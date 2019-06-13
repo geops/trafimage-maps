@@ -1,0 +1,24 @@
+{
+  "presets": [
+    [
+      "react-app",
+      {
+        "absoluteRuntime": false,
+        "typescript": false
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "babel-plugin-named-asset-import",
+      {
+        "loaderMap": {
+          "svg": {
+            "ReactComponent": "@svgr/webpack?-svgo![path]",
+          },
+        },
+      },
+    ]
+  ],
+  "ignore": ["**/*.test.js"]
+}
