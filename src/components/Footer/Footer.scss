@@ -1,0 +1,40 @@
+.wkp-footer {
+  position: absolute;
+  bottom:0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: white;
+  font-size: 12px;
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+
+  .tm-scale-line {
+    min-width: 180px;
+    text-align: center;
+
+    .ol-scale-line-inner {
+      border-width: 0 2px 2px 2px;
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+
+  .tm-mouse-position {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    select {
+      height: 25px;
+      font-size: 12px;
+      background-color: white;
+    }
+
+    span {
+      display: block;
+      margin-right: 10px;
+    }
+  }
+}
