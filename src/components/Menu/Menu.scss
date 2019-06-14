@@ -1,0 +1,60 @@
+.wkp-menu {
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  background: white;
+  border: 2px solid #666666;
+  width: 371px;
+  z-index: 2;
+
+  .wkp-menu-header {
+    padding: 0 15px;
+    height: 69px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .wkp-menu-toggler {
+      position: absolute;
+      right: 10px;
+      top: 25px;
+    }
+
+    .wkp-menu-layers {
+      color: #888;
+      margin-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: all .2s ease;
+      max-height: 16px;
+
+      &.hidden {
+        max-height: 0;
+        margin: 0;
+      }
+    }
+
+    .wkp-menu-title {
+      transition: font-size .2s ease;
+      &.large {
+        font-size: 120%;
+      }
+    }
+  }
+
+  .wkp-layer-tree {
+    border-top: 1px solid #eee;
+    transition: max-height .3s ease;
+    transition: padding .3s ease;
+    max-height: 1000px;
+    overflow: hidden;
+    padding: 10px 15px;
+
+    &.closed {
+      border-top-width: 0;
+      max-height: 0;  
+      padding: 0px 15px;
+    }
+  }
+}
