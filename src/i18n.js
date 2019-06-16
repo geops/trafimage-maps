@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-xhr-backend';
-import CONF from './config';
 
 i18n
   .use(initReactI18next)
@@ -15,9 +14,8 @@ i18n
         lookupQuerystring: 'lang',
       },
       backend: {
-        // CONF.translationBackend to be configured
-        loadPath: `${CONF.translationBackend}/locale-{{lng}}.json`,
-        crossDomain: true,
+        loadPath: `/lang/locale-{{lng}}-main.json`,
+        // crossDomain: true,
       },
       fallbackLng: 'de',
       interpolation: {
@@ -31,6 +29,7 @@ i18n
         return fallbackValue;
       },
       react: {
+        useSuspense: false,
         wait: false,
       },
     },
