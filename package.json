@@ -1,5 +1,5 @@
 {
-  "name": "geops-react-spatial-starter",
+  "name": "trafimage-maps",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://127.0.0.1:8000",
@@ -26,7 +26,7 @@
     "react-router-dom": "^5.0.0",
     "react-router-prop-types": "^1.0.4",
     "react-scripts": "^3.0.1",
-    "react-spatial": "file:/home/mario/repositories/react-spatial/build",
+    "react-spatial": "../react-spatial/build",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
     "redux-thunk": "^2.3.0"
@@ -34,6 +34,7 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/runtime": "^7.3.1",
+    "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.0",
     "canvas": "^2.3.1",
     "cypress": "^3.1.5",
@@ -47,7 +48,7 @@
     "jest-canvas-mock": "^2.0.0-alpha.2",
     "node-fetch": "^2.3.0",
     "prettier": "^1.16.3",
-    "react-styleguidist": "^9.0.2",
+    "react-styleguidist": "^9.1.11",
     "react-test-renderer": "^16.5.2",
     "redux-mock-store": "^1.5.3",
     "rewire": "^4.0.1",

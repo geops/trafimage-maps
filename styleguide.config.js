@@ -1,20 +1,25 @@
 const { version } = require('./package.json');
 
 module.exports = {
-  title: `geOps react-spatial Starter ${version}`,
+  title: `Trafimage Webkartenportal ${version}`,
   require: ['react-app-polyfill/ie11', 'react-app-polyfill/stable'],
   sections: [
     {
       name: '',
-      content: 'README.md',
+      context: 'README.md',
     },
-    // {
-    //  name: 'UI components',
-    //  description: 'A collection of react components.',
-    //  components: 'src/components/**/*.js',
-    //  exampleMode: 'expand',
-    //  usageMode: 'expand',
-    // },
+    {
+      name: 'Applications',
+      components: [
+        'src/components/TrafimageMaps/[A-Z]*.js',
+      ],
+    },
+    {
+      name: 'Layers',
+      components: [
+        'src/layers/VerbundLayer/[A-Z]*.js',
+      ],
+    },
   ],
   webpackConfig: {
     module: {
@@ -29,6 +34,18 @@ module.exports = {
         {
           test: /\.s?css$/,
           use: ['style-loader', 'css-loader', 'sass-loader?modules'],
+        },
+        {
+          test: /\.url\.svg$/,
+          loader: 'url-loader',
+        },
+        {
+          test: /\.png$/,
+          use: [
+            {
+              loader: 'url-loader',
+            },
+          ],
         },
       ],
     },

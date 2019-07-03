@@ -6,8 +6,12 @@ import { compose } from 'lodash/fp';
 import Layer from 'react-spatial/Layer';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
-
-import { setResolution, setCenter, setZoom } from '../../model/map/actions';
+import {
+  setResolution,
+  setCenter,
+  setLayers,
+  setZoom,
+} from '../../model/map/actions';
 
 const propTypes = {
   projection: PropTypes.string,
@@ -22,8 +26,9 @@ const propTypes = {
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
-  dispatchSetZoom: PropTypes.func.isRequired,
+  dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
+  dispatchSetZoom: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -107,8 +112,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  dispatchSetResolution: setResolution,
   dispatchSetCenter: setCenter,
+  dispatchSetLayers: setLayers,
+  dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,
 };
 

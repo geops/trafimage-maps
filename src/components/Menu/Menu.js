@@ -45,7 +45,7 @@ class Menu extends Component {
     return (
       <div className="wkp-menu">
         <div
-          className="wkp-menu-header"
+          className={`wkp-menu-header ${isOpen ? 'open' : ''}`}
           role="button"
           tabIndex="0"
           onClick={() => this.setState({ isOpen: !isOpen })}

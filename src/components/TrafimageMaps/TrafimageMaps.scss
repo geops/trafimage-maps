@@ -1,0 +1,41 @@
+body {
+  font-family: 'SBBWeb Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+}
+
+.tm-app {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+
+  .tm-zooms-bar {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .tm-base-layer-toggler {
+    position: absolute;
+    bottom: 60px;
+    left: 10px;
+    width: 120px;
+    height: 120px;
+  }
+}
+
+.tm-map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}

@@ -6,8 +6,10 @@ import { compose } from 'lodash/fp';
 import Map from 'ol/Map';
 import RSFooter from 'react-spatial/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
+import Copyright from 'react-spatial/components/Copyright';
 import Select from 'react-spatial/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
+import LayerService from 'react-spatial/LayerService';
 
 import { setLanguage } from '../../model/app/actions';
 import './Footer.scss';
@@ -15,6 +17,7 @@ import './Footer.scss';
 const propTypes = {
   map: PropTypes.instanceOf(Map).isRequired,
   language: PropTypes.string.isRequired,
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
   t: PropTypes.func.isRequired,
 
   // mapDispatchToProps
@@ -31,8 +34,9 @@ const numberFormat = coords => {
   return coordStr;
 };
 
-const Footer = ({ map, language, t, dispatchSetLanguage }) => (
+const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
   <RSFooter className="wkp-footer">
+    <Copyright layerService={layerService} />
     <MousePosition
       coordinatePosition="left"
       map={map}
