@@ -29,7 +29,8 @@
     "react-spatial": "../react-spatial/build",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "turf": "^3.0.14"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
