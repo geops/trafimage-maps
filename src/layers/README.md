@@ -13,7 +13,7 @@ Layer for visualizing fare networks.
 -   `projection` **[string][2]?** Layer projection.
       Default is webmercator ('EPSG:3857')
 
-### route
+### getRoute
 
 Generate the route for a given configuration.
 
@@ -25,6 +25,9 @@ Generate the route for a given configuration.
     -   `sequences[].mot` **[string][2]** Method of transportation.
           Allowed values are "rail", "bus", "tram", "subway", "gondola",
           "funicular" and "ferry"
+
+Returns **[Promise][6]&lt;Feature>** An OpenLayers feature.
+  See [https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html][7]
 
 ## VerbundLayer
 
@@ -45,3 +48,7 @@ Layer for visualizing fare networks.
 [4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 [5]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+
+[6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+[7]: https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html

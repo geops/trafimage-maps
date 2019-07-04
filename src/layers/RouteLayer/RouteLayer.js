@@ -86,8 +86,10 @@ class RouteLayer extends Layer {
    * @param {string} sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
+   * @returns {Promise<Feature>} an OpenLayers feature.
+   *   See https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html.
    */
-  route(sequences) {
+  getRoute(sequences) {
     let via = [];
     let mot;
 

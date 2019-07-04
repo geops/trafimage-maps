@@ -62,10 +62,23 @@ const propTypes = {
     PropTypes.instanceOf(Projection),
     PropTypes.string,
   ]),
+
+  /**
+   * Initial map center described by an array of coordinates
+   * containing longitude and latitude.
+   */
+  center: PropTypes.arrayOf(PropTypes.number),
+
+  /**
+   * Initial zoom level.
+   */
+  zoom: PropTypes.number,
 };
 
 const defaultProps = {
   children: null,
+  center: [922748, 5911640],
+  zoom: 9,
   elements: {
     header: false,
     footer: false,
@@ -102,6 +115,8 @@ class TrafimageMaps extends Component {
       layers,
       projection,
       topic,
+      center,
+      zoom,
     } = this.props;
 
     const defaultElements = {
@@ -130,7 +145,12 @@ class TrafimageMaps extends Component {
             topic={topic}
           />
           <ResizeHandler observe={this} />
-          <Map map={this.map} projection={projection} />
+          <Map
+            map={this.map}
+            initialCenter={center}
+            initialZoom={zoom}
+            projection={projection}
+          />
 
           {appElements.map(elem => elem)}
 

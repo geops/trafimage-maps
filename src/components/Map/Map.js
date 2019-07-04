@@ -19,6 +19,8 @@ const propTypes = {
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
+  initialCenter: PropTypes.arrayOf(PropTypes.number),
+  initialZoom: PropTypes.number,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
   resolution: PropTypes.number,
@@ -26,7 +28,6 @@ const propTypes = {
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
-  dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
 };
@@ -36,6 +37,8 @@ const defaultProps = {
 
   // mapStateToProps
   center: [0, 0],
+  initialCenter: undefined,
+  initialZoom: undefined,
   layers: [],
   extent: undefined,
   resolution: undefined,
@@ -43,6 +46,25 @@ const defaultProps = {
 };
 
 class Map extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    const {
+      initialCenter,
+      initialZoom,
+      dispatchSetCenter,
+      dispatchSetZoom,
+    } = this.props;
+
+    if (initialCenter) {
+      dispatchSetCenter(initialCenter);
+    }
+
+    if (typeof initialZoom !== 'undefined') {
+      dispatchSetZoom(initialZoom);
+    }
+  }
+
   onMapMoved(evt) {
     const {
       center,

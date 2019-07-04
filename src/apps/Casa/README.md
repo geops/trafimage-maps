@@ -18,7 +18,7 @@ const CasaExample = () => {
   const routeLayer = new RouteLayer();
 
   // Visualize a route on the map.
-  routeLayer.route([
+  routeLayer.getRoute([
     {
       uicFrom: 8501000,
       uicTo: 8500010,
