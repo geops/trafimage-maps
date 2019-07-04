@@ -50,7 +50,7 @@ const resolutions = [
 export default [
   {
     name: 'Basemap',
-    topics: ['ch.sbb.netzkarte'],
+    topics: ['ch.sbb.netzkarte', 'ch.sbb.casa'],
     copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
     visible: true,
     isBaseLayer: true,

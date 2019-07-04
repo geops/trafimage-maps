@@ -1,0 +1,738 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "layers/.external-ecmascript.js",
+    "static": true,
+    "longname": "layers/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "layers/VerbundLayer/VerbundLayer.js",
+    "content": "import VectorLayer from 'ol/layer/Vector';\nimport VectorSource from 'ol/source/Vector';\nimport GeoJSON from 'ol/format/GeoJSON';\nimport {\n  Style,\n  Fill as FillStyle,\n  Stroke as StrokeStyle,\n  Text as TextStyle,\n} from 'ol/style';\nimport { containsExtent } from 'ol/extent';\nimport MultiPolygon from 'ol/geom/MultiPolygon';\nimport { fromExtent } from 'ol/geom/Polygon';\nimport Feature from 'ol/Feature';\nimport { intersect } from 'turf';\nimport Layer from 'react-spatial/Layer';\n\n/**\n * Layer for visualizing fare networks.\n */\nclass VerbundLayer extends Layer {\n  constructor(options) {\n    super({\n      name: 'Verbundzonen',\n      visible: true,\n      olLayer: new VectorLayer({\n        source: new VectorSource(),\n      }),\n      ...options,\n    });\n\n    // Cache for zone styles\n    this.zoneStyleCache = {};\n\n    // Load features\n    const url = (options || {}).url || '/public/sample_data/zones.geojson';\n    this.loadFeatures(url);\n\n    // Set style\n    this.olLayer.setStyle((f, r) => this.zoneStyle(f, r));\n  }\n\n  loadFeatures(url) {\n    const format = new GeoJSON();\n    fetch(url)\n      .then(res => res.json())\n      .then(data => {\n        const features = format.readFeatures(data);\n        this.olLayer.getSource().clear();\n        this.olLayer.getSource().addFeatures(features);\n      });\n  }\n\n  zoneStyle(feature, resolution) {\n    const zone = parseInt(feature.get('zone'), 10);\n\n    let opacity = 0.5;\n    opacity = resolution < 100 ? 0.3 : opacity;\n    opacity = resolution < 50 ? 0.1 : opacity;\n\n    let textGeometry;\n    const color = [255, 200, 25];\n\n    if (resolution < 100) {\n      // optimize text positioning\n      const mapExtent = this.map.getView().calculateExtent();\n      const geomExtent = feature.getGeometry().getExtent();\n\n      if (!containsExtent(mapExtent, geomExtent)) {\n        const mapPolygon = fromExtent(mapExtent);\n        const format = new GeoJSON();\n        const intersection = intersect(\n          format.writeFeatureObject(new Feature(mapPolygon)),\n          format.writeFeatureObject(feature),\n        );\n\n        if (intersection) {\n          const intersectionFeature = format.readFeature(intersection);\n          const geom = intersectionFeature.getGeometry();\n          if (geom instanceof MultiPolygon) {\n            textGeometry = geom.getInteriorPoints();\n          } else {\n            textGeometry = geom.getInteriorPoint();\n          }\n        }\n      }\n    }\n\n    return [\n      new Style({\n        stroke: new StrokeStyle({\n          color,\n          width: 2,\n        }),\n        fill: new FillStyle({\n          color: [...color, opacity],\n        }),\n      }),\n      new Style({\n        geometry: textGeometry,\n        text: new TextStyle({\n          font: '12px Arial',\n          fill: new FillStyle({\n            color: 'black',\n          }),\n          stroke: new StrokeStyle({\n            color: 'white',\n            width: 2,\n          }),\n          text: `${zone}`,\n        }),\n      }),\n    ];\n  }\n\n  init(map) {\n    super.init(map);\n    this.map = map;\n  }\n}\n\nexport default VerbundLayer;\n",
+    "static": true,
+    "longname": "/home/mario/repositories/trafimage-maps/src/layers/VerbundLayer/VerbundLayer.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "class",
+    "name": "VerbundLayer",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js",
+    "static": true,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "access": "public",
+    "export": true,
+    "importPath": "trafimage-maps/layers/VerbundLayer/VerbundLayer.js",
+    "importStyle": "VerbundLayer",
+    "description": "Layer for visualizing fare networks.",
+    "lineNumber": 20,
+    "interface": false,
+    "extends": [
+      "react-spatial/Layer~Layer"
+    ]
+  },
+  {
+    "__docId__": 50,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "member",
+    "name": "zoneStyleCache",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "static": false,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer#zoneStyleCache",
+    "access": "public",
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{}"
+      ]
+    }
+  },
+  {
+    "__docId__": 52,
+    "kind": "method",
+    "name": "loadFeatures",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer#loadFeatures",
+    "access": "public",
+    "description": null,
+    "lineNumber": 42,
+    "undocument": true,
+    "params": [
+      {
+        "name": "url",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 53,
+    "kind": "method",
+    "name": "zoneStyle",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer#zoneStyle",
+    "access": "public",
+    "description": null,
+    "lineNumber": 53,
+    "undocument": true,
+    "params": [
+      {
+        "name": "feature",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "resolution",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "undefined[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "init",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer#init",
+    "access": "public",
+    "description": null,
+    "lineNumber": 115,
+    "undocument": true,
+    "params": [
+      {
+        "name": "map",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 55,
+    "kind": "member",
+    "name": "map",
+    "memberof": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer",
+    "static": false,
+    "longname": "layers/VerbundLayer/VerbundLayer.js~VerbundLayer#map",
+    "access": "public",
+    "description": null,
+    "lineNumber": 117,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "index",
+    "content": "# geOps react-spatial Starter\n\n[![npm](https://img.shields.io/npm/v/%40geops%2Freact-spatial-starter.svg)](https://www.npmjs.com/package/%40geops%2Freact-spatial-starter)\n[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)\n\nThis library provides a starter kit to create a web map application based on [React Spatial](https://github.com/geops/react-spatial).\n\n\n## Technologies\n* react\n* redux\n* react-router\n* enzyme\n* jest\n* cypress\n* react-spatial\n* eslint with airbnb\n* prettier\n* sass\n\n## Getting Started\n\nInstall:\n```bash\nyarn install\n```\n\nStart:\n```bash\nyarn start\n```\n\nPublish as NPM package:\n\n* Build to publish:\n```bash\nyarn build:es\n```\n\n* Publish:\n```bash\nyarn publish:build\n```\n\n## Use as ES6 module:\n\nWhen this app is published as npm package, it can be integrated easily in other applications, as ES6 module:\n\nInstall\n```bash\nnpm install <this-app-package>\n```\n\nIn your App.js file:\n```bash\nimport React, { Component } from 'react';\nimport thisApp from '<this-app-package>';\n\nclass App extends Component {\n  render() {\n    return (\n      <div className=\"App\">\n        <thisApp\n          props1={props1}\n          props2={props2}\n        />\n      </div>\n    );\n  }\n}\n\nexport default App;\n```\n\nProps can be passed to the App:\n```bash\n<thisApp\n  props1={props1}\n  props2={props2}\n/>\n```\n",
+    "longname": "/home/mario/repositories/trafimage-maps/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"trafimage-maps\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"proxy\": \"http://127.0.0.1:8000\",\n  \"main\": \"build/es/index.js\",\n  \"dependencies\": {\n    \"abortcontroller-polyfill\": \"^1.2.3\",\n    \"i18next\": \"^15.0.4\",\n    \"i18next-browser-languagedetector\": \"^3.0.1\",\n    \"i18next-xhr-backend\": \"^2.0.1\",\n    \"jsts\": \"^2.0.3\",\n    \"lodash\": \"^4.17.11\",\n    \"node-sass\": \"^4.11.0\",\n    \"ol\": \"^5.3.0\",\n    \"ole\": \"^0.0.4-beta.9\",\n    \"proj4\": \"^2.5.0\",\n    \"prop-types\": \"^15.6.2\",\n    \"query-string\": \"^6.3.0\",\n    \"react\": \"^16.7.0\",\n    \"react-app-polyfill\": \"^1.0.1\",\n    \"react-dom\": \"^16.7.0\",\n    \"react-i18next\": \"^10.2.0\",\n    \"react-icons\": \"^3.1.0\",\n    \"react-redux\": \"^7.0.3\",\n    \"react-router-dom\": \"^5.0.0\",\n    \"react-router-prop-types\": \"^1.0.4\",\n    \"react-scripts\": \"^3.0.1\",\n    \"react-spatial\": \"../react-spatial/build\",\n    \"redux\": \"^4.0.1\",\n    \"redux-debounced\": \"^0.5.0\",\n    \"redux-thunk\": \"^2.3.0\",\n    \"turf\": \"^3.0.14\"\n  },\n  \"devDependencies\": {\n    \"@babel/cli\": \"^7.2.3\",\n    \"@babel/runtime\": \"^7.3.1\",\n    \"babel-loader\": \"8.0.5\",\n    \"babel-plugin-named-asset-import\": \"^0.3.0\",\n    \"canvas\": \"^2.3.1\",\n    \"cypress\": \"^3.1.5\",\n    \"enzyme\": \"^3.8.0\",\n    \"enzyme-adapter-react-16\": \"^1.8.0\",\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint-config-airbnb\": \"^17.1.0\",\n    \"eslint-config-prettier\": \"^4.0.0\",\n    \"eslint-plugin-prettier\": \"^3.0.1\",\n    \"fetch-mock\": \"^7.2.5\",\n    \"jest\": \"24.7.1\",\n    \"jest-canvas-mock\": \"^2.0.0-alpha.2\",\n    \"node-fetch\": \"^2.3.0\",\n    \"prettier\": \"^1.16.3\",\n    \"react-styleguidist\": \"^9.1.11\",\n    \"react-test-renderer\": \"^16.5.2\",\n    \"redux-mock-store\": \"^1.5.3\",\n    \"rewire\": \"^4.0.1\",\n    \"stylelint\": \"^10.0.1\",\n    \"stylelint-config-recommended-scss\": \"^3.2.0\",\n    \"stylelint-config-standard\": \"^18.2.0\",\n    \"stylelint-scss\": \"^3.5.1\"\n  },\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"start:local\": \"REACT_APP_ENV='local' yarn start\",\n    \"start:dev\": \"REACT_APP_ENV='dev' yarn start\",\n    \"start:stag\": \"REACT_APP_ENV='stag' yarn start\",\n    \"start:prod\": \"REACT_APP_ENV='prod' yarn start\",\n    \"build\": \"node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js\",\n    \"build:dev\": \"REACT_APP_ENV='dev' yarn build\",\n    \"build:stag\": \"REACT_APP_ENV='stag' yarn build\",\n    \"build:prod\": \"REACT_APP_ENV='prod' yarn build\",\n    \"format\": \"prettier --write 'src/**/*.js' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix\",\n    \"lint\": \"eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'\",\n    \"cy:open\": \"cypress open\",\n    \"cy:test\": \"yarn start & wait-on http://localhost:3000 & yarn cypress run\",\n    \"test\": \"react-scripts test --env=jsdom --transformIgnorePatterns \\\"/node_modules/(?!(jsts|ol|react-spatial)/).*/\\\"\",\n    \"test:coverage\": \"yarn test --coverage --coverageDirectory=coverage\",\n    \"doc\": \"styleguidist build\",\n    \"doc:server\": \"styleguidist server\",\n    \"eject\": \"react-scripts eject\",\n    \"publish:build\": \"rm -rf build && yarn version && yarn run build:prod && yarn publish build/ --access public --non-interactive --no-git-tag-version\",\n    \"build:es\": \"bash ./scripts/build-es.sh\"\n  },\n  \"browserslist\": [\n    \">0.2%\",\n    \"not dead\",\n    \"not ie <= 11\",\n    \"not op_mini all\"\n  ],\n  \"jest\": {\n    \"coverageReporters\": [\n      \"text\",\n      \"html\"\n    ]\n  }\n}\n",
+    "longname": "/home/mario/repositories/trafimage-maps/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

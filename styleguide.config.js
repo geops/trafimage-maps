@@ -9,17 +9,24 @@ module.exports = {
       context: 'README.md',
     },
     {
-      name: 'Applications',
+      name: 'Components',
       components: [
         'src/components/TrafimageMaps/[A-Z]*.js',
       ],
     },
     {
-      name: 'Layers',
-      components: [
-        'src/layers/VerbundLayer/[A-Z]*.js',
-        'src/layers/RouteLayer/[A-Z]*.js',
+      name: 'Applications',
+      sections: [
+        {
+          name: 'Casa',
+          content: 'src/apps/Casa/README.md',
+        },
       ],
+    },
+
+    {
+      name: 'Layers',
+      content: './src/layers/README.md',
     },
   ],
   webpackConfig: {

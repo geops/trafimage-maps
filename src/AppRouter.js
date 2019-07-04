@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import TrafimageMaps from './components/TrafimageMaps';
+import TrafimageMaps from './apps/TrafimageMaps';
 import APP_CONFIG from './appConfig/topics';
 
 const topicNames = Object.keys(APP_CONFIG);

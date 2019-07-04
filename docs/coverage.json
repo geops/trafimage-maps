@@ -1,0 +1,19 @@
+{
+  "coverage": "14.28%",
+  "expectCount": 7,
+  "actualCount": 1,
+  "files": {
+    "layers/VerbundLayer/VerbundLayer.js": {
+      "expectCount": 7,
+      "actualCount": 1,
+      "undocumentLines": [
+        21,
+        32,
+        42,
+        53,
+        115,
+        117
+      ]
+    }
+  }
+}

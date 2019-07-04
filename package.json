@@ -76,8 +76,8 @@
     "cy:test": "yarn start & wait-on http://localhost:3000 & yarn cypress run",
     "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial)/).*/\"",
     "test:coverage": "yarn test --coverage --coverageDirectory=coverage",
-    "doc": "styleguidist build",
-    "doc:server": "styleguidist server",
+    "doc": "node ./scripts/doc.js && styleguidist build",
+    "doc:server": "node ./scripts/doc.js && styleguidist server",
     "eject": "react-scripts eject",
     "publish:build": "rm -rf build && yarn version && yarn run build:prod && yarn publish build/ --access public --non-interactive --no-git-tag-version",
     "build:es": "bash ./scripts/build-es.sh"

@@ -1,11 +1,7 @@
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import {
-  Style,
-  Fill as FillStyle,
-  Stroke as StrokeStyle,
-} from 'ol/style';
+import { Style, Stroke as StrokeStyle } from 'ol/style';
 import Layer from 'react-spatial/Layer';
 
 /**
@@ -100,7 +96,7 @@ class RouteLayer extends Layer {
 
       if (mot !== sequences[i].mot) {
         this.getRouteForMot(via, mot);
-        mot = sequences[i].mot;
+        ({ mot } = sequences[i]);
         via = [sequences[i].uicFrom, sequences[i].uicTo];
       } else {
         via = via.concat([sequences[i].uicFrom, sequences[i].uicTo]);
