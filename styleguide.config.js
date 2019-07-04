@@ -18,6 +18,7 @@ module.exports = {
       name: 'Layers',
       components: [
         'src/layers/VerbundLayer/[A-Z]*.js',
+        'src/layers/RouteLayer/[A-Z]*.js',
       ],
     },
   ],

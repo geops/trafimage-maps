@@ -13,28 +13,23 @@ import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import { intersect } from 'turf';
 import Layer from 'react-spatial/Layer';
-import PropTypes from 'prop-types';
-
-const propTypes = {
-  foo: PropTypes.string.isRequired,
-};
 
 /**
- * Class for Verbundlayer.
+ * Layer for visualizing fare networks.
+ * @class VerbundLayer
+ * @param {Object} options Layer options.
+ * @param {boolean} options.visible Visibility of the layer.
+ * @param {string} options.url Url of the geOps fare network backend.
  */
 class VerbundLayer extends Layer {
   constructor(options) {
     super({
       name: 'Verbundzonen',
-      visible: true,
       olLayer: new VectorLayer({
         source: new VectorSource(),
       }),
       ...options,
     });
-
-    // Cache for zone styles
-    this.zoneStyleCache = {};
 
     // Load features
     const url = (options || {}).url || '/public/sample_data/zones.geojson';
@@ -123,5 +118,4 @@ class VerbundLayer extends Layer {
   }
 }
 
-VerbundLayer.propTypes = propTypes;
 export default VerbundLayer;
