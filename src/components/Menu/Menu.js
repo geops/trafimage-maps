@@ -69,7 +69,10 @@ class Menu extends Component {
         </div>
 
         <div className={`wkp-layer-tree ${isOpen ? '' : 'closed'}`}>
-          <LayerTree layerService={layerService} />
+          <LayerTree
+            isItemHidden={l => l.getIsBaseLayer()}
+            layerService={layerService}
+          />
         </div>
       </div>
     );
