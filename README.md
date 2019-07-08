@@ -3,7 +3,8 @@
 [![npm](https://img.shields.io/npm/v/%40geops%2Freact-spatial-starter.svg)](https://www.npmjs.com/package/%40geops%2Freact-spatial-starter)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-This library provides a starter kit to create a web map application based on [React Spatial](https://github.com/geops/react-spatial).
+This repo contains the code of the Trafimage Map Portal and other applications build on it.
+Components are based on [react-spatial](https://github.com/geops/react-spatial).
 
 
 ## Technologies
@@ -51,31 +52,4 @@ Install
 npm install <this-app-package>
 ```
 
-In your App.js file:
-```bash
-import React, { Component } from 'react';
-import thisApp from '<this-app-package>';
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <thisApp
-          props1={props1}
-          props2={props2}
-        />
-      </div>
-    );
-  }
-}
-
-export default App;
-```
-
-Props can be passed to the App:
-```bash
-<thisApp
-  props1={props1}
-  props2={props2}
-/>
-```
+TODO: Link styleguidist here.
