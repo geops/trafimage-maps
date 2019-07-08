@@ -7,6 +7,8 @@ Layer for visualizing fare networks.
 ### Parameters
 
 -   `options` **[Object][1]?** Layer options.
+    -   `options.token` **[string][2]** Access token for geOps services.
+    -   `options.name` **[string][2]?** Layer name.
     -   `options.url` **[string][2]?** Url of the geOps route backend.
     -   `options.visible` **[boolean][3]?** Visibility of the layer.
           Default is true.
@@ -26,8 +28,8 @@ Generate the route for a given configuration.
           Allowed values are "rail", "bus", "tram", "subway", "gondola",
           "funicular" and "ferry"
 
-Returns **[Promise][6]&lt;Feature>** An OpenLayers feature.
-  See [https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html][7]
+Returns **[Promise][6]&lt;Feature>** an OpenLayers feature.
+  See [https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html][7].
 
 ## VerbundLayer
 
@@ -38,6 +40,20 @@ Layer for visualizing fare networks.
 -   `options` **[Object][1]** Layer options.
     -   `options.visible` **[boolean][3]** Visibility of the layer.
     -   `options.url` **[string][2]** Url of the geOps fare network backend.
+-   `null`  (number} options.labelOptimizationMinResolution Minimum resolution for
+      using optimized label placement based on the current extent. Default is 100.
+
+### selectZonesByConfig
+
+Select zones by a given configuration.
+
+#### Parameters
+
+-   `config` **[Array][4]&lt;[Object][1]>** Array of objects defining selected zones.
+    -   `config[].partnerCode` **[number][5]** Partner code.
+    -   `config[].zones` **[Array][4]&lt;[Object][1]>** Array of zones to select.
+-   `number` **[number][5]** \[].zoneCode] Code of zone to select.
+-   `string` **[string][2]** \[].zoneName] Name of zone to select.
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 

@@ -12,8 +12,6 @@ const TrafimageMapsExample = () => (
     <TrafimageMaps
       topic="ch.sbb.netzkarte"
       elements={{
-        header: true,
-        menu: true,
         footer: true,
         baseLayerToggler: true,
       }}

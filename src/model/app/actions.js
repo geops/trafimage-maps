@@ -4,3 +4,5 @@ export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const setActiveTopic = data => ({ type: SET_ACTIVE_TOPIC, data });
 
 export const setLanguage = data => ({ type: SET_LANGUAGE, data });
+
+export const setClickedFeatures = data => ({ type: SET_CLICKED_FEATURES, data });

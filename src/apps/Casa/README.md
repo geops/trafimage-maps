@@ -13,9 +13,35 @@ import RouteLayer from '../../layers/RouteLayer';
 import VerbundLayer from '../../layers/VerbundLayer';
 
 const CasaExample = () => {
-  // Intialization of fare network layer and route layer.
-  const verbundLayer = new VerbundLayer();
-  const routeLayer = new RouteLayer();
+  // Intialization of fare network layer.
+  const verbundLayer = new VerbundLayer({
+    token: '', // Please add a valid token here',   
+  });
+
+  // Select zones.
+  verbundLayer.selectZonesByConfig([
+    {
+      partnerCode: 801,
+      zones: [{
+        zoneCode: 10,
+        zoneName: 'Davos',
+      }],
+    },
+    {
+      partnerCode: 490,
+      zones: [{
+        zoneCode: 120,
+      },
+      {
+        zoneCode: 170,
+      }],
+    },
+  ]);
+
+  // Initialize route layer.
+  const routeLayer = new RouteLayer({
+    token: '', // Please add a valid token here',   
+  });
 
   // Visualize a route on the map.
   routeLayer.getRoute([

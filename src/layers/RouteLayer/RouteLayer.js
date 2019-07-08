@@ -8,6 +8,8 @@ import Layer from 'react-spatial/Layer';
  * Layer for visualizing fare networks.
  * @class RouteLayer
  * @param {Object} [options] Layer options.
+ * @param {string} options.token Access token for geOps services.
+ * @param {string} [options.name] Layer name.
  * @param {string} [options.url] Url of the geOps route backend.
  * @param {boolean} [options.visible] Visibility of the layer.
  *   Default is true.
@@ -17,7 +19,7 @@ import Layer from 'react-spatial/Layer';
 class RouteLayer extends Layer {
   constructor(options = {}) {
     super({
-      name: 'Routen',
+      name: options.name || 'Routen',
       olLayer: new VectorLayer({
         style: f => this.routeStyle(f),
         source: new VectorSource(),
@@ -26,10 +28,12 @@ class RouteLayer extends Layer {
     });
 
     this.projection = options.projection || 'EPSG:3857';
-    this.apiKey = '5cc87b12d7c5370001c1d655f0eb047f18c84c7bbae6cba17692e9f1';
 
     // Cache for storing route styles
     this.routeStyleCache = {};
+
+    // API token
+    this.token = options.token;
 
     // Colors for differtent modes of transportation
     this.motColors = {
@@ -42,10 +46,10 @@ class RouteLayer extends Layer {
     // Route url
     this.url =
       (options || {}).url ||
-      `https://geops.cloud.tyk.io/routing?token=${this.apiKey}`;
+      `https://geops.cloud.tyk.io/routing?token=${this.token}`;
   }
 
-  getRouteForMot(viaPoints, mot) {
+  fetchRouteForMot(viaPoints, mot) {
     const via = viaPoints.map(v => `!${v}`);
     const url = `${this.url}&via=${via.join(';')}&mot=${mot}`;
     const format = new GeoJSON({
@@ -97,7 +101,7 @@ class RouteLayer extends Layer {
       mot = mot || sequences[i].mot;
 
       if (mot !== sequences[i].mot) {
-        this.getRouteForMot(via, mot);
+        this.fetchRouteForMot(via, mot);
         ({ mot } = sequences[i]);
         via = [sequences[i].uicFrom, sequences[i].uicTo];
       } else {
@@ -105,7 +109,7 @@ class RouteLayer extends Layer {
       }
     }
 
-    this.getRouteForMot(via, mot);
+    this.fetchRouteForMot(via, mot);
   }
 
   init(map) {

@@ -1,17 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import TrafimageMaps from './apps/TrafimageMaps';
+import TrafimageMaps from './components/TrafimageMaps';
 import APP_CONFIG from './appConfig/topics';
 
 const topicNames = Object.keys(APP_CONFIG);
 
 const AppRouter = () => (
   <Router>
-    <Route
-      exact
-      path="/"
-      render={() => <Redirect to={`${topicNames[0]}`} />}
-    />
+    <Route exact path="/" render={() => <Redirect to={`${topicNames[0]}`} />} />
     <Route
       exact
       path="/:topic"
