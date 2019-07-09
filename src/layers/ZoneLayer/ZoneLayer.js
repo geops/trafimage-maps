@@ -16,14 +16,14 @@ import Layer from 'react-spatial/Layer';
 
 /**
  * Layer for visualizing fare networks.
- * @class VerbundLayer
+ * @class ZoneLayer
  * @param {Object} options Layer options.
  * @param {boolean} options.visible Visibility of the layer.
  * @param (number} options.labelOptimizationMinResolution Minimum resolution for
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
  */
-class VerbundLayer extends Layer {
+class ZoneLayer extends Layer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
     const mapPolygon = fromExtent(mapExtent);
     const format = new GeoJSON();
@@ -147,7 +147,7 @@ class VerbundLayer extends Layer {
       const geomExtent = feature.getGeometry().getExtent();
 
       if (!containsExtent(mapExtent, geomExtent)) {
-        textGeometry = VerbundLayer.getOptimizedLanelGeometry(
+        textGeometry = ZoneLayer.getOptimizedLanelGeometry(
           feature,
           mapExtent,
         );
@@ -187,4 +187,4 @@ class VerbundLayer extends Layer {
   }
 }
 
-export default VerbundLayer;
+export default ZoneLayer;

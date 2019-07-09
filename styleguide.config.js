@@ -35,8 +35,8 @@ module.exports = {
           content: 'src/layers/RouteLayer/README.md',
         },
         {
-          name: 'VerbundLayer',
-          content: 'src/layers/VerbundLayer/README.md',
+          name: 'ZoneLayer',
+          content: 'src/layers/ZoneLayer/README.md',
         },
       ],
     },

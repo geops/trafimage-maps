@@ -28,8 +28,17 @@ Generate the route for a given configuration.
           Allowed values are "rail", "bus", "tram", "subway", "gondola",
           "funicular" and "ferry"
 
-Returns **[Promise][6]&lt;Feature>** an OpenLayers feature.
-  See [https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html][7].
+Returns **[Promise][6]&lt;[Array][4]&lt;Feature>>** Promise resolving OpenLayers features.
+
+### zoomToRoute
+
+Zoom to route.
+
+#### Parameters
+
+-   `options`  
+-   `fitOptions` **[Object][1]?** Options,
+      see [https://openlayers.org/en/latest/apidoc/module-ol_View-View.html][7]
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
@@ -43,4 +52,4 @@ Returns **[Promise][6]&lt;Feature>** an OpenLayers feature.
 
 [6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[7]: https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html
+[7]: https://openlayers.org/en/latest/apidoc/module-ol_View-View.html

@@ -10,17 +10,17 @@ the map extent and the used resolution.
 import React from 'react';
 import TrafimageMaps from '../../components/TrafimageMaps';
 import RouteLayer from '../../layers/RouteLayer';
-import VerbundLayer from '../../layers/VerbundLayer';
+import ZoneLayer from '../../layers/ZoneLayer';
 
 const CasaExample = () => {
   // Intialization of fare network layer.
-  const verbundLayer = new VerbundLayer({
+  const zoneLayer = new ZoneLayer({
     // This is a demo token. Please use your own token.
     token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
   });
 
   // Select zones.
-  verbundLayer.selectZonesByConfig([
+  zoneLayer.selectZonesByConfig([
     {
       partnerCode: 801,
       zones: [{
@@ -38,7 +38,7 @@ const CasaExample = () => {
       }],
     },
   ]).then((f) => {
-    verbundLayer.zoomToZones();
+    zoneLayer.zoomToZones();
   });
 
   // Initialize route layer.
@@ -68,7 +68,7 @@ const CasaExample = () => {
 
       <TrafimageMaps
         topic="ch.sbb.casa"
-        layers={[verbundLayer, routeLayer]}
+        layers={[zoneLayer, routeLayer]}
         elements={elements}
       />
 

@@ -1,7 +1,7 @@
 const documentation = require('documentation');
 const fs = require('fs');
 
-['RouteLayer', 'VerbundLayer'].forEach(l => {
+['RouteLayer', 'ZoneLayer'].forEach(l => {
   documentation
     .build([`./src/layers/${l}/**`], { shallow: false })
     .then(doc => {
