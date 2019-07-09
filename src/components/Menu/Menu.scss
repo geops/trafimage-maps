@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: center;
     border: 2px solid #666;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
 
     &.open {
       border-bottom-width: 1px;
@@ -32,7 +32,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      transition: all .2s ease;
+      transition: all 0.2s ease;
       max-height: 16px;
 
       &.hidden {
@@ -42,15 +42,15 @@
     }
 
     .wkp-menu-title {
-      transition: font-size .2s ease;
+      transition: font-size 0.2s ease;
+
       &.large {
         font-size: 120%;
       }
     }
   }
 
-
-  @media(max-width: 1060px) {
+  @media (max-width: 1060px) {
     .wkp-menu-title,
     .wkp-menu-toggler,
     .wkp-menu-layers {
@@ -70,17 +70,17 @@
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: max-height .3s ease;
-    transition: padding .3s ease;
+    transition: max-height 0.3s ease;
+    transition: padding 0.3s ease;
     max-height: 1000px;
     overflow: hidden;
     padding: 10px 15px;
 
     &.closed {
-      border-top-width: 0;
       border-width: 0;
-      max-height: 0;  
-      padding: 0px 15px;
+      border-top-width: 0;
+      max-height: 0;
+      padding: 0 15px;
     }
   }
 }
