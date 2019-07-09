@@ -68,6 +68,8 @@
     "start:stag": "REACT_APP_ENV='stag' yarn start",
     "start:prod": "REACT_APP_ENV='prod' yarn start",
     "start:doc": "yarn doc:server",
+    "prebuild": "rm -rf build/",
+    "build:es": "bash ./scripts/build-es.sh",
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",
     "build:dev": "REACT_APP_ENV='dev' yarn build",
     "build:stag": "REACT_APP_ENV='stag' yarn build",
@@ -81,8 +83,8 @@
     "doc": "node ./scripts/doc.js && styleguidist build",
     "doc:server": "node ./scripts/doc.js && styleguidist server",
     "eject": "react-scripts eject",
-    "publish:build": "rm -rf build && yarn version && yarn run build:prod && yarn publish build/ --access public --non-interactive --no-git-tag-version",
-    "build:es": "bash ./scripts/build-es.sh"
+    "publish:public": "yarn version && git push origin HEAD && yarn run build:prod && yarn publish build/ --non-interactive --no-git-tag-version",
+    "publish:beta": "yarn publish:public --tag beta"
   },
   "browserslist": [
     ">0.2%",
