@@ -3,6 +3,10 @@ const { version } = require('./package.json');
 module.exports = {
   title: `Trafimage Webkartenportal ${version}`,
   require: ['react-app-polyfill/ie11', 'react-app-polyfill/stable'],
+  ribbon: {
+    url: 'https://github.com/geops/trafimage-maps',
+    text: 'Fork me on GitHub',
+  },
   sections: [
     {
       name: '',
@@ -10,9 +14,9 @@ module.exports = {
     },
     {
       name: 'Components',
-      components: [
-        'src/components/TrafimageMaps/[A-Z]*.js',
-      ],
+      components: ['src/components/TrafimageMaps/[A-Z]*.js'],
+      exampleMode: 'expand',
+      usageMode: 'collapse',
     },
     {
       name: 'Applications',
@@ -23,7 +27,6 @@ module.exports = {
         },
       ],
     },
-
     {
       name: 'Layers',
       content: './src/layers/README.md',

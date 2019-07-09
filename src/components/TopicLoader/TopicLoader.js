@@ -47,7 +47,6 @@ class TopicLoader extends Component {
     const bl = baseLayers || appLayers.filter(l => l.getIsBaseLayer());
     const tl = layers || appLayers.filter(l => !l.getIsBaseLayer());
     const newLayers = [...bl, ...tl];
-
     layerService.setLayers(newLayers);
     dispatchSetLayers(newLayers);
   }

@@ -59,7 +59,7 @@ const CasaExample = () => {
 
   // Configuration of visible app elements.
   const elements = {
-    menu: true, // I only want to show the menu 
+    menu: true, // I only want to show the menu
   };
 
   // Render the component with react.
