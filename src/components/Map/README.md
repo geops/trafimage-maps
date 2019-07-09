@@ -1,6 +1,6 @@
 #
 
-This demonstrates the use of Footer.
+This demonstrates the use of Map.
 
 ```jsx
 import React from 'react';
@@ -9,7 +9,6 @@ import OLMap from 'ol/Map';
 import ConfigReader from 'react-spatial/ConfigReader';
 import LayerService from 'react-spatial/LayerService';
 import BasicMap from 'react-spatial/components/BasicMap';
-import Footer from 'trafimage-maps/components/Footer';
 import LAYER_CONF from '../../appConfig/layers';
 import { getStore } from '../../model/store';
 
@@ -18,9 +17,9 @@ const layerService = new LayerService([
   ...ConfigReader.readConfig(map, LAYER_CONF),
 ]);
 
-function FooterExample() {
+function MapExample() {
   return (
-    <div className="tm-footer-example">
+    <div className="tm-map-example">
       <Provider store={getStore()}>
         <BasicMap
           map={map}
@@ -28,11 +27,10 @@ function FooterExample() {
           center={[922748, 5911640]}
           zoom={9}
         />
-        <Footer layerService={layerService} map={map} />
       </Provider>
     </div>
   );
 }
 
-<FooterExample />;
+<MapExample />;
 ```
