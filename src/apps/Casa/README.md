@@ -13,7 +13,7 @@ import RouteLayer from '../../layers/RouteLayer';
 import ZoneLayer from '../../layers/ZoneLayer';
 
 const CasaExample = () => {
-  // Intialization of fare network layer.
+  // Intialization of zone layer.
   const zoneLayer = new ZoneLayer({
     // This is a demo token. Please use your own token.
     token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
@@ -41,10 +41,13 @@ const CasaExample = () => {
     zoneLayer.zoomToZones();
   });
 
+  zoneLayer.onClick(f => {
+    alert(`Clicked on ${f.length} ZoneLayer features.`);
+  });
+
   // Initialize route layer.
   const routeLayer = new RouteLayer({
     // This is a demo token. Please use your own token.
-    key: 'ch.sbb.casa.routeLayer',
     token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
   });
 
@@ -56,6 +59,10 @@ const CasaExample = () => {
       mot:'rail',
     },
   ]);
+
+  routeLayer.onClick(f => {
+    alert(`Clicked on ${f.length} RouteLayer features.`);
+  });
 
   // Configuration of visible app elements.
   const elements = {

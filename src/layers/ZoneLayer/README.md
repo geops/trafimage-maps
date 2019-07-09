@@ -24,7 +24,7 @@ Zoom to visible zones.
 
 ### loadZones
 
-Select zones by a given configuration.
+Load zones from a given configuration.
 
 #### Parameters
 
@@ -35,6 +35,19 @@ Select zones by a given configuration.
 -   `string` **[string][3]** \[].zoneName] Name of zone to select.
 
 Returns **[Promise][7]&lt;[Array][5]&lt;Feature>>** Promise resolving OpenLayers features.
+
+## CasaLayer
+
+Base layer for ZoneLayer and RouteLayer.
+
+### onClick
+
+Listens to click events on the layer.
+
+#### Parameters
+
+-   `callback` **[function][8]** Callback function, called with the clicked
+    Features ([https://openlayers.org/en/latest/apidoc/module-ol_Feature.html][9])
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
@@ -49,3 +62,7 @@ Returns **[Promise][7]&lt;[Array][5]&lt;Feature>>** Promise resolving OpenLayers
 [6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
 [7]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
+
+[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+
+[9]: https://openlayers.org/en/latest/apidoc/module-ol_Feature.html

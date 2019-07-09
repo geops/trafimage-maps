@@ -12,7 +12,7 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import { intersect } from 'turf';
-import Layer from 'react-spatial/Layer';
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing fare networks.
@@ -23,7 +23,7 @@ import Layer from 'react-spatial/Layer';
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
  */
-class ZoneLayer extends Layer {
+class ZoneLayer extends CasaLayer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
     const mapPolygon = fromExtent(mapExtent);
     const format = new GeoJSON();
@@ -147,10 +147,7 @@ class ZoneLayer extends Layer {
       const geomExtent = feature.getGeometry().getExtent();
 
       if (!containsExtent(mapExtent, geomExtent)) {
-        textGeometry = ZoneLayer.getOptimizedLanelGeometry(
-          feature,
-          mapExtent,
-        );
+        textGeometry = ZoneLayer.getOptimizedLanelGeometry(feature, mapExtent);
       }
     }
 
