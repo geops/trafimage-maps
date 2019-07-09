@@ -7,7 +7,7 @@ import configureStore from 'redux-mock-store';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer, { act } from 'react-test-renderer';
-import App from './App';
+import App from '.';
 
 configure({ adapter: new Adapter() });
 const mockStore = configureStore();
