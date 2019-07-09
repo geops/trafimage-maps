@@ -1,19 +1,11 @@
-const path = require('path');
 const { version } = require('./package.json');
 
 module.exports = {
   title: `Trafimage Webkartenportal ${version}`,
-  require: [
-    path.join(__dirname, 'src/themes/examples.scss'),
-    'react-app-polyfill/ie11',
-    'react-app-polyfill/stable',
-  ],
+  require: ['react-app-polyfill/ie11', 'react-app-polyfill/stable'],
   ribbon: {
     url: 'https://github.com/geops/trafimage-maps',
     text: 'Fork me on GitHub',
-  },
-  moduleAliases: {
-    'trafimage-maps': path.resolve(__dirname, 'src'),
   },
   sections: [
     {
@@ -21,28 +13,23 @@ module.exports = {
       context: 'README.md',
     },
     {
-      name: 'UI components',
+      name: 'Components',
+      components: ['src/components/TrafimageMaps/[A-Z]*.js'],
+      exampleMode: 'expand',
+      usageMode: 'collapse',
+    },
+    {
+      name: 'Applications',
       sections: [
         {
-          name: 'Spatial',
-          description: 'Spatial components',
-          components: ['src/components/Map/[A-Z]*.js'],
-          exampleMode: 'expand',
-          usageMode: 'collapse',
-        },
-        {
-          name: 'Basic',
-          description: 'Basic components',
-          components: [
-            'src/components/Footer/[A-Z]*.js',
-            'src/components/Header/[A-Z]*.js',
-            'src/components/Menu/[A-Z]*.js',
-            'src/components/Permalink/[A-Z]*.js',
-          ],
-          exampleMode: 'expand',
-          usageMode: 'collapse',
+          name: 'Casa',
+          content: 'src/apps/Casa/README.md',
         },
       ],
+    },
+    {
+      name: 'Layers',
+      content: './src/layers/README.md',
     },
   ],
   webpackConfig: {
