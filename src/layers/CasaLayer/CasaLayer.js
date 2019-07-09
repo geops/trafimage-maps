@@ -14,7 +14,6 @@ class CasaLayer extends Layer {
 
   /**
    * Listens to click events on the layer.
-   * @function onClick()
    * @param {function} callback Callback function, called with the clicked
    * Features (https://openlayers.org/en/latest/apidoc/module-ol_Feature.html)
    */
