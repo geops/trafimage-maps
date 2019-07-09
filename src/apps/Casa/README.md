@@ -41,6 +41,10 @@ const CasaExample = () => {
     zoneLayer.zoomToZones();
   });
 
+  zoneLayer.onClick(f => {
+    alert(`Clicked on ${f.length} ZoneLayer features.`);
+  });
+
   // Initialize route layer.
   const routeLayer = new RouteLayer({
     // This is a demo token. Please use your own token.
@@ -56,6 +60,10 @@ const CasaExample = () => {
       mot:'rail',
     },
   ]);
+
+  routeLayer.onClick(f => {
+    alert(`Clicked on ${f.length} RouteLayer features.`);
+  });
 
   // Configuration of visible app elements.
   const elements = {

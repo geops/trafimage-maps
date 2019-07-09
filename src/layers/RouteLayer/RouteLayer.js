@@ -2,11 +2,12 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Stroke as StrokeStyle } from 'ol/style';
-import Layer from 'react-spatial/Layer';
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing fare networks.
  * @class RouteLayer
+ * @extends CasaLayer
  * @param {Object} [options] Layer options.
  * @param {string} options.token Access token for geOps services.
  * @param {string} [options.name] Layer name.
@@ -16,7 +17,7 @@ import Layer from 'react-spatial/Layer';
  * @param {string} [projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  */
-class RouteLayer extends Layer {
+class RouteLayer extends CasaLayer {
   constructor(options = {}) {
     super({
       name: options.name || 'Routen',
@@ -120,11 +121,6 @@ class RouteLayer extends Layer {
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
     this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
-  }
-
-  init(map) {
-    super.init(map);
-    this.map = map;
   }
 }
 
