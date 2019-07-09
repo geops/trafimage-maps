@@ -15,7 +15,7 @@ import VerbundLayer from '../../layers/VerbundLayer';
 const CasaExample = () => {
   // Intialization of fare network layer.
   const verbundLayer = new VerbundLayer({
-    token: '', // Please add a valid token here',   
+    token: '', // Please add a valid token here',
   });
 
   // Select zones.
@@ -40,7 +40,7 @@ const CasaExample = () => {
 
   // Initialize route layer.
   const routeLayer = new RouteLayer({
-    token: '', // Please add a valid token here',   
+    token: '', // Please add a valid token here',
   });
 
   // Visualize a route on the map.
@@ -54,7 +54,7 @@ const CasaExample = () => {
 
   // Configuration of visible app elements.
   const elements = {
-    menu: true, // I only want to show the menu 
+    menu: true, // I only want to show the menu
   };
 
   // Render the component with react.

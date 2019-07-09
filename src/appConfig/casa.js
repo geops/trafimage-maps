@@ -815,6 +815,7 @@ const zoneColors = [
 ];
 
 export default (zoneplan, zone) => {
+  // eslint-disable-next-line no-console
   console.log(zoneplan);
   for (let i = 0, len = zoneColors.length; i < len; i += 1) {
     if (zoneColors[i].zonenplaene.includes(zoneplan)) {
