@@ -5,6 +5,7 @@
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "abortcontroller-polyfill": "^1.2.3",
     "i18next": "^15.0.4",
     "i18next-browser-languagedetector": "^3.0.1",

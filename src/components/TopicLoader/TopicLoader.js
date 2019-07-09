@@ -6,6 +6,7 @@ import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
 import Layer from 'react-spatial/Layer';
 import LAYER_CONF from '../../appConfig/layers';
+import TOPIC_CONF from '../../appConfig/topics';
 import { setActiveTopic } from '../../model/app/actions';
 import { setLayers } from '../../model/map/actions';
 
@@ -30,7 +31,7 @@ class TopicLoader extends Component {
   constructor(props) {
     super(props);
     const { dispatchSetActiveTopic, topic } = this.props;
-    dispatchSetActiveTopic(topic);
+    dispatchSetActiveTopic(TOPIC_CONF[topic]);
   }
 
   componentDidMount() {

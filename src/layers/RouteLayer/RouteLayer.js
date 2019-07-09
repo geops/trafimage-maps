@@ -57,13 +57,14 @@ class RouteLayer extends Layer {
       featureProjection: this.projection,
     });
 
-    fetch(url)
+    return fetch(url)
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
         features.forEach(f => f.set('mot', mot));
         this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
+        return features;
       });
   }
 
@@ -90,8 +91,7 @@ class RouteLayer extends Layer {
    * @param {string} sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
-   * @returns {Promise<Feature>} an OpenLayers feature.
-   *   See https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html.
+   * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   getRoute(sequences) {
     let via = [];
@@ -109,7 +109,17 @@ class RouteLayer extends Layer {
       }
     }
 
-    this.fetchRouteForMot(via, mot);
+    return this.fetchRouteForMot(via, mot);
+  }
+
+  /**
+   * Zoom to route.
+   * @param {Object} [fitOptions] Options,
+   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   */
+  zoomToRoute(options) {
+    const fitOptions = { padding: [20, 20, 20, 20], ...options };
+    this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
   }
 
   init(map) {

@@ -15,7 +15,8 @@ import VerbundLayer from '../../layers/VerbundLayer';
 const CasaExample = () => {
   // Intialization of fare network layer.
   const verbundLayer = new VerbundLayer({
-    token: '', // Please add a valid token here',   
+    // This is a demo token. Please use your own token.
+    token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
   });
 
   // Select zones.
@@ -36,11 +37,15 @@ const CasaExample = () => {
         zoneCode: 170,
       }],
     },
-  ]);
+  ]).then((f) => {
+    verbundLayer.zoomToZones();
+  });
 
   // Initialize route layer.
   const routeLayer = new RouteLayer({
-    token: '', // Please add a valid token here',   
+    // This is a demo token. Please use your own token.
+    key: 'ch.sbb.casa.routeLayer',
+    token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
   });
 
   // Visualize a route on the map.

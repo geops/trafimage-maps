@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
@@ -11,6 +12,7 @@ import './Menu.scss';
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 class Menu extends Component {
@@ -20,6 +22,7 @@ class Menu extends Component {
     this.state = {
       isOpen: false,
       menuLayers: [],
+      allMenuLayersVisible: false,
     };
 
     const { layerService } = this.props;
@@ -32,14 +35,19 @@ class Menu extends Component {
 
   updateMenuLayers() {
     const { layerService } = this.props;
-    let menuLayers = layerService.getLayersAsFlatArray();
-    menuLayers = menuLayers.filter(l => l.getIsBaseLayer() && l.getVisible());
-    this.setState({ menuLayers });
+    let topicLayers = layerService.getLayersAsFlatArray();
+    topicLayers = topicLayers.filter(l => !l.getIsBaseLayer());
+    const menuLayers = topicLayers.filter(l => l.getVisible());
+
+    this.setState({
+      menuLayers,
+      allMenuLayersVisible: menuLayers.length === topicLayers.length,
+    });
   }
 
   render() {
-    const { activeTopic, layerService } = this.props;
-    const { menuLayers, isOpen } = this.state;
+    const { activeTopic, layerService, t } = this.props;
+    const { menuLayers, allMenuLayersVisible, isOpen } = this.state;
     const lNames = menuLayers.map(l => l.getName());
 
     return (
@@ -64,7 +72,9 @@ class Menu extends Component {
           </div>
 
           <div className={`wkp-menu-layers ${lNames.length ? '' : 'hidden'}`}>
-            {menuLayers.map(l => l.getName()).join(', ')}
+            {allMenuLayersVisible
+              ? t('alle aktiviert')
+              : menuLayers.map(l => l.getName()).join(', ')}
           </div>
         </div>
 
@@ -88,6 +98,7 @@ const mapDispatchToProps = {};
 Menu.propTypes = propTypes;
 
 export default compose(
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps,

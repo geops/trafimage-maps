@@ -55,23 +55,51 @@ class VerbundLayer extends Layer {
       ...options,
     });
 
-    this.url = (options || {}).url || '/public/sample_data/zones.geojson';
+    this.url = options.url || 'https://geops.cloud.tyk.io/casa-fare-network';
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
     this.token = options.token;
 
-    this.fetchZones(this.url);
+    this.fetchZones();
   }
 
-  fetchZones(url) {
+  fetchZones(params = {}) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+
+    this.abortController = new AbortController();
     this.olLayer.getSource().clear();
+
     const format = new GeoJSON();
-    fetch(url)
+    const urlParams = { ...params, ...{ token: this.token, simplify: 100 } };
+    let url = `${this.url}/zonen`;
+
+    Object.keys(urlParams).forEach(key => {
+      url += url.indexOf('?') > -1 ? '&' : '?';
+      url += `${key}=${urlParams[key]}`;
+    });
+
+    return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
       .then(data => {
-        const features = format.readFeatures(data);
+        const features = format.readFeatures(data, {
+          dataProjection: 'EPSG:21781',
+          featureProjection: 'EPSG:3857',
+        });
         this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
+        return features;
       });
+  }
+
+  /**
+   * Zoom to visible zones.
+   * @param {Object} [fitOptions] Options,
+   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   */
+  zoomToZones(options) {
+    const fitOptions = { padding: [20, 20, 20, 20], ...options };
+    this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
   }
 
   /**
@@ -81,26 +109,26 @@ class VerbundLayer extends Layer {
    * @param {Object[]} config[].zones Array of zones to select.
    * @param {number} [config[].zones[].zoneCode] Code of zone to select.
    * @param {string} [config[].zones[].zoneName] Name of zone to select.
+   * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   selectZonesByConfig(config) {
     const qryParams = [];
 
     // Buid query parameter as expected by the api.
-    // Example: ?filter=zones=801:10:Davos,490:120:undefined,490:170:undefined
+    // Example: ?filter=zones=801:10:Davos,490:120:,490:170:
     for (let i = 0; i < config.length; i += 1) {
       for (let j = 0; j < config[i].zones.length; j += 1) {
         qryParams.push(
           [
-            config[i].partnerCode || 'undefined',
-            config[i].zones[j].zoneCode || 'undefined',
-            config[i].zones[j].zoneName || 'undefined',
+            config[i].partnerCode || '',
+            config[i].zones[j].zoneCode || '',
+            config[i].zones[j].zoneName || '',
           ].join(':'),
         );
       }
     }
 
-    const url = `${this.url}?filter=${qryParams.join(',')}`;
-    return this.fetchZones(url);
+    return this.fetchZones({ filter: qryParams.join(',') });
   }
 
   zoneStyle(feature, resolution) {
