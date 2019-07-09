@@ -23,14 +23,6 @@ else
   exit 1
 fi
 
-# Remove all sass files
-if find build/es -regextype posix-extended -regex '.*\.scss$' -type f | xargs rm -f; then
-  echo "All sass files removed."
-else
-  echo "Remove sass files failed."
-  exit 1
-fi
-
 # Remove all tests files.
 if find build/es -regextype posix-extended -regex '.*(test).*js.?(map|snap)?$' -type f | xargs rm -f; then
   echo "All test files removed."
@@ -38,3 +30,6 @@ else
   echo "Remove tests files failed."
   exit 1
 fi
+
+# Move the index.js file to build/es
+cp -f packages/es/index.js build/es
