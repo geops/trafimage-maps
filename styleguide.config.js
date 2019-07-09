@@ -1,19 +1,11 @@
-const path = require('path');
 const { version } = require('./package.json');
 
 module.exports = {
   title: `Trafimage Webkartenportal ${version}`,
-  require: [
-    path.join(__dirname, 'src/themes/examples.scss'),
-    'react-app-polyfill/ie11',
-    'react-app-polyfill/stable',
-  ],
+  require: ['react-app-polyfill/ie11', 'react-app-polyfill/stable'],
   ribbon: {
     url: 'https://github.com/geops/trafimage-maps',
     text: 'Fork me on GitHub',
-  },
-  moduleAliases: {
-    'trafimage-maps': path.resolve(__dirname, 'src'),
   },
   sections: [
     {
