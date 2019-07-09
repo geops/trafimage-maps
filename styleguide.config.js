@@ -29,7 +29,16 @@ module.exports = {
     },
     {
       name: 'Layers',
-      content: './src/layers/README.md',
+      sections: [
+        {
+          name: 'RouteLayer',
+          content: 'src/layers/RouteLayer/README.md',
+        },
+        {
+          name: 'VerbundLayer',
+          content: 'src/layers/VerbundLayer/README.md',
+        },
+      ],
     },
   ],
   webpackConfig: {
