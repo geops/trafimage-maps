@@ -7,6 +7,9 @@ This repo contains the code of the Trafimage Map Portal and other applications b
 Components are based on [react-spatial](https://github.com/geops/react-spatial).
 
 
+See [demo](https://trafimage-maps.geops.ch).
+
+
 ## Technologies
 * react
 * redux
@@ -51,5 +54,3 @@ Install
 ```bash
 npm install <this-app-package>
 ```
-
-TODO: Link styleguidist here.
