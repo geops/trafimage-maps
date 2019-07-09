@@ -15,7 +15,7 @@ Layer for visualizing fare networks.
 -   `projection` **[string][2]?** Layer projection.
       Default is webmercator ('EPSG:3857')
 
-### getRoute
+### loadRoutes
 
 Generate the route for a given configuration.
 

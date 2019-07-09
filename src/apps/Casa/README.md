@@ -20,7 +20,7 @@ const CasaExample = () => {
   });
 
   // Select zones.
-  zoneLayer.selectZonesByConfig([
+  zoneLayer.loadZones([
     {
       partnerCode: 801,
       zones: [{
@@ -49,7 +49,7 @@ const CasaExample = () => {
   });
 
   // Visualize a route on the map.
-  routeLayer.getRoute([
+  routeLayer.loadRoutes([
     {
       uicFrom: 8501000,
       uicTo: 8500010,

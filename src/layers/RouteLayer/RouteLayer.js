@@ -84,7 +84,7 @@ class RouteLayer extends Layer {
   }
 
   /**
-   * Generate the route for a given configuration.
+   * Load routes based on a given configuration.
    * @param {Object[]} sequences Route sequences.
    * @param {number} sequences[].uicFrom UIC number of start station.
    * @param {number} sequences[].uicTo UIC number of end station.
@@ -93,7 +93,7 @@ class RouteLayer extends Layer {
    *   "funicular" and "ferry"
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  getRoute(sequences) {
+  loadRoutes(sequences) {
     let via = [];
     let mot;
 

@@ -22,7 +22,7 @@ Zoom to visible zones.
 -   `fitOptions` **[Object][1]?** Options,
       see [https://openlayers.org/en/latest/apidoc/module-ol_View-View.html][4]
 
-### selectZonesByConfig
+### loadZones
 
 Select zones by a given configuration.
 

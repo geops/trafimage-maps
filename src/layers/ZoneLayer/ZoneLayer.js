@@ -103,7 +103,7 @@ class ZoneLayer extends Layer {
   }
 
   /**
-   * Select zones by a given configuration.
+   * Load zones from a given configuration.
    * @param {Object[]} config Array of objects defining selected zones.
    * @param {number} config[].partnerCode Partner code.
    * @param {Object[]} config[].zones Array of zones to select.
@@ -111,7 +111,7 @@ class ZoneLayer extends Layer {
    * @param {string} [config[].zones[].zoneName] Name of zone to select.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  selectZonesByConfig(config) {
+  loadZones(config) {
     const qryParams = [];
 
     // Buid query parameter as expected by the api.
