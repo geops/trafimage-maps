@@ -91,6 +91,22 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "post-checkout": "if [[ $HUSKY_GIT_PARAMS =~ 1$ ]]; then yarn install --frozen-lockfile; fi",
+      "post-merge": "yarn install --frozen-lockfile",
+      "post-rebase": "yarn install"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "eslint src --fix",
+      "prettier --write 'src/**/*.js'",
+      "git add",
+      "react-scripts test --bail --findRelatedTests --watchAll=false"
+    ]
+  },
   "jest": {
     "coverageReporters": [
       "text",
