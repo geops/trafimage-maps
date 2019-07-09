@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import ConfigReader from 'react-spatial/ConfigReader';
-// import LayerService from 'react-spatial/LayerService';
+import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
 import Layer from 'react-spatial/Layer';
 import LAYER_CONF from '../../appConfig/layers';
@@ -13,7 +13,7 @@ const propTypes = {
   topic: PropTypes.string.isRequired,
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-  // layerService: PropTypes.instanceOf(LayerService).isRequired,
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
 
   // mapDispatchToProps
@@ -38,7 +38,7 @@ class TopicLoader extends Component {
       dispatchSetLayers,
       baseLayers,
       layers,
-      // layerService,
+      layerService,
       topic,
     } = this.props;
 
@@ -46,7 +46,7 @@ class TopicLoader extends Component {
     const bl = baseLayers || appLayers.filter(l => l.getIsBaseLayer());
     const tl = layers || appLayers.filter(l => !l.getIsBaseLayer());
     const newLayers = [...bl, ...tl];
-    // layerService.setLayers(newLayers);
+    layerService.setLayers(newLayers);
     dispatchSetLayers(newLayers);
   }
 
