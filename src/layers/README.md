@@ -28,8 +28,17 @@ Generate the route for a given configuration.
           Allowed values are "rail", "bus", "tram", "subway", "gondola",
           "funicular" and "ferry"
 
-Returns **[Promise][6]&lt;Feature>** an OpenLayers feature.
-  See [https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html][7].
+Returns **[Promise][6]&lt;[Array][4]&lt;Feature>>** Promise resolving OpenLayers features.
+
+### zoomToRoute
+
+Zoom to route.
+
+#### Parameters
+
+-   `options`  
+-   `fitOptions` **[Object][1]?** Options,
+      see [https://openlayers.org/en/latest/apidoc/module-ol_View-View.html][7]
 
 ## VerbundLayer
 
@@ -43,6 +52,16 @@ Layer for visualizing fare networks.
 -   `null`  (number} options.labelOptimizationMinResolution Minimum resolution for
       using optimized label placement based on the current extent. Default is 100.
 
+### zoomToZones
+
+Zoom to visible zones.
+
+#### Parameters
+
+-   `options`  
+-   `fitOptions` **[Object][1]?** Options,
+      see [https://openlayers.org/en/latest/apidoc/module-ol_View-View.html][7]
+
 ### selectZonesByConfig
 
 Select zones by a given configuration.
@@ -54,6 +73,8 @@ Select zones by a given configuration.
     -   `config[].zones` **[Array][4]&lt;[Object][1]>** Array of zones to select.
 -   `number` **[number][5]** \[].zoneCode] Code of zone to select.
 -   `string` **[string][2]** \[].zoneName] Name of zone to select.
+
+Returns **[Promise][6]&lt;[Array][4]&lt;Feature>>** Promise resolving OpenLayers features.
 
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
@@ -67,4 +88,4 @@ Select zones by a given configuration.
 
 [6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
 
-[7]: https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html
+[7]: https://openlayers.org/en/latest/apidoc/module-ol_View-View.html

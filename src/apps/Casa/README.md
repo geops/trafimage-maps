@@ -59,7 +59,8 @@ const CasaExample = () => {
 
   // Configuration of visible app elements.
   const elements = {
-    menu: true, // I only want to show the menu
+    menu: true,
+    popup: true,
   };
 
   // Render the component with react.
@@ -70,6 +71,9 @@ const CasaExample = () => {
         topic="ch.sbb.casa"
         layers={[verbundLayer, routeLayer]}
         elements={elements}
+        popupComponents={{
+          'ch.sbb.casa.routeLayer': 'CasaRoutePopup',
+        }}
       />
 
     </div>

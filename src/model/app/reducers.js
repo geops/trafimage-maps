@@ -1,7 +1,12 @@
 import i18n from 'i18next';
-import { SET_ACTIVE_TOPIC, SET_LANGUAGE } from './actions';
+import {
+  SET_ACTIVE_TOPIC,
+  SET_CLICKED_FEATURES,
+  SET_LANGUAGE,
+} from './actions';
 
 const initialState = {
+  clickedFeatures: [],
   language: 'de',
 };
 
@@ -12,6 +17,11 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         language: action.data,
+      };
+    case SET_CLICKED_FEATURES:
+      return {
+        ...state,
+        clickedFeatures: [...action.data],
       };
     case SET_ACTIVE_TOPIC:
       return {
