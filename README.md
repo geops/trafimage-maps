@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/%40geops%2Freact-spatial-starter.svg)](https://www.npmjs.com/package/%40geops%2Freact-spatial-starter)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-This repo contains the code of the Trafimage Map Portal and other applications build on it.
+This repo contains the code of the Trafimage Map Portal by Swiss Federal Railways SBB and other applications build on it.
 Components are based on [react-spatial](https://github.com/geops/react-spatial).
 
 
