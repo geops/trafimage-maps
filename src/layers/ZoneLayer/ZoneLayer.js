@@ -12,18 +12,18 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import { intersect } from 'turf';
-import Layer from 'react-spatial/Layer';
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing fare networks.
- * @class VerbundLayer
+ * @class ZoneLayer
  * @param {Object} options Layer options.
  * @param {boolean} options.visible Visibility of the layer.
  * @param (number} options.labelOptimizationMinResolution Minimum resolution for
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
  */
-class VerbundLayer extends Layer {
+class ZoneLayer extends CasaLayer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
     const mapPolygon = fromExtent(mapExtent);
     const format = new GeoJSON();
@@ -103,7 +103,7 @@ class VerbundLayer extends Layer {
   }
 
   /**
-   * Select zones by a given configuration.
+   * Load zones from a given configuration.
    * @param {Object[]} config Array of objects defining selected zones.
    * @param {number} config[].partnerCode Partner code.
    * @param {Object[]} config[].zones Array of zones to select.
@@ -111,7 +111,7 @@ class VerbundLayer extends Layer {
    * @param {string} [config[].zones[].zoneName] Name of zone to select.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  selectZonesByConfig(config) {
+  loadZones(config) {
     const qryParams = [];
 
     // Buid query parameter as expected by the api.
@@ -147,10 +147,7 @@ class VerbundLayer extends Layer {
       const geomExtent = feature.getGeometry().getExtent();
 
       if (!containsExtent(mapExtent, geomExtent)) {
-        textGeometry = VerbundLayer.getOptimizedLanelGeometry(
-          feature,
-          mapExtent,
-        );
+        textGeometry = ZoneLayer.getOptimizedLanelGeometry(feature, mapExtent);
       }
     }
 
@@ -187,4 +184,4 @@ class VerbundLayer extends Layer {
   }
 }
 
-export default VerbundLayer;
+export default ZoneLayer;

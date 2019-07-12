@@ -2,11 +2,12 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Stroke as StrokeStyle } from 'ol/style';
-import Layer from 'react-spatial/Layer';
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing fare networks.
  * @class RouteLayer
+ * @extends CasaLayer
  * @param {Object} [options] Layer options.
  * @param {string} options.token Access token for geOps services.
  * @param {string} [options.name] Layer name.
@@ -16,7 +17,7 @@ import Layer from 'react-spatial/Layer';
  * @param {string} [projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  */
-class RouteLayer extends Layer {
+class RouteLayer extends CasaLayer {
   constructor(options = {}) {
     super({
       name: options.name || 'Routen',
@@ -84,7 +85,7 @@ class RouteLayer extends Layer {
   }
 
   /**
-   * Generate the route for a given configuration.
+   * Load routes based on a given configuration.
    * @param {Object[]} sequences Route sequences.
    * @param {number} sequences[].uicFrom UIC number of start station.
    * @param {number} sequences[].uicTo UIC number of end station.
@@ -93,7 +94,7 @@ class RouteLayer extends Layer {
    *   "funicular" and "ferry"
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  getRoute(sequences) {
+  loadRoutes(sequences) {
     let via = [];
     let mot;
 
@@ -120,11 +121,6 @@ class RouteLayer extends Layer {
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
     this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
-  }
-
-  init(map) {
-    super.init(map);
-    this.map = map;
   }
 }
 
