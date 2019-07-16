@@ -73,6 +73,11 @@ const propTypes = {
    * Initial zoom level.
    */
   zoom: PropTypes.number,
+
+  /**
+   * Token for using geOps services.
+   */
+  token: PropTypes.string,
 };
 
 const defaultProps = {
@@ -90,6 +95,7 @@ const defaultProps = {
   baseLayers: null,
   projection: 'EPSG:3857',
   layers: null,
+  token: null,
 };
 
 class TrafimageMaps extends Component {
@@ -115,6 +121,7 @@ class TrafimageMaps extends Component {
       layers,
       projection,
       topic,
+      token,
       center,
       zoom,
     } = this.props;
@@ -138,11 +145,11 @@ class TrafimageMaps extends Component {
       <Provider store={getStore()}>
         <div className="tm-app">
           <TopicLoader
-            map={this.map}
             layerService={this.layerService}
             baseLayers={baseLayers}
             layers={layers}
             topic={topic}
+            token={token}
           />
           <ResizeHandler observe={this} />
           <Map
