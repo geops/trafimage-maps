@@ -36,7 +36,7 @@ Load zones from a given configuration.
 
 Returns **[Promise][7]&lt;[Array][5]&lt;Feature>>** Promise resolving OpenLayers features.
 
-## CasaLayer
+## TrafimageLayer
 
 Base layer for ZoneLayer and RouteLayer.
 

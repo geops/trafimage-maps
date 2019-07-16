@@ -12,7 +12,7 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import { intersect } from 'turf';
-import CasaLayer from '../CasaLayer';
+import TrafimageLayer from '../TrafimageLayer';
 
 /**
  * Layer for visualizing fare networks.
@@ -23,7 +23,7 @@ import CasaLayer from '../CasaLayer';
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
  */
-class ZoneLayer extends CasaLayer {
+class ZoneLayer extends TrafimageLayer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
     const mapPolygon = fromExtent(mapExtent);
     const format = new GeoJSON();

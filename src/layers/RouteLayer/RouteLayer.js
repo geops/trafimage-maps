@@ -2,12 +2,12 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Stroke as StrokeStyle } from 'ol/style';
-import CasaLayer from '../CasaLayer';
+import TrafimageLayer from '../TrafimageLayer';
 
 /**
  * Layer for visualizing fare networks.
  * @class RouteLayer
- * @extends CasaLayer
+ * @extends TrafimageLayer
  * @param {Object} [options] Layer options.
  * @param {string} options.token Access token for geOps services.
  * @param {string} [options.name] Layer name.
@@ -17,7 +17,7 @@ import CasaLayer from '../CasaLayer';
  * @param {string} [projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  */
-class RouteLayer extends CasaLayer {
+class RouteLayer extends TrafimageLayer {
   constructor(options = {}) {
     super({
       name: options.name || 'Routen',
@@ -45,9 +45,18 @@ class RouteLayer extends CasaLayer {
     };
 
     // Route url
-    this.url =
-      (options || {}).url ||
-      `https://geops.cloud.tyk.io/routing?token=${this.token}`;
+    this.url = options.url || 'https://geops.cloud.tyk.io/routing';
+    this.url = this.token
+      ? TrafimageLayer.getTokenUrl(this.url, this.token)
+      : this.url;
+  }
+
+  setToken(token) {
+    if (token) {
+      this.url = TrafimageLayer.getTokenUrl(this.url, token);
+    }
+
+    return super.setToken(token);
   }
 
   fetchRouteForMot(viaPoints, mot) {

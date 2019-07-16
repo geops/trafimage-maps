@@ -1,15 +1,50 @@
+import qs from 'querystring';
+import WMTSSource from 'ol/source/WMTS';
 import Layer from 'react-spatial/Layer';
 
 /**
  * Base layer for ZoneLayer and RouteLayer.
- * @class CasaLayer
+ * @class TrafimageLayer
  */
-class CasaLayer extends Layer {
+class TrafimageLayer extends Layer {
+  static getTokenUrl(url, token) {
+    const [u, search] = url.split('?');
+    const params = qs.parse(search);
+    return `${u}?${qs.stringify({ key: token, ...params })}`;
+  }
+
+  /**
+   * @param {Object} [options] Layer options.
+   * @param {string} [options.token] Access token for geOps services.
+   */
   constructor(options = {}) {
     super(options);
 
+    // Access token for geOps services
+    this.token = options.token;
+
     // Array of click callbacks
     this.clickCallbacks = [];
+
+    // Add token
+    this.setToken(this.token);
+  }
+
+  setToken(token) {
+    if (!token) {
+      return;
+    }
+
+    this.token = token;
+    const source = this.olLayer.getSource();
+
+    if (source instanceof WMTSSource) {
+      const urls = source
+        .getUrls()
+        .map(url => TrafimageLayer.getTokenUrl(url, this.token));
+
+      source.setUrls(urls);
+    }
   }
 
   /**
@@ -48,4 +83,4 @@ class CasaLayer extends Layer {
   }
 }
 
-export default CasaLayer;
+export default TrafimageLayer;
