@@ -14,7 +14,10 @@ import ZoneLayer from '../../layers/ZoneLayer';
 
 const CasaExample = () => {
   // Intialization of zone layer.
-  const zoneLayer = new ZoneLayer();
+  const zoneLayer = new ZoneLayer({
+    // Demo token. Please replace with your own token.
+    token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  });
 
   // Select zones.
   zoneLayer.loadZones([
@@ -43,7 +46,10 @@ const CasaExample = () => {
   });
 
   // Initialize route layer.
-  const routeLayer = new RouteLayer();
+  const routeLayer = new RouteLayer({
+    // Demo token. Please replace with your own token.
+    token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+	});
 
   // Visualize a route on the map.
   routeLayer.loadRoutes([

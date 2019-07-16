@@ -1,3 +1,4 @@
+import qs from 'querystring';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -46,22 +47,17 @@ class RouteLayer extends TrafimageLayer {
 
     // Route url
     this.url = options.url || 'https://geops.cloud.tyk.io/routing';
-    this.url = this.token
-      ? TrafimageLayer.getTokenUrl(this.url, this.token)
-      : this.url;
-  }
-
-  setToken(token) {
-    if (token) {
-      this.url = TrafimageLayer.getTokenUrl(this.url, token);
-    }
-
-    return super.setToken(token);
   }
 
   fetchRouteForMot(viaPoints, mot) {
     const via = viaPoints.map(v => `!${v}`);
-    const url = `${this.url}&via=${via.join(';')}&mot=${mot}`;
+    const urlParams = {
+      token: this.token || '',
+      via: via.join(';'),
+      mot,
+    };
+
+    const url = `${this.url}?${qs.stringify(urlParams)}`;
     const format = new GeoJSON({
       dataProjection: 'EPSG:4326',
       featureProjection: this.projection,

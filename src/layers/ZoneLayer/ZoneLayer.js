@@ -1,3 +1,4 @@
+import qs from 'querystring';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -56,8 +57,8 @@ class ZoneLayer extends TrafimageLayer {
     });
 
     this.url = options.url || 'https://geops.cloud.tyk.io/casa-fare-network';
+
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
-    this.token = options.token;
 
     this.fetchZones();
   }
@@ -72,12 +73,7 @@ class ZoneLayer extends TrafimageLayer {
 
     const format = new GeoJSON();
     const urlParams = { ...params, ...{ token: this.token, simplify: 100 } };
-    let url = `${this.url}/zonen`;
-
-    Object.keys(urlParams).forEach(key => {
-      url += url.indexOf('?') > -1 ? '&' : '?';
-      url += `${key}=${urlParams[key]}`;
-    });
+    const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
     return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
