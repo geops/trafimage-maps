@@ -1,3 +1,4 @@
+import qs from 'querystring';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -12,7 +13,7 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import { intersect } from 'turf';
-import CasaLayer from '../CasaLayer';
+import TrafimageLayer from '../TrafimageLayer';
 
 /**
  * Layer for visualizing fare networks.
@@ -23,7 +24,7 @@ import CasaLayer from '../CasaLayer';
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
  */
-class ZoneLayer extends CasaLayer {
+class ZoneLayer extends TrafimageLayer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
     const mapPolygon = fromExtent(mapExtent);
     const format = new GeoJSON();
@@ -56,8 +57,8 @@ class ZoneLayer extends CasaLayer {
     });
 
     this.url = options.url || 'https://geops.cloud.tyk.io/casa-fare-network';
+
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
-    this.token = options.token;
 
     this.fetchZones();
   }
@@ -72,12 +73,7 @@ class ZoneLayer extends CasaLayer {
 
     const format = new GeoJSON();
     const urlParams = { ...params, ...{ token: this.token, simplify: 100 } };
-    let url = `${this.url}/zonen`;
-
-    Object.keys(urlParams).forEach(key => {
-      url += url.indexOf('?') > -1 ? '&' : '?';
-      url += `${key}=${urlParams[key]}`;
-    });
+    const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
     return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())

@@ -1,5 +1,9 @@
 import proj4 from 'proj4';
+import TileLayer from 'ol/layer/Tile';
+import WMTSSource from 'ol/source/WMTS';
+import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
+import TrafimageLayer from '../layers/TrafimageLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -47,39 +51,29 @@ const resolutions = [
   0.298582141739,
 ];
 
-export default [
-  {
-    name: 'Basemap',
-    topics: ['ch.sbb.netzkarte', 'ch.sbb.casa'],
+export const defaultBaseLayers = [
+  new TrafimageLayer({
+    name: 'Netzkarte',
+    key: 'ch.sbb.netzkarte',
     copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
     visible: true,
     isBaseLayer: true,
-    data: {
-      type: 'wmts',
-      url:
-        'http://vtiles.trafimage.geops.ch/styles/' +
-        'trafimage_perimeter/{TileMatrix}/{TileCol}/{TileRow}.png',
-      matrixSet: 'webmercator',
-      requestEncoding: 'REST',
-      projectionExtent,
-      resolutions,
-    },
-  },
-  {
-    name: 'Swisstopo Swissimage',
-    topics: ['ch.sbb.netzkarte'],
-    copyright: 'swisstopo (5704003351)',
-    visible: false,
-    isBaseLayer: true,
-    data: {
-      type: 'wmts',
-      url:
-        'https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage-product/' +
-        'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
-      matrixSet: 'webmercator',
-      requestEncoding: 'REST',
-      projectionExtent,
-      resolutions,
-    },
-  },
+    olLayer: new TileLayer({
+      source: new WMTSSource({
+        url:
+          `https://maps.geops.io/styles/trafimage_perimeter_v2/` +
+          `{TileMatrix}/{TileCol}/{TileRow}.png`,
+        matrixSet: 'webmercator',
+        projection: 'EPSG:3857',
+        requestEncoding: 'REST',
+        tileGrid: new WMTSTileGrid({
+          extent: projectionExtent,
+          resolutions,
+          matrixIds: resolutions.map((r, i) => `${i}`),
+        }),
+      }),
+    }),
+  }),
 ];
+
+export default defaultBaseLayers;

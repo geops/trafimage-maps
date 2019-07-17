@@ -2,7 +2,7 @@
 
 ## 
 
-**Extends CasaLayer**
+**Extends TrafimageLayer**
 
 Layer for visualizing fare networks.
 
@@ -42,7 +42,7 @@ Zoom to route.
 -   `fitOptions` **[Object][1]?** Options,
       see [https://openlayers.org/en/latest/apidoc/module-ol_View-View.html][7]
 
-## CasaLayer
+## TrafimageLayer
 
 Base layer for ZoneLayer and RouteLayer.
 
