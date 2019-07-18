@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import LayerService from 'react-spatial/LayerService';
 import LayerTree from 'react-spatial/components/LayerTree';
+import MenuHeader from './MenuHeader';
+import TopicMenu from './TopicMenu';
+import TOPIC_CONF from '../../appConfig/topics';
+import { setActiveTopic } from '../../model/app/actions';
 
 import './Menu.scss';
 
@@ -13,6 +16,7 @@ const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   t: PropTypes.func.isRequired,
+  dispatchSetActiveTopic: PropTypes.func.isRequired,
 };
 
 class Menu extends Component {
@@ -21,6 +25,7 @@ class Menu extends Component {
 
     this.state = {
       isOpen: false,
+      openTopicKey: null,
       menuLayers: [],
       allMenuLayersVisible: false,
     };
@@ -31,6 +36,21 @@ class Menu extends Component {
 
   componentDidMount() {
     this.updateMenuLayers();
+  }
+
+  onTopicClick(topic) {
+    const { activeTopic, dispatchSetActiveTopic } = this.props;
+    const { openTopicKey } = this.state;
+
+    if (activeTopic.key === topic.key) {
+      // toggle layer tree
+      this.setState({
+        openTopicKey: openTopicKey === topic.key ? null : topic.key,
+      });
+    } else {
+      // change topic
+      dispatchSetActiveTopic(topic);
+    }
   }
 
   updateMenuLayers() {
@@ -47,42 +67,51 @@ class Menu extends Component {
 
   render() {
     const { activeTopic, layerService, t } = this.props;
-    const { menuLayers, allMenuLayersVisible, isOpen } = this.state;
-    const lNames = menuLayers.map(l => l.getName());
+    const {
+      menuLayers,
+      allMenuLayersVisible,
+      isOpen,
+      openTopicKey,
+    } = this.state;
+
+    const info = allMenuLayersVisible
+      ? t('alle aktiviert')
+      : menuLayers.map(l => l.getName()).join(', ');
 
     return (
       <div className="wkp-menu">
-        <div
-          className={`wkp-menu-header ${isOpen ? 'open' : ''}`}
-          role="button"
-          tabIndex="0"
-          onClick={() => this.setState({ isOpen: !isOpen })}
-          onKeyPress={e => {
-            if (e.which === 13) {
-              this.setState({ isOpen: !isOpen });
-            }
-          }}
-        >
-          <div className={`wkp-menu-title ${lNames.length ? '' : 'large'}`}>
-            {activeTopic.name}
-          </div>
+        <MenuHeader
+          title={activeTopic.name}
+          info={info}
+          headerLayerNames={menuLayers.map(l => l.getName())}
+          isOpen={isOpen}
+          onToggle={() => this.setState({ isOpen: !isOpen })}
+        />
 
-          <div className="wkp-menu-toggler">
-            {isOpen ? <FaAngleUp /> : <FaAngleDown />}
-          </div>
+        <div className={`wkp-menu-body ${isOpen ? '' : 'closed'}`}>
+          {TOPIC_CONF.map(topic => (
+            <div key={topic.key}>
+              <TopicMenu
+                topic={topic}
+                isActive={activeTopic.key === topic.key}
+                isTopicCollapsed={openTopicKey === topic.key}
+                onClick={to => this.onTopicClick(to)}
+              />
 
-          <div className={`wkp-menu-layers ${lNames.length ? '' : 'hidden'}`}>
-            {allMenuLayersVisible
-              ? t('alle aktiviert')
-              : menuLayers.map(l => l.getName()).join(', ')}
-          </div>
-        </div>
-
-        <div className={`wkp-layer-tree ${isOpen ? '' : 'closed'}`}>
-          <LayerTree
-            isItemHidden={l => l.getIsBaseLayer()}
-            layerService={layerService}
-          />
+              {topic.key === activeTopic.key && (
+                <div
+                  className={`wkp-layer-tree ${
+                    openTopicKey === topic.key ? '' : 'closed'
+                  }`}
+                >
+                  <LayerTree
+                    isItemHidden={l => l.getIsBaseLayer()}
+                    layerService={layerService}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -93,7 +122,9 @@ const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  dispatchSetActiveTopic: setActiveTopic,
+};
 
 Menu.propTypes = propTypes;
 

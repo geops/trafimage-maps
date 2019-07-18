@@ -10,6 +10,7 @@ import { setLayers } from '../../model/map/actions';
 
 const propTypes = {
   topic: PropTypes.string.isRequired,
+  activeTopic: PropTypes.shape(),
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -21,6 +22,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  activeTopic: null,
   baseLayers: null,
   layers: null,
   token: null,
@@ -30,29 +32,34 @@ class TopicLoader extends Component {
   constructor(props) {
     super(props);
     const { dispatchSetActiveTopic, topic } = this.props;
-    dispatchSetActiveTopic(TOPIC_CONF[topic]);
+    this.topic = TOPIC_CONF.find(t => t.key === topic);
+    dispatchSetActiveTopic(this.topic);
   }
 
   componentDidMount() {
-    const {
-      dispatchSetLayers,
-      baseLayers,
-      layers,
-      layerService,
-      topic,
-      token,
-    } = this.props;
-
-    const appLayers = TOPIC_CONF[topic].layers;
+    const { baseLayers, layers } = this.props;
+    const appLayers = this.topic.layers;
     const bl = baseLayers || appLayers.filter(l => l.getIsBaseLayer());
     const tl = layers || appLayers.filter(l => !l.getIsBaseLayer());
     const newLayers = [...bl, ...tl];
+    this.updateLayers(newLayers);
+  }
 
-    layerService.setLayers(newLayers);
-    dispatchSetLayers(newLayers);
+  componentDidUpdate(prevProps) {
+    const { activeTopic } = this.props;
+
+    if (activeTopic !== prevProps.activeTopic) {
+      this.updateLayers(activeTopic.layers);
+    }
+  }
+
+  updateLayers(layers) {
+    const { layerService, dispatchSetLayers, token } = this.props;
+    layerService.setLayers(layers);
+    dispatchSetLayers(layers);
 
     if (token) {
-      newLayers
+      layers
         .filter(l => l instanceof TrafimageLayer)
         .forEach(l => l.setToken(token));
     }
@@ -63,7 +70,9 @@ class TopicLoader extends Component {
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  activeTopic: state.app.activeTopic,
+});
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
