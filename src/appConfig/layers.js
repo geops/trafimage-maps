@@ -3,7 +3,7 @@ import TileLayer from 'ol/layer/Tile';
 import WMTSSource from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
-import TrafimageLayer from '../layers/TrafimageLayer';
+import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -52,7 +52,7 @@ const resolutions = [
 ];
 
 export const defaultBaseLayers = [
-  new TrafimageLayer({
+  new TrafimageRasterLayer({
     name: 'Netzkarte',
     key: 'ch.sbb.netzkarte',
     copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',

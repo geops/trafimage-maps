@@ -42,7 +42,7 @@ const CasaExample = () => {
   });
 
   zoneLayer.onClick(f => {
-    alert(`Clicked on ${f.length} ZoneLayer features.`);
+      console.log('Clicked', f);
   });
 
   // Initialize route layer.
@@ -61,7 +61,7 @@ const CasaExample = () => {
   ]);
 
   routeLayer.onClick(f => {
-    alert(`Clicked on ${f.length} RouteLayer features.`);
+      console.log('Clicked', f);
   });
 
   // Configuration of visible app elements.

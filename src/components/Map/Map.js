@@ -13,8 +13,6 @@ import {
   setZoom,
 } from '../../model/map/actions';
 
-import { setClickedFeatures } from '../../model/app/actions';
-
 const propTypes = {
   projection: PropTypes.string,
 
@@ -30,7 +28,6 @@ const propTypes = {
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
-  dispatchSetClickedFeatures: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
 };
@@ -104,14 +101,12 @@ class Map extends PureComponent {
       map,
       resolution,
       extent,
-      dispatchSetClickedFeatures,
     } = this.props;
 
     return (
       <>
         <BasicMap
           center={center}
-          onFeaturesClick={f => dispatchSetClickedFeatures(f)}
           resolution={resolution}
           extent={extent}
           layers={layers}
@@ -140,7 +135,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
-  dispatchSetClickedFeatures: setClickedFeatures,
   dispatchSetLayers: setLayers,
   dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,

@@ -141,13 +141,7 @@ class TrafimageMaps extends Component {
 
     const defaultElements = {
       header: <Header />,
-      popup: (
-        <Popup
-          layerService={this.layerService}
-          map={this.map}
-          popupComponents={popupComponents}
-        />
-      ),
+      popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: <Menu layerService={this.layerService} />,
       permalink: <Permalink map={this.map} />,
