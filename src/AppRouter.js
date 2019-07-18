@@ -13,7 +13,17 @@ const AppRouter = () => (
       path="/:topic"
       render={({ history, match }) => {
         if (topicNames.includes(match.params.topic)) {
-          return <TrafimageMaps history={history} topic={match.params.topic} />;
+          return (
+            <TrafimageMaps
+              history={history}
+              topic={match.params.topic}
+              elements={{
+                header: true,
+                footer: true,
+                menu: true,
+              }}
+            />
+          );
         }
 
         return <Redirect to={`${topicNames[0]}`} />;
