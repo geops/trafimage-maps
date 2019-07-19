@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/Layer';
+import VectorLayer from 'react-spatial/layers/VectorLayer';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../appConfig/topics';
 import { setActiveTopic, setClickedFeatureInfo } from '../../model/app/actions';
@@ -77,10 +78,14 @@ class TopicLoader extends Component {
     layerService.setLayers(newLayers);
     dispatchSetLayers(newLayers);
 
-    if (token) {
-      newLayers
-        .filter(l => l instanceof TrafimageRasterLayer)
-        .forEach(l => l.setToken(token));
+    for (let i = 0; i < newLayers.length; i += 1) {
+      if (token && newLayers[i] instanceof TrafimageRasterLayer) {
+        newLayers[i].setToken(token);
+      }
+
+      if (newLayers[i] instanceof VectorLayer) {
+        newLayers[i].onClick(this.onClick.bind(this));
+      }
     }
   }
 
