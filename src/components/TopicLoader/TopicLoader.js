@@ -38,12 +38,7 @@ class TopicLoader extends Component {
   }
 
   componentDidMount() {
-    const { baseLayers, layers } = this.props;
-    const appLayers = this.topic.layers;
-    const bl = baseLayers || appLayers.filter(l => l.getIsBaseLayer());
-    const tl = layers || appLayers.filter(l => !l.getIsBaseLayer());
-    const newLayers = [...bl, ...tl];
-    this.updateLayers(newLayers);
+    this.updateLayers(this.topic.layers);
   }
 
   componentDidUpdate(prevProps) {
@@ -64,13 +59,26 @@ class TopicLoader extends Component {
     });
   }
 
-  updateLayers(layers) {
-    const { layerService, dispatchSetLayers, token } = this.props;
-    layerService.setLayers(layers);
-    dispatchSetLayers(layers);
+  updateLayers(topicLayers) {
+    const {
+      layerService,
+      layers,
+      baseLayers,
+      dispatchSetLayers,
+      token,
+    } = this.props;
+
+    const newLayers = [
+      ...(baseLayers || []),
+      ...topicLayers,
+      ...(layers || []),
+    ];
+
+    layerService.setLayers(newLayers);
+    dispatchSetLayers(newLayers);
 
     if (token) {
-      layers
+      newLayers
         .filter(l => l instanceof TrafimageRasterLayer)
         .forEach(l => l.setToken(token));
     }
