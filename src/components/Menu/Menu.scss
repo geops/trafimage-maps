@@ -44,13 +44,8 @@
 
   .wkp-menu-body {
     border: 0;
-    max-height: initial;
-    max-width: 500px;
-    transition: max-width 0.2s ease, padding 0.1s ease;
 
     &.closed {
-      max-height: initial;
-      max-width: 0;
       padding: 0;
       overflow: hidden;
 
