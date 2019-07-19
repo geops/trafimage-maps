@@ -36,19 +36,6 @@ Load zones from a given configuration.
 
 Returns **[Promise][7]&lt;[Array][5]&lt;Feature>>** Promise resolving OpenLayers features.
 
-## TrafimageLayer
-
-Base layer for ZoneLayer and RouteLayer.
-
-### onClick
-
-Listens to click events on the layer.
-
-#### Parameters
-
--   `callback` **[function][8]** Callback function, called with the clicked
-    Features ([https://openlayers.org/en/latest/apidoc/module-ol_Feature.html][9])
-
 [1]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
 [2]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
@@ -62,7 +49,3 @@ Listens to click events on the layer.
 [6]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
 [7]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
-[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
-
-[9]: https://openlayers.org/en/latest/apidoc/module-ol_Feature.html

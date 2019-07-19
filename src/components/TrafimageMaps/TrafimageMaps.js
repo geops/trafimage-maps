@@ -16,6 +16,7 @@ import Menu from '../Menu';
 import Header from '../Header';
 import Footer from '../Footer';
 import TopicLoader from '../TopicLoader';
+import Popup from '../Popup';
 import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
@@ -40,6 +41,7 @@ const propTypes = {
     footer: PropTypes.bool,
     menu: PropTypes.bool,
     permaLink: PropTypes.bool,
+    popup: PropTypes.bool,
     mapControls: PropTypes.bool,
     baseLayerToggler: PropTypes.bool,
   }),
@@ -53,6 +55,14 @@ const propTypes = {
    * List of layers.
    */
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
+
+  /**
+   * Mapping of layer keys and Popup component names.
+   * Component names are names of files from the folder `src/components/Popup`
+   * without the `.js` extension.
+   * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
+   */
+  popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
    * Projection used for the map.
@@ -93,10 +103,12 @@ const defaultProps = {
     footer: false,
     menu: false,
     permalink: false,
+    popup: false,
     mapControls: false,
     baseLayerToggler: false,
   },
   baseLayers: null,
+  popupComponents: null,
   projection: 'EPSG:3857',
   layers: null,
   token: null,
@@ -124,6 +136,7 @@ class TrafimageMaps extends Component {
       children,
       elements,
       layers,
+      popupComponents,
       projection,
       topic,
       token,
@@ -134,6 +147,7 @@ class TrafimageMaps extends Component {
 
     const defaultElements = {
       header: <Header />,
+      popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: <Menu layerService={this.layerService} />,
       permalink: <Permalink map={this.map} history={history} />,

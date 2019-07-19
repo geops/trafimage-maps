@@ -5,7 +5,6 @@ import OSMSource from 'ol/source/OSM';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
-import TrafimageLayer from '../layers/TrafimageLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -62,7 +61,7 @@ export const osm = new Layer({
   }),
 });
 
-export const netzkarte = new TrafimageLayer({
+export const netzkarte = new Layer({
   name: 'Netzkarte',
   key: 'ch.sbb.netzkarte',
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',

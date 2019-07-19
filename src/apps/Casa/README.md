@@ -42,7 +42,7 @@ const CasaExample = () => {
   });
 
   zoneLayer.onClick(f => {
-    alert(`Clicked on ${f.length} ZoneLayer features.`);
+      console.log('Clicked', f);
   });
 
   // Initialize route layer.
@@ -61,12 +61,13 @@ const CasaExample = () => {
   ]);
 
   routeLayer.onClick(f => {
-    alert(`Clicked on ${f.length} RouteLayer features.`);
+      console.log('Clicked', f);
   });
 
   // Configuration of visible app elements.
   const elements = {
-    menu: true, // I only want to show the menu
+    menu: true,
+    popup: true,
   };
 
   // Render the component with react.
@@ -78,6 +79,9 @@ const CasaExample = () => {
         token="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
         layers={[zoneLayer, routeLayer]}
         elements={elements}
+        popupComponents={{
+          'ch.sbb.casa.routeLayer': 'CasaRoutePopup',
+        }}
       />
 
     </div>

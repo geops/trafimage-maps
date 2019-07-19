@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/Layer';
-import TrafimageLayer from '../../layers/TrafimageLayer';
+import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../appConfig/topics';
-import { setActiveTopic } from '../../model/app/actions';
+import { setActiveTopic, setClickedFeatureInfo } from '../../model/app/actions';
 import { setLayers } from '../../model/map/actions';
 
 const propTypes = {
@@ -18,6 +18,7 @@ const propTypes = {
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
 };
 
@@ -53,6 +54,16 @@ class TopicLoader extends Component {
     }
   }
 
+  onClick(features, layer, event) {
+    const { dispatchSetClickedFeatureInfo } = this.props;
+
+    dispatchSetClickedFeatureInfo({
+      features,
+      layer,
+      event,
+    });
+  }
+
   updateLayers(layers) {
     const { layerService, dispatchSetLayers, token } = this.props;
     layerService.setLayers(layers);
@@ -60,7 +71,7 @@ class TopicLoader extends Component {
 
     if (token) {
       layers
-        .filter(l => l instanceof TrafimageLayer)
+        .filter(l => l instanceof TrafimageRasterLayer)
         .forEach(l => l.setToken(token));
     }
   }
@@ -76,6 +87,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetLayers: setLayers,
 };
 
