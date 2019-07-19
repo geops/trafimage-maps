@@ -1,9 +1,9 @@
 import qs from 'querystring';
-import VectorLayer from 'ol/layer/Vector';
+import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Stroke as StrokeStyle } from 'ol/style';
-import TrafimageLayer from '../TrafimageLayer';
+import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
  * Layer for visualizing fare networks.
@@ -18,11 +18,11 @@ import TrafimageLayer from '../TrafimageLayer';
  * @param {string} [projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  */
-class RouteLayer extends TrafimageLayer {
+class RouteLayer extends VectorLayer {
   constructor(options = {}) {
     super({
       name: options.name || 'Routen',
-      olLayer: new VectorLayer({
+      olLayer: new OLVectorLayer({
         style: f => this.routeStyle(f),
         source: new VectorSource(),
       }),
