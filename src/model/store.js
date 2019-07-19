@@ -20,3 +20,6 @@ export const getStore = () => {
 
   return store;
 };
+
+const defaultStore = getStore();
+export default defaultStore;

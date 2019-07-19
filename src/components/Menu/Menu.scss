@@ -5,82 +5,65 @@
   width: 371px;
   z-index: 2;
 
-  .wkp-menu-header {
-    background: white;
-    padding: 0 15px;
-    height: 69px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border: 2px solid #666;
-    transition: all 0.2s ease;
-
-    &.open {
-      border-bottom-width: 1px;
-      border-bottom-color: #666;
-    }
-
-    .wkp-menu-toggler {
-      position: absolute;
-      right: 10px;
-      top: 25px;
-    }
-
-    .wkp-menu-layers {
-      color: #888;
-      margin-top: 4px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      transition: all 0.2s ease;
-      max-height: 16px;
-
-      &.hidden {
-        max-height: 0;
-        margin: 0;
-      }
-    }
-
-    .wkp-menu-title {
-      transition: font-size 0.2s ease;
-
-      &.large {
-        font-size: 120%;
-      }
-    }
-  }
-
-  @media (max-width: 1060px) {
-    .wkp-menu-title,
-    .wkp-menu-toggler,
-    .wkp-menu-layers {
-      display: none;
-    }
-
-    .wkp-menu-header {
-      margin: 20px 0 0 10px;
-      padding: 0;
-      width: 30px;
-      height: 30px;
-    }
-  }
-
-  .wkp-layer-tree {
+  .wkp-menu-body {
     border-width: 0 2px 2px 2px;
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: max-height 0.3s ease;
-    transition: padding 0.3s ease;
+    transition: max-height 0.3s ease, border 0.1s ease 0.1s;
     max-height: 1000px;
     overflow: hidden;
-    padding: 10px 15px;
 
     &.closed {
       border-width: 0;
       border-top-width: 0;
       max-height: 0;
-      padding: 0 15px;
+    }
+
+    .wkp-menu-body-inner {
+      min-width: 250px;
+    }
+
+    .wkp-layer-tree {
+      overflow: hidden;
+      max-height: 1000px;
+      margin: 10px 10px 10px 25px;
+
+      &.closed {
+        display: none;
+      }
+    }
+  }
+}
+
+.tm-app.tm-w-m,
+.tm-app.tm-w-s {
+  .wkp-menu {
+    left: 0;
+  }
+
+  .wkp-menu-body {
+    border: 0;
+
+    &.closed {
+      padding: 0;
+      overflow: hidden;
+
+      div {
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+
+  // header component is enabled
+  &.header {
+    .wkp-menu {
+      top: 0;
+
+      .wkp-menu-body {
+        margin-top: 6px;
+      }
     }
   }
 }

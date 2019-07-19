@@ -11,6 +11,7 @@ import { setLayers } from '../../model/map/actions';
 
 const propTypes = {
   topic: PropTypes.string.isRequired,
+  activeTopic: PropTypes.shape(),
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -23,6 +24,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  activeTopic: null,
   baseLayers: null,
   layers: null,
   token: null,
@@ -32,37 +34,19 @@ class TopicLoader extends Component {
   constructor(props) {
     super(props);
     const { dispatchSetActiveTopic, topic } = this.props;
-    dispatchSetActiveTopic(TOPIC_CONF[topic]);
+    this.topic = TOPIC_CONF.find(t => t.key === topic);
+    dispatchSetActiveTopic(this.topic);
   }
 
   componentDidMount() {
-    const {
-      dispatchSetLayers,
-      baseLayers,
-      layers,
-      layerService,
-      topic,
-      token,
-    } = this.props;
+    this.updateLayers(this.topic.layers);
+  }
 
-    const appLayers = TOPIC_CONF[topic].layers;
-    const bl = baseLayers || appLayers.filter(l => l.getIsBaseLayer());
-    const tl = layers || appLayers.filter(l => !l.getIsBaseLayer());
-    const newLayers = [...bl, ...tl];
+  componentDidUpdate(prevProps) {
+    const { activeTopic } = this.props;
 
-    layerService.setLayers(newLayers);
-    dispatchSetLayers(newLayers);
-
-    for (let i = 0; i < newLayers.length; i += 1) {
-      if (newLayers[i] instanceof VectorLayer) {
-        newLayers[i].onClick(this.onClick.bind(this));
-      }
-    }
-
-    if (token) {
-      newLayers
-        .filter(l => l instanceof TrafimageRasterLayer)
-        .forEach(l => l.setToken(token));
+    if (activeTopic !== prevProps.activeTopic) {
+      this.updateLayers(activeTopic.layers);
     }
   }
 
@@ -76,12 +60,43 @@ class TopicLoader extends Component {
     });
   }
 
+  updateLayers(topicLayers) {
+    const {
+      layerService,
+      layers,
+      baseLayers,
+      dispatchSetLayers,
+      token,
+    } = this.props;
+
+    const newLayers = [
+      ...(baseLayers || []),
+      ...topicLayers,
+      ...(layers || []),
+    ];
+
+    layerService.setLayers(newLayers);
+    dispatchSetLayers(newLayers);
+
+    for (let i = 0; i < newLayers.length; i += 1) {
+      if (token && newLayers[i] instanceof TrafimageRasterLayer) {
+        newLayers[i].setToken(token);
+      }
+
+      if (newLayers[i] instanceof VectorLayer) {
+        newLayers[i].onClick(this.onClick.bind(this));
+      }
+    }
+  }
+
   render() {
     return null;
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  activeTopic: state.app.activeTopic,
+});
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,

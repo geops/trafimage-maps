@@ -17,8 +17,7 @@ import Header from '../Header';
 import Footer from '../Footer';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
-
-import { getStore } from '../../model/store';
+import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
@@ -88,12 +87,17 @@ const propTypes = {
    * Token for using geOps services.
    */
   token: PropTypes.string,
+
+  /**
+   * React router history.
+   */
+  history: PropTypes.shape(),
 };
 
 const defaultProps = {
   children: null,
-  center: [922748, 5911640],
-  zoom: 9,
+  center: [925472, 5950684],
+  zoom: 14,
   elements: {
     header: false,
     footer: false,
@@ -108,6 +112,7 @@ const defaultProps = {
   projection: 'EPSG:3857',
   layers: null,
   token: null,
+  history: null,
 };
 
 class TrafimageMaps extends Component {
@@ -135,6 +140,7 @@ class TrafimageMaps extends Component {
       projection,
       topic,
       token,
+      history,
       center,
       zoom,
     } = this.props;
@@ -144,7 +150,7 @@ class TrafimageMaps extends Component {
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: <Menu layerService={this.layerService} />,
-      permalink: <Permalink map={this.map} />,
+      permalink: <Permalink map={this.map} history={history} />,
       mapControls: <Zoom map={this.map} />,
       baseLayerToggler: (
         <BaseLayerToggler layerService={this.layerService} map={this.map} />
@@ -155,9 +161,20 @@ class TrafimageMaps extends Component {
       elements[k] ? <div key={k}>{v}</div> : null,
     );
 
+    // Classes for active components used for conditional styling
+    const elementClasses = Object.keys(elements)
+      .filter(k => elements[k])
+      .map(k => k);
+
+    /**
+     * If the application runs standalone, we want to use a consistent store.
+     * However when running in Stylegudist, every application needs it own store
+     */
+    const appStore = history ? store : getStore();
+
     return (
-      <Provider store={getStore()}>
-        <div className="tm-app">
+      <Provider store={appStore}>
+        <div className={`tm-app ${elementClasses.join(' ')}`}>
           <TopicLoader
             layerService={this.layerService}
             baseLayers={baseLayers}

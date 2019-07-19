@@ -1,14 +1,16 @@
-import { defaultBaseLayers } from './layers';
+import defaultBaseLayers, { netzkarte, osm } from './layers';
 
-export default {
-  'ch.sbb.netzkarte': {
+export default [
+  {
     name: 'ÖV Netzkarte Schweiz',
+    key: 'ch.sbb.netzkarte',
     layers: defaultBaseLayers,
     projection: 'EPSG:3857',
   },
-  'ch.sbb.casa': {
+  {
     name: 'CASA',
-    layers: defaultBaseLayers,
+    key: 'ch.sbb.casa',
+    layers: [netzkarte, osm],
     projection: 'EPSG:3857',
   },
-};
+];

@@ -9,6 +9,9 @@ import RSPermalink from 'react-spatial/components/Permalink';
 import { setCenter, setZoom } from '../../model/map/actions';
 
 const propTypes = {
+  activeTopic: PropTypes.shape({
+    key: PropTypes.string,
+  }).isRequired,
   map: PropTypes.instanceOf(OLMap),
   initialState: PropTypes.object,
   history: PropTypes.shape({
@@ -57,6 +60,14 @@ class Permalink extends PureComponent {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { activeTopic, history } = this.props;
+
+    if (history && activeTopic !== prevProps.activeTopic) {
+      history.replace(`/${activeTopic.key}`);
+    }
+  }
+
   render() {
     const { history, map } = this.props;
     const { params } = this.state;
@@ -69,7 +80,9 @@ Permalink.propTypes = propTypes;
 Permalink.defaultProps = defaultProps;
 
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  activeTopic: state.app.activeTopic,
+});
 
 const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
