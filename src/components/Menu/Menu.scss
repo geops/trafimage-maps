@@ -20,8 +20,8 @@
       max-height: 0;
     }
 
-    &.inner {
-      min-width: 200px;
+    .wkp-menu-body-inner {
+      min-width: 250px;
     }
 
     .wkp-layer-tree {
@@ -44,7 +44,6 @@
 
   .wkp-menu-body {
     border: 0;
-    margin-top: 14px;
     max-height: initial;
     max-width: 500px;
     transition: max-width 0.2s ease, padding 0.1s ease;
@@ -58,6 +57,17 @@
       div {
         white-space: nowrap;
         overflow: hidden;
+      }
+    }
+  }
+
+  // header component is enabled
+  &.header {
+    .wkp-menu {
+      top: 0;
+
+      .wkp-menu-body {
+        margin-top: 6px;
       }
     }
   }

@@ -27,7 +27,7 @@ const MenuHeader = ({ title, info, isOpen, onToggle }) => (
   >
     <div className="wkp-menu-toggle-button">
       <img alt="menu" src={menuOpenImg} />
-      Menü
+      <span className="wkp-menu-toggle-text">Menü</span>
     </div>
     <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{title}</div>
     <div className="wkp-menu-toggler">
