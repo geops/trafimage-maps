@@ -22,15 +22,23 @@
       border-radius: 50%;
     }
   }
+
+  .wkp-layer-toggler {
+    padding-left: 5px
+  }
 }
 
 .tm-app.tm-w-m,
 .tm-app.tm-w-s {
   .wkp-topic-menu {
     justify-content: space-between;
-    border-width: 1px 0;
+    border-width: 1px 0 0 0;
     border-color: #eee;
     border-style: solid;
+
+    &.active {
+      border-bottom: 1px solid #eee;
+    }
 
     .wkp-topic-title {
       margin: 15px 0;

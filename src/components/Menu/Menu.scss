@@ -10,8 +10,7 @@
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: max-height 0.3s ease;
-    transition: padding 0.3s ease;
+    transition: max-height 0.3s ease, border 0.1s ease 0.1s;
     max-height: 1000px;
     overflow: hidden;
 
@@ -19,7 +18,10 @@
       border-width: 0;
       border-top-width: 0;
       max-height: 0;
-      padding: 0 15px;
+    }
+
+    &.inner {
+      min-width: 200px;
     }
 
     .wkp-layer-tree {
@@ -48,10 +50,9 @@
     transition: max-width 0.2s ease, padding 0.1s ease;
 
     &.closed {
-      white-space: nowrap;
       max-height: initial;
       max-width: 0;
-      padding: 10px 0;
+      padding: 0;
       overflow: hidden;
 
       div {

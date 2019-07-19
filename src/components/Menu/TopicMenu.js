@@ -15,7 +15,7 @@ const propTypes = {
 
 const TopicMenu = ({ topic, isActive, isTopicCollapsed, onClick }) => (
   <div
-    className="wkp-topic-menu"
+    className={`wkp-topic-menu ${isActive ? 'active' : ''}`}
     role="button"
     tabIndex={0}
     onClick={() => onClick(topic)}

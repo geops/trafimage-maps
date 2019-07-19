@@ -89,29 +89,31 @@ class Menu extends Component {
         />
 
         <div className={`wkp-menu-body ${isOpen ? '' : 'closed'}`}>
-          {TOPIC_CONF.map(topic => (
-            <div key={topic.key}>
-              <TopicMenu
-                topic={topic}
-                isActive={activeTopic.key === topic.key}
-                isTopicCollapsed={openTopicKey === topic.key}
-                onClick={to => this.onTopicClick(to)}
-              />
+          <div className="wkp-menu-body-inner">
+            {TOPIC_CONF.map(topic => (
+              <div key={topic.key}>
+                <TopicMenu
+                  topic={topic}
+                  isActive={activeTopic.key === topic.key}
+                  isTopicCollapsed={openTopicKey === topic.key}
+                  onClick={to => this.onTopicClick(to)}
+                />
 
-              {topic.key === activeTopic.key && (
-                <div
-                  className={`wkp-layer-tree ${
-                    openTopicKey === topic.key ? '' : 'closed'
-                  }`}
-                >
-                  <LayerTree
-                    isItemHidden={l => l.getIsBaseLayer()}
-                    layerService={layerService}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
+                {topic.key === activeTopic.key && (
+                  <div
+                    className={`wkp-layer-tree ${
+                      openTopicKey === topic.key ? '' : 'closed'
+                    }`}
+                  >
+                    <LayerTree
+                      isItemHidden={l => l.getIsBaseLayer()}
+                      layerService={layerService}
+                    />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
