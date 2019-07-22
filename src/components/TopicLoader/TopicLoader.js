@@ -102,7 +102,7 @@ class TopicLoader extends Component {
       }
 
       if (flatLayers[i] instanceof VectorLayer) {
-        flatLayers[i].on('click', this.onClick.bind(this));
+        flatLayers[i].onClick(this.onClick.bind(this));
       }
     }
   }

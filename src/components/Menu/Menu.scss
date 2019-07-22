@@ -37,7 +37,8 @@
 }
 
 .tm-app.tm-w-m,
-.tm-app.tm-w-s {
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
   .wkp-menu {
     left: 0;
   }
@@ -62,7 +63,7 @@
       top: 0;
 
       .wkp-menu-body {
-        margin-top: 6px;
+        margin-top: 1px;
       }
     }
   }

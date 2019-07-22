@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import menuOpenImg from '../../img/menu.png';
+import menuOpenImg from '../../img/menu_open.png';
+import menuClosedImg from '../../img/menu_closed.png';
 
 import './MenuHeader.scss';
 
@@ -26,7 +27,9 @@ const MenuHeader = ({ title, info, isOpen, onToggle }) => (
     onKeyPress={e => e.which === 13 && onToggle()}
   >
     <div className="wkp-menu-toggle-button">
-      <img alt="menu" src={menuOpenImg} />
+      <div className="wkp-menu-toggle-button-icon">
+        <img src={isOpen ? menuClosedImg : menuOpenImg} alt="Menü" />
+      </div>
       <span className="wkp-menu-toggle-text">Menü</span>
     </div>
     <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{title}</div>

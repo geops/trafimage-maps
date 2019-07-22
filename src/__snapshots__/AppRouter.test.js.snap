@@ -122,10 +122,14 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-toggle-button"
         >
-          <img
-            alt="menu"
-            src="menu.png"
-          />
+          <div
+            className="wkp-menu-toggle-button-icon"
+          >
+            <img
+              alt="Menü"
+              src="menu_open.png"
+            />
+          </div>
           <span
             className="wkp-menu-toggle-text"
           >

@@ -22,6 +22,10 @@
 
     .wkp-menu-toggle-button {
       display: none;
+
+      .wkp-menu-toggle-button-icon {
+        width: 50px;
+      }
     }
 
     .wkp-menu-layers {
@@ -50,7 +54,8 @@
 }
 
 .tm-app.tm-w-m,
-.tm-app.tm-w-s {
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
   .wkp-menu {
     top: 0;
 
@@ -73,7 +78,7 @@
       margin: 0;
       border: 0;
       padding: 10px;
-      height: 30px;
+      height: 35px;
       width: 20px;
 
       .wkp-menu-toggle-text {
