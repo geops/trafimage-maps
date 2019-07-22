@@ -1,10 +1,11 @@
 import proj4 from 'proj4';
 import TileLayer from 'ol/layer/Tile';
 import WMTSSource from 'ol/source/WMTS';
-import OSMSource from 'ol/source/OSM';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
+import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
+import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -52,16 +53,7 @@ const resolutions = [
   0.298582141739,
 ];
 
-export const osm = new Layer({
-  name: 'OSM Sample',
-  key: 'ch.sbb.osm',
-  copyright: 'OpenStreetMap contributors',
-  olLayer: new TileLayer({
-    source: new OSMSource(),
-  }),
-});
-
-export const netzkarte = new Layer({
+export const netzkarteLayer = new TrafimageRasterLayer({
   name: 'Netzkarte',
   key: 'ch.sbb.netzkarte',
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
@@ -107,4 +99,14 @@ export const swisstopoSwissImage = new Layer({
   }),
 });
 
-export default [swisstopoSwissImage, netzkarte];
+export const bahnhofplaene = new Layer({
+  name: 'Bahnhofpläne',
+  key: 'ch.sbb.bahnhofplaene',
+});
+
+bahnhofplaene.setChildren([
+  new BahnhofplanLayer({ visible: false }),
+  new BahnhofplanLayer({ showPrintFeatures: true }),
+]);
+
+export default [swisstopoSwissImage, netzkarteLayer];

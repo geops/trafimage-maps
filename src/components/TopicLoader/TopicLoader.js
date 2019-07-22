@@ -5,13 +5,18 @@ import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/Layer';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
-import TOPIC_CONF from '../../appConfig/topics';
-import { setActiveTopic, setClickedFeatureInfo } from '../../model/app/actions';
+import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
+import {
+  setActiveTopic,
+  setTopics,
+  setClickedFeatureInfo,
+} from '../../model/app/actions';
 
 const propTypes = {
-  topic: PropTypes.string.isRequired,
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   activeTopic: PropTypes.shape(),
+  activeTopicKey: PropTypes.string,
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -21,9 +26,11 @@ const propTypes = {
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
+  dispatchSetTopics: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
+  activeTopicKey: null,
   activeTopic: null,
   baseLayers: null,
   layers: null,
@@ -33,9 +40,19 @@ const defaultProps = {
 class TopicLoader extends Component {
   constructor(props) {
     super(props);
-    const { dispatchSetActiveTopic, topic } = this.props;
-    this.topic = TOPIC_CONF.find(t => t.key === topic);
+    const {
+      activeTopicKey,
+      dispatchSetActiveTopic,
+      dispatchSetTopics,
+      topics,
+    } = this.props;
+
+    this.topic = activeTopicKey
+      ? TOPIC_CONF.find(t => t.key === activeTopicKey)
+      : topics[0];
+
     dispatchSetActiveTopic(this.topic);
+    dispatchSetTopics(topics);
   }
 
   componentDidMount() {
@@ -75,16 +92,17 @@ class TopicLoader extends Component {
       ...(layers || []),
     ];
 
+    const flatLayers = layerService.getLayersAsFlatArray();
     layerService.setLayers(newLayers);
-    dispatchSetLayers(newLayers);
+    dispatchSetLayers(flatLayers);
 
-    for (let i = 0; i < newLayers.length; i += 1) {
-      if (token && newLayers[i] instanceof TrafimageRasterLayer) {
-        newLayers[i].setToken(token);
+    for (let i = 0; i < flatLayers.length; i += 1) {
+      if (token && flatLayers[i] instanceof TrafimageRasterLayer) {
+        flatLayers[i].setToken(token);
       }
 
-      if (newLayers[i] instanceof VectorLayer) {
-        newLayers[i].onClick(this.onClick.bind(this));
+      if (flatLayers[i] instanceof VectorLayer) {
+        flatLayers[i].on('click', this.onClick.bind(this));
       }
     }
   }
@@ -102,6 +120,7 @@ const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetLayers: setLayers,
+  dispatchSetTopics: setTopics,
 };
 
 TopicLoader.propTypes = propTypes;

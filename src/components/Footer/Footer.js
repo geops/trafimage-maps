@@ -62,7 +62,7 @@ const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
             format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
           },
           {
-            label: 'WSG 85',
+            label: 'WGS 84',
             value: 'EPSG:4324',
             format: c => `${t('Koordinaten')}: ${c}`,
           },

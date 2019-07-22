@@ -26,7 +26,12 @@ const propTypes = {
   /**
    * Name of the topic to display.
    */
-  topic: PropTypes.string.isRequired,
+  activeTopicKey: PropTypes.string,
+
+  /**
+   * Array of topics from ./src/config/topics
+   */
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   /**
    * Additional elements.
@@ -95,6 +100,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  activeTopicKey: null,
   children: null,
   center: [925472, 5950684],
   zoom: 14,
@@ -138,7 +144,8 @@ class TrafimageMaps extends Component {
       layers,
       popupComponents,
       projection,
-      topic,
+      topics,
+      activeTopicKey,
       token,
       history,
       center,
@@ -150,7 +157,13 @@ class TrafimageMaps extends Component {
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: <Menu layerService={this.layerService} />,
-      permalink: <Permalink map={this.map} history={history} />,
+      permalink: (
+        <Permalink
+          map={this.map}
+          history={history}
+          layerService={this.layerService}
+        />
+      ),
       mapControls: <Zoom map={this.map} />,
       baseLayerToggler: (
         <BaseLayerToggler layerService={this.layerService} map={this.map} />
@@ -179,7 +192,8 @@ class TrafimageMaps extends Component {
             layerService={this.layerService}
             baseLayers={baseLayers}
             layers={layers}
-            topic={topic}
+            topics={topics}
+            activeTopicKey={activeTopicKey}
             token={token}
           />
           <ResizeHandler observe={this} />

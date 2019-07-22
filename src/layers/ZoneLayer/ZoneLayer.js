@@ -74,16 +74,19 @@ class ZoneLayer extends VectorLayer {
     this.olLayer.getSource().clear();
 
     const format = new GeoJSON();
-    const urlParams = { ...params, ...{ token: this.token, simplify: 100 } };
+    const urlParams = {
+      ...params,
+      token: this.token,
+      simplify: 100,
+      srs: 3857,
+    };
+
     const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
     return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
       .then(data => {
-        const features = format.readFeatures(data, {
-          dataProjection: 'EPSG:21781',
-          featureProjection: 'EPSG:3857',
-        });
+        const features = format.readFeatures(data);
         this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
         return features;
