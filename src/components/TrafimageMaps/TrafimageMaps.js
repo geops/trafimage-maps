@@ -157,7 +157,13 @@ class TrafimageMaps extends Component {
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: <Menu layerService={this.layerService} />,
-      permalink: <Permalink map={this.map} history={history} />,
+      permalink: (
+        <Permalink
+          map={this.map}
+          history={history}
+          layerService={this.layerService}
+        />
+      ),
       mapControls: <Zoom map={this.map} />,
       baseLayerToggler: (
         <BaseLayerToggler layerService={this.layerService} map={this.map} />

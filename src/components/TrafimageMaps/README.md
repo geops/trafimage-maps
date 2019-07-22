@@ -18,6 +18,9 @@ const TrafimageMapsExample = () => (
         header: true,
         menu: true,
       }}
+      popupComponents={{
+        'ch.sbb.bahnhofplaene.interaktiv': 'BahnhofplanPopup',
+      }}
     />
 
   </div>

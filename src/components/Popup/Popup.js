@@ -2,14 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
 import OLMap from 'ol/Map';
 import RSPopup from 'react-spatial/components/Popup';
 import DefaultPopup from './DefaultPopup';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
-  clickedFeatureInfo: PropTypes.arrayOf(PropTypes.instanceOf(Feature)),
+  clickedFeatureInfo: PropTypes.shape(),
   popupComponents: PropTypes.objectOf(PropTypes.string),
   map: PropTypes.instanceOf(OLMap).isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
@@ -36,6 +35,8 @@ const Popup = ({
   const PopupComponent = componentName
     ? React.lazy(() => import(`./${componentName}`))
     : DefaultPopup;
+
+  console.log(PopupComponent, layer.getKey());
 
   return (
     <React.Suspense fallback="loading...">

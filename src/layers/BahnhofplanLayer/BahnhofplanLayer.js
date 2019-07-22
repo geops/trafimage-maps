@@ -7,12 +7,14 @@ import bahnhofplanLayerIcon from '../../img/bahnhofplanLayerIcon.png';
 
 class BahnhofplanLayer extends VectorLayer {
   constructor(options = {}) {
-    const name = options.showPrintFeatures
-      ? 'Printprodukte'
-      : 'Interaktiver Bahnhofplan';
-    const key = options.showPrintFeatures
-      ? 'ch.sbb.bahnhofplane.printproduke'
-      : 'ch.sbb.bahnhofplaene.interaktiv';
+    let name = 'Interaktiver Bahnhofplan';
+    let key = 'ch.sbb.bahnhofplaene.interaktiv';
+
+    if (options.showPrintFeatures) {
+      name = 'Printprodukte';
+      key = 'ch.sbb.bahnhofplaene.printprodukte';
+    }
+
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
       source: new OLVectorSource(),
@@ -20,7 +22,10 @@ class BahnhofplanLayer extends VectorLayer {
 
     super({
       ...options,
-      ...{ name, key, olLayer, radioGroup: 'bahnhofplaene' },
+      name,
+      key,
+      olLayer,
+      radioGroup: 'bahnhofplaene',
     });
 
     this.url =
@@ -29,7 +34,10 @@ class BahnhofplanLayer extends VectorLayer {
       '&typeName=trafimage:bahnhofplaene&outputFormat=application%2Fjson';
 
     this.showPrintFeatures = !!options.showPrintFeatures;
+
     this.setVisible(this.visible);
+
+    this.dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
 
     this.iconStyle = new Style({
       image: new Icon({
@@ -38,17 +46,14 @@ class BahnhofplanLayer extends VectorLayer {
     });
   }
 
-  style(feature) {
+  style(feature, resolution) {
     const vis = feature.get('visibility');
-    if (vis !== 50) {
-      return null;
-    }
+    // find closest data resolution
+    const res = this.dataResolutions.reduce((prev, curr) =>
+      Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
+    );
 
-    if (this.showPrintFeatures) {
-      if (!feature.get('url_a4') && !feature.get('url_poster')) {
-        return null;
-      }
-    } else if (!feature.get('url_interactive_plan')) {
+    if (vis < resolution * 10 || feature.get('resolution') !== res) {
       return null;
     }
 
@@ -66,7 +71,10 @@ class BahnhofplanLayer extends VectorLayer {
         .then(data => data.json())
         .then(data => {
           const format = new GeoJSON();
-          const features = format.readFeatures(data);
+          let features = format.readFeatures(data);
+          features = this.showPrintFeatures
+            ? features
+            : features.filter(f => f.get('url_interactive_plan'));
           this.olLayer.getSource().clear();
           this.olLayer.getSource().addFeatures(features);
         });

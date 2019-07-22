@@ -10,6 +10,15 @@ body {
   position: absolute;
   overflow: hidden;
 
+  a {
+    color: initial;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .tm-zooms-bar {
     position: absolute;
     right: 15px;

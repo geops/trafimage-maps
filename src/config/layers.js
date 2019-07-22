@@ -105,7 +105,7 @@ export const bahnhofplaene = new Layer({
 });
 
 bahnhofplaene.setChildren([
-  new BahnhofplanLayer(),
+  new BahnhofplanLayer({ visible: false }),
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
 

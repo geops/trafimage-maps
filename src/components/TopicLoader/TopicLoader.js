@@ -92,16 +92,17 @@ class TopicLoader extends Component {
       ...(layers || []),
     ];
 
+    const flatLayers = layerService.getLayersAsFlatArray();
     layerService.setLayers(newLayers);
-    dispatchSetLayers(layerService.getLayersAsFlatArray());
+    dispatchSetLayers(flatLayers);
 
-    for (let i = 0; i < newLayers.length; i += 1) {
-      if (token && newLayers[i] instanceof TrafimageRasterLayer) {
-        newLayers[i].setToken(token);
+    for (let i = 0; i < flatLayers.length; i += 1) {
+      if (token && flatLayers[i] instanceof TrafimageRasterLayer) {
+        flatLayers[i].setToken(token);
       }
 
-      if (newLayers[i] instanceof VectorLayer) {
-        newLayers[i].onClick(this.onClick.bind(this));
+      if (flatLayers[i] instanceof VectorLayer) {
+        flatLayers[i].onClick(this.onClick.bind(this));
       }
     }
   }

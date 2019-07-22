@@ -2,7 +2,7 @@
 
 exports[`AppRouter should match snapshot 1`] = `
 <div
-  className="tm-app header footer menu permalink"
+  className="tm-app header footer menu permalink popup"
 >
   <div
     className="tm-map"
@@ -26,6 +26,7 @@ exports[`AppRouter should match snapshot 1`] = `
       </div>
     </div>
   </div>
+  <div />
   <div>
     <div
       className="wkp-footer"
@@ -70,7 +71,7 @@ exports[`AppRouter should match snapshot 1`] = `
             <option
               value="EPSG:4324"
             >
-              WSG 85
+              WGS 84
             </option>
           </select>
           <span />
