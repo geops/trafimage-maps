@@ -1,6 +1,7 @@
 // Variable to configure if PWA Service Worker is registered in index.js.
 const pwaActive = false;
 let tilesUrl = '//tiles.dev.trafimage.geops.ch';
+const geoserverUrl = '//maps.trafimage.ch/geoserver/trafimage/ows';
 
 switch (process.env.REACT_APP_ENV) {
   case 'local': {
@@ -25,4 +26,5 @@ switch (process.env.REACT_APP_ENV) {
 export default {
   pwaActive,
   tilesUrl,
+  geoserverUrl,
 };

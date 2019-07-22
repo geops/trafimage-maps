@@ -4,6 +4,7 @@ import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Icon, Circle, Fill } from 'ol/style';
 import bahnhofplanLayerIcon from '../../img/bahnhofplanLayerIcon.png';
+import CONF from '../../config/appConfig';
 
 class BahnhofplanLayer extends VectorLayer {
   constructor(options = {}) {
@@ -29,8 +30,7 @@ class BahnhofplanLayer extends VectorLayer {
     });
 
     this.url =
-      'http://maps.trafimage.ch/geoserver/trafimage/ows' +
-      '?service=WFS&version=1.0.0&request=GetFeature' +
+      `${CONF.geoserverUrl}?service=WFS&version=1.0.0&request=GetFeature` +
       '&typeName=trafimage:bahnhofplaene&outputFormat=application%2Fjson';
 
     this.showPrintFeatures = !!options.showPrintFeatures;
