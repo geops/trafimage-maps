@@ -7,13 +7,13 @@ import LayerService from 'react-spatial/LayerService';
 import LayerTree from 'react-spatial/components/LayerTree';
 import MenuHeader from './MenuHeader';
 import TopicMenu from './TopicMenu';
-import TOPIC_CONF from '../../appConfig/topics';
 import { setActiveTopic } from '../../model/app/actions';
 
 import './Menu.scss';
 
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   t: PropTypes.func.isRequired,
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -66,7 +66,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { activeTopic, layerService, t } = this.props;
+    const { activeTopic, layerService, t, topics } = this.props;
     const {
       menuLayers,
       allMenuLayersVisible,
@@ -90,7 +90,7 @@ class Menu extends Component {
 
         <div className={`wkp-menu-body ${isOpen ? '' : 'closed'}`}>
           <div className="wkp-menu-body-inner">
-            {TOPIC_CONF.map(topic => (
+            {topics.map(topic => (
               <div key={topic.key}>
                 <TopicMenu
                   topic={topic}
@@ -122,6 +122,7 @@ class Menu extends Component {
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
+  topics: state.app.topics,
 });
 
 const mapDispatchToProps = {

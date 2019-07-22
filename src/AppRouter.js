@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TrafimageMaps from './components/TrafimageMaps';
-import APP_CONFIG from './appConfig/topics';
+import TOPIC_CONF from './config/topics';
 
-const topicKeys = APP_CONFIG.map(t => t.key);
+const topicKeys = TOPIC_CONF.map(t => t.key);
 
 const AppRouter = () => (
   <Router>
@@ -16,7 +16,8 @@ const AppRouter = () => (
           return (
             <TrafimageMaps
               history={history}
-              topic={match.params.topic}
+              activeTopicKeyopic={match.params.topic}
+              topics={TOPIC_CONF}
               token="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
               elements={{
                 header: true,
