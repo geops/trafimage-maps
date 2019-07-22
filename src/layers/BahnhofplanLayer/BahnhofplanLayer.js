@@ -2,7 +2,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Style, Icon } from 'ol/style';
+import { Style, Icon, Circle, Fill } from 'ol/style';
 import bahnhofplanLayerIcon from '../../img/bahnhofplanLayerIcon.png';
 
 class BahnhofplanLayer extends VectorLayer {
@@ -44,10 +44,16 @@ class BahnhofplanLayer extends VectorLayer {
         src: bahnhofplanLayerIcon,
       }),
     });
+
+    this.onClick(f => {
+      [this.clickedFeature] = f;
+      this.olLayer.changed();
+    });
   }
 
   style(feature, resolution) {
     const vis = feature.get('visibility');
+    const style = [this.iconStyle];
     // find closest data resolution
     const res = this.dataResolutions.reduce((prev, curr) =>
       Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
@@ -57,7 +63,20 @@ class BahnhofplanLayer extends VectorLayer {
       return null;
     }
 
-    return this.iconStyle;
+    if (feature === this.clickedFeature) {
+      style.unshift(
+        new Style({
+          image: new Circle({
+            radius: 15,
+            fill: new Fill({
+              color: 'rgba(0, 61, 133, 0.5)',
+            }),
+          }),
+        }),
+      );
+    }
+
+    return style;
   }
 
   setVisible(
