@@ -45,7 +45,7 @@ class BahnhofplanLayer extends VectorLayer {
       }),
     });
 
-    this.onClick(f => {
+    this.on('click', f => {
       [this.clickedFeature] = f;
       this.olLayer.changed();
     });

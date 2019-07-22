@@ -162,7 +162,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-layers hidden"
         >
-          alle aktiviert
+          Bahnhofpläne, Printprodukte
         </div>
       </div>
       <div
@@ -314,7 +314,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         tabIndex={-1}
                       >
                         <input
-                          checked={true}
+                          checked={false}
                           onChange={[Function]}
                           onClick={[Function]}
                           tabIndex={-1}
