@@ -36,8 +36,6 @@ const Popup = ({
     ? React.lazy(() => import(`./${componentName}`))
     : DefaultPopup;
 
-  console.log(PopupComponent, layer.getKey());
-
   return (
     <React.Suspense fallback="loading...">
       <RSPopup
