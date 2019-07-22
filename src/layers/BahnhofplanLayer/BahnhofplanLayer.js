@@ -38,7 +38,7 @@ class BahnhofplanLayer extends VectorLayer {
     });
   }
 
-  style(feature, resolution) {
+  style(feature) {
     const vis = feature.get('visibility');
     if (vis !== 50) {
       return null;
