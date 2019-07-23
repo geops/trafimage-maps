@@ -1,3 +1,8 @@
+// import polyfills if application is not loaded via index.js
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
