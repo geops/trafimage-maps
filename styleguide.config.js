@@ -2,7 +2,11 @@ const { version } = require('./package.json');
 
 module.exports = {
   title: `Trafimage Webkartenportal ${version}`,
-  require: ['react-app-polyfill/ie11', 'react-app-polyfill/stable'],
+  require: [
+    'react-app-polyfill/ie11',
+    'react-app-polyfill/stable',
+    'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
+  ],
   ribbon: {
     url: 'https://github.com/geops/trafimage-maps',
     text: 'Fork me on GitHub',
@@ -53,6 +57,15 @@ module.exports = {
   webpackConfig: {
     module: {
       rules: [
+        // Babel loader, will use your project’s .babelrc
+        // Transpile node dependencies, node deps are often not transpiled for IE11
+        {
+          test: [
+            /\/node_modules\/(regexpu-core|unicode-.*|acorn-.*|query-string|strict-uri-encode)/,
+            /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker)/,
+          ],
+          loader: 'babel-loader',
+        },
         // Babel loader, will use your project’s .babelrc
         {
           test: /\.jsx?$/,
