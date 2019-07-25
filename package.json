@@ -1,7 +1,6 @@
 {
-  "name": "@geops/trafimage-maps",
+  "name": "trafimage-maps",
   "version": "0.1.0",
-  "private": true,
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
