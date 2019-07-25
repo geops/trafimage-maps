@@ -89,6 +89,7 @@ class ZoneLayer extends VectorLayer {
         font: '12px Arial',
         color: 'black',
       },
+      ...(options.zoneStyle || {}),
     };
 
     this.token = options.token;
