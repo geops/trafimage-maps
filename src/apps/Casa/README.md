@@ -18,6 +18,13 @@ const CasaExample = () => {
   const zoneLayer = new ZoneLayer({
     // Demo token. Please replace with your own token.
     token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+    zoneStyleFunction: (zoneProps, isSelected) => {
+      return {
+        fill: {
+          color: isSelected ? 'red' : 'rgb(255, 200, 25)',
+        },
+      };
+    },
   });
 
   // Select zones.

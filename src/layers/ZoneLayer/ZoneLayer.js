@@ -14,6 +14,7 @@ import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import { intersect } from 'turf';
+import Color from 'color';
 
 /**
  * Layer for visualizing fare networks.
@@ -23,6 +24,26 @@ import { intersect } from 'turf';
  * @param (number} options.labelOptimizationMinResolution Minimum resolution for
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
+ * @param {Object} [options.zoneStyle] Zone style.
+ * @param {Object} [options.zoneStyle.fill] Fill properties.
+ * @param {string} [options.zoneStyle.fill.color] Fill color.
+ *   Default is 'rgb(255, 200, 25)'.
+
+ * @param {Object} [options.zoneStyle.stroke] Stroke properties.
+ * @param {string} [options.zoneStyle.stroke.width] Stroke width.
+ *   Default is 2.
+ * @param {string} [options.zoneStyle.stroke.color] Stroke color.
+ *   Default is 'black'.
+ * @param {Object} [options.zoneStyle.text] Text properties.
+ * @param {string} [options.zoneStyle.text.font] Font.
+ *   Default is '12px Arial'.
+ * @param {string} [options.zoneStyle.text.label] Text label.
+ *   If undefined, the zone code is used.
+ * @param {string} [options.zoneStyle.text.color] Text color.
+ *   Default is 'black'.
+ * @param {Function} [zoneStyleFunction] called with zone properties as
+ *   an Object and a boolean indicating if the zone is selected.
+ *   The function should return a zoneStyle object (see above).
  */
 class ZoneLayer extends VectorLayer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
@@ -51,10 +72,24 @@ class ZoneLayer extends VectorLayer {
       name: 'Verbundzonen',
       olLayer: new OLVectorLayer({
         source: new VectorSource(),
-        style: (f, r) => this.zoneStyle(f, r),
+        style: (f, r) => this.internalZoneStyleFunction(f, r),
       }),
       ...options,
     });
+
+    this.defaultZoneStyle = {
+      fill: {
+        color: 'rgb(255, 200, 25)',
+      },
+      stroke: {
+        width: 2,
+        color: 'black',
+      },
+      text: {
+        font: '12px Arial',
+        color: 'black',
+      },
+    };
 
     this.token = options.token;
 
@@ -63,6 +98,22 @@ class ZoneLayer extends VectorLayer {
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
     this.fetchZones();
+
+    this.zoneStyleFunction = options.zoneStyleFunction || (() => ({}));
+
+    this.selectedZones = [];
+
+    this.onClick(features => {
+      const [feature] = features;
+      const ix = this.selectedZones.indexOf(feature);
+      if (ix > -1) {
+        this.selectedZones.splice(ix, 1);
+      } else {
+        this.selectedZones.push(feature);
+      }
+
+      this.olLayer.changed();
+    });
   }
 
   fetchZones(params = {}) {
@@ -132,7 +183,13 @@ class ZoneLayer extends VectorLayer {
     return this.fetchZones({ filter: qryParams.join(',') });
   }
 
-  zoneStyle(feature, resolution) {
+  internalZoneStyleFunction(feature, resolution) {
+    const isSelected = this.selectedZones.indexOf(feature) > -1;
+    const styleObject = {
+      ...this.defaultZoneStyle,
+      ...this.zoneStyleFunction(feature.getProperties(), isSelected),
+    };
+
     const zone = parseInt(feature.get('zone'), 10);
 
     let opacity = 0.5;
@@ -140,7 +197,7 @@ class ZoneLayer extends VectorLayer {
     opacity = resolution < 50 ? 0.1 : opacity;
 
     let textGeometry;
-    const color = [255, 200, 25];
+    const color = new Color(styleObject.fill.color).rgb().array();
 
     if (resolution <= this.labelOptimizeMinRes) {
       // optimize text positioning
@@ -156,7 +213,7 @@ class ZoneLayer extends VectorLayer {
       new Style({
         stroke: new StrokeStyle({
           color,
-          width: 2,
+          width: styleObject.stroke.width,
         }),
         fill: new FillStyle({
           color: [...color, opacity],
@@ -165,15 +222,15 @@ class ZoneLayer extends VectorLayer {
       new Style({
         geometry: textGeometry,
         text: new TextStyle({
-          font: '12px Arial',
+          font: styleObject.text.font,
           fill: new FillStyle({
-            color: 'black',
+            color: styleObject.text.color,
           }),
           stroke: new StrokeStyle({
             color: 'white',
             width: 2,
           }),
-          text: `${zone}`,
+          text: styleObject.text.label || `${zone}`,
         }),
       }),
     ];
