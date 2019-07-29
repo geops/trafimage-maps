@@ -7,38 +7,38 @@ import Layer from 'react-spatial/Layer';
  * @class TrafimageLayer
  */
 class TrafimageRasterLayer extends Layer {
-  static getTokenUrl(url, token) {
+  static getApiKeyUrl(url, apiKey) {
     const [u, search] = url.split('?');
     const params = qs.parse(search);
-    return `${u}?${qs.stringify({ key: token, ...params })}`;
+    return `${u}?${qs.stringify({ key: apiKey, ...params })}`;
   }
 
   /**
    * @param {Object} [options] Layer options.
-   * @param {string} [options.token] Access token for geOps services.
+   * @param {string} [options.apiKey] Access key for geOps services.
    */
   constructor(options = {}) {
     super(options);
 
-    // Access token for geOps services
-    this.token = options.token;
+    // Access apiKey for geOps services
+    this.apiKey = options.apiKey;
 
-    // Add token
-    this.setToken(this.token);
+    // Add apiKey
+    this.setApiKey(this.apiKey);
   }
 
-  setToken(token) {
-    if (!token) {
+  setApiKey(apiKey) {
+    if (!apiKey) {
       return;
     }
 
-    this.token = token;
+    this.apiKey = apiKey;
     const source = this.olLayer.getSource();
 
     if (source instanceof WMTSSource) {
       const urls = source
         .getUrls()
-        .map(url => TrafimageRasterLayer.getTokenUrl(url, this.token));
+        .map(url => TrafimageRasterLayer.getApiKeyUrl(url, this.apiKey));
 
       source.setUrls(urls);
     }

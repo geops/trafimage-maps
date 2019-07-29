@@ -20,7 +20,7 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  token: PropTypes.string,
+  apiKey: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -34,7 +34,7 @@ const defaultProps = {
   activeTopic: null,
   baseLayers: null,
   layers: null,
-  token: null,
+  apiKey: null,
 };
 
 class TopicLoader extends Component {
@@ -83,7 +83,7 @@ class TopicLoader extends Component {
       layers,
       baseLayers,
       dispatchSetLayers,
-      token,
+      apiKey,
     } = this.props;
 
     const newLayers = [
@@ -97,8 +97,8 @@ class TopicLoader extends Component {
     dispatchSetLayers(flatLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      if (token && flatLayers[i] instanceof TrafimageRasterLayer) {
-        flatLayers[i].setToken(token);
+      if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
+        flatLayers[i].setApiKey(apiKey);
       }
 
       if (flatLayers[i] instanceof VectorLayer) {
