@@ -7,7 +7,7 @@ import Layer from 'react-spatial/Layer';
  * @class TrafimageLayer
  */
 class TrafimageRasterLayer extends Layer {
-  static getTokenUrl(url, apiKey) {
+  static getApiKeyUrl(url, apiKey) {
     const [u, search] = url.split('?');
     const params = qs.parse(search);
     return `${u}?${qs.stringify({ key: apiKey, ...params })}`;
@@ -24,10 +24,10 @@ class TrafimageRasterLayer extends Layer {
     this.apiKey = options.apiKey;
 
     // Add apiKey
-    this.setToken(this.apiKey);
+    this.setApiKey(this.apiKey);
   }
 
-  setToken(apiKey) {
+  setApiKey(apiKey) {
     if (!apiKey) {
       return;
     }
@@ -38,7 +38,7 @@ class TrafimageRasterLayer extends Layer {
     if (source instanceof WMTSSource) {
       const urls = source
         .getUrls()
-        .map(url => TrafimageRasterLayer.getTokenUrl(url, this.apiKey));
+        .map(url => TrafimageRasterLayer.getApiKeyUrl(url, this.apiKey));
 
       source.setUrls(urls);
     }

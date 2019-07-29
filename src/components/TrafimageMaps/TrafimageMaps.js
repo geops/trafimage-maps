@@ -94,7 +94,7 @@ const propTypes = {
   zoom: PropTypes.number,
 
   /**
-   * Token for using geOps services.
+   * API key for using geOps services.
    */
   apiKey: PropTypes.string,
 

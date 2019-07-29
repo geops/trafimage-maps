@@ -98,7 +98,7 @@ class TopicLoader extends Component {
 
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
-        flatLayers[i].setToken(apiKey);
+        flatLayers[i].setApiKey(apiKey);
       }
 
       if (flatLayers[i] instanceof VectorLayer) {
