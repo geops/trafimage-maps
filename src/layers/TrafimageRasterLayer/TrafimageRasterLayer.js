@@ -10,7 +10,7 @@ class TrafimageRasterLayer extends Layer {
   static getTokenUrl(url, token) {
     const [u, search] = url.split('?');
     const params = qs.parse(search);
-    return `${u}?${qs.stringify({ token, ...params })}`;
+    return `${u}?${qs.stringify({ key: token, ...params })}`;
   }
 
   /**
