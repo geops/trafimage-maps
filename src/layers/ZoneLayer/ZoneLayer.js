@@ -92,7 +92,7 @@ class ZoneLayer extends VectorLayer {
       ...(options.zoneStyle || {}),
     };
 
-    this.token = options.token;
+    this.apiKey = options.apiKey;
 
     this.url = options.url || 'https://geops.cloud.tyk.io/casa-fare-network';
 
@@ -128,7 +128,7 @@ class ZoneLayer extends VectorLayer {
     const format = new GeoJSON();
     const urlParams = {
       ...params,
-      token: this.token,
+      key: this.apiKey,
       simplify: 100,
       srs: 3857,
     };

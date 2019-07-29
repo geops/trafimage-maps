@@ -96,7 +96,7 @@ const propTypes = {
   /**
    * Token for using geOps services.
    */
-  token: PropTypes.string,
+  apiKey: PropTypes.string,
 
   /**
    * React router history.
@@ -122,7 +122,7 @@ const defaultProps = {
   popupComponents: null,
   projection: 'EPSG:3857',
   layers: null,
-  token: null,
+  apiKey: null,
   history: null,
 };
 
@@ -151,7 +151,7 @@ class TrafimageMaps extends Component {
       projection,
       topics,
       activeTopicKey,
-      token,
+      apiKey,
       history,
       center,
       zoom,
@@ -199,7 +199,7 @@ class TrafimageMaps extends Component {
             layers={layers}
             topics={topics}
             activeTopicKey={activeTopicKey}
-            token={token}
+            apiKey={apiKey}
           />
           <ResizeHandler observe={this} />
           <Map
