@@ -23,7 +23,7 @@ const propTypes = {
 class Menu extends Component {
   static getMenuComponent(name) {
     if (name) {
-      return React.lazy(() => import(`./${name}`));
+      return React.lazy(() => import(`../../menus/${name}`));
     }
 
     return null;

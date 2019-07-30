@@ -31,8 +31,6 @@ const TrackerMenu = ({ layerService }) => {
     return null;
   }
 
-  console.log(trajectory);
-
   return (
     <div className="wkp-menu">
       <div
