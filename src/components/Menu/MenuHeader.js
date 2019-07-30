@@ -26,8 +26,8 @@ const MenuHeader = ({ title, info, isOpen, onToggle }) => (
     onClick={() => onToggle()}
     onKeyPress={e => e.which === 13 && onToggle()}
   >
-    <div className="wkp-menu-toggle-button">
-      <div className="wkp-menu-toggle-button-icon">
+    <div className="wkp-menu-header-toggler">
+      <div className="wkp-menu-header-toggler-icon">
         <img src={isOpen ? menuClosedImg : menuOpenImg} alt="Menü" />
       </div>
       <span className="wkp-menu-toggle-text">Menü</span>

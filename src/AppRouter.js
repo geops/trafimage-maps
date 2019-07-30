@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TrafimageMaps from './components/TrafimageMaps';
 import TOPIC_CONF from './config/topics';
 import POPUP_CONF from './config/popups';
+import { TrackerMenu } from './config/menu';
 
 const topicKeys = TOPIC_CONF.map(t => t.key);
 
@@ -28,6 +29,7 @@ const AppRouter = () => (
                 popup: true,
               }}
               popupComponents={POPUP_CONF}
+              menuComponents={[TrackerMenu]}
             />
           );
         }

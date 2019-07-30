@@ -75,6 +75,13 @@ const propTypes = {
   popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
+   * List of menu component names that are displayed next to the default layer
+   * menu. Component names are names of files from the folder
+   * `src/compontens/Menu` without the `.js` extension.
+   */
+  menuComponents: PropTypes.arrayOf(PropTypes.string),
+
+  /**
    * Projection used for the map.
    */
   projection: PropTypes.oneOfType([
@@ -120,6 +127,7 @@ const defaultProps = {
   },
   baseLayers: null,
   popupComponents: null,
+  menuComponents: [],
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
@@ -148,6 +156,7 @@ class TrafimageMaps extends Component {
       elements,
       layers,
       popupComponents,
+      menuComponents,
       projection,
       topics,
       activeTopicKey,
@@ -161,7 +170,12 @@ class TrafimageMaps extends Component {
       header: <Header />,
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
-      menu: <Menu layerService={this.layerService} />,
+      menu: (
+        <Menu
+          layerService={this.layerService}
+          menuComponents={menuComponents}
+        />
+      ),
       permalink: (
         <Permalink
           map={this.map}

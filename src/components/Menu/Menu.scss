@@ -1,27 +1,60 @@
-.wkp-menu {
+.wkp-menu-wrapper {
   position: absolute;
   top: 12px;
   left: 10px;
   width: 371px;
   z-index: 2;
 
-  .wkp-menu-body {
-    border-width: 0 2px 2px 2px;
+  .wkp-menu {
+    border-width: 2px;
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: max-height 0.3s ease, border 0.1s ease 0.1s;
+    transition: max-height 0.3s ease;
     max-height: 1000px;
+    margin-top: 5px;
     overflow: hidden;
+
+    &.wkp-topics {
+      border-top-width: 0px;
+      margin-top: 0;
+    }
 
     &.closed {
       border-width: 0;
       border-top-width: 0;
       max-height: 0;
+      transition: max-height 0.3s ease, border 0.1s ease 0.3s;
     }
 
-    .wkp-menu-body-inner {
+    .wkp-menu-title {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+
+      .wkp-menu-title-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .wkp-menu-title-icon {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+    }
+
+    .wkp-menu-body {
       min-width: 250px;
+      max-height: 1000px;
+      padding: 15px;
+      border-top: 1px solid #eee;
+
+      &.closed {
+        border: 0;
+        max-height: 0px;
+        transition: all 0.1s ease;
+        padding: 0 15px;
+      }
     }
 
     .wkp-layer-tree {
@@ -43,7 +76,7 @@
     left: 0;
   }
 
-  .wkp-menu-body {
+  .wkp-menu {
     border: 0;
 
     &.closed {
@@ -59,10 +92,10 @@
 
   // header component is enabled
   &.header {
-    .wkp-menu {
+    .wkp-menu-wrapper {
       top: 0;
 
-      .wkp-menu-body {
+      .wkp-menu {
         margin-top: 1px;
       }
     }

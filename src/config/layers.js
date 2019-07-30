@@ -4,6 +4,7 @@ import WMTSSource from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
+import TrackerLayer from 'react-public-transport/components/Tracker/TrackerLayer';
 import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 
@@ -108,5 +109,7 @@ bahnhofplaene.setChildren([
   new BahnhofplanLayer({ visible: false }),
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
+
+export const tracker = new TrackerLayer();
 
 export default [swisstopoSwissImage, netzkarteLayer];

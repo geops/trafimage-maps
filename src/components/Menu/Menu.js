@@ -14,12 +14,21 @@ import './Menu.scss';
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  menuComponents: PropTypes.arrayOf(PropTypes.string).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   t: PropTypes.func.isRequired,
   dispatchSetActiveTopic: PropTypes.func.isRequired,
 };
 
 class Menu extends Component {
+  static getMenuComponent(name) {
+    if (name) {
+      return React.lazy(() => import(`./${name}`));
+    }
+
+    return null;
+  }
+
   constructor(props) {
     super(props);
 
@@ -66,7 +75,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { activeTopic, layerService, t, topics } = this.props;
+    const { activeTopic, layerService, t, topics, menuComponents } = this.props;
     const {
       menuLayers,
       allMenuLayersVisible,
@@ -79,7 +88,7 @@ class Menu extends Component {
       : menuLayers.map(l => l.getName()).join(', ');
 
     return (
-      <div className="wkp-menu">
+      <div className="wkp-menu-wrapper">
         <MenuHeader
           title={activeTopic.name}
           info={info}
@@ -88,8 +97,8 @@ class Menu extends Component {
           onToggle={() => this.setState({ isOpen: !isOpen })}
         />
 
-        <div className={`wkp-menu-body ${isOpen ? '' : 'closed'}`}>
-          <div className="wkp-menu-body-inner">
+        <div className={`wkp-menu wkp-topics ${isOpen ? '' : 'closed'}`}>
+          <div className="wkp-menu-body">
             {topics.map(topic => (
               <div key={topic.key}>
                 <TopicMenu
@@ -115,6 +124,14 @@ class Menu extends Component {
             ))}
           </div>
         </div>
+
+        {menuComponents
+          .map(name => Menu.getMenuComponent(name))
+          .map(Comp => (
+            <React.Suspense fallback="Loading menu...">
+              <Comp layerService={layerService} />
+            </React.Suspense>
+          ))}
       </div>
     );
   }

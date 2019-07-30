@@ -1,4 +1,4 @@
-.wkp-menu {
+.wkp-menu-wrapper {
   .wkp-menu-header {
     background: white;
     padding: 0 15px;
@@ -20,10 +20,10 @@
       top: 30px;
     }
 
-    .wkp-menu-toggle-button {
+    .wkp-menu-header-toggler {
       display: none;
 
-      .wkp-menu-toggle-button-icon {
+      .wkp-menu-header-toggler-icon {
         width: 50px;
       }
     }
@@ -56,7 +56,7 @@
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-menu {
+  .wkp-menu-wrapper {
     top: 0;
 
     .wkp-menu-title,
@@ -65,7 +65,7 @@
       display: none;
     }
 
-    .wkp-menu-toggle-button {
+    .wkp-menu-header-toggler {
       display: flex;
       align-items: center;
 

@@ -1,6 +1,5 @@
 {
   "name": "trafimage-maps",
-  "version": "0.3.0",
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
@@ -23,6 +22,7 @@
     "react-dom": "^16.7.0",
     "react-i18next": "^10.2.0",
     "react-icons": "^3.1.0",
+    "react-public-transport": "../react-public-transport/build/es",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-router-prop-types": "^1.0.4",
