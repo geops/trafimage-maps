@@ -174,6 +174,7 @@ class TrafimageMaps extends Component {
         <Menu
           layerService={this.layerService}
           menuComponents={menuComponents}
+          map={this.map}
         />
       ),
       permalink: (

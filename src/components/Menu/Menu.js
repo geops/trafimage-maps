@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
+import Map from 'ol/Map';
 import LayerService from 'react-spatial/LayerService';
 import LayerTree from 'react-spatial/components/LayerTree';
 import MenuHeader from './MenuHeader';
@@ -16,19 +17,12 @@ const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   menuComponents: PropTypes.arrayOf(PropTypes.string).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  map: PropTypes.instanceOf(Map).isRequired,
   t: PropTypes.func.isRequired,
   dispatchSetActiveTopic: PropTypes.func.isRequired,
 };
 
 class Menu extends Component {
-  static getMenuComponent(name) {
-    if (name) {
-      return React.lazy(() => import(`../../menus/${name}`));
-    }
-
-    return null;
-  }
-
   constructor(props) {
     super(props);
 
@@ -37,14 +31,24 @@ class Menu extends Component {
       openTopicKey: null,
       menuLayers: [],
       allMenuLayersVisible: false,
+      loadedMenuComponents: [],
     };
 
     const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
+    this.loadMenuComponents();
   }
 
   componentDidMount() {
     this.updateMenuLayers();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { menuComponents } = this.props;
+
+    if (prevProps.menuComponents !== menuComponents) {
+      this.loadMenuComponents();
+    }
   }
 
   onTopicClick(topic) {
@@ -62,6 +66,18 @@ class Menu extends Component {
     }
   }
 
+  loadMenuComponents() {
+    const { menuComponents } = this.props;
+    const components = [];
+
+    for (let i = 0; i < menuComponents.length; i += 1) {
+      const Comp = React.lazy(() => import(`../../menus/${menuComponents[i]}`));
+      components.push(Comp);
+    }
+
+    this.setState({ loadedMenuComponents: components });
+  }
+
   updateMenuLayers() {
     const { layerService } = this.props;
     let topicLayers = layerService.getLayersAsFlatArray();
@@ -75,9 +91,11 @@ class Menu extends Component {
   }
 
   render() {
-    const { activeTopic, layerService, t, topics, menuComponents } = this.props;
+    const { activeTopic, layerService, t, topics, map } = this.props;
+
     const {
       menuLayers,
+      loadedMenuComponents,
       allMenuLayersVisible,
       isOpen,
       openTopicKey,
@@ -125,13 +143,11 @@ class Menu extends Component {
           </div>
         </div>
 
-        {menuComponents
-          .map(name => Menu.getMenuComponent(name))
-          .map(Comp => (
-            <React.Suspense fallback="Loading menu...">
-              <Comp layerService={layerService} />
-            </React.Suspense>
-          ))}
+        {loadedMenuComponents.map(Comp => (
+          <React.Suspense fallback="Loading menu...">
+            <Comp layerService={layerService} map={map} />
+          </React.Suspense>
+        ))}
       </div>
     );
   }

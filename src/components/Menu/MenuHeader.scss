@@ -43,7 +43,7 @@
       }
     }
 
-    .wkp-menu-title {
+    .wkp-menu-header-title {
       transition: font-size 0.2s ease;
 
       &.large {
@@ -59,7 +59,7 @@
   .wkp-menu-wrapper {
     top: 0;
 
-    .wkp-menu-title,
+    .wkp-menu-header-title,
     .wkp-menu-toggler,
     .wkp-menu-layers {
       display: none;

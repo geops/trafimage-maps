@@ -32,7 +32,9 @@ const MenuHeader = ({ title, info, isOpen, onToggle }) => (
       </div>
       <span className="wkp-menu-toggle-text">Menü</span>
     </div>
-    <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{title}</div>
+    <div className={`wkp-menu-header-title ${!info ? '' : 'large'}`}>
+      {title}
+    </div>
     <div className="wkp-menu-toggler">
       {isOpen ? <FaAngleUp /> : <FaAngleDown />}
     </div>

@@ -27,36 +27,6 @@
       transition: max-height 0.3s ease, border 0.1s ease 0.3s;
     }
 
-    .wkp-menu-title {
-      display: flex;
-      justify-content: space-between;
-      padding: 15px;
-
-      .wkp-menu-title-left {
-        display: flex;
-        align-items: center;
-      }
-
-      .wkp-menu-title-icon {
-        margin-right: 10px;
-        font-size: 20px;
-      }
-    }
-
-    .wkp-menu-body {
-      min-width: 250px;
-      max-height: 1000px;
-      padding: 15px;
-      border-top: 1px solid #eee;
-
-      &.closed {
-        border: 0;
-        max-height: 0px;
-        transition: all 0.1s ease;
-        padding: 0 15px;
-      }
-    }
-
     .wkp-layer-tree {
       overflow: hidden;
       max-height: 1000px;
@@ -72,20 +42,20 @@
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-menu {
+  .wkp-menu-wrapper {
     left: 0;
-  }
 
-  .wkp-menu {
-    border: 0;
+    .wkp-menu {
+      border: 0;
 
-    &.closed {
-      padding: 0;
-      overflow: hidden;
-
-      div {
-        white-space: nowrap;
+      &.closed {
+        padding: 0;
         overflow: hidden;
+
+        div {
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
   }
