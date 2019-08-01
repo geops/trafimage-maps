@@ -1,41 +1,84 @@
-.wkp-topic-menu {
-  padding: 10px 15px;
-  display: flex;
-  align-items: center;
-
-  .wkp-topic-title {
-    display: flex;
+.wkp-menu-wrapper {
+  .wkp-menu.wkp-topics {
+    border-top-width: 0px;
+    margin-top: 0;
   }
 
-  .wkp-topic-radio {
-    width: 15px;
-    height: 15px;
-    margin-right: 7px;
-    border: 1px solid grey;
-    border-radius: 50%;
+  .wkp-topic-menu {
+    .wkp-topic-menu-item {
+      outline: none;
+      padding: 0 15px;
+      height: 40px;
+      display: flex;
+      align-items: center;
 
-    .wkp-topic-radio-dot {
-      width: 11px;
-      height: 11px;
-      margin: 2px;
-      background: #eb0000;
-      border-radius: 50%;
+      .wkp-topic-title {
+        display: flex;
+      }
+
+      .wkp-topic-radio {
+        width: 15px;
+        height: 15px;
+        margin-right: 7px;
+        border: 1px solid grey;
+        border-radius: 50%;
+
+        .wkp-topic-radio-dot {
+          width: 11px;
+          height: 11px;
+          margin: 2px;
+          background: #eb0000;
+          border-radius: 50%;
+        }
+      }
+
+      .wkp-layer-toggler {
+        margin-left: 10px;
+        margin-top: 3px;
+        width: 5px;
+        height: 5px;
+        border-width: 1px 0 0 1px;
+        border-style: solid;
+        transform: rotate(45deg);
+
+        &.collapsed {
+          margin-top: 0;
+          transform: rotate(225deg);
+        }
+      }
     }
-  }
 
-  .wkp-layer-toggler {
-    padding-left: 5px;
+    .wkp-layer-tree {
+      overflow: hidden;
+      max-height: 1000px;
+      margin: 0 10px 10px 40px;
+      transition: max-height 0.3s ease, margin 0.3s ease;
+
+      .tm-layer-tree-item {
+        padding: 7px;
+      }
+    }
+
+    &.collapsed {
+      .wkp-layer-tree {
+        max-height: 0;
+        margin-top: 0;
+        margin-bottom: 0;
+        overflow: hidden;
+      }
+    }
   }
 }
 
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-topic-menu {
+  .wkp-topic-menu-item {
     justify-content: space-between;
     border-width: 1px 0 0 0;
     border-color: #eee;
     border-style: solid;
+    height: 60px;
 
     &.active {
       border-bottom: 1px solid #eee;

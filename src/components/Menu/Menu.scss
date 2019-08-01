@@ -15,26 +15,11 @@
     margin-top: 5px;
     overflow: hidden;
 
-    &.wkp-topics {
-      border-top-width: 0px;
-      margin-top: 0;
-    }
-
     &.closed {
       border-width: 0;
       border-top-width: 0;
       max-height: 0;
-      transition: max-height 0.3s ease, border 0.1s ease 0.3s;
-    }
-
-    .wkp-layer-tree {
-      overflow: hidden;
-      max-height: 1000px;
-      margin: 10px 10px 10px 25px;
-
-      &.closed {
-        display: none;
-      }
+      transition: max-height 0.3s ease, border 0.1s ease 0.2s;
     }
   }
 }
@@ -66,7 +51,7 @@
       top: 0;
 
       .wkp-menu {
-        margin-top: 1px;
+        margin-top: 0;
       }
     }
   }

@@ -10,6 +10,7 @@ import './TrackerMenu.scss';
 const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
+  open: PropTypes.bool.isRequired ,
 };
 
 class TrackerMenu extends Component {
@@ -66,7 +67,7 @@ class TrackerMenu extends Component {
 
   render() {
     const { visible, trajectory } = this.state;
-    const { map } = this.props;
+    const { closed, map } = this.props;
     let trajectoryElem = null;
 
     if (!visible) {
@@ -95,6 +96,7 @@ class TrackerMenu extends Component {
         title="Zugtracker"
         icon=<TiVideo />
         map={map}
+        closed={closed}
       >
         {trajectoryElem}
       </MenuItem>

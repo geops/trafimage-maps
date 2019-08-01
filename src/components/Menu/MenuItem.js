@@ -11,6 +11,7 @@ const propTypes = {
   icon: PropTypes.node,
   title: PropTypes.string,
   map: PropTypes.instanceOf(Map).isRequired,
+  closed: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -24,38 +25,48 @@ class MenuItem extends Component {
   constructor(props) {
     super(props);
 
+    const { map } = this.props;
+    this.bodyElementRef = null;
+
     this.state = {
-      closed: false,
+      collapsed: false,
+      menuHeight: null,
     };
 
-    this.elementRef = null;
+    map.on('change:size', () => this.updateMenuHeight());
+  }
+
+  componentDidMount() {
+    this.updateMenuHeight();
+  }
+
+  updateMenuHeight() {
+    const { map } = this.props;
+    let menuHeight;
+
+    if (this.bodyElementRef) {
+      const mapBottom = map.getTarget().getBoundingClientRect().bottom;
+      const elemRect = this.bodyElementRef.getBoundingClientRect();
+      menuHeight = mapBottom - elemRect.top - 35;
+    }
+
+    this.setState({ menuHeight });
   }
 
   render() {
-    const { children, className, title, icon, map } = this.props;
-    const { closed } = this.state;
-    const style = {};
-
-    if (this.elementRef) {
-      const mapBottom = map.getTarget().getBoundingClientRect().bottom;
-      const elemRect = this.elementRef.getBoundingClientRect();
-      style.maxHeight = mapBottom - elemRect.bottom - elemRect.top;
-    }
+    const { closed, children, className, title, icon } = this.props;
+    const { collapsed, menuHeight } = this.state;
 
     return (
-      <div
-        className={`wkp-menu ${className}`}
-        style={style}
-        ref={e => {
-          this.elementRef = e;
-        }}
-      >
+      <div className={`wkp-menu ${className} ${closed ? 'closed' : ''}`}>
         <div
           className="wkp-menu-title"
           role="button"
           tabIndex={0}
-          onClick={() => this.setState({ closed: !closed })}
-          onKeyPress={e => e.which === 13 && this.setState({ closed: !closed })}
+          onClick={() => this.setState({ collapsed: !collapsed })}
+          onKeyPress={e =>
+            e.which === 13 && this.setState({ collapsed: !collapsed })
+          }
         >
           <div className="wkp-menu-title-left">
             <div className="wkp-menu-title-icon">{icon}</div>
@@ -66,7 +77,13 @@ class MenuItem extends Component {
             {closed ? <FaAngleDown /> : <FaAngleUp />}
           </div>
         </div>
-        <div className={`wkp-menu-body ${closed ? 'closed' : ''}`}>
+        <div
+          className={`wkp-menu-body ${collapsed ? 'collapsed' : ''}`}
+          style={{ maxHeight: collapsed ? 0 : menuHeight }}
+          ref={e => {
+            this.bodyElementRef = e;
+          }}
+        >
           {children}
         </div>
       </div>
