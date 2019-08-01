@@ -23,6 +23,7 @@
   padding: 3px 70px;
 }
 
-#promo a, #promo a:hover {
+#promo a,
+#promo a:hover {
   text-decoration: none;
 }
