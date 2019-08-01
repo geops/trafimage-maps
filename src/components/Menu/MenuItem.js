@@ -74,7 +74,7 @@ class MenuItem extends Component {
           </div>
 
           <div className="wkp-menu-title-toggler">
-            {closed ? <FaAngleDown /> : <FaAngleUp />}
+            {collapsed ? <FaAngleDown /> : <FaAngleUp />}
           </div>
         </div>
         <div
