@@ -6,6 +6,7 @@ import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
 import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
+import NetzkartePointLayer from '../layers/NetzkartePointLayer';
 import CONF from './appConfig';
 
 proj4.defs(
@@ -161,6 +162,13 @@ bahnhofplaene.setChildren([
   new BahnhofplanLayer({ visible: false }),
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
+
+export const netzkartePointLayer = new Layer({
+  name: 'Stationen',
+  key: 'ch.sbb.stationen.parent',
+});
+
+netzkartePointLayer.setChildren([new NetzkartePointLayer({})]);
 
 export default [
   swisstopoSwissImage,
