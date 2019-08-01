@@ -10,7 +10,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * @class RouteLayer
  * @extends TrafimageLayer
  * @param {Object} [options] Layer options.
- * @param {string} options.token Access token for geOps services.
+ * @param {string} options.apiKey Access key for geOps services.
  * @param {string} [options.name] Layer name.
  * @param {string} [options.url] Url of the geOps route backend.
  * @param {boolean} [options.visible] Visibility of the layer.
@@ -34,8 +34,8 @@ class RouteLayer extends VectorLayer {
     // Cache for storing route styles
     this.routeStyleCache = {};
 
-    // API token
-    this.token = options.token;
+    // API key
+    this.apiKey = options.apiKey;
 
     // Colors for differtent modes of transportation
     this.motColors = {
@@ -52,7 +52,7 @@ class RouteLayer extends VectorLayer {
   fetchRouteForMot(viaPoints, mot) {
     const via = viaPoints.map(v => `!${v}`);
     const urlParams = {
-      token: this.token || '',
+      key: this.apiKey || '',
       via: via.join(';'),
       mot,
     };

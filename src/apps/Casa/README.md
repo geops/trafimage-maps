@@ -16,8 +16,15 @@ import { casa } from '../../config/topics';
 const CasaExample = () => {
   // Intialization of zone layer.
   const zoneLayer = new ZoneLayer({
-    // Demo token. Please replace with your own token.
-    token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+    // Demo key. Please replace with your own key.
+    apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+    zoneStyleFunction: (zoneProps, isSelected) => {
+      return {
+        fill: {
+          color: isSelected ? 'red' : 'rgb(255, 200, 25)',
+        },
+      };
+    },
   });
 
   // Select zones.
@@ -48,8 +55,8 @@ const CasaExample = () => {
 
   // Initialize route layer.
   const routeLayer = new RouteLayer({
-    // Demo token. Please replace with your own token.
-    token: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+    // Demo apiKey. Please replace with your own apiKey.
+    apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
 	});
 
   // Visualize a route on the map.
@@ -77,7 +84,7 @@ const CasaExample = () => {
 
       <TrafimageMaps
         topics={[casa]}
-        token="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+        apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
         layers={[zoneLayer, routeLayer]}
         elements={elements}
         popupComponents={{
