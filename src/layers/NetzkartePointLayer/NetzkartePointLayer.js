@@ -79,9 +79,7 @@ class NetzkartePointLayer extends VectorLayer {
       radioGroup: 'stationen',
     });
 
-    this.url = `${
-      CONF.geoserverUrl
-    }?service=WFS&version=1.0.0&request=GetFeature&`;
+    this.url = `${CONF.geoserverUrl}?service=WFS&version=1.0.0&request=GetFeature&`;
 
     this.urlParams = {
       typeName: options.showAirports
