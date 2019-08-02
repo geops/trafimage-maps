@@ -7,7 +7,7 @@ import defaultBaseLayers, {
 export const netzkarte = {
   name: 'ÖV Netzkarte Schweiz',
   key: 'ch.sbb.netzkarte',
-  layers: [...defaultBaseLayers, bahnhofplaene, netzkartePointLayer],
+  layers: [...defaultBaseLayers, netzkartePointLayer, bahnhofplaene],
   projection: 'EPSG:3857',
 };
 
