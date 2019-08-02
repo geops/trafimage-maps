@@ -118,7 +118,7 @@ class ZoneLayer extends VectorLayer {
   }
 
   /**
-   * Clear the layer.
+   * Clears the layer.
    */
   clear() {
     if (this.abortController && !this.abortController.signal.aborted) {
@@ -174,6 +174,8 @@ class ZoneLayer extends VectorLayer {
    * @param {Object[]} config[].zones Array of zones to select.
    * @param {number} [config[].zones[].zoneCode] Code of zone to select.
    * @param {string} [config[].zones[].zoneName] Name of zone to select.
+   * @param {boolean} [config[].zones[].isSelected] If true, the zone
+   *   is initially selected.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   loadZones(config) {
@@ -193,7 +195,24 @@ class ZoneLayer extends VectorLayer {
       }
     }
 
-    return this.fetchZones({ filter: qryParams.join(',') });
+    return this.fetchZones({ filter: qryParams.join(',') }).then(features => {
+      // Preselect features
+      for (let i = 0; i < features.length; i += 1) {
+        const zoneCode = features[i].get('zone');
+        const partnerCode = features[i].get('partner_code');
+        const partner = config.find(c => c.partnerCode === partnerCode);
+
+        if (partner) {
+          const zone = partner.zones.find(
+            z => `${z.zoneCode}` === `${zoneCode}`,
+          );
+
+          if (zone && zone.isSelected) {
+            this.selectedZones.push(features[i]);
+          }
+        }
+      }
+    });
   }
 
   internalZoneStyleFunction(feature, resolution) {
