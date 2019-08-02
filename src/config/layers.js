@@ -163,7 +163,7 @@ export const netzkartePointLayer = new Layer({
 });
 
 netzkartePointLayer.setChildren([
-  new NetzkartePointLayer({}),
+  new NetzkartePointLayer({ useBboxStrategy: true }),
   new NetzkartePointLayer({ showAirports: true }),
 ]);
 

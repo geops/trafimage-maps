@@ -20,7 +20,7 @@ class NetzkartePointLayer extends VectorLayer {
 
     const vectorSource = new OLVectorSource({
       format: new OLGeoJSON(),
-      strategy: OLBboxStrategy,
+      ...(options.useBboxStrategy && { strategy: OLBboxStrategy }),
     });
 
     const olLayer = new OLVectorLayer({
@@ -35,6 +35,11 @@ class NetzkartePointLayer extends VectorLayer {
       radioGroup: 'stationen',
     });
 
+    // Options
+    this.showAirports = !!options.showAirports;
+    this.useBboxStrategy = !!options.useBboxStrategy;
+
+    // Bindings
     this.airportStyle = this.airportStyle.bind(this);
     this.defaultStyle = this.defaultStyle.bind(this);
     this.loader = this.loader.bind(this);
@@ -53,6 +58,7 @@ class NetzkartePointLayer extends VectorLayer {
         : 'trafimage:netzkarte_point',
     };
 
+    // Set loader after binding
     this.vectorSource = vectorSource;
     vectorSource.setLoader(this.loader);
   }
@@ -128,11 +134,12 @@ class NetzkartePointLayer extends VectorLayer {
 
     const urlParams = {
       ...this.urlParams,
-      bbox: `${extent.join(',')},${proj}`,
+      ...(this.useBboxStrategy && { bbox: `${extent.join(',')},${proj}` }),
       srsname: proj,
-      viewparams: `resolution:${res}`,
+      ...(!this.showAirports && { viewparams: `resolution:${res}` }),
       outputFormat: 'application/json',
     };
+
     const url = `${this.url}${qs.stringify(urlParams)}`;
 
     fetch(url)
