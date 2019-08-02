@@ -2,7 +2,7 @@ const path = require('path');
 const { version } = require('./package.json');
 
 module.exports = {
-  title: `Trafimage Webkartenportal ${version}`,
+  version,
   template: {
     favicon: 'img/favicon.png',
   },
