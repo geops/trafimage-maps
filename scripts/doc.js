@@ -1,17 +1,17 @@
 const documentation = require('documentation');
-const fs = require('fs');
+const streamArray = require('stream-array');
+const vfs = require('vinyl-fs');
 
-['RouteLayer', 'ZoneLayer'].forEach(l => {
-  documentation
-    .build([`./src/layers/${l}/**`], { shallow: false })
-    .then(doc => {
-      // Unset name to avoid duplicatin with styleguidist name.
-      // eslint-disable-next-line no-param-reassign
-      doc[0].name = undefined;
-      return documentation.formats.md(doc);
-    })
-    .then(output => {
-      // output is a string of Markdown data
-      fs.writeFileSync(`./src/layers/${l}/README.md`, output);
-    });
-});
+// Use geOps default template (https://github.com/geops/geops-docjs-template)
+documentation
+  .build([`./src/layers/**`], { shallow: false })
+  .then(out =>
+    documentation.formats.html(out, {
+      'project-name': 'Trafimage-maps',
+      'project-url': 'https://github.com/geops/react-spatial',
+      theme: 'node_modules/geops-docjs-template',
+    }),
+  )
+  .then(output => {
+    streamArray(output).pipe(vfs.dest(`./docjs`));
+  });

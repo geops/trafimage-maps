@@ -87,9 +87,7 @@ export const swisstopoSwissImage = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${
-          CONF.geoadminWmtsUrl
-        }/geo-admin-wmts/1.0.0/ch.swisstopo.swissimage/` +
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.swissimage/` +
         'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
@@ -112,9 +110,7 @@ export const swisstopoLandeskarte = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${
-          CONF.geoadminWmtsUrl
-        }/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-farbe/` +
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-farbe/` +
         'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
@@ -137,9 +133,7 @@ export const swisstopoLandeskarteGrau = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${
-          CONF.geoadminWmtsUrl
-        }/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-grau/` +
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-grau/` +
         'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
