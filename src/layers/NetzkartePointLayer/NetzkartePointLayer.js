@@ -1,3 +1,4 @@
+import qs from 'querystring';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
@@ -78,9 +79,18 @@ class NetzkartePointLayer extends VectorLayer {
       radioGroup: 'stationen',
     });
 
-    this.showAirports = !!options.showAirports;
-    this.vectorSource = vectorSource;
+    this.url = `${
+      CONF.geoserverUrl
+    }?service=WFS&version=1.0.0&request=GetFeature&`;
+
+    this.urlParams = {
+      typeName: options.showAirports
+        ? 'trafimage:netzkarte_airport_point'
+        : 'trafimage:netzkarte_point',
+    };
+
     this.loader = this.loader.bind(this);
+    this.vectorSource = vectorSource;
     vectorSource.setLoader(this.loader);
   }
 
@@ -111,22 +121,14 @@ class NetzkartePointLayer extends VectorLayer {
     const res = layerHelper.getDataResolution(resolution);
     const proj = projection.getCode();
 
-    let url =
-      `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
-      'request=GetFeature&typeName=trafimage:netzkarte_point&' +
-      `bbox=${extent.join(
-        ',',
-      )},${proj}&srsname=${proj}&viewparams=resolution%3A${res}&` +
-      'outputFormat=application%2Fjson';
-
-    if (this.showAirports) {
-      url =
-        `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
-        'request=GetFeature&typeName=trafimage:netzkarte_airport_point&' +
-        `bbox=${extent.join(
-          ',',
-        )},${proj}&srsname=${proj}&outputFormat=application%2Fjson`;
-    }
+    const urlParams = {
+      ...this.urlParams,
+      bbox: `${extent.join(',')},${proj}`,
+      srsname: proj,
+      viewparams: `resolution:${res}`,
+      outputFormat: 'application/json',
+    };
+    const url = `${this.url}${qs.stringify(urlParams)}`;
 
     fetch(url)
       .then(data => data.json())
