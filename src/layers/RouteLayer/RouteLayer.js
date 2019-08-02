@@ -135,6 +135,9 @@ class RouteLayer extends VectorLayer {
     this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
   }
 
+  /**
+   * Clears the layer.
+   */
   clear() {
     if (this.abortController && !this.abortController.signal.aborted) {
       this.abortController.abort();
