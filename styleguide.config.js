@@ -20,14 +20,12 @@ module.exports = {
       context: 'README.md',
     },
     {
-      name: 'Components',
-      components: ['src/components/TrafimageMaps/[A-Z]*.js'],
-      exampleMode: 'expand',
-      usageMode: 'collapse',
-    },
-    {
       name: 'Applications',
       sections: [
+        {
+          name: 'Trafimage Kartenportal',
+          content: 'src/components/TrafimageMaps/README.md',
+        },
         {
           name: 'Casa',
           content: 'src/apps/Casa/README.md',
