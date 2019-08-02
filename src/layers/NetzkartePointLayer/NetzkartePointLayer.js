@@ -63,7 +63,7 @@ function loader(extent, resolution, projection) {
     `${CONF.geojsoncacheUrl}?layer=netzkarte_point&workspace=trafimage&` +
     `bbox=${extent.join(
       ',',
-    )},EPSG:3857&resolution=${res}&geoserver=wkp&srsname=${proj}`;
+    )},${proj}&resolution=${res}&geoserver=wkp&srsname=${proj}`;
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', url);
