@@ -117,13 +117,21 @@ class ZoneLayer extends VectorLayer {
     });
   }
 
-  fetchZones(params = {}) {
-    if (this.abortController) {
+  /**
+   * Clear the layer.
+   */
+  clear() {
+    if (this.abortController && !this.abortController.signal.aborted) {
       this.abortController.abort();
     }
 
-    this.abortController = new AbortController();
     this.olLayer.getSource().clear();
+  }
+
+  fetchZones(params = {}) {
+    this.clear();
+
+    this.abortController = new AbortController();
 
     const format = new GeoJSON();
     const urlParams = {
@@ -142,6 +150,10 @@ class ZoneLayer extends VectorLayer {
         this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
         return features;
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.info('Request cancelled');
       });
   }
 
