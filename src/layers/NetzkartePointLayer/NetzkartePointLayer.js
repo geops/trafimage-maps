@@ -76,11 +76,15 @@ function loader(extent, resolution, projection) {
   const res = getDataResolution(resolution);
   const proj = projection.getCode();
 
+
+  // TODO Eva query string stringify, dann nur ein Objekt verwenden
   let url =
-    `${CONF.geojsoncacheUrl}?layer=netzkarte_point&workspace=trafimage&` +
+    `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
+    'request=GetFeature&typeName=trafimage:netzkarte_point&' +
     `bbox=${extent.join(
       ',',
-    )},${proj}&resolution=${res}&geoserver=wkp&srsname=${proj}`;
+    )},${proj}&srsname=${proj}&viewparams=resolution%3A${res}&` +
+    'outputFormat=application%2Fjson';
 
   if (showAirports) {
     url =

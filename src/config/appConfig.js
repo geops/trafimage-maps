@@ -2,7 +2,6 @@
 const pwaActive = false;
 let tilesUrl = '//tiles.dev.trafimage.geops.ch';
 const geoadminWmtsUrl = '//maps{1-3}.trafimage.ch';
-const geojsoncacheUrl = '//maps.trafimage.ch/service/gjc/ows';
 const geoserverUrl = '//maps.trafimage.ch/geoserver/trafimage/ows';
 
 switch (process.env.REACT_APP_ENV) {
@@ -29,6 +28,5 @@ export default {
   pwaActive,
   tilesUrl,
   geoadminWmtsUrl,
-  geojsoncacheUrl,
   geoserverUrl,
 };
