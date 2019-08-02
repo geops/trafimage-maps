@@ -29,8 +29,7 @@ function style(feature) {
         image: new OLCircle({
           radius: 10,
           fill: new OLFill({
-            color: 'black',
-            // color: 'rgba(255,255,255,0.01)',
+            color: 'rgba(255,255,255,0.01)',
           }),
         }),
       }),
@@ -95,7 +94,6 @@ class NetzkartePointLayer extends VectorLayer {
 
     const vectorSource = new OLVectorSource({
       format: new OLGeoJSON(),
-      url: (extent, resolution) => this.url(extent, resolution),
       strategy: OLBboxStrategy,
       loader,
     });
