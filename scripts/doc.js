@@ -8,7 +8,7 @@ documentation
   .then(out =>
     documentation.formats.html(out, {
       'project-name': 'Trafimage-maps',
-      'project-url': 'https://github.com/geops/react-spatial',
+      'project-url': 'https://github.com/geops/trafimage-maps',
       theme: 'node_modules/geops-docjs-template',
     }),
   )
