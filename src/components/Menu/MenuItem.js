@@ -11,7 +11,9 @@ const propTypes = {
   icon: PropTypes.node,
   title: PropTypes.string,
   map: PropTypes.instanceOf(Map).isRequired,
-  closed: PropTypes.bool.isRequired,
+  open: PropTypes.bool.isRequired,
+  collapsed: PropTypes.bool.isRequired,
+  onCollapseToggle: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -29,7 +31,6 @@ class MenuItem extends Component {
     this.bodyElementRef = null;
 
     this.state = {
-      collapsed: false,
       menuHeight: null,
     };
 
@@ -54,19 +55,26 @@ class MenuItem extends Component {
   }
 
   render() {
-    const { closed, children, className, title, icon } = this.props;
-    const { collapsed, menuHeight } = this.state;
+    const {
+      open,
+      collapsed,
+      children,
+      className,
+      title,
+      icon,
+      onCollapseToggle,
+    } = this.props;
+
+    const { menuHeight } = this.state;
 
     return (
-      <div className={`wkp-menu ${className} ${closed ? 'closed' : ''}`}>
+      <div className={`wkp-menu ${className} ${open ? '' : 'closed'}`}>
         <div
           className="wkp-menu-title"
           role="button"
           tabIndex={0}
-          onClick={() => this.setState({ collapsed: !collapsed })}
-          onKeyPress={e =>
-            e.which === 13 && this.setState({ collapsed: !collapsed })
-          }
+          onClick={() => onCollapseToggle(!collapsed)}
+          onKeyPress={e => e.which === 13 && onCollapseToggle(!collapsed)}
         >
           <div className="wkp-menu-title-left">
             <div className="wkp-menu-title-icon">{icon}</div>

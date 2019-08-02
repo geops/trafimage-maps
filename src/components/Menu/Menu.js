@@ -7,6 +7,7 @@ import Map from 'ol/Map';
 import LayerService from 'react-spatial/LayerService';
 import TopicMenu from './TopicMenu';
 import MenuHeader from './MenuHeader';
+import { setMenuOpen } from '../../model/app/actions';
 
 import './Menu.scss';
 
@@ -16,6 +17,9 @@ const propTypes = {
   menuComponents: PropTypes.arrayOf(PropTypes.string).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
+  menuOpen: PropTypes.bool.isRequired,
+
+  dispatchSetMenuOpen: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
 
@@ -25,7 +29,6 @@ class Menu extends Component {
     const { layerService } = this.props;
 
     this.state = {
-      isOpen: false,
       menuLayers: [],
       allMenuLayersVisible: false,
       loadedMenuComponents: [],
@@ -72,13 +75,20 @@ class Menu extends Component {
   }
 
   render() {
-    const { activeTopic, layerService, t, topics, map } = this.props;
+    const {
+      activeTopic,
+      layerService,
+      topics,
+      map,
+      menuOpen,
+      dispatchSetMenuOpen,
+      t,
+    } = this.props;
 
     const {
       menuLayers,
       loadedMenuComponents,
       allMenuLayersVisible,
-      isOpen,
     } = this.state;
 
     const info = allMenuLayersVisible
@@ -91,11 +101,11 @@ class Menu extends Component {
           title={activeTopic.name}
           info={info}
           headerLayerNames={menuLayers.map(l => l.getName())}
-          isOpen={isOpen}
-          onToggle={() => this.setState({ isOpen: !isOpen })}
+          isOpen={menuOpen}
+          onToggle={() => dispatchSetMenuOpen(!menuOpen)}
         />
 
-        <div className={`wkp-menu wkp-topics ${isOpen ? '' : 'closed'}`}>
+        <div className={`wkp-menu wkp-topics ${menuOpen ? '' : 'closed'}`}>
           <div className="wkp-menu-body">
             {topics.map(topic => (
               <div key={topic.key}>
@@ -107,7 +117,7 @@ class Menu extends Component {
 
         {loadedMenuComponents.map(Comp => (
           <React.Suspense fallback="Loading menu...">
-            <Comp layerService={layerService} map={map} closed={!isOpen} />
+            <Comp layerService={layerService} map={map} />
           </React.Suspense>
         ))}
       </div>
@@ -118,11 +128,19 @@ class Menu extends Component {
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   topics: state.app.topics,
+  menuOpen: state.app.menuOpen,
 });
+
+const mapDispatchToProps = {
+  dispatchSetMenuOpen: setMenuOpen,
+};
 
 Menu.propTypes = propTypes;
 
 export default compose(
   withTranslation(),
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(Menu);

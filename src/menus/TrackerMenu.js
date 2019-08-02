@@ -10,7 +10,6 @@ import './TrackerMenu.scss';
 const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
-  closed: PropTypes.bool.isRequired,
 };
 
 class TrackerMenu extends Component {
@@ -30,13 +29,14 @@ class TrackerMenu extends Component {
       .find(l => l instanceof TrackerLayer);
 
     this.state = {
-      visible: this.trackerLayer && this.trackerLayer.getVisible(),
+      open: this.trackerLayer && this.trackerLayer.getVisible(),
+      collapsed: true,
       trajectory: null,
     };
 
     if (this.trackerLayer) {
       this.trackerLayer.olLayer.on('change:visible', () =>
-        this.setState({ visible: this.trackerLayer.getVisible() }),
+        this.setState({ open: this.trackerLayer.getVisible() }),
       );
 
       this.trackerLayer.onClick(trajectories => {
@@ -45,6 +45,9 @@ class TrackerMenu extends Component {
           const id = trajectories[0].get('id');
 
           this.trackerLayer.fetchTrajectory(id).then(traj => {
+            if (traj.p.length) {
+              this.setState({ open: true, collapsed: false });
+            }
             for (let i = 0; i < traj.p.length; i += 1) {
               for (let j = 0; j < traj.p[i].length; j += 1) {
                 const stop = traj.p[i][j];
@@ -66,11 +69,11 @@ class TrackerMenu extends Component {
   }
 
   render() {
-    const { visible, trajectory } = this.state;
-    const { closed, map } = this.props;
+    const { open, collapsed, trajectory } = this.state;
+    const { map } = this.props;
     let trajectoryElem = null;
 
-    if (!visible) {
+    if (!open) {
       return null;
     }
 
@@ -96,7 +99,9 @@ class TrackerMenu extends Component {
         title="Zugtracker"
         icon=<TiVideo />
         map={map}
-        closed={closed}
+        open={open}
+        collapsed={collapsed}
+        onCollapseToggle={c => this.setState({ collapsed: c })}
       >
         {trajectoryElem}
       </MenuItem>
