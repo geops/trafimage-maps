@@ -10,7 +10,7 @@ import './TrackerMenu.scss';
 const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
-  open: PropTypes.bool.isRequired ,
+  closed: PropTypes.bool.isRequired,
 };
 
 class TrackerMenu extends Component {
