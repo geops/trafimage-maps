@@ -5,16 +5,7 @@ import OLGeoJSON from 'ol/format/GeoJSON';
 import { bbox as OLBboxStrategy } from 'ol/loadingstrategy';
 import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
-
-/**
- * Find closest data resolution
- */
-const dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
-function getDataResolution(resolution) {
-  return dataResolutions.reduce((prev, curr) =>
-    Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
-  );
-}
+import { getDataResolution } from '../layerHelper';
 
 const netzkarteStyleCache = {};
 function defaultStyle(feature) {
@@ -75,7 +66,6 @@ function loader(extent, resolution, projection) {
 
   const res = getDataResolution(resolution);
   const proj = projection.getCode();
-
 
   // TODO Eva query string stringify, dann nur ein Objekt verwenden
   let url =
