@@ -6,8 +6,18 @@ import { bbox as OLBboxStrategy } from 'ol/loadingstrategy';
 import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
 
+/**
+ * Find closest data resolution
+ */
+const dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
+function getDataResolution(resolution) {
+  return dataResolutions.reduce((prev, curr) =>
+    Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
+  );
+}
+
 const netzkarteStyleCache = {};
-function style(feature) {
+function defaultStyle(feature) {
   const layer = feature.get('layer');
   if (!netzkarteStyleCache[layer]) {
     let zIndex = layer === 'Zug' ? 1 : 0;
@@ -38,6 +48,17 @@ function style(feature) {
   return netzkarteStyleCache[layer];
 }
 
+function airportStyle(feature, resolution) {
+  const res = getDataResolution(resolution);
+  if (
+    feature.get('resolution') === res &&
+    feature.get('visibility') >= res * 10
+  ) {
+    return defaultStyle(feature, resolution);
+  }
+  return null;
+}
+
 /**
  * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
  * (similar to https://osgeo-org.atlassian.net/browse/GEOS-5996)
@@ -50,20 +71,25 @@ function style(feature) {
  * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
  */
 function loader(extent, resolution, projection) {
-  const vectorSource = this;
-  const dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
+  const { showAirports, vectorSource } = this;
 
-  // find closest data resolution
-  const res = dataResolutions.reduce((prev, curr) =>
-    Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
-  );
-
+  const res = getDataResolution(resolution);
   const proj = projection.getCode();
-  const url =
+
+  let url =
     `${CONF.geojsoncacheUrl}?layer=netzkarte_point&workspace=trafimage&` +
     `bbox=${extent.join(
       ',',
     )},${proj}&resolution=${res}&geoserver=wkp&srsname=${proj}`;
+
+  if (showAirports) {
+    url =
+      `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
+      'request=GetFeature&typeName=trafimage:netzkarte_airport_point&' +
+      `bbox=${extent.join(
+        ',',
+      )},${proj}&srsname=${proj}&outputFormat=application%2Fjson`;
+  }
 
   const xhr = new XMLHttpRequest();
   xhr.open('GET', url);
@@ -89,17 +115,21 @@ function loader(extent, resolution, projection) {
 
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
-    const name = 'Stationen';
-    const key = 'ch.sbb.stationen';
+    let name = 'Stationen';
+    let key = 'ch.sbb.stationen';
+
+    if (options.showAirports) {
+      name = 'Flughäfen';
+      key = 'ch.sbb.flughafen';
+    }
 
     const vectorSource = new OLVectorSource({
       format: new OLGeoJSON(),
       strategy: OLBboxStrategy,
-      loader,
     });
 
     const olLayer = new OLVectorLayer({
-      style: (f, r) => style(f, r),
+      style: options.showAirports ? airportStyle : defaultStyle,
       source: vectorSource,
     });
 
@@ -110,6 +140,10 @@ class NetzkartePointLayer extends VectorLayer {
       olLayer,
       radioGroup: 'stationen',
     });
+
+    this.showAirports = !!options.showAirports;
+    this.vectorSource = vectorSource;
+    vectorSource.setLoader(loader.bind(this));
   }
 
   init(map) {

@@ -168,7 +168,10 @@ export const netzkartePointLayer = new Layer({
   key: 'ch.sbb.stationen.parent',
 });
 
-netzkartePointLayer.setChildren([new NetzkartePointLayer({})]);
+netzkartePointLayer.setChildren([
+  new NetzkartePointLayer({}),
+  new NetzkartePointLayer({ showAirports: true }),
+]);
 
 export default [
   swisstopoSwissImage,
