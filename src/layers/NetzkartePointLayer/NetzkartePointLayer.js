@@ -8,49 +8,6 @@ import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
-const netzkarteStyleCache = {};
-function defaultStyle(feature) {
-  const layer = feature.get('layer');
-  if (!netzkarteStyleCache[layer]) {
-    let zIndex = layer === 'Zug' ? 1 : 0;
-
-    switch (layer) {
-      case 'Zug':
-        zIndex = 2;
-        break;
-      case 'Tram':
-        zIndex = 1;
-        break;
-      default:
-        zIndex = 0;
-    }
-
-    netzkarteStyleCache[layer] = [
-      new OLStyle({
-        zIndex,
-        image: new OLCircle({
-          radius: 10,
-          fill: new OLFill({
-            color: 'rgba(255,255,255,0.01)',
-          }),
-        }),
-      }),
-    ];
-  }
-  return netzkarteStyleCache[layer];
-}
-
-function airportStyle(feature, resolution) {
-  const res = layerHelper.getDataResolution(resolution);
-  if (
-    feature.get('resolution') === res &&
-    feature.get('visibility') >= res * 10
-  ) {
-    return defaultStyle(feature, resolution);
-  }
-  return null;
-}
-
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
     let name = 'Stationen';
@@ -67,7 +24,6 @@ class NetzkartePointLayer extends VectorLayer {
     });
 
     const olLayer = new OLVectorLayer({
-      style: options.showAirports ? airportStyle : defaultStyle,
       source: vectorSource,
     });
 
@@ -79,15 +35,24 @@ class NetzkartePointLayer extends VectorLayer {
       radioGroup: 'stationen',
     });
 
-    this.url = `${CONF.geoserverUrl}?service=WFS&version=1.0.0&request=GetFeature&`;
+    this.airportStyle = this.airportStyle.bind(this);
+    this.defaultStyle = this.defaultStyle.bind(this);
+    this.loader = this.loader.bind(this);
 
+    // Style
+    this.netzkarteStyleCache = {};
+    olLayer.setStyle(
+      options.showAirports ? this.airportStyle : this.defaultStyle,
+    );
+
+    // Url
+    this.url = `${CONF.geoserverUrl}?service=WFS&version=1.0.0&request=GetFeature&`;
     this.urlParams = {
       typeName: options.showAirports
         ? 'trafimage:netzkarte_airport_point'
         : 'trafimage:netzkarte_point',
     };
 
-    this.loader = this.loader.bind(this);
     this.vectorSource = vectorSource;
     vectorSource.setLoader(this.loader);
   }
@@ -102,6 +67,48 @@ class NetzkartePointLayer extends VectorLayer {
     this.map.getView().on('change:resolution', () => {
       olLayer.getSource().clear();
     });
+  }
+
+  airportStyle(feature, resolution) {
+    const res = layerHelper.getDataResolution(resolution);
+    if (
+      feature.get('resolution') === res &&
+      feature.get('visibility') >= res * 10
+    ) {
+      return this.defaultStyle(feature, resolution);
+    }
+    return null;
+  }
+
+  defaultStyle(feature) {
+    const layer = feature.get('layer');
+    if (!this.netzkarteStyleCache[layer]) {
+      let zIndex = layer === 'Zug' ? 1 : 0;
+
+      switch (layer) {
+        case 'Zug':
+          zIndex = 2;
+          break;
+        case 'Tram':
+          zIndex = 1;
+          break;
+        default:
+          zIndex = 0;
+      }
+
+      this.netzkarteStyleCache[layer] = [
+        new OLStyle({
+          zIndex,
+          image: new OLCircle({
+            radius: 10,
+            fill: new OLFill({
+              color: 'rgba(255,255,255,0.01)',
+            }),
+          }),
+        }),
+      ];
+    }
+    return this.netzkarteStyleCache[layer];
   }
 
   /**
