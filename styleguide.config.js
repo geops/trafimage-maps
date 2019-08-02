@@ -7,7 +7,7 @@ module.exports = {
     favicon: 'img/favicon.png',
   },
   assetsDir: 'src/',
-  styleguideDir: 'doc',
+  styleguideDir: 'styleguide-build',
   require: [
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
     'react-app-polyfill/ie11',
