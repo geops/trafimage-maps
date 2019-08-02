@@ -50,63 +50,6 @@ function airportStyle(feature, resolution) {
   return null;
 }
 
-/**
- * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
- * (similar to https://osgeo-org.atlassian.net/browse/GEOS-5996)
- * which results in an Assertion error 36, https://openlayers.org/en/latest/doc/errors/
- *
- * By using a custom the projection in the geojson does not matter
- * (compared to https://github.com/openlayers/openlayers/blob/v5.3.0/src/ol/featureloader.js#L88)
- *
- * This loader function is based on the loader example in
- * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
- */
-function loader(extent, resolution, projection) {
-  const { showAirports, vectorSource } = this;
-
-  const res = getDataResolution(resolution);
-  const proj = projection.getCode();
-
-  // TODO Eva query string stringify, dann nur ein Objekt verwenden
-  let url =
-    `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
-    'request=GetFeature&typeName=trafimage:netzkarte_point&' +
-    `bbox=${extent.join(
-      ',',
-    )},${proj}&srsname=${proj}&viewparams=resolution%3A${res}&` +
-    'outputFormat=application%2Fjson';
-
-  if (showAirports) {
-    url =
-      `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
-      'request=GetFeature&typeName=trafimage:netzkarte_airport_point&' +
-      `bbox=${extent.join(
-        ',',
-      )},${proj}&srsname=${proj}&outputFormat=application%2Fjson`;
-  }
-
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', url);
-
-  function onError() {
-    vectorSource.removeLoadedExtent(extent);
-  }
-  xhr.onerror = onError;
-
-  function onLoad() {
-    if (xhr.status === 200) {
-      vectorSource.addFeatures(
-        vectorSource.getFormat().readFeatures(xhr.responseText),
-      );
-    } else {
-      onError();
-    }
-  }
-  xhr.onload = onLoad;
-
-  xhr.send();
-}
-
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
     let name = 'Stationen';
@@ -137,7 +80,8 @@ class NetzkartePointLayer extends VectorLayer {
 
     this.showAirports = !!options.showAirports;
     this.vectorSource = vectorSource;
-    vectorSource.setLoader(loader.bind(this));
+    this.loader = this.loader.bind(this);
+    vectorSource.setLoader(this.loader);
   }
 
   init(map) {
@@ -150,6 +94,50 @@ class NetzkartePointLayer extends VectorLayer {
     this.map.getView().on('change:resolution', () => {
       olLayer.getSource().clear();
     });
+  }
+
+  /**
+   * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
+   * (similar to https://osgeo-org.atlassian.net/browse/GEOS-5996)
+   * which results in an Assertion error 36, https://openlayers.org/en/latest/doc/errors/
+   *
+   * By using a custom the projection in the geojson does not matter
+   * (compared to https://github.com/openlayers/openlayers/blob/v5.3.0/src/ol/featureloader.js#L88)
+   *
+   * This loader function is based on the loader example in
+   * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
+   */
+  loader(extent, resolution, projection) {
+    const res = getDataResolution(resolution);
+    const proj = projection.getCode();
+
+    let url =
+      `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
+      'request=GetFeature&typeName=trafimage:netzkarte_point&' +
+      `bbox=${extent.join(
+        ',',
+      )},${proj}&srsname=${proj}&viewparams=resolution%3A${res}&` +
+      'outputFormat=application%2Fjson';
+
+    if (this.showAirports) {
+      url =
+        `${CONF.geoserverUrl}?service=WFS&version=1.0.0&` +
+        'request=GetFeature&typeName=trafimage:netzkarte_airport_point&' +
+        `bbox=${extent.join(
+          ',',
+        )},${proj}&srsname=${proj}&outputFormat=application%2Fjson`;
+    }
+
+    fetch(url)
+      .then(data => data.json())
+      .then(data => {
+        this.vectorSource.addFeatures(
+          this.vectorSource.getFormat().readFeatures(data),
+        );
+      })
+      .catch(() => {
+        this.vectorSource.removeLoadedExtent(extent);
+      });
   }
 }
 
