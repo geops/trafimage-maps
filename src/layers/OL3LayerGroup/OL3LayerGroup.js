@@ -1,0 +1,3 @@
+class OL3LayerGroup {
+
+}
