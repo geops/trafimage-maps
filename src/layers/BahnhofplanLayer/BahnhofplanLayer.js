@@ -5,7 +5,7 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Icon, Circle, Fill } from 'ol/style';
 import bahnhofplanLayerIcon from '../../img/bahnhofplanLayerIcon.png';
 import CONF from '../../config/appConfig';
-import { getDataResolution } from '../layerHelper';
+import layerHelper from '../layerHelper';
 
 class BahnhofplanLayer extends VectorLayer {
   constructor(options = {}) {
@@ -53,7 +53,7 @@ class BahnhofplanLayer extends VectorLayer {
   style(feature, resolution) {
     const vis = feature.get('visibility');
     const style = [this.iconStyle];
-    const res = getDataResolution(resolution);
+    const res = layerHelper.getDataResolution(resolution);
 
     if (vis < resolution * 10 || feature.get('resolution') !== res) {
       return null;

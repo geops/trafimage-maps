@@ -5,7 +5,7 @@ import OLGeoJSON from 'ol/format/GeoJSON';
 import { bbox as OLBboxStrategy } from 'ol/loadingstrategy';
 import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
-import { getDataResolution } from '../layerHelper';
+import layerHelper from '../layerHelper';
 
 const netzkarteStyleCache = {};
 function defaultStyle(feature) {
@@ -40,7 +40,7 @@ function defaultStyle(feature) {
 }
 
 function airportStyle(feature, resolution) {
-  const res = getDataResolution(resolution);
+  const res = layerHelper.getDataResolution(resolution);
   if (
     feature.get('resolution') === res &&
     feature.get('visibility') >= res * 10
@@ -108,7 +108,7 @@ class NetzkartePointLayer extends VectorLayer {
    * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
    */
   loader(extent, resolution, projection) {
-    const res = getDataResolution(resolution);
+    const res = layerHelper.getDataResolution(resolution);
     const proj = projection.getCode();
 
     let url =
