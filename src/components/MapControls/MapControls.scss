@@ -1,0 +1,31 @@
+.wkp-map-controls {
+  position: absolute;
+  right: 15px;
+  top: 110px
+}
+
+.tm-app.tm-w-m,
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-map-controls {
+    top: 60px
+  }
+}
+
+.wkp-zoom-in,
+.wkp-zoom-out,
+.wkp-geolocation,
+.wkp-fit-extent {
+  margin: 10px 0;
+  background: #003d85;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
