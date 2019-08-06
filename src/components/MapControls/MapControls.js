@@ -15,35 +15,33 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const MapControls = ({ map, t }) => {
-  return (
-    <div className="wkp-map-controls">
-      <Zoom
-        map={map}
-        zoomSlider
-        zoomInTitle={t('Hineinzoomen')}
-        zoomOnTitle={t('Rauszoomen')}
-        zoomInClassName="wkp-zoom-in"
-        zoomOutClassName="wkp-zoom-out"
-      />
-      <Geolocation
-        title={t('Lokalisieren')}
-        className="wkp-geolocation"
-        map={map}
-        noCenterAfterDrag
-        colorOrStyleFunc={[0, 61, 133]}
-      />
-      <FitExtent
-        map={map}
-        title={t('Ganze Schweiz')}
-        extent={CONF.swissExtent}
-        className="wkp-fit-extent"
-      >
-        {<img src={swissbounds} alt={t('Ganze Schweiz')} />}
-      </FitExtent>
-    </div>
-  );
-};
+const MapControls = ({ map, t }) => (
+  <div className="wkp-map-controls">
+    <Zoom
+      map={map}
+      zoomSlider
+      zoomInTitle={t('Hineinzoomen')}
+      zoomOnTitle={t('Rauszoomen')}
+      zoomInClassName="wkp-zoom-in"
+      zoomOutClassName="wkp-zoom-out"
+    />
+    <Geolocation
+      title={t('Lokalisieren')}
+      className="wkp-geolocation"
+      map={map}
+      noCenterAfterDrag
+      colorOrStyleFunc={[0, 61, 133]}
+    />
+    <FitExtent
+      map={map}
+      title={t('Ganze Schweiz')}
+      extent={CONF.swissExtent}
+      className="wkp-fit-extent"
+    >
+      {<img src={swissbounds} alt={t('Ganze Schweiz')} />}
+    </FitExtent>
+  </div>
+);
 
 MapControls.propTypes = propTypes;
 
