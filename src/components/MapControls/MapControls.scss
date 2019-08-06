@@ -10,6 +10,11 @@
   .wkp-map-controls {
     top: 60px;
 
+    .wkp-zoom-in,
+    .wkp-zoom-out {
+      margin: 20px 0;
+    }
+
     .wkp-zoomslider-wrapper {
       display: none;
     }

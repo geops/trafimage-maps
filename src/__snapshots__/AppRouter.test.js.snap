@@ -2,7 +2,7 @@
 
 exports[`AppRouter should match snapshot 1`] = `
 <div
-  className="tm-app header footer menu permalink popup"
+  className="tm-app header footer menu permalink mapControls popup"
 >
   <div
     className="tm-map"
@@ -393,5 +393,118 @@ exports[`AppRouter should match snapshot 1`] = `
     </div>
   </div>
   <div />
+  <div>
+    <div
+      className="wkp-map-controls"
+    >
+      <div
+        className="tm-zooms-bar"
+      >
+        <div
+          aria-label="Hineinzoomen"
+          className="wkp-zoom-in"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Hineinzoomen"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </div>
+        <div
+          className="wkp-zoomslider-wrapper"
+        />
+        <div
+          aria-label="Zoom out"
+          className="wkp-zoom-out"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Zoom out"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        aria-label="Lokalisieren"
+        className="wkp-geolocation "
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+        title="Lokalisieren"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"
+          />
+        </svg>
+      </div>
+      <div
+        aria-label="Ganze Schweiz"
+        className="wkp-fit-extent"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+        title="Ganze Schweiz"
+      >
+        <img
+          alt="Ganze Schweiz"
+          src="swissbounds.png"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 `;
