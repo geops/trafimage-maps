@@ -1,24 +1,7 @@
 .wkp-map-controls {
   position: absolute;
   right: 15px;
-  top: 110px
-}
-
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-map-controls {
-    top: 60px;
-
-    .wkp-zoom-in,
-    .wkp-zoom-out {
-      margin: 20px 0;
-    }
-
-    .wkp-zoomslider-wrapper {
-      display: none;
-    }
-  }
+  top: 110px;
 }
 
 .wkp-zoom-in,
@@ -42,4 +25,21 @@
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;
+}
+
+.tm-app.tm-w-m,
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-map-controls {
+    top: 60px;
+
+    .wkp-zoom-in,
+    .wkp-zoom-out {
+      margin: 20px 0;
+    }
+
+    .wkp-zoomslider-wrapper {
+      display: none;
+    }
+  }
 }
