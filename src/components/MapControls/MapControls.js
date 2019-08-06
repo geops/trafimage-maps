@@ -20,7 +20,9 @@ const MapControls = ({ map, t }) => {
     <div className="wkp-map-controls">
       <Zoom
         map={map}
-        className="wkp-zooms"
+        zoomSlider
+        zoomInTitle={t('Hineinzoomen')}
+        zoomOnTitle={t('Rauszoomen')}
         zoomInClassName="wkp-zoom-in"
         zoomOutClassName="wkp-zoom-out"
       />

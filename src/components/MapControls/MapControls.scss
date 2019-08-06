@@ -8,7 +8,11 @@
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
   .wkp-map-controls {
-    top: 60px
+    top: 60px;
+
+    .wkp-zoomslider-wrapper {
+      display: none;
+    }
   }
 }
 
@@ -28,4 +32,9 @@
   align-items: center;
   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.wkp-geolocation,
+.wkp-fit-extent {
+  margin: 20px 0;
 }
