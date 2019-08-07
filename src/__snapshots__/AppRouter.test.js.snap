@@ -430,16 +430,16 @@ exports[`AppRouter should match snapshot 1`] = `
           </svg>
         </div>
         <div
-          className="wkp-zoomslider-wrapper"
+          className="tm-zoomslider-wrapper"
         />
         <div
-          aria-label="Zoom out"
+          aria-label="Rauszoomen"
           className="wkp-zoom-out"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
-          title="Zoom out"
+          title="Rauszoomen"
         >
           <svg
             fill="currentColor"
