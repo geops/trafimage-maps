@@ -1,0 +1,37 @@
+# Define base docker image
+image: registry.geops.de/build/stretch-node:latest
+
+before_script:
+  - eval $(ssh-agent -s)
+
+# Define the stages of the build which will be run in sequence
+stages:
+  - build
+  - deploy
+
+# Define folders that are being cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+
+build_maps:
+  stage: build
+  script:
+    - yarn install
+    - yarn lint
+    - yarn test
+    - yarn build
+  artifacts:
+    when: on_success
+    paths:
+      - build/
+
+deploy_dev:
+  stage: deploy
+  dependencies:
+    - build_maps
+  script:
+    - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -av --delete build/ trafimage-maps-dev@maps2.dev.trafimage.geops.ch:/var/www/trafimage-maps-dev/
+  when: manual
