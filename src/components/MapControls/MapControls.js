@@ -21,7 +21,7 @@ const MapControls = ({ map, t }) => (
       map={map}
       zoomSlider
       zoomInTitle={t('Hineinzoomen')}
-      zoomOnTitle={t('Rauszoomen')}
+      zoomOutTitle={t('Rauszoomen')}
       zoomInClassName="wkp-zoom-in"
       zoomOutClassName="wkp-zoom-out"
     />
