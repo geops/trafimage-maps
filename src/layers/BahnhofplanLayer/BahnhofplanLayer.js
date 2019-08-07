@@ -6,6 +6,10 @@ import { Style, Icon, Circle, Fill } from 'ol/style';
 import bahnhofplanLayerIcon from '../../img/bahnhofplanLayerIcon.png';
 import CONF from '../../config/appConfig';
 
+/**
+ * Layer for visualizing fare networks.
+ * @class BahnhofplanLayer
+ */
 class BahnhofplanLayer extends VectorLayer {
   constructor(options = {}) {
     let name = 'Interaktiver Bahnhofplan';
@@ -79,6 +83,13 @@ class BahnhofplanLayer extends VectorLayer {
     return style;
   }
 
+  /**
+   * Set visible
+   * @param {boolean} visible
+   * @param {boolean} stopPropagationDown Stops propagation down.
+   * @param {boolean} stopPropagationUp Stops propagation up.
+   * @param {boolean} stopPropagationSiblings Stops propagation toward siblings.
+   */
   setVisible(
     visible,
     stopPropagationDown = false,

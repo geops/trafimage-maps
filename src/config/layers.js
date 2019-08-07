@@ -7,6 +7,7 @@ import Layer from 'react-spatial/Layer';
 import TrackerLayer from 'react-public-transport/components/Tracker/TrackerLayer';
 import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
+import CONF from './appConfig';
 
 proj4.defs(
   'EPSG:21781',
@@ -78,7 +79,7 @@ export const netzkarteLayer = new TrafimageRasterLayer({
 });
 
 export const swisstopoSwissImage = new Layer({
-  name: 'Swisstopo Swissimage',
+  name: 'Netzkarte Luftbild',
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
   visible: false,
@@ -86,7 +87,53 @@ export const swisstopoSwissImage = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        'https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.swissimage-product/' +
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.swissimage/` +
+        'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
+      matrixSet: 'webmercator',
+      projection: 'EPSG:3857',
+      requestEncoding: 'REST',
+      tileGrid: new WMTSTileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
+  }),
+});
+
+export const swisstopoLandeskarte = new Layer({
+  name: 'Landeskarte',
+  key: 'ch.sbb.netzkarte.landeskarte',
+  copyright: 'swisstopo (5704003351)',
+  visible: false,
+  isBaseLayer: true,
+  olLayer: new TileLayer({
+    source: new WMTSSource({
+      url:
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-farbe/` +
+        'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
+      matrixSet: 'webmercator',
+      projection: 'EPSG:3857',
+      requestEncoding: 'REST',
+      tileGrid: new WMTSTileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
+  }),
+});
+
+export const swisstopoLandeskarteGrau = new Layer({
+  name: 'Landeskarte (grau)',
+  key: 'ch.sbb.netzkarte.landeskarte.grau',
+  copyright: 'swisstopo (5704003351)',
+  visible: false,
+  isBaseLayer: true,
+  olLayer: new TileLayer({
+    source: new WMTSSource({
+      url:
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-grau/` +
         'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
@@ -112,4 +159,9 @@ bahnhofplaene.setChildren([
 
 export const tracker = new TrackerLayer();
 
-export default [swisstopoSwissImage, netzkarteLayer];
+export default [
+  swisstopoSwissImage,
+  swisstopoLandeskarte,
+  swisstopoLandeskarteGrau,
+  netzkarteLayer,
+];

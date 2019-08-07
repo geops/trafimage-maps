@@ -94,7 +94,7 @@ class ZoneLayer extends VectorLayer {
 
     this.apiKey = options.apiKey;
 
-    this.url = options.url || 'https://geops.cloud.tyk.io/casa-fare-network';
+    this.url = options.url || 'https://api.geops.io/casa-fare-network';
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
@@ -117,13 +117,21 @@ class ZoneLayer extends VectorLayer {
     });
   }
 
-  fetchZones(params = {}) {
-    if (this.abortController) {
+  /**
+   * Clears the layer.
+   */
+  clear() {
+    if (this.abortController && !this.abortController.signal.aborted) {
       this.abortController.abort();
     }
 
-    this.abortController = new AbortController();
     this.olLayer.getSource().clear();
+  }
+
+  fetchZones(params = {}) {
+    this.clear();
+
+    this.abortController = new AbortController();
 
     const format = new GeoJSON();
     const urlParams = {
@@ -142,6 +150,10 @@ class ZoneLayer extends VectorLayer {
         this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
         return features;
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.info('Request cancelled');
       });
   }
 
@@ -162,6 +174,8 @@ class ZoneLayer extends VectorLayer {
    * @param {Object[]} config[].zones Array of zones to select.
    * @param {number} [config[].zones[].zoneCode] Code of zone to select.
    * @param {string} [config[].zones[].zoneName] Name of zone to select.
+   * @param {boolean} [config[].zones[].isSelected] If true, the zone
+   *   is initially selected.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   loadZones(config) {
@@ -181,7 +195,24 @@ class ZoneLayer extends VectorLayer {
       }
     }
 
-    return this.fetchZones({ filter: qryParams.join(',') });
+    return this.fetchZones({ filter: qryParams.join(',') }).then(features => {
+      // Preselect features
+      for (let i = 0; i < features.length; i += 1) {
+        const zoneCode = features[i].get('zone');
+        const partnerCode = features[i].get('partner_code');
+        const partner = config.find(c => c.partnerCode === partnerCode);
+
+        if (partner) {
+          const zone = partner.zones.find(
+            z => `${z.zoneCode}` === `${zoneCode}`,
+          );
+
+          if (zone && zone.isSelected) {
+            this.selectedZones.push(features[i]);
+          }
+        }
+      }
+    });
   }
 
   internalZoneStyleFunction(feature, resolution) {

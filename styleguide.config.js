@@ -1,46 +1,34 @@
+const path = require('path');
 const { version } = require('./package.json');
 
 module.exports = {
-  title: `Trafimage Webkartenportal ${version}`,
+  version,
+  template: {
+    favicon: 'img/favicon.png',
+  },
+  assetsDir: 'src/',
+  styleguideDir: 'styleguide-build',
   require: [
+    path.join(__dirname, 'src/styleguidist/styleguidist.css'),
     'react-app-polyfill/ie11',
     'react-app-polyfill/stable',
     'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
   ],
-  ribbon: {
-    url: 'https://github.com/geops/trafimage-maps',
-    text: 'Fork me on GitHub',
-  },
   sections: [
     {
       name: '',
       context: 'README.md',
     },
     {
-      name: 'Components',
-      components: ['src/components/TrafimageMaps/[A-Z]*.js'],
-      exampleMode: 'expand',
-      usageMode: 'collapse',
-    },
-    {
       name: 'Applications',
       sections: [
         {
+          name: 'Trafimage Kartenportal',
+          content: 'src/components/TrafimageMaps/README.md',
+        },
+        {
           name: 'Casa',
           content: 'src/apps/Casa/README.md',
-        },
-      ],
-    },
-    {
-      name: 'Layers',
-      sections: [
-        {
-          name: 'RouteLayer',
-          content: 'src/layers/RouteLayer/README.md',
-        },
-        {
-          name: 'ZoneLayer',
-          content: 'src/layers/ZoneLayer/README.md',
         },
       ],
     },
@@ -91,5 +79,18 @@ module.exports = {
         },
       ],
     },
+  },
+  styles: {
+    StyleGuide: {
+      '@global body': {
+        overflowY: 'hidden',
+        overflowX: 'hidden',
+      },
+    },
+  },
+  showSidebar: true,
+  styleguideComponents: {
+    ComponentsList: path.join(__dirname, 'src/styleguidist/ComponentsList'),
+    StyleGuideRenderer: path.join(__dirname, 'src/styleguidist/StyleGuide'),
   },
 };

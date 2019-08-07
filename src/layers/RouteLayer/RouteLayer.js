@@ -46,10 +46,14 @@ class RouteLayer extends VectorLayer {
     };
 
     // Route url
-    this.url = options.url || 'https://geops.cloud.tyk.io/routing';
+    this.url = options.url || 'https://api.geops.io/routing';
   }
 
   fetchRouteForMot(viaPoints, mot) {
+    this.clear();
+
+    this.abortController = new AbortController();
+
     const via = viaPoints.map(v => `!${v}`);
     const urlParams = {
       key: this.apiKey || '',
@@ -63,14 +67,17 @@ class RouteLayer extends VectorLayer {
       featureProjection: this.projection,
     });
 
-    return fetch(url)
+    return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
         features.forEach(f => f.set('mot', mot));
-        this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
         return features;
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.info('Request cancelled');
       });
   }
 
@@ -126,6 +133,18 @@ class RouteLayer extends VectorLayer {
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
     this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
+  }
+
+  /**
+   * Clears the layer.
+   */
+  clear() {
+    if (this.abortController && !this.abortController.signal.aborted) {
+      this.abortController.abort();
+      this.abortController = null;
+    }
+
+    this.olLayer.getSource().clear();
   }
 }
 
