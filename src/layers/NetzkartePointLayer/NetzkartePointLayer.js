@@ -20,7 +20,7 @@ class NetzkartePointLayer extends VectorLayer {
 
     const vectorSource = new OLVectorSource({
       format: new OLGeoJSON(),
-      ...(options.useBboxStrategy && { strategy: OLBboxStrategy }),
+      ...(options.useBboxStrategy ? { strategy: OLBboxStrategy } : {}),
     });
 
     const olLayer = new OLVectorLayer({
@@ -32,7 +32,7 @@ class NetzkartePointLayer extends VectorLayer {
       name,
       key,
       olLayer,
-      radioGroup: 'stationen',
+      radioGroup: 'stations',
     });
 
     // Options
@@ -40,8 +40,6 @@ class NetzkartePointLayer extends VectorLayer {
     this.useBboxStrategy = !!options.useBboxStrategy;
 
     // Bindings
-    this.airportStyle = this.airportStyle.bind(this);
-    this.defaultStyle = this.defaultStyle.bind(this);
     this.loader = this.loader.bind(this);
 
     // Style
@@ -51,31 +49,32 @@ class NetzkartePointLayer extends VectorLayer {
     );
 
     // Url
-    this.url = `${CONF.geoserverUrl}?service=WFS&version=1.0.0&request=GetFeature&`;
+    this.url = `${CONF.geoserverUrl}?`;
     this.urlParams = {
+      service: 'WFS',
+      version: '1.0.0',
+      request: 'GetFeature',
       typeName: options.showAirports
         ? 'trafimage:netzkarte_airport_point'
         : 'trafimage:netzkarte_point',
     };
 
     // Set loader after binding
-    this.vectorSource = vectorSource;
     vectorSource.setLoader(this.loader);
   }
 
   init(map) {
     super.init(map);
     this.map = map;
-    const { olLayer } = this;
 
     // Clear the layer when the resolution changes
     // as the WFS is resolution dependent
     this.map.getView().on('change:resolution', () => {
-      olLayer.getSource().clear();
+      this.olLayer.getSource().clear();
     });
   }
 
-  airportStyle(feature, resolution) {
+  airportStyle = (feature, resolution) => {
     const res = layerHelper.getDataResolution(resolution);
     if (
       feature.get('resolution') === res &&
@@ -84,9 +83,9 @@ class NetzkartePointLayer extends VectorLayer {
       return this.defaultStyle(feature, resolution);
     }
     return null;
-  }
+  };
 
-  defaultStyle(feature) {
+  defaultStyle = feature => {
     const layer = feature.get('layer');
     if (!this.netzkarteStyleCache[layer]) {
       let zIndex = layer === 'Zug' ? 1 : 0;
@@ -115,7 +114,7 @@ class NetzkartePointLayer extends VectorLayer {
       ];
     }
     return this.netzkarteStyleCache[layer];
-  }
+  };
 
   /**
    * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
@@ -134,9 +133,9 @@ class NetzkartePointLayer extends VectorLayer {
 
     const urlParams = {
       ...this.urlParams,
-      ...(this.useBboxStrategy && { bbox: `${extent.join(',')},${proj}` }),
+      ...(this.useBboxStrategy ? { bbox: `${extent.join(',')},${proj}` } : {}),
       srsname: proj,
-      ...(!this.showAirports && { viewparams: `resolution:${res}` }),
+      ...(!this.showAirports ? { viewparams: `resolution:${res}` } : {}),
       outputFormat: 'application/json',
     };
 
@@ -145,12 +144,15 @@ class NetzkartePointLayer extends VectorLayer {
     fetch(url)
       .then(data => data.json())
       .then(data => {
-        this.vectorSource.addFeatures(
-          this.vectorSource.getFormat().readFeatures(data),
+        this.olLayer.getSource().addFeatures(
+          this.olLayer
+            .getSource()
+            .getFormat()
+            .readFeatures(data),
         );
       })
       .catch(() => {
-        this.vectorSource.removeLoadedExtent(extent);
+        this.olLayer.getSource().removeLoadedExtent(extent);
       });
   }
 }
