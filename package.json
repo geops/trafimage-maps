@@ -108,7 +108,8 @@
     "src/**/*.js": [
       "eslint --fix",
       "prettier --write",
-      "git add"
+      "git add",
+      "yarn test --bail --findRelatedTests"
     ],
     "src/**/*.{css,scss}": ["stylelint --fix", "git add"]
   },
