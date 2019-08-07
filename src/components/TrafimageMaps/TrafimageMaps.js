@@ -1,3 +1,8 @@
+// import polyfills if application is not loaded via index.js
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
@@ -16,8 +21,8 @@ import Menu from '../Menu';
 import Header from '../Header';
 import Footer from '../Footer';
 import TopicLoader from '../TopicLoader';
-
-import { getStore } from '../../model/store';
+import Popup from '../Popup';
+import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
@@ -26,7 +31,12 @@ const propTypes = {
   /**
    * Name of the topic to display.
    */
-  topic: PropTypes.string.isRequired,
+  activeTopicKey: PropTypes.string,
+
+  /**
+   * Array of topics from ./src/config/topics
+   */
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   /**
    * Additional elements.
@@ -41,6 +51,7 @@ const propTypes = {
     footer: PropTypes.bool,
     menu: PropTypes.bool,
     permaLink: PropTypes.bool,
+    popup: PropTypes.bool,
     mapControls: PropTypes.bool,
     baseLayerToggler: PropTypes.bool,
   }),
@@ -54,6 +65,14 @@ const propTypes = {
    * List of layers.
    */
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
+
+  /**
+   * Mapping of layer keys and Popup component names.
+   * Component names are names of files from the folder `src/components/Popup`
+   * without the `.js` extension.
+   * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
+   */
+  popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
    * Projection used for the map.
@@ -73,23 +92,38 @@ const propTypes = {
    * Initial zoom level.
    */
   zoom: PropTypes.number,
+
+  /**
+   * API key for using geOps services.
+   */
+  apiKey: PropTypes.string,
+
+  /**
+   * React router history.
+   */
+  history: PropTypes.shape(),
 };
 
 const defaultProps = {
+  activeTopicKey: null,
   children: null,
-  center: [922748, 5911640],
-  zoom: 9,
+  center: [925472, 5950684],
+  zoom: 14,
   elements: {
     header: false,
     footer: false,
     menu: false,
     permalink: false,
+    popup: false,
     mapControls: false,
     baseLayerToggler: false,
   },
   baseLayers: null,
+  popupComponents: null,
   projection: 'EPSG:3857',
   layers: null,
+  apiKey: null,
+  history: null,
 };
 
 class TrafimageMaps extends Component {
@@ -113,17 +147,28 @@ class TrafimageMaps extends Component {
       children,
       elements,
       layers,
+      popupComponents,
       projection,
-      topic,
+      topics,
+      activeTopicKey,
+      apiKey,
+      history,
       center,
       zoom,
     } = this.props;
 
     const defaultElements = {
       header: <Header />,
+      popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: <Menu layerService={this.layerService} />,
-      permalink: <Permalink map={this.map} />,
+      permalink: (
+        <Permalink
+          map={this.map}
+          history={history}
+          layerService={this.layerService}
+        />
+      ),
       mapControls: <Zoom map={this.map} />,
       baseLayerToggler: (
         <BaseLayerToggler layerService={this.layerService} map={this.map} />
@@ -134,15 +179,27 @@ class TrafimageMaps extends Component {
       elements[k] ? <div key={k}>{v}</div> : null,
     );
 
+    // Classes for active components used for conditional styling
+    const elementClasses = Object.keys(elements)
+      .filter(k => elements[k])
+      .map(k => k);
+
+    /**
+     * If the application runs standalone, we want to use a consistent store.
+     * However when running in Stylegudist, every application needs it own store
+     */
+    const appStore = history ? store : getStore();
+
     return (
-      <Provider store={getStore()}>
-        <div className="tm-app">
+      <Provider store={appStore}>
+        <div className={`tm-app ${elementClasses.join(' ')}`}>
           <TopicLoader
-            map={this.map}
             layerService={this.layerService}
             baseLayers={baseLayers}
             layers={layers}
-            topic={topic}
+            topics={topics}
+            activeTopicKey={activeTopicKey}
+            apiKey={apiKey}
           />
           <ResizeHandler observe={this} />
           <Map

@@ -1,10 +1,13 @@
-# geOps react-spatial Starter
+# trafimage-maps
 
-[![npm](https://img.shields.io/npm/v/%40geops%2Freact-spatial-starter.svg)](https://www.npmjs.com/package/%40geops%2Freact-spatial-starter)
+[![npm](https://img.shields.io/npm/v/trafimage-maps.svg)](https://www.npmjs.com/package/trafimage-maps)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
-This repo contains the code of the Trafimage Map Portal and other applications build on it.
+This repo contains the code of the Trafimage Map Portal by Swiss Federal Railways SBB and other applications build on it.
 Components are based on [react-spatial](https://github.com/geops/react-spatial).
+
+
+See [demo](https://trafimage-maps.geops.ch).
 
 
 ## Technologies
@@ -51,5 +54,3 @@ Install
 ```bash
 npm install <this-app-package>
 ```
-
-TODO: Link styleguidist here.

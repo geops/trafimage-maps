@@ -36,47 +36,53 @@ const numberFormat = coords => {
 
 const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
   <RSFooter className="wkp-footer">
-    <Copyright layerService={layerService} />
-    <MousePosition
-      coordinatePosition="left"
-      map={map}
-      projections={[
-        {
-          label: 'CH1093 / LV03',
-          value: 'EPSG:21781',
-          format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-        },
-        {
-          label: 'CH1093+ / LV95',
-          value: 'EPSG:2056',
-          format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-        },
-        {
-          label: 'Web Mercator',
-          value: 'EPSG:3857',
-          format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-        },
-        {
-          label: 'WSG 85',
-          value: 'EPSG:4324',
-          format: c => `${t('Koordinaten')}: ${c}`,
-        },
-      ]}
-    />
-    <ScaleLine map={map} />
-    <Select
-      className="wkp-language-select"
-      options={[
-        { label: 'DE', value: 'de' },
-        { label: 'FR', value: 'fr' },
-        { label: 'IT', value: 'it' },
-        { label: 'EN', value: 'en' },
-      ]}
-      value={language}
-      onChange={(e, opt) => {
-        dispatchSetLanguage(opt.value);
-      }}
-    />
+    <div className="wkp-footer-left">
+      Geodaten&nbsp;
+      <Copyright layerService={layerService} />
+    </div>
+
+    <div className="wkp-footer-right">
+      <MousePosition
+        coordinatePosition="left"
+        map={map}
+        projections={[
+          {
+            label: 'CH1093 / LV03',
+            value: 'EPSG:21781',
+            format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
+          },
+          {
+            label: 'CH1093+ / LV95',
+            value: 'EPSG:2056',
+            format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
+          },
+          {
+            label: 'Web Mercator',
+            value: 'EPSG:3857',
+            format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
+          },
+          {
+            label: 'WGS 84',
+            value: 'EPSG:4324',
+            format: c => `${t('Koordinaten')}: ${c}`,
+          },
+        ]}
+      />
+      <ScaleLine map={map} />
+      <Select
+        className="wkp-language-select"
+        options={[
+          { label: 'DE', value: 'de' },
+          { label: 'FR', value: 'fr' },
+          { label: 'IT', value: 'it' },
+          { label: 'EN', value: 'en' },
+        ]}
+        value={language}
+        onChange={(e, opt) => {
+          dispatchSetLanguage(opt.value);
+        }}
+      />
+    </div>
   </RSFooter>
 );
 

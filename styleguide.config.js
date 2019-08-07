@@ -1,26 +1,31 @@
+const path = require('path');
 const { version } = require('./package.json');
 
 module.exports = {
-  title: `Trafimage Webkartenportal ${version}`,
-  require: ['react-app-polyfill/ie11', 'react-app-polyfill/stable'],
-  ribbon: {
-    url: 'https://github.com/geops/trafimage-maps',
-    text: 'Fork me on GitHub',
+  version,
+  template: {
+    favicon: 'img/favicon.png',
   },
+  assetsDir: 'src/',
+  styleguideDir: 'styleguide-build',
+  require: [
+    path.join(__dirname, 'src/styleguidist/styleguidist.css'),
+    'react-app-polyfill/ie11',
+    'react-app-polyfill/stable',
+    'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
+  ],
   sections: [
     {
       name: '',
       context: 'README.md',
     },
     {
-      name: 'Components',
-      components: ['src/components/TrafimageMaps/[A-Z]*.js'],
-      exampleMode: 'expand',
-      usageMode: 'collapse',
-    },
-    {
       name: 'Applications',
       sections: [
+        {
+          name: 'Trafimage Kartenportal',
+          content: 'src/components/TrafimageMaps/README.md',
+        },
         {
           name: 'Casa',
           content: 'src/apps/Casa/README.md',
@@ -28,15 +33,11 @@ module.exports = {
       ],
     },
     {
-      name: 'Layers',
+      name: 'Popups',
       sections: [
         {
-          name: 'RouteLayer',
-          content: 'src/layers/RouteLayer/README.md',
-        },
-        {
-          name: 'VerbundLayer',
-          content: 'src/layers/VerbundLayer/README.md',
+          name: 'BahnhofplanPopup',
+          content: 'src/popups/BahnhofplanPopup/README.md',
         },
       ],
     },
@@ -44,6 +45,15 @@ module.exports = {
   webpackConfig: {
     module: {
       rules: [
+        // Babel loader, will use your project’s .babelrc
+        // Transpile node dependencies, node deps are often not transpiled for IE11
+        {
+          test: [
+            /\/node_modules\/(regexpu-core|unicode-.*|acorn-.*|query-string|strict-uri-encode)/,
+            /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker)/,
+          ],
+          loader: 'babel-loader',
+        },
         // Babel loader, will use your project’s .babelrc
         {
           test: /\.jsx?$/,
@@ -69,5 +79,18 @@ module.exports = {
         },
       ],
     },
+  },
+  styles: {
+    StyleGuide: {
+      '@global body': {
+        overflowY: 'hidden',
+        overflowX: 'hidden',
+      },
+    },
+  },
+  showSidebar: true,
+  styleguideComponents: {
+    ComponentsList: path.join(__dirname, 'src/styleguidist/ComponentsList'),
+    StyleGuideRenderer: path.join(__dirname, 'src/styleguidist/StyleGuide'),
   },
 };

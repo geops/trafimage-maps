@@ -1,11 +1,12 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
+import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './i18n';
 import AppRouter from './AppRouter';
-import CONF from './config';
+import CONF from './config/appConfig';
 import registerServiceWorker from './serviceWorker';
 
 if (CONF.pwaActive) {

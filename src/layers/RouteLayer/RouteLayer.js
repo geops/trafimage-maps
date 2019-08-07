@@ -1,14 +1,16 @@
-import VectorLayer from 'ol/layer/Vector';
+import qs from 'querystring';
+import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Stroke as StrokeStyle } from 'ol/style';
-import Layer from 'react-spatial/Layer';
+import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
  * Layer for visualizing fare networks.
  * @class RouteLayer
+ * @extends TrafimageLayer
  * @param {Object} [options] Layer options.
- * @param {string} options.token Access token for geOps services.
+ * @param {string} options.apiKey Access key for geOps services.
  * @param {string} [options.name] Layer name.
  * @param {string} [options.url] Url of the geOps route backend.
  * @param {boolean} [options.visible] Visibility of the layer.
@@ -16,11 +18,11 @@ import Layer from 'react-spatial/Layer';
  * @param {string} [projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  */
-class RouteLayer extends Layer {
+class RouteLayer extends VectorLayer {
   constructor(options = {}) {
     super({
       name: options.name || 'Routen',
-      olLayer: new VectorLayer({
+      olLayer: new OLVectorLayer({
         style: f => this.routeStyle(f),
         source: new VectorSource(),
       }),
@@ -32,8 +34,8 @@ class RouteLayer extends Layer {
     // Cache for storing route styles
     this.routeStyleCache = {};
 
-    // API token
-    this.token = options.token;
+    // API key
+    this.apiKey = options.apiKey;
 
     // Colors for differtent modes of transportation
     this.motColors = {
@@ -44,26 +46,38 @@ class RouteLayer extends Layer {
     };
 
     // Route url
-    this.url =
-      (options || {}).url ||
-      `https://geops.cloud.tyk.io/routing?token=${this.token}`;
+    this.url = options.url || 'https://api.geops.io/routing';
   }
 
   fetchRouteForMot(viaPoints, mot) {
+    this.clear();
+
+    this.abortController = new AbortController();
+
     const via = viaPoints.map(v => `!${v}`);
-    const url = `${this.url}&via=${via.join(';')}&mot=${mot}`;
+    const urlParams = {
+      key: this.apiKey || '',
+      via: via.join(';'),
+      mot,
+    };
+
+    const url = `${this.url}?${qs.stringify(urlParams)}`;
     const format = new GeoJSON({
       dataProjection: 'EPSG:4326',
       featureProjection: this.projection,
     });
 
-    fetch(url)
+    return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
         features.forEach(f => f.set('mot', mot));
-        this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
+        return features;
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.info('Request cancelled');
       });
   }
 
@@ -83,17 +97,16 @@ class RouteLayer extends Layer {
   }
 
   /**
-   * Generate the route for a given configuration.
+   * Load routes based on a given configuration.
    * @param {Object[]} sequences Route sequences.
    * @param {number} sequences[].uicFrom UIC number of start station.
    * @param {number} sequences[].uicTo UIC number of end station.
    * @param {string} sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
-   * @returns {Promise<Feature>} an OpenLayers feature.
-   *   See https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html.
+   * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  getRoute(sequences) {
+  loadRoutes(sequences) {
     let via = [];
     let mot;
 
@@ -109,12 +122,29 @@ class RouteLayer extends Layer {
       }
     }
 
-    this.fetchRouteForMot(via, mot);
+    return this.fetchRouteForMot(via, mot);
   }
 
-  init(map) {
-    super.init(map);
-    this.map = map;
+  /**
+   * Zoom to route.
+   * @param {Object} [fitOptions] Options,
+   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   */
+  zoomToRoute(options) {
+    const fitOptions = { padding: [20, 20, 20, 20], ...options };
+    this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
+  }
+
+  /**
+   * Clears the layer.
+   */
+  clear() {
+    if (this.abortController && !this.abortController.signal.aborted) {
+      this.abortController.abort();
+      this.abortController = null;
+    }
+
+    this.olLayer.getSource().clear();
   }
 }
 

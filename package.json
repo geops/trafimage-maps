@@ -1,18 +1,20 @@
 {
   "name": "trafimage-maps",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.3.0",
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "abortcontroller-polyfill": "^1.2.3",
+    "color": "^3.1.2",
+    "geops-docjs-template": "^1.0.0",
     "i18next": "^15.0.4",
     "i18next-browser-languagedetector": "^3.0.1",
     "i18next-xhr-backend": "^2.0.1",
     "jsts": "^2.0.3",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
-    "ol": "^5.3.0",
+    "ol": "^5.3.3",
     "ole": "^0.0.4-beta.9",
     "proj4": "^2.5.0",
     "prop-types": "^15.6.2",
@@ -26,7 +28,8 @@
     "react-router-dom": "^5.0.0",
     "react-router-prop-types": "^1.0.4",
     "react-scripts": "^3.0.1",
-    "react-spatial": "0.0.14-beta.45",
+    "react-spatial": "^0.0.14-beta.54",
+    "react-styleguidist": "^9.1.11",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
     "redux-thunk": "^2.3.0",
@@ -45,7 +48,7 @@
     "esdoc-standard-plugin": "^1.0.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "fetch-mock": "^7.2.5",
     "husky": "^3.0.0",
     "jest": "24.7.1",
@@ -53,14 +56,15 @@
     "lint-staged": "^8.2.1",
     "node-fetch": "^2.3.0",
     "prettier": "^1.16.3",
-    "react-styleguidist": "^9.1.11",
     "react-test-renderer": "^16.5.2",
     "redux-mock-store": "^1.5.3",
     "rewire": "^4.0.1",
+    "stream-array": "^1.1.2",
     "stylelint": "^10.0.1",
     "stylelint-config-recommended-scss": "^3.2.0",
     "stylelint-config-standard": "^18.2.0",
-    "stylelint-scss": "^3.5.1"
+    "stylelint-scss": "^3.5.1",
+    "vinyl-fs": "^3.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -69,6 +73,8 @@
     "start:stag": "REACT_APP_ENV='stag' yarn start",
     "start:prod": "REACT_APP_ENV='prod' yarn start",
     "start:doc": "yarn doc:server",
+    "prebuild": "rm -rf build/",
+    "build:es": "bash ./scripts/build-es.sh",
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",
     "build:dev": "REACT_APP_ENV='dev' yarn build",
     "build:stag": "REACT_APP_ENV='stag' yarn build",
@@ -79,16 +85,15 @@
     "cy:test": "yarn start & wait-on http://localhost:3000 & yarn cypress run",
     "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial)/).*/\"",
     "test:coverage": "yarn test --coverage --coverageDirectory=coverage",
-    "doc": "node ./scripts/doc.js && styleguidist build",
-    "doc:server": "node ./scripts/doc.js && styleguidist server",
+    "doc": "bash ./scripts/prepare-doc.sh",
+    "doc:server": "styleguidist server",
     "eject": "react-scripts eject",
-    "publish:build": "rm -rf build && yarn version && yarn run build:prod && yarn publish build/ --access public --non-interactive --no-git-tag-version",
-    "build:es": "bash ./scripts/build-es.sh"
+    "publish:public": "yarn version && git push origin HEAD && yarn run build:prod && yarn publish build/ --access public --non-interactive --no-git-tag-version",
+    "publish:beta": "yarn publish:public --tag beta"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie <= 11",
     "not op_mini all"
   ],
   "husky": {
@@ -100,12 +105,12 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "eslint src --fix",
-      "prettier --write 'src/**/*.js'",
-      "git add",
-      "react-scripts test --bail --findRelatedTests --watchAll=false"
-    ]
+    "src/**/*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "src/**/*.{css,scss}": ["stylelint --fix", "git add"]
   },
   "jest": {
     "coverageReporters": [

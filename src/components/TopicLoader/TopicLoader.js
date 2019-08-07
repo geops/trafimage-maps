@@ -1,59 +1,110 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ConfigReader from 'react-spatial/ConfigReader';
 import LayerService from 'react-spatial/LayerService';
-import OLMap from 'ol/Map';
 import Layer from 'react-spatial/Layer';
-import LAYER_CONF from '../../appConfig/layers';
-import { setActiveTopic } from '../../model/app/actions';
+import VectorLayer from 'react-spatial/layers/VectorLayer';
+import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
+import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
+import {
+  setActiveTopic,
+  setTopics,
+  setClickedFeatureInfo,
+} from '../../model/app/actions';
 
 const propTypes = {
-  topic: PropTypes.string.isRequired,
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  activeTopic: PropTypes.shape(),
+  activeTopicKey: PropTypes.string,
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  map: PropTypes.instanceOf(OLMap).isRequired,
+  apiKey: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
+  dispatchSetTopics: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
+  activeTopicKey: null,
+  activeTopic: null,
   baseLayers: null,
   layers: null,
+  apiKey: null,
 };
 
 class TopicLoader extends Component {
   constructor(props) {
     super(props);
-    const { dispatchSetActiveTopic, topic } = this.props;
-    dispatchSetActiveTopic(topic);
+    const {
+      activeTopicKey,
+      dispatchSetActiveTopic,
+      dispatchSetTopics,
+      topics,
+    } = this.props;
+
+    this.topic = activeTopicKey
+      ? TOPIC_CONF.find(t => t.key === activeTopicKey)
+      : topics[0];
+
+    dispatchSetActiveTopic(this.topic);
+    dispatchSetTopics(topics);
   }
 
   componentDidMount() {
-    const {
-      dispatchSetLayers,
-      baseLayers,
-      layers,
-      layerService,
-      topic,
-    } = this.props;
-
-    const appLayers = this.getTopicLayers(topic);
-    const bl = baseLayers || appLayers.filter(l => l.getIsBaseLayer());
-    const tl = layers || appLayers.filter(l => !l.getIsBaseLayer());
-    const newLayers = [...bl, ...tl];
-    layerService.setLayers(newLayers);
-    dispatchSetLayers(newLayers);
+    this.updateLayers(this.topic.layers);
   }
 
-  getTopicLayers(topicName) {
-    const { map } = this.props;
-    const layers = LAYER_CONF.filter(l => l.topics.includes(topicName));
-    return ConfigReader.readConfig(map, layers);
+  componentDidUpdate(prevProps) {
+    const { activeTopic } = this.props;
+
+    if (activeTopic !== prevProps.activeTopic) {
+      this.updateLayers(activeTopic.layers);
+    }
+  }
+
+  onClick(features, layer, event) {
+    const { dispatchSetClickedFeatureInfo } = this.props;
+
+    dispatchSetClickedFeatureInfo({
+      features,
+      layer,
+      event,
+    });
+  }
+
+  updateLayers(topicLayers) {
+    const {
+      layerService,
+      layers,
+      baseLayers,
+      dispatchSetLayers,
+      apiKey,
+    } = this.props;
+
+    const newLayers = [
+      ...(baseLayers || []),
+      ...topicLayers,
+      ...(layers || []),
+    ];
+
+    const flatLayers = layerService.getLayersAsFlatArray();
+    layerService.setLayers(newLayers);
+    dispatchSetLayers(flatLayers);
+
+    for (let i = 0; i < flatLayers.length; i += 1) {
+      if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
+        flatLayers[i].setApiKey(apiKey);
+      }
+
+      if (flatLayers[i] instanceof VectorLayer) {
+        flatLayers[i].onClick(this.onClick.bind(this));
+      }
+    }
   }
 
   render() {
@@ -61,11 +112,15 @@ class TopicLoader extends Component {
   }
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  activeTopic: state.app.activeTopic,
+});
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetLayers: setLayers,
+  dispatchSetTopics: setTopics,
 };
 
 TopicLoader.propTypes = propTypes;
