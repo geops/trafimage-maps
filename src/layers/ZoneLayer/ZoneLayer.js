@@ -94,7 +94,7 @@ class ZoneLayer extends VectorLayer {
 
     this.apiKey = options.apiKey;
 
-    this.url = options.url || 'https://geops.cloud.tyk.io/casa-fare-network';
+    this.url = options.url || 'https://api.geops.io/casa-fare-network';
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
