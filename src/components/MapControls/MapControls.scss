@@ -32,14 +32,23 @@
 .tm-app.tm-w-xs {
   .wkp-map-controls {
     top: 60px;
+  }
+}
 
-    .wkp-zoom-in,
-    .wkp-zoom-out {
-      margin: 20px 0;
-    }
+.tm-app.tm-h-m,
+.tm-app.tm-h-s,
+.tm-app.tm-h-xs {
+  .wkp-geolocation,
+  .wkp-fit-extent,
+  .wkp-zoom-in,
+  .wkp-zoom-out {
+    margin: 10px 0;
+  }
+}
 
-    .tm-zoomslider-wrapper {
-      display: none;
-    }
+.tm-app.tm-h-s,
+.tm-app.tm-h-xs {
+  .tm-zoomslider-wrapper {
+    display: none;
   }
 }
