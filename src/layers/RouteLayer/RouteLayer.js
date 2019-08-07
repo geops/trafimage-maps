@@ -46,7 +46,7 @@ class RouteLayer extends VectorLayer {
     };
 
     // Route url
-    this.url = options.url || 'https://geops.cloud.tyk.io/routing';
+    this.url = options.url || 'https://api.geops.io/routing';
   }
 
   fetchRouteForMot(viaPoints, mot) {

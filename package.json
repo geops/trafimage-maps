@@ -48,10 +48,12 @@
     "esdoc-standard-plugin": "^1.0.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "fetch-mock": "^7.2.5",
+    "husky": "^3.0.0",
     "jest": "24.7.1",
     "jest-canvas-mock": "^2.0.0-alpha.2",
+    "lint-staged": "^8.2.1",
     "node-fetch": "^2.3.0",
     "prettier": "^1.16.3",
     "react-test-renderer": "^16.5.2",
@@ -94,6 +96,23 @@
     "not dead",
     "not op_mini all"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "CI=true lint-staged",
+      "post-checkout": "if [[ $HUSKY_GIT_PARAMS =~ 1$ ]]; then yarn install --frozen-lockfile; fi",
+      "post-merge": "yarn install --frozen-lockfile",
+      "post-rebase": "yarn install"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add",
+      "yarn test --bail --findRelatedTests"
+    ],
+    "src/**/*.{css,scss}": ["stylelint --fix", "git add"]
+  },
   "jest": {
     "coverageReporters": [
       "text",
