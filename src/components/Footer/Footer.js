@@ -37,8 +37,7 @@ const numberFormat = coords => {
 const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
   <RSFooter className="wkp-footer">
     <div className="wkp-footer-left">
-      Geodaten&nbsp;
-      <Copyright layerService={layerService} />
+      <Copyright layerService={layerService} format={f => `Geodaten ${f}`} />
     </div>
 
     <div className="wkp-footer-right">

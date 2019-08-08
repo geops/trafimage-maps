@@ -34,12 +34,10 @@ exports[`AppRouter should match snapshot 1`] = `
       <div
         className="wkp-footer-left"
       >
-        Geodaten 
         <div
           className="tm-copyright"
         >
-          © 
-           OpenStreetMap contributors, © SBB/CFF/FFS
+          Geodaten OpenStreetMap contributors, © SBB/CFF/FFS
         </div>
       </div>
       <div
