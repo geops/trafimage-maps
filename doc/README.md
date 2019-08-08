@@ -19,6 +19,8 @@ the documentation build of both tools.
 
 ## Configuration
 
+Variables shared among both documentation are written in /doc/doc-config.json
+
 - Styleguidist: 'styleguide.config.js
     two components need to be overwritten:
     - 'StyleGuideRenderer': to customize the style of the page, with our own
@@ -39,4 +41,3 @@ the documentation build of both tools.
 
 /!\ to change the style consistently it needs to be changed
 in both places ('geops-docjs-template' & stylegudist)
-
