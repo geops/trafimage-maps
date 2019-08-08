@@ -76,12 +76,12 @@ class Menu extends Component {
 
     const info = allMenuLayersVisible
       ? t('alle aktiviert')
-      : menuLayers.map(l => l.getName()).join(', ');
+      : menuLayers.map(l => t(l.getName())).join(', ');
 
     return (
       <div className="wkp-menu">
         <MenuHeader
-          title={activeTopic.name}
+          title={activeTopic.key}
           info={info}
           headerLayerNames={menuLayers.map(l => l.getName())}
           isOpen={isOpen}
@@ -107,6 +107,7 @@ class Menu extends Component {
                   >
                     <LayerTree
                       isItemHidden={l => l.getIsBaseLayer()}
+                      t={name => t(name)}
                       layerService={layerService}
                     />
                   </div>

@@ -44,10 +44,6 @@
     "Services am Bahnhof": "Servizi in stazione",
     "Shopping im Bahnhof" : "Shopping alla stazione",
     "Reisende mit Handicap" : "Viaggiatori disabili",
-    "Bahnhofpläne": "Piani delle stazioni",
-    "Plakat": "Manifesto",
-    "Format A4": "Format A4",
-    "Interaktiver Bahnhofplan" : "Pianta interattiva della stazione",
 
     "url_poster": "Manifesto",
     "url_shopping" : "Shopping alla stazione",
@@ -306,5 +302,12 @@
     "ch.sbb.stationen.homog.osm": "OpenStreetMap",
     "ch.sbb.stationen.homog.osm-desc": "Nella cartina pubblica del mondo OpenStreetMap, le fermate e spesso persino il ciglio dei marciapiedi vengono registrati con il nome e i numeri ufficiali.<br/>Fonte di dati: 2018.",
     "ch.sbb.stationen.homog.hafas": "Orario",
-    "ch.sbb.stationen.homog.hafas-desc": "Anche nell’orario le fermate sono salvate con la rispettiva denominazione, il numero del posto di servizio e la posizione. I dati sono disponibili in fahrplanfelder.ch e gtfs.geops.ch.<br/>Fonte di dati: 2018."
+    "ch.sbb.stationen.homog.hafas-desc": "Anche nell’orario le fermate sono salvate con la rispettiva denominazione, il numero del posto di servizio e la posizione. I dati sono disponibili in fahrplanfelder.ch e gtfs.geops.ch.<br/>Fonte di dati: 2018.",
+
+    "ch.sbb.casa": "CASA",
+    "Interaktiver Bahnhofplan" : "Pianta interattiva della stazione",
+    "Bahnhofpläne": "Piani delle stazioni",
+    "Printprodukte": "Prodotti di stampa",
+    "Plakat": "Manifesto",
+    "Format A4": "Format A4"
 }
