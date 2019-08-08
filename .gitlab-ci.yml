@@ -33,5 +33,5 @@ deploy_dev:
     - build_maps
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
-    - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp
+    - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
   when: manual
