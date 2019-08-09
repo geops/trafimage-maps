@@ -34,4 +34,33 @@ deploy_dev:
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+
+deploy_dev_manual:
+  stage: deploy
+  dependencies:
+    - build_maps
+  script:
+    - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
   when: manual
+
+deploy_stag_manual:
+  stage: deploy
+  dependencies:
+    - build_maps
+  script:
+    - echo "$STAG_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -av --delete build/ wkp@wkp2.stag.trafimage.geops.ch:/var/www/wkp2.stag.trafimage.geops.ch
+  when: manual
+
+deploy_prod_manual:
+  stage: deploy
+  dependencies:
+    - build_maps
+  script:
+    - echo "$PROD_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -av --delete build/ wkp@wkp2.prod.trafimage.geops.ch:/var/www/wkp2.prod.trafimage.geops.ch
+  when: manual
+  only:
+    - tags
+    - master
