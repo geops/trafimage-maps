@@ -196,6 +196,28 @@ netzkartePointLayer.setChildren([
   new NetzkartePointLayer({ showAirports: true }),
 ]);
 
+export const buslines = new Layer({
+  name: 'ch.sbb.netzkarte.buslinien',
+  key: 'ch.sbb.netzkarte.buslinien',
+  visible: true,
+  olLayer: new TileLayer({
+    source: new WMTSSource({
+      url:
+        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_buslines` +
+        '/swissgrid/{TileMatrix}/{TileCol}/{TileRow}.png',
+      matrixSet: 'webmercator',
+      projection: 'EPSG:3857',
+      requestEncoding: 'REST',
+      tileGrid: new WMTSTileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
+    maxResolution: 20,
+  }),
+});
+
 export default [
   aerial,
   swisstopoLandeskarte,
