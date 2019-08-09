@@ -4,7 +4,6 @@ import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import OLMap from 'ol/Map';
 import RSPopup from 'react-spatial/components/Popup';
-import DefaultPopup from '../../popups/DefaultPopup';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 
 import './Popup.scss';
@@ -34,9 +33,14 @@ const Popup = ({
   const { features, layer, event } = clickedFeatureInfo;
   const [feature] = features; // TODO: allow multiple
   const componentName = popupComponents[layer.getKey()];
-  const PopupComponent = componentName
-    ? React.lazy(() => import(`../../popups/${componentName}`))
-    : DefaultPopup;
+
+  if (!componentName) {
+    return null;
+  }
+
+  const PopupComponent = React.lazy(() =>
+    import(`../../popups/${componentName}`),
+  );
 
   return (
     <React.Suspense fallback="loading...">
