@@ -4,6 +4,7 @@
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "abortcontroller-polyfill": "^1.2.3",
     "color": "^3.1.2",
@@ -111,7 +112,10 @@
       "git add",
       "yarn test --bail --findRelatedTests"
     ],
-    "src/**/*.{css,scss}": ["stylelint --fix", "git add"]
+    "src/**/*.{css,scss}": [
+      "stylelint --fix",
+      "git add"
+    ]
   },
   "jest": {
     "coverageReporters": [
