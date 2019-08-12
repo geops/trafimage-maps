@@ -1,9 +1,12 @@
 import proj4 from 'proj4';
 import TileLayer from 'ol/layer/Tile';
 import WMTSSource from 'ol/source/WMTS';
+import TileWMSSource from 'ol/source/TileWMS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
+import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
+import WMSLayer from 'react-spatial/layers/WMSLayer';
 import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
@@ -215,6 +218,27 @@ export const buslines = new Layer({
       }),
     }),
     maxResolution: 20,
+  }),
+});
+
+export const gemeindegrenzen = new WMSLayer({
+  name: 'ch.sbb.ch_gemeinden',
+  key: 'ch.sbb.ch_gemeinden',
+  visible: true,
+  olLayer: new TileLayer({
+    source: new TileWMSSource({
+      url: `${CONF.geoserverUrl}/service/wms`,
+      crossOrigin: 'anonymous',
+      params: {
+        layers: 'trafimage:gemeindegrenzen',
+        STYLES: 'gemeindegrenzen_netzkarte',
+      },
+      tileGrid: new TileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
   }),
 });
 

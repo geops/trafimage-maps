@@ -166,7 +166,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-layers hidden"
         >
-          ch.sbb.netzkarte.buslinien, Stationen, Stationen, Flughäfen, Bahnhofpläne, Printprodukte
+          ch.sbb.ch_gemeinden, ch.sbb.netzkarte.buslinien, Stationen, Stationen, Flughäfen, Bahnhofpläne, Printprodukte
         </div>
       </div>
       <div
@@ -483,6 +483,42 @@ exports[`AppRouter should match snapshot 1`] = `
                     >
                       <div>
                         ch.sbb.netzkarte.buslinien
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div
+                    className="tm-layer-tree-item"
+                    style={
+                      Object {
+                        "paddingLeft": "0px",
+                      }
+                    }
+                  >
+                    <label
+                      className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                      onKeyPress={[Function]}
+                      tabIndex={-1}
+                    >
+                      <input
+                        checked={true}
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        tabIndex={-1}
+                        type="checkbox"
+                      />
+                      <span />
+                    </label>
+                    <div
+                      className="tm-layer-tree-toggle"
+                      onClick={[Function]}
+                      onKeyPress={[Function]}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <div>
+                        ch.sbb.ch_gemeinden
                       </div>
                     </div>
                   </div>

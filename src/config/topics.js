@@ -3,12 +3,19 @@ import defaultBaseLayers, {
   bahnhofplaene,
   netzkartePointLayer,
   buslines,
+  gemeindegrenzen,
 } from './layers';
 
 export const netzkarte = {
   name: 'ÖV Netzkarte Schweiz',
   key: 'ch.sbb.netzkarte',
-  layers: [...defaultBaseLayers, buslines, netzkartePointLayer, bahnhofplaene],
+  layers: [
+    ...defaultBaseLayers,
+    gemeindegrenzen,
+    buslines,
+    netzkartePointLayer,
+    bahnhofplaene,
+  ],
   projection: 'EPSG:3857',
 };
 
