@@ -38,7 +38,7 @@ const MapControls = ({ map, t }) => (
       extent={CONF.swissExtent}
       className="wkp-fit-extent"
     >
-      {<img src={swissbounds} alt={t('Ganze Schweiz')} />}
+      <img src={swissbounds} alt={t('Ganze Schweiz')} />
     </FitExtent>
   </div>
 );
