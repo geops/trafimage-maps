@@ -78,6 +78,7 @@ export const netzkarteLayer = new TrafimageRasterLayer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
+    zIndex: -10,
   }),
 });
 
@@ -101,6 +102,7 @@ export const swisstopoSwissImage = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
+    zIndex: -10,
   }),
 });
 
@@ -123,6 +125,7 @@ export const netzkarteAerial = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
+    zIndex: -10,
   }),
 });
 
@@ -153,6 +156,7 @@ export const swisstopoLandeskarte = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
+    zIndex: -10,
   }),
 });
 
@@ -176,6 +180,7 @@ export const swisstopoLandeskarteGrau = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
+    zIndex: -10,
   }),
 });
 
@@ -218,6 +223,7 @@ export const buslines = new Layer({
       }),
     }),
     maxResolution: 20,
+    zIndex: -9,
   }),
 });
 
