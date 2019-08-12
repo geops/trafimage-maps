@@ -18,9 +18,10 @@ const TrafimageMapsExample = () => (
         header: true,
         mapControls: true,
         menu: true,
+        popup: true,
       }}
       popupComponents={{
-        'ch.sbb.bahnhofplaene.interaktiv': 'BahnhofplanPopup',
+        'ch.sbb.bahnhofplaene.printprodukte': 'BahnhofplanPopup',
       }}
     />
 

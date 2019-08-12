@@ -57,7 +57,7 @@ class RouteLayer extends VectorLayer {
     const via = viaPoints.map(v => `!${v}`);
     const urlParams = {
       key: this.apiKey || '',
-      via: via.join(';'),
+      via: via.join('|'),
       mot,
     };
 

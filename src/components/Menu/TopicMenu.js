@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'lodash/fp';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 
@@ -11,9 +13,10 @@ const propTypes = {
   topic: PropTypes.shape({
     name: PropTypes.string,
   }).isRequired,
+  t: PropTypes.func.isRequired,
 };
 
-const TopicMenu = ({ topic, isActive, isTopicCollapsed, onClick }) => (
+const TopicMenu = ({ topic, isActive, isTopicCollapsed, onClick, t }) => (
   <div
     className={`wkp-topic-menu ${isActive ? 'active' : ''}`}
     role="button"
@@ -25,7 +28,7 @@ const TopicMenu = ({ topic, isActive, isTopicCollapsed, onClick }) => (
       <div className="wkp-topic-radio">
         {isActive && <div className="wkp-topic-radio-dot" />}
       </div>
-      {topic.name}
+      {t(topic.key)}
     </div>
     <div
       className="wkp-layer-toggler"
@@ -38,4 +41,4 @@ const TopicMenu = ({ topic, isActive, isTopicCollapsed, onClick }) => (
 
 TopicMenu.propTypes = propTypes;
 
-export default TopicMenu;
+export default compose(withTranslation())(TopicMenu);

@@ -1,4 +1,6 @@
 import React from 'react';
+import { compose } from 'lodash/fp';
+import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import menuOpenImg from '../../img/menu_open.png';
@@ -11,6 +13,7 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   info: PropTypes.string,
   isOpen: PropTypes.bool,
+  t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -18,7 +21,7 @@ const defaultProps = {
   isOpen: false,
 };
 
-const MenuHeader = ({ title, info, isOpen, onToggle }) => (
+const MenuHeader = ({ title, info, isOpen, onToggle, t }) => (
   <div
     className={`wkp-menu-header ${isOpen ? 'open' : ''}`}
     role="button"
@@ -28,11 +31,11 @@ const MenuHeader = ({ title, info, isOpen, onToggle }) => (
   >
     <div className="wkp-menu-toggle-button">
       <div className="wkp-menu-toggle-button-icon">
-        <img src={isOpen ? menuClosedImg : menuOpenImg} alt="Menü" />
+        <img src={isOpen ? menuClosedImg : menuOpenImg} alt={t('Menü')} />
       </div>
-      <span className="wkp-menu-toggle-text">Menü</span>
+      <span className="wkp-menu-toggle-text">{t('Menü')}</span>
     </div>
-    <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{title}</div>
+    <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{t(title)}</div>
     <div className="wkp-menu-toggler">
       {isOpen ? <FaAngleUp /> : <FaAngleDown />}
     </div>
@@ -43,4 +46,4 @@ const MenuHeader = ({ title, info, isOpen, onToggle }) => (
 MenuHeader.propTypes = propTypes;
 MenuHeader.defaultProps = defaultProps;
 
-export default MenuHeader;
+export default compose(withTranslation())(MenuHeader);
