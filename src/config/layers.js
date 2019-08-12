@@ -206,8 +206,8 @@ export const buslines = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_buslines` +
-        '/swissgrid/{TileMatrix}/{TileCol}/{TileRow}.png',
+        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_buslines_webmercator` +
+        '/webmercator/{TileMatrix}/{TileCol}/{TileRow}.png',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
