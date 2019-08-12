@@ -43,10 +43,6 @@
     "Services am Bahnhof": "Services at the station",
     "Shopping im Bahnhof" : "Shopping at the station",
     "Reisende mit Handicap" : "Handicap",
-    "Bahnhofpläne": "Station plans",
-    "Plakat": "Poster",
-    "Format A4": "A4 size",
-    "Interaktiver Bahnhofplan" : "Interactive station plan",
 
     "url_poster": "Poster",
     "url_shopping" : "Shopping at the station",
@@ -245,5 +241,12 @@
     "ch.sbb.stationen.homog.osm": "OpenStreetMap",
     "ch.sbb.stationen.homog.osm-desc": "In OpenStreetMap, the free world map, stops and often even platform edges are shown with their names and official numbers.<br/>Data source: 2018.",
     "ch.sbb.stationen.homog.hafas": "Timetable",
-    "ch.sbb.stationen.homog.hafas-desc": "Stops are also listed in the timetable with their name, their department number and their location. The data is available at fahrplanfelder.ch and gtfs.geops.ch.<br/>Data source: 2018."
+    "ch.sbb.stationen.homog.hafas-desc": "Stops are also listed in the timetable with their name, their department number and their location. The data is available at fahrplanfelder.ch and gtfs.geops.ch.<br/>Data source: 2018.",
+
+    "ch.sbb.casa": "CASA",
+    "Interaktiver Bahnhofplan" : "Interactive station plan",
+    "Bahnhofpläne": "Station plans",
+    "Printprodukte": "Print products",
+    "Plakat": "Poster",
+    "Format A4": "A4 size"
 }

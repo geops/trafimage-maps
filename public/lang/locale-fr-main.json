@@ -44,10 +44,6 @@
     "Services am Bahnhof": "Services en gare",
     "Shopping im Bahnhof" : "Shopping à la gare",
     "Reisende mit Handicap" : "Voyageurs avec un handicap",
-    "Bahnhofpläne": "Plans de gares",
-    "Plakat": "Affiche",
-    "Format A4": "Format A4",
-    "Interaktiver Bahnhofplan" : "Plan de gare interactif",
 
     "url_poster": "Affiche",
     "url_shopping" : "Shopping à la gare",
@@ -306,5 +302,12 @@
     "ch.sbb.stationen.homog.osm": "OpenStreetMap",
     "ch.sbb.stationen.homog.osm-desc": "Dans OpenStreetMap, la carte libre du monde, les haltes et souvent même, les bordures d’arrêt, sont saisies avec leur nom et leur numéro officiel.<br/>Source de données: 2018.",
     "ch.sbb.stationen.homog.hafas": "Horaire",
-    "ch.sbb.stationen.homog.hafas-desc": "Dans l’horaire également, les haltes sont définies avec leur désignation, leur numéro de service et leur situation. Les données sont disponibles sous http://www.tableaux-horaires.ch ainsi que sous gtfs.geops.ch.<br/>Source de données: 2018."
+    "ch.sbb.stationen.homog.hafas-desc": "Dans l’horaire également, les haltes sont définies avec leur désignation, leur numéro de service et leur situation. Les données sont disponibles sous http://www.tableaux-horaires.ch ainsi que sous gtfs.geops.ch.<br/>Source de données: 2018.",
+
+    "ch.sbb.casa": "CASA",
+    "Interaktiver Bahnhofplan" : "Plan de gare interactif",
+    "Bahnhofpläne": "Plans de gares",
+    "Printprodukte": "Produits imprimés",
+    "Plakat": "Affiche",
+    "Format A4": "Format A4"
 }
