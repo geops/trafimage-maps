@@ -207,7 +207,7 @@ netzkartePointLayer.setChildren([
 export const buslines = new Layer({
   name: 'ch.sbb.netzkarte.buslinien',
   key: 'ch.sbb.netzkarte.buslinien',
-  visible: true,
+  visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -230,7 +230,7 @@ export const buslines = new Layer({
 export const gemeindegrenzen = new WMSLayer({
   name: 'ch.sbb.ch_gemeinden',
   key: 'ch.sbb.ch_gemeinden',
-  visible: true,
+  visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
       url: `${CONF.geoserverUrl}/service/wms`,
