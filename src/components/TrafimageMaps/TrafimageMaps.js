@@ -12,7 +12,6 @@ import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/Layer';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
-import Zoom from 'react-spatial/components/Zoom';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
 
 import Permalink from '../Permalink';
@@ -20,6 +19,7 @@ import Map from '../Map';
 import Menu from '../Menu';
 import Header from '../Header';
 import Footer from '../Footer';
+import MapControls from '../MapControls';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
 import store, { getStore } from '../../model/store';
@@ -169,7 +169,7 @@ class TrafimageMaps extends Component {
           layerService={this.layerService}
         />
       ),
-      mapControls: <Zoom map={this.map} />,
+      mapControls: <MapControls map={this.map} />,
       baseLayerToggler: (
         <BaseLayerToggler layerService={this.layerService} map={this.map} />
       ),
