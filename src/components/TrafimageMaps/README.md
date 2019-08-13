@@ -16,6 +16,7 @@ const TrafimageMapsExample = () => (
       elements={{
         footer: true,
         header: true,
+        mapControls: true,
         menu: true,
         popup: true,
       }}
