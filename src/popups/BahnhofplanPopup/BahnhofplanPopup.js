@@ -2,26 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
 import { FaRegFilePdf } from 'react-icons/fa';
 
 import './BahnhofplanPopup.scss';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
-  language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  showOnlyLinks: PropTypes.bool,
 };
 
-const defaultProps = {
-  showOnlyLinks: false,
-};
-
-const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
+const BahnhofplanPopup = ({ feature, t }) => {
   const iabpUrl = feature.get('url_interactive_plan');
-  const iabpUrlLang = `${iabpUrl}#?lang=${language}`;
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
@@ -34,7 +25,7 @@ const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
   if (iabpUrl) {
     iabpLink = (
       <div>
-        <a href={iabpUrlLang} rel="noopener noreferrer" target="_blank">
+        <a href={iabpUrl} rel="noopener noreferrer" target="_blank">
           {t('Interaktiver Bahnhofplan')}
         </a>
       </div>
@@ -55,7 +46,7 @@ const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
   if (posterUrl) {
     posterLink = (
       <div>
-        <a href={posterUrl} rel="noopener noreferrer" target="_blank">
+        <a href={iabpUrl} rel="noopener noreferrer" target="_blank">
           {t('Plakat')}
           <FaRegFilePdf />
         </a>
@@ -67,7 +58,7 @@ const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
     shoppingLink = (
       <div>
         <a href={shoppingUrl} rel="noopener noreferrer" target="_blank">
-          {t('Shopping im Bahnhof')}
+          {t('Shopping')}
           <FaRegFilePdf />
         </a>
       </div>
@@ -76,9 +67,7 @@ const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
 
   return (
     <div className="wkp-bahnhofplan-popup">
-      {!showOnlyLinks ? (
-        <div className="wkp-bahnhofplan-popup-title">{feature.get('name')}</div>
-      ) : null}
+      <div className="wkp-bahnhofplan-popup-title">{feature.get('name')}</div>
       {iabpLink}
       {a4Link}
       {posterLink}
@@ -87,14 +76,6 @@ const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  language: state.app.language,
-});
-
 BahnhofplanPopup.propTypes = propTypes;
-BahnhofplanPopup.defaultProps = defaultProps;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps),
-)(BahnhofplanPopup);
+export default withTranslation()(BahnhofplanPopup);

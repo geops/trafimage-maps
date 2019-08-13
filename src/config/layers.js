@@ -6,7 +6,6 @@ import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
 import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
-import NetzkartePointLayer from '../layers/NetzkartePointLayer';
 import CONF from './appConfig';
 
 proj4.defs(
@@ -101,35 +100,6 @@ export const swisstopoSwissImage = new Layer({
   }),
 });
 
-export const netzkarteAerial = new Layer({
-  name: 'Netzkarte Luftbild',
-  key: 'ch.sbb.netzkarte.overlay',
-  visible: false,
-  isBaseLayer: true,
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_aerial_webmercator` +
-        '/webmercator/{TileMatrix}/{TileCol}/{TileRow}.png',
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-  }),
-});
-
-export const aerial = new Layer({
-  name: 'ch.sbb.netzkarte.luftbild.group',
-  isBaseLayer: true,
-});
-
-aerial.setChildren([swisstopoSwissImage, netzkarteAerial]);
-
 export const swisstopoLandeskarte = new Layer({
   name: 'Landeskarte',
   key: 'ch.sbb.netzkarte.landeskarte',
@@ -186,18 +156,8 @@ bahnhofplaene.setChildren([
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
 
-export const netzkartePointLayer = new Layer({
-  name: 'Stationen',
-  key: 'ch.sbb.stationen.parent',
-});
-
-netzkartePointLayer.setChildren([
-  new NetzkartePointLayer({ useBboxStrategy: true }),
-  new NetzkartePointLayer({ showAirports: true }),
-]);
-
 export default [
-  aerial,
+  swisstopoSwissImage,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,
   netzkarteLayer,
