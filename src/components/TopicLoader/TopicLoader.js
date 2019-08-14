@@ -70,6 +70,10 @@ class TopicLoader extends Component {
   onClick(features, layer, event) {
     const { dispatchSetClickedFeatureInfo } = this.props;
 
+    if (!features.length) {
+      return;
+    }
+
     dispatchSetClickedFeatureInfo({
       features,
       layer,

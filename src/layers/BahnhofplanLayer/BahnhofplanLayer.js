@@ -5,6 +5,7 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { Style, Icon, Circle, Fill } from 'ol/style';
 import bahnhofplanLayerIcon from '../../img/bahnhofplanLayerIcon.png';
 import CONF from '../../config/appConfig';
+import layerHelper from '../layerHelper';
 
 /**
  * Layer for visualizing fare networks.
@@ -41,8 +42,6 @@ class BahnhofplanLayer extends VectorLayer {
 
     this.setVisible(this.visible);
 
-    this.dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
-
     this.iconStyle = new Style({
       image: new Icon({
         src: bahnhofplanLayerIcon,
@@ -58,10 +57,7 @@ class BahnhofplanLayer extends VectorLayer {
   style(feature, resolution) {
     const vis = feature.get('visibility');
     const style = [this.iconStyle];
-    // find closest data resolution
-    const res = this.dataResolutions.reduce((prev, curr) =>
-      Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
-    );
+    const res = layerHelper.getDataResolution(resolution);
 
     if (vis < resolution * 10 || feature.get('resolution') !== res) {
       return null;

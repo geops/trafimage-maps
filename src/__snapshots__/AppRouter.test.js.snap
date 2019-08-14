@@ -2,7 +2,7 @@
 
 exports[`AppRouter should match snapshot 1`] = `
 <div
-  className="tm-app header footer menu permalink popup"
+  className="tm-app header footer menu permalink mapControls popup"
 >
   <div
     className="tm-map"
@@ -34,12 +34,10 @@ exports[`AppRouter should match snapshot 1`] = `
       <div
         className="wkp-footer-left"
       >
-        Geodaten 
         <div
           className="tm-copyright"
         >
-          © 
-           OpenStreetMap contributors, © SBB/CFF/FFS
+          Geodaten OpenStreetMap contributors, © SBB/CFF/FFS
         </div>
       </div>
       <div
@@ -139,7 +137,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-title large"
         >
-          ÖV Netzkarte Schweiz
+          ch.sbb.netzkarte
         </div>
         <div
           className="wkp-menu-toggler"
@@ -166,7 +164,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-layers hidden"
         >
-          Bahnhofpläne, Printprodukte
+          Stationen, Stationen, Flughäfen, Bahnhofpläne, Printprodukte
         </div>
       </div>
       <div
@@ -193,7 +191,7 @@ exports[`AppRouter should match snapshot 1`] = `
                     className="wkp-topic-radio-dot"
                   />
                 </div>
-                ÖV Netzkarte Schweiz
+                ch.sbb.netzkarte
               </div>
               <div
                 className="wkp-layer-toggler"
@@ -340,6 +338,117 @@ exports[`AppRouter should match snapshot 1`] = `
                     </div>
                   </div>
                 </div>
+                <div>
+                  <div
+                    className="tm-layer-tree-item"
+                    style={
+                      Object {
+                        "paddingLeft": "0px",
+                      }
+                    }
+                  >
+                    <label
+                      className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                      onKeyPress={[Function]}
+                      tabIndex={0}
+                    >
+                      <input
+                        checked={true}
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        tabIndex={-1}
+                        type="checkbox"
+                      />
+                      <span />
+                    </label>
+                    <div
+                      className="tm-layer-tree-toggle"
+                      onClick={[Function]}
+                      onKeyPress={[Function]}
+                      role="button"
+                      tabIndex={0}
+                    >
+                      <div>
+                        Stationen
+                      </div>
+                      <div
+                        className="tm-layer-tree-arrow tm-layer-tree-arrow-expanded"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      className="tm-layer-tree-item"
+                      style={
+                        Object {
+                          "paddingLeft": "30px",
+                        }
+                      }
+                    >
+                      <label
+                        className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                        onKeyPress={[Function]}
+                        tabIndex={-1}
+                      >
+                        <input
+                          checked={true}
+                          onChange={[Function]}
+                          onClick={[Function]}
+                          tabIndex={-1}
+                          type="radio"
+                        />
+                        <span />
+                      </label>
+                      <div
+                        className="tm-layer-tree-toggle"
+                        onClick={[Function]}
+                        onKeyPress={[Function]}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        <div>
+                          Flughäfen
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      className="tm-layer-tree-item"
+                      style={
+                        Object {
+                          "paddingLeft": "30px",
+                        }
+                      }
+                    >
+                      <label
+                        className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                        onKeyPress={[Function]}
+                        tabIndex={-1}
+                      >
+                        <input
+                          checked={true}
+                          onChange={[Function]}
+                          onClick={[Function]}
+                          tabIndex={-1}
+                          type="radio"
+                        />
+                        <span />
+                      </label>
+                      <div
+                        className="tm-layer-tree-toggle"
+                        onClick={[Function]}
+                        onKeyPress={[Function]}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        <div>
+                          Stationen
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -357,7 +466,7 @@ exports[`AppRouter should match snapshot 1`] = `
                 <div
                   className="wkp-topic-radio"
                 />
-                CASA
+                ch.sbb.casa
               </div>
               <div
                 className="wkp-layer-toggler"
@@ -393,5 +502,118 @@ exports[`AppRouter should match snapshot 1`] = `
     </div>
   </div>
   <div />
+  <div>
+    <div
+      className="wkp-map-controls"
+    >
+      <div
+        className="tm-zooms-bar"
+      >
+        <div
+          aria-label="Hineinzoomen"
+          className="wkp-zoom-in"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Hineinzoomen"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </div>
+        <div
+          className="tm-zoomslider-wrapper"
+        />
+        <div
+          aria-label="Rauszoomen"
+          className="wkp-zoom-out"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Rauszoomen"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        aria-label="Lokalisieren"
+        className="wkp-geolocation "
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+        title="Lokalisieren"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"
+          />
+        </svg>
+      </div>
+      <div
+        aria-label="Ganze Schweiz"
+        className="wkp-fit-extent"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+        title="Ganze Schweiz"
+      >
+        <img
+          alt="Ganze Schweiz"
+          src="swissbounds.png"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 `;

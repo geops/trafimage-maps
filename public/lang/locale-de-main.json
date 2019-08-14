@@ -47,9 +47,6 @@
     "Services am Bahnhof": "Services am Bahnhof",
     "Shopping im Bahnhof" : "Shopping im Bahnhof",
     "Reisende mit Handicap" : "Reisende mit Handicap",
-    "Bahnhofpläne": "Bahnhofpläne",
-    "Plakat": "Plakat",
-    "Format A4": "Format A4",
 
     "url_poster": "Plakat",
     "url_shopping" : "Shopping im Bahnhof",
@@ -236,5 +233,12 @@
     "ch.sbb.stationen.homog.osm": "OpenStreetMap",
     "ch.sbb.stationen.homog.osm-desc": "In der freien Weltkarte OpenStreetMap werden Haltestellen und häufig sogar Haltekanten mit Ihren Namen und offiziellen Nummern erfasst.<br/>Datenquelle: 2018.",
     "ch.sbb.stationen.homog.hafas": "Fahrplan",
-    "ch.sbb.stationen.homog.hafas-desc": "Auch im Fahrplan sind die Haltestellen mit ihrer Bezeichnung, der Dienststellnnumer und der Lage hinterlegt. Die Daten sind unter fahplanfelder.ch sowie unter gtfs.geops.ch verfügbar.<br/>Datenquelle: 2018."
+    "ch.sbb.stationen.homog.hafas-desc": "Auch im Fahrplan sid die Haltestellen mit ihrer Bezeichnung, der Dienststellnnumer und der Lage hinterlegt. Die Daten sind unter fahplanfelder.ch sowie unter gtfs.geops.ch verfügbar.<br/>Datenquelle: 2018.",
+
+    "ch.sbb.casa": "CASA",
+    "Interaktiver Bahnhofplan" : "Interaktiver Bahnhofplan",
+    "Bahnhofpläne": "Bahnhofpläne",
+    "Printprodukte": "Printprodukte",
+    "Plakat": "Plakat",
+    "Format A4": "Format A4"
 }

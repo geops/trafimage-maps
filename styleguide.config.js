@@ -9,6 +9,7 @@ module.exports = {
   assetsDir: 'src/',
   styleguideDir: 'styleguide-build',
   require: [
+    path.join(__dirname, 'src/i18n.js'),
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
     'react-app-polyfill/ie11',
     'react-app-polyfill/stable',

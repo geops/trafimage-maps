@@ -26,6 +26,7 @@ const AppRouter = () => (
                 footer: true,
                 menu: true,
                 permalink: true,
+                mapControls: true,
                 popup: true,
               }}
               popupComponents={POPUP_CONF}

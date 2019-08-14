@@ -32,13 +32,15 @@ const Popup = ({
 
   const { features, layer, event } = clickedFeatureInfo;
   const [feature] = features; // TODO: allow multiple
-  const cName = popupComponents[layer.getKey()];
+  const componentName = popupComponents[layer.getKey()];
 
-  if (!cName) {
+  if (!componentName) {
     return null;
   }
 
-  const PopupComponent = React.lazy(() => import(`../../popups/${cName}`));
+  const PopupComponent = React.lazy(() =>
+    import(`../../popups/${componentName}`),
+  );
 
   return (
     <React.Suspense fallback="loading...">

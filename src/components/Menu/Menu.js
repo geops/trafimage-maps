@@ -34,6 +34,7 @@ class Menu extends Component {
       loadedMenuComponents: [],
     };
 
+    const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
     this.loadMenuComponents();
   }
@@ -93,7 +94,7 @@ class Menu extends Component {
 
     const info = allMenuLayersVisible
       ? t('alle aktiviert')
-      : menuLayers.map(l => l.getName()).join(', ');
+      : menuLayers.map(l => t(l.getName())).join(', ');
 
     return (
       <div className="wkp-menu-wrapper">
