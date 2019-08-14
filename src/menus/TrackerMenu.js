@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TiVideo } from 'react-icons/ti';
 import Map from 'ol/Map';
 import LayerService from 'react-spatial/LayerService';
-import TrackerLayer from 'react-public-transport/components/Tracker/TrackerLayer';
+import TrackerLayer from 'react-transit/components/Tracker/TrackerLayer';
 import MenuItem from '../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 

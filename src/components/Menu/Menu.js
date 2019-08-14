@@ -26,7 +26,6 @@ const propTypes = {
 class Menu extends Component {
   constructor(props) {
     super(props);
-    const { layerService } = this.props;
 
     this.state = {
       menuLayers: [],
