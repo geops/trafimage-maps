@@ -24,7 +24,7 @@
 
     &.collapsed {
       border: 0;
-      max-height: 0px;
+      max-height: 0;
       transition: all 0.1s ease;
       padding: 0 initial;
     }
@@ -38,6 +38,7 @@
     .wkp-menu-title {
       border-top: 1px solid #eee;
     }
+
     .wkp-menu-body {
       padding: 0;
     }
