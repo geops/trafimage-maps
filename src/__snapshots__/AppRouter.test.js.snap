@@ -164,7 +164,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-layers hidden"
         >
-          Stationen, Stationen, Flughäfen, Bahnhofpläne, Printprodukte
+          Stationen, ch.sbb.netzkarte.stationen, ch.sbb.netzkarte.flughafen, Bahnhofpläne, Printprodukte
         </div>
       </div>
       <div
@@ -407,7 +407,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         tabIndex={0}
                       >
                         <div>
-                          Flughäfen
+                          ch.sbb.netzkarte.flughafen
                         </div>
                       </div>
                     </div>
@@ -443,7 +443,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         tabIndex={0}
                       >
                         <div>
-                          Stationen
+                          ch.sbb.netzkarte.stationen
                         </div>
                       </div>
                     </div>

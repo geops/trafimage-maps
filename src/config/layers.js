@@ -196,7 +196,7 @@ bahnhofplaene.setChildren([
 
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',
-  key: 'ch.sbb.stationen.parent',
+  key: 'ch.sbb.netzkarte.stationen.parent',
 });
 
 netzkartePointLayer.setChildren([
