@@ -4,7 +4,7 @@ import WMTSSource from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
-import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
+import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
 import CONF from './appConfig';
@@ -55,27 +55,13 @@ const resolutions = [
   0.298582141739,
 ];
 
-export const netzkarteLayer = new TrafimageRasterLayer({
+export const netzkarteLayer = new MapboxLayer({
   name: 'Netzkarte',
   key: 'ch.sbb.netzkarte',
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `https://maps.geops.io/styles/trafimage_perimeter_v2/` +
-        `{TileMatrix}/{TileCol}/{TileRow}.png`,
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  url: `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json?key=${CONF.vectorTilesKey}`,
 });
 
 export const swisstopoSwissImage = new Layer({
