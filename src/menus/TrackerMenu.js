@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TiVideo } from 'react-icons/ti';
 import Map from 'ol/Map';
 import LayerService from 'react-spatial/LayerService';
-import TrackerLayer from 'react-transit/components/Tracker/TrackerLayer';
+import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MenuItem from '../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
@@ -26,7 +26,7 @@ class TrackerMenu extends Component {
 
     this.trackerLayer = layerService
       .getLayersAsFlatArray()
-      .find(l => l instanceof TrackerLayer);
+      .find(l => l instanceof TrajservLayer);
 
     this.state = {
       open: this.trackerLayer && this.trackerLayer.getVisible(),
@@ -97,7 +97,7 @@ class TrackerMenu extends Component {
       <MenuItem
         className="wkp-tracker-menu"
         title="Zugtracker"
-        icon=<TiVideo />
+        icon={<TiVideo />}
         map={map}
         open={open}
         collapsed={collapsed}

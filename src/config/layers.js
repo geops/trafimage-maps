@@ -4,7 +4,7 @@ import WMTSSource from 'ol/source/WMTS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
-import TrackerLayer from 'react-transit/components/Tracker/TrackerLayer';
+import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import TrafimageRasterLayer from '../layers/TrafimageRasterLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
@@ -187,7 +187,7 @@ bahnhofplaene.setChildren([
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
 
-export const tracker = new TrackerLayer();
+export const tracker = new TrajservLayer();
 
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',

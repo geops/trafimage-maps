@@ -108,7 +108,7 @@ exports[`AppRouter should match snapshot 1`] = `
   </div>
   <div>
     <div
-      className="wkp-menu"
+      className="wkp-menu-wrapper"
     >
       <div
         className="wkp-menu-header "
@@ -118,10 +118,10 @@ exports[`AppRouter should match snapshot 1`] = `
         tabIndex="0"
       >
         <div
-          className="wkp-menu-toggle-button"
+          className="wkp-menu-header-toggler"
         >
           <div
-            className="wkp-menu-toggle-button-icon"
+            className="wkp-menu-header-toggler-icon"
           >
             <img
               alt="Menü"
@@ -137,7 +137,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-title large"
         >
-          ch.sbb.netzkarte
+          ÖV Netzkarte Schweiz
         </div>
         <div
           className="wkp-menu-toggler"
@@ -164,127 +164,73 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-layers hidden"
         >
-          Stationen, Stationen, Flughäfen, Bahnhofpläne, Printprodukte
+          Tracker, Stationen, Stationen, Flughäfen, Bahnhofpläne, Printprodukte
         </div>
       </div>
       <div
-        className="wkp-menu-body closed"
+        className="wkp-menu wkp-topics closed"
       >
         <div
-          className="wkp-menu-body-inner"
+          className="wkp-menu-body"
         >
           <div>
             <div
-              className="wkp-topic-menu active"
-              onClick={[Function]}
-              onKeyPress={[Function]}
-              role="button"
-              tabIndex={0}
+              className="wkp-topic-menu "
             >
               <div
-                className="wkp-topic-title"
+                className="wkp-topic-menu-item"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex={0}
               >
                 <div
-                  className="wkp-topic-radio"
+                  className="wkp-topic-title"
                 >
                   <div
-                    className="wkp-topic-radio-dot"
-                  />
+                    className="wkp-topic-radio"
+                  >
+                    <div
+                      className="wkp-topic-radio-dot"
+                    />
+                  </div>
+                  ÖV Netzkarte Schweiz
                 </div>
-                ch.sbb.netzkarte
-              </div>
-              <div
-                className="wkp-layer-toggler"
-                style={
-                  Object {
-                    "display": "block",
-                  }
-                }
-              >
-                <svg
-                  fill="currentColor"
-                  height="1em"
-                  stroke="currentColor"
-                  strokeWidth="0"
+                <div
+                  className="wkp-layer-toggler "
                   style={
                     Object {
-                      "color": undefined,
+                      "display": "block",
                     }
                   }
-                  viewBox="0 0 320 512"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"
-                  />
-                </svg>
+                />
               </div>
-            </div>
-            <div
-              className="wkp-layer-tree closed"
-            >
               <div
-                className="tm-layer-tree"
+                className="wkp-layer-tree"
               >
-                <div>
-                  <div
-                    className="tm-layer-tree-item"
-                    style={
-                      Object {
-                        "paddingLeft": "0px",
-                      }
-                    }
-                  >
-                    <label
-                      className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                      onKeyPress={[Function]}
-                      tabIndex={0}
-                    >
-                      <input
-                        checked={true}
-                        onChange={[Function]}
-                        onClick={[Function]}
-                        tabIndex={-1}
-                        type="checkbox"
-                      />
-                      <span />
-                    </label>
-                    <div
-                      className="tm-layer-tree-toggle"
-                      onClick={[Function]}
-                      onKeyPress={[Function]}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      <div>
-                        Bahnhofpläne
-                      </div>
-                      <div
-                        className="tm-layer-tree-arrow tm-layer-tree-arrow-expanded"
-                      />
-                    </div>
-                  </div>
+                <div
+                  className="tm-layer-tree"
+                >
                   <div>
                     <div
                       className="tm-layer-tree-item"
                       style={
                         Object {
-                          "paddingLeft": "30px",
+                          "paddingLeft": "0px",
                         }
                       }
                     >
                       <label
-                        className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                        className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                         onKeyPress={[Function]}
-                        tabIndex={-1}
+                        tabIndex={0}
                       >
                         <input
                           checked={true}
                           onChange={[Function]}
                           onClick={[Function]}
                           tabIndex={-1}
-                          type="radio"
+                          type="checkbox"
                         />
                         <span />
                       </label>
@@ -296,84 +242,84 @@ exports[`AppRouter should match snapshot 1`] = `
                         tabIndex={0}
                       >
                         <div>
-                          Printprodukte
+                          Bahnhofpläne
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      className="tm-layer-tree-item"
-                      style={
-                        Object {
-                          "paddingLeft": "30px",
-                        }
-                      }
-                    >
-                      <label
-                        className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
-                        onKeyPress={[Function]}
-                        tabIndex={-1}
-                      >
-                        <input
-                          checked={false}
-                          onChange={[Function]}
-                          onClick={[Function]}
-                          tabIndex={-1}
-                          type="radio"
+                        <div
+                          className="tm-layer-tree-arrow tm-layer-tree-arrow-expanded"
                         />
-                        <span />
-                      </label>
+                      </div>
+                    </div>
+                    <div>
                       <div
-                        className="tm-layer-tree-toggle"
-                        onClick={[Function]}
-                        onKeyPress={[Function]}
-                        role="button"
-                        tabIndex={0}
+                        className="tm-layer-tree-item"
+                        style={
+                          Object {
+                            "paddingLeft": "30px",
+                          }
+                        }
                       >
-                        <div>
-                          Interaktiver Bahnhofplan
+                        <label
+                          className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                          onKeyPress={[Function]}
+                          tabIndex={-1}
+                        >
+                          <input
+                            checked={true}
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            tabIndex={-1}
+                            type="radio"
+                          />
+                          <span />
+                        </label>
+                        <div
+                          className="tm-layer-tree-toggle"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <div>
+                            Printprodukte
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div>
-                  <div
-                    className="tm-layer-tree-item"
-                    style={
-                      Object {
-                        "paddingLeft": "0px",
-                      }
-                    }
-                  >
-                    <label
-                      className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                      onKeyPress={[Function]}
-                      tabIndex={0}
-                    >
-                      <input
-                        checked={true}
-                        onChange={[Function]}
-                        onClick={[Function]}
-                        tabIndex={-1}
-                        type="checkbox"
-                      />
-                      <span />
-                    </label>
-                    <div
-                      className="tm-layer-tree-toggle"
-                      onClick={[Function]}
-                      onKeyPress={[Function]}
-                      role="button"
-                      tabIndex={0}
-                    >
-                      <div>
-                        Stationen
-                      </div>
+                    <div>
                       <div
-                        className="tm-layer-tree-arrow tm-layer-tree-arrow-expanded"
-                      />
+                        className="tm-layer-tree-item"
+                        style={
+                          Object {
+                            "paddingLeft": "30px",
+                          }
+                        }
+                      >
+                        <label
+                          className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                          onKeyPress={[Function]}
+                          tabIndex={-1}
+                        >
+                          <input
+                            checked={false}
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            tabIndex={-1}
+                            type="radio"
+                          />
+                          <span />
+                        </label>
+                        <div
+                          className="tm-layer-tree-toggle"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <div>
+                            Interaktiver Bahnhofplan
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <div>
@@ -381,57 +327,21 @@ exports[`AppRouter should match snapshot 1`] = `
                       className="tm-layer-tree-item"
                       style={
                         Object {
-                          "paddingLeft": "30px",
+                          "paddingLeft": "0px",
                         }
                       }
                     >
                       <label
-                        className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                        className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                         onKeyPress={[Function]}
-                        tabIndex={-1}
+                        tabIndex={0}
                       >
                         <input
                           checked={true}
                           onChange={[Function]}
                           onClick={[Function]}
                           tabIndex={-1}
-                          type="radio"
-                        />
-                        <span />
-                      </label>
-                      <div
-                        className="tm-layer-tree-toggle"
-                        onClick={[Function]}
-                        onKeyPress={[Function]}
-                        role="button"
-                        tabIndex={0}
-                      >
-                        <div>
-                          Flughäfen
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      className="tm-layer-tree-item"
-                      style={
-                        Object {
-                          "paddingLeft": "30px",
-                        }
-                      }
-                    >
-                      <label
-                        className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
-                        onKeyPress={[Function]}
-                        tabIndex={-1}
-                      >
-                        <input
-                          checked={true}
-                          onChange={[Function]}
-                          onClick={[Function]}
-                          tabIndex={-1}
-                          type="radio"
+                          type="checkbox"
                         />
                         <span />
                       </label>
@@ -445,6 +355,117 @@ exports[`AppRouter should match snapshot 1`] = `
                         <div>
                           Stationen
                         </div>
+                        <div
+                          className="tm-layer-tree-arrow tm-layer-tree-arrow-expanded"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        className="tm-layer-tree-item"
+                        style={
+                          Object {
+                            "paddingLeft": "30px",
+                          }
+                        }
+                      >
+                        <label
+                          className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                          onKeyPress={[Function]}
+                          tabIndex={-1}
+                        >
+                          <input
+                            checked={true}
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            tabIndex={-1}
+                            type="radio"
+                          />
+                          <span />
+                        </label>
+                        <div
+                          className="tm-layer-tree-toggle"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <div>
+                            Flughäfen
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div
+                        className="tm-layer-tree-item"
+                        style={
+                          Object {
+                            "paddingLeft": "30px",
+                          }
+                        }
+                      >
+                        <label
+                          className="tm-layer-tree-input tm-layer-tree-input-radio tm-radio"
+                          onKeyPress={[Function]}
+                          tabIndex={-1}
+                        >
+                          <input
+                            checked={true}
+                            onChange={[Function]}
+                            onClick={[Function]}
+                            tabIndex={-1}
+                            type="radio"
+                          />
+                          <span />
+                        </label>
+                        <div
+                          className="tm-layer-tree-toggle"
+                          onClick={[Function]}
+                          onKeyPress={[Function]}
+                          role="button"
+                          tabIndex={0}
+                        >
+                          <div>
+                            Stationen
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div
+                      className="tm-layer-tree-item"
+                      style={
+                        Object {
+                          "paddingLeft": "0px",
+                        }
+                      }
+                    >
+                      <label
+                        className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                        onKeyPress={[Function]}
+                        tabIndex={-1}
+                      >
+                        <input
+                          checked={true}
+                          onChange={[Function]}
+                          onClick={[Function]}
+                          tabIndex={-1}
+                          type="checkbox"
+                        />
+                        <span />
+                      </label>
+                      <div
+                        className="tm-layer-tree-toggle"
+                        onClick={[Function]}
+                        onKeyPress={[Function]}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        <div>
+                          Tracker
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -454,51 +475,40 @@ exports[`AppRouter should match snapshot 1`] = `
           </div>
           <div>
             <div
-              className="wkp-topic-menu "
-              onClick={[Function]}
-              onKeyPress={[Function]}
-              role="button"
-              tabIndex={0}
+              className="wkp-topic-menu collapsed"
             >
               <div
-                className="wkp-topic-title"
+                className="wkp-topic-menu-item"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex={0}
               >
                 <div
-                  className="wkp-topic-radio"
-                />
-                ch.sbb.casa
-              </div>
-              <div
-                className="wkp-layer-toggler"
-                style={
-                  Object {
-                    "display": "none",
-                  }
-                }
-              >
-                <svg
-                  fill="currentColor"
-                  height="1em"
-                  stroke="currentColor"
-                  strokeWidth="0"
+                  className="wkp-topic-title"
+                >
+                  <div
+                    className="wkp-topic-radio"
+                  />
+                  CASA
+                </div>
+                <div
+                  className="wkp-layer-toggler collapsed"
                   style={
                     Object {
-                      "color": undefined,
+                      "display": "none",
                     }
                   }
-                  viewBox="0 0 320 512"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"
-                  />
-                </svg>
+                />
               </div>
+              <div
+                className="wkp-layer-tree"
+              />
             </div>
           </div>
         </div>
       </div>
+      Loading menu...
     </div>
   </div>
   <div />
