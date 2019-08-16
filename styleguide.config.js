@@ -34,6 +34,10 @@ module.exports = {
       ],
     },
     {
+      name: 'Digitale Stelen',
+      content: 'src/apps/digitalenStelen/README.md',
+    },
+    {
       name: 'Popups',
       sections: [
         {
