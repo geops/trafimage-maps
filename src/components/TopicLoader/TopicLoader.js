@@ -67,7 +67,7 @@ class TopicLoader extends Component {
     }
   }
 
-  onClick(features, layer, event) {
+  onClick(features, layer, coordinate) {
     const { dispatchSetClickedFeatureInfo } = this.props;
 
     if (!features.length) {
@@ -77,7 +77,7 @@ class TopicLoader extends Component {
     dispatchSetClickedFeatureInfo({
       features,
       layer,
-      event,
+      coordinate,
     });
   }
 
