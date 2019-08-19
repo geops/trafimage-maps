@@ -13,7 +13,7 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
-import { intersect } from 'turf';
+import intersect from '@turf/intersect';
 import Color from 'color';
 
 /**
