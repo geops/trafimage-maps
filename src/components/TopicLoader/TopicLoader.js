@@ -98,7 +98,7 @@ class TopicLoader extends Component {
 
     layerService.setLayers(newLayers);
     const flatLayers = layerService.getLayersAsFlatArray();
-    dispatchSetLayers(flatLayers);
+    dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
