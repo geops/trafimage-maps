@@ -1,10 +1,13 @@
 import proj4 from 'proj4';
 import TileLayer from 'ol/layer/Tile';
 import WMTSSource from 'ol/source/WMTS';
+import TileWMSSource from 'ol/source/TileWMS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
+import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
+import WMSLayer from 'react-spatial/layers/WMSLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
 import CONF from './appConfig';
@@ -181,6 +184,27 @@ netzkartePointLayer.setChildren([
   new NetzkartePointLayer({ useBboxStrategy: true }),
   new NetzkartePointLayer({ showAirports: true }),
 ]);
+
+export const parks = new WMSLayer({
+  name: 'ch.sbb.parks',
+  key: 'ch.sbb.parks',
+  visible: false,
+  olLayer: new TileLayer({
+    source: new TileWMSSource({
+      url: `${CONF.geoserverUrl}/service/wms`,
+      crossOrigin: 'anonymous',
+      params: {
+        layers: 'trafimage:perimeter_parks',
+      },
+      tileGrid: new TileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
+    opacity: 0.9,
+  }),
+});
 
 export default [
   aerial,
