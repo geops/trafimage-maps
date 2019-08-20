@@ -10,10 +10,10 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.
- * @param {string?} options.apiKey Access key for geOps services.
+ * @param {string?} [options.apiKey] Access key for geOps services.
  * @param {string} [options.name] Layer name.
  * @param {string} [options.url] Url of the geOps route backend.
- * @param {boolean} [options.visible] Visibility of the layer.
+ * @param {boolean} [options.visible = true] Visibility of the layer.
  *   Default is true.
  * @param {string} [options.projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
@@ -50,7 +50,7 @@ class RouteLayer extends VectorLayer {
   }
 
   /**
-   * Gettint the Mot-features on specific route
+   * Gettint the Mot-features on specific route.
    * @param {Object} viaPoints Route Informations
    * @param {String} mot ask for specific Route
    * @returns {array<ol.feature>}
