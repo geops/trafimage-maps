@@ -72,7 +72,7 @@ class NetzkartePointLayer extends VectorLayer {
 
   /**
    * Initialize the layer and listen to feature clicks.
-   * @param {ol.map} map ol.map (https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html)
+   * @param {ol.map} map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/map}
    */
   init(map) {
     super.init(map);
