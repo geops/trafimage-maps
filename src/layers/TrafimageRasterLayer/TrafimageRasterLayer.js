@@ -4,7 +4,7 @@ import Layer from 'react-spatial/Layer';
 
 /**
  * Base layer for ZoneLayer and RouteLayer.
- * {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
  * @class
  * @param {Object} options Layer options.
  * @param {string} options.apiKey Access key for geOps services.
