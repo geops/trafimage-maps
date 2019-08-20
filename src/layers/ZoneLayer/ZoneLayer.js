@@ -18,30 +18,31 @@ import Color from 'color';
 
 /**
  * Layer for visualizing fare networks.
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class ZoneLayer
  * @param {Object} options Layer options.
  * @param {boolean} options.visible Visibility of the layer.
- * @param (number} options.labelOptimizationMinResolution Minimum resolution for
+ * @param {number} options.labelOptimizationMinResolution Minimum resolution for
  *   using optimized label placement based on the current extent. Default is 100.
  * @param {string} options.url Url of the geOps fare network backend.
- * @param {Object} [options.zoneStyle] Zone style.
- * @param {Object} [options.zoneStyle.fill] Fill properties.
- * @param {string} [options.zoneStyle.fill.color] Fill color.
+ * @param {Object} options.zoneStyle Zone style.
+ * @param {Object} options.zoneStyle.fill Fill properties.
+ * @param {string} options.zoneStyle.fill.color Fill color.
  *   Default is 'rgb(255, 200, 25)'.
 
- * @param {Object} [options.zoneStyle.stroke] Stroke properties.
- * @param {string} [options.zoneStyle.stroke.width] Stroke width.
+ * @param {Object} options.zoneStyle.stroke Stroke properties.
+ * @param {string} options.zoneStyle.stroke.width Stroke width.
  *   Default is 2.
- * @param {string} [options.zoneStyle.stroke.color] Stroke color.
+ * @param {string} options.zoneStyle.stroke.color Stroke color.
  *   Default is 'black'.
- * @param {Object} [options.zoneStyle.text] Text properties.
- * @param {string} [options.zoneStyle.text.font] Font.
+ * @param {Object} options.zoneStyle.text Text properties.
+ * @param {string} options.zoneStyle.text.font Font.
  *   Default is '12px Arial'.
- * @param {string} [options.zoneStyle.text.label] Text label.
+ * @param {string} options.zoneStyle.text.label Text label.
  *   If undefined, the zone code is used.
- * @param {string} [options.zoneStyle.text.color] Text color.
+ * @param {string} options.zoneStyle.text.color Text color.
  *   Default is 'black'.
- * @param {Function} [zoneStyleFunction] called with zone properties as
+ * @param {Function} options.zoneStyleFunction called with zone properties as
  *   an Object and a boolean indicating if the zone is selected.
  *   The function should return a zoneStyle object (see above).
  */
@@ -128,6 +129,10 @@ class ZoneLayer extends VectorLayer {
     this.olLayer.getSource().clear();
   }
 
+  /**
+   * Get zone based on params
+   * @param {Object} params
+   */
   fetchZones(params = {}) {
     this.clear();
 
@@ -159,7 +164,7 @@ class ZoneLayer extends VectorLayer {
 
   /**
    * Zoom to visible zones.
-   * @param {Object} [fitOptions] Options,
+   * @param {Object} options fitOptions
    *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
    */
   zoomToZones(options) {
@@ -172,9 +177,9 @@ class ZoneLayer extends VectorLayer {
    * @param {Object[]} config Array of objects defining selected zones.
    * @param {number} config[].partnerCode Partner code.
    * @param {Object[]} config[].zones Array of zones to select.
-   * @param {number} [config[].zones[].zoneCode] Code of zone to select.
-   * @param {string} [config[].zones[].zoneName] Name of zone to select.
-   * @param {boolean} [config[].zones[].isSelected] If true, the zone
+   * @param {number} config[].zones[].zoneCode Code of zone to select.
+   * @param {string} config[].zones[].zoneName Name of zone to select.
+   * @param {boolean} config[].zones[].isSelected If true, the zone
    *   is initially selected.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
@@ -215,6 +220,12 @@ class ZoneLayer extends VectorLayer {
     });
   }
 
+  /**
+   * Internal function for extracting a feature's style at a given resolution
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} resolution
+   * @returns {ol.style[]}
+   */
   internalZoneStyleFunction(feature, resolution) {
     const isSelected = this.selectedZones.indexOf(feature) > -1;
     const styleObject = {
@@ -268,6 +279,10 @@ class ZoneLayer extends VectorLayer {
     ];
   }
 
+  /**
+   * Initialize the layer and listen to feature clicks.
+   * @param {ol.map} map ol.map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/map}
+   */
   init(map) {
     super.init(map);
     this.map = map;

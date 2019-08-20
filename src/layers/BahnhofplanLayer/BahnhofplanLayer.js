@@ -9,7 +9,10 @@ import layerHelper from '../layerHelper';
 
 /**
  * Layer for visualizing fare networks.
- * @class BahnhofplanLayer
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
+ * @class
+ * @params {Object} options
+ * @inheritdoc
  */
 class BahnhofplanLayer extends VectorLayer {
   constructor(options = {}) {
@@ -54,6 +57,12 @@ class BahnhofplanLayer extends VectorLayer {
     });
   }
 
+  /**
+   * Create Style from feature and resolution
+   * @param {ol.feature} feature
+   * @param {number} resolution
+   * @returns {Object|null}
+   */
   style(feature, resolution) {
     const vis = feature.get('visibility');
     const style = [this.iconStyle];

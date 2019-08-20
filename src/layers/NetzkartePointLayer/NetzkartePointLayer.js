@@ -8,6 +8,13 @@ import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
+/**
+ * Layer for visualizing network points.
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
+ * @class
+ * @params {Object} options
+ * @inheritdoc
+ */
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
     let name = 'Stationen';
@@ -63,6 +70,10 @@ class NetzkartePointLayer extends VectorLayer {
     vectorSource.setLoader(this.loader);
   }
 
+  /**
+   * Initialize the layer and listen to feature clicks.
+   * @param {ol.map} map ol.map (https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html)
+   */
   init(map) {
     super.init(map);
     this.map = map;
@@ -74,6 +85,12 @@ class NetzkartePointLayer extends VectorLayer {
     });
   }
 
+  /**
+   * Create airport style from feature and resolution
+   * @param {ol.feature} feature
+   * @param {number} resolution
+   * @returns {Object|null}
+   */
   airportStyle = (feature, resolution) => {
     const res = layerHelper.getDataResolution(resolution);
     if (
@@ -85,6 +102,11 @@ class NetzkartePointLayer extends VectorLayer {
     return null;
   };
 
+  /**
+   * Returns default style for feature
+   * @param {ol.feature} feature
+   * @returns {Object}
+   */
   defaultStyle = feature => {
     const layer = feature.get('layer');
     if (!this.netzkarteStyleCache[layer]) {
