@@ -189,9 +189,6 @@ export const parks = new WMSLayer({
   name: 'ch.sbb.parks',
   key: 'ch.sbb.parks',
   visible: false,
-  onClick: (clickedFeatures, layer, e) => {
-    console.log(clickedFeatures, layer, e);
-  },
   olLayer: new TileLayer({
     source: new TileWMSSource({
       url: `${CONF.geoserverUrl}/service/wms`,
