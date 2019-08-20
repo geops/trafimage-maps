@@ -27,7 +27,7 @@ import Color from 'color';
  * @param {string} options.url Url of the geOps fare network backend.
  * @param {Object} [options.zoneStyle] Zone style.
  * @param {Object} [options.zoneStyle.fill] Fill properties.
- * @param {string} [options.zoneStyle.fill.color] Fill color.
+ * @param {string} [options.zoneStyle.fill.color = 'rgb(255, 200, 25)'] Fill color.
  *   Default is 'rgb(255, 200, 25)'.
 
  * @param {Object} [options.zoneStyle.stroke] Stroke properties.
