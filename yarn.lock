@@ -12240,10 +12240,10 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.5.2:
     react-is "^16.9.0"
     scheduler "^0.15.0"
 
-react-transit@^0.1.1-beta.1:
-  version "0.1.1-beta.1"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.1.1-beta.1.tgz#739fda0bbb4093ceee8f6dfeb6ca2aeb878b4f42"
-  integrity sha512-748DUdJFxuOZIsh2hRdFqf+YDLkJ+62bMiPQkiCWLa7dGMtyBeXdFnEmCDSwXvrMX4NIHXFMbC58RMZ2ySwCgg==
+react-transit@^0.1.1-beta.3:
+  version "0.1.1-beta.3"
+  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.1.1-beta.3.tgz#20aeed1cc9f8257252d0d4ee17d8f4d173600ea5"
+  integrity sha512-i944INcAN04erPKDmCevSBNg/5kES1Q8nt+4PXYWuUd6pZuoMkqJrV8J6MK5nUAmVdgghHX8xZrLKMjxCrEYDw==
   dependencies:
     abortcontroller-polyfill "^1.3.0"
     ol "^6.0.0-beta.13"
