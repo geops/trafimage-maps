@@ -29,6 +29,7 @@ const AppRouter = () => (
                 mapControls: true,
                 popup: true,
               }}
+              initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}
               menuComponents={[TrackerMenu]}
             />

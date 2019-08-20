@@ -109,6 +109,11 @@ const propTypes = {
    * React router history.
    */
   history: PropTypes.shape(),
+
+  /**
+   * React router url params.
+   */
+  initialState: PropTypes.shape(),
 };
 
 const defaultProps = {
@@ -132,6 +137,7 @@ const defaultProps = {
   layers: null,
   apiKey: null,
   history: null,
+  initialState: {},
 };
 
 class TrafimageMaps extends Component {
@@ -164,6 +170,7 @@ class TrafimageMaps extends Component {
       history,
       center,
       zoom,
+      initialState,
     } = this.props;
 
     const defaultElements = {
@@ -181,6 +188,7 @@ class TrafimageMaps extends Component {
         <Permalink
           map={this.map}
           history={history}
+          initialState={initialState}
           layerService={this.layerService}
         />
       ),
