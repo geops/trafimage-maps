@@ -281,7 +281,7 @@ class ZoneLayer extends VectorLayer {
 
   /**
    * Initialize the layer and listen to feature clicks.
-   * @param {ol.map} map ol.map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/map}
+   * @param {ol.map} map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/map}
    */
   init(map) {
     super.init(map);
