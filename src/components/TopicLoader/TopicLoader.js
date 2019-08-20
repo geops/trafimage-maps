@@ -97,8 +97,8 @@ class TopicLoader extends Component {
       ...(layers || []),
     ];
 
-    const flatLayers = layerService.getLayersAsFlatArray();
     layerService.setLayers(newLayers);
+    const flatLayers = layerService.getLayersAsFlatArray();
     dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {

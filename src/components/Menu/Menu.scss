@@ -1,37 +1,25 @@
-.wkp-menu {
+.wkp-menu-wrapper {
   position: absolute;
   top: 12px;
   left: 10px;
   width: 371px;
   z-index: 2;
 
-  .wkp-menu-body {
-    border-width: 0 2px 2px 2px;
+  .wkp-menu {
+    border-width: 2px;
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: max-height 0.3s ease, border 0.1s ease 0.1s;
+    transition: max-height 0.3s ease;
     max-height: 1000px;
+    margin-top: 5px;
     overflow: hidden;
 
     &.closed {
       border-width: 0;
       border-top-width: 0;
       max-height: 0;
-    }
-
-    .wkp-menu-body-inner {
-      min-width: 250px;
-    }
-
-    .wkp-layer-tree {
-      overflow: hidden;
-      max-height: 1000px;
-      margin: 10px 10px 10px 25px;
-
-      &.closed {
-        display: none;
-      }
+      transition: max-height 0.3s ease, border 0.1s ease 0.2s;
     }
   }
 }
@@ -39,32 +27,32 @@
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-menu {
+  .wkp-menu-wrapper {
     left: 0;
-  }
 
-  .wkp-menu-body {
-    border: 0;
+    .wkp-menu {
+      border: 0;
 
-    &.closed {
-      padding: 0;
-      overflow: hidden;
-
-      div {
-        white-space: nowrap;
+      &.closed {
+        padding: 0;
         overflow: hidden;
+
+        div {
+          white-space: nowrap;
+          overflow: hidden;
+        }
       }
     }
   }
 
   // header component is enabled
   &.header {
-    .wkp-menu {
+    .wkp-menu-wrapper {
       top: 0;
       width: 345px;
 
-      .wkp-menu-body {
-        margin-top: 1px;
+      .wkp-menu {
+        margin-top: 0;
       }
     }
   }

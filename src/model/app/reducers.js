@@ -4,12 +4,14 @@ import {
   SET_ACTIVE_TOPIC,
   SET_CLICKED_FEATURE_INFO,
   SET_LANGUAGE,
+  SET_MENU_OPEN,
 } from './actions';
 
 const initialState = {
   topics: [],
   clickedFeatureInfo: null,
   language: 'de',
+  menuOpen: false,
 };
 
 export default function app(state = initialState, action) {
@@ -34,6 +36,11 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         activeTopic: { ...action.data },
+      };
+    case SET_MENU_OPEN:
+      return {
+        ...state,
+        menuOpen: action.data,
       };
     default:
       return {

@@ -6,6 +6,7 @@ import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/Layer';
+import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
@@ -175,6 +176,8 @@ bahnhofplaene.setChildren([
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
 
+export const tracker = new TrajservLayer();
+
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',
   key: 'ch.sbb.stationen.parent',
@@ -186,7 +189,7 @@ netzkartePointLayer.setChildren([
 ]);
 
 export const parks = new WMSLayer({
-  name: 'ch.sbb.parks',
+  name: 'Schweizer Pärke',
   key: 'ch.sbb.parks',
   visible: false,
   olLayer: new TileLayer({

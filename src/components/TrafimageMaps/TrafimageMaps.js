@@ -75,6 +75,13 @@ const propTypes = {
   popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
+   * List of menu component names that are displayed next to the default layer
+   * menu. Component names are names of files from the folder
+   * `src/compontens/Menu` without the `.js` extension.
+   */
+  menuComponents: PropTypes.arrayOf(PropTypes.string),
+
+  /**
    * Projection used for the map.
    */
   projection: PropTypes.oneOfType([
@@ -102,6 +109,11 @@ const propTypes = {
    * React router history.
    */
   history: PropTypes.shape(),
+
+  /**
+   * React router url params.
+   */
+  initialState: PropTypes.shape(),
 };
 
 const defaultProps = {
@@ -120,10 +132,12 @@ const defaultProps = {
   },
   baseLayers: null,
   popupComponents: null,
+  menuComponents: [],
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
   history: null,
+  initialState: {},
 };
 
 class TrafimageMaps extends Component {
@@ -148,6 +162,7 @@ class TrafimageMaps extends Component {
       elements,
       layers,
       popupComponents,
+      menuComponents,
       projection,
       topics,
       activeTopicKey,
@@ -155,17 +170,25 @@ class TrafimageMaps extends Component {
       history,
       center,
       zoom,
+      initialState,
     } = this.props;
 
     const defaultElements = {
       header: <Header />,
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
       footer: <Footer layerService={this.layerService} map={this.map} />,
-      menu: <Menu layerService={this.layerService} />,
+      menu: (
+        <Menu
+          layerService={this.layerService}
+          menuComponents={menuComponents}
+          map={this.map}
+        />
+      ),
       permalink: (
         <Permalink
           map={this.map}
           history={history}
+          initialState={initialState}
           layerService={this.layerService}
         />
       ),

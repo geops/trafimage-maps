@@ -1,0 +1,29 @@
+.wkp-tracker-menu {
+  .wkp-trajectory {
+    .wkp-trajectory-stop {
+      display: flex;
+
+      .wkp-trajectory-stop-time {
+        border-right: 4px solid #003d85;
+        padding: 10px;
+        padding-right: 10px;
+        position: relative;
+
+        .wkp-trajectory-stop-icon {
+          height: 6px;
+          width: 6px;
+          border: 2px solid #003d85;
+          background: white;
+          border-radius: 50%;
+          position: absolute;
+          right: -7px;
+          top: 12px;
+        }
+      }
+
+      .wkp-trajectory-stop-name {
+        padding: 10px;
+      }
+    }
+  }
+}

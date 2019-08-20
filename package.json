@@ -1,6 +1,5 @@
 {
   "name": "trafimage-maps",
-  "version": "0.3.0",
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
@@ -30,7 +29,7 @@
     "react-scripts": "3.0.1",
     "react-spatial": "^0.1.0-beta.2",
     "react-styleguidist": "^9.1.11",
-    "react-transit": "^0.1.1-beta.1",
+    "react-transit": "^0.1.1-beta.3",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
     "redux-thunk": "^2.3.0"
@@ -70,6 +69,10 @@
     "stylelint-scss": "^3.5.1",
     "vinyl-fs": "^3.0.3"
   },
+  "peerDependency": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
   "scripts": {
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",
     "build:dev": "REACT_APP_ENV='dev' yarn build",
@@ -93,7 +96,7 @@
     "start:stag": "REACT_APP_ENV='stag' yarn start",
     "start:prod": "REACT_APP_ENV='prod' yarn start",
     "start:doc": "yarn doc:server",
-    "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial)/).*/\"",
+    "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial|react-transit)/).*/\"",
     "test:coverage": "yarn test --coverage --coverageDirectory=coverage"
   },
   "browserslist": [
