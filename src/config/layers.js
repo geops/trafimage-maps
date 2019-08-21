@@ -65,6 +65,7 @@ export const netzkarteLayer = new MapboxLayer({
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   url: `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json?key=${CONF.vectorTilesKey}`,
 });
 
@@ -180,13 +181,57 @@ export const tracker = new TrajservLayer();
 
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',
-  key: 'ch.sbb.stationen.parent',
+  key: 'ch.sbb.netzkarte.stationen.parent',
+  hideInLegend: true,
 });
 
 netzkartePointLayer.setChildren([
   new NetzkartePointLayer({ useBboxStrategy: true }),
   new NetzkartePointLayer({ showAirports: true }),
 ]);
+
+export const buslines = new Layer({
+  name: 'ch.sbb.netzkarte.buslinien',
+  key: 'ch.sbb.netzkarte.buslinien',
+  visible: false,
+  olLayer: new TileLayer({
+    source: new WMTSSource({
+      url:
+        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_buslines_webmercator` +
+        '/webmercator/{TileMatrix}/{TileCol}/{TileRow}.png',
+      matrixSet: 'webmercator',
+      projection: 'EPSG:3857',
+      requestEncoding: 'REST',
+      tileGrid: new WMTSTileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
+    maxResolution: 20,
+  }),
+});
+
+export const gemeindegrenzen = new WMSLayer({
+  name: 'ch.sbb.ch_gemeinden',
+  key: 'ch.sbb.ch_gemeinden',
+  visible: false,
+  olLayer: new TileLayer({
+    source: new TileWMSSource({
+      url: `${CONF.geoserverUrl}/service/wms`,
+      crossOrigin: 'anonymous',
+      params: {
+        layers: 'trafimage:gemeindegrenzen',
+        STYLES: 'gemeindegrenzen_netzkarte',
+      },
+      tileGrid: new TileGrid({
+        extent: projectionExtent,
+        resolutions,
+        matrixIds: resolutions.map((r, i) => `${i}`),
+      }),
+    }),
+  }),
+});
 
 export const parks = new WMSLayer({
   name: 'Schweizer Pärke',

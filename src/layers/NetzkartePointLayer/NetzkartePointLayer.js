@@ -17,12 +17,12 @@ import layerHelper from '../layerHelper';
  */
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
-    let name = 'Stationen';
-    let key = 'ch.sbb.stationen';
+    let name = 'ch.sbb.netzkarte.stationen';
+    let key = 'ch.sbb.netzkarte.stationen';
 
     if (options.showAirports) {
-      name = 'Flughäfen';
-      key = 'ch.sbb.flughafen';
+      name = 'ch.sbb.netzkarte.flughafen';
+      key = 'ch.sbb.netzkarte.flughafen';
     }
 
     const vectorSource = new OLVectorSource({

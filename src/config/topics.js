@@ -2,6 +2,8 @@ import defaultBaseLayers, {
   netzkarteLayer,
   bahnhofplaene,
   netzkartePointLayer,
+  buslines,
+  gemeindegrenzen,
   tracker,
   parks,
 } from './layers';
@@ -11,6 +13,8 @@ export const netzkarte = {
   key: 'ch.sbb.netzkarte',
   layers: [
     ...defaultBaseLayers,
+    gemeindegrenzen,
+    buslines,
     parks,
     tracker,
     netzkartePointLayer,
