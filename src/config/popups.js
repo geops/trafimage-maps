@@ -1,8 +1,8 @@
 export const wkpPopups = {
   'ch.sbb.bahnhofplaene.printprodukte': 'BahnhofplanPopup',
   'ch.sbb.bahnhofplaene.interaktiv': 'BahnhofplanPopup',
-  'ch.sbb.stationen': 'NetzkartePopup',
-  'ch.sbb.flughafen': 'NetzkartePopup',
+  'ch.sbb.netzkarte.stationen': 'NetzkartePopup',
+  'ch.sbb.netzkarte.flughafen': 'NetzkartePopup',
   'ch.sbb.parks': 'ParksPopup',
 };
 
