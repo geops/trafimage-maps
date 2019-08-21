@@ -176,7 +176,17 @@ bahnhofplaene.setChildren([
   new BahnhofplanLayer({ showPrintFeatures: true }),
 ]);
 
-export const tracker = new TrajservLayer();
+export const tracker = new TrajservLayer({
+  name: 'Zugtracker',
+  key: 'ch.sbb.tracker',
+});
+
+export const punctuality = new TrajservLayer({
+  name: 'Pünktlichkeit',
+  key: 'ch.sbb.punctuality',
+  visible: false,
+  useDelayStyle: true,
+});
 
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',

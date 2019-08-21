@@ -35,17 +35,19 @@ class Menu extends Component {
 
     const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
-    this.loadMenuComponents();
   }
 
   componentDidMount() {
+    this.loadMenuComponents();
     this.updateMenuLayers();
   }
 
   componentDidUpdate(prevProps) {
     const { menuComponents } = this.props;
 
-    if (prevProps.menuComponents !== menuComponents) {
+    if (
+      prevProps.menuComponents.every(e => menuComponents.includes(e) === false)
+    ) {
       this.loadMenuComponents();
     }
   }
