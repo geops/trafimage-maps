@@ -3,20 +3,24 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
+import Map from 'ol/Map';
 import LayerService from 'react-spatial/LayerService';
-import LayerTree from 'react-spatial/components/LayerTree';
-import MenuHeader from './MenuHeader';
 import TopicMenu from './TopicMenu';
-import { setActiveTopic } from '../../model/app/actions';
+import MenuHeader from './MenuHeader';
+import { setMenuOpen } from '../../model/app/actions';
 
 import './Menu.scss';
 
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  menuComponents: PropTypes.arrayOf(PropTypes.string).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  map: PropTypes.instanceOf(Map).isRequired,
+  menuOpen: PropTypes.bool.isRequired,
+
+  dispatchSetMenuOpen: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  dispatchSetActiveTopic: PropTypes.func.isRequired,
 };
 
 class Menu extends Component {
@@ -24,33 +28,38 @@ class Menu extends Component {
     super(props);
 
     this.state = {
-      isOpen: false,
-      openTopicKey: null,
       menuLayers: [],
       allMenuLayersVisible: false,
+      loadedMenuComponents: [],
     };
 
     const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
+    this.loadMenuComponents();
   }
 
   componentDidMount() {
     this.updateMenuLayers();
   }
 
-  onTopicClick(topic) {
-    const { activeTopic, dispatchSetActiveTopic } = this.props;
-    const { openTopicKey } = this.state;
+  componentDidUpdate(prevProps) {
+    const { menuComponents } = this.props;
 
-    if (activeTopic.key === topic.key) {
-      // toggle layer tree
-      this.setState({
-        openTopicKey: openTopicKey === topic.key ? null : topic.key,
-      });
-    } else {
-      // change topic
-      dispatchSetActiveTopic(topic);
+    if (prevProps.menuComponents !== menuComponents) {
+      this.loadMenuComponents();
     }
+  }
+
+  loadMenuComponents() {
+    const { menuComponents } = this.props;
+    const components = [];
+
+    for (let i = 0; i < menuComponents.length; i += 1) {
+      const Comp = React.lazy(() => import(`../../menus/${menuComponents[i]}`));
+      components.push(Comp);
+    }
+
+    this.setState({ loadedMenuComponents: components });
   }
 
   updateMenuLayers() {
@@ -66,12 +75,20 @@ class Menu extends Component {
   }
 
   render() {
-    const { activeTopic, layerService, t, topics } = this.props;
+    const {
+      activeTopic,
+      layerService,
+      topics,
+      map,
+      menuOpen,
+      dispatchSetMenuOpen,
+      t,
+    } = this.props;
+
     const {
       menuLayers,
+      loadedMenuComponents,
       allMenuLayersVisible,
-      isOpen,
-      openTopicKey,
     } = this.state;
 
     const info = allMenuLayersVisible
@@ -79,43 +96,30 @@ class Menu extends Component {
       : menuLayers.map(l => t(l.getName())).join(', ');
 
     return (
-      <div className="wkp-menu">
+      <div className="wkp-menu-wrapper">
         <MenuHeader
-          title={activeTopic.key}
+          title={activeTopic.name}
           info={info}
           headerLayerNames={menuLayers.map(l => l.getName())}
-          isOpen={isOpen}
-          onToggle={() => this.setState({ isOpen: !isOpen })}
+          isOpen={menuOpen}
+          onToggle={() => dispatchSetMenuOpen(!menuOpen)}
         />
 
-        <div className={`wkp-menu-body ${isOpen ? '' : 'closed'}`}>
-          <div className="wkp-menu-body-inner">
+        <div className={`wkp-menu wkp-topics ${menuOpen ? '' : 'closed'}`}>
+          <div className="wkp-menu-body">
             {topics.map(topic => (
               <div key={topic.key}>
-                <TopicMenu
-                  topic={topic}
-                  isActive={activeTopic.key === topic.key}
-                  isTopicCollapsed={openTopicKey === topic.key}
-                  onClick={to => this.onTopicClick(to)}
-                />
-
-                {topic.key === activeTopic.key && (
-                  <div
-                    className={`wkp-layer-tree ${
-                      openTopicKey === topic.key ? '' : 'closed'
-                    }`}
-                  >
-                    <LayerTree
-                      isItemHidden={l => l.getIsBaseLayer()}
-                      t={name => t(name)}
-                      layerService={layerService}
-                    />
-                  </div>
-                )}
+                <TopicMenu layerService={layerService} topic={topic} />
               </div>
             ))}
           </div>
         </div>
+
+        {loadedMenuComponents.map(Comp => (
+          <React.Suspense fallback="Loading menu...">
+            <Comp layerService={layerService} map={map} />
+          </React.Suspense>
+        ))}
       </div>
     );
   }
@@ -124,10 +128,11 @@ class Menu extends Component {
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   topics: state.app.topics,
+  menuOpen: state.app.menuOpen,
 });
 
 const mapDispatchToProps = {
-  dispatchSetActiveTopic: setActiveTopic,
+  dispatchSetMenuOpen: setMenuOpen,
 };
 
 Menu.propTypes = propTypes;

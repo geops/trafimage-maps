@@ -4,6 +4,8 @@ import defaultBaseLayers, {
   netzkartePointLayer,
   buslines,
   gemeindegrenzen,
+  tracker,
+  parks,
 } from './layers';
 
 export const netzkarte = {
@@ -13,6 +15,8 @@ export const netzkarte = {
     ...defaultBaseLayers,
     gemeindegrenzen,
     buslines,
+    parks,
+    tracker,
     netzkartePointLayer,
     bahnhofplaene,
   ],

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/Layer';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
+import WMSLayer from 'react-spatial/layers/WMSLayer';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
@@ -67,7 +68,7 @@ class TopicLoader extends Component {
     }
   }
 
-  onClick(features, layer, event) {
+  onClick(features, layer, coordinate) {
     const { dispatchSetClickedFeatureInfo } = this.props;
 
     if (!features.length) {
@@ -77,7 +78,7 @@ class TopicLoader extends Component {
     dispatchSetClickedFeatureInfo({
       features,
       layer,
-      event,
+      coordinate,
     });
   }
 
@@ -96,8 +97,8 @@ class TopicLoader extends Component {
       ...(layers || []),
     ];
 
-    const flatLayers = layerService.getLayersAsFlatArray();
     layerService.setLayers(newLayers);
+    const flatLayers = layerService.getLayersAsFlatArray();
     dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
@@ -105,7 +106,10 @@ class TopicLoader extends Component {
         flatLayers[i].setApiKey(apiKey);
       }
 
-      if (flatLayers[i] instanceof VectorLayer) {
+      if (
+        flatLayers[i] instanceof VectorLayer ||
+        flatLayers[i] instanceof WMSLayer
+      ) {
         flatLayers[i].onClick(this.onClick.bind(this));
       }
     }

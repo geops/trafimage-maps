@@ -3,6 +3,7 @@ export const wkpPopups = {
   'ch.sbb.bahnhofplaene.interaktiv': 'BahnhofplanPopup',
   'ch.sbb.netzkarte.stationen': 'NetzkartePopup',
   'ch.sbb.netzkarte.flughafen': 'NetzkartePopup',
+  'ch.sbb.parks': 'ParksPopup',
 };
 
 export default wkpPopups;

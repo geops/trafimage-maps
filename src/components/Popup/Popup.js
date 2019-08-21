@@ -30,7 +30,7 @@ const Popup = ({
     return null;
   }
 
-  const { features, layer, event } = clickedFeatureInfo;
+  const { features, layer, coordinate } = clickedFeatureInfo;
   const [feature] = features; // TODO: allow multiple
   const componentName = popupComponents[layer.getKey()];
 
@@ -46,7 +46,7 @@ const Popup = ({
     <React.Suspense fallback="loading...">
       <RSPopup
         onCloseClick={() => dispatchSetClickedFeatureInfo()}
-        popupCoordinate={event.coordinate}
+        popupCoordinate={coordinate}
         feature={feature}
         map={map}
       >

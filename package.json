@@ -1,11 +1,9 @@
 {
   "name": "trafimage-maps",
-  "version": "0.3.0",
   "proxy": "http://127.0.0.1:8000",
   "main": "build/es/index.js",
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@turf/intersect": "^6.1.3",
     "abortcontroller-polyfill": "^1.2.3",
     "color": "^3.1.2",
     "geops-docjs-template": "^1.0.0",
@@ -28,16 +26,18 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-router-prop-types": "^1.0.4",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "3.0.1",
     "react-spatial": "^0.1.0-beta.2",
     "react-styleguidist": "^9.1.11",
+    "react-transit": "^0.1.1-beta.3",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
-    "redux-thunk": "^2.3.0",
-    "turf": "^3.0.14"
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/runtime": "^7.3.1",
     "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.0",
@@ -69,6 +69,10 @@
     "stylelint-scss": "^3.5.1",
     "vinyl-fs": "^3.0.3"
   },
+  "peerDependency": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
   "scripts": {
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",
     "build:dev": "REACT_APP_ENV='dev' yarn build",
@@ -92,7 +96,7 @@
     "start:stag": "REACT_APP_ENV='stag' yarn start",
     "start:prod": "REACT_APP_ENV='prod' yarn start",
     "start:doc": "yarn doc:server",
-    "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial)/).*/\"",
+    "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial|react-transit)/).*/\"",
     "test:coverage": "yarn test --coverage --coverageDirectory=coverage"
   },
   "browserslist": [

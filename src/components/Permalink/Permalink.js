@@ -19,6 +19,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  initialState: PropTypes.shape(),
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
@@ -28,21 +29,24 @@ const propTypes = {
 const defaultProps = {
   map: undefined,
   history: undefined,
+  initialState: {},
 };
+
+const TRAIN_FILTER = 'train_filter';
+const OPERATOR_FILTER = 'operator_filter';
 
 class Permalink extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      params: {},
-    };
+    this.state = {};
   }
 
   componentDidMount() {
-    const { dispatchSetZoom, dispatchSetCenter } = this.props;
+    const { dispatchSetZoom, dispatchSetCenter, initialState } = this.props;
 
     // Permalink has the priority over the initial state.
     const parameters = {
+      ...initialState,
       ...qs.parse(window.location.search),
     };
 
@@ -57,6 +61,14 @@ class Permalink extends PureComponent {
     if (z) {
       dispatchSetZoom(z);
     }
+
+    const trainFilter = parameters[TRAIN_FILTER];
+    const operatorFilter = parameters[OPERATOR_FILTER];
+
+    this.setState({
+      [TRAIN_FILTER]: trainFilter,
+      [OPERATOR_FILTER]: operatorFilter,
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -69,12 +81,11 @@ class Permalink extends PureComponent {
 
   render() {
     const { history, layerService, map } = this.props;
-    const { params } = this.state;
 
     return (
       <RSPermalink
         map={map}
-        params={params}
+        params={{ ...this.state }}
         layerService={layerService}
         history={history}
       />

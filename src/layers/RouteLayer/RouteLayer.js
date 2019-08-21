@@ -7,15 +7,15 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
  * Layer for visualizing fare networks.
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
- * @extends TrafimageLayer
  * @param {Object} [options] Layer options.
- * @param {string} options.apiKey Access key for geOps services.
+ * @param {string?} [options.apiKey] Access key for geOps services.
  * @param {string} [options.name] Layer name.
  * @param {string} [options.url] Url of the geOps route backend.
- * @param {boolean} [options.visible] Visibility of the layer.
+ * @param {boolean} [options.visible = true] Visibility of the layer.
  *   Default is true.
- * @param {string} [projection] Layer projection.
+ * @param {string} [options.projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  */
 class RouteLayer extends VectorLayer {
@@ -49,6 +49,12 @@ class RouteLayer extends VectorLayer {
     this.url = options.url || 'https://api.geops.io/routing';
   }
 
+  /**
+   * Gettint the Mot-features on specific route.
+   * @param {Object} viaPoints Route Informations
+   * @param {String} mot ask for specific Route
+   * @returns {array<ol.feature>}
+   */
   fetchRouteForMot(viaPoints, mot) {
     this.clear();
 
