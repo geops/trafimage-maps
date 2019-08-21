@@ -65,6 +65,7 @@ export const netzkarteLayer = new MapboxLayer({
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   url: `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json?key=${CONF.vectorTilesKey}`,
 });
 
@@ -88,7 +89,6 @@ export const swisstopoSwissImage = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
-    zIndex: -10,
   }),
 });
 
@@ -111,7 +111,6 @@ export const netzkarteAerial = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
-    zIndex: -10,
   }),
 });
 
@@ -142,7 +141,6 @@ export const swisstopoLandeskarte = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
-    zIndex: -10,
   }),
 });
 
@@ -166,7 +164,6 @@ export const swisstopoLandeskarteGrau = new Layer({
         matrixIds: resolutions.map((r, i) => `${i}`),
       }),
     }),
-    zIndex: -10,
   }),
 });
 
@@ -212,7 +209,6 @@ export const buslines = new Layer({
       }),
     }),
     maxResolution: 20,
-    zIndex: -9,
   }),
 });
 
