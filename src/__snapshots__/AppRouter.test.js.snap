@@ -500,7 +500,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         tabIndex={0}
                       >
                         <div>
-                          Pünktlichkeit
+                          ch.sbb.puenktlichkeit
                         </div>
                         <div
                           className="tm-layer-tree-arrow tm-layer-tree-arrow-expanded"
@@ -538,7 +538,7 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            Regionalverkehr
+                            ch.sbb.puenktlichkeit-nv
                           </div>
                         </div>
                       </div>
@@ -574,7 +574,7 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            Fernverkehr
+                            ch.sbb.puenktlichkeit-fv
                           </div>
                         </div>
                       </div>
@@ -610,7 +610,7 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            Alle
+                            ch.sbb.puenktlichkeit-all
                           </div>
                         </div>
                       </div>
