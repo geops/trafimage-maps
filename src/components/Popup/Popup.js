@@ -39,7 +39,8 @@ const Popup = ({
   }
 
   const PopupComponent = React.lazy(() =>
-    import(`../../popups/${componentName}`),
+    // Styleguidist try to load every file in the folder if we don't put index.js
+    import(`../../popups/${componentName}/index.js`),
   );
 
   return (

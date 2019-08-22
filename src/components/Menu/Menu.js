@@ -32,8 +32,8 @@ class Menu extends Component {
       allMenuLayersVisible: false,
       loadedMenuComponents: [],
     };
-
     const { layerService } = this.props;
+    console.log('constructor');
     layerService.on('change:visible', () => this.updateMenuLayers());
   }
 
@@ -45,8 +45,12 @@ class Menu extends Component {
   componentDidUpdate(prevProps) {
     const { menuComponents } = this.props;
 
+    // Array.every returns always true if array is empty.
     if (
-      prevProps.menuComponents.every(e => menuComponents.includes(e) === false)
+      !(prevProps.menuComponents.length === 0 && menuComponents.length === 0) &&
+      prevProps.menuComponents.every(
+        comp => menuComponents.includes(comp) === false,
+      )
     ) {
       this.loadMenuComponents();
     }
@@ -57,7 +61,10 @@ class Menu extends Component {
     const components = [];
 
     for (let i = 0; i < menuComponents.length; i += 1) {
-      const Comp = React.lazy(() => import(`../../menus/${menuComponents[i]}`));
+      const Comp = React.lazy(() =>
+        // Styleguidist try to load every file in the folder if we don't put index.js
+        import(`../../menus/${menuComponents[i]}/index.js`),
+      );
       components.push(Comp);
     }
 
@@ -66,10 +73,10 @@ class Menu extends Component {
 
   updateMenuLayers() {
     const { layerService } = this.props;
-    let topicLayers = layerService.getLayersAsFlatArray();
-    topicLayers = topicLayers.filter(l => !l.getIsBaseLayer());
+    const topicLayers = layerService
+      .getLayersAsFlatArray()
+      .filter(l => !l.getIsBaseLayer());
     const menuLayers = topicLayers.filter(l => l.getVisible());
-
     this.setState({
       menuLayers,
       allMenuLayersVisible: menuLayers.length === topicLayers.length,
