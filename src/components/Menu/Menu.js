@@ -33,7 +33,6 @@ class Menu extends Component {
       loadedMenuComponents: [],
     };
     const { layerService } = this.props;
-    console.log('constructor');
     layerService.on('change:visible', () => this.updateMenuLayers());
   }
 

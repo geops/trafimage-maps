@@ -6,7 +6,7 @@ import { transform as transformCoords } from 'ol/proj';
 import LayerService from 'react-spatial/LayerService';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
-import MenuItem from '../components/Menu/MenuItem';
+import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
 const propTypes = {
