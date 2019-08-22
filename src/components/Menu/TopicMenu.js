@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
@@ -12,6 +14,8 @@ const propTypes = {
   topic: PropTypes.shape().isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   dispatchSetActiveTopic: PropTypes.func.isRequired,
+
+  t: PropTypes.func.isRequired,
 };
 
 class TopicMenu extends PureComponent {
@@ -35,7 +39,7 @@ class TopicMenu extends PureComponent {
   }
 
   render() {
-    const { layerService, topic, activeTopic } = this.props;
+    const { t, layerService, topic, activeTopic } = this.props;
     const { isCollapsed } = this.state;
     let layerTree = null;
 
@@ -44,6 +48,7 @@ class TopicMenu extends PureComponent {
         <LayerTree
           isItemHidden={l => l.getIsBaseLayer()}
           layerService={layerService}
+          t={t}
         />
       );
     }
@@ -65,7 +70,7 @@ class TopicMenu extends PureComponent {
                 <div className="wkp-topic-radio-dot" />
               )}
             </div>
-            {topic.name}
+            {t(topic.name)}
           </div>
           <div
             className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
@@ -90,7 +95,10 @@ const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  withTranslation(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(TopicMenu);

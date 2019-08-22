@@ -135,7 +135,6 @@
     "ch.sbb.bahnhoffrequenzen-desc": "Le nombre d’usagers des chemins de fer pour les gares et les arrêts CFF, SOB, Thurbo et Zentralbahn est affiché. Les chiffres se rapportent au trafic moyen pendant les jours ouvrés (lu-ve) et recensent les montées et descentes de personnes pour les entreprises de transport suivantes: CFF, RegionAlps, Thurbo, Zentralbahn, Appenzeller Bahnen, BLS, MGB, MOB, OeBB (Oensingen-Balsthal-Bahn), RhB, SOB, SZU et Travys. Les passagers d’autres entreprises de transport/d’autres moyens de transport publics et les passants ne sont pas pris en compte.<br/>Les données se réfèrent à l’année 2016.<p>Données: <a href=\"mailto:stat@sbb.ch\">stat@sbb.ch</a>.</p>",
     "ch.sbb.netzkarte.buslinien": "Lignes de bus",
     "ch.sbb.netzkarte.buslinien-desc": "Le tracé géographique exact des lignes de bus a été déduit d’une procédure d’itinérance automatisée (<a target=\"_blank\" href=\"http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs\">détails</a>). Les données ne sont pas traitées d’un point de vue rédactionnel et sont améliorées en continu.",
-    "Zugtracker" : "Train tracker",
     "Nach:" : "Jusqu' à",
 
     "ch.sbb.netzkarte" : "Carte du réseau des TP suisses",
@@ -309,5 +308,8 @@
     "Bahnhofpläne": "Plans de gares",
     "Printprodukte": "Produits imprimés",
     "Plakat": "Affiche",
-    "Format A4": "Format A4"
+    "Format A4": "Format A4",
+    "Menü wird geladen...": "Chargement du menu...",
+    "Zugtracker" : "Train tracker",
+    "Pünktlichkeit": "Ponctualité"
 }

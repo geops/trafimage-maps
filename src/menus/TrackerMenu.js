@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TiVideo } from 'react-icons/ti';
 import Map from 'ol/Map';
+import { transform as transformCoords } from 'ol/proj';
 import LayerService from 'react-spatial/LayerService';
-import TrajservLayer from 'react-transit/layers/TrajservLayer';
+import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import MenuItem from '../components/Menu/MenuItem';
 import './TrackerMenu.scss';
@@ -25,29 +26,38 @@ class TrackerMenu extends Component {
     super(props);
     const { layerService } = this.props;
 
-    this.trackerLayer = layerService
+    this.trackerLayers = layerService
       .getLayersAsFlatArray()
-      .find(l => l instanceof TrajservLayer);
+      .filter(l => l instanceof TrackerLayer);
 
     this.state = {
-      open: this.trackerLayer && this.trackerLayer.getVisible(),
+      open: this.trackerLayers.length && this.getVisibleLayerName(),
       collapsed: true,
       trajectory: null,
     };
 
-    if (this.trackerLayer) {
-      this.trackerLayer.olLayer.on('change:visible', () =>
-        this.setState({ open: this.trackerLayer.getVisible() }),
-      );
+    if (this.trackerLayers.length) {
+      this.trackerLayers.forEach(layer => {
+        layer.olLayer.on('change:visible', () =>
+          this.setState({
+            open: this.getVisibleLayerName(),
+          }),
+        );
 
-      this.trackerLayer.onClick(traj => {
-        this.setState({
-          open: true,
-          collapsed: false,
-          trajectory: traj,
+        layer.onClick(traj => {
+          this.setState({
+            open: layer.getName(),
+            collapsed: false,
+            trajectory: traj,
+          });
         });
       });
     }
+  }
+
+  getVisibleLayerName() {
+    const layerVisible = this.trackerLayers.find(l => l.getVisible());
+    return layerVisible ? layerVisible.getName() : false;
   }
 
   render() {
@@ -64,11 +74,25 @@ class TrackerMenu extends Component {
         title="Zugtracker"
         icon={<TiVideo />}
         map={map}
-        open={open}
+        open={typeof open === 'string'}
         collapsed={collapsed}
         onCollapseToggle={c => this.setState({ collapsed: c })}
       >
-        {trajectory ? <RouteSchedule lineInfos={trajectory} /> : null}
+        {trajectory ? (
+          <RouteSchedule
+            lineInfos={trajectory}
+            onStationClick={station => {
+              map.getView().animate({
+                zoom: map.getView().getZoom(),
+                center: transformCoords(
+                  station.coordinates,
+                  'EPSG:4326',
+                  'EPSG:3857',
+                ),
+              });
+            }}
+          />
+        ) : null}
       </MenuItem>
     );
   }
