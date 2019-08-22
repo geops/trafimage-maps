@@ -1,6 +1,6 @@
 import qs from 'querystring';
 import WMTSSource from 'ol/source/WMTS';
-import Layer from 'react-spatial/Layer';
+import Layer from 'react-spatial/layers/Layer';
 
 /**
  * Base layer for ZoneLayer and RouteLayer.

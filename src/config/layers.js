@@ -5,7 +5,7 @@ import TileWMSSource from 'ol/source/TileWMS';
 import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
-import Layer from 'react-spatial/Layer';
+import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';

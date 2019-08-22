@@ -2,7 +2,7 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
-import Layer from 'react-spatial/Layer';
+import Layer from 'react-spatial/layers/Layer';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';

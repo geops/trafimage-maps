@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 
-import Layer from 'react-spatial/Layer';
+import Layer from 'react-spatial/layers/Layer';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';

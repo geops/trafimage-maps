@@ -10,7 +10,7 @@ import OLMap from 'ol/Map';
 import Projection from 'ol/proj/Projection';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
-import Layer from 'react-spatial/Layer';
+import Layer from 'react-spatial/layers/Layer';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
 
