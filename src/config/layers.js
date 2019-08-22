@@ -182,12 +182,38 @@ export const tracker = new TrajservLayer({
   key: 'ch.sbb.tracker',
 });
 
-export const punctuality = new TrajservLayer({
-  name: 'Pünktlichkeit',
-  key: 'ch.sbb.punctuality',
+export const punctuality = new Layer({
+  name: 'ch.sbb.puenktlichkeit',
+  key: 'ch.sbb.puenktlichkeit',
   visible: false,
-  useDelayStyle: true,
 });
+
+punctuality.setChildren([
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-all',
+    key: 'ch.sbb.puenktlichkeit-all',
+    visible: false,
+    useDelayStyle: false,
+    radioGroup: 'ch.sbb.punctuality',
+    train: ['(IR|IC|EC|RJX|TGV)', '^(S|R$)'],
+  }),
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-fv',
+    key: 'ch.sbb.puenktlichkeit-fv',
+    visible: false,
+    useDelayStyle: false,
+    radioGroup: 'ch.sbb.punctuality',
+    train: '(IR|IC|EC|RJX|TGV)',
+  }),
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-nv',
+    key: 'ch.sbb.puenktlichkeit-nv',
+    visible: false,
+    useDelayStyle: true,
+    radioGroup: 'ch.sbb.punctuality',
+    train: '^(S|R$)',
+  }),
+]);
 
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',
