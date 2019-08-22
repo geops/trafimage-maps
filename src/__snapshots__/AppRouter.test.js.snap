@@ -728,39 +728,6 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
             </div>
           </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
-              <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
-              >
-                <div
-                  className="wkp-topic-title"
-                >
-                  <div
-                    className="wkp-topic-radio"
-                  />
-                  CASA
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
-                />
-              </div>
-              <div
-                className="wkp-layer-tree"
-              />
-            </div>
-          </div>
         </div>
       </div>
       Loading menu...

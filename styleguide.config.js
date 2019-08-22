@@ -24,18 +24,14 @@ module.exports = {
       name: 'Applications',
       sections: [
         {
-          name: 'Trafimage Kartenportal',
-          content: 'src/components/TrafimageMaps/README.md',
-        },
-        {
           name: 'Casa',
           content: 'src/apps/Casa/README.md',
         },
+        {
+          name: 'Digitale Stelen',
+          content: 'src/apps/DigitalenStelen/README.md',
+        },
       ],
-    },
-    {
-      name: 'Digitale Stelen',
-      content: 'src/apps/DigitalenStelen/README.md',
     },
     {
       name: 'Popups',

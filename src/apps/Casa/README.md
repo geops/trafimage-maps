@@ -11,91 +11,82 @@ import React from 'react';
 import TrafimageMaps from '../../components/TrafimageMaps';
 import RouteLayer from '../../layers/RouteLayer';
 import ZoneLayer from '../../layers/ZoneLayer';
-import { casa } from '../../config/topics';
+import casa from '../../config/Casa';
 
-const CasaExample = () => {
-  // Intialization of zone layer.
-  const zoneLayer = new ZoneLayer({
-    // Demo key. Please replace with your own key.
-    apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
-    zoneStyleFunction: (zoneProps, isSelected) => {
-      return {
-        fill: {
-          color: isSelected ? 'red' : 'rgb(255, 200, 25)',
-        },
-      };
-    },
-  });
-
-  // Select zones.
-  zoneLayer.loadZones([
-    {
-      partnerCode: 801,
-      zones: [{
-        zoneCode: 10,
-        zoneName: 'Davos',
-      }],
-    },
-    {
-      partnerCode: 490,
-      zones: [{
-        zoneCode: 120,
+// Intialization of zone layer.
+const zoneLayer = new ZoneLayer({
+  // Demo key. Please replace with your own key.
+  apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  zoneStyleFunction: (zoneProps, isSelected) => {
+    return {
+      fill: {
+        color: isSelected ? 'red' : 'rgb(255, 200, 25)',
       },
-      {
-        zoneCode: 170,
-      }],
+    };
+  },
+});
+
+// Select zones.
+zoneLayer.loadZones([
+  {
+    partnerCode: 801,
+    zones: [{
+      zoneCode: 10,
+      zoneName: 'Davos',
+    }],
+  },
+  {
+    partnerCode: 490,
+    zones: [{
+      zoneCode: 120,
     },
-  ]).then((f) => {
-    zoneLayer.zoomToZones();
-  });
-
-  zoneLayer.onClick(f => {
-      console.log('Clicked', f);
-  });
-
-  // Initialize route layer.
-  const routeLayer = new RouteLayer({
-    // Demo apiKey. Please replace with your own apiKey.
-    apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
-	});
-
-  // Visualize a route on the map.
-  routeLayer.loadRoutes([
     {
-      uicFrom: 8501000,
-      uicTo: 8500010,
-      mot:'rail',
-    },
-  ]);
+      zoneCode: 170,
+    }],
+  },
+]).then((f) => {
+  zoneLayer.zoomToZones();
+});
 
-  routeLayer.onClick(f => {
-      console.log('Clicked', f);
-  });
+zoneLayer.onClick(f => {
+    console.log('Clicked', f);
+});
 
-  // Configuration of visible app elements.
-  const elements = {
-    menu: true,
-    popup: true,
-  };
+// Initialize route layer.
+const routeLayer = new RouteLayer({
+  // Demo apiKey. Please replace with your own apiKey.
+  apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+});
 
-  // Render the component with react.
-  return (
-    <div style={{ position: 'relative', width: '100%', height: 500 }}>
+// Visualize a route on the map.
+routeLayer.loadRoutes([
+  {
+    uicFrom: 8501000,
+    uicTo: 8500010,
+    mot:'rail',
+  },
+]);
 
-      <TrafimageMaps
-        topics={[casa]}
-        apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
-        layers={[zoneLayer, routeLayer]}
-        elements={elements}
-        popupComponents={{
-          'ch.sbb.casa.routeLayer': 'CasaRoutePopup',
-        }}
-      />
+routeLayer.onClick(f => {
+    console.log('Clicked', f);
+});
 
-    </div>
-  );
+// Configuration of visible app elements.
+const elements = {
+  menu: true,
+  popup: true,
 };
 
-<CasaExample />;
 
+<div style={{ position: 'relative', width: '100%', height: 500 }}>
+  <TrafimageMaps
+    topics={[casa]}
+    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+    layers={[zoneLayer, routeLayer]}
+    elements={elements}
+    popupComponents={{
+      'ch.sbb.casa.routeLayer': 'CasaRoutePopup',
+    }}
+  />
+</div>;
 ```
