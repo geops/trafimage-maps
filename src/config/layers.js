@@ -183,31 +183,31 @@ export const tracker = new TrajservLayer({
 });
 
 export const punctuality = new Layer({
-  name: 'Pünktlichkeit',
-  key: 'ch.sbb.punctuality',
+  name: 'ch.sbb.puenktlichkeit',
+  key: 'ch.sbb.puenktlichkeit',
   visible: false,
 });
 
 punctuality.setChildren([
   new TrajservLayer({
-    name: 'Alle',
-    key: 'ch.sbb.punctuality.all',
+    name: 'ch.sbb.puenktlichkeit-all',
+    key: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     useDelayStyle: false,
     radioGroup: 'ch.sbb.punctuality',
     train: ['(IR|IC|EC|RJX|TGV)', '^(S|R$)'],
   }),
   new TrajservLayer({
-    name: 'Fernverkehr',
-    key: 'ch.sbb.punctuality.longdistances',
+    name: 'ch.sbb.puenktlichkeit-fv',
+    key: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: false,
     radioGroup: 'ch.sbb.punctuality',
     train: '(IR|IC|EC|RJX|TGV)',
   }),
   new TrajservLayer({
-    name: 'Regionalverkehr',
-    key: 'ch.sbb.punctuality.regional',
+    name: 'ch.sbb.puenktlichkeit-nv',
+    key: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
