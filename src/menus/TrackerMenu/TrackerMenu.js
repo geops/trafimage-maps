@@ -6,6 +6,7 @@ import { transform as transformCoords } from 'ol/proj';
 import LayerService from 'react-spatial/LayerService';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
+import TrackerControl from 'react-transit/components/TrackerControl';
 import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
@@ -68,6 +69,8 @@ class TrackerMenu extends Component {
       return null;
     }
 
+    const visibleTracker = this.trackerLayers.find(l => l.getVisible());
+
     return (
       <MenuItem
         className="wkp-tracker-menu"
@@ -79,19 +82,22 @@ class TrackerMenu extends Component {
         onCollapseToggle={c => this.setState({ collapsed: c })}
       >
         {trajectory ? (
-          <RouteSchedule
-            lineInfos={trajectory}
-            onStationClick={station => {
-              map.getView().animate({
-                zoom: map.getView().getZoom(),
-                center: transformCoords(
-                  station.coordinates,
-                  'EPSG:4326',
-                  'EPSG:3857',
-                ),
-              });
-            }}
-          />
+          <div>
+            <TrackerControl trackerLayer={visibleTracker} />
+            <RouteSchedule
+              lineInfos={trajectory}
+              onStationClick={station => {
+                map.getView().animate({
+                  zoom: map.getView().getZoom(),
+                  center: transformCoords(
+                    station.coordinates,
+                    'EPSG:4326',
+                    'EPSG:3857',
+                  ),
+                });
+              }}
+            />
+          </div>
         ) : null}
       </MenuItem>
     );
