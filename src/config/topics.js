@@ -1,5 +1,6 @@
 import defaultBaseLayers, {
   bahnhofplaene,
+  netzkarteLayer,
   netzkartePointLayer,
   buslines,
   gemeindegrenzen,
@@ -24,4 +25,11 @@ export const netzkarte = {
   projection: 'EPSG:3857',
 };
 
-export default [netzkarte];
+const casa = {
+  name: 'CASA',
+  key: 'ch.sbb.casa',
+  layers: [netzkarteLayer],
+  projection: 'EPSG:3857',
+};
+
+export default [netzkarte, casa];
