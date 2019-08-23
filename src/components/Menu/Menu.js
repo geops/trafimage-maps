@@ -124,7 +124,7 @@ class Menu extends Component {
         </div>
 
         {loadedMenuComponents.map(Comp => (
-          <React.Suspense fallback="Loading menu..." key={Comp.toString()}>
+          <React.Suspense fallback="Loading menu...">
             <Comp layerService={layerService} map={map} />
           </React.Suspense>
         ))}
