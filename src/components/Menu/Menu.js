@@ -103,6 +103,7 @@ class Menu extends Component {
       ? t('alle aktiviert')
       : menuLayers.map(l => t(l.getName())).join(', ');
 
+    /* eslint-disable react/no-array-index-key */
     return (
       <div className="wkp-menu-wrapper">
         <MenuHeader
@@ -123,13 +124,16 @@ class Menu extends Component {
           </div>
         </div>
 
-        {loadedMenuComponents.map(Comp => (
-          <React.Suspense fallback="Loading menu...">
-            <Comp layerService={layerService} map={map} />
-          </React.Suspense>
-        ))}
+        {loadedMenuComponents.map((Comp, index) => {
+          return (
+            <React.Suspense fallback="Loading menu...">
+              <Comp layerService={layerService} map={map} key={index} />
+            </React.Suspense>
+          );
+        })}
       </div>
     );
+    /* eslint-enable */
   }
 }
 
