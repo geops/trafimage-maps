@@ -28,8 +28,8 @@ module.exports = {
           content: 'src/apps/Casa/README.md',
         },
         {
-          name: 'Digitale Stelen',
-          content: 'src/apps/DigitalenStelen/README.md',
+          name: 'Trafimage WKP',
+          content: 'src/apps/TrafimageWKP/README.md',
         },
       ],
     },
