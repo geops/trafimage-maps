@@ -12012,10 +12012,10 @@ react-simple-code-editor@^0.9.7:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.9.14.tgz#5b8fdc36a975cbf02fdafa2597398d8e212afebc"
   integrity sha512-doNaIIt4w7QIiB6ysWHMtYL4M3xOGPvZJH8vGq3W/hGk43pn25RDA27IS8GkbfhA1eLX72CWDhuC7KmDKax13g==
 
-react-spatial@^0.1.0-beta.6:
-  version "0.1.0-beta.6"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.6.tgz#255a051580c617d98003d6d4baf17f6e21baa109"
-  integrity sha512-G2SrjQfyoWpefHOAKGgCfX/l1BgTV5KK6lQcsIQ3503d3bMyK49qRdcJBjvRuYSPGeKRB0Q18GoHzyKUWoExEA==
+react-spatial@^0.1.0-beta.7:
+  version "0.1.0-beta.7"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.7.tgz#b5771c7de45c9bb24e9eac2c54462fbf57e5e29d"
+  integrity sha512-WvSBcyPCdkdSGaajP94mzedJM2+3dxiNeHK+ICxObuBUMyzJ2zCaqvQbukujSl4JalbfX6ryvt1X4YORa/PnQw==
   dependencies:
     query-string "^6.4.2"
     react-draggable "^3.3.1"
@@ -12100,13 +12100,12 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.5.2:
     react-is "^16.9.0"
     scheduler "^0.15.0"
 
-react-transit@^0.1.1-beta.6:
-  version "0.1.1-beta.6"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.1.1-beta.6.tgz#bcb2afe9a989dd223dbf7241487b5fec9d4cb065"
-  integrity sha512-f/v9PHkd1O4jpBfviKrCJr958A84zf1z5okq5cp6A5VY9U3sbvBW4m49ECuLEYuRtIp13n4Jr1A4N0gO2J++6w==
+react-transit@^0.1.1-beta.7:
+  version "0.1.1-beta.7"
+  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.1.1-beta.7.tgz#6cccebfd7be70118f78a6bc5267e976cad86078a"
+  integrity sha512-9rrORMMRQscFdGpqPlDJcBnPaTuxc+pWIji+fRVwS5es53ocioZ5QAJGCjFxk11NqM6a4mHelEXlyOWVn0XGzQ==
   dependencies:
     abortcontroller-polyfill "^1.3.0"
-    ol "^6.0.0-beta.11"
     query-string "^6.8.2"
     react-icons "^3.7.0"
 
