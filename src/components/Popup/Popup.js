@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import OLMap from 'ol/Map';
+import Point from 'ol/geom/Point';
 import RSPopup from 'react-spatial/components/Popup';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 
@@ -33,13 +34,17 @@ const Popup = ({
   const { features, layer, coordinate } = clickedFeatureInfo;
   const [feature] = features; // TODO: allow multiple
   const componentName = popupComponents[layer.getKey()];
+  const popupCoordinate =
+    feature.getGeometry() instanceof Point
+      ? feature.getGeometry().getCoordinates()
+      : coordinate;
 
   if (!componentName) {
     return null;
   }
 
+  // Styleguidist try to load every file in the folder if we don't put index.js
   const PopupComponent = React.lazy(() =>
-    // Styleguidist try to load every file in the folder if we don't put index.js
     import(`../../popups/${componentName}/index.js`),
   );
 
@@ -47,7 +52,7 @@ const Popup = ({
     <React.Suspense fallback="loading...">
       <RSPopup
         onCloseClick={() => dispatchSetClickedFeatureInfo()}
-        popupCoordinate={coordinate}
+        popupCoordinate={popupCoordinate}
         feature={feature}
         map={map}
       >
