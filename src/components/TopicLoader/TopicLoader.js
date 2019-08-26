@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import Map from 'ol/Map';
+import { unByKey } from 'ol/Observable';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
@@ -61,7 +62,7 @@ class TopicLoader extends Component {
 
     this.updateLayers(this.topic.layers);
 
-    map.on('singleclick', e => {
+    this.singleclickKey = map.on('singleclick', e => {
       const infoPromises = layerService
         .getLayersAsFlatArray()
         .filter(l => l.getVisible())
@@ -80,6 +81,10 @@ class TopicLoader extends Component {
     if (activeTopic !== prevProps.activeTopic) {
       this.updateLayers(activeTopic.layers);
     }
+  }
+
+  componentWillUnmount() {
+    unByKey(this.singleclickKey);
   }
 
   updateLayers(topicLayers) {
