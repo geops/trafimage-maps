@@ -220,6 +220,7 @@ class TrafimageMaps extends Component {
             layerService={this.layerService}
             baseLayers={baseLayers}
             layers={layers}
+            map={this.map}
             topics={topics}
             activeTopicKey={activeTopicKey}
             apiKey={apiKey}

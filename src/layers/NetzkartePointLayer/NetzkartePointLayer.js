@@ -8,13 +8,6 @@ import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
-/**
- * Layer for visualizing network points.
- * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
- * @class
- * @params {Object} options
- * @inheritdoc
- */
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
     let name = 'ch.sbb.netzkarte.stationen';
@@ -25,13 +18,11 @@ class NetzkartePointLayer extends VectorLayer {
       key = 'ch.sbb.netzkarte.flughafen';
     }
 
-    const vectorSource = new OLVectorSource({
-      format: new OLGeoJSON(),
-      ...(options.useBboxStrategy ? { strategy: OLBboxStrategy } : {}),
-    });
-
     const olLayer = new OLVectorLayer({
-      source: vectorSource,
+      source: new OLVectorSource({
+        format: new OLGeoJSON(),
+        ...(options.useBboxStrategy ? { strategy: OLBboxStrategy } : {}),
+      }),
     });
 
     super({
@@ -42,20 +33,10 @@ class NetzkartePointLayer extends VectorLayer {
       radioGroup: 'stations',
     });
 
-    // Options
     this.showAirports = !!options.showAirports;
     this.useBboxStrategy = !!options.useBboxStrategy;
+    this.highlightFeature = null;
 
-    // Bindings
-    this.loader = this.loader.bind(this);
-
-    // Style
-    this.netzkarteStyleCache = {};
-    olLayer.setStyle(
-      options.showAirports ? this.airportStyle : this.defaultStyle,
-    );
-
-    // Url
     this.url = `${CONF.geoserverUrl}?`;
     this.urlParams = {
       service: 'WFS',
@@ -66,14 +47,45 @@ class NetzkartePointLayer extends VectorLayer {
         : 'trafimage:netzkarte_point',
     };
 
-    // Set loader after binding
-    vectorSource.setLoader(this.loader);
+    this.defaultStyle = new OLStyle({
+      image: new OLCircle({
+        radius: 10,
+        fill: new OLFill({
+          color: 'rgba(255,255,255,0.01)',
+        }),
+      }),
+    });
+
+    this.highlightStyle = new OLStyle({
+      image: new OLCircle({
+        radius: 10,
+        fill: new OLFill({
+          color: 'rgba(0,61,155,0.5)',
+        }),
+      }),
+    });
+
+    this.olLayer.setStyle((f, r) => this.styleFunction(f, r));
+    this.olLayer.getSource().setLoader(this.loader.bind(this));
+    this.onClick(features => {
+      this.highlightFeature = features.length ? features[0] : null;
+      this.olLayer.getSource().changed();
+    });
   }
 
-  /**
-   * Initialize the layer and listen to feature clicks.
-   * @param {ol.map} map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/Map}
-   */
+  styleFunction(f, r) {
+    const res = layerHelper.getDataResolution(r);
+    if (f.get('resolution') === res && f.get('visibility') >= res * 10) {
+      if (f === this.highlightFeature) {
+        return this.highlightStyle;
+      }
+
+      return this.defaultStyle;
+    }
+
+    return null;
+  }
+
   init(map) {
     super.init(map);
     this.map = map;
@@ -84,59 +96,6 @@ class NetzkartePointLayer extends VectorLayer {
       this.olLayer.getSource().clear();
     });
   }
-
-  /**
-   * Create airport style from feature and resolution
-   * @param {ol.feature} feature
-   * @param {number} resolution
-   * @returns {Object|null}
-   */
-  airportStyle = (feature, resolution) => {
-    const res = layerHelper.getDataResolution(resolution);
-    if (
-      feature.get('resolution') === res &&
-      feature.get('visibility') >= res * 10
-    ) {
-      return this.defaultStyle(feature, resolution);
-    }
-    return null;
-  };
-
-  /**
-   * Returns default style for feature
-   * @param {ol.feature} feature
-   * @returns {Object}
-   */
-  defaultStyle = feature => {
-    const layer = feature.get('layer');
-    if (!this.netzkarteStyleCache[layer]) {
-      let zIndex = layer === 'Zug' ? 1 : 0;
-
-      switch (layer) {
-        case 'Zug':
-          zIndex = 2;
-          break;
-        case 'Tram':
-          zIndex = 1;
-          break;
-        default:
-          zIndex = 0;
-      }
-
-      this.netzkarteStyleCache[layer] = [
-        new OLStyle({
-          zIndex,
-          image: new OLCircle({
-            radius: 10,
-            fill: new OLFill({
-              color: 'rgba(255,255,255,0.01)',
-            }),
-          }),
-        }),
-      ];
-    }
-    return this.netzkarteStyleCache[layer];
-  };
 
   /**
    * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax

@@ -179,8 +179,8 @@ export const bahnhofplaene = new Layer({
 });
 
 bahnhofplaene.setChildren([
-  new BahnhofplanLayer({ visible: false }),
   new BahnhofplanLayer({ visible: false, showPrintFeatures: true }),
+  new BahnhofplanLayer({ visible: false }),
 ]);
 
 export const tracker = new TrajservLayer({
