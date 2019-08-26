@@ -66,7 +66,9 @@ export const netzkarteLayer = new MapboxLayer({
   visible: true,
   isBaseLayer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  url: `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json?key=${CONF.vectorTilesKey}`,
+  url:
+    `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
 });
 
 export const swisstopoSwissImage = new Layer({
@@ -78,8 +80,9 @@ export const swisstopoSwissImage = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.swissimage/` +
-        'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/` +
+        `ch.swisstopo.swissimage/default/current/3857/` +
+        '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
@@ -130,8 +133,9 @@ export const swisstopoLandeskarte = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-farbe/` +
-        'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/` +
+        'ch.swisstopo.pixelkarte-farbe/default/current/3857/' +
+        '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
@@ -153,8 +157,9 @@ export const swisstopoLandeskarteGrau = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-grau/` +
-        'default/current/3857/{TileMatrix}/{TileCol}/{TileRow}.jpeg',
+        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/` +
+        'ch.swisstopo.pixelkarte-grau/default/current/3857/' +
+        '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
@@ -170,16 +175,18 @@ export const swisstopoLandeskarteGrau = new Layer({
 export const bahnhofplaene = new Layer({
   name: 'Bahnhofpläne',
   key: 'ch.sbb.bahnhofplaene',
+  visible: false,
 });
 
 bahnhofplaene.setChildren([
   new BahnhofplanLayer({ visible: false }),
-  new BahnhofplanLayer({ showPrintFeatures: true }),
+  new BahnhofplanLayer({ visible: false, showPrintFeatures: true }),
 ]);
 
 export const tracker = new TrajservLayer({
   name: 'Zugtracker',
   key: 'ch.sbb.tracker',
+  visible: false,
 });
 
 export const punctuality = new Layer({
@@ -218,7 +225,9 @@ punctuality.setChildren([
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',
   key: 'ch.sbb.netzkarte.stationen.parent',
-  hideInLegend: true,
+  properties: {
+    hideInLegend: true,
+  },
 });
 
 netzkartePointLayer.setChildren([

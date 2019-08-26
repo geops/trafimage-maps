@@ -60,8 +60,8 @@ class Menu extends Component {
     const components = [];
 
     for (let i = 0; i < menuComponents.length; i += 1) {
+      // Styleguidist try to load every file in the folder if we don't put index.js
       const Comp = React.lazy(() =>
-        // Styleguidist try to load every file in the folder if we don't put index.js
         import(`../../menus/${menuComponents[i]}/index.js`),
       );
       components.push(Comp);
@@ -124,13 +124,11 @@ class Menu extends Component {
           </div>
         </div>
 
-        {loadedMenuComponents.map((Comp, index) => {
-          return (
-            <React.Suspense fallback="Loading menu...">
-              <Comp layerService={layerService} map={map} key={index} />
-            </React.Suspense>
-          );
-        })}
+        {loadedMenuComponents.map((Comp, index) => (
+          <React.Suspense fallback="Loading menu...">
+            <Comp layerService={layerService} map={map} key={index} />
+          </React.Suspense>
+        ))}
       </div>
     );
     /* eslint-enable */
