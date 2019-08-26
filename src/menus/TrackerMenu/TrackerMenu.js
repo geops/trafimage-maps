@@ -6,7 +6,6 @@ import { transform as transformCoords } from 'ol/proj';
 import LayerService from 'react-spatial/LayerService';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
-import TrackerControl from 'react-transit/components/TrackerControl';
 import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
@@ -69,8 +68,6 @@ class TrackerMenu extends Component {
       return null;
     }
 
-    const visibleTracker = this.trackerLayers.find(l => l.getVisible());
-
     return (
       <MenuItem
         className="wkp-tracker-menu"
@@ -83,7 +80,6 @@ class TrackerMenu extends Component {
       >
         {trajectory ? (
           <div>
-            <TrackerControl trackerLayer={visibleTracker} />
             <RouteSchedule
               lineInfos={trajectory}
               onStationClick={station => {
