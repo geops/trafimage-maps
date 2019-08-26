@@ -617,39 +617,6 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
             </div>
           </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
-              <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
-              >
-                <div
-                  className="wkp-topic-title"
-                >
-                  <div
-                    className="wkp-topic-radio"
-                  />
-                  CASA
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
-                    }
-                  }
-                />
-              </div>
-              <div
-                className="wkp-layer-tree"
-              />
-            </div>
-          </div>
         </div>
       </div>
       Loading menu...
@@ -664,13 +631,13 @@ exports[`AppRouter should match snapshot 1`] = `
         className="tm-zooms-bar"
       >
         <div
-          aria-label="Hineinzoomen"
+          aria-label="Zoom"
           className="wkp-zoom-in"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
-          title="Hineinzoomen"
+          title="Zoom"
         >
           <svg
             fill="currentColor"
@@ -696,13 +663,13 @@ exports[`AppRouter should match snapshot 1`] = `
           className="tm-zoomslider-wrapper"
         />
         <div
-          aria-label="Rauszoomen"
+          aria-label="Zoom"
           className="wkp-zoom-out"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
-          title="Rauszoomen"
+          title="Zoom"
         >
           <svg
             fill="currentColor"
