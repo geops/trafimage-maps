@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
 import Map from 'ol/Map';
 import { transform as transformCoords } from 'ol/proj';
@@ -12,6 +14,8 @@ import './TrackerMenu.scss';
 const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
+
+  t: PropTypes.func.isRequired,
 };
 
 class TrackerMenu extends Component {
@@ -62,7 +66,7 @@ class TrackerMenu extends Component {
 
   render() {
     const { open, collapsed, trajectory } = this.state;
-    const { map } = this.props;
+    const { t, map } = this.props;
 
     if (!open) {
       return null;
@@ -71,7 +75,7 @@ class TrackerMenu extends Component {
     return (
       <MenuItem
         className="wkp-tracker-menu"
-        title="Zugtracker"
+        title={t('ch.sbb.puenktlichkeit')}
         icon={<TiVideo />}
         map={map}
         open={typeof open === 'string'}
@@ -101,4 +105,5 @@ class TrackerMenu extends Component {
 }
 
 TrackerMenu.propTypes = propTypes;
-export default TrackerMenu;
+
+export default compose(withTranslation())(TrackerMenu);
