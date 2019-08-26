@@ -46,7 +46,7 @@ class TopicMenu extends PureComponent {
     if (activeTopic.key === topic.key) {
       layerTree = (
         <LayerTree
-          isItemHidden={l => l.getIsBaseLayer()}
+          isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
           layerService={layerService}
           t={t}
         />
