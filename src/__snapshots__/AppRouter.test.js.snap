@@ -280,7 +280,7 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            Printprodukte
+                            Interaktiver Bahnhofplan
                           </div>
                         </div>
                       </div>
@@ -316,7 +316,7 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            Interaktiver Bahnhofplan
+                            Printprodukte
                           </div>
                         </div>
                       </div>
