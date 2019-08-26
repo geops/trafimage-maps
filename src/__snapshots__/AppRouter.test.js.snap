@@ -427,7 +427,7 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            ch.sbb.puenktlichkeit-nv
+                            ch.sbb.puenktlichkeit-all
                           </div>
                         </div>
                       </div>
@@ -499,44 +499,8 @@ exports[`AppRouter should match snapshot 1`] = `
                           tabIndex={0}
                         >
                           <div>
-                            ch.sbb.puenktlichkeit-all
+                            ch.sbb.puenktlichkeit-nv
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div
-                      className="tm-layer-tree-item "
-                      style={
-                        Object {
-                          "paddingLeft": "0px",
-                        }
-                      }
-                    >
-                      <label
-                        className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                        onKeyPress={[Function]}
-                        tabIndex={-1}
-                      >
-                        <input
-                          checked={false}
-                          onChange={[Function]}
-                          onClick={[Function]}
-                          tabIndex={-1}
-                          type="checkbox"
-                        />
-                        <span />
-                      </label>
-                      <div
-                        className="tm-layer-tree-toggle"
-                        onClick={[Function]}
-                        onKeyPress={[Function]}
-                        role="button"
-                        tabIndex={0}
-                      >
-                        <div>
-                          Zugtracker
                         </div>
                       </div>
                     </div>

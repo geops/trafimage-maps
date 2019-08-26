@@ -89,6 +89,7 @@ class TrackerMenu extends Component {
         {trajectory ? (
           <div>
             <RouteSchedule
+              trackerLayer={this.trackerLayers.find(l => l.getVisible())}
               lineInfos={trajectory}
               onStationClick={station => {
                 map.getView().animate({

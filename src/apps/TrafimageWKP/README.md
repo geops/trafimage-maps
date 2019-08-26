@@ -2,12 +2,19 @@
 
 Configure your own map.
 
+'TrajservLayer' Layer filter options (case insensitive):
+
+| Options  | Description            | Examples                                                                  |
+|----------|------------------------|---------------------------------------------------------------------------|
+| operator | filter by operator     | string: 'sbb', list: '(vbz\|zsg)'                                         |
+| line     | filter by line number  | string: 'ICE',  list: '(s9\|s15\|s10)'                                    |
+| route    | filter by route number | ferry in zurich: '01012', list of funiculars in Zurich: '(00191\|00040)'  |
+
 ```jsx
 import React from 'react';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import defaultBaseLayers, { buslines } from '../../config/layers';
-import CONF from '../../config/appConfig';
 
 import TrafimageMaps from '../../components/TrafimageMaps';
 
@@ -28,7 +35,7 @@ import TrafimageMaps from '../../components/TrafimageMaps';
           visible: false,
           useDelayStyle: true,
           operator: ['SBB'], // To filter operator
-          train: ['(IR|IC|EC|RJX|TGV)', '^(S|R$)'], // To filter train by name
+          line: ['(IR|IC|EC|RJX|TGV)', '^(S|R$)'], // To filter train by line number
         }),
         buslines,
       ],

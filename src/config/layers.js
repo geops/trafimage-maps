@@ -197,28 +197,27 @@ export const punctuality = new Layer({
 
 punctuality.setChildren([
   new TrajservLayer({
-    name: 'ch.sbb.puenktlichkeit-all',
-    key: 'ch.sbb.puenktlichkeit-all',
-    visible: false,
-    useDelayStyle: false,
-    radioGroup: 'ch.sbb.punctuality',
-    train: ['(IR|IC|EC|RJX|TGV)', '^(S|R$)'],
-  }),
-  new TrajservLayer({
-    name: 'ch.sbb.puenktlichkeit-fv',
-    key: 'ch.sbb.puenktlichkeit-fv',
-    visible: false,
-    useDelayStyle: false,
-    radioGroup: 'ch.sbb.punctuality',
-    train: '(IR|IC|EC|RJX|TGV)',
-  }),
-  new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
     key: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
-    train: '^(S|R$)',
+    line: '^(S|R$)',
+  }),
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-fv',
+    key: 'ch.sbb.puenktlichkeit-fv',
+    visible: false,
+    useDelayStyle: true,
+    radioGroup: 'ch.sbb.punctuality',
+    line: '(IR|IC|EC|RJX|TGV)',
+  }),
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-all',
+    key: 'ch.sbb.puenktlichkeit-all',
+    visible: false,
+    useDelayStyle: true,
+    radioGroup: 'ch.sbb.punctuality',
   }),
 ]);
 
