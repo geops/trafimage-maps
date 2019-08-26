@@ -5,6 +5,7 @@ import {
   SET_CLICKED_FEATURE_INFO,
   SET_LANGUAGE,
   SET_MENU_OPEN,
+  SET_LAYER_INFOS_OPEN,
 } from './actions';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   clickedFeatureInfo: null,
   language: 'de',
   menuOpen: false,
+  layerInfosOpen: false,
 };
 
 export default function app(state = initialState, action) {
@@ -41,6 +43,11 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         menuOpen: action.data,
+      };
+    case SET_LAYER_INFOS_OPEN:
+      return {
+        ...state,
+        layerInfosOpen: action.data,
       };
     default:
       return {

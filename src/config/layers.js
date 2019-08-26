@@ -203,6 +203,9 @@ punctuality.setChildren([
     useDelayStyle: false,
     radioGroup: 'ch.sbb.punctuality',
     train: ['(IR|IC|EC|RJX|TGV)', '^(S|R$)'],
+    properties: {
+      hasInfos: true,
+    },
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
