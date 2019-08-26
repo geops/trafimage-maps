@@ -8,9 +8,8 @@
 
 ** 'TrajservLayer' specific parameters: **
 
-| Parameters      | Description            | Examples                                                                |
-|-----------------|------------------------|-------------------------------------------------------------------------|
-| operator_filter | filter by operator     | operator_filter=vbz,zsg                                    |
-| line_filter     | filter by line number  | line_filter=s9,s15,s10                                  |
-| route_filter    | filter by route number | route_filter=00191,00040
-
+| Parameters      | Description            | Examples       |
+|-----------------|------------------------|----------------|
+| operator_filter | filter by operator     | vbz,zsg      |
+| line_filter     | filter by line number  | s9,s15,s10   |
+| route_filter    | filter by route number | 00191,00040  |
