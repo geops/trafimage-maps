@@ -41,7 +41,7 @@ const MenuHeader = ({ title, info, isOpen, onToggle, t }) => (
     <div className="wkp-menu-toggler">
       {isOpen ? <FaAngleUp /> : <FaAngleDown />}
     </div>
-    <div className={`wkp-menu-layers ${!info ? '' : 'hidden'}`}>{info}</div>
+    <div className={`wkp-menu-layers ${info ? '' : 'hidden'}`}>{info}</div>
   </div>
 );
 

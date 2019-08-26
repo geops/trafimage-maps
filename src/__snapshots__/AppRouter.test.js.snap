@@ -135,7 +135,7 @@ exports[`AppRouter should match snapshot 1`] = `
           </span>
         </div>
         <div
-          className="wkp-menu-title-main large"
+          className="wkp-menu-title-main "
         >
           ÖV Netzkarte Schweiz
         </div>
@@ -164,7 +164,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="wkp-menu-layers hidden"
         >
-          Stationen, ch.sbb.netzkarte.stationen, ch.sbb.netzkarte.flughafen
+          
         </div>
       </div>
       <div

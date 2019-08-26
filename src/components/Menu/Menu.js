@@ -32,6 +32,7 @@ class Menu extends Component {
       allMenuLayersVisible: false,
       loadedMenuComponents: [],
     };
+
     const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
   }
@@ -74,8 +75,15 @@ class Menu extends Component {
     const { layerService } = this.props;
     const topicLayers = layerService
       .getLayersAsFlatArray()
-      .filter(l => !l.getIsBaseLayer());
+      .reverse()
+      .filter(
+        l =>
+          !l.getIsBaseLayer() &&
+          !l.get('hideInLegend') &&
+          !layerService.getParent(l),
+      );
     const menuLayers = topicLayers.filter(l => l.getVisible());
+
     this.setState({
       menuLayers,
       allMenuLayersVisible: menuLayers.length === topicLayers.length,
