@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `null`;
+
+exports[`LayerInfosDialog should match snapshot when Layer is null 1`] = `null`;

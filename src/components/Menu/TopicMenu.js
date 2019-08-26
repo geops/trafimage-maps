@@ -7,6 +7,7 @@ import { FaInfoCircle } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
 import Button from 'react-spatial/components/Button';
+import Layer from 'react-spatial/layers/Layer';
 import { setActiveTopic, setLayerInfosOpen } from '../../model/app/actions';
 
 import './TopicMenu.scss';
@@ -17,7 +18,7 @@ const propTypes = {
 
   // mapStateToProps
   activeTopic: PropTypes.shape().isRequired,
-  layerInfosOpen: PropTypes.string,
+  layerInfosOpen: PropTypes.instanceOf(Layer),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -27,7 +28,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  layerInfosOpen: false,
+  layerInfosOpen: null,
 };
 
 class TopicMenu extends PureComponent {
@@ -50,15 +51,24 @@ class TopicMenu extends PureComponent {
     }
   }
 
+  renderInfoButton(layer) {
+    const { layerInfosOpen, dispatchSetLayerInfosOpen } = this.props;
+    const isSelected = layerInfosOpen === layer;
+    const className = `wkp-info-bt${isSelected ? ' wkp-selected' : ''}`;
+    return (
+      <Button
+        className={className}
+        onClick={() => {
+          dispatchSetLayerInfosOpen(isSelected ? null : layer);
+        }}
+      >
+        <FaInfoCircle focusable={false} />
+      </Button>
+    );
+  }
+
   render() {
-    const {
-      t,
-      layerService,
-      topic,
-      activeTopic,
-      layerInfosOpen,
-      dispatchSetLayerInfosOpen,
-    } = this.props;
+    const { t, layerService, topic, activeTopic } = this.props;
     const { isCollapsed } = this.state;
     let layerTree = null;
 
@@ -72,19 +82,7 @@ class TopicMenu extends PureComponent {
             return (
               <>
                 {layerTreeComp.renderItemContent(layer)}
-                {layer.get('hasInfos') && (
-                  <Button
-                    onClick={() => {
-                      if (layerInfosOpen === layer.getKey()) {
-                        dispatchSetLayerInfosOpen();
-                      } else {
-                        dispatchSetLayerInfosOpen(layer.getKey());
-                      }
-                    }}
-                  >
-                    <FaInfoCircle focusable={false} />
-                  </Button>
-                )}
+                {layer.get('hasInfos') && this.renderInfoButton(layer)}
               </>
             );
           }}

@@ -1,0 +1,39 @@
+.tm-dialog,
+.tm-modal {
+  z-index: 10000;
+
+  .tm-dialog-header {
+    position: relative;
+    line-height: 50px;
+    height: 50px;
+    padding: 0 20px;
+    text-align: left;
+    font-weight: bold;
+
+    &.tm-dialog-draggable {
+      cursor: move;
+    }
+  }
+
+  .tm-dialog-container {
+    min-width: 250px;
+    max-width: 400px;
+    width: auto;
+  }
+
+  .tm-dialog-body {
+    padding: 0 20px 20px 20px;
+    width: auto;
+    text-align: justify;
+    max-height: 400px;
+    pointer-events: none;
+  }
+}
+
+.tm-dialog {
+  position: absolute;
+  top: 125px;
+  left: 420px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  background: white;
+}
