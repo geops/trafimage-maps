@@ -55,7 +55,19 @@
       transition: max-height 0.3s ease, margin 0.3s ease;
 
       .tm-layer-tree-item {
+        color: #888;
         padding: 7px;
+
+        .tm-layer-tree-arrow {
+          border-color: #888;
+        }
+
+        &.tm-visible {
+          color: initial;
+          .tm-layer-tree-arrow {
+            border-color: black;
+          }
+        }
       }
     }
 
