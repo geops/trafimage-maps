@@ -5,7 +5,6 @@ import defaultBaseLayers, {
   buslines,
   gemeindegrenzen,
   punctuality,
-  tracker,
   parks,
 } from './layers';
 
@@ -16,7 +15,6 @@ export const netzkarte = {
     ...defaultBaseLayers,
     gemeindegrenzen,
     parks,
-    tracker,
     punctuality,
     buslines,
     netzkartePointLayer,

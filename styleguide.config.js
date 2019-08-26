@@ -25,7 +25,12 @@ module.exports = {
   sections: [
     {
       name: '',
-      context: 'README.md',
+      sections: [
+        {
+          name: 'Url parameters',
+          content: 'src/README.md',
+        },
+      ],
     },
     {
       name: 'Applications',
