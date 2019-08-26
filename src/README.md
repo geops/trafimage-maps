@@ -10,7 +10,7 @@
 
 | Parameters      | Description            | Examples                                                                |
 |-----------------|------------------------|-------------------------------------------------------------------------|
-| operator_filter | filter by operator     | string: 'sbb', list: 'vbz,zsg'                                        |
-| line_filter     | filter by line number  | string: 'ICE',  list: 's9,s15,s10)'                                    |
-| route_filter    | filter by route number | ferry in zurich: '01012', list of funiculars in Zurich: '00191,00040' |
+| operator_filter | filter by operator     | operator_filter=vbz,zsg                                    |
+| line_filter     | filter by line number  | line_filter=s9,s15,s10                                  |
+| route_filter    | filter by route number | route_filter=00191,00040
 
