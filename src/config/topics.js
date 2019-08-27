@@ -9,7 +9,7 @@ import defaultBaseLayers, {
 } from './layers';
 
 export const netzkarte = {
-  name: 'ÖV Netzkarte Schweiz',
+  name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
   layers: [
     ...defaultBaseLayers,

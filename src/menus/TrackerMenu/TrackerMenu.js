@@ -52,7 +52,9 @@ class TrackerMenu extends Component {
         );
 
         layer.onClick(traj => {
-          dispatchSetMenuOpen(false);
+          if (traj) {
+            dispatchSetMenuOpen(false);
+          }
           this.setState({
             open: layer.getName(),
             collapsed: false,
