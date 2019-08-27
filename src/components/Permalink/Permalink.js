@@ -32,9 +32,9 @@ const defaultProps = {
   initialState: {},
 };
 
-const LINE_FILTER = 'line_filter';
-const ROUTE_FILTER = 'route_filter';
-const OPERATOR_FILTER = 'operator_filter';
+const LINE_FILTER = 'PublishedLineName';
+const ROUTE_FILTER = 'TripNumber';
+const OPERATOR_FILTER = 'Operator';
 
 class Permalink extends PureComponent {
   constructor(props) {
