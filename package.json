@@ -170,6 +170,10 @@
     ]
   },
   "lint-staged": {
+    "public/lang/*.json": [
+      "sort",
+      "git add"
+    ],
     "(src|__mocks__)/**/*.js": [
       "eslint --fix",
       "prettier --write",
