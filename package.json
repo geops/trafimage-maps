@@ -27,7 +27,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-router-prop-types": "^1.0.4",
-    "react-spatial": "^0.1.0-beta.11",
+    "react-spatial": "^0.1.0-beta.12",
     "react-styleguidist": "^9.1.11",
     "react-transit": "^0.1.1-beta.8",
     "redux": "^4.0.1",
@@ -157,7 +157,7 @@
       "post-checkout": "yarn install --frozen-lockfile",
       "post-merge": "yarn install --frozen-lockfile",
       "post-rebase": "yarn install --frozen-lockfile",
-      "pre-commit": "sort && CI=true lint-staged   "
+      "pre-commit": "CI=true lint-staged   "
     }
   },
   "jest": {
@@ -170,6 +170,10 @@
     ]
   },
   "lint-staged": {
+    "public/lang/*.json": [
+      "yarn sort",
+      "git add"
+    ],
     "(src|__mocks__)/**/*.js": [
       "eslint --fix",
       "prettier --write",

@@ -60,8 +60,7 @@ const resolutions = [
 ];
 
 export const netzkarteLayer = new MapboxLayer({
-  name: 'Netzkarte',
-  key: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte',
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
@@ -125,8 +124,7 @@ export const aerial = new Layer({
 aerial.setChildren([swisstopoSwissImage, netzkarteAerial]);
 
 export const swisstopoLandeskarte = new Layer({
-  name: 'Landeskarte',
-  key: 'ch.sbb.netzkarte.landeskarte',
+  name: 'ch.sbb.netzkarte.landeskarte',
   copyright: 'swisstopo (5704003351)',
   visible: false,
   isBaseLayer: true,
@@ -149,8 +147,7 @@ export const swisstopoLandeskarte = new Layer({
 });
 
 export const swisstopoLandeskarteGrau = new Layer({
-  name: 'Landeskarte (grau)',
-  key: 'ch.sbb.netzkarte.landeskarte.grau',
+  name: 'ch.sbb.netzkarte.landeskarte.grau',
   copyright: 'swisstopo (5704003351)',
   visible: false,
   isBaseLayer: true,
@@ -173,40 +170,64 @@ export const swisstopoLandeskarteGrau = new Layer({
 });
 
 export const bahnhofplaene = new Layer({
-  name: 'Bahnhofpläne',
-  key: 'ch.sbb.bahnhofplaene',
+  name: 'ch.sbb.bahnhofplaene',
   visible: false,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.bahnhofplaene-desc',
+  },
 });
 
 bahnhofplaene.setChildren([
-  new BahnhofplanLayer({ visible: false, showPrintFeatures: true }),
-  new BahnhofplanLayer({ visible: false }),
+  new BahnhofplanLayer({
+    name: 'ch.sbb.bahnhofplaene.printprodukte',
+    visible: false,
+    showPrintFeatures: true,
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
+    },
+  }),
+  new BahnhofplanLayer({
+    name: 'ch.sbb.bahnhofplaene.interaktiv',
+    visible: false,
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
+    },
+  }),
 ]);
 
 export const tracker = new TrajservLayer({
   name: 'Zugtracker',
   key: 'ch.sbb.tracker',
   visible: false,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.tracker-desc',
+  },
 });
 
 export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
-  key: 'ch.sbb.puenktlichkeit',
   visible: false,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.puenktlichkeit-desc',
+    legendUrl: '/img/tracker/puenktlichkeit_legend_{language}.png',
+  },
 });
 
 punctuality.setChildren([
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
-    key: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
-    line: '^(S|R$)',
+    train: '^(S|R$)',
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
-    key: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -214,16 +235,15 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-all',
-    key: 'ch.sbb.puenktlichkeit-all',
     visible: false,
-    useDelayStyle: true,
+    useDelayStyle: false,
     radioGroup: 'ch.sbb.punctuality',
   }),
 ]);
 
 export const netzkartePointLayer = new Layer({
   name: 'Stationen',
-  key: 'ch.sbb.netzkarte.stationen.parent',
+  key: 'ch.sbb.netzkarte.stationen',
   properties: {
     hideInLegend: true,
   },
@@ -236,7 +256,6 @@ netzkartePointLayer.setChildren([
 
 export const buslines = new Layer({
   name: 'ch.sbb.netzkarte.buslinien',
-  key: 'ch.sbb.netzkarte.buslinien',
   visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
@@ -254,11 +273,14 @@ export const buslines = new Layer({
     }),
     maxResolution: 20,
   }),
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.netzkarte.buslinien-desc',
+  },
 });
 
 export const gemeindegrenzen = new WMSLayer({
   name: 'ch.sbb.ch_gemeinden',
-  key: 'ch.sbb.ch_gemeinden',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
@@ -275,11 +297,14 @@ export const gemeindegrenzen = new WMSLayer({
       }),
     }),
   }),
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.ch_gemeinden-desc',
+  },
 });
 
 export const parks = new WMSLayer({
-  name: 'Schweizer Pärke',
-  key: 'ch.sbb.parks',
+  name: 'ch.sbb.parks',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
@@ -296,6 +321,10 @@ export const parks = new WMSLayer({
     }),
     opacity: 0.9,
   }),
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.parks-desc',
+  },
 });
 
 export default [

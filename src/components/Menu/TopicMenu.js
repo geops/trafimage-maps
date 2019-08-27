@@ -3,19 +3,35 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
+import { FaInfoCircle } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
-import { setActiveTopic } from '../../model/app/actions';
+import Button from 'react-spatial/components/Button';
+import Layer from 'react-spatial/layers/Layer';
+import {
+  setActiveTopic,
+  setLayerSelectedForInfos,
+} from '../../model/app/actions';
 
 import './TopicMenu.scss';
 
 const propTypes = {
-  activeTopic: PropTypes.shape().isRequired,
   topic: PropTypes.shape().isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape().isRequired,
+  layerInfosOpen: PropTypes.instanceOf(Layer),
+
+  // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
+  dispatchSetLayerInfosOpen: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  layerInfosOpen: null,
 };
 
 class TopicMenu extends PureComponent {
@@ -38,6 +54,22 @@ class TopicMenu extends PureComponent {
     }
   }
 
+  renderInfoButton(layer) {
+    const { layerInfosOpen, dispatchSetLayerInfosOpen } = this.props;
+    const isSelected = layerInfosOpen === layer;
+    const className = `wkp-info-bt${isSelected ? ' wkp-selected' : ''}`;
+    return (
+      <Button
+        className={className}
+        onClick={() => {
+          dispatchSetLayerInfosOpen(isSelected ? null : layer);
+        }}
+      >
+        <FaInfoCircle focusable={false} />
+      </Button>
+    );
+  }
+
   render() {
     const { t, layerService, topic, activeTopic } = this.props;
     const { isCollapsed } = this.state;
@@ -49,6 +81,14 @@ class TopicMenu extends PureComponent {
           isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
           layerService={layerService}
           t={t}
+          renderItemContent={(layer, layerTreeComp) => {
+            return (
+              <>
+                {layerTreeComp.renderItemContent(layer)}
+                {layer.get('hasInfos') && this.renderInfoButton(layer)}
+              </>
+            );
+          }}
         />
       );
     }
@@ -85,14 +125,17 @@ class TopicMenu extends PureComponent {
   }
 }
 
+TopicMenu.defaultProps = defaultProps;
 TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
+  layerInfosOpen: state.app.layerInfosOpen,
 });
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
+  dispatchSetLayerInfosOpen: setLayerSelectedForInfos,
 };
 
 export default compose(

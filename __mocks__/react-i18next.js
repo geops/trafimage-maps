@@ -49,7 +49,22 @@ module.exports = {
     return Component;
   },
   useTranslation: () => useMock,
-  Trans: ({ children }) => renderNodes(children),
+  Trans: ({ i18nKey, children, components = [] }) => {
+    if (children) {
+      return renderNodes(children);
+    }
+    if (i18nKey) {
+      let cp = '';
+      if (!components.length) {
+        return i18nKey;
+      }
+      components.forEach((comp, idx) => {
+        cp += i18nKey.replace('<' + idx + '/>', comp);
+      });
+      return cp;
+    }
+    return null;
+  },
   NamespacesConsumer: ({ children }) => children(k => k, { i18n: {} }),
 
   // mock if needed

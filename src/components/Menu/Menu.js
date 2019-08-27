@@ -133,8 +133,8 @@ class Menu extends Component {
         </div>
 
         {loadedMenuComponents.map((Comp, index) => (
-          <React.Suspense fallback="Loading menu...">
-            <Comp layerService={layerService} map={map} key={index} />
+          <React.Suspense fallback="Loading menu..." key={index}>
+            <Comp layerService={layerService} map={map} />
           </React.Suspense>
         ))}
       </div>

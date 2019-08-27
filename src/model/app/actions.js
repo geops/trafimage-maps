@@ -3,6 +3,8 @@ export const SET_ACTIVE_TOPIC = 'SET_ACTIVE_TOPIC';
 export const SET_CLICKED_FEATURE_INFO = 'SET_CLICKED_FEATURE_INFO';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_MENU_OPEN = 'SET_MENU_OPEN';
+export const SET_LAYER_SELECTED_FOR_INFOS = 'SET_LAYER_SELECTED_FOR_INFOS';
+export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 
 export const setTopics = data => ({ type: SET_TOPICS, data });
 
@@ -16,3 +18,10 @@ export const setClickedFeatureInfo = data => ({
 });
 
 export const setMenuOpen = data => ({ type: SET_MENU_OPEN, data });
+
+export const setDialogVisible = data => ({ type: SET_DIALOG_VISIBLE, data });
+
+export const setLayerSelectedForInfos = data => ({
+  type: SET_LAYER_SELECTED_FOR_INFOS,
+  data,
+});
