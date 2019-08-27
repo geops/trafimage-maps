@@ -56,7 +56,7 @@ class TrackerMenu extends Component {
             dispatchSetMenuOpen(false);
           }
           this.setState({
-            open: layer.getName() || false,
+            open: layer.getName(),
             collapsed: false,
             trajectory: traj,
           });
