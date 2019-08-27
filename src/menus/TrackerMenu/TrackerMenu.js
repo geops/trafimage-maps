@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
 import Map from 'ol/Map';
 import { transform as transformCoords } from 'ol/proj';
 import LayerService from 'react-spatial/LayerService';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
+import { setMenuOpen } from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
 const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
+
+  dispatchSetMenuOpen: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired,
 };
 
 class TrackerMenu extends Component {
@@ -24,7 +31,7 @@ class TrackerMenu extends Component {
 
   constructor(props) {
     super(props);
-    const { layerService } = this.props;
+    const { layerService, dispatchSetMenuOpen } = this.props;
 
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
@@ -45,6 +52,7 @@ class TrackerMenu extends Component {
         );
 
         layer.onClick(traj => {
+          dispatchSetMenuOpen(false);
           this.setState({
             open: layer.getName(),
             collapsed: false,
@@ -62,7 +70,7 @@ class TrackerMenu extends Component {
 
   render() {
     const { open, collapsed, trajectory } = this.state;
-    const { map } = this.props;
+    const { t, map } = this.props;
 
     if (!open) {
       return null;
@@ -71,7 +79,7 @@ class TrackerMenu extends Component {
     return (
       <MenuItem
         className="wkp-tracker-menu"
-        title="Zugtracker"
+        title={t('ch.sbb.puenktlichkeit')}
         icon={<TiVideo />}
         map={map}
         open={typeof open === 'string'}
@@ -81,6 +89,7 @@ class TrackerMenu extends Component {
         {trajectory ? (
           <div>
             <RouteSchedule
+              trackerLayer={this.trackerLayers.find(l => l.getVisible())}
               lineInfos={trajectory}
               onStationClick={station => {
                 map.getView().animate({
@@ -100,5 +109,19 @@ class TrackerMenu extends Component {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = {
+  dispatchSetMenuOpen: setMenuOpen,
+};
+
 TrackerMenu.propTypes = propTypes;
-export default TrackerMenu;
+
+export default compose(
+  withTranslation(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(TrackerMenu);

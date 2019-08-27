@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import VectorLayer from 'react-spatial/layers/VectorLayer';
-import WMSLayer from 'react-spatial/layers/WMSLayer';
+import Map from 'ol/Map';
+import { unByKey } from 'ol/Observable';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
@@ -21,6 +21,7 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  map: PropTypes.instanceOf(Map).isRequired,
   apiKey: PropTypes.string,
 
   // mapDispatchToProps
@@ -57,7 +58,23 @@ class TopicLoader extends Component {
   }
 
   componentDidMount() {
+    const { dispatchSetClickedFeatureInfo, layerService, map } = this.props;
+
     this.updateLayers(this.topic.layers);
+
+    this.singleclickKey = map.on('singleclick', e => {
+      const infoPromises = layerService
+        .getLayersAsFlatArray()
+        .filter(l => l.getVisible())
+        .map(l => l.getFeatureInfoAtCoordinate(e.coordinate));
+
+      Promise.all(infoPromises).then(featureInfos => {
+        const info = featureInfos
+          .reverse()
+          .find(i => i.features && i.features.length);
+        dispatchSetClickedFeatureInfo(info ? { ...info } : null);
+      });
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -68,18 +85,8 @@ class TopicLoader extends Component {
     }
   }
 
-  onClick(features, layer, coordinate) {
-    const { dispatchSetClickedFeatureInfo } = this.props;
-
-    if (!features.length) {
-      return;
-    }
-
-    dispatchSetClickedFeatureInfo({
-      features,
-      layer,
-      coordinate,
-    });
+  componentWillUnmount() {
+    unByKey(this.singleclickKey);
   }
 
   updateLayers(topicLayers) {
@@ -104,13 +111,6 @@ class TopicLoader extends Component {
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
         flatLayers[i].setApiKey(apiKey);
-      }
-
-      if (
-        flatLayers[i] instanceof VectorLayer ||
-        flatLayers[i] instanceof WMSLayer
-      ) {
-        flatLayers[i].onClick(this.onClick.bind(this));
       }
     }
   }
