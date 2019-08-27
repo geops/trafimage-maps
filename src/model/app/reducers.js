@@ -5,7 +5,7 @@ import {
   SET_CLICKED_FEATURE_INFO,
   SET_LANGUAGE,
   SET_MENU_OPEN,
-  SET_LAYER_INFOS_OPEN,
+  SET_LAYER_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
 } from './actions';
 
@@ -45,7 +45,7 @@ export default function app(state = initialState, action) {
         ...state,
         menuOpen: action.data,
       };
-    case SET_LAYER_INFOS_OPEN:
+    case SET_LAYER_SELECTED_FOR_INFOS:
       return {
         ...state,
         dialogVisible: action.data ? 'layerInfos' : false,

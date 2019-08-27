@@ -217,6 +217,7 @@ class TrafimageMaps extends Component {
     return (
       <Provider store={appStore}>
         <div className={`tm-app ${elementClasses.join(' ')}`}>
+          <ResizeHandler observe=".tm-app" />
           <TopicLoader
             layerService={this.layerService}
             baseLayers={baseLayers}

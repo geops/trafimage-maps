@@ -5,8 +5,6 @@ import { Trans, useTranslation } from 'react-i18next';
 import Layer from 'react-spatial/layers/Layer';
 import Dialog from '../Dialog';
 
-import './LayerInfosDialog.scss';
-
 const propTypes = {
   layer: PropTypes.instanceOf(Layer),
 };
@@ -35,8 +33,12 @@ function LayerInfosDialog({ layer }) {
             i18nKey={layer.get('description')}
             components={[
               <img
-                src={layer.get('legendUrl').replace('{language}', language)}
-                alt="No legend"
+                src={(layer.get('legendUrl') || '').replace(
+                  '{language}',
+                  language,
+                )}
+                draggable="false"
+                alt={t('Kein Bildtext')}
               ></img>,
             ]}
           ></Trans>

@@ -76,7 +76,7 @@
   "ch.sbb.puenktlichkeit": "Ponctualité",
   "ch.sbb.puenktlichkeit-all": "Tous",
   "ch.sbb.puenktlichkeit-all-desc": "Tous",
-  "ch.sbb.puenktlichkeit-desc": "Le train tracker indique les trajets en cours en se basant sur l’horaire théorique et réel des transports publiques suisses.<p><0><p>Données: <a href=\"https://opentransportdata.swiss/\"  target=\"_blank\">opentransportdata.swiss</a>.</p>",
+  "ch.sbb.puenktlichkeit-desc": "Le train tracker indique les trajets en cours en se basant sur l’horaire théorique et réel des transports publiques suisses.<p><0/></p><p>Données: <a href=\"https://opentransportdata.swiss/\"  target=\"_blank\">opentransportdata.swiss</a>.</p>",
   "ch.sbb.puenktlichkeit-fv": "Trafic grandes lignes",
   "ch.sbb.puenktlichkeit-fv-desc": "Trafic grandes lignes",
   "ch.sbb.puenktlichkeit-nv": "Trafic régional",
@@ -269,5 +269,6 @@
   "xmastr": "Tracker",
   "Zeichnen": "Dessiner",
   "Zugtracker": "Train tracker",
-  "Zurücksetzen": "Réinitialiser"
+  "Zurücksetzen": "Réinitialiser",
+  "Kein Bildtext": "Pas de légende"
 }

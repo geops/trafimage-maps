@@ -176,11 +176,30 @@ export const bahnhofplaene = new Layer({
   name: 'Bahnhofpläne',
   key: 'ch.sbb.bahnhofplaene',
   visible: false,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.bahnhofplaene-desc',
+  },
 });
 
 bahnhofplaene.setChildren([
-  new BahnhofplanLayer({ visible: false }),
-  new BahnhofplanLayer({ visible: false, showPrintFeatures: true }),
+  new BahnhofplanLayer({
+    name: 'ch.sbb.bahnhofplaene.printprodukte',
+    visible: false,
+    showPrintFeatures: true,
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
+    },
+  }),
+  new BahnhofplanLayer({
+    name: 'ch.sbb.bahnhofplaene.interaktiv',
+    visible: false,
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
+    },
+  }),
 ]);
 
 export const tracker = new TrajservLayer({
@@ -260,6 +279,10 @@ export const buslines = new Layer({
     }),
     maxResolution: 20,
   }),
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.netzkarte.buslinien-desc',
+  },
 });
 
 export const gemeindegrenzen = new WMSLayer({
@@ -281,6 +304,10 @@ export const gemeindegrenzen = new WMSLayer({
       }),
     }),
   }),
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.ch_gemeinden-desc',
+  },
 });
 
 export const parks = new WMSLayer({
@@ -302,6 +329,10 @@ export const parks = new WMSLayer({
     }),
     opacity: 0.9,
   }),
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.parks-desc',
+  },
 });
 
 export default [

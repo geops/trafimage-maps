@@ -8,7 +8,10 @@ import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
 import Button from 'react-spatial/components/Button';
 import Layer from 'react-spatial/layers/Layer';
-import { setActiveTopic, setLayerInfosOpen } from '../../model/app/actions';
+import {
+  setActiveTopic,
+  setLayerSelectedForInfos,
+} from '../../model/app/actions';
 
 import './TopicMenu.scss';
 
@@ -132,7 +135,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
-  dispatchSetLayerInfosOpen: setLayerInfosOpen,
+  dispatchSetLayerInfosOpen: setLayerSelectedForInfos,
 };
 
 export default compose(
