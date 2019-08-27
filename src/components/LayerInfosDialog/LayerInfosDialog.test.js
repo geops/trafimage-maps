@@ -18,13 +18,19 @@ describe('LayerInfosDialog', () => {
   let layer;
 
   beforeEach(() => {
-    layer = new Layer({ name: 'test', olLayer: new OLLayer() });
-    store = mockStore({
-      map: {},
-      app: {
-        layerInfosOpen: layer,
+    layer = new Layer({
+      name: 'test',
+      olLayer: new OLLayer(),
+      properties: {
+        description: 'description<0/>',
+        legendUrl: 'legendUrl',
       },
-      oidc: { user: {} },
+    });
+    store = mockStore({
+      app: {
+        language: 'de',
+        t: t => t,
+      },
     });
   });
 
@@ -41,7 +47,7 @@ describe('LayerInfosDialog', () => {
   test('should match snapshot when Layer is defined', () => {
     const component = renderer.create(
       <Provider store={store}>
-        <LayerInfosDialog layers={layer}></LayerInfosDialog>
+        <LayerInfosDialog layer={layer}></LayerInfosDialog>
       </Provider>,
     );
     const tree = component.toJSON();

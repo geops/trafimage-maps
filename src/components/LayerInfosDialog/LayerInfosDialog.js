@@ -30,7 +30,7 @@ function LayerInfosDialog({ layer }) {
       body={
         <div>
           <Trans
-            i18nKey={layer.get('description')}
+            i18nKey={layer.get('description') || ''}
             components={[
               <img
                 src={(layer.get('legendUrl') || '').replace(
