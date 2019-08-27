@@ -8,8 +8,8 @@
 
 ** 'TrajservLayer' specific parameters: **
 
-| Parameters      | Description            | Examples       |
-|-----------------|------------------------|----------------|
-| operator_filter | filter by operator     | vbz,zsg      |
-| line_filter     | filter by line number  | s9,s15,s10   |
-| route_filter    | filter by route number | 00191,00040  |
+| Options           | Description            | Examples                       |
+|-------------------|------------------------|--------------------------------|
+| Operator          | filter by operator     | Operator=vbz,zsg               |
+| PublishedLineName | filter by line name    | PublishedLineName=s9,s15,s10   |
+| TripNumber        | filter by trip number  | TripNumber=2068,3003,3451,3953 |
