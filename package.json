@@ -157,7 +157,7 @@
       "post-checkout": "yarn install --frozen-lockfile",
       "post-merge": "yarn install --frozen-lockfile",
       "post-rebase": "yarn install --frozen-lockfile",
-      "pre-commit": "sort && CI=true lint-staged   "
+      "pre-commit": "CI=true lint-staged   "
     }
   },
   "jest": {
@@ -171,7 +171,7 @@
   },
   "lint-staged": {
     "public/lang/*.json": [
-      "sort",
+      "yarn sort",
       "git add"
     ],
     "(src|__mocks__)/**/*.js": [

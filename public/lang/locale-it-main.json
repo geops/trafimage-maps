@@ -161,6 +161,7 @@
   "Karte per Email versenden": "Spedisca la carta.",
   "Karte vergrößern": "Ingrandire la cartina",
   "Karte verkleinern": "Ridurre la cartina",
+  "Kein Bildtext": "Nessuna leggenda",
   "Kilometer": "Chilometro",
   "klasse": "Klasse",
   "km_ende": "Kilometer Ende",
@@ -270,6 +271,5 @@
   "xmastr": "Tracker",
   "Zeichnen": "Disegnare",
   "Zugtracker": "Train tracker",
-  "Zurücksetzen": "Ripristinare",
-  "Kein Bildtext": "Nessuna leggenda"
+  "Zurücksetzen": "Ripristinare"
 }

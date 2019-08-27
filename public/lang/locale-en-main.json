@@ -127,6 +127,7 @@
   "Karte per Email versenden": "Send map via email.",
   "Karte vergrößern": "Enlarge map",
   "Karte verkleinern": "Reduce map",
+  "Kein Bildtext": "No legend",
   "Kilometer": "Kilometer",
   "klasse": "Klasse",
   "km_ende": "Kilometer Ende",
@@ -215,6 +216,5 @@
   "xmas": "SBB-Christmas",
   "xmastr": "Christmas-Tracker",
   "Zeichnen": "Draw",
-  "Zugtracker": "Train tracker",
-  "Kein Bildtext": "No legend"
+  "Zugtracker": "Train tracker"
 }

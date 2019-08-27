@@ -161,6 +161,7 @@
   "Karte per Email versenden": "Envoyer une carte.",
   "Karte vergrößern": "Agrandir la carte",
   "Karte verkleinern": "Réduire la carte",
+  "Kein Bildtext": "Pas de légende",
   "Kilometer": "Kilomètres",
   "klasse": "Klasse",
   "km_ende": "Kilometer Ende",
@@ -269,6 +270,5 @@
   "xmastr": "Tracker",
   "Zeichnen": "Dessiner",
   "Zugtracker": "Train tracker",
-  "Zurücksetzen": "Réinitialiser",
-  "Kein Bildtext": "Pas de légende"
+  "Zurücksetzen": "Réinitialiser"
 }
