@@ -6,10 +6,12 @@ import LayerInfosDialog, {
 
 const MainDialog = () => {
   const dialogVisible = useSelector(state => state.app.dialogVisible);
-  const layerInfosOpen = useSelector(state => state.app.layerInfosOpen);
+  const layerSelectedForInfos = useSelector(
+    state => state.app.layerSelectedForInfos,
+  );
 
-  if (layerInfosOpen && dialogVisible === LayerInfosDialogName) {
-    return <LayerInfosDialog layer={layerInfosOpen} />;
+  if (layerSelectedForInfos && dialogVisible === LayerInfosDialogName) {
+    return <LayerInfosDialog layer={layerSelectedForInfos} />;
   }
 
   return null;

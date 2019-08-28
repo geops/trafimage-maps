@@ -21,17 +21,17 @@ const propTypes = {
 
   // mapStateToProps
   activeTopic: PropTypes.shape().isRequired,
-  layerInfosOpen: PropTypes.instanceOf(Layer),
+  layerSelectedForInfos: PropTypes.instanceOf(Layer),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
-  dispatchSetLayerInfosOpen: PropTypes.func.isRequired,
+  dispatchSetlayerSelectedForInfos: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  layerInfosOpen: null,
+  layerSelectedForInfos: null,
 };
 
 class TopicMenu extends PureComponent {
@@ -55,14 +55,17 @@ class TopicMenu extends PureComponent {
   }
 
   renderInfoButton(layer) {
-    const { layerInfosOpen, dispatchSetLayerInfosOpen } = this.props;
-    const isSelected = layerInfosOpen === layer;
+    const {
+      layerSelectedForInfos,
+      dispatchSetlayerSelectedForInfos,
+    } = this.props;
+    const isSelected = layerSelectedForInfos === layer;
     const className = `wkp-info-bt${isSelected ? ' wkp-selected' : ''}`;
     return (
       <Button
         className={className}
         onClick={() => {
-          dispatchSetLayerInfosOpen(isSelected ? null : layer);
+          dispatchSetlayerSelectedForInfos(isSelected ? null : layer);
         }}
       >
         <FaInfoCircle focusable={false} />
@@ -130,12 +133,12 @@ TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
-  layerInfosOpen: state.app.layerInfosOpen,
+  layerSelectedForInfos: state.app.layerSelectedForInfos,
 });
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
-  dispatchSetLayerInfosOpen: setLayerSelectedForInfos,
+  dispatchSetlayerSelectedForInfos: setLayerSelectedForInfos,
 };
 
 export default compose(
