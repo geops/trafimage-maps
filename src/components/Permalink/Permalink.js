@@ -32,12 +32,12 @@ const defaultProps = {
   initialState: {},
 };
 
-const LINE_FILTER = 'PublishedLineName';
-const ROUTE_FILTER = 'TripNumber';
-const OPERATOR_FILTER = 'Operator';
+const LINE_FILTER = 'publishedlinename';
+const ROUTE_FILTER = 'tripnumber';
+const OPERATOR_FILTER = 'operator';
 
 const getUrlParam = param => {
-  return param ? decodeURI(param).replace(/\s+/g, '') : undefined;
+  return param ? param.replace(/\s+/g, '') : undefined;
 };
 
 class Permalink extends PureComponent {
@@ -52,7 +52,7 @@ class Permalink extends PureComponent {
     // Permalink has the priority over the initial state.
     const parameters = {
       ...initialState,
-      ...qs.parse(window.location.search),
+      ...qs.parse(window.location.search.toLowerCase()),
     };
 
     const z = parseInt(parameters.z, 10);
