@@ -52,7 +52,7 @@ class Permalink extends PureComponent {
     // Permalink has the priority over the initial state.
     const parameters = {
       ...initialState,
-      ...qs.parse(window.location.search.toLowerCase()),
+      ...qs.parse(window.location.search),
     };
 
     const z = parseInt(parameters.z, 10);

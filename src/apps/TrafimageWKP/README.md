@@ -6,9 +6,9 @@ Configure your own map.
 
 | Options            | Description            | Examples                                                              |
 |--------------------|------------------------|-----------------------------------------------------------------------|
-| Operator           | filter by operator     | string: 'sbb', list: '(vbz\|zsg)'                                     |
-| PublishedLineName  | filter by line name    | string: 'ICE',  list: 's1,s2,s9,s10,s15'                              |
-| TripNumber         | filter by trip number  | bus in zurich: '2068', list of buses in Zurich: '2068,3003,3451,3953' |
+| operator           | filter by operator     | string: 'sbb', list: '(vbz\|zsg)'                                     |
+| publishedLineName  | filter by line name    | string: 'ICE',  list: 's1,s2,s9,s10,s15'                              |
+| tripNumber         | filter by trip number  | bus in zurich: '2068', list of buses in Zurich: '2068,3003,3451,3953' |
 
 ```jsx
 import React from 'react';
@@ -34,8 +34,8 @@ import TrafimageMaps from '../../components/TrafimageMaps';
           key: 'ch.sbb.puenktlichkeit',
           visible: false,
           useDelayStyle: true,
-          Operator: 'SBB', // To filter operator
-          PublishedLineName: 's1,s2,s9,s10,s15', // To filter line number
+          operator: 'SBB', // To filter operator
+          publishedLineName: 's1,s2,s9,s10,s15', // To filter line number
         }),
         buslines,
       ],
