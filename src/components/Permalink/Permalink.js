@@ -32,9 +32,13 @@ const defaultProps = {
   initialState: {},
 };
 
-const LINE_FILTER = 'PublishedLineName';
-const ROUTE_FILTER = 'TripNumber';
-const OPERATOR_FILTER = 'Operator';
+const LINE_FILTER = 'publishedlinename';
+const ROUTE_FILTER = 'tripnumber';
+const OPERATOR_FILTER = 'operator';
+
+const getUrlParam = param => {
+  return param ? param.replace(/\s+/g, '') : undefined;
+};
 
 class Permalink extends PureComponent {
   constructor(props) {
@@ -45,10 +49,16 @@ class Permalink extends PureComponent {
   componentDidMount() {
     const { dispatchSetZoom, dispatchSetCenter, initialState } = this.props;
 
+    const lowerPermalinkParams = {};
+    const permalinkParams = qs.parse(window.location.search);
+    Object.keys(permalinkParams).forEach(key => {
+      lowerPermalinkParams[key.toLowerCase()] = permalinkParams[key];
+    });
+
     // Permalink has the priority over the initial state.
     const parameters = {
       ...initialState,
-      ...qs.parse(window.location.search),
+      ...lowerPermalinkParams,
     };
 
     const z = parseInt(parameters.z, 10);
@@ -63,9 +73,9 @@ class Permalink extends PureComponent {
       dispatchSetZoom(z);
     }
 
-    const lineFilter = parameters[LINE_FILTER];
-    const routeFilter = parameters[ROUTE_FILTER];
-    const operatorFilter = parameters[OPERATOR_FILTER];
+    const lineFilter = getUrlParam(parameters[LINE_FILTER]);
+    const routeFilter = getUrlParam(parameters[ROUTE_FILTER]);
+    const operatorFilter = getUrlParam(parameters[OPERATOR_FILTER]);
 
     this.setState({
       [LINE_FILTER]: lineFilter,

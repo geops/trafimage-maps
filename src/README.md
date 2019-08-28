@@ -10,6 +10,6 @@
 
 | Options           | Description            | Examples                       |
 |-------------------|------------------------|--------------------------------|
-| Operator          | filter by operator     | Operator=vbz,zsg               |
-| PublishedLineName | filter by line name    | PublishedLineName=s9,s15,s10   |
-| TripNumber        | filter by trip number  | TripNumber=2068,3003,3451,3953 |
+| operator          | filter by operator     | Operator=vbz,zsg               |
+| publishedLineName | filter by line name    | PublishedLineName=s9,s15,s10   |
+| tripNumber        | filter by trip number  | TripNumber=2068,3003,3451,3953 |
