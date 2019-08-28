@@ -15,9 +15,10 @@ const defaultProps = {
 
 export const NAME = 'layerInfos';
 
-function LayerInfosDialog({ layer }) {
+function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
+  const { layer } = props;
 
   if (!layer) {
     return null;
@@ -25,25 +26,25 @@ function LayerInfosDialog({ layer }) {
 
   return (
     <Dialog
+      isDraggable
       name={NAME}
       title={<span>{t('Informationen')}</span>}
       body={
-        <div>
-          <Trans
-            i18nKey={layer.get('description') || ''}
-            components={[
-              <img
-                src={(layer.get('legendUrl') || '').replace(
-                  '{language}',
-                  language,
-                )}
-                draggable="false"
-                alt={t('Kein Bildtext')}
-              ></img>,
-            ]}
-          ></Trans>
-        </div>
+        <Trans
+          i18nKey={layer.get('description') || ''}
+          components={[
+            <img
+              src={(layer.get('legendUrl') || '').replace(
+                '{language}',
+                language,
+              )}
+              draggable="false"
+              alt={t('Kein Bildtext')}
+            ></img>,
+          ]}
+        ></Trans>
       }
+      {...props}
     />
   );
 }

@@ -22,16 +22,14 @@ const defaultProps = {
 function Dialog(props) {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
   const dispatch = useDispatch();
-  const { name, body } = props;
+  const { body } = props;
   return (
     <RSDialog
-      name={name}
       isOpen
-      isDraggable
+      position={dialogPosition}
       onClose={() => {
         dispatch(setDialogVisible());
       }}
-      position={dialogPosition}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >

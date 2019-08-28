@@ -7,6 +7,7 @@ import {
   SET_MENU_OPEN,
   SET_LAYER_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
+  SET_DIALOG_POSITION,
 } from './actions';
 
 const initialState = {
@@ -56,6 +57,11 @@ export default function app(state = initialState, action) {
         ...state,
         dialogVisible: action.data,
         layerSelectedForInfos: null,
+      };
+    case SET_DIALOG_POSITION:
+      return {
+        ...state,
+        dialogPosition: action.data,
       };
     default:
       return {
