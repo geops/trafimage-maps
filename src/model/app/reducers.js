@@ -7,6 +7,7 @@ import {
   SET_MENU_OPEN,
   SET_LAYER_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
+  SET_DIALOG_POSITION,
 } from './actions';
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
   clickedFeatureInfo: null,
   language: 'de',
   menuOpen: false,
-  layerInfosOpen: null,
+  layerSelectedForInfos: null,
 };
 
 export default function app(state = initialState, action) {
@@ -49,13 +50,18 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         dialogVisible: action.data ? 'layerInfos' : false,
-        layerInfosOpen: action.data,
+        layerSelectedForInfos: action.data,
       };
     case SET_DIALOG_VISIBLE:
       return {
         ...state,
         dialogVisible: action.data,
-        layerInfosOpen: null,
+        layerSelectedForInfos: null,
+      };
+    case SET_DIALOG_POSITION:
+      return {
+        ...state,
+        dialogPosition: action.data,
       };
     default:
       return {

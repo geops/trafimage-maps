@@ -2,25 +2,18 @@
 
 exports[`ExportDialog should match snapshot. 1`] = `
 <div
-  className="tm-dialog react-draggable"
-  onMouseDown={[Function]}
-  onMouseUp={[Function]}
-  onTouchEnd={[Function]}
-  onTouchStart={[Function]}
+  className="tm-dialog"
   style={
     Object {
       "display": "block",
-      "touchAction": "none",
-      "transform": "translate(0px,0px)",
     }
   }
-  transform={null}
 >
   <div
     className="tm-dialog-container"
   >
     <div
-      className="tm-dialog-header tm-dialog-draggable"
+      className="tm-dialog-header "
     >
       <div
         className="tm-header-left"

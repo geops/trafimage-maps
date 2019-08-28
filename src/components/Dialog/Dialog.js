@@ -19,21 +19,17 @@ const defaultProps = {
   footer: null,
 };
 
-const hideDialog = dispatch => () => {
-  dispatch(setDialogVisible());
-};
-
 function Dialog(props) {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
   const dispatch = useDispatch();
-  const { name, body } = props;
+  const { body } = props;
   return (
     <RSDialog
-      name={name}
       isOpen
-      isDraggable
-      onClose={hideDialog(dispatch)}
       position={dialogPosition}
+      onClose={() => {
+        dispatch(setDialogVisible());
+      }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
