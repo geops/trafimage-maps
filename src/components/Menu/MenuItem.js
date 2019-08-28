@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import Map from 'ol/Map';
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
@@ -14,6 +16,7 @@ const propTypes = {
   open: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
   onCollapseToggle: PropTypes.func.isRequired,
+  menuOpen: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -39,6 +42,15 @@ class MenuItem extends Component {
 
   componentDidMount() {
     this.updateMenuHeight();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { menuOpen } = this.props;
+    if (menuOpen !== prevProps.menuOpen) {
+      window.setTimeout(() => {
+        this.updateMenuHeight();
+      }, 350);
+    }
   }
 
   updateMenuHeight() {
@@ -99,6 +111,18 @@ class MenuItem extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  menuOpen: state.app.menuOpen,
+});
+
+const mapDispatchToProps = {};
+
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
-export default MenuItem;
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
+)(MenuItem);
