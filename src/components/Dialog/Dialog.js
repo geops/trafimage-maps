@@ -19,10 +19,6 @@ const defaultProps = {
   footer: null,
 };
 
-const hideDialog = dispatch => () => {
-  dispatch(setDialogVisible());
-};
-
 function Dialog(props) {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
   const dispatch = useDispatch();
@@ -32,7 +28,9 @@ function Dialog(props) {
       name={name}
       isOpen
       isDraggable
-      onClose={hideDialog(dispatch)}
+      onClose={() => {
+        dispatch(setDialogVisible());
+      }}
       position={dialogPosition}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
