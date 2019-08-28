@@ -36,6 +36,10 @@ const LINE_FILTER = 'PublishedLineName';
 const ROUTE_FILTER = 'TripNumber';
 const OPERATOR_FILTER = 'Operator';
 
+const getUrlParam = param => {
+  return param ? decodeURI(param).replace(/\s+/g, '') : undefined;
+};
+
 class Permalink extends PureComponent {
   constructor(props) {
     super(props);
@@ -63,9 +67,9 @@ class Permalink extends PureComponent {
       dispatchSetZoom(z);
     }
 
-    const lineFilter = parameters[LINE_FILTER];
-    const routeFilter = parameters[ROUTE_FILTER];
-    const operatorFilter = parameters[OPERATOR_FILTER];
+    const lineFilter = getUrlParam(parameters[LINE_FILTER]);
+    const routeFilter = getUrlParam(parameters[ROUTE_FILTER]);
+    const operatorFilter = getUrlParam(parameters[OPERATOR_FILTER]);
 
     this.setState({
       [LINE_FILTER]: lineFilter,
