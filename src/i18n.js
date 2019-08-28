@@ -31,6 +31,16 @@ i18n
       react: {
         useSuspense: false,
         wait: false,
+        transKeepBasicHtmlNodesFor: [
+          'br',
+          'strong',
+          'i',
+          'div',
+          'span',
+          'img',
+          'p',
+          'a',
+        ],
       },
     },
     err => {

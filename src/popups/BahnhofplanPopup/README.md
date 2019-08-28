@@ -11,7 +11,6 @@ import React from 'react';
 import TrafimageMaps from '../../components/TrafimageMaps';
 import BahnhofplanLayer from '../../layers/BahnhofplanLayer';
 
-
 <div
   style={{
     position: 'relative',

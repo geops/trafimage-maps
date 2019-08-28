@@ -32,8 +32,9 @@ const defaultProps = {
   initialState: {},
 };
 
-const TRAIN_FILTER = 'train_filter';
-const OPERATOR_FILTER = 'operator_filter';
+const LINE_FILTER = 'PublishedLineName';
+const ROUTE_FILTER = 'TripNumber';
+const OPERATOR_FILTER = 'Operator';
 
 class Permalink extends PureComponent {
   constructor(props) {
@@ -62,11 +63,13 @@ class Permalink extends PureComponent {
       dispatchSetZoom(z);
     }
 
-    const trainFilter = parameters[TRAIN_FILTER];
+    const lineFilter = parameters[LINE_FILTER];
+    const routeFilter = parameters[ROUTE_FILTER];
     const operatorFilter = parameters[OPERATOR_FILTER];
 
     this.setState({
-      [TRAIN_FILTER]: trainFilter,
+      [LINE_FILTER]: lineFilter,
+      [ROUTE_FILTER]: routeFilter,
       [OPERATOR_FILTER]: operatorFilter,
     });
   }

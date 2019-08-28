@@ -9,16 +9,28 @@ module.exports = {
   assetsDir: 'src/',
   styleguideDir: 'styleguide-build',
   require: [
-    path.join(__dirname, 'src/i18n.js'),
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
     'react-app-polyfill/ie11',
     'react-app-polyfill/stable',
     'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
+    path.join(__dirname, 'src/i18n.js'),
   ],
+  ribbon: {
+    url: 'https://github.com/geops/trafimage-maps',
+    text: 'Fork me on GitHub',
+  },
+  moduleAliases: {
+    'trafimage-maps': path.resolve(__dirname, 'src'),
+  },
   sections: [
     {
       name: '',
-      context: 'README.md',
+      sections: [
+        {
+          name: 'Url parameters',
+          content: 'src/README.md',
+        },
+      ],
     },
     {
       name: 'Applications',
@@ -28,8 +40,8 @@ module.exports = {
           content: 'src/apps/Casa/README.md',
         },
         {
-          name: 'Digitale Stelen',
-          content: 'src/apps/DigitalenStelen/README.md',
+          name: 'Trafimage WKP',
+          content: 'src/apps/TrafimageWKP/README.md',
         },
       ],
     },
@@ -50,12 +62,12 @@ module.exports = {
         // Transpile node dependencies, node deps are often not transpiled for IE11
         {
           test: [
-            /\/node_modules\/(regexpu-core|unicode-.*|acorn-.*|query-string|strict-uri-encode)/,
-            /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker)/,
+            /\/node_modules\/(regexpu-core|unicode-.*|chalk|acorn-.*|query-string|strict-uri-encode)/,
+            /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker|strip-ansi)/,
           ],
           loader: 'babel-loader',
         },
-        // Babel loader, will use your project’s .babelrc
+        // Transpile js
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
@@ -65,6 +77,20 @@ module.exports = {
         {
           test: /\.s?css$/,
           use: ['style-loader', 'css-loader', 'sass-loader?modules'],
+        },
+        {
+          test: /^((?!url).)*\.svg$/,
+          use: [
+            {
+              loader: 'babel-loader',
+            },
+            {
+              loader: 'react-svg-loader',
+              options: {
+                jsx: true, // true outputs JSX tags
+              },
+            },
+          ],
         },
         {
           test: /\.url\.svg$/,

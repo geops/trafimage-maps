@@ -22,25 +22,15 @@
     border-top: 1px solid #eee;
     overflow-y: auto;
 
+    .rt-tracker-control {
+      padding: 15px 10px 0 10px;
+    }
+
     &.collapsed {
       border: 0;
       max-height: 0;
       transition: all 0.1s ease;
       padding: 0 initial;
-    }
-  }
-}
-
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-menu {
-    .wkp-menu-title {
-      border-top: 1px solid #eee;
-    }
-
-    .wkp-menu-body {
-      padding: 0;
     }
   }
 }

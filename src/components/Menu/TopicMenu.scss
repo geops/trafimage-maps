@@ -1,4 +1,13 @@
 .wkp-menu-wrapper {
+  .wkp-info-bt {
+    position: absolute !important;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
   .wkp-menu.wkp-topics {
     border-top-width: 0;
     margin-top: 0;
@@ -55,7 +64,20 @@
       transition: max-height 0.3s ease, margin 0.3s ease;
 
       .tm-layer-tree-item {
+        color: #888;
         padding: 7px;
+
+        .tm-layer-tree-arrow {
+          border-color: #888;
+        }
+
+        &.tm-visible {
+          color: initial;
+
+          .tm-layer-tree-arrow {
+            border-color: black;
+          }
+        }
       }
     }
 

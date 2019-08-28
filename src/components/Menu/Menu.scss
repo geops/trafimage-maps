@@ -30,6 +30,10 @@
   .wkp-menu-wrapper {
     left: 0;
 
+    .wkp-menu-title-main {
+      display: none;
+    }
+
     .wkp-menu {
       border: 0;
 
@@ -41,6 +45,14 @@
           white-space: nowrap;
           overflow: hidden;
         }
+      }
+
+      .wkp-menu-title {
+        border-top: 1px solid #eee;
+      }
+
+      .wkp-menu-body {
+        padding: 0;
       }
     }
   }

@@ -22,6 +22,7 @@ import Footer from '../Footer';
 import MapControls from '../MapControls';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
+import MainDialog from '../MainDialog';
 import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
@@ -216,10 +217,12 @@ class TrafimageMaps extends Component {
     return (
       <Provider store={appStore}>
         <div className={`tm-app ${elementClasses.join(' ')}`}>
+          <ResizeHandler observe=".tm-app" />
           <TopicLoader
             layerService={this.layerService}
             baseLayers={baseLayers}
             layers={layers}
+            map={this.map}
             topics={topics}
             activeTopicKey={activeTopicKey}
             apiKey={apiKey}
@@ -235,6 +238,7 @@ class TrafimageMaps extends Component {
           {appElements.map(elem => elem)}
 
           {children}
+          <MainDialog />
         </div>
       </Provider>
     );

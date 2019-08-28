@@ -32,6 +32,7 @@ class Menu extends Component {
       allMenuLayersVisible: false,
       loadedMenuComponents: [],
     };
+
     const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
   }
@@ -60,8 +61,8 @@ class Menu extends Component {
     const components = [];
 
     for (let i = 0; i < menuComponents.length; i += 1) {
+      // Styleguidist try to load every file in the folder if we don't put index.js
       const Comp = React.lazy(() =>
-        // Styleguidist try to load every file in the folder if we don't put index.js
         import(`../../menus/${menuComponents[i]}/index.js`),
       );
       components.push(Comp);
@@ -74,8 +75,15 @@ class Menu extends Component {
     const { layerService } = this.props;
     const topicLayers = layerService
       .getLayersAsFlatArray()
-      .filter(l => !l.getIsBaseLayer());
+      .reverse()
+      .filter(
+        l =>
+          !l.getIsBaseLayer() &&
+          !l.get('hideInLegend') &&
+          !layerService.getParent(l),
+      );
     const menuLayers = topicLayers.filter(l => l.getVisible());
+
     this.setState({
       menuLayers,
       allMenuLayersVisible: menuLayers.length === topicLayers.length,
@@ -103,6 +111,7 @@ class Menu extends Component {
       ? t('alle aktiviert')
       : menuLayers.map(l => t(l.getName())).join(', ');
 
+    /* eslint-disable react/no-array-index-key */
     return (
       <div className="wkp-menu-wrapper">
         <MenuHeader
@@ -123,13 +132,14 @@ class Menu extends Component {
           </div>
         </div>
 
-        {loadedMenuComponents.map(Comp => (
-          <React.Suspense fallback="Loading menu...">
+        {loadedMenuComponents.map((Comp, index) => (
+          <React.Suspense fallback="Loading menu..." key={index}>
             <Comp layerService={layerService} map={map} />
           </React.Suspense>
         ))}
       </div>
     );
+    /* eslint-enable */
   }
 }
 
