@@ -49,10 +49,16 @@ class Permalink extends PureComponent {
   componentDidMount() {
     const { dispatchSetZoom, dispatchSetCenter, initialState } = this.props;
 
+    const lowerPermalinkParams = {};
+    const permalinkParams = qs.parse(window.location.search);
+    Object.keys(permalinkParams).forEach(key => {
+      lowerPermalinkParams[key.toLowerCase()] = permalinkParams[key];
+    });
+
     // Permalink has the priority over the initial state.
     const parameters = {
       ...initialState,
-      ...qs.parse(window.location.search),
+      ...lowerPermalinkParams,
     };
 
     const z = parseInt(parameters.z, 10);
