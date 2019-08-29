@@ -200,6 +200,24 @@
     "extends": [
       "stylelint-config-standard",
       "stylelint-config-recommended-scss"
-    ]
+    ],
+    "rules": {
+      "selector-pseudo-class-no-unknown": [
+        true,
+        {
+          "ignorePseudoClasses": [
+            "export"
+          ]
+        }
+      ],
+      "property-no-unknown": [
+        true,
+        {
+          "ignoreProperties": [
+            "/transitiondelay/"
+          ]
+        }
+      ]
+    }
   }
 }
