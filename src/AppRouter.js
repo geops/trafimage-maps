@@ -1,13 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TrafimageMaps from './components/TrafimageMaps';
-import TOPIC_CONF from './config/topics';
-import CONTAINER_TOPIC_CONF from './config/containerTopics';
+import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
 import { TrackerMenu } from './config/menu';
 
-const topics =
-  process.env.REACT_APP_ENV === 'container' ? CONTAINER_TOPIC_CONF : TOPIC_CONF;
+const { topics } = INSTANCES_CONF;
 
 const topicKeys = topics.map(t => t.key);
 

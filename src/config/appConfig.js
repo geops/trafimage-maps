@@ -10,15 +10,15 @@ let vectorTilesUrl = '//maps.geops.io';
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
 
 switch (process.env.REACT_APP_ENV) {
-  case 'stag': {
+  case 'wkp_stag': {
     tileserverUrlMapproxy = '//wkp.stag.trafimage.geops.ch/raster';
     break;
   }
-  case 'prod': {
+  case 'wkp_prod': {
     tileserverUrlMapproxy = '//maps{1-3}.trafimage.ch/raster';
     break;
   }
-  case 'container': {
+  case 'stelen': {
     vectorTilesKey = null;
     vectorTilesUrl = '/tileserver';
     break;
