@@ -23,6 +23,13 @@ export const netzkarte = {
   projection: 'EPSG:3857',
 };
 
+export const netzkarteStelen = {
+  name: 'ch.sbb.netzkarte',
+  key: 'ch.sbb.netzkarte',
+  layers: [netzkarteLayer],
+  projection: 'EPSG:3857',
+};
+
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
