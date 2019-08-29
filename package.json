@@ -107,7 +107,7 @@
     "start:doc": "yarn doc:server",
     "start:prod": "REACT_APP_ENV='wkp_prod' yarn start",
     "start:stag": "REACT_APP_ENV='wkp_stag' yarn start",
-    "start:stelen": "REACT_APP_ENV='stelen' yarn start",
+    "start:stele": "REACT_APP_ENV='stele' yarn start",
     "test": "react-scripts test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial|react-transit)/).*/\"",
     "test:coverage": "yarn test --coverage --coverageDirectory=coverage"
   },

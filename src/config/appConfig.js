@@ -18,7 +18,7 @@ switch (process.env.REACT_APP_ENV) {
     tileserverUrlMapproxy = '//maps{1-3}.trafimage.ch/raster';
     break;
   }
-  case 'stelen': {
+  case 'stele': {
     vectorTilesKey = null;
     vectorTilesUrl = '/tileserver';
     break;
