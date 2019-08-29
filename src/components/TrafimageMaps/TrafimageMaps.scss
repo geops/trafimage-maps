@@ -1,5 +1,6 @@
 @import 'react-transit/themes/default/variables.scss';
 @import 'react-transit/themes/default/components.scss';
+@import '../../Globals.scss';
 
 body {
   font-family: 'SBBWeb Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -36,7 +37,7 @@ body {
 }
 
 .wkp-selected {
-  color: #eb0000;
+  color: $brand-primary;
 }
 
 .tm-map {

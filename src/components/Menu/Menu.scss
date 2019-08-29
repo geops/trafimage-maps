@@ -1,3 +1,5 @@
+@import '../../Globals.scss';
+
 .wkp-menu-wrapper {
   position: absolute;
   top: 12px;
@@ -10,7 +12,7 @@
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: max-height 0.3s ease;
+    transition: $menu-transition;
     max-height: 1000px;
     margin-top: 5px;
     overflow: hidden;
@@ -19,7 +21,7 @@
       border-width: 0;
       border-top-width: 0;
       max-height: 0;
-      transition: max-height 0.3s ease, border 0.1s ease 0.2s;
+      transition: $menu-transition-closed;
     }
   }
 }
