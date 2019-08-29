@@ -11,7 +11,7 @@ import Select from 'react-spatial/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
 import LayerService from 'react-spatial/LayerService';
 
-import { setLanguage } from '../../model/app/actions';
+import { setLanguage, setProjection } from '../../model/app/actions';
 import './Footer.scss';
 
 const propTypes = {
@@ -22,6 +22,7 @@ const propTypes = {
 
   // mapDispatchToProps
   dispatchSetLanguage: PropTypes.func.isRequired,
+  dispatchSetProjection: PropTypes.func.isRequired,
 };
 
 const numberFormat = coords => {
@@ -34,7 +35,14 @@ const numberFormat = coords => {
   return coordStr;
 };
 
-const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
+const Footer = ({
+  map,
+  language,
+  layerService,
+  t,
+  dispatchSetLanguage,
+  dispatchSetProjection,
+}) => (
   <RSFooter className="wkp-footer">
     <div className="wkp-footer-left">
       <Copyright
@@ -47,6 +55,9 @@ const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
       <MousePosition
         coordinatePosition="left"
         map={map}
+        onChange={(evt, proj) => {
+          dispatchSetProjection(proj);
+        }}
         projections={[
           {
             label: 'CH1093 / LV03',
@@ -65,7 +76,7 @@ const Footer = ({ map, language, layerService, t, dispatchSetLanguage }) => (
           },
           {
             label: 'WGS 84',
-            value: 'EPSG:4324',
+            value: 'EPSG:4326',
             format: c => `${t('Koordinaten')}: ${c}`,
           },
         ]}
@@ -94,6 +105,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   dispatchSetLanguage: setLanguage,
+  dispatchSetProjection: setProjection,
 };
 
 Footer.propTypes = propTypes;

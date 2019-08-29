@@ -67,7 +67,7 @@ exports[`AppRouter should match snapshot 1`] = `
               Web Mercator
             </option>
             <option
-              value="EPSG:4324"
+              value="EPSG:4326"
             >
               WGS 84
             </option>

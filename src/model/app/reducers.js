@@ -4,6 +4,7 @@ import {
   SET_ACTIVE_TOPIC,
   SET_CLICKED_FEATURE_INFO,
   SET_LANGUAGE,
+  SET_PROJECTION,
   SET_MENU_OPEN,
   SET_LAYER_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
@@ -14,6 +15,7 @@ const initialState = {
   topics: [],
   clickedFeatureInfo: null,
   language: 'de',
+  projection: null,
   menuOpen: false,
   layerSelectedForInfos: null,
 };
@@ -30,6 +32,11 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         language: action.data,
+      };
+    case SET_PROJECTION:
+      return {
+        ...state,
+        projection: action.data,
       };
     case SET_CLICKED_FEATURE_INFO:
       return {
