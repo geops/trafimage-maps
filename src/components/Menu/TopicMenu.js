@@ -78,7 +78,11 @@ class TopicMenu extends PureComponent {
     const { isCollapsed } = this.state;
     let layerTree = null;
 
-    if (activeTopic.key === topic.key) {
+    if (
+      activeTopic.key === topic.key &&
+      layerService &&
+      layerService.getLayers()
+    ) {
       layerTree = (
         <LayerTree
           isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
