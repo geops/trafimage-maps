@@ -47,7 +47,7 @@ class TrackerMenu extends Component {
       this.trackerLayers.forEach(layer => {
         layer.olLayer.on('change:visible', () =>
           this.setState({
-            open: this.getVisibleLayerName(),
+            open: false,
           }),
         );
 
