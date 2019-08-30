@@ -38,7 +38,7 @@ class TrackerMenu extends Component {
       .filter(l => l instanceof TrackerLayer);
 
     this.state = {
-      open: this.trackerLayers.length && this.getVisibleLayerName(),
+      open: false,
       collapsed: true,
       trajectory: null,
     };
