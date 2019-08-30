@@ -1,6 +1,6 @@
-import { netzkarte, netzkarteStelen } from './topics';
+import defaultTopics, { netzkarteStelen } from './topics';
 
-let topics = [netzkarte];
+let topics = defaultTopics;
 
 switch (process.env.REACT_APP_ENV) {
   case 'stele': {
