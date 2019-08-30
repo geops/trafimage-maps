@@ -64,6 +64,7 @@ export const netzkarteLayer = new MapboxLayer({
   copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
+  radioGroup: 'baseLayer',
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
@@ -75,7 +76,6 @@ export const swisstopoSwissImage = new Layer({
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
   visible: false,
-  isBaseLayer: true,
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -98,7 +98,6 @@ export const netzkarteAerial = new Layer({
   name: 'Netzkarte Luftbild',
   key: 'ch.sbb.netzkarte.overlay',
   visible: false,
-  isBaseLayer: true,
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -119,6 +118,8 @@ export const netzkarteAerial = new Layer({
 export const aerial = new Layer({
   name: 'ch.sbb.netzkarte.luftbild.group',
   isBaseLayer: true,
+  radioGroup: 'baseLayer',
+  visible: false,
 });
 
 aerial.setChildren([swisstopoSwissImage, netzkarteAerial]);
@@ -128,6 +129,7 @@ export const swisstopoLandeskarte = new Layer({
   copyright: 'swisstopo (5704003351)',
   visible: false,
   isBaseLayer: true,
+  radioGroup: 'baseLayer',
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -151,6 +153,7 @@ export const swisstopoLandeskarteGrau = new Layer({
   copyright: 'swisstopo (5704003351)',
   visible: false,
   isBaseLayer: true,
+  radioGroup: 'baseLayer',
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
