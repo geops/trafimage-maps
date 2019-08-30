@@ -1,6 +1,6 @@
 // Variable to configure if PWA Service Worker is registered in index.js.
 const pwaActive = false;
-const geoadminWmtsUrl = '//maps{1-3}.trafimage.ch';
+const geoadminWmtsUrl = '//maps.trafimage.ch';
 const geoserverUrl = '//maps.trafimage.ch/geoserver/trafimage/ows';
 let tileserverUrlMapproxy = '//wkp.dev.trafimage.geops.ch/raster';
 let vectorTilesKey = '5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910';
