@@ -1,9 +1,9 @@
-.tm-netzkarte-popup {
+.wkp-netzkarte-popup {
   svg {
     margin-left: 5px;
   }
 
-  .tm-netzkarte-popup-title {
+  .wkp-netzkarte-popup-title {
     font-weight: bold;
   }
 
@@ -18,13 +18,42 @@
     }
   }
 
-  & > .tm-bahnhofplan-links {
+  .wkp-coordinates-infos {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.3ms;
+    display: none;
+    cursor: initial;
+    margin: 0 6px;
+
+    span {
+      padding: 2px 0;
+      display: block;
+    }
+
+    .wkp-projection-label {
+      font-style: italic;
+    }
+
+    &.wkp-visible {
+      height: 100%;
+      display: block;
+    }
+  }
+
+  .wkp-coordinate-toggle {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  & > .wkp-bahnhofplan-links {
     height: 0;
     transition: height 900ms;
     display: none;
     margin: 0 6px;
 
-    &.tm-visible {
+    &.wkp-visible {
       height: 100%;
       display: block;
     }

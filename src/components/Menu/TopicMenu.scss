@@ -1,3 +1,5 @@
+@import '../../Globals.scss';
+
 .wkp-menu-wrapper {
   .wkp-info-bt {
     position: absolute !important;
@@ -36,7 +38,7 @@
           width: 11px;
           height: 11px;
           margin: 2px;
-          background: #eb0000;
+          background: $brand-primary;
           border-radius: 50%;
         }
       }

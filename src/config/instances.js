@@ -3,7 +3,7 @@ import { netzkarte, netzkarteStelen } from './topics';
 let topics = [netzkarte];
 
 switch (process.env.REACT_APP_ENV) {
-  case 'stelen': {
+  case 'stele': {
     topics = [netzkarteStelen];
     break;
   }
