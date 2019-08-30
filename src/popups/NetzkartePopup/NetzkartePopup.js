@@ -141,7 +141,7 @@ class NetzkartePopup extends PureComponent {
 
         <div
           className={`wkp-coordinates-infos${
-            showCoordinates ? ' wkp-visible' : ''
+            showCoordinates ? '' : ' wkp-closed'
           }`}
         >
           <span className="wkp-projection-label">{projection.label}</span>

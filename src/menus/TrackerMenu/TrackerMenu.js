@@ -38,7 +38,7 @@ class TrackerMenu extends Component {
       .filter(l => l instanceof TrackerLayer);
 
     this.state = {
-      open: this.trackerLayers.length && this.getVisibleLayerName(),
+      open: false,
       collapsed: true,
       trajectory: null,
     };
@@ -47,7 +47,7 @@ class TrackerMenu extends Component {
       this.trackerLayers.forEach(layer => {
         layer.olLayer.on('change:visible', () =>
           this.setState({
-            open: this.getVisibleLayerName(),
+            open: false,
           }),
         );
 
@@ -56,7 +56,7 @@ class TrackerMenu extends Component {
             dispatchSetMenuOpen(false);
           }
           this.setState({
-            open: layer.getName(),
+            open: traj ? layer.getName() : false,
             collapsed: false,
             trajectory: traj,
           });
