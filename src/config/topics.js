@@ -1,5 +1,6 @@
 import defaultBaseLayers, {
   bahnhofplaene,
+  passagierfrequenzen,
   netzkarteLayer,
   netzkartePointLayer,
   buslines,
@@ -18,6 +19,7 @@ export const netzkarte = {
     punctuality,
     buslines,
     netzkartePointLayer,
+    passagierfrequenzen,
     bahnhofplaene,
   ],
   projection: 'EPSG:3857',

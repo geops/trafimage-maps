@@ -9,6 +9,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
+import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
 import CONF from './appConfig';
@@ -170,6 +171,10 @@ export const swisstopoLandeskarteGrau = new Layer({
       }),
     }),
   }),
+});
+
+export const passagierfrequenzen = new PassagierfrequenzenLayer({
+  visible: false,
 });
 
 export const bahnhofplaene = new Layer({
