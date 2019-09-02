@@ -63,7 +63,7 @@ class Menu extends Component {
     for (let i = 0; i < menuComponents.length; i += 1) {
       // Styleguidist try to load every file in the folder if we don't put index.js
       const Comp = React.lazy(() =>
-        import(`../../menus/${menuComponents[i]}/index.js`),
+        import(`../../components/${menuComponents[i]}/index.js`),
       );
       components.push(Comp);
     }
