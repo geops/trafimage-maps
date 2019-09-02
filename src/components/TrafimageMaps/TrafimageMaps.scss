@@ -54,3 +54,11 @@ h1 {
   right: 0;
   left: 0;
 }
+
+.tm-app.tm-w-m,
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .tm-base-layer-toggler {
+    display: none;
+  }
+}
