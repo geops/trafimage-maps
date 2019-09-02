@@ -110,6 +110,7 @@ class Map extends PureComponent {
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
             projection,
+            maxZoom: 20,
           }}
         />
       </>
