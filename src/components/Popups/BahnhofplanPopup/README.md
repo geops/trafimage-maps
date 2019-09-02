@@ -8,8 +8,8 @@ the map extent and the used resolution.
 
 ```jsx
 import React from 'react';
-import TrafimageMaps from '../../components/TrafimageMaps';
-import BahnhofplanLayer from '../../layers/BahnhofplanLayer';
+import TrafimageMaps from '../../TrafimageMaps';
+import BahnhofplanLayer from '../../../layers/BahnhofplanLayer';
 
 <div
   style={{
