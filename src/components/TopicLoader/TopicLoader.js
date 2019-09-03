@@ -40,6 +40,10 @@ const defaultProps = {
 };
 
 class TopicLoader extends Component {
+  static openLinkTopic(topic) {
+    window.location.href = topic.linkUrl;
+  }
+
   constructor(props) {
     super(props);
     const {
@@ -53,13 +57,16 @@ class TopicLoader extends Component {
       ? TOPIC_CONF.find(t => t.key === activeTopicKey)
       : topics[0];
 
+    if (this.topic.linkUrl) {
+      TopicLoader.openLinkTopic(this.topic);
+    }
+
     dispatchSetActiveTopic(this.topic);
     dispatchSetTopics(topics);
   }
 
   componentDidMount() {
     const { dispatchSetClickedFeatureInfo, layerService, map } = this.props;
-
     this.updateLayers(this.topic.layers);
 
     this.singleclickKey = map.on('singleclick', e => {
@@ -81,6 +88,9 @@ class TopicLoader extends Component {
     const { activeTopic } = this.props;
 
     if (activeTopic !== prevProps.activeTopic) {
+      if (activeTopic.linkUrl) {
+        TopicLoader.openLinkTopic(activeTopic);
+      }
       this.updateLayers(activeTopic.layers);
     }
   }
