@@ -85,6 +85,7 @@ export const swisstopoSwissImage = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -106,6 +107,7 @@ export const netzkarteAerial = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -139,6 +141,7 @@ export const swisstopoLandeskarte = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -163,6 +166,7 @@ export const swisstopoLandeskarteGrau = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
