@@ -5,7 +5,6 @@ import OLVectorSource from 'ol/source/Vector';
 import { unByKey } from 'ol/Observable';
 import { Style, Stroke, Circle, Fill } from 'ol/style';
 import OLGeoJSON from 'ol/format/GeoJSON';
-import { bbox as OLBboxStrategy } from 'ol/loadingstrategy';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
@@ -15,10 +14,7 @@ class PassagierfrequenzenLayer extends VectorLayer {
     const key = 'ch.sbb.bahnhoffrequenzen';
 
     const olLayer = new OLVectorLayer({
-      source: new OLVectorSource({
-        format: new OLGeoJSON(),
-        ...(options.useBboxStrategy ? { strategy: OLBboxStrategy } : {}),
-      }),
+      source: new OLVectorSource(),
     });
 
     super({
@@ -29,7 +25,6 @@ class PassagierfrequenzenLayer extends VectorLayer {
     });
 
     this.styleCache = {};
-    this.useBboxStrategy = !!options.useBboxStrategy;
 
     this.url = `${CONF.geoserverUrl}?`;
     this.urlParams = {
@@ -120,7 +115,6 @@ class PassagierfrequenzenLayer extends VectorLayer {
 
     const urlParams = {
       ...this.urlParams,
-      ...(this.useBboxStrategy ? { bbox: `${extent.join(',')},${proj}` } : {}),
       srsname: proj,
       outputFormat: 'application/json',
     };
