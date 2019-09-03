@@ -91,9 +91,9 @@ class BahnhofplanLayer extends VectorLayer {
   /**
    * Set visible
    * @param {boolean} visible
-   * @param {boolean} stopPropagationDown Stops propagation down.
-   * @param {boolean} stopPropagationUp Stops propagation up.
-   * @param {boolean} stopPropagationSiblings Stops propagation toward siblings.
+   * @param {boolean} [stopPropagationDown] Stops propagation down.
+   * @param {boolean} [stopPropagationUp] Stops propagation up.
+   * @param {boolean} [stopPropagationSiblings] Stops propagation toward siblings.
    */
   setVisible(
     visible,

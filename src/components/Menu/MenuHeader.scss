@@ -8,10 +8,10 @@
     justify-content: center;
     border: 2px solid #666;
     transition: all 0.2s ease;
+    position: relative;
 
     &.open {
-      border-bottom-width: 1px;
-      border-bottom-color: #666;
+      border-bottom-width: 0;
     }
 
     .wkp-menu-toggler {
