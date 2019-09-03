@@ -8,6 +8,13 @@ import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
+/**
+ * Layer for visualizing fare networks.
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
+ * @class
+ * @params {Object} options
+ * @inheritdoc
+ */
 class NetzkartePointLayer extends VectorLayer {
   constructor(options = {}) {
     let name = 'ch.sbb.netzkarte.stationen';
@@ -73,6 +80,12 @@ class NetzkartePointLayer extends VectorLayer {
     });
   }
 
+  /**
+   * Create Style from feature and resolution
+   * @param {ol.feature} f
+   * @param {number} r
+   * @returns {Object|null}
+   */
   styleFunction(f, r) {
     const res = layerHelper.getDataResolution(r);
     if (f.get('resolution') === res && f.get('visibility') >= res * 10) {
@@ -86,6 +99,10 @@ class NetzkartePointLayer extends VectorLayer {
     return null;
   }
 
+  /**
+   * Initialize the layer and listen to feature clicks.
+   * @param {ol.map} map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/map}
+   */
   init(map) {
     super.init(map);
     this.map = map;
@@ -107,6 +124,9 @@ class NetzkartePointLayer extends VectorLayer {
    *
    * This loader function is based on the loader example in
    * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
+   * @param {ol.extent} extent The desired extent {@link https://openlayers.org/en/latest/apidoc/module-ol_extent.html ol/extent}
+   * @param {number} resolution The desired resolution for the loaded map.
+   * @param {ol.proj} projection The desired projecition.
    */
   loader(extent, resolution, projection) {
     const res = layerHelper.getDataResolution(resolution);
