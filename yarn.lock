@@ -5318,11 +5318,6 @@ eslint@^5.0.0, eslint@^5.16.0:
     table "^5.2.3"
     text-table "^0.2.0"
 
-esm@~3.0.84:
-  version "3.0.84"
-  resolved "https://registry.yarnpkg.com/esm/-/esm-3.0.84.tgz#bb108989f4673b32d4f62406869c28eed3815a63"
-  integrity sha512-SzSGoZc17S7P+12R9cg21Bdb7eybX25RnIeRZ80xZs+VZ3kdQKzqTp2k4hZJjR7p9l0186TTXSgrxzlMDBktlw==
-
 espree@^3.5.4:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/espree/-/espree-3.5.4.tgz#b0f447187c8a8bed944b815a660bddf5deb5d1a7"
@@ -6898,9 +6893,9 @@ https-browserify@^1.0.0:
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
 husky@^3.0.0:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.4.tgz#10a48ac11ab50859b0939750fa0b4e07ad0bf669"
-  integrity sha512-7Rnt8aJfy+MlV28snmYK7O7vWwtOfeVxV6KhLpUFXlmx5ukQ1nQmNUB7QsAwSgdySB5X+bm7q7JIRgazqBUzKA==
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.5.tgz#d7db27c346645a8dc52df02aa534a377ad7925e0"
+  integrity sha512-cKd09Jy9cDyNIvAdN2QQAP/oA21sle4FWXjIMDttailpLAYZuBE7WaPmhrkj+afS8Sj9isghAtFvWSQ0JiwOHg==
   dependencies:
     chalk "^2.4.2"
     cosmiconfig "^5.2.1"
@@ -6932,9 +6927,9 @@ i18next-xhr-backend@^3.1.2:
     "@babel/runtime" "^7.5.5"
 
 i18next@^17.0.12:
-  version "17.0.12"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-17.0.12.tgz#d732a6c1131fc3b02305a8241eac25ec0d1cf663"
-  integrity sha512-FoYYnORcAMNznVXSpwJ1zVGL8kXcv1JUmvTqoQyuPPRncBq9rd7Mi0I/oVXkGR3YIek5dDiunvA/NGG2o+mMuw==
+  version "17.0.13"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-17.0.13.tgz#3c639e15de86e0523f8f286f6cf07db355ee0a4f"
+  integrity sha512-tCBpekVs95IsN3kdi/6HhnfzHDlpXerOmOsf2ZMWtct9YbMYKI54HVdQ6XxsHGXBxY+UgjbQJwqghKCd2sYQWw==
   dependencies:
     "@babel/runtime" "^7.3.1"
 
@@ -8450,7 +8445,7 @@ jss@^9.8.7:
     symbol-observable "^1.1.0"
     warning "^3.0.0"
 
-jsts@^2.0.3, jsts@^2.0.6:
+jsts@^2.0.3:
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/jsts/-/jsts-2.0.8.tgz#433c8f14e0537e2bfb46acadfd98884017aec06c"
   integrity sha512-JsVWANyeQ2j8XLiPPdz1fTaaBnji8P6P95w/Rg487MW7qMAMKgc+86nw5iW/9kC5OlYvbOf4oG380Vyn90H9/g==
@@ -9095,9 +9090,9 @@ map-visit@^1.0.0:
     object-visit "^1.0.0"
 
 mapbox-gl@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/mapbox-gl/-/mapbox-gl-1.2.1.tgz#a91acb48e5ee57d40a09fa6b4c297e92690c5909"
-  integrity sha512-CO7uhTYtcreDokGr3W2LifIdCtHz0TO/BqnRtO5rQ4Rvm8P7ndUM5ZWwZvJJmNnlkMpVwNKSESsKYX32GXHXoQ==
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/mapbox-gl/-/mapbox-gl-1.3.0.tgz#8bd807b44f395d1830fe3a202763b28b5f1ed299"
+  integrity sha512-mhxIXNQwyqqlFImVUuFucSydxXIeKS4ul/5ES6A5zA4loLvcEXOrlH1PewjqkGoYjfdRHjqsaxpP8czbVuHg3g==
   dependencies:
     "@mapbox/geojson-rewind" "^0.4.0"
     "@mapbox/geojson-types" "^1.0.2"
@@ -9110,7 +9105,6 @@ mapbox-gl@^1.2.1:
     "@mapbox/whoots-js" "^3.1.0"
     csscolorparser "~1.0.2"
     earcut "^2.1.5"
-    esm "~3.0.84"
     geojson-vt "^3.2.1"
     gl-matrix "^3.0.0"
     grid-index "^1.1.0"
@@ -10091,7 +10085,7 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-ol@^6.0.0-beta.11, ol@^6.0.0-beta.13:
+ol@^6.0.0-beta.13:
   version "6.0.0-beta.15"
   resolved "https://registry.yarnpkg.com/ol/-/ol-6.0.0-beta.15.tgz#f648566784749f8a3c12717ba4d28e0ee652e8ac"
   integrity sha512-J0gZ5pYGrER2WJSuIBh6QDNMn15xPRmpJJACnsgexSbaapOBOWEbv8z+yaYkTtWq+I1/quzBs9e4cLUB7R/I3w==
@@ -10099,14 +10093,6 @@ ol@^6.0.0-beta.11, ol@^6.0.0-beta.13:
     pbf "3.2.0"
     pixelworks "1.1.0"
     rbush "^3.0.0"
-
-ole@^1.1.0-beta.1:
-  version "1.1.0-beta.2"
-  resolved "https://registry.yarnpkg.com/ole/-/ole-1.1.0-beta.2.tgz#c512e6f6d9bedb2eaadbd5a9cfffc7014157db12"
-  integrity sha512-oe2vvX0PQ+BVZN/jVlDwLBC1OOFzgNNxbGT+N78M5EY2C8yaFwIS5xxUHKwqCBhjEkqVa0audHi6WCE5mYl/eQ==
-  dependencies:
-    jsts "^2.0.6"
-    ol "^6.0.0-beta.11"
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -11768,7 +11754,16 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^6.3.0, query-string@^6.4.2, query-string@^6.8.2:
+query-string@^6.3.0:
+  version "6.8.3"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.8.3.tgz#fd9fb7ffb068b79062b43383685611ee47777d4b"
+  integrity sha512-llcxWccnyaWlODe7A9hRjkvdCKamEKTh+wH8ITdTc3OhchaqUZteiSCX/2ablWHVrkVIe04dntnaZJ7BdyW0lQ==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
+query-string@^6.4.2, query-string@^6.8.2:
   version "6.8.2"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.8.2.tgz#36cb7e452ae11a4b5e9efee83375e0954407b2f6"
   integrity sha512-J3Qi8XZJXh93t2FiKyd/7Ec6GNifsjKXUsVFkSBj/kjLsDylWhnCz4NT1bkPcKotttPW+QbKGqqPH8OoI2pdqw==
@@ -12129,10 +12124,10 @@ react-simple-code-editor@^0.9.7:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.9.14.tgz#5b8fdc36a975cbf02fdafa2597398d8e212afebc"
   integrity sha512-doNaIIt4w7QIiB6ysWHMtYL4M3xOGPvZJH8vGq3W/hGk43pn25RDA27IS8GkbfhA1eLX72CWDhuC7KmDKax13g==
 
-react-spatial@^0.1.0-beta.15:
-  version "0.1.0-beta.15"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.15.tgz#e6b650c642f98efe933a5c55b8b4d7dbf3d76712"
-  integrity sha512-FcoqKJv426pmFovSlaM0IeGVarokPkPIKLvCTVDPvB0V5on61T574CmUSbNRgcPUw3olROu0//Ae9zk6SaYLhA==
+react-spatial@^0.1.0-beta.16:
+  version "0.1.0-beta.16"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.16.tgz#5b6722bd6711be20208cbcf8a5b9fcff7620dbd3"
+  integrity sha512-kI43xxoa4utpQq4vbUIuvjNmtnS3IC+BzdO0G+T16zOCYIRUn4U3/IVWa0/2LpxaEShgFdZnSMZNUQkC5luL1g==
   dependencies:
     query-string "^6.4.2"
     react-draggable "^3.3.1"
