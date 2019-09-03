@@ -10,7 +10,7 @@ import LayerService from 'react-spatial/LayerService';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { setMenuOpen } from '../../model/app/actions';
-import MenuItem from '../Menu/MenuItem';
+import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
 const propTypes = {

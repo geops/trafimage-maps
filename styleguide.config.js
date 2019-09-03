@@ -50,7 +50,7 @@ module.exports = {
       sections: [
         {
           name: 'BahnhofplanPopup',
-          content: 'src/components/Popups/BahnhofplanPopup/README.md',
+          content: 'src/popups/BahnhofplanPopup/README.md',
         },
       ],
     },
