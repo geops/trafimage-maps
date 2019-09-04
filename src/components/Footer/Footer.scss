@@ -29,6 +29,23 @@
     }
   }
 
+  .wkp-impressum {
+    a {
+      margin-left: 30px;
+
+      &:hover {
+        color: #003d85;
+      }
+    }
+  }
+
+  /*
+  > a:hover {
+    color: #003d85;
+    text-decoration: underline;
+  }
+  */
+
   .wkp-language-select {
     background: white;
   }

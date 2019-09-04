@@ -39,6 +39,28 @@ exports[`AppRouter should match snapshot 1`] = `
         >
           Geodaten OpenStreetMap contributors, © SBB/CFF/FFS
         </div>
+        <div
+          className="wkp-impressum"
+        >
+          <a
+            href="#"
+            onClick={[Function]}
+          >
+            Kontakt
+          </a>
+          <a
+            href="#"
+            onClick={[Function]}
+          >
+            Impressum
+          </a>
+          <a
+            href="#"
+            onClick={[Function]}
+          >
+            Rechtliches
+          </a>
+        </div>
       </div>
       <div
         className="wkp-footer-right"
