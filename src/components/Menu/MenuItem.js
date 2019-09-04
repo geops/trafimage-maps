@@ -42,7 +42,9 @@ class MenuItem extends Component {
   }
 
   componentDidMount() {
-    this.updateMenuHeight();
+    window.setTimeout(() => {
+      this.updateMenuHeight();
+    }, transitiondelay);
   }
 
   componentDidUpdate(prevProps) {
