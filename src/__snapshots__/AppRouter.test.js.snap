@@ -171,208 +171,199 @@ exports[`AppRouter should match snapshot 1`] = `
         className="wkp-menu wkp-topics closed"
       >
         <div
-          className="wkp-menu-body"
+          className=" wkp-collapsible-vertical"
+          style={
+            Object {
+              "maxHeight": 0,
+            }
+          }
         >
-          <div>
-            <div
-              className="wkp-topic-menu "
-            >
+          <div
+            className="wkp-menu-body"
+          >
+            <div>
               <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
+                className="wkp-topic-menu"
               >
                 <div
-                  className="wkp-topic-title"
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div
-                    className="wkp-topic-radio"
+                    className="wkp-topic-title"
                   >
                     <div
-                      className="wkp-topic-radio-dot"
-                    />
+                      className="wkp-topic-radio"
+                    >
+                      <div
+                        className="wkp-topic-radio-dot"
+                      />
+                    </div>
+                    ch.sbb.netzkarte
                   </div>
-                  ch.sbb.netzkarte
-                </div>
-                <div
-                  className="wkp-layer-toggler "
-                  style={
-                    Object {
-                      "display": "block",
+                  <div
+                    className="wkp-layer-toggler "
+                    style={
+                      Object {
+                        "display": "block",
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
               </div>
-              <div
-                className="wkp-layer-tree"
-              />
             </div>
-          </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
+            <div>
               <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
+                className="wkp-topic-menu"
               >
                 <div
-                  className="wkp-topic-title"
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div
-                    className="wkp-topic-radio"
-                  />
-                  ch.sbb.construction
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
+                    className="wkp-topic-title"
+                  >
+                    <div
+                      className="wkp-topic-radio"
+                    />
+                    ch.sbb.construction
+                  </div>
+                  <div
+                    className="wkp-layer-toggler collapsed"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
               </div>
-              <div
-                className="wkp-layer-tree"
-              />
             </div>
-          </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
+            <div>
               <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
+                className="wkp-topic-menu"
               >
                 <div
-                  className="wkp-topic-title"
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div
-                    className="wkp-topic-radio"
-                  />
-                  ch.sbb.behig
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
+                    className="wkp-topic-title"
+                  >
+                    <div
+                      className="wkp-topic-radio"
+                    />
+                    ch.sbb.behig
+                  </div>
+                  <div
+                    className="wkp-layer-toggler collapsed"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
               </div>
-              <div
-                className="wkp-layer-tree"
-              />
             </div>
-          </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
+            <div>
               <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
+                className="wkp-topic-menu"
               >
                 <div
-                  className="wkp-topic-title"
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div
-                    className="wkp-topic-radio"
-                  />
-                  ch.sbb.infrastruktur
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
+                    className="wkp-topic-title"
+                  >
+                    <div
+                      className="wkp-topic-radio"
+                    />
+                    ch.sbb.infrastruktur
+                  </div>
+                  <div
+                    className="wkp-layer-toggler collapsed"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
               </div>
-              <div
-                className="wkp-layer-tree"
-              />
             </div>
-          </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
+            <div>
               <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
+                className="wkp-topic-menu"
               >
                 <div
-                  className="wkp-topic-title"
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div
-                    className="wkp-topic-radio"
-                  />
-                  ch.sbb.regionenkarte.public
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
+                    className="wkp-topic-title"
+                  >
+                    <div
+                      className="wkp-topic-radio"
+                    />
+                    ch.sbb.regionenkarte.public
+                  </div>
+                  <div
+                    className="wkp-layer-toggler collapsed"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
               </div>
-              <div
-                className="wkp-layer-tree"
-              />
             </div>
-          </div>
-          <div>
-            <div
-              className="wkp-topic-menu collapsed"
-            >
+            <div>
               <div
-                className="wkp-topic-menu-item"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
+                className="wkp-topic-menu"
               >
                 <div
-                  className="wkp-topic-title"
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
                 >
                   <div
-                    className="wkp-topic-radio"
-                  />
-                  ch.sbb.tarifverbundkarte.public
-                </div>
-                <div
-                  className="wkp-layer-toggler collapsed"
-                  style={
-                    Object {
-                      "display": "none",
+                    className="wkp-topic-title"
+                  >
+                    <div
+                      className="wkp-topic-radio"
+                    />
+                    ch.sbb.tarifverbundkarte.public
+                  </div>
+                  <div
+                    className="wkp-layer-toggler collapsed"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
                     }
-                  }
-                />
+                  />
+                </div>
               </div>
-              <div
-                className="wkp-layer-tree"
-              />
             </div>
           </div>
         </div>
@@ -502,16 +493,6 @@ exports[`AppRouter should match snapshot 1`] = `
         className="tm-map"
         role="menu"
         tabIndex={0}
-      />
-      <img
-        alt={null}
-        className="tm-base-layer-item"
-        src={null}
-        style={
-          Object {
-            "opacity": 0,
-          }
-        }
       />
       <div
         className="tm-base-layer-item"

@@ -2,8 +2,6 @@
 $brand-primary: #eb0000;
 
 $transition-delay: 300;
-$menu-transition: max-height #{$transition-delay}ms ease;
-$menu-transition-closed: max-height #{$transition-delay}ms ease, border 0.1s ease 0.2s;
 
 // Export variables to be used in js files.
 :export {
