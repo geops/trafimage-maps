@@ -106,10 +106,10 @@ class Map extends PureComponent {
 
     const mapFeatures = map.getFeaturesAtPixel(evt.pixel);
 
-    const newHoveredStation =
+    const hoverFeature =
       mapFeatures && mapFeatures.length ? mapFeatures[0] : null;
 
-    map.getTarget().style.cursor = newHoveredStation ? 'pointer' : 'auto';
+    map.getTarget().style.cursor = hoverFeature ? 'pointer' : 'auto';
   }
 
   render() {
