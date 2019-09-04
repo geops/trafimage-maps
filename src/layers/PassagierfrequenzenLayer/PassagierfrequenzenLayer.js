@@ -2,7 +2,6 @@ import qs from 'querystring';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
-import { unByKey } from 'ol/Observable';
 import { Style, Stroke, Circle, Fill } from 'ol/style';
 import OLGeoJSON from 'ol/format/GeoJSON';
 import CONF from '../../config/appConfig';
@@ -41,21 +40,6 @@ class PassagierfrequenzenLayer extends VectorLayer {
       this.clickedFeatureName = clickedFeature && clickedFeature.get('name');
       this.olLayer.changed();
     });
-  }
-
-  init(map) {
-    super.init(map);
-    this.map = map;
-
-    if (this.getVisible() && this.map && !this.onPointerMoveRef) {
-      this.registerPointerMove();
-    }
-  }
-
-  registerPointerMove() {
-    this.onPointerMoveRef = this.map.on('pointermove', e =>
-      this.onPointerMove(e),
-    );
   }
 
   styleFunction(feature, resolution) {
@@ -131,53 +115,6 @@ class PassagierfrequenzenLayer extends VectorLayer {
       .catch(() => {
         this.olLayer.getSource().removeLoadedExtent(extent);
       });
-  }
-
-  onPointerMove(evt) {
-    if (evt.dragging) {
-      return;
-    }
-    const layerFeatures = this.olLayer.getSource().getFeatures();
-
-    const mapFeatures = this.map.getFeaturesAtPixel(evt.pixel);
-    const hoverFeatures =
-      mapFeatures && mapFeatures.filter(f => layerFeatures.includes(f));
-
-    const newHoveredStation =
-      hoverFeatures && hoverFeatures.length ? hoverFeatures[0] : null;
-
-    if (newHoveredStation) {
-      this.map.getTarget().style.cursor = 'pointer';
-    }
-    if (!newHoveredStation) {
-      this.map.getTarget().style.cursor = 'auto';
-    }
-  }
-
-  /**
-   * Set visible
-   * @param {boolean} visible
-   * @param {boolean} stopPropagationDown Stops propagation down.
-   * @param {boolean} stopPropagationUp Stops propagation up.
-   * @param {boolean} stopPropagationSiblings Stops propagation toward siblings.
-   */
-  setVisible(
-    visible,
-    stopPropagationDown = false,
-    stopPropagationUp = false,
-    stopPropagationSiblings = false,
-  ) {
-    super.setVisible(
-      visible,
-      stopPropagationDown,
-      stopPropagationUp,
-      stopPropagationSiblings,
-    );
-    if (this.getVisible() && this.map) {
-      this.registerPointerMove();
-    } else {
-      unByKey(this.onPointerMoveRef);
-    }
   }
 }
 

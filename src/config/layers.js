@@ -175,7 +175,6 @@ export const swisstopoLandeskarteGrau = new Layer({
 
 export const passagierfrequenzen = new PassagierfrequenzenLayer({
   visible: false,
-  useBboxStrategy: true,
 });
 
 export const bahnhofplaene = new Layer({
