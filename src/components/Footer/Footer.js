@@ -76,7 +76,6 @@ const Footer = ({
             }
             classNameChildren="tm-dialog-content"
             onClose={() => setIsOpen(null)}
-            cancelDraggable=".tm-dialog-content"
             isOpen={isOpen}
             isModal
           >
