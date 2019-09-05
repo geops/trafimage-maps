@@ -104,7 +104,6 @@
   "ch.sbb.zweitausbildung": "Ausbildungen Personenverkehr SBB",
   "ch.sbb.zweitausbildung-desc": "Die Übersichtskarte Geografie wird in der Ausbildung des Zugpersonals SBB, des Schalterpersonals SBB und von Mitarbeitenden im Contact Center Brig verwendet. Mit Hilfe der Karte lernen die Auszubildenden, definierte Ortschaften, Hauptlinien, touristische Reiseziele und touristische Strecken geografisch zuzuordnen.<p>Verantwortlich:</p>HR-BIL-SKK-PM (VM und VS), <a href=\"mailto:pm.skk@sbb.ch\">pm.skk@sbb.ch</a></p>",
   "connection_plural": "Verbindung",
-  "contact_content": "<p>Haben Sie Fragen, Verbesserungsvorschläge, Hinweise auf Unstimmigkeiten oder Interesse an Karten und Plänen? Dann nehmen Sie bitte mit uns Kontakt auf!</p><p><b>SBB AG</b><br />Infrastruktur – Anlagen und Technologie – Operation Center Technik – Technical Management<br />Fachbus Trafimage<br />Poststrasse 6<br />3072 Ostermundingen<br />Schweiz</p><p><a href=\"http://www.trafimage.ch\" tabindex=\"2\">www.trafimage.ch</a><br /><a href=\"mailto:trafimage@sbb.ch\" tabindex=\"2\">trafimage@sbb.ch</a><br /></p>",
   "departure_url": "http://fahrplan.sbb.ch/bin/stboard.exe/dn?boardType=dep&editStation=yes&input={stationname}&start=yes",
   "dfa": "DfA",
   "dfa_filter": "DfA Liniennetz",
