@@ -28,7 +28,7 @@ const defaultProps = {
 class Popup extends Component {
   constructor(props) {
     super(props);
-    const { clickedFeatureInfo, popupComponents } = this.props;
+    const { clickedFeatureInfo } = this.props;
 
     this.state = {
       featIndex: 0,
@@ -36,12 +36,7 @@ class Popup extends Component {
     };
 
     if (clickedFeatureInfo) {
-      const { features, layer, coordinate } = clickedFeatureInfo;
-      this.componentName = popupComponents[layer.getKey()];
-      this.popupCoordinate =
-        features.length && features[0].getGeometry() instanceof Point
-          ? features[0].getGeometry().getCoordinates()
-          : coordinate;
+      this.setClickedFeatureInfo(clickedFeatureInfo);
     }
   }
 
@@ -53,19 +48,24 @@ class Popup extends Component {
     }
   }
 
-  setFeaturesList(clickedFeature) {
+  setClickedFeatureInfo(clickedFeature) {
     const { popupComponents } = this.props;
     const { featIndex } = this.state;
+
+    const { features, layer, coordinate } = clickedFeature;
+    this.componentName = popupComponents[layer.getKey()];
+    this.popupCoordinate =
+      features.length && features[featIndex].getGeometry() instanceof Point
+        ? features[featIndex].getGeometry().getCoordinates()
+        : coordinate;
+  }
+
+  setFeaturesList(clickedFeature) {
     if (clickedFeature) {
-      const { features, layer, coordinate } = clickedFeature;
-      this.componentName = popupComponents[layer.getKey()];
-      this.popupCoordinate =
-        features.length && features[featIndex].getGeometry() instanceof Point
-          ? features[featIndex].getGeometry().getCoordinates()
-          : coordinate;
+      this.setClickedFeatureInfo(clickedFeature);
       this.setState({
         featIndex: 0,
-        featuresList: features,
+        featuresList: clickedFeature.features,
       });
     } else {
       this.componentName = null;
