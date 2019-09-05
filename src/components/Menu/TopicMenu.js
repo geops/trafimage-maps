@@ -85,7 +85,10 @@ class TopicMenu extends PureComponent {
     ) {
       layerTree = (
         <LayerTree
-          isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
+          isItemHidden={l => l.get('hideInLegend')}
+          getParentClassName={l =>
+            l.getIsBaseLayer() ? 'tm-base-layer-item' : undefined
+          }
           layerService={layerService}
           t={t}
           renderItemContent={(layer, layerTreeComp) => {

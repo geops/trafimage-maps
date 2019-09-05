@@ -73,7 +73,7 @@ export const netzkarteLayer = new MapboxLayer({
 });
 
 export const swisstopoSwissImage = new Layer({
-  name: 'Netzkarte Luftbild',
+  name: 'Swissimage',
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
   visible: false,
@@ -340,8 +340,8 @@ export const parks = new WMSLayer({
 });
 
 export default [
-  aerial,
-  swisstopoLandeskarte,
-  swisstopoLandeskarteGrau,
   netzkarteLayer,
+  swisstopoLandeskarteGrau,
+  swisstopoLandeskarte,
+  aerial,
 ];

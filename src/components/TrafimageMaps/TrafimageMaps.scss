@@ -55,10 +55,19 @@ h1 {
   left: 0;
 }
 
+/* Base layers in the layer tree */
+.tm-base-layer-item {
+  display: none;
+}
+
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
   .tm-base-layer-toggler {
     display: none;
+  }
+
+  .tm-base-layer-item {
+    display: block;
   }
 }
