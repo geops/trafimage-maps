@@ -12,8 +12,8 @@ import MousePosition from 'react-spatial/components/MousePosition';
 import LayerService from 'react-spatial/LayerService';
 import ActionLink from 'react-spatial/components/ActionLink';
 import Dialog from 'react-spatial/components/Dialog';
-
 import { FaInfo } from 'react-icons/fa';
+import LegalLines from '../legals/LegalLines';
 
 import { setLanguage, setProjection } from '../../model/app/actions';
 import './Footer.scss';
@@ -105,18 +105,19 @@ const Footer = ({
 }) => {
   const [isOpen, setIsOpen] = useState(null);
 
-  const getDialogContent = value => {
-    if (value === 'Kontakt') {
-      return { __html: t('contact_content') };
-    }
-    if (value === 'Impressum') {
-      return t('impressum_content');
-    }
-    if (value === 'Rechtliches') {
-      return t('legal_content');
-    }
-    return null;
-  };
+  // const getDialogContent = value => {
+  //   if (value === 'Kontakt') {
+  //     return t('contact_content');
+  //   }
+  //   if (value === 'Impressum') {
+  //     return t('impressum_content');
+  //   }
+  //   if (value === 'Rechtliches') {
+  //     return t('legal_content');
+  //   }
+  //   return null;
+  // };
+
   return (
     <RSFooter className="wkp-footer">
       <div className="wkp-footer-left">
@@ -148,7 +149,10 @@ const Footer = ({
             isOpen={isOpen}
             isModal
           >
-            <div dangerouslySetInnerHTML={getDialogContent(isOpen)} />
+            <LegalLines
+              doc={isOpen ? isOpen.toLowerCase() : null}
+              language={language}
+            />
           </Dialog>
         </div>
       </div>
