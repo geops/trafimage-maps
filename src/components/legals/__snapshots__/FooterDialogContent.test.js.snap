@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LegalLines redirect to bern if bad values are given with doc=foo and language=bar. 1`] = `"Redirect to bern"`;
+exports[`FooterDialogContent redirect to bern if bad values are given with doc=foo and language=bar. 1`] = `"Redirect to bern"`;
 
-exports[`LegalLines redirect to bern if bad values are given with doc=foo and language=de. 1`] = `"Redirect to bern"`;
+exports[`FooterDialogContent redirect to bern if bad values are given with doc=foo and language=de. 1`] = `"Redirect to bern"`;
 
-exports[`LegalLines should match snapshot with doc=impressum and language=de 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=impressum and language=de 1`] = `
 <div
   className="tm-imprint"
 >
@@ -185,7 +185,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=impressum and language=en 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=impressum and language=en 1`] = `
 <div
   className="tm-imprint"
 >
@@ -366,7 +366,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=impressum and language=fr 1`] = `
 <div
   className="tm-imprint"
 >
@@ -547,7 +547,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=impressum and language=it 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=impressum and language=it 1`] = `
 <div
   className="tm-imprint"
 >
@@ -728,7 +728,163 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=kontakt and language=de 1`] = `
+<div
+  className="tm-imprint"
+>
+  <p>
+    Haben Sie Fragen, Verbesserungsvorschläge, Hinweise auf Unstimmigkeiten oder Interesse an Karten und Plänen? Dann nehmen Sie bitte mit uns Kontakt auf!
+  </p>
+  <p>
+    <b>
+      SBB AG
+    </b>
+    <br />
+    Infrastruktur – Anlagen und Technologie – Operation Center Technik – Technical Management
+    <br />
+    Fachbus Trafimage
+    <br />
+    Poststrasse 6
+    <br />
+    3072 Ostermundingen
+    <br />
+    Schweiz
+  </p>
+  <p>
+    <a
+      href="http://www.trafimage.ch"
+    >
+      www.trafimage.ch
+    </a>
+    <br />
+    <a
+      href="mailto:trafimage@sbb.ch"
+    >
+      trafimage@sbb.ch
+    </a>
+    <br />
+  </p>
+</div>
+`;
+
+exports[`FooterDialogContent should match snapshot with doc=kontakt and language=en 1`] = `
+<div
+  className="tm-imprint"
+>
+  <p>
+    Do you have any questions about our maps and plans or suggestions for improvement? Or would you like to point out any errors? If so, please contact us.
+  </p>
+  <p>
+    <b>
+      SBB AG
+    </b>
+    <br />
+    Infrastructure – Installations and Technology – Technology Operation Center – Technical Management
+    <br />
+    Fachbus Trafimage
+    <br />
+    Poststrasse 6
+    <br />
+    3072 Ostermundingen
+    <br />
+    Switzerland
+  </p>
+  <p>
+    <a
+      href="http://www.trafimage.ch"
+    >
+      www.trafimage.ch
+    </a>
+    <br />
+    <a
+      href="mailto:trafimage@sbb.ch"
+    >
+      trafimage@sbb.ch
+    </a>
+    <br />
+  </p>
+</div>
+`;
+
+exports[`FooterDialogContent should match snapshot with doc=kontakt and language=fr 1`] = `
+<div
+  className="tm-imprint"
+>
+  <p>
+    Avete domande, proposte di miglioramento, segnalazioni di inesattezze o siete interessati.
+  </p>
+  <p>
+    <b>
+      FFS SA
+    </b>
+    <br />
+    Infrastruttura – Impianti e tecnologia – Operation Center Tecnica – Technical Management
+    <br />
+    Fachbus Trafimage
+    <br />
+    Poststrasse 6
+    <br />
+    3072 Ostermundingen
+    <br />
+    Svizzera
+  </p>
+  <p>
+    <a
+      href="http://www.trafimage.ch"
+    >
+      www.trafimage.ch
+    </a>
+    <br />
+    <a
+      href="mailto:trafimage@ffs.ch"
+    >
+      trafimage@ffs.ch
+    </a>
+    <br />
+  </p>
+</div>
+`;
+
+exports[`FooterDialogContent should match snapshot with doc=kontakt and language=it 1`] = `
+<div
+  className="tm-imprint"
+>
+  <p>
+    Avete domande, proposte di miglioramento, segnalazioni di inesattezze o siete interessati.
+  </p>
+  <p>
+    <b>
+      FFS SA
+    </b>
+    <br />
+    Infrastruttura – Impianti e tecnologia – Operation Center Tecnica – Technical Management
+    <br />
+    Fachbus Trafimage
+    <br />
+    Poststrasse 6
+    <br />
+    3072 Ostermundingen
+    <br />
+    Svizzera
+  </p>
+  <p>
+    <a
+      href="http://www.trafimage.ch"
+    >
+      www.trafimage.ch
+    </a>
+    <br />
+    <a
+      href="mailto:trafimage@ffs.ch"
+    >
+      trafimage@ffs.ch
+    </a>
+    <br />
+  </p>
+</div>
+`;
+
+exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=de 1`] = `
 <div
   className="tm-imprint"
 >
@@ -766,7 +922,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
     </a>
     ») anonymisiert ausgewertet.
   </p>
-  Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um Informationen für den internen Gebrauch gemäss "R K 400.16 Informationsklassifizierung.&#34 und .&#34R K 040.1 Konzernweisung Datenschutz. .&#34 (siehe
+  Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um Informationen für den internen Gebrauch gemäss "R K 400.16 Informationsklassifizierung." und "R K 040.1 Konzernweisung Datenschutz. " (siehe
    
   <a
     href="http://intranet.sbb.ch/de/Themen/Sicherheit/Alle/IT-Security/Seiten/Klassifikation.aspx"
@@ -791,7 +947,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
   </p>
   <p />
   <p>
-    Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne Karten und Pläne bzw. Ausschnitte davon und Informationen für private Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere Weise zu vervielfältigen sofern weder der Copyrightvermerke .&#34© SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo (5704003351) .&#34 noch andere gesetzlich geschützte Bezeichnungen entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln), Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB und swisstopo gestattet.
+    Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne Karten und Pläne bzw. Ausschnitte davon und Informationen für private Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere Weise zu vervielfältigen sofern weder der Copyrightvermerke "© SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo (5704003351) " noch andere gesetzlich geschützte Bezeichnungen entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung (vollständig oder teilweise), Übermittlung (elektronisch oder mit anderen Mitteln), Modifikation, Verknüpfung oder Benutzung der in den Websites enthaltenen Geobasisdaten ist nur mit vorheriger schriftlicher Einwilligung von SBB und swisstopo gestattet.
   </p>
   <p>
     <b>
@@ -831,7 +987,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=en 1`] = `
 <div
   className="tm-imprint"
 >
@@ -922,7 +1078,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=fr 1`] = `
 <div
   className="tm-imprint"
 >
@@ -1007,7 +1163,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
 </div>
 `;
 
-exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1`] = `
+exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=it 1`] = `
 <div
   className="tm-imprint"
 >
@@ -1062,7 +1218,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     </b>
   </p>
   <p>
-    I geodati di base inclusi in questa piattaforma Internet sono proprietà della Confederazione svizzera. In virtù della Legge federale sulla geoinformazione (RS 510.62) questi dati godono di tutela giuridica per quanto riguarda il diritto d’autore. Se non indicato altrimenti, si tratta di dati dell\`%apos;\`Ufficio federale di topografia (swisstopo) e quindi disciplinati dalle norme dell'Ordinanza sulla geoinformazione (OGI, RS 510.620) e dall\\’Ordinanza del DDPS sugli emolumenti dell’Ufficio federale di topografia (RS 510.620.2). Responsabilità di swisstopo. In presenza di un rapporto contrattuale tra swisstopo e l'utente di un servizio, swisstopo è responsabile solo dei danni che ha causato negligentemente o intenzionalmente nell'ambito delle proprie competenze. swisstopo declina ogni responsabilità per danni da mancato guadagno, perdita di dati o altri danni indiretti sorti in seguito a informazioni errate o guasti tecnici. swisstopo declina altresì ogni responsabilità per errori che esulano dall'ambito delle sue competenze.
+    I geodati di base inclusi in questa piattaforma Internet sono proprietà della Confederazione svizzera. In virtù della Legge federale sulla geoinformazione (RS 510.62) questi dati godono di tutela giuridica per quanto riguarda il diritto d’autore. Se non indicato altrimenti, si tratta di dati dell'Ufficio federale di topografia (swisstopo) e quindi disciplinati dalle norme dell'Ordinanza sulla geoinformazione (OGI, RS 510.620) e dall\\’Ordinanza del DDPS sugli emolumenti dell’Ufficio federale di topografia (RS 510.620.2). Responsabilità di swisstopo. In presenza di un rapporto contrattuale tra swisstopo e l'utente di un servizio, swisstopo è responsabile solo dei danni che ha causato negligentemente o intenzionalmente nell'ambito delle proprie competenze. swisstopo declina ogni responsabilità per danni da mancato guadagno, perdita di dati o altri danni indiretti sorti in seguito a informazioni errate o guasti tecnici. swisstopo declina altresì ogni responsabilità per errori che esulano dall'ambito delle sue competenze.
   </p>
   <p>
     <b>
@@ -1083,7 +1239,7 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
 </div>
 `;
 
-exports[`LegalLines uses default  properties 1`] = `
+exports[`FooterDialogContent uses default  properties 1`] = `
 <div
   className="tm-imprint"
 >

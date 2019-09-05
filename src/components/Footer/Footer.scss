@@ -29,13 +29,11 @@
     }
   }
 
-  .wkp-impressum {
-    a {
-      margin-left: 30px;
+  .wkp-impressum > a {
+    margin-left: 30px;
 
-      &:hover {
-        color: #003d85;
-      }
+    &:hover {
+      color: #003d85;
     }
   }
 

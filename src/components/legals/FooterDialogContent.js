@@ -2,8 +2,6 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import './LegalLines.scss';
-
 import KontaktDE from './kontakt/KontaktDE';
 import KontaktFR from './kontakt/KontaktFR';
 import KontaktIT from './kontakt/KontaktIT';
@@ -56,7 +54,7 @@ const defaultProps = {
   language: 'de',
 };
 
-const LegalLines = ({ language, doc }) => {
+const FooterDialogContent = ({ language, doc }) => {
   if (!Object.keys(docs).includes(doc) || !docs[doc][language]) {
     return <Redirect to="/bern" />;
   }
@@ -64,7 +62,7 @@ const LegalLines = ({ language, doc }) => {
   return docs[doc][language];
 };
 
-LegalLines.propTypes = propTypes;
-LegalLines.defaultProps = defaultProps;
+FooterDialogContent.propTypes = propTypes;
+FooterDialogContent.defaultProps = defaultProps;
 
-export default LegalLines;
+export default FooterDialogContent;

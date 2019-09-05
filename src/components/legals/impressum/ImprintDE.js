@@ -87,13 +87,13 @@ function ImprintDE() {
       <p>
         <b className="ng-binding">öV-Netzkarte Schweiz.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
         <b className="ng-binding">Bauprojekte Bahninfrastruktur.</b>
         <br />
-        Kommunikation SBB Infrastruktur,&#32;
+        Kommunikation SBB Infrastruktur,
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -101,13 +101,13 @@ function ImprintDE() {
       <p>
         <b className="ng-binding">Eisenbahninfrastruktur Schweiz.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
         <b className="ng-binding">Koordinatoren Bahnnahes Bauen.</b>
         <br />
-        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,&#32;
+        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>

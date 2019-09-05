@@ -13,7 +13,7 @@ import LayerService from 'react-spatial/LayerService';
 import ActionLink from 'react-spatial/components/ActionLink';
 import Dialog from 'react-spatial/components/Dialog';
 import { FaInfo } from 'react-icons/fa';
-import LegalLines from '../legals/LegalLines';
+import FooterDialogContent from '../legals/FooterDialogContent';
 
 import { setLanguage, setProjection } from '../../model/app/actions';
 import './Footer.scss';
@@ -38,62 +38,6 @@ const numberFormat = coords => {
 
   return coordStr;
 };
-/*
-function langText(lang,value){
-  if (lang === "de"){
-    return({'Title':'Impressum','Text':'Dies ist ein deutsches Umprewssion'})
-  } else {
-    return {'Title':null,'Text':null}
-  }
-}
-
-class DialogFooter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: null,
-      inhalt: {'Title':null,'Text':null},
-    };
-  }
-
-  toggleDialog(value) {
-    const { isOpen } = this.state;
-    this.setState({
-      isOpen: !isOpen,
-      lang:this.props.lang,
-      inhalt: langText(this.props.lang,value),
-    });
-  }
-
-  render() {
-    const { isOpen } = this.state;
-    return (
-      <div className="wkp-impressum">
-        <ActionLink onClick={() => this.toggleDialog('Kontakt')}>
-        Kontakt
-        </ActionLink>
-        <ActionLink onClick={() => this.toggleDialog('Impressum')}>
-        Impressum
-        </ActionLink>
-        <ActionLink onClick={() => this.toggleDialog('Rechtliches')}>
-        Rechtliches
-        </ActionLink>
-        
-        <Dialog
-          title={<span>{this.state.inhalt.Title}</span>}
-          classNameChildren="tm-dialog-content"
-          onClose={() => this.toggleDialog()}
-          cancelDraggable=".tm-dialog-content"
-          isOpen={isOpen}
-          isModal
-        >
-          <span>{this.state.inhalt.Text}</span>
-        </Dialog>
-      </div>
-    );
-  }
-}
-*/
 
 const Footer = ({
   map,
@@ -104,19 +48,6 @@ const Footer = ({
   dispatchSetProjection,
 }) => {
   const [isOpen, setIsOpen] = useState(null);
-
-  // const getDialogContent = value => {
-  //   if (value === 'Kontakt') {
-  //     return t('contact_content');
-  //   }
-  //   if (value === 'Impressum') {
-  //     return t('impressum_content');
-  //   }
-  //   if (value === 'Rechtliches') {
-  //     return t('legal_content');
-  //   }
-  //   return null;
-  // };
 
   return (
     <RSFooter className="wkp-footer">
@@ -149,7 +80,7 @@ const Footer = ({
             isOpen={isOpen}
             isModal
           >
-            <LegalLines
+            <FooterDialogContent
               doc={isOpen ? isOpen.toLowerCase() : null}
               language={language}
             />

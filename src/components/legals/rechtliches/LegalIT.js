@@ -28,10 +28,10 @@ function LegalIT() {
       </p>
       <p>
         Il brand Trafimage (struttura e presentazione delle immagini) è parte
-        integrante del brand FFS e pertanto è protetto dal diritto d&#39;autore.
-        Le cartine e i piani contenuti nel sito web di Trafimage, comprese le
-        relative informazioni, sono disponibili esclusivamente per uso privato e
-        per scopi informativi.
+        integrante del brand FFS e pertanto è protetto dal diritto
+        d&apos;autore. Le cartine e i piani contenuti nel sito web di Trafimage,
+        comprese le relative informazioni, sono disponibili esclusivamente per
+        uso privato e per scopi informativi.
       </p>
       <p>
         <b>
@@ -47,9 +47,9 @@ function LegalIT() {
         informazioni, a condizione che non siano rimosse le indicazioni circa la
         fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo
         (5704003351)» né altre indicazioni tutelate per legge. Tutti i diritti
-        d&#39;autore rispettivamente di utilizzo rimangono alle FFS (immagine
+        d&apos;autore rispettivamente di utilizzo rimangono alle FFS (immagine
         cartografica) e a swisstopo (dati cartografici), che possono in
-        qualsiasi momento revocare il proprio assenso all&#39;utilizzo.
+        qualsiasi momento revocare il proprio assenso all&apos;utilizzo.
         Qualsiasi ulteriore utilizzo (completo o parziale), trasmissione
         (elettronica o con altri mezzi), modifica, collegamento o impiego dei
         geodati di base contenuti nelle pagine web sono consentiti solo previo
@@ -63,18 +63,18 @@ function LegalIT() {
         della Confederazione svizzera. In virtù della Legge federale sulla
         geoinformazione (RS 510.62) questi dati godono di tutela giuridica per
         quanto riguarda il diritto d’autore. Se non indicato altrimenti, si
-        tratta di dati dell`%apos;`Ufficio federale di topografia (swisstopo) e
-        quindi disciplinati dalle norme dell&#39;Ordinanza sulla geoinformazione
-        (OGI, RS 510.620) e dall\’Ordinanza del DDPS sugli emolumenti
-        dell’Ufficio federale di topografia (RS 510.620.2). Responsabilità di
-        swisstopo. In presenza di un rapporto contrattuale tra swisstopo e
-        l&#39;utente di un servizio, swisstopo è responsabile solo dei danni che
-        ha causato negligentemente o intenzionalmente nell&#39;ambito delle
-        proprie competenze. swisstopo declina ogni responsabilità per danni da
-        mancato guadagno, perdita di dati o altri danni indiretti sorti in
-        seguito a informazioni errate o guasti tecnici. swisstopo declina
-        altresì ogni responsabilità per errori che esulano dall&#39;ambito delle
-        sue competenze.
+        tratta di dati dell&apos;Ufficio federale di topografia (swisstopo) e
+        quindi disciplinati dalle norme dell&apos;Ordinanza sulla
+        geoinformazione (OGI, RS 510.620) e dall\’Ordinanza del DDPS sugli
+        emolumenti dell’Ufficio federale di topografia (RS 510.620.2).
+        Responsabilità di swisstopo. In presenza di un rapporto contrattuale tra
+        swisstopo e l&apos;utente di un servizio, swisstopo è responsabile solo
+        dei danni che ha causato negligentemente o intenzionalmente
+        nell&apos;ambito delle proprie competenze. swisstopo declina ogni
+        responsabilità per danni da mancato guadagno, perdita di dati o altri
+        danni indiretti sorti in seguito a informazioni errate o guasti tecnici.
+        swisstopo declina altresì ogni responsabilità per errori che esulano
+        dall&apos;ambito delle sue competenze.
       </p>
       <p>
         <b>Dati delle FFS e dei suoi partner.</b>

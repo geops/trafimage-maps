@@ -1,19 +1,25 @@
+.tm-modal {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
 .tm-dialog,
 .tm-modal {
   z-index: 10000;
 
   .tm-dialog-container {
-    width: 320px;
     overflow: hidden;
     font-size: 14px;
     font-family: Arial, sans-serif;
+    position: absolute;
+    width: 600px;
+    margin: 30px auto;
 
     .tm-dialog-header {
       padding: 0 20px;
       text-align: left;
       font-weight: bold;
       border-bottom: 1px solid #e5e5e5;
-      min-height: 16.42857143px;
+      min-height: 16px;
       background-color: #f5f5f5;
     }
 
@@ -30,16 +36,25 @@
   }
 }
 
-.tm-dialog {
-  position: absolute;
-  left: 390px;
-}
-
 .tm-dialog-content {
   position: relative;
   background-color: #fff;
   background-clip: padding-box;
+  max-height: 70vh;
+  padding: 0 30px;
+  margin-bottom: 10px;
+  overflow-y: auto;
+}
+
+.tm-imprint {
   line-height: 20px;
+
+  a {
+    color: #1738a5 !important;
+    margin-left: 3px;
+    margin-right: 3px;
+    text-decoration: none;
+  }
 }
 
 .tm-w-m,
@@ -58,25 +73,14 @@
 
 .tm-w-xs,
 .tm-w-s {
-  .tm-dialog {
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    width: calc(100% - 20px);
-    height: calc(40% - 10px);
-    max-height: 50%;
-    margin: auto;
-    transform: none !important; // block drag
+  .tm-dialog-container {
+    width: 100%;
+    height: 100%;
+  }
 
-    .tm-dialog-container {
-      width: 100%;
-      height: 100%;
-    }
-
-    .tm-dialog-body {
-      height: calc(100% - 50px);
-      overflow-y: auto;
-      overflow-x: hidden;
-    }
+  .tm-dialog-body {
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 }

@@ -28,8 +28,8 @@ function LegalDE() {
       </p>
       Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
       Informationen für den internen Gebrauch gemäss &quot;R K 400.16
-      Informationsklassifizierung.&#34 und .&#34R K 040.1 Konzernweisung
-      Datenschutz. .&#34 (siehe{' '}
+      Informationsklassifizierung.&quot; und &quot;R K 040.1 Konzernweisung
+      Datenschutz. &quot; (siehe{' '}
       <a href="http://intranet.sbb.ch/de/Themen/Sicherheit/Alle/IT-Security/Seiten/Klassifikation.aspx">
         SBB-Intranet
       </a>
@@ -58,9 +58,9 @@ function LegalDE() {
         Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne
         Karten und Pläne bzw. Ausschnitte davon und Informationen für private
         Zwecke herunterzuladen, abzuspeichern, auszudrucken oder auf andere
-        Weise zu vervielfältigen sofern weder der Copyrightvermerke .&#34©
+        Weise zu vervielfältigen sofern weder der Copyrightvermerke &quot;©
         SBB/CFF/FSS, Geodaten: © OpenStreetMap contributors, © swisstopo
-        (5704003351) .&#34 noch andere gesetzlich geschützte Bezeichnungen
+        (5704003351) &quot; noch andere gesetzlich geschützte Bezeichnungen
         entfernt werden. Sämtliche Eigentums- bzw. Nutzungsrechte verbleiben bei
         der SBB (Kartenbild) und bei der swisstopo (Kartengrundlagen). Sie
         können diese Zustimmung jederzeit widerrufen. Jegliche weitere Nutzung
