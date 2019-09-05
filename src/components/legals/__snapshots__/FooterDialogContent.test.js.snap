@@ -1,9 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FooterDialogContent redirect to bern if bad values are given with doc=foo and language=bar. 1`] = `"Redirect to bern"`;
-
-exports[`FooterDialogContent redirect to bern if bad values are given with doc=foo and language=de. 1`] = `"Redirect to bern"`;
-
 exports[`FooterDialogContent should match snapshot with doc=impressum and language=de 1`] = `
 <div
   className="tm-imprint"

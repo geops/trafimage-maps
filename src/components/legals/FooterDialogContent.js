@@ -1,5 +1,3 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import KontaktDE from './kontakt/KontaktDE';
@@ -55,10 +53,6 @@ const defaultProps = {
 };
 
 const FooterDialogContent = ({ language, doc }) => {
-  if (!Object.keys(docs).includes(doc) || !docs[doc][language]) {
-    return <Redirect to="/bern" />;
-  }
-
   return docs[doc][language];
 };
 
