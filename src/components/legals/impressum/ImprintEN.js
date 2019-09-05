@@ -88,7 +88,7 @@ function ImprintEN() {
       <p>
         <b className="ng-binding">Swiss public transport network map.</b>
         <br />
-        Trafimage System Manager Daniel Hofstetter,&#32;
+        Trafimage System Manager Daniel Hofstetter,
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -96,7 +96,7 @@ function ImprintEN() {
           Railway infrastructure construction projects.
         </b>
         <br />
-        Communications at SBB Infrastructure,&#32;
+        Communications at SBB Infrastructure,
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -104,7 +104,7 @@ function ImprintEN() {
       <p>
         <b className="ng-binding">Railway infrastructure in Switzerland.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -112,7 +112,7 @@ function ImprintEN() {
           Coordinators for construction work near railways.
         </b>
         <br />
-        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,&#32;
+        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>

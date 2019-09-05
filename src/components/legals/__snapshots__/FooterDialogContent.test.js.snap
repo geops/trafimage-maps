@@ -1212,6 +1212,7 @@ exports[`FooterDialogContent should match snapshot with doc=rechtliches and lang
   <p>
     Per i geodati di base (p. es. immagini aeree, rilievi, carte topografiche) valgono le norme di swisstopo ed OpenStreetMap. A titolo privato è permesso scaricare, salvare, stampare o riprodurre in altro modo singole cartine e singoli piani o parte di essi e le relative informazioni, a condizione che non siano rimosse le indicazioni circa la fonte «© FFS / Geodati: © OpenStreetMap contributors, © swisstopo (5704003351)» né altre indicazioni tutelate per legge. Tutti i diritti d'autore rispettivamente di utilizzo rimangono alle FFS (immagine cartografica) e a swisstopo (dati cartografici), che possono in qualsiasi momento revocare il proprio assenso all'utilizzo. Qualsiasi ulteriore utilizzo (completo o parziale), trasmissione (elettronica o con altri mezzi), modifica, collegamento o impiego dei geodati di base contenuti nelle pagine web sono consentiti solo previo consenso scritto da parte di FFS e swisstopo.
   </p>
+  min-height: 16px;
   <p>
     <b>
       Copyright swisstopo.

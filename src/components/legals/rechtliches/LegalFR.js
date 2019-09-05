@@ -7,15 +7,15 @@ function LegalFR() {
         <b>Mention juridique et protection des données.</b>
       </p>
       <p>
-        La&#32;
+        La
         <a href="http://www.cff.ch/meta/mention-juridique.html">
           Mention juridique
         </a>
-        &#32; et les&#32;
+        et les
         <a href="http://www.cff.ch/meta/protection-des-donnees.html">
           dispositions sur la protection des données
         </a>
-        &#32; des CFF s’appliquent.
+        des CFF s’appliquent.
       </p>
       <p>
         En dérogation aux dispositions générales des CFF en matière de
@@ -104,7 +104,7 @@ function LegalFR() {
         peuvent accéder au dessin (visualiser et copier, mais pas modifier).
         L’utilisateur s’engage à ne pas abuser des fonctions de dessin
         disponibles et à renoncer à des activités illégales. La confidentialité
-        et les droit d&#39;auteur doivent être respectés; l’utilisation abusive
+        et les droit d&apos;auteur doivent être respectés; l’utilisation abusive
         est punissable et peut être poursuivie. En particulier, la protection de
         la vie privée / des données personnelles doit être conforme à la
         législation en vigueur. SBB/CFF/FFS se réserve le droit de supprimer un

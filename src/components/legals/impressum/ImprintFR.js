@@ -88,15 +88,15 @@ function ImprintFR() {
       <p>
         <b className="ng-binding">Carte du réseau des TP suisses.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
       </p>
       <p>
         <b className="ng-binding">
-          Projet de construction de l&#39;infrastructure ferroviaire.
+          Projet de construction de l&apos;infrastructure ferroviaire.
         </b>
         <br />
-        Communication CFF Infrastructure,&#32;
+        Communication CFF Infrastructure,
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -104,7 +104,7 @@ function ImprintFR() {
       <p>
         <b className="ng-binding">Infrastructure ferroviaire suisse.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -112,7 +112,7 @@ function ImprintFR() {
           Coordinateurs travaux à proximité des voies.
         </b>
         <br />
-        CFF Infrastructure, Installations &amp; Technologie, Surveillance,&#32;
+        CFF Infrastructure, Installations &amp; Technologie, Surveillance,
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>

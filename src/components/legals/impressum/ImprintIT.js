@@ -40,7 +40,7 @@ function ImprintIT() {
       <p>
         <b>
           Coordinamento IT, dati sul trasporto pubblico, cartine web, gestione
-          dell&#39;infrastruttura geodati.
+          dell&apos;infrastruttura geodati.
         </b>
         <br />
         geOps AG
@@ -90,15 +90,15 @@ function ImprintIT() {
           Carta di rete dei trasporti pubblici svizzeri.
         </b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
       </p>
       <p>
         <b className="ng-binding">
-          Progetti di costruzione dell&#39;infrastruttura ferroviaria.
+          Progetti di costruzione dell&apos;infrastruttura ferroviaria.
         </b>
         <br />
-        Comunicazione FFS Infrastruttura,&#32;
+        Comunicazione FFS Infrastruttura,
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -106,7 +106,7 @@ function ImprintIT() {
       <p>
         <b className="ng-binding">Infrastruttura ferroviaria Svizzera.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,&#32;
+        Fachbus Trafimage, Daniel Hofstetter,
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -114,7 +114,7 @@ function ImprintIT() {
           Coordinatori Costruzioni in prossimità della ferrovia.
         </b>
         <br />
-        FFS Infrastruttura, Impianti&amp;Tecnologia, Sorveglianza,&#32;
+        FFS Infrastruttura, Impianti&amp;Tecnologia, Sorveglianza,
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>

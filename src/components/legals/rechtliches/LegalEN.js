@@ -8,15 +8,15 @@ function LegalEN() {
       </p>
       <p></p>
       <p>
-        SBB&#39;s&#32;
+        SBB&apos;s
         <a href="http://www.sbb.ch/en/meta/legal-information.html">
           legal information
         </a>
-        &#32; and&#32;
+        and
         <a href="http://www.sbb.ch/en/meta/data-protection.html">
           Privacy Policy
         </a>
-        &#32; apply.
+        apply.
       </p>
       <p>
         Contrary to SBB’s general data protection provisions, maps.trafimage.ch
@@ -33,10 +33,10 @@ function LegalEN() {
       <p></p>
       <p>
         The corporate identity of Trafimage (structure and design) forms an
-        integral part of SBB&#39;s image and is protected by copyright. The maps
-        and plans contained on the websites of Trafimage, including the related
-        information, are supplied solely for private use and for information
-        purposes.
+        integral part of SBB&apos;s image and is protected by copyright. The
+        maps and plans contained on the websites of Trafimage, including the
+        related information, are supplied solely for private use and for
+        information purposes.
       </p>
       <p>
         <b>

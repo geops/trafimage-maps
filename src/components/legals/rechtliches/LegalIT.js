@@ -7,8 +7,8 @@ function LegalIT() {
         <b>Avvertenza legale e protezione dei dati.</b>
       </p>
       <p>
-        Valgono le&#32;
-        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e&#32;
+        Valgono le
+        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e
         <a href="http://www.ffs.ch/meta/tutela-dei-dati.html">
           la dichiarazione sulla protezione dei dati
         </a>
@@ -55,6 +55,7 @@ function LegalIT() {
         geodati di base contenuti nelle pagine web sono consentiti solo previo
         consenso scritto da parte di FFS e swisstopo.
       </p>
+      min-height: 16px;
       <p>
         <b>Copyright swisstopo.</b>
       </p>
