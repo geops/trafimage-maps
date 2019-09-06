@@ -71,19 +71,10 @@ select {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-/* Base layers in the layer tree */
-.tm-base-layer-select {
-  display: none;
-}
-
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
   .tm-base-layer-toggler {
     display: none;
-  }
-
-  .tm-base-layer-select {
-    display: block;
   }
 }
