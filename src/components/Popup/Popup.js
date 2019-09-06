@@ -28,56 +28,50 @@ const defaultProps = {
 class Popup extends Component {
   constructor(props) {
     super(props);
-    const { clickedFeatureInfo } = this.props;
-
     this.state = {
       featIndex: 0,
-      featuresList: clickedFeatureInfo ? clickedFeatureInfo.features : [],
+      componentName: null,
+      popupCoordinate: null,
     };
+  }
 
+  componentDidMount() {
+    const { clickedFeatureInfo } = this.props;
     if (clickedFeatureInfo) {
-      this.setClickedFeatureInfo(clickedFeatureInfo);
+      this.updatePopup(clickedFeatureInfo);
     }
   }
 
   componentDidUpdate(prevProps) {
     const { clickedFeatureInfo } = this.props;
-
     if (clickedFeatureInfo !== prevProps.clickedFeatureInfo) {
-      this.setFeaturesList(clickedFeatureInfo);
+      this.updatePopup();
     }
   }
 
-  setClickedFeatureInfo(clickedFeature) {
-    const { popupComponents } = this.props;
+  updatePopup() {
+    const { popupComponents, clickedFeatureInfo } = this.props;
     const { featIndex } = this.state;
-
-    const { features, layer, coordinate } = clickedFeature;
-    this.componentName = popupComponents[layer.getKey()];
-    this.popupCoordinate =
-      features.length && features[featIndex].getGeometry() instanceof Point
-        ? features[featIndex].getGeometry().getCoordinates()
-        : coordinate;
-  }
-
-  setFeaturesList(clickedFeature) {
-    if (clickedFeature) {
-      this.setClickedFeatureInfo(clickedFeature);
+    if (clickedFeatureInfo) {
+      const { features, layer, coordinate } = clickedFeatureInfo;
       this.setState({
         featIndex: 0,
-        featuresList: clickedFeature.features,
+        componentName: popupComponents[layer.getKey()],
+        popupCoordinate:
+          features.length && features[featIndex].getGeometry() instanceof Point
+            ? features[featIndex].getGeometry().getCoordinates()
+            : coordinate,
       });
     } else {
-      this.componentName = null;
-      this.popupCoordinate = null;
       this.setState({
         featIndex: 0,
-        featuresList: [],
+        componentName: null,
+        popupCoordinate: null,
       });
     }
   }
 
-  renderPagination(feats) {
+  renderPagination(features) {
     const { t } = this.props;
     const { featIndex } = this.state;
     return (
@@ -92,9 +86,9 @@ class Popup extends Component {
             </Button>
           ) : null}
         </span>
-        {featIndex + 1} {t('von')} {feats.length}
+        {featIndex + 1} {t('von')} {features.length}
         <span className="wkp-popup-pagination-button-wrapper">
-          {featIndex + 1 < feats.length ? (
+          {featIndex + 1 < features.length ? (
             <Button
               className="wkp-popup-pagination-button"
               onClick={() => this.setState({ featIndex: featIndex + 1 })}
@@ -108,26 +102,32 @@ class Popup extends Component {
   }
 
   render() {
-    const { map, dispatchSetClickedFeatureInfo } = this.props;
-    const { featIndex, featuresList } = this.state;
-    if (!featuresList.length) {
+    const {
+      map,
+      clickedFeatureInfo,
+      dispatchSetClickedFeatureInfo,
+    } = this.props;
+    const { featIndex, popupCoordinate, componentName } = this.state;
+    if (!clickedFeatureInfo || !clickedFeatureInfo.features.length) {
       return null;
     }
 
     // Styleguidist try to load every file in the folder if we don't put index.js
     const PopupComponent = React.lazy(() =>
-      import(`../../popups/${this.componentName}/index.js`),
+      import(`../../popups/${componentName}/index.js`),
     );
 
     return (
       <React.Suspense fallback="loading...">
         <RSPopup
           onCloseClick={() => dispatchSetClickedFeatureInfo()}
-          popupCoordinate={this.popupCoordinate}
+          popupCoordinate={popupCoordinate}
           map={map}
         >
-          <PopupComponent feature={featuresList[featIndex]} />
-          {featuresList.length > 1 ? this.renderPagination(featuresList) : null}
+          <PopupComponent feature={clickedFeatureInfo.features[featIndex]} />
+          {clickedFeatureInfo.features.length > 1
+            ? this.renderPagination(clickedFeatureInfo.features)
+            : null}
         </RSPopup>
       </React.Suspense>
     );
