@@ -206,8 +206,17 @@ exports[`AppRouter should match snapshot 1`] = `
                 />
               </div>
               <div
-                className="wkp-layer-tree"
-              />
+                className="wkp-topic-content"
+              >
+                <select
+                  className="tm-select"
+                  onChange={[Function]}
+                  value="null"
+                />
+                <div
+                  className="wkp-layer-tree"
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -239,8 +248,12 @@ exports[`AppRouter should match snapshot 1`] = `
                 />
               </div>
               <div
-                className="wkp-layer-tree"
-              />
+                className="wkp-topic-content"
+              >
+                <div
+                  className="wkp-layer-tree"
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -272,8 +285,12 @@ exports[`AppRouter should match snapshot 1`] = `
                 />
               </div>
               <div
-                className="wkp-layer-tree"
-              />
+                className="wkp-topic-content"
+              >
+                <div
+                  className="wkp-layer-tree"
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -305,8 +322,12 @@ exports[`AppRouter should match snapshot 1`] = `
                 />
               </div>
               <div
-                className="wkp-layer-tree"
-              />
+                className="wkp-topic-content"
+              >
+                <div
+                  className="wkp-layer-tree"
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -338,8 +359,12 @@ exports[`AppRouter should match snapshot 1`] = `
                 />
               </div>
               <div
-                className="wkp-layer-tree"
-              />
+                className="wkp-topic-content"
+              >
+                <div
+                  className="wkp-layer-tree"
+                />
+              </div>
             </div>
           </div>
           <div>
@@ -371,8 +396,12 @@ exports[`AppRouter should match snapshot 1`] = `
                 />
               </div>
               <div
-                className="wkp-layer-tree"
-              />
+                className="wkp-topic-content"
+              >
+                <div
+                  className="wkp-layer-tree"
+                />
+              </div>
             </div>
           </div>
         </div>

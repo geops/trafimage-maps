@@ -5,6 +5,7 @@ import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
+import Select from 'react-spatial/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from 'react-spatial/components/Button';
 import Layer from 'react-spatial/layers/Layer';
@@ -40,7 +41,23 @@ class TopicMenu extends PureComponent {
 
     this.state = {
       isCollapsed: false,
+      currentBaseLayerKey: null,
     };
+  }
+
+  componentDidMount() {
+    this.listenLayerServiceEvent();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { layerService } = this.props;
+    if (layerService !== prevProps.layerService) {
+      this.listenLayerServiceEvent(prevProps.layerService);
+    }
+  }
+
+  componentWillUnmount() {
+    this.unlistenLayerServiceEvent();
   }
 
   onTopicClick(topic) {
@@ -52,6 +69,36 @@ class TopicMenu extends PureComponent {
     } else {
       dispatchSetActiveTopic(topic);
     }
+  }
+
+  listenLayerServiceEvent() {
+    this.unlistenLayerServiceEvent();
+    const { layerService } = this.props;
+    if (layerService) {
+      layerService.on('change:visible', () => {
+        this.updateCurrentBaseLayerKey();
+      });
+    }
+  }
+
+  unlistenLayerServiceEvent(prevLayerService) {
+    const { layerService } = this.props;
+    if (layerService || prevLayerService) {
+      /* (prevLayerService || layerService).un(
+        'change:visible',
+        this.updateCurrentBaseLayerKey,
+      ); */
+    }
+  }
+
+  updateCurrentBaseLayerKey() {
+    const { layerService } = this.props;
+    this.setState({
+      currentBaseLayerKey: layerService
+        .getBaseLayers()
+        .find(l => l.getVisible())
+        .getKey(),
+    });
   }
 
   renderInfoButton(layer) {
@@ -75,7 +122,7 @@ class TopicMenu extends PureComponent {
 
   render() {
     const { t, layerService, topic, activeTopic } = this.props;
-    const { isCollapsed } = this.state;
+    const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
 
     if (
@@ -85,10 +132,7 @@ class TopicMenu extends PureComponent {
     ) {
       layerTree = (
         <LayerTree
-          isItemHidden={l => l.get('hideInLegend')}
-          getParentClassName={l =>
-            l.getIsBaseLayer() ? 'tm-base-layer-item' : undefined
-          }
+          isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
           layerService={layerService}
           t={t}
           renderItemContent={(layer, layerTreeComp) => {
@@ -129,7 +173,27 @@ class TopicMenu extends PureComponent {
             }}
           />
         </div>
-        <div className="wkp-layer-tree">{layerTree}</div>
+        <div className="wkp-topic-content">
+          {topic.key === activeTopic.key && layerService.getBaseLayers() && (
+            <Select
+              options={layerService.getBaseLayers().map(l => {
+                return {
+                  value: l.getKey(),
+                  label: t(l.getKey()),
+                  layer: l,
+                };
+              })}
+              value={currentBaseLayerKey}
+              onChange={(evt, option) => {
+                option.layer.setVisible(true);
+                this.setState({
+                  currentBaseLayerKey: option.value,
+                });
+              }}
+            />
+          )}
+          <div className="wkp-layer-tree">{layerTree}</div>
+        </div>
       </div>
     );
   }
