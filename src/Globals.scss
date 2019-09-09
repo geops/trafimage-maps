@@ -1,9 +1,12 @@
 // Colors
 $brand-primary: #eb0000;
+$footer-height: 30px;
+$footer-font-size: 12px;
 
 $transition-delay: 300;
 $menu-transition: max-height #{$transition-delay}ms ease;
-$menu-transition-closed: max-height #{$transition-delay}ms ease, border 0.1s ease 0.2s;
+$menu-transition-closed: max-height #{$transition-delay}ms ease,
+  border 0.1s ease 0.2s;
 
 // Export variables to be used in js files.
 :export {
