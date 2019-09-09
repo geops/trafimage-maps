@@ -37,7 +37,7 @@ describe('LayerInfosDialog', () => {
   test('should match snapshot when Layer is null', () => {
     const component = renderer.create(
       <Provider store={store}>
-        <LayerInfosDialog></LayerInfosDialog>
+        <LayerInfosDialog />
       </Provider>,
     );
     const tree = component.toJSON();
@@ -47,7 +47,7 @@ describe('LayerInfosDialog', () => {
   test('should match snapshot when Layer is defined', () => {
     const component = renderer.create(
       <Provider store={store}>
-        <LayerInfosDialog layer={layer}></LayerInfosDialog>
+        <LayerInfosDialog layer={layer} />
       </Provider>,
     );
     const tree = component.toJSON();
