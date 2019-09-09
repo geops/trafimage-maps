@@ -12124,10 +12124,10 @@ react-simple-code-editor@^0.9.7:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.9.14.tgz#5b8fdc36a975cbf02fdafa2597398d8e212afebc"
   integrity sha512-doNaIIt4w7QIiB6ysWHMtYL4M3xOGPvZJH8vGq3W/hGk43pn25RDA27IS8GkbfhA1eLX72CWDhuC7KmDKax13g==
 
-react-spatial@^0.1.0-beta.16:
-  version "0.1.0-beta.16"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.16.tgz#5b6722bd6711be20208cbcf8a5b9fcff7620dbd3"
-  integrity sha512-kI43xxoa4utpQq4vbUIuvjNmtnS3IC+BzdO0G+T16zOCYIRUn4U3/IVWa0/2LpxaEShgFdZnSMZNUQkC5luL1g==
+react-spatial@^0.1.0-beta.18:
+  version "0.1.0-beta.18"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.18.tgz#0d062e72deec3788b78ddd10707b898efd406ac0"
+  integrity sha512-ugc1pk0ycAy6uYtWZ79sn6xJgBfZGiFfJWHvLHw2sdKndmWQpXrQPGiAa9bdr0k6fE0a5ZbiUE6fB5d2oxy2nQ==
   dependencies:
     query-string "^6.4.2"
     react-draggable "^3.3.1"
