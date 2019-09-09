@@ -61,7 +61,7 @@
 
     .wkp-layer-tree {
       overflow: hidden;
-      margin: 0 10px 10px 35px;
+      margin: 5px 10px 10px 15px;
 
       .tm-layer-tree-item {
         color: #888;
@@ -86,12 +86,28 @@
         }
       }
     }
+
+    .wkp-topic-content {
+      transition: max-height 0.3s ease, margin 0.3s ease;
+      max-height: 1000px;
+
+      select {
+        margin: 0 35px 15px 35px;
+        height: 34px;
+        width: 285px;
+        display: none;
+      }
+    }
   }
 }
 
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
+  .wkp-topic-content select {
+    display: block;
+  }
+
   .wkp-topic-menu-item {
     justify-content: space-between;
     border-width: 1px 0 0 0;

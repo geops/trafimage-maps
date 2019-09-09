@@ -40,10 +40,11 @@ function LayerInfosDialog(props) {
               )}
               draggable="false"
               alt={t('Kein Bildtext')}
-            ></img>,
+            />,
           ]}
-        ></Trans>
+        />
       }
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );
