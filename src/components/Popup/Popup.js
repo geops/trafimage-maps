@@ -52,6 +52,7 @@ class Popup extends Component {
   updatePopup() {
     const { popupComponents, clickedFeatureInfo } = this.props;
     const { featIndex } = this.state;
+
     if (clickedFeatureInfo) {
       const { features, layer, coordinate } = clickedFeatureInfo;
       this.setState({
@@ -108,7 +109,11 @@ class Popup extends Component {
       dispatchSetClickedFeatureInfo,
     } = this.props;
     const { featIndex, popupCoordinate, componentName } = this.state;
-    if (!clickedFeatureInfo || !clickedFeatureInfo.features.length) {
+    if (
+      !clickedFeatureInfo ||
+      !clickedFeatureInfo.features.length ||
+      !componentName
+    ) {
       return null;
     }
 
