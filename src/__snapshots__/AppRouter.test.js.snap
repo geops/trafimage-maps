@@ -208,11 +208,6 @@ exports[`AppRouter should match snapshot 1`] = `
               <div
                 className="wkp-topic-content"
               >
-                <select
-                  className="tm-select"
-                  onChange={[Function]}
-                  value="null"
-                />
                 <div
                   className="wkp-layer-tree"
                 />

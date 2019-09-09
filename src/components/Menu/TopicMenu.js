@@ -171,24 +171,26 @@ class TopicMenu extends PureComponent {
           />
         </div>
         <div className="wkp-topic-content">
-          {topic.key === activeTopic.key && layerService.getBaseLayers() && (
-            <Select
-              options={layerService.getBaseLayers().map(l => {
-                return {
-                  value: l.getKey(),
-                  label: t(l.getKey()),
-                  layer: l,
-                };
-              })}
-              value={currentBaseLayerKey}
-              onChange={(evt, option) => {
-                option.layer.setVisible(true);
-                this.setState({
-                  currentBaseLayerKey: option.value,
-                });
-              }}
-            />
-          )}
+          {topic.key === activeTopic.key &&
+            layerService.getBaseLayers() &&
+            layerService.getBaseLayers().length > 1 && (
+              <Select
+                options={layerService.getBaseLayers().map(l => {
+                  return {
+                    value: l.getKey(),
+                    label: t(l.getKey()),
+                    layer: l,
+                  };
+                })}
+                value={currentBaseLayerKey}
+                onChange={(evt, option) => {
+                  option.layer.setVisible(true);
+                  this.setState({
+                    currentBaseLayerKey: option.value,
+                  });
+                }}
+              />
+            )}
           <div className="wkp-layer-tree">{layerTree}</div>
         </div>
       </div>
