@@ -43,6 +43,7 @@ class TopicMenu extends PureComponent {
       isCollapsed: false,
       currentBaseLayerKey: null,
     };
+    this.updateCurrentBaseLayerKey = this.updateCurrentBaseLayerKey.bind(this);
   }
 
   componentDidMount() {
@@ -75,30 +76,26 @@ class TopicMenu extends PureComponent {
     this.unlistenLayerServiceEvent();
     const { layerService } = this.props;
     if (layerService) {
-      layerService.on('change:visible', () => {
-        this.updateCurrentBaseLayerKey();
-      });
+      layerService.on('change:visible', this.updateCurrentBaseLayerKey);
     }
   }
 
   unlistenLayerServiceEvent(prevLayerService) {
     const { layerService } = this.props;
     if (layerService || prevLayerService) {
-      /* (prevLayerService || layerService).un(
+      (prevLayerService || layerService).un(
         'change:visible',
         this.updateCurrentBaseLayerKey,
-      ); */
+      );
     }
   }
 
-  updateCurrentBaseLayerKey() {
-    const { layerService } = this.props;
-    this.setState({
-      currentBaseLayerKey: layerService
-        .getBaseLayers()
-        .find(l => l.getVisible())
-        .getKey(),
-    });
+  updateCurrentBaseLayerKey(layer) {
+    if (layer.getIsBaseLayer() && layer.getVisible()) {
+      this.setState({
+        currentBaseLayerKey: layer.getKey(),
+      });
+    }
   }
 
   renderInfoButton(layer) {
