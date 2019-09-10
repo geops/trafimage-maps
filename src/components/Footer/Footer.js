@@ -13,7 +13,7 @@ import LayerService from 'react-spatial/LayerService';
 import ActionLink from 'react-spatial/components/ActionLink';
 import Dialog from 'react-spatial/components/Dialog';
 import { FaInfo } from 'react-icons/fa';
-import LegalLines from '../legals/LegalLines';
+import LegalLines from '../LegalLines';
 
 import { setLanguage, setProjection } from '../../model/app/actions';
 import './Footer.scss';

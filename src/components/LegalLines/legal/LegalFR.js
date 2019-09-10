@@ -26,7 +26,7 @@ function LegalFR() {
         <a href="http://matomo.org/">Matomo</a>
         »).
       </p>
-      <p></p>
+      <p />
       <p>
         <b>Image de Trafimage.</b>
       </p>

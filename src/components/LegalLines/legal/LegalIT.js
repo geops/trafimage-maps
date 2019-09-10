@@ -22,7 +22,7 @@ function LegalIT() {
         <a href="http://matomo.org/">Matomo</a>
         »).
       </p>
-      <p></p>
+      <p />
       <p>
         <b>Brand Trafimage.</b>
       </p>

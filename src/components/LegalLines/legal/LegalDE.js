@@ -6,7 +6,7 @@ function LegalDE() {
       <p>
         <b>Rechtlicher Hinweis und Datenschutz.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         Es gelten die{' '}
         <a href="http://www.sbb.ch/meta/rechtlicher-hinweis.html">
@@ -34,11 +34,11 @@ function LegalDE() {
         SBB-Intranet
       </a>
       ).
-      <p></p>
+      <p />
       <p>
         <b>Erscheinungsbild von Trafimage.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         Das Erscheinungsbild von Trafimage (Bildaufbau und Bildgestaltung) ist
         ein fester Bestandteil des Auftritts der SBB und ist urheberrechtlich
@@ -52,7 +52,7 @@ function LegalDE() {
           OpenStreetMap.
         </b>
       </p>
-      <p></p>
+      <p />
       <p>
         Für die Geobasisdaten (z.B. Luftbilder, Relief, Landeskarten) gelten die
         Bestimmungen von swisstopo und OpenStreetMap. Es ist gestattet, einzelne
@@ -72,7 +72,7 @@ function LegalDE() {
       <p>
         <b>Copyright swisstopo.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         Die in dieser Internet-Plattform integrierten Geobasisdaten sind
         Eigentum der Schweizerischen Eidgenossenschaft. Die Daten sind
@@ -86,7 +86,7 @@ function LegalDE() {
       <p>
         <b>Haftung von swisstopo.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         Liegt ein Vertragsverhältnis zwischen swisstopo und dem Nutzer eines
         Dienstes vor, so haftet swisstopo nur für Schäden, die sie
@@ -100,7 +100,7 @@ function LegalDE() {
       <p>
         <b>Daten der SBB und ihrer Partner.</b>
       </p>
-      <p></p>
+      <p />
       <p>Alle anderen Daten sind Eigentum der SBB oder ihrer Partner.</p>
       <p>
         <b>Zeichnung.</b>

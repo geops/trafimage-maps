@@ -6,7 +6,7 @@ function LegalEN() {
       <p>
         <b>Legal information and data protection.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         SBB&apos;s
         <a href="http://www.sbb.ch/en/meta/legal-information.html">
@@ -26,11 +26,11 @@ function LegalEN() {
         <a href="http://matomo.org/">Matomo</a>
         »).
       </p>
-      <p></p>
+      <p />
       <p>
         <b>Corporate identity of Trafimage.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         The corporate identity of Trafimage (structure and design) forms an
         integral part of SBB&apos;s image and is protected by copyright. The
@@ -43,7 +43,7 @@ function LegalEN() {
           Use of Trafimage map images and swisstopo and OpenStreetMap map data.
         </b>
       </p>
-      <p></p>
+      <p />
       <p>
         The provisions of swisstopo and OpenStreetMap and apply to basic
         geographical data (e.g. aerial photographs, relief data, national maps).
@@ -62,7 +62,7 @@ function LegalEN() {
       <p>
         <b>Copyright of swisstopo.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         The basic geographical data integrated into this Internet platform is
         the property of the Swiss Confederation. The data is copyright protected
@@ -76,7 +76,7 @@ function LegalEN() {
       <p>
         <b>Liability on the part of swisstopo.</b>
       </p>
-      <p></p>
+      <p />
       <p>
         If a contractual relationship between swisstopo and the user of a
         service exists, swisstopo shall only be liable for damage it has caused
@@ -90,7 +90,7 @@ function LegalEN() {
       <p>
         <b>Data belonging to SBB and its partners.</b>
       </p>
-      <p></p>
+      <p />
       <p>All other data is the property of SBB or its partners.</p>
       <p>
         <b>Draw.</b>
