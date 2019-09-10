@@ -11,24 +11,31 @@ const propTypes = {
   title: PropTypes.element,
   body: PropTypes.element,
   footer: PropTypes.element,
+  isModal: PropTypes.bool,
 };
 
 const defaultProps = {
   title: null,
   body: null,
   footer: null,
+  isModal: false,
 };
 
 function Dialog(props) {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
   const dispatch = useDispatch();
-  const { body } = props;
+  const { body, isModal } = props;
   return (
     <RSDialog
       isOpen
       position={dialogPosition}
       onClose={() => {
         dispatch(setDialogVisible());
+      }}
+      onOutsideClick={() => {
+        if (isModal) {
+          dispatch(setDialogVisible());
+        }
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

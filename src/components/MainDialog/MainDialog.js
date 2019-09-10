@@ -1,13 +1,19 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { FaInfo } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import LayerInfosDialog, {
   NAME as LayerInfosDialogName,
 } from '../LayerInfosDialog';
+import Dialog from '../Dialog';
+import LegalLines from '../LegalLines';
 import { setDialogPosition } from '../../model/app/actions';
 
 const MainDialog = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const dialogVisible = useSelector(state => state.app.dialogVisible);
+  const language = useSelector(state => state.app.language);
   const layerSelectedForInfos = useSelector(
     state => state.app.layerSelectedForInfos,
   );
@@ -24,6 +30,24 @@ const MainDialog = () => {
             }),
           );
         }}
+      />
+    );
+  }
+
+  if (/(Kontakt|Impressum|Rechtliches)/.test(dialogVisible)) {
+    return (
+      <Dialog
+        isModal
+        isOpen
+        name="legallines"
+        title={
+          <span>
+            <FaInfo /> {t(dialogVisible)}
+          </span>
+        }
+        body={
+          <LegalLines doc={dialogVisible.toLowerCase()} language={language} />
+        }
       />
     );
   }

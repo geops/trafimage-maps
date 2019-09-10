@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { compose } from 'lodash/fp';
 import Map from 'ol/Map';
 import RSFooter from 'react-spatial/components/Footer';
@@ -11,11 +11,12 @@ import Select from 'react-spatial/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
 import LayerService from 'react-spatial/LayerService';
 import ActionLink from 'react-spatial/components/ActionLink';
-import Dialog from 'react-spatial/components/Dialog';
-import { FaInfo } from 'react-icons/fa';
-import LegalLines from '../LegalLines';
 
-import { setLanguage, setProjection } from '../../model/app/actions';
+import {
+  setLanguage,
+  setProjection,
+  setDialogVisible,
+} from '../../model/app/actions';
 import './Footer.scss';
 
 const propTypes = {
@@ -47,7 +48,7 @@ const Footer = ({
   dispatchSetLanguage,
   dispatchSetProjection,
 }) => {
-  const [open, setOpen] = useState(null);
+  const dispatch = useDispatch();
 
   return (
     <RSFooter className="wkp-footer">
@@ -56,35 +57,15 @@ const Footer = ({
           layerService={layerService}
           format={f => `${t('Geodaten')} ${f}`}
         />
-
-        <div className="wkp-impressum">
-          <ActionLink onClick={() => setOpen('Kontakt')}>
-            {t('Kontakt')}
-          </ActionLink>
-          <ActionLink onClick={() => setOpen('Impressum')}>
-            {t('Impressum')}
-          </ActionLink>
-          <ActionLink onClick={() => setOpen('Rechtliches')}>
-            {t('Rechtliches')}
-          </ActionLink>
-
-          <Dialog
-            title={
-              <div>
-                <FaInfo /> {t(open)}
-              </div>
-            }
-            classNameChildren="tm-dialog-content"
-            onClose={() => setOpen(null)}
-            isOpen={open}
-            isModal
-          >
-            <LegalLines
-              doc={open ? open.toLowerCase() : null}
-              language={language}
-            />
-          </Dialog>
-        </div>
+        <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
+          {t('Kontakt')}
+        </ActionLink>
+        <ActionLink onClick={() => dispatch(setDialogVisible('Impressum'))}>
+          {t('Impressum')}
+        </ActionLink>
+        <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
+          {t('Rechtliches')}
+        </ActionLink>
       </div>
 
       <div className="wkp-footer-right">
