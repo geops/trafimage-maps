@@ -45,7 +45,7 @@ class Popup extends Component {
   componentDidUpdate(prevProps) {
     const { clickedFeatureInfo } = this.props;
     if (clickedFeatureInfo !== prevProps.clickedFeatureInfo) {
-      this.updspatePopup();
+      this.updatePopup();
     }
   }
 
