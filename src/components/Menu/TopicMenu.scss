@@ -6,8 +6,8 @@
     right: 0;
     display: flex;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 27px;
+    height: 27px;
   }
 
   .wkp-menu.wkp-topics {
@@ -17,9 +17,9 @@
 
   .wkp-topic-menu {
     .wkp-topic-menu-item {
-      outline: none;
-      padding: 0 15px;
-      height: 40px;
+      margin: 0 10px;
+      padding: 0 5px;
+      height: 30px;
       display: flex;
       align-items: center;
 
@@ -62,12 +62,17 @@
     .wkp-layer-tree {
       overflow: hidden;
       max-height: 1000px;
-      margin: 0 10px 10px 40px;
-      transition: max-height 0.3s ease, margin 0.3s ease;
+      margin: 0 10px 10px 35px;
 
       .tm-layer-tree-item {
         color: #888;
-        padding: 7px;
+        padding: 0;
+        margin-left: 5px;
+
+        .tm-layer-tree-toggle {
+          padding: 5px 6px;
+          margin: 1px 40px 1px 0;
+        }
 
         .tm-layer-tree-arrow {
           border-color: #888;
@@ -83,8 +88,20 @@
       }
     }
 
+    .wkp-topic-content {
+      transition: max-height 0.3s ease, margin 0.3s ease;
+      max-height: 1000px;
+
+      select {
+        margin: 0 35px 15px 35px;
+        height: 34px;
+        width: 285px;
+        display: none;
+      }
+    }
+
     &.collapsed {
-      .wkp-layer-tree {
+      .wkp-topic-content {
         max-height: 0;
         margin-top: 0;
         margin-bottom: 0;
@@ -97,6 +114,10 @@
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
+  .wkp-topic-content select {
+    display: block;
+  }
+
   .wkp-topic-menu-item {
     justify-content: space-between;
     border-width: 1px 0 0 0;

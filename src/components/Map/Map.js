@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 
 import Layer from 'react-spatial/layers/Layer';
+import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
@@ -60,6 +61,15 @@ class Map extends PureComponent {
     }
   }
 
+  componentWillMount() {
+    unByKey(this.onPointerMoveRef);
+  }
+
+  componentDidMount() {
+    const { map } = this.props;
+    this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
+  }
+
   onMapMoved(evt) {
     const {
       center,
@@ -87,6 +97,21 @@ class Map extends PureComponent {
     }
   }
 
+  onPointerMove(evt) {
+    const { map } = this.props;
+
+    if (evt.dragging) {
+      return;
+    }
+
+    const mapFeatures = map.getFeaturesAtPixel(evt.pixel);
+
+    const hoverFeature =
+      mapFeatures && mapFeatures.length ? mapFeatures[0] : null;
+
+    map.getTarget().style.cursor = hoverFeature ? 'pointer' : 'auto';
+  }
+
   render() {
     const {
       projection,
@@ -110,6 +135,7 @@ class Map extends PureComponent {
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
             projection,
+            maxZoom: 20,
           }}
         />
       </>

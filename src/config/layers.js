@@ -9,6 +9,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
+import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
 import CONF from './appConfig';
@@ -72,7 +73,7 @@ export const netzkarteLayer = new MapboxLayer({
 });
 
 export const swisstopoSwissImage = new Layer({
-  name: 'Netzkarte Luftbild',
+  name: 'Swissimage',
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
   visible: false,
@@ -85,6 +86,7 @@ export const swisstopoSwissImage = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -106,6 +108,7 @@ export const netzkarteAerial = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -139,6 +142,7 @@ export const swisstopoLandeskarte = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -163,6 +167,7 @@ export const swisstopoLandeskarteGrau = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      transition: 0,
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -170,6 +175,10 @@ export const swisstopoLandeskarteGrau = new Layer({
       }),
     }),
   }),
+});
+
+export const passagierfrequenzen = new PassagierfrequenzenLayer({
+  visible: false,
 });
 
 export const bahnhofplaene = new Layer({
@@ -331,8 +340,8 @@ export const parks = new WMSLayer({
 });
 
 export default [
-  aerial,
-  swisstopoLandeskarte,
-  swisstopoLandeskarteGrau,
   netzkarteLayer,
+  swisstopoLandeskarteGrau,
+  swisstopoLandeskarte,
+  aerial,
 ];

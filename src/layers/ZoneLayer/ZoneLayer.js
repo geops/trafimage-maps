@@ -107,9 +107,9 @@ class ZoneLayer extends VectorLayer {
 
     this.onClick(features => {
       const [feature] = features;
-      const ix = this.selectedZones.indexOf(feature);
-      if (ix > -1) {
-        this.selectedZones.splice(ix, 1);
+      const idx = this.selectedZones.indexOf(feature);
+      if (idx > -1) {
+        this.selectedZones.splice(idx, 1);
       } else {
         this.selectedZones.push(feature);
       }

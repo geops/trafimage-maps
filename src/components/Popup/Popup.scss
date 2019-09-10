@@ -1,4 +1,37 @@
-// placeholder
-.wkp-popup {
-  display: block;
+.tm-popup {
+  div:first-child {
+    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 0.5s; /* Firefox < 16 */
+    -ms-animation: fadein 0.5s; /* Internet Explorer */
+    -o-animation: fadein 0.5s; /* Opera < 12.1 */
+    animation: fadein 0.5s;
+  }
+
+  .wkp-popup-pagination-wrapper {
+    display: flex;
+    padding: 5px 0;
+    align-items: center;
+    justify-content: center;
+
+    .wkp-popup-pagination-button-wrapper {
+      padding: 0 10px;
+      height: 25px;
+      width: 25px;
+
+      .wkp-popup-pagination-button {
+        height: 25px;
+        width: 25px;
+
+        svg {
+          height: 25px;
+          width: 25px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
