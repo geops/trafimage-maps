@@ -1,5 +1,3 @@
-@import '../../Globals.scss';
-
 .wkp-menu-wrapper {
   position: absolute;
   top: 12px;
@@ -21,10 +19,23 @@
       max-height: 1000px;
       border-top: 1px solid #eee;
       overflow-y: auto;
-      padding: 5px 0;
+      padding: 5px 0 0 0;
 
       .rt-tracker-control {
         padding: 15px 10px 0 10px;
+      }
+    }
+
+    .wkp-share-wrapper {
+      border: none;
+      background: white;
+      max-height: 1000px;
+      overflow: hidden;
+
+      &.closed {
+        border-width: 0;
+        border-top-width: 0;
+        max-height: 0;
       }
     }
 

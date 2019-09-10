@@ -9,6 +9,7 @@ import menuClosedImg from '../../img/menu_closed.png';
 import './MenuHeader.scss';
 
 const propTypes = {
+  className: PropTypes.string,
   onToggle: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   info: PropTypes.string,
@@ -17,13 +18,14 @@ const propTypes = {
 };
 
 const defaultProps = {
+  className: 'wkp-menu-header',
   info: null,
   isOpen: false,
 };
 
-const MenuHeader = ({ title, info, isOpen, onToggle, t }) => (
+const MenuHeader = ({ className, title, info, isOpen, onToggle, t }) => (
   <div
-    className={`wkp-menu-header ${isOpen ? 'open' : ''}`}
+    className={`${className}${isOpen ? ' open' : ''}`}
     role="button"
     tabIndex="0"
     onClick={() => onToggle()}

@@ -1,5 +1,6 @@
 .wkp-menu-wrapper {
-  .wkp-menu-header {
+  .wkp-menu-header,
+  .wkp-share-header {
     background: white;
     padding: 0 15px;
     height: 69px;
@@ -52,6 +53,23 @@
       }
     }
   }
+
+  .wkp-share-header {
+    height: 40px;
+    border: none;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+
+    &.open {
+      border-bottom-width: 1px;
+    }
+
+    .wkp-menu-toggler {
+      position: absolute;
+      right: 10px;
+      top: unset;
+    }
+  }
 }
 
 .tm-app.tm-w-m,
@@ -60,21 +78,6 @@
   .wkp-menu-wrapper {
     top: 0;
 
-    .wkp-menu-header-title,
-    .wkp-menu-toggler,
-    .wkp-menu-layers {
-      display: none;
-    }
-
-    .wkp-menu-header-toggler {
-      display: flex;
-      align-items: center;
-
-      img {
-        margin-right: 5px;
-      }
-    }
-
     .wkp-menu-header {
       margin: 0;
       border: 0;
@@ -82,8 +85,28 @@
       height: 35px;
       width: 30px;
 
-      .wkp-menu-toggle-text {
+      .wkp-menu-toggler,
+      .wkp-menu-layers {
         display: none;
+      }
+
+      .wkp-menu-header-toggler {
+        display: flex;
+        align-items: center;
+
+        .wkp-menu-toggle-text {
+          display: none;
+        }
+
+        img {
+          margin-right: 5px;
+        }
+      }
+    }
+
+    .wkp-share-header {
+      .wkp-menu-title-main {
+        display: block;
       }
     }
   }
