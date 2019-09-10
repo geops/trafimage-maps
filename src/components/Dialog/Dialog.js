@@ -32,7 +32,7 @@ function Dialog(props) {
       onClose={() => {
         dispatch(setDialogVisible());
       }}
-      onOutsideClick={() => {
+      onClickOutside={() => {
         if (isModal) {
           dispatch(setDialogVisible());
         }
