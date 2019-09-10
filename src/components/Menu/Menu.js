@@ -7,6 +7,7 @@ import Map from 'ol/Map';
 import LayerService from 'react-spatial/LayerService';
 import TopicMenu from './TopicMenu';
 import MenuHeader from './MenuHeader';
+import Collapsible from '../Collapsible';
 import { setMenuOpen } from '../../model/app/actions';
 
 import './Menu.scss';
@@ -123,13 +124,15 @@ class Menu extends Component {
         />
 
         <div className={`wkp-menu wkp-topics ${menuOpen ? '' : 'closed'}`}>
-          <div className="wkp-menu-body">
-            {topics.map(topic => (
-              <div key={topic.key}>
-                <TopicMenu layerService={layerService} topic={topic} />
-              </div>
-            ))}
-          </div>
+          <Collapsible isCollapsed={!menuOpen}>
+            <div className="wkp-menu-body">
+              {topics.map(topic => (
+                <div key={topic.key}>
+                  <TopicMenu layerService={layerService} topic={topic} />
+                </div>
+              ))}
+            </div>
+          </Collapsible>
         </div>
 
         {loadedMenuComponents.map((Comp, index) => (
