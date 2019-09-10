@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FooterDialogContent should match snapshot with doc=impressum and language=de 1`] = `
+exports[`LegalLines should match snapshot with doc=impressum and language=de 1`] = `
 <div
   className="tm-imprint"
 >
@@ -181,7 +181,7 @@ exports[`FooterDialogContent should match snapshot with doc=impressum and langua
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=impressum and language=en 1`] = `
+exports[`LegalLines should match snapshot with doc=impressum and language=en 1`] = `
 <div
   className="tm-imprint"
 >
@@ -362,7 +362,7 @@ exports[`FooterDialogContent should match snapshot with doc=impressum and langua
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=impressum and language=fr 1`] = `
+exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`] = `
 <div
   className="tm-imprint"
 >
@@ -543,7 +543,7 @@ exports[`FooterDialogContent should match snapshot with doc=impressum and langua
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=impressum and language=it 1`] = `
+exports[`LegalLines should match snapshot with doc=impressum and language=it 1`] = `
 <div
   className="tm-imprint"
 >
@@ -724,7 +724,7 @@ exports[`FooterDialogContent should match snapshot with doc=impressum and langua
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=kontakt and language=de 1`] = `
+exports[`LegalLines should match snapshot with doc=kontakt and language=de 1`] = `
 <div
   className="tm-imprint"
 >
@@ -763,7 +763,7 @@ exports[`FooterDialogContent should match snapshot with doc=kontakt and language
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=kontakt and language=en 1`] = `
+exports[`LegalLines should match snapshot with doc=kontakt and language=en 1`] = `
 <div
   className="tm-imprint"
 >
@@ -802,7 +802,7 @@ exports[`FooterDialogContent should match snapshot with doc=kontakt and language
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=kontakt and language=fr 1`] = `
+exports[`LegalLines should match snapshot with doc=kontakt and language=fr 1`] = `
 <div
   className="tm-imprint"
 >
@@ -841,7 +841,7 @@ exports[`FooterDialogContent should match snapshot with doc=kontakt and language
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=kontakt and language=it 1`] = `
+exports[`LegalLines should match snapshot with doc=kontakt and language=it 1`] = `
 <div
   className="tm-imprint"
 >
@@ -880,7 +880,7 @@ exports[`FooterDialogContent should match snapshot with doc=kontakt and language
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=de 1`] = `
+exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1`] = `
 <div
   className="tm-imprint"
 >
@@ -983,7 +983,7 @@ exports[`FooterDialogContent should match snapshot with doc=rechtliches and lang
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=en 1`] = `
+exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1`] = `
 <div
   className="tm-imprint"
 >
@@ -1074,7 +1074,7 @@ exports[`FooterDialogContent should match snapshot with doc=rechtliches and lang
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=fr 1`] = `
+exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1`] = `
 <div
   className="tm-imprint"
 >
@@ -1159,7 +1159,7 @@ exports[`FooterDialogContent should match snapshot with doc=rechtliches and lang
 </div>
 `;
 
-exports[`FooterDialogContent should match snapshot with doc=rechtliches and language=it 1`] = `
+exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1`] = `
 <div
   className="tm-imprint"
 >
@@ -1236,7 +1236,7 @@ exports[`FooterDialogContent should match snapshot with doc=rechtliches and lang
 </div>
 `;
 
-exports[`FooterDialogContent uses default  properties 1`] = `
+exports[`LegalLines uses default  properties 1`] = `
 <div
   className="tm-imprint"
 >

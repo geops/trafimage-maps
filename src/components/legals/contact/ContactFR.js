@@ -1,6 +1,6 @@
 import React from 'react';
 
-function KontaktIT() {
+function ContactFR() {
   return (
     <div className="tm-imprint">
       <p>
@@ -30,4 +30,4 @@ function KontaktIT() {
   );
 }
 
-export default KontaktIT();
+export default ContactFR();

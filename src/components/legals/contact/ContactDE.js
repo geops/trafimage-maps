@@ -1,25 +1,25 @@
 import React from 'react';
 
-function KontaktEN() {
+function ContactDE() {
   return (
     <div className="tm-imprint">
       <p>
-        Do you have any questions about our maps and plans or suggestions for
-        improvement? Or would you like to point out any errors? If so, please
-        contact us.
+        Haben Sie Fragen, Verbesserungsvorschläge, Hinweise auf Unstimmigkeiten
+        oder Interesse an Karten und Plänen? Dann nehmen Sie bitte mit uns
+        Kontakt auf!
       </p>
       <p>
         <b>SBB AG</b>
         <br />
-        Infrastructure – Installations and Technology – Technology Operation
-        Center – Technical Management
+        Infrastruktur – Anlagen und Technologie – Operation Center Technik –
+        Technical Management
         <br />
         Fachbus Trafimage
         <br />
         Poststrasse 6<br />
         3072 Ostermundingen
         <br />
-        Switzerland
+        Schweiz
       </p>
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
@@ -31,4 +31,4 @@ function KontaktEN() {
   );
 }
 
-export default KontaktEN();
+export default ContactDE();

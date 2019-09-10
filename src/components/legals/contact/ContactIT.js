@@ -1,17 +1,16 @@
 import React from 'react';
 
-function KontaktDE() {
+function ContactIT() {
   return (
     <div className="tm-imprint">
       <p>
-        Haben Sie Fragen, Verbesserungsvorschläge, Hinweise auf Unstimmigkeiten
-        oder Interesse an Karten und Plänen? Dann nehmen Sie bitte mit uns
-        Kontakt auf!
+        Avete domande, proposte di miglioramento, segnalazioni di inesattezze o
+        siete interessati.
       </p>
       <p>
-        <b>SBB AG</b>
+        <b>FFS SA</b>
         <br />
-        Infrastruktur – Anlagen und Technologie – Operation Center Technik –
+        Infrastruttura – Impianti e tecnologia – Operation Center Tecnica –
         Technical Management
         <br />
         Fachbus Trafimage
@@ -19,16 +18,16 @@ function KontaktDE() {
         Poststrasse 6<br />
         3072 Ostermundingen
         <br />
-        Schweiz
+        Svizzera
       </p>
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
+        <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
         <br />
       </p>
     </div>
   );
 }
 
-export default KontaktDE();
+export default ContactIT();

@@ -13,7 +13,7 @@ import LayerService from 'react-spatial/LayerService';
 import ActionLink from 'react-spatial/components/ActionLink';
 import Dialog from 'react-spatial/components/Dialog';
 import { FaInfo } from 'react-icons/fa';
-import FooterDialogContent from '../legals/FooterDialogContent';
+import LegalLines from '../legals/LegalLines';
 
 import { setLanguage, setProjection } from '../../model/app/actions';
 import './Footer.scss';
@@ -47,7 +47,7 @@ const Footer = ({
   dispatchSetLanguage,
   dispatchSetProjection,
 }) => {
-  const [isOpen, setIsOpen] = useState(null);
+  const [open, setOpen] = useState(null);
 
   return (
     <RSFooter className="wkp-footer">
@@ -58,29 +58,29 @@ const Footer = ({
         />
 
         <div className="wkp-impressum">
-          <ActionLink onClick={() => setIsOpen('Kontakt')}>
+          <ActionLink onClick={() => setOpen('Kontakt')}>
             {t('Kontakt')}
           </ActionLink>
-          <ActionLink onClick={() => setIsOpen('Impressum')}>
+          <ActionLink onClick={() => setOpen('Impressum')}>
             {t('Impressum')}
           </ActionLink>
-          <ActionLink onClick={() => setIsOpen('Rechtliches')}>
+          <ActionLink onClick={() => setOpen('Rechtliches')}>
             {t('Rechtliches')}
           </ActionLink>
 
           <Dialog
             title={
               <div>
-                <FaInfo /> {t(isOpen)}
+                <FaInfo /> {t(open)}
               </div>
             }
             classNameChildren="tm-dialog-content"
-            onClose={() => setIsOpen(null)}
-            isOpen={isOpen}
+            onClose={() => setOpen(null)}
+            isOpen={open}
             isModal
           >
-            <FooterDialogContent
-              doc={isOpen ? isOpen.toLowerCase() : null}
+            <LegalLines
+              doc={open ? open.toLowerCase() : null}
               language={language}
             />
           </Dialog>

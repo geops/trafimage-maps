@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 
-import KontaktDE from './kontakt/KontaktDE';
-import KontaktFR from './kontakt/KontaktFR';
-import KontaktIT from './kontakt/KontaktIT';
-import KontaktEN from './kontakt/KontaktEN';
+import ContactDE from './contact/ContactDE';
+import ContactFR from './contact/ContactFR';
+import ContactIT from './contact/ContactIT';
+import ContactEN from './contact/ContactEN';
 
-import LegalDE from './rechtliches/LegalDE';
-import LegalFR from './rechtliches/LegalFR';
-import LegalIT from './rechtliches/LegalIT';
-import LegalEN from './rechtliches/LegalEN';
+import LegalDE from './legal/LegalDE';
+import LegalFR from './legal/LegalFR';
+import LegalIT from './legal/LegalIT';
+import LegalEN from './legal/LegalEN';
 
 import ImprintDE from './impressum/ImprintDE';
 import ImprintEN from './impressum/ImprintEN';
@@ -16,10 +16,10 @@ import ImprintFR from './impressum/ImprintFR';
 import ImprintIT from './impressum/ImprintIT';
 
 const kontakt = {
-  de: KontaktDE,
-  fr: KontaktFR,
-  it: KontaktIT,
-  en: KontaktEN,
+  de: ContactDE,
+  fr: ContactFR,
+  it: ContactIT,
+  en: ContactEN,
 };
 
 const rechtliches = {
@@ -52,11 +52,11 @@ const defaultProps = {
   language: 'de',
 };
 
-const FooterDialogContent = ({ language, doc }) => {
+const LegalLines = ({ language, doc }) => {
   return docs[doc][language];
 };
 
-FooterDialogContent.propTypes = propTypes;
-FooterDialogContent.defaultProps = defaultProps;
+LegalLines.propTypes = propTypes;
+LegalLines.defaultProps = defaultProps;
 
-export default FooterDialogContent;
+export default LegalLines;
