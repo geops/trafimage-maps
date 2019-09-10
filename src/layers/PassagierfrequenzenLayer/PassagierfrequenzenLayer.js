@@ -21,6 +21,10 @@ class PassagierfrequenzenLayer extends VectorLayer {
       name,
       key,
       olLayer,
+      properties: {
+        hasInfos: true,
+        description: 'ch.sbb.bahnhoffrequenzen-desc',
+      },
     });
 
     this.styleCache = {};
