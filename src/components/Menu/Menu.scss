@@ -4,36 +4,31 @@
   left: 10px;
   width: 371px;
   z-index: 2;
+}
 
-  .wkp-menu {
-    border-width: 2px;
-    background: white;
-    border-style: solid;
-    border-color: #666;
+.wkp-menu {
+  border-width: 2px;
+  background: white;
+  border-style: solid;
+  border-color: #666;
+  max-height: 1000px;
+  margin-top: 5px;
+  overflow: hidden;
+
+  .wkp-menu-item {
+    border: none;
+  }
+
+  .wkp-menu-title {
+    display: flex;
+    align-items: center;
+  }
+
+  .wkp-menu-body {
+    min-width: 250px;
     max-height: 1000px;
-    margin-top: 5px;
-    overflow: hidden;
-
-    .wkp-menu-title {
-      display: flex;
-      align-items: center;
-    }
-
-    .wkp-menu-body {
-      min-width: 250px;
-      max-height: 1000px;
-      border-top: 1px solid #eee;
-      overflow-y: auto;
-      padding: 5px 0 0 0;
-
-      .rt-tracker-control {
-        padding: 15px 10px 0 10px;
-      }
-    }
-
-    &.closed {
-      border-width: 0;
-    }
+    overflow-y: auto;
+    padding: 5px 0 0 0;
   }
 }
 

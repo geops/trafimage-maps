@@ -116,21 +116,22 @@ class Menu extends Component {
     /* eslint-disable react/no-array-index-key */
     return (
       <div className="wkp-menu-wrapper">
-        <MenuHeader
-          title={t(activeTopic.name)}
-          info={info}
-          headerLayerNames={menuLayers.map(l => l.getName())}
-          isOpen={menuOpen}
-          onToggle={() => dispatchSetMenuOpen(!menuOpen)}
-        />
-
-        <div className={`wkp-menu wkp-topics ${menuOpen ? '' : 'closed'}`}>
+        <div className="wkp-menu">
+          <MenuHeader
+            title={t(activeTopic.name)}
+            info={info}
+            headerLayerNames={menuLayers.map(l => l.getName())}
+            isOpen={menuOpen}
+            onToggle={() => dispatchSetMenuOpen(!menuOpen)}
+          />
           <Collapsible isCollapsed={!menuOpen}>
             <div className="wkp-menu-body">
               {topics.map(topic => (
-                <div key={topic.key}>
-                  <TopicMenu layerService={layerService} topic={topic} />
-                </div>
+                <TopicMenu
+                  key={topic.key}
+                  layerService={layerService}
+                  topic={topic}
+                />
               ))}
             </div>
             <ShareMenu map={map} />

@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import Map from 'ol/Map';
 import { FaShareAlt } from 'react-icons/fa';
 import Share from '../Share';
-import MenuHeader from './MenuHeader';
-import Collapsible from '../Collapsible';
-import './ShareMenu.scss';
+import MenuItem from './MenuItem';
 
 const propTypes = {
   map: PropTypes.instanceOf(Map).isRequired,
@@ -15,26 +13,20 @@ const propTypes = {
 const defaultProps = {};
 
 const ShareMenu = ({ map }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState();
   const { t } = useTranslation();
   return (
-    <div className="wkp-share-menu">
-      <MenuHeader
-        title={
-          <>
-            <FaShareAlt />
-            <span>{t('Teilen')}</span>
-          </>
-        }
-        className="wkp-share-header"
-        headerLayerNames={t('Teilen')}
-        isOpen={menuOpen}
-        onToggle={() => setMenuOpen(!menuOpen)}
-      />
-      <Collapsible isCollapsed={!menuOpen}>
-        <Share map={map} />
-      </Collapsible>
-    </div>
+    <MenuItem
+      open
+      className="wkp-share-menu"
+      title={t('Teilen')}
+      icon={<FaShareAlt />}
+      map={map}
+      collapsed={collapsed}
+      onCollapseToggle={c => setCollapsed(c)}
+    >
+      <Share map={map} />
+    </MenuItem>
   );
 };
 

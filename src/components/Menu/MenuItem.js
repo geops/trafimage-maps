@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import Map from 'ol/Map';
-import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
-
+import MenuItemHeader from './MenuItemHeader';
+import Collapsible from '../Collapsible';
 import { transitiondelay } from '../../Globals.scss';
 import './MenuItem.scss';
 
@@ -32,7 +32,7 @@ class MenuItem extends Component {
     super(props);
 
     const { map } = this.props;
-    this.bodyElementRef = null;
+    this.bodyElementRef = React.createRef();
 
     this.state = {
       menuHeight: null,
@@ -59,10 +59,12 @@ class MenuItem extends Component {
   updateMenuHeight() {
     const { map } = this.props;
     let menuHeight;
-
-    if (this.bodyElementRef) {
+    if (
+      this.bodyElementRef.current &&
+      this.bodyElementRef.current.ref.current
+    ) {
       const mapBottom = map.getTarget().getBoundingClientRect().bottom;
-      const elemRect = this.bodyElementRef.getBoundingClientRect();
+      const elemRect = this.bodyElementRef.current.ref.current.getBoundingClientRect();
       menuHeight = mapBottom - elemRect.top - 35;
     }
 
@@ -81,34 +83,23 @@ class MenuItem extends Component {
     } = this.props;
 
     const { menuHeight } = this.state;
+    console.log(menuHeight);
 
     return (
-      <div className={`wkp-menu ${className} ${open ? '' : 'closed'}`}>
-        <div
-          className="wkp-menu-title"
-          role="button"
-          tabIndex={0}
-          onClick={() => onCollapseToggle(!collapsed)}
-          onKeyPress={e => e.which === 13 && onCollapseToggle(!collapsed)}
-        >
-          <div className="wkp-menu-title-left">
-            <div className="wkp-menu-title-icon">{icon}</div>
-            {title}
-          </div>
-
-          <div className="wkp-menu-title-toggler">
-            {collapsed ? <FaAngleDown /> : <FaAngleUp />}
-          </div>
-        </div>
-        <div
-          className={`wkp-menu-body ${collapsed ? 'collapsed' : ''}`}
-          style={{ maxHeight: collapsed ? 0 : menuHeight }}
-          ref={e => {
-            this.bodyElementRef = e;
-          }}
+      <div className={`wkp-menu-item ${className} ${open ? '' : 'closed'}`}>
+        <MenuItemHeader
+          icon={icon}
+          title={title}
+          isOpen={!collapsed}
+          onToggle={() => onCollapseToggle(!collapsed)}
+        />
+        <Collapsible
+          isCollapsed={collapsed}
+          maxHeight={menuHeight}
+          ref={this.bodyElementRef}
         >
           {children}
-        </div>
+        </Collapsible>
       </div>
     );
   }
