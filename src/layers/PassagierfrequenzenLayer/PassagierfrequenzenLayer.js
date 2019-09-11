@@ -29,12 +29,14 @@ class PassagierfrequenzenLayer extends VectorLayer {
 
     this.styleCache = {};
 
-    this.url = `${CONF.geoserverUrl}?`;
+    this.url = `${CONF.geoserverCachedUrl}?`;
     this.urlParams = {
       service: 'WFS',
       version: '1.0.0',
       request: 'GetFeature',
-      typeName: 'trafimage:passagierfrequenzen',
+      layer: 'passagierfrequenzen',
+      workspace: 'trafimage',
+      geoserver: 'wkp',
     };
     this.olLayer.setStyle((f, r) => this.styleFunction(f, r));
     this.olLayer.getSource().setLoader(this.loader.bind(this));
