@@ -132,7 +132,7 @@ const defaultProps = {
     baseLayerToggler: false,
   },
   baseLayers: null,
-  popupComponents: null,
+  popupComponents: {},
   menuComponents: [],
   projection: 'EPSG:3857',
   layers: null,
