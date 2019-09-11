@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import './Collapsible.scss';
@@ -22,6 +22,8 @@ const defaultProps = {
   type: 'vertical',
 };
 
+let timeout;
+
 const Collapsible = ({
   children,
   className,
@@ -34,15 +36,18 @@ const Collapsible = ({
   const [isHidden, setHidden] = useState(false);
   const style = {};
 
+  useEffect(() => {
+    if (isHidden !== isCollapsed) {
+      window.clearTimeout(timeout);
+      const duration = isCollapsed ? transitionDuration : 0;
+      timeout = window.setTimeout(() => setHidden(isCollapsed), duration);
+    }
+  });
+
   if (type === 'horizontal') {
     style.maxWidth = isCollapsed ? 0 : maxWidth;
   } else {
     style.maxHeight = isCollapsed ? 0 : maxHeight;
-  }
-
-  if (isHidden !== isCollapsed) {
-    const duration = isCollapsed ? transitionDuration : 0;
-    window.setTimeout(() => setHidden(isCollapsed), duration);
   }
 
   return (
