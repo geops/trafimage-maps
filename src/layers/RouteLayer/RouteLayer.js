@@ -47,7 +47,7 @@ class RouteLayer extends VectorLayer {
     };
 
     // Route url
-    this.url = options.url || 'https://api.geops.io/routing';
+    this.url = options.url || 'https://api.geops.io/routing/v1';
 
     // Function for route styling
     this.routeStyleFunction = options.routeStyleFunction || (() => {});
