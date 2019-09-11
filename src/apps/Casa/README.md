@@ -44,9 +44,7 @@ zoneLayer.loadZones([
       zoneCode: 170,
     }],
   },
-]).then((f) => {
-  zoneLayer.zoomToZones();
-});
+]);
 
 zoneLayer.onClick(f => {
     console.log('Clicked', f);
@@ -62,11 +60,33 @@ const routeLayer = new RouteLayer({
 // Visualize a route on the map.
 routeLayer.loadRoutes([
   {
-    uicFrom: 8501000,
-    uicTo: 8500010,
+    uicFrom: 8502024,
+    uicTo: 8502042,
     mot: 'rail',
   },
-]);
+  {
+    uicFrom: 8502028,
+    uicTo: 8502021,
+    mot: 'rail',
+  },
+  {
+    uicFrom: 8502028,
+    uicTo: 8505000,
+    mot: 'rail',
+  },
+  {
+    uicFrom: 8508450,
+    uicTo: 8589801,
+    mot: 'bus',
+  },
+  {
+    uicFrom: 8589801,
+    uicTo: 8589775,
+    mot: 'bus',
+  },
+]).then((f) => {
+  routeLayer.zoomToRoute();
+});
 
 routeLayer.onClick(f => {
     console.log('Clicked', f);
