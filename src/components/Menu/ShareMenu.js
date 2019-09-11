@@ -1,67 +1,32 @@
 import React, { useState } from 'react';
-import { compose } from 'lodash/fp';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FiMail } from 'react-icons/fi';
-import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
+import Map from 'ol/Map';
+import Share from '../Share';
 import MenuHeader from './MenuHeader';
+import Collapsible from '../Collapsible';
 
 const propTypes = {
-  t: PropTypes.func,
   map: PropTypes.instanceOf(Map).isRequired,
 };
 
-const defaultProps = {
-  t: p => p,
-};
+const defaultProps = {};
 
-const socialShareConfig = [
-  {
-    url: '//www.facebook.com/sharer.php?u={url}',
-    title: 'Auf Facebook teilen.',
-    icon: <TiSocialFacebook focusable={false} />,
-  },
-  {
-    url: '//twitter.com/intent/tweet?url={url}',
-    title: 'Twittern.',
-    icon: <TiSocialTwitter focusable={false} />,
-  },
-  {
-    url: 'mailto:?body={url}',
-    title: 'Per Email teilen.',
-    icon: <FiMail focusable={false} />,
-    className: 'ta-mail-icon',
-  },
-];
-
-const ShareMenu = ({ t, map }) => {
-  const [shareMenuOpen, setShareMenuOpen] = useState(false);
-
-  const config = [...socialShareConfig];
-
+const ShareMenu = ({ map }) => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { t } = useTranslation();
   return (
     <>
       <MenuHeader
         title={t('Teilen')}
         className="wkp-share-header"
         headerLayerNames={t('Teilen')}
-        isOpen={shareMenuOpen}
-        onToggle={() => setShareMenuOpen(!shareMenuOpen)}
+        isOpen={menuOpen}
+        onToggle={() => setMenuOpen(!menuOpen)}
       />
-      <div className={`wkp-share-wrapper ${shareMenuOpen ? '' : 'closed'}`}>
-        {config.map(conf => (
-          <div
-            className={`tm-share-menu-icon ${conf.className || ''}`}
-            key={conf.title}
-          >
-            {conf.icon}
-          </div>
-        ))}
-        <CanvasSaveButton title={t('Karte als Bild speichern')} map={map}>
-          <TiImage focusable={false} />
-        </CanvasSaveButton>
-      </div>
+      <Collapsible isCollapsed={!menuOpen}>
+        <Share map={map} />
+      </Collapsible>
     </>
   );
 };
@@ -69,4 +34,4 @@ const ShareMenu = ({ t, map }) => {
 ShareMenu.propTypes = propTypes;
 ShareMenu.defaultProps = defaultProps;
 
-export default compose(withTranslation())(ShareMenu);
+export default React.memo(ShareMenu);
