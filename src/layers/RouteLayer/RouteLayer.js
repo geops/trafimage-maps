@@ -56,8 +56,6 @@ class RouteLayer extends VectorLayer {
    * @returns {array<ol.feature>}
    */
   fetchRouteForMot(viaPoints, mot) {
-    this.clear();
-
     this.abortController = new AbortController();
 
     const via = viaPoints.map(v => `!${v}`);
@@ -78,7 +76,6 @@ class RouteLayer extends VectorLayer {
       .then(data => {
         const features = format.readFeatures(data);
         features.forEach(f => f.set('mot', mot));
-        this.olLayer.getSource().addFeatures(features);
         return features;
       })
       .catch(() => {
@@ -115,12 +112,13 @@ class RouteLayer extends VectorLayer {
   loadRoutes(sequences) {
     let via = [];
     let mot;
+    const routePromises = [];
 
     for (let i = 0; i < sequences.length; i += 1) {
       mot = mot || sequences[i].mot;
 
       if (mot !== sequences[i].mot) {
-        this.fetchRouteForMot(via, mot);
+        routePromises.push(this.fetchRouteForMot(via, mot));
         ({ mot } = sequences[i]);
         via = [sequences[i].uicFrom, sequences[i].uicTo];
       } else {
@@ -128,7 +126,12 @@ class RouteLayer extends VectorLayer {
       }
     }
 
-    return this.fetchRouteForMot(via, mot);
+    routePromises.push(this.fetchRouteForMot(via, mot));
+
+    return Promise.all(routePromises).then(data => {
+      this.olLayer.getSource().clear();
+      data.forEach(features => this.olLayer.getSource().addFeatures(features));
+    });
   }
 
   /**
