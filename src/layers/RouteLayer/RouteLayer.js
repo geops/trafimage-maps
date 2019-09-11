@@ -17,6 +17,11 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  *   Default is true.
  * @param {string} [options.projection] Layer projection.
  *   Default is webmercator ('EPSG:3857')
+ * @param {Object} [options.motColors] Mapping of colors for different mots.
+ *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
+ * @param [options.routeStyleFunction] Function called with the route properties
+ *   and a boolean indicating if the zone is selected.
+ *   The function should return the route color.
  */
 class RouteLayer extends VectorLayer {
   constructor(options = {}) {
@@ -31,15 +36,11 @@ class RouteLayer extends VectorLayer {
 
     this.projection = options.projection || 'EPSG:3857';
 
-    // Cache for storing route styles
-    this.routeStyleCache = {};
-
     // API key
     this.apiKey = options.apiKey;
 
     // Colors for differtent modes of transportation
-    this.motColors = {
-      train: '#e3000b',
+    this.motColors = options.motColors || {
       rail: '#e3000b',
       bus: '#ffed00',
       ship: '#0074be',
@@ -47,10 +48,32 @@ class RouteLayer extends VectorLayer {
 
     // Route url
     this.url = options.url || 'https://api.geops.io/routing';
+
+    // Function for route styling
+    this.routeStyleFunction = options.routeStyleFunction || (() => {});
+
+    this.selectedRouteIds = [];
+
+    this.onClick(features => {
+      const [feature] = features;
+
+      if (feature) {
+        const routeId = feature.get('routeId');
+        const idx = this.selectedRouteIds.indexOf(routeId);
+        if (idx > -1) {
+          this.selectedRouteIds.splice(idx, 1);
+        } else {
+          this.selectedRouteIds.push(routeId);
+        }
+
+        this.olLayer.changed();
+      }
+    });
   }
 
   /**
    * Gettint the Mot-features on specific route.
+   * @private
    * @param {Object} viaPoints Route Informations
    * @param {String} mot ask for specific Route
    * @returns {array<ol.feature>}
@@ -86,17 +109,17 @@ class RouteLayer extends VectorLayer {
 
   routeStyle(feature) {
     const mot = feature.get('mot');
+    const isSelected = this.selectedRouteIds.includes(feature.get('routeId'));
+    const color =
+      this.routeStyleFunction(feature.getProperties(), isSelected) ||
+      this.motColors[mot];
 
-    if (!this.routeStyleCache[mot]) {
-      this.routeStyleCache[mot] = new Style({
-        stroke: new StrokeStyle({
-          width: 5,
-          color: this.motColors[mot] || 'green',
-        }),
-      });
-    }
-
-    return this.routeStyleCache[mot];
+    return new Style({
+      stroke: new StrokeStyle({
+        width: 5,
+        color: color || 'green',
+      }),
+    });
   }
 
   /**
@@ -130,7 +153,10 @@ class RouteLayer extends VectorLayer {
 
     return Promise.all(routePromises).then(data => {
       this.olLayer.getSource().clear();
-      data.forEach(features => this.olLayer.getSource().addFeatures(features));
+      for (let i = 0; i < data.length; i += 1) {
+        data[i].forEach(feat => feat.set('routeId', i));
+        this.olLayer.getSource().addFeatures(data[i]);
+      }
     });
   }
 
