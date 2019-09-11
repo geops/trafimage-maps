@@ -109,9 +109,6 @@ const elements = {
     apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     layers={[zoneLayer, routeLayer]}
     elements={elements}
-    popupComponents={{
-      'ch.sbb.casa.routeLayer': 'CasaRoutePopup',
-    }}
   />
 </div>;
 ```
