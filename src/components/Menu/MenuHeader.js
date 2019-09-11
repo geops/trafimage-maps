@@ -11,7 +11,7 @@ import './MenuHeader.scss';
 const propTypes = {
   className: PropTypes.string,
   onToggle: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   info: PropTypes.string,
   isOpen: PropTypes.bool,
   t: PropTypes.func.isRequired,
@@ -37,9 +37,7 @@ const MenuHeader = ({ className, title, info, isOpen, onToggle, t }) => (
       </div>
       <span className="wkp-menu-toggle-text">{t('Menü')}</span>
     </div>
-    <div className={`wkp-menu-title-main ${!info ? '' : 'large'}`}>
-      {t(title)}
-    </div>
+    <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{title}</div>
     <div className="wkp-menu-toggler">
       {isOpen ? <FaAngleUp /> : <FaAngleDown />}
     </div>

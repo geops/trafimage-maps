@@ -117,7 +117,7 @@ class Menu extends Component {
     return (
       <div className="wkp-menu-wrapper">
         <MenuHeader
-          title={activeTopic.name}
+          title={t(activeTopic.name)}
           info={info}
           headerLayerNames={menuLayers.map(l => l.getName())}
           isOpen={menuOpen}
