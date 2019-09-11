@@ -49,6 +49,16 @@ class TopicMenu extends PureComponent {
 
   componentDidMount() {
     this.listenLayerServiceEvent();
+
+    const { layerService } = this.props;
+    this.setState({
+      currentBaseLayerKey:
+        layerService &&
+        layerService
+          .getBaseLayers()
+          .find(l => l.getVisible())
+          .getKey(),
+    });
   }
 
   componentDidUpdate(prevProps) {

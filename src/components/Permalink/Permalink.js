@@ -41,6 +41,17 @@ class Permalink extends PureComponent {
       ...initialState,
     };
 
+    const getUrlParamKey = (params, regex) => {
+      return Object.keys(params).find(key => {
+        return regex.test(key);
+      });
+    };
+
+    const getUrlParamVal = param => {
+      // Remove spaces from value.
+      return param ? param.replace(/\s+/g, '') : undefined;
+    };
+
     const z = parseInt(parameters.z, 10);
     const x = parseFloat(parameters.x);
     const y = parseFloat(parameters.y);
@@ -52,6 +63,23 @@ class Permalink extends PureComponent {
     if (z) {
       dispatchSetZoom(z);
     }
+
+    const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
+    const routeFilterKey = getUrlParamKey(parameters, /tripnumber/i);
+    const operatorFilterKey = getUrlParamKey(parameters, /operator/i);
+
+    const lineFilter =
+      lineFilterKey && getUrlParamVal(parameters[lineFilterKey]);
+    const routeFilter =
+      routeFilterKey && getUrlParamVal(parameters[routeFilterKey]);
+    const operatorFilter =
+      operatorFilterKey && getUrlParamVal(parameters[operatorFilterKey]);
+
+    this.setState({
+      [lineFilterKey]: lineFilter,
+      [routeFilterKey]: routeFilter,
+      [operatorFilterKey]: operatorFilter,
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -66,7 +94,12 @@ class Permalink extends PureComponent {
     const { history, layerService, map } = this.props;
 
     return (
-      <RSPermalink map={map} layerService={layerService} history={history} />
+      <RSPermalink
+        params={{ ...this.state }}
+        map={map}
+        layerService={layerService}
+        history={history}
+      />
     );
   }
 }
