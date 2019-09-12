@@ -32,33 +32,24 @@ const defaultProps = {
   initialState: {},
 };
 
-const LINE_FILTER = 'publishedlinename';
-const ROUTE_FILTER = 'tripnumber';
-const OPERATOR_FILTER = 'operator';
-
-const getUrlParam = param => {
-  return param ? param.replace(/\s+/g, '') : undefined;
-};
-
 class Permalink extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   componentDidMount() {
     const { dispatchSetZoom, dispatchSetCenter, initialState } = this.props;
 
-    const lowerPermalinkParams = {};
-    const permalinkParams = qs.parse(window.location.search);
-    Object.keys(permalinkParams).forEach(key => {
-      lowerPermalinkParams[key.toLowerCase()] = permalinkParams[key];
-    });
-
-    // Permalink has the priority over the initial state.
     const parameters = {
+      ...qs.parse(window.location.search),
       ...initialState,
-      ...lowerPermalinkParams,
+    };
+
+    const getUrlParamKey = (params, regex) => {
+      return Object.keys(params).find(key => {
+        return regex.test(key);
+      });
+    };
+
+    const getUrlParamVal = param => {
+      // Remove spaces from value.
+      return param ? param.replace(/\s+/g, '') : undefined;
     };
 
     const z = parseInt(parameters.z, 10);
@@ -73,14 +64,21 @@ class Permalink extends PureComponent {
       dispatchSetZoom(z);
     }
 
-    const lineFilter = getUrlParam(parameters[LINE_FILTER]);
-    const routeFilter = getUrlParam(parameters[ROUTE_FILTER]);
-    const operatorFilter = getUrlParam(parameters[OPERATOR_FILTER]);
+    const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
+    const routeFilterKey = getUrlParamKey(parameters, /tripnumber/i);
+    const operatorFilterKey = getUrlParamKey(parameters, /operator/i);
+
+    const lineFilter =
+      lineFilterKey && getUrlParamVal(parameters[lineFilterKey]);
+    const routeFilter =
+      routeFilterKey && getUrlParamVal(parameters[routeFilterKey]);
+    const operatorFilter =
+      operatorFilterKey && getUrlParamVal(parameters[operatorFilterKey]);
 
     this.setState({
-      [LINE_FILTER]: lineFilter,
-      [ROUTE_FILTER]: routeFilter,
-      [OPERATOR_FILTER]: operatorFilter,
+      [lineFilterKey]: lineFilter,
+      [routeFilterKey]: routeFilter,
+      [operatorFilterKey]: operatorFilter,
     });
   }
 
@@ -97,8 +95,8 @@ class Permalink extends PureComponent {
 
     return (
       <RSPermalink
-        map={map}
         params={{ ...this.state }}
+        map={map}
         layerService={layerService}
         history={history}
       />

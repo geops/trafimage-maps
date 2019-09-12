@@ -95,7 +95,7 @@ class ZoneLayer extends VectorLayer {
 
     this.apiKey = options.apiKey;
 
-    this.url = options.url || 'https://api.geops.io/casa-fare-network';
+    this.url = options.url || 'https://api.geops.io/casa-fare-network/v1';
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
@@ -131,6 +131,7 @@ class ZoneLayer extends VectorLayer {
 
   /**
    * Get zone based on params
+   * @private
    * @param {Object} params
    */
   fetchZones(params = {}) {
@@ -222,6 +223,7 @@ class ZoneLayer extends VectorLayer {
 
   /**
    * Internal function for extracting a feature's style at a given resolution
+   * @private
    * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
    * @param {number} resolution
    * @returns {ol.style[]}
@@ -277,15 +279,6 @@ class ZoneLayer extends VectorLayer {
         }),
       }),
     ];
-  }
-
-  /**
-   * Initialize the layer and listen to feature clicks.
-   * @param {ol.map} map {@link https://openlayers.org/en/latest/apidoc/module-ol_Map-Map.html ol/map}
-   */
-  init(map) {
-    super.init(map);
-    this.map = map;
   }
 }
 

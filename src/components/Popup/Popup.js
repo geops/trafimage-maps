@@ -15,14 +15,13 @@ import './Popup.scss';
 const propTypes = {
   t: PropTypes.func.isRequired,
   clickedFeatureInfo: PropTypes.shape(),
-  popupComponents: PropTypes.objectOf(PropTypes.string),
+  popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   clickedFeatureInfo: null,
-  popupComponents: null,
 };
 
 class Popup extends Component {

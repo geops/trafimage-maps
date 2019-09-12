@@ -44,9 +44,7 @@ zoneLayer.loadZones([
       zoneCode: 170,
     }],
   },
-]).then((f) => {
-  zoneLayer.zoomToZones();
-});
+]);
 
 zoneLayer.onClick(f => {
     console.log('Clicked', f);
@@ -57,16 +55,42 @@ const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   // Demo apiKey. Please replace with your own apiKey.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  routeStyleFunction: (routeProps, isSelected) => {
+    // return undefined to use default color (see param motColors)
+    return isSelected ? 'blue' : undefined;
+  },
 });
 
 // Visualize a route on the map.
 routeLayer.loadRoutes([
   {
-    uicFrom: 8501000,
-    uicTo: 8500010,
+    uicFrom: 8502024,
+    uicTo: 8502042,
     mot: 'rail',
   },
-]);
+  {
+    uicFrom: 8502028,
+    uicTo: 8502021,
+    mot: 'rail',
+  },
+  {
+    uicFrom: 8502028,
+    uicTo: 8505000,
+    mot: 'rail',
+  },
+  {
+    uicFrom: 8508450,
+    uicTo: 8589801,
+    mot: 'bus',
+  },
+  {
+    uicFrom: 8589801,
+    uicTo: 8589775,
+    mot: 'bus',
+  },
+]).then((f) => {
+  routeLayer.zoomToRoute();
+});
 
 routeLayer.onClick(f => {
     console.log('Clicked', f);
@@ -85,9 +109,6 @@ const elements = {
     apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     layers={[zoneLayer, routeLayer]}
     elements={elements}
-    popupComponents={{
-      'ch.sbb.casa.routeLayer': 'CasaRoutePopup',
-    }}
   />
 </div>;
 ```

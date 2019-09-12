@@ -31,6 +31,23 @@ class Collapsible extends PureComponent {
     };
   }
 
+  componentDidUpdate() {
+    const { isCollapsed, transitionDuration } = this.props;
+    const { isHidden } = this.state;
+    if (isHidden !== isCollapsed) {
+      window.clearTimeout(this.timeout);
+      const duration = isCollapsed ? transitionDuration : 0;
+      this.timeout = window.setTimeout(
+        () => this.setState({ isHidden: isCollapsed }),
+        duration,
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    window.clearTimeout(this.timeout);
+  }
+
   render() {
     const {
       children,
