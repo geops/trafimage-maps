@@ -31,7 +31,6 @@ const AppRouter = () => (
                 mapControls: true,
                 popup: true,
                 baseLayerToggler: true,
-                share: true,
               }}
               initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}

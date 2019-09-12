@@ -2,7 +2,7 @@
 
 exports[`AppRouter should match snapshot 1`] = `
 <div
-  className="tm-app header footer menu permalink mapControls popup baseLayerToggler share"
+  className="tm-app header footer menu permalink mapControls popup baseLayerToggler"
 >
   <div
     className="tm-map"

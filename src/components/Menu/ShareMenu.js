@@ -13,7 +13,7 @@ const propTypes = {
 const defaultProps = {};
 
 const ShareMenu = ({ map }) => {
-  const [collapsed, setCollapsed] = useState();
+  const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   return (
     <MenuItem

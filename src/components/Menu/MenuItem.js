@@ -83,7 +83,6 @@ class MenuItem extends Component {
     } = this.props;
 
     const { menuHeight } = this.state;
-    console.log(menuHeight);
 
     return (
       <div className={`wkp-menu-item ${className} ${open ? '' : 'closed'}`}>
