@@ -24,8 +24,6 @@ import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
 import MainDialog from '../MainDialog';
 import store, { getStore } from '../../model/store';
-
-import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
 
 const propTypes = {

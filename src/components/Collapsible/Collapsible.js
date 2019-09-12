@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import './Collapsible.scss';
-
 const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,

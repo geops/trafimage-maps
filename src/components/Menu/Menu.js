@@ -10,8 +10,6 @@ import MenuHeader from './MenuHeader';
 import Collapsible from '../Collapsible';
 import { setMenuOpen } from '../../model/app/actions';
 
-import './Menu.scss';
-
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,

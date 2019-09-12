@@ -4,9 +4,7 @@ import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import Map from 'ol/Map';
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa';
-
-import { transitiondelay } from '../../Globals.scss';
-import './MenuItem.scss';
+import { transitiondelay } from '../../themes/default/variables.scss';
 
 const propTypes = {
   children: PropTypes.node,

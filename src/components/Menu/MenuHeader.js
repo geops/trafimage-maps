@@ -6,8 +6,6 @@ import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import menuOpenImg from '../../img/menu_open.png';
 import menuClosedImg from '../../img/menu_closed.png';
 
-import './MenuHeader.scss';
-
 const propTypes = {
   onToggle: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,

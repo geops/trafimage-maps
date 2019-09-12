@@ -15,8 +15,6 @@ import {
   setLayerSelectedForInfos,
 } from '../../model/app/actions';
 
-import './TopicMenu.scss';
-
 const propTypes = {
   topic: PropTypes.shape().isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
