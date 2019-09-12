@@ -9,6 +9,7 @@ import Select from 'react-spatial/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from 'react-spatial/components/Button';
 import Layer from 'react-spatial/layers/Layer';
+import Collapsible from '../Collapsible';
 import {
   setActiveTopic,
   setLayerSelectedForInfos,
@@ -48,6 +49,16 @@ class TopicMenu extends PureComponent {
 
   componentDidMount() {
     this.listenLayerServiceEvent();
+
+    const { layerService } = this.props;
+    this.setState({
+      currentBaseLayerKey:
+        layerService &&
+        layerService
+          .getBaseLayers()
+          .find(l => l.getVisible())
+          .getKey(),
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -128,26 +139,28 @@ class TopicMenu extends PureComponent {
       layerService.getLayers()
     ) {
       layerTree = (
-        <LayerTree
-          isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
-          layerService={layerService}
-          t={t}
-          renderItemContent={(layer, layerTreeComp) => {
-            return (
-              <>
-                {layerTreeComp.renderItemContent(layer)}
-                {layer.get('hasInfos') && this.renderInfoButton(layer)}
-              </>
-            );
-          }}
-        />
+        <Collapsible isCollapsed={isCollapsed}>
+          <div className="wkp-layer-tree">
+            <LayerTree
+              isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
+              layerService={layerService}
+              t={t}
+              renderItemContent={(layer, layerTreeComp) => (
+                <>
+                  {layerTreeComp.renderItemContent(layer)}
+                  {layer.get('hasInfos') && this.renderInfoButton(layer)}
+                </>
+              )}
+            />
+          </div>
+        </Collapsible>
       );
     }
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
     return (
-      <div className={`wkp-topic-menu ${collapsed ? 'collapsed' : ''}`}>
+      <div className="wkp-topic-menu">
         <div
           className="wkp-topic-menu-item"
           role="button"

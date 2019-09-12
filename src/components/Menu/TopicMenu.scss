@@ -61,8 +61,7 @@
 
     .wkp-layer-tree {
       overflow: hidden;
-      max-height: 1000px;
-      margin: 0 10px 10px 35px;
+      margin: 5px 10px 10px 15px;
 
       .tm-layer-tree-item {
         color: #888;
@@ -97,15 +96,6 @@
         height: 34px;
         width: 285px;
         display: none;
-      }
-    }
-
-    &.collapsed {
-      .wkp-topic-content {
-        max-height: 0;
-        margin-top: 0;
-        margin-bottom: 0;
-        overflow: hidden;
       }
     }
   }

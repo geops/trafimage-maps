@@ -12,7 +12,6 @@
     background: white;
     border-style: solid;
     border-color: #666;
-    transition: $menu-transition;
     max-height: 1000px;
     margin-top: 5px;
     overflow: hidden;
@@ -27,20 +26,10 @@
       .rt-tracker-control {
         padding: 15px 10px 0 10px;
       }
-
-      &.collapsed {
-        border: 0;
-        max-height: 0;
-        transition: all 0.1s ease;
-        padding: 0 initial;
-      }
     }
 
     &.closed {
       border-width: 0;
-      border-top-width: 0;
-      max-height: 0;
-      transition: $menu-transition-closed;
     }
   }
 }
@@ -57,16 +46,6 @@
 
     .wkp-menu {
       border: 0;
-
-      &.closed {
-        padding: 0;
-        overflow: hidden;
-
-        div {
-          white-space: nowrap;
-          overflow: hidden;
-        }
-      }
 
       .wkp-menu-title {
         border-top: 1px solid #eee;
