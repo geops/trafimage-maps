@@ -107,6 +107,11 @@ class RouteLayer extends VectorLayer {
       });
   }
 
+  /**
+   * Returns the style of the given feature
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @returns {ol.style} get the feature's style function.
+   */
   routeStyle(feature) {
     const mot = feature.get('mot');
     const isSelected = this.selectedRouteIds.includes(feature.get('routeId'));

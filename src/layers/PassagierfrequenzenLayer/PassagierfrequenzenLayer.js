@@ -7,6 +7,13 @@ import OLGeoJSON from 'ol/format/GeoJSON';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
+/**
+ * Layer for passenger frequency.
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
+ * @class
+ * @params {Object} options
+ * @inheritdoc
+ */
 class PassagierfrequenzenLayer extends VectorLayer {
   constructor(options = {}) {
     const name = 'ch.sbb.bahnhoffrequenzen';
@@ -48,6 +55,12 @@ class PassagierfrequenzenLayer extends VectorLayer {
     });
   }
 
+  /**
+   * Create Style from feature and resolution
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} resolution
+   * @returns {Object|null}
+   */
   styleFunction(feature, resolution) {
     const vis = feature.get('visibility');
     const res = layerHelper.getDataResolution(resolution);
@@ -99,6 +112,9 @@ class PassagierfrequenzenLayer extends VectorLayer {
    *
    * This loader function is based on the loader example in
    * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
+   * @param {ol.extent} extent The desired extent {@link https://openlayers.org/en/latest/apidoc/module-ol_extent.html ol/extent}
+   * @param {number} resolution The desired resolution for the loaded map.
+   * @param {ol.proj} projection The desired projecition.
    */
   loader(extent, resolution, projection) {
     const proj = projection.getCode();
