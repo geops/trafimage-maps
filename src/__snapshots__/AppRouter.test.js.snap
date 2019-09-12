@@ -2,7 +2,7 @@
 
 exports[`AppRouter should match snapshot 1`] = `
 <div
-  className="tm-app header footer menu permalink mapControls popup baseLayerToggler"
+  className="tm-app header footer menu permalink mapControls popup baseLayerToggler share"
 >
   <div
     className="tm-map"
@@ -242,404 +242,400 @@ exports[`AppRouter should match snapshot 1`] = `
                   </option>
                 </select>
                 <div
-                  className="wkp-layer-tree"
+                  className=" wkp-collapsible-vertical"
+                  style={
+                    Object {
+                      "maxHeight": 1000,
+                    }
+                  }
                 >
                   <div
-                    className=" wkp-collapsible-vertical"
-                    style={
-                      Object {
-                        "maxHeight": 1000,
-                      }
-                    }
+                    className="wkp-layer-tree"
                   >
                     <div
-                      className="wkp-layer-tree"
+                      className="tm-layer-tree"
                     >
-                      <div
-                        className="tm-layer-tree"
-                      >
-                        <div>
-                          <div
-                            className="tm-layer-tree-item "
-                            style={
-                              Object {
-                                "paddingLeft": "0px",
-                              }
+                      <div>
+                        <div
+                          className="tm-layer-tree-item "
+                          style={
+                            Object {
+                              "paddingLeft": "0px",
                             }
+                          }
+                        >
+                          <label
+                            className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                            onKeyPress={[Function]}
+                            tabIndex={0}
                           >
-                            <label
-                              className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                              onKeyPress={[Function]}
-                              tabIndex={0}
-                            >
-                              <input
-                                checked={false}
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                tabIndex={-1}
-                                type="checkbox"
-                              />
-                              <span />
-                            </label>
-                            <div
-                              className="tm-layer-tree-toggle"
+                            <input
+                              checked={false}
+                              onChange={[Function]}
                               onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <div>
-                                ch.sbb.bahnhofplaene
-                              </div>
-                              <div
-                                className="tm-layer-tree-arrow tm-layer-tree-arrow-collapsed"
-                              />
-                            </div>
-                            <div
-                              className="wkp-info-bt"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <svg
-                                fill="currentColor"
-                                focusable={false}
-                                height="1em"
-                                stroke="currentColor"
-                                strokeWidth="0"
-                                style={
-                                  Object {
-                                    "color": undefined,
-                                  }
-                                }
-                                viewBox="0 0 512 512"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                />
-                              </svg>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div
-                            className="tm-layer-tree-item "
-                            style={
-                              Object {
-                                "paddingLeft": "0px",
-                              }
-                            }
-                          >
-                            <label
-                              className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                              onKeyPress={[Function]}
                               tabIndex={-1}
-                            >
-                              <input
-                                checked={false}
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                tabIndex={-1}
-                                type="checkbox"
-                              />
-                              <span />
-                            </label>
-                            <div
-                              className="tm-layer-tree-toggle"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <div>
-                                ch.sbb.bahnhoffrequenzen
-                              </div>
+                              type="checkbox"
+                            />
+                            <span />
+                          </label>
+                          <div
+                            className="tm-layer-tree-toggle"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div>
+                              ch.sbb.bahnhofplaene
                             </div>
                             <div
-                              className="wkp-info-bt"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <svg
-                                fill="currentColor"
-                                focusable={false}
-                                height="1em"
-                                stroke="currentColor"
-                                strokeWidth="0"
-                                style={
-                                  Object {
-                                    "color": undefined,
-                                  }
+                              className="tm-layer-tree-arrow tm-layer-tree-arrow-collapsed"
+                            />
+                          </div>
+                          <div
+                            className="wkp-info-bt"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <svg
+                              fill="currentColor"
+                              focusable={false}
+                              height="1em"
+                              stroke="currentColor"
+                              strokeWidth="0"
+                              style={
+                                Object {
+                                  "color": undefined,
                                 }
-                                viewBox="0 0 512 512"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                />
-                              </svg>
-                            </div>
+                              }
+                              viewBox="0 0 512 512"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              />
+                            </svg>
                           </div>
                         </div>
-                        <div>
-                          <div
-                            className="tm-layer-tree-item "
-                            style={
-                              Object {
-                                "paddingLeft": "0px",
-                              }
+                      </div>
+                      <div>
+                        <div
+                          className="tm-layer-tree-item "
+                          style={
+                            Object {
+                              "paddingLeft": "0px",
                             }
+                          }
+                        >
+                          <label
+                            className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                            onKeyPress={[Function]}
+                            tabIndex={-1}
                           >
-                            <label
-                              className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                              onKeyPress={[Function]}
+                            <input
+                              checked={false}
+                              onChange={[Function]}
+                              onClick={[Function]}
                               tabIndex={-1}
-                            >
-                              <input
-                                checked={false}
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                tabIndex={-1}
-                                type="checkbox"
-                              />
-                              <span />
-                            </label>
-                            <div
-                              className="tm-layer-tree-toggle"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <div>
-                                ch.sbb.netzkarte.buslinien
-                              </div>
-                            </div>
-                            <div
-                              className="wkp-info-bt"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <svg
-                                fill="currentColor"
-                                focusable={false}
-                                height="1em"
-                                stroke="currentColor"
-                                strokeWidth="0"
-                                style={
-                                  Object {
-                                    "color": undefined,
-                                  }
-                                }
-                                viewBox="0 0 512 512"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                />
-                              </svg>
+                              type="checkbox"
+                            />
+                            <span />
+                          </label>
+                          <div
+                            className="tm-layer-tree-toggle"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div>
+                              ch.sbb.bahnhoffrequenzen
                             </div>
                           </div>
-                        </div>
-                        <div>
                           <div
-                            className="tm-layer-tree-item "
-                            style={
-                              Object {
-                                "paddingLeft": "0px",
-                              }
-                            }
+                            className="wkp-info-bt"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
                           >
-                            <label
-                              className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                              onKeyPress={[Function]}
-                              tabIndex={0}
-                            >
-                              <input
-                                checked={false}
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                tabIndex={-1}
-                                type="checkbox"
-                              />
-                              <span />
-                            </label>
-                            <div
-                              className="tm-layer-tree-toggle"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <div>
-                                ch.sbb.puenktlichkeit
-                              </div>
-                              <div
-                                className="tm-layer-tree-arrow tm-layer-tree-arrow-collapsed"
-                              />
-                            </div>
-                            <div
-                              className="wkp-info-bt"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <svg
-                                fill="currentColor"
-                                focusable={false}
-                                height="1em"
-                                stroke="currentColor"
-                                strokeWidth="0"
-                                style={
-                                  Object {
-                                    "color": undefined,
-                                  }
+                            <svg
+                              fill="currentColor"
+                              focusable={false}
+                              height="1em"
+                              stroke="currentColor"
+                              strokeWidth="0"
+                              style={
+                                Object {
+                                  "color": undefined,
                                 }
-                                viewBox="0 0 512 512"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                />
-                              </svg>
-                            </div>
+                              }
+                              viewBox="0 0 512 512"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              />
+                            </svg>
                           </div>
                         </div>
-                        <div>
-                          <div
-                            className="tm-layer-tree-item "
-                            style={
-                              Object {
-                                "paddingLeft": "0px",
-                              }
+                      </div>
+                      <div>
+                        <div
+                          className="tm-layer-tree-item "
+                          style={
+                            Object {
+                              "paddingLeft": "0px",
                             }
+                          }
+                        >
+                          <label
+                            className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                            onKeyPress={[Function]}
+                            tabIndex={-1}
                           >
-                            <label
-                              className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                              onKeyPress={[Function]}
+                            <input
+                              checked={false}
+                              onChange={[Function]}
+                              onClick={[Function]}
                               tabIndex={-1}
-                            >
-                              <input
-                                checked={false}
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                tabIndex={-1}
-                                type="checkbox"
-                              />
-                              <span />
-                            </label>
-                            <div
-                              className="tm-layer-tree-toggle"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <div>
-                                ch.sbb.parks
-                              </div>
-                            </div>
-                            <div
-                              className="wkp-info-bt"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <svg
-                                fill="currentColor"
-                                focusable={false}
-                                height="1em"
-                                stroke="currentColor"
-                                strokeWidth="0"
-                                style={
-                                  Object {
-                                    "color": undefined,
-                                  }
-                                }
-                                viewBox="0 0 512 512"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                />
-                              </svg>
+                              type="checkbox"
+                            />
+                            <span />
+                          </label>
+                          <div
+                            className="tm-layer-tree-toggle"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div>
+                              ch.sbb.netzkarte.buslinien
                             </div>
                           </div>
-                        </div>
-                        <div>
                           <div
-                            className="tm-layer-tree-item "
-                            style={
-                              Object {
-                                "paddingLeft": "0px",
-                              }
-                            }
+                            className="wkp-info-bt"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
                           >
-                            <label
-                              className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
-                              onKeyPress={[Function]}
-                              tabIndex={-1}
-                            >
-                              <input
-                                checked={false}
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                tabIndex={-1}
-                                type="checkbox"
-                              />
-                              <span />
-                            </label>
-                            <div
-                              className="tm-layer-tree-toggle"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <div>
-                                ch.sbb.ch_gemeinden
-                              </div>
-                            </div>
-                            <div
-                              className="wkp-info-bt"
-                              onClick={[Function]}
-                              onKeyPress={[Function]}
-                              role="button"
-                              tabIndex={0}
-                            >
-                              <svg
-                                fill="currentColor"
-                                focusable={false}
-                                height="1em"
-                                stroke="currentColor"
-                                strokeWidth="0"
-                                style={
-                                  Object {
-                                    "color": undefined,
-                                  }
+                            <svg
+                              fill="currentColor"
+                              focusable={false}
+                              height="1em"
+                              stroke="currentColor"
+                              strokeWidth="0"
+                              style={
+                                Object {
+                                  "color": undefined,
                                 }
-                                viewBox="0 0 512 512"
-                                width="1em"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
-                                />
-                              </svg>
+                              }
+                              viewBox="0 0 512 512"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="tm-layer-tree-item "
+                          style={
+                            Object {
+                              "paddingLeft": "0px",
+                            }
+                          }
+                        >
+                          <label
+                            className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                            onKeyPress={[Function]}
+                            tabIndex={0}
+                          >
+                            <input
+                              checked={false}
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              tabIndex={-1}
+                              type="checkbox"
+                            />
+                            <span />
+                          </label>
+                          <div
+                            className="tm-layer-tree-toggle"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div>
+                              ch.sbb.puenktlichkeit
                             </div>
+                            <div
+                              className="tm-layer-tree-arrow tm-layer-tree-arrow-collapsed"
+                            />
+                          </div>
+                          <div
+                            className="wkp-info-bt"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <svg
+                              fill="currentColor"
+                              focusable={false}
+                              height="1em"
+                              stroke="currentColor"
+                              strokeWidth="0"
+                              style={
+                                Object {
+                                  "color": undefined,
+                                }
+                              }
+                              viewBox="0 0 512 512"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="tm-layer-tree-item "
+                          style={
+                            Object {
+                              "paddingLeft": "0px",
+                            }
+                          }
+                        >
+                          <label
+                            className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                            onKeyPress={[Function]}
+                            tabIndex={-1}
+                          >
+                            <input
+                              checked={false}
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              tabIndex={-1}
+                              type="checkbox"
+                            />
+                            <span />
+                          </label>
+                          <div
+                            className="tm-layer-tree-toggle"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div>
+                              ch.sbb.parks
+                            </div>
+                          </div>
+                          <div
+                            className="wkp-info-bt"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <svg
+                              fill="currentColor"
+                              focusable={false}
+                              height="1em"
+                              stroke="currentColor"
+                              strokeWidth="0"
+                              style={
+                                Object {
+                                  "color": undefined,
+                                }
+                              }
+                              viewBox="0 0 512 512"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div
+                          className="tm-layer-tree-item "
+                          style={
+                            Object {
+                              "paddingLeft": "0px",
+                            }
+                          }
+                        >
+                          <label
+                            className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
+                            onKeyPress={[Function]}
+                            tabIndex={-1}
+                          >
+                            <input
+                              checked={false}
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              tabIndex={-1}
+                              type="checkbox"
+                            />
+                            <span />
+                          </label>
+                          <div
+                            className="tm-layer-tree-toggle"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <div>
+                              ch.sbb.ch_gemeinden
+                            </div>
+                          </div>
+                          <div
+                            className="wkp-info-bt"
+                            onClick={[Function]}
+                            onKeyPress={[Function]}
+                            role="button"
+                            tabIndex={0}
+                          >
+                            <svg
+                              fill="currentColor"
+                              focusable={false}
+                              height="1em"
+                              stroke="currentColor"
+                              strokeWidth="0"
+                              style={
+                                Object {
+                                  "color": undefined,
+                                }
+                              }
+                              viewBox="0 0 512 512"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 110c23.196 0 42 18.804 42 42s-18.804 42-42 42-42-18.804-42-42 18.804-42 42-42zm56 254c0 6.627-5.373 12-12 12h-88c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h12v-64h-12c-6.627 0-12-5.373-12-12v-24c0-6.627 5.373-12 12-12h64c6.627 0 12 5.373 12 12v100h12c6.627 0 12 5.373 12 12v24z"
+                              />
+                            </svg>
                           </div>
                         </div>
                       </div>
@@ -677,11 +673,7 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              >
-                <div
-                  className="wkp-layer-tree"
-                />
-              </div>
+              />
             </div>
             <div
               className="wkp-topic-menu"
@@ -712,11 +704,7 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              >
-                <div
-                  className="wkp-layer-tree"
-                />
-              </div>
+              />
             </div>
             <div
               className="wkp-topic-menu"
@@ -747,11 +735,7 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              >
-                <div
-                  className="wkp-layer-tree"
-                />
-              </div>
+              />
             </div>
             <div
               className="wkp-topic-menu"
@@ -782,11 +766,7 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              >
-                <div
-                  className="wkp-layer-tree"
-                />
-              </div>
+              />
             </div>
             <div
               className="wkp-topic-menu"
@@ -817,11 +797,7 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              >
-                <div
-                  className="wkp-layer-tree"
-                />
-              </div>
+              />
             </div>
           </div>
           <div

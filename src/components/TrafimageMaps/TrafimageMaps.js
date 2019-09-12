@@ -240,7 +240,7 @@ class TrafimageMaps extends Component {
             projection={projection}
           />
 
-          {appElements.map(elem => elem)}
+          {appElements}
 
           {children}
           <MainDialog />

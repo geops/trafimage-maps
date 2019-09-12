@@ -1,15 +1,15 @@
 .wkp-menu-header {
-  background: white;
-  padding: 0 15px;
-  height: 69px;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0 15px;
+  height: 69px;
   transition: all 0.2s ease;
-  position: relative;
+  background: white;
 
   &.open {
-    border-bottom-width: 0;
+    border-bottom: 1px solid #eee;
   }
 
   .wkp-menu-toggler {
@@ -51,9 +51,9 @@
   }
 }
 
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
+.tm-w-m,
+.tm-w-s,
+.tm-w-xs {
   .wkp-menu-header {
     margin: 0;
     border: 0;
