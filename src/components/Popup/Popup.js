@@ -9,7 +9,6 @@ import Button from 'react-spatial/components/Button';
 import RSPopup from 'react-spatial/components/Popup';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { setClickedFeatureInfo } from '../../model/app/actions';
-
 import './Popup.scss';
 
 const propTypes = {
@@ -28,70 +27,45 @@ class Popup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      featIndex: 0,
-      componentName: null,
-      popupCoordinate: null,
+      featureIndex: 0,
     };
-  }
-
-  componentDidMount() {
-    const { clickedFeatureInfo } = this.props;
-    if (clickedFeatureInfo) {
-      this.updatePopup(clickedFeatureInfo);
-    }
   }
 
   componentDidUpdate(prevProps) {
     const { clickedFeatureInfo } = this.props;
+
     if (clickedFeatureInfo !== prevProps.clickedFeatureInfo) {
-      this.updatePopup();
+      this.resetFeatureIndex();
     }
   }
 
-  updatePopup() {
-    const { popupComponents, clickedFeatureInfo } = this.props;
-    const { featIndex } = this.state;
-
-    if (clickedFeatureInfo) {
-      const { features, layer, coordinate } = clickedFeatureInfo;
-      this.setState({
-        featIndex: 0,
-        componentName: popupComponents[layer.getKey()],
-        popupCoordinate:
-          features.length && features[featIndex].getGeometry() instanceof Point
-            ? features[featIndex].getGeometry().getCoordinates()
-            : coordinate,
-      });
-    } else {
-      this.setState({
-        featIndex: 0,
-        componentName: null,
-        popupCoordinate: null,
-      });
-    }
+  resetFeatureIndex() {
+    this.setState({
+      featureIndex: 0,
+    });
   }
 
   renderPagination(features) {
     const { t } = this.props;
-    const { featIndex } = this.state;
+    const { featureIndex } = this.state;
     return (
       <div className="wkp-popup-pagination-wrapper">
         <span className="wkp-popup-pagination-button-wrapper">
-          {featIndex > 0 ? (
+          {featureIndex > 0 ? (
             <Button
               className="wkp-popup-pagination-button"
-              onClick={() => this.setState({ featIndex: featIndex - 1 })}
+              onClick={() => this.setState({ featureIndex: featureIndex - 1 })}
             >
               <IoIosArrowRoundBack />
             </Button>
           ) : null}
         </span>
-        {featIndex + 1} {t('von')} {features.length}
+        {featureIndex + 1} {t('von')} {features.length}
         <span className="wkp-popup-pagination-button-wrapper">
-          {featIndex + 1 < features.length ? (
+          {featureIndex + 1 < features.length ? (
             <Button
               className="wkp-popup-pagination-button"
-              onClick={() => this.setState({ featIndex: featIndex + 1 })}
+              onClick={() => this.setState({ featureIndex: featureIndex + 1 })}
             >
               <IoIosArrowRoundForward />
             </Button>
@@ -104,22 +78,27 @@ class Popup extends Component {
   render() {
     const {
       map,
+      popupComponents,
       clickedFeatureInfo,
       dispatchSetClickedFeatureInfo,
     } = this.props;
-    const { featIndex, popupCoordinate, componentName } = this.state;
-    if (
-      !clickedFeatureInfo ||
-      !clickedFeatureInfo.features.length ||
-      !componentName
-    ) {
+
+    if (!clickedFeatureInfo || !clickedFeatureInfo.features.length) {
       return null;
     }
 
+    const { featureIndex } = this.state;
+    const { features, coordinate, layer } = clickedFeatureInfo;
+    const feature = features[featureIndex];
     // Styleguidist try to load every file in the folder if we don't put index.js
     const PopupComponent = React.lazy(() =>
-      import(`../../popups/${componentName}/index.js`),
+      import(`../../popups/${popupComponents[layer.getKey()]}/index.js`),
     );
+
+    const popupCoordinate =
+      feature.getGeometry() instanceof Point
+        ? feature.getGeometry().getCoordinates()
+        : coordinate;
 
     return (
       <React.Suspense fallback="loading...">
@@ -128,9 +107,9 @@ class Popup extends Component {
           popupCoordinate={popupCoordinate}
           map={map}
         >
-          <PopupComponent feature={clickedFeatureInfo.features[featIndex]} />
+          <PopupComponent feature={features[featureIndex]} />
           {clickedFeatureInfo.features.length > 1
-            ? this.renderPagination(clickedFeatureInfo.features)
+            ? this.renderPagination(features)
             : null}
         </RSPopup>
       </React.Suspense>
