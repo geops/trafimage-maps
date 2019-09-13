@@ -1,38 +1,38 @@
-.tm-dialog,
-.tm-modal {
-  z-index: 10000;
-
-  .tm-dialog-container {
-    width: 320px;
-    overflow: hidden;
-
-    .tm-dialog-header {
-      padding: 0 20px;
-      text-align: left;
-      font-weight: bold;
-    }
-
-    .tm-dialog-draggable {
-      cursor: move;
-    }
-  }
-
-  .tm-dialog-body {
-    padding: 0 20px;
-    margin: 0 0 20px 0;
-    width: auto;
-    text-align: left;
-    overflow: hidden auto;
-    max-height: calc(100% - 70px);
-  }
-}
-
-.tm-dialog {
-  position: absolute;
-  left: 390px;
-}
-
 .wkp-dialog {
+  .tm-dialog,
+  .tm-modal {
+    z-index: 10000;
+
+    .tm-dialog-container {
+      width: 320px;
+      overflow: hidden;
+
+      .tm-dialog-header {
+        padding: 0 20px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .tm-dialog-draggable {
+        cursor: move;
+      }
+    }
+
+    .tm-dialog-body {
+      padding: 0 20px;
+      margin: 0 0 20px 0;
+      width: auto;
+      text-align: left;
+      overflow: hidden auto;
+      max-height: calc(100% - 70px);
+    }
+  }
+
+  .tm-dialog {
+    position: absolute;
+    left: 390px;
+  }
+
   .tm-modal {
     .tm-dialog-container {
       width: 600px;
