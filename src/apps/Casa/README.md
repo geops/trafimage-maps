@@ -33,12 +33,14 @@ zoneLayer.loadZones([
     zones: [{
       zoneCode: 10,
       zoneName: 'Davos',
+      isClickable: true,
     }],
   },
   {
     partnerCode: 490,
     zones: [{
       zoneCode: 120,
+      isSelected: true,
     },
     {
       zoneCode: 170,
@@ -82,11 +84,13 @@ routeLayer.loadRoutes([
     uicFrom: 8508450,
     uicTo: 8589801,
     mot: 'bus',
+    isClickable: true,
   },
   {
     uicFrom: 8589801,
     uicTo: 8589775,
     mot: 'bus',
+    isClickable: true,
   },
 ]).then((f) => {
   routeLayer.zoomToRoute();
