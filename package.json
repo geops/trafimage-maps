@@ -82,7 +82,7 @@
     "stylelint-config-standard": "^18.2.0",
     "stylelint-scss": "^3.5.1",
     "vinyl-fs": "^3.0.3",
-    "webpack": "4.39.1"
+    "webpack": "4.40.1"
   },
   "scripts": {
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",
