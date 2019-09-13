@@ -10,6 +10,8 @@ import RSPopup from 'react-spatial/components/Popup';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 
+import './Popup.scss';
+
 const propTypes = {
   t: PropTypes.func.isRequired,
   clickedFeatureInfo: PropTypes.shape(),

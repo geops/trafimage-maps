@@ -33,7 +33,7 @@
 }
 
 .tm-modal {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3) !important;
 
   .tm-dialog-container {
     width: 600px;
@@ -42,7 +42,7 @@
 
   .tm-dialog-container,
   .tm-dialog-body {
-    height: calc(100% - 70px);
+    height: calc(100% - 70px) !important;
   }
 }
 

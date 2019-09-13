@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import RSDialog from 'react-spatial/components/Dialog';
 import { setDialogVisible } from '../../model/app/actions';
 
+import './Dialog.scss';
+
 const propTypes = {
   name: PropTypes.string.isRequired,
   title: PropTypes.element,

@@ -17,6 +17,7 @@ import {
   setProjection,
   setDialogVisible,
 } from '../../model/app/actions';
+import './Footer.scss';
 
 const propTypes = {
   map: PropTypes.instanceOf(Map).isRequired,

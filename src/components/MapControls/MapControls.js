@@ -8,6 +8,7 @@ import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
 import CONF from '../../config/appConfig';
 import swissbounds from '../../img/swissbounds.png';
+import './MapControls.scss';
 
 const propTypes = {
   map: PropTypes.instanceOf(OLMap).isRequired,
