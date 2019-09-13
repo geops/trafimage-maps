@@ -1,9 +1,10 @@
 .wkp-menu-item-header {
-  height: 35px;
+  height: 15px;
   border: none;
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 15px 10px 15px 15px;
+  margin: 2px; //For outline
 
   &.open {
     border-bottom: 1px solid #eee;
@@ -11,8 +12,8 @@
 
   .wkp-menu-item-header-icon {
     margin-right: 10px;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
 
   .wkp-menu-item-header-toggler {

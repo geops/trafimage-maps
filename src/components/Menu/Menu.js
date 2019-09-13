@@ -8,7 +8,7 @@ import LayerService from 'react-spatial/LayerService';
 import TopicMenu from './TopicMenu';
 import MenuHeader from './MenuHeader';
 import Collapsible from '../Collapsible';
-import ShareMenu from './ShareMenu';
+import ShareMenu from '../ShareMenu';
 import { setMenuOpen } from '../../model/app/actions';
 
 import './Menu.scss';
