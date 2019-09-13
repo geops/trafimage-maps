@@ -33,12 +33,14 @@ zoneLayer.loadZones([
     zones: [{
       zoneCode: 10,
       zoneName: 'Davos',
+      isClickable: true,
     }],
   },
   {
     partnerCode: 490,
     zones: [{
       zoneCode: 120,
+      isSelected: true,
     },
     {
       zoneCode: 170,

@@ -107,14 +107,17 @@ class ZoneLayer extends VectorLayer {
 
     this.onClick(features => {
       const [feature] = features;
-      const idx = this.selectedZones.indexOf(feature);
-      if (idx > -1) {
-        this.selectedZones.splice(idx, 1);
-      } else {
-        this.selectedZones.push(feature);
-      }
 
-      this.olLayer.changed();
+      if (feature.get('isClickable')) {
+        const idx = this.selectedZones.indexOf(feature);
+        if (idx > -1) {
+          this.selectedZones.splice(idx, 1);
+        } else {
+          this.selectedZones.push(feature);
+        }
+
+        this.olLayer.changed();
+      }
     });
   }
 
@@ -182,6 +185,8 @@ class ZoneLayer extends VectorLayer {
    * @param {string} [config[].zones[].zoneName] Name of zone to select.
    * @param {boolean} [config[].zones[].isSelected] If true, the zone
    *   is initially selected.
+   * @param {boolean} [config[].zones[].isClickable] If true, the zone
+   *   can be selected by click.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   loadZones(config) {
@@ -213,8 +218,12 @@ class ZoneLayer extends VectorLayer {
             z => `${z.zoneCode}` === `${zoneCode}`,
           );
 
-          if (zone && zone.isSelected) {
-            this.selectedZones.push(features[i]);
+          if (zone) {
+            features[i].set('isClickable', zone.isClickable);
+
+            if (zone.isSelected) {
+              this.selectedZones.push(features[i]);
+            }
           }
         }
       }
