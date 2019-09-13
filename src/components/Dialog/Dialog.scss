@@ -32,17 +32,17 @@
   left: 390px;
 }
 
-.tm-modal {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+.wkp-dialog {
+  .tm-modal {
+    .tm-dialog-container {
+      width: 600px;
+      max-height: 500px;
+    }
 
-  .tm-dialog-container {
-    width: 600px;
-    max-height: 500px;
-  }
-
-  .tm-dialog-container,
-  .tm-dialog-body {
-    height: calc(100% - 70px) !important;
+    .tm-dialog-container,
+    .tm-dialog-body {
+      height: calc(100% - 70px);
+    }
   }
 }
 

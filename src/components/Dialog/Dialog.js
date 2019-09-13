@@ -26,22 +26,24 @@ function Dialog(props) {
   const dispatch = useDispatch();
   const { body, isModal } = props;
   return (
-    <RSDialog
-      isOpen
-      position={dialogPosition}
-      onClose={() => {
-        dispatch(setDialogVisible());
-      }}
-      onClickOutside={() => {
-        if (isModal) {
+    <div className="wkp-dialog">
+      <RSDialog
+        isOpen
+        position={dialogPosition}
+        onClose={() => {
           dispatch(setDialogVisible());
-        }
-      }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    >
-      {body}
-    </RSDialog>
+        }}
+        onClickOutside={() => {
+          if (isModal) {
+            dispatch(setDialogVisible());
+          }
+        }}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...props}
+      >
+        {body}
+      </RSDialog>
+    </div>
   );
 }
 
