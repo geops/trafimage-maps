@@ -72,11 +72,12 @@ class RouteLayer extends VectorLayer {
   }
 
   /**
-   * Gettint the Mot-features on specific route.
+   * Getting the Mot-features on specific route.
    * @private
    * @param {Object} viaPoints Route Informations
    * @param {String} mot ask for specific Route
-   * @returns {array<ol.feature>}
+   * @param {isClickable} If true, the route is clickable.
+   * @returns {array<ol.Feature>}
    */
   fetchRouteForMot(viaPoints, mot, isClickable) {
     this.abortController = new AbortController();
