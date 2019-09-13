@@ -57,7 +57,7 @@ class RouteLayer extends VectorLayer {
     this.onClick(features => {
       const [feature] = features;
 
-      if (feature) {
+      if (feature && feature.get('isClickable')) {
         const routeId = feature.get('routeId');
         const idx = this.selectedRouteIds.indexOf(routeId);
         if (idx > -1) {
@@ -78,7 +78,7 @@ class RouteLayer extends VectorLayer {
    * @param {String} mot ask for specific Route
    * @returns {array<ol.feature>}
    */
-  fetchRouteForMot(viaPoints, mot) {
+  fetchRouteForMot(viaPoints, mot, isClickable) {
     this.abortController = new AbortController();
 
     const via = viaPoints.map(v => `!${v}`);
@@ -98,7 +98,10 @@ class RouteLayer extends VectorLayer {
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
-        features.forEach(f => f.set('mot', mot));
+        features.forEach(f => {
+          f.set('mot', mot);
+          f.set('isClickable', isClickable);
+        });
         return features;
       })
       .catch(() => {
@@ -130,26 +133,32 @@ class RouteLayer extends VectorLayer {
    * @param {string} sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
+   * @param {boolean} sequences[].isClickable If true, routes can be
+   * selected by click.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   loadRoutes(sequences) {
     let via = [];
     let mot;
+    let isClickable = true;
     const routePromises = [];
 
     for (let i = 0; i < sequences.length; i += 1) {
       mot = mot || sequences[i].mot;
 
       if (mot !== sequences[i].mot) {
-        routePromises.push(this.fetchRouteForMot(via, mot));
+        isClickable = isClickable && sequences[i].isClickable;
+        routePromises.push(this.fetchRouteForMot(via, mot, isClickable));
+        isClickable = true;
         ({ mot } = sequences[i]);
         via = [sequences[i].uicFrom, sequences[i].uicTo];
       } else {
+        isClickable = isClickable && sequences[i].isClickable;
         via = via.concat([sequences[i].uicFrom, sequences[i].uicTo]);
       }
     }
 
-    routePromises.push(this.fetchRouteForMot(via, mot));
+    routePromises.push(this.fetchRouteForMot(via, mot, isClickable));
 
     return Promise.all(routePromises).then(data => {
       this.olLayer.getSource().clear();

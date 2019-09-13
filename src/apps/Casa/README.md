@@ -82,11 +82,13 @@ routeLayer.loadRoutes([
     uicFrom: 8508450,
     uicTo: 8589801,
     mot: 'bus',
+    isClickable: true,
   },
   {
     uicFrom: 8589801,
     uicTo: 8589775,
     mot: 'bus',
+    isClickable: true,
   },
 ]).then((f) => {
   routeLayer.zoomToRoute();
