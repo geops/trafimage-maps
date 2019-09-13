@@ -1,40 +1,12 @@
+import React from 'react';
 import PropTypes from 'prop-types';
+import Contact from './Contact';
+import Legal from './Legal';
+import Imprint from './Imprint';
 
-import ContactDE from './contact/ContactDE';
-import ContactFR from './contact/ContactFR';
-import ContactIT from './contact/ContactIT';
-import ContactEN from './contact/ContactEN';
-
-import LegalDE from './legal/LegalDE';
-import LegalFR from './legal/LegalFR';
-import LegalIT from './legal/LegalIT';
-import LegalEN from './legal/LegalEN';
-
-import ImprintDE from './impressum/ImprintDE';
-import ImprintEN from './impressum/ImprintEN';
-import ImprintFR from './impressum/ImprintFR';
-import ImprintIT from './impressum/ImprintIT';
-
-const kontakt = {
-  de: ContactDE,
-  fr: ContactFR,
-  it: ContactIT,
-  en: ContactEN,
-};
-
-const rechtliches = {
-  de: LegalDE,
-  fr: LegalFR,
-  it: LegalIT,
-  en: LegalEN,
-};
-
-const impressum = {
-  de: ImprintDE,
-  fr: ImprintFR,
-  it: ImprintIT,
-  en: ImprintEN,
-};
+const kontakt = Contact;
+const rechtliches = Legal;
+const impressum = Imprint;
 
 const docs = {
   kontakt,
@@ -53,7 +25,8 @@ const defaultProps = {
 };
 
 const LegalLines = ({ language, doc }) => {
-  return docs[doc][language];
+  const Comp = docs[doc];
+  return <Comp language={language} />;
 };
 
 LegalLines.propTypes = propTypes;
