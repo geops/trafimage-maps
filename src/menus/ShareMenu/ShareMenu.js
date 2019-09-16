@@ -32,6 +32,5 @@ const ShareMenu = ({ map }) => {
 
 ShareMenu.propTypes = propTypes;
 ShareMenu.defaultProps = defaultProps;
-ShareMenu.standalone = false;
 
 export default React.memo(ShareMenu);
