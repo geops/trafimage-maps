@@ -8,7 +8,6 @@ import LayerService from 'react-spatial/LayerService';
 import TopicMenu from './TopicMenu';
 import MenuHeader from './MenuHeader';
 import Collapsible from '../Collapsible';
-import ShareMenu from '../ShareMenu';
 import { setMenuOpen } from '../../model/app/actions';
 
 import './Menu.scss';
@@ -65,8 +64,9 @@ class Menu extends Component {
     for (let i = 0; i < menuComponents.length; i += 1) {
       // Styleguidist try to load every file in the folder if we don't put index.js
       const Comp = React.lazy(() =>
-        import(`../../menus/${menuComponents[i]}/index.js`),
+        import(`../../menus/${menuComponents[i].component}/index.js`),
       );
+      Comp.standalone = menuComponents[i].standalone;
       components.push(Comp);
     }
 
@@ -134,15 +134,23 @@ class Menu extends Component {
                 />
               ))}
             </div>
-            <ShareMenu map={map} />
+            {loadedMenuComponents
+              .filter(Comp => !Comp.standalone)
+              .map((Comp, index) => (
+                <React.Suspense fallback="Loading menu..." key={index}>
+                  <Comp layerService={layerService} map={map} />
+                </React.Suspense>
+              ))}
           </Collapsible>
         </div>
 
-        {loadedMenuComponents.map((Comp, index) => (
-          <React.Suspense fallback="Loading menu..." key={index}>
-            <Comp layerService={layerService} map={map} />
-          </React.Suspense>
-        ))}
+        {loadedMenuComponents
+          .filter(Comp => Comp.standalone)
+          .map((Comp, index) => (
+            <React.Suspense fallback="Loading menu..." key={index}>
+              <Comp layerService={layerService} map={map} />
+            </React.Suspense>
+          ))}
       </div>
     );
     /* eslint-enable */

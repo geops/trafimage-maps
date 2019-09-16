@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Map from 'ol/Map';
 import { FaShareAlt } from 'react-icons/fa';
-import Share from '../Share';
-import MenuItem from '../Menu/MenuItem';
+import Share from '../../components/Share';
+import MenuItem from '../../components/Menu/MenuItem';
 
 const propTypes = {
   map: PropTypes.instanceOf(Map).isRequired,
@@ -32,5 +32,6 @@ const ShareMenu = ({ map }) => {
 
 ShareMenu.propTypes = propTypes;
 ShareMenu.defaultProps = defaultProps;
+ShareMenu.standalone = false;
 
 export default React.memo(ShareMenu);

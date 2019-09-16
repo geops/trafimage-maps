@@ -119,6 +119,7 @@ const mapDispatchToProps = {
 };
 
 TrackerMenu.propTypes = propTypes;
+TrackerMenu.standalone = true;
 
 export default compose(
   withTranslation(),
