@@ -15,7 +15,12 @@ import './Menu.scss';
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  menuComponents: PropTypes.arrayOf(PropTypes.string).isRequired,
+  menuComponents: PropTypes.arrayOf(
+    PropTypes.shape({
+      component: PropTypes.string,
+      standalone: PropTypes.bool,
+    }),
+  ).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
   menuOpen: PropTypes.bool.isRequired,

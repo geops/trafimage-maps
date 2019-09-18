@@ -76,11 +76,22 @@ const propTypes = {
   popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
-   * List of menu component names that are displayed next to the default layer
-   * menu. Component names are names of files from the folder
-   * `src/compontens/Menu` without the `.js` extension.
+   * List of menu components that are displayed.
+   * A menu component is represented by 2 properties:
+   *   `standalone`: defined if the property is displayed inside the main menu (false) or outside (true), default to false.
+   *   `component`: the name of the component. Component names are names of files from the folder
+   * `src/components/menus/[MyComponent]` without the `.js` extension.
+   * Example: [
+   *   { component: 'ShareMenu', standalone: true }
+   *   { component: 'TrackerMenu', standalone: false }
+   * ]
    */
-  menuComponents: PropTypes.arrayOf(PropTypes.string),
+  menuComponents: PropTypes.arrayOf(
+    PropTypes.shape({
+      component: PropTypes.string,
+      standalone: PropTypes.bool,
+    }),
+  ),
 
   /**
    * Projection used for the map.
