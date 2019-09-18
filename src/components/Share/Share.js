@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Map from 'ol/Map';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FiMail } from 'react-icons/fi';
+import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from 'react-spatial/components/BlankLink';
+import SharePermalinkButton from '../SharePermalinkButton';
 import './Share.scss';
 
 const propTypes = {
@@ -15,6 +16,12 @@ const propTypes = {
 const defaultProps = {};
 
 const socialShareConfig = [
+  {
+    url: 'mailto:?body={url}',
+    title: 'Per Email teilen.',
+    icon: <FaEnvelope focusable={false} />,
+    className: 'ta-mail-icon',
+  },
   {
     url: '//www.facebook.com/sharer.php?u={url}',
     title: 'Auf Facebook teilen.',
@@ -27,13 +34,14 @@ const socialShareConfig = [
     icon: <TiSocialTwitter focusable={false} />,
     className: 'ta-twitter-icon',
   },
-  {
-    url: 'mailto:?body={url}',
-    title: 'Per Email teilen.',
-    icon: <FiMail focusable={false} />,
-    className: 'ta-mail-icon',
-  },
 ];
+const renderConf = (conf, t) => (
+  <div className={conf.className} key={conf.title}>
+    <BlankLink href={conf.url} title={t(conf.title)}>
+      {conf.icon}
+    </BlankLink>
+  </div>
+);
 
 const Share = ({ map }) => {
   const { t } = useTranslation();
@@ -47,16 +55,13 @@ const Share = ({ map }) => {
 
   return (
     <div className="wkp-share">
-      {socialShareConfig.map(conf => (
-        <div className={conf.className} key={conf.title}>
-          <BlankLink href={conf.url} title={t(conf.title)}>
-            {conf.icon}
-          </BlankLink>
-        </div>
-      ))}
+      <SharePermalinkButton />
+      {renderConf(config[0], t)}
       <CanvasSaveButton title={t('Karte als Bild speichern')} map={map}>
         <TiImage focusable={false} />
       </CanvasSaveButton>
+      {renderConf(config[1], t)}
+      {renderConf(config[2], t)}
     </div>
   );
 };
