@@ -1,33 +1,49 @@
-.tm-dialog,
-.tm-modal {
-  z-index: 10000;
+.wkp-dialog {
+  .tm-dialog,
+  .tm-modal {
+    z-index: 10000;
 
-  .tm-dialog-container {
-    width: 320px;
-    overflow: hidden;
+    .tm-dialog-container {
+      width: 320px;
+      overflow: hidden;
 
-    .tm-dialog-header {
+      .tm-dialog-header {
+        padding: 0 20px;
+        text-align: left;
+        font-weight: bold;
+      }
+
+      .tm-dialog-draggable {
+        cursor: move;
+      }
+    }
+
+    .tm-dialog-body {
       padding: 0 20px;
+      margin: 0 0 20px 0;
+      width: auto;
       text-align: left;
-      font-weight: bold;
-    }
-
-    .tm-dialog-draggable {
-      cursor: move;
+      overflow: hidden auto;
+      max-height: calc(100% - 70px);
     }
   }
 
-  .tm-dialog-body {
-    padding: 0 20px 20px 20px;
-    width: auto;
-    text-align: left;
-    max-height: 400px;
+  .tm-dialog {
+    position: absolute;
+    left: 390px;
   }
-}
 
-.tm-dialog {
-  position: absolute;
-  left: 390px;
+  .tm-modal {
+    .tm-dialog-container {
+      width: 600px;
+      max-height: 500px;
+    }
+
+    .tm-dialog-container,
+    .tm-dialog-body {
+      height: calc(100% - 70px);
+    }
+  }
 }
 
 .tm-w-m,
@@ -65,6 +81,12 @@
       height: calc(100% - 50px);
       overflow-y: auto;
       overflow-x: hidden;
+    }
+  }
+
+  .tm-modal {
+    .tm-dialog-container {
+      width: calc(100% - 40px);
     }
   }
 }
