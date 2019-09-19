@@ -66,7 +66,7 @@
     "generact": "^0.4.0",
     "geops-docjs-template": "^1.0.0",
     "husky": "^3.0.0",
-    "jest": "24.8.0",
+    "jest": "24.9.0",
     "jest-canvas-mock": "^2.0.0-alpha.2",
     "jest-serializer-html": "^7.0.0",
     "lint-staged": "^9.2.3",
