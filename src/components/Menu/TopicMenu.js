@@ -204,7 +204,7 @@ class TopicMenu extends PureComponent {
                 }}
               />
             )}
-          <div className="wkp-layer-tree">{layerTree}</div>
+          {layerTree}
         </div>
       </div>
     );

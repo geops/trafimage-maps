@@ -9,21 +9,23 @@ import menuClosedImg from '../../img/menu_closed.png';
 import './MenuHeader.scss';
 
 const propTypes = {
+  className: PropTypes.string,
   onToggle: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.node.isRequired,
   info: PropTypes.string,
   isOpen: PropTypes.bool,
   t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
+  className: 'wkp-menu-header',
   info: null,
   isOpen: false,
 };
 
-const MenuHeader = ({ title, info, isOpen, onToggle, t }) => (
+const MenuHeader = ({ className, title, info, isOpen, onToggle, t }) => (
   <div
-    className={`wkp-menu-header ${isOpen ? 'open' : ''}`}
+    className={`${className}${isOpen ? ' open' : ''}`}
     role="button"
     tabIndex="0"
     onClick={() => onToggle()}
@@ -35,9 +37,7 @@ const MenuHeader = ({ title, info, isOpen, onToggle, t }) => (
       </div>
       <span className="wkp-menu-toggle-text">{t('Menü')}</span>
     </div>
-    <div className={`wkp-menu-title-main ${!info ? '' : 'large'}`}>
-      {t(title)}
-    </div>
+    <div className={`wkp-menu-title ${!info ? '' : 'large'}`}>{title}</div>
     <div className="wkp-menu-toggler">
       {isOpen ? <FaAngleUp /> : <FaAngleDown />}
     </div>

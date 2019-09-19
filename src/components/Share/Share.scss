@@ -1,0 +1,40 @@
+.wkp-share {
+  width: 100%;
+  display: flex;
+
+  > div {
+    width: 30px;
+    height: 30px;
+    margin: 10px 0 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .wkp-share-permalink-button > div[role='button'] {
+    width: 20px;
+    font-size: 20px;
+  }
+
+  .ta-facebook-icon {
+    width: 16px;
+    font-size: 30px;
+  }
+
+  .ta-twitter-icon,
+  .tm-canvas-save-button {
+    font-size: 30px;
+  }
+
+  .ta-mail-icon {
+    font-size: 23px;
+
+    svg {
+      margin-top: 2px;
+    }
+  }
+
+  .tm-canvas-save-button {
+    font-size: 28px;
+  }
+}

@@ -66,6 +66,7 @@ export const netzkarteLayer = new MapboxLayer({
   visible: true,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
+  preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
@@ -87,6 +88,7 @@ export const swisstopoSwissImage = new Layer({
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
       transition: 0,
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -109,6 +111,7 @@ export const netzkarteAerial = new Layer({
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
       transition: 0,
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -168,6 +171,7 @@ export const swisstopoLandeskarteGrau = new Layer({
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
       transition: 0,
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -277,6 +281,7 @@ export const buslines = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,

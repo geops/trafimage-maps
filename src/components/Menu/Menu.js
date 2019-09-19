@@ -15,7 +15,12 @@ import './Menu.scss';
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  menuComponents: PropTypes.arrayOf(PropTypes.string).isRequired,
+  menuComponents: PropTypes.arrayOf(
+    PropTypes.shape({
+      component: PropTypes.string,
+      standalone: PropTypes.bool,
+    }),
+  ).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
   menuOpen: PropTypes.bool.isRequired,
@@ -64,8 +69,9 @@ class Menu extends Component {
     for (let i = 0; i < menuComponents.length; i += 1) {
       // Styleguidist try to load every file in the folder if we don't put index.js
       const Comp = React.lazy(() =>
-        import(`../../menus/${menuComponents[i]}/index.js`),
+        import(`../../menus/${menuComponents[i].component}/index.js`),
       );
+      Comp.standalone = menuComponents[i].standalone;
       components.push(Comp);
     }
 
@@ -115,31 +121,41 @@ class Menu extends Component {
     /* eslint-disable react/no-array-index-key */
     return (
       <div className="wkp-menu-wrapper">
-        <MenuHeader
-          title={activeTopic.name}
-          info={info}
-          headerLayerNames={menuLayers.map(l => l.getName())}
-          isOpen={menuOpen}
-          onToggle={() => dispatchSetMenuOpen(!menuOpen)}
-        />
-
-        <div className={`wkp-menu wkp-topics ${menuOpen ? '' : 'closed'}`}>
+        <div className="wkp-menu">
+          <MenuHeader
+            title={t(activeTopic.name)}
+            info={info}
+            headerLayerNames={menuLayers.map(l => l.getName())}
+            isOpen={menuOpen}
+            onToggle={() => dispatchSetMenuOpen(!menuOpen)}
+          />
           <Collapsible isCollapsed={!menuOpen}>
             <div className="wkp-menu-body">
               {topics.map(topic => (
-                <div key={topic.key}>
-                  <TopicMenu layerService={layerService} topic={topic} />
-                </div>
+                <TopicMenu
+                  key={topic.key}
+                  layerService={layerService}
+                  topic={topic}
+                />
               ))}
             </div>
+            {loadedMenuComponents
+              .filter(Comp => !Comp.standalone)
+              .map((Comp, index) => (
+                <React.Suspense fallback="Loading menu..." key={index}>
+                  <Comp layerService={layerService} map={map} />
+                </React.Suspense>
+              ))}
           </Collapsible>
         </div>
 
-        {loadedMenuComponents.map((Comp, index) => (
-          <React.Suspense fallback="Loading menu..." key={index}>
-            <Comp layerService={layerService} map={map} />
-          </React.Suspense>
-        ))}
+        {loadedMenuComponents
+          .filter(Comp => Comp.standalone)
+          .map((Comp, index) => (
+            <React.Suspense fallback="Loading menu..." key={index}>
+              <Comp layerService={layerService} map={map} />
+            </React.Suspense>
+          ))}
       </div>
     );
     /* eslint-enable */

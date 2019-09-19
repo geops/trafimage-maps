@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TrafimageMaps from './components/TrafimageMaps';
 import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
-import { TrackerMenu } from './config/menu';
+import { TrackerMenu, ShareMenu } from './config/menu';
 
 const { topics } = INSTANCES_CONF;
 
@@ -34,7 +34,10 @@ const AppRouter = () => (
               }}
               initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}
-              menuComponents={[TrackerMenu]}
+              menuComponents={[
+                { component: ShareMenu, standalone: false },
+                { component: TrackerMenu, standalone: true },
+              ]}
             />
           );
         }
