@@ -14,14 +14,12 @@ const MainDialog = () => {
   const { t } = useTranslation();
   const dialogVisible = useSelector(state => state.app.dialogVisible);
   const language = useSelector(state => state.app.language);
-  const layerSelectedForInfos = useSelector(
-    state => state.app.layerSelectedForInfos,
-  );
+  const selectedForInfos = useSelector(state => state.app.selectedForInfos);
 
-  if (layerSelectedForInfos && dialogVisible === LayerInfosDialogName) {
+  if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
     return (
       <LayerInfosDialog
-        layer={layerSelectedForInfos}
+        selectedForInfos={selectedForInfos}
         onDragStop={(evt, pos) => {
           dispatch(
             setDialogPosition({

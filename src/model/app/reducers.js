@@ -6,7 +6,7 @@ import {
   SET_LANGUAGE,
   SET_PROJECTION,
   SET_MENU_OPEN,
-  SET_LAYER_SELECTED_FOR_INFOS,
+  SET_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
 } from './actions';
@@ -17,7 +17,7 @@ const initialState = {
   language: 'de',
   projection: null,
   menuOpen: false,
-  layerSelectedForInfos: null,
+  selectedForInfos: null,
 };
 
 export default function app(state = initialState, action) {
@@ -53,17 +53,17 @@ export default function app(state = initialState, action) {
         ...state,
         menuOpen: action.data,
       };
-    case SET_LAYER_SELECTED_FOR_INFOS:
+    case SET_SELECTED_FOR_INFOS:
       return {
         ...state,
-        dialogVisible: action.data ? 'layerInfos' : false,
-        layerSelectedForInfos: action.data,
+        dialogVisible: action.data ? 'infoDialog' : false,
+        selectedForInfos: action.data,
       };
     case SET_DIALOG_VISIBLE:
       return {
         ...state,
         dialogVisible: action.data,
-        layerSelectedForInfos: null,
+        selectedForInfos: null,
       };
     case SET_DIALOG_POSITION:
       return {

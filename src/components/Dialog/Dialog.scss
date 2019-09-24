@@ -4,7 +4,8 @@
     z-index: 10000;
 
     .tm-dialog-container {
-      width: 320px;
+      min-width: 320px;
+      width: auto;
       overflow: hidden;
 
       .tm-dialog-header {
@@ -80,7 +81,7 @@
     .tm-dialog-body {
       height: calc(100% - 50px);
       overflow-y: auto;
-      overflow-x: hidden;
+      overflow-x: auto;
     }
   }
 
