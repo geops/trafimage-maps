@@ -19,6 +19,7 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
 
   // mapStateToProps
+  menuOpen: PropTypes.bool.isRequired,
   activeTopic: PropTypes.shape().isRequired,
   selectedForInfos: PropTypes.object,
 
@@ -137,7 +138,7 @@ class TopicMenu extends PureComponent {
   }
 
   render() {
-    const { t, layerService, topic, activeTopic } = this.props;
+    const { t, layerService, topic, activeTopic, menuOpen } = this.props;
     const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
 
@@ -192,7 +193,10 @@ class TopicMenu extends PureComponent {
               }}
             />
           </div>
-          {topic && topic.description && this.renderInfoButton(topic)}
+          {menuOpen &&
+            topic &&
+            topic.description &&
+            this.renderInfoButton(topic)}
         </div>
         <div className="wkp-topic-content">
           {topic.key === activeTopic.key &&
@@ -226,6 +230,7 @@ TopicMenu.defaultProps = defaultProps;
 TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = state => ({
+  menuOpen: state.app.menuOpen,
   activeTopic: state.app.activeTopic,
   selectedForInfos: state.app.selectedForInfos,
 });
