@@ -55,18 +55,20 @@ class RouteLayer extends VectorLayer {
     this.selectedRouteIds = [];
 
     this.onClick(features => {
-      const [feature] = features;
+      if (features.length) {
+        const [feature] = features;
 
-      if (feature && feature.get('isClickable')) {
-        const routeId = feature.get('routeId');
-        const idx = this.selectedRouteIds.indexOf(routeId);
-        if (idx > -1) {
-          this.selectedRouteIds.splice(idx, 1);
-        } else {
-          this.selectedRouteIds.push(routeId);
+        if (feature && feature.get('isClickable')) {
+          const routeId = feature.get('routeId');
+          const idx = this.selectedRouteIds.indexOf(routeId);
+          if (idx > -1) {
+            this.selectedRouteIds.splice(idx, 1);
+          } else {
+            this.selectedRouteIds.push(routeId);
+          }
+
+          this.olLayer.changed();
         }
-
-        this.olLayer.changed();
       }
     });
   }
@@ -76,10 +78,10 @@ class RouteLayer extends VectorLayer {
    * @private
    * @param {Object} viaPoints Route Informations
    * @param {String} mot ask for specific Route
-   * @param {isClickable} If true, the route is clickable.
+   * @param {Object[]} sequenceProps Properties for the returned features.
    * @returns {array<ol.Feature>}
    */
-  fetchRouteForMot(viaPoints, mot, isClickable) {
+  fetchRouteForMot(viaPoints, mot, sequenceProps) {
     this.abortController = new AbortController();
 
     const via = viaPoints.map(v => `!${v}`);
@@ -99,10 +101,7 @@ class RouteLayer extends VectorLayer {
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
-        features.forEach(f => {
-          f.set('mot', mot);
-          f.set('isClickable', isClickable);
-        });
+        features.forEach((f, i) => f.setProperties(sequenceProps[i]));
         return features;
       })
       .catch(() => {
@@ -128,45 +127,64 @@ class RouteLayer extends VectorLayer {
 
   /**
    * Load routes based on a given configuration.
-   * @param {Object[]} sequences Route sequences.
-   * @param {number} sequences[].uicFrom UIC number of start station.
-   * @param {number} sequences[].uicTo UIC number of end station.
-   * @param {string} sequences[].mot Method of transportation.
+   * @param {Object[]} routes Routes.
+   * @param {boolean} routes[].isSelected If true, the route is
+   *   selected initially.
+   * @param {boolean} routes[].isClickable If true, the route can be
+   *   selected or unselected by click.
+   * @param {Object[]} routes[].sequences Route sequences.
+   * @param {number} routes[].sequences[].uicFrom UIC number of start station.
+   * @param {number} routes[].sequences[].uicTo UIC number of end station.
+   * @param {string} routes[].sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
-   * @param {boolean} sequences[].isClickable If true, routes can be
-   * selected by click.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  loadRoutes(sequences) {
-    let via = [];
-    let mot;
-    let isClickable = true;
+  loadRoutes(routes) {
     const routePromises = [];
 
-    for (let i = 0; i < sequences.length; i += 1) {
-      mot = mot || sequences[i].mot;
+    for (let i = 0; i < routes.length; i += 1) {
+      let via = [];
+      let sequenceProps = [];
 
-      if (mot !== sequences[i].mot) {
-        isClickable = isClickable && sequences[i].isClickable;
-        routePromises.push(this.fetchRouteForMot(via, mot, isClickable));
-        isClickable = true;
-        ({ mot } = sequences[i]);
-        via = [sequences[i].uicFrom, sequences[i].uicTo];
-      } else {
-        isClickable = isClickable && sequences[i].isClickable;
-        via = via.concat([sequences[i].uicFrom, sequences[i].uicTo]);
+      if (!routes[i].sequences) {
+        throw new Error('Missing route sequences.');
+      }
+
+      for (let j = 0; j < routes[i].sequences.length; j += 1) {
+        const { isSelected, isClickable, sequences } = routes[i];
+        const { mot, uicFrom, uicTo } = sequences[j];
+        const nextMot =
+          j === routes[i].sequences.length - 1
+            ? null
+            : routes[i].sequences[j + 1].mot;
+
+        via = via.concat([uicFrom, uicTo]);
+        sequenceProps.push({
+          uicFrom,
+          uicTo,
+          mot,
+          isSelected,
+          isClickable,
+          routeId: i,
+        });
+
+        if (mot !== nextMot) {
+          routePromises.push(this.fetchRouteForMot(via, mot, sequenceProps));
+          sequenceProps = [];
+          via = [];
+        }
       }
     }
 
-    routePromises.push(this.fetchRouteForMot(via, mot, isClickable));
-
     return Promise.all(routePromises).then(data => {
-      this.olLayer.getSource().clear();
-      for (let i = 0; i < data.length; i += 1) {
-        data[i].forEach(feat => feat.set('routeId', i));
-        this.olLayer.getSource().addFeatures(data[i]);
-      }
+      // group sequences to routes
+      const sequenceFeatures = data.flat().filter(f => f);
+      this.olLayer.getSource().addFeatures(sequenceFeatures);
+      sequenceFeatures
+        .filter(f => f.get('isSelected'))
+        .forEach(f => this.selectedRouteIds.push(f.get('routeId')));
+      return sequenceFeatures;
     });
   }
 
@@ -189,6 +207,7 @@ class RouteLayer extends VectorLayer {
       this.abortController = null;
     }
 
+    this.selectedRouteIds = [];
     this.olLayer.getSource().clear();
   }
 }

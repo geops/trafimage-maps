@@ -66,31 +66,29 @@ const routeLayer = new RouteLayer({
 // Visualize a route on the map.
 routeLayer.loadRoutes([
   {
-    uicFrom: 8502024,
-    uicTo: 8502042,
-    mot: 'rail',
-  },
-  {
-    uicFrom: 8502028,
-    uicTo: 8502021,
-    mot: 'rail',
-  },
-  {
-    uicFrom: 8502028,
-    uicTo: 8505000,
-    mot: 'rail',
-  },
-  {
-    uicFrom: 8508450,
-    uicTo: 8589801,
-    mot: 'bus',
     isClickable: true,
+    sequences: [
+      {
+        uicFrom: 8502024,
+        uicTo: 8505000,
+        mot: 'rail',
+      },
+      {
+        uicFrom: 8508450,
+        uicTo: 8589801,
+        mot: 'bus',
+      },
+    ],
   },
   {
-    uicFrom: 8589801,
-    uicTo: 8589775,
-    mot: 'bus',
-    isClickable: true,
+    isSelected: true,
+    sequences: [
+      {
+        uicFrom: 8589801,
+        uicTo: 8589775,
+        mot: 'bus',
+      },
+    ],
   },
 ]).then((f) => {
   routeLayer.zoomToRoute();
