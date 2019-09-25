@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import RSDialog from 'react-spatial/components/Dialog';
@@ -25,6 +25,29 @@ function Dialog(props) {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
   const dispatch = useDispatch();
   const { body, isModal } = props;
+
+  const escFunction = () => {
+    dispatch(setDialogVisible());
+  };
+
+  const registerEsc = isRegister => {
+    if (isRegister) {
+      document.addEventListener('keydown', escFunction, false);
+    } else {
+      document.removeEventListener('keydown', escFunction, false);
+    }
+  };
+
+  // ComponentDidMount
+  useEffect(() => registerEsc(true), []);
+
+  // ComponentWillUnmount
+  useEffect(() => {
+    return () => {
+      registerEsc(false);
+    };
+  }, []);
+
   return (
     <div className="wkp-dialog">
       <RSDialog
