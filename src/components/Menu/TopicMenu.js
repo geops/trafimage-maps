@@ -10,10 +10,7 @@ import LayerService from 'react-spatial/LayerService';
 import Button from 'react-spatial/components/Button';
 import Layer from 'react-spatial/layers/Layer';
 import Collapsible from '../Collapsible';
-import {
-  setActiveTopic,
-  setLayerSelectedForInfos,
-} from '../../model/app/actions';
+import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
 
 import './TopicMenu.scss';
 
@@ -22,18 +19,19 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
 
   // mapStateToProps
+  menuOpen: PropTypes.bool.isRequired,
   activeTopic: PropTypes.shape().isRequired,
-  layerSelectedForInfos: PropTypes.instanceOf(Layer),
+  selectedForInfos: PropTypes.object,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
-  dispatchSetlayerSelectedForInfos: PropTypes.func.isRequired,
+  dispatchSetSelectedForInfos: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  layerSelectedForInfos: null,
+  selectedForInfos: null,
 };
 
 class TopicMenu extends PureComponent {
@@ -109,18 +107,29 @@ class TopicMenu extends PureComponent {
     }
   }
 
-  renderInfoButton(layer) {
+  renderInfoButton(selectedInfo) {
     const {
-      layerSelectedForInfos,
-      dispatchSetlayerSelectedForInfos,
+      activeTopic,
+      selectedForInfos,
+      dispatchSetSelectedForInfos,
     } = this.props;
-    const isSelected = layerSelectedForInfos === layer;
-    const className = `wkp-info-bt${isSelected ? ' wkp-selected' : ''}`;
+    const isLayerButton = selectedInfo instanceof Layer;
+    const isSelected = selectedForInfos === selectedInfo;
+
+    let className;
+    if (isLayerButton) {
+      className = `wkp-info-layer-bt${isSelected ? ' wkp-selected' : ''}`;
+    } else {
+      className = `wkp-info-topic-bt${
+        activeTopic.key === selectedInfo.key ? ' wkp-active' : ''
+      }${isSelected ? ' wkp-selected' : ''}`;
+    }
+
     return (
       <Button
         className={className}
         onClick={() => {
-          dispatchSetlayerSelectedForInfos(isSelected ? null : layer);
+          dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
         }}
       >
         <FaInfoCircle focusable={false} />
@@ -129,7 +138,7 @@ class TopicMenu extends PureComponent {
   }
 
   render() {
-    const { t, layerService, topic, activeTopic } = this.props;
+    const { t, layerService, topic, activeTopic, menuOpen } = this.props;
     const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
 
@@ -161,27 +170,33 @@ class TopicMenu extends PureComponent {
 
     return (
       <div className="wkp-topic-menu">
-        <div
-          className="wkp-topic-menu-item"
-          role="button"
-          tabIndex={0}
-          onClick={() => this.onTopicClick(topic)}
-          onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
-        >
-          <div className="wkp-topic-title">
-            <div className="wkp-topic-radio">
-              {topic.key === activeTopic.key && (
-                <div className="wkp-topic-radio-dot" />
-              )}
-            </div>
-            {t(topic.name)}
-          </div>
+        <div className="wkp-topic-menu-item-wrapper">
           <div
-            className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
-            style={{
-              display: topic.key === activeTopic.key ? 'block' : 'none',
-            }}
-          />
+            className="wkp-topic-menu-item"
+            role="button"
+            tabIndex={0}
+            onClick={() => this.onTopicClick(topic)}
+            onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
+          >
+            <div className="wkp-topic-title">
+              <div className="wkp-topic-radio">
+                {topic.key === activeTopic.key && (
+                  <div className="wkp-topic-radio-dot" />
+                )}
+              </div>
+              {t(topic.name)}
+            </div>
+            <div
+              className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
+              style={{
+                display: topic.key === activeTopic.key ? 'block' : 'none',
+              }}
+            />
+          </div>
+          {menuOpen &&
+            topic &&
+            topic.description &&
+            this.renderInfoButton(topic)}
         </div>
         <div className="wkp-topic-content">
           {topic.key === activeTopic.key &&
@@ -215,13 +230,14 @@ TopicMenu.defaultProps = defaultProps;
 TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = state => ({
+  menuOpen: state.app.menuOpen,
   activeTopic: state.app.activeTopic,
-  layerSelectedForInfos: state.app.layerSelectedForInfos,
+  selectedForInfos: state.app.selectedForInfos,
 });
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
-  dispatchSetlayerSelectedForInfos: setLayerSelectedForInfos,
+  dispatchSetSelectedForInfos: setSelectedForInfos,
 };
 
 export default compose(

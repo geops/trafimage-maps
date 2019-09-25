@@ -6,44 +6,67 @@ import Layer from 'react-spatial/layers/Layer';
 import Dialog from '../Dialog';
 
 const propTypes = {
-  layer: PropTypes.instanceOf(Layer),
+  selectedForInfos: PropTypes.object,
 };
 
 const defaultProps = {
-  layer: null,
+  selectedForInfos: null,
 };
 
-export const NAME = 'layerInfos';
+export const NAME = 'infoDialog';
+
+const getLegendUrl = (legendUrl, language) => {
+  const src = legendUrl || '';
+  return /{language}/.test(legendUrl)
+    ? src.replace('{language}', language)
+    : src;
+};
 
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
-  const { layer } = props;
+  const { selectedForInfos } = props;
 
-  if (!layer) {
+  if (!selectedForInfos) {
     return null;
+  }
+
+  let body;
+  if (selectedForInfos instanceof Layer) {
+    body = (
+      <Trans
+        i18nKey={selectedForInfos.get('description') || ''}
+        components={[
+          <img
+            src={getLegendUrl(selectedForInfos.get('legendUrl'), language)}
+            draggable="false"
+            alt={t('Kein Bildtext')}
+          />,
+        ]}
+      />
+    );
+  } else {
+    body = (
+      <Trans
+        i18nKey={selectedForInfos.description || ''}
+        components={[
+          <img
+            src={getLegendUrl(selectedForInfos.legendUrl, language)}
+            draggable="false"
+            alt={t('Kein Bildtext')}
+          />,
+        ]}
+      />
+    );
   }
 
   return (
     <Dialog
       isDraggable
+      cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}
-      body={
-        <Trans
-          i18nKey={layer.get('description') || ''}
-          components={[
-            <img
-              src={(layer.get('legendUrl') || '').replace(
-                '{language}',
-                language,
-              )}
-              draggable="false"
-              alt={t('Kein Bildtext')}
-            />,
-          ]}
-        />
-      }
+      body={body}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

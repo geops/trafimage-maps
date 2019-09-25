@@ -230,7 +230,8 @@ export const punctuality = new Layer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.puenktlichkeit-desc',
-    legendUrl: '/img/tracker/puenktlichkeit_legend_{language}.png',
+    legendUrl:
+      '/img/layers/puenktlichkeit/puenktlichkeit_legend_{language}.png',
   },
 });
 
