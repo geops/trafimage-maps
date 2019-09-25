@@ -17,9 +17,6 @@ export const NAME = 'infoDialog';
 
 const getLegendUrl = (legendUrl, language) => {
   const src = legendUrl || '';
-  console.log(
-    /{language}/.test(legendUrl) ? src.replace('{language}', language) : src,
-  );
   return /{language}/.test(legendUrl)
     ? src.replace('{language}', language)
     : src;
@@ -66,6 +63,7 @@ function LayerInfosDialog(props) {
   return (
     <Dialog
       isDraggable
+      cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}
       body={body}
