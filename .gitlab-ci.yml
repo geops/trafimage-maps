@@ -27,6 +27,16 @@ build_maps:
     paths:
       - build/
 
+build_maps_prod:
+  stage: build
+  script:
+    - yarn install
+    - yarn lint
+    - yarn test
+    - yarn build:prod
+  artifacts:
+    when: on_success
+
 deploy_dev:
   stage: deploy
   dependencies:
@@ -56,7 +66,7 @@ deploy_stag_manual:
 deploy_prod_manual:
   stage: deploy
   dependencies:
-    - build_maps
+    - build_maps_prod
   script:
     - echo "$PROD_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.prod.trafimage.geops.ch:/var/www/wkp2.prod.trafimage.geops.ch
