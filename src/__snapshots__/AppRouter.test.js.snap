@@ -685,6 +685,41 @@ exports[`AppRouter should match snapshot 1`] = `
                     <div
                       className="wkp-topic-radio"
                     />
+                    ch.sbb.handicap
+                  </div>
+                  <div
+                    className="wkp-layer-toggler collapsed"
+                    style={
+                      Object {
+                        "display": "none",
+                      }
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                className="wkp-topic-content"
+              />
+            </div>
+            <div
+              className="wkp-topic-menu"
+            >
+              <div
+                className="wkp-topic-menu-item-wrapper"
+              >
+                <div
+                  className="wkp-topic-menu-item"
+                  onClick={[Function]}
+                  onKeyPress={[Function]}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <div
+                    className="wkp-topic-title"
+                  >
+                    <div
+                      className="wkp-topic-radio"
+                    />
                     ch.sbb.construction
                   </div>
                   <div
