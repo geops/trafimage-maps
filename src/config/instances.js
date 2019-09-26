@@ -4,7 +4,7 @@ let topics = defaultTopics;
 
 switch (process.env.REACT_APP_ENV) {
   case 'wkp_prod':
-    topics = [netzkarte],
+    topics = [netzkarte];
   case 'stele': {
     topics = [netzkarteStelen];
     break;
