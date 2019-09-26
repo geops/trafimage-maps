@@ -12,6 +12,7 @@ import WMSLayer from 'react-spatial/layers/WMSLayer';
 import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
+import HandicapLayer from '../layers/HandicapLayer';
 import CONF from './appConfig';
 
 proj4.defs(
@@ -342,6 +343,26 @@ export const parks = new WMSLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.parks-desc',
+  },
+});
+
+export const stuetzpunktbahnhoefe = new HandicapLayer({
+  name: 'ch.sbb.stuetzpunktbahnhoefe',
+  visible: true,
+  showStuetzpunktbahnhof: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
+  },
+});
+
+export const nichtStuetzpunktbahnhoefe = new HandicapLayer({
+  name: 'ch.sbb.nichtStuetzpunktbahnhoefe',
+  visible: true,
+  showStuetzpunktbahnhof: false,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.nichtStuetzpunktbahnhoefe-desc',
   },
 });
 
