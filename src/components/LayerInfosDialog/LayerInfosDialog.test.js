@@ -47,7 +47,7 @@ describe('LayerInfosDialog', () => {
   test('should match snapshot when Layer is defined', () => {
     const component = renderer.create(
       <Provider store={store}>
-        <LayerInfosDialog layer={layer} />
+        <LayerInfosDialog selectedForInfos={layer} />
       </Provider>,
     );
     const tree = component.toJSON();

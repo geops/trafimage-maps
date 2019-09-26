@@ -4,7 +4,8 @@
   border-top-width: 0;
   margin-top: 0;
 
-  .wkp-info-bt {
+  .wkp-info-layer-bt,
+  .wkp-info-topic-bt {
     position: absolute !important;
     right: 0;
     display: flex;
@@ -13,52 +14,71 @@
     height: 27px;
   }
 
-  .wkp-topic-menu-item {
-    margin: 0 10px;
-    padding: 0 5px;
-    height: 30px;
+  .wkp-topic-menu-item-wrapper {
     display: flex;
     align-items: center;
 
-    .wkp-topic-title {
+    .wkp-topic-menu-item {
+      margin: 0 55px 0 10px;
+      padding: 0 5px;
+      height: 30px;
       display: flex;
-    }
+      align-items: center;
 
-    .wkp-topic-radio {
-      width: 15px;
-      height: 15px;
-      margin-right: 7px;
-      border: 1px solid grey;
-      border-radius: 50%;
+      .wkp-topic-title {
+        display: flex;
+      }
 
-      .wkp-topic-radio-dot {
-        width: 11px;
-        height: 11px;
-        margin: 2px;
-        background: $brand-primary;
+      .wkp-topic-radio {
+        width: 15px;
+        height: 15px;
+        margin-right: 7px;
+        border: 1px solid grey;
         border-radius: 50%;
+
+        .wkp-topic-radio-dot {
+          width: 11px;
+          height: 11px;
+          margin: 2px;
+          background: $brand-primary;
+          border-radius: 50%;
+        }
+      }
+
+      .wkp-layer-toggler {
+        margin-left: 10px;
+        margin-top: 3px;
+        width: 5px;
+        height: 5px;
+        border-width: 1px 0 0 1px;
+        border-style: solid;
+        transform: rotate(45deg);
+
+        &.collapsed {
+          margin-top: 0;
+          transform: rotate(225deg);
+        }
       }
     }
 
-    .wkp-layer-toggler {
-      margin-left: 10px;
-      margin-top: 3px;
-      width: 5px;
-      height: 5px;
-      border-width: 1px 0 0 1px;
-      border-style: solid;
-      transform: rotate(45deg);
+    .wkp-info-topic-bt {
+      color: #888;
+      margin-right: 22px;
+      align-items: center;
 
-      &.collapsed {
-        margin-top: 0;
-        transform: rotate(225deg);
+      &.wkp-active {
+        color: #000;
+      }
+
+      &.wkp-selected {
+        color: $brand-primary;
       }
     }
   }
 
   .wkp-layer-tree {
     overflow: hidden;
-    margin: 10px 20px 20px 30px;
+    margin: 10px 10px 20px 30px;
 
     .tm-layer-tree-item {
       color: #888;
