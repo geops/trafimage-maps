@@ -38,14 +38,14 @@ function Dialog(props) {
     }
   };
 
-  // ComponentDidMount
-  useEffect(() => registerEsc(true), []);
-
-  // ComponentWillUnmount
   useEffect(() => {
+    // ComponentDidMount
+    registerEsc(true);
+    // ComponentWillUnmount
     return () => {
       registerEsc(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
