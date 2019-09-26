@@ -10223,10 +10223,10 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-ol@^6.0.0-beta.13:
-  version "6.0.0-dev.1569313715023"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.0.0-dev.1569313715023.tgz#66dc446c874b9af3a5b3ce40a64195015ca6b5ff"
-  integrity sha512-dgeoAZnMCXtoI+EiWEQcq2s82oArs+TcJ7ZF0EEaShuiQJZhjMMNeiNJEUZJE4jj1OWJ6MkfkCZ23ZF68BRtzQ==
+ol@^6.0.0-dev.1569433045197:
+  version "6.0.0-dev.1569433045197"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.0.0-dev.1569433045197.tgz#5a56a20ac4d5d2341d2c54b16b270c1f9ad968c6"
+  integrity sha512-Nhr5w8owl0XmK7wa/dCz7n1CJUIpDtayvCUEry3ugf/xWy/T5CYUqIaDcVTPkfYsI+PS71VFqD2ib00VX0Go4Q==
   dependencies:
     "@openlayers/pepjs" "^0.5.3"
     pbf "3.2.0"
