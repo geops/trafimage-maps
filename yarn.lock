@@ -12284,10 +12284,10 @@ react-simple-code-editor@^0.9.7:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.9.14.tgz#5b8fdc36a975cbf02fdafa2597398d8e212afebc"
   integrity sha512-doNaIIt4w7QIiB6ysWHMtYL4M3xOGPvZJH8vGq3W/hGk43pn25RDA27IS8GkbfhA1eLX72CWDhuC7KmDKax13g==
 
-react-spatial@^0.1.0-beta.23:
-  version "0.1.0-beta.23"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.23.tgz#600bb4539dd085128eef0f8285dae8974dd35b0c"
-  integrity sha512-VoSEYWbhXBAAAdgO31Qkm+u+SxnSCqx+4u0TzQWJNAIUjB1B/jwCzIdC04GKQt8engh6YzPRyF4VI3mgym3tlg==
+react-spatial@^0.1.0-beta.24:
+  version "0.1.0-beta.24"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.24.tgz#c90745877afecc48a90312aec7374757fa6ce5e3"
+  integrity sha512-O5eoGrkfjLlw93NbZoPyqLce294wNQf74ugu+MwrNIYRJumwxHCo6V9+NjrHcNKiZebsjJ+zYZo7qW4FVZZ0ig==
   dependencies:
     query-string "^6.4.2"
     react-color "^2.17.3"

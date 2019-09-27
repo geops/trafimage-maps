@@ -106,17 +106,19 @@ class ZoneLayer extends VectorLayer {
     this.selectedZones = [];
 
     this.onClick(features => {
-      const [feature] = features;
+      if (features.length) {
+        const [feature] = features;
 
-      if (feature.get('isClickable')) {
-        const idx = this.selectedZones.indexOf(feature);
-        if (idx > -1) {
-          this.selectedZones.splice(idx, 1);
-        } else {
-          this.selectedZones.push(feature);
+        if (feature.get('isClickable')) {
+          const idx = this.selectedZones.indexOf(feature);
+          if (idx > -1) {
+            this.selectedZones.splice(idx, 1);
+          } else {
+            this.selectedZones.push(feature);
+          }
+
+          this.olLayer.changed();
         }
-
-        this.olLayer.changed();
       }
     });
   }
