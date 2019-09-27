@@ -170,7 +170,6 @@ class RouteLayer extends VectorLayer {
     }
 
     return Promise.all(routePromises).then(data => {
-      // group sequences to routes
       const sequenceFeatures = data.flat().filter(f => f);
       this.olLayer.getSource().addFeatures(sequenceFeatures);
       sequenceFeatures.forEach(f => {
