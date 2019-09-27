@@ -242,6 +242,7 @@ punctuality.setChildren([
     apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
+    radioGroup: 'ch.sbb.punctuality',
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
   }),
   new TrajservLayer({
@@ -249,6 +250,7 @@ punctuality.setChildren([
     apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
+    radioGroup: 'ch.sbb.punctuality',
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
   }),
   new TrajservLayer({
@@ -256,6 +258,7 @@ punctuality.setChildren([
     apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
+    radioGroup: 'ch.sbb.punctuality',
   }),
 ]);
 
