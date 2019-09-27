@@ -57,9 +57,9 @@ class RouteLayer extends VectorLayer {
     this.onClick(features => {
       if (features.length) {
         const [feature] = features;
+        const { isClickable, routeId } = feature.get('route');
 
-        if (feature && feature.get('isClickable')) {
-          const routeId = feature.get('routeId');
+        if (isClickable) {
           const idx = this.selectedRouteIds.indexOf(routeId);
           if (idx > -1) {
             this.selectedRouteIds.splice(idx, 1);
@@ -103,16 +103,13 @@ class RouteLayer extends VectorLayer {
         const features = format.readFeatures(data);
         features.forEach((f, i) => f.setProperties(sequenceProps[i]));
         return features;
-      })
-      .catch(() => {
-        // eslint-disable-next-line no-console
-        console.info('Request cancelled');
       });
   }
 
   routeStyle(feature) {
+    const { routeId } = feature.get('route');
     const mot = feature.get('mot');
-    const isSelected = this.selectedRouteIds.includes(feature.get('routeId'));
+    const isSelected = this.selectedRouteIds.includes(routeId);
     const color =
       this.routeStyleFunction(feature.getProperties(), isSelected) ||
       this.motColors[mot];
@@ -152,8 +149,7 @@ class RouteLayer extends VectorLayer {
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
-        const { isSelected, isClickable, sequences } = routes[i];
-        const { mot, uicFrom, uicTo } = sequences[j];
+        const { mot, uicFrom, uicTo } = routes[i].sequences[j];
         const nextMot =
           j === routes[i].sequences.length - 1
             ? null
@@ -161,12 +157,8 @@ class RouteLayer extends VectorLayer {
 
         via = via.concat([uicFrom, uicTo]);
         sequenceProps.push({
-          uicFrom,
-          uicTo,
+          route: { ...routes[i], routeId: i },
           mot,
-          isSelected,
-          isClickable,
-          routeId: i,
         });
 
         if (mot !== nextMot) {
@@ -181,9 +173,12 @@ class RouteLayer extends VectorLayer {
       // group sequences to routes
       const sequenceFeatures = data.flat().filter(f => f);
       this.olLayer.getSource().addFeatures(sequenceFeatures);
-      sequenceFeatures
-        .filter(f => f.get('isSelected'))
-        .forEach(f => this.selectedRouteIds.push(f.get('routeId')));
+      sequenceFeatures.forEach(f => {
+        const { routeId, isSelected } = f.get('route');
+        if (isSelected) {
+          this.selectedRouteIds.push(routeId);
+        }
+      });
       return sequenceFeatures;
     });
   }
