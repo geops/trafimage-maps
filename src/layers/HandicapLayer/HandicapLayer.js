@@ -15,15 +15,29 @@ class HandicapLayer extends VectorLayer {
   constructor(options = {}) {
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
-      source: new OLVectorSource(),
+      source: new OLVectorSource({
+        format: new GeoJSON(),
+        loader: () => {
+          fetch(`${CONF.cartaroUrl}handicap/items/`)
+            .then(data => data.json())
+            .then(data => {
+              const format = new GeoJSON();
+              let features = format.readFeatures(data);
+              features = features.filter(
+                f =>
+                  f.get('stuetzpunktbahnhof') === this.showStuetzpunktbahnhof,
+              );
+              this.olLayer.getSource().clear();
+              this.olLayer.getSource().addFeatures(features);
+            });
+        },
+      }),
     });
 
     super({
       ...options,
       olLayer,
     });
-
-    this.url = `${CONF.cartaroUrl}handicap/items/`;
 
     this.setVisible(this.visible);
 
@@ -66,41 +80,6 @@ class HandicapLayer extends VectorLayer {
     }
 
     return style;
-  }
-
-  /**
-   * Set visible
-   * @param {boolean} visible
-   * @param {boolean} [stopPropagationDown] Stops propagation down.
-   * @param {boolean} [stopPropagationUp] Stops propagation up.
-   * @param {boolean} [stopPropagationSiblings] Stops propagation toward siblings.
-   */
-  setVisible(
-    visible,
-    stopPropagationDown = false,
-    stopPropagationUp = false,
-    stopPropagationSiblings = false,
-  ) {
-    if (visible && !this.olLayer.getSource().getFeatures().length) {
-      fetch(this.url)
-        .then(data => data.json())
-        .then(data => {
-          const format = new GeoJSON();
-          let features = format.readFeatures(data);
-          features = features.filter(
-            f => f.get('stuetzpunktbahnhof') === this.showStuetzpunktbahnhof,
-          );
-          this.olLayer.getSource().clear();
-          this.olLayer.getSource().addFeatures(features);
-        });
-    }
-
-    super.setVisible(
-      visible,
-      stopPropagationDown,
-      stopPropagationUp,
-      stopPropagationSiblings,
-    );
   }
 }
 
