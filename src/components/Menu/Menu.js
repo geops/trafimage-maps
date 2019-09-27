@@ -19,6 +19,7 @@ const propTypes = {
     PropTypes.shape({
       component: PropTypes.string,
       standalone: PropTypes.bool,
+      topic: PropTypes.string,
     }),
   ).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -49,21 +50,24 @@ class Menu extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { menuComponents } = this.props;
+    const { menuComponents, activeTopic } = this.props;
 
     // Array.every returns always true if array is empty.
     if (
       !(prevProps.menuComponents.length === 0 && menuComponents.length === 0) &&
-      prevProps.menuComponents.every(
-        comp => menuComponents.includes(comp) === false,
-      )
+      JSON.stringify(prevProps.menuComponents) !==
+        JSON.stringify(menuComponents)
     ) {
+      this.loadMenuComponents();
+    }
+
+    if (prevProps.activeTopic !== activeTopic) {
       this.loadMenuComponents();
     }
   }
 
   loadMenuComponents() {
-    const { menuComponents } = this.props;
+    const { menuComponents, activeTopic } = this.props;
     const components = [];
 
     for (let i = 0; i < menuComponents.length; i += 1) {
@@ -72,9 +76,13 @@ class Menu extends Component {
         import(`../../menus/${menuComponents[i].component}/index.js`),
       );
       Comp.standalone = menuComponents[i].standalone;
-      components.push(Comp);
-    }
+      Comp.topic = menuComponents[i].topic;
 
+      // Only load general and topic related menu.
+      if (!Comp.topic || Comp.topic === activeTopic.key) {
+        components.push(Comp);
+      }
+    }
     this.setState({ loadedMenuComponents: components });
   }
 

@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TrafimageMaps from './components/TrafimageMaps';
 import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
-import { TrackerMenu, ShareMenu } from './config/menu';
+import { HandicapMenu, TrackerMenu, ShareMenu } from './config/menu';
 
 const { topics } = INSTANCES_CONF;
 
@@ -36,7 +36,16 @@ const AppRouter = () => (
               popupComponents={POPUP_CONF}
               menuComponents={[
                 { component: ShareMenu, standalone: false },
-                { component: TrackerMenu, standalone: true },
+                {
+                  component: TrackerMenu,
+                  standalone: true,
+                  topic: 'ch.sbb.netzkarte',
+                },
+                {
+                  component: HandicapMenu,
+                  standalone: true,
+                  topic: 'ch.sbb.handicap',
+                },
               ]}
             />
           );

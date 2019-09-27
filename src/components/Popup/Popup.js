@@ -2,17 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
 import OLMap from 'ol/Map';
 import Point from 'ol/geom/Point';
-import Button from 'react-spatial/components/Button';
 import RSPopup from 'react-spatial/components/Popup';
-import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
+import FeaturePagination from '../FeaturePagination';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 import './Popup.scss';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   clickedFeatureInfo: PropTypes.shape(),
   popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
@@ -46,32 +43,13 @@ class Popup extends Component {
   }
 
   renderPagination(features) {
-    const { t } = this.props;
     const { featureIndex } = this.state;
     return (
-      <div className="wkp-popup-pagination-wrapper">
-        <span className="wkp-popup-pagination-button-wrapper">
-          {featureIndex > 0 ? (
-            <Button
-              className="wkp-popup-pagination-button"
-              onClick={() => this.setState({ featureIndex: featureIndex - 1 })}
-            >
-              <IoIosArrowRoundBack />
-            </Button>
-          ) : null}
-        </span>
-        {featureIndex + 1} {t('von')} {features.length}
-        <span className="wkp-popup-pagination-button-wrapper">
-          {featureIndex + 1 < features.length ? (
-            <Button
-              className="wkp-popup-pagination-button"
-              onClick={() => this.setState({ featureIndex: featureIndex + 1 })}
-            >
-              <IoIosArrowRoundForward />
-            </Button>
-          ) : null}
-        </span>
-      </div>
+      <FeaturePagination
+        featureIndex={featureIndex}
+        features={features}
+        setFeatureIndex={idx => this.setState({ featureIndex: idx })}
+      />
     );
   }
 
@@ -134,7 +112,6 @@ const mapDispatchToProps = {
 };
 
 export default compose(
-  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps,
