@@ -36,6 +36,8 @@ build_maps_prod:
     - yarn build:prod
   artifacts:
     when: on_success
+    paths:
+      - build/
 
 deploy_dev:
   stage: deploy
