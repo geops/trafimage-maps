@@ -148,41 +148,19 @@ class TopicMenu extends PureComponent {
       layerService.getLayers()
     ) {
       layerTree = (
-        <Collapsible isCollapsed={isCollapsed}>
-          {topic.key === activeTopic.key &&
-            layerService.getBaseLayers() &&
-            layerService.getBaseLayers().length > 1 && (
-              <Select
-                options={layerService.getBaseLayers().map(l => {
-                  return {
-                    value: l.getKey(),
-                    label: t(l.getKey()),
-                    layer: l,
-                  };
-                })}
-                value={currentBaseLayerKey}
-                onChange={(evt, option) => {
-                  option.layer.setVisible(true);
-                  this.setState({
-                    currentBaseLayerKey: option.value,
-                  });
-                }}
-              />
+        <div className="wkp-layer-tree">
+          <LayerTree
+            isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
+            layerService={layerService}
+            t={t}
+            renderItemContent={(layer, layerTreeComp) => (
+              <>
+                {layerTreeComp.renderItemContent(layer)}
+                {layer.get('hasInfos') && this.renderInfoButton(layer)}
+              </>
             )}
-          <div className="wkp-layer-tree">
-            <LayerTree
-              isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
-              layerService={layerService}
-              t={t}
-              renderItemContent={(layer, layerTreeComp) => (
-                <>
-                  {layerTreeComp.renderItemContent(layer)}
-                  {layer.get('hasInfos') && this.renderInfoButton(layer)}
-                </>
-              )}
-            />
-          </div>
-        </Collapsible>
+          />
+        </div>
       );
     }
 
@@ -218,7 +196,31 @@ class TopicMenu extends PureComponent {
             topic.description &&
             this.renderInfoButton(topic)}
         </div>
-        <div className="wkp-topic-content">{layerTree}</div>
+        <div className="wkp-topic-content">
+          <Collapsible isCollapsed={isCollapsed}>
+            {topic.key === activeTopic.key &&
+              layerService.getBaseLayers() &&
+              layerService.getBaseLayers().length > 1 && (
+                <Select
+                  options={layerService.getBaseLayers().map(l => {
+                    return {
+                      value: l.getKey(),
+                      label: t(l.getKey()),
+                      layer: l,
+                    };
+                  })}
+                  value={currentBaseLayerKey}
+                  onChange={(evt, option) => {
+                    option.layer.setVisible(true);
+                    this.setState({
+                      currentBaseLayerKey: option.value,
+                    });
+                  }}
+                />
+              )}
+            {layerTree}
+          </Collapsible>
+        </div>
       </div>
     );
   }

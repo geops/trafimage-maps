@@ -699,7 +699,16 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              />
+              >
+                <div
+                  className=" wkp-collapsible-vertical"
+                  style={
+                    Object {
+                      "maxHeight": 1000,
+                    }
+                  }
+                />
+              </div>
             </div>
             <div
               className="wkp-topic-menu"
@@ -734,7 +743,16 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              />
+              >
+                <div
+                  className=" wkp-collapsible-vertical"
+                  style={
+                    Object {
+                      "maxHeight": 1000,
+                    }
+                  }
+                />
+              </div>
             </div>
             <div
               className="wkp-topic-menu"
@@ -769,7 +787,16 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              />
+              >
+                <div
+                  className=" wkp-collapsible-vertical"
+                  style={
+                    Object {
+                      "maxHeight": 1000,
+                    }
+                  }
+                />
+              </div>
             </div>
             <div
               className="wkp-topic-menu"
@@ -804,7 +831,16 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              />
+              >
+                <div
+                  className=" wkp-collapsible-vertical"
+                  style={
+                    Object {
+                      "maxHeight": 1000,
+                    }
+                  }
+                />
+              </div>
             </div>
             <div
               className="wkp-topic-menu"
@@ -839,7 +875,16 @@ exports[`AppRouter should match snapshot 1`] = `
               </div>
               <div
                 className="wkp-topic-content"
-              />
+              >
+                <div
+                  className=" wkp-collapsible-vertical"
+                  style={
+                    Object {
+                      "maxHeight": 1000,
+                    }
+                  }
+                />
+              </div>
             </div>
           </div>
           Loading menu...
