@@ -19,9 +19,10 @@
     align-items: center;
 
     .wkp-topic-menu-item {
-      margin: 0 55px 0 10px;
-      padding: 0 5px;
+      margin: 1px;
+      padding: 0 15px;
       height: 30px;
+      width: 100%;
       display: flex;
       align-items: center;
 
@@ -109,7 +110,7 @@
     max-height: 1000px;
 
     select {
-      margin: 0 35px 15px 35px;
+      margin: 5px 35px 15px 35px;
       height: 34px;
       width: 285px;
       display: none;
@@ -125,7 +126,6 @@
   }
 
   .wkp-topic-menu-item {
-    justify-content: space-between;
     border-width: 1px 0 0 0;
     border-color: #eee;
     border-style: solid;
