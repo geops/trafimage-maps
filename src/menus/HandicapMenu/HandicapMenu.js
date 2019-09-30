@@ -59,7 +59,7 @@ function HandicapMenu({ t, map, language }) {
         return (
           <div className="wkp-handicap-menu-wrapper">
             <div className="wkp-handicap-menu-title">
-              {feat.get('stationsbezeichnung')} ({feat.get('didok')})
+              {feat.get('stationsbezeichnung')}
             </div>
             <div className="wkp-handicap-menu-body">
               {fields.map(key => (

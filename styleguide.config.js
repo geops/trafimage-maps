@@ -54,6 +54,15 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'Menus',
+      sections: [
+        {
+          name: 'Handicap Menu',
+          content: 'src/menus/HandicapMenu/README.md',
+        },
+      ],
+    },
   ],
   webpackConfig: {
     module: {
