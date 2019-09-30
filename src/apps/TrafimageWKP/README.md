@@ -18,6 +18,7 @@ import defaultBaseLayers, { buslines } from '../../config/layers';
 
 import TrafimageMaps from '../../components/TrafimageMaps';
 
+const apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
 <div style={{ position: 'relative', width: '100%', height: 500 }}>
   <TrafimageMaps
     topics={[{
@@ -28,10 +29,12 @@ import TrafimageMaps from '../../components/TrafimageMaps';
         new TrajservLayer({
           name: 'Zugtracker',
           key: 'ch.sbb.tracker',
+          apiKey,
         }),
         new TrajservLayer({
           name: 'ch.sbb.puenktlichkeit',
           key: 'ch.sbb.puenktlichkeit',
+          apiKey,
           visible: false,
           useDelayStyle: true,
           operator: 'SBB', // To filter operator
@@ -40,7 +43,7 @@ import TrafimageMaps from '../../components/TrafimageMaps';
         buslines,
       ],
     }]}
-    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+    apiKey={apiKey}
     elements={{
       footer: true,
       header: true,
