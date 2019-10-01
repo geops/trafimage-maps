@@ -51,7 +51,6 @@ class FeatureMenu extends Component {
       source: new OLVectorSource(),
       zIndex: 1,
     });
-    map.addLayer(this.highlightedLayer);
 
     map.on('change:size', () => {
       this.updateMenuHeight();
@@ -75,8 +74,7 @@ class FeatureMenu extends Component {
   }
 
   componentWillUnmount() {
-    const { map } = this.props;
-    map.removeLayer(this.highlightedLayer);
+    this.highlightedLayer.setMap(null);
   }
 
   updateMenuHeight() {
@@ -116,9 +114,10 @@ class FeatureMenu extends Component {
     });
 
     if (feature) {
+      this.highlightedLayer.setMap(map);
       this.highlightFeature(0);
     } else {
-      map.removeLayer(this.highlightedLayer);
+      this.highlightedLayer.setMap(null);
     }
   }
 
