@@ -5,6 +5,8 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import { FaInfo } from 'react-icons/fa';
 import Map from 'ol/Map';
+import OLVectorLayer from 'ol/layer/Vector';
+import OLVectorSource from 'ol/source/Vector';
 import { setMenuOpen } from '../../model/app/actions';
 import FeaturePagination from '../FeaturePagination';
 import MenuItem from '../Menu/MenuItem';
@@ -33,13 +35,20 @@ const defaultProps = {
 class FeatureMenu extends Component {
   constructor(props) {
     super(props);
-    const { clickedFeatureInfo } = this.props;
+    const { map, clickedFeatureInfo } = this.props;
 
     this.state = {
       open: !!clickedFeatureInfo || false,
       collapsed: true,
       featureIndex: 0,
     };
+
+    // Layer with a higher zIndex, to display clicked feature above other layers.
+    this.highlightedLayer = new OLVectorLayer({
+      source: new OLVectorSource(),
+      zIndex: 1,
+    });
+    map.addLayer(this.highlightedLayer);
   }
 
   componentDidUpdate(prevProps) {
@@ -52,17 +61,40 @@ class FeatureMenu extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { map } = this.props;
+    map.removeLayer(this.highlightedLayer);
+  }
+
+  highlightFeature(idx) {
+    const { clickedFeatureInfo } = this.props;
+
+    this.highlightedLayer.setStyle(
+      clickedFeatureInfo.layers[idx].olLayer.getStyle(),
+    );
+    this.highlightedLayer.getSource().clear();
+    this.highlightedLayer
+      .getSource()
+      .addFeature(clickedFeatureInfo.features[idx]);
+  }
+
   updateMenu() {
     const { featureIndex } = this.state;
-    const { clickedFeatureInfo } = this.props;
+    const { map, clickedFeatureInfo } = this.props;
     const feature =
       clickedFeatureInfo && clickedFeatureInfo.features[featureIndex];
 
     this.setState({
       featureIndex: 0,
-      open: feature ? clickedFeatureInfo.layer.getName() : false,
+      open: feature ? clickedFeatureInfo.layers[featureIndex].getName() : false,
       collapsed: false,
     });
+
+    if (feature) {
+      this.highlightFeature(0);
+    } else {
+      map.removeLayer(this.highlightedLayer);
+    }
   }
 
   renderpagination() {
@@ -75,7 +107,10 @@ class FeatureMenu extends Component {
         <FeaturePagination
           featureIndex={featureIndex}
           features={features}
-          setFeatureIndex={idx => this.setState({ featureIndex: idx })}
+          setFeatureIndex={idx => {
+            this.setState({ featureIndex: idx });
+            this.highlightFeature(idx);
+          }}
         />
       );
     }

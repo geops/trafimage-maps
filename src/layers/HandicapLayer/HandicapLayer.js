@@ -32,6 +32,7 @@ class HandicapLayer extends VectorLayer {
             });
         },
       }),
+      zIndex: 0,
     });
 
     super({
@@ -72,7 +73,7 @@ class HandicapLayer extends VectorLayer {
           image: new Circle({
             radius: 10,
             fill: new Fill({
-              color: 'rgba(0, 61, 133, 0.5)',
+              color: 'rgba(0, 61, 133, 0.3)',
             }),
           }),
         }),

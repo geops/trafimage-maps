@@ -66,16 +66,20 @@ class Popup extends Component {
     }
 
     const { featureIndex } = this.state;
-    const { features, coordinate, layer } = clickedFeatureInfo;
+    const { features, coordinate, layers } = clickedFeatureInfo;
     const feature = features[featureIndex];
 
-    if (!popupComponents[layer.getKey()]) {
+    if (!popupComponents[layers[featureIndex].getKey()]) {
       return null;
     }
 
     // Styleguidist try to load every file in the folder if we don't put index.js
     const PopupComponent = React.lazy(() =>
-      import(`../../popups/${popupComponents[layer.getKey()]}/index.js`),
+      import(
+        `../../popups/${
+          popupComponents[layers[featureIndex].getKey()]
+        }/index.js`
+      ),
     );
 
     const popupCoordinate =
