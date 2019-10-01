@@ -49,7 +49,7 @@ function HandicapMenu({ t, map, language }) {
       className="wkp-handicap-menu"
       title={t('ch.sbb.handicap')}
       map={map}
-      renderBody={(idx, features) => {
+      renderBody={(idx, features, menuHeight, isPaginated) => {
         const feat = features[idx];
         const fields = feat
           .getKeys()
@@ -57,7 +57,14 @@ function HandicapMenu({ t, map, language }) {
             key => !['stationsbezeichnung', 'didok', 'geometry'].includes(key),
           );
         return (
-          <div className="wkp-handicap-menu-wrapper">
+          <div
+            style={{
+              maxHeight: `calc(${menuHeight}px${
+                isPaginated ? ' - 35px' : ''
+              } - 30px)`,
+            }}
+            className="wkp-handicap-menu-wrapper"
+          >
             <div className="wkp-handicap-menu-title">
               {feat.get('stationsbezeichnung')}
             </div>

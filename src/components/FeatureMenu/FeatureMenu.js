@@ -9,6 +9,7 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import { setMenuOpen } from '../../model/app/actions';
 import FeaturePagination from '../FeaturePagination';
+import { transitiondelay } from '../../Globals.scss';
 import MenuItem from '../Menu/MenuItem';
 
 const propTypes = {
@@ -19,6 +20,7 @@ const propTypes = {
   renderBody: PropTypes.func.isRequired,
 
   // mapStateToProps
+  menuOpen: PropTypes.bool.isRequired,
   clickedFeatureInfo: PropTypes.shape(),
 
   // mapDispatchToProps
@@ -36,6 +38,7 @@ class FeatureMenu extends Component {
   constructor(props) {
     super(props);
     const { map, clickedFeatureInfo } = this.props;
+    this.elementRef = React.createRef();
 
     this.state = {
       open: !!clickedFeatureInfo || false,
@@ -49,21 +52,43 @@ class FeatureMenu extends Component {
       zIndex: 1,
     });
     map.addLayer(this.highlightedLayer);
+
+    map.on('change:size', () => {
+      this.updateMenuHeight();
+    });
   }
 
   componentDidUpdate(prevProps) {
-    const { clickedFeatureInfo, dispatchSetMenuOpen } = this.props;
+    const { menuOpen, clickedFeatureInfo, dispatchSetMenuOpen } = this.props;
     if (clickedFeatureInfo !== prevProps.clickedFeatureInfo) {
       if (clickedFeatureInfo && clickedFeatureInfo.features.length) {
         dispatchSetMenuOpen(false);
       }
       this.updateMenu();
     }
+
+    if (menuOpen !== prevProps.menuOpen) {
+      window.setTimeout(() => {
+        this.updateMenuHeight();
+      }, transitiondelay);
+    }
   }
 
   componentWillUnmount() {
     const { map } = this.props;
     map.removeLayer(this.highlightedLayer);
+  }
+
+  updateMenuHeight() {
+    const { map } = this.props;
+    let menuHeight;
+    if (this.elementRef && this.elementRef.current) {
+      const mapBottom = map.getTarget().getBoundingClientRect().bottom;
+      const elemRect = this.elementRef.current.getBoundingClientRect();
+      menuHeight = mapBottom - elemRect.top - 35;
+    }
+
+    this.setState({ menuHeight });
   }
 
   highlightFeature(idx) {
@@ -110,6 +135,9 @@ class FeatureMenu extends Component {
           setFeatureIndex={idx => {
             this.setState({ featureIndex: idx });
             this.highlightFeature(idx);
+            window.setTimeout(() => {
+              this.updateMenuHeight();
+            }, transitiondelay);
           }}
         />
       );
@@ -128,7 +156,7 @@ class FeatureMenu extends Component {
       map,
       clickedFeatureInfo,
     } = this.props;
-
+    const { menuHeight } = this.state;
     if (!open) {
       return null;
     }
@@ -141,13 +169,23 @@ class FeatureMenu extends Component {
         map={map}
         open={typeof open === 'string'}
         collapsed={collapsed}
-        onCollapseToggle={c => this.setState({ collapsed: c })}
+        onCollapseToggle={c => {
+          this.setState({ collapsed: c });
+          window.setTimeout(() => {
+            this.updateMenuHeight();
+          }, transitiondelay);
+        }}
       >
         {clickedFeatureInfo && clickedFeatureInfo.features.length ? (
-          <>
-            {renderBody(featureIndex, clickedFeatureInfo.features)}
+          <div ref={this.elementRef}>
+            {renderBody(
+              featureIndex,
+              clickedFeatureInfo.features,
+              menuHeight,
+              clickedFeatureInfo.features.length > 1,
+            )}
             {this.renderpagination()}
-          </>
+          </div>
         ) : null}
       </MenuItem>
     );
@@ -155,6 +193,7 @@ class FeatureMenu extends Component {
 }
 
 const mapStateToProps = state => ({
+  menuOpen: state.app.menuOpen,
   clickedFeatureInfo: state.app.clickedFeatureInfo,
 });
 
