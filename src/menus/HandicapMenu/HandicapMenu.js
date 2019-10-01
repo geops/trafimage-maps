@@ -27,10 +27,10 @@ function HandicapMenu({ t, map, language }) {
   const renderField = (key, val) => {
     if (typeof val === 'boolean') {
       return (
-        <>
+        <div className="wkp-handicap-field-boolean">
           <span>{key}: </span>
-          {key ? <MdDone /> : <MdClear />}
-        </>
+          {val ? <MdDone /> : <MdClear />}
+        </div>
       );
     }
     if (unselectedLanguagesRegex.test(key)) {
