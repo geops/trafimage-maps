@@ -64,6 +64,9 @@ class FeatureMenu extends Component {
         dispatchSetMenuOpen(false);
       }
       this.updateMenu();
+      window.setTimeout(() => {
+        this.updateMenuHeight();
+      }, transitiondelay);
     }
 
     if (menuOpen !== prevProps.menuOpen) {
