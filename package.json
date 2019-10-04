@@ -18,7 +18,7 @@
     "proj4": "^2.5.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.3.0",
-    "react": "^16.7.0",
+    "react": "^16.10.2",
     "react-app-polyfill": "^1.0.1",
     "react-dom": "^16.7.0",
     "react-i18next": "^10.2.0",
@@ -34,7 +34,7 @@
     "redux-thunk": "^2.3.0"
   },
   "peerDependencies": {
-    "react": "^16.7.0",
+    "react": "^16.10.2",
     "react-dom": "^16.7.0"
   },
   "devDependencies": {
