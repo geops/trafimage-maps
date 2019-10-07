@@ -5,6 +5,13 @@ module.exports = {
   version,
   template: {
     favicon: 'img/favicon.png',
+    head: {
+      scripts: [
+        {
+          src: 'https://geops.ch/tempkey.js'
+        }
+      ]
+    }
   },
   assetsDir: 'src/',
   styleguideDir: 'styleguide-build',
