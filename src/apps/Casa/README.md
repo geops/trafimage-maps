@@ -16,7 +16,7 @@ import casa from '../../config/Casa';
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
   // Demo key. Please replace with your own key.
-  apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  apiKey: demo-key,
   zoneStyleFunction: (zoneProps, isSelected) => {
     return {
       fill: {
@@ -56,7 +56,7 @@ zoneLayer.onClick(f => {
 const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   // Demo apiKey. Please replace with your own apiKey.
-  apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  apiKey: demo-key,
   routeStyleFunction: (routeProps, isSelected) => {
     // return undefined to use default color (see param motColors)
     return isSelected ? 'blue' : undefined;
@@ -108,7 +108,7 @@ const elements = {
 <div style={{ position: 'relative', width: '100%', height: 500 }}>
   <TrafimageMaps
     topics={[casa]}
-    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+    apiKey= demo-key
     layers={[zoneLayer, routeLayer]}
     elements={elements}
   />
