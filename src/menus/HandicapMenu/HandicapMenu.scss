@@ -1,18 +1,32 @@
 .wkp-handicap-menu {
-  .wkp-handicap-menu-wrapper {
-    margin: 10px 20px;
+  .wkp-collapsible-vertical {
+    overflow: hidden;
 
-    .wkp-handicap-menu-title {
-      margin: 10px 0;
-      font-weight: bold;
+    .wkp-handicap-menu-wrapper {
+      overflow: hidden auto;
+      padding: 10px 20px;
+
+      .wkp-handicap-menu-title {
+        margin: 10px 0;
+        font-weight: bold;
+      }
+
+      .wkp-handicap-menu-field {
+        margin: 5px 0;
+
+        .wkp-handicap-field-boolean {
+          display: flex;
+          align-items: center;
+        }
+
+        .wkp-handicap-menu-value {
+          margin: 5px 10px;
+        }
+      }
     }
 
-    .wkp-handicap-menu-field {
-      margin: 5px 0;
-
-      .wkp-handicap-menu-value {
-        margin: 5px 10px;
-      }
+    .wkp-pagination-wrapper {
+      border-top: 1px solid #eee;
     }
   }
 }
