@@ -8,7 +8,7 @@ module.exports = {
     head: {
       scripts: [
         {
-          src: 'https://geops.ch/tempkey.js'
+          src: 'https://geops.ch/dl/tempkey.js'
         }
       ]
     }
