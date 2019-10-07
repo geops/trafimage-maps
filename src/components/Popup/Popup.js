@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import OLMap from 'ol/Map';
 import Point from 'ol/geom/Point';
 import RSPopup from 'react-spatial/components/Popup';
-import FeaturePagination from '../FeaturePagination';
+import FeatureInformation from '../FeatureInformation';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 import './Popup.scss';
 
 const propTypes = {
-  clickedFeatureInfo: PropTypes.shape(),
+  clickedFeatureInfo: PropTypes.arrayOf(PropTypes.shape()),
   popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
@@ -20,89 +20,33 @@ const defaultProps = {
   clickedFeatureInfo: null,
 };
 
-class Popup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      featureIndex: 0,
-    };
+const Popup = ({
+  map,
+  popupComponents,
+  clickedFeatureInfo,
+  dispatchSetClickedFeatureInfo,
+}) => {
+  if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
+    return null;
   }
 
-  componentDidUpdate(prevProps) {
-    const { clickedFeatureInfo } = this.props;
+  const { coordinate, features } = clickedFeatureInfo[0];
+  const geom = features[0].getGeometry();
+  const coord = geom instanceof Point ? geom.getCoordinates() : coordinate;
 
-    if (clickedFeatureInfo !== prevProps.clickedFeatureInfo) {
-      this.resetFeatureIndex();
-    }
-  }
-
-  resetFeatureIndex() {
-    this.setState({
-      featureIndex: 0,
-    });
-  }
-
-  renderPagination(features) {
-    const { featureIndex } = this.state;
-    return (
-      <FeaturePagination
-        featureIndex={featureIndex}
-        features={features}
-        setFeatureIndex={idx => this.setState({ featureIndex: idx })}
+  return (
+    <RSPopup
+      onCloseClick={() => dispatchSetClickedFeatureInfo()}
+      popupCoordinate={coord}
+      map={map}
+    >
+      <FeatureInformation
+        popupComponents={popupComponents}
+        clickedFeatureInfo={clickedFeatureInfo}
       />
-    );
-  }
-
-  render() {
-    const {
-      map,
-      popupComponents,
-      clickedFeatureInfo,
-      dispatchSetClickedFeatureInfo,
-    } = this.props;
-
-    if (!clickedFeatureInfo || !clickedFeatureInfo.features.length) {
-      return null;
-    }
-
-    const { featureIndex } = this.state;
-    const { features, coordinate, layers } = clickedFeatureInfo;
-    const feature = features[featureIndex];
-
-    if (!popupComponents[layers[featureIndex].getKey()]) {
-      return null;
-    }
-
-    // Styleguidist try to load every file in the folder if we don't put index.js
-    const PopupComponent = React.lazy(() =>
-      import(
-        `../../popups/${
-          popupComponents[layers[featureIndex].getKey()]
-        }/index.js`
-      ),
-    );
-
-    const popupCoordinate =
-      feature.getGeometry() instanceof Point
-        ? feature.getGeometry().getCoordinates()
-        : coordinate;
-
-    return (
-      <React.Suspense fallback="loading...">
-        <RSPopup
-          onCloseClick={() => dispatchSetClickedFeatureInfo()}
-          popupCoordinate={popupCoordinate}
-          map={map}
-        >
-          <PopupComponent feature={features[featureIndex]} />
-          {clickedFeatureInfo.features.length > 1
-            ? this.renderPagination(features)
-            : null}
-        </RSPopup>
-      </React.Suspense>
-    );
-  }
-}
+    </RSPopup>
+  );
+};
 
 Popup.propTypes = propTypes;
 Popup.defaultProps = defaultProps;

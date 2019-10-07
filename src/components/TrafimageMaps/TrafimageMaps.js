@@ -22,6 +22,7 @@ import Footer from '../Footer';
 import MapControls from '../MapControls';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
+import FeatureMenu from '../FeatureMenu';
 import MainDialog from '../MainDialog';
 import store, { getStore } from '../../model/store';
 
@@ -51,6 +52,7 @@ const propTypes = {
     header: PropTypes.bool,
     footer: PropTypes.bool,
     menu: PropTypes.bool,
+    featureMenu: PropTypes.bool,
     permaLink: PropTypes.bool,
     popup: PropTypes.bool,
     mapControls: PropTypes.bool,
@@ -139,6 +141,7 @@ const defaultProps = {
     menu: false,
     permalink: false,
     popup: false,
+    featureMenu: false,
     mapControls: false,
     baseLayerToggler: false,
   },
@@ -188,6 +191,9 @@ class TrafimageMaps extends Component {
     const defaultElements = {
       header: <Header />,
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
+      featureMenu: (
+        <FeatureMenu map={this.map} popupComponents={popupComponents} />
+      ),
       footer: <Footer layerService={this.layerService} map={this.map} />,
       menu: (
         <Menu

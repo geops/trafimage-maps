@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import TrafimageMaps from './components/TrafimageMaps';
 import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
-import { HandicapMenu, TrackerMenu, ShareMenu } from './config/menu';
 
 const { topics } = INSTANCES_CONF;
 
@@ -17,35 +16,21 @@ const AppRouter = () => (
       path="/:topic"
       render={({ history, match }) => {
         if (topicKeys.includes(match.params.topic)) {
+          const activeTopic = topics.find(t => t.key = match.params.topic);
+          const { menuComponents, elements } = activeTopic;
+
           return (
             <TrafimageMaps
               history={history}
               activeTopicKey={match.params.topic}
               topics={topics}
               apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
-              elements={{
-                header: true,
-                footer: true,
-                menu: true,
-                permalink: true,
-                mapControls: true,
-                popup: true,
-                baseLayerToggler: true,
-              }}
+              elements={elements}
               initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}
               menuComponents={[
-                { component: ShareMenu, standalone: false },
-                {
-                  component: TrackerMenu,
-                  standalone: true,
-                  topic: 'ch.sbb.netzkarte',
-                },
-                {
-                  component: HandicapMenu,
-                  standalone: true,
-                  topic: 'ch.sbb.handicap',
-                },
+                ...(menuComponents || []),
+                { component: 'ShareMenu', standalone: false },
               ]}
             />
           );

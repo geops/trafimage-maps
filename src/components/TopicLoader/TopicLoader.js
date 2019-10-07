@@ -75,21 +75,9 @@ class TopicLoader extends Component {
         .filter(l => l.getVisible())
         .map(l => l.getFeatureInfoAtCoordinate(e.coordinate));
 
-      const featInfo = {
-        coordinate: e.coordinate,
-        features: [],
-        layers: [],
-      };
       Promise.all(infoPromises).then(featureInfos => {
-        featureInfos.reverse().forEach(i => {
-          if (i.features && i.features.length) {
-            featInfo.features.push(...i.features);
-            for (let y = 0; y < i.features.length; y += 1) {
-              featInfo.layers.push(i.layer);
-            }
-          }
-        });
-        dispatchSetClickedFeatureInfo(featInfo ? { ...featInfo } : null);
+        const infos = featureInfos.filter(i => i.features.length);
+        dispatchSetClickedFeatureInfo(infos);
       });
     });
   }

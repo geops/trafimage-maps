@@ -41,7 +41,7 @@ export default function app(state = initialState, action) {
     case SET_CLICKED_FEATURE_INFO:
       return {
         ...state,
-        clickedFeatureInfo: action.data ? { ...action.data } : null,
+        clickedFeatureInfo: action.data ? [...action.data] : null,
       };
     case SET_ACTIVE_TOPIC:
       return {
