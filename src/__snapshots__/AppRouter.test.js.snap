@@ -434,32 +434,6 @@ exports[`AppRouter should match snapshot 1`] = `
             <div
               className="wkp-topic-content"
             >
-              <select
-                className="tm-select"
-                onChange={[Function]}
-                value="ch.sbb.netzkarte"
-              >
-                <option
-                  value="ch.sbb.netzkarte"
-                >
-                  ch.sbb.netzkarte
-                </option>
-                <option
-                  value="ch.sbb.netzkarte.landeskarte.grau"
-                >
-                  ch.sbb.netzkarte.landeskarte.grau
-                </option>
-                <option
-                  value="ch.sbb.netzkarte.landeskarte"
-                >
-                  ch.sbb.netzkarte.landeskarte
-                </option>
-                <option
-                  value="ch.sbb.netzkarte.luftbild.group"
-                >
-                  ch.sbb.netzkarte.luftbild.group
-                </option>
-              </select>
               <div
                 className=" wkp-collapsible-vertical"
                 style={
@@ -468,6 +442,32 @@ exports[`AppRouter should match snapshot 1`] = `
                   }
                 }
               >
+                <select
+                  className="tm-select"
+                  onChange={[Function]}
+                  value="ch.sbb.netzkarte"
+                >
+                  <option
+                    value="ch.sbb.netzkarte"
+                  >
+                    ch.sbb.netzkarte
+                  </option>
+                  <option
+                    value="ch.sbb.netzkarte.landeskarte.grau"
+                  >
+                    ch.sbb.netzkarte.landeskarte.grau
+                  </option>
+                  <option
+                    value="ch.sbb.netzkarte.landeskarte"
+                  >
+                    ch.sbb.netzkarte.landeskarte
+                  </option>
+                  <option
+                    value="ch.sbb.netzkarte.luftbild.group"
+                  >
+                    ch.sbb.netzkarte.luftbild.group
+                  </option>
+                </select>
                 <div
                   className="wkp-layer-tree"
                 >
@@ -896,7 +896,16 @@ exports[`AppRouter should match snapshot 1`] = `
             </div>
             <div
               className="wkp-topic-content"
-            />
+            >
+              <div
+                className=" wkp-collapsible-vertical"
+                style={
+                  Object {
+                    "maxHeight": 1000,
+                  }
+                }
+              />
+            </div>
           </div>
           <div
             className="wkp-topic-menu"
@@ -931,7 +940,16 @@ exports[`AppRouter should match snapshot 1`] = `
             </div>
             <div
               className="wkp-topic-content"
-            />
+            >
+              <div
+                className=" wkp-collapsible-vertical"
+                style={
+                  Object {
+                    "maxHeight": 1000,
+                  }
+                }
+              />
+            </div>
           </div>
           <div
             className="wkp-topic-menu"
@@ -966,7 +984,16 @@ exports[`AppRouter should match snapshot 1`] = `
             </div>
             <div
               className="wkp-topic-content"
-            />
+            >
+              <div
+                className=" wkp-collapsible-vertical"
+                style={
+                  Object {
+                    "maxHeight": 1000,
+                  }
+                }
+              />
+            </div>
           </div>
           <div
             className="wkp-topic-menu"
@@ -1001,7 +1028,16 @@ exports[`AppRouter should match snapshot 1`] = `
             </div>
             <div
               className="wkp-topic-content"
-            />
+            >
+              <div
+                className=" wkp-collapsible-vertical"
+                style={
+                  Object {
+                    "maxHeight": 1000,
+                  }
+                }
+              />
+            </div>
           </div>
           <div
             className="wkp-topic-menu"
@@ -1036,7 +1072,16 @@ exports[`AppRouter should match snapshot 1`] = `
             </div>
             <div
               className="wkp-topic-content"
-            />
+            >
+              <div
+                className=" wkp-collapsible-vertical"
+                style={
+                  Object {
+                    "maxHeight": 1000,
+                  }
+                }
+              />
+            </div>
           </div>
           <div
             className="wkp-topic-menu"
@@ -1071,7 +1116,16 @@ exports[`AppRouter should match snapshot 1`] = `
             </div>
             <div
               className="wkp-topic-content"
-            />
+            >
+              <div
+                className=" wkp-collapsible-vertical"
+                style={
+                  Object {
+                    "maxHeight": 1000,
+                  }
+                }
+              />
+            </div>
           </div>
         </div>
         <div
@@ -1138,7 +1192,7 @@ exports[`AppRouter should match snapshot 1`] = `
             className=" wkp-collapsible-vertical"
             style={
               Object {
-                "maxHeight": 1000,
+                "maxHeight": null,
               }
             }
           >
