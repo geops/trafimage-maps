@@ -2,7 +2,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Style, Circle, Fill } from 'ol/style';
+import { Style, RegularShape, Stroke, Fill } from 'ol/style';
 import CONF from '../../config/appConfig';
 
 /**
@@ -48,6 +48,33 @@ class HandicapLayer extends VectorLayer {
       [this.clickedFeature] = f;
       this.olLayer.changed();
     });
+
+    this.clickedStyle = new Style({
+      image: new RegularShape({
+        radius: 12,
+        points: 4,
+        angle: Math.PI / 4,
+        stroke: new Stroke({
+          color: '#ed7d31',
+          width: 5,
+        }),
+        fill: new Fill({
+          color: [0, 61, 133, 0.3],
+        }),
+      }),
+    });
+
+    this.defaultStyle = new Style({
+      image: new RegularShape({
+        radius: 12,
+        points: 4,
+        angle: Math.PI / 4,
+        stroke: new Stroke({
+          color: '#ed7d31',
+          width: 5,
+        }),
+      }),
+    });
   }
 
   /**
@@ -56,31 +83,11 @@ class HandicapLayer extends VectorLayer {
    * @returns {Object|null}
    */
   style(feature) {
-    const style = [
-      new Style({
-        image: new Circle({
-          radius: 7,
-          fill: new Fill({
-            color: feature.get('stuetzpunktbahnhof') ? 'blue' : 'red',
-          }),
-        }),
-      }),
-    ];
-
     if (feature === this.clickedFeature) {
-      style.unshift(
-        new Style({
-          image: new Circle({
-            radius: 10,
-            fill: new Fill({
-              color: 'rgba(0, 61, 133, 0.3)',
-            }),
-          }),
-        }),
-      );
+      return this.clickedStyle;
     }
 
-    return style;
+    return this.defaultStyle;
   }
 }
 
