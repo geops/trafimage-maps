@@ -40,16 +40,23 @@ class MenuItem extends Component {
   componentDidMount() {
     const { map } = this.context;
     map.on('change:size', () => this.updateMenuHeight());
-    this.updateMenuHeight();
+    this.heightTimeout = window.setTimeout(() => {
+      this.updateMenuHeight();
+    }, transitiondelay);
   }
 
   componentDidUpdate(prevProps) {
     const { menuOpen } = this.props;
     if (menuOpen !== prevProps.menuOpen) {
-      window.setTimeout(() => {
+      window.clearTimeout(this.heightTimeout);
+      this.heightTimeout = window.setTimeout(() => {
         this.updateMenuHeight();
       }, transitiondelay);
     }
+  }
+
+  componentWillUnmount() {
+    window.clearTimeout(this.heightTimeout);
   }
 
   updateMenuHeight() {

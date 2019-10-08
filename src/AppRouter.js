@@ -22,6 +22,19 @@ const AppRouter = () => (
         if (topicKeys.includes(match.params.topic)) {
           const activeTopic = topics.find(t => t.key === match.params.topic);
           const { elements } = activeTopic;
+          let menuChildren = null;
+
+          switch (match.params.topic) {
+            case 'ch.sbb.handicap': {
+              menuChildren = <FeatureMenu popupComponents={POPUP_CONF} />;
+              break;
+            }
+            case 'ch.sbb.netzkarte':
+              menuChildren = <TrackerMenu />;
+              break;
+            default:
+              menuChildren = null;
+          }
 
           return (
             <TrafimageMaps
@@ -33,12 +46,7 @@ const AppRouter = () => (
               initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}
             >
-              <Menu subMenus=<ShareMenu />>
-                <>
-                  <FeatureMenu popupComponents={POPUP_CONF} />
-                  <TrackerMenu />
-                </>
-              </Menu>
+              <Menu subMenus=<ShareMenu />>{menuChildren}</Menu>
             </TrafimageMaps>
           );
         }
