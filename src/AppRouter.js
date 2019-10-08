@@ -1,5 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import Menu from './components/Menu';
+import FeatureMenu from './components/FeatureMenu';
+import ShareMenu from './menus/ShareMenu';
+import TrackerMenu from './menus/TrackerMenu';
 import TrafimageMaps from './components/TrafimageMaps';
 import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
@@ -16,8 +20,8 @@ const AppRouter = () => (
       path="/:topic"
       render={({ history, match }) => {
         if (topicKeys.includes(match.params.topic)) {
-          const activeTopic = topics.find(t => t.key = match.params.topic);
-          const { menuComponents, elements } = activeTopic;
+          const activeTopic = topics.find(t => t.key === match.params.topic);
+          const { elements } = activeTopic;
 
           return (
             <TrafimageMaps
@@ -28,11 +32,14 @@ const AppRouter = () => (
               elements={elements}
               initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}
-              menuComponents={[
-                ...(menuComponents || []),
-                { component: 'ShareMenu', standalone: false },
-              ]}
-            />
+            >
+              <Menu subMenus=<ShareMenu />>
+                <>
+                  <FeatureMenu popupComponents={POPUP_CONF} />
+                  <TrackerMenu />
+                </>
+              </Menu>
+            </TrafimageMaps>
           );
         }
 

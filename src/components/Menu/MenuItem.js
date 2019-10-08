@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import Map from 'ol/Map';
 import MenuItemHeader from './MenuItemHeader';
+import { AppContext } from '../TrafimageMaps/TrafimageMaps';
 import Collapsible from '../Collapsible';
 import { transitiondelay } from '../../Globals.scss';
 import './MenuItem.scss';
@@ -13,7 +13,6 @@ const propTypes = {
   className: PropTypes.string,
   icon: PropTypes.node,
   title: PropTypes.string,
-  map: PropTypes.instanceOf(Map).isRequired,
   open: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
   onCollapseToggle: PropTypes.func.isRequired,
@@ -31,20 +30,17 @@ class MenuItem extends Component {
   constructor(props) {
     super(props);
 
-    const { map } = this.props;
     this.bodyElementRef = React.createRef();
 
     this.state = {
       menuHeight: null,
     };
-
-    map.on('change:size', () => this.updateMenuHeight());
   }
 
   componentDidMount() {
-    window.setTimeout(() => {
-      this.updateMenuHeight();
-    }, transitiondelay);
+    const { map } = this.context;
+    map.on('change:size', () => this.updateMenuHeight());
+    this.updateMenuHeight();
   }
 
   componentDidUpdate(prevProps) {
@@ -57,8 +53,9 @@ class MenuItem extends Component {
   }
 
   updateMenuHeight() {
-    const { map } = this.props;
+    const { map } = this.context;
     let menuHeight;
+
     if (
       this.bodyElementRef.current &&
       this.bodyElementRef.current.ref.current
@@ -110,6 +107,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {};
 
+MenuItem.contextType = AppContext;
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
 

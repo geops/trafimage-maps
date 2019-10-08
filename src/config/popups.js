@@ -5,8 +5,8 @@ export const wkpPopups = {
   'ch.sbb.netzkarte.stationen': 'NetzkartePopup',
   'ch.sbb.netzkarte.flughafen': 'NetzkartePopup',
   'ch.sbb.parks': 'ParksPopup',
-  'ch.sbb.nichtStuetzpunktbahnhoefe': 'HandicapMenu',
-  'ch.sbb.stuetzpunktbahnhoefe': 'HandicapMenu',
+  'ch.sbb.nichtstuetzpunktbahnhoefe': 'HandicapPopup',
+  'ch.sbb.stuetzpunktbahnhoefe': 'HandicapPopup',
 };
 
 export default wkpPopups;

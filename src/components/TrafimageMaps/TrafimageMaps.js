@@ -16,13 +16,11 @@ import ResizeHandler from 'react-spatial/components/ResizeHandler';
 
 import Permalink from '../Permalink';
 import Map from '../Map';
-import Menu from '../Menu';
 import Header from '../Header';
 import Footer from '../Footer';
 import MapControls from '../MapControls';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
-import FeatureMenu from '../FeatureMenu';
 import MainDialog from '../MainDialog';
 import store, { getStore } from '../../model/store';
 
@@ -52,7 +50,6 @@ const propTypes = {
     header: PropTypes.bool,
     footer: PropTypes.bool,
     menu: PropTypes.bool,
-    featureMenu: PropTypes.bool,
     permaLink: PropTypes.bool,
     popup: PropTypes.bool,
     mapControls: PropTypes.bool,
@@ -76,24 +73,6 @@ const propTypes = {
    * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
    */
   popupComponents: PropTypes.objectOf(PropTypes.string),
-
-  /**
-   * List of menu components that are displayed.
-   * A menu component is represented by 2 properties:
-   *   `standalone`: defined if the property is displayed inside the main menu (false) or outside (true), default to false.
-   *   `component`: the name of the component. Component names are names of files from the folder
-   * `src/components/menus/[MyComponent]` without the `.js` extension.
-   * Example: [
-   *   { component: 'ShareMenu', standalone: true }
-   *   { component: 'TrackerMenu', standalone: false }
-   * ]
-   */
-  menuComponents: PropTypes.arrayOf(
-    PropTypes.shape({
-      component: PropTypes.string,
-      standalone: PropTypes.bool,
-    }),
-  ),
 
   /**
    * Projection used for the map.
@@ -141,19 +120,23 @@ const defaultProps = {
     menu: false,
     permalink: false,
     popup: false,
-    featureMenu: false,
     mapControls: false,
     baseLayerToggler: false,
   },
   baseLayers: null,
   popupComponents: {},
-  menuComponents: [],
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
   history: null,
   initialState: {},
 };
+
+/**
+ * Application context.
+ * Only use the global app context for the map and the layerService.
+ */
+export const AppContext = React.createContext();
 
 class TrafimageMaps extends Component {
   constructor(props) {
@@ -177,7 +160,6 @@ class TrafimageMaps extends Component {
       elements,
       layers,
       popupComponents,
-      menuComponents,
       projection,
       topics,
       activeTopicKey,
@@ -191,17 +173,7 @@ class TrafimageMaps extends Component {
     const defaultElements = {
       header: <Header />,
       popup: <Popup map={this.map} popupComponents={popupComponents} />,
-      featureMenu: (
-        <FeatureMenu map={this.map} popupComponents={popupComponents} />
-      ),
       footer: <Footer layerService={this.layerService} map={this.map} />,
-      menu: (
-        <Menu
-          layerService={this.layerService}
-          menuComponents={menuComponents}
-          map={this.map}
-        />
-      ),
       permalink: (
         <Permalink
           map={this.map}
@@ -240,27 +212,35 @@ class TrafimageMaps extends Component {
       <Provider store={appStore}>
         <div className={`tm-app ${elementClasses.join(' ')}`}>
           <ResizeHandler observe=".tm-app" />
-          <TopicLoader
-            layerService={this.layerService}
-            baseLayers={baseLayers}
-            layers={layers}
-            map={this.map}
-            topics={topics}
-            activeTopicKey={activeTopicKey}
-            apiKey={apiKey}
-          />
-          <ResizeHandler observe={this} />
-          <Map
-            map={this.map}
-            initialCenter={center}
-            initialZoom={zoom}
-            projection={projection}
-          />
 
-          {appElements}
+          <AppContext.Provider
+            value={{
+              map: this.map,
+              layerService: this.layerService,
+            }}
+          >
+            <TopicLoader
+              layerService={this.layerService}
+              baseLayers={baseLayers}
+              layers={layers}
+              map={this.map}
+              topics={topics}
+              activeTopicKey={activeTopicKey}
+              apiKey={apiKey}
+            />
+            <ResizeHandler observe={this} />
+            <Map
+              map={this.map}
+              initialCenter={center}
+              initialZoom={zoom}
+              projection={projection}
+            />
 
-          {children}
-          <MainDialog />
+            {appElements}
+            {children}
+
+            <MainDialog />
+          </AppContext.Provider>
         </div>
       </Provider>
     );

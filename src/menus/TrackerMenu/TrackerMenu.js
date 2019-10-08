@@ -4,19 +4,15 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
-import Map from 'ol/Map';
 import { transform as transformCoords } from 'ol/proj';
-import LayerService from 'react-spatial/LayerService';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
+import { AppContext } from '../../components/TrafimageMaps/TrafimageMaps';
 import { setMenuOpen } from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
 const propTypes = {
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
-  map: PropTypes.instanceOf(Map).isRequired,
-
   dispatchSetMenuOpen: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
@@ -31,17 +27,21 @@ class TrackerMenu extends Component {
 
   constructor(props) {
     super(props);
-    const { layerService, dispatchSetMenuOpen } = this.props;
-
-    this.trackerLayers = layerService
-      .getLayersAsFlatArray()
-      .filter(l => l instanceof TrackerLayer);
 
     this.state = {
       open: false,
       collapsed: true,
       trajectory: null,
     };
+  }
+
+  componentDidMount() {
+    const { layerService } = this.context;
+    const { dispatchSetMenuOpen } = this.props;
+
+    this.trackerLayers = layerService
+      .getLayersAsFlatArray()
+      .filter(l => l instanceof TrackerLayer);
 
     if (this.trackerLayers.length) {
       this.trackerLayers.forEach(layer => {
@@ -72,7 +72,8 @@ class TrackerMenu extends Component {
 
   render() {
     const { open, collapsed, trajectory } = this.state;
-    const { t, map } = this.props;
+    const { map } = this.context;
+    const { t } = this.props;
 
     if (!open) {
       return null;
@@ -118,6 +119,7 @@ const mapDispatchToProps = {
   dispatchSetMenuOpen: setMenuOpen,
 };
 
+TrackerMenu.contextType = AppContext;
 TrackerMenu.propTypes = propTypes;
 
 export default compose(

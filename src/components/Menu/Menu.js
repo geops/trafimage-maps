@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import Map from 'ol/Map';
-import LayerService from 'react-spatial/LayerService';
+import { AppContext } from '../TrafimageMaps/TrafimageMaps';
 import TopicMenu from './TopicMenu';
 import MenuHeader from './MenuHeader';
 import Collapsible from '../Collapsible';
@@ -15,19 +14,16 @@ import './Menu.scss';
 const propTypes = {
   activeTopic: PropTypes.shape().isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  menuComponents: PropTypes.arrayOf(
-    PropTypes.shape({
-      component: PropTypes.string,
-      standalone: PropTypes.bool,
-      topic: PropTypes.string,
-    }),
-  ).isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
-  map: PropTypes.instanceOf(Map).isRequired,
+  subMenus: PropTypes.element,
+  children: PropTypes.element,
   menuOpen: PropTypes.bool.isRequired,
-
   dispatchSetMenuOpen: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  subMenus: null,
+  children: null,
 };
 
 class Menu extends Component {
@@ -37,57 +33,17 @@ class Menu extends Component {
     this.state = {
       menuLayers: [],
       allMenuLayersVisible: false,
-      loadedMenuComponents: [],
     };
-
-    const { layerService } = this.props;
-    layerService.on('change:visible', () => this.updateMenuLayers());
   }
 
   componentDidMount() {
-    this.loadMenuComponents();
+    const { layerService } = this.context;
+    layerService.on('change:visible', () => this.updateMenuLayers());
     this.updateMenuLayers();
   }
 
-  componentDidUpdate(prevProps) {
-    const { menuComponents, activeTopic } = this.props;
-
-    // Array.every returns always true if array is empty.
-    if (
-      !(prevProps.menuComponents.length === 0 && menuComponents.length === 0) &&
-      JSON.stringify(prevProps.menuComponents) !==
-        JSON.stringify(menuComponents)
-    ) {
-      this.loadMenuComponents();
-    }
-
-    if (prevProps.activeTopic !== activeTopic) {
-      this.loadMenuComponents();
-    }
-  }
-
-  loadMenuComponents() {
-    const { menuComponents, activeTopic } = this.props;
-    const components = [];
-
-    for (let i = 0; i < menuComponents.length; i += 1) {
-      // Styleguidist try to load every file in the folder if we don't put index.js
-      const Comp = React.lazy(() =>
-        import(`../../menus/${menuComponents[i].component}/index.js`),
-      );
-      Comp.standalone = menuComponents[i].standalone;
-      Comp.topic = menuComponents[i].topic;
-
-      // Only load general and topic related menu.
-      if (!Comp.topic || Comp.topic === activeTopic.key) {
-        components.push(Comp);
-      }
-    }
-    this.setState({ loadedMenuComponents: components });
-  }
-
   updateMenuLayers() {
-    const { layerService } = this.props;
+    const { layerService } = this.context;
     const topicLayers = layerService
       .getLayersAsFlatArray()
       .reverse()
@@ -108,19 +64,16 @@ class Menu extends Component {
   render() {
     const {
       activeTopic,
-      layerService,
       topics,
-      map,
+      subMenus,
+      children,
       menuOpen,
       dispatchSetMenuOpen,
       t,
     } = this.props;
 
-    const {
-      menuLayers,
-      loadedMenuComponents,
-      allMenuLayersVisible,
-    } = this.state;
+    const { menuLayers, allMenuLayersVisible } = this.state;
+    const { layerService } = this.context;
 
     const info = allMenuLayersVisible
       ? t('alle aktiviert')
@@ -147,23 +100,11 @@ class Menu extends Component {
                 />
               ))}
             </div>
-            {loadedMenuComponents
-              .filter(Comp => !Comp.standalone)
-              .map((Comp, index) => (
-                <React.Suspense fallback="Loading menu..." key={index}>
-                  <Comp layerService={layerService} map={map} />
-                </React.Suspense>
-              ))}
+            {subMenus}
           </Collapsible>
         </div>
 
-        {loadedMenuComponents
-          .filter(Comp => Comp.standalone)
-          .map((Comp, index) => (
-            <React.Suspense fallback="Loading menu..." key={index}>
-              <Comp layerService={layerService} map={map} />
-            </React.Suspense>
-          ))}
+        {children}
       </div>
     );
     /* eslint-enable */
@@ -180,7 +121,9 @@ const mapDispatchToProps = {
   dispatchSetMenuOpen: setMenuOpen,
 };
 
+Menu.contextType = AppContext;
 Menu.propTypes = propTypes;
+Menu.defaultProps = defaultProps;
 
 export default compose(
   withTranslation(),

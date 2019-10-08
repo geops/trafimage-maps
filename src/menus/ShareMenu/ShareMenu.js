@@ -1,18 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import Map from 'ol/Map';
 import { FaShareAlt } from 'react-icons/fa';
+import { AppContext } from '../../components/TrafimageMaps/TrafimageMaps';
 import Share from '../../components/Share';
 import MenuItem from '../../components/Menu/MenuItem';
 
-const propTypes = {
-  map: PropTypes.instanceOf(Map).isRequired,
-};
-
-const defaultProps = {};
-
-const ShareMenu = ({ map }) => {
+const ShareMenu = () => {
+  const { map } = useContext(AppContext);
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   return (
@@ -29,8 +23,5 @@ const ShareMenu = ({ map }) => {
     </MenuItem>
   );
 };
-
-ShareMenu.propTypes = propTypes;
-ShareMenu.defaultProps = defaultProps;
 
 export default React.memo(ShareMenu);
