@@ -39,8 +39,9 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
   const layerService = useSelector(state => state.app.layerService);
   const { name } = useSelector(state => state.app.activeTopic);
   const { t } = useTranslation();
-  const [subtitle, setSubtitle] = useState(getSubtitle(layerService, t));
+  const [subtitle, setSubtitle] = useState('');
 
+  // Update subtitle on layer's visibility change.
   useEffect(() => {
     const cb = () => {
       setSubtitle(getSubtitle(layerService, t));
@@ -51,6 +52,11 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Update subtitle on language change and topic change.
+  useEffect(() => {
+    setSubtitle(getSubtitle(layerService, t));
+  }, [layerService, t, name]);
 
   return (
     <Button
@@ -80,4 +86,4 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
 TopicsMenuHeader.propTypes = propTypes;
 TopicsMenuHeader.defaultProps = defaultProps;
 
-export default React.memo(TopicsMenuHeader);
+export default TopicsMenuHeader;
