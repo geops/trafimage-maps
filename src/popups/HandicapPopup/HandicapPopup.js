@@ -20,51 +20,51 @@ function HandicapPopup({ language, feature }) {
     <>
       <PopupElement
         properties={properties}
-        k={`treffpunkt_${lng}`}
+        key={`treffpunkt_${lng}`}
         name="Treffpunkt"
       />
       <PopupElement
         properties={properties}
-        k={`voranmeldefrist_${lng}`}
+        key={`voranmeldefrist_${lng}`}
         name="Voranmeldefrist"
       />
       <PopupElement
         properties={properties}
-        k={`bedienungszeiten_${lng}`}
+        key={`bedienungszeiten_${lng}`}
         name="Bedienungszeiten"
       />
       <PopupElement properties={properties} k="faltrampe" />
       <PopupElement
         properties={properties}
-        k="rampe"
+        key="rampe"
         ausnahme={`ausnahme_zu_rampe_${lng}`}
       />
       <PopupElement
         properties={properties}
-        k="lift_zu_perron"
+        key="lift_zu_perron"
         name="Lift zu Perron"
         ausnahme={`ausnahme_zu_lift_${lng}`}
       />
       <PopupElement
         properties={properties}
-        k="perronhoehe_P55"
+        key="perronhoehe_P55"
         name="Perronhöhe"
         ausnahme={`ausnahme_zu_P55_${lng}`}
       />
-      <PopupElement properties={properties} k="taktile_sicherheitslinien" />
-      <PopupElement properties={properties} k="induktionsverstaerker" />
-      <PopupElement properties={properties} k="sbb_rollstuhl" />
-      <PopupElement properties={properties} k="rollstuhl_billet" />
-      <PopupElement properties={properties} k="rollstuhl_wc" />
-      <PopupElement properties={properties} k="eurok_wc" />
+      <PopupElement properties={properties} key="taktile_sicherheitslinien" />
+      <PopupElement properties={properties} key="induktionsverstaerker" />
+      <PopupElement properties={properties} key="sbb_rollstuhl" />
+      <PopupElement properties={properties} key="rollstuhl_billet" />
+      <PopupElement properties={properties} key="rollstuhl_wc" />
+      <PopupElement properties={properties} key="eurok_wc" />
       <PopupElement
         name="Dienstleistungen dritter"
         properties={properties}
-        k={`beschreibung_zur_dritte_dienstleistung_${lng}`}
+        key={`beschreibung_zur_dritte_dienstleistung_${lng}`}
       />
       <PopupElement
         properties={properties}
-        k={`zusaetzliche_informationen_${lng}`}
+        key={`zusaetzliche_informationen_${lng}`}
       />
     </>
   );

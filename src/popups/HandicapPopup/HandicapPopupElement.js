@@ -6,7 +6,7 @@ import { compose } from 'lodash/fp';
 const propTypes = {
   t: PropTypes.func.isRequired,
   properties: PropTypes.shape.isRequired,
-  k: PropTypes.string.isRequired,
+  key: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   ausnahme: PropTypes.string,
 };
@@ -15,22 +15,22 @@ const defaultProps = {
   ausnahme: null,
 };
 
-function PopupElement({ t, properties, k, name, ausnahme }) {
-  if (!properties[k]) {
+function PopupElement({ t, properties, key, name, ausnahme }) {
+  if (!properties[key]) {
     return null;
   }
 
-  switch (typeof properties[k]) {
+  switch (typeof properties[key]) {
     case 'boolean':
       return (
         <div className="handicap-popup-element">
           <b>{t(name)}</b>
           &nbsp;
-          {properties[k] ? t('vorhanden') : t('nicht vorhanden')}
+          {properties[key] ? t('vorhanden') : t('nicht vorhanden')}
         </div>
       );
     case 'string': {
-      const values = properties[k].split('\n');
+      const values = properties[key].split('\n');
 
       if (ausnahme && properties[ausnahme]) {
         values.push(properties[ausnahme]);
