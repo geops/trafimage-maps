@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 import { FaInfo } from 'react-icons/fa';
 import FeatureInformation from '../FeatureInformation';
 import MenuItem from '../Menu/MenuItem';
 
 const propTypes = {
-  clickedFeatureInfo: PropTypes.arrayOf(PropTypes.shape()),
   popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-  clickedFeatureInfo: [],
-};
-
-const FeatureMenu = ({ clickedFeatureInfo, popupComponents, t }) => {
+const FeatureMenu = ({ popupComponents }) => {
+  const { t } = useTranslation();
+  const clickedFeatureInfo = useSelector(state => state.app.clickedFeatureInfo);
   const [collapsed, setCollapsed] = useState(false);
 
   if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
@@ -41,14 +36,6 @@ const FeatureMenu = ({ clickedFeatureInfo, popupComponents, t }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  clickedFeatureInfo: state.app.clickedFeatureInfo,
-});
-
 FeatureMenu.propTypes = propTypes;
-FeatureMenu.defaultProps = defaultProps;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps),
-)(FeatureMenu);
+export default FeatureMenu;
