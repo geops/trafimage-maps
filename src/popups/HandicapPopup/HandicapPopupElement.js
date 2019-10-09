@@ -1,68 +1,82 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
-  properties: PropTypes.shape.isRequired,
-  key: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  properties: PropTypes.object.isRequired,
+  propertyName: PropTypes.string.isRequired,
+  label: PropTypes.string,
   ausnahme: PropTypes.string,
 };
 
 const defaultProps = {
   ausnahme: null,
+  label: null,
 };
 
-function PopupElement({ t, properties, key, name, ausnahme }) {
-  if (!properties[key]) {
+function PopupElement({ properties, propertyName, label, ausnahme }) {
+  const { t } = useTranslation();
+
+  if (!properties[propertyName]) {
     return null;
   }
 
-  switch (typeof properties[key]) {
+  let content = null;
+  const propLabel = label || propertyName;
+  const propValue = properties[propertyName];
+
+  switch (typeof propValue) {
     case 'boolean':
-      return (
-        <div className="handicap-popup-element">
-          <b>{t(name)}</b>
+      content = (
+        <>
+          <b>{t(propLabel)}</b>
           &nbsp;
-          {properties[key] ? t('vorhanden') : t('nicht vorhanden')}
-        </div>
+          {propValue ? t('vorhanden') : t('nicht vorhanden')}
+        </>
       );
+      break;
     case 'string': {
-      const values = properties[key].split('\n');
+      const values = propValue.split('\n');
 
       if (ausnahme && properties[ausnahme]) {
         values.push(properties[ausnahme]);
       }
 
       if (values.length > 1) {
-        return (
-          <div className="handicap-popup-element">
-            <div>{t(name)}</div>
+        content = (
+          <>
+            <div>{t(propLabel)}</div>
             <div>
               {values.map(v => (
                 <div>{v}</div>
               ))}
             </div>
-          </div>
+          </>
         );
+        break;
       }
 
-      return (
-        <div className="handicap-popup-element">
-          <b>{t(name)}</b>
+      content = (
+        <>
+          <b>{t(propLabel)}</b>
           &nbsp;
           <div>{values[0]}</div>
-        </div>
+        </>
       );
+      break;
     }
     default:
-      return null;
+      break;
   }
+
+  if (!content) {
+    return null;
+  }
+
+  return <div className="wkp-handicap-popup-element">{content}</div>;
 }
 
 PopupElement.propTypes = propTypes;
 PopupElement.defaultProps = defaultProps;
 
-export default compose(withTranslation())(PopupElement);
+export default React.memo(PopupElement);

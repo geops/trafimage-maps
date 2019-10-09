@@ -16,7 +16,6 @@ configure({ adapter: new Adapter() });
 describe('Permalink', () => {
   const mockStore = configureStore([thunk]);
   let store;
-  let layerService;
 
   beforeEach(() => {
     store = mockStore({
@@ -27,24 +26,23 @@ describe('Permalink', () => {
           name: 'topic name',
           projection: 'EPSG:3857',
         },
+        layerService: new LayerService([
+          new Layer({
+            name: 'testLayer',
+            olLayer: new VectorLayer({
+              source: new VectorSource(),
+            }),
+          }),
+        ]),
       },
     });
-
-    layerService = new LayerService([
-      new Layer({
-        name: 'testLayer',
-        olLayer: new VectorLayer({
-          source: new VectorSource(),
-        }),
-      }),
-    ]);
   });
 
   test('shoud initialize Permalink with layerService.', () => {
     expect(window.location.search).toEqual('');
     mount(
       <Provider store={store}>
-        <Permalink layerService={layerService} />
+        <Permalink />
       </Provider>,
     );
 
@@ -55,7 +53,7 @@ describe('Permalink', () => {
     window.history.pushState({}, undefined, '/?tripNumber=150, 200, 300');
     mount(
       <Provider store={store}>
-        <Permalink layerService={layerService} />
+        <Permalink />
       </Provider>,
     );
 
@@ -68,7 +66,7 @@ describe('Permalink', () => {
     window.history.pushState({}, undefined, '/?operator=sbb,  zsg');
     mount(
       <Provider store={store}>
-        <Permalink layerService={layerService} />
+        <Permalink />
       </Provider>,
     );
 
@@ -81,7 +79,7 @@ describe('Permalink', () => {
     window.history.pushState({}, undefined, '/?publishedLineName=2068, 3003 ');
     mount(
       <Provider store={store}>
-        <Permalink layerService={layerService} />
+        <Permalink />
       </Provider>,
     );
 

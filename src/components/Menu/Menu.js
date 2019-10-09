@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import { AppContext } from '../TrafimageMaps/TrafimageMaps';
 import TopicMenu from './TopicMenu';
 import MenuHeader from './MenuHeader';
 import Collapsible from '../Collapsible';
@@ -12,13 +11,16 @@ import { setMenuOpen } from '../../model/app/actions';
 import './Menu.scss';
 
 const propTypes = {
-  activeTopic: PropTypes.shape().isRequired,
-  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   subMenus: PropTypes.element,
   children: PropTypes.element,
-  menuOpen: PropTypes.bool.isRequired,
   dispatchSetMenuOpen: PropTypes.func.isRequired,
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape().isRequired,
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  menuOpen: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
+  layerService: PropTypes.object.isRequired,
 };
 
 const defaultProps = {
@@ -37,13 +39,13 @@ class Menu extends Component {
   }
 
   componentDidMount() {
-    const { layerService } = this.context;
+    const { layerService } = this.props;
     layerService.on('change:visible', () => this.updateMenuLayers());
     this.updateMenuLayers();
   }
 
   updateMenuLayers() {
-    const { layerService } = this.context;
+    const { layerService } = this.props;
     const topicLayers = layerService
       .getLayersAsFlatArray()
       .reverse()
@@ -70,10 +72,10 @@ class Menu extends Component {
       menuOpen,
       dispatchSetMenuOpen,
       t,
+      layerService,
     } = this.props;
 
     const { menuLayers, allMenuLayersVisible } = this.state;
-    const { layerService } = this.context;
 
     const info = allMenuLayersVisible
       ? t('alle aktiviert')
@@ -115,13 +117,13 @@ const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   topics: state.app.topics,
   menuOpen: state.app.menuOpen,
+  layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
   dispatchSetMenuOpen: setMenuOpen,
 };
 
-Menu.contextType = AppContext;
 Menu.propTypes = propTypes;
 Menu.defaultProps = defaultProps;
 

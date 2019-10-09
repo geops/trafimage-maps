@@ -3,13 +3,10 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import OLMap from 'ol/Map';
 import Projection from 'ol/proj/Projection';
-import { defaults as defaultInteractions } from 'ol/interaction';
-import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
@@ -132,122 +129,83 @@ const defaultProps = {
   initialState: {},
 };
 
-/**
- * Application context.
- * Only use the global app context for the map and the layerService.
- */
-export const AppContext = React.createContext();
+function TrafimageMaps({
+  baseLayers,
+  children,
+  elements,
+  layers,
+  popupComponents,
+  projection,
+  topics,
+  activeTopicKey,
+  apiKey,
+  history,
+  center,
+  zoom,
+  initialState,
+}) {
+  /**
+   * If the application runs standalone, we want to use a consistent store.
+   * However when running in Stylegudist, every application needs it own store
+   */
+  const appStore = history ? store : getStore();
+  const { map, layerService } = appStore.getState().app;
+  const defaultElements = {
+    header: <Header />,
+    popup: <Popup popupComponents={popupComponents} />,
+    footer: <Footer />,
+    permalink: <Permalink history={history} initialState={initialState} />,
+    mapControls: <MapControls />,
+    baseLayerToggler: (
+      <BaseLayerToggler
+        layerService={layerService}
+        map={map}
+        fallbackImgDir="/img/baselayer/"
+        validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
+      />
+    ),
+  };
 
-class TrafimageMaps extends Component {
-  constructor(props) {
-    super(props);
+  const appElements = Object.entries(defaultElements).map(([k, v]) =>
+    elements[k] ? <div key={k}>{v}</div> : null,
+  );
 
-    this.map = new OLMap({
-      controls: [],
-      interactions: defaultInteractions({
-        altShiftDragRotate: false,
-        pinchRotate: false,
-      }),
-    });
+  // Classes for active components used for conditional styling
+  const elementClasses = Object.keys(elements)
+    .filter(k => elements[k])
+    .map(k => k);
 
-    this.layerService = new LayerService();
-  }
-
-  render() {
-    const {
-      baseLayers,
-      children,
-      elements,
-      layers,
-      popupComponents,
-      projection,
-      topics,
-      activeTopicKey,
-      apiKey,
-      history,
-      center,
-      zoom,
-      initialState,
-    } = this.props;
-
-    const defaultElements = {
-      header: <Header />,
-      popup: <Popup map={this.map} popupComponents={popupComponents} />,
-      footer: <Footer layerService={this.layerService} map={this.map} />,
-      permalink: (
-        <Permalink
-          map={this.map}
-          history={history}
-          initialState={initialState}
-          layerService={this.layerService}
+  return (
+    <Provider store={appStore}>
+      <div className={`tm-app ${elementClasses.join(' ')}`}>
+        <ResizeHandler observe=".tm-app" />
+        <TopicLoader
+          layerService={layerService}
+          baseLayers={baseLayers}
+          layers={layers}
+          map={map}
+          topics={topics}
+          activeTopicKey={activeTopicKey}
+          apiKey={apiKey}
         />
-      ),
-      mapControls: <MapControls map={this.map} />,
-      baseLayerToggler: (
-        <BaseLayerToggler
-          layerService={this.layerService}
-          map={this.map}
-          fallbackImgDir="/img/baselayer/"
-          validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
+        <ResizeHandler observe={this} />
+        <Map
+          map={map}
+          initialCenter={center}
+          initialZoom={zoom}
+          projection={projection}
         />
-      ),
-    };
 
-    const appElements = Object.entries(defaultElements).map(([k, v]) =>
-      elements[k] ? <div key={k}>{v}</div> : null,
-    );
+        {appElements}
+        {children}
 
-    // Classes for active components used for conditional styling
-    const elementClasses = Object.keys(elements)
-      .filter(k => elements[k])
-      .map(k => k);
-
-    /**
-     * If the application runs standalone, we want to use a consistent store.
-     * However when running in Stylegudist, every application needs it own store
-     */
-    const appStore = history ? store : getStore();
-
-    return (
-      <Provider store={appStore}>
-        <div className={`tm-app ${elementClasses.join(' ')}`}>
-          <ResizeHandler observe=".tm-app" />
-
-          <AppContext.Provider
-            value={{
-              map: this.map,
-              layerService: this.layerService,
-            }}
-          >
-            <TopicLoader
-              layerService={this.layerService}
-              baseLayers={baseLayers}
-              layers={layers}
-              map={this.map}
-              topics={topics}
-              activeTopicKey={activeTopicKey}
-              apiKey={apiKey}
-            />
-            <ResizeHandler observe={this} />
-            <Map
-              map={this.map}
-              initialCenter={center}
-              initialZoom={zoom}
-              projection={projection}
-            />
-
-            {appElements}
-            {children}
-
-            <MainDialog />
-          </AppContext.Provider>
-        </div>
-      </Provider>
-    );
-  }
+        <MainDialog />
+      </div>
+    </Provider>
+  );
 }
 
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default TrafimageMaps;
+export default React.memo(TrafimageMaps);

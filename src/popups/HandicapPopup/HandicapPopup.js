@@ -1,87 +1,77 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import PopupElement from './HandicapPopupElement';
 import './HandicapPopup.scss';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
-  language: PropTypes.string.isRequired,
 };
 
-function HandicapPopup({ language, feature }) {
+function HandicapPopup({ feature }) {
+  const language = useSelector(state => state.app.language);
   const properties = feature.getProperties();
-  const lng = language;
-
   return (
     <>
       <PopupElement
         properties={properties}
-        key={`treffpunkt_${lng}`}
-        name="Treffpunkt"
+        propertyName={`treffpunkt_${language}`}
+        label="Treffpunkt"
       />
       <PopupElement
         properties={properties}
-        key={`voranmeldefrist_${lng}`}
-        name="Voranmeldefrist"
+        propertyName={`voranmeldefrist_${language}`}
+        label="Voranmeldefrist"
       />
       <PopupElement
         properties={properties}
-        key={`bedienungszeiten_${lng}`}
-        name="Bedienungszeiten"
+        propertyName={`bedienungszeiten_${language}`}
+        label="Bedienungszeiten"
       />
-      <PopupElement properties={properties} k="faltrampe" />
+      <PopupElement properties={properties} propertyName="faltrampe" />
       <PopupElement
         properties={properties}
-        key="rampe"
-        ausnahme={`ausnahme_zu_rampe_${lng}`}
-      />
-      <PopupElement
-        properties={properties}
-        key="lift_zu_perron"
-        name="Lift zu Perron"
-        ausnahme={`ausnahme_zu_lift_${lng}`}
+        propertyName="rampe"
+        ausnahme={`ausnahme_zu_rampe_${language}`}
       />
       <PopupElement
         properties={properties}
-        key="perronhoehe_P55"
-        name="Perronhöhe"
-        ausnahme={`ausnahme_zu_P55_${lng}`}
-      />
-      <PopupElement properties={properties} key="taktile_sicherheitslinien" />
-      <PopupElement properties={properties} key="induktionsverstaerker" />
-      <PopupElement properties={properties} key="sbb_rollstuhl" />
-      <PopupElement properties={properties} key="rollstuhl_billet" />
-      <PopupElement properties={properties} key="rollstuhl_wc" />
-      <PopupElement properties={properties} key="eurok_wc" />
-      <PopupElement
-        name="Dienstleistungen dritter"
-        properties={properties}
-        key={`beschreibung_zur_dritte_dienstleistung_${lng}`}
+        propertyName="lift_zu_perron"
+        label="Lift zu Perron"
+        ausnahme={`ausnahme_zu_lift_${language}`}
       />
       <PopupElement
         properties={properties}
-        key={`zusaetzliche_informationen_${lng}`}
+        propertyName="perronhoehe_P55"
+        label="Perronhöhe"
+        ausnahme={`ausnahme_zu_P55_${language}`}
+      />
+      <PopupElement
+        properties={properties}
+        propertyName="taktile_sicherheitslinien"
+      />
+      <PopupElement
+        properties={properties}
+        propertyName="induktionsverstaerker"
+      />
+      <PopupElement properties={properties} propertyName="sbb_rollstuhl" />
+      <PopupElement properties={properties} propertyName="rollstuhl_billet" />
+      <PopupElement properties={properties} propertyName="rollstuhl_wc" />
+      <PopupElement properties={properties} propertyName="eurok_wc" />
+      <PopupElement
+        label="Dienstleistungen dritter"
+        properties={properties}
+        propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
+      />
+      <PopupElement
+        properties={properties}
+        propertyName={`zusaetzliche_informationen_${language}`}
       />
     </>
   );
 }
 
-const mapStateToProps = state => ({
-  language: state.app.language,
-});
-
-const mapDispatchToProps = {};
-
 HandicapPopup.propTypes = propTypes;
 
-export default compose(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(HandicapPopup);
+export default React.memo(HandicapPopup);

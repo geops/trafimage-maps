@@ -1,8 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import OLMap from 'ol/Map';
 import Point from 'ol/geom/Point';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
@@ -10,22 +8,13 @@ import { setClickedFeatureInfo } from '../../model/app/actions';
 import './Popup.scss';
 
 const propTypes = {
-  clickedFeatureInfo: PropTypes.arrayOf(PropTypes.shape()),
   popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
-  map: PropTypes.instanceOf(OLMap).isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
-  clickedFeatureInfo: null,
-};
+const Popup = ({ popupComponents }) => {
+  const { map, clickedFeatureInfo } = useSelector(state => state.app);
+  const dispatch = useDispatch();
 
-const Popup = ({
-  map,
-  popupComponents,
-  clickedFeatureInfo,
-  dispatchSetClickedFeatureInfo,
-}) => {
   if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
     return null;
   }
@@ -36,7 +25,9 @@ const Popup = ({
 
   return (
     <RSPopup
-      onCloseClick={() => dispatchSetClickedFeatureInfo()}
+      onCloseClick={() => {
+        dispatch(setClickedFeatureInfo());
+      }}
       popupCoordinate={coord}
       map={map}
     >
@@ -49,19 +40,5 @@ const Popup = ({
 };
 
 Popup.propTypes = propTypes;
-Popup.defaultProps = defaultProps;
 
-const mapStateToProps = state => ({
-  clickedFeatureInfo: state.app.clickedFeatureInfo,
-});
-
-const mapDispatchToProps = {
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
-};
-
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(Popup);
+export default React.memo(Popup);

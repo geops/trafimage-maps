@@ -11,20 +11,20 @@ import POPUP_CONF from './config/popups';
 const { topics } = INSTANCES_CONF;
 
 const topicKeys = topics.map(t => t.key);
-
 const AppRouter = () => (
   <Router>
     <Route exact path="/" render={() => <Redirect to={`${topicKeys[0]}`} />} />
     <Route
       exact
       path="/:topic"
-      render={({ history, match }) => {
-        if (topicKeys.includes(match.params.topic)) {
+      component={({ history, match }) => {
+        const topicKey = match.params.topic;
+        if (topicKeys.includes(topicKey)) {
           const activeTopic = topics.find(t => t.key === match.params.topic);
           const { elements } = activeTopic;
           let menuChildren = null;
 
-          switch (match.params.topic) {
+          switch (topicKey) {
             case 'ch.sbb.handicap': {
               menuChildren = <FeatureMenu popupComponents={POPUP_CONF} />;
               break;
@@ -39,7 +39,7 @@ const AppRouter = () => (
           return (
             <TrafimageMaps
               history={history}
-              activeTopicKey={match.params.topic}
+              activeTopicKey={topicKey}
               topics={topics}
               apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
               elements={elements}
@@ -57,4 +57,4 @@ const AppRouter = () => (
   </Router>
 );
 
-export default AppRouter;
+export default React.memo(AppRouter);

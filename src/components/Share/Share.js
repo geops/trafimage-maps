@@ -1,19 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import Map from 'ol/Map';
+import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
 import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from 'react-spatial/components/BlankLink';
 import SharePermalinkButton from '../SharePermalinkButton';
 import './Share.scss';
-
-const propTypes = {
-  map: PropTypes.instanceOf(Map).isRequired,
-};
-
-const defaultProps = {};
 
 const socialShareConfig = [
   {
@@ -35,6 +28,7 @@ const socialShareConfig = [
     className: 'ta-twitter-icon',
   },
 ];
+
 const renderConf = (conf, t) => (
   <div className={conf.className} key={conf.title}>
     <BlankLink href={conf.url} title={t(conf.title)}>
@@ -43,7 +37,8 @@ const renderConf = (conf, t) => (
   </div>
 );
 
-const Share = ({ map }) => {
+const Share = () => {
+  const { map } = useSelector(state => state.app.map);
   const { t } = useTranslation();
   const config = [...socialShareConfig];
 
@@ -65,8 +60,5 @@ const Share = ({ map }) => {
     </div>
   );
 };
-
-Share.propTypes = propTypes;
-Share.defaultProps = defaultProps;
 
 export default React.memo(Share);

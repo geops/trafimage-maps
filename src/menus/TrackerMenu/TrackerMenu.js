@@ -5,16 +5,21 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
 import { transform as transformCoords } from 'ol/proj';
+import Map from 'ol/Map';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
-import { AppContext } from '../../components/TrafimageMaps/TrafimageMaps';
 import { setMenuOpen } from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
 const propTypes = {
-  dispatchSetMenuOpen: PropTypes.func.isRequired,
+  // mapStateToProps
+  map: PropTypes.instanceOf(Map).isRequired,
+  layerService: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+
+  // mapDispatchToProps
+  dispatchSetMenuOpen: PropTypes.func.isRequired,
 };
 
 class TrackerMenu extends Component {
@@ -36,8 +41,7 @@ class TrackerMenu extends Component {
   }
 
   componentDidMount() {
-    const { layerService } = this.context;
-    const { dispatchSetMenuOpen } = this.props;
+    const { layerService, dispatchSetMenuOpen } = this.props;
 
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
@@ -72,8 +76,7 @@ class TrackerMenu extends Component {
 
   render() {
     const { open, collapsed, trajectory } = this.state;
-    const { map } = this.context;
-    const { t } = this.props;
+    const { map, t } = this.props;
 
     if (!open) {
       return null;
@@ -113,13 +116,15 @@ class TrackerMenu extends Component {
 }
 
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  map: state.app.map,
+  layerService: state.app.layerService,
+});
 
 const mapDispatchToProps = {
   dispatchSetMenuOpen: setMenuOpen,
 };
 
-TrackerMenu.contextType = AppContext;
 TrackerMenu.propTypes = propTypes;
 
 export default compose(
