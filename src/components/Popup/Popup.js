@@ -19,9 +19,13 @@ const Popup = ({ popupComponents }) => {
     return null;
   }
 
-  const { coordinate, features } = clickedFeatureInfo[0];
+  const { coordinate, features, layer } = clickedFeatureInfo[0];
   const geom = features[0].getGeometry();
   const coord = geom instanceof Point ? geom.getCoordinates() : coordinate;
+
+  if (!popupComponents[layer.getKey()]) {
+    return null;
+  }
 
   return (
     <RSPopup

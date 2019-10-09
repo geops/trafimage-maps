@@ -76,7 +76,7 @@ class TopicLoader extends Component {
         .map(l => l.getFeatureInfoAtCoordinate(e.coordinate));
 
       Promise.all(infoPromises).then(featureInfos => {
-        const infos = featureInfos.filter(i => i.features.length);
+        const infos = featureInfos.filter(i => i && i.features.length);
         dispatchSetClickedFeatureInfo(infos);
       });
     });

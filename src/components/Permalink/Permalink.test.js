@@ -9,6 +9,7 @@ import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { Map, View } from 'ol';
 import Permalink from './Permalink';
 
 configure({ adapter: new Adapter() });
@@ -34,6 +35,7 @@ describe('Permalink', () => {
             }),
           }),
         ]),
+        map: new Map({ view: new View({}) }),
       },
     });
   });

@@ -10,6 +10,10 @@ import Projection from 'ol/proj/Projection';
 import Layer from 'react-spatial/layers/Layer';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
+import Menu from '../Menu';
+import FeatureMenu from '../FeatureMenu';
+import ShareMenu from '../../menus/ShareMenu';
+import TrackerMenu from '../../menus/TrackerMenu';
 
 import Permalink from '../Permalink';
 import Map from '../Map';
@@ -23,6 +27,7 @@ import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
+import TopicsMenu from '../TopicsMenu';
 
 const propTypes = {
   /**
@@ -150,12 +155,35 @@ function TrafimageMaps({
    */
   const appStore = history ? store : getStore();
   const { map, layerService } = appStore.getState().app;
+
+  let menuChildren = null;
+
+  switch (activeTopicKey) {
+    case 'ch.sbb.handicap': {
+      menuChildren = <FeatureMenu popupComponents={popupComponents} />;
+      break;
+    }
+    case 'ch.sbb.netzkarte':
+      menuChildren = <TrackerMenu />;
+      break;
+    default:
+      menuChildren = null;
+  }
+
   const defaultElements = {
     header: <Header />,
     popup: <Popup popupComponents={popupComponents} />,
     footer: <Footer />,
     permalink: <Permalink history={history} initialState={initialState} />,
     mapControls: <MapControls />,
+    menu: (
+      <Menu>
+        <TopicsMenu>
+          <ShareMenu />
+        </TopicsMenu>
+        {menuChildren}
+      </Menu>
+    ),
     baseLayerToggler: (
       <BaseLayerToggler
         layerService={layerService}

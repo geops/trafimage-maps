@@ -1,9 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import Menu from './components/Menu';
-import FeatureMenu from './components/FeatureMenu';
-import ShareMenu from './menus/ShareMenu';
-import TrackerMenu from './menus/TrackerMenu';
 import TrafimageMaps from './components/TrafimageMaps';
 import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
@@ -22,19 +18,6 @@ const AppRouter = () => (
         if (topicKeys.includes(topicKey)) {
           const activeTopic = topics.find(t => t.key === match.params.topic);
           const { elements } = activeTopic;
-          let menuChildren = null;
-
-          switch (topicKey) {
-            case 'ch.sbb.handicap': {
-              menuChildren = <FeatureMenu popupComponents={POPUP_CONF} />;
-              break;
-            }
-            case 'ch.sbb.netzkarte':
-              menuChildren = <TrackerMenu />;
-              break;
-            default:
-              menuChildren = null;
-          }
 
           return (
             <TrafimageMaps
@@ -45,9 +28,7 @@ const AppRouter = () => (
               elements={elements}
               initialState={{ ...match.params }}
               popupComponents={POPUP_CONF}
-            >
-              <Menu subMenus=<ShareMenu />>{menuChildren}</Menu>
-            </TrafimageMaps>
+            />
           );
         }
 
