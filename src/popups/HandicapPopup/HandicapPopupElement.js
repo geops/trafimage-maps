@@ -14,7 +14,7 @@ const defaultProps = {
   label: null,
 };
 
-function PopupElement({ properties, propertyName, label, ausnahme }) {
+function HandicapPopupElement({ properties, propertyName, label, ausnahme }) {
   const { t } = useTranslation();
 
   if (!properties[propertyName]) {
@@ -76,7 +76,7 @@ function PopupElement({ properties, propertyName, label, ausnahme }) {
   return <div className="wkp-handicap-popup-element">{content}</div>;
 }
 
-PopupElement.propTypes = propTypes;
-PopupElement.defaultProps = defaultProps;
+HandicapPopupElement.propTypes = propTypes;
+HandicapPopupElement.defaultProps = defaultProps;
 
-export default React.memo(PopupElement);
+export default React.memo(HandicapPopupElement);
