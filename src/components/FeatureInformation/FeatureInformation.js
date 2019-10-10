@@ -26,8 +26,6 @@ const FeatureInformation = ({ clickedFeatureInfo, popupComponents }) => {
     import(`../../popups/${popupComponents[info.layer.getKey()]}/index.js`),
   );
 
-  const MemoizedPopupComponent = React.memo(PopupComponent);
-
   let pagination = null;
 
   if (features.length > 1) {
@@ -61,7 +59,10 @@ const FeatureInformation = ({ clickedFeatureInfo, popupComponents }) => {
   return (
     <div className="wkp-feature-information">
       <React.Suspense fallback="...loading">
-        <MemoizedPopupComponent feature={features[featureIndex]} />
+        <PopupComponent
+          key={info.layer.getKey()}
+          feature={features[featureIndex]}
+        />
         {pagination}
       </React.Suspense>
     </div>
@@ -70,4 +71,4 @@ const FeatureInformation = ({ clickedFeatureInfo, popupComponents }) => {
 
 FeatureInformation.propTypes = propTypes;
 
-export default FeatureInformation;
+export default React.memo(FeatureInformation);
