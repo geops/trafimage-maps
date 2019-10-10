@@ -7,6 +7,14 @@ import OLGeoJSON from 'ol/format/GeoJSON';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
+/**
+ * Layer for visualizing the number of people who use the railway.
+ *
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
+ * @class
+ * @param {Object} [options] Layer options.
+ * @inheritdoc
+ */
 class PassagierfrequenzenLayer extends VectorLayer {
   constructor(options = {}) {
     const name = 'ch.sbb.bahnhoffrequenzen';

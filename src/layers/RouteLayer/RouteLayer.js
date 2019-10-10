@@ -6,16 +6,16 @@ import { Style, Stroke as StrokeStyle } from 'ol/style';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing routes.
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.
- * @param {string?} [options.apiKey] Access key for geOps services.
- * @param {string} [options.name] Layer name.
- * @param {string} [options.url] Url of the geOps route backend.
+ * @param {string?} [options.apiKey] Access key for [geOps services](https://developer.geops.io/).
+ * @param {string} [options.name=Routen] Layer name.
+ * @param {string} [options.url=https://api.geops.io/routing/v1] Url of the geOps route backend.
  * @param {boolean} [options.visible = true] Visibility of the layer.
  *   Default is true.
- * @param {string} [options.projection] Layer projection.
+ * @param {string} [options.projection=EPSG:3857] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.

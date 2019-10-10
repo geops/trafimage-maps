@@ -8,10 +8,14 @@ import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing stations
+ * which have interactive plan applications or station plans (print products such as posters).
+ * The popup shows the links to the interactive station plan or print products.
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
- * @params {Object} options
+ * @param {Object} [options] Layer options.
+ * @param {boolean} [options.showPrintFeatures] True for additionally showing print products
  * @inheritdoc
  */
 class BahnhofplanLayer extends VectorLayer {

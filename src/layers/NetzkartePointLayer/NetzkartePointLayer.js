@@ -9,10 +9,15 @@ import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing information about stations (default) or airports.
+ * The popup contains links to station plans, station coordinates
+ * and links to timetable, services, shopping, handicap information.
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
- * @params {Object} options
+ * @param {Object} [options] Layer options.
+ * @param {boolean} [showAirports] True to show the airports instead of stations
+ * @param {boolean} [useBboxStrategy] Use the the [bbox loading strategy](https://openlayers.org/en/latest/apidoc/module-ol_loadingstrategy.html#.bbox)
  * @inheritdoc
  */
 class NetzkartePointLayer extends VectorLayer {
