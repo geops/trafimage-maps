@@ -6,11 +6,11 @@ import INSTANCES_CONF from './config/instances';
 import POPUP_CONF from './config/popups';
 
 const { topics } = INSTANCES_CONF;
-const dfltTopicKey = topics[0].key;
+const redirectUrl = topics[0].key + window.location.search;
 
 const AppRouter = () => (
   <Router>
-    <Route exact path="/" render={() => <Redirect to={`${dfltTopicKey}`} />} />
+    <Route exact path="/" render={() => <Redirect to={redirectUrl} />} />
     <Route
       exact
       path="/:topic"
@@ -18,7 +18,7 @@ const AppRouter = () => (
         const topic = topics.find(t => t.key === match.params.topic);
 
         if (!topic) {
-          return <Redirect to={`${dfltTopicKey}`} />;
+          return <Redirect to={redirectUrl} />;
         }
 
         const { disabled } = qs.parse(history.location.search);
