@@ -37,15 +37,6 @@ module.exports = {
         },
       ],
     },
-    {
-      name: 'Popups',
-      sections: [
-        {
-          name: 'BahnhofplanPopup',
-          content: 'src/popups/BahnhofplanPopup/README.md',
-        },
-      ],
-    },
   ],
   webpackConfig: {
     module: {
