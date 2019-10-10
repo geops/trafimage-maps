@@ -1,5 +1,7 @@
 #
 
+The Trafimage Web Map Portal is used to illustrate topics relating to public transport.
+
 Configure your own map.
 
 'TrajservLayer' Layer filter options (case insensitive):

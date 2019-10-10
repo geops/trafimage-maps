@@ -25,13 +25,14 @@ module.exports = {
   sections: [
     {
       name: 'Applications',
+      content: 'src/apps/README.md',
       sections: [
         {
           name: 'Casa',
           content: 'src/apps/Casa/README.md',
         },
         {
-          name: 'Trafimage WKP',
+          name: 'Trafimage Web Map Portal',
           content: 'src/apps/TrafimageWKP/README.md',
         },
       ],

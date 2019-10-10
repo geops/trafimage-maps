@@ -1,10 +1,6 @@
 #
 
-This example shows a TrafimageMaps application together with layers for routing
-and fare networks.
-
-The positioning of labels inside the fare networks layer are optimized based on
-the map extent and the used resolution.
+This example shows a popup for the two station plan layers 'Interactive Station Plan' and 'Print Products'.
 
 ```jsx
 import React from 'react';
