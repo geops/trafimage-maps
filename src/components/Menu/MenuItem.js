@@ -13,11 +13,13 @@ const propTypes = {
   className: PropTypes.string,
   icon: PropTypes.node,
   title: PropTypes.string,
-  map: PropTypes.instanceOf(Map).isRequired,
   open: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
   onCollapseToggle: PropTypes.func.isRequired,
+
+  // mapStateToProps
   menuOpen: PropTypes.bool.isRequired,
+  map: PropTypes.instanceOf(Map).isRequired,
 };
 
 const defaultProps = {
@@ -31,18 +33,18 @@ class MenuItem extends Component {
   constructor(props) {
     super(props);
 
-    const { map } = this.props;
     this.bodyElementRef = React.createRef();
 
     this.state = {
       menuHeight: null,
     };
-
-    map.on('change:size', () => this.updateMenuHeight());
   }
 
   componentDidMount() {
-    window.setTimeout(() => {
+    const { map } = this.props;
+    map.on('change:size', () => this.updateMenuHeight());
+    window.clearTimeout(this.heightTimeout);
+    this.heightTimeout = window.setTimeout(() => {
       this.updateMenuHeight();
     }, transitiondelay);
   }
@@ -50,15 +52,21 @@ class MenuItem extends Component {
   componentDidUpdate(prevProps) {
     const { menuOpen } = this.props;
     if (menuOpen !== prevProps.menuOpen) {
-      window.setTimeout(() => {
+      window.clearTimeout(this.heightTimeout);
+      this.heightTimeout = window.setTimeout(() => {
         this.updateMenuHeight();
       }, transitiondelay);
     }
   }
 
+  componentWillUnmount() {
+    window.clearTimeout(this.heightTimeout);
+  }
+
   updateMenuHeight() {
     const { map } = this.props;
     let menuHeight;
+
     if (
       this.bodyElementRef.current &&
       this.bodyElementRef.current.ref.current
@@ -106,6 +114,7 @@ class MenuItem extends Component {
 
 const mapStateToProps = state => ({
   menuOpen: state.app.menuOpen,
+  map: state.app.map,
 });
 
 const mapDispatchToProps = {};

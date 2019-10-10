@@ -101,7 +101,7 @@ class RouteLayer extends VectorLayer {
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
-        features.forEach((f, i) => f.setProperties(sequenceProps[i]));
+        features.forEach(f => f.setProperties(sequenceProps));
         return features;
       });
   }
@@ -142,7 +142,6 @@ class RouteLayer extends VectorLayer {
 
     for (let i = 0; i < routes.length; i += 1) {
       let via = [];
-      let sequenceProps = [];
 
       if (!routes[i].sequences) {
         throw new Error('Missing route sequences.');
@@ -156,14 +155,10 @@ class RouteLayer extends VectorLayer {
             : routes[i].sequences[j + 1].mot;
 
         via = via.concat([uicFrom, uicTo]);
-        sequenceProps.push({
-          route: { ...routes[i], routeId: i },
-          mot,
-        });
 
         if (mot !== nextMot) {
+          const sequenceProps = { route: { ...routes[i], routeId: i }, mot };
           routePromises.push(this.fetchRouteForMot(via, mot, sequenceProps));
-          sequenceProps = [];
           via = [];
         }
       }

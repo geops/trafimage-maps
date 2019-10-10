@@ -8,7 +8,7 @@
     "abortcontroller-polyfill": "^1.2.3",
     "color": "^3.1.2",
     "i18next": "^17.0.12",
-    "i18next-browser-languagedetector": "^3.0.1",
+    "i18next-browser-languagedetector": "^4.0.0",
     "i18next-xhr-backend": "^3.1.2",
     "jsts": "^2.0.3",
     "lodash": "^4.17.11",
@@ -28,7 +28,7 @@
     "react-router-prop-types": "^1.0.4",
     "react-spatial": "^0.1.0-beta.24",
     "react-styleguidist": "^9.1.11",
-    "react-transit": "^0.1.1-beta.13",
+    "react-transit": "^0.1.1-beta.15",
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
     "redux-thunk": "^2.3.0"
@@ -83,7 +83,7 @@
     "stylelint-config-standard": "^19.0.0",
     "stylelint-scss": "^3.5.1",
     "vinyl-fs": "^3.0.3",
-    "webpack": "4.40.2"
+    "webpack": "^4.41.0"
   },
   "scripts": {
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",

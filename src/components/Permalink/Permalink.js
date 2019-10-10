@@ -10,16 +10,18 @@ import LayerService from 'react-spatial/LayerService';
 import { setCenter, setZoom } from '../../model/map/actions';
 
 const propTypes = {
-  activeTopic: PropTypes.shape({
-    key: PropTypes.string,
-  }).isRequired,
-  map: PropTypes.instanceOf(OLMap),
   history: PropTypes.shape({
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
   initialState: PropTypes.shape(),
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape({
+    key: PropTypes.string,
+  }).isRequired,
+  map: PropTypes.instanceOf(OLMap).isRequired,
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
@@ -27,7 +29,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  map: undefined,
   history: undefined,
   initialState: {},
 };
@@ -110,6 +111,8 @@ Permalink.defaultProps = defaultProps;
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
+  map: state.app.map,
+  layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
