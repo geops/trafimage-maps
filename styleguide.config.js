@@ -28,12 +28,12 @@ module.exports = {
       content: 'src/apps/README.md',
       sections: [
         {
-          name: 'Casa',
-          content: 'src/apps/Casa/README.md',
-        },
-        {
           name: 'Trafimage Web Map Portal',
           content: 'src/apps/TrafimageWKP/README.md',
+        },
+        {
+          name: 'Casa Map',
+          content: 'src/apps/Casa/README.md',
         },
       ],
     },
