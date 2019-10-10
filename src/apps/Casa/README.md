@@ -1,10 +1,10 @@
 #
 
-This example shows a TrafimageMaps application together with layers for routing
-and fare networks.
+Casa Map is a TrafimageMaps application which is offered as a commercial map application by the SBB.
 
-The positioning of labels inside the fare networks layer are optimized based on
-the map extent and the used resolution.
+The integrated [RouteLayer](/docjs.html#routelayer) allows to display routes of different transport modes. The [ZoneLayer](/docjs.html#zonelayer) displays fare networks.
+
+The used [APIs from geOps](https://developer.geops.io/) require a license key.
 
 ```jsx
 import React from 'react';
