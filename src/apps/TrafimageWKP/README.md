@@ -4,14 +4,6 @@ The Trafimage Web Map Portal is used to illustrate topics relating to public tra
 
 Configure your own map.
 
-'TrajservLayer' Layer filter options (case insensitive):
-
-| Options            | Description            | Examples                                                              |
-|--------------------|------------------------|-----------------------------------------------------------------------|
-| operator           | filter by operator     | string: 'sbb', list: '(vbz\|zsg)'                                     |
-| publishedLineName  | filter by line name    | string: 'ICE',  list: 's1,s2,s9,s10,s15'                              |
-| tripNumber         | filter by trip number  | bus in zurich: '2068', list of buses in Zurich: '2068,3003,3451,3953' |
-
 ```jsx
 import React from 'react';
 import Layer from 'react-spatial/layers/Layer';
