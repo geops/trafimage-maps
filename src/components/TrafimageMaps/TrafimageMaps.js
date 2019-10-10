@@ -12,9 +12,8 @@ import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
 import Menu from '../Menu';
 import FeatureMenu from '../FeatureMenu';
-import ShareMenu from '../../menus/ShareMenu';
 import TrackerMenu from '../../menus/TrackerMenu';
-
+import ShareMenu from '../../menus/ShareMenu';
 import Permalink from '../Permalink';
 import Map from '../Map';
 import Header from '../Header';
@@ -43,7 +42,10 @@ const propTypes = {
   /**
    * Additional elements.
    */
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 
   /**
    * Visible elements on the map application.
@@ -56,6 +58,9 @@ const propTypes = {
     popup: PropTypes.bool,
     mapControls: PropTypes.bool,
     baseLayerToggler: PropTypes.bool,
+    shareMenu: PropTypes.bool,
+    featureMenu: PropTypes.bool,
+    trackerMenu: PropTypes.bool,
   }),
 
   /**
@@ -75,6 +80,24 @@ const propTypes = {
    * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
    */
   popupComponents: PropTypes.objectOf(PropTypes.string),
+
+  /**
+   * Array of menus compomnents to display as child of Menu component.
+   * Example: [<TrackerMenu/>]
+   */
+  menus: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+
+  /**
+   * Array of menus compomnents to display at the bottom of the TopicsMenu.
+   * Example: [<ShareMenu/>]
+   */
+  subMenus: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 
   /**
    * Projection used for the map.
@@ -124,6 +147,9 @@ const defaultProps = {
     popup: false,
     mapControls: false,
     baseLayerToggler: false,
+    shareMenu: false,
+    trackerMenu: false,
+    featureMenu: false,
   },
   baseLayers: null,
   popupComponents: {},
@@ -132,6 +158,14 @@ const defaultProps = {
   apiKey: null,
   history: null,
   initialState: {},
+  menus: null,
+  subMenus: null,
+};
+
+const getComponents = (dfltComponents, elementsToDisplay) => {
+  return Object.entries(dfltComponents).map(([k, v]) =>
+    elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
+  );
 };
 
 function TrafimageMaps({
@@ -148,6 +182,8 @@ function TrafimageMaps({
   center,
   zoom,
   initialState,
+  menus,
+  subMenus,
 }) {
   /**
    * If the application runs standalone, we want to use a consistent store.
@@ -156,20 +192,24 @@ function TrafimageMaps({
   const appStore = history ? store : getStore();
   const { map, layerService } = appStore.getState().app;
 
-  let menuChildren = null;
+  // Define which component to display as child of TopicsMenu.
+  const appTopicsMenuChildren = getComponents(
+    {
+      shareMenu: <ShareMenu />,
+    },
+    elements,
+  );
 
-  switch (activeTopicKey) {
-    case 'ch.sbb.handicap': {
-      menuChildren = <FeatureMenu popupComponents={popupComponents} />;
-      break;
-    }
-    case 'ch.sbb.netzkarte':
-      menuChildren = <TrackerMenu />;
-      break;
-    default:
-      menuChildren = null;
-  }
+  // Define which component to display as child of Menu.
+  const appMenuChildren = getComponents(
+    {
+      featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+      trackerMenu: <TrackerMenu />,
+    },
+    elements,
+  );
 
+  // Define which components to display.
   const defaultElements = {
     header: <Header />,
     popup: <Popup popupComponents={popupComponents} />,
@@ -179,9 +219,11 @@ function TrafimageMaps({
     menu: (
       <Menu>
         <TopicsMenu>
-          <ShareMenu />
+          {appTopicsMenuChildren}
+          {subMenus}
         </TopicsMenu>
-        {menuChildren}
+        {appMenuChildren}
+        {menus}
       </Menu>
     ),
     baseLayerToggler: (
@@ -194,9 +236,7 @@ function TrafimageMaps({
     ),
   };
 
-  const appElements = Object.entries(defaultElements).map(([k, v]) =>
-    elements[k] ? <div key={k}>{v}</div> : null,
-  );
+  const appElements = getComponents(defaultElements, elements);
 
   // Classes for active components used for conditional styling
   const elementClasses = Object.keys(elements)
@@ -216,17 +256,14 @@ function TrafimageMaps({
           activeTopicKey={activeTopicKey}
           apiKey={apiKey}
         />
-        <ResizeHandler observe={this} />
         <Map
           map={map}
           initialCenter={center}
           initialZoom={zoom}
           projection={projection}
         />
-
         {appElements}
         {children}
-
         <MainDialog />
       </div>
     </Provider>

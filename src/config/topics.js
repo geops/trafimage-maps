@@ -18,12 +18,18 @@ const defaultElements = {
   permalink: true,
   mapControls: true,
   baseLayerToggler: true,
+  popup: false,
 };
 
 export const netzkarte = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
-  elements: { ...defaultElements, popup: true },
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+    trackerMenu: true,
+  },
   layers: [
     ...defaultBaseLayers,
     gemeindegrenzen,
@@ -34,10 +40,6 @@ export const netzkarte = {
     passagierfrequenzen,
     bahnhofplaene,
   ],
-  menuComponents: [
-    { component: 'ShareMenu', standalone: false },
-    { component: 'TrackerMenu', standalone: true },
-  ],
   projection: 'EPSG:3857',
   description: 'ch.sbb.netzkarte-desc',
 };
@@ -45,7 +47,7 @@ export const netzkarte = {
 export const handicap = {
   name: 'ch.sbb.handicap',
   key: 'ch.sbb.handicap',
-  elements: { ...defaultElements, featureMenu: true },
+  elements: { ...defaultElements, shareMenu: true, featureMenu: true },
   layers: [
     ...defaultBaseLayers,
     nichtStuetzpunktbahnhoefe,

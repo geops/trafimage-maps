@@ -8,7 +8,10 @@ import { setMenuOpen } from '../../model/app/actions';
 import './TopicsMenu.scss';
 
 const propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 const defaultProps = {
