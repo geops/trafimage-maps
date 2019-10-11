@@ -10,7 +10,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.
- * @param {string?} [options.apiKey] Access key for [geOps services](https://developer.geops.io/).
+ * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
  * @param {string} [options.name=Routen] Layer name.
  * @param {string} [options.url=https://api.geops.io/routing/v1] Url of the geOps route backend.
  * @param {boolean} [options.visible = true] Visibility of the layer.
