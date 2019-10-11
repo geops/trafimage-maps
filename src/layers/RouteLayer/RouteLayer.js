@@ -79,7 +79,7 @@ class RouteLayer extends VectorLayer {
    * @param {Object} viaPoints Route Informations
    * @param {String} mot Ask for specific Route
    * @param {Object[]} sequenceProps Properties for the returned features.
-   * @returns {array<ol.Feature>}
+   * @returns {array<ol.Feature>} Features
    */
   fetchRouteForMot(viaPoints, mot, sequenceProps) {
     this.abortController = new AbortController();
