@@ -77,7 +77,7 @@ class RouteLayer extends VectorLayer {
    * Getting the Mot-features on specific route.
    * @private
    * @param {Object} viaPoints Route Informations
-   * @param {String} mot ask for specific Route
+   * @param {String} mot Ask for specific Route
    * @param {Object[]} sequenceProps Properties for the returned features.
    * @returns {array<ol.Feature>}
    */
