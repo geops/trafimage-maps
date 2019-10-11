@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaInfo } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import Dialog from '../Dialog';
 import LegalLines from '../LegalLines';
 import { setDialogPosition } from '../../model/app/actions';
 
-const MainDialog = () => {
+const MainDialog = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const dialogVisible = useSelector(state => state.app.dialogVisible);
@@ -19,6 +19,7 @@ const MainDialog = () => {
   if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
     return (
       <LayerInfosDialog
+        ref={ref}
         selectedForInfos={selectedForInfos}
         onDragStop={(evt, pos) => {
           dispatch(
@@ -36,6 +37,7 @@ const MainDialog = () => {
     return (
       <Dialog
         isModal
+        ref={ref}
         name="legallines"
         title={
           <span>
@@ -50,6 +52,6 @@ const MainDialog = () => {
   }
 
   return null;
-};
+});
 
 export default MainDialog;

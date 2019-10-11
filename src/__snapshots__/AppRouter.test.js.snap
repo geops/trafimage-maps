@@ -4,11 +4,6 @@ exports[`AppRouter should match snapshot 1`] = `
 <div
   className="tm-app header footer menu permalink mapControls baseLayerToggler popup"
 >
-  <div
-    className="tm-map"
-    role="menu"
-    tabIndex={0}
-  />
   <div>
     <div
       className="wkp-header"
@@ -26,218 +21,6 @@ exports[`AppRouter should match snapshot 1`] = `
       </div>
     </div>
   </div>
-  <div />
-  <div>
-    <div
-      className="wkp-footer"
-    >
-      <div
-        className="wkp-footer-left"
-      >
-        <div
-          className="tm-copyright"
-        >
-          Geodaten OpenStreetMap contributors, © SBB/CFF/FFS
-        </div>
-        <a
-          href="#"
-          onClick={[Function]}
-        >
-          Kontakt
-        </a>
-        <a
-          href="#"
-          onClick={[Function]}
-        >
-          Impressum
-        </a>
-        <a
-          href="#"
-          onClick={[Function]}
-        >
-          Rechtliches
-        </a>
-      </div>
-      <div
-        className="wkp-footer-right"
-      >
-        <div
-          className="tm-mouse-position"
-        >
-          <select
-            className="tm-select"
-            onChange={[Function]}
-            value="EPSG:21781"
-          >
-            <option
-              value="EPSG:21781"
-            >
-              CH1093 / LV03
-            </option>
-            <option
-              value="EPSG:2056"
-            >
-              CH1093+ / LV95
-            </option>
-            <option
-              value="EPSG:3857"
-            >
-              Web Mercator
-            </option>
-            <option
-              value="EPSG:4326"
-            >
-              WGS 84
-            </option>
-          </select>
-          <span />
-        </div>
-        <div
-          className="tm-scale-line"
-        />
-        <select
-          className="wkp-language-select"
-          onChange={[Function]}
-          value="de"
-        >
-          <option
-            value="de"
-          >
-            DE
-          </option>
-          <option
-            value="fr"
-          >
-            FR
-          </option>
-          <option
-            value="it"
-          >
-            IT
-          </option>
-          <option
-            value="en"
-          >
-            EN
-          </option>
-        </select>
-      </div>
-    </div>
-  </div>
-  <div />
-  <div>
-    <div
-      className="wkp-map-controls"
-    >
-      <div
-        className="tm-zooms-bar"
-      >
-        <div
-          aria-label="Zoom"
-          className="wkp-zoom-in"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-          title="Zoom"
-        >
-          <svg
-            fill="currentColor"
-            focusable={false}
-            height="1em"
-            stroke="currentColor"
-            strokeWidth="0"
-            style={
-              Object {
-                "color": undefined,
-              }
-            }
-            viewBox="0 0 448 512"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-            />
-          </svg>
-        </div>
-        <div
-          className="tm-zoomslider-wrapper"
-        />
-        <div
-          aria-label="Zoom"
-          className="wkp-zoom-out"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-          title="Zoom"
-        >
-          <svg
-            fill="currentColor"
-            focusable={false}
-            height="1em"
-            stroke="currentColor"
-            strokeWidth="0"
-            style={
-              Object {
-                "color": undefined,
-              }
-            }
-            viewBox="0 0 448 512"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
-            />
-          </svg>
-        </div>
-      </div>
-      <div
-        aria-label="Lokalisieren"
-        className="wkp-geolocation "
-        onClick={[Function]}
-        onKeyPress={[Function]}
-        role="button"
-        tabIndex={0}
-        title="Lokalisieren"
-      >
-        <svg
-          fill="currentColor"
-          height="1em"
-          stroke="currentColor"
-          strokeWidth="0"
-          style={
-            Object {
-              "color": undefined,
-            }
-          }
-          viewBox="0 0 512 512"
-          width="1em"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"
-          />
-        </svg>
-      </div>
-      <div
-        aria-label="Ganze Schweiz"
-        className="wkp-fit-extent"
-        onClick={[Function]}
-        onKeyPress={[Function]}
-        role="button"
-        tabIndex={0}
-        title="Ganze Schweiz"
-      >
-        <img
-          alt="Ganze Schweiz"
-          src="swissbounds.png"
-        />
-      </div>
-    </div>
-  </div>
   <div>
     <div
       className="wkp-menu-wrapper"
@@ -250,6 +33,11 @@ exports[`AppRouter should match snapshot 1`] = `
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
+          style={
+            Object {
+              "borderBottom": "",
+            }
+          }
           tabIndex={0}
         >
           <div
@@ -1049,10 +837,15 @@ exports[`AppRouter should match snapshot 1`] = `
             className="wkp-menu-item wkp-share-menu "
           >
             <div
-              className="wkp-menu-item-header open"
+              className="wkp-menu-item-header"
               onClick={[Function]}
               onKeyPress={[Function]}
               role="button"
+              style={
+                Object {
+                  "borderBottom": "1px solid #eee",
+                }
+              }
               tabIndex={0}
             >
               <div
@@ -1121,7 +914,7 @@ exports[`AppRouter should match snapshot 1`] = `
                 >
                   <div
                     aria-label="Permalink generieren"
-                    className="tm-button"
+                    className="wkp-share-permalink-icon"
                     onClick={[Function]}
                     onKeyPress={[Function]}
                     role="button"
@@ -1289,6 +1082,126 @@ exports[`AppRouter should match snapshot 1`] = `
       </div>
     </div>
   </div>
+  <div
+    className="tm-map"
+    role="menu"
+    tabIndex={0}
+  />
+  <div />
+  <div />
+  <div>
+    <div
+      className="wkp-map-controls"
+    >
+      <div
+        className="tm-zooms-bar"
+      >
+        <div
+          aria-label="Zoom"
+          className="wkp-zoom-in"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Zoom"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </div>
+        <div
+          className="tm-zoomslider-wrapper"
+        />
+        <div
+          aria-label="Zoom"
+          className="wkp-zoom-out"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Zoom"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 448 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        aria-label="Lokalisieren"
+        className="wkp-geolocation "
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+        title="Lokalisieren"
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 512 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M256 56c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m0-48C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 168c-44.183 0-80 35.817-80 80s35.817 80 80 80 80-35.817 80-80-35.817-80-80-80z"
+          />
+        </svg>
+      </div>
+      <div
+        aria-label="Ganze Schweiz"
+        className="wkp-fit-extent"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        role="button"
+        tabIndex={0}
+        title="Ganze Schweiz"
+      >
+        <img
+          alt="Ganze Schweiz"
+          src="swissbounds.png"
+        />
+      </div>
+    </div>
+  </div>
   <div>
     <div
       className="tm-base-layer-toggler"
@@ -1296,7 +1209,7 @@ exports[`AppRouter should match snapshot 1`] = `
       <div
         className="tm-map"
         role="menu"
-        tabIndex={0}
+        tabIndex={-1}
       />
       <img
         alt={null}
@@ -1371,6 +1284,107 @@ exports[`AppRouter should match snapshot 1`] = `
           </svg>
         </div>
       </div>
+    </div>
+  </div>
+  <div
+    label="barrierfree"
+    onFocus={[Function]}
+    role="button"
+    tabIndex="0"
+  />
+  <div
+    className="wkp-footer"
+  >
+    <div
+      className="wkp-footer-left"
+    >
+      <div
+        className="tm-copyright"
+      >
+        Geodaten OpenStreetMap contributors, © SBB/CFF/FFS
+      </div>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Kontakt
+      </a>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Impressum
+      </a>
+      <a
+        href="#"
+        onClick={[Function]}
+      >
+        Rechtliches
+      </a>
+    </div>
+    <div
+      className="wkp-footer-right"
+    >
+      <div
+        className="tm-mouse-position"
+      >
+        <select
+          className="tm-select"
+          onChange={[Function]}
+          value="EPSG:21781"
+        >
+          <option
+            value="EPSG:21781"
+          >
+            CH1093 / LV03
+          </option>
+          <option
+            value="EPSG:2056"
+          >
+            CH1093+ / LV95
+          </option>
+          <option
+            value="EPSG:3857"
+          >
+            Web Mercator
+          </option>
+          <option
+            value="EPSG:4326"
+          >
+            WGS 84
+          </option>
+        </select>
+        <span />
+      </div>
+      <div
+        className="tm-scale-line"
+      />
+      <select
+        className="wkp-language-select"
+        onChange={[Function]}
+        value="de"
+      >
+        <option
+          value="de"
+        >
+          DE
+        </option>
+        <option
+          value="fr"
+        >
+          FR
+        </option>
+        <option
+          value="it"
+        >
+          IT
+        </option>
+        <option
+          value="en"
+        >
+          EN
+        </option>
+      </select>
     </div>
   </div>
 </div>

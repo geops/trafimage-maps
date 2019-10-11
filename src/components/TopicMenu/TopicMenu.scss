@@ -10,8 +10,6 @@
     right: 0;
     display: flex;
     justify-content: center;
-    width: 27px;
-    height: 27px;
   }
 
   .wkp-topic-menu-item-wrapper {
@@ -64,7 +62,7 @@
 
     .wkp-info-topic-bt {
       color: #888;
-      margin-right: 22px;
+      margin-right: 30px;
       align-items: center;
 
       &.wkp-active {
@@ -78,28 +76,36 @@
   }
 
   .wkp-layer-tree {
-    overflow: hidden;
-    margin: 10px 10px 10px 30px;
+    overflow: visible;
+    margin: 10px 10px 20px 30px;
 
-    .tm-layer-tree-item {
-      color: #888;
-      padding: 0;
-      margin-left: 5px;
+    .tm-layer-tree {
+      overflow: visible;
 
-      .tm-layer-tree-toggle {
-        padding: 5px 6px;
-        margin: 1px 40px 1px 0;
-      }
+      .tm-layer-tree-item {
+        color: #888;
+        padding: 0;
+        margin-left: 5px;
 
-      .tm-layer-tree-arrow {
-        border-color: #888;
-      }
+        .wkp-info-layer-bt {
+          margin-right: 18px;
+        }
 
-      &.tm-visible {
-        color: initial;
+        .tm-layer-tree-toggle {
+          padding: 5px 6px;
+          margin: 1px 40px 1px 0;
+        }
 
         .tm-layer-tree-arrow {
-          border-color: black;
+          border-color: #888;
+        }
+
+        &.tm-visible {
+          color: initial;
+
+          .tm-layer-tree-arrow {
+            border-color: black;
+          }
         }
       }
     }

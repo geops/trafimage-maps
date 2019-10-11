@@ -2,7 +2,7 @@
   border: 2px solid #666;
   max-height: 1000px;
   margin-top: 5px;
-  overflow: hidden;
+  overflow: visible;
 
   .wkp-menu-item {
     border: none;
@@ -11,6 +11,7 @@
 
   .wkp-menu-item-header {
     border-top: 1px solid #eee;
+    outline-offset: 0 !important; // For barrierFree
   }
 
   .wkp-menu-title {

@@ -9,7 +9,7 @@ exports[`Share should match snapshot. 1`] = `
   >
     <div
       aria-label="Permalink generieren"
-      className="tm-button"
+      className="wkp-share-permalink-icon"
       onClick={[Function]}
       onKeyPress={[Function]}
       role="button"

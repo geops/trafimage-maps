@@ -2,6 +2,18 @@
   position: relative;
   width: 20px;
 
+  .wkp-share-permalink-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    svg {
+      font-size: 20px;
+    }
+  }
+
   .wkp-tooltip,
   .tm-permalink-field,
   .wkp-arrow-left {

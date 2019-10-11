@@ -1,3 +1,5 @@
+@import '../../Globals.scss';
+
 .wkp-menu-header {
   position: relative;
   display: flex;
@@ -7,9 +9,10 @@
   height: 69px;
   transition: all 0.2s ease;
   background: white;
+  outline-offset: 0 !important; // For barrierFree
 
-  &.open {
-    border-bottom: 1px solid #eee;
+  &.wkp-bf-focus {
+    outline: $bf-large-outline;
   }
 
   .wkp-menu-toggler {

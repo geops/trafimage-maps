@@ -22,7 +22,7 @@
   "ch.sbb.bahnhofplaene.printprodukte": "Printprodukte",
   "ch.sbb.bahnhofplaene.printprodukte-desc": "Diese Bahnhöfe sind mit einem Bahnhof plan ausgerüstet. Es ist immer ein Plakat (Format A0 oder A1) und eine drucker optimierte Version (Format A4) verfügbar.",
   "ch.sbb.behig": "Umsetzung BehiG",
-  "ch.sbb.behig-desc": "Zur Umsetzung des Behindertengleichstellungsgesetzes (BehiG) sind unter anderem umfangreiche Anpassungen der Infrastruktur notwendig. Die vorliegende Karte zeigt den aktuellen Umsetzungsstand der Bahnhöfe der SBB.<p>Verantwortlich:<br/>I-AT-KUF-PAM, Simone Mundwiler, <a href=\"mailto:simone.mundwiler@sbb.ch\">simone.mundwiler@sbb.ch</a></p><p><0/></p>",
+  "ch.sbb.behig-desc": "Zur Umsetzung des Behindertengleichstellungsgesetzes (BehiG) sind unter anderem umfangreiche Anpassungen der Infrastruktur notwendig. Die vorliegende Karte zeigt den aktuellen Umsetzungsstand der Bahnhöfe der SBB.<p>Verantwortlich:<br/>I-AT-KUF-PAM, Simone Mundwiler, <a tabindex=0 href=\"mailto:simone.mundwiler@sbb.ch\">simone.mundwiler@sbb.ch</a></p><p><0/></p>",
   "ch.sbb.betriebslage": "Betriebslage",
   "ch.sbb.betriebslage-desc": "Betriebslage",
   "ch.sbb.casa": "CASA",

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import RSDialog from 'react-spatial/components/Dialog';
@@ -21,13 +21,15 @@ const defaultProps = {
   isModal: false,
 };
 
-function Dialog(props) {
+const Dialog = forwardRef((props, ref) => {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
   const dispatch = useDispatch();
   const { body, isModal } = props;
 
-  const escFunction = () => {
-    dispatch(setDialogVisible());
+  const escFunction = e => {
+    if (e.keyCode === 27) {
+      dispatch(setDialogVisible());
+    }
   };
 
   const registerEsc = isRegister => {
@@ -52,6 +54,7 @@ function Dialog(props) {
     <div className="wkp-dialog">
       <RSDialog
         isOpen
+        ref={ref}
         position={dialogPosition}
         onClose={() => {
           dispatch(setDialogVisible());
@@ -68,7 +71,7 @@ function Dialog(props) {
       </RSDialog>
     </div>
   );
-}
+});
 
 Dialog.propTypes = propTypes;
 Dialog.defaultProps = defaultProps;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from 'react-i18next';
@@ -22,7 +22,7 @@ const getLegendUrl = (legendUrl, language) => {
     : src;
 };
 
-function LayerInfosDialog(props) {
+const LayerInfosDialog = forwardRef((props, ref) => {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
   const { selectedForInfos } = props;
@@ -62,6 +62,7 @@ function LayerInfosDialog(props) {
 
   return (
     <Dialog
+      ref={ref}
       isDraggable
       cancelDraggable=".tm-dialog-body"
       name={NAME}
@@ -71,7 +72,7 @@ function LayerInfosDialog(props) {
       {...props}
     />
   );
-}
+});
 
 LayerInfosDialog.propTypes = propTypes;
 LayerInfosDialog.defaultProps = defaultProps;

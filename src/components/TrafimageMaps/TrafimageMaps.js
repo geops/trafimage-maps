@@ -3,7 +3,7 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import Projection from 'ol/proj/Projection';
@@ -16,6 +16,7 @@ import ShareMenu from '../../menus/ShareMenu';
 import TrackerMenu from '../../menus/TrackerMenu';
 
 import Permalink from '../Permalink';
+import BarrierFree from '../BarrierFree';
 import Map from '../Map';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -155,6 +156,7 @@ function TrafimageMaps({
    */
   const appStore = history ? store : getStore();
   const { map, layerService } = appStore.getState().app;
+  const refDialog = useRef();
 
   let menuChildren = null;
 
@@ -170,12 +172,8 @@ function TrafimageMaps({
       menuChildren = null;
   }
 
-  const defaultElements = {
+  const topElements = {
     header: <Header />,
-    popup: <Popup popupComponents={popupComponents} />,
-    footer: <Footer />,
-    permalink: <Permalink history={history} initialState={initialState} />,
-    mapControls: <MapControls />,
     menu: (
       <Menu>
         <TopicsMenu>
@@ -184,17 +182,29 @@ function TrafimageMaps({
         {menuChildren}
       </Menu>
     ),
+  };
+
+  const defaultElements = {
+    popup: <Popup popupComponents={popupComponents} />,
+    permalink: <Permalink history={history} initialState={initialState} />,
+    mapControls: <MapControls />,
     baseLayerToggler: (
       <BaseLayerToggler
         layerService={layerService}
         map={map}
+        mapTabIndex={-1} // No accessible via Tab nav.
         fallbackImgDir="/img/baselayer/"
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
   };
 
-  const appElements = Object.entries(defaultElements).map(([k, v]) =>
+  // Declared above the map for tabIndex accessibility.
+  const appTopElements = Object.entries(topElements).map(([k, v]) =>
+    elements[k] ? <div key={k}>{v}</div> : null,
+  );
+
+  const appDefaultElements = Object.entries(defaultElements).map(([k, v]) =>
     elements[k] ? <div key={k}>{v}</div> : null,
   );
 
@@ -217,6 +227,9 @@ function TrafimageMaps({
           apiKey={apiKey}
         />
         <ResizeHandler observe={this} />
+
+        {appTopElements}
+
         <Map
           map={map}
           initialCenter={center}
@@ -224,10 +237,15 @@ function TrafimageMaps({
           projection={projection}
         />
 
-        {appElements}
+        <MainDialog ref={refDialog} />
+
+        {appDefaultElements}
+
+        <BarrierFree refDialog={refDialog} />
+
         {children}
 
-        <MainDialog />
+        <Footer />
       </div>
     </Provider>
   );

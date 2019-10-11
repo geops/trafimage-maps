@@ -47,6 +47,7 @@ function SharePermalinkButton({ icon, title, className }) {
     <div className={className} ref={ref}>
       <Button
         title={t(title)}
+        className="wkp-share-permalink-icon"
         onClick={e => {
           setPositionTooltip(e.currentTarget.getBoundingClientRect());
           setShowTooltip(!showTooltip);

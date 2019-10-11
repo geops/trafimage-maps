@@ -34,7 +34,7 @@
   "ch.sbb.bahnhofplaene.printprodukte": "Prodotti stampati",
   "ch.sbb.bahnhofplaene.printprodukte-desc": "Queste stazioni sono dotate di un piano della stazione. Sono sempre disponibili un cartellone (formato A0 o A1) e una versione ottimizzata per la stampa (formato A4).",
   "ch.sbb.behig": "Trasformazione LDis",
-  "ch.sbb.behig-desc": "L’attuazione della Legge sui disabili (LDis), sono necessari adeguamenti significativi dell'infrastruttura. Questa mappa mostra lo stato corrente delle stazioni FFS.<p>Responsabile:<br/>I-AT-KUF-PAM, Simone Mundwiler, <a href=\"mailto:simone.mundwiler@sbb.ch\">simone.mundwiler@sbb.ch</a></p><p><0/></p>",
+  "ch.sbb.behig-desc": "L’attuazione della Legge sui disabili (LDis), sono necessari adeguamenti significativi dell'infrastruttura. Questa mappa mostra lo stato corrente delle stazioni FFS.<p>Responsabile:<br/>I-AT-KUF-PAM, Simone Mundwiler, <a tabindex=0 href=\"mailto:simone.mundwiler@sbb.ch\">simone.mundwiler@sbb.ch</a></p><p><0/></p>",
   "ch.sbb.casa": "CASA",
   "ch.sbb.ch_gemeinden": "Limiti comunali",
   "ch.sbb.ch_gemeinden-desc": "Visualizzazione dei confini comunali. I Comuni vengono individuati dal campo di ricerca.<p>Dati:<br/>Ufficio federale di statistica, swisstopo (01.01.2018)</p>",
