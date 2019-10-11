@@ -35,6 +35,14 @@ module.exports = {
           name: 'Casa Map',
           content: 'src/apps/Casa/README.md',
         },
+        {
+          name: 'Components',
+          components: [
+            'src/components/TrafimageMaps/[A-Z]*.js',
+          ],
+          exampleMode: 'collapse',
+          usageMode: 'collapse',
+        },
       ],
     },
   ],
