@@ -28,7 +28,7 @@ module.exports = {
       content: 'src/apps/README.md',
       sections: [
         {
-          name: 'Trafimage Web Map Portal',
+          name: 'Trafimage Map Portal',
           content: 'src/apps/TrafimageWKP/README.md',
         },
         {
