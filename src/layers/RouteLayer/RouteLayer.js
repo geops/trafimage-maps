@@ -7,6 +7,9 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
  * Layer for visualizing routes.
+ *
+ * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.

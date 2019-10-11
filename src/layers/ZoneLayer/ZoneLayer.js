@@ -18,6 +18,9 @@ import Color from 'color';
 
 /**
  * Layer for visualizing fare networks.
+ *
+ * <img src="img/layers/ZoneLayer/layer.png" alt="Layer preview" title="Layer preview">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class ZoneLayer
  * @param {Object} options Layer options.
