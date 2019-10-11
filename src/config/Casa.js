@@ -4,7 +4,7 @@ import CONF from './appConfig';
 const netzkarteLayer = new MapboxLayer({
   name: 'Netzkarte',
   key: 'ch.sbb.netzkarte',
-  copyright: '© OpenStreetMap contributors, imagico, SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
   preserveDrawingBuffer: true,

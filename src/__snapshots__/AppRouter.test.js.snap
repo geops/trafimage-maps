@@ -37,7 +37,7 @@ exports[`AppRouter should match snapshot 1`] = `
         <div
           className="tm-copyright"
         >
-          Geodaten © OpenStreetMap contributors, imagico, SBB/CFF/FFS
+          Geodaten © OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS
         </div>
         <a
           href="#"
