@@ -28,21 +28,27 @@ module.exports = {
       content: 'src/apps/README.md',
       sections: [
         {
-          name: 'Trafimage Map Portal',
-          content: 'src/apps/TrafimageWKP/README.md',
-        },
-        {
-          name: 'Casa Map',
-          content: 'src/apps/Casa/README.md',
-        },
-        {
-          name: 'Components',
+          name: 'Component',
           components: [
             'src/components/TrafimageMaps/[A-Z]*.js',
           ],
           exampleMode: 'collapse',
           usageMode: 'collapse',
         },
+        {
+          name: 'Examples',
+          sections: [
+            {
+              name: 'Punctuality Map',
+              content: 'src/apps/TrafimageWKP/README.md',
+            },
+            {
+              name: 'Casa Map',
+              content: 'src/apps/Casa/README.md',
+            },
+          ]
+        }
+
       ],
     },
   ],
