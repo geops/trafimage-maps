@@ -13,6 +13,8 @@ import layerHelper from '../layerHelper';
  * The popup contains links to station plans, station coordinates
  * and links to timetable, services, shopping, handicap information.
  *
+ * <img src="img/layers/NetzkartePointLayer/stations.png" alt="Layer preview for the stations (with popup)" title="Layer preview for the stations (with popup)">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
  * @param {Object} [options] Layer options.

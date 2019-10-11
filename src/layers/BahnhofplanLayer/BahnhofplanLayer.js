@@ -12,6 +12,8 @@ import layerHelper from '../layerHelper';
  * which have interactive plan applications or station plans (print products such as posters).
  * The popup shows the links to the interactive station plan or print products.
  *
+ * <img src="img/layers/BahnhofplanLayer/printproducts.png" alt="Layer preview for stations with print products" title="Layer preview for stations with print products">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
  * @param {Object} [options] Layer options.
