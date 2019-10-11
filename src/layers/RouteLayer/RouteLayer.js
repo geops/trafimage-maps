@@ -19,7 +19,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  *   Default is webmercator ('EPSG:3857')
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
- * @param [options.routeStyleFunction] Function called with the route properties
+ * @param {Function} [options.routeStyleFunction] Function called with the route properties
  *   and a boolean indicating if the zone is selected.
  *   The function should return the route color.
  */
@@ -180,7 +180,7 @@ class RouteLayer extends VectorLayer {
   /**
    * Zoom to route.
    * @param {Object} [fitOptions] Options,
-   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   *   see {@link https://openlayers.org/en/latest/apidoc/module-ol_View-View.html ol/View~View}
    */
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };

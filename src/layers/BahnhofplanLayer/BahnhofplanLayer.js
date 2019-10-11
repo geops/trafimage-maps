@@ -63,9 +63,9 @@ class BahnhofplanLayer extends VectorLayer {
 
   /**
    * Create Style from feature and resolution
-   * @param {ol.feature} feature
-   * @param {number} resolution
-   * @returns {Object|null}
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} resolution The views resolution
+   * @returns {Array.<ol.style.Style>} Style
    */
   style(feature, resolution) {
     const vis = feature.get('visibility');
@@ -93,8 +93,8 @@ class BahnhofplanLayer extends VectorLayer {
   }
 
   /**
-   * Set visible
-   * @param {boolean} visible
+   * Set the visibility of the layer
+   * @param {boolean} visible The visibility of the layer
    * @param {boolean} [stopPropagationDown] Stops propagation down.
    * @param {boolean} [stopPropagationUp] Stops propagation up.
    * @param {boolean} [stopPropagationSiblings] Stops propagation toward siblings.

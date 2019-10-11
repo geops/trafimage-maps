@@ -87,9 +87,10 @@ class NetzkartePointLayer extends VectorLayer {
 
   /**
    * Create Style from feature and resolution
-   * @param {ol.feature} f
-   * @param {number} r
-   * @returns {Object|null}
+   * @private
+   * @param {ol.feature} f {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} r The views resolution
+   * @returns {Object|null} Style
    */
   styleFunction(f, r) {
     const res = layerHelper.getDataResolution(r);
@@ -120,6 +121,8 @@ class NetzkartePointLayer extends VectorLayer {
   }
 
   /**
+   * Custom loader
+   * @private
    * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
    * (similar to https://osgeo-org.atlassian.net/browse/GEOS-5996)
    * which results in an Assertion error 36, https://openlayers.org/en/latest/doc/errors/

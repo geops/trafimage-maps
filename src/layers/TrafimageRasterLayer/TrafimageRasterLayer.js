@@ -28,7 +28,7 @@ class TrafimageRasterLayer extends Layer {
 
   /**
    * Set a new Api Key
-   * @param {String} apiKey
+   * @param {String} apiKey Access key for [geOps services](https://developer.geops.io/).
    */
   setApiKey(apiKey) {
     if (!apiKey) {

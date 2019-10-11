@@ -21,9 +21,10 @@ import Color from 'color';
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class ZoneLayer
  * @param {Object} options Layer options.
+ * @param {String} apiKey Access key for [geOps services](https://developer.geops.io/).
  * @param {boolean} options.visible Visibility of the layer.
- * @param {number} options.labelOptimizationMinResolution Minimum resolution for
- *   using optimized label placement based on the current extent. Default is 100.
+ * @param {number} [options.labelOptimizationMinResolution = 100] Minimum resolution for
+ *   using optimized label placement based on the current extent.
  * @param {string} options.url Url of the geOps fare network backend.
  * @param {Object} [options.zoneStyle] Zone style.
  * @param {Object} [options.zoneStyle.fill] Fill properties.
@@ -32,7 +33,6 @@ import Color from 'color';
 
  * @param {Object} [options.zoneStyle.stroke] Stroke properties.
  * @param {number} [options.zoneStyle.stroke.width = 2] Stroke width.
- *   Default is 2.
  * @param {string} [options.zoneStyle.stroke.color = 'black'] Stroke color.
  *   Default is 'black'.
  * @param {Object} [options.zoneStyle.text] Text properties.
@@ -171,7 +171,7 @@ class ZoneLayer extends VectorLayer {
   /**
    * Zoom to visible zones.
    * @param {Object} [options] fitOptions
-   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   *   see {@link https://openlayers.org/en/latest/apidoc/module-ol_View-View.html ol/View~View}
    */
   zoomToZones(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
