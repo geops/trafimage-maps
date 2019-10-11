@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
-// import Feature from 'ol/Feature';
+import OLMap from 'ol/Map';
+import { containsExtent } from 'ol/extent';
 import LayerService from 'react-spatial/LayerService';
 
 const propTypes = {
   focusClass: PropTypes.string,
   refDialog: PropTypes.object,
+  refFooter: PropTypes.object,
+  refBaseLayerToggler: PropTypes.object,
 
   // mapStateToProps
   dialogVisible: PropTypes.string,
   selectedForInfos: PropTypes.object,
+  map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   center: PropTypes.arrayOf(PropTypes.number),
   resolution: PropTypes.number,
@@ -24,6 +28,8 @@ const propTypes = {
 const defaultProps = {
   focusClass: 'wkp-bf-focus',
   refDialog: undefined,
+  refFooter: undefined,
+  refBaseLayerToggler: undefined,
   dialogVisible: null,
   center: [0, 0],
   resolution: undefined,
@@ -38,36 +44,74 @@ const findNode = refNode => {
   return ReactDOM.findDOMNode(refNode.current);
 };
 
+let tabFeature = false;
+let featLayer = null;
+let visibleLayers = [];
+let visibleFeatures = [];
 let featureIndex = 0;
-// let tabFeature = false;
 
 function BarrierFree({
   focusClass,
   refDialog,
+  refFooter,
+  refBaseLayerToggler,
   layerService,
   center,
   resolution,
   zoom,
+  map,
   dialogVisible,
   selectedForInfos,
 }) {
-  let visibleLayers = [];
-  let visibleFeatures = [];
-
   let timeout;
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const focusRef = ref => {
+    const node = findNode(ref);
+    if (!node) {
+      return;
+    }
+    const nodeToFocus = node.querySelector('[tabindex="0"]');
+    if (!nodeToFocus) {
+      return;
+    }
+    nodeToFocus.focus();
+
+    // First time we focus a feature, the class name is not apply properly using classList
+    timeout = window.setTimeout(() => {
+      nodeToFocus.classList.add(focusClass);
+    }, 50);
+  };
+
+  const focusFeature = () => {
+    const featToFocus = visibleFeatures[featureIndex];
+    featLayer = featToFocus ? featToFocus.get('layerRef') : null;
+    if (featLayer) {
+      tabFeature = true;
+      featLayer.clickedFeature = featToFocus;
+      featLayer.olLayer.changed();
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const setVisibleFeats = () => {
     visibleLayers = layerService
       .getLayersAsFlatArray()
       .reverse()
       .filter(l => !l.getIsBaseLayer() && l.getVisible());
 
+    const mapExtent = map.getView().calculateExtent(map.getSize());
+
     let visFeats = [];
     visibleLayers.forEach(l => {
       if (l && l.olLayer) {
         const features = l.olLayer.getSource().getFeatures();
         if (features.length > 0) {
-          visFeats = visFeats.concat(features);
+          features.forEach(f => f.set('layerRef', l));
+          const visibleFeats = features.filter(feat =>
+            containsExtent(mapExtent, feat.getGeometry().getExtent()),
+          );
+          visFeats = visFeats.concat(visibleFeats);
         }
       }
     });
@@ -84,26 +128,60 @@ function BarrierFree({
   };
 
   const onKeyUp = (e, forceTarget) => {
+    const forward = !e.shiftKey;
     // Remov bf class from all the document
     document.querySelectorAll(`.${focusClass}`).forEach(elt => {
-      // debugger;
       elt.classList.remove(focusClass);
     });
-
-    if (forceTarget) {
-      forceTarget.classList.add(focusClass);
+    if (!tabFeature) {
+      if (forceTarget) {
+        forceTarget.classList.add(focusClass);
+      } else {
+        e.target.focus();
+        e.target.classList.add(focusClass);
+      }
     } else {
-      e.target.focus();
-      e.target.classList.add(focusClass);
+      if (forward) {
+        featureIndex += 1;
+      } else {
+        featureIndex -= 1;
+      }
+      if (forward && featureIndex >= visibleFeatures.length) {
+        // Remove feature highlight
+        featLayer.clickedFeature = null;
+        featLayer.olLayer.changed();
+
+        // Focus on 1st footer item
+        const nodeToFocus = findNode(refFooter).querySelector('a');
+        nodeToFocus.focus();
+        timeout = window.setTimeout(() => {
+          nodeToFocus.classList.add(focusClass);
+        }, 50);
+
+        tabFeature = false;
+      } else if (!forward && featureIndex <= -1) {
+        // Remove feature highlight
+        featLayer.clickedFeature = null;
+        featLayer.olLayer.changed();
+        // Focus on element before barrierfree
+        // TODO: if refBaseLayerToggler else zoom out
+        const baseLayerElems = findNode(refBaseLayerToggler).querySelectorAll(
+          '[tabindex="0"]',
+        );
+        const nodeToFocus = baseLayerElems[baseLayerElems.length - 1];
+        nodeToFocus.focus();
+        timeout = window.setTimeout(() => {
+          nodeToFocus.classList.add(focusClass);
+        }, 50);
+
+        tabFeature = false;
+        featureIndex = 0;
+      } else {
+        focusFeature();
+        e.preventDefault();
+        e.stopPropagation();
+      }
     }
-    /* else if (e.target.tagName === 'BODY') {
-      // IE initially focus body,
-      // needs to wait before setting the style. [IABPKLEIN-231]
-      setTimeout(() => {
-        document.activeElement.classList.add(focusClass);
-      }, 10);
-    }
-    */
   };
 
   const onDocumentClick = () => {
@@ -111,11 +189,8 @@ function BarrierFree({
     document.querySelectorAll(`.${focusClass}`).forEach(elt => {
       elt.classList.remove(focusClass);
     });
-    /*
     // Reset values to default
-    this.tabFeature = false;
-    this.featureIndex = null;
-    */
+    tabFeature = false;
   };
 
   const onDocumentKeyUp = e => {
@@ -140,12 +215,9 @@ function BarrierFree({
    */
   const onFocus = () => {
     setVisibleFeats();
-    // eslint-disable-next-line no-console
-    console.log('onFocus Features', visibleFeatures);
-
+    tabFeature = true;
     featureIndex = featureIndex || 0;
-    visibleLayers[0].clickedFeature = visibleFeatures[featureIndex];
-    visibleLayers[0].olLayer.changed();
+    focusFeature();
   };
 
   useEffect(() => {
@@ -167,47 +239,19 @@ function BarrierFree({
   }, []);
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log('useEffect - visibleLayers', visibleLayers, visibleFeatures);
-  }, [center, zoom, resolution, layerService, visibleFeatures, visibleLayers]);
+    setVisibleFeats();
+  }, [center, zoom, resolution, layerService, setVisibleFeats]);
 
   useEffect(() => {
     if (dialogVisible) {
-      const node = findNode(refDialog);
-      if (!node) {
-        return;
-      }
-
-      const nodeToFocus = node.querySelector('[tabindex="0"]');
-      if (!nodeToFocus) {
-        return;
-      }
-      /*
-      node.removeEventListener('keydown', this.onPopupKeyDown);
-      node.addEventListener('keydown', this.onPopupKeyDown);
-      */
-      nodeToFocus.focus();
-
-      // First time we focus a feature, the class name is not apply properly
-      // using classList
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      timeout = window.setTimeout(() => {
-        nodeToFocus.classList.add(focusClass);
-      }, 50);
+      focusRef(refDialog);
     }
-  }, [selectedForInfos, dialogVisible, refDialog]);
-
-  // Ensure focus goes in dialog/menu/popup when opened
+  }, [selectedForInfos, dialogVisible, refDialog, focusRef]);
 
   return (
     <div
       role="button"
       label="barrierfree"
-      /*
-      ref={node => {
-        this.refBarrierFree = node;
-      }}
-      */
       tabIndex="0"
       onFocus={() => {
         onFocus();
@@ -218,6 +262,7 @@ function BarrierFree({
 
 const mapStateToProps = state => ({
   // app
+  map: state.app.map,
   layerService: state.app.layerService,
   dialogVisible: state.app.dialogVisible,
   selectedForInfos: state.app.selectedForInfos,

@@ -157,6 +157,8 @@ function TrafimageMaps({
   const appStore = history ? store : getStore();
   const { map, layerService } = appStore.getState().app;
   const refDialog = useRef();
+  const refBaseLayerToggler = useRef();
+  const refFooter = useRef();
 
   let menuChildren = null;
 
@@ -192,6 +194,7 @@ function TrafimageMaps({
       <BaseLayerToggler
         layerService={layerService}
         map={map}
+        ref={refBaseLayerToggler}
         mapTabIndex={-1} // No accessible via Tab nav.
         fallbackImgDir="/img/baselayer/"
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
@@ -241,11 +244,15 @@ function TrafimageMaps({
 
         {appDefaultElements}
 
-        <BarrierFree refDialog={refDialog} />
+        <BarrierFree
+          refDialog={refDialog}
+          refFooter={refFooter}
+          refBaseLayerToggler={refBaseLayerToggler}
+        />
 
         {children}
 
-        <Footer />
+        <Footer ref={refFooter} />
       </div>
     </Provider>
   );
