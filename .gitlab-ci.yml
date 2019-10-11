@@ -7,6 +7,7 @@ before_script:
 # Define the stages of the build which will be run in sequence
 stages:
   - build
+  - review
   - deploy
 
 # Define folders that are being cached between builds
