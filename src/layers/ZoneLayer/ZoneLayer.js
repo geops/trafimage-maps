@@ -29,19 +29,14 @@ import Color from 'color';
  * @param {Object} [options.zoneStyle] Zone style.
  * @param {Object} [options.zoneStyle.fill] Fill properties.
  * @param {string} [options.zoneStyle.fill.color = 'rgb(255, 200, 25)'] Fill color.
- *   Default is 'rgb(255, 200, 25)'.
-
  * @param {Object} [options.zoneStyle.stroke] Stroke properties.
  * @param {number} [options.zoneStyle.stroke.width = 2] Stroke width.
  * @param {string} [options.zoneStyle.stroke.color = 'black'] Stroke color.
- *   Default is 'black'.
  * @param {Object} [options.zoneStyle.text] Text properties.
  * @param {string} [options.zoneStyle.text.font = '12px Arial'] Font.
- *   Default is '12px Arial'.
  * @param {string} [options.zoneStyle.text.label] Text label.
  *   If undefined, the zone code is used.
  * @param {string} [options.zoneStyle.text.color = 'black'] Text color.
- *   Default is 'black'.
  * @param {Function} [options.zoneStyleFunction] called with zone properties as
  *   an Object and a boolean indicating if the zone is selected.
  *   The function should return a zoneStyle object (see above).
