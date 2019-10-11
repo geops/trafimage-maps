@@ -14,7 +14,7 @@ stages:
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 cache:
   paths:
-    - yarn_cache/
+    - .yarn-cache/
 
 build_dev:
   stage: build
