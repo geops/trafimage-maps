@@ -1,8 +1,6 @@
 #
 
-Casa Map is a TrafimageMaps application which is offered as a commercial map application by the SBB.
-
-The integrated [RouteLayer](/docjs.html#routelayer) allows to display routes of different transport modes. The [ZoneLayer](/docjs.html#zonelayer) displays fare networks.
+The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
 The used [APIs from geOps](https://developer.geops.io/) require a license key.
 

@@ -8,7 +8,7 @@ import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
 /**
- * Layer for visualizing the number of people who use the railway.
+ * Layer for visualizing passenger frequencies of various stations.
  *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class

@@ -1,8 +1,7 @@
 #
 
-The Trafimage Web Map Portal is used to illustrate topics relating to public transport.
-
-Configure your own map.
+Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://www.sbb.ch/en/bahnhof-services/bahnhoefe/karten-bahnhofplaene/trafimage-karten.html)).
+This section shows you how to configure your own map for integrating it in your existing web page.
 
 ```jsx
 import React from 'react';
