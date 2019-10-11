@@ -52,6 +52,16 @@ build_prod:
     paths:
       - build/
 
+deploy_dev_auto:
+  stage: deploy
+  dependencies:
+    - build_dev
+  script:
+    - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+  only:
+    - master
+
 deploy_dev:
   stage: deploy
   dependencies:
@@ -59,6 +69,7 @@ deploy_dev:
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+  when: manual
 
 deploy_stag:
   stage: deploy
