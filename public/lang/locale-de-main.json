@@ -218,5 +218,16 @@
   "xmas": "SBB-Weihnacht",
   "xmastr": "Weihnachts-Tracker",
   "Zeichnen": "Zeichnen",
-  "Zugtracker": "Zugtracker"
+  "Zugtracker": "Zugtracker",
+
+  "faltrampe": "Faltrampe",
+  "sbb_rollstuhl": "SBB Rollstuhl",
+  "rollstuhl_billet": "Rollstuhl Billet",
+  "rollstuhl_wc": "Rollstuhl WC",
+  "eurok_wc": "Eurokey WC",
+  "lift_zu_perron": "Lift zu Perron",
+  "perronhoehe_P55": "Perronhöhe P55",
+  "taktile_sicherheitslinien": "Taktile Sicherheitslinien",
+  "induktionsverstaerker": "Induktionsverstärker",
+  "rampe": "Rampe"
 }

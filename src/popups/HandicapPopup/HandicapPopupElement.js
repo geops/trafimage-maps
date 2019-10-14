@@ -5,68 +5,37 @@ import { useTranslation } from 'react-i18next';
 const propTypes = {
   properties: PropTypes.object.isRequired,
   propertyName: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  ausnahme: PropTypes.string,
+  label: PropTypes.string.isRequired,
 };
 
-const defaultProps = {
-  ausnahme: null,
-  label: null,
-};
-
-function HandicapPopupElement({ properties, propertyName, label, ausnahme }) {
+function HandicapPopupElement({ properties, propertyName, label }) {
   const { t } = useTranslation();
 
   if (!properties[propertyName]) {
     return null;
   }
 
-  let content = null;
   const propLabel = label || propertyName;
-  const propValue = properties[propertyName];
+  const values = properties[propertyName].split('\n');
+  let content = null;
 
-  switch (typeof propValue) {
-    case 'boolean':
-      content = (
-        <>
-          <b>{t(propLabel)}</b>
-          &nbsp;
-          {propValue ? t('vorhanden') : t('nicht vorhanden')}
-        </>
-      );
-      break;
-    case 'string': {
-      const values = propValue.split('\n');
-
-      if (ausnahme && properties[ausnahme]) {
-        values.push(properties[ausnahme]);
-      }
-
-      if (values.length > 1) {
-        content = (
-          <>
-            <div>{t(propLabel)}</div>
-            <div>
-              {values.map(v => (
-                <div>{v}</div>
-              ))}
-            </div>
-          </>
-        );
-        break;
-      }
-
-      content = (
-        <>
-          <b>{t(propLabel)}</b>
-          &nbsp;
-          <div>{values[0]}</div>
-        </>
-      );
-      break;
-    }
-    default:
-      break;
+  if (values.length > 1) {
+    content = (
+      <>
+        <div>{t(propLabel)}</div>
+        <div>
+          {values.map(v => (
+            <div>{v}</div>
+          ))}
+        </div>
+      </>
+    );
+  } else {
+    content = (
+      <>
+        <b>{t(propLabel)}:</b> {values[0]}
+      </>
+    );
   }
 
   if (!content) {
@@ -77,6 +46,5 @@ function HandicapPopupElement({ properties, propertyName, label, ausnahme }) {
 }
 
 HandicapPopupElement.propTypes = propTypes;
-HandicapPopupElement.defaultProps = defaultProps;
 
 export default React.memo(HandicapPopupElement);
