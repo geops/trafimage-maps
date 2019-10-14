@@ -1,11 +1,12 @@
 class SearchService {
-  constructor(activeTopic, clear, upsert) {
+  constructor(activeTopic, clear, upsert, clickedFeature) {
     this.activeTopic = activeTopic;
     this.clear = clear;
     this.upsert = upsert;
-    Object.values(this.activeTopic.searches).forEach(search =>
-      search.setActiveTopic(activeTopic),
-    );
+    Object.values(this.activeTopic.searches).forEach(search => {
+      search.setActiveTopic(activeTopic);
+      search.setClickedFeature(clickedFeature);
+    });
   }
 
   getPlaceholder(t) {

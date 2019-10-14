@@ -30,8 +30,9 @@ class HandicapStationFinder extends StationFinder {
   }
 
   select(item) {
-    // TODO: zoom and select item.handicap.feature on map
-    console.log(this, item);
+    this.clickedFeature([
+      { features: [item.handicap.feature], layer: item.handicap.layer },
+    ]);
   }
 }
 

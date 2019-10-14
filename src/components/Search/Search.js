@@ -1,15 +1,21 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { FaSearch } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { setClickedFeatureInfo } from '../../model/app/actions';
 import SearchService from './SearchService';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
 
 function Search() {
+  const dispatch = useDispatch();
+  const clickedFeature = useCallback(
+    featureInfos => dispatch(setClickedFeatureInfo(featureInfos)),
+    [dispatch],
+  );
   const activeTopic = useSelector(state => state.app.activeTopic);
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
@@ -28,8 +34,8 @@ function Search() {
         }
         return newSuggestions;
       });
-    return new SearchService(activeTopic, clear, upsert);
-  }, [activeTopic, setSuggestions]);
+    return new SearchService(activeTopic, clear, upsert, clickedFeature);
+  }, [activeTopic, setSuggestions, clickedFeature]);
 
   return (
     <div className="wkp-search">
