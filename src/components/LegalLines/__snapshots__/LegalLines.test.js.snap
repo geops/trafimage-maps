@@ -891,23 +891,19 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=de 1
   </p>
   <p />
   <p>
-    Es gelten die
-     
+    Es gelten die 
     <a
       href="http://www.sbb.ch/meta/rechtlicher-hinweis.html"
     >
       rechtlichen Hinweise
     </a>
-     
-    und
-     
+     und 
     <a
       href="http://www.sbb.ch/meta/datenschutz.html"
     >
       Datenschutzbestimmungen
     </a>
-     
-    der SBB.
+     der SBB.
   </p>
   <p>
     In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden auf maps.trafimage.ch unpersönliche Nutzungsdaten wie Ihre IP-Adresse, die zuletzt besuchte Seite, der verwendete Browser, Datum, Uhrzeit etc. gespeichert und mit Matomo («
@@ -994,19 +990,19 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
   </p>
   <p />
   <p>
-    SBB's
+    SBB's 
     <a
       href="http://www.sbb.ch/en/meta/legal-information.html"
     >
       legal information
     </a>
-    and
+     and 
     <a
       href="http://www.sbb.ch/en/meta/data-protection.html"
     >
       Privacy Policy
     </a>
-    apply.
+     apply.
   </p>
   <p>
     Contrary to SBB’s general data protection provisions, maps.trafimage.ch stores non-personal usage data such as your IP address, the page you last visited, the browser used, the date, the time, etc. and analyses it in an anonymised form using Matomo («
@@ -1084,19 +1080,19 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
     </b>
   </p>
   <p>
-    La
+    La 
     <a
       href="http://www.cff.ch/meta/mention-juridique.html"
     >
       Mention juridique
     </a>
-    et les
+     et les 
     <a
       href="http://www.cff.ch/meta/protection-des-donnees.html"
     >
       dispositions sur la protection des données
     </a>
-    des CFF s’appliquent.
+     des CFF s’appliquent.
   </p>
   <p>
     En dérogation aux dispositions générales des CFF en matière de protection des données, maps.trafimage.ch enregistre des données d’utilisation non personnelles telles que votre adresse IP, la dernière page visitée, le logiciel de navigation utilisé, la date, l’heure, etc. et les exploite sous forme anonymisée avec Matomo («
@@ -1169,13 +1165,13 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
     </b>
   </p>
   <p>
-    Valgono le
+    Valgono le 
     <a
       href="http://www.ffs.ch/meta/note-legali.html"
     >
       note legali
     </a>
-     e
+     e 
     <a
       href="http://www.ffs.ch/meta/tutela-dei-dati.html"
     >

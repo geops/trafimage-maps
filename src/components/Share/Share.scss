@@ -5,20 +5,22 @@
   > div {
     width: 30px;
     height: 30px;
+    max-height: 30px;
     margin: 10px 0 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
 
-  .wkp-share-permalink-button > div[role='button'] {
-    width: 20px;
-    font-size: 20px;
+    a {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
   }
 
   .ta-facebook-icon {
-    width: 16px;
-    font-size: 30px;
+    svg {
+      font-size: 30px;
+    }
   }
 
   .ta-twitter-icon,
@@ -27,14 +29,14 @@
   }
 
   .ta-mail-icon {
-    font-size: 23px;
-
     svg {
-      margin-top: 2px;
+      font-size: 23px;
     }
   }
 
   .tm-canvas-save-button {
-    font-size: 28px;
+    svg {
+      font-size: 28px;
+    }
   }
 }

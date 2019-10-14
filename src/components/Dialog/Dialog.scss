@@ -7,7 +7,7 @@
     .tm-dialog-container {
       min-width: 320px;
       width: auto;
-      overflow: hidden;
+      overflow: visible;
 
       .tm-dialog-header {
         padding: 0 20px;
@@ -51,6 +51,10 @@
       flex-direction: column;
       overflow-y: auto;
       border-bottom: 1px solid #eee;
+    }
+
+    .tm-dialog-body {
+      overflow-y: auto;
     }
   }
 }

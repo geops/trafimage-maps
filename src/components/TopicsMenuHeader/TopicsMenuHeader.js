@@ -60,7 +60,10 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
 
   return (
     <Button
-      className={`wkp-menu-header${isOpen ? ' open' : ''}`}
+      className="wkp-menu-header"
+      style={{
+        borderBottom: isOpen ? '1px solid #eee' : '',
+      }}
       tabIndex={0}
       onClick={() => onToggle()}
     >

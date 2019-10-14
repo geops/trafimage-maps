@@ -209,13 +209,8 @@ function TrafimageMaps({
     elements,
   );
 
-  // Define which components to display.
-  const defaultElements = {
+  const topElements = {
     header: <Header />,
-    popup: <Popup popupComponents={popupComponents} />,
-    footer: <Footer />,
-    permalink: <Permalink history={history} initialState={initialState} />,
-    mapControls: <MapControls />,
     menu: (
       <Menu>
         <TopicsMenu>
@@ -226,17 +221,31 @@ function TrafimageMaps({
         {menus}
       </Menu>
     ),
+  };
+
+  const defaultElements = {
+    popup: <Popup popupComponents={popupComponents} />,
+    permalink: <Permalink history={history} initialState={initialState} />,
+    mapControls: <MapControls />,
     baseLayerToggler: (
       <BaseLayerToggler
         layerService={layerService}
         map={map}
+        mapTabIndex={-1} // No accessible via Tab nav.
         fallbackImgDir="/img/baselayer/"
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
   };
 
-  const appElements = getComponents(defaultElements, elements);
+  // Declared above the map for tabIndex accessibility.
+  const appTopElements = Object.entries(topElements).map(([k, v]) =>
+    elements[k] ? <div key={k}>{v}</div> : null,
+  );
+
+  const appDefaultElements = Object.entries(defaultElements).map(([k, v]) =>
+    elements[k] ? <div key={k}>{v}</div> : null,
+  );
 
   // Classes for active components used for conditional styling
   const elementClasses = Object.keys(elements)
@@ -256,15 +265,17 @@ function TrafimageMaps({
           activeTopicKey={activeTopicKey}
           apiKey={apiKey}
         />
+        {appTopElements}
         <Map
           map={map}
           initialCenter={center}
           initialZoom={zoom}
           projection={projection}
         />
-        {appElements}
-        {children}
         <MainDialog />
+        {appDefaultElements}
+        {children}
+        <Footer />,
       </div>
     </Provider>
   );

@@ -26,8 +26,10 @@ function Dialog(props) {
   const dispatch = useDispatch();
   const { body, isModal } = props;
 
-  const escFunction = () => {
-    dispatch(setDialogVisible());
+  const escFunction = e => {
+    if (e.keyCode === 27) {
+      dispatch(setDialogVisible());
+    }
   };
 
   const registerEsc = isRegister => {

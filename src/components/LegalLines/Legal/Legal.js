@@ -8,15 +8,15 @@ const comps = {
       </p>
       <p />
       <p>
-        Es gelten die{' '}
+        Es gelten die&nbsp;
         <a href="http://www.sbb.ch/meta/rechtlicher-hinweis.html">
           rechtlichen Hinweise
-        </a>{' '}
-        und{' '}
+        </a>
+        &nbsp;und&nbsp;
         <a href="http://www.sbb.ch/meta/datenschutz.html">
           Datenschutzbestimmungen
-        </a>{' '}
-        der SBB.
+        </a>
+        &nbsp;der SBB.
       </p>
       <p>
         In Abweichung zu den allgemeinen Datenschutzbestimmungen der SBB werden
@@ -127,15 +127,15 @@ const comps = {
         <b>Mention juridique et protection des données.</b>
       </p>
       <p>
-        La
+        La&nbsp;
         <a href="http://www.cff.ch/meta/mention-juridique.html">
           Mention juridique
         </a>
-        et les
+        &nbsp;et les&nbsp;
         <a href="http://www.cff.ch/meta/protection-des-donnees.html">
           dispositions sur la protection des données
         </a>
-        des CFF s’appliquent.
+        &nbsp;des CFF s’appliquent.
       </p>
       <p>
         En dérogation aux dispositions générales des CFF en matière de
@@ -239,15 +239,15 @@ const comps = {
       </p>
       <p />
       <p>
-        SBB&apos;s
+        SBB&apos;s&nbsp;
         <a href="http://www.sbb.ch/en/meta/legal-information.html">
           legal information
         </a>
-        and
+        &nbsp;and&nbsp;
         <a href="http://www.sbb.ch/en/meta/data-protection.html">
           Privacy Policy
         </a>
-        apply.
+        &nbsp;apply.
       </p>
       <p>
         Contrary to SBB’s general data protection provisions, maps.trafimage.ch
@@ -346,8 +346,9 @@ const comps = {
         <b>Avvertenza legale e protezione dei dati.</b>
       </p>
       <p>
-        Valgono le
-        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e
+        Valgono le&nbsp;
+        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a>
+        &nbsp;e&nbsp;
         <a href="http://www.ffs.ch/meta/tutela-dei-dati.html">
           la dichiarazione sulla protezione dei dati
         </a>

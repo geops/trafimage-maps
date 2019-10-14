@@ -1,3 +1,5 @@
+@import '../../Globals.scss';
+
 .wkp-menu-header {
   position: relative;
   display: flex;
@@ -8,8 +10,8 @@
   transition: all 0.2s ease;
   background: white;
 
-  &.open {
-    border-bottom: 1px solid #eee;
+  &:focus {
+    outline: $bf-large-outline;
   }
 
   .wkp-menu-toggler {
