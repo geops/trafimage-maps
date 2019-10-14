@@ -108,6 +108,7 @@
   "dfa": "DfA",
   "dfa_filter": "DfA Liniennetz",
   "didok": "DIDOK",
+  "Direkt erreichbares Ziel auswählen": "Direkt erreichbares Ziel auswählen",
   "Draw Manual Trafimage Webkartenportal.": "Quickstart Manual Trafimage Webkartenportal.",
   "dwv": "Durchschnittlicher werktäglicher Verkehr",
   "Ein- und Aussteiger": "Ein- und Aussteiger",
@@ -117,6 +118,7 @@
   "EPSG:4326": "WGS 84",
   "Fahrplan": "Fahrplan",
   "Format A4": "Format A4",
+  "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.": "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.",
   "gemeinde": "Gemeinde",
   "gemeinde_plural": "Gemeinden",
   "Geodaten": "Geodaten",
@@ -144,6 +146,7 @@
   "Länge": "Länge",
   "last-import": "Letzer Import",
   "Layer": "Layer",
+  "Linie": "Linie",
   "linie": "Linie",
   "linie_plural": "Linien",
   "linien": "Linien",
@@ -169,6 +172,7 @@
   "passagier_freq_jahr": "Durchschnittlicher werktäglicher Verkehr {{statisticDate}}:",
   "Permalink generieren": "Permalink.",
   "Plakat": "Plakat",
+  "Planmässige Abfahrt": "Planmässige Abfahrt",
   "Printprodukte": "Printprodukte",
   "Projektionswahl": "Projektionswahl",
   "Pünktlichkeit": "Pünktlichkeit",
@@ -212,5 +216,6 @@
   "xmas": "SBB-Weihnacht",
   "xmastr": "Weihnachts-Tracker",
   "Zeichnen": "Zeichnen",
+  "Ziel": "Ziel",
   "Zugtracker": "Zugtracker"
 }
