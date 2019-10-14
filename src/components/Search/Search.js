@@ -35,7 +35,6 @@ function Search() {
     <div className="wkp-search">
       <SearchToggle>
         <Autosuggest
-          alwaysRenderSuggestions
           multiSection
           suggestions={suggestions}
           onSuggestionsFetchRequested={event =>
