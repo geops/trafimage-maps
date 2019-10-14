@@ -47,7 +47,7 @@ function HandicapPopup({ feature }) {
 
   const equipmentStr = equipment.length ? (
     <div className="wkp-handicap-popup-element">
-      <b>Ausstattung</b>
+      <u>Ausstattung</u>
       <br />
       {equipment.join(', ')}
     </div>
@@ -55,8 +55,8 @@ function HandicapPopup({ feature }) {
 
   return (
     <div className="wkp-handicap-popup">
-      <div className="wkp-handicap-popup-element">
-        <b>{feature.get('stationsbezeichnung')}</b>
+      <div style={{ fontWeight: 'bold', marginBottom: 10 }}>
+        {feature.get('stationsbezeichnung')}
       </div>
       <PopupElement
         properties={properties}

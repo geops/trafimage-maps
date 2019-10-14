@@ -22,7 +22,9 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   if (values.length > 1) {
     content = (
       <>
-        <div>{t(propLabel)}</div>
+        <div>
+          <u>{t(propLabel)}</u>
+        </div>
         <div>
           {values.map(v => (
             <div>{v}</div>
@@ -33,7 +35,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   } else {
     content = (
       <>
-        <b>{t(propLabel)}:</b> {values[0]}
+        <u>{t(propLabel)}</u>: {values[0]}
       </>
     );
   }
