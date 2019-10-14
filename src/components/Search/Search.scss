@@ -1,0 +1,54 @@
+@import '../../Globals.scss';
+
+.wkp-search {
+  position: absolute;
+  top: 25px;
+  z-index: 1;
+  right: 400px;
+  left: 400px;
+
+  .wkp-search-button {
+    border: none;
+    background-color: $brand-primary;
+    color: white;
+    height: 41px;
+    width: 46px;
+    position: absolute;
+    top: 2px;
+    right: -26px;
+  }
+
+  .react-autosuggest__input {
+    border: 2px solid #b7b7b7;
+    padding: 12px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .react-autosuggest__suggestions-container {
+    background: white;
+    border: 2px solid #666;
+    margin-top: 5px;
+    width: 100%;
+    padding: 12px;
+  }
+
+  .react-autosuggest__section-title {
+    font-weight: bold;
+  }
+
+  .react-autosuggest__suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .react-autosuggest__suggestion {
+    margin: 10px 0 0 0;
+
+    :hover {
+      color: $brand-primary;
+      cursor: pointer;
+    }
+  }
+}

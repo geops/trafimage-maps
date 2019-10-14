@@ -1,0 +1,22 @@
+@import '../../Globals.scss';
+
+.wkp-search-toggle {
+  > button {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: -200px;
+
+    svg {
+      height: 25px;
+      fill: grey;
+    }
+
+    &:hover {
+      svg {
+        fill: $brand-primary;
+      }
+    }
+  }
+}

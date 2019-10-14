@@ -22,6 +22,7 @@ import MapControls from '../MapControls';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
 import MainDialog from '../MainDialog';
+import Search from '../Search';
 import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
@@ -234,6 +235,7 @@ function TrafimageMaps({
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
+    search: <Search />,
   };
 
   const appElements = getComponents(defaultElements, elements);
