@@ -23,10 +23,11 @@ class HandicapLayer extends VectorLayer {
             .then(data => {
               const format = new GeoJSON();
               let features = format.readFeatures(data);
-              features = features.filter(
-                f =>
-                  f.get('stuetzpunktbahnhof') === this.showStuetzpunktbahnhof,
-              );
+              features = features.filter(f => f.get('has_changes'));
+              // features = features.filter(
+              //   f =>
+              //     f.get('stuetzpunktbahnhof') === this.showStuetzpunktbahnhof,
+              // );
               this.olLayer.getSource().clear();
               this.olLayer.getSource().addFeatures(features);
             });

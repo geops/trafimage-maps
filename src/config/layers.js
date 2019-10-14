@@ -353,20 +353,9 @@ export const parks = new WMSLayer({
 export const stuetzpunktbahnhoefe = new HandicapLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: true,
-  showStuetzpunktbahnhof: true,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
-  },
-});
-
-export const nichtStuetzpunktbahnhoefe = new HandicapLayer({
-  name: 'ch.sbb.nichtStuetzpunktbahnhoefe',
-  visible: true,
-  showStuetzpunktbahnhof: false,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.nichtStuetzpunktbahnhoefe-desc',
   },
 });
 

@@ -8,7 +8,6 @@ import defaultBaseLayers, {
   punctuality,
   parks,
   stuetzpunktbahnhoefe,
-  nichtStuetzpunktbahnhoefe,
 } from './layers';
 
 const defaultElements = {
