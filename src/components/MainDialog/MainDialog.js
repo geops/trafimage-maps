@@ -36,7 +36,6 @@ const MainDialog = () => {
     return (
       <Dialog
         isModal
-        isOpen
         name="legallines"
         title={
           <span>

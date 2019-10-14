@@ -1,4 +1,7 @@
 import i18n from 'i18next';
+import { defaults as defaultInteractions } from 'ol/interaction';
+import LayerService from 'react-spatial/LayerService';
+import OLMap from 'ol/Map';
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
@@ -11,16 +14,24 @@ import {
   SET_DIALOG_POSITION,
 } from './actions';
 
-const initialState = {
+const getInitialState = () => ({
   topics: [],
   clickedFeatureInfo: null,
   language: 'de',
   projection: null,
   menuOpen: false,
   selectedForInfos: null,
-};
+  map: new OLMap({
+    controls: [],
+    interactions: defaultInteractions({
+      altShiftDragRotate: false,
+      pinchRotate: false,
+    }),
+  }),
+  layerService: new LayerService(),
+});
 
-export default function app(state = initialState, action) {
+export default function app(state = getInitialState(), action) {
   switch (action.type) {
     case SET_TOPICS:
       return {
@@ -41,7 +52,7 @@ export default function app(state = initialState, action) {
     case SET_CLICKED_FEATURE_INFO:
       return {
         ...state,
-        clickedFeatureInfo: action.data ? { ...action.data } : null,
+        clickedFeatureInfo: action.data ? [...action.data] : null,
       };
     case SET_ACTIVE_TOPIC:
       return {

@@ -3,20 +3,19 @@ import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import OLMap from 'ol/Map';
 import Projection from 'ol/proj/Projection';
-import { defaults as defaultInteractions } from 'ol/interaction';
-import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
-
+import Menu from '../Menu';
+import FeatureMenu from '../FeatureMenu';
+import TrackerMenu from '../../menus/TrackerMenu';
+import ShareMenu from '../../menus/ShareMenu';
 import Permalink from '../Permalink';
 import Map from '../Map';
-import Menu from '../Menu';
 import Header from '../Header';
 import Footer from '../Footer';
 import MapControls from '../MapControls';
@@ -27,6 +26,7 @@ import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
+import TopicsMenu from '../TopicsMenu';
 
 const propTypes = {
   /**
@@ -42,7 +42,10 @@ const propTypes = {
   /**
    * Additional elements.
    */
-  children: PropTypes.element,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 
   /**
    * Visible elements on the map application.
@@ -55,6 +58,9 @@ const propTypes = {
     popup: PropTypes.bool,
     mapControls: PropTypes.bool,
     baseLayerToggler: PropTypes.bool,
+    shareMenu: PropTypes.bool,
+    featureMenu: PropTypes.bool,
+    trackerMenu: PropTypes.bool,
   }),
 
   /**
@@ -76,22 +82,22 @@ const propTypes = {
   popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
-   * List of menu components that are displayed.
-   * A menu component is represented by 2 properties:
-   *   `standalone`: defined if the property is displayed inside the main menu (false) or outside (true), default to false.
-   *   `component`: the name of the component. Component names are names of files from the folder
-   * `src/components/menus/[MyComponent]` without the `.js` extension.
-   * Example: [
-   *   { component: 'ShareMenu', standalone: true }
-   *   { component: 'TrackerMenu', standalone: false }
-   * ]
+   * Array of menus compomnents to display as child of Menu component.
+   * Example: [<TrackerMenu/>]
    */
-  menuComponents: PropTypes.arrayOf(
-    PropTypes.shape({
-      component: PropTypes.string,
-      standalone: PropTypes.bool,
-    }),
-  ),
+  menus: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+
+  /**
+   * Array of menus compomnents to display at the bottom of the TopicsMenu.
+   * Example: [<ShareMenu/>]
+   */
+  subMenus: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 
   /**
    * Projection used for the map.
@@ -141,127 +147,130 @@ const defaultProps = {
     popup: false,
     mapControls: false,
     baseLayerToggler: false,
+    shareMenu: false,
+    trackerMenu: false,
+    featureMenu: false,
   },
   baseLayers: null,
   popupComponents: {},
-  menuComponents: [],
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
   history: null,
   initialState: {},
+  menus: null,
+  subMenus: null,
 };
 
-class TrafimageMaps extends Component {
-  constructor(props) {
-    super(props);
+const getComponents = (dfltComponents, elementsToDisplay) => {
+  return Object.entries(dfltComponents).map(([k, v]) =>
+    elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
+  );
+};
 
-    this.map = new OLMap({
-      controls: [],
-      interactions: defaultInteractions({
-        altShiftDragRotate: false,
-        pinchRotate: false,
-      }),
-    });
+function TrafimageMaps({
+  baseLayers,
+  children,
+  elements,
+  layers,
+  popupComponents,
+  projection,
+  topics,
+  activeTopicKey,
+  apiKey,
+  history,
+  center,
+  zoom,
+  initialState,
+  menus,
+  subMenus,
+}) {
+  /**
+   * If the application runs standalone, we want to use a consistent store.
+   * However when running in Stylegudist, every application needs it own store
+   */
+  const appStore = history ? store : getStore();
+  const { map, layerService } = appStore.getState().app;
 
-    this.layerService = new LayerService();
-  }
+  // Define which component to display as child of TopicsMenu.
+  const appTopicsMenuChildren = getComponents(
+    {
+      shareMenu: <ShareMenu />,
+    },
+    elements,
+  );
 
-  render() {
-    const {
-      baseLayers,
-      children,
-      elements,
-      layers,
-      popupComponents,
-      menuComponents,
-      projection,
-      topics,
-      activeTopicKey,
-      apiKey,
-      history,
-      center,
-      zoom,
-      initialState,
-    } = this.props;
+  // Define which component to display as child of Menu.
+  const appMenuChildren = getComponents(
+    {
+      featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+      trackerMenu: <TrackerMenu />,
+    },
+    elements,
+  );
 
-    const defaultElements = {
-      header: <Header />,
-      popup: <Popup map={this.map} popupComponents={popupComponents} />,
-      footer: <Footer layerService={this.layerService} map={this.map} />,
-      menu: (
-        <Menu
-          layerService={this.layerService}
-          menuComponents={menuComponents}
-          map={this.map}
+  // Define which components to display.
+  const defaultElements = {
+    header: <Header />,
+    popup: <Popup popupComponents={popupComponents} />,
+    footer: <Footer />,
+    permalink: <Permalink history={history} initialState={initialState} />,
+    mapControls: <MapControls />,
+    menu: (
+      <Menu>
+        <TopicsMenu>
+          {appTopicsMenuChildren}
+          {subMenus}
+        </TopicsMenu>
+        {appMenuChildren}
+        {menus}
+      </Menu>
+    ),
+    baseLayerToggler: (
+      <BaseLayerToggler
+        layerService={layerService}
+        map={map}
+        fallbackImgDir="/img/baselayer/"
+        validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
+      />
+    ),
+  };
+
+  const appElements = getComponents(defaultElements, elements);
+
+  // Classes for active components used for conditional styling
+  const elementClasses = Object.keys(elements)
+    .filter(k => elements[k])
+    .map(k => k);
+
+  return (
+    <Provider store={appStore}>
+      <div className={`tm-app ${elementClasses.join(' ')}`}>
+        <ResizeHandler observe=".tm-app" />
+        <TopicLoader
+          layerService={layerService}
+          baseLayers={baseLayers}
+          layers={layers}
+          map={map}
+          topics={topics}
+          activeTopicKey={activeTopicKey}
+          apiKey={apiKey}
         />
-      ),
-      permalink: (
-        <Permalink
-          map={this.map}
-          history={history}
-          initialState={initialState}
-          layerService={this.layerService}
+        <Map
+          map={map}
+          initialCenter={center}
+          initialZoom={zoom}
+          projection={projection}
         />
-      ),
-      mapControls: <MapControls map={this.map} />,
-      baseLayerToggler: (
-        <BaseLayerToggler
-          layerService={this.layerService}
-          map={this.map}
-          fallbackImgDir="/img/baselayer/"
-          validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
-        />
-      ),
-    };
-
-    const appElements = Object.entries(defaultElements).map(([k, v]) =>
-      elements[k] ? <div key={k}>{v}</div> : null,
-    );
-
-    // Classes for active components used for conditional styling
-    const elementClasses = Object.keys(elements)
-      .filter(k => elements[k])
-      .map(k => k);
-
-    /**
-     * If the application runs standalone, we want to use a consistent store.
-     * However when running in Stylegudist, every application needs it own store
-     */
-    const appStore = history ? store : getStore();
-
-    return (
-      <Provider store={appStore}>
-        <div className={`tm-app ${elementClasses.join(' ')}`}>
-          <ResizeHandler observe=".tm-app" />
-          <TopicLoader
-            layerService={this.layerService}
-            baseLayers={baseLayers}
-            layers={layers}
-            map={this.map}
-            topics={topics}
-            activeTopicKey={activeTopicKey}
-            apiKey={apiKey}
-          />
-          <ResizeHandler observe={this} />
-          <Map
-            map={this.map}
-            initialCenter={center}
-            initialZoom={zoom}
-            projection={projection}
-          />
-
-          {appElements}
-
-          {children}
-          <MainDialog />
-        </div>
-      </Provider>
-    );
-  }
+        {appElements}
+        {children}
+        <MainDialog />
+      </div>
+    </Provider>
+  );
 }
 
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default TrafimageMaps;
+export default React.memo(TrafimageMaps);

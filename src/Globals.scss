@@ -5,6 +5,10 @@ $footer-font-size: 12px;
 
 $transition-delay: 300;
 
+// BarrierFree
+$bf-large-outline: 4px solid black !important;
+$bf-outline: 2px solid black !important;
+
 // Export variables to be used in js files.
 :export {
   transitiondelay: $transition-delay;

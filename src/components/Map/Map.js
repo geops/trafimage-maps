@@ -61,12 +61,9 @@ class Map extends PureComponent {
     }
   }
 
-  componentWillMount() {
-    unByKey(this.onPointerMoveRef);
-  }
-
   componentDidMount() {
     const { map } = this.props;
+    unByKey(this.onPointerMoveRef);
     this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
   }
 
