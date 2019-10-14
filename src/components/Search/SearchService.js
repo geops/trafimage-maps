@@ -8,6 +8,11 @@ class SearchService {
     );
   }
 
+  getPlaceholder(t) {
+    const sections = Object.keys(this.activeTopic.searches).map(s => t(s));
+    return `${sections.join(', ')} …`;
+  }
+
   search(value) {
     Object.entries(this.activeTopic.searches).forEach(([section, client]) => {
       client.search(value).then(items => {

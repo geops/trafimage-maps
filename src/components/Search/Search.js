@@ -55,7 +55,7 @@ function Search() {
           }
           inputProps={{
             onChange: (e, { newValue }) => setValue(newValue),
-            placeholder: t('Stationen, Verbindungen, Orte …'),
+            placeholder: searchService.getPlaceholder(t),
             value,
           }}
         />

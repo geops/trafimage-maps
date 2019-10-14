@@ -1401,7 +1401,7 @@ exports[`AppRouter should match snapshot 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
-              placeholder="Stationen, Verbindungen, Orte …"
+              placeholder=" …"
               type="text"
               value=""
             />
