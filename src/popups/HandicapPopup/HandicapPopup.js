@@ -45,8 +45,19 @@ function HandicapPopup({ feature }) {
     }
   });
 
+  const equipmentStr = equipment.length ? (
+    <div className="wkp-handicap-popup-element">
+      <b>Ausstattung</b>
+      <br />
+      {equipment.join(', ')}
+    </div>
+  ) : null;
+
   return (
     <div className="wkp-handicap-popup">
+      <div className="wkp-handicap-popup-element">
+        <b>{feature.get('stationsbezeichnung')}</b>
+      </div>
       <PopupElement
         properties={properties}
         propertyName={`treffpunkt_${language}`}
@@ -62,11 +73,7 @@ function HandicapPopup({ feature }) {
         propertyName={`bedienungszeiten_${language}`}
         label="Bedienungszeiten"
       />
-      <div className="wkp-handicap-popup-element">
-        <b>Ausstattung</b>
-        <br />
-        {equipment.join(', ')}
-      </div>
+      {equipmentStr}
       <PopupElement
         label="Dienstleistungen Dritter"
         properties={properties}
