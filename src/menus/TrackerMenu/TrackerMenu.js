@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
-import Map from 'ol/Map';
 import { transform as transformCoords } from 'ol/proj';
-import LayerService from 'react-spatial/LayerService';
+import Map from 'ol/Map';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { setMenuOpen } from '../../model/app/actions';
@@ -14,11 +13,13 @@ import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
 
 const propTypes = {
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
+  // mapStateToProps
   map: PropTypes.instanceOf(Map).isRequired,
-
-  dispatchSetMenuOpen: PropTypes.func.isRequired,
+  layerService: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
+
+  // mapDispatchToProps
+  dispatchSetMenuOpen: PropTypes.func.isRequired,
 };
 
 class TrackerMenu extends Component {
@@ -31,17 +32,20 @@ class TrackerMenu extends Component {
 
   constructor(props) {
     super(props);
-    const { layerService, dispatchSetMenuOpen } = this.props;
-
-    this.trackerLayers = layerService
-      .getLayersAsFlatArray()
-      .filter(l => l instanceof TrackerLayer);
 
     this.state = {
       open: false,
       collapsed: true,
       trajectory: null,
     };
+  }
+
+  componentDidMount() {
+    const { layerService, dispatchSetMenuOpen } = this.props;
+
+    this.trackerLayers = layerService
+      .getLayersAsFlatArray()
+      .filter(l => l instanceof TrackerLayer);
 
     if (this.trackerLayers.length) {
       this.trackerLayers.forEach(layer => {
@@ -72,7 +76,7 @@ class TrackerMenu extends Component {
 
   render() {
     const { open, collapsed, trajectory } = this.state;
-    const { t, map } = this.props;
+    const { map, t } = this.props;
 
     if (!open) {
       return null;
@@ -112,7 +116,10 @@ class TrackerMenu extends Component {
 }
 
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  map: state.app.map,
+  layerService: state.app.layerService,
+});
 
 const mapDispatchToProps = {
   dispatchSetMenuOpen: setMenuOpen,

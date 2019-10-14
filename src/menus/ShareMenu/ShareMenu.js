@@ -1,18 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import Map from 'ol/Map';
 import { FaShareAlt } from 'react-icons/fa';
 import Share from '../../components/Share';
 import MenuItem from '../../components/Menu/MenuItem';
 
-const propTypes = {
-  map: PropTypes.instanceOf(Map).isRequired,
-};
-
-const defaultProps = {};
-
-const ShareMenu = ({ map }) => {
+const ShareMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   return (
@@ -21,16 +13,12 @@ const ShareMenu = ({ map }) => {
       className="wkp-share-menu"
       title={t('Teilen')}
       icon={<FaShareAlt />}
-      map={map}
       collapsed={collapsed}
       onCollapseToggle={c => setCollapsed(c)}
     >
-      <Share map={map} />
+      <Share />
     </MenuItem>
   );
 };
-
-ShareMenu.propTypes = propTypes;
-ShareMenu.defaultProps = defaultProps;
 
 export default React.memo(ShareMenu);

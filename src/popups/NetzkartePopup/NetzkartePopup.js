@@ -116,13 +116,11 @@ class NetzkartePopup extends PureComponent {
       projection.value,
     );
 
-    const formatedCoords = [];
-
-    coordinates.forEach(input => {
+    const formatedCoords = coordinates.map(input => {
       const coord = Math.round(parseFloat(input) * 10 ** 4) / 10 ** 4;
       const parts = coord.toString().split('.');
       parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-      formatedCoords.push(parts.join());
+      return parts.join();
     });
 
     const coordinatesWrapper = (

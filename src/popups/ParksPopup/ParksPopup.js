@@ -20,7 +20,7 @@ class ParksPopup extends PureComponent {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { feature } = this.props;
     const abk = feature.get('abk');
 

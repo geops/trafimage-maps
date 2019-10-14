@@ -20,6 +20,7 @@ import {
 import './Footer.scss';
 
 const propTypes = {
+  // mapStateToProps
   map: PropTypes.instanceOf(Map).isRequired,
   language: PropTypes.string.isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -119,6 +120,8 @@ const Footer = ({
 
 const mapStateToProps = state => ({
   language: state.app.language,
+  map: state.app.map,
+  layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
