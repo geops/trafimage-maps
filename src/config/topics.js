@@ -49,7 +49,6 @@ export const handicap = {
   elements: { ...defaultElements, shareMenu: true, featureMenu: true },
   layers: [
     ...defaultBaseLayers,
-    nichtStuetzpunktbahnhoefe,
     stuetzpunktbahnhoefe,
   ],
   projection: 'EPSG:3857',
