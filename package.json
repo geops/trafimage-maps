@@ -194,8 +194,6 @@
     "singleQuote": true
   },
   "resolutions": {
-    "@vxna/mini-html-webpack-template": "1.0.0",
-    "mini-html-webpack-plugin": "2.0.0",
     "terser": "4.3.4"
   },
   "stylelint": {
