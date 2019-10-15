@@ -8,7 +8,6 @@ import defaultBaseLayers, {
   punctuality,
   parks,
   stuetzpunktbahnhoefe,
-  nichtStuetzpunktbahnhoefe,
 } from './layers';
 
 const defaultElements = {
@@ -48,11 +47,7 @@ export const handicap = {
   name: 'ch.sbb.handicap',
   key: 'ch.sbb.handicap',
   elements: { ...defaultElements, shareMenu: true, featureMenu: true },
-  layers: [
-    ...defaultBaseLayers,
-    nichtStuetzpunktbahnhoefe,
-    stuetzpunktbahnhoefe,
-  ],
+  layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
   description: 'ch.sbb.handicap-desc',
 };
