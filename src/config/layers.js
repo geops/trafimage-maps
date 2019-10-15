@@ -12,6 +12,7 @@ import WMSLayer from 'react-spatial/layers/WMSLayer';
 import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
 import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import NetzkartePointLayer from '../layers/NetzkartePointLayer';
+import HandicapLayer from '../layers/HandicapLayer';
 import CONF from './appConfig';
 
 proj4.defs(
@@ -62,10 +63,11 @@ const resolutions = [
 
 export const netzkarteLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
+  preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
@@ -87,6 +89,7 @@ export const swisstopoSwissImage = new Layer({
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
       transition: 0,
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -109,6 +112,7 @@ export const netzkarteAerial = new Layer({
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
       transition: 0,
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -168,6 +172,7 @@ export const swisstopoLandeskarteGrau = new Layer({
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
       transition: 0,
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -226,13 +231,16 @@ export const punctuality = new Layer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.puenktlichkeit-desc',
-    legendUrl: '/img/tracker/puenktlichkeit_legend_{language}.png',
+    legendUrl:
+      '/img/layers/puenktlichkeit/puenktlichkeit_legend_{language}.png',
   },
 });
 
+const apiPublicKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
 punctuality.setChildren([
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
+    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -240,6 +248,7 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
+    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -247,6 +256,7 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-all',
+    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -277,6 +287,7 @@ export const buslines = new Layer({
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',
+      crossOrigin: 'anonymous',
       tileGrid: new WMTSTileGrid({
         extent: projectionExtent,
         resolutions,
@@ -336,6 +347,15 @@ export const parks = new WMSLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.parks-desc',
+  },
+});
+
+export const stuetzpunktbahnhoefe = new HandicapLayer({
+  name: 'ch.sbb.stuetzpunktbahnhoefe',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
   },
 });
 

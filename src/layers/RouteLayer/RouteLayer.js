@@ -6,20 +6,23 @@ import { Style, Stroke as StrokeStyle } from 'ol/style';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing routes.
+ *
+ * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.
- * @param {string?} [options.apiKey] Access key for geOps services.
- * @param {string} [options.name] Layer name.
- * @param {string} [options.url] Url of the geOps route backend.
+ * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
+ * @param {string} [options.name=Routen] Layer name.
+ * @param {string} [options.url=https://api.geops.io/routing/v1] Url of the geOps route backend.
  * @param {boolean} [options.visible = true] Visibility of the layer.
  *   Default is true.
- * @param {string} [options.projection] Layer projection.
+ * @param {string} [options.projection=EPSG:3857] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
- * @param [options.routeStyleFunction] Function called with the route properties
+ * @param {Function} [options.routeStyleFunction] Function called with the route properties
  *   and a boolean indicating if the zone is selected.
  *   The function should return the route color.
  */
@@ -55,30 +58,33 @@ class RouteLayer extends VectorLayer {
     this.selectedRouteIds = [];
 
     this.onClick(features => {
-      const [feature] = features;
+      if (features.length) {
+        const [feature] = features;
+        const { isClickable, routeId } = feature.get('route');
 
-      if (feature) {
-        const routeId = feature.get('routeId');
-        const idx = this.selectedRouteIds.indexOf(routeId);
-        if (idx > -1) {
-          this.selectedRouteIds.splice(idx, 1);
-        } else {
-          this.selectedRouteIds.push(routeId);
+        if (isClickable) {
+          const idx = this.selectedRouteIds.indexOf(routeId);
+          if (idx > -1) {
+            this.selectedRouteIds.splice(idx, 1);
+          } else {
+            this.selectedRouteIds.push(routeId);
+          }
+
+          this.olLayer.changed();
         }
-
-        this.olLayer.changed();
       }
     });
   }
 
   /**
-   * Gettint the Mot-features on specific route.
+   * Getting the Mot-features on specific route.
    * @private
    * @param {Object} viaPoints Route Informations
-   * @param {String} mot ask for specific Route
-   * @returns {array<ol.feature>}
+   * @param {String} mot Ask for specific Route
+   * @param {Object[]} sequenceProps Properties for the returned features.
+   * @returns {array<ol.Feature>} Features
    */
-  fetchRouteForMot(viaPoints, mot) {
+  fetchRouteForMot(viaPoints, mot, sequenceProps) {
     this.abortController = new AbortController();
 
     const via = viaPoints.map(v => `!${v}`);
@@ -98,12 +104,8 @@ class RouteLayer extends VectorLayer {
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
-        features.forEach(f => f.set('mot', mot));
+        features.forEach(f => f.setProperties(sequenceProps));
         return features;
-      })
-      .catch(() => {
-        // eslint-disable-next-line no-console
-        console.info('Request cancelled');
       });
   }
 
@@ -113,8 +115,9 @@ class RouteLayer extends VectorLayer {
    * @returns {ol.style} get the feature's style function.
    */
   routeStyle(feature) {
+    const { routeId } = feature.get('route');
     const mot = feature.get('mot');
-    const isSelected = this.selectedRouteIds.includes(feature.get('routeId'));
+    const isSelected = this.selectedRouteIds.includes(routeId);
     const color =
       this.routeStyleFunction(feature.getProperties(), isSelected) ||
       this.motColors[mot];
@@ -129,46 +132,63 @@ class RouteLayer extends VectorLayer {
 
   /**
    * Load routes based on a given configuration.
-   * @param {Object[]} sequences Route sequences.
-   * @param {number} sequences[].uicFrom UIC number of start station.
-   * @param {number} sequences[].uicTo UIC number of end station.
-   * @param {string} sequences[].mot Method of transportation.
+   * @param {Object[]} routes Routes.
+   * @param {boolean} routes[].isSelected If true, the route is
+   *   selected initially.
+   * @param {boolean} routes[].isClickable If true, the route can be
+   *   selected or unselected by click.
+   * @param {Object[]} routes[].sequences Route sequences.
+   * @param {number} routes[].sequences[].uicFrom UIC number of start station.
+   * @param {number} routes[].sequences[].uicTo UIC number of end station.
+   * @param {string} routes[].sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
-  loadRoutes(sequences) {
-    let via = [];
-    let mot;
+  loadRoutes(routes) {
     const routePromises = [];
 
-    for (let i = 0; i < sequences.length; i += 1) {
-      mot = mot || sequences[i].mot;
+    for (let i = 0; i < routes.length; i += 1) {
+      let via = [];
 
-      if (mot !== sequences[i].mot) {
-        routePromises.push(this.fetchRouteForMot(via, mot));
-        ({ mot } = sequences[i]);
-        via = [sequences[i].uicFrom, sequences[i].uicTo];
-      } else {
-        via = via.concat([sequences[i].uicFrom, sequences[i].uicTo]);
+      if (!routes[i].sequences) {
+        throw new Error('Missing route sequences.');
+      }
+
+      for (let j = 0; j < routes[i].sequences.length; j += 1) {
+        const { mot, uicFrom, uicTo } = routes[i].sequences[j];
+        const nextMot =
+          j === routes[i].sequences.length - 1
+            ? null
+            : routes[i].sequences[j + 1].mot;
+
+        via = via.concat([uicFrom, uicTo]);
+
+        if (mot !== nextMot) {
+          const sequenceProps = { route: { ...routes[i], routeId: i }, mot };
+          routePromises.push(this.fetchRouteForMot(via, mot, sequenceProps));
+          via = [];
+        }
       }
     }
 
-    routePromises.push(this.fetchRouteForMot(via, mot));
-
     return Promise.all(routePromises).then(data => {
-      this.olLayer.getSource().clear();
-      for (let i = 0; i < data.length; i += 1) {
-        data[i].forEach(feat => feat.set('routeId', i));
-        this.olLayer.getSource().addFeatures(data[i]);
-      }
+      const sequenceFeatures = data.flat().filter(f => f);
+      this.olLayer.getSource().addFeatures(sequenceFeatures);
+      sequenceFeatures.forEach(f => {
+        const { routeId, isSelected } = f.get('route');
+        if (isSelected) {
+          this.selectedRouteIds.push(routeId);
+        }
+      });
+      return sequenceFeatures;
     });
   }
 
   /**
    * Zoom to route.
    * @param {Object} [fitOptions] Options,
-   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   *   see {@link https://openlayers.org/en/latest/apidoc/module-ol_View-View.html ol/View~View}
    */
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
@@ -184,6 +204,7 @@ class RouteLayer extends VectorLayer {
       this.abortController = null;
     }
 
+    this.selectedRouteIds = [];
     this.olLayer.getSource().clear();
   }
 }

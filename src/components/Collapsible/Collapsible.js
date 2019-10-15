@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import './Collapsible.scss';
@@ -22,40 +22,70 @@ const defaultProps = {
   type: 'vertical',
 };
 
-let timeout;
-
-const Collapsible = ({
-  children,
-  className,
-  isCollapsed,
-  maxHeight,
-  maxWidth,
-  transitionDuration,
-  type,
-}) => {
-  const [isHidden, setHidden] = useState(false);
-  const style = {};
-
-  useEffect(() => {
-    if (isHidden !== isCollapsed) {
-      window.clearTimeout(timeout);
-      const duration = isCollapsed ? transitionDuration : 0;
-      timeout = window.setTimeout(() => setHidden(isCollapsed), duration);
-    }
-  });
-
-  if (type === 'horizontal') {
-    style.maxWidth = isCollapsed ? 0 : maxWidth;
-  } else {
-    style.maxHeight = isCollapsed ? 0 : maxHeight;
+class Collapsible extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.ref = React.createRef();
+    this.state = {
+      isHidden: false,
+    };
   }
 
-  return (
-    <div style={style} className={`${className} wkp-collapsible-${type}`}>
-      {isHidden ? null : children}
-    </div>
-  );
-};
+  componentDidUpdate() {
+    const { isCollapsed, transitionDuration } = this.props;
+    const { isHidden } = this.state;
+    if (isHidden !== isCollapsed) {
+      window.clearTimeout(this.timeout);
+      const duration = isCollapsed ? transitionDuration : 0;
+      this.timeout = window.setTimeout(
+        () => this.setState({ isHidden: isCollapsed }),
+        duration,
+      );
+    }
+  }
+
+  componentWillUnmount() {
+    window.clearTimeout(this.timeout);
+  }
+
+  render() {
+    const {
+      children,
+      className,
+      isCollapsed,
+      maxHeight,
+      maxWidth,
+      transitionDuration,
+      type,
+    } = this.props;
+    const { isHidden } = this.state;
+    const style = {};
+
+    if (type === 'horizontal') {
+      style.maxWidth = isCollapsed ? 0 : maxWidth;
+    } else {
+      style.maxHeight = isCollapsed ? 0 : maxHeight;
+    }
+
+    if (isHidden !== isCollapsed) {
+      const duration = isCollapsed ? transitionDuration : 0;
+      window.setTimeout(
+        () => this.setState({ isHidden: isCollapsed }),
+        duration,
+      );
+    }
+
+    return (
+      <div
+        ref={this.ref}
+        style={style}
+        className={`${className} wkp-collapsible-${type}`}
+      >
+        {isHidden ? null : children}
+      </div>
+    );
+  }
+}
 
 Collapsible.propTypes = propTypes;
 Collapsible.defaultProps = defaultProps;

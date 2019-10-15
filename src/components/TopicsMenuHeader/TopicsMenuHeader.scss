@@ -1,0 +1,98 @@
+.wkp-menu-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15px;
+  height: 69px;
+  transition: all 0.2s ease;
+  background: white;
+
+  &.open {
+    border-bottom: 1px solid #eee;
+  }
+
+  .wkp-menu-toggler {
+    position: absolute;
+    right: 10px;
+    top: 30px;
+  }
+
+  .wkp-menu-header-toggler {
+    display: none;
+
+    .wkp-menu-header-toggler-icon {
+      width: 50px;
+      text-align: center;
+    }
+  }
+
+  .wkp-menu-layers {
+    color: #888;
+    margin-top: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.2s ease;
+    max-height: 16px;
+
+    &.hidden {
+      max-height: 0;
+      margin: 0;
+    }
+  }
+
+  .wkp-menu-header-title {
+    transition: font-size 0.2s ease;
+
+    &.large {
+      font-size: 120%;
+    }
+  }
+}
+
+.tm-w-m,
+.tm-w-s,
+.tm-w-xs {
+  .wkp-menu-header {
+    margin: 0;
+    border: 0;
+    padding: 10px;
+    height: 35px;
+    width: 30px;
+
+    .wkp-menu-toggler,
+    .wkp-menu-layers {
+      display: none;
+    }
+
+    .wkp-menu-header-toggler {
+      display: flex;
+      align-items: center;
+
+      .wkp-menu-toggle-text {
+        display: none;
+      }
+
+      img {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  // header component is enabled
+  &.header {
+    .wkp-menu {
+      top: 12px;
+
+      .wkp-menu-header {
+        margin: 0 0 0 10px;
+        width: 60px;
+
+        .wkp-menu-toggle-text {
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -8,10 +8,13 @@ import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
 /**
- * Layer for passenger frequency.
+ * Layer for visualizing passenger frequencies of various stations.
+ *
+ * <img src="img/layers/PassagierfrequenzenLayer/layer.png" alt="Layer preview" title="Layer preview">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
- * @params {Object} options
+ * @param {Object} [options] Layer options.
  * @inheritdoc
  */
 class PassagierfrequenzenLayer extends VectorLayer {

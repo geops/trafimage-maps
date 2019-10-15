@@ -7,60 +7,120 @@ before_script:
 # Define the stages of the build which will be run in sequence
 stages:
   - build
+  - review
   - deploy
 
 # Define folders that are being cached between builds
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 cache:
   paths:
-    - node_modules/
+    - .yarn-cache/
 
-build_maps:
+build_dev:
   stage: build
   script:
     - yarn install
     - yarn lint
     - yarn test
-    - yarn build
+    - yarn build:dev
   artifacts:
     when: on_success
     paths:
       - build/
 
-deploy_dev:
+build_stag:
+  stage: build
+  script:
+    - yarn install
+    - yarn lint
+    - yarn test
+    - yarn build:stag
+  artifacts:
+    when: on_success
+    paths:
+      - build/
+
+build_prod:
+  stage: build
+  script:
+    - yarn install
+    - yarn lint
+    - yarn test
+    - yarn build:prod
+  artifacts:
+    when: on_success
+    paths:
+      - build/
+
+deploy_dev_auto:
   stage: deploy
   dependencies:
-    - build_maps
+    - build_dev
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+  only:
+    - master
 
-deploy_dev_manual:
+deploy_dev:
   stage: deploy
   dependencies:
-    - build_maps
+    - build_dev
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
   when: manual
 
-deploy_stag_manual:
+deploy_stag:
   stage: deploy
   dependencies:
-    - build_maps
+    - build_stag
   script:
     - echo "$STAG_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.stag.trafimage.geops.ch:/var/www/wkp2.stag.trafimage.geops.ch
   when: manual
 
-deploy_prod_manual:
+deploy_prod:
   stage: deploy
   dependencies:
-    - build_maps
+    - build_prod
   script:
     - echo "$PROD_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.prod.trafimage.geops.ch:/var/www/wkp2.prod.trafimage.geops.ch
   when: manual
+
+review:
+  stage: review
+  dependencies:
+    - build_dev
+  before_script: []
+  script:
+    - rsync -av build/ "/var/www/review_apps/$CI_ENVIRONMENT_SLUG/"
+  environment:
+    name: '$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME'
+    url: 'https://$CI_ENVIRONMENT_SLUG.review.geops.io'
+    on_stop: stop_review
   only:
-    - tags
+    - branches
+  except:
     - master
+  tags:
+    - review-apps
+
+stop_review:
+  stage: review
+  before_script: []
+  script:
+    - rm -rf "/var/www/review_apps/$CI_ENVIRONMENT_SLUG"
+  variables:
+    GIT_STRATEGY: none
+  when: manual
+  environment:
+    name: '$CI_PROJECT_PATH/$CI_COMMIT_REF_NAME'
+    action: stop
+  only:
+    - branches
+  except:
+    - master
+  tags:
+    - review-apps

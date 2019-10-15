@@ -1,14 +1,7 @@
 #
 
-Configure your own map.
-
-'TrajservLayer' Layer filter options (case insensitive):
-
-| Options            | Description            | Examples                                                              |
-|--------------------|------------------------|-----------------------------------------------------------------------|
-| operator           | filter by operator     | string: 'sbb', list: '(vbz\|zsg)'                                     |
-| publishedLineName  | filter by line name    | string: 'ICE',  list: 's1,s2,s9,s10,s15'                              |
-| tripNumber         | filter by trip number  | bus in zurich: '2068', list of buses in Zurich: '2068,3003,3451,3953' |
+Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://www.sbb.ch/en/bahnhof-services/bahnhoefe/karten-bahnhofplaene/trafimage-karten.html)).
+This section shows you how to configure your own map for integrating it in your existing web page.
 
 ```jsx
 import React from 'react';
@@ -18,6 +11,7 @@ import defaultBaseLayers, { buslines } from '../../config/layers';
 
 import TrafimageMaps from '../../components/TrafimageMaps';
 
+const apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
 <div style={{ position: 'relative', width: '100%', height: 500 }}>
   <TrafimageMaps
     topics={[{
@@ -28,10 +22,12 @@ import TrafimageMaps from '../../components/TrafimageMaps';
         new TrajservLayer({
           name: 'Zugtracker',
           key: 'ch.sbb.tracker',
+          apiKey,
         }),
         new TrajservLayer({
           name: 'ch.sbb.puenktlichkeit',
           key: 'ch.sbb.puenktlichkeit',
+          apiKey,
           visible: false,
           useDelayStyle: true,
           operator: 'SBB', // To filter operator
@@ -40,7 +36,7 @@ import TrafimageMaps from '../../components/TrafimageMaps';
         buslines,
       ],
     }]}
-    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+    apiKey={apiKey}
     elements={{
       footer: true,
       header: true,

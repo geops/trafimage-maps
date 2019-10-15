@@ -1,10 +1,8 @@
 #
 
-This example shows a TrafimageMaps application together with layers for routing
-and fare networks.
+The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
-The positioning of labels inside the fare networks layer are optimized based on
-the map extent and the used resolution.
+The used [APIs from geOps](https://developer.geops.io/) require a license key.
 
 ```jsx
 import React from 'react';
@@ -33,12 +31,14 @@ zoneLayer.loadZones([
     zones: [{
       zoneCode: 10,
       zoneName: 'Davos',
+      isClickable: true,
     }],
   },
   {
     partnerCode: 490,
     zones: [{
       zoneCode: 120,
+      isSelected: true,
     },
     {
       zoneCode: 170,
@@ -64,29 +64,29 @@ const routeLayer = new RouteLayer({
 // Visualize a route on the map.
 routeLayer.loadRoutes([
   {
-    uicFrom: 8502024,
-    uicTo: 8502042,
-    mot: 'rail',
+    isClickable: true,
+    sequences: [
+      {
+        uicFrom: 8502024,
+        uicTo: 8505000,
+        mot: 'rail',
+      },
+      {
+        uicFrom: 8508450,
+        uicTo: 8589801,
+        mot: 'bus',
+      },
+    ],
   },
   {
-    uicFrom: 8502028,
-    uicTo: 8502021,
-    mot: 'rail',
-  },
-  {
-    uicFrom: 8502028,
-    uicTo: 8505000,
-    mot: 'rail',
-  },
-  {
-    uicFrom: 8508450,
-    uicTo: 8589801,
-    mot: 'bus',
-  },
-  {
-    uicFrom: 8589801,
-    uicTo: 8589775,
-    mot: 'bus',
+    isSelected: true,
+    sequences: [
+      {
+        uicFrom: 8589801,
+        uicTo: 8589775,
+        mot: 'bus',
+      },
+    ],
   },
 ]).then((f) => {
   routeLayer.zoomToRoute();

@@ -4,9 +4,10 @@ import CONF from './appConfig';
 const netzkarteLayer = new MapboxLayer({
   name: 'Netzkarte',
   key: 'ch.sbb.netzkarte',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
+  preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   url: `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json?key=${CONF.vectorTilesKey}`,
 });

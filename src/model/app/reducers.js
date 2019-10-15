@@ -1,4 +1,7 @@
 import i18n from 'i18next';
+import { defaults as defaultInteractions } from 'ol/interaction';
+import LayerService from 'react-spatial/LayerService';
+import OLMap from 'ol/Map';
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
@@ -6,21 +9,29 @@ import {
   SET_LANGUAGE,
   SET_PROJECTION,
   SET_MENU_OPEN,
-  SET_LAYER_SELECTED_FOR_INFOS,
+  SET_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
 } from './actions';
 
-const initialState = {
+const getInitialState = () => ({
   topics: [],
   clickedFeatureInfo: null,
   language: 'de',
   projection: null,
   menuOpen: false,
-  layerSelectedForInfos: null,
-};
+  selectedForInfos: null,
+  map: new OLMap({
+    controls: [],
+    interactions: defaultInteractions({
+      altShiftDragRotate: false,
+      pinchRotate: false,
+    }),
+  }),
+  layerService: new LayerService(),
+});
 
-export default function app(state = initialState, action) {
+export default function app(state = getInitialState(), action) {
   switch (action.type) {
     case SET_TOPICS:
       return {
@@ -41,7 +52,7 @@ export default function app(state = initialState, action) {
     case SET_CLICKED_FEATURE_INFO:
       return {
         ...state,
-        clickedFeatureInfo: action.data ? { ...action.data } : null,
+        clickedFeatureInfo: action.data ? [...action.data] : null,
       };
     case SET_ACTIVE_TOPIC:
       return {
@@ -53,17 +64,17 @@ export default function app(state = initialState, action) {
         ...state,
         menuOpen: action.data,
       };
-    case SET_LAYER_SELECTED_FOR_INFOS:
+    case SET_SELECTED_FOR_INFOS:
       return {
         ...state,
-        dialogVisible: action.data ? 'layerInfos' : false,
-        layerSelectedForInfos: action.data,
+        dialogVisible: action.data ? 'infoDialog' : false,
+        selectedForInfos: action.data,
       };
     case SET_DIALOG_VISIBLE:
       return {
         ...state,
         dialogVisible: action.data,
-        layerSelectedForInfos: null,
+        selectedForInfos: null,
       };
     case SET_DIALOG_POSITION:
       return {

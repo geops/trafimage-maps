@@ -1,33 +1,58 @@
-.tm-dialog,
-.tm-modal {
-  z-index: 10000;
+.wkp-dialog {
+  .tm-dialog,
+  .tm-modal {
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.4);
 
-  .tm-dialog-container {
-    width: 320px;
-    overflow: hidden;
+    .tm-dialog-container {
+      min-width: 320px;
+      width: auto;
+      overflow: hidden;
 
-    .tm-dialog-header {
-      padding: 0 20px;
+      .tm-dialog-header {
+        padding: 0 20px;
+        text-align: left;
+        font-weight: bold;
+        border-bottom: 1px solid #eee;
+      }
+
+      .tm-dialog-draggable {
+        cursor: move;
+      }
+    }
+
+    .tm-dialog-body {
+      padding: 0 30px;
+      margin: 10px 0 20px 0;
+      width: auto;
       text-align: left;
-      font-weight: bold;
-    }
-
-    .tm-dialog-draggable {
-      cursor: move;
+      max-height: calc(100% - 70px);
     }
   }
 
-  .tm-dialog-body {
-    padding: 0 20px 20px 20px;
-    width: auto;
-    text-align: left;
-    max-height: 400px;
+  .tm-dialog {
+    position: absolute;
+    left: 390px;
   }
-}
 
-.tm-dialog {
-  position: absolute;
-  left: 390px;
+  .tm-modal {
+    .tm-dialog-container {
+      width: 650px;
+      height: auto;
+      max-height: calc(100% - 125px);
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .tm-dialog-container,
+    .tm-dialog-body {
+      margin-top: 0;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      border-bottom: 1px solid #eee;
+    }
+  }
 }
 
 .tm-w-m,
@@ -64,7 +89,13 @@
     .tm-dialog-body {
       height: calc(100% - 50px);
       overflow-y: auto;
-      overflow-x: hidden;
+      overflow-x: auto;
+    }
+  }
+
+  .tm-modal {
+    .tm-dialog-container {
+      width: calc(100% - 40px);
     }
   }
 }

@@ -20,11 +20,19 @@
     border-radius: 0;
   }
 
+  a {
+    margin: 0 5px;
+  }
+
   .wkp-footer-left,
   .wkp-footer-right,
   .tm-scale-line {
     display: flex;
     align-items: center;
+  }
+
+  .tm-copyright {
+    margin-right: 10px;
   }
 
   .tm-scale-line {
@@ -43,7 +51,7 @@
   }
 
   .tm-mouse-position {
-    width: 210px;
+    width: 320px;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -52,6 +60,16 @@
       display: block;
       margin-right: 10px;
     }
+  }
+}
+
+.tm-w-m,
+.tm-w-s,
+.tm-w-xs {
+  .tm-copyright {
+    position: absolute;
+    bottom: 32px;
+    font-size: 11px;
   }
 }
 
