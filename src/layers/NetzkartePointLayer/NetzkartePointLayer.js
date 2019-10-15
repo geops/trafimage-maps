@@ -9,10 +9,17 @@ import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing information about stations (default) or airports.
+ * The popup contains links to station plans, station coordinates
+ * and links to timetable, services, shopping, handicap information.
+ *
+ * <img src="img/layers/NetzkartePointLayer/layer.png" alt="Layer preview" title="Layer preview">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
- * @params {Object} options
+ * @param {Object} [options] Layer options.
+ * @param {boolean} [showAirports] True to show the airports instead of stations
+ * @param {boolean} [useBboxStrategy] Use the the [bbox loading strategy](https://openlayers.org/en/latest/apidoc/module-ol_loadingstrategy.html#.bbox)
  * @inheritdoc
  */
 class NetzkartePointLayer extends VectorLayer {
@@ -82,9 +89,10 @@ class NetzkartePointLayer extends VectorLayer {
 
   /**
    * Create Style from feature and resolution
-   * @param {ol.feature} f
-   * @param {number} r
-   * @returns {Object|null}
+   * @private
+   * @param {ol.feature} f {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} r The views resolution
+   * @returns {Object|null} Style
    */
   styleFunction(f, r) {
     const res = layerHelper.getDataResolution(r);
@@ -115,6 +123,8 @@ class NetzkartePointLayer extends VectorLayer {
   }
 
   /**
+   * Custom loader
+   * @private
    * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
    * (similar to https://osgeo-org.atlassian.net/browse/GEOS-5996)
    * which results in an Assertion error 36, https://openlayers.org/en/latest/doc/errors/

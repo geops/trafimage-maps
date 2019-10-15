@@ -9,11 +9,10 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
-import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
-import BahnhofplanLayer from '../layers/BahnhofplanLayer';
-import NetzkartePointLayer from '../layers/NetzkartePointLayer';
-import HandicapLayer from '../layers/HandicapLayer';
-import CONF from './appConfig';
+import PassagierfrequenzenLayer from '../../../layers/PassagierfrequenzenLayer';
+import BahnhofplanLayer from '../../../layers/BahnhofplanLayer';
+import NetzkartePointLayer from '../../../layers/NetzkartePointLayer';
+import CONF from '../../appConfig';
 
 proj4.defs(
   'EPSG:21781',
@@ -63,13 +62,12 @@ const resolutions = [
 
 export const netzkarteLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  tabIndex: -1, // Canvas not accessible via Tab navigation.
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
     `?key=${CONF.vectorTilesKey}`,
@@ -348,15 +346,6 @@ export const parks = new WMSLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.parks-desc',
-  },
-});
-
-export const stuetzpunktbahnhoefe = new HandicapLayer({
-  name: 'ch.sbb.stuetzpunktbahnhoefe',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
   },
 });
 
