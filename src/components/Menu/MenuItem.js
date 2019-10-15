@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
 import Map from 'ol/Map';
+import { unByKey } from 'ol/Observable';
 import MenuItemHeader from './MenuItemHeader';
 import Collapsible from '../Collapsible';
 import { transitiondelay } from '../../Globals.scss';
@@ -34,6 +35,7 @@ class MenuItem extends Component {
     super(props);
 
     this.bodyElementRef = React.createRef();
+    this.olEventKey = null;
 
     this.state = {
       menuHeight: null,
@@ -42,7 +44,7 @@ class MenuItem extends Component {
 
   componentDidMount() {
     const { map } = this.props;
-    map.on('change:size', () => this.updateMenuHeight());
+    this.olEventKey = map.on('change:size', () => this.updateMenuHeight());
     window.clearTimeout(this.heightTimeout);
     this.heightTimeout = window.setTimeout(() => {
       this.updateMenuHeight();
@@ -60,6 +62,7 @@ class MenuItem extends Component {
   }
 
   componentWillUnmount() {
+    unByKey(this.olEventKey);
     window.clearTimeout(this.heightTimeout);
   }
 
