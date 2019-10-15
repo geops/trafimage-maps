@@ -39,19 +39,6 @@ module.exports = {
           name: 'Casa',
           content: 'src/apps/Casa/README.md',
         },
-        {
-          name: 'Trafimage WKP',
-          content: 'src/apps/TrafimageWKP/README.md',
-        },
-      ],
-    },
-    {
-      name: 'Popups',
-      sections: [
-        {
-          name: 'BahnhofplanPopup',
-          content: 'src/popups/BahnhofplanPopup/README.md',
-        },
       ],
     },
   ],
@@ -72,6 +59,9 @@ module.exports = {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
         },
         // Load css and scss files.
         {
