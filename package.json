@@ -26,7 +26,7 @@
     "react-i18next": "^10.2.0",
     "react-icons": "^3.1.0",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.0",
+    "react-router-dom": "^5.1.2",
     "react-router-prop-types": "^1.0.4",
     "react-spatial": "^0.1.0-beta.24",
     "react-styleguidist": "^9.1.11",
