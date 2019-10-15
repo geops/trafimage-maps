@@ -72,6 +72,7 @@ function Search() {
                 : []
             }
             inputProps={{
+              autofocus: 'true',
               onChange: (e, { newValue }) => setValue(newValue),
               placeholder: searchService.getPlaceholder(t),
               value,
