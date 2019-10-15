@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { useTranslation } from 'react-i18next';
 import Button from 'react-spatial/components/Button';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import './FeatureInformation.scss';
@@ -9,10 +8,10 @@ import './FeatureInformation.scss';
 const propTypes = {
   clickedFeatureInfo: PropTypes.array.isRequired,
   popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
-  t: PropTypes.func.isRequired,
 };
 
-const FeatureInformation = ({ clickedFeatureInfo, popupComponents, t }) => {
+const FeatureInformation = ({ clickedFeatureInfo, popupComponents }) => {
+  const { t } = useTranslation();
   const [featureIndex, setFeatureIndex] = useState(0);
   const features = clickedFeatureInfo.map(l => l.features).flat();
   const feature = features[featureIndex];
@@ -60,7 +59,10 @@ const FeatureInformation = ({ clickedFeatureInfo, popupComponents, t }) => {
   return (
     <div className="wkp-feature-information">
       <React.Suspense fallback="...loading">
-        <PopupComponent feature={features[featureIndex]} />
+        <PopupComponent
+          key={info.layer.getKey()}
+          feature={features[featureIndex]}
+        />
         {pagination}
       </React.Suspense>
     </div>
@@ -69,4 +71,4 @@ const FeatureInformation = ({ clickedFeatureInfo, popupComponents, t }) => {
 
 FeatureInformation.propTypes = propTypes;
 
-export default compose(withTranslation())(FeatureInformation);
+export default React.memo(FeatureInformation);

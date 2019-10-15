@@ -63,7 +63,7 @@ const resolutions = [
 
 export const netzkarteLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
   radioGroup: 'baseLayer',

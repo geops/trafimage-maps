@@ -38,7 +38,7 @@ const renderConf = (conf, t) => (
 );
 
 const Share = () => {
-  const { map } = useSelector(state => state.app.map);
+  const map = useSelector(state => state.app.map);
   const { t } = useTranslation();
   const config = [...socialShareConfig];
 
