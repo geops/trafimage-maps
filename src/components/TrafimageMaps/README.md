@@ -5,7 +5,7 @@ Configure your own map.
 ```jsx
 import React from 'react';
 import TrafimageMaps from './TrafimageMaps';
-import topics from '../../config/topics';
+import topics from '../../config/examples/TrafimageMaps/topics';
 
 <div style={{ position: 'relative', width: '100%', height: 500 }}>
   <TrafimageMaps

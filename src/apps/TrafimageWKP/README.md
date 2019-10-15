@@ -1,14 +1,7 @@
 #
 
-Configure your own map.
-
-'TrajservLayer' Layer filter options (case insensitive):
-
-| Options            | Description            | Examples                                                              |
-|--------------------|------------------------|-----------------------------------------------------------------------|
-| operator           | filter by operator     | string: 'sbb', list: '(vbz\|zsg)'                                     |
-| publishedLineName  | filter by line name    | string: 'ICE',  list: 's1,s2,s9,s10,s15'                              |
-| tripNumber         | filter by trip number  | bus in zurich: '2068', list of buses in Zurich: '2068,3003,3451,3953' |
+Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://www.sbb.ch/en/bahnhof-services/bahnhoefe/karten-bahnhofplaene/trafimage-karten.html)).
+This section shows you how to configure your own map for integrating it in your existing web page.
 
 ```jsx
 import React from 'react';

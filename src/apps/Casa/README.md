@@ -1,10 +1,8 @@
 #
 
-This example shows a TrafimageMaps application together with layers for routing
-and fare networks.
+The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
-The positioning of labels inside the fare networks layer are optimized based on
-the map extent and the used resolution.
+The used [APIs from geOps](https://developer.geops.io/) require a license key.
 
 ```jsx
 import React from 'react';
