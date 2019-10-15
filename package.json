@@ -83,6 +83,9 @@
     "vinyl-fs": "^3.0.3",
     "webpack": "4.41.0"
   },
+  "resolutions": {
+    "terser": "4.3.4"
+  },
   "scripts": {
     "build": "node ./scripts/build-non-split.js && yarn build:es && node scripts/prepare-package.js",
     "build:dev": "REACT_APP_ENV='wkp_dev' yarn build",
@@ -181,7 +184,7 @@
       "yarn test --bail --findRelatedTests"
     ],
     "package.json": [
-      "fixpack --sortToTop name --sortToTop descrpition --sortToTop version --sortToTop author --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop scripts",
+      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts",
       "git add"
     ],
     "src/**/*.{css,scss}": [
@@ -192,9 +195,6 @@
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
-  },
-  "resolutions": {
-    "terser": "4.3.4"
   },
   "stylelint": {
     "plugins": [
