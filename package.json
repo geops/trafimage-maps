@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "main": "build/es/index.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
