@@ -14,14 +14,22 @@ const defaultProps = {
 };
 
 function SearchToggle({ children }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="wkp-search-toggle">
-      <div>{open ? children : null}</div>
-      <button type="button" onClick={() => setOpen(!open)}>
-        <SearchIcon />
-      </button>
+    <div>
+      <div className={`wkp-search-toggle-container${open ? '--open' : ''}`}>
+        {children}
+      </div>
+      {!open && (
+        <button
+          className="wkp-search-toggle-button"
+          type="button"
+          onClick={() => setOpen(!open)}
+        >
+          <SearchIcon />
+        </button>
+      )}
     </div>
   );
 }

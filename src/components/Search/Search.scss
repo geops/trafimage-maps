@@ -3,8 +3,8 @@
 .wkp-search {
   position: absolute;
   top: 25px;
-  z-index: 1;
-  right: 400px;
+  z-index: 2;
+  right: 250px;
   left: 400px;
   max-width: 400px;
   margin: 0 auto;
@@ -52,5 +52,23 @@
       color: $brand-primary;
       cursor: pointer;
     }
+  }
+}
+
+.tm-app.tm-w-m,
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-search {
+    top: 5px;
+    left: 250px;
+  }
+}
+
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-search {
+    right: 33px;
+    max-width: 100%;
+    left: 100px;
   }
 }

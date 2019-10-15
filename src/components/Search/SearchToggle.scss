@@ -1,22 +1,33 @@
 @import '../../Globals.scss';
 
-.wkp-search-toggle {
-  > button {
-    background: none;
-    border: none;
-    position: absolute;
-    top: 10px;
-    right: -200px;
+.wkp-search-toggle-button {
+  display: none;
+  background: none;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 190px;
 
+  svg {
+    height: 25px;
+    fill: grey;
+  }
+
+  &:hover {
     svg {
-      height: 25px;
-      fill: grey;
+      fill: $brand-primary;
     }
+  }
+}
 
-    &:hover {
-      svg {
-        fill: $brand-primary;
-      }
-    }
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-search-toggle-container {
+    display: none;
+  }
+
+  .wkp-search-toggle-button,
+  .wkp-search-toggle-container--open {
+    display: block;
   }
 }

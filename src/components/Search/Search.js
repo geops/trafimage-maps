@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 import { setCenter, setZoom } from '../../model/map/actions';
 import SearchService from './SearchService';
+import SearchToggle from './SearchToggle';
 
 import './Search.scss';
 
@@ -40,41 +41,45 @@ function Search() {
 
   return (
     <div className="wkp-search">
-      <Autosuggest
-        multiSection
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={event => searchService.search(event.value)}
-        onSuggestionsClearRequested={() => searchService.clear()}
-        onSuggestionSelected={(e, { suggestion }) => {
-          dispatch(setZoom(12));
-          dispatch(
-            setCenter(
-              transformCoords(
-                suggestion.geometry.coordinates,
-                'EPSG:4326',
-                'EPSG:3857',
+      <SearchToggle>
+        <Autosuggest
+          multiSection
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={event =>
+            searchService.search(event.value)
+          }
+          onSuggestionsClearRequested={() => searchService.clear()}
+          onSuggestionSelected={(e, { suggestion }) => {
+            dispatch(setZoom(12));
+            dispatch(
+              setCenter(
+                transformCoords(
+                  suggestion.geometry.coordinates,
+                  'EPSG:4326',
+                  'EPSG:3857',
+                ),
               ),
-            ),
-          );
-          searchService.select(suggestion);
-        }}
-        getSuggestionValue={suggestion => searchService.value(suggestion)}
-        renderSuggestion={suggestion => searchService.render(suggestion)}
-        renderSectionTitle={result => t(result.section)}
-        getSectionSuggestions={result =>
-          result.items
-            ? result.items.map(i => ({ ...i, section: result.section }))
-            : []
-        }
-        inputProps={{
-          onChange: (e, { newValue }) => setValue(newValue),
-          placeholder: searchService.getPlaceholder(t),
-          value,
-        }}
-      />
-      <button type="button" className="wkp-search-button">
-        <FaSearch />
-      </button>
+            );
+            searchService.select(suggestion);
+          }}
+          getSuggestionValue={suggestion => searchService.value(suggestion)}
+          renderSuggestion={suggestion => searchService.render(suggestion)}
+          renderSectionTitle={result => t(result.section)}
+          getSectionSuggestions={result =>
+            result.items
+              ? result.items.map(i => ({ ...i, section: result.section }))
+              : []
+          }
+          inputProps={{
+            onChange: (e, { newValue }) => setValue(newValue),
+            placeholder: searchService.getPlaceholder(t),
+            value,
+          }}
+        />
+        <button type="button" className="wkp-search-button">
+          <FaSearch />
+        </button>
+      </SearchToggle>
     </div>
   );
 }
