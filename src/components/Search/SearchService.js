@@ -1,11 +1,11 @@
 class SearchService {
-  constructor(activeTopic, clear, upsert, clickedFeature) {
+  constructor(activeTopic, clear, upsert, dispatch) {
     this.activeTopic = activeTopic;
     this.clear = clear;
     this.upsert = upsert;
     Object.values(this.activeTopic.searches).forEach(search => {
       search.setActiveTopic(activeTopic);
-      search.setClickedFeature(clickedFeature);
+      search.setDispatch(dispatch);
     });
   }
 

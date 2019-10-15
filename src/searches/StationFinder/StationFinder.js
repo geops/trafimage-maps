@@ -1,5 +1,7 @@
+import { transform as transformCoords } from 'ol/proj';
 import React from 'react';
 
+import { setCenter, setZoom } from '../../model/map/actions';
 import Search from '../Search';
 
 class StationFinder extends Search {
@@ -16,6 +18,15 @@ class StationFinder extends Search {
 
   render(item) {
     return <div>{item.properties.name}</div>;
+  }
+
+  select(item) {
+    this.dispatch(setZoom(12));
+    this.dispatch(
+      setCenter(
+        transformCoords(item.geometry.coordinates, 'EPSG:4326', 'EPSG:3857'),
+      ),
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this

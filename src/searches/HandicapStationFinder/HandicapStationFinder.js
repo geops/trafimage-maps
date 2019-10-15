@@ -1,3 +1,4 @@
+import { setClickedFeatureInfo } from '../../model/app/actions';
 import HandicapLayer from '../../layers/HandicapLayer';
 import StationFinder from '../StationFinder';
 
@@ -30,9 +31,12 @@ class HandicapStationFinder extends StationFinder {
   }
 
   select(item) {
-    this.clickedFeature([
-      { features: [item.handicap.feature], layer: item.handicap.layer },
-    ]);
+    super.select(item);
+    this.dispatch(
+      setClickedFeatureInfo([
+        { features: [item.handicap.feature], layer: item.handicap.layer },
+      ]),
+    );
   }
 }
 

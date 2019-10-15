@@ -7,8 +7,8 @@ class Search {
     this.activeTopic = activeTopic;
   }
 
-  setClickedFeature(clickedFeature) {
-    this.clickedFeature = clickedFeature;
+  setDispatch(dispatch) {
+    this.dispatch = dispatch;
   }
 }
 

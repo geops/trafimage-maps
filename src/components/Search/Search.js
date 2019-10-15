@@ -1,12 +1,9 @@
-import { transform as transformCoords } from 'ol/proj';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { FaSearch } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setClickedFeatureInfo } from '../../model/app/actions';
-import { setCenter, setZoom } from '../../model/map/actions';
 import SearchService from './SearchService';
 import SearchToggle from './SearchToggle';
 
@@ -14,10 +11,6 @@ import './Search.scss';
 
 function Search() {
   const dispatch = useDispatch();
-  const clickedFeature = useCallback(
-    featureInfos => dispatch(setClickedFeatureInfo(featureInfos)),
-    [dispatch],
-  );
   const activeTopic = useSelector(state => state.app.activeTopic);
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
@@ -36,8 +29,8 @@ function Search() {
         }
         return newSuggestions;
       });
-    return new SearchService(activeTopic, clear, upsert, clickedFeature);
-  }, [activeTopic, setSuggestions, clickedFeature]);
+    return new SearchService(activeTopic, clear, upsert, dispatch);
+  }, [activeTopic, setSuggestions, dispatch]);
 
   return (
     Object.keys(activeTopic.searches).length > 0 && (
@@ -50,19 +43,9 @@ function Search() {
               searchService.search(event.value)
             }
             onSuggestionsClearRequested={() => searchService.clear()}
-            onSuggestionSelected={(e, { suggestion }) => {
-              dispatch(setZoom(12));
-              dispatch(
-                setCenter(
-                  transformCoords(
-                    suggestion.geometry.coordinates,
-                    'EPSG:4326',
-                    'EPSG:3857',
-                  ),
-                ),
-              );
-              searchService.select(suggestion);
-            }}
+            onSuggestionSelected={(e, { suggestion }) =>
+              searchService.select(suggestion)
+            }
             getSuggestionValue={suggestion => searchService.value(suggestion)}
             renderSuggestion={suggestion => searchService.render(suggestion)}
             renderSectionTitle={result => t(result.section)}
