@@ -10,10 +10,6 @@
   transition: all 0.2s ease;
   background: white;
 
-  &:focus {
-    outline: $bf-large-outline;
-  }
-
   .wkp-menu-toggler {
     position: absolute;
     right: 10px;

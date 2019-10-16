@@ -2,12 +2,6 @@
 @import 'react-transit/themes/default/components.scss';
 @import '../../Globals.scss';
 
-body {
-  font-family: 'SBBWeb Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  margin: 0;
-}
-
 select {
   margin: 0;
   padding: 1px 0 1px 12px;
@@ -21,27 +15,34 @@ select {
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 }
 
-a,
-div,
-li,
-select,
-input {
-  &:focus {
-    // outline: $bf-outline;
-    outline: $bf-large-outline;
-    outline-offset: 3px;
-  }
-}
-
 .tm-app {
   height: 100%;
   width: 100%;
   position: absolute;
   overflow: hidden;
+}
+
+body {
+  font-family: 'SBBWeb Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  margin: 0;
+
+  div,
+  li,
+  select,
+  input {
+    &:focus {
+      outline: none;
+    }
+  }
 
   a {
     color: initial;
     text-decoration: none;
+
+    &:focus {
+      outline: none;
+    }
 
     &:hover {
       text-decoration: underline;
@@ -58,6 +59,25 @@ input {
     left: 10px;
     width: 120px;
     height: 120px;
+  }
+
+  &.wkp-bf-focus {
+    a,
+    div,
+    li,
+    select,
+    input {
+      &:focus {
+        outline: $bf-large-outline;
+        outline-offset: 3px;
+      }
+    }
+
+    .wkp-menu-header {
+      &:focus {
+        outline: $bf-large-outline;
+      }
+    }
   }
 }
 

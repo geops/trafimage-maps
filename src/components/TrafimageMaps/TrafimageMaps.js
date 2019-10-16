@@ -15,6 +15,7 @@ import FeatureMenu from '../FeatureMenu';
 import TrackerMenu from '../../menus/TrackerMenu';
 import ShareMenu from '../../menus/ShareMenu';
 import Permalink from '../Permalink';
+import BarrierFree from '../BarrierFree';
 import Map from '../Map';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -275,6 +276,7 @@ function TrafimageMaps({
         <MainDialog />
         {appDefaultElements}
         {children}
+        <BarrierFree />
         <Footer />,
       </div>
     </Provider>

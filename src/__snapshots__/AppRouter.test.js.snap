@@ -1290,6 +1290,12 @@ exports[`AppRouter should match snapshot 1`] = `
     </div>
   </div>
   <div
+    label="barrierfree"
+    onFocus={[Function]}
+    role="button"
+    tabIndex="0"
+  />
+  <div
     className="wkp-footer"
   >
     <div
