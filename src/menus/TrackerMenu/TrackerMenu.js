@@ -8,6 +8,7 @@ import { transform as transformCoords } from 'ol/proj';
 import Map from 'ol/Map';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
+import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
 import './TrackerMenu.scss';
@@ -33,45 +34,57 @@ class TrackerMenu extends Component {
   constructor(props) {
     super(props);
 
+    this.olEventsKeys = [];
     this.state = {
       open: false,
       collapsed: true,
       trajectory: null,
     };
+    this.onLayerClick = this.onLayerClick.bind(this);
   }
 
   componentDidMount() {
-    const { layerService, dispatchSetMenuOpen } = this.props;
+    const { layerService } = this.props;
 
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
       .filter(l => l instanceof TrackerLayer);
 
+    unByKey(this.olEventsKeys);
+    this.olEventsKeys = [];
     if (this.trackerLayers.length) {
       this.trackerLayers.forEach(layer => {
-        layer.olLayer.on('change:visible', () =>
-          this.setState({
-            open: false,
+        this.olEventsKeys.push(
+          layer.olLayer.on('change:visible', () => {
+            this.setState({
+              open: false,
+            });
           }),
         );
-
-        layer.onClick(traj => {
-          if (traj) {
-            dispatchSetMenuOpen(false);
-          }
-          this.setState({
-            open: traj ? layer.getName() : false,
-            collapsed: false,
-            trajectory: traj,
-          });
-        });
+        layer.onClick(this.onLayerClick);
       });
     }
   }
 
-  getVisibleLayerName() {
-    const layerVisible = this.trackerLayers.find(l => l.getVisible());
-    return layerVisible ? layerVisible.getName() : false;
+  componentWillUnmount() {
+    unByKey(this.olEventsKeys);
+    this.olEventsKeys = [];
+
+    this.trackerLayers.forEach(layer => {
+      layer.unClick(this.onLayerClick);
+    });
+  }
+
+  onLayerClick(traj) {
+    const { dispatchSetMenuOpen } = this.props;
+    if (traj) {
+      dispatchSetMenuOpen(false);
+    }
+    this.setState({
+      open: !!traj,
+      collapsed: false,
+      trajectory: traj,
+    });
   }
 
   render() {
@@ -88,7 +101,7 @@ class TrackerMenu extends Component {
         title={t('ch.sbb.puenktlichkeit')}
         icon={<TiVideo />}
         map={map}
-        open={typeof open === 'string'}
+        open={open}
         collapsed={collapsed}
         onCollapseToggle={c => this.setState({ collapsed: c })}
       >
