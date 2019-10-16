@@ -8,10 +8,16 @@ import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing stations
+ * which have interactive plan applications or station plans (print products such as posters).
+ * The popup shows the links to the interactive station plan or print products.
+ *
+ * <img src="img/layers/BahnhofplanLayer/printproducts.png" alt="Layer preview for stations with print products" title="Layer preview for stations with print products">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class
- * @params {Object} options
+ * @param {Object} [options] Layer options.
+ * @param {boolean} [options.showPrintFeatures] True for additionally showing print products
  * @inheritdoc
  */
 class BahnhofplanLayer extends VectorLayer {
@@ -59,9 +65,9 @@ class BahnhofplanLayer extends VectorLayer {
 
   /**
    * Create Style from feature and resolution
-   * @param {ol.feature} feature
-   * @param {number} resolution
-   * @returns {Object|null}
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} resolution The views resolution
+   * @returns {Array.<ol.style.Style>} Style
    */
   style(feature, resolution) {
     const vis = feature.get('visibility');
@@ -89,8 +95,8 @@ class BahnhofplanLayer extends VectorLayer {
   }
 
   /**
-   * Set visible
-   * @param {boolean} visible
+   * Set the visibility of the layer
+   * @param {boolean} visible The visibility of the layer
    * @param {boolean} [stopPropagationDown] Stops propagation down.
    * @param {boolean} [stopPropagationUp] Stops propagation up.
    * @param {boolean} [stopPropagationSiblings] Stops propagation toward siblings.

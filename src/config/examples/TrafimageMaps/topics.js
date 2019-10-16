@@ -7,28 +7,11 @@ import defaultBaseLayers, {
   gemeindegrenzen,
   punctuality,
   parks,
-  stuetzpunktbahnhoefe,
 } from './layers';
-
-const defaultElements = {
-  header: true,
-  footer: true,
-  menu: true,
-  permalink: true,
-  mapControls: true,
-  baseLayerToggler: true,
-  popup: false,
-};
 
 export const netzkarte = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: true,
-    trackerMenu: true,
-  },
   layers: [
     ...defaultBaseLayers,
     gemeindegrenzen,
@@ -41,15 +24,6 @@ export const netzkarte = {
   ],
   projection: 'EPSG:3857',
   description: 'ch.sbb.netzkarte-desc',
-};
-
-export const handicap = {
-  name: 'ch.sbb.handicap',
-  key: 'ch.sbb.handicap',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
-  projection: 'EPSG:3857',
-  description: 'ch.sbb.handicap-desc',
 };
 
 export const netzkarteStelen = {
@@ -105,7 +79,6 @@ export const tarifverbundkarte = {
 
 export default [
   netzkarte,
-  handicap,
   bauprojekte,
   behig,
   infrastruktur,
