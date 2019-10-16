@@ -11,7 +11,6 @@ const getHandicapFeatures = layer =>
 
 class HandicapStationFinder extends StationFinder {
   search(value) {
-    // TODO: move to setActiveTopic
     const handicapFeatures = this.getActiveTopic()
       .layers.filter(findHandicapLayers)
       .map(getHandicapFeatures)
