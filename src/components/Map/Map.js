@@ -7,6 +7,7 @@ import Layer from 'react-spatial/layers/Layer';
 import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
+import LayerService from 'react-spatial/LayerService';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
 
 const propTypes = {
@@ -19,6 +20,7 @@ const propTypes = {
   initialZoom: PropTypes.number,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
   resolution: PropTypes.number,
   zoom: PropTypes.number,
 
@@ -95,18 +97,30 @@ class Map extends PureComponent {
   }
 
   onPointerMove(evt) {
-    const { map } = this.props;
+    const { map, layerService } = this.props;
 
-    if (evt.dragging) {
+    if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
     }
 
-    const mapFeatures = map.getFeaturesAtPixel(evt.pixel);
-
-    const hoverFeature =
-      mapFeatures && mapFeatures.length ? mapFeatures[0] : null;
-
-    map.getTarget().style.cursor = hoverFeature ? 'pointer' : 'auto';
+    const promises = [
+      ...layerService
+        .getLayersAsFlatArray()
+        .filter(l => l.getVisible() && !l.isBaseLayer)
+        .map(layer => {
+          if (!layer.getVisible()) {
+            return Promise.resolve(false);
+          }
+          return layer
+            .getFeatureInfoAtCoordinate(evt.coordinate)
+            .then(featureInfo => {
+              return !!featureInfo.features[0];
+            });
+        }),
+    ];
+    Promise.all(promises).then(res => {
+      map.getTarget().style.cursor = res.includes(true) ? 'pointer' : 'auto';
+    });
   }
 
   render() {
@@ -144,6 +158,7 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
+  layerService: state.app.layerService,
   layers: state.map.layers,
   center: state.map.center,
   extent: state.map.extent,

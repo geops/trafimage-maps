@@ -72,7 +72,7 @@ class TopicLoader extends Component {
     this.singleclickKey = map.on('singleclick', e => {
       const infoPromises = layerService
         .getLayersAsFlatArray()
-        .filter(l => l.getVisible())
+        .filter(l => l.getVisible() && l.isBaseLayer)
         .map(l => l.getFeatureInfoAtCoordinate(e.coordinate));
 
       Promise.all(infoPromises).then(featureInfos => {

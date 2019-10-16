@@ -69,6 +69,7 @@ export const netzkarteLayer = new MapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  // `/styles/busline_style.json` + `?key=${CONF.vectorTilesKey}`,
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
     `?key=${CONF.vectorTilesKey}`,
