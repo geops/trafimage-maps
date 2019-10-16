@@ -1,3 +1,9 @@
+import OLGeoJSON from 'ol/format/GeoJSON';
+
+import { highlight } from '../model/map/actions';
+
+const geoJSON = new OLGeoJSON();
+
 class Search {
   constructor() {
     this.collapsed = true;
@@ -26,6 +32,11 @@ class Search {
 
   collapse(collapsed) {
     this.collapsed = collapsed;
+  }
+
+  select(item) {
+    const feature = geoJSON.readFeature(item);
+    this.dispatch(highlight(feature));
   }
 }
 

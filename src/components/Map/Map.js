@@ -5,6 +5,7 @@ import { compose } from 'lodash/fp';
 
 import Layer from 'react-spatial/layers/Layer';
 import { unByKey } from 'ol/Observable';
+import OLFeature from 'ol/Feature';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
@@ -15,6 +16,7 @@ const propTypes = {
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
+  highlight: PropTypes.instanceOf(OLFeature),
   initialCenter: PropTypes.arrayOf(PropTypes.number),
   initialZoom: PropTypes.number,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
@@ -33,6 +35,7 @@ const defaultProps = {
 
   // mapStateToProps
   center: [0, 0],
+  highlight: undefined,
   initialCenter: undefined,
   initialZoom: undefined,
   layers: [],
@@ -65,6 +68,13 @@ class Map extends PureComponent {
     const { map } = this.props;
     unByKey(this.onPointerMoveRef);
     this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
+  }
+
+  componentDidUpdate(prevProps) {
+    const { highlight } = this.props;
+    if (prevProps.highlight !== highlight) {
+      console.log('TODO: highlight!!!', highlight);
+    }
   }
 
   onMapMoved(evt) {
@@ -144,6 +154,7 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
+  highlight: state.map.highlight,
   layers: state.map.layers,
   center: state.map.center,
   extent: state.map.extent,
