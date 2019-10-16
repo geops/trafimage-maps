@@ -5,13 +5,13 @@
 
 ## About
 
-
 This repo contains the code of the Trafimage Map Portal by Swiss Federal Railways SBB and other applications build on it.
 Components are based on [react-spatial](https://github.com/geops/react-spatial).
 
 
 See [demo](https://apidoc.trafimage.ch/).
 
+Github [repo](https://github.com/geops/trafimage-maps).
 
 ## Technologies
 * react

@@ -23,7 +23,7 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
       <div className="wkp-passagier-freq-popup-title">{name}</div>
       <div className="wkp-passagier-freq-popup-body">
         <span>{t('passagier_freq_jahr', { statisticDate })}</span>
-        <span>{`${dwv} ${t('Ein- und Aussteiger')}`}</span>
+        <span>{`${dwv} ${t('Ein- und Aussteigende')}`}</span>
       </div>
     </div>
   );

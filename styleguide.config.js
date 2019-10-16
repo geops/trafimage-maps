@@ -24,34 +24,31 @@ module.exports = {
   },
   sections: [
     {
-      name: '',
-      sections: [
-        {
-          name: 'Url parameters',
-          content: 'src/README.md',
-        },
-      ],
-    },
-    {
       name: 'Applications',
+      content: 'src/apps/README.md',
       sections: [
         {
-          name: 'Casa',
-          content: 'src/apps/Casa/README.md',
+          name: 'Component',
+          components: [
+            'src/components/TrafimageMaps/[A-Z]*.js',
+          ],
+          exampleMode: 'collapse',
+          usageMode: 'collapse',
         },
         {
-          name: 'Trafimage WKP',
-          content: 'src/apps/TrafimageWKP/README.md',
-        },
-      ],
-    },
-    {
-      name: 'Popups',
-      sections: [
-        {
-          name: 'BahnhofplanPopup',
-          content: 'src/popups/BahnhofplanPopup/README.md',
-        },
+          name: 'Examples',
+          sections: [
+            {
+              name: 'Punctuality Map',
+              content: 'src/apps/TrafimageWKP/README.md',
+            },
+            {
+              name: 'Casa Map',
+              content: 'src/apps/Casa/README.md',
+            },
+          ]
+        }
+
       ],
     },
   ],

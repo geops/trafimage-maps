@@ -6,8 +6,8 @@ import Layer from 'react-spatial/layers/Layer';
  * Base layer for ZoneLayer and RouteLayer.
  * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
  * @class
- * @param {Object} options Layer options.
- * @param {string} options.apiKey Access key for geOps services.
+ * @param {Object} [options] Layer options.
+ * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
  */
 class TrafimageRasterLayer extends Layer {
   static getApiKeyUrl(url, apiKey) {
@@ -28,7 +28,7 @@ class TrafimageRasterLayer extends Layer {
 
   /**
    * Set a new Api Key
-   * @param {String} apiKey
+   * @param {String} apiKey Access key for [geOps services](https://developer.geops.io/).
    */
   setApiKey(apiKey) {
     if (!apiKey) {

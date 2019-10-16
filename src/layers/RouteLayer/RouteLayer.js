@@ -6,20 +6,23 @@ import { Style, Stroke as StrokeStyle } from 'ol/style';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
- * Layer for visualizing fare networks.
+ * Layer for visualizing routes.
+ *
+ * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
+ *
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.
- * @param {string?} [options.apiKey] Access key for geOps services.
- * @param {string} [options.name] Layer name.
- * @param {string} [options.url] Url of the geOps route backend.
+ * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
+ * @param {string} [options.name=Routen] Layer name.
+ * @param {string} [options.url=https://api.geops.io/routing/v1] Url of the geOps route backend.
  * @param {boolean} [options.visible = true] Visibility of the layer.
  *   Default is true.
- * @param {string} [options.projection] Layer projection.
+ * @param {string} [options.projection=EPSG:3857] Layer projection.
  *   Default is webmercator ('EPSG:3857')
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
- * @param [options.routeStyleFunction] Function called with the route properties
+ * @param {Function} [options.routeStyleFunction] Function called with the route properties
  *   and a boolean indicating if the zone is selected.
  *   The function should return the route color.
  */
@@ -77,9 +80,9 @@ class RouteLayer extends VectorLayer {
    * Getting the Mot-features on specific route.
    * @private
    * @param {Object} viaPoints Route Informations
-   * @param {String} mot ask for specific Route
+   * @param {String} mot Ask for specific Route
    * @param {Object[]} sequenceProps Properties for the returned features.
-   * @returns {array<ol.Feature>}
+   * @returns {array<ol.Feature>} Features
    */
   fetchRouteForMot(viaPoints, mot, sequenceProps) {
     this.abortController = new AbortController();
@@ -106,6 +109,11 @@ class RouteLayer extends VectorLayer {
       });
   }
 
+  /**
+   * Returns the style of the given feature
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @returns {ol.style} get the feature's style function.
+   */
   routeStyle(feature) {
     const { routeId } = feature.get('route');
     const mot = feature.get('mot');
@@ -180,7 +188,7 @@ class RouteLayer extends VectorLayer {
   /**
    * Zoom to route.
    * @param {Object} [fitOptions] Options,
-   *   see https://openlayers.org/en/latest/apidoc/module-ol_View-View.html
+   *   see {@link https://openlayers.org/en/latest/apidoc/module-ol_View-View.html ol/View~View}
    */
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
