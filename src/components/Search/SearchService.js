@@ -10,14 +10,17 @@ class SearchService {
   }
 
   getPlaceholder(t) {
-    const sections = Object.keys(this.activeTopic.searches).map(s => t(s));
+    const sections = Object.entries(this.activeTopic.searches)
+      .filter(([, search]) => search.showInPlaceholder)
+      .map(([section]) => t(section));
     return `${sections.join(', ')} …`;
   }
 
   search(value) {
-    Object.entries(this.activeTopic.searches).forEach(([section, client]) => {
-      client.search(value).then(items => {
-        this.upsert(section, items);
+    Object.entries(this.activeTopic.searches).forEach(([section, search]) => {
+      search.search(value).then(items => {
+        search.setItems(items);
+        this.upsert(section, search.getItems());
       });
     });
   }
@@ -28,6 +31,21 @@ class SearchService {
 
   select(item) {
     return this.activeTopic.searches[item.section].select(item);
+  }
+
+  countItems(section) {
+    return this.activeTopic.searches[section].items.length;
+  }
+
+  toggleSection(toggledSection) {
+    Object.entries(this.activeTopic.searches).forEach(([section, search]) => {
+      search.collapse(!(section === toggledSection && search.collapsed));
+      this.upsert(section, search.getItems());
+    });
+  }
+
+  sectionCollapsed(section) {
+    return this.activeTopic.searches[section].collapsed;
   }
 
   value(item) {

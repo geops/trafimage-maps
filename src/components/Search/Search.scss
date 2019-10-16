@@ -4,7 +4,7 @@
   position: absolute;
   top: 25px;
   z-index: 2;
-  right: 250px;
+  right: 220px;
   left: 400px;
   max-width: 400px;
   margin: 0 auto;
@@ -17,14 +17,15 @@
     width: 46px;
     position: absolute;
     top: 2px;
-    right: -26px;
+    right: -2px;
+    font-size: 14px;
   }
 
   .react-autosuggest__input {
     border: 2px solid #b7b7b7;
-    padding: 12px;
+    padding: 12px 15px;
     font-size: 14px;
-    width: 100%;
+    width: calc(100% - 30px);
   }
 
   .react-autosuggest__suggestions-container--open {
@@ -32,11 +33,48 @@
     border: 2px solid #666;
     margin-top: 5px;
     width: 100%;
-    padding: 12px;
+    padding-top: 15px;
+    max-height: calc(100vh - 150px);
+    overflow: scroll;
+  }
+
+  .react-autosuggest__section-container {
+    padding-bottom: 15px;
   }
 
   .react-autosuggest__section-title {
-    font-weight: bold;
+    padding: 15px 15px 0;
+    border-top: 1px solid lightgray;
+
+    .wkp-search-section-header {
+      font-weight: bold;
+    }
+
+    .wkp-search-section-count {
+      color: #666;
+      padding-top: 5px;
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: -15px;
+        right: 0;
+      }
+    }
+
+    :hover {
+      .wkp-search-section-count {
+        color: $brand-primary;
+      }
+    }
+  }
+
+  .react-autosuggest__section-container--first {
+    .react-autosuggest__section-title {
+      margin: 0;
+      padding: 0 15px;
+      border: none;
+    }
   }
 
   .react-autosuggest__suggestions-list {
@@ -46,7 +84,7 @@
   }
 
   .react-autosuggest__suggestion {
-    margin: 10px 0 0 0;
+    margin: 15px 15px 0;
 
     :hover {
       color: $brand-primary;
@@ -67,7 +105,7 @@
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
   .wkp-search {
-    right: 33px;
+    right: 9px;
     max-width: 100%;
     left: 100px;
   }
