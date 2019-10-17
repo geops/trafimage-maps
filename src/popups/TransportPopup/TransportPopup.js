@@ -20,7 +20,7 @@ const propTypes = {
 
   name: PropTypes.string.isRequired,
 
-  showTitle: PropTypes.boolean,
+  showTitle: PropTypes.bool,
 
   // react-i18next
   t: PropTypes.func.isRequired,
