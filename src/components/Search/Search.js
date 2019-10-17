@@ -6,23 +6,19 @@ import {
   FaChevronCircleUp,
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 
-import SearchService from './SearchService';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
 
-function Search() {
-  const dispatch = useDispatch();
-  const activeTopic = useSelector(state => state.app.activeTopic);
+function Search({ map, searchService }) {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
   const { t } = useTranslation();
 
-  const searchService = useMemo(() => {
-    const clear = () => setSuggestions([]);
-    const upsert = (section, items) =>
+  useMemo(() => {
+    searchService.setClear(() => setSuggestions([]));
+    searchService.setUpsert((section, items) =>
       setSuggestions(oldSuggestions => {
         const index = oldSuggestions.findIndex(s => s.section === section);
         const newSuggestions = [...oldSuggestions];
@@ -32,12 +28,14 @@ function Search() {
           newSuggestions[index] = { section, items };
         }
         return newSuggestions;
-      });
-    return new SearchService(activeTopic, clear, upsert, dispatch);
-  }, [activeTopic, setSuggestions, dispatch]);
+      }),
+    );
+  }, [searchService, setSuggestions]);
+
+  useMemo(() => searchService.setMap(map), [searchService, map]);
 
   return (
-    Object.keys(activeTopic.searches).length > 0 && (
+    Object.keys(searchService.searches).length > 0 && (
       <div className="wkp-search">
         <SearchToggle>
           <Autosuggest

@@ -1,4 +1,3 @@
-import { setClickedFeatureInfo } from '../../model/app/actions';
 import HandicapLayer from '../../layers/HandicapLayer';
 import StationFinder from '../StationFinder';
 
@@ -11,8 +10,8 @@ const getHandicapFeatures = layer =>
 
 class HandicapStationFinder extends StationFinder {
   search(value) {
-    const handicapFeatures = this.getActiveTopic()
-      .layers.filter(findHandicapLayers)
+    const handicapFeatures = this.props.activeTopic.layers
+      .filter(findHandicapLayers)
       .map(getHandicapFeatures)
       .flat();
     return super.search(value).then(features =>
@@ -29,13 +28,11 @@ class HandicapStationFinder extends StationFinder {
     );
   }
 
-  select(item) {
-    super.select(item);
-    this.dispatch(
-      setClickedFeatureInfo([
-        { features: [item.handicap.feature], layer: item.handicap.layer },
-      ]),
-    );
+  select(item, featureProjection) {
+    this.props.dispatchSetClickedFeatureInfo([
+      { features: [item.handicap.feature], layer: item.handicap.layer },
+    ]);
+    return super.select(item, featureProjection);
   }
 }
 

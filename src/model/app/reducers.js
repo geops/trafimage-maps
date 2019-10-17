@@ -13,6 +13,7 @@ import {
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
 } from './actions';
+import SearchService from '../../components/Search/SearchService';
 
 const getInitialState = () => ({
   topics: [],
@@ -29,6 +30,7 @@ const getInitialState = () => ({
     }),
   }),
   layerService: new LayerService(),
+  searchService: new SearchService(),
 });
 
 export default function app(state = getInitialState(), action) {

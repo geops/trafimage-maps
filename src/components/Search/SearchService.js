@@ -1,23 +1,42 @@
+import OLVectorLayer from 'ol/layer/Vector';
+import OLVectorSource from 'ol/source/Vector';
+
 class SearchService {
-  constructor(activeTopic, clear, upsert, dispatch) {
-    this.activeTopic = activeTopic;
+  constructor() {
+    this.searches = [];
+    this.highlightLayer = new OLVectorLayer({ source: new OLVectorSource({}) });
+  }
+
+  setClear(clear) {
     this.clear = clear;
+  }
+
+  setMap(map) {
+    this.map = map;
+    this.highlightLayer.setMap(map);
+  }
+
+  setSearches(searches) {
+    this.searches = searches;
+  }
+
+  setSearchProps(props) {
+    Object.values(this.searches).forEach(search => search.setProps(props));
+  }
+
+  setUpsert(upsert) {
     this.upsert = upsert;
-    Object.values(this.activeTopic.searches).forEach(search => {
-      search.setActiveTopic(activeTopic);
-      search.setDispatch(dispatch);
-    });
   }
 
   getPlaceholder(t) {
-    const sections = Object.entries(this.activeTopic.searches)
+    const sections = Object.entries(this.searches)
       .filter(([, search]) => search.showInPlaceholder)
       .map(([section]) => t(section));
     return `${sections.join(', ')} …`;
   }
 
   search(value) {
-    Object.entries(this.activeTopic.searches).forEach(([section, search]) => {
+    Object.entries(this.searches).forEach(([section, search]) => {
       search.search(value).then(items => {
         search.setItems(items);
         this.upsert(section, search.getItems());
@@ -26,30 +45,40 @@ class SearchService {
   }
 
   render(item) {
-    return this.activeTopic.searches[item.section].render(item);
+    return this.searches[item.section].render(item);
   }
 
   select(item) {
-    return this.activeTopic.searches[item.section].select(item);
+    const projection = this.map.getView().getProjection();
+    const feature = this.searches[item.section].select(item, projection);
+    if (feature) {
+      this.highlightLayer.getSource().clear();
+      this.highlightLayer.getSource().addFeature(feature);
+      this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
+        padding: [50, 50, 50, 50],
+        duration: 500,
+        maxZoom: 15,
+      });
+    }
   }
 
   countItems(section) {
-    return this.activeTopic.searches[section].items.length;
+    return this.searches[section].items.length;
   }
 
   toggleSection(toggledSection) {
-    Object.entries(this.activeTopic.searches).forEach(([section, search]) => {
+    Object.entries(this.searches).forEach(([section, search]) => {
       search.collapse(!(section === toggledSection && search.collapsed));
       this.upsert(section, search.getItems());
     });
   }
 
   sectionCollapsed(section) {
-    return this.activeTopic.searches[section].collapsed;
+    return this.searches[section].collapsed;
   }
 
   value(item) {
-    return this.activeTopic.searches[item.section].value(item);
+    return this.searches[item.section].value(item);
   }
 }
 
