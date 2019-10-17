@@ -12,6 +12,7 @@ import {
   SET_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
+  SET_DESTINATION_FILTER,
 } from './actions';
 
 const getInitialState = () => ({
@@ -29,6 +30,7 @@ const getInitialState = () => ({
     }),
   }),
   layerService: new LayerService(),
+  destinationFilter: '',
 });
 
 export default function app(state = getInitialState(), action) {
@@ -80,6 +82,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         dialogPosition: action.data,
+      };
+    case SET_DESTINATION_FILTER:
+      return {
+        ...state,
+        destinationFilter: action.data,
       };
     default:
       return {

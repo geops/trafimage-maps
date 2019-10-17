@@ -10,6 +10,7 @@ import CONF from '../../config/appConfig';
 import './DestinationInput.scss';
 
 const propTypes = {
+  destination: PropTypes.string,
   platforms: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
   uic: PropTypes.number.isRequired,
@@ -19,6 +20,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  destination: '',
   platforms: null,
 };
 
@@ -28,11 +30,13 @@ class DestinationInput extends Component {
 
     this.state = {
       destinations: [],
-      destinationInputValue: '',
+      destinationInputValue: props.destination,
     };
 
     // Abort fetch requests
     this.abortController = new AbortController();
+
+    this.loadDestinations(props.destination);
   }
 
   /**
@@ -40,11 +44,13 @@ class DestinationInput extends Component {
    * @param {string} value Selected value.
    */
   onInputChange(value) {
+    const { onSelect } = this.props;
     this.setState({ destinationInputValue: value });
     if (value) {
       this.loadDestinations(value);
     } else {
       this.setState({ destinations: [] });
+      onSelect(undefined);
     }
   }
 
