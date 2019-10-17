@@ -1,35 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { connect, useDispatch } from 'react-redux';
-import { compose } from 'lodash/fp';
-import Map from 'ol/Map';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import RSFooter from 'react-spatial/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
 import Copyright from 'react-spatial/components/Copyright';
 import Select from 'react-spatial/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
-import LayerService from 'react-spatial/LayerService';
 import ActionLink from 'react-spatial/components/ActionLink';
-
 import {
   setLanguage,
   setProjection,
   setDialogVisible,
 } from '../../model/app/actions';
 import './Footer.scss';
-
-const propTypes = {
-  // mapStateToProps
-  map: PropTypes.instanceOf(Map).isRequired,
-  language: PropTypes.string.isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
-  t: PropTypes.func.isRequired,
-
-  // mapDispatchToProps
-  dispatchSetLanguage: PropTypes.func.isRequired,
-  dispatchSetProjection: PropTypes.func.isRequired,
-};
 
 const numberFormat = coords => {
   const coordStr = coords.map(num =>
@@ -41,15 +24,12 @@ const numberFormat = coords => {
   return coordStr;
 };
 
-const Footer = ({
-  map,
-  language,
-  layerService,
-  t,
-  dispatchSetLanguage,
-  dispatchSetProjection,
-}) => {
+const Footer = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const layerService = useSelector(state => state.app.layerService);
+  const map = useSelector(state => state.app.map);
+  const language = useSelector(state => state.app.language);
 
   return (
     <RSFooter className="wkp-footer">
@@ -74,7 +54,7 @@ const Footer = ({
           coordinatePosition="left"
           map={map}
           onChange={(evt, proj) => {
-            dispatchSetProjection(proj);
+            dispatch(setProjection(proj));
           }}
           projections={[
             {
@@ -110,7 +90,7 @@ const Footer = ({
           ]}
           value={language}
           onChange={(e, opt) => {
-            dispatchSetLanguage(opt.value);
+            dispatch(setLanguage(opt.value));
           }}
         />
       </div>
@@ -118,22 +98,4 @@ const Footer = ({
   );
 };
 
-const mapStateToProps = state => ({
-  language: state.app.language,
-  map: state.app.map,
-  layerService: state.app.layerService,
-});
-
-const mapDispatchToProps = {
-  dispatchSetLanguage: setLanguage,
-  dispatchSetProjection: setProjection,
-};
-
-Footer.propTypes = propTypes;
-export default compose(
-  withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(Footer);
+export default React.memo(Footer);
