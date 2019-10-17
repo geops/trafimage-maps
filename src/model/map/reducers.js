@@ -1,10 +1,4 @@
-import {
-  HIGHLIGHT,
-  SET_LAYERS,
-  SET_CENTER,
-  SET_RESOLUTION,
-  SET_ZOOM,
-} from './actions';
+import { SET_LAYERS, SET_CENTER, SET_RESOLUTION, SET_ZOOM } from './actions';
 
 const initialState = {
   layers: [],
@@ -12,11 +6,6 @@ const initialState = {
 
 export default function app(state = initialState, action) {
   switch (action.type) {
-    case HIGHLIGHT:
-      return {
-        ...state,
-        highlight: action.feature,
-      };
     case SET_LAYERS:
       return {
         ...state,
