@@ -9,6 +9,7 @@ import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
+import { setClickedFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
   projection: PropTypes.string,
@@ -23,11 +24,13 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   resolution: PropTypes.number,
   zoom: PropTypes.number,
+  popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -65,8 +68,13 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map } = this.props;
-    unByKey(this.onPointerMoveRef);
+    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
     this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
+    this.onSingleClickRef = map.on('singleclick', e => this.onSingleClick(e));
+  }
+
+  componentWillUnmount() {
+    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
   }
 
   onMapMoved(evt) {
@@ -97,30 +105,26 @@ class Map extends PureComponent {
   }
 
   onPointerMove(evt) {
-    const { map, layerService } = this.props;
+    const { map, layerService, popupComponents } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
     }
+    layerService
+      .getFeatureInfoAtCoordinate(evt.coordinate)
+      .then(featureInfos => {
+        const filtered = featureInfos.filter(
+          ({ layer, features }) =>
+            !!popupComponents[layer.getKey()] && features.length,
+        );
+        map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
+        this.clickedFeatureInfos = filtered;
+      });
+  }
 
-    const promises = [
-      ...layerService
-        .getLayersAsFlatArray()
-        .filter(l => l.getVisible() && !l.isBaseLayer)
-        .map(layer => {
-          if (!layer.getVisible()) {
-            return Promise.resolve(false);
-          }
-          return layer
-            .getFeatureInfoAtCoordinate(evt.coordinate)
-            .then(featureInfo => {
-              return !!featureInfo.features[0];
-            });
-        }),
-    ];
-    Promise.all(promises).then(res => {
-      map.getTarget().style.cursor = res.includes(true) ? 'pointer' : 'auto';
-    });
+  onSingleClick() {
+    const { dispatchSetClickedFeatureInfo } = this.props;
+    dispatchSetClickedFeatureInfo(this.clickedFeatureInfos);
   }
 
   render() {
@@ -170,6 +174,7 @@ const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
 export default compose(

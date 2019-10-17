@@ -255,12 +255,14 @@ function TrafimageMaps({
           topics={topics}
           activeTopicKey={activeTopicKey}
           apiKey={apiKey}
+          popupComponents={popupComponents}
         />
         <Map
           map={map}
           initialCenter={center}
           initialZoom={zoom}
           projection={projection}
+          popupComponents={popupComponents}
         />
         {appElements}
         {children}
