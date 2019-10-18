@@ -20,7 +20,7 @@ class SearchService {
     this.searches = searches;
   }
 
-  setSearchProps(props) {
+  setSearchesProps(props) {
     Object.values(this.searches).forEach(search => search.setProps(props));
   }
 

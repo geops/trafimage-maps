@@ -98,7 +98,7 @@ class TopicLoader extends Component {
       this.updateLayers(activeTopic.layers);
 
       searchService.setSearches(activeTopic.searches);
-      searchService.setSearchProps({
+      searchService.setSearchesProps({
         activeTopic,
         dispatchSetClickedFeatureInfo,
       });
