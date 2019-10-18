@@ -7,7 +7,11 @@ import { unByKey } from 'ol/Observable';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
-import { setActiveTopic, setTopics } from '../../model/app/actions';
+import {
+  setActiveTopic,
+  setTopics,
+  setClickedFeatureInfo,
+} from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 
 const propTypes = {
@@ -78,7 +82,7 @@ class TopicLoader extends Component {
       }
       this.updateLayers(activeTopic.layers);
 
-      searchService.setSearches(activeTopic.searches);
+      searchService.setSearches(activeTopic.searches || []);
       searchService.setSearchesProps({
         activeTopic,
         dispatchSetClickedFeatureInfo,
@@ -129,6 +133,7 @@ const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
 TopicLoader.propTypes = propTypes;

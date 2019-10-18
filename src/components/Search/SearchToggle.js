@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-
 import { ReactComponent as SearchIcon } from './Search.svg';
-
 import './SearchToggle.scss';
 
 const propTypes = {
