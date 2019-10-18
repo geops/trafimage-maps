@@ -8,6 +8,7 @@ import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
+import CONF from '../../config/appConfig';
 
 const propTypes = {
   projection: PropTypes.string,
@@ -132,6 +133,7 @@ class Map extends PureComponent {
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
             projection,
+            extent: CONF.appExtent,
             maxZoom: 20,
           }}
         />
