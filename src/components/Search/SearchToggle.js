@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { ReactComponent as SearchIcon } from './Search.svg';
+import SearchIcon from './Search.url.svg';
 import './SearchToggle.scss';
 
 const propTypes = {
@@ -25,7 +25,7 @@ function SearchToggle({ children }) {
           type="button"
           onClick={() => setOpen(!open)}
         >
-          <SearchIcon />
+          <img src={SearchIcon} alt="Suche" />
         </button>
       )}
     </div>
