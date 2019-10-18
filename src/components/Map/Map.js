@@ -118,13 +118,37 @@ class Map extends PureComponent {
             !!popupComponents[layer.getKey()] && features.length,
         );
         map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
-        this.clickedFeatureInfos = filtered;
       });
   }
 
-  onSingleClick() {
-    const { dispatchSetClickedFeatureInfo } = this.props;
-    dispatchSetClickedFeatureInfo(this.clickedFeatureInfos);
+  onSingleClick(evt) {
+    const {
+      layerService,
+      popupComponents,
+      dispatchSetClickedFeatureInfo,
+    } = this.props;
+
+    layerService
+      .getFeatureInfoAtCoordinate(evt.coordinate)
+      .then(featureInfos => {
+        // Display only info of layers with a popup defined.
+        const filtered = featureInfos.filter(
+          ({ layer }) => !!popupComponents[layer.getKey()],
+        );
+
+        // Clear the select style.
+        filtered.forEach(({ layer, features }) => {
+          if (layer.select) {
+            layer.select(features);
+          }
+        });
+
+        // Dispatch only infos with features found.
+        this.clickedFeatureInfos = filtered.filter(
+          ({ features }) => features.length,
+        );
+        dispatchSetClickedFeatureInfo(this.clickedFeatureInfos);
+      });
   }
 
   render() {
