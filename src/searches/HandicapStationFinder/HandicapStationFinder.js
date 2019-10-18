@@ -28,11 +28,10 @@ class HandicapStationFinder extends StationFinder {
     );
   }
 
-  select(item, featureProjection) {
+  select(item) {
     this.props.dispatchSetClickedFeatureInfo([
       { features: [item.handicap.feature], layer: item.handicap.layer },
     ]);
-    return super.select(item, featureProjection);
   }
 }
 

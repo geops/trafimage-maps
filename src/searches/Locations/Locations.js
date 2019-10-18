@@ -21,14 +21,17 @@ class Locations extends Search {
     return <div>{item.label}</div>;
   }
 
-  select(item) {
-    super.select({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [item.attrs.lon, item.attrs.lat],
+  getFeature(item, options) {
+    return super.getFeature(
+      {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [item.attrs.lon, item.attrs.lat],
+        },
       },
-    });
+      options,
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this

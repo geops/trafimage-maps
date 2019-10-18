@@ -35,6 +35,26 @@ class SearchService {
     return `${sections.join(', ')} …`;
   }
 
+  highlight(item, fitExtent = false) {
+    if (item) {
+      this.highlightLayer.getSource().clear();
+      const featureProjection = this.map.getView().getProjection();
+      const feature = this.searches[item.section].getFeature(item, {
+        featureProjection,
+      });
+      if (feature) {
+        this.highlightLayer.getSource().addFeature(feature);
+        if (fitExtent) {
+          this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
+            padding: [50, 50, 50, 50],
+            duration: 500,
+            maxZoom: 15,
+          });
+        }
+      }
+    }
+  }
+
   search(value) {
     Object.entries(this.searches).forEach(([section, search]) => {
       search.search(value).then(items => {
@@ -49,17 +69,8 @@ class SearchService {
   }
 
   select(item) {
-    const projection = this.map.getView().getProjection();
-    const feature = this.searches[item.section].select(item, projection);
-    if (feature) {
-      this.highlightLayer.getSource().clear();
-      this.highlightLayer.getSource().addFeature(feature);
-      this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
-        padding: [50, 50, 50, 50],
-        duration: 500,
-        maxZoom: 15,
-      });
-    }
+    this.searches[item.section].select(item);
+    this.highlight(item, true);
   }
 
   countItems(section) {

@@ -45,6 +45,9 @@ function Search({ map, searchService }) {
               searchService.search(event.value)
             }
             onSuggestionsClearRequested={() => searchService.clear()}
+            onSuggestionHighlighted={({ suggestion }) =>
+              searchService.highlight(suggestion)
+            }
             onSuggestionSelected={(e, { suggestion }) =>
               searchService.select(suggestion)
             }

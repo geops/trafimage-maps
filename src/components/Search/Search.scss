@@ -86,8 +86,11 @@
   .react-autosuggest__suggestion {
     margin: 15px 15px 0;
 
-    :hover {
+    &.react-autosuggest__suggestion--highlighted {
       color: $brand-primary;
+    }
+
+    :hover {
       cursor: pointer;
     }
   }
