@@ -22,6 +22,7 @@ import MapControls from '../MapControls';
 import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
 import MainDialog from '../MainDialog';
+import Search from '../Search';
 import store, { getStore } from '../../model/store';
 
 import 'react-spatial/themes/default/index.scss';
@@ -190,7 +191,7 @@ function TrafimageMaps({
    * However when running in Stylegudist, every application needs it own store
    */
   const appStore = history ? store : getStore();
-  const { map, layerService } = appStore.getState().app;
+  const { map, layerService, searchService } = appStore.getState().app;
 
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
@@ -234,6 +235,7 @@ function TrafimageMaps({
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
+    search: <Search map={map} searchService={searchService} />,
   };
 
   const appElements = getComponents(defaultElements, elements);
@@ -249,6 +251,7 @@ function TrafimageMaps({
         <ResizeHandler observe=".tm-app" />
         <TopicLoader
           layerService={layerService}
+          searchService={searchService}
           baseLayers={baseLayers}
           layers={layers}
           map={map}

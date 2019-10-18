@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import Map from 'ol/Map';
 import { unByKey } from 'ol/Observable';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
 import { setActiveTopic, setTopics } from '../../model/app/actions';
+import SearchService from '../Search/SearchService';
 
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -17,13 +17,14 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  map: PropTypes.instanceOf(Map).isRequired,
+  searchService: PropTypes.instanceOf(SearchService).isRequired,
   apiKey: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -65,13 +66,23 @@ class TopicLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic } = this.props;
+    const {
+      activeTopic,
+      dispatchSetClickedFeatureInfo,
+      searchService,
+    } = this.props;
 
     if (activeTopic !== prevProps.activeTopic) {
       if (activeTopic.linkUrl) {
         TopicLoader.openLinkTopic(activeTopic);
       }
       this.updateLayers(activeTopic.layers);
+
+      searchService.setSearches(activeTopic.searches);
+      searchService.setSearchesProps({
+        activeTopic,
+        dispatchSetClickedFeatureInfo,
+      });
     }
   }
 

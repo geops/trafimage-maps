@@ -9,6 +9,7 @@ import defaultBaseLayers, {
   parks,
   stuetzpunktbahnhoefe,
 } from './layers';
+import defaultSearches, { handicapStationFinder } from './searches';
 
 const defaultElements = {
   header: true,
@@ -18,6 +19,7 @@ const defaultElements = {
   mapControls: true,
   baseLayerToggler: true,
   popup: false,
+  search: true,
 };
 
 export const netzkarte = {
@@ -41,15 +43,17 @@ export const netzkarte = {
   ],
   projection: 'EPSG:3857',
   description: 'ch.sbb.netzkarte-desc',
+  searches: defaultSearches,
 };
 
 export const handicap = {
   name: 'ch.sbb.handicap',
   key: 'ch.sbb.handicap',
-  elements: { ...defaultElements, shareMenu: true, featureMenu: true },
+  elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
   description: 'ch.sbb.handicap-desc',
+  searches: { Stationen: handicapStationFinder },
 };
 
 export const netzkarteStelen = {

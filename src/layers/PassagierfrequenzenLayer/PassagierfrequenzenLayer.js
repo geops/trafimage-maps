@@ -58,6 +58,12 @@ class PassagierfrequenzenLayer extends VectorLayer {
     });
   }
 
+  /**
+   * Create Style from feature and resolution
+   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} resolution
+   * @returns {Object|null}
+   */
   styleFunction(feature, resolution) {
     const vis = feature.get('visibility');
     const res = layerHelper.getDataResolution(resolution);
@@ -99,6 +105,20 @@ class PassagierfrequenzenLayer extends VectorLayer {
     return this.styleCache[res][name][selected];
   }
 
+  /**
+   * Use a custom loader as our geoserver delivers the geojson with the legacy crs syntax
+   * (similar to https://osgeo-org.atlassian.net/browse/GEOS-5996)
+   * which results in an Assertion error 36, https://openlayers.org/en/latest/doc/errors/
+   *
+   * By using a custom the projection in the geojson does not matter
+   * (compared to https://github.com/openlayers/openlayers/blob/v5.3.0/src/ol/featureloader.js#L88)
+   *
+   * This loader function is based on the loader example in
+   * https://openlayers.org/en/latest/apidoc/module-ol_source_Vector-VectorSource.html
+   * @param {ol.extent} extent The desired extent {@link https://openlayers.org/en/latest/apidoc/module-ol_extent.html ol/extent}
+   * @param {number} resolution The desired resolution for the loaded map.
+   * @param {ol.proj} projection The desired projecition.
+   */
   loader(extent, resolution, projection) {
     const proj = projection.getCode();
 
