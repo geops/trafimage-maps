@@ -20,7 +20,10 @@ class HandicapStationFinder extends StationFinder {
             .map(f => ({
               ...f,
               handicap: handicapFeatures.find(
-                hf => hf.didok === f.properties.ibnr,
+                hf =>
+                  hf.didok ===
+                  f.properties.identifiers.find(i => i.source === 'sbb:ibnr')
+                    .value,
               ),
             }))
             .filter(f => f.handicap)
