@@ -386,8 +386,8 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
 
 export default [
   netzkarteLayer,
-  netzkarteLayerLight,
-  netzkarteLayerNight,
+  // netzkarteLayerLight,
+  // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   aerial,

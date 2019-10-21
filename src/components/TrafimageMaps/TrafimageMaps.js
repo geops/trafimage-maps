@@ -138,7 +138,7 @@ const propTypes = {
 const defaultProps = {
   activeTopicKey: null,
   children: null,
-  center: [925472, 5950684],
+  center: [925472, 5920000],
   zoom: 9,
   elements: {
     header: false,

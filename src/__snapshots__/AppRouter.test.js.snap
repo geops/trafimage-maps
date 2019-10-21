@@ -370,16 +370,6 @@ exports[`AppRouter should match snapshot 1`] = `
                       ch.sbb.netzkarte
                     </option>
                     <option
-                      value="ch.sbb.netzkarte.light"
-                    >
-                      ch.sbb.netzkarte.light
-                    </option>
-                    <option
-                      value="ch.sbb.netzkarte.night"
-                    >
-                      ch.sbb.netzkarte.night
-                    </option>
-                    <option
                       value="ch.sbb.netzkarte.landeskarte.grau"
                     >
                       ch.sbb.netzkarte.landeskarte.grau
