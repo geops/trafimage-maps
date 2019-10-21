@@ -1442,9 +1442,10 @@ exports[`AppRouter should match snapshot 1`] = `
           onClick={[Function]}
           type="button"
         >
-          <svg>
-            Search.svg
-          </svg>
+          <img
+            alt="Suche"
+            src="Search.url.svg"
+          />
         </button>
       </div>
     </div>

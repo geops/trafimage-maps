@@ -19,7 +19,7 @@ class SearchService {
     this.highlightLayer.setMap(map);
   }
 
-  setSearches(searches) {
+  setSearches(searches = {}) {
     this.searches = searches;
   }
 

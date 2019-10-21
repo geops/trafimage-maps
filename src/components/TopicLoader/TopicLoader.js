@@ -97,7 +97,7 @@ class TopicLoader extends Component {
       }
       this.updateLayers(activeTopic.layers);
 
-      searchService.setSearches(activeTopic.searches);
+      searchService.setSearches(activeTopic.searches || []);
       searchService.setSearchesProps({
         activeTopic,
         dispatchSetClickedFeatureInfo,
@@ -149,6 +149,7 @@ const mapDispatchToProps = {
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
 TopicLoader.propTypes = propTypes;
