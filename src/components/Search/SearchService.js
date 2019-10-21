@@ -2,9 +2,12 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 
 class SearchService {
-  constructor() {
+  constructor(highlightStyle) {
     this.searches = [];
-    this.highlightLayer = new OLVectorLayer({ source: new OLVectorSource({}) });
+    this.highlightLayer = new OLVectorLayer({
+      source: new OLVectorSource({}),
+      style: highlightStyle,
+    });
   }
 
   setClear(clear) {
