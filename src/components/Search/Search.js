@@ -19,15 +19,13 @@ function Search({ map, searchService }) {
 
   useMemo(() => {
     searchService.setClear(() => setSuggestions([]));
-    searchService.setUpsert((section, items) =>
+    searchService.setUpsert((section, items, position) =>
       setSuggestions(oldSuggestions => {
         const index = oldSuggestions.findIndex(s => s.section === section);
+        const start = index === -1 ? position : index;
+        const deleteCount = index === -1 ? 0 : 1;
         const newSuggestions = [...oldSuggestions];
-        if (index === -1 && items) {
-          newSuggestions.push({ section, items });
-        } else if (items) {
-          newSuggestions[index] = { section, items };
-        }
+        newSuggestions.splice(start, deleteCount, { section, items });
         return newSuggestions;
       }),
     );

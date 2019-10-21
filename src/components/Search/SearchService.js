@@ -61,10 +61,10 @@ class SearchService {
 
   search(value) {
     this.clearHighlight();
-    Object.entries(this.searches).forEach(([section, search]) => {
+    Object.entries(this.searches).forEach(([section, search], position) => {
       search.search(value).then(items => {
         search.setItems(items);
-        this.upsert(section, search.getItems());
+        this.upsert(section, search.getItems(), position);
       });
     });
   }
@@ -83,9 +83,9 @@ class SearchService {
   }
 
   toggleSection(toggledSection) {
-    Object.entries(this.searches).forEach(([section, search]) => {
+    Object.entries(this.searches).forEach(([section, search], position) => {
       search.collapse(!(section === toggledSection && search.collapsed));
-      this.upsert(section, search.getItems());
+      this.upsert(section, search.getItems(), position);
     });
   }
 
