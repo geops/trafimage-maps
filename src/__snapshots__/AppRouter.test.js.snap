@@ -1413,7 +1413,7 @@ exports[`AppRouter should match snapshot 1`] = `
             />
           </div>
           <button
-            className="wkp-search-button"
+            className="wkp-search-button wkp-search-button-submit"
             type="button"
           >
             <svg
@@ -1435,6 +1435,7 @@ exports[`AppRouter should match snapshot 1`] = `
               />
             </svg>
           </button>
+          
         </div>
         <button
           className="wkp-search-toggle-button"

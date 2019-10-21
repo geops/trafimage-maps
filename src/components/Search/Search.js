@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import {
   FaSearch,
+  FaTimes,
   FaChevronCircleDown,
   FaChevronCircleUp,
 } from 'react-icons/fa';
@@ -94,9 +95,21 @@ function Search({ map, searchService }) {
               value,
             }}
           />
-          <button type="button" className="wkp-search-button">
+          <button
+            type="button"
+            className="wkp-search-button wkp-search-button-submit"
+          >
             <FaSearch />
           </button>
+          {value && (
+            <button
+              type="button"
+              className="wkp-search-button wkp-search-button-clear"
+              onClick={() => setValue('')}
+            >
+              <FaTimes />
+            </button>
+          )}
         </SearchToggle>
       </div>
     )
