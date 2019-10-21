@@ -84,6 +84,7 @@ export const sourcesLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   visible: true,
   zIndex: 1,
+  preserveDrawingBuffer: true,
   url: `/styles/ch.sbb.netzkarte.sources.json?key=${CONF.vectorTilesKey}`,
   properties: {
     hideInLegend: true,

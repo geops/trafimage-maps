@@ -13,10 +13,10 @@ const applyVisibilityToStyleLayer = (styleLayer, visibilityValue) => {
  * Apply visibility to style layers that fits the filter function.
  */
 const applyVisibility = (mbMap, visible, filterFunc) => {
-  if (!mbMap || !mbMap.isStyleLoaded()) {
+  const styleObj = mbMap.getStyle();
+  if (!mbMap && styleObj) {
     return;
   }
-  const styleObj = mbMap.getStyle();
   const visibilityValue = visible ? 'visible' : 'none';
   if (filterFunc) {
     for (let i = 0; i < styleObj.layers.length; i += 1) {
@@ -97,12 +97,7 @@ class MapboxStyleLayer extends Layer {
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
       this.on('change:visible', ({ target: layer }) => {
-        applyVisibility(
-          mbMap,
-          layer.getVisible(),
-          this.styleLayersFilter,
-          this.styleLayers,
-        );
+        applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
       }),
     );
   }
