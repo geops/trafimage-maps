@@ -2,8 +2,8 @@ import Betriebspunkte from '../searches/Betriebspunkte';
 import Lines from '../searches/Lines';
 import Locations from '../searches/Locations';
 import Municipalities from '../searches/Municipalities';
-import StationFinder from '../searches/StationFinder';
-import HandicapStationFinder from '../searches/HandicapStationFinder';
+import StopFinder from '../searches/StopFinder';
+import HandicapStopFinder from '../searches/HandicapStopFinder';
 
 export const betriebspunkte = new Betriebspunkte();
 
@@ -13,12 +13,12 @@ export const locations = new Locations();
 
 export const municipalities = new Municipalities();
 
-export const stationFinder = new StationFinder();
+export const stopFinder = new StopFinder();
 
-export const handicapStationFinder = new HandicapStationFinder();
+export const handicapStopFinder = new HandicapStopFinder();
 
 export default {
-  Stationen: stationFinder,
+  Stationen: stopFinder,
   Gemeinden: municipalities,
   Orte: locations,
   Betriebspunkte: betriebspunkte,
