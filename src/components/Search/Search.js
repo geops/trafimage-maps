@@ -45,7 +45,7 @@ function Search({ map, searchService }) {
             onSuggestionsFetchRequested={event =>
               searchService.search(event.value)
             }
-            onSuggestionsClearRequested={() => searchService.clear()}
+            onSuggestionsClearRequested={() => searchService.clear('asdf')}
             onSuggestionHighlighted={({ suggestion }) =>
               searchService.highlight(suggestion)
             }
@@ -105,7 +105,10 @@ function Search({ map, searchService }) {
             <button
               type="button"
               className="wkp-search-button wkp-search-button-clear"
-              onClick={() => setValue('')}
+              onClick={() => {
+                setValue('');
+                searchService.clearHighlight();
+              }}
             >
               <FaTimes />
             </button>
