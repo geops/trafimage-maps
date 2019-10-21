@@ -62,7 +62,7 @@ const resolutions = [
 
 export const netzkarteLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
@@ -75,7 +75,7 @@ export const netzkarteLayer = new MapboxLayer({
 
 export const netzkarteLayerLight = new MapboxLayer({
   name: 'ch.sbb.netzkarte.light',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
@@ -87,7 +87,7 @@ export const netzkarteLayerLight = new MapboxLayer({
 });
 export const netzkarteLayerNight = new MapboxLayer({
   name: 'ch.sbb.netzkarte.night',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
