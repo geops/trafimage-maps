@@ -149,7 +149,6 @@ const mapDispatchToProps = {
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
 TopicLoader.propTypes = propTypes;
