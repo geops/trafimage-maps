@@ -139,7 +139,7 @@ const defaultProps = {
   activeTopicKey: null,
   children: null,
   center: [925472, 5950684],
-  zoom: 14,
+  zoom: 9,
   elements: {
     header: false,
     footer: false,
