@@ -18,9 +18,9 @@ export const stationFinder = new StationFinder();
 export const handicapStationFinder = new HandicapStationFinder();
 
 export default {
-  Betriebspunkte: betriebspunkte,
   Stationen: stationFinder,
-  Verbindungen: lines,
-  Orte: locations,
   Gemeinden: municipalities,
+  Orte: locations,
+  Betriebspunkte: betriebspunkte,
+  Verbindungen: lines,
 };
