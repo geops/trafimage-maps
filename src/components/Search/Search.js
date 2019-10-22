@@ -65,7 +65,7 @@ function Search({ map, searchService }) {
                     {t(result.section)}
                   </div>
                   <div className="wkp-search-section-count">
-                    {count > 0 ? (
+                    {count > 2 ? (
                       <>
                         {t('insgesamt {{ count }} Ergebnisse', { count })}
                         {searchService.sectionCollapsed(result.section) ? (
@@ -74,9 +74,9 @@ function Search({ map, searchService }) {
                           <FaChevronCircleUp />
                         )}
                       </>
-                    ) : (
-                      t('keine Ergebnisse')
-                    )}
+                    ) : null}
+
+                    {count === 0 ? t('keine Ergebnisse') : null}
                   </div>
                 </div>
               );
