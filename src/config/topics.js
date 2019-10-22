@@ -9,7 +9,7 @@ import defaultBaseLayers, {
   parks,
   stuetzpunktbahnhoefe,
 } from './layers';
-import defaultSearches, { handicapStationFinder } from './searches';
+import defaultSearches, { handicapStopFinder } from './searches';
 
 const defaultElements = {
   header: true,
@@ -53,7 +53,7 @@ export const handicap = {
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
   description: 'ch.sbb.handicap-desc',
-  searches: { Stationen: handicapStationFinder },
+  searches: { Stationen: handicapStopFinder },
 };
 
 export const netzkarteStelen = {

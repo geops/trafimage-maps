@@ -2,7 +2,7 @@ import React from 'react';
 
 import Search from '../Search';
 
-class StationFinder extends Search {
+class StopFinder extends Search {
   constructor() {
     super();
     this.key = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
@@ -24,4 +24,4 @@ class StationFinder extends Search {
   }
 }
 
-export default StationFinder;
+export default StopFinder;

@@ -1,5 +1,5 @@
 import HandicapLayer from '../../layers/HandicapLayer';
-import StationFinder from '../StationFinder';
+import StopFinder from '../StopFinder';
 
 const findHandicapLayers = l => l instanceof HandicapLayer;
 const getHandicapFeatures = layer =>
@@ -8,7 +8,7 @@ const getHandicapFeatures = layer =>
     .getFeatures()
     .map(feature => ({ didok: feature.getProperties().didok, feature, layer }));
 
-class HandicapStationFinder extends StationFinder {
+class HandicapStopFinder extends StopFinder {
   search(value) {
     const handicapFeatures = this.props.activeTopic.layers
       .filter(findHandicapLayers)
@@ -20,7 +20,10 @@ class HandicapStationFinder extends StationFinder {
             .map(f => ({
               ...f,
               handicap: handicapFeatures.find(
-                hf => hf.didok === f.properties.ibnr,
+                hf =>
+                  hf.didok ===
+                  f.properties.identifiers.find(i => i.source === 'sbb:ibnr')
+                    .value,
               ),
             }))
             .filter(f => f.handicap)
@@ -35,4 +38,4 @@ class HandicapStationFinder extends StationFinder {
   }
 }
 
-export default HandicapStationFinder;
+export default HandicapStopFinder;

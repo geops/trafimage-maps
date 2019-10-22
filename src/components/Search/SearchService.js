@@ -2,9 +2,12 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 
 class SearchService {
-  constructor() {
+  constructor(highlightStyle) {
     this.searches = [];
-    this.highlightLayer = new OLVectorLayer({ source: new OLVectorSource({}) });
+    this.highlightLayer = new OLVectorLayer({
+      source: new OLVectorSource({}),
+      style: highlightStyle,
+    });
   }
 
   setClear(clear) {
@@ -35,31 +38,36 @@ class SearchService {
     return `${sections.join(', ')} …`;
   }
 
-  highlight(item, fitExtent = false) {
-    if (item) {
-      this.highlightLayer.getSource().clear();
-      const featureProjection = this.map.getView().getProjection();
-      const feature = this.searches[item.section].getFeature(item, {
-        featureProjection,
-      });
-      if (feature) {
-        this.highlightLayer.getSource().addFeature(feature);
-        if (fitExtent) {
-          this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
-            padding: [50, 50, 50, 50],
-            duration: 500,
-            maxZoom: 15,
-          });
-        }
+  clearHighlight() {
+    this.highlightFeature = null;
+    this.highlightLayer.getSource().clear();
+  }
+
+  highlight(item, persistent = false) {
+    this.highlightLayer.getSource().clear();
+    const featureProjection = this.map.getView().getProjection();
+    const feature = item
+      ? this.searches[item.section].getFeature(item, { featureProjection })
+      : this.highlightFeature;
+    if (feature) {
+      this.highlightLayer.getSource().addFeature(feature);
+      if (persistent) {
+        this.highlightFeature = feature;
+        this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
+          padding: [50, 50, 50, 50],
+          duration: 500,
+          maxZoom: 15,
+        });
       }
     }
   }
 
   search(value) {
-    Object.entries(this.searches).forEach(([section, search]) => {
+    this.clearHighlight();
+    Object.entries(this.searches).forEach(([section, search], position) => {
       search.search(value).then(items => {
         search.setItems(items);
-        this.upsert(section, search.getItems());
+        this.upsert(section, search.getItems(), position);
       });
     });
   }
@@ -78,9 +86,9 @@ class SearchService {
   }
 
   toggleSection(toggledSection) {
-    Object.entries(this.searches).forEach(([section, search]) => {
+    Object.entries(this.searches).forEach(([section, search], position) => {
       search.collapse(!(section === toggledSection && search.collapsed));
-      this.upsert(section, search.getItems());
+      this.upsert(section, search.getItems(), position);
     });
   }
 

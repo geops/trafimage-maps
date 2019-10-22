@@ -4,7 +4,6 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import OLGeoJSON from 'ol/format/GeoJSON';
 import { bbox as OLBboxStrategy } from 'ol/loadingstrategy';
-import { Style as OLStyle, Circle as OLCircle, Fill as OLFill } from 'ol/style';
 import CONF from '../../config/appConfig';
 import layerHelper from '../layerHelper';
 
@@ -61,24 +60,6 @@ class NetzkartePointLayer extends VectorLayer {
         : 'trafimage:netzkarte_point',
     };
 
-    this.defaultStyle = new OLStyle({
-      image: new OLCircle({
-        radius: 10,
-        fill: new OLFill({
-          color: 'rgba(255,255,255,0.01)',
-        }),
-      }),
-    });
-
-    this.highlightStyle = new OLStyle({
-      image: new OLCircle({
-        radius: 10,
-        fill: new OLFill({
-          color: 'rgba(0,61,155,0.5)',
-        }),
-      }),
-    });
-
     this.olLayer.setStyle((f, r) => this.styleFunction(f, r));
     this.olLayer.getSource().setLoader(this.loader.bind(this));
     this.onClick(features => {
@@ -98,10 +79,10 @@ class NetzkartePointLayer extends VectorLayer {
     const res = layerHelper.getDataResolution(r);
     if (f.get('resolution') === res && f.get('visibility') >= res * 10) {
       if (f === this.highlightFeature) {
-        return this.highlightStyle;
+        return layerHelper.highlightStyle;
       }
 
-      return this.defaultStyle;
+      return layerHelper.defaultStyle;
     }
 
     return null;
