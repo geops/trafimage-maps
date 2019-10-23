@@ -240,14 +240,9 @@ function TrafimageMaps({
 
   const appElements = getComponents(defaultElements, elements);
 
-  // Classes for active components used for conditional styling
-  const elementClasses = Object.keys(elements)
-    .filter(k => elements[k])
-    .map(k => k);
-
   return (
     <Provider store={appStore}>
-      <div className={`tm-app ${elementClasses.join(' ')}`}>
+      <div className={`tm-app ${elements.header ? 'header' : ''}`}>
         <ResizeHandler observe=".tm-app" />
         <TopicLoader
           layerService={layerService}
@@ -276,4 +271,4 @@ function TrafimageMaps({
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default React.memo(TrafimageMaps);
+export default TrafimageMaps;
