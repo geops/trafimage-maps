@@ -9,10 +9,8 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
-import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import HandicapLayer from '../layers/HandicapLayer';
-import layerHelper from '../layers/layerHelper';
 import CONF from './appConfig';
 
 proj4.defs(
@@ -225,8 +223,41 @@ export const swisstopoLandeskarteGrau = new Layer({
   }),
 });
 
-export const passagierfrequenzen = new PassagierfrequenzenLayer({
+export const passagierfrequenzen = new MapboxStyleLayer({
+  name: 'ch.sbb.bahnhoffrequenzen',
   visible: false,
+  mapboxLayer: sourcesLayer,
+  styleLayer: {
+    id: 'passagierfrequenzen',
+    type: 'circle',
+    source: 'base',
+    'source-layer': 'netzkarte_point',
+    filter: ['has', 'dwv'],
+    paint: {
+      'circle-radius': [
+        'interpolate',
+        ['linear'],
+        ['get', 'dwv'],
+        400,
+        8,
+        500000,
+        70,
+      ],
+      'circle-color': 'rgb(255,220,0)',
+      'circle-stroke-width': 2,
+      'circle-stroke-color': 'rgb(255,220,0)',
+      'circle-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        1,
+        0.7,
+      ],
+    },
+  },
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.bahnhoffrequenzen-desc',
+  },
 });
 
 export const bahnhofplaene = new Layer({
@@ -244,26 +275,14 @@ bahnhofplaene.setChildren([
     radioGroup: 'bahnhofplaene',
     visible: false,
     mapboxLayer: sourcesLayer,
-    featureInfoFilter: (feature, resolution) => {
-      const res = layerHelper.getDataResolution(resolution);
-      return (
-        feature.get('resolution') === res && feature.get('visibility') >= res
-      );
-    },
     styleLayer: {
       id: 'printprodukte',
-      type: 'circle',
+      type: 'symbol',
       source: 'base',
       'source-layer': 'netzkarte_point',
-      paint: {
-        'circle-radius': 10,
-        'circle-color': 'rgb(0, 61, 155)',
-        'circle-opacity': [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          0.5,
-          1,
-        ],
+      layout: {
+        'icon-image': 'marker_11',
+        'icon-size': 3,
       },
     },
     properties: {
@@ -276,28 +295,15 @@ bahnhofplaene.setChildren([
     radioGroup: 'bahnhofplaene',
     visible: false,
     mapboxLayer: sourcesLayer,
-    featureInfoFilter: (feature, resolution) => {
-      const res = layerHelper.getDataResolution(resolution);
-      return (
-        feature.get('resolution') === res &&
-        feature.get('visibility') >= res * 10
-      );
-    },
     styleLayer: {
       id: 'interaktiv',
-      type: 'circle',
+      type: 'symbol',
       source: 'base',
       'source-layer': 'netzkarte_point',
       filter: ['has', 'url_interactive_plan'],
-      paint: {
-        'circle-radius': 10,
-        'circle-color': 'rgb(255, 61, 155)',
-        'circle-opacity': [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          0.5,
-          1,
-        ],
+      layout: {
+        'icon-image': 'marker_11',
+        'icon-size': 3,
       },
     },
     properties: {
@@ -305,24 +311,6 @@ bahnhofplaene.setChildren([
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
     },
   }),
-  // f.get('url_interactive_plan')
-  /* new BahnhofplanLayer({
-    name: 'ch.sbb.bahnhofplaene.printprodukte',
-    visible: false,
-    showPrintFeatures: true,
-    properties: {
-      hasInfos: true,
-      description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-    },
-  }),
-  new BahnhofplanLayer({
-    name: 'ch.sbb.bahnhofplaene.interaktiv',
-    visible: false,
-    properties: {
-      hasInfos: true,
-      description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
-    },
-  }), */
 ]);
 
 export const tracker = new TrajservLayer({
@@ -384,14 +372,8 @@ punctuality.setChildren([
 
 export const netzkartePointLayer = new MapboxStyleLayer({
   key: 'ch.sbb.netzkarte.stationen',
-  visible: false,
+  visible: true,
   mapboxLayer: sourcesLayer,
-  featureInfoFilter: (feature, resolution) => {
-    const res = layerHelper.getDataResolution(resolution);
-    return (
-      feature.get('resolution') === res && feature.get('visibility') >= res
-    );
-  },
   styleLayer: {
     id: 'netzkarte_point',
     type: 'circle',
@@ -421,10 +403,10 @@ export const buslines = new MapboxStyleLayer({
   styleLayer: {
     id: 'bus',
     type: 'line',
-    source: 'buslines',
-    'source-layer': 'buslines',
+    source: 'busses',
+    'source-layer': 'busses',
     paint: {
-      'line-color': 'rgba(255, 232, 0, 1)',
+      'line-color': 'rgba(255, 220, 0, 1)',
       'line-width': 3,
       'line-opacity': 1,
     },
