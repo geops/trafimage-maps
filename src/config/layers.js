@@ -399,7 +399,6 @@ export const buslines = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.buslinien',
   mapboxLayer: sourcesLayer,
   visible: false,
-  isQueryable: false,
   styleLayer: {
     id: 'bus',
     type: 'line',

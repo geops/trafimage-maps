@@ -113,10 +113,9 @@ class Map extends PureComponent {
     layerService
       .getFeatureInfoAtCoordinate(evt.coordinate)
       .then(featureInfos => {
-        const filtered = featureInfos.filter(
-          ({ layer, features }) =>
-            !!popupComponents[layer.getKey()] && features.length,
-        );
+        const filtered = featureInfos.filter(({ layer, features }) => {
+          return !!popupComponents[layer.getKey()] && features.length;
+        });
         map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
       });
   }
