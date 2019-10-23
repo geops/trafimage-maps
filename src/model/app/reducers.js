@@ -13,6 +13,7 @@ import {
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
   SET_DESTINATION_FILTER,
+  SET_DEPARTURES_FILTER,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 import layerHelper from '../../layers/layerHelper';
@@ -90,6 +91,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         destinationFilter: action.data,
+      };
+    case SET_DEPARTURES_FILTER:
+      return {
+        ...state,
+        departuresFilter: action.data,
       };
     default:
       return {

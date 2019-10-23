@@ -9,7 +9,10 @@ import qs from 'querystring';
 import DestinationInput from './DestinationInput';
 import CONF from '../../config/appConfig';
 
-import { setDestinationFilter } from '../../model/app/actions';
+import {
+  setDestinationFilter,
+  setDeparturesFilter,
+} from '../../model/app/actions';
 
 import './TransportPopup.scss';
 
@@ -32,6 +35,7 @@ const propTypes = {
 
   // mapDispatchToProps
   dispatchSetDestinationFilter: PropTypes.func.isRequired,
+  dispatchSetDeparturesFilter: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -69,11 +73,13 @@ class TransportPopup extends Component {
   }
 
   componentDidMount() {
-    const { destinationFilter } = this.props;
+    const { destinationFilter, dispatchSetDeparturesFilter, uic } = this.props;
 
     this.mounted = true;
     this.loadDepartures();
     this.loadInterval = window.setInterval(() => this.loadDepartures(), 5000);
+
+    dispatchSetDeparturesFilter(uic);
 
     this.onDestinationSelect(destinationFilter);
   }
@@ -269,6 +275,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   dispatchSetDestinationFilter: setDestinationFilter,
+  dispatchSetDeparturesFilter: setDeparturesFilter,
 };
 
 TransportPopup.propTypes = propTypes;
