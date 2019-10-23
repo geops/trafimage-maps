@@ -9,8 +9,6 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
-import PassagierfrequenzenLayer from '../../../layers/PassagierfrequenzenLayer';
-import BahnhofplanLayer from '../../../layers/BahnhofplanLayer';
 import MapboxStyleLayer from '../../../layers/MapboxStyleLayer';
 import layerHelper from '../../../layers/layerHelper';
 import CONF from '../../appConfig';
@@ -223,9 +221,41 @@ export const swisstopoLandeskarteGrau = new Layer({
     }),
   }),
 });
-
-export const passagierfrequenzen = new PassagierfrequenzenLayer({
+export const passagierfrequenzen = new MapboxStyleLayer({
+  name: 'ch.sbb.bahnhoffrequenzen',
   visible: false,
+  mapboxLayer: sourcesLayer,
+  styleLayer: {
+    id: 'passagierfrequenzen',
+    type: 'circle',
+    source: 'base',
+    'source-layer': 'netzkarte_point',
+    filter: ['has', 'dwv'],
+    paint: {
+      'circle-radius': [
+        'interpolate',
+        ['linear'],
+        ['get', 'dwv'],
+        400,
+        8,
+        500000,
+        70,
+      ],
+      'circle-color': 'rgb(255,220,0)',
+      'circle-stroke-width': 2,
+      'circle-stroke-color': 'rgb(255,220,0)',
+      'circle-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        1,
+        0.7,
+      ],
+    },
+  },
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.bahnhoffrequenzen-desc',
+  },
 });
 
 export const bahnhofplaene = new Layer({
@@ -238,18 +268,42 @@ export const bahnhofplaene = new Layer({
 });
 
 bahnhofplaene.setChildren([
-  new BahnhofplanLayer({
+  new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.printprodukte',
+    radioGroup: 'bahnhofplaene',
     visible: false,
-    showPrintFeatures: true,
+    mapboxLayer: sourcesLayer,
+    styleLayer: {
+      id: 'printprodukte',
+      type: 'symbol',
+      source: 'base',
+      'source-layer': 'netzkarte_point',
+      layout: {
+        'icon-image': 'marker_11',
+        'icon-size': 3,
+      },
+    },
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
     },
   }),
-  new BahnhofplanLayer({
+  new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.interaktiv',
+    radioGroup: 'bahnhofplaene',
     visible: false,
+    mapboxLayer: sourcesLayer,
+    styleLayer: {
+      id: 'interaktiv',
+      type: 'symbol',
+      source: 'base',
+      'source-layer': 'netzkarte_point',
+      filter: ['has', 'url_interactive_plan'],
+      layout: {
+        'icon-image': 'marker_11',
+        'icon-size': 3,
+      },
+    },
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
