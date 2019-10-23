@@ -13,6 +13,7 @@ import {
   setTopics,
   setClickedFeatureInfo,
 } from '../../model/app/actions';
+import SearchService from '../Search/SearchService';
 
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -21,6 +22,7 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  searchService: PropTypes.instanceOf(SearchService).isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
   apiKey: PropTypes.string,
 
@@ -83,13 +85,23 @@ class TopicLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic } = this.props;
+    const {
+      activeTopic,
+      dispatchSetClickedFeatureInfo,
+      searchService,
+    } = this.props;
 
     if (activeTopic !== prevProps.activeTopic) {
       if (activeTopic.linkUrl) {
         TopicLoader.openLinkTopic(activeTopic);
       }
       this.updateLayers(activeTopic.layers);
+
+      searchService.setSearches(activeTopic.searches || []);
+      searchService.setSearchesProps({
+        activeTopic,
+        dispatchSetClickedFeatureInfo,
+      });
     }
   }
 

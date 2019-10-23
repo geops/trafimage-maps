@@ -1,0 +1,125 @@
+@import '../../Globals.scss';
+
+.wkp-search {
+  position: absolute;
+  top: 25px;
+  z-index: 2;
+  right: 220px;
+  left: 400px;
+  max-width: 400px;
+  margin: 0 auto;
+
+  .wkp-search-button {
+    border: none;
+    color: white;
+    height: 41px;
+    width: 46px;
+    position: absolute;
+    top: 2px;
+    font-size: 16px;
+    padding-top: 3px;
+
+    &.wkp-search-button-clear {
+      right: 46px;
+      background: none;
+      color: #666;
+    }
+
+    &.wkp-search-button-submit {
+      background-color: $brand-primary;
+      right: -2px;
+    }
+  }
+
+  .react-autosuggest__input {
+    border: 2px solid #b7b7b7;
+    padding: 12px 15px;
+    font-size: 14px;
+    width: calc(100% - 30px);
+  }
+
+  .react-autosuggest__suggestions-container--open {
+    background: white;
+    border: 2px solid #666;
+    margin-top: 5px;
+    width: 100%;
+    padding-top: 15px;
+    max-height: calc(100vh - 150px);
+    overflow: scroll;
+  }
+
+  .react-autosuggest__section-container {
+    padding-bottom: 15px;
+  }
+
+  .react-autosuggest__section-title {
+    padding: 15px 15px 0;
+    border-top: 1px solid lightgray;
+
+    .wkp-search-section-header {
+      font-weight: bold;
+    }
+
+    .wkp-search-section-count {
+      color: #666;
+      padding-top: 5px;
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: -15px;
+        right: 0;
+      }
+    }
+
+    :hover {
+      .wkp-search-section-count {
+        color: $brand-primary;
+      }
+    }
+  }
+
+  .react-autosuggest__section-container--first {
+    .react-autosuggest__section-title {
+      margin: 0;
+      padding: 0 15px;
+      border: none;
+    }
+  }
+
+  .react-autosuggest__suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .react-autosuggest__suggestion {
+    margin: 15px 15px 0;
+
+    &.react-autosuggest__suggestion--highlighted {
+      color: $brand-primary;
+    }
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.tm-app.tm-w-m,
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-search {
+    top: 5px;
+    left: 250px;
+  }
+}
+
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-search {
+    right: 9px;
+    max-width: 100%;
+    left: 100px;
+  }
+}

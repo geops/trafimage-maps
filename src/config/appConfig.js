@@ -11,8 +11,9 @@ let cartaroUrl = '//cartaro2.dev.trafimage.ch/api/v1/';
 
 // Swiss extent in 3857.
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+const env = process && process.env && process.env.REACT_APP_ENV;
 
-switch (process.env.REACT_APP_ENV) {
+switch (env) {
   case 'wkp_stag': {
     tileserverUrlMapproxy = '//wkp.stag.trafimage.geops.ch/raster';
     departureUrl = '//wkp.stag.trafimage.geops.ch/search';
