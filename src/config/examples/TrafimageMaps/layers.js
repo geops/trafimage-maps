@@ -63,7 +63,7 @@ const resolutions = [
 
 export const netzkarteLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte',
-  copyright: 'OpenStreetMap contributors, © SBB/CFF/FFS',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isQueryable: false,
   isBaseLayer: true,
@@ -89,6 +89,31 @@ export const sourcesLayer = new MapboxLayer({
   properties: {
     hideInLegend: true,
   },
+});
+
+export const netzkarteLayerLight = new MapboxLayer({
+  name: 'ch.sbb.netzkarte.light',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: false,
+  isBaseLayer: true,
+  radioGroup: 'baseLayer',
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  url:
+    `${CONF.vectorTilesUrl}/styles/evoq_sandbox2/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
+});
+export const netzkarteLayerNight = new MapboxLayer({
+  name: 'ch.sbb.netzkarte.night',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: false,
+  isBaseLayer: true,
+  radioGroup: 'baseLayer',
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  url:
+    `${CONF.vectorTilesUrl}/styles/evoq_sandbox1/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
 });
 
 export const swisstopoSwissImage = new Layer({
@@ -384,6 +409,8 @@ export const parks = new WMSLayer({
 export default [
   netzkarteLayer,
   sourcesLayer,
+  netzkarteLayerLight,
+  netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   aerial,

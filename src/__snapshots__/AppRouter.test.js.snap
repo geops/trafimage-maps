@@ -370,6 +370,16 @@ exports[`AppRouter should match snapshot 1`] = `
                       ch.sbb.netzkarte
                     </option>
                     <option
+                      value="ch.sbb.netzkarte.light"
+                    >
+                      ch.sbb.netzkarte.light
+                    </option>
+                    <option
+                      value="ch.sbb.netzkarte.night"
+                    >
+                      ch.sbb.netzkarte.night
+                    </option>
+                    <option
                       value="ch.sbb.netzkarte.landeskarte.grau"
                     >
                       ch.sbb.netzkarte.landeskarte.grau
@@ -1402,7 +1412,7 @@ exports[`AppRouter should match snapshot 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
-              placeholder="Stationen, Verbindungen, Orte …"
+              placeholder="Stationen, Orte, Verbindungen …"
               type="text"
               value=""
             />
@@ -1413,7 +1423,7 @@ exports[`AppRouter should match snapshot 1`] = `
             />
           </div>
           <button
-            className="wkp-search-button"
+            className="wkp-search-button wkp-search-button-submit"
             type="button"
           >
             <svg
@@ -1435,6 +1445,7 @@ exports[`AppRouter should match snapshot 1`] = `
               />
             </svg>
           </button>
+          
         </div>
         <button
           className="wkp-search-toggle-button"

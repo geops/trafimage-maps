@@ -14,6 +14,7 @@ import {
   SET_DIALOG_POSITION,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
+import layerHelper from '../../layers/layerHelper';
 
 const getInitialState = () => ({
   topics: [],
@@ -30,7 +31,7 @@ const getInitialState = () => ({
     }),
   }),
   layerService: new LayerService(),
-  searchService: new SearchService(),
+  searchService: new SearchService(layerHelper.highlightStyle),
 });
 
 export default function app(state = getInitialState(), action) {

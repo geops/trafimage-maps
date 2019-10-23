@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import {
   FaSearch,
+  FaTimes,
   FaChevronCircleDown,
   FaChevronCircleUp,
 } from 'react-icons/fa';
@@ -18,15 +19,13 @@ function Search({ map, searchService }) {
 
   useMemo(() => {
     searchService.setClear(() => setSuggestions([]));
-    searchService.setUpsert((section, items) =>
+    searchService.setUpsert((section, items, position) =>
       setSuggestions(oldSuggestions => {
         const index = oldSuggestions.findIndex(s => s.section === section);
+        const start = index === -1 ? position : index;
+        const deleteCount = index === -1 ? 0 : 1;
         const newSuggestions = [...oldSuggestions];
-        if (index === -1 && items) {
-          newSuggestions.push({ section, items });
-        } else if (items) {
-          newSuggestions[index] = { section, items };
-        }
+        newSuggestions.splice(start, deleteCount, { section, items });
         return newSuggestions;
       }),
     );
@@ -44,7 +43,7 @@ function Search({ map, searchService }) {
             onSuggestionsFetchRequested={event =>
               searchService.search(event.value)
             }
-            onSuggestionsClearRequested={() => searchService.clear()}
+            onSuggestionsClearRequested={() => searchService.clear('asdf')}
             onSuggestionHighlighted={({ suggestion }) =>
               searchService.highlight(suggestion)
             }
@@ -94,9 +93,24 @@ function Search({ map, searchService }) {
               value,
             }}
           />
-          <button type="button" className="wkp-search-button">
+          <button
+            type="button"
+            className="wkp-search-button wkp-search-button-submit"
+          >
             <FaSearch />
           </button>
+          {value && (
+            <button
+              type="button"
+              className="wkp-search-button wkp-search-button-clear"
+              onClick={() => {
+                setValue('');
+                searchService.clearHighlight();
+              }}
+            >
+              <FaTimes />
+            </button>
+          )}
         </SearchToggle>
       </div>
     )

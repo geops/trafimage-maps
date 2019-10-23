@@ -10,7 +10,6 @@ import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
 import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
-import BahnhofplanLayer from '../layers/BahnhofplanLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import HandicapLayer from '../layers/HandicapLayer';
 import layerHelper from '../layers/layerHelper';
@@ -90,6 +89,32 @@ export const sourcesLayer = new MapboxLayer({
   properties: {
     hideInLegend: true,
   },
+});
+
+export const netzkarteLayerLight = new MapboxLayer({
+  name: 'ch.sbb.netzkarte.light',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: false,
+  isBaseLayer: true,
+  radioGroup: 'baseLayer',
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  url:
+    `${CONF.vectorTilesUrl}/styles/evoq_sandbox2/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
+});
+
+export const netzkarteLayerNight = new MapboxLayer({
+  name: 'ch.sbb.netzkarte.night',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: false,
+  isBaseLayer: true,
+  radioGroup: 'baseLayer',
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  url:
+    `${CONF.vectorTilesUrl}/styles/evoq_sandbox1/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
 });
 
 export const swisstopoSwissImage = new Layer({
@@ -470,6 +495,8 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
 export default [
   sourcesLayer,
   netzkarteLayer,
+  netzkarteLayerLight,
+  netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   aerial,

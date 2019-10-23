@@ -11,14 +11,24 @@
 
   .wkp-search-button {
     border: none;
-    background-color: $brand-primary;
     color: white;
     height: 41px;
     width: 46px;
     position: absolute;
     top: 2px;
-    right: -2px;
-    font-size: 14px;
+    font-size: 16px;
+    padding-top: 3px;
+
+    &.wkp-search-button-clear {
+      right: 46px;
+      background: none;
+      color: #666;
+    }
+
+    &.wkp-search-button-submit {
+      background-color: $brand-primary;
+      right: -2px;
+    }
   }
 
   .react-autosuggest__input {
