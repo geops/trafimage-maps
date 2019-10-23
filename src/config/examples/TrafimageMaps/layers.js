@@ -398,10 +398,10 @@ export const buslines = new MapboxStyleLayer({
   styleLayer: {
     id: 'bus',
     type: 'line',
-    source: 'buslines',
-    'source-layer': 'buslines',
+    source: 'busses',
+    'source-layer': 'busses',
     paint: {
-      'line-color': 'rgba(255, 232, 0, 1)',
+      'line-color': 'rgba(255, 220, 0, 1)',
       'line-width': 3,
       'line-opacity': 1,
     },
