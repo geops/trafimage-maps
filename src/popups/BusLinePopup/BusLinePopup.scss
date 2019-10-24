@@ -1,0 +1,16 @@
+.wkp-bus-line-popup {
+  > div {
+    display: flex;
+    align-content: center;
+    margin: 10px 0;
+
+    > div:first-child {
+      font-weight: bold;
+      width: 100px;
+    }
+
+    > div:last-child {
+      width: 200px;
+    }
+  }
+}

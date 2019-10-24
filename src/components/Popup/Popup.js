@@ -12,20 +12,25 @@ const propTypes = {
 };
 
 const Popup = ({ popupComponents }) => {
-  const { map, clickedFeatureInfo } = useSelector(state => state.app);
+  const map = useSelector(state => state.app.map);
+  const clickedFeatureInfo = useSelector(state => state.app.clickedFeatureInfo);
   const dispatch = useDispatch();
 
   if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
     return null;
   }
 
-  const { coordinate, features, layer } = clickedFeatureInfo[0];
-  const geom = features[0].getGeometry();
-  const coord = geom instanceof Point ? geom.getCoordinates() : coordinate;
+  const filtered = clickedFeatureInfo.filter(
+    ({ layer }) => !!popupComponents[layer.getKey()],
+  );
 
-  if (!popupComponents[layer.getKey()]) {
+  if (!filtered.length) {
     return null;
   }
+
+  const { coordinate, features } = clickedFeatureInfo[0];
+  const geom = features[0].getGeometry();
+  const coord = geom instanceof Point ? geom.getCoordinates() : coordinate;
 
   return (
     <RSPopup
@@ -37,7 +42,7 @@ const Popup = ({ popupComponents }) => {
     >
       <FeatureInformation
         popupComponents={popupComponents}
-        clickedFeatureInfo={clickedFeatureInfo}
+        clickedFeatureInfo={filtered}
       />
     </RSPopup>
   );
