@@ -8,10 +8,7 @@ import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
 
 import { setCenter, setZoom } from '../../model/map/actions';
-import {
-  setDestinationFilter,
-  setDeparturesFilter,
-} from '../../model/app/actions';
+import { setDeparturesFilter } from '../../model/app/actions';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -26,20 +23,17 @@ const propTypes = {
   }).isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  destinationFilter: PropTypes.string,
   departuresFilter: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
-  dispatchSetDestinationFilter: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   history: undefined,
   initialState: {},
-  destinationFilter: undefined,
   departuresFilter: undefined,
 };
 
@@ -49,7 +43,6 @@ class Permalink extends PureComponent {
       dispatchSetZoom,
       dispatchSetCenter,
       initialState,
-      dispatchSetDestinationFilter,
       dispatchSetDeparturesFilter,
     } = this.props;
 
@@ -84,7 +77,6 @@ class Permalink extends PureComponent {
     const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
     const routeFilterKey = getUrlParamKey(parameters, /tripnumber/i);
     const operatorFilterKey = getUrlParamKey(parameters, /operator/i);
-    const destinationFilterKey = getUrlParamKey(parameters, /destination/i);
     const departuresFilterKey = getUrlParamKey(parameters, /departures/i);
 
     const lineFilter =
@@ -93,49 +85,29 @@ class Permalink extends PureComponent {
       routeFilterKey && getUrlParamVal(parameters[routeFilterKey]);
     const operatorFilter =
       operatorFilterKey && getUrlParamVal(parameters[operatorFilterKey]);
-    const destination =
-      destinationFilterKey && getUrlParamVal(parameters[destinationFilterKey]);
     const departures =
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
 
-    dispatchSetDestinationFilter(destination);
     dispatchSetDeparturesFilter(departures);
 
     this.setState({
       [lineFilterKey]: lineFilter,
       [routeFilterKey]: routeFilter,
       [operatorFilterKey]: operatorFilter,
-      [destinationFilterKey]: destination,
       [departuresFilterKey]: departures,
     });
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      activeTopic,
-      history,
-      destinationFilter,
-      departuresFilter,
-    } = this.props;
+    const { activeTopic, history, departuresFilter } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}`);
     }
 
-    if (destinationFilter !== prevProps.destinationFilter) {
-      this.updateDestination();
-    }
-
     if (departuresFilter !== prevProps.departuresFilter) {
       this.updateDepartures();
     }
-  }
-
-  updateDestination() {
-    const { destinationFilter } = this.props;
-    this.setState({
-      destination: destinationFilter,
-    });
   }
 
   updateDepartures() {
@@ -167,13 +139,11 @@ const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   map: state.app.map,
   layerService: state.app.layerService,
-  destinationFilter: state.app.destinationFilter,
 });
 
 const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetZoom: setZoom,
-  dispatchSetDestinationFilter: setDestinationFilter,
   dispatchSetDeparturesFilter: setDeparturesFilter,
 };
 

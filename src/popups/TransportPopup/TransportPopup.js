@@ -4,17 +4,16 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import { MdLoop } from 'react-icons/md';
 import { withTranslation } from 'react-i18next';
-import qs from 'querystring';
+import qs from 'query-string';
 
 import DestinationInput from './DestinationInput';
 import CONF from '../../config/appConfig';
 
-import {
-  setDestinationFilter,
-  setDeparturesFilter,
-} from '../../model/app/actions';
+import { setDeparturesFilter } from '../../model/app/actions';
 
 import './TransportPopup.scss';
+
+const DESTINATION_FILTER = 'destination';
 
 const propTypes = {
   uic: PropTypes.number.isRequired,
@@ -30,11 +29,7 @@ const propTypes = {
   // react-i18next
   t: PropTypes.func.isRequired,
 
-  // mapStateToProps
-  destinationFilter: PropTypes.string,
-
   // mapDispatchToProps
-  dispatchSetDestinationFilter: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
 };
 
@@ -42,7 +37,6 @@ const defaultProps = {
   platforms: null,
   icon: null,
   showTitle: false,
-  destinationFilter: undefined,
 };
 
 class TransportPopup extends Component {
@@ -68,12 +62,15 @@ class TransportPopup extends Component {
       platformName: 'abfahrtszeiten_kante',
     };
 
+    const parameters = qs.parse(window.location.search);
+    this.destinationFilter = parameters[DESTINATION_FILTER];
+
     this.loadInterval = null;
     this.mounted = false;
   }
 
   componentDidMount() {
-    const { destinationFilter, dispatchSetDeparturesFilter, uic } = this.props;
+    const { dispatchSetDeparturesFilter, uic } = this.props;
 
     this.mounted = true;
     this.loadDepartures();
@@ -81,7 +78,7 @@ class TransportPopup extends Component {
 
     dispatchSetDeparturesFilter(uic);
 
-    this.onDestinationSelect(destinationFilter);
+    this.onDestinationSelect(this.destinationFilter);
   }
 
   componentWillUnmount() {
@@ -93,9 +90,32 @@ class TransportPopup extends Component {
    * On selection of a destination in the input.
    */
   onDestinationSelect(selectedDestination) {
-    const { dispatchSetDestinationFilter } = this.props;
-    dispatchSetDestinationFilter(selectedDestination);
+    this.destinationFilter = selectedDestination;
+    this.updatePermalink();
     this.loadDepartures();
+  }
+
+  updatePermalink() {
+    const oldParams = qs.parse(window.location.search);
+    const parameters = {
+      ...oldParams,
+      ...{
+        [DESTINATION_FILTER]: this.destinationFilter,
+      },
+    };
+    const qStr = qs.stringify(parameters, { encode: false });
+    const search = qStr ? `?${qStr}` : '';
+    if (
+      (!qStr && window.location.search) ||
+      (qStr && search !== window.location.search)
+    ) {
+      const { hash } = window.location;
+      window.history.replaceState(
+        undefined,
+        undefined,
+        `${search}${hash || ''}`,
+      );
+    }
   }
 
   /**
@@ -103,7 +123,7 @@ class TransportPopup extends Component {
    * @param {string} destination Selected destination.
    */
   loadDepartures() {
-    const { platforms, uic, destinationFilter } = this.props;
+    const { platforms, uic } = this.props;
 
     const urlParams = {};
 
@@ -111,8 +131,8 @@ class TransportPopup extends Component {
       urlParams.platforms = `${platforms || ''}`;
     }
 
-    if (destinationFilter) {
-      urlParams.destination = `${destinationFilter}`;
+    if (this.destinationFilter) {
+      urlParams.destination = `${this.destinationFilter}`;
     }
 
     const url = `${CONF.departureUrl}/departures/${uic}?${qs.stringify(
@@ -152,15 +172,7 @@ class TransportPopup extends Component {
   }
 
   render() {
-    const {
-      platforms,
-      uic,
-      name,
-      icon,
-      destinationFilter,
-      showTitle,
-      t,
-    } = this.props;
+    const { platforms, uic, name, icon, showTitle, t } = this.props;
 
     const { departuresLoading, platformName } = this.state;
     let { departures } = this.state;
@@ -215,7 +227,7 @@ class TransportPopup extends Component {
 
         <DestinationInput
           platforms={platformsFormatted}
-          destination={destinationFilter}
+          destination={this.destinationFilter}
           onSelect={d => this.onDestinationSelect(d)}
           uic={uic}
         />
@@ -269,12 +281,7 @@ class TransportPopup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  destinationFilter: state.app.destinationFilter,
-});
-
 const mapDispatchToProps = {
-  dispatchSetDestinationFilter: setDestinationFilter,
   dispatchSetDeparturesFilter: setDeparturesFilter,
 };
 
@@ -284,7 +291,7 @@ TransportPopup.defaultProps = defaultProps;
 export default compose(
   withTranslation(),
   connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps,
   ),
 )(TransportPopup);

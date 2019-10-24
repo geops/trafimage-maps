@@ -12,7 +12,6 @@ import {
   SET_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
-  SET_DESTINATION_FILTER,
   SET_DEPARTURES_FILTER,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
@@ -33,7 +32,6 @@ const getInitialState = () => ({
     }),
   }),
   layerService: new LayerService(),
-  destinationFilter: '',
   searchService: new SearchService(layerHelper.highlightStyle),
 });
 
@@ -86,11 +84,6 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         dialogPosition: action.data,
-      };
-    case SET_DESTINATION_FILTER:
-      return {
-        ...state,
-        destinationFilter: action.data,
       };
     case SET_DEPARTURES_FILTER:
       return {

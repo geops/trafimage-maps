@@ -7,7 +7,6 @@ export const SET_MENU_OPEN = 'SET_MENU_OPEN';
 export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
 export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
-export const SET_DESTINATION_FILTER = 'SET_DESTINATION_FILTER';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 
 export const setTopics = data => ({ type: SET_TOPICS, data });
@@ -34,11 +33,6 @@ export const setSelectedForInfos = data => ({
 
 export const setDialogPosition = data => ({
   type: SET_DIALOG_POSITION,
-  data,
-});
-
-export const setDestinationFilter = data => ({
-  type: SET_DESTINATION_FILTER,
   data,
 });
 
