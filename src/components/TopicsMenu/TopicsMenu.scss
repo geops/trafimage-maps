@@ -1,7 +1,6 @@
-.wkp-menu {
+.wkp-topics-menu {
   border: 2px solid #666;
   max-height: 1000px;
-  margin-top: 5px;
   overflow: hidden;
 
   .wkp-menu-item {
@@ -13,41 +12,42 @@
     border-top: 1px solid #eee;
   }
 
-  .wkp-menu-title {
+  .wkp-topics-menu-title {
     display: flex;
     align-items: center;
   }
 
-  .wkp-menu-body {
+  .wkp-topics-menu-body {
     min-width: 250px;
     max-height: 1000px;
     overflow-y: auto;
     background: white;
-    padding: 5px 0;
+    padding: 10px 15px;
+    position: relative;
   }
 }
 
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-menu {
+  .wkp-topics-menu {
     border: 0;
 
     .wkp-menu-header {
       .wkp-menu-title {
         display: none;
-        border-top: 1px solid #eee;
       }
     }
 
-    .wkp-menu-body {
+    .wkp-topics-menu-body {
       padding: 0;
+      border-top: 1px solid #eee;
     }
   }
 
   // header component is enabled
   &.header {
-    .wkp-menu {
+    .wkp-topics-menu {
       margin-top: 0;
     }
   }

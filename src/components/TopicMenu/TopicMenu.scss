@@ -2,16 +2,14 @@
 
 .wkp-topic-menu {
   border-top-width: 0;
-  margin-top: 0;
 
-  .wkp-info-layer-bt,
   .wkp-info-topic-bt {
-    position: absolute !important;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    width: 27px;
-    height: 27px;
+    margin-right: 4px;
+  }
+
+  .wkp-info-layer-bt {
+    top: 0;
+    margin-right: 0;
   }
 
   .wkp-topic-menu-item-wrapper {
@@ -19,44 +17,43 @@
     align-items: center;
 
     .wkp-topic-menu-item {
-      margin: 1px;
-      padding: 0 15px;
       height: 30px;
       width: 100%;
       display: flex;
       align-items: center;
+      margin-right: 10px;
 
       .wkp-topic-title {
         display: flex;
       }
 
       .wkp-topic-radio {
-        width: 15px;
-        height: 15px;
-        margin-right: 7px;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid grey;
         border-radius: 50%;
+        margin-right: 7px;
 
         .wkp-topic-radio-dot {
-          width: 11px;
-          height: 11px;
-          margin: 2px;
+          width: 12px;
+          height: 12px;
           background: $brand-primary;
           border-radius: 50%;
         }
       }
 
       .wkp-layer-toggler {
-        margin-left: 10px;
-        margin-top: 3px;
         width: 5px;
         height: 5px;
         border-width: 1px 0 0 1px;
         border-style: solid;
         transform: rotate(45deg);
+        margin-left: 10px;
 
         &.collapsed {
-          margin-top: 0;
           transform: rotate(225deg);
         }
       }
@@ -64,7 +61,6 @@
 
     .wkp-info-topic-bt {
       color: #888;
-      margin-right: 22px;
       align-items: center;
 
       &.wkp-active {
@@ -79,17 +75,13 @@
 
   .wkp-layer-tree {
     overflow: hidden;
-    margin: 5px 10px 5px 30px;
+    margin: 0 0 0 20px;
 
     .tm-layer-tree-item {
       color: #888;
+      height: 30px;
       padding: 0;
-      margin-left: 5px;
-
-      .tm-layer-tree-toggle {
-        padding: 5px 6px;
-        margin: 1px 40px 1px 0;
-      }
+      margin: 0 4px 0 4px;
 
       .tm-layer-tree-arrow {
         border-color: #888;
@@ -110,9 +102,9 @@
     max-height: 1000px;
 
     select {
-      margin: 5px 35px 15px 35px;
-      height: 34px;
-      width: 285px;
+      margin: 0 20px 5px 23px;
+      height: 30px;
+      width: 307px;
       display: none;
     }
   }
@@ -121,22 +113,27 @@
 .tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-topic-content select {
-    display: block;
+  .wkp-topic-content {
+    border-bottom: 1px solid #eee;
+
+    select {
+      display: block;
+    }
+  }
+
+  .wkp-info-layer-bt {
+    margin-right: 10px;
+  }
+
+  .wkp-topic-menu-item-wrapper {
+    padding: 0 10px;
   }
 
   .wkp-topic-menu-item {
-    border-width: 1px 0 0 0;
-    border-color: #eee;
-    border-style: solid;
     height: 60px;
 
     &.active {
       border-bottom: 1px solid #eee;
-    }
-
-    .wkp-topic-title {
-      margin: 15px 0;
     }
   }
 }

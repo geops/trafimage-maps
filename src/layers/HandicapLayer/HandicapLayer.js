@@ -3,7 +3,7 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import WKT from 'ol/format/WKT';
-import { Style, RegularShape, Stroke, Fill } from 'ol/style';
+import { Style, RegularShape, Fill } from 'ol/style';
 import CONF from '../../config/appConfig';
 
 /**
@@ -13,6 +13,20 @@ import CONF from '../../config/appConfig';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
+  static getRectangleStyle(geometry, radius = 12, opacity = 1) {
+    return new Style({
+      geometry,
+      image: new RegularShape({
+        radius,
+        points: 4,
+        angle: Math.PI / 4,
+        fill: new Fill({
+          color: [237, 125, 49, opacity],
+        }),
+      }),
+    });
+  }
+
   constructor(options = {}) {
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
@@ -71,21 +85,13 @@ class HandicapLayer extends VectorLayer {
       return null;
     }
 
-    return new Style({
-      geometry,
-      image: new RegularShape({
-        radius: 12,
-        points: 4,
-        angle: Math.PI / 4,
-        fill: new Fill({
-          color: [237, 125, 49, feature === this.clickedFeature ? 1 : 0.5],
-        }),
-        stroke: new Stroke({
-          color: '#ed7d31',
-          width: 2,
-        }),
-      }),
-    });
+    const style = [HandicapLayer.getRectangleStyle(geometry)];
+
+    if (feature === this.clickedFeature) {
+      style.unshift(HandicapLayer.getRectangleStyle(geometry, 16, 0.5));
+    }
+
+    return style;
   }
 }
 

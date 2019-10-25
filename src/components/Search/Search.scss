@@ -45,11 +45,11 @@
     width: 100%;
     padding-top: 15px;
     max-height: calc(100vh - 150px);
-    overflow: scroll;
+    overflow: auto;
   }
 
   .react-autosuggest__section-title {
-    padding: 15px 15px 0;
+    padding: 5px 15px 0;
     border-top: 1px solid lightgray;
 
     .wkp-search-section-header {
