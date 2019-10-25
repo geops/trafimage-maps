@@ -21,15 +21,15 @@
   "sources": {
     "base": {
       "type": "vector",
-      "url": "https://maps.geops.io/data/base.json"
+      "url": "https://maps.geops.io/data/base.json?key=5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910"
     },
     "busses": {
       "type": "vector",
-      "url": "https://maps.geops.io/data/busses.json"
+      "url": "https://maps.geops.io/data/busses.json?key=5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910"
     }
   },
-  "sprite": "https://maps.geops.io/styles/trafimage_perimeter_v2/sprite",
-  "glyphs": "https://maps.geops.io/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://maps.geops.io/styles/trafimage_perimeter_v2/sprite?key=5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910",
+  "glyphs": "https://maps.geops.io/fonts/{fontstack}/{range}.pbf?key=5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910",
   "layers": [],
   "id": "naked"
 }
