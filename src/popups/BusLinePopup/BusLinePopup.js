@@ -17,7 +17,7 @@ const BusLinePopup = ({ feature }) => {
           return null;
         }
         return (
-          <div>
+          <div key={key}>
             <div>{key}</div>
             <div>{value}</div>
           </div>
