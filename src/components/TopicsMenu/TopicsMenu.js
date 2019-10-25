@@ -19,7 +19,9 @@ const defaultProps = {
 };
 
 function TopicsMenu({ children }) {
-  const { topics, menuOpen, layerService } = useSelector(state => state.app);
+  const layerService = useSelector(state => state.app.layerService);
+  const menuOpen = useSelector(state => state.app.menuOpen);
+  const topics = useSelector(state => state.app.topics);
   const dispatch = useDispatch();
 
   return (

@@ -52,33 +52,29 @@ function Search({ map, searchService }) {
             }
             getSuggestionValue={suggestion => searchService.value(suggestion)}
             renderSuggestion={suggestion => searchService.render(suggestion)}
-            renderSectionTitle={result => {
-              const count = searchService.countItems(result.section);
+            renderSectionTitle={({ section }) => {
+              const count = searchService.countItems(section);
               return (
-                <div
-                  onClick={() => searchService.toggleSection(result.section)}
-                  onKeyPress={() => searchService.toggleSection(result.section)}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <div className="wkp-search-section-header">
-                    {t(result.section)}
+                count > 0 && (
+                  <div
+                    onClick={() => searchService.toggleSection(section)}
+                    onKeyPress={() => searchService.toggleSection(section)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="wkp-search-section-header">
+                      {t(section)}
+                    </div>
+                    <div className="wkp-search-section-count">
+                      {t('insgesamt {{ count }} Ergebnisse', { count })}
+                      {searchService.sectionCollapsed(section) ? (
+                        <FaChevronCircleDown />
+                      ) : (
+                        <FaChevronCircleUp />
+                      )}
+                    </div>
                   </div>
-                  <div className="wkp-search-section-count">
-                    {count > 0 ? (
-                      <>
-                        {t('insgesamt {{ count }} Ergebnisse', { count })}
-                        {searchService.sectionCollapsed(result.section) ? (
-                          <FaChevronCircleDown />
-                        ) : (
-                          <FaChevronCircleUp />
-                        )}
-                      </>
-                    ) : (
-                      t('keine Ergebnisse')
-                    )}
-                  </div>
-                </div>
+                )
               );
             }}
             getSectionSuggestions={result =>
