@@ -21,15 +21,15 @@
   "sources": {
     "base": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/base.json"
+      "url": "https://maps.geops.io/data/base.json"
     },
     "busses": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/busses.json"
+      "url": "https://maps.geops.io/data/busses.json"
     }
   },
-  "sprite": "https://maps.style-dev.geops.io/styles/trafimage_perimeter_v2/sprite",
-  "glyphs": "https://maps.style-dev.geops.io/fonts/{fontstack}/{range}.pbf",
+  "sprite": "https://maps.geops.io/styles/trafimage_perimeter_v2/sprite",
+  "glyphs": "https://maps.geops.io/fonts/{fontstack}/{range}.pbf",
   "layers": [],
   "id": "naked"
 }
