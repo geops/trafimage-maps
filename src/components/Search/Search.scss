@@ -48,10 +48,6 @@
     overflow: auto;
   }
 
-  .react-autosuggest__section-container {
-    padding-bottom: 15px;
-  }
-
   .react-autosuggest__section-title {
     padding: 5px 15px 0;
     border-top: 1px solid lightgray;
@@ -102,6 +98,10 @@
 
     :hover {
       cursor: pointer;
+    }
+
+    :last-child {
+      margin-bottom: 15px;
     }
   }
 }
