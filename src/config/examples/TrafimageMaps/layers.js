@@ -281,8 +281,8 @@ bahnhofplaene.setChildren([
       source: 'base',
       'source-layer': 'netzkarte_point',
       layout: {
-        'icon-image': 'marker_11',
-        'icon-size': 3,
+        'icon-image': 'standort',
+        'icon-size': 1,
       },
     },
     properties: {
@@ -302,8 +302,8 @@ bahnhofplaene.setChildren([
       'source-layer': 'netzkarte_point',
       filter: ['has', 'url_interactive_plan'],
       layout: {
-        'icon-image': 'marker_11',
-        'icon-size': 3,
+        'icon-image': 'standort',
+        'icon-size': 1,
       },
     },
     properties: {
