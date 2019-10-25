@@ -281,6 +281,7 @@ class TrafimageMaps extends React.Component {
               initialCenter={center}
               initialZoom={zoom}
               projection={projection}
+              popupComponents={popupComponents}
             />
             {appElements}
             {children}
@@ -295,4 +296,4 @@ class TrafimageMaps extends React.Component {
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default TrafimageMaps;
+export default React.memo(TrafimageMaps);
