@@ -4,6 +4,7 @@ import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import WKT from 'ol/format/WKT';
 import { Style, RegularShape, Fill } from 'ol/style';
+import LayerHelper from '../layerHelper';
 import CONF from '../../config/appConfig';
 
 /**
@@ -73,15 +74,16 @@ class HandicapLayer extends VectorLayer {
     let geometry = feature.getGeometry();
     let gen = 100;
     gen = resolution < 500 ? 30 : gen;
-    gen = resolution < 100 ? 10 : gen;
-    gen = resolution < 200 ? null : gen;
+    gen = resolution < 200 ? 10 : gen;
+    gen = resolution < 100 ? null : gen;
 
     if (gen) {
       const wkt = (feature.get('generalizations') || {})[`geom_gen${gen}`];
       geometry = wkt ? this.wktFormat.readGeometry(wkt.split(';')[1]) : null;
     }
 
-    if (!geometry || feature.get('visibility') < resolution * 10) {
+    const minVisibility = LayerHelper.getDataResolution(resolution) * 10;
+    if (!geometry || feature.get('visibility') < minVisibility) {
       return null;
     }
 
