@@ -163,7 +163,7 @@ const defaultProps = {
   subMenus: null,
 };
 
-class TrafimageMaps extends React.Component {
+class TrafimageMaps extends React.PureComponent {
   static getComponents(dfltComponents, elementsToDisplay) {
     return Object.entries(dfltComponents).map(([k, v]) =>
       elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
@@ -296,4 +296,4 @@ class TrafimageMaps extends React.Component {
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default React.memo(TrafimageMaps);
+export default TrafimageMaps;
