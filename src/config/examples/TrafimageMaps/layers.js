@@ -68,7 +68,6 @@ export const netzkarteLayer = new MapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  // url: `/styles/trafimage_perimetererweiterung_v2.json?key=${CONF.vectorTilesKey}`,
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
     `?key=${CONF.vectorTilesKey}`,
@@ -83,7 +82,9 @@ export const sourcesLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
   preserveDrawingBuffer: true,
-  url: `/styles/ch.sbb.netzkarte.sources.json?key=${CONF.vectorTilesKey}`,
+  url:
+    `${CONF.vectorTilesUrl}/styles/trafimage_sources_only/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
   properties: {
     hideInLegend: true,
   },
