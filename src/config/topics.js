@@ -19,7 +19,7 @@ const defaultElements = {
   mapControls: true,
   baseLayerToggler: true,
   popup: false,
-  search: false,
+  search: true,
 };
 
 export const netzkarte = {
