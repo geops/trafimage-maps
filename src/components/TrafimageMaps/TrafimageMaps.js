@@ -151,6 +151,7 @@ const defaultProps = {
     shareMenu: false,
     trackerMenu: false,
     featureMenu: false,
+    search: false,
   },
   baseLayers: null,
   popupComponents: {},
