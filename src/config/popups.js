@@ -8,4 +8,5 @@ export default {
   'ch.sbb.nichtstuetzpunktbahnhoefe': 'HandicapPopup',
   'ch.sbb.parks': 'ParksPopup',
   'ch.sbb.stuetzpunktbahnhoefe': 'HandicapPopup',
+  'ch.sbb.transport': 'TransportPopup',
 };

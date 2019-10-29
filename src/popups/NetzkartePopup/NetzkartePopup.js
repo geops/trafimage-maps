@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import { transform as transformCoords } from 'ol/proj';
 import BahnhofplanPopup from '../BahnhofplanPopup';
+import { setClickedFeatureInfo } from '../../model/app/actions';
 
 import './NetzkartePopup.scss';
 
@@ -19,6 +20,9 @@ const propTypes = {
     value: PropTypes.string,
   }).isRequired,
   t: PropTypes.func.isRequired,
+
+  // mapDispatchToProps
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
 class NetzkartePopup extends PureComponent {
@@ -27,12 +31,25 @@ class NetzkartePopup extends PureComponent {
     this.state = {
       showPlanLinks: false,
       showCoordinates: false,
+      showDepartures: true, // TODO
     };
+  }
+
+  openTransportPopup() {
+    const { dispatchSetClickedFeatureInfo, feature } = this.props;
+    // TODO dispatchSetFeatureIndex(0);
+    dispatchSetClickedFeatureInfo([
+      {
+        coordinate: feature.getGeometry().getCoordinates()[0],
+        features: [feature],
+        layer: { getKey: () => 'ch.sbb.transport' },
+      },
+    ]);
   }
 
   render() {
     const { feature, projection, language, t } = this.props;
-    const { showPlanLinks, showCoordinates } = this.state;
+    const { showPlanLinks, showCoordinates, showDepartures } = this.state;
 
     const isAirport = feature.get('layer').indexOf('flug') > 0;
 
@@ -60,9 +77,25 @@ class NetzkartePopup extends PureComponent {
 
     let airportLabel;
     let stationTimetableLink;
+    let transportLink;
     let stationServiceLink;
     let handicapLink;
     let shoppingLink;
+
+    if (showDepartures) {
+      transportLink = (
+        <div>
+          <div
+            tabIndex={0}
+            role="button"
+            onClick={() => this.openTransportPopup()}
+            onKeyPress={() => this.openTransportPopup()}
+          >
+            {t('Abfahrtszeiten')}
+          </div>
+        </div>
+      );
+    }
 
     if (isAirport) {
       airportLabel = <div>{t(layer)}</div>;
@@ -174,6 +207,7 @@ class NetzkartePopup extends PureComponent {
           </>
         ) : null}
         {stationTimetableLink}
+        {transportLink}
         {stationServiceLink}
         {shoppingLink}
         {handicapLink}
@@ -188,9 +222,16 @@ const mapStateToProps = state => ({
   projection: state.app.projection,
 });
 
+const mapDispatchToProps = {
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+};
+
 NetzkartePopup.propTypes = propTypes;
 
 export default compose(
   withTranslation(),
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(NetzkartePopup);

@@ -21,6 +21,10 @@ const FeatureInformation = ({ clickedFeatureInfo, popupComponents }) => {
     setFeatureIndex(0);
   }, [clickedFeatureInfo]);
 
+  if (!feature) {
+    return null;
+  }
+
   // Styleguidist try to load every file in the folder if we don't put index.js
   const PopupComponent = React.lazy(() =>
     import(`../../popups/${popupComponents[info.layer.getKey()]}/index.js`),
