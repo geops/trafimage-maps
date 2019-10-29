@@ -29,9 +29,7 @@ module.exports = {
       sections: [
         {
           name: 'Component',
-          components: [
-            'src/components/TrafimageMaps/[A-Z]*.js',
-          ],
+          components: ['src/components/TrafimageMaps/[A-Z]*.js'],
           exampleMode: 'collapse',
           usageMode: 'collapse',
         },
@@ -46,9 +44,8 @@ module.exports = {
               name: 'Casa Map',
               content: 'src/apps/Casa/README.md',
             },
-          ]
-        }
-
+          ],
+        },
       ],
     },
   ],
@@ -76,22 +73,26 @@ module.exports = {
           use: ['style-loader', 'css-loader', 'sass-loader?modules'],
         },
         {
-          test: /^((?!url).)*\.svg$/,
+          test: /\.svg$/,
           use: [
             {
-              loader: 'babel-loader',
-            },
-            {
-              loader: 'react-svg-loader',
+              loader: require.resolve('babel-loader'),
               options: {
-                jsx: true, // true outputs JSX tags
+                // @remove-on-eject-begin
+                babelrc: false,
+                presets: [require.resolve('babel-preset-react-app')],
+                // @remove-on-eject-end
+                cacheDirectory: true,
+              },
+            },
+            require.resolve('@svgr/webpack'),
+            {
+              loader: require.resolve('file-loader'),
+              options: {
+                name: 'static/media/[name].[hash:8].[ext]',
               },
             },
           ],
-        },
-        {
-          test: /\.url\.svg$/,
-          loader: 'url-loader',
         },
         {
           test: /\.png$/,
