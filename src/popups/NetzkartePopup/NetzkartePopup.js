@@ -37,7 +37,6 @@ class NetzkartePopup extends PureComponent {
 
   openTransportPopup() {
     const { dispatchSetClickedFeatureInfo, feature } = this.props;
-    // TODO dispatchSetFeatureIndex(0);
     dispatchSetClickedFeatureInfo([
       {
         coordinate: feature.getGeometry().getCoordinates()[0],

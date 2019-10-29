@@ -29,8 +29,6 @@ const propTypes = {
   // react-i18next
   t: PropTypes.func.isRequired,
 
-  // TODO Eva Permalink und State wie im Pünktlichkeitslayer für destination nur hier
-
   // mapDispatchToProps
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
 };
