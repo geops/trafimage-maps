@@ -84,20 +84,18 @@ function Search({ map, searchService }) {
             }
             inputProps={{
               autoFocus: true,
+              tabIndex: 0,
+              'aria-label': 'Suche',
               onChange: (e, { newValue }) => setValue(newValue),
               placeholder: searchService.getPlaceholder(t),
               value,
             }}
           />
-          <button
-            type="button"
-            className="wkp-search-button wkp-search-button-submit"
-          >
-            <FaSearch />
-          </button>
           {value && (
             <button
               type="button"
+              tabIndex={0}
+              aria-label={t('Suchtext löschen')}
               className="wkp-search-button wkp-search-button-clear"
               onClick={() => {
                 setValue('');
@@ -107,6 +105,14 @@ function Search({ map, searchService }) {
               <FaTimes />
             </button>
           )}
+          <button
+            type="button"
+            tabIndex={0}
+            aria-label={t('Suche')}
+            className="wkp-search-button wkp-search-button-submit"
+          >
+            <FaSearch />
+          </button>
         </SearchToggle>
       </div>
     )
