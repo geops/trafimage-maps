@@ -278,6 +278,7 @@ exports[`AppRouter should match snapshot 1`] = `
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={0}
+                              title="Layer anzeigen"
                             >
                               <input
                                 checked={false}
@@ -349,6 +350,7 @@ exports[`AppRouter should match snapshot 1`] = `
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Layer anzeigen"
                             >
                               <input
                                 checked={false}
@@ -417,6 +419,7 @@ exports[`AppRouter should match snapshot 1`] = `
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Layer anzeigen"
                             >
                               <input
                                 checked={false}
@@ -485,6 +488,7 @@ exports[`AppRouter should match snapshot 1`] = `
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={0}
+                              title="Layer anzeigen"
                             >
                               <input
                                 checked={false}
@@ -556,6 +560,7 @@ exports[`AppRouter should match snapshot 1`] = `
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Layer anzeigen"
                             >
                               <input
                                 checked={false}
@@ -624,6 +629,7 @@ exports[`AppRouter should match snapshot 1`] = `
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Layer anzeigen"
                             >
                               <input
                                 checked={false}
@@ -1061,7 +1067,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         rel="noopener noreferrer"
                         tabIndex="0"
                         target="_blank"
-                        title="Per Email teilen."
+                        title="Per Email versenden"
                       >
                         <svg
                           fill="currentColor"
@@ -1128,7 +1134,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         rel="noopener noreferrer"
                         tabIndex="0"
                         target="_blank"
-                        title="Auf Facebook teilen."
+                        title="Auf Facebook teilen"
                       >
                         <svg
                           baseProfile="tiny"
@@ -1161,7 +1167,7 @@ exports[`AppRouter should match snapshot 1`] = `
                         rel="noopener noreferrer"
                         tabIndex="0"
                         target="_blank"
-                        title="Twittern."
+                        title="Auf Twitter teilen"
                       >
                         <svg
                           baseProfile="tiny"
