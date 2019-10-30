@@ -24,7 +24,10 @@
         width: 40%;
         font-weight: bold;
         vertical-align: top;
-        padding-right: 20px;
+        padding-right: 5px;
+        min-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .wkp-handicap-popup-field-body {
@@ -39,7 +42,7 @@
   &.tm-w-s,
   &.tm-w-xs {
     .wkp-handicap-popup-body {
-      min-width: 100px;
+      min-width: 320px;
     }
   }
 }
