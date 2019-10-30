@@ -7159,10 +7159,10 @@ i18next-browser-languagedetector@^4.0.0:
   dependencies:
     "@babel/runtime" "^7.5.5"
 
-i18next-xhr-backend@^3.1.2:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-3.2.0.tgz#f2ac0792c38ca8ee653fab723fc9dcc7b0ff4d71"
-  integrity sha512-WKxC7YWqMT5CNwmnuSbFqb3pXZyDglIONO8qC8HBmP1OaT4GHc1Ox4JX42G27RQjzKK2px3ynwW9Z35LR9RoQg==
+i18next-xhr-backend@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-3.2.1.tgz#ee7dcd9137d86ecc3d737d14e4b57dd0222f52b3"
+  integrity sha512-aep1Xjl9g7VIJTAcyikEnNIEXgvSU6aXx//Ld0SC0qGMji8n2hCkjghYaoL8uZh3LCu5kLd/sMdpc2yXWPpowg==
   dependencies:
     "@babel/runtime" "^7.5.5"
 
