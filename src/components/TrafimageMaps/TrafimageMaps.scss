@@ -8,6 +8,23 @@ body {
   margin: 0;
 }
 
+.tm-barrier-free {
+  *:focus {
+    outline-width: 3px;
+    outline-style: solid;
+    outline-offset: 1px;
+    outline-color: #3f83d1;
+  }
+
+  .wkp-menu-header:focus {
+    outline-offset: -2px;
+  }
+
+  &.tm-no-focus *:focus {
+    outline: none;
+  }
+}
+
 .tm-app {
   height: 100%;
   width: 100%;

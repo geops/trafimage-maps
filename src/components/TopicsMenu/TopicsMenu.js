@@ -19,17 +19,19 @@ const defaultProps = {
 };
 
 function TopicsMenu({ children }) {
-  const { topics, menuOpen, layerService } = useSelector(state => state.app);
+  const layerService = useSelector(state => state.app.layerService);
+  const menuOpen = useSelector(state => state.app.menuOpen);
+  const topics = useSelector(state => state.app.topics);
   const dispatch = useDispatch();
 
   return (
-    <div className="wkp-menu">
+    <div className="wkp-topics-menu">
       <TopicsMenuHeader
         isOpen={menuOpen}
         onToggle={() => dispatch(setMenuOpen(!menuOpen))}
       />
       <Collapsible isCollapsed={!menuOpen}>
-        <div className="wkp-menu-body">
+        <div className="wkp-topics-menu-body">
           {topics.map(topic => (
             <TopicMenu
               key={topic.key}

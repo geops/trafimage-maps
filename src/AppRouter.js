@@ -31,6 +31,10 @@ const AppRouter = () => (
             if (element === 'spyLayer') {
               elements.baseLayerToggler = false;
             }
+            // Backward compatibility
+            if (element === 'header') {
+              elements.search = false;
+            }
             elements[element] = false;
           });
         }

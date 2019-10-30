@@ -4,6 +4,8 @@ import { FaShareAlt } from 'react-icons/fa';
 import Share from '../../components/Share';
 import MenuItem from '../../components/Menu/MenuItem';
 
+import './ShareMenu.scss';
+
 const ShareMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();

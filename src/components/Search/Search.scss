@@ -6,8 +6,6 @@
   z-index: 2;
   right: 220px;
   left: 400px;
-  max-width: 400px;
-  margin: 0 auto;
 
   .wkp-search-button {
     border: none;
@@ -45,15 +43,11 @@
     width: 100%;
     padding-top: 15px;
     max-height: calc(100vh - 150px);
-    overflow: scroll;
-  }
-
-  .react-autosuggest__section-container {
-    padding-bottom: 15px;
+    overflow: auto;
   }
 
   .react-autosuggest__section-title {
-    padding: 15px 15px 0;
+    padding: 10px 15px 0;
     border-top: 1px solid lightgray;
 
     .wkp-search-section-header {
@@ -102,6 +96,10 @@
 
     :hover {
       cursor: pointer;
+    }
+
+    :last-child {
+      margin-bottom: 15px;
     }
   }
 }

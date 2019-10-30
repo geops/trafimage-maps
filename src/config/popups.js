@@ -1,12 +1,11 @@
-export const wkpPopups = {
-  'ch.sbb.bahnhofplaene.printprodukte': 'BahnhofplanPopup',
-  'ch.sbb.bahnhofplaene.interaktiv': 'BahnhofplanPopup',
+export default {
   'ch.sbb.bahnhoffrequenzen': 'PassagierFrequenzenPopup',
-  'ch.sbb.netzkarte.stationen': 'NetzkartePopup',
+  'ch.sbb.bahnhofplaene.interaktiv': 'BahnhofplanPopup',
+  'ch.sbb.bahnhofplaene.printprodukte': 'BahnhofplanPopup',
+  'ch.sbb.netzkarte.buslinien': 'BusLinePopup',
   'ch.sbb.netzkarte.flughafen': 'NetzkartePopup',
-  'ch.sbb.parks': 'ParksPopup',
+  'ch.sbb.netzkarte.stationen': 'NetzkartePopup',
   'ch.sbb.nichtstuetzpunktbahnhoefe': 'HandicapPopup',
+  'ch.sbb.parks': 'ParksPopup',
   'ch.sbb.stuetzpunktbahnhoefe': 'HandicapPopup',
 };
-
-export default wkpPopups;

@@ -9,9 +9,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
-import PassagierfrequenzenLayer from '../layers/PassagierfrequenzenLayer';
-import BahnhofplanLayer from '../layers/BahnhofplanLayer';
-import NetzkartePointLayer from '../layers/NetzkartePointLayer';
+import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import HandicapLayer from '../layers/HandicapLayer';
 import CONF from './appConfig';
 
@@ -65,13 +63,32 @@ export const netzkarteLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
+  isQueryable: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  // url: `/styles/trafimage_perimetererweiterung_v2.json?key=${CONF.vectorTilesKey}`,
   url:
     `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
     `?key=${CONF.vectorTilesKey}`,
+});
+
+/**
+ * This layer create a MapboxLayer used by all the MapboxStyleLayer.
+ * Its style file contains only source where to find datas.
+ * The style of features are  defined by each MapboxStyleLayer ('netzkarte_point, buslinien,...)
+ */
+export const sourcesLayer = new MapboxLayer({
+  name: 'ch.sbb.netzkarte.sources',
+  zIndex: 1,
+  preserveDrawingBuffer: true,
+  url:
+    `${CONF.vectorTilesUrl}/styles/trafimage_sources_only/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
+  properties: {
+    hideInLegend: true,
+  },
 });
 
 export const netzkarteLayerLight = new MapboxLayer({
@@ -86,6 +103,7 @@ export const netzkarteLayerLight = new MapboxLayer({
     `${CONF.vectorTilesUrl}/styles/evoq_sandbox2/style.json` +
     `?key=${CONF.vectorTilesKey}`,
 });
+
 export const netzkarteLayerNight = new MapboxLayer({
   name: 'ch.sbb.netzkarte.night',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
@@ -207,8 +225,41 @@ export const swisstopoLandeskarteGrau = new Layer({
   }),
 });
 
-export const passagierfrequenzen = new PassagierfrequenzenLayer({
+export const passagierfrequenzen = new MapboxStyleLayer({
+  name: 'ch.sbb.bahnhoffrequenzen',
   visible: false,
+  mapboxLayer: sourcesLayer,
+  styleLayer: {
+    id: 'passagierfrequenzen',
+    type: 'circle',
+    source: 'base',
+    'source-layer': 'netzkarte_point',
+    filter: ['has', 'dwv'],
+    paint: {
+      'circle-radius': [
+        'interpolate',
+        ['linear'],
+        ['get', 'dwv'],
+        400,
+        8,
+        500000,
+        70,
+      ],
+      'circle-color': 'rgb(255,220,0)',
+      'circle-stroke-width': 2,
+      'circle-stroke-color': 'rgb(255,220,0)',
+      'circle-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        1,
+        0.7,
+      ],
+    },
+  },
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.bahnhoffrequenzen-desc',
+  },
 });
 
 export const bahnhofplaene = new Layer({
@@ -221,18 +272,42 @@ export const bahnhofplaene = new Layer({
 });
 
 bahnhofplaene.setChildren([
-  new BahnhofplanLayer({
+  new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.printprodukte',
+    radioGroup: 'bahnhofplaene',
     visible: false,
-    showPrintFeatures: true,
+    mapboxLayer: sourcesLayer,
+    styleLayer: {
+      id: 'printprodukte',
+      type: 'symbol',
+      source: 'base',
+      'source-layer': 'netzkarte_point',
+      layout: {
+        'icon-image': 'standort',
+        'icon-size': 1,
+      },
+    },
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
     },
   }),
-  new BahnhofplanLayer({
+  new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.interaktiv',
+    radioGroup: 'bahnhofplaene',
     visible: false,
+    mapboxLayer: sourcesLayer,
+    styleLayer: {
+      id: 'interaktiv',
+      type: 'symbol',
+      source: 'base',
+      'source-layer': 'netzkarte_point',
+      filter: ['has', 'url_interactive_plan'],
+      layout: {
+        'icon-image': 'standort',
+        'icon-size': 1,
+      },
+    },
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
@@ -288,39 +363,55 @@ punctuality.setChildren([
   }),
 ]);
 
-export const netzkartePointLayer = new Layer({
-  name: 'Stationen',
+/* export const netzkartePointLayer = new NetzkartePointMapboxStyleLayer({
   key: 'ch.sbb.netzkarte.stationen',
+  mapboxLayer: netzkarteLayer,
+  visible: false,
+  filter: styleLayer => {
+    return styleLayer.id === 'netzkarte_point';
+  }
+}); */
+
+export const netzkartePointLayer = new MapboxStyleLayer({
+  key: 'ch.sbb.netzkarte.stationen',
+  visible: true,
+  mapboxLayer: sourcesLayer,
+  styleLayer: {
+    id: 'netzkarte_point',
+    type: 'circle',
+    source: 'base',
+    'source-layer': 'netzkarte_point',
+    paint: {
+      'circle-radius': 10,
+      'circle-color': 'rgb(0, 61, 155)',
+      'circle-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        0.5,
+        0,
+      ],
+    },
+  },
   properties: {
     hideInLegend: true,
   },
 });
 
-netzkartePointLayer.setChildren([
-  new NetzkartePointLayer({ useBboxStrategy: true }),
-  new NetzkartePointLayer({ showAirports: true }),
-]);
-
-export const buslines = new Layer({
+export const buslines = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.buslinien',
+  mapboxLayer: sourcesLayer,
   visible: false,
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_buslines_webmercator` +
-        '/webmercator/{TileMatrix}/{TileCol}/{TileRow}.png',
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      crossOrigin: 'anonymous',
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-    maxResolution: 20,
-  }),
+  styleLayer: {
+    id: 'bus',
+    type: 'line',
+    source: 'busline',
+    'source-layer': 'busses',
+    paint: {
+      'line-color': 'rgba(255, 220, 0, 1)',
+      'line-width': 3,
+      'line-opacity': 1,
+    },
+  },
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.buslinien-desc',
@@ -385,9 +476,10 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
 });
 
 export default [
+  sourcesLayer,
   netzkarteLayer,
-  netzkarteLayerLight,
-  netzkarteLayerNight,
+  // netzkarteLayerLight,
+  // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   aerial,

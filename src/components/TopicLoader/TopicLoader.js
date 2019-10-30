@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import Map from 'ol/Map';
 import { unByKey } from 'ol/Observable';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
@@ -23,14 +22,13 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   searchService: PropTypes.instanceOf(SearchService).isRequired,
-  map: PropTypes.instanceOf(Map).isRequired,
   apiKey: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -68,20 +66,7 @@ class TopicLoader extends Component {
   }
 
   componentDidMount() {
-    const { dispatchSetClickedFeatureInfo, layerService, map } = this.props;
     this.updateLayers(this.topic.layers);
-
-    this.singleclickKey = map.on('singleclick', e => {
-      const infoPromises = layerService
-        .getLayersAsFlatArray()
-        .filter(l => l.getVisible())
-        .map(l => l.getFeatureInfoAtCoordinate(e.coordinate));
-
-      Promise.all(infoPromises).then(featureInfos => {
-        const infos = featureInfos.filter(i => i && i.features.length);
-        dispatchSetClickedFeatureInfo(infos);
-      });
-    });
   }
 
   componentDidUpdate(prevProps) {
@@ -146,9 +131,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
 TopicLoader.propTypes = propTypes;
