@@ -1,4 +1,4 @@
-import qs from 'querystring';
+import qs from 'query-string';
 import WMTSSource from 'ol/source/WMTS';
 import Layer from 'react-spatial/layers/Layer';
 
