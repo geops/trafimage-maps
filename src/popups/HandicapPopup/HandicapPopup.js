@@ -46,44 +46,74 @@ function HandicapPopup({ feature }) {
   });
 
   const equipmentStr = equipment.length ? (
-    <div className="wkp-handicap-popup-element">
-      <u>Ausstattung</u>
-      <br />
-      {equipment.join(', ')}
-    </div>
+    <div className="wkp-handicap-popup-element">{equipment.join(', ')}</div>
   ) : null;
+
+  const elementsList = [
+    {
+      label: 'Treffpunkt',
+      element: (
+        <PopupElement
+          properties={properties}
+          propertyName={`treffpunkt_${language}`}
+        />
+      ),
+    },
+    {
+      label: 'Voranmeldefrist',
+      element: (
+        <PopupElement
+          properties={properties}
+          propertyName={`voranmeldefrist_${language}`}
+        />
+      ),
+    },
+    {
+      label: 'Bedienungszeiten',
+      element: (
+        <PopupElement
+          properties={properties}
+          propertyName={`bedienungszeiten_${language}`}
+        />
+      ),
+    },
+    {
+      label: 'Ausstattung',
+      element: equipmentStr,
+    },
+    {
+      label: 'Dienstleistungen Dritter',
+      element: (
+        <PopupElement
+          properties={properties}
+          propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
+        />
+      ),
+    },
+    {
+      label: 'Zusätzliche Informationen',
+      element: (
+        <PopupElement
+          properties={properties}
+          propertyName={`zusaetzliche_informationen_${language}`}
+        />
+      ),
+    },
+  ];
 
   return (
     <div className="wkp-handicap-popup">
-      <div style={{ fontWeight: 'bold', marginBottom: 10 }}>
+      <div className="wkp-handicap-popup-title">
         {feature.get('stationsbezeichnung')}
       </div>
-      <PopupElement
-        properties={properties}
-        propertyName={`treffpunkt_${language}`}
-        label="Treffpunkt"
-      />
-      <PopupElement
-        properties={properties}
-        propertyName={`voranmeldefrist_${language}`}
-        label="Voranmeldefrist"
-      />
-      <PopupElement
-        properties={properties}
-        propertyName={`bedienungszeiten_${language}`}
-        label="Bedienungszeiten"
-      />
-      {equipmentStr}
-      <PopupElement
-        label="Dienstleistungen Dritter"
-        properties={properties}
-        propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
-      />
-      <PopupElement
-        label="Zusätzliche Informationen"
-        properties={properties}
-        propertyName={`zusaetzliche_informationen_${language}`}
-      />
+      <table>
+        {elementsList.map(field => (
+          <tr>
+            <td className="wkp-handicap-popup-field-title">{field.label}</td>
+            <td>{field.element}</td>
+          </tr>
+        ))}
+      </table>
     </div>
   );
 }

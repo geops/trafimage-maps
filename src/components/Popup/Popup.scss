@@ -6,6 +6,12 @@
     -o-animation: fadein 0.5s; /* Opera < 12.1 */
     animation: fadein 0.5s;
   }
+
+  .tm-popup-close-bt {
+    height: 40px !important;
+    width: 40px !important;
+    z-index: 999;
+  }
 }
 
 @keyframes fadein {

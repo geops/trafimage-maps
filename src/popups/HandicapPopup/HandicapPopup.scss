@@ -1,10 +1,37 @@
 .wkp-handicap-popup {
   .wkp-handicap-popup-title {
+    background-color: #f5f5f5;
     font-weight: bold;
-    margin: 10px 0 5px 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 25px;
+    padding: 10px 20px;
+    align-items: center;
+    display: flex;
   }
 
-  .wkp-handicap-popup-element {
-    margin-bottom: 5px;
+  table {
+    padding-top: 40px;
+    min-width: 450px;
+
+    td {
+      padding-bottom: 10px;
+    }
+  }
+
+  .wkp-handicap-popup-field-title {
+    font-weight: bold;
+    vertical-align: top;
+    padding-right: 20px;
+  }
+}
+
+.tm-w-m,
+.tm-w-s,
+.tm-w-xs {
+  table {
+    min-width: 100px;
   }
 }
