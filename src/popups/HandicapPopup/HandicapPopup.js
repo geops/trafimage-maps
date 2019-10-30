@@ -52,30 +52,15 @@ function HandicapPopup({ feature }) {
   const elementsList = [
     {
       label: 'Treffpunkt',
-      element: (
-        <PopupElement
-          properties={properties}
-          propertyName={`treffpunkt_${language}`}
-        />
-      ),
+      propertyName: `treffpunkt_${language}`,
     },
     {
       label: 'Voranmeldefrist',
-      element: (
-        <PopupElement
-          properties={properties}
-          propertyName={`voranmeldefrist_${language}`}
-        />
-      ),
+      propertyName: `voranmeldefrist_${language}`,
     },
     {
       label: 'Bedienungszeiten',
-      element: (
-        <PopupElement
-          properties={properties}
-          propertyName={`bedienungszeiten_${language}`}
-        />
-      ),
+      propertyName: `bedienungszeiten_${language}`,
     },
     {
       label: 'Ausstattung',
@@ -83,21 +68,11 @@ function HandicapPopup({ feature }) {
     },
     {
       label: 'Dienstleistungen Dritter',
-      element: (
-        <PopupElement
-          properties={properties}
-          propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
-        />
-      ),
+      propertyName: `beschreibung_zur_dritte_dienstleistung_${language}`,
     },
     {
       label: 'Zusätzliche Informationen',
-      element: (
-        <PopupElement
-          properties={properties}
-          propertyName={`zusaetzliche_informationen_${language}`}
-        />
-      ),
+      propertyName: `zusaetzliche_informationen_{language}`,
     },
   ];
 
@@ -107,12 +82,31 @@ function HandicapPopup({ feature }) {
         {feature.get('stationsbezeichnung')}
       </div>
       <table>
-        {elementsList.map(field => (
-          <tr>
-            <td className="wkp-handicap-popup-field-title">{field.label}</td>
-            <td>{field.element}</td>
-          </tr>
-        ))}
+        <tbody>
+          {elementsList.map(field => {
+            if (!properties[field.propertyName] && !field.element) {
+              return null;
+            }
+            return (
+              <tr>
+                <td className="wkp-handicap-popup-field-title">
+                  {field.label}
+                </td>
+                <td>
+                  {field.element || (
+                    <PopupElement
+                      properties={properties}
+                      propertyName={field.propertyName.replace(
+                        `{language}`,
+                        language,
+                      )}
+                    />
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
       </table>
     </div>
   );
