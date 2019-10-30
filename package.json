@@ -23,7 +23,7 @@
     "react-autosuggest": "^9.4.3",
     "react-dom": "^16.10.2",
     "react-i18next": "^10.13.1",
-    "react-icons": "^3.1.0",
+    "react-icons": "^3.8.0",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.1.2",
     "react-router-prop-types": "^1.0.4",
