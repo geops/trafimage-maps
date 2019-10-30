@@ -1,5 +1,12 @@
 @import '../../Globals.scss';
 
+.wkp-search-toggle-container,
+.wkp-search-toggle-container--open {
+  max-width: 400px;
+  position: relative;
+  margin: 0 auto;
+}
+
 .wkp-search-toggle-button {
   display: none;
   background: none;
@@ -7,6 +14,7 @@
   position: absolute;
   top: 10px;
   right: 190px;
+  width: 41px;
 
   svg {
     height: 25px;
@@ -29,5 +37,6 @@
   .wkp-search-toggle-button,
   .wkp-search-toggle-container--open {
     display: block;
+    margin-right: 0;
   }
 }
