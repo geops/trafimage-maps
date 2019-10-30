@@ -6,8 +6,6 @@
   z-index: 2;
   right: 220px;
   left: 400px;
-  max-width: 400px;
-  margin: 0 auto;
 
   .wkp-search-button {
     border: none;
@@ -49,7 +47,7 @@
   }
 
   .react-autosuggest__section-title {
-    padding: 5px 15px 0;
+    padding: 10px 15px 0;
     border-top: 1px solid lightgray;
 
     .wkp-search-section-header {

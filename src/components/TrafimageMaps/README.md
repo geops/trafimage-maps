@@ -17,11 +17,11 @@ import topics from '../../config/examples/TrafimageMaps/topics';
       mapControls: true,
       menu: true,
       popup: true,
+      search: true,
     }}
     popupComponents={{
       'ch.sbb.bahnhofplaene.printprodukte': 'BahnhofplanPopup',
     }}
   />
-
-</div>
+</div>;
 ```

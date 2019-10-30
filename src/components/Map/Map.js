@@ -131,9 +131,9 @@ class Map extends PureComponent {
       .getFeatureInfoAtCoordinate(evt.coordinate)
       .then(featureInfos => {
         // Display only info of layers with a popup defined.
-        const filtered = featureInfos.filter(
-          ({ layer }) => !!popupComponents[layer.getKey()],
-        );
+        const filtered = featureInfos
+          .reverse()
+          .filter(({ layer }) => !!popupComponents[layer.getKey()]);
 
         // Clear the select style.
         filtered.forEach(({ layer, features }) => {

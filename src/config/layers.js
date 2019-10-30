@@ -282,6 +282,12 @@ bahnhofplaene.setChildren([
       type: 'symbol',
       source: 'base',
       'source-layer': 'netzkarte_point',
+      filter: [
+        'any',
+        ['has', 'url_a4'],
+        ['has', 'url_poster'],
+        ['has', 'url_shopping'],
+      ],
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,

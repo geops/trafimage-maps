@@ -8,6 +8,7 @@ import defaultBaseLayers, {
   punctuality,
   parks,
 } from './layers';
+import defaultSearches from '../../searches';
 
 export const netzkarte = {
   name: 'ch.sbb.netzkarte',
@@ -24,6 +25,7 @@ export const netzkarte = {
   ],
   projection: 'EPSG:3857',
   description: 'ch.sbb.netzkarte-desc',
+  searches: defaultSearches,
 };
 
 export const netzkarteStelen = {

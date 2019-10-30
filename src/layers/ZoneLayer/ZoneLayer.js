@@ -1,4 +1,4 @@
-import qs from 'querystring';
+import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
