@@ -46,7 +46,12 @@ function HandicapPopup({ feature }) {
   });
 
   const equipmentStr = equipment.length ? (
-    <div className="wkp-handicap-popup-element">{equipment.join(', ')}</div>
+    <div className="wkp-handicap-popup-element" key="Ausstattung">
+      <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
+      <div className="wkp-handicap-popup-field-body">
+        {equipment.join(', ')}
+      </div>
+    </div>
   ) : null;
 
   const elementsList = [
@@ -81,33 +86,26 @@ function HandicapPopup({ feature }) {
       <div className="wkp-handicap-popup-title">
         {feature.get('stationsbezeichnung')}
       </div>
-      <table>
-        <tbody>
-          {elementsList.map(field => {
-            if (!properties[field.propertyName] && !field.element) {
-              return null;
-            }
-            return (
-              <tr>
-                <td className="wkp-handicap-popup-field-title">
-                  {field.label}
-                </td>
-                <td>
-                  {field.element || (
-                    <PopupElement
-                      properties={properties}
-                      propertyName={field.propertyName.replace(
-                        `{language}`,
-                        language,
-                      )}
-                    />
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <div className="wkp-handicap-popup-body">
+        {elementsList.map(field => {
+          if (!properties[field.propertyName] && !field.element) {
+            return null;
+          }
+          return (
+            field.element || (
+              <PopupElement
+                key={field.label}
+                label={field.label}
+                properties={properties}
+                propertyName={field.propertyName.replace(
+                  `{language}`,
+                  language,
+                )}
+              />
+            )
+          );
+        })}
+      </div>
     </div>
   );
 }

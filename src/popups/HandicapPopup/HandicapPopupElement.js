@@ -1,29 +1,43 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
   propertyName: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
-function HandicapPopupElement({ properties, propertyName }) {
+function HandicapPopupElement({ properties, propertyName, label }) {
+  const { t } = useTranslation();
+
   if (!properties[propertyName]) {
     return null;
   }
 
+  const propLabel = label || propertyName;
   const values = properties[propertyName].split('\n');
   let content = null;
 
   if (values.length > 1) {
     content = (
-      <div>
-        {values.map(v => (
-          <div>{v}</div>
-        ))}
-      </div>
+      <>
+        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+        <div className="wkp-handicap-popup-field-body">
+          {values.map((v, idx) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <div key={idx}>{v}</div>
+          ))}
+        </div>
+      </>
     );
   } else {
-    content = <>{values[0]}</>;
+    content = (
+      <>
+        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+        <div className="wkp-handicap-popup-field-body">{values[0]}</div>
+      </>
+    );
   }
 
   if (!content) {

@@ -12,26 +12,32 @@
     display: flex;
   }
 
-  table {
+  .wkp-handicap-popup-body {
     padding-top: 40px;
     min-width: 450px;
 
-    td {
+    .wkp-handicap-popup-element {
       padding-bottom: 10px;
-    }
-  }
+      display: flex;
 
-  .wkp-handicap-popup-field-title {
-    font-weight: bold;
-    vertical-align: top;
-    padding-right: 20px;
+      .wkp-handicap-popup-field-title {
+        width: 40%;
+        font-weight: bold;
+        vertical-align: top;
+        padding-right: 20px;
+      }
+
+      .wkp-handicap-popup-field-body {
+        width: 60%;
+      }
+    }
   }
 }
 
-.tm-w-m,
-.tm-w-s,
-.tm-w-xs {
-  table {
+.tm-app.tm-w-m,
+.tm-app.tm-w-s,
+.tm-app.tm-w-xs {
+  .wkp-handicap-popup-body {
     min-width: 100px;
   }
 }
