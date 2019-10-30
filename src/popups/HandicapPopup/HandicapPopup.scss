@@ -34,10 +34,12 @@
   }
 }
 
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-handicap-popup-body {
-    min-width: 100px;
+.tm-app {
+  &.tm-w-m,
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-handicap-popup-body {
+      min-width: 100px;
+    }
   }
 }

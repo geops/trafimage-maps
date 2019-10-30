@@ -1,12 +1,14 @@
 .tm-popup {
   div:first-child {
     animation: fadein 0.5s;
+    cursor: default;
   }
 
   > div .tm-popup-close-bt {
     height: 40px;
     width: 40px;
     z-index: 999;
+    cursor: pointer;
   }
 }
 
