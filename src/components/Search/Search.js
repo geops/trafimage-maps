@@ -77,6 +77,7 @@ function Search({ map, searchService }) {
                 )
               );
             }}
+            shouldRenderSuggestions={val => val.trim().length > 2}
             getSectionSuggestions={result =>
               result.items
                 ? result.items.map(i => ({ ...i, section: result.section }))
