@@ -138,8 +138,8 @@ const propTypes = {
 const defaultProps = {
   activeTopicKey: null,
   children: null,
-  center: [925472, 5950684],
-  zoom: 14,
+  center: [925472, 5920000],
+  zoom: 9,
   elements: {
     header: false,
     footer: false,
@@ -151,6 +151,7 @@ const defaultProps = {
     shareMenu: false,
     trackerMenu: false,
     featureMenu: false,
+    search: false,
   },
   baseLayers: null,
   popupComponents: {},
@@ -163,119 +164,137 @@ const defaultProps = {
   subMenus: null,
 };
 
-const getComponents = (dfltComponents, elementsToDisplay) => {
-  return Object.entries(dfltComponents).map(([k, v]) =>
-    elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
-  );
-};
+class TrafimageMaps extends React.PureComponent {
+  static getComponents(dfltComponents, elementsToDisplay) {
+    return Object.entries(dfltComponents).map(([k, v]) =>
+      elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
+    );
+  }
 
-function TrafimageMaps({
-  baseLayers,
-  children,
-  elements,
-  layers,
-  popupComponents,
-  projection,
-  topics,
-  activeTopicKey,
-  apiKey,
-  history,
-  center,
-  zoom,
-  initialState,
-  menus,
-  subMenus,
-}) {
-  /**
-   * If the application runs standalone, we want to use a consistent store.
-   * However when running in Stylegudist, every application needs it own store
-   */
-  const appStore = history ? store : getStore();
-  const { map, layerService, searchService } = appStore.getState().app;
+  constructor(props) {
+    super(props);
+    this.state = {
+      tabFocus: false,
+    };
 
-  // Define which component to display as child of TopicsMenu.
-  const appTopicsMenuChildren = getComponents(
-    {
-      shareMenu: <ShareMenu />,
-    },
-    elements,
-  );
+    document.addEventListener('keydown', e => {
+      if (e.which === 9) {
+        this.setState({ tabFocus: true });
+      }
+    });
 
-  // Define which component to display as child of Menu.
-  const appMenuChildren = getComponents(
-    {
-      featureMenu: <FeatureMenu popupComponents={popupComponents} />,
-      trackerMenu: <TrackerMenu />,
-    },
-    elements,
-  );
+    document.addEventListener('click', () => {
+      this.setState({ tabFocus: false });
+    });
+  }
 
-  // Define which components to display.
-  const defaultElements = {
-    header: <Header />,
-    popup: <Popup popupComponents={popupComponents} />,
-    footer: <Footer />,
-    permalink: <Permalink history={history} initialState={initialState} />,
-    mapControls: <MapControls />,
-    menu: (
-      <Menu>
-        <TopicsMenu>
-          {appTopicsMenuChildren}
-          {subMenus}
-        </TopicsMenu>
-        {appMenuChildren}
-        {menus}
-      </Menu>
-    ),
-    baseLayerToggler: (
-      <BaseLayerToggler
-        layerService={layerService}
-        map={map}
-        fallbackImgDir="/img/baselayer/"
-        validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
-      />
-    ),
-    search: <Search map={map} searchService={searchService} />,
-  };
+  render() {
+    const {
+      baseLayers,
+      children,
+      elements,
+      layers,
+      popupComponents,
+      projection,
+      topics,
+      activeTopicKey,
+      apiKey,
+      history,
+      center,
+      zoom,
+      initialState,
+      menus,
+      subMenus,
+    } = this.props;
 
-  const appElements = getComponents(defaultElements, elements);
+    /**
+     * If the application runs standalone, we want to use a consistent store.
+     * However when running in Stylegudist, every application needs it own store
+     */
+    const appStore = history ? store : getStore();
+    const { map, layerService, searchService } = appStore.getState().app;
 
-  // Classes for active components used for conditional styling
-  const elementClasses = Object.keys(elements)
-    .filter(k => elements[k])
-    .map(k => k);
+    // Define which component to display as child of TopicsMenu.
+    const appTopicsMenuChildren = TrafimageMaps.getComponents(
+      {
+        shareMenu: <ShareMenu />,
+      },
+      elements,
+    );
 
-  return (
-    <Provider store={appStore}>
-      <div className={`tm-app ${elementClasses.join(' ')}`}>
-        <ResizeHandler observe=".tm-app" />
-        <TopicLoader
+    // Define which component to display as child of Menu.
+    const appMenuChildren = TrafimageMaps.getComponents(
+      {
+        featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+        trackerMenu: <TrackerMenu />,
+      },
+      elements,
+    );
+
+    // Define which components to display.
+    const defaultElements = {
+      header: <Header />,
+      search: <Search map={map} searchService={searchService} />,
+      popup: <Popup popupComponents={popupComponents} />,
+      permalink: <Permalink history={history} initialState={initialState} />,
+      menu: (
+        <Menu>
+          <TopicsMenu>
+            {appTopicsMenuChildren}
+            {subMenus}
+          </TopicsMenu>
+          {appMenuChildren}
+          {menus}
+        </Menu>
+      ),
+      baseLayerToggler: (
+        <BaseLayerToggler
           layerService={layerService}
-          searchService={searchService}
-          baseLayers={baseLayers}
-          layers={layers}
           map={map}
-          topics={topics}
-          activeTopicKey={activeTopicKey}
-          apiKey={apiKey}
-          popupComponents={popupComponents}
+          fallbackImgDir="/img/baselayer/"
+          validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
         />
-        <Map
-          map={map}
-          initialCenter={center}
-          initialZoom={zoom}
-          projection={projection}
-          popupComponents={popupComponents}
-        />
-        {appElements}
-        {children}
-        <MainDialog />
-      </div>
-    </Provider>
-  );
+      ),
+      mapControls: <MapControls />,
+      footer: <Footer />,
+    };
+
+    const appElements = TrafimageMaps.getComponents(defaultElements, elements);
+    const { tabFocus } = this.state;
+
+    return (
+      <Provider store={appStore}>
+        <div className={`tm-app ${elements.header ? 'header' : ''}`}>
+          <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
+            <ResizeHandler observe=".tm-app" />
+            <TopicLoader
+              layerService={layerService}
+              searchService={searchService}
+              baseLayers={baseLayers}
+              layers={layers}
+              map={map}
+              topics={topics}
+              activeTopicKey={activeTopicKey}
+              apiKey={apiKey}
+            />
+            <Map
+              map={map}
+              initialCenter={center}
+              initialZoom={zoom}
+              projection={projection}
+              popupComponents={popupComponents}
+            />
+            {appElements}
+            {children}
+            <MainDialog />
+          </div>
+        </div>
+      </Provider>
+    );
+  }
 }
 
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default React.memo(TrafimageMaps);
+export default TrafimageMaps;

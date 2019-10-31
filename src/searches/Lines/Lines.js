@@ -2,6 +2,10 @@ import React from 'react';
 
 import Search from '../Search';
 
+const lineMeasuresRegExp = new RegExp(
+  '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
+);
+
 class Lines extends Search {
   constructor() {
     super();
@@ -10,18 +14,34 @@ class Lines extends Search {
 
   // eslint-disable-next-line class-methods-use-this
   search(value) {
-    return fetch(`https://maps.trafimage.ch/search/lines?line=${value}`)
+    let params = `line=${value}`;
+    if (lineMeasuresRegExp.test(value)) {
+      const [, line, km, kmEnd] = value.match(lineMeasuresRegExp);
+      params = `line=${line}&km=${km}&km_end=${kmEnd}`;
+    }
+    return fetch(`https://maps.trafimage.ch/search/lines?${params}`)
       .then(data => data.json())
       .then(featureCollection => featureCollection.features);
   }
 
-  render(item) {
-    return <div>{item.properties.name}</div>;
+  render({ properties }) {
+    return (
+      <div>
+        Linie {properties.linie} ({properties.name})
+        {properties.start !== properties.end && (
+          <div style={{ color: '#999' }}>
+            Kilometer {properties.start}-{properties.end}
+          </div>
+        )}
+      </div>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
-  value(item) {
-    return item.properties.name;
+  value({ properties }) {
+    return properties.start !== properties.end
+      ? `${properties.linie} ${properties.start}-${properties.end}`
+      : `${properties.linie}`;
   }
 }
 

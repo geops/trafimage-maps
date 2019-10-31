@@ -121,6 +121,11 @@ class MapboxStyleLayer extends Layer {
    *  or null if no feature was hit.
    */
   getFeatureInfoAtCoordinate(coordinate) {
+    const { mbMap } = this.mapboxLayer;
+    // Ignore the getFeatureInfo until the mapbox map is loaded
+    if (!mbMap || !mbMap.isStyleLoaded()) {
+      return Promise.resolve({ coordinate, features: [], layer: this });
+    }
     return this.mapboxLayer
       .getFeatureInfoAtCoordinate(coordinate, {
         layers: this.styleLayers.map(s => s && s.id),

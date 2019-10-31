@@ -5,7 +5,7 @@ const geoserverUrl = '//maps.trafimage.ch/geoserver/trafimage/ows';
 const geoserverCachedUrl = '//maps.trafimage.ch/service/gjc/ows';
 let tileserverUrlMapproxy = '//wkp.dev.trafimage.geops.ch/raster';
 let vectorTilesKey = '5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910';
-let vectorTilesUrl = '//maps.style-dev.geops.io';
+let vectorTilesUrl = '//maps.geops.io';
 let departureUrl = '//wkp.dev.trafimage.geops.ch/search';
 let cartaroUrl = '//cartaro2.dev.trafimage.ch/api/v1/';
 

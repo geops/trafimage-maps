@@ -83,7 +83,9 @@ export const sourcesLayer = new MapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
   preserveDrawingBuffer: true,
-  url: `/styles/ch.sbb.netzkarte.sources.json?key=${CONF.vectorTilesKey}`,
+  url:
+    `${CONF.vectorTilesUrl}/styles/trafimage_sources_only/style.json` +
+    `?key=${CONF.vectorTilesKey}`,
   properties: {
     hideInLegend: true,
   },
@@ -280,9 +282,15 @@ bahnhofplaene.setChildren([
       type: 'symbol',
       source: 'base',
       'source-layer': 'netzkarte_point',
+      filter: [
+        'any',
+        ['has', 'url_a4'],
+        ['has', 'url_poster'],
+        ['has', 'url_shopping'],
+      ],
       layout: {
-        'icon-image': 'marker_11',
-        'icon-size': 3,
+        'icon-image': 'standort',
+        'icon-size': 1,
       },
     },
     properties: {
@@ -302,8 +310,8 @@ bahnhofplaene.setChildren([
       'source-layer': 'netzkarte_point',
       filter: ['has', 'url_interactive_plan'],
       layout: {
-        'icon-image': 'marker_11',
-        'icon-size': 3,
+        'icon-image': 'standort',
+        'icon-size': 1,
       },
     },
     properties: {
@@ -402,7 +410,7 @@ export const buslines = new MapboxStyleLayer({
   styleLayer: {
     id: 'bus',
     type: 'line',
-    source: 'busses',
+    source: 'busline',
     'source-layer': 'busses',
     paint: {
       'line-color': 'rgba(255, 220, 0, 1)',
@@ -476,8 +484,8 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
 export default [
   sourcesLayer,
   netzkarteLayer,
-  netzkarteLayerLight,
-  netzkarteLayerNight,
+  // netzkarteLayerLight,
+  // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   aerial,

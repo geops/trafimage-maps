@@ -25,13 +25,13 @@ function TopicsMenu({ children }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="wkp-menu">
+    <div className="wkp-topics-menu">
       <TopicsMenuHeader
         isOpen={menuOpen}
         onToggle={() => dispatch(setMenuOpen(!menuOpen))}
       />
       <Collapsible isCollapsed={!menuOpen}>
-        <div className="wkp-menu-body">
+        <div className="wkp-topics-menu-body">
           {topics.map(topic => (
             <TopicMenu
               key={topic.key}

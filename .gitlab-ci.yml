@@ -4,6 +4,9 @@ image: registry.geops.de/build/stretch-node:latest
 before_script:
   - eval $(ssh-agent -s)
 
+variables:
+  YARN_CACHE_FOLDER: '.yarn-cache/'
+
 # Define the stages of the build which will be run in sequence
 stages:
   - build
@@ -32,8 +35,6 @@ build_stag:
   stage: build
   script:
     - yarn install
-    - yarn lint
-    - yarn test
     - yarn build:stag
   artifacts:
     when: on_success
@@ -44,8 +45,6 @@ build_prod:
   stage: build
   script:
     - yarn install
-    - yarn lint
-    - yarn test
     - yarn build:prod
   artifacts:
     when: on_success
