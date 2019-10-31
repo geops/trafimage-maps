@@ -43,7 +43,7 @@ function Search({ map, searchService }) {
             onSuggestionsFetchRequested={event =>
               searchService.search(event.value)
             }
-            onSuggestionsClearRequested={() => searchService.clear('asdf')}
+            onSuggestionsClearRequested={() => searchService.clear('')}
             onSuggestionHighlighted={({ suggestion }) =>
               searchService.highlight(suggestion)
             }
