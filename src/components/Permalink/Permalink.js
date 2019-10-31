@@ -107,6 +107,18 @@ class Permalink extends PureComponent {
       );
       // to fitler results and use to open departurePopup.
       console.log(depature);
+
+      /*
+      Netzkarte popup opens DeparturePopup with:
+      dispatchSetClickedFeatureInfo([
+        {
+          coordinate: feature.getGeometry().getCoordinates()[0],
+          features: [feature],
+          // Fake layer binded to popup, to open it.
+          layer: { getKey: () => 'ch.sbb.departure.popup' },
+        },
+      ]);
+      */
     }
 
     this.setState({
