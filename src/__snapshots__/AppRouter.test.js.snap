@@ -267,9 +267,11 @@ exports[`AppRouter should match snapshot 1`] = `
                             }
                           >
                             <label
+                              aria-label="Show layer"
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={0}
+                              title="Show layer"
                             >
                               <input
                                 checked={false}
@@ -281,11 +283,13 @@ exports[`AppRouter should match snapshot 1`] = `
                               <span />
                             </label>
                             <div
+                              aria-label="ch.sbb.bahnhofplaene Show sublayer"
                               className="tm-layer-tree-toggle"
                               onClick={[Function]}
                               onKeyPress={[Function]}
                               role="button"
                               tabIndex={0}
+                              title="ch.sbb.bahnhofplaene Show sublayer"
                             >
                               <div>
                                 ch.sbb.bahnhofplaene
@@ -333,9 +337,11 @@ exports[`AppRouter should match snapshot 1`] = `
                             }
                           >
                             <label
+                              aria-label="Show layer"
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Show layer"
                             >
                               <input
                                 checked={false}
@@ -347,11 +353,13 @@ exports[`AppRouter should match snapshot 1`] = `
                               <span />
                             </label>
                             <div
+                              aria-label="ch.sbb.bahnhoffrequenzen Show sublayer"
                               className="tm-layer-tree-toggle"
                               onClick={[Function]}
                               onKeyPress={[Function]}
                               role="button"
                               tabIndex={0}
+                              title="ch.sbb.bahnhoffrequenzen Show sublayer"
                             >
                               <div>
                                 ch.sbb.bahnhoffrequenzen
@@ -396,9 +404,11 @@ exports[`AppRouter should match snapshot 1`] = `
                             }
                           >
                             <label
+                              aria-label="Show layer"
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Show layer"
                             >
                               <input
                                 checked={false}
@@ -410,11 +420,13 @@ exports[`AppRouter should match snapshot 1`] = `
                               <span />
                             </label>
                             <div
+                              aria-label="ch.sbb.netzkarte.buslinien Show sublayer"
                               className="tm-layer-tree-toggle"
                               onClick={[Function]}
                               onKeyPress={[Function]}
                               role="button"
                               tabIndex={0}
+                              title="ch.sbb.netzkarte.buslinien Show sublayer"
                             >
                               <div>
                                 ch.sbb.netzkarte.buslinien
@@ -459,9 +471,11 @@ exports[`AppRouter should match snapshot 1`] = `
                             }
                           >
                             <label
+                              aria-label="Show layer"
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={0}
+                              title="Show layer"
                             >
                               <input
                                 checked={false}
@@ -473,11 +487,13 @@ exports[`AppRouter should match snapshot 1`] = `
                               <span />
                             </label>
                             <div
+                              aria-label="ch.sbb.puenktlichkeit Show sublayer"
                               className="tm-layer-tree-toggle"
                               onClick={[Function]}
                               onKeyPress={[Function]}
                               role="button"
                               tabIndex={0}
+                              title="ch.sbb.puenktlichkeit Show sublayer"
                             >
                               <div>
                                 ch.sbb.puenktlichkeit
@@ -525,9 +541,11 @@ exports[`AppRouter should match snapshot 1`] = `
                             }
                           >
                             <label
+                              aria-label="Show layer"
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Show layer"
                             >
                               <input
                                 checked={false}
@@ -539,11 +557,13 @@ exports[`AppRouter should match snapshot 1`] = `
                               <span />
                             </label>
                             <div
+                              aria-label="ch.sbb.parks Show sublayer"
                               className="tm-layer-tree-toggle"
                               onClick={[Function]}
                               onKeyPress={[Function]}
                               role="button"
                               tabIndex={0}
+                              title="ch.sbb.parks Show sublayer"
                             >
                               <div>
                                 ch.sbb.parks
@@ -588,9 +608,11 @@ exports[`AppRouter should match snapshot 1`] = `
                             }
                           >
                             <label
+                              aria-label="Show layer"
                               className="tm-layer-tree-input tm-layer-tree-input-checkbox tm-checkbox"
                               onKeyPress={[Function]}
                               tabIndex={-1}
+                              title="Show layer"
                             >
                               <input
                                 checked={false}
@@ -602,11 +624,13 @@ exports[`AppRouter should match snapshot 1`] = `
                               <span />
                             </label>
                             <div
+                              aria-label="ch.sbb.ch_gemeinden Show sublayer"
                               className="tm-layer-tree-toggle"
                               onClick={[Function]}
                               onKeyPress={[Function]}
                               role="button"
                               tabIndex={0}
+                              title="ch.sbb.ch_gemeinden Show sublayer"
                             >
                               <div>
                                 ch.sbb.ch_gemeinden
@@ -1178,21 +1202,25 @@ exports[`AppRouter should match snapshot 1`] = `
           }
         />
         <div
+          aria-label="Baselayer button"
           className="tm-base-layer-item"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
+          title="Baselayer button"
         />
         <div
           className="tm-footer"
         >
           <div
+            aria-label="Previous baselayer"
             className="tm-base-layer-previous"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex={0}
+            title="Previous baselayer"
           >
             <svg
               fill="currentColor"
@@ -1214,11 +1242,13 @@ exports[`AppRouter should match snapshot 1`] = `
             </svg>
           </div>
           <div
+            aria-label="Next baselayer"
             className="tm-base-layer-next"
             onClick={[Function]}
             onKeyPress={[Function]}
             role="button"
             tabIndex={0}
+            title="Next baselayer"
           >
             <svg
               fill="currentColor"

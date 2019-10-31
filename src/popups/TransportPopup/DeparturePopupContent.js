@@ -11,7 +11,7 @@ import CONF from '../../config/appConfig';
 
 import { setDeparturesFilter } from '../../model/app/actions';
 
-import './TransportPopupContent.scss';
+import './DeparturePopupContent.scss';
 
 const DESTINATION_FILTER = 'destination';
 
@@ -39,7 +39,7 @@ const defaultProps = {
   showTitle: false,
 };
 
-class TransportPopupContent extends Component {
+class DeparturePopupContent extends Component {
   static formatTime(time) {
     const d = new Date(time);
 
@@ -219,7 +219,7 @@ class TransportPopupContent extends Component {
     }
 
     return (
-      <div className="tm-transport-popup-body">
+      <div className="tm-departure-popup-body">
         <div className="tm-popup-title">{name}</div>
 
         {icon}
@@ -255,7 +255,7 @@ class TransportPopupContent extends Component {
                       {d.destination}
                     </div>
                   </td>
-                  <td>{TransportPopupContent.formatTime(d.time)}</td>
+                  <td>{DeparturePopupContent.formatTime(d.time)}</td>
                   <td>
                     <div
                       className={
@@ -268,7 +268,7 @@ class TransportPopupContent extends Component {
                   </td>
                   <td>
                     <div className="tm-departure-min">
-                      {TransportPopupContent.getMinDiff(d.time)}
+                      {DeparturePopupContent.getMinDiff(d.time)}
                     </div>
                   </td>
                 </tr>
@@ -285,8 +285,8 @@ const mapDispatchToProps = {
   dispatchSetDeparturesFilter: setDeparturesFilter,
 };
 
-TransportPopupContent.propTypes = propTypes;
-TransportPopupContent.defaultProps = defaultProps;
+DeparturePopupContent.propTypes = propTypes;
+DeparturePopupContent.defaultProps = defaultProps;
 
 export default compose(
   withTranslation(),
@@ -294,4 +294,4 @@ export default compose(
     null,
     mapDispatchToProps,
   ),
-)(TransportPopupContent);
+)(DeparturePopupContent);

@@ -16,6 +16,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
+  popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -43,6 +44,8 @@ class Permalink extends PureComponent {
       dispatchSetZoom,
       dispatchSetCenter,
       initialState,
+      layerService,
+      popupComponents,
       dispatchSetDeparturesFilter,
     } = this.props;
 
@@ -89,6 +92,22 @@ class Permalink extends PureComponent {
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
 
     dispatchSetDeparturesFilter(departures);
+
+    if (
+      departures &&
+      popupComponents &&
+      Object.keys(popupComponents).includes('ch.sbb.departure.popup')
+    ) {
+      // wait until mapbox is loaded
+      const stationFeats = layerService
+        .getLayer('ch.sbb.netzkarte.stationen')
+        .getFeatures();
+      const depature = stationFeats.filter(
+        station => station.properties.didok === departures - 8500000,
+      );
+      // to fitler results and use to open departurePopup.
+      console.log(depature);
+    }
 
     this.setState({
       [lineFilterKey]: lineFilter,
@@ -139,6 +158,7 @@ const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   map: state.app.map,
   layerService: state.app.layerService,
+  departuresFilter: state.app.departuresFilter,
 });
 
 const mapDispatchToProps = {

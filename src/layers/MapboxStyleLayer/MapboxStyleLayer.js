@@ -143,6 +143,20 @@ class MapboxStyleLayer extends Layer {
       });
   }
 
+  getFeatures() {
+    const { mbMap } = this.mapboxLayer;
+    // Ignore the getFeatureInfo until the mapbox map is loaded
+    if (!mbMap || !mbMap.isStyleLoaded()) {
+      return [];
+    }
+
+    return mbMap.querySourceFeatures(this.styleLayers.map(s => s && s.source), {
+      sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
+      // filter: e => e,
+      validate: false,
+    });
+  }
+
   setHoverState(features = [], state) {
     const options = this.styleLayers[0];
     features.forEach(feature => {

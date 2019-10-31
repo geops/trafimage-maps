@@ -35,13 +35,14 @@ class NetzkartePopup extends PureComponent {
     };
   }
 
-  openTransportPopup() {
+  openDeparturePopup() {
     const { dispatchSetClickedFeatureInfo, feature } = this.props;
     dispatchSetClickedFeatureInfo([
       {
         coordinate: feature.getGeometry().getCoordinates()[0],
         features: [feature],
-        layer: { getKey: () => 'ch.sbb.transport' },
+        // Fake layer binded to popup, to open it.
+        layer: { getKey: () => 'ch.sbb.departure.popup' },
       },
     ]);
   }
@@ -87,8 +88,8 @@ class NetzkartePopup extends PureComponent {
           <div
             tabIndex={0}
             role="button"
-            onClick={() => this.openTransportPopup()}
-            onKeyPress={() => this.openTransportPopup()}
+            onClick={() => this.openDeparturePopup()}
+            onKeyPress={() => this.openDeparturePopup()}
           >
             {t('Abfahrtszeiten')}
           </div>
@@ -219,6 +220,7 @@ class NetzkartePopup extends PureComponent {
 const mapStateToProps = state => ({
   language: state.app.language,
   projection: state.app.projection,
+  departuresFilter: state.app.departuresFilter,
 });
 
 const mapDispatchToProps = {

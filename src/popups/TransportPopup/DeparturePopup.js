@@ -4,7 +4,7 @@ import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 
-import TransportPopupContent from './TransportPopupContent';
+import DeparturePopupContent from './DeparturePopupContent';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -12,14 +12,14 @@ const propTypes = {
 
 const defaultProps = {};
 
-const TransportPopup = ({ feature }) => {
+const DeparturePopup = ({ feature }) => {
   const name = feature.get('name');
   const uic = feature.get('didok') + 8500000;
 
-  return <TransportPopupContent name={name} uic={uic} />;
+  return <DeparturePopupContent name={name} uic={uic} />;
 };
 
-TransportPopup.propTypes = propTypes;
-TransportPopup.defaultProps = defaultProps;
+DeparturePopup.propTypes = propTypes;
+DeparturePopup.defaultProps = defaultProps;
 
-export default compose(withTranslation())(TransportPopup);
+export default compose(withTranslation())(DeparturePopup);

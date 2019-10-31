@@ -8,5 +8,5 @@ export default {
   'ch.sbb.nichtstuetzpunktbahnhoefe': 'HandicapPopup',
   'ch.sbb.parks': 'ParksPopup',
   'ch.sbb.stuetzpunktbahnhoefe': 'HandicapPopup',
-  'ch.sbb.transport': 'TransportPopup',
+  'ch.sbb.departure.popup': 'TransportPopup', // Fake layer binded to popup, to open it.
 };

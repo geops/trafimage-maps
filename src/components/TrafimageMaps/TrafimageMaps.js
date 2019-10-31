@@ -236,7 +236,13 @@ class TrafimageMaps extends React.PureComponent {
       header: <Header />,
       search: <Search map={map} searchService={searchService} />,
       popup: <Popup popupComponents={popupComponents} />,
-      permalink: <Permalink history={history} initialState={initialState} />,
+      permalink: (
+        <Permalink
+          history={history}
+          initialState={initialState}
+          popupComponents={popupComponents}
+        />
+      ),
       menu: (
         <Menu>
           <TopicsMenu>
