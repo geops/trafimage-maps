@@ -86,6 +86,15 @@ function Search({ map, searchService }) {
             inputProps={{
               autoFocus: true,
               onChange: (e, { newValue }) => setValue(newValue),
+              onKeyDown: ({ key }) => {
+                if (key === 'Enter') {
+                  const filtered = suggestions.filter(s => s.items.length > 0);
+                  if (filtered.length > 0) {
+                    const { items, section } = filtered[0];
+                    searchService.select({ ...items[0], section });
+                  }
+                }
+              },
               placeholder: searchService.getPlaceholder(t),
               value,
             }}
