@@ -43,7 +43,7 @@ function Search({ map, searchService }) {
             onSuggestionsFetchRequested={event =>
               searchService.search(event.value)
             }
-            onSuggestionsClearRequested={() => searchService.clear('asdf')}
+            onSuggestionsClearRequested={() => searchService.clear('')}
             onSuggestionHighlighted={({ suggestion }) =>
               searchService.highlight(suggestion)
             }
@@ -77,6 +77,7 @@ function Search({ map, searchService }) {
                 )
               );
             }}
+            shouldRenderSuggestions={val => val.trim().length > 2}
             getSectionSuggestions={result =>
               result.items
                 ? result.items.map(i => ({ ...i, section: result.section }))
@@ -85,6 +86,15 @@ function Search({ map, searchService }) {
             inputProps={{
               autoFocus: true,
               onChange: (e, { newValue }) => setValue(newValue),
+              onKeyDown: ({ key }) => {
+                if (key === 'Enter') {
+                  const filtered = suggestions.filter(s => s.items.length > 0);
+                  if (filtered.length > 0) {
+                    const { items, section } = filtered[0];
+                    searchService.select({ ...items[0], section });
+                  }
+                }
+              },
               placeholder: searchService.getPlaceholder(t),
               value,
             }}
