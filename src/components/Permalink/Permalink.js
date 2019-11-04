@@ -2,13 +2,19 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
+import Point from 'ol/geom/Point';
+import { transform } from 'ol/proj';
 import qs from 'query-string';
 import OLMap from 'ol/Map';
+import Feature from 'ol/Feature';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
 
 import { setCenter, setZoom } from '../../model/map/actions';
-import { setDeparturesFilter } from '../../model/app/actions';
+import {
+  setDeparturesFilter,
+  setClickedFeatureInfo,
+} from '../../model/app/actions';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -30,6 +36,7 @@ const propTypes = {
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
+  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -44,8 +51,6 @@ class Permalink extends PureComponent {
       dispatchSetZoom,
       dispatchSetCenter,
       initialState,
-      layerService,
-      popupComponents,
       dispatchSetDeparturesFilter,
     } = this.props;
 
@@ -88,49 +93,27 @@ class Permalink extends PureComponent {
       routeFilterKey && getUrlParamVal(parameters[routeFilterKey]);
     const operatorFilter =
       operatorFilterKey && getUrlParamVal(parameters[operatorFilterKey]);
-    const departures =
+    this.departures =
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
 
-    dispatchSetDeparturesFilter(departures);
-
-    if (
-      departures &&
-      popupComponents &&
-      Object.keys(popupComponents).includes('ch.sbb.departure.popup')
-    ) {
-      // wait until mapbox is loaded
-      const stationFeats = layerService
-        .getLayer('ch.sbb.netzkarte.stationen')
-        .getFeatures();
-      const depature = stationFeats.filter(
-        station => station.properties.didok === departures - 8500000,
-      );
-      // to fitler results and use to open departurePopup.
-      console.log(depature);
-
-      /*
-      Netzkarte popup opens DeparturePopup with:
-      dispatchSetClickedFeatureInfo([
-        {
-          coordinate: feature.getGeometry().getCoordinates()[0],
-          features: [feature],
-          // Fake layer binded to popup, to open it.
-          layer: { getKey: () => 'ch.sbb.departure.popup' },
-        },
-      ]);
-      */
-    }
+    dispatchSetDeparturesFilter(this.departures);
 
     this.setState({
       [lineFilterKey]: lineFilter,
       [routeFilterKey]: routeFilter,
       [operatorFilterKey]: operatorFilter,
-      [departuresFilterKey]: departures,
+      [departuresFilterKey]: this.departures,
     });
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic, history, departuresFilter } = this.props;
+    const {
+      activeTopic,
+      history,
+      departuresFilter,
+      layerService,
+      popupComponents,
+    } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}`);
@@ -139,6 +122,60 @@ class Permalink extends PureComponent {
     if (departuresFilter !== prevProps.departuresFilter) {
       this.updateDepartures();
     }
+
+    if (
+      this.departures &&
+      popupComponents &&
+      Object.keys(popupComponents).includes('ch.sbb.departure.popup')
+    ) {
+      const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+
+      if (
+        stationsLayer &&
+        stationsLayer.mapboxLayer &&
+        stationsLayer.mapboxLayer.mbMap
+      ) {
+        const { mbMap } = stationsLayer.mapboxLayer;
+
+        // We need to wait until mapbox layer is loaded.
+        if (mbMap.isStyleLoaded()) {
+          this.openDepartureOnLoad.bind(this);
+        } else {
+          mbMap.on('load', this.openDepartureOnLoad.bind(this));
+        }
+      }
+    }
+  }
+
+  openDepartureOnLoad() {
+    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+    const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+    const [departure] = stationsLayer
+      .getFeatures()
+      .filter(
+        station => station.properties.didok === this.departures - 8500000,
+      );
+
+    const { latitude, longitude } = departure.properties;
+    const stationFeature = new Feature({
+      geometry: new Point(
+        transform([longitude, latitude], 'EPSG:21781', 'EPSG:3857'),
+      ),
+      ...departure.properties,
+    });
+
+    // Open departure popup from departure define in URL on mapbbox layer load.
+    dispatchSetClickedFeatureInfo([
+      {
+        coordinate: stationFeature.getGeometry().getCoordinates(),
+        features: [stationFeature],
+        // Fake layer binded to popup, to open it.
+        layer: { getKey: () => 'ch.sbb.departure.popup' },
+      },
+    ]);
+
+    // Unregister event listener to open only on page load.
+    stationsLayer.mapboxLayer.mbMap.off('load', this.openDepartureOnLoad);
   }
 
   updateDepartures() {
@@ -177,6 +214,7 @@ const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetZoom: setZoom,
   dispatchSetDeparturesFilter: setDeparturesFilter,
+  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
 export default compose(
