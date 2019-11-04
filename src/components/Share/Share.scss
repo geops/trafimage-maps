@@ -11,9 +11,29 @@
     justify-content: space-around;
   }
 
+  .ta-mail-icon {
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+
+      svg {
+        font-size: 23px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
   .wkp-share-permalink-button > div[role='button'] {
-    width: 20px;
-    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    svg {
+      font-size: 20px;
+    }
   }
 
   .ta-facebook-icon {
@@ -24,14 +44,6 @@
   .ta-twitter-icon,
   .tm-canvas-save-button {
     font-size: 30px;
-  }
-
-  .ta-mail-icon {
-    font-size: 23px;
-
-    svg {
-      margin-top: 2px;
-    }
   }
 
   .tm-canvas-save-button {

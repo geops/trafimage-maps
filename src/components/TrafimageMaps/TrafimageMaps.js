@@ -5,7 +5,9 @@ import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'lodash/fp';
 import { Provider } from 'react-redux';
+import { withTranslation } from 'react-i18next';
 import Projection from 'ol/proj/Projection';
 import Layer from 'react-spatial/layers/Layer';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
@@ -133,6 +135,11 @@ const propTypes = {
    * React router url params.
    */
   initialState: PropTypes.shape(),
+
+  /**
+   * translation function.
+   */
+  t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -190,6 +197,7 @@ class TrafimageMaps extends React.PureComponent {
 
   render() {
     const {
+      t,
       baseLayers,
       children,
       elements,
@@ -257,6 +265,10 @@ class TrafimageMaps extends React.PureComponent {
         <BaseLayerToggler
           layerService={layerService}
           map={map}
+          mapTabIndex={-1} // No accessible via Tab nav.
+          titleButton={t('Baselayerwechsel')}
+          titleButtonNext={t('Nächste Baselayer')}
+          titleButtonPrevious={t('Vorherige Baselayer')}
           fallbackImgDir="/img/baselayer/"
           validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
         />
@@ -303,4 +315,4 @@ class TrafimageMaps extends React.PureComponent {
 TrafimageMaps.propTypes = propTypes;
 TrafimageMaps.defaultProps = defaultProps;
 
-export default TrafimageMaps;
+export default compose(withTranslation())(TrafimageMaps);

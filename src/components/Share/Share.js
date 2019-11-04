@@ -11,19 +11,19 @@ import './Share.scss';
 const socialShareConfig = [
   {
     url: 'mailto:?body={url}',
-    title: 'Per Email teilen.',
+    title: 'Per Email versenden',
     icon: <FaEnvelope focusable={false} />,
     className: 'ta-mail-icon',
   },
   {
     url: '//www.facebook.com/sharer.php?u={url}',
-    title: 'Auf Facebook teilen.',
+    title: 'Auf Facebook teilen',
     icon: <TiSocialFacebook focusable={false} />,
     className: 'ta-facebook-icon',
   },
   {
     url: '//twitter.com/intent/tweet?url={url}',
-    title: 'Twittern.',
+    title: 'Auf Twitter teilen',
     icon: <TiSocialTwitter focusable={false} />,
     className: 'ta-twitter-icon',
   },

@@ -45,7 +45,7 @@ exports[`Share should match snapshot. 1`] = `
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"
-      title="Per Email teilen."
+      title="Per Email versenden"
     >
       <svg
         fill="currentColor"
@@ -112,7 +112,7 @@ exports[`Share should match snapshot. 1`] = `
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"
-      title="Auf Facebook teilen."
+      title="Auf Facebook teilen"
     >
       <svg
         baseProfile="tiny"
@@ -145,7 +145,7 @@ exports[`Share should match snapshot. 1`] = `
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"
-      title="Twittern."
+      title="Auf Twitter teilen"
     >
       <svg
         baseProfile="tiny"
