@@ -62,6 +62,7 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
     <Button
       className={`wkp-menu-header${isOpen ? ' open' : ''}`}
       tabIndex={0}
+      title={t('Menü')}
       onClick={() => onToggle()}
     >
       <div className="wkp-menu-header-toggler">

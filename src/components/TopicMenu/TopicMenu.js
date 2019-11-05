@@ -109,6 +109,7 @@ class TopicMenu extends PureComponent {
 
   renderInfoButton(selectedInfo) {
     const {
+      t,
       activeTopic,
       selectedForInfos,
       dispatchSetSelectedForInfos,
@@ -128,6 +129,7 @@ class TopicMenu extends PureComponent {
     return (
       <Button
         className={className}
+        title={t('Layerinformationen anzeigen')}
         onClick={() => {
           dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
         }}
@@ -153,6 +155,12 @@ class TopicMenu extends PureComponent {
             isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
             layerService={layerService}
             t={t}
+            buttonTitles={{
+              layerShow: t('Layer anzeigen'),
+              layerHide: t('Layer verbergen'),
+              subLayerShow: t('Unterlayer anzeigen'),
+              subLayerHide: t('Unterlayer verbergen'),
+            }}
             renderItemContent={(layer, layerTreeComp) => (
               <>
                 {layerTreeComp.renderItemContent(layer)}
