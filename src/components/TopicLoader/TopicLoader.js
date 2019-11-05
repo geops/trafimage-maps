@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import { unByKey } from 'ol/Observable';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
-import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -52,21 +50,21 @@ class TopicLoader extends Component {
       dispatchSetTopics,
       topics,
     } = this.props;
-
     this.topic = activeTopicKey
-      ? TOPIC_CONF.find(t => t.key === activeTopicKey)
+      ? topics.find(t => t.key === activeTopicKey)
       : topics[0];
 
     if (this.topic.linkUrl) {
-      TopicLoader.openLinkTopic(this.topic);
+      TopicLoader.openLinkTopic(this.topic.linkUrl);
     }
-
     dispatchSetActiveTopic(this.topic);
     dispatchSetTopics(topics);
   }
 
   componentDidMount() {
-    this.updateLayers(this.topic.layers);
+    if (this.topic) {
+      this.updateLayers(this.topic.layers);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -76,9 +74,10 @@ class TopicLoader extends Component {
       searchService,
     } = this.props;
 
-    if (activeTopic !== prevProps.activeTopic) {
+    if (activeTopic && activeTopic !== prevProps.activeTopic) {
       if (activeTopic.linkUrl) {
         TopicLoader.openLinkTopic(activeTopic);
+        return;
       }
       this.updateLayers(activeTopic.layers);
 
@@ -88,10 +87,6 @@ class TopicLoader extends Component {
         dispatchSetClickedFeatureInfo,
       });
     }
-  }
-
-  componentWillUnmount() {
-    unByKey(this.singleclickKey);
   }
 
   updateLayers(topicLayers) {

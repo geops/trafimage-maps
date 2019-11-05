@@ -104,20 +104,19 @@ class Map extends PureComponent {
     }
   }
 
-  onPointerMove(evt) {
-    const { map, layerService, popupComponents } = this.props;
+  onPointerMove({ map, coordinate }) {
+    const { layerService, popupComponents } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
     }
-    layerService
-      .getFeatureInfoAtCoordinate(evt.coordinate)
-      .then(featureInfos => {
-        const filtered = featureInfos.filter(({ layer, features }) => {
-          return !!popupComponents[layer.getKey()] && features.length;
-        });
-        map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
+    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
+      const filtered = featureInfos.filter(({ layer, features }) => {
+        return !!popupComponents[layer.getKey()] && features.length;
       });
+      // eslint-disable-next-line no-param-reassign
+      map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
+    });
   }
 
   onSingleClick(evt) {
