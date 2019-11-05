@@ -1,5 +1,3 @@
-// Variable to configure if PWA Service Worker is registered in index.js.
-const pwaActive = false;
 const geoadminWmtsUrl = '//maps.trafimage.ch';
 const geoserverUrl = '//maps.trafimage.ch/geoserver/trafimage/ows';
 const geoserverCachedUrl = '//maps.trafimage.ch/service/gjc/ows';
@@ -32,7 +30,6 @@ switch (env) {
 }
 
 export default {
-  pwaActive,
   geoadminWmtsUrl,
   geoserverUrl,
   geoserverCachedUrl,
