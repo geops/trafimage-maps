@@ -1,4 +1,3 @@
-const geoadminWmtsUrl = '//maps.trafimage.ch';
 const geoserverUrl = '//maps.trafimage.ch/geoserver/trafimage/ows';
 const geoserverCachedUrl = '//maps.trafimage.ch/service/gjc/ows';
 let tileserverUrlMapproxy = '//wkp.dev.trafimage.geops.ch/raster';
@@ -30,7 +29,6 @@ switch (env) {
 }
 
 export default {
-  geoadminWmtsUrl,
   geoserverUrl,
   geoserverCachedUrl,
   tileserverUrlMapproxy,
