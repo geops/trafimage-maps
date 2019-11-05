@@ -429,7 +429,7 @@ export const gemeindegrenzen = new WMSLayer({
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `${CONF.geoserverUrl}/service/wms`,
+      url: `//maps.trafimage.ch/geoserver/trafimage/ows/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:gemeindegrenzen',
@@ -453,7 +453,7 @@ export const parks = new WMSLayer({
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `${CONF.geoserverUrl}/service/wms`,
+      url: `//maps.trafimage.ch/geoserver/trafimage/ows/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:perimeter_parks',
