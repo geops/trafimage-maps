@@ -403,7 +403,7 @@ export const buslines = new MapboxStyleLayer({
   styleLayer: {
     id: 'bus',
     type: 'line',
-    source: 'busses',
+    source: 'busline',
     'source-layer': 'busses',
     paint: {
       'line-color': 'rgba(255, 220, 0, 1)',
