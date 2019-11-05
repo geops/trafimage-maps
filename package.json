@@ -176,7 +176,7 @@
     ]
   },
   "lint-staged": {
-    "public/lang/*.json": [
+    "src/lang/*.json": [
       "yarn sort",
       "git add"
     ],
