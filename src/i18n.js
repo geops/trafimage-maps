@@ -3,6 +3,26 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-xhr-backend';
 
+import translationDE from './lang/de.json';
+import translationEN from './lang/en.json';
+import translationFR from './lang/fr.json';
+import translationIT from './lang/it.json';
+
+const resources = {
+  de: {
+    translation: translationDE,
+  },
+  en: {
+    translation: translationEN,
+  },
+  fr: {
+    translation: translationFR,
+  },
+  it: {
+    translation: translationIT,
+  },
+};
+
 i18n
   .use(initReactI18next)
   .use(Backend)
@@ -13,10 +33,7 @@ i18n
         order: ['querystring'],
         lookupQuerystring: 'lang',
       },
-      backend: {
-        loadPath: `/lang/locale-{{lng}}-main.json`,
-        // crossDomain: true,
-      },
+      resources,
       fallbackLng: 'de',
       interpolation: {
         escapeValue: false,
