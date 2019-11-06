@@ -37,14 +37,6 @@ else
   exit 1
 fi
 
-# Copy translations in documentation folder.
-if cp -rf public/lang doc/build/; then
-  echo "Copy translations in doc folder suceeds."
-else
-  echo "Copy translations in doc folder failed."
-  exit 1
-fi
-
 # Build jsdoc documentation for layers, in jsdoc folder (based on jsdoc_conf.json).
 if node ./scripts/doc.js; then
   echo "jsdoc build suceeds."
