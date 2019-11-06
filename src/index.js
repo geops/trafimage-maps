@@ -5,10 +5,9 @@ import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AppRouter from './AppRouter';
-import CONF from './config/appConfig';
 import registerServiceWorker from './serviceWorker';
 
-if (CONF.pwaActive) {
+if (process.env.REACT_APP_PWA === 'active') {
   registerServiceWorker();
 }
 

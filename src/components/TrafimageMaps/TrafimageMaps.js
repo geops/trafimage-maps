@@ -153,6 +153,26 @@ const propTypes = {
    * translation function.
    */
   t: PropTypes.func.isRequired,
+
+  /**
+   * URL endpoint for Cartaro.
+   */
+  cartaroUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for GeoServer.
+   */
+  geoServerUrl: PropTypes.string,
+
+  /**
+   * API key for vector tiles hosted by geOps.
+   */
+  vectorTilesKey: PropTypes.string,
+
+  /**
+   * URL endpoint for vector tiles hosted by geOps.
+   */
+  vectorTilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
@@ -183,6 +203,10 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
+  cartaroUrl: null,
+  geoServerUrl: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
   topics: null,
 };
 
@@ -262,9 +286,15 @@ class TrafimageMaps extends React.PureComponent {
       initialState,
       menus,
       subMenus,
+      cartaroUrl,
+      geoServerUrl,
+      vectorTilesKey,
+      vectorTilesUrl,
       initialZoom,
     } = this.props;
     const { map, layerService, searchService } = this.store.getState().app;
+
+    searchService.setApiKey(apiKey);
 
     // Define which component to display as child of TopicsMenu.
     const appTopicsMenuChildren = TrafimageMaps.getComponents(
@@ -331,7 +361,10 @@ class TrafimageMaps extends React.PureComponent {
               map={map}
               topics={topics}
               activeTopicKey={activeTopicKey}
-              apiKey={apiKey}
+              cartaroUrl={cartaroUrl}
+              geoServerUrl={geoServerUrl}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
             />
             <Map
               map={map}
