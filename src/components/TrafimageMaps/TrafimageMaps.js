@@ -271,7 +271,7 @@ class TrafimageMaps extends React.PureComponent {
     // Define which components to display.
     const defaultElements = {
       header: <Header />,
-      search: <Search map={map} />,
+      search: <Search />,
       popup: <Popup popupComponents={popupComponents} />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
