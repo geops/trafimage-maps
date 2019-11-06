@@ -140,6 +140,16 @@ const propTypes = {
    * translation function.
    */
   t: PropTypes.func.isRequired,
+
+  /**
+   * API key for vector tiles hosted by geOps.
+   */
+  vectorTilesKey: PropTypes.string,
+
+  /**
+   * URL endpoint for vector tiles hosted by geOps.
+   */
+  vectorTilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
@@ -169,6 +179,8 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -213,6 +225,8 @@ class TrafimageMaps extends React.PureComponent {
       initialState,
       menus,
       subMenus,
+      vectorTilesKey,
+      vectorTilesUrl,
     } = this.props;
 
     /**
@@ -288,6 +302,8 @@ class TrafimageMaps extends React.PureComponent {
               topics={topics}
               activeTopicKey={activeTopicKey}
               apiKey={apiKey}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
             />
             <Map
               map={map}

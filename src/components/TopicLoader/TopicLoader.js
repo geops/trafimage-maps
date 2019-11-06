@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import { unByKey } from 'ol/Observable';
+import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TOPIC_CONF from '../../config/topics';
 import { setLayers } from '../../model/map/actions';
@@ -23,6 +24,8 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   searchService: PropTypes.instanceOf(SearchService).isRequired,
   apiKey: PropTypes.string,
+  vectorTilesKey: PropTypes.string,
+  vectorTilesUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -37,6 +40,8 @@ const defaultProps = {
   baseLayers: null,
   layers: null,
   apiKey: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -101,6 +106,8 @@ class TopicLoader extends Component {
       baseLayers,
       dispatchSetLayers,
       apiKey,
+      vectorTilesKey,
+      vectorTilesUrl,
     } = this.props;
 
     const newLayers = [
@@ -116,6 +123,9 @@ class TopicLoader extends Component {
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
         flatLayers[i].setApiKey(apiKey);
+      }
+      if (flatLayers[i] instanceof TrafimageMapboxLayer) {
+        flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       }
     }
   }

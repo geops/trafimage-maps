@@ -48,6 +48,8 @@ const AppRouter = () => (
             elements={elements}
             initialState={{ ...match.params }}
             popupComponents={POPUP_CONF}
+            vectorTilesKey={process.env.REACT_APP_VECTOR_TILES_KEY}
+            vectorTilesUrl={process.env.REACT_APP_VECTOR_TILES_URL}
           />
         );
       }}
