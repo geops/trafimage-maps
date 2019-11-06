@@ -1,1 +1,1 @@
-export { default } from './TrafimageMaps';
+export { default, propTypes, defaultProps } from './TrafimageMaps';

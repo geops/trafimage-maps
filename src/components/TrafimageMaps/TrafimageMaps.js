@@ -31,9 +31,10 @@ import store, { getStore } from '../../model/store';
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
 import TopicsMenu from '../TopicsMenu';
-import { setZoom } from '../../model/map/actions';
+import { setTopics } from '../../model/app/actions';
+import { setZoom, setCenter } from '../../model/map/actions';
 
-const propTypes = {
+export const propTypes = {
   /**
    * Name of the topic to display.
    */
@@ -42,7 +43,7 @@ const propTypes = {
   /**
    * Array of topics from ./src/config/topics
    */
-  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  topics: PropTypes.array,
 
   /**
    * Additional elements.
@@ -149,7 +150,7 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const defaultProps = {
+export const defaultProps = {
   activeTopicKey: null,
   children: null,
   center: [925472, 5920000],
@@ -177,6 +178,7 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
+  topics: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -208,10 +210,18 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom } = this.props;
+    const { zoom, center, topics } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
+    }
+
+    if (center !== prevProps.center) {
+      this.store.dispatch(setCenter(center));
+    }
+
+    if (topics !== prevProps.topics) {
+      this.store.dispatch(setTopics(topics));
     }
   }
 
