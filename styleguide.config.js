@@ -10,10 +10,7 @@ module.exports = {
   styleguideDir: 'styleguide-build',
   require: [
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
-    'react-app-polyfill/ie11',
-    'react-app-polyfill/stable',
-    'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
-    path.join(__dirname, 'src/i18n.js'),
+    path.join(__dirname, 'build/bundle.js'),
   ],
   ribbon: {
     url: 'https://github.com/geops/trafimage-maps',
@@ -28,10 +25,13 @@ module.exports = {
       content: 'src/apps/README.md',
       sections: [
         {
-          name: 'Component',
-          components: ['src/components/TrafimageMaps/[A-Z]*.js'],
-          exampleMode: 'collapse',
-          usageMode: 'collapse',
+          name: 'WebComponent',
+          sections: [
+            {
+              name: '<trafimage-maps>',
+              content: 'src/apps/WebComponent/README.md',
+            },
+          ],
         },
         {
           name: 'Examples',
@@ -56,6 +56,7 @@ module.exports = {
         // Transpile node dependencies, node deps are often not transpiled for IE11
         {
           test: [
+            /\/node_modules\/(regexpu-core|unicode-.*|chalk|acorn-.*|query-string|strict-uri-encode)/,
             /\/node_modules\/(regexpu-core|unicode-.*|chalk|acorn-.*|query-string|strict-uri-encode)/,
             /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker|strip-ansi)/,
           ],

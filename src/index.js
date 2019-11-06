@@ -1,19 +1,11 @@
+// import polyfills for ie 11
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import 'proxy-polyfill';
+import { ReactWebComponent } from 'create-react-web-component';
+import WebComponent from './WebComponent';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import AppRouter from './AppRouter';
-import CONF from './config/appConfig';
-import registerServiceWorker from './serviceWorker';
-
-if (CONF.pwaActive) {
-  registerServiceWorker();
-}
-
-ReactDOM.render(<AppRouter />, document.getElementById('root'));
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+ReactWebComponent.setAttributes(WebComponent.attributes);
+ReactWebComponent.setProperties(WebComponent.defaultProps);
+ReactWebComponent.render(WebComponent, 'trafimage-maps', { shadow: false });

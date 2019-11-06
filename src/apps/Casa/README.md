@@ -93,22 +93,23 @@ routeLayer.loadRoutes([
 });
 
 routeLayer.onClick(f => {
-    console.log('Clicked', f);
+  console.log('Clicked', f);
 });
 
-// Configuration of visible app elements.
-const elements = {
-  menu: true,
-  popup: true,
-};
+window.addEventListener('load', () => {  
+  const trafimage = document.getElementById('casa');
+  trafimage.apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
+  trafimage.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
+  trafimage.elements = {
+    menu: true,
+    popup: true,
+  };
+  trafimage.setAttribute('width', '99%');
+});
 
 
 <div style={{ position: 'relative', width: '100%', height: 500 }}>
-  <TrafimageMaps
-    topics={[casa]}
-    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
-    layers={[zoneLayer, routeLayer]}
-    elements={elements}
-  />
-</div>;
+  <trafimage-maps id="casa"></trafimage-maps>
+</div>
+
 ```
