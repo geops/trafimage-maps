@@ -44,6 +44,7 @@ class SearchService {
   }
 
   highlight(item, persistent = false) {
+    this.highlightItem = item;
     this.highlightLayer.getSource().clear();
     const featureProjection = this.map.getView().getProjection();
     const feature = item
@@ -59,6 +60,15 @@ class SearchService {
           maxZoom: 15,
         });
       }
+    }
+  }
+
+  highlightSection() {
+    if (this.highlightItem) {
+      Object.entries(this.searches).forEach(([section, search], position) => {
+        search.collapse(section !== this.highlightItem.section);
+        this.upsert(section, search.getItems(), position);
+      });
     }
   }
 

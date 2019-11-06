@@ -4,7 +4,6 @@ import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './i18n';
 import AppRouter from './AppRouter';
 import CONF from './config/appConfig';
 import registerServiceWorker from './serviceWorker';
