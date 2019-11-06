@@ -317,7 +317,6 @@ class TrafimageMaps extends React.PureComponent {
               map={map}
               topics={topics}
               activeTopicKey={activeTopicKey}
-              apiKey={apiKey}
               cartaroUrl={cartaroUrl}
               tileserverUrl={tileserverUrl}
               vectorTilesKey={vectorTilesKey}

@@ -5,7 +5,6 @@ import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import { unByKey } from 'ol/Observable';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
 import TrafimageTileserverLayer from '../../layers/TrafimageTileserverLayer';
 import HandicapLayer from '../../layers/HandicapLayer';
 import TOPIC_CONF from '../../config/topics';
@@ -25,7 +24,6 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   searchService: PropTypes.instanceOf(SearchService).isRequired,
-  apiKey: PropTypes.string,
   cartaroUrl: PropTypes.string,
   tileserverUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
@@ -43,7 +41,6 @@ const defaultProps = {
   activeTopic: null,
   baseLayers: null,
   layers: null,
-  apiKey: null,
   cartaroUrl: null,
   tileserverUrl: null,
   vectorTilesKey: null,
@@ -111,7 +108,6 @@ class TopicLoader extends Component {
       layers,
       baseLayers,
       dispatchSetLayers,
-      apiKey,
       cartaroUrl,
       tileserverUrl,
       vectorTilesKey,
@@ -129,9 +125,7 @@ class TopicLoader extends Component {
     dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
-        flatLayers[i].setApiKey(apiKey);
-      } else if (flatLayers[i] instanceof TrafimageMapboxLayer) {
+      if (flatLayers[i] instanceof TrafimageMapboxLayer) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       } else if (flatLayers[i] instanceof TrafimageTileserverLayer) {
         flatLayers[i].setTileserverUrl(tileserverUrl);
