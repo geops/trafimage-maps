@@ -9,10 +9,10 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import WMSLayer from 'react-spatial/layers/WMSLayer';
+import HandicapLayer from '../../../layers/HandicapLayer';
 import MapboxStyleLayer from '../../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../../layers/TrafimageMapboxLayer';
-import HandicapLayer from '../../../layers/HandicapLayer';
-import CONF from '../../appConfig';
+import TrafimageTileserverLayer from '../../../layers/TrafimageTileserverLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -134,15 +134,12 @@ export const swisstopoSwissImage = new Layer({
   }),
 });
 
-export const netzkarteAerial = new Layer({
+export const netzkarteAerial = new TrafimageTileserverLayer({
   name: 'Netzkarte Luftbild',
   key: 'ch.sbb.netzkarte.overlay',
   visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
-      url:
-        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_aerial_webmercator` +
-        '/webmercator/{TileMatrix}/{TileCol}/{TileRow}.png',
       matrixSet: 'webmercator',
       projection: 'EPSG:3857',
       requestEncoding: 'REST',

@@ -147,6 +147,11 @@ const propTypes = {
   cartaroUrl: PropTypes.string,
 
   /**
+   * URL endpoint for Mapproxy tileserver.
+   */
+  tileserverUrl: PropTypes.string,
+
+  /**
    * API key for vector tiles hosted by geOps.
    */
   vectorTilesKey: PropTypes.string,
@@ -185,6 +190,7 @@ const defaultProps = {
   menus: null,
   subMenus: null,
   cartaroUrl: null,
+  tileserverUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
 };
@@ -232,6 +238,7 @@ class TrafimageMaps extends React.PureComponent {
       menus,
       subMenus,
       cartaroUrl,
+      tileserverUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -310,6 +317,7 @@ class TrafimageMaps extends React.PureComponent {
               activeTopicKey={activeTopicKey}
               apiKey={apiKey}
               cartaroUrl={cartaroUrl}
+              tileserverUrl={tileserverUrl}
               vectorTilesKey={vectorTilesKey}
               vectorTilesUrl={vectorTilesUrl}
             />
