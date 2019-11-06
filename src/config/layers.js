@@ -118,9 +118,11 @@ export const netzkarteLayerNight = new MapboxLayer({
 });
 
 export const swisstopoSwissImage = new Layer({
-  name: 'Swissimage',
+  name: 'ch.sbb.netzkarte.luftbild',
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
+  isBaseLayer: true,
+  radioGroup: 'baseLayer',
   visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
@@ -141,38 +143,6 @@ export const swisstopoSwissImage = new Layer({
     }),
   }),
 });
-
-export const netzkarteAerial = new Layer({
-  name: 'Netzkarte Luftbild',
-  key: 'ch.sbb.netzkarte.overlay',
-  visible: false,
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `${CONF.tileserverUrlMapproxy}/wmts/netzkarte_aerial_webmercator` +
-        '/webmercator/{TileMatrix}/{TileCol}/{TileRow}.png',
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      transition: 0,
-      crossOrigin: 'anonymous',
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-  }),
-});
-
-export const aerial = new Layer({
-  name: 'ch.sbb.netzkarte.luftbild.group',
-  isBaseLayer: true,
-  radioGroup: 'baseLayer',
-  visible: false,
-});
-
-aerial.setChildren([swisstopoSwissImage, netzkarteAerial]);
 
 export const swisstopoLandeskarte = new Layer({
   name: 'ch.sbb.netzkarte.landeskarte',
@@ -488,5 +458,5 @@ export default [
   // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
-  aerial,
+  swisstopoSwissImage,
 ];
