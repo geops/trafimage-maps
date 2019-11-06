@@ -7,9 +7,9 @@ import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
-import WMSLayer from 'react-spatial/layers/WMSLayer';
 import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
+import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import TrafimageTileserverLayer from '../layers/TrafimageTileserverLayer';
 
@@ -385,12 +385,11 @@ export const buslines = new MapboxStyleLayer({
   },
 });
 
-export const gemeindegrenzen = new WMSLayer({
+export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   name: 'ch.sbb.ch_gemeinden',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `//maps.trafimage.ch/geoserver/trafimage/ows/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:gemeindegrenzen',
@@ -409,12 +408,11 @@ export const gemeindegrenzen = new WMSLayer({
   },
 });
 
-export const parks = new WMSLayer({
+export const parks = new TrafimageGeoServerWMSLayer({
   name: 'ch.sbb.parks',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `//maps.trafimage.ch/geoserver/trafimage/ows/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:perimeter_parks',
