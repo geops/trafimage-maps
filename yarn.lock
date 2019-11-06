@@ -10455,10 +10455,10 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-ol@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/ol/-/ol-6.1.0.tgz#81882524f554a58e1c588a1e6dbec262b26b87db"
-  integrity sha512-qAoa26yq8jZ9bKA/QlQcyvjlfi84DJh4yHQiTwF+yVKxug4B8IUUEiRlll0Mi9/fjKbKajjLMMXZFB59MAgofw==
+ol@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/ol/-/ol-6.1.1.tgz#7f8ada284344a5872d552205de558ed4a904cd27"
+  integrity sha512-0dL3i3eJqgOpqIjDKEY3grkeQnjAYfV5L/JCxhOu4SxiaizRwFrFgeas6LILRoxKa03jhQFbut2r2bbgcLGQeA==
   dependencies:
     "@openlayers/pepjs" "^0.5.3"
     pbf "3.2.1"
@@ -12521,10 +12521,10 @@ react-simple-code-editor@^0.9.7:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.9.15.tgz#59e3583832e9e98992d3674b2d7673b4cd1c5709"
   integrity sha512-M8iKgjBTBZK92tZYgOEfMuR7c3zZ0q0v3QYllSxIPx3SU+w003VofH50txXQSBTu92pSOm2tidON1HbQ1l8BDA==
 
-react-spatial@^0.1.0-beta.29:
-  version "0.1.0-beta.29"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.29.tgz#d04fa25481de92ab3fa3aee76033d4a220544ce5"
-  integrity sha512-ztvDOe8KQZMUwEF/Kx2X33Z+hZ5nxRf7OLfYMUa60aYUcvDDlbuSpoX9A+7ci1+MOpeQzYixXSvv7XakBbB++g==
+react-spatial@^0.1.0-beta.32:
+  version "0.1.0-beta.32"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.32.tgz#dd397afae42b8249606b32cea33b3e130eea6b98"
+  integrity sha512-YmiFw9mHT8AY/jCNw3KlZsvtFlE4X3QmZX0UeQnZsUdgPLiVmABeX5d5jI2Chp/ifsKgjoNfmEBQ7Xq2ny0mJQ==
   dependencies:
     query-string "^6.4.2"
     react-draggable "^4.0.3"

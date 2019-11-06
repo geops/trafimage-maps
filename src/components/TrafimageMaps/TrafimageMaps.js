@@ -2,6 +2,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import '../../i18n';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -30,6 +31,7 @@ import store, { getStore } from '../../model/store';
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
 import TopicsMenu from '../TopicsMenu';
+import { setZoom } from '../../model/map/actions';
 
 const propTypes = {
   /**
@@ -119,6 +121,11 @@ const propTypes = {
   /**
    * Initial zoom level.
    */
+  initialZoom: PropTypes.number,
+
+  /**
+   * Zoom level.
+   */
   zoom: PropTypes.number,
 
   /**
@@ -166,7 +173,8 @@ const defaultProps = {
   activeTopicKey: null,
   children: null,
   center: [925472, 5920000],
-  zoom: 9,
+  initialZoom: 9,
+  zoom: undefined,
   elements: {
     header: false,
     footer: false,
@@ -207,16 +215,43 @@ class TrafimageMaps extends React.PureComponent {
     this.state = {
       tabFocus: false,
     };
+    this.onDocumentClick = this.onDocumentClick.bind(this);
+    this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
+    const { history } = this.props;
 
-    document.addEventListener('keydown', e => {
-      if (e.which === 9) {
-        this.setState({ tabFocus: true });
-      }
-    });
+    /**
+     * If the application runs standalone, we want to use a consistent store.
+     * However when running in Stylegudist, every application needs it own store
+     */
+    this.store = history ? store : getStore();
+  }
 
-    document.addEventListener('click', () => {
-      this.setState({ tabFocus: false });
-    });
+  componentDidMount() {
+    document.addEventListener('click', this.onDocumentClick);
+    document.addEventListener('keydown', this.onDocumentKeyDown);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { zoom } = this.props;
+
+    if (zoom !== prevProps.zoom) {
+      this.store.dispatch(setZoom(zoom));
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.onDocumentClick);
+    document.removeEventListener('keydown', this.onDocumentKeyDown);
+  }
+
+  onDocumentKeyDown(e) {
+    if (e.which === 9) {
+      this.setState({ tabFocus: true });
+    }
+  }
+
+  onDocumentClick() {
+    this.setState({ tabFocus: false });
   }
 
   render() {
@@ -233,7 +268,6 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       history,
       center,
-      zoom,
       initialState,
       menus,
       subMenus,
@@ -241,14 +275,9 @@ class TrafimageMaps extends React.PureComponent {
       tileserverUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      initialZoom,
     } = this.props;
-
-    /**
-     * If the application runs standalone, we want to use a consistent store.
-     * However when running in Stylegudist, every application needs it own store
-     */
-    const appStore = history ? store : getStore();
-    const { map, layerService, searchService } = appStore.getState().app;
+    const { map, layerService, searchService } = this.store.getState().app;
 
     searchService.setApiKey(apiKey);
 
@@ -272,7 +301,7 @@ class TrafimageMaps extends React.PureComponent {
     // Define which components to display.
     const defaultElements = {
       header: <Header />,
-      search: <Search map={map} searchService={searchService} />,
+      search: <Search />,
       popup: <Popup popupComponents={popupComponents} />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
@@ -305,7 +334,7 @@ class TrafimageMaps extends React.PureComponent {
     const { tabFocus } = this.state;
 
     return (
-      <Provider store={appStore}>
+      <Provider store={this.store}>
         <div className={`tm-app ${elements.header ? 'header' : ''}`}>
           <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
             <ResizeHandler observe=".tm-app" />
@@ -325,7 +354,7 @@ class TrafimageMaps extends React.PureComponent {
             <Map
               map={map}
               initialCenter={center}
-              initialZoom={zoom}
+              initialZoom={initialZoom}
               projection={projection}
               popupComponents={popupComponents}
             />
