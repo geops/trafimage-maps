@@ -9,8 +9,10 @@ import {
   setActiveTopic,
   setTopics,
   setClickedFeatureInfo,
+  setSearchService,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
+import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -19,7 +21,6 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  searchService: PropTypes.instanceOf(SearchService).isRequired,
   apiKey: PropTypes.string,
 
   // mapDispatchToProps
@@ -27,6 +28,7 @@ const propTypes = {
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetSearchService: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -63,30 +65,36 @@ class TopicLoader extends Component {
 
   componentDidMount() {
     if (this.topic) {
-      this.updateLayers(this.topic.layers);
+      this.updateServices(this.topic);
     }
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      activeTopic,
-      dispatchSetClickedFeatureInfo,
-      searchService,
-    } = this.props;
+    const { activeTopic } = this.props;
 
     if (activeTopic && activeTopic !== prevProps.activeTopic) {
-      if (activeTopic.linkUrl) {
-        TopicLoader.openLinkTopic(activeTopic);
-        return;
-      }
-      this.updateLayers(activeTopic.layers);
-
-      searchService.setSearches(activeTopic.searches || []);
-      searchService.setSearchesProps({
-        activeTopic,
-        dispatchSetClickedFeatureInfo,
-      });
+      this.updateServices(activeTopic);
     }
+  }
+
+  updateServices(topic) {
+    const {
+      dispatchSetClickedFeatureInfo,
+      dispatchSetSearchService,
+    } = this.props;
+    if (topic.linkUrl) {
+      TopicLoader.openLinkTopic(topic);
+      return;
+    }
+    this.updateLayers(topic.layers);
+
+    const newSearchService = new SearchService(layerHelper.highlightStyle);
+    newSearchService.setSearches(topic.searches || []);
+    newSearchService.setSearchesProps({
+      topic,
+      dispatchSetClickedFeatureInfo,
+    });
+    dispatchSetSearchService(newSearchService);
   }
 
   updateLayers(topicLayers) {
@@ -129,6 +137,7 @@ const mapDispatchToProps = {
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetSearchService: setSearchService,
 };
 
 TopicLoader.propTypes = propTypes;

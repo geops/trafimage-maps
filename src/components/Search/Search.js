@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import {
   FaSearch,
@@ -12,9 +13,11 @@ import SearchToggle from './SearchToggle';
 
 import './Search.scss';
 
-function Search({ map, searchService }) {
+function Search() {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
+  const map = useSelector(state => state.app.map);
+  const searchService = useSelector(state => state.app.searchService);
   const { t } = useTranslation();
 
   useMemo(() => {
