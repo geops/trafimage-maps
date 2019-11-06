@@ -34,7 +34,7 @@ import TopicsMenu from '../TopicsMenu';
 import { setTopics } from '../../model/app/actions';
 import { setZoom, setCenter } from '../../model/map/actions';
 
-export const propTypes = {
+const propTypes = {
   /**
    * Name of the topic to display.
    */
@@ -43,7 +43,12 @@ export const propTypes = {
   /**
    * Array of topics from ./src/config/topics
    */
-  topics: PropTypes.array,
+  topics: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
+    }),
+  ),
 
   /**
    * Additional elements.
@@ -150,7 +155,7 @@ export const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-export const defaultProps = {
+const defaultProps = {
   activeTopicKey: null,
   children: null,
   center: [925472, 5920000],
