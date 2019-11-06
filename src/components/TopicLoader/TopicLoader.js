@@ -5,7 +5,6 @@ import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import TrafimageGeoServerWMSLayer from '../../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import TrafimageTileserverLayer from '../../layers/TrafimageTileserverLayer';
 import HandicapLayer from '../../layers/HandicapLayer';
 import { setLayers } from '../../model/map/actions';
 import {
@@ -26,7 +25,6 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
-  tileserverUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
 
@@ -45,7 +43,6 @@ const defaultProps = {
   layers: null,
   cartaroUrl: null,
   geoServerUrl: null,
-  tileserverUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
 };
@@ -116,7 +113,6 @@ class TopicLoader extends Component {
       dispatchSetLayers,
       cartaroUrl,
       geoServerUrl,
-      tileserverUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -136,8 +132,6 @@ class TopicLoader extends Component {
         flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
       } else if (flatLayers[i] instanceof TrafimageMapboxLayer) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
-      } else if (flatLayers[i] instanceof TrafimageTileserverLayer) {
-        flatLayers[i].setTileserverUrl(tileserverUrl);
       } else if (flatLayers[i] instanceof HandicapLayer) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
       }

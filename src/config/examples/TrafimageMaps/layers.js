@@ -12,7 +12,6 @@ import WMSLayer from 'react-spatial/layers/WMSLayer';
 import HandicapLayer from '../../../layers/HandicapLayer';
 import MapboxStyleLayer from '../../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../../layers/TrafimageMapboxLayer';
-import TrafimageTileserverLayer from '../../../layers/TrafimageTileserverLayer';
 
 proj4.defs(
   'EPSG:21781',

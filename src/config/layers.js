@@ -11,7 +11,6 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import TrafimageTileserverLayer from '../layers/TrafimageTileserverLayer';
 
 proj4.defs(
   'EPSG:21781',
