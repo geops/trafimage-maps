@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import {
@@ -20,17 +20,26 @@ function Search() {
   const searchService = useSelector(state => state.app.searchService);
   const { t } = useTranslation();
 
+  const componentIsMounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      componentIsMounted.current = false;
+    };
+  }, []);
+
   useMemo(() => {
     searchService.setClear(() => setSuggestions([]));
-    searchService.setUpsert((section, items, position) =>
-      setSuggestions(oldSuggestions => {
-        const index = oldSuggestions.findIndex(s => s.section === section);
-        const start = index === -1 ? position : index;
-        const deleteCount = index === -1 ? 0 : 1;
-        const newSuggestions = [...oldSuggestions];
-        newSuggestions.splice(start, deleteCount, { section, items });
-        return newSuggestions;
-      }),
+    searchService.setUpsert(
+      (section, items, position) =>
+        componentIsMounted.current &&
+        setSuggestions(oldSuggestions => {
+          const index = oldSuggestions.findIndex(s => s.section === section);
+          const start = index === -1 ? position : index;
+          const deleteCount = index === -1 ? 0 : 1;
+          const newSuggestions = [...oldSuggestions];
+          newSuggestions.splice(start, deleteCount, { section, items });
+          return newSuggestions;
+        }),
     );
   }, [searchService, setSuggestions]);
 
@@ -91,13 +100,15 @@ function Search() {
               tabIndex: 0,
               'aria-label': 'Suche',
               onChange: (e, { newValue }) => setValue(newValue),
-              onKeyDown: ({ key }) => {
+              onKeyUp: ({ key }) => {
                 if (key === 'Enter') {
                   const filtered = suggestions.filter(s => s.items.length > 0);
                   if (filtered.length > 0) {
                     const { items, section } = filtered[0];
                     searchService.select({ ...items[0], section });
                   }
+                } else if (key === 'ArrowDown' || key === 'ArrowUp') {
+                  searchService.highlightSection(); // for improved accessibility
                 }
               },
               placeholder: searchService.getPlaceholder(t),
