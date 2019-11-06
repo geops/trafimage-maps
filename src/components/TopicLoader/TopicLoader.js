@@ -23,7 +23,6 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  searchService: PropTypes.instanceOf(SearchService).isRequired,
   cartaroUrl: PropTypes.string,
   tileserverUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
