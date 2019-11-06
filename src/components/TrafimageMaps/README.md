@@ -19,9 +19,6 @@ import topics from '../../config/examples/TrafimageMaps/topics';
       popup: true,
       search: true,
     }}
-    popupComponents={{
-      'ch.sbb.bahnhofplaene.printprodukte': 'BahnhofplanPopup',
-    }}
   />
 </div>;
 ```
