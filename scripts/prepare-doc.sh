@@ -13,6 +13,14 @@ else
   exit 1
 fi
 
+# Build web component.
+if yarn wc:build; then
+  echo "Web component build suceeds."
+else
+  echo "Building web component failed."
+  exit 1
+fi
+
 # Build styleguidist documentation (based on styleguide.config.js).
 if styleguidist build; then
   echo "Styleguidist build suceeds."

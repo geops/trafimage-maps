@@ -25,6 +25,9 @@ const overrideModule = module => {
   const cssRuleIndex = module.rules[2].oneOf.findIndex(rule =>
     '.css'.match(rule.test),
   );
+  const scssRuleIndex = module.rules[2].oneOf.findIndex(rule =>
+    '.scss'.match(rule.test),
+  );
   if (cssRuleIndex !== -1) {
     module.rules[2].oneOf[cssRuleIndex].use[0] = {
       loader: 'to-string-loader',
@@ -34,10 +37,14 @@ const overrideModule = module => {
     };
   }
 
-  /*module.rules[2].oneOf.unshift({
-    test: /\.svg$/,
-    use: ['@svgr/webpack'],
-  });*/
+  if (scssRuleIndex !== -1) {
+    module.rules[2].oneOf[scssRuleIndex].use[0] = {
+      loader: 'to-string-loader',
+    };
+    module.rules[2].oneOf[scssRuleIndex].use[1] = {
+      loader: 'css-loader',
+    };
+  }
 
   return module;
 };
@@ -54,8 +61,8 @@ const overrideOutput = output => {
 const overrideOptimization = (optimization, env) => {
   const newOptions = optimization.minimizer[0].options;
 
-  newOptions.sourceMap = env === 'development';
-  optimization.minimizer[0].options = newOptions;
+  //newOptions.sourceMap = env === 'development';
+  //optimization.minimizer[0].options = newOptions;
 
   return {
     ...optimization,
@@ -67,11 +74,11 @@ const overrideOptimization = (optimization, env) => {
 const overridePlugins = (plugins, env) => {
   plugins[0].options.inject = 'head';
 
-  plugins.push(
+  /*plugins.push(
     new EventHooksPlugin({
       done: new PromiseTask(() => copyBundleScript(env)),
     }),
-  );
+  );*/
 
   return plugins;
 };

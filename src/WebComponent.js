@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from 'create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
-import styles from './main.e1265f09.css';
+import styles from './WebComponent.scss';
 
 const propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
