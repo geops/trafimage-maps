@@ -14,7 +14,7 @@
     "lodash": "^4.17.11",
     "mapbox-gl": "^1.5.0",
     "node-sass": "^4.13.0",
-    "ol": "^6.1.0",
+    "ol": "^6.1.1",
     "proj4": "^2.5.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.4.2",
@@ -27,7 +27,7 @@
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.1.2",
     "react-router-prop-types": "^1.0.4",
-    "react-spatial": "^0.1.0-beta.29",
+    "react-spatial": "^0.1.0-beta.32",
     "react-styleguidist": "^9.1.11",
     "react-transit": "^0.1.1-beta.25",
     "redux": "^4.0.1",
@@ -35,8 +35,8 @@
     "redux-thunk": "^2.3.0"
   },
   "peerDependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
@@ -176,7 +176,7 @@
     ]
   },
   "lint-staged": {
-    "public/lang/*.json": [
+    "src/lang/*.json": [
       "yarn sort",
       "git add"
     ],

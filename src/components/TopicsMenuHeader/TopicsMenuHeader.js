@@ -37,7 +37,7 @@ const getSubtitle = (layerService, t) => {
 
 const TopicsMenuHeader = ({ isOpen, onToggle }) => {
   const layerService = useSelector(state => state.app.layerService);
-  const { name } = useSelector(state => state.app.activeTopic);
+  const { name } = useSelector(state => state.app.activeTopic || {});
   const { t } = useTranslation();
   const [subtitle, setSubtitle] = useState('');
 
