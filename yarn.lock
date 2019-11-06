@@ -12521,10 +12521,8 @@ react-simple-code-editor@^0.9.7:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.9.15.tgz#59e3583832e9e98992d3674b2d7673b4cd1c5709"
   integrity sha512-M8iKgjBTBZK92tZYgOEfMuR7c3zZ0q0v3QYllSxIPx3SU+w003VofH50txXQSBTu92pSOm2tidON1HbQ1l8BDA==
 
-react-spatial@^0.1.0-beta.32:
-  version "0.1.0-beta.32"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.0-beta.32.tgz#dd397afae42b8249606b32cea33b3e130eea6b98"
-  integrity sha512-YmiFw9mHT8AY/jCNw3KlZsvtFlE4X3QmZX0UeQnZsUdgPLiVmABeX5d5jI2Chp/ifsKgjoNfmEBQ7Xq2ny0mJQ==
+react-spatial@../react-spatial/build/:
+  version "0.1.1-beta.1"
   dependencies:
     query-string "^6.4.2"
     react-draggable "^4.0.3"
