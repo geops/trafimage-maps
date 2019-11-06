@@ -7,10 +7,9 @@ import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
-import MapboxLayer from 'react-spatial/layers/MapboxLayer';
-import WMSLayer from 'react-spatial/layers/WMSLayer';
 import HandicapLayer from '../../../layers/HandicapLayer';
 import MapboxStyleLayer from '../../../layers/MapboxStyleLayer';
+import TrafimageGeoServerWMSLayer from '../../../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../../../layers/TrafimageMapboxLayer';
 
 proj4.defs(
@@ -97,7 +96,7 @@ export const netzkarteLayerLight = new TrafimageMapboxLayer({
   style: 'evoq_sandbox2',
 });
 
-export const netzkarteLayerNight = new MapboxLayer({
+export const netzkarteLayerNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
@@ -112,9 +111,9 @@ export const swisstopoSwissImage = new Layer({
   name: 'ch.sbb.netzkarte.luftbild',
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
-  visible: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
+  visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -243,6 +242,12 @@ bahnhofplaene.setChildren([
       type: 'symbol',
       source: 'base',
       'source-layer': 'netzkarte_point',
+      filter: [
+        'any',
+        ['has', 'url_a4'],
+        ['has', 'url_poster'],
+        ['has', 'url_shopping'],
+      ],
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
@@ -379,12 +384,11 @@ export const buslines = new MapboxStyleLayer({
   },
 });
 
-export const gemeindegrenzen = new WMSLayer({
+export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   name: 'ch.sbb.ch_gemeinden',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `//maps.trafimage.ch/geoserver/trafimage/ows/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:gemeindegrenzen',
@@ -403,12 +407,11 @@ export const gemeindegrenzen = new WMSLayer({
   },
 });
 
-export const parks = new WMSLayer({
+export const parks = new TrafimageGeoServerWMSLayer({
   name: 'ch.sbb.parks',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `//maps.trafimage.ch/geoserver/trafimage/ows/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:perimeter_parks',
@@ -439,8 +442,8 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
 export default [
   sourcesLayer,
   netzkarteLayer,
-  netzkarteLayerLight,
-  netzkarteLayerNight,
+  // netzkarteLayerLight,
+  // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   swisstopoSwissImage,
