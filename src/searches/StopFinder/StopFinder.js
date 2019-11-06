@@ -2,14 +2,15 @@ import React from 'react';
 
 import Search from '../Search';
 
+const endpoint = 'https://api.geops.io/stops/v1/';
+
 class StopFinder extends Search {
-  constructor() {
-    super();
-    this.key = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
+  setApiKey(apiKey) {
+    this.apiKey = apiKey;
   }
 
   search(value) {
-    return fetch(`https://api.geops.io/stops/v1/?&q=${value}&key=${this.key}`)
+    return fetch(`${endpoint}?&q=${value}&key=${this.apiKey}`)
       .then(data => data.json())
       .then(featureCollection => featureCollection.features);
   }
