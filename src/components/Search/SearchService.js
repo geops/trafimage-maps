@@ -14,6 +14,14 @@ class SearchService {
     this.clear = clear;
   }
 
+  setApiKey(apiKey) {
+    Object.entries(this.searches).forEach(([, search]) => {
+      if (typeof search.setApiKey === 'function') {
+        search.setApiKey(apiKey);
+      }
+    });
+  }
+
   setMap(map) {
     this.map = map;
     this.highlightLayer.setMap(map);

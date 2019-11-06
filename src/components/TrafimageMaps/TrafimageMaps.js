@@ -250,6 +250,8 @@ class TrafimageMaps extends React.PureComponent {
     const appStore = history ? store : getStore();
     const { map, layerService, searchService } = appStore.getState().app;
 
+    searchService.setApiKey(apiKey);
+
     // Define which component to display as child of TopicsMenu.
     const appTopicsMenuChildren = TrafimageMaps.getComponents(
       {
