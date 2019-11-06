@@ -62,7 +62,10 @@ class TopicLoader extends Component {
     } = this.props;
     this.topic = activeTopicKey
       ? topics.find(t => t.key === activeTopicKey)
-      : topics[0];
+      : topics && topics[0];
+    if (!this.topic) {
+      return;
+    }
 
     if (this.topic.linkUrl) {
       TopicLoader.openLinkTopic(this.topic.linkUrl);
@@ -78,10 +81,14 @@ class TopicLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic } = this.props;
+    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
 
     if (activeTopic && activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
+    }
+
+    if (topics !== prevProps.topics && topics && topics.length) {
+      dispatchSetActiveTopic(topics[0]);
     }
   }
 
