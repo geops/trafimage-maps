@@ -2,6 +2,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import '../../i18n';
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -30,6 +31,8 @@ import store, { getStore } from '../../model/store';
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
 import TopicsMenu from '../TopicsMenu';
+import { setTopics } from '../../model/app/actions';
+import { setZoom, setCenter } from '../../model/map/actions';
 
 const propTypes = {
   /**
@@ -40,7 +43,12 @@ const propTypes = {
   /**
    * Array of topics from ./src/config/topics
    */
-  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  topics: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
+    }),
+  ),
 
   /**
    * Additional elements.
@@ -77,14 +85,6 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
 
   /**
-   * Mapping of layer keys and Popup component names.
-   * Component names are names of files from the folder `src/components/Popup`
-   * without the `.js` extension.
-   * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
-   */
-  popupComponents: PropTypes.objectOf(PropTypes.string),
-
-  /**
    * Array of menus compomnents to display as child of Menu component.
    * Example: [<TrackerMenu/>]
    */
@@ -119,6 +119,11 @@ const propTypes = {
   /**
    * Initial zoom level.
    */
+  initialZoom: PropTypes.number,
+
+  /**
+   * Zoom level.
+   */
   zoom: PropTypes.number,
 
   /**
@@ -140,13 +145,34 @@ const propTypes = {
    * translation function.
    */
   t: PropTypes.func.isRequired,
+
+  /**
+   * URL endpoint for Cartaro.
+   */
+  cartaroUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for GeoServer.
+   */
+  geoServerUrl: PropTypes.string,
+
+  /**
+   * API key for vector tiles hosted by geOps.
+   */
+  vectorTilesKey: PropTypes.string,
+
+  /**
+   * URL endpoint for vector tiles hosted by geOps.
+   */
+  vectorTilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   activeTopicKey: null,
   children: null,
   center: [925472, 5920000],
-  zoom: 9,
+  initialZoom: 9,
+  zoom: undefined,
   elements: {
     header: false,
     footer: false,
@@ -161,7 +187,6 @@ const defaultProps = {
     search: false,
   },
   baseLayers: null,
-  popupComponents: {},
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
@@ -169,6 +194,11 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
+  cartaroUrl: null,
+  geoServerUrl: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
+  topics: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -183,16 +213,51 @@ class TrafimageMaps extends React.PureComponent {
     this.state = {
       tabFocus: false,
     };
+    this.onDocumentClick = this.onDocumentClick.bind(this);
+    this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
+    const { history } = this.props;
 
-    document.addEventListener('keydown', e => {
-      if (e.which === 9) {
-        this.setState({ tabFocus: true });
-      }
-    });
+    /**
+     * If the application runs standalone, we want to use a consistent store.
+     * However when running in Stylegudist, every application needs it own store
+     */
+    this.store = history ? store : getStore();
+  }
 
-    document.addEventListener('click', () => {
-      this.setState({ tabFocus: false });
-    });
+  componentDidMount() {
+    document.addEventListener('click', this.onDocumentClick);
+    document.addEventListener('keydown', this.onDocumentKeyDown);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { zoom, center, topics } = this.props;
+
+    if (zoom !== prevProps.zoom) {
+      this.store.dispatch(setZoom(zoom));
+    }
+
+    if (center !== prevProps.center) {
+      this.store.dispatch(setCenter(center));
+    }
+
+    if (topics !== prevProps.topics) {
+      this.store.dispatch(setTopics(topics));
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('click', this.onDocumentClick);
+    document.removeEventListener('keydown', this.onDocumentKeyDown);
+  }
+
+  onDocumentKeyDown(e) {
+    if (e.which === 9) {
+      this.setState({ tabFocus: true });
+    }
+  }
+
+  onDocumentClick() {
+    this.setState({ tabFocus: false });
   }
 
   render() {
@@ -202,25 +267,24 @@ class TrafimageMaps extends React.PureComponent {
       children,
       elements,
       layers,
-      popupComponents,
       projection,
       topics,
       activeTopicKey,
       apiKey,
       history,
       center,
-      zoom,
       initialState,
       menus,
       subMenus,
+      cartaroUrl,
+      geoServerUrl,
+      vectorTilesKey,
+      vectorTilesUrl,
+      initialZoom,
     } = this.props;
+    const { map, layerService, searchService } = this.store.getState().app;
 
-    /**
-     * If the application runs standalone, we want to use a consistent store.
-     * However when running in Stylegudist, every application needs it own store
-     */
-    const appStore = history ? store : getStore();
-    const { map, layerService, searchService } = appStore.getState().app;
+    searchService.setApiKey(apiKey);
 
     // Define which component to display as child of TopicsMenu.
     const appTopicsMenuChildren = TrafimageMaps.getComponents(
@@ -233,7 +297,7 @@ class TrafimageMaps extends React.PureComponent {
     // Define which component to display as child of Menu.
     const appMenuChildren = TrafimageMaps.getComponents(
       {
-        featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+        featureMenu: <FeatureMenu />,
         trackerMenu: <TrackerMenu />,
       },
       elements,
@@ -242,8 +306,8 @@ class TrafimageMaps extends React.PureComponent {
     // Define which components to display.
     const defaultElements = {
       header: <Header />,
-      search: <Search map={map} searchService={searchService} />,
-      popup: <Popup popupComponents={popupComponents} />,
+      search: <Search />,
+      popup: <Popup />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
         <Menu>
@@ -275,7 +339,7 @@ class TrafimageMaps extends React.PureComponent {
     const { tabFocus } = this.state;
 
     return (
-      <Provider store={appStore}>
+      <Provider store={this.store}>
         <div className={`tm-app ${elements.header ? 'header' : ''}`}>
           <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
             <ResizeHandler observe=".tm-app" />
@@ -287,14 +351,16 @@ class TrafimageMaps extends React.PureComponent {
               map={map}
               topics={topics}
               activeTopicKey={activeTopicKey}
-              apiKey={apiKey}
+              cartaroUrl={cartaroUrl}
+              geoServerUrl={geoServerUrl}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
             />
             <Map
               map={map}
               initialCenter={center}
-              initialZoom={zoom}
+              initialZoom={initialZoom}
               projection={projection}
-              popupComponents={popupComponents}
             />
             {appElements}
             {children}

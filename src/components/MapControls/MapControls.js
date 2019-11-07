@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
-import CONF from '../../config/appConfig';
 import swissbounds from '../../img/swissbounds.png';
 import './MapControls.scss';
+
+const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
 
 const MapControls = () => {
   const map = useSelector(state => state.app.map);
@@ -31,7 +32,7 @@ const MapControls = () => {
       <FitExtent
         map={map}
         title={t('Ganze Schweiz')}
-        extent={CONF.swissExtent}
+        extent={swissExtent}
         className="wkp-fit-extent"
       >
         <img src={swissbounds} alt={t('Ganze Schweiz')} />

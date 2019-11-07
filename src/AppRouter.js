@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import qs from 'query-string';
 import TrafimageMaps from './components/TrafimageMaps';
 import INSTANCES_CONF from './config/instances';
-import POPUP_CONF from './config/popups';
 
 const { topics } = INSTANCES_CONF;
 const redirectUrl = topics[0].key + window.location.search;
@@ -47,7 +46,10 @@ const AppRouter = () => (
             apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
             elements={elements}
             initialState={{ ...match.params }}
-            popupComponents={POPUP_CONF}
+            cartaroUrl={process.env.REACT_APP_CARTARO_URL}
+            geoServerUrl={process.env.REACT_APP_GEOSERVER_URL}
+            vectorTilesKey={process.env.REACT_APP_VECTOR_TILES_KEY}
+            vectorTilesUrl={process.env.REACT_APP_VECTOR_TILES_URL}
           />
         );
       }}

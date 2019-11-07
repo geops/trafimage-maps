@@ -8,8 +8,9 @@ exports[`AppRouter should match snapshot 1`] = `
     className="tm-barrier-free tm-no-focus"
   >
     <div
+      aria-label="map"
       className="tm-map"
-      role="menu"
+      role="presentation"
       tabIndex={0}
     />
     <div>
@@ -253,9 +254,9 @@ exports[`AppRouter should match snapshot 1`] = `
                         ch.sbb.netzkarte.landeskarte
                       </option>
                       <option
-                        value="ch.sbb.netzkarte.luftbild.group"
+                        value="ch.sbb.netzkarte.luftbild"
                       >
-                        ch.sbb.netzkarte.luftbild.group
+                        ch.sbb.netzkarte.luftbild
                       </option>
                     </select>
                     <div
@@ -1250,8 +1251,9 @@ exports[`AppRouter should match snapshot 1`] = `
         className="tm-base-layer-toggler"
       >
         <div
+          aria-label="map"
           className="tm-map"
-          role="menu"
+          role="presentation"
           tabIndex={-1}
         />
         <img

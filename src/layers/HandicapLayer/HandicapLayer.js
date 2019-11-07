@@ -5,7 +5,6 @@ import GeoJSON from 'ol/format/GeoJSON';
 import WKT from 'ol/format/WKT';
 import { Style, RegularShape, Fill } from 'ol/style';
 import LayerHelper from '../layerHelper';
-import CONF from '../../config/appConfig';
 
 /**
  * Layer for visualizing Handicap Topic.
@@ -35,7 +34,7 @@ class HandicapLayer extends VectorLayer {
         format: new GeoJSON(),
         loader: () => {
           fetch(
-            `${CONF.cartaroUrl}handicap/items/?has_changes=true` +
+            `${this.cartaroUrl}handicap/items/?has_changes=true` +
               '&stuetzpunktbahnhof=true',
           )
             .then(data => data.json())
@@ -63,6 +62,10 @@ class HandicapLayer extends VectorLayer {
       [this.clickedFeature] = f;
       this.olLayer.changed();
     });
+  }
+
+  setCartaroUrl(cartaroUrl) {
+    this.cartaroUrl = cartaroUrl;
   }
 
   /**

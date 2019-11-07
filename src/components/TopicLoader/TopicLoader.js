@@ -3,16 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import { unByKey } from 'ol/Observable';
-import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
-import TOPIC_CONF from '../../config/topics';
+import TrafimageGeoServerWMSLayer from '../../layers/TrafimageGeoServerWMSLayer';
+import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
+import HandicapLayer from '../../layers/HandicapLayer';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
   setTopics,
   setClickedFeatureInfo,
+  setSearchService,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
+import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -21,14 +23,17 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  searchService: PropTypes.instanceOf(SearchService).isRequired,
-  apiKey: PropTypes.string,
+  cartaroUrl: PropTypes.string,
+  geoServerUrl: PropTypes.string,
+  vectorTilesKey: PropTypes.string,
+  vectorTilesUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetSearchService: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -36,7 +41,10 @@ const defaultProps = {
   activeTopic: null,
   baseLayers: null,
   layers: null,
-  apiKey: null,
+  cartaroUrl: null,
+  geoServerUrl: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -52,46 +60,56 @@ class TopicLoader extends Component {
       dispatchSetTopics,
       topics,
     } = this.props;
-
     this.topic = activeTopicKey
-      ? TOPIC_CONF.find(t => t.key === activeTopicKey)
-      : topics[0];
-
-    if (this.topic.linkUrl) {
-      TopicLoader.openLinkTopic(this.topic);
+      ? topics.find(t => t.key === activeTopicKey)
+      : topics && topics[0];
+    if (!this.topic) {
+      return;
     }
 
+    if (this.topic.linkUrl) {
+      TopicLoader.openLinkTopic(this.topic.linkUrl);
+    }
     dispatchSetActiveTopic(this.topic);
     dispatchSetTopics(topics);
   }
 
   componentDidMount() {
-    this.updateLayers(this.topic.layers);
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      activeTopic,
-      dispatchSetClickedFeatureInfo,
-      searchService,
-    } = this.props;
-
-    if (activeTopic !== prevProps.activeTopic) {
-      if (activeTopic.linkUrl) {
-        TopicLoader.openLinkTopic(activeTopic);
-      }
-      this.updateLayers(activeTopic.layers);
-
-      searchService.setSearches(activeTopic.searches || []);
-      searchService.setSearchesProps({
-        activeTopic,
-        dispatchSetClickedFeatureInfo,
-      });
+    if (this.topic) {
+      this.updateServices(this.topic);
     }
   }
 
-  componentWillUnmount() {
-    unByKey(this.singleclickKey);
+  componentDidUpdate(prevProps) {
+    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
+
+    if (activeTopic && activeTopic !== prevProps.activeTopic) {
+      this.updateServices(activeTopic);
+    }
+
+    if (topics !== prevProps.topics && topics && topics.length) {
+      dispatchSetActiveTopic(topics[0]);
+    }
+  }
+
+  updateServices(topic) {
+    const {
+      dispatchSetClickedFeatureInfo,
+      dispatchSetSearchService,
+    } = this.props;
+    if (topic.linkUrl) {
+      TopicLoader.openLinkTopic(topic);
+      return;
+    }
+    this.updateLayers(topic.layers);
+
+    const newSearchService = new SearchService(layerHelper.highlightStyle);
+    newSearchService.setSearches(topic.searches || []);
+    newSearchService.setSearchesProps({
+      topic,
+      dispatchSetClickedFeatureInfo,
+    });
+    dispatchSetSearchService(newSearchService);
   }
 
   updateLayers(topicLayers) {
@@ -100,7 +118,10 @@ class TopicLoader extends Component {
       layers,
       baseLayers,
       dispatchSetLayers,
-      apiKey,
+      cartaroUrl,
+      geoServerUrl,
+      vectorTilesKey,
+      vectorTilesUrl,
     } = this.props;
 
     const newLayers = [
@@ -114,8 +135,12 @@ class TopicLoader extends Component {
     dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
-        flatLayers[i].setApiKey(apiKey);
+      if (flatLayers[i] instanceof TrafimageGeoServerWMSLayer) {
+        flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
+      } else if (flatLayers[i] instanceof TrafimageMapboxLayer) {
+        flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
+      } else if (flatLayers[i] instanceof HandicapLayer) {
+        flatLayers[i].setCartaroUrl(cartaroUrl);
       }
     }
   }
@@ -134,6 +159,7 @@ const mapDispatchToProps = {
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetSearchService: setSearchService,
 };
 
 TopicLoader.propTypes = propTypes;
