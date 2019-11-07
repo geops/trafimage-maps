@@ -194,10 +194,10 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
-  cartaroUrl: null,
-  geoServerUrl: null,
-  vectorTilesKey: null,
-  vectorTilesUrl: null,
+  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
+  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   topics: null,
 };
 

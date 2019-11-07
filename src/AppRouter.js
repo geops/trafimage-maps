@@ -46,10 +46,6 @@ const AppRouter = () => (
             apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
             elements={elements}
             initialState={{ ...match.params }}
-            cartaroUrl={process.env.REACT_APP_CARTARO_URL}
-            geoServerUrl={process.env.REACT_APP_GEOSERVER_URL}
-            vectorTilesKey={process.env.REACT_APP_VECTOR_TILES_KEY}
-            vectorTilesUrl={process.env.REACT_APP_VECTOR_TILES_URL}
           />
         );
       }}
