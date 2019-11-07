@@ -42,7 +42,6 @@ window.addEventListener('load', () => {
     menu: true,
     popup: true,
   };
-  trafimage.setAttribute('width', '99%');
 });
 
 

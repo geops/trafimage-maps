@@ -18,7 +18,6 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
   const feature = features[featureIndex];
   const info = clickedFeatureInfo.find(i => i.features.includes(feature));
   const PopupComponent = popups[info.layer.get('popupComponent')];
-  console.log(PopupComponent);
 
   useEffect(() => {
     setFeatureIndex(0);

@@ -6,7 +6,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.styleUrl = `${url}/styles/${style}/style.json?key=${key}`;
     // console.log('this.mbMap', this.mbMap, this.mbMap.style);
     if (this.mbMap) {
-      console.log('setStyle', this.styleUrl);
       this.mbMap.setStyle(this.styleUrl);
     }
   }

@@ -97,7 +97,7 @@
   },
   "scripts": {
     "build": "react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
-    "coverage": "yarn test --coverage --coverageDirectory=coverage",
+    "coverage": "yarn test  --watchAll=false  --coverage --coverageDirectory=coverage",
     "cp": "generact --root src/components",
     "cy:open": "cypress open",
     "cy:test": "yarn start & wait-on http://localhost:3000 & yarn cypress run",
@@ -110,7 +110,7 @@
     "publish:public": "yarn version && git push origin HEAD && yarn run build:prod && yarn publish build/ --access public --non-interactive --no-git-tag-version",
     "sort": "sort-json src/lang/*.json -i",
     "start": "react-app-rewired start",
-    "start:doc": "yarn build && styleguidist server",
+    "start:doc": "styleguidist server",
     "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial|react-transit)/).*/\""
   },
   "browserslist": [

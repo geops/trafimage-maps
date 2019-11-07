@@ -109,31 +109,3 @@
     }
   }
 }
-
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-topic-content {
-    border-bottom: 1px solid #eee;
-
-    select {
-      display: block;
-    }
-  }
-
-  .wkp-info-layer-bt {
-    margin-right: 10px;
-  }
-
-  .wkp-topic-menu-item-wrapper {
-    padding: 0 10px;
-  }
-
-  .wkp-topic-menu-item {
-    height: 60px;
-
-    &.active {
-      border-bottom: 1px solid #eee;
-    }
-  }
-}

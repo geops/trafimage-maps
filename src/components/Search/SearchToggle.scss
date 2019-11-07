@@ -27,16 +27,3 @@
     }
   }
 }
-
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-search-toggle-container {
-    display: none;
-  }
-
-  .wkp-search-toggle-button,
-  .wkp-search-toggle-container--open {
-    display: block;
-    margin-right: 0;
-  }
-}

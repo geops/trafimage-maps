@@ -77,12 +77,118 @@
   div[role='button'] {
     cursor: pointer;
   }
-}
 
-.tm-trafimage-maps.tm-w-m,
-.tm-trafimage-maps.tm-w-s,
-.tm-trafimage-maps.tm-w-xs {
-  .tm-base-layer-toggler {
-    display: none;
+  &.tm-w-m,
+  &.tm-w-s,
+  &.tm-w-xs {
+    .tm-base-layer-toggler {
+      display: none;
+    }
+
+    .wkp-header {
+      height: 55px;
+    }
+
+    .wkp-map-controls {
+      top: 60px;
+    }
+
+    .wkp-menu-wrapper {
+      top: 0;
+      left: 0;
+    }
+
+    .wkp-topics-menu {
+      border: 0;
+
+      .wkp-menu-header {
+        .wkp-menu-title {
+          display: none;
+        }
+      }
+
+      .wkp-topics-menu-body {
+        padding: 0;
+        border-top: 1px solid #eee;
+      }
+    }
+
+    // header component is enabled
+    &.header {
+      .wkp-menu-wrapper {
+        top: 0;
+        width: 345px;
+      }
+
+      .wkp-topics-menu {
+        margin-top: 0;
+      }
+    }
+
+    .wkp-search {
+      top: 5px;
+      left: 250px;
+    }
+
+    .wkp-topic-content {
+      border-bottom: 1px solid #eee;
+
+      select {
+        display: block;
+      }
+    }
+
+    .wkp-info-layer-bt {
+      margin-right: 10px;
+    }
+
+    .wkp-topic-menu-item-wrapper {
+      padding: 0 10px;
+    }
+
+    .wkp-topic-menu-item {
+      height: 60px;
+
+      &.active {
+        border-bottom: 1px solid #eee;
+      }
+    }
+  }
+
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-search {
+      right: 9px;
+      max-width: 100%;
+      left: 100px;
+    }
+
+    .wkp-search-toggle-container {
+      display: none;
+    }
+
+    .wkp-search-toggle-button,
+    .wkp-search-toggle-container--open {
+      display: block;
+      margin-right: 0;
+    }
+  }
+
+  &.tm-h-m,
+  &.tm-h-s,
+  &.tm-h-xs {
+    .wkp-geolocation,
+    .wkp-fit-extent,
+    .wkp-zoom-in,
+    .wkp-zoom-out {
+      margin: 10px 0;
+    }
+  }
+
+  &.tm-h-s,
+  &.tm-h-xs {
+    .tm-zoomslider-wrapper {
+      display: none;
+    }
   }
 }

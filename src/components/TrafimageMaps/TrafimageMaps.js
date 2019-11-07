@@ -26,12 +26,17 @@ import TopicLoader from '../TopicLoader';
 import Popup from '../Popup';
 import MainDialog from '../MainDialog';
 import Search from '../Search';
-import store, { getStore } from '../../model/store';
+import { getStore } from '../../model/store';
 import TopicsMenu from '../TopicsMenu';
 import { setTopics } from '../../model/app/actions';
 import { setZoom, setCenter } from '../../model/map/actions';
 
 const propTypes = {
+  /**
+   * History object from react-router.
+   */
+  history: PropTypes.object,
+
   /**
    * Name of the topic to display.
    */
@@ -129,11 +134,6 @@ const propTypes = {
   apiKey: PropTypes.string,
 
   /**
-   * React router history.
-   */
-  history: PropTypes.shape(),
-
-  /**
    * React router url params.
    */
   initialState: PropTypes.shape(),
@@ -184,9 +184,9 @@ const defaultProps = {
     search: false,
   },
   baseLayers: null,
+  history: null,
   projection: 'EPSG:3857',
   layers: null,
-  history: null,
   initialState: {},
   menus: null,
   subMenus: null,
@@ -212,13 +212,12 @@ class TrafimageMaps extends React.PureComponent {
     };
     this.onDocumentClick = this.onDocumentClick.bind(this);
     this.onDocumentKeyDown = this.onDocumentKeyDown.bind(this);
-    const { history } = this.props;
 
     /**
      * If the application runs standalone, we want to use a consistent store.
      * However when running in Stylegudist, every application needs it own store
      */
-    this.store = history ? store : getStore();
+    this.store = getStore();
   }
 
   componentDidMount() {
@@ -339,7 +338,7 @@ class TrafimageMaps extends React.PureComponent {
       <Provider store={this.store}>
         <div className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}>
           <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-            <ResizeHandler observe=".tm-app" />
+            <ResizeHandler observe=".tm-trafimage-maps" />
             <TopicLoader
               layerService={layerService}
               searchService={searchService}
