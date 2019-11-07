@@ -6,6 +6,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TrafimageGeoServerWMSLayer from '../../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import HandicapLayer from '../../layers/HandicapLayer';
+import ConstructionLayer from '../../layers/ConstructionLayer';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -141,6 +142,8 @@ class TopicLoader extends Component {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       } else if (flatLayers[i] instanceof HandicapLayer) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
+      } else if (flatLayers[i] instanceof ConstructionLayer) {
+        flatLayers[i].setGeoServerUrl(geoServerUrl);
       }
     }
   }

@@ -11,6 +11,8 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import ConstructionSingleLayer from '../layers/ConstructionLayer/ConstructionSingleLayer';
+import ConstructionClusterLayer from '../layers/ConstructionLayer/ConstructionClusterLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -445,6 +447,202 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
     popupComponent: 'HandicapPopup',
   },
 });
+
+const constrUnterhaltBahnhof = new Layer({
+  name: 'ch.sbb.construction.unterhalt.bahnhof',
+  key: 'ch.sbb.construction.unterhalt.bahnhof',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.bahnhof-desc',
+    legendUrl: '/img/layers/construction/Unterhalt_Bahnhof.png',
+    construction: {
+      art: 'Unterhalt',
+      ort: 'Bahnhof',
+    },
+  },
+});
+
+const constrUnterhaltStrecke = new Layer({
+  name: 'ch.sbb.construction.unterhalt.strecke',
+  key: 'ch.sbb.construction.unterhalt.strecke',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.strecke-desc',
+    legendUrl: '/img/layers/construction/Unterhalt_Strecke.png',
+    construction: {
+      art: 'Unterhalt',
+      ort: 'Strecke',
+    },
+  },
+});
+
+const constrUnterhaltBahnhofStrecke = new Layer({
+  name: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+  key: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.bahnhof_strecke-desc',
+    legendUrl: '/img/layers/construction/Unterhalt_BahnhofundStrecke.png',
+    construction: {
+      art: 'Unterhalt',
+      ort: 'Bahnhof und Strecke',
+    },
+  },
+});
+
+const constrUnterhaltUebrige = new Layer({
+  name: 'ch.sbb.construction.unterhalt.uebrige',
+  key: 'ch.sbb.construction.unterhalt.uebrige',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.uebrige-desc',
+    legendUrl: '/img/layers/construction/Unterhalt_brigeStandorte.png',
+    construction: {
+      art: 'Unterhalt',
+      ort: 'Übrige Standorte',
+    },
+  },
+});
+
+const constrAusbauBahnhof = new Layer({
+  name: 'ch.sbb.construction.ausbau.bahnhof',
+  key: 'ch.sbb.construction.ausbau.bahnhof',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.ausbau.bahnhof-desc',
+    legendUrl: '/img/layers/construction/Ausbau_Bahnhof.png',
+    construction: {
+      art: 'Ausbau',
+      ort: 'Bahnhof',
+    },
+  },
+});
+
+const constrAusbauStrecke = new Layer({
+  name: 'ch.sbb.construction.ausbau.strecke',
+  key: 'ch.sbb.construction.ausbau.strecke',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.ausbau.strecke-desc',
+    legendUrl: '/img/layers/construction/Ausbau_Strecke.png',
+    construction: {
+      art: 'Ausbau',
+      ort: 'Strecke',
+    },
+  },
+});
+
+const constrAusbauBahnhofStrecke = new Layer({
+  name: 'ch.sbb.construction.ausbau.bahnhof_strecke',
+  key: 'ch.sbb.construction.ausbau.bahnhof_strecke',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.ausbau.bahnhof_strecke-desc',
+    legendUrl: '/img/layers/construction/Ausbau_BahnhofundStrecke.png',
+    construction: {
+      art: 'Ausbau',
+      ort: 'Bahnhof und Strecke',
+    },
+  },
+});
+
+const constrAusbauUebrige = new Layer({
+  name: 'ch.sbb.construction.ausbau.uebrige',
+  key: 'ch.sbb.construction.ausbau.uebrige',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.ausbau.uebrige-desc',
+    legendUrl: '/img/layers/construction/Ausbau_brigeStandorte.png',
+    construction: {
+      art: 'Ausbau',
+      ort: 'Übrige Standorte',
+    },
+  },
+});
+
+export const constrUnterhalt = new Layer({
+  name: 'ch.sbb.construction.unterhalt.group',
+  desc: 'ch.sbb.construction.unterhalt.group-desc',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.group-desc',
+  },
+});
+
+constrUnterhalt.setChildren([
+  constrUnterhaltUebrige,
+  constrUnterhaltBahnhofStrecke,
+  constrUnterhaltStrecke,
+  constrUnterhaltBahnhof,
+]);
+
+export const constrAusbau = new Layer({
+  name: 'ch.sbb.construction.ausbau.group',
+  desc: 'ch.sbb.construction.ausbau.group-desc',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.ausbau.group-desc',
+  },
+});
+
+constrAusbau.setChildren([
+  constrAusbauUebrige,
+  constrAusbauBahnhofStrecke,
+  constrAusbauStrecke,
+  constrAusbauBahnhof,
+]);
+
+export const constrSingleLayer = new ConstructionSingleLayer({
+  name: 'ch.sbb.constructio.single',
+  key: 'ch.sbb.constructio.single',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+  },
+  maxResolution: 611.496226281,
+});
+
+constrSingleLayer.setChildren([
+  constrUnterhaltUebrige,
+  constrUnterhaltBahnhofStrecke,
+  constrUnterhaltStrecke,
+  constrUnterhaltBahnhof,
+  constrAusbauUebrige,
+  constrAusbauBahnhofStrecke,
+  constrAusbauStrecke,
+  constrAusbauBahnhof,
+]);
+
+export const constrClusterLayer = new ConstructionClusterLayer({
+  name: 'ch.sbb.constructio.cluster',
+  key: 'ch.sbb.constructio.cluster',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+  },
+  minResolution: 611.496226281,
+});
+
+constrClusterLayer.setChildren([
+  constrUnterhaltUebrige,
+  constrUnterhaltBahnhofStrecke,
+  constrUnterhaltStrecke,
+  constrUnterhaltBahnhof,
+  constrAusbauUebrige,
+  constrAusbauBahnhofStrecke,
+  constrAusbauStrecke,
+  constrAusbauBahnhof,
+]);
 
 export default [
   sourcesLayer,
