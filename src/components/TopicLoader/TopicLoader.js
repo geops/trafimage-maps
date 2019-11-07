@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import MapboxLayer from 'react-spatial/layers/MapboxLayer';
-import TrafimageGeoServerWMSLayer from '../../layers/TrafimageGeoServerWMSLayer';
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import HandicapLayer from '../../layers/HandicapLayer';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -114,7 +110,6 @@ class TopicLoader extends Component {
   }
 
   updateLayers(topicLayers) {
-    console.log('updateLayers');
     const {
       layerService,
       layers,
@@ -137,18 +132,9 @@ class TopicLoader extends Component {
     dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      console.log(
-        'updateLayers',
-        flatLayers[i] instanceof TrafimageGeoServerWMSLayer,
-        flatLayers[i] instanceof TrafimageMapboxLayer,
-        flatLayers[i] instanceof HandicapLayer,
-        flatLayers[i] instanceof MapboxLayer,
-        flatLayers[i],
-      );
       if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
       } else if (flatLayers[i].setStyleConfig) {
-        console.log(vectorTilesUrl, vectorTilesKey);
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       } else if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);

@@ -1,4 +1,10 @@
-@import 'Globals.scss';
+@import 'globals.scss';
+
+// React-transit
+@import 'react-transit/themes/default/variables.scss';
+@import 'react-transit/themes/default/components.scss';
+
+// React-spatial
 @import 'node_modules/react-spatial/themes/default/variables.scss';
 @import 'node_modules/react-spatial/themes/default/mixins.scss';
 @import 'node_modules/react-spatial/components/LayerTree/LayerTree.scss';
@@ -10,6 +16,8 @@
 @import 'node_modules/react-spatial/components/Zoom/Zoom.scss';
 @import 'node_modules/react-spatial/components/Geolocation/Geolocation.scss';
 @import 'node_modules/react-spatial/components/PermalinkInput/PermalinkInput.scss';
+@import 'node_modules/react-spatial/components/Dialog/Dialog.scss';
+@import 'node_modules/react-spatial/components/Popup/Popup.scss';
 @import 'src/components/Collapsible/Collapsible.scss';
 @import 'src/components/Dialog/Dialog.scss';
 @import 'src/components/FeatureInformation/FeatureInformation.scss';
@@ -28,3 +36,15 @@
 @import 'src/components/TopicsMenu/TopicsMenu.scss';
 @import 'src/components/TopicsMenuHeader/TopicsMenuHeader.scss';
 @import 'src/components/TrafimageMaps/TrafimageMaps.scss';
+
+// Menus
+@import 'src/menus/ShareMenu/ShareMenu.scss';
+@import 'src/menus/TrackerMenu/TrackerMenu.scss';
+
+// Popups
+@import 'src/popups/BahnhofplanPopup/BahnhofplanPopup.scss';
+@import 'src/popups/BusLinePopup/BusLinePopup.scss';
+@import 'src/popups/HandicapPopup/HandicapPopup.scss';
+@import 'src/popups/NetzkartePopup/NetzkartePopup.scss';
+@import 'src/popups/ParksPopup/ParksPopup.scss';
+@import 'src/popups/PassagierFrequenzenPopup/PassagierFrequenzenPopup.scss';

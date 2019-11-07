@@ -26,14 +26,14 @@ module.exports = {
   sections: [
     {
       name: 'Applications',
-      content: 'src/apps/README.md',
+      content: 'src/examples/README.md',
       sections: [
         {
           name: 'WebComponent',
           sections: [
             {
               name: '<trafimage-maps>',
-              content: 'src/apps/WebComponent/README.md',
+              content: 'src/examples/WebComponent/README.md',
             },
           ],
         },
@@ -42,11 +42,11 @@ module.exports = {
           sections: [
             {
               name: 'Punctuality Map',
-              content: 'src/apps/TrafimageWKP/README.md',
+              content: 'src/examples/Punctuality/README.md',
             },
             {
               name: 'Casa Map',
-              content: 'src/apps/Casa/README.md',
+              content: 'src/examples/Casa/README.md',
             },
           ],
         },

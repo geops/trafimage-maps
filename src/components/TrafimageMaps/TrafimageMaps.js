@@ -186,15 +186,15 @@ const defaultProps = {
   baseLayers: null,
   projection: 'EPSG:3857',
   layers: null,
-  apiKey: null,
   history: null,
   initialState: {},
   menus: null,
   subMenus: null,
-  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
-  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  apiKey: null,
+  cartaroUrl: null,
+  geoServerUrl: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
   topics: null,
 };
 
@@ -337,7 +337,7 @@ class TrafimageMaps extends React.PureComponent {
 
     return (
       <Provider store={this.store}>
-        <div className={`tm-app ${elements.header ? 'header' : ''}`}>
+        <div className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}>
           <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
             <ResizeHandler observe=".tm-app" />
             <TopicLoader

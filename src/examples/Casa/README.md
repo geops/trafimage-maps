@@ -6,10 +6,9 @@ The used [APIs from geOps](https://developer.geops.io/) require a license key.
 
 ```jsx
 import React from 'react';
-import TrafimageMaps from '../../components/TrafimageMaps';
-import RouteLayer from '../../layers/RouteLayer';
-import ZoneLayer from '../../layers/ZoneLayer';
-import casa from '../../config/Casa';
+import RouteLayer from 'trafimage-maps/layers/RouteLayer';
+import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
+import casa from 'trafimage-maps/examples/Casa/topic';
 
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({

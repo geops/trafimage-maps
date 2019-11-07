@@ -1,4 +1,4 @@
-import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 
 const netzkarteLayer = new TrafimageMapboxLayer({
   name: 'Netzkarte',
