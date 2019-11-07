@@ -305,7 +305,7 @@ class TrafimageMaps extends React.PureComponent {
     const defaultElements = {
       header: <Header />,
       search: <Search />,
-      popup: <Popup />,
+      popup: <Popup elements={elements} />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
         <Menu>
