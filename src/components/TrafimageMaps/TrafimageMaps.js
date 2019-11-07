@@ -85,14 +85,6 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
 
   /**
-   * Mapping of layer keys and Popup component names.
-   * Component names are names of files from the folder `src/components/Popup`
-   * without the `.js` extension.
-   * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
-   */
-  popupComponents: PropTypes.objectOf(PropTypes.string),
-
-  /**
    * Array of menus compomnents to display as child of Menu component.
    * Example: [<TrackerMenu/>]
    */
@@ -195,7 +187,6 @@ const defaultProps = {
     search: false,
   },
   baseLayers: null,
-  popupComponents: {},
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
@@ -276,7 +267,6 @@ class TrafimageMaps extends React.PureComponent {
       children,
       elements,
       layers,
-      popupComponents,
       projection,
       topics,
       activeTopicKey,
@@ -307,7 +297,7 @@ class TrafimageMaps extends React.PureComponent {
     // Define which component to display as child of Menu.
     const appMenuChildren = TrafimageMaps.getComponents(
       {
-        featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+        featureMenu: <FeatureMenu />,
         trackerMenu: <TrackerMenu />,
       },
       elements,
@@ -317,7 +307,7 @@ class TrafimageMaps extends React.PureComponent {
     const defaultElements = {
       header: <Header />,
       search: <Search />,
-      popup: <Popup popupComponents={popupComponents} />,
+      popup: <Popup />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
         <Menu>
@@ -371,7 +361,6 @@ class TrafimageMaps extends React.PureComponent {
               initialCenter={center}
               initialZoom={initialZoom}
               projection={projection}
-              popupComponents={popupComponents}
             />
             {appElements}
             {children}
