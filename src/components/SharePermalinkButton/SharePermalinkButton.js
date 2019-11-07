@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import PermalinkInput from 'react-spatial/components/PermalinkInput';
 import Button from 'react-spatial/components/Button';
 
-import './SharePermalinkButton.scss';
-
 const propTypes = {
   title: PropTypes.string,
   icon: PropTypes.node,

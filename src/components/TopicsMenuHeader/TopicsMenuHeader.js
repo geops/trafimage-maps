@@ -7,8 +7,6 @@ import Button from 'react-spatial/components/Button';
 import menuOpenImg from '../../img/menu_open.png';
 import menuClosedImg from '../../img/menu_closed.png';
 
-import './TopicsMenuHeader.scss';
-
 const propTypes = {
   onToggle: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,

@@ -5,7 +5,6 @@ import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
 import { setMenuOpen } from '../../model/app/actions';
-import './TopicsMenu.scss';
 
 const propTypes = {
   children: PropTypes.oneOfType([

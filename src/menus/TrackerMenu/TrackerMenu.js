@@ -11,7 +11,6 @@ import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
-import './TrackerMenu.scss';
 
 const propTypes = {
   // mapStateToProps

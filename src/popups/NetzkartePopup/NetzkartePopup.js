@@ -8,8 +8,6 @@ import { compose } from 'lodash/fp';
 import { transform as transformCoords } from 'ol/proj';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 
-import './NetzkartePopup.scss';
-
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,

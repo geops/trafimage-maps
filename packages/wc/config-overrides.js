@@ -94,7 +94,7 @@ const copyBundleScript = async env => {
 
   fs.readdirSync('build').forEach(file => {
     if (file !== 'bundle.js') {
-      rimraf.sync(`build/${file}`);
+      //rimraf.sync(`build/${file}`);
     }
   });
 };

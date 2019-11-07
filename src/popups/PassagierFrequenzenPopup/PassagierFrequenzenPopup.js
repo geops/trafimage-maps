@@ -4,8 +4,6 @@ import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 
-import './PassagierFrequenzenPopup.scss';
-
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,

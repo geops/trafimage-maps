@@ -7,6 +7,7 @@ module.exports = {
     favicon: 'img/favicon.png',
   },
   assetsDir: 'src/',
+  components: [],
   styleguideDir: 'styleguide-build',
   require: [
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),

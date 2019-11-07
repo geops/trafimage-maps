@@ -27,9 +27,6 @@ import Popup from '../Popup';
 import MainDialog from '../MainDialog';
 import Search from '../Search';
 import store, { getStore } from '../../model/store';
-
-import 'react-spatial/themes/default/index.scss';
-import './TrafimageMaps.scss';
 import TopicsMenu from '../TopicsMenu';
 import { setTopics } from '../../model/app/actions';
 import { setZoom, setCenter } from '../../model/map/actions';
@@ -203,10 +200,10 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
-  cartaroUrl: null,
-  geoServerUrl: null,
-  vectorTilesKey: null,
-  vectorTilesUrl: null,
+  cartaroUrl: '//cartaro2.prod.trafimage.ch/api/v1/',
+  geoServerUrl: '//maps.trafimage.ch/geoserver/trafimage/ows',
+  vectorTilesKey: '5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910',
+  vectorTilesUrl: '//maps.geops.io',
   topics: null,
 };
 

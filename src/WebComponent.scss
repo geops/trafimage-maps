@@ -1,4 +1,15 @@
 @import 'Globals.scss';
+@import 'node_modules/react-spatial/themes/default/variables.scss';
+@import 'node_modules/react-spatial/themes/default/mixins.scss';
+@import 'node_modules/react-spatial/components/LayerTree/LayerTree.scss';
+@import 'node_modules/react-spatial/components/BaseLayerToggler/BaseLayerToggler.scss';
+@import 'node_modules/react-spatial/components/Footer/Footer.scss';
+@import 'node_modules/react-spatial/components/Button/Button.scss';
+@import 'node_modules/react-spatial/components/ScaleLine/ScaleLine.scss';
+@import 'node_modules/react-spatial/components/Header/Header.scss';
+@import 'node_modules/react-spatial/components/Zoom/Zoom.scss';
+@import 'node_modules/react-spatial/components/Geolocation/Geolocation.scss';
+@import 'node_modules/react-spatial/components/PermalinkInput/PermalinkInput.scss';
 @import 'src/components/Collapsible/Collapsible.scss';
 @import 'src/components/Dialog/Dialog.scss';
 @import 'src/components/FeatureInformation/FeatureInformation.scss';
