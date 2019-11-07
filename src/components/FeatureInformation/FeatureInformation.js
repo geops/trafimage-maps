@@ -3,32 +3,29 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from 'react-spatial/components/Button';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
+import popups from '../../popups';
+
 import './FeatureInformation.scss';
 
 const propTypes = {
   clickedFeatureInfo: PropTypes.array.isRequired,
-  popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-const FeatureInformation = ({ clickedFeatureInfo, popupComponents }) => {
+const FeatureInformation = ({ clickedFeatureInfo }) => {
   const { t } = useTranslation();
   const [featureIndex, setFeatureIndex] = useState(0);
   const features = clickedFeatureInfo.map(l => l.features).flat();
   const feature = features[featureIndex];
   const info = clickedFeatureInfo.find(i => i.features.includes(feature));
+  const PopupComponent = popups[info.layer.get('popupComponent')];
 
   useEffect(() => {
     setFeatureIndex(0);
   }, [clickedFeatureInfo]);
 
-  if (!feature) {
+  if (!feature || !PopupComponent) {
     return null;
   }
-
-  // Styleguidist try to load every file in the folder if we don't put index.js
-  const PopupComponent = React.lazy(() =>
-    import(`../../popups/${popupComponents[info.layer.getKey()]}/index.js`),
-  );
 
   let pagination = null;
 
