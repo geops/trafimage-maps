@@ -82,14 +82,6 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
 
   /**
-   * Mapping of layer keys and Popup component names.
-   * Component names are names of files from the folder `src/components/Popup`
-   * without the `.js` extension.
-   * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
-   */
-  popupComponents: PropTypes.objectOf(PropTypes.string),
-
-  /**
    * Array of menus compomnents to display as child of Menu component.
    * Example: [<TrackerMenu/>]
    */
@@ -192,7 +184,6 @@ const defaultProps = {
     search: false,
   },
   baseLayers: null,
-  popupComponents: {},
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
@@ -200,10 +191,10 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
-  cartaroUrl: '//cartaro2.prod.trafimage.ch/api/v1/',
-  geoServerUrl: '//maps.trafimage.ch/geoserver/trafimage/ows',
-  vectorTilesKey: '5cc87b12d7c5370001c1d6557f01e26728174c1fa19d33afe303b910',
-  vectorTilesUrl: '//maps.geops.io',
+  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
+  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   topics: null,
 };
 
@@ -273,7 +264,6 @@ class TrafimageMaps extends React.PureComponent {
       children,
       elements,
       layers,
-      popupComponents,
       projection,
       topics,
       activeTopicKey,
@@ -304,7 +294,7 @@ class TrafimageMaps extends React.PureComponent {
     // Define which component to display as child of Menu.
     const appMenuChildren = TrafimageMaps.getComponents(
       {
-        featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+        featureMenu: <FeatureMenu />,
         trackerMenu: <TrackerMenu />,
       },
       elements,
@@ -314,7 +304,7 @@ class TrafimageMaps extends React.PureComponent {
     const defaultElements = {
       header: <Header />,
       search: <Search />,
-      popup: <Popup popupComponents={popupComponents} />,
+      popup: <Popup />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
         <Menu>
@@ -368,7 +358,6 @@ class TrafimageMaps extends React.PureComponent {
               initialCenter={center}
               initialZoom={initialZoom}
               projection={projection}
-              popupComponents={popupComponents}
             />
             {appElements}
             {children}

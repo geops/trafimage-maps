@@ -225,6 +225,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.bahnhoffrequenzen-desc',
+    popupComponent: 'PassagierFrequenzenPopup',
   },
 });
 
@@ -262,6 +263,7 @@ bahnhofplaene.setChildren([
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
+      popupComponent: 'BahnhofplanPopup',
     },
   }),
   new MapboxStyleLayer({
@@ -283,6 +285,7 @@ bahnhofplaene.setChildren([
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
+      popupComponent: 'BahnhofplanPopup',
     },
   }),
 ]);
@@ -366,6 +369,7 @@ export const netzkartePointLayer = new MapboxStyleLayer({
   },
   properties: {
     hideInLegend: true,
+    popupComponent: 'NetzkartePopup',
   },
 });
 
@@ -387,6 +391,7 @@ export const buslines = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.buslinien-desc',
+    popupComponent: 'BusLinePopup',
   },
 });
 
@@ -433,6 +438,7 @@ export const parks = new TrafimageGeoServerWMSLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.parks-desc',
+    popupComponent: 'ParksPopup',
   },
 });
 
@@ -442,6 +448,7 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
+    popupComponent: 'HandicapPopup',
   },
 });
 
