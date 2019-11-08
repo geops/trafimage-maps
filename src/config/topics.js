@@ -6,6 +6,7 @@ import defaultBaseLayers, {
   buslines,
   gemeindegrenzen,
   punctuality,
+  netzkarteShowcases,
   parks,
   stuetzpunktbahnhoefe,
 } from './layers';
@@ -107,6 +108,18 @@ export const tarifverbundkarte = {
   legendUrl: '/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png',
 };
 
+export const showcases = {
+  name: 'ch.sbb.showcases',
+  key: 'ch.sbb.showcases',
+  elements: {
+    ...defaultElements,
+    baseLayerToggler: false,
+  },
+  layers: [netzkarteShowcases],
+  projection: 'EPSG:3857',
+  description: 'ch.sbb.showcases-desc',
+};
+
 export default [
   netzkarte,
   handicap,
@@ -115,4 +128,5 @@ export default [
   infrastruktur,
   regionenkarte,
   tarifverbundkarte,
+  showcases,
 ];
