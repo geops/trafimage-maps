@@ -219,8 +219,6 @@ class DeparturePopupContent extends Component {
 
     return (
       <div className="tm-departure-popup-body">
-        <div className="tm-popup-title">{name}</div>
-
         {icon}
         {title}
 

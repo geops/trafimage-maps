@@ -22,4 +22,7 @@ const DeparturePopup = ({ feature }) => {
 DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;
 
-export default compose(withTranslation())(DeparturePopup);
+const composed = compose(withTranslation())(DeparturePopup);
+composed.renderTitle = feat => feat.get('name');
+
+export default composed;
