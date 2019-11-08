@@ -1,4 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+require('dotenv').config();
 const path = require('path');
+const webpack = require('webpack');
 const { version } = require('./package.json');
 
 module.exports = {
@@ -108,6 +111,9 @@ module.exports = {
         },
       ],
     },
+    plugins: [
+      new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) }),
+    ],
   },
   styles: {
     StyleGuide: {

@@ -31,7 +31,8 @@ import store, { getStore } from '../../model/store';
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
 import TopicsMenu from '../TopicsMenu';
-import { setZoom } from '../../model/map/actions';
+import { setTopics } from '../../model/app/actions';
+import { setZoom, setCenter } from '../../model/map/actions';
 
 const propTypes = {
   /**
@@ -42,7 +43,12 @@ const propTypes = {
   /**
    * Array of topics from ./src/config/topics
    */
-  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  topics: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+      layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
+    }),
+  ),
 
   /**
    * Additional elements.
@@ -77,14 +83,6 @@ const propTypes = {
    * List of layers.
    */
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-
-  /**
-   * Mapping of layer keys and Popup component names.
-   * Component names are names of files from the folder `src/components/Popup`
-   * without the `.js` extension.
-   * Example: { 'ch.sbb.netzkarte': 'NetzkartePopup' }
-   */
-  popupComponents: PropTypes.objectOf(PropTypes.string),
 
   /**
    * Array of menus compomnents to display as child of Menu component.
@@ -147,6 +145,26 @@ const propTypes = {
    * translation function.
    */
   t: PropTypes.func.isRequired,
+
+  /**
+   * URL endpoint for Cartaro.
+   */
+  cartaroUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for GeoServer.
+   */
+  geoServerUrl: PropTypes.string,
+
+  /**
+   * API key for vector tiles hosted by geOps.
+   */
+  vectorTilesKey: PropTypes.string,
+
+  /**
+   * URL endpoint for vector tiles hosted by geOps.
+   */
+  vectorTilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
@@ -169,7 +187,6 @@ const defaultProps = {
     search: false,
   },
   baseLayers: null,
-  popupComponents: {},
   projection: 'EPSG:3857',
   layers: null,
   apiKey: null,
@@ -177,6 +194,11 @@ const defaultProps = {
   initialState: {},
   menus: null,
   subMenus: null,
+  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
+  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  topics: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -208,10 +230,18 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom } = this.props;
+    const { zoom, center, topics } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
+    }
+
+    if (center !== prevProps.center) {
+      this.store.dispatch(setCenter(center));
+    }
+
+    if (topics !== prevProps.topics) {
+      this.store.dispatch(setTopics(topics));
     }
   }
 
@@ -237,7 +267,6 @@ class TrafimageMaps extends React.PureComponent {
       children,
       elements,
       layers,
-      popupComponents,
       projection,
       topics,
       activeTopicKey,
@@ -247,9 +276,15 @@ class TrafimageMaps extends React.PureComponent {
       initialState,
       menus,
       subMenus,
+      cartaroUrl,
+      geoServerUrl,
+      vectorTilesKey,
+      vectorTilesUrl,
       initialZoom,
     } = this.props;
     const { map, layerService, searchService } = this.store.getState().app;
+
+    searchService.setApiKey(apiKey);
 
     // Define which component to display as child of TopicsMenu.
     const appTopicsMenuChildren = TrafimageMaps.getComponents(
@@ -262,7 +297,7 @@ class TrafimageMaps extends React.PureComponent {
     // Define which component to display as child of Menu.
     const appMenuChildren = TrafimageMaps.getComponents(
       {
-        featureMenu: <FeatureMenu popupComponents={popupComponents} />,
+        featureMenu: <FeatureMenu />,
         trackerMenu: <TrackerMenu />,
       },
       elements,
@@ -272,7 +307,7 @@ class TrafimageMaps extends React.PureComponent {
     const defaultElements = {
       header: <Header />,
       search: <Search />,
-      popup: <Popup popupComponents={popupComponents} />,
+      popup: <Popup />,
       permalink: <Permalink history={history} initialState={initialState} />,
       menu: (
         <Menu>
@@ -316,14 +351,16 @@ class TrafimageMaps extends React.PureComponent {
               map={map}
               topics={topics}
               activeTopicKey={activeTopicKey}
-              apiKey={apiKey}
+              cartaroUrl={cartaroUrl}
+              geoServerUrl={geoServerUrl}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
             />
             <Map
               map={map}
               initialCenter={center}
               initialZoom={initialZoom}
               projection={projection}
-              popupComponents={popupComponents}
             />
             {appElements}
             {children}

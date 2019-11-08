@@ -25,7 +25,6 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   resolution: PropTypes.number,
   zoom: PropTypes.number,
-  popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
@@ -108,26 +107,22 @@ class Map extends PureComponent {
   }
 
   onPointerMove({ map, coordinate }) {
-    const { layerService, popupComponents } = this.props;
+    const { layerService } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
     }
     layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
-      const filtered = featureInfos.filter(({ layer, features }) => {
-        return !!popupComponents[layer.getKey()] && features.length;
-      });
+      const filtered = featureInfos.filter(
+        ({ layer, features }) => layer.get('popupComponent') && features.length,
+      );
       // eslint-disable-next-line no-param-reassign
       map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
     });
   }
 
   onSingleClick(evt) {
-    const {
-      layerService,
-      popupComponents,
-      dispatchSetClickedFeatureInfo,
-    } = this.props;
+    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
 
     layerService
       .getFeatureInfoAtCoordinate(evt.coordinate)
@@ -135,7 +130,7 @@ class Map extends PureComponent {
         // Display only info of layers with a popup defined.
         const filtered = featureInfos
           .reverse()
-          .filter(({ layer }) => !!popupComponents[layer.getKey()]);
+          .filter(({ layer }) => layer.get('popupComponent'));
 
         // Clear the select style.
         filtered.forEach(({ layer, features }) => {

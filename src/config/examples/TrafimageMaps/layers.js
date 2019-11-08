@@ -7,11 +7,10 @@ import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
-import MapboxLayer from 'react-spatial/layers/MapboxLayer';
-import WMSLayer from 'react-spatial/layers/WMSLayer';
-import MapboxStyleLayer from '../../../layers/MapboxStyleLayer';
 import HandicapLayer from '../../../layers/HandicapLayer';
-import CONF from '../../appConfig';
+import MapboxStyleLayer from '../../../layers/MapboxStyleLayer';
+import TrafimageGeoServerWMSLayer from '../../../layers/TrafimageGeoServerWMSLayer';
+import TrafimageMapboxLayer from '../../../layers/TrafimageMapboxLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -59,7 +58,7 @@ const resolutions = [
   0.298582141739,
 ];
 
-export const netzkarteLayer = new MapboxLayer({
+export const netzkarteLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
@@ -68,9 +67,7 @@ export const netzkarteLayer = new MapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  url:
-    `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json` +
-    `?key=${CONF.vectorTilesKey}`,
+  style: 'trafimage_perimeter_v2',
 });
 
 /**
@@ -78,19 +75,17 @@ export const netzkarteLayer = new MapboxLayer({
  * Its style file contains only source where to find datas.
  * The style of features are  defined by each MapboxStyleLayer ('netzkarte_point, buslinien,...)
  */
-export const sourcesLayer = new MapboxLayer({
+export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
   preserveDrawingBuffer: true,
-  url:
-    `${CONF.vectorTilesUrl}/styles/trafimage_sources_only/style.json` +
-    `?key=${CONF.vectorTilesKey}`,
+  style: 'trafimage_sources_only',
   properties: {
     hideInLegend: true,
   },
 });
 
-export const netzkarteLayerLight = new MapboxLayer({
+export const netzkarteLayerLight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.light',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
@@ -98,12 +93,10 @@ export const netzkarteLayerLight = new MapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  url:
-    `${CONF.vectorTilesUrl}/styles/evoq_sandbox2/style.json` +
-    `?key=${CONF.vectorTilesKey}`,
+  style: 'evoq_sandbox2',
 });
 
-export const netzkarteLayerNight = new MapboxLayer({
+export const netzkarteLayerNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
@@ -111,22 +104,20 @@ export const netzkarteLayerNight = new MapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  url:
-    `${CONF.vectorTilesUrl}/styles/evoq_sandbox1/style.json` +
-    `?key=${CONF.vectorTilesKey}`,
+  style: 'evoq_sandbox1',
 });
 
 export const swisstopoSwissImage = new Layer({
   name: 'ch.sbb.netzkarte.luftbild',
   key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
-  visible: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
+  visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/` +
+        `//maps.trafimage.ch/geo-admin-wmts/1.0.0/` +
         `ch.swisstopo.swissimage/default/current/3857/` +
         '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
@@ -152,7 +143,7 @@ export const swisstopoLandeskarte = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/` +
+        `//maps.trafimage.ch/geo-admin-wmts/1.0.0/` +
         'ch.swisstopo.pixelkarte-farbe/default/current/3857/' +
         '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
@@ -177,7 +168,7 @@ export const swisstopoLandeskarteGrau = new Layer({
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
-        `${CONF.geoadminWmtsUrl}/geo-admin-wmts/1.0.0/` +
+        `//maps.trafimage.ch/geo-admin-wmts/1.0.0/` +
         'ch.swisstopo.pixelkarte-grau/default/current/3857/' +
         '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
       matrixSet: 'webmercator',
@@ -228,6 +219,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.bahnhoffrequenzen-desc',
+    popupComponent: 'PassagierFrequenzenPopup',
   },
 });
 
@@ -251,6 +243,12 @@ bahnhofplaene.setChildren([
       type: 'symbol',
       source: 'base',
       'source-layer': 'netzkarte_point',
+      filter: [
+        'any',
+        ['has', 'url_a4'],
+        ['has', 'url_poster'],
+        ['has', 'url_shopping'],
+      ],
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
@@ -259,6 +257,7 @@ bahnhofplaene.setChildren([
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
+      popupComponent: 'BahnhofplanPopup',
     },
   }),
   new MapboxStyleLayer({
@@ -280,6 +279,7 @@ bahnhofplaene.setChildren([
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
+      popupComponent: 'BahnhofplanPopup',
     },
   }),
 ]);
@@ -363,6 +363,7 @@ export const netzkartePointLayer = new MapboxStyleLayer({
   },
   properties: {
     hideInLegend: true,
+    popupComponent: 'NetzkartePopup',
   },
 });
 
@@ -384,15 +385,15 @@ export const buslines = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.buslinien-desc',
+    popupComponent: 'BusLinePopup',
   },
 });
 
-export const gemeindegrenzen = new WMSLayer({
+export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   name: 'ch.sbb.ch_gemeinden',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `${CONF.geoserverUrl}/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:gemeindegrenzen',
@@ -411,12 +412,11 @@ export const gemeindegrenzen = new WMSLayer({
   },
 });
 
-export const parks = new WMSLayer({
+export const parks = new TrafimageGeoServerWMSLayer({
   name: 'ch.sbb.parks',
   visible: false,
   olLayer: new TileLayer({
     source: new TileWMSSource({
-      url: `${CONF.geoserverUrl}/service/wms`,
       crossOrigin: 'anonymous',
       params: {
         layers: 'trafimage:perimeter_parks',
@@ -432,6 +432,7 @@ export const parks = new WMSLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.parks-desc',
+    popupComponent: 'ParksPopup',
   },
 });
 
@@ -441,14 +442,15 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
+    popupComponent: 'HandicapPopup',
   },
 });
 
 export default [
   sourcesLayer,
   netzkarteLayer,
-  netzkarteLayerLight,
-  netzkarteLayerNight,
+  // netzkarteLayerLight,
+  // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   swisstopoSwissImage,

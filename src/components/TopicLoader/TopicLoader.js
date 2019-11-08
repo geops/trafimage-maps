@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
-import TrafimageRasterLayer from '../../layers/TrafimageRasterLayer';
+import TrafimageGeoServerWMSLayer from '../../layers/TrafimageGeoServerWMSLayer';
+import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
+import HandicapLayer from '../../layers/HandicapLayer';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -21,7 +23,10 @@ const propTypes = {
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  apiKey: PropTypes.string,
+  cartaroUrl: PropTypes.string,
+  geoServerUrl: PropTypes.string,
+  vectorTilesKey: PropTypes.string,
+  vectorTilesUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -36,7 +41,10 @@ const defaultProps = {
   activeTopic: null,
   baseLayers: null,
   layers: null,
-  apiKey: null,
+  cartaroUrl: null,
+  geoServerUrl: null,
+  vectorTilesKey: null,
+  vectorTilesUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -54,7 +62,10 @@ class TopicLoader extends Component {
     } = this.props;
     this.topic = activeTopicKey
       ? topics.find(t => t.key === activeTopicKey)
-      : topics[0];
+      : topics && topics[0];
+    if (!this.topic) {
+      return;
+    }
 
     if (this.topic.linkUrl) {
       TopicLoader.openLinkTopic(this.topic.linkUrl);
@@ -70,10 +81,14 @@ class TopicLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic } = this.props;
+    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
 
     if (activeTopic && activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
+    }
+
+    if (topics !== prevProps.topics && topics && topics.length) {
+      dispatchSetActiveTopic(topics[0]);
     }
   }
 
@@ -103,7 +118,10 @@ class TopicLoader extends Component {
       layers,
       baseLayers,
       dispatchSetLayers,
-      apiKey,
+      cartaroUrl,
+      geoServerUrl,
+      vectorTilesKey,
+      vectorTilesUrl,
     } = this.props;
 
     const newLayers = [
@@ -117,8 +135,12 @@ class TopicLoader extends Component {
     dispatchSetLayers(newLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      if (apiKey && flatLayers[i] instanceof TrafimageRasterLayer) {
-        flatLayers[i].setApiKey(apiKey);
+      if (flatLayers[i] instanceof TrafimageGeoServerWMSLayer) {
+        flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
+      } else if (flatLayers[i] instanceof TrafimageMapboxLayer) {
+        flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
+      } else if (flatLayers[i] instanceof HandicapLayer) {
+        flatLayers[i].setCartaroUrl(cartaroUrl);
       }
     }
   }
