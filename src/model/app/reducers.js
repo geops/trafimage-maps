@@ -12,6 +12,7 @@ import {
   SET_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
+  SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
@@ -89,6 +90,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         dialogPosition: action.data,
+      };
+    case SET_DEPARTURES_FILTER:
+      return {
+        ...state,
+        departuresFilter: action.data,
       };
     default:
       return {

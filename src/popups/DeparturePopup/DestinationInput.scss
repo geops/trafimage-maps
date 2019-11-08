@@ -1,0 +1,22 @@
+.tm-departure-input {
+  position: relative;
+
+  .tm-search-input {
+    input {
+      padding: 0 7px;
+    }
+
+    .tm-bt-search {
+      display: none;
+    }
+  }
+
+  .tm-autocomplete .tm-autocomplete-results {
+    max-height: 140px;
+  }
+
+  .tm-list li {
+    line-height: 20px;
+    padding: 4px 7px;
+  }
+}
