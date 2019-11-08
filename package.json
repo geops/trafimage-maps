@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "version": "1.0.0-beta.1",
-  "main": "build/es/index.js",
+  "main": "bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
     "@turf/intersect": "^6.1.3",
