@@ -22,7 +22,6 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
-  popupComponents: PropTypes.objectOf(PropTypes.string).isRequired,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -108,13 +107,7 @@ class Permalink extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      activeTopic,
-      history,
-      departuresFilter,
-      layerService,
-      popupComponents,
-    } = this.props;
+    const { activeTopic, history, departuresFilter, layerService } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}`);
@@ -124,12 +117,7 @@ class Permalink extends PureComponent {
       this.updateDepartures();
     }
 
-    if (
-      this.loadDepartureOnce &&
-      this.departures &&
-      popupComponents &&
-      Object.keys(popupComponents).includes('ch.sbb.departure.popup')
-    ) {
+    if (this.loadDepartureOnce && this.departures) {
       const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
       this.loadDepartureOnce = false;
       if (
@@ -175,7 +163,10 @@ class Permalink extends PureComponent {
         coordinate: stationFeature.getGeometry().getCoordinates(),
         features: [stationFeature],
         // Fake layer binded to popup, to open it.
-        layer: { getKey: () => 'ch.sbb.departure.popup' },
+        layer: {
+          getKey: () => 'ch.sbb.departure.popup',
+          get: val => (val === 'popupComponent' ? 'DeparturePopup' : null),
+        },
       },
     ]);
 

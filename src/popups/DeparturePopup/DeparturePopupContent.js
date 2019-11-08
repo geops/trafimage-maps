@@ -7,7 +7,6 @@ import { withTranslation } from 'react-i18next';
 import qs from 'query-string';
 
 import DestinationInput from './DestinationInput';
-import CONF from '../../config/appConfig';
 
 import { setDeparturesFilter } from '../../model/app/actions';
 
@@ -135,9 +134,9 @@ class DeparturePopupContent extends Component {
       urlParams.destination = `${this.destinationFilter}`;
     }
 
-    const url = `${CONF.departureUrl}/departures/${uic}?${qs.stringify(
-      urlParams,
-    )}`;
+    const url = `${
+      process.env.REACT_APP_DEPARTURE_URL
+    }/departures/${uic}?${qs.stringify(urlParams)}`;
 
     fetch(url)
       .then(response => response.json())

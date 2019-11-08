@@ -5,8 +5,6 @@ import Autocomplete from 'react-spatial/components/Autocomplete';
 
 import { ReactComponent as SearchIcon } from '../../img/search.svg';
 
-import CONF from '../../config/appConfig';
-
 import './DestinationInput.scss';
 
 const propTypes = {
@@ -74,7 +72,7 @@ class DestinationInput extends Component {
     const { uic, platforms } = this.props;
 
     const url =
-      `${CONF.departureUrl}/destinations/${uic}` +
+      `${process.env.REACT_APP_DEPARTURE_URL}/destinations/${uic}` +
       `?platforms=${platforms || ''}&destination=${value}`;
 
     this.abortController.abort();

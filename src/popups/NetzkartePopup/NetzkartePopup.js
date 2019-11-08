@@ -42,7 +42,10 @@ class NetzkartePopup extends PureComponent {
         coordinate: feature.getGeometry().getCoordinates()[0],
         features: [feature],
         // Fake layer binded to popup, to open it.
-        layer: { getKey: () => 'ch.sbb.departure.popup' },
+        layer: {
+          getKey: () => 'ch.sbb.departure.popup',
+          get: val => (val === 'popupComponent' ? 'DeparturePopup' : null),
+        },
       },
     ]);
   }

@@ -1,7 +1,6 @@
-import MapboxLayer from 'react-spatial/layers/MapboxLayer';
-import CONF from './appConfig';
+import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 
-const netzkarteLayer = new MapboxLayer({
+const netzkarteLayer = new TrafimageMapboxLayer({
   name: 'Netzkarte',
   key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
@@ -9,7 +8,7 @@ const netzkarteLayer = new MapboxLayer({
   isBaseLayer: true,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  url: `${CONF.vectorTilesUrl}/styles/trafimage_perimeter_v2/style.json?key=${CONF.vectorTilesKey}`,
+  style: 'trafimage_perimeter_v2',
 });
 
 export default {

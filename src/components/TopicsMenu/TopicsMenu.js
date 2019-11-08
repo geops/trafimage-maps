@@ -24,6 +24,10 @@ function TopicsMenu({ children }) {
   const topics = useSelector(state => state.app.topics);
   const dispatch = useDispatch();
 
+  if (!topics || !topics.length) {
+    return null;
+  }
+
   return (
     <div className="wkp-topics-menu">
       <TopicsMenuHeader
