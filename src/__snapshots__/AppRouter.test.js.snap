@@ -1291,6 +1291,7 @@ exports[`AppRouter should match snapshot 1`] = `
           >
             <svg
               fill="currentColor"
+              focusable={false}
               height="1em"
               stroke="currentColor"
               strokeWidth="0"
@@ -1319,6 +1320,7 @@ exports[`AppRouter should match snapshot 1`] = `
           >
             <svg
               fill="currentColor"
+              focusable={false}
               height="1em"
               stroke="currentColor"
               strokeWidth="0"
@@ -1419,6 +1421,7 @@ exports[`AppRouter should match snapshot 1`] = `
         >
           <svg
             fill="currentColor"
+            focusable={false}
             height="1em"
             stroke="currentColor"
             strokeWidth="0"
