@@ -8,7 +8,7 @@ exports[`AppRouter should match snapshot 1`] = `
     className="tm-barrier-free tm-no-focus"
   >
     <div
-      aria-label="map"
+      aria-label="Karte"
       className="tm-map"
       role="presentation"
       tabIndex={0}
@@ -78,6 +78,7 @@ exports[`AppRouter should match snapshot 1`] = `
             >
               <svg
                 fill="currentColor"
+                focusable={false}
                 height="1em"
                 stroke="currentColor"
                 strokeWidth="0"
@@ -153,6 +154,7 @@ exports[`AppRouter should match snapshot 1`] = `
             >
               <svg
                 fill="currentColor"
+                focusable={false}
                 height="1em"
                 stroke="currentColor"
                 strokeWidth="0"
@@ -954,6 +956,50 @@ exports[`AppRouter should match snapshot 1`] = `
                   />
                 </div>
               </div>
+              <div
+                className="wkp-topic-menu"
+              >
+                <div
+                  className="wkp-topic-menu-item-wrapper"
+                >
+                  <div
+                    className="wkp-topic-menu-item"
+                    onClick={[Function]}
+                    onKeyPress={[Function]}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div
+                      className="wkp-topic-title"
+                    >
+                      <div
+                        className="wkp-topic-radio"
+                      />
+                      ch.sbb.showcases
+                    </div>
+                    <div
+                      className="wkp-layer-toggler collapsed"
+                      style={
+                        Object {
+                          "display": "none",
+                        }
+                      }
+                    />
+                  </div>
+                </div>
+                <div
+                  className="wkp-topic-content"
+                >
+                  <div
+                    className=" wkp-collapsible-vertical"
+                    style={
+                      Object {
+                        "maxHeight": 1000,
+                      }
+                    }
+                  />
+                </div>
+              </div>
             </div>
             <div>
               <div
@@ -1245,6 +1291,7 @@ exports[`AppRouter should match snapshot 1`] = `
           >
             <svg
               fill="currentColor"
+              focusable={false}
               height="1em"
               stroke="currentColor"
               strokeWidth="0"
@@ -1273,6 +1320,7 @@ exports[`AppRouter should match snapshot 1`] = `
           >
             <svg
               fill="currentColor"
+              focusable={false}
               height="1em"
               stroke="currentColor"
               strokeWidth="0"
@@ -1373,6 +1421,7 @@ exports[`AppRouter should match snapshot 1`] = `
         >
           <svg
             fill="currentColor"
+            focusable={false}
             height="1em"
             stroke="currentColor"
             strokeWidth="0"

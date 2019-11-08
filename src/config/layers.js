@@ -85,28 +85,6 @@ export const sourcesLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const netzkarteLayerLight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.light',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
-  visible: false,
-  isBaseLayer: true,
-  radioGroup: 'baseLayer',
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'evoq_sandbox2',
-});
-
-export const netzkarteLayerNight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.night',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
-  visible: false,
-  isBaseLayer: true,
-  radioGroup: 'baseLayer',
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'evoq_sandbox1',
-});
-
 export const swisstopoSwissImage = new Layer({
   name: 'ch.sbb.netzkarte.luftbild',
   key: 'ch.sbb.netzkarte.luftbild',
@@ -446,11 +424,67 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
   },
 });
 
+export const netzkarteShowcases = new Layer({
+  name: 'ch.sbb.netzkarte.showcases.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.netzkarte.showcases.group-desc',
+  },
+});
+
+netzkarteShowcases.setChildren([
+  new TrafimageMapboxLayer({
+    name: 'ch.sbb.netzkarte.night',
+    copyright:
+      '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+    visible: false,
+    isBaseLayer: true,
+    radioGroup: 'showcases',
+    preserveDrawingBuffer: true,
+    zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+    style: 'evoq_sandbox1',
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.netzkarte.night-desc',
+    },
+  }),
+  new TrafimageMapboxLayer({
+    name: 'ch.sbb.netzkarte.light',
+    copyright:
+      '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+    visible: false,
+    isBaseLayer: true,
+    radioGroup: 'showcases',
+    preserveDrawingBuffer: true,
+    zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+    style: 'evoq_sandbox2',
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.netzkarte.light-desc',
+    },
+  }),
+  new TrafimageMapboxLayer({
+    name: 'ch.sbb.netzkarte.showcases',
+    copyright:
+      '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+    visible: true,
+    isQueryable: false,
+    isBaseLayer: true,
+    radioGroup: 'showcases',
+    preserveDrawingBuffer: true,
+    zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+    style: 'trafimage_perimeter_v2',
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.netzkarte.showcases-desc',
+    },
+  }),
+]);
+
 export default [
   sourcesLayer,
   netzkarteLayer,
-  // netzkarteLayerLight,
-  // netzkarteLayerNight,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,
   swisstopoSwissImage,
