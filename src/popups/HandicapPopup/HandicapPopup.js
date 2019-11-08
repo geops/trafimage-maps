@@ -17,11 +17,11 @@ function HandicapPopup({ feature }) {
 
   // mapping of all boolean values properties and their exceptions
   const bfEquipmentExceptions = {
-    lift_zu_perron: `ausnahme_zu_lift_${language}`,
     perronhoehe_P55: `ausnahme_zu_P55_${language}`,
     taktile_sicherheitslinien: null,
     induktionsverstaerker: null,
-    rampe: `ausnahme_zu_rampe_${language}`,
+    lift_zu_perron: `standort_zu_lift_${language}`,
+    rampe: `ausnahme_zu_lift_und_treppe_${language}`,
     faltrampe: null,
     sbb_rollstuhl: null,
     rollstuhl_billet: null,
@@ -70,6 +70,10 @@ function HandicapPopup({ feature }) {
     {
       label: 'Ausstattung',
       element: equipmentStr,
+    },
+    {
+      label: 'Aktuell',
+      propertyName: `aktuell_${language}`,
     },
   ];
 
