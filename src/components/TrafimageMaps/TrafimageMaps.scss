@@ -51,6 +51,18 @@ body {
     left: 10px;
     width: 120px;
     height: 120px;
+
+    // For some reasons, after a click on tm-base-layer-item button,
+    // we are not able to click on next and previous button anymore because
+    // they are behind the tm-base-layer-item button.
+    .tm-base-layer-item {
+      z-index: 0;
+    }
+
+    .tm-base-layer-previous,
+    .tm-base-layer-next {
+      z-index: 1;
+    }
   }
 }
 
