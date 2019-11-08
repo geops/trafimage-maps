@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 
@@ -30,6 +31,8 @@ const propTypes = {
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+
+  t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -153,6 +156,7 @@ class Map extends PureComponent {
       map,
       resolution,
       extent,
+      t,
     } = this.props;
 
     return (
@@ -164,6 +168,7 @@ class Map extends PureComponent {
           layers={layers}
           zoom={zoom}
           map={map}
+          ariaLabel={t('Karte')}
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
             projection,
@@ -195,6 +200,7 @@ const mapDispatchToProps = {
 };
 
 export default compose(
+  withTranslation(),
   connect(
     mapStateToProps,
     mapDispatchToProps,

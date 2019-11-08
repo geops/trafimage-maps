@@ -80,9 +80,9 @@ function Search() {
                     <div className="wkp-search-section-count">
                       {t('insgesamt {{ count }} Ergebnisse', { count })}
                       {searchService.sectionCollapsed(section) ? (
-                        <FaChevronCircleDown />
+                        <FaChevronCircleDown focusable={false} />
                       ) : (
-                        <FaChevronCircleUp />
+                        <FaChevronCircleUp focusable={false} />
                       )}
                     </div>
                   </div>
@@ -135,7 +135,7 @@ function Search() {
             aria-label={t('Suche')}
             className="wkp-search-button wkp-search-button-submit"
           >
-            <FaSearch />
+            <FaSearch focusable={false} />
           </button>
         </SearchToggle>
       </div>
