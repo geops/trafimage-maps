@@ -134,6 +134,7 @@ const WebComponent = props => {
 };
 
 WebComponent.propTypes = propTypes;
+WebComponent.defaultProps = defaultProps;
 const memoized = React.memo(WebComponent);
 memoized.defaultProps = defaultProps;
 memoized.attributes = attributes;
