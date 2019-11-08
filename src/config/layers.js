@@ -645,7 +645,7 @@ export const constrSingleLayer = new ConstructionSingleLayer({
   properties: {
     hideInLegend: true,
   },
-  maxResolution: 611.496226281,
+  maxResolution: 305.748113141,
 });
 
 constrSingleLayer.setChildren([
@@ -666,7 +666,7 @@ export const constrClusterLayer = new ConstructionClusterLayer({
   properties: {
     hideInLegend: true,
   },
-  minResolution: 611.496226281,
+  minResolution: 305.748113141,
 });
 
 constrClusterLayer.setChildren([
