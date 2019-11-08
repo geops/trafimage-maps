@@ -7,7 +7,6 @@ import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
-import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
@@ -59,7 +58,7 @@ const resolutions = [
   0.298582141739,
 ];
 
-export const netzkarteLayer = new MapboxLayer({
+export const netzkarteLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
@@ -68,9 +67,7 @@ export const netzkarteLayer = new MapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  url:
-    `//maps.geops.io/styles/trafimage_perimeter_v2/style.json` +
-    `?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93`,
+  style: 'trafimage_perimeter_v2',
 });
 
 /**
@@ -78,14 +75,11 @@ export const netzkarteLayer = new MapboxLayer({
  * Its style file contains only source where to find datas.
  * The style of features are  defined by each MapboxStyleLayer ('netzkarte_point, buslinien,...)
  */
-export const sourcesLayer = new MapboxLayer({
+export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
   preserveDrawingBuffer: true,
   style: 'trafimage_sources_only',
-  url:
-    `//maps.geops.io/styles/trafimage_sources_only/style.json` +
-    `?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93`,
   properties: {
     hideInLegend: true,
   },
