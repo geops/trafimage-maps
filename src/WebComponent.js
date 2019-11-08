@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import { Styled } from 'create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
-import defaultTopics from './config/topics';
+// import defaultTopics from './config/topics';
 
 const propTypes = {
   // Properties
   center: PropTypes.arrayOf(PropTypes.number),
   topics: PropTypes.array,
+  history: PropTypes.object,
 
   // Attributes
   width: PropTypes.string,
@@ -57,8 +58,9 @@ const attributes = {
 };
 
 const defaultProps = {
-  center: [925472, 5920000],
-  topics: defaultTopics,
+  center: undefined,
+  topics: undefined,
+  history: undefined,
 };
 
 const getBool = val => val === 'true' || val === true;
@@ -126,7 +128,6 @@ const WebComponent = props => {
           {...props}
           elements={boolElements}
           initialZoom={floatZoom}
-          zoom={floatZoom}
         />
       </div>
     </Styled>

@@ -45,7 +45,11 @@ class TopicLoader extends Component {
   constructor(props) {
     super(props);
     const { dispatchSetActiveTopic, dispatchSetTopics, topics } = this.props;
-    this.topic = topics.find(t => t.active) || topics[0];
+    this.topic = topics && (topics.find(t => t.active) || topics[0]);
+
+    if (!this.topic) {
+      return;
+    }
 
     if (this.topic.linkUrl) {
       TopicLoader.openLinkTopic(this.topic.linkUrl);
@@ -69,7 +73,8 @@ class TopicLoader extends Component {
     }
 
     if (topics !== prevProps.topics && topics && topics.length) {
-      dispatchSetActiveTopic(topics[0]);
+      this.topic = topics.find(t => t.active) || topics[0];
+      dispatchSetActiveTopic(this.topic);
     }
   }
 
@@ -105,6 +110,7 @@ class TopicLoader extends Component {
 
     layerService.setLayers(topicLayers);
     const flatLayers = layerService.getLayersAsFlatArray();
+    console.log('dispatchSetLayers');
     dispatchSetLayers(topicLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
