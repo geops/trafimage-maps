@@ -103,7 +103,7 @@ class DeparturePopupContent extends Component {
         [DESTINATION_FILTER]: this.destinationFilter,
       },
     };
-    const qStr = qs.stringify(parameters, { encode: false });
+    const qStr = qs.stringify(parameters);
     const search = qStr ? `?${qStr}` : '';
     if (
       (!qStr && window.location.search) ||

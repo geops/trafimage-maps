@@ -93,6 +93,7 @@ class Permalink extends PureComponent {
       routeFilterKey && getUrlParamVal(parameters[routeFilterKey]);
     const operatorFilter =
       operatorFilterKey && getUrlParamVal(parameters[operatorFilterKey]);
+    this.loadDepartureOnce = true;
     this.departures =
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
 
@@ -124,12 +125,13 @@ class Permalink extends PureComponent {
     }
 
     if (
+      this.loadDepartureOnce &&
       this.departures &&
       popupComponents &&
       Object.keys(popupComponents).includes('ch.sbb.departure.popup')
     ) {
       const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
-
+      this.loadDepartureOnce = false;
       if (
         stationsLayer &&
         stationsLayer.mapboxLayer &&
@@ -156,6 +158,9 @@ class Permalink extends PureComponent {
         station => station.properties.didok === this.departures - 8500000,
       );
 
+    if (!departure) {
+      return;
+    }
     const { latitude, longitude } = departure.properties;
     const stationFeature = new Feature({
       geometry: new Point(
