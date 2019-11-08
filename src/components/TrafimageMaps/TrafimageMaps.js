@@ -38,11 +38,6 @@ const propTypes = {
   history: PropTypes.object,
 
   /**
-   * Name of the topic to display.
-   */
-  activeTopicKey: PropTypes.string,
-
-  /**
    * Array of topics from ./src/config/topics
    */
   topics: PropTypes.arrayOf(
@@ -75,16 +70,6 @@ const propTypes = {
     featureMenu: PropTypes.bool,
     trackerMenu: PropTypes.bool,
   }),
-
-  /**
-   * List of base layers.
-   */
-  baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-
-  /**
-   * List of layers.
-   */
-  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
 
   /**
    * Array of menus compomnents to display as child of Menu component.
@@ -165,7 +150,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  activeTopicKey: null,
   children: null,
   center: [925472, 5920000],
   initialZoom: 9,
@@ -183,10 +167,8 @@ const defaultProps = {
     featureMenu: false,
     search: false,
   },
-  baseLayers: null,
   history: null,
   projection: 'EPSG:3857',
-  layers: null,
   initialState: {},
   menus: null,
   subMenus: null,
@@ -259,13 +241,10 @@ class TrafimageMaps extends React.PureComponent {
   render() {
     const {
       t,
-      baseLayers,
       children,
       elements,
-      layers,
       projection,
       topics,
-      activeTopicKey,
       apiKey,
       history,
       center,
@@ -342,11 +321,8 @@ class TrafimageMaps extends React.PureComponent {
             <TopicLoader
               layerService={layerService}
               searchService={searchService}
-              baseLayers={baseLayers}
-              layers={layers}
               map={map}
               topics={topics}
-              activeTopicKey={activeTopicKey}
               cartaroUrl={cartaroUrl}
               geoServerUrl={geoServerUrl}
               vectorTilesKey={vectorTilesKey}

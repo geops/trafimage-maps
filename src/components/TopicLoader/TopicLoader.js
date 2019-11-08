@@ -2,7 +2,6 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
-import Layer from 'react-spatial/layers/Layer';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -16,9 +15,6 @@ import layerHelper from '../../layers/layerHelper';
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   activeTopic: PropTypes.shape(),
-  activeTopicKey: PropTypes.string,
-  baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
@@ -34,10 +30,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  activeTopicKey: null,
   activeTopic: null,
-  baseLayers: null,
-  layers: null,
   cartaroUrl: null,
   geoServerUrl: null,
   vectorTilesKey: null,
@@ -51,22 +44,13 @@ class TopicLoader extends Component {
 
   constructor(props) {
     super(props);
-    const {
-      activeTopicKey,
-      dispatchSetActiveTopic,
-      dispatchSetTopics,
-      topics,
-    } = this.props;
-    this.topic = activeTopicKey
-      ? topics.find(t => t.key === activeTopicKey)
-      : topics && topics[0];
-    if (!this.topic) {
-      return;
-    }
+    const { dispatchSetActiveTopic, dispatchSetTopics, topics } = this.props;
+    this.topic = topics.find(t => t.active) || topics[0];
 
     if (this.topic.linkUrl) {
       TopicLoader.openLinkTopic(this.topic.linkUrl);
     }
+
     dispatchSetActiveTopic(this.topic);
     dispatchSetTopics(topics);
   }
@@ -112,8 +96,6 @@ class TopicLoader extends Component {
   updateLayers(topicLayers) {
     const {
       layerService,
-      layers,
-      baseLayers,
       dispatchSetLayers,
       cartaroUrl,
       geoServerUrl,
@@ -121,15 +103,9 @@ class TopicLoader extends Component {
       vectorTilesUrl,
     } = this.props;
 
-    const newLayers = [
-      ...(baseLayers || []),
-      ...topicLayers,
-      ...(layers || []),
-    ];
-
-    layerService.setLayers(newLayers);
+    layerService.setLayers(topicLayers);
     const flatLayers = layerService.getLayersAsFlatArray();
-    dispatchSetLayers(newLayers);
+    dispatchSetLayers(topicLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerWMSUrl) {
