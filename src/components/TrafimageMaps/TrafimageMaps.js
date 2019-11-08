@@ -72,16 +72,6 @@ const propTypes = {
   }),
 
   /**
-   * List of base layers.
-   */
-  baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-
-  /**
-   * List of layers.
-   */
-  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-
-  /**
    * Array of menus compomnents to display as child of Menu component.
    * Example: [<TrackerMenu/>]
    */
@@ -177,10 +167,8 @@ const defaultProps = {
     featureMenu: false,
     search: false,
   },
-  baseLayers: null,
   history: null,
   projection: 'EPSG:3857',
-  layers: null,
   initialState: {},
   menus: null,
   subMenus: null,
@@ -253,10 +241,8 @@ class TrafimageMaps extends React.PureComponent {
   render() {
     const {
       t,
-      baseLayers,
       children,
       elements,
-      layers,
       projection,
       topics,
       apiKey,
@@ -335,8 +321,6 @@ class TrafimageMaps extends React.PureComponent {
             <TopicLoader
               layerService={layerService}
               searchService={searchService}
-              baseLayers={baseLayers}
-              layers={layers}
               map={map}
               topics={topics}
               cartaroUrl={cartaroUrl}
