@@ -45,111 +45,48 @@ function HandicapPopup({ feature }) {
   });
 
   const equipmentStr = equipment.length ? (
-    <div className="wkp-handicap-popup-element" key="Ausstattung">
-      <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
-      <div className="wkp-handicap-popup-field-body">
-        {equipment.join(', ')}
-      </div>
+    <div className="wkp-handicap-popup-element">
+      <u>Ausstattung</u>
+      <br />
+      {equipment.join(', ')}
     </div>
   ) : null;
 
-  const elementsList = [
-    {
-      label: 'Treffpunkt',
-      propertyName: `treffpunkt_${language}`,
-    },
-    {
-      label: 'Voranmeldefrist',
-      propertyName: `voranmeldefrist_${language}`,
-    },
-    {
-      label: 'Bedienungszeiten',
-      propertyName: `bedienungszeiten_${language}`,
-    },
-    {
-      label: 'Ausstattung',
-      element: equipmentStr,
-    },
-  ];
-
-  const renderBottom = props => {
-    if (
-      [
-        `zusaetzliche_informationen_${language}`,
-        `beschreibung_zur_dritte_dienstleistung_${language}`,
-      ].every(val => Object.keys(props).includes(val) && props[val] !== '')
-    ) {
-      return (
-        <div className="wkp-handicap-popup-bottom">
-          <PopupElement
-            key="Zusätzliche Informationen"
-            label="Zusätzliche Informationen"
-            properties={props}
-            propertyName={`zusaetzliche_informationen_${language}`}
-          />
-          <PopupElement
-            key="Dienstleistungen Dritter"
-            label="Dienstleistungen Dritter"
-            properties={props}
-            propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
-          />
-        </div>
-      );
-    }
-    if (
-      Object.keys(props).includes(`zusaetzliche_informationen_${language}`) &&
-      // eslint-disable-next-line react/destructuring-assignment
-      props[`zusaetzliche_informationen_${language}`] !== ''
-    ) {
-      return (
-        <PopupElement
-          key="Zusätzliche Informationen"
-          label="Zusätzliche Informationen"
-          properties={props}
-          propertyName={`zusaetzliche_informationen_${language}`}
-        />
-      );
-    }
-    return (
-      <PopupElement
-        key="Dienstleistungen Dritter"
-        label="Dienstleistungen Dritter"
-        properties={props}
-        propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
-      />
-    );
-  };
-
   return (
     <div className="wkp-handicap-popup">
-      <div className="wkp-handicap-popup-body">
-        {elementsList.map(field => {
-          if (!properties[field.propertyName] && !field.element) {
-            return null;
-          }
-          return (
-            field.element || (
-              <PopupElement
-                key={field.label}
-                label={field.label}
-                properties={properties}
-                propertyName={field.propertyName.replace(
-                  `{language}`,
-                  language,
-                )}
-              />
-            )
-          );
-        })}
-        {renderBottom(properties)}
+      <div style={{ fontWeight: 'bold', marginBottom: 10 }}>
+        {feature.get('stationsbezeichnung')}
       </div>
+      <PopupElement
+        properties={properties}
+        propertyName={`treffpunkt_${language}`}
+        label="Treffpunkt"
+      />
+      <PopupElement
+        properties={properties}
+        propertyName={`voranmeldefrist_${language}`}
+        label="Voranmeldefrist"
+      />
+      <PopupElement
+        properties={properties}
+        propertyName={`bedienungszeiten_${language}`}
+        label="Bedienungszeiten"
+      />
+      {equipmentStr}
+      <PopupElement
+        label="Dienstleistungen Dritter"
+        properties={properties}
+        propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
+      />
+      <PopupElement
+        label="Zusätzliche Informationen"
+        properties={properties}
+        propertyName={`zusaetzliche_informationen_${language}`}
+      />
     </div>
   );
 }
 
 HandicapPopup.propTypes = propTypes;
 
-const memoized = React.memo(HandicapPopup);
-memoized.renderTitle = feat => feat.get('stationsbezeichnung');
-
-export default memoized;
+export default React.memo(HandicapPopup);

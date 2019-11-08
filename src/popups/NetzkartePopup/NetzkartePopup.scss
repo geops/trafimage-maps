@@ -3,6 +3,10 @@
     margin-left: 5px;
   }
 
+  .wkp-netzkarte-popup-title {
+    font-weight: bold;
+  }
+
   div {
     padding: 3px 0;
     border-width: 0 0 1px 0;
@@ -33,14 +37,10 @@
 
     &.wkp-closed {
       max-height: 0;
-      padding: 0;
     }
   }
 
   .wkp-coordinate-toggle {
-    padding: 0;
-    padding-bottom: 3px;
-
     &:hover {
       text-decoration: underline;
     }

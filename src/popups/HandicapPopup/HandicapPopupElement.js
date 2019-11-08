@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
@@ -22,11 +22,12 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   if (values.length > 1) {
     content = (
       <>
-        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
-        <div className="wkp-handicap-popup-field-body">
-          {values.map((v, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={idx}>{v}</div>
+        <div>
+          <u>{t(propLabel)}</u>
+        </div>
+        <div>
+          {values.map(v => (
+            <div>{v}</div>
           ))}
         </div>
       </>
@@ -34,8 +35,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   } else {
     content = (
       <>
-        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
-        <div className="wkp-handicap-popup-field-body">{values[0]}</div>
+        <u>{t(propLabel)}</u>: {values[0]}
       </>
     );
   }

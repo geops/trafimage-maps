@@ -12,11 +12,13 @@ const propTypes = {
 const defaultProps = {};
 
 const PassagierFrequenzenPopup = ({ feature, t }) => {
+  const name = feature.get('name');
   const statisticDate = feature.get('passagier_freq_jahr');
   const dwv = feature.get('dwv');
 
   return (
     <div className="wkp-passagier-freq-popup">
+      <div className="wkp-passagier-freq-popup-title">{name}</div>
       <div className="wkp-passagier-freq-popup-body">
         <span>{t('passagier_freq_jahr', { statisticDate })}</span>
         <span>{`${dwv} ${t('Ein- und Aussteigende')}`}</span>
@@ -28,7 +30,4 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
 PassagierFrequenzenPopup.propTypes = propTypes;
 PassagierFrequenzenPopup.defaultProps = defaultProps;
 
-const composed = compose(withTranslation())(PassagierFrequenzenPopup);
-
-composed.renderTitle = feat => feat.get('name');
-export default composed;
+export default compose(withTranslation())(PassagierFrequenzenPopup);

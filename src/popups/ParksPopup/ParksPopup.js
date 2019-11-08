@@ -49,6 +49,7 @@ class ParksPopup extends PureComponent {
     const { feature, t } = this.props;
     const { loaded } = this.state;
 
+    const parkName = feature.get('park_name');
     const parkTyp = feature.get('park_typ');
     const webUrl = feature.get('web');
 
@@ -84,6 +85,7 @@ class ParksPopup extends PureComponent {
 
     return (
       <div className="wkp-parks-popup">
+        <div className="wkp-parks-popup-title">{parkName}</div>
         {images}
         {typ}
         {web}
@@ -98,10 +100,7 @@ const mapStateToProps = state => ({
 
 ParksPopup.propTypes = propTypes;
 
-const composed = compose(
+export default compose(
   withTranslation(),
   connect(mapStateToProps),
 )(ParksPopup);
-
-composed.renderTitle = feat => feat.get('park_name');
-export default composed;

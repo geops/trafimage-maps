@@ -10,14 +10,14 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  // showOnlyLinks: PropTypes.bool,
+  showOnlyLinks: PropTypes.bool,
 };
 
 const defaultProps = {
-  // showOnlyLinks: false,
+  showOnlyLinks: false,
 };
 
-const BahnhofplanPopup = ({ feature, language, t }) => {
+const BahnhofplanPopup = ({ feature, language, t, showOnlyLinks }) => {
   const iabpUrl = feature.get('url_interactive_plan');
   const iabpUrlLang = `${iabpUrl}#?lang=${language}`;
   const a4Url = feature.get('url_a4');
@@ -74,11 +74,9 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
 
   return (
     <div className="wkp-bahnhofplan-popup">
-      {/*
-      !showOnlyLinks ? (
+      {!showOnlyLinks ? (
         <div className="wkp-bahnhofplan-popup-title">{feature.get('name')}</div>
-      ) : null
-      */}
+      ) : null}
       {iabpLink}
       {a4Link}
       {posterLink}
@@ -94,10 +92,7 @@ const mapStateToProps = state => ({
 BahnhofplanPopup.propTypes = propTypes;
 BahnhofplanPopup.defaultProps = defaultProps;
 
-const composed = compose(
+export default compose(
   withTranslation(),
   connect(mapStateToProps),
 )(BahnhofplanPopup);
-
-composed.renderTitle = feat => feat.get('name');
-export default composed;
