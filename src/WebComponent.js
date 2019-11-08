@@ -82,7 +82,7 @@ const WebComponent = props => {
   } = props;
 
   const floatZoom = useMemo(() => {
-    return parseFloat(zoom) || null;
+    return zoom && parseFloat(zoom);
   }, [zoom]);
 
   const boolElements = useMemo(() => {
@@ -134,7 +134,8 @@ const WebComponent = props => {
 };
 
 WebComponent.propTypes = propTypes;
-WebComponent.defaultProps = defaultProps;
-WebComponent.attributes = attributes;
+const memoized = React.memo(WebComponent);
+memoized.defaultProps = defaultProps;
+memoized.attributes = attributes;
 
-export default WebComponent;
+export default memoized;
