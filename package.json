@@ -29,7 +29,7 @@
     "react-icons": "^3.8.0",
     "react-redux": "^7.1.3",
     "react-shadow": "^17.1.3",
-    "react-spatial": "^0.1.1-beta.4",
+    "react-spatial": "^0.1.1-beta.5",
     "react-styleguidist": "^10.2.0",
     "react-transit": "^0.1.1-beta.25",
     "react-web-component": "^2.0.1",
