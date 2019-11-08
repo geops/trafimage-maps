@@ -12756,14 +12756,7 @@ react-i18next@^11.0.1:
     "@babel/runtime" "^7.3.1"
     html-parse-stringify2 "2.0.1"
 
-react-icons@^3.4.0, react-icons@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.7.0.tgz#64fe46231fabfeea27895edeae6c3b78114b8c8f"
-  integrity sha512-7MyPwjIhuyW0D2N3s4DEd0hGPGFf0sK+IIRKhc1FvSpZNVmnUoGvHbmAwzGJU+3my+fvihVWgwU5SDtlAri56Q==
-  dependencies:
-    camelcase "^5.0.0"
-
-react-icons@^3.8.0:
+react-icons@^3.4.0, react-icons@^3.7.0, react-icons@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.8.0.tgz#229de5904809696c9f46932bd9b6126b2522866e"
   integrity sha512-rA/8GRKjPulft8BSBSMsHkE1AGPqJ7LjNsyk0BE7XjG70Iz62zOled2SJk7LDo8x9z86a3xOstDlKlMZ4pAy7A==
@@ -12890,10 +12883,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^0.1.1-beta.2:
-  version "0.1.1-beta.2"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.1-beta.2.tgz#0103adeea88fb8f347b3d684a04feb7c0eec7424"
-  integrity sha512-/DB6swXLKOTwksmVjTkNYJ0kfbGwWvTtrjpR+lE1rDQF7Uqt0sQFyvItvetHRz0rSvqjLOCmXdEUvp8hLVFkAg==
+react-spatial@^0.1.1-beta.4:
+  version "0.1.1-beta.4"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.1-beta.4.tgz#471bd9540d94dcfff8f08e58f177aa4a988b3893"
+  integrity sha512-F7DMGL6k29WVl65brxBHsDvdnpG39VKBfgr6l9b188cf1zkeHz9YcyFcFbGnr4aJEpiNAZHWFGrWU2romp0XuQ==
   dependencies:
     query-string "^6.4.2"
     react-draggable "^4.0.3"
