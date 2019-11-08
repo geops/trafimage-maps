@@ -140,10 +140,10 @@ class Map extends PureComponent {
         });
 
         // Dispatch only infos with features found.
-        this.clickedFeatureInfos = filtered.filter(
+        const clickedFeatureInfos = filtered.filter(
           ({ features }) => features.length,
         );
-        dispatchSetClickedFeatureInfo(this.clickedFeatureInfos);
+        dispatchSetClickedFeatureInfo(clickedFeatureInfos);
       });
   }
 
