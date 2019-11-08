@@ -16,7 +16,6 @@ import layerHelper from '../../layers/layerHelper';
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   activeTopic: PropTypes.shape(),
-  activeTopicKey: PropTypes.string,
   baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -34,7 +33,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  activeTopicKey: null,
   activeTopic: null,
   baseLayers: null,
   layers: null,
@@ -51,22 +49,13 @@ class TopicLoader extends Component {
 
   constructor(props) {
     super(props);
-    const {
-      activeTopicKey,
-      dispatchSetActiveTopic,
-      dispatchSetTopics,
-      topics,
-    } = this.props;
-    this.topic = activeTopicKey
-      ? topics.find(t => t.key === activeTopicKey)
-      : topics && topics[0];
-    if (!this.topic) {
-      return;
-    }
+    const { dispatchSetActiveTopic, dispatchSetTopics, topics } = this.props;
+    this.topic = topics.find(t => t.active) || topics[0];
 
     if (this.topic.linkUrl) {
       TopicLoader.openLinkTopic(this.topic.linkUrl);
     }
+
     dispatchSetActiveTopic(this.topic);
     dispatchSetTopics(topics);
   }

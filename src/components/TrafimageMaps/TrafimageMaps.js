@@ -38,11 +38,6 @@ const propTypes = {
   history: PropTypes.object,
 
   /**
-   * Name of the topic to display.
-   */
-  activeTopicKey: PropTypes.string,
-
-  /**
    * Array of topics from ./src/config/topics
    */
   topics: PropTypes.arrayOf(
@@ -165,7 +160,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  activeTopicKey: null,
   children: null,
   center: [925472, 5920000],
   initialZoom: 9,
@@ -265,7 +259,6 @@ class TrafimageMaps extends React.PureComponent {
       layers,
       projection,
       topics,
-      activeTopicKey,
       apiKey,
       history,
       center,
@@ -346,7 +339,6 @@ class TrafimageMaps extends React.PureComponent {
               layers={layers}
               map={map}
               topics={topics}
-              activeTopicKey={activeTopicKey}
               cartaroUrl={cartaroUrl}
               geoServerUrl={geoServerUrl}
               vectorTilesKey={vectorTilesKey}
