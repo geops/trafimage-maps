@@ -75,7 +75,11 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
         {t(name)}
       </div>
       <div className="wkp-menu-toggler">
-        {isOpen ? <FaAngleUp /> : <FaAngleDown />}
+        {isOpen ? (
+          <FaAngleUp focusable={false} />
+        ) : (
+          <FaAngleDown focusable={false} />
+        )}
       </div>
       <div className={`wkp-menu-layers ${subtitle ? '' : 'hidden'}`}>
         {subtitle}
