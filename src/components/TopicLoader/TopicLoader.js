@@ -1,8 +1,8 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
-import Layer from 'react-spatial/layers/Layer';
+
 import TrafimageGeoServerWMSLayer from '../../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import HandicapLayer from '../../layers/HandicapLayer';
@@ -14,14 +14,13 @@ import {
   setSearchService,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
+import TopicElements from '../TopicElements';
 import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
+  apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   activeTopic: PropTypes.shape(),
-  activeTopicKey: PropTypes.string,
-  baseLayers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
-  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
@@ -37,10 +36,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  activeTopicKey: null,
   activeTopic: null,
-  baseLayers: null,
-  layers: null,
   cartaroUrl: null,
   geoServerUrl: null,
   vectorTilesKey: null,
@@ -52,71 +48,55 @@ class TopicLoader extends Component {
     window.location.href = topic.linkUrl;
   }
 
-  constructor(props) {
-    super(props);
-    const {
-      activeTopicKey,
-      dispatchSetActiveTopic,
-      dispatchSetTopics,
-      topics,
-    } = this.props;
-    this.topic = activeTopicKey
-      ? topics.find(t => t.key === activeTopicKey)
-      : topics && topics[0];
-    if (!this.topic) {
-      return;
-    }
-
-    if (this.topic.linkUrl) {
-      TopicLoader.openLinkTopic(this.topic.linkUrl);
-    }
-    dispatchSetActiveTopic(this.topic);
-    dispatchSetTopics(topics);
-  }
-
   componentDidMount() {
-    if (this.topic) {
-      this.updateServices(this.topic);
-    }
+    const { dispatchSetTopics, topics } = this.props;
+    const activeTopic = topics.find(topic => topic.active) || topics[0];
+    activeTopic.active = true; // in case we fall back to the first topic.
+    dispatchSetTopics(topics);
+    this.updateServices(activeTopic);
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
-
-    if (activeTopic && activeTopic !== prevProps.activeTopic) {
+    const { activeTopic } = this.props;
+    if (
+      activeTopic &&
+      prevProps.activeTopic &&
+      activeTopic.key !== prevProps.activeTopic.key
+    ) {
       this.updateServices(activeTopic);
-    }
-
-    if (topics !== prevProps.topics && topics && topics.length) {
-      dispatchSetActiveTopic(topics[0]);
     }
   }
 
-  updateServices(topic) {
+  updateServices(activeTopic) {
     const {
+      apiKey,
+      dispatchSetActiveTopic,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
-    if (topic.linkUrl) {
-      TopicLoader.openLinkTopic(topic);
+
+    if (activeTopic.linkUrl) {
+      TopicLoader.openLinkTopic(activeTopic);
       return;
     }
-    this.updateLayers(topic.layers);
+
+    dispatchSetActiveTopic(activeTopic);
+
+    this.updateLayers(activeTopic.layers);
 
     const newSearchService = new SearchService(layerHelper.highlightStyle);
-    newSearchService.setSearches(topic.searches || []);
+    newSearchService.setSearches(activeTopic.searches || []);
     newSearchService.setSearchesProps({
-      topic,
+      activeTopic,
       dispatchSetClickedFeatureInfo,
     });
+    newSearchService.setApiKey(apiKey);
     dispatchSetSearchService(newSearchService);
   }
 
   updateLayers(topicLayers) {
     const {
       layerService,
-      layers,
-      baseLayers,
       dispatchSetLayers,
       cartaroUrl,
       geoServerUrl,
@@ -124,15 +104,9 @@ class TopicLoader extends Component {
       vectorTilesUrl,
     } = this.props;
 
-    const newLayers = [
-      ...(baseLayers || []),
-      ...topicLayers,
-      ...(layers || []),
-    ];
-
-    layerService.setLayers(newLayers);
+    layerService.setLayers(topicLayers);
     const flatLayers = layerService.getLayersAsFlatArray();
-    dispatchSetLayers(newLayers);
+    dispatchSetLayers(topicLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i] instanceof TrafimageGeoServerWMSLayer) {
@@ -146,12 +120,13 @@ class TopicLoader extends Component {
   }
 
   render() {
-    return null;
+    return <TopicElements />;
   }
 }
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
+  layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
