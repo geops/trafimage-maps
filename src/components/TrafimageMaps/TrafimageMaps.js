@@ -284,8 +284,6 @@ class TrafimageMaps extends React.PureComponent {
     } = this.props;
     const { map, layerService, searchService } = this.store.getState().app;
 
-    searchService.setApiKey(apiKey);
-
     // Define which component to display as child of TopicsMenu.
     const appTopicsMenuChildren = TrafimageMaps.getComponents(
       {
@@ -344,6 +342,7 @@ class TrafimageMaps extends React.PureComponent {
           <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
             <ResizeHandler observe=".tm-app" />
             <TopicLoader
+              apiKey={apiKey}
               layerService={layerService}
               searchService={searchService}
               baseLayers={baseLayers}
