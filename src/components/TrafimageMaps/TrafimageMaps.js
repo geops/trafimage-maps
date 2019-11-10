@@ -47,6 +47,8 @@ const propTypes = {
     }),
   ),
 
+  activeTopicKey: PropTypes.string,
+
   /**
    * Additional elements.
    */
@@ -178,6 +180,7 @@ const defaultProps = {
   vectorTilesKey: null,
   vectorTilesUrl: null,
   topics: null,
+  activeTopicKey: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -245,6 +248,7 @@ class TrafimageMaps extends React.PureComponent {
       elements,
       projection,
       topics,
+      activeTopicKey,
       apiKey,
       history,
       center,
@@ -323,6 +327,7 @@ class TrafimageMaps extends React.PureComponent {
               searchService={searchService}
               map={map}
               topics={topics}
+              activeTopicKey={activeTopicKey}
               cartaroUrl={cartaroUrl}
               geoServerUrl={geoServerUrl}
               vectorTilesKey={vectorTilesKey}

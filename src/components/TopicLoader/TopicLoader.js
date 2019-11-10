@@ -14,12 +14,15 @@ import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  activeTopic: PropTypes.shape(),
+  activeTopicKey: PropTypes.string,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape(),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -31,6 +34,7 @@ const propTypes = {
 
 const defaultProps = {
   activeTopic: null,
+  activeTopicKey: null,
   cartaroUrl: null,
   geoServerUrl: null,
   vectorTilesKey: null,
@@ -44,8 +48,15 @@ class TopicLoader extends Component {
 
   constructor(props) {
     super(props);
-    const { dispatchSetActiveTopic, dispatchSetTopics, topics } = this.props;
-    this.topic = topics && (topics.find(t => t.active) || topics[0]);
+    const {
+      dispatchSetActiveTopic,
+      dispatchSetTopics,
+      activeTopicKey,
+      topics,
+    } = this.props;
+
+    this.topic =
+      topics && (topics.find(t => t.key === activeTopicKey) || topics[0]);
 
     if (!this.topic) {
       return;

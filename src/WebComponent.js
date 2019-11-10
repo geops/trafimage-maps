@@ -5,12 +5,14 @@ import PropTypes from 'prop-types';
 import { Styled } from 'create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
-// import defaultTopics from './config/topics';
+import topicConfig from './config/topics';
 
 const propTypes = {
   // Properties
   center: PropTypes.arrayOf(PropTypes.number),
   topics: PropTypes.array,
+  appName: PropTypes.string,
+  activeTopicKey: PropTypes.string,
   history: PropTypes.object,
 
   // Attributes
@@ -60,6 +62,8 @@ const attributes = {
 const defaultProps = {
   center: undefined,
   topics: undefined,
+  appName: 'wkp',
+  activeTopicKey: undefined,
   history: undefined,
 };
 
@@ -81,11 +85,12 @@ const WebComponent = props => {
     shareMenu,
     featureMenu,
     trackerMenu,
+    topics,
+    appName,
   } = props;
 
-  const floatZoom = useMemo(() => {
-    return zoom && parseFloat(zoom);
-  }, [zoom]);
+  const appTopics = topics || topicConfig[appName];
+  const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const boolElements = useMemo(() => {
     return {
@@ -126,6 +131,7 @@ const WebComponent = props => {
       >
         <TrafimageMaps
           {...props}
+          topics={appTopics}
           elements={boolElements}
           initialZoom={floatZoom}
         />
