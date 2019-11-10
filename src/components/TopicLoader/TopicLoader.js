@@ -96,6 +96,7 @@ class TopicLoader extends Component {
     const {
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
+      activeTopic,
     } = this.props;
     if (topic.linkUrl) {
       TopicLoader.openLinkTopic(topic);
@@ -107,6 +108,7 @@ class TopicLoader extends Component {
     newSearchService.setSearches(topic.searches || []);
     newSearchService.setSearchesProps({
       topic,
+      activeTopic,
       dispatchSetClickedFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
