@@ -1,15 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Point from 'ol/geom/Point';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
-import { setClickedFeatureInfo } from '../../model/app/actions';
 import './Popup.scss';
 
 const Popup = () => {
   const map = useSelector(state => state.app.map);
   const clickedFeatureInfo = useSelector(state => state.app.clickedFeatureInfo);
-  const dispatch = useDispatch();
 
   if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
     return null;
@@ -28,13 +26,7 @@ const Popup = () => {
   const coord = geom instanceof Point ? geom.getCoordinates() : coordinate;
 
   return (
-    <RSPopup
-      onCloseClick={() => {
-        dispatch(setClickedFeatureInfo());
-      }}
-      popupCoordinate={coord}
-      map={map}
-    >
+    <RSPopup showHeader={false} padding="0px" popupCoordinate={coord} map={map}>
       <FeatureInformation clickedFeatureInfo={filtered} />
     </RSPopup>
   );

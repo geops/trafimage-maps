@@ -1,24 +1,35 @@
 .wkp-feature-information {
-  min-height: 50px;
-
-  .wkp-pagination-wrapper {
+  .wkp-feature-information-header {
+    padding: 10px;
     display: flex;
-    padding: 5px 0;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
 
-    .wkp-pagination-button-wrapper {
-      padding: 0 10px;
-      height: 25px;
-      width: 25px;
+  .wkp-feature-information-body {
+    padding: 10px;
 
-      .wkp-pagination-button {
+    .wkp-pagination-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 5px;
+
+      .wkp-pagination-button-wrapper {
+        padding: 0 10px;
         height: 25px;
         width: 25px;
 
-        svg {
+        .wkp-pagination-button {
           height: 25px;
           width: 25px;
+
+          svg {
+            height: 25px;
+            width: 25px;
+          }
         }
       }
     }
