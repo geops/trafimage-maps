@@ -9,6 +9,11 @@ const getHandicapFeatures = layer =>
     .map(feature => ({ didok: feature.getProperties().didok, feature, layer }));
 
 class HandicapStopFinder extends StopFinder {
+  constructor() {
+    super();
+    this.placeholder = 'Suche nach Stationen';
+  }
+
   search(value) {
     const handicapFeatures = this.props.activeTopic.layers
       .filter(findHandicapLayers)
