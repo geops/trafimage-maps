@@ -121,7 +121,6 @@ class TopicLoader extends Component {
 
     layerService.setLayers(topicLayers);
     const flatLayers = layerService.getLayersAsFlatArray();
-    console.log('dispatchSetLayers');
     dispatchSetLayers(topicLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
