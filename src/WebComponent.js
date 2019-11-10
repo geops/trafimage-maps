@@ -11,8 +11,6 @@ const propTypes = {
   // Properties
   center: PropTypes.arrayOf(PropTypes.number),
   topics: PropTypes.array,
-  appName: PropTypes.string,
-  activeTopicKey: PropTypes.string,
   history: PropTypes.object,
 
   // Attributes
@@ -30,6 +28,8 @@ const propTypes = {
   shareMenu: PropTypes.string,
   featureMenu: PropTypes.string,
   trackerMenu: PropTypes.string,
+  appName: PropTypes.string,
+  activeTopicKey: PropTypes.string,
   apiKey: PropTypes.string,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
@@ -64,8 +64,6 @@ const attributes = {
 const defaultProps = {
   center: undefined,
   topics: undefined,
-  appName: 'wkp',
-  activeTopicKey: undefined,
   history: undefined,
 };
 
