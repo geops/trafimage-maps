@@ -52,6 +52,8 @@ const attributes = {
   shareMenu: 'true',
   featureMenu: 'false',
   trackerMenu: 'true',
+  appName: 'wkp',
+  activeTopicKey: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
