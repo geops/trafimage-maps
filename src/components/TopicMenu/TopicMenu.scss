@@ -3,15 +3,6 @@
 .wkp-topic-menu {
   border-top-width: 0;
 
-  .wkp-info-topic-bt {
-    margin-right: 4px;
-  }
-
-  .wkp-info-layer-bt {
-    top: 0;
-    margin-right: 0;
-  }
-
   .wkp-topic-menu-item-wrapper {
     display: flex;
     align-items: center;
@@ -62,6 +53,7 @@
     .wkp-info-topic-bt {
       color: #888;
       align-items: center;
+      margin-right: 4px;
 
       &.wkp-active {
         color: #000;
@@ -76,6 +68,11 @@
   .wkp-layer-tree {
     overflow: hidden;
     margin: 0 0 0 20px;
+
+    .wkp-info-layer-bt {
+      top: 0;
+      margin-right: 0;
+    }
 
     .tm-layer-tree-item {
       color: #888;

@@ -14,6 +14,10 @@ const netzkarteLayer = new TrafimageMapboxLayer({
 export default {
   name: 'CASA',
   key: 'ch.sbb.casa',
+  elements: {
+    menu: true,
+    popup: true,
+  },
   layers: [netzkarteLayer],
   projection: 'EPSG:3857',
 };

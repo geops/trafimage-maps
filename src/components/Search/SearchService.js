@@ -42,7 +42,7 @@ class SearchService {
   getPlaceholder(t) {
     const sections = Object.entries(this.searches)
       .filter(([, search]) => search.showInPlaceholder)
-      .map(([section]) => t(section));
+      .map(([section, search]) => t(search.placeholder || section));
     return `${sections.join(', ')} …`;
   }
 
@@ -64,7 +64,6 @@ class SearchService {
         this.highlightFeature = feature;
         this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
           padding: [50, 50, 50, 50],
-          duration: 500,
           maxZoom: 15,
         });
       }

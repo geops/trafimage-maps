@@ -9,6 +9,11 @@ const getHandicapFeatures = layer =>
     .map(feature => ({ didok: feature.getProperties().didok, feature, layer }));
 
 class HandicapStopFinder extends StopFinder {
+  constructor() {
+    super();
+    this.placeholder = 'Suche nach Stationen';
+  }
+
   search(value) {
     const handicapFeatures = this.props.activeTopic.layers
       .filter(findHandicapLayers)
@@ -20,10 +25,7 @@ class HandicapStopFinder extends StopFinder {
             .map(f => ({
               ...f,
               handicap: handicapFeatures.find(
-                hf =>
-                  hf.didok ===
-                  f.properties.identifiers.find(i => i.source === 'sbb:ibnr')
-                    .value,
+                hf => hf.didok === f.properties.id,
               ),
             }))
             .filter(f => f.handicap)
@@ -32,9 +34,12 @@ class HandicapStopFinder extends StopFinder {
   }
 
   select(item) {
-    this.props.dispatchSetClickedFeatureInfo([
-      { features: [item.handicap.feature], layer: item.handicap.layer },
-    ]);
+    window.clearTimeout(this.selectTimeout);
+    this.selectTimeout = window.setTimeout(() => {
+      this.props.dispatchSetClickedFeatureInfo([
+        { features: [item.handicap.feature], layer: item.handicap.layer },
+      ]);
+    }, 200);
   }
 }
 

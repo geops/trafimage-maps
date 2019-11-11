@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LayerService from 'react-spatial/LayerService';
@@ -10,19 +10,18 @@ import {
   setSearchService,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
+import TopicElements from '../TopicElements';
 import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
+  apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  activeTopicKey: PropTypes.string,
+  activeTopic: PropTypes.shape(),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
-
-  // mapStateToProps
-  activeTopic: PropTypes.shape(),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -34,7 +33,6 @@ const propTypes = {
 
 const defaultProps = {
   activeTopic: null,
-  activeTopicKey: null,
   cartaroUrl: null,
   geoServerUrl: null,
   vectorTilesKey: null,
@@ -46,75 +44,47 @@ class TopicLoader extends Component {
     window.location.href = topic.linkUrl;
   }
 
-  constructor(props) {
-    super(props);
-    const {
-      dispatchSetActiveTopic,
-      dispatchSetTopics,
-      activeTopicKey,
-      topics,
-    } = this.props;
-
-    this.topic =
-      topics && (topics.find(t => t.key === activeTopicKey) || topics[0]);
-
-    if (!this.topic) {
-      return;
-    }
-
-    if (this.topic.linkUrl) {
-      TopicLoader.openLinkTopic(this.topic.linkUrl);
-    }
-
-    dispatchSetActiveTopic(this.topic);
-    dispatchSetTopics(topics);
-  }
-
   componentDidMount() {
-    if (this.topic) {
-      this.updateServices(this.topic);
-    }
+    const { dispatchSetTopics, topics } = this.props;
+    const activeTopic = topics.find(topic => topic.active) || topics[0];
+    activeTopic.active = true; // in case we fall back to the first topic.
+    dispatchSetTopics(topics);
+    this.updateServices(activeTopic);
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      activeTopic,
-      activeTopicKey,
-      topics,
-      dispatchSetActiveTopic,
-    } = this.props;
-
-    if (activeTopic && activeTopic !== prevProps.activeTopic) {
+    const { activeTopic } = this.props;
+    if (
+      activeTopic &&
+      prevProps.activeTopic &&
+      activeTopic.key !== prevProps.activeTopic.key
+    ) {
       this.updateServices(activeTopic);
-    }
-
-    if (activeTopicKey && activeTopicKey !== prevProps.activeTopicKey) {
-      this.topic =
-        topics && (topics.find(t => t.key === activeTopicKey) || topics[0]);
-      dispatchSetActiveTopic(this.topic);
-    }
-
-    if (topics !== prevProps.topics && topics && topics.length) {
-      this.topic = topics.find(t => t.active) || topics[0];
-      dispatchSetActiveTopic(this.topic);
     }
   }
 
-  updateServices(topic) {
+  updateServices(activeTopic) {
     const {
+      apiKey,
+      dispatchSetActiveTopic,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
-    if (topic.linkUrl) {
-      TopicLoader.openLinkTopic(topic);
+
+    if (activeTopic.linkUrl) {
+      TopicLoader.openLinkTopic(activeTopic);
       return;
     }
-    this.updateLayers(topic.layers);
+
+    dispatchSetActiveTopic(activeTopic);
+
+    this.updateLayers(activeTopic.layers);
 
     const newSearchService = new SearchService(layerHelper.highlightStyle);
-    newSearchService.setSearches(topic.searches || []);
+    newSearchService.setSearches(activeTopic.searches || []);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
-      topic,
+      activeTopic,
       dispatchSetClickedFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
@@ -146,12 +116,13 @@ class TopicLoader extends Component {
   }
 
   render() {
-    return null;
+    return <TopicElements />;
   }
 }
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
+  layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
