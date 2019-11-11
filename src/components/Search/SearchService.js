@@ -42,7 +42,7 @@ class SearchService {
   getPlaceholder(t) {
     const sections = Object.entries(this.searches)
       .filter(([, search]) => search.showInPlaceholder)
-      .map(([section]) => t(section));
+      .map(([section, search]) => t(search.placeholder || section));
     return `${sections.join(', ')} …`;
   }
 

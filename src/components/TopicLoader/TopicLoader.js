@@ -85,12 +85,12 @@ class TopicLoader extends Component {
     this.updateLayers(activeTopic.layers);
 
     const newSearchService = new SearchService(layerHelper.highlightStyle);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearches(activeTopic.searches || []);
     newSearchService.setSearchesProps({
       activeTopic,
       dispatchSetClickedFeatureInfo,
     });
-    newSearchService.setApiKey(apiKey);
     dispatchSetSearchService(newSearchService);
   }
 
