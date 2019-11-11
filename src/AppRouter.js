@@ -14,38 +14,34 @@ const AppRouter = () => (
       exact
       path="/:topic"
       component={({ history, match }) => {
-        const topic = topics.find(t => t.key === match.params.topic);
+        const activeTopic = topics.find(t => t.key === match.params.topic);
 
-        if (!topic) {
+        if (!activeTopic) {
           return <Redirect to={redirectUrl} />;
         }
 
+        activeTopic.active = true;
         const { disabled } = qs.parse(history.location.search);
-        const { elements } = topic;
-
         // Disabled elements from permalink
         if (disabled) {
           disabled.split(',').forEach(element => {
             // Backward compatibility
             if (element === 'spyLayer') {
-              elements.baseLayerToggler = false;
+              activeTopic.elements.baseLayerToggler = false;
             }
             // Backward compatibility
             if (element === 'header') {
-              elements.search = false;
+              activeTopic.elements.search = false;
             }
-            elements[element] = false;
+            activeTopic.elements[element] = false;
           });
         }
 
         return (
           <TrafimageMaps
             history={history}
-            activeTopicKey={topic.key}
             topics={topics}
             apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
-            elements={elements}
-            initialState={{ ...match.params }}
           />
         );
       }}
