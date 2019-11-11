@@ -644,6 +644,7 @@ export const constrSingleLayer = new ConstructionSingleLayer({
   visible: true,
   properties: {
     hideInLegend: true,
+    popupComponent: 'ConstructionPopup',
   },
   maxResolution: 305.748113141,
 });

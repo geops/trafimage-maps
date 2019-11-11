@@ -1,0 +1,21 @@
+.wkp-construction-popup {
+  .wkp-construction-popup-subtitle {
+    font-style: italic;
+  }
+
+  .wkp-construction-popup-desc {
+    margin: 9px 6px;
+  }
+
+  .wkp-construction-popup-link {
+    padding: 2px 0;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #eee;
+    margin: 0 6px;
+
+    &:last-child {
+      border-bottom-width: 1px;
+    }
+  }
+}
