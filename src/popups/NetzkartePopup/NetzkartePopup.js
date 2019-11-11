@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from 'react-spatial/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
+import { setClickedFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 
 import './NetzkartePopup.scss';
@@ -16,10 +17,27 @@ const propTypes = {
 function NetzkartePopup({ feature }) {
   const [showPlanLinks, setShowPlanLinks] = useState(false);
   const [showCoordinates, setShowCoordinates] = useState(false);
+  const dispatch = useDispatch();
   const language = useSelector(state => state.app.language);
   const projection = useSelector(state => state.app.projection);
 
   const { t } = useTranslation();
+
+  const openDeparturePopup = () => {
+    dispatch(
+      setClickedFeatureInfo([
+        {
+          coordinate: feature.getGeometry().getCoordinates()[0],
+          features: [feature],
+          // Fake layer binded to popup, to open it.
+          layer: {
+            getKey: () => 'ch.sbb.departure.popup',
+            get: val => (val === 'popupComponent' ? 'DeparturePopup' : null),
+          },
+        },
+      ]),
+    );
+  };
 
   const isAirport = feature.get('layer').indexOf('flug') > 0;
 
@@ -50,6 +68,19 @@ function NetzkartePopup({ feature }) {
   let stationServiceLink;
   let handicapLink;
   let shoppingLink;
+
+  const transportLink = (
+    <div>
+      <div
+        tabIndex={0}
+        role="button"
+        onClick={() => openDeparturePopup()}
+        onKeyPress={() => openDeparturePopup()}
+      >
+        {t('Abfahrtszeiten')}
+      </div>
+    </div>
+  );
 
   if (isAirport) {
     airportLabel = <div>{t(layer)}</div>;
@@ -158,6 +189,7 @@ function NetzkartePopup({ feature }) {
         </>
       ) : null}
       {stationTimetableLink}
+      {transportLink}
       {stationServiceLink}
       {shoppingLink}
       {handicapLink}

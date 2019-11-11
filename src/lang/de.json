@@ -145,6 +145,7 @@
   "dfa": "DfA",
   "dfa_filter": "DfA Liniennetz",
   "didok": "DIDOK",
+  "Direkt erreichbares Ziel auswählen": "Direkt erreichbares Ziel auswählen",
   "Draw Manual Trafimage Webkartenportal.": "Quickstart Manual Trafimage Webkartenportal.",
   "dwv": "Durchschnittlicher werktäglicher Verkehr",
   "Ein- und Aussteigende": "Ein- und Aussteigende",
@@ -156,6 +157,7 @@
   "Fahrplan": "Fahrplan",
   "faltrampe": "Faltrampe",
   "Format A4": "Format A4",
+  "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.": "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.",
   "gemeinde": "Gemeinde",
   "gemeinde_plural": "Gemeinden",
   "Geodaten": "Geodaten",
@@ -188,6 +190,7 @@
   "Layer verbergen": "Layer verbergen",
   "Layerinformationen anzeigen": "Layerinformationen anzeigen",
   "lift_zu_perron": "Lift zu Perron",
+  "Linie": "Linie",
   "linie": "Linie",
   "linie_plural": "Linien",
   "linien": "Linien",
@@ -216,6 +219,7 @@
   "Permalink generieren": "Permalink.",
   "perronhoehe_P55": "Perronhöhe P55",
   "Plakat": "Plakat",
+  "Planmässige Abfahrt": "Planmässige Abfahrt",
   "Printprodukte": "Printprodukte",
   "Projektionswahl": "Projektionswahl",
   "Pünktlichkeit": "Pünktlichkeit",
@@ -268,5 +272,6 @@
   "xmas": "SBB-Weihnacht",
   "xmastr": "Weihnachts-Tracker",
   "Zeichnen": "Zeichnen",
+  "Ziel": "Ziel",
   "Zugtracker": "Zugtracker"
 }

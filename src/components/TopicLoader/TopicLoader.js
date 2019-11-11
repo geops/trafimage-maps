@@ -18,6 +18,7 @@ import SearchService from '../Search/SearchService';
 import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
+  apiKey: PropTypes.string,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   activeTopic: PropTypes.shape(),
   activeTopicKey: PropTypes.string,
@@ -38,6 +39,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  apiKey: null,
   activeTopicKey: null,
   activeTopic: null,
   baseLayers: null,
@@ -97,6 +99,8 @@ class TopicLoader extends Component {
     const {
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
+      apiKey,
+      activeTopic,
     } = this.props;
     if (topic.linkUrl) {
       TopicLoader.openLinkTopic(topic);
@@ -106,8 +110,10 @@ class TopicLoader extends Component {
 
     const newSearchService = new SearchService(layerHelper.highlightStyle);
     newSearchService.setSearches(topic.searches || []);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
       topic,
+      activeTopic,
       dispatchSetClickedFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);

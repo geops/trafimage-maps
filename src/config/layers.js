@@ -322,7 +322,7 @@ punctuality.setChildren([
 }); */
 
 export const netzkartePointLayer = new MapboxStyleLayer({
-  key: 'ch.sbb.netzkarte.stationen',
+  name: 'ch.sbb.netzkarte.stationen',
   visible: true,
   mapboxLayer: sourcesLayer,
   styleLayer: {

@@ -6,6 +6,7 @@ import NetzkartePopup from './NetzkartePopup';
 import ParksPopup from './ParksPopup';
 import PassagierFrequenzenPopup from './PassagierFrequenzenPopup';
 import ConstructionPopup from './ConstructionPopup';
+import DeparturePopup from './DeparturePopup';
 
 export default {
   BahnhofplanPopup,
@@ -16,4 +17,5 @@ export default {
   ParksPopup,
   PassagierFrequenzenPopup,
   ConstructionPopup,
+  DeparturePopup,
 };
