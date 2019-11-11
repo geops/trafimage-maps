@@ -18,9 +18,21 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [featureIndex, setFeatureIndex] = useState(0);
-  const features = clickedFeatureInfo.map(l => l.features).flat();
+  const clickedFeatures = clickedFeatureInfo.map(l => l.features).flat();
+
+  // Extract cluster
+  const features = clickedFeatures
+    .map(f => (f.get('features') ? f.get('features') : f))
+    .flat();
   const feature = features[featureIndex];
-  const info = clickedFeatureInfo.find(i => i.features.includes(feature));
+
+  const info = clickedFeatureInfo.find(i => {
+    // Extract cluster
+    return i.features
+      .map(f => (f.get('features') ? f.get('features') : f))
+      .flat()
+      .includes(feature);
+  });
   const PopupComponent = popups[info.layer.get('popupComponent')];
 
   useEffect(() => {

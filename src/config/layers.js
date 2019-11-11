@@ -666,6 +666,7 @@ export const constrClusterLayer = new ConstructionClusterLayer({
   visible: true,
   properties: {
     hideInLegend: true,
+    popupComponent: 'ConstructionPopup',
   },
   minResolution: 305.748113141,
 });
