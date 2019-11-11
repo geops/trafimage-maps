@@ -77,10 +77,21 @@ class TopicLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
+    const {
+      activeTopic,
+      activeTopicKey,
+      topics,
+      dispatchSetActiveTopic,
+    } = this.props;
 
     if (activeTopic && activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
+    }
+
+    if (activeTopicKey && activeTopicKey !== prevProps.activeTopicKey) {
+      this.topic =
+        topics && (topics.find(t => t.key === activeTopicKey) || topics[0]);
+      dispatchSetActiveTopic(this.topic);
     }
 
     if (topics !== prevProps.topics && topics && topics.length) {
