@@ -44,7 +44,7 @@ class ConstructionLayer extends VectorLayer {
     this.styleCache = {};
     this.visibilityKeys = [];
 
-    this.isFeatureVisible = this.isFeatureVisible.bind(this);
+    this.geometryFunction = this.geometryFunction.bind(this);
 
     this.setVisible(this.visible);
   }
@@ -71,7 +71,12 @@ class ConstructionLayer extends VectorLayer {
     this.geoServerUrl = geoServerUrl;
   }
 
-  isFeatureVisible(feature) {
+  /**
+   * Function that returns a geometry if the feature should be visible.
+   * @param  {ol.feature} feature Feature
+   * @return {ol.geom.Point} Geometry or null
+   */
+  geometryFunction(feature) {
     const childLayer = this.children.find(
       child =>
         child.properties &&

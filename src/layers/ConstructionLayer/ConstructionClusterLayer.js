@@ -18,7 +18,7 @@ class ConstructionClusterLayer extends ConstructionLayer {
       new ClusterSource({
         distance: 90,
         source: this.olLayer.getSource(),
-        geometryFunction: this.isFeatureVisible,
+        geometryFunction: this.geometryFunction,
       }),
     );
   }

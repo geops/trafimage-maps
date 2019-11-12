@@ -24,7 +24,7 @@ class ConstructionSingleLayer extends ConstructionLayer {
   }
 
   style(feature) {
-    if (!this.isFeatureVisible(feature)) {
+    if (!this.geometryFunction(feature)) {
       return null;
     }
 
