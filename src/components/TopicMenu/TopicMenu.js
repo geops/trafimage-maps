@@ -249,8 +249,5 @@ const mapDispatchToProps = {
 
 export default compose(
   withTranslation(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
+  connect(mapStateToProps, mapDispatchToProps),
 )(TopicMenu);

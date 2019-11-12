@@ -140,7 +140,4 @@ const mapDispatchToProps = {
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TopicLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicLoader);

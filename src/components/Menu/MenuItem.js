@@ -125,9 +125,4 @@ const mapDispatchToProps = {};
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(MenuItem);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(MenuItem);
