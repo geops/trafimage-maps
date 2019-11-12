@@ -58,6 +58,9 @@ deploy_dev_auto:
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+  environment:
+    name: dev
+    url: https://wkp2.dev.trafimage.geops.ch/
   only:
     - master
 
