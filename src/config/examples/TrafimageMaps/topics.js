@@ -13,6 +13,14 @@ import defaultSearches from '../../searches';
 export const netzkarte = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
+  elements: {
+    footer: true,
+    header: true,
+    mapControls: true,
+    menu: true,
+    popup: true,
+    search: true,
+  },
   layers: [
     ...defaultBaseLayers,
     gemeindegrenzen,

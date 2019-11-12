@@ -64,7 +64,6 @@ class SearchService {
         this.highlightFeature = feature;
         this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
           padding: [50, 50, 50, 50],
-          duration: 500,
           maxZoom: 15,
         });
       }
