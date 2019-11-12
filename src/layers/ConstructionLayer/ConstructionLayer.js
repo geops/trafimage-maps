@@ -88,6 +88,22 @@ class ConstructionLayer extends VectorLayer {
     }
   }
 
+  getFeatureInfoAtCoordinate(coordinate) {
+    return super.getFeatureInfoAtCoordinate(coordinate).then(data => {
+      const features = data.features
+        .map(f => (f.get('features') ? f.get('features') : f))
+        .flat();
+
+      return Promise.resolve({
+        features,
+        layer: data.layer,
+        coordinate: data.features.length
+          ? data.features[0].getGeometry().getCoordinates()
+          : data.coordinate,
+      });
+    });
+  }
+
   onChangeVisible() {
     this.getSource().changed();
   }
