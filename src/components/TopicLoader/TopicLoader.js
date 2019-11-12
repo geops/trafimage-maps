@@ -85,8 +85,8 @@ class TopicLoader extends Component {
     this.updateLayers(activeTopic.layers);
 
     const newSearchService = new SearchService(layerHelper.highlightStyle);
-    newSearchService.setApiKey(apiKey);
     newSearchService.setSearches(activeTopic.searches || []);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
       activeTopic,
       dispatchSetClickedFeatureInfo,
@@ -140,7 +140,4 @@ const mapDispatchToProps = {
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TopicLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicLoader);

@@ -213,9 +213,4 @@ const mapDispatchToProps = {
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(Permalink);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

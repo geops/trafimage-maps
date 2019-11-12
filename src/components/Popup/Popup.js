@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import Point from 'ol/geom/Point';
 import RSPopup from 'react-spatial/components/Popup';
@@ -7,13 +6,9 @@ import FeatureInformation from '../FeatureInformation';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 import './Popup.scss';
 
-const propTypes = {
-  elements: PropTypes.objectOf(PropTypes.bool).isRequired,
-};
-
-const Popup = ({ elements }) => {
+const Popup = () => {
   const map = useSelector(state => state.app.map);
-  const clickedFeatureInfo = useSelector(state => state.app.clickedFeatureInfo);
+  const { activeTopic, clickedFeatureInfo } = useSelector(state => state.app);
   const dispatch = useDispatch();
 
   if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
@@ -42,10 +37,10 @@ const Popup = ({ elements }) => {
       padding="0px"
       panIntoView
       panRect={{
-        top: mapRect.top + (elements.header ? 110 : 10),
+        top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
         bottom: mapRect.bottom,
         left: mapRect.left + 10,
-        right: mapRect.right - (elements.mapControls ? 70 : 10),
+        right: mapRect.right - (activeTopic.elements.mapControls ? 70 : 10),
       }}
       popupCoordinate={coord}
       map={map}
@@ -54,7 +49,5 @@ const Popup = ({ elements }) => {
     </RSPopup>
   );
 };
-
-Popup.propTypes = propTypes;
 
 export default React.memo(Popup);
