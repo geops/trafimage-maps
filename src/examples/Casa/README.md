@@ -101,15 +101,10 @@ routeLayer.onClick(f => {
   console.log('Clicked', f);
 });
 
-<<<<<<< HEAD:src/examples/Casa/README.md
 window.addEventListener('load', () => {  
   const trafimage = document.getElementById('casa');
   trafimage.apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
   trafimage.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
-  trafimage.elements = {
-    menu: true,
-    popup: true,
-  };
   trafimage.setAttribute('width', '99%');
 });
 
@@ -119,13 +114,3 @@ window.addEventListener('load', () => {
 </div>
 
 ```
-=======
-<div style={{ position: 'relative', width: '100%', height: 500 }}>
-  <TrafimageMaps
-    topics={[casa]}
-    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
-    layers={[zoneLayer, routeLayer]}
-  />
-</div>;
-```
->>>>>>> origin/master:src/apps/Casa/README.md

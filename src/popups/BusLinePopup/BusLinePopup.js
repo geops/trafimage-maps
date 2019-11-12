@@ -11,12 +11,12 @@ const BusLinePopup = ({ feature }) => {
   return (
     <div className="wkp-bus-line-popup">
       {Object.entries(props).map(([key, value]) => {
-        if (!/line/.test(key)) {
+        if (!/^lines /.test(key)) {
           return null;
         }
         return (
           <div key={key}>
-            <div>{key}</div>
+            <div>{key.replace('lines ', '')}</div>
             <div>{value}</div>
           </div>
         );
