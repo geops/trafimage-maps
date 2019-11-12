@@ -63,7 +63,7 @@ class ConstructionLayer extends VectorLayer {
     super.terminate();
 
     if (this.visibilityKeys.length) {
-      this.visibilityKeys.forEach(key => unByKey(key));
+      unByKey(this.visibilityKeys);
     }
   }
 
