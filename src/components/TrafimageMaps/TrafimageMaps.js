@@ -15,6 +15,14 @@ import { setTopics } from '../../model/app/actions';
 
 const propTypes = {
   /**
+   * History object from react-router
+   */
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    replace: PropTypes.func,
+  }),
+
+  /**
    * Array of topics from ./src/config/topics
    */
   topics: PropTypes.arrayOf(
@@ -62,6 +70,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  history: null,
   center: [925472, 5920000],
   zoom: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
@@ -95,13 +104,13 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (topics !== prevProps.topics) {
-      console.log('disptach', topics);
       this.store.dispatch(setTopics(topics));
     }
   }
 
   render() {
     const {
+      history,
       apiKey,
       topics,
       cartaroUrl,
@@ -109,11 +118,11 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
-    console.log('render', topics);
 
     return (
       <Provider store={this.store}>
         <TopicLoader
+          history={history}
           apiKey={apiKey}
           topics={topics}
           cartaroUrl={cartaroUrl}

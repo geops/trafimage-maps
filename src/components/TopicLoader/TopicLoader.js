@@ -14,6 +14,10 @@ import TopicElements from '../TopicElements';
 import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    replace: PropTypes.func,
+  }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   activeTopic: PropTypes.shape(),
@@ -32,6 +36,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  history: null,
   activeTopic: null,
   cartaroUrl: null,
   geoServerUrl: null,
@@ -121,7 +126,8 @@ class TopicLoader extends Component {
   }
 
   render() {
-    return <TopicElements />;
+    const { history } = this.props;
+    return <TopicElements history={history} />;
   }
 }
 
@@ -141,7 +147,4 @@ const mapDispatchToProps = {
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(TopicLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicLoader);

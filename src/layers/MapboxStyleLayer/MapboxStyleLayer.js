@@ -111,7 +111,9 @@ class MapboxStyleLayer extends Layer {
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
       this.on('change:visible', ({ target: layer }) => {
-        applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+        if (mbMap && mbMap.isStyleLoaded()) {
+          applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+        }
       }),
     );
 
@@ -170,11 +172,14 @@ class MapboxStyleLayer extends Layer {
       return [];
     }
 
-    return mbMap.querySourceFeatures(this.styleLayers.map(s => s && s.source), {
-      sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
-      // filter: e => e,
-      validate: false,
-    });
+    return mbMap.querySourceFeatures(
+      this.styleLayers.map(s => s && s.source),
+      {
+        sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
+        // filter: e => e,
+        validate: false,
+      },
+    );
   }
 
   setHoverState(features = [], state) {
