@@ -46,8 +46,8 @@ function HandicapPopup({ feature }) {
   });
 
   const equipmentStr = equipment.length ? (
-    <div className="wkp-handicap-popup-element" key="Beschreibung">
-      <div className="wkp-handicap-popup-field-title">{t('Beschreibung')}</div>
+    <div className="wkp-handicap-popup-element" key="Ausstattung">
+      <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
       <div className="wkp-handicap-popup-field-body">
         {equipment.join(', ')}
       </div>
@@ -68,7 +68,7 @@ function HandicapPopup({ feature }) {
       propertyName: `bedienungszeiten_${language}`,
     },
     {
-      label: 'Beschreibung',
+      label: 'Ausstattung',
       element: equipmentStr,
     },
     {
@@ -93,8 +93,8 @@ function HandicapPopup({ feature }) {
             propertyName={`zusaetzliche_informationen_${language}`}
           />
           <PopupElement
-            key="beschreibung_zur_dritte_dienstleistung"
-            label={t('Beschreibung von dritte Dienstleistung')}
+            key={`beschreibung_zur_dritte_dienstleistung_${language}`}
+            label={t('Dritte Dienstleistung')}
             properties={props}
             propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
           />
@@ -118,7 +118,7 @@ function HandicapPopup({ feature }) {
     return (
       <PopupElement
         key="beschreibung_zur_dritte_dienstleistung"
-        label={t('Beschreibung von dritte Dienstleistung')}
+        label={t('Dritte Dienstleistung')}
         properties={props}
         propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
       />
