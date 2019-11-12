@@ -22,11 +22,15 @@
     }
 
     .tm-dialog-body {
-      padding: 0 30px;
-      margin: 10px 0 20px 0;
+      padding: 20px;
       width: auto;
       text-align: left;
       max-height: calc(100% - 70px);
+
+      p {
+        margin: 0;
+        margin-top: 1em;
+      }
     }
   }
 
