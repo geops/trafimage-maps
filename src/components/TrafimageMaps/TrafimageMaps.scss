@@ -17,7 +17,7 @@ body {
   }
 
   .wkp-menu-header:focus {
-    outline-offset: -2px;
+    z-index: 999;
   }
 
   &.tm-no-focus *:focus {
