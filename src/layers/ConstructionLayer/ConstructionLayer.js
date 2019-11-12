@@ -21,11 +21,7 @@ class ConstructionLayer extends VectorLayer {
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
       source: new OLVectorSource({
-        projection: 'EPSG:3857',
-        format: new GeoJSON({
-          featureProjection: 'EPSG:3857',
-          dataProjection: 'EPSG:3857',
-        }),
+        format: new GeoJSON(),
         loader: () => {
           fetch(
             `${this.geoServerUrl}?` +
