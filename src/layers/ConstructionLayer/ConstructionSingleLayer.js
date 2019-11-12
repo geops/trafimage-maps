@@ -1,6 +1,5 @@
 import Style from 'ol/style/Style';
 import Icon from 'ol/style/Icon';
-import GeoJSON from 'ol/format/GeoJSON';
 import ConstructionLayer from './ConstructionLayer';
 
 class ConstructionSingleLayer extends ConstructionLayer {
@@ -9,18 +8,11 @@ class ConstructionSingleLayer extends ConstructionLayer {
       ...options,
     });
 
-    this.onChangeVisible = this.onChangeVisible.bind(this);
+    this.getSource = this.getSource.bind(this);
   }
 
-  addFeatures(data) {
-    const format = new GeoJSON();
-    const features = format.readFeatures(data);
-    this.olLayer.getSource().clear();
-    this.olLayer.getSource().addFeatures(features);
-  }
-
-  onChangeVisible() {
-    this.olLayer.getSource().changed();
+  getSource() {
+    return this.olLayer.getSource();
   }
 
   style(feature) {

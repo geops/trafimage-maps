@@ -3,7 +3,6 @@ import Style from 'ol/style/Style';
 import Text from 'ol/style/Text';
 import Fill from 'ol/style/Fill';
 import Circle from 'ol/style/Circle';
-import GeoJSON from 'ol/format/GeoJSON';
 import ConstructionLayer from './ConstructionLayer';
 
 class ConstructionClusterLayer extends ConstructionLayer {
@@ -12,7 +11,7 @@ class ConstructionClusterLayer extends ConstructionLayer {
       ...options,
     });
 
-    this.onChangeVisible = this.onChangeVisible.bind(this);
+    this.getSource = this.getSource.bind(this);
 
     this.olLayer.setSource(
       new ClusterSource({
@@ -23,24 +22,8 @@ class ConstructionClusterLayer extends ConstructionLayer {
     );
   }
 
-  addFeatures(data) {
-    const format = new GeoJSON();
-    const features = format.readFeatures(data);
-    this.olLayer
-      .getSource()
-      .getSource()
-      .clear();
-    this.olLayer
-      .getSource()
-      .getSource()
-      .addFeatures(features);
-  }
-
-  onChangeVisible() {
-    this.olLayer
-      .getSource()
-      .getSource()
-      .changed();
+  getSource() {
+    return this.olLayer.getSource().getSource();
   }
 
   style(feature) {

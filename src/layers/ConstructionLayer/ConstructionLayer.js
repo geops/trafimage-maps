@@ -29,7 +29,12 @@ class ConstructionLayer extends VectorLayer {
               'outputFormat=application/json',
           )
             .then(data => data.json())
-            .then(this.addFeatures.bind(this));
+            .then(data => {
+              const format = new GeoJSON();
+              const features = format.readFeatures(data);
+              this.getSource().clear();
+              this.getSource().addFeatures(features);
+            });
         },
       }),
       minResolution: options.minResolution,
@@ -44,6 +49,7 @@ class ConstructionLayer extends VectorLayer {
     this.styleCache = {};
     this.visibilityKeys = [];
 
+    this.onChangeVisible = this.onChangeVisible.bind(this);
     this.geometryFunction = this.geometryFunction.bind(this);
 
     this.setVisible(this.visible);
@@ -65,6 +71,10 @@ class ConstructionLayer extends VectorLayer {
     if (this.visibilityKeys.length) {
       unByKey(this.visibilityKeys);
     }
+  }
+
+  onChangeVisible() {
+    this.getSource().changed();
   }
 
   setGeoServerUrl(geoServerUrl) {
