@@ -105,16 +105,18 @@ class TrafimageMaps extends React.PureComponent {
     } = this.props;
 
     return (
-      <Provider store={this.store}>
-        <TopicLoader
-          apiKey={apiKey}
-          topics={topics}
-          cartaroUrl={cartaroUrl}
-          geoServerUrl={geoServerUrl}
-          vectorTilesKey={vectorTilesKey}
-          vectorTilesUrl={vectorTilesUrl}
-        />
-      </Provider>
+      <div className="tm-trafimage-maps">
+        <Provider store={this.store}>
+          <TopicLoader
+            apiKey={apiKey}
+            topics={topics}
+            cartaroUrl={cartaroUrl}
+            geoServerUrl={geoServerUrl}
+            vectorTilesKey={vectorTilesKey}
+            vectorTilesUrl={vectorTilesUrl}
+          />
+        </Provider>
+      </div>
     );
   }
 }
