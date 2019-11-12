@@ -96,8 +96,10 @@ class MapboxStyleLayer extends Layer {
 
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
-      this.on('change:visible', ({ target: layer }) => {
-        applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+      this.on('change:visible', ({ target: layer }) => {        
+        if (mbMap.isStyleLoaded()) {
+          applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+        }
       }),
     );
   }
