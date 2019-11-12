@@ -58,6 +58,9 @@ deploy_dev_auto:
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+  environment:
+    name: dev
+    url: https://wkp2.dev.trafimage.geops.ch/
   only:
     - master
 
@@ -68,6 +71,9 @@ deploy_dev:
   script:
     - echo "$DEV_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.dev.trafimage.geops.ch:/var/www/wkp2.dev.trafimage.geops.ch
+  environment:
+    name: dev
+    url: https://wkp2.dev.trafimage.geops.ch/
   when: manual
 
 deploy_stag:
@@ -77,6 +83,9 @@ deploy_stag:
   script:
     - echo "$STAG_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.stag.trafimage.geops.ch:/var/www/wkp2.stag.trafimage.geops.ch
+  environment:
+    name: stag
+    url: https://wkp2.stag.trafimage.geops.ch/
   when: manual
 
 deploy_prod:
@@ -86,6 +95,9 @@ deploy_prod:
   script:
     - echo "$PROD_DEPLOY_KEY" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -av --delete build/ wkp@wkp2.prod.trafimage.geops.ch:/var/www/wkp2.prod.trafimage.geops.ch
+  environment:
+    name: prod
+    url: https://maps2.trafimage.ch/
   when: manual
 
 review:

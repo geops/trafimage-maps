@@ -9,14 +9,22 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
-import store, { getStore } from '../../model/store';
+import { getStore } from '../../model/store';
+import { setZoom, setCenter } from '../../model/map/actions';
+import { setTopics } from '../../model/app/actions';
 
 import 'react-spatial/themes/default/index.scss';
 import './TrafimageMaps.scss';
 
-import { setZoom, setCenter } from '../../model/map/actions';
-
 const propTypes = {
+  /**
+   * History object from react-router
+   */
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    replace: PropTypes.func,
+  }),
+
   /**
    * Array of topics from ./src/config/topics
    */
@@ -44,11 +52,6 @@ const propTypes = {
   apiKey: PropTypes.string,
 
   /**
-   * React router history.
-   */
-  history: PropTypes.shape(),
-
-  /**
    * URL endpoint for Cartaro.
    */
   cartaroUrl: PropTypes.string,
@@ -70,10 +73,10 @@ const propTypes = {
 };
 
 const defaultProps = {
+  history: null,
   center: [925472, 5920000],
   zoom: undefined,
-  apiKey: null,
-  history: null,
+  apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
@@ -84,17 +87,16 @@ const defaultProps = {
 class TrafimageMaps extends React.PureComponent {
   constructor(props) {
     super(props);
-    const { history } = this.props;
 
     /**
      * If the application runs standalone, we want to use a consistent store.
      * However when running in Stylegudist, every application needs it own store
      */
-    this.store = history ? store : getStore();
+    this.store = getStore();
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center } = this.props;
+    const { zoom, center, topics } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -103,10 +105,15 @@ class TrafimageMaps extends React.PureComponent {
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
     }
+
+    if (topics !== prevProps.topics) {
+      this.store.dispatch(setTopics(topics));
+    }
   }
 
   render() {
     const {
+      history,
       apiKey,
       topics,
       cartaroUrl,
@@ -118,6 +125,7 @@ class TrafimageMaps extends React.PureComponent {
     return (
       <Provider store={this.store}>
         <TopicLoader
+          history={history}
           apiKey={apiKey}
           topics={topics}
           cartaroUrl={cartaroUrl}
