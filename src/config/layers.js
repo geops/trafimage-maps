@@ -638,8 +638,8 @@ constrAusbau.setChildren([
 ]);
 
 export const constrSingleLayer = new ConstructionLayer({
-  name: 'ch.sbb.constructio.single',
-  key: 'ch.sbb.constructio.single',
+  name: 'ch.sbb.construction.single',
+  key: 'ch.sbb.construction.single',
   visible: true,
   properties: {
     hideInLegend: true,
@@ -660,8 +660,8 @@ constrSingleLayer.setChildren([
 ]);
 
 export const constrClusterLayer = new ConstructionLayer({
-  name: 'ch.sbb.constructio.cluster',
-  key: 'ch.sbb.constructio.cluster',
+  name: 'ch.sbb.construction.cluster',
+  key: 'ch.sbb.construction.cluster',
   visible: true,
   properties: {
     hideInLegend: true,
