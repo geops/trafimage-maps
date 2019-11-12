@@ -11,8 +11,7 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import ConstructionSingleLayer from '../layers/ConstructionLayer/ConstructionSingleLayer';
-import ConstructionClusterLayer from '../layers/ConstructionLayer/ConstructionClusterLayer';
+import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -638,7 +637,7 @@ constrAusbau.setChildren([
   constrAusbauBahnhof,
 ]);
 
-export const constrSingleLayer = new ConstructionSingleLayer({
+export const constrSingleLayer = new ConstructionLayer({
   name: 'ch.sbb.constructio.single',
   key: 'ch.sbb.constructio.single',
   visible: true,
@@ -660,13 +659,14 @@ constrSingleLayer.setChildren([
   constrAusbauBahnhof,
 ]);
 
-export const constrClusterLayer = new ConstructionClusterLayer({
+export const constrClusterLayer = new ConstructionLayer({
   name: 'ch.sbb.constructio.cluster',
   key: 'ch.sbb.constructio.cluster',
   visible: true,
   properties: {
     hideInLegend: true,
     popupComponent: 'ConstructionPopup',
+    cluster: true,
   },
   minResolution: 305.748113141,
 });

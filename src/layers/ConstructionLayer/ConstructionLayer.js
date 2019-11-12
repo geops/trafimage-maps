@@ -1,11 +1,17 @@
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
+import ClusterSource from 'ol/source/Cluster';
 import GeoJSON from 'ol/format/GeoJSON';
+import Style from 'ol/style/Style';
+import Icon from 'ol/style/Icon';
+import Text from 'ol/style/Text';
+import Fill from 'ol/style/Fill';
+import Circle from 'ol/style/Circle';
 import { unByKey } from 'ol/Observable';
 
 /**
- * Base layer for construction
+ * Layer for construction
  * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
  * @class
  * @param {Object} [options] Layer options.
@@ -46,13 +52,26 @@ class ConstructionLayer extends VectorLayer {
       olLayer,
     });
 
+    this.cluster = this.get('cluster');
+
     this.styleCache = {};
     this.visibilityKeys = [];
 
     this.onChangeVisible = this.onChangeVisible.bind(this);
     this.geometryFunction = this.geometryFunction.bind(this);
+    this.getSource = this.getSource.bind(this);
 
     this.setVisible(this.visible);
+
+    if (this.cluster) {
+      this.olLayer.setSource(
+        new ClusterSource({
+          distance: 90,
+          source: this.olLayer.getSource(),
+          geometryFunction: this.geometryFunction,
+        }),
+      );
+    }
   }
 
   init(map) {
@@ -81,6 +100,12 @@ class ConstructionLayer extends VectorLayer {
     this.geoServerUrl = geoServerUrl;
   }
 
+  getSource() {
+    return this.cluster
+      ? this.olLayer.getSource().getSource()
+      : this.olLayer.getSource();
+  }
+
   /**
    * Function that returns a geometry if the feature should be visible.
    * @param  {ol.feature} feature Feature
@@ -96,6 +121,69 @@ class ConstructionLayer extends VectorLayer {
     );
 
     return childLayer && childLayer.getVisible() ? feature.getGeometry() : null;
+  }
+
+  styleCluster(feature) {
+    const count = feature.get('features').length;
+    const cacheKey = `cluster_${count}`;
+
+    if (!this.styleCache[cacheKey]) {
+      const radius = 9 * Math.sqrt((count + 15) / Math.PI);
+
+      this.styleCache[cacheKey] = [
+        new Style({
+          zIndex: 3,
+          text: new Text({
+            textBaseline: 'middle',
+            textAlign: 'center',
+            offsetY: 0,
+            text: count.toString(),
+            fill: new Fill({
+              color: 'rgba(255, 255, 255, 1)',
+            }),
+            font: 'bold 14px Arial, Verdana, Helvetica, sans-serif',
+          }),
+          image: new Circle({
+            radius,
+            fill: new Fill({
+              color: 'rgba(0, 61, 133, 0.8)',
+            }),
+          }),
+        }),
+      ];
+    }
+
+    return this.styleCache[cacheKey];
+  }
+
+  styleSingle(feature) {
+    if (!this.geometryFunction(feature)) {
+      return null;
+    }
+
+    const cacheKey = `${feature.get('art')}_${feature.get('ort')}`;
+    const filename = `${feature.get('art')}_${feature.get('ort')}`.replace(
+      /[^A-Z,^0-9,-_]/gi,
+      '',
+    );
+
+    if (!this.styleCache[cacheKey]) {
+      this.styleCache[cacheKey] = [
+        new Style({
+          image: new Icon({
+            src: `/img/layers/construction/${filename}.png`,
+          }),
+        }),
+      ];
+    }
+
+    return this.styleCache[cacheKey];
+  }
+
+  style(feature) {
+    return this.cluster
+      ? this.styleCluster(feature)
+      : this.styleSingle(feature);
   }
 }
 
