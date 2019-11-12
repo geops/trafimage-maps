@@ -101,8 +101,8 @@ function TopicElements() {
   const appElements = getComponents(appComponents, elements);
   return (
     <div className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}>
+      <ResizeHandler observe=".tm-trafimage-maps" />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-        <ResizeHandler observe=".tm-trafimage-maps" />
         <Map
           map={map}
           initialCenter={[925472, 5920000]}

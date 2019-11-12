@@ -45,38 +45,43 @@ class TopicLoader extends Component {
   }
 
   componentDidMount() {
-    const { dispatchSetTopics, topics } = this.props;
+    const { dispatchSetTopics, dispatchSetActiveTopic, topics } = this.props;
     const activeTopic = topics.find(topic => topic.active) || topics[0];
     activeTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(topics);
+    dispatchSetActiveTopic(activeTopic);
     this.updateServices(activeTopic);
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic } = this.props;
-    if (
-      activeTopic &&
-      prevProps.activeTopic &&
-      activeTopic.key !== prevProps.activeTopic.key
-    ) {
+    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
+    if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
+    }
+
+    if (topics !== prevProps.topics) {
+      const newActiveTopic = topics.find(topic => topic.active) || topics[0];
+      dispatchSetActiveTopic(newActiveTopic);
+      this.updateServices(newActiveTopic);
     }
   }
 
   updateServices(activeTopic) {
     const {
       apiKey,
-      dispatchSetActiveTopic,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
+
+    if (!activeTopic) {
+      this.updateLayers([]);
+      dispatchSetSearchService();
+    }
 
     if (activeTopic.linkUrl) {
       TopicLoader.openLinkTopic(activeTopic);
       return;
     }
-
-    dispatchSetActiveTopic(activeTopic);
 
     this.updateLayers(activeTopic.layers);
 

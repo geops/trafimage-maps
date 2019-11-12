@@ -17,17 +17,6 @@ const propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
   zoom: PropTypes.number,
-  header: PropTypes.string,
-  footer: PropTypes.string,
-  menu: PropTypes.string,
-  permalink: PropTypes.string,
-  search: PropTypes.string,
-  popup: PropTypes.string,
-  mapControls: PropTypes.string,
-  baseLayerToggler: PropTypes.string,
-  shareMenu: PropTypes.string,
-  featureMenu: PropTypes.string,
-  trackerMenu: PropTypes.string,
   appName: PropTypes.string,
   activeTopicKey: PropTypes.string,
   apiKey: PropTypes.string,
@@ -41,17 +30,6 @@ const attributes = {
   width: '100%',
   height: '100%',
   zoom: undefined,
-  footer: 'true',
-  header: 'true',
-  mapControls: 'true',
-  menu: 'true',
-  popup: 'true',
-  search: 'true',
-  permalink: 'false',
-  baseLayerToggler: 'true',
-  shareMenu: 'true',
-  featureMenu: 'false',
-  trackerMenu: 'true',
   appName: 'wkp',
   activeTopicKey: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
@@ -67,58 +45,22 @@ const defaultProps = {
   history: undefined,
 };
 
-const getBool = val => val === 'true' || val === true;
-
 const WebComponent = props => {
-  const {
-    width,
-    height,
-    zoom,
-    footer,
-    header,
-    mapControls,
-    menu,
-    popup,
-    search,
-    permalink,
-    baseLayerToggler,
-    shareMenu,
-    featureMenu,
-    trackerMenu,
-    topics,
-    appName,
-  } = props;
+  const { activeTopicKey, width, height, zoom, topics, appName } = props;
 
-  const appTopics = topics || topicConfig[appName];
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
-
-  const boolElements = useMemo(() => {
-    return {
-      footer: getBool(footer),
-      header: getBool(header),
-      mapControls: getBool(mapControls),
-      menu: getBool(menu),
-      popup: getBool(popup),
-      search: getBool(search),
-      permalink: getBool(permalink),
-      baseLayerToggler: getBool(baseLayerToggler),
-      shareMenu: getBool(shareMenu),
-      featureMenu: getBool(featureMenu),
-      trackerMenu: getBool(trackerMenu),
-    };
-  }, [
-    footer,
-    header,
-    mapControls,
-    menu,
-    popup,
-    search,
-    permalink,
-    baseLayerToggler,
-    shareMenu,
-    featureMenu,
-    trackerMenu,
-  ]);
+  const appTopics = useMemo(() => {
+    const tps = topics || topicConfig[appName];
+    if (activeTopicKey) {
+      tps.forEach(topic => {
+        // eslint-disable-next-line no-param-reassign
+        topic.active = topic.key === activeTopicKey;
+      });
+    } else {
+      tps[0].active = true;
+    }
+    return [...tps];
+  }, [activeTopicKey, appName, topics]);
 
   return (
     <Styled styles={styles}>
@@ -129,12 +71,7 @@ const WebComponent = props => {
           height,
         }}
       >
-        <TrafimageMaps
-          {...props}
-          topics={appTopics}
-          elements={boolElements}
-          initialZoom={floatZoom}
-        />
+        <TrafimageMaps {...props} topics={appTopics} initialZoom={floatZoom} />
       </div>
     </Styled>
   );

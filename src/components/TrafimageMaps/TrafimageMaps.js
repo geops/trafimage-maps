@@ -11,6 +11,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter } from '../../model/map/actions';
+import { setTopics } from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -63,7 +64,7 @@ const propTypes = {
 const defaultProps = {
   center: [925472, 5920000],
   zoom: undefined,
-  apiKey: null,
+  apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
@@ -83,7 +84,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center } = this.props;
+    const { zoom, center, topics } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -91,6 +92,11 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (topics !== prevProps.topics) {
+      console.log('disptach', topics);
+      this.store.dispatch(setTopics(topics));
     }
   }
 
@@ -103,6 +109,7 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
+    console.log('render', topics);
 
     return (
       <Provider store={this.store}>
