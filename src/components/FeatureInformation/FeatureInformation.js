@@ -32,6 +32,7 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
   }
 
   let pagination = null;
+  const { layer } = info;
 
   if (features.length > 1) {
     pagination = (
@@ -60,7 +61,6 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
       </div>
     );
   }
-
   return (
     <div className="wkp-feature-information">
       <React.Suspense fallback="...loading">
@@ -68,7 +68,7 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
           <span>
             {PopupComponent && PopupComponent.renderTitle && feature
               ? PopupComponent.renderTitle(feature)
-              : null}
+              : layer && layer.getName() && t(layer.getName())}
           </span>
           <Button
             className="wkp-close-bt"
