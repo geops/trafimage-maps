@@ -16,6 +16,7 @@ import CasaLayer from '../CasaLayer';
  * @class ZoneLayer
  * @extends CasaLayer
  * @param {Object} options Layer options.
+ * @param {string} [validity] Zone validity. Format: yyyy-mm-dd.
  * @param {number} [options.labelOptimizationMinResolution = 100] Minimum resolution for
  *   using optimized label placement based on the current extent.
  */
@@ -51,6 +52,8 @@ class ZoneLayer extends CasaLayer {
       ...options,
     });
 
+    this.validity = options.validity;
+
     this.url = 'https://api.geops.io/casa-fare-network/v1';
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
@@ -75,6 +78,14 @@ class ZoneLayer extends CasaLayer {
         }
       }
     });
+  }
+
+  /**
+   * Set the validity of the zone.
+   * @param {string} validity Validity. Format: yyyy-mm-dd
+   */
+  setValidity(validity) {
+    this.validity = validity;
   }
 
   /**
@@ -158,6 +169,10 @@ class ZoneLayer extends CasaLayer {
       simplify: 100,
       srs: 3857,
     };
+
+    if (this.validity) {
+      urlParams.valid_from = this.validity;
+    }
 
     const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
