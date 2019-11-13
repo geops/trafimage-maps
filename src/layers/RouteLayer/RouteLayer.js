@@ -6,30 +6,44 @@ import { Style, Stroke as StrokeStyle } from 'ol/style';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 
 /**
+ * @typedef {Object} routeStyle
+ * @property {Object} stroke Stroke style.
+ * @property {number} [stroke.width=5] Stroke width in pixel. Default is 5.
+ * @property {string} [stroke.color] Stroke color.
+ *   Default is '#e3000b' for rail, '#ffed00' for bus and '#0074be' for ship.
+ * @property {Object} [outline] Outline style.
+ * @property {number} [outline.width] Outline width in pixel. By default there's no outline.
+ * @property {string} [outline.color] Outline color.
+ * Example for a route style: {
+ *   stroke: { width: 5, color: 'red' },
+ *   outline: { width: 7, color: 'white' },
+ * }
+ */
+
+/**
+ * @callback routeStyleFunction
+ * @param {Object} properties Route properties.
+ * @param {boolean} isSelected Whether the route is selected.
+ * @returns {RouteStyle} The route style.
+ */
+
+/**
  * Layer for visualizing routes.
  *
  * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
  *
- * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
+ * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer react-spatial/layers/VectorLayer}
  * @class RouteLayer
  * @param {Object} [options] Layer options.
  * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
- * @param {string} [options.name=Routen] Layer name.
- * @param {string} [options.url=https://api.geops.io/routing/v1] Url of the geOps route backend.
- * @param {boolean} [options.visible = true] Visibility of the layer.
- *   Default is true.
- * @param {string} [options.projection=EPSG:3857] Layer projection.
- *   Default is webmercator ('EPSG:3857')
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
- * @param {Function} [options.routeStyleFunction] Function called with the route properties
- *   and a boolean indicating if the zone is selected.
- *   The function should return the route color.
+ * @param {routeStyleFunction} [options.routeStyleFunction] Style function.
  */
 class RouteLayer extends VectorLayer {
   constructor(options = {}) {
     super({
-      name: options.name || 'Routen',
+      name: 'RouteLayer',
       olLayer: new OLVectorLayer({
         style: f => this.routeStyle(f),
         source: new VectorSource(),
@@ -49,13 +63,10 @@ class RouteLayer extends VectorLayer {
       ship: '#0074be',
     };
 
-    // Route url
-    this.url = options.url || 'https://api.geops.io/routing/v1';
-
-    // Function for route styling
-    this.routeStyleFunction = options.routeStyleFunction || (() => {});
-
+    this.url = 'https://api.geops.io/routing/v1';
     this.selectedRouteIds = [];
+    this.routeStyleFunction =
+      options.routeStyleFunction || this.defaultRouteStyleFunction;
 
     this.onClick(features => {
       if (features.length) {
@@ -74,6 +85,64 @@ class RouteLayer extends VectorLayer {
         }
       }
     });
+  }
+
+  /**
+   * Converts an route style to an ol style.
+   * @private
+   * @param {ol.Feature} feature The ol.Feature to style.
+   * @param {RouteStyle} routeStyle Style of the route.
+   * @param {boolean} [isSelected=false] Whether the feature is selected.
+   */
+  getOlStyleFromRouteStyle(feature, routeStyle = {}, isSelected = false) {
+    const strokeStyle = {
+      ...{ color: this.motColors[feature.get('mot')], width: 5 },
+      ...routeStyle.stroke,
+    };
+
+    const style = [
+      new Style({
+        stroke: new StrokeStyle({
+          ...strokeStyle,
+        }),
+      }),
+    ];
+
+    if (routeStyle.outline) {
+      style.unshift(
+        new Style({
+          stroke: new StrokeStyle({
+            ...routeStyle.outline,
+          }),
+        }),
+      );
+    }
+
+    if (isSelected) {
+      style.forEach(s => s.setZIndex(1));
+    }
+
+    return style;
+  }
+
+  /**
+   * Default route style function.
+   * @private
+   * @param {Object} properties Feature properties.
+   * @param {boolean} isSelected Whether the feature is selected.
+   * @returns {RouteStyle}
+   */
+  defaultRouteStyleFunction(properties, isSelected = false) {
+    return {
+      stroke: {
+        color: isSelected ? 'blue' : this.motColors[properties.mot],
+        width: 5,
+      },
+      outline: {
+        color: 'white',
+        width: 10,
+      },
+    };
   }
 
   /**
@@ -110,24 +179,19 @@ class RouteLayer extends VectorLayer {
   }
 
   /**
-   * Returns the style of the given feature
+   * Returns the style of the given feature.
+   * @private
    * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
    * @returns {ol.style} get the feature's style function.
    */
   routeStyle(feature) {
     const { routeId } = feature.get('route');
-    const mot = feature.get('mot');
     const isSelected = this.selectedRouteIds.includes(routeId);
-    const color =
-      this.routeStyleFunction(feature.getProperties(), isSelected) ||
-      this.motColors[mot];
-
-    return new Style({
-      stroke: new StrokeStyle({
-        width: 5,
-        color: color || 'green',
-      }),
-    });
+    const routeStyle = this.routeStyleFunction(
+      feature.getProperties(),
+      isSelected,
+    );
+    return this.getOlStyleFromRouteStyle(feature, routeStyle, isSelected);
   }
 
   /**
