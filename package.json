@@ -17,7 +17,7 @@
     "ol": "^6.1.1",
     "proj4": "^2.5.0",
     "prop-types": "^15.6.2",
-    "query-string": "^6.4.2",
+    "query-string": "^6.9.0",
     "react": "^16.11.0",
     "react-app-polyfill": "^1.0.4",
     "react-autosuggest": "^9.4.3",
