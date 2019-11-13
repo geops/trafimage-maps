@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
-
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -70,6 +70,23 @@ function TopicElements({ history }) {
   if (!activeTopic) {
     return null;
   }
+
+  // Disabled elements from permalink
+  const { disabled } = qs.parse((history || window).location.search);
+  if (disabled) {
+    disabled.split(',').forEach(element => {
+      // Backward compatibility
+      if (element === 'spyLayer') {
+        activeTopic.elements.baseLayerToggler = false;
+      }
+      // Backward compatibility
+      if (element === 'header') {
+        activeTopic.elements.search = false;
+      }
+      activeTopic.elements[element] = false;
+    });
+  }
+
   const elements = activeTopic.elements || defaultElements;
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
