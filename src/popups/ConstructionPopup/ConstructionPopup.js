@@ -21,10 +21,10 @@ const ConstructionPopup = ({ feature, t }) => {
   let link2;
   let link3;
 
-  if (feature.get('projektort')) {
+  if (feature.get('name')) {
     projektort = (
       <div className="wkp-construction-popup-subtitle">
-        {t(feature.get('projektort'))}
+        {feature.get('name')}
       </div>
     );
   }
@@ -99,5 +99,7 @@ ConstructionPopup.defaultProps = defaultProps;
 
 const composed = compose(withTranslation())(ConstructionPopup);
 
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = feat => {
+  return feat.get('projektort') || feat.get('name');
+};
 export default composed;
