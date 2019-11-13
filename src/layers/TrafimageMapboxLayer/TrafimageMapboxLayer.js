@@ -17,6 +17,10 @@ class TrafimageMapboxLayer extends MapboxLayer {
           return response.json();
         })
         .then(data => {
+          // Ensure we don't reload the style for nothing.
+          if (this.styleUrl === newStyleUrl) {
+            return;
+          }
           this.mbMap.setStyle(data);
           this.mbMap.once('styledata', () => {
             this.dispatchEvent({
