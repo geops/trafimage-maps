@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
 
@@ -32,12 +33,27 @@ const defaultElements = {
   search: false,
 };
 
+const propTypes = {
+  /**
+   * History object from react-router
+   */
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    replace: PropTypes.func,
+  }),
+};
+
+const defaultProps = {
+  history: null,
+};
+
 const getComponents = (defaultComponents, elementsToDisplay) =>
   Object.entries(defaultComponents).map(([k, v]) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements() {
+function TopicElements({ history }) {
+  const ref = useRef(null);
   const { activeTopic, layerService, map } = useSelector(state => state.app);
   const [tabFocus, setTabFocus] = useState(false);
   useEffect(() => {
@@ -75,7 +91,7 @@ function TopicElements() {
     header: <Header />,
     search: <Search />,
     popup: <Popup />,
-    permalink: <Permalink />,
+    permalink: <Permalink history={history} />,
     menu: (
       <Menu>
         <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
@@ -100,9 +116,9 @@ function TopicElements() {
 
   const appElements = getComponents(appComponents, elements);
   return (
-    <div className={`tm-app ${elements.header ? 'header' : ''}`}>
+    <div ref={ref} className={`tm-app ${elements.header ? 'header' : ''}`}>
+      <ResizeHandler observe={ref.current} />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-        <ResizeHandler observe=".tm-app" />
         <Map
           map={map}
           initialCenter={[925472, 5920000]}
@@ -115,5 +131,8 @@ function TopicElements() {
     </div>
   );
 }
+
+TopicElements.propTypes = propTypes;
+TopicElements.defaultProps = defaultProps;
 
 export default TopicElements;

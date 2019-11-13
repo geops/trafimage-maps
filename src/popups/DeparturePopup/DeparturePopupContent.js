@@ -287,8 +287,5 @@ DeparturePopupContent.defaultProps = defaultProps;
 
 export default compose(
   withTranslation(),
-  connect(
-    null,
-    mapDispatchToProps,
-  ),
+  connect(null, mapDispatchToProps),
 )(DeparturePopupContent);

@@ -110,7 +110,7 @@ class Permalink extends PureComponent {
     const { activeTopic, history, departuresFilter, layerService } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
-      history.replace(`/${activeTopic.key}`);
+      history.replace(`/${activeTopic.key}${window.location.search}`);
     }
 
     if (departuresFilter !== prevProps.departuresFilter) {
@@ -213,9 +213,4 @@ const mapDispatchToProps = {
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(Permalink);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

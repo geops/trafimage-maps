@@ -52,6 +52,7 @@ class MapboxStyleLayer extends Layer {
     this.selectedFeatures = [];
     this.styleLayers =
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
+    this.addStyleLayers = this.addStyleLayers.bind(this);
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map(s => s.id);
@@ -59,6 +60,15 @@ class MapboxStyleLayer extends Layer {
         return ids.includes(styleLayer.id);
       };
     }
+  }
+
+  addStyleLayers() {
+    const { mbMap } = this.mapboxLayer;
+    this.styleLayers.forEach(styleLayer => {
+      if (!mbMap.getLayer(styleLayer.id)) {
+        mbMap.addLayer(styleLayer);
+      }
+    });
   }
 
   init(map) {
@@ -72,7 +82,9 @@ class MapboxStyleLayer extends Layer {
     if (mbMap.isStyleLoaded()) {
       if (this.styleLayers) {
         this.styleLayers.forEach(styleLayer => {
-          mbMap.addLayer(styleLayer);
+          if (!mbMap.getLayer(styleLayer.id)) {
+            mbMap.addLayer(styleLayer);
+          }
         });
         applyVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
       }
@@ -85,7 +97,9 @@ class MapboxStyleLayer extends Layer {
               styleLayer,
               this.getVisible() ? 'visible' : 'none',
             );
-            mbMap.addLayer(styleLayer);
+            if (!mbMap.getLayer(styleLayer.id)) {
+              mbMap.addLayer(styleLayer);
+            }
           });
         }
         applyVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
@@ -97,8 +111,14 @@ class MapboxStyleLayer extends Layer {
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
       this.on('change:visible', ({ target: layer }) => {
-        applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+        if (mbMap && mbMap.isStyleLoaded()) {
+          applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+        }
       }),
+    );
+
+    this.olListenersKeys.push(
+      this.mapboxLayer.on('change:styleurl', this.addStyleLayers),
     );
   }
 
@@ -108,7 +128,9 @@ class MapboxStyleLayer extends Layer {
       this.styleLayers
         .map(s => s.id)
         .forEach(styleLayerId => {
-          mbMap.removeLayer(styleLayerId);
+          if (mbMap.getLayer(styleLayerId)) {
+            mbMap.removeLayer(styleLayerId);
+          }
         });
     }
     super.terminate(map);
@@ -150,11 +172,14 @@ class MapboxStyleLayer extends Layer {
       return [];
     }
 
-    return mbMap.querySourceFeatures(this.styleLayers.map(s => s && s.source), {
-      sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
-      // filter: e => e,
-      validate: false,
-    });
+    return mbMap.querySourceFeatures(
+      this.styleLayers.map(s => s && s.source),
+      {
+        sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
+        // filter: e => e,
+        validate: false,
+      },
+    );
   }
 
   setHoverState(features = [], state) {
