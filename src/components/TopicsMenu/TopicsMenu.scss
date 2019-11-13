@@ -2,7 +2,7 @@
   border: 2px solid #666;
   max-height: 1000px;
   overflow: hidden;
-  padding: 2px;
+  padding: 2px; // To have space for barrier free outline.
 
   .wkp-menu-item {
     border: none;
@@ -33,6 +33,7 @@
 .tm-app.tm-w-xs {
   .wkp-topics-menu {
     border: 0;
+    padding: 0;
 
     .wkp-menu-header {
       .wkp-menu-title {

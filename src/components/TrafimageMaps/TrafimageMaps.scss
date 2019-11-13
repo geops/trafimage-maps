@@ -96,4 +96,11 @@ select {
   .tm-base-layer-toggler {
     display: none;
   }
+
+  .tm-barrier-free {
+    .wkp-menu-header:focus {
+      padding: 7px;
+      margin: 3px;
+    }
+  }
 }
