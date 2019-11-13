@@ -2,45 +2,18 @@ import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Style, Stroke as StrokeStyle } from 'ol/style';
-import VectorLayer from 'react-spatial/layers/VectorLayer';
-
-/**
- * @typedef {Object} routeStyle
- * @property {Object} stroke Stroke style.
- * @property {number} [stroke.width=5] Stroke width in pixel. Default is 5.
- * @property {string} [stroke.color] Stroke color.
- *   Default is '#e3000b' for rail, '#ffed00' for bus and '#0074be' for ship.
- * @property {Object} [outline] Outline style.
- * @property {number} [outline.width] Outline width in pixel. By default there's no outline.
- * @property {string} [outline.color] Outline color.
- * Example for a route style: {
- *   stroke: { width: 5, color: 'red' },
- *   outline: { width: 7, color: 'white' },
- * }
- */
-
-/**
- * @callback routeStyleFunction
- * @param {Object} properties Route properties.
- * @param {boolean} isSelected Whether the route is selected.
- * @returns {RouteStyle} The route style.
- */
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing routes.
- *
  * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
- *
- * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer react-spatial/layers/VectorLayer}
  * @class RouteLayer
+ * @extends CasaLayer
  * @param {Object} [options] Layer options.
- * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
- * @param {routeStyleFunction} [options.routeStyleFunction] Style function.
  */
-class RouteLayer extends VectorLayer {
+class RouteLayer extends CasaLayer {
   constructor(options = {}) {
     super({
       name: 'RouteLayer',
@@ -51,11 +24,6 @@ class RouteLayer extends VectorLayer {
       ...options,
     });
 
-    this.projection = options.projection || 'EPSG:3857';
-
-    // API key
-    this.apiKey = options.apiKey;
-
     // Colors for differtent modes of transportation
     this.motColors = options.motColors || {
       rail: '#e3000b',
@@ -64,9 +32,10 @@ class RouteLayer extends VectorLayer {
     };
 
     this.url = 'https://api.geops.io/routing/v1';
+
     this.selectedRouteIds = [];
-    this.routeStyleFunction =
-      options.routeStyleFunction || this.defaultRouteStyleFunction;
+
+    this.defaultStyleObject.text = {};
 
     this.onClick(features => {
       if (features.length) {
@@ -87,62 +56,11 @@ class RouteLayer extends VectorLayer {
     });
   }
 
-  /**
-   * Converts an route style to an ol style.
-   * @private
-   * @param {ol.Feature} feature The ol.Feature to style.
-   * @param {RouteStyle} routeStyle Style of the route.
-   * @param {boolean} [isSelected=false] Whether the feature is selected.
-   */
-  getOlStyleFromRouteStyle(feature, routeStyle = {}, isSelected = false) {
-    const strokeStyle = {
-      ...{ color: this.motColors[feature.get('mot')], width: 5 },
-      ...routeStyle.stroke,
-    };
-
-    const style = [
-      new Style({
-        stroke: new StrokeStyle({
-          ...strokeStyle,
-        }),
-      }),
-    ];
-
-    if (routeStyle.outline) {
-      style.unshift(
-        new Style({
-          stroke: new StrokeStyle({
-            ...routeStyle.outline,
-          }),
-        }),
-      );
-    }
-
-    if (isSelected) {
-      style.forEach(s => s.setZIndex(1));
-    }
-
-    return style;
-  }
-
-  /**
-   * Default route style function.
-   * @private
-   * @param {Object} properties Feature properties.
-   * @param {boolean} isSelected Whether the feature is selected.
-   * @returns {RouteStyle}
-   */
-  defaultRouteStyleFunction(properties, isSelected = false) {
-    return {
-      stroke: {
-        color: isSelected ? 'blue' : this.motColors[properties.mot],
-        width: 5,
-      },
-      outline: {
-        color: 'white',
-        width: 10,
-      },
-    };
+  defaultStyleFunction(properties, isSelected = false) {
+    const obj = super.defaultStyleFunction(properties, isSelected);
+    return isSelected
+      ? obj
+      : { ...obj, stroke: { width: 4, color: this.motColors[properties.mot] } };
   }
 
   /**
@@ -187,11 +105,8 @@ class RouteLayer extends VectorLayer {
   routeStyle(feature) {
     const { routeId } = feature.get('route');
     const isSelected = this.selectedRouteIds.includes(routeId);
-    const routeStyle = this.routeStyleFunction(
-      feature.getProperties(),
-      isSelected,
-    );
-    return this.getOlStyleFromRouteStyle(feature, routeStyle, isSelected);
+    const routeStyle = this.styleFunction(feature.getProperties(), isSelected);
+    return this.getOlStyleFromObject(routeStyle, isSelected);
   }
 
   /**
