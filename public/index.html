@@ -33,10 +33,31 @@
         padding: 0;
       }
     </style>
+    <script>
+      window.changeTopic = function(topic) {
+        const map = document.getElementById('map');
+        //map.topic = topic;
+        //map.setAttribute('vectorTilesUrl', 'https://maps.style-dev.geops.io');
+        map.setAttribute(
+          'vectorTilesKey',
+          '5cc87b12d7c5370001c1d6555a58d7028c3f493a9232b617ba9aa400',
+        );
+        map.setAttribute('activeTopicKey', topic);
+        //map.setAttribute('vectorTilesUrl', 'https://maps.style-dev.geops.io');');
+        //map.setAttribute('width', '600px');
+        // map.setAttribute('height', '300px');
+        //map.history = window.history;
+        console.log('lala');
+      };
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <trafimage-maps></trafimage-maps>
+    <button onclick="changeTopic('ch.sbb.handicap')">change to handicap</button>
+    <button onclick="changeTopic('ch.sbb.netzkarte')">
+      change to netzkarte
+    </button>
+    <trafimage-maps id="map"></trafimage-maps>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

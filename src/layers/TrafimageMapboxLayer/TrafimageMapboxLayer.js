@@ -6,17 +6,21 @@ class TrafimageMapboxLayer extends MapboxLayer {
     const newStyleUrl = `${url}/styles/${style}/style.json?key=${key}`;
 
     // Don't apply style if not necessary otherwise
-    // it will remove styles applies by MapboxStyleLayer layers.
+    // it will remove styles apply by MapboxStyleLayer layers.
     if (this.styleUrl === newStyleUrl) {
       return;
     }
-    this.styleUrl = newStyleUrl;
     if (this.mbMap) {
-      fetch(this.styleUrl)
+      fetch(newStyleUrl)
         .then(response => {
           return response.json();
         })
         .then(data => {
+          // Ensure we don't reload the style for nothing.
+          if (this.styleUrl === newStyleUrl) {
+            return;
+          }
+          this.styleUrl = newStyleUrl;
           this.mbMap.setStyle(data);
           this.mbMap.once('styledata', () => {
             this.dispatchEvent({
