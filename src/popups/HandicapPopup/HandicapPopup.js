@@ -20,12 +20,12 @@ function HandicapPopup({ feature }) {
     taktile_sicherheitslinien: null,
     induktionsverstaerker: null,
     lift_zu_perron: `standort_zu_lift_${language}`,
-    rampe: `ausnahme_zu_lift_und_treppe_${language}`,
+    rampe: `ausnahme_zu_rampe_und_treppe_${language}`,
     faltrampe: null,
     sbb_rollstuhl: null,
     rollstuhl_billet: null,
     rollstuhl_wc: null,
-    eurok_wc: null,
+    eurokey_wc: null,
   };
 
   // build string for equipment
@@ -87,13 +87,13 @@ function HandicapPopup({ feature }) {
         <div className="wkp-handicap-popup-bottom">
           <PopupElement
             key="Zusätzliche Informationen"
-            label="Zusätzliche Informationen"
+            label={t('Zusätzliche Informationen')}
             properties={props}
             propertyName={`zusaetzliche_informationen_${language}`}
           />
           <PopupElement
-            key="Dienstleistungen Dritter"
-            label="Dienstleistungen Dritter"
+            key={`beschreibung_zur_dritte_dienstleistung_${language}`}
+            label={t('Dritte Dienstleistung')}
             properties={props}
             propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
           />
@@ -108,7 +108,7 @@ function HandicapPopup({ feature }) {
       return (
         <PopupElement
           key="Zusätzliche Informationen"
-          label="Zusätzliche Informationen"
+          label={t('Zusätzliche Informationen')}
           properties={props}
           propertyName={`zusaetzliche_informationen_${language}`}
         />
@@ -116,8 +116,8 @@ function HandicapPopup({ feature }) {
     }
     return (
       <PopupElement
-        key="Dienstleistungen Dritter"
-        label="Dienstleistungen Dritter"
+        key="beschreibung_zur_dritte_dienstleistung"
+        label={t('Dritte Dienstleistung')}
         properties={props}
         propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
       />
@@ -135,7 +135,7 @@ function HandicapPopup({ feature }) {
             field.element || (
               <PopupElement
                 key={field.label}
-                label={field.label}
+                label={t(field.label)}
                 properties={properties}
                 propertyName={field.propertyName.replace(
                   `{language}`,
