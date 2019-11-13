@@ -18,16 +18,24 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [featureIndex, setFeatureIndex] = useState(0);
-  const features = clickedFeatureInfo.map(l => l.features).flat();
-  const feature = features[featureIndex];
-  const info = clickedFeatureInfo.find(i => i.features.includes(feature));
-  const PopupComponent = popups[info.layer.get('popupComponent')];
 
   useEffect(() => {
     setFeatureIndex(0);
   }, [clickedFeatureInfo]);
 
-  if (!feature || !PopupComponent) {
+  const features = clickedFeatureInfo.map(l => l.features).flat();
+  const feature = features[featureIndex];
+  if (!feature) {
+    return null;
+  }
+
+  const info = clickedFeatureInfo.find(i => i.features.includes(feature));
+  if (!info || !info.layer) {
+    return null;
+  }
+
+  const PopupComponent = popups[info.layer.get('popupComponent')];
+  if (!PopupComponent) {
     return null;
   }
 
