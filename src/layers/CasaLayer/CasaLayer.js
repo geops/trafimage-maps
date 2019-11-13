@@ -21,14 +21,14 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * @property {Object} [stroke] Stroke properties.
  * @property {number} [stroke.width] Stroke width.
  * @property {string} [stroke.color] Stroke color.
- * @property {Object{ [strokeOutline] Stroke outline.
+ * @property {Object} [strokeOutline] Stroke outline.
  * @property {number} [strokeOutline.width] Stroke outline width.
  * @property {string} [strokeOutline.color] Stroke outline color.
  * @property {Object} [text] Text properties.
  * @property {string} [text.font] Font.
  * @property {string} [text.label] Text label. If undefined, the zone code is used.
  * @property {string} [text.color] Text color.
- * @property {Object{ [Text] Text outline.
+ * @property {Object} [Text] Text outline.
  * @property {Object} [textOutline.color] Text outline color.
  * @property {Object} [textOutline.width] Text outline width.
  */
