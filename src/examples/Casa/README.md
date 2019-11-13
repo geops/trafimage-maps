@@ -14,13 +14,6 @@ import casa from 'trafimage-maps/examples/Casa/topic';
 const zoneLayer = new ZoneLayer({
   // Demo key. Please replace with your own key.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
-  zoneStyleFunction: (zoneProps, isSelected) => {
-    return {
-      fill: {
-        color: isSelected ? 'red' : 'rgb(255, 200, 25)',
-      },
-    };
-  },
 });
 
 // Select zones.
@@ -41,6 +34,7 @@ zoneLayer.loadZones([
       {
         zoneCode: 120,
         isSelected: true,
+        isClickable: true,
       },
       {
         zoneCode: 170,
@@ -58,9 +52,17 @@ const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   // Demo apiKey. Please replace with your own apiKey.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
-  routeStyleFunction: (routeProps, isSelected) => {
-    // return undefined to use default color (see param motColors)
-    return isSelected ? 'blue' : undefined;
+  styleFunction: (props, isSelected) => {
+    if (isSelected) {
+      return {
+        stroke: { width: 5, color: 'pink' },
+      };
+    }
+
+    return {
+      stroke: { width: 5, color: 'red' },
+      strokeOutline: { width: 10, color: 'white' }
+    };
   },
 });
 
@@ -71,24 +73,9 @@ routeLayer
       isClickable: true,
       sequences: [
         {
-          uicFrom: 8502024,
-          uicTo: 8505000,
+          uicFrom: 8506302,
+          uicTo: 8503000,
           mot: 'rail',
-        },
-        {
-          uicFrom: 8508450,
-          uicTo: 8589801,
-          mot: 'bus',
-        },
-      ],
-    },
-    {
-      isSelected: true,
-      sequences: [
-        {
-          uicFrom: 8589801,
-          uicTo: 8589775,
-          mot: 'bus',
         },
       ],
     },

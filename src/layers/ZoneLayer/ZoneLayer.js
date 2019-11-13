@@ -2,49 +2,25 @@ import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import {
-  Style,
-  Fill as FillStyle,
-  Stroke as StrokeStyle,
-  Text as TextStyle,
-} from 'ol/style';
 import { containsExtent } from 'ol/extent';
 import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
-import VectorLayer from 'react-spatial/layers/VectorLayer';
 import intersect from '@turf/intersect';
 import Color from 'color';
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing fare networks.
- *
  * <img src="img/layers/ZoneLayer/layer.png" alt="Layer preview" title="Layer preview">
- *
- * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class ZoneLayer
+ * @extends CasaLayer
  * @param {Object} options Layer options.
- * @param {String} apiKey Access key for [geOps services](https://developer.geops.io/).
- * @param {boolean} options.visible Visibility of the layer.
+ * @param {string} [validity] Zone validity. Format: yyyy-mm-dd.
  * @param {number} [options.labelOptimizationMinResolution = 100] Minimum resolution for
  *   using optimized label placement based on the current extent.
- * @param {string} options.url Url of the geOps fare network backend.
- * @param {Object} [options.zoneStyle] Zone style.
- * @param {Object} [options.zoneStyle.fill] Fill properties.
- * @param {string} [options.zoneStyle.fill.color = 'rgb(255, 200, 25)'] Fill color.
- * @param {Object} [options.zoneStyle.stroke] Stroke properties.
- * @param {number} [options.zoneStyle.stroke.width = 2] Stroke width.
- * @param {string} [options.zoneStyle.stroke.color = 'black'] Stroke color.
- * @param {Object} [options.zoneStyle.text] Text properties.
- * @param {string} [options.zoneStyle.text.font = '12px Arial'] Font.
- * @param {string} [options.zoneStyle.text.label] Text label.
- *   If undefined, the zone code is used.
- * @param {string} [options.zoneStyle.text.color = 'black'] Text color.
- * @param {Function} [options.zoneStyleFunction] called with zone properties as
- *   an Object and a boolean indicating if the zone is selected.
- *   The function should return a zoneStyle object (see above).
  */
-class ZoneLayer extends VectorLayer {
+class ZoneLayer extends CasaLayer {
   static getOptimizedLanelGeometry(feature, mapExtent) {
     const mapPolygon = fromExtent(mapExtent);
     const format = new GeoJSON();
@@ -71,35 +47,18 @@ class ZoneLayer extends VectorLayer {
       name: 'Verbundzonen',
       olLayer: new OLVectorLayer({
         source: new VectorSource(),
-        style: (f, r) => this.internalZoneStyleFunction(f, r),
+        style: (f, r) => this.zoneStyle(f, r),
       }),
       ...options,
     });
 
-    this.defaultZoneStyle = {
-      fill: {
-        color: 'rgb(255, 200, 25)',
-      },
-      stroke: {
-        width: 2,
-        color: 'black',
-      },
-      text: {
-        font: '12px Arial',
-        color: 'black',
-      },
-      ...(options.zoneStyle || {}),
-    };
+    this.validity = options.validity;
 
-    this.apiKey = options.apiKey;
-
-    this.url = options.url || 'https://api.geops.io/casa-fare-network/v1';
+    this.url = 'https://api.geops.io/casa-fare-network/v1';
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
     this.fetchZones();
-
-    this.zoneStyleFunction = options.zoneStyleFunction || (() => ({}));
 
     this.selectedZones = [];
 
@@ -119,6 +78,67 @@ class ZoneLayer extends VectorLayer {
         }
       }
     });
+  }
+
+  /**
+   * Set the validity of the zone.
+   * @param {string} validity Validity. Format: yyyy-mm-dd
+   */
+  setValidity(validity) {
+    this.validity = validity;
+  }
+
+  /**
+   * Converts a zone style to an ol.Style.
+   * @private
+   * @param {ol.Feature} feature The ol.Feature to style.
+   * @param {zoneStyle} zoneStyle Style of the zone.
+   * @param {boolean} [isSelected = false] Whether the feature is selected.
+   */
+  getOlStyleFromObject(styleObject = {}, isSelected = false, feature, res) {
+    const olStyle = super.getOlStyleFromObject(styleObject, isSelected);
+    olStyle[olStyle.length - 1].getText().setText(feature.get('zone'));
+
+    // change opacity
+    let opacity = 0.5;
+    opacity = res < 100 ? 0.3 : opacity;
+    opacity = res < 50 ? 0.1 : opacity;
+
+    const fillColor = olStyle[olStyle.length - 1].getFill().getColor();
+    const colors = new Color(fillColor).rgb().array();
+    olStyle[olStyle.length - 1].getFill().setColor([...colors, opacity]);
+
+    // change text geometry
+    if (res <= this.labelOptimizeMinRes) {
+      const mapExtent = this.map.getView().calculateExtent();
+      const geomExtent = feature.getGeometry().getExtent();
+
+      if (!containsExtent(mapExtent, geomExtent)) {
+        olStyle
+          .getText()
+          .setGeometry(ZoneLayer.getOptimizedLanelGeometry(feature, mapExtent));
+      }
+    }
+
+    return olStyle;
+  }
+
+  /**
+   * Returns the style of the given feature.
+   * @private
+   * @param {ol.Feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
+   * @param {number} resolution Map resolution.
+   * @returns {ol.Style} get the feature's style function.
+   */
+  zoneStyle(feature, resolution) {
+    const isSelected = this.selectedZones.includes(feature);
+    const styleObject = this.styleFunction(feature.getProperties(), isSelected);
+    return this.getOlStyleFromObject(
+      styleObject,
+      isSelected,
+      feature,
+      resolution,
+    );
   }
 
   /**
@@ -149,6 +169,10 @@ class ZoneLayer extends VectorLayer {
       simplify: 100,
       srs: 3857,
     };
+
+    if (this.validity) {
+      urlParams.valid_from = this.validity;
+    }
 
     const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
@@ -228,66 +252,6 @@ class ZoneLayer extends VectorLayer {
         }
       }
     });
-  }
-
-  /**
-   * Internal function for extracting a feature's style at a given resolution
-   * @private
-   * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
-   * @param {number} resolution
-   * @returns {ol.style[]}
-   */
-  internalZoneStyleFunction(feature, resolution) {
-    const isSelected = this.selectedZones.indexOf(feature) > -1;
-    const styleObject = {
-      ...this.defaultZoneStyle,
-      ...this.zoneStyleFunction(feature.getProperties(), isSelected),
-    };
-
-    const zone = parseInt(feature.get('zone'), 10);
-
-    let opacity = 0.5;
-    opacity = resolution < 100 ? 0.3 : opacity;
-    opacity = resolution < 50 ? 0.1 : opacity;
-
-    let textGeometry;
-    const color = new Color(styleObject.fill.color).rgb().array();
-
-    if (resolution <= this.labelOptimizeMinRes) {
-      // optimize text positioning
-      const mapExtent = this.map.getView().calculateExtent();
-      const geomExtent = feature.getGeometry().getExtent();
-
-      if (!containsExtent(mapExtent, geomExtent)) {
-        textGeometry = ZoneLayer.getOptimizedLanelGeometry(feature, mapExtent);
-      }
-    }
-
-    return [
-      new Style({
-        stroke: new StrokeStyle({
-          color,
-          width: styleObject.stroke.width,
-        }),
-        fill: new FillStyle({
-          color: [...color, opacity],
-        }),
-      }),
-      new Style({
-        geometry: textGeometry,
-        text: new TextStyle({
-          font: styleObject.text.font,
-          fill: new FillStyle({
-            color: styleObject.text.color,
-          }),
-          stroke: new StrokeStyle({
-            color: 'white',
-            width: 2,
-          }),
-          text: styleObject.text.label || `${zone}`,
-        }),
-      }),
-    ];
   }
 }
 
