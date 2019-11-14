@@ -139,12 +139,7 @@ function TopicElements({ history }) {
     >
       <ResizeHandler observe={ref.current} />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-        <Map
-          map={map}
-          initialCenter={[925472, 5920000]}
-          initialZoom={9}
-          projection="EPSG:3857"
-        />
+        <Map map={map} projection="EPSG:3857" />
         {appElements}
         <MainDialog />
       </div>

@@ -18,8 +18,6 @@ const propTypes = {
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
-  initialCenter: PropTypes.arrayOf(PropTypes.number),
-  initialZoom: PropTypes.number,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -40,8 +38,6 @@ const defaultProps = {
 
   // mapStateToProps
   center: [0, 0],
-  initialCenter: undefined,
-  initialZoom: undefined,
   layers: [],
   extent: undefined,
   resolution: undefined,
@@ -49,25 +45,6 @@ const defaultProps = {
 };
 
 class Map extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    const {
-      initialCenter,
-      initialZoom,
-      dispatchSetCenter,
-      dispatchSetZoom,
-    } = this.props;
-
-    if (initialCenter) {
-      dispatchSetCenter(initialCenter);
-    }
-
-    if (typeof initialZoom !== 'undefined') {
-      dispatchSetZoom(initialZoom);
-    }
-  }
-
   componentDidMount() {
     const { map } = this.props;
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);

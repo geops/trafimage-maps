@@ -92,16 +92,30 @@ class TrafimageMaps extends React.PureComponent {
     this.store = getStore();
   }
 
+  componentDidMount() {
+    const { zoom, center, topics } = this.props;
+
+    if (zoom) {
+      this.store.dispatch(setZoom(zoom));
+    }
+
+    if (center) {
+      this.store.dispatch(setCenter(center));
+    }
+
+    if (topics) {
+      this.store.dispatch(setTopics(topics));
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { zoom, center, topics } = this.props;
 
     if (zoom !== prevProps.zoom) {
-      console.log('zoom', zoom, prevProps.zoom);
       this.store.dispatch(setZoom(zoom));
     }
 
     if (center !== prevProps.center) {
-      console.log('center', center, prevProps.center);
       this.store.dispatch(setCenter(center));
     }
 

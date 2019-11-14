@@ -69,13 +69,17 @@
         change cartaroUrl to http://foo.ch
       </button>
       <button onclick="changeAttr('center', '[950000, 6000000]')">
-        change center to '[950000, 6000000]'
+        change center to '[950000, 5900000]'
       </button>
       <button onclick="changeAttr('zoom', 16)">
         change zoom to 16
       </button>
     </div>
-    <trafimage-maps id="map"></trafimage-maps>
+    <trafimage-maps
+      id="map"
+      zoom="12"
+      center="[810000, 5900000]"
+    ></trafimage-maps>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
