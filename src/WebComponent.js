@@ -67,6 +67,7 @@ const WebComponent = props => {
   const appTopics = useMemo(() => {
     const tps = topics || topicConfig[appName];
     if (!tps) {
+      // eslint-disable-next-line no-console
       console.error('You must provide a list of topics');
       return [];
     }
