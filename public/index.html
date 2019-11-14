@@ -34,28 +34,34 @@
       }
     </style>
     <script>
-      window.changeTopic = function(topic) {
+      window.changeAttr = function(attr, val) {
         const map = document.getElementById('map');
-        //map.topic = topic;
-        //map.setAttribute('vectorTilesUrl', 'https://maps.style-dev.geops.io');
-        map.setAttribute(
-          'vectorTilesKey',
-          '5cc87b12d7c5370001c1d6555a58d7028c3f493a9232b617ba9aa400',
-        );
-        map.setAttribute('activeTopicKey', topic);
-        //map.setAttribute('vectorTilesUrl', 'https://maps.style-dev.geops.io');');
-        //map.setAttribute('width', '600px');
-        // map.setAttribute('height', '300px');
-        //map.history = window.history;
-        console.log('lala');
+        map.setAttribute(attr, val);
       };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <button onclick="changeTopic('ch.sbb.handicap')">change to handicap</button>
-    <button onclick="changeTopic('ch.sbb.netzkarte')">
+    <button onclick="changeAttr('activeTopicKey','ch.sbb.handicap')">
+      change to handicap
+    </button>
+    <button onclick="changeAttr('activeTopicKey','ch.sbb.netzkarte')">
       change to netzkarte
+    </button>
+    <button onclick="changeAttr('vectorTilesUrl', 'http://foo.ch')">
+      change vectorTilesUrl to http://foo.ch
+    </button>
+    <button onclick="changeAttr('apiKey', 'abcdefgh')">
+      change apiKey to 'abcdefgh'
+    </button>
+    <button onclick="changeAttr('vectorTilesKey', 'abcdefgh')">
+      change vectorTilesKey to 'abcdefgh'
+    </button>
+    <button onclick="changeAttr('geoserverUrl', 'http://foo.ch')">
+      change geoserverUrl to http://foo.ch
+    </button>
+    <button onclick="changeAttr('cartaroUrl', 'http://foo.ch')">
+      change cartaroUrl to http://foo.ch
     </button>
     <trafimage-maps id="map"></trafimage-maps>
     <!--
