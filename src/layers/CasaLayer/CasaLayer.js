@@ -28,9 +28,9 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * @property {string} [text.font] Font.
  * @property {string} [text.label] Text label. If undefined, the zone code is used.
  * @property {string} [text.color] Text color.
- * @property {Object} [Text] Text outline.
- * @property {Object} [textOutline.color] Text outline color.
- * @property {Object} [textOutline.width] Text outline width.
+ * @property {Object} [textOutline] Text outline.
+ * @property {string} [textOutline.color] Text outline color.
+ * @property {number} [textOutline.width] Text outline width.
  */
 
 /**

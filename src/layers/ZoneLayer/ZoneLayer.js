@@ -203,13 +203,13 @@ class ZoneLayer extends CasaLayer {
   /**
    * Load zones from a given configuration.
    * @param {Object[]} config Array of objects defining selected zones.
-   * @param {number} config[].partnerCode Partner code.
-   * @param {Object[]} config[].zones Array of zones to select.
-   * @param {number} [config[].zones[].zoneCode] Code of zone to select.
-   * @param {string} [config[].zones[].zoneName] Name of zone to select.
-   * @param {boolean} [config[].zones[].isSelected] If true, the zone
+   * @param {number} config.partnerCode Partner code.
+   * @param {Object[]} config.zones Array of zones to select.
+   * @param {number} [config.zones.zoneCode] Code of zone to select.
+   * @param {string} [config.zones.zoneName] Name of zone to select.
+   * @param {boolean} [config.zones.isSelected] If true, the zone
    *   is initially selected.
-   * @param {boolean} [config[].zones[].isClickable] If true, the zone
+   * @param {boolean} [config.zones.isClickable] If true, the zone
    *   can be selected by click.
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */

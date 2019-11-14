@@ -6,6 +6,7 @@ import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing routes.
+ *
  * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
  * @class RouteLayer
  * @extends CasaLayer
