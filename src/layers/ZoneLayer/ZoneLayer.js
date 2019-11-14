@@ -174,8 +174,8 @@ class ZoneLayer extends CasaLayer {
       key: this.apiKey,
       simplify: 100,
       srs: 3857,
-      valid_from: this.validFrom,
-      valid_to: this.validTo,
+      from: this.validFrom,
+      to: this.validTo,
     };
 
     const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
