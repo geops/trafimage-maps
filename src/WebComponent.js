@@ -9,14 +9,14 @@ import topicConfig from './config/topics';
 
 const propTypes = {
   // Properties
-  center: PropTypes.arrayOf(PropTypes.number),
   topics: PropTypes.array,
   history: PropTypes.object,
 
   // Attributes
   width: PropTypes.string,
   height: PropTypes.string,
-  zoom: PropTypes.number,
+  center: PropTypes.string,
+  zoom: PropTypes.string,
   appName: PropTypes.string,
   activeTopicKey: PropTypes.string,
   apiKey: PropTypes.string,
@@ -29,6 +29,7 @@ const propTypes = {
 const attributes = {
   width: '100%',
   height: '100%',
+  center: undefined,
   zoom: undefined,
   appName: 'wkp',
   activeTopicKey: undefined,
@@ -40,13 +41,27 @@ const attributes = {
 };
 
 const defaultProps = {
-  center: undefined,
   topics: undefined,
   history: undefined,
 };
 
 const WebComponent = props => {
-  const { activeTopicKey, width, height, zoom, topics, appName } = props;
+  const {
+    activeTopicKey,
+    width,
+    height,
+    zoom,
+    topics,
+    appName,
+    center,
+  } = props;
+
+  const arrayCenter = useMemo(() => {
+    if (!center || Array.isArray(center)) {
+      return center;
+    }
+    return JSON.parse(center);
+  }, [center]);
 
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
   const appTopics = useMemo(() => {
@@ -71,7 +86,12 @@ const WebComponent = props => {
           height,
         }}
       >
-        <TrafimageMaps {...props} topics={appTopics} initialZoom={floatZoom} />
+        <TrafimageMaps
+          {...props}
+          topics={appTopics}
+          zoom={floatZoom}
+          center={arrayCenter}
+        />
       </div>
     </Styled>
   );

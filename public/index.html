@@ -38,31 +38,43 @@
         const map = document.getElementById('map');
         map.setAttribute(attr, val);
       };
+      window.changeProp = function(attr, val) {
+        const map = document.getElementById('map');
+        map[attr] = val;
+      };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <button onclick="changeAttr('activeTopicKey','ch.sbb.handicap')">
-      change to handicap
-    </button>
-    <button onclick="changeAttr('activeTopicKey','ch.sbb.netzkarte')">
-      change to netzkarte
-    </button>
-    <button onclick="changeAttr('vectorTilesUrl', 'http://foo.ch')">
-      change vectorTilesUrl to http://foo.ch
-    </button>
-    <button onclick="changeAttr('apiKey', 'abcdefgh')">
-      change apiKey to 'abcdefgh'
-    </button>
-    <button onclick="changeAttr('vectorTilesKey', 'abcdefgh')">
-      change vectorTilesKey to 'abcdefgh'
-    </button>
-    <button onclick="changeAttr('geoserverUrl', 'http://foo.ch')">
-      change geoserverUrl to http://foo.ch
-    </button>
-    <button onclick="changeAttr('cartaroUrl', 'http://foo.ch')">
-      change cartaroUrl to http://foo.ch
-    </button>
+    <div style="position: absolute; z-index: 10000;top: 0;">
+      <button onclick="changeAttr('activeTopicKey','ch.sbb.handicap')">
+        change to handicap
+      </button>
+      <button onclick="changeAttr('activeTopicKey','ch.sbb.netzkarte')">
+        change to netzkarte
+      </button>
+      <button onclick="changeAttr('vectorTilesUrl', 'http://foo.ch')">
+        change vectorTilesUrl to http://foo.ch
+      </button>
+      <button onclick="changeAttr('apiKey', 'abcdefgh')">
+        change apiKey to 'abcdefgh'
+      </button>
+      <button onclick="changeAttr('vectorTilesKey', 'abcdefgh')">
+        change vectorTilesKey to 'abcdefgh'
+      </button>
+      <button onclick="changeAttr('geoserverUrl', 'http://foo.ch')">
+        change geoserverUrl to http://foo.ch
+      </button>
+      <button onclick="changeAttr('cartaroUrl', 'http://foo.ch')">
+        change cartaroUrl to http://foo.ch
+      </button>
+      <button onclick="changeAttr('center', '[950000, 6000000]')">
+        change center to '[950000, 6000000]'
+      </button>
+      <button onclick="changeAttr('zoom', 16)">
+        change zoom to 16
+      </button>
+    </div>
     <trafimage-maps id="map"></trafimage-maps>
     <!--
       This HTML file is a template.
