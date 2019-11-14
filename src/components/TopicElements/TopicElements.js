@@ -3,6 +3,7 @@ import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { EventConsumer } from 'create-react-web-component';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from 'react-spatial/components/ResizeHandler';
 import MainDialog from '../MainDialog';
@@ -139,7 +140,9 @@ function TopicElements({ history }) {
     >
       <ResizeHandler observe={ref.current} />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-        <Map map={map} projection="EPSG:3857" />
+        <EventConsumer>
+          {dispatcher => <Map map={map} dispatchHtmlEvent={dispatcher} />}
+        </EventConsumer>
         {appElements}
         <MainDialog />
       </div>

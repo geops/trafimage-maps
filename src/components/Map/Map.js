@@ -13,7 +13,7 @@ import { setResolution, setCenter, setZoom } from '../../model/map/actions';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
-  projection: PropTypes.string,
+  dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number),
@@ -34,14 +34,13 @@ const propTypes = {
 };
 
 const defaultProps = {
-  projection: 'EPSG:3857',
-
   // mapStateToProps
   center: [0, 0],
   layers: [],
   extent: undefined,
   resolution: undefined,
   zoom: 9,
+  dispatchHtmlEvent: () => {},
 };
 
 class Map extends PureComponent {
@@ -64,8 +63,8 @@ class Map extends PureComponent {
       dispatchSetResolution,
       dispatchSetZoom,
       zoom,
+      dispatchHtmlEvent,
     } = this.props;
-
     const newResolution = evt.map.getView().getResolution();
     const newZoom = evt.map.getView().getZoom();
     const newCenter = evt.map.getView().getCenter();
@@ -81,10 +80,15 @@ class Map extends PureComponent {
     if (center[0] !== newCenter[0] || center[1] !== newCenter[1]) {
       dispatchSetCenter(newCenter);
     }
+
+    // Propagate the ol event to the WebComponent
+    const htmlEvent = new CustomEvent(evt.type, { detail: evt });
+    dispatchHtmlEvent(htmlEvent);
   }
 
-  onPointerMove({ map, coordinate }) {
-    const { layerService } = this.props;
+  onPointerMove(evt) {
+    const { map, coordinate } = evt;
+    const { layerService, dispatchHtmlEvent } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
@@ -96,10 +100,20 @@ class Map extends PureComponent {
       // eslint-disable-next-line no-param-reassign
       map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
     });
+
+    // Propagate the ol event to the WebComponent
+    const htmlEvent = new CustomEvent(evt.type, {
+      detail: evt,
+    });
+    dispatchHtmlEvent(htmlEvent);
   }
 
   onSingleClick(evt) {
-    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+    const {
+      layerService,
+      dispatchSetClickedFeatureInfo,
+      dispatchHtmlEvent,
+    } = this.props;
 
     layerService
       .getFeatureInfoAtCoordinate(evt.coordinate)
@@ -121,20 +135,23 @@ class Map extends PureComponent {
           ({ features }) => features.length,
         );
         dispatchSetClickedFeatureInfo(clickedFeatureInfos);
+
+        // Propagate the infos clicked to the WebComponent
+        const htmlEvent = new CustomEvent('getfeatureinfo', {
+          detail: clickedFeatureInfos,
+        });
+        dispatchHtmlEvent(htmlEvent);
       });
+
+    // Propagate the ol event to the WebComponent
+    const htmlEvent = new CustomEvent(evt.type, {
+      detail: evt,
+    });
+    dispatchHtmlEvent(htmlEvent);
   }
 
   render() {
-    const {
-      projection,
-      center,
-      zoom,
-      layers,
-      map,
-      resolution,
-      extent,
-      t,
-    } = this.props;
+    const { center, zoom, layers, map, resolution, extent, t } = this.props;
 
     return (
       <>
@@ -148,7 +165,6 @@ class Map extends PureComponent {
           ariaLabel={t('Karte')}
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
-            projection,
             maxZoom: 20,
           }}
         />
