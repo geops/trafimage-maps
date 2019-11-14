@@ -57,6 +57,7 @@ class ConstructionLayer extends VectorLayer {
     this.geometryFunction = this.geometryFunction.bind(this);
     this.getSource = this.getSource.bind(this);
 
+    this.grandChildren = this.children.map(c => c.getChildren()).flat();
     this.setVisible(this.visible);
 
     if (this.cluster) {
@@ -74,7 +75,7 @@ class ConstructionLayer extends VectorLayer {
     super.init(map);
 
     this.visibilityKeys.push(
-      this.children.map(childLayer => {
+      this.grandChildren.map(childLayer => {
         return childLayer.on('change:visible', this.onChangeVisible);
       }),
     );
@@ -124,7 +125,7 @@ class ConstructionLayer extends VectorLayer {
    * @return {ol.geom.Point} Geometry or null
    */
   geometryFunction(feature) {
-    const childLayer = this.children.find(
+    const childLayer = this.grandChildren.find(
       child =>
         child.properties &&
         child.properties.construction &&
