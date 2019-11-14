@@ -98,9 +98,10 @@ class ConstructionLayer extends VectorLayer {
       return Promise.resolve({
         features,
         layer: data.layer,
-        coordinate: data.features.length
-          ? data.features[0].getGeometry().getCoordinates()
-          : data.coordinate,
+        coordinate:
+          data.features.length && data.features[0].get('features') // Features from cluster
+            ? data.features[0].getGeometry().getCoordinates()
+            : data.coordinate,
       });
     });
   }
