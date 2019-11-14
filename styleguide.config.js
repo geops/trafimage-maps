@@ -12,10 +12,7 @@ module.exports = {
   assetsDir: 'src/',
   components: [],
   styleguideDir: 'styleguide-build',
-  require: [
-    path.join(__dirname, 'src/styleguidist/styleguidist.css'),
-    path.join(__dirname, 'build/bundle.js'),
-  ],
+  require: [path.join(__dirname, 'src/styleguidist/styleguidist.css')],
   ribbon: {
     url: 'https://github.com/geops/trafimage-maps',
     text: 'Fork me on GitHub',
@@ -32,7 +29,7 @@ module.exports = {
           name: 'WebComponent',
           sections: [
             {
-              name: '<trafimage-maps>',
+              name: 'trafimage-maps',
               content: 'src/examples/WebComponent/README.md',
             },
           ],

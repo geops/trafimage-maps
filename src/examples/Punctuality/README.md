@@ -4,6 +4,7 @@ Trafimage maps are used to illustrate a whole range of topics relating to public
 This section shows you how to configure your own map for integrating it in your existing web page.
 
 ```jsx
+import 'trafimage-maps';
 import React from 'react';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
@@ -34,14 +35,14 @@ window.addEventListener('load', () => {
       }),
       buslines,
     ],
+    elements: {
+      footer: true,
+      header: true,
+      mapControls: true,
+      menu: true,
+      popup: true,
+    },
   }];
-  trafimage.elements = {
-    footer: true,
-    header: true,
-    mapControls: true,
-    menu: true,
-    popup: true,
-  };
   trafimage.setAttribute('width', '99%');
 });
 

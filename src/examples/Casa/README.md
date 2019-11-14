@@ -5,6 +5,7 @@ The Casa module is a sub module of trafimage-maps which is integrated in the SBB
 The used [APIs from geOps](https://developer.geops.io/) require a license key.
 
 ```jsx
+import 'trafimage-maps';
 import React from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';

@@ -155,11 +155,6 @@ export const buslines = new MapboxStyleLayer({
       'line-opacity': 1,
     },
   },
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.netzkarte.buslinien-desc',
-    popupComponent: 'BusLinePopup',
-  },
 });
 
 export default [

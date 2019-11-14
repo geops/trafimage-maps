@@ -21,6 +21,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
             return;
           }
           this.styleUrl = newStyleUrl;
+          if (!this.mbMap) {
+            return;
+          }
           this.mbMap.setStyle(data);
           this.mbMap.once('styledata', () => {
             this.dispatchEvent({

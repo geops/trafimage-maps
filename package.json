@@ -103,7 +103,7 @@
     "cp": "generact --root src/components",
     "cy:open": "cypress open",
     "cy:test": "yarn start & wait-on http://localhost:3000 & yarn cypress run",
-    "doc": "yarn build && bash ./scripts/prepare-doc.sh",
+    "doc": "bash ./scripts/prepare-doc.sh",
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.js' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
     "lint": "eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
@@ -112,7 +112,7 @@
     "publish:public": "yarn version && git push origin HEAD && yarn run build && yarn publish build/ --access public --non-interactive --no-git-tag-version",
     "sort": "sort-json src/lang/*.json -i",
     "start": "react-app-rewired start",
-    "start:doc": "yarn build && styleguidist server",
+    "start:doc": "styleguidist server",
     "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(jsts|ol|react-spatial|react-transit)/).*/\""
   },
   "browserslist": [
