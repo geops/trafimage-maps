@@ -13,12 +13,6 @@ import defaultBaseLayers, {
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
-const getLayerWithVisibility = (layer, visible) => {
-  layer.setVisible(visible);
-  layer.getChildren().forEach(c => c.setVisible(visible));
-  return layer;
-};
-
 const defaultElements = {
   header: true,
   footer: true,
@@ -67,12 +61,7 @@ export const handicap = {
 export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
-  layers: [
-    netzkarteLayer,
-    sourcesLayer,
-    netzkartePointLayer,
-    getLayerWithVisibility(bahnhofplaene, true),
-  ],
+  layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
   elements: { popup: true },
   projection: 'EPSG:3857',
 };
