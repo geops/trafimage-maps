@@ -12,11 +12,13 @@ import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing fare networks.
+ *
  * <img src="img/layers/ZoneLayer/layer.png" alt="Layer preview" title="Layer preview">
  * @class ZoneLayer
  * @extends CasaLayer
  * @param {Object} options Layer options.
- * @param {string} [validity] Zone validity. Format: yyyy-mm-dd.
+ * @param {string} [validFrom] Zone validity start. Format: yyyy-mm-dd.
+ * @param {string} [validTo] Zone validity end . Format: yyyy-mm-dd.
  * @param {number} [options.labelOptimizationMinResolution = 100] Minimum resolution for
  *   using optimized label placement based on the current extent.
  */
@@ -52,7 +54,9 @@ class ZoneLayer extends CasaLayer {
       ...options,
     });
 
-    this.validity = options.validity;
+    this.validFrom = options.validFrom;
+
+    this.validTo = options.validTo;
 
     this.url = 'https://api.geops.io/casa-fare-network/v1';
 
@@ -82,10 +86,12 @@ class ZoneLayer extends CasaLayer {
 
   /**
    * Set the validity of the zone.
-   * @param {string} validity Validity. Format: yyyy-mm-dd
+   * @param {string} validFrom Zone validity start. Format: yyyy-mm-dd.
+   * @param {string} validTo Zone validity end. Format: yyyy-mm-dd.
    */
-  setValidity(validity) {
-    this.validity = validity;
+  setValidity(validFrom, validTo) {
+    this.validFrom = validFrom;
+    this.validTo = validTo;
   }
 
   /**
@@ -168,11 +174,9 @@ class ZoneLayer extends CasaLayer {
       key: this.apiKey,
       simplify: 100,
       srs: 3857,
+      valid_from: this.validFrom,
+      valid_to: this.validTo,
     };
-
-    if (this.validity) {
-      urlParams.valid_from = this.validity;
-    }
 
     const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
