@@ -66,6 +66,10 @@ const WebComponent = props => {
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
   const appTopics = useMemo(() => {
     const tps = topics || topicConfig[appName];
+    if (!tps) {
+      console.error('You must provide a list of topics');
+      return [];
+    }
     if (activeTopicKey) {
       tps.forEach(topic => {
         // eslint-disable-next-line no-param-reassign
