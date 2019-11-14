@@ -1,4 +1,6 @@
 .wkp-handicap-popup {
+  min-width: 350px;
+
   .wkp-handicap-popup-body {
     .wkp-handicap-popup-element {
       padding-bottom: 10px;
@@ -33,10 +35,13 @@
   }
 }
 
-.tm-app.tm-w-m,
 .tm-app.tm-w-s,
 .tm-app.tm-w-xs {
-  .wkp-handicap-popup-bottom {
+  .wkp-handicap-popup {
     min-width: 200px;
+
+    .wkp-handicap-popup-bottom {
+      min-width: 200px;
+    }
   }
 }
