@@ -27,6 +27,7 @@ function HandicapPopup({ feature }) {
     rollstuhl_billet: null,
     rollstuhl_wc: null,
     eurokey_wc: null,
+    mobilift: null,
   };
 
   // build string for equipment
