@@ -32,6 +32,24 @@
         margin: 0;
         padding: 0;
       }
+
+      #events {
+        position: absolute;
+        width: 300px;
+        height: 100px;
+        bottom: 35px;
+        overflow-y: auto;
+        color: red;
+        margin: auto;
+        left: 0;
+        right: 0;
+      }
+
+      #buttons {
+        position: absolute;
+        z-index: 10000;
+        top: 0;
+      }
     </style>
     <script>
       window.changeAttr = function(attr, val) {
@@ -46,11 +64,28 @@
         map[attr] = null;
         map[attr] = val;
       };
+
+      window.onload = function() {
+        const map = document.getElementById('map');
+        const evts = document.getElementById('events');
+        map.addEventListener('moveend', evt => {
+          evts.innerHTML =
+            evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
+        });
+        map.addEventListener('singleclick', evt => {
+          evts.innerHTML =
+            evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
+        });
+        map.addEventListener('getfeatureinfo', evt => {
+          evts.innerHTML =
+            evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
+        });
+      };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div style="position: absolute; z-index: 10000;top: 0;">
+    <div id="buttons">
       <button onclick="changeAttr('activeTopicKey','ch.sbb.handicap')">
         change to handicap
       </button>
@@ -83,8 +118,11 @@
       id="map"
       zoom="12"
       center="[810000, 5900000]"
+      appName="wkp"
+      activeTopicKey="ch.sbb.netzkarte"
       vectorTilesUrl="https://maps.style-dev.geops.io"
     ></trafimage-maps>
+    <div id="events"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
