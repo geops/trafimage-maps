@@ -200,7 +200,7 @@ class TopicMenu extends PureComponent {
           </div>
           {menuOpen &&
             topic &&
-            topic.description &&
+            (topic.description || topic.layerInfoComponent) &&
             this.renderInfoButton(topic)}
         </div>
         <div className="wkp-topic-content">
