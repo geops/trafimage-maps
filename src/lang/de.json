@@ -19,7 +19,6 @@
   "bezeichnung": "Bezeichnung",
   "Breite": "Breite",
   "ch.sbb.bahnhoffrequenzen": "Passagierfrequenzen",
-  "ch.sbb.bahnhoffrequenzen-desc": "Angezeigt wird die Anzahl Ein- und Aussteigende an den Bahnhöfen und Haltestellen der MGB, RhB, SBB, SOB, Thurbo und Zentralbahn. Die Zahlen beziehen sich auf den durchschnittlichen werktäglichen Verkehr (Mo-Fr) und enthalten die Ein- resp. Aussteigenden folgender Transportunternehmen: BLS, MGB, MOB, Oensingen-Balsthal-Bahn, RegionAlps, RhB, SBB, SBB GmbH, SOB, SZU, Thurbo, TILO, TRAVYS und Zentralbahn. Ein- und Aussteigende anderer Transportunternehmen und anderer öffentlicher Verkehrsmittel sowie Passanten werden nicht berücksichtigt.<br/>Die Angaben beziehen sich auf das Fahrplanjahr 2018.<p>Daten: <a href=\"mailto:stat@sbb.ch\">stat@sbb.ch</a>.</p>",
   "ch.sbb.bahnhofplaene": "Bahnhofpläne",
   "ch.sbb.bahnhofplaene-desc": "Dieser Layer zeigt auf einen Blick, welche Bahnhöfe mit einer interaktiven Plananwendung oder mit einem Bahnhofplan als Printprodukt ausgerüstet sind. Zudem können auch die Bahnersatz-Pläne angezeigt werden.",
   "ch.sbb.bahnhofplaene.interaktiv": "Interaktiver Bahnhofplan",

@@ -196,7 +196,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   },
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.bahnhoffrequenzen-desc',
+    layerInfoComponent: 'PassagierFrequenzenLayerInfo',
     popupComponent: 'PassagierFrequenzenPopup',
   },
 });

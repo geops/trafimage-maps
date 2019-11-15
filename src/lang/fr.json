@@ -31,7 +31,6 @@
   "BFS-Gemeindenummer": "Numéro de commune OFS",
   "Breite": "Latitude",
   "ch.sbb.bahnhoffrequenzen": "Affluence des voyageurs",
-  "ch.sbb.bahnhoffrequenzen-desc": "L’affluence des voyageurs dans les gares et les arrêts CFF, MGB, RhB, SOB, Thurbo et Zentralbahn est affiché. Les chiffres se rapportent au trafic moyen pendant les jours ouvrés (lu-ve) et recensent les montées et descentes de personnes pour les entreprises de transport suivantes: BLS, CFF, MGB, MOB, Oensingen-Balsthal-Bahn, RegionAlps, RhB, SBB GmbH, SOB, SZU, Thurbo, TILO, TRAVYS et Zentralbahn. Les passagers d’autres entreprises de transport/d’autres moyens de transport publics et les passants ne sont pas pris en compte.<br/>Les données se réfèrent à l’année d’horaire 2018.<p>Données: <a href=\"mailto:stat@sbb.ch\">stat@sbb.ch</a>.</p>",
   "ch.sbb.bahnhofplaene": "Plans de gares",
   "ch.sbb.bahnhofplaene-desc": "Cette couche donne un aperçu des gares qui disposent d’un plan interactif ou d’un plan de gare imprimé. Les plans du service de remplacement peuvent également être affichés.",
   "ch.sbb.bahnhofplaene.interaktiv": "Plan de gare interactif",
