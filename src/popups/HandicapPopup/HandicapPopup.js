@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import { useTranslation } from 'react-i18next';
 import PopupElement from './HandicapPopupElement';
-import './HandicapPopup.scss';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

@@ -13,13 +13,11 @@ import { setResolution, setCenter, setZoom } from '../../model/map/actions';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
-  projection: PropTypes.string,
+  dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
-  initialCenter: PropTypes.arrayOf(PropTypes.number),
-  initialZoom: PropTypes.number,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -36,43 +34,22 @@ const propTypes = {
 };
 
 const defaultProps = {
-  projection: 'EPSG:3857',
-
   // mapStateToProps
   center: [0, 0],
-  initialCenter: undefined,
-  initialZoom: undefined,
   layers: [],
   extent: undefined,
   resolution: undefined,
   zoom: 9,
+  dispatchHtmlEvent: () => {},
 };
 
 class Map extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    const {
-      initialCenter,
-      initialZoom,
-      dispatchSetCenter,
-      dispatchSetZoom,
-    } = this.props;
-
-    if (initialCenter) {
-      dispatchSetCenter(initialCenter);
-    }
-
-    if (typeof initialZoom !== 'undefined') {
-      dispatchSetZoom(initialZoom);
-    }
-  }
-
   componentDidMount() {
-    const { map } = this.props;
+    const { map, dispatchHtmlEvent } = this.props;
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
     this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', e => this.onSingleClick(e));
+    dispatchHtmlEvent(new CustomEvent('load'));
   }
 
   componentWillUnmount() {
@@ -87,8 +64,8 @@ class Map extends PureComponent {
       dispatchSetResolution,
       dispatchSetZoom,
       zoom,
+      dispatchHtmlEvent,
     } = this.props;
-
     const newResolution = evt.map.getView().getResolution();
     const newZoom = evt.map.getView().getZoom();
     const newCenter = evt.map.getView().getCenter();
@@ -104,10 +81,15 @@ class Map extends PureComponent {
     if (center[0] !== newCenter[0] || center[1] !== newCenter[1]) {
       dispatchSetCenter(newCenter);
     }
+
+    // Propagate the ol event to the WebComponent
+    const htmlEvent = new CustomEvent(evt.type, { detail: evt });
+    dispatchHtmlEvent(htmlEvent);
   }
 
-  onPointerMove({ map, coordinate }) {
-    const { layerService } = this.props;
+  onPointerMove(evt) {
+    const { map, coordinate } = evt;
+    const { layerService, dispatchHtmlEvent } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
@@ -119,10 +101,20 @@ class Map extends PureComponent {
       // eslint-disable-next-line no-param-reassign
       map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
     });
+
+    // Propagate the ol event to the WebComponent
+    const htmlEvent = new CustomEvent(evt.type, {
+      detail: evt,
+    });
+    dispatchHtmlEvent(htmlEvent);
   }
 
   onSingleClick(evt) {
-    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+    const {
+      layerService,
+      dispatchSetClickedFeatureInfo,
+      dispatchHtmlEvent,
+    } = this.props;
 
     layerService
       .getFeatureInfoAtCoordinate(evt.coordinate)
@@ -140,24 +132,27 @@ class Map extends PureComponent {
         });
 
         // Dispatch only infos with features found.
-        this.clickedFeatureInfos = filtered.filter(
+        const clickedFeatureInfos = filtered.filter(
           ({ features }) => features.length,
         );
-        dispatchSetClickedFeatureInfo(this.clickedFeatureInfos);
+        dispatchSetClickedFeatureInfo(clickedFeatureInfos);
+
+        // Propagate the infos clicked to the WebComponent
+        const htmlEvent = new CustomEvent('getfeatureinfo', {
+          detail: clickedFeatureInfos,
+        });
+        dispatchHtmlEvent(htmlEvent);
       });
+
+    // Propagate the ol event to the WebComponent
+    const htmlEvent = new CustomEvent(evt.type, {
+      detail: evt,
+    });
+    dispatchHtmlEvent(htmlEvent);
   }
 
   render() {
-    const {
-      projection,
-      center,
-      zoom,
-      layers,
-      map,
-      resolution,
-      extent,
-      t,
-    } = this.props;
+    const { center, zoom, layers, map, resolution, extent, t } = this.props;
 
     return (
       <>
@@ -171,7 +166,6 @@ class Map extends PureComponent {
           ariaLabel={t('Karte')}
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
-            projection,
             maxZoom: 20,
           }}
         />

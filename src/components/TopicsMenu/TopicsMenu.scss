@@ -26,29 +26,3 @@
     position: relative;
   }
 }
-
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-topics-menu {
-    border: 0;
-
-    .wkp-menu-header {
-      .wkp-menu-title {
-        display: none;
-      }
-    }
-
-    .wkp-topics-menu-body {
-      padding: 0;
-      border-top: 1px solid #eee;
-    }
-  }
-
-  // header component is enabled
-  &.header {
-    .wkp-topics-menu {
-      margin-top: 0;
-    }
-  }
-}

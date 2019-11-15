@@ -1,8 +1,4 @@
-/* eslint-disable */
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-// import './i18n';
-import App from './AppRouter';
+// eslint-disable-next-line import/no-unresolved
+import TrafimageMaps from './components/TrafimageMaps';
 
-export default App;
+export default TrafimageMaps;
