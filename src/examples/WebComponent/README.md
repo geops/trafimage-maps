@@ -5,15 +5,21 @@ This section shows you how to configure your own map for integrating it in your 
 
 ```jsx
 import 'trafimage-maps';
-import React from 'react';
+import React, { useEffect } from 'react';
 import topic from 'trafimage-maps/examples/WebComponent/topic';
 
-window.addEventListener('load', () => {  
-  const trafimage = document.getElementById('webcomponent');
-  trafimage.topics =  [topic];
-});
+const App = () => {
+  useEffect(() => {
+    const trafimage = document.getElementById('map');
+    trafimage.topics =  [topic];
+  });
 
-<div style={{ position: 'relative', width: '100%', height: 500 }}>
-  <trafimage-maps id="webcomponent"></trafimage-maps>
-</div>
+  return (
+    <div style={{ position: 'relative', width: '100%', height: 500 }}>
+      <trafimage-maps id="map"/>
+    </div>
+  );
+}
+
+<App />
 ```

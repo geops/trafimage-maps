@@ -45,10 +45,11 @@ const defaultProps = {
 
 class Map extends PureComponent {
   componentDidMount() {
-    const { map } = this.props;
+    const { map, dispatchHtmlEvent } = this.props;
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
     this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', e => this.onSingleClick(e));
+    dispatchHtmlEvent(new CustomEvent('load'));
   }
 
   componentWillUnmount() {

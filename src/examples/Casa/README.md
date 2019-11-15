@@ -6,7 +6,7 @@ The used [APIs from geOps](https://developer.geops.io/) require a license key.
 
 ```jsx
 import 'trafimage-maps';
-import React from 'react';
+import React, { useEffect } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
@@ -89,16 +89,20 @@ routeLayer.onClick(f => {
   console.log('Clicked', f);
 });
 
-window.addEventListener('load', () => {  
-  const trafimage = document.getElementById('casa');
-  trafimage.apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
-  trafimage.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
-  trafimage.setAttribute('width', '99%');
-});
+const App = () => {
+  useEffect(() => {
+    const app = document.getElementById('casa');
+    app.apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
+    app.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
+    app.setAttribute('width', '99%');
+  });
+  return (
+    <div style={{ position: 'relative', width: '100%', height: 500 }}>
+      <trafimage-maps id="casa"></trafimage-maps>
+    </div>
+  );
+}
 
-
-<div style={{ position: 'relative', width: '100%', height: 500 }}>
-  <trafimage-maps id="casa"></trafimage-maps>
-</div>
+<App />
 
 ```
