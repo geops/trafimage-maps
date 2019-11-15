@@ -12551,16 +12551,7 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^6.4.2, query-string@^6.8.2:
-  version "6.8.3"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.8.3.tgz#fd9fb7ffb068b79062b43383685611ee47777d4b"
-  integrity sha512-llcxWccnyaWlODe7A9hRjkvdCKamEKTh+wH8ITdTc3OhchaqUZteiSCX/2ablWHVrkVIe04dntnaZJ7BdyW0lQ==
-  dependencies:
-    decode-uri-component "^0.2.0"
-    split-on-first "^1.0.0"
-    strict-uri-encode "^2.0.0"
-
-query-string@^6.9.0:
+query-string@^6.4.2, query-string@^6.8.2, query-string@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.9.0.tgz#1c3b727c370cf00f177c99f328fda2108f8fa3dd"
   integrity sha512-KG4bhCFYapExLsUHrFt+kQVEegF2agm4cpF/VNc6pZVthIfCc/GK8t8VyNIE3nyXG9DK3Tf2EGkxjR6/uRdYsA==
@@ -12808,14 +12799,7 @@ react-i18next@^11.2.0:
     "@babel/runtime" "^7.3.1"
     html-parse-stringify2 "2.0.1"
 
-react-icons@^3.4.0, react-icons@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.7.0.tgz#64fe46231fabfeea27895edeae6c3b78114b8c8f"
-  integrity sha512-7MyPwjIhuyW0D2N3s4DEd0hGPGFf0sK+IIRKhc1FvSpZNVmnUoGvHbmAwzGJU+3my+fvihVWgwU5SDtlAri56Q==
-  dependencies:
-    camelcase "^5.0.0"
-
-react-icons@^3.8.0:
+react-icons@^3.4.0, react-icons@^3.7.0, react-icons@^3.8.0:
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.8.0.tgz#229de5904809696c9f46932bd9b6126b2522866e"
   integrity sha512-rA/8GRKjPulft8BSBSMsHkE1AGPqJ7LjNsyk0BE7XjG70Iz62zOled2SJk7LDo8x9z86a3xOstDlKlMZ4pAy7A==
@@ -12942,10 +12926,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^0.1.1-beta.8:
-  version "0.1.1-beta.8"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.1-beta.8.tgz#7722bf92b2cd6dbbf852465a6ff6ae361a3b098c"
-  integrity sha512-BrcGg2RPmq8ZLg/Bp6eif0fh7+dwNSh9dcaEhzd4KKb4MDkXxdwSo5t+cmNiLNgWjOD0iORniceV80PPiIhayw==
+react-spatial@^0.1.1-beta.9:
+  version "0.1.1-beta.9"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.1-beta.9.tgz#7bd70944c6043a1416c6f3af9dd38ae75b320e4b"
+  integrity sha512-gTYKfYBOIa02dVd0UpGDxguse/M3hDttscn+Q41DCi8YLsXT/UNccZc4cnR0uElhaeEZnx2eaOeX27xQX+kWEQ==
   dependencies:
     query-string "^6.4.2"
     react-draggable "^4.0.3"
