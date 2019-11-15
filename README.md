@@ -5,22 +5,22 @@
 
 ## About
 
+This repo contains the web component used by the Trafimage Map Portal by Swiss Federal Railways SBB and other applications build on it.
 
-This repo contains the code of the Trafimage Map Portal by Swiss Federal Railways SBB and other applications build on it.
-Components are based on [react-spatial](https://github.com/geops/react-spatial).
-
+## Documentation
 
 See [demo](https://apidoc.trafimage.ch/).
 
-
 ## Technologies
+
+* web-component
 * react
 * redux
-* react-router
 * enzyme
 * jest
 * cypress
 * react-spatial
+* react-transit
 * eslint with airbnb
 * prettier
 * sass
@@ -28,32 +28,27 @@ See [demo](https://apidoc.trafimage.ch/).
 ## Getting Started
 
 Install:
+
 ```bash
 yarn install
 ```
 
 Start:
+
 ```bash
 yarn start
 ```
 
-Publish as NPM package:
+## Publish as NPM package
 
-* Build to publish:
+* Publish a public version:
+
 ```bash
-yarn build:es
+yarn publish:public
 ```
 
-* Publish:
+* Publish a beta version:
+
 ```bash
-yarn publish:build
-```
-
-## Use as ES6 module:
-
-When this app is published as npm package, it can be integrated easily in other applications, as ES6 module:
-
-Install
-```bash
-npm install trafimage-maps
+yarn publish:public
 ```
