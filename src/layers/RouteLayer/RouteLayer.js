@@ -2,45 +2,28 @@ import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import { Style, Stroke as StrokeStyle } from 'ol/style';
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import CasaLayer from '../CasaLayer';
 
 /**
  * Layer for visualizing routes.
  *
  * <img src="img/layers/RouteLayer/layer.png" alt="Layer preview" title="Layer preview">
- *
- * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer geops-spatial/layers/VectorLayer}
  * @class RouteLayer
+ * @extends CasaLayer
  * @param {Object} [options] Layer options.
- * @param {string} options.apiKey Access key for [geOps services](https://developer.geops.io/).
- * @param {string} [options.name=Routen] Layer name.
- * @param {string} [options.url=https://api.geops.io/routing/v1] Url of the geOps route backend.
- * @param {boolean} [options.visible = true] Visibility of the layer.
- *   Default is true.
- * @param {string} [options.projection=EPSG:3857] Layer projection.
- *   Default is webmercator ('EPSG:3857')
  * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
- * @param {Function} [options.routeStyleFunction] Function called with the route properties
- *   and a boolean indicating if the zone is selected.
- *   The function should return the route color.
  */
-class RouteLayer extends VectorLayer {
+class RouteLayer extends CasaLayer {
   constructor(options = {}) {
     super({
-      name: options.name || 'Routen',
+      name: 'RouteLayer',
       olLayer: new OLVectorLayer({
         style: f => this.routeStyle(f),
         source: new VectorSource(),
       }),
       ...options,
     });
-
-    this.projection = options.projection || 'EPSG:3857';
-
-    // API key
-    this.apiKey = options.apiKey;
 
     // Colors for differtent modes of transportation
     this.motColors = options.motColors || {
@@ -49,13 +32,11 @@ class RouteLayer extends VectorLayer {
       ship: '#0074be',
     };
 
-    // Route url
-    this.url = options.url || 'https://api.geops.io/routing/v1';
-
-    // Function for route styling
-    this.routeStyleFunction = options.routeStyleFunction || (() => {});
+    this.url = 'https://api.geops.io/routing/v1';
 
     this.selectedRouteIds = [];
+
+    this.defaultStyleObject.text = {};
 
     this.onClick(features => {
       if (features.length) {
@@ -74,6 +55,13 @@ class RouteLayer extends VectorLayer {
         }
       }
     });
+  }
+
+  defaultStyleFunction(properties, isSelected = false) {
+    const obj = super.defaultStyleFunction(properties, isSelected);
+    return isSelected
+      ? obj
+      : { ...obj, stroke: { width: 4, color: this.motColors[properties.mot] } };
   }
 
   /**
@@ -110,24 +98,16 @@ class RouteLayer extends VectorLayer {
   }
 
   /**
-   * Returns the style of the given feature
+   * Returns the style of the given feature.
+   * @private
    * @param {ol.feature} feature {@link https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html ol/Feature}
    * @returns {ol.style} get the feature's style function.
    */
   routeStyle(feature) {
     const { routeId } = feature.get('route');
-    const mot = feature.get('mot');
     const isSelected = this.selectedRouteIds.includes(routeId);
-    const color =
-      this.routeStyleFunction(feature.getProperties(), isSelected) ||
-      this.motColors[mot];
-
-    return new Style({
-      stroke: new StrokeStyle({
-        width: 5,
-        color: color || 'green',
-      }),
-    });
+    const routeStyle = this.styleFunction(feature.getProperties(), isSelected);
+    return this.getOlStyleFromObject(routeStyle, isSelected);
   }
 
   /**

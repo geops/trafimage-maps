@@ -2,6 +2,7 @@ import defaultBaseLayers, {
   bahnhofplaene,
   passagierfrequenzen,
   netzkarteLayer,
+  sourcesLayer,
   netzkartePointLayer,
   buslines,
   gemeindegrenzen,
@@ -60,7 +61,8 @@ export const handicap = {
 export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
-  layers: [netzkarteLayer],
+  layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
+  elements: { popup: true },
   projection: 'EPSG:3857',
 };
 
@@ -68,6 +70,7 @@ export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
   layers: [netzkarteLayer],
+  elements: { popup: true },
   projection: 'EPSG:3857',
 };
 
@@ -120,13 +123,16 @@ export const showcases = {
   description: 'ch.sbb.showcases-desc',
 };
 
-export default [
-  netzkarte,
-  handicap,
-  bauprojekte,
-  behig,
-  infrastruktur,
-  regionenkarte,
-  tarifverbundkarte,
-  showcases,
-];
+export default {
+  wkp: [
+    netzkarte,
+    handicap,
+    bauprojekte,
+    behig,
+    infrastruktur,
+    regionenkarte,
+    tarifverbundkarte,
+    showcases,
+  ],
+  stelen: [netzkarteStelen],
+};

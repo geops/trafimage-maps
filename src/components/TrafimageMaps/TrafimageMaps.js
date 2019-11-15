@@ -13,9 +13,6 @@ import { getStore } from '../../model/store';
 import { setZoom, setCenter } from '../../model/map/actions';
 import { setTopics } from '../../model/app/actions';
 
-import 'react-spatial/themes/default/index.scss';
-import './TrafimageMaps.scss';
-
 const propTypes = {
   /**
    * History object from react-router
@@ -93,6 +90,22 @@ class TrafimageMaps extends React.PureComponent {
      * However when running in Stylegudist, every application needs it own store
      */
     this.store = getStore();
+  }
+
+  componentDidMount() {
+    const { zoom, center, topics } = this.props;
+
+    if (zoom) {
+      this.store.dispatch(setZoom(zoom));
+    }
+
+    if (center) {
+      this.store.dispatch(setCenter(center));
+    }
+
+    if (topics) {
+      this.store.dispatch(setTopics(topics));
+    }
   }
 
   componentDidUpdate(prevProps) {

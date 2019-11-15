@@ -22,7 +22,11 @@ const getInitialState = () => ({
   topics: [],
   clickedFeatureInfo: null,
   language: 'de',
-  projection: null,
+  projection: {
+    label: 'WGS 84',
+    value: 'EPSG:4326',
+    format: c => c,
+  },
   menuOpen: false,
   selectedForInfos: null,
   map: new OLMap({

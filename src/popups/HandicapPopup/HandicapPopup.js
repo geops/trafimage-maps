@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import { useTranslation } from 'react-i18next';
 import PopupElement from './HandicapPopupElement';
-import './HandicapPopup.scss';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -27,6 +26,7 @@ function HandicapPopup({ feature }) {
     rollstuhl_billet: null,
     rollstuhl_wc: null,
     eurokey_wc: null,
+    mobilift: null,
   };
 
   // build string for equipment
