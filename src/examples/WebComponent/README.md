@@ -9,7 +9,7 @@ import React, { useRef, useEffect } from 'react';
 import topic from 'trafimage-maps/examples/WebComponent/topic';
 
 const App = () => {
-  const ref = useRef()
+  const ref = useRef();
   
   useEffect(() => {
     const map = ref.current;
