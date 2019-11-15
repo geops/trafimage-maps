@@ -21,7 +21,6 @@ import {
 import MenuItem from '../../components/Menu/MenuItem';
 import { ReactComponent as Filter } from '../../img/FilterButton/filter.svg';
 import { ReactComponent as Follow } from '../../img/FollowButton/follow.svg';
-
 import './TrackerMenu.scss';
 
 const propTypes = {

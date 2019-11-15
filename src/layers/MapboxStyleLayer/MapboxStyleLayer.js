@@ -3,6 +3,7 @@ import Layer from 'react-spatial/layers/Layer';
 
 /**
  * Apply visibility to style layers that fits the filter function.
+ * @private
  */
 const applyVisibilityToStyleLayer = (styleLayer, visibilityValue) => {
   styleLayer.layout = styleLayer.layout || {};
@@ -11,6 +12,7 @@ const applyVisibilityToStyleLayer = (styleLayer, visibilityValue) => {
 
 /**
  * Apply visibility to style layers that fits the filter function.
+ * @private
  */
 const applyVisibility = (mbMap, visible, filterFunc) => {
   const styleObj = mbMap.getStyle();

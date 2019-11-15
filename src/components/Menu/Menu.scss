@@ -5,20 +5,3 @@
   width: 371px;
   z-index: 2;
 }
-
-.tm-app.tm-w-m,
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-menu-wrapper {
-    top: 0;
-    left: 0;
-  }
-
-  // header component is enabled
-  &.header {
-    .wkp-menu-wrapper {
-      top: 0;
-      width: 345px;
-    }
-  }
-}

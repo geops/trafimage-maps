@@ -8,8 +8,6 @@ import { transform as transformCoords } from 'ol/proj';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 
-import './NetzkartePopup.scss';
-
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };

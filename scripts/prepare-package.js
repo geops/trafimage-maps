@@ -13,7 +13,7 @@ delete pkg.eslintConfig;
 delete pkg.private;
 
 // Write the good index file import for es6 module loading.
-pkg.main = 'es/index.js';
+pkg.main = 'bundle.js';
 fs.writeFileSync(
   path.join(buildDir, 'package.json'),
   JSON.stringify(pkg, null, 2),

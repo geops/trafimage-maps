@@ -6,8 +6,6 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import { FaRegFilePdf } from 'react-icons/fa';
 
-import './BahnhofplanPopup.scss';
-
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,

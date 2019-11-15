@@ -6,7 +6,6 @@ import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from 'react-spatial/components/BlankLink';
 import SharePermalinkButton from '../SharePermalinkButton';
-import './Share.scss';
 
 const socialShareConfig = [
   {
