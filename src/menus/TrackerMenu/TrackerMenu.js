@@ -7,20 +7,40 @@ import { TiVideo } from 'react-icons/ti';
 import { transform as transformCoords } from 'ol/proj';
 import Map from 'ol/Map';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
+import FilterButton from 'react-transit/components/FilterButton';
+import FollowButton from 'react-transit/components/FollowButton';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
-import { setMenuOpen } from '../../model/app/actions';
+import { setCenter } from '../../model/map/actions';
+import {
+  setMenuOpen,
+  setLineFilter,
+  setRouteFilter,
+  setOperatorFilter,
+} from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
+import { ReactComponent as Filter } from '../../img/FilterButton/filter.svg';
+import { ReactComponent as Follow } from '../../img/FollowButton/follow.svg';
+
 import './TrackerMenu.scss';
 
 const propTypes = {
   // mapStateToProps
+  routeFilter: PropTypes.string,
   map: PropTypes.instanceOf(Map).isRequired,
   layerService: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
 
   // mapDispatchToProps
+  dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetMenuOpen: PropTypes.func.isRequired,
+  dispatchSetLineFilter: PropTypes.func.isRequired,
+  dispatchSetRouteFilter: PropTypes.func.isRequired,
+  dispatchSetOperatorFilter: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  routeFilter: undefined,
 };
 
 class TrackerMenu extends Component {
@@ -39,6 +59,7 @@ class TrackerMenu extends Component {
       open: false,
       collapsed: true,
       trajectory: null,
+      followActive: false,
     };
     this.onLayerClick = this.onLayerClick.bind(this);
   }
@@ -64,6 +85,21 @@ class TrackerMenu extends Component {
         layer.onClick(this.onLayerClick);
       });
     }
+
+    [this.trackerParentLayer] = layerService
+      .getLayersAsFlatArray()
+      .filter(l => l.getName() === 'ch.sbb.puenktlichkeit');
+
+    if (this.trackerParentLayer) {
+      this.olEventsKeys.push(
+        this.trackerParentLayer.on('change:visible', evt => {
+          if (!evt.target.getVisible()) {
+            // Remove tracker specific url params when layer hidden.
+            this.removeTrackerUrlParams();
+          }
+        }),
+      );
+    }
   }
 
   componentWillUnmount() {
@@ -71,6 +107,7 @@ class TrackerMenu extends Component {
     this.olEventsKeys = [];
 
     this.trackerLayers.forEach(layer => {
+      layer.setFilter(null);
       layer.unClick(this.onLayerClick);
     });
   }
@@ -87,13 +124,33 @@ class TrackerMenu extends Component {
     });
   }
 
+  removeTrackerUrlParams() {
+    const {
+      dispatchSetLineFilter,
+      dispatchSetRouteFilter,
+      dispatchSetOperatorFilter,
+    } = this.props;
+
+    dispatchSetLineFilter(undefined);
+    dispatchSetRouteFilter(undefined);
+    dispatchSetOperatorFilter(undefined);
+  }
+
   render() {
-    const { open, collapsed, trajectory } = this.state;
-    const { map, t } = this.props;
+    const { open, collapsed, trajectory, followActive } = this.state;
+    const {
+      map,
+      t,
+      dispatchSetCenter,
+      routeFilter,
+      dispatchSetRouteFilter,
+    } = this.props;
 
     if (!open) {
       return null;
     }
+
+    const trackerLayer = this.trackerLayers.find(l => l.getVisible());
 
     return (
       <MenuItem
@@ -108,7 +165,7 @@ class TrackerMenu extends Component {
         {trajectory ? (
           <div>
             <RouteSchedule
-              trackerLayer={this.trackerLayers.find(l => l.getVisible())}
+              trackerLayer={trackerLayer}
               lineInfos={trajectory}
               onStationClick={station => {
                 map.getView().animate({
@@ -120,6 +177,37 @@ class TrackerMenu extends Component {
                   ),
                 });
               }}
+              renderHeaderButtons={routeIdentifier => (
+                <>
+                  <FilterButton
+                    title="Filter"
+                    active={!!routeFilter}
+                    onChange={() =>
+                      dispatchSetRouteFilter(
+                        routeFilter ? undefined : routeIdentifier.split('.')[0],
+                      )
+                    }
+                    routeIdentifier={routeIdentifier}
+                    trackerLayer={trackerLayer}
+                  >
+                    <Filter focusable={false} />
+                  </FilterButton>
+                  <FollowButton
+                    setCenter={coord => dispatchSetCenter(coord)}
+                    title="Follow"
+                    active={followActive}
+                    onChange={active =>
+                      this.setState({
+                        followActive: active,
+                      })
+                    }
+                    routeIdentifier={routeIdentifier}
+                    trackerLayer={trackerLayer}
+                  >
+                    <Follow focusable={false} />
+                  </FollowButton>
+                </>
+              )}
             />
           </div>
         ) : null}
@@ -131,14 +219,20 @@ class TrackerMenu extends Component {
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => ({
   map: state.app.map,
+  routeFilter: state.app.routeFilter,
   layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
+  dispatchSetCenter: setCenter,
   dispatchSetMenuOpen: setMenuOpen,
+  dispatchSetLineFilter: setLineFilter,
+  dispatchSetRouteFilter: setRouteFilter,
+  dispatchSetOperatorFilter: setOperatorFilter,
 };
 
 TrackerMenu.propTypes = propTypes;
+TrackerMenu.defaultProps = defaultProps;
 
 export default compose(
   withTranslation(),
