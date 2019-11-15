@@ -32,14 +32,14 @@ function LayerInfosDialog(props) {
     return null;
   }
 
-  const LayerInfoComponent =
-    layerInfos[
-      selectedForInfos.layerInfoComponent ||
-        selectedForInfos.get('layerInfoComponent')
-    ];
+  const componentName =
+    selectedForInfos instanceof Layer
+      ? selectedForInfos.get('layerInfoComponent')
+      : selectedForInfos.layerInfoComponent;
 
   let body;
-  if (LayerInfoComponent) {
+  if (componentName) {
+    const LayerInfoComponent = layerInfos[componentName];
     body = <LayerInfoComponent language={language} />;
   } else if (selectedForInfos instanceof Layer) {
     body = (
