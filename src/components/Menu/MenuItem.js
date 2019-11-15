@@ -6,8 +6,7 @@ import Map from 'ol/Map';
 import { unByKey } from 'ol/Observable';
 import MenuItemHeader from './MenuItemHeader';
 import Collapsible from '../Collapsible';
-import { transitiondelay } from '../../Globals.scss';
-import './MenuItem.scss';
+import { transitiondelay } from '../../globals.scss';
 
 const propTypes = {
   children: PropTypes.node,

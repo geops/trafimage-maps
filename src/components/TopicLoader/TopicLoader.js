@@ -59,7 +59,17 @@ class TopicLoader extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic, topics, dispatchSetActiveTopic } = this.props;
+    const {
+      activeTopic,
+      topics,
+      dispatchSetActiveTopic,
+      apiKey,
+      cartaroUrl,
+      geoServerUrl,
+      vectorTilesKey,
+      vectorTilesUrl,
+    } = this.props;
+
     if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
     }
@@ -68,6 +78,17 @@ class TopicLoader extends Component {
       const newActiveTopic = topics.find(topic => topic.active) || topics[0];
       dispatchSetActiveTopic(newActiveTopic);
       this.updateServices(newActiveTopic);
+    }
+
+    if (
+      vectorTilesUrl !== prevProps.vectorTilesUrl ||
+      apiKey !== prevProps.apiKey ||
+      vectorTilesKey !== prevProps.vectorTilesKey ||
+      vectorTilesUrl !== prevProps.vectorTilesUrl ||
+      cartaroUrl !== prevProps.cartaroUrl ||
+      geoServerUrl !== prevProps.geoServerUrl
+    ) {
+      this.updateServices(activeTopic);
     }
   }
 

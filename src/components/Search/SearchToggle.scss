@@ -1,4 +1,4 @@
-@import '../../Globals.scss';
+@import '../../globals.scss';
 
 .wkp-search-toggle-container,
 .wkp-search-toggle-container--open {
@@ -25,18 +25,5 @@
     svg {
       fill: $brand-primary;
     }
-  }
-}
-
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-search-toggle-container {
-    display: none;
-  }
-
-  .wkp-search-toggle-button,
-  .wkp-search-toggle-container--open {
-    display: block;
-    margin-right: 0;
   }
 }

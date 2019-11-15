@@ -357,7 +357,12 @@ export const buslines = new MapboxStyleLayer({
     'source-layer': 'busses',
     paint: {
       'line-color': 'rgba(255, 220, 0, 1)',
-      'line-width': 3,
+      'line-width': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        10,
+        3,
+      ],
       'line-opacity': 1,
     },
   },
