@@ -54,7 +54,6 @@
   "ch.sbb.mobz": "Mobilitätshubs",
   "ch.sbb.mobz-desc": "Mobilitätshubs",
   "ch.sbb.netzkarte": "Swiss public transport network map",
-  "ch.sbb.netzkarte-desc": "The network map is aimed at public transport users. It is a basic map derived from timetable data. Relevant information can be accessed directly from the map by clicking on the required station. Under Layer, there is further content which can be displayed on the map.<p>Responsible: Trafimage System Manager Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a>.</p>",
   "ch.sbb.netzkarte.buslinien": "Bus routes",
   "ch.sbb.netzkarte.buslinien-desc": "The exact geographic course of the bus routes was established via an automated routing procedure (<a target=\"_blank\" href=\"http://geops.de/node/171?language=en\">details</a>). The data are not editorial revised and improved continuously.",
   "ch.sbb.netzkarte.flughafen": "Airports",

@@ -66,7 +66,6 @@
   "ch.sbb.mobz": "Mobilitätshubs",
   "ch.sbb.mobz-desc": "Mobilitätshubs",
   "ch.sbb.netzkarte": "Carta di rete dei trasporti pubblici svizzeri",
-  "ch.sbb.netzkarte-desc": "La carta di rete è destinata agli utenti dei trasporti pubblici. Si tratta di una cartina di base che fa riferimento ai dati dell’orario. È sufficiente fare clic sulla stazione desiderata direttamente sulla cartina per consultare le informazioni corrispondenti. Alla voce «Layer» sono disponibili ulteriori contenuti che possono essere visualizzati sulla carta.<p>Responsabile: Fachbus Trafimage, Daniel Hofstetter, <a href=\"mailto:trafimage@ffs.ch\">trafimage@ffs.ch</a>.</p>",
   "ch.sbb.netzkarte.buslinien": "Linee di autobus",
   "ch.sbb.netzkarte.buslinien-desc": "Il tracciato geografico esatto delle linee di autobus è stato ricavato tramite una procedura di routing automatizzata (<a target=\"_blank\" href=\"http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs\">dettagli</a>). I dati non sono rielaborati a livello redazionale e vengono costantemente ottimizzati.",
   "ch.sbb.netzkarte.flughafen": "Aeroporto",

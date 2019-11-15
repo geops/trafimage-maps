@@ -32,7 +32,7 @@ export const netzkarte = {
     bahnhofplaene,
   ],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.netzkarte-desc',
+  layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
 };
 
