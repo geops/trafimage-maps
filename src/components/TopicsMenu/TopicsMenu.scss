@@ -1,8 +1,6 @@
 .wkp-topics-menu {
   border: 2px solid #666;
   max-height: 1000px;
-  overflow: hidden;
-  padding: 2px; // To have space for barrier free outline.
 
   .wkp-menu-item {
     border: none;
@@ -24,7 +22,6 @@
     overflow-y: auto;
     background: white;
     padding: 10px 15px;
-    position: relative;
   }
 }
 
@@ -36,6 +33,9 @@
     padding: 0;
 
     .wkp-menu-header {
+      padding: 7px;
+      margin: 3px 4px; //For barrier free outline
+
       .wkp-menu-title {
         display: none;
       }
@@ -44,6 +44,12 @@
     .wkp-topics-menu-body {
       padding: 0;
       border-top: 1px solid #eee;
+    }
+  }
+
+  .tm-barrier-free {
+    .wkp-topic-menu-item {
+      margin: 4px;
     }
   }
 

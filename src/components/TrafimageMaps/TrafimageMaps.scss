@@ -16,10 +16,6 @@ body {
     outline-color: #3f83d1;
   }
 
-  .wkp-menu-header:focus {
-    z-index: 999;
-  }
-
   &.tm-no-focus *:focus {
     outline: none;
   }
@@ -95,12 +91,5 @@ select {
 .tm-app.tm-w-xs {
   .tm-base-layer-toggler {
     display: none;
-  }
-
-  .tm-barrier-free {
-    .wkp-menu-header:focus {
-      padding: 7px;
-      margin: 3px;
-    }
   }
 }
