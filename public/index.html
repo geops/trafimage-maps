@@ -69,8 +69,15 @@
         const map = document.getElementById('map');
         const evts = document.getElementById('events');
         map.addEventListener('moveend', function(evt) {
+          console.log(evt);
           evts.innerHTML =
-            evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
+            evt.type +
+            ':<br>' +
+            evt.detail.map.getView().getZoom() +
+            ',' +
+            evt.detail.map.getView().getCenter() +
+            '<br>' +
+            evts.innerHTML;
         });
         map.addEventListener('singleclick', function(evt) {
           evts.innerHTML =
