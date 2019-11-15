@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from 'react-i18next';
 import Layer from 'react-spatial/layers/Layer';
 import Dialog from '../Dialog';
+import layerInfos from '../../layerInfos';
 
 const propTypes = {
   selectedForInfos: PropTypes.object,
@@ -31,8 +32,16 @@ function LayerInfosDialog(props) {
     return null;
   }
 
+  const LayerInfoComponent =
+    layerInfos[
+      selectedForInfos.layerInfoComponent ||
+        selectedForInfos.get('layerInfoComponent')
+    ];
+
   let body;
-  if (selectedForInfos instanceof Layer) {
+  if (LayerInfoComponent) {
+    body = <LayerInfoComponent language={language} />;
+  } else if (selectedForInfos instanceof Layer) {
     body = (
       <Trans
         i18nKey={selectedForInfos.get('description') || ''}
