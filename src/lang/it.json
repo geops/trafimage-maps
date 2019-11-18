@@ -84,7 +84,6 @@
   "ch.sbb.puenktlichkeit": "Puntualità",
   "ch.sbb.puenktlichkeit-all": "Tutto",
   "ch.sbb.puenktlichkeit-all-desc": "Tutto",
-  "ch.sbb.puenktlichkeit-desc": "Il train tracker mostra i collegamenti aggiornati sulla base dell'orario teorico e attuale dei trasporti pubblici svizzeri.<p><0></p><p>Dati: <a href=\"https://opentransportdata.swiss/\" target=\"_blank\">opentransportdata.swiss</a>.</p>",
   "ch.sbb.puenktlichkeit-fv": "Traffico a lunga percorrenza",
   "ch.sbb.puenktlichkeit-fv-desc": "Traffico a lunga percorrenza",
   "ch.sbb.puenktlichkeit-nv": "Traffico regionale",

@@ -4,6 +4,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
+import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
@@ -16,6 +17,7 @@ export default {
   InfrastrukturTopicInfo,
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,
+  PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,

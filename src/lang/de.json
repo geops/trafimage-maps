@@ -77,7 +77,6 @@
   "ch.sbb.puenktlichkeit": "Pünktlichkeit",
   "ch.sbb.puenktlichkeit-all": "Alle",
   "ch.sbb.puenktlichkeit-all-desc": "Alle",
-  "ch.sbb.puenktlichkeit-desc": "Der Zugtracker zeigt die aktuellen Verbindungen basierend auf dem Soll- und Ist-Fahrplan des Schweizer ÖV.<p><0/></p><p>Daten: <a href=\"https://opentransportdata.swiss/\" target=\"_blank\">opentransportdata.swiss</a>.</p>",
   "ch.sbb.puenktlichkeit-fv": "Fernverkehr",
   "ch.sbb.puenktlichkeit-fv-desc": "Fernverkehr",
   "ch.sbb.puenktlichkeit-nv": "Regionalverkehr",

@@ -72,7 +72,6 @@
   "ch.sbb.puenktlichkeit": "Punctuality",
   "ch.sbb.puenktlichkeit-all": "All",
   "ch.sbb.puenktlichkeit-all-desc": "All",
-  "ch.sbb.puenktlichkeit-desc": "The train tracker shows current connections based on the planned and actual timetable for Swiss public transport.<p><0></p><p>Data: <a href=\"https://opentransportdata.swiss/\" target=\"_blank\">opentransportdata.swiss</a>.</p>",
   "ch.sbb.puenktlichkeit-fv": "Long-distance services",
   "ch.sbb.puenktlichkeit-fv-desc": "Long-distance services",
   "ch.sbb.puenktlichkeit-nv": "Regional services",

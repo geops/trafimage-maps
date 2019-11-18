@@ -277,9 +277,7 @@ export const punctuality = new Layer({
   visible: false,
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.puenktlichkeit-desc',
-    legendUrl:
-      '/img/layers/puenktlichkeit/puenktlichkeit_legend_{language}.png',
+    layerInfoComponent: 'PunctualityLayerInfo',
   },
 });
 
