@@ -93,6 +93,7 @@ export const bauprojekte = {
   ],
   projection: 'EPSG:3857',
   description: 'ch.sbb.construction-desc',
+  searches: defaultSearches,
 };
 
 export const behig = {
