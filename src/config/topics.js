@@ -93,6 +93,7 @@ export const bauprojekte = {
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
+  searches: defaultSearches,
 };
 
 export const behig = {

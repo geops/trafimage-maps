@@ -1,7 +1,6 @@
 .wkp-topics-menu {
   border: 2px solid #666;
   max-height: 1000px;
-  overflow: hidden;
 
   .wkp-menu-item {
     border: none;
@@ -23,6 +22,5 @@
     overflow-y: auto;
     background: white;
     padding: 10px 15px;
-    position: relative;
   }
 }
