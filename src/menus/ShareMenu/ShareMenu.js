@@ -12,7 +12,7 @@ const ShareMenu = () => {
       open
       className="wkp-share-menu"
       title={t('Teilen')}
-      icon={<FaShareAlt />}
+      icon={<FaShareAlt focusable={false} />}
       collapsed={collapsed}
       onCollapseToggle={c => setCollapsed(c)}
     >
