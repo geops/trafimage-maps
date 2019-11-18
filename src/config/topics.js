@@ -93,7 +93,7 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
-  description: 'ch.sbb.infrastruktur-desc',
+  layerInfoComponent: 'InfrastrukturTopicInfo',
 };
 
 export const regionenkarte = {

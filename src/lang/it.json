@@ -49,7 +49,6 @@
   "ch.sbb.infofpw": "Informazioni cambiamento d'orario",
   "ch.sbb.infofpw-desc": "L’infografica informa sulle sfide d’esercizio per ogni stazione. L'infografica pilota del cambiamento d'orario di dicembre 2018 si limita alle regioni di Zurigo e della Svizzera orientale.<p>Responsabile: P-V-STA-BWP, <a href=\"mailto:xp487@sbb.ch\">xp487@sbb.ch</a></p>",
   "ch.sbb.infrastruktur": "Infrastruttura ferroviaria Svizzera",
-  "ch.sbb.infrastruktur-desc": "<p>La cartina infrastruttura mostra l’intera infrastruttura ferroviaria della Svizzera, comprensiva dei punti di esercizio per una determinata tratta. La cartina distingue tra l’infrastruttura delle FFS (con relative società affiliate) e l’infrastruttura delle altre imprese ferroviarie. Il materiale cartografico serve principalmente da supporto per le cartine tematiche interne alle FFS.</p><p>Aggiornamento dei dati: 2017</p><p>Versione della base cartografica: 2017</p><p>Responsabile: Fachbus Trafimage, Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a></p>",
   "ch.sbb.infrastruktur.bg_blau": "Cartina standard",
   "ch.sbb.infrastruktur.bg_grau": "Carte Blanche",
   "ch.sbb.infrastruktur.blank": "Nessuna carta",

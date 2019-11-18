@@ -39,7 +39,6 @@
   "ch.sbb.dfanachfuehrung-desc": "Geographische Darstellung der aktuellen Lage zum Stand der DfA-Nachführung bzgl. Status über Arbeitsfortschritt, Inbetriebnahme und Abschluss sowie den Stand der periodischen Kontrolle.",
   "ch.sbb.handicap": "Personen mit eingeschränkter Mobilität",
   "ch.sbb.infrastruktur": "Railway infrastructure in Switzerland",
-  "ch.sbb.infrastruktur-desc": "<p>The infrastructure map shows all Swiss railway infrastructure including route operating points. The map differentiates between SBB infrastructure, including subsidiaries, and the infrastructure of other railway companies. The map is primarily used as a background map for SBB internal map topics.</p><p>Data status: 2017</p><p>Base map status 2017</p><p>Contact person: Trafimage System Manager Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a></p>",
   "ch.sbb.infrastruktur.bg_blau": "Standard map",
   "ch.sbb.infrastruktur.bg_grau": "Carte Blanche",
   "ch.sbb.infrastruktur.blank": "No background",

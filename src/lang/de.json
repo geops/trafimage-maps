@@ -39,7 +39,6 @@
   "ch.sbb.infofpw": "Informationen Fahrplanwechsel",
   "ch.sbb.infofpw-desc": "Die Infografik gibt Auskunft über die betrieblichen Herausforderungen je Bahnhof. Der Pilot zum Fahrplanwechsel im Dezember 2018 ist auf die Regionen Zürich und Ostschweiz beschränkt.<p>Verantwortlich: P-V-STA-BWP, <a href=\"mailto:xp487@sbb.ch\">xp487@sbb.ch</a></p>",
   "ch.sbb.infrastruktur": "Eisenbahninfrastruktur Schweiz",
-  "ch.sbb.infrastruktur-desc": "<p>Die Infrastrukturkarte zeigt die komplette Schweizer Eisenbahninfrastruktur inkl. den streckenbezogenen Betriebspunkten. In der Karte kann zwischen der Infrastruktur der SBB inkl. Tochtergesellschaften und der Infrasturktur der übrigen Eisenbahnunternehmen unterschieden werden. Das Kartenmaterial dient in erster Linie bei SBB-internen Kartenthemen als Hintergrundkarte.</p><p>Datenstand: 2018</p><p>Stand Kartengrundlage: 2018</p><p>Verantwortlich: Fachbus Trafimage, Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a></p>",
   "ch.sbb.infrastruktur.bg_blau": "Standardkarte",
   "ch.sbb.infrastruktur.bg_grau": "Carte Blanche",
   "ch.sbb.infrastruktur.blank": "Kein Hintergrund",

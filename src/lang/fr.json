@@ -49,7 +49,6 @@
   "ch.sbb.infofpw": "Informations changement d'horaire",
   "ch.sbb.infofpw-desc": "L'infographie illustre les défis de chaque gare pour assurer l'exploitation. L'infographie pilote du changement d'horaire de décembre 2018 se limite aux régions de Zurich et de la Suisse orientale.<p>Responsable: P-V-STA-BWP, <a href=\"mailto:xp487@sbb.ch\">xp487@sbb.ch</a></p>",
   "ch.sbb.infrastruktur": "Infrastructure ferroviaire suisse",
-  "ch.sbb.infrastruktur-desc": "<p>La carte des infrastructures indique l’emplacement de toutes les infrastructures ferroviaires de Suisse, points d’exploitation propres aux tronçons compris. Cette carte réalise une distinction entre les infrastructures des CFF et de leurs filiales, d’une part, et celles des autres entreprises de chemin de fer, d’autre part. Elle est conçue en premier lieu pour servir de référence dans le cadre des thèmes internes aux CFF en matière de cartographie.</p><p>État des données: 2017</p><p>État de la base de données de la carte: 2017</p><p>Responsable: Fachbus Trafimage, Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a></p>",
   "ch.sbb.infrastruktur.bg_blau": "Carte standard",
   "ch.sbb.infrastruktur.bg_grau": "Carte Blanche",
   "ch.sbb.infrastruktur.blank": "Pas de fond de carte",
