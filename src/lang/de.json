@@ -53,7 +53,6 @@
   "ch.sbb.mobz-desc": "Mobilitätshubs",
   "ch.sbb.netzkarte": "öV-Netzkarte Schweiz",
   "ch.sbb.netzkarte.buslinien": "Buslinien",
-  "ch.sbb.netzkarte.buslinien-desc": "Der geographisch exakte Verlauf der Buslinien wurde über ein automatisiertes Routing-Verfahren (<a target=\"_blank\" href=\"http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs\">Details hier</a>) hergeleitet. Die Daten sind nicht redaktionell überarbeitet und werden laufend verbessert.",
   "ch.sbb.netzkarte.flughafen": "Flughäfen",
   "ch.sbb.netzkarte.landeskarte": "Landeskarte",
   "ch.sbb.netzkarte.landeskarte.grau": "Landeskarte (grau)",

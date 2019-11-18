@@ -1,4 +1,5 @@
 import BehigTopicInfo from './BehigTopicInfo';
+import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
 import HandicapTopicInfo from './HandicapTopicInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
@@ -12,6 +13,7 @@ import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 
 export default {
   BehigTopicInfo,
+  BuslinesLayerInfo,
   ConstructionTopicInfo,
   HandicapTopicInfo,
   InfrastrukturTopicInfo,

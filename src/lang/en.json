@@ -51,7 +51,6 @@
   "ch.sbb.mobz-desc": "Mobilitätshubs",
   "ch.sbb.netzkarte": "Swiss public transport network map",
   "ch.sbb.netzkarte.buslinien": "Bus routes",
-  "ch.sbb.netzkarte.buslinien-desc": "The exact geographic course of the bus routes was established via an automated routing procedure (<a target=\"_blank\" href=\"http://geops.de/node/171?language=en\">details</a>). The data are not editorial revised and improved continuously.",
   "ch.sbb.netzkarte.flughafen": "Airports",
   "ch.sbb.netzkarte.landeskarte": "Swiss National Map",
   "ch.sbb.netzkarte.landeskarte.grau": "Swiss National Map (grey)",

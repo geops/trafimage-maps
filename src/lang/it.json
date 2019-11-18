@@ -63,7 +63,6 @@
   "ch.sbb.mobz-desc": "Mobilitätshubs",
   "ch.sbb.netzkarte": "Carta di rete dei trasporti pubblici svizzeri",
   "ch.sbb.netzkarte.buslinien": "Linee di autobus",
-  "ch.sbb.netzkarte.buslinien-desc": "Il tracciato geografico esatto delle linee di autobus è stato ricavato tramite una procedura di routing automatizzata (<a target=\"_blank\" href=\"http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs\">dettagli</a>). I dati non sono rielaborati a livello redazionale e vengono costantemente ottimizzati.",
   "ch.sbb.netzkarte.flughafen": "Aeroporto",
   "ch.sbb.netzkarte.landeskarte": "Carta nazionale",
   "ch.sbb.netzkarte.landeskarte.grau": "Carta nazionale (grigio)",
