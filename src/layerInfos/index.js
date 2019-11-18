@@ -4,6 +4,7 @@ import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
+import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 
 export default {
@@ -13,5 +14,6 @@ export default {
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,
   RegionenkartePublicTopicInfo,
+  ShowcasesTopicInfo,
   NetzkarteTopicInfo,
 };

@@ -95,7 +95,6 @@
   "ch.sbb.regionenkarte.public": "Coordinatori Costruzioni in prossimità della ferrovia",
   "ch.sbb.sandbox": "Trafimage Sandbox",
   "ch.sbb.sandbox-desc": "Trafimage Sandbox",
-  "ch.sbb.showcases-desc": "<p>Il tema carta mostra diverse varianti della carta della rete Trafimage.</p><p>Le carte si differenziano a livello cromatico e di quantità d’informazioni. Per la configurazione flessibile delle carte utilizziamo il nostro workflow basato su web, che copre tutti gli aspetti della produzione della carta (dall’integrazione dei dati, allo styling, alla pubblicazione).</p><p>Responsabile: Fachbus Trafimage, Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a>.</p>",
   "ch.sbb.stationen": "Confronto dati stazioni",
   "ch.sbb.stationen-desc": "I dati relativi a posizione e attributi di stazioni provengono da svariate fonti. Questo layer mostra per tutte le stazioni della Svizzera gli scostamenti tra le fonti dei dati. L’assegnazione delle stazioni avviene tramite il numero di stazione (IBNR).",
   "ch.sbb.stationen.haltestellen_oev": "Stazioni TP",

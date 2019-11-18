@@ -120,7 +120,7 @@ export const showcases = {
   },
   layers: [netzkarteShowcases],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.showcases-desc',
+  layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
 export default {

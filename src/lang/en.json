@@ -81,7 +81,6 @@
   "ch.sbb.regionenkarte.public": "Coordinators for construction work near railways",
   "ch.sbb.sandbox": "Trafimage Sandbox",
   "ch.sbb.sandbox-desc": "Trafimage Sandbox",
-  "ch.sbb.showcases-desc": "<p>The map theme shows different variants of the Trafimage network map.</p><p>The maps differ in terms of level of information and colour design. For the flexible creation of these and other maps, we use our web-based workflow, which covers all aspects of map production from data integration and styling to publication.</p><p>Contact person: Trafimage System Manager Daniel Hofstetter, <a href=\"mailto:trafimage@sbb.ch\">trafimage@sbb.ch</a>.</p>",
   "ch.sbb.stationen": "Station data comparison",
   "ch.sbb.stationen-desc": "The location and attributes of stations are available from a range of data sources. This layer shows the differences between the data sources for all stations in Switzerland. The stations are classified based on their station number (IBNR).",
   "ch.sbb.stationen.haltestellen_oev": "Public Transport Stops",
