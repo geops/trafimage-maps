@@ -6,6 +6,7 @@ import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
+import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 
 export default {
@@ -17,5 +18,6 @@ export default {
   PassagierFrequenzenLayerInfo,
   RegionenkartePublicTopicInfo,
   ShowcasesTopicInfo,
+  TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,
 };

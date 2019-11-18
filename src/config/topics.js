@@ -106,8 +106,7 @@ export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
-  description: 'ch.sbb.tarifverbundkarte.public-desc',
-  legendUrl: '/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png',
+  layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 
 export const showcases = {
