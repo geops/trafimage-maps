@@ -1,4 +1,5 @@
 import defaultBaseLayers, {
+  swisstopoSwissImage,
   bahnhofplaene,
   passagierfrequenzen,
   netzkarteLayer,
@@ -10,6 +11,10 @@ import defaultBaseLayers, {
   netzkarteShowcases,
   parks,
   stuetzpunktbahnhoefe,
+  constrUnterhalt,
+  constrAusbau,
+  constrSingleLayer,
+  constrClusterLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -77,7 +82,16 @@ export const casa = {
 export const bauprojekte = {
   name: 'ch.sbb.construction',
   key: 'ch.sbb.construction',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.construction',
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [
+    netzkarteLayer,
+    swisstopoSwissImage,
+    constrUnterhalt,
+    constrAusbau,
+    constrSingleLayer,
+    constrClusterLayer,
+  ],
+  projection: 'EPSG:3857',
   description: 'ch.sbb.construction-desc',
 };
 

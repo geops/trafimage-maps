@@ -136,7 +136,9 @@ class TopicLoader extends Component {
     dispatchSetLayers(topicLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      if (flatLayers[i].setGeoServerWMSUrl) {
+      if (flatLayers[i].setGeoServerUrl) {
+        flatLayers[i].setGeoServerUrl(geoServerUrl);
+      } else if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
       } else if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
