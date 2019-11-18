@@ -1,0 +1,25 @@
+.wkp-construction-popup {
+  .wkp-construction-popup-subtitle {
+    font-style: italic;
+    padding-bottom: 7px;
+  }
+
+  .wkp-construction-popup-desc {
+    padding-bottom: 4px;
+  }
+
+  .wkp-construction-popup-link {
+    padding: 3px 0;
+    border-width: 1px 0 0 0;
+    border-style: solid;
+    border-color: #eee;
+
+    &:last-child {
+      border-bottom-width: 1px;
+    }
+  }
+}
+
+.rs-popup > div {
+  min-width: 240px !important;
+}
