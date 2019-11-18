@@ -54,7 +54,7 @@ export const handicap = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.handicap-desc',
+  layerInfoComponent: 'HandicapTopicInfo',
   searches: { Stationen: handicapStopFinder },
 };
 
