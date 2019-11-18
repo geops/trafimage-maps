@@ -414,7 +414,7 @@ export const parks = new TrafimageGeoServerWMSLayer({
   }),
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.parks-desc',
+    layerInfoComponent: 'ParksLayerInfo',
     popupComponent: 'ParksPopup',
   },
 });

@@ -85,7 +85,6 @@
   "ch.sbb.nichtStuetzpunktbahnhoefe": "Nicht Stützpunktbahnhöfe",
   "ch.sbb.nichtStuetzpunktbahnhoefe-desc": "Nicht Stützpunktbahnhöfe",
   "ch.sbb.parks": "Parcs suisses",
-  "ch.sbb.parks-desc": "Aperçu de tous les parcs suisses d’importance nationale. Seuls les parcs en gestion sont affichés.<p>Données: <a href=\"http://www.parks.swiss/fr\" target=\"_blank\">www.parks.swiss/fr</a>.</p>",
   "ch.sbb.puenktlichkeit": "Ponctualité",
   "ch.sbb.puenktlichkeit-all": "Tous",
   "ch.sbb.puenktlichkeit-all-desc": "Tous",
