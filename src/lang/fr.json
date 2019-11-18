@@ -43,7 +43,6 @@
   "ch.sbb.ch_gemeinden": "Limites de commune",
   "ch.sbb.ch_gemeinden-desc": "Affichez/masquez les limites communales. Vous trouvez les communes via le champ de recherche.<p>Données:<br/>Office fédéral de la statistique, swisstopo (01.01.2018)</p>",
   "ch.sbb.construction": "Projet de construction de l'infrastructure ferroviaire",
-  "ch.sbb.construction-desc": "Sur cette carte, vous trouverez une sélection de projets d’aménagement et de maintenance des CFF, qu’ils soient planifiés ou déjà en cours de réalisation. Chaque entrée contient des liens vers des sites web et des fiches d’information comprenant les informations les plus importantes sur le projet en question.<p>Responsable: Communication CFF Infrastructure, <a href=\"mailto:Kommunikation-Infrastruktur@sbb.ch\">Kommunikation-Infrastruktur@sbb.ch</a></p>",
   "ch.sbb.dfanachfuehrung": "Carte de l’état de la mise à jour DfA",
   "ch.sbb.dfanachfuehrung-desc": "Représentation géographique de l’état actuel de la mise à jour DfA en termes d’avancement des travaux, de mise en service et de clôture des travaux ainsi que de l’état du contrôle périodique.",
   "ch.sbb.handicap": "Personen mit eingeschränkter Mobilität",

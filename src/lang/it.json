@@ -43,7 +43,6 @@
   "ch.sbb.ch_gemeinden": "Limiti comunali",
   "ch.sbb.ch_gemeinden-desc": "Visualizzazione dei confini comunali. I Comuni vengono individuati dal campo di ricerca.<p>Dati:<br/>Ufficio federale di statistica, swisstopo (01.01.2018)</p>",
   "ch.sbb.construction": "Progetti di costruzione dell'infrastruttura ferroviaria",
-  "ch.sbb.construction-desc": "Su questa cartina è riportata una gamma di progetti di manutenzione e ampliamento ferroviario delle FFS. Alcuni sono pianificati e altri sono in fase di realizzazione. Ciascun elemento contiene link a pagine Internet o schede informative con le informazioni più importanti sul progetto.<p>Responsabile: Comunicazione FFS Infrastruttura, <a href=\"mailto:Kommunikation-Infrastruktur@sbb.ch\">Kommunikation-Infrastruktur@sbb.ch</a></p>",
   "ch.sbb.dfanachfuehrung": "Situazione dell’aggiornamento DfA della cartina",
   "ch.sbb.dfanachfuehrung-desc": "Rappresentazione geografica della situazione attuale sulle condizioni dell’aggiornamento DfA per quanto riguarda lo stato dell’avanzamento lavori, della messa in servizio e della conclusione nonché del controllo periodico.",
   "ch.sbb.handicap": "Personen mit eingeschränkter Mobilität",

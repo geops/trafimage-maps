@@ -78,7 +78,7 @@ export const bauprojekte = {
   name: 'ch.sbb.construction',
   key: 'ch.sbb.construction',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.construction',
-  description: 'ch.sbb.construction-desc',
+  layerInfoComponent: 'ConstructionTopicInfo',
 };
 
 export const behig = {

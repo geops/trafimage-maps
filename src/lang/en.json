@@ -36,7 +36,6 @@
   "ch.sbb.ch_gemeinden": "Municipal borders",
   "ch.sbb.ch_gemeinden-desc": "Show/hide the municipal borders. You can find municipalities using the search field.<p>Data:<br/>Federal Statistical Office, swisstopo (01.01.2018)</p>",
   "ch.sbb.construction": "Railway infrastructure construction projects",
-  "ch.sbb.construction-desc": "This map shows you a selection of SBB’s rail upgrades and maintenance projects – some that are still in the planning stages and others that are currently being implemented. Each entry contains links to websites or fact sheets with the most important project information.<p>Responsibility lies with: Communications at SBB Infrastructure, <a href=\"mailto:Kommunikation-Infrastruktur@sbb.ch\">Kommunikation-Infrastruktur@sbb.ch</a></p>",
   "ch.sbb.dfanachfuehrung-desc": "Geographische Darstellung der aktuellen Lage zum Stand der DfA-Nachführung bzgl. Status über Arbeitsfortschritt, Inbetriebnahme und Abschluss sowie den Stand der periodischen Kontrolle.",
   "ch.sbb.handicap": "Personen mit eingeschränkter Mobilität",
   "ch.sbb.infrastruktur": "Railway infrastructure in Switzerland",

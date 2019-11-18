@@ -33,7 +33,6 @@
   "ch.sbb.ch_gemeinden": "Gemeindegrenzen",
   "ch.sbb.ch_gemeinden-desc": "Blenden Sie die Gemeindegrenzen ein/aus. Die Gemeinden finden Sie über das Suchfeld.<p>Daten:<br/>Bundesamt für Statistik, swisstopo (01.01.2018)</p>",
   "ch.sbb.construction": "Bauprojekte Bahninfrastruktur",
-  "ch.sbb.construction-desc": "Auf dieser Karte finden Sie eine Auswahl von Bahnausbau- und Unterhaltsprojekten der SBB – solche, die in Planung sind und solche, die ausgeführt werden. Jeder Eintrag enthält Links zu Webseiten oder Faktenblättern mit den wichtigsten Projektinformationen. <p>Verantwortlich: Kommunikation SBB Infrastruktur, <a href=\"mailto:Kommunikation-Infrastruktur@sbb.ch\">Kommunikation-Infrastruktur@sbb.ch</a></p>",
   "ch.sbb.dfanachfuehrung": "Karte DfA-Nachführungsstand",
   "ch.sbb.dfanachfuehrung-desc": "Geographische Darstellung der aktuellen Lage zum Stand der DfA-Nachführung bzgl. Status über Arbeitsfortschritt, Inbetriebnahme und Abschluss sowie den Stand der periodischen Kontrolle.",
   "ch.sbb.handicap": "Personen mit eingeschränkter Mobilität",
