@@ -501,8 +501,7 @@ export const constrUnterhalt = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.unterhalt.uebrige-desc',
-        legendUrl: '/img/layers/construction/Unterhalt_brigeStandorte.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Unterhalt',
           ort: 'Übrige Standorte',
@@ -515,8 +514,7 @@ export const constrUnterhalt = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.unterhalt.bahnhof_strecke-desc',
-        legendUrl: '/img/layers/construction/Unterhalt_BahnhofundStrecke.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Unterhalt',
           ort: 'Bahnhof und Strecke',
@@ -529,8 +527,7 @@ export const constrUnterhalt = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.unterhalt.strecke-desc',
-        legendUrl: '/img/layers/construction/Unterhalt_Strecke.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Unterhalt',
           ort: 'Strecke',
@@ -543,8 +540,7 @@ export const constrUnterhalt = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.unterhalt.bahnhof-desc',
-        legendUrl: '/img/layers/construction/Unterhalt_Bahnhof.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Unterhalt',
           ort: 'Bahnhof',
@@ -569,8 +565,7 @@ export const constrAusbau = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.ausbau.uebrige-desc',
-        legendUrl: '/img/layers/construction/Ausbau_brigeStandorte.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Ausbau',
           ort: 'Übrige Standorte',
@@ -583,8 +578,7 @@ export const constrAusbau = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.ausbau.bahnhof_strecke-desc',
-        legendUrl: '/img/layers/construction/Ausbau_BahnhofundStrecke.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Ausbau',
           ort: 'Bahnhof und Strecke',
@@ -597,8 +591,7 @@ export const constrAusbau = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.ausbau.strecke-desc',
-        legendUrl: '/img/layers/construction/Ausbau_Strecke.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Ausbau',
           ort: 'Strecke',
@@ -611,8 +604,7 @@ export const constrAusbau = new Layer({
       visible: true,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.construction.ausbau.bahnhof-desc',
-        legendUrl: '/img/layers/construction/Ausbau_Bahnhof.png',
+        layerInfoComponent: 'ConstructionLayerInfo',
         construction: {
           art: 'Ausbau',
           ort: 'Bahnhof',
