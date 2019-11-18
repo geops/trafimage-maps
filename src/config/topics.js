@@ -85,8 +85,7 @@ export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
-  description: 'ch.sbb.behig-desc',
-  legendUrl: '/img/topics/behig/behig_legend_{language}.jpg',
+  layerInfoComponent: 'BehigTopicInfo',
 };
 
 export const infrastruktur = {

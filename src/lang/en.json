@@ -31,7 +31,6 @@
   "ch.sbb.bahnhofplaene.printprodukte": "Print products",
   "ch.sbb.bahnhofplaene.printprodukte-desc": "These stations have a station plan. A poster (A0 or A1 format) and a version which is optimised for printing (A4 format) are always available.",
   "ch.sbb.behig": "Implementation of DDA",
-  "ch.sbb.behig-desc": "To implement the Disability Discrimination Act (DDA), extensive infrastructure adjustments are necessary. This map shows the current status of the SBB stations.<p>Responsible:<br/>I-AT-KUF-PAM, Simone Mundwiler, <a href=\"mailto:simone.mundwiler@sbb.ch\">simone.mundwiler@sbb.ch</a></p><p><0/></p>",
   "ch.sbb.casa": "CASA",
   "ch.sbb.ch_gemeinden": "Municipal borders",
   "ch.sbb.ch_gemeinden-desc": "Show/hide the municipal borders. You can find municipalities using the search field.<p>Data:<br/>Federal Statistical Office, swisstopo (01.01.2018)</p>",
