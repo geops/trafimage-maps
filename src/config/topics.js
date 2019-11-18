@@ -100,7 +100,7 @@ export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
-  description: 'ch.sbb.regionenkarte.public-desc',
+  layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
 export const tarifverbundkarte = {

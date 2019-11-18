@@ -86,7 +86,6 @@
   "ch.sbb.regionenkarte.intern": "Anlagenverantwortliche Überwachung",
   "ch.sbb.regionenkarte.intern-desc": "Übersicht der Anlagenverantwortungen AT-UEW für die Anlagengattungen Fahrbahn, Fahrstrom, Bahnzugang, Ingenieurbau, Wasser, Abwasser, Natur, Naturrisiken und Koordinatoren Bahnnahes Bauen. Die Karten enthalten zusätzlich Informationen über schweizweite und regionale Aufgaben (Lichtraumprofil, Schienenprüfung, Fahrweg, Regionenleitung) in der Anlagenüberwachung. <p>Verantwortlich: I-AT-UEW, Aurelia Kollros, <a href=\"mailto:aurelia.kollros@sbb.ch\">aurelia.kollros@sbb.ch</a></p>",
   "ch.sbb.regionenkarte.public": "Koordinatoren Bahnnahes Bauen",
-  "ch.sbb.regionenkarte.public-desc": "Hier finden Sie Ihre örtlichen Ansprechpartner zur Gewährleistung der Arbeitsstellensicherheit auf Baustellen von Dritten im Gefahrenbereich der Bahninfrastruktur. Die Koordinatoren Bahnnahes Bauen unterstützen Sie bei der korrekten Abwicklung Ihres Vorhabens. <p>Verantwortlich: SBB Infrastruktur, Anlagen&Technologie, Überwachung, Hilfikerstrasse 3, 3000 Bern 65, <a href=\"mailto:ueberwachung@sbb.ch\">ueberwachung@sbb.ch</a></p>",
   "ch.sbb.sandbox": "Trafimage Sandbox",
   "ch.sbb.sandbox-desc": "Trafimage Sandbox",
   "ch.sbb.showcases": "Showcases",

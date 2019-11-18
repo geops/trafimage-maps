@@ -3,6 +3,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
+import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 
 export default {
@@ -11,5 +12,6 @@ export default {
   InfrastrukturTopicInfo,
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,
+  RegionenkartePublicTopicInfo,
   NetzkarteTopicInfo,
 };
