@@ -46,6 +46,7 @@ export const netzkarte = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
+  telephone: '0800 007 102',
 };
 
 export const handicap = {
@@ -56,6 +57,7 @@ export const handicap = {
   projection: 'EPSG:3857',
   description: 'ch.sbb.handicap-desc',
   searches: { Stationen: handicapStopFinder },
+  telephone: '0800 007 102',
 };
 
 export const netzkarteStelen = {
@@ -64,6 +66,7 @@ export const netzkarteStelen = {
   layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
   elements: { popup: true },
   projection: 'EPSG:3857',
+  telephone: '0800 007 102',
 };
 
 export const casa = {
@@ -72,6 +75,7 @@ export const casa = {
   layers: [netzkarteLayer],
   elements: { popup: true },
   projection: 'EPSG:3857',
+  telephone: '0800 007 102',
 };
 
 export const bauprojekte = {
@@ -79,6 +83,7 @@ export const bauprojekte = {
   key: 'ch.sbb.construction',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.construction',
   description: 'ch.sbb.construction-desc',
+  telephone: '0800 007 102',
 };
 
 export const behig = {
@@ -87,6 +92,7 @@ export const behig = {
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
   description: 'ch.sbb.behig-desc',
   legendUrl: '/img/topics/behig/behig_legend_{language}.jpg',
+  telephone: '0800 007 102',
 };
 
 export const infrastruktur = {
@@ -94,6 +100,7 @@ export const infrastruktur = {
   key: 'ch.sbb.infrastruktur',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
   description: 'ch.sbb.infrastruktur-desc',
+  telephone: '0800 007 102',
 };
 
 export const regionenkarte = {
@@ -101,6 +108,7 @@ export const regionenkarte = {
   key: 'ch.sbb.regionenkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
   description: 'ch.sbb.regionenkarte.public-desc',
+  telephone: '0800 007 102',
 };
 
 export const tarifverbundkarte = {
@@ -109,6 +117,7 @@ export const tarifverbundkarte = {
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
   description: 'ch.sbb.tarifverbundkarte.public-desc',
   legendUrl: '/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png',
+  telephone: '0800 007 102',
 };
 
 export const showcases = {
