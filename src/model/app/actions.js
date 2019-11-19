@@ -7,9 +7,6 @@ export const SET_MENU_OPEN = 'SET_MENU_OPEN';
 export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
 export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
-export const SET_LINE_FILTER = 'SET_LINE_FILTER';
-export const SET_ROUTE_FILTER = 'SET_ROUTE_FILTER';
-export const SET_OPERATOR_FILTER = 'SET_OPERATOR_FILTER';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 
@@ -37,21 +34,6 @@ export const setSelectedForInfos = data => ({
 
 export const setDialogPosition = data => ({
   type: SET_DIALOG_POSITION,
-  data,
-});
-
-export const setLineFilter = data => ({
-  type: SET_LINE_FILTER,
-  data,
-});
-
-export const setRouteFilter = data => ({
-  type: SET_ROUTE_FILTER,
-  data,
-});
-
-export const setOperatorFilter = data => ({
-  type: SET_OPERATOR_FILTER,
   data,
 });
 

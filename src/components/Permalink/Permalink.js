@@ -7,15 +7,11 @@ import { transform } from 'ol/proj';
 import qs from 'query-string';
 import OLMap from 'ol/Map';
 import Feature from 'ol/Feature';
-import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
 
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
-  setLineFilter,
-  setRouteFilter,
-  setOperatorFilter,
   setDeparturesFilter,
   setClickedFeatureInfo,
 } from '../../model/app/actions';
@@ -33,17 +29,11 @@ const propTypes = {
   }).isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  lineFilter: PropTypes.string,
-  routeFilter: PropTypes.string,
-  operatorFilter: PropTypes.string,
   departuresFilter: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
-  dispatchSetLineFilter: PropTypes.func.isRequired,
-  dispatchSetRouteFilter: PropTypes.func.isRequired,
-  dispatchSetOperatorFilter: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
 };
@@ -52,9 +42,6 @@ const defaultProps = {
   history: undefined,
   initialState: {},
   departuresFilter: undefined,
-  lineFilter: undefined,
-  routeFilter: undefined,
-  operatorFilter: undefined,
 };
 
 class Permalink extends PureComponent {
@@ -63,9 +50,6 @@ class Permalink extends PureComponent {
       dispatchSetZoom,
       dispatchSetCenter,
       initialState,
-      dispatchSetLineFilter,
-      dispatchSetRouteFilter,
-      dispatchSetOperatorFilter,
       dispatchSetDeparturesFilter,
     } = this.props;
 
@@ -112,9 +96,6 @@ class Permalink extends PureComponent {
     this.departures =
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
 
-    dispatchSetLineFilter(lineFilter);
-    dispatchSetRouteFilter(routeFilter);
-    dispatchSetOperatorFilter(operatorFilter);
     dispatchSetDeparturesFilter(this.departures);
 
     this.setState({
@@ -126,15 +107,7 @@ class Permalink extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const {
-      activeTopic,
-      history,
-      departuresFilter,
-      lineFilter,
-      routeFilter,
-      operatorFilter,
-      layerService,
-    } = this.props;
+    const { activeTopic, history, departuresFilter, layerService } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}${window.location.search}`);
@@ -142,18 +115,6 @@ class Permalink extends PureComponent {
 
     if (departuresFilter !== prevProps.departuresFilter) {
       this.updateDepartures();
-    }
-
-    if (lineFilter !== prevProps.lineFilter) {
-      this.updateUrlParam(TrajservLayer.LINE_FILTER, lineFilter);
-    }
-
-    if (routeFilter !== prevProps.routeFilter) {
-      this.updateUrlParam(TrajservLayer.ROUTE_FILTER, routeFilter);
-    }
-
-    if (operatorFilter !== prevProps.operatorFilter) {
-      this.updateUrlParam(TrajservLayer.OPERATOR_FILTER, operatorFilter);
     }
 
     if (this.loadDepartureOnce && this.departures) {
@@ -220,12 +181,6 @@ class Permalink extends PureComponent {
     });
   }
 
-  updateUrlParam(key, value) {
-    this.setState({
-      [key]: value,
-    });
-  }
-
   render() {
     const { history, layerService, map } = this.props;
 
@@ -248,18 +203,12 @@ const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   map: state.app.map,
   layerService: state.app.layerService,
-  lineFilter: state.app.lineFilter,
-  routeFilter: state.app.routeFilter,
-  operatorFilter: state.app.operatorFilter,
   departuresFilter: state.app.departuresFilter,
 });
 
 const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetZoom: setZoom,
-  dispatchSetLineFilter: setLineFilter,
-  dispatchSetRouteFilter: setRouteFilter,
-  dispatchSetOperatorFilter: setOperatorFilter,
   dispatchSetDeparturesFilter: setDeparturesFilter,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
