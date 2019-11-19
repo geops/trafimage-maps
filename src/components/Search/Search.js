@@ -52,7 +52,6 @@ function Search() {
   return (
     Object.keys(searchService.searches).length > 0 && (
       <>
-        {isTabBlured ? <TopicTelephoneInfos /> : null}
         <div className="wkp-search">
           <SearchToggle>
             <Autosuggest
@@ -156,6 +155,7 @@ function Search() {
               <FaSearch focusable={false} />
             </button>
           </SearchToggle>
+          {isTabBlured ? <TopicTelephoneInfos /> : null}
         </div>
       </>
     )

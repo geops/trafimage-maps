@@ -8,14 +8,15 @@
   padding: 10px;
   width: 200px;
   position: absolute;
-  top: 110px;
-  left: 10px;
+  top: 90px;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 .tm-w-m,
 .tm-w-s,
 .tm-w-xs {
   .wkp-tel-infos {
-    top: 70px;
+    top: 60px;
   }
 }
