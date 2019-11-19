@@ -181,7 +181,7 @@ class TrackerMenu extends Component {
                   <FilterButton
                     title="Filter"
                     active={!!routeFilter}
-                    onChange={() =>
+                    onClick={() =>
                       dispatchSetRouteFilter(
                         routeFilter ? undefined : routeIdentifier.split('.')[0],
                       )
@@ -195,7 +195,7 @@ class TrackerMenu extends Component {
                     setCenter={coord => dispatchSetCenter(coord)}
                     title="Follow"
                     active={followActive}
-                    onChange={active =>
+                    onClick={active =>
                       this.setState({
                         followActive: active,
                       })
