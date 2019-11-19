@@ -83,6 +83,7 @@
   "ch.sbb.netzkarte.night": "Swiss public transport network map (night)",
   "ch.sbb.netzkarte.night-desc": "The dark version of the Trafimage network map could be used to display a nighttime network, for example.",
   "ch.sbb.netzkarte.relief": "Network map (Relief)",
+  "ch.sbb.netzkarte.showcases": "Trafimage network map",
   "ch.sbb.netzkarte.showcases-desc": "This view shows a version of the Trafimage network map which is optimised for user friendliness and accessibility.",
   "ch.sbb.netzkarte.stationen": "Stations",
   "ch.sbb.netzkarte.tarifverbunde": "Fare networks",

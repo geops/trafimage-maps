@@ -95,6 +95,7 @@
   "ch.sbb.netzkarte.night": "Carte du réseau des TP suisses (nuit)",
   "ch.sbb.netzkarte.night-desc": "La version foncée de la carte du réseau Trafimage peut être utilisée pour afficher un réseau de nuit par exemple.",
   "ch.sbb.netzkarte.relief": "Carte du réseau (Relief)",
+  "ch.sbb.netzkarte.showcases": "Carte du réseau Trafimage",
   "ch.sbb.netzkarte.showcases-desc": "Cette vue montre la représentation optimisée de la carte du réseau Trafimage en termes de convivialité et d’accessibilité.",
   "ch.sbb.netzkarte.stationen": "Gares",
   "ch.sbb.netzkarte.tarifverbunde": "Communauté tarifaire",
