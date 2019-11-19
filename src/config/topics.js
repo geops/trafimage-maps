@@ -1,4 +1,5 @@
 import defaultBaseLayers, {
+  swisstopoSwissImage,
   bahnhofplaene,
   passagierfrequenzen,
   netzkarteLayer,
@@ -10,6 +11,10 @@ import defaultBaseLayers, {
   netzkarteShowcases,
   parks,
   stuetzpunktbahnhoefe,
+  constrUnterhalt,
+  constrAusbau,
+  constrSingleLayer,
+  constrClusterLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -55,9 +60,8 @@ export const handicap = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.handicap-desc',
+  layerInfoComponent: 'HandicapTopicInfo',
   searches: { Stationen: handicapStopFinder },
-  telephone: '0800 007 102',
 };
 
 export const netzkarteStelen = {
@@ -66,7 +70,6 @@ export const netzkarteStelen = {
   layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
   elements: { popup: true },
   projection: 'EPSG:3857',
-  telephone: '0800 007 102',
 };
 
 export const casa = {
@@ -75,15 +78,23 @@ export const casa = {
   layers: [netzkarteLayer],
   elements: { popup: true },
   projection: 'EPSG:3857',
-  telephone: '0800 007 102',
 };
 
 export const bauprojekte = {
   name: 'ch.sbb.construction',
   key: 'ch.sbb.construction',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.construction',
-  description: 'ch.sbb.construction-desc',
-  telephone: '0800 007 102',
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [
+    netzkarteLayer,
+    swisstopoSwissImage,
+    constrUnterhalt,
+    constrAusbau,
+    constrSingleLayer,
+    constrClusterLayer,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'ConstructionTopicInfo',
+  searches: defaultSearches,
 };
 
 export const behig = {
@@ -92,15 +103,14 @@ export const behig = {
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
   description: 'ch.sbb.behig-desc',
   legendUrl: '/img/topics/behig/behig_legend_{language}.jpg',
-  telephone: '0800 007 102',
+  layerInfoComponent: 'BehigTopicInfo',
 };
 
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
-  description: 'ch.sbb.infrastruktur-desc',
-  telephone: '0800 007 102',
+  layerInfoComponent: 'InfrastrukturTopicInfo',
 };
 
 export const regionenkarte = {
@@ -108,16 +118,14 @@ export const regionenkarte = {
   key: 'ch.sbb.regionenkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
   description: 'ch.sbb.regionenkarte.public-desc',
-  telephone: '0800 007 102',
+  layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
-  description: 'ch.sbb.tarifverbundkarte.public-desc',
-  legendUrl: '/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png',
-  telephone: '0800 007 102',
+  layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 
 export const showcases = {
@@ -129,7 +137,7 @@ export const showcases = {
   },
   layers: [netzkarteShowcases],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.showcases-desc',
+  layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
 export default {

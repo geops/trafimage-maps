@@ -25,7 +25,10 @@ const Popup = () => {
 
   const { coordinate, features } = clickedFeatureInfo[0];
   const geom = features[0].getGeometry();
-  const coord = geom instanceof Point ? geom.getCoordinates() : coordinate;
+  const coord =
+    features.length === 1 && geom instanceof Point
+      ? geom.getCoordinates()
+      : coordinate;
   const mapRect = map.getTarget().getBoundingClientRect();
 
   return (

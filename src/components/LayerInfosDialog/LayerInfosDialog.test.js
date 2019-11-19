@@ -22,8 +22,7 @@ describe('LayerInfosDialog', () => {
       name: 'test',
       olLayer: new OLLayer(),
       properties: {
-        description: 'description<0/>',
-        legendUrl: 'legendUrl',
+        description: 'description<br/>break',
       },
     });
     store = mockStore({

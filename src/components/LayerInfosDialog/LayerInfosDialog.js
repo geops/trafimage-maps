@@ -16,13 +16,6 @@ const defaultProps = {
 
 export const NAME = 'infoDialog';
 
-const getLegendUrl = (legendUrl, language) => {
-  const src = legendUrl || '';
-  return /{language}/.test(legendUrl)
-    ? src.replace('{language}', language)
-    : src;
-};
-
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
@@ -32,41 +25,22 @@ function LayerInfosDialog(props) {
     return null;
   }
 
-  const LayerInfoComponent =
-    layerInfos[
-      selectedForInfos.layerInfoComponent ||
-        selectedForInfos.get('layerInfoComponent')
-    ];
+  const componentName =
+    selectedForInfos instanceof Layer
+      ? selectedForInfos.get('layerInfoComponent')
+      : selectedForInfos.layerInfoComponent;
+
+  const description =
+    selectedForInfos instanceof Layer
+      ? selectedForInfos.get('description')
+      : selectedForInfos.description;
 
   let body;
-  if (LayerInfoComponent) {
-    body = <LayerInfoComponent language={language} />;
-  } else if (selectedForInfos instanceof Layer) {
-    body = (
-      <Trans
-        i18nKey={selectedForInfos.get('description') || ''}
-        components={[
-          <img
-            src={getLegendUrl(selectedForInfos.get('legendUrl'), language)}
-            draggable="false"
-            alt={t('Kein Bildtext')}
-          />,
-        ]}
-      />
-    );
-  } else {
-    body = (
-      <Trans
-        i18nKey={selectedForInfos.description || ''}
-        components={[
-          <img
-            src={getLegendUrl(selectedForInfos.legendUrl, language)}
-            draggable="false"
-            alt={t('Kein Bildtext')}
-          />,
-        ]}
-      />
-    );
+  if (componentName) {
+    const LayerInfoComponent = layerInfos[componentName];
+    body = <LayerInfoComponent language={language} infos={selectedForInfos} />;
+  } else if (description) {
+    body = <Trans i18nKey={description} />;
   }
 
   return (
