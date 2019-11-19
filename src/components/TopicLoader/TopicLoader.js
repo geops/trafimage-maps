@@ -94,6 +94,7 @@ class TopicLoader extends Component {
   updateServices(activeTopic) {
     const {
       apiKey,
+      layerService,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
@@ -115,6 +116,7 @@ class TopicLoader extends Component {
     newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
       activeTopic,
+      layerService,
       dispatchSetClickedFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
