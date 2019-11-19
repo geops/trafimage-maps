@@ -51,6 +51,11 @@ class Search {
   }
 
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  openPopup() {
+    // Can be implemented by sub-classes
+  }
+
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
   select(item) {
     // Can be overwritten by sub-classes.
   }
