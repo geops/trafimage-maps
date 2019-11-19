@@ -11,7 +11,6 @@ import {
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
-import layerHelper from '../../layers/layerHelper';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -111,7 +110,7 @@ class TopicLoader extends Component {
 
     this.updateLayers(activeTopic.layers);
 
-    const newSearchService = new SearchService(layerHelper.highlightStyle);
+    const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || []);
     newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
@@ -136,7 +135,9 @@ class TopicLoader extends Component {
     dispatchSetLayers(topicLayers);
 
     for (let i = 0; i < flatLayers.length; i += 1) {
-      if (flatLayers[i].setGeoServerWMSUrl) {
+      if (flatLayers[i].setGeoServerUrl) {
+        flatLayers[i].setGeoServerUrl(geoServerUrl);
+      } else if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
       } else if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);

@@ -11,6 +11,7 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -196,7 +197,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   },
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.bahnhoffrequenzen-desc',
+    layerInfoComponent: 'PassagierFrequenzenLayerInfo',
     popupComponent: 'PassagierFrequenzenPopup',
   },
 });
@@ -277,9 +278,7 @@ export const punctuality = new Layer({
   visible: false,
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.puenktlichkeit-desc',
-    legendUrl:
-      '/img/layers/puenktlichkeit/puenktlichkeit_legend_{language}.png',
+    layerInfoComponent: 'PunctualityLayerInfo',
   },
 });
 
@@ -367,7 +366,7 @@ export const buslines = new MapboxStyleLayer({
   },
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.netzkarte.buslinien-desc',
+    layerInfoComponent: 'BuslinesLayerInfo',
     popupComponent: 'BusLinePopup',
   },
 });
@@ -414,7 +413,7 @@ export const parks = new TrafimageGeoServerWMSLayer({
   }),
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.parks-desc',
+    layerInfoComponent: 'ParksLayerInfo',
     popupComponent: 'ParksPopup',
   },
 });
@@ -486,6 +485,159 @@ netzkarteShowcases.setChildren([
     },
   }),
 ]);
+
+export const constrUnterhalt = new Layer({
+  name: 'ch.sbb.construction.unterhalt.group',
+  desc: 'ch.sbb.construction.unterhalt.group-desc',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.group-desc',
+  },
+  children: [
+    new Layer({
+      name: 'ch.sbb.construction.unterhalt.uebrige',
+      key: 'ch.sbb.construction.unterhalt.uebrige',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Übrige Standorte',
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+      key: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Bahnhof und Strecke',
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.construction.unterhalt.strecke',
+      key: 'ch.sbb.construction.unterhalt.strecke',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Strecke',
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.construction.unterhalt.bahnhof',
+      key: 'ch.sbb.construction.unterhalt.bahnhof',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Bahnhof',
+        },
+      },
+    }),
+  ],
+});
+
+export const constrAusbau = new Layer({
+  name: 'ch.sbb.construction.ausbau.group',
+  desc: 'ch.sbb.construction.ausbau.group-desc',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.construction.ausbau.group-desc',
+  },
+  children: [
+    new Layer({
+      name: 'ch.sbb.construction.ausbau.uebrige',
+      key: 'ch.sbb.construction.ausbau.uebrige',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Ausbau',
+          ort: 'Übrige Standorte',
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.construction.ausbau.bahnhof_strecke',
+      key: 'ch.sbb.construction.ausbau.bahnhof_strecke',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Ausbau',
+          ort: 'Bahnhof und Strecke',
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.construction.ausbau.strecke',
+      key: 'ch.sbb.construction.ausbau.strecke',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Ausbau',
+          ort: 'Strecke',
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.construction.ausbau.bahnhof',
+      key: 'ch.sbb.construction.ausbau.bahnhof',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        construction: {
+          art: 'Ausbau',
+          ort: 'Bahnhof',
+        },
+      },
+    }),
+  ],
+});
+
+export const constrSingleLayer = new ConstructionLayer({
+  name: 'ch.sbb.construction.single',
+  key: 'ch.sbb.construction.single',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'ConstructionPopup',
+  },
+  children: [constrUnterhalt, constrAusbau],
+  maxResolution: 305.748113141,
+});
+
+export const constrClusterLayer = new ConstructionLayer({
+  name: 'ch.sbb.construction.cluster',
+  key: 'ch.sbb.construction.cluster',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'ConstructionPopup',
+    cluster: true,
+  },
+  children: [constrUnterhalt, constrAusbau],
+  minResolution: 305.748113141,
+});
 
 export default [
   sourcesLayer,

@@ -1,4 +1,5 @@
 import defaultBaseLayers, {
+  swisstopoSwissImage,
   bahnhofplaene,
   passagierfrequenzen,
   netzkarteLayer,
@@ -10,6 +11,10 @@ import defaultBaseLayers, {
   netzkarteShowcases,
   parks,
   stuetzpunktbahnhoefe,
+  constrUnterhalt,
+  constrAusbau,
+  constrSingleLayer,
+  constrClusterLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -44,7 +49,7 @@ export const netzkarte = {
     bahnhofplaene,
   ],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.netzkarte-desc',
+  layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
 };
 
@@ -54,7 +59,7 @@ export const handicap = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.handicap-desc',
+  layerInfoComponent: 'HandicapTopicInfo',
   searches: { Stationen: handicapStopFinder },
 };
 
@@ -77,38 +82,46 @@ export const casa = {
 export const bauprojekte = {
   name: 'ch.sbb.construction',
   key: 'ch.sbb.construction',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.construction',
-  description: 'ch.sbb.construction-desc',
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [
+    netzkarteLayer,
+    swisstopoSwissImage,
+    constrUnterhalt,
+    constrAusbau,
+    constrSingleLayer,
+    constrClusterLayer,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'ConstructionTopicInfo',
+  searches: defaultSearches,
 };
 
 export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
-  description: 'ch.sbb.behig-desc',
-  legendUrl: '/img/topics/behig/behig_legend_{language}.jpg',
+  layerInfoComponent: 'BehigTopicInfo',
 };
 
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
-  description: 'ch.sbb.infrastruktur-desc',
+  layerInfoComponent: 'InfrastrukturTopicInfo',
 };
 
 export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
-  description: 'ch.sbb.regionenkarte.public-desc',
+  layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
   linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
-  description: 'ch.sbb.tarifverbundkarte.public-desc',
-  legendUrl: '/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png',
+  layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 
 export const showcases = {
@@ -120,7 +133,7 @@ export const showcases = {
   },
   layers: [netzkarteShowcases],
   projection: 'EPSG:3857',
-  description: 'ch.sbb.showcases-desc',
+  layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
 export default {

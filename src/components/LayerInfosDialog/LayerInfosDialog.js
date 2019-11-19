@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from 'react-i18next';
 import Layer from 'react-spatial/layers/Layer';
 import Dialog from '../Dialog';
+import layerInfos from '../../layerInfos';
 
 const propTypes = {
   selectedForInfos: PropTypes.object,
@@ -15,13 +16,6 @@ const defaultProps = {
 
 export const NAME = 'infoDialog';
 
-const getLegendUrl = (legendUrl, language) => {
-  const src = legendUrl || '';
-  return /{language}/.test(legendUrl)
-    ? src.replace('{language}', language)
-    : src;
-};
-
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
@@ -31,33 +25,22 @@ function LayerInfosDialog(props) {
     return null;
   }
 
+  const componentName =
+    selectedForInfos instanceof Layer
+      ? selectedForInfos.get('layerInfoComponent')
+      : selectedForInfos.layerInfoComponent;
+
+  const description =
+    selectedForInfos instanceof Layer
+      ? selectedForInfos.get('description')
+      : selectedForInfos.description;
+
   let body;
-  if (selectedForInfos instanceof Layer) {
-    body = (
-      <Trans
-        i18nKey={selectedForInfos.get('description') || ''}
-        components={[
-          <img
-            src={getLegendUrl(selectedForInfos.get('legendUrl'), language)}
-            draggable="false"
-            alt={t('Kein Bildtext')}
-          />,
-        ]}
-      />
-    );
-  } else {
-    body = (
-      <Trans
-        i18nKey={selectedForInfos.description || ''}
-        components={[
-          <img
-            src={getLegendUrl(selectedForInfos.legendUrl, language)}
-            draggable="false"
-            alt={t('Kein Bildtext')}
-          />,
-        ]}
-      />
-    );
+  if (componentName) {
+    const LayerInfoComponent = layerInfos[componentName];
+    body = <LayerInfoComponent language={language} infos={selectedForInfos} />;
+  } else if (description) {
+    body = <Trans i18nKey={description} />;
   }
 
   return (
