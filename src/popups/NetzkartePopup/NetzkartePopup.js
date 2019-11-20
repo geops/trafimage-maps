@@ -141,12 +141,8 @@ function NetzkartePopup({ feature }) {
         tabIndex={0}
         role="button"
         className="wkp-coordinate-toggle"
-        onClick={() =>
-          setShowCoordinates({ showCoordinates: !showCoordinates })
-        }
-        onKeyPress={() =>
-          setShowCoordinates({ showCoordinates: !showCoordinates })
-        }
+        onClick={() => setShowCoordinates(!showCoordinates)}
+        onKeyPress={() => setShowCoordinates(!showCoordinates)}
       >
         {t('Koordinaten')}
       </div>
@@ -171,7 +167,7 @@ function NetzkartePopup({ feature }) {
         <>
           <Button
             onClick={() => {
-              setShowPlanLinks({ showPlanLinks: !showPlanLinks });
+              setShowPlanLinks(!showPlanLinks);
             }}
             className="wkp-popup-plans"
           >
