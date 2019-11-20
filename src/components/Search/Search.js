@@ -21,9 +21,6 @@ function Search() {
   const searchService = useSelector(state => state.app.searchService);
   const { t } = useTranslation();
 
-  const [isTabFocused, setIsTabFocused] = useState(false);
-  const [isTabBlured, setIsTabBlured] = useState(false);
-
   const componentIsMounted = useRef(true);
   useEffect(() => {
     return () => {
@@ -117,15 +114,6 @@ function Search() {
                     }
                   } else if (key === 'ArrowDown' || key === 'ArrowUp') {
                     searchService.highlightSection(); // for improved accessibility
-                  } else if (key === 'Tab') {
-                    setIsTabFocused(true);
-                    setIsTabBlured(false);
-                  }
-                },
-                onBlur: () => {
-                  if (isTabFocused) {
-                    setIsTabFocused(false);
-                    setIsTabBlured(true);
                   }
                 },
                 placeholder: searchService.getPlaceholder(t),
@@ -155,8 +143,8 @@ function Search() {
               <FaSearch focusable={false} />
             </button>
           </SearchToggle>
-          {isTabBlured ? <TopicTelephoneInfos /> : null}
         </div>
+        <TopicTelephoneInfos />
       </>
     )
   );

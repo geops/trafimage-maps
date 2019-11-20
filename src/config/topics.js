@@ -51,7 +51,6 @@ export const netzkarte = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
-  telephone: '0800 007 102',
 };
 
 export const handicap = {

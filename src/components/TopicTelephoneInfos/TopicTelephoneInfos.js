@@ -6,16 +6,15 @@ const TopicTelephoneInfos = () => {
   const { t } = useTranslation();
   const activeTopic = useSelector(state => state.app.activeTopic);
 
-  const { name, telephone } = activeTopic;
+  const { name } = activeTopic;
 
-  return telephone ? (
-    <div className="wkp-tel-infos">
+  return (
+    <div className="wkp-tel-infos" tabIndex={0} role="button">
       {t('telephone_information', {
         name: t(name),
-        telephone,
       })}
     </div>
-  ) : null;
+  );
 };
 
 export default TopicTelephoneInfos;
