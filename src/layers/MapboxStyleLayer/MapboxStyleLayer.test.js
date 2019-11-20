@@ -42,7 +42,8 @@ describe('MapboxStyleLayer', () => {
 
   test('should initalized mapbox map.', () => {
     source.init(map);
-    expect(source.mbMap).toBeInstanceOf(mapboxgl.Map);
+    layer.init(map);
+    expect(layer.mapboxLayer.mbMap).toBeInstanceOf(mapboxgl.Map);
   });
 
   test('should called terminate on initalization.', () => {
@@ -51,7 +52,8 @@ describe('MapboxStyleLayer', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  test('should return a promise resolving features.', async () => {
+  test('should return coordinates, features and a layer instance.', async () => {
+    source.init(map);
     layer.init(map);
     const data = await layer.getFeatureInfoAtCoordinate([50, 50]);
     expect(data.coordinate).toEqual([50, 50]);
