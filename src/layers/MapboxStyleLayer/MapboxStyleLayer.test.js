@@ -10,20 +10,7 @@ let layer;
 let map;
 
 const styleLayer = {
-  id: 'netzkarte_point',
-  type: 'circle',
-  source: 'base',
-  'source-layer': 'netzkarte_point',
-  paint: {
-    'circle-radius': 10,
-    'circle-color': 'rgb(0, 61, 155)',
-    'circle-opacity': [
-      'case',
-      ['boolean', ['feature-state', 'hover'], false],
-      0.5,
-      0,
-    ],
-  },
+  id: 'layer',
 };
 
 describe('MapboxStyleLayer', () => {
@@ -32,14 +19,10 @@ describe('MapboxStyleLayer', () => {
       name: 'Layer',
     });
     layer = new MapboxStyleLayer({
-      name: 'ch.sbb.netzkarte.stationen',
+      name: 'mapbox layer',
       visible: true,
       mapboxLayer: source,
       styleLayer,
-      properties: {
-        hideInLegend: true,
-        popupComponent: 'NetzkartePopup',
-      },
     });
     map = new Map({
       target: document.createElement('div'),
