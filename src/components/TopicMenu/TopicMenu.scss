@@ -16,10 +16,11 @@
 
       .wkp-topic-title {
         display: flex;
+        align-items: center;
       }
 
       .wkp-topic-radio {
-        width: 16px;
+        min-width: 16px;
         height: 16px;
         display: flex;
         align-items: center;
