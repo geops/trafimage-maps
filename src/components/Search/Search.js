@@ -78,7 +78,7 @@ function Search() {
                       {t(section)}
                     </div>
                     <div className="wkp-search-section-count">
-                      {t('insgesamt {{ count }} Ergebnisse', { count })}
+                      {t('overall_result', { count })}
                       {searchService.sectionCollapsed(section) ? (
                         <FaChevronCircleDown focusable={false} />
                       ) : (
