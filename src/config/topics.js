@@ -27,6 +27,7 @@ const defaultElements = {
   baseLayerToggler: true,
   popup: false,
   search: true,
+  telephoneInfos: true,
 };
 
 export const netzkarte = {

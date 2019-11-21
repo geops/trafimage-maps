@@ -18,6 +18,7 @@ import Footer from '../Footer';
 import MapControls from '../MapControls';
 import Popup from '../Popup';
 import Search from '../Search';
+import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
 
 const defaultElements = {
@@ -32,6 +33,7 @@ const defaultElements = {
   trackerMenu: false,
   featureMenu: false,
   search: false,
+  telephoneInfos: true,
 };
 
 const propTypes = {
@@ -108,6 +110,7 @@ function TopicElements({ history }) {
   const appComponents = {
     header: <Header />,
     search: <Search />,
+    telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,
     permalink: <Permalink history={history} />,
     menu: (
