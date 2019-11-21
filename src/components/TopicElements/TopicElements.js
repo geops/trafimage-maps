@@ -33,7 +33,6 @@ const defaultElements = {
   trackerMenu: false,
   featureMenu: false,
   search: false,
-  telephoneInfos: true,
 };
 
 const propTypes = {
@@ -91,6 +90,9 @@ function TopicElements({ history }) {
   }
 
   const elements = activeTopic.elements || defaultElements;
+  elements.telephoneInfos =
+    !disabled || !disabled.split(',').find(el => el === 'header');
+
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
     { shareMenu: <ShareMenu /> },
