@@ -6,19 +6,19 @@
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 1;
+  height: 0;
   background-color: white;
-  border: 2px solid #666;
-  padding: 10px;
+  border: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .tm-barrier-free {
   .wkp-tel-infos {
-    display: block;
-  }
-
-  &.tm-no-focus {
-    .wkp-tel-infos {
-      display: none;
+    &:focus {
+      padding: 10px;
+      border: 2px solid #666;
+      height: auto;
     }
   }
 }
