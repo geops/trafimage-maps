@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from 'create-react-web-component';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
-import ResizeHandler from 'react-spatial/components/ResizeHandler';
+import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';

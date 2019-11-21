@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
 import { FaLink } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import PermalinkInput from 'react-spatial/components/PermalinkInput';
-import Button from 'react-spatial/components/Button';
+import PermalinkInput from '@geops/react-ui/components/PermalinkInput';
+import Button from '@geops/react-ui/components/Button';
 
 const propTypes = {
   title: PropTypes.string,

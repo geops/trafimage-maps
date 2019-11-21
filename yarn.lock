@@ -1188,6 +1188,16 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@geops/react-ui@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.0.1.tgz#828b4f04d6b6f43ac08bc424e292657bf9fec6bd"
+  integrity sha512-OSjqOxCNYAWPqoSQXStb42qQQ8Es9jp0MtNKpEgubhPVPkiE0MTgyqmGeY5rJ2pWemiGnog/zij63XPXLh6PsA==
+  dependencies:
+    query-string "^6.4.2"
+    react-draggable "^4.0.3"
+    react-icons "^3.4.0"
+    resize-observer-polyfill "^1.5.1"
+
 "@hapi/address@2.x.x":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.2.tgz#1c794cd6dbf2354d1eb1ef10e0303f573e1c7222"
