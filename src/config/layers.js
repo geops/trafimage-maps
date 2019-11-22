@@ -12,6 +12,7 @@ import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
+import BehigLayer from '../layers/BehigLayer/BehigLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -637,6 +638,56 @@ export const constrClusterLayer = new ConstructionLayer({
   },
   children: [constrUnterhalt, constrAusbau],
   minResolution: 305.748113141,
+});
+
+export const behigKonform = new Layer({
+  name: 'ch.sbb.behig.konform',
+  key: 'ch.sbb.behig.konform',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'BehigLayerInfo',
+    behig: {
+      status: 'OK',
+    },
+  },
+});
+
+export const behigNotYetKonform = new Layer({
+  name: 'ch.sbb.behig.not_yet_konform',
+  key: 'ch.sbb.behig.not_yet_konform',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'BehigLayerInfo',
+    behig: {
+      status: 'NOCH NICHT OK',
+    },
+  },
+});
+
+export const behigNotKonform = new Layer({
+  name: 'ch.sbb.behig.not_konform',
+  key: 'ch.sbb.behig.not_konform',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'BehigLayerInfo',
+    behig: {
+      status: 'BLEIBEN NICHT OK',
+    },
+  },
+});
+
+export const behigParent = new BehigLayer({
+  name: 'ch.sbb.behig.parent',
+  key: 'ch.sbb.behig.parent',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'BehigPopup',
+  },
+  children: [behigKonform, behigNotYetKonform, behigNotKonform],
 });
 
 export default [

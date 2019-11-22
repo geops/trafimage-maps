@@ -43,6 +43,7 @@
 
 // Popups
 @import 'src/popups/BahnhofplanPopup/BahnhofplanPopup.scss';
+@import 'src/popups/BehigPopup/BehigPopup.scss';
 @import 'src/popups/BusLinePopup/BusLinePopup.scss';
 @import 'src/popups/HandicapPopup/HandicapPopup.scss';
 @import 'src/popups/NetzkartePopup/NetzkartePopup.scss';
@@ -50,3 +51,6 @@
 @import 'src/popups/PassagierFrequenzenPopup/PassagierFrequenzenPopup.scss';
 @import 'src/popups/DeparturePopup/DeparturePopupContent.scss';
 @import 'src/popups/DeparturePopup/DestinationInput.scss';
+
+// LayerInfos
+@import 'src/layerInfos/BehigLayerInfo/BehigLayerInfo.scss';
