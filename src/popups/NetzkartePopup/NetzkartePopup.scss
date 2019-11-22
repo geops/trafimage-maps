@@ -20,7 +20,7 @@
     transition: all 0.3s;
     display: block;
     cursor: initial;
-    margin: 0 6px;
+    margin-left: 15px;
 
     span {
       padding: 2px 0;
@@ -50,7 +50,7 @@
     height: 0;
     transition: height 900ms;
     display: none;
-    margin: 0 6px;
+    margin-left: 15px;
 
     &.wkp-visible {
       height: 100%;

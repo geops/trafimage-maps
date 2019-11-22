@@ -8,7 +8,9 @@ import defaultBaseLayers, {
   buslines,
   gemeindegrenzen,
   punctuality,
-  netzkarteShowcases,
+  netzkarteShowcasesNight,
+  netzkarteShowcasesLight,
+  netzkarteShowcasesNetzkarte,
   parks,
   stuetzpunktbahnhoefe,
   constrUnterhalt,
@@ -144,7 +146,11 @@ export const showcases = {
     ...defaultElements,
     baseLayerToggler: false,
   },
-  layers: [netzkarteShowcases],
+  layers: [
+    netzkarteShowcasesNight,
+    netzkarteShowcasesLight,
+    netzkarteShowcasesNetzkarte,
+  ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ShowcasesTopicInfo',
 };

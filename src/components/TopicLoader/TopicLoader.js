@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 import LayerService from 'react-spatial/LayerService';
 import { setLayers } from '../../model/map/actions';
 import {
@@ -33,6 +35,8 @@ const propTypes = {
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
+
+  t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -97,7 +101,9 @@ class TopicLoader extends Component {
 
   updateServices(activeTopic) {
     const {
+      t,
       apiKey,
+      layerService,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
@@ -118,7 +124,9 @@ class TopicLoader extends Component {
     newSearchService.setSearches(activeTopic.searches || []);
     newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
+      t,
       activeTopic,
+      layerService,
       dispatchSetClickedFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
@@ -176,4 +184,7 @@ const mapDispatchToProps = {
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopicLoader);
+export default compose(
+  withTranslation(),
+  connect(mapStateToProps, mapDispatchToProps),
+)(TopicLoader);

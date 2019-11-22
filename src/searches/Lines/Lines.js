@@ -46,12 +46,13 @@ class Lines extends Search {
   }
 
   render({ properties }) {
+    const { t } = this.props;
     return (
       <div>
-        Linie {properties.linie} ({properties.name})
+        {t('Linie')} {properties.linie} ({properties.name})
         {properties.start !== properties.end && (
           <div style={{ color: '#999' }}>
-            Kilometer {properties.start}-{properties.end}
+            {t('Kilometer')} {properties.start}-{properties.end}
           </div>
         )}
       </div>

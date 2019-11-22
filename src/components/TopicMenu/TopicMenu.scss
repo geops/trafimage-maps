@@ -12,14 +12,15 @@
       width: 100%;
       display: flex;
       align-items: center;
-      margin: 4px 0 4px 10px;
+      margin-right: 10px;
 
       .wkp-topic-title {
         display: flex;
+        align-items: center;
       }
 
       .wkp-topic-radio {
-        width: 16px;
+        min-width: 16px;
         height: 16px;
         display: flex;
         align-items: center;
@@ -68,6 +69,10 @@
   .wkp-layer-tree {
     overflow: hidden;
     margin: 0 0 0 20px;
+
+    .tm-layer-tree {
+      overflow: hidden;
+    }
 
     .wkp-info-layer-bt {
       top: 0;

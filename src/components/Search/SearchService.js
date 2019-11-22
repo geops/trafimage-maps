@@ -52,19 +52,23 @@ class SearchService {
   }
 
   highlight(item, persistent = false) {
-    this.highlightItem = item;
     this.highlightLayer.getSource().clear();
+
+    this.highlightItem = item;
     const featureProjection = this.map.getView().getProjection();
     const feature = item
       ? this.searches[item.section].getFeature(item, { featureProjection })
       : this.highlightFeature;
+
     if (feature) {
       this.highlightLayer.getSource().addFeature(feature);
+
       if (persistent) {
         this.highlightFeature = feature;
         this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
           padding: [50, 50, 50, 50],
           maxZoom: 15,
+          callback: () => this.searches[item.section].openPopup(item),
         });
       }
     }
