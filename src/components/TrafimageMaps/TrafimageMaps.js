@@ -59,6 +59,11 @@ const propTypes = {
   geoServerUrl: PropTypes.string,
 
   /**
+   * URL endpoint for GeoJSON Cache (gjc).
+   */
+  geoJsonCacheUrl: PropTypes.string,
+
+  /**
    * API key for vector tiles hosted by geOps.
    */
   vectorTilesKey: PropTypes.string,
@@ -76,6 +81,7 @@ const defaultProps = {
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
+  geoJsonCacheUrl: process.env.REACT_APP_GEOJSON_CACHE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   topics: null,
@@ -131,6 +137,7 @@ class TrafimageMaps extends React.PureComponent {
       topics,
       cartaroUrl,
       geoServerUrl,
+      geoJsonCacheUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -143,6 +150,7 @@ class TrafimageMaps extends React.PureComponent {
           topics={topics}
           cartaroUrl={cartaroUrl}
           geoServerUrl={geoServerUrl}
+          geoJsonCacheUrl={geoJsonCacheUrl}
           vectorTilesKey={vectorTilesKey}
           vectorTilesUrl={vectorTilesUrl}
         />

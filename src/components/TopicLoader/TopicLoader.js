@@ -25,6 +25,7 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   geoServerUrl: PropTypes.string,
+  geoJsonCacheUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
 
@@ -43,6 +44,7 @@ const defaultProps = {
   activeTopic: null,
   cartaroUrl: null,
   geoServerUrl: null,
+  geoJsonCacheUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
 };
@@ -69,6 +71,7 @@ class TopicLoader extends Component {
       apiKey,
       cartaroUrl,
       geoServerUrl,
+      geoJsonCacheUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -89,7 +92,8 @@ class TopicLoader extends Component {
       vectorTilesKey !== prevProps.vectorTilesKey ||
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
       cartaroUrl !== prevProps.cartaroUrl ||
-      geoServerUrl !== prevProps.geoServerUrl
+      geoServerUrl !== prevProps.geoServerUrl ||
+      geoJsonCacheUrl !== prevProps.geoJsonCacheUrl
     ) {
       this.updateServices(activeTopic);
     }
@@ -134,6 +138,7 @@ class TopicLoader extends Component {
       dispatchSetLayers,
       cartaroUrl,
       geoServerUrl,
+      geoJsonCacheUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -147,6 +152,8 @@ class TopicLoader extends Component {
         flatLayers[i].setGeoServerUrl(geoServerUrl);
       } else if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
+      } else if (flatLayers[i].setGeoJsonUrl) {
+        flatLayers[i].setGeoJsonUrl(geoJsonCacheUrl);
       } else if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       } else if (flatLayers[i].setCartaroUrl) {

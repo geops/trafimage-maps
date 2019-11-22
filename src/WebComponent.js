@@ -69,6 +69,7 @@ const propTypes = {
    * @ignore
    */
   geoServerUrl: PropTypes.string,
+  geoJsonCacheUrl: PropTypes.string,
 
   /**
    * API key for accessing vector tiles.
@@ -91,6 +92,7 @@ const attributes = {
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
+  geoJsonCacheUrl: process.env.REACT_APP_GEOJSON_CACHE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
 };
