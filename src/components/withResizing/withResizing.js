@@ -3,7 +3,8 @@ import Map from 'ol/Map';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
-import { transitiondelay } from '../../globals.scss';
+
+const transitiondelay = 300;
 
 function withResizing(MenuToBeResized) {
   const propTypes = {
