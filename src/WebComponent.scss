@@ -7,6 +7,9 @@
 // React-spatial
 @import 'node_modules/react-spatial/themes/default/variables.scss';
 @import 'node_modules/react-spatial/themes/default/mixins.scss';
+@import 'node_modules/react-spatial/components/List/List.scss';
+@import 'node_modules/react-spatial/components/SearchInput/SearchInput.scss';
+@import 'node_modules/react-spatial/components/Autocomplete/Autocomplete.scss';
 @import 'node_modules/react-spatial/components/LayerTree/LayerTree.scss';
 @import 'node_modules/react-spatial/components/BaseLayerToggler/BaseLayerToggler.scss';
 @import 'node_modules/react-spatial/components/Footer/Footer.scss';
