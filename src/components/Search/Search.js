@@ -100,7 +100,8 @@ function Search() {
               tabIndex: 0,
               'aria-label': 'Suche',
               onChange: (e, { newValue }) => setValue(newValue),
-              onKeyUp: ({ key }) => {
+              onKeyUp: e => {
+                const { key } = e;
                 if (key === 'Enter') {
                   const filtered = suggestions.filter(s => s.items.length > 0);
                   if (filtered.length > 0) {
