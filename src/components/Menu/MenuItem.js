@@ -6,6 +6,7 @@ import withResizing from '../withResizing';
 
 const propTypes = {
   menuHeight: PropTypes.number,
+  fixedHeight: PropTypes.number,
   bodyElementRef: PropTypes.shape({
     current: PropTypes.instanceOf(Collapsible),
   }),
@@ -20,6 +21,7 @@ const propTypes = {
 
 const defaultProps = {
   menuHeight: null,
+  fixedHeight: null,
   bodyElementRef: null,
   children: null,
   className: '',
@@ -37,6 +39,7 @@ function MenuItem(props) {
     icon,
     onCollapseToggle,
     menuHeight,
+    fixedHeight,
     bodyElementRef,
   } = props;
 
@@ -50,7 +53,7 @@ function MenuItem(props) {
       />
       <Collapsible
         isCollapsed={collapsed}
-        maxHeight={menuHeight}
+        maxHeight={fixedHeight || menuHeight}
         ref={bodyElementRef}
       >
         {children}
