@@ -21,8 +21,7 @@ const propTypes = {
   activeTopicKey: PropTypes.string,
   apiKey: PropTypes.string,
   cartaroUrl: PropTypes.string,
-  geoServerUrl: PropTypes.string,
-  geoJsonCacheUrl: PropTypes.string,
+  appBaseUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
 };
@@ -36,8 +35,7 @@ const attributes = {
   activeTopicKey: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
-  geoJsonCacheUrl: process.env.REACT_APP_GEOJSON_CACHE_URL,
+  appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
 };
