@@ -625,9 +625,9 @@ export const constrClusterLayer = new ConstructionLayer({
   minResolution: 305.748113141,
 });
 
-export const behigKonform = new Layer({
-  name: 'ch.sbb.behig.konform',
-  key: 'ch.sbb.behig.konform',
+export const behigOk = new Layer({
+  name: 'ch.sbb.behig.ok',
+  key: 'ch.sbb.behig.ok',
   visible: true,
   properties: {
     hasInfos: true,
@@ -638,9 +638,9 @@ export const behigKonform = new Layer({
   },
 });
 
-export const behigNotYetKonform = new Layer({
-  name: 'ch.sbb.behig.not_yet_konform',
-  key: 'ch.sbb.behig.not_yet_konform',
+export const behigNotYetOk = new Layer({
+  name: 'ch.sbb.behig.not_yet_ok',
+  key: 'ch.sbb.behig.not_yet_ok',
   visible: true,
   properties: {
     hasInfos: true,
@@ -651,9 +651,9 @@ export const behigNotYetKonform = new Layer({
   },
 });
 
-export const behigNotKonform = new Layer({
-  name: 'ch.sbb.behig.not_konform',
-  key: 'ch.sbb.behig.not_konform',
+export const behigNotOk = new Layer({
+  name: 'ch.sbb.behig.not_ok',
+  key: 'ch.sbb.behig.not_ok',
   visible: true,
   properties: {
     hasInfos: true,
@@ -672,7 +672,7 @@ export const behigParent = new BehigLayer({
     hideInLegend: true,
     popupComponent: 'BehigPopup',
   },
-  children: [behigKonform, behigNotYetKonform, behigNotKonform],
+  children: [behigOk, behigNotYetOk, behigNotOk],
 });
 
 export default [

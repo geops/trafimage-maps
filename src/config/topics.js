@@ -17,9 +17,9 @@ import defaultBaseLayers, {
   constrAusbau,
   constrSingleLayer,
   constrClusterLayer,
-  behigKonform,
-  behigNotYetKonform,
-  behigNotKonform,
+  behigOk,
+  behigNotYetOk,
+  behigNotOk,
   behigParent,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -106,13 +106,7 @@ export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    netzkarteLayer,
-    behigNotKonform,
-    behigNotYetKonform,
-    behigKonform,
-    behigParent,
-  ],
+  layers: [netzkarteLayer, behigNotOk, behigNotYetOk, behigOk, behigParent],
   projection: 'EPSG:3857',
   layerInfoComponent: 'BehigTopicInfo',
   searches: defaultSearches,
