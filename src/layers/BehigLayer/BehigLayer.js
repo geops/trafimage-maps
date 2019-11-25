@@ -117,7 +117,6 @@ class BehigLayer extends VectorLayer {
       if (feature.get('visibility') >= res * 10) {
         return this.styleCache[cacheKey];
       }
-      return null;
     }
     return null;
   }
