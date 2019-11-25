@@ -13,6 +13,7 @@ import { unByKey } from 'ol/Observable';
 /**
  * Layer for construction
  * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * @private
  * @class
  * @param {Object} [options] Layer options.
  */

@@ -9,6 +9,7 @@ import LayerHelper from '../layerHelper';
 /**
  * Layer for visualizing Handicap Topic.
  * @class
+ * @private
  * @params {Object} options
  * @inheritdoc
  */
