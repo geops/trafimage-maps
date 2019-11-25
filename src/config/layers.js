@@ -436,7 +436,7 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'evoq_sandbox1',
+  style: 'showcase2',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.night-desc',
@@ -450,7 +450,7 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'evoq_sandbox2',
+  style: 'showcase3',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.light-desc',
