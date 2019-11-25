@@ -78,9 +78,7 @@ function Search() {
                       {t(section)}
                     </div>
                     <div className="wkp-search-section-count">
-                      {count > 1
-                        ? t('overall_results', { count })
-                        : t('overall_result', { count })}
+                      {t('overallResult', { count })}
                       {searchService.sectionCollapsed(section) ? (
                         <FaChevronCircleDown focusable={false} />
                       ) : (
