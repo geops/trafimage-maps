@@ -69,6 +69,11 @@ const propTypes = {
    * @ignore
    */
   geoServerUrl: PropTypes.string,
+
+  /**
+   * URL of the GeoJSON Cache to use.
+   * @ignore
+   */
   geoJsonCacheUrl: PropTypes.string,
 
   /**
