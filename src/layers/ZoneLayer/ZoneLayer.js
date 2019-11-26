@@ -62,8 +62,6 @@ class ZoneLayer extends CasaLayer {
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
-    this.fetchZones();
-
     this.selectedZones = [];
 
     this.onClick(features => {
