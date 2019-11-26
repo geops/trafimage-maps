@@ -12,7 +12,7 @@ const defaultProps = {};
 const BehigTopicInfo = ({ language, t }) => {
   const img = (
     <img
-      src={`/img/topics/behig/behig_legend_${language}.jpg`}
+      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/topics/behig/behig_legend_${language}.jpg`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />

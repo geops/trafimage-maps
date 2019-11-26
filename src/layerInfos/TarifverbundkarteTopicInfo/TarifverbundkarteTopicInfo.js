@@ -12,7 +12,7 @@ const defaultProps = {};
 const TarifverbundkarteTopicInfo = ({ language, t }) => {
   const img = (
     <img
-      src="/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png"
+      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />
