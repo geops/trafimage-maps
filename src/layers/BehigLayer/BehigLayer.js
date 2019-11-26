@@ -10,6 +10,7 @@ import LayerHelper from '../layerHelper';
 /**
  * Layer for behig
  * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * @private
  * @class
  * @param {Object} [options] Layer options.
  */
