@@ -72,7 +72,7 @@ class DestinationInput extends Component {
     const { uic, platforms } = this.props;
 
     const url =
-      `${process.env.REACT_APP_BASE_URL}/search/destinations/${uic}` +
+      `${process.env.REACT_APP_DEPARTURE_URL}/destinations/${uic}` +
       `?platforms=${platforms || ''}&destination=${value}`;
 
     this.abortController.abort();

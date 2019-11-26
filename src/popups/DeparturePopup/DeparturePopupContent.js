@@ -135,8 +135,8 @@ class DeparturePopupContent extends Component {
     }
 
     const url = `${
-      process.env.REACT_APP_BASE_URL
-    }/search/departures/${uic}?${qs.stringify(urlParams)}`;
+      process.env.REACT_APP_DEPARTURE_URL
+    }/departures/${uic}?${qs.stringify(urlParams)}`;
 
     fetch(url)
       .then(response => response.json())

@@ -24,7 +24,8 @@ const propTypes = {
   activeTopic: PropTypes.shape(),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
-  appBaseUrl: PropTypes.string,
+  geoServerUrl: PropTypes.string,
+  geoJsonCacheUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
 
@@ -42,7 +43,8 @@ const defaultProps = {
   history: null,
   activeTopic: null,
   cartaroUrl: null,
-  appBaseUrl: null,
+  geoServerUrl: null,
+  geoJsonCacheUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
 };
@@ -68,7 +70,8 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
       apiKey,
       cartaroUrl,
-      appBaseUrl,
+      geoServerUrl,
+      geoJsonCacheUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -89,7 +92,8 @@ class TopicLoader extends Component {
       vectorTilesKey !== prevProps.vectorTilesKey ||
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
       cartaroUrl !== prevProps.cartaroUrl ||
-      appBaseUrl !== prevProps.appBaseUrl
+      geoServerUrl !== prevProps.geoServerUrl ||
+      geoJsonCacheUrl !== prevProps.geoJsonCacheUrl
     ) {
       this.updateServices(activeTopic);
     }
@@ -133,7 +137,8 @@ class TopicLoader extends Component {
       layerService,
       dispatchSetLayers,
       cartaroUrl,
-      appBaseUrl,
+      geoServerUrl,
+      geoJsonCacheUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -144,13 +149,11 @@ class TopicLoader extends Component {
 
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
-        flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
+        flatLayers[i].setGeoServerUrl(geoServerUrl);
       } else if (flatLayers[i].setGeoServerWMSUrl) {
-        flatLayers[i].setGeoServerWMSUrl(
-          `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
-        );
+        flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
       } else if (flatLayers[i].setGeoJsonUrl) {
-        flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
+        flatLayers[i].setGeoJsonUrl(geoJsonCacheUrl);
       } else if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       } else if (flatLayers[i].setCartaroUrl) {
