@@ -8,21 +8,76 @@ import styles from './WebComponent.scss';
 import topicConfig from './config/topics';
 
 const propTypes = {
-  // Properties
+  /**
+   * Configuration of the topics to load. See examples to learn how topics
+   * can be configured or use the 'appName' attribute to load a predefined
+   * topic configuration (ask us for help).
+   */
   topics: PropTypes.array,
+
+  /**
+   * @ignore
+   */
   history: PropTypes.object,
 
-  // Attributes
+  /**
+   * Width of the application as CSS property.
+   * Default is '100%'.
+   */
   width: PropTypes.string,
+
+  /**
+   * Height of the application as CSS proprerty.
+   * Default is '100%'.
+   */
   height: PropTypes.string,
+
+  /**
+   * Initial map center. Default is '925472,5920000'.
+   */
   center: PropTypes.string,
+
+  /**
+   * Initial map zoom. Default is '9'.
+   */
   zoom: PropTypes.string,
+
+  /**
+   * Application name. By specifying the app name, you can load a predefined
+   * topics configuration. Default is 'wkp' loading the trafimage maps portal.
+   */
   appName: PropTypes.string,
+
+  /**
+   * Key of the topic that should be opened on startup.
+   */
   activeTopicKey: PropTypes.string,
+
+  /**
+   * API key of using the application. Details at 'https://developer.geops.io'.
+   */
   apiKey: PropTypes.string,
+
+  /**
+   * URL of the cartaro instance to use.
+   * @ignore
+   */
   cartaroUrl: PropTypes.string,
+
+  /**
+   * URL of the GeoServer instance to use.
+   * @ignore
+   */
   geoServerUrl: PropTypes.string,
+
+  /**
+   * API key for accessing vector tiles.
+   * Details at 'https://developer.geops.io'.
+   */
   vectorTilesKey: PropTypes.string,
+  /**
+   * URL of the vector tile server. Default is 'https://maps.geops.io'.
+   */
   vectorTilesUrl: PropTypes.string,
 };
 

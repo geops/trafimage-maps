@@ -28,17 +28,12 @@ module.exports = {
   },
   sections: [
     {
-      name: 'Applications',
+      name: 'Trafimage Maps Application',
       content: 'src/examples/README.md',
       sections: [
         {
-          name: 'WebComponent',
-          sections: [
-            {
-              name: 'trafimage-maps',
-              content: 'src/examples/WebComponent/README.md',
-            },
-          ],
+          name: 'trafimage-maps',
+          components: 'src/WebComponent.js',
         },
         {
           name: 'Examples',

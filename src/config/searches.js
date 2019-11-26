@@ -22,5 +22,5 @@ export default {
   Gemeinden: municipalities,
   Orte: locations,
   Betriebspunkte: betriebspunkte,
-  Verbindungen: lines,
+  Linien: lines,
 };

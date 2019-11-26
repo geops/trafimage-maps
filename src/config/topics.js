@@ -69,7 +69,7 @@ export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
   layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
-  elements: { popup: true },
+  elements: {},
   projection: 'EPSG:3857',
 };
 
