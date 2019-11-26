@@ -62,13 +62,7 @@ const BehigTopicInfo = ({ language, t }) => {
           I-AT-KUF-PAM, Simone Mundwiler,&nbsp;
           <a href="mailto:simone.mundwiler@sbb.ch">simone.mundwiler@sbb.ch</a>.
         </p>
-        <p>
-          <img
-            src="/img/topics/behig/behig_legend_en.jpg"
-            draggable="false"
-            alt={t('Kein Bildtext')}
-          />
-        </p>
+        <p>{img}</p>
       </div>
     ),
     it: (
