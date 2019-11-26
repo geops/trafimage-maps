@@ -73,10 +73,7 @@ class MapboxStyleLayer extends Layer {
     });
   }
 
-  init(map) {
-    super.init(map);
-
-    // Apply the initial visibiltity.
+  aplyStyle() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
@@ -109,13 +106,18 @@ class MapboxStyleLayer extends Layer {
       };
       mbMap.on('styledata', onStyleData);
     }
+  }
+
+  init(map) {
+    super.init(map);
+
+    // Apply the initial visibiltity.
+    this.aplyStyle();
 
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
-      this.on('change:visible', ({ target: layer }) => {
-        if (mbMap && mbMap.isStyleLoaded()) {
-          applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
-        }
+      this.on('change:visible', () => {
+        this.aplyStyle();
       }),
     );
 
