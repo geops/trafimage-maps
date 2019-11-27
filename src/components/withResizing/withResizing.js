@@ -5,14 +5,17 @@ import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
 
 const transitiondelay = 300;
-const otherMenuHeight = 55;
 
-function withResizing(MenuToBeResized, isTopicsMenu) {
+function withResizing(MenuToBeResized) {
   const propTypes = {
     menuOpen: PropTypes.bool.isRequired,
-    trackerMenuOpen: PropTypes.bool.isRequired,
     map: PropTypes.instanceOf(Map).isRequired,
   };
+
+  const mapStateToProps = state => ({
+    menuOpen: state.app.menuOpen,
+    map: state.app.map,
+  });
 
   class ResizedWrapper extends Component {
     constructor(props) {
@@ -50,7 +53,7 @@ function withResizing(MenuToBeResized, isTopicsMenu) {
     }
 
     updateMenuHeight() {
-      const { map, trackerMenuOpen } = this.props;
+      const { map } = this.props;
       let menuHeight;
 
       if (
@@ -59,11 +62,7 @@ function withResizing(MenuToBeResized, isTopicsMenu) {
       ) {
         const mapBottom = map.getTarget().getBoundingClientRect().bottom;
         const elemRect = this.bodyElementRef.current.ref.current.getBoundingClientRect();
-        menuHeight =
-          mapBottom -
-          elemRect.top -
-          35 -
-          (isTopicsMenu && trackerMenuOpen ? otherMenuHeight : 0);
+        menuHeight = mapBottom - elemRect.top - 35;
       }
 
       this.setState({ menuHeight });
@@ -82,12 +81,6 @@ function withResizing(MenuToBeResized, isTopicsMenu) {
       );
     }
   }
-
-  const mapStateToProps = state => ({
-    trackerMenuOpen: state.app.trackerMenuOpen,
-    menuOpen: state.app.menuOpen,
-    map: state.app.map,
-  });
 
   ResizedWrapper.propTypes = propTypes;
 

@@ -5,7 +5,7 @@ import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
 import withResizing from '../withResizing';
-import { setMenuOpen, setTrackerMenuCollapse } from '../../model/app/actions';
+import { setMenuOpen } from '../../model/app/actions';
 
 const propTypes = {
   menuHeight: PropTypes.number,
@@ -27,9 +27,6 @@ const defaultProps = {
 function TopicsMenu({ children, menuHeight, bodyElementRef }) {
   const layerService = useSelector(state => state.app.layerService);
   const menuOpen = useSelector(state => state.app.menuOpen);
-  const trackerMenuCollapse = useSelector(
-    state => state.app.trackerMenuCollapse,
-  );
   const topics = useSelector(state => state.app.topics);
   const dispatch = useDispatch();
 
@@ -41,13 +38,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
     <div className="wkp-topics-menu">
       <TopicsMenuHeader
         isOpen={menuOpen}
-        onToggle={() => {
-          if (!trackerMenuCollapse) {
-            // Close Tracker Menu is needed.
-            dispatch(setTrackerMenuCollapse(true));
-          }
-          dispatch(setMenuOpen(!menuOpen));
-        }}
+        onToggle={() => dispatch(setMenuOpen(!menuOpen))}
       />
       <Collapsible
         isCollapsed={!menuOpen}
@@ -72,4 +63,4 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
 TopicsMenu.propTypes = propTypes;
 TopicsMenu.defaultProps = defaultProps;
 
-export default React.memo(withResizing(TopicsMenu, true));
+export default React.memo(withResizing(TopicsMenu));
