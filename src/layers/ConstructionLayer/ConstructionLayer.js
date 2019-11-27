@@ -20,14 +20,16 @@ import { unByKey } from 'ol/Observable';
  */
 class ConstructionLayer extends VectorLayer {
   constructor(options = {}) {
+    const thresholdRes = 305.748113141;
+
     const singleLayer = new OLVectorLayer({
       style: (f, r) => this.styleSingle(f, r),
-      maxResolution: 305.748113141,
+      maxResolution: thresholdRes,
     });
 
     const clusterLayer = new OLVectorLayer({
       style: (f, r) => this.styleCluster(f, r),
-      minResolution: 305.748113141,
+      minResolution: thresholdRes,
     });
 
     const olLayer = new OLLayerGroup({
