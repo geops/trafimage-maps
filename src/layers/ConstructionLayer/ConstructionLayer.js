@@ -1,4 +1,5 @@
 import VectorLayer from 'react-spatial/layers/VectorLayer';
+import OLLayerGroup from 'ol/layer/Group';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import ClusterSource from 'ol/source/Cluster';
@@ -19,29 +20,18 @@ import { unByKey } from 'ol/Observable';
  */
 class ConstructionLayer extends VectorLayer {
   constructor(options = {}) {
-    const olLayer = new OLVectorLayer({
-      style: (f, r) => this.style(f, r),
-      source: new OLVectorSource({
-        format: new GeoJSON(),
-        loader: () => {
-          fetch(
-            `${this.geoServerUrl}?` +
-              'service=WFS&version=1.0.0&request=GetFeature&' +
-              'typeName=trafimage:bahnausbauten&' +
-              'srsName=EPSG:3857&' +
-              'outputFormat=application/json',
-          )
-            .then(data => data.json())
-            .then(data => {
-              const format = new GeoJSON();
-              const features = format.readFeatures(data);
-              this.getSource().clear();
-              this.getSource().addFeatures(features);
-            });
-        },
-      }),
-      minResolution: options.minResolution,
-      maxResolution: options.maxResolution,
+    const singleLayer = new OLVectorLayer({
+      style: (f, r) => this.styleSingle(f, r),
+      maxResolution: 305.748113141,
+    });
+
+    const clusterLayer = new OLVectorLayer({
+      style: (f, r) => this.styleCluster(f, r),
+      minResolution: 305.748113141,
+    });
+
+    const olLayer = new OLLayerGroup({
+      layers: [singleLayer, clusterLayer],
     });
 
     super({
@@ -49,27 +39,43 @@ class ConstructionLayer extends VectorLayer {
       olLayer,
     });
 
-    this.cluster = this.get('cluster');
-
     this.styleCache = {};
     this.visibilityKeys = [];
 
-    this.onChangeVisible = this.onChangeVisible.bind(this);
     this.geometryFunction = this.geometryFunction.bind(this);
-    this.getSource = this.getSource.bind(this);
 
     this.grandChildren = this.children.map(c => c.getChildren()).flat();
     this.setVisible(this.visible);
 
-    if (this.cluster) {
-      this.olLayer.setSource(
-        new ClusterSource({
-          distance: 90,
-          source: this.olLayer.getSource(),
-          geometryFunction: this.geometryFunction,
-        }),
-      );
-    }
+    // Same source for both layers
+    this.source = new OLVectorSource({
+      format: new GeoJSON(),
+      loader: () => {
+        fetch(
+          `${this.geoServerUrl}?` +
+            'service=WFS&version=1.0.0&request=GetFeature&' +
+            'typeName=trafimage:bahnausbauten&' +
+            'srsName=EPSG:3857&' +
+            'outputFormat=application/json',
+        )
+          .then(data => data.json())
+          .then(data => {
+            const format = new GeoJSON();
+            const features = format.readFeatures(data);
+            this.source.clear();
+            this.source.addFeatures(features);
+          });
+      },
+    });
+
+    singleLayer.setSource(this.source);
+    clusterLayer.setSource(
+      new ClusterSource({
+        distance: 90,
+        source: this.source,
+        geometryFunction: this.geometryFunction,
+      }),
+    );
   }
 
   init(map) {
@@ -77,7 +83,7 @@ class ConstructionLayer extends VectorLayer {
 
     this.visibilityKeys.push(
       this.grandChildren.map(childLayer => {
-        return childLayer.on('change:visible', this.onChangeVisible);
+        return childLayer.on('change:visible', () => this.source.changed());
       }),
     );
   }
@@ -90,35 +96,48 @@ class ConstructionLayer extends VectorLayer {
     }
   }
 
+  /**
+   * Request feature information for a given coordinate.
+   * Overrides the parent function
+   * to handle the group layers and cluster features
+   * @override
+   * @param {ol.Coordinate} coordinate {@link https://openlayers.org/en/latest/apidoc/module-ol_coordinate.html ol/Coordinate} to request the information at.
+   * @returns {Promise<Object>} Promise with features, layer and coordinate
+   *  or null if no feature was hit.
+   */
   getFeatureInfoAtCoordinate(coordinate) {
-    return super.getFeatureInfoAtCoordinate(coordinate).then(data => {
-      const features = data.features
-        .map(f => (f.get('features') ? f.get('features') : f))
-        .flat();
+    let features = [];
 
-      return Promise.resolve({
-        features,
-        layer: data.layer,
-        coordinate:
-          data.features.length && data.features[0].get('features') // Features from cluster
-            ? data.features[0].getGeometry().getCoordinates()
-            : data.coordinate,
+    if (this.map) {
+      const pixel = this.map.getPixelFromCoordinate(coordinate);
+      features = this.map.getFeaturesAtPixel(pixel, {
+        layerFilter: l =>
+          // Get group layers
+          this.olLayer
+            .getLayers()
+            .getArray()
+            .some(layer => l === layer),
+        hitTolerance: this.hitTolerance,
       });
-    });
-  }
+    }
 
-  onChangeVisible() {
-    this.getSource().changed();
+    // Extract cluster features
+    const feats = features
+      .map(f => (f.get('features') ? f.get('features') : f))
+      .flat();
+
+    return Promise.resolve({
+      features: feats,
+      layer: this,
+      coordinate:
+        features.length && features[0].get('features')
+          ? features[0].getGeometry().getCoordinates() // Cluster coordinate
+          : coordinate,
+    });
   }
 
   setGeoServerUrl(geoServerUrl) {
     this.geoServerUrl = geoServerUrl;
-  }
-
-  getSource() {
-    return this.cluster
-      ? this.olLayer.getSource().getSource()
-      : this.olLayer.getSource();
   }
 
   /**
@@ -193,12 +212,6 @@ class ConstructionLayer extends VectorLayer {
     }
 
     return this.styleCache[cacheKey];
-  }
-
-  style(feature) {
-    return this.cluster
-      ? this.styleCluster(feature)
-      : this.styleSingle(feature);
   }
 }
 
