@@ -5,30 +5,24 @@ import Layer from 'react-spatial/layers/Layer';
  * Apply visibility to style layers that fits the filter function.
  * @private
  */
-const applyVisibilityToStyleLayer = (styleLayer, visibilityValue) => {
-  styleLayer.layout = styleLayer.layout || {};
-  styleLayer.layout.visibility = visibilityValue;
-};
+const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
+  const style = mbMap.getStyle();
 
-/**
- * Apply visibility to style layers that fits the filter function.
- * @private
- */
-const applyVisibility = (mbMap, visible, filterFunc) => {
-  const styleObj = mbMap.getStyle();
-  if (!mbMap && styleObj) {
+  if (!mbMap || !style) {
     return;
   }
-  const visibilityValue = visible ? 'visible' : 'none';
+
   if (filterFunc) {
-    for (let i = 0; i < styleObj.layers.length; i += 1) {
-      const styleObjLayer = styleObj.layers[i];
-      if (filterFunc(styleObjLayer)) {
-        applyVisibilityToStyleLayer(styleObjLayer, visibilityValue);
+    const visibilityValue = visible ? 'visible' : 'none';
+    for (let i = 0; i < style.layers.length; i += 1) {
+      const styleLayer = style.layers[i];
+      if (filterFunc(styleLayer)) {
+        if (mbMap.getLayer(styleLayer.id)) {
+          mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
+        }
       }
     }
   }
-  mbMap.setStyle(styleObj);
 };
 
 /**
@@ -62,6 +56,8 @@ class MapboxStyleLayer extends Layer {
         return ids.includes(styleLayer.id);
       };
     }
+
+    this.actions = [];
   }
 
   addStyleLayers() {
@@ -70,6 +66,7 @@ class MapboxStyleLayer extends Layer {
       if (!mbMap.getLayer(styleLayer.id)) {
         mbMap.addLayer(styleLayer);
       }
+      applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
     });
   }
 
@@ -81,40 +78,28 @@ class MapboxStyleLayer extends Layer {
     if (!mbMap) {
       return;
     }
+
     if (mbMap.isStyleLoaded()) {
-      if (this.styleLayers) {
-        this.styleLayers.forEach(styleLayer => {
-          if (!mbMap.getLayer(styleLayer.id)) {
-            mbMap.addLayer(styleLayer);
-          }
-        });
-        applyVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
-      }
-      applyVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
+      this.isMbMapLoaded = true;
+      this.addStyleLayers();
     } else {
-      const onStyleData = () => {
-        if (this.styleLayers) {
-          this.styleLayers.forEach(styleLayer => {
-            applyVisibilityToStyleLayer(
-              styleLayer,
-              this.getVisible() ? 'visible' : 'none',
-            );
-            if (!mbMap.getLayer(styleLayer.id)) {
-              mbMap.addLayer(styleLayer);
-            }
-          });
-        }
-        applyVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
-        mbMap.off('styledata', onStyleData);
-      };
-      mbMap.on('styledata', onStyleData);
+      mbMap.once('load', () => {
+        this.isMbMapLoaded = true;
+        this.addStyleLayers();
+      });
     }
 
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
       this.on('change:visible', ({ target: layer }) => {
-        if (mbMap && mbMap.isStyleLoaded()) {
-          applyVisibility(mbMap, layer.getVisible(), this.styleLayersFilter);
+        if (this.isMbMapLoaded) {
+          // Once the map is loaded we can apply vsiiblity without waiting
+          // the style. Mapbox take care of the application of style changes.
+          applyLayoutVisibility(
+            mbMap,
+            layer.getVisible(),
+            this.styleLayersFilter,
+          );
         }
       }),
     );

@@ -5,6 +5,8 @@ class Map {
   getCanvas() {}
 
   on() {}
+
+  once() {}
 }
 module.exports = {
   Map,
