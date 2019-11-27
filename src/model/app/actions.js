@@ -4,6 +4,8 @@ export const SET_CLICKED_FEATURE_INFO = 'SET_CLICKED_FEATURE_INFO';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_PROJECTION = 'SET_PROJECTION';
 export const SET_MENU_OPEN = 'SET_MENU_OPEN';
+export const SET_TRACKER_MENU_OPEN = 'SET_TRACKER_MENU_OPEN';
+export const SET_TRACKER_MENU_COLLAPSE = 'SET_TRACKER_MENU_COLLAPSE';
 export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
 export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
@@ -24,6 +26,24 @@ export const setClickedFeatureInfo = data => ({
 });
 
 export const setMenuOpen = data => ({ type: SET_MENU_OPEN, data });
+
+export const setTrackerMenuCollapse = data => {
+  return {
+    type: SET_TRACKER_MENU_COLLAPSE,
+    data,
+  };
+};
+
+export const setTrackerMenuOpen = data => {
+  // if closing TrackerMenu, reset trackerMenuCollapse to true.
+  if (!data) {
+    setTrackerMenuCollapse(true);
+  }
+  return {
+    type: SET_TRACKER_MENU_OPEN,
+    data,
+  };
+};
 
 export const setDialogVisible = data => ({ type: SET_DIALOG_VISIBLE, data });
 

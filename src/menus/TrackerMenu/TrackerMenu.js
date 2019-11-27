@@ -9,17 +9,25 @@ import Map from 'ol/Map';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
-import { setMenuOpen } from '../../model/app/actions';
+import {
+  setMenuOpen,
+  setTrackerMenuOpen,
+  setTrackerMenuCollapse,
+} from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
 
 const propTypes = {
   // mapStateToProps
+  trackerMenuOpen: PropTypes.bool.isRequired,
+  trackerMenuCollapse: PropTypes.bool.isRequired,
   map: PropTypes.instanceOf(Map).isRequired,
   layerService: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
 
   // mapDispatchToProps
   dispatchSetMenuOpen: PropTypes.func.isRequired,
+  dispatchSetTrackerMenuOpen: PropTypes.func.isRequired,
+  dispatchSetTrackerMenuCollapse: PropTypes.func.isRequired,
 };
 
 class TrackerMenu extends Component {
@@ -35,15 +43,13 @@ class TrackerMenu extends Component {
 
     this.olEventsKeys = [];
     this.state = {
-      open: false,
-      collapsed: true,
       trajectory: null,
     };
     this.onLayerClick = this.onLayerClick.bind(this);
   }
 
   componentDidMount() {
-    const { layerService } = this.props;
+    const { layerService, dispatchSetTrackerMenuOpen } = this.props;
 
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
@@ -55,9 +61,7 @@ class TrackerMenu extends Component {
       this.trackerLayers.forEach(layer => {
         this.olEventsKeys.push(
           layer.olLayer.on('change:visible', () => {
-            this.setState({
-              open: false,
-            });
+            dispatchSetTrackerMenuOpen(false);
           }),
         );
         layer.onClick(this.onLayerClick);
@@ -75,22 +79,33 @@ class TrackerMenu extends Component {
   }
 
   onLayerClick(traj) {
-    const { dispatchSetMenuOpen } = this.props;
+    const {
+      dispatchSetTrackerMenuOpen,
+      dispatchSetTrackerMenuCollapse,
+      dispatchSetMenuOpen,
+    } = this.props;
     if (traj) {
       dispatchSetMenuOpen(false);
     }
+    dispatchSetTrackerMenuOpen(!!traj);
+    dispatchSetTrackerMenuCollapse(false);
     this.setState({
-      open: !!traj,
-      collapsed: false,
       trajectory: traj,
     });
   }
 
   render() {
-    const { open, collapsed, trajectory } = this.state;
-    const { map, t } = this.props;
+    const { trajectory } = this.state;
+    const {
+      t,
+      map,
+      trackerMenuOpen,
+      trackerMenuCollapse,
+      dispatchSetMenuOpen,
+      dispatchSetTrackerMenuCollapse,
+    } = this.props;
 
-    if (!open) {
+    if (!trackerMenuOpen) {
       return null;
     }
 
@@ -100,9 +115,12 @@ class TrackerMenu extends Component {
         title={t('ch.sbb.puenktlichkeit')}
         icon={<TiVideo />}
         map={map}
-        open={open}
-        collapsed={collapsed}
-        onCollapseToggle={c => this.setState({ collapsed: c })}
+        open={trackerMenuOpen}
+        collapsed={trackerMenuCollapse}
+        onCollapseToggle={c => {
+          dispatchSetMenuOpen(false);
+          dispatchSetTrackerMenuCollapse(c);
+        }}
       >
         {trajectory ? (
           <div>
@@ -130,11 +148,15 @@ class TrackerMenu extends Component {
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => ({
   map: state.app.map,
+  trackerMenuOpen: state.app.trackerMenuOpen,
+  trackerMenuCollapse: state.app.trackerMenuCollapse,
   layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
   dispatchSetMenuOpen: setMenuOpen,
+  dispatchSetTrackerMenuOpen: setTrackerMenuOpen,
+  dispatchSetTrackerMenuCollapse: setTrackerMenuCollapse,
 };
 
 TrackerMenu.propTypes = propTypes;
