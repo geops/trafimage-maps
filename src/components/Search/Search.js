@@ -78,7 +78,7 @@ function Search() {
                       {t(section)}
                     </div>
                     <div className="wkp-search-section-count">
-                      {t('insgesamt {{ count }} Ergebnisse', { count })}
+                      {t('overallResult', { count })}
                       {searchService.sectionCollapsed(section) ? (
                         <FaChevronCircleDown focusable={false} />
                       ) : (
@@ -100,7 +100,8 @@ function Search() {
               tabIndex: 0,
               'aria-label': 'Suche',
               onChange: (e, { newValue }) => setValue(newValue),
-              onKeyUp: ({ key }) => {
+              onKeyUp: e => {
+                const { key } = e;
                 if (key === 'Enter') {
                   const filtered = suggestions.filter(s => s.items.length > 0);
                   if (filtered.length > 0) {

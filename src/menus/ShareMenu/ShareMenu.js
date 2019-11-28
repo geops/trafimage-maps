@@ -10,6 +10,7 @@ const ShareMenu = () => {
   return (
     <MenuItem
       open
+      fixedHeight={375}
       className="wkp-share-menu"
       title={t('Teilen')}
       icon={<FaShareAlt focusable={false} />}

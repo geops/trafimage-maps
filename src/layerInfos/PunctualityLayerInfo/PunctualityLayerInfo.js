@@ -12,7 +12,7 @@ const defaultProps = {};
 const PunctualityLayerInfo = ({ language, t }) => {
   const img = (
     <img
-      src={`/img/layers/puenktlichkeit/puenktlichkeit_legend_${language}.png`}
+      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/puenktlichkeit/puenktlichkeit_legend_${language}.png`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />

@@ -18,6 +18,7 @@ import Footer from '../Footer';
 import MapControls from '../MapControls';
 import Popup from '../Popup';
 import Search from '../Search';
+import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
 
 const defaultElements = {
@@ -89,6 +90,9 @@ function TopicElements({ history }) {
   }
 
   const elements = activeTopic.elements || defaultElements;
+  elements.telephoneInfos =
+    !disabled || !disabled.split(',').find(el => el === 'header');
+
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
     { shareMenu: <ShareMenu /> },
@@ -108,6 +112,7 @@ function TopicElements({ history }) {
   const appComponents = {
     header: <Header />,
     search: <Search />,
+    telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,
     permalink: <Permalink history={history} />,
     menu: (
@@ -124,7 +129,7 @@ function TopicElements({ history }) {
         titleButton={t('Baselayerwechsel')}
         titleButtonNext={t('Nächste Baselayer')}
         titleButtonPrevious={t('Vorherige Baselayer')}
-        fallbackImgDir="/img/baselayer/"
+        fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),

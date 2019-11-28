@@ -13,6 +13,7 @@ import { unByKey } from 'ol/Observable';
 /**
  * Layer for construction
  * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * @private
  * @class
  * @param {Object} [options] Layer options.
  */
@@ -185,7 +186,7 @@ class ConstructionLayer extends VectorLayer {
       this.styleCache[cacheKey] = [
         new Style({
           image: new Icon({
-            src: `/img/layers/construction/${filename}.png`,
+            src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`,
           }),
         }),
       ];

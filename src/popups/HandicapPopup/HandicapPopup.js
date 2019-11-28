@@ -16,17 +16,18 @@ function HandicapPopup({ feature }) {
 
   // mapping of all boolean values properties and their exceptions
   const bfEquipmentExceptions = {
+    treppenfrei: null,
     perronhoehe_P55: `ausnahme_zu_P55_${language}`,
-    taktile_sicherheitslinien: null,
-    induktionsverstaerker: null,
-    lift_zu_perron: `standort_zu_lift_${language}`,
     rampe: `ausnahme_zu_rampe_und_treppe_${language}`,
-    faltrampe: null,
-    sbb_rollstuhl: null,
+    lift_zu_perron: `standort_zu_lift_${language}`,
+    taktile_sicherheitslinien: null,
     rollstuhl_billet: null,
+    induktionsverstaerker: null,
     rollstuhl_wc: null,
     eurokey_wc: null,
+    sbb_rollstuhl: null,
     mobilift: null,
+    faltrampe: null,
   };
 
   // build string for equipment

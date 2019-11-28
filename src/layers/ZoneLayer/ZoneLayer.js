@@ -62,8 +62,6 @@ class ZoneLayer extends CasaLayer {
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
-    this.fetchZones();
-
     this.selectedZones = [];
 
     this.onClick(features => {
@@ -239,7 +237,10 @@ class ZoneLayer extends CasaLayer {
       for (let i = 0; i < features.length; i += 1) {
         const zoneCode = features[i].get('zone');
         const partnerCode = features[i].get('partner_code');
-        const partner = config.find(c => c.partnerCode === partnerCode);
+        // partner code can be string or int. ensure both are string.
+        const partner = config.find(
+          c => `${c.partnerCode}` === `${partnerCode}`,
+        );
 
         if (partner) {
           const zone = partner.zones.find(

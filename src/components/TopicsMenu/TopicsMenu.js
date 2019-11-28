@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
+import withResizing from '../withResizing';
 import { setMenuOpen } from '../../model/app/actions';
 
 const propTypes = {
+  menuHeight: PropTypes.number,
+  bodyElementRef: PropTypes.shape({
+    current: PropTypes.instanceOf(Collapsible),
+  }),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
@@ -15,9 +20,11 @@ const propTypes = {
 
 const defaultProps = {
   children: null,
+  menuHeight: null,
+  bodyElementRef: null,
 };
 
-function TopicsMenu({ children }) {
+function TopicsMenu({ children, menuHeight, bodyElementRef }) {
   const layerService = useSelector(state => state.app.layerService);
   const menuOpen = useSelector(state => state.app.menuOpen);
   const topics = useSelector(state => state.app.topics);
@@ -33,7 +40,11 @@ function TopicsMenu({ children }) {
         isOpen={menuOpen}
         onToggle={() => dispatch(setMenuOpen(!menuOpen))}
       />
-      <Collapsible isCollapsed={!menuOpen}>
+      <Collapsible
+        isCollapsed={!menuOpen}
+        maxHeight={menuHeight}
+        ref={bodyElementRef}
+      >
         <div className="wkp-topics-menu-body">
           {topics.map(topic => (
             <TopicMenu
@@ -52,4 +63,4 @@ function TopicsMenu({ children }) {
 TopicsMenu.propTypes = propTypes;
 TopicsMenu.defaultProps = defaultProps;
 
-export default React.memo(TopicsMenu);
+export default React.memo(withResizing(TopicsMenu));

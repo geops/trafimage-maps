@@ -124,6 +124,10 @@
       }
     }
 
+    .wkp-tel-infos {
+      top: 65px;
+    }
+
     // header component is enabled
     &.header {
       .wkp-menu-wrapper {
@@ -183,6 +187,10 @@
     .wkp-search-toggle-container--open {
       display: block;
       margin-right: 0;
+    }
+
+    .wkp-bus-line-popup {
+      max-width: 200px;
     }
   }
 
