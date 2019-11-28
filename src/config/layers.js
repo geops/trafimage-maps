@@ -12,6 +12,7 @@ import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
+import InfoFPWLayer from '../layers/InfoFPWLayer/InfoFPWLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -622,6 +623,16 @@ export const constrClusterLayer = new ConstructionLayer({
   },
   children: [constrUnterhalt, constrAusbau],
   minResolution: 305.748113141,
+});
+
+export const infoFPWLayer = new InfoFPWLayer({
+  name: 'ch.sbb.infofpw.haltestellen',
+  key: 'ch.sbb.infofpw.haltestellen',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'InfoFPWPopup',
+  },
 });
 
 export default [

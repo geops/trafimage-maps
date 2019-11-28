@@ -7,6 +7,7 @@ import ParksPopup from './ParksPopup';
 import PassagierFrequenzenPopup from './PassagierFrequenzenPopup';
 import ConstructionPopup from './ConstructionPopup';
 import DeparturePopup from './DeparturePopup';
+import InfoFPWPopup from './InfoFPWPopup';
 
 export default {
   BahnhofplanPopup,
@@ -18,4 +19,5 @@ export default {
   PassagierFrequenzenPopup,
   ConstructionPopup,
   DeparturePopup,
+  InfoFPWPopup,
 };

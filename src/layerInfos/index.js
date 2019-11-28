@@ -4,6 +4,7 @@ import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
 import HandicapTopicInfo from './HandicapTopicInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
+import InfoFPWTopicInfo from './InfoFPWTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
@@ -18,6 +19,7 @@ export default {
   ConstructionLayerInfo,
   ConstructionTopicInfo,
   HandicapTopicInfo,
+  InfoFPWTopicInfo,
   InfrastrukturTopicInfo,
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,

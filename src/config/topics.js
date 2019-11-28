@@ -17,6 +17,7 @@ import defaultBaseLayers, {
   constrAusbau,
   constrSingleLayer,
   constrClusterLayer,
+  infoFPWLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -142,6 +143,18 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
+export const infofpw = {
+  name: 'ch.sbb.infofpw',
+  key: 'ch.sbb.infofpw',
+  elements: {
+    ...defaultElements,
+    popup: true,
+  },
+  layers: [netzkarteLayer, infoFPWLayer],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'InfoFPWTopicInfo',
+};
+
 export default {
   wkp: [
     netzkarte,
@@ -152,6 +165,7 @@ export default {
     regionenkarte,
     tarifverbundkarte,
     showcases,
+    infofpw,
   ],
   stelen: [netzkarteStelen],
 };
