@@ -22,7 +22,7 @@ const ConstructionLayerInfo = ({ t, infos }) => {
       {t(`${infos.key}-desc`)}
       <p>
         <img
-          src={`/img/layers/construction/${filename}.png`}
+          src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`}
           draggable="false"
           alt={t('Kein Bildtext')}
         />

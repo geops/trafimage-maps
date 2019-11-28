@@ -129,7 +129,7 @@ function TopicElements({ history }) {
         titleButton={t('Baselayerwechsel')}
         titleButtonNext={t('Nächste Baselayer')}
         titleButtonPrevious={t('Vorherige Baselayer')}
-        fallbackImgDir="/img/baselayer/"
+        fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
