@@ -49,6 +49,7 @@ class MapboxStyleLayer extends Layer {
     this.styleLayers =
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
     this.addStyleLayers = this.addStyleLayers.bind(this);
+    this.onLoad = this.onLoad.bind(this);
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map(s => s.id);
@@ -56,9 +57,6 @@ class MapboxStyleLayer extends Layer {
         return ids.includes(styleLayer.id);
       };
     }
-
-    this.actions = [];
-    this.onLoad = this.onLoad.bind(this);
   }
 
   init(map) {
