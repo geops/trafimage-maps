@@ -110,7 +110,7 @@ class BehigLayer extends VectorLayer {
           new Style({
             zIndex: 3,
             image: new Icon({
-              src: `/img/layers/behig/${filename}.png`,
+              src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/behig/${filename}.png`,
             }),
           }),
         ];

@@ -19,7 +19,7 @@ const BehigLayerInfo = ({ t, language, infos }) => {
 
   const img = (
     <img
-      src={`/img/layers/behig/${key}.png`}
+      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/behig/${key}.png`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />
