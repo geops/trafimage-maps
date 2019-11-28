@@ -2,9 +2,13 @@
 class Map {
   isStyleLoaded() {}
 
+  loaded() {}
+
   getCanvas() {}
 
   on() {}
+
+  off() {}
 
   once() {}
 }

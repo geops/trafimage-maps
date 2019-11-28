@@ -58,16 +58,7 @@ class MapboxStyleLayer extends Layer {
     }
 
     this.actions = [];
-  }
-
-  addStyleLayers() {
-    const { mbMap } = this.mapboxLayer;
-    this.styleLayers.forEach(styleLayer => {
-      if (!mbMap.getLayer(styleLayer.id)) {
-        mbMap.addLayer(styleLayer);
-      }
-      applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
-    });
+    this.onLoad = this.onLoad.bind(this);
   }
 
   init(map) {
@@ -79,14 +70,14 @@ class MapboxStyleLayer extends Layer {
       return;
     }
 
-    if (mbMap.isStyleLoaded()) {
-      this.isMbMapLoaded = true;
-      this.addStyleLayers();
+    // mbMap.loaded() and mbMap.isStyleLoaded() are reliable only on the first call of init.
+    // On the next call (when a topic change for example), these functions returns false because
+    // the style is being modified.
+    // That's why we rely on a property instead for the next calls.
+    if (this.isMbMapLoaded || mbMap.isStyleLoaded() || mbMap.loaded()) {
+      this.onLoad();
     } else {
-      mbMap.once('load', () => {
-        this.isMbMapLoaded = true;
-        this.addStyleLayers();
-      });
+      mbMap.once('load', this.onLoad);
     }
 
     // Apply the visibiltity when layer's visibility change.
@@ -111,16 +102,39 @@ class MapboxStyleLayer extends Layer {
 
   terminate(map) {
     const { mbMap } = this.mapboxLayer;
-    if (mbMap && mbMap.isStyleLoaded() && this.styleLayers) {
-      this.styleLayers
-        .map(s => s.id)
-        .forEach(styleLayerId => {
-          if (mbMap.getLayer(styleLayerId)) {
-            mbMap.removeLayer(styleLayerId);
-          }
-        });
+    if (!mbMap) {
+      return;
+    }
+
+    mbMap.off('load', this.onLoad);
+    if (this.isMbMapLoaded) {
+      this.removeStyleLayers();
     }
     super.terminate(map);
+  }
+
+  addStyleLayers() {
+    const { mbMap } = this.mapboxLayer;
+    this.styleLayers.forEach(styleLayer => {
+      if (!mbMap.getLayer(styleLayer.id)) {
+        mbMap.addLayer(styleLayer);
+      }
+      applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
+    });
+  }
+
+  removeStyleLayers() {
+    const { mbMap } = this.mapboxLayer;
+    this.styleLayers.forEach(styleLayer => {
+      if (mbMap.getLayer(styleLayer.id)) {
+        mbMap.removeLayer(styleLayer.id);
+      }
+    });
+  }
+
+  onLoad() {
+    this.isMbMapLoaded = true;
+    this.addStyleLayers();
   }
 
   /**
