@@ -49,7 +49,7 @@ const renderLinks = intialText => {
       return !pos || item !== ary[pos - 1];
     });
 
-    return replaceLinks(emailMatches);
+    return replaceLinks(intialText, emailMatches);
   }
   return intialText;
 };
