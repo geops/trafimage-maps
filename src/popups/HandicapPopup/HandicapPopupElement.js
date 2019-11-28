@@ -9,49 +9,85 @@ const propTypes = {
 };
 
 const emailTester = /[a-zA-Z0-9._+%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}/gm;
+const urlTester = /(www)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g;
 
-// eslint-disable-next-line react/no-array-index-key
+const searchMatches = (intialText, tester) => {
+  const matched = intialText.match(tester);
+  if (matched) {
+    // Remove duplicates from match array.
+    return matched.sort().filter((item, pos, ary) => {
+      return !pos || item !== ary[pos - 1];
+    });
+  }
+  return [];
+};
+
 const mailTo = (email, idx) => (
   <a key={idx} href={`mailto:${email}`}>
     {email}
   </a>
 );
 
-const replaceLinks = (intialText, matched) => {
+const urlHref = (href, idx) => {
+  return (
+    <a
+      key={idx}
+      href={`http://${href}`}
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      {href}
+    </a>
+  );
+};
+
+const replaceLinks = (intialTextArray, matched, renderCallback) => {
   // Construct an RegExp to capture all matched emails.
   const regularExp = matched.reduce(
     (prevVal, currVal, currentIndex) =>
       currentIndex === 0 ? prevVal : `${prevVal}|(${currVal})`,
     `(${matched[0]})`,
   );
-  const textArray = intialText
-    .split(new RegExp(regularExp, 'g'))
-    .filter(v => v !== undefined && v !== '');
 
-  const newTextArray = textArray.map((text, idx) => {
+  // Split array items and flatten it.
+  const flatSplitArray = intialTextArray
+    .map(item => {
+      if (typeof item === 'string') {
+        return item
+          .split(new RegExp(regularExp, 'g'))
+          .filter(v => v !== undefined && v !== '');
+      }
+      return [item];
+    })
+    .reduce((accumulatorArray, currentArray) => {
+      return [...accumulatorArray, ...currentArray];
+    }, []);
+
+  const newTextArray = flatSplitArray.map((text, idx) => {
     // eslint-disable-next-line react/no-array-index-key
-    let elementToReturn = <span key={idx}>{text}</span>;
+    let substitutedElement = <span key={idx}>{text}</span>;
     matched.forEach(match => {
       if (text === match) {
-        elementToReturn = mailTo(match, idx);
+        substitutedElement = renderCallback(match, idx);
       }
     });
-    return elementToReturn;
+    return substitutedElement;
   });
   return newTextArray;
 };
 
 const renderLinks = intialText => {
-  let emailMatches = intialText.match(emailTester);
-  if (emailMatches) {
-    // Remove duplicates from match array.
-    emailMatches = emailMatches.sort().filter((item, pos, ary) => {
-      return !pos || item !== ary[pos - 1];
-    });
+  const emailMatches = searchMatches(intialText, emailTester);
+  const urlMatches = searchMatches(intialText, urlTester);
 
-    return replaceLinks(intialText, emailMatches);
+  let replaced = [intialText];
+  if (emailMatches.length) {
+    replaced = replaceLinks(replaced, emailMatches, mailTo);
   }
-  return intialText;
+  if (urlMatches.length) {
+    replaced = replaceLinks(replaced, urlMatches, urlHref);
+  }
+  return replaced;
 };
 
 function HandicapPopupElement({ properties, propertyName, label }) {
