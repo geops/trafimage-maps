@@ -8,6 +8,52 @@ const propTypes = {
   label: PropTypes.string.isRequired,
 };
 
+const emailTester = /[a-zA-Z0-9._+%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}/gm;
+
+// eslint-disable-next-line react/no-array-index-key
+const mailTo = (email, idx) => (
+  <a key={idx} href={`mailto:${email}`}>
+    {email}
+  </a>
+);
+
+const replaceLinks = (intialText, matched) => {
+  // Construct an RegExp to capture all matched emails.
+  const regularExp = matched.reduce(
+    (prevVal, currVal, currentIndex) =>
+      currentIndex === 0 ? prevVal : `${prevVal}|(${currVal})`,
+    `(${matched[0]})`,
+  );
+  const textArray = intialText
+    .split(new RegExp(regularExp, 'g'))
+    .filter(v => v !== undefined && v !== '');
+
+  const newTextArray = textArray.map((text, idx) => {
+    // eslint-disable-next-line react/no-array-index-key
+    let elementToReturn = <span key={idx}>{text}</span>;
+    matched.forEach(match => {
+      if (text === match) {
+        elementToReturn = mailTo(match, idx);
+      }
+    });
+    return elementToReturn;
+  });
+  return newTextArray;
+};
+
+const renderLinks = intialText => {
+  let emailMatches = intialText.match(emailTester);
+  if (emailMatches) {
+    // Remove duplicates from match array.
+    emailMatches = emailMatches.sort().filter((item, pos, ary) => {
+      return !pos || item !== ary[pos - 1];
+    });
+
+    return replaceLinks(emailMatches);
+  }
+  return intialText;
+};
+
 function HandicapPopupElement({ properties, propertyName, label }) {
   const { t } = useTranslation();
 
@@ -26,7 +72,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
         <div className="wkp-handicap-popup-field-body">
           {values.map((v, idx) => (
             // eslint-disable-next-line react/no-array-index-key
-            <div key={idx}>{v}</div>
+            <div key={idx}>{renderLinks(v)}</div>
           ))}
         </div>
       </>
@@ -35,7 +81,9 @@ function HandicapPopupElement({ properties, propertyName, label }) {
     content = (
       <>
         <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
-        <div className="wkp-handicap-popup-field-body">{values[0]}</div>
+        <div className="wkp-handicap-popup-field-body">
+          {renderLinks(values[0])}
+        </div>
       </>
     );
   }
