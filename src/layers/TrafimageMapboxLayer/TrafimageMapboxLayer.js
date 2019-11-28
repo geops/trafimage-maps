@@ -10,7 +10,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
 
     // Don't apply style if not necessary otherwise
     // it will remove styles apply by MapboxStyleLayer layers.
-    if (!this.styleUrl === newStyleUrl) {
+    if (this.styleUrl === newStyleUrl) {
       return;
     }
     if (!this.mbMap) {
