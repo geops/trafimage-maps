@@ -8,8 +8,13 @@ const propTypes = {
   label: PropTypes.string.isRequired,
 };
 
+const telephoneTester = /((([+]{1}[0-9]{1,3})|([+]?[(]{1}[0-9]{1,3}[)]{1})|([(]?[0-9]{4}[)]?))\s{0,4}[)]?[-\s\\.]?[(]?[0-9]{1,4}[)]?([^\r\n][-\s\\.]{0,1}[0-9]{1,3}){1,4})|([0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
 const emailTester = /[a-zA-Z0-9._+%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}/gm;
 const urlTester = /(www)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g;
+
+const escapeRegExp = string => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+};
 
 const searchMatches = (intialText, tester) => {
   const matched = intialText.match(tester);
@@ -25,6 +30,12 @@ const searchMatches = (intialText, tester) => {
 const mailTo = (email, idx) => (
   <a key={idx} href={`mailto:${email}`}>
     {email}
+  </a>
+);
+
+const telTo = (telNumber, idx) => (
+  <a key={idx} href={`tel:${telNumber}`}>
+    {telNumber}
   </a>
 );
 
@@ -45,8 +56,8 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
   // Construct an RegExp to capture all matched emails.
   const regularExp = matched.reduce(
     (prevVal, currVal, currentIndex) =>
-      currentIndex === 0 ? prevVal : `${prevVal}|(${currVal})`,
-    `(${matched[0]})`,
+      currentIndex === 0 ? prevVal : `${prevVal}|(${escapeRegExp(currVal)})`,
+    `(${escapeRegExp(matched[0])})`,
   );
 
   // Split array items and flatten it.
@@ -77,10 +88,14 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
 };
 
 const renderLinks = intialText => {
+  const telMatches = searchMatches(intialText, telephoneTester);
   const emailMatches = searchMatches(intialText, emailTester);
   const urlMatches = searchMatches(intialText, urlTester);
 
   let replaced = [intialText];
+  if (telMatches.length) {
+    replaced = replaceLinks(replaced, telMatches, telTo);
+  }
   if (emailMatches.length) {
     replaced = replaceLinks(replaced, emailMatches, mailTo);
   }
