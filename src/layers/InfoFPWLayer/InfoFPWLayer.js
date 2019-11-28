@@ -6,7 +6,7 @@ import { Style, Icon } from 'ol/style';
 import LayerHelper from '../layerHelper';
 
 /**
- * Layer for visualizing Handicap Topic.
+ * Layer for visualizing InfoFPW Topic.
  * @class
  * @private
  * @params {Object} options
