@@ -1,5 +1,6 @@
 .wkp-collapsible-vertical {
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   transition: max-height 0.3s ease;
 }
 

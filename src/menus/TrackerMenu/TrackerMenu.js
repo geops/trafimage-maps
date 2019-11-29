@@ -16,6 +16,7 @@ const propTypes = {
   // mapStateToProps
   map: PropTypes.instanceOf(Map).isRequired,
   layerService: PropTypes.object.isRequired,
+  menuOpen: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
 
   // mapDispatchToProps
@@ -65,6 +66,13 @@ class TrackerMenu extends Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const { menuOpen } = this.props;
+    if (menuOpen !== prevProps.menuOpen) {
+      this.closeMenu();
+    }
+  }
+
   componentWillUnmount() {
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
@@ -83,6 +91,14 @@ class TrackerMenu extends Component {
       open: !!traj,
       collapsed: false,
       trajectory: traj,
+    });
+  }
+
+  closeMenu() {
+    this.setState({
+      open: false,
+      collapsed: false,
+      trajectory: null,
     });
   }
 
@@ -130,6 +146,7 @@ class TrackerMenu extends Component {
 // eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => ({
   map: state.app.map,
+  menuOpen: state.app.menuOpen,
   layerService: state.app.layerService,
 });
 

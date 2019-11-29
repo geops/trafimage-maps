@@ -2,9 +2,15 @@
 class Map {
   isStyleLoaded() {}
 
+  loaded() {}
+
   getCanvas() {}
 
   on() {}
+
+  off() {}
+
+  once() {}
 }
 module.exports = {
   Map,
