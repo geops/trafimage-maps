@@ -5,6 +5,7 @@ import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
 import HandicapTopicInfo from './HandicapTopicInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
+import MobzTopicInfo from './MobzTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
@@ -21,6 +22,7 @@ export default {
   ConstructionTopicInfo,
   HandicapTopicInfo,
   InfrastrukturTopicInfo,
+  MobzTopicInfo,
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
