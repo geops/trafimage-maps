@@ -207,7 +207,7 @@ class ConstructionLayer extends VectorLayer {
       this.styleCache[cacheKey] = [
         new Style({
           image: new Icon({
-            src: `/img/layers/construction/${filename}.png`,
+            src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`,
           }),
         }),
       ];
