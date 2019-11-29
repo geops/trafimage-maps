@@ -65,10 +65,10 @@ const propTypes = {
   cartaroUrl: PropTypes.string,
 
   /**
-   * URL of the GeoServer instance to use.
+   * Base URL to use.
    * @ignore
    */
-  geoServerUrl: PropTypes.string,
+  appBaseUrl: PropTypes.string,
 
   /**
    * API key for accessing vector tiles.
@@ -90,7 +90,7 @@ const attributes = {
   activeTopicKey: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  geoServerUrl: process.env.REACT_APP_GEOSERVER_URL,
+  appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
 };
