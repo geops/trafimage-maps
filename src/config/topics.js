@@ -15,8 +15,7 @@ import defaultBaseLayers, {
   stuetzpunktbahnhoefe,
   constrUnterhalt,
   constrAusbau,
-  constrSingleLayer,
-  constrClusterLayer,
+  constructionLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -90,8 +89,7 @@ export const bauprojekte = {
     swisstopoSwissImage,
     constrUnterhalt,
     constrAusbau,
-    constrSingleLayer,
-    constrClusterLayer,
+    constructionLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
