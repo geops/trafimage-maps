@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
-import Button from 'react-spatial/components/Button';
+import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
 import { setClickedFeatureInfo } from '../../model/app/actions';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import Button from 'react-spatial/components/Button';
+import Button from '@geops/react-ui/components/Button';
 import { MdClose } from 'react-icons/md';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { setClickedFeatureInfo } from '../../model/app/actions';

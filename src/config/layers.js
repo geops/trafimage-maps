@@ -600,29 +600,15 @@ export const constrAusbau = new Layer({
   ],
 });
 
-export const constrSingleLayer = new ConstructionLayer({
-  name: 'ch.sbb.construction.single',
-  key: 'ch.sbb.construction.single',
+export const constructionLayer = new ConstructionLayer({
+  name: 'ch.sbb.construction.data',
+  key: 'ch.sbb.construction.data',
   visible: true,
   properties: {
     hideInLegend: true,
     popupComponent: 'ConstructionPopup',
   },
   children: [constrUnterhalt, constrAusbau],
-  maxResolution: 305.748113141,
-});
-
-export const constrClusterLayer = new ConstructionLayer({
-  name: 'ch.sbb.construction.cluster',
-  key: 'ch.sbb.construction.cluster',
-  visible: true,
-  properties: {
-    hideInLegend: true,
-    popupComponent: 'ConstructionPopup',
-    cluster: true,
-  },
-  children: [constrUnterhalt, constrAusbau],
-  minResolution: 305.748113141,
 });
 
 export const behigOk = new Layer({

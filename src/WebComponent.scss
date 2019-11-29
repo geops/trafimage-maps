@@ -1,5 +1,17 @@
 @import 'globals.scss';
 
+// @geops/react-ui
+@import 'node_modules/@geops/react-ui/themes/default/variables.scss';
+@import 'node_modules/@geops/react-ui/themes/default/mixins.scss';
+@import 'node_modules/@geops/react-ui/components/List/List.scss';
+@import 'node_modules/@geops/react-ui/components/SearchInput/SearchInput.scss';
+@import 'node_modules/@geops/react-ui/components/Autocomplete/Autocomplete.scss';
+@import 'node_modules/@geops/react-ui/components/Footer/Footer.scss';
+@import 'node_modules/@geops/react-ui/components/Button/Button.scss';
+@import 'node_modules/@geops/react-ui/components/Header/Header.scss';
+@import 'node_modules/@geops/react-ui/components/PermalinkInput/PermalinkInput.scss';
+@import 'node_modules/@geops/react-ui/components/Dialog/Dialog.scss';
+
 // React-transit
 @import 'react-transit/themes/default/variables.scss';
 @import 'react-transit/themes/default/components.scss';
@@ -7,19 +19,11 @@
 // React-spatial
 @import 'node_modules/react-spatial/themes/default/variables.scss';
 @import 'node_modules/react-spatial/themes/default/mixins.scss';
-@import 'node_modules/react-spatial/components/List/List.scss';
-@import 'node_modules/react-spatial/components/SearchInput/SearchInput.scss';
-@import 'node_modules/react-spatial/components/Autocomplete/Autocomplete.scss';
 @import 'node_modules/react-spatial/components/LayerTree/LayerTree.scss';
 @import 'node_modules/react-spatial/components/BaseLayerToggler/BaseLayerToggler.scss';
-@import 'node_modules/react-spatial/components/Footer/Footer.scss';
-@import 'node_modules/react-spatial/components/Button/Button.scss';
 @import 'node_modules/react-spatial/components/ScaleLine/ScaleLine.scss';
-@import 'node_modules/react-spatial/components/Header/Header.scss';
 @import 'node_modules/react-spatial/components/Zoom/Zoom.scss';
 @import 'node_modules/react-spatial/components/Geolocation/Geolocation.scss';
-@import 'node_modules/react-spatial/components/PermalinkInput/PermalinkInput.scss';
-@import 'node_modules/react-spatial/components/Dialog/Dialog.scss';
 @import 'node_modules/react-spatial/components/Popup/Popup.scss';
 @import 'src/components/Collapsible/Collapsible.scss';
 @import 'src/components/Dialog/Dialog.scss';

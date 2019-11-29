@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import RSFooter from 'react-spatial/components/Footer';
+import UIFooter from '@geops/react-ui/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
 import Copyright from 'react-spatial/components/Copyright';
-import Select from 'react-spatial/components/Select';
+import Select from '@geops/react-ui/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
-import ActionLink from 'react-spatial/components/ActionLink';
+import ActionLink from '@geops/react-ui/components/ActionLink';
 import {
   setLanguage,
   setProjection,
@@ -32,7 +32,7 @@ const Footer = () => {
   const language = useSelector(state => state.app.language);
 
   return (
-    <RSFooter className="wkp-footer">
+    <UIFooter className="wkp-footer">
       <div className="wkp-footer-left">
         <Copyright
           layerService={layerService}
@@ -94,7 +94,7 @@ const Footer = () => {
           }}
         />
       </div>
-    </RSFooter>
+    </UIFooter>
   );
 };
 
