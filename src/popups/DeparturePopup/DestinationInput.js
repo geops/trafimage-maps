@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import Autocomplete from 'react-spatial/components/Autocomplete';
+import Autocomplete from '@geops/react-ui/components/Autocomplete';
 
 import { ReactComponent as SearchIcon } from '../../img/search.svg';
 

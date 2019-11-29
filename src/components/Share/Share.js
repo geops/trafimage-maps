@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
 import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
-import BlankLink from 'react-spatial/components/BlankLink';
+import BlankLink from '@geops/react-ui/components/BlankLink';
 import SharePermalinkButton from '../SharePermalinkButton';
 
 const socialShareConfig = [
