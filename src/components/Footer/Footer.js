@@ -49,7 +49,7 @@ const Footer = () => {
           rel="noopener noreferrer"
           target="_blank"
         >
-          {t('Developer Portal')}
+          Developer Portal
         </a>
         <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
           {t('Rechtliches')}
@@ -82,7 +82,8 @@ const Footer = () => {
             {
               label: 'WGS 84',
               value: 'EPSG:4326',
-              format: c => `${t('Koordinaten')}: ${c}`,
+              format: c =>
+                `${t('Koordinaten')}: ${c[0].toFixed(5)},${c[1].toFixed(5)}`,
             },
           ]}
         />
