@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import RSDialog from 'react-spatial/components/Dialog';
+import UIDialog from '@geops/react-ui/components/Dialog';
 import { setDialogVisible } from '../../model/app/actions';
 
 import './Dialog.scss';
@@ -50,7 +50,7 @@ function Dialog(props) {
 
   return (
     <div className="wkp-dialog">
-      <RSDialog
+      <UIDialog
         isOpen
         position={dialogPosition}
         onClose={() => {
@@ -65,7 +65,7 @@ function Dialog(props) {
         {...props}
       >
         {body}
-      </RSDialog>
+      </UIDialog>
     </div>
   );
 }
