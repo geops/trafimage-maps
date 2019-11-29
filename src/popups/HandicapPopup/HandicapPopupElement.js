@@ -8,7 +8,11 @@ const propTypes = {
   label: PropTypes.string.isRequired,
 };
 
-const telephoneTester = /((([+]{1}[0-9]{1,3})|([+]?[(]{1}[0-9]{1,3}[)]{1})|([(]?[0-9]{4}[)]?))\s{0,4}[)]?[-\s\\.]?[(]?[0-9]{1,4}[)]?([^\r\n][-\s\\.]{0,1}[0-9]{1,3}){1,4})|([0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
+// 012 111 22 333
+const simpleTelTester = /([0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
+// +41 (0) 11 222 33 44
+const complexTelTester = /((([+]{1}[0-9]{1,3})|([+]?[(]{1}[0-9]{1,3}[)]{1})|([(]?[0-9]{4}[)]?))\s{0,4}[)]?[-\s\\.]?[(]?[0-9]{1,4}[)]?([^\r\n][-\s\\.]{0,1}[0-9]{1,3}){1,4})/g;
+
 const emailTester = /[a-zA-Z0-9._+%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}/gm;
 const urlTester = /(www)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g;
 
@@ -16,8 +20,19 @@ const escapeRegExp = string => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 
-const searchMatches = (intialText, tester) => {
-  const matched = intialText.match(tester);
+const searchMatches = (intialText, testers) => {
+  let matched = [];
+  testers.forEach(t => {
+    const matches = intialText.match(t);
+    if (matches) {
+      matched.push(matches);
+    }
+  });
+  // Flatten array of matches.
+  if (matched.length) {
+    matched = matched.reduce((acc, curr) => [...acc, ...curr], []);
+  }
+
   if (matched) {
     // Remove duplicates from match array.
     return matched.sort().filter((item, pos, ary) => {
@@ -88,9 +103,12 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
 };
 
 const renderLinks = intialText => {
-  const telMatches = searchMatches(intialText, telephoneTester);
-  const emailMatches = searchMatches(intialText, emailTester);
-  const urlMatches = searchMatches(intialText, urlTester);
+  const telMatches = searchMatches(intialText, [
+    simpleTelTester,
+    complexTelTester,
+  ]);
+  const emailMatches = searchMatches(intialText, [emailTester]);
+  const urlMatches = searchMatches(intialText, [urlTester]);
 
   let replaced = [intialText];
   if (telMatches.length) {
