@@ -44,6 +44,13 @@ const Footer = () => {
         <ActionLink onClick={() => dispatch(setDialogVisible('Impressum'))}>
           {t('Impressum')}
         </ActionLink>
+        <a
+          href="https://doc.trafimage.ch"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {t('Developer Portal')}
+        </a>
         <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
           {t('Rechtliches')}
         </ActionLink>
