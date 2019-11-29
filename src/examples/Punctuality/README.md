@@ -50,7 +50,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <trafimage-maps ref={ref} zoom="14" center="[950690,6004000]" />
+      <trafimage-maps ref={ref} zoom="14" center="[950690,6004000]" language="fr" />
     </div>
   );
 }

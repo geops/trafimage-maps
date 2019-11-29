@@ -21,6 +21,11 @@ const propTypes = {
   history: PropTypes.object,
 
   /**
+   * Language of the application.
+   */
+  language: PropTypes.string,
+
+  /**
    * Width of the application as CSS property.
    * Default is '100%'.
    */
@@ -87,6 +92,7 @@ const attributes = {
   center: undefined,
   zoom: undefined,
   appName: 'wkp',
+  language: 'de',
   activeTopicKey: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
