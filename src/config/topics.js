@@ -15,8 +15,11 @@ import defaultBaseLayers, {
   stuetzpunktbahnhoefe,
   constrUnterhalt,
   constrAusbau,
-  constrSingleLayer,
-  constrClusterLayer,
+  constructionLayer,
+  behigOk,
+  behigNotYetOk,
+  behigNotOk,
+  behigParent,
   infoFPWLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -91,8 +94,7 @@ export const bauprojekte = {
     swisstopoSwissImage,
     constrUnterhalt,
     constrAusbau,
-    constrSingleLayer,
-    constrClusterLayer,
+    constructionLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
@@ -102,8 +104,11 @@ export const bauprojekte = {
 export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [netzkarteLayer, behigNotOk, behigNotYetOk, behigOk, behigParent],
+  projection: 'EPSG:3857',
   layerInfoComponent: 'BehigTopicInfo',
+  searches: defaultSearches,
 };
 
 export const infrastruktur = {

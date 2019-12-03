@@ -1,3 +1,4 @@
+import BehigLayerInfo from './BehigLayerInfo';
 import BehigTopicInfo from './BehigTopicInfo';
 import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionLayerInfo from './ConstructionLayerInfo';
@@ -14,6 +15,7 @@ import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 
 export default {
+  BehigLayerInfo,
   BehigTopicInfo,
   BuslinesLayerInfo,
   ConstructionLayerInfo,

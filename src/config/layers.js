@@ -12,6 +12,7 @@ import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
+import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import InfoFPWLayer from '../layers/InfoFPWLayer/InfoFPWLayer';
 
 proj4.defs(
@@ -600,29 +601,52 @@ export const constrAusbau = new Layer({
   ],
 });
 
-export const constrSingleLayer = new ConstructionLayer({
-  name: 'ch.sbb.construction.single',
-  key: 'ch.sbb.construction.single',
+export const constructionLayer = new ConstructionLayer({
+  name: 'ch.sbb.construction.data',
+  key: 'ch.sbb.construction.data',
   visible: true,
   properties: {
     hideInLegend: true,
     popupComponent: 'ConstructionPopup',
   },
   children: [constrUnterhalt, constrAusbau],
-  maxResolution: 305.748113141,
 });
 
-export const constrClusterLayer = new ConstructionLayer({
-  name: 'ch.sbb.construction.cluster',
-  key: 'ch.sbb.construction.cluster',
+export const behigNotYetOk = new Layer({
+  name: 'ch.sbb.behig.not_yet_ok',
+  key: 'ch.sbb.behig.not_yet_ok',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'BehigLayerInfo',
+    behig: {
+      status: 'NOCH NICHT OK',
+    },
+  },
+});
+
+export const behigNotOk = new Layer({
+  name: 'ch.sbb.behig.not_ok',
+  key: 'ch.sbb.behig.not_ok',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'BehigLayerInfo',
+    behig: {
+      status: 'BLEIBEN NICHT OK',
+    },
+  },
+});
+
+export const behigParent = new BehigLayer({
+  name: 'ch.sbb.behig.parent',
+  key: 'ch.sbb.behig.parent',
   visible: true,
   properties: {
     hideInLegend: true,
-    popupComponent: 'ConstructionPopup',
-    cluster: true,
+    popupComponent: 'BehigPopup',
   },
-  children: [constrUnterhalt, constrAusbau],
-  minResolution: 305.748113141,
+  children: [behigOk, behigNotYetOk, behigNotOk],
 });
 
 export const infoFPWLayer = new InfoFPWLayer({

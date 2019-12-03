@@ -70,8 +70,7 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
       apiKey,
       cartaroUrl,
-      geoServerUrl,
-      geoJsonCacheUrl,
+      appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -92,8 +91,7 @@ class TopicLoader extends Component {
       vectorTilesKey !== prevProps.vectorTilesKey ||
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
       cartaroUrl !== prevProps.cartaroUrl ||
-      geoServerUrl !== prevProps.geoServerUrl ||
-      geoJsonCacheUrl !== prevProps.geoJsonCacheUrl
+      appBaseUrl !== prevProps.appBaseUrl
     ) {
       this.updateServices(activeTopic);
     }
@@ -137,8 +135,7 @@ class TopicLoader extends Component {
       layerService,
       dispatchSetLayers,
       cartaroUrl,
-      geoServerUrl,
-      geoJsonCacheUrl,
+      appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
     } = this.props;
@@ -149,11 +146,13 @@ class TopicLoader extends Component {
 
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
-        flatLayers[i].setGeoServerUrl(geoServerUrl);
+        flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
       } else if (flatLayers[i].setGeoServerWMSUrl) {
-        flatLayers[i].setGeoServerWMSUrl(`${geoServerUrl}/service/wms`);
+        flatLayers[i].setGeoServerWMSUrl(
+          `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
+        );
       } else if (flatLayers[i].setGeoJsonUrl) {
-        flatLayers[i].setGeoJsonUrl(geoJsonCacheUrl);
+        flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       } else if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       } else if (flatLayers[i].setCartaroUrl) {

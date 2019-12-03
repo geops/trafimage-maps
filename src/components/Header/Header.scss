@@ -14,5 +14,10 @@
 
   .wkp-header-right {
     margin-right: 10px;
+    display: flex;
+
+    svg {
+      height: 22px;
+    }
   }
 }

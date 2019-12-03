@@ -2,6 +2,9 @@ import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 
 class TrafimageMapboxLayer extends MapboxLayer {
   setStyleConfig(url, key) {
+    if (!url) {
+      return;
+    }
     const { style } = this.options;
     const newStyleUrl = `${url}/styles/${style}/style.json?key=${key}`;
 

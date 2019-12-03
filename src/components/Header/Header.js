@@ -1,15 +1,15 @@
 import React from 'react';
-import RSHeader from 'react-spatial/components/Header';
-import SBBLogo from '../../img/sbb-logo.png';
+import UIHeader from '@geops/react-ui/components/Header';
+import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
 
 import './Header.scss';
 
 const Header = () => (
-  <RSHeader className="wkp-header">
+  <UIHeader className="wkp-header">
     <div className="wkp-header-right">
-      <img src={SBBLogo} alt="SBB Logo" />
+      <SBBLogo focusable={false} />
     </div>
-  </RSHeader>
+  </UIHeader>
 );
 
 export default Header;
