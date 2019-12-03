@@ -26,29 +26,22 @@ module.exports = {
   moduleAliases: {
     'trafimage-maps': path.resolve(__dirname, 'src'),
   },
+  pagePerSection: true,
   sections: [
     {
       name: 'Trafimage Maps Application',
       content: 'src/examples/README.md',
       sections: [
         {
-          name: 'trafimage-maps',
-          components: 'src/WebComponent.js',
+          name: 'Punctuality Map',
+          content: 'src/examples/Punctuality/README.md',
         },
         {
-          name: 'Examples',
-          sections: [
-            {
-              name: 'Punctuality Map',
-              content: 'src/examples/Punctuality/README.md',
-            },
-            {
-              name: 'Casa Map',
-              content: 'src/examples/Casa/README.md',
-            },
-          ],
+          name: 'Casa Map',
+          content: 'src/examples/Casa/README.md',
         },
       ],
+      sectionDepth: 2,
     },
   ],
   webpackConfig: {
