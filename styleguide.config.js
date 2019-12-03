@@ -29,7 +29,7 @@ module.exports = {
   pagePerSection: true,
   sections: [
     {
-      name: 'Trafimage Maps Application',
+      name: 'Trafimage Maps',
       content: 'src/examples/README.md',
       exampleMode: 'expand',
     },
