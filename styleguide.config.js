@@ -26,27 +26,28 @@ module.exports = {
   moduleAliases: {
     'trafimage-maps': path.resolve(__dirname, 'src'),
   },
+  pagePerSection: true,
   sections: [
     {
-      name: 'Trafimage Maps Application',
+      name: 'Trafimage Maps',
       content: 'src/examples/README.md',
+      exampleMode: 'expand',
+    },
+    {
+      name: 'Examples',
+      href: '/#/Examples/Punctuality%20Map',
+      external: true,
+      sectionDepth: 2,
       sections: [
         {
-          name: 'trafimage-maps',
-          components: 'src/WebComponent.js',
+          name: 'Punctuality Map',
+          content: 'src/examples/Punctuality/README.md',
+          exampleMode: 'expand',
         },
         {
-          name: 'Examples',
-          sections: [
-            {
-              name: 'Punctuality Map',
-              content: 'src/examples/Punctuality/README.md',
-            },
-            {
-              name: 'Casa Map',
-              content: 'src/examples/Casa/README.md',
-            },
-          ],
+          name: 'Casa Map',
+          content: 'src/examples/Casa/README.md',
+          exampleMode: 'expand',
         },
       ],
     },

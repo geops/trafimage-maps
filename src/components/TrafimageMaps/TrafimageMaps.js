@@ -11,7 +11,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter } from '../../model/map/actions';
-import { setTopics } from '../../model/app/actions';
+import { setTopics, setLanguage } from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -31,6 +31,11 @@ const propTypes = {
       layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
     }),
   ),
+
+  /**
+   * Language of the application.
+   */
+  language: PropTypes.string,
 
   /**
    * Initial map center described by an array of coordinates
@@ -79,6 +84,7 @@ const defaultProps = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   topics: null,
+  language: 'de',
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -93,7 +99,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, topics } = this.props;
+    const { zoom, center, topics, language } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -105,6 +111,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (topics) {
       this.store.dispatch(setTopics(topics));
+    }
+
+    if (language) {
+      this.store.dispatch(setLanguage(language));
     }
   }
 
