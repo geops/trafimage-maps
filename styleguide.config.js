@@ -31,17 +31,25 @@ module.exports = {
     {
       name: 'Trafimage Maps Application',
       content: 'src/examples/README.md',
+      exampleMode: 'expand',
+    },
+    {
+      name: 'Examples',
+      href: '/#/Examples/Punctuality%20Map',
+      external: true,
+      sectionDepth: 2,
       sections: [
         {
           name: 'Punctuality Map',
           content: 'src/examples/Punctuality/README.md',
+          exampleMode: 'expand',
         },
         {
           name: 'Casa Map',
           content: 'src/examples/Casa/README.md',
+          exampleMode: 'expand',
         },
       ],
-      sectionDepth: 2,
     },
   ],
   webpackConfig: {
