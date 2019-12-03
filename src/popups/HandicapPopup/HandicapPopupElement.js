@@ -36,7 +36,7 @@ const searchMatches = (intialText, testers) => {
   if (matched) {
     // Remove duplicates from match array.
     return matched.sort().filter((item, pos, ary) => {
-      return !pos || item !== ary[pos - 1];
+      return ary.indexOf(item) === pos;
     });
   }
   return [];
