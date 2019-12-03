@@ -612,6 +612,19 @@ export const constructionLayer = new ConstructionLayer({
   children: [constrUnterhalt, constrAusbau],
 });
 
+export const behigOk = new Layer({
+  name: 'ch.sbb.behig.ok',
+  key: 'ch.sbb.behig.ok',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'BehigLayerInfo',
+    behig: {
+      status: 'OK',
+    },
+  },
+});
+
 export const behigNotYetOk = new Layer({
   name: 'ch.sbb.behig.not_yet_ok',
   key: 'ch.sbb.behig.not_yet_ok',

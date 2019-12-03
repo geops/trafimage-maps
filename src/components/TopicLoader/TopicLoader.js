@@ -24,8 +24,7 @@ const propTypes = {
   activeTopic: PropTypes.shape(),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
-  geoServerUrl: PropTypes.string,
-  geoJsonCacheUrl: PropTypes.string,
+  appBaseUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
 
@@ -43,8 +42,7 @@ const defaultProps = {
   history: null,
   activeTopic: null,
   cartaroUrl: null,
-  geoServerUrl: null,
-  geoJsonCacheUrl: null,
+  appBaseUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
 };
