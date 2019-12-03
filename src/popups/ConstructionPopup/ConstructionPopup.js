@@ -45,13 +45,7 @@ const ConstructionPopup = ({ feature, t }) => {
   if (feature.get('link1_title') && feature.get('link1')) {
     link1 = (
       <div className="wkp-construction-popup-link">
-        <a
-          href={feature.get('link1')}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          {t(feature.get('link1_title'))}
-        </a>
+        <Link href={feature.get('link1')}>{t(feature.get('link1_title'))}</Link>
       </div>
     );
   }
@@ -59,13 +53,7 @@ const ConstructionPopup = ({ feature, t }) => {
   if (feature.get('link2_title') && feature.get('link2')) {
     link2 = (
       <div className="wkp-construction-popup-link">
-        <a
-          href={feature.get('link2')}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          {t(feature.get('link2_title'))}
-        </a>
+        <Link href={feature.get('link2')}>{t(feature.get('link2_title'))}</Link>
       </div>
     );
   }
@@ -73,13 +61,7 @@ const ConstructionPopup = ({ feature, t }) => {
   if (feature.get('link3_title') && feature.get('link3')) {
     link3 = (
       <div className="wkp-construction-popup-link">
-        <a
-          href={feature.get('link3')}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          {t(feature.get('link3_title'))}
-        </a>
+        <Link href={feature.get('link3')}>{t(feature.get('link3_title'))}</Link>
       </div>
     );
   }
