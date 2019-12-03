@@ -30,7 +30,7 @@ const searchMatches = (intialText, testers) => {
   });
   // Flatten array of matches.
   if (matched.length) {
-    matched = matched.reduce((acc, curr) => [...acc, ...curr], []);
+    matched = matched.flat();
   }
 
   if (matched) {
@@ -79,15 +79,14 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
   const flatSplitArray = intialTextArray
     .map(item => {
       if (typeof item === 'string') {
+        // Split string with RegExp and remove all empty strings or undefined.
         return item
           .split(new RegExp(regularExp, 'g'))
           .filter(v => v !== undefined && v !== '');
       }
       return [item];
     })
-    .reduce((accumulatorArray, currentArray) => {
-      return [...accumulatorArray, ...currentArray];
-    }, []);
+    .flat();
 
   const newTextArray = flatSplitArray.map((text, idx) => {
     // eslint-disable-next-line react/no-array-index-key
