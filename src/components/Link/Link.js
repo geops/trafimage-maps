@@ -6,12 +6,10 @@ import './Link.scss';
 
 const propTypes = {
   href: PropTypes.string.isRequired,
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
 };
 
-const defaultProps = {
-  children: null,
-};
+const defaultProps = {};
 
 const Link = ({ href, children }) => {
   return (
