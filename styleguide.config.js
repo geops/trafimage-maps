@@ -49,6 +49,11 @@ module.exports = {
           content: 'src/examples/Casa/README.md',
           exampleMode: 'expand',
         },
+        {
+          name: 'Construction',
+          content: 'src/examples/Construction/README.md',
+          exampleMode: 'expand',
+        },
       ],
     },
   ],

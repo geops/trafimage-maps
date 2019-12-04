@@ -46,11 +46,15 @@ const App = () => {
         permalink: false,
       },
     }];
+
+    return () => {
+      map.topics = null;
+    };
   }, []);
 
   return (
     <div className="container">
-      <trafimage-maps ref={ref} zoom="14" center="[950690,6004000]" language="fr" />
+      <trafimage-maps ref={ref} zoom="14" center="[950690,6004000]" />
     </div>
   );
 }
