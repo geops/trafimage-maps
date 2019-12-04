@@ -72,7 +72,7 @@ class MapboxStyleLayer extends Layer {
     // On the next call (when a topic change for example), these functions returns false because
     // the style is being modified.
     // That's why we rely on a property instead for the next calls.
-    if (this.isMbMapLoaded || mbMap.isStyleLoaded() || mbMap.loaded()) {
+    if (this.mapboxLayer.loaded || mbMap.isStyleLoaded() || mbMap.loaded()) {
       this.onLoad();
     } else {
       mbMap.once('load', this.onLoad);

@@ -24,6 +24,12 @@
     margin: 0 5px;
   }
 
+  .wkp-footer-left {
+    a {
+      white-space: nowrap;
+    }
+  }
+
   .wkp-footer-left,
   .wkp-footer-right,
   .tm-scale-line {
@@ -63,6 +69,20 @@
   }
 }
 
+.tm-w-l {
+  .tm-mouse-position {
+    width: 250px;
+    font-size: 11px;
+  }
+}
+
+.tm-w-l,
+.tm-w-m {
+  .tm-mouse-position {
+    width: 220px;
+  }
+}
+
 .tm-w-m,
 .tm-w-s,
 .tm-w-xs {
@@ -70,6 +90,10 @@
     position: absolute;
     bottom: 32px;
     font-size: 11px;
+  }
+
+  .tm-mouse-position {
+    width: 320px;
   }
 }
 

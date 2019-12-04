@@ -44,6 +44,13 @@ const Footer = () => {
         <ActionLink onClick={() => dispatch(setDialogVisible('Impressum'))}>
           {t('Impressum')}
         </ActionLink>
+        <a
+          href="https://doc.trafimage.ch"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Developer Portal
+        </a>
         <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
           {t('Rechtliches')}
         </ActionLink>
@@ -75,7 +82,8 @@ const Footer = () => {
             {
               label: 'WGS 84',
               value: 'EPSG:4326',
-              format: c => `${t('Koordinaten')}: ${c}`,
+              format: c =>
+                `${t('Koordinaten')}: ${c[0].toFixed(5)},${c[1].toFixed(5)}`,
             },
           ]}
         />
