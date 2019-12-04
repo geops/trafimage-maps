@@ -11,3 +11,12 @@
     }
   }
 }
+
+.rs-popup > div {
+  min-width: 300px;
+}
+
+.wkp-feature-information-body {
+  max-height: 220px;
+  overflow-y: auto;
+}
