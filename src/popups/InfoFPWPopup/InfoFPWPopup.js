@@ -49,13 +49,15 @@ class InfoFPWPopup extends PureComponent {
     if (photoPath) {
       const photoPaths = [JSON.parse(photoPath), JSON.parse(photoPath)].flat();
 
-      image = (
-        <img
-          src={`${process.env.REACT_APP_CARTARO_1_URL}/${photoPaths[imageIndex]}`}
-          draggable="false"
-          alt={t('Kein Bildtext')}
-        />
-      );
+      if (photoPaths.length) {
+        image = (
+          <img
+            src={`${process.env.REACT_APP_CARTARO_1_URL}/${photoPaths[imageIndex]}`}
+            draggable="false"
+            alt={t('Kein Bildtext')}
+          />
+        );
+      }
 
       if (photoPaths.length > 1) {
         pagination = (
