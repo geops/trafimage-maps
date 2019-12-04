@@ -34,7 +34,7 @@ const InfoFPWTopicInfo = ({ language, t }) => {
 
   return (
     <div>
-      {desc[language] ? desc[language] : desc.de}
+      {desc[language] || desc.de}
       <p>
         {t('Verantwortlich')}:
         <br />
