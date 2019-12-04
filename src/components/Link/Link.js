@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 import { ReactComponent as LinkIcon } from './Link.svg';
 
 import './Link.scss';
@@ -32,4 +30,4 @@ const Link = ({ href, children }) => {
 Link.propTypes = propTypes;
 Link.defaultProps = defaultProps;
 
-export default compose(withTranslation())(Link);
+export default Link;
