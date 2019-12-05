@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`] = `
+<div
+  className="wkp-handicap-popup-element"
+>
+  <div
+    className="wkp-handicap-popup-field-title"
+  >
+    Zusätzliche Informationen
+  </div>
+  <div
+    className="wkp-handicap-popup-field-body"
+  >
+    <div>
+      Test line here
+    </div>
+    <div>
+      <span>
+              
+      </span>
+      <a
+        href="tel:+33 666 66 66"
+      >
+        +33 666 66 66
+      </a>
+    </div>
+    <div>
+      <span>
+        <span>
+                
+        </span>
+      </span>
+      <span>
+        <a
+          href="mailto:admin@email.it"
+        >
+          admin@email.it
+        </a>
+      </span>
+    </div>
+    <div>
+            (text)
+    </div>
+    <div>
+            LU-Tixi
+    </div>
+    <div>
+            foo bar baz
+    </div>
+    <div>
+      <span>
+              
+      </span>
+      <a
+        href="http://www.test.ch"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        www.test.ch
+      </a>
+    </div>
+    <div>
+            Dritte Dienstleistung
+    </div>
+    <div>
+            Freiburg
+    </div>
+    <div>
+      <span>
+              
+      </span>
+      <a
+        href="tel:+41 (0) 41 210 00 60"
+      >
+        +41 (0) 41 210 00 60
+      </a>
+    </div>
+    <div>
+      <span>
+              
+      </span>
+      <a
+        href="http://www.geops.ch"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        www.geops.ch
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`HandicapPopupElement matches empty snapshot. 1`] = `null`;
