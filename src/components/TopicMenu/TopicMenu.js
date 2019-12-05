@@ -192,7 +192,13 @@ class TopicMenu extends PureComponent {
             <div
               className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
               style={{
-                display: topic.key === activeTopic.key ? 'block' : 'none',
+                display:
+                  topic.key === activeTopic.key &&
+                  layerService
+                    .getLayersAsFlatArray()
+                    .some(l => !l.getIsBaseLayer() && !l.get('hideInLegend'))
+                    ? 'block'
+                    : 'none',
               }}
             />
           </div>
