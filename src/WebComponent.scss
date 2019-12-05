@@ -25,6 +25,12 @@
 @import 'node_modules/react-spatial/components/Zoom/Zoom.scss';
 @import 'node_modules/react-spatial/components/Geolocation/Geolocation.scss';
 @import 'node_modules/react-spatial/components/Popup/Popup.scss';
+
+// React-slideshow
+@import '../node_modules/react-slideshow-image/lib/components/slideshow/general.css';
+@import '../node_modules/react-slideshow-image/lib/components/slideshow/fade.css';
+
+// Components
 @import 'src/components/Collapsible/Collapsible.scss';
 @import 'src/components/Dialog/Dialog.scss';
 @import 'src/components/FeatureInformation/FeatureInformation.scss';
