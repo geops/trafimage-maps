@@ -95,6 +95,10 @@ const App = () => {
   useEffect(() => {
     const map = ref.current;
     map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
+
+    return () => {
+      map.topics = null;
+    };
   }, []);
 
   return (
