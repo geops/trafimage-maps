@@ -158,6 +158,7 @@ export const infofpw = {
   layers: [netzkarteLayer, infoFPWLayer],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfoFPWTopicInfo',
+  searches: defaultSearches,
 };
 
 export default {
