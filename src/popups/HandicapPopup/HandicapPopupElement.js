@@ -80,9 +80,7 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
     .map(item => {
       if (typeof item === 'string') {
         // Split string with RegExp and remove all empty strings or undefined.
-        return item
-          .split(new RegExp(regularExp, 'g'))
-          .filter(v => !!v);
+        return item.split(new RegExp(regularExp, 'g')).filter(v => !!v);
       }
       return [item];
     })
