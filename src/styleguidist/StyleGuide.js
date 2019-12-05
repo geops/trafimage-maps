@@ -90,7 +90,7 @@ const styles = ({ font, mq }) => ({
     top: 60,
     left: 0,
     bottom: 0,
-    width: '200px',
+    width: '220px',
     overflow: 'auto',
   },
 });
