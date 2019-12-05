@@ -25,12 +25,15 @@
 @import 'node_modules/react-spatial/components/Zoom/Zoom.scss';
 @import 'node_modules/react-spatial/components/Geolocation/Geolocation.scss';
 @import 'node_modules/react-spatial/components/Popup/Popup.scss';
+
+// Components
 @import 'src/components/Collapsible/Collapsible.scss';
 @import 'src/components/Dialog/Dialog.scss';
 @import 'src/components/FeatureInformation/FeatureInformation.scss';
 @import 'src/components/FeatureInformation/FeaturePagination.scss';
 @import 'src/components/Footer/Footer.scss';
 @import 'src/components/Header/Header.scss';
+@import 'src/components/Link/Link.scss';
 @import 'src/components/MapControls/MapControls.scss';
 @import 'src/components/Menu/Menu.scss';
 @import 'src/components/Menu/MenuItem.scss';
@@ -53,6 +56,7 @@
 @import 'src/popups/BahnhofplanPopup/BahnhofplanPopup.scss';
 @import 'src/popups/BehigPopup/BehigPopup.scss';
 @import 'src/popups/BusLinePopup/BusLinePopup.scss';
+@import 'src/popups/ConstructionPopup/ConstructionPopup.scss';
 @import 'src/popups/HandicapPopup/HandicapPopup.scss';
 @import 'src/popups/NetzkartePopup/NetzkartePopup.scss';
 @import 'src/popups/ParksPopup/ParksPopup.scss';
