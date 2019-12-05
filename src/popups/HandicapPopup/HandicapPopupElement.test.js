@@ -3,6 +3,7 @@ import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import HandicapPopupElement from './HandicapPopupElement';
+import '../../utils/polyfills/flat';
 
 configure({ adapter: new Adapter() });
 
