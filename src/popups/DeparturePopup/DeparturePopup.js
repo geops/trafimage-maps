@@ -49,7 +49,7 @@ DeparturePopup.defaultProps = defaultProps;
 const composed = compose(withTranslation())(DeparturePopup);
 composed.renderTitle = feat => feat.get('name');
 // Trigerred on popup close with close button only.
-composed.actionOnClose = () => {
+composed.onCloseBtClick = () => {
   returnToNetzkarte = true;
 };
 
