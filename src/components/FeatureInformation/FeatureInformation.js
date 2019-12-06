@@ -82,6 +82,9 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
             className="wkp-close-bt"
             onClick={() => {
               dispatch(setClickedFeatureInfo());
+              if (PopupComponent.onCloseBtClick) {
+                PopupComponent.onCloseBtClick();
+              }
             }}
           >
             <MdClose focusable={false} />
