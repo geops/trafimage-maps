@@ -57,6 +57,10 @@ function HandicapPopup({ feature }) {
 
   const elementsList = [
     {
+      label: 'Sektor',
+      propertyName: `sektor_${language}`,
+    },
+    {
       label: 'Treffpunkt',
       propertyName: `treffpunkt_${language}`,
     },
