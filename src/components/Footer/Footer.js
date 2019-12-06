@@ -44,6 +44,9 @@ const Footer = () => {
         <ActionLink onClick={() => dispatch(setDialogVisible('Impressum'))}>
           {t('Impressum')}
         </ActionLink>
+        <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
+          {t('Rechtliches')}
+        </ActionLink>
         <a
           href="https://doc.trafimage.ch"
           rel="noopener noreferrer"
@@ -51,9 +54,6 @@ const Footer = () => {
         >
           Developer Portal
         </a>
-        <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
-          {t('Rechtliches')}
-        </ActionLink>
       </div>
 
       <div className="wkp-footer-right">
