@@ -1,4 +1,6 @@
 .wkp-construction-popup {
+  min-width: 240px;
+
   .wkp-construction-popup-subtitle {
     font-style: italic;
     padding-bottom: 7px;
@@ -18,8 +20,4 @@
       border-bottom-width: 1px;
     }
   }
-}
-
-.rs-popup > div {
-  min-width: 240px !important;
 }
