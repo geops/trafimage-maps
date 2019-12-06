@@ -25,7 +25,17 @@
   }
 
   .wkp-feature-information-body {
-    padding: 10px;
+    & > * {
+      padding: 10px;
+    }
+
+    & > *:first-child {
+      padding-bottom: 0;
+    }
+
+    & > *:last-child {
+      padding-bottom: 10px;
+    }
 
     .wkp-pagination-wrapper {
       display: flex;
