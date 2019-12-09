@@ -10,6 +10,7 @@ import Feature from 'ol/Feature';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
 
+import layerHelper from '../../layers/layerHelper';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
@@ -44,6 +45,33 @@ const defaultProps = {
   departuresFilter: undefined,
 };
 
+const redirectToDraw = drawId => {
+  const urlParams = qs.parse(window.location.search);
+
+  if (urlParams.z) {
+    // Convert the zoom level to match the different scale on the old wkp.
+    urlParams.zoom = layerHelper.convertToOldZoom(parseInt(urlParams.z, 10));
+    delete urlParams.z;
+  }
+
+  if (urlParams.x || urlParams.y) {
+    // Reproject the coordinates to the old wkp projection: EPSG:21781.
+    const [newX, newY] = transform(
+      [parseInt(urlParams.x, 10), parseInt(urlParams.y, 10)],
+      'EPSG:3857',
+      'EPSG:21781',
+    );
+    urlParams.x = newX;
+    urlParams.y = newY;
+  }
+
+  urlParams['wkp.draw'] = drawId;
+
+  window.location.href = `http://wkp.prod.trafimage.geops.ch/?debug#/ch.sbb.netzkarte.draw?${qs.stringify(
+    urlParams,
+  )}`;
+};
+
 class Permalink extends PureComponent {
   componentDidMount() {
     const {
@@ -57,6 +85,11 @@ class Permalink extends PureComponent {
       ...qs.parse(window.location.search),
       ...initialState,
     };
+
+    if (parameters['wkp.draw']) {
+      // Redirection to old wkp to use teh drawing tool.
+      redirectToDraw(parameters['wkp.draw']);
+    }
 
     const getUrlParamKey = (params, regex) => {
       return Object.keys(params).find(key => {
@@ -213,4 +246,8 @@ const mapDispatchToProps = {
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);
+const composed = compose(connect(mapStateToProps, mapDispatchToProps))(
+  Permalink,
+);
+composed.redirectToDraw = redirectToDraw;
+export default composed;
