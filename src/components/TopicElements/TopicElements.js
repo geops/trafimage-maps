@@ -28,6 +28,7 @@ const defaultElements = {
   permalink: false,
   popup: false,
   mapControls: false,
+  geolocationButton: true,
   baseLayerToggler: false,
   shareMenu: false,
   trackerMenu: false,
@@ -133,7 +134,7 @@ function TopicElements({ history }) {
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
-    mapControls: <MapControls />,
+    mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
   };
 
