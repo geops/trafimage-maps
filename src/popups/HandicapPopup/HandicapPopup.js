@@ -26,7 +26,7 @@ function HandicapPopup({ feature }) {
     rollstuhl_wc: null,
     eurokey_wc: null,
     sbb_rollstuhl: null,
-    mobilift: null,
+    mobilift: `sektor_${language}`,
     faltrampe: null,
   };
 

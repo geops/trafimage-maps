@@ -101,32 +101,36 @@ class ZoneLayer extends CasaLayer {
    * @param {zoneStyle} zoneStyle Style of the zone.
    * @param {boolean} [isSelected = false] Whether the feature is selected.
    */
-  getOlStyleFromObject(styleObject = {}, isSelected = false, feature, res) {
-    const olStyle = super.getOlStyleFromObject(styleObject, isSelected);
-    olStyle[olStyle.length - 1].getText().setText(feature.get('zone'));
+  getOlStylesFromObject(styleObject = {}, isSelected = false, feature, res) {
+    const olStyles = super.getOlStylesFromObject(styleObject, isSelected);
 
-    // change opacity
-    let opacity = 0.5;
-    opacity = res < 100 ? 0.3 : opacity;
-    opacity = res < 50 ? 0.1 : opacity;
+    if (olStyles.text) {
+      olStyles.text.getText().setText(feature.get('zone'));
 
-    const fillColor = olStyle[olStyle.length - 1].getFill().getColor();
-    const colors = new Color(fillColor).rgb().array();
-    olStyle[olStyle.length - 1].getFill().setColor([...colors, opacity]);
+      // change text geometry
+      if (res <= this.labelOptimizeMinRes) {
+        const mapExtent = this.map.getView().calculateExtent();
+        const geomExtent = feature.getGeometry().getExtent();
 
-    // change text geometry
-    if (res <= this.labelOptimizeMinRes) {
-      const mapExtent = this.map.getView().calculateExtent();
-      const geomExtent = feature.getGeometry().getExtent();
-
-      if (!containsExtent(mapExtent, geomExtent)) {
-        olStyle
-          .getText()
-          .setGeometry(ZoneLayer.getOptimizedLanelGeometry(feature, mapExtent));
+        if (!containsExtent(mapExtent, geomExtent)) {
+          const geom = ZoneLayer.getOptimizedLanelGeometry(feature, mapExtent);
+          olStyles.text.setGeometry(geom);
+        }
       }
     }
 
-    return olStyle;
+    if (olStyles.base) {
+      // change opacity
+      let opacity = 0.5;
+      opacity = res < 100 ? 0.3 : opacity;
+      opacity = res < 50 ? 0.1 : opacity;
+
+      const fillColor = olStyles.base.getFill().getColor();
+      const colors = new Color(fillColor).rgb().array();
+      olStyles.base.getFill().setColor([...colors, opacity]);
+    }
+
+    return olStyles;
   }
 
   /**
@@ -139,12 +143,14 @@ class ZoneLayer extends CasaLayer {
   zoneStyle(feature, resolution) {
     const isSelected = this.selectedZones.includes(feature);
     const styleObject = this.styleFunction(feature.getProperties(), isSelected);
-    return this.getOlStyleFromObject(
+    const olStyles = this.getOlStylesFromObject(
       styleObject,
       isSelected,
       feature,
       resolution,
     );
+
+    return Object.values(olStyles);
   }
 
   /**

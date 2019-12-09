@@ -95,51 +95,51 @@ class CasaLayer extends VectorLayer {
   }
 
   /**
-   * Converts a zone style to an ol.Style.
+   * Converts a zone style to an Object of ol.Style.
    * @private
    * @param {styleObject} [styleObject = {}] Style object.
    * @param {number} resolution Map resultion.
    * @param {boolean} [isSelected = false] Whether the feature is selected.
    */
-  getOlStyleFromObject(styleObject = {}, isSelected = false) {
+  getOlStylesFromObject(styleObject = {}, isSelected = false) {
     const style = deepmerge(this.defaultStyleObject, styleObject);
-
-    const olStyle = [
-      new Style({
-        stroke: new StrokeStyle({
-          ...style.stroke,
-        }),
-        fill: new FillStyle({
-          ...style.fill,
-        }),
-        text: new TextStyle({
-          font: style.text.font,
-          fill: new FillStyle({
-            color: style.text.color,
-          }),
-          stroke: new StrokeStyle({
-            ...style.textOutline,
-          }),
-          text: style.text.label,
-        }),
-      }),
-    ];
+    const olStyles = {};
 
     if (style.strokeOutline) {
-      olStyle.unshift(
-        new Style({
-          stroke: new StrokeStyle({
-            ...style.strokeOutline,
-          }),
+      olStyles.outline = new Style({
+        stroke: new StrokeStyle({
+          ...style.strokeOutline,
         }),
-      );
+      });
     }
+
+    olStyles.base = new Style({
+      stroke: new StrokeStyle({
+        ...style.stroke,
+      }),
+      fill: new FillStyle({
+        ...style.fill,
+      }),
+    });
+
+    olStyles.text = new Style({
+      text: new TextStyle({
+        font: style.text.font,
+        fill: new FillStyle({
+          color: style.text.color,
+        }),
+        stroke: new StrokeStyle({
+          ...style.textOutline,
+        }),
+        text: style.text.label,
+      }),
+    });
 
     if (isSelected) {
-      olStyle.forEach(s => s.setZIndex(1));
+      Object.values(olStyles).forEach(s => s.setZIndex(1));
     }
 
-    return olStyle;
+    return olStyles;
   }
 
   /**

@@ -11,19 +11,12 @@ const propTypes = {
 
 const defaultProps = {};
 
-const Link = ({ href, children }) => {
-  return (
-    <a
-      className="wkp-link"
-      href={href}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <LinkIcon />
-      {children}
-    </a>
-  );
-};
+const Link = ({ href, children }) => (
+  <a className="wkp-link" href={href} rel="noopener noreferrer" target="_blank">
+    {children}
+    <LinkIcon />
+  </a>
+);
 
 Link.propTypes = propTypes;
 Link.defaultProps = defaultProps;

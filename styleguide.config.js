@@ -32,6 +32,11 @@ module.exports = {
       name: 'Trafimage Maps',
       content: 'src/examples/README.md',
       exampleMode: 'expand',
+      sections: [
+        {
+          components: 'src/WebComponent.js',
+        },
+      ],
     },
     {
       name: 'Examples',
@@ -47,6 +52,11 @@ module.exports = {
         {
           name: 'Casa Map',
           content: 'src/examples/Casa/README.md',
+          exampleMode: 'expand',
+        },
+        {
+          name: 'Construction',
+          content: 'src/examples/Construction/README.md',
           exampleMode: 'expand',
         },
       ],
