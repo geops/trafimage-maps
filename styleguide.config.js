@@ -32,6 +32,11 @@ module.exports = {
       name: 'Trafimage Maps',
       content: 'src/examples/README.md',
       exampleMode: 'expand',
+      sections: [
+        {
+          components: 'src/WebComponent.js',
+        },
+      ],
     },
     {
       name: 'Examples',
