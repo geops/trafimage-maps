@@ -53,11 +53,15 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
               
       </span>
       <a
+        className="wkp-link"
         href="http://www.test.ch"
         rel="noopener noreferrer"
         target="_blank"
       >
         www.test.ch
+        <svg>
+          Link.svg
+        </svg>
       </a>
     </div>
     <div>
@@ -81,11 +85,15 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
               
       </span>
       <a
+        className="wkp-link"
         href="http://www.geops.ch"
         rel="noopener noreferrer"
         target="_blank"
       >
         www.geops.ch
+        <svg>
+          Link.svg
+        </svg>
       </a>
     </div>
   </div>
