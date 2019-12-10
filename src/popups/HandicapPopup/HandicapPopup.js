@@ -126,13 +126,14 @@ function HandicapPopup({ feature }) {
     );
   };
 
-  let title = properties.stuetzpunktbahnhof
-    ? `${t('Stützpunktbahnhof')} / `
-    : '';
+  let title = properties.stuetzpunktbahnhof ? `${t('Stützpunktbahnhof')}` : '';
 
-  title += properties.barrierefreier_bahnhof
-    ? t('Barrierefreier Bahnhof')
-    : t('Nicht barrierefreier Bahnhof');
+  if (properties.barrierefreier_bahnhof !== null) {
+    title += ' / ';
+    title += properties.barrierefreier_bahnhof
+      ? t('Barrierefreier Bahnhof')
+      : t('Nicht barrierefreier Bahnhof');
+  }
 
   return (
     <div className="wkp-handicap-popup">
