@@ -88,16 +88,16 @@ function HandicapPopup({ feature }) {
       return (
         <div className="wkp-handicap-popup-bottom">
           <PopupElement
-            key="Zusätzliche Informationen"
-            label={t('Zusätzliche Informationen')}
-            properties={props}
-            propertyName={`zusaetzliche_informationen_${language}`}
-          />
-          <PopupElement
             key={`beschreibung_zur_dritte_dienstleistung_${language}`}
             label={t('Dritte Dienstleistung')}
             properties={props}
             propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
+          />
+          <PopupElement
+            key="Zusätzliche Informationen"
+            label={t('Zusätzliche Informationen')}
+            properties={props}
+            propertyName={`zusaetzliche_informationen_${language}`}
           />
         </div>
       );
