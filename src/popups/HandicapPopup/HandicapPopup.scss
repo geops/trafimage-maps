@@ -1,7 +1,16 @@
 .wkp-handicap-popup {
   min-width: 350px;
 
+  a {
+    text-decoration: underline;
+  }
+
   .wkp-handicap-popup-body {
+    .wkp-handicap-popup-title {
+      font-weight: bold;
+      padding-bottom: 10px;
+    }
+
     .wkp-handicap-popup-element {
       padding-bottom: 10px;
       flex-direction: column;

@@ -3,7 +3,7 @@ import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { EventConsumer } from 'create-react-web-component';
+import { EventConsumer } from '@geops/create-react-web-component';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
 import MainDialog from '../MainDialog';
@@ -28,6 +28,7 @@ const defaultElements = {
   permalink: false,
   popup: false,
   mapControls: false,
+  geolocationButton: true,
   baseLayerToggler: false,
   shareMenu: false,
   trackerMenu: false,
@@ -133,7 +134,7 @@ function TopicElements({ history }) {
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
-    mapControls: <MapControls />,
+    mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
   };
 

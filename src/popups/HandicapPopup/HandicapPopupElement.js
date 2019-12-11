@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import Link from '../../components/Link';
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
@@ -56,14 +57,9 @@ const telTo = (telNumber, idx) => (
 
 const urlHref = (href, idx) => {
   return (
-    <a
-      key={idx}
-      href={`http://${href}`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
+    <Link key={idx} href={`http://${href}`}>
       {href}
-    </a>
+    </Link>
   );
 };
 
