@@ -14,6 +14,10 @@ const App = () => {
   useEffect(() => {
     const map = ref.current;
     map.topics =  [topic];
+
+    return () => {
+      map.topics = null;
+    };
   }, []);
 
   return (
