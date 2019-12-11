@@ -25,15 +25,15 @@
   }
 
   .wkp-feature-information-body {
-    & > * {
+    & > div {
       padding: 10px;
     }
 
-    & > *:first-child {
+    & > div:first-child {
       padding-bottom: 0;
     }
 
-    & > *:last-child {
+    & > div:last-child {
       padding-bottom: 10px;
     }
 
