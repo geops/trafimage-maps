@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Styled } from 'create-react-web-component';
+import { Styled } from '@geops/create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
 import topicConfig from './config/topics';

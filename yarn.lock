@@ -1273,6 +1273,31 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@geops/create-react-web-component@^2.0.19":
+  version "2.0.19"
+  resolved "https://registry.yarnpkg.com/@geops/create-react-web-component/-/create-react-web-component-2.0.19.tgz#dfa3d4f1a4dcf601a4e642127d2860fc87539ef5"
+  integrity sha512-fVxS7IsokfQPUaEhuZsynczuFtXmn6xcF8lxYztdPObY+WsNGXE6bVvGMuqIufA3SlWFEEr9QvxaxIgvuqvdbw==
+  dependencies:
+    "@svgr/webpack" "4.3.2"
+    "@types/inquirer" "^6.5.0"
+    "@types/mkdirp" "^0.5.2"
+    "@types/ncp" "^2.0.1"
+    "@types/react" "16.9.3"
+    "@types/react-dom" "^16.9.4"
+    "@types/rimraf" "^2.0.2"
+    "@webcomponents/webcomponentsjs" "^2.3.0"
+    boxen "^4.1.0"
+    chalk "^2.4.2"
+    deepmerge "^4.0.0"
+    esm "^3.2.25"
+    event-hooks-webpack-plugin "^2.1.4"
+    inquirer "^6.5.0"
+    mkdirp "^0.5.1"
+    ncp "^2.0.0"
+    react-dom "^16.12.0"
+    react-shadow "^17.1.3"
+    rimraf "^3.0.0"
+
 "@geops/react-ui@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.0.1.tgz#828b4f04d6b6f43ac08bc424e292657bf9fec6bd"
@@ -1836,6 +1861,21 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/react-dom@^16.9.4":
+  version "16.9.4"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
+  integrity sha512-fya9xteU/n90tda0s+FtN5Ym4tbgxpq/hb/Af24dvs6uYnYn+fspaxw5USlw0R8apDNwxsqumdRoCoKitckQqw==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*":
+  version "16.9.16"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.16.tgz#4f12515707148b1f53a8eaa4341dae5dfefb066d"
+  integrity sha512-dQ3wlehuBbYlfvRXfF5G+5TbZF3xqgkikK7DWAsQXe2KnzV+kjD4W2ea+ThCrKASZn9h98bjjPzoTYzfRqyBkw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
 "@types/react@16.9.3":
   version "16.9.3"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.3.tgz#6d13251e441a3e67fb60d719d1fc8785b984a2ec"
@@ -2135,7 +2175,7 @@
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
 
-"@webcomponents/custom-elements@^1.2.1":
+"@webcomponents/custom-elements@^1.2.1", "@webcomponents/custom-elements@^1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@webcomponents/custom-elements/-/custom-elements-1.3.1.tgz#6a654d4d8cbdcb6344af15e9c518c2de8416b3f5"
   integrity sha512-busXK/Mkz6NcvUK8izF9pePo6gPVjybO7vopX2NkZow6U7ZCjUvCGzcS3tCIURAD8WLrAI9MW3PqslOQOYa4lg==
@@ -2145,7 +2185,12 @@
   resolved "https://registry.yarnpkg.com/@webcomponents/shadydom/-/shadydom-1.7.0.tgz#acc19e562c26e5d0477b8ecefa79bf08877bed7d"
   integrity sha512-7Pxhu2uQ1Udq33FMym8EecKRUMc8QXUYMPfZ9v7xhvgSlg5YeMgg+PflEr11x6BPWaK6zmV2AWhlg2aEu8D+0g==
 
-"@webcomponents/webcomponentsjs@^2.3.0":
+"@webcomponents/webcomponents-platform@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@webcomponents/webcomponents-platform/-/webcomponents-platform-1.0.1.tgz#4e7ae8b40bcade06f5fdfa73fdb0211d90908866"
+  integrity sha512-7Ua2c3FvqAuiC2++gIoStG9r0B5sxleq8B7o0XKuIM052amWPTaCka0UMvnQRRJEsdGgRGIUv6sLkOyfhcr1dw==
+
+"@webcomponents/webcomponentsjs@^2.3.0", "@webcomponents/webcomponentsjs@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@webcomponents/webcomponentsjs/-/webcomponentsjs-2.4.0.tgz#e9dd031d24c234eff8824f7560e5c0c605d3d6a0"
   integrity sha512-kEClEz2nu9/i6SvyBJTV4pCc6CyCzMhK7zEeJ6QhiJoulBp4YZ06Zfj2E2HUXfWfHJIjtKriJYMtfhettKEjEg==
@@ -4245,29 +4290,6 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
-
-create-react-web-component@^2.0.16:
-  version "2.0.17"
-  resolved "https://registry.yarnpkg.com/create-react-web-component/-/create-react-web-component-2.0.17.tgz#1b8d9de622740f80bc6bcaa911555a4b6786b020"
-  integrity sha512-yyjN0vA7hfpRL1VESpsLzDhOWqrkdlu+nXa8pLFLMVDmcJrjLHPtcuxwrAKOvkWen07dMksN8Q7HIPrMEKlHRQ==
-  dependencies:
-    "@svgr/webpack" "4.3.2"
-    "@types/inquirer" "^6.5.0"
-    "@types/mkdirp" "^0.5.2"
-    "@types/ncp" "^2.0.1"
-    "@types/react" "16.9.3"
-    "@types/rimraf" "^2.0.2"
-    "@webcomponents/webcomponentsjs" "^2.3.0"
-    boxen "^4.1.0"
-    chalk "^2.4.2"
-    deepmerge "^4.0.0"
-    esm "^3.2.25"
-    event-hooks-webpack-plugin "^2.1.4"
-    inquirer "^6.5.0"
-    mkdirp "^0.5.1"
-    ncp "^2.0.0"
-    react-shadow "^17.1.3"
-    rimraf "^3.0.0"
 
 cross-spawn@6.0.5, cross-spawn@^6.0.0, cross-spawn@^6.0.5:
   version "6.0.5"

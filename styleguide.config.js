@@ -16,7 +16,9 @@ module.exports = {
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
     'react-app-polyfill/ie11',
     'react-app-polyfill/stable',
-    'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
+    '@webcomponents/webcomponents-platform',
+    '@webcomponents/custom-elements',
+    '@webcomponents/webcomponentsjs/custom-elements-es5-adapter',
     'proxy-polyfill',
   ],
   ribbon: {
@@ -32,6 +34,11 @@ module.exports = {
       name: 'Trafimage Maps',
       content: 'src/examples/README.md',
       exampleMode: 'expand',
+      sections: [
+        {
+          components: 'src/WebComponent.js',
+        },
+      ],
     },
     {
       name: 'Examples',
@@ -47,6 +54,11 @@ module.exports = {
         {
           name: 'Casa Map',
           content: 'src/examples/Casa/README.md',
+          exampleMode: 'expand',
+        },
+        {
+          name: 'Construction',
+          content: 'src/examples/Construction/README.md',
           exampleMode: 'expand',
         },
       ],
