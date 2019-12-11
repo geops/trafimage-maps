@@ -4,8 +4,6 @@ Example how to load 'trafimage-maps' with a specific topic without using React.
 
 ```js
 import 'trafimage-maps';
-import Layer from 'react-spatial/layers/Layer';
-import TrajservLayer from 'react-transit/layers/TrajservLayer';
 
 <trafimage-maps
   activeTopicKey="ch.sbb.construction"
