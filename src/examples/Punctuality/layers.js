@@ -44,7 +44,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'trafimage_perimeter_v2',
+  style: 'netzkarte_personenverkehr',
 });
 
 /**
