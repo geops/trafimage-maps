@@ -31,7 +31,7 @@ const Popup = () => {
 
   return (
     <RSPopup
-      showHeader={false}
+      renderHeader={() => {}}
       padding="0px"
       panIntoView
       panRect={{
