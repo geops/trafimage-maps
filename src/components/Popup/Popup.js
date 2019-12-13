@@ -29,6 +29,10 @@ const Popup = () => {
       : coordinate;
   const mapRect = map.getTarget().getBoundingClientRect();
 
+  // do not move the popup over the map controls except on small screens
+  const paddingRight =
+    activeTopic.elements.mapControls && mapRect.width > 450 ? 70 : 10;
+
   return (
     <RSPopup
       showHeader={false}
@@ -38,7 +42,7 @@ const Popup = () => {
         top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
         bottom: mapRect.bottom,
         left: mapRect.left + 10,
-        right: mapRect.right - (activeTopic.elements.mapControls ? 70 : 10),
+        right: mapRect.right - paddingRight,
       }}
       popupCoordinate={coord}
       map={map}
