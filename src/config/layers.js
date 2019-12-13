@@ -425,6 +425,7 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
+    layerInfoComponent: 'StuetzpunktLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });
