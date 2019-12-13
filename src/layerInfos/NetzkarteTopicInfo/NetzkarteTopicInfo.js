@@ -12,7 +12,7 @@ const defaultProps = {};
 const NetzkarteTopicInfo = ({ t }) => {
   return (
     <div>
-      {t('ch.sbb.netzkarte-desc')}
+      {`${t('ch.sbb.netzkarte-desc')} ${t('ch.sbb.netzkarte-desc-topic-info')}`}
       <p>
         {t('Verantwortlich')}:
         <br />
