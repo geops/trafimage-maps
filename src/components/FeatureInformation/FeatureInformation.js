@@ -80,6 +80,7 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
           </span>
           <Button
             className="wkp-close-bt"
+            title={t('Popup schliessen')}
             onClick={() => {
               dispatch(setClickedFeatureInfo());
               if (PopupComponent.onCloseBtClick) {
