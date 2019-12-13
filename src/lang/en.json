@@ -186,7 +186,7 @@
   "last-import": "Letzer Import",
   "Layer anzeigen": "Show layer",
   "Layer verbergen": "Hide layer",
-  "Layerinformationen anzeigen": "Show layer information",
+  "Layerinformationen anzeigen": "Show layer information of {{layer}}",
   "lift_zu_perron": "Lift to platform area",
   "Linie": "Line",
   "linie": "Line",

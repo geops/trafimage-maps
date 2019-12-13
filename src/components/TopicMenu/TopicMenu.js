@@ -126,7 +126,7 @@ class TopicMenu extends PureComponent {
     return (
       <Button
         className={className}
-        title={t('Layerinformationen anzeigen')}
+        title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
         onClick={() => {
           dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
         }}

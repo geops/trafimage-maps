@@ -220,7 +220,7 @@
   "Layer anzeigen": "Afficher le layer",
   "Layer filtern": "Filtrer le layer",
   "Layer verbergen": "Masquer le layer",
-  "Layerinformationen anzeigen": "Afficher les informations sur les layers",
+  "Layerinformationen anzeigen": "Afficher les informations de la layer {{layer}}",
   "Legende": "Légende",
   "lift_zu_perron": "Ascenseur pour quai",
   "linie": "Ligne",
