@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import UIDialog from '@geops/react-ui/components/Dialog';
@@ -26,15 +26,28 @@ function Dialog(props) {
   const dispatch = useDispatch();
   const { body, isModal } = props;
 
-  const escFunction = () => {
-    dispatch(setDialogVisible());
-  };
+  const dialogRef = useRef(null);
+  let activeElement;
+
+  const escFunction = e => e.which === 27 && dispatch(setDialogVisible());
 
   const registerEsc = isRegister => {
     if (isRegister) {
       document.addEventListener('keydown', escFunction, false);
+
+      activeElement = document.activeElement;
+      const dialogFocusables = dialogRef.current.ref.current.querySelectorAll(
+        '[tabindex="0"]',
+      );
+
+      if (dialogFocusables.length) {
+        // Focus the first focusable element in the popup.
+        dialogFocusables[0].focus();
+      }
     } else {
       document.removeEventListener('keydown', escFunction, false);
+      // Re focus the element that opened the dialog.
+      activeElement.focus();
     }
   };
 
@@ -52,6 +65,7 @@ function Dialog(props) {
     <div className="wkp-dialog">
       <UIDialog
         isOpen
+        ref={dialogRef}
         position={dialogPosition}
         onClose={() => {
           dispatch(setDialogVisible());
