@@ -37,6 +37,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * @callback styleFunction
  * @param {Object} properties Feature properties.
  * @param {boolean} isSelected Whether the feature is selected.
+ * @param {boolean} isHovered True if the feature is hovered.
  * @returns {styleObject} The style object.
  */
 
@@ -45,6 +46,7 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer react-spatial/layers/VectorLayer}
  * @class CasaLayer
  * @param {Object} options Layer options.
+ * @param {function} onMouseOver Mouse over callback. Called with the feature and the coordinate.
  * @param {String} options.apiKey Access key for [geOps services](https://developer.geops.io/).
  * @param {styleFunction} [options.styleFunction] Style function.
  */
@@ -80,6 +82,22 @@ class CasaLayer extends VectorLayer {
     };
 
     this.styleFunction = options.styleFunction || this.defaultStyleFunction;
+
+    this.mouseOverCallbacks = [];
+
+    this.onMouseOver(options.onMouseOver);
+  }
+
+  /**
+   * Listen to mouseover events on features.
+   * The callback is called with the hovered feature
+   * (https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html)
+   * and the coordinate.
+   */
+  onMouseOver(callback) {
+    if (callback && typeof callback === 'function') {
+      this.mouseOverCallbacks.push(callback);
+    }
   }
 
   defaultStyleFunction(properties, isSelected) {
@@ -100,8 +118,13 @@ class CasaLayer extends VectorLayer {
    * @param {styleObject} [styleObject = {}] Style object.
    * @param {number} resolution Map resultion.
    * @param {boolean} [isSelected = false] Whether the feature is selected.
+   * @param {boolean} [isHovered= false] True if the feature is hovered.
    */
-  getOlStylesFromObject(styleObject = {}, isSelected = false) {
+  getOlStylesFromObject(
+    styleObject = {},
+    isSelected = false,
+    isHovered = false,
+  ) {
     const style = deepmerge(this.defaultStyleObject, styleObject);
     const olStyles = {};
 
@@ -135,7 +158,7 @@ class CasaLayer extends VectorLayer {
       }),
     });
 
-    if (isSelected) {
+    if (isSelected || isHovered) {
       Object.values(olStyles).forEach(s => s.setZIndex(1));
     }
 
@@ -158,6 +181,23 @@ class CasaLayer extends VectorLayer {
     }
 
     super.callClickCallbacks(features, layer, coordinate);
+  }
+
+  /**
+   * Set the hoverFeature when hovering a feature.
+   * @private
+   */
+  init(map) {
+    super.init(map);
+
+    this.map.on('pointermove', e => {
+      const feature = this.map.forEachFeatureAtPixel(e.pixel, f => f);
+      if (feature !== this.hoverFeature) {
+        this.hoverFeature = feature;
+        this.olLayer.changed();
+        this.mouseOverCallbacks.forEach(c => c(feature, e.coordinate));
+      }
+    });
   }
 }
 

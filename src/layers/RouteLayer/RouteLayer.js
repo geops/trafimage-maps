@@ -108,8 +108,19 @@ class RouteLayer extends CasaLayer {
   routeStyle(feature) {
     const { routeId } = feature.get('route');
     const isSelected = this.selectedRouteIds.includes(routeId);
-    const routeStyle = this.styleFunction(feature.getProperties(), isSelected);
-    return Object.values(this.getOlStylesFromObject(routeStyle, isSelected));
+    const isHovered =
+      this.hoverFeature &&
+      (this.hoverFeature.get('route') || {}).routeId === routeId;
+
+    const routeStyle = this.styleFunction(
+      feature.getProperties(),
+      isSelected,
+      isHovered,
+    );
+
+    return Object.values(
+      this.getOlStylesFromObject(routeStyle, isSelected, isHovered),
+    );
   }
 
   /**

@@ -97,12 +97,23 @@ class ZoneLayer extends CasaLayer {
   /**
    * Converts a zone style to an ol.Style.
    * @private
-   * @param {ol.Feature} feature The ol.Feature to style.
-   * @param {zoneStyle} zoneStyle Style of the zone.
+   * @param {styleObject} styleObject Style of the zone.
    * @param {boolean} [isSelected = false] Whether the feature is selected.
+   * @param {ol.Feature} feature The ol.Feature to style.
+   * @param {number} resolution Map resolution.
    */
-  getOlStylesFromObject(styleObject = {}, isSelected = false, feature, res) {
-    const olStyles = super.getOlStylesFromObject(styleObject, isSelected);
+  getOlStylesFromObject(
+    styleObject = {},
+    isSelected = false,
+    isHovered = false,
+    feature,
+    res,
+  ) {
+    const olStyles = super.getOlStylesFromObject(
+      styleObject,
+      isSelected,
+      isHovered,
+    );
 
     if (olStyles.text) {
       olStyles.text.getText().setText(feature.get('zone'));
@@ -142,10 +153,12 @@ class ZoneLayer extends CasaLayer {
    */
   zoneStyle(feature, resolution) {
     const isSelected = this.selectedZones.includes(feature);
+    const isHovered = this.hoverFeature === feature;
     const styleObject = this.styleFunction(feature.getProperties(), isSelected);
     const olStyles = this.getOlStylesFromObject(
       styleObject,
       isSelected,
+      isHovered,
       feature,
       resolution,
     );
