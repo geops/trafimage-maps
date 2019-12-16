@@ -459,7 +459,7 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 });
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.showcases',
+  name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isQueryable: false,
@@ -469,7 +469,7 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   style: 'trafimage_perimeter_v2',
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.netzkarte.showcases-desc',
+    description: 'ch.sbb.netzkarte-desc',
   },
 });
 
