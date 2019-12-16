@@ -126,6 +126,7 @@ class RouteLayer extends CasaLayer {
     const isSelected = this.selectedRouteIds.includes(routeId);
     const isHovered =
       this.hoverFeature &&
+      (this.hoverFeature.get('route') || {}).isClickable &&
       (this.hoverFeature.get('route') || {}).routeId === routeId;
 
     const routeStyle = this.styleFunction(

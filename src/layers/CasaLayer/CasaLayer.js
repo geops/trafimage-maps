@@ -129,13 +129,13 @@ class CasaLayer extends VectorLayer {
     if (style.text) {
       olStyles.text = new Style({
         text: new TextStyle({
-          font: style.text.font,
+          font: style.text.font || 'bold 13px Arial',
           fill: new FillStyle({
             color: style.text.color,
           }),
-          stroke: new StrokeStyle({
-            ...style.textOutline,
-          }),
+          stroke: style.text.textOutline
+            ? new StrokeStyle({ ...style.textOutline })
+            : undefined,
           text: style.text.label,
         }),
       });

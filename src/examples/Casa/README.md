@@ -15,6 +15,8 @@ import casa from 'trafimage-maps/examples/Casa/topic';
 const zoneLayer = new ZoneLayer({
   // Demo key. Please replace with your own key.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  validFrom: '2019-12-16',
+  validTo: '2020-12-01',
 });
 
 // Select zones.
