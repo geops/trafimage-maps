@@ -9,7 +9,6 @@ import MultiPolygon from 'ol/geom/MultiPolygon';
 import { fromExtent } from 'ol/geom/Polygon';
 import Feature from 'ol/Feature';
 import intersect from '@turf/intersect';
-import Color from 'color';
 import CasaLayer from '../CasaLayer';
 
 /**
@@ -85,6 +84,55 @@ class ZoneLayer extends CasaLayer {
   }
 
   /**
+   * Default style function of the layer.
+   * The returned style can be overriden by using a style function.
+   */
+  // eslint-disable-next-line class-methods-use-this
+  defaultStyleFunction(feature, isSelected, isHovered) {
+    if (isHovered) {
+      return {
+        fill: {
+          color: [102, 102, 102, 0.3],
+        },
+        stroke: {
+          width: 2,
+          color: '#4576A2',
+        },
+        text: {
+          color: '#686868',
+        },
+      };
+    }
+
+    if (isSelected) {
+      return {
+        fill: {
+          color: [104, 104, 104, 0.7],
+        },
+        stroke: {
+          color: '#686868',
+        },
+        text: {
+          color: 'white',
+        },
+      };
+    }
+
+    return {
+      fill: {
+        color: [102, 102, 102, 0.2],
+      },
+      stroke: {
+        color: [102, 102, 102, 0.5],
+        width: 1,
+      },
+      text: {
+        color: '#4576A2',
+      },
+    };
+  }
+
+  /**
    * Set the validity of the zone.
    * @param {string} validFrom Zone validity start. Format: yyyy-mm-dd.
    * @param {string} validTo Zone validity end. Format: yyyy-mm-dd.
@@ -97,12 +145,24 @@ class ZoneLayer extends CasaLayer {
   /**
    * Converts a zone style to an ol.Style.
    * @private
-   * @param {ol.Feature} feature The ol.Feature to style.
-   * @param {zoneStyle} zoneStyle Style of the zone.
+   * @param {styleObject} styleObject Style of the zone.
    * @param {boolean} [isSelected = false] Whether the feature is selected.
+   * @param {ol.Feature} feature The ol.Feature to style.
+   * @param {number} resolution Map resolution.
    */
-  getOlStylesFromObject(styleObject = {}, isSelected = false, feature, res) {
-    const olStyles = super.getOlStylesFromObject(styleObject, isSelected);
+  getOlStylesFromObject(
+    styleObject = {},
+    isSelected = false,
+    isHovered = false,
+    feature,
+    res,
+  ) {
+    const olStyles = super.getOlStylesFromObject(
+      styleObject,
+      isSelected,
+      isHovered,
+      feature,
+    );
 
     if (olStyles.text) {
       olStyles.text.getText().setText(feature.get('zone'));
@@ -119,17 +179,6 @@ class ZoneLayer extends CasaLayer {
       }
     }
 
-    if (olStyles.base) {
-      // change opacity
-      let opacity = 0.5;
-      opacity = res < 100 ? 0.3 : opacity;
-      opacity = res < 50 ? 0.1 : opacity;
-
-      const fillColor = olStyles.base.getFill().getColor();
-      const colors = new Color(fillColor).rgb().array();
-      olStyles.base.getFill().setColor([...colors, opacity]);
-    }
-
     return olStyles;
   }
 
@@ -142,10 +191,13 @@ class ZoneLayer extends CasaLayer {
    */
   zoneStyle(feature, resolution) {
     const isSelected = this.selectedZones.includes(feature);
+    const isHovered =
+      feature.get('isClickable') && this.hoverFeature === feature;
     const styleObject = this.styleFunction(feature.getProperties(), isSelected);
     const olStyles = this.getOlStylesFromObject(
       styleObject,
       isSelected,
+      isHovered,
       feature,
       resolution,
     );

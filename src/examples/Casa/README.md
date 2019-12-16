@@ -15,6 +15,8 @@ import casa from 'trafimage-maps/examples/Casa/topic';
 const zoneLayer = new ZoneLayer({
   // Demo key. Please replace with your own key.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  validFrom: '2019-12-16',
+  validTo: '2020-12-01',
 });
 
 // Select zones.
@@ -53,17 +55,12 @@ const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   // Demo apiKey. Please replace with your own apiKey.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
-  styleFunction: (props, isSelected) => {
-    if (isSelected) {
+  styleFunction: (props, isSelected, isHovered) => {
+    if (isSelected && isHovered) {
       return {
-        stroke: { width: 5, color: 'pink' },
+        stroke: { color: 'green' },
       };
     }
-
-    return {
-      stroke: { width: 5, color: 'red' },
-      strokeOutline: { width: 10, color: 'white' }
-    };
   },
 });
 
