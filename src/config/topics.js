@@ -22,7 +22,10 @@ import defaultBaseLayers, {
   behigParent,
   infoFPWLayer,
 } from './layers';
-import defaultSearches, { handicapStopFinder } from './searches';
+import defaultSearches, {
+  handicapStopFinder,
+  handicapNoInfoFinder,
+} from './searches';
 
 const defaultElements = {
   header: true,
@@ -66,7 +69,11 @@ export const handicap = {
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
-  searches: { Stationen: handicapStopFinder },
+  searches: {
+    // prettier-ignore
+    'Stützpunktbahnhöfe': handicapStopFinder,
+    'Stationen ohne Informationen': handicapNoInfoFinder,
+  },
 };
 
 export const netzkarteStelen = {
