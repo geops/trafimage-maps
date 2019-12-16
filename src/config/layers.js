@@ -69,7 +69,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'trafimage_perimeter_v2',
+  style: 'netzkarte_personenverkehr',
 });
 
 /**
@@ -425,6 +425,7 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
+    layerInfoComponent: 'StuetzpunktLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });
@@ -458,17 +459,17 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 });
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.showcases',
+  name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isQueryable: false,
   radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'trafimage_perimeter_v2',
+  style: 'netzkarte_personenverkehr',
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.netzkarte.showcases-desc',
+    description: 'ch.sbb.netzkarte-desc',
   },
 });
 

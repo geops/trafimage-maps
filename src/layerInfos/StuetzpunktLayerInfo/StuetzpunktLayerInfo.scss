@@ -1,0 +1,16 @@
+.stuetzpunkt-layer-info {
+  display: flex;
+
+  .stuetzpunkt-layer-icon {
+    width: 18px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 18px;
+    border-radius: 50%;
+    background-color: rgb(246, 136, 38);
+    border: 5px solid rgba(246, 136, 38, 0.4);
+    margin: 0 10px 5px 0;
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  }
+}
