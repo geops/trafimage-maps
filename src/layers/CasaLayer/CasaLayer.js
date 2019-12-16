@@ -58,30 +58,7 @@ class CasaLayer extends VectorLayer {
 
     this.projection = options.projection || 'EPSG:3857';
 
-    this.defaultStyleObject = {
-      stroke: {
-        color: 'rgb(255, 200, 25)',
-        width: 2,
-      },
-      strokeOutline: {
-        color: 'white',
-        width: 8,
-      },
-      fill: {
-        color: 'rgb(255, 200, 25)',
-      },
-      text: {
-        font: '12px Arial',
-        color: 'black',
-        label: 'zone',
-      },
-      textOutline: {
-        width: 2,
-        color: 'white',
-      },
-    };
-
-    this.styleFunction = options.styleFunction || this.defaultStyleFunction;
+    this.styleFunction = options.styleFunction || (() => ({}));
 
     this.mouseOverCallbacks = [];
 
@@ -100,16 +77,14 @@ class CasaLayer extends VectorLayer {
     }
   }
 
-  defaultStyleFunction(properties, isSelected) {
-    return isSelected
-      ? {
-          ...this.defaultStyleObject,
-          stroke: {
-            color: 'blue',
-            width: 4,
-          },
-        }
-      : this.defaultStyleObject;
+  /**
+   * The layer's default style function.
+   * @private
+   */
+  // eslint-disable-next-line no-unused-vars, class-methods-use-this
+  defaultStyleFunction(feature, isSelected, isHovered) {
+    // to be implemented by inheriting layers
+    return {};
   }
 
   /**
@@ -124,8 +99,18 @@ class CasaLayer extends VectorLayer {
     styleObject = {},
     isSelected = false,
     isHovered = false,
+    feature,
   ) {
-    const style = deepmerge(this.defaultStyleObject, styleObject);
+    const defaultStyleObject = this.defaultStyleFunction(
+      feature,
+      isSelected,
+      isHovered,
+    );
+
+    const style = deepmerge(defaultStyleObject, styleObject, {
+      arrayMerge: (a, b) => b, // do not merge arrays
+    });
+
     const olStyles = {};
 
     if (style.strokeOutline) {
@@ -137,26 +122,24 @@ class CasaLayer extends VectorLayer {
     }
 
     olStyles.base = new Style({
-      stroke: new StrokeStyle({
-        ...style.stroke,
-      }),
-      fill: new FillStyle({
-        ...style.fill,
-      }),
+      stroke: style.stroke ? new StrokeStyle({ ...style.stroke }) : undefined,
+      fill: style.fill ? new FillStyle({ ...style.fill }) : undefined,
     });
 
-    olStyles.text = new Style({
-      text: new TextStyle({
-        font: style.text.font,
-        fill: new FillStyle({
-          color: style.text.color,
+    if (style.text) {
+      olStyles.text = new Style({
+        text: new TextStyle({
+          font: style.text.font,
+          fill: new FillStyle({
+            color: style.text.color,
+          }),
+          stroke: new StrokeStyle({
+            ...style.textOutline,
+          }),
+          text: style.text.label,
         }),
-        stroke: new StrokeStyle({
-          ...style.textOutline,
-        }),
-        text: style.text.label,
-      }),
-    });
+      });
+    }
 
     if (isSelected || isHovered) {
       Object.values(olStyles).forEach(s => s.setZIndex(1));

@@ -54,16 +54,11 @@ const routeLayer = new RouteLayer({
   // Demo apiKey. Please replace with your own apiKey.
   apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
   styleFunction: (props, isSelected, isHovered) => {
-    if (isSelected || isHovered) {
+    if (isSelected && isHovered) {
       return {
-        stroke: { width: 5, color: isHovered ? 'orange' : 'blue' },
+        stroke: { color: 'green' },
       };
     }
-
-    return {
-      stroke: { width: 5, color: 'red' },
-      strokeOutline: { width: 10, color: 'white' }
-    };
   },
 });
 
