@@ -53,8 +53,11 @@
       height: auto;
       display: flex;
       flex-direction: column;
-      overflow-y: auto;
       border-bottom: 1px solid #eee;
+    }
+
+    .tm-dialog-body {
+      overflow-y: auto;
     }
   }
 }
