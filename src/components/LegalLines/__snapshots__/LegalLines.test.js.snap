@@ -121,6 +121,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@sbb.ch"
     >
@@ -135,6 +136,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     </b>
     <br />
     Kommunikation SBB Infrastruktur,
+     
     <a
       href="mailto:Kommunikation-Infrastruktur@sbb.ch"
     >
@@ -149,6 +151,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@sbb.ch"
     >
@@ -163,6 +166,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     </b>
     <br />
     SBB Infrastruktur, Anlagen&Technologie, Überwachung,
+     
     <a
       href="mailto:ueberwachung@sbb.ch"
     >
@@ -302,6 +306,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     </b>
     <br />
     Trafimage System Manager Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@sbb.ch"
     >
@@ -316,6 +321,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     </b>
     <br />
     Communications at SBB Infrastructure,
+     
     <a
       href="mailto:Kommunikation-Infrastruktur@sbb.ch"
     >
@@ -330,6 +336,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@sbb.ch"
     >
@@ -344,6 +351,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     </b>
     <br />
     SBB Infrastruktur, Anlagen&Technologie, Überwachung,
+     
     <a
       href="mailto:ueberwachung@sbb.ch"
     >
@@ -483,6 +491,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@cff.ch"
     >
@@ -497,6 +506,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     </b>
     <br />
     Communication CFF Infrastructure,
+     
     <a
       href="mailto:Kommunikation-Infrastruktur@sbb.ch"
     >
@@ -511,6 +521,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@sbb.ch"
     >
@@ -525,6 +536,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     </b>
     <br />
     CFF Infrastructure, Installations & Technologie, Surveillance,
+     
     <a
       href="mailto:ueberwachung@sbb.ch"
     >
@@ -664,6 +676,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@ffs.ch"
     >
@@ -678,6 +691,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     </b>
     <br />
     Comunicazione FFS Infrastruttura,
+     
     <a
       href="mailto:Kommunikation-Infrastruktur@sbb.ch"
     >
@@ -692,6 +706,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     </b>
     <br />
     Fachbus Trafimage, Daniel Hofstetter,
+     
     <a
       href="mailto:trafimage@sbb.ch"
     >
@@ -706,6 +721,7 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     </b>
     <br />
     FFS Infrastruttura, Impianti&Tecnologia, Sorveglianza,
+     
     <a
       href="mailto:ueberwachung@sbb.ch"
     >
@@ -807,14 +823,14 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=fr 1`] =
   className="tm-imprint"
 >
   <p>
-    Avete domande, proposte di miglioramento, segnalazioni di inesattezze o siete interessati.
+    Vous avez des questions, des suggestions, des remarques sur des inexactitudes ? Les cartes et plans vous intéressent? N’hésitez pas à nos contacter.
   </p>
   <p>
     <b>
-      FFS SA
+      CFF SA
     </b>
     <br />
-    Infrastruttura – Impianti e tecnologia – Operation Center Tecnica – Technical Management
+    Infrastructure – Installations et technologie – Operation Center Technique – Technical Management
     <br />
     Fachbus Trafimage
     <br />
@@ -822,7 +838,7 @@ exports[`LegalLines should match snapshot with doc=kontakt and language=fr 1`] =
     <br />
     3072 Ostermundingen
     <br />
-    Svizzera
+    Suisse
   </p>
   <p>
     <a
@@ -995,17 +1011,21 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=en 1
   <p />
   <p>
     SBB's
+     
     <a
       href="http://www.sbb.ch/en/meta/legal-information.html"
     >
       legal information
     </a>
+     
     and
+     
     <a
       href="http://www.sbb.ch/en/meta/data-protection.html"
     >
       Privacy Policy
     </a>
+     
     apply.
   </p>
   <p>
@@ -1085,17 +1105,21 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=fr 1
   </p>
   <p>
     La
+     
     <a
       href="http://www.cff.ch/meta/mention-juridique.html"
     >
       Mention juridique
     </a>
+     
     et les
+     
     <a
       href="http://www.cff.ch/meta/protection-des-donnees.html"
     >
       dispositions sur la protection des données
     </a>
+     
     des CFF s’appliquent.
   </p>
   <p>
@@ -1170,12 +1194,14 @@ exports[`LegalLines should match snapshot with doc=rechtliches and language=it 1
   </p>
   <p>
     Valgono le
+     
     <a
       href="http://www.ffs.ch/meta/note-legali.html"
     >
       note legali
     </a>
      e
+     
     <a
       href="http://www.ffs.ch/meta/tutela-dei-dati.html"
     >
