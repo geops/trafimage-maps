@@ -58,7 +58,10 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
         rel="noopener noreferrer"
         target="_blank"
       >
-        www.test.ch
+        <span>
+          www.test.ch
+        </span>
+         
         <svg>
           Link.svg
         </svg>
@@ -90,7 +93,10 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
         rel="noopener noreferrer"
         target="_blank"
       >
-        www.geops.ch
+        <span>
+          www.geops.ch
+        </span>
+         
         <svg>
           Link.svg
         </svg>
