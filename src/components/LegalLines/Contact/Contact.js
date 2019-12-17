@@ -52,7 +52,7 @@ const comps = {
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
+        <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
         <br />
       </p>
     </div>
