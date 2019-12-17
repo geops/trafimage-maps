@@ -1,17 +1,14 @@
 import React from 'react';
+import Link from '../../components/Link';
 
 const comps = {
   de: (
     <div>
       Der geographisch exakte Verlauf der Buslinien wurde über ein
       automatisiertes Routing-Verfahren (
-      <a
-        href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <Link href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs">
         Details hier
-      </a>
+      </Link>
       ) hergeleitet. Die Daten sind nicht redaktionell überarbeitet und werden
       laufend verbessert.
     </div>
@@ -20,13 +17,9 @@ const comps = {
     <div>
       Le tracé géographique exact des lignes de bus a été déduit d’une procédure
       d’itinérance automatisée (
-      <a
-        href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <Link href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs">
         détails
-      </a>
+      </Link>
       ). Les données ne sont pas traitées d’un point de vue rédactionnel et sont
       améliorées en continu.
     </div>
@@ -35,13 +28,7 @@ const comps = {
     <div>
       The exact geographic course of the bus routes was established via an
       automated routing procedure (
-      <a
-        href="http://geops.de/node/171?language=en"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        details
-      </a>
+      <Link href="http://geops.de/node/171?language=en">details</Link>
       ). The data are not editorial revised and improved continuously.
     </div>
   ),
@@ -49,13 +36,9 @@ const comps = {
     <div>
       Il tracciato geografico esatto delle linee di autobus è stato ricavato
       tramite una procedura di routing automatizzata (
-      <a
-        href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
+      <Link href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs">
         dettagli
-      </a>
+      </Link>
       ). I dati non sono rielaborati a livello redazionale e vengono
       costantemente ottimizzati.
     </div>
