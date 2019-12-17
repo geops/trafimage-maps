@@ -283,11 +283,9 @@ export const punctuality = new Layer({
   },
 });
 
-const apiPublicKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
 punctuality.setChildren([
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
-    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -295,7 +293,6 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
-    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -303,7 +300,6 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-all',
-    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',

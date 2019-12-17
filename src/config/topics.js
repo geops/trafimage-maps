@@ -154,7 +154,7 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
-export default {
+const topics = {
   wkp: [
     netzkarte,
     handicap,
@@ -167,3 +167,13 @@ export default {
   ],
   stelen: [netzkarteStelen],
 };
+
+export const getTopicConfig = (apiKey, name) => {
+  punctuality.getChildren().forEach(layer => {
+    // eslint-disable-next-line no-param-reassign
+    layer.apiKey = apiKey;
+  });
+  return topics[name];
+};
+
+export default topics;
