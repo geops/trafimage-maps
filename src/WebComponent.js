@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
-import topicConfig from './config/topics';
+import { getTopicConfig } from './config/topics';
 
 const propTypes = {
   /**
@@ -115,6 +115,7 @@ const WebComponent = props => {
     topics,
     appName,
     center,
+    apiKey,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -126,7 +127,7 @@ const WebComponent = props => {
 
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
   const appTopics = useMemo(() => {
-    const tps = topics || topicConfig[appName];
+    const tps = topics || getTopicConfig(apiKey, appName);
     if (!tps) {
       // eslint-disable-next-line no-console
       console.error('You must provide a list of topics');
@@ -141,7 +142,7 @@ const WebComponent = props => {
       tps[0].active = true;
     }
     return [...tps];
-  }, [activeTopicKey, appName, topics]);
+  }, [activeTopicKey, appName, topics, apiKey]);
 
   return (
     <Styled styles={styles}>

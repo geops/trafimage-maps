@@ -1,6 +1,7 @@
 #
 
 This example shows how to integrate punctuality information in your map application.
+The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
 
 ```jsx
 import 'trafimage-maps';
