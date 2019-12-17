@@ -32,7 +32,7 @@ function HandicapPopup({ feature }) {
   // build string for equipment
   const equipment = [];
 
-  equipment.push(
+  equipment.unshift(
     properties.treppenfrei ? t('treppenfrei') : t('nicht treppenfrei'),
   );
 
