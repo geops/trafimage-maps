@@ -31,27 +31,27 @@ function Dialog(props) {
 
   const escFunction = e => e.which === 27 && dispatch(setDialogVisible());
 
-  const registerEsc = isRegister => {
-    if (isRegister) {
-      document.addEventListener('keydown', escFunction, false);
-
-      activeElement = document.activeElement;
-      const dialogFocusables = dialogRef.current.ref.current.querySelectorAll(
-        '[tabindex="0"]',
-      );
-
-      if (dialogFocusables.length) {
-        // Focus the first focusable element in the popup.
-        dialogFocusables[0].focus();
-      }
-    } else {
-      document.removeEventListener('keydown', escFunction, false);
-      // Re focus the element that opened the dialog.
-      activeElement.focus();
-    }
-  };
-
   useEffect(() => {
+    const registerEsc = isRegister => {
+      if (isRegister) {
+        document.addEventListener('keydown', escFunction, false);
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        activeElement = document.activeElement;
+        const dialogFocusables = dialogRef.current.ref.current.querySelectorAll(
+          '[tabindex="0"]',
+        );
+
+        if (dialogFocusables.length) {
+          // Focus the first focusable element in the popup.
+          dialogFocusables[0].focus();
+        }
+      } else {
+        document.removeEventListener('keydown', escFunction, false);
+        // Re focus the element that opened the dialog.
+        activeElement.focus();
+      }
+    };
     // ComponentDidMount
     registerEsc(true);
     // ComponentWillUnmount
