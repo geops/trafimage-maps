@@ -3,10 +3,15 @@
 Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://www.sbb.ch/en/bahnhof-services/bahnhoefe/karten-bahnhofplaene/trafimage-karten.html)).
 This section shows you how to configure your own map for integrating it in your existing web page.
 
+The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+
 ```jsx
 import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
 import topic from 'trafimage-maps/examples/WebComponent/topic';
+
+// The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+const apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
 
 const App = () => {
   const ref = useRef();
@@ -22,7 +27,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <trafimage-maps ref={ref} zoom="7"/>
+      <trafimage-maps ref={ref} zoom="7" apiKey={apiKey} />
     </div>
   );
 }
