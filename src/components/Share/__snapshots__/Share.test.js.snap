@@ -94,6 +94,9 @@ exports[`Share should match snapshot. 1`] = `
       width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>
+        Karte als Bild speichern
+      </title>
       <circle
         cx="8.5"
         cy="8.501"
