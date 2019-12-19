@@ -12,7 +12,7 @@ import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
 
 // The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
-const apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
+const apiKey = window.apiKey;
 
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
