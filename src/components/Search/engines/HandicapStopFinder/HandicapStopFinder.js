@@ -1,4 +1,5 @@
-import HandicapLayer from '../../layers/HandicapLayer';
+import HandicapLayer from '../../../../layers/HandicapLayer';
+import { setClickedFeatureInfo } from '../../../../model/app/actions';
 import StopFinder from '../StopFinder';
 
 const findHandicapLayers = l => l instanceof HandicapLayer;
@@ -36,9 +37,11 @@ class HandicapStopFinder extends StopFinder {
   select(item) {
     window.clearTimeout(this.selectTimeout);
     this.selectTimeout = window.setTimeout(() => {
-      this.props.dispatchSetClickedFeatureInfo([
-        { features: [item.handicap.feature], layer: item.handicap.layer },
-      ]);
+      this.props.dispatch(
+        setClickedFeatureInfo([
+          { features: [item.handicap.feature], layer: item.handicap.layer },
+        ]),
+      );
     }, 200);
   }
 }

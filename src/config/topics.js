@@ -21,10 +21,11 @@ import defaultBaseLayers, {
   behigNotOk,
   behigParent,
 } from './layers';
-import defaultSearches, {
-  handicapStopFinder,
+
+import defaultSearchEngines, {
   handicapNoInfoFinder,
-} from './searches';
+  handicapStopFinder,
+} from './searchEngines';
 
 const defaultElements = {
   header: true,
@@ -58,7 +59,7 @@ export const netzkarte = {
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
-  searches: defaultSearches,
+  searchEngines: defaultSearchEngines,
 };
 
 export const handicap = {
@@ -68,7 +69,7 @@ export const handicap = {
   layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
-  searches: {
+  searchEngines: {
     // prettier-ignore
     'Stützpunktbahnhöfe': handicapStopFinder,
     'Stationen ohne Informationen': handicapNoInfoFinder,
@@ -104,7 +105,7 @@ export const bauprojekte = {
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
-  searches: defaultSearches,
+  searchEngines: defaultSearchEngines,
 };
 
 export const behig = {
@@ -114,7 +115,7 @@ export const behig = {
   layers: [netzkarteLayer, behigNotOk, behigNotYetOk, behigOk, behigParent],
   projection: 'EPSG:3857',
   layerInfoComponent: 'BehigTopicInfo',
-  searches: defaultSearches,
+  searchEngines: defaultSearchEngines,
 };
 
 export const infrastruktur = {

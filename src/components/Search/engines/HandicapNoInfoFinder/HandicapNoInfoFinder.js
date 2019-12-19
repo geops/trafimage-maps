@@ -1,4 +1,4 @@
-import HandicapLayer from '../../layers/HandicapLayer';
+import HandicapLayer from '../../../../layers/HandicapLayer';
 import StopFinder from '../StopFinder';
 
 const findHandicapLayers = l => l instanceof HandicapLayer;

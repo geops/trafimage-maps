@@ -37,6 +37,7 @@ const defaultElements = {
 };
 
 const propTypes = {
+  apiKey: PropTypes.string.isRequired,
   /**
    * History object from react-router
    */
@@ -55,7 +56,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history }) {
+function TopicElements({ apiKey, history }) {
   const ref = useRef(null);
   const { activeTopic, layerService, map } = useSelector(state => state.app);
   const [tabFocus, setTabFocus] = useState(false);
@@ -112,7 +113,7 @@ function TopicElements({ history }) {
   // Define which components to display.
   const appComponents = {
     header: <Header />,
-    search: <Search />,
+    search: <Search apiKey={apiKey} />,
     telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,
     permalink: <Permalink history={history} />,

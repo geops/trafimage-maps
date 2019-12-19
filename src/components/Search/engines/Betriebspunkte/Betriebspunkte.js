@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Search from '../Search';
+import createTrafimageEngine from '../createTrafimageEngine';
 
-class Betriebspunkte extends Search {
+class Betriebspunkte extends createTrafimageEngine() {
   constructor() {
     super();
     this.showInPlaceholder = false;
@@ -20,8 +20,7 @@ class Betriebspunkte extends Search {
     return <div>{item.properties.bezeichnung}</div>;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  value(item) {
+  static value(item) {
     return item.properties.bezeichnung;
   }
 }

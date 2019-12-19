@@ -13,7 +13,6 @@ import {
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
   SET_DEPARTURES_FILTER,
-  SET_SEARCH_SERVICE,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 import layerHelper from '../../layers/layerHelper';
@@ -42,11 +41,6 @@ const getInitialState = () => ({
 
 export default function app(state = getInitialState(), action) {
   switch (action.type) {
-    case SET_SEARCH_SERVICE:
-      return {
-        ...state,
-        searchService: action.data,
-      };
     case SET_TOPICS:
       return {
         ...state,

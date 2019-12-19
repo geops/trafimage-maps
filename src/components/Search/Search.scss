@@ -1,105 +1,69 @@
 @import '../../globals.scss';
 
-.wkp-search {
+.rt-search {
   position: absolute;
   top: 25px;
   z-index: 3;
-  right: 220px;
-  left: 400px;
 
-  .wkp-search-button {
-    border: none;
-    color: white;
-    height: 41px;
-    width: 46px;
-    position: absolute;
-    top: 2px;
-    font-size: 16px;
-    padding-top: 3px;
-
-    &.wkp-search-button-clear {
-      right: 46px;
-      background: none;
-      color: #666;
+  .react-autosuggest__container {
+    .react-autosuggest__input {
+      border: 2px solid #b7b7b7;
+      padding: 12px 15px;
+      font-size: 14px;
+      height: auto;
+      width: calc(100% - 34px);
     }
 
-    &.wkp-search-button-submit {
-      background-color: $brand-primary;
-      right: -2px;
-    }
-  }
-
-  .react-autosuggest__input {
-    border: 2px solid #b7b7b7;
-    padding: 12px 15px;
-    font-size: 14px;
-    width: calc(100% - 30px);
-  }
-
-  .react-autosuggest__suggestions-container--open {
-    background: white;
-    border: 2px solid #666;
-    margin-top: 5px;
-    width: 100%;
-    padding-top: 15px;
-    max-height: calc(100vh - 150px);
-    overflow: auto;
-  }
-
-  .react-autosuggest__section-title {
-    padding: 10px 15px 0;
-    border-top: 1px solid lightgray;
-
-    .wkp-search-section-header {
-      font-weight: bold;
+    .react-autosuggest__suggestions-container--open {
+      width: calc(100% - 4px);
+      border: 2px solid #666;
     }
 
-    .wkp-search-section-count {
-      color: #666;
-      padding-top: 5px;
-      position: relative;
-
-      svg {
-        position: absolute;
-        top: -15px;
-        right: 0;
-      }
-    }
-
-    :hover {
-      .wkp-search-section-count {
-        color: $brand-primary;
-      }
-    }
-  }
-
-  .react-autosuggest__section-container--first {
     .react-autosuggest__section-title {
-      margin: 0;
-      padding: 0 15px;
+      padding: 10px 15px 0;
+      border-top: 1px solid lightgray;
+
+      .wkp-search-section-header {
+        font-weight: bold;
+      }
+
+      .wkp-search-section-count {
+        color: #666;
+        padding-top: 5px;
+        position: relative;
+
+        svg {
+          position: absolute;
+          top: -15px;
+          right: 0;
+        }
+      }
+
+      :hover {
+        .wkp-search-section-count {
+          color: $brand-primary;
+        }
+      }
+    }
+
+    .react-autosuggest__section-container--first {
+      .react-autosuggest__section-title {
+        border: none;
+      }
+    }
+  }
+
+  .rt-search-button {
+    height: 45px;
+
+    &.rt-search-button-submit {
+      background-color: $brand-primary;
       border: none;
-    }
-  }
-
-  .react-autosuggest__suggestions-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .react-autosuggest__suggestion {
-    margin: 15px 15px 0;
-
-    &.react-autosuggest__suggestion--highlighted {
-      color: $brand-primary;
-    }
-
-    :hover {
-      cursor: pointer;
-    }
-
-    :last-child {
-      margin-bottom: 15px;
+      width: 41px;
+      height: 41px;
+      position: absolute;
+      right: 2px;
+      top: 2px;
     }
   }
 }

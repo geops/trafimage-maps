@@ -67,7 +67,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'netzkarte_personenverkehr',
 });
@@ -80,7 +80,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
 export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   style: 'trafimage_sources_only',
   properties: {
     hideInLegend: true,
@@ -431,7 +431,7 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   radioGroup: 'showcases',
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'showcase2',
   properties: {
@@ -445,7 +445,7 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   radioGroup: 'showcases',
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'showcase3',
   properties: {
@@ -460,7 +460,7 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   visible: true,
   isQueryable: false,
   radioGroup: 'showcases',
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'netzkarte_personenverkehr',
   properties: {

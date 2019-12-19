@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Search from '../Search';
+import createTrafimageEngine from '../createTrafimageEngine';
 
-class Municipalities extends Search {
+class Municipalities extends createTrafimageEngine() {
   constructor() {
     super();
     this.showInPlaceholder = false;
@@ -22,8 +22,7 @@ class Municipalities extends Search {
     return <div>{item.properties.name}</div>;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  value(item) {
+  static value(item) {
     return item.properties.name;
   }
 }

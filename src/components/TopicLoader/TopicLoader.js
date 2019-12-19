@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 import LayerService from 'react-spatial/LayerService';
 import { setLayers } from '../../model/map/actions';
-import {
-  setActiveTopic,
-  setTopics,
-  setClickedFeatureInfo,
-  setSearchService,
-} from '../../model/app/actions';
-import SearchService from '../Search/SearchService';
+import { setActiveTopic, setTopics } from '../../model/app/actions';
 import TopicElements from '../TopicElements';
 
 const propTypes = {
@@ -32,10 +24,6 @@ const propTypes = {
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
-  dispatchSetSearchService: PropTypes.func.isRequired,
-
-  t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -66,7 +54,6 @@ class TopicLoader extends Component {
       activeTopic,
       topics,
       dispatchSetActiveTopic,
-      apiKey,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
@@ -85,7 +72,6 @@ class TopicLoader extends Component {
 
     if (
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      apiKey !== prevProps.apiKey ||
       vectorTilesKey !== prevProps.vectorTilesKey ||
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
       cartaroUrl !== prevProps.cartaroUrl ||
@@ -96,17 +82,8 @@ class TopicLoader extends Component {
   }
 
   updateServices(activeTopic) {
-    const {
-      t,
-      apiKey,
-      layerService,
-      dispatchSetClickedFeatureInfo,
-      dispatchSetSearchService,
-    } = this.props;
-
     if (!activeTopic) {
       this.updateLayers([]);
-      dispatchSetSearchService();
     }
 
     if (activeTopic.linkUrl) {
@@ -115,17 +92,6 @@ class TopicLoader extends Component {
     }
 
     this.updateLayers(activeTopic.layers);
-
-    const newSearchService = new SearchService();
-    newSearchService.setSearches(activeTopic.searches || []);
-    newSearchService.setApiKey(apiKey);
-    newSearchService.setSearchesProps({
-      t,
-      activeTopic,
-      layerService,
-      dispatchSetClickedFeatureInfo,
-    });
-    dispatchSetSearchService(newSearchService);
   }
 
   updateLayers(topicLayers) {
@@ -160,8 +126,8 @@ class TopicLoader extends Component {
   }
 
   render() {
-    const { history } = this.props;
-    return <TopicElements history={history} />;
+    const { apiKey, history } = this.props;
+    return <TopicElements apiKey={apiKey} history={history} />;
   }
 }
 
@@ -174,14 +140,9 @@ const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
-  dispatchSetSearchService: setSearchService,
 };
 
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
 
-export default compose(
-  withTranslation(),
-  connect(mapStateToProps, mapDispatchToProps),
-)(TopicLoader);
+export default connect(mapStateToProps, mapDispatchToProps)(TopicLoader);

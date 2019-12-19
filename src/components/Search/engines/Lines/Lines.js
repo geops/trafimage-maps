@@ -3,8 +3,8 @@ import { Style, Circle, Fill, Stroke as OLStroke } from 'ol/style';
 import { MultiLineString } from 'ol/geom';
 import GeoJSON from 'ol/format/GeoJSON';
 
-import Search from '../Search';
-import layerHelper from '../../layers/layerHelper';
+import createTrafimageEngine from '../createTrafimageEngine';
+import layerHelper from '../../../../layers/layerHelper';
 
 const lineMeasuresRegExp = new RegExp(
   '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
@@ -14,7 +14,7 @@ const lineKilometerRegExp = new RegExp('^([0-9]+)\\s+([0-9]+\\.?[0-9]+)$');
 
 const color = 'rgba(0,61,155,0.5)';
 
-class Lines extends Search {
+class Lines extends createTrafimageEngine() {
   constructor() {
     super();
     this.dataProjection = 'EPSG:21781';
@@ -79,8 +79,7 @@ class Lines extends Search {
     );
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  value({ properties }) {
+  static value({ properties }) {
     return properties.start !== properties.end
       ? `${properties.linie} ${properties.start}${
           properties.end ? `-${properties.end}` : ''

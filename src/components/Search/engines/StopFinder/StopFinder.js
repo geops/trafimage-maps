@@ -1,39 +1,13 @@
-import React from 'react';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { transform } from 'ol/proj';
+import { StopFinder } from 'react-transit/components/Search';
 
-import Search from '../Search';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+import createTrafimageEngine from '../createTrafimageEngine';
+import MapboxStyleLayer from '../../../../layers/MapboxStyleLayer';
+import { setClickedFeatureInfo } from '../../../../model/app/actions';
 
-const endpoint = 'https://api.geops.io/stops/v1/';
-
-class StopFinder extends Search {
-  constructor() {
-    super();
-
-    this.onDataEvent = this.onDataEvent.bind(this);
-  }
-
-  setApiKey(apiKey) {
-    this.apiKey = apiKey;
-  }
-
-  search(value) {
-    return fetch(`${endpoint}?&q=${value}&key=${this.apiKey}`)
-      .then(data => data.json())
-      .then(featureCollection => featureCollection.features);
-  }
-
-  render(item) {
-    return <div>{item.properties.name}</div>;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  value(item) {
-    return item.properties.name;
-  }
-
+class TrafimageStopFinder extends createTrafimageEngine(StopFinder) {
   openPopup(item) {
     this.popupItem = item;
     const { layerService } = this.props;
@@ -73,8 +47,8 @@ class StopFinder extends Search {
     return null;
   }
 
-  onDataEvent() {
-    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+  onDataEvent = () => {
+    const { layerService, dispatch } = this.props;
     const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
     const { mbMap } = layer.mapboxLayer;
 
@@ -90,8 +64,8 @@ class StopFinder extends Search {
       .map(l => this.getFeatureInfoForLayer(l))
       .filter(i => i);
 
-    dispatchSetClickedFeatureInfo(infos);
-  }
+    dispatch(setClickedFeatureInfo(infos));
+  };
 }
 
-export default StopFinder;
+export default TrafimageStopFinder;

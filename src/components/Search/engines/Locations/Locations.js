@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Search from '../Search';
+import createTrafimageEngine from '../createTrafimageEngine';
 
-class Locations extends Search {
+class Locations extends createTrafimageEngine() {
   // eslint-disable-next-line class-methods-use-this
   search(value) {
     return fetch(
@@ -34,8 +34,7 @@ class Locations extends Search {
     );
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  value(item) {
+  static value(item) {
     return item.label;
   }
 }

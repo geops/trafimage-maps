@@ -42,7 +42,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'netzkarte_personenverkehr',
 });
@@ -55,7 +55,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
 export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
-  preserveDrawingBuffer: true,
+  preserveDrawingBuffer: false,
   style: 'trafimage_sources_only',
   properties: {
     hideInLegend: true,
