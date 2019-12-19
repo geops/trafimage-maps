@@ -20,7 +20,8 @@ class HandicapNoInfoFinder extends StopFinder {
   }
 
   search(value) {
-    const handicapFeatures = this.props.activeTopic.layers
+    const handicapFeatures = this.props.layerService
+      .getLayers()
       .filter(findHandicapLayers)
       .map(getHandicapFeatures)
       .flat();
