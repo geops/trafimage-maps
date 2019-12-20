@@ -9,7 +9,8 @@ import { HandicapMenu } from '../../config/menu';
 
 import TrafimageMaps from '../../components/TrafimageMaps';
 
-// The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
 <div style={{ position: 'relative', width: '100%', height: 500 }}>

@@ -2,7 +2,7 @@
 
 This example shows how to integrate punctuality information in your map application.
 
-The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+The `apiKey` used here is for demonstration purposes only. Please get your own api key at https://developer.geops.io/.
 
 ```jsx
 import 'trafimage-maps';
@@ -11,7 +11,8 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import defaultBaseLayers, { buslines } from 'trafimage-maps/examples/Punctuality/layers';
 
-// The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
 const App = () => {
