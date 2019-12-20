@@ -178,6 +178,7 @@ class TopicMenu extends PureComponent {
             className="wkp-topic-menu-item"
             role="button"
             tabIndex={0}
+            aria-expanded={!isCollapsed}
             onClick={() => this.onTopicClick(topic)}
             onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
           >

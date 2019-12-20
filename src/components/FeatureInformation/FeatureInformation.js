@@ -88,7 +88,7 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
               }
             }}
           >
-            <MdClose focusable={false} />
+            <MdClose focusable={false} alt={t('Popup schliessen')} />
           </Button>
         </div>
         <div className="wkp-feature-information-body">
