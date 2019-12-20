@@ -31,7 +31,13 @@
         word-break: break-word;
       }
     }
+  }
+}
 
+.tm-w-xl,
+.tm-w-l,
+.tm-w-m {
+  .wkp-handicap-popup {
     .wkp-handicap-popup-bottom {
       padding-top: 20px;
       min-width: 400px;
@@ -45,13 +51,9 @@
   }
 }
 
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
+.tm-w-s,
+.tm-w-xs {
   .wkp-handicap-popup {
     min-width: 200px;
-
-    .wkp-handicap-popup-bottom {
-      min-width: 200px;
-    }
   }
 }
