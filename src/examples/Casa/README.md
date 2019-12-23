@@ -2,7 +2,7 @@
 
 The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
-The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+The `apiKey` used here is for demonstration purposes only. Please get your own api key at https://developer.geops.io/.
 
 ```jsx
 import 'trafimage-maps';
@@ -11,7 +11,8 @@ import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
 
-// The used `apiKey` is a demo key. Please [request your own api key](http://developer.geops.io/) for using the application.
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
 // Intialization of zone layer.
