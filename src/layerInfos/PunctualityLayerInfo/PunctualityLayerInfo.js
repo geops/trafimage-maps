@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
-import Link from '../../components/Link';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -27,9 +26,14 @@ const PunctualityLayerInfo = ({ language, t }) => {
         <p>{img}</p>
         <p>
           Daten:&nbsp;
-          <Link href="https://opentransportdata.swiss/">
+          <a
+            href="https://opentransportdata.swiss/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             opentransportdata.swiss
-          </Link>
+          </a>
+          .
         </p>
       </div>
     ),
@@ -40,9 +44,14 @@ const PunctualityLayerInfo = ({ language, t }) => {
         <p>{img}</p>
         <p>
           Données:&nbsp;
-          <Link href="https://opentransportdata.swiss/">
+          <a
+            href="https://opentransportdata.swiss/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             opentransportdata.swiss
-          </Link>
+          </a>
+          .
         </p>
       </div>
     ),
@@ -53,9 +62,14 @@ const PunctualityLayerInfo = ({ language, t }) => {
         <p>{img}</p>
         <p>
           Data:&nbsp;
-          <Link href="https://opentransportdata.swiss/">
+          <a
+            href="https://opentransportdata.swiss/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             opentransportdata.swiss
-          </Link>
+          </a>
+          .
         </p>
       </div>
     ),
@@ -66,9 +80,14 @@ const PunctualityLayerInfo = ({ language, t }) => {
         <p>{img}</p>
         <p>
           Dati:&nbsp;
-          <Link href="https://opentransportdata.swiss/">
+          <a
+            href="https://opentransportdata.swiss/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             opentransportdata.swiss
-          </Link>
+          </a>
+          .
         </p>
       </div>
     ),
