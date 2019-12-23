@@ -35,7 +35,7 @@
     position: relative;
   }
 
-  .tm-base-layer-toggler {
+  .rs-base-layer-toggler {
     position: absolute;
     bottom: 40px;
     left: 10px;
@@ -45,12 +45,12 @@
     // For some reasons, after a click on tm-base-layer-item button,
     // we are not able to click on next and previous button anymore because
     // they are behind the tm-base-layer-item button.
-    .tm-base-layer-item {
+    .rs-base-layer-item {
       z-index: 0;
     }
 
-    .tm-base-layer-previous,
-    .tm-base-layer-next {
+    .rs-base-layer-previous,
+    .rs-base-layer-next {
       z-index: 1;
     }
   }
@@ -88,7 +88,7 @@
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
-    .tm-base-layer-toggler {
+    .rs-base-layer-toggler {
       display: none;
     }
 

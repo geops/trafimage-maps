@@ -138,6 +138,29 @@ class TopicLoader extends Component {
       vectorTilesUrl,
     } = this.props;
 
+    const [currentBaseLayer] = layerService
+      .getLayersAsFlatArray()
+      .filter(l => l.getIsBaseLayer() && l.getVisible());
+
+    const visibleBaseLayers = topicLayers.filter(
+      l => l.getIsBaseLayer() && l.getVisible(),
+    );
+
+    // Set the visible baselayer if need to be changed on topic change.
+    if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
+      topicLayers.forEach((lay, idx) => {
+        if (lay.getIsBaseLayer()) {
+          if (idx === 0) {
+            lay.setVisible(true);
+          } else {
+            lay.setVisible(false);
+          }
+          return lay;
+        }
+        return lay;
+      });
+    }
+
     layerService.setLayers(topicLayers);
     const flatLayers = layerService.getLayersAsFlatArray();
     dispatchSetLayers(topicLayers);
