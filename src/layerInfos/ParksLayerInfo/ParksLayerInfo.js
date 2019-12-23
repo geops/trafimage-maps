@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from '../../components/Link';
 
 const comps = {
   de: (
@@ -8,7 +7,14 @@ const comps = {
       nur Pärke in Betrieb gezeigt.
       <p>
         Daten:&nbsp;
-        <Link href="http://www.parks.swiss">www.parks.swiss</Link>
+        <a
+          href="http://www.parks.swiss"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          www.parks.swiss
+        </a>
+        .
       </p>
     </div>
   ),
@@ -18,7 +24,14 @@ const comps = {
       en gestion sont affichés.
       <p>
         Données:&nbsp;
-        <Link href="http://www.parks.swiss/fr">www.parks.swiss/fr</Link>
+        <a
+          href="http://www.parks.swiss/fr"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          www.parks.swiss/fr
+        </a>
+        .
       </p>
     </div>
   ),
@@ -28,7 +41,14 @@ const comps = {
       currently in use are shown.
       <p>
         Data:&nbsp;
-        <Link href="http://www.parks.swiss/en">www.parks.swiss/en</Link>
+        <a
+          href="http://www.parks.swiss/en"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          www.parks.swiss/en
+        </a>
+        .
       </p>
     </div>
   ),
@@ -38,7 +58,14 @@ const comps = {
       mostrati solo i parchi aperti.
       <p>
         Dati:&nbsp;
-        <Link href="http://www.parks.swiss/it">www.parks.swiss/it</Link>
+        <a
+          href="http://www.parks.swiss/it"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          www.parks.swiss/it
+        </a>
+        .
       </p>
     </div>
   ),
