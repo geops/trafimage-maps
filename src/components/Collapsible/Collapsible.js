@@ -65,6 +65,7 @@ class Collapsible extends PureComponent {
       style.maxWidth = isCollapsed ? 0 : maxWidth;
     } else {
       style.maxHeight = isCollapsed ? 0 : maxHeight;
+      style.height = isCollapsed ? 0 : undefined;
     }
 
     if (isHidden !== isCollapsed) {

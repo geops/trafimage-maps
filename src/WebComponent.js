@@ -94,7 +94,7 @@ const attributes = {
   appName: 'wkp',
   language: 'de',
   activeTopicKey: undefined,
-  apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  apiKey: process.env.REACT_APP_API_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
@@ -116,6 +116,7 @@ const WebComponent = props => {
     appName,
     center,
     apiKey,
+    vectorTilesKey,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -125,6 +126,10 @@ const WebComponent = props => {
     return JSON.parse(center);
   }, [center]);
 
+  const vectorTileApiKey = useMemo(() => vectorTilesKey || apiKey, [
+    apiKey,
+    vectorTilesKey,
+  ]);
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
   const appTopics = useMemo(() => {
     const tps = topics || getTopicConfig(apiKey, appName);
@@ -155,6 +160,8 @@ const WebComponent = props => {
       >
         <TrafimageMaps
           {...props}
+          apiKey={apiKey}
+          vectorTilesKey={vectorTileApiKey}
           topics={appTopics}
           zoom={floatZoom}
           center={arrayCenter}

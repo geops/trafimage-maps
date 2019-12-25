@@ -127,14 +127,14 @@ const comps = {
         <b>Mention juridique et protection des données.</b>
       </p>
       <p>
-        La
+        La{' '}
         <a href="http://www.cff.ch/meta/mention-juridique.html">
           Mention juridique
-        </a>
-        et les
+        </a>{' '}
+        et les{' '}
         <a href="http://www.cff.ch/meta/protection-des-donnees.html">
           dispositions sur la protection des données
-        </a>
+        </a>{' '}
         des CFF s’appliquent.
       </p>
       <p>
@@ -239,14 +239,14 @@ const comps = {
       </p>
       <p />
       <p>
-        SBB&apos;s
+        SBB&apos;s{' '}
         <a href="http://www.sbb.ch/en/meta/legal-information.html">
           legal information
-        </a>
-        and
+        </a>{' '}
+        and{' '}
         <a href="http://www.sbb.ch/en/meta/data-protection.html">
           Privacy Policy
-        </a>
+        </a>{' '}
         apply.
       </p>
       <p>
@@ -346,8 +346,8 @@ const comps = {
         <b>Avvertenza legale e protezione dei dati.</b>
       </p>
       <p>
-        Valgono le
-        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e
+        Valgono le{' '}
+        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e{' '}
         <a href="http://www.ffs.ch/meta/tutela-dei-dati.html">
           la dichiarazione sulla protezione dei dati
         </a>

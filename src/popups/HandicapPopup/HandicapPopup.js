@@ -16,7 +16,6 @@ function HandicapPopup({ feature }) {
 
   // mapping of all boolean values properties and their exceptions
   const bfEquipmentExceptions = {
-    treppenfrei: null,
     perronhoehe_P55: `ausnahme_zu_P55_${language}`,
     rampe: `ausnahme_zu_rampe_und_treppe_${language}`,
     lift_zu_perron: `standort_zu_lift_${language}`,
@@ -32,6 +31,11 @@ function HandicapPopup({ feature }) {
 
   // build string for equipment
   const equipment = [];
+
+  equipment.unshift(
+    properties.treppenfrei ? t('treppenfrei') : t('nicht treppenfrei'),
+  );
+
   Object.keys(bfEquipmentExceptions).forEach(key => {
     if (properties[key]) {
       let str = t(key);

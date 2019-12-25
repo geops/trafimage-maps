@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 
+import './ConstructionLayerInfo.scss';
+
 const propTypes = {
   t: PropTypes.func.isRequired,
   infos: PropTypes.object.isRequired,
@@ -18,15 +20,13 @@ const ConstructionLayerInfo = ({ t, infos }) => {
   );
 
   return (
-    <div>
+    <div className="wkp-construction-layer-info">
+      <img
+        src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`}
+        draggable="false"
+        alt={t('Kein Bildtext')}
+      />
       {t(`${infos.key}-desc`)}
-      <p>
-        <img
-          src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`}
-          draggable="false"
-          alt={t('Kein Bildtext')}
-        />
-      </p>
     </div>
   );
 };
