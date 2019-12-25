@@ -26,6 +26,7 @@ class RouteLayer extends CasaLayer {
       ...options,
     });
 
+    this.set('showPopupOnHover', true);
     this.set('popupComponent', 'CasaRoutePopup');
 
     this.url = 'https://api.geops.io/routing/v1';

@@ -8,7 +8,6 @@ const propTypes = {
 
 const CasaRoutePopup = ({ feature }) => {
   const content = feature.get('route').popupContent;
-  console.log('CasaRoutePopup', content);
 
   return (
     <div className="wkp-casa-route-popup">

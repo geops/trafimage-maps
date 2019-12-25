@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Point from 'ol/geom/Point';
+import { Point, LineString } from 'ol/geom';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
 import './Popup.scss';
@@ -31,10 +31,15 @@ const Popup = () => {
 
   const { coordinate, features } = clickedFeatureInfo[0];
   const geom = features[0].getGeometry();
-  const coord =
-    features.length === 1 && geom instanceof Point
-      ? geom.getCoordinates()
-      : coordinate;
+  let coord = coordinate;
+
+  if (
+    features.length === 1 &&
+    (geom instanceof Point || geom instanceof LineString)
+  ) {
+    coord = geom.getClosestPoint(coordinate);
+  }
+
   const mapRect = map.getTarget().getBoundingClientRect();
 
   // do not move the popup over the map controls except on small screens

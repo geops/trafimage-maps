@@ -16,6 +16,7 @@ const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
+  clickedFeatureInfo: PropTypes.arrayOf(PropTypes.shape()),
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
@@ -36,6 +37,7 @@ const propTypes = {
 const defaultProps = {
   // mapStateToProps
   center: [0, 0],
+  clickedFeatureInfo: [],
   layers: [],
   extent: undefined,
   resolution: undefined,
@@ -89,60 +91,72 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const { layerService, dispatchHtmlEvent } = this.props;
+    const {
+      layerService,
+      clickedFeatureInfo,
+      dispatchSetClickedFeatureInfo,
+    } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
     }
-    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
-      const filtered = featureInfos.filter(
-        ({ layer, features }) => layer.get('popupComponent') && features.length,
-      );
-      // eslint-disable-next-line no-param-reassign
-      map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
-    });
 
-    // Propagate the ol event to the WebComponent
-    const htmlEvent = new CustomEvent(evt.type, {
-      detail: evt,
+    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
+      let infos = featureInfos.filter(({ features }) => features.length);
+      map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
+
+      const isClickInfoOpen =
+        clickedFeatureInfo &&
+        clickedFeatureInfo.length &&
+        clickedFeatureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
+
+      // don't continue if there's a popup that was opened by click
+      if (!isClickInfoOpen) {
+        infos = infos.filter(
+          ({ layer }) =>
+            layer.get('showPopupOnHover') && layer.get('popupComponent'),
+        );
+
+        dispatchSetClickedFeatureInfo(infos);
+      }
     });
-    dispatchHtmlEvent(htmlEvent);
   }
 
   onSingleClick(evt) {
+    const { coordinate } = evt;
     const {
       layerService,
       dispatchSetClickedFeatureInfo,
       dispatchHtmlEvent,
     } = this.props;
 
-    layerService
-      .getFeatureInfoAtCoordinate(evt.coordinate)
-      .then(featureInfos => {
-        // Display only info of layers with a popup defined.
-        const filtered = featureInfos
-          .reverse()
-          .filter(({ layer }) => layer.get('popupComponent'));
-
-        // Clear the select style.
-        filtered.forEach(({ layer, features }) => {
-          if (layer.select) {
-            layer.select(features);
-          }
-        });
-
-        // Dispatch only infos with features found.
-        const clickedFeatureInfos = filtered.filter(
-          ({ features }) => features.length,
+    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
+      // Display only info of layers with a popup defined.
+      let infos = featureInfos
+        .reverse()
+        .filter(
+          ({ layer }) =>
+            layer.get('popupComponent') && !layer.get('showPopupOnHover'),
         );
-        dispatchSetClickedFeatureInfo(clickedFeatureInfos);
 
-        // Propagate the infos clicked to the WebComponent
-        const htmlEvent = new CustomEvent('getfeatureinfo', {
-          detail: clickedFeatureInfos,
-        });
-        dispatchHtmlEvent(htmlEvent);
+      // Clear the select style.
+      infos.forEach(({ layer, features }) => {
+        if (layer.select) {
+          layer.select(features);
+        }
       });
+
+      // Dispatch only infos with features found.
+      infos = infos.filter(({ features }) => features.length);
+      dispatchSetClickedFeatureInfo(infos);
+
+      // Propagate the infos clicked to the WebComponent
+      dispatchHtmlEvent(
+        new CustomEvent('getfeatureinfo', {
+          detail: infos,
+        }),
+      );
+    });
 
     // Propagate the ol event to the WebComponent
     const htmlEvent = new CustomEvent(evt.type, {
@@ -178,6 +192,7 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
+  clickedFeatureInfo: state.app.clickedFeatureInfo,
   layerService: state.app.layerService,
   layers: state.map.layers,
   center: state.map.center,

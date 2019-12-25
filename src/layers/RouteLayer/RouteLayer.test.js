@@ -169,7 +169,7 @@ describe('RouteLayer', () => {
     const component = mount(<TrafimageMaps topics={topicConf} />);
     const compMap = component.find('Map').props().map;
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
-    const evt = { type: 'singleclick', map: compMap, coordinate: [50, 50] };
+    const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };
     await compMap.dispatchEvent(evt);
     await Promise.all(spy.mock.results.map(r => r.value));
     component.update();
@@ -177,16 +177,5 @@ describe('RouteLayer', () => {
     expect(component.find('.wkp-casa-route-popup').text()).toBe(
       'Von: St. GallenNach: Zürich HB',
     );
-
-    // no popup if popupConent is undefined
-    const newFeat = feature.clone();
-    newFeat.set('route', {});
-    jest.spyOn(Map.prototype, 'getFeaturesAtPixel').mockReturnValue([newFeat]);
-
-    await compMap.dispatchEvent(evt);
-    await Promise.all(spy.mock.results.map(r => r.value));
-    component.update();
-
-    expect(component.find('.wkp-casa-route-popup').length).toBe(0);
   });
 });
