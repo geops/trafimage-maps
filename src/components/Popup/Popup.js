@@ -13,9 +13,17 @@ const Popup = () => {
     return null;
   }
 
-  const filtered = clickedFeatureInfo.filter(({ layer }) =>
-    layer.get('popupComponent'),
-  );
+  const filtered = clickedFeatureInfo.filter(info => {
+    const { layer, features } = info;
+
+    if (layer.get('popupComponent')) {
+      if (typeof layer.hidePopup === 'function') {
+        return features.find(f => !layer.hidePopup(f));
+      }
+      return true;
+    }
+    return false;
+  });
 
   if (!filtered.length) {
     return null;

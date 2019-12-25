@@ -66,6 +66,17 @@ class CasaLayer extends VectorLayer {
   }
 
   /**
+   * In some cases we want to dispatch an onClick() without showing a popup.
+   * If this function returns true, no popup is displayed.
+   * @param {ol.Feature} feature The potential popup feature.
+   */
+  // eslint-disable-next-line no-unused-vars, class-methods-use-this
+  hidePopup(feature) {
+    // by default no popup is shown for CASA
+    return true;
+  }
+
+  /**
    * Listen to mouseover events on features.
    * The callback is called with the hovered feature
    * (https://openlayers.org/en/latest/apidoc/module-ol_Feature-Feature.html)
