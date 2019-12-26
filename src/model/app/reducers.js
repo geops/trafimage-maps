@@ -20,7 +20,7 @@ import layerHelper from '../../layers/layerHelper';
 
 const getInitialState = () => ({
   topics: [],
-  featureInfo: null,
+  featureInfo: [],
   language: 'de',
   projection: {
     label: 'WGS 84',

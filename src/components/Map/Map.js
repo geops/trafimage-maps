@@ -46,6 +46,25 @@ const defaultProps = {
 };
 
 class Map extends PureComponent {
+  /**
+   * Compare 2 feature info objects and return true
+   * if they are the same.
+   */
+  static isSameFeatureInfo(first, second) {
+    if (first.length !== second.length) {
+      return false;
+    }
+
+    const firstFeatures = first.map(f => f.features).flat();
+    const secondFeatures = second.map(s => s.features).flat();
+
+    if (firstFeatures.length !== secondFeatures.length) {
+      return false;
+    }
+
+    return firstFeatures.every((f, i) => secondFeatures[i] === f);
+  }
+
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
@@ -97,12 +116,11 @@ class Map extends PureComponent {
       return;
     }
 
-    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
-      let infos = featureInfos.filter(({ features }) => features.length);
+    layerService.getFeatureInfoAtCoordinate(coordinate).then(newInfos => {
+      let infos = newInfos.filter(({ features }) => features.length);
       map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
       const isClickInfoOpen =
-        featureInfo &&
         featureInfo.length &&
         featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
 
@@ -113,7 +131,9 @@ class Map extends PureComponent {
             layer.get('showPopupOnHover') && layer.get('popupComponent'),
         );
 
-        dispatchSetFeatureInfo(infos);
+        if (!Map.isSameFeatureInfo(featureInfo, infos)) {
+          dispatchSetFeatureInfo(infos);
+        }
       }
     });
   }
