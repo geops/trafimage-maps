@@ -86,8 +86,8 @@ export const netzkarteStelen = {
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [netzkarteLayer],
-  elements: { popup: true },
+  layers: [netzkarteLayer, swisstopoSwissImage],
+  elements: { popup: true, baseLayerToggler: true },
   projection: 'EPSG:3857',
 };
 
