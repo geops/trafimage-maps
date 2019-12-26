@@ -145,7 +145,7 @@ class RouteLayer extends CasaLayer {
 
     return Object.values(
       this.getOlStylesFromObject(routeStyle, isSelected, isHovered, feature),
-    );
+    ).flat();
   }
 
   /**

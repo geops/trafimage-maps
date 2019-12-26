@@ -202,7 +202,7 @@ class ZoneLayer extends CasaLayer {
       resolution,
     );
 
-    return Object.values(olStyles);
+    return Object.values(olStyles).flat();
   }
 
   /**

@@ -2,10 +2,13 @@ import deepmerge from 'deepmerge';
 import {
   Style,
   Fill as FillStyle,
+  Icon as IconStyle,
   Stroke as StrokeStyle,
   Text as TextStyle,
 } from 'ol/style';
+import { LineString, Point } from 'ol/geom';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
+import ArrowImg from '../../img/arrow.png';
 
 /**
  * @typedef {Object} styleObject
@@ -21,6 +24,8 @@ import VectorLayer from 'react-spatial/layers/VectorLayer';
  * @property {Object} [stroke] Stroke properties.
  * @property {number} [stroke.width] Stroke width.
  * @property {string} [stroke.color] Stroke color.
+ * @property {Object} [stroke.arrow] Stroke arrows.
+ * @property {number} [stroke.arrow.count] Number of stroke arrows along the route.
  * @property {Object} [strokeOutline] Stroke outline.
  * @property {number} [strokeOutline.width] Stroke outline width.
  * @property {string} [strokeOutline.color] Stroke outline color.
@@ -137,6 +142,62 @@ class CasaLayer extends VectorLayer {
       fill: style.fill ? new FillStyle({ ...style.fill }) : undefined,
     });
 
+    if (style.strokeArrow && feature.getGeometry() instanceof LineString) {
+      olStyles.arrows = [];
+      olStyles.helpPoints = [];
+      const { count, color } = style.strokeArrow;
+      const fraction = 1 / (count - 1);
+      const geom = feature.getGeometry();
+      const rotationFractionDiff = 0.05;
+
+      const arrowColor = color || (style.stroke || {}).color;
+      const opacity =
+        Array.isArray(arrowColor) && arrowColor.length === 4
+          ? arrowColor[3]
+          : 1;
+
+      // fraction offset for measuring the rotation
+      let currentFraction = 0;
+
+      while (currentFraction <= 1) {
+        const coords = geom.getCoordinateAt(currentFraction);
+        let rotation = 0;
+
+        if (currentFraction + rotationFractionDiff < 1) {
+          const rotFraction = currentFraction + rotationFractionDiff;
+          const rotCoords = geom.getCoordinateAt(rotFraction);
+
+          rotation = Math.atan2(
+            rotCoords[1] - coords[1],
+            rotCoords[0] - coords[0],
+          );
+        } else {
+          const rotFraction = currentFraction - rotationFractionDiff;
+          const rotCoords = geom.getCoordinateAt(rotFraction);
+
+          rotation =
+            Math.PI +
+            Math.atan2(rotCoords[1] - coords[1], rotCoords[0] - coords[0]);
+        }
+
+        rotation = 2 * Math.PI - rotation;
+
+        olStyles.arrows.push(
+          new Style({
+            geometry: new Point(coords),
+            image: new IconStyle({
+              rotation,
+              src: ArrowImg,
+              color: arrowColor,
+              opacity,
+            }),
+          }),
+        );
+
+        currentFraction += fraction;
+      }
+    }
+
     if (style.text) {
       olStyles.text = new Style({
         text: new TextStyle({
@@ -153,7 +214,9 @@ class CasaLayer extends VectorLayer {
     }
 
     if (isSelected || isHovered) {
-      Object.values(olStyles).forEach(s => s.setZIndex(1));
+      Object.values(olStyles)
+        .flat()
+        .forEach(s => s.setZIndex(1));
     }
 
     return olStyles;

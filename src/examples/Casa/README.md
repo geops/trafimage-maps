@@ -63,6 +63,12 @@ const routeLayer = new RouteLayer({
         stroke: { color: 'green' },
       };
     }
+
+    return {
+      strokeArrow: {
+        count: 3,
+      },
+    }
   },
 });
 
@@ -78,8 +84,8 @@ routeLayer
       },
       sequences: [
         {
-          uicFrom: 8506302,
-          uicTo: 8503000,
+          uicFrom: 8503000,
+          uicTo: 8506302,
           mot: 'rail',
         },
       ],
