@@ -8,7 +8,7 @@ import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
   setTopics,
-  setClickedFeatureInfo,
+  setFeatureInfo,
   setSearchService,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
@@ -32,7 +32,7 @@ const propTypes = {
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
@@ -100,7 +100,7 @@ class TopicLoader extends Component {
       t,
       apiKey,
       layerService,
-      dispatchSetClickedFeatureInfo,
+      dispatchSetFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
 
@@ -123,7 +123,7 @@ class TopicLoader extends Component {
       t,
       activeTopic,
       layerService,
-      dispatchSetClickedFeatureInfo,
+      dispatchSetFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
   }
@@ -174,7 +174,7 @@ const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchService: setSearchService,
 };
 

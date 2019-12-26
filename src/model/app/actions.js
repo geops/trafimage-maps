@@ -1,6 +1,6 @@
 export const SET_TOPICS = 'SET_TOPICS';
 export const SET_ACTIVE_TOPIC = 'SET_ACTIVE_TOPIC';
-export const SET_CLICKED_FEATURE_INFO = 'SET_CLICKED_FEATURE_INFO';
+export const SET_FEATURE_INFO = 'SET_FEATURE_INFO';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_PROJECTION = 'SET_PROJECTION';
 export const SET_MENU_OPEN = 'SET_MENU_OPEN';
@@ -18,8 +18,8 @@ export const setLanguage = data => ({ type: SET_LANGUAGE, data });
 
 export const setProjection = data => ({ type: SET_PROJECTION, data });
 
-export const setClickedFeatureInfo = data => ({
-  type: SET_CLICKED_FEATURE_INFO,
+export const setFeatureInfo = data => ({
+  type: SET_FEATURE_INFO,
   data,
 });
 

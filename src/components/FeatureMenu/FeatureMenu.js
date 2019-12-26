@@ -7,10 +7,10 @@ import MenuItem from '../Menu/MenuItem';
 
 const FeatureMenu = () => {
   const { t } = useTranslation();
-  const clickedFeatureInfo = useSelector(state => state.app.clickedFeatureInfo);
+  const featureInfo = useSelector(state => state.app.featureInfo);
   const [collapsed, setCollapsed] = useState(false);
 
-  if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
+  if (!featureInfo || !featureInfo.length) {
     return null;
   }
 
@@ -23,7 +23,7 @@ const FeatureMenu = () => {
       collapsed={collapsed}
       onCollapseToggle={c => setCollapsed(c)}
     >
-      <FeatureInformation clickedFeatureInfo={clickedFeatureInfo} />
+      <FeatureInformation featureInfo={featureInfo} />
     </MenuItem>
   );
 };

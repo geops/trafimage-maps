@@ -10,13 +10,13 @@ import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
-import { setClickedFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
-  clickedFeatureInfo: PropTypes.arrayOf(PropTypes.shape()),
+  featureInfo: PropTypes.arrayOf(PropTypes.shape()),
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
@@ -29,7 +29,7 @@ const propTypes = {
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetFeatureInfo: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -37,7 +37,7 @@ const propTypes = {
 const defaultProps = {
   // mapStateToProps
   center: [0, 0],
-  clickedFeatureInfo: [],
+  featureInfo: [],
   layers: [],
   extent: undefined,
   resolution: undefined,
@@ -91,11 +91,7 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const {
-      layerService,
-      clickedFeatureInfo,
-      dispatchSetClickedFeatureInfo,
-    } = this.props;
+    const { layerService, featureInfo, dispatchSetFeatureInfo } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
@@ -106,9 +102,9 @@ class Map extends PureComponent {
       map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
       const isClickInfoOpen =
-        clickedFeatureInfo &&
-        clickedFeatureInfo.length &&
-        clickedFeatureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
+        featureInfo &&
+        featureInfo.length &&
+        featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
 
       // don't continue if there's a popup that was opened by click
       if (!isClickInfoOpen) {
@@ -117,7 +113,7 @@ class Map extends PureComponent {
             layer.get('showPopupOnHover') && layer.get('popupComponent'),
         );
 
-        dispatchSetClickedFeatureInfo(infos);
+        dispatchSetFeatureInfo(infos);
       }
     });
   }
@@ -126,7 +122,7 @@ class Map extends PureComponent {
     const { coordinate } = evt;
     const {
       layerService,
-      dispatchSetClickedFeatureInfo,
+      dispatchSetFeatureInfo,
       dispatchHtmlEvent,
     } = this.props;
 
@@ -148,7 +144,7 @@ class Map extends PureComponent {
 
       // Dispatch only infos with features found.
       infos = infos.filter(({ features }) => features.length);
-      dispatchSetClickedFeatureInfo(infos);
+      dispatchSetFeatureInfo(infos);
 
       // Propagate the infos clicked to the WebComponent
       dispatchHtmlEvent(
@@ -192,7 +188,7 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
-  clickedFeatureInfo: state.app.clickedFeatureInfo,
+  featureInfo: state.app.featureInfo,
   layerService: state.app.layerService,
   layers: state.map.layers,
   center: state.map.center,
@@ -205,7 +201,7 @@ const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetFeatureInfo: setFeatureInfo,
 };
 
 export default compose(

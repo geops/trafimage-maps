@@ -13,7 +13,7 @@ import LayerService from 'react-spatial/LayerService';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
-  setClickedFeatureInfo,
+  setFeatureInfo,
   setLanguage,
 } from '../../model/app/actions';
 
@@ -38,7 +38,7 @@ const propTypes = {
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetFeatureInfo: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -159,7 +159,7 @@ class Permalink extends PureComponent {
   }
 
   openDepartureOnLoad() {
-    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+    const { layerService, dispatchSetFeatureInfo } = this.props;
     const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
     const [departure] = stationsLayer
       .getFeatures()
@@ -179,7 +179,7 @@ class Permalink extends PureComponent {
     });
 
     // Open departure popup from departure define in URL on mapbbox layer load.
-    dispatchSetClickedFeatureInfo([
+    dispatchSetFeatureInfo([
       {
         coordinate: stationFeature.getGeometry().getCoordinates(),
         features: [stationFeature],
@@ -240,7 +240,7 @@ const mapDispatchToProps = {
   dispatchSetZoom: setZoom,
   dispatchSetLanguage: setLanguage,
   dispatchSetDeparturesFilter: setDeparturesFilter,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetFeatureInfo: setFeatureInfo,
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

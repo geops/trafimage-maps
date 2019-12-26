@@ -7,13 +7,13 @@ import './Popup.scss';
 
 const Popup = () => {
   const map = useSelector(state => state.app.map);
-  const { activeTopic, clickedFeatureInfo } = useSelector(state => state.app);
+  const { activeTopic, featureInfo } = useSelector(state => state.app);
 
-  if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
+  if (!featureInfo || !featureInfo.length) {
     return null;
   }
 
-  const filtered = clickedFeatureInfo.filter(info => {
+  const filtered = featureInfo.filter(info => {
     const { layer, features } = info;
 
     if (layer.get('popupComponent')) {
@@ -29,7 +29,7 @@ const Popup = () => {
     return null;
   }
 
-  const { coordinate, features } = clickedFeatureInfo[0];
+  const { coordinate, features } = featureInfo[0];
   const geom = features[0].getGeometry();
   let coord = coordinate;
 
@@ -60,7 +60,7 @@ const Popup = () => {
       popupCoordinate={coord}
       map={map}
     >
-      <FeatureInformation clickedFeatureInfo={filtered} />
+      <FeatureInformation featureInfo={filtered} />
     </RSPopup>
   );
 };
