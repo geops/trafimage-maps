@@ -2,7 +2,7 @@
 
 The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
-The used [APIs from geOps](https://developer.geops.io/) require a license key.
+The `apiKey` used here is for demonstration purposes only. Please get your own api key at https://developer.geops.io/.
 
 ```jsx
 import 'trafimage-maps';
@@ -11,10 +11,15 @@ import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
 
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
+const apiKey = window.apiKey;
+
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
-  // Demo key. Please replace with your own key.
-  apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
+  apiKey: apiKey,
+  validFrom: '2019-12-16',
+  validTo: '2020-12-01',
 });
 
 // Select zones.
@@ -51,19 +56,13 @@ zoneLayer.onClick(f => {
 // Initialize route layer.
 const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
-  // Demo apiKey. Please replace with your own apiKey.
-  apiKey: '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93',
-  styleFunction: (props, isSelected) => {
-    if (isSelected) {
+  apiKey: apiKey,
+  styleFunction: (props, isSelected, isHovered) => {
+    if (isSelected && isHovered) {
       return {
-        stroke: { width: 5, color: 'pink' },
+        stroke: { color: 'green' },
       };
     }
-
-    return {
-      stroke: { width: 5, color: 'red' },
-      strokeOutline: { width: 10, color: 'white' }
-    };
   },
 });
 
@@ -103,7 +102,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <trafimage-maps ref={ref} />
+      <trafimage-maps ref={ref} apiKey={apiKey}/>
     </div>
   );
 }

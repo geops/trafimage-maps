@@ -69,7 +69,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'trafimage_perimeter_v2',
+  style: 'netzkarte_personenverkehr',
 });
 
 /**
@@ -283,11 +283,9 @@ export const punctuality = new Layer({
   },
 });
 
-const apiPublicKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
 punctuality.setChildren([
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
-    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -295,7 +293,6 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
-    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -303,7 +300,6 @@ punctuality.setChildren([
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-all',
-    apiKey: apiPublicKey,
     visible: false,
     useDelayStyle: true,
     radioGroup: 'ch.sbb.punctuality',
@@ -425,6 +421,7 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
+    layerInfoComponent: 'StuetzpunktLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });
@@ -458,17 +455,17 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 });
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.showcases',
+  name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isQueryable: false,
   radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'trafimage_perimeter_v2',
+  style: 'netzkarte_personenverkehr',
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.netzkarte.showcases-desc',
+    description: 'ch.sbb.netzkarte-desc',
   },
 });
 
