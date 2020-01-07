@@ -13228,10 +13228,10 @@ react-spatial@^0.1.1-beta.14:
     react-icons "^3.4.0"
     resize-observer-polyfill "^1.5.1"
 
-react-styleguidist@^10.3.2:
-  version "10.3.2"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-10.3.2.tgz#702f97ef894496f2cd20891b22880441fd9fcf59"
-  integrity sha512-sD7/cVFABQ/FFLC9GtDQzQOhLnhiDcyIOHI/Yl3m8ZMK70T+CYiEOM4ca2XwY3RejgFrWzlWsgwto5YksGL8gA==
+react-styleguidist@^10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-10.4.1.tgz#4f8d4103389cb63b4848154288e8fe313bbe4a04"
+  integrity sha512-bwAoo7jl0ih35yvlOlBJo3Dn1DZhA3pUiPkKPkOoDwiQVc5S0rVKk4iBYKBzoOoFhaZ2De8XFAuSyR54BZU5cA==
   dependencies:
     "@vxna/mini-html-webpack-template" "^1.0.0"
     acorn "~6.4.0"
