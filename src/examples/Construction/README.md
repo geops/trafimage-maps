@@ -2,9 +2,6 @@
 
 Example how to load 'trafimage-maps' with a specific topic without using React.
 
-The `apiKey` used here is for demonstration purposes only.
-Please get your own api key at https://developer.geops.io/.
-
 ```js
 import 'trafimage-maps';
 
