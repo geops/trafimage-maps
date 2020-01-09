@@ -148,17 +148,11 @@ class TopicLoader extends Component {
 
     // Set the visible baselayer if need to be changed on topic change.
     if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
-      topicLayers.forEach((lay, idx) => {
-        if (lay.getIsBaseLayer()) {
-          if (idx === 0) {
-            lay.setVisible(true);
-          } else {
-            lay.setVisible(false);
-          }
-          return lay;
-        }
-        return lay;
-      });
+      topicLayers
+        .filter(l => l.getIsBaseLayer())
+        .forEach((lay, idx) => {
+          lay.setVisible(idx === 0);
+        });
     }
 
     layerService.setLayers(topicLayers);
