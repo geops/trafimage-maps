@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
-import topicConfig from './config/topics';
+import { getTopicConfig } from './config/topics';
 
 const propTypes = {
   /**
@@ -94,7 +94,7 @@ const attributes = {
   appName: 'wkp',
   language: 'de',
   activeTopicKey: undefined,
-  apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  apiKey: process.env.REACT_APP_API_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
@@ -115,6 +115,8 @@ const WebComponent = props => {
     topics,
     appName,
     center,
+    apiKey,
+    vectorTilesKey,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -124,9 +126,13 @@ const WebComponent = props => {
     return JSON.parse(center);
   }, [center]);
 
+  const vectorTileApiKey = useMemo(() => vectorTilesKey || apiKey, [
+    apiKey,
+    vectorTilesKey,
+  ]);
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
   const appTopics = useMemo(() => {
-    const tps = topics || topicConfig[appName];
+    const tps = topics || getTopicConfig(apiKey, appName);
     if (!tps) {
       // eslint-disable-next-line no-console
       console.error('You must provide a list of topics');
@@ -141,7 +147,7 @@ const WebComponent = props => {
       tps[0].active = true;
     }
     return [...tps];
-  }, [activeTopicKey, appName, topics]);
+  }, [activeTopicKey, appName, topics, apiKey]);
 
   return (
     <Styled styles={styles}>
@@ -154,6 +160,8 @@ const WebComponent = props => {
       >
         <TrafimageMaps
           {...props}
+          apiKey={apiKey}
+          vectorTilesKey={vectorTileApiKey}
           topics={appTopics}
           zoom={floatZoom}
           center={arrayCenter}

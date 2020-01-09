@@ -9,13 +9,15 @@ import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import defaultBaseLayers, { buslines } from 'trafimage-maps/examples/Punctuality/layers';
 
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
+const apiKey = window.apiKey;
+
 const App = () => {
   const ref = useRef();
 
   useEffect(() => {
     const map = ref.current;
-    const apiKey = '5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93';
-    map.setAttribute('apiKey', apiKey);
     map.topics =  [{
       name: 'ch.sbb.netzkarte',
       key: 'ch.sbb.netzkarte',
@@ -54,7 +56,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <trafimage-maps ref={ref} zoom="14" center="[950690,6004000]" />
+      <trafimage-maps ref={ref} zoom="14" center="[950690,6004000]" apiKey={apiKey}/>
     </div>
   );
 }

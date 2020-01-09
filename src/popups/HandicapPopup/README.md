@@ -9,10 +9,14 @@ import { HandicapMenu } from '../../config/menu';
 
 import TrafimageMaps from '../../components/TrafimageMaps';
 
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
+const apiKey = window.apiKey;
+
 <div style={{ position: 'relative', width: '100%', height: 500 }}>
   <TrafimageMaps
     topics={[handicap]}
-    apiKey="5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+    apiKey={apiKey}
     elements={{
       footer: true,
       header: true,

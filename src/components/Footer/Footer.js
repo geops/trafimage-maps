@@ -36,7 +36,8 @@ const Footer = () => {
       <div className="wkp-footer-left">
         <Copyright
           layerService={layerService}
-          format={f => `${t('Geodaten')} ${f}`}
+          format={f => `${t('Geodaten')} ${f.join(', ')}`}
+          className="tm-copyright"
         />
         <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
           {t('Kontakt')}
