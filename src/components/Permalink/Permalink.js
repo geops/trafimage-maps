@@ -95,7 +95,7 @@ class Permalink extends PureComponent {
     };
 
     if (parameters['wkp.draw']) {
-      // Redirection to old wkp to use teh drawing tool.
+      // Redirection to old wkp to use the drawing tool.
       redirectToDraw(parameters['wkp.draw'], appBaseUrl);
     }
 
