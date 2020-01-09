@@ -40,10 +40,10 @@ const MapControls = ({ showGeolocation }) => {
       <Zoom
         map={map}
         zoomSlider
-        zoomInTitle={t('Zoom')}
-        zoomOutTitle={t('Zoom')}
-        zoomInClassName="wkp-zoom-in"
-        zoomOutClassName="wkp-zoom-out"
+        title={{
+          zoomIn: t('Zoom'),
+          zoomOut: t('Zoom'),
+        }}
       />
       {geolocationButton}
       <FitExtent

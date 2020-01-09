@@ -2,13 +2,29 @@
   position: absolute;
   right: 15px;
   top: 110px;
+
+  .rs-zooms-bar {
+    .rs-zoom-in,
+    .rs-zoom-out {
+      margin: 10px 0;
+      background: #003d85;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+  }
 }
 
-.wkp-zoom-in,
-.wkp-zoom-out,
 .wkp-geolocation,
 .wkp-fit-extent {
-  margin: 10px 0;
+  margin: 20px 0;
   background: #003d85;
   border-radius: 50%;
   color: white;
@@ -20,9 +36,4 @@
   align-items: center;
   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
   transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-.wkp-geolocation,
-.wkp-fit-extent {
-  margin: 20px 0;
 }

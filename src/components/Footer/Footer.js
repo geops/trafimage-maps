@@ -59,7 +59,6 @@ const Footer = () => {
 
       <div className="wkp-footer-right">
         <MousePosition
-          coordinatePosition="left"
           map={map}
           onChange={(evt, proj) => {
             dispatch(setProjection(proj));
