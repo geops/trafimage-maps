@@ -32,26 +32,27 @@ const comps = {
   fr: (
     <div className="tm-imprint">
       <p>
-        Avete domande, proposte di miglioramento, segnalazioni di inesattezze o
-        siete interessati.
+        Vous avez des questions, des suggestions, des remarques sur des
+        inexactitudes ? Les cartes et plans vous intéressent? N’hésitez pas à
+        nos contacter.
       </p>
       <p>
-        <b>FFS SA</b>
+        <b>CFF SA</b>
         <br />
-        Infrastruttura – Impianti e tecnologia – Operation Center Tecnica –
-        Technical Management
+        Infrastructure – Installations et technologie – Operation Center
+        Technique – Technical Management
         <br />
         Fachbus Trafimage
         <br />
         Poststrasse 6<br />
         3072 Ostermundingen
         <br />
-        Svizzera
+        Suisse
       </p>
       <p>
         <a href="http://www.trafimage.ch">www.trafimage.ch</a>
         <br />
-        <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
+        <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
         <br />
       </p>
     </div>

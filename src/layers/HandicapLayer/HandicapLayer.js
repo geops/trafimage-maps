@@ -3,7 +3,7 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import WKT from 'ol/format/WKT';
-import { Style, RegularShape, Fill } from 'ol/style';
+import { Style, Circle, Fill } from 'ol/style';
 import LayerHelper from '../layerHelper';
 
 /**
@@ -14,18 +14,27 @@ import LayerHelper from '../layerHelper';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
-  static getRectangleStyle(geometry, radius = 12, opacity = 1) {
-    return new Style({
-      geometry,
-      image: new RegularShape({
-        radius,
-        points: 4,
-        angle: Math.PI / 4,
-        fill: new Fill({
-          color: [237, 125, 49, opacity],
+  static getIconStyle(geometry, isHighlighted = false) {
+    return [
+      new Style({
+        geometry,
+        image: new Circle({
+          radius: 15,
+          fill: new Fill({
+            color: [246, 136, 38, isHighlighted ? 0.7 : 0.4],
+          }),
         }),
       }),
-    });
+      new Style({
+        geometry,
+        image: new Circle({
+          radius: 9,
+          fill: new Fill({
+            color: [246, 136, 38, 1],
+          }),
+        }),
+      }),
+    ];
   }
 
   constructor(options = {}) {
@@ -91,13 +100,8 @@ class HandicapLayer extends VectorLayer {
       return null;
     }
 
-    const style = [HandicapLayer.getRectangleStyle(geometry)];
-
-    if (feature === this.clickedFeature) {
-      style.unshift(HandicapLayer.getRectangleStyle(geometry, 16, 0.5));
-    }
-
-    return style;
+    const isHighlighted = feature === this.clickedFeature;
+    return HandicapLayer.getIconStyle(geometry, isHighlighted);
   }
 }
 

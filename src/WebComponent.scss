@@ -38,6 +38,7 @@
 @import 'src/components/Menu/Menu.scss';
 @import 'src/components/Menu/MenuItem.scss';
 @import 'src/components/Menu/MenuItemHeader.scss';
+@import 'src/components/Popup/Popup.scss';
 @import 'src/components/Search/Search.scss';
 @import 'src/components/Search/SearchToggle.scss';
 @import 'src/components/Share/Share.scss';
@@ -66,3 +67,5 @@
 
 // LayerInfos
 @import 'src/layerInfos/BehigLayerInfo/BehigLayerInfo.scss';
+@import 'src/layerInfos/ConstructionLayerInfo/ConstructionLayerInfo.scss';
+@import 'src/layerInfos/StuetzpunktLayerInfo/StuetzpunktLayerInfo.scss';

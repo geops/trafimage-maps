@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import Link from '../../components/Link';
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
@@ -14,7 +15,7 @@ const simpleTelTester = /([0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
 const complexTelTester = /((([+]{1}[0-9]{1,3})|([+]?[(]{1}[0-9]{1,3}[)]{1})|([(]?[0-9]{4}[)]?))\s{0,4}[)]?[-\s\\.]?[(]?[0-9]{1,4}[)]?([^\r\n][-\s\\.]{0,1}[0-9]{1,3}){1,4})/g;
 
 const emailTester = /[a-zA-Z0-9._+%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}/gm;
-const urlTester = /(www)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?/g;
+const urlTester = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)/gm;
 
 const escapeRegExp = string => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -56,14 +57,9 @@ const telTo = (telNumber, idx) => (
 
 const urlHref = (href, idx) => {
   return (
-    <a
-      key={idx}
-      href={`http://${href}`}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
+    <Link key={idx} href={`http://${href}`}>
       {href}
-    </a>
+    </Link>
   );
 };
 

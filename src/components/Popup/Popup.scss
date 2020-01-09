@@ -1,14 +1,5 @@
-.tm-popup {
-  div:first-child {
-    -webkit-animation: fadein 0.5s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 0.5s; /* Firefox < 16 */
-    -ms-animation: fadein 0.5s; /* Internet Explorer */
-    -o-animation: fadein 0.5s; /* Opera < 12.1 */
-    animation: fadein 0.5s;
+@media (max-width: 500px) {
+  .rs-popup {
+    z-index: 3;
   }
-}
-
-@keyframes fadein {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }

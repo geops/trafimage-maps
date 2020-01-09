@@ -16,7 +16,6 @@ function HandicapPopup({ feature }) {
 
   // mapping of all boolean values properties and their exceptions
   const bfEquipmentExceptions = {
-    treppenfrei: null,
     perronhoehe_P55: `ausnahme_zu_P55_${language}`,
     rampe: `ausnahme_zu_rampe_und_treppe_${language}`,
     lift_zu_perron: `standort_zu_lift_${language}`,
@@ -26,12 +25,17 @@ function HandicapPopup({ feature }) {
     rollstuhl_wc: null,
     eurokey_wc: null,
     sbb_rollstuhl: null,
-    mobilift: null,
+    mobilift: `sektor_${language}`,
     faltrampe: null,
   };
 
   // build string for equipment
   const equipment = [];
+
+  equipment.unshift(
+    properties.treppenfrei ? t('treppenfrei') : t('nicht treppenfrei'),
+  );
+
   Object.keys(bfEquipmentExceptions).forEach(key => {
     if (properties[key]) {
       let str = t(key);
@@ -88,16 +92,16 @@ function HandicapPopup({ feature }) {
       return (
         <div className="wkp-handicap-popup-bottom">
           <PopupElement
-            key="Zusätzliche Informationen"
-            label={t('Zusätzliche Informationen')}
-            properties={props}
-            propertyName={`zusaetzliche_informationen_${language}`}
-          />
-          <PopupElement
             key={`beschreibung_zur_dritte_dienstleistung_${language}`}
             label={t('Dritte Dienstleistung')}
             properties={props}
             propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
+          />
+          <PopupElement
+            key="Zusätzliche Informationen"
+            label={t('Zusätzliche Informationen')}
+            properties={props}
+            propertyName={`zusaetzliche_informationen_${language}`}
           />
         </div>
       );
@@ -126,9 +130,19 @@ function HandicapPopup({ feature }) {
     );
   };
 
+  let title = properties.stuetzpunktbahnhof ? `${t('Stützpunktbahnhof')}` : '';
+
+  if (properties.barrierefreier_bahnhof !== null) {
+    title += ' / ';
+    title += properties.barrierefreier_bahnhof
+      ? t('Barrierefreier Bahnhof')
+      : t('Nicht barrierefreier Bahnhof');
+  }
+
   return (
     <div className="wkp-handicap-popup">
       <div className="wkp-handicap-popup-body">
+        <div className="wkp-handicap-popup-title">{title}</div>
         {elementsList.map(field => {
           if (!properties[field.propertyName] && !field.element) {
             return null;
