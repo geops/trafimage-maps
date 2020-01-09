@@ -23,6 +23,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
+  appBaseUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -41,11 +42,12 @@ const propTypes = {
 
 const defaultProps = {
   history: undefined,
+  appBaseUrl: null,
   initialState: {},
   departuresFilter: undefined,
 };
 
-const redirectToDraw = drawId => {
+const redirectToDraw = (drawId, appBaseUrl) => {
   const urlParams = qs.parse(window.location.search);
 
   if (urlParams.z) {
@@ -67,7 +69,7 @@ const redirectToDraw = drawId => {
 
   urlParams['wkp.draw'] = drawId;
 
-  window.location.href = `http://wkp.prod.trafimage.geops.ch/?debug#/ch.sbb.netzkarte.draw?${qs.stringify(
+  window.location.href = `${appBaseUrl}/#/ch.sbb.netzkarte.draw?${qs.stringify(
     urlParams,
   )}`;
 };
@@ -75,6 +77,7 @@ const redirectToDraw = drawId => {
 class Permalink extends PureComponent {
   componentDidMount() {
     const {
+      appBaseUrl,
       dispatchSetZoom,
       dispatchSetCenter,
       initialState,
@@ -88,7 +91,7 @@ class Permalink extends PureComponent {
 
     if (parameters['wkp.draw']) {
       // Redirection to old wkp to use teh drawing tool.
-      redirectToDraw(parameters['wkp.draw']);
+      redirectToDraw(parameters['wkp.draw'], appBaseUrl);
     }
 
     const getUrlParamKey = (params, regex) => {
