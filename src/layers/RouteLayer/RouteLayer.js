@@ -13,7 +13,6 @@ import CasaLayer from '../CasaLayer';
  * @class RouteLayer
  * @extends CasaLayer
  * @param {Object} [options] Layer options.
- * @param {Object} [options.motColors] Mapping of colors for different mots.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
  */
 class RouteLayer extends CasaLayer {
@@ -27,18 +26,9 @@ class RouteLayer extends CasaLayer {
       ...options,
     });
 
-    // Colors for differtent modes of transportation
-    this.motColors = options.motColors || {
-      rail: '#e3000b',
-      bus: '#ffed00',
-      ship: '#0074be',
-    };
-
     this.url = 'https://api.geops.io/routing/v1';
 
     this.selectedRouteIds = [];
-
-    this.defaultStyleObject.text = {};
 
     this.onClick(features => {
       if (features.length) {
@@ -59,11 +49,37 @@ class RouteLayer extends CasaLayer {
     });
   }
 
-  defaultStyleFunction(properties, isSelected = false) {
-    const obj = super.defaultStyleFunction(properties, isSelected);
-    return isSelected
-      ? obj
-      : { ...obj, stroke: { width: 4, color: this.motColors[properties.mot] } };
+  /**
+   * Default style function for the route layer.
+   * @private
+   */
+  // eslint-disable-next-line class-methods-use-this
+  defaultStyleFunction(feature, isSelected, isHovered) {
+    const motColors = {
+      rail: [235, 0, 0],
+      bus: [255, 255, 0],
+      funicular: [0, 151, 59],
+      ship: [255, 255, 255],
+    };
+
+    const opacity = isSelected || isHovered ? 1 : 0.5;
+    const rgb = motColors[feature.get('mot')] || [68, 68, 68];
+
+    const style = {
+      stroke: {
+        color: [...rgb, opacity],
+        width: 6,
+      },
+    };
+
+    if (isHovered) {
+      style.strokeOutline = {
+        color: 'black',
+        width: 8,
+      };
+    }
+
+    return style;
   }
 
   /**
@@ -108,8 +124,20 @@ class RouteLayer extends CasaLayer {
   routeStyle(feature) {
     const { routeId } = feature.get('route');
     const isSelected = this.selectedRouteIds.includes(routeId);
-    const routeStyle = this.styleFunction(feature.getProperties(), isSelected);
-    return this.getOlStyleFromObject(routeStyle, isSelected);
+    const isHovered =
+      this.hoverFeature &&
+      (this.hoverFeature.get('route') || {}).isClickable &&
+      (this.hoverFeature.get('route') || {}).routeId === routeId;
+
+    const routeStyle = this.styleFunction(
+      feature.getProperties(),
+      isSelected,
+      isHovered,
+    );
+
+    return Object.values(
+      this.getOlStylesFromObject(routeStyle, isSelected, isHovered, feature),
+    );
   }
 
   /**

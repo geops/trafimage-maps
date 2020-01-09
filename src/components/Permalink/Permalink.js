@@ -14,6 +14,7 @@ import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
   setClickedFeatureInfo,
+  setLanguage,
 } from '../../model/app/actions';
 
 const propTypes = {
@@ -27,11 +28,13 @@ const propTypes = {
   activeTopic: PropTypes.shape({
     key: PropTypes.string,
   }).isRequired,
+  language: PropTypes.string.isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   departuresFilter: PropTypes.string,
 
   // mapDispatchToProps
+  dispatchSetLanguage: PropTypes.func.isRequired,
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
@@ -49,7 +52,9 @@ class Permalink extends PureComponent {
     const {
       dispatchSetZoom,
       dispatchSetCenter,
+      dispatchSetLanguage,
       initialState,
+      language,
       dispatchSetDeparturesFilter,
     } = this.props;
 
@@ -81,6 +86,11 @@ class Permalink extends PureComponent {
       dispatchSetZoom(z);
     }
 
+    const { lang } = parameters;
+    if (lang) {
+      dispatchSetLanguage(lang);
+    }
+
     const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
     const routeFilterKey = getUrlParamKey(parameters, /tripnumber/i);
     const operatorFilterKey = getUrlParamKey(parameters, /operator/i);
@@ -99,6 +109,7 @@ class Permalink extends PureComponent {
     dispatchSetDeparturesFilter(this.departures);
 
     this.setState({
+      lang: lang || language, // take from permalink, else from redux.
       [lineFilterKey]: lineFilter,
       [routeFilterKey]: routeFilter,
       [operatorFilterKey]: operatorFilter,
@@ -107,7 +118,13 @@ class Permalink extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { activeTopic, history, departuresFilter, layerService } = this.props;
+    const {
+      activeTopic,
+      history,
+      departuresFilter,
+      layerService,
+      language,
+    } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
       history.replace(`/${activeTopic.key}${window.location.search}`);
@@ -115,6 +132,10 @@ class Permalink extends PureComponent {
 
     if (departuresFilter !== prevProps.departuresFilter) {
       this.updateDepartures();
+    }
+
+    if (language !== prevProps.language) {
+      this.updateLanguage();
     }
 
     if (this.loadDepartureOnce && this.departures) {
@@ -181,6 +202,13 @@ class Permalink extends PureComponent {
     });
   }
 
+  updateLanguage() {
+    const { language } = this.props;
+    this.setState({
+      lang: language,
+    });
+  }
+
   render() {
     const { history, layerService, map } = this.props;
 
@@ -202,6 +230,7 @@ Permalink.defaultProps = defaultProps;
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   map: state.app.map,
+  language: state.app.language,
   layerService: state.app.layerService,
   departuresFilter: state.app.departuresFilter,
 });
@@ -209,6 +238,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetZoom: setZoom,
+  dispatchSetLanguage: setLanguage,
   dispatchSetDeparturesFilter: setDeparturesFilter,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
 };

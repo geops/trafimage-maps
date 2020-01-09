@@ -36,13 +36,17 @@ const Footer = () => {
       <div className="wkp-footer-left">
         <Copyright
           layerService={layerService}
-          format={f => `${t('Geodaten')} ${f}`}
+          format={f => `${t('Geodaten')} ${f.join(', ')}`}
+          className="tm-copyright"
         />
         <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
           {t('Kontakt')}
         </ActionLink>
         <ActionLink onClick={() => dispatch(setDialogVisible('Impressum'))}>
           {t('Impressum')}
+        </ActionLink>
+        <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
+          {t('Rechtliches')}
         </ActionLink>
         <a
           href="https://doc.trafimage.ch"
@@ -51,14 +55,10 @@ const Footer = () => {
         >
           Developer Portal
         </a>
-        <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
-          {t('Rechtliches')}
-        </ActionLink>
       </div>
 
       <div className="wkp-footer-right">
         <MousePosition
-          coordinatePosition="left"
           map={map}
           onChange={(evt, proj) => {
             dispatch(setProjection(proj));

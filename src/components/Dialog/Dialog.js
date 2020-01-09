@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import UIDialog from '@geops/react-ui/components/Dialog';
@@ -26,24 +26,28 @@ function Dialog(props) {
   const dispatch = useDispatch();
   const { body, isModal } = props;
 
-  const escFunction = () => {
-    dispatch(setDialogVisible());
-  };
-
-  const registerEsc = isRegister => {
-    if (isRegister) {
-      document.addEventListener('keydown', escFunction, false);
-    } else {
-      document.removeEventListener('keydown', escFunction, false);
-    }
-  };
+  const dialogRef = useRef(null);
+  const escFunction = e => e.which === 27 && dispatch(setDialogVisible());
 
   useEffect(() => {
     // ComponentDidMount
-    registerEsc(true);
+    document.addEventListener('keydown', escFunction, false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const { activeElement } = document;
+    const dialogFocusables = dialogRef.current.ref.current.querySelectorAll(
+      '[tabindex="0"]',
+    );
+
+    if (dialogFocusables.length) {
+      // Focus the first focusable element in the popup.
+      dialogFocusables[0].focus();
+    }
     // ComponentWillUnmount
     return () => {
-      registerEsc(false);
+      document.removeEventListener('keydown', escFunction, false);
+      // Re focus the element that opened the dialog.
+      activeElement.focus();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -52,6 +56,7 @@ function Dialog(props) {
     <div className="wkp-dialog">
       <UIDialog
         isOpen
+        ref={dialogRef}
         position={dialogPosition}
         onClose={() => {
           dispatch(setDialogVisible());

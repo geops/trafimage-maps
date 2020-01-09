@@ -1,6 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 
-const comps = {
+const propTypes = {
+  t: PropTypes.func.isRequired,
+  language: PropTypes.string.isRequired,
+};
+
+const defaultProps = {};
+
+const desc = {
   de: (
     <div>
       Das Kartenthema zeigt verschiedene Varianten der Trafimage Netzkarte.
@@ -10,10 +20,6 @@ const comps = {
         weiterer Karten nutzen wir unseren Web-basierten Workflow, welcher von
         Datenintegration über Styling bis hin zur Publikation alle Aspekte der
         Kartenproduktion abdeckt.
-      </p>
-      <p>
-        Verantwortlich: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
     </div>
   ),
@@ -28,10 +34,6 @@ const comps = {
         les aspects de la production de cartes, de l’intégration des données à
         la publication, en passant par le style.
       </p>
-      <p>
-        Responsable: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
-      </p>
     </div>
   ),
   en: (
@@ -42,10 +44,6 @@ const comps = {
         the flexible creation of these and other maps, we use our web-based
         workflow, which covers all aspects of map production from data
         integration and styling to publication.
-      </p>
-      <p>
-        Contact person: Trafimage System Manager Daniel Hofstetter,&nbsp;
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
     </div>
   ),
@@ -59,16 +57,27 @@ const comps = {
         produzione della carta (dall’integrazione dei dati, allo styling, alla
         pubblicazione).
       </p>
-      <p>
-        Responsabile: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
-        <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
-      </p>
     </div>
   ),
 };
 
-const ShowcasesTopicInfo = ({ language }) => {
-  return comps[language];
+const ShowcasesTopicInfo = ({ language, t }) => {
+  return (
+    <div>
+      {desc[language]}
+      <p>
+        {t('Verantwortlich')}:
+        <br />
+        {t('SBB AG, Product Owner Trafimage')},
+        <br />
+        Daniel Hofstetter,&nbsp;
+        <a href={`mailto:${t('trafimage@sbb.ch')}`}>{t('trafimage@sbb.ch')}</a>.
+      </p>
+    </div>
+  );
 };
 
-export default React.memo(ShowcasesTopicInfo);
+ShowcasesTopicInfo.propTypes = propTypes;
+ShowcasesTopicInfo.defaultProps = defaultProps;
+
+export default compose(withTranslation())(ShowcasesTopicInfo);

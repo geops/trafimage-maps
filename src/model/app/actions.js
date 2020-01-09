@@ -14,8 +14,11 @@ export const setTopics = data => ({ type: SET_TOPICS, data });
 
 export const setActiveTopic = data => ({ type: SET_ACTIVE_TOPIC, data });
 
-export const setLanguage = data => ({ type: SET_LANGUAGE, data });
-
+export const setLanguage = data => {
+  // Set HTML language for screen readers.
+  document.documentElement.lang = data;
+  return { type: SET_LANGUAGE, data };
+};
 export const setProjection = data => ({ type: SET_PROJECTION, data });
 
 export const setClickedFeatureInfo = data => ({

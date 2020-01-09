@@ -31,11 +31,11 @@
     }
   }
 
-  .tm-zooms-bar {
+  .rs-zooms-bar {
     position: relative;
   }
 
-  .tm-base-layer-toggler {
+  .rs-base-layer-toggler {
     position: absolute;
     bottom: 40px;
     left: 10px;
@@ -67,6 +67,14 @@
     left: 0;
   }
 
+  .rs-popup {
+    .rs-popup-container {
+      .rs-popup-body {
+        padding: 0;
+      }
+    }
+  }
+
   select {
     margin: 0;
     padding: 1px 0 1px 12px;
@@ -88,7 +96,7 @@
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
-    .tm-base-layer-toggler {
+    .rs-base-layer-toggler {
       display: none;
     }
 
@@ -199,8 +207,8 @@
   &.tm-h-xs {
     .wkp-geolocation,
     .wkp-fit-extent,
-    .wkp-zoom-in,
-    .wkp-zoom-out {
+    .rs-zoom-in,
+    .rs-zoom-out {
       margin: 10px 0;
     }
   }

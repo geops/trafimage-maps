@@ -1,15 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Point from 'ol/geom/Point';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
-import { setClickedFeatureInfo } from '../../model/app/actions';
 import './Popup.scss';
 
 const Popup = () => {
   const map = useSelector(state => state.app.map);
   const { activeTopic, clickedFeatureInfo } = useSelector(state => state.app);
-  const dispatch = useDispatch();
 
   if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
     return null;
@@ -31,19 +29,20 @@ const Popup = () => {
       : coordinate;
   const mapRect = map.getTarget().getBoundingClientRect();
 
+  // do not move the popup over the map controls except on small screens
+  const paddingRight =
+    activeTopic.elements.mapControls && mapRect.width > 450 ? 70 : 10;
+
   return (
     <RSPopup
-      onCloseClick={() => {
-        dispatch(setClickedFeatureInfo());
-      }}
-      showHeader={false}
+      renderHeader={() => {}}
       padding="0px"
       panIntoView
       panRect={{
         top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
         bottom: mapRect.bottom,
         left: mapRect.left + 10,
-        right: mapRect.right - (activeTopic.elements.mapControls ? 70 : 10),
+        right: mapRect.right - paddingRight,
       }}
       popupCoordinate={coord}
       map={map}

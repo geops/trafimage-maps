@@ -47,12 +47,13 @@ const Share = () => {
     }
   }
 
+  const title = t('Karte als Bild speichern');
   return (
     <div className="wkp-share">
       <SharePermalinkButton />
       {renderConf(config[0], t)}
-      <CanvasSaveButton title={t('Karte als Bild speichern')} map={map}>
-        <TiImage focusable={false} />
+      <CanvasSaveButton aria-label={title} map={map}>
+        <TiImage focusable={false} title={title} />
       </CanvasSaveButton>
       {renderConf(config[1], t)}
       {renderConf(config[2], t)}
