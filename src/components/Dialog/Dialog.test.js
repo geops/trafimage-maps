@@ -34,4 +34,6 @@ describe('ExportDialog', () => {
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  // TODO: test focus document.activeElement on popup close
 });
