@@ -4,6 +4,7 @@ import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
+import Link from '../../components/Link';
 
 import './BehigPopup.scss';
 
@@ -35,27 +36,20 @@ const BehigPopup = ({ feature, language, t }) => {
   // Link Handicap
   const url = t('www.sbb.ch/handicap');
   const link = (
-    <a
-      href={`https://${url}`}
-      rel="noopener noreferrer"
-      target="_blank"
-      key={url}
-    >
+    <Link href={`https://${url}`} key={url}>
       {url}
-    </a>
+    </Link>
   );
 
   // Link ViaStaziun
   const viaStaziun = 'Via Staziun:';
   const linkViaStaziun = (
-    <a
+    <Link
       href={feature.get('via_staziun_link')}
-      rel="noopener noreferrer"
-      target="_blank"
       key={feature.get('via_staziun_link')}
     >
       ViaStaziun
-    </a>
+    </Link>
   );
 
   const text = feature.get(`text_popup_${language}`);
@@ -86,7 +80,7 @@ const BehigPopup = ({ feature, language, t }) => {
       })
       // Format sentences
       // eslint-disable-next-line react/no-array-index-key
-      .map((sentence, idx) => <div key={idx}>{sentence}.</div>);
+      .map((sentence, idx) => <div key={idx}>{sentence}</div>);
   }
 
   return <div className="wkp-behig-popup">{textArray}</div>;
