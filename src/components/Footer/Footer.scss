@@ -32,7 +32,7 @@
 
   .wkp-footer-left,
   .wkp-footer-right,
-  .tm-scale-line {
+  .rs-scale-line {
     display: flex;
     align-items: center;
   }
@@ -45,7 +45,7 @@
     }
   }
 
-  .tm-scale-line {
+  .rs-scale-line {
     min-width: 160px;
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@
     }
   }
 
-  .tm-mouse-position {
+  .rs-mouse-position {
     width: 320px;
     display: flex;
     flex-direction: row-reverse;
@@ -74,7 +74,7 @@
 }
 
 .tm-w-l {
-  .tm-mouse-position {
+  .rs-mouse-position {
     width: 250px;
     font-size: 11px;
   }
@@ -82,7 +82,7 @@
 
 .tm-w-l,
 .tm-w-m {
-  .tm-mouse-position {
+  .rs-mouse-position {
     width: 220px;
   }
 }
@@ -96,15 +96,15 @@
     font-size: 11px;
   }
 
-  .tm-mouse-position {
+  .rs-mouse-position {
     width: 320px;
   }
 }
 
 .tm-w-s,
 .tm-w-xs {
-  .tm-mouse-position,
-  .tm-scale-line {
+  .rs-mouse-position,
+  .rs-scale-line {
     display: none;
   }
 }

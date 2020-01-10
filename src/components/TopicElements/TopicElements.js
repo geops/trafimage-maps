@@ -62,10 +62,10 @@ function TopicElements({ history }) {
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
     const focusTab = e => e.which === 9 && setTabFocus(true);
-    document.addEventListener('click', unfocusTab);
+    document.addEventListener('mousedown', unfocusTab);
     document.addEventListener('keydown', focusTab);
     return function cleanup() {
-      document.removeEventListener('click', unfocusTab);
+      document.removeEventListener('mousedown', unfocusTab);
       document.removeEventListener('keydown', focusTab);
     };
   });
@@ -139,6 +139,7 @@ function TopicElements({ history }) {
   };
 
   const appElements = getComponents(appComponents, elements);
+
   return (
     <div
       ref={ref}
