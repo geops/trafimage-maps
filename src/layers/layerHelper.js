@@ -21,7 +21,7 @@ function convertToOldZoom(zoom) {
   if (zoom > 18) {
     return 10;
   }
-  return zoomEquivalent[zoom];
+  return zoomEquivalent[Math.min(Math.max(Math.round(zoom), 9), 18)];
 }
 
 const dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
