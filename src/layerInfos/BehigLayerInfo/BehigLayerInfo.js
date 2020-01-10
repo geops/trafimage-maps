@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 
-import './BehigLayerInfo.scss';
-
 const propTypes = {
   t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,

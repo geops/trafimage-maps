@@ -1,5 +1,6 @@
 import BahnhofplanPopup from './BahnhofplanPopup';
 import BehigPopup from './BehigPopup';
+import MobzPopup from './MobzPopup';
 import BusLinePopup from './BusLinePopup';
 import CasaRoutePopup from './CasaRoutePopup';
 import HandicapPopup from './HandicapPopup';
@@ -12,6 +13,7 @@ import DeparturePopup from './DeparturePopup';
 export default {
   BahnhofplanPopup,
   BehigPopup,
+  MobzPopup,
   BusLinePopup,
   CasaRoutePopup,
   HandicapPopup,
