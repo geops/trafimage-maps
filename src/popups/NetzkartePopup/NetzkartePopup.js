@@ -140,6 +140,7 @@ function NetzkartePopup({ feature }) {
       <div
         tabIndex={0}
         role="button"
+        aria-expanded={showCoordinates}
         className="wkp-coordinate-toggle"
         onClick={() => setShowCoordinates(!showCoordinates)}
         onKeyPress={() => setShowCoordinates(!showCoordinates)}
@@ -169,6 +170,7 @@ function NetzkartePopup({ feature }) {
             onClick={() => {
               setShowPlanLinks(!showPlanLinks);
             }}
+            ariaExpanded={showPlanLinks}
             className="wkp-popup-plans"
           >
             {t('Bahnhofpläne')}

@@ -69,13 +69,13 @@ exports[`Share should match snapshot. 1`] = `
     </a>
   </div>
   <div
+    aria-label="Karte als Bild speichern"
     className="rs-canvas-save-button"
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
     scale={1}
     tabIndex={0}
-    title="Karte als Bild speichern"
   >
     <svg
       baseProfile="tiny"
@@ -94,6 +94,9 @@ exports[`Share should match snapshot. 1`] = `
       width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
+      <title>
+        Karte als Bild speichern
+      </title>
       <circle
         cx="8.5"
         cy="8.501"
