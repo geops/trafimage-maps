@@ -53,7 +53,11 @@ describe('Permalink', () => {
   });
 
   test("shoud remove space from 'tripNumber' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?tripNumber=150, 200, 300');
+    window.history.pushState(
+      {},
+      undefined,
+      '/?lang=de&tripNumber=150, 200, 300',
+    );
     mount(
       <Provider store={store}>
         <Permalink />
@@ -66,7 +70,7 @@ describe('Permalink', () => {
   });
 
   test("shoud remove space from 'operator' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?operator=sbb,  zsg');
+    window.history.pushState({}, undefined, '/?lang=de&operator=sbb,  zsg');
     mount(
       <Provider store={store}>
         <Permalink />
@@ -79,7 +83,11 @@ describe('Permalink', () => {
   });
 
   test("shoud remove space from 'publishedLineName' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?publishedLineName=2068, 3003 ');
+    window.history.pushState(
+      {},
+      undefined,
+      '/?lang=de&publishedLineName=2068, 3003 ',
+    );
     mount(
       <Provider store={store}>
         <Permalink />
