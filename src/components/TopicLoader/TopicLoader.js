@@ -177,8 +177,8 @@ class TopicLoader extends Component {
   }
 
   render() {
-    const { history } = this.props;
-    return <TopicElements history={history} />;
+    const { history, appBaseUrl } = this.props;
+    return <TopicElements history={history} appBaseUrl={appBaseUrl} />;
   }
 }
 
