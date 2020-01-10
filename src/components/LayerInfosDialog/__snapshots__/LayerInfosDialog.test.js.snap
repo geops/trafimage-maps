@@ -21,7 +21,6 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
   >
     <div
       className="tm-dialog-container"
-      role="dialog"
     >
       <div
         className="tm-dialog-header tm-dialog-draggable"
