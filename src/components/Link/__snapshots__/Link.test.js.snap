@@ -7,7 +7,10 @@ exports[`Link should match snapshot. 1`] = `
   rel="noopener noreferrer"
   target="_blank"
 >
-  geOps
+  <span>
+    geOps
+  </span>
+   
   <svg>
     Link.svg
   </svg>

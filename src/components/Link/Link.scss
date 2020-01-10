@@ -1,5 +1,9 @@
 .wkp-link {
-  & > svg {
-    padding-left: 5px;
+  &:hover {
+    text-decoration: none !important;
+
+    span {
+      text-decoration: underline;
+    }
   }
 }

@@ -83,7 +83,11 @@
       color: #888;
       height: 30px;
       padding: 0;
-      margin: 0 4px 0 4px;
+      margin: 0 4px 1px 4px;
+
+      .tm-layer-tree-toggle {
+        line-height: 14px;
+      }
 
       .tm-layer-tree-arrow {
         border-color: #888;
