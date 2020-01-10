@@ -41,7 +41,8 @@
     "redux": "^4.0.1",
     "redux-debounced": "^0.5.0",
     "redux-thunk": "^2.3.0",
-    "style-it": "^2.1.4"
+    "style-it": "^2.1.4",
+    "styled-components": "^4.4.1"
   },
   "peerDependencies": {
     "react": "^16.11.0",
