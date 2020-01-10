@@ -55,7 +55,7 @@ const redirectToDraw = (drawId, appBaseUrl) => {
 
   if (urlParams.z) {
     // Convert the zoom level to match the different scale on the old wkp.
-    urlParams.zoom = layerHelper.convertToOldZoom(parseInt(urlParams.z, 10));
+    urlParams.zoom = layerHelper.convertToOldZoom(urlParams.z);
     delete urlParams.z;
   }
 
