@@ -44,7 +44,7 @@ class InfoFPWPopup extends PureComponent {
           >
             {photoPaths.map(url => (
               <img
-                src={`${process.env.REACT_APP_CARTARO_1_URL}/${url}`}
+                src={`http://cartaro.stag.trafimage.geops.ch/${url}`}
                 draggable="false"
                 alt={t('Kein Bildtext')}
               />

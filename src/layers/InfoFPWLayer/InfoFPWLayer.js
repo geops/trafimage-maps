@@ -20,7 +20,7 @@ class InfoFPWLayer extends VectorLayer {
         format: new GeoJSON(),
         loader: () => {
           fetch(
-            `${this.geoJsonCacheUrl}?` +
+            'https://wkp.stag.trafimage.geops.ch/service/gjc/ows?' +
               'layer=infofpw_haltestellen&workspace=trafimage' +
               '&srsName=EPSG:3857&geoserver=wkp',
           )
