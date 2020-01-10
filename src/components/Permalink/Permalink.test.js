@@ -22,6 +22,7 @@ describe('Permalink', () => {
     store = mockStore({
       map: {},
       app: {
+        language: 'de',
         activeTopic: {
           key: 'topic',
           name: 'topic name',
@@ -48,7 +49,7 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual('?layers=testlayer');
+    expect(window.location.search).toEqual('?lang=de&layers=testlayer');
   });
 
   test("shoud remove space from 'tripNumber' Tracker filter.", () => {
@@ -60,7 +61,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?layers=testlayer&tripNumber=150,200,300',
+      '?lang=de&layers=testlayer&tripNumber=150,200,300',
     );
   });
 
@@ -73,7 +74,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?layers=testlayer&operator=sbb,zsg',
+      '?lang=de&layers=testlayer&operator=sbb,zsg',
     );
   });
 
@@ -86,7 +87,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?layers=testlayer&publishedLineName=2068,3003',
+      '?lang=de&layers=testlayer&publishedLineName=2068,3003',
     );
   });
 });
