@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
+import Link from '../../components/Link';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -24,11 +25,7 @@ const BehigLayerInfo = ({ t, language, infos }) => {
   );
 
   const url = t('www.sbb.ch/handicap');
-  const link = (
-    <a href={`https://${url}`} rel="noopener noreferrer" target="_blank">
-      {url}
-    </a>
-  );
+  const link = <Link href={`https://${url}`}>{url}</Link>;
 
   const desc = {
     OK: {
