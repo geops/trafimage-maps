@@ -13,6 +13,7 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import MobzLayer from '../layers/MobzLayer/MobzLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -656,6 +657,102 @@ export const behigParent = new BehigLayer({
     popupComponent: 'BehigPopup',
   },
   children: [behigOk, behigNotYetOk, behigNotOk],
+});
+
+export const mobzHauptzentrumsHubs = new Layer({
+  name: 'ch.sbb.mobz.hauptzentrums_hubs',
+  key: 'ch.sbb.mobz.hauptzentrums_hubs',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'MobzLayerInfo',
+    mobz: {
+      category: 'Hauptzentrums-Hubs',
+    },
+  },
+});
+
+export const mobzUmsteigebahnhof = new Layer({
+  name: 'ch.sbb.mobz.umsteige',
+  key: 'ch.sbb.mobz.umsteige',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'MobzLayerInfo',
+    mobz: {
+      category: 'Umsteigebahnhof',
+    },
+  },
+});
+
+export const mobzAgglomerationsHubs = new Layer({
+  name: 'ch.sbb.mobz.agglo_hubs',
+  key: 'ch.sbb.mobz.agglo_hubs',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'MobzLayerInfo',
+    mobz: {
+      category: 'Agglomerations-Hubs',
+    },
+  },
+});
+
+export const mobzStadtbahnhof = new Layer({
+  name: 'ch.sbb.mobz.stadt',
+  key: 'ch.sbb.mobz.stadt',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'MobzLayerInfo',
+    mobz: {
+      category: 'Stadtbahnhof',
+    },
+  },
+});
+
+export const mobzZentrumHubs = new Layer({
+  name: 'ch.sbb.mobz.zentrums_hubs',
+  key: 'ch.sbb.mobz.zentrums_hubs',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'MobzLayerInfo',
+    mobz: {
+      category: 'Zentrum-Hubs',
+    },
+  },
+});
+
+export const mobzRegionalHubs = new Layer({
+  name: 'ch.sbb.mobz.regional_hubs',
+  key: 'ch.sbb.mobz.regional_hubs',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'MobzLayerInfo',
+    mobz: {
+      category: 'Regional-Hubs',
+    },
+  },
+});
+
+export const mobzParent = new MobzLayer({
+  name: 'ch.sbb.mobz.parent',
+  key: 'ch.sbb.mobz.parent',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'MobzPopup',
+  },
+  children: [
+    mobzHauptzentrumsHubs,
+    mobzUmsteigebahnhof,
+    mobzAgglomerationsHubs,
+    mobzStadtbahnhof,
+    mobzZentrumHubs,
+    mobzRegionalHubs,
+  ],
 });
 
 export default [

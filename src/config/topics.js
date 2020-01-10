@@ -20,6 +20,13 @@ import defaultBaseLayers, {
   behigNotYetOk,
   behigNotOk,
   behigParent,
+  mobzHauptzentrumsHubs,
+  mobzUmsteigebahnhof,
+  mobzAgglomerationsHubs,
+  mobzStadtbahnhof,
+  mobzZentrumHubs,
+  mobzRegionalHubs,
+  mobzParent,
 } from './layers';
 import defaultSearches, {
   handicapStopFinder,
@@ -117,6 +124,25 @@ export const behig = {
   searches: defaultSearches,
 };
 
+export const mobz = {
+  name: 'ch.sbb.mobz',
+  key: 'ch.sbb.mobz',
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [
+    netzkarteLayer,
+    mobzRegionalHubs,
+    mobzZentrumHubs,
+    mobzStadtbahnhof,
+    mobzAgglomerationsHubs,
+    mobzUmsteigebahnhof,
+    mobzHauptzentrumsHubs,
+    mobzParent,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'MobzTopicInfo',
+  searches: defaultSearches,
+};
+
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
@@ -160,6 +186,7 @@ const topics = {
     handicap,
     bauprojekte,
     behig,
+    mobz,
     infrastruktur,
     regionenkarte,
     tarifverbundkarte,

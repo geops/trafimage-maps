@@ -5,8 +5,6 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 
-import './BehigPopup.scss';
-
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,
