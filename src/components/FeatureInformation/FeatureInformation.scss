@@ -25,22 +25,15 @@
   }
 
   .wkp-feature-information-body {
-    & > div {
+    .wkp-popup-component {
       padding: 10px;
-    }
-
-    & > div:first-child {
-      padding-bottom: 0;
-    }
-
-    & > div:last-child {
-      padding-bottom: 10px;
     }
 
     .wkp-pagination-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 10px;
       padding-top: 5px;
 
       .wkp-pagination-button-wrapper {
@@ -57,6 +50,17 @@
             width: 25px;
           }
         }
+      }
+    }
+
+    .wkp-popup-component,
+    .wkp-pagination-wrapper {
+      &:first-child {
+        padding-bottom: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 10px;
       }
     }
   }
