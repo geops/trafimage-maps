@@ -3,7 +3,6 @@ import defaultBaseLayers, {
   bahnhofplaene,
   passagierfrequenzen,
   netzkarteLayer,
-  sourcesLayer,
   netzkartePointLayer,
   buslines,
   gemeindegrenzen,
@@ -78,7 +77,7 @@ export const handicap = {
 export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
-  layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
+  layers: [netzkarteLayer, netzkartePointLayer, bahnhofplaene],
   elements: {},
   projection: 'EPSG:3857',
 };
