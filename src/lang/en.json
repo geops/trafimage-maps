@@ -78,8 +78,6 @@
   "ch.sbb.lakai.carte_blanche": "Carte Blanche",
   "ch.sbb.lar": "TINA",
   "ch.sbb.lar-desc": "TINA - Topographical information system network and services:<br/>General overview of the services and infrastructure network via the various outlooks. Representation of the planning data (number of trains, rolling stock, changes between outlooks) and of the key projects as topographical/schematic maps and synopses. ",
-  "ch.sbb.mobz": "Mobilitätshubs",
-  "ch.sbb.mobz-desc": "Mobilitätshubs",
   "ch.sbb.netzkarte": "Network map passenger Traffic",
   "ch.sbb.netzkarte-desc": "The network map is aimed at public transport users. It is a basic map derived from timetable data. Relevant information can be accessed directly from the map by clicking on the required station.",
   "ch.sbb.netzkarte-desc-topic-info": "Under Layer, there is further content which can be displayed on the map.",
