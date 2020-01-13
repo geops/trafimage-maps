@@ -16,6 +16,8 @@ import LayerHelper from '../layerHelper';
  */
 class MobzLayer extends VectorLayer {
   constructor(options = {}) {
+    const suffix = options.properties.mobzWhatIf ? '_what_if' : '';
+
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
       source: new OLVectorSource({
@@ -23,7 +25,7 @@ class MobzLayer extends VectorLayer {
         loader: () => {
           fetch(
             `${this.geoJsonCacheUrl}?` +
-              'layer=mobz_haltestellen&workspace=trafimage' +
+              `layer=mobz${suffix}_haltestellen&workspace=trafimage` +
               '&srsName=EPSG:3857&geoserver=wkp',
           )
             .then(data => data.json())

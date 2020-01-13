@@ -92,6 +92,7 @@
   "ch.sbb.lar": "TINA",
   "ch.sbb.lar-desc": "TINA - Sistema di informazione topografica rete e offerta:<br/>Panoramica generale dell’offerta e della rete infrastrutturale sui diversi orizzonti. Rappresentazione dei dati pianificati dell’offerta (numero di treni, materiale rotabile, modifiche tra gli orizzonti) e dei principali progetti sotto forma di carte topografiche/schematiche nonché di sinossi.",
   "ch.sbb.mobz": "Hub di mobilità",
+  "ch.sbb.mobz_what_if": "What-if Hub di mobilità",
   "ch.sbb.mobz.agglo_hubs": "Hub degli agglomerati",
   "ch.sbb.mobz.hauptzentrums_hubs": "Hub dei centri principali",
   "ch.sbb.mobz.regional_hubs": "Hub regionali",

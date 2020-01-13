@@ -744,6 +744,26 @@ export const mobzParent = new MobzLayer({
   properties: {
     hideInLegend: true,
     popupComponent: 'MobzPopup',
+    mobzWhatIf: false,
+  },
+  children: [
+    mobzHauptzentrumsHubs,
+    mobzUmsteigebahnhof,
+    mobzAgglomerationsHubs,
+    mobzStadtbahnhof,
+    mobzZentrumHubs,
+    mobzRegionalHubs,
+  ],
+});
+
+export const mobzWhatIfParent = new MobzLayer({
+  name: 'ch.sbb.mobz_what_if.parent',
+  key: 'ch.sbb.mobz_what_if.parent',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'MobzPopup',
+    mobzWhatIf: true,
   },
   children: [
     mobzHauptzentrumsHubs,
