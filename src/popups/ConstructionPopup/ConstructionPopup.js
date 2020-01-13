@@ -10,11 +10,14 @@ import './ConstructionPopup.scss';
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
-const ConstructionPopup = ({ feature, t }) => {
+const ConstructionPopup = ({ feature, t, className }) => {
   let projektort;
   let ort;
   let artAndOrt;
@@ -67,7 +70,7 @@ const ConstructionPopup = ({ feature, t }) => {
   }
 
   return (
-    <div className="wkp-construction-popup">
+    <div className={`${className} wkp-construction-popup`}>
       {projektort}
       {artAndOrt}
       {link1}

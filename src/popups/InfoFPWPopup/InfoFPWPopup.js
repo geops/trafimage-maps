@@ -12,13 +12,16 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
 class InfoFPWPopup extends PureComponent {
   render() {
-    const { feature, language, t } = this.props;
+    const { feature, language, t, className } = this.props;
 
     let text;
     let images;
@@ -55,7 +58,7 @@ class InfoFPWPopup extends PureComponent {
     }
 
     return (
-      <div className="wkp-infofpw-popup">
+      <div className={`${className} wkp-infofpw-popup`}>
         {text}
         <div className="wkp-infofpw-popup-images">{images}</div>
       </div>

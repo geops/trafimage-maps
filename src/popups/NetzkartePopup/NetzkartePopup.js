@@ -10,9 +10,14 @@ import BahnhofplanPopup from '../BahnhofplanPopup';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  className: PropTypes.string,
 };
 
-function NetzkartePopup({ feature }) {
+const defaultProps = {
+  className: '',
+};
+
+function NetzkartePopup({ feature, className }) {
   const [showPlanLinks, setShowPlanLinks] = useState(false);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
@@ -162,7 +167,7 @@ function NetzkartePopup({ feature }) {
   );
 
   return (
-    <div className="wkp-netzkarte-popup">
+    <div className={`${className} wkp-netzkarte-popup`}>
       {airportLabel}
       {hasPlanLinks ? (
         <>
@@ -195,6 +200,7 @@ function NetzkartePopup({ feature }) {
 }
 
 NetzkartePopup.propTypes = propTypes;
+NetzkartePopup.defaultProps = defaultProps;
 
 const memoized = React.memo(NetzkartePopup);
 memoized.renderTitle = feat => feat.get('name');

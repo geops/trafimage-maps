@@ -7,16 +7,19 @@ import { compose } from 'lodash/fp';
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
-const PassagierFrequenzenPopup = ({ feature, t }) => {
+const PassagierFrequenzenPopup = ({ feature, t, className }) => {
   const statisticDate = feature.get('passagier_freq_jahr');
   const dwv = feature.get('dwv');
 
   return (
-    <div className="wkp-passagier-freq-popup">
+    <div className={`${className} wkp-passagier-freq-popup`}>
       <div className="wkp-passagier-freq-popup-body">
         <span>{t('passagier_freq_jahr', { statisticDate })}</span>
         <span>{`${dwv} ${t('Ein- und Aussteigende')}`}</span>

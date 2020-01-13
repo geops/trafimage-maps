@@ -7,9 +7,14 @@ import PopupElement from './HandicapPopupElement';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  className: PropTypes.string,
 };
 
-function HandicapPopup({ feature }) {
+const defaultProps = {
+  className: '',
+};
+
+function HandicapPopup({ feature, className }) {
   const language = useSelector(state => state.app.language);
   const properties = feature.getProperties();
   const { t } = useTranslation();
@@ -140,7 +145,7 @@ function HandicapPopup({ feature }) {
   }
 
   return (
-    <div className="wkp-handicap-popup">
+    <div className={`${className} wkp-handicap-popup`}>
       <div className="wkp-handicap-popup-body">
         <div className="wkp-handicap-popup-title">{title}</div>
         {elementsList.map(field => {
@@ -168,6 +173,7 @@ function HandicapPopup({ feature }) {
 }
 
 HandicapPopup.propTypes = propTypes;
+HandicapPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(HandicapPopup);
 memoized.renderTitle = feat => feat.get('stationsbezeichnung');

@@ -8,6 +8,11 @@ import { compose } from 'lodash/fp';
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
+  className: PropTypes.string,
+};
+
+const defaultProps = {
+  className: '',
 };
 
 class ParksPopup extends PureComponent {
@@ -46,7 +51,7 @@ class ParksPopup extends PureComponent {
   }
 
   render() {
-    const { feature, t } = this.props;
+    const { feature, t, className } = this.props;
     const { loaded } = this.state;
 
     const parkTyp = feature.get('park_typ');
@@ -83,7 +88,7 @@ class ParksPopup extends PureComponent {
     }
 
     return (
-      <div className="wkp-parks-popup">
+      <div className={`${className} wkp-parks-popup`}>
         {images}
         {typ}
         {web}
@@ -97,6 +102,7 @@ const mapStateToProps = state => ({
 });
 
 ParksPopup.propTypes = propTypes;
+ParksPopup.defaultProps = defaultProps;
 
 const composed = compose(
   withTranslation(),

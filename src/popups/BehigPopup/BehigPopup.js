@@ -12,9 +12,12 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
 /**
  * Replace substring by component
@@ -30,7 +33,7 @@ const replace = (text, substr, replacement) => {
   return array;
 };
 
-const BehigPopup = ({ feature, language, t }) => {
+const BehigPopup = ({ feature, language, t, className }) => {
   let textArray = [];
 
   // Link Handicap
@@ -83,7 +86,7 @@ const BehigPopup = ({ feature, language, t }) => {
       .map((sentence, idx) => <div key={idx}>{sentence}</div>);
   }
 
-  return <div className="wkp-behig-popup">{textArray}</div>;
+  return <div className={`${className} wkp-behig-popup`}>{textArray}</div>;
 };
 
 const mapStateToProps = state => ({

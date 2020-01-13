@@ -4,12 +4,17 @@ import Feature from 'ol/Feature';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  className: PropTypes.string,
 };
 
-const BusLinePopup = ({ feature }) => {
+const defaultProps = {
+  className: '',
+};
+
+const BusLinePopup = ({ feature, className }) => {
   const props = feature.getProperties();
   return (
-    <div className="wkp-bus-line-popup">
+    <div className={`${className} wkp-bus-line-popup`}>
       {Object.entries(props).map(([key, value]) => {
         if (!/^lines /.test(key)) {
           return null;
@@ -26,5 +31,6 @@ const BusLinePopup = ({ feature }) => {
 };
 
 BusLinePopup.propTypes = propTypes;
+BusLinePopup.defaultProps = defaultProps;
 
 export default React.memo(BusLinePopup);

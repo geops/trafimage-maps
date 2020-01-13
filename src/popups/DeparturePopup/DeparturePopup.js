@@ -10,13 +10,16 @@ import DeparturePopupContent from './DeparturePopupContent';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
 let returnToNetzkarte = false;
 
-const DeparturePopup = ({ feature }) => {
+const DeparturePopup = ({ feature, className }) => {
   const dispatch = useDispatch();
   const { clickedFeatureInfo, layerService } = useSelector(state => state.app);
   const name = feature.get('name');
@@ -40,7 +43,11 @@ const DeparturePopup = ({ feature }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <DeparturePopupContent name={name} uic={uic} />;
+  return (
+    <div className={className}>
+      <DeparturePopupContent name={name} uic={uic} />
+    </div>
+  );
 };
 
 DeparturePopup.propTypes = propTypes;
