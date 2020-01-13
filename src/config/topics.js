@@ -154,6 +154,16 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
+export const zweitausbildung = {
+  name: 'ch.sbb.zweitausbildung',
+  key: 'ch.sbb.zweitausbildung',
+  elements: { ...defaultElements, shareMenu: true },
+  layers: [netzkarteLayer],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'ZweitausbildungTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -164,6 +174,7 @@ const topics = {
     regionenkarte,
     tarifverbundkarte,
     showcases,
+    zweitausbildung,
   ],
   stelen: [netzkarteStelen],
 };

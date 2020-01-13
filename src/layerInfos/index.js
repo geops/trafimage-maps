@@ -13,6 +13,7 @@ import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
+import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
 
 export default {
   BehigLayerInfo,
@@ -30,4 +31,5 @@ export default {
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,
+  ZweitausbildungTopicInfo,
 };
