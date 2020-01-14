@@ -1,22 +1,12 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { FaShareAlt } from 'react-icons/fa';
 import Share from '../../components/Share';
 import MenuItem from '../../components/Menu/MenuItem';
 
-const propTypes = {
-  appBaseUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  appBaseUrl: null,
-};
-
-const ShareMenu = ({ appBaseUrl }) => {
+const ShareMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
-
   return (
     <MenuItem
       open
@@ -27,12 +17,9 @@ const ShareMenu = ({ appBaseUrl }) => {
       collapsed={collapsed}
       onCollapseToggle={c => setCollapsed(c)}
     >
-      <Share appBaseUrl={appBaseUrl} />
+      <Share />
     </MenuItem>
   );
 };
-
-ShareMenu.propTypes = propTypes;
-ShareMenu.defaultProps = defaultProps;
 
 export default React.memo(ShareMenu);

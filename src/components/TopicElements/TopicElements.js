@@ -44,12 +44,10 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-  appBaseUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
-  appBaseUrl: null,
 };
 
 const getComponents = (defaultComponents, elementsToDisplay) =>
@@ -57,7 +55,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history, appBaseUrl }) {
+function TopicElements({ history }) {
   const ref = useRef(null);
   const { activeTopic, layerService, map } = useSelector(state => state.app);
   const [tabFocus, setTabFocus] = useState(false);
@@ -98,7 +96,7 @@ function TopicElements({ history, appBaseUrl }) {
 
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
-    { shareMenu: <ShareMenu appBaseUrl={appBaseUrl} /> },
+    { shareMenu: <ShareMenu /> },
     elements,
   );
 
@@ -117,7 +115,7 @@ function TopicElements({ history, appBaseUrl }) {
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,
-    permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
+    permalink: <Permalink history={history} />,
     menu: (
       <Menu>
         <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
