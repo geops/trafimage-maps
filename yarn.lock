@@ -4263,12 +4263,7 @@ core-js-compat@^3.1.1:
     browserslist "^4.7.2"
     semver "^6.3.0"
 
-core-js@^2.4.0:
-  version "2.6.10"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.10.tgz#8a5b8391f8cc7013da703411ce5b585706300d7f"
-  integrity sha512-I39t74+4t+zau64EN1fE5v2W31Adtc/REhzWN+gWRRXg6WH5qAsZm62DHpQ1+Yhe4047T55jvzz7MUqF/dBBlA==
-
-core-js@^2.6.5:
+core-js@^2.4.0, core-js@^2.6.5:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
@@ -7515,6 +7510,11 @@ hash-base@^3.0.0:
   dependencies:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
+
+hash-sum@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/hash-sum/-/hash-sum-2.0.0.tgz#81d01bb5de8ea4a214ad5d6ead1b523460b0b45a"
+  integrity sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==
 
 hash.js@^1.0.0, hash.js@^1.0.3:
   version "1.1.7"
@@ -13330,10 +13330,10 @@ react-spatial@^0.1.1-beta.18:
     react-icons "^3.4.0"
     resize-observer-polyfill "^1.5.1"
 
-react-styleguidist@^10.3.2:
-  version "10.3.2"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-10.3.2.tgz#702f97ef894496f2cd20891b22880441fd9fcf59"
-  integrity sha512-sD7/cVFABQ/FFLC9GtDQzQOhLnhiDcyIOHI/Yl3m8ZMK70T+CYiEOM4ca2XwY3RejgFrWzlWsgwto5YksGL8gA==
+react-styleguidist@^10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-10.5.0.tgz#a23c31c0606d18a88c6e4f6d35a992a6a5343185"
+  integrity sha512-J5uWMGZGESHHDedBjPyA8TPQZmGyVaLTexqOse/Uebny2JLyV26jpXPp9Rm5xFhbAXWgBqO0b9IWO3onoolYoA==
   dependencies:
     "@vxna/mini-html-webpack-template" "^1.0.0"
     acorn "~6.4.0"
@@ -13356,6 +13356,7 @@ react-styleguidist@^10.3.2:
     github-slugger "^1.2.1"
     glob "^7.1.5"
     glogg "^1.0.2"
+    hash-sum "^2.0.0"
     is-directory "^0.3.1"
     javascript-stringify "^2.0.0"
     jss "^10.0.0"
