@@ -36,7 +36,7 @@ const resolutions = [
 ];
 
 export const netzkarteLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.relief',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isQueryable: false,
