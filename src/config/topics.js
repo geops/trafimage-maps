@@ -163,7 +163,6 @@ const topics = {
     infrastruktur,
     regionenkarte,
     tarifverbundkarte,
-    showcases,
   ],
   stelen: [netzkarteStelen],
 };
