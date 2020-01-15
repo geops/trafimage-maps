@@ -1,13 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope, FaPencilAlt } from 'react-icons/fa';
+import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
-import Button from '@geops/react-ui/components/Button';
-import Permalink from '../Permalink';
 import SharePermalinkButton from '../SharePermalinkButton';
 
 const socialShareConfig = [
@@ -31,14 +28,6 @@ const socialShareConfig = [
   },
 ];
 
-const propTypes = {
-  appBaseUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  appBaseUrl: null,
-};
-
 const renderConf = (conf, t) => (
   <div className={conf.className} key={conf.title}>
     <BlankLink href={conf.url} title={t(conf.title)}>
@@ -47,7 +36,7 @@ const renderConf = (conf, t) => (
   </div>
 );
 
-const Share = ({ appBaseUrl }) => {
+const Share = () => {
   const map = useSelector(state => state.app.map);
   const { t } = useTranslation();
   const config = [...socialShareConfig];
@@ -68,19 +57,8 @@ const Share = ({ appBaseUrl }) => {
       </CanvasSaveButton>
       {renderConf(config[1], t)}
       {renderConf(config[2], t)}
-      <div className="ta-draw-icon">
-        <Button
-          onClick={() => Permalink.redirectToDraw('', appBaseUrl)}
-          title={`${t('Zeichnen')}.`}
-        >
-          <FaPencilAlt focusable={false} />
-        </Button>
-      </div>
     </div>
   );
 };
-
-Share.propTypes = propTypes;
-Share.defaultProps = defaultProps;
 
 export default React.memo(Share);
