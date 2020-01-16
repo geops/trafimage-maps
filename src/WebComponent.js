@@ -94,7 +94,7 @@ const attributes = {
   appName: 'wkp',
   language: 'de',
   activeTopicKey: undefined,
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: undefined,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
