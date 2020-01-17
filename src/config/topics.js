@@ -158,41 +158,44 @@ export const infofpw = {
   name: 'ch.sbb.infofpw',
   key: 'ch.sbb.infofpw',
   permission: 'sbb',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infofpw',
+  redirect: true,
+  layerInfoComponent: 'InfoFPWTopicInfo',
 };
 
 export const intervention = {
   name: 'ch.sbb.intervention',
   key: 'ch.sbb.intervention',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.intervention',
+  redirect: true,
   permission: 'sbb',
 };
 
 export const dfanachfuehrung = {
   name: 'ch.sbb.dfanachfuehrung',
   key: 'ch.sbb.dfanachfuehrung',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.dfanachfuehrung',
+  redirect: true,
   permission: 'dfa-nf',
 };
 
 export const mobz = {
   name: 'ch.sbb.mobz',
   key: 'ch.sbb.mobz',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.mobz',
+  redirect: true,
   permission: 'mobz',
+  layerInfoComponent: 'MobzTopicInfo',
 };
 
 export const mobzWhatIf = {
   name: 'ch.sbb.mobz_what_if',
   key: 'ch.sbb.mobz_what_if',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.mobz_what_if',
+  redirect: true,
   permission: 'mobz_what_if',
+  layerInfoComponent: 'MobzTopicInfo',
 };
 
 export const verbundzonen = {
   name: 'ch.sbb.verbundzonen',
   key: 'ch.sbb.verbundzonen',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.verbundzonen',
+  redirect: true,
   permission: 'verbundzonen',
 };
 
@@ -200,7 +203,7 @@ export const tina = {
   name: 'ch.sbb.lar',
   key: 'ch.sbb.lar',
   permission: 'tina',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tina',
+  redirect: true,
 };
 
 const topics = {
@@ -210,6 +213,7 @@ const topics = {
     bauprojekte,
     behig,
     infrastruktur,
+    regionenkarte,
     tarifverbundkarte,
     showcases,
     regionenkarte,

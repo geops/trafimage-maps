@@ -90,6 +90,8 @@
   "ch.sbb.lakai.carte_blanche": "Carte Blanche",
   "ch.sbb.lar": "TINA",
   "ch.sbb.lar-desc": "TINA - Sistema di informazione topografica rete e offerta:<br/>Panoramica generale dell’offerta e della rete infrastrutturale sui diversi orizzonti. Rappresentazione dei dati pianificati dell’offerta (numero di treni, materiale rotabile, modifiche tra gli orizzonti) e dei principali progetti sotto forma di carte topografiche/schematiche nonché di sinossi.",
+  "ch.sbb.mobz": "Hub di mobilità",
+  "ch.sbb.mobz_what_if": "What-if Hub di mobilità",
   "ch.sbb.netzkarte": "Carta di rete traffico viaggiatori",
   "ch.sbb.netzkarte-desc": "La carta di rete è destinata agli utenti dei trasporti pubblici. Si tratta di una cartina di base che fa riferimento ai dati dell’orario. È sufficiente fare clic sulla stazione desiderata direttamente sulla cartina per consultare le informazioni corrispondenti.",
   "ch.sbb.netzkarte-desc-topic-info": "Alla voce «Layer» sono disponibili ulteriori contenuti che possono essere visualizzati sulla carta.",
