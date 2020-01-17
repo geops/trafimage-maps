@@ -99,7 +99,7 @@
   "ch.sbb.netzkarte.landeskarte.grau": "Carte nationale (gris)",
   "ch.sbb.netzkarte.light": "Carte du réseau des TP suisses (claire)",
   "ch.sbb.netzkarte.light-desc": "Cette carte montre une variante claire de la carte de réseau trafic voyageurs avec une densité d’informations réduite.",
-  "ch.sbb.netzkarte.luftbild": "Carte du réseau (Vue aérienne)",
+  "ch.sbb.netzkarte.luftbild.group": "Carte du réseau (Vue aérienne)",
   "ch.sbb.netzkarte.night": "Carte du réseau des TP suisses (nuit)",
   "ch.sbb.netzkarte.night-desc": "La version foncée de la carte de réseau trafic voyageurs peut être utilisée pour afficher un réseau de nuit par exemple.",
   "ch.sbb.netzkarte.relief": "Carte du réseau (Relief)",
