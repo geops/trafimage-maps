@@ -22,6 +22,7 @@ describe('Permalink', () => {
     store = mockStore({
       map: {},
       app: {
+        language: 'de',
         activeTopic: {
           key: 'topic',
           name: 'topic name',
@@ -48,11 +49,15 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual('?layers=testlayer');
+    expect(window.location.search).toEqual('?lang=de&layers=testlayer');
   });
 
   test("shoud remove space from 'tripNumber' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?tripNumber=150, 200, 300');
+    window.history.pushState(
+      {},
+      undefined,
+      '/?lang=de&tripNumber=150, 200, 300',
+    );
     mount(
       <Provider store={store}>
         <Permalink />
@@ -60,12 +65,12 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?layers=testlayer&tripNumber=150,200,300',
+      '?lang=de&layers=testlayer&tripNumber=150,200,300',
     );
   });
 
   test("shoud remove space from 'operator' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?operator=sbb,  zsg');
+    window.history.pushState({}, undefined, '/?lang=de&operator=sbb,  zsg');
     mount(
       <Provider store={store}>
         <Permalink />
@@ -73,12 +78,16 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?layers=testlayer&operator=sbb,zsg',
+      '?lang=de&layers=testlayer&operator=sbb,zsg',
     );
   });
 
   test("shoud remove space from 'publishedLineName' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?publishedLineName=2068, 3003 ');
+    window.history.pushState(
+      {},
+      undefined,
+      '/?lang=de&publishedLineName=2068, 3003 ',
+    );
     mount(
       <Provider store={store}>
         <Permalink />
@@ -86,7 +95,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?layers=testlayer&publishedLineName=2068,3003',
+      '?lang=de&layers=testlayer&publishedLineName=2068,3003',
     );
   });
 });

@@ -88,8 +88,8 @@ export const sourcesLayer = new TrafimageMapboxLayer({
 });
 
 export const swisstopoSwissImage = new Layer({
-  name: 'ch.sbb.netzkarte.luftbild',
-  key: 'ch.sbb.netzkarte.luftbild',
+  name: 'ch.sbb.netzkarte.luftbild.group',
+  key: 'ch.sbb.netzkarte.luftbild.group',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
   radioGroup: 'baseLayer',

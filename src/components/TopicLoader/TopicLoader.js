@@ -10,9 +10,11 @@ import {
   setTopics,
   setClickedFeatureInfo,
   setSearchService,
+  fetchPermissions,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
+import redirectHelper from '../../utils/redirectHelper';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -27,6 +29,7 @@ const propTypes = {
   appBaseUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
+  permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -34,6 +37,7 @@ const propTypes = {
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
+  dispatchFetchPermissions: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -48,24 +52,17 @@ const defaultProps = {
 };
 
 class TopicLoader extends Component {
-  static openLinkTopic(topic) {
-    window.location.href = topic.linkUrl;
-  }
-
   componentDidMount() {
-    const { dispatchSetTopics, dispatchSetActiveTopic, topics } = this.props;
-    const activeTopic = topics.find(topic => topic.active) || topics[0];
-    activeTopic.active = true; // in case we fall back to the first topic.
-    dispatchSetTopics(topics);
-    dispatchSetActiveTopic(activeTopic);
-    this.updateServices(activeTopic);
+    const { dispatchFetchPermissions } = this.props;
+    dispatchFetchPermissions();
+    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
     const {
       activeTopic,
       topics,
-      dispatchSetActiveTopic,
+      permissions,
       apiKey,
       cartaroUrl,
       appBaseUrl,
@@ -77,10 +74,8 @@ class TopicLoader extends Component {
       this.updateServices(activeTopic);
     }
 
-    if (topics !== prevProps.topics) {
-      const newActiveTopic = topics.find(topic => topic.active) || topics[0];
-      dispatchSetActiveTopic(newActiveTopic);
-      this.updateServices(newActiveTopic);
+    if (permissions !== prevProps.permissions || topics !== prevProps.topics) {
+      this.loadTopics();
     }
 
     if (
@@ -95,10 +90,30 @@ class TopicLoader extends Component {
     }
   }
 
+  loadTopics() {
+    const {
+      topics,
+      permissions,
+      dispatchSetTopics,
+      dispatchSetActiveTopic,
+    } = this.props;
+
+    const visibleTopics = topics.filter(
+      t => !t.permissions || permissions.includes(t.permission),
+    );
+
+    const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
+    activeTopic.active = true; // in case we fall back to the first topic.
+    dispatchSetTopics(visibleTopics);
+    dispatchSetActiveTopic(activeTopic);
+    this.updateServices(activeTopic);
+  }
+
   updateServices(activeTopic) {
     const {
       t,
       apiKey,
+      appBaseUrl,
       layerService,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
@@ -109,8 +124,12 @@ class TopicLoader extends Component {
       dispatchSetSearchService();
     }
 
-    if (activeTopic.linkUrl) {
-      TopicLoader.openLinkTopic(activeTopic);
+    if (activeTopic.redirect) {
+      // Redirection to the old wkp
+      redirectHelper.redirect(appBaseUrl, activeTopic.key, {
+        baselayers: '',
+        layers: '',
+      });
       return;
     }
 
@@ -177,14 +196,15 @@ class TopicLoader extends Component {
   }
 
   render() {
-    const { history } = this.props;
-    return <TopicElements history={history} />;
+    const { history, appBaseUrl } = this.props;
+    return <TopicElements history={history} appBaseUrl={appBaseUrl} />;
   }
 }
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   layerService: state.app.layerService,
+  permissions: state.app.permissions,
 });
 
 const mapDispatchToProps = {
@@ -193,6 +213,7 @@ const mapDispatchToProps = {
   dispatchSetTopics: setTopics,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetSearchService: setSearchService,
+  dispatchFetchPermissions: fetchPermissions,
 };
 
 TopicLoader.propTypes = propTypes;

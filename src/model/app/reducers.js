@@ -14,11 +14,13 @@ import {
   SET_DIALOG_POSITION,
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
+  SET_PERMISSIONS,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 import layerHelper from '../../layers/layerHelper';
 
 const getInitialState = () => ({
+  permissions: [],
   topics: [],
   clickedFeatureInfo: null,
   language: 'de',
@@ -99,6 +101,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         departuresFilter: action.data,
+      };
+    case SET_PERMISSIONS:
+      return {
+        ...state,
+        permissions: [...action.data],
       };
     default:
       return {

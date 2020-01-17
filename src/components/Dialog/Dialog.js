@@ -35,9 +35,9 @@ function Dialog(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const { activeElement } = document;
-    const dialogFocusables = dialogRef.current.ref.current.querySelectorAll(
-      '[tabindex="0"]',
-    );
+    const dialogFocusables = dialogRef.current.ref.current
+      ? dialogRef.current.ref.current.querySelectorAll('[tabindex="0"]')
+      : [];
 
     if (dialogFocusables.length) {
       // Focus the first focusable element in the popup.
