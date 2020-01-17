@@ -7,8 +7,8 @@ import { FaEnvelope, FaPencilAlt } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import Button from '@geops/react-ui/components/Button';
-import Permalink from '../Permalink';
 import SharePermalinkButton from '../SharePermalinkButton';
+import redirectHelper from '../../utils/redirectHelper';
 
 const socialShareConfig = [
   {
@@ -70,7 +70,11 @@ const Share = ({ appBaseUrl }) => {
       {renderConf(config[2], t)}
       <div className="ta-draw-icon">
         <Button
-          onClick={() => Permalink.redirectToDraw('', appBaseUrl)}
+          onClick={() =>
+            redirectHelper.redirect(appBaseUrl, 'ch.sbb.netzkarte.draw', {
+              'wkp.draw': '',
+            })
+          }
           title={`${t('Zeichnen')}.`}
         >
           <FaPencilAlt focusable={false} />

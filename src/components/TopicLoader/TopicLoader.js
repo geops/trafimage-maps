@@ -14,6 +14,7 @@ import {
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
+import redirectHelper from '../../utils/redirectHelper';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -51,10 +52,6 @@ const defaultProps = {
 };
 
 class TopicLoader extends Component {
-  static openLinkTopic(topic) {
-    window.location.href = topic.linkUrl;
-  }
-
   componentDidMount() {
     const { dispatchFetchPermissions } = this.props;
     dispatchFetchPermissions();
@@ -116,6 +113,7 @@ class TopicLoader extends Component {
     const {
       t,
       apiKey,
+      appBaseUrl,
       layerService,
       dispatchSetClickedFeatureInfo,
       dispatchSetSearchService,
@@ -126,8 +124,12 @@ class TopicLoader extends Component {
       dispatchSetSearchService();
     }
 
-    if (activeTopic.linkUrl) {
-      TopicLoader.openLinkTopic(activeTopic);
+    if (activeTopic.redirect) {
+      // Redirection to the old wkp
+      redirectHelper.redirect(appBaseUrl, activeTopic.key, {
+        baselayers: '',
+        layers: '',
+      });
       return;
     }
 

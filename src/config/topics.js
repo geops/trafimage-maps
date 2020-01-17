@@ -120,21 +120,21 @@ export const behig = {
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
+  redirect: true,
   layerInfoComponent: 'InfrastrukturTopicInfo',
 };
 
 export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
+  redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
+  redirect: true,
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 
