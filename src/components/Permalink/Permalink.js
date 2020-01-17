@@ -227,6 +227,10 @@ class Permalink extends PureComponent {
         map={map}
         layerService={layerService}
         history={history}
+        isLayerHidden={l =>
+          l.get('hideInLegend') ||
+          layerService.getParents(l).some(pl => pl.get('hideInLegend'))
+        }
       />
     );
   }
