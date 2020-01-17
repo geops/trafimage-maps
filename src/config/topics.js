@@ -159,6 +159,7 @@ export const infofpw = {
   key: 'ch.sbb.infofpw',
   permission: 'sbb',
   redirect: true,
+  layerInfoComponent: 'InfoFPWTopicInfo',
 };
 
 export const intervention = {
