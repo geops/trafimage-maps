@@ -154,6 +154,13 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
+export const infofpw = {
+  name: 'ch.sbb.infofpw',
+  key: 'ch.sbb.infofpw',
+  redirect: true,
+  layerInfoComponent: 'InfoFPWTopicInfo',
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -163,6 +170,7 @@ const topics = {
     infrastruktur,
     regionenkarte,
     tarifverbundkarte,
+    infofpw,
     showcases,
   ],
   stelen: [netzkarteStelen],
