@@ -88,8 +88,8 @@ export const sourcesLayer = new TrafimageMapboxLayer({
 });
 
 export const swisstopoSwissImage = new Layer({
-  name: 'ch.sbb.netzkarte.luftbild',
-  key: 'ch.sbb.netzkarte.luftbild',
+  name: 'ch.sbb.netzkarte.luftbild.group',
+  key: 'ch.sbb.netzkarte.luftbild.group',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
   radioGroup: 'baseLayer',
@@ -605,7 +605,7 @@ export const constructionLayer = new ConstructionLayer({
     hideInLegend: true,
     popupComponent: 'ConstructionPopup',
   },
-  children: [constrUnterhalt, constrAusbau],
+  toggleLayers: [constrUnterhalt, constrAusbau],
 });
 
 export const behigOk = new Layer({
@@ -655,7 +655,7 @@ export const behigParent = new BehigLayer({
     hideInLegend: true,
     popupComponent: 'BehigPopup',
   },
-  children: [behigOk, behigNotYetOk, behigNotOk],
+  toggleLayers: [behigOk, behigNotYetOk, behigNotOk],
 });
 
 export default [

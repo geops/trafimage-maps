@@ -46,7 +46,8 @@ class ConstructionLayer extends VectorLayer {
 
     this.geometryFunction = this.geometryFunction.bind(this);
 
-    this.grandChildren = this.children.map(c => c.getChildren()).flat();
+    this.toggleLayers = options.toggleLayers || [];
+    this.grandChildren = this.toggleLayers.map(c => c.getChildren()).flat();
     this.setVisible(this.visible);
 
     // Same source for both layers
