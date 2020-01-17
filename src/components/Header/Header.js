@@ -7,6 +7,7 @@ import './Header.scss';
 const Header = () => (
   <UIHeader className="wkp-header">
     <div className="wkp-header-right">
+      <a href={process.env.REACT_APP_LOGIN_URL}>Login</a>
       <SBBLogo focusable={false} />
     </div>
   </UIHeader>

@@ -145,6 +145,7 @@
       "prettier"
     ],
     "rules": {
+      "linebreak-style": "Off",
       "react/jsx-filename-extension": [
         1,
         {

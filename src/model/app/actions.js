@@ -9,6 +9,7 @@ export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
+export const SET_PERMISSIONS = 'SET_PERMISSIONS';
 
 export const setTopics = data => ({ type: SET_TOPICS, data });
 
@@ -44,5 +45,14 @@ export const setDeparturesFilter = data => ({
   type: SET_DEPARTURES_FILTER,
   data,
 });
+
+export const fetchPermissions = () => dispatch => {
+  const url = `${process.env.REACT_APP_OLD_WKP}/permissions`;
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      dispatch({ type: SET_PERMISSIONS, data: (data || {}).permissions });
+    });
+};
 
 export const setSearchService = data => ({ type: SET_SEARCH_SERVICE, data });

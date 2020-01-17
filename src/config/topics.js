@@ -154,6 +154,55 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
+export const infofpw = {
+  name: 'ch.sbb.infofpw',
+  key: 'ch.sbb.infofpw',
+  permission: 'sbb',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infofpw',
+};
+
+export const intervention = {
+  name: 'ch.sbb.intervention',
+  key: 'ch.sbb.intervention',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.intervention',
+  permission: 'sbb',
+};
+
+export const dfanachfuehrung = {
+  name: 'ch.sbb.dfanachfuehrung',
+  key: 'ch.sbb.dfanachfuehrung',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.dfanachfuehrung',
+  permission: 'dfa-nf',
+};
+
+export const mobz = {
+  name: 'ch.sbb.mobz',
+  key: 'ch.sbb.mobz',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.mobz',
+  permission: 'mobz',
+};
+
+export const mobzWhatIf = {
+  name: 'ch.sbb.mobz_what_if',
+  key: 'ch.sbb.mobz_what_if',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.mobz_what_if',
+  permission: 'mobz_what_if',
+};
+
+export const verbundzonen = {
+  name: 'ch.sbb.verbundzonen',
+  key: 'ch.sbb.verbundzonen',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.verbundzonen',
+  permission: 'verbundzonen',
+};
+
+export const tina = {
+  name: 'ch.sbb.lar',
+  key: 'ch.sbb.lar',
+  permission: 'tina',
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tina',
+};
+
 const topics = {
   wkp: [
     netzkarte,
