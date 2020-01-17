@@ -1,5 +1,6 @@
 import BehigLayerInfo from './BehigLayerInfo';
 import BehigTopicInfo from './BehigTopicInfo';
+import MobzTopicInfo from './MobzTopicInfo';
 import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
@@ -18,6 +19,7 @@ import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 export default {
   BehigLayerInfo,
   BehigTopicInfo,
+  MobzTopicInfo,
   BuslinesLayerInfo,
   ConstructionLayerInfo,
   ConstructionTopicInfo,
