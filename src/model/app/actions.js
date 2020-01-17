@@ -48,7 +48,7 @@ export const setDeparturesFilter = data => ({
 
 export const fetchPermissions = () => dispatch => {
   const url = `${process.env.REACT_APP_OLD_WKP}/permissions`;
-  fetch(url)
+  fetch(url, { credentials: 'include' })
     .then(res => res.json())
     .then(data => {
       dispatch({ type: SET_PERMISSIONS, data: (data || {}).permissions });
