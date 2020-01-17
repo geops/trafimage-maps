@@ -24,10 +24,6 @@ const InfoFPWTopicInfo = ({ language, t }) => {
         l’offre prévus au changement d’horaire 2019.
       </span>
     ),
-    // en: (
-    //   <span>
-    //   </span>
-    // ),
     it: (
       <span>
         L’infografica fornisce una panoramica delle modifiche e dello sviluppo
