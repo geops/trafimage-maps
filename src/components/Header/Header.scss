@@ -22,14 +22,16 @@
       display: flex;
       line-height: 20px;
 
-      .wkp-header-login-icon {
-        margin-right: 5px;
-        font-size: 18px;
-      }
-
       a {
         color: grey;
         text-decoration: none;
+        line-height: 25px;
+
+        .wkp-header-login-icon {
+          float: left;
+          margin-right: 5px;
+          font-size: 18px;
+        }
       }
 
       &:hover {
