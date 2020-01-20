@@ -212,6 +212,7 @@ export const verbundzonen = {
 export const tina = {
   name: 'ch.sbb.lar',
   key: 'ch.sbb.lar',
+  description: 'ch.sbb.lar-desc',
   permission: 'tina',
   redirect: true,
 };
