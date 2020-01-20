@@ -173,6 +173,7 @@ export const intervention = {
 export const dfanachfuehrung = {
   name: 'ch.sbb.dfanachfuehrung',
   key: 'ch.sbb.dfanachfuehrung',
+  description: 'ch.sbb.dfanachfuehrung-desc',
   redirect: true,
   permission: 'dfa-nf',
 };
