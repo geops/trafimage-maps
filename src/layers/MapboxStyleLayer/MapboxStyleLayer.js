@@ -40,7 +40,7 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
 class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
     super(options);
-
+    this.options = options;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
     this.featureInfoFilter = options.featureInfoFilter || (obj => obj);
@@ -177,7 +177,6 @@ class MapboxStyleLayer extends Layer {
       })
       .then(featureInfo => {
         const features = featureInfo.features.filter(feature => {
-          console.log(feature);
           return this.featureInfoFilter(
             feature,
             this.map.getView().getResolution(),
@@ -227,7 +226,7 @@ class MapboxStyleLayer extends Layer {
         }
         return;
       }
-      console.log(feature);
+      // console.log(feature);
       this.mapboxLayer.mbMap.setFeatureState(
         {
           id: feature.getId(),
@@ -259,6 +258,14 @@ class MapboxStyleLayer extends Layer {
 
     // Add highlight
     this.setHoverState(this.highlightedFeatures, true);
+  }
+
+  /**
+   * Create exact copy of the MapboxLayer
+   * @returns {MapboxLayer} MapboxLayer
+   */
+  clone() {
+    return new MapboxStyleLayer(this.options);
   }
 }
 

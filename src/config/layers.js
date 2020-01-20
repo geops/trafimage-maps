@@ -69,8 +69,15 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr_v2',
+  // style: 'netzkarte_personenverkehr_v2',
+  url: '/static/styles/netzkarte_personenverkehr_v2_aerial.json',
 });
+
+// netzkarteLayer.setStyleConfig(
+//   '/static/styles/netzkarte_personenverkehr_v2_aerial.json',
+//   null,
+//   true,
+// );
 
 let osmPointsLayers = [];
 let osmPointsFeaturesRendered = [];
@@ -108,16 +115,16 @@ netzkarteLayer.on('init', () => {
   });
 });
 
-const getStationFilterByZoom = () => {
-  // console.log(
-  //   'moveend getStationFilterByZoom',
-  //   osmPointsFeaturesRendered.length,
-  // );
-  return [
-    'any',
-    ...osmPointsFeaturesRendered.map(feat => ['==', '$id', feat.id]),
-  ];
-};
+// const getStationFilterByZoom = () => {
+//   // console.log(
+//   //   'moveend getStationFilterByZoom',
+//   //   osmPointsFeaturesRendered.length,
+//   // );
+//   return [
+//     'any',
+//     ...osmPointsFeaturesRendered.map(feat => ['==', '$id', feat.id]),
+//   ];
+// };
 
 /**
  * This layer create a MapboxLayer used by all the MapboxStyleLayer.
@@ -276,15 +283,6 @@ export const passagierfrequenzen = new MapboxStyleLayer({
       ],
     },
   },
-  // filters: layer => {
-  //   const zoom = layer.map.getView().getZoom();
-  //   return [
-  //     'all',
-  //     ['has', 'dwv'],
-  //     ['<=', 'minzoom', zoom],
-  //     ['>', 'maxzoom', zoom],
-  //   ];
-  // },
   properties: {
     hasInfos: true,
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
@@ -318,18 +316,12 @@ bahnhofplaene.setChildren([
         'icon-size': 1,
       },
     },
-    filters: layer => {
-      return [
-        'all',
-        [
-          'any',
-          ['has', 'url_a4'],
-          ['has', 'url_poster'],
-          ['has', 'url_shopping'],
-        ],
-        getStationFilterByZoom(layer.map.getView().getZoom()),
-      ];
-    },
+    filters: [
+      'any',
+      ['has', 'url_a4'],
+      ['has', 'url_poster'],
+      ['has', 'url_shopping'],
+    ],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
@@ -353,13 +345,7 @@ bahnhofplaene.setChildren([
         'icon-size': 1,
       },
     },
-    filters: layer => {
-      return [
-        'all',
-        ['has', 'url_interactive_plan'],
-        getStationFilterByZoom(layer.map.getView().getZoom()),
-      ];
-    },
+    filters: ['has', 'url_interactive_plan'],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
@@ -443,9 +429,6 @@ export const netzkartePointLayer = new MapboxStyleLayer({
       ],
     },
   },
-  /* filters: layer => {
-    return getStationFilterByZoom(layer.map.getView().getZoom());
-  }, */
   properties: {
     hideInLegend: true,
     popupComponent: 'NetzkartePopup',

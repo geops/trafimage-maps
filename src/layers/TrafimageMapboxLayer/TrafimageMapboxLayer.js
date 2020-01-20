@@ -25,8 +25,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
     if (!url) {
       return;
     }
-    const { style } = this.options;
-    const newStyleUrl = `${url}/styles/${style}/style.json?key=${key}`;
+    const { style, url: url2 } = this.options;
+    // console.log(url2);
+    const newStyleUrl = url2 || `${url}/styles/${style}/style.json?key=${key}`;
 
     // Don't apply style if not necessary otherwise
     // it will remove styles apply by MapboxStyleLayer layers.
