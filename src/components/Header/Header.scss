@@ -16,8 +16,43 @@
     margin-right: 10px;
     display: flex;
 
+    .wkp-header-login {
+      margin-right: 40px;
+      color: grey;
+      display: flex;
+      line-height: 20px;
+
+      a {
+        color: grey;
+        text-decoration: none;
+        line-height: 25px;
+
+        .wkp-header-login-icon {
+          float: left;
+          margin-right: 5px;
+          font-size: 18px;
+        }
+      }
+
+      &:hover {
+        color: #eb0000;
+
+        a {
+          color: #eb0000;
+        }
+      }
+    }
+
     svg {
       height: 22px;
+    }
+  }
+}
+
+.tm-trafimage-maps {
+  &.tm-w-xs {
+    .wkp-header-login span.wkp-header-login-text {
+      display: none;
     }
   }
 }

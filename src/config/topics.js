@@ -135,21 +135,29 @@ export const behig = {
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.infrastruktur',
+  redirect: true,
   layerInfoComponent: 'InfrastrukturTopicInfo',
 };
 
 export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
+  redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
+};
+
+export const regionenkartePrivate = {
+  name: 'ch.sbb.regionenkarte.intern',
+  key: 'ch.sbb.regionenkarte.intern',
+  permission: 'sbb',
+  redirect: true,
+  layerInfoComponent: 'RegionenkartePrivateTopicInfo',
 };
 
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
+  redirect: true,
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 
@@ -169,6 +177,61 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
+export const infofpw = {
+  name: 'ch.sbb.infofpw',
+  key: 'ch.sbb.infofpw',
+  permission: 'sbb',
+  redirect: true,
+  layerInfoComponent: 'InfoFPWTopicInfo',
+};
+
+export const intervention = {
+  name: 'ch.sbb.intervention',
+  key: 'ch.sbb.intervention',
+  redirect: true,
+  permission: 'sbb',
+  layerInfoComponent: 'InterventionTopicInfo',
+};
+
+export const dfanachfuehrung = {
+  name: 'ch.sbb.dfanachfuehrung',
+  key: 'ch.sbb.dfanachfuehrung',
+  description: 'ch.sbb.dfanachfuehrung-desc',
+  redirect: true,
+  permission: 'dfa-nf',
+};
+
+export const mobz = {
+  name: 'ch.sbb.mobz',
+  key: 'ch.sbb.mobz',
+  redirect: true,
+  permission: 'mobz',
+  layerInfoComponent: 'MobzTopicInfo',
+};
+
+export const mobzWhatIf = {
+  name: 'ch.sbb.mobz_what_if',
+  key: 'ch.sbb.mobz_what_if',
+  redirect: true,
+  permission: 'mobz_what_if',
+  layerInfoComponent: 'MobzTopicInfo',
+};
+
+export const verbundzonen = {
+  name: 'ch.sbb.verbundzonen',
+  key: 'ch.sbb.verbundzonen',
+  redirect: true,
+  permission: 'verbundzonen',
+};
+
+export const tina = {
+  name: 'ch.sbb.lar',
+  key: 'ch.sbb.lar',
+  description: 'ch.sbb.lar-desc',
+  permission: 'tina',
+  redirect: true,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -179,6 +242,14 @@ const topics = {
     regionenkarte,
     tarifverbundkarte,
     showcases,
+    regionenkartePrivate,
+    infofpw,
+    intervention,
+    dfanachfuehrung,
+    mobz,
+    mobzWhatIf,
+    verbundzonen,
+    tina,
   ],
   stelen: [netzkarteStelen],
 };

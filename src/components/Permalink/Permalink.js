@@ -10,6 +10,7 @@ import Feature from 'ol/Feature';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
 
+import redirectHelper from '../../utils/redirectHelper';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
@@ -23,6 +24,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
+  appBaseUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -43,6 +45,7 @@ const propTypes = {
 
 const defaultProps = {
   history: undefined,
+  appBaseUrl: null,
   initialState: {},
   departuresFilter: undefined,
 };
@@ -50,6 +53,7 @@ const defaultProps = {
 class Permalink extends PureComponent {
   componentDidMount() {
     const {
+      appBaseUrl,
       dispatchSetZoom,
       dispatchSetCenter,
       dispatchSetLanguage,
@@ -62,6 +66,11 @@ class Permalink extends PureComponent {
       ...qs.parse(window.location.search),
       ...initialState,
     };
+
+    if (parameters['wkp.draw']) {
+      // Redirection to the old wkp to use the drawing tool.
+      redirectHelper.redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+    }
 
     const getUrlParamKey = (params, regex) => {
       return Object.keys(params).find(key => {
@@ -218,6 +227,10 @@ class Permalink extends PureComponent {
         map={map}
         layerService={layerService}
         history={history}
+        isLayerHidden={l =>
+          l.get('hideInLegend') ||
+          layerService.getParents(l).some(pl => pl.get('hideInLegend'))
+        }
       />
     );
   }

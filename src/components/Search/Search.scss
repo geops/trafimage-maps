@@ -4,8 +4,8 @@
   position: absolute;
   top: 25px;
   z-index: 3;
-  right: 220px;
-  left: 400px;
+  right: 320px;
+  left: 300px;
 
   .wkp-search-button {
     border: none;
@@ -100,6 +100,29 @@
 
     :last-child {
       margin-bottom: 15px;
+    }
+  }
+}
+
+.tm-trafimage-maps {
+  &.tm-w-l,
+  &.tm-w-m,
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-search {
+      right: 9px;
+      max-width: 100%;
+      left: 100px;
+    }
+
+    .wkp-search-toggle-container {
+      display: none;
+    }
+
+    .wkp-search-toggle-button,
+    .wkp-search-toggle-container--open {
+      display: block;
+      margin-right: 0;
     }
   }
 }
