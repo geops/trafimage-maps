@@ -8,10 +8,12 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import InfoFPWTopicInfo from './InfoFPWTopicInfo';
 import StuetzpunktLayerInfo from './StuetzpunktLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
+import InterventionTopicInfo from './InterventionTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
+import RegionenkartePrivateTopicInfo from './RegionenkartePrivateTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
@@ -27,10 +29,12 @@ export default {
   InfoFPWTopicInfo,
   StuetzpunktLayerInfo,
   InfrastrukturTopicInfo,
+  InterventionTopicInfo,
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
+  RegionenkartePrivateTopicInfo,
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,
