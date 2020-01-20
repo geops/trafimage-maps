@@ -16,8 +16,8 @@
     display: flex;
 
     .wkp-header-login {
+      margin-right: 40px;
       padding: 0 5px;
-      margin-right: 0;
       color: grey;
       display: flex;
       line-height: 20px;
@@ -51,6 +51,28 @@
 }
 
 .tm-trafimage-maps {
+  &.tm-w-l {
+    .wkp-header {
+      .wkp-header-right {
+        .wkp-header-login {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  &.tm-w-m,
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-header {
+      .wkp-header-right {
+        .wkp-header-login {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
   &.tm-w-xs {
     .wkp-header-login span.wkp-header-login-text {
       display: none;
