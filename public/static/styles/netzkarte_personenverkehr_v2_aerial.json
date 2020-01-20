@@ -21,33 +21,33 @@
   "sources": {
     "base": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/base_v2.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/base_v2.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "busline": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/busses.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/busses.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "label_ch_raster": {
       "tileSize": 256,
       "type": "raster",
-      "url": "https://maps.style-dev.geops.io/data/labels_ch_raster.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/labels_ch_raster.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "landscape": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/landscape.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/landscape.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "openmaptiles": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/openmaptiles.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/openmaptiles.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "perimeter_mask": {
       "type": "vector",
-      "url": "https://maps.style-dev.geops.io/data/perimeter_mask.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/perimeter_mask.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "relief_white_inspiration": {
       "tileSize": 256,
       "type": "raster",
-      "url": "https://maps.style-dev.geops.io/data/relief_white.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
+      "url": "https://maps.geops.io/data/relief_white.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
     "swissimage": {
       "type": "raster",
@@ -77,8 +77,8 @@
       "tileSize": 256
     }
   },
-  "sprite": "https://maps.style-dev.geops.io/styles/netzkarte_personenverkehr_v2/sprite",
-  "glyphs": "https://maps.style-dev.geops.io/fonts/{fontstack}/{range}.pbf?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93",
+  "sprite": "https://maps.geops.io/styles/netzkarte_personenverkehr_v2/sprite",
+  "glyphs": "https://maps.geops.io/fonts/{fontstack}/{range}.pbf?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93",
   "layers": [
     {
       "id": "background_white",
