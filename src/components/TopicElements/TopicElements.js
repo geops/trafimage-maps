@@ -113,7 +113,7 @@ function TopicElements({ history, appBaseUrl }) {
 
   // Define which components to display.
   const appComponents = {
-    header: <Header />,
+    header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,

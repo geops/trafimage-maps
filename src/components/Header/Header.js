@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { AiOutlineUser } from 'react-icons/ai';
 import UIHeader from '@geops/react-ui/components/Header';
@@ -6,8 +7,12 @@ import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
 
 import './Header.scss';
 
-const Header = () => {
-  let login = <a href={`${process.env.REACT_APP_OLD_WKP}/login`}>Login</a>;
+const propTypes = {
+  appBaseUrl: PropTypes.string.isRequired,
+};
+
+const Header = ({ appBaseUrl }) => {
+  let login = <a href={`${appBaseUrl}/login`}>Login</a>;
   const permissions = useSelector(state => state.app.permissions);
 
   if (permissions.user) {
@@ -26,5 +31,7 @@ const Header = () => {
     </UIHeader>
   );
 };
+
+Header.propTypes = propTypes;
 
 export default Header;

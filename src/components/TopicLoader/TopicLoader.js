@@ -26,7 +26,7 @@ const propTypes = {
   activeTopic: PropTypes.shape(),
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
-  appBaseUrl: PropTypes.string,
+  appBaseUrl: PropTypes.string.isRequired,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -46,15 +46,14 @@ const defaultProps = {
   history: null,
   activeTopic: null,
   cartaroUrl: null,
-  appBaseUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
 };
 
 class TopicLoader extends Component {
   componentDidMount() {
-    const { dispatchFetchPermissions } = this.props;
-    dispatchFetchPermissions();
+    const { dispatchFetchPermissions, appBaseUrl } = this.props;
+    dispatchFetchPermissions(appBaseUrl);
     this.loadTopics();
   }
 
