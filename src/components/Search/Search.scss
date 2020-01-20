@@ -5,7 +5,7 @@
   top: 25px;
   z-index: 3;
   right: 320px;
-  left: 300px;
+  left: 400px;
 
   .wkp-search-button {
     border: none;
@@ -105,24 +105,38 @@
 }
 
 .tm-trafimage-maps {
-  &.tm-w-l,
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
     .wkp-search {
       right: 9px;
       max-width: 100%;
-      left: 100px;
+      left: 55px;
     }
 
     .wkp-search-toggle-container {
       display: none;
     }
 
-    .wkp-search-toggle-button,
-    .wkp-search-toggle-container--open {
+    .wkp-search-toggle-button {
       display: block;
-      margin-right: 0;
+      margin-right: 35px;
+
+      svg {
+        height: 22px;
+        width: 22px;
+      }
+    }
+  }
+
+  &.tm-w-m,
+  &.tm-w-s {
+    .wkp-search-toggle-button {
+      margin-right: 75px;
+    }
+
+    .wkp-search-toggle-container--open {
+      margin: 0;
     }
   }
 }
