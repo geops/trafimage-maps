@@ -60,7 +60,7 @@ const resolutions = [
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
-  visible: false,
+  visible: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)

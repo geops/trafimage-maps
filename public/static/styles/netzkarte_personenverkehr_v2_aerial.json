@@ -3424,7 +3424,7 @@
       "type": "background",
       "minzoom": 0,
       "maxzoom": 20.5,
-      "layout": { "visibility": "visible" },
+      "layout": { "visibility": "none" },
       "paint": { "background-color": "rgba(251, 251, 251, 1)" }
     },
     {
