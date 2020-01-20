@@ -105,7 +105,6 @@
 }
 
 .tm-trafimage-maps {
-  &.tm-w-l,
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
@@ -119,10 +118,24 @@
       display: none;
     }
 
-    .wkp-search-toggle-button,
-    .wkp-search-toggle-container--open {
+    .wkp-search-toggle-button {
       display: block;
-      margin-right: 0;
+      margin-right: 35px;
+
+      svg {
+        height: 22px;
+        width: 22px;
+      }
+    }
+  }
+
+  &.tm-w-m {
+    .wkp-search-toggle-button {
+      margin-right: 65px;
+    }
+
+    .wkp-search-toggle-container--open {
+      margin: 0;
     }
   }
 }
