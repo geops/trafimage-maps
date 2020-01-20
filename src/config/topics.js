@@ -131,6 +131,14 @@ export const regionenkarte = {
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
+export const regionenkartePrivate = {
+  name: 'ch.sbb.regionenkarte.intern',
+  key: 'ch.sbb.regionenkarte.intern',
+  permission: 'sbb',
+  redirect: true,
+  layerInfoComponent: 'RegionenkartePrivateTopicInfo',
+};
+
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
@@ -218,7 +226,7 @@ const topics = {
     regionenkarte,
     tarifverbundkarte,
     showcases,
-    regionenkarte,
+    regionenkartePrivate,
     infofpw,
     intervention,
     dfanachfuehrung,

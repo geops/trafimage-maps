@@ -99,7 +99,7 @@
   "ch.sbb.puenktlichkeit-nv": "Regionalverkehr",
   "ch.sbb.puenktlichkeit-nv-desc": "Regionalverkehr",
   "ch.sbb.regionenkarte.intern": "Anlagenverantwortliche Überwachung",
-  "ch.sbb.regionenkarte.intern-desc": "Übersicht der Anlagenverantwortungen AT-UEW für die Anlagengattungen Fahrbahn, Fahrstrom, Bahnzugang, Ingenieurbau, Wasser, Abwasser, Natur, Naturrisiken und Koordinatoren Bahnnahes Bauen. Die Karten enthalten zusätzlich Informationen über schweizweite und regionale Aufgaben (Lichtraumprofil, Schienenprüfung, Fahrweg, Regionenleitung) in der Anlagenüberwachung. <p>Verantwortlich: I-AT-UEW, Aurelia Kollros, <a href=\"mailto:aurelia.kollros@sbb.ch\">aurelia.kollros@sbb.ch</a></p>",
+  "ch.sbb.regionenkarte.intern-desc": "Übersicht der Anlagenverantwortungen AT-UEW für die Anlagengattungen Fahrbahn, Fahrstrom, Bahnzugang, Ingenieurbau, Wasser, Abwasser, Natur, Naturrisiken und Koordinatoren Bahnnahes Bauen. Die Karten enthalten zusätzlich Informationen über regionale Aufgaben (Fahrweg, Regionenleitung) in der Anlagenüberwachung.",
   "ch.sbb.regionenkarte.public": "Koordinatoren Bahnnahes Bauen",
   "ch.sbb.sandbox": "Trafimage Sandbox",
   "ch.sbb.sandbox-desc": "Trafimage Sandbox",
