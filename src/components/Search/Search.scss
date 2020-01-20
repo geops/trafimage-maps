@@ -129,7 +129,8 @@
     }
   }
 
-  &.tm-w-m {
+  &.tm-w-m,
+  &.tm-w-s {
     .wkp-search-toggle-button {
       margin-right: 65px;
     }
