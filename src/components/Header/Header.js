@@ -12,7 +12,7 @@ const propTypes = {
 };
 
 const Header = ({ appBaseUrl }) => {
-  let login = <a href={`${appBaseUrl}/login`}>Login</a>;
+  let login = 'Login';
   const permissions = useSelector(state => state.app.permissions);
 
   if (permissions.user) {
@@ -23,8 +23,10 @@ const Header = ({ appBaseUrl }) => {
     <UIHeader className="wkp-header">
       <div className="wkp-header-right">
         <div className="wkp-header-login">
-          <AiOutlineUser className="wkp-header-login-icon" />
-          <span className="wkp-header-login-text">{login}</span>
+          <a href={`${appBaseUrl}/login`}>
+            <AiOutlineUser className="wkp-header-login-icon" />
+            <span className="wkp-header-login-text">{login}</span>
+          </a>
         </div>
         <SBBLogo focusable={false} />
       </div>
