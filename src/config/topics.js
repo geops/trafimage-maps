@@ -167,6 +167,7 @@ export const intervention = {
   key: 'ch.sbb.intervention',
   redirect: true,
   permission: 'sbb',
+  layerInfoComponent: 'InterventionTopicInfo',
 };
 
 export const dfanachfuehrung = {

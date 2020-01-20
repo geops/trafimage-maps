@@ -8,6 +8,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import InfoFPWTopicInfo from './InfoFPWTopicInfo';
 import StuetzpunktLayerInfo from './StuetzpunktLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
+import InterventionTopicInfo from './InterventionTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
@@ -27,6 +28,7 @@ export default {
   InfoFPWTopicInfo,
   StuetzpunktLayerInfo,
   InfrastrukturTopicInfo,
+  InterventionTopicInfo,
   ParksLayerInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
