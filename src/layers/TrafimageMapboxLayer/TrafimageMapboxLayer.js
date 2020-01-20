@@ -1,6 +1,26 @@
 import MapboxLayer from 'react-spatial/layers/MapboxLayer';
 
 class TrafimageMapboxLayer extends MapboxLayer {
+  init(map) {
+    super.init(map);
+
+    if (this.map) {
+      this.dispatchEvent({
+        type: 'init',
+        target: this,
+      });
+    }
+  }
+
+  terminate(map) {
+    super.terminate(map);
+
+    this.dispatchEvent({
+      type: 'terminate',
+      target: this,
+    });
+  }
+
   setStyleConfig(url, key) {
     if (!url) {
       return;

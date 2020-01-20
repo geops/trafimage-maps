@@ -69,22 +69,101 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr',
+  style: 'netzkarte_personenverkehr_v2',
 });
+
+let osmPointsLayers = [];
+let osmPointsFeaturesRendered = [];
+
+// Get list of layers apply to osm_points
+netzkarteLayer.on('load', () => {
+  osmPointsLayers = netzkarteLayer.mbMap
+    .getStyle()
+    .layers.filter(layer => {
+      return (
+        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+      );
+    })
+    .map(layer => layer.id);
+});
+
+netzkarteLayer.on('init', () => {
+  netzkarteLayer.mbMap.on('idle', () => {
+    // console.log('moveend Init');
+    osmPointsFeaturesRendered = netzkarteLayer.mbMap
+      .queryRenderedFeatures({
+        layers: osmPointsLayers,
+      })
+      .map(feat => {
+        const good = {
+          id: feat.id * 1000,
+          type: feat.type,
+          properties: feat.properties,
+          geometry: feat.geometry,
+        };
+        // console.log(good);
+        return good;
+      });
+    // console.log(osmPointsFeaturesRendered.length);
+  });
+});
+
+const getStationFilterByZoom = () => {
+  // console.log(
+  //   'moveend getStationFilterByZoom',
+  //   osmPointsFeaturesRendered.length,
+  // );
+  return [
+    'any',
+    ...osmPointsFeaturesRendered.map(feat => ['==', '$id', feat.id]),
+  ];
+};
 
 /**
  * This layer create a MapboxLayer used by all the MapboxStyleLayer.
  * Its style file contains only source where to find datas.
- * The style of features are  defined by each MapboxStyleLayer ('netzkarte_point, buslinien,...)
+ * The style of features are  defined by each MapboxStyleLayer ('osm_points, buslinien,...)
  */
 export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
   preserveDrawingBuffer: true,
-  style: 'trafimage_sources_only',
+  style: 'trafimage_sources_only_v2',
   properties: {
     hideInLegend: true,
   },
+});
+
+sourcesLayer.on('load', () => {
+  if (!sourcesLayer.mbMap.getSource('stations')) {
+    sourcesLayer.mbMap.addSource('stations', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: osmPointsFeaturesRendered,
+      },
+    });
+  }
+});
+
+netzkarteLayer.on('init', () => {
+  netzkarteLayer.mbMap.on('idle', () => {
+    // console.log('sourcesLayer idle', osmPointsFeaturesRendered);
+    if (!sourcesLayer.mbMap.getSource('stations')) {
+      sourcesLayer.mbMap.addSource('stations', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: osmPointsFeaturesRendered,
+        },
+      });
+    } else {
+      sourcesLayer.mbMap.getSource('stations').setData({
+        type: 'FeatureCollection',
+        features: osmPointsFeaturesRendered,
+      });
+    }
+  });
 });
 
 export const swisstopoSwissImage = new Layer({
@@ -172,8 +251,9 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   styleLayer: {
     id: 'passagierfrequenzen',
     type: 'circle',
-    source: 'base',
-    'source-layer': 'netzkarte_point',
+    source: 'stations',
+    // source: 'base',
+    // 'source-layer': 'osm_points',
     filter: ['has', 'dwv'],
     paint: {
       'circle-radius': [
@@ -196,6 +276,15 @@ export const passagierfrequenzen = new MapboxStyleLayer({
       ],
     },
   },
+  // filters: layer => {
+  //   const zoom = layer.map.getView().getZoom();
+  //   return [
+  //     'all',
+  //     ['has', 'dwv'],
+  //     ['<=', 'minzoom', zoom],
+  //     ['>', 'maxzoom', zoom],
+  //   ];
+  // },
   properties: {
     hasInfos: true,
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
@@ -221,18 +310,25 @@ bahnhofplaene.setChildren([
     styleLayer: {
       id: 'printprodukte',
       type: 'symbol',
-      source: 'base',
-      'source-layer': 'netzkarte_point',
-      filter: [
-        'any',
-        ['has', 'url_a4'],
-        ['has', 'url_poster'],
-        ['has', 'url_shopping'],
-      ],
+      source: 'stations',
+      // source: 'base',
+      // 'source-layer': 'osm_points',
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
       },
+    },
+    filters: layer => {
+      return [
+        'all',
+        [
+          'any',
+          ['has', 'url_a4'],
+          ['has', 'url_poster'],
+          ['has', 'url_shopping'],
+        ],
+        getStationFilterByZoom(layer.map.getView().getZoom()),
+      ];
     },
     properties: {
       hasInfos: true,
@@ -248,13 +344,21 @@ bahnhofplaene.setChildren([
     styleLayer: {
       id: 'interaktiv',
       type: 'symbol',
-      source: 'base',
-      'source-layer': 'netzkarte_point',
+      source: 'stations',
+      // source: 'base',
+      // 'source-layer': 'osm_points',
       filter: ['has', 'url_interactive_plan'],
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
       },
+    },
+    filters: layer => {
+      return [
+        'all',
+        ['has', 'url_interactive_plan'],
+        getStationFilterByZoom(layer.map.getView().getZoom()),
+      ];
     },
     properties: {
       hasInfos: true,
@@ -311,7 +415,7 @@ punctuality.setChildren([
   mapboxLayer: netzkarteLayer,
   visible: false,
   filter: styleLayer => {
-    return styleLayer.id === 'netzkarte_point';
+    return styleLayer.id === 'osm_points';
   }
 }); */
 
@@ -319,11 +423,15 @@ export const netzkartePointLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.stationen',
   visible: true,
   mapboxLayer: sourcesLayer,
+  // queryRenderedLayersFilter: layer => {
+  //   return layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points';
+  // },
   styleLayer: {
-    id: 'netzkarte_point',
+    id: 'stations',
     type: 'circle',
-    source: 'base',
-    'source-layer': 'netzkarte_point',
+    source: 'stations',
+    // source: 'base',
+    // 'source-layer': 'osm_points',
     paint: {
       'circle-radius': 10,
       'circle-color': 'rgb(0, 61, 155)',
@@ -335,6 +443,9 @@ export const netzkartePointLayer = new MapboxStyleLayer({
       ],
     },
   },
+  /* filters: layer => {
+    return getStationFilterByZoom(layer.map.getView().getZoom());
+  }, */
   properties: {
     hideInLegend: true,
     popupComponent: 'NetzkartePopup',
