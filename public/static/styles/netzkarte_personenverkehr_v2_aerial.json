@@ -49,13 +49,31 @@
       "type": "raster",
       "url": "https://maps.style-dev.geops.io/data/relief_white.json?key=5cc87b12d7c5370001c1d6551c1d597442444f8f8adc27fefe2f6b93"
     },
-    "05xasiihu": {
+    "swissimage": {
       "type": "raster",
       "tiles": [
         "https://maps.trafimage.ch/geo-admin-wmts/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg"
       ],
       "minzoom": 0,
-      "maxzoom": 22,
+      "maxzoom": 19,
+      "tileSize": 256
+    },
+    "pixelkarte_grau": {
+      "type": "raster",
+      "tiles": [
+        "https://maps.trafimage.ch/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-grau/default/current/3857/{z}/{x}/{y}.jpeg"
+      ],
+      "minzoom": 0,
+      "maxzoom": 19,
+      "tileSize": 256
+    },
+    "pixelkarte_farbe": {
+      "type": "raster",
+      "tiles": [
+        "https://maps.trafimage.ch/geo-admin-wmts/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg"
+      ],
+      "minzoom": 0,
+      "maxzoom": 19,
       "tileSize": 256
     }
   },
@@ -3402,7 +3420,7 @@
       }
     },
     {
-      "id": "background_red",
+      "id": "background_swissimage",
       "type": "background",
       "minzoom": 0,
       "maxzoom": 20.5,
@@ -3410,10 +3428,10 @@
       "paint": { "background-color": "rgba(251, 251, 251, 1)" }
     },
     {
-      "id": "stop_aerial",
+      "id": "swissimage",
       "type": "raster",
-      "source": "05xasiihu",
-      "layout": { "visibility": "visible" }
+      "source": "swissimage",
+      "layout": { "visibility": "none" }
     },
     {
       "id": "aeroway_taxiway",
@@ -9236,6 +9254,35 @@
       "source": "perimeter_mask",
       "source-layer": "perimeter_mask",
       "paint": { "fill-color": "rgba(255, 255, 255, 1)" }
+    },
+    {
+      "id": "background_pixelkarte_grau",
+      "type": "background",
+      "minzoom": 0,
+      "maxzoom": 20.5,
+      "layout": { "visibility": "none" },
+      "paint": { "background-color": "rgba(251, 251, 251, 1)" }
+    },
+    {
+      "id": "pixelkarte_grau",
+      "type": "raster",
+      "source": "pixelkarte_grau",
+      "layout": { "visibility": "none" }
+    },
+
+    {
+      "id": "background_pixelkarte_farbe",
+      "type": "background",
+      "minzoom": 0,
+      "maxzoom": 20.5,
+      "layout": { "visibility": "none" },
+      "paint": { "background-color": "rgba(251, 251, 251, 1)" }
+    },
+    {
+      "id": "pixelkarte_farbe",
+      "type": "raster",
+      "source": "pixelkarte_farbe",
+      "layout": { "visibility": "none" }
     }
   ],
   "id": "netzkarte_personenverkehr_v2"

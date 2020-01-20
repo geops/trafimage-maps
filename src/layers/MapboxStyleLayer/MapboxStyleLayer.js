@@ -133,8 +133,8 @@ class MapboxStyleLayer extends Layer {
       if (!mbMap.getLayer(styleLayer.id)) {
         mbMap.addLayer(styleLayer);
       }
-      applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
     });
+    applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
   }
 
   removeStyleLayers() {
@@ -264,8 +264,9 @@ class MapboxStyleLayer extends Layer {
    * Create exact copy of the MapboxLayer
    * @returns {MapboxLayer} MapboxLayer
    */
-  clone() {
-    return new MapboxStyleLayer(this.options);
+  clone(mapboxLayer) {
+    const options = { ...this.options, mapboxLayer };
+    return new MapboxStyleLayer(options);
   }
 }
 
