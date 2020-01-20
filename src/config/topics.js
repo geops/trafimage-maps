@@ -3,6 +3,7 @@ import defaultBaseLayers, {
   bahnhofplaene,
   passagierfrequenzen,
   netzkarteLayer,
+  dataLayer,
   sourcesLayer,
   netzkartePointLayer,
   buslines,
@@ -78,7 +79,13 @@ export const handicap = {
 export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte',
   key: 'ch.sbb.netzkarte',
-  layers: [netzkarteLayer, sourcesLayer, netzkartePointLayer, bahnhofplaene],
+  layers: [
+    dataLayer,
+    netzkarteLayer,
+    sourcesLayer,
+    netzkartePointLayer,
+    bahnhofplaene,
+  ],
   elements: {},
   projection: 'EPSG:3857',
 };
@@ -86,7 +93,7 @@ export const netzkarteStelen = {
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [netzkarteLayer],
+  layers: [dataLayer, netzkarteLayer],
   elements: { popup: true },
   projection: 'EPSG:3857',
 };
@@ -96,6 +103,7 @@ export const bauprojekte = {
   key: 'ch.sbb.construction',
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
+    dataLayer,
     netzkarteLayer,
     swisstopoSwissImage,
     constrUnterhalt,
@@ -111,7 +119,14 @@ export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [netzkarteLayer, behigNotOk, behigNotYetOk, behigOk, behigParent],
+  layers: [
+    dataLayer,
+    netzkarteLayer,
+    behigNotOk,
+    behigNotYetOk,
+    behigOk,
+    behigParent,
+  ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'BehigTopicInfo',
   searches: defaultSearches,

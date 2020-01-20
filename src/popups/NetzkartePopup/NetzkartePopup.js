@@ -37,8 +37,6 @@ function NetzkartePopup({ feature }) {
     );
   };
 
-  const isAirport = feature.get('layer').indexOf('flug') > 0;
-
   const iabpUrl = feature.get('url_interactive_plan');
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
@@ -47,8 +45,13 @@ function NetzkartePopup({ feature }) {
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
   const name = feature.get('name');
-  const didok = feature.get('didok');
-  const layer = feature.get('layer');
+  const didok = feature.get('sbb_id') - 8500000;
+  let layer = feature.get('layer') || (feature.get('rail') ? 'railway' : '');
+  if (feature.get('ferry')) {
+    layer = 'ship';
+  }
+
+  const isAirport = layer && layer.indexOf('flug') > 0;
 
   const stationTimetableUrl = t('station_timetable_url').replace(
     '{stationname}',
@@ -94,7 +97,7 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  if (didok && layer === 'Zug') {
+  if (didok && layer === 'railway') {
     stationServiceLink = (
       <div>
         <a href={stationServiceUrl} rel="noopener noreferrer" target="_blank">
@@ -112,7 +115,7 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  if (shoppingLangUrl && layer !== 'Schiff') {
+  if (shoppingLangUrl && layer !== 'ship') {
     shoppingLink = (
       <div>
         <a href={shoppingLangUrl} rel="noopener noreferrer" target="_blank">
@@ -123,7 +126,9 @@ function NetzkartePopup({ feature }) {
   }
 
   const coordinates = transformCoords(
-    [feature.get('longitude'), feature.get('latitude')],
+    feature.get('longitude') && feature.get('latitude')
+      ? [feature.get('longitude'), feature.get('latitude')]
+      : feature.getGeometry().getCoordinates(),
     'EPSG:21781',
     projection.value,
   );
@@ -156,7 +161,9 @@ function NetzkartePopup({ feature }) {
         <span className="wkp-projection-label">{projection.label}</span>
         <span>{`${t('Länge')} (X): ${formatedCoords[0]}`}</span>
         <span>{`${t('Breite')} (Y): ${formatedCoords[1]}`}</span>
-        <span>{`${t('Höhe')}: ${feature.get('altitude')}m`}</span>
+        {feature.get('altitude') && (
+          <span>{`${t('Höhe')}: ${feature.get('altitude')}m`}</span>
+        )}
       </div>
     </div>
   );
