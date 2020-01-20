@@ -55,7 +55,8 @@
         "https://maps.trafimage.ch/geo-admin-wmts/1.0.0/ch.swisstopo.swissimage/default/current/3857/{z}/{x}/{y}.jpeg"
       ],
       "minzoom": 0,
-      "maxzoom": 22
+      "maxzoom": 22,
+      "tileSize": 256
     }
   },
   "sprite": "https://maps.style-dev.geops.io/styles/netzkarte_personenverkehr_v2/sprite",
