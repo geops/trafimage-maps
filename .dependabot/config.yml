@@ -1,9 +1,9 @@
 version: 1
 
 update_configs:
-   # Keep package.json (& lockfiles) up to date, batching pull requests weekly
+  # Keep package.json (& lockfiles) up to date, batching pull requests weekly
    
-   - package_manager: "javascript"
+  - package_manager: "javascript"
     directory: "/"
     update_schedule: "weekly"
     
