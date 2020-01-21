@@ -80,10 +80,16 @@ const propTypes = {
    * Details at 'https://developer.geops.io'.
    */
   vectorTilesKey: PropTypes.string,
+
   /**
    * URL of the vector tile server. Default is 'https://maps.geops.io'.
    */
   vectorTilesUrl: PropTypes.string,
+
+  /**
+   * URL to request permission.
+   */
+  permissionUrl: PropTypes.string,
 };
 
 const attributes = {
@@ -99,6 +105,7 @@ const attributes = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  permissionUrl: null,
 };
 
 const defaultProps = {
