@@ -51,7 +51,7 @@ export const fetchPermissions = appBaseUrl => dispatch => {
   fetch(url, { credentials: 'include' })
     .then(res => res.json())
     .then(data => {
-      dispatch({ type: SET_PERMISSIONS, data: (data || {}).permissions });
+      dispatch({ type: SET_PERMISSIONS, data: data || {} });
     });
 };
 
