@@ -118,6 +118,7 @@ export const bauprojekte = {
 export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
+  permission: 'sbb',
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     dataLayer,
