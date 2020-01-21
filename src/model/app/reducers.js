@@ -105,10 +105,7 @@ export default function app(state = getInitialState(), action) {
     case SET_PERMISSIONS:
       return {
         ...state,
-        permissions: action.data.permissions
-          ? [...action.data.permissions]
-          : [],
-        user: action.data.user,
+        permissions: action.data,
       };
     default:
       return {

@@ -13,10 +13,10 @@ const propTypes = {
 
 const Header = ({ appBaseUrl }) => {
   let login = 'Login';
-  const user = useSelector(state => state.app.user);
+  const permissions = useSelector(state => state.app.permissions);
 
-  if (user) {
-    login = user;
+  if (permissions && permissions.user) {
+    login = permissions.user;
   }
 
   return (

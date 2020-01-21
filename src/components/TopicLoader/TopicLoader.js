@@ -27,6 +27,7 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
+  permissionUrl: PropTypes.string.isRequired,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -52,8 +53,12 @@ const defaultProps = {
 
 class TopicLoader extends Component {
   componentDidMount() {
-    const { dispatchFetchPermissions, appBaseUrl } = this.props;
-    dispatchFetchPermissions(appBaseUrl);
+    const { dispatchFetchPermissions, permissionUrl } = this.props;
+
+    if (permissionUrl) {
+      dispatchFetchPermissions(permissionUrl);
+    }
+
     this.loadTopics();
   }
 
@@ -67,7 +72,13 @@ class TopicLoader extends Component {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      permissionUrl,
+      dispatchFetchPermissions,
     } = this.props;
+
+    if (permissionUrl !== prevProps.permissionUrl && permissionUrl) {
+      dispatchFetchPermissions(permissionUrl);
+    }
 
     if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
