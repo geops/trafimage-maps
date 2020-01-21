@@ -137,7 +137,7 @@ class TopicMenu extends PureComponent {
   }
 
   renderLockIcon(topic) {
-    const { activeTopic } = this.props;
+    const { activeTopic, t } = this.props;
 
     const className = `wkp-lock-icon${
       activeTopic.key === topic.key ? ' wkp-active' : ''
@@ -145,7 +145,10 @@ class TopicMenu extends PureComponent {
 
     return (
       <div className={className}>
-        <FaLock focusable={false} />
+        <FaLock
+          focusable={false}
+          title={t('Vertraulich/ Nur SBB-intern verfügbar')}
+        />
       </div>
     );
   }
