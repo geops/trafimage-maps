@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
-import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
+import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -113,7 +113,7 @@ function TopicElements({ history, appBaseUrl }) {
 
   // Define which components to display.
   const appComponents = {
-    header: <Header />,
+    header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,

@@ -42,6 +42,8 @@ class BehigLayer extends VectorLayer {
       olLayer,
     });
 
+    this.toggleLayers = options.toggleLayers || [];
+
     this.styleCache = {};
     this.visibilityKeys = [];
 
@@ -55,8 +57,8 @@ class BehigLayer extends VectorLayer {
     super.init(map);
 
     this.visibilityKeys.push(
-      this.children.map(childLayer => {
-        return childLayer.on('change:visible', this.onChangeVisible);
+      this.toggleLayers.map(toggleLayer => {
+        return toggleLayer.on('change:visible', this.onChangeVisible);
       }),
     );
   }
@@ -83,14 +85,16 @@ class BehigLayer extends VectorLayer {
    * @return {ol.geom.Point} Geometry or null
    */
   geometryFunction(feature) {
-    const childLayer = this.children.find(
-      child =>
-        child.properties &&
-        child.properties.behig &&
-        child.properties.behig.status === feature.get('status'),
+    const toggleLayer = this.toggleLayers.find(
+      layer =>
+        layer.properties &&
+        layer.properties.behig &&
+        layer.properties.behig.status === feature.get('status'),
     );
 
-    return childLayer && childLayer.getVisible() ? feature.getGeometry() : null;
+    return toggleLayer && toggleLayer.getVisible()
+      ? feature.getGeometry()
+      : null;
   }
 
   style(feature, resolution) {

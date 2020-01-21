@@ -149,8 +149,7 @@
     }
 
     .wkp-search {
-      top: 5px;
-      left: 250px;
+      top: 6px;
     }
 
     .wkp-topic-content {
@@ -181,22 +180,6 @@
 
   &.tm-w-s,
   &.tm-w-xs {
-    .wkp-search {
-      right: 9px;
-      max-width: 100%;
-      left: 100px;
-    }
-
-    .wkp-search-toggle-container {
-      display: none;
-    }
-
-    .wkp-search-toggle-button,
-    .wkp-search-toggle-container--open {
-      display: block;
-      margin-right: 0;
-    }
-
     .wkp-bus-line-popup {
       max-width: 200px;
     }
