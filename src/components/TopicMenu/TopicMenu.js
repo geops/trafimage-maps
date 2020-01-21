@@ -211,11 +211,13 @@ class TopicMenu extends PureComponent {
               }}
             />
           </div>
-          {topic && topic.permission && this.renderLockIcon(topic)}
-          {menuOpen &&
-            topic &&
-            (topic.description || topic.layerInfoComponent) &&
-            this.renderInfoButton(topic)}
+          <div className="wkp-topic-icons">
+            {topic && topic.permission && this.renderLockIcon(topic)}
+            {menuOpen &&
+              topic &&
+              (topic.description || topic.layerInfoComponent) &&
+              this.renderInfoButton(topic)}
+          </div>
         </div>
         <div className="wkp-topic-content">
           <Collapsible isCollapsed={isCollapsed}>
