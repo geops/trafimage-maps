@@ -92,13 +92,23 @@ class TopicLoader extends Component {
   loadTopics() {
     const {
       topics,
-      permissions,
+      // permissions,
       dispatchSetTopics,
       dispatchSetActiveTopic,
     } = this.props;
 
     const visibleTopics = topics.filter(
-      t => !t.permission || ["sbb", "verbundzonen", "betriebslage", "mobz_what_if", "mobz", "tina", "dfa-nf"].includes(t.permission),
+      t =>
+        !t.permission ||
+        [
+          'sbb',
+          'verbundzonen',
+          'betriebslage',
+          'mobz_what_if',
+          'mobz',
+          'tina',
+          'dfa-nf',
+        ].includes(t.permission),
     );
 
     const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
