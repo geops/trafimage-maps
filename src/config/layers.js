@@ -687,6 +687,208 @@ export const behigParent = new BehigLayer({
   toggleLayers: [behigOk, behigNotYetOk, behigNotOk],
 });
 
+export const zweitausbildungStations = new Layer({
+  name: 'ch.sbb.zweitausbildung.stationen.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.stationen.group-title',
+      },
+    },
+  },
+  children: [
+    new Layer({
+      name: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
+      key: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          viewparams: 'selektion:Aufbau',
+          infos: {
+            title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
+            legend: [
+              {
+                image: 'station_aufbau.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-stations',
+              },
+              {
+                image: 'station_aufbau_grenzstation.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
+              },
+            ],
+          },
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.zweitausbildung.haltestellen.basis',
+      key: 'ch.sbb.zweitausbildung.haltestellen.basis',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          viewparams: 'selektion:Basis',
+          infos: {
+            title: 'ch.sbb.zweitausbildung.haltestellen.basis-title',
+            legend: [
+              {
+                image: 'station_basis.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-stations',
+              },
+              {
+                image: 'station_basis_grenzstation.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
+              },
+            ],
+          },
+        },
+      },
+    }),
+  ],
+});
+
+export const zweitausbildungPois = new Layer({
+  name: 'ch.sbb.zweitausbildung.tourist.pois.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.tourist.pois.group-title',
+      },
+    },
+  },
+  children: [
+    new Layer({
+      name: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
+      key: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          viewparams: 'railway:false',
+          infos: {
+            legend: [
+              {
+                image: 'poi_no_railaway.png',
+                name: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway-name',
+              },
+            ],
+          },
+        },
+      },
+    }),
+    new Layer({
+      name: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
+      key: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          viewparams: 'railaway:true',
+          infos: {
+            legend: [
+              {
+                image: 'poi_railaway.png',
+                name: 'ch.sbb.zweitausbildung.tourist.pois.railaway-name',
+              },
+            ],
+          },
+        },
+      },
+    }),
+  ],
+});
+
+export const zweitausbildungRoutes = new Layer({
+  name: 'ch.sbb.zweitausbildung.linien.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.linien.group-title',
+      },
+    },
+  },
+  children: [
+    new Layer({
+      name: 'ch.sbb.zweitausbildung.tourist.routes.group',
+      key: 'ch.sbb.zweitausbildung.tourist.routes.group',
+      visible: false,
+      radioGroup: 'zweitausbildungRoutes',
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
+        zweitausbildung: {
+          infos: {
+            title: 'ch.sbb.zweitausbildung.tourist.routes.group',
+            desc: 'ch.sbb.zweitausbildung.tourist.routes.group-desc',
+            legend: {
+              image: 'legend_tourist_strecken.png',
+            },
+          },
+        },
+      },
+      children: [
+        new Layer({
+          name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
+          key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
+          visible: false,
+          properties: {
+            hideInLegend: true,
+            zweitausbildung: {
+              layer: 'zweitausbildung_tourist_strecken_grouped_qry',
+            },
+          },
+        }),
+      ],
+    }),
+    new Layer({
+      name: 'ch.sbb.zweitausbildung.hauptlinien.group',
+      key: 'ch.sbb.zweitausbildung.hauptlinien.group',
+      visible: true,
+      radioGroup: 'zweitausbildungRoutes',
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
+        zweitausbildung: {
+          infos: {
+            title: 'ch.sbb.zweitausbildung.hauptlinien.group',
+            desc: 'ch.sbb.zweitausbildung.hauptlinien.group-desc',
+            legend: {
+              image: 'legend_hauptlinien.png',
+            },
+          },
+        },
+      },
+      children: [
+        new Layer({
+          name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
+          key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
+          visible: true,
+          properties: {
+            hideInLegend: true,
+            zweitausbildung: {
+              layer: 'zweitausbildung_hauptlinien_grouped_qry',
+            },
+          },
+        }),
+      ],
+    }),
+  ],
+});
+
 export default [
   dataLayer,
   sourcesLayer,

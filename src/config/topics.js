@@ -21,6 +21,9 @@ import defaultBaseLayers, {
   behigNotYetOk,
   behigNotOk,
   behigParent,
+  zweitausbildungPois,
+  zweitausbildungRoutes,
+  zweitausbildungStations,
 } from './layers';
 import defaultSearches, {
   handicapStopFinder,
@@ -236,7 +239,12 @@ export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
   elements: { ...defaultElements, shareMenu: true },
-  layers: [netzkarteLayer],
+  layers: [
+    netzkarteLayer,
+    zweitausbildungPois,
+    zweitausbildungRoutes,
+    zweitausbildungStations,
+  ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ZweitausbildungTopicInfo',
   searches: defaultSearches,

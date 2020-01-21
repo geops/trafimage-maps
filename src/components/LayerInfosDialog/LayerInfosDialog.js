@@ -38,7 +38,9 @@ function LayerInfosDialog(props) {
   let body;
   if (componentName) {
     const LayerInfoComponent = layerInfos[componentName];
-    body = <LayerInfoComponent language={language} infos={selectedForInfos} />;
+    body = (
+      <LayerInfoComponent language={language} properties={selectedForInfos} />
+    );
   } else if (description) {
     body = <Trans i18nKey={description} />;
   }
