@@ -8,8 +8,9 @@ export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
 export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
-export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 export const SET_PERMISSIONS = 'SET_PERMISSIONS';
+export const SET_STATIC_FILES_URL = 'SET_STATIC_FILES_URL';
+export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 
 export const setTopics = data => ({ type: SET_TOPICS, data });
 
@@ -54,5 +55,7 @@ export const fetchPermissions = appBaseUrl => dispatch => {
       dispatch({ type: SET_PERMISSIONS, data: (data || {}).permissions });
     });
 };
+
+export const setStaticFilesUrl = data => ({ type: SET_STATIC_FILES_URL, data });
 
 export const setSearchService = data => ({ type: SET_SEARCH_SERVICE, data });

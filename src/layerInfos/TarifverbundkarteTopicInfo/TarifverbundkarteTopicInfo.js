@@ -4,15 +4,17 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 
 const propTypes = {
+  language: PropTypes.string.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {};
 
-const TarifverbundkarteTopicInfo = ({ language, t }) => {
+const TarifverbundkarteTopicInfo = ({ language, staticFilesUrl, t }) => {
   const img = (
     <img
-      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png`}
+      src={`${staticFilesUrl}/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />

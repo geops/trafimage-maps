@@ -45,11 +45,13 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   appBaseUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
   appBaseUrl: null,
+  staticFilesUrl: null,
 };
 
 const getComponents = (defaultComponents, elementsToDisplay) =>
@@ -57,7 +59,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history, appBaseUrl }) {
+function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const ref = useRef(null);
   const { activeTopic, layerService, map } = useSelector(state => state.app);
   const [tabFocus, setTabFocus] = useState(false);
@@ -132,7 +134,7 @@ function TopicElements({ history, appBaseUrl }) {
         titleButton={t('Baselayerwechsel')}
         titleButtonNext={t('Nächste Baselayer')}
         titleButtonPrevious={t('Vorherige Baselayer')}
-        fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
+        fallbackImgDir={`${staticFilesUrl}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),

@@ -11,6 +11,7 @@ const propTypes = {
   destination: PropTypes.string,
   platforms: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
   uic: PropTypes.number.isRequired,
 
   // react-i18next
@@ -69,10 +70,10 @@ class DestinationInput extends Component {
    * @param {string} destination Selected destination.
    */
   loadDestinations(value) {
-    const { uic, platforms } = this.props;
+    const { uic, platforms, staticFilesUrl } = this.props;
 
     const url =
-      `${process.env.REACT_APP_BASE_URL}/search/destinations/${uic}` +
+      `${staticFilesUrl}/search/destinations/${uic}` +
       `?platforms=${platforms || ''}&destination=${value}`;
 
     this.abortController.abort();

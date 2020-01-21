@@ -8,11 +8,12 @@ import './ConstructionLayerInfo.scss';
 const propTypes = {
   t: PropTypes.func.isRequired,
   infos: PropTypes.object.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
 
-const ConstructionLayerInfo = ({ t, infos }) => {
+const ConstructionLayerInfo = ({ t, infos, staticFilesUrl }) => {
   const config = infos.get('construction');
   const filename = `${config.art}_${config.ort}`.replace(
     /[^A-Z,^0-9,-_]/gi,
@@ -22,7 +23,7 @@ const ConstructionLayerInfo = ({ t, infos }) => {
   return (
     <div className="wkp-construction-layer-info">
       <img
-        src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`}
+        src={`${staticFilesUrl}/img/layers/construction/${filename}.png`}
         draggable="false"
         alt={t('Kein Bildtext')}
       />

@@ -11,7 +11,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter } from '../../model/map/actions';
-import { setLanguage } from '../../model/app/actions';
+import { setLanguage, setStaticFilesUrl } from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -51,38 +51,38 @@ const propTypes = {
   /**
    * API key for using geOps services.
    */
-  apiKey: PropTypes.string,
+  apiKey: PropTypes.string.isRequired,
 
   /**
    * URL endpoint for Cartaro.
    */
-  cartaroUrl: PropTypes.string,
+  cartaroUrl: PropTypes.string.isRequired,
 
   /**
    * React app base URL
    */
-  appBaseUrl: PropTypes.string,
+  appBaseUrl: PropTypes.string.isRequired,
 
   /**
    * API key for vector tiles hosted by geOps.
    */
-  vectorTilesKey: PropTypes.string,
+  vectorTilesKey: PropTypes.string.isRequired,
 
   /**
    * URL endpoint for vector tiles hosted by geOps.
    */
-  vectorTilesUrl: PropTypes.string,
+  vectorTilesUrl: PropTypes.string.isRequired,
+
+  /**
+   * URL endpoint for static files hosted by geOps.
+   */
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
   history: null,
   center: [925472, 5920000],
   zoom: undefined,
-  apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
-  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  appBaseUrl: process.env.REACT_APP_BASE_URL,
-  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   topics: null,
   language: 'de',
 };
@@ -99,7 +99,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, language } = this.props;
+    const { zoom, center, language, staticFilesUrl } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -112,10 +112,14 @@ class TrafimageMaps extends React.PureComponent {
     if (language) {
       this.store.dispatch(setLanguage(language));
     }
+
+    if (staticFilesUrl) {
+      this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
+    }
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center } = this.props;
+    const { zoom, center, staticFilesUrl } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -123,6 +127,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (staticFilesUrl !== prevProps.staticFilesUrl) {
+      this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
     }
   }
 

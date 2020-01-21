@@ -18,6 +18,7 @@ export const NAME = 'infoDialog';
 
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
+  const staticFilesUrl = useSelector(state => state.app.staticFilesUrl);
   const { t } = useTranslation();
   const { selectedForInfos } = props;
 
@@ -38,7 +39,13 @@ function LayerInfosDialog(props) {
   let body;
   if (componentName) {
     const LayerInfoComponent = layerInfos[componentName];
-    body = <LayerInfoComponent language={language} infos={selectedForInfos} />;
+    body = (
+      <LayerInfoComponent
+        language={language}
+        infos={selectedForInfos}
+        staticFilesUrl={staticFilesUrl}
+      />
+    );
   } else if (description) {
     body = <Trans i18nKey={description} />;
   }

@@ -139,6 +139,10 @@ class ConstructionLayer extends VectorLayer {
     });
   }
 
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
+  }
+
   setGeoServerUrl(geoServerUrl) {
     this.geoServerUrl = geoServerUrl;
   }
@@ -208,7 +212,7 @@ class ConstructionLayer extends VectorLayer {
       this.styleCache[cacheKey] = [
         new Style({
           image: new Icon({
-            src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`,
+            src: `${this.staticFilesUrl}/img/layers/construction/${filename}.png`,
           }),
         }),
       ];

@@ -15,6 +15,7 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSIONS,
+  SET_STATIC_FILES_URL,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 import layerHelper from '../../layers/layerHelper';
@@ -106,6 +107,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         permissions: [...action.data],
+      };
+    case SET_STATIC_FILES_URL:
+      return {
+        ...state,
+        staticFilesUrl: action.data,
       };
     default:
       return {

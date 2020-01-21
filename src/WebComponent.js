@@ -61,29 +61,34 @@ const propTypes = {
   /**
    * API key of using the application. Details at 'https://developer.geops.io'.
    */
-  apiKey: PropTypes.string,
+  apiKey: PropTypes.string.isRequired,
 
   /**
    * URL of the cartaro instance to use.
    * @ignore
    */
-  cartaroUrl: PropTypes.string,
+  cartaroUrl: PropTypes.string.isRequired,
 
   /**
    * Base URL to use.
    * @ignore
    */
-  appBaseUrl: PropTypes.string,
+  appBaseUrl: PropTypes.string.isRequired,
 
   /**
    * API key for accessing vector tiles.
    * Details at 'https://developer.geops.io'.
    */
-  vectorTilesKey: PropTypes.string,
+  vectorTilesKey: PropTypes.string.isRequired,
   /**
-   * URL of the vector tile server. Default is 'https://maps.geops.io'.
+   * URL of the vector tile server.
    */
-  vectorTilesUrl: PropTypes.string,
+  vectorTilesUrl: PropTypes.string.isRequired,
+
+  /**
+   * URL endpoint for static files hosted by geOps.
+   */
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const attributes = {
@@ -94,11 +99,12 @@ const attributes = {
   appName: 'wkp',
   language: 'de',
   activeTopicKey: undefined,
-  apiKey: process.env.REACT_APP_API_KEY,
-  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  appBaseUrl: process.env.REACT_APP_BASE_URL,
-  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  apiKey: undefined,
+  cartaroUrl: undefined,
+  appBaseUrl: undefined,
+  vectorTilesKey: undefined,
+  vectorTilesUrl: undefined,
+  staticFilesUrl: undefined,
 };
 
 const defaultProps = {

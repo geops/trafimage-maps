@@ -25,6 +25,9 @@ const propTypes = {
 
   showTitle: PropTypes.bool,
 
+  // mapStateToProps
+  staticFilesUrl: PropTypes.string.isRequired,
+
   // react-i18next
   t: PropTypes.func.isRequired,
 
@@ -122,7 +125,7 @@ class DeparturePopupContent extends Component {
    * @param {string} destination Selected destination.
    */
   loadDepartures() {
-    const { platforms, uic } = this.props;
+    const { platforms, uic, staticFilesUrl } = this.props;
 
     const urlParams = {};
 
@@ -134,9 +137,9 @@ class DeparturePopupContent extends Component {
       urlParams.destination = `${this.destinationFilter}`;
     }
 
-    const url = `${
-      process.env.REACT_APP_BASE_URL
-    }/search/departures/${uic}?${qs.stringify(urlParams)}`;
+    const url = `${staticFilesUrl}/search/departures/${uic}?${qs.stringify(
+      urlParams,
+    )}`;
 
     fetch(url)
       .then(response => response.json())
@@ -171,7 +174,15 @@ class DeparturePopupContent extends Component {
   }
 
   render() {
-    const { platforms, uic, name, icon, showTitle, t } = this.props;
+    const {
+      platforms,
+      uic,
+      name,
+      icon,
+      showTitle,
+      staticFilesUrl,
+      t,
+    } = this.props;
 
     const { departuresLoading, platformName } = this.state;
     let { departures } = this.state;
@@ -226,6 +237,7 @@ class DeparturePopupContent extends Component {
           platforms={platformsFormatted}
           destination={this.destinationFilter}
           onSelect={d => this.onDestinationSelect(d)}
+          staticFilesUrl={staticFilesUrl}
           uic={uic}
         />
 
@@ -277,6 +289,9 @@ class DeparturePopupContent extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  staticFilesUrl: state.app.staticFilesUrl,
+});
 
 const mapDispatchToProps = {
   dispatchSetDeparturesFilter: setDeparturesFilter,
@@ -287,5 +302,5 @@ DeparturePopupContent.defaultProps = defaultProps;
 
 export default compose(
   withTranslation(),
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(DeparturePopupContent);
