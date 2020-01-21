@@ -4,7 +4,6 @@
   border-top-width: 0;
 
   .wkp-topic-menu-item-wrapper {
-    position: relative;
     display: flex;
     align-items: center;
 
@@ -52,10 +51,14 @@
       }
     }
 
+    .wkp-topic-icons {
+      align-items: center;
+      margin-right: 4px;
+      display: flex;
+    }
+
     .wkp-lock-icon {
       color: #888;
-      position: absolute;
-      right: 22px;
 
       &.wkp-active {
         color: #000;
@@ -64,8 +67,7 @@
 
     .wkp-info-topic-bt {
       color: #888;
-      align-items: center;
-      margin-right: 4px;
+      margin-left: 4px;
 
       &.wkp-active {
         color: #000;
