@@ -30,7 +30,7 @@ const propTypes = {
   permissionUrl: PropTypes.string.isRequired,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
-  permissionsInfos: PropTypes.arrayOf(PropTypes.string).isRequired,
+  permissionsInfos: PropTypes.object.isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
