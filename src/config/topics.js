@@ -240,6 +240,7 @@ export const zweitausbildung = {
   key: 'ch.sbb.zweitausbildung',
   elements: { ...defaultElements, shareMenu: true },
   layers: [
+    dataLayer,
     netzkarteLayer,
     zweitausbildungPois,
     zweitausbildungRoutes,
