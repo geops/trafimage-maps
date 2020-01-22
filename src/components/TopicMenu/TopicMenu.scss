@@ -12,7 +12,8 @@
       width: 100%;
       display: flex;
       align-items: center;
-      margin-right: 45px;
+      margin-right: 42px;
+      padding-right: 10px;
 
       .wkp-topic-title {
         display: flex;
@@ -40,7 +41,7 @@
       .wkp-layer-toggler {
         position: absolute;
         right: 0;
-        bottom: 12px;
+        bottom: 10px;
         width: 5px;
         height: 5px;
         border-width: 1px 0 0 1px;
@@ -49,6 +50,7 @@
         margin-left: 10px;
 
         &.collapsed {
+          bottom: 12px;
           transform: rotate(225deg);
         }
       }
