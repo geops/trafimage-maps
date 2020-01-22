@@ -12,7 +12,7 @@
       width: 100%;
       display: flex;
       align-items: center;
-      margin-right: 10px;
+      margin-right: 22px;
 
       .wkp-topic-title {
         display: flex;
@@ -51,10 +51,31 @@
       }
     }
 
-    .wkp-info-topic-bt {
-      color: #888;
-      align-items: center;
+    .wkp-topic-icons {
+      position: relative;
       margin-right: 4px;
+      height: 30px;
+      width: auto;
+    }
+
+    .wkp-lock-icon {
+      position: absolute;
+      right: 25px;
+      bottom: 0;
+      cursor: pointer;
+      color: #888;
+
+      &.wkp-active {
+        color: #000;
+      }
+    }
+
+    .wkp-info-topic-bt {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      color: #888;
+      margin-left: 4px;
 
       &.wkp-active {
         color: #000;

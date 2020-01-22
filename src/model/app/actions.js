@@ -9,7 +9,7 @@ export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
-export const SET_PERMISSIONS = 'SET_PERMISSIONS';
+export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
 
 export const setTopics = data => ({ type: SET_TOPICS, data });
 
@@ -46,12 +46,18 @@ export const setDeparturesFilter = data => ({
   data,
 });
 
-export const fetchPermissions = appBaseUrl => dispatch => {
+export const fetchPermissionsInfos = appBaseUrl => dispatch => {
   const url = `${appBaseUrl}/permissions`;
   fetch(url, { credentials: 'include' })
     .then(res => res.json())
     .then(data => {
-      dispatch({ type: SET_PERMISSIONS, data: (data || {}).permissions });
+      dispatch({
+        type: SET_PERMISSIONS_INFOS,
+        data: data || {
+          user: null,
+          permissions: [],
+        },
+      });
     });
 };
 

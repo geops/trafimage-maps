@@ -72,6 +72,11 @@ const propTypes = {
    * URL endpoint for vector tiles hosted by geOps.
    */
   vectorTilesUrl: PropTypes.string,
+
+  /**
+   * URL to request permission.
+   */
+  permissionUrl: PropTypes.string,
 };
 
 const defaultProps = {
@@ -83,6 +88,7 @@ const defaultProps = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  permissionUrl: null,
   topics: null,
   language: 'de',
 };
@@ -135,6 +141,7 @@ class TrafimageMaps extends React.PureComponent {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      permissionUrl,
     } = this.props;
 
     return (
@@ -145,6 +152,7 @@ class TrafimageMaps extends React.PureComponent {
           topics={topics}
           cartaroUrl={cartaroUrl}
           appBaseUrl={appBaseUrl}
+          permissionUrl={permissionUrl}
           vectorTilesKey={vectorTilesKey}
           vectorTilesUrl={vectorTilesUrl}
         />
