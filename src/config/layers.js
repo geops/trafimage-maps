@@ -96,7 +96,7 @@ export const sourcesLayer = new TrafimageMapboxLayer({
 });
 
 sourcesLayer.on('load', () => {
-  if (!sourcesLayer.mbMap.getSource('stations')) {
+  if (sourcesLayer.mbMap && !sourcesLayer.mbMap.getSource('stations')) {
     sourcesLayer.mbMap.addSource('stations', {
       type: 'geojson',
       data: {
