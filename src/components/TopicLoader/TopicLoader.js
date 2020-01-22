@@ -10,7 +10,7 @@ import {
   setTopics,
   setClickedFeatureInfo,
   setSearchService,
-  fetchPermissions,
+  fetchPermissionsInfos,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
@@ -27,9 +27,10 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
+  permissionUrl: PropTypes.string.isRequired,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
-  permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  permissionsInfos: PropTypes.arrayOf(PropTypes.string).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -37,7 +38,7 @@ const propTypes = {
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
-  dispatchFetchPermissions: PropTypes.func.isRequired,
+  dispatchFetchPermissionsInfos: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -52,8 +53,12 @@ const defaultProps = {
 
 class TopicLoader extends Component {
   componentDidMount() {
-    const { dispatchFetchPermissions, appBaseUrl } = this.props;
-    dispatchFetchPermissions(appBaseUrl);
+    const { dispatchFetchPermissionsInfos, permissionUrl } = this.props;
+
+    if (permissionUrl) {
+      dispatchFetchPermissionsInfos(permissionUrl);
+    }
+
     this.loadTopics();
   }
 
@@ -61,19 +66,28 @@ class TopicLoader extends Component {
     const {
       activeTopic,
       topics,
-      permissions,
+      permissionsInfos,
       apiKey,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      permissionUrl,
+      dispatchFetchPermissionsInfos,
     } = this.props;
+
+    if (permissionUrl !== prevProps.permissionUrl && permissionUrl) {
+      dispatchFetchPermissionsInfos(permissionUrl);
+    }
 
     if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
     }
 
-    if (permissions !== prevProps.permissions || topics !== prevProps.topics) {
+    if (
+      permissionsInfos !== prevProps.permissionsInfos ||
+      topics !== prevProps.topics
+    ) {
       this.loadTopics();
     }
 
@@ -92,7 +106,7 @@ class TopicLoader extends Component {
   loadTopics() {
     const {
       topics,
-      // permissions,
+      // permissionsInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
     } = this.props;
@@ -213,7 +227,7 @@ class TopicLoader extends Component {
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
   layerService: state.app.layerService,
-  permissions: state.app.permissions,
+  permissionsInfos: state.app.permissionsInfos,
 });
 
 const mapDispatchToProps = {
@@ -222,7 +236,7 @@ const mapDispatchToProps = {
   dispatchSetTopics: setTopics,
   dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
   dispatchSetSearchService: setSearchService,
-  dispatchFetchPermissions: fetchPermissions,
+  dispatchFetchPermissionsInfos: fetchPermissionsInfos,
 };
 
 TopicLoader.propTypes = propTypes;
