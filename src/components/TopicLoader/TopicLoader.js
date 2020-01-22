@@ -23,14 +23,20 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  activeTopic: PropTypes.shape(),
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
+
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
-  permissionUrl: PropTypes.string.isRequired,
+  permissionUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
-  permissionsInfos: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape(),
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
+  permissionsInfos: PropTypes.shape({
+    user: PropTypes.string,
+    permissions: PropTypes.array,
+  }).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -49,6 +55,7 @@ const defaultProps = {
   cartaroUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
+  permissionUrl: null,
 };
 
 class TopicLoader extends Component {
