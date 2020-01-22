@@ -85,25 +85,6 @@ dataLayer.on('load', () => {
     .map(layer => layer.id);
 });
 
-// On initilialization we get the lit of rendered stations.
-dataLayer.on('init', () => {
-  dataLayer.mbMap.on('idle', () => {
-    osmPointsFeaturesRendered = dataLayer.mbMap
-      .queryRenderedFeatures({
-        layers: osmPointsLayers,
-      })
-      .map(feat => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-  });
-});
-
 export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
   zIndex: 1,
@@ -126,18 +107,24 @@ sourcesLayer.on('load', () => {
   }
 });
 
+// On initilialization we get the lit of rendered stations.
 dataLayer.on('init', () => {
   dataLayer.mbMap.on('idle', () => {
-    // console.log('sourcesLayer idle', osmPointsFeaturesRendered);
-    if (!sourcesLayer.mbMap.getSource('stations')) {
-      sourcesLayer.mbMap.addSource('stations', {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: osmPointsFeaturesRendered,
-        },
+    osmPointsFeaturesRendered = dataLayer.mbMap
+      .queryRenderedFeatures({
+        layers: osmPointsLayers,
+      })
+      .map(feat => {
+        const good = {
+          id: feat.id * 1000,
+          type: feat.type,
+          properties: feat.properties,
+          geometry: feat.geometry,
+        };
+        return good;
       });
-    } else {
+
+    if (sourcesLayer.mbMap && sourcesLayer.mbMap.getSource('stations')) {
       sourcesLayer.mbMap.getSource('stations').setData({
         type: 'FeatureCollection',
         features: osmPointsFeaturesRendered,

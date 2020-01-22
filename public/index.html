@@ -66,6 +66,15 @@
       };
 
       window.onload = function() {
+        fetch('https://developer.geops.io/publickey')
+          .then(response => response.json())
+          .then(data => {
+            changeAttr('apiKey', data.key)
+          })
+          .catch(() => {
+            console.error('Request to get the apiKey failed');
+          });
+
         const map = document.getElementById('map');
         const evts = document.getElementById('events');
         map.addEventListener('moveend', function(evt) {
@@ -139,6 +148,7 @@
       center="[810000, 5900000]"
       appName="wkp"
       activeTopicKey="ch.sbb.netzkarte"
+      permissionUrl="//maps.trafimage.ch"
     ></trafimage-maps>
     <div id="events"></div>
     <!--
