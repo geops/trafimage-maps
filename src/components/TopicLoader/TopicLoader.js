@@ -23,13 +23,16 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  activeTopic: PropTypes.shape(),
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
+
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
   permissionUrl: PropTypes.string.isRequired,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape(),
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
   permissionsInfos: PropTypes.object.isRequired,
 
   // mapDispatchToProps
