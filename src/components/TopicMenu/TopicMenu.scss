@@ -12,7 +12,7 @@
       width: 100%;
       display: flex;
       align-items: center;
-      margin-right: 35px;
+      margin-right: 45px;
 
       .wkp-topic-title {
         display: flex;
@@ -38,7 +38,10 @@
       }
 
       .wkp-layer-toggler {
-        width: 6px;
+        position: absolute;
+        right: 0;
+        bottom: 12px;
+        width: 5px;
         height: 5px;
         border-width: 1px 0 0 1px;
         border-style: solid;
@@ -61,7 +64,7 @@
     .wkp-lock-icon {
       position: absolute;
       right: 20px;
-      bottom: 0;
+      bottom: 5px;
       cursor: pointer;
       color: #888;
 
@@ -73,7 +76,7 @@
     .wkp-info-topic-bt {
       position: absolute;
       right: 0;
-      bottom: 0;
+      bottom: 5px;
       color: #888;
       margin-left: 4px;
 
