@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import OLMap from 'ol/Map';
 import { FaInfoCircle, FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import Select from '@geops/react-ui/components/Select';
@@ -11,24 +10,18 @@ import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Layer from 'react-spatial/layers/Layer';
 import Collapsible from '../Collapsible';
-import {
-  setActiveTopic,
-  setSelectedForInfos,
-  setMenuOpen,
-} from '../../model/app/actions';
+import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
 
 const propTypes = {
   topic: PropTypes.shape().isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
 
   // mapStateToProps
-  map: PropTypes.instanceOf(OLMap).isRequired,
   menuOpen: PropTypes.bool.isRequired,
   activeTopic: PropTypes.shape().isRequired,
   selectedForInfos: PropTypes.object,
 
   // mapDispatchToProps
-  dispatchSetMenuOpen: PropTypes.func.isRequired,
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetSelectedForInfos: PropTypes.func.isRequired,
 
@@ -114,10 +107,8 @@ class TopicMenu extends PureComponent {
   renderInfoButton(selectedInfo) {
     const {
       t,
-      map,
       activeTopic,
       selectedForInfos,
-      dispatchSetMenuOpen,
       dispatchSetSelectedForInfos,
     } = this.props;
     const isLayerButton = selectedInfo instanceof Layer;
@@ -138,12 +129,6 @@ class TopicMenu extends PureComponent {
         title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
         onClick={() => {
           dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
-
-          const mapRect = map.getTarget().getBoundingClientRect();
-          // If small screen closes menu:
-          if (mapRect.width < 450) {
-            dispatchSetMenuOpen(false);
-          }
         }}
       >
         <FaInfoCircle focusable={false} />
@@ -278,7 +263,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  dispatchSetMenuOpen: setMenuOpen,
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetSelectedForInfos: setSelectedForInfos,
 };
