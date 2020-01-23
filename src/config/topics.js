@@ -207,6 +207,10 @@ export const mobz = {
   redirect: true,
   permission: 'mobz',
   layerInfoComponent: 'MobzTopicInfo',
+  infos: {
+    owner: 'I-FN-NED-GAN, Hannes Maichle',
+    email: 'hannes.maichle@sbb.ch',
+  },
 };
 
 export const mobzWhatIf = {
@@ -215,6 +219,10 @@ export const mobzWhatIf = {
   redirect: true,
   permission: 'mobz_what_if',
   layerInfoComponent: 'MobzTopicInfo',
+  infos: {
+    owner: 'I-FN-NED-GAN, Martina Hauri',
+    email: 'martina.hauri@sbb.ch',
+  },
 };
 
 export const verbundzonen = {
