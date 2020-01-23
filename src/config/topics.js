@@ -205,7 +205,7 @@ export const mobz = {
   name: 'ch.sbb.mobz',
   key: 'ch.sbb.mobz',
   redirect: true,
-  permission: 'mobz',
+  // permission: 'mobz',
   layerInfoComponent: 'MobzTopicInfo',
   infos: {
     owner: 'I-FN-NED-GAN, Hannes Maichle',
@@ -217,7 +217,7 @@ export const mobzWhatIf = {
   name: 'ch.sbb.mobz_what_if',
   key: 'ch.sbb.mobz_what_if',
   redirect: true,
-  permission: 'mobz_what_if',
+  // permission: 'mobz_what_if',
   layerInfoComponent: 'MobzTopicInfo',
   infos: {
     owner: 'I-FN-NED-GAN, Martina Hauri',
