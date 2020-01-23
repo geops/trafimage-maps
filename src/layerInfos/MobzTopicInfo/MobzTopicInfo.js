@@ -6,11 +6,13 @@ import { compose } from 'lodash/fp';
 const propTypes = {
   language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
+  properties: PropTypes.object.isRequired,
 };
 
 const defaultProps = {};
 
-const MobzTopicInfo = ({ language, t }) => {
+const MobzTopicInfo = ({ language, t, properties }) => {
+  const { infos } = properties;
   const desc = {
     de: (
       <span>
@@ -51,8 +53,9 @@ const MobzTopicInfo = ({ language, t }) => {
       <p>
         {t('Verantwortlich')}:
         <br />
-        I-FN-NED-GAN, Hannes Maichle,&nbsp;
-        <a href="mailto:hannes.maichle@sbb.ch">hannes.maichle@sbb.ch</a>.
+        {infos.owner},
+        <br />
+        <a href={`mailto:${infos.email}`}>{infos.email}</a>.
       </p>
     </div>
   );
