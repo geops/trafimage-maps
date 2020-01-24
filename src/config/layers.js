@@ -1,8 +1,6 @@
 import proj4 from 'proj4';
 import TileLayer from 'ol/layer/Tile';
-import WMTSSource from 'ol/source/WMTS';
 import TileWMSSource from 'ol/source/TileWMS';
-import WMTSTileGrid from 'ol/tilegrid/WMTS';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
@@ -61,109 +59,128 @@ const resolutions = [
   0.298582141739,
 ];
 
-export const netzkarteLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+export const dataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.data',
   visible: true,
   isQueryable: false,
-  isBaseLayer: true,
-  radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr',
-});
-
-/**
- * This layer create a MapboxLayer used by all the MapboxStyleLayer.
- * Its style file contains only source where to find datas.
- * The style of features are  defined by each MapboxStyleLayer ('netzkarte_point, buslinien,...)
- */
-export const sourcesLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.sources',
-  zIndex: 1,
-  preserveDrawingBuffer: true,
-  style: 'trafimage_sources_only',
+  style: 'netzkarte_personenverkehr_v2',
   properties: {
     hideInLegend: true,
   },
 });
 
-export const swisstopoSwissImage = new Layer({
-  name: 'ch.sbb.netzkarte.luftbild',
-  key: 'ch.sbb.netzkarte.luftbild',
+let osmPointsLayers = [];
+let osmPointsFeaturesRendered = [];
+
+// Get list of styleLayers applied to osm_points source.
+dataLayer.on('load', () => {
+  osmPointsLayers = dataLayer.mbMap
+    .getStyle()
+    .layers.filter(layer => {
+      return (
+        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+      );
+    })
+    .map(layer => layer.id);
+});
+
+export const sourcesLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.sources',
+  zIndex: 1,
+  preserveDrawingBuffer: true,
+  style: 'trafimage_sources_only_v2',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+sourcesLayer.on('load', () => {
+  if (sourcesLayer.mbMap && !sourcesLayer.mbMap.getSource('stations')) {
+    sourcesLayer.mbMap.addSource('stations', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: osmPointsFeaturesRendered,
+      },
+    });
+  }
+});
+
+// On initilialization we get the lit of rendered stations.
+dataLayer.on('init', () => {
+  dataLayer.mbMap.on('idle', () => {
+    osmPointsFeaturesRendered = dataLayer.mbMap
+      .queryRenderedFeatures({
+        layers: osmPointsLayers,
+      })
+      .map(feat => {
+        const good = {
+          id: feat.id * 1000,
+          type: feat.type,
+          properties: feat.properties,
+          geometry: feat.geometry,
+        };
+        return good;
+      });
+
+    if (sourcesLayer.mbMap && sourcesLayer.mbMap.getSource('stations')) {
+      sourcesLayer.mbMap.getSource('stations').setData({
+        type: 'FeatureCollection',
+        features: osmPointsFeaturesRendered,
+      });
+    }
+  });
+});
+
+export const netzkarteLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzkarte',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  isBaseLayer: true,
+  radioGroup: 'baseLayer',
+  visible: true,
+  mapboxLayer: dataLayer,
+  styleLayersFilter: () => {
+    return false;
+  },
+});
+
+export const swisstopoSwissImage = new MapboxStyleLayer({
+  name: 'ch.sbb.netzkarte.luftbild.group',
+  key: 'ch.sbb.netzkarte.luftbild.group',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
   radioGroup: 'baseLayer',
   visible: false,
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `//maps.trafimage.ch/geo-admin-wmts/1.0.0/` +
-        `ch.swisstopo.swissimage/default/current/3857/` +
-        '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      transition: 0,
-      crossOrigin: 'anonymous',
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  mapboxLayer: dataLayer,
+  styleLayersFilter: styleLayer => {
+    return /(swissimage|netzkarte)/.test(styleLayer.id);
+  },
 });
 
-export const swisstopoLandeskarte = new Layer({
+export const swisstopoLandeskarte = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte',
   copyright: 'swisstopo (5704003351)',
-  visible: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `//maps.trafimage.ch/geo-admin-wmts/1.0.0/` +
-        'ch.swisstopo.pixelkarte-farbe/default/current/3857/' +
-        '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      transition: 0,
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  visible: false,
+  mapboxLayer: dataLayer,
+  styleLayersFilter: styleLayer => {
+    return /pixelkarte_farbe/.test(styleLayer.id);
+  },
 });
 
-export const swisstopoLandeskarteGrau = new Layer({
+export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte.grau',
   copyright: 'swisstopo (5704003351)',
-  visible: false,
   isBaseLayer: true,
   radioGroup: 'baseLayer',
-  olLayer: new TileLayer({
-    source: new WMTSSource({
-      url:
-        `//maps.trafimage.ch/geo-admin-wmts/1.0.0/` +
-        'ch.swisstopo.pixelkarte-grau/default/current/3857/' +
-        '{TileMatrix}/{TileCol}/{TileRow}.jpeg',
-      matrixSet: 'webmercator',
-      projection: 'EPSG:3857',
-      requestEncoding: 'REST',
-      transition: 0,
-      crossOrigin: 'anonymous',
-      tileGrid: new WMTSTileGrid({
-        extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  visible: false,
+  mapboxLayer: dataLayer,
+  styleLayersFilter: styleLayer => {
+    return /pixelkarte_grau/.test(styleLayer.id);
+  },
 });
 
 export const passagierfrequenzen = new MapboxStyleLayer({
@@ -173,8 +190,9 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   styleLayer: {
     id: 'passagierfrequenzen',
     type: 'circle',
-    source: 'base',
-    'source-layer': 'netzkarte_point',
+    source: 'stations',
+    // source: 'base',
+    // 'source-layer': 'osm_points',
     filter: ['has', 'dwv'],
     paint: {
       'circle-radius': [
@@ -222,19 +240,20 @@ bahnhofplaene.setChildren([
     styleLayer: {
       id: 'printprodukte',
       type: 'symbol',
-      source: 'base',
-      'source-layer': 'netzkarte_point',
-      filter: [
-        'any',
-        ['has', 'url_a4'],
-        ['has', 'url_poster'],
-        ['has', 'url_shopping'],
-      ],
+      source: 'stations',
+      // source: 'base',
+      // 'source-layer': 'osm_points',
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
       },
     },
+    filters: [
+      'any',
+      ['has', 'url_a4'],
+      ['has', 'url_poster'],
+      ['has', 'url_shopping'],
+    ],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
@@ -249,14 +268,16 @@ bahnhofplaene.setChildren([
     styleLayer: {
       id: 'interaktiv',
       type: 'symbol',
-      source: 'base',
-      'source-layer': 'netzkarte_point',
+      source: 'stations',
+      // source: 'base',
+      // 'source-layer': 'osm_points',
       filter: ['has', 'url_interactive_plan'],
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
       },
     },
+    filters: ['has', 'url_interactive_plan'],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
@@ -307,24 +328,19 @@ punctuality.setChildren([
   }),
 ]);
 
-/* export const netzkartePointLayer = new NetzkartePointMapboxStyleLayer({
-  key: 'ch.sbb.netzkarte.stationen',
-  mapboxLayer: netzkarteLayer,
-  visible: false,
-  filter: styleLayer => {
-    return styleLayer.id === 'netzkarte_point';
-  }
-}); */
-
 export const netzkartePointLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.stationen',
   visible: true,
   mapboxLayer: sourcesLayer,
+  // queryRenderedLayersFilter: layer => {
+  //   return layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points';
+  // },
   styleLayer: {
-    id: 'netzkarte_point',
+    id: 'stations',
     type: 'circle',
-    source: 'base',
-    'source-layer': 'netzkarte_point',
+    source: 'stations',
+    // source: 'base',
+    // 'source-layer': 'osm_points',
     paint: {
       'circle-radius': 10,
       'circle-color': 'rgb(0, 61, 155)',
@@ -606,7 +622,7 @@ export const constructionLayer = new ConstructionLayer({
     hideInLegend: true,
     popupComponent: 'ConstructionPopup',
   },
-  children: [constrUnterhalt, constrAusbau],
+  toggleLayers: [constrUnterhalt, constrAusbau],
 });
 
 export const behigOk = new Layer({
@@ -656,7 +672,7 @@ export const behigParent = new BehigLayer({
     hideInLegend: true,
     popupComponent: 'BehigPopup',
   },
-  children: [behigOk, behigNotYetOk, behigNotOk],
+  toggleLayers: [behigOk, behigNotYetOk, behigNotOk],
 });
 
 export const infoFPWLayer = new InfoFPWLayer({
@@ -670,6 +686,7 @@ export const infoFPWLayer = new InfoFPWLayer({
 });
 
 export default [
+  dataLayer,
   sourcesLayer,
   netzkarteLayer,
   swisstopoLandeskarteGrau,

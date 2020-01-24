@@ -12,7 +12,8 @@
       width: 100%;
       display: flex;
       align-items: center;
-      margin-right: 10px;
+      margin-right: 42px;
+      padding-right: 15px;
 
       .wkp-topic-title {
         display: flex;
@@ -44,17 +45,40 @@
         border-style: solid;
         transform: rotate(45deg);
         margin-left: 10px;
+        margin-top: 3px;
 
         &.collapsed {
+          margin-top: 0;
           transform: rotate(225deg);
         }
       }
     }
 
-    .wkp-info-topic-bt {
-      color: #888;
-      align-items: center;
+    .wkp-topic-icons {
+      position: relative;
       margin-right: 4px;
+      height: 30px;
+      width: auto;
+    }
+
+    .wkp-lock-icon {
+      position: absolute;
+      right: 20px;
+      bottom: 5px;
+      cursor: pointer;
+      color: #888;
+
+      &.wkp-active {
+        color: #000;
+      }
+    }
+
+    .wkp-info-topic-bt {
+      position: absolute;
+      right: 0;
+      bottom: 5px;
+      color: #888;
+      margin-left: 4px;
 
       &.wkp-active {
         color: #000;

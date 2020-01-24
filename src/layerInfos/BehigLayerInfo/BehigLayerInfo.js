@@ -9,13 +9,13 @@ import './BehigLayerInfo.scss';
 const propTypes = {
   t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
-  infos: PropTypes.object.isRequired,
+  properties: PropTypes.object.isRequired,
 };
 
 const defaultProps = {};
 
-const BehigLayerInfo = ({ t, language, infos }) => {
-  const config = infos.get('behig');
+const BehigLayerInfo = ({ t, language, properties }) => {
+  const config = properties.get('behig');
   const key = config.status.replace(/\s/g, '_');
 
   const img = (

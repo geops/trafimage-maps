@@ -23,7 +23,7 @@ const DeparturePopup = ({ feature, className }) => {
   const dispatch = useDispatch();
   const { clickedFeatureInfo, layerService } = useSelector(state => state.app);
   const name = feature.get('name');
-  const uic = feature.get('didok') + 8500000;
+  const uic = parseFloat(feature.get('sbb_id'));
 
   const openNetzkartePopup = () => {
     const netkarteFeature = { ...clickedFeatureInfo[0] };
