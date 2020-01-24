@@ -181,8 +181,8 @@ export const showcases = {
 export const infofpw = {
   name: 'ch.sbb.infofpw',
   key: 'ch.sbb.infofpw',
-  permission: 'sbb',
-  redirect: true,
+  // permission: 'sbb',
+  // redirect: true,
   elements: {
     ...defaultElements,
     popup: true,
