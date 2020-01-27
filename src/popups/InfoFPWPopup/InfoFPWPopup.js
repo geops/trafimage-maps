@@ -13,6 +13,7 @@ const propTypes = {
   language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
   className: PropTypes.string,
+  cartaroOldUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {
@@ -21,7 +22,7 @@ const defaultProps = {
 
 class InfoFPWPopup extends PureComponent {
   render() {
-    const { feature, language, t, className } = this.props;
+    const { feature, language, t, className, cartaroOldUrl } = this.props;
 
     let text;
     let images;
@@ -47,7 +48,7 @@ class InfoFPWPopup extends PureComponent {
           >
             {photoPaths.map(url => (
               <img
-                src={`${process.env.REACT_APP_CARTARO_1_URL}/${url}`}
+                src={`${cartaroOldUrl}/${url}`}
                 draggable="false"
                 alt={t('Kein Bildtext')}
               />
@@ -68,6 +69,7 @@ class InfoFPWPopup extends PureComponent {
 
 const mapStateToProps = state => ({
   language: state.app.language,
+  cartaroOldUrl: state.app.cartaroOldUrl,
 });
 
 InfoFPWPopup.propTypes = propTypes;

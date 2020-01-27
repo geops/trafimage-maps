@@ -70,6 +70,12 @@ const propTypes = {
   cartaroUrl: PropTypes.string,
 
   /**
+   * URL of the previous cartaro instance to use.
+   * @ignore
+   */
+  cartaroOldUrl: PropTypes.string,
+
+  /**
    * Base URL to use.
    * @ignore
    */
@@ -102,6 +108,7 @@ const attributes = {
   activeTopicKey: undefined,
   apiKey: undefined,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
