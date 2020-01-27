@@ -7,6 +7,8 @@ import ConstructionTopicInfo from './ConstructionTopicInfo';
 import HandicapTopicInfo from './HandicapTopicInfo';
 import InfoFPWTopicInfo from './InfoFPWTopicInfo';
 import StuetzpunktLayerInfo from './StuetzpunktLayerInfo';
+import BarrierfreierLayerInfo from './BarrierfreierLayerInfo';
+import NichtBarrierfreierLayerInfo from './NichtBarrierfreierLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import InterventionTopicInfo from './InterventionTopicInfo';
 import ParksLayerInfo from './ParksLayerInfo';
@@ -28,6 +30,8 @@ export default {
   HandicapTopicInfo,
   InfoFPWTopicInfo,
   StuetzpunktLayerInfo,
+  BarrierfreierLayerInfo,
+  NichtBarrierfreierLayerInfo,
   InfrastrukturTopicInfo,
   InterventionTopicInfo,
   ParksLayerInfo,
