@@ -240,8 +240,6 @@ bahnhofplaene.setChildren([
       id: 'printprodukte',
       type: 'symbol',
       source: 'stations',
-      // source: 'base',
-      // 'source-layer': 'osm_points',
       layout: {
         'icon-image': 'standort',
         'icon-size': 1,
@@ -268,8 +266,6 @@ bahnhofplaene.setChildren([
       id: 'interaktiv',
       type: 'symbol',
       source: 'stations',
-      // source: 'base',
-      // 'source-layer': 'osm_points',
       filter: ['has', 'url_interactive_plan'],
       layout: {
         'icon-image': 'standort',
@@ -331,15 +327,10 @@ export const netzkartePointLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.stationen',
   visible: true,
   mapboxLayer: sourcesLayer,
-  // queryRenderedLayersFilter: layer => {
-  //   return layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points';
-  // },
   styleLayer: {
     id: 'stations',
     type: 'circle',
     source: 'stations',
-    // source: 'base',
-    // 'source-layer': 'osm_points',
     paint: {
       'circle-radius': 10,
       'circle-color': 'rgb(0, 61, 155)',
