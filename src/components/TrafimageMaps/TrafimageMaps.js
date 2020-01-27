@@ -11,7 +11,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter } from '../../model/map/actions';
-import { setLanguage } from '../../model/app/actions';
+import { setLanguage, setCartaroOldUrl } from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -59,6 +59,11 @@ const propTypes = {
   cartaroUrl: PropTypes.string,
 
   /**
+   * URL endpoint for the previous Cartaro.
+   */
+  cartaroOldUrl: PropTypes.string,
+
+  /**
    * React app base URL
    */
   appBaseUrl: PropTypes.string,
@@ -85,6 +90,7 @@ const defaultProps = {
   zoom: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
@@ -105,7 +111,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, language } = this.props;
+    const { zoom, center, language, cartaroOldUrl } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -117,6 +123,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (language) {
       this.store.dispatch(setLanguage(language));
+    }
+
+    if (cartaroOldUrl) {
+      this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
     }
   }
 
