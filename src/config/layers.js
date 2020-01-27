@@ -433,33 +433,36 @@ export const parks = new TrafimageGeoServerWMSLayer({
 
 export const stuetzpunktBahnhoefe = new HandicapLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
+  key: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: false,
   properties: {
-    stutzpunkt: true,
+    handicapType: 'stuetzpunkt',
     hasInfos: true,
-    layerInfoComponent: 'StuetzpunktLayerInfo',
+    layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });
 
 export const barrierfreierBahnhoefe = new HandicapLayer({
   name: 'ch.sbb.barrierfreierbahnhoefe',
+  key: 'ch.sbb.barrierfreierbahnhoefe',
   visible: true,
   properties: {
-    barrierfree: true,
+    handicapType: 'barrierfree',
     hasInfos: true,
-    layerInfoComponent: 'BarrierfreierLayerInfo',
+    layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });
 
 export const nichtBarrierfreierBahnhoefe = new HandicapLayer({
   name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   visible: true,
   properties: {
-    barrierfree: false,
+    handicapType: 'notBarrierfree',
     hasInfos: true,
-    layerInfoComponent: 'NichtBarrierfreierLayerInfo',
+    layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });

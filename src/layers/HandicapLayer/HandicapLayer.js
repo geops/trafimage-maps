@@ -14,11 +14,10 @@ import LayerHelper from '../layerHelper';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
-  static getIconStyle(geometry, isHighlighted = false, barrierfree) {
-    if (typeof barrierfree === 'undefined') {
+  static getIconStyle(geometry, isHighlighted = false, handicapType) {
+    if (handicapType === 'stuetzpunkt') {
       return [
         new Style({
-          geometry,
           image: new Circle({
             radius: 15,
             fill: new Fill({
@@ -27,7 +26,6 @@ class HandicapLayer extends VectorLayer {
           }),
         }),
         new Style({
-          geometry,
           image: new Circle({
             radius: 9,
             fill: new Fill({
@@ -39,7 +37,6 @@ class HandicapLayer extends VectorLayer {
     }
     return [
       new Style({
-        geometry,
         image: new Circle({
           radius: 15,
           fill: new Fill({
@@ -48,10 +45,9 @@ class HandicapLayer extends VectorLayer {
         }),
       }),
       new Style({
-        geometry,
         image: new Icon({
           src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/${
-            barrierfree
+            handicapType === 'barrierfree'
               ? 'barrierfreierBahnhoefe'
               : 'nichtBarrierfreierBahnhoefe'
           }.png`,
@@ -62,26 +58,29 @@ class HandicapLayer extends VectorLayer {
   }
 
   constructor(options = {}) {
-    const { stutzpunkt, barrierfree } = options.properties;
+    const { handicapType } = options.properties;
 
     const olLayer = new OLVectorLayer({
-      style: (f, r) => this.style(f, r, barrierfree),
+      style: (f, r) => this.style(f, r, handicapType),
       source: new OLVectorSource({
         format: new GeoJSON(),
         loader: () => {
           fetch(
             `${this.cartaroUrl}handicap/items/?has_changes=true&${
-              stutzpunkt ? 'stuetzpunktbahnhof=true' : ''
+              handicapType === 'stuetzpunkt' ? 'stuetzpunktbahnhof=true' : ''
             }`,
           )
             .then(data => data.json())
             .then(data => {
               const format = new GeoJSON();
               let features = format.readFeatures(data);
-              if (typeof barrierfree !== 'undefined') {
-                features = features.filter(
-                  feat => feat.get('barrierefreier_bahnhof') === barrierfree,
-                );
+              if (handicapType !== 'stuetzpunkt') {
+                features = features.filter(feat => {
+                  if (handicapType === 'barrierfree') {
+                    return feat.get('barrierefreier_bahnhof') === true;
+                  }
+                  return feat.get('barrierefreier_bahnhof') === false;
+                });
               }
               this.olLayer.getSource().clear();
               this.olLayer.getSource().addFeatures(features);
@@ -96,6 +95,7 @@ class HandicapLayer extends VectorLayer {
       olLayer,
     });
 
+    this.styleCache = {};
     this.setVisible(this.visible);
 
     this.wktFormat = new WKT();
@@ -115,7 +115,7 @@ class HandicapLayer extends VectorLayer {
    * @param {ol.feature} feature
    * @returns {Object|null}
    */
-  style(feature, resolution, barrierfree) {
+  style(feature, resolution, handicapType) {
     let geometry = feature.getGeometry();
     let gen = 100;
     gen = resolution < 500 ? 30 : gen;
@@ -133,7 +133,18 @@ class HandicapLayer extends VectorLayer {
     }
 
     const isHighlighted = feature === this.clickedFeature;
-    return HandicapLayer.getIconStyle(geometry, isHighlighted, barrierfree);
+    const highlightCache = isHighlighted ? 'highlighted' : 'notHighlighted';
+
+    this.styleCache[handicapType] = this.styleCache[handicapType] || {};
+    if (!this.styleCache[handicapType][highlightCache]) {
+      this.styleCache[handicapType][
+        highlightCache
+      ] = HandicapLayer.getIconStyle(geometry, isHighlighted, handicapType);
+
+      return this.styleCache[handicapType][highlightCache];
+    }
+
+    return this.styleCache[handicapType][highlightCache];
   }
 }
 
