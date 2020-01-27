@@ -58,19 +58,14 @@ const HandicapLayerInfo = ({ t, properties, language }) => {
   const handicapType = properties.get('handicapType');
 
   let image = <div className="stuetzpunkt-layer-icon" />;
-  if (handicapType === 'barrierfree') {
+  if (handicapType !== 'stuetzpunkt') {
     image = (
       <img
-        src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/barrierfreierBahnhoefe.png`}
-        draggable="false"
-        alt={t('Kein Bildtext')}
-      />
-    );
-  }
-  if (handicapType === 'notBarrierfree') {
-    image = (
-      <img
-        src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/nichtBarrierfreierBahnhoefe.png`}
+        src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/${
+          handicapType === 'barrierfree'
+            ? 'barrierfreierBahnhoefe'
+            : 'nichtBarrierfreierBahnhoefe'
+        }.png`}
         draggable="false"
         alt={t('Kein Bildtext')}
       />
