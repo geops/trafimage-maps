@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 import './HandicapLayerInfo.scss';
 
@@ -14,8 +13,8 @@ const propTypes = {
 const defaultProps = {};
 
 const names = {
-  barrierfree: 'Barrierefreier Bahnhöfe',
-  notBarrierfree: 'Nicht barrierefreier Bahnhöfe',
+  barrierfree: 'Barrierefreie Bahnhöfe',
+  notBarrierfree: 'Nicht barrierefreie Bahnhöfe',
   stuetzpunkt: 'bahnhof_plural',
 };
 
@@ -23,7 +22,7 @@ const desc = (name, lng) => {
   if (lng === 'de') {
     return (
       <div>
-        {name} an denen beim SBB Call Center Handicap unter der Nummer{' '}
+        {name}, an denen beim SBB Call Center Handicap unter der Nummer{' '}
         <a href="tel:0800 007 102">0800 007 102</a> eine Hilfestellung bestellt
         werden kann.
       </div>
@@ -83,4 +82,4 @@ const HandicapLayerInfo = ({ t, properties, language }) => {
 HandicapLayerInfo.propTypes = propTypes;
 HandicapLayerInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(HandicapLayerInfo);
+export default withTranslation()(HandicapLayerInfo);

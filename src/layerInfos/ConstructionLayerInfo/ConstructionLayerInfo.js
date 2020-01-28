@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 import './ConstructionLayerInfo.scss';
 
@@ -34,4 +33,4 @@ const ConstructionLayerInfo = ({ t, properties }) => {
 ConstructionLayerInfo.propTypes = propTypes;
 ConstructionLayerInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(ConstructionLayerInfo);
+export default withTranslation()(ConstructionLayerInfo);
