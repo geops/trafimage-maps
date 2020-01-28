@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 const propTypes = {
   language: PropTypes.string.isRequired,
@@ -64,4 +63,4 @@ const MobzTopicInfo = ({ language, t, properties }) => {
 MobzTopicInfo.propTypes = propTypes;
 MobzTopicInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(MobzTopicInfo);
+export default withTranslation()(MobzTopicInfo);

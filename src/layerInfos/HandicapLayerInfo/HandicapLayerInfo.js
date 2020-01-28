@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 import './HandicapLayerInfo.scss';
 
@@ -83,4 +82,4 @@ const HandicapLayerInfo = ({ t, properties, language }) => {
 HandicapLayerInfo.propTypes = propTypes;
 HandicapLayerInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(HandicapLayerInfo);
+export default withTranslation()(HandicapLayerInfo);
