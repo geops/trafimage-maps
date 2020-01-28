@@ -23,7 +23,7 @@ const desc = (name, lng) => {
   if (lng === 'de') {
     return (
       <div>
-        {name} an denen beim SBB Call Center Handicap unter der Nummer{' '}
+        {name}, an denen beim SBB Call Center Handicap unter der Nummer{' '}
         <a href="tel:0800 007 102">0800 007 102</a> eine Hilfestellung bestellt
         werden kann.
       </div>
