@@ -14,8 +14,8 @@ const propTypes = {
 const defaultProps = {};
 
 const names = {
-  barrierfree: 'Barrierefreier Bahnhöfe',
-  notBarrierfree: 'Nicht barrierefreier Bahnhöfe',
+  barrierfree: 'Barrierefreie Bahnhöfe',
+  notBarrierfree: 'Nicht barrierefreie Bahnhöfe',
   stuetzpunkt: 'bahnhof_plural',
 };
 
