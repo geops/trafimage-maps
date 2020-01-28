@@ -133,18 +133,17 @@ class HandicapLayer extends VectorLayer {
     }
 
     const isHighlighted = feature === this.clickedFeature;
-    const highlightCache = isHighlighted ? 'highlighted' : 'notHighlighted';
+    const cacheKey = `${handicapType}_${isHighlighted}`;
 
-    this.styleCache[handicapType] = this.styleCache[handicapType] || {};
-    if (!this.styleCache[handicapType][highlightCache]) {
-      this.styleCache[handicapType][
-        highlightCache
-      ] = HandicapLayer.getIconStyle(geometry, isHighlighted, handicapType);
-
-      return this.styleCache[handicapType][highlightCache];
+    if (!this.styleCache[cacheKey]) {
+      this.styleCache[cacheKey] = HandicapLayer.getIconStyle(
+        geometry,
+        isHighlighted,
+        handicapType,
+      );
     }
 
-    return this.styleCache[handicapType][highlightCache];
+    return this.styleCache[cacheKey];
   }
 }
 
