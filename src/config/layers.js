@@ -232,9 +232,31 @@ export const bahnhofplaene = new Layer({
 
 bahnhofplaene.setChildren([
   new MapboxStyleLayer({
-    name: 'ch.sbb.bahnhofplaene.printprodukte',
+    name: 'ch.sbb.bahnhofplaene.interaktiv',
     radioGroup: 'bahnhofplaene',
     visible: false,
+    mapboxLayer: sourcesLayer,
+    styleLayer: {
+      id: 'interaktiv',
+      type: 'symbol',
+      source: 'stations',
+      filter: ['has', 'url_interactive_plan'],
+      layout: {
+        'icon-image': 'standort',
+        'icon-size': 1,
+      },
+    },
+    filters: ['has', 'url_interactive_plan'],
+    properties: {
+      hasInfos: true,
+      description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
+      popupComponent: 'BahnhofplanPopup',
+    },
+  }),
+  new MapboxStyleLayer({
+    name: 'ch.sbb.bahnhofplaene.printprodukte',
+    radioGroup: 'bahnhofplaene',
+    visible: true,
     mapboxLayer: sourcesLayer,
     styleLayer: {
       id: 'printprodukte',
@@ -254,28 +276,6 @@ bahnhofplaene.setChildren([
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-      popupComponent: 'BahnhofplanPopup',
-    },
-  }),
-  new MapboxStyleLayer({
-    name: 'ch.sbb.bahnhofplaene.interaktiv',
-    radioGroup: 'bahnhofplaene',
-    visible: false,
-    mapboxLayer: sourcesLayer,
-    styleLayer: {
-      id: 'interaktiv',
-      type: 'symbol',
-      source: 'stations',
-      filter: ['has', 'url_interactive_plan'],
-      layout: {
-        'icon-image': 'standort',
-        'icon-size': 1,
-      },
-    },
-    filters: ['has', 'url_interactive_plan'],
-    properties: {
-      hasInfos: true,
-      description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
       popupComponent: 'BahnhofplanPopup',
     },
   }),
