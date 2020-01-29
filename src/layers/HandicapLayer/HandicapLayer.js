@@ -14,7 +14,7 @@ import LayerHelper from '../layerHelper';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
-  static getIconStyle(geometry, isHighlighted = false, handicapType) {
+  static getIconStyle(handicapType, isHighlighted = false) {
     if (handicapType === 'stuetzpunkt') {
       return [
         new Style({
@@ -137,9 +137,8 @@ class HandicapLayer extends VectorLayer {
 
     if (!this.styleCache[cacheKey]) {
       this.styleCache[cacheKey] = HandicapLayer.getIconStyle(
-        geometry,
-        isHighlighted,
         handicapType,
+        isHighlighted,
       );
     }
 
