@@ -208,7 +208,7 @@ export const mobz = {
   permission: 'mobz',
   layerInfoComponent: 'MobzTopicInfo',
   infos: {
-    owner: 'I-FN-NED-GAN, Hannes Maichle',
+    owner: 'I-NAT-NET-AN, Hannes Maichle',
     email: 'hannes.maichle@sbb.ch',
   },
 };
@@ -220,7 +220,7 @@ export const mobzWhatIf = {
   permission: 'mobz_what_if',
   layerInfoComponent: 'MobzTopicInfo',
   infos: {
-    owner: 'I-FN-NED-GAN, Martina Hauri',
+    owner: 'I-NAT-INK, Martina Hauri',
     email: 'martina.hauri@sbb.ch',
   },
 };
