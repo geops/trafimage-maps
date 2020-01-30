@@ -5,6 +5,7 @@ import { transform } from 'ol/proj';
 
 import Search from '../Search';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 
 const endpoint = 'https://api.geops.io/stops/v1/';
 
@@ -37,25 +38,32 @@ class StopFinder extends Search {
   openPopup(item) {
     this.popupItem = item;
     const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+    const layer = layerService.getLayer('ch.sbb.netzkarte.data');
 
     if (layer) {
-      const { mbMap } = layer.mapboxLayer;
-
-      if (mbMap.isStyleLoaded()) {
-        this.onDataEvent();
-      } else {
-        mbMap.on('data', this.onDataEvent);
-      }
+      const { mbMap } = layer;
+      mbMap.once('idle', () => {
+        if (mbMap.isSourceLoaded('base')) {
+          this.onDataEvent();
+        } else {
+          mbMap.on('sourcedata', this.onDataEvent);
+        }
+      });
     }
   }
 
   getFeatureInfoForLayer(layer) {
     const uic = parseInt(this.popupItem.properties.id, 10);
-    const mbFeature = layer
-      .getFeatures()
-      .find(s => parseInt(8500000 + s.properties.didok, 10) === uic);
 
+    console.log('GET features', layer.getFeatures());
+    console.log('this.popupItem.properties', this.popupItem.properties);
+    const mbFeature = layer.getFeatures({
+      source: 'base',
+      sourceLayer: 'osm_points',
+      filter: ['==', 'uid', this.popupItem.properties.uid],
+    });
+
+    console.log('GET mbFeature', mbFeature);
     if (mbFeature) {
       const feature = new Feature({
         geometry: new Point(
@@ -75,21 +83,25 @@ class StopFinder extends Search {
 
   onDataEvent() {
     const { layerService, dispatchSetClickedFeatureInfo } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
-    const { mbMap } = layer.mapboxLayer;
+    const layer = layerService.getLayer('ch.sbb.netzkarte.data');
+    const { mbMap } = layer;
 
-    if (mbMap.isStyleLoaded()) {
-      mbMap.off('data', this.onDataEvent);
+    if (mbMap.isSourceLoaded('base')) {
+      mbMap.off('sourcedata', this.onDataEvent);
     }
 
     const infoLayers = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getVisible() && l instanceof MapboxStyleLayer);
+      .filter(l => l.getVisible() && l instanceof TrafimageMapboxLayer);
 
     const infos = infoLayers
       .map(l => this.getFeatureInfoForLayer(l))
       .filter(i => i);
 
+    infos.forEach(info => {
+      // eslint-disable-next-line no-param-reassign
+      info.popupComponent = 'NetzkartePopup';
+    });
     dispatchSetClickedFeatureInfo(infos);
   }
 }

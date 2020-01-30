@@ -125,13 +125,18 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  const coordinates = transformCoords(
+  const coordinates =
     feature.get('longitude') && feature.get('latitude')
-      ? [feature.get('longitude'), feature.get('latitude')]
-      : feature.getGeometry().getCoordinates(),
-    'EPSG:21781',
-    projection.value,
-  );
+      ? transformCoords(
+          [feature.get('longitude'), feature.get('latitude')],
+          'EPSG:21781',
+          projection.value,
+        )
+      : transformCoords(
+          feature.getGeometry().getCoordinates(),
+          'EPSG:3857',
+          projection.value,
+        );
 
   const formatedCoords = coordinates.map(input => {
     const coord = Math.round(parseFloat(input) * 10 ** 4) / 10 ** 4;

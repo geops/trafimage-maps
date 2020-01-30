@@ -68,6 +68,9 @@ export const dataLayer = new TrafimageMapboxLayer({
   properties: {
     hideInLegend: true,
   },
+  properties: {
+    hasInfos: true,
+  },
 });
 
 let osmPointsLayers = [];

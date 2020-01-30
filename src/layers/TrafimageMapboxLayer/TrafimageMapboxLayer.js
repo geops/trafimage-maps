@@ -62,6 +62,18 @@ class TrafimageMapboxLayer extends MapboxLayer {
         });
       });
   }
+
+  getFeatures({ source, sourceLayer, filter } = {}) {
+    const { mbMap } = this;
+    // Ignore the getFeatureInfo until the mapbox map is loaded
+    if (!mbMap || !mbMap.isStyleLoaded()) {
+      return [];
+    }
+    return mbMap.querySourceFeatures(source, {
+      sourceLayer,
+      filter,
+    });
+  }
 }
 
 export default TrafimageMapboxLayer;

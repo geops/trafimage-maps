@@ -13,10 +13,10 @@ const Popup = () => {
     return null;
   }
 
-  const filtered = clickedFeatureInfo.filter(({ layer }) =>
-    layer.get('popupComponent'),
+  const filtered = clickedFeatureInfo.filter(
+    info => info.layer.get('popupComponent') || info.popupComponent,
   );
-
+  console.log(filtered);
   if (!filtered.length) {
     return null;
   }

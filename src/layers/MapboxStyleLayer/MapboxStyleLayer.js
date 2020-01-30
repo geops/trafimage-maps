@@ -193,15 +193,11 @@ class MapboxStyleLayer extends Layer {
     if (!mbMap || !mbMap.isStyleLoaded()) {
       return [];
     }
-
-    return mbMap.querySourceFeatures(
-      this.styleLayers.map(s => s && s.source),
-      {
-        sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
-        // filter: e => e,
-        validate: false,
-      },
+    console.log(
+      'mbMap.querySourceFeatures',
+      mbMap.querySourceFeatures('stations'),
     );
+    return mbMap.querySourceFeatures('base');
   }
 
   setFilter(filter) {
