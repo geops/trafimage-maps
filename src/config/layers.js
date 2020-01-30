@@ -256,7 +256,7 @@ bahnhofplaene.setChildren([
   new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.printprodukte',
     radioGroup: 'bahnhofplaene',
-    visible: true,
+    visible: false,
     mapboxLayer: sourcesLayer,
     styleLayer: {
       id: 'printprodukte',
