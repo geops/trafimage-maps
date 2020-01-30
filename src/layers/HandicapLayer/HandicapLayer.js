@@ -14,10 +14,11 @@ import LayerHelper from '../layerHelper';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
-  static getIconStyle(handicapType, isHighlighted = false) {
+  static getIconStyle(geometry, handicapType, isHighlighted = false) {
     if (handicapType === 'stuetzpunkt') {
       return [
         new Style({
+          geometry,
           image: new Circle({
             radius: 15,
             fill: new Fill({
@@ -26,6 +27,7 @@ class HandicapLayer extends VectorLayer {
           }),
         }),
         new Style({
+          geometry,
           image: new Circle({
             radius: 9,
             fill: new Fill({
@@ -37,6 +39,7 @@ class HandicapLayer extends VectorLayer {
     }
     return [
       new Style({
+        geometry,
         image: new Circle({
           radius: 15,
           fill: new Fill({
@@ -45,6 +48,7 @@ class HandicapLayer extends VectorLayer {
         }),
       }),
       new Style({
+        geometry,
         image: new Icon({
           src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/${
             handicapType === 'barrierfree'
@@ -95,7 +99,6 @@ class HandicapLayer extends VectorLayer {
       olLayer,
     });
 
-    this.styleCache = {};
     this.setVisible(this.visible);
 
     this.wktFormat = new WKT();
@@ -133,16 +136,8 @@ class HandicapLayer extends VectorLayer {
     }
 
     const isHighlighted = feature === this.clickedFeature;
-    const cacheKey = `${handicapType}_${isHighlighted}`;
 
-    if (!this.styleCache[cacheKey]) {
-      this.styleCache[cacheKey] = HandicapLayer.getIconStyle(
-        handicapType,
-        isHighlighted,
-      );
-    }
-
-    return this.styleCache[cacheKey];
+    return HandicapLayer.getIconStyle(geometry, handicapType, isHighlighted);
   }
 }
 
