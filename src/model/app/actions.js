@@ -8,13 +8,17 @@ export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
 export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
+export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
 
 export const setTopics = data => ({ type: SET_TOPICS, data });
 
 export const setActiveTopic = data => ({ type: SET_ACTIVE_TOPIC, data });
 
-export const setLanguage = data => ({ type: SET_LANGUAGE, data });
-
+export const setLanguage = data => {
+  // Set HTML language for screen readers.
+  document.documentElement.lang = data;
+  return { type: SET_LANGUAGE, data };
+};
 export const setProjection = data => ({ type: SET_PROJECTION, data });
 
 export const setClickedFeatureInfo = data => ({
@@ -40,3 +44,18 @@ export const setDeparturesFilter = data => ({
   type: SET_DEPARTURES_FILTER,
   data,
 });
+
+export const fetchPermissionsInfos = appBaseUrl => dispatch => {
+  const url = `${appBaseUrl}/permissions`;
+  fetch(url, { credentials: 'include' })
+    .then(res => res.json())
+    .then(data => {
+      dispatch({
+        type: SET_PERMISSIONS_INFOS,
+        data: data || {
+          user: null,
+          permissions: [],
+        },
+      });
+    });
+};

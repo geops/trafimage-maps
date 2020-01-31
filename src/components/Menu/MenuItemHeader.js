@@ -21,6 +21,7 @@ const defaultProps = {
 const MenuItemHeader = ({ className, title, icon, isOpen, onToggle }) => (
   <Button
     className={`${className}${isOpen ? ' open' : ''}`}
+    ariaExpanded={isOpen}
     onClick={() => onToggle()}
   >
     {icon && <div className="wkp-menu-item-header-icon">{icon}</div>}

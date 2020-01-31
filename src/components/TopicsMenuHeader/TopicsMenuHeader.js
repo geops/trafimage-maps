@@ -59,6 +59,7 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
   return (
     <Button
       className={`wkp-menu-header${isOpen ? ' open' : ''}`}
+      ariaExpanded={isOpen}
       tabIndex={0}
       title={t('Menü')}
       onClick={() => onToggle()}

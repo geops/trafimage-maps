@@ -13,13 +13,22 @@
 
   .ta-mail-icon {
     a {
+      svg {
+        font-size: 23px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  .ta-draw-icon {
+    .tm-button {
+      height: 30px;
       display: flex;
       align-items: center;
       justify-content: space-around;
 
       svg {
-        font-size: 23px;
-        margin-bottom: 2px;
+        font-size: 21px;
       }
     }
   }
@@ -42,11 +51,11 @@
   }
 
   .ta-twitter-icon,
-  .tm-canvas-save-button {
+  .rs-canvas-save-button {
     font-size: 30px;
   }
 
-  .tm-canvas-save-button {
+  .rs-canvas-save-button {
     font-size: 28px;
   }
 }

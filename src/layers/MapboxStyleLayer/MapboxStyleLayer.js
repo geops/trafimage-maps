@@ -40,16 +40,27 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
 class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
     super(options);
-
+    this.options = options;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
     this.featureInfoFilter = options.featureInfoFilter || (obj => obj);
+    this.queryRenderedLayersFilter = options.queryRenderedLayersFilter;
     this.highlightedFeatures = [];
     this.selectedFeatures = [];
     this.styleLayers =
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
+    if (options.filters) {
+      this.addDynamicFilters =
+        typeof options.filters === 'function'
+          ? () => {
+              this.setFilter(options.filters(this));
+            }
+          : () => {
+              this.setFilter(options.filters);
+            };
+    }
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map(s => s.id);
@@ -94,7 +105,16 @@ class MapboxStyleLayer extends Layer {
     );
 
     this.olListenersKeys.push(
-      this.mapboxLayer.on('change:styleurl', this.addStyleLayers),
+      this.mapboxLayer.on('change:styleurl', () => {
+        this.addStyleLayers();
+        if (this.addDynamicFilters) {
+          this.addDynamicFilters();
+        }
+      }),
+      // this.addDynamicFilters &&
+      //   this.map.on('moveend', () => {
+      //     this.addDynamicFilters();
+      //   }),
     );
   }
 
@@ -117,8 +137,8 @@ class MapboxStyleLayer extends Layer {
       if (!mbMap.getLayer(styleLayer.id)) {
         mbMap.addLayer(styleLayer);
       }
-      applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
     });
+    applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
   }
 
   removeStyleLayers() {
@@ -133,6 +153,10 @@ class MapboxStyleLayer extends Layer {
   onLoad() {
     this.isMbMapLoaded = true;
     this.addStyleLayers();
+
+    if (this.addDynamicFilters) {
+      this.addDynamicFilters();
+    }
   }
 
   /**
@@ -149,7 +173,10 @@ class MapboxStyleLayer extends Layer {
     }
     return this.mapboxLayer
       .getFeatureInfoAtCoordinate(coordinate, {
-        layers: this.styleLayers.map(s => s && s.id),
+        layers: (this.queryRenderedLayersFilter
+          ? mbMap.getStyle().layers.filter(this.queryRenderedLayersFilter)
+          : this.styleLayers
+        ).map(s => s && s.id),
         validate: false,
       })
       .then(featureInfo => {
@@ -181,12 +208,27 @@ class MapboxStyleLayer extends Layer {
     );
   }
 
+  setFilter(filter) {
+    this.styleLayers.forEach(({ id }) => {
+      this.mapboxLayer.mbMap.setFilter(id, filter);
+    });
+  }
+
   setHoverState(features = [], state) {
     const options = this.styleLayers[0];
     features.forEach(feature => {
-      if (!options.source || !options['source-layer'] || !feature.getId()) {
+      if ((!options.source && !options['source-layer']) || !feature.getId()) {
+        if (!feature.getId()) {
+          // eslint-disable-next-line no-console
+          console.warn(
+            "No feature's id found. To use the feature state functionnality, tiles must be generated with --generate-ids. See https://github.com/mapbox/tippecanoe#adding-calculated-attributes.",
+            feature.getId(),
+            feature.getProperties(),
+          );
+        }
         return;
       }
+
       this.mapboxLayer.mbMap.setFeatureState(
         {
           id: feature.getId(),
@@ -218,6 +260,15 @@ class MapboxStyleLayer extends Layer {
 
     // Add highlight
     this.setHoverState(this.highlightedFeatures, true);
+  }
+
+  /**
+   * Create exact copy of the MapboxLayer
+   * @returns {MapboxLayer} MapboxLayer
+   */
+  clone(mapboxLayer) {
+    const options = { ...this.options, mapboxLayer };
+    return new MapboxStyleLayer(options);
   }
 }
 

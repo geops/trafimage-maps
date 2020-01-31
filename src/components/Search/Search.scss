@@ -1,5 +1,42 @@
 @import '../../globals.scss';
 
+.tm-trafimage-maps {
+  &.tm-w-m,
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-search {
+      right: 9px;
+      max-width: 100%;
+      left: 55px;
+    }
+
+    .wkp-search-toggle-container {
+      display: none;
+    }
+
+    .wkp-search-toggle-button {
+      display: block;
+      margin-right: 35px;
+
+      svg {
+        height: 22px;
+        width: 22px;
+      }
+    }
+  }
+
+  &.tm-w-m,
+  &.tm-w-s {
+    .wkp-search-toggle-button {
+      margin-right: 75px;
+    }
+
+    .wkp-search-toggle-container--open {
+      margin: 0;
+    }
+  }
+}
+
 .rt-search {
   position: absolute;
   top: 25px;

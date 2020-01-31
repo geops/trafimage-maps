@@ -7,13 +7,13 @@ import './ConstructionLayerInfo.scss';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
-  infos: PropTypes.object.isRequired,
+  properties: PropTypes.object.isRequired,
 };
 
 const defaultProps = {};
 
-const ConstructionLayerInfo = ({ t, infos }) => {
-  const config = infos.get('construction');
+const ConstructionLayerInfo = ({ t, properties }) => {
+  const config = properties.get('construction');
   const filename = `${config.art}_${config.ort}`.replace(
     /[^A-Z,^0-9,-_]/gi,
     '',
@@ -26,7 +26,7 @@ const ConstructionLayerInfo = ({ t, infos }) => {
         draggable="false"
         alt={t('Kein Bildtext')}
       />
-      {t(`${infos.key}-desc`)}
+      {t(`${properties.key}-desc`)}
     </div>
   );
 };

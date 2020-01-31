@@ -11,7 +11,7 @@ import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter } from '../../model/map/actions';
-import { setTopics, setLanguage } from '../../model/app/actions';
+import { setLanguage } from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -72,6 +72,11 @@ const propTypes = {
    * URL endpoint for vector tiles hosted by geOps.
    */
   vectorTilesUrl: PropTypes.string,
+
+  /**
+   * URL to request permission.
+   */
+  permissionUrl: PropTypes.string,
 };
 
 const defaultProps = {
@@ -83,6 +88,7 @@ const defaultProps = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  permissionUrl: null,
   topics: null,
   language: 'de',
 };
@@ -99,7 +105,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, topics, language } = this.props;
+    const { zoom, center, language } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -109,17 +115,13 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setCenter(center));
     }
 
-    if (topics) {
-      this.store.dispatch(setTopics(topics));
-    }
-
     if (language) {
       this.store.dispatch(setLanguage(language));
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center, topics } = this.props;
+    const { zoom, center } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -127,10 +129,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
-    }
-
-    if (topics !== prevProps.topics) {
-      this.store.dispatch(setTopics(topics));
     }
   }
 
@@ -143,6 +141,7 @@ class TrafimageMaps extends React.PureComponent {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      permissionUrl,
     } = this.props;
 
     return (
@@ -153,6 +152,7 @@ class TrafimageMaps extends React.PureComponent {
           topics={topics}
           cartaroUrl={cartaroUrl}
           appBaseUrl={appBaseUrl}
+          permissionUrl={permissionUrl}
           vectorTilesKey={vectorTilesKey}
           vectorTilesUrl={vectorTilesUrl}
         />

@@ -65,7 +65,9 @@ function withResizing(MenuToBeResized) {
         menuHeight = mapBottom - elemRect.top - 35;
       }
 
-      this.setState({ menuHeight });
+      if (menuHeight >= 0) {
+        this.setState({ menuHeight });
+      }
     }
 
     render() {

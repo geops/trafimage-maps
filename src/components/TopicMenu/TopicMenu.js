@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import { FaInfoCircle } from 'react-icons/fa';
+import { FaInfoCircle, FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
@@ -126,13 +126,30 @@ class TopicMenu extends PureComponent {
     return (
       <Button
         className={className}
-        title={t('Layerinformationen anzeigen')}
+        title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
         onClick={() => {
           dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
         }}
       >
         <FaInfoCircle focusable={false} />
       </Button>
+    );
+  }
+
+  renderLockIcon(topic) {
+    const { activeTopic, t } = this.props;
+
+    const className = `wkp-lock-icon${
+      activeTopic.key === topic.key ? ' wkp-active' : ''
+    }`;
+
+    return (
+      <div className={className}>
+        <FaLock
+          focusable={false}
+          title={t('Vertraulich/ Nur SBB-intern verfügbar')}
+        />
+      </div>
     );
   }
 
@@ -178,6 +195,7 @@ class TopicMenu extends PureComponent {
             className="wkp-topic-menu-item"
             role="button"
             tabIndex={0}
+            aria-expanded={!isCollapsed}
             onClick={() => this.onTopicClick(topic)}
             onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
           >
@@ -196,10 +214,13 @@ class TopicMenu extends PureComponent {
               }}
             />
           </div>
-          {menuOpen &&
-            topic &&
-            (topic.description || topic.layerInfoComponent) &&
-            this.renderInfoButton(topic)}
+          <div className="wkp-topic-icons">
+            {topic && topic.permission && this.renderLockIcon(topic)}
+            {menuOpen &&
+              topic &&
+              (topic.description || topic.layerInfoComponent) &&
+              this.renderInfoButton(topic)}
+          </div>
         </div>
         <div className="wkp-topic-content">
           <Collapsible isCollapsed={isCollapsed}>
@@ -236,6 +257,7 @@ TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   menuOpen: state.app.menuOpen,
+  map: state.app.map,
   activeTopic: state.app.activeTopic,
   selectedForInfos: state.app.selectedForInfos,
 });

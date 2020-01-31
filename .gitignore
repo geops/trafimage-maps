@@ -5,7 +5,6 @@
 
 # others
 /doc/build
-/cypress
 
 # testing
 /coverage

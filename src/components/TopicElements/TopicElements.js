@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
-import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
+import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -45,10 +45,12 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
+  appBaseUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
+  appBaseUrl: null,
 };
 
 const getComponents = (defaultComponents, elementsToDisplay) =>
@@ -56,17 +58,17 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ apiKey, history }) {
+function TopicElements({ apiKey, history, appBaseUrl }) {
   const ref = useRef(null);
   const { activeTopic, layerService, map } = useSelector(state => state.app);
   const [tabFocus, setTabFocus] = useState(false);
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
     const focusTab = e => e.which === 9 && setTabFocus(true);
-    document.addEventListener('click', unfocusTab);
+    document.addEventListener('mousedown', unfocusTab);
     document.addEventListener('keydown', focusTab);
     return function cleanup() {
-      document.removeEventListener('click', unfocusTab);
+      document.removeEventListener('mousedown', unfocusTab);
       document.removeEventListener('keydown', focusTab);
     };
   });
@@ -97,7 +99,7 @@ function TopicElements({ apiKey, history }) {
 
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
-    { shareMenu: <ShareMenu /> },
+    { shareMenu: <ShareMenu appBaseUrl={appBaseUrl} /> },
     elements,
   );
 
@@ -112,11 +114,11 @@ function TopicElements({ apiKey, history }) {
 
   // Define which components to display.
   const appComponents = {
-    header: <Header />,
+    header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search apiKey={apiKey} />,
     telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup />,
-    permalink: <Permalink history={history} />,
+    permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
     menu: (
       <Menu>
         <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
@@ -140,6 +142,7 @@ function TopicElements({ apiKey, history }) {
   };
 
   const appElements = getComponents(appComponents, elements);
+
   return (
     <div
       ref={ref}

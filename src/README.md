@@ -8,6 +8,10 @@ import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
 import topic from 'trafimage-maps/examples/WebComponent/topic';
 
+// The `apiKey` used here is for demonstration purposes only.
+// Please get your own api key at https://developer.geops.io/.
+const apiKey = window.apiKey;
+
 const App = () => {
   const ref = useRef();
 
@@ -22,7 +26,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <trafimage-maps ref={ref} zoom="7"/>
+      <trafimage-maps ref={ref} zoom="7" apiKey={apiKey} />
     </div>
   );
 }

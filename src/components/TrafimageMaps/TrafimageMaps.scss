@@ -31,11 +31,11 @@
     }
   }
 
-  .tm-zooms-bar {
+  .rs-zooms-bar {
     position: relative;
   }
 
-  .tm-base-layer-toggler {
+  .rs-base-layer-toggler {
     position: absolute;
     bottom: 40px;
     left: 10px;
@@ -45,12 +45,12 @@
     // For some reasons, after a click on tm-base-layer-item button,
     // we are not able to click on next and previous button anymore because
     // they are behind the tm-base-layer-item button.
-    .tm-base-layer-item {
+    .rs-base-layer-item {
       z-index: 0;
     }
 
-    .tm-base-layer-previous,
-    .tm-base-layer-next {
+    .rs-base-layer-previous,
+    .rs-base-layer-next {
       z-index: 1;
     }
   }
@@ -65,6 +65,14 @@
     bottom: 0;
     right: 0;
     left: 0;
+  }
+
+  .rs-popup {
+    .rs-popup-container {
+      .rs-popup-body {
+        padding: 0;
+      }
+    }
   }
 
   select {
@@ -88,7 +96,7 @@
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
-    .tm-base-layer-toggler {
+    .rs-base-layer-toggler {
       display: none;
     }
 
@@ -141,8 +149,7 @@
     }
 
     .wkp-search {
-      top: 5px;
-      left: 250px;
+      top: 6px;
     }
 
     .wkp-topic-content {
@@ -162,33 +169,27 @@
     }
 
     .wkp-topic-menu-item {
-      margin: 4px;
+      margin: 4px 40px 4px 4px;
       height: 52px;
 
       &.active {
         border-bottom: 1px solid #eee;
+      }
+
+      .wkp-layer-toggler {
+        position: absolute;
+        right: 5px;
+        top: 24px;
+      }
+
+      .wkp-info-topic-bt {
+        bottom: 0;
       }
     }
   }
 
   &.tm-w-s,
   &.tm-w-xs {
-    .wkp-search {
-      right: 9px;
-      max-width: 100%;
-      left: 100px;
-    }
-
-    .wkp-search-toggle-container {
-      display: none;
-    }
-
-    .wkp-search-toggle-button,
-    .wkp-search-toggle-container--open {
-      display: block;
-      margin-right: 0;
-    }
-
     .wkp-bus-line-popup {
       max-width: 200px;
     }
@@ -199,8 +200,8 @@
   &.tm-h-xs {
     .wkp-geolocation,
     .wkp-fit-extent,
-    .wkp-zoom-in,
-    .wkp-zoom-out {
+    .rs-zoom-in,
+    .rs-zoom-out {
       margin: 10px 0;
     }
   }

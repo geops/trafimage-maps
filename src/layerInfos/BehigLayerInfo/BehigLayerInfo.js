@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
+import Link from '../../components/Link';
 
 import './BehigLayerInfo.scss';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
-  infos: PropTypes.object.isRequired,
+  properties: PropTypes.object.isRequired,
 };
 
 const defaultProps = {};
 
-const BehigLayerInfo = ({ t, language, infos }) => {
-  const config = infos.get('behig');
+const BehigLayerInfo = ({ t, language, properties }) => {
+  const config = properties.get('behig');
   const key = config.status.replace(/\s/g, '_');
 
   const img = (
@@ -26,11 +27,7 @@ const BehigLayerInfo = ({ t, language, infos }) => {
   );
 
   const url = t('www.sbb.ch/handicap');
-  const link = (
-    <a href={`https://${url}`} rel="noopener noreferrer" target="_blank">
-      {url}
-    </a>
-  );
+  const link = <Link href={`https://${url}`}>{url}</Link>;
 
   const desc = {
     OK: {
