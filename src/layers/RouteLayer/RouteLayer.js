@@ -26,7 +26,7 @@ class RouteLayer extends CasaLayer {
       ...options,
     });
 
-    this.url = 'https://api.geops.io/routing/v1';
+    this.url = 'https://api.geops.io/routing/v1/';
 
     this.selectedRouteIds = [];
 
