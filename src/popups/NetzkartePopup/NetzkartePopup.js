@@ -132,7 +132,7 @@ function NetzkartePopup({ feature }) {
           parseFloat(feature.get('latitude'), 10),
         ]
       : feature.getGeometry().getCoordinates(),
-    'EPSG:21781',
+    'EPSG:4326',
     projection.value,
   );
 
