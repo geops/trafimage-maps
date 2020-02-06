@@ -49,6 +49,7 @@ class ZoneLayer extends CasaLayer {
     super({
       name: 'Verbundzonen',
       olLayer: new OLVectorLayer({
+        className: 'Verbundzonen', // needed for forEachLayerAtPixel
         source: new VectorSource(),
         style: (f, r) => this.zoneStyle(f, r),
       }),

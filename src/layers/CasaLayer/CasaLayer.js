@@ -156,10 +156,9 @@ class CasaLayer extends VectorLayer {
    */
   callClickCallbacks(features, layer, coordinate) {
     const pixel = this.map.getPixelFromCoordinate(coordinate);
-    const isTopFeature = this.map.hasFeatureAtPixel(pixel, {
-      layerFilter: l => l === this.olLayer,
-    });
-    if (!isTopFeature) {
+    const topLayer = this.map.forEachLayerAtPixel(pixel, l => l);
+
+    if (layer.olLayer !== topLayer) {
       return;
     }
 

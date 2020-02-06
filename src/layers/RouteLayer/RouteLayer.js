@@ -20,6 +20,7 @@ class RouteLayer extends CasaLayer {
     super({
       name: 'RouteLayer',
       olLayer: new OLVectorLayer({
+        className: 'RouteLayer', // needed for forEachLayerAtPixel
         style: f => this.routeStyle(f),
         source: new VectorSource(),
       }),
