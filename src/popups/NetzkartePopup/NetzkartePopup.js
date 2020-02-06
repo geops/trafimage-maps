@@ -4,6 +4,7 @@ import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
 import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
+import { transform as transformCoords } from 'ol/proj';
 import { setClickedFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 
@@ -124,10 +125,16 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  const coordinates =
+  const coordinates = transformCoords(
     feature.get('longitude') && feature.get('latitude')
-      ? [feature.get('longitude'), feature.get('latitude')]
-      : feature.getGeometry().getCoordinates();
+      ? [
+          parseFloat(feature.get('longitude'), 10),
+          parseFloat(feature.get('latitude'), 10),
+        ]
+      : feature.getGeometry().getCoordinates(),
+    'EPSG:21781',
+    projection.value,
+  );
 
   const formatedCoords = coordinates.map(input => {
     const coord = Math.round(parseFloat(input) * 10 ** 4) / 10 ** 4;
