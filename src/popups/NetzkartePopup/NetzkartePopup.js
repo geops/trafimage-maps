@@ -127,7 +127,10 @@ function NetzkartePopup({ feature }) {
 
   const coordinates = transformCoords(
     feature.get('longitude') && feature.get('latitude')
-      ? [feature.get('longitude'), feature.get('latitude')]
+      ? [
+          parseFloat(feature.get('longitude'), 10),
+          parseFloat(feature.get('latitude'), 10),
+        ]
       : feature.getGeometry().getCoordinates(),
     'EPSG:21781',
     projection.value,
