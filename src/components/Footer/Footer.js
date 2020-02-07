@@ -88,7 +88,7 @@ const Footer = () => {
             dispatch(setProjection(proj));
           }}
           projections={projections}
-          value={projection}
+          projectionValue={projection}
         />
         <ScaleLine map={map} />
         <Select
