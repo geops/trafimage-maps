@@ -88,9 +88,7 @@ const Footer = () => {
             dispatch(setProjection(proj));
           }}
           projections={projections}
-          initialIndex={projections.findIndex(
-            el => el.value === projection.value,
-          )}
+          value={projection}
         />
         <ScaleLine map={map} />
         <Select
