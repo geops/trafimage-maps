@@ -30,6 +30,30 @@ const Footer = () => {
   const layerService = useSelector(state => state.app.layerService);
   const map = useSelector(state => state.app.map);
   const language = useSelector(state => state.app.language);
+  const projection = useSelector(state => state.app.projection);
+
+  const projections = [
+    {
+      label: 'CH1093 / LV03',
+      value: 'EPSG:21781',
+      format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
+    },
+    {
+      label: 'CH1093+ / LV95',
+      value: 'EPSG:2056',
+      format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
+    },
+    {
+      label: 'Web Mercator',
+      value: 'EPSG:3857',
+      format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
+    },
+    {
+      label: 'WGS 84',
+      value: 'EPSG:4326',
+      format: c => `${t('Koordinaten')}: ${c[0].toFixed(5)},${c[1].toFixed(5)}`,
+    },
+  ];
 
   return (
     <UIFooter className="wkp-footer">
@@ -63,29 +87,10 @@ const Footer = () => {
           onChange={(evt, proj) => {
             dispatch(setProjection(proj));
           }}
-          projections={[
-            {
-              label: 'CH1093 / LV03',
-              value: 'EPSG:21781',
-              format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-            },
-            {
-              label: 'CH1093+ / LV95',
-              value: 'EPSG:2056',
-              format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-            },
-            {
-              label: 'Web Mercator',
-              value: 'EPSG:3857',
-              format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-            },
-            {
-              label: 'WGS 84',
-              value: 'EPSG:4326',
-              format: c =>
-                `${t('Koordinaten')}: ${c[0].toFixed(5)},${c[1].toFixed(5)}`,
-            },
-          ]}
+          projections={projections}
+          initialIndex={projections.findIndex(
+            el => el.value === projection.value,
+          )}
         />
         <ScaleLine map={map} />
         <Select
