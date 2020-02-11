@@ -138,7 +138,7 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   elements: { ...defaultElements, shareMenu: true },
-  layers: [grenzen, netzkarteEisenbahninfrastruktur],
+  layers: [netzkarteEisenbahninfrastruktur, grenzen],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
   searches: defaultSearches,

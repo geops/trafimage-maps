@@ -695,52 +695,48 @@ export const grenzen = new Layer({
         description: 'ch.sbb.infrastruktur.gemeindegrenzen.group-desc',
       },
       children: [
-        new TrafimageGeoServerWMSLayer({
-          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
+        new MapboxStyleLayer({
+          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
-          olLayer: new TileLayer({
-            source: new TileWMSSource({
-              crossOrigin: 'anonymous',
-              params: {
-                layers: 'trafimage:gemeindegrenzen',
-                STYLES: 'gemeindegrenzen_intern',
-              },
-              tileGrid: new TileGrid({
-                extent: projectionExtent,
-                resolutions,
-                matrixIds: resolutions.map((r, i) => `${i}`),
-              }),
-            }),
-          }),
+          mapboxLayer: netzkarteEisenbahninfrastruktur,
+          styleLayer: {
+            id: 'gemeindegrenzen_green',
+            type: 'line',
+            source: 'base',
+            'source-layer': 'gemeinden_ch_trafimage',
+            paint: {
+              'line-color': 'rgba(14, 151, 49, 1)',
+              'line-width': 0.5,
+              'line-opacity': 1,
+            },
+          },
           properties: {
             hasInfos: true,
             description:
               'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen-desc',
           },
         }),
-        new TrafimageGeoServerWMSLayer({
-          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
+        new MapboxStyleLayer({
+          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
-          olLayer: new TileLayer({
-            source: new TileWMSSource({
-              crossOrigin: 'anonymous',
-              params: {
-                layers: 'trafimage:gemeindegrenzen',
-                env: 'color#009139',
-              },
-              tileGrid: new TileGrid({
-                extent: projectionExtent,
-                resolutions,
-                matrixIds: resolutions.map((r, i) => `${i}`),
-              }),
-            }),
-          }),
+          mapboxLayer: netzkarteEisenbahninfrastruktur,
+          styleLayer: {
+            id: 'gemeindegrenzen_grey',
+            type: 'line',
+            source: 'base',
+            'source-layer': 'gemeinden_ch_trafimage',
+            paint: {
+              'line-color': 'rgba(188, 188, 188, 1)',
+              'line-width': 0.5,
+              'line-opacity': 1,
+            },
+          },
           properties: {
             hasInfos: true,
             description:
-              'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen-desc',
+              'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen-desc',
           },
         }),
       ],
@@ -753,51 +749,48 @@ export const grenzen = new Layer({
         description: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen-desc',
       },
       children: [
-        new TrafimageGeoServerWMSLayer({
-          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
+        new MapboxStyleLayer({
+          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
-          olLayer: new TileLayer({
-            source: new TileWMSSource({
-              crossOrigin: 'anonymous',
-              params: {
-                layers: 'trafimage:kantone',
-                STYLES: 'kantonsgrenzen_intern',
-              },
-              tileGrid: new TileGrid({
-                extent: projectionExtent,
-                resolutions,
-                matrixIds: resolutions.map((r, i) => `${i}`),
-              }),
-            }),
-          }),
+          mapboxLayer: netzkarteEisenbahninfrastruktur,
+          styleLayer: {
+            id: 'kantonsgrenzen_green',
+            type: 'line',
+            source: 'base',
+            'source-layer': 'kantone_ch_trafimage',
+            paint: {
+              'line-color': 'rgba(14, 151, 49, 1)',
+              'line-width': 2.5,
+              'line-opacity': 1,
+            },
+          },
           properties: {
             hasInfos: true,
             description:
               'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen-desc',
           },
         }),
-        new TrafimageGeoServerWMSLayer({
-          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
+        new MapboxStyleLayer({
+          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
-          olLayer: new TileLayer({
-            source: new TileWMSSource({
-              crossOrigin: 'anonymous',
-              params: {
-                layers: 'trafimage:kantone',
-                STYLES: 'kantonsgrenzen_intern_grey',
-              },
-              tileGrid: new TileGrid({
-                extent: projectionExtent,
-                resolutions,
-                matrixIds: resolutions.map((r, i) => `${i}`),
-              }),
-            }),
-          }),
+          mapboxLayer: netzkarteEisenbahninfrastruktur,
+          styleLayer: {
+            id: 'kantonsgrenzen_grey',
+            type: 'line',
+            source: 'base',
+            'source-layer': 'kantone_ch_trafimage',
+            paint: {
+              'line-color': 'rgba(188, 188, 188, 1)',
+              'line-width': 2.5,
+              'line-opacity': 1,
+            },
+          },
           properties: {
             hasInfos: true,
-            description: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen-desc',
+            description:
+              'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen-desc',
           },
         }),
       ],
