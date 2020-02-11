@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
-import { setClickedFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 
 const propTypes = {
@@ -23,7 +23,7 @@ function NetzkartePopup({ feature }) {
 
   const openDeparturePopup = () => {
     dispatch(
-      setClickedFeatureInfo([
+      setFeatureInfo([
         {
           coordinate: feature.getGeometry().getCoordinates()[0],
           features: [feature],

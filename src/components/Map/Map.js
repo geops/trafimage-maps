@@ -10,12 +10,13 @@ import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
-import { setClickedFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
 
   // mapStateToProps
+  featureInfo: PropTypes.arrayOf(PropTypes.shape()),
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
@@ -28,7 +29,7 @@ const propTypes = {
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetFeatureInfo: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -36,6 +37,7 @@ const propTypes = {
 const defaultProps = {
   // mapStateToProps
   center: [0, 0],
+  featureInfo: [],
   layers: [],
   extent: undefined,
   resolution: undefined,
@@ -44,6 +46,25 @@ const defaultProps = {
 };
 
 class Map extends PureComponent {
+  /**
+   * Compare 2 feature info objects and return true
+   * if they are the same.
+   */
+  static isSameFeatureInfo(first, second) {
+    if (first.length !== second.length) {
+      return false;
+    }
+
+    const firstFeatures = first.map(f => f.features).flat();
+    const secondFeatures = second.map(s => s.features).flat();
+
+    if (firstFeatures.length !== secondFeatures.length) {
+      return false;
+    }
+
+    return firstFeatures.every((f, i) => secondFeatures[i] === f);
+  }
+
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
@@ -89,60 +110,69 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const { layerService, dispatchHtmlEvent } = this.props;
+    const { layerService, featureInfo, dispatchSetFeatureInfo } = this.props;
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;
     }
-    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
-      const filtered = featureInfos.filter(
-        ({ layer, features }) => layer.get('popupComponent') && features.length,
-      );
-      // eslint-disable-next-line no-param-reassign
-      map.getTarget().style.cursor = filtered.length ? 'pointer' : 'auto';
-    });
 
-    // Propagate the ol event to the WebComponent
-    const htmlEvent = new CustomEvent(evt.type, {
-      detail: evt,
+    layerService.getFeatureInfoAtCoordinate(coordinate).then(newInfos => {
+      let infos = newInfos.filter(({ features }) => features.length);
+      map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
+
+      const isClickInfoOpen =
+        featureInfo.length &&
+        featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
+
+      // don't continue if there's a popup that was opened by click
+      if (!isClickInfoOpen) {
+        infos = infos.filter(
+          ({ layer }) =>
+            layer.get('showPopupOnHover') && layer.get('popupComponent'),
+        );
+
+        if (!Map.isSameFeatureInfo(featureInfo, infos)) {
+          dispatchSetFeatureInfo(infos);
+        }
+      }
     });
-    dispatchHtmlEvent(htmlEvent);
   }
 
   onSingleClick(evt) {
+    const { coordinate } = evt;
     const {
       layerService,
-      dispatchSetClickedFeatureInfo,
+      dispatchSetFeatureInfo,
       dispatchHtmlEvent,
     } = this.props;
 
-    layerService
-      .getFeatureInfoAtCoordinate(evt.coordinate)
-      .then(featureInfos => {
-        // Display only info of layers with a popup defined.
-        const filtered = featureInfos
-          .reverse()
-          .filter(({ layer }) => layer.get('popupComponent'));
-
-        // Clear the select style.
-        filtered.forEach(({ layer, features }) => {
-          if (layer.select) {
-            layer.select(features);
-          }
-        });
-
-        // Dispatch only infos with features found.
-        const clickedFeatureInfos = filtered.filter(
-          ({ features }) => features.length,
+    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
+      // Display only info of layers with a popup defined.
+      let infos = featureInfos
+        .reverse()
+        .filter(
+          ({ layer }) =>
+            layer.get('popupComponent') && !layer.get('showPopupOnHover'),
         );
-        dispatchSetClickedFeatureInfo(clickedFeatureInfos);
 
-        // Propagate the infos clicked to the WebComponent
-        const htmlEvent = new CustomEvent('getfeatureinfo', {
-          detail: clickedFeatureInfos,
-        });
-        dispatchHtmlEvent(htmlEvent);
+      // Clear the select style.
+      infos.forEach(({ layer, features }) => {
+        if (layer.select) {
+          layer.select(features);
+        }
       });
+
+      // Dispatch only infos with features found.
+      infos = infos.filter(({ features }) => features.length);
+      dispatchSetFeatureInfo(infos);
+
+      // Propagate the infos clicked to the WebComponent
+      dispatchHtmlEvent(
+        new CustomEvent('getfeatureinfo', {
+          detail: infos,
+        }),
+      );
+    });
 
     // Propagate the ol event to the WebComponent
     const htmlEvent = new CustomEvent(evt.type, {
@@ -178,6 +208,7 @@ Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
+  featureInfo: state.app.featureInfo,
   layerService: state.app.layerService,
   layers: state.map.layers,
   center: state.map.center,
@@ -190,7 +221,7 @@ const mapDispatchToProps = {
   dispatchSetCenter: setCenter,
   dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetFeatureInfo: setFeatureInfo,
 };
 
 export default compose(

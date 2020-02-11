@@ -93,7 +93,7 @@ export const netzkarteStelen = {
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [dataLayer, netzkarteLayer],
+  layers: [netzkarteLayer],
   elements: { popup: true },
   projection: 'EPSG:3857',
 };
@@ -142,7 +142,7 @@ export const infrastruktur = {
 export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  redirect: true,
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
@@ -157,7 +157,7 @@ export const regionenkartePrivate = {
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  redirect: true,
+  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 

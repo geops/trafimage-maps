@@ -26,6 +26,8 @@ class RouteLayer extends CasaLayer {
       }),
       ...options,
     });
+    this.set('showPopupOnHover', true);
+    this.set('popupComponent', 'CasaRoutePopup');
 
     this.url = 'https://api.geops.io/routing/v1/';
 
@@ -48,6 +50,11 @@ class RouteLayer extends CasaLayer {
         }
       }
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  hidePopup(feature) {
+    return !feature.get('route').popupContent;
   }
 
   /**
@@ -138,7 +145,7 @@ class RouteLayer extends CasaLayer {
 
     return Object.values(
       this.getOlStylesFromObject(routeStyle, isSelected, isHovered, feature),
-    );
+    ).flat();
   }
 
   /**

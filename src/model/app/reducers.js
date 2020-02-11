@@ -5,7 +5,7 @@ import OLMap from 'ol/Map';
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
-  SET_CLICKED_FEATURE_INFO,
+  SET_FEATURE_INFO,
   SET_LANGUAGE,
   SET_PROJECTION,
   SET_MENU_OPEN,
@@ -25,7 +25,7 @@ const getInitialState = () => ({
     permissions: [],
   },
   topics: [],
-  clickedFeatureInfo: null,
+  featureInfo: [],
   language: 'de',
   projection: {
     label: 'WGS 84',
@@ -68,10 +68,10 @@ export default function app(state = getInitialState(), action) {
         ...state,
         projection: action.data,
       };
-    case SET_CLICKED_FEATURE_INFO:
+    case SET_FEATURE_INFO:
       return {
         ...state,
-        clickedFeatureInfo: action.data ? [...action.data] : null,
+        featureInfo: action.data ? [...action.data] : null,
       };
     case SET_ACTIVE_TOPIC:
       return {
