@@ -667,8 +667,7 @@ export const behigParent = new BehigLayer({
 
 export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   name: 'ch.sbb.infrastruktur',
-  // copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS', // TODO
-  // isBaseLayer: true, // TODO Nachfragen
+  isBaseLayer: true,
   visible: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
@@ -676,16 +675,16 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   style: 'netzkarte_eisenbahninfrastruktur',
   properties: {
     hasInfos: true,
-    layerInfoComponent: 'InfrastrukturTopicInfo', // TODO Nachfragen
+    layerInfoComponent: 'InfrastrukturTopicInfo',
   },
 });
 
 export const grenzen = new Layer({
-  name: 'ch.sbb.infrastruktur.grenzen.group', // TODO Alle Uebersetzungen...
+  name: 'ch.sbb.infrastruktur.grenzen.group',
   visible: false,
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.infrastruktur.grenzen.group-desc', // TODO Alle Uebersetzungen...
+    description: 'ch.sbb.infrastruktur.grenzen.group-desc',
   },
   children: [
     new Layer({
