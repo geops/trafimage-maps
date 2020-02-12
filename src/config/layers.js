@@ -679,6 +679,45 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   },
 });
 
+export const tochtergesellschaftenSBB = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
+  visible: true,
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
+  styleLayersFilter: styleLayer => {
+    return /_SBB/.test(styleLayer.id);
+  },
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.infrastruktur.tochtergesellschaften.group-desc',
+  },
+});
+
+export const gewässer = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastruktur.gewaesser.group',
+  visible: true,
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
+  styleLayersFilter: styleLayer => {
+    return /waters/.test(styleLayer.id);
+  },
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.infrastruktur.gewaesser.group-desc',
+  },
+});
+
+export const uebrigeBahnen = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastruktur.uebrigebahnen.group',
+  visible: true,
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
+  styleLayersFilter: styleLayer => {
+    return /_KTU/.test(styleLayer.id);
+  },
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.infrastruktur.uebrigebahnen.group-desc',
+  },
+});
+
 export const grenzen = new Layer({
   name: 'ch.sbb.infrastruktur.grenzen.group',
   visible: false,
