@@ -700,16 +700,8 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayer: {
-            id: 'gemeindegrenzen_green',
-            type: 'line',
-            source: 'base',
-            'source-layer': 'gemeinden_ch_trafimage',
-            paint: {
-              'line-color': 'rgba(14, 151, 49, 1)',
-              'line-width': 0.5,
-              'line-opacity': 1,
-            },
+          styleLayersFilter: styleLayer => {
+            return /(border_Gemeinde)/.test(styleLayer.id);
           },
           properties: {
             hasInfos: true,
@@ -721,16 +713,8 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayer: {
-            id: 'gemeindegrenzen_grey',
-            type: 'line',
-            source: 'base',
-            'source-layer': 'gemeinden_ch_trafimage',
-            paint: {
-              'line-color': 'rgba(188, 188, 188, 1)',
-              'line-width': 0.5,
-              'line-opacity': 1,
-            },
+          styleLayersFilter: styleLayer => {
+            return /(border_Gemeinde-Grey)/.test(styleLayer.id);
           },
           properties: {
             hasInfos: true,
@@ -752,16 +736,8 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayer: {
-            id: 'kantonsgrenzen_green',
-            type: 'line',
-            source: 'base',
-            'source-layer': 'kantone_ch_trafimage',
-            paint: {
-              'line-color': 'rgba(14, 151, 49, 1)',
-              'line-width': 2.5,
-              'line-opacity': 1,
-            },
+          styleLayersFilter: styleLayer => {
+            return /(border_Kanton)/.test(styleLayer.id);
           },
           properties: {
             hasInfos: true,
@@ -773,16 +749,8 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayer: {
-            id: 'kantonsgrenzen_grey',
-            type: 'line',
-            source: 'base',
-            'source-layer': 'kantone_ch_trafimage',
-            paint: {
-              'line-color': 'rgba(188, 188, 188, 1)',
-              'line-width': 2.5,
-              'line-opacity': 1,
-            },
+          styleLayersFilter: styleLayer => {
+            return /(border_Kanton-Grey)/.test(styleLayer.id);
           },
           properties: {
             hasInfos: true,
