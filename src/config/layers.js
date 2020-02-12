@@ -684,7 +684,7 @@ export const grenzen = new Layer({
   visible: false,
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.infrastruktur.grenzen.group-desc',
+    description: 'ch.sbb.infrastruktur.grenzen.group',
   },
   children: [
     new Layer({
@@ -696,7 +696,7 @@ export const grenzen = new Layer({
       },
       children: [
         new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
+          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
@@ -713,12 +713,11 @@ export const grenzen = new Layer({
           },
           properties: {
             hasInfos: true,
-            description:
-              'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen-desc',
+            description: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
           },
         }),
         new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
+          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
@@ -735,8 +734,7 @@ export const grenzen = new Layer({
           },
           properties: {
             hasInfos: true,
-            description:
-              'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen-desc',
+            description: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
           },
         }),
       ],
@@ -746,11 +744,11 @@ export const grenzen = new Layer({
       visible: false,
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen-desc',
+        description: 'ch.sbb.infrastruktur.kantonsgrenzen.group-desc',
       },
       children: [
         new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
+          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
@@ -767,12 +765,11 @@ export const grenzen = new Layer({
           },
           properties: {
             hasInfos: true,
-            description:
-              'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen-desc',
+            description: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
           },
         }),
         new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
+          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
@@ -789,8 +786,7 @@ export const grenzen = new Layer({
           },
           properties: {
             hasInfos: true,
-            description:
-              'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen-desc',
+            description: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
           },
         }),
       ],
