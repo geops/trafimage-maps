@@ -9,8 +9,8 @@ const comps = {
       und der Infrasturktur der übrigen Eisenbahnunternehmen unterschieden
       werden. Das Kartenmaterial dient in erster Linie bei SBB-internen
       Kartenthemen als Hintergrundkarte.
-      <p>Datenstand: 2018</p>
-      <p>Stand Kartengrundlage: 2018</p>
+      <p>Datenstand: 2020</p>
+      <p>Stand Kartengrundlage: 2020</p>
       <p>
         Verantwortlich: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
@@ -26,8 +26,8 @@ const comps = {
       autres entreprises de chemin de fer, d’autre part. Elle est conçue en
       premier lieu pour servir de référence dans le cadre des thèmes internes
       aux CFF en matière de cartographie.
-      <p>État des données: 2017</p>
-      <p>État de la base de données de la carte: 2017</p>
+      <p>État des données: 2020</p>
+      <p>État de la base de données de la carte: 2020</p>
       <p>
         Responsable: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
@@ -40,8 +40,8 @@ const comps = {
       route operating points. The map differentiates between SBB infrastructure,
       including subsidiaries, and the infrastructure of other railway companies.
       The map is primarily used as a background map for SBB internal map topics.
-      <p>Data status: 2017</p>
-      <p>Base map status 2017</p>
+      <p>Data status: 2020</p>
+      <p>Base map status 2020</p>
       <p>
         Contact person: Trafimage System Manager Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
@@ -56,8 +56,8 @@ const comps = {
       affiliate) e l’infrastruttura delle altre imprese ferroviarie. Il
       materiale cartografico serve principalmente da supporto per le cartine
       tematiche interne alle FFS.
-      <p>Aggiornamento dei dati: 2017</p>
-      <p>Versione della base cartografica: 2017</p>
+      <p>Aggiornamento dei dati: 2020</p>
+      <p>Versione della base cartografica: 2020</p>
       <p>
         Responsabile: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
