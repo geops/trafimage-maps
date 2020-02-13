@@ -21,6 +21,11 @@ import defaultBaseLayers, {
   behigNotYetOk,
   behigNotOk,
   behigParent,
+  grenzen,
+  tochtergesellschaftenSBB,
+  gewässer,
+  uebrigeBahnen,
+  netzkarteEisenbahninfrastruktur,
 } from './layers';
 import defaultSearches, {
   handicapStopFinder,
@@ -135,8 +140,17 @@ export const behig = {
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
-  redirect: true,
+  elements: { ...defaultElements, shareMenu: true },
+  layers: [
+    netzkarteEisenbahninfrastruktur,
+    gewässer,
+    grenzen,
+    uebrigeBahnen,
+    tochtergesellschaftenSBB,
+  ],
+  projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
+  searches: defaultSearches,
 };
 
 export const regionenkarte = {
