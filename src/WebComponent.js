@@ -145,6 +145,11 @@ const WebComponent = props => {
       console.error('You must provide a list of topics');
       return [];
     }
+
+    const urlTopic = window.location.pathname.replace('/', '');
+    if (urlTopic !== '' && urlTopic !== activeTopicKey) {
+      return [];
+    }
     if (activeTopicKey) {
       tps.forEach(topic => {
         // eslint-disable-next-line no-param-reassign
