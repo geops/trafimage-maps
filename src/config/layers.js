@@ -740,7 +740,9 @@ export const grenzen = new Layer({
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: styleLayer => {
-            return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(styleLayer.id);
+            return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(
+              styleLayer.id,
+            );
           },
           properties: {
             hasInfos: true,
@@ -753,7 +755,9 @@ export const grenzen = new Layer({
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: styleLayer => {
-            return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(styleLayer.id);
+            return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(
+              styleLayer.id,
+            );
           },
           properties: {
             hasInfos: true,
@@ -789,7 +793,9 @@ export const grenzen = new Layer({
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: styleLayer => {
-            return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(styleLayer.id);
+            return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
+              styleLayer.id,
+            );
           },
           properties: {
             hasInfos: true,
