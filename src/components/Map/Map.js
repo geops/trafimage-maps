@@ -14,6 +14,7 @@ import { setFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
+  maxZoom: PropTypes.number,
 
   // mapStateToProps
   featureInfo: PropTypes.arrayOf(PropTypes.shape()),
@@ -42,6 +43,7 @@ const defaultProps = {
   extent: undefined,
   resolution: undefined,
   zoom: 9,
+  maxZoom: 20,
   dispatchHtmlEvent: () => {},
 };
 
@@ -182,7 +184,16 @@ class Map extends PureComponent {
   }
 
   render() {
-    const { center, zoom, layers, map, resolution, extent, t } = this.props;
+    const {
+      center,
+      zoom,
+      maxZoom,
+      layers,
+      map,
+      resolution,
+      extent,
+      t,
+    } = this.props;
 
     return (
       <>
@@ -196,7 +207,7 @@ class Map extends PureComponent {
           ariaLabel={t('Karte')}
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
-            maxZoom: 15,
+            maxZoom,
           }}
         />
       </>
