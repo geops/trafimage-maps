@@ -156,7 +156,7 @@ export const infrastruktur = {
 export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.regionenkarte.public',
+  redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
@@ -171,7 +171,7 @@ export const regionenkartePrivate = {
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  linkUrl: 'https://maps.trafimage.ch/#/ch.sbb.tarifverbundkarte.public',
+  redirect: true,
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
 };
 
