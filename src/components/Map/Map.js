@@ -196,7 +196,7 @@ class Map extends PureComponent {
           ariaLabel={t('Karte')}
           onMapMoved={evt => this.onMapMoved(evt)}
           viewOptions={{
-            maxZoom: 20,
+            maxZoom: 15,
           }}
         />
       </>
