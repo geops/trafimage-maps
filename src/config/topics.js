@@ -22,9 +22,6 @@ import defaultBaseLayers, {
   behigNotOk,
   behigParent,
   grenzen,
-  tochtergesellschaftenSBB,
-  gewässer,
-  uebrigeBahnen,
   netzkarteEisenbahninfrastruktur,
 } from './layers';
 import defaultSearches, {
@@ -141,13 +138,7 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   elements: { ...defaultElements, shareMenu: true },
-  layers: [
-    netzkarteEisenbahninfrastruktur,
-    gewässer,
-    grenzen,
-    uebrigeBahnen,
-    tochtergesellschaftenSBB,
-  ],
+  layers: [grenzen, netzkarteEisenbahninfrastruktur],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
   searches: defaultSearches,
