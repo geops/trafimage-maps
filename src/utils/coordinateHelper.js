@@ -1,11 +1,9 @@
 function meterFormat(coords) {
-  const coordStr = coords.map(num =>
+  return coords.map(num =>
     Math.round(num)
       .toString()
       .replace(/\B(?=(\d{3})+(?!\d))/g, "'"),
   );
-
-  return coordStr;
 }
 
 function wgs84Format(coords, decimalSep = '.') {
