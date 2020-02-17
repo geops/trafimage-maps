@@ -28,7 +28,7 @@ const Header = ({ appBaseUrl }) => {
             <span className="wkp-header-login-text">{login}</span>
           </a>
         </div>
-        <SBBLogo focusable={false} />
+        <SBBLogo focusable={false} className="wkp-header-sbb-logo" />
       </div>
     </UIHeader>
   );
