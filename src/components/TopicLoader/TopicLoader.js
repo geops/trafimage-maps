@@ -118,6 +118,9 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
     } = this.props;
 
+    if (!topics.length) {
+      return;
+    }
     const visibleTopics = topics.filter(
       t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
@@ -142,6 +145,7 @@ class TopicLoader extends Component {
     if (!activeTopic) {
       this.updateLayers([]);
       dispatchSetSearchService();
+      return;
     }
 
     if (activeTopic.redirect) {
