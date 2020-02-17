@@ -140,7 +140,7 @@ export const behig = {
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
-  maxZoom: 14,
+  maxZoom: 15,
   elements: { ...defaultElements, shareMenu: true },
   layers: [
     netzkarteEisenbahninfrastruktur,
