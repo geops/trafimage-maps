@@ -33,7 +33,7 @@
     "react-i18next": "^11.2.7",
     "react-icons": "^3.8.0",
     "react-redux": "^7.1.3",
-    "react-shadow": "^17.1.3",
+    "react-shadow": "^17.5.0",
     "react-spatial": "^0.2.1",
     "react-styleguidist": "^10.6.1",
     "react-transit": "^0.2.0-beta.2",
