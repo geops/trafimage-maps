@@ -147,7 +147,7 @@ const WebComponent = props => {
     }
 
     const urlTopic = window.location.pathname.replace('/', '');
-    if (urlTopic !== '' && urlTopic !== activeTopicKey) {
+    if (urlTopic && urlTopic !== activeTopicKey) {
       return [];
     }
     if (activeTopicKey) {
