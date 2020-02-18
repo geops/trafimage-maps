@@ -188,17 +188,11 @@ class TopicMenu extends PureComponent {
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
-    const isMenuItemIcons =
-      (topic && topic.permission) ||
-      (menuOpen && topic && (topic.description || topic.layerInfoComponent));
-
     return (
       <div className="wkp-topic-menu">
         <div className="wkp-topic-menu-item-wrapper">
           <div
-            className={`wkp-topic-menu-item${
-              isMenuItemIcons ? ' wkp-topic-menu-padding' : ''
-            }`}
+            className="wkp-topic-menu-item"
             role="button"
             tabIndex={0}
             aria-expanded={!isCollapsed}

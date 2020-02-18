@@ -169,7 +169,7 @@
     }
 
     .wkp-topic-menu-item {
-      margin: 4px;
+      margin: 4px 40px 4px 4px;
       height: 52px;
 
       &.active {
@@ -185,10 +185,6 @@
       .wkp-info-topic-bt {
         bottom: 0;
       }
-    }
-
-    .wkp-topic-menu-padding {
-      margin: 4px 40px 4px 4px;
     }
   }
 
