@@ -35,8 +35,7 @@ const resolutions = [
 ];
 
 const netzkarteLayer = new TrafimageMapboxLayer({
-  name: 'Netzkarte Personenverkehr',
-  key: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   radioGroup: 'baseLayer',
@@ -45,8 +44,7 @@ const netzkarteLayer = new TrafimageMapboxLayer({
 });
 
 const netzkarteShowcasesLight = new TrafimageMapboxLayer({
-  name: 'Netzkarte light',
-  key: 'ch.sbb.netzkarte.light',
+  name: 'ch.sbb.netzkarte.light',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   radioGroup: 'baseLayer',
@@ -57,8 +55,7 @@ const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 });
 
 const swisstopoSwissImage = new Layer({
-  name: 'Luftbild',
-  key: 'ch.sbb.netzkarte.luftbild',
+  name: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
   radioGroup: 'baseLayer',
   isBaseLayer: true,
