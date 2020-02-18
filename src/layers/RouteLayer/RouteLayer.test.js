@@ -1,4 +1,8 @@
+import React from 'react';
 import 'jest-canvas-mock';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import fetchMock from 'fetch-mock';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Map from 'ol/Map';
@@ -7,6 +11,56 @@ import Feature from 'ol/Feature';
 import LineString from 'ol/geom/LineString';
 import { Style, Stroke } from 'ol/style';
 import RouteLayer from './RouteLayer';
+import { casa } from '../../config/topics';
+import TrafimageMaps from '../../components/TrafimageMaps';
+
+configure({ adapter: new Adapter() });
+
+const routes = [
+  {
+    isClickable: true,
+    sequences: [
+      {
+        uicFrom: 8506302,
+        uicTo: 8503000,
+        mot: 'rail',
+      },
+    ],
+  },
+];
+
+const routeData = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'LineString',
+        coordinates: [
+          [1, 1],
+          [10, 10],
+        ],
+      },
+      properties: {
+        lines: [],
+        station_from: {
+          id: '8506302',
+          latitude: 9.3695504838,
+          longitude: 47.4233618848,
+          name: 'st gallen',
+          platform: '',
+        },
+        station_to: {
+          id: '8503000',
+          latitude: 8.539596174,
+          longitude: 47.3775484643,
+          name: 'zuerich hauptbahnhof',
+          platform: '',
+        },
+      },
+    },
+  ],
+};
 
 const feature = new Feature({
   geometry: new LineString([
@@ -14,6 +68,12 @@ const feature = new Feature({
     [50, 10],
   ]),
   mot: 'rail',
+  route: {
+    popupContent: {
+      Von: 'St. Gallen',
+      Nach: 'Zürich HB',
+    },
+  },
 });
 
 const olLayer = new OLVectorLayer({
@@ -38,7 +98,6 @@ describe('RouteLayer', () => {
       onMouseOver,
     });
     map = new Map({ view: new View({ resution: 5 }) });
-    layer.init(map);
   });
 
   test('should return the correct default style.', () => {
@@ -77,6 +136,46 @@ describe('RouteLayer', () => {
           width: 8,
         }),
       }),
+    );
+  });
+
+  test('should return a feature on loadRoute.', async () => {
+    layer.init(map);
+    fetchMock.once(/routing/g, routeData);
+
+    const route = await layer.loadRoutes(routes);
+    expect(route[0]).toBeInstanceOf(Feature);
+  });
+
+  test('shoud call onClick callbacks.', async () => {
+    const coordinate = [50, 50];
+    layer.init(map);
+    jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([feature]);
+    jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);
+
+    expect(onClick).toHaveBeenCalledTimes(0);
+
+    const evt = { type: 'singleclick', map, coordinate };
+    await map.dispatchEvent(evt);
+
+    expect(onClick).toHaveBeenCalledWith([feature], layer, coordinate);
+  });
+
+  test('shoud open a popup if popupContent is defined', async () => {
+    jest.spyOn(Map.prototype, 'getFeaturesAtPixel').mockReturnValue([feature]);
+    jest.spyOn(Map.prototype, 'hasFeatureAtPixel').mockReturnValue(true);
+
+    const topicConf = [{ ...casa, layers: [layer] }];
+    const component = mount(<TrafimageMaps topics={topicConf} />);
+    const compMap = component.find('Map').props().map;
+    const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
+    const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };
+    await compMap.dispatchEvent(evt);
+    await Promise.all(spy.mock.results.map(r => r.value));
+    component.update();
+
+    expect(component.find('.wkp-casa-route-popup').text()).toBe(
+      'Von: St. GallenNach: Zürich HB',
     );
   });
 });

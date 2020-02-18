@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { setClickedFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo } from '../../model/app/actions';
 
 import DeparturePopupContent from './DeparturePopupContent';
 
@@ -17,15 +17,15 @@ let returnToNetzkarte = false;
 
 const DeparturePopup = ({ feature }) => {
   const dispatch = useDispatch();
-  const { clickedFeatureInfo, layerService } = useSelector(state => state.app);
+  const { featureInfo, layerService } = useSelector(state => state.app);
   const name = feature.get('name');
   const uic = parseFloat(feature.get('sbb_id'));
 
   const openNetzkartePopup = () => {
-    const netkarteFeature = { ...clickedFeatureInfo[0] };
+    const netkarteFeature = { ...featureInfo[0] };
     const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
     netkarteFeature.layer = stationsLayer;
-    dispatch(setClickedFeatureInfo([netkarteFeature]));
+    dispatch(setFeatureInfo([netkarteFeature]));
   };
 
   useEffect(() => {

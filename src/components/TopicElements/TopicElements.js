@@ -76,6 +76,8 @@ function TopicElements({ history, appBaseUrl }) {
     return null;
   }
 
+  const { maxZoom } = activeTopic;
+
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
   if (disabled) {
@@ -150,7 +152,9 @@ function TopicElements({ history, appBaseUrl }) {
       <ResizeHandler observe={ref.current} />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         <EventConsumer>
-          {dispatcher => <Map map={map} dispatchHtmlEvent={dispatcher} />}
+          {dispatcher => (
+            <Map map={map} maxZoom={maxZoom} dispatchHtmlEvent={dispatcher} />
+          )}
         </EventConsumer>
         {appElements}
         <MainDialog />

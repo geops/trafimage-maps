@@ -169,7 +169,7 @@ class TopicMenu extends PureComponent {
             isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
             layerService={layerService}
             t={t}
-            buttonTitles={{
+            titles={{
               layerShow: t('Layer anzeigen'),
               layerHide: t('Layer verbergen'),
               subLayerShow: t('Unterlayer anzeigen'),

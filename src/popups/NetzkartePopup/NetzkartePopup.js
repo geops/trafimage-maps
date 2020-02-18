@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
-import { setClickedFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
+import coordinateHelper from '../../utils/coordinateHelper';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -23,7 +24,7 @@ function NetzkartePopup({ feature }) {
 
   const openDeparturePopup = () => {
     dispatch(
-      setClickedFeatureInfo([
+      setFeatureInfo([
         {
           coordinate: feature.getGeometry().getCoordinates()[0],
           features: [feature],
@@ -125,20 +126,26 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  const coordinates = transformCoords(
+  const coordinates =
     feature.get('longitude') && feature.get('latitude')
-      ? [feature.get('longitude'), feature.get('latitude')]
-      : feature.getGeometry().getCoordinates(),
-    'EPSG:21781',
-    projection.value,
-  );
+      ? transformCoords(
+          [
+            parseFloat(feature.get('longitude'), 10),
+            parseFloat(feature.get('latitude'), 10),
+          ],
+          'EPSG:4326',
+          projection.value,
+        )
+      : transformCoords(
+          feature.getGeometry().getCoordinates(),
+          'EPSG:3857',
+          projection.value,
+        );
 
-  const formatedCoords = coordinates.map(input => {
-    const coord = Math.round(parseFloat(input) * 10 ** 4) / 10 ** 4;
-    const parts = coord.toString().split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'");
-    return parts.join();
-  });
+  const formatedCoords =
+    projection.value === 'EPSG:4326'
+      ? coordinateHelper.wgs84Format(coordinates, ',')
+      : coordinateHelper.meterFormat(coordinates);
 
   const coordinatesWrapper = (
     <div>
