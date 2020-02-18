@@ -55,14 +55,14 @@ class HandicapLayer extends VectorLayer {
               ? 'barrierfreierBahnhoefe'
               : 'nichtBarrierfreierBahnhoefe'
           }.png`,
-          scale: 0.7,
+          scale: 0.45,
         }),
       }),
     ];
   }
 
   constructor(options = {}) {
-    const { handicapType } = options.properties;
+    const { handicapType, zIndex } = options.properties;
 
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r, handicapType),
@@ -93,6 +93,10 @@ class HandicapLayer extends VectorLayer {
       }),
       zIndex: 0,
     });
+
+    if (zIndex) {
+      olLayer.setZIndex(zIndex);
+    }
 
     super({
       ...options,
