@@ -55,7 +55,7 @@ class HandicapLayer extends VectorLayer {
               ? 'barrierfreierBahnhoefe'
               : 'nichtBarrierfreierBahnhoefe'
           }.png`,
-          scale: 0.45,
+          scale: 0.5,
         }),
       }),
     ];

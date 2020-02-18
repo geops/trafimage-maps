@@ -427,7 +427,7 @@ export const stuetzpunktBahnhoefe = new HandicapLayer({
   key: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: false,
   properties: {
-    zIndex: 1,
+    zIndex: 0,
     handicapType: 'stuetzpunkt',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -440,7 +440,7 @@ export const barrierfreierBahnhoefe = new HandicapLayer({
   key: 'ch.sbb.barrierfreierbahnhoefe',
   visible: true,
   properties: {
-    zIndex: 2,
+    zIndex: 1,
     handicapType: 'barrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -453,7 +453,7 @@ export const nichtBarrierfreierBahnhoefe = new HandicapLayer({
   key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   visible: true,
   properties: {
-    zIndex: 2,
+    zIndex: 1,
     handicapType: 'notBarrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
