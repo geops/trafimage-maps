@@ -4,6 +4,7 @@
   border-top-width: 0;
 
   .wkp-topic-menu-item-wrapper {
+    padding-bottom: 4px;
     display: flex;
     align-items: center;
 
@@ -55,8 +56,8 @@
 
     .wkp-topic-icons {
       display: flex;
-      position: relative;
-      height: 12px;
+      align-items: center;
+      margin-top: 4px;
       width: auto;
     }
 
@@ -70,6 +71,8 @@
     }
 
     .wkp-info-topic-bt {
+      display: flex;
+      align-items: center;
       color: #888;
       margin-left: 4px;
 
@@ -93,6 +96,8 @@
 
     .wkp-info-layer-bt {
       top: 0;
+      height: 14px;
+      width: 14px;
       margin-right: 0;
     }
 
