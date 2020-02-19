@@ -8,6 +8,7 @@ const propTypes = {
   t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
   properties: PropTypes.object.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
@@ -53,14 +54,14 @@ const desc = (name, lng) => {
   );
 };
 
-const HandicapLayerInfo = ({ t, properties, language }) => {
+const HandicapLayerInfo = ({ t, properties, language, staticFilesUrl }) => {
   const handicapType = properties.get('handicapType');
 
   let image = <div className="stuetzpunkt-layer-icon" />;
   if (handicapType !== 'stuetzpunkt') {
     image = (
       <img
-        src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/${
+        src={`${staticFilesUrl}/img/layers/handicap/${
           handicapType === 'barrierfree'
             ? 'barrierfreierBahnhoefe'
             : 'nichtBarrierfreierBahnhoefe'

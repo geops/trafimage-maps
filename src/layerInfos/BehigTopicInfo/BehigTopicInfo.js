@@ -4,14 +4,16 @@ import { withTranslation } from 'react-i18next';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
+  language: PropTypes.string.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
 
-const BehigTopicInfo = ({ language, t }) => {
+const BehigTopicInfo = ({ language, t, staticFilesUrl }) => {
   const img = (
     <img
-      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/topics/behig/behig_legend_${language}.jpg`}
+      src={`${staticFilesUrl}/img/topics/behig/behig_legend_${language}.jpg`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />

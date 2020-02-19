@@ -14,53 +14,6 @@ import LayerHelper from '../layerHelper';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
-  static getIconStyle(geometry, handicapType, isHighlighted = false) {
-    if (handicapType === 'stuetzpunkt') {
-      return [
-        new Style({
-          geometry,
-          image: new Circle({
-            radius: 15,
-            fill: new Fill({
-              color: [246, 136, 38, isHighlighted ? 0.7 : 0.4],
-            }),
-          }),
-        }),
-        new Style({
-          geometry,
-          image: new Circle({
-            radius: 9,
-            fill: new Fill({
-              color: [246, 136, 38, 1],
-            }),
-          }),
-        }),
-      ];
-    }
-    return [
-      new Style({
-        geometry,
-        image: new Circle({
-          radius: 15,
-          fill: new Fill({
-            color: [246, 136, 38, isHighlighted ? 0.7 : 0],
-          }),
-        }),
-      }),
-      new Style({
-        geometry,
-        image: new Icon({
-          src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/handicap/${
-            handicapType === 'barrierfree'
-              ? 'barrierfreierBahnhoefe'
-              : 'nichtBarrierfreierBahnhoefe'
-          }.png`,
-          scale: 0.5,
-        }),
-      }),
-    ];
-  }
-
   constructor(options = {}) {
     const { handicapType, zIndex } = options.properties;
 
@@ -113,8 +66,59 @@ class HandicapLayer extends VectorLayer {
     });
   }
 
+  getIconStyle(geometry, handicapType, isHighlighted = false) {
+    if (handicapType === 'stuetzpunkt') {
+      return [
+        new Style({
+          geometry,
+          image: new Circle({
+            radius: 15,
+            fill: new Fill({
+              color: [246, 136, 38, isHighlighted ? 0.7 : 0.4],
+            }),
+          }),
+        }),
+        new Style({
+          geometry,
+          image: new Circle({
+            radius: 9,
+            fill: new Fill({
+              color: [246, 136, 38, 1],
+            }),
+          }),
+        }),
+      ];
+    }
+    return [
+      new Style({
+        geometry,
+        image: new Circle({
+          radius: 15,
+          fill: new Fill({
+            color: [246, 136, 38, isHighlighted ? 0.7 : 0],
+          }),
+        }),
+      }),
+      new Style({
+        geometry,
+        image: new Icon({
+          src: `${this.staticFilesUrl}/img/layers/handicap/${
+            handicapType === 'barrierfree'
+              ? 'barrierfreierBahnhoefe'
+              : 'nichtBarrierfreierBahnhoefe'
+          }.png`,
+          scale: 0.5,
+        }),
+      }),
+    ];
+  }
+
   setCartaroUrl(cartaroUrl) {
     this.cartaroUrl = cartaroUrl;
+  }
+
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
   }
 
   /**
@@ -141,7 +145,7 @@ class HandicapLayer extends VectorLayer {
 
     const isHighlighted = feature === this.clickedFeature;
 
-    return HandicapLayer.getIconStyle(geometry, handicapType, isHighlighted);
+    return this.getIconStyle(geometry, handicapType, isHighlighted);
   }
 }
 
