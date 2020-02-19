@@ -425,7 +425,7 @@ export const parks = new TrafimageGeoServerWMSLayer({
 export const stuetzpunktBahnhoefe = new HandicapLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
   key: 'ch.sbb.stuetzpunktbahnhoefe',
-  visible: false,
+  visible: true,
   properties: {
     zIndex: 0,
     handicapType: 'stuetzpunkt',
