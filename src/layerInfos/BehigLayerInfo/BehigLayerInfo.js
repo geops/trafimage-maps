@@ -195,8 +195,9 @@ const BehigLayerInfo = ({ t, language, properties }) => {
       <p>
         {t('Verantwortlich')}:
         <br />
-        I-AT-KUF-PAM, Simone Mundwiler,&nbsp;
-        <a href="mailto:simone.mundwiler@sbb.ch">simone.mundwiler@sbb.ch</a>.
+        Karin Moser&nbsp;(I-NAT-MHF-PAM),
+        <br />
+        <a href="mailto:karin.moser@sbb.ch">karin.moser@sbb.ch</a>.
       </p>
     </div>
   );

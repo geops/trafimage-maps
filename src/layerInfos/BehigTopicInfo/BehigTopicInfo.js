@@ -28,11 +28,8 @@ const BehigTopicInfo = ({ language, t }) => {
         <p>
           Verantwortlich:
           <br />
-          I-AT-KUF-PAM, Simone Mundwiler,&nbsp;
-          <a href="mailto:simone.mundwiler@sbb.ch">
-            Kommunikation-Infrastruktur@sbb.ch
-          </a>
-          .
+          Karin Moser (I-NAT-MHF-PAM),&nbsp;
+          <a href="mailto:karin.moser@sbb.ch">karin.moser@sbb.ch</a>.
         </p>
         <p>{img}</p>
       </div>
@@ -45,8 +42,8 @@ const BehigTopicInfo = ({ language, t }) => {
         <p>
           Responsable:
           <br />
-          I-AT-KUF-PAM, Simone Mundwiler,&nbsp;
-          <a href="mailto:simone.mundwiler@sbb.ch">simone.mundwiler@sbb.ch</a>.
+          Karin Moser (I-NAT-MHF-PAM),&nbsp;
+          <a href="mailto:karin.moser@sbb.ch">karin.moser@sbb.ch</a>.
         </p>
         <p>{img}</p>
       </div>
@@ -59,8 +56,8 @@ const BehigTopicInfo = ({ language, t }) => {
         <p>
           Responsible:
           <br />
-          I-AT-KUF-PAM, Simone Mundwiler,&nbsp;
-          <a href="mailto:simone.mundwiler@sbb.ch">simone.mundwiler@sbb.ch</a>.
+          Karin Moser (I-NAT-MHF-PAM),&nbsp;
+          <a href="mailto:karin.moser@sbb.ch">karin.moser@sbb.ch</a>.
         </p>
         <p>{img}</p>
       </div>
@@ -73,8 +70,8 @@ const BehigTopicInfo = ({ language, t }) => {
         <p>
           Responsabile:
           <br />
-          I-AT-KUF-PAM, Simone Mundwiler,&nbsp;
-          <a href="mailto:simone.mundwiler@sbb.ch">simone.mundwiler@sbb.ch</a>.
+          Karin Moser (I-NAT-MHF-PAM),&nbsp;
+          <a href="mailto:karin.moser@sbb.ch">karin.moser@sbb.ch</a>.
         </p>
         <p>{img}</p>
       </div>
