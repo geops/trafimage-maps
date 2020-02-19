@@ -15,7 +15,7 @@ const defaultProps = {};
 
 const names = {
   barrierfree: 'ch.sbb.barrierfreierbahnhoefe',
-  notBarrierfree: 'Nicht barrierefreie Bahnhöfe',
+  notBarrierfree: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   stuetzpunkt: 'bahnhof_plural',
 };
 
