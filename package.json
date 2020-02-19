@@ -86,7 +86,7 @@
     "node-fetch": "^2.3.0",
     "prettier": "^1.19.1",
     "react-app-rewired": "^2.1.5",
-    "react-scripts": "^3.1.2",
+    "react-scripts": "^3.4.0",
     "react-svg-loader": "^3.0.3",
     "react-test-renderer": "^16.12.0",
     "react-web-component-style-loader": "^0.1.4-alpha",
