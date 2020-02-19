@@ -51,12 +51,16 @@ class MapboxStyleLayer extends Layer {
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
-    this.addDynamicFilters =
-      options.filters &&
-      typeof options.filters === 'function' &&
-      (() => {
-        this.setFilter(options.filters(this));
-      });
+    if (options.filters) {
+      this.addDynamicFilters =
+        typeof options.filters === 'function'
+          ? () => {
+              this.setFilter(options.filters(this));
+            }
+          : () => {
+              this.setFilter(options.filters);
+            };
+    }
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map(s => s.id);
@@ -213,8 +217,6 @@ class MapboxStyleLayer extends Layer {
   setHoverState(features = [], state) {
     const options = this.styleLayers[0];
     features.forEach(feature => {
-      // console.log(feature.getId());
-      // console.log(feature.getProperties());
       if ((!options.source && !options['source-layer']) || !feature.getId()) {
         if (!feature.getId()) {
           // eslint-disable-next-line no-console
@@ -226,7 +228,7 @@ class MapboxStyleLayer extends Layer {
         }
         return;
       }
-      // console.log(feature);
+
       this.mapboxLayer.mbMap.setFeatureState(
         {
           id: feature.getId(),

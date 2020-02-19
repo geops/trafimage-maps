@@ -169,7 +169,7 @@ class TopicMenu extends PureComponent {
             isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
             layerService={layerService}
             t={t}
-            buttonTitles={{
+            titles={{
               layerShow: t('Layer anzeigen'),
               layerHide: t('Layer verbergen'),
               subLayerShow: t('Unterlayer anzeigen'),
@@ -257,6 +257,7 @@ TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   menuOpen: state.app.menuOpen,
+  map: state.app.map,
   activeTopic: state.app.activeTopic,
   selectedForInfos: state.app.selectedForInfos,
 });

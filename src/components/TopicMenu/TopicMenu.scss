@@ -12,7 +12,8 @@
       width: 100%;
       display: flex;
       align-items: center;
-      margin-right: 22px;
+      margin-right: 42px;
+      padding-right: 15px;
 
       .wkp-topic-title {
         display: flex;
@@ -44,8 +45,10 @@
         border-style: solid;
         transform: rotate(45deg);
         margin-left: 10px;
+        margin-top: 3px;
 
         &.collapsed {
+          margin-top: 0;
           transform: rotate(225deg);
         }
       }
@@ -60,8 +63,8 @@
 
     .wkp-lock-icon {
       position: absolute;
-      right: 25px;
-      bottom: 0;
+      right: 20px;
+      bottom: 5px;
       cursor: pointer;
       color: #888;
 
@@ -73,7 +76,7 @@
     .wkp-info-topic-bt {
       position: absolute;
       right: 0;
-      bottom: 0;
+      bottom: 5px;
       color: #888;
       margin-left: 4px;
 
@@ -91,7 +94,7 @@
     overflow: hidden;
     margin: 0 0 0 20px;
 
-    .tm-layer-tree {
+    .rs-layer-tree {
       overflow: hidden;
     }
 
@@ -100,24 +103,24 @@
       margin-right: 0;
     }
 
-    .tm-layer-tree-item {
+    .rs-layer-tree-item {
       color: #888;
       height: 30px;
       padding: 0;
       margin: 0 4px 1px 4px;
 
-      .tm-layer-tree-toggle {
+      .rs-layer-tree-toggle {
         line-height: 14px;
       }
 
-      .tm-layer-tree-arrow {
+      .rs-layer-tree-arrow {
         border-color: #888;
       }
 
-      &.tm-visible {
+      &.rs-visible {
         color: initial;
 
-        .tm-layer-tree-arrow {
+        .rs-layer-tree-arrow {
           border-color: black;
         }
       }

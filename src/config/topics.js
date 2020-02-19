@@ -21,6 +21,11 @@ import defaultBaseLayers, {
   behigNotYetOk,
   behigNotOk,
   behigParent,
+  grenzen,
+  tochtergesellschaftenSBB,
+  gewässer,
+  uebrigeBahnen,
+  netzkarteEisenbahninfrastruktur,
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
@@ -96,7 +101,7 @@ export const netzkarteStelen = {
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [dataLayer, netzkarteLayer],
+  layers: [netzkarteLayer],
   elements: { popup: true },
   projection: 'EPSG:3857',
 };
@@ -138,8 +143,18 @@ export const behig = {
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
-  redirect: true,
+  maxZoom: 14,
+  elements: { ...defaultElements, shareMenu: true },
+  layers: [
+    netzkarteEisenbahninfrastruktur,
+    gewässer,
+    grenzen,
+    uebrigeBahnen,
+    tochtergesellschaftenSBB,
+  ],
+  projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
+  searches: defaultSearches,
 };
 
 export const regionenkarte = {
@@ -210,6 +225,10 @@ export const mobz = {
   redirect: true,
   permission: 'mobz',
   layerInfoComponent: 'MobzTopicInfo',
+  infos: {
+    owner: 'I-NAT-NET-AN, Hannes Maichle',
+    email: 'hannes.maichle@sbb.ch',
+  },
 };
 
 export const mobzWhatIf = {
@@ -218,6 +237,10 @@ export const mobzWhatIf = {
   redirect: true,
   permission: 'mobz_what_if',
   layerInfoComponent: 'MobzTopicInfo',
+  infos: {
+    owner: 'I-NAT-INK, Martina Hauri',
+    email: 'martina.hauri@sbb.ch',
+  },
 };
 
 export const verbundzonen = {

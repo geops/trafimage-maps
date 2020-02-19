@@ -74,7 +74,7 @@ class StopFinder extends Search {
   }
 
   onDataEvent() {
-    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+    const { layerService, dispatchSetFeatureInfo } = this.props;
     const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
     const { mbMap } = layer.mapboxLayer;
 
@@ -90,7 +90,7 @@ class StopFinder extends Search {
       .map(l => this.getFeatureInfoForLayer(l))
       .filter(i => i);
 
-    dispatchSetClickedFeatureInfo(infos);
+    dispatchSetFeatureInfo(infos);
   }
 }
 

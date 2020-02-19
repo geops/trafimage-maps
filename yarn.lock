@@ -12994,6 +12994,15 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
+query-string@^6.11.0:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.11.0.tgz#dc27a05733d1be66f16d0f83dfa957270f45f66d"
+  integrity sha512-jS+me8X3OEGFTsF6kF+vUUMFG/d3WUCvD7bHhfZP5784nOq1pjj8yau/u86nfOncmcN6ZkSWKWkKAvv/MGxzLA==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
 query-string@^6.4.2, query-string@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.9.0.tgz#1c3b727c370cf00f177c99f328fda2108f8fa3dd"
@@ -13289,6 +13298,13 @@ react-icons@^3.4.0, react-icons@^3.7.0, react-icons@^3.8.0:
   dependencies:
     camelcase "^5.0.0"
 
+react-icons@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.9.0.tgz#89a00f20a0e02e6bfd899977eaf46eb4624239d5"
+  integrity sha512-gKbYKR+4QsD3PmIHLAM9TDDpnaTsr3XZeK1NTAb6WQQ+gxEdJ0xuCgLq0pxXdS7Utg2AIpcVhM1ut/jlDhcyNg==
+  dependencies:
+    camelcase "^5.0.0"
+
 react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4, react-is@^16.8.6, react-is@^16.9.0:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
@@ -13398,15 +13414,15 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^0.1.1-beta.19:
-  version "0.1.1-beta.19"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.1.1-beta.19.tgz#01370f5a59e75ba425e8fd14df6bbfca8a4bec4a"
-  integrity sha512-4CEpKRTUg45tYIvckMeDlIG1eVa8XQDnID6HQyZhJNFUMkj96KrqQEslXqlIhG5kVm+nO3WsCyayVkn8LeA39g==
+react-spatial@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.2.1.tgz#4576b46f01f63b41784b6fbf634c785a5b847f62"
+  integrity sha512-r6lc4q+yoyFLEihgi54RU/tZGlYrlBonE06rstXcqYoVHH6IzUszhee61zVZC+UgHSDwjHETZnKr2ahoky8+VQ==
   dependencies:
-    query-string "^6.4.2"
+    query-string "^6.11.0"
     radians-degrees "^1.0.0"
     react-draggable "^4.0.3"
-    react-icons "^3.4.0"
+    react-icons "^3.9.0"
     resize-observer-polyfill "^1.5.1"
 
 react-styleguidist@^10.6.1:

@@ -8,7 +8,7 @@ import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
   setTopics,
-  setClickedFeatureInfo,
+  setFeatureInfo,
   setSearchService,
   fetchPermissionsInfos,
 } from '../../model/app/actions';
@@ -23,20 +23,26 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  activeTopic: PropTypes.shape(),
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
+
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
-  permissionUrl: PropTypes.string.isRequired,
+  permissionUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
-  permissionsInfos: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+  // mapStateToProps
+  activeTopic: PropTypes.shape(),
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
+  permissionsInfos: PropTypes.shape({
+    user: PropTypes.string,
+    permissions: PropTypes.array,
+  }).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
   dispatchSetTopics: PropTypes.func.isRequired,
-  dispatchSetClickedFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
   dispatchFetchPermissionsInfos: PropTypes.func.isRequired,
 
@@ -49,6 +55,7 @@ const defaultProps = {
   cartaroUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
+  permissionUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -111,6 +118,9 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
     } = this.props;
 
+    if (!topics.length) {
+      return;
+    }
     const visibleTopics = topics.filter(
       t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
@@ -128,13 +138,14 @@ class TopicLoader extends Component {
       apiKey,
       appBaseUrl,
       layerService,
-      dispatchSetClickedFeatureInfo,
+      dispatchSetFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
 
     if (!activeTopic) {
       this.updateLayers([]);
       dispatchSetSearchService();
+      return;
     }
 
     if (activeTopic.redirect) {
@@ -155,7 +166,7 @@ class TopicLoader extends Component {
       t,
       activeTopic,
       layerService,
-      dispatchSetClickedFeatureInfo,
+      dispatchSetFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
   }
@@ -224,7 +235,7 @@ const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetLayers: setLayers,
   dispatchSetTopics: setTopics,
-  dispatchSetClickedFeatureInfo: setClickedFeatureInfo,
+  dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchService: setSearchService,
   dispatchFetchPermissionsInfos: fetchPermissionsInfos,
 };

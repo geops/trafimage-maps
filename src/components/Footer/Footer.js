@@ -7,6 +7,7 @@ import Copyright from 'react-spatial/components/Copyright';
 import Select from '@geops/react-ui/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
 import ActionLink from '@geops/react-ui/components/ActionLink';
+import coordinateHelper from '../../utils/coordinateHelper';
 import {
   setLanguage,
   setProjection,
@@ -14,22 +15,36 @@ import {
 } from '../../model/app/actions';
 import './Footer.scss';
 
-const numberFormat = coords => {
-  const coordStr = coords.map(num =>
-    Math.round(num)
-      .toString()
-      .replace(/\B(?=(\d{3})+(?!\d))/g, "'"),
-  );
-
-  return coordStr;
-};
-
 const Footer = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const layerService = useSelector(state => state.app.layerService);
   const map = useSelector(state => state.app.map);
   const language = useSelector(state => state.app.language);
+  const projection = useSelector(state => state.app.projection);
+
+  const projections = [
+    {
+      label: 'CH1093 / LV03',
+      value: 'EPSG:21781',
+      format: c => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+    },
+    {
+      label: 'CH1093+ / LV95',
+      value: 'EPSG:2056',
+      format: c => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+    },
+    {
+      label: 'Web Mercator',
+      value: 'EPSG:3857',
+      format: c => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+    },
+    {
+      label: 'WGS 84',
+      value: 'EPSG:4326',
+      format: c => `${t('Koordinaten')}: ${coordinateHelper.wgs84Format(c)}`,
+    },
+  ];
 
   return (
     <UIFooter className="wkp-footer">
@@ -63,29 +78,8 @@ const Footer = () => {
           onChange={(evt, proj) => {
             dispatch(setProjection(proj));
           }}
-          projections={[
-            {
-              label: 'CH1093 / LV03',
-              value: 'EPSG:21781',
-              format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-            },
-            {
-              label: 'CH1093+ / LV95',
-              value: 'EPSG:2056',
-              format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-            },
-            {
-              label: 'Web Mercator',
-              value: 'EPSG:3857',
-              format: c => `${t('Koordinaten')}: ${numberFormat(c)}`,
-            },
-            {
-              label: 'WGS 84',
-              value: 'EPSG:4326',
-              format: c =>
-                `${t('Koordinaten')}: ${c[0].toFixed(5)},${c[1].toFixed(5)}`,
-            },
-          ]}
+          projections={projections}
+          projectionValue={projection}
         />
         <ScaleLine map={map} />
         <Select

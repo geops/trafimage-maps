@@ -36,7 +36,7 @@ class HandicapStopFinder extends StopFinder {
   select(item) {
     window.clearTimeout(this.selectTimeout);
     this.selectTimeout = window.setTimeout(() => {
-      this.props.dispatchSetClickedFeatureInfo([
+      this.props.dispatchSetFeatureInfo([
         { features: [item.handicap.feature], layer: item.handicap.layer },
       ]);
     }, 200);
