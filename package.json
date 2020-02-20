@@ -77,6 +77,7 @@
     "fetch-mock": "^8.3.1",
     "fixpack": "^2.3.1",
     "generact": "^0.4.0",
+    "gensync": "^1.0.0-beta.1",
     "geops-docjs-template": "^1.0.0",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
