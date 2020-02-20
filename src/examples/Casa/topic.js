@@ -35,17 +35,27 @@ const resolutions = [
 ];
 
 const netzkarteLayer = new TrafimageMapboxLayer({
-  name: 'Netzkarte',
+  name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   radioGroup: 'baseLayer',
   isBaseLayer: true,
-  style: 'netzkarte_personenverkehr',
+  style: 'netzkarte_personenverkehr_v2',
+});
+
+const netzkarteShowcasesLight = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.light',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: true,
+  radioGroup: 'baseLayer',
+  isBaseLayer: true,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'showcase3',
 });
 
 const swisstopoSwissImage = new Layer({
   name: 'ch.sbb.netzkarte.luftbild',
-  key: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
   radioGroup: 'baseLayer',
   isBaseLayer: true,
@@ -79,5 +89,5 @@ export default {
     permalink: false,
     baseLayerToggler: true,
   },
-  layers: [netzkarteLayer, swisstopoSwissImage],
+  layers: [netzkarteLayer, netzkarteShowcasesLight, swisstopoSwissImage],
 };
