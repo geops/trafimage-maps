@@ -3,7 +3,7 @@ import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import WKT from 'ol/format/WKT';
-import { Style, Circle, Fill } from 'ol/style';
+import { Style, Circle, Fill, Icon } from 'ol/style';
 import LayerHelper from '../layerHelper';
 
 /**
@@ -14,43 +14,31 @@ import LayerHelper from '../layerHelper';
  * @inheritdoc
  */
 class HandicapLayer extends VectorLayer {
-  static getIconStyle(geometry, isHighlighted = false) {
-    return [
-      new Style({
-        geometry,
-        image: new Circle({
-          radius: 15,
-          fill: new Fill({
-            color: [246, 136, 38, isHighlighted ? 0.7 : 0.4],
-          }),
-        }),
-      }),
-      new Style({
-        geometry,
-        image: new Circle({
-          radius: 9,
-          fill: new Fill({
-            color: [246, 136, 38, 1],
-          }),
-        }),
-      }),
-    ];
-  }
-
   constructor(options = {}) {
+    const { handicapType, zIndex } = options.properties;
+
     const olLayer = new OLVectorLayer({
-      style: (f, r) => this.style(f, r),
+      style: (f, r) => this.style(f, r, handicapType),
       source: new OLVectorSource({
         format: new GeoJSON(),
         loader: () => {
           fetch(
-            `${this.cartaroUrl}handicap/items/?has_changes=true` +
-              '&stuetzpunktbahnhof=true',
+            `${this.cartaroUrl}handicap/items/?has_changes=true&${
+              handicapType === 'stuetzpunkt' ? 'stuetzpunktbahnhof=true' : ''
+            }`,
           )
             .then(data => data.json())
             .then(data => {
               const format = new GeoJSON();
-              const features = format.readFeatures(data);
+              let features = format.readFeatures(data);
+              if (handicapType !== 'stuetzpunkt') {
+                features = features.filter(feat => {
+                  if (handicapType === 'barrierfree') {
+                    return feat.get('barrierefreier_bahnhof') === true;
+                  }
+                  return feat.get('barrierefreier_bahnhof') === false;
+                });
+              }
               this.olLayer.getSource().clear();
               this.olLayer.getSource().addFeatures(features);
             });
@@ -58,6 +46,10 @@ class HandicapLayer extends VectorLayer {
       }),
       zIndex: 0,
     });
+
+    if (zIndex) {
+      olLayer.setZIndex(zIndex);
+    }
 
     super({
       ...options,
@@ -74,8 +66,59 @@ class HandicapLayer extends VectorLayer {
     });
   }
 
+  getIconStyle(geometry, handicapType, isHighlighted = false) {
+    if (handicapType === 'stuetzpunkt') {
+      return [
+        new Style({
+          geometry,
+          image: new Circle({
+            radius: 15,
+            fill: new Fill({
+              color: [246, 136, 38, isHighlighted ? 0.7 : 0.4],
+            }),
+          }),
+        }),
+        new Style({
+          geometry,
+          image: new Circle({
+            radius: 9,
+            fill: new Fill({
+              color: [246, 136, 38, 1],
+            }),
+          }),
+        }),
+      ];
+    }
+    return [
+      new Style({
+        geometry,
+        image: new Circle({
+          radius: 15,
+          fill: new Fill({
+            color: [246, 136, 38, isHighlighted ? 0.7 : 0],
+          }),
+        }),
+      }),
+      new Style({
+        geometry,
+        image: new Icon({
+          src: `${this.staticFilesUrl}/img/layers/handicap/${
+            handicapType === 'barrierfree'
+              ? 'barrierfreierBahnhoefe'
+              : 'nichtBarrierfreierBahnhoefe'
+          }.png`,
+          scale: 0.5,
+        }),
+      }),
+    ];
+  }
+
   setCartaroUrl(cartaroUrl) {
     this.cartaroUrl = cartaroUrl;
+  }
+
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
   }
 
   /**
@@ -83,7 +126,7 @@ class HandicapLayer extends VectorLayer {
    * @param {ol.feature} feature
    * @returns {Object|null}
    */
-  style(feature, resolution) {
+  style(feature, resolution, handicapType) {
     let geometry = feature.getGeometry();
     let gen = 100;
     gen = resolution < 500 ? 30 : gen;
@@ -101,7 +144,8 @@ class HandicapLayer extends VectorLayer {
     }
 
     const isHighlighted = feature === this.clickedFeature;
-    return HandicapLayer.getIconStyle(geometry, isHighlighted);
+
+    return this.getIconStyle(geometry, handicapType, isHighlighted);
   }
 }
 

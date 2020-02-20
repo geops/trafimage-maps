@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 const propTypes = {
   language: PropTypes.string.isRequired,
@@ -48,4 +47,4 @@ const InfoFPWTopicInfo = ({ language, t }) => {
 InfoFPWTopicInfo.propTypes = propTypes;
 InfoFPWTopicInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(InfoFPWTopicInfo);
+export default withTranslation()(InfoFPWTopicInfo);

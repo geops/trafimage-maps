@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
 
-const PunctualityLayerInfo = ({ language, t }) => {
+const PunctualityLayerInfo = ({ language, t, staticFilesUrl }) => {
   const img = (
     <img
-      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/puenktlichkeit/puenktlichkeit_legend_${language}.png`}
+      src={`${staticFilesUrl}/img/layers/puenktlichkeit/puenktlichkeit_legend_${language}.png`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />
@@ -99,4 +99,4 @@ const PunctualityLayerInfo = ({ language, t }) => {
 PunctualityLayerInfo.propTypes = propTypes;
 PunctualityLayerInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(PunctualityLayerInfo);
+export default withTranslation()(PunctualityLayerInfo);

@@ -143,6 +143,10 @@ class ConstructionLayer extends VectorLayer {
     this.geoServerUrl = geoServerUrl;
   }
 
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
+  }
+
   /**
    * Function that returns a geometry if the feature should be visible.
    * @param  {ol.feature} feature Feature
@@ -208,7 +212,7 @@ class ConstructionLayer extends VectorLayer {
       this.styleCache[cacheKey] = [
         new Style({
           image: new Icon({
-            src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/construction/${filename}.png`,
+            src: `${this.staticFilesUrl}/img/layers/construction/${filename}.png`,
           }),
         }),
       ];
