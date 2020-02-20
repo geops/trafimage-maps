@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "1.0.7-beta.57",
+  "version": "1.0.7-beta.61",
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
@@ -41,7 +41,8 @@
     "redux": "^4.0.5",
     "redux-debounced": "^0.5.0",
     "redux-thunk": "^2.3.0",
-    "style-it": "^2.1.4"
+    "style-it": "^2.1.4",
+    "styled-components": "^5.0.1"
   },
   "peerDependencies": {
     "react": "^16.11.0",
@@ -77,6 +78,7 @@
     "fetch-mock": "^8.3.1",
     "fixpack": "^2.3.1",
     "generact": "^0.4.0",
+    "gensync": "^1.0.0-beta.1",
     "geops-docjs-template": "^1.0.0",
     "husky": "^3.1.0",
     "jest": "^24.9.0",

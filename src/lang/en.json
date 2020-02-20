@@ -108,6 +108,7 @@
   "ch.sbb.netzkarte.landeskarte.grau": "Swiss National Map (grey)",
   "ch.sbb.netzkarte.light": "Swiss public transport network map (light)",
   "ch.sbb.netzkarte.light-desc": "This map shows a lighter version of the Network map passenger Traffic with a reduced level of information.",
+  "ch.sbb.netzkarte.luftbild": "Aerial image",
   "ch.sbb.netzkarte.luftbild.group": "Network map (Aerial)",
   "ch.sbb.netzkarte.night": "Swiss public transport network map (night)",
   "ch.sbb.netzkarte.night-desc": "The dark version of the Network map passenger Traffic could be used to display a nighttime network, for example.",
