@@ -11,6 +11,7 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -805,6 +806,26 @@ export const grenzen = new Layer({
       ],
     }),
   ],
+});
+
+export const zweitausbildungAbroad = new ZweitausbildungAbroadLayer({
+  name: 'ch.sbb.zweitausbildung.abroad',
+  key: 'ch.sbb.zweitausbildung.abroad',
+  visible: true,
+  properties: {
+    popupComponent: 'ZweitausbildungAbroadPopup',
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.abroad-title',
+        legend: {
+          image: 'button_rectangle.png',
+          name: 'ch.sbb.zweitausbildung.abroad-name',
+        },
+      },
+    },
+  },
 });
 
 export const zweitausbildungStations = new Layer({

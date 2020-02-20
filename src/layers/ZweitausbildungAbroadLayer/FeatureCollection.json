@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "totalFeatures": 4,
+  "features": [
+    {
+      "type": "Feature",
+      "id": "1",
+      "geometry": { "type": "Point", "coordinates": [700043.3044749643, 5988241.881072619] },
+      "properties": {
+        "id": 1,
+        "abroad": "true",
+        "title_de": "Karte F",
+        "title_fr": "Carte F",
+        "title_it": "Carta F",
+        "title_en": "Map F",
+        "url": "https://sbb.sharepoint.com/teams/526/1775/_layouts/15/DocIdRedir.aspx?ID=T0526-1440065995-56"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "2",
+      "geometry": { "type": "Point", "coordinates": [860347.0842893623, 6064734.0029315315] },
+      "properties": {
+        "id": 2,
+        "abroad": "true",
+        "title_de": "Karte D",
+        "title_fr": "Carte D",
+        "title_it": "Carta D",
+        "title_en": "Map D",
+        "url": "https://sbb.sharepoint.com/teams/526/1775/_layouts/15/DocIdRedir.aspx?ID=T0526-1440065995-55"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "3",
+      "geometry": { "type": "Point", "coordinates": [1133166.8845173584, 5969835.50545724] },
+      "properties": {
+        "id": 3,
+        "abroad": "true",
+        "title_de": "Karte A",
+        "title_fr": "Carte A",
+        "title_it": "Carta A",
+        "title_en": "Map A",
+        "url": "https://sbb.sharepoint.com/teams/526/1775/_layouts/15/DocIdRedir.aspx?ID=T0526-1440065995-54"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "4",
+      "geometry": { "type": "Point", "coordinates": [1085626.3123452219, 5778950.253212102] },
+      "properties": {
+        "id": 4,
+        "abroad": "true",
+        "title_de": "Karte I",
+        "title_fr": "Carte I",
+        "title_it": "Carta I",
+        "title_en": "Map I",
+        "url": "https://sbb.sharepoint.com/teams/526/1775/_layouts/15/DocIdRedir.aspx?ID=T0526-1440065995-57"
+      }
+    }
+  ]
+}

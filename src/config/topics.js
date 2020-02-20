@@ -26,6 +26,7 @@ import defaultBaseLayers, {
   gewässer,
   uebrigeBahnen,
   netzkarteEisenbahninfrastruktur,
+  zweitausbildungAbroad,
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
@@ -258,13 +259,15 @@ export const tina = {
   redirect: true,
 };
 
+// TODO Eva Thema versteckt
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
-  elements: { ...defaultElements, shareMenu: true },
+  elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     dataLayer,
     netzkarteLayer,
+    zweitausbildungAbroad,
     zweitausbildungPois,
     zweitausbildungRoutes,
     zweitausbildungStations,
