@@ -841,15 +841,28 @@ export const zweitausbildungStations = new Layer({
     },
   },
   children: [
-    new Layer({
+    new TrafimageGeoServerWMSLayer({
       name: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
       key: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
       visible: true,
+      olLayer: new TileLayer({
+        source: new TileWMSSource({
+          crossOrigin: 'anonymous',
+          params: {
+            layers: 'trafimage:zweitausbildung_haltestellen_qry',
+            viewparams: 'selektion:Aufbau',
+          },
+          tileGrid: new TileGrid({
+            extent: projectionExtent,
+            resolutions,
+            matrixIds: resolutions.map((r, i) => `${i}`),
+          }),
+        }),
+      }),
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          viewparams: 'selektion:Aufbau',
           infos: {
             title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
             legend: [
@@ -866,15 +879,28 @@ export const zweitausbildungStations = new Layer({
         },
       },
     }),
-    new Layer({
+    new TrafimageGeoServerWMSLayer({
       name: 'ch.sbb.zweitausbildung.haltestellen.basis',
       key: 'ch.sbb.zweitausbildung.haltestellen.basis',
       visible: true,
+      olLayer: new TileLayer({
+        source: new TileWMSSource({
+          crossOrigin: 'anonymous',
+          params: {
+            layers: 'trafimage:zweitausbildung_haltestellen_qry',
+            viewparams: 'selektion:Basis',
+          },
+          tileGrid: new TileGrid({
+            extent: projectionExtent,
+            resolutions,
+            matrixIds: resolutions.map((r, i) => `${i}`),
+          }),
+        }),
+      }),
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          viewparams: 'selektion:Basis',
           infos: {
             title: 'ch.sbb.zweitausbildung.haltestellen.basis-title',
             legend: [
