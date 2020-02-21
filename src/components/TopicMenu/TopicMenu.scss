@@ -13,10 +13,12 @@
       height: 100%;
       display: flex;
       align-items: center;
+      overflow: visible;
 
       .wkp-topic-title {
         display: flex;
         align-items: center;
+        max-width: 300px;
       }
 
       .wkp-topic-radio {
@@ -59,6 +61,7 @@
       height: 100%;
       width: auto;
       min-width: 14px;
+      margin-left: 5px;
       justify-content: flex-end;
     }
 
@@ -76,7 +79,6 @@
       display: flex;
       align-items: center;
       color: #888;
-      font-size: 14px;
 
       &.wkp-active {
         color: #000;
