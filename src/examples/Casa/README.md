@@ -7,7 +7,7 @@ import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import casa from 'trafimage-maps/examples/Casa/topic';
+import casa, { netzkarteLayerLabels } from 'trafimage-maps/examples/Casa/topic';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -102,7 +102,7 @@ const App = () => {
 
   useEffect(() => {
     const map = ref.current;
-    map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
+    map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer, netzkarteLayerLabels]}];
 
     return () => {
       map.topics = null;
