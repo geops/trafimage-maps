@@ -29,6 +29,7 @@ const propTypes = {
   permissionUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape(),
@@ -56,6 +57,7 @@ const defaultProps = {
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionUrl: null,
+  staticFilesUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -80,6 +82,7 @@ class TopicLoader extends Component {
       vectorTilesKey,
       vectorTilesUrl,
       permissionUrl,
+      staticFilesUrl,
       dispatchFetchPermissionsInfos,
     } = this.props;
 
@@ -104,7 +107,8 @@ class TopicLoader extends Component {
       vectorTilesKey !== prevProps.vectorTilesKey ||
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
       cartaroUrl !== prevProps.cartaroUrl ||
-      appBaseUrl !== prevProps.appBaseUrl
+      appBaseUrl !== prevProps.appBaseUrl ||
+      staticFilesUrl !== prevProps.staticFilesUrl
     ) {
       this.updateServices(activeTopic);
     }
@@ -179,6 +183,7 @@ class TopicLoader extends Component {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      staticFilesUrl,
     } = this.props;
 
     const [currentBaseLayer] = layerService
@@ -216,12 +221,21 @@ class TopicLoader extends Component {
       } else if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
       }
+      if (flatLayers[i].setStaticFilesUrl) {
+        flatLayers[i].setStaticFilesUrl(staticFilesUrl);
+      }
     }
   }
 
   render() {
-    const { history, appBaseUrl } = this.props;
-    return <TopicElements history={history} appBaseUrl={appBaseUrl} />;
+    const { history, appBaseUrl, staticFilesUrl } = this.props;
+    return (
+      <TopicElements
+        history={history}
+        appBaseUrl={appBaseUrl}
+        staticFilesUrl={staticFilesUrl}
+      />
+    );
   }
 }
 

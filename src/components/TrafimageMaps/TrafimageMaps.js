@@ -74,6 +74,11 @@ const propTypes = {
   vectorTilesUrl: PropTypes.string,
 
   /**
+   * URL endpoint for static files.
+   */
+  staticFilesUrl: PropTypes.string,
+
+  /**
    * URL to request permission.
    */
   permissionUrl: PropTypes.string,
@@ -88,6 +93,7 @@ const defaultProps = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
   topics: null,
   language: 'de',
@@ -141,6 +147,7 @@ class TrafimageMaps extends React.PureComponent {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      staticFilesUrl,
       permissionUrl,
     } = this.props;
 
@@ -155,6 +162,7 @@ class TrafimageMaps extends React.PureComponent {
           permissionUrl={permissionUrl}
           vectorTilesKey={vectorTilesKey}
           vectorTilesUrl={vectorTilesUrl}
+          staticFilesUrl={staticFilesUrl}
         />
       </Provider>
     );

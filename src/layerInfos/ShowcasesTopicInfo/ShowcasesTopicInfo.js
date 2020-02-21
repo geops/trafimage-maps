@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -80,4 +79,4 @@ const ShowcasesTopicInfo = ({ language, t }) => {
 ShowcasesTopicInfo.propTypes = propTypes;
 ShowcasesTopicInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(ShowcasesTopicInfo);
+export default withTranslation()(ShowcasesTopicInfo);
