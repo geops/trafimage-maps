@@ -16,25 +16,25 @@ import ArrowImg from '../../img/arrow.png';
  *   fill: { color: 'rgb(255, 200, 25)', },
  *   stroke: { width: 2, color: 'black' },
  *   strokeOutline: { width: 10, color: 'white' },
- *   text: { color: 'black' },
- *   textOutline { color: 'white', width: 2 },
+ *   text: { color: [255, 0, 0, 0.3] },
+ *   textOutline: { color: 'white', width: 2 },
  * };
  * @property {Object} [fill] Fill properties.
- * @property {string} [fill.color] Fill color.
+ * @property {string|array} [fill.color] Fill color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [stroke] Stroke properties.
  * @property {number} [stroke.width] Stroke width.
- * @property {string} [stroke.color] Stroke color.
+ * @property {string|array} [stroke.color] Stroke color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [stroke.arrow] Stroke arrows.
  * @property {number} [stroke.arrow.count] Number of stroke arrows along the route.
  * @property {Object} [strokeOutline] Stroke outline.
  * @property {number} [strokeOutline.width] Stroke outline width.
- * @property {string} [strokeOutline.color] Stroke outline color.
+ * @property {string|array} [strokeOutline.color] Stroke outline color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [text] Text properties.
  * @property {string} [text.font] Font.
  * @property {string} [text.label] Text label. If undefined, the zone code is used.
- * @property {string} [text.color] Text color.
+ * @property {string|array} [text.color] Text color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [textOutline] Text outline.
- * @property {string} [textOutline.color] Text outline color.
+ * @property {string|array} [textOutline.color] Text outline color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {number} [textOutline.width] Text outline width.
  */
 
@@ -205,7 +205,7 @@ class CasaLayer extends VectorLayer {
           fill: new FillStyle({
             color: style.text.color,
           }),
-          stroke: style.text.textOutline
+          stroke: style.textOutline
             ? new StrokeStyle({ ...style.textOutline })
             : undefined,
           text: style.text.label,
