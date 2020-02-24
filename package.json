@@ -24,7 +24,7 @@
     "package.json": "^2.0.1",
     "proj4": "^2.6.0",
     "prop-types": "^15.6.2",
-    "proxy-polyfill": "^0.3.0",
+    "proxy-polyfill": "^0.3.1",
     "query-string": "^6.11.0",
     "react": "^16.12.0",
     "react-app-polyfill": "^1.0.6",
