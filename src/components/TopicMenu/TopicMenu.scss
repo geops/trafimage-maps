@@ -6,7 +6,7 @@
   .wkp-topic-menu-item-wrapper {
     display: flex;
     align-items: center;
-    height: 32px;
+    height: $menu-item-height;
 
     .wkp-topic-menu-item {
       width: 100%;
@@ -95,7 +95,6 @@
     margin: 1px 0 0 20px;
 
     .rs-layer-tree {
-      // margin-top: -1px;
       overflow: hidden;
     }
 
@@ -107,7 +106,7 @@
 
     .rs-layer-tree-item {
       color: #888;
-      height: 32px;
+      height: $menu-item-height;
       padding: 0;
       margin: 0 0 0 4px;
 
