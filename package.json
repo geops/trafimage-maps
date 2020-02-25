@@ -4,6 +4,7 @@
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
+    "@datapunt/matomo-tracker-react": "^0.1.1",
     "@geops/create-react-web-component": "^2.0.19",
     "@geops/react-ui": "^1.0.5",
     "@turf/intersect": "^6.1.3",

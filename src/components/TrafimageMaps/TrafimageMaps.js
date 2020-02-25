@@ -4,6 +4,7 @@ import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '../../i18n';
 
+import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
@@ -77,6 +78,11 @@ const propTypes = {
    * URL to request permission.
    */
   permissionUrl: PropTypes.string,
+
+  /**
+   * Disable analytics tracking.
+   */
+  disableTracking: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -91,7 +97,14 @@ const defaultProps = {
   permissionUrl: null,
   topics: null,
   language: 'de',
+  disableTracking: false,
 };
+
+const matomo = createInstance({
+  urlBase: process.env.REACT_APP_MATOMO_URL_BASE,
+  siteId: process.env.REACT_APP_MATOMO_SITE_ID,
+  trackerUrl: `${process.env.REACT_APP_MATOMO_URL_BASE}piwik.php`,
+});
 
 class TrafimageMaps extends React.PureComponent {
   constructor(props) {
@@ -105,7 +118,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, language } = this.props;
+    const { zoom, center, language, disableTracking } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -117,6 +130,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (language) {
       this.store.dispatch(setLanguage(language));
+    }
+
+    if (matomo && disableTracking === false) {
+      matomo.trackPageView();
     }
   }
 
@@ -142,21 +159,24 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
       permissionUrl,
+      disableTracking,
     } = this.props;
 
     return (
-      <Provider store={this.store}>
-        <TopicLoader
-          history={history}
-          apiKey={apiKey}
-          topics={topics}
-          cartaroUrl={cartaroUrl}
-          appBaseUrl={appBaseUrl}
-          permissionUrl={permissionUrl}
-          vectorTilesKey={vectorTilesKey}
-          vectorTilesUrl={vectorTilesUrl}
-        />
-      </Provider>
+      <MatomoProvider value={disableTracking ? {} : matomo}>
+        <Provider store={this.store}>
+          <TopicLoader
+            history={history}
+            apiKey={apiKey}
+            topics={topics}
+            cartaroUrl={cartaroUrl}
+            appBaseUrl={appBaseUrl}
+            permissionUrl={permissionUrl}
+            vectorTilesKey={vectorTilesKey}
+            vectorTilesUrl={vectorTilesUrl}
+          />
+        </Provider>
+      </MatomoProvider>
     );
   }
 }

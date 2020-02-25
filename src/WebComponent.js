@@ -90,6 +90,11 @@ const propTypes = {
    * URL to request permission.
    */
   permissionUrl: PropTypes.string,
+
+  /**
+   * Disable analytics tracking.
+   */
+  disableTracking: PropTypes.bool,
 };
 
 const attributes = {
@@ -111,6 +116,7 @@ const attributes = {
 const defaultProps = {
   topics: undefined,
   history: undefined,
+  disableTracking: false,
 };
 
 const WebComponent = props => {
@@ -124,6 +130,7 @@ const WebComponent = props => {
     center,
     apiKey,
     vectorTilesKey,
+    disableTracking,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -177,6 +184,7 @@ const WebComponent = props => {
           topics={appTopics}
           zoom={floatZoom}
           center={arrayCenter}
+          disableTracking={disableTracking}
         />
       </div>
     </Styled>

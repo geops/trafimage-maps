@@ -1,3 +1,4 @@
+import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -133,6 +134,7 @@ class TopicLoader extends Component {
   }
 
   updateServices(activeTopic) {
+    const matomo = this.context;
     const {
       t,
       apiKey,
@@ -147,6 +149,8 @@ class TopicLoader extends Component {
       dispatchSetSearchService();
       return;
     }
+
+    matomo.trackEvent({ category: activeTopic.name, action: 'load' });
 
     if (activeTopic.redirect) {
       // Redirection to the old wkp
@@ -242,6 +246,7 @@ const mapDispatchToProps = {
 
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
+TopicLoader.contextType = MatomoContext;
 
 export default compose(
   withTranslation(),
