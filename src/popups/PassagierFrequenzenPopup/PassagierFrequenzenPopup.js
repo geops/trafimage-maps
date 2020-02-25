@@ -27,7 +27,9 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
       <div className="wkp-passagier-freq-popup-body">
         <span>{t('passagier_freq_jahr', { statisticDate })}</span>
         <span>{`${dwv} ${t('Ein- und Aussteigende')}`}</span>
-        {remark ? <span>{remark}</span> : null}
+        {remark ? (
+          <span className="wkp-passagier-freq-remark">{remark}</span>
+        ) : null}
       </div>
     </div>
   );
