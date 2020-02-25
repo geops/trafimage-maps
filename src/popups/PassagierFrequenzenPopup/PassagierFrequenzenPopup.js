@@ -13,7 +13,11 @@ const defaultProps = {};
 
 const PassagierFrequenzenPopup = ({ feature, t }) => {
   const statisticDate = feature.get('passagier_freq_jahr');
-  const dwv = feature.get('dwv');
+
+  const dwv = feature
+    .get('dwv')
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
   return (
     <div className="wkp-passagier-freq-popup">
