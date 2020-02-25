@@ -51,6 +51,7 @@
         top: 0;
       }
     </style>
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
     <script type="text/javascript">
       window.changeAttr = function(attr, val) {
         // If attribute value is the same the update is not triggered,
@@ -67,13 +68,14 @@
 
       window.onload = function() {
         fetch('https://developer.geops.io/publickey')
-          .then(response => response.json())
-          .then(data => {
-            changeAttr('apiKey', data.key)
+          .then(function(response) {
+            return response.json();
+          }).then(function(data) {
+            return changeAttr('apiKey', data.key);
           })
-          .catch(() => {
+          .catch(function() {
             console.error('Request to get the apiKey failed');
-          });
+        });
 
         const map = document.getElementById('map');
         const evts = document.getElementById('events');
