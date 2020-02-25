@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
+import { useSelector } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 
@@ -12,18 +13,21 @@ const propTypes = {
 const defaultProps = {};
 
 const PassagierFrequenzenPopup = ({ feature, t }) => {
-  const statisticDate = feature.get('passagier_freq_jahr');
+  const language = useSelector(state => state.app.language);
 
+  const statisticDate = feature.get('passagier_freq_jahr');
   const dwv = feature
     .get('dwv')
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  const remark = feature.get(`passagier_freq_bemerkungen_${language}`);
 
   return (
     <div className="wkp-passagier-freq-popup">
       <div className="wkp-passagier-freq-popup-body">
         <span>{t('passagier_freq_jahr', { statisticDate })}</span>
         <span>{`${dwv} ${t('Ein- und Aussteigende')}`}</span>
+        {remark ? <span>{remark}</span> : null}
       </div>
     </div>
   );
