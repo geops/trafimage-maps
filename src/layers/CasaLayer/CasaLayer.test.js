@@ -95,6 +95,10 @@ describe('CasaLayer', () => {
           fill: new Fill({
             color: 'black',
           }),
+          stroke: new Stroke({
+            color: 'white',
+            width: 2,
+          }),
         }),
       }),
     );

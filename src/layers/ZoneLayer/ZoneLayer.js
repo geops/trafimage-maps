@@ -194,7 +194,11 @@ class ZoneLayer extends CasaLayer {
     const isSelected = this.selectedZones.includes(feature);
     const isHovered =
       feature.get('isClickable') && this.hoverFeature === feature;
-    const styleObject = this.styleFunction(feature.getProperties(), isSelected);
+    const styleObject = this.styleFunction(
+      feature.getProperties(),
+      isSelected,
+      isHovered,
+    );
     const olStyles = this.getOlStylesFromObject(
       styleObject,
       isSelected,
