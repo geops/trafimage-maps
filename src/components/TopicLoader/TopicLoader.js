@@ -150,7 +150,9 @@ class TopicLoader extends Component {
       return;
     }
 
-    matomo.trackEvent({ category: activeTopic.name, action: 'load' });
+    if (matomo) {
+      matomo.trackEvent({ category: activeTopic.name, action: 'load' });
+    }
 
     if (activeTopic.redirect) {
       // Redirection to the old wkp

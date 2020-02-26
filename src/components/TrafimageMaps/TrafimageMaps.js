@@ -80,9 +80,9 @@ const propTypes = {
   permissionUrl: PropTypes.string,
 
   /**
-   * Disable analytics tracking.
+   * Enable analytics tracking.
    */
-  disableTracking: PropTypes.bool,
+  enableTracking: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -97,14 +97,18 @@ const defaultProps = {
   permissionUrl: null,
   topics: null,
   language: 'de',
-  disableTracking: false,
+  enableTracking: false,
 };
 
-const matomo = createInstance({
-  urlBase: process.env.REACT_APP_MATOMO_URL_BASE,
-  siteId: process.env.REACT_APP_MATOMO_SITE_ID,
-  trackerUrl: `${process.env.REACT_APP_MATOMO_URL_BASE}piwik.php`,
-});
+let matomo;
+const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
+if (REACT_APP_MATOMO_URL_BASE && REACT_APP_MATOMO_SITE_ID) {
+  matomo = createInstance({
+    urlBase: REACT_APP_MATOMO_URL_BASE,
+    siteId: REACT_APP_MATOMO_SITE_ID,
+    trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
+  });
+}
 
 class TrafimageMaps extends React.PureComponent {
   constructor(props) {
@@ -118,7 +122,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, language, disableTracking } = this.props;
+    const { zoom, center, language, enableTracking } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -132,7 +136,7 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setLanguage(language));
     }
 
-    if (matomo && disableTracking === false) {
+    if (matomo && enableTracking) {
       matomo.trackPageView();
     }
   }
@@ -159,11 +163,11 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
       permissionUrl,
-      disableTracking,
+      enableTracking,
     } = this.props;
 
     return (
-      <MatomoProvider value={disableTracking ? {} : matomo}>
+      <MatomoProvider value={enableTracking && matomo}>
         <Provider store={this.store}>
           <TopicLoader
             history={history}
