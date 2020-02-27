@@ -92,15 +92,6 @@ class HandicapLayer extends VectorLayer {
     return [
       new Style({
         geometry,
-        image: new Circle({
-          radius: 15,
-          fill: new Fill({
-            color: [246, 136, 38, isHighlighted ? 0.7 : 0],
-          }),
-        }),
-      }),
-      new Style({
-        geometry,
         image: new Icon({
           src: `${this.staticFilesUrl}/img/layers/handicap/${
             handicapType === 'barrierfree'

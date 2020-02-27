@@ -87,7 +87,7 @@ dataLayer.on('load', () => {
 
 export const sourcesLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.sources',
-  zIndex: 1,
+  zIndex: 2,
   preserveDrawingBuffer: true,
   style: 'trafimage_sources_only_v2',
   properties: {
