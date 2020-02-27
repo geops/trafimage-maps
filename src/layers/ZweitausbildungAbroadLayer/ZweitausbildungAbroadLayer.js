@@ -44,8 +44,13 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
     this.geoJsonCacheUrl = geoJsonCacheUrl;
   }
 
+  setLanguage(language) {
+    this.language = language;
+    this.olLayer.changed();
+  }
+
   style(feature, resolution) {
-    const text = feature.get(`title_de`);
+    const text = feature.get(`title_${this.language}`);
     const hover = feature.get('hoverStyle');
 
     const fontSize = hover ? 20 : 16;
