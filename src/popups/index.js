@@ -9,6 +9,7 @@ import PassagierFrequenzenPopup from './PassagierFrequenzenPopup';
 import ConstructionPopup from './ConstructionPopup';
 import DeparturePopup from './DeparturePopup';
 import ZweitausbildungAbroadPopup from './ZweitausbildungAbroadPopup';
+import ZweitausbildungPoisPopup from './ZweitausbildungPoisPopup';
 
 export default {
   BahnhofplanPopup,
@@ -22,4 +23,5 @@ export default {
   ConstructionPopup,
   DeparturePopup,
   ZweitausbildungAbroadPopup,
+  ZweitausbildungPoisPopup,
 };

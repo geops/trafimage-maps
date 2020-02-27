@@ -1,0 +1,20 @@
+.wkp-zweitausbildung-pois-popup {
+  .wkp-zweitausbildung-pois-popup-row {
+    min-height: 50px;
+    border-bottom: dashed 1px #bebebe;
+    padding-top: 5px;
+
+    &:hover {
+      background-color: #eaeaea;
+      cursor: pointer;
+    }
+  }
+
+  .wkp-zweitausbildung-pois-popup-railaway {
+    font-style: italic;
+  }
+
+  .wkp-zweitausbildung-pois-popup-image {
+    padding: 6px;
+  }
+}

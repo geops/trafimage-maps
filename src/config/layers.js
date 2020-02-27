@@ -12,6 +12,7 @@ import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
+import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -933,15 +934,17 @@ export const zweitausbildungPois = new Layer({
     },
   },
   children: [
-    new Layer({
+    new ZweitausbildungPoisLayer({
       name: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
       key: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
       visible: true,
       properties: {
+        popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
           viewparams: 'railway:false',
+          color: 'rgba(0, 61, 133, 0.8)',
           infos: {
             legend: [
               {
@@ -953,15 +956,17 @@ export const zweitausbildungPois = new Layer({
         },
       },
     }),
-    new Layer({
+    new ZweitausbildungPoisLayer({
       name: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
       key: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
       visible: true,
       properties: {
+        popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
           viewparams: 'railaway:true',
+          color: 'rgba(235, 0, 0, 0.8)',
           infos: {
             legend: [
               {
