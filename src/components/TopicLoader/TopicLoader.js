@@ -32,6 +32,7 @@ const propTypes = {
 
   // mapStateToProps
   activeTopic: PropTypes.shape(),
+  language: PropTypes.string.isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   permissionsInfos: PropTypes.shape({
     user: PropTypes.string,
@@ -72,6 +73,7 @@ class TopicLoader extends Component {
   componentDidUpdate(prevProps) {
     const {
       activeTopic,
+      language,
       topics,
       permissionsInfos,
       apiKey,
@@ -107,6 +109,10 @@ class TopicLoader extends Component {
       appBaseUrl !== prevProps.appBaseUrl
     ) {
       this.updateServices(activeTopic);
+    }
+
+    if (language !== prevProps.language) {
+      this.updateLayers(activeTopic.layers);
     }
   }
 
@@ -173,6 +179,7 @@ class TopicLoader extends Component {
 
   updateLayers(topicLayers) {
     const {
+      language,
       layerService,
       dispatchSetLayers,
       cartaroUrl,
@@ -216,6 +223,10 @@ class TopicLoader extends Component {
       } else if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
       }
+
+      if (flatLayers[i].setLanguage) {
+        flatLayers[i].setLanguage(language);
+      }
     }
   }
 
@@ -227,6 +238,7 @@ class TopicLoader extends Component {
 
 const mapStateToProps = state => ({
   activeTopic: state.app.activeTopic,
+  language: state.app.language,
   layerService: state.app.layerService,
   permissionsInfos: state.app.permissionsInfos,
 });
