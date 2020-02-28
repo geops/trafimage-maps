@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
-import { fronLonLat } from 'ol/proj';
+import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
@@ -128,7 +128,7 @@ class TrackerMenu extends Component {
               onStationClick={station => {
                 map.getView().animate({
                   zoom: map.getView().getZoom(),
-                  center: fronLonLat(station.coordinates),
+                  center: fromLonLat(station.coordinates),
                 });
               }}
             />
