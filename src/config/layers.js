@@ -13,6 +13,7 @@ import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
+import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1013,7 +1014,7 @@ export const zweitausbildungRoutes = new Layer({
         },
       },
       children: [
-        new Layer({
+        new ZweitausbildungRoutesLayer({
           name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           visible: false,
@@ -1045,7 +1046,7 @@ export const zweitausbildungRoutes = new Layer({
         },
       },
       children: [
-        new Layer({
+        new ZweitausbildungRoutesLayer({
           name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           visible: true,
