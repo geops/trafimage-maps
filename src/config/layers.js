@@ -87,8 +87,6 @@ const updateStations = mbMap => {
         };
         return good;
       });
-
-    console.log(osmPointsRendered);
     const source = mbMap.getSource('stations');
     if (source) {
       source.setData({
@@ -110,7 +108,6 @@ dataLayer.once('load', () => {
       );
     })
     .map(layer => layer.id);
-  console.log(osmPointsLayers);
   mbMap.addSource('stations', {
     type: 'geojson',
     data: {

@@ -2,6 +2,7 @@ import React from 'react';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { transform } from 'ol/proj';
+import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
 
 const endpoint = 'https://api.geops.io/stops/v1/';
@@ -9,7 +10,6 @@ const endpoint = 'https://api.geops.io/stops/v1/';
 class StopFinder extends Search {
   constructor() {
     super();
-    this.endpoint = endpoint;
     this.onDataEvent = this.onDataEvent.bind(this);
   }
 
@@ -85,7 +85,7 @@ class StopFinder extends Search {
 
     const infoLayers = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getVisible());
+      .filter(l => l.getVisible() && l instanceof MapboxStyleLayer);
 
     const infos = infoLayers
       .map(l => this.getFeatureInfoForLayer(l))
