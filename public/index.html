@@ -76,6 +76,7 @@
           });
 
         const map = document.getElementById('map');
+        /*
         const evts = document.getElementById('events');
         map.addEventListener('moveend', function(evt) {
           console.log(evt);
@@ -96,11 +97,13 @@
           evts.innerHTML =
             evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
         });
+        */
       };
     </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--
     <div id="buttons">
       <button
         type="button"
@@ -142,6 +145,7 @@
         change zoom to 16
       </button>
     </div>
+    -->
     <trafimage-maps
       id="map"
       zoom="12"
@@ -150,7 +154,9 @@
       activeTopicKey="ch.sbb.netzkarte"
       permissionUrl="//maps.trafimage.ch"
     ></trafimage-maps>
+    <!--
     <div id="events"></div>
+    -->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
