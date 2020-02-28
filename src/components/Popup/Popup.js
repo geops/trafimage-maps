@@ -18,7 +18,7 @@ const Popup = () => {
 
     if (layer.get('popupComponent')) {
       if (typeof layer.hidePopup === 'function') {
-        return features.find(f => !layer.hidePopup(f));
+        return features.find(f => !layer.hidePopup(f, layer, featureInfo));
       }
       return true;
     }

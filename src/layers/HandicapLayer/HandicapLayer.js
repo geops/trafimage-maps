@@ -56,6 +56,7 @@ class HandicapLayer extends VectorLayer {
       olLayer,
     });
 
+    this.hidePopup = options.hidePopup;
     this.setVisible(this.visible);
 
     this.wktFormat = new WKT();

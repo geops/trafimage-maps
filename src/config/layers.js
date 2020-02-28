@@ -433,6 +433,15 @@ export const stuetzpunktBahnhoefe = new HandicapLayer({
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
   },
+  hidePopup: (feat, layer, featureInfo) => {
+    const otherFeatsClicked = featureInfo
+      .filter(info => info.layer !== layer)
+      .map(info => info.features)
+      .flat()
+      .map(f => f.get('stationsbezeichnung'));
+
+    return otherFeatsClicked.includes(feat.get('stationsbezeichnung'));
+  },
 });
 
 export const barrierfreierBahnhoefe = new HandicapLayer({
