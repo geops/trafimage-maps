@@ -26,7 +26,7 @@ function NetzkartePopup({ feature }) {
     dispatch(
       setFeatureInfo([
         {
-          coordinate: feature.getGeometry().getCoordinates()[0],
+          coordinate: feature.getGeometry().getCoordinates(),
           features: [feature],
           // Fake layer binded to popup, to open it.
           layer: {
