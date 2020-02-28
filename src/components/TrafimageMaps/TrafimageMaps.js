@@ -142,7 +142,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center } = this.props;
+    const { zoom, center, enableTracking } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -150,6 +150,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (matomo && !prevProps.enableTracking && enableTracking) {
+      matomo.trackPageView();
     }
   }
 

@@ -111,12 +111,12 @@ const attributes = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   permissionUrl: null,
+  enableTracking: false,
 };
 
 const defaultProps = {
   topics: undefined,
   history: undefined,
-  enableTracking: false,
 };
 
 const WebComponent = props => {
