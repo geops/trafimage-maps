@@ -68,9 +68,6 @@ export const dataLayer = new TrafimageMapboxLayer({
   properties: {
     hideInLegend: true,
   },
-  properties: {
-    hasInfos: true,
-  },
 });
 
 let osmPointsLayers = [];
@@ -86,21 +83,8 @@ dataLayer.on('load', () => {
       );
     })
     .map(layer => layer.id);
-});
-
-export const sourcesLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.sources',
-  zIndex: 1,
-  preserveDrawingBuffer: true,
-  style: 'trafimage_sources_only_v2',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-sourcesLayer.on('load', () => {
-  if (sourcesLayer.mbMap && !sourcesLayer.mbMap.getSource('stations')) {
-    sourcesLayer.mbMap.addSource('stations', {
+  if (dataLayer.mbMap && !dataLayer.mbMap.getSource('stations')) {
+    dataLayer.mbMap.addSource('stations', {
       type: 'geojson',
       data: {
         type: 'FeatureCollection',
@@ -127,8 +111,8 @@ dataLayer.on('init', () => {
         return good;
       });
 
-    if (sourcesLayer.mbMap && sourcesLayer.mbMap.getSource('stations')) {
-      sourcesLayer.mbMap.getSource('stations').setData({
+    if (dataLayer.mbMap && dataLayer.mbMap.getSource('stations')) {
+      dataLayer.mbMap.getSource('stations').setData({
         type: 'FeatureCollection',
         features: osmPointsFeaturesRendered,
       });
@@ -188,13 +172,11 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
 export const passagierfrequenzen = new MapboxStyleLayer({
   name: 'ch.sbb.bahnhoffrequenzen',
   visible: false,
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: dataLayer,
   styleLayer: {
     id: 'passagierfrequenzen',
     type: 'circle',
     source: 'stations',
-    // source: 'base',
-    // 'source-layer': 'osm_points',
     filter: ['has', 'dwv'],
     paint: {
       'circle-radius': [
@@ -238,7 +220,7 @@ bahnhofplaene.setChildren([
     name: 'ch.sbb.bahnhofplaene.interaktiv',
     radioGroup: 'bahnhofplaene',
     visible: false,
-    mapboxLayer: sourcesLayer,
+    mapboxLayer: dataLayer,
     styleLayer: {
       id: 'interaktiv',
       type: 'symbol',
@@ -246,7 +228,7 @@ bahnhofplaene.setChildren([
       filter: ['has', 'url_interactive_plan'],
       layout: {
         'icon-image': 'standort',
-        'icon-size': 1,
+        'icon-ignore-placement': true,
       },
     },
     filters: ['has', 'url_interactive_plan'],
@@ -260,14 +242,14 @@ bahnhofplaene.setChildren([
     name: 'ch.sbb.bahnhofplaene.printprodukte',
     radioGroup: 'bahnhofplaene',
     visible: false,
-    mapboxLayer: sourcesLayer,
+    mapboxLayer: dataLayer,
     styleLayer: {
       id: 'printprodukte',
       type: 'symbol',
       source: 'stations',
       layout: {
         'icon-image': 'standort',
-        'icon-size': 1,
+        'icon-ignore-placement': true,
       },
     },
     filters: [
@@ -329,7 +311,7 @@ punctuality.setChildren([
 export const netzkartePointLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.stationen',
   visible: true,
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: dataLayer,
   styleLayer: {
     id: 'stations',
     type: 'circle',
@@ -353,7 +335,7 @@ export const netzkartePointLayer = new MapboxStyleLayer({
 
 export const buslines = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.buslinien',
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: dataLayer,
   visible: false,
   styleLayer: {
     id: 'bus',
@@ -812,7 +794,6 @@ export const grenzen = new Layer({
 
 export default [
   dataLayer,
-  sourcesLayer,
   netzkarteLayer,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,

@@ -65,7 +65,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
   getFeatures({ source, sourceLayer, filter } = {}) {
     const { mbMap } = this;
     // Ignore the getFeatureInfo until the mapbox map is loaded
-    if (!mbMap || !mbMap.isStyleLoaded()) {
+    if (!mbMap || !mbMap.isSourceLoaded(source)) {
       return [];
     }
     return mbMap.querySourceFeatures(source, {

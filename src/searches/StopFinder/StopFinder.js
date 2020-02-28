@@ -2,17 +2,14 @@ import React from 'react';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
 import { transform } from 'ol/proj';
-
 import Search from '../Search';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 
 const endpoint = 'https://api.geops.io/stops/v1/';
 
 class StopFinder extends Search {
   constructor() {
     super();
-
+    this.endpoint = endpoint;
     this.onDataEvent = this.onDataEvent.bind(this);
   }
 
@@ -53,17 +50,12 @@ class StopFinder extends Search {
   }
 
   getFeatureInfoForLayer(layer) {
-    const uic = parseInt(this.popupItem.properties.id, 10);
-
-    console.log('GET features', layer.getFeatures());
-    console.log('this.popupItem.properties', this.popupItem.properties);
     const mbFeature = layer.getFeatures({
       source: 'base',
       sourceLayer: 'osm_points',
       filter: ['==', 'uid', this.popupItem.properties.uid],
-    });
+    })[0];
 
-    console.log('GET mbFeature', mbFeature);
     if (mbFeature) {
       const feature = new Feature({
         geometry: new Point(
@@ -75,6 +67,7 @@ class StopFinder extends Search {
       return {
         features: [feature],
         layer,
+        coordinate: mbFeature.geometry.coordinates,
       };
     }
 
@@ -83,9 +76,8 @@ class StopFinder extends Search {
 
   onDataEvent() {
     const { layerService, dispatchSetFeatureInfo } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.data');
-    //const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
-    const { mbMap } = layer;
+    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+    const { mbMap } = layer.mapboxLayer;
 
     if (mbMap.isSourceLoaded('base')) {
       mbMap.off('sourcedata', this.onDataEvent);
@@ -93,7 +85,7 @@ class StopFinder extends Search {
 
     const infoLayers = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getVisible() && l instanceof TrafimageMapboxLayer);
+      .filter(l => l.getVisible());
 
     const infos = infoLayers
       .map(l => this.getFeatureInfoForLayer(l))

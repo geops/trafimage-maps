@@ -24,7 +24,6 @@ const Popup = () => {
     }
     return false;
   });
-  console.log(filtered);
 
   if (!filtered.length) {
     return null;

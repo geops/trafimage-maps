@@ -191,17 +191,8 @@ class MapboxStyleLayer extends Layer {
       });
   }
 
-  getFeatures() {
-    const { mbMap } = this.mapboxLayer;
-    // Ignore the getFeatureInfo until the mapbox map is loaded
-    if (!mbMap || !mbMap.isStyleLoaded()) {
-      return [];
-    }
-    console.log(
-      'mbMap.querySourceFeatures',
-      mbMap.querySourceFeatures('stations'),
-    );
-    return mbMap.querySourceFeatures('base');
+  getFeatures(options) {
+    return this.mapboxLayer.getFeatures(options);
   }
 
   setFilter(filter) {

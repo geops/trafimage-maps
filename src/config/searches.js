@@ -14,7 +14,7 @@ export const locations = new Locations();
 
 export const municipalities = new Municipalities();
 
-export const stopFinder = new StopFinder();
+export const stopFinder = new StopFinder('https://api.geops.io/stops/v1/');
 
 export const handicapStopFinder = new HandicapStopFinder();
 
