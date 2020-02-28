@@ -19,7 +19,7 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
   const dwv = feature
     .get('dwv')
     .toString()
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    .replace(/\B(?=(\d{3})+(?!\d))/g, '\u2009');
   const remark = feature.get(`passagier_freq_bemerkungen_${language}`);
 
   return (
