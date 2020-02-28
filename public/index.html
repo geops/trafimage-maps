@@ -82,7 +82,8 @@
             return response.json();
           })
           .then(function(data) {
-            return changeAttr('apiKey', data.key);
+            changeAttr('apiKey', data.key);
+            changeAttr('activeTopicKey', 'ch.sbb.netzkarte');
           })
           .catch(function() {
             console.error('Request to get the apiKey failed');
@@ -119,7 +120,6 @@
       zoom="12"
       center="[810000, 5900000]"
       appName="wkp"
-      activeTopicKey="ch.sbb.netzkarte"
       permissionUrl="//maps.trafimage.ch"
     ></trafimage-maps>
     <div id="buttons">

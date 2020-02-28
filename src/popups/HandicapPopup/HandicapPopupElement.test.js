@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 import HandicapPopupElement from './HandicapPopupElement';
 import 'react-app-polyfill/stable';
 

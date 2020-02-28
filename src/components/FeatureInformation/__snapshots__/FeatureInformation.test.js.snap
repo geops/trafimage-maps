@@ -73,10 +73,10 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
             className="wkp-projection-label"
           />
           <span>
-            Länge (X): -18'229,5003
+            Länge (X): 2
           </span>
           <span>
-            Breite (Y): 5'604'154,957
+            Breite (Y): 2
           </span>
         </div>
       </div>
@@ -200,10 +200,10 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
             className="wkp-projection-label"
           />
           <span>
-            Länge (X): -18'229,5003
+            Länge (X): 2
           </span>
           <span>
-            Breite (Y): 5'604'154,957
+            Breite (Y): 2
           </span>
         </div>
       </div>
@@ -285,10 +285,10 @@ exports[`FeatureInformaion should match snapshot. using the layers's popupCompon
             className="wkp-projection-label"
           />
           <span>
-            Länge (X): -18'229,5003
+            Länge (X): 2
           </span>
           <span>
-            Breite (Y): 5'604'154,957
+            Breite (Y): 2
           </span>
         </div>
       </div>

@@ -3,9 +3,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
-import { Map, View, Feature } from 'ol';
+import { Feature } from 'ol';
 import { Point } from 'ol/geom';
-import { get } from 'ol/proj';
 import Layer from 'react-spatial/layers/Layer';
 
 import FeatureInformation from '.';
@@ -13,7 +12,6 @@ import FeatureInformation from '.';
 describe('FeatureInformaion', () => {
   const mockStore = configureStore([thunk]);
   let store;
-  let map;
 
   beforeEach(() => {
     store = mockStore({
@@ -21,7 +19,6 @@ describe('FeatureInformaion', () => {
       app: { projection: { value: 'EPSG:3857' } },
       oidc: { user: {} },
     });
-    map = new Map({ view: new View({}) });
   });
 
   describe('should match snapshot.', () => {
@@ -34,14 +31,14 @@ describe('FeatureInformaion', () => {
       });
       const fi = [
         {
-          features: [new Feature(new Point([0, 0]))],
+          features: [new Feature(new Point([2, 2]))],
           layer: l,
         },
       ];
 
       const component = renderer.create(
         <Provider store={store}>
-          <FeatureInformation clickedFeatureInfo={fi} />
+          <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
       const tree = component.toJSON();
@@ -54,7 +51,7 @@ describe('FeatureInformaion', () => {
       });
       const fi = [
         {
-          features: [new Feature(new Point([0, 0]))],
+          features: [new Feature(new Point([2, 2]))],
           layer: l,
           popupComponent: 'NetzkartePopup',
         },
@@ -62,7 +59,7 @@ describe('FeatureInformaion', () => {
 
       const component = renderer.create(
         <Provider store={store}>
-          <FeatureInformation clickedFeatureInfo={fi} />
+          <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
       const tree = component.toJSON();
@@ -76,7 +73,7 @@ describe('FeatureInformaion', () => {
       const fi = [
         {
           features: [
-            new Feature(new Point([0, 0])),
+            new Feature(new Point([2, 2])),
             new Feature(new Point([1, 1])),
           ],
           layer: l,
@@ -84,7 +81,7 @@ describe('FeatureInformaion', () => {
         },
         {
           features: [
-            new Feature(new Point([0, 0])),
+            new Feature(new Point([2, 2])),
             new Feature(new Point([1, 1])),
           ],
           layer: l,
@@ -94,7 +91,7 @@ describe('FeatureInformaion', () => {
 
       const component = renderer.create(
         <Provider store={store}>
-          <FeatureInformation clickedFeatureInfo={fi} />
+          <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
       const tree = component.toJSON();
