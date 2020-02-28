@@ -192,8 +192,29 @@ class MapboxStyleLayer extends Layer {
       });
   }
 
-  getFeatures(options) {
-    return this.mapboxLayer.getFeatures(options);
+  getFeatures(options = {}) {
+    if (!this.styleLayers) {
+      return [];
+    }
+    const sourceIds = this.styleLayers.map(({ source }) => source);
+    const sourceLayerIds = this.styleLayers.map(
+      styleLayer => styleLayer['source-layer'],
+    );
+    const filters = this.styleLayers
+      .map(styleLayer => styleLayer.filter)
+      .filter(f => f);
+    if (
+      options.source &&
+      sourceIds.includes(options.source) &&
+      (!options.sourceLayer || sourceLayerIds.includes(options.sourceLayer))
+    ) {
+      let filter = options.filter || [];
+      if (filters.length) {
+        filter = ['all', options.filter, ...filters];
+      }
+      return this.mapboxLayer.getFeatures({ ...options, filter });
+    }
+    return [];
   }
 
   setFilter(filter) {
