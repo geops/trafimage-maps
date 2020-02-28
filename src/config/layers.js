@@ -814,6 +814,7 @@ export const zweitausbildungAbroad = new ZweitausbildungAbroadLayer({
   name: 'ch.sbb.zweitausbildung.abroad',
   key: 'ch.sbb.zweitausbildung.abroad',
   visible: true,
+  zIndex: 2,
   properties: {
     popupComponent: 'ZweitausbildungAbroadPopup',
     hasInfos: true,
@@ -847,6 +848,7 @@ export const zweitausbildungStations = new Layer({
       name: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
       key: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
       visible: true,
+      zIndex: 3,
       olLayer: new TileLayer({
         source: new TileWMSSource({
           crossOrigin: 'anonymous',
@@ -885,6 +887,7 @@ export const zweitausbildungStations = new Layer({
       name: 'ch.sbb.zweitausbildung.haltestellen.basis',
       key: 'ch.sbb.zweitausbildung.haltestellen.basis',
       visible: true,
+      zIndex: 3,
       olLayer: new TileLayer({
         source: new TileWMSSource({
           crossOrigin: 'anonymous',
@@ -939,6 +942,7 @@ export const zweitausbildungPois = new Layer({
       name: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
       key: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
       visible: true,
+      zIndex: 4,
       properties: {
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
@@ -961,6 +965,7 @@ export const zweitausbildungPois = new Layer({
       name: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
       key: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
       visible: true,
+      zIndex: 4,
       properties: {
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
@@ -1018,6 +1023,7 @@ export const zweitausbildungRoutes = new Layer({
           name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           visible: false,
+          zIndex: 1,
           properties: {
             hideInLegend: true,
             zweitausbildung: {
@@ -1050,6 +1056,7 @@ export const zweitausbildungRoutes = new Layer({
           name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           visible: true,
+          zIndex: 1,
           properties: {
             hideInLegend: true,
             zweitausbildung: {
