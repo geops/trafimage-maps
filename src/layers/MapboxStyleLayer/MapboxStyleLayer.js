@@ -134,7 +134,8 @@ class MapboxStyleLayer extends Layer {
   addStyleLayers() {
     const { mbMap } = this.mapboxLayer;
     this.styleLayers.forEach(styleLayer => {
-      if (!mbMap.getLayer(styleLayer.id)) {
+      const { id, source } = styleLayer;
+      if (mbMap.getSource(source) && !mbMap.getLayer(id)) {
         mbMap.addLayer(styleLayer);
       }
     });
@@ -196,8 +197,11 @@ class MapboxStyleLayer extends Layer {
   }
 
   setFilter(filter) {
+    const { mbMap } = this.mapboxLayer;
     this.styleLayers.forEach(({ id }) => {
-      this.mapboxLayer.mbMap.setFilter(id, filter);
+      if (mbMap.getLayer(id)) {
+        mbMap.setFilter(id, filter);
+      }
     });
   }
 

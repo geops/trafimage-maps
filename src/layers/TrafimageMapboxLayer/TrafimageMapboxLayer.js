@@ -22,7 +22,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
   }
 
   setStyleConfig(url, key) {
-    if (!url) {
+    if (!url || !key) {
       return;
     }
     const { style, url: url2 } = this.options;

@@ -71,33 +71,10 @@ export const dataLayer = new TrafimageMapboxLayer({
 });
 
 let osmPointsLayers = [];
-let osmPointsFeaturesRendered = [];
-
-// Get list of styleLayers applied to osm_points source.
-dataLayer.on('load', () => {
-  osmPointsLayers = dataLayer.mbMap
-    .getStyle()
-    .layers.filter(layer => {
-      return (
-        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
-      );
-    })
-    .map(layer => layer.id);
-  if (dataLayer.mbMap && !dataLayer.mbMap.getSource('stations')) {
-    dataLayer.mbMap.addSource('stations', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: osmPointsFeaturesRendered,
-      },
-    });
-  }
-});
-
-// On initilialization we get the lit of rendered stations.
-dataLayer.on('init', () => {
-  dataLayer.mbMap.on('idle', () => {
-    osmPointsFeaturesRendered = dataLayer.mbMap
+const updateStations = mbMap => {
+  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
+  mbMap.once('idle', () => {
+    const osmPointsRendered = mbMap
       .queryRenderedFeatures({
         layers: osmPointsLayers,
       })
@@ -111,12 +88,41 @@ dataLayer.on('init', () => {
         return good;
       });
 
-    if (dataLayer.mbMap && dataLayer.mbMap.getSource('stations')) {
-      dataLayer.mbMap.getSource('stations').setData({
+    console.log(osmPointsRendered);
+    const source = mbMap.getSource('stations');
+    if (source) {
+      source.setData({
         type: 'FeatureCollection',
-        features: osmPointsFeaturesRendered,
+        features: osmPointsRendered,
       });
     }
+  });
+};
+
+// Get list of styleLayers applied to osm_points source.
+dataLayer.once('load', () => {
+  const { map, mbMap } = dataLayer;
+  osmPointsLayers = mbMap
+    .getStyle()
+    .layers.filter(layer => {
+      return (
+        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+      );
+    })
+    .map(layer => layer.id);
+  console.log(osmPointsLayers);
+  mbMap.addSource('stations', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: [],
+    },
+  });
+  updateStations(mbMap);
+
+  // Update stations source on moveeend.
+  map.on('moveend', () => {
+    updateStations(mbMap);
   });
 });
 
