@@ -112,6 +112,7 @@ class TopicLoader extends Component {
   }
 
   loadTopics() {
+    const matomo = this.context;
     const {
       topics,
       permissionsInfos,
@@ -131,10 +132,13 @@ class TopicLoader extends Component {
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);
     this.updateServices(activeTopic);
+
+    if (matomo) {
+      matomo.trackEvent({ category: activeTopic.name, action: 'load' });
+    }
   }
 
   updateServices(activeTopic) {
-    const matomo = this.context;
     const {
       t,
       apiKey,
@@ -148,10 +152,6 @@ class TopicLoader extends Component {
       this.updateLayers([]);
       dispatchSetSearchService();
       return;
-    }
-
-    if (matomo) {
-      matomo.trackEvent({ category: activeTopic.name, action: 'load' });
     }
 
     if (activeTopic.redirect) {
