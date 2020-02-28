@@ -82,8 +82,9 @@ class StopFinder extends Search {
   }
 
   onDataEvent() {
-    const { layerService, dispatchSetClickedFeatureInfo } = this.props;
+    const { layerService, dispatchSetFeatureInfo } = this.props;
     const layer = layerService.getLayer('ch.sbb.netzkarte.data');
+    //const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
     const { mbMap } = layer;
 
     if (mbMap.isSourceLoaded('base')) {
@@ -98,11 +99,7 @@ class StopFinder extends Search {
       .map(l => this.getFeatureInfoForLayer(l))
       .filter(i => i);
 
-    infos.forEach(info => {
-      // eslint-disable-next-line no-param-reassign
-      info.popupComponent = 'NetzkartePopup';
-    });
-    dispatchSetClickedFeatureInfo(infos);
+    dispatchSetFeatureInfo(infos);
   }
 }
 

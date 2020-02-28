@@ -1,32 +1,46 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Point from 'ol/geom/Point';
+import { Point, LineString } from 'ol/geom';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
 import './Popup.scss';
 
 const Popup = () => {
   const map = useSelector(state => state.app.map);
-  const { activeTopic, clickedFeatureInfo } = useSelector(state => state.app);
+  const { activeTopic, featureInfo } = useSelector(state => state.app);
 
-  if (!clickedFeatureInfo || !clickedFeatureInfo.length) {
+  if (!featureInfo || !featureInfo.length) {
     return null;
   }
 
-  const filtered = clickedFeatureInfo.filter(
-    info => info.layer.get('popupComponent') || info.popupComponent,
-  );
+  const filtered = featureInfo.filter(info => {
+    const { layer, features } = info;
+
+    if (layer.get('popupComponent')) {
+      if (typeof layer.hidePopup === 'function') {
+        return features.find(f => !layer.hidePopup(f));
+      }
+      return true;
+    }
+    return false;
+  });
   console.log(filtered);
+
   if (!filtered.length) {
     return null;
   }
 
-  const { coordinate, features } = clickedFeatureInfo[0];
+  const { coordinate, features } = featureInfo[0];
   const geom = features[0].getGeometry();
-  const coord =
-    features.length === 1 && geom instanceof Point
-      ? geom.getCoordinates()
-      : coordinate;
+  let coord = coordinate;
+
+  if (
+    features.length === 1 &&
+    (geom instanceof Point || geom instanceof LineString)
+  ) {
+    coord = geom.getClosestPoint(coordinate);
+  }
+
   const mapRect = map.getTarget().getBoundingClientRect();
 
   // do not move the popup over the map controls except on small screens
@@ -47,7 +61,7 @@ const Popup = () => {
       popupCoordinate={coord}
       map={map}
     >
-      <FeatureInformation clickedFeatureInfo={filtered} />
+      <FeatureInformation featureInfo={filtered} />
     </RSPopup>
   );
 };

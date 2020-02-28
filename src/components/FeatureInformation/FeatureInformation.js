@@ -5,31 +5,31 @@ import { useTranslation } from 'react-i18next';
 import Button from '@geops/react-ui/components/Button';
 import { MdClose } from 'react-icons/md';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
-import { setClickedFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo } from '../../model/app/actions';
 import popups from '../../popups';
 
 import './FeatureInformation.scss';
 
 const propTypes = {
-  clickedFeatureInfo: PropTypes.array.isRequired,
+  featureInfo: PropTypes.array.isRequired,
 };
 
-const FeatureInformation = ({ clickedFeatureInfo }) => {
+const FeatureInformation = ({ featureInfo }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
     setFeatureIndex(0);
-  }, [clickedFeatureInfo]);
+  }, [featureInfo]);
 
-  const features = clickedFeatureInfo.map(l => l.features).flat();
+  const features = featureInfo.map(l => l.features).flat();
   const feature = features[featureIndex];
   if (!feature) {
     return null;
   }
 
-  const info = clickedFeatureInfo.find(i => i.features.includes(feature));
+  const info = featureInfo.find(i => i.features.includes(feature));
   if (!info || !info.layer) {
     return null;
   }
@@ -83,7 +83,7 @@ const FeatureInformation = ({ clickedFeatureInfo }) => {
             className="wkp-close-bt"
             title={t('Popup schliessen')}
             onClick={() => {
-              dispatch(setClickedFeatureInfo());
+              dispatch(setFeatureInfo([]));
               if (PopupComponent.onCloseBtClick) {
                 PopupComponent.onCloseBtClick();
               }

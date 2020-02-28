@@ -34,21 +34,31 @@
       }
 
       #events {
-        position: absolute;
-        width: 300px;
-        height: 100px;
-        bottom: 35px;
-        overflow-y: auto;
-        color: red;
-        margin: auto;
-        left: 0;
-        right: 0;
+        left: 220px;
       }
 
-      #buttons {
+      #log {
+        margin: 5px 0;
+      }
+
+      #buttons,
+      #events {
+        top: 100px;
+        background-color: lightgray;
+        padding: 5px 10px;
+        transition: height ease 0.3s;
+        overflow: auto;
         position: absolute;
-        z-index: 10000;
-        top: 0;
+        height: 30px;
+        width: 200px;
+        border: 1px solid gray;
+      }
+
+      #buttons > button,
+      #events > button {
+        margin: 5px 0;
+        cursor: pointer;
+        width: calc(100% - 10px);
       }
     </style>
     <script type="text/javascript">
@@ -69,14 +79,14 @@
         fetch('https://developer.geops.io/publickey')
           .then(response => response.json())
           .then(data => {
-            changeAttr('apiKey', data.key)
+            changeAttr('apiKey', data.key);
           })
           .catch(() => {
             console.error('Request to get the apiKey failed');
           });
 
         const map = document.getElementById('map');
-        const evts = document.getElementById('events');
+        const evts = document.getElementById('log');
         map.addEventListener('moveend', function(evt) {
           console.log(evt);
           evts.innerHTML =
@@ -101,7 +111,21 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <trafimage-maps
+      id="map"
+      zoom="12"
+      center="[810000, 5900000]"
+      appName="wkp"
+      activeTopicKey="ch.sbb.netzkarte"
+      permissionUrl="//maps.trafimage.ch"
+    ></trafimage-maps>
     <div id="buttons">
+      <button
+        type="button"
+        onclick="var bt = document.getElementById('buttons'); bt.style.height = (!bt.style.height || bt.style.height == '30px' ? '200px' : '30px');"
+      >
+        Toggle buttons
+      </button>
       <button
         type="button"
         onclick="changeAttr('activeTopicKey','ch.sbb.handicap')"
@@ -142,15 +166,15 @@
         change zoom to 16
       </button>
     </div>
-    <trafimage-maps
-      id="map"
-      zoom="12"
-      center="[810000, 5900000]"
-      appName="wkp"
-      activeTopicKey="ch.sbb.netzkarte"
-      permissionUrl="//maps.trafimage.ch"
-    ></trafimage-maps>
-    <div id="events"></div>
+    <div id="events">
+      <button
+        type="button"
+        onclick="var bt = document.getElementById('events'); bt.style.height =  (!bt.style.height || bt.style.height == '30px' ? '100px' : '30px');"
+      >
+        Toggle events
+      </button>
+      <div id="log"></div>
+    </div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -49,6 +49,7 @@ class ZoneLayer extends CasaLayer {
     super({
       name: 'Verbundzonen',
       olLayer: new OLVectorLayer({
+        className: 'Verbundzonen', // needed for forEachLayerAtPixel
         source: new VectorSource(),
         style: (f, r) => this.zoneStyle(f, r),
       }),
@@ -193,7 +194,11 @@ class ZoneLayer extends CasaLayer {
     const isSelected = this.selectedZones.includes(feature);
     const isHovered =
       feature.get('isClickable') && this.hoverFeature === feature;
-    const styleObject = this.styleFunction(feature.getProperties(), isSelected);
+    const styleObject = this.styleFunction(
+      feature.getProperties(),
+      isSelected,
+      isHovered,
+    );
     const olStyles = this.getOlStylesFromObject(
       styleObject,
       isSelected,
@@ -202,7 +207,7 @@ class ZoneLayer extends CasaLayer {
       resolution,
     );
 
-    return Object.values(olStyles);
+    return Object.values(olStyles).flat();
   }
 
   /**

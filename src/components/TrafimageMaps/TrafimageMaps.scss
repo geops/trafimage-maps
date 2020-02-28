@@ -59,7 +59,7 @@
     color: $brand-primary;
   }
 
-  .tm-map {
+  .rs-map {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -166,10 +166,11 @@
 
     .wkp-topic-menu-item-wrapper {
       padding: 0 10px;
+      height: 100%;
     }
 
     .wkp-topic-menu-item {
-      margin: 4px 40px 4px 4px;
+      margin: 4px;
       height: 52px;
 
       &.active {
@@ -179,7 +180,7 @@
       .wkp-layer-toggler {
         position: absolute;
         right: 5px;
-        top: 24px;
+        top: 23px;
       }
 
       .wkp-info-topic-bt {

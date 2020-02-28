@@ -7,7 +7,7 @@ import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import casa from 'trafimage-maps/examples/Casa/topic';
+import casa, { netzkarteLayerLabels } from 'trafimage-maps/examples/Casa/topic';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -18,6 +18,30 @@ const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
   validFrom: '2019-12-16',
   validTo: '2020-12-01',
+  styleFunction: (feature, isSelected, isHovered) => {
+    // Should return a styleobject, example at:
+    // https://jsdoc.maps.trafimage.ch/docjs.html#styleobject
+    if (isSelected) {
+      return {
+        stroke: {
+          width: 2,
+        },
+        strokeOutline: {
+          width: 8,
+          color: [69, 118, 162, 0.3],
+        },
+      };
+    }
+
+    if (isHovered) {
+      return {
+        textOutline: {
+          color: 'rgba(104, 104, 104, 0.3)',
+          width: 4,
+        },
+      };
+    }
+  },
 });
 
 // Select zones.
@@ -61,6 +85,12 @@ const routeLayer = new RouteLayer({
         stroke: { color: 'green' },
       };
     }
+
+    return {
+      strokeArrow: {
+        count: 3,
+      },
+    }
   },
 });
 
@@ -69,10 +99,15 @@ routeLayer
   .loadRoutes([
     {
       isClickable: true,
+      popupTitle: 'Route St. Gallen >> Zürich',
+      popupContent: {
+        Von: 'St. Gallen',
+        Nach: 'Zürich HB',
+      },
       sequences: [
         {
-          uicFrom: 8506302,
-          uicTo: 8503000,
+          uicFrom: 8503000,
+          uicTo: 8506302,
           mot: 'rail',
         },
       ],
@@ -91,7 +126,7 @@ const App = () => {
 
   useEffect(() => {
     const map = ref.current;
-    map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
+    map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer, netzkarteLayerLabels]}];
 
     return () => {
       map.topics = null;
