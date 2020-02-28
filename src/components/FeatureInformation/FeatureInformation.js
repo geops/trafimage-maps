@@ -23,7 +23,7 @@ const FeatureInformation = ({ featureInfo }) => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo.map(l => l.features).flat();
+  let features = featureInfo.map(l => l.features).flat();
   const feature = features[featureIndex];
   if (!feature) {
     return null;
@@ -32,6 +32,23 @@ const FeatureInformation = ({ featureInfo }) => {
   const info = featureInfo.find(i => i.features.includes(feature));
   if (!info || !info.layer) {
     return null;
+  }
+
+  // Allow to show only one occurance of the same feature in different layers.
+  const featIdentifierField = info.layer.get('featIdentifierField');
+  if (featIdentifierField) {
+    const featuresId = features
+      .map(f => f.get(featIdentifierField))
+      .reduce((unique, item) => {
+        return unique.includes(item) ? unique : [...unique, item];
+      }, []);
+    features = features.filter(f => {
+      if (featuresId.includes(f.get(featIdentifierField))) {
+        featuresId.splice(featuresId.indexOf(featIdentifierField), 1);
+        return true;
+      }
+      return false;
+    });
   }
 
   const PopupComponent = popups[info.layer.get('popupComponent')];

@@ -432,6 +432,7 @@ export const stuetzpunktBahnhoefe = new HandicapLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    featIdentifierField: 'didok',
   },
 });
 
@@ -445,6 +446,7 @@ export const barrierfreierBahnhoefe = new HandicapLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    featIdentifierField: 'didok',
   },
 });
 
@@ -458,6 +460,7 @@ export const nichtBarrierfreierBahnhoefe = new HandicapLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    featIdentifierField: 'didok',
   },
 });
 
