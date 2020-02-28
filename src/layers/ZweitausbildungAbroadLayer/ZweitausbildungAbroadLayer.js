@@ -40,10 +40,6 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
     this.setVisible(this.visible);
   }
 
-  setGeoJsonUrl(geoJsonCacheUrl) {
-    this.geoJsonCacheUrl = geoJsonCacheUrl;
-  }
-
   setLanguage(language) {
     this.language = language;
     this.olLayer.changed();
