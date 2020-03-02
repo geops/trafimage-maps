@@ -1940,6 +1940,18 @@
     debug "^3.1.0"
     lodash.once "^4.1.1"
 
+"@datapunt/matomo-tracker-js@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@datapunt/matomo-tracker-js/-/matomo-tracker-js-0.1.1.tgz#629cf786624c18e48f15e9e6f138b3ecbc955de1"
+  integrity sha512-9pwfiWSokCn/5Cs1loRr9dtpzoGUPippWbUucl1XCq55vwmcWbW1nZM0Wo0ZSYA4IIm/KShXAELT6f7nPt+EqA==
+
+"@datapunt/matomo-tracker-react@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@datapunt/matomo-tracker-react/-/matomo-tracker-react-0.1.1.tgz#6b8a6e0d40f8e7fc5f677b0356729f7a994b9f00"
+  integrity sha512-KURr5+b0Pt0rp8O8FU8bB3XuesP1BhIn9+ekA6tKPPyZuDClAm0+6k7o9r6cQbHztedsEMkXfRNdMDrj5Z/x4Q==
+  dependencies:
+    "@datapunt/matomo-tracker-js" "^0.1.1"
+
 "@emotion/is-prop-valid@^0.8.3":
   version "0.8.6"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.6.tgz#4757646f0a58e9dec614c47c838e7147d88c263c"
@@ -1987,10 +1999,10 @@
     react-shadow "^17.1.3"
     rimraf "^3.0.0"
 
-"@geops/react-ui@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.0.5.tgz#b8f784a1ae8988c5bf1789ff22eb62f057904a1c"
-  integrity sha512-Wbi61KX0KgI3YqCJFXmdi04fsejNzlZBaoyUseZf5unpDl5mM/HWq8r2ssi0y1kc567ZQL53d0aWFWtR3Fl6vA==
+"@geops/react-ui@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.0.6.tgz#accf4664703465dce1dc9407b5ef623d07c0f0c6"
+  integrity sha512-7wJMsb1+/wp5rP8lwxsMbOnEan/+9iXhUbF2J0jEfpjiskbXzbTuC2pami48ZnwMWljL9h+5peeh4d3LuVyBNg==
   dependencies:
     query-string "^6.4.2"
     react-icons "^3.4.0"
@@ -8697,10 +8709,10 @@ hyphenate-style-name@^1.0.2, hyphenate-style-name@^1.0.3:
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.3.tgz#097bb7fa0b8f1a9cf0bd5c734cf95899981a9b48"
   integrity sha512-EcuixamT82oplpoJ2XU4pDtKGWQ7b00CD9f1ug9IaQ3p1bkHMiKCZ9ut9QDI6qsa6cpUuB+A/I+zLtdNK4n2DQ==
 
-i18next-browser-languagedetector@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-4.0.1.tgz#6a0b44a93835146287130da36ce3d04a1836879f"
-  integrity sha512-RxSoX6mB8cab0CTIQ+klCS764vYRj+Jk621cnFVsINvcdlb/cdi3vQFyrPwmnowB7ReUadjHovgZX+RPIzHVQQ==
+i18next-browser-languagedetector@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-4.0.2.tgz#eb02535cc5e57dd534fc60abeede05a3823a8551"
+  integrity sha512-AK4IZ3XST4HIKShgpB2gOFeDPrMOnZx56GLA6dGo/8rvkiczIlq05lV8w77c3ShEZxtTZeUVRI4Q/cBFFVXS/w==
   dependencies:
     "@babel/runtime" "^7.5.5"
 
@@ -8711,10 +8723,10 @@ i18next-xhr-backend@^3.2.2:
   dependencies:
     "@babel/runtime" "^7.5.5"
 
-i18next@^19.3.1:
-  version "19.3.1"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-19.3.1.tgz#b8e1adb1e3297f240af98382724967f9895096e3"
-  integrity sha512-fSd67ADNfVtffECirge69OBChESzdJgXMVa8cmnR96mHn+rB2lTmNE5bqwPz32aufAKOV1LHwOTAepG+P9QbjA==
+i18next@^19.3.2:
+  version "19.3.2"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-19.3.2.tgz#a17c3c8bb0dd2d8c4a8963429df99730275b3282"
+  integrity sha512-QDBQ8MqFWi4+L9OQjjZEKVyg9uSTy3NTU3Ri53QHe7nxtV+KD4PyLB8Kxu58gr6b9y5l8cU3mCiNHVeoxPMzAQ==
   dependencies:
     "@babel/runtime" "^7.3.1"
 
@@ -12050,7 +12062,7 @@ obuf@^1.0.0, obuf@^1.1.2:
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
   integrity sha512-PX1wu0AmAdPqOL1mWhqmlOd8kOIZQwGZw6rh7uby9fTc5lhaOWFLX3I6R1hrF9k3zUY40e6igsLGkDXK92LJNg==
 
-ol@^6.1.1:
+ol@6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/ol/-/ol-6.1.1.tgz#7f8ada284344a5872d552205de558ed4a904cd27"
   integrity sha512-0dL3i3eJqgOpqIjDKEY3grkeQnjAYfV5L/JCxhOu4SxiaizRwFrFgeas6LILRoxKa03jhQFbut2r2bbgcLGQeA==
