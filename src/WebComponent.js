@@ -95,6 +95,11 @@ const propTypes = {
    * URL to request permission.
    */
   permissionUrl: PropTypes.string,
+
+  /**
+   * Enable analytics tracking.
+   */
+  enableTracking: PropTypes.bool,
 };
 
 const attributes = {
@@ -112,6 +117,7 @@ const attributes = {
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
+  enableTracking: false,
 };
 
 const defaultProps = {
@@ -130,6 +136,7 @@ const WebComponent = props => {
     center,
     apiKey,
     vectorTilesKey,
+    enableTracking,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -183,6 +190,7 @@ const WebComponent = props => {
           topics={appTopics}
           zoom={floatZoom}
           center={arrayCenter}
+          enableTracking={enableTracking}
         />
       </div>
     </Styled>
