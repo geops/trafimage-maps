@@ -95,8 +95,8 @@
             console.error('Request to get the apiKey failed');
           });
 
-        const evts = document.getElementById('events');
         var map = document.getElementById('map');
+        const evts = document.getElementById('events');
         map.addEventListener('moveend', function(evt) {
           console.log(evt);
           evts.innerHTML =
@@ -176,14 +176,6 @@
         change zoom to 16
       </button>
     </div>
-    <trafimage-maps
-      id="map"
-      zoom="12"
-      center="[810000, 5900000]"
-      appName="wkp"
-      activeTopicKey="ch.sbb.netzkarte"
-      permissionUrl="//maps.trafimage.ch"
-    ></trafimage-maps>
     <div id="events">
       <button
         type="button"
