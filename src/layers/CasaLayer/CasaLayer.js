@@ -213,7 +213,13 @@ class CasaLayer extends VectorLayer {
       });
     }
 
-    if (isSelected || isHovered) {
+    if (isSelected) {
+      Object.values(olStyles)
+        .flat()
+        .forEach(s => s.setZIndex(0.5));
+    }
+
+    if (isHovered) {
       Object.values(olStyles)
         .flat()
         .forEach(s => s.setZIndex(1));
@@ -232,7 +238,7 @@ class CasaLayer extends VectorLayer {
     const pixel = this.map.getPixelFromCoordinate(coordinate);
     const topLayer = this.map.forEachLayerAtPixel(pixel, l => l);
 
-    if (layer.olLayer !== topLayer) {
+    if (layer.featuresLayer !== topLayer) {
       return;
     }
 
@@ -250,7 +256,8 @@ class CasaLayer extends VectorLayer {
       const feature = this.map.forEachFeatureAtPixel(e.pixel, f => f);
       if (feature !== this.hoverFeature) {
         this.hoverFeature = feature;
-        this.olLayer.changed();
+        const targetLayer = this.featuresLayer;
+        targetLayer.changed();
         this.mouseOverCallbacks.forEach(c => c(feature, e.coordinate));
       }
     });

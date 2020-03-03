@@ -3,6 +3,7 @@ import 'react-app-polyfill/stable';
 import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { Group as LayerGroup } from 'ol/layer';
 import GeoJSON from 'ol/format/GeoJSON';
 import { containsExtent } from 'ol/extent';
 import MultiPolygon from 'ol/geom/MultiPolygon';
@@ -48,13 +49,26 @@ class ZoneLayer extends CasaLayer {
   constructor(options = {}) {
     super({
       name: 'Verbundzonen',
-      olLayer: new OLVectorLayer({
-        className: 'Verbundzonen', // needed for forEachLayerAtPixel
-        source: new VectorSource(),
-        style: (f, r) => this.zoneStyle(f, r),
+      olLayer: new LayerGroup({
+        layers: [
+          new OLVectorLayer({
+            className: 'Verbundzonen', // needed for forEachLayerAtPixel
+            source: new VectorSource(),
+            style: (f, r) => this.zoneStyle(f, r),
+          }),
+          // new OLVectorLayer({
+          //   className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
+          //   source: new VectorSource(),
+          //   style: (f, r) => this.zoneStyle(f, r),
+          // }),
+        ],
       }),
       ...options,
     });
+
+    this.layers = this.olLayer.getLayers().getArray();
+
+    [this.featuresLayer, this.labelsLayer] = this.layers;
 
     this.validFrom = options.validFrom;
 
@@ -78,7 +92,7 @@ class ZoneLayer extends CasaLayer {
             this.selectedZones.push(feature);
           }
 
-          this.olLayer.changed();
+          this.featuresLayer.changed();
         }
       }
     });
@@ -218,7 +232,16 @@ class ZoneLayer extends CasaLayer {
       this.abortController.abort();
     }
 
-    this.olLayer.getSource().clear();
+    this.featuresLayer.getSource().clear();
+  }
+
+  /**
+   * Returns available layers in the layer group
+   * @private
+   * @inheritdoc
+   */
+  getLayers() {
+    return this.layers;
   }
 
   /**
@@ -247,8 +270,8 @@ class ZoneLayer extends CasaLayer {
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
-        this.olLayer.getSource().clear();
-        this.olLayer.getSource().addFeatures(features);
+        this.featuresLayer.getSource().clear();
+        this.featuresLayer.getSource().addFeatures(features);
         return features;
       })
       .catch(() => {
@@ -264,7 +287,9 @@ class ZoneLayer extends CasaLayer {
    */
   zoomToZones(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
-    this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
+    this.map
+      .getView()
+      .fit(this.featuresLayer.getSource().getExtent(), fitOptions);
   }
 
   /**

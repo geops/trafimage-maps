@@ -117,5 +117,5 @@ export default {
     permalink: false,
     baseLayerToggler: true,
   },
-  layers: [netzkarteLayer, netzkarteShowcasesLight, swisstopoSwissImage],
+  layers: [netzkarteShowcasesLight, netzkarteLayer, swisstopoSwissImage],
 };
