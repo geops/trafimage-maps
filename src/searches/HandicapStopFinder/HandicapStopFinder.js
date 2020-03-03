@@ -37,7 +37,11 @@ class HandicapStopFinder extends StopFinder {
     window.clearTimeout(this.selectTimeout);
     this.selectTimeout = window.setTimeout(() => {
       this.props.dispatchSetFeatureInfo([
-        { features: [item.handicap.feature], layer: item.handicap.layer },
+        {
+          features: [item.handicap.feature],
+          layer: item.handicap.layer,
+          coordinate: item.handicap.feature.getGeometry().getFlatCoordinates(),
+        },
       ]);
     }, 200);
   }
