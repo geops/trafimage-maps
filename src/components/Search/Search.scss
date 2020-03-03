@@ -10,7 +10,7 @@
   .wkp-search-button {
     border: none;
     color: white;
-    height: 39px;
+    height: 41px;
     width: 46px;
     position: absolute;
     top: 2px;
@@ -142,6 +142,10 @@
 
   &.tm-w-xs,
   &.tm-w-s {
+    .wkp-search-button {
+      height: 39px;
+    }
+
     .react-autosuggest__input {
       font-size: 16px;
       padding: 12px 15px 9px 15px;
