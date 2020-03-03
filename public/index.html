@@ -60,6 +60,13 @@
         cursor: pointer;
         width: calc(100% - 10px);
       }
+
+      @media only screen and (max-width:480px) {
+        #buttons,
+        #events {
+          display: none;
+        }
+      }
     </style>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
     <script type="text/javascript">
@@ -89,7 +96,7 @@
           });
 
         var map = document.getElementById('map');
-        var evts = document.getElementById('log');
+        var evts = document.getElementById('events');
         map.addEventListener('moveend', function(evt) {
           console.log(evt);
           evts.innerHTML =
