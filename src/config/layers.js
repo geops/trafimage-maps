@@ -848,6 +848,7 @@ export const zweitausbildungStations = new Layer({
       name: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
       key: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
       visible: true,
+      isQueryable: false,
       zIndex: 3,
       olLayer: new TileLayer({
         source: new TileWMSSource({
@@ -887,6 +888,7 @@ export const zweitausbildungStations = new Layer({
       name: 'ch.sbb.zweitausbildung.haltestellen.basis',
       key: 'ch.sbb.zweitausbildung.haltestellen.basis',
       visible: true,
+      isQueryable: false,
       zIndex: 3,
       olLayer: new TileLayer({
         source: new TileWMSSource({
