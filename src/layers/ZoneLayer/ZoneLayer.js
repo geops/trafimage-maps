@@ -54,13 +54,14 @@ class ZoneLayer extends CasaLayer {
           new OLVectorLayer({
             className: 'Verbundzonen', // needed for forEachLayerAtPixel
             source: new VectorSource(),
-            style: (f, r) => this.zoneStyle(f, r),
+            style: (f, r) => this.zoneStyle(f, r)[0],
           }),
-          // new OLVectorLayer({
-          //   className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
-          //   source: new VectorSource(),
-          //   style: (f, r) => this.zoneStyle(f, r),
-          // }),
+          new OLVectorLayer({
+            className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
+            source: new VectorSource(),
+            style: (f, r) => this.zoneStyle(f, r)[1],
+            zIndex: 1,
+          }),
         ],
       }),
       ...options,
@@ -91,8 +92,8 @@ class ZoneLayer extends CasaLayer {
           } else {
             this.selectedZones.push(feature);
           }
-
           this.featuresLayer.changed();
+          this.labelsLayer.changed();
         }
       }
     });
@@ -178,7 +179,6 @@ class ZoneLayer extends CasaLayer {
       isHovered,
       feature,
     );
-
     if (olStyles.text) {
       olStyles.text.getText().setText(feature.get('zone'));
 
@@ -233,6 +233,7 @@ class ZoneLayer extends CasaLayer {
     }
 
     this.featuresLayer.getSource().clear();
+    this.labelsLayer.getSource().clear();
   }
 
   /**
@@ -271,7 +272,9 @@ class ZoneLayer extends CasaLayer {
       .then(data => {
         const features = format.readFeatures(data);
         this.featuresLayer.getSource().clear();
+        this.labelsLayer.getSource().clear();
         this.featuresLayer.getSource().addFeatures(features);
+        this.labelsLayer.getSource().addFeatures(features);
         return features;
       })
       .catch(() => {

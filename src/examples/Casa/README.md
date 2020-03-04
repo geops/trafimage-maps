@@ -22,7 +22,6 @@ const zoneLayer = new ZoneLayer({
         stroke: { color: '#fff' },
       };
     }
-    // it looks like isHovered doesn't work same as in the routes section
     if (isHovered) {
       return {
         stroke: {width: 2, color: '#4576A2'},

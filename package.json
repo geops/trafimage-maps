@@ -180,6 +180,9 @@
     ],
     "snapshotSerializers": [
       "jest-serializer-html"
+    ],
+    "setupFiles": [
+      "./setupTest.js"
     ]
   },
   "lint-staged": {
