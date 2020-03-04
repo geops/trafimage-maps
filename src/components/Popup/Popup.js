@@ -34,6 +34,7 @@ const Popup = () => {
   let coord = coordinate;
 
   if (
+    coordinate &&
     features.length === 1 &&
     (geom instanceof Point || geom instanceof LineString)
   ) {

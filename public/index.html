@@ -60,6 +60,13 @@
         cursor: pointer;
         width: calc(100% - 10px);
       }
+
+      @media only screen and (max-width: 480px) {
+        #buttons,
+        #events {
+          display: none;
+        }
+      }
     </style>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
     <script type="text/javascript">
@@ -88,25 +95,25 @@
           });
 
         var map = document.getElementById('map');
-        var evts = document.getElementById('log');
+        var log = document.getElementById('log');
         map.addEventListener('moveend', function(evt) {
           console.log(evt);
-          evts.innerHTML =
+          log.innerHTML =
             evt.type +
             ':<br>' +
             evt.detail.map.getView().getZoom() +
             ',' +
             evt.detail.map.getView().getCenter() +
             '<br>' +
-            evts.innerHTML;
+            log.innerHTML;
         });
         map.addEventListener('singleclick', function(evt) {
-          evts.innerHTML =
-            evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
+          log.innerHTML =
+            evt.type + ':<br>' + evt.detail + '<br>' + log.innerHTML;
         });
         map.addEventListener('getfeatureinfo', function(evt) {
-          evts.innerHTML =
-            evt.type + ':<br>' + evt.detail + '<br>' + evts.innerHTML;
+          log.innerHTML =
+            evt.type + ':<br>' + evt.detail + '<br>' + log.innerHTML;
         });
       };
     </script>
