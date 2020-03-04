@@ -1,5 +1,4 @@
 {
-  "ch.sbb.zweitausbildung.linien.group-title": "Basiswissen Zuglinien",
   "Abfahrtszeiten": "Abfahrtszeiten",
   "abkuerzung": "Abkürzung",
   "Aktuell": "Aktuell",
@@ -159,6 +158,7 @@
   "ch.sbb.zweitausbildung.hauptlinien.group": "Hauptlinien",
   "ch.sbb.zweitausbildung.hauptlinien.group-desc": "Die Hauptlinien umfassen die wichtigsten Zugstrecken auf der Achse Nord-Süd und West-Ost.",
   "ch.sbb.zweitausbildung.linien.group": "Linien",
+  "ch.sbb.zweitausbildung.linien.group-title": "Basiswissen Zuglinien",
   "ch.sbb.zweitausbildung.stationen.group": "Stationen",
   "ch.sbb.zweitausbildung.stationen.group-title": "Basis- und Aufbauwissen Zughaltestellen",
   "ch.sbb.zweitausbildung.tourist.pois.group": "Touristische Reiseziele",

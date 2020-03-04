@@ -263,6 +263,7 @@ export const tina = {
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
+  hiddenInMenu: false,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     dataLayer,
