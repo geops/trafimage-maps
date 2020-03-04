@@ -34,6 +34,8 @@
     font-size: 14px;
     padding: 12px 80px 12px 15px;
     width: calc(100% - 95px);
+    border-radius: 0;
+    -webkit-appearance: none;
 
     &::-ms-clear {
       display: none;
