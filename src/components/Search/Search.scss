@@ -34,6 +34,10 @@
     font-size: 14px;
     padding: 12px 80px 12px 15px;
     width: calc(100% - 95px);
+
+    &::-ms-clear {
+      display: none;
+    }
   }
 
   .react-autosuggest__suggestions-container--open {
