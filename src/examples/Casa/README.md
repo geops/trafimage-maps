@@ -130,9 +130,9 @@ zoneLayer.loadZones([
   },
 ]);
 
-// zoneLayer.onClick(f => {
-//   console.log('Clicked', f);
-// });
+zoneLayer.onClick(f => {
+  console.log('Clicked', f);
+});
 
 // Initialize route layer.
 const routeLayer = new RouteLayer({
