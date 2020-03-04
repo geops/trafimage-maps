@@ -75,7 +75,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.5.0",
-    "fetch-mock": "^9.0.0-beta.2",
+    "fetch-mock": "^9.1.0",
     "fixpack": "^3.0.6",
     "generact": "^0.4.0",
     "gensync": "^1.0.0-beta.1",
