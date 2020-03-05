@@ -191,6 +191,8 @@ routeLayer.onClick(f => {
 
 const App = () => {
   const ref = useRef();
+  const classes = useStyles()
+  console.log(classes)
 
   useEffect(() => {
     const map = ref.current;

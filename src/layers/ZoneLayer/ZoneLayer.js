@@ -52,12 +52,10 @@ class ZoneLayer extends CasaLayer {
       olLayer: new LayerGroup({
         layers: [
           new OLVectorLayer({
-            className: 'Verbundzonen', // needed for forEachLayerAtPixel
             source: new VectorSource(),
             style: (f, r) => this.zoneStyle(f, r)[0],
           }),
           new OLVectorLayer({
-            className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
             source: new VectorSource(),
             style: (f, r) => this.zoneStyle(f, r)[1],
             zIndex: 1,
@@ -234,15 +232,6 @@ class ZoneLayer extends CasaLayer {
 
     this.featuresLayer.getSource().clear();
     this.labelsLayer.getSource().clear();
-  }
-
-  /**
-   * Returns available layers in the layer group
-   * @private
-   * @inheritdoc
-   */
-  getLayers() {
-    return this.layers;
   }
 
   /**
