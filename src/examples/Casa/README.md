@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
+import 'trafimage-maps/examples/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -191,8 +192,6 @@ routeLayer.onClick(f => {
 
 const App = () => {
   const ref = useRef();
-  const classes = useStyles()
-  console.log(classes)
 
   useEffect(() => {
     const map = ref.current;
@@ -204,7 +203,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container casa">
       <trafimage-maps ref={ref} apiKey={apiKey}/>
     </div>
   );

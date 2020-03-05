@@ -26,7 +26,8 @@ class TrafimageMapboxLayer extends MapboxLayer {
       return;
     }
     const { style, url: url2 } = this.options;
-    const newStyleUrl = url2 || `${url}/styles/${style}/style.json?key=${key}`;
+    const newStyleUrl =
+      url2 || `${url}/styles/${style}/style.json${key ? `?key=${key}` : ''}`;
 
     // Don't apply style if not necessary otherwise
     // it will remove styles apply by MapboxStyleLayer layers.
@@ -60,6 +61,18 @@ class TrafimageMapboxLayer extends MapboxLayer {
           });
         });
       });
+  }
+
+  getFeatures({ source, sourceLayer, filter } = {}) {
+    const { mbMap } = this;
+    // Ignore the getFeatureInfo until the source is loaded
+    if (!mbMap || !mbMap.isSourceLoaded(source)) {
+      return [];
+    }
+    return mbMap.querySourceFeatures(source, {
+      sourceLayer,
+      filter,
+    });
   }
 }
 

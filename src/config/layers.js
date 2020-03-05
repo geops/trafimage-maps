@@ -71,46 +71,10 @@ export const dataLayer = new TrafimageMapboxLayer({
 });
 
 let osmPointsLayers = [];
-let osmPointsFeaturesRendered = [];
-
-// Get list of styleLayers applied to osm_points source.
-dataLayer.on('load', () => {
-  osmPointsLayers = dataLayer.mbMap
-    .getStyle()
-    .layers.filter(layer => {
-      return (
-        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
-      );
-    })
-    .map(layer => layer.id);
-});
-
-export const sourcesLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.sources',
-  zIndex: 1,
-  preserveDrawingBuffer: true,
-  style: 'trafimage_sources_only_v2',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-sourcesLayer.on('load', () => {
-  if (sourcesLayer.mbMap && !sourcesLayer.mbMap.getSource('stations')) {
-    sourcesLayer.mbMap.addSource('stations', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: osmPointsFeaturesRendered,
-      },
-    });
-  }
-});
-
-// On initilialization we get the lit of rendered stations.
-dataLayer.on('init', () => {
-  dataLayer.mbMap.on('idle', () => {
-    osmPointsFeaturesRendered = dataLayer.mbMap
+const updateStations = mbMap => {
+  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
+  mbMap.once('idle', () => {
+    const osmPointsRendered = mbMap
       .queryRenderedFeatures({
         layers: osmPointsLayers,
       })
@@ -123,13 +87,39 @@ dataLayer.on('init', () => {
         };
         return good;
       });
-
-    if (sourcesLayer.mbMap && sourcesLayer.mbMap.getSource('stations')) {
-      sourcesLayer.mbMap.getSource('stations').setData({
+    const source = mbMap.getSource('stations');
+    if (source) {
+      source.setData({
         type: 'FeatureCollection',
-        features: osmPointsFeaturesRendered,
+        features: osmPointsRendered,
       });
     }
+  });
+};
+
+// Get list of styleLayers applied to osm_points source.
+dataLayer.once('load', () => {
+  const { map, mbMap } = dataLayer;
+  osmPointsLayers = mbMap
+    .getStyle()
+    .layers.filter(layer => {
+      return (
+        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+      );
+    })
+    .map(layer => layer.id);
+  mbMap.addSource('stations', {
+    type: 'geojson',
+    data: {
+      type: 'FeatureCollection',
+      features: [],
+    },
+  });
+  updateStations(mbMap);
+
+  // Update stations source on moveeend.
+  map.on('moveend', () => {
+    updateStations(mbMap);
   });
 });
 
@@ -185,13 +175,11 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
 export const passagierfrequenzen = new MapboxStyleLayer({
   name: 'ch.sbb.bahnhoffrequenzen',
   visible: false,
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: dataLayer,
   styleLayer: {
     id: 'passagierfrequenzen',
     type: 'circle',
     source: 'stations',
-    // source: 'base',
-    // 'source-layer': 'osm_points',
     filter: ['has', 'dwv'],
     paint: {
       'circle-radius': [
@@ -235,7 +223,7 @@ bahnhofplaene.setChildren([
     name: 'ch.sbb.bahnhofplaene.interaktiv',
     radioGroup: 'bahnhofplaene',
     visible: false,
-    mapboxLayer: sourcesLayer,
+    mapboxLayer: dataLayer,
     styleLayer: {
       id: 'interaktiv',
       type: 'symbol',
@@ -243,7 +231,7 @@ bahnhofplaene.setChildren([
       filter: ['has', 'url_interactive_plan'],
       layout: {
         'icon-image': 'standort',
-        'icon-size': 1,
+        'icon-ignore-placement': true,
       },
     },
     filters: ['has', 'url_interactive_plan'],
@@ -257,14 +245,14 @@ bahnhofplaene.setChildren([
     name: 'ch.sbb.bahnhofplaene.printprodukte',
     radioGroup: 'bahnhofplaene',
     visible: false,
-    mapboxLayer: sourcesLayer,
+    mapboxLayer: dataLayer,
     styleLayer: {
       id: 'printprodukte',
       type: 'symbol',
       source: 'stations',
       layout: {
         'icon-image': 'standort',
-        'icon-size': 1,
+        'icon-ignore-placement': true,
       },
     },
     filters: [
@@ -326,7 +314,7 @@ punctuality.setChildren([
 export const netzkartePointLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.stationen',
   visible: true,
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: dataLayer,
   styleLayer: {
     id: 'stations',
     type: 'circle',
@@ -350,7 +338,7 @@ export const netzkartePointLayer = new MapboxStyleLayer({
 
 export const buslines = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.buslinien',
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: dataLayer,
   visible: false,
   styleLayer: {
     id: 'bus',
@@ -809,7 +797,6 @@ export const grenzen = new Layer({
 
 export default [
   dataLayer,
-  sourcesLayer,
   netzkarteLayer,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,

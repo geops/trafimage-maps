@@ -1,18 +1,15 @@
 import 'jest-canvas-mock';
 import React from 'react';
 import thunk from 'redux-thunk';
-import { configure, mount } from 'enzyme';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import Adapter from 'enzyme-adapter-react-16';
 import LayerService from 'react-spatial/LayerService';
 import Layer from 'react-spatial/layers/Layer';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Map, View } from 'ol';
 import Permalink from './Permalink';
-
-configure({ adapter: new Adapter() });
 
 describe('Permalink', () => {
   const mockStore = configureStore([thunk]);
