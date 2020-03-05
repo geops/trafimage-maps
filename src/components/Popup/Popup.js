@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Point, LineString } from 'ol/geom';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
-import './Popup.scss';
 
 const Popup = () => {
   const map = useSelector(state => state.app.map);
