@@ -134,7 +134,8 @@ class MapboxStyleLayer extends Layer {
   addStyleLayers() {
     const { mbMap } = this.mapboxLayer;
     this.styleLayers.forEach(styleLayer => {
-      if (!mbMap.getLayer(styleLayer.id)) {
+      const { id, source } = styleLayer;
+      if (mbMap.getSource(source) && !mbMap.getLayer(id)) {
         mbMap.addLayer(styleLayer);
       }
     });
@@ -191,26 +192,16 @@ class MapboxStyleLayer extends Layer {
       });
   }
 
-  getFeatures() {
-    const { mbMap } = this.mapboxLayer;
-    // Ignore the getFeatureInfo until the mapbox map is loaded
-    if (!mbMap || !mbMap.isStyleLoaded()) {
-      return [];
-    }
-
-    return mbMap.querySourceFeatures(
-      this.styleLayers.map(s => s && s.source),
-      {
-        sourceLayer: this.styleLayers.map(s => s && s['source-layer']),
-        // filter: e => e,
-        validate: false,
-      },
-    );
+  getFeatures2(resolve) {
+    resolve(this.getFeatures());
   }
 
   setFilter(filter) {
+    const { mbMap } = this.mapboxLayer;
     this.styleLayers.forEach(({ id }) => {
-      this.mapboxLayer.mbMap.setFilter(id, filter);
+      if (mbMap.getLayer(id)) {
+        mbMap.setFilter(id, filter);
+      }
     });
   }
 
