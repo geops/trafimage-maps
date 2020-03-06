@@ -64,7 +64,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr_v2',
+  style: 'osm_bright',
   properties: {
     hideInLegend: true,
   },
