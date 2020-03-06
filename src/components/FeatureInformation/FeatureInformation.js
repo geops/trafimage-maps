@@ -34,7 +34,8 @@ const FeatureInformation = ({ featureInfo }) => {
     return null;
   }
 
-  const PopupComponent = popups[info.layer.get('popupComponent')];
+  const comp = info.layer.get('popupComponent');
+  const PopupComponent = typeof comp === 'string' ? popups[comp] : comp;
   if (!PopupComponent) {
     return null;
   }
