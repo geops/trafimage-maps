@@ -17,7 +17,8 @@ let returnToNetzkarte = false;
 
 const DeparturePopup = ({ feature }) => {
   const dispatch = useDispatch();
-  const { featureInfo, layerService } = useSelector(state => state.app);
+  const featureInfo = useSelector(state => state.app.featureInfo);
+  const layerService = useSelector(state => state.app.layerService);
   const name = feature.get('name');
   const uic = parseFloat(feature.get('sbb_id'));
 

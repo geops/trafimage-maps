@@ -166,7 +166,7 @@ describe('RouteLayer', () => {
     jest.spyOn(Map.prototype, 'hasFeatureAtPixel').mockReturnValue(true);
 
     const topicConf = [{ ...casa, layers: [layer] }];
-    const component = mount(<TrafimageMaps topics={topicConf} />);
+    const component = mount(<TrafimageMaps topics={topicConf} apiKey="test" />);
     const compMap = component.find('Map').props().map;
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
     const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };

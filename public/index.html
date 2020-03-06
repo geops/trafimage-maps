@@ -88,7 +88,7 @@
             return response.json();
           })
           .then(function(data) {
-            return changeAttr('apiKey', data.key);
+            changeAttr('apiKey', data.key);
           })
           .catch(function() {
             console.error('Request to get the apiKey failed');
