@@ -13830,19 +13830,10 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^6.11.0:
+query-string@^6.11.0, query-string@^6.4.2:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.11.0.tgz#dc27a05733d1be66f16d0f83dfa957270f45f66d"
   integrity sha512-jS+me8X3OEGFTsF6kF+vUUMFG/d3WUCvD7bHhfZP5784nOq1pjj8yau/u86nfOncmcN6ZkSWKWkKAvv/MGxzLA==
-  dependencies:
-    decode-uri-component "^0.2.0"
-    split-on-first "^1.0.0"
-    strict-uri-encode "^2.0.0"
-
-query-string@^6.4.2, query-string@^6.9.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.9.0.tgz#1c3b727c370cf00f177c99f328fda2108f8fa3dd"
-  integrity sha512-KG4bhCFYapExLsUHrFt+kQVEegF2agm4cpF/VNc6pZVthIfCc/GK8t8VyNIE3nyXG9DK3Tf2EGkxjR6/uRdYsA==
   dependencies:
     decode-uri-component "^0.2.0"
     split-on-first "^1.0.0"
@@ -14152,14 +14143,7 @@ react-i18next@^11.3.3:
     "@babel/runtime" "^7.3.1"
     html-parse-stringify2 "2.0.1"
 
-react-icons@^3.4.0, react-icons@^3.7.0, react-icons@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.8.0.tgz#229de5904809696c9f46932bd9b6126b2522866e"
-  integrity sha512-rA/8GRKjPulft8BSBSMsHkE1AGPqJ7LjNsyk0BE7XjG70Iz62zOled2SJk7LDo8x9z86a3xOstDlKlMZ4pAy7A==
-  dependencies:
-    camelcase "^5.0.0"
-
-react-icons@^3.9.0:
+react-icons@^3.4.0, react-icons@^3.7.0, react-icons@^3.8.0, react-icons@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.9.0.tgz#89a00f20a0e02e6bfd899977eaf46eb4624239d5"
   integrity sha512-gKbYKR+4QsD3PmIHLAM9TDDpnaTsr3XZeK1NTAb6WQQ+gxEdJ0xuCgLq0pxXdS7Utg2AIpcVhM1ut/jlDhcyNg==
@@ -14397,13 +14381,13 @@ react-themeable@^1.1.0:
   dependencies:
     object-assign "^3.0.0"
 
-react-transit@^0.2.0-beta.3:
-  version "0.2.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.2.0-beta.3.tgz#5acdce9e98e706ef4c8c19336e25d2faad0617c0"
-  integrity sha512-Gdm98MSgpkl93SG7aknHdzgDCde1a5HBAyS/+lhfplxTPE2D4gatx4YcjvH8lvKmHwuASP04fIGms5REjYIRWg==
+react-transit@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.0.tgz#21fc83615c1db613d600efbf4aceeb9ad40ce434"
+  integrity sha512-jDobUBhV4kWqQQ3328jYJM9016B6DrvfVvw1e3zmiuRYSXqnK7KzZ08tBN5Oqg/ZPrCRVSehqi9ZJiCBt6vccg==
   dependencies:
     abortcontroller-polyfill "^1.4.0"
-    query-string "^6.9.0"
+    query-string "^6.11.0"
     react-autosuggest "^9.4.3"
     react-icons "^3.7.0"
 

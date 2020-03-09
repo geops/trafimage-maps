@@ -37,7 +37,7 @@
     "react-shadow": "^17.5.0",
     "react-spatial": "^0.2.1",
     "react-styleguidist": "^10.6.2",
-    "react-transit": "^0.2.0-beta.3",
+    "react-transit": "^0.3.0",
     "react-web-component": "^2.0.1",
     "redux": "^4.0.5",
     "redux-debounced": "^0.5.0",
