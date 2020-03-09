@@ -8,7 +8,7 @@ import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
-import 'trafimage-maps/examples/casa.css'
+import 'trafimage-maps/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -25,8 +25,8 @@ const zoneLayer = new ZoneLayer({
     }
     if (isHovered) {
       return {
-        stroke: {width: 2, color: '#4576A2'},
-        text: { color: '#4576A2'},
+        stroke: {width: 2, color: '#4576a2'},
+        text: { color: '#4576a2'},
       };
     }
     return {
@@ -195,13 +195,21 @@ const App = () => {
 
   useEffect(() => {
     const map = ref.current;
-    map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer]}];
+    map.topics =  [{
+      ...casa,
+      layers: [...casa.layers, zoneLayer, routeLayer],
+      elements: {
+        mapControls: true,
+        menu: true,
+        popup: true,
+      }}];
 
     return () => {
       map.topics = null;
     };
   }, []);
 
+  /* To use casa style sheet, add the casa class in the parent class */
   return (
     <div className="container casa">
       <trafimage-maps ref={ref} apiKey={apiKey}/>
