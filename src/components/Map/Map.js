@@ -51,6 +51,7 @@ class Map extends PureComponent {
   /**
    * Compare 2 feature info objects and return true
    * if they are the same.
+   * @private
    */
   static isSameFeatureInfo(first, second) {
     if (first.length !== second.length) {

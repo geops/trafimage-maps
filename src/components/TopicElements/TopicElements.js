@@ -39,6 +39,7 @@ const defaultElements = {
 const propTypes = {
   /**
    * History object from react-router
+   * @private
    */
   history: PropTypes.shape({
     push: PropTypes.func,

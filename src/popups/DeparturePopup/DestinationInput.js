@@ -40,6 +40,7 @@ class DestinationInput extends Component {
   /**
    * Fired if user selects a destination from the input
    * @param {string} value Selected value.
+   * @private
    */
   onInputChange(value) {
     const { onSelect } = this.props;
@@ -54,6 +55,7 @@ class DestinationInput extends Component {
 
   /**
    * Selection is selected by click or key event.
+   * @private
    */
   selectDestination(item) {
     const { onSelect } = this.props;
@@ -67,6 +69,7 @@ class DestinationInput extends Component {
   /**
    * Load destinations.
    * @param {string} destination Selected destination.
+   * @private
    */
   loadDestinations(value) {
     const { uic, platforms } = this.props;

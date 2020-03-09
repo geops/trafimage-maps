@@ -17,6 +17,7 @@ import { setLanguage } from '../../model/app/actions';
 const propTypes = {
   /**
    * History object from react-router
+   * @private
    */
   history: PropTypes.shape({
     push: PropTypes.func,
@@ -25,6 +26,7 @@ const propTypes = {
 
   /**
    * Array of topics from ./src/config/topics
+   * @private
    */
   topics: PropTypes.arrayOf(
     PropTypes.shape({
@@ -35,52 +37,62 @@ const propTypes = {
 
   /**
    * Language of the application.
+   * @private
    */
   language: PropTypes.string,
 
   /**
    * Initial map center described by an array of coordinates
    * containing longitude and latitude.
+   * @private
    */
   center: PropTypes.arrayOf(PropTypes.number),
 
   /**
    * Zoom level.
+   * @private
    */
   zoom: PropTypes.number,
 
   /**
    * API key for using geOps services.
+   * @private
    */
   apiKey: PropTypes.string,
 
   /**
    * URL endpoint for Cartaro.
+   * @private
    */
   cartaroUrl: PropTypes.string,
 
   /**
    * React app base URL
+   * @private
    */
   appBaseUrl: PropTypes.string,
 
   /**
    * API key for vector tiles hosted by geOps.
+   * @private
    */
   vectorTilesKey: PropTypes.string,
 
   /**
    * URL endpoint for vector tiles hosted by geOps.
+   * @private
    */
   vectorTilesUrl: PropTypes.string,
 
   /**
    * URL to request permission.
+   * @private
    */
   permissionUrl: PropTypes.string,
 
   /**
    * Enable analytics tracking.
+   * @private
    */
   enableTracking: PropTypes.bool,
 };
@@ -117,6 +129,7 @@ class TrafimageMaps extends React.PureComponent {
     /**
      * If the application runs standalone, we want to use a consistent store.
      * However when running in Stylegudist, every application needs it own store
+     * @private
      */
     this.store = getStore();
   }
