@@ -36,6 +36,7 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
  * @class
  * @param {Object} [options] Layer options.
  * @inheritdoc
+ * @private
  */
 class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
