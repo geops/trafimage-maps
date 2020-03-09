@@ -128,10 +128,21 @@ class Map extends PureComponent {
 
       // don't continue if there's a popup that was opened by click
       if (!isClickInfoOpen) {
-        infos = infos.filter(
-          ({ layer }) =>
-            layer.get('showPopupOnHover') && layer.get('popupComponent'),
-        );
+        infos = infos
+          .filter(
+            ({ layer }) =>
+              layer.get('showPopupOnHover') && layer.get('popupComponent'),
+          )
+          .map(i => {
+            /* Apply showPopupOnHover function if defined to further filter features */
+            const showPopupOnHover = i.layer.get('showPopupOnHover');
+            if (typeof showPopupOnHover === 'function') {
+              const newFeature = i;
+              newFeature.features = i.layer.get('showPopupOnHover')(i.features);
+              return newFeature;
+            }
+            return i;
+          });
 
         if (!Map.isSameFeatureInfo(featureInfo, infos)) {
           dispatchSetFeatureInfo(infos);

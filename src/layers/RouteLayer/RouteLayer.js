@@ -4,6 +4,8 @@ import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
+import MultiLineString from 'ol/geom/MultiLineString';
+import Feature from 'ol/Feature';
 import CasaLayer from '../CasaLayer';
 
 /**
@@ -26,7 +28,12 @@ class RouteLayer extends CasaLayer {
       }),
       ...options,
     });
-    this.set('showPopupOnHover', true);
+    this.set('showPopupOnHover', features => {
+      if (features.length) {
+        return features.filter(f => f.get('route').popupContent);
+      }
+      return [features];
+    });
     this.set('popupComponent', 'CasaRoutePopup');
 
     this.url = 'https://api.geops.io/routing/v1/';
@@ -117,9 +124,12 @@ class RouteLayer extends CasaLayer {
     return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
       .then(data => {
-        const features = format.readFeatures(data);
-        features.forEach(f => f.setProperties(sequenceProps));
-        return features;
+        const lineStrings = format.readFeatures(data);
+        const feature = new Feature({
+          geometry: new MultiLineString(lineStrings.map(l => l.getGeometry())),
+        });
+        feature.setProperties(sequenceProps);
+        return feature;
       });
   }
 
