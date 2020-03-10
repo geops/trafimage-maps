@@ -18,6 +18,7 @@ const defaultProps = {};
 
 /**
  * Replace substring by component
+ * @private
  */
 const replace = (text, substr, replacement) => {
   const array = text
