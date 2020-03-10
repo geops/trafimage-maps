@@ -39,6 +39,7 @@ const defaultElements = {
 const propTypes = {
   /**
    * History object from react-router
+   * @private
    */
   history: PropTypes.shape({
     push: PropTypes.func,
@@ -149,7 +150,7 @@ function TopicElements({ history, appBaseUrl }) {
       ref={ref}
       className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}
     >
-      <ResizeHandler observe={ref.current} />
+      <ResizeHandler observe={ref.current} forceUpdate={elements.header} />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         <EventConsumer>
           {dispatcher => (

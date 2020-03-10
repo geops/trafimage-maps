@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeatureInformaion should match snapshot. should display multiple features with pagination 1`] = `null`;
+
+exports[`FeatureInformaion should match snapshot. using the info's popupComponent 1`] = `null`;
+
+exports[`FeatureInformaion should match snapshot. using the layers's popupComponent 1`] = `
+<div
+  className="wkp-feature-information"
+>
+  <div
+    className="wkp-feature-information-header"
+  >
+    <span />
+    <div
+      aria-label="Popup schliessen"
+      className="wkp-close-bt"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      role="button"
+      tabIndex={0}
+      title="Popup schliessen"
+    >
+      <svg
+        alt="Popup schliessen"
+        fill="currentColor"
+        focusable={false}
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+    </div>
+  </div>
+  <div
+    className="wkp-feature-information-body"
+  >
+    <div
+      className="wkp-netzkarte-popup"
+    >
+      <div>
+        <div
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          Abfahrtszeiten
+        </div>
+      </div>
+      <div>
+        <div
+          aria-expanded={false}
+          className="wkp-coordinate-toggle"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+        >
+          Koordinaten
+        </div>
+        <div
+          className="wkp-coordinates-infos wkp-closed"
+        >
+          <span
+            className="wkp-projection-label"
+          />
+          <span>
+            Länge (X): 2
+          </span>
+          <span>
+            Breite (Y): 2
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,17 +1,13 @@
 import React from 'react';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import { transform } from 'ol/proj';
-
-import Search from '../Search';
+import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+import Search from '../Search';
 
 const endpoint = 'https://api.geops.io/stops/v1/';
 
 class StopFinder extends Search {
   constructor() {
     super();
-
     this.onDataEvent = this.onDataEvent.bind(this);
   }
 
@@ -37,60 +33,60 @@ class StopFinder extends Search {
   openPopup(item) {
     this.popupItem = item;
     const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+    const layer = layerService.getLayer('ch.sbb.netzkarte.data');
 
     if (layer) {
-      const { mbMap } = layer.mapboxLayer;
-
-      if (mbMap.isStyleLoaded()) {
-        this.onDataEvent();
-      } else {
-        mbMap.on('data', this.onDataEvent);
-      }
-    }
-  }
-
-  getFeatureInfoForLayer(layer) {
-    const uic = parseInt(this.popupItem.properties.id, 10);
-    const mbFeature = layer
-      .getFeatures()
-      .find(s => parseInt(8500000 + s.properties.didok, 10) === uic);
-
-    if (mbFeature) {
-      const feature = new Feature({
-        geometry: new Point(
-          transform(mbFeature.geometry.coordinates, 'EPSG:4326', 'EPSG:3857'),
-        ),
-        ...mbFeature.properties,
+      const { mbMap } = layer;
+      mbMap.once('idle', () => {
+        if (mbMap.isSourceLoaded('stations')) {
+          this.onDataEvent();
+        } else {
+          // We can't rely on sourcedata because isSourceLoaded returns false.
+          mbMap.on('idle', this.onDataEvent);
+        }
       });
-
-      return {
-        features: [feature],
-        layer,
-      };
     }
-
-    return null;
   }
 
   onDataEvent() {
     const { layerService, dispatchSetFeatureInfo } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
-    const { mbMap } = layer.mapboxLayer;
+    const { mbMap } = layerService.getLayer('ch.sbb.netzkarte.data');
 
-    if (mbMap.isStyleLoaded()) {
-      mbMap.off('data', this.onDataEvent);
+    if (mbMap.isSourceLoaded('stations')) {
+      mbMap.off('idle', this.onDataEvent);
+    } else {
+      return;
     }
 
-    const infoLayers = layerService
-      .getLayersAsFlatArray()
-      .filter(l => l.getVisible() && l instanceof MapboxStyleLayer);
+    // We get feature infos only for layer that use the source 'stations'.
+    const infoLayers = layerService.getLayersAsFlatArray().filter(layer => {
+      const { styleLayers } = layer;
+      if (!styleLayers) {
+        return [];
+      }
+      const sourceIds = styleLayers.map(({ source }) => source);
+      return (
+        layer.getVisible() &&
+        layer instanceof MapboxStyleLayer &&
+        sourceIds.includes('stations')
+      );
+    });
 
+    // Here we simulate a click, it's the best way to get the proper popup informations.
+    // The only drawback is that if the station is not rendered there is no popup.
     const infos = infoLayers
-      .map(l => this.getFeatureInfoForLayer(l))
+      .map(layer =>
+        layer.getFeatureInfoAtCoordinate(
+          fromLonLat(this.popupItem.geometry.coordinates),
+        ),
+      )
       .filter(i => i);
 
-    dispatchSetFeatureInfo(infos);
+    Promise.all(infos).then(featureInfos => {
+      dispatchSetFeatureInfo(
+        featureInfos.filter(({ features }) => features.length),
+      );
+    });
   }
 }
 

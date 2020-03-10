@@ -43,6 +43,7 @@ import ArrowImg from '../../img/arrow.png';
  * @param {Object} properties Feature properties.
  * @param {boolean} isSelected Whether the feature is selected.
  * @param {boolean} isHovered True if the feature is hovered.
+ * @private
  * @returns {styleObject} The style object.
  */
 
