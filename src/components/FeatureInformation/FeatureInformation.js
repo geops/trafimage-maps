@@ -95,6 +95,7 @@ const FeatureInformation = ({ featureInfo }) => {
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.getKey()}
+            t={t}
             feature={features[featureIndex]}
           />
           {pagination}
