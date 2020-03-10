@@ -2,6 +2,7 @@ import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import LayerService from 'react-spatial/LayerService';
@@ -123,6 +124,7 @@ class TopicLoader extends Component {
     if (!topics.length) {
       return;
     }
+
     const visibleTopics = topics.filter(
       t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
@@ -132,6 +134,10 @@ class TopicLoader extends Component {
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);
     this.updateServices(activeTopic);
+
+    Object.entries(activeTopic.translations || {}).forEach(([lang, trans]) =>
+      i18next.addResourceBundle(lang, 'translation', trans),
+    );
 
     if (matomo) {
       matomo.trackEvent({ category: activeTopic.name, action: 'load' });
