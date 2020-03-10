@@ -14495,13 +14495,13 @@ react-themeable@^1.1.0:
   dependencies:
     object-assign "^3.0.0"
 
-react-transit@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.0.tgz#21fc83615c1db613d600efbf4aceeb9ad40ce434"
-  integrity sha512-jDobUBhV4kWqQQ3328jYJM9016B6DrvfVvw1e3zmiuRYSXqnK7KzZ08tBN5Oqg/ZPrCRVSehqi9ZJiCBt6vccg==
+react-transit@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.1.tgz#a420788f1244e02eb3d829358d9c53a5e5b83bdf"
+  integrity sha512-yCsRKNwd1k0NsZFkKpAzwKMnbnxQeohYQVUYMrcugXbdhBPcE4t7K0gC8LJceYNWo4IH+v+DkJ3h/yyP7WjhgQ==
   dependencies:
     abortcontroller-polyfill "^1.4.0"
-    query-string "^6.11.0"
+    query-string "^6.11.1"
     react-autosuggest "^9.4.3"
     react-icons "^3.7.0"
 
