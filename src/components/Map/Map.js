@@ -51,6 +51,7 @@ class Map extends PureComponent {
   /**
    * Compare 2 feature info objects and return true
    * if they are the same.
+   * @private
    */
   static isSameFeatureInfo(first, second) {
     if (first.length !== second.length) {
@@ -128,10 +129,22 @@ class Map extends PureComponent {
 
       // don't continue if there's a popup that was opened by click
       if (!isClickInfoOpen) {
-        infos = infos.filter(
-          ({ layer }) =>
-            layer.get('showPopupOnHover') && layer.get('popupComponent'),
-        );
+        infos = infos
+          .filter(
+            ({ layer }) =>
+              layer.get('showPopupOnHover') && layer.get('popupComponent'),
+          )
+          .map(info => {
+            /* Apply showPopupOnHover function if defined to further filter features */
+            const showPopupOnHover = info.layer.get('showPopupOnHover');
+            if (typeof showPopupOnHover === 'function') {
+              return {
+                ...info,
+                features: info.layer.get('showPopupOnHover')(info.features),
+              };
+            }
+            return info;
+          });
 
         if (!Map.isSameFeatureInfo(featureInfo, infos)) {
           dispatchSetFeatureInfo(infos);

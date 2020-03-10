@@ -12,6 +12,7 @@ const getHandicapFeatures = layer =>
  * Search for handicap stations which are not a 'Stützpunktbahnhof'.
  * This search will be removed after handicap information for all stations has
  * been added to cartaro.
+ * @private
  */
 class HandicapNoInfoFinder extends StopFinder {
   constructor() {
