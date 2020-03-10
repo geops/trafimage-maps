@@ -133,15 +133,16 @@ class Map extends PureComponent {
             ({ layer }) =>
               layer.get('showPopupOnHover') && layer.get('popupComponent'),
           )
-          .map(i => {
+          .map(info => {
             /* Apply showPopupOnHover function if defined to further filter features */
-            const showPopupOnHover = i.layer.get('showPopupOnHover');
+            const showPopupOnHover = info.layer.get('showPopupOnHover');
             if (typeof showPopupOnHover === 'function') {
-              const newFeature = i;
-              newFeature.features = i.layer.get('showPopupOnHover')(i.features);
-              return newFeature;
+              return {
+                ...info,
+                features: info.layer.get('showPopupOnHover')(info.features),
+              };
             }
-            return i;
+            return info;
           });
 
         if (!Map.isSameFeatureInfo(featureInfo, infos)) {

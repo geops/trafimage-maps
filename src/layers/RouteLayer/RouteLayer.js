@@ -28,11 +28,8 @@ class RouteLayer extends CasaLayer {
       }),
       ...options,
     });
-    this.set('showPopupOnHover', features => {
-      if (features.length) {
-        return features.filter(f => f.get('route').popupContent);
-      }
-      return [features];
+    this.set('showPopupOnHover', (features = []) => {
+      return features.filter(f => f.get('route').popupContent);
     });
     this.set('popupComponent', 'CasaRoutePopup');
 
