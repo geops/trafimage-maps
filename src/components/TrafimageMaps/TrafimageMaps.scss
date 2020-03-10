@@ -18,6 +18,11 @@
     }
   }
 
+  .ol-overlaycontainer,
+  .ol-overlaycontainer-stopevent {
+    pointer-events: none;
+  }
+
   .tm-barrier-free {
     *:focus {
       outline-width: 3px;

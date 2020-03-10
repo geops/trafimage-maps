@@ -14,6 +14,7 @@ module.exports = {
   styleguideDir: 'styleguide-build',
   require: [
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
+    'ol/ol.css',
     'react-app-polyfill/ie11',
     'react-app-polyfill/stable',
     '@webcomponents/webcomponents-platform',

@@ -209,6 +209,8 @@ class Map extends PureComponent {
           viewOptions={{
             maxZoom,
           }}
+          // Important if we want to be able to zoom with the mouse wheel, without clicking on the map first
+          tabIndex={null}
         />
       </>
     );
