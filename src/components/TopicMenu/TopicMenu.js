@@ -111,7 +111,7 @@ class TopicMenu extends PureComponent {
       selectedForInfos,
       dispatchSetSelectedForInfos,
     } = this.props;
-    const isLayerButton = selectedInfo instanceof Layer;
+    const isLayerButton = selectedInfo.isReactSpatialLayer;
     const isSelected = selectedForInfos === selectedInfo;
 
     let className;
