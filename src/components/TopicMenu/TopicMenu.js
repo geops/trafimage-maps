@@ -8,7 +8,6 @@ import LayerTree from 'react-spatial/components/LayerTree';
 import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
-import Layer from 'react-spatial/layers/Layer';
 import Collapsible from '../Collapsible';
 import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
 
