@@ -33,6 +33,8 @@ class RouteLayer extends CasaLayer {
     });
     this.set('popupComponent', 'CasaRoutePopup');
 
+    this.featuresLayer = this.olLayer;
+
     this.url = 'https://api.geops.io/routing/v1/';
 
     this.selectedRouteIds = [];
@@ -231,6 +233,15 @@ class RouteLayer extends CasaLayer {
 
     this.selectedRouteIds = [];
     this.olLayer.getSource().clear();
+  }
+
+  /**
+   * Returns available layers in the layer group
+   * @private
+   * @inheritdoc
+   */
+  getLayers() {
+    return [this.olLayer];
   }
 }
 

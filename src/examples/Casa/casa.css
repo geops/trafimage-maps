@@ -1,0 +1,14 @@
+.casa .tm-trafimage-maps.tm-h-xs .wkp-fit-extent,
+.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb,
+.casa .tm-trafimage-maps.tm-h-xs .rs-zoom-out,
+.casa .tm-trafimage-maps.tm-h-xs .rs-zoom-in {
+  background: #4576a2;
+}
+
+.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider {
+  border: 1px solid #4576a2;
+}
+
+.casa .tm-trafimage-maps.tm-h-xs .wkp-geolocation {
+  display: none;
+}

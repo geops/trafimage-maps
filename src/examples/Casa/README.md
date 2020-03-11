@@ -7,7 +7,8 @@ import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import casa, { netzkarteLayerLabels } from 'trafimage-maps/examples/Casa/topic';
+import casa from 'trafimage-maps/examples/Casa/topic';
+import 'trafimage-maps/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -16,32 +17,24 @@ const apiKey = window.apiKey;
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
-  validFrom: '2019-12-16',
-  validTo: '2020-12-01',
-  styleFunction: (feature, isSelected, isHovered) => {
-    // Should return a styleobject, example at:
-    // https://jsdoc.maps.trafimage.ch/docjs.html#styleobject
-    if (isSelected) {
+  styleFunction: (props, isSelected, isHovered) => {
+    if (isSelected && !isHovered) {
       return {
-        stroke: {
-          width: 2,
-        },
-        strokeOutline: {
-          width: 8,
-          color: [69, 118, 162, 0.3],
-        },
+        stroke: { color: '#fff' },
       };
     }
-
     if (isHovered) {
       return {
-        textOutline: {
-          color: 'rgba(104, 104, 104, 0.3)',
-          width: 4,
-        },
+        stroke: {width: 2, color: '#4576a2'},
+        text: { color: '#4576a2'},
       };
     }
+    return {
+      stroke: { color: 'rgb(102, 102, 102, 0.2)'},
+    }
   },
+  validFrom: '2019-12-16',
+  validTo: '2020-12-01',
 });
 
 // Select zones.
@@ -59,13 +52,80 @@ zoneLayer.loadZones([
   {
     partnerCode: 490,
     zones: [
+       {
+        zoneCode: 163,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 164,
+        isSelected: true,
+        isClickable: true,
+      },
       {
         zoneCode: 120,
         isSelected: true,
         isClickable: true,
       },
       {
+        zoneCode: 121,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 122,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 123,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 124,
+        isSelected: false,
+        isClickable: true,
+      },
+    ],
+  },
+  {
+    partnerCode: 446,
+    zones: [
+      {
         zoneCode: 170,
+        isSelected: false,
+        isClickable: true,
+      },
+      {
+        zoneCode: 116,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 126,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 626,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 710,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 700,
+        isSelected: true,
+        isClickable: true,
+      },
+      {
+        zoneCode: 701,
+        isSelected: true,
+        isClickable: true,
       },
     ],
   },
@@ -80,16 +140,18 @@ const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   apiKey: apiKey,
   styleFunction: (props, isSelected, isHovered) => {
-    if (isSelected && isHovered) {
+    if (isSelected) {
       return {
-        stroke: { color: 'green' },
+        stroke: { color: 'rgb(235, 0, 0)' },
       };
     }
-
+    if (isHovered) {
+      return {
+        stroke: { color: 'rgb(235, 0, 0)' },
+      };
+    }
     return {
-      strokeArrow: {
-        count: 3,
-      },
+      stroke: { color: 'rgb(235, 0, 0, 0.3)' },
     }
   },
 });
@@ -99,15 +161,22 @@ routeLayer
   .loadRoutes([
     {
       isClickable: true,
-      popupTitle: 'Route St. Gallen >> Zürich',
-      popupContent: {
-        Von: 'St. Gallen',
-        Nach: 'Zürich HB',
-      },
+      isSelected: true,
       sequences: [
         {
           uicFrom: 8503000,
-          uicTo: 8506302,
+          uicTo: 8506306,
+          mot: 'rail',
+        },
+      ],
+    },
+    {
+      isClickable: true,
+      isSelected: false,
+      sequences: [
+        {
+          uicFrom: 8503000,
+          uicTo: 8506206,
           mot: 'rail',
         },
       ],
@@ -126,15 +195,23 @@ const App = () => {
 
   useEffect(() => {
     const map = ref.current;
-    map.topics =  [{...casa, layers: [...casa.layers, zoneLayer, routeLayer, netzkarteLayerLabels]}];
+    map.topics =  [{
+      ...casa,
+      layers: [...casa.layers, zoneLayer, routeLayer],
+      elements: {
+        mapControls: true,
+        menu: true,
+        popup: true,
+      }}];
 
     return () => {
       map.topics = null;
     };
   }, []);
 
+  /* To use casa style sheet, add the casa class in the parent class */
   return (
-    <div className="container">
+    <div className="container casa">
       <trafimage-maps ref={ref} apiKey={apiKey}/>
     </div>
   );

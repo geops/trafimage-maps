@@ -72,6 +72,28 @@ class CasaLayer extends VectorLayer {
   }
 
   /**
+   * Overwrites the react-spatial function, necessary to change the target layer containing
+   * the features, since olLayer is a LayerGroup in CASA
+   */
+  getFeatureInfoAtCoordinate(coordinate) {
+    let features = [];
+
+    if (this.map) {
+      const pixel = this.map.getPixelFromCoordinate(coordinate);
+      features = this.map.getFeaturesAtPixel(pixel, {
+        layerFilter: l => l === this.featuresLayer,
+        hitTolerance: this.hitTolerance,
+      });
+    }
+
+    return Promise.resolve({
+      features,
+      layer: this,
+      coordinate,
+    });
+  }
+
+  /**
    * In some cases we want to dispatch an onClick() without showing a popup.
    * If this function returns true, no popup is displayed.
    * @param {ol.Feature} feature The potential popup feature.
@@ -214,7 +236,13 @@ class CasaLayer extends VectorLayer {
       });
     }
 
-    if (isSelected || isHovered) {
+    if (isSelected) {
+      Object.values(olStyles)
+        .flat()
+        .forEach(s => s.setZIndex(0.5));
+    }
+
+    if (isHovered) {
       Object.values(olStyles)
         .flat()
         .forEach(s => s.setZIndex(1));
@@ -233,7 +261,7 @@ class CasaLayer extends VectorLayer {
     const pixel = this.map.getPixelFromCoordinate(coordinate);
     const topLayer = this.map.forEachLayerAtPixel(pixel, l => l);
 
-    if (layer.olLayer !== topLayer) {
+    if (layer.featuresLayer !== topLayer) {
       return;
     }
 
@@ -251,7 +279,14 @@ class CasaLayer extends VectorLayer {
       const feature = this.map.forEachFeatureAtPixel(e.pixel, f => f);
       if (feature !== this.hoverFeature) {
         this.hoverFeature = feature;
-        this.olLayer.changed();
+        if (this.featuresLayer) {
+          this.featuresLayer.changed();
+          if (this.labelsLayer) {
+            this.labelsLayer.changed();
+          }
+        } else {
+          this.olLayer.changed();
+        }
         this.mouseOverCallbacks.forEach(c => c(feature, e.coordinate));
       }
     });
