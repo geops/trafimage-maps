@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .wkp-header {
   position: absolute;
   right: 0;
@@ -9,7 +11,7 @@
   background: white;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid #b7b7b7;
-  height: 100px;
+  height: $header-height;
   z-index: 1;
 
   .wkp-header-right {

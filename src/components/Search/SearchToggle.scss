@@ -12,7 +12,7 @@
   background: none;
   border: none;
   position: absolute;
-  top: 9px;
+  top: calc(#{$header-height} - 92.5px);
   right: 200px;
   width: 39px;
 

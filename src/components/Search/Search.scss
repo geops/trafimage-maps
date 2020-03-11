@@ -2,38 +2,41 @@
 
 .wkp-search {
   position: absolute;
-  top: 25px;
-  z-index: 2; // To be above header div, in order to be clickable.
+  max-height: 40px;
+  top: calc(#{$header-height} - 70px);
   right: 320px;
   left: 400px;
+  z-index: 2; // To be above header div, in order to be clickable.
 
   .wkp-search-button {
     border: none;
     color: white;
-    height: 40px;
-    width: 46px;
+    height: calc(#{$header-height} - 64px);
+    width: 44px;
     position: absolute;
     top: 2px;
     font-size: 16px;
     padding-top: 4px;
 
     &.wkp-search-button-clear {
-      right: 44px;
+      right: 46px;
       background: none;
       color: #666;
     }
 
     &.wkp-search-button-submit {
       background-color: $brand-primary;
-      right: -2px;
+      right: 2px;
     }
   }
 
   .react-autosuggest__input {
+    box-sizing: border-box;
     border: 2px solid #b7b7b7;
     font-size: 14px;
     padding: 12px 80px 12px 15px;
-    width: calc(100% - 95px);
+    width: 100%;
+    height: calc(#{$header-height} - 60px);
     border-radius: 0;
     -webkit-appearance: none;
 
@@ -44,8 +47,8 @@
 
   .react-autosuggest__suggestions-container--open {
     background: white;
+    box-sizing: border-box;
     border: 2px solid #666;
-    margin-top: 5px;
     width: 100%;
     padding-top: 15px;
     max-height: calc(100vh - 150px);
@@ -149,7 +152,7 @@
   &.tm-w-xs,
   &.tm-w-s {
     .wkp-search-button {
-      height: 39px;
+      height: calc(#{$header-height} - 64px);
     }
 
     .react-autosuggest__input {
