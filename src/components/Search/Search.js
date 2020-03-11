@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import {
   FaSearch,
@@ -8,6 +8,7 @@ import {
   FaChevronCircleUp,
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { setSearchOpen } from '../../model/app/actions';
 
 import SearchToggle from './SearchToggle';
 
@@ -19,6 +20,7 @@ function Search() {
   const map = useSelector(state => state.app.map);
   const searchService = useSelector(state => state.app.searchService);
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const componentIsMounted = useRef(true);
   useEffect(() => {
@@ -59,9 +61,10 @@ function Search() {
             onSuggestionHighlighted={({ suggestion }) =>
               searchService.highlight(suggestion)
             }
-            onSuggestionSelected={(e, { suggestion }) =>
-              searchService.select(suggestion)
-            }
+            onSuggestionSelected={(e, { suggestion }) => {
+              searchService.select(suggestion);
+              dispatch(setSearchOpen(false));
+            }}
             getSuggestionValue={suggestion => searchService.value(suggestion)}
             renderSuggestion={suggestion => searchService.render(suggestion)}
             renderSectionTitle={({ section }) => {
@@ -106,6 +109,7 @@ function Search() {
                   const filtered = suggestions.filter(s => s.items.length > 0);
                   if (filtered.length > 0) {
                     const { items, section } = filtered[0];
+                    dispatch(setSearchOpen(false));
                     searchService.select({ ...items[0], section });
                   }
                 } else if (key === 'ArrowDown' || key === 'ArrowUp') {
@@ -125,6 +129,7 @@ function Search() {
               onClick={() => {
                 setValue('');
                 searchService.clearHighlight();
+                dispatch(setSearchOpen(false));
               }}
             >
               <FaTimes />
@@ -135,6 +140,11 @@ function Search() {
             tabIndex={0}
             aria-label={t('Suche')}
             className="wkp-search-button wkp-search-button-submit"
+            onClick={() => {
+              if (!value) {
+                dispatch(setSearchOpen(false));
+              }
+            }}
           >
             <FaSearch focusable={false} />
           </button>
