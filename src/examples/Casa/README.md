@@ -18,20 +18,11 @@ const apiKey = window.apiKey;
 const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
   styleFunction: (props, isSelected, isHovered) => {
-    if (isSelected && !isHovered) {
-      return {
-        stroke: { color: '#fff' },
-      };
-    }
-    if (isHovered) {
-      return {
-        stroke: {width: 2, color: '#4576a2'},
-        text: { color: '#4576a2'},
-      };
-    }
-    return {
-      stroke: { color: 'rgb(102, 102, 102, 0.2)'},
-    }
+    // if (isSelected && !isHovered) {
+    //   return {
+    //     stroke: { color: '#ff0000' },
+    //   };
+    // }
   },
   validFrom: '2019-12-16',
   validTo: '2020-12-01',
@@ -140,19 +131,9 @@ const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   apiKey: apiKey,
   styleFunction: (props, isSelected, isHovered) => {
-    if (isSelected) {
-      return {
-        stroke: { color: 'rgb(235, 0, 0)' },
-      };
-    }
-    if (isHovered) {
-      return {
-        stroke: { color: 'rgb(235, 0, 0)' },
-      };
-    }
-    return {
-      stroke: { color: 'rgb(235, 0, 0, 0.3)' },
-    }
+    // return {
+    //   stroke: { color: 'blue' },
+    // }
   },
 });
 

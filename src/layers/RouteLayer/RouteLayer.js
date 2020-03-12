@@ -76,7 +76,7 @@ class RouteLayer extends CasaLayer {
       ship: [255, 255, 255],
     };
 
-    const opacity = isSelected || isHovered ? 1 : 0.5;
+    const opacity = isSelected || isHovered ? 1 : 0.3;
     const rgb = motColors[feature.get('mot')] || [68, 68, 68];
 
     const style = {

@@ -103,6 +103,20 @@ class ZoneLayer extends CasaLayer {
    */
   // eslint-disable-next-line class-methods-use-this
   defaultStyleFunction(feature, isSelected, isHovered) {
+    if (isSelected && !isHovered) {
+      return {
+        fill: {
+          color: [104, 104, 104, 0.7],
+        },
+        stroke: {
+          color: '#fff',
+        },
+        text: {
+          color: '#fff',
+        },
+      };
+    }
+
     if (isHovered) {
       return {
         fill: {
@@ -110,24 +124,10 @@ class ZoneLayer extends CasaLayer {
         },
         stroke: {
           width: 2,
-          color: '#4576A2',
+          color: '#4576a2',
         },
         text: {
-          color: '#686868',
-        },
-      };
-    }
-
-    if (isSelected) {
-      return {
-        fill: {
-          color: [104, 104, 104, 0.7],
-        },
-        stroke: {
-          color: '#686868',
-        },
-        text: {
-          color: 'white',
+          color: '#4576a2',
         },
       };
     }
@@ -137,7 +137,7 @@ class ZoneLayer extends CasaLayer {
         color: [102, 102, 102, 0.2],
       },
       stroke: {
-        color: [102, 102, 102, 0.5],
+        color: [102, 102, 102, 0.2],
         width: 1,
       },
       text: {
