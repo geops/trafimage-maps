@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import UIDialog from '@geops/react-ui/components/Dialog';
 import { setDialogVisible } from '../../model/app/actions';
@@ -23,6 +24,7 @@ const defaultProps = {
 
 function Dialog(props) {
   const dialogPosition = useSelector(state => state.app.dialogPosition);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { body, isModal } = props;
 
@@ -58,6 +60,7 @@ function Dialog(props) {
         isOpen
         ref={dialogRef}
         position={dialogPosition}
+        closeButtonAriaLabel={t('Dialog schließen')}
         onClose={() => {
           dispatch(setDialogVisible());
         }}

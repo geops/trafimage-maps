@@ -50,6 +50,7 @@ const FeatureInformation = ({ featureInfo }) => {
           {featureIndex > 0 ? (
             <Button
               className="wkp-pagination-button"
+              title={t('zurück')}
               onClick={() => setFeatureIndex(featureIndex - 1)}
             >
               <IoIosArrowRoundBack />
@@ -61,6 +62,7 @@ const FeatureInformation = ({ featureInfo }) => {
           {featureIndex + 1 < features.length ? (
             <Button
               className="wkp-pagination-button"
+              title={t('weiter')}
               onClick={() => setFeatureIndex(featureIndex + 1)}
             >
               <IoIosArrowRoundForward />

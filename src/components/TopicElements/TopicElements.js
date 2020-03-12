@@ -132,9 +132,11 @@ function TopicElements({ history, appBaseUrl }) {
         layerService={layerService}
         map={map}
         mapTabIndex={-1} // No accessible via Tab nav.
-        titleButton={t('Baselayerwechsel')}
-        titleButtonNext={t('Nächste Baselayer')}
-        titleButtonPrevious={t('Vorherige Baselayer')}
+        titles={{
+          button: t('Baselayerwechsel'),
+          prevButton: t('Nächste Baselayer'),
+          nextButton: t('Vorherige Baselayer'),
+        }}
         fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />

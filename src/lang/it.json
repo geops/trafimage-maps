@@ -19,8 +19,8 @@
   "Ausbau": "Ampliamento",
   "Ausstattung": "Attrezzatura",
   "Auswahl drucken": "Stampare selezione",
-  "Bahnhof": "Stazione",
   "bahnhof": "Stazione",
+  "Bahnhof": "Stazione",
   "Bahnhof und Strecke": "Tratta e stazione",
   "bahnhof_plural": "Stazioni",
   "Bahnhofpläne": "Piani delle stazioni",
@@ -174,6 +174,7 @@
   "dfa": "DfA",
   "DfA Linien Nr.": "N. linee DfA",
   "dfa_filter": "Rete delle linee DfA",
+  "Dialog schließen": "chiudi la finestra di dialogo",
   "didok": "DIDOK",
   "Die mit einem Schloss markierten Themen enthalten Informationen für den internen Gebrauch gemäss": "I temi contrassegnati con il simbolo di un lucchetto contengono informazioni ad uso interno in conformità con",
   "Dieser Bahnhof ist barrierefrei": "Stazione senza barriere",
@@ -364,6 +365,7 @@
   "Webkartenportal": "Portale della cartine",
   "Webseite des Parks": "Sito del parco",
   "Wechseln zu Element": "Passaggio all'elemento",
+  "weiter": "prossimo",
   "weitere Ergebnisse": "risultati",
   "weiteres Ergebnis": "risultati",
   "Werkzeuge": "Strumenti",
@@ -374,6 +376,7 @@
   "Zeichnen": "Disegnare",
   "Ziel": "Destinazione",
   "Zugtracker": "Train tracker",
+  "zurück": "precedente",
   "Zurücksetzen": "Ripristinare",
   "Zusätzliche Informationen": "Informazioni complementari"
 }
