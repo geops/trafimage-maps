@@ -4,6 +4,7 @@ export const SET_FEATURE_INFO = 'SET_FEATURE_INFO';
 export const SET_LANGUAGE = 'SET_LANGUAGE';
 export const SET_PROJECTION = 'SET_PROJECTION';
 export const SET_MENU_OPEN = 'SET_MENU_OPEN';
+export const SET_SEARCH_OPEN = 'SET_SEARCH_OPEN';
 export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
 export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
@@ -28,6 +29,8 @@ export const setFeatureInfo = data => ({
 });
 
 export const setMenuOpen = data => ({ type: SET_MENU_OPEN, data });
+
+export const setSearchOpen = data => ({ type: SET_SEARCH_OPEN, data });
 
 export const setDialogVisible = data => ({ type: SET_DIALOG_VISIBLE, data });
 
