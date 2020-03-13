@@ -1,4 +1,4 @@
-const dataResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
+const dataResolutions = [750, 500, 250, 100, 75, 50, 20, 10, 5];
 
 function getDataResolution(resolution) {
   return dataResolutions.reduce((prev, curr) =>
@@ -8,7 +8,7 @@ function getDataResolution(resolution) {
 
 function getGeneralization(resolution) {
   const res = getDataResolution(resolution);
-  return { 750: 10, 500: 10, 250: 30, 100: 30 }[res] || 100;
+  return { 750: 5, 500: 10, 250: 30, 100: 30, 75: 100, 50: 100 }[res] || 150;
 }
 
 export default { getDataResolution, getGeneralization };
