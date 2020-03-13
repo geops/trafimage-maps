@@ -10,7 +10,7 @@ import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
-import { setFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -31,6 +31,7 @@ const propTypes = {
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetSearchOpen: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -158,6 +159,7 @@ class Map extends PureComponent {
     const {
       layerService,
       dispatchSetFeatureInfo,
+      dispatchSetSearchOpen,
       dispatchHtmlEvent,
     } = this.props;
 
@@ -194,6 +196,7 @@ class Map extends PureComponent {
       detail: evt,
     });
     dispatchHtmlEvent(htmlEvent);
+    dispatchSetSearchOpen(false);
   }
 
   render() {
@@ -246,6 +249,7 @@ const mapDispatchToProps = {
   dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,
   dispatchSetFeatureInfo: setFeatureInfo,
+  dispatchSetSearchOpen: setSearchOpen,
 };
 
 export default compose(
