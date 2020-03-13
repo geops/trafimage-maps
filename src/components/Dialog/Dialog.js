@@ -60,7 +60,7 @@ function Dialog(props) {
         isOpen
         ref={dialogRef}
         position={dialogPosition}
-        closeButtonAriaLabel={t('Dialog schließen')}
+        closeButtonTitle={t('Dialog schließen')}
         onClose={() => {
           dispatch(setDialogVisible());
         }}
