@@ -107,7 +107,7 @@ describe('RouteLayer', () => {
     expect(olStyles.base).toEqual(
       new Style({
         stroke: new Stroke({
-          color: [235, 0, 0, 0.5],
+          color: [235, 0, 0, 0.3],
           width: 6,
         }),
       }),

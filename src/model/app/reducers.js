@@ -9,6 +9,7 @@ import {
   SET_LANGUAGE,
   SET_PROJECTION,
   SET_MENU_OPEN,
+  SET_SEARCH_OPEN,
   SET_SELECTED_FOR_INFOS,
   SET_DIALOG_VISIBLE,
   SET_DIALOG_POSITION,
@@ -33,6 +34,7 @@ const getInitialState = () => ({
     format: c => c,
   },
   menuOpen: false,
+  searchOpen: false,
   selectedForInfos: null,
   map: new OLMap({
     controls: [],
@@ -82,6 +84,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         menuOpen: action.data,
+      };
+    case SET_SEARCH_OPEN:
+      return {
+        ...state,
+        searchOpen: action.data,
       };
     case SET_SELECTED_FOR_INFOS:
       return {

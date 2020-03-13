@@ -1,0 +1,21 @@
+.casa .tm-trafimage-maps .wkp-fit-extent,
+.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb,
+.casa .tm-trafimage-maps .rs-zoom-out,
+.casa .tm-trafimage-maps .rs-zoom-in {
+  background: #4576a2;
+}
+
+.casa .tm-trafimage-maps .wkp-fit-extent:hover,
+.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb:hover,
+.casa .tm-trafimage-maps .rs-zoom-out:hover,
+.casa .tm-trafimage-maps .rs-zoom-in:hover {
+  background: #305a80;
+}
+
+.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider {
+  border: 1px solid #4576a2;
+}
+
+.casa .tm-trafimage-maps .wkp-geolocation {
+  display: none;
+}

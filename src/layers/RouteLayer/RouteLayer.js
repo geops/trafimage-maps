@@ -33,6 +33,8 @@ class RouteLayer extends CasaLayer {
     });
     this.set('popupComponent', 'CasaRoutePopup');
 
+    this.featuresLayer = this.olLayer;
+
     this.url = 'https://api.geops.io/routing/v1/';
 
     this.selectedRouteIds = [];
@@ -74,7 +76,7 @@ class RouteLayer extends CasaLayer {
       ship: [255, 255, 255],
     };
 
-    const opacity = isSelected || isHovered ? 1 : 0.5;
+    const opacity = isSelected || isHovered ? 1 : 0.3;
     const rgb = motColors[feature.get('mot')] || [68, 68, 68];
 
     const style = {
@@ -231,6 +233,15 @@ class RouteLayer extends CasaLayer {
 
     this.selectedRouteIds = [];
     this.olLayer.getSource().clear();
+  }
+
+  /**
+   * Returns available layers in the layer group
+   * @private
+   * @inheritdoc
+   */
+  getLayers() {
+    return [this.olLayer];
   }
 }
 
