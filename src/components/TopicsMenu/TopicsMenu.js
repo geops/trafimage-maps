@@ -5,7 +5,7 @@ import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
 import withResizing from '../withResizing';
-import { setMenuOpen } from '../../model/app/actions';
+import { setMenuOpen, setSearchOpen } from '../../model/app/actions';
 
 const propTypes = {
   menuHeight: PropTypes.number,
@@ -38,7 +38,10 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
     <div className="wkp-topics-menu">
       <TopicsMenuHeader
         isOpen={menuOpen}
-        onToggle={() => dispatch(setMenuOpen(!menuOpen))}
+        onToggle={() => {
+          dispatch(setMenuOpen(!menuOpen));
+          dispatch(setSearchOpen(false));
+        }}
       />
       <Collapsible
         isCollapsed={!menuOpen}

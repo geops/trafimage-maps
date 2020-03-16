@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchOpen } from '../../model/app/actions';
 import { ReactComponent as SearchIcon } from './Search.svg';
 
 const propTypes = {
@@ -11,18 +13,21 @@ const defaultProps = {
 };
 
 function SearchToggle({ children }) {
-  const [open, setOpen] = useState(false);
+  const searchOpen = useSelector(state => state.app.searchOpen);
+  const dispatch = useDispatch();
 
   return (
     <div>
-      <div className={`wkp-search-toggle-container${open ? '--open' : ''}`}>
+      <div
+        className={`wkp-search-toggle-container${searchOpen ? '--open' : ''}`}
+      >
         {children}
       </div>
-      {!open && (
+      {!searchOpen && (
         <button
           className="wkp-search-toggle-button"
           type="button"
-          onClick={() => setOpen(!open)}
+          onClick={() => dispatch(setSearchOpen(true))}
         >
           <SearchIcon />
         </button>

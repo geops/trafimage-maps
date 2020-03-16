@@ -59,7 +59,7 @@ describe('ZoneLayer', () => {
           color: [102, 102, 102, 0.2],
         }),
         stroke: new Stroke({
-          color: [102, 102, 102, 0.5],
+          color: [102, 102, 102, 0.2],
           width: 1,
         }),
       }),
@@ -89,7 +89,7 @@ describe('ZoneLayer', () => {
           color: [104, 104, 104, 0.7],
         }),
         stroke: new Stroke({
-          color: '#686868',
+          color: '#fff',
         }),
       }),
     );
@@ -101,7 +101,7 @@ describe('ZoneLayer', () => {
           text: '42',
           font: 'bold 13px Arial',
           fill: new Fill({
-            color: 'white',
+            color: '#fff',
           }),
         }),
       }),
