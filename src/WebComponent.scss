@@ -1,3 +1,38 @@
+@font-face {
+  font-family: 'SBB Web Bold';
+  src:
+    url('utils/fonts/SBBWeb-Bold.woff2') format('woff2'),
+    url('utils/fonts/SBBWeb-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SBB Web Light';
+  src:
+    url('utils/fonts/SBBWeb-Light.woff2') format('woff2'),
+    url('utils/fonts/SBBWeb-Light.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SBB Web Roman';
+  src:
+    url('utils/fonts/SBBWeb-Roman.woff2') format('woff2'),
+    url('utils/fonts/SBBWeb-Roman.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SBB Web Thin';
+  src:
+    url('utils/fonts/SBBWeb-Thin.woff2') format('woff2'),
+    url('utils/fonts/SBBWeb-Thin.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'SBB Web UltraLight';
+  src:
+    url('utils/fonts/SBBWeb-UltraLight.woff2') format('woff2'),
+    url('utils/fonts/SBBWeb-UltraLight.woff') format('woff');
+}
+
 @import 'globals.scss';
 
 // @geops/react-ui
