@@ -19,10 +19,16 @@ configure({ adapter: new Adapter() });
 const routes = [
   {
     isClickable: true,
+    isSelected: true,
+    popupTitle: 'Route St. Gallen >> Zürich',
+    popupContent: {
+      Von: 'St. Gallen',
+      Nach: 'Zürich HB',
+    },
     sequences: [
       {
-        uicFrom: 8506302,
-        uicTo: 8503000,
+        uicFrom: 8503000,
+        uicTo: 8506306,
         mot: 'rail',
       },
     ],
@@ -69,6 +75,7 @@ const feature = new Feature({
   ]),
   mot: 'rail',
   route: {
+    isClickable: true,
     popupContent: {
       Von: 'St. Gallen',
       Nach: 'Zürich HB',
