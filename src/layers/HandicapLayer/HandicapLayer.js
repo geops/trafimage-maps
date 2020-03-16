@@ -85,9 +85,9 @@ class HandicapLayer extends VectorLayer {
    */
   style(feature, resolution) {
     let geometry = feature.getGeometry();
-    let gen = 100;
+    let gen = 10;
     gen = resolution < 500 ? 30 : gen;
-    gen = resolution < 200 ? 10 : gen;
+    gen = resolution < 200 ? 100 : gen;
     gen = resolution < 100 ? null : gen;
 
     if (gen) {
