@@ -129,7 +129,6 @@ function Search() {
               onClick={() => {
                 setValue('');
                 searchService.clearHighlight();
-                dispatch(setSearchOpen(false));
               }}
             >
               <FaTimes />
