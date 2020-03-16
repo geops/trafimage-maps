@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from '@geops/react-ui/components/Button';
@@ -17,6 +17,7 @@ const propTypes = {
 const FeatureInformation = ({ featureInfo }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const language = useSelector(state => state.app.language);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
@@ -97,6 +98,7 @@ const FeatureInformation = ({ featureInfo }) => {
             key={info.layer.getKey()}
             t={t}
             feature={features[featureIndex]}
+            language={language}
           />
           {pagination}
         </div>
