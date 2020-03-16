@@ -84,16 +84,11 @@ class HandicapLayer extends VectorLayer {
    * @returns {Object|null}
    */
   style(feature, resolution) {
-    let geometry = feature.getGeometry();
-    let gen = 10;
-    gen = resolution < 500 ? 30 : gen;
-    gen = resolution < 200 ? 100 : gen;
-    gen = resolution < 100 ? null : gen;
-
-    if (gen) {
-      const wkt = (feature.get('generalizations') || {})[`geom_gen${gen}`];
-      geometry = wkt ? this.wktFormat.readGeometry(wkt.split(';')[1]) : null;
-    }
+    const gen = LayerHelper.getGeneralization(resolution);
+    const wkt = (feature.get('generalizations') || {})[`geom_gen${gen}`];
+    const geometry = wkt
+      ? this.wktFormat.readGeometry(wkt.split(';')[1])
+      : null;
 
     const minVisibility = LayerHelper.getDataResolution(resolution) * 10;
     if (!geometry || feature.get('visibility') < minVisibility) {
