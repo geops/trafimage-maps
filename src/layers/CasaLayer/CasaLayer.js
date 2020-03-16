@@ -80,10 +80,16 @@ class CasaLayer extends VectorLayer {
 
     if (this.map) {
       const pixel = this.map.getPixelFromCoordinate(coordinate);
-      features = this.map.getFeaturesAtPixel(pixel, {
-        layerFilter: l => l === this.featuresLayer,
-        hitTolerance: this.hitTolerance,
-      });
+      features = this.map
+        .getFeaturesAtPixel(pixel, {
+          layerFilter: l => l === this.featuresLayer,
+          hitTolerance: this.hitTolerance,
+        })
+        .filter(
+          feature =>
+            feature.get('isClickable') ||
+            (feature.get('route') && feature.get('route').isClickable),
+        );
     }
 
     return Promise.resolve({
@@ -274,7 +280,6 @@ class CasaLayer extends VectorLayer {
    */
   init(map) {
     super.init(map);
-
     this.map.on('pointermove', e => {
       const feature = this.map.forEachFeatureAtPixel(e.pixel, f => f);
       if (feature !== this.hoverFeature) {

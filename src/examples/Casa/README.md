@@ -70,13 +70,13 @@ zoneLayer.loadZones([
       },
       {
         zoneCode: 123,
-        isSelected: true,
-        isClickable: true,
+        isSelected: false,
+        isClickable: false,
       },
       {
         zoneCode: 124,
         isSelected: false,
-        isClickable: true,
+        isClickable: false,
       },
     ],
   },
@@ -143,6 +143,11 @@ routeLayer
     {
       isClickable: true,
       isSelected: true,
+      popupTitle: 'Route St. Gallen >> Zürich',
+      popupContent: {
+        Von: 'St. Gallen',
+        Nach: 'Zürich HB',
+      },
       sequences: [
         {
           uicFrom: 8503000,
