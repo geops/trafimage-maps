@@ -92,7 +92,7 @@
     "react-test-renderer": "^16.13.0",
     "react-web-component-style-loader": "^0.1.4-alpha",
     "redux-mock-store": "^1.5.4",
-    "rewire": "^4.0.1",
+    "rewire": "^5.0.0",
     "sort-json": "^2.0.0",
     "start-server-and-test": "^1.10.9",
     "stream-array": "^1.1.2",
