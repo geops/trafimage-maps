@@ -152,6 +152,7 @@
   "dfa": "DfA",
   "DfA Linien Nr.": "DfA line No.",
   "dfa_filter": "DfA Liniennetz",
+  "Dialog schließen": "Close dialog",
   "didok": "DIDOK",
   "Dieser Bahnhof ist barrierefrei": "Train access barrier-free",
   "Dieser Bahnhof wird barrierefrei umgebaut (Prognose): JJJJ. Weitere Informationen zur Hilfestellung auf www.sbb.ch/handicap": "Train access adapted barrier-free (prognosis): YYYY\nFurther Information on assistance can be obtained from www.sbb.ch/handicap",
@@ -314,6 +315,7 @@
   "Webkartenportal": "Geoportal",
   "Webseite des Parks": "Website of the Park",
   "Wechseln zu Element": "Switch to element",
+  "weiter": "next",
   "weitere Ergebnisse": "more results",
   "weiteres Ergebnis": "additional result",
   "Werkzeuge": "Tools",
@@ -324,5 +326,6 @@
   "Zeichnen": "Draw",
   "Ziel": "Destination",
   "Zugtracker": "Train tracker",
+  "zurück": "previous",
   "Zusätzliche Informationen": "Additional information"
 }

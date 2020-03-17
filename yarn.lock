@@ -2083,10 +2083,10 @@
     react-shadow "^17.1.3"
     rimraf "^3.0.0"
 
-"@geops/react-ui@^1.0.7":
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.0.7.tgz#834755187c60631d5b36f4235cf47f6f0c47bba2"
-  integrity sha512-zTee5j2B0lt97C9T9ohFeTdl5hgRhzwpQ7roH7nHvqjd0XG07D74npTb+jUeHaVsUSCAEKUvXwtSsBogBpsvCQ==
+"@geops/react-ui@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.0.8.tgz#31e0e330f712fdbdb462a8ca214dabc3931a92c8"
+  integrity sha512-wEVjAQXx0JatesZ+f/uW0djwBcFeRoYkIIygnnFEshtS4ti1SoIhuOyh2jQSSknOnd6ICd0oGNljj9rW/iFaNQ==
   dependencies:
     query-string "^6.4.2"
     react-icons "^3.4.0"
@@ -14369,10 +14369,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.2.8.tgz#bda5219017526f57c8e3f539593711feef64ae2d"
-  integrity sha512-MY90b5HZpRqUESGx1TTh2QeWlx+YTvf3pd/esacPmrJOpo5V7GfDL9gxzrU8Z3A5rH2sLK9xsRyMnTV+mgSs4w==
+react-spatial@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.2.9.tgz#9376a4c9af602b9330601bdc3918b37a9d3fc86a"
+  integrity sha512-WzjDMuIQioSj/22ds78MLbwB8FaU++X70Sir5RRtsdjjnacMKcweM5CH+YsWrcAdrqXMsXkxeg3gB3HffTJtAQ==
   dependencies:
     query-string "^6.11.0"
     radians-degrees "^1.0.0"

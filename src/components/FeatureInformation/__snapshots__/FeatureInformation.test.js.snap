@@ -96,11 +96,13 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
         className="wkp-pagination-button-wrapper"
       >
         <div
+          aria-label="weiter"
           className="wkp-pagination-button"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
           tabIndex={0}
+          title="weiter"
         >
           <svg
             fill="currentColor"
