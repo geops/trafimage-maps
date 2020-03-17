@@ -3,22 +3,22 @@
 .wkp-search {
   position: absolute;
   top: 25px;
-  z-index: 3;
+  z-index: 2; // To be above header div, in order to be clickable.
   right: 320px;
   left: 400px;
 
   .wkp-search-button {
     border: none;
     color: white;
-    height: 41px;
+    height: 40px;
     width: 46px;
     position: absolute;
     top: 2px;
     font-size: 16px;
-    padding-top: 3px;
+    padding-top: 4px;
 
     &.wkp-search-button-clear {
-      right: 46px;
+      right: 44px;
       background: none;
       color: #666;
     }
@@ -31,9 +31,15 @@
 
   .react-autosuggest__input {
     border: 2px solid #b7b7b7;
-    padding: 12px 15px;
     font-size: 14px;
-    width: calc(100% - 30px);
+    padding: 12px 80px 12px 15px;
+    width: calc(100% - 95px);
+    border-radius: 0;
+    -webkit-appearance: none;
+
+    &::-ms-clear {
+      display: none;
+    }
   }
 
   .react-autosuggest__suggestions-container--open {
@@ -137,6 +143,18 @@
 
     .wkp-search-toggle-container--open {
       margin: 0;
+    }
+  }
+
+  &.tm-w-xs,
+  &.tm-w-s {
+    .wkp-search-button {
+      height: 39px;
+    }
+
+    .react-autosuggest__input {
+      font-size: 16px;
+      padding-bottom: 9px;
     }
   }
 }

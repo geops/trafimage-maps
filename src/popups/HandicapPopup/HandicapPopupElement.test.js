@@ -1,11 +1,8 @@
 import React from 'react';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
+import { mount } from 'enzyme';
 import HandicapPopupElement from './HandicapPopupElement';
 import 'react-app-polyfill/stable';
-
-configure({ adapter: new Adapter() });
 
 describe('HandicapPopupElement', () => {
   const props = {

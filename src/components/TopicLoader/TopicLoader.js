@@ -1,3 +1,4 @@
+import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -117,6 +118,7 @@ class TopicLoader extends Component {
   }
 
   loadTopics() {
+    const matomo = this.context;
     const {
       topics,
       permissionsInfos,
@@ -136,6 +138,10 @@ class TopicLoader extends Component {
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);
     this.updateServices(activeTopic);
+
+    if (matomo) {
+      matomo.trackEvent({ category: activeTopic.name, action: 'load' });
+    }
   }
 
   updateServices(activeTopic) {
@@ -254,6 +260,7 @@ const mapDispatchToProps = {
 
 TopicLoader.propTypes = propTypes;
 TopicLoader.defaultProps = defaultProps;
+TopicLoader.contextType = MatomoContext;
 
 export default compose(
   withTranslation(),

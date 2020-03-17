@@ -19,10 +19,16 @@ configure({ adapter: new Adapter() });
 const routes = [
   {
     isClickable: true,
+    isSelected: true,
+    popupTitle: 'Route St. Gallen >> Zürich',
+    popupContent: {
+      Von: 'St. Gallen',
+      Nach: 'Zürich HB',
+    },
     sequences: [
       {
-        uicFrom: 8506302,
-        uicTo: 8503000,
+        uicFrom: 8503000,
+        uicTo: 8506306,
         mot: 'rail',
       },
     ],
@@ -69,6 +75,7 @@ const feature = new Feature({
   ]),
   mot: 'rail',
   route: {
+    isClickable: true,
     popupContent: {
       Von: 'St. Gallen',
       Nach: 'Zürich HB',
@@ -107,7 +114,7 @@ describe('RouteLayer', () => {
     expect(olStyles.base).toEqual(
       new Style({
         stroke: new Stroke({
-          color: [235, 0, 0, 0.5],
+          color: [235, 0, 0, 0.3],
           width: 6,
         }),
       }),
@@ -166,7 +173,7 @@ describe('RouteLayer', () => {
     jest.spyOn(Map.prototype, 'hasFeatureAtPixel').mockReturnValue(true);
 
     const topicConf = [{ ...casa, layers: [layer] }];
-    const component = mount(<TrafimageMaps topics={topicConf} />);
+    const component = mount(<TrafimageMaps topics={topicConf} apiKey="test" />);
     const compMap = component.find('Map').props().map;
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
     const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };

@@ -3,6 +3,7 @@ import 'react-app-polyfill/stable';
 import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { Group as LayerGroup } from 'ol/layer';
 import GeoJSON from 'ol/format/GeoJSON';
 import { containsExtent } from 'ol/extent';
 import MultiPolygon from 'ol/geom/MultiPolygon';
@@ -48,13 +49,25 @@ class ZoneLayer extends CasaLayer {
   constructor(options = {}) {
     super({
       name: 'Verbundzonen',
-      olLayer: new OLVectorLayer({
-        className: 'Verbundzonen', // needed for forEachLayerAtPixel
-        source: new VectorSource(),
-        style: (f, r) => this.zoneStyle(f, r),
+      olLayer: new LayerGroup({
+        layers: [
+          new OLVectorLayer({
+            source: new VectorSource(),
+            style: (f, r) => this.zoneStyle(f, r)[0],
+          }),
+          new OLVectorLayer({
+            source: new VectorSource(),
+            style: (f, r) => this.zoneStyle(f, r)[1],
+            zIndex: 1,
+          }),
+        ],
       }),
       ...options,
     });
+
+    this.layers = this.olLayer.getLayers().getArray();
+
+    [this.featuresLayer, this.labelsLayer] = this.layers;
 
     this.validFrom = options.validFrom;
 
@@ -77,8 +90,8 @@ class ZoneLayer extends CasaLayer {
           } else {
             this.selectedZones.push(feature);
           }
-
-          this.olLayer.changed();
+          this.featuresLayer.changed();
+          this.labelsLayer.changed();
         }
       }
     });
@@ -90,6 +103,20 @@ class ZoneLayer extends CasaLayer {
    */
   // eslint-disable-next-line class-methods-use-this
   defaultStyleFunction(feature, isSelected, isHovered) {
+    if (isSelected && !isHovered) {
+      return {
+        fill: {
+          color: [104, 104, 104, 0.7],
+        },
+        stroke: {
+          color: '#fff',
+        },
+        text: {
+          color: '#fff',
+        },
+      };
+    }
+
     if (isHovered) {
       return {
         fill: {
@@ -97,24 +124,10 @@ class ZoneLayer extends CasaLayer {
         },
         stroke: {
           width: 2,
-          color: '#4576A2',
+          color: '#4576a2',
         },
         text: {
-          color: '#686868',
-        },
-      };
-    }
-
-    if (isSelected) {
-      return {
-        fill: {
-          color: [104, 104, 104, 0.7],
-        },
-        stroke: {
-          color: '#686868',
-        },
-        text: {
-          color: 'white',
+          color: '#4576a2',
         },
       };
     }
@@ -124,7 +137,7 @@ class ZoneLayer extends CasaLayer {
         color: [102, 102, 102, 0.2],
       },
       stroke: {
-        color: [102, 102, 102, 0.5],
+        color: [102, 102, 102, 0.2],
         width: 1,
       },
       text: {
@@ -164,7 +177,6 @@ class ZoneLayer extends CasaLayer {
       isHovered,
       feature,
     );
-
     if (olStyles.text) {
       olStyles.text.getText().setText(feature.get('zone'));
 
@@ -194,7 +206,11 @@ class ZoneLayer extends CasaLayer {
     const isSelected = this.selectedZones.includes(feature);
     const isHovered =
       feature.get('isClickable') && this.hoverFeature === feature;
-    const styleObject = this.styleFunction(feature.getProperties(), isSelected);
+    const styleObject = this.styleFunction(
+      feature.getProperties(),
+      isSelected,
+      isHovered,
+    );
     const olStyles = this.getOlStylesFromObject(
       styleObject,
       isSelected,
@@ -214,7 +230,8 @@ class ZoneLayer extends CasaLayer {
       this.abortController.abort();
     }
 
-    this.olLayer.getSource().clear();
+    this.featuresLayer.getSource().clear();
+    this.labelsLayer.getSource().clear();
   }
 
   /**
@@ -243,8 +260,10 @@ class ZoneLayer extends CasaLayer {
       .then(res => res.json())
       .then(data => {
         const features = format.readFeatures(data);
-        this.olLayer.getSource().clear();
-        this.olLayer.getSource().addFeatures(features);
+        this.featuresLayer.getSource().clear();
+        this.labelsLayer.getSource().clear();
+        this.featuresLayer.getSource().addFeatures(features);
+        this.labelsLayer.getSource().addFeatures(features);
         return features;
       })
       .catch(() => {
@@ -260,7 +279,9 @@ class ZoneLayer extends CasaLayer {
    */
   zoomToZones(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
-    this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
+    this.map
+      .getView()
+      .fit(this.featuresLayer.getSource().getExtent(), fitOptions);
   }
 
   /**

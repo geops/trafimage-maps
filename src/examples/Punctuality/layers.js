@@ -47,21 +47,6 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   style: 'netzkarte_personenverkehr',
 });
 
-/**
- * This layer create a MapboxLayer used by all the MapboxStyleLayer.
- * Its style file contains only source where to find datas.
- * The style of features are  defined by each MapboxStyleLayer ('netzkarte_point, buslinien,...)
- */
-export const sourcesLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.sources',
-  zIndex: 1,
-  preserveDrawingBuffer: true,
-  style: 'trafimage_sources_only',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
 export const swisstopoSwissImage = new Layer({
   name: 'ch.sbb.netzkarte.luftbild.group',
   key: 'ch.sbb.netzkarte.luftbild.group',
@@ -142,7 +127,7 @@ export const swisstopoLandeskarteGrau = new Layer({
 
 export const buslines = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.buslinien',
-  mapboxLayer: sourcesLayer,
+  mapboxLayer: netzkarteLayer,
   visible: false,
   styleLayer: {
     id: 'bus',
@@ -158,7 +143,6 @@ export const buslines = new MapboxStyleLayer({
 });
 
 export default [
-  sourcesLayer,
   netzkarteLayer,
   swisstopoLandeskarteGrau,
   swisstopoLandeskarte,

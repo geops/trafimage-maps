@@ -16,25 +16,25 @@ import ArrowImg from '../../img/arrow.png';
  *   fill: { color: 'rgb(255, 200, 25)', },
  *   stroke: { width: 2, color: 'black' },
  *   strokeOutline: { width: 10, color: 'white' },
- *   text: { color: 'black' },
- *   textOutline { color: 'white', width: 2 },
+ *   text: { color: [255, 0, 0, 0.3] },
+ *   textOutline: { color: 'white', width: 2 },
  * };
  * @property {Object} [fill] Fill properties.
- * @property {string} [fill.color] Fill color.
+ * @property {string|array} [fill.color] Fill color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [stroke] Stroke properties.
  * @property {number} [stroke.width] Stroke width.
- * @property {string} [stroke.color] Stroke color.
+ * @property {string|array} [stroke.color] Stroke color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [stroke.arrow] Stroke arrows.
  * @property {number} [stroke.arrow.count] Number of stroke arrows along the route.
  * @property {Object} [strokeOutline] Stroke outline.
  * @property {number} [strokeOutline.width] Stroke outline width.
- * @property {string} [strokeOutline.color] Stroke outline color.
+ * @property {string|array} [strokeOutline.color] Stroke outline color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [text] Text properties.
  * @property {string} [text.font] Font.
  * @property {string} [text.label] Text label. If undefined, the zone code is used.
- * @property {string} [text.color] Text color.
+ * @property {string|array} [text.color] Text color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {Object} [textOutline] Text outline.
- * @property {string} [textOutline.color] Text outline color.
+ * @property {string|array} [textOutline.color] Text outline color. (https://openlayers.org/en/latest/apidoc/module-ol_color.html#~Color)
  * @property {number} [textOutline.width] Text outline width.
  */
 
@@ -43,6 +43,7 @@ import ArrowImg from '../../img/arrow.png';
  * @param {Object} properties Feature properties.
  * @param {boolean} isSelected Whether the feature is selected.
  * @param {boolean} isHovered True if the feature is hovered.
+ * @private
  * @returns {styleObject} The style object.
  */
 
@@ -68,6 +69,34 @@ class CasaLayer extends VectorLayer {
     this.mouseOverCallbacks = [];
 
     this.onMouseOver(options.onMouseOver);
+  }
+
+  /**
+   * Overwrites the react-spatial function, necessary to change the target layer containing
+   * the features, since olLayer is a LayerGroup in CASA
+   */
+  getFeatureInfoAtCoordinate(coordinate) {
+    let features = [];
+
+    if (this.map) {
+      const pixel = this.map.getPixelFromCoordinate(coordinate);
+      features = this.map
+        .getFeaturesAtPixel(pixel, {
+          layerFilter: l => l === this.featuresLayer,
+          hitTolerance: this.hitTolerance,
+        })
+        .filter(
+          feature =>
+            feature.get('isClickable') ||
+            (feature.get('route') && feature.get('route').isClickable),
+        );
+    }
+
+    return Promise.resolve({
+      features,
+      layer: this,
+      coordinate,
+    });
   }
 
   /**
@@ -205,7 +234,7 @@ class CasaLayer extends VectorLayer {
           fill: new FillStyle({
             color: style.text.color,
           }),
-          stroke: style.text.textOutline
+          stroke: style.textOutline
             ? new StrokeStyle({ ...style.textOutline })
             : undefined,
           text: style.text.label,
@@ -213,7 +242,13 @@ class CasaLayer extends VectorLayer {
       });
     }
 
-    if (isSelected || isHovered) {
+    if (isSelected) {
+      Object.values(olStyles)
+        .flat()
+        .forEach(s => s.setZIndex(0.5));
+    }
+
+    if (isHovered) {
       Object.values(olStyles)
         .flat()
         .forEach(s => s.setZIndex(1));
@@ -232,7 +267,7 @@ class CasaLayer extends VectorLayer {
     const pixel = this.map.getPixelFromCoordinate(coordinate);
     const topLayer = this.map.forEachLayerAtPixel(pixel, l => l);
 
-    if (layer.olLayer !== topLayer) {
+    if (layer.featuresLayer !== topLayer) {
       return;
     }
 
@@ -245,12 +280,18 @@ class CasaLayer extends VectorLayer {
    */
   init(map) {
     super.init(map);
-
     this.map.on('pointermove', e => {
       const feature = this.map.forEachFeatureAtPixel(e.pixel, f => f);
       if (feature !== this.hoverFeature) {
         this.hoverFeature = feature;
-        this.olLayer.changed();
+        if (this.featuresLayer) {
+          this.featuresLayer.changed();
+          if (this.labelsLayer) {
+            this.labelsLayer.changed();
+          }
+        } else {
+          this.olLayer.changed();
+        }
         this.mouseOverCallbacks.forEach(c => c(feature, e.coordinate));
       }
     });

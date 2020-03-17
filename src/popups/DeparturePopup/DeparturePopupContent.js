@@ -87,6 +87,7 @@ class DeparturePopupContent extends Component {
 
   /**
    * On selection of a destination in the input.
+   * @private
    */
   onDestinationSelect(selectedDestination) {
     this.destinationFilter = selectedDestination;
@@ -120,6 +121,7 @@ class DeparturePopupContent extends Component {
   /**
    * Load departures.
    * @param {string} destination Selected destination.
+   * @private
    */
   loadDepartures() {
     const { platforms, uic } = this.props;

@@ -10,7 +10,7 @@ import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
-import { setFeatureInfo } from '../../model/app/actions';
+import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -31,6 +31,7 @@ const propTypes = {
   dispatchSetResolution: PropTypes.func.isRequired,
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetSearchOpen: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -51,6 +52,7 @@ class Map extends PureComponent {
   /**
    * Compare 2 feature info objects and return true
    * if they are the same.
+   * @private
    */
   static isSameFeatureInfo(first, second) {
     if (first.length !== second.length) {
@@ -128,10 +130,22 @@ class Map extends PureComponent {
 
       // don't continue if there's a popup that was opened by click
       if (!isClickInfoOpen) {
-        infos = infos.filter(
-          ({ layer }) =>
-            layer.get('showPopupOnHover') && layer.get('popupComponent'),
-        );
+        infos = infos
+          .filter(
+            ({ layer }) =>
+              layer.get('showPopupOnHover') && layer.get('popupComponent'),
+          )
+          .map(info => {
+            /* Apply showPopupOnHover function if defined to further filter features */
+            const showPopupOnHover = info.layer.get('showPopupOnHover');
+            if (typeof showPopupOnHover === 'function') {
+              return {
+                ...info,
+                features: info.layer.get('showPopupOnHover')(info.features),
+              };
+            }
+            return info;
+          });
 
         if (!Map.isSameFeatureInfo(featureInfo, infos)) {
           dispatchSetFeatureInfo(infos);
@@ -145,6 +159,7 @@ class Map extends PureComponent {
     const {
       layerService,
       dispatchSetFeatureInfo,
+      dispatchSetSearchOpen,
       dispatchHtmlEvent,
     } = this.props;
 
@@ -181,6 +196,7 @@ class Map extends PureComponent {
       detail: evt,
     });
     dispatchHtmlEvent(htmlEvent);
+    dispatchSetSearchOpen(false);
   }
 
   render() {
@@ -233,6 +249,7 @@ const mapDispatchToProps = {
   dispatchSetResolution: setResolution,
   dispatchSetZoom: setZoom,
   dispatchSetFeatureInfo: setFeatureInfo,
+  dispatchSetSearchOpen: setSearchOpen,
 };
 
 export default compose(

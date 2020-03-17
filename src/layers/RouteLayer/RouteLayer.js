@@ -4,6 +4,8 @@ import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
+import MultiLineString from 'ol/geom/MultiLineString';
+import Feature from 'ol/Feature';
 import CasaLayer from '../CasaLayer';
 
 /**
@@ -26,8 +28,12 @@ class RouteLayer extends CasaLayer {
       }),
       ...options,
     });
-    this.set('showPopupOnHover', true);
+    this.set('showPopupOnHover', (features = []) => {
+      return features.filter(f => f.get('route').popupContent);
+    });
     this.set('popupComponent', 'CasaRoutePopup');
+
+    this.featuresLayer = this.olLayer;
 
     this.url = 'https://api.geops.io/routing/v1/';
 
@@ -70,7 +76,7 @@ class RouteLayer extends CasaLayer {
       ship: [255, 255, 255],
     };
 
-    const opacity = isSelected || isHovered ? 1 : 0.5;
+    const opacity = isSelected || isHovered ? 1 : 0.3;
     const rgb = motColors[feature.get('mot')] || [68, 68, 68];
 
     const style = {
@@ -117,9 +123,12 @@ class RouteLayer extends CasaLayer {
     return fetch(url, { signal: this.abortController.signal })
       .then(res => res.json())
       .then(data => {
-        const features = format.readFeatures(data);
-        features.forEach(f => f.setProperties(sequenceProps));
-        return features;
+        const lineStrings = format.readFeatures(data);
+        const feature = new Feature({
+          geometry: new MultiLineString(lineStrings.map(l => l.getGeometry())),
+        });
+        feature.setProperties(sequenceProps);
+        return feature;
       });
   }
 

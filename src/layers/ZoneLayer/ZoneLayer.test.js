@@ -5,6 +5,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import { Group as LayerGroup } from 'ol/layer';
 import { Style, Stroke, Text, Fill } from 'ol/style';
 import ZoneLayer from './ZoneLayer';
 
@@ -13,10 +14,20 @@ const feature = new Feature({
   zone: '42',
 });
 
-const olLayer = new OLVectorLayer({
-  source: new VectorSource({
-    features: [feature],
-  }),
+const olLayer = new LayerGroup({
+  layers: [
+    new OLVectorLayer({
+      className: 'Verbundzonen', // needed for forEachLayerAtPixel
+      source: new VectorSource(),
+      style: (f, r) => this.zoneStyle(f, r)[0],
+    }),
+    new OLVectorLayer({
+      className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
+      source: new VectorSource(),
+      style: (f, r) => this.zoneStyle(f, r)[1],
+      zIndex: 100,
+    }),
+  ],
 });
 
 let layer;
@@ -48,7 +59,7 @@ describe('ZoneLayer', () => {
           color: [102, 102, 102, 0.2],
         }),
         stroke: new Stroke({
-          color: [102, 102, 102, 0.5],
+          color: [102, 102, 102, 0.2],
           width: 1,
         }),
       }),
@@ -73,24 +84,24 @@ describe('ZoneLayer', () => {
 
     expect(olStyles.base).toEqual(
       new Style({
-        zIndex: 1,
+        zIndex: 0.5,
         fill: new Fill({
           color: [104, 104, 104, 0.7],
         }),
         stroke: new Stroke({
-          color: '#686868',
+          color: '#fff',
         }),
       }),
     );
 
     expect(olStyles.text).toEqual(
       new Style({
-        zIndex: 1,
+        zIndex: 0.5,
         text: new Text({
           text: '42',
           font: 'bold 13px Arial',
           fill: new Fill({
-            color: 'white',
+            color: '#fff',
           }),
         }),
       }),
