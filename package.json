@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "1.0.7-beta.87",
+  "version": "1.0.7-beta.88",
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
@@ -19,7 +19,7 @@
     "i18next-xhr-backend": "^3.2.2",
     "jsts": "^2.1.0",
     "lodash": "^4.17.11",
-    "mapbox-gl": "^1.8.1",
+    "mapbox-gl": "1.6.0",
     "node-sass": "^4.13.1",
     "ol": "6.1.1",
     "package.json": "^2.0.1",

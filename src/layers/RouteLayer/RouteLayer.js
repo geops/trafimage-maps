@@ -234,15 +234,6 @@ class RouteLayer extends CasaLayer {
     this.selectedRouteIds = [];
     this.olLayer.getSource().clear();
   }
-
-  /**
-   * Returns available layers in the layer group
-   * @private
-   * @inheritdoc
-   */
-  getLayers() {
-    return [this.olLayer];
-  }
 }
 
 export default RouteLayer;
