@@ -14,7 +14,6 @@ import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
-import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1022,7 +1021,6 @@ export const zweitausbildungRoutes = new Layer({
         },
       },
       children: [
-        // TODO Eva Dropdown layer
         new ZweitausbildungRoutesLayer({
           name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
@@ -1031,15 +1029,13 @@ export const zweitausbildungRoutes = new Layer({
           properties: {
             hideInLegend: true,
             zweitausbildung: {
-              // TODO Eva customFeatureInfo
               layer: 'zweitausbildung_tourist_strecken_grouped_qry',
-              highlightLayer: 'zweitausbildung_tourist_strecken',
             },
           },
         }),
       ],
     }),
-    new ZweitausbildungRoutesLayer({
+    new Layer({
       name: 'ch.sbb.zweitausbildung.hauptlinien.group',
       key: 'ch.sbb.zweitausbildung.hauptlinien.group',
       visible: true,
@@ -1055,21 +1051,18 @@ export const zweitausbildungRoutes = new Layer({
               image: 'legend_hauptlinien.png',
             },
           },
-          layer: 'zweitausbildung_hauptlinien_grouped_qry',
         },
       },
       children: [
-        // TODO Eva always expanded
-        // TODO Eva Dropdown layer
-        new ZweitausbildungRoutesHighlightLayer({
-          name: 'ch.sbb.zweitausbildung.hauptliniem.grouped',
+        new ZweitausbildungRoutesLayer({
+          name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           visible: true,
           zIndex: 1,
           properties: {
+            hideInLegend: true,
             zweitausbildung: {
-              // TODO Eva customFeatureInfo
-              layer: 'zweitausbildung_hauptlinien',
+              layer: 'zweitausbildung_hauptlinien_grouped_qry',
             },
           },
         }),
@@ -1077,9 +1070,6 @@ export const zweitausbildungRoutes = new Layer({
     }),
   ],
 });
-
-// TODO Eva it Uebsersetzung
-// "von": "dei",
 
 export default [
   dataLayer,

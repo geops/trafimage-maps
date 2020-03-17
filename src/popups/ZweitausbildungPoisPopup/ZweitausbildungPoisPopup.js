@@ -11,18 +11,6 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-// TODO Eva process.env.REACT_APP_BASE_URL ersetzen durch:
-// appBaseUrl
-// oder eigene Cache-URL
-
-// TODO Eva Popup-Titel, vor allem, wenn man beide Pois-Layer trifft.
-
-// TODO Eva Highlight Feature in der Karte onMouseEnter/onMouseLeave
-
-// TODO Eva Ggf. breiteres Popup wie im alten WKP
-
-// TODO Eva Popup Scrollbar?
-
 class ZweitausbildungPoisPopup extends PureComponent {
   highlight(singleFeature, highlight) {
     const { feature } = this.props;

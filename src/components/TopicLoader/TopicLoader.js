@@ -128,10 +128,7 @@ class TopicLoader extends Component {
       return;
     }
     const visibleTopics = topics.filter(
-      t =>
-        (!t.permission ||
-          permissionsInfos.permissions.includes(t.permission)) &&
-        !t.hiddenInMenu,
+      t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
 
     const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
