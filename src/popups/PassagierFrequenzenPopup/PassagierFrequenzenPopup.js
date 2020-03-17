@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -38,7 +37,7 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
 PassagierFrequenzenPopup.propTypes = propTypes;
 PassagierFrequenzenPopup.defaultProps = defaultProps;
 
-const composed = compose(withTranslation())(PassagierFrequenzenPopup);
+const composed = withTranslation()(PassagierFrequenzenPopup);
 
 composed.renderTitle = feat => feat.get('name');
 export default composed;

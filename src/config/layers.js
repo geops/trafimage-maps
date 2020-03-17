@@ -410,13 +410,50 @@ export const parks = new TrafimageGeoServerWMSLayer({
   },
 });
 
-export const stuetzpunktbahnhoefe = new HandicapLayer({
+export const stuetzpunktBahnhoefe = new HandicapLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
+  key: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: true,
   properties: {
+    zIndex: 0,
+    handicapType: 'stuetzpunkt',
     hasInfos: true,
-    description: 'ch.sbb.stuetzpunktbahnhoefe-desc',
-    layerInfoComponent: 'StuetzpunktLayerInfo',
+    layerInfoComponent: 'HandicapLayerInfo',
+    popupComponent: 'HandicapPopup',
+  },
+  hidePopup: (feat, layer, featureInfo) => {
+    const otherFeatsClicked = featureInfo
+      .filter(info => info.layer !== layer)
+      .map(info => info.features)
+      .flat()
+      .map(f => f.get('stationsbezeichnung'));
+
+    return otherFeatsClicked.includes(feat.get('stationsbezeichnung'));
+  },
+});
+
+export const barrierfreierBahnhoefe = new HandicapLayer({
+  name: 'ch.sbb.barrierfreierbahnhoefe',
+  key: 'ch.sbb.barrierfreierbahnhoefe',
+  visible: true,
+  properties: {
+    zIndex: 1,
+    handicapType: 'barrierfree',
+    hasInfos: true,
+    layerInfoComponent: 'HandicapLayerInfo',
+    popupComponent: 'HandicapPopup',
+  },
+});
+
+export const nichtBarrierfreierBahnhoefe = new HandicapLayer({
+  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  visible: true,
+  properties: {
+    zIndex: 1,
+    handicapType: 'notBarrierfree',
+    hasInfos: true,
+    layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
   },
 });

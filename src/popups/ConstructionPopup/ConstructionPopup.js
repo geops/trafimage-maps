@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 import Link from '../../components/Link';
 
 import './ConstructionPopup.scss';
@@ -80,7 +79,7 @@ const ConstructionPopup = ({ feature, t }) => {
 ConstructionPopup.propTypes = propTypes;
 ConstructionPopup.defaultProps = defaultProps;
 
-const composed = compose(withTranslation())(ConstructionPopup);
+const composed = withTranslation()(ConstructionPopup);
 
 composed.renderTitle = feat => feat.get('name');
 export default composed;

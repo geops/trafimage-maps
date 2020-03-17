@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 import Link from '../../components/Link';
 
 import './BehigLayerInfo.scss';
@@ -10,17 +9,18 @@ const propTypes = {
   t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
   properties: PropTypes.object.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
 
-const BehigLayerInfo = ({ t, language, properties }) => {
+const BehigLayerInfo = ({ t, language, properties, staticFilesUrl }) => {
   const config = properties.get('behig');
   const key = config.status.replace(/\s/g, '_');
 
   const img = (
     <img
-      src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/behig/${key}.png`}
+      src={`${staticFilesUrl}/img/layers/behig/${key}.png`}
       draggable="false"
       alt={t('Kein Bildtext')}
     />
@@ -206,4 +206,4 @@ const BehigLayerInfo = ({ t, language, properties }) => {
 BehigLayerInfo.propTypes = propTypes;
 BehigLayerInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(BehigLayerInfo);
+export default withTranslation()(BehigLayerInfo);
