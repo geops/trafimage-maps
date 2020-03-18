@@ -11,4 +11,9 @@ function getGeneralization(resolution) {
   return { 750: 5, 500: 10, 250: 30, 100: 30, 75: 100, 50: 100 }[res] || 150;
 }
 
-export default { getDataResolution, getGeneralization };
+function getOldGeneralization(resolution) {
+  const res = getDataResolution(resolution);
+  return { 750: 10, 500: 10, 250: 30, 100: 30 }[res] || 100;
+}
+
+export default { getDataResolution, getGeneralization, getOldGeneralization };

@@ -87,7 +87,7 @@ class ZweitausbildungRoutesLayer extends VectorLayer {
     const colors = feature.get('colors');
     const network = feature.get('network');
 
-    const currentNetwork = `trackit${layerHelper.getGeneralization(
+    const currentNetwork = `trackit${layerHelper.getOldGeneralization(
       resolution,
     )}`;
     const visible = network === currentNetwork;
