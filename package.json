@@ -8,7 +8,7 @@
     "@geops/create-react-web-component": "^2.0.19",
     "@geops/react-ui": "^1.0.8",
     "@turf/intersect": "^6.1.3",
-    "@webcomponents/custom-elements": "1.4.0",
+    "@webcomponents/custom-elements": "1.3.2",
     "@webcomponents/webcomponents-platform": "^1.0.1",
     "@webcomponents/webcomponentsjs": "^2.4.2",
     "abortcontroller-polyfill": "^1.4.0",
