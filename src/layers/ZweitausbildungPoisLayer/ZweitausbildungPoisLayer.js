@@ -79,9 +79,7 @@ class ZweitausbildungPoisLayer extends VectorLayer {
     for (let i = 0; i < count; i += 1) {
       const highlightFeature = features[i];
       if (highlightFeature.get('highlight')) {
-        const color = highlightFeature.get('color')
-          ? highlightFeature.get('color')
-          : 'rgba(50, 50, 50, 0.8)';
+        const color = highlightFeature.get('color') || 'rgba(50, 50, 50, 0.8)';
 
         highlightStyles.push(
           new Style({
