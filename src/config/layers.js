@@ -14,6 +14,7 @@ import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
+import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -990,7 +991,7 @@ export const zweitausbildungRoutes = new Layer({
     },
   },
   children: [
-    new Layer({
+    new ZweitausbildungRoutesLayer({
       name: 'ch.sbb.zweitausbildung.tourist.routes.group',
       key: 'ch.sbb.zweitausbildung.tourist.routes.group',
       visible: false,
@@ -1006,24 +1007,24 @@ export const zweitausbildungRoutes = new Layer({
               image: 'legend_tourist_strecken.png',
             },
           },
+          layer: 'zweitausbildung_tourist_strecken_grouped_qry',
         },
       },
       children: [
-        new ZweitausbildungRoutesLayer({
+        new ZweitausbildungRoutesHighlightLayer({
           name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           visible: false,
           zIndex: 1,
           properties: {
-            hideInLegend: true,
             zweitausbildung: {
-              layer: 'zweitausbildung_tourist_strecken_grouped_qry',
+              layer: 'zweitausbildung_tourist_strecken',
             },
           },
         }),
       ],
     }),
-    new Layer({
+    new ZweitausbildungRoutesLayer({
       name: 'ch.sbb.zweitausbildung.hauptlinien.group',
       key: 'ch.sbb.zweitausbildung.hauptlinien.group',
       visible: true,
@@ -1039,18 +1040,18 @@ export const zweitausbildungRoutes = new Layer({
               image: 'legend_hauptlinien.png',
             },
           },
+          layer: 'zweitausbildung_hauptlinien_grouped_qry',
         },
       },
       children: [
-        new ZweitausbildungRoutesLayer({
+        new ZweitausbildungRoutesHighlightLayer({
           name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           visible: true,
           zIndex: 1,
           properties: {
-            hideInLegend: true,
             zweitausbildung: {
-              layer: 'zweitausbildung_hauptlinien_grouped_qry',
+              layer: 'zweitausbildung_hauptlinien',
             },
           },
         }),
