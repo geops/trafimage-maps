@@ -7,24 +7,27 @@
   right: 320px;
   left: 400px;
 
+  .wkp-search-toggle-container--open,
   .wkp-search-toggle-container {
     .wkp-search-input {
-      background-color: white;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: white;
       border: 2px solid #b7b7b7;
+      height: 42px;
     }
   }
 
   .wkp-search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 46px;
     border: none;
     color: white;
-    height: 42px;
-    width: 46px;
     font-size: 16px;
-    padding-top: 4px;
-    flex: 0 1 auto;
 
     &.wkp-search-button-clear {
       background: none;
@@ -39,7 +42,7 @@
   .react-autosuggest__input {
     border: 0;
     font-size: 14px;
-    padding: 12px 0 12px 15px;
+    padding-left: 15px;
     border-radius: 0;
     -webkit-appearance: none;
     flex: 2 1 auto;
@@ -50,6 +53,7 @@
   }
 
   .react-autosuggest__suggestions-container--open {
+    box-sizing: border-box;
     background: white;
     border: 2px solid #666;
     margin-top: 5px;
@@ -132,17 +136,6 @@
       display: none;
     }
 
-    .wkp-search-toggle-container--open {
-      .wkp-search-input {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px solid #b7b7b7;
-        background-color: white;
-        width: 100%;
-      }
-    }
-
     .wkp-search-toggle-button {
       display: block;
       margin-right: 35px;
@@ -164,12 +157,13 @@
   &.tm-w-xs,
   &.tm-w-s {
     .wkp-search-button {
-      width: 40px;
+      width: 42px;
     }
 
     .react-autosuggest__input {
-      width: calc(100% - 90px);
-      padding: 12px 0 12px 15px;
+      width: calc(100% - 96px);
+      height: 80%;
+      padding: 4px 0 0 15px;
       font-size: 16px;
     }
   }
