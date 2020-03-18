@@ -55,10 +55,11 @@ const telTo = (telNumber, idx) => (
   </a>
 );
 
-const urlHref = (href, idx) => {
+const urlHref = (link, idx) => {
+  const href = /^http(s?):\/\//i.test(link) ? link : `http://${link}`;
   return (
-    <Link key={idx} href={`http://${href}`}>
-      {href}
+    <Link key={idx} href={href}>
+      {link}
     </Link>
   );
 };
