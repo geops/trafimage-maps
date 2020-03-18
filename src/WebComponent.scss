@@ -1,3 +1,20 @@
+@mixin loadFonts($paths...) {
+  @each $family in $paths {
+    @font-face {
+      font-family: #{$family};
+      src: url('utils/fonts/#{$family}.eot');
+      src:
+        url('utils/fonts/#{$family}.woff2') format('woff2'),
+        url('utils/fonts/#{$family}.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  }
+}
+
+@include loadFonts('SBBWeb-Roman');
+@include loadFonts('SBBWeb-Bold');
+
 @import 'globals.scss';
 
 // @geops/react-ui
