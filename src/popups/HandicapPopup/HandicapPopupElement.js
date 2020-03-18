@@ -132,10 +132,15 @@ function HandicapPopupElement({ properties, propertyName, label }) {
       <>
         <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
         <div className="wkp-handicap-popup-field-body">
-          {values.map((v, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={idx}>{renderLinks(v)}</div>
-          ))}
+          {values.map((v, idx) => {
+            if (v === '') {
+              return <br />;
+            }
+            return (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={idx}>{renderLinks(v)}</div>
+            );
+          })}
         </div>
       </>
     );
