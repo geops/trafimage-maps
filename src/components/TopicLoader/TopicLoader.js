@@ -166,7 +166,7 @@ class TopicLoader extends Component {
     }
 
     if (activeTopic.translations) {
-      Object.entries(activeTopic.translations || {}).forEach(
+      Object.entries(activeTopic.translations).forEach(
         ([lang, trans]) => {
           i18next.addResourceBundle(lang, 'translation', trans);
         },
