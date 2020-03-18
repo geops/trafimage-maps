@@ -135,10 +135,6 @@ class TopicLoader extends Component {
     dispatchSetActiveTopic(activeTopic);
     this.updateServices(activeTopic);
 
-    Object.entries(activeTopic.translations || {}).forEach(([lang, trans]) =>
-      i18next.addResourceBundle(lang, 'translation', trans),
-    );
-
     if (matomo) {
       matomo.trackEvent({ category: activeTopic.name, action: 'load' });
     }
@@ -167,6 +163,14 @@ class TopicLoader extends Component {
         layers: '',
       });
       return;
+    }
+
+    if (activeTopic.translations) {
+      Object.entries(activeTopic.translations || {}).forEach(
+        ([lang, trans]) => {
+          i18next.addResourceBundle(lang, 'translation', trans);
+        },
+      );
     }
 
     this.updateLayers(activeTopic.layers);
