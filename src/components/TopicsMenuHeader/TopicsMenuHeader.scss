@@ -22,8 +22,13 @@
     display: none;
 
     .wkp-menu-header-toggler-icon {
+      display: flex;
       width: 50px;
       text-align: center;
+
+      img {
+        padding-right: 10px;
+      }
     }
   }
 
