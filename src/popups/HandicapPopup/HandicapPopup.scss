@@ -17,6 +17,10 @@
       flex-direction: column;
       display: flex;
 
+      a {
+        white-space: nowrap;
+      }
+
       &:last-child {
         padding: 0;
       }
