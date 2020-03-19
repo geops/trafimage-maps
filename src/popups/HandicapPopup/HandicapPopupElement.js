@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 // 012 111 22 333
-const simpleTelTester = /([0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
+const simpleTelTester = /([0-9]{2,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3}\s?[0-9]{1,3})/g;
 // +41 (0) 11 222 33 44
 const complexTelTester = /((([+]{1}[0-9]{1,3})|([+]?[(]{1}[0-9]{1,3}[)]{1})|([(]?[0-9]{4}[)]?))\s{0,4}[)]?[-\s\\.]?[(]?[0-9]{1,4}[)]?([^\r\n][-\s\\.]{0,1}[0-9]{1,3}){1,4})/g;
 
@@ -98,8 +98,8 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
 
 const renderLinks = intialText => {
   const telMatches = searchMatches(intialText, [
-    simpleTelTester,
     complexTelTester,
+    simpleTelTester,
   ]);
   const emailMatches = searchMatches(intialText, [emailTester]);
   const urlMatches = searchMatches(intialText, [urlTester]);
@@ -133,10 +133,15 @@ function HandicapPopupElement({ properties, propertyName, label }) {
       <>
         <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
         <div className="wkp-handicap-popup-field-body">
-          {values.map((v, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={idx}>{renderLinks(v)}</div>
-          ))}
+          {values.map((v, idx) => {
+            if (v === '') {
+              return <br />;
+            }
+            return (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={idx}>{renderLinks(v)}</div>
+            );
+          })}
         </div>
       </>
     );
