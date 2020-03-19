@@ -7,16 +7,13 @@
   right: 320px;
   left: 400px;
 
-  .wkp-search-toggle-container--open,
-  .wkp-search-toggle-container {
-    .wkp-search-input {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: white;
-      border: 2px solid #b7b7b7;
-      height: 42px;
-    }
+  .wkp-search-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #b7b7b7;
+    height: 42px;
   }
 
   .wkp-search-button {
