@@ -144,7 +144,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     }
 
     this.olLayer.changed();
-    this.comp.forceUpdate();
+    if (this.comp) {
+      this.comp.forceUpdate();
+    }
   }
 
   setGeoJsonUrl(geoJsonCacheUrl) {
