@@ -67,12 +67,15 @@
 
     .wkp-lock-icon {
       cursor: pointer;
-      margin-right: 4px;
       color: #888;
 
       &.wkp-active {
         color: #000;
       }
+    }
+
+    .wkp-lock-left {
+      margin-right: 4px;
     }
 
     .wkp-info-topic-bt {

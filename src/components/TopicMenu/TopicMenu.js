@@ -135,10 +135,10 @@ class TopicMenu extends PureComponent {
     );
   }
 
-  renderLockIcon(topic) {
+  renderLockIcon(topic, isInfo) {
     const { activeTopic, t } = this.props;
 
-    const className = `wkp-lock-icon${
+    const className = `wkp-lock-icon${!isInfo ? ' wkp-lock-left' : ''}${
       activeTopic.key === topic.key ? ' wkp-active' : ''
     }`;
 
@@ -214,7 +214,12 @@ class TopicMenu extends PureComponent {
             />
           </div>
           <div className="wkp-topic-icons">
-            {topic && topic.permission && this.renderLockIcon(topic)}
+            {topic &&
+              topic.permission &&
+              this.renderLockIcon(
+                topic,
+                topic.description || topic.layerInfoComponent,
+              )}
             {menuOpen &&
               topic &&
               (topic.description || topic.layerInfoComponent) &&
