@@ -159,8 +159,6 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   getFeatureInfoAtCoordinate(coordinate) {
     const layer = this;
     const meterRad = this.map && this.map.getView().getZoom() > 11 ? 100 : 1000;
-    // TODO Eva meterRad von zoom abhängig
-    // const meterRad = z > 11 100 : 1000;
 
     const [newX, newY] = transform(
       [parseInt(coordinate[0], 10), parseInt(coordinate[1], 10)],

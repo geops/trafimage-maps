@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 import { setFeatureInfo } from '../../model/app/actions';
 
-// TODO Eva Oder singleClick einführen ohne Pseudo-Popup-Element
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 

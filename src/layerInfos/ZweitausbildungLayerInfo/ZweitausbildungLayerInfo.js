@@ -8,7 +8,6 @@ const propTypes = {
   properties: PropTypes.object.isRequired,
 };
 
-// TODO Eva Zeilenumbrueche fr pruefen
 const ZweitausbildungLayerInfo = ({ t, properties }) => {
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;

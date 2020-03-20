@@ -252,7 +252,6 @@ export const tina = {
   redirect: true,
 };
 
-// TODO Eva Thema versteckt
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
