@@ -138,7 +138,7 @@ class TopicMenu extends PureComponent {
   renderLockIcon(topic, isInfo) {
     const { activeTopic, t } = this.props;
 
-    const className = `wkp-lock-icon${!isInfo ? ' wkp-lock-left' : ''}${
+    const className = `wkp-lock-icon${isInfo ? ' wkp-lock-left' : ''}${
       activeTopic.key === topic.key ? ' wkp-active' : ''
     }`;
 
