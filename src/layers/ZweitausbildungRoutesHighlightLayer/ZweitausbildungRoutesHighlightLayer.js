@@ -140,7 +140,10 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   onSelect(evt) {
     for (let i = 0; i < this.features.length; i += 1) {
       const label = this.features[i].get('label');
-      this.features[i].set('highlight', label === evt.target.value);
+      this.features[i].set(
+        'highlight',
+        evt ? label === evt.target.value : false,
+      );
     }
 
     this.olLayer.changed();
