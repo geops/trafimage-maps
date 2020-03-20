@@ -73,6 +73,19 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     this.on('change:visible', this.onChangeVisible);
   }
 
+  init(map) {
+    super.init(map);
+
+    if (this.map) {
+      this.map.on('singleclick', () => this.reset);
+    }
+  }
+
+  reset() {
+    // Deselect map features
+    this.onSelect();
+  }
+
   populate() {
     this.options = [];
     for (let i = 0; i < this.features.length; i += 1) {
