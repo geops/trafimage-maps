@@ -5,6 +5,9 @@ import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import Style from 'ol/style/Style';
 import Stroke from 'ol/style/Stroke';
+import { transform } from 'ol/proj';
+import Feature from 'ol/Feature';
+import { Point } from 'ol/geom';
 import layerHelper from '../layerHelper';
 
 import './ZweitausbildungRoutesHighlightLayer.scss';
@@ -152,8 +155,60 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     }
   }
 
+  getFeatureInfoAtCoordinate(coordinate) {
+    const layer = this;
+    const meterRad = 1000;
+    // TODO Eva meterRad von zoom abhängig
+    // const meterRad = z > 11 100 : 1000;
+
+    const [newX, newY] = transform(
+      [parseInt(coordinate[0], 10), parseInt(coordinate[1], 10)],
+      'EPSG:3857',
+      'EPSG:21781',
+    );
+
+    return fetch(
+      `${this.geoServerUrl}?` +
+        'service=WFS&version=1.0.0&request=GetFeature&' +
+        `typeName=trafimage:${this.zweitProps.featureInfoLayer}&` +
+        // 'srsName=EPSG:3857&' +
+        'maxFeatures=50&' +
+        'outputFormat=application/json&' +
+        `viewparams=x:${parseInt(newX, 10)};y:${parseInt(
+          newY,
+          10,
+        )};r:${meterRad}`,
+    )
+      .then(data => data.json())
+      .then(data => {
+        const format = new GeoJSON();
+        const feats = format.readFeatures(data);
+
+        const features = [];
+        if (feats.length) {
+          features.push(
+            new Feature({
+              geometry: new Point(coordinate),
+              features: feats,
+              highlightFeatures: layer.features,
+            }),
+          );
+        }
+
+        return {
+          features,
+          layer,
+          coordinate,
+        };
+      });
+  }
+
   setGeoJsonUrl(geoJsonCacheUrl) {
     this.geoJsonCacheUrl = geoJsonCacheUrl;
+  }
+
+  setGeoServerUrl(geoServerUrl) {
+    this.geoServerUrl = geoServerUrl;
   }
 
   style(feature, resolution) {

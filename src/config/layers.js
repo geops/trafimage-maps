@@ -1017,8 +1017,10 @@ export const zweitausbildungRoutes = new Layer({
           visible: false,
           zIndex: 1,
           properties: {
+            popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
               layer: 'zweitausbildung_tourist_strecken',
+              featureInfoLayer: 'zweitausbildung_tourist_strecken_qry_xyr',
             },
           },
         }),
@@ -1050,8 +1052,10 @@ export const zweitausbildungRoutes = new Layer({
           visible: true,
           zIndex: 1,
           properties: {
+            popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
               layer: 'zweitausbildung_hauptlinien',
+              featureInfoLayer: 'zweitausbildung_hauptlinien_qry_xyr',
             },
           },
         }),
