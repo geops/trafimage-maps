@@ -71,6 +71,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     this.routes = {};
     this.options = [];
     this.icons = {};
+    this.reset = this.reset.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onChangeVisible = this.onChangeVisible.bind(this);
     this.on('change:visible', this.onChangeVisible);
@@ -80,7 +81,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     super.init(map);
 
     if (this.map) {
-      this.map.on('singleclick', () => this.reset);
+      this.map.on('singleclick', this.reset);
     }
   }
 
