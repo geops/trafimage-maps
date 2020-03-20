@@ -68,4 +68,7 @@ class ZweitausbildungPoisPopup extends PureComponent {
 
 ZweitausbildungPoisPopup.propTypes = propTypes;
 
-export default compose(withTranslation())(ZweitausbildungPoisPopup);
+const composed = compose(withTranslation())(ZweitausbildungPoisPopup);
+
+composed.renderTitle = (feature, t) => t('Detailinformationen');
+export default composed;
