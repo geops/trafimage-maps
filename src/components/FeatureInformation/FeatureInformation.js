@@ -76,7 +76,7 @@ const FeatureInformation = ({ featureInfo }) => {
         <div className="wkp-feature-information-header">
           <span>
             {PopupComponent && PopupComponent.renderTitle && feature
-              ? PopupComponent.renderTitle(feature)
+              ? PopupComponent.renderTitle(feature, t)
               : layer && layer.getName() && t(layer.getName())}
           </span>
           <Button
