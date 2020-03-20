@@ -218,15 +218,19 @@ class TopicLoader extends Component {
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
-      } else if (flatLayers[i].setGeoServerWMSUrl) {
+      }
+      if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(
           `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
         );
-      } else if (flatLayers[i].setGeoJsonUrl) {
+      }
+      if (flatLayers[i].setGeoJsonUrl) {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
-      } else if (flatLayers[i].setStyleConfig) {
+      }
+      if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
-      } else if (flatLayers[i].setCartaroUrl) {
+      }
+      if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
       }
 
