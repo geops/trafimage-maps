@@ -1,4 +1,7 @@
 .wkp-zweitausbildung-routes-popup {
+  overflow-y: auto;
+  max-height: 300px;
+
   .wkp-zweitausbildung-routes-popup-row {
     min-height: 50px;
     border-bottom: dashed 1px #bebebe;
