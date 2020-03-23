@@ -100,6 +100,12 @@ const propTypes = {
    * @private
    */
   enableTracking: PropTypes.bool,
+
+  /**
+   * Key of the active topic.
+   * @private
+   */
+  activeTopicKey: PropTypes.string,
 };
 
 const defaultProps = {
@@ -116,6 +122,7 @@ const defaultProps = {
   topics: null,
   language: 'de',
   enableTracking: false,
+  activeTopicKey: null,
 };
 
 let matomo;
@@ -201,6 +208,7 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesUrl,
       permissionUrl,
       enableTracking,
+      activeTopicKey,
     } = this.props;
 
     return (
@@ -210,6 +218,7 @@ class TrafimageMaps extends React.PureComponent {
             history={history}
             apiKey={apiKey}
             topics={topics}
+            activeTopicKey={activeTopicKey}
             cartaroUrl={cartaroUrl}
             appBaseUrl={appBaseUrl}
             permissionUrl={permissionUrl}
