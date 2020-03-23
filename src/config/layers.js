@@ -13,7 +13,6 @@ import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import LayerHelper from '../layers/layerHelper';
 
-
 proj4.defs(
   'EPSG:21781',
   '+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 ' +

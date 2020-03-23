@@ -119,13 +119,46 @@ class HandicapLayer extends VectorLayer {
    * @returns {Object|null}
    */
   style(feature, resolution, handicapType) {
+    const names = [
+      // 'Leuk',
+      // 'St. Niklaus',
+      // 'Fiesch',
+      // 'Andermatt',
+      // 'Erstfeld',
+      // 'Brunnen',
+      // 'Zürich Oerlikon',
+      // 'Bern',
+      'Luzern',
+      // 'Arosa',
+      // 'Sissach',
+      // 'Neuchâtel',
+      // Moutier
+      // Basel
+      // Bern,
+      // Genf,
+      // Grenchen,
+      // Lenzburg,
+      // Spiez,
+      // Thalwil,
+      // Zürich Flughafen,
+      // Zürich,
+    ];
+
+    if (names.indexOf(feature.get('stationsbezeichnung')) > -1) {
+      debugger;
+    }
+    // const gen = LayerHelper.getOldGeneralization(resolution);
     const gen = LayerHelper.getGeneralization(resolution);
+    // feature.get('generalizations') additionally offers 5 & 150 now
+    // for //cartaro2.dev.trafimage.ch/api/v1/
+    // (but not for //cartaro2.trafimage.ch/api/v1/)
     const wkt = (feature.get('generalizations') || {})[`geom_gen${gen}`];
     const geometry = wkt
       ? this.wktFormat.readGeometry(wkt.split(';')[1])
       : null;
 
     const minVisibility = LayerHelper.getDataResolution(resolution) * 10;
+    // const minVisibility = LayerHelper.getMovedDataResolution(resolution) * 10;
     if (!geometry || feature.get('visibility') < minVisibility) {
       return null;
     }
