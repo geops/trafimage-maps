@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
-import { setZoom, setCenter } from '../../model/map/actions';
+import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import { setLanguage } from '../../model/app/actions';
 
 const propTypes = {
@@ -53,6 +53,12 @@ const propTypes = {
    * @private
    */
   zoom: PropTypes.number,
+
+  /**
+   * Limit the map extent.
+   * @private
+   */
+  maxExtent: PropTypes.arrayOf(PropTypes.number),
 
   /**
    * API key for using geOps services.
@@ -101,6 +107,7 @@ const defaultProps = {
   history: null,
   center: [925472, 5920000],
   zoom: undefined,
+  maxExtent: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
@@ -135,7 +142,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, language, enableTracking } = this.props;
+    const { zoom, center, language, enableTracking, maxExtent } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -147,6 +154,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (language) {
       this.store.dispatch(setLanguage(language));
+    }
+
+    if (maxExtent) {
+      this.store.dispatch(setMaxExtent(maxExtent));
     }
 
     if (matomo && enableTracking) {
