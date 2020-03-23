@@ -170,7 +170,6 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       `${this.geoServerUrl}?` +
         'service=WFS&version=1.0.0&request=GetFeature&' +
         `typeName=trafimage:${this.zweitProps.featureInfoLayer}&` +
-        // 'srsName=EPSG:3857&' +
         'maxFeatures=50&' +
         'outputFormat=application/json&' +
         `viewparams=x:${parseInt(newX, 10)};y:${parseInt(
