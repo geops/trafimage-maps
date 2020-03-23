@@ -25,6 +25,7 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  activeTopicKey: PropTypes.string,
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
@@ -58,6 +59,7 @@ const defaultProps = {
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionUrl: null,
+  activeTopicKey: null,
 };
 
 class TopicLoader extends Component {
@@ -119,6 +121,7 @@ class TopicLoader extends Component {
       permissionsInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
+      activeTopicKey,
     } = this.props;
 
     if (!topics.length) {
@@ -128,8 +131,12 @@ class TopicLoader extends Component {
     const visibleTopics = topics.filter(
       t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
+    const asyncTopics = topics.filter(t => t.permission);
 
-    const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
+    const activeTopic =
+      visibleTopics.find(topic => topic.active) ||
+      asyncTopics.find(topic => topic.key === activeTopicKey) ||
+      topics[0];
     activeTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);

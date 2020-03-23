@@ -9,7 +9,11 @@ import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Collapsible from '../Collapsible';
-import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
+import {
+  setActiveTopic,
+  setSelectedForInfos,
+  setFeatureInfo,
+} from '../../model/app/actions';
 
 const propTypes = {
   topic: PropTypes.shape().isRequired,
@@ -23,6 +27,7 @@ const propTypes = {
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetSelectedForInfos: PropTypes.func.isRequired,
+  dispatchSetFeatureInfo: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -67,13 +72,18 @@ class TopicMenu extends PureComponent {
   }
 
   onTopicClick(topic) {
-    const { activeTopic, dispatchSetActiveTopic } = this.props;
+    const {
+      activeTopic,
+      dispatchSetActiveTopic,
+      dispatchSetFeatureInfo,
+    } = this.props;
     const { isCollapsed } = this.state;
 
     if (topic.key === activeTopic.key) {
       this.setState({ isCollapsed: !isCollapsed });
     } else {
       dispatchSetActiveTopic(topic);
+      dispatchSetFeatureInfo([]);
     }
   }
 
@@ -135,10 +145,10 @@ class TopicMenu extends PureComponent {
     );
   }
 
-  renderLockIcon(topic) {
+  renderLockIcon(topic, isInfo) {
     const { activeTopic, t } = this.props;
 
-    const className = `wkp-lock-icon${
+    const className = `wkp-lock-icon${isInfo ? ' wkp-lock-left' : ''}${
       activeTopic.key === topic.key ? ' wkp-active' : ''
     }`;
 
@@ -198,7 +208,11 @@ class TopicMenu extends PureComponent {
             onClick={() => this.onTopicClick(topic)}
             onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
           >
-            <div className="wkp-topic-title">
+            <div
+              className={`wkp-topic-title${
+                activeTopic.key === topic.key ? ' wkp-active' : ''
+              }`}
+            >
               <div className="wkp-topic-radio">
                 {topic.key === activeTopic.key && (
                   <div className="wkp-topic-radio-dot" />
@@ -214,7 +228,12 @@ class TopicMenu extends PureComponent {
             />
           </div>
           <div className="wkp-topic-icons">
-            {topic && topic.permission && this.renderLockIcon(topic)}
+            {topic &&
+              topic.permission &&
+              this.renderLockIcon(
+                topic,
+                topic.description || topic.layerInfoComponent,
+              )}
             {menuOpen &&
               topic &&
               (topic.description || topic.layerInfoComponent) &&
@@ -264,6 +283,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetSelectedForInfos: setSelectedForInfos,
+  dispatchSetFeatureInfo: setFeatureInfo,
 };
 
 export default compose(
