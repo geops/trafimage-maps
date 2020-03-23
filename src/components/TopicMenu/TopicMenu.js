@@ -83,7 +83,7 @@ class TopicMenu extends PureComponent {
       this.setState({ isCollapsed: !isCollapsed });
     } else {
       dispatchSetActiveTopic(topic);
-      dispatchSetFeatureInfo(null);
+      dispatchSetFeatureInfo([]);
     }
   }
 
