@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from '@geops/react-ui/components/Button';
@@ -17,6 +17,8 @@ const propTypes = {
 const FeatureInformation = ({ featureInfo }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const language = useSelector(state => state.app.language);
+  const cartaroOldUrl = useSelector(state => state.app.cartaroOldUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
@@ -34,8 +36,8 @@ const FeatureInformation = ({ featureInfo }) => {
     return null;
   }
 
-  const PopupComponent =
-    popups[info.popupComponent || info.layer.get('popupComponent')];
+  const comp = info.layer.get('popupComponent');
+  const PopupComponent = typeof comp === 'string' ? popups[comp] : comp;
   if (!PopupComponent) {
     return null;
   }
@@ -97,7 +99,10 @@ const FeatureInformation = ({ featureInfo }) => {
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.getKey()}
+            cartaroOldUrl={cartaroOldUrl}
+            t={t}
             feature={features[featureIndex]}
+            language={language}
           />
           {pagination}
         </div>

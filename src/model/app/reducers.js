@@ -16,6 +16,7 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSIONS_INFOS,
+  SET_CARTARO_OLD_URL,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 import layerHelper from '../../layers/layerHelper';
@@ -116,6 +117,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         permissionsInfos: action.data,
+      };
+    case SET_CARTARO_OLD_URL:
+      return {
+        ...state,
+        cartaroOldUrl: action.data,
       };
     default:
       return {

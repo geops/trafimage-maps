@@ -2,6 +2,7 @@ import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import LayerService from 'react-spatial/LayerService';
@@ -24,6 +25,7 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  activeTopicKey: PropTypes.string,
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
@@ -59,6 +61,7 @@ const defaultProps = {
   vectorTilesUrl: null,
   permissionUrl: null,
   staticFilesUrl: null,
+  activeTopicKey: null,
 };
 
 class TopicLoader extends Component {
@@ -122,16 +125,22 @@ class TopicLoader extends Component {
       permissionsInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
+      activeTopicKey,
     } = this.props;
 
     if (!topics.length) {
       return;
     }
+
     const visibleTopics = topics.filter(
       t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
+    const asyncTopics = topics.filter(t => t.permission);
 
-    const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
+    const activeTopic =
+      visibleTopics.find(topic => topic.active) ||
+      asyncTopics.find(topic => topic.key === activeTopicKey) ||
+      topics[0];
     activeTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);
@@ -165,6 +174,12 @@ class TopicLoader extends Component {
         layers: '',
       });
       return;
+    }
+
+    if (activeTopic.translations) {
+      Object.entries(activeTopic.translations).forEach(([lang, trans]) => {
+        i18next.addResourceBundle(lang, 'translation', trans);
+      });
     }
 
     this.updateLayers(activeTopic.layers);

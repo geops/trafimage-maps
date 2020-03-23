@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "1.0.7-beta.96",
+  "version": "1.0.7-alpha.15",
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
@@ -114,6 +114,7 @@
     "format": "prettier --write 'src/**/*.js' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
     "lint": "eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
     "prebuild": "rm -rf build/",
+    "publish:alpha": "yarn publish:public --tag alpha",
     "publish:beta": "yarn publish:public --tag beta",
     "publish:public": "yarn version && git push origin HEAD && yarn run build && yarn publish build/ --access public --non-interactive --no-git-tag-version",
     "sort": "sort-json src/lang/*.json -i",
