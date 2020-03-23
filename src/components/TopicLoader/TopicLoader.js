@@ -128,8 +128,12 @@ class TopicLoader extends Component {
     const visibleTopics = topics.filter(
       t => !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
+    const asyncTopics = topics.filter(t => t.permission);
 
-    const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
+    const activeTopic =
+      visibleTopics.find(topic => topic.active) ||
+      asyncTopics.find(topic => topic.active) ||
+      topics[0];
     activeTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);
