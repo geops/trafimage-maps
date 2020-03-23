@@ -19,6 +19,11 @@
         display: flex;
         align-items: center;
         max-width: 300px;
+        color: #888;
+
+        &.wkp-active {
+          color: #000;
+        }
       }
 
       .wkp-topic-radio {

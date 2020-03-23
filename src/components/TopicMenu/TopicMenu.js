@@ -208,7 +208,11 @@ class TopicMenu extends PureComponent {
             onClick={() => this.onTopicClick(topic)}
             onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
           >
-            <div className="wkp-topic-title">
+            <div
+              className={`wkp-topic-title${
+                activeTopic.key === topic.key ? ' wkp-active' : ''
+              }`}
+            >
               <div className="wkp-topic-radio">
                 {topic.key === activeTopic.key && (
                   <div className="wkp-topic-radio-dot" />
