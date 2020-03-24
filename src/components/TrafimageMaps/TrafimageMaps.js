@@ -152,12 +152,12 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setCenter(center));
     }
 
-    if (language) {
-      this.store.dispatch(setLanguage(language));
-    }
-
     if (maxExtent) {
       this.store.dispatch(setMaxExtent(maxExtent));
+    }
+
+    if (language) {
+      this.store.dispatch(setLanguage(language));
     }
 
     if (matomo && enableTracking) {
@@ -166,7 +166,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center, enableTracking } = this.props;
+    const { zoom, center, enableTracking, maxExtent } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -174,6 +174,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (maxExtent !== prevProps.maxExtent) {
+      this.store.dispatch(setMaxExtent(maxExtent));
     }
 
     if (matomo && !prevProps.enableTracking && enableTracking) {

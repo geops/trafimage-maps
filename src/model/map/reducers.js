@@ -53,6 +53,11 @@ export default function app(state = initialState, action) {
         zoom: action.data,
       };
     case SET_MAX_EXTENT:
+      if (!action.data) {
+        return {
+          ...state,
+        };
+      }
       return {
         ...state,
         maxExtent: action.data,

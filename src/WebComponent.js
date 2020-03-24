@@ -153,6 +153,7 @@ const WebComponent = props => {
     vectorTilesKey,
   ]);
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
+
   const extentArray = useMemo(
     () => maxExtent && maxExtent.split(',').map(float => parseFloat(float)),
     [maxExtent],
