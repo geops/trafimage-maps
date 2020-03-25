@@ -35,24 +35,25 @@
     position: relative;
   }
 
-  .rs-base-layer-toggler {
+  .rs-base-layer-switcher {
     position: absolute;
-    bottom: 40px;
+    bottom: 10px;
     left: 10px;
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 140px;
     z-index: 0; // under menu
 
-    // For some reasons, after a click on tm-base-layer-item button,
-    // we are not able to click on next and previous button anymore because
-    // they are behind the tm-base-layer-item button.
-    .rs-base-layer-item {
-      z-index: 0;
+    &.rs-open {
+      width: 600px;
     }
 
-    .rs-base-layer-previous,
-    .rs-base-layer-next {
-      z-index: 1;
+    .rs-base-layer-switcher-layers {
+      height: 100px;
+    }
+
+    .rs-base-layer-switcher-image {
+      width: 140px;
+      height: 140px;
     }
   }
 
@@ -97,7 +98,7 @@
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
-    .rs-base-layer-toggler {
+    .rs-base-layer-switcher {
       display: none;
     }
 
