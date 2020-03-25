@@ -71,9 +71,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
       highlightFeatures[i].changed();
     }
 
-    this.setState({ features: singleFeatures });
-
-    this.forceUpdate();
+    this.setState({ features: [...singleFeatures] });
   }
 
   render() {
