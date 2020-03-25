@@ -8,7 +8,7 @@ function getDataResolution(resolution) {
 
 function getGeneralization(resolution) {
   const res = getDataResolution(resolution);
-  return { 750: 5, 500: 10, 250: 30, 100: 30, 75: 100, 50: 100 }[res] || 150;
+  return { 750: 5, 500: 10, 250: 30, 100: 100, 75: 100, 50: 100 }[res] || 150;
 }
 
 export default { getDataResolution, getGeneralization };
