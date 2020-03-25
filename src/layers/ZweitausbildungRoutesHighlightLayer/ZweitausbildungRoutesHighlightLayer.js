@@ -9,8 +9,7 @@ import { transform } from 'ol/proj';
 import Feature from 'ol/Feature';
 import { Point } from 'ol/geom';
 import layerHelper from '../layerHelper';
-
-import './ZweitausbildungRoutesHighlightLayer.scss';
+import IconList from '../../components/IconList';
 
 /**
  * Layer for zweitausbildung highlight routes
@@ -120,19 +119,18 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   renderItemContent(comp) {
     this.comp = comp;
 
-    return (
-      <select
-        disabled={!this.visible}
-        className="wkp-zweitausbildung-layer-select"
-        onChange={this.onSelect}
-      >
-        {this.options.map(option => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    );
+    if (this.options && this.options.length) {
+      return (
+        <IconList
+          disabled={!this.visible}
+          options={this.options}
+          icons={this.icons}
+          onSelect={this.onSelect}
+        />
+      );
+    }
+
+    return null;
   }
 
   onChangeVisible() {
@@ -141,13 +139,10 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     }
   }
 
-  onSelect(evt) {
+  onSelect(option) {
     for (let i = 0; i < this.features.length; i += 1) {
       const label = this.features[i].get('label');
-      this.features[i].set(
-        'highlight',
-        evt ? label === evt.target.value : false,
-      );
+      this.features[i].set('highlight', option ? label === option : false);
     }
 
     this.olLayer.changed();

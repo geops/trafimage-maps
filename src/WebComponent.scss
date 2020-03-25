@@ -50,6 +50,7 @@
 @import 'src/components/FeatureInformation/FeaturePagination.scss';
 @import 'src/components/Footer/Footer.scss';
 @import 'src/components/Header/Header.scss';
+@import 'src/components/IconList/IconList.scss';
 @import 'src/components/Link/Link.scss';
 @import 'src/components/MapControls/MapControls.scss';
 @import 'src/components/Menu/Menu.scss';
@@ -91,6 +92,3 @@
 @import 'src/layerInfos/ZweitausbildungLayerInfo/ZweitausbildungLayerInfo.scss';
 @import 'src/layerInfos/ZweitausbildungRoutesSubLayerInfo/ZweitausbildungRoutesSubLayerInfo.scss';
 @import 'src/layerInfos/ZweitausbildungSubLayerInfo/ZweitausbildungSubLayerInfo.scss';
-
-// Layers
-@import 'src/layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer.scss';
