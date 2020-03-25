@@ -111,6 +111,10 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     this.options = this.options.sort((a, b) => a.localeCompare(b));
     this.options.unshift('Alle');
 
+    this.rerenderList();
+  }
+
+  rerenderList() {
     if (this.comp) {
       this.comp.forceUpdate();
     }
@@ -124,6 +128,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
         <IconList
           disabled={!this.visible}
           options={this.options}
+          selected={this.selected}
           icons={this.icons}
           onSelect={this.onSelect}
         />
@@ -134,21 +139,17 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   }
 
   onChangeVisible() {
-    if (this.comp) {
-      this.comp.forceUpdate();
-    }
+    this.rerenderList();
   }
 
   onSelect(option) {
+    this.selected = option;
     for (let i = 0; i < this.features.length; i += 1) {
       const label = this.features[i].get('label');
       this.features[i].set('highlight', option ? label === option : false);
     }
 
     this.olLayer.changed();
-    if (this.comp) {
-      this.comp.forceUpdate();
-    }
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
@@ -229,8 +230,26 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
         }
       }
 
+      // Update the selected option
+      this.selected = feature.get('label');
+      this.rerenderList();
+
       return this.styleCache[styleName];
     }
+
+    // Update the selected option
+    // if no features is highlighted so far
+    let selectedFeature = null;
+    for (let i = 0; i < this.features.length; i += 1) {
+      if (this.features[i].get('highlight')) {
+        selectedFeature = this.features[i].get('highlight');
+      }
+    }
+    if (!selectedFeature) {
+      this.selected = null;
+      this.rerenderList();
+    }
+
     return null;
   }
 }

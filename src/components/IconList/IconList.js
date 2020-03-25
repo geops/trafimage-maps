@@ -11,6 +11,7 @@ import './IconList.scss';
 const propTypes = {
   disabled: PropTypes.bool,
   options: PropTypes.array.isRequired,
+  selected: PropTypes.string,
   icons: PropTypes.object.isRequired,
   onSelect: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ const propTypes = {
 
 const defaultProps = {
   disabled: false,
+  selected: null,
 };
 
 class IconList extends PureComponent {
@@ -25,21 +27,35 @@ class IconList extends PureComponent {
     super(props);
 
     this.state = {
-      selectedOption: props.options.length ? props.options[0] : null,
+      selectedOption: props.selected,
       iconListVis: false,
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const { selected } = this.props;
+
+    if (selected !== prevProps.selected) {
+      this.select(selected);
+    }
+  }
+
+  select(option) {
+    this.setState({
+      selectedOption: option,
+    });
+  }
+
   renderOption(option) {
-    const { icons, t } = this.props;
+    const { icons, t, options } = this.props;
+
+    const opt = option || (options.length ? options[0] : null);
 
     const label = (
-      <div className="wkp-zweitausbildung-routes-dropdown-label">
-        {t(option)}
-      </div>
+      <div className="wkp-zweitausbildung-routes-dropdown-label">{t(opt)}</div>
     );
 
-    return option && icons[option] ? (
+    return opt && icons[opt] ? (
       <>
         <div className="wkp-zweitausbildung-routes-dropdown-icon">
           <img
