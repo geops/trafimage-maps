@@ -64,6 +64,17 @@ $primary-color-hover: #c60018;
   &:hover {
     background: $primary-color-hover;
   }
+
+  svg {
+    width: 34px;
+    height: 34px;
+    margin-top: -1px;
+    margin-left: -1px;
+
+    path {
+      stroke: white;
+    }
+  }
 }
 
 .tm-h-s {
