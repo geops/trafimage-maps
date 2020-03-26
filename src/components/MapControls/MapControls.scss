@@ -1,55 +1,12 @@
+@import '../../globals.scss';
 // $primary-color: #444;
-$primary-color: #eb0000;
 // $primary-color: #DCDCDC;
-$primary-color-hover: #c60018;
 // $primary-color-hover: #666666;
-
-.wkp-map-controls {
-  position: absolute;
-  right: 15px;
-  top: 110px;
-
-  .rs-zooms-bar {
-    .rs-zoom-in,
-    .rs-zoom-out {
-      margin: 10px 0;
-      background: $primary-color;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      height: 40px;
-      width: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      -webkit-transition: background-color 0.5s ease, color 0.5s ease;
-      transition: background-color 0.5s ease, color 0.5s ease;
-
-      &:hover {
-        background: $primary-color-hover;
-      }
-    }
-
-    .rs-zoomslider-wrapper {
-      .ol-zoomslider {
-        border: 2px solid #b7b7b7;
-
-        .ol-zoomslider-thumb {
-          background: $primary-color;
-
-          &:hover {
-            background: $primary-color-hover;
-          }
-        }
-      }
-    }
-  }
-}
 
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;
-  background: $primary-color;
+  background: $brand-primary;
   border-radius: 50%;
   color: white;
   cursor: pointer;
@@ -62,17 +19,70 @@ $primary-color-hover: #c60018;
   transition: background-color 0.5s ease, color 0.5s ease;
 
   &:hover {
-    background: $primary-color-hover;
+    background: $brand-primary-hover;
   }
 
   svg {
-    width: 34px;
-    height: 34px;
+    width: 30px;
+    height: 30px;
     margin-top: -1px;
     margin-left: -1px;
 
     path {
       stroke: white;
+      stroke-width: 3;
+    }
+  }
+}
+
+.wkp-map-controls {
+  position: absolute;
+  right: 15px;
+  top: 110px;
+
+  .rs-zooms-bar {
+    .rs-zoom-in,
+    .rs-zoom-out {
+      margin: 10px 0;
+      background: $brand-primary;
+      border-radius: 50%;
+      color: white;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-transition: background-color 0.5s ease, color 0.5s ease;
+      transition: background-color 0.5s ease, color 0.5s ease;
+
+      &:hover {
+        background: $brand-primary-hover;
+      }
+
+      svg {
+        height: 25px;
+        width: 25px;
+
+        path {
+          stroke: white;
+          stroke-width: 4;
+        }
+      }
+    }
+
+    .rs-zoomslider-wrapper {
+      .ol-zoomslider {
+        border: 2px solid #b7b7b7;
+
+        .ol-zoomslider-thumb {
+          background: $brand-primary;
+
+          &:hover {
+            background: $brand-primary-hover;
+          }
+        }
+      }
     }
   }
 }

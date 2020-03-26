@@ -7,6 +7,8 @@ import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
 import swissbounds from '../../img/swissbounds.png';
 import { ReactComponent as GeolocSVG } from '../../img/sbb/gps_12_large.svg';
+import { ReactComponent as MinusSVG } from '../../img/sbb/minus_105_large.svg';
+import { ReactComponent as PlusSVG } from '../../img/sbb/plus_103_large.svg';
 import './MapControls.scss';
 
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
@@ -43,6 +45,8 @@ const MapControls = ({ showGeolocation }) => {
       <Zoom
         map={map}
         zoomSlider
+        zoomInChildren={<PlusSVG focusable={false} />}
+        zoomOutChildren={<MinusSVG focusable={false} />}
         title={{
           zoomIn: t('Zoom'),
           zoomOut: t('Zoom'),

@@ -2,19 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope, FaPencilAlt } from 'react-icons/fa';
+import { TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import Button from '@geops/react-ui/components/Button';
 import SharePermalinkButton from '../SharePermalinkButton';
 import redirectHelper from '../../utils/redirectHelper';
 
+import { ReactComponent as ImageSVG } from '../../img/sbb/share/picture_147_large.svg';
+import { ReactComponent as EnvelopSVG } from '../../img/sbb/share/envelope_3_large.svg';
+import { ReactComponent as PencilSVG } from '../../img/sbb/share/pen_16_large.svg';
+
 const socialShareConfig = [
   {
     url: 'mailto:?body={url}',
     title: 'Per Email versenden',
-    icon: <FaEnvelope focusable={false} />,
+    icon: <EnvelopSVG focusable={false} />,
     className: 'ta-mail-icon',
   },
   {
@@ -64,7 +67,7 @@ const Share = ({ appBaseUrl }) => {
       <SharePermalinkButton />
       {renderConf(config[0], t)}
       <CanvasSaveButton aria-label={title} map={map}>
-        <TiImage focusable={false} title={title} />
+        <ImageSVG focusable={false} title={title} />
       </CanvasSaveButton>
       {renderConf(config[1], t)}
       {renderConf(config[2], t)}
@@ -77,7 +80,7 @@ const Share = ({ appBaseUrl }) => {
           }
           title={`${t('Zeichnen')}.`}
         >
-          <FaPencilAlt focusable={false} />
+          <PencilSVG focusable={false} />
         </Button>
       </div>
     </div>

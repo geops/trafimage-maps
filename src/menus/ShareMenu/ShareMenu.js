@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { FaShareAlt } from 'react-icons/fa';
+import { ReactComponent as ShareSVG } from '../../img/sbb/share/share_25_large.svg';
 import Share from '../../components/Share';
 import MenuItem from '../../components/Menu/MenuItem';
 
@@ -23,7 +23,7 @@ const ShareMenu = ({ appBaseUrl }) => {
       fixedHeight={375}
       className="wkp-share-menu"
       title={t('Teilen')}
-      icon={<FaShareAlt focusable={false} />}
+      icon={<ShareSVG focusable={false} />}
       collapsed={collapsed}
       onCollapseToggle={c => setCollapsed(c)}
     >

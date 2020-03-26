@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .wkp-share {
   width: 100%;
   display: flex;
@@ -11,17 +13,13 @@
     justify-content: space-around;
   }
 
-  .ta-mail-icon {
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
+  .ta-facebook-icon {
+    margin: 10px 0 10px 15px;
+    font-size: 30px;
+  }
 
-      svg {
-        font-size: 23px;
-        margin-bottom: 2px;
-      }
-    }
+  .ta-twitter-icon {
+    font-size: 30px;
   }
 
   .ta-draw-icon {
@@ -30,36 +28,71 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
+    }
+  }
 
-      svg {
-        font-size: 21px;
+  .ta-mail-icon {
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
+
+  .ta-mail-icon,
+  .ta-draw-icon {
+    svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  .rs-canvas-save-button {
+    svg {
+      height: 90%;
+      width: 90%;
+    }
+  }
+
+  .ta-mail-icon,
+  .ta-draw-icon,
+  .rs-canvas-save-button {
+    &:hover {
+      path {
+        stroke: $brand-primary;
+      }
+    }
+  }
+
+  .ta-facebook-icon,
+  .ta-twitter-icon {
+    &:hover {
+      path {
+        fill: $brand-primary;
       }
     }
   }
 
   .wkp-share-permalink-button > div[role='button'] {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     display: flex;
     align-items: center;
     justify-content: space-around;
 
     svg {
-      font-size: 20px;
+      height: 100%;
+      width: 100%;
+
+      path {
+        stroke-width: 3;
+      }
+
+      &:hover {
+        path {
+          stroke: $brand-primary;
+        }
+      }
     }
-  }
-
-  .ta-facebook-icon {
-    margin: 10px 0 10px 15px;
-    font-size: 30px;
-  }
-
-  .ta-twitter-icon,
-  .rs-canvas-save-button {
-    font-size: 30px;
-  }
-
-  .rs-canvas-save-button {
-    font-size: 28px;
   }
 }

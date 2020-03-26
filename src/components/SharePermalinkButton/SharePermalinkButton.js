@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
-import { FaLink } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import PermalinkInput from '@geops/react-ui/components/PermalinkInput';
 import Button from '@geops/react-ui/components/Button';
+import { ReactComponent as LinkSVG } from '../../img/sbb/share/link_152_large.svg';
 
 const propTypes = {
   title: PropTypes.string,
@@ -14,7 +14,7 @@ const propTypes = {
 
 const defaultProps = {
   title: 'Permalink generieren',
-  icon: <FaLink focusable={false} />,
+  icon: <LinkSVG focusable={false} />,
   className: 'wkp-share-permalink-button',
 };
 
