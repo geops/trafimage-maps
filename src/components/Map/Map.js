@@ -75,6 +75,8 @@ class Map extends PureComponent {
     this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', e => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent('load'));
+
+    this.increaseFontSize();
   }
 
   componentWillUnmount() {
@@ -199,6 +201,69 @@ class Map extends PureComponent {
     dispatchSetSearchOpen(false);
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  increaseFontSize2(mbMap, delta) {
+    mbMap.getStyle().layers.forEach(layer => {
+      try {
+        // console.log(layer.id, layer);
+        const size = mbMap.getLayoutProperty(layer.id, 'text-size');
+        if (size && !size.stops && !Array.isArray(size)) {
+          const newSize = size + delta;
+          // console.log(size, newSize);
+          mbMap.setLayoutProperty(layer.id, 'text-size', newSize);
+        } else if (size && size.stops && !Array.isArray(size)) {
+          const newStops = {
+            stops: size.stops.map(stop => {
+              return [stop[0], stop[1] + delta];
+            }),
+          };
+          // console.log('stops', size, newStops);
+          mbMap.setLayoutProperty(layer.id, 'text-size', newStops);
+        } else if (
+          size &&
+          !size.stops &&
+          Array.isArray(size) &&
+          size[0] === 'match'
+        ) {
+          const newMatch = [...size].map((match, idx) => {
+            if ((idx !== 0 && idx % 2 === 0) || idx === size.length - 1) {
+              return match + delta;
+            }
+            return match;
+          });
+          // console.log('match', size, newMatch);
+          mbMap.setLayoutProperty(layer.id, 'text-size', newMatch);
+        } else if (size !== 0) {
+          // console.log('others', size, layer);
+          mbMap.setLayoutProperty(layer.id, 'text-size', 16 + delta);
+        }
+      } catch (e) {
+        // console.log(layer.id, layer);
+      }
+    });
+  }
+
+  increaseFontSize(delta = 1) {
+    const { layerService } = this.props;
+    const baseLayer = (layerService
+      .getBaseLayers()
+      .filter(layer => layer.getVisible()) || [])[0];
+    if (baseLayer) {
+      // console.log('idle', baseLayer.mapboxLayer.mbMap);
+      if (
+        !baseLayer.mapboxLayer.mbMap ||
+        !baseLayer.mapboxLayer.mbMap.loaded()
+      ) {
+        this.currentMbMap = baseLayer.mapboxLayer.mbMap;
+        // console.log('idle', baseLayer.mapboxLayer.mbMap);
+        baseLayer.mapboxLayer.mbMap.once('idle', () => {
+          // console.log('idle');
+          this.increaseFontSize2(baseLayer.mapboxLayer.mbMap, delta);
+        });
+      }
+    }
+  }
+
   render() {
     const {
       center,
@@ -210,7 +275,6 @@ class Map extends PureComponent {
       extent,
       t,
     } = this.props;
-
     return (
       <>
         <BasicMap
@@ -226,6 +290,41 @@ class Map extends PureComponent {
             maxZoom,
           }}
         />
+        <div
+          style={{
+            position: 'absolute',
+            width: '200px',
+            margin: 'auto',
+            top: '0',
+            bottom: '0',
+            height: '200px',
+          }}
+        >
+          <button
+            type="button"
+            style={{
+              width: '100px',
+              height: '100px',
+            }}
+            onClick={() => {
+              this.increaseFontSize2(this.currentMbMap, -5);
+            }}
+          >
+            -
+          </button>
+          <button
+            type="button"
+            style={{
+              width: '100px',
+              height: '100px',
+            }}
+            onClick={() => {
+              this.increaseFontSize2(this.currentMbMap, 5);
+            }}
+          >
+            +
+          </button>
+        </div>
       </>
     );
   }
