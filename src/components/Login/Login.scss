@@ -1,0 +1,19 @@
+.wkp-login {
+  a {
+    color: grey;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 25px;
+
+    &:hover {
+      color: #eb0000;
+    }
+
+    .wkp-login-icon {
+      margin-right: 5px;
+      font-size: 18px;
+      height: 100%;
+    }
+  }
+}

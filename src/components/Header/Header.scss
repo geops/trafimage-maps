@@ -16,33 +16,8 @@
     margin-right: 10px;
     display: flex;
 
-    .wkp-header-login {
-      margin-right: 40px;
-      padding: 0 5px;
-      color: grey;
-      display: flex;
-      line-height: 20px;
-
-      a {
-        color: grey;
-        text-decoration: none;
-        line-height: 25px;
-
-        .wkp-header-login-icon {
-          float: left;
-          margin-right: 5px;
-          font-size: 18px;
-          height: 22px;
-        }
-      }
-
-      &:hover {
-        color: #eb0000;
-
-        a {
-          color: #eb0000;
-        }
-      }
+    .wkp-login {
+      margin-right: 45px;
     }
 
     .wkp-header-sbb-logo {
@@ -55,10 +30,8 @@
 .tm-trafimage-maps {
   &.tm-w-l {
     .wkp-header {
-      .wkp-header-right {
-        .wkp-header-login {
-          margin-right: 10px;
-        }
+      .wkp-login {
+        margin-right: 10px;
       }
     }
   }
@@ -67,17 +40,17 @@
   &.tm-w-s,
   &.tm-w-xs {
     .wkp-header {
-      .wkp-header-right {
-        .wkp-header-login {
-          margin-right: 10px;
-        }
+      .wkp-login {
+        margin-right: 15px;
       }
     }
   }
 
   &.tm-w-xs {
-    .wkp-header-login span.wkp-header-login-text {
-      display: none;
+    .wkp-header {
+      .wkp-login-text {
+        display: none;
+      }
     }
   }
 }
