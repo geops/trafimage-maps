@@ -18,16 +18,11 @@ const Header = ({ appBaseUrl }) => {
   if (permissionsInfos && permissionsInfos.user) {
     login = permissionsInfos.user;
   }
-  console.log(encodeURI(window.location.href));
-  console.log(encodeURIComponent(window.location.href));
-  console.log(window.location.href);
   return (
     <UIHeader className="wkp-header">
       <div className="wkp-header-right">
         <div className="wkp-header-login">
-          <a
-            href={`${appBaseUrl}/login?next=${encodeURI(window.location.href)}`}
-          >
+          <a href={`${appBaseUrl}/login?next=${window.location.href}`}>
             <AiOutlineUser className="wkp-header-login-icon" />
             <span className="wkp-header-login-text">{login}</span>
           </a>

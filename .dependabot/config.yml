@@ -5,7 +5,7 @@ update_configs:
    
   - package_manager: "javascript"
     directory: "/"
-    update_schedule: "weekly"
+    update_schedule: "monthly"
     
     # Apply default reviewer and label to created
     # pull requests
