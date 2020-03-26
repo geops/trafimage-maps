@@ -3,6 +3,78 @@
 .wkp-topic-menu {
   border-top-width: 0;
 
+  .wkp-info-topic-bt {
+    display: flex;
+    align-items: center;
+    height: 18px;
+    width: 18px;
+
+    svg {
+      height: 19px;
+      width: 19px;
+
+      path {
+        stroke: #888;
+      }
+    }
+
+    &.wkp-active {
+      svg {
+        path {
+          stroke: #000;
+        }
+      }
+    }
+
+    &.wkp-selected {
+      color: $brand-primary;
+    }
+  }
+
+  .wkp-layer-tree {
+    overflow: hidden;
+    margin: 1px 0 0 20px;
+
+    .rs-layer-tree {
+      overflow: hidden;
+    }
+
+    .wkp-info-layer-bt {
+      height: 18px;
+      width: 18px;
+      margin-right: 0;
+
+      svg {
+        height: 18px;
+        width: 18px;
+      }
+    }
+
+    .rs-layer-tree-item {
+      color: #888;
+      height: $menu-item-height;
+      padding: 0;
+      margin: 0 0 0 4px;
+
+      .rs-layer-tree-toggle {
+        line-height: 14px;
+        max-width: 262px;
+      }
+
+      .rs-layer-tree-arrow {
+        border-color: #888;
+      }
+
+      &.rs-visible {
+        color: initial;
+
+        .rs-layer-tree-arrow {
+          border-color: black;
+        }
+      }
+    }
+  }
+
   .wkp-topic-menu-item-wrapper {
     display: flex;
     align-items: center;
@@ -18,7 +90,7 @@
       .wkp-topic-title {
         display: flex;
         align-items: center;
-        max-width: 300px;
+        max-width: 260px;
       }
 
       .wkp-topic-radio {
@@ -68,62 +140,23 @@
     .wkp-lock-icon {
       cursor: pointer;
       margin-right: 4px;
-      color: #888;
+      height: 18px;
+      width: 18px;
+
+      svg {
+        height: 19px;
+        width: 19px;
+
+        path {
+          stroke: #888;
+        }
+      }
 
       &.wkp-active {
-        color: #000;
-      }
-    }
-
-    .wkp-info-topic-bt {
-      display: flex;
-      align-items: center;
-      color: #888;
-
-      &.wkp-active {
-        color: #000;
-      }
-
-      &.wkp-selected {
-        color: $brand-primary;
-      }
-    }
-  }
-
-  .wkp-layer-tree {
-    overflow: hidden;
-    margin: 1px 0 0 20px;
-
-    .rs-layer-tree {
-      overflow: hidden;
-    }
-
-    .wkp-info-layer-bt {
-      height: 14px;
-      width: 14px;
-      margin-right: 0;
-    }
-
-    .rs-layer-tree-item {
-      color: #888;
-      height: $menu-item-height;
-      padding: 0;
-      margin: 0 0 0 4px;
-
-      .rs-layer-tree-toggle {
-        line-height: 14px;
-        max-width: 262px;
-      }
-
-      .rs-layer-tree-arrow {
-        border-color: #888;
-      }
-
-      &.rs-visible {
-        color: initial;
-
-        .rs-layer-tree-arrow {
-          border-color: black;
+        svg {
+          path {
+            stroke: #000;
+          }
         }
       }
     }

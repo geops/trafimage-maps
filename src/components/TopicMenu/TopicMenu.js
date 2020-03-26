@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import { FaInfoCircle, FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Layer from 'react-spatial/layers/Layer';
+import { ReactComponent as LockSVG } from '../../img/sbb/lock_closed_114_large.svg';
+import { ReactComponent as InfoSVG } from '../../img/sbb/circle_information_11_large.svg';
 import Collapsible from '../Collapsible';
 import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
 
@@ -131,7 +132,7 @@ class TopicMenu extends PureComponent {
           dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
         }}
       >
-        <FaInfoCircle focusable={false} />
+        <InfoSVG focusable={false} />
       </Button>
     );
   }
@@ -145,7 +146,7 @@ class TopicMenu extends PureComponent {
 
     return (
       <div className={className}>
-        <FaLock
+        <LockSVG
           focusable={false}
           title={t('Vertraulich/ Nur SBB-intern verfügbar')}
         />
