@@ -37,23 +37,18 @@
 
   .rs-base-layer-switcher {
     position: absolute;
-    bottom: 10px;
+    bottom: 40px;
     left: 10px;
-    width: 150px;
-    height: 140px;
+    width: 162px;
+    height: 120px;
     z-index: 0; // under menu
 
     &.rs-open {
-      width: 600px;
+      width: 680px;
     }
 
-    .rs-base-layer-switcher-layers {
-      height: 100px;
-    }
-
-    .rs-base-layer-switcher-image {
-      width: 140px;
-      height: 140px;
+    .rs-base-layer-switcher-button {
+      min-width: 150px;
     }
   }
 
