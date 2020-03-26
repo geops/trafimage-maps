@@ -9,6 +9,9 @@ import Text from 'ol/style/Text';
 import Fill from 'ol/style/Fill';
 import Circle from 'ol/style/Circle';
 import Stroke from 'ol/style/Stroke';
+import { getVectorContext } from 'ol/render';
+import { unByKey } from 'ol/Observable';
+import { easeOut } from 'ol/easing';
 
 /**
  * Layer for zweitausbildung pois
@@ -63,10 +66,75 @@ class ZweitausbildungPoisLayer extends VectorLayer {
         source: this.source,
       }),
     );
+
+    this.animate = this.animate.bind(this);
   }
 
   setGeoServerUrl(geoServerUrl) {
     this.geoServerUrl = geoServerUrl;
+  }
+
+  init(map) {
+    super.init(map);
+
+    this.olLayerHighlight = new OLVectorLayer({
+      map,
+      source: new OLVectorSource(),
+    });
+
+    this.olLayerHighlight.getSource().on('addfeature', () => {
+      this.animationStartTime = new Date().getTime();
+      unByKey(this.postrenderKey);
+      this.postrenderKey = this.olLayerHighlight.on('postrender', this.animate);
+    });
+  }
+
+  /**
+   * Animate the highlight feature
+   * based on https://openlayers.org/en/latest/examples/feature-animation.html
+   */
+  animate(event) {
+    const duration = 200;
+    const maxRadius = 14;
+    const color = this.highlightFeature.get('color') || 'rgba(50, 50, 50, 0.8)';
+
+    const elapsed = event.frameState.time - this.animationStartTime;
+
+    if (elapsed < 0) {
+      return;
+    }
+
+    const elapsedRatio = elapsed / duration;
+    // radius will be 1 at start and 14 at end
+    const radius = easeOut(elapsedRatio) * maxRadius + 1;
+
+    const style = new Style({
+      image: new Circle({
+        fill: new Fill({
+          color,
+        }),
+        radius,
+      }),
+      stroke: new Stroke({
+        color,
+        width: 8,
+      }),
+      fill: new Fill({
+        color,
+      }),
+    });
+
+    const vectorContext = getVectorContext(event);
+    vectorContext.setStyle(style);
+    vectorContext.drawGeometry(this.highlightFeature.getGeometry().clone());
+
+    if (elapsed > duration) {
+      unByKey(this.postrenderKey);
+      return;
+    }
+
+    // Tell OpenLayers to continue postrender animation
+    this.map.render();
   }
 
   style(feature) {
@@ -74,31 +142,11 @@ class ZweitausbildungPoisLayer extends VectorLayer {
     const count = feature.get('features').length;
     const cacheKey = count;
 
-    const highlightStyles = [];
-
     for (let i = 0; i < count; i += 1) {
-      const highlightFeature = features[i];
-      if (highlightFeature.get('highlight')) {
-        const color = highlightFeature.get('color') || 'rgba(50, 50, 50, 0.8)';
-
-        highlightStyles.push(
-          new Style({
-            image: new Circle({
-              fill: new Fill({
-                color,
-              }),
-              radius: 14,
-            }),
-            stroke: new Stroke({
-              color,
-              width: 8,
-            }),
-            fill: new Fill({
-              color,
-            }),
-            geometry: highlightFeature.getGeometry(),
-          }),
-        );
+      if (features[i].get('highlight')) {
+        this.highlightFeature = features[i];
+        this.olLayerHighlight.getSource().clear();
+        this.olLayerHighlight.getSource().addFeature(this.highlightFeature);
       }
     }
 
@@ -149,7 +197,7 @@ class ZweitausbildungPoisLayer extends VectorLayer {
       }
     }
 
-    return [...highlightStyles, this.styleCache[cacheKey]].flat();
+    return this.styleCache[cacheKey];
   }
 }
 
