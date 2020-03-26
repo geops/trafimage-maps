@@ -91,6 +91,7 @@ describe('CasaLayer', () => {
       new Style({
         text: new Text({
           font: '12px Arial',
+          scale: 1,
           text: 'zone',
           fill: new Fill({
             color: 'black',

@@ -69,6 +69,20 @@ class CasaLayer extends VectorLayer {
     this.mouseOverCallbacks = [];
 
     this.onMouseOver(options.onMouseOver);
+    this.scale = null;
+  }
+
+  getScale() {
+    return this.scale;
+  }
+
+  setScale(scale) {
+    this.scale = scale;
+    if (this.olLayer.getLayers()) {
+      this.olLayer.getLayersArray().forEach(l => l.changed());
+    } else {
+      this.olLayer.changed();
+    }
   }
 
   /**
@@ -231,6 +245,7 @@ class CasaLayer extends VectorLayer {
       olStyles.text = new Style({
         text: new TextStyle({
           font: style.text.font || 'bold 13px Arial',
+          scale: this.scale || style.text.scale || 1,
           fill: new FillStyle({
             color: style.text.color,
           }),

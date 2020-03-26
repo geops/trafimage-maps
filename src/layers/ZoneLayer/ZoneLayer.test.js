@@ -70,6 +70,7 @@ describe('ZoneLayer', () => {
         text: new Text({
           text: '42',
           font: 'bold 13px Arial',
+          scale: 1,
           fill: new Fill({
             color: '#4576A2',
           }),
@@ -100,6 +101,7 @@ describe('ZoneLayer', () => {
         text: new Text({
           text: '42',
           font: 'bold 13px Arial',
+          scale: 1,
           fill: new Fill({
             color: '#fff',
           }),

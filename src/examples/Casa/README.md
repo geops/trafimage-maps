@@ -4,7 +4,7 @@ The Casa module is a sub module of trafimage-maps which is integrated in the SBB
 
 ```jsx
 import 'trafimage-maps';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import casa from 'trafimage-maps/examples/Casa/topic';
@@ -195,9 +195,23 @@ const App = () => {
     };
   }, []);
 
+  const minus = useCallback(() => {
+    let scale = (zoneLayer.getScale() ||1) - 0.1;
+    zoneLayer.setScale(scale < 1 ? 1 : scale);
+  }, []);
+
+  const plus = useCallback(() => {
+    let scale = (zoneLayer.getScale() || 1) + 0.1;
+    zoneLayer.setScale(scale > 3 ? 3 : scale);
+  }, []);
+  
   /* To use casa style sheet, add the casa class in the parent class */
   return (
     <div className="container casa">
+      <div>
+        <button onClick={minus}>-</button>
+        <button onClick={plus}>+</button>
+      </div>
       <trafimage-maps ref={ref} apiKey={apiKey}/>
     </div>
   );
