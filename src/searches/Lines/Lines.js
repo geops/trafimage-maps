@@ -4,7 +4,7 @@ import { MultiLineString } from 'ol/geom';
 import GeoJSON from 'ol/format/GeoJSON';
 
 import Search from '../Search';
-import layerHelper from '../../layers/layerHelper';
+import LayerHelper from '../../layers/layerHelper';
 
 const lineMeasuresRegExp = new RegExp(
   '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
@@ -20,7 +20,7 @@ class Lines extends Search {
     this.dataProjection = 'EPSG:21781';
 
     this.highlightStyle = (f, r) => {
-      const gen = layerHelper.getGeneralization(r);
+      const gen = LayerHelper.getGeneralization(r);
       const format = new GeoJSON();
       const geometry =
         format.readGeometry(f.get('geoms')[gen], {
@@ -46,6 +46,8 @@ class Lines extends Search {
             }),
           });
     };
+
+    this.highlightStyle = this.highlightStyle.bind(this);
   }
 
   // eslint-disable-next-line class-methods-use-this
