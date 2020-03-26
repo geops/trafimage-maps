@@ -52,7 +52,15 @@
 
     .rs-base-layer-previous,
     .rs-base-layer-next {
+      width: 22px;
+      height: 22px;
       z-index: 1;
+
+      svg {
+        path {
+          stroke-width: 3;
+        }
+      }
     }
   }
 

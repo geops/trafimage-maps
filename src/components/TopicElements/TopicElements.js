@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
+import { ReactComponent as ChevronRightSVG } from '../../img/sbb/chevron_small_right_circle_42_large.svg';
+import { ReactComponent as ChevronLeftSVG } from '../../img/sbb/chevron_small_left_circle_41_large.svg';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -137,6 +139,8 @@ function TopicElements({ history, appBaseUrl }) {
           prevButton: t('Nächste Baselayer'),
           nextButton: t('Vorherige Baselayer'),
         }}
+        nextButtonContent={<ChevronRightSVG focusable={false} />}
+        prevButtonContent={<ChevronLeftSVG focusable={false} />}
         fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
