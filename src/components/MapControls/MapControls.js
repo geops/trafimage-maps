@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
-import swissbounds from '../../img/swissbounds.png';
+import { ReactComponent as SwissSVG } from '../../img/sbb/switzerland_343_large.svg';
 import { ReactComponent as GeolocSVG } from '../../img/sbb/gps_12_large.svg';
 import { ReactComponent as MinusSVG } from '../../img/sbb/minus_105_large.svg';
 import { ReactComponent as PlusSVG } from '../../img/sbb/plus_103_large.svg';
@@ -59,7 +59,7 @@ const MapControls = ({ showGeolocation }) => {
         extent={swissExtent}
         className="wkp-fit-extent"
       >
-        <img src={swissbounds} alt={t('Ganze Schweiz')} />
+        <SwissSVG focusable={false} />
       </FitExtent>
     </div>
   );

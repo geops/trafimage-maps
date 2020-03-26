@@ -3,6 +3,32 @@
 // $primary-color: #DCDCDC;
 // $primary-color-hover: #666666;
 
+.wkp-fit-extent {
+  svg {
+    width: 30px;
+    height: 30px;
+
+    polygon {
+      stroke: white;
+      stroke-width: 3;
+    }
+  }
+}
+
+.wkp-geolocation {
+  svg {
+    width: 30px;
+    height: 30px;
+    margin-top: -1px;
+    margin-left: -1px;
+
+    path {
+      stroke: white;
+      stroke-width: 3;
+    }
+  }
+}
+
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;
@@ -20,18 +46,6 @@
 
   &:hover {
     background: $brand-primary-hover;
-  }
-
-  svg {
-    width: 30px;
-    height: 30px;
-    margin-top: -1px;
-    margin-left: -1px;
-
-    path {
-      stroke: white;
-      stroke-width: 3;
-    }
   }
 }
 
