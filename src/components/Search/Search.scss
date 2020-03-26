@@ -2,40 +2,47 @@
 
 .wkp-search {
   position: absolute;
-  top: 25px;
+  top: 26px;
   z-index: 2; // To be above header div, in order to be clickable.
   right: 320px;
   left: 400px;
 
+  .wkp-search-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 2px solid #b7b7b7;
+    height: 42px;
+  }
+
   .wkp-search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 46px;
     border: none;
     color: white;
-    height: 40px;
-    width: 46px;
-    position: absolute;
-    top: 2px;
     font-size: 16px;
-    padding-top: 4px;
 
     &.wkp-search-button-clear {
-      right: 44px;
       background: none;
       color: #666;
     }
 
     &.wkp-search-button-submit {
       background-color: $brand-primary;
-      right: -2px;
     }
   }
 
   .react-autosuggest__input {
-    border: 2px solid #b7b7b7;
+    border: 0;
     font-size: 14px;
-    padding: 12px 80px 12px 15px;
-    width: calc(100% - 95px);
+    padding-left: 15px;
     border-radius: 0;
     -webkit-appearance: none;
+    flex: 2 1 auto;
 
     &::-ms-clear {
       display: none;
@@ -43,6 +50,7 @@
   }
 
   .react-autosuggest__suggestions-container--open {
+    box-sizing: border-box;
     background: white;
     border: 2px solid #666;
     margin-top: 5px;
@@ -115,6 +123,7 @@
   &.tm-w-s,
   &.tm-w-xs {
     .wkp-search {
+      top: 4.5px;
       right: 9px;
       max-width: 100%;
       left: 55px;
@@ -140,21 +149,19 @@
     .wkp-search-toggle-button {
       margin-right: 75px;
     }
-
-    .wkp-search-toggle-container--open {
-      margin: 0;
-    }
   }
 
   &.tm-w-xs,
   &.tm-w-s {
     .wkp-search-button {
-      height: 39px;
+      width: 42px;
     }
 
     .react-autosuggest__input {
+      width: calc(100% - 96px);
+      height: 80%;
+      padding: 4px 0 4px 15px;
       font-size: 16px;
-      padding-bottom: 9px;
     }
   }
 }
