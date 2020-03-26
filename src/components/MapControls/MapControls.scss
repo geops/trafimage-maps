@@ -36,6 +36,10 @@ $primary-color-hover: #c60018;
 
         .ol-zoomslider-thumb {
           background: $primary-color;
+
+          &:hover {
+            background: $primary-color-hover;
+          }
         }
       }
     }
