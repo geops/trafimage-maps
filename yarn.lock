@@ -14323,17 +14323,10 @@ react-shadow-dom-retarget-events@^1.0.8:
   resolved "https://registry.yarnpkg.com/react-shadow-dom-retarget-events/-/react-shadow-dom-retarget-events-1.0.10.tgz#78c3c039bf2ea4e788d91d390662c9ccaf8d92ad"
   integrity sha512-OOt7ugDgSuXiy+PmMOMHqvm4ko6X+cJsre/N124dCJhLBXqv1xVLjwuhpeY7/nv7p/YxytvyfwYG+M19NMnSjQ==
 
-react-shadow@^17.1.3:
-  version "17.1.3"
-  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-17.1.3.tgz#21f8ebbbeff8f867a5eb29dec52758a3fb576d42"
-  integrity sha512-T0TETccduTNwid9/URfWRhtAH0Fv3eA1zra7cq+2bY5u4fd4oBjtXA629h/95QN8aznlJof3ELd36qOyzaGdHQ==
-  dependencies:
-    humps "^2.0.1"
-
-react-shadow@^17.5.0:
-  version "17.5.0"
-  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-17.5.0.tgz#0995113e61c902281cf666bc2c241f61a513c487"
-  integrity sha512-1t8EaL9cS85tWbc8mOAyNhmHXyXVwrVHWxuNAy9REI3V7Gb1wrHVEv5Cyn/q8GPuIhzDT+81w9h1rDOPfJ671Q==
+react-shadow@^17.1.3, react-shadow@^17.6.0:
+  version "17.6.0"
+  resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-17.6.0.tgz#74cee9dbe1dbb723ae559c392575513f41d97cf2"
+  integrity sha512-rMHknSM7KNm7SvBFqoAJqXgpcuq2ZqLlXFMpL1j02b17jgqKVx8ukNptUaweWuLcksB55U3Y/oYnTEGrfEU3pw==
   dependencies:
     humps "^2.0.1"
     react-use "^13.22.4"
