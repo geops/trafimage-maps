@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
@@ -21,6 +22,40 @@ function Search() {
   const searchService = useSelector(state => state.app.searchService);
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const renderInputComponent = inputProps => {
+    return (
+      <div className="wkp-search-input">
+        <input {...inputProps} />
+        {value && (
+          <button
+            type="button"
+            tabIndex={0}
+            aria-label={t('Suchtext löschen')}
+            className="wkp-search-button wkp-search-button-clear"
+            onClick={() => {
+              setValue('');
+              searchService.clearHighlight();
+            }}
+          >
+            <FaTimes />
+          </button>
+        )}
+        <button
+          type="button"
+          tabIndex={0}
+          aria-label="Suche"
+          className="wkp-search-button wkp-search-button-submit"
+          onClick={() => {
+            if (!value) {
+              dispatch(setSearchOpen(false));
+            }
+          }}
+        >
+          <FaSearch focusable={false} />
+        </button>
+      </div>
+    );
+  };
 
   const componentIsMounted = useRef(true);
   useEffect(() => {
@@ -119,35 +154,8 @@ function Search() {
               placeholder: searchService.getPlaceholder(t),
               value,
             }}
+            renderInputComponent={renderInputComponent}
           />
-          {value && (
-            <button
-              type="button"
-              tabIndex={0}
-              aria-label={t('Suchtext löschen')}
-              className="wkp-search-button wkp-search-button-clear"
-              onClick={() => {
-                setValue('');
-                searchService.clearHighlight();
-                dispatch(setSearchOpen(false));
-              }}
-            >
-              <FaTimes />
-            </button>
-          )}
-          <button
-            type="button"
-            tabIndex={0}
-            aria-label={t('Suche')}
-            className="wkp-search-button wkp-search-button-submit"
-            onClick={() => {
-              if (!value) {
-                dispatch(setSearchOpen(false));
-              }
-            }}
-          >
-            <FaSearch focusable={false} />
-          </button>
         </SearchToggle>
       </div>
     )
