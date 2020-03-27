@@ -161,6 +161,11 @@ const WebComponent = props => {
       tps.forEach(topic => {
         // eslint-disable-next-line no-param-reassign
         topic.active = topic.key === activeTopicKey;
+        // eslint-disable-next-line no-param-reassign
+        topic.hideInLayerTree =
+          topic.hideInLayerTree && topic.key === activeTopicKey
+            ? false
+            : topic.hideInLayerTree;
       });
     } else {
       tps[0].active = true;
