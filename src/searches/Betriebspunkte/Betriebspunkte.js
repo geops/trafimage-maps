@@ -12,8 +12,8 @@ class Betriebspunkte extends Search {
   // eslint-disable-next-line class-methods-use-this
   search(value) {
     return fetch(`https://maps.trafimage.ch/search/bps?name=${value}`)
-      .then(data => data.json())
-      .then(featureCollection => featureCollection.features);
+      .then((data) => data.json())
+      .then((featureCollection) => featureCollection.features);
   }
 
   render(item) {

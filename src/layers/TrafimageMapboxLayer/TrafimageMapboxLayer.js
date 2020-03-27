@@ -41,10 +41,10 @@ class TrafimageMapboxLayer extends MapboxLayer {
     }
 
     fetch(newStyleUrl)
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         // Ensure we don't reload the style for nothing.
         if (this.styleUrl === newStyleUrl) {
           return;

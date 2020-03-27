@@ -105,8 +105,8 @@ export function StyleGuideRenderer({
   const [apiKey, setApiKey] = useState();
   useEffect(() => {
     fetch('https://developer.geops.io/publickey')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setApiKey(data.key);
       })
       .catch(() => {

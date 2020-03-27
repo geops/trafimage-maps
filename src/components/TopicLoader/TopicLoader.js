@@ -124,10 +124,12 @@ class TopicLoader extends Component {
       return;
     }
     const visibleTopics = topics.filter(
-      t => !t.permission || permissionsInfos.permissions.includes(t.permission),
+      (t) =>
+        !t.permission || permissionsInfos.permissions.includes(t.permission),
     );
 
-    const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
+    const activeTopic =
+      visibleTopics.find((topic) => topic.active) || topics[0];
     activeTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(activeTopic);
@@ -189,16 +191,16 @@ class TopicLoader extends Component {
 
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getIsBaseLayer() && l.getVisible());
+      .filter((l) => l.getIsBaseLayer() && l.getVisible());
 
     const visibleBaseLayers = topicLayers.filter(
-      l => l.getIsBaseLayer() && l.getVisible(),
+      (l) => l.getIsBaseLayer() && l.getVisible(),
     );
 
     // Set the visible baselayer if need to be changed on topic change.
     if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
       topicLayers
-        .filter(l => l.getIsBaseLayer())
+        .filter((l) => l.getIsBaseLayer())
         .forEach((lay, idx) => {
           lay.setVisible(idx === 0);
         });
@@ -231,7 +233,7 @@ class TopicLoader extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   layerService: state.app.layerService,
   permissionsInfos: state.app.permissionsInfos,
