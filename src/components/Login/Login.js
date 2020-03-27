@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -15,12 +15,20 @@ const Login = ({ appBaseUrl }) => {
     return 'Login';
   }, [permissionsInfos]);
 
+  const openLoginPage = useCallback(() => {
+    window.location.href = `${appBaseUrl}/login?next=${window.location.href}`;
+  }, [appBaseUrl]);
+
   return (
-    <div className="wkp-login">
-      <a href={`${appBaseUrl}/login?next=${window.location.href}`}>
-        <AiOutlineUser className="wkp-login-icon" />
-        <span className="wkp-login-text">{login}</span>
-      </a>
+    <div
+      className="wkp-login"
+      role="button"
+      onClick={openLoginPage}
+      onKeyPress={evt => evt.which === 13 && openLoginPage()}
+      tabIndex={0}
+    >
+      <AiOutlineUser className="wkp-login-icon" />
+      <span className="wkp-login-text">{login}</span>
     </div>
   );
 };
