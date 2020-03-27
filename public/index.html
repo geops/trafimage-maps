@@ -55,9 +55,6 @@
       }
 
       .buttons-row button {
-        background: white;
-        border: 2px solid #b7b7b7;
-        margin: 5px;
         width: 150px;
       }
 
@@ -80,11 +77,17 @@
         height: 0px;
       }
 
+      #development-wrapper button {
+        background: white;
+        border: 2px solid #b7b7b7;
+        margin: 5px;
+      }
+
+
       #development-bt {
         color: red;
         height: 200px;
         width: 50px;
-        z-index: 1;
       }
 
       #development-bt span {
@@ -166,6 +169,17 @@
       <span>Development</span>
     </button>
     <div id="development-wrapper">
+      <button
+        type="button"
+        onclick="
+          var wrapper = document.getElementById('development-wrapper');
+          wrapper.style.border = (!wrapper.style.border || wrapper.style.border === 'none' ? '2px solid red' : 'none');
+          wrapper.style.height = (!wrapper.style.height || wrapper.style.height == '0px' ? '400px' : '0px');
+          wrapper.style.width = (!wrapper.style.width || wrapper.style.width == '0px' ? '350px' : '0px');
+        "
+      >
+        <span>X</span>
+      </button>
       <div id="buttons">
         <div class="buttons-row">
           <button
