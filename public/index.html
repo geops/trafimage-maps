@@ -95,6 +95,13 @@
         transform: rotate(-90deg);
         margin: -55px;
       }
+
+      #development-wrapper #close-bt {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        margin: 0;
+      }
     </style>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
     <script type="text/javascript">
@@ -171,6 +178,7 @@
     <div id="development-wrapper">
       <button
         type="button"
+        id="close-bt"
         onclick="
           var wrapper = document.getElementById('development-wrapper');
           wrapper.style.border = (!wrapper.style.border || wrapper.style.border === 'none' ? '2px solid red' : 'none');
