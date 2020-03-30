@@ -38,34 +38,69 @@
       }
 
       #log {
-        margin: 5px 0;
+        height: 130px;
+        overflow: scroll;
+        padding: 10px 20px 0 20px;
       }
 
-      #buttons,
-      #events {
-        top: 100px;
-        background-color: lightgray;
-        padding: 5px 10px;
-        transition: height ease 0.3s;
-        overflow: auto;
+      #buttons {
+        display: flex;
+        padding-left: 70px;
+        flex-direction: column;
+      }
+
+      .buttons-row {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .buttons-row button {
+        width: 150px;
+      }
+
+      #development-bt,
+      #development-wrapper {
         position: absolute;
-        height: 30px;
-        width: 200px;
-        border: 1px solid gray;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        background: white;
+        border: 2px solid red;
+        top: 110px;
+        left: 0;
       }
 
-      #buttons > button,
-      #events > button {
-        margin: 5px 0;
-        cursor: pointer;
-        width: calc(100% - 10px);
+      #development-wrapper {
+        transition: width ease 0.3s;
+        color: #444;
+        width: 0px;
+        height: 0px;
       }
 
-      @media only screen and (max-width: 480px) {
-        #buttons,
-        #events {
-          display: none;
-        }
+      #development-wrapper button {
+        background: white;
+        border: 2px solid #b7b7b7;
+        margin: 5px;
+      }
+
+
+      #development-bt {
+        color: red;
+        height: 200px;
+        width: 50px;
+      }
+
+      #development-bt span {
+        display: inline-block;
+        transform: rotate(-90deg);
+        margin: -55px;
+      }
+
+      #development-wrapper #close-bt {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        margin: 0;
       }
     </style>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
@@ -178,13 +213,82 @@
         Set max extent to "502649.8980,5655117.1007,1352629.6525,6141868.0968"
       </button>
     </div>
-    <div id="events">
+    <div id="events">n
+      type="button"
+      id="development-bt"
+      onclick="
+        var wrapper = document.getElementById('development-wrapper');
+        wrapper.style.border = (!wrapper.style.border || wrapper.style.border === 'none' ? '2px solid red' : 'none');
+        wrapper.style.height = (!wrapper.style.height || wrapper.style.height == '0px' ? '400px' : '0px');
+        wrapper.style.width = (!wrapper.style.width || wrapper.style.width == '0px' ? '350px' : '0px');
+      "
+    >
+      <span>Development</span>
+    </button>
+    <div id="development-wrapper">
       <button
         type="button"
-        onclick="var bt = document.getElementById('events'); bt.style.height =  (!bt.style.height || bt.style.height == '30px' ? '100px' : '30px');"
+        id="close-bt"
+        onclick="
+          var wrapper = document.getElementById('development-wrapper');
+          wrapper.style.border = (!wrapper.style.border || wrapper.style.border === 'none' ? '2px solid red' : 'none');
+          wrapper.style.height = (!wrapper.style.height || wrapper.style.height == '0px' ? '400px' : '0px');
+          wrapper.style.width = (!wrapper.style.width || wrapper.style.width == '0px' ? '350px' : '0px');
+        "
       >
-        Toggle events
+        <span>X</span>
       </button>
+      <div id="buttons">
+        <div class="buttons-row">
+          <button
+            type="button"
+            onclick="changeAttr('activeTopicKey','ch.sbb.handicap')"
+          >
+            change to handicap
+          </button>
+          <button
+            type="button"
+            onclick="changeAttr('activeTopicKey','ch.sbb.netzkarte')"
+          >
+            change to netzkarte
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button
+            type="button"
+            onclick="changeAttr('vectorTilesUrl', 'http://foo.ch')"
+          >
+            change vectorTilesUrl to http://foo.ch
+          </button>
+          <button type="button" onclick="changeAttr('apiKey', 'abcdefgh')">
+            change apiKey to 'abcdefgh'
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button type="button" onclick="changeAttr('vectorTilesKey', 'abcdefgh')">
+            change vectorTilesKey to 'abcdefgh'
+          </button>
+          <button
+            type="button"
+            onclick="changeAttr('geoserverUrl', 'http://foo.ch')"
+          >
+            change geoserverUrl to http://foo.ch
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button type="button" onclick="changeAttr('cartaroUrl', 'http://foo.ch')">
+            change cartaroUrl to http://foo.ch
+          </button>
+          <button type="button" onclick="changeAttr('center', '[950000, 6000000]')">
+            change center to '[950000, 5900000]'
+          </button>
+        </div>
+        <div class="buttons-row">
+          <button type="button" onclick="changeAttr('zoom', 16)">
+            change zoom to 16
+          </button>
+        </div>
+      </div>
       <div id="log"></div>
     </div>
     <!--
