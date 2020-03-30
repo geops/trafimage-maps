@@ -16,7 +16,9 @@ const Login = ({ appBaseUrl }) => {
   }, [permissionsInfos]);
 
   const openLoginPage = useCallback(() => {
-    window.location.href = `${appBaseUrl}/login?next=${window.location.href}`;
+    window.location.href = `${appBaseUrl}/login?next=${encodeURIComponent(
+      window.location.href,
+    )}`;
   }, [appBaseUrl]);
 
   return (
