@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: row;
 
-    .wkp-zweitausbildung-routes-dropdown-label {
+    .wkp-image-dropdown-label {
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -46,7 +46,7 @@
 }
 
 /* General settings for both, the button and the list */
-.wkp-zweitausbildung-routes-dropdown-icon {
+.wkp-image-dropdown-icon {
   padding-right: 5px;
 
   & > img {

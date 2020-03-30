@@ -104,7 +104,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       this.features[i].set('label', label);
       if (this.options.indexOf(label) === -1) {
         this.options.push(label);
-        this.icons[label] = feature.get('line_number');
+        this.icons[label] = `${
+          process.env.REACT_APP_STATIC_FILES_URL
+        }/img/layers/zweitausbildung/${feature.get('line_number')}.png`;
       }
     }
 

@@ -13,6 +13,15 @@ const propTypes = {
   options: PropTypes.array.isRequired,
   selected: PropTypes.string,
   icons: PropTypes.object.isRequired,
+
+  /**
+   * Icon size in pixels
+   */
+  iconSize: PropTypes.shape({
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+
   onSelect: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
 };
@@ -20,6 +29,10 @@ const propTypes = {
 const defaultProps = {
   disabled: false,
   selected: null,
+  iconSize: {
+    height: 16,
+    width: 42,
+  },
 };
 
 class IconList extends PureComponent {
@@ -47,21 +60,19 @@ class IconList extends PureComponent {
   }
 
   renderOption(option) {
-    const { icons, t, options } = this.props;
+    const { icons, t, options, iconSize } = this.props;
 
     const opt = option || (options.length ? options[0] : null);
 
-    const label = (
-      <div className="wkp-zweitausbildung-routes-dropdown-label">{t(opt)}</div>
-    );
+    const label = <div className="wkp-image-dropdown-label">{t(opt)}</div>;
 
     return opt && icons[opt] ? (
       <>
-        <div className="wkp-zweitausbildung-routes-dropdown-icon">
+        <div className="wkp-image-dropdown-icon">
           <img
-            src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/zweitausbildung/${icons[option]}.png`}
-            height="16"
-            width="42"
+            src={icons[option]}
+            height={iconSize.height}
+            width={iconSize.width}
             draggable="false"
             alt={t('Kein Bildtext')}
           />
