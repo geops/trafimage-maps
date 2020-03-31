@@ -9,6 +9,7 @@ import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Layer from 'react-spatial/layers/Layer';
+import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Collapsible from '../Collapsible';
 import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
 
@@ -188,6 +189,11 @@ class TopicMenu extends PureComponent {
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
+    const menuVisibleLayers = !topic.layers
+      ? []
+      : topic.layers.filter(l => {
+          return !l.get('hideInLegend') && !(l instanceof MapboxStyleLayer);
+        });
     return (
       <div className="wkp-topic-menu">
         <div className="wkp-topic-menu-item-wrapper">
@@ -207,12 +213,14 @@ class TopicMenu extends PureComponent {
               </div>
               {t(topic.name)}
             </div>
-            <div
-              className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
-              style={{
-                display: topic.key === activeTopic.key ? 'block' : 'none',
-              }}
-            />
+            {menuVisibleLayers.length ? (
+              <div
+                className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
+                style={{
+                  display: topic.key === activeTopic.key ? 'block' : 'none',
+                }}
+              />
+            ) : null}
           </div>
           <div className="wkp-topic-icons">
             {topic && topic.permission && this.renderLockIcon(topic)}
