@@ -9,7 +9,6 @@ import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Layer from 'react-spatial/layers/Layer';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Collapsible from '../Collapsible';
 import { setActiveTopic, setSelectedForInfos } from '../../model/app/actions';
 
@@ -192,7 +191,7 @@ class TopicMenu extends PureComponent {
     const menuVisibleLayers = !topic.layers
       ? []
       : topic.layers.filter(l => {
-          return !l.get('hideInLegend') && !(l instanceof MapboxStyleLayer);
+          return !l.get('hideInLegend') && !l.isMapboxStyleLayer;
         });
     return (
       <div className="wkp-topic-menu">

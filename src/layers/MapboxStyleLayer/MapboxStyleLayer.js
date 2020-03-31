@@ -40,6 +40,7 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
 class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
     super(options);
+    this.isMapboxStyleLayer = true;
     this.options = options;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
