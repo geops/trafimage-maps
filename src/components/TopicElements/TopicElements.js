@@ -160,7 +160,7 @@ function TopicElements({ history, appBaseUrl }) {
           )}
         </EventConsumer>
         {appElements}
-        <MainDialog />
+        <MainDialog appRef={ref.current} />
       </div>
     </div>
   );

@@ -8,10 +8,12 @@ import layerInfos from '../../layerInfos';
 
 const propTypes = {
   selectedForInfos: PropTypes.object,
+  appRef: PropTypes.object,
 };
 
 const defaultProps = {
   selectedForInfos: null,
+  appRef: null,
 };
 
 export const NAME = 'infoDialog';
@@ -19,7 +21,7 @@ export const NAME = 'infoDialog';
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
-  const { selectedForInfos } = props;
+  const { selectedForInfos, appRef } = props;
 
   if (!selectedForInfos) {
     return null;
@@ -45,9 +47,18 @@ function LayerInfosDialog(props) {
     body = <Trans i18nKey={description} />;
   }
 
+  const [width, height] =
+    appRef && appRef.className
+      ? appRef.className
+          .split(' ')
+          .filter(c => /tm-w-|tm-h-/.test(c))
+          .map(c => c.slice(c.length - 1))
+      : [];
+
   return (
     <Dialog
       isDraggable
+      isModal={['xs', 's'].includes(height) && ['xs', 's'].includes(width)}
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaInfo } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +10,15 @@ import Dialog from '../Dialog';
 import LegalLines from '../LegalLines';
 import { setDialogPosition } from '../../model/app/actions';
 
-const MainDialog = () => {
+const propTypes = {
+  appRef: PropTypes.object,
+};
+
+const defaultProps = {
+  appRef: null,
+};
+
+const MainDialog = ({ appRef }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const dialogVisible = useSelector(state => state.app.dialogVisible);
@@ -20,6 +29,7 @@ const MainDialog = () => {
     return (
       <LayerInfosDialog
         selectedForInfos={selectedForInfos}
+        appRef={appRef}
         onDragStop={(evt, pos) => {
           dispatch(
             setDialogPosition({
@@ -52,4 +62,6 @@ const MainDialog = () => {
   return null;
 };
 
+MainDialog.propTypes = propTypes;
+MainDialog.defaultProps = defaultProps;
 export default MainDialog;
