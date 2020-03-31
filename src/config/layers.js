@@ -995,6 +995,7 @@ export const zweitausbildungRoutes = new Layer({
       name: 'ch.sbb.zweitausbildung.tourist.routes.group',
       key: 'ch.sbb.zweitausbildung.tourist.routes.group',
       visible: false,
+      isAlwaysExpanded: true,
       radioGroup: 'zweitausbildungRoutes',
       properties: {
         hasInfos: true,
@@ -1030,6 +1031,7 @@ export const zweitausbildungRoutes = new Layer({
       name: 'ch.sbb.zweitausbildung.hauptlinien.group',
       key: 'ch.sbb.zweitausbildung.hauptlinien.group',
       visible: true,
+      isAlwaysExpanded: true,
       radioGroup: 'zweitausbildungRoutes',
       properties: {
         hasInfos: true,
