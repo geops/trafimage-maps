@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import i18n from 'i18next';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
@@ -21,7 +20,8 @@ import {
 import SearchService from '../../components/Search/SearchService';
 
 const getInitialState = () => ({
-  // We set the permission to null instead of a default empty object to know when the request has been done.
+  // We set the permission to null instead of a default empty object
+  // to know when the request has been done.
   permissionsInfos: null,
   topics: [],
   featureInfo: [],
@@ -111,7 +111,6 @@ export default function app(state = getInitialState(), action) {
         departuresFilter: action.data,
       };
     case SET_PERMISSIONS_INFOS:
-      console.log('dispatch SET_PERMISSIONS_INFOS', action.data);
       return {
         ...state,
         permissionsInfos: action.data || {

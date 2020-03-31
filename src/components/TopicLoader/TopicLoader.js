@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-alert */
-/* eslint-disable no-debugger */
 import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -70,7 +67,6 @@ class TopicLoader extends Component {
     if (permissionUrl) {
       dispatchFetchPermissionsInfos(permissionUrl);
     } else {
-      console.log('loadTopics without permission');
       this.loadTopics();
     }
   }
@@ -97,14 +93,6 @@ class TopicLoader extends Component {
       this.updateServices(activeTopic);
     }
 
-    if (permissionsInfos !== prevProps.permissionsInfos) {
-      console.log('loadTopics permission changed');
-    }
-
-    if (topics !== prevProps.topics) {
-      console.log('loadTopics withtopcis changed');
-    }
-
     if (
       permissionsInfos !== prevProps.permissionsInfos ||
       topics !== prevProps.topics
@@ -125,7 +113,6 @@ class TopicLoader extends Component {
   }
 
   loadTopics() {
-    console.log('loadTopics');
     const matomo = this.context;
     const {
       topics,
@@ -149,25 +136,8 @@ class TopicLoader extends Component {
     let visibleActiveTopic = visibleTopics.find(t => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
-    console.log(
-      'redirect',
-      activeTopic,
-      visibleActiveTopic,
-      permissionsInfos,
-      isTopicNeedsPermission,
-    );
-
-    // If the user has receive permissions info, he's not logged in and the topic is hidden, we redirect to the login page.
-    if (permissionsInfos && !permissionsInfos.user && isTopicNeedsPermission) {
-      console.log(
-        'redirect',
-        activeTopic,
-        !visibleActiveTopic,
-        appBaseUrl,
-        permissionsInfos,
-      );
-      alert();
-      debugger;
+    // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
+    if (isTopicNeedsPermission && permissionsInfos && !permissionsInfos.user) {
       redirectToLogin(appBaseUrl);
       return;
     }
