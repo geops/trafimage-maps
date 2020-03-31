@@ -73,8 +73,8 @@
       #development-wrapper {
         transition: width ease 0.3s;
         color: #444;
-        width: 0px;
-        height: 0px;
+        width: 0;
+        height: 0;
       }
 
       #development-wrapper button {
@@ -163,57 +163,7 @@
       activeTopicKey="ch.sbb.netzkarte"
       permissionUrl="//maps.trafimage.ch"
     ></trafimage-maps>
-    <div id="buttons">
-      <button
-        type="button"
-        onclick="var bt = document.getElementById('buttons'); bt.style.height = (!bt.style.height || bt.style.height == '30px' ? '200px' : '30px');"
-      >
-        Toggle buttons
-      </button>
-      <button
-        type="button"
-        onclick="changeAttr('activeTopicKey','ch.sbb.handicap')"
-      >
-        change to handicap
-      </button>
-      <button
-        type="button"
-        onclick="changeAttr('activeTopicKey','ch.sbb.netzkarte')"
-      >
-        change to netzkarte
-      </button>
-      <button
-        type="button"
-        onclick="changeAttr('vectorTilesUrl', 'http://foo.ch')"
-      >
-        change vectorTilesUrl to http://foo.ch
-      </button>
-      <button type="button" onclick="changeAttr('apiKey', 'abcdefgh')">
-        change apiKey to 'abcdefgh'
-      </button>
-      <button type="button" onclick="changeAttr('vectorTilesKey', 'abcdefgh')">
-        change vectorTilesKey to 'abcdefgh'
-      </button>
-      <button
-        type="button"
-        onclick="changeAttr('geoserverUrl', 'http://foo.ch')"
-      >
-        change geoserverUrl to http://foo.ch
-      </button>
-      <button type="button" onclick="changeAttr('cartaroUrl', 'http://foo.ch')">
-        change cartaroUrl to http://foo.ch
-      </button>
-      <button type="button" onclick="changeAttr('center', '[950000, 6000000]')">
-        change center to '[950000, 5900000]'
-      </button>
-      <button type="button" onclick="changeAttr('zoom', 16)">
-        change zoom to 16
-      </button>
-      <button type="button" onclick="changeAttr('maxExtent', '502649.8980,5655117.1007,1352629.6525,6141868.0968')">
-        Set max extent to "502649.8980,5655117.1007,1352629.6525,6141868.0968"
-      </button>
-    </div>
-    <div id="events">n
+    <button
       type="button"
       id="development-bt"
       onclick="
@@ -286,6 +236,9 @@
         <div class="buttons-row">
           <button type="button" onclick="changeAttr('zoom', 16)">
             change zoom to 16
+          </button>
+          <button type="button" onclick="changeAttr('maxExtent', '502649.8980,5655117.1007,1352629.6525,6141868.0968')">
+            change max extent to "502649.8980,5655117.1007,1352629.6525,6141868.0968"
           </button>
         </div>
       </div>
