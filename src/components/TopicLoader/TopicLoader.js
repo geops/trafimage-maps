@@ -147,14 +147,18 @@ class TopicLoader extends Component {
           permissionsInfos.permissions.includes(t.permission)),
     );
     let visibleActiveTopic = visibleTopics.find(t => t.active);
+    const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
+
+    console.log(
+      'redirect',
+      activeTopic,
+      visibleActiveTopic,
+      permissionsInfos,
+      isTopicNeedsPermission,
+    );
 
     // If the user has receive permissions info, he's not logged in and the topic is hidden, we redirect to the login page.
-    if (
-      permissionsInfos &&
-      !permissionsInfos.user &&
-      activeTopic &&
-      !visibleActiveTopic
-    ) {
+    if (permissionsInfos && !permissionsInfos.user && isTopicNeedsPermission) {
       console.log(
         'redirect',
         activeTopic,
@@ -165,6 +169,11 @@ class TopicLoader extends Component {
       alert();
       debugger;
       redirectToLogin(appBaseUrl);
+      return;
+    }
+
+    // If the wanted topic can't be seen, we do nothing until the login redirect happens.
+    if (isTopicNeedsPermission && !permissionsInfos) {
       return;
     }
 
