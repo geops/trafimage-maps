@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
+/* eslint-disable no-debugger */
 import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -37,7 +40,7 @@ const propTypes = {
   permissionsInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.array,
-  }).isRequired,
+  }),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -57,6 +60,7 @@ const defaultProps = {
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionUrl: null,
+  permissionsInfos: null,
 };
 
 class TopicLoader extends Component {
@@ -65,9 +69,10 @@ class TopicLoader extends Component {
 
     if (permissionUrl) {
       dispatchFetchPermissionsInfos(permissionUrl);
+    } else {
+      console.log('loadTopics without permission');
+      this.loadTopics();
     }
-
-    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
@@ -92,6 +97,14 @@ class TopicLoader extends Component {
       this.updateServices(activeTopic);
     }
 
+    if (permissionsInfos !== prevProps.permissionsInfos) {
+      console.log('loadTopics permission changed');
+    }
+
+    if (topics !== prevProps.topics) {
+      console.log('loadTopics withtopcis changed');
+    }
+
     if (
       permissionsInfos !== prevProps.permissionsInfos ||
       topics !== prevProps.topics
@@ -112,6 +125,7 @@ class TopicLoader extends Component {
   }
 
   loadTopics() {
+    console.log('loadTopics');
     const matomo = this.context;
     const {
       topics,
@@ -121,17 +135,35 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
     } = this.props;
 
+    // Load onl ytopics when permissions are loaded, to avoid double loading.
     if (!topics.length) {
       return;
     }
     const activeTopic = topics.find(t => t.active);
     const visibleTopics = topics.filter(
-      t => !t.permission || permissionsInfos.permissions.includes(t.permission),
+      t =>
+        !t.permission ||
+        (permissionsInfos &&
+          permissionsInfos.permissions.includes(t.permission)),
     );
     let visibleActiveTopic = visibleTopics.find(t => t.active);
 
-    // If the topic is hidden, we redirect to the login page.
-    if (activeTopic && !visibleActiveTopic) {
+    // If the user has receive permissions info, he's not logged in and the topic is hidden, we redirect to the login page.
+    if (
+      permissionsInfos &&
+      !permissionsInfos.user &&
+      activeTopic &&
+      !visibleActiveTopic
+    ) {
+      console.log(
+        'redirect',
+        activeTopic,
+        !visibleActiveTopic,
+        appBaseUrl,
+        permissionsInfos,
+      );
+      alert();
+      debugger;
       redirectToLogin(appBaseUrl);
       return;
     }
