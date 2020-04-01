@@ -64,6 +64,7 @@ const Footer = () => {
           {t('Rechtliches')}
         </ActionLink>
         <a
+          className="wkp-dev-portal-link"
           href="https://doc.trafimage.ch"
           rel="noopener noreferrer"
           target="_blank"

@@ -144,7 +144,7 @@
     select {
       margin: 4px 20px 5px 23px;
       height: 30px;
-      width: 307px;
+      width: calc(100% - 42px);
       display: none;
     }
   }

@@ -16,7 +16,7 @@ import {
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
-import redirectHelper from '../../utils/redirectHelper';
+import { redirect, redirectToLogin } from '../../utils/redirectHelper';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -25,7 +25,6 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  activeTopicKey: PropTypes.string,
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
@@ -40,7 +39,7 @@ const propTypes = {
   permissionsInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.array,
-  }).isRequired,
+  }),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -60,8 +59,8 @@ const defaultProps = {
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionUrl: null,
+  permissionsInfos: null,
   staticFilesUrl: null,
-  activeTopicKey: null,
 };
 
 class TopicLoader extends Component {
@@ -70,9 +69,9 @@ class TopicLoader extends Component {
 
     if (permissionUrl) {
       dispatchFetchPermissionsInfos(permissionUrl);
+    } else {
+      this.loadTopics();
     }
-
-    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
@@ -122,32 +121,47 @@ class TopicLoader extends Component {
     const matomo = this.context;
     const {
       topics,
+      appBaseUrl,
       permissionsInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
-      activeTopicKey,
     } = this.props;
 
+    // Load onl ytopics when permissions are loaded, to avoid double loading.
     if (!topics.length) {
       return;
     }
-
+    const activeTopic = topics.find(t => t.active);
     const visibleTopics = topics.filter(
-      t => !t.permission || permissionsInfos.permissions.includes(t.permission),
+      t =>
+        !t.permission ||
+        t(
+          permissionsInfos &&
+            permissionsInfos.permissions.includes(t.permission),
+        ),
     );
-    const asyncTopics = topics.filter(t => t.permission);
+    let visibleActiveTopic = visibleTopics.find(t => t.active);
+    const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
-    const activeTopic =
-      visibleTopics.find(topic => topic.active) ||
-      asyncTopics.find(topic => topic.key === activeTopicKey) ||
-      topics[0];
-    activeTopic.active = true; // in case we fall back to the first topic.
+    // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
+    if (isTopicNeedsPermission && permissionsInfos && !permissionsInfos.user) {
+      redirectToLogin(appBaseUrl);
+      return;
+    }
+
+    // If the wanted topic can't be seen, we do nothing until the login redirect happens.
+    if (isTopicNeedsPermission && !permissionsInfos) {
+      return;
+    }
+
+    visibleActiveTopic = visibleActiveTopic || topics[0];
+    visibleActiveTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
-    dispatchSetActiveTopic(activeTopic);
-    this.updateServices(activeTopic);
+    dispatchSetActiveTopic(visibleActiveTopic);
+    this.updateServices(visibleActiveTopic);
 
     if (matomo) {
-      matomo.trackEvent({ category: activeTopic.name, action: 'load' });
+      matomo.trackEvent({ category: visibleActiveTopic.name, action: 'load' });
     }
   }
 
@@ -169,7 +183,7 @@ class TopicLoader extends Component {
 
     if (activeTopic.redirect) {
       // Redirection to the old wkp
-      redirectHelper.redirect(appBaseUrl, activeTopic.key, {
+      redirect(appBaseUrl, activeTopic.key, {
         baselayers: '',
         layers: '',
       });
