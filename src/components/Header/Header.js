@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { AiOutlineUser } from 'react-icons/ai';
 import UIHeader from '@geops/react-ui/components/Header';
 import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
+import LanguageSelect from '../LanguageSelect';
 
 import './Header.scss';
 
@@ -28,6 +29,7 @@ const Header = ({ appBaseUrl }) => {
             <span className="wkp-header-login-text">{login}</span>
           </a>
         </div>
+        <LanguageSelect />
         <SBBLogo focusable={false} className="wkp-header-sbb-logo" />
       </div>
     </UIHeader>
