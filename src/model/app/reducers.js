@@ -16,6 +16,7 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSIONS_INFOS,
+  SET_IS_MOBILE,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 
@@ -44,6 +45,7 @@ const getInitialState = () => ({
   }),
   layerService: new LayerService(),
   searchService: new SearchService(),
+  isMobile: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -115,6 +117,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         permissionsInfos: action.data,
+      };
+    case SET_IS_MOBILE:
+      return {
+        ...state,
+        isMobile: action.data,
       };
     default:
       return {
