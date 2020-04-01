@@ -18,7 +18,6 @@ import {
   SET_PERMISSIONS_INFOS,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
-import layerHelper from '../../layers/layerHelper';
 
 const getInitialState = () => ({
   permissionsInfos: {
@@ -44,7 +43,7 @@ const getInitialState = () => ({
     }),
   }),
   layerService: new LayerService(),
-  searchService: new SearchService(layerHelper.highlightStyle),
+  searchService: new SearchService(),
 });
 
 export default function app(state = getInitialState(), action) {

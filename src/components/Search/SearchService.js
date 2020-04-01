@@ -62,7 +62,6 @@ class SearchService {
 
     if (feature) {
       this.highlightLayer.getSource().addFeature(feature);
-
       if (persistent) {
         this.highlightFeature = feature;
         this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
