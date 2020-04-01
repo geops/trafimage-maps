@@ -111,8 +111,8 @@ class IconList extends PureComponent {
     if (displayOnTop) {
       const rect = this.ref.current.getBoundingClientRect();
       const listStyles = {
-        top: `${rect.y + rect.height}px`,
-        left: `${rect.x}px`,
+        top: `${rect.top + rect.height}px`,
+        left: `${rect.left}px`,
       };
 
       const targetElements = document.getElementsByClassName(
