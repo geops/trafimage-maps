@@ -188,8 +188,8 @@ class TopicMenu extends PureComponent {
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
-    const menuVisibleLayers = (topic.layers || []).filter(l => {
-      return !l.get('hideInLegend') && !l.isMapboxStyleLayer;
+    const isMenuVisibleLayers = (topic.layers || []).find(l => {
+      return !l.get('hideInLegend');
     });
     return (
       <div className="wkp-topic-menu">
@@ -210,7 +210,7 @@ class TopicMenu extends PureComponent {
               </div>
               {t(topic.name)}
             </div>
-            {menuVisibleLayers.length ? (
+            {isMenuVisibleLayers ? (
               <div
                 className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
                 style={{
