@@ -189,7 +189,7 @@ class TopicMenu extends PureComponent {
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
     const menuVisibleLayers = (topic.layers || []).filter(l => {
-       return !l.get('hideInLegend') && !l.isMapboxStyleLayer;
+      return !l.get('hideInLegend') && !l.isMapboxStyleLayer;
     });
     return (
       <div className="wkp-topic-menu">
