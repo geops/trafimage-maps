@@ -41,7 +41,7 @@
     invariant "^2.2.4"
     semver "^5.5.0"
 
-"@babel/core@7.9.0", "@babel/core@>=7.2.2", "@babel/core@^7.1.0", "@babel/core@^7.1.2", "@babel/core@^7.4.5", "@babel/core@^7.7.5", "@babel/core@^7.8.7":
+"@babel/core@7.9.0", "@babel/core@>=7.2.2", "@babel/core@^7.1.0", "@babel/core@^7.1.2", "@babel/core@^7.4.5", "@babel/core@^7.7.5", "@babel/core@^7.9.0":
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.9.0.tgz#ac977b538b77e132ff706f3b8a4dbad09c03c56e"
   integrity sha512-kWc7L0fw1xwvI0zi8OKVBuxRVefwGOrKSQMvrQ3dW+bIIavBY3/NpXmpjMy7bQnLgwgzWQZ8TlM57YHpHNHz4w==
@@ -4757,7 +4757,7 @@ cypress-plugin-tab@^1.0.5:
   dependencies:
     ally.js "^1.4.1"
 
-cypress@^4.2.0:
+cypress@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-4.3.0.tgz#74694c2407846119368a6aecc456b3ee1a8ee32b"
   integrity sha512-xO1oef4ns4koDAkQROGJIhKKhGHDOKfOmlirwP1QAk9w/no+YJpN7HZ6IUPiXwWw3C7xVLjScoI8Dad0z5uTTg==
@@ -7207,9 +7207,9 @@ github-slugger@^1.0.0, github-slugger@^1.2.1:
     emoji-regex ">=6.0.0 <=6.1.1"
 
 gl-matrix@^3.0.0:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.2.1.tgz#2d8e35125bf854f49abded8a0c8350b1a4907a26"
-  integrity sha512-YYVO8jUSf6+SakL4AJmx9Jc7zAZhkJQ+WhdtX3VQe5PJdCOX6/ybY4x1vk+h94ePnjRn6uml68+QxTAJneUpvA==
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gl-matrix/-/gl-matrix-3.3.0.tgz#232eef60b1c8b30a28cbbe75b2caf6c48fd6358b"
+  integrity sha512-COb7LDz+SXaHtl/h4LeaFcNdJdAQSDeVqjiIihSXNrkWObZLhDI4hIkZC11Aeqp7bcE72clzB0BnDXr2SmslRA==
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -9469,10 +9469,10 @@ jss@10.1.1, jss@^10.0.0:
     is-in-browser "^1.1.3"
     tiny-warning "^1.0.2"
 
-jsts@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/jsts/-/jsts-2.1.1.tgz#b845569dd9f5423d43094776288eabbbd5f31799"
-  integrity sha512-CEx7DKa4QkaYx5kUP/8O9HQTwLuNpqJ/SzGtAu55I3xN64L/5SdTavET8RX5tqtZxaW2dwkgBhnW7WEXeI0LUA==
+jsts@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/jsts/-/jsts-2.1.0.tgz#6a724e9d38de8a69585f7ace09d87bf4bbda68e5"
+  integrity sha512-gxv7hw5FmXwoieHBNKyrl+DZVp1aaJbUPDgPRGf54y7owWoq75CWwL6VCmdKxt5jaMHh9CKOaG1u/WZJRUM5NA==
 
 jsx-ast-utils@^2.2.1, jsx-ast-utils@^2.2.3:
   version "2.2.3"
@@ -10806,6 +10806,22 @@ node-notifier@^5.4.2:
     semver "^5.5.0"
     shellwords "^0.1.1"
     which "^1.3.0"
+
+node-pre-gyp@*:
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.14.0.tgz#9a0596533b877289bcad4e143982ca3d904ddc83"
+  integrity sha512-+CvDC7ZttU/sSt9rFjix/P05iS43qHCOOGzcr3Ry99bXG7VX953+vFyEuph/tfqoYu8dttBkE86JSKBO2OzcxA==
+  dependencies:
+    detect-libc "^1.0.2"
+    mkdirp "^0.5.1"
+    needle "^2.2.1"
+    nopt "^4.0.1"
+    npm-packlist "^1.1.6"
+    npmlog "^4.0.2"
+    rc "^1.2.7"
+    rimraf "^2.6.1"
+    semver "^5.3.0"
+    tar "^4.4.2"
 
 node-pre-gyp@^0.11.0:
   version "0.11.0"
@@ -13305,9 +13321,9 @@ react-simple-code-editor@^0.10.0:
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
 react-spatial@^0.2.9:
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.2.13.tgz#d6a95e8c403836c3e36959e0832522887889f696"
-  integrity sha512-foggzQzqZ65KShbkMjOSFooR2av6QGdwoDXMstwKB+AEP7DGwt56MTNzthKwNOhA63ifd1HiCJlZ2HdEii7waQ==
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.2.14.tgz#2093ebceb57f980d6cb1f53ef786bb02ef6c65a6"
+  integrity sha512-sdxV9vR3IQjYoSejz8vpek6wknRsC/0XI91TfqcahAGCXbqI9pgsaS02Z2wurlpysPifbs5j9kxjMaeW79tWmw==
   dependencies:
     query-string "^6.11.1"
     radians-degrees "^1.0.0"
@@ -15716,7 +15732,7 @@ tar@^2.0.0:
     fstream "^1.0.12"
     inherits "2"
 
-tar@^4:
+tar@^4, tar@^4.4.2:
   version "4.4.13"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.13.tgz#43b364bc52888d555298637b10d60790254ab525"
   integrity sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
