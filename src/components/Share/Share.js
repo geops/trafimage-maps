@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope, FaPencilAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPencilAlt, FaQuestion } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import Button from '@geops/react-ui/components/Button';
@@ -29,6 +29,12 @@ const socialShareConfig = [
     icon: <TiSocialTwitter focusable={false} />,
     className: 'ta-twitter-icon',
   },
+  {
+    url: '{appBase}/static/app_trafimage/docs/{language}/Quickstart.pdf',
+    title: 'Quickstart Manual Trafimage Webkartenportal',
+    icon: <FaQuestion focusable={false} />,
+    className: 'ta-manual-icon',
+  },
 ];
 
 const propTypes = {
@@ -48,13 +54,22 @@ const renderConf = (conf, t) => (
 );
 
 const Share = ({ appBaseUrl }) => {
+  const activeTopic = useSelector(state => state.app.activeTopic);
+  const language = useSelector(state => state.app.language);
   const map = useSelector(state => state.app.map);
   const { t } = useTranslation();
-  const config = [...socialShareConfig];
+  const duplicateConfig = JSON.parse(JSON.stringify(socialShareConfig));
 
-  for (let i = 0; i < config.length; i += 1) {
-    if (config[i].url) {
-      config[i].url = config[i].url.replace('{url}', window.location.href);
+  for (let i = 0; i < socialShareConfig.length; i += 1) {
+    // Ensure the correct icon value.
+    duplicateConfig[i].icon = socialShareConfig[i].icon;
+    if (socialShareConfig[i].url) {
+      const test = { ...duplicateConfig[i] }.url;
+
+      duplicateConfig[i].url = test
+        .replace('{url}', window.location.href)
+        .replace('{language}', language)
+        .replace('{appBase}', appBaseUrl);
     }
   }
 
@@ -62,12 +77,13 @@ const Share = ({ appBaseUrl }) => {
   return (
     <div className="wkp-share">
       <SharePermalinkButton />
-      {renderConf(config[0], t)}
+      {renderConf(duplicateConfig[0], t)}
       <CanvasSaveButton aria-label={title} map={map}>
         <TiImage focusable={false} title={title} />
       </CanvasSaveButton>
-      {renderConf(config[1], t)}
-      {renderConf(config[2], t)}
+      {renderConf(duplicateConfig[1], t)}
+      {renderConf(duplicateConfig[2], t)}
+      {!activeTopic.permission ? renderConf(duplicateConfig[3], t) : null}
       <div className="ta-draw-icon">
         <Button
           onClick={() =>
