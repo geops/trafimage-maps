@@ -210,7 +210,7 @@ class TopicMenu extends PureComponent {
               </div>
               {t(topic.name)}
             </div>
-            {menuVisibleLayers.length ? (
+            {!!menuVisibleLayers.length && (
               <div
                 className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
                 style={{
