@@ -22,6 +22,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   constructor(options = {}) {
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
+      source: new OLVectorSource({
+        format: new GeoJSON(),
+      }),
     });
 
     super({
@@ -30,42 +33,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     });
 
     this.styleCache = {};
-
-    // Set the layer initially visible
-    // in order to load the data and populate the dropdown
-    // Then the visibility is set the the initial value.
-    this.initialVisible = this.visible;
-    this.setVisible(true);
-
     this.zweitProps = this.get('zweitausbildung') || {};
-    const layerParam = this.zweitProps.layer
-      ? `layer=${this.zweitProps.layer}&`
-      : '';
 
-    this.source = new OLVectorSource({
-      format: new GeoJSON(),
-      loader: () => {
-        fetch(
-          `${this.geoJsonCacheUrl}?` +
-            `${layerParam}workspace=trafimage` +
-            '&srsName=EPSG:3857&geoserver=wkp',
-        )
-          .then(data => data.json())
-          .then(data => {
-            const format = new GeoJSON();
-            this.features = format.readFeatures(data);
-            this.olLayer.getSource().clear();
-            this.olLayer.getSource().addFeatures(this.features);
-
-            this.populate();
-
-            // Set the visibility to the initial value
-            this.setVisible(this.initialVisible);
-          });
-      },
-    });
-
-    olLayer.setSource(this.source);
+    this.setVisible(this.visible);
 
     this.routes = {};
     this.options = [];
@@ -89,6 +59,32 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     this.onSelect();
   }
 
+  /**
+   * Load the data independently from the vector source loader
+   * to make sure that the dropdown is always popuplated,
+   * even when the layer is invisible, e.g. because of the permalink.
+   */
+  load() {
+    const layerParam = this.zweitProps.layer
+      ? `layer=${this.zweitProps.layer}&`
+      : '';
+
+    fetch(
+      `${this.geoJsonCacheUrl}?` +
+        `${layerParam}workspace=trafimage` +
+        '&srsName=EPSG:3857&geoserver=wkp',
+    )
+      .then(data => data.json())
+      .then(data => {
+        const format = new GeoJSON();
+        this.features = format.readFeatures(data);
+        this.olLayer.getSource().clear();
+        this.olLayer.getSource().addFeatures(this.features);
+
+        this.populate();
+      });
+  }
+
   populate() {
     this.options = [];
     for (let i = 0; i < this.features.length; i += 1) {
@@ -104,7 +100,11 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       this.features[i].set('label', label);
       if (this.options.indexOf(label) === -1) {
         this.options.push(label);
-        this.icons[label] = feature.get('line_number');
+        this.icons[label] = feature.get('line_number')
+          ? `${
+              process.env.REACT_APP_STATIC_FILES_URL
+            }/img/layers/zweitausbildung/${feature.get('line_number')}.png`
+          : null;
       }
     }
 
@@ -131,6 +131,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
           selected={this.selected}
           icons={this.icons}
           onSelect={this.onSelect}
+          displayOnTop
         />
       );
     }
@@ -199,6 +200,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
 
   setGeoJsonUrl(geoJsonCacheUrl) {
     this.geoJsonCacheUrl = geoJsonCacheUrl;
+    this.load();
   }
 
   setGeoServerUrl(geoServerUrl) {

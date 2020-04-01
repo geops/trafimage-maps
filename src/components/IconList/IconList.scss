@@ -1,19 +1,19 @@
-.wkp-image-dropdown-button,
-.wkp-image-dropdown-current {
+.wkp-icon-list-button,
+.wkp-icon-list-current {
   width: 210px;
 }
 
-.wkp-image-dropdown-button {
+.wkp-icon-list-button {
   display: flex;
   flex-direction: row;
   padding: 5px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 
-  .wkp-image-dropdown-current {
+  .wkp-icon-list-current {
     display: flex;
     flex-direction: row;
 
-    .wkp-zweitausbildung-routes-dropdown-label {
+    .wkp-icon-list-label {
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -22,14 +22,11 @@
   }
 }
 
-.wkp-image-dropdown-list {
-  position: absolute;
+.wkp-icon-list-list {
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border: 1px solid #e6e6e6;
   background-color: #fff;
   max-height: 150px;
-  width: 219px;
-  z-index: 800;
   overflow-y: auto;
 
   .tm-list-item {
@@ -46,10 +43,34 @@
 }
 
 /* General settings for both, the button and the list */
-.wkp-zweitausbildung-routes-dropdown-icon {
+.wkp-icon-list-icon {
   padding-right: 5px;
 
   & > img {
     vertical-align: middle;
   }
+}
+
+.wkp-icon-list-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+
+  .wkp-icon-list-modal-pos {
+    position: absolute;
+
+    .wkp-icon-list-list {
+      width: 500px;
+    }
+  }
+}
+
+.wkp-icon-list-non-modal {
+  position: absolute !important;
+  width: 219px;
+  z-index: 800;
 }
