@@ -11,6 +11,10 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import netzkarte from '../img/netzkarte.png';
+import landeskarte from '../img/landeskarte.png';
+import landeskarteGrau from '../img/landeskarte_grau.png';
+import luftbild from '../img/luftbild.png';
 
 proj4.defs(
   'EPSG:21781',
@@ -133,6 +137,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: () => {
     return false;
   },
+  previewImage: netzkarte,
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
@@ -146,6 +151,7 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   styleLayersFilter: styleLayer => {
     return /(swissimage|netzkarte)/.test(styleLayer.id);
   },
+  previewImage: luftbild,
 });
 
 export const swisstopoLandeskarte = new MapboxStyleLayer({
@@ -158,6 +164,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   styleLayersFilter: styleLayer => {
     return /pixelkarte_farbe/.test(styleLayer.id);
   },
+  previewImage: landeskarte,
 });
 
 export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
@@ -170,6 +177,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   styleLayersFilter: styleLayer => {
     return /pixelkarte_grau/.test(styleLayer.id);
   },
+  previewImage: landeskarteGrau,
 });
 
 export const passagierfrequenzen = new MapboxStyleLayer({

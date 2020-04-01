@@ -115,7 +115,7 @@ export default {
     menu: true,
     popup: true,
     permalink: false,
-    baseLayerToggler: true,
+    baseLayerSwitcher: true,
   },
   layers: [netzkarteShowcasesLight, netzkarteLayer, swisstopoSwissImage],
 };
