@@ -139,6 +139,7 @@ function TopicElements({ history, appBaseUrl }) {
           openSwitcher: t('Baselayer-Menu öffnen'),
           closeSwitcher: t('Baselayer-Menu Schliessen'),
         }}
+        t={t}
       />
     ),
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
