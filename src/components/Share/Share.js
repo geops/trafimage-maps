@@ -8,7 +8,7 @@ import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import Button from '@geops/react-ui/components/Button';
 import SharePermalinkButton from '../SharePermalinkButton';
-import redirectHelper from '../../utils/redirectHelper';
+import { redirect } from '../../utils/redirectHelper';
 
 const socialShareConfig = [
   {
@@ -71,7 +71,7 @@ const Share = ({ appBaseUrl }) => {
       <div className="ta-draw-icon">
         <Button
           onClick={() =>
-            redirectHelper.redirect(appBaseUrl, 'ch.sbb.netzkarte.draw', {
+            redirect(appBaseUrl, 'ch.sbb.netzkarte.draw', {
               'wkp.draw': '',
             })
           }

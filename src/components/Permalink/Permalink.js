@@ -7,8 +7,7 @@ import qs from 'query-string';
 import OLMap from 'ol/Map';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
-
-import redirectHelper from '../../utils/redirectHelper';
+import { redirect } from '../../utils/redirectHelper';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
@@ -69,7 +68,7 @@ class Permalink extends PureComponent {
 
     if (parameters['wkp.draw']) {
       // Redirection to the old wkp to use the drawing tool.
-      redirectHelper.redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+      redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
     }
 
     const getUrlParamKey = (params, regex) => {
