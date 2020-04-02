@@ -20,6 +20,7 @@ const propTypes = {
   featureInfo: PropTypes.arrayOf(PropTypes.shape()),
   center: PropTypes.arrayOf(PropTypes.number),
   extent: PropTypes.arrayOf(PropTypes.number),
+  maxExtent: PropTypes.arrayOf(PropTypes.number),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
@@ -42,6 +43,7 @@ const defaultProps = {
   featureInfo: [],
   layers: [],
   extent: undefined,
+  maxExtent: undefined,
   resolution: undefined,
   zoom: 9,
   maxZoom: 20,
@@ -207,6 +209,7 @@ class Map extends PureComponent {
       layers,
       map,
       resolution,
+      maxExtent,
       extent,
       t,
     } = this.props;
@@ -224,6 +227,7 @@ class Map extends PureComponent {
           onMapMoved={(evt) => this.onMapMoved(evt)}
           viewOptions={{
             maxZoom,
+            extent: maxExtent,
           }}
         />
       </>
@@ -242,6 +246,7 @@ const mapStateToProps = (state) => ({
   extent: state.map.extent,
   resolution: state.map.resolution,
   zoom: state.map.zoom,
+  maxExtent: state.map.maxExtent,
 });
 
 const mapDispatchToProps = {

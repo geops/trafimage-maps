@@ -20,10 +20,9 @@ import {
 import SearchService from '../../components/Search/SearchService';
 
 const getInitialState = () => ({
-  permissionsInfos: {
-    user: null,
-    permissions: [],
-  },
+  // We set the permission to null instead of a default empty object
+  // to know when the request has been done.
+  permissionsInfos: null,
   topics: [],
   featureInfo: [],
   language: 'de',
@@ -114,7 +113,10 @@ export default function app(state = getInitialState(), action) {
     case SET_PERMISSIONS_INFOS:
       return {
         ...state,
-        permissionsInfos: action.data,
+        permissionsInfos: action.data || {
+          user: null,
+          permissions: [],
+        },
       };
     default:
       return {
