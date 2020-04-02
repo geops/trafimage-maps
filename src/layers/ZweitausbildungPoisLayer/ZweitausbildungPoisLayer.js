@@ -79,6 +79,13 @@ class ZweitausbildungPoisLayer extends VectorLayer {
 
     this.olLayerHighlight = new OLVectorLayer({
       map,
+      // Use a dummy geometry to avoid rendering the default style
+      // under the animation circle.
+      // With a null style or an empty new Style(),
+      // the postrender callback function would not be called.
+      style: new Style({
+        image: new Circle(),
+      }),
       source: new OLVectorSource(),
     });
 
