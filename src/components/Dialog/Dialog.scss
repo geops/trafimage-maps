@@ -86,8 +86,8 @@
       top: unset !important;
       bottom: 0 !important;
       width: calc(100% - 20px) !important;
-      height: calc(40% - 10px) !important;
-      max-height: 50% !important;
+      height: calc(60% - 10px) !important;
+      max-height: 60% !important;
       transform: none !important; // block drag
 
       .tm-dialog {
@@ -100,6 +100,7 @@
 
         .tm-dialog-body {
           height: calc(100% - 50px);
+          padding-bottom: 0;
           overflow-y: auto;
           overflow-x: auto;
         }
