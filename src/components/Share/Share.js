@@ -45,9 +45,19 @@ const defaultProps = {
   appBaseUrl: null,
 };
 
-const renderConf = (conf, t) => (
+const replaceParams = (url, language, appBaseUrl) => {
+  return url
+    .replace('{url}', window.location.href)
+    .replace('{language}', language)
+    .replace('{appBaseUrl}', appBaseUrl);
+};
+
+const renderConf = (conf, t, lang, appBaseUrl) => (
   <div className={conf.className} key={conf.title}>
-    <BlankLink href={conf.url} title={t(conf.title)}>
+    <BlankLink
+      href={replaceParams(conf.url, lang, appBaseUrl)}
+      title={t(conf.title)}
+    >
       {conf.icon}
     </BlankLink>
   </div>
@@ -58,32 +68,21 @@ const Share = ({ appBaseUrl }) => {
   const language = useSelector(state => state.app.language);
   const map = useSelector(state => state.app.map);
   const { t } = useTranslation();
-  const duplicateConfig = JSON.parse(JSON.stringify(socialShareConfig));
-
-  for (let i = 0; i < socialShareConfig.length; i += 1) {
-    // Ensure the correct icon value.
-    duplicateConfig[i].icon = socialShareConfig[i].icon;
-    if (socialShareConfig[i].url) {
-      const test = { ...duplicateConfig[i] }.url;
-
-      duplicateConfig[i].url = test
-        .replace('{url}', window.location.href)
-        .replace('{language}', language)
-        .replace('{appBaseUrl}', appBaseUrl);
-    }
-  }
+  const config = [...socialShareConfig];
 
   const title = t('Karte als Bild speichern');
   return (
     <div className="wkp-share">
       <SharePermalinkButton />
-      {renderConf(duplicateConfig[0], t)}
+      {renderConf(config[0], t, language, appBaseUrl)}
       <CanvasSaveButton aria-label={title} map={map}>
         <TiImage focusable={false} title={title} />
       </CanvasSaveButton>
-      {renderConf(duplicateConfig[1], t)}
-      {renderConf(duplicateConfig[2], t)}
-      {!activeTopic.permission ? renderConf(duplicateConfig[3], t) : null}
+      {renderConf(config[1], t, language, appBaseUrl)}
+      {renderConf(config[2], t, language, appBaseUrl)}
+      {!activeTopic.permission
+        ? renderConf(config[3], t, language, appBaseUrl)
+        : null}
       <div className="ta-draw-icon">
         <Button
           onClick={() =>
