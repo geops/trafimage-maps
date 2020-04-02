@@ -672,7 +672,7 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: styleLayer => {
-    return /_SBB/.test(styleLayer.id);
+    return /(?<!only)_SBB/.test(styleLayer.id);
   },
   properties: {
     hasInfos: true,
@@ -698,7 +698,7 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: styleLayer => {
-    return /_KTU/.test(styleLayer.id);
+    return /(?<!only)_KTU/.test(styleLayer.id);
   },
   properties: {
     hasInfos: true,
