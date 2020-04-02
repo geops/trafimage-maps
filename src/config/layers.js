@@ -697,7 +697,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur',
+  style: 'netzkarte_eisenbahninfrastruktur_v2',
   properties: {
     hasInfos: true,
     layerInfoComponent: 'InfrastrukturTopicInfo',
@@ -709,7 +709,7 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: styleLayer => {
-    return /_SBB/.test(styleLayer.id);
+    return /(?<!only)_SBB/.test(styleLayer.id);
   },
   properties: {
     hasInfos: true,
@@ -735,7 +735,7 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: styleLayer => {
-    return /_KTU/.test(styleLayer.id);
+    return /(?<!only)_KTU/.test(styleLayer.id);
   },
   properties: {
     hasInfos: true,
