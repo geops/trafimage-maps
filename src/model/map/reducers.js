@@ -1,4 +1,10 @@
-import { SET_LAYERS, SET_CENTER, SET_RESOLUTION, SET_ZOOM } from './actions';
+import {
+  SET_LAYERS,
+  SET_CENTER,
+  SET_RESOLUTION,
+  SET_ZOOM,
+  SET_MAX_EXTENT,
+} from './actions';
 
 const initialState = {
   layers: [],
@@ -45,6 +51,16 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         zoom: action.data,
+      };
+    case SET_MAX_EXTENT:
+      if (!action.data) {
+        return {
+          ...state,
+        };
+      }
+      return {
+        ...state,
+        maxExtent: action.data,
       };
     default:
       return {
