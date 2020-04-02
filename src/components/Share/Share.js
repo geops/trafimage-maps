@@ -30,7 +30,7 @@ const socialShareConfig = [
     className: 'ta-twitter-icon',
   },
   {
-    url: '{appBase}/static/app_trafimage/docs/{language}/Quickstart.pdf',
+    url: '{appBaseUrl}/static/app_trafimage/docs/{language}/Quickstart.pdf',
     title: 'Quickstart Manual Trafimage Webkartenportal',
     icon: <FaQuestion focusable={false} />,
     className: 'ta-manual-icon',
@@ -69,7 +69,7 @@ const Share = ({ appBaseUrl }) => {
       duplicateConfig[i].url = test
         .replace('{url}', window.location.href)
         .replace('{language}', language)
-        .replace('{appBase}', appBaseUrl);
+        .replace('{appBaseUrl}', appBaseUrl);
     }
   }
 
