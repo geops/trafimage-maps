@@ -210,14 +210,14 @@ class TopicMenu extends PureComponent {
               </div>
               {t(topic.name)}
             </div>
-            {isMenuVisibleLayers ? (
+            {isMenuVisibleLayers && (
               <div
                 className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
                 style={{
                   display: topic.key === activeTopic.key ? 'block' : 'none',
                 }}
               />
-            ) : null}
+            )}
           </div>
           <div className="wkp-topic-icons">
             {topic && topic.permission && this.renderLockIcon(topic)}
