@@ -111,8 +111,8 @@ class ZweitausbildungPoisLayer extends VectorLayer {
       return;
     }
 
-    const elapsedRatio = elapsed / duration;
-    // radius will be 1 at start and 14 at end
+    const elapsedRatio = Math.min(elapsed, duration) / duration;
+    // radius will be >= 1 at start and maxRadius+1 at end
     const radius = easeOut(elapsedRatio) * maxRadius + 1;
 
     const style = new Style({
