@@ -11,7 +11,7 @@ import { Provider } from 'react-redux';
 import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
-import { setZoom, setCenter } from '../../model/map/actions';
+import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import { setLanguage, setCartaroOldUrl } from '../../model/app/actions';
 
 const propTypes = {
@@ -53,6 +53,12 @@ const propTypes = {
    * @private
    */
   zoom: PropTypes.number,
+
+  /**
+   * Limit the map extent.
+   * @private
+   */
+  maxExtent: PropTypes.arrayOf(PropTypes.number),
 
   /**
    * API key for using geOps services.
@@ -117,6 +123,7 @@ const defaultProps = {
   history: null,
   center: [925472, 5920000],
   zoom: undefined,
+  maxExtent: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
@@ -158,8 +165,9 @@ class TrafimageMaps extends React.PureComponent {
       zoom,
       center,
       language,
-      cartaroOldUrl,
       enableTracking,
+      cartaroOldUrl,
+      maxExtent,
     } = this.props;
 
     if (zoom) {
@@ -174,6 +182,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
     }
 
+    if (maxExtent) {
+      this.store.dispatch(setMaxExtent(maxExtent));
+    }
+
     if (language) {
       this.store.dispatch(setLanguage(language));
     }
@@ -184,7 +196,13 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center, cartaroOldUrl, enableTracking } = this.props;
+    const {
+      zoom,
+      center,
+      cartaroOldUrl,
+      enableTracking,
+      maxExtent,
+    } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -196,6 +214,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (cartaroOldUrl !== prevProps.cartaroOldUrl) {
       this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
+    }
+
+    if (maxExtent !== prevProps.maxExtent) {
+      this.store.dispatch(setMaxExtent(maxExtent));
     }
 
     if (matomo && !prevProps.enableTracking && enableTracking) {
