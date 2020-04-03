@@ -14,12 +14,21 @@ const MainDialog = () => {
   const { t } = useTranslation();
   const dialogVisible = useSelector(state => state.app.dialogVisible);
   const language = useSelector(state => state.app.language);
+  const isMobileWidth = useSelector(state => state.app.isMobileWidth);
   const selectedForInfos = useSelector(state => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
     return (
       <LayerInfosDialog
         selectedForInfos={selectedForInfos}
+        style={{
+          top: 'unset',
+          bottom: isMobileWidth ? '0px' : 'unset',
+          padding: '10px',
+          zIndex: '1',
+        }}
+        width="calc(100% - 20px)"
+        height="auto"
         onDragStop={(evt, pos) => {
           dispatch(
             setDialogPosition({

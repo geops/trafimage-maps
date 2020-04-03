@@ -1,4 +1,8 @@
 .wkp-dialog {
+  .tm-rnd {
+    bottom: unset;
+  }
+
   .tm-dialog,
   .tm-modal {
     z-index: 10000;
@@ -25,8 +29,8 @@
       padding: 20px;
       width: auto;
       text-align: left;
-      max-height: calc(100% - 70px);
-
+      min-height: 100px;
+      overflow: auto;
       p {
         margin: 0;
         margin-top: 1em;
@@ -83,25 +87,16 @@
 .tm-w-s {
   .wkp-dialog {
     .tm-rnd {
-      top: unset !important;
-      bottom: 0 !important;
-      width: calc(100% - 20px) !important;
-      height: calc(40% - 10px) !important;
-      max-height: 50% !important;
-      transform: none !important; // block drag
-
       .tm-dialog {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
+        position: relative;
+        max-height: calc(100vh / 2);
+        left: 0;
+        right: 0;
+        top: unset;
+        bottom: 0;
 
         .tm-dialog-body {
-          height: calc(100% - 50px);
-          overflow-y: auto;
-          overflow-x: auto;
+          max-height: calc((100vh / 2) - 100px);
         }
       }
     }

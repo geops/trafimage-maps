@@ -7,10 +7,12 @@ import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
 
 const propTypes = {
+  style: PropTypes.object,
   selectedForInfos: PropTypes.object,
 };
 
 const defaultProps = {
+  style: undefined,
   selectedForInfos: null,
 };
 
@@ -19,7 +21,7 @@ export const NAME = 'infoDialog';
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
-  const { selectedForInfos } = props;
+  const { style, selectedForInfos } = props;
 
   if (!selectedForInfos) {
     return null;
@@ -52,6 +54,7 @@ function LayerInfosDialog(props) {
       name={NAME}
       title={<span>{t('Informationen')}</span>}
       body={body}
+      style={style}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
