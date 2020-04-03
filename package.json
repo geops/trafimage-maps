@@ -6,7 +6,7 @@
   "dependencies": {
     "@datapunt/matomo-tracker-react": "^0.1.1",
     "@geops/create-react-web-component": "^2.0.19",
-    "@geops/react-ui": "^1.0.8",
+    "@geops/react-ui": "^1.0.9",
     "@turf/intersect": "^6.1.3",
     "@webcomponents/custom-elements": "1.3.2",
     "@webcomponents/webcomponents-platform": "^1.0.1",
