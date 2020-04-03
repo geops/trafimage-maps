@@ -24,7 +24,7 @@ describe('LayerInfosDialog', () => {
     store = mockStore({
       app: {
         language: 'de',
-        t: t => t,
+        t: (t) => t,
       },
     });
   });

@@ -26,8 +26,8 @@ class BehigLayer extends VectorLayer {
               'layer=behig_konformitaet&workspace=trafimage' +
               '&srsName=EPSG:3857&geoserver=wkp',
           )
-            .then(data => data.json())
-            .then(data => {
+            .then((data) => data.json())
+            .then((data) => {
               const format = new GeoJSON();
               const features = format.readFeatures(data);
               this.olLayer.getSource().clear();
@@ -57,7 +57,7 @@ class BehigLayer extends VectorLayer {
     super.init(map);
 
     this.visibilityKeys.push(
-      this.toggleLayers.map(toggleLayer => {
+      this.toggleLayers.map((toggleLayer) => {
         return toggleLayer.on('change:visible', this.onChangeVisible);
       }),
     );
@@ -86,7 +86,7 @@ class BehigLayer extends VectorLayer {
    */
   geometryFunction(feature) {
     const toggleLayer = this.toggleLayers.find(
-      layer =>
+      (layer) =>
         layer.properties &&
         layer.properties.behig &&
         layer.properties.behig.status === feature.get('status'),

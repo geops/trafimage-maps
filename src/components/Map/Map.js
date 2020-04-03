@@ -59,8 +59,8 @@ class Map extends PureComponent {
       return false;
     }
 
-    const firstFeatures = first.map(f => f.features).flat();
-    const secondFeatures = second.map(s => s.features).flat();
+    const firstFeatures = first.map((f) => f.features).flat();
+    const secondFeatures = second.map((s) => s.features).flat();
 
     if (firstFeatures.length !== secondFeatures.length) {
       return false;
@@ -72,8 +72,8 @@ class Map extends PureComponent {
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
-    this.onPointerMoveRef = map.on('pointermove', e => this.onPointerMove(e));
-    this.onSingleClickRef = map.on('singleclick', e => this.onSingleClick(e));
+    this.onPointerMoveRef = map.on('pointermove', (e) => this.onPointerMove(e));
+    this.onSingleClickRef = map.on('singleclick', (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent('load'));
   }
 
@@ -120,7 +120,7 @@ class Map extends PureComponent {
       return;
     }
 
-    layerService.getFeatureInfoAtCoordinate(coordinate).then(newInfos => {
+    layerService.getFeatureInfoAtCoordinate(coordinate).then((newInfos) => {
       let infos = newInfos.filter(({ features }) => features.length);
       map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
@@ -135,7 +135,7 @@ class Map extends PureComponent {
             ({ layer }) =>
               layer.get('showPopupOnHover') && layer.get('popupComponent'),
           )
-          .map(info => {
+          .map((info) => {
             /* Apply showPopupOnHover function if defined to further filter features */
             const showPopupOnHover = info.layer.get('showPopupOnHover');
             if (typeof showPopupOnHover === 'function') {
@@ -163,7 +163,7 @@ class Map extends PureComponent {
       dispatchHtmlEvent,
     } = this.props;
 
-    layerService.getFeatureInfoAtCoordinate(coordinate).then(featureInfos => {
+    layerService.getFeatureInfoAtCoordinate(coordinate).then((featureInfos) => {
       // Display only info of layers with a popup defined.
       let infos = featureInfos
         .reverse()
@@ -221,7 +221,7 @@ class Map extends PureComponent {
           zoom={zoom}
           map={map}
           ariaLabel={t('Karte')}
-          onMapMoved={evt => this.onMapMoved(evt)}
+          onMapMoved={(evt) => this.onMapMoved(evt)}
           viewOptions={{
             maxZoom,
           }}
@@ -234,7 +234,7 @@ class Map extends PureComponent {
 Map.propTypes = propTypes;
 Map.defaultProps = defaultProps;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   featureInfo: state.app.featureInfo,
   layerService: state.app.layerService,
   layers: state.map.layers,

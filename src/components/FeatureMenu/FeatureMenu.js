@@ -7,7 +7,7 @@ import MenuItem from '../Menu/MenuItem';
 
 const FeatureMenu = () => {
   const { t } = useTranslation();
-  const featureInfo = useSelector(state => state.app.featureInfo);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
   const [collapsed, setCollapsed] = useState(false);
 
   if (!featureInfo || !featureInfo.length) {
@@ -21,7 +21,7 @@ const FeatureMenu = () => {
       icon={<FaInfo />}
       open
       collapsed={collapsed}
-      onCollapseToggle={c => setCollapsed(c)}
+      onCollapseToggle={(c) => setCollapsed(c)}
     >
       <FeatureInformation featureInfo={featureInfo} />
     </MenuItem>

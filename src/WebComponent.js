@@ -119,7 +119,7 @@ const defaultProps = {
   history: undefined,
 };
 
-const WebComponent = props => {
+const WebComponent = (props) => {
   const {
     activeTopicKey,
     width,
@@ -158,7 +158,7 @@ const WebComponent = props => {
       return [];
     }
     if (activeTopicKey) {
-      tps.forEach(topic => {
+      tps.forEach((topic) => {
         // eslint-disable-next-line no-param-reassign
         topic.active = topic.key === activeTopicKey;
       });

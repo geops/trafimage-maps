@@ -23,7 +23,7 @@ const defaultProps = {};
 const replace = (text, substr, replacement) => {
   const array = text
     .split(substr)
-    .map(str => {
+    .map((str) => {
       return [str, replacement];
     })
     .flat();
@@ -65,13 +65,13 @@ const BehigPopup = ({ feature, language, t }) => {
     }
 
     textArray = textArray
-      .map(str => {
+      .map((str) => {
         // Link Handicap
         let array = replace(str, url, link);
 
         // Link ViaStaziun
         if (feature.get('via_staziun_link')) {
-          array = array.map(elem => {
+          array = array.map((elem) => {
             return typeof elem === 'string'
               ? replace(elem, viaStaziun, linkViaStaziun)
               : elem;
@@ -87,7 +87,7 @@ const BehigPopup = ({ feature, language, t }) => {
   return <div className="wkp-behig-popup">{textArray}</div>;
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   language: state.app.language,
 });
 
@@ -99,5 +99,5 @@ const composed = compose(
   connect(mapStateToProps),
 )(BehigPopup);
 
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = (feat) => feat.get('name');
 export default composed;

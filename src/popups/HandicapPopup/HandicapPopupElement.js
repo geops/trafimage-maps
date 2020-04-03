@@ -17,13 +17,13 @@ const complexTelTester = /((([+]{1}[0-9]{1,3})|([+]?[(]{1}[0-9]{1,3}[)]{1})|([(]
 const emailTester = /[a-zA-Z0-9._+%-]+@[a-zA-Z0-9.-]+[.][a-zA-Z]{2,4}/gm;
 const urlTester = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)/gm;
 
-const escapeRegExp = string => {
+const escapeRegExp = (string) => {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 };
 
 const searchMatches = (intialText, testers) => {
   let matched = [];
-  testers.forEach(t => {
+  testers.forEach((t) => {
     const matches = intialText.match(t);
     if (matches) {
       matched.push(matches);
@@ -74,10 +74,10 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
 
   // Split array items and flatten it.
   const flatSplitArray = intialTextArray
-    .map(item => {
+    .map((item) => {
       if (typeof item === 'string') {
         // Split string with RegExp and remove all empty strings or undefined.
-        return item.split(new RegExp(regularExp, 'g')).filter(v => !!v);
+        return item.split(new RegExp(regularExp, 'g')).filter((v) => !!v);
       }
       return [item];
     })
@@ -86,7 +86,7 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
   const newTextArray = flatSplitArray.map((text, idx) => {
     // eslint-disable-next-line react/no-array-index-key
     let substitutedElement = <span key={idx}>{text}</span>;
-    matched.forEach(match => {
+    matched.forEach((match) => {
       if (text === match) {
         substitutedElement = renderCallback(match, idx);
       }
@@ -96,7 +96,7 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
   return newTextArray;
 };
 
-const renderLinks = intialText => {
+const renderLinks = (intialText) => {
   const telMatches = searchMatches(intialText, [
     complexTelTester,
     simpleTelTester,

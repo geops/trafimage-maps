@@ -13,7 +13,7 @@ const propTypes = {
 
 const Header = ({ appBaseUrl }) => {
   let login = 'Login';
-  const permissionsInfos = useSelector(state => state.app.permissionsInfos);
+  const permissionsInfos = useSelector((state) => state.app.permissionsInfos);
 
   if (permissionsInfos && permissionsInfos.user) {
     login = permissionsInfos.user;
