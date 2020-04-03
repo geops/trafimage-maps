@@ -177,7 +177,7 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-manual-icon"
   >
     <a
-      href="null/static/app_trafimage/docs/undefined/Quickstart.pdf"
+      href="https://maps.trafimage.ch/static/app_trafimage/docs/de/Quickstart.pdf"
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"

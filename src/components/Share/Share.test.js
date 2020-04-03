@@ -21,12 +21,13 @@ describe('Share', () => {
         activeTopic: {
           key: 'test',
         },
+        language: 'de',
       },
     });
 
     const component = renderer.create(
       <Provider store={store}>
-        <Share />
+        <Share appBaseUrl="https://maps.trafimage.ch" />
       </Provider>,
     );
     const tree = component.toJSON();
@@ -41,12 +42,13 @@ describe('Share', () => {
           key: 'test',
           permission: ['sbb'],
         },
+        language: 'fr',
       },
     });
 
     const wrapper = mount(
       <Provider store={store}>
-        <Share />
+        <Share appBaseUrl="https://maps.trafimage.ch" />
       </Provider>,
     );
 
