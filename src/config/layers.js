@@ -708,8 +708,9 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
-    return /(?<!only)_SBB/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    // negative look behind regex doesn't work on all browsers.
+    return /_SBB/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
     hasInfos: true,
@@ -734,8 +735,9 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.uebrigebahnen.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
-    return /(?<!only)_KTU/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    // negative look behind regex doesn't work on all browsers.
+    return /_KTU/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
     hasInfos: true,
