@@ -98,6 +98,7 @@
 
         .tm-dialog-body {
           max-height: calc((100vh / 2) - 100px);
+          max-width: calc(100vw - 60px);
         }
       }
     }
