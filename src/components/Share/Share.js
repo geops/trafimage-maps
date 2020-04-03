@@ -80,7 +80,7 @@ const Share = ({ appBaseUrl }) => {
       </CanvasSaveButton>
       {renderConf(config[1], t, language, appBaseUrl)}
       {renderConf(config[2], t, language, appBaseUrl)}
-      {!activeTopic.permission
+      {activeTopic.permission
         ? renderConf(config[3], t, language, appBaseUrl)
         : null}
       <div className="ta-draw-icon">

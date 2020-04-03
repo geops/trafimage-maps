@@ -57,7 +57,6 @@ describe('Share', () => {
         .find('.ta-manual-icon')
         .first()
         .exists(),
-    ).toBe(false);
-    // ).toBe(true);
+    ).toBe(true);
   });
 });
