@@ -33,8 +33,8 @@ class ParksPopup extends PureComponent {
 
   preload(urls) {
     Promise.all(
-      urls.map(url => {
-        return new Promise(resolve => {
+      urls.map((url) => {
+        return new Promise((resolve) => {
           const image = new Image();
           image.onload = resolve;
           image.src = url;
@@ -92,7 +92,7 @@ class ParksPopup extends PureComponent {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   language: state.app.language,
 });
 
@@ -103,5 +103,5 @@ const composed = compose(
   connect(mapStateToProps),
 )(ParksPopup);
 
-composed.renderTitle = feat => feat.get('park_name');
+composed.renderTitle = (feat) => feat.get('park_name');
 export default composed;

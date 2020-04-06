@@ -17,8 +17,8 @@ import './Search.scss';
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
-  const map = useSelector(state => state.app.map);
-  const searchService = useSelector(state => state.app.searchService);
+  const map = useSelector((state) => state.app.map);
+  const searchService = useSelector((state) => state.app.searchService);
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -28,8 +28,8 @@ function Search() {
     }
     searchService.setClear(() => setSuggestions([]));
     searchService.setUpsert((section, items, position) =>
-      setSuggestions(oldSuggestions => {
-        const index = oldSuggestions.findIndex(s => s.section === section);
+      setSuggestions((oldSuggestions) => {
+        const index = oldSuggestions.findIndex((s) => s.section === section);
         const start = index === -1 ? position : index;
         const deleteCount = index === -1 ? 0 : 1;
         const newSuggestions = [...oldSuggestions];
@@ -54,7 +54,7 @@ function Search() {
         <Autosuggest
           multiSection
           suggestions={suggestions}
-          onSuggestionsFetchRequested={event =>
+          onSuggestionsFetchRequested={(event) =>
             searchService.search(event.value)
           }
           onSuggestionsClearRequested={() => searchService.clear('')}
@@ -65,8 +65,8 @@ function Search() {
             searchService.select(suggestion);
             dispatch(setSearchOpen(false));
           }}
-          getSuggestionValue={suggestion => searchService.value(suggestion)}
-          renderSuggestion={suggestion => searchService.render(suggestion)}
+          getSuggestionValue={(suggestion) => searchService.value(suggestion)}
+          renderSuggestion={(suggestion) => searchService.render(suggestion)}
           renderSectionTitle={({ section }) => {
             const count = searchService.countItems(section);
             return (
@@ -90,10 +90,10 @@ function Search() {
               )
             );
           }}
-          shouldRenderSuggestions={val => val.trim().length > 2}
-          getSectionSuggestions={result =>
+          shouldRenderSuggestions={(val) => val.trim().length > 2}
+          getSectionSuggestions={(result) =>
             result.items
-              ? result.items.map(i => ({ ...i, section: result.section }))
+              ? result.items.map((i) => ({ ...i, section: result.section }))
               : []
           }
           inputProps={{
@@ -101,10 +101,10 @@ function Search() {
             tabIndex: 0,
             'aria-label': 'Suche',
             onChange: (e, { newValue }) => setValue(newValue),
-            onKeyUp: e => {
+            onKeyUp: (e) => {
               const { key } = e;
               if (key === 'Enter') {
-                const filtered = suggestions.filter(s => s.items.length > 0);
+                const filtered = suggestions.filter((s) => s.items.length > 0);
                 if (filtered.length > 0) {
                   const { items, section } = filtered[0];
                   dispatch(setSearchOpen(false));
@@ -117,7 +117,7 @@ function Search() {
             placeholder: searchService.getPlaceholder(t),
             value,
           }}
-          renderInputComponent={inputProps => {
+          renderInputComponent={(inputProps) => {
             return (
               <div className="wkp-search-input">
                 <input {...inputProps} />

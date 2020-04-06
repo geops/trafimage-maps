@@ -1,12 +1,12 @@
 import HandicapLayer from '../../layers/HandicapLayer';
 import StopFinder from '../StopFinder';
 
-const findHandicapLayers = l => l instanceof HandicapLayer;
-const getHandicapFeatures = layer =>
+const findHandicapLayers = (l) => l instanceof HandicapLayer;
+const getHandicapFeatures = (layer) =>
   layer.olLayer
     .getSource()
     .getFeatures()
-    .map(feature => ({
+    .map((feature) => ({
       didok: feature.getProperties().didok,
       feature,
       layer,
@@ -32,10 +32,11 @@ class HandicapNoInfoFinder extends StopFinder {
 
     return super
       .search(value)
-      .then(features =>
+      .then((features) =>
         features
           ? features.filter(
-              f => !handicapFeatures.find(hf => hf.didok === f.properties.id),
+              (f) =>
+                !handicapFeatures.find((hf) => hf.didok === f.properties.id),
             )
           : [],
       )

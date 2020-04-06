@@ -21,7 +21,7 @@ const defaultProps = {
 export const NAME = 'infoDialog';
 
 function LayerInfosDialog(props) {
-  const language = useSelector(state => state.app.language);
+  const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
   const { style, isDraggable, selectedForInfos } = props;
 

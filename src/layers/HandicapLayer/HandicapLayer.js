@@ -47,8 +47,8 @@ class HandicapLayer extends VectorLayer {
             `${this.cartaroUrl}handicap/items/?has_changes=true` +
               '&stuetzpunktbahnhof=true',
           )
-            .then(data => data.json())
-            .then(data => {
+            .then((data) => data.json())
+            .then((data) => {
               const format = new GeoJSON();
               const features = format.readFeatures(data);
               this.olLayer.getSource().clear();
@@ -68,7 +68,7 @@ class HandicapLayer extends VectorLayer {
 
     this.wktFormat = new WKT();
 
-    this.onClick(f => {
+    this.onClick((f) => {
       [this.clickedFeature] = f;
       this.olLayer.changed();
     });

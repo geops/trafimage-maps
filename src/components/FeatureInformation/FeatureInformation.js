@@ -23,13 +23,13 @@ const FeatureInformation = ({ featureInfo }) => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo.map(l => l.features).flat();
+  const features = featureInfo.map((l) => l.features).flat();
   const feature = features[featureIndex];
   if (!feature) {
     return null;
   }
 
-  const info = featureInfo.find(i => i.features.includes(feature));
+  const info = featureInfo.find((i) => i.features.includes(feature));
   if (!info || !info.layer) {
     return null;
   }

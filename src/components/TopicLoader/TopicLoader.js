@@ -126,14 +126,14 @@ class TopicLoader extends Component {
     if (!topics.length) {
       return;
     }
-    const activeTopic = topics.find(t => t.active);
+    const activeTopic = topics.find((t) => t.active);
     const visibleTopics = topics.filter(
-      t =>
+      (t) =>
         !t.permission ||
         (permissionsInfos &&
           permissionsInfos.permissions.includes(t.permission)),
     );
-    let visibleActiveTopic = visibleTopics.find(t => t.active);
+    let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
@@ -209,16 +209,16 @@ class TopicLoader extends Component {
 
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getIsBaseLayer() && l.getVisible());
+      .filter((l) => l.getIsBaseLayer() && l.getVisible());
 
     const visibleBaseLayers = topicLayers.filter(
-      l => l.getIsBaseLayer() && l.getVisible(),
+      (l) => l.getIsBaseLayer() && l.getVisible(),
     );
 
     // Set the visible baselayer if need to be changed on topic change.
     if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
       topicLayers
-        .filter(l => l.getIsBaseLayer())
+        .filter((l) => l.getIsBaseLayer())
         .forEach((lay, idx) => {
           lay.setVisible(idx === 0);
         });
@@ -251,7 +251,7 @@ class TopicLoader extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   layerService: state.app.layerService,
   permissionsInfos: state.app.permissionsInfos,

@@ -82,11 +82,11 @@ class CasaLayer extends VectorLayer {
       const pixel = this.map.getPixelFromCoordinate(coordinate);
       features = this.map
         .getFeaturesAtPixel(pixel, {
-          layerFilter: l => l === this.featuresLayer,
+          layerFilter: (l) => l === this.featuresLayer,
           hitTolerance: this.hitTolerance,
         })
         .filter(
-          feature =>
+          (feature) =>
             feature.get('isClickable') ||
             (feature.get('route') && feature.get('route').isClickable),
         );
@@ -245,13 +245,13 @@ class CasaLayer extends VectorLayer {
     if (isSelected) {
       Object.values(olStyles)
         .flat()
-        .forEach(s => s.setZIndex(0.5));
+        .forEach((s) => s.setZIndex(0.5));
     }
 
     if (isHovered) {
       Object.values(olStyles)
         .flat()
-        .forEach(s => s.setZIndex(1));
+        .forEach((s) => s.setZIndex(1));
     }
 
     return olStyles;
@@ -265,7 +265,7 @@ class CasaLayer extends VectorLayer {
    */
   callClickCallbacks(features, layer, coordinate) {
     const pixel = this.map.getPixelFromCoordinate(coordinate);
-    const topLayer = this.map.forEachLayerAtPixel(pixel, l => l);
+    const topLayer = this.map.forEachLayerAtPixel(pixel, (l) => l);
 
     if (layer.featuresLayer !== topLayer) {
       return;
@@ -280,8 +280,8 @@ class CasaLayer extends VectorLayer {
    */
   init(map) {
     super.init(map);
-    this.map.on('pointermove', e => {
-      const feature = this.map.forEachFeatureAtPixel(e.pixel, f => f);
+    this.map.on('pointermove', (e) => {
+      const feature = this.map.forEachFeatureAtPixel(e.pixel, (f) => f);
       if (feature !== this.hoverFeature) {
         this.hoverFeature = feature;
         if (this.featuresLayer) {
@@ -292,7 +292,7 @@ class CasaLayer extends VectorLayer {
         } else {
           this.olLayer.changed();
         }
-        this.mouseOverCallbacks.forEach(c => c(feature, e.coordinate));
+        this.mouseOverCallbacks.forEach((c) => c(feature, e.coordinate));
       }
     });
   }
