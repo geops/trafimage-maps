@@ -178,7 +178,7 @@ describe('RouteLayer', () => {
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
     const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };
     await compMap.dispatchEvent(evt);
-    await Promise.all(spy.mock.results.map(r => r.value));
+    await Promise.all(spy.mock.results.map((r) => r.value));
     component.update();
 
     expect(component.find('.wkp-casa-route-popup').text()).toBe(

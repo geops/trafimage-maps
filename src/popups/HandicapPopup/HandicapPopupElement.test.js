@@ -51,7 +51,7 @@ describe('HandicapPopupElement', () => {
     '041 999 37 37',
     '+42 (0) 41 210 00 60',
     '056 632 12 21',
-  ].forEach(number => {
+  ].forEach((number) => {
     test(`should render telephone number '${number}' in href.`, () => {
       const wrapper = mount(
         <HandicapPopupElement
@@ -63,15 +63,12 @@ describe('HandicapPopupElement', () => {
           propertyName="test"
         />,
       );
-      const telHref = wrapper
-        .find('a')
-        .first()
-        .getDOMNode();
+      const telHref = wrapper.find('a').first().getDOMNode();
       expect(telHref.getAttribute('href')).toBe(`tel:${number}`);
     });
   });
 
-  ['061', '1807 Blonay', 'Route de Brent 2'].forEach(string => {
+  ['061', '1807 Blonay', 'Route de Brent 2'].forEach((string) => {
     test(`should not render telephone number for '${string}'.`, () => {
       const wrapper = mount(
         <HandicapPopupElement
@@ -90,7 +87,7 @@ describe('HandicapPopupElement', () => {
     });
   });
 
-  ['test@test.fr', 'bla@lutixi.ch', 'foo@bluewin.ch'].forEach(email => {
+  ['test@test.fr', 'bla@lutixi.ch', 'foo@bluewin.ch'].forEach((email) => {
     test(`should render email '${email}' in href.`, () => {
       const wrapper = mount(
         <HandicapPopupElement
@@ -102,10 +99,7 @@ describe('HandicapPopupElement', () => {
           propertyName="test"
         />,
       );
-      const telHref = wrapper
-        .find('a')
-        .first()
-        .getDOMNode();
+      const telHref = wrapper.find('a').first().getDOMNode();
       expect(telHref.getAttribute('href')).toBe(`mailto:${email}`);
     });
   });
@@ -121,14 +115,8 @@ describe('HandicapPopupElement', () => {
         propertyName="test"
       />,
     );
-    const firstTelHref = wrapper
-      .find('a')
-      .first()
-      .getDOMNode();
-    const secondTelHref = wrapper
-      .find('a')
-      .at(1)
-      .getDOMNode();
+    const firstTelHref = wrapper.find('a').first().getDOMNode();
+    const secondTelHref = wrapper.find('a').at(1).getDOMNode();
 
     expect(firstTelHref.getAttribute('href')).toBe(
       'mailto:jean-jacques@hotmail.ch',
@@ -138,7 +126,7 @@ describe('HandicapPopupElement', () => {
     );
   });
 
-  ['www.geops.ch', 'www.test.ch/foo/bar/baz'].forEach(url => {
+  ['www.geops.ch', 'www.test.ch/foo/bar/baz'].forEach((url) => {
     test(`should render urls '${url}' in href.`, () => {
       const wrapper = mount(
         <HandicapPopupElement
@@ -150,10 +138,7 @@ describe('HandicapPopupElement', () => {
           propertyName="test"
         />,
       );
-      const telHref = wrapper
-        .find('a')
-        .first()
-        .getDOMNode();
+      const telHref = wrapper.find('a').first().getDOMNode();
       expect(telHref.getAttribute('href')).toBe(`http://${url}`);
     });
   });
@@ -170,10 +155,7 @@ describe('HandicapPopupElement', () => {
         propertyName="test"
       />,
     );
-    const telHref = wrapper
-      .find('a')
-      .first()
-      .getDOMNode();
+    const telHref = wrapper.find('a').first().getDOMNode();
     expect(telHref.getAttribute('href')).toBe(url);
   });
 });

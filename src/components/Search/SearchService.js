@@ -32,7 +32,7 @@ class SearchService {
   }
 
   setSearchesProps(props) {
-    Object.values(this.searches).forEach(search => search.setProps(props));
+    Object.values(this.searches).forEach((search) => search.setProps(props));
   }
 
   setUpsert(upsert) {
@@ -85,7 +85,7 @@ class SearchService {
   search(value) {
     this.clearHighlight();
     Object.entries(this.searches).forEach(([section, search], position) => {
-      search.search(value).then(items => {
+      search.search(value).then((items) => {
         search.setItems(items);
         this.upsert(section, search.getItems(), position);
       });

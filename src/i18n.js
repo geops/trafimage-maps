@@ -61,7 +61,7 @@ i18n
         ],
       },
     },
-    err => {
+    (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.error('i18n initialisation failed:', err);
