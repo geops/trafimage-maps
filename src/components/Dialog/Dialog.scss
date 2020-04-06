@@ -79,6 +79,12 @@
   }
 }
 
+.tm-w-m {
+  .tm-dialog {
+    left: 350px;
+  }
+}
+
 .tm-w-m,
 .tm-w-l,
 .tm-w-xl {
@@ -87,39 +93,33 @@
   }
 }
 
-.tm-w-m {
-  .tm-dialog {
-    left: 350px;
-  }
-}
-
 .tm-w-xs,
 .tm-w-s {
-  .wkp-dialog {
-      .tm-dialog {
-        position: absolute;
-        display: flex !important;
-        max-height: 50%;
-        height:100%;
-        left: 10px;
-        right: 10px;
-        top: unset;
-        bottom: 10px;
-
-        .tm-dialog-container {
-          height: 100%;
-
-          .tm-dialog-body {
-            display: flex;
-            flex-direction: column;
-          }
-        }
-      }
-  }
-
   .tm-modal {
     .tm-dialog-container {
       width: calc(100% - 40px);
+    }
+  }
+
+  .wkp-dialog {
+    .tm-dialog {
+      position: absolute;
+      display: flex !important;
+      max-height: 50%;
+      height: 100%;
+      left: 10px;
+      right: 10px;
+      top: unset;
+      bottom: 10px;
+
+      .tm-dialog-container {
+        height: 100%;
+
+        .tm-dialog-body {
+          display: flex;
+          flex-direction: column;
+        }
+      }
     }
   }
 }
