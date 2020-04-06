@@ -29,6 +29,8 @@ const MainDialog = () => {
         }}
         width="calc(100% - 20px)"
         height="auto"
+        maxHeight="50%"
+        maxWidth="100%"
         onDragStop={(evt, pos) => {
           dispatch(
             setDialogPosition({
