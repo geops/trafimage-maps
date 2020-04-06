@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { AiOutlineUser } from 'react-icons/ai';
+import { useTranslation } from 'react-i18next';
 import UIHeader from '@geops/react-ui/components/Header';
 import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
+import { ReactComponent as SBBUser } from '../../img/sbb/user_92_large.svg';
 import LanguageSelect from '../LanguageSelect';
 
 import './Header.scss';
@@ -13,7 +14,8 @@ const propTypes = {
 };
 
 const Header = ({ appBaseUrl }) => {
-  let login = 'Login';
+  let login = 'Anmelden';
+  const { t } = useTranslation();
   const permissionsInfos = useSelector(state => state.app.permissionsInfos);
 
   if (permissionsInfos && permissionsInfos.user) {
@@ -25,8 +27,8 @@ const Header = ({ appBaseUrl }) => {
       <div className="wkp-header-right">
         <div className="wkp-header-login">
           <a href={`${appBaseUrl}/login`}>
-            <AiOutlineUser className="wkp-header-login-icon" />
-            <span className="wkp-header-login-text">{login}</span>
+            <SBBUser focusable={false} className="wkp-header-login-icon" />
+            <span className="wkp-header-login-text">{t(login)}</span>
           </a>
         </div>
         <LanguageSelect />

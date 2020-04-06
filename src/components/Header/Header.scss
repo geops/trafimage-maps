@@ -19,13 +19,15 @@
     align-items: center;
 
     .wkp-header-login {
-      margin-right: 40px;
+      margin-right: 10px;
       padding: 0 5px;
       color: grey;
       display: flex;
       line-height: 20px;
 
       a {
+        align-items: center;
+        display: flex;
         color: grey;
         text-decoration: none;
         line-height: 25px;
@@ -33,16 +35,24 @@
         .wkp-header-login-icon {
           float: left;
           margin-right: 5px;
-          font-size: 18px;
-          height: 22px;
+          height: 28px;
+          width: 28px;
+
+          path {
+            stroke: grey;
+          }
         }
       }
 
       &:hover {
-        color: #eb0000;
-
         a {
           color: #eb0000;
+
+          svg {
+            path {
+              stroke: #eb0000;
+            }
+          }
         }
       }
     }
