@@ -18,8 +18,8 @@ let returnToNetzkarte = false;
 
 const DeparturePopup = ({ feature }) => {
   const dispatch = useDispatch();
-  const featureInfo = useSelector(state => state.app.featureInfo);
-  const layerService = useSelector(state => state.app.layerService);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
+  const layerService = useSelector((state) => state.app.layerService);
   const name = feature.get('name');
   const uic = parseFloat(feature.get('sbb_id'));
 
@@ -48,7 +48,7 @@ DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;
 
 const composed = compose(withTranslation())(DeparturePopup);
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = (feat) => feat.get('name');
 // Trigerred on popup close with close button only.
 composed.onCloseBtClick = () => {
   returnToNetzkarte = true;

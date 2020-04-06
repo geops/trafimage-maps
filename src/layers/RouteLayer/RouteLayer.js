@@ -23,13 +23,13 @@ class RouteLayer extends CasaLayer {
       name: 'RouteLayer',
       olLayer: new OLVectorLayer({
         className: 'RouteLayer', // needed for forEachLayerAtPixel
-        style: f => this.routeStyle(f),
+        style: (f) => this.routeStyle(f),
         source: new VectorSource(),
       }),
       ...options,
     });
     this.set('showPopupOnHover', (features = []) => {
-      return features.filter(f => f.get('route').popupContent);
+      return features.filter((f) => f.get('route').popupContent);
     });
     this.set('popupComponent', 'CasaRoutePopup');
 
@@ -39,7 +39,7 @@ class RouteLayer extends CasaLayer {
 
     this.selectedRouteIds = [];
 
-    this.onClick(features => {
+    this.onClick((features) => {
       if (features.length) {
         const [feature] = features;
         const { isClickable, routeId } = feature.get('route');
@@ -107,7 +107,7 @@ class RouteLayer extends CasaLayer {
   fetchRouteForMot(viaPoints, mot, sequenceProps) {
     this.abortController = new AbortController();
 
-    const via = viaPoints.map(v => `!${v}`);
+    const via = viaPoints.map((v) => `!${v}`);
     const urlParams = {
       key: this.apiKey || '',
       via: via.join('|'),
@@ -121,11 +121,13 @@ class RouteLayer extends CasaLayer {
     });
 
     return fetch(url, { signal: this.abortController.signal })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const lineStrings = format.readFeatures(data);
         const feature = new Feature({
-          geometry: new MultiLineString(lineStrings.map(l => l.getGeometry())),
+          geometry: new MultiLineString(
+            lineStrings.map((l) => l.getGeometry()),
+          ),
         });
         feature.setProperties(sequenceProps);
         return feature;
@@ -199,10 +201,10 @@ class RouteLayer extends CasaLayer {
       }
     }
 
-    return Promise.all(routePromises).then(data => {
-      const sequenceFeatures = data.flat().filter(f => f);
+    return Promise.all(routePromises).then((data) => {
+      const sequenceFeatures = data.flat().filter((f) => f);
       this.olLayer.getSource().addFeatures(sequenceFeatures);
-      sequenceFeatures.forEach(f => {
+      sequenceFeatures.forEach((f) => {
         const { routeId, isSelected } = f.get('route');
         if (isSelected) {
           this.selectedRouteIds.push(routeId);

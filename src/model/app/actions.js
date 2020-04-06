@@ -12,48 +12,48 @@ export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
 
-export const setTopics = data => ({ type: SET_TOPICS, data });
+export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
-export const setActiveTopic = data => ({ type: SET_ACTIVE_TOPIC, data });
+export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
 
-export const setLanguage = data => {
+export const setLanguage = (data) => {
   // Set HTML language for screen readers.
   document.documentElement.lang = data;
   return { type: SET_LANGUAGE, data };
 };
-export const setProjection = data => ({ type: SET_PROJECTION, data });
+export const setProjection = (data) => ({ type: SET_PROJECTION, data });
 
-export const setFeatureInfo = data => ({
+export const setFeatureInfo = (data) => ({
   type: SET_FEATURE_INFO,
   data,
 });
 
-export const setMenuOpen = data => ({ type: SET_MENU_OPEN, data });
+export const setMenuOpen = (data) => ({ type: SET_MENU_OPEN, data });
 
-export const setSearchOpen = data => ({ type: SET_SEARCH_OPEN, data });
+export const setSearchOpen = (data) => ({ type: SET_SEARCH_OPEN, data });
 
-export const setDialogVisible = data => ({ type: SET_DIALOG_VISIBLE, data });
+export const setDialogVisible = (data) => ({ type: SET_DIALOG_VISIBLE, data });
 
-export const setSelectedForInfos = data => ({
+export const setSelectedForInfos = (data) => ({
   type: SET_SELECTED_FOR_INFOS,
   data,
 });
 
-export const setDialogPosition = data => ({
+export const setDialogPosition = (data) => ({
   type: SET_DIALOG_POSITION,
   data,
 });
 
-export const setDeparturesFilter = data => ({
+export const setDeparturesFilter = (data) => ({
   type: SET_DEPARTURES_FILTER,
   data,
 });
 
-export const fetchPermissionsInfos = appBaseUrl => dispatch => {
+export const fetchPermissionsInfos = (appBaseUrl) => (dispatch) => {
   const url = `${appBaseUrl}/permissions`;
   fetch(url, { credentials: 'include' })
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       dispatch({
         type: SET_PERMISSIONS_INFOS,
         data,
@@ -67,4 +67,4 @@ export const fetchPermissionsInfos = appBaseUrl => dispatch => {
     });
 };
 
-export const setSearchService = data => ({ type: SET_SEARCH_SERVICE, data });
+export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });

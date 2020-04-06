@@ -6,7 +6,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import './Login.scss';
 
 const Login = ({ appBaseUrl }) => {
-  const permissionsInfos = useSelector(state => state.app.permissionsInfos);
+  const permissionsInfos = useSelector((state) => state.app.permissionsInfos);
 
   const login = useMemo(() => {
     if (permissionsInfos && permissionsInfos.user) {
@@ -26,7 +26,7 @@ const Login = ({ appBaseUrl }) => {
       className="wkp-login"
       role="button"
       onClick={openLoginPage}
-      onKeyPress={evt => evt.which === 13 && openLoginPage()}
+      onKeyPress={(evt) => evt.which === 13 && openLoginPage()}
       tabIndex={0}
     >
       <AiOutlineUser className="wkp-login-icon" />

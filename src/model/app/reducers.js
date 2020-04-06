@@ -29,7 +29,7 @@ const getInitialState = () => ({
   projection: {
     label: 'WGS 84',
     value: 'EPSG:4326',
-    format: c => c,
+    format: (c) => c,
   },
   menuOpen: false,
   searchOpen: false,

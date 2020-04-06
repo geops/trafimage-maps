@@ -141,8 +141,8 @@ class DeparturePopupContent extends Component {
     }/search/departures/${uic}?${qs.stringify(urlParams)}`;
 
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // HACK to prevent "update of unmounted component" warning
         if (!this.mounted) {
           return;
@@ -182,7 +182,7 @@ class DeparturePopupContent extends Component {
     let platformsFormatted = platforms || '';
     platformsFormatted = platformsFormatted
       .split(',')
-      .filter(v => v)
+      .filter((v) => v)
       .join(', ');
 
     let title = null;
@@ -227,7 +227,7 @@ class DeparturePopupContent extends Component {
         <DestinationInput
           platforms={platformsFormatted}
           destination={this.destinationFilter}
-          onSelect={d => this.onDestinationSelect(d)}
+          onSelect={(d) => this.onDestinationSelect(d)}
           uic={uic}
         />
 
@@ -244,7 +244,7 @@ class DeparturePopupContent extends Component {
                 <th>{t('Ziel')}</th>
                 <th colSpan="2">{t('Planmässige Abfahrt')}</th>
               </tr>
-              {departures.map(d => (
+              {departures.map((d) => (
                 <tr key={d.id}>
                   <td>
                     <div className="tm-departure-name">{d.label}</div>

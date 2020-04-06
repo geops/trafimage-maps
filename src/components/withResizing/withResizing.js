@@ -12,7 +12,7 @@ function withResizing(MenuToBeResized) {
     map: PropTypes.instanceOf(Map).isRequired,
   };
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state) => ({
     menuOpen: state.app.menuOpen,
     map: state.app.map,
   });
