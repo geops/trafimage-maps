@@ -55,7 +55,7 @@ const propTypes = {
   zoom: PropTypes.number,
 
   /**
-   * Limit the map extent.
+   * Limit the map extent (e.g. maxExtent="502649.8980,5655117.1007,1352629.6525,6141868.0968"). Default extent has no limit.
    * @private
    */
   maxExtent: PropTypes.arrayOf(PropTypes.number),
