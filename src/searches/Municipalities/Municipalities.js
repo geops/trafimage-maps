@@ -15,7 +15,10 @@ class Municipalities extends Search {
       `https://maps.trafimage.ch/search/municipalities?query=${value}&utf8=%E2%9C%93`,
     )
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features);
+      .then((featureCollection) => featureCollection.features)
+      .catch(() => {
+        return [];
+      });
   }
 
   render(item) {

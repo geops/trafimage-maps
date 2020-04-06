@@ -13,7 +13,10 @@ class Betriebspunkte extends Search {
   search(value) {
     return fetch(`https://maps.trafimage.ch/search/bps?name=${value}`)
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features);
+      .then((featureCollection) => featureCollection.features)
+      .catch(() => {
+        return [];
+      });
   }
 
   render(item) {

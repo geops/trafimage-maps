@@ -39,7 +39,10 @@ class HandicapNoInfoFinder extends StopFinder {
                 !handicapFeatures.find((hf) => hf.didok === f.properties.id),
             )
           : [],
-      );
+      )
+      .catch(() => {
+        return [];
+      });
   }
 }
 

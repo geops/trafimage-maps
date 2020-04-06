@@ -63,7 +63,10 @@ class Lines extends Search {
     }
     return fetch(`https://maps.trafimage.ch/search/lines?${params}`)
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features);
+      .then((featureCollection) => featureCollection.features)
+      .catch(() => {
+        return [];
+      });
   }
 
   render({ properties }) {

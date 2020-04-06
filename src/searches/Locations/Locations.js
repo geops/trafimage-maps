@@ -14,7 +14,10 @@ class Locations extends Search {
           ...item,
           label: item.attrs.label.replace(/<[^>]*>?/gm, ''),
         })),
-      );
+      )
+      .catch(() => {
+        return [];
+      });
   }
 
   render(item) {

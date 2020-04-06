@@ -18,7 +18,10 @@ class StopFinder extends Search {
   search(value) {
     return fetch(`${endpoint}?&q=${value}&key=${this.apiKey}`)
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features);
+      .then((featureCollection) => featureCollection.features)
+      .catch(() => {
+        return [];
+      });
   }
 
   render(item) {
