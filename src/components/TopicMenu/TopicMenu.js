@@ -188,6 +188,9 @@ class TopicMenu extends PureComponent {
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
+    const isMenuVisibleLayers = (topic.layers || []).find((l) => {
+      return !l.get('hideInLegend');
+    });
     return (
       <div className="wkp-topic-menu">
         <div className="wkp-topic-menu-item-wrapper">
@@ -207,12 +210,14 @@ class TopicMenu extends PureComponent {
               </div>
               {t(topic.name)}
             </div>
-            <div
-              className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
-              style={{
-                display: topic.key === activeTopic.key ? 'block' : 'none',
-              }}
-            />
+            {isMenuVisibleLayers && (
+              <div
+                className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
+                style={{
+                  display: topic.key === activeTopic.key ? 'block' : 'none',
+                }}
+              />
+            )}
           </div>
           <div className="wkp-topic-icons">
             {topic && topic.permission && this.renderLockIcon(topic)}
