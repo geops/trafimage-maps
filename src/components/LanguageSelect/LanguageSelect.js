@@ -21,6 +21,7 @@ const selectStyles = {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+    marginRight: '20px',
     color: 'grey',
   }),
   control: () => ({
