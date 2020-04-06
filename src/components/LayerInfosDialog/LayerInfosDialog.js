@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Layer from 'react-spatial/layers/Layer';
 import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
 
 const propTypes = {
   style: PropTypes.object,
+  isDraggable: PropTypes.bool,
   selectedForInfos: PropTypes.object,
 };
 
 const defaultProps = {
   style: undefined,
+  isDraggable: true,
   selectedForInfos: null,
 };
 
@@ -21,7 +23,7 @@ export const NAME = 'infoDialog';
 function LayerInfosDialog(props) {
   const language = useSelector(state => state.app.language);
   const { t } = useTranslation();
-  const { style, selectedForInfos } = props;
+  const { style, isDraggable, selectedForInfos } = props;
 
   if (!selectedForInfos) {
     return null;
@@ -33,9 +35,11 @@ function LayerInfosDialog(props) {
       : selectedForInfos.layerInfoComponent;
 
   const description =
-    selectedForInfos instanceof Layer
-      ? selectedForInfos.get('description')
-      : selectedForInfos.description;
+    selectedForInfos instanceof Layer ? (
+      <div>{t(selectedForInfos.get('description'))}</div>
+    ) : (
+      selectedForInfos.description
+    );
 
   let body;
   if (componentName) {
@@ -44,12 +48,12 @@ function LayerInfosDialog(props) {
       <LayerInfoComponent language={language} properties={selectedForInfos} />
     );
   } else if (description) {
-    body = <Trans i18nKey={description} />;
+    body = description;
   }
 
   return (
     <Dialog
-      isDraggable
+      isDraggable={isDraggable}
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}

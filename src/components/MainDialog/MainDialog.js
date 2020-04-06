@@ -21,16 +21,7 @@ const MainDialog = () => {
     return (
       <LayerInfosDialog
         selectedForInfos={selectedForInfos}
-        style={{
-          top: 'unset',
-          bottom: isMobileWidth ? '0px' : 'unset',
-          padding: '10px',
-          zIndex: '1',
-        }}
-        width="calc(100% - 20px)"
-        height="auto"
-        maxHeight="50%"
-        maxWidth="100%"
+        isDraggable={!isMobileWidth}
         onDragStop={(evt, pos) => {
           dispatch(
             setDialogPosition({
