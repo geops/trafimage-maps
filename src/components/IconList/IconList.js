@@ -124,7 +124,17 @@ class IconList extends PureComponent {
       }
 
       return ReactDOM.createPortal(
-        <div className="wkp-icon-list-modal">
+        <div
+          role="button"
+          tabIndex={0}
+          className="wkp-icon-list-modal"
+          onClick={() => {
+            this.setState({
+              iconListVis: false,
+            });
+          }}
+          onKeyPress={() => {}}
+        >
           <div className="wkp-icon-list-modal-pos" style={listStyles}>
             {list}
           </div>
