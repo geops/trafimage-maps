@@ -25,13 +25,15 @@
   }
 
   .wkp-feature-information-body {
-    padding: 10px;
+    > div {
+      padding: 10px;
+    }
 
     .wkp-pagination-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-top: 5px;
+      padding-top: 0;
 
       .wkp-pagination-button-wrapper {
         padding: 0 10px;
