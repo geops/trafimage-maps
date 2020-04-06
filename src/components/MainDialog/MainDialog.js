@@ -12,6 +12,7 @@ import { setDialogPosition } from '../../model/app/actions';
 const MainDialog = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
   const dialogVisible = useSelector(state => state.app.dialogVisible);
   const language = useSelector(state => state.app.language);
   const isMobileWidth = useSelector(state => state.app.isMobileWidth);

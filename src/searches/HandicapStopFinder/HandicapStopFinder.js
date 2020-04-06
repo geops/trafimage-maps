@@ -6,7 +6,11 @@ const getHandicapFeatures = layer =>
   layer.olLayer
     .getSource()
     .getFeatures()
-    .map(feature => ({ didok: feature.getProperties().didok, feature, layer }));
+    .map(feature => ({
+      didok: feature.getProperties().didok,
+      feature,
+      layer,
+    }));
 
 class HandicapStopFinder extends StopFinder {
   constructor() {
@@ -19,18 +23,23 @@ class HandicapStopFinder extends StopFinder {
       .filter(findHandicapLayers)
       .map(getHandicapFeatures)
       .flat();
-    return super.search(value).then(features =>
-      features
-        ? features
-            .map(f => ({
-              ...f,
-              handicap: handicapFeatures.find(
-                hf => hf.didok === f.properties.id,
-              ),
-            }))
-            .filter(f => f.handicap)
-        : [],
-    );
+    return super
+      .search(value)
+      .then(features =>
+        features
+          ? features
+              .map(f => ({
+                ...f,
+                handicap: handicapFeatures.find(
+                  hf => hf.didok === f.properties.id,
+                ),
+              }))
+              .filter(f => f.handicap)
+          : [],
+      )
+      .catch(() => {
+        return [];
+      });
   }
 
   select(item) {

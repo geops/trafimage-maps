@@ -6,7 +6,11 @@ const getHandicapFeatures = layer =>
   layer.olLayer
     .getSource()
     .getFeatures()
-    .map(feature => ({ didok: feature.getProperties().didok, feature, layer }));
+    .map(feature => ({
+      didok: feature.getProperties().didok,
+      feature,
+      layer,
+    }));
 
 /**
  * Search for handicap stations which are not a 'Stützpunktbahnhof'.
@@ -34,7 +38,10 @@ class HandicapNoInfoFinder extends StopFinder {
               f => !handicapFeatures.find(hf => hf.didok === f.properties.id),
             )
           : [],
-      );
+      )
+      .catch(() => {
+        return [];
+      });
   }
 }
 
