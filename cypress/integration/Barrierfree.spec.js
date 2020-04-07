@@ -5,6 +5,7 @@ describe('Barrierfree E2E', () => {
   beforeEach(() => {
     cy.visit('');
     cy.get('.wkp-menu-header ').click();
+    cy.wait(1000);
   });
 
   it('should show visible layer title in menu.', () => {
