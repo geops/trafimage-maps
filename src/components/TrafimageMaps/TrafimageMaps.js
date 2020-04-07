@@ -101,6 +101,11 @@ const propTypes = {
    * @private
    */
   enableTracking: PropTypes.bool,
+
+  /**
+   * URL endpoint for static files.
+   */
+  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
@@ -113,6 +118,7 @@ const defaultProps = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
   topics: null,
   language: 'de',
@@ -194,6 +200,7 @@ class TrafimageMaps extends React.PureComponent {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      staticFilesUrl,
       permissionUrl,
       enableTracking,
     } = this.props;
@@ -210,6 +217,7 @@ class TrafimageMaps extends React.PureComponent {
             permissionUrl={permissionUrl}
             vectorTilesKey={vectorTilesKey}
             vectorTilesUrl={vectorTilesUrl}
+            staticFilesUrl={staticFilesUrl}
           />
         </Provider>
       </MatomoProvider>
