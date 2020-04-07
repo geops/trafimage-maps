@@ -73,8 +73,8 @@
       #development-wrapper {
         transition: width ease 0.3s;
         color: #444;
-        width: 0px;
-        height: 0px;
+        width: 0;
+        height: 0;
       }
 
       #development-wrapper button {
@@ -157,11 +157,11 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <trafimage-maps
       id="map"
-      zoom="12"
+      zoom="14"
       center="[810000, 5900000]"
       appName="wkp"
       activeTopicKey="ch.sbb.zweitausbildung"
-      permissionUrl="//maps.trafimage.ch"
+      permissionUrl="//maps.trafimage.geops.ch"
     ></trafimage-maps>
     <button
       type="button"
@@ -236,6 +236,9 @@
         <div class="buttons-row">
           <button type="button" onclick="changeAttr('zoom', 16)">
             change zoom to 16
+          </button>
+          <button type="button" onclick="changeAttr('maxExtent', '502649.8980,5655117.1007,1352629.6525,6141868.0968')">
+            change max extent to "502649.8980,5655117.1007,1352629.6525,6141868.0968"
           </button>
         </div>
       </div>

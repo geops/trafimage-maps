@@ -1,7 +1,7 @@
 import { transform } from 'ol/proj';
 import qs from 'query-string';
 
-const zoomEquivalent = {
+export const zoomEquivalent = {
   7: 1,
   8: 1,
   9: 2,
@@ -17,11 +17,11 @@ const zoomEquivalent = {
 };
 
 // Convert zoom from new wkp to old one.
-function convertToOldZoom(zoom) {
+export function convertToOldZoom(zoom) {
   return zoomEquivalent[Math.min(Math.max(Math.round(zoom), 7), 18)];
 }
 
-function convertUrlParams(urlParams) {
+export function convertUrlParams(urlParams) {
   const params = { ...urlParams };
 
   if (params.z) {
@@ -44,7 +44,7 @@ function convertUrlParams(urlParams) {
   return params;
 }
 
-function redirect(appBaseUrl, topicKey, overrideParams) {
+export function redirect(appBaseUrl, topicKey, overrideParams) {
   const params = {
     ...convertUrlParams(qs.parse(window.location.search)),
     ...overrideParams,
@@ -53,4 +53,8 @@ function redirect(appBaseUrl, topicKey, overrideParams) {
   window.location.href = `${appBaseUrl}/#/${topicKey}?${qs.stringify(params)}`;
 }
 
-export default { convertToOldZoom, convertUrlParams, redirect };
+export function redirectToLogin(appBaseUrl) {
+  window.location.href = `${appBaseUrl}/login?next=${encodeURIComponent(
+    window.location.href,
+  )}`;
+}

@@ -66,8 +66,8 @@ class ZweitausbildungRoutesLayer extends VectorLayer {
             `${layerParam}workspace=trafimage` +
             '&srsName=EPSG:3857&geoserver=wkp',
         )
-          .then(data => data.json())
-          .then(data => {
+          .then((data) => data.json())
+          .then((data) => {
             const format = new GeoJSON();
             const features = format.readFeatures(data);
             this.olLayer.getSource().clear();

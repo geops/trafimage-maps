@@ -25,7 +25,7 @@ class ZweitausbildungPoisPopup extends PureComponent {
 
     return (
       <div className="wkp-zweitausbildung-pois-popup">
-        {features.map(singleFeature => (
+        {features.map((singleFeature) => (
           <div
             className="wkp-zweitausbildung-pois-popup-row"
             key={singleFeature.get('bezeichnung')}

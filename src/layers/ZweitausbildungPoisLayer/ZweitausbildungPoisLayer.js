@@ -23,7 +23,7 @@ import { easeOut } from 'ol/easing';
 class ZweitausbildungPoisLayer extends VectorLayer {
   constructor(options = {}) {
     const olLayer = new OLVectorLayer({
-      style: f => this.style(f),
+      style: (f) => this.style(f),
     });
 
     super({
@@ -50,8 +50,8 @@ class ZweitausbildungPoisLayer extends VectorLayer {
             `srsName=EPSG:3857&${viewparams}` +
             'outputFormat=application/json',
         )
-          .then(data => data.json())
-          .then(data => {
+          .then((data) => data.json())
+          .then((data) => {
             const format = new GeoJSON();
             const features = format.readFeatures(data);
             this.source.clear();

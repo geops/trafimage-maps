@@ -20,7 +20,7 @@ const ZweitausbildungSubLayerInfo = ({ t, properties }) => {
         </div>
       ) : null}
       <div className="wkp-zweitausbildung-sub-layer-info-legend">
-        {legend.map(item => (
+        {legend.map((item) => (
           <div>
             <img
               src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/zweitausbildung/${item.image}`}

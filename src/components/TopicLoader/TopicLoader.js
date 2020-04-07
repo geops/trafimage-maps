@@ -15,7 +15,7 @@ import {
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
-import redirectHelper from '../../utils/redirectHelper';
+import { redirect, redirectToLogin } from '../../utils/redirectHelper';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -38,7 +38,7 @@ const propTypes = {
   permissionsInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.array,
-  }).isRequired,
+  }),
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -58,6 +58,7 @@ const defaultProps = {
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionUrl: null,
+  permissionsInfos: null,
 };
 
 class TopicLoader extends Component {
@@ -66,9 +67,9 @@ class TopicLoader extends Component {
 
     if (permissionUrl) {
       dispatchFetchPermissionsInfos(permissionUrl);
+    } else {
+      this.loadTopics();
     }
-
-    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
@@ -121,29 +122,45 @@ class TopicLoader extends Component {
     const matomo = this.context;
     const {
       topics,
+      appBaseUrl,
       permissionsInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
     } = this.props;
 
+    // Load onl ytopics when permissions are loaded, to avoid double loading.
     if (!topics.length) {
       return;
     }
+    const activeTopic = topics.find((t) => t.active);
     const visibleTopics = topics.filter(
-      t =>
-        (!t.permission ||
-          permissionsInfos.permissions.includes(t.permission)) &&
-        !t.hideInLayerTree,
+      (t) =>
+        !t.permission ||
+        (permissionsInfos &&
+          permissionsInfos.permissions.includes(t.permission)),
     );
+    let visibleActiveTopic = visibleTopics.find((t) => t.active);
+    const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
-    const activeTopic = visibleTopics.find(topic => topic.active) || topics[0];
-    activeTopic.active = true; // in case we fall back to the first topic.
+    // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
+    if (isTopicNeedsPermission && permissionsInfos && !permissionsInfos.user) {
+      redirectToLogin(appBaseUrl);
+      return;
+    }
+
+    // If the wanted topic can't be seen, we do nothing until the login redirect happens.
+    if (isTopicNeedsPermission && !permissionsInfos) {
+      return;
+    }
+
+    visibleActiveTopic = visibleActiveTopic || topics[0];
+    visibleActiveTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
-    dispatchSetActiveTopic(activeTopic);
-    this.updateServices(activeTopic);
+    dispatchSetActiveTopic(visibleActiveTopic);
+    this.updateServices(visibleActiveTopic);
 
     if (matomo) {
-      matomo.trackEvent({ category: activeTopic.name, action: 'load' });
+      matomo.trackEvent({ category: visibleActiveTopic.name, action: 'load' });
     }
   }
 
@@ -165,7 +182,7 @@ class TopicLoader extends Component {
 
     if (activeTopic.redirect) {
       // Redirection to the old wkp
-      redirectHelper.redirect(appBaseUrl, activeTopic.key, {
+      redirect(appBaseUrl, activeTopic.key, {
         baselayers: '',
         layers: '',
       });
@@ -199,16 +216,16 @@ class TopicLoader extends Component {
 
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getIsBaseLayer() && l.getVisible());
+      .filter((l) => l.getIsBaseLayer() && l.getVisible());
 
     const visibleBaseLayers = topicLayers.filter(
-      l => l.getIsBaseLayer() && l.getVisible(),
+      (l) => l.getIsBaseLayer() && l.getVisible(),
     );
 
     // Set the visible baselayer if need to be changed on topic change.
     if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
       topicLayers
-        .filter(l => l.getIsBaseLayer())
+        .filter((l) => l.getIsBaseLayer())
         .forEach((lay, idx) => {
           lay.setVisible(idx === 0);
         });
@@ -249,7 +266,7 @@ class TopicLoader extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   language: state.app.language,
   layerService: state.app.layerService,

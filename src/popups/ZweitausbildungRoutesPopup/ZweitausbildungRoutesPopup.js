@@ -21,7 +21,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
       .filter((feat, pos, arr) => {
         return (
           arr
-            .map(f => f.get('bezeichnung'))
+            .map((f) => f.get('bezeichnung'))
             .indexOf(feat.get('bezeichnung')) === pos
         );
       })
@@ -80,7 +80,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
 
     return (
       <div className="wkp-zweitausbildung-routes-popup">
-        {features.map(singleFeature => (
+        {features.map((singleFeature) => (
           <div
             className={`wkp-zweitausbildung-routes-popup-row${
               singleFeature.get('highlight') ? ' highlight' : ''

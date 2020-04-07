@@ -17,8 +17,8 @@ function NetzkartePopup({ feature }) {
   const [showPlanLinks, setShowPlanLinks] = useState(false);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
-  const language = useSelector(state => state.app.language);
-  const projection = useSelector(state => state.app.projection);
+  const language = useSelector((state) => state.app.language);
+  const projection = useSelector((state) => state.app.projection);
 
   const { t } = useTranslation();
 
@@ -31,7 +31,7 @@ function NetzkartePopup({ feature }) {
           // Fake layer binded to popup, to open it.
           layer: {
             getKey: () => 'ch.sbb.departure.popup',
-            get: val => (val === 'popupComponent' ? 'DeparturePopup' : null),
+            get: (val) => (val === 'popupComponent' ? 'DeparturePopup' : null),
           },
         },
       ]),
@@ -211,6 +211,6 @@ function NetzkartePopup({ feature }) {
 NetzkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(NetzkartePopup);
-memoized.renderTitle = feat => feat.get('name');
+memoized.renderTitle = (feat) => feat.get('name');
 
 export default memoized;

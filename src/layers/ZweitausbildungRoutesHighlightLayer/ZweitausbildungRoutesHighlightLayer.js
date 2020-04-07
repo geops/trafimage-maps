@@ -74,8 +74,8 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
         `${layerParam}workspace=trafimage` +
         '&srsName=EPSG:3857&geoserver=wkp',
     )
-      .then(data => data.json())
-      .then(data => {
+      .then((data) => data.json())
+      .then((data) => {
         const format = new GeoJSON();
         this.features = format.readFeatures(data);
         this.olLayer.getSource().clear();
@@ -174,8 +174,8 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
           10,
         )};r:${meterRad}`,
     )
-      .then(data => data.json())
-      .then(data => {
+      .then((data) => data.json())
+      .then((data) => {
         const format = new GeoJSON();
         const feats = format.readFeatures(data);
 

@@ -79,7 +79,7 @@ class ZoneLayer extends CasaLayer {
 
     this.selectedZones = [];
 
-    this.onClick(features => {
+    this.onClick((features) => {
       if (features.length) {
         const [feature] = features;
 
@@ -257,8 +257,8 @@ class ZoneLayer extends CasaLayer {
     const url = `${this.url}/zonen?${qs.stringify(urlParams)}`;
 
     return fetch(url, { signal: this.abortController.signal })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         const features = format.readFeatures(data);
         this.featuresLayer.getSource().clear();
         this.labelsLayer.getSource().clear();
@@ -314,19 +314,19 @@ class ZoneLayer extends CasaLayer {
       }
     }
 
-    return this.fetchZones({ filter: qryParams.join(',') }).then(features => {
+    return this.fetchZones({ filter: qryParams.join(',') }).then((features) => {
       // Preselect features
       for (let i = 0; i < features.length; i += 1) {
         const zoneCode = features[i].get('zone');
         const partnerCode = features[i].get('partner_code');
         // partner code can be string or int. ensure both are string.
         const partner = config.find(
-          c => `${c.partnerCode}` === `${partnerCode}`,
+          (c) => `${c.partnerCode}` === `${partnerCode}`,
         );
 
         if (partner) {
           const zone = partner.zones.find(
-            z => `${z.zoneCode}` === `${zoneCode}`,
+            (z) => `${z.zoneCode}` === `${zoneCode}`,
           );
 
           if (zone) {

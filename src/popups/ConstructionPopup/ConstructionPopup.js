@@ -82,5 +82,5 @@ ConstructionPopup.defaultProps = defaultProps;
 
 const composed = compose(withTranslation())(ConstructionPopup);
 
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = (feat) => feat.get('name');
 export default composed;

@@ -48,6 +48,11 @@ const propTypes = {
   zoom: PropTypes.string,
 
   /**
+   * Limit the map extent (e.g. maxExtent="502649.8980,5655117.1007,1352629.6525,6141868.0968"). Default extent has no limit.
+   */
+  maxExtent: PropTypes.string,
+
+  /**
    * Application name. By specifying the app name, you can load a predefined
    * topics configuration. Default is 'wkp' loading the trafimage maps portal.
    */
@@ -102,6 +107,7 @@ const attributes = {
   height: '100%',
   center: undefined,
   zoom: undefined,
+  maxExtent: undefined,
   appName: 'wkp',
   language: 'de',
   activeTopicKey: undefined,
@@ -119,12 +125,13 @@ const defaultProps = {
   history: undefined,
 };
 
-const WebComponent = props => {
+const WebComponent = (props) => {
   const {
     activeTopicKey,
     width,
     height,
     zoom,
+    maxExtent,
     topics,
     appName,
     center,
@@ -145,6 +152,11 @@ const WebComponent = props => {
     vectorTilesKey,
   ]);
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
+
+  const extentArray = useMemo(
+    () => maxExtent && maxExtent.split(',').map((float) => parseFloat(float)),
+    [maxExtent],
+  );
   const appTopics = useMemo(() => {
     const tps = topics || getTopicConfig(apiKey, appName);
     if (!tps) {
@@ -158,7 +170,7 @@ const WebComponent = props => {
       return [];
     }
     if (activeTopicKey) {
-      tps.forEach(topic => {
+      tps.forEach((topic) => {
         // eslint-disable-next-line no-param-reassign
         topic.active = topic.key === activeTopicKey;
         // eslint-disable-next-line no-param-reassign
@@ -188,6 +200,7 @@ const WebComponent = props => {
           vectorTilesKey={vectorTileApiKey}
           topics={appTopics}
           zoom={floatZoom}
+          maxExtent={extentArray}
           center={arrayCenter}
           enableTracking={enableTracking}
         />

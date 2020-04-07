@@ -75,14 +75,14 @@ export const dataLayer = new TrafimageMapboxLayer({
 });
 
 let osmPointsLayers = [];
-const updateStations = mbMap => {
+const updateStations = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
     const osmPointsRendered = mbMap
       .queryRenderedFeatures({
         layers: osmPointsLayers,
       })
-      .map(feat => {
+      .map((feat) => {
         const good = {
           id: feat.id * 1000,
           type: feat.type,
@@ -106,12 +106,12 @@ dataLayer.once('load', () => {
   const { map, mbMap } = dataLayer;
   osmPointsLayers = mbMap
     .getStyle()
-    .layers.filter(layer => {
+    .layers.filter((layer) => {
       return (
         layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
       );
     })
-    .map(layer => layer.id);
+    .map((layer) => layer.id);
   mbMap.addSource('stations', {
     type: 'geojson',
     data: {
@@ -147,7 +147,7 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   radioGroup: 'baseLayer',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /(swissimage|netzkarte)/.test(styleLayer.id);
   },
 });
@@ -159,7 +159,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   radioGroup: 'baseLayer',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /pixelkarte_farbe/.test(styleLayer.id);
   },
 });
@@ -171,7 +171,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   radioGroup: 'baseLayer',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /pixelkarte_grau/.test(styleLayer.id);
   },
 });
@@ -675,7 +675,7 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /_SBB/.test(styleLayer.id);
   },
   properties: {
@@ -688,7 +688,7 @@ export const gewässer = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.gewaesser.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /waters/.test(styleLayer.id);
   },
   properties: {
@@ -701,7 +701,7 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.uebrigebahnen.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /_KTU/.test(styleLayer.id);
   },
   properties: {
@@ -731,7 +731,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(
               styleLayer.id,
             );
@@ -746,7 +746,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(
               styleLayer.id,
             );
@@ -771,7 +771,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Kanton|border_Kanton-IMAGICO)$/.test(styleLayer.id);
           },
           properties: {
@@ -784,7 +784,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
               styleLayer.id,
             );
