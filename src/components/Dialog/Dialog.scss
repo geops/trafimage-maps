@@ -76,7 +76,7 @@
 }
 
 .tm-h-m {
-  .wkp-dialog {
+  .tm-dialog {
     .tm-dialog-body {
       max-height: 420px;
     }
@@ -84,7 +84,7 @@
 }
 
 .tm-h-s {
-  .wkp-dialog {
+  .tm-dialog {
     .tm-dialog-body {
       max-height: 350px;
     }
@@ -92,8 +92,10 @@
 }
 
 .tm-h-xs {
-  .tm-dialog-body {
-    max-height: 280px;
+  .tm-dialog {
+    .tm-dialog-body {
+      max-height: 280px;
+    }
   }
 }
 
@@ -158,5 +160,9 @@
         }
       }
     }
+  }
+
+  .wkp-dialog-modal {
+    pointer-events: all;
   }
 }

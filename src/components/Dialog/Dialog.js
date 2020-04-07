@@ -13,6 +13,7 @@ const propTypes = {
   body: PropTypes.element,
   footer: PropTypes.element,
   isModal: PropTypes.bool,
+  wrapperClassName: PropTypes.string,
 };
 
 const defaultProps = {
@@ -20,13 +21,14 @@ const defaultProps = {
   body: null,
   footer: null,
   isModal: false,
+  wrapperClassName: undefined,
 };
 
 function Dialog(props) {
   const dialogPosition = useSelector((state) => state.app.dialogPosition);
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { body, isModal } = props;
+  const { body, isModal, wrapperClassName } = props;
 
   const dialogRef = useRef(null);
   const escFunction = (e) => e.which === 27 && dispatch(setDialogVisible());
@@ -55,7 +57,9 @@ function Dialog(props) {
   }, []);
 
   return (
-    <div className="wkp-dialog">
+    <div
+      className={`wkp-dialog${wrapperClassName ? ` ${wrapperClassName}` : ''}`}
+    >
       <UIDialog
         isOpen
         ref={dialogRef}

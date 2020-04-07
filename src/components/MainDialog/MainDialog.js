@@ -40,6 +40,7 @@ const MainDialog = () => {
       <Dialog
         isModal
         name="legallines"
+        wrapperClassName="wkp-dialog-modal"
         title={
           <span>
             <FaInfo /> {t(dialogVisible)}
