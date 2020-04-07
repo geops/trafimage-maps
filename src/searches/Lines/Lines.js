@@ -15,16 +15,16 @@ const lineKilometerRegExp = new RegExp('^([0-9]+)\\s+([0-9]+\\.?[0-9]+)$');
 const color = 'rgba(0,61,155,0.5)';
 
 const lineResolutions = [900, 850, 500, 250, 115, 100, 75, 50, 20, 10, 5];
-
-function getLineGeneralization(resolution) {
-  const res = LayerHelper.getDataResolution(resolution, lineResolutions);
-
-  return (
-    { 900: 5, 850: 10, 500: 10, 250: 30, 115: 30, 100: 100, 75: 100, 50: 100 }[
-      res
-    ] || 150
-  );
-}
+const lineGeneralisations = {
+  900: 5,
+  850: 10,
+  500: 10,
+  250: 30,
+  115: 30,
+  100: 100,
+  75: 100,
+  50: 100,
+};
 
 class Lines extends Search {
   constructor() {
@@ -32,7 +32,11 @@ class Lines extends Search {
     this.dataProjection = 'EPSG:21781';
 
     this.highlightStyle = (f, r) => {
-      const gen = getLineGeneralization(r);
+      const gen = LayerHelper.getLineGeneralization(
+        r,
+        lineResolutions,
+        lineGeneralisations,
+      );
       const format = new GeoJSON();
       const geometry =
         format.readGeometry(f.get('geoms')[gen], {

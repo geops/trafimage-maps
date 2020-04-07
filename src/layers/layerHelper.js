@@ -6,10 +6,19 @@ function getDataResolution(resolution, resolutions) {
   );
 }
 
-function getGeneralization(resolution) {
-  const res = getDataResolution(resolution);
+function getGeneralization(resolution, resolutions, generalisations) {
+  const res = getDataResolution(resolution, resolutions);
 
-  return { 750: 5, 500: 10, 250: 30, 100: 30, 75: 100, 50: 100 }[res] || 150;
+  return (
+    (generalisations || {
+      750: 5,
+      500: 10,
+      250: 30,
+      100: 30,
+      75: 100,
+      50: 100,
+    })[res] || 150
+  );
 }
 
 export default { getDataResolution, getGeneralization };
