@@ -76,9 +76,12 @@
 }
 
 .tm-h-m {
-  .tm-dialog {
-    .tm-dialog-body {
-      max-height: 420px;
+  &.tm-w-s,
+  &.tm-w-xs {
+    .tm-dialog {
+      .tm-dialog-body {
+        max-height: 420px;
+      }
     }
   }
 
