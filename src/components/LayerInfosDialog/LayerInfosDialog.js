@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import Layer from 'react-spatial/layers/Layer';
 import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
@@ -35,11 +35,9 @@ function LayerInfosDialog(props) {
       : selectedForInfos.layerInfoComponent;
 
   const description =
-    selectedForInfos instanceof Layer ? (
-      <div>{t(selectedForInfos.get('description'))}</div>
-    ) : (
-      selectedForInfos.description
-    );
+    selectedForInfos instanceof Layer
+      ? selectedForInfos.get('description')
+      : selectedForInfos.description;
 
   let body;
   if (componentName) {
@@ -48,7 +46,11 @@ function LayerInfosDialog(props) {
       <LayerInfoComponent language={language} properties={selectedForInfos} />
     );
   } else if (description) {
-    body = description;
+    body = (
+      <div>
+        <Trans i18nKey={description} />
+      </div>
+    );
   }
 
   return (
