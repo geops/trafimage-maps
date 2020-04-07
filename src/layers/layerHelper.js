@@ -1,9 +1,11 @@
 const dataResolutions = [750, 500, 250, 100, 75, 50, 20, 10, 5];
 
 function getDataResolution(resolution, resolutions = dataResolutions) {
-  return (resolutions.reduce((prev, curr) =>
-    Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
-  );
+  return resolutions.reduce((prev, curr) => {
+    return Math.abs(curr - resolution) < Math.abs(prev - resolution)
+      ? curr
+      : prev;
+  });
 }
 
 function getGeneralization(resolution, resolutions, generalisations) {
