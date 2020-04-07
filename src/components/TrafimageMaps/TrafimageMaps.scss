@@ -140,17 +140,13 @@
     // header component is enabled
     &.header {
       .wkp-menu-wrapper {
-        top: 0;
+        top: 55px;
         width: 345px;
       }
 
       .wkp-topics-menu {
         margin-top: 0;
       }
-    }
-
-    .wkp-search {
-      top: 6px;
     }
 
     .wkp-topic-content {
@@ -208,8 +204,49 @@
     }
   }
 
+  &.tm-w-xs {
+    .wkp-search {
+      right: 10px;
+    }
+  }
+
+  &.tm-w-s {
+    .wkp-search {
+      right: 220px;
+    }
+  }
+
+  &.tm-w-m {
+    .wkp-search {
+      right: 230px;
+    }
+  }
+
+  &.tm-w-m,
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-search {
+      min-width: unset;
+      left: 55px;
+      top: 3px;
+    }
+  }
+
+  &.tm-w-s,
+  &.tm-w-xs {
+    .wkp-search-toggle-container--open {
+      min-width: unset;
+    }
+  }
+
+
+
   &.tm-h-s,
   &.tm-h-xs {
+    .wkp-search-toggle-container--open {
+      width: 100%;
+    }
+
     .tm-zoomslider-wrapper {
       display: none;
     }

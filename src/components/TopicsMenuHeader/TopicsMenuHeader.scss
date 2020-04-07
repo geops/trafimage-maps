@@ -55,6 +55,8 @@
 .tm-w-s,
 .tm-w-xs {
   .wkp-menu-header {
+    position: absolute;
+    top: -55px;
     margin: 0;
     border: 0;
     padding: 10px;

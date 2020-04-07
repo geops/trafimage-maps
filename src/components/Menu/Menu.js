@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import './Menu.scss';
 
@@ -8,7 +9,15 @@ const propTypes = {
 };
 
 function Menu({ children }) {
-  return <div className="wkp-menu-wrapper">{children}</div>;
+  const menuOpen = useSelector(state => state.app.menuOpen);
+
+  return (
+    <div
+      className={`wkp-menu-wrapper${menuOpen ? ' wkp-menu-wrapper-open' : ''}`}
+    >
+      {children}
+    </div>
+  );
 }
 
 Menu.propTypes = propTypes;

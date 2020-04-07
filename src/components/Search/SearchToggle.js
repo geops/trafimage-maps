@@ -1,10 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useSelector } from 'react-redux';
-/*
+import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 import { setSearchOpen } from '../../model/app/actions';
 import { ReactComponent as SearchIcon } from './Search.svg';
-*/
 
 const propTypes = {
   children: PropTypes.node,
@@ -16,7 +15,8 @@ const defaultProps = {
 
 function SearchToggle({ children }) {
   const searchOpen = useSelector(state => state.app.searchOpen);
-  // const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -25,17 +25,16 @@ function SearchToggle({ children }) {
       >
         {children}
       </div>
-      {/*
-      !searchOpen && (
+      {!searchOpen && (
         <button
           className="wkp-search-toggle-button"
           type="button"
           onClick={() => dispatch(setSearchOpen(true))}
         >
           <SearchIcon />
+          <span>{t('Suchen')}</span>
         </button>
-      )
-      */}
+      )}
     </div>
   );
 }

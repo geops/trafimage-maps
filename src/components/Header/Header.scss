@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .wkp-header {
   position: absolute;
   right: 0;
@@ -21,14 +23,14 @@
     .wkp-header-login {
       margin-right: 10px;
       padding: 0 5px;
-      color: grey;
+      color: $brand-grey;
       display: flex;
       line-height: 20px;
 
       a {
         align-items: center;
         display: flex;
-        color: grey;
+        color: $brand-grey;
         text-decoration: none;
         line-height: 25px;
 
@@ -39,18 +41,18 @@
           width: 28px;
 
           path {
-            stroke: grey;
+            stroke: $brand-grey;
           }
         }
       }
 
       &:hover {
         a {
-          color: #eb0000;
+          color: $brand-primary-hover;
 
           svg {
             path {
-              stroke: #eb0000;
+              stroke: $brand-primary-hover;
             }
           }
         }
@@ -90,6 +92,10 @@
   &.tm-w-xs {
     .wkp-header-login span.wkp-header-login-text {
       display: none;
+    }
+
+    .wkp-header-sbb-logo {
+      width: 110px;
     }
   }
 }

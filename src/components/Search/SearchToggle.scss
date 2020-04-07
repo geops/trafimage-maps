@@ -1,30 +1,48 @@
 @import '../../globals.scss';
 
+.wkp-search-toggle-container {
+  display: none;
+}
+
 .wkp-search-toggle-container,
 .wkp-search-toggle-container--open {
   max-width: 400px;
+  min-width: 350px;
   position: relative;
-  margin: 0 auto;
+  padding-top: 3px;
+  float: right;
 }
 
 .wkp-search-toggle-button {
-  display: none;
   background: none;
   border: none;
   position: absolute;
   top: 9px;
   right: 200px;
-  width: 39px;
+  font-size: 14px;
+  margin-right: 40px;
+
+  height: 30px;
+  color: $brand-grey;
+  align-items: center;
+  display: flex;
+  padding: 0 5px;
 
   svg {
     height: 25px;
     width: 25px;
-    fill: grey;
+    fill: $brand-grey;
+  }
+
+  span {
+    padding-left: 2px;
   }
 
   &:hover {
+    color: $brand-primary-hover;
+
     svg {
-      fill: $brand-primary;
+      fill: $brand-primary-hover;
     }
   }
 }

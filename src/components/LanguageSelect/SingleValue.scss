@@ -1,7 +1,9 @@
+@import '../../globals.scss';
+
 .wkp-single-value-wrapper {
   border: 1px solid white;
   height: 100%;
-  color: grey;
+  color: $brand-grey;
   align-items: center;
   display: flex;
   padding: 5px;
@@ -11,7 +13,7 @@
     width: 28px;
 
     path {
-      stroke: grey;
+      stroke: $brand-grey;
     }
   }
 
@@ -20,11 +22,11 @@
   }
 
   &:hover {
-    color: #eb0000;
+    color: $brand-primary-hover;
 
     .wkp-single-value-globe {
       path {
-        stroke: #eb0000;
+        stroke: $brand-primary-hover;
       }
     }
   }
@@ -42,8 +44,15 @@
   }
 }
 
+.tm-w-s,
+.tm-w-xs {
+  .wkp-single-value-selected {
+    display: none;
+  }
+}
+
 .wkp-menu-opened {
   border: 1px solid #666;
   border-radius: 0.14286em;
-  border-bottom: none;
+  border-bottom: 1px solid #e5e5e5,
 }
