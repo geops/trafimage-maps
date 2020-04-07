@@ -63,7 +63,8 @@
     .tm-dialog-container,
     .tm-dialog-body {
       margin-top: 0;
-      height: 100%;
+      height: auto;
+      max-height: 620px;
       display: flex;
       flex-direction: column;
       border-bottom: 1px solid #eee;
@@ -81,6 +82,12 @@
       max-height: 420px;
     }
   }
+
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 520px;
+    }
+  }
 }
 
 .tm-h-s {
@@ -89,12 +96,24 @@
       max-height: 350px;
     }
   }
+
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 420px;
+    }
+  }
 }
 
 .tm-h-xs {
   .tm-dialog {
     .tm-dialog-body {
       max-height: 280px;
+    }
+  }
+
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 360px;
     }
   }
 }
