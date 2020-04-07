@@ -74,6 +74,10 @@ class ZweitausbildungPoisLayer extends VectorLayer {
     this.geoServerUrl = geoServerUrl;
   }
 
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
+  }
+
   init(map) {
     super.init(map);
 
@@ -173,7 +177,7 @@ class ZweitausbildungPoisLayer extends VectorLayer {
           new Style({
             zIndex: 3,
             image: new Icon({
-              src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/zweitausbildung/poi.png`,
+              src: `${this.staticFilesUrl}/img/layers/zweitausbildung/poi.png`,
             }),
           }),
         ];
