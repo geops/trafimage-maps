@@ -71,6 +71,25 @@ describe('HandicapPopupElement', () => {
     });
   });
 
+  ['061', '1807 Blonay', 'Route de Brent 2'].forEach(string => {
+    test(`should not render telephone number for '${string}'.`, () => {
+      const wrapper = mount(
+        <HandicapPopupElement
+          key="test"
+          label="test"
+          properties={{
+            test: string,
+          }}
+          propertyName="test"
+        />,
+      );
+      const children = wrapper.find('.wkp-handicap-popup-field-body').html();
+      expect(children).toBe(
+        `<div class="wkp-handicap-popup-field-body">${string}</div>`,
+      );
+    });
+  });
+
   ['test@test.fr', 'bla@lutixi.ch', 'foo@bluewin.ch'].forEach(email => {
     test(`should render email '${email}' in href.`, () => {
       const wrapper = mount(
@@ -137,5 +156,24 @@ describe('HandicapPopupElement', () => {
         .getDOMNode();
       expect(telHref.getAttribute('href')).toBe(`http://${url}`);
     });
+  });
+
+  test(`should not add http to href.`, () => {
+    const url = 'https://www.geops.ch';
+    const wrapper = mount(
+      <HandicapPopupElement
+        key="test"
+        label="test"
+        properties={{
+          test: url,
+        }}
+        propertyName="test"
+      />,
+    );
+    const telHref = wrapper
+      .find('a')
+      .first()
+      .getDOMNode();
+    expect(telHref.getAttribute('href')).toBe(url);
   });
 });

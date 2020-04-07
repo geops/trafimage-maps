@@ -193,14 +193,6 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
-export const infofpw = {
-  name: 'ch.sbb.infofpw',
-  key: 'ch.sbb.infofpw',
-  permission: 'sbb',
-  redirect: true,
-  layerInfoComponent: 'InfoFPWTopicInfo',
-};
-
 export const intervention = {
   name: 'ch.sbb.intervention',
   key: 'ch.sbb.intervention',
@@ -215,30 +207,6 @@ export const dfanachfuehrung = {
   description: 'ch.sbb.dfanachfuehrung-desc',
   redirect: true,
   permission: 'dfa-nf',
-};
-
-export const mobz = {
-  name: 'ch.sbb.mobz',
-  key: 'ch.sbb.mobz',
-  redirect: true,
-  permission: 'mobz',
-  layerInfoComponent: 'MobzTopicInfo',
-  infos: {
-    owner: 'I-NAT-NET-AN, Hannes Maichle',
-    email: 'hannes.maichle@sbb.ch',
-  },
-};
-
-export const mobzWhatIf = {
-  name: 'ch.sbb.mobz_what_if',
-  key: 'ch.sbb.mobz_what_if',
-  redirect: true,
-  permission: 'mobz_what_if',
-  layerInfoComponent: 'MobzTopicInfo',
-  infos: {
-    owner: 'I-NAT-INK, Martina Hauri',
-    email: 'martina.hauri@sbb.ch',
-  },
 };
 
 export const verbundzonen = {
@@ -267,11 +235,8 @@ const topics = {
     tarifverbundkarte,
     showcases,
     regionenkartePrivate,
-    infofpw,
     intervention,
     dfanachfuehrung,
-    mobz,
-    mobzWhatIf,
     verbundzonen,
     tina,
   ],

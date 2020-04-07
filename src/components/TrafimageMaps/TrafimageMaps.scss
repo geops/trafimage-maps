@@ -1,7 +1,7 @@
 @import '../../globals.scss';
 
 .tm-trafimage-maps {
-  font-family: 'SBBWeb Roman', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'SBBWeb-Roman', Arial, sans-serif;
   font-size: 14px;
   margin: 0;
   height: 100%;
@@ -141,16 +141,13 @@
     &.header {
       .wkp-menu-wrapper {
         top: 0;
-        width: 345px;
+        width: 100%;
+        max-width: 345px;
       }
 
       .wkp-topics-menu {
         margin-top: 0;
       }
-    }
-
-    .wkp-search {
-      top: 6px;
     }
 
     .wkp-topic-content {
@@ -172,7 +169,7 @@
 
     .wkp-topic-menu-item {
       margin: 4px;
-      height: 52px;
+      height: 28px;
 
       &.active {
         border-bottom: 1px solid #eee;
@@ -181,7 +178,7 @@
       .wkp-layer-toggler {
         position: absolute;
         right: 5px;
-        top: 23px;
+        top: 12px;
       }
 
       .wkp-info-topic-bt {

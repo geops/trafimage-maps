@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope, FaPencilAlt } from 'react-icons/fa';
+import { FaEnvelope, FaPencilAlt, FaQuestion } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import Button from '@geops/react-ui/components/Button';
 import SharePermalinkButton from '../SharePermalinkButton';
-import redirectHelper from '../../utils/redirectHelper';
+import { redirect } from '../../utils/redirectHelper';
 
 const socialShareConfig = [
   {
@@ -29,6 +29,12 @@ const socialShareConfig = [
     icon: <TiSocialTwitter focusable={false} />,
     className: 'ta-twitter-icon',
   },
+  {
+    url: '{appBaseUrl}/static/app_trafimage/docs/{language}/Quickstart.pdf',
+    title: 'Quickstart Manual Trafimage Webkartenportal',
+    icon: <FaQuestion focusable={false} />,
+    className: 'ta-manual-icon',
+  },
 ];
 
 const propTypes = {
@@ -39,39 +45,48 @@ const defaultProps = {
   appBaseUrl: null,
 };
 
-const renderConf = (conf, t) => (
+const replaceParams = (url, language, appBaseUrl) => {
+  return url
+    .replace('{url}', window.location.href)
+    .replace('{language}', language)
+    .replace('{appBaseUrl}', appBaseUrl);
+};
+
+const renderConf = (conf, t, lang, appBaseUrl) => (
   <div className={conf.className} key={conf.title}>
-    <BlankLink href={conf.url} title={t(conf.title)}>
+    <BlankLink
+      href={replaceParams(conf.url, lang, appBaseUrl)}
+      title={t(conf.title)}
+    >
       {conf.icon}
     </BlankLink>
   </div>
 );
 
 const Share = ({ appBaseUrl }) => {
+  const activeTopic = useSelector(state => state.app.activeTopic);
+  const language = useSelector(state => state.app.language);
   const map = useSelector(state => state.app.map);
   const { t } = useTranslation();
   const config = [...socialShareConfig];
-
-  for (let i = 0; i < config.length; i += 1) {
-    if (config[i].url) {
-      config[i].url = config[i].url.replace('{url}', window.location.href);
-    }
-  }
 
   const title = t('Karte als Bild speichern');
   return (
     <div className="wkp-share">
       <SharePermalinkButton />
-      {renderConf(config[0], t)}
+      {renderConf(config[0], t, language, appBaseUrl)}
       <CanvasSaveButton aria-label={title} map={map}>
         <TiImage focusable={false} title={title} />
       </CanvasSaveButton>
-      {renderConf(config[1], t)}
-      {renderConf(config[2], t)}
+      {renderConf(config[1], t, language, appBaseUrl)}
+      {renderConf(config[2], t, language, appBaseUrl)}
+      {activeTopic.permission
+        ? renderConf(config[3], t, language, appBaseUrl)
+        : null}
       <div className="ta-draw-icon">
         <Button
           onClick={() =>
-            redirectHelper.redirect(appBaseUrl, 'ch.sbb.netzkarte.draw', {
+            redirect(appBaseUrl, 'ch.sbb.netzkarte.draw', {
               'wkp.draw': '',
             })
           }

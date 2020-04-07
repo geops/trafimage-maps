@@ -67,6 +67,7 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
       <div className="wkp-menu-header-toggler">
         <div className="wkp-menu-header-toggler-icon">
           <img src={isOpen ? menuClosedImg : menuOpenImg} alt={t('Menü')} />
+          <span className="wkp-menu-header-menu-title">{t('Menü')}</span>
         </div>
         <span className="wkp-menu-toggle-text">{t('Menü')}</span>
       </div>

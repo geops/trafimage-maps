@@ -6,7 +6,6 @@
 
     .tm-dialog-container {
       min-width: 320px;
-      max-width: 420px;
       width: auto;
       overflow: visible;
 
@@ -101,6 +100,7 @@
 
         .tm-dialog-body {
           height: calc(100% - 50px);
+          padding-bottom: 0;
           overflow-y: auto;
           overflow-x: auto;
         }

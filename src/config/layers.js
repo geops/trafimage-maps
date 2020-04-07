@@ -16,7 +16,7 @@ proj4.defs(
   'EPSG:21781',
   '+proj=somerc +lat_0=46.95240555555556 +lon_0=7.439583333333333 +k_0=1 ' +
     '+x_0=600000 +y_0=200000 +ellps=bessel ' +
-    '+towgs84=660.077,13.551,369.344,2.484,1.783,2.939,5.66 +units=m +no_defs',
+    '+towgs84=674.374,15.056,405.346,0,0,0,0 +units=m +no_defs',
 );
 
 proj4.defs(
@@ -697,7 +697,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur',
+  style: 'netzkarte_eisenbahninfrastruktur_v2',
   properties: {
     hasInfos: true,
     layerInfoComponent: 'InfrastrukturTopicInfo',
@@ -708,8 +708,9 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
-    return /_SBB/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    // negative look behind regex doesn't work on all browsers.
+    return /_SBB/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
     hasInfos: true,
@@ -734,8 +735,9 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.uebrigebahnen.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
-    return /_KTU/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    // negative look behind regex doesn't work on all browsers.
+    return /_KTU/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
     hasInfos: true,
