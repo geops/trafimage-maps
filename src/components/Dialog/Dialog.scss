@@ -133,10 +133,6 @@
     }
   }
 
-  .wkp-dialog-modal {
-    pointer-events: all;
-  }
-
   &.tm-h-m {
     .tm-dialog {
       .tm-dialog-body {
@@ -185,4 +181,8 @@
       }
     }
   }
+}
+
+.wkp-dialog-modal {
+  pointer-events: all;
 }
