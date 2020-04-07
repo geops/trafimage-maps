@@ -64,7 +64,6 @@
     .tm-dialog-body {
       margin-top: 0;
       height: auto;
-      max-height: 620px;
       display: flex;
       flex-direction: column;
       border-bottom: 1px solid #eee;
@@ -85,7 +84,7 @@
 
   .tm-modal {
     .tm-dialog-body {
-      max-height: 520px;
+      max-height: 720px;
     }
   }
 }
