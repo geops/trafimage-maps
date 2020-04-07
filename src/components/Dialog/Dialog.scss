@@ -119,6 +119,11 @@
     .tm-dialog-container {
       width: calc(100% - 40px);
     }
+
+    .tm-dialog-container,
+    .tm-dialog-body {
+      height: 100%;
+    }
   }
 
   .wkp-dialog {
