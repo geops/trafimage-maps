@@ -12,9 +12,14 @@ import './FeatureInformation.scss';
 
 const propTypes = {
   featureInfo: PropTypes.array.isRequired,
+  staticFilesUrl: PropTypes.string,
 };
 
-const FeatureInformation = ({ featureInfo }) => {
+const defaultProps = {
+  staticFilesUrl: null,
+};
+
+const FeatureInformation = ({ featureInfo, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [featureIndex, setFeatureIndex] = useState(0);
@@ -98,6 +103,7 @@ const FeatureInformation = ({ featureInfo }) => {
           <PopupComponent
             key={info.layer.getKey()}
             feature={features[featureIndex]}
+            staticFilesUrl={staticFilesUrl}
           />
           {pagination}
         </div>
@@ -107,5 +113,6 @@ const FeatureInformation = ({ featureInfo }) => {
 };
 
 FeatureInformation.propTypes = propTypes;
+FeatureInformation.defaultProps = defaultProps;
 
 export default React.memo(FeatureInformation);

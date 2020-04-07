@@ -110,7 +110,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   // Define which component to display as child of Menu.
   const appMenuChildren = getComponents(
     {
-      featureMenu: <FeatureMenu />,
+      featureMenu: <FeatureMenu staticFilesUrl={staticFilesUrl} />,
       trackerMenu: <TrackerMenu />,
     },
     elements,
@@ -121,7 +121,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
-    popup: <Popup />,
+    popup: <Popup staticFilesUrl={staticFilesUrl} />,
     permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
     menu: (
       <Menu>
