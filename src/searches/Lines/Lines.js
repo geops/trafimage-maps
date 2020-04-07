@@ -32,7 +32,7 @@ class Lines extends Search {
     this.dataProjection = 'EPSG:21781';
 
     this.highlightStyle = (f, r) => {
-      const gen = LayerHelper.getLineGeneralization(
+      const gen = LayerHelper.getGeneralization(
         r,
         lineResolutions,
         lineGeneralisations,
