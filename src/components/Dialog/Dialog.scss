@@ -75,23 +75,6 @@
   }
 }
 
-.tm-h-m {
-  &.tm-w-s,
-  &.tm-w-xs {
-    .tm-dialog {
-      .tm-dialog-body {
-        max-height: 420px;
-      }
-    }
-  }
-
-  .tm-modal {
-    .tm-dialog-body {
-      max-height: 620px;
-    }
-  }
-}
-
 .tm-h-s {
   .tm-dialog {
     .tm-dialog-body {
@@ -134,11 +117,31 @@
   }
 }
 
+.tm-h-m {
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 620px;
+    }
+  }
+}
+
 .tm-w-xs,
 .tm-w-s {
   .tm-modal {
     .tm-dialog-container {
       width: calc(100% - 40px);
+    }
+  }
+
+  .wkp-dialog-modal {
+    pointer-events: all;
+  }
+
+  &.tm-h-m {
+    .tm-dialog {
+      .tm-dialog-body {
+        max-height: 420px;
+      }
     }
   }
 
@@ -181,9 +184,5 @@
         }
       }
     }
-  }
-
-  .wkp-dialog-modal {
-    pointer-events: all;
   }
 }
