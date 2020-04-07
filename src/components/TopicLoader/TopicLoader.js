@@ -135,9 +135,10 @@ class TopicLoader extends Component {
     const activeTopic = topics.find((t) => t.active);
     const visibleTopics = topics.filter(
       (t) =>
-        !t.permission ||
-        (permissionsInfos &&
-          permissionsInfos.permissions.includes(t.permission)),
+        (!t.permission ||
+          (permissionsInfos &&
+            permissionsInfos.permissions.includes(t.permission))) &&
+        !t.hideInLayerTree,
     );
     let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
