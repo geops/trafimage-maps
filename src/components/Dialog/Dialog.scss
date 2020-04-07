@@ -63,7 +63,7 @@
     .tm-dialog-container,
     .tm-dialog-body {
       margin-top: 0;
-      height: auto;
+      height: 100%;
       display: flex;
       flex-direction: column;
       border-bottom: 1px solid #eee;
@@ -118,11 +118,6 @@
   .tm-modal {
     .tm-dialog-container {
       width: calc(100% - 40px);
-    }
-
-    .tm-dialog-container,
-    .tm-dialog-body {
-      height: 100%;
     }
   }
 
