@@ -98,18 +98,38 @@
   }
 
   .wkp-dialog {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: 100%;
+    pointer-events: none;
+    margin: auto;
+
     .tm-dialog {
+      display: block;
       position: absolute;
-      display: flex !important;
-      max-height: 50%;
-      height: auto;
-      left: 10px;
-      right: 10px;
-      top: unset;
-      bottom: 10px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      height: 100%;
+      pointer-events: none;
+      margin: auto;
+      background: transparent;
 
       .tm-dialog-container {
-        height: 100%;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        max-height: 50%;
+        pointer-events: all;
 
         .tm-dialog-body {
           display: flex;
