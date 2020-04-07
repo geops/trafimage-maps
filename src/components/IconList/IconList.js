@@ -96,8 +96,8 @@ class IconList extends PureComponent {
       <List
         items={options}
         className="tm-list wkp-icon-list-list"
-        renderItem={option => this.renderOption(option)}
-        getItemKey={option => option}
+        renderItem={(option) => this.renderOption(option)}
+        getItemKey={(option) => option}
         onSelect={(e, option) => {
           onSelect(option);
           this.setState({
