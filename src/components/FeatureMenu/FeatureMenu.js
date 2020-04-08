@@ -7,14 +7,16 @@ import FeatureInformation from '../FeatureInformation';
 import MenuItem from '../Menu/MenuItem';
 
 const propTypes = {
+  appBaseUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
+  appBaseUrl: null,
   staticFilesUrl: null,
 };
 
-const FeatureMenu = ({ staticFilesUrl }) => {
+const FeatureMenu = ({ appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const [collapsed, setCollapsed] = useState(false);
@@ -34,6 +36,7 @@ const FeatureMenu = ({ staticFilesUrl }) => {
     >
       <FeatureInformation
         featureInfo={featureInfo}
+        appBaseUrl={appBaseUrl}
         staticFilesUrl={staticFilesUrl}
       />
     </MenuItem>

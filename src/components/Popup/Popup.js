@@ -6,14 +6,16 @@ import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
 
 const propTypes = {
+  appBaseUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
+  appBaseUrl: null,
   staticFilesUrl: null,
 };
 
-const Popup = ({ staticFilesUrl }) => {
+const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
   const { activeTopic, featureInfo } = useSelector((state) => state.app);
 
@@ -71,6 +73,7 @@ const Popup = ({ staticFilesUrl }) => {
     >
       <FeatureInformation
         featureInfo={filtered}
+        appBaseUrl={appBaseUrl}
         staticFilesUrl={staticFilesUrl}
       />
     </RSPopup>

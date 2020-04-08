@@ -12,14 +12,16 @@ import './FeatureInformation.scss';
 
 const propTypes = {
   featureInfo: PropTypes.array.isRequired,
+  appBaseUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
+  appBaseUrl: null,
   staticFilesUrl: null,
 };
 
-const FeatureInformation = ({ featureInfo, staticFilesUrl }) => {
+const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [featureIndex, setFeatureIndex] = useState(0);
@@ -103,6 +105,7 @@ const FeatureInformation = ({ featureInfo, staticFilesUrl }) => {
           <PopupComponent
             key={info.layer.getKey()}
             feature={features[featureIndex]}
+            appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
           />
           {pagination}
