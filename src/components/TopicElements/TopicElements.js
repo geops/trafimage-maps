@@ -46,11 +46,13 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   appBaseUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
   appBaseUrl: null,
+  staticFilesUrl: null,
 };
 
 const getComponents = (defaultComponents, elementsToDisplay) =>
@@ -58,7 +60,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history, appBaseUrl }) {
+function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const ref = useRef(null);
   const { activeTopic, layerService, map } = useSelector((state) => state.app);
   const [tabFocus, setTabFocus] = useState(false);
@@ -108,7 +110,9 @@ function TopicElements({ history, appBaseUrl }) {
   // Define which component to display as child of Menu.
   const appMenuChildren = getComponents(
     {
-      featureMenu: <FeatureMenu />,
+      featureMenu: (
+        <FeatureMenu appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />
+      ),
       trackerMenu: <TrackerMenu />,
     },
     elements,
@@ -119,7 +123,7 @@ function TopicElements({ history, appBaseUrl }) {
     header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
-    popup: <Popup />,
+    popup: <Popup appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />,
     permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
     menu: (
       <Menu>
@@ -137,7 +141,7 @@ function TopicElements({ history, appBaseUrl }) {
           prevButton: t('Nächste Baselayer'),
           nextButton: t('Vorherige Baselayer'),
         }}
-        fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
+        fallbackImgDir={`${staticFilesUrl}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
@@ -160,7 +164,7 @@ function TopicElements({ history, appBaseUrl }) {
           )}
         </EventConsumer>
         {appElements}
-        <MainDialog />
+        <MainDialog staticFilesUrl={staticFilesUrl} />
       </div>
     </div>
   );

@@ -6,9 +6,10 @@ import { compose } from 'lodash/fp';
 const propTypes = {
   t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const ZweitausbildungLayerInfo = ({ t, properties }) => {
+const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;
 
@@ -18,7 +19,7 @@ const ZweitausbildungLayerInfo = ({ t, properties }) => {
       {legend ? (
         <div className="wkp-zweitausbildung-layer-info-legend">
           <img
-            src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/zweitausbildung/${legend.image}`}
+            src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
             draggable="false"
             alt={t('Kein Bildtext')}
           />

@@ -45,6 +45,10 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
     this.olLayer.changed();
   }
 
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
+  }
+
   style(feature, resolution) {
     const text = feature.get(`title_${this.language}`);
     const hover = feature.get('hoverStyle');
@@ -68,7 +72,7 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
         }),
         new Style({
           image: new Icon({
-            src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/zweitausbildung/button_rectangle.png`,
+            src: `${this.staticFilesUrl}/img/layers/zweitausbildung/button_rectangle.png`,
             anchor: [0.4, 0.505],
           }),
         }),

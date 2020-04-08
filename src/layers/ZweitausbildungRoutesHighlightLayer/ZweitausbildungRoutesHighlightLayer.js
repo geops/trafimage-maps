@@ -101,9 +101,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       if (this.options.indexOf(label) === -1) {
         this.options.push(label);
         this.icons[label] = feature.get('line_number')
-          ? `${
-              process.env.REACT_APP_STATIC_FILES_URL
-            }/img/layers/zweitausbildung/${feature.get('line_number')}.png`
+          ? `${this.staticFilesUrl}/img/layers/zweitausbildung/${feature.get(
+              'line_number',
+            )}.png`
           : null;
       }
     }
@@ -205,6 +205,10 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
 
   setGeoServerUrl(geoServerUrl) {
     this.geoServerUrl = geoServerUrl;
+  }
+
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
   }
 
   style(feature, resolution) {

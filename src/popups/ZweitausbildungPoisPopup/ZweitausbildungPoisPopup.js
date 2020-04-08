@@ -9,6 +9,7 @@ import './ZweitausbildungPoisPopup.scss';
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
+  appBaseUrl: PropTypes.string.isRequired,
 };
 
 class ZweitausbildungPoisPopup extends PureComponent {
@@ -20,7 +21,7 @@ class ZweitausbildungPoisPopup extends PureComponent {
   }
 
   render() {
-    const { feature, t } = this.props;
+    const { feature, t, appBaseUrl } = this.props;
     const features = feature.get('features');
 
     return (
@@ -41,9 +42,7 @@ class ZweitausbildungPoisPopup extends PureComponent {
             <div className="wkp-zweitausbildung-pois-popup-image">
               {singleFeature.get('image') ? (
                 <img
-                  src={`${
-                    process.env.REACT_APP_BASE_URL
-                  }/cached_image?url=${encodeURIComponent(
+                  src={`${appBaseUrl}/cached_image?url=${encodeURIComponent(
                     encodeURI(singleFeature.get('image')),
                   )}`}
                   height={

@@ -9,6 +9,7 @@ import './ZweitausbildungRoutesPopup.scss';
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 class ZweitausbildungRoutesPopup extends PureComponent {
@@ -75,7 +76,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
   }
 
   render() {
-    const { t } = this.props;
+    const { t, staticFilesUrl } = this.props;
     const { features } = this.state;
 
     return (
@@ -91,9 +92,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
             {singleFeature.get('line_number') ? (
               <span className="wkp-zweitausbildung-routes-popup-image">
                 <img
-                  src={`${
-                    process.env.REACT_APP_STATIC_FILES_URL
-                  }/img/layers/zweitausbildung/${singleFeature.get(
+                  src={`${staticFilesUrl}/img/layers/zweitausbildung/${singleFeature.get(
                     'line_number',
                   )}.png`}
                   height="16"

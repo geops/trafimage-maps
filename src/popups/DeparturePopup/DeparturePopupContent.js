@@ -25,6 +25,8 @@ const propTypes = {
 
   showTitle: PropTypes.bool,
 
+  appBaseUrl: PropTypes.string.isRequired,
+
   // react-i18next
   t: PropTypes.func.isRequired,
 
@@ -124,7 +126,7 @@ class DeparturePopupContent extends Component {
    * @private
    */
   loadDepartures() {
-    const { platforms, uic } = this.props;
+    const { platforms, uic, appBaseUrl } = this.props;
 
     const urlParams = {};
 
@@ -136,9 +138,9 @@ class DeparturePopupContent extends Component {
       urlParams.destination = `${this.destinationFilter}`;
     }
 
-    const url = `${
-      process.env.REACT_APP_BASE_URL
-    }/search/departures/${uic}?${qs.stringify(urlParams)}`;
+    const url = `${appBaseUrl}/search/departures/${uic}?${qs.stringify(
+      urlParams,
+    )}`;
 
     fetch(url)
       .then((response) => response.json())
@@ -173,7 +175,7 @@ class DeparturePopupContent extends Component {
   }
 
   render() {
-    const { platforms, uic, name, icon, showTitle, t } = this.props;
+    const { platforms, uic, name, icon, showTitle, t, appBaseUrl } = this.props;
 
     const { departuresLoading, platformName } = this.state;
     let { departures } = this.state;
@@ -229,6 +231,7 @@ class DeparturePopupContent extends Component {
           destination={this.destinationFilter}
           onSelect={(d) => this.onDestinationSelect(d)}
           uic={uic}
+          appBaseUrl={appBaseUrl}
         />
 
         {loading}
