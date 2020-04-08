@@ -13,11 +13,9 @@ const propTypes = {
 };
 
 class ZweitausbildungPoisPopup extends PureComponent {
+  // eslint-disable-next-line class-methods-use-this
   highlight(singleFeature, highlight) {
-    const { feature } = this.props;
-
     singleFeature.set('highlight', highlight);
-    feature.changed();
   }
 
   render() {

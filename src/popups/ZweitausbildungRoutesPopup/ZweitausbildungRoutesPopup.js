@@ -47,7 +47,6 @@ class ZweitausbildungRoutesPopup extends PureComponent {
     // Update the features in the map
     for (let i = 0; i < highlightFeatures.length; i += 1) {
       highlightFeatures[i].set('highlight', false);
-      highlightFeatures[i].changed();
     }
   }
 

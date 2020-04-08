@@ -30,6 +30,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     super({
       ...options,
       olLayer,
+      onClick: () => {
+        this.rerenderList();
+      },
     });
 
     this.styleCache = {};
@@ -110,8 +113,6 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
 
     this.options = this.options.sort((a, b) => a.localeCompare(b));
     this.options.unshift('Alle');
-
-    this.rerenderList();
   }
 
   rerenderList() {
@@ -149,8 +150,6 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       const label = this.features[i].get('label');
       this.features[i].set('highlight', option ? label === option : false);
     }
-
-    this.olLayer.changed();
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
@@ -236,24 +235,13 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
         }
       }
 
-      // Update the selected option
-      this.selected = feature.get('label');
-      this.rerenderList();
+      // Update the selected option only when needed.
+      if (this.selected !== feature.get('label')) {
+        this.selected = feature.get('label');
+        this.rerenderList();
+      }
 
       return this.styleCache[styleName];
-    }
-
-    // Update the selected option
-    // if no features is highlighted so far
-    let selectedFeature = null;
-    for (let i = 0; i < this.features.length; i += 1) {
-      if (this.features[i].get('highlight')) {
-        selectedFeature = this.features[i].get('highlight');
-      }
-    }
-    if (!selectedFeature) {
-      this.selected = null;
-      this.rerenderList();
     }
 
     return null;
