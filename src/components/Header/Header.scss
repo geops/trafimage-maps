@@ -36,20 +36,31 @@
     }
   }
 
-  &.tm-w-m,
-  &.tm-w-s,
-  &.tm-w-xs {
+  &.tm-w-m {
     .wkp-header {
       .wkp-login {
-        margin-right: 15px;
+        margin-right: 11px;
       }
     }
   }
 
+  &.tm-w-s {
+    .wkp-header {
+      .wkp-login {
+        margin-right: 13px;
+      }
+    }
+  }
+
+
   &.tm-w-xs {
     .wkp-header {
-      .wkp-login-text {
-        display: none;
+      .wkp-login {
+        margin-right: 9px;
+
+        .wkp-login-text {
+          display: none;
+        }
       }
     }
 
