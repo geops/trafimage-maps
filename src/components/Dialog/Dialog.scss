@@ -125,6 +125,8 @@
 .tm-w-xs,
 .tm-w-s {
   .tm-modal {
+    pointer-events: all;
+
     .tm-dialog-container {
       width: calc(100% - 40px);
     }
@@ -164,9 +166,5 @@
         }
       }
     }
-  }
-
-  .tm-modal {
-    pointer-events: all;
   }
 }
