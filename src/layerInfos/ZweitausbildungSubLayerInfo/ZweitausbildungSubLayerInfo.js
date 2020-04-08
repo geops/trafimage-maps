@@ -6,9 +6,10 @@ import { compose } from 'lodash/fp';
 const propTypes = {
   t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const ZweitausbildungSubLayerInfo = ({ t, properties }) => {
+const ZweitausbildungSubLayerInfo = ({ t, properties, staticFilesUrl }) => {
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;
 
@@ -23,7 +24,7 @@ const ZweitausbildungSubLayerInfo = ({ t, properties }) => {
         {legend.map((item) => (
           <div>
             <img
-              src={`${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/zweitausbildung/${item.image}`}
+              src={`${staticFilesUrl}/img/layers/zweitausbildung/${item.image}`}
               draggable="false"
               alt={t('Kein Bildtext')}
             />
