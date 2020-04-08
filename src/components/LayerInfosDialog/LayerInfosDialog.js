@@ -59,7 +59,7 @@ function LayerInfosDialog(props) {
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}
-      body={<div style={{ maxWidth: '500px' }}>{body}</div>}
+      body={<div>{body}</div>}
       style={style}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

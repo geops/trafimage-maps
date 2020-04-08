@@ -85,13 +85,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         <div
           className="tm-dialog-body"
         >
-          <div
-            style={
-              Object {
-                "maxWidth": "500px",
-              }
-            }
-          >
+          <div>
             <div>
               description&lt;br/&gt;break
             </div>

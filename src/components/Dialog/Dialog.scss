@@ -8,8 +8,6 @@
       min-width: 320px;
       width: auto;
       overflow: visible;
-      display: flex;
-      flex-direction: column;
 
       .tm-dialog-header {
         padding: 0 20px;
@@ -124,6 +122,11 @@
 
 .tm-w-xs,
 .tm-w-s {
+  .tm-dialog-container {
+    display: flex;
+    flex-direction: column;
+  }
+
   .tm-modal {
     pointer-events: all;
 
