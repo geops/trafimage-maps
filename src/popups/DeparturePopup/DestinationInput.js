@@ -12,6 +12,7 @@ const propTypes = {
   platforms: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
   uic: PropTypes.number.isRequired,
+  appBaseUrl: PropTypes.string.isRequired,
 
   // react-i18next
   t: PropTypes.func.isRequired,
@@ -72,10 +73,10 @@ class DestinationInput extends Component {
    * @private
    */
   loadDestinations(value) {
-    const { uic, platforms } = this.props;
+    const { uic, platforms, appBaseUrl } = this.props;
 
     const url =
-      `${process.env.REACT_APP_BASE_URL}/search/destinations/${uic}` +
+      `${appBaseUrl}/search/destinations/${uic}` +
       `?platforms=${platforms || ''}&destination=${value}`;
 
     this.abortController.abort();

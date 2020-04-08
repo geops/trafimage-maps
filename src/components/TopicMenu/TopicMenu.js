@@ -177,7 +177,9 @@ class TopicMenu extends PureComponent {
             }}
             renderItemContent={(layer, layerTreeComp) => (
               <>
-                {layerTreeComp.renderItemContent(layer)}
+                {layer.renderItemContent
+                  ? layer.renderItemContent(layerTreeComp)
+                  : layerTreeComp.renderItemContent(layer)}
                 {layer.get('hasInfos') && this.renderInfoButton(layer)}
               </>
             )}

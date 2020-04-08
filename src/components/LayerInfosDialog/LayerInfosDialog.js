@@ -8,10 +8,12 @@ import layerInfos from '../../layerInfos';
 
 const propTypes = {
   selectedForInfos: PropTypes.object,
+  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   selectedForInfos: null,
+  staticFilesUrl: null,
 };
 
 export const NAME = 'infoDialog';
@@ -19,7 +21,7 @@ export const NAME = 'infoDialog';
 function LayerInfosDialog(props) {
   const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
-  const { selectedForInfos } = props;
+  const { selectedForInfos, staticFilesUrl } = props;
 
   if (!selectedForInfos) {
     return null;
@@ -39,7 +41,11 @@ function LayerInfosDialog(props) {
   if (componentName) {
     const LayerInfoComponent = layerInfos[componentName];
     body = (
-      <LayerInfoComponent language={language} properties={selectedForInfos} />
+      <LayerInfoComponent
+        language={language}
+        properties={selectedForInfos}
+        staticFilesUrl={staticFilesUrl}
+      />
     );
   } else if (description) {
     body = <Trans i18nKey={description} />;

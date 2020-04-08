@@ -45,17 +45,24 @@
 
       #buttons {
         display: flex;
-        padding-left: 70px;
         flex-direction: column;
       }
 
       .buttons-row {
         display: flex;
         justify-content: space-evenly;
+        margin: 5px;
       }
 
       .buttons-row button {
         width: 150px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .buttons-row label {
+        display: flex;
       }
 
       #development-bt,
@@ -94,13 +101,6 @@
         display: inline-block;
         transform: rotate(-90deg);
         margin: -55px;
-      }
-
-      #development-wrapper #close-bt {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        margin: 0;
       }
     </style>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
@@ -160,7 +160,7 @@
       zoom="14"
       center="[810000, 5900000]"
       appName="wkp"
-      activeTopicKey="ch.sbb.netzkarte"
+      activeTopicKey="ch.sbb.zweitausbildung"
       permissionUrl="//maps.trafimage.geops.ch"
     ></trafimage-maps>
     <button
@@ -189,6 +189,17 @@
         <span>X</span>
       </button>
       <div id="buttons">
+        <div class="buttons-row">
+          <label>
+            <input id="topic" type="text" />
+            <button
+              type="button"
+              onclick="changeAttr('activeTopicKey', document.getElementById('topic').value)"
+            >
+            change topic
+            </button>
+          </label>
+        </div>
         <div class="buttons-row">
           <button
             type="button"
