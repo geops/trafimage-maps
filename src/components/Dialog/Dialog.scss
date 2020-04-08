@@ -122,9 +122,12 @@
 
 .tm-w-xs,
 .tm-w-s {
-  .tm-dialog-container {
-    display: flex;
-    flex-direction: column;
+  .tm-dialog,
+  .tm-modal {
+    .tm-dialog-container {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .tm-modal {
