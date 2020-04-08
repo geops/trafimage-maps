@@ -25,31 +25,8 @@
   }
 
   .wkp-feature-information-body {
-    > div {
+    > div:first-child {
       padding: 10px;
-    }
-
-    .wkp-pagination-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 0;
-
-      .wkp-pagination-button-wrapper {
-        padding: 0 10px;
-        height: 25px;
-        width: 25px;
-
-        .wkp-pagination-button {
-          height: 25px;
-          width: 25px;
-
-          svg {
-            height: 25px;
-            width: 25px;
-          }
-        }
-      }
     }
   }
 }
