@@ -184,6 +184,12 @@
         bottom: 0;
       }
     }
+
+    .wkp-search {
+      min-width: unset;
+      left: 55px;
+      top: 3px;
+    }
   }
 
   &.tm-w-s,
@@ -219,16 +225,6 @@
   &.tm-w-m {
     .wkp-search {
       right: 230px;
-    }
-  }
-
-  &.tm-w-m,
-  &.tm-w-s,
-  &.tm-w-xs {
-    .wkp-search {
-      min-width: unset;
-      left: 55px;
-      top: 3px;
     }
   }
 

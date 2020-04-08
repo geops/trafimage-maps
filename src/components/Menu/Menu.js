@@ -9,7 +9,7 @@ const propTypes = {
 };
 
 function Menu({ children }) {
-  const menuOpen = useSelector(state => state.app.menuOpen);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
 
   return (
     <div

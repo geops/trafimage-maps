@@ -10,7 +10,7 @@ const propTypes = {
   data: PropTypes.object.isRequired,
 };
 
-const SingleValue = props => {
+const SingleValue = (props) => {
   const { selectProps, data } = props;
   return (
     <div

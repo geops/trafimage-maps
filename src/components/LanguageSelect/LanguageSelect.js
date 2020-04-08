@@ -72,9 +72,9 @@ const selectStyles = (screenWidth, isMobile) => {
 
 const LanguageSelect = () => {
   const dispatch = useDispatch();
-  const language = useSelector(state => state.app.language);
-  const screenWidth = useSelector(state => state.app.screenWidth);
-  const [inputValue] = options.filter(opt => opt.value === language);
+  const language = useSelector((state) => state.app.language);
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+  const [inputValue] = options.filter((opt) => opt.value === language);
   const isMobileWidth = ['xs', 's'].includes(screenWidth);
 
   return (
@@ -84,7 +84,7 @@ const LanguageSelect = () => {
       value={inputValue}
       styles={selectStyles(screenWidth, isMobileWidth)}
       components={{ SingleValue }}
-      onChange={opt => {
+      onChange={(opt) => {
         dispatch(setLanguage(opt.value));
       }}
     />
