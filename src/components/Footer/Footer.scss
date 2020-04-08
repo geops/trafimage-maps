@@ -112,6 +112,10 @@
 .tm-w-xs {
   .wkp-footer-left {
     font-size: 11px;
+
+    .wkp-dev-portal-link {
+      display: none;
+    }
   }
 
   .wkp-language-select {

@@ -13,30 +13,30 @@ import './Footer.scss';
 const Footer = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const layerService = useSelector(state => state.app.layerService);
-  const map = useSelector(state => state.app.map);
-  const projection = useSelector(state => state.app.projection);
+  const layerService = useSelector((state) => state.app.layerService);
+  const map = useSelector((state) => state.app.map);
+  const projection = useSelector((state) => state.app.projection);
 
   const projections = [
     {
       label: 'CH1093 / LV03',
       value: 'EPSG:21781',
-      format: c => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+      format: (c) => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
     },
     {
       label: 'CH1093+ / LV95',
       value: 'EPSG:2056',
-      format: c => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+      format: (c) => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
     },
     {
       label: 'Web Mercator',
       value: 'EPSG:3857',
-      format: c => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+      format: (c) => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
     },
     {
       label: 'WGS 84',
       value: 'EPSG:4326',
-      format: c => `${t('Koordinaten')}: ${coordinateHelper.wgs84Format(c)}`,
+      format: (c) => `${t('Koordinaten')}: ${coordinateHelper.wgs84Format(c)}`,
     },
   ];
 
@@ -45,7 +45,7 @@ const Footer = () => {
       <div className="wkp-footer-left">
         <Copyright
           layerService={layerService}
-          format={f => `${t('Geodaten')} ${f.join(', ')}`}
+          format={(f) => `${t('Geodaten')} ${f.join(', ')}`}
           className="tm-copyright"
         />
         <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
@@ -58,6 +58,7 @@ const Footer = () => {
           {t('Rechtliches')}
         </ActionLink>
         <a
+          className="wkp-dev-portal-link"
           href="https://doc.trafimage.ch"
           rel="noopener noreferrer"
           target="_blank"

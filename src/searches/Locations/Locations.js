@@ -8,13 +8,16 @@ class Locations extends Search {
     return fetch(
       `https://maps.trafimage.ch/api3-geo-admin/SearchServer?type=locations&searchText=${value}`,
     )
-      .then(data => data.json())
-      .then(response =>
-        response.results.map(item => ({
+      .then((data) => data.json())
+      .then((response) =>
+        response.results.map((item) => ({
           ...item,
           label: item.attrs.label.replace(/<[^>]*>?/gm, ''),
         })),
-      );
+      )
+      .catch(() => {
+        return [];
+      });
   }
 
   render(item) {

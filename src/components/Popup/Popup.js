@@ -5,19 +5,19 @@ import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
 
 const Popup = () => {
-  const map = useSelector(state => state.app.map);
-  const { activeTopic, featureInfo } = useSelector(state => state.app);
+  const map = useSelector((state) => state.app.map);
+  const { activeTopic, featureInfo } = useSelector((state) => state.app);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
   }
 
-  const filtered = featureInfo.filter(info => {
+  const filtered = featureInfo.filter((info) => {
     const { layer, features } = info;
 
     if (layer.get('popupComponent')) {
       if (typeof layer.hidePopup === 'function') {
-        return features.find(f => !layer.hidePopup(f));
+        return features.find((f) => !layer.hidePopup(f));
       }
       return true;
     }

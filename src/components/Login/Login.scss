@@ -1,0 +1,32 @@
+@import '../../globals.scss';
+
+.wkp-login {
+  margin-right: 10px;
+  padding: 0 5px;
+  color: $brand-grey;
+  display: flex;
+  align-items: center;
+  display: flex;
+  color: $brand-grey;
+
+  .wkp-login-icon {
+    float: left;
+    margin-bottom: 2px;
+    height: 28px;
+    width: 28px;
+
+    path {
+      stroke: $brand-grey;
+    }
+  }
+
+  &:hover {
+    color: $brand-primary-hover;
+
+    svg {
+      path {
+        stroke: $brand-primary-hover;
+      }
+    }
+  }
+}

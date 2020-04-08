@@ -20,45 +20,6 @@
     display: flex;
     align-items: center;
 
-    .wkp-header-login {
-      margin-right: 10px;
-      padding: 0 5px;
-      color: $brand-grey;
-      display: flex;
-      line-height: 20px;
-
-      a {
-        align-items: center;
-        display: flex;
-        color: $brand-grey;
-        text-decoration: none;
-        line-height: 25px;
-
-        .wkp-header-login-icon {
-          float: left;
-          margin-bottom: 2px;
-          height: 28px;
-          width: 28px;
-
-          path {
-            stroke: $brand-grey;
-          }
-        }
-      }
-
-      &:hover {
-        a {
-          color: $brand-primary-hover;
-
-          svg {
-            path {
-              stroke: $brand-primary-hover;
-            }
-          }
-        }
-      }
-    }
-
     .wkp-header-sbb-logo {
       height: 22px;
       width: 198px;
@@ -69,10 +30,8 @@
 .tm-trafimage-maps {
   &.tm-w-l {
     .wkp-header {
-      .wkp-header-right {
-        .wkp-header-login {
-          margin-right: 10px;
-        }
+      .wkp-login {
+        margin-right: 10px;
       }
     }
   }
@@ -81,17 +40,17 @@
   &.tm-w-s,
   &.tm-w-xs {
     .wkp-header {
-      .wkp-header-right {
-        .wkp-header-login {
-          margin-right: 10px;
-        }
+      .wkp-login {
+        margin-right: 15px;
       }
     }
   }
 
   &.tm-w-xs {
-    .wkp-header-login span.wkp-header-login-text {
-      display: none;
+    .wkp-header {
+      .wkp-login-text {
+        display: none;
+      }
     }
 
     .wkp-header-sbb-logo {

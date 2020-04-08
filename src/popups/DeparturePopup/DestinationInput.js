@@ -82,8 +82,8 @@ class DestinationInput extends Component {
     this.abortController = new AbortController();
     const { signal } = this.abortController;
     fetch(url, { signal })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const destinations = data.map((d, i) => ({
           id: i,
           label: d,
@@ -91,7 +91,7 @@ class DestinationInput extends Component {
 
         this.setState({ destinations });
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.name === 'AbortError') {
           // eslint-disable-next-line no-console
           console.warn(`Abort ${url}`);
@@ -114,12 +114,12 @@ class DestinationInput extends Component {
           value={destinationInputValue}
           items={destinations}
           placeholder={t('Direkt erreichbares Ziel auswählen')}
-          renderItem={item => item.label}
-          getItemKey={item => item.id}
-          onChange={value => {
+          renderItem={(item) => item.label}
+          getItemKey={(item) => item.id}
+          onChange={(value) => {
             this.onInputChange(value);
           }}
-          onSelect={item => {
+          onSelect={(item) => {
             if (!item) {
               return;
             }

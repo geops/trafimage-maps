@@ -48,12 +48,12 @@ class TrackerMenu extends Component {
 
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
-      .filter(l => l instanceof TrackerLayer);
+      .filter((l) => l instanceof TrackerLayer);
 
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
     if (this.trackerLayers.length) {
-      this.trackerLayers.forEach(layer => {
+      this.trackerLayers.forEach((layer) => {
         this.olEventsKeys.push(
           layer.olLayer.on('change:visible', () => {
             this.setState({
@@ -77,7 +77,7 @@ class TrackerMenu extends Component {
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
 
-    this.trackerLayers.forEach(layer => {
+    this.trackerLayers.forEach((layer) => {
       layer.unClick(this.onLayerClick);
     });
   }
@@ -118,14 +118,14 @@ class TrackerMenu extends Component {
         map={map}
         open={open}
         collapsed={collapsed}
-        onCollapseToggle={c => this.setState({ collapsed: c })}
+        onCollapseToggle={(c) => this.setState({ collapsed: c })}
       >
         {trajectory ? (
           <div>
             <RouteSchedule
-              trackerLayer={this.trackerLayers.find(l => l.getVisible())}
+              trackerLayer={this.trackerLayers.find((l) => l.getVisible())}
               lineInfos={trajectory}
-              onStationClick={station => {
+              onStationClick={(station) => {
                 map.getView().animate({
                   zoom: map.getView().getZoom(),
                   center: fromLonLat(station.coordinates),
@@ -140,7 +140,7 @@ class TrackerMenu extends Component {
 }
 
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   map: state.app.map,
   menuOpen: state.app.menuOpen,
   layerService: state.app.layerService,

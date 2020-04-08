@@ -25,9 +25,9 @@ const defaultProps = {
 };
 
 function TopicsMenu({ children, menuHeight, bodyElementRef }) {
-  const layerService = useSelector(state => state.app.layerService);
-  const menuOpen = useSelector(state => state.app.menuOpen);
-  const topics = useSelector(state => state.app.topics);
+  const layerService = useSelector((state) => state.app.layerService);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
+  const topics = useSelector((state) => state.app.topics);
   const dispatch = useDispatch();
 
   if (!topics || !topics.length) {
@@ -49,7 +49,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
         ref={bodyElementRef}
       >
         <div className="wkp-topics-menu-body">
-          {topics.map(topic => (
+          {topics.map((topic) => (
             <TopicMenu
               key={topic.key}
               layerService={layerService}

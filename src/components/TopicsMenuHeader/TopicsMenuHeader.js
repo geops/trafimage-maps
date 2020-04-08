@@ -22,20 +22,20 @@ const getSubtitle = (layerService, t) => {
     .getLayersAsFlatArray()
     .reverse()
     .filter(
-      l =>
+      (l) =>
         !l.getIsBaseLayer() &&
         !l.get('hideInLegend') &&
         !layerService.getParent(l),
     );
-  const menuLayers = topicLayers.filter(l => l.getVisible());
+  const menuLayers = topicLayers.filter((l) => l.getVisible());
   return menuLayers.length > 0 && menuLayers.length === topicLayers.length
     ? t('alle aktiviert')
-    : menuLayers.map(l => t(l.getName())).join(', ');
+    : menuLayers.map((l) => t(l.getName())).join(', ');
 };
 
 const TopicsMenuHeader = ({ isOpen, onToggle }) => {
-  const layerService = useSelector(state => state.app.layerService);
-  const { name } = useSelector(state => state.app.activeTopic || {});
+  const layerService = useSelector((state) => state.app.layerService);
+  const { name } = useSelector((state) => state.app.activeTopic || {});
   const { t } = useTranslation();
   const [subtitle, setSubtitle] = useState('');
 

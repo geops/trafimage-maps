@@ -25,7 +25,7 @@ const ShareMenu = ({ appBaseUrl }) => {
       title={t('Teilen')}
       icon={<FaShareAlt focusable={false} />}
       collapsed={collapsed}
-      onCollapseToggle={c => setCollapsed(c)}
+      onCollapseToggle={(c) => setCollapsed(c)}
     >
       <Share appBaseUrl={appBaseUrl} />
     </MenuItem>
