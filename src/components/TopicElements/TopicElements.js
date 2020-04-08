@@ -62,11 +62,11 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
 
 function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const ref = useRef(null);
-  const { activeTopic, layerService, map } = useSelector(state => state.app);
+  const { activeTopic, layerService, map } = useSelector((state) => state.app);
   const [tabFocus, setTabFocus] = useState(false);
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
-    const focusTab = e => e.which === 9 && setTabFocus(true);
+    const focusTab = (e) => e.which === 9 && setTabFocus(true);
     document.addEventListener('mousedown', unfocusTab);
     document.addEventListener('keydown', focusTab);
     return function cleanup() {
@@ -84,7 +84,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
   if (disabled) {
-    disabled.split(',').forEach(element => {
+    disabled.split(',').forEach((element) => {
       // Backward compatibility
       if (element === 'spyLayer') {
         activeTopic.elements.baseLayerToggler = false;
@@ -99,7 +99,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   const elements = activeTopic.elements || defaultElements;
   elements.telephoneInfos =
-    !disabled || !disabled.split(',').find(el => el === 'header');
+    !disabled || !disabled.split(',').find((el) => el === 'header');
 
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
@@ -110,7 +110,9 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   // Define which component to display as child of Menu.
   const appMenuChildren = getComponents(
     {
-      featureMenu: <FeatureMenu />,
+      featureMenu: (
+        <FeatureMenu appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />
+      ),
       trackerMenu: <TrackerMenu />,
     },
     elements,
@@ -121,7 +123,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
-    popup: <Popup />,
+    popup: <Popup appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />,
     permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
     menu: (
       <Menu>
@@ -157,7 +159,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
       <ResizeHandler observe={ref.current} forceUpdate={elements.header} />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         <EventConsumer>
-          {dispatcher => (
+          {(dispatcher) => (
             <Map map={map} maxZoom={maxZoom} dispatchHtmlEvent={dispatcher} />
           )}
         </EventConsumer>

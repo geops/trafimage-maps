@@ -27,12 +27,12 @@ class HandicapLayer extends VectorLayer {
               handicapType === 'stuetzpunkt' ? 'stuetzpunktbahnhof=true' : ''
             }`,
           )
-            .then(data => data.json())
-            .then(data => {
+            .then((data) => data.json())
+            .then((data) => {
               const format = new GeoJSON();
               let features = format.readFeatures(data);
               if (handicapType !== 'stuetzpunkt') {
-                features = features.filter(feat => {
+                features = features.filter((feat) => {
                   if (handicapType === 'barrierfree') {
                     return feat.get('barrierefreier_bahnhof') === true;
                   }
@@ -61,7 +61,7 @@ class HandicapLayer extends VectorLayer {
 
     this.wktFormat = new WKT();
 
-    this.onClick(f => {
+    this.onClick((f) => {
       [this.clickedFeature] = f;
       this.olLayer.changed();
     });

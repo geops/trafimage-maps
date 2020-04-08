@@ -47,7 +47,7 @@ class ConstructionLayer extends VectorLayer {
     this.geometryFunction = this.geometryFunction.bind(this);
 
     this.toggleLayers = options.toggleLayers || [];
-    this.grandChildren = this.toggleLayers.map(c => c.getChildren()).flat();
+    this.grandChildren = this.toggleLayers.map((c) => c.getChildren()).flat();
     this.setVisible(this.visible);
 
     // Same source for both layers
@@ -61,8 +61,8 @@ class ConstructionLayer extends VectorLayer {
             'srsName=EPSG:3857&' +
             'outputFormat=application/json',
         )
-          .then(data => data.json())
-          .then(data => {
+          .then((data) => data.json())
+          .then((data) => {
             const format = new GeoJSON();
             const features = format.readFeatures(data);
             this.source.clear();
@@ -85,7 +85,7 @@ class ConstructionLayer extends VectorLayer {
     super.init(map);
 
     this.visibilityKeys.push(
-      this.grandChildren.map(childLayer => {
+      this.grandChildren.map((childLayer) => {
         return childLayer.on('change:visible', () => this.source.changed());
       }),
     );
@@ -114,19 +114,19 @@ class ConstructionLayer extends VectorLayer {
     if (this.map) {
       const pixel = this.map.getPixelFromCoordinate(coordinate);
       features = this.map.getFeaturesAtPixel(pixel, {
-        layerFilter: l =>
+        layerFilter: (l) =>
           // Get group layers
           this.olLayer
             .getLayers()
             .getArray()
-            .some(layer => l === layer),
+            .some((layer) => l === layer),
         hitTolerance: this.hitTolerance,
       });
     }
 
     // Extract cluster features
     const feats = features
-      .map(f => (f.get('features') ? f.get('features') : f))
+      .map((f) => (f.get('features') ? f.get('features') : f))
       .flat();
 
     return Promise.resolve({
@@ -154,7 +154,7 @@ class ConstructionLayer extends VectorLayer {
    */
   geometryFunction(feature) {
     const childLayer = this.grandChildren.find(
-      child =>
+      (child) =>
         child.properties &&
         child.properties.construction &&
         child.properties.construction.art === feature.get('art') &&

@@ -72,12 +72,12 @@ class Permalink extends PureComponent {
     }
 
     const getUrlParamKey = (params, regex) => {
-      return Object.keys(params).find(key => {
+      return Object.keys(params).find((key) => {
         return regex.test(key);
       });
     };
 
-    const getUrlParamVal = param => {
+    const getUrlParamVal = (param) => {
       // Remove spaces from value.
       return param ? param.replace(/\s+/g, '') : undefined;
     };
@@ -186,7 +186,7 @@ class Permalink extends PureComponent {
         // Fake layer binded to popup, to open it.
         layer: {
           getKey: () => 'ch.sbb.departure.popup',
-          get: val => (val === 'popupComponent' ? 'DeparturePopup' : null),
+          get: (val) => (val === 'popupComponent' ? 'DeparturePopup' : null),
         },
       },
     ]);
@@ -215,9 +215,9 @@ class Permalink extends PureComponent {
         map={map}
         layerService={layerService}
         history={history}
-        isLayerHidden={l =>
+        isLayerHidden={(l) =>
           l.get('hideInLegend') ||
-          layerService.getParents(l).some(pl => pl.get('hideInLegend'))
+          layerService.getParents(l).some((pl) => pl.get('hideInLegend'))
         }
       />
     );
@@ -228,7 +228,7 @@ Permalink.propTypes = propTypes;
 Permalink.defaultProps = defaultProps;
 
 // eslint-disable-next-line no-unused-vars
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   map: state.app.map,
   language: state.app.language,

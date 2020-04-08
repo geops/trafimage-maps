@@ -87,7 +87,7 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   language: state.app.language,
 });
 
@@ -99,5 +99,5 @@ const composed = compose(
   connect(mapStateToProps),
 )(BahnhofplanPopup);
 
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = (feat) => feat.get('name');
 export default composed;

@@ -12,6 +12,7 @@ const propTypes = {
   platforms: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
   uic: PropTypes.number.isRequired,
+  appBaseUrl: PropTypes.string.isRequired,
 
   // react-i18next
   t: PropTypes.func.isRequired,
@@ -72,18 +73,18 @@ class DestinationInput extends Component {
    * @private
    */
   loadDestinations(value) {
-    const { uic, platforms } = this.props;
+    const { uic, platforms, appBaseUrl } = this.props;
 
     const url =
-      `${process.env.REACT_APP_BASE_URL}/search/destinations/${uic}` +
+      `${appBaseUrl}/search/destinations/${uic}` +
       `?platforms=${platforms || ''}&destination=${value}`;
 
     this.abortController.abort();
     this.abortController = new AbortController();
     const { signal } = this.abortController;
     fetch(url, { signal })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         const destinations = data.map((d, i) => ({
           id: i,
           label: d,
@@ -91,7 +92,7 @@ class DestinationInput extends Component {
 
         this.setState({ destinations });
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.name === 'AbortError') {
           // eslint-disable-next-line no-console
           console.warn(`Abort ${url}`);
@@ -114,12 +115,12 @@ class DestinationInput extends Component {
           value={destinationInputValue}
           items={destinations}
           placeholder={t('Direkt erreichbares Ziel auswählen')}
-          renderItem={item => item.label}
-          getItemKey={item => item.id}
-          onChange={value => {
+          renderItem={(item) => item.label}
+          getItemKey={(item) => item.id}
+          onChange={(value) => {
             this.onInputChange(value);
           }}
-          onSelect={item => {
+          onSelect={(item) => {
             if (!item) {
               return;
             }

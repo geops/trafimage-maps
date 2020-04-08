@@ -21,9 +21,9 @@ const defaultProps = {
 const MainDialog = ({ staticFilesUrl }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const dialogVisible = useSelector(state => state.app.dialogVisible);
-  const language = useSelector(state => state.app.language);
-  const selectedForInfos = useSelector(state => state.app.selectedForInfos);
+  const dialogVisible = useSelector((state) => state.app.dialogVisible);
+  const language = useSelector((state) => state.app.language);
+  const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
     return (

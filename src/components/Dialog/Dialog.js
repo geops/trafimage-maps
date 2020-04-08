@@ -23,13 +23,13 @@ const defaultProps = {
 };
 
 function Dialog(props) {
-  const dialogPosition = useSelector(state => state.app.dialogPosition);
+  const dialogPosition = useSelector((state) => state.app.dialogPosition);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { body, isModal } = props;
 
   const dialogRef = useRef(null);
-  const escFunction = e => e.which === 27 && dispatch(setDialogVisible());
+  const escFunction = (e) => e.which === 27 && dispatch(setDialogVisible());
 
   useEffect(() => {
     // ComponentDidMount

@@ -17,8 +17,11 @@ class StopFinder extends Search {
 
   search(value) {
     return fetch(`${endpoint}?&q=${value}&key=${this.apiKey}`)
-      .then(data => data.json())
-      .then(featureCollection => featureCollection.features);
+      .then((data) => data.json())
+      .then((featureCollection) => featureCollection.features)
+      .catch(() => {
+        return [];
+      });
   }
 
   render(item) {
@@ -59,7 +62,7 @@ class StopFinder extends Search {
     }
 
     // We get feature infos only for layer that use the source 'stations'.
-    const infoLayers = layerService.getLayersAsFlatArray().filter(layer => {
+    const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
       const { styleLayers } = layer;
       if (!styleLayers) {
         return [];
@@ -75,14 +78,14 @@ class StopFinder extends Search {
     // Here we simulate a click, it's the best way to get the proper popup informations.
     // The only drawback is that if the station is not rendered there is no popup.
     const infos = infoLayers
-      .map(layer =>
+      .map((layer) =>
         layer.getFeatureInfoAtCoordinate(
           fromLonLat(this.popupItem.geometry.coordinates),
         ),
       )
-      .filter(i => i);
+      .filter((i) => i);
 
-    Promise.all(infos).then(featureInfos => {
+    Promise.all(infos).then((featureInfos) => {
       dispatchSetFeatureInfo(
         featureInfos.filter(({ features }) => features.length),
       );
