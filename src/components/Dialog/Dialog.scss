@@ -1,8 +1,4 @@
 .wkp-dialog {
-  .tm-rnd {
-    display: flex;
-  }
-
   .tm-dialog,
   .tm-modal {
     z-index: 10000;
@@ -31,6 +27,7 @@
       width: auto;
       text-align: left;
       min-height: 100px;
+      background-color: white;
       overflow: auto;
 
       p {
@@ -142,26 +139,13 @@
   }
 
   .wkp-dialog {
-    display: block;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    height: 100%;
     pointer-events: none;
     margin: auto;
 
     .tm-dialog {
-      display: block;
-      position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      z-index: 10;
-      height: 100%;
-      pointer-events: none;
-      margin: auto;
       background: transparent;
 
       .tm-dialog-container {
@@ -182,7 +166,7 @@
     }
   }
 
-  .wkp-dialog-modal {
+  .tm-modal {
     pointer-events: all;
   }
 }
