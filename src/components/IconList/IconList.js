@@ -43,11 +43,40 @@ class IconList extends PureComponent {
     super(props);
 
     this.ref = createRef();
+    this.listRef = createRef();
 
     this.state = {
       selectedOption: props.selected,
       iconListVis: false,
     };
+
+    this.hideList = this.hideList.bind(this);
+    this.evtTypes = ['mousewheel'];
+    this.mounted = false;
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount');
+    this.mounted = true;
+    this.evtTypes.forEach((type) => {
+      document.body.addEventListener(type, this.hideList);
+    });
+
+    this.evtTypes.forEach((type) => {
+      this.ref.current.addEventListener(type, (evt) => {
+        const path = evt.path || (evt.composedPath && evt.composedPath());
+        if (!path || !this.listRef.current) {
+          // In browser without the path, keeps the bad behavior.
+          return;
+        }
+        const isInsideList = (path || []).find(
+          (p) => p === this.listRef.current,
+        );
+        if (isInsideList) {
+          evt.stopPropagation();
+        }
+      });
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -58,10 +87,30 @@ class IconList extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    this.mounted = false;
+    this.evtTypes.forEach((type) => {
+      document.body.removeEventListener(type, this.hideList);
+    });
+  }
+
   select(option) {
     this.setState({
       selectedOption: option,
     });
+  }
+
+  hideList() {
+    console.log('la', this.mounted);
+    if (!this.mounted) {
+      return;
+    }
+    const { iconListVis } = this.state;
+    if (iconListVis) {
+      this.setState = {
+        iconListVis: false,
+      };
+    }
   }
 
   renderOption(option) {
@@ -93,28 +142,29 @@ class IconList extends PureComponent {
     const { displayOnTop, options, onSelect } = this.props;
 
     const list = (
-      <List
-        items={options}
-        className="tm-list wkp-icon-list-list"
-        renderItem={(option) => this.renderOption(option)}
-        getItemKey={(option) => option}
-        onSelect={(e, option) => {
-          onSelect(option);
-          this.setState({
-            iconListVis: false,
-            selectedOption: option,
-          });
-        }}
-      />
+      <div ref={this.listRef}>
+        <List
+          items={options}
+          className="tm-list wkp-icon-list-list"
+          renderItem={(option) => this.renderOption(option)}
+          getItemKey={(option) => option}
+          onSelect={(e, option) => {
+            onSelect(option);
+            this.setState({
+              iconListVis: false,
+              selectedOption: option,
+            });
+          }}
+        />
+      </div>
     );
+    const rect = this.ref.current.getBoundingClientRect();
+    const listStyles = {
+      top: `${rect.top + rect.height}px`,
+      left: `${rect.left}px`,
+    };
 
     if (displayOnTop) {
-      const rect = this.ref.current.getBoundingClientRect();
-      const listStyles = {
-        top: `${rect.top + rect.height}px`,
-        left: `${rect.left}px`,
-      };
-
       const targetElements = document.getElementsByClassName(
         'tm-trafimage-maps',
       );
@@ -143,19 +193,26 @@ class IconList extends PureComponent {
       );
     }
 
-    return <div className="wkp-icon-list-non-modal">{list}</div>;
+    return (
+      <div className="wkp-icon-list-non-modal" style={listStyles}>
+        {list}
+      </div>
+    );
   }
 
   render() {
     const { disabled } = this.props;
     const { iconListVis, selectedOption } = this.state;
-
+    console.log(iconListVis);
     return (
       <div ref={this.ref}>
         <Button
           className="wkp-icon-list-button"
           onClick={() => {
             if (disabled) {
+              return;
+            }
+            if (!this.mounted) {
               return;
             }
             this.setState({ iconListVis: !iconListVis });

@@ -35,6 +35,7 @@
     flex-direction: row;
     padding-right: 4px;
     padding-left: 4px;
+    margin: 5px;
   }
 
   .tm-list-item:hover {
@@ -58,6 +59,7 @@
   z-index: 2000;
   left: 0;
   top: 0;
+  cursor: default;
 
   .wkp-icon-list-modal-pos {
     position: absolute;
@@ -68,8 +70,7 @@
   }
 }
 
-.wkp-icon-list-non-modal {
-  position: absolute !important;
-  width: 219px;
-  z-index: 800;
+.rs-layer-tree-item div.wkp-icon-list-non-modal {
+  position: fixed;
+  z-index: 2;
 }
