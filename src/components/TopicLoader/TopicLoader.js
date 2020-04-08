@@ -30,9 +30,11 @@ const propTypes = {
   permissionUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape(),
+  language: PropTypes.string.isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   permissionsInfos: PropTypes.shape({
     user: PropTypes.string,
@@ -58,6 +60,7 @@ const defaultProps = {
   vectorTilesUrl: null,
   permissionUrl: null,
   permissionsInfos: null,
+  staticFilesUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -74,6 +77,7 @@ class TopicLoader extends Component {
   componentDidUpdate(prevProps) {
     const {
       activeTopic,
+      language,
       topics,
       permissionsInfos,
       apiKey,
@@ -82,6 +86,7 @@ class TopicLoader extends Component {
       vectorTilesKey,
       vectorTilesUrl,
       permissionUrl,
+      staticFilesUrl,
       dispatchFetchPermissionsInfos,
     } = this.props;
 
@@ -106,9 +111,14 @@ class TopicLoader extends Component {
       vectorTilesKey !== prevProps.vectorTilesKey ||
       vectorTilesUrl !== prevProps.vectorTilesUrl ||
       cartaroUrl !== prevProps.cartaroUrl ||
-      appBaseUrl !== prevProps.appBaseUrl
+      appBaseUrl !== prevProps.appBaseUrl ||
+      staticFilesUrl !== prevProps.staticFilesUrl
     ) {
       this.updateServices(activeTopic);
+    }
+
+    if (language !== prevProps.language) {
+      this.updateLayers(activeTopic.layers);
     }
   }
 
@@ -129,9 +139,10 @@ class TopicLoader extends Component {
     const activeTopic = topics.find((t) => t.active);
     const visibleTopics = topics.filter(
       (t) =>
-        !t.permission ||
-        (permissionsInfos &&
-          permissionsInfos.permissions.includes(t.permission)),
+        (!t.permission ||
+          (permissionsInfos &&
+            permissionsInfos.permissions.includes(t.permission))) &&
+        !t.hideInLayerTree,
     );
     let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
@@ -199,12 +210,14 @@ class TopicLoader extends Component {
 
   updateLayers(topicLayers) {
     const {
+      language,
       layerService,
       dispatchSetLayers,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      staticFilesUrl,
     } = this.props;
 
     const [currentBaseLayer] = layerService
@@ -231,28 +244,45 @@ class TopicLoader extends Component {
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
-      } else if (flatLayers[i].setGeoServerWMSUrl) {
+      }
+      if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(
           `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
         );
-      } else if (flatLayers[i].setGeoJsonUrl) {
+      }
+      if (flatLayers[i].setGeoJsonUrl) {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
-      } else if (flatLayers[i].setStyleConfig) {
+      }
+      if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
-      } else if (flatLayers[i].setCartaroUrl) {
+      }
+      if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
+      }
+      if (flatLayers[i].setLanguage) {
+        flatLayers[i].setLanguage(language);
+      }
+      if (flatLayers[i].setStaticFilesUrl) {
+        flatLayers[i].setStaticFilesUrl(staticFilesUrl);
       }
     }
   }
 
   render() {
-    const { history, appBaseUrl } = this.props;
-    return <TopicElements history={history} appBaseUrl={appBaseUrl} />;
+    const { history, appBaseUrl, staticFilesUrl } = this.props;
+    return (
+      <TopicElements
+        history={history}
+        appBaseUrl={appBaseUrl}
+        staticFilesUrl={staticFilesUrl}
+      />
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
+  language: state.app.language,
   layerService: state.app.layerService,
   permissionsInfos: state.app.permissionsInfos,
 });

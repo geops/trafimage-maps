@@ -80,6 +80,10 @@ class BehigLayer extends VectorLayer {
     this.geoJsonCacheUrl = geoJsonCacheUrl;
   }
 
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
+  }
+
   /**
    * Function that returns a geometry if the feature should be visible.
    * @param  {ol.feature} feature Feature
@@ -118,7 +122,7 @@ class BehigLayer extends VectorLayer {
           new Style({
             zIndex: 3,
             image: new Icon({
-              src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/behig/${filename}.png`,
+              src: `${this.staticFilesUrl}/img/layers/behig/${filename}.png`,
             }),
           }),
         ];
