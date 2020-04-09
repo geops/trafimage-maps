@@ -92,6 +92,11 @@ const propTypes = {
   vectorTilesUrl: PropTypes.string,
 
   /**
+   * URL of the static files. Default is 'https://maps2.trafimage.ch'.
+   */
+  staticFilesUrl: PropTypes.string,
+
+  /**
    * URL to request permission.
    */
   permissionUrl: PropTypes.string,
@@ -116,6 +121,7 @@ const attributes = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
   enableTracking: false,
 };
@@ -173,6 +179,11 @@ const WebComponent = (props) => {
       tps.forEach((topic) => {
         // eslint-disable-next-line no-param-reassign
         topic.active = topic.key === activeTopicKey;
+        // eslint-disable-next-line no-param-reassign
+        topic.hideInLayerTree =
+          topic.hideInLayerTree && topic.key === activeTopicKey
+            ? false
+            : topic.hideInLayerTree;
       });
     } else {
       tps[0].active = true;

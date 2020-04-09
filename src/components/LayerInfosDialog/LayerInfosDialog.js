@@ -7,11 +7,17 @@ import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
 
 const propTypes = {
+  style: PropTypes.object,
+  isDraggable: PropTypes.bool,
   selectedForInfos: PropTypes.object,
+  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
+  style: undefined,
+  isDraggable: true,
   selectedForInfos: null,
+  staticFilesUrl: null,
 };
 
 export const NAME = 'infoDialog';
@@ -19,8 +25,7 @@ export const NAME = 'infoDialog';
 function LayerInfosDialog(props) {
   const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
-  const { selectedForInfos } = props;
-
+  const { style, isDraggable, selectedForInfos, staticFilesUrl } = props;
   if (!selectedForInfos) {
     return null;
   }
@@ -39,19 +44,28 @@ function LayerInfosDialog(props) {
   if (componentName) {
     const LayerInfoComponent = layerInfos[componentName];
     body = (
-      <LayerInfoComponent language={language} properties={selectedForInfos} />
+      <LayerInfoComponent
+        language={language}
+        properties={selectedForInfos}
+        staticFilesUrl={staticFilesUrl}
+      />
     );
   } else if (description) {
-    body = <Trans i18nKey={description} />;
+    body = (
+      <div>
+        <Trans i18nKey={description} />
+      </div>
+    );
   }
 
   return (
     <Dialog
-      isDraggable
+      isDraggable={isDraggable}
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}
-      body={body}
+      body={<div>{body}</div>}
+      style={style}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

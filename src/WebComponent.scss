@@ -53,6 +53,7 @@
 @import 'src/components/Select/SingleValue.scss';
 @import 'src/components/LanguageSelect/LanguageSelect.scss';
 @import 'src/components/ProjectionSelect/ProjectionSelect.scss';
+@import 'src/components/IconList/IconList.scss';
 @import 'src/components/Login/Login.scss';
 @import 'src/components/Link/Link.scss';
 @import 'src/components/MapControls/MapControls.scss';
@@ -85,8 +86,13 @@
 @import 'src/popups/DeparturePopup/DeparturePopupContent.scss';
 @import 'src/popups/DeparturePopup/DestinationInput.scss';
 @import 'src/popups/CasaRoutePopup/CasaRoutePopup.scss';
+@import 'src/popups/ZweitausbildungPoisPopup/ZweitausbildungPoisPopup.scss';
+@import 'src/popups/ZweitausbildungRoutesPopup/ZweitausbildungRoutesPopup.scss';
 
 // LayerInfos
 @import 'src/layerInfos/BehigLayerInfo/BehigLayerInfo.scss';
 @import 'src/layerInfos/ConstructionLayerInfo/ConstructionLayerInfo.scss';
 @import 'src/layerInfos/StuetzpunktLayerInfo/StuetzpunktLayerInfo.scss';
+@import 'src/layerInfos/ZweitausbildungLayerInfo/ZweitausbildungLayerInfo.scss';
+@import 'src/layerInfos/ZweitausbildungRoutesSubLayerInfo/ZweitausbildungRoutesSubLayerInfo.scss';
+@import 'src/layerInfos/ZweitausbildungSubLayerInfo/ZweitausbildungSubLayerInfo.scss';

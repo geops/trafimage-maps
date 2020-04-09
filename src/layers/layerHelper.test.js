@@ -1,10 +1,10 @@
 import layerHelper from './layerHelper';
 
-const expected = [
+const expected1 = [
   5,
   5,
   5,
-  10,
+  5,
   10,
   30,
   30,
@@ -37,6 +37,15 @@ const expected = [
 ].forEach((res, idx) => {
   test(`get correct generalization of ${res}`, () => {
     const gen = layerHelper.getGeneralization(res);
-    expect(gen).toBe(expected[idx]);
+    expect(gen).toBe(expected1[idx]);
+  });
+});
+
+const expected2 = [25, 25, 25, 25, 25, 200, 200, 200];
+
+[null, 1, 7.99999, 24, 75, 140.0001, 201.975, 450].forEach((res, idx) => {
+  test(`get correct resolution of ${res}`, () => {
+    const gen = layerHelper.getDataResolution(res, [25, 200]);
+    expect(gen).toBe(expected2[idx]);
   });
 });

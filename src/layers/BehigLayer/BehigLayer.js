@@ -43,6 +43,7 @@ class BehigLayer extends VectorLayer {
     });
 
     this.toggleLayers = options.toggleLayers || [];
+    this.behigResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
 
     this.styleCache = {};
     this.visibilityKeys = [];
@@ -79,6 +80,10 @@ class BehigLayer extends VectorLayer {
     this.geoJsonCacheUrl = geoJsonCacheUrl;
   }
 
+  setStaticFilesUrl(staticFilesUrl) {
+    this.staticFilesUrl = staticFilesUrl;
+  }
+
   /**
    * Function that returns a geometry if the feature should be visible.
    * @param  {ol.feature} feature Feature
@@ -102,7 +107,10 @@ class BehigLayer extends VectorLayer {
       return null;
     }
 
-    const res = LayerHelper.getDataResolution(resolution);
+    const res = LayerHelper.getDataResolution(
+      resolution,
+      this.behigResolutions,
+    );
     if (feature.get('resolution') === res) {
       const status = feature.get('status');
       const cacheKey = status;
@@ -114,7 +122,7 @@ class BehigLayer extends VectorLayer {
           new Style({
             zIndex: 3,
             image: new Icon({
-              src: `${process.env.REACT_APP_STATIC_FILES_URL}/img/layers/behig/${filename}.png`,
+              src: `${this.staticFilesUrl}/img/layers/behig/${filename}.png`,
             }),
           }),
         ];

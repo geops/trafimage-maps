@@ -25,6 +25,10 @@ import defaultBaseLayers, {
   gewässer,
   uebrigeBahnen,
   netzkarteEisenbahninfrastruktur,
+  zweitausbildungAbroad,
+  zweitausbildungPois,
+  zweitausbildungRoutes,
+  zweitausbildungStations,
 } from './layers';
 import defaultSearches, {
   handicapStopFinder,
@@ -248,6 +252,24 @@ export const tina = {
   redirect: true,
 };
 
+export const zweitausbildung = {
+  name: 'ch.sbb.zweitausbildung',
+  key: 'ch.sbb.zweitausbildung',
+  hideInLayerTree: true,
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [
+    dataLayer,
+    netzkarteLayer,
+    zweitausbildungAbroad,
+    zweitausbildungPois,
+    zweitausbildungRoutes,
+    zweitausbildungStations,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'ZweitausbildungTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -258,6 +280,7 @@ const topics = {
     regionenkarte,
     tarifverbundkarte,
     showcases,
+    zweitausbildung,
     regionenkartePrivate,
     infofpw,
     intervention,

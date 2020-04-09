@@ -85,7 +85,11 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         <div
           className="tm-dialog-body"
         >
-          description&lt;br/&gt;break
+          <div>
+            <div>
+              description&lt;br/&gt;break
+            </div>
+          </div>
         </div>
       </div>
     </div>
