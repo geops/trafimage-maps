@@ -5,7 +5,6 @@ import List from '@geops/react-ui/components/List';
 import Button from '@geops/react-ui/components/Button';
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 import './IconList.scss';
 
@@ -181,4 +180,4 @@ class IconList extends PureComponent {
 IconList.propTypes = propTypes;
 IconList.defaultProps = defaultProps;
 
-export default compose(withTranslation())(IconList);
+export default withTranslation('translation', { withRef: true })(IconList);

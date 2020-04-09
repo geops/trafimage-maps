@@ -120,17 +120,19 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   }
 
   rerenderList() {
-    if (this.comp) {
-      this.comp.forceUpdate();
+    if (this.iconListComp) {
+      this.iconListComp.select(this.selected);
     }
   }
 
   renderItemContent(comp) {
-    this.comp = comp;
-
     if (this.options && this.options.length) {
       return (
         <IconList
+          ref={(el) => {
+            this.iconListComp = el;
+          }}
+          t={comp.props.t}
           disabled={!this.visible}
           options={this.options}
           selected={this.selected}
