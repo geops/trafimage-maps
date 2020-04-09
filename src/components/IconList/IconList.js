@@ -95,7 +95,6 @@ class IconList extends PureComponent {
       }
       const isInsideList = (path || []).find((p) => p === this.ref.current);
       if (isInsideList) {
-        // evt.stopPropagation();
         // Don't hide the list if the event comes form inside the IconList.
         return;
       }
