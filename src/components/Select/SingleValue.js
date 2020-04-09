@@ -20,6 +20,8 @@ const SingleValue = (props) => {
   const { selectLabel, selectProps, data, singleValueClassName } = props;
   return (
     <div
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex="0"
       className={`wkp-single-value-wrapper${
         selectProps.menuIsOpen ? ' wkp-select-menu-opened' : ''
       }${singleValueClassName ? ` ${singleValueClassName}` : ''}`}

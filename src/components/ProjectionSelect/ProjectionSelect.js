@@ -47,7 +47,7 @@ const selectStyles = () => {
     option: (styles, state) => ({
       ...styles,
       padding: '10px 15px',
-      color: '#000',
+      color: state.isFocused ? '#c60018' : '#000',
       '&:hover': {
         cursor: state.isSelected ? 'default' : 'pointer',
         color: state.isSelected ? '#000' : '#c60018',

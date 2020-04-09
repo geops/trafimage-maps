@@ -61,7 +61,7 @@ const selectStyles = (screenWidth, isMobile) => {
     option: (styles, state) => ({
       ...styles,
       padding: '10px 15px',
-      color: 'grey',
+      color: state.isFocused ? '#c60018' : '#767676',
       '&:hover': {
         cursor: state.isSelected ? 'default' : 'pointer',
         color: state.isSelected ? '#767676' : '#c60018',

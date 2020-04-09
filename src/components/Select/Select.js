@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
 import SingleValue from './SingleValue';
@@ -33,8 +33,15 @@ const Select = ({
   singleValueClassName,
   selectLabel,
 }) => {
+  const ref = useRef();
   return (
     <ReactSelect
+      ref={ref}
+      onKeyDown={(evt) => {
+        if (evt.key === 'Enter' && !ref.current.state.menuIsOpen) {
+          ref.current.onMenuOpen();
+        }
+      }}
       options={options}
       isSearchable={false}
       value={value}
