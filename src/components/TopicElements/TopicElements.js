@@ -158,7 +158,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     const rect = entry.contentRect;
     const { width } = rect;
     // tm-w-s
-    dispatch(setIsMobileWidth(width < 768));
+    dispatch(setIsMobileWidth(width <= 768));
   };
 
   return (
