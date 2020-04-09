@@ -87,17 +87,29 @@ class IconList extends PureComponent {
     }
     const { iconListVis } = this.state;
     if (iconListVis) {
-      // Test if the event comes from inside the IconList.
-      const path = evt.path || (evt.composedPath && evt.composedPath());
+      let isInsideList = false;
+      console.log(this.ref.current);
       console.log(evt);
-      console.log(evt.path);
-      console.log(evt.composedPath);
-      console.log(evt.composedPath && evt.composedPath());
-      if (!path || !this.ref.current) {
-        // In browser without the path, keeps the bad behavior.
+      console.log(evt.srcElement);
+      console.log(this.ref.current.contains);
+      console.log(this.ref.current.contains(evt.srcElement));
+
+      if (!this.ref.current) {
         return;
       }
-      const isInsideList = (path || []).find((p) => p === this.ref.current);
+
+      if (evt.path || evt.composedPath) {
+        // Chrome, Edge and FF
+        // Test if the event comes from inside the IconList.
+        const path = evt.path || (evt.composedPath && evt.composedPath());
+        if (!path) {
+          return;
+        }
+        isInsideList = (path || []).find((p) => p === this.ref.current);
+      } else if (evt.srcElement && this.ref.current.contains(evt.srcElement)) {
+        // IE 11
+        isInsideList = true;
+      }
       if (isInsideList) {
         // Don't hide the list if the event comes form inside the IconList.
         return;
