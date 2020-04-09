@@ -176,22 +176,18 @@
   },
   "lint-staged": {
     "src/lang/*.json": [
-      "yarn sort",
-      "git add"
+      "yarn sort"
     ],
     "(src|__mocks__)/**/*.js": [
       "eslint --fix",
       "prettier --write",
-      "git add",
       "yarn test --bail --findRelatedTests"
     ],
     "package.json": [
-      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts",
-      "git add"
+      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts"
     ],
     "src/**/*.{scss}": [
-      "stylelint --fix",
-      "git add"
+      "stylelint --fix"
     ]
   },
   "prettier": {
