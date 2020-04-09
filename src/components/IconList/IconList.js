@@ -49,7 +49,7 @@ class IconList extends PureComponent {
     };
 
     this.hideList = this.hideList.bind(this);
-    this.evtTypes = ['mousewheel', 'click', 'touchstart'];
+    this.evtTypes = ['wheel', 'click', 'touchstart'];
     this.mounted = false;
   }
 
@@ -87,26 +87,20 @@ class IconList extends PureComponent {
     }
     const { iconListVis } = this.state;
     if (iconListVis) {
-      let isInsideList = false;
       console.log(this.ref.current);
-      console.log(evt);
-      console.log(evt.srcElement);
-      console.log(this.ref.current.contains);
-      console.log(this.ref.current.contains(evt.srcElement));
 
       if (!this.ref.current) {
         return;
       }
+      console.log(evt);
+      console.log(evt.srcElement);
+      console.log(evt.target);
+      console.log(this.ref.current.contains);
+      console.log(this.ref.current.contains(evt.srcElement));
+      console.log(this.ref.current.contains(evt.target));
 
-      if (evt.path || evt.composedPath) {
-        // Chrome, Edge and FF
-        // Test if the event comes from inside the IconList.
-        const path = evt.path || (evt.composedPath && evt.composedPath());
-        if (!path) {
-          return;
-        }
-        isInsideList = (path || []).find((p) => p === this.ref.current);
-      } else if (evt.srcElement && this.ref.current.contains(evt.srcElement)) {
+      let isInsideList = false;
+      if (evt.target && this.ref.current.contains(evt.target)) {
         // IE 11
         isInsideList = true;
       }
