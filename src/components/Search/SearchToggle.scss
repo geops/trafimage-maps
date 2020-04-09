@@ -3,6 +3,7 @@
 .wkp-search-toggle-container,
 .wkp-search-toggle-container--open {
   max-width: 400px;
+  min-width: 350px;
   position: relative;
   padding-top: 2px;
   margin: auto;
@@ -15,9 +16,8 @@
   border: none;
   position: absolute;
   top: 11px;
-  right: 200px;
+  right: 0;
   font-size: 14px;
-  margin-right: 40px;
   height: 30px;
   color: $brand-grey;
   align-items: center;

@@ -9,10 +9,14 @@ exports[`Header match snapshots 1`] = `
   <div
     className="wkp-header-right"
   >
-    <UNDEFINED
-      appBaseUrl="http://foo.de"
-    />
-    <LanguageSelect />
+    <div
+      className="wkp-header-right-bloc"
+    >
+      <UNDEFINED
+        appBaseUrl="http://foo.de"
+      />
+      <LanguageSelect />
+    </div>
     <ForwardRef(SvgSbbLogo)
       className="wkp-header-sbb-logo"
       focusable={false}

@@ -2,6 +2,8 @@
 
 .wkp-projection-select {
   color: #000;
+  justify-content: space-between;
+  padding: 5px 15px;
 
   &:hover {
     color: $brand-primary-hover;

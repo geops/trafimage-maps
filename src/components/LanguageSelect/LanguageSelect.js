@@ -20,17 +20,17 @@ const optionsMobile = [
   { label: 'EN', value: 'en' },
 ];
 
-const selectStyles = (screenWidth, isMobile) => {
+const selectStyles = (isMobile) => {
   return {
     container: () => ({
       position: 'relative',
       height: 'calc(100% - 20px)',
-      maxHeight: '50px',
+      maxHeight: '38px',
       width: isMobile ? '55px' : '120px',
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column',
-      marginRight: isMobile ? '5px' : '20px',
+      marginRight: isMobile ? '5px' : '0',
       color: 'grey',
     }),
     control: () => ({
@@ -56,7 +56,7 @@ const selectStyles = (screenWidth, isMobile) => {
       borderTop: 'none',
       position: 'absolute',
       left: '0',
-      top: ['xs', 's', 'm'].includes(screenWidth) ? '29px' : '42px',
+      margin: '0',
     }),
     option: (styles, state) => ({
       ...styles,
@@ -82,7 +82,7 @@ const LanguageSelect = () => {
     <Select
       options={isMobileWidth ? optionsMobile : options}
       value={inputValue}
-      styles={selectStyles(screenWidth, isMobileWidth)}
+      styles={selectStyles(isMobileWidth)}
       selectLabel={
         <SBBGlobe focusable={false} className="wkp-single-value-globe" />
       }
