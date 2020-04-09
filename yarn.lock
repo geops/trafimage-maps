@@ -798,17 +798,10 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/helper-replace-supers" "^7.8.3"
 
-<<<<<<< HEAD
-"@babel/plugin-transform-parameters@^7.8.7":
-  version "7.9.3"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-transform-parameters/-/plugin-transform-parameters-7.9.3.tgz#3028d0cc20ddc733166c6e9c8534559cee09f54a"
-  integrity sha512-fzrQFQhp7mIhOzmOtPiKffvCYQSK10NR8t6BBz2yPbeUHb9OLW8RZGtgDRBn8z2hGcwvKDL3vC7ojPTLNxmqEg==
-=======
 "@babel/plugin-transform-parameters@^7.8.7", "@babel/plugin-transform-parameters@^7.9.5":
   version "7.9.5"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-parameters/-/plugin-transform-parameters-7.9.5.tgz#173b265746f5e15b2afe527eeda65b73623a0795"
   integrity sha512-0+1FhHnMfj6lIIhVvS4KGQJeuhe1GI//h5uptK4PvLt+BGBxsoUJbd3/IW002yk//6sZPlFgsG1hY6OHLcy6kA==
->>>>>>> release-1.0.8
   dependencies:
     "@babel/helper-get-function-arity" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
@@ -5319,37 +5312,6 @@ documentation@12.1.4:
     yargs "^12.0.2"
 
 documentation@^12.2.0:
-<<<<<<< HEAD
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/documentation/-/documentation-12.2.0.tgz#ffbdfaab358ee94fbb1b0b8b27906b3112682b73"
-  integrity sha512-a9qu00ecaJWn0WJraaCgQmWFJrDJqTU+ASZyDRs9LVcWMXEMzYh6QGdekSjQSflaAQ5+BqCSt/CC0Che9S5uTw==
-  dependencies:
-    "@babel/core" "^7.1.2"
-    "@babel/generator" "^7.1.3"
-    "@babel/parser" "7.1.3"
-    "@babel/plugin-proposal-class-properties" "^7.1.0"
-    "@babel/plugin-proposal-decorators" "^7.1.2"
-    "@babel/plugin-proposal-do-expressions" "^7.0.0"
-    "@babel/plugin-proposal-export-default-from" "^7.0.0"
-    "@babel/plugin-proposal-export-namespace-from" "^7.0.0"
-    "@babel/plugin-proposal-function-bind" "^7.0.0"
-    "@babel/plugin-proposal-function-sent" "^7.1.0"
-    "@babel/plugin-proposal-json-strings" "^7.0.0"
-    "@babel/plugin-proposal-logical-assignment-operators" "^7.0.0"
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.0.0"
-    "@babel/plugin-proposal-numeric-separator" "^7.0.0"
-    "@babel/plugin-proposal-optional-chaining" "^7.0.0"
-    "@babel/plugin-proposal-pipeline-operator" "^7.0.0"
-    "@babel/plugin-proposal-throw-expressions" "^7.0.0"
-    "@babel/plugin-syntax-dynamic-import" "^7.0.0"
-    "@babel/plugin-syntax-import-meta" "^7.0.0"
-    "@babel/preset-env" "^7.1.0"
-    "@babel/preset-flow" "^7.0.0"
-    "@babel/preset-react" "^7.0.0"
-    "@babel/preset-stage-0" "^7.0.0"
-    "@babel/traverse" "^7.1.4"
-    "@babel/types" "^7.1.3"
-=======
   version "12.3.0"
   resolved "https://registry.yarnpkg.com/documentation/-/documentation-12.3.0.tgz#2bf429433a1edcb32dd35f60bcdc95bf3858ae4a"
   integrity sha512-qjEcTyC5jjGUOedRvumC/gCyon2WynfWtcjxDAna23CnRnYwD6Q6ATCRGZk+2wyf6GBpr7o5F77fgtHrjfuIxQ==
@@ -5380,7 +5342,6 @@ documentation@^12.2.0:
     "@babel/preset-stage-0" "^7.8.3"
     "@babel/traverse" "^7.9.0"
     "@babel/types" "^7.9.0"
->>>>>>> release-1.0.8
     ansi-html "^0.0.7"
     babelify "^10.0.0"
     chalk "^2.3.0"
@@ -9614,11 +9575,7 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-<<<<<<< HEAD
-lint-staged@^10.0.8:
-=======
 lint-staged@^10.0.9:
->>>>>>> release-1.0.8
   version "10.1.2"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-10.1.2.tgz#beaefc58037ea9e02fe7639cb323d584312a7957"
   integrity sha512-Vtbe8rhWbJxPNlnXk6jczRh6wvAVjGg+VhELAIjLakOjTACdB4qJOD4W2R8oUXLRCqL1t9WMUsXbSlVK34A8Lg==
@@ -13209,11 +13166,7 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-<<<<<<< HEAD
-react-spatial@^0.2.13:
-=======
 react-spatial@0.2.14:
->>>>>>> release-1.0.8
   version "0.2.14"
   resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.2.14.tgz#2093ebceb57f980d6cb1f53ef786bb02ef6c65a6"
   integrity sha512-sdxV9vR3IQjYoSejz8vpek6wknRsC/0XI91TfqcahAGCXbqI9pgsaS02Z2wurlpysPifbs5j9kxjMaeW79tWmw==
