@@ -131,8 +131,6 @@
   }
 
   .tm-modal {
-    pointer-events: all;
-
     .tm-dialog-container {
       width: calc(100% - 40px);
     }
@@ -147,7 +145,6 @@
   }
 
   .wkp-dialog {
-    pointer-events: none;
     margin: auto;
 
     .tm-dialog {
@@ -164,7 +161,6 @@
         height: auto;
         display: flex;
         flex-direction: column;
-        pointer-events: all;
 
         .tm-dialog-body {
           display: flex;
