@@ -138,7 +138,6 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
           selected={this.selected}
           icons={this.icons}
           onSelect={this.onSelect}
-          displayOnTop
         />
       );
     }
