@@ -16,17 +16,15 @@ class ZweitausbildungRoutesPopup extends PureComponent {
   constructor(props) {
     super(props);
 
-    // Sorted unique features by bezeichnung
+    // Sorted unique features by the unique label
     const singleFeatures = props.feature
       .get('features')
       .filter((feat, pos, arr) => {
         return (
-          arr
-            .map((f) => f.get('bezeichnung'))
-            .indexOf(feat.get('bezeichnung')) === pos
+          arr.map((f) => f.get('label')).indexOf(feat.get('label')) === pos
         );
       })
-      .sort((a, b) => (a.get('bezeichnung') > b.get('bezeichnung') ? 1 : -1));
+      .sort((a, b) => (a.get('label') > b.get('label') ? 1 : -1));
 
     this.state = {
       features: singleFeatures,
@@ -47,7 +45,6 @@ class ZweitausbildungRoutesPopup extends PureComponent {
     // Update the features in the map
     for (let i = 0; i < highlightFeatures.length; i += 1) {
       highlightFeatures[i].set('highlight', false);
-      highlightFeatures[i].changed();
     }
   }
 
@@ -62,12 +59,11 @@ class ZweitausbildungRoutesPopup extends PureComponent {
       singleFeatures[j].set('highlight', singleFeatures[j] === singleFeature);
     }
 
-    // Update the features in the map
+    // Update the features in the map, depending on the unique label
     for (let i = 0; i < highlightFeatures.length; i += 1) {
       highlightFeatures[i].set(
         'highlight',
-        highlightFeatures[i].get('bezeichnung') ===
-          singleFeature.get('bezeichnung'),
+        highlightFeatures[i].get('label') === singleFeature.get('label'),
       );
       highlightFeatures[i].changed();
     }
@@ -86,7 +82,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
             className={`wkp-zweitausbildung-routes-popup-row${
               singleFeature.get('highlight') ? ' highlight' : ''
             }`}
-            key={singleFeature.get('bezeichnung')}
+            key={singleFeature.get('label')}
             onMouseEnter={() => this.highlight(singleFeature)}
           >
             {singleFeature.get('line_number') ? (

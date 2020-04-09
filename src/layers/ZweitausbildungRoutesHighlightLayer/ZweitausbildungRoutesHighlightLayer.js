@@ -19,6 +19,15 @@ import IconList from '../../components/IconList';
  * @param {Object} [options] Layer options.
  */
 class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
+  static generateLabel(feature) {
+    // viadescription for tourist routes
+    // description for hauptlinien
+    const description =
+      feature.get('viadescription') || feature.get('description');
+    const desc = description ? `: ${description}` : '';
+    return `${feature.get('bezeichnung')}${desc}`;
+  }
+
   constructor(options = {}) {
     const olLayer = new OLVectorLayer({
       style: (f, r) => this.style(f, r),
@@ -30,6 +39,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     super({
       ...options,
       olLayer,
+      onClick: () => {
+        this.rerenderList();
+      },
     });
 
     this.styleCache = {};
@@ -90,14 +102,9 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
     for (let i = 0; i < this.features.length; i += 1) {
       const feature = this.features[i];
 
-      // viadescription for tourist routes
-      // description for hauptlinien
-      const description =
-        feature.get('viadescription') || feature.get('description');
-      const desc = description ? `: ${description}` : '';
-      const label = `${feature.get('bezeichnung')}${desc}`;
-
+      const label = ZweitausbildungRoutesHighlightLayer.generateLabel(feature);
       this.features[i].set('label', label);
+
       if (this.options.indexOf(label) === -1) {
         this.options.push(label);
         this.icons[label] = feature.get('line_number')
@@ -110,28 +117,27 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
 
     this.options = this.options.sort((a, b) => a.localeCompare(b));
     this.options.unshift('Alle');
-
-    this.rerenderList();
   }
 
   rerenderList() {
-    if (this.comp) {
-      this.comp.forceUpdate();
+    if (this.iconListComp) {
+      this.iconListComp.select(this.selected);
     }
   }
 
   renderItemContent(comp) {
-    this.comp = comp;
-
     if (this.options && this.options.length) {
       return (
         <IconList
+          ref={(el) => {
+            this.iconListComp = el;
+          }}
+          t={comp.props.t}
           disabled={!this.visible}
           options={this.options}
           selected={this.selected}
           icons={this.icons}
           onSelect={this.onSelect}
-          displayOnTop={false}
         />
       );
     }
@@ -149,8 +155,6 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       const label = this.features[i].get('label');
       this.features[i].set('highlight', option ? label === option : false);
     }
-
-    this.olLayer.changed();
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
@@ -178,6 +182,14 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       .then((data) => {
         const format = new GeoJSON();
         const feats = format.readFeatures(data);
+
+        // Set the unique label
+        for (let i = 0; i < feats.length; i += 1) {
+          const label = ZweitausbildungRoutesHighlightLayer.generateLabel(
+            feats[i],
+          );
+          feats[i].set('label', label);
+        }
 
         const features = [];
         if (feats.length) {
@@ -236,24 +248,13 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
         }
       }
 
-      // Update the selected option
-      this.selected = feature.get('label');
-      this.rerenderList();
+      // Update the selected option only when needed.
+      if (this.selected !== feature.get('label')) {
+        this.selected = feature.get('label');
+        this.rerenderList();
+      }
 
       return this.styleCache[styleName];
-    }
-
-    // Update the selected option
-    // if no features is highlighted so far
-    let selectedFeature = null;
-    for (let i = 0; i < this.features.length; i += 1) {
-      if (this.features[i].get('highlight')) {
-        selectedFeature = this.features[i].get('highlight');
-      }
-    }
-    if (!selectedFeature) {
-      this.selected = null;
-      this.rerenderList();
     }
 
     return null;
