@@ -11,7 +11,7 @@ const selectStyles = () => {
     container: () => ({
       position: 'relative',
       height: '30px',
-      width: '90px',
+      width: '135px',
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column-reverse',
@@ -41,7 +41,7 @@ const selectStyles = () => {
       borderBottom: '1px solid #e5e5e5',
       position: 'absolute',
       left: '0',
-      top: '-195px',
+      top: '-153px',
       boxShadow: 'none',
     }),
     option: (styles, state) => ({
@@ -69,11 +69,16 @@ const propTypes = {
 
 const ProjectionSelect = ({ projections }) => {
   const dispatch = useDispatch();
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+  const isMobileWidth = ['xs', 's'].includes(screenWidth);
   const projection = useSelector((state) => state.app.projection);
   const projectionsOptions = projections.map((p) => ({
     label: p.label,
     value: p.value,
   }));
+  if (isMobileWidth) {
+    return null;
+  }
   return (
     <Select
       options={projectionsOptions}
