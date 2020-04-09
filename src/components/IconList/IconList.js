@@ -42,7 +42,6 @@ class IconList extends PureComponent {
     super(props);
 
     this.ref = createRef();
-    this.listRef = createRef();
 
     this.state = {
       selectedOption: props.selected,
@@ -50,31 +49,14 @@ class IconList extends PureComponent {
     };
 
     this.hideList = this.hideList.bind(this);
-    this.evtTypes = ['mousewheel'];
+    this.evtTypes = ['mousewheel', 'click', 'touchstart'];
     this.mounted = false;
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     this.mounted = true;
     this.evtTypes.forEach((type) => {
       document.body.addEventListener(type, this.hideList);
-    });
-
-    this.evtTypes.forEach((type) => {
-      this.ref.current.addEventListener(type, (evt) => {
-        const path = evt.path || (evt.composedPath && evt.composedPath());
-        if (!path || !this.listRef.current) {
-          // In browser without the path, keeps the bad behavior.
-          return;
-        }
-        const isInsideList = (path || []).find(
-          (p) => p === this.listRef.current,
-        );
-        if (isInsideList) {
-          evt.stopPropagation();
-        }
-      });
     });
   }
 
@@ -99,16 +81,27 @@ class IconList extends PureComponent {
     });
   }
 
-  hideList() {
-    console.log('la', this.mounted);
+  hideList(evt) {
     if (!this.mounted) {
       return;
     }
     const { iconListVis } = this.state;
     if (iconListVis) {
-      this.setState = {
+      // Test if the event comes from inside the IconList.
+      const path = evt.path || (evt.composedPath && evt.composedPath());
+      if (!path || !this.ref.current) {
+        // In browser without the path, keeps the bad behavior.
+        return;
+      }
+      const isInsideList = (path || []).find((p) => p === this.ref.current);
+      if (isInsideList) {
+        // evt.stopPropagation();
+        // Don't hide the list if the event comes form inside the IconList.
+        return;
+      }
+      this.setState({
         iconListVis: false,
-      };
+      });
     }
   }
 
@@ -141,21 +134,19 @@ class IconList extends PureComponent {
     const { displayOnTop, options, onSelect } = this.props;
 
     const list = (
-      <div ref={this.listRef}>
-        <List
-          items={options}
-          className="tm-list wkp-icon-list-list"
-          renderItem={(option) => this.renderOption(option)}
-          getItemKey={(option) => option}
-          onSelect={(e, option) => {
-            onSelect(option);
-            this.setState({
-              iconListVis: false,
-              selectedOption: option,
-            });
-          }}
-        />
-      </div>
+      <List
+        items={options}
+        className="tm-list wkp-icon-list-list"
+        renderItem={(option) => this.renderOption(option)}
+        getItemKey={(option) => option}
+        onSelect={(e, option) => {
+          onSelect(option);
+          this.setState({
+            iconListVis: false,
+            selectedOption: option,
+          });
+        }}
+      />
     );
     const rect = this.ref.current.getBoundingClientRect();
     const listStyles = {
@@ -202,7 +193,6 @@ class IconList extends PureComponent {
   render() {
     const { disabled } = this.props;
     const { iconListVis, selectedOption } = this.state;
-    console.log(iconListVis);
     return (
       <div ref={this.ref}>
         <Button
