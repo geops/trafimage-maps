@@ -1,19 +1,16 @@
 @import '../../globals.scss';
 
-.wkp-search-toggle-container {
-  display: none;
-}
-
 .wkp-search-toggle-container,
 .wkp-search-toggle-container--open {
   max-width: 400px;
-  min-width: 350px;
   position: relative;
   padding-top: 2px;
-  float: right;
+  margin: auto;
+  z-index: 1;
 }
 
 .wkp-search-toggle-button {
+  display: none;
   background: none;
   border: none;
   position: absolute;
@@ -24,7 +21,6 @@
   height: 30px;
   color: $brand-grey;
   align-items: center;
-  display: flex;
   padding: 0 5px;
 
   svg {
