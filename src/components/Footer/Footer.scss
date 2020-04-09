@@ -34,6 +34,16 @@
       }
     }
 
+    .tm-copyright {
+      position: absolute;
+      bottom: 42px;
+      right: 5px;
+
+      a {
+        margin: 0;
+      }
+    }
+
     .wkp-footer-right {
       a {
         margin: 0 10px;
@@ -50,16 +60,6 @@
     .rs-scale-line {
       display: flex;
       align-items: center;
-    }
-
-    .tm-copyright {
-      position: absolute;
-      bottom: 42px;
-      right: 5px;
-
-      a {
-        margin: 0;
-      }
     }
 
     .rs-scale-line {
