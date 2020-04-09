@@ -87,23 +87,11 @@ class IconList extends PureComponent {
     }
     const { iconListVis } = this.state;
     if (iconListVis) {
-      console.log(this.ref.current);
-
       if (!this.ref.current) {
         return;
       }
-      console.log(evt);
-      console.log(evt.srcElement);
-      console.log(evt.target);
-      console.log(this.ref.current.contains);
-      console.log(this.ref.current.contains(evt.srcElement));
-      console.log(this.ref.current.contains(evt.target));
 
-      let isInsideList = false;
-      if (evt.target && this.ref.current.contains(evt.target)) {
-        // IE 11
-        isInsideList = true;
-      }
+      const isInsideList = evt.target && this.ref.current.contains(evt.target);
       if (isInsideList) {
         // Don't hide the list if the event comes form inside the IconList.
         return;
