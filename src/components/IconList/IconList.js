@@ -89,6 +89,10 @@ class IconList extends PureComponent {
     if (iconListVis) {
       // Test if the event comes from inside the IconList.
       const path = evt.path || (evt.composedPath && evt.composedPath());
+      console.log(evt);
+      console.log(evt.path);
+      console.log(evt.composedPath);
+      console.log(evt.composedPath && evt.composedPath());
       if (!path || !this.ref.current) {
         // In browser without the path, keeps the bad behavior.
         return;
