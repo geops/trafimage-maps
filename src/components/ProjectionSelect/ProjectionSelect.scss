@@ -1,0 +1,15 @@
+@import '../../globals.scss';
+
+.wkp-projection-select {
+  color: #000;
+
+  &:hover {
+    color: $brand-primary-hover;
+
+    .wkp-single-value-globe {
+      path {
+        stroke: $brand-primary-hover;
+      }
+    }
+  }
+}

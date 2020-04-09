@@ -1,24 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { ReactComponent as SBBGlobe } from '../../img/sbb/globe_210_large.svg';
 
 import './SingleValue.scss';
 
 const propTypes = {
   selectProps: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
+  selectLabel: PropTypes.object,
+  singleValueClassName: PropTypes.string,
+};
+
+const defaultProps = {
+  selectLabel: null,
+  singleValueClassName: null,
 };
 
 const SingleValue = (props) => {
-  const { selectProps, data } = props;
+  const { selectLabel, selectProps, data, singleValueClassName } = props;
   return (
     <div
       className={`wkp-single-value-wrapper${
-        selectProps.menuIsOpen ? ' wkp-menu-opened' : ''
-      }`}
+        selectProps.menuIsOpen ? ' wkp-select-menu-opened' : ''
+      }${singleValueClassName ? ` ${singleValueClassName}` : ''}`}
     >
-      <SBBGlobe focusable={false} className="wkp-single-value-globe" />
+      {selectLabel}
       <div className="wkp-single-value-selected">
         {selectProps.getOptionLabel(data)}
       </div>
@@ -33,4 +39,6 @@ const SingleValue = (props) => {
 };
 
 SingleValue.propTypes = propTypes;
+SingleValue.defaultProps = defaultProps;
+
 export default SingleValue;

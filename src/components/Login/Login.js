@@ -8,6 +8,7 @@ import './Login.scss';
 
 const Login = ({ appBaseUrl }) => {
   const { t } = useTranslation();
+  const language = useSelector((state) => state.app.language);
   const permissionsInfos = useSelector((state) => state.app.permissionsInfos);
 
   const login = useMemo(() => {
@@ -16,7 +17,7 @@ const Login = ({ appBaseUrl }) => {
     }
     return t('Anmelden');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [permissionsInfos]);
+  }, [permissionsInfos, language]);
 
   const openLoginPage = useCallback(() => {
     window.location.href = `${appBaseUrl}/login?next=${encodeURIComponent(

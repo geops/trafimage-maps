@@ -1,0 +1,22 @@
+@import '../../globals.scss';
+
+.wkp-single-value-wrapper {
+  .wkp-single-value-globe {
+    height: 28px;
+    width: 28px;
+
+    path {
+      stroke: $brand-grey;
+    }
+  }
+
+  &:hover {
+    color: $brand-primary-hover;
+
+    .wkp-single-value-globe {
+      path {
+        stroke: $brand-primary-hover;
+      }
+    }
+  }
+}

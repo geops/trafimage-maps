@@ -5,30 +5,12 @@
   height: 100%;
   color: $brand-grey;
   align-items: center;
+  justify-content: center;
   display: flex;
   padding: 5px;
 
-  .wkp-single-value-globe {
-    height: 28px;
-    width: 28px;
-
-    path {
-      stroke: $brand-grey;
-    }
-  }
-
   .wkp-single-value-selected {
     padding-right: 5px;
-  }
-
-  &:hover {
-    color: $brand-primary-hover;
-
-    .wkp-single-value-globe {
-      path {
-        stroke: $brand-primary-hover;
-      }
-    }
   }
 
   .wkp-select-toggle {
@@ -51,8 +33,19 @@
   }
 }
 
-.wkp-menu-opened {
+.wkp-select-menu-opened {
   border: 1px solid #666;
   border-radius: 0.14286em;
-  border-bottom: 1px solid #e5e5e5;
+}
+
+.wkp-header {
+  .wkp-select-menu-opened {
+    border-bottom: 1px solid #e5e5e5;
+  }
+}
+
+.wkp-footer {
+  .wkp-menu-opened {
+    border-top: none;
+  }
 }

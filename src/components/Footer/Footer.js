@@ -6,8 +6,9 @@ import ScaleLine from 'react-spatial/components/ScaleLine';
 import Copyright from 'react-spatial/components/Copyright';
 import MousePosition from 'react-spatial/components/MousePosition';
 import ActionLink from '@geops/react-ui/components/ActionLink';
+import ProjectionSelect from '../ProjectionSelect';
 import coordinateHelper from '../../utils/coordinateHelper';
-import { setProjection, setDialogVisible } from '../../model/app/actions';
+import { setDialogVisible } from '../../model/app/actions';
 import './Footer.scss';
 
 const Footer = () => {
@@ -48,6 +49,15 @@ const Footer = () => {
           format={(f) => `${t('Geodaten')} ${f.join(', ')}`}
           className="tm-copyright"
         />
+        <ScaleLine map={map} />
+        <ProjectionSelect projections={projections} />
+        <MousePosition
+          map={map}
+          projections={projections}
+          projectionValue={projection}
+        />
+      </div>
+      <div className="wkp-footer-right">
         <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
           {t('Kontakt')}
         </ActionLink>
@@ -65,18 +75,6 @@ const Footer = () => {
         >
           Developer Portal
         </a>
-      </div>
-
-      <div className="wkp-footer-right">
-        <MousePosition
-          map={map}
-          onChange={(evt, proj) => {
-            dispatch(setProjection(proj));
-          }}
-          projections={projections}
-          projectionValue={projection}
-        />
-        <ScaleLine map={map} />
       </div>
     </UIFooter>
   );

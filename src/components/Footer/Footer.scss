@@ -1,124 +1,130 @@
 @import '../../globals.scss';
 
-.wkp-footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: $footer-height;
-  background: white;
-  box-shadow: 1px -1px 2px rgba(0, 0, 0, 0.4);
-  font-size: $footer-font-size;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
-  padding: 0 5px;
-
-  select {
-    height: 20px;
-    font-size: $footer-font-size;
-    border-radius: 0;
-  }
-
-  a {
-    margin: 0 5px;
-  }
-
-  .wkp-footer-left {
-    a {
-      white-space: nowrap;
-    }
-  }
-
-  .wkp-footer-left,
-  .wkp-footer-right,
-  .rs-scale-line {
-    display: flex;
-    align-items: center;
-  }
-
-  .tm-copyright {
-    margin-right: 10px;
-
-    a {
-      margin: 0;
-    }
-  }
-
-  .rs-scale-line {
-    min-width: 160px;
-    display: flex;
-    justify-content: center;
-    margin: 0 5px;
-
-    .ol-scale-line-inner {
-      border-width: 0 2px 2px 2px;
-      font-size: $footer-font-size;
-      text-align: center;
-      padding: 0;
-      height: 18px;
-    }
-  }
-
-  .rs-mouse-position {
-    width: 320px;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-
-    span {
-      display: block;
-      margin-right: 10px;
-    }
-  }
-}
-
-.tm-w-l {
-  .rs-mouse-position {
-    width: 250px;
-    font-size: 11px;
-  }
-}
-
-.tm-w-l,
-.tm-w-m {
-  .rs-mouse-position {
-    width: 220px;
-  }
-}
-
-.tm-w-m,
-.tm-w-s,
-.tm-w-xs {
-  .tm-copyright {
+.tm-trafimage-maps {
+  .wkp-footer {
     position: absolute;
-    bottom: 32px;
-    font-size: 11px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: $footer-height;
+    background: white;
+    box-shadow: 1px -1px 2px rgba(0, 0, 0, 0.4);
+    font-size: $footer-font-size;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 0 5px;
+
+    select {
+      display: none; // Hide select from react-spatial MousePosition
+    }
+
+    input {
+      /*
+       * Hide dummyInput from react-select
+       * before issue resolved: https://github.com/JedWatson/react-select/issues/3995
+       */
+      position: absolute !important;
+      top: 0;
+    }
+
+    a {
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    .wkp-footer-right {
+      a {
+        margin: 0 10px;
+        white-space: nowrap;
+
+        &:hover {
+          color: $brand-primary-hover;
+        }
+      }
+    }
+
+    .wkp-footer-left,
+    .wkp-footer-right,
+    .rs-scale-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .tm-copyright {
+      position: absolute;
+      bottom: 42px;
+      right: 5px;
+
+      a {
+        margin: 0;
+      }
+    }
+
+    .rs-scale-line {
+      min-width: 160px;
+      display: flex;
+      justify-content: center;
+      margin: 0 5px;
+
+      .ol-scale-line-inner {
+        border-width: 0 2px 2px 2px;
+        font-size: $footer-font-size;
+        text-align: center;
+        padding: 0;
+        height: 18px;
+      }
+    }
+
+    .rs-mouse-position {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      select {
+        border: 1px solid #666;
+        border-radius: 0.14286em;
+      }
+
+      span {
+        display: block;
+        margin-right: 10px;
+      }
+    }
   }
 
-  .rs-mouse-position {
-    width: 320px;
+  .tm-w-m,
+  .tm-w-s,
+  .tm-w-xs {
+    .tm-copyright {
+      font-size: 11px;
+    }
+
+    .rs-mouse-position {
+      width: 120px;
+    }
   }
-}
 
-.tm-w-s,
-.tm-w-xs {
-  .rs-mouse-position,
-  .rs-scale-line {
-    display: none;
-  }
-}
-
-.tm-w-xs {
-  .wkp-footer-left {
-    font-size: 11px;
-
-    .wkp-dev-portal-link {
+  .tm-w-s,
+  .tm-w-xs {
+    .rs-mouse-position,
+    .rs-scale-line {
       display: none;
     }
   }
 
-  .wkp-language-select {
-    padding-right: 0;
+  .tm-w-xs {
+    .wkp-footer-left {
+      font-size: 11px;
+
+      .wkp-dev-portal-link {
+        display: none;
+      }
+    }
+
+    .wkp-language-select {
+      padding-right: 0;
+    }
   }
 }

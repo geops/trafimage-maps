@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Select from 'react-select';
+import Select from '../Select';
 import { setLanguage } from '../../model/app/actions';
+import { ReactComponent as SBBGlobe } from '../../img/sbb/globe_210_large.svg';
 
-import SingleValue from './SingleValue';
+import './LanguageSelect.scss';
 
 const options = [
   { label: 'Deutsch', value: 'de' },
@@ -80,10 +81,11 @@ const LanguageSelect = () => {
   return (
     <Select
       options={isMobileWidth ? optionsMobile : options}
-      isSearchable={false}
       value={inputValue}
       styles={selectStyles(screenWidth, isMobileWidth)}
-      components={{ SingleValue }}
+      selectLabel={
+        <SBBGlobe focusable={false} className="wkp-single-value-globe" />
+      }
       onChange={(opt) => {
         dispatch(setLanguage(opt.value));
       }}
