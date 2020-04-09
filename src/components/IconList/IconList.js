@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import List from '@geops/react-ui/components/List';
 import Button from '@geops/react-ui/components/Button';
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
-import { withTranslation } from 'react-i18next';
 
 import './IconList.scss';
 
@@ -226,4 +225,6 @@ class IconList extends PureComponent {
 IconList.propTypes = propTypes;
 IconList.defaultProps = defaultProps;
 
-export default withTranslation('translation', { withRef: true })(IconList);
+// Don't use HOC components here, it will breaks the app in handicap branch.
+// This component is only used by a Layer class.
+export default IconList;
