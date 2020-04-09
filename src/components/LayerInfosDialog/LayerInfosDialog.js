@@ -6,11 +6,15 @@ import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
 
 const propTypes = {
+  style: PropTypes.object,
+  isDraggable: PropTypes.bool,
   selectedForInfos: PropTypes.object,
   staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
+  style: undefined,
+  isDraggable: true,
   selectedForInfos: null,
   staticFilesUrl: null,
 };
@@ -20,8 +24,7 @@ export const NAME = 'infoDialog';
 function LayerInfosDialog(props) {
   const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
-  const { selectedForInfos, staticFilesUrl } = props;
-
+  const { style, isDraggable, selectedForInfos, staticFilesUrl } = props;
   if (!selectedForInfos) {
     return null;
   }
@@ -52,16 +55,21 @@ function LayerInfosDialog(props) {
       />
     );
   } else if (description) {
-    body = <Trans i18nKey={description} />;
+    body = (
+      <div>
+        <Trans i18nKey={description} />
+      </div>
+    );
   }
 
   return (
     <Dialog
-      isDraggable
+      isDraggable={isDraggable}
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={<span>{t('Informationen')}</span>}
-      body={body}
+      body={<div>{body}</div>}
+      style={style}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />

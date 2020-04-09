@@ -21,14 +21,17 @@ const defaultProps = {
 const MainDialog = ({ staticFilesUrl }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
+  const isMobileWidth = useSelector((state) => state.app.isMobileWidth);
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
     return (
       <LayerInfosDialog
         selectedForInfos={selectedForInfos}
+        isDraggable={!isMobileWidth}
         staticFilesUrl={staticFilesUrl}
         onDragStop={(evt, pos) => {
           dispatch(

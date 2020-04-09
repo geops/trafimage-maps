@@ -5,7 +5,6 @@ import List from '@geops/react-ui/components/List';
 import Button from '@geops/react-ui/components/Button';
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 import './IconList.scss';
 
@@ -48,6 +47,17 @@ class IconList extends PureComponent {
       selectedOption: props.selected,
       iconListVis: false,
     };
+
+    this.hideList = this.hideList.bind(this);
+    this.evtTypes = ['wheel', 'click', 'touchstart'];
+    this.mounted = false;
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+    this.evtTypes.forEach((type) => {
+      document.body.addEventListener(type, this.hideList);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -58,10 +68,40 @@ class IconList extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    this.mounted = false;
+    this.evtTypes.forEach((type) => {
+      document.body.removeEventListener(type, this.hideList);
+    });
+  }
+
   select(option) {
     this.setState({
       selectedOption: option,
     });
+  }
+
+  hideList(evt) {
+    if (!this.mounted) {
+      return;
+    }
+    const { iconListVis } = this.state;
+    if (iconListVis) {
+      if (!this.ref.current) {
+        return;
+      }
+
+      const isInsideList = !!(
+        evt.target && this.ref.current.contains(evt.target)
+      );
+      if (isInsideList) {
+        // Don't hide the list if the event comes form inside the IconList.
+        return;
+      }
+      this.setState({
+        iconListVis: false,
+      });
+    }
   }
 
   renderOption(option) {
@@ -107,14 +147,13 @@ class IconList extends PureComponent {
         }}
       />
     );
+    const rect = this.ref.current.getBoundingClientRect();
+    const listStyles = {
+      top: `${rect.top + rect.height}px`,
+      left: `${rect.left}px`,
+    };
 
     if (displayOnTop) {
-      const rect = this.ref.current.getBoundingClientRect();
-      const listStyles = {
-        top: `${rect.top + rect.height}px`,
-        left: `${rect.left}px`,
-      };
-
       const targetElements = document.getElementsByClassName(
         'tm-trafimage-maps',
       );
@@ -143,19 +182,25 @@ class IconList extends PureComponent {
       );
     }
 
-    return <div className="wkp-icon-list-non-modal">{list}</div>;
+    return (
+      <div className="wkp-icon-list-non-modal" style={listStyles}>
+        {list}
+      </div>
+    );
   }
 
   render() {
     const { disabled } = this.props;
     const { iconListVis, selectedOption } = this.state;
-
     return (
       <div ref={this.ref}>
         <Button
           className="wkp-icon-list-button"
           onClick={() => {
             if (disabled) {
+              return;
+            }
+            if (!this.mounted) {
               return;
             }
             this.setState({ iconListVis: !iconListVis });
@@ -181,4 +226,4 @@ class IconList extends PureComponent {
 IconList.propTypes = propTypes;
 IconList.defaultProps = defaultProps;
 
-export default compose(withTranslation())(IconList);
+export default withTranslation('translation', { withRef: true })(IconList);

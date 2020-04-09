@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
+import { setIsMobileWidth } from '../../model/app/actions';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -62,6 +63,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
 
 function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const ref = useRef(null);
+  const dispatch = useDispatch();
   const { activeTopic, layerService, map } = useSelector((state) => state.app);
   const [tabFocus, setTabFocus] = useState(false);
   useEffect(() => {
@@ -151,12 +153,24 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   const appElements = getComponents(appComponents, elements);
 
+  const onResize = (entries) => {
+    const [entry] = entries;
+    const rect = entry.contentRect;
+    const { width } = rect;
+    // tm-w-s
+    dispatch(setIsMobileWidth(width <= 768));
+  };
+
   return (
     <div
       ref={ref}
       className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}
     >
-      <ResizeHandler observe={ref.current} forceUpdate={elements.header} />
+      <ResizeHandler
+        observe={ref.current}
+        forceUpdate={elements.header}
+        onResize={onResize}
+      />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         <EventConsumer>
           {(dispatcher) => (

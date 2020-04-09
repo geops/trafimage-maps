@@ -12,6 +12,7 @@ export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
 export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
+export const SET_IS_MOBILE_WIDTH = 'SET_IS_MOBILE_WIDTH';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -67,6 +68,11 @@ export const fetchPermissionsInfos = (appBaseUrl) => (dispatch) => {
       });
     });
 };
+
+export const setIsMobileWidth = (data) => ({
+  type: SET_IS_MOBILE_WIDTH,
+  data,
+});
 
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
 
