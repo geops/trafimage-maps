@@ -119,13 +119,14 @@ class HandicapLayer extends VectorLayer {
    * @returns {Object|null}
    */
   style(feature, resolution, handicapType) {
-    const gen = LayerHelper.getGeneralization(resolution);
+    const gen = LayerHelper.getMapboxGeneralization(resolution);
     const wkt = (feature.get('generalizations') || {})[`geom_gen${gen}`];
     const geometry = wkt
       ? this.wktFormat.readGeometry(wkt.split(';')[1])
       : null;
 
-    const minVisibility = LayerHelper.getDataResolution(resolution) * 10;
+    const minVisibility = LayerHelper.getMapboxDataResolution(resolution) * 10;
+
     if (!geometry || feature.get('visibility') < minVisibility) {
       return null;
     }

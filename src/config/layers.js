@@ -11,6 +11,7 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import LayerHelper from '../layers/layerHelper';
 
 proj4.defs(
   'EPSG:21781',
@@ -33,29 +34,6 @@ const projectionExtent = [
   -20037508.3428,
   20037508.3428,
   20037508.3428,
-];
-
-const resolutions = [
-  156543.033928,
-  78271.516964,
-  39135.758482,
-  19567.879241,
-  9783.9396205,
-  4891.96981025,
-  2445.98490513,
-  1222.99245256,
-  611.496226281,
-  305.748113141,
-  152.87405657,
-  76.4370282852,
-  38.2185141426,
-  19.1092570713,
-  9.55462853565,
-  4.77731426782,
-  2.38865713391,
-  1.19432856696,
-  0.597164283478,
-  0.298582141739,
 ];
 
 export const dataLayer = new TrafimageMapboxLayer({
@@ -375,8 +353,8 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.mapResolutions,
+        matrixIds: LayerHelper.mapResolutions.map((r, i) => `${i}`),
       }),
     }),
   }),
@@ -397,8 +375,8 @@ export const parks = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.mapResolutions,
+        matrixIds: LayerHelper.mapResolutions.map((r, i) => `${i}`),
       }),
     }),
     opacity: 0.9,
