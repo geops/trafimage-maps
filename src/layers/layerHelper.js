@@ -8,11 +8,11 @@ function getDataResolution(resolution, resolutions = dataResolutions) {
   });
 }
 
-function getGeneralization(resolution, resolutions, generalisations) {
+function getGeneralization(resolution, resolutions, generalizations) {
   const res = getDataResolution(resolution, resolutions);
 
   return (
-    (generalisations || {
+    (generalizations || {
       750: 5,
       500: 10,
       250: 30,
