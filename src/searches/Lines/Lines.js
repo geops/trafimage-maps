@@ -78,8 +78,11 @@ class Lines extends Search {
       params = `line=${line}&km=${km}&km_end=${kmEnd}`;
     }
     return fetch(`https://maps.trafimage.ch/search/lines?${params}`)
-      .then(data => data.json())
-      .then(featureCollection => featureCollection.features);
+      .then((data) => data.json())
+      .then((featureCollection) => featureCollection.features)
+      .catch(() => {
+        return [];
+      });
   }
 
   render({ properties }) {

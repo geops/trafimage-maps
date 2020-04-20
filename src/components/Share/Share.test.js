@@ -52,11 +52,6 @@ describe('Share', () => {
       </Provider>,
     );
 
-    expect(
-      wrapper
-        .find('.ta-manual-icon')
-        .first()
-        .exists(),
-    ).toBe(true);
+    expect(wrapper.find('.ta-manual-icon').first().exists()).toBe(true);
   });
 });

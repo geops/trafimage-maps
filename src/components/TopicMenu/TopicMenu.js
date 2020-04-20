@@ -52,7 +52,7 @@ class TopicMenu extends PureComponent {
 
     const { layerService } = this.props;
     const visibleBaseLayer =
-      layerService && layerService.getBaseLayers().find(l => l.getVisible());
+      layerService && layerService.getBaseLayers().find((l) => l.getVisible());
     if (visibleBaseLayer) {
       this.setState({
         currentBaseLayerKey: visibleBaseLayer.getKey(),
@@ -175,7 +175,7 @@ class TopicMenu extends PureComponent {
       layerTree = (
         <div className="wkp-layer-tree">
           <LayerTree
-            isItemHidden={l => l.getIsBaseLayer() || l.get('hideInLegend')}
+            isItemHidden={(l) => l.getIsBaseLayer() || l.get('hideInLegend')}
             layerService={layerService}
             t={t}
             titles={{
@@ -186,7 +186,9 @@ class TopicMenu extends PureComponent {
             }}
             renderItemContent={(layer, layerTreeComp) => (
               <>
-                {layerTreeComp.renderItemContent(layer)}
+                {layer.renderItemContent
+                  ? layer.renderItemContent(layerTreeComp)
+                  : layerTreeComp.renderItemContent(layer)}
                 {layer.get('hasInfos') && this.renderInfoButton(layer)}
               </>
             )}
@@ -197,7 +199,7 @@ class TopicMenu extends PureComponent {
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
 
-    const isMenuVisibleLayers = (topic.layers || []).find(l => {
+    const isMenuVisibleLayers = (topic.layers || []).find((l) => {
       return !l.get('hideInLegend');
     });
     return (
@@ -209,7 +211,7 @@ class TopicMenu extends PureComponent {
             tabIndex={0}
             aria-expanded={!isCollapsed}
             onClick={() => this.onTopicClick(topic)}
-            onKeyPress={e => e.which === 13 && this.onTopicClick(topic)}
+            onKeyPress={(e) => e.which === 13 && this.onTopicClick(topic)}
           >
             <div
               className={`wkp-topic-title${
@@ -251,7 +253,7 @@ class TopicMenu extends PureComponent {
               layerService.getBaseLayers() &&
               layerService.getBaseLayers().length > 1 && (
                 <Select
-                  options={layerService.getBaseLayers().map(l => {
+                  options={layerService.getBaseLayers().map((l) => {
                     return {
                       value: l.getKey(),
                       label: t(l.getKey()),
@@ -278,7 +280,7 @@ class TopicMenu extends PureComponent {
 TopicMenu.defaultProps = defaultProps;
 TopicMenu.propTypes = propTypes;
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   menuOpen: state.app.menuOpen,
   map: state.app.map,
   activeTopic: state.app.activeTopic,

@@ -12,26 +12,33 @@ import './FeatureInformation.scss';
 
 const propTypes = {
   featureInfo: PropTypes.array.isRequired,
+  appBaseUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
 };
 
-const FeatureInformation = ({ featureInfo }) => {
+const defaultProps = {
+  appBaseUrl: null,
+  staticFilesUrl: null,
+};
+
+const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const language = useSelector(state => state.app.language);
-  const cartaroOldUrl = useSelector(state => state.app.cartaroOldUrl);
+  const language = useSelector((state) => state.app.language);
+  const cartaroOldUrl = useSelector((state) => state.app.cartaroOldUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo.map(l => l.features).flat();
+  const features = featureInfo.map((l) => l.features).flat();
   const feature = features[featureIndex];
   if (!feature) {
     return null;
   }
 
-  const info = featureInfo.find(i => i.features.includes(feature));
+  const info = featureInfo.find((i) => i.features.includes(feature));
   if (!info || !info.layer) {
     return null;
   }
@@ -80,7 +87,7 @@ const FeatureInformation = ({ featureInfo }) => {
         <div className="wkp-feature-information-header">
           <span>
             {PopupComponent && PopupComponent.renderTitle && feature
-              ? PopupComponent.renderTitle(feature)
+              ? PopupComponent.renderTitle(feature, t)
               : layer && layer.getName() && t(layer.getName())}
           </span>
           <Button
@@ -103,6 +110,8 @@ const FeatureInformation = ({ featureInfo }) => {
             t={t}
             feature={features[featureIndex]}
             language={language}
+            appBaseUrl={appBaseUrl}
+            staticFilesUrl={staticFilesUrl}
           />
           {pagination}
         </div>
@@ -112,5 +121,6 @@ const FeatureInformation = ({ featureInfo }) => {
 };
 
 FeatureInformation.propTypes = propTypes;
+FeatureInformation.defaultProps = defaultProps;
 
 export default React.memo(FeatureInformation);

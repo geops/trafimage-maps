@@ -47,6 +47,11 @@ function getGeneralization(resolution, resolutions, generalizations) {
   );
 }
 
+function getOldGeneralization(resolution) {
+  const res = getDataResolution(resolution);
+  return { 750: 10, 500: 10, 250: 30, 100: 30 }[res] || 100;
+}
+
 const mapboxDataResolutions = [
   4500, // zoom 0
   4500, // zoom 1
@@ -120,6 +125,7 @@ export default {
   mapResolutions,
   getDataResolution,
   getGeneralization,
+  getOldGeneralization,
   getMapboxDataResolution,
   getMapboxGeneralization,
 };

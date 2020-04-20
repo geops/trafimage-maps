@@ -10,8 +10,8 @@ describe('LegalLines', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  ['rechtliches', 'impressum', 'kontakt'].forEach(doc => {
-    ['de', 'fr', 'en', 'it'].forEach(lng => {
+  ['rechtliches', 'impressum', 'kontakt'].forEach((doc) => {
+    ['de', 'fr', 'en', 'it'].forEach((lng) => {
       test(`should match snapshot with doc=${doc} and language=${lng}`, () => {
         const component = renderer.create(
           <LegalLines doc={doc} language={lng} />,

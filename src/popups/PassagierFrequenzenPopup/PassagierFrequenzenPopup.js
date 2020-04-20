@@ -12,7 +12,7 @@ const propTypes = {
 const defaultProps = {};
 
 const PassagierFrequenzenPopup = ({ feature, t }) => {
-  const language = useSelector(state => state.app.language);
+  const language = useSelector((state) => state.app.language);
 
   const statisticDate = feature.get('passagier_freq_jahr');
   const dwv = feature
@@ -39,5 +39,5 @@ PassagierFrequenzenPopup.defaultProps = defaultProps;
 
 const composed = withTranslation()(PassagierFrequenzenPopup);
 
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = (feat) => feat.get('name');
 export default composed;

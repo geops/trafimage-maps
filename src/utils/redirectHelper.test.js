@@ -8,7 +8,7 @@ import {
 
 describe('redirectHelper', () => {
   describe('#convertToOldZoom()', () => {
-    Object.keys(zoomEquivalent).forEach(i => {
+    Object.keys(zoomEquivalent).forEach((i) => {
       test(`should get the old wkp zoom form the zoom ${i}`, () => {
         expect(convertToOldZoom(i)).toEqual(zoomEquivalent[i]);
       });

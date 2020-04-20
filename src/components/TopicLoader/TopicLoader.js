@@ -35,6 +35,7 @@ const propTypes = {
 
   // mapStateToProps
   activeTopic: PropTypes.shape(),
+  language: PropTypes.string.isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   permissionsInfos: PropTypes.shape({
     user: PropTypes.string,
@@ -77,6 +78,7 @@ class TopicLoader extends Component {
   componentDidUpdate(prevProps) {
     const {
       activeTopic,
+      language,
       topics,
       permissionsInfos,
       apiKey,
@@ -115,6 +117,10 @@ class TopicLoader extends Component {
     ) {
       this.updateServices(activeTopic);
     }
+
+    if (language !== prevProps.language) {
+      this.updateLayers(activeTopic.layers);
+    }
   }
 
   loadTopics() {
@@ -131,14 +137,15 @@ class TopicLoader extends Component {
     if (!topics.length) {
       return;
     }
-    const activeTopic = topics.find(t => t.active);
+    const activeTopic = topics.find((t) => t.active);
     const visibleTopics = topics.filter(
-      t =>
-        !t.permission ||
-        (permissionsInfos &&
-          permissionsInfos.permissions.includes(t.permission)),
+      (t) =>
+        (!t.permission ||
+          (permissionsInfos &&
+            permissionsInfos.permissions.includes(t.permission))) &&
+        !t.hideInLayerTree,
     );
-    let visibleActiveTopic = visibleTopics.find(t => t.active);
+    let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
@@ -210,6 +217,7 @@ class TopicLoader extends Component {
 
   updateLayers(topicLayers) {
     const {
+      language,
       layerService,
       dispatchSetLayers,
       cartaroUrl,
@@ -221,16 +229,16 @@ class TopicLoader extends Component {
 
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
-      .filter(l => l.getIsBaseLayer() && l.getVisible());
+      .filter((l) => l.getIsBaseLayer() && l.getVisible());
 
     const visibleBaseLayers = topicLayers.filter(
-      l => l.getIsBaseLayer() && l.getVisible(),
+      (l) => l.getIsBaseLayer() && l.getVisible(),
     );
 
     // Set the visible baselayer if need to be changed on topic change.
     if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
       topicLayers
-        .filter(l => l.getIsBaseLayer())
+        .filter((l) => l.getIsBaseLayer())
         .forEach((lay, idx) => {
           lay.setVisible(idx === 0);
         });
@@ -243,16 +251,23 @@ class TopicLoader extends Component {
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
-      } else if (flatLayers[i].setGeoServerWMSUrl) {
+      }
+      if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(
           `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
         );
-      } else if (flatLayers[i].setGeoJsonUrl) {
+      }
+      if (flatLayers[i].setGeoJsonUrl) {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
-      } else if (flatLayers[i].setStyleConfig) {
+      }
+      if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
-      } else if (flatLayers[i].setCartaroUrl) {
+      }
+      if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
+      }
+      if (flatLayers[i].setLanguage) {
+        flatLayers[i].setLanguage(language);
       }
       if (flatLayers[i].setStaticFilesUrl) {
         flatLayers[i].setStaticFilesUrl(staticFilesUrl);
@@ -272,8 +287,9 @@ class TopicLoader extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
+  language: state.app.language,
   layerService: state.app.layerService,
   permissionsInfos: state.app.permissionsInfos,
 });

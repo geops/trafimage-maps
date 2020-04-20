@@ -138,7 +138,7 @@ const defaultProps = {
   history: undefined,
 };
 
-const WebComponent = props => {
+const WebComponent = (props) => {
   const {
     activeTopicKey,
     width,
@@ -167,7 +167,7 @@ const WebComponent = props => {
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(
-    () => maxExtent && maxExtent.split(',').map(float => parseFloat(float)),
+    () => maxExtent && maxExtent.split(',').map((float) => parseFloat(float)),
     [maxExtent],
   );
   const appTopics = useMemo(() => {
@@ -183,9 +183,14 @@ const WebComponent = props => {
       return [];
     }
     if (activeTopicKey) {
-      tps.forEach(topic => {
+      tps.forEach((topic) => {
         // eslint-disable-next-line no-param-reassign
         topic.active = topic.key === activeTopicKey;
+        // eslint-disable-next-line no-param-reassign
+        topic.hideInLayerTree =
+          topic.hideInLayerTree && topic.key === activeTopicKey
+            ? false
+            : topic.hideInLayerTree;
       });
     } else {
       tps[0].active = true;

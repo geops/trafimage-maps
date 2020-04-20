@@ -64,9 +64,9 @@ const renderConf = (conf, t, lang, appBaseUrl) => (
 );
 
 const Share = ({ appBaseUrl }) => {
-  const activeTopic = useSelector(state => state.app.activeTopic);
-  const language = useSelector(state => state.app.language);
-  const map = useSelector(state => state.app.map);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+  const language = useSelector((state) => state.app.language);
+  const map = useSelector((state) => state.app.map);
   const { t } = useTranslation();
   const config = [...socialShareConfig];
 
