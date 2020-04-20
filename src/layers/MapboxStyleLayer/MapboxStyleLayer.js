@@ -43,7 +43,7 @@ class MapboxStyleLayer extends Layer {
     this.options = options;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
-    this.featureInfoFilter = options.featureInfoFilter || (obj => obj);
+    this.featureInfoFilter = options.featureInfoFilter || ((obj) => obj);
     this.queryRenderedLayersFilter = options.queryRenderedLayersFilter;
     this.highlightedFeatures = [];
     this.selectedFeatures = [];
@@ -63,8 +63,8 @@ class MapboxStyleLayer extends Layer {
     }
 
     if (!this.styleLayersFilter && this.styleLayers) {
-      const ids = this.styleLayers.map(s => s.id);
-      this.styleLayersFilter = styleLayer => {
+      const ids = this.styleLayers.map((s) => s.id);
+      this.styleLayersFilter = (styleLayer) => {
         return ids.includes(styleLayer.id);
       };
     }
@@ -133,7 +133,7 @@ class MapboxStyleLayer extends Layer {
 
   addStyleLayers() {
     const { mbMap } = this.mapboxLayer;
-    this.styleLayers.forEach(styleLayer => {
+    this.styleLayers.forEach((styleLayer) => {
       const { id, source } = styleLayer;
       if (mbMap.getSource(source) && !mbMap.getLayer(id)) {
         mbMap.addLayer(styleLayer);
@@ -144,7 +144,7 @@ class MapboxStyleLayer extends Layer {
 
   removeStyleLayers() {
     const { mbMap } = this.mapboxLayer;
-    this.styleLayers.forEach(styleLayer => {
+    this.styleLayers.forEach((styleLayer) => {
       if (mbMap.getLayer(styleLayer.id)) {
         mbMap.removeLayer(styleLayer.id);
       }
@@ -177,11 +177,11 @@ class MapboxStyleLayer extends Layer {
         layers: (this.queryRenderedLayersFilter
           ? mbMap.getStyle().layers.filter(this.queryRenderedLayersFilter)
           : this.styleLayers
-        ).map(s => s && s.id),
+        ).map((s) => s && s.id),
         validate: false,
       })
-      .then(featureInfo => {
-        const features = featureInfo.features.filter(feature => {
+      .then((featureInfo) => {
+        const features = featureInfo.features.filter((feature) => {
           return this.featureInfoFilter(
             feature,
             this.map.getView().getResolution(),
@@ -207,7 +207,7 @@ class MapboxStyleLayer extends Layer {
 
   setHoverState(features = [], state) {
     const options = this.styleLayers[0];
-    features.forEach(feature => {
+    features.forEach((feature) => {
       if ((!options.source && !options['source-layer']) || !feature.getId()) {
         if (!feature.getId()) {
           // eslint-disable-next-line no-console
@@ -239,9 +239,9 @@ class MapboxStyleLayer extends Layer {
 
   highlight(features = []) {
     // Filter out selected features
-    const filtered = this.highlightedFeatures.filter(feature => {
+    const filtered = this.highlightedFeatures.filter((feature) => {
       return !this.selectedFeatures
-        .map(feat => feat.getId())
+        .map((feat) => feat.getId())
         .includes(feature.getId());
     });
 

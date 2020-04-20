@@ -114,6 +114,10 @@ module.exports = {
           loader: 'url-loader',
         },
         {
+          test: /\.(woff|woff2|ttf|eot)$/,
+          use: 'file-loader?name=fonts/[name].[ext]!static',
+        },
+        {
           test: /\.png$/,
           use: [
             {

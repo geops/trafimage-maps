@@ -26,7 +26,7 @@ function SharePermalinkButton({ icon, title, className }) {
 
   // Close the tooltip when clicking outside the tooltip
   useEffect(() => {
-    const onDocClick = e => {
+    const onDocClick = (e) => {
       // If the click comes from an element of Autocomplete, don't close the list.
       if (ref && ref.current && ref.current.contains(e.target)) {
         return;
@@ -45,7 +45,7 @@ function SharePermalinkButton({ icon, title, className }) {
     <div className={className} ref={ref}>
       <Button
         title={t(title)}
-        onClick={e => {
+        onClick={(e) => {
           setPositionTooltip(e.currentTarget.getBoundingClientRect());
           setShowTooltip(!showTooltip);
         }}

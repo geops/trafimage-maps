@@ -39,6 +39,7 @@ i18n
         escapeValue: false,
       },
       keySeparator: ' µ', // Deactivate the keySeparator option
+      nsSeparator: false, // Deactivate the nsSeparator option
       saveMissing: false,
       missingKeyHandler(lng, ns, key, fallbackValue) {
         // eslint-disable-next-line no-console
@@ -60,7 +61,7 @@ i18n
         ],
       },
     },
-    err => {
+    (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.error('i18n initialisation failed:', err);

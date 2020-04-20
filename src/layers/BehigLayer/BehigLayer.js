@@ -26,8 +26,8 @@ class BehigLayer extends VectorLayer {
               'layer=behig_konformitaet&workspace=trafimage' +
               '&srsName=EPSG:3857&geoserver=wkp',
           )
-            .then(data => data.json())
-            .then(data => {
+            .then((data) => data.json())
+            .then((data) => {
               const format = new GeoJSON();
               const features = format.readFeatures(data);
               this.olLayer.getSource().clear();
@@ -43,6 +43,7 @@ class BehigLayer extends VectorLayer {
     });
 
     this.toggleLayers = options.toggleLayers || [];
+    this.behigResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
 
     this.styleCache = {};
     this.visibilityKeys = [];
@@ -57,7 +58,7 @@ class BehigLayer extends VectorLayer {
     super.init(map);
 
     this.visibilityKeys.push(
-      this.toggleLayers.map(toggleLayer => {
+      this.toggleLayers.map((toggleLayer) => {
         return toggleLayer.on('change:visible', this.onChangeVisible);
       }),
     );
@@ -90,7 +91,7 @@ class BehigLayer extends VectorLayer {
    */
   geometryFunction(feature) {
     const toggleLayer = this.toggleLayers.find(
-      layer =>
+      (layer) =>
         layer.properties &&
         layer.properties.behig &&
         layer.properties.behig.status === feature.get('status'),
@@ -106,7 +107,10 @@ class BehigLayer extends VectorLayer {
       return null;
     }
 
-    const res = LayerHelper.getDataResolution(resolution);
+    const res = LayerHelper.getDataResolution(
+      resolution,
+      this.behigResolutions,
+    );
     if (feature.get('resolution') === res) {
       const status = feature.get('status');
       const cacheKey = status;

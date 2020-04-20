@@ -16,22 +16,22 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSIONS_INFOS,
+  SET_CARTARO_OLD_URL,
+  SET_IS_MOBILE_WIDTH,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
-import layerHelper from '../../layers/layerHelper';
 
 const getInitialState = () => ({
-  permissionsInfos: {
-    user: null,
-    permissions: [],
-  },
+  // We set the permission to null instead of a default empty object
+  // to know when the request has been done.
+  permissionsInfos: null,
   topics: [],
   featureInfo: [],
   language: 'de',
   projection: {
     label: 'WGS 84',
     value: 'EPSG:4326',
-    format: c => c,
+    format: (c) => c,
   },
   menuOpen: false,
   searchOpen: false,
@@ -44,7 +44,8 @@ const getInitialState = () => ({
     }),
   }),
   layerService: new LayerService(),
-  searchService: new SearchService(layerHelper.highlightStyle),
+  searchService: new SearchService(),
+  isMobileWidth: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -115,7 +116,20 @@ export default function app(state = getInitialState(), action) {
     case SET_PERMISSIONS_INFOS:
       return {
         ...state,
-        permissionsInfos: action.data,
+        permissionsInfos: action.data || {
+          user: null,
+          permissions: [],
+        },
+      };
+    case SET_CARTARO_OLD_URL:
+      return {
+        ...state,
+        cartaroOldUrl: action.data,
+      };
+    case SET_IS_MOBILE_WIDTH:
+      return {
+        ...state,
+        isMobileWidth: action.data,
       };
     default:
       return {

@@ -10,7 +10,7 @@ const propTypes = {
 };
 
 function HandicapPopup({ feature }) {
-  const language = useSelector(state => state.app.language);
+  const language = useSelector((state) => state.app.language);
   const properties = feature.getProperties();
   const { t } = useTranslation();
 
@@ -36,7 +36,7 @@ function HandicapPopup({ feature }) {
     properties.treppenfrei ? t('treppenfrei') : t('nicht treppenfrei'),
   );
 
-  Object.keys(bfEquipmentExceptions).forEach(key => {
+  Object.keys(bfEquipmentExceptions).forEach((key) => {
     if (properties[key]) {
       let str = t(key);
 
@@ -82,12 +82,12 @@ function HandicapPopup({ feature }) {
     },
   ];
 
-  const renderBottom = props => {
+  const renderBottom = (props) => {
     if (
       [
         `zusaetzliche_informationen_${language}`,
         `beschreibung_zur_dritte_dienstleistung_${language}`,
-      ].every(val => Object.keys(props).includes(val) && props[val] !== '')
+      ].every((val) => Object.keys(props).includes(val) && props[val] !== '')
     ) {
       return (
         <div className="wkp-handicap-popup-bottom">
@@ -146,7 +146,7 @@ function HandicapPopup({ feature }) {
     <div className="wkp-handicap-popup">
       <div className="wkp-handicap-popup-body">
         <div className="wkp-handicap-popup-title">{titles.join(' / ')}</div>
-        {elementsList.map(field => {
+        {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
             return null;
           }
@@ -173,6 +173,6 @@ function HandicapPopup({ feature }) {
 HandicapPopup.propTypes = propTypes;
 
 const memoized = React.memo(HandicapPopup);
-memoized.renderTitle = feat => feat.get('stationsbezeichnung');
+memoized.renderTitle = (feat) => feat.get('stationsbezeichnung');
 
 export default memoized;

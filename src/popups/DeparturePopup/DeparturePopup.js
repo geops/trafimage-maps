@@ -9,16 +9,17 @@ import DeparturePopupContent from './DeparturePopupContent';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  appBaseUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
 
 let returnToNetzkarte = false;
 
-const DeparturePopup = ({ feature }) => {
+const DeparturePopup = ({ feature, appBaseUrl }) => {
   const dispatch = useDispatch();
-  const featureInfo = useSelector(state => state.app.featureInfo);
-  const layerService = useSelector(state => state.app.layerService);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
+  const layerService = useSelector((state) => state.app.layerService);
   const name = feature.get('name');
   const uic = parseFloat(feature.get('sbb_id'));
 
@@ -40,14 +41,16 @@ const DeparturePopup = ({ feature }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <DeparturePopupContent name={name} uic={uic} />;
+  return (
+    <DeparturePopupContent name={name} uic={uic} appBaseUrl={appBaseUrl} />
+  );
 };
 
 DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;
 
 const composed = withTranslation()(DeparturePopup);
-composed.renderTitle = feat => feat.get('name');
+composed.renderTitle = (feat) => feat.get('name');
 // Trigerred on popup close with close button only.
 composed.onCloseBtClick = () => {
   returnToNetzkarte = true;

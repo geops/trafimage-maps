@@ -6,7 +6,6 @@
 
     .tm-dialog-container {
       min-width: 320px;
-      max-width: 420px;
       width: auto;
       overflow: visible;
 
@@ -23,15 +22,20 @@
     }
 
     .tm-dialog-body {
-      padding: 20px;
       width: auto;
       text-align: left;
-      max-height: calc(100% - 70px);
+      min-height: 100px;
+      background-color: white;
+      overflow: auto;
 
       p {
         margin: 0;
         margin-top: 1em;
       }
+    }
+
+    .tm-dialog-body > div:first-child {
+      padding: 20px;
     }
   }
 
@@ -66,11 +70,31 @@
   }
 }
 
-.tm-w-m,
-.tm-w-l,
-.tm-w-xl {
+.tm-h-s {
   .tm-dialog {
-    top: 125px;
+    .tm-dialog-body {
+      max-height: 350px;
+    }
+  }
+
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 420px;
+    }
+  }
+}
+
+.tm-h-xs {
+  .tm-dialog {
+    .tm-dialog-body {
+      max-height: 280px;
+    }
+  }
+
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 360px;
+    }
   }
 }
 
@@ -80,37 +104,69 @@
   }
 }
 
+.tm-w-m,
+.tm-w-l,
+.tm-w-xl {
+  .tm-dialog {
+    top: 125px;
+  }
+}
+
+.tm-h-m {
+  .tm-modal {
+    .tm-dialog-body {
+      max-height: 620px;
+    }
+  }
+}
+
 .tm-w-xs,
 .tm-w-s {
-  .wkp-dialog {
-    .tm-rnd {
-      top: unset !important;
-      bottom: 0 !important;
-      width: calc(100% - 20px) !important;
-      height: calc(40% - 10px) !important;
-      max-height: 50% !important;
-      transform: none !important; // block drag
-
-      .tm-dialog {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        bottom: 10px;
-        left: 10px;
-        right: 10px;
-
-        .tm-dialog-body {
-          height: calc(100% - 50px);
-          overflow-y: auto;
-          overflow-x: auto;
-        }
-      }
+  .tm-dialog,
+  .tm-modal {
+    .tm-dialog-container {
+      display: flex;
+      flex-direction: column;
     }
   }
 
   .tm-modal {
     .tm-dialog-container {
       width: calc(100% - 40px);
+    }
+  }
+
+  &.tm-h-m {
+    .tm-dialog {
+      .tm-dialog-body {
+        max-height: 420px;
+      }
+    }
+  }
+
+  .wkp-dialog {
+    margin: auto;
+
+    .tm-dialog {
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: transparent;
+
+      .tm-dialog-container {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+
+        .tm-dialog-body {
+          display: flex;
+          flex-direction: column;
+        }
+      }
     }
   }
 }
