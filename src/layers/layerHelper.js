@@ -22,6 +22,14 @@ const mapResolutions = [
   0.298582141739,
 ];
 
+/**
+ * Get the map resolutions
+ * where the array index is the zoom level
+ */
+function getMapResolutions() {
+  return mapResolutions;
+}
+
 const dataResolutions = [750, 500, 250, 100, 75, 50, 20, 10, 5];
 
 function getDataResolution(resolution, resolutions = dataResolutions) {
@@ -122,7 +130,7 @@ function getMapboxGeneralization(resolution) {
 }
 
 export default {
-  mapResolutions,
+  getMapResolutions,
   getDataResolution,
   getGeneralization,
   getOldGeneralization,

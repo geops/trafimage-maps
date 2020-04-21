@@ -357,8 +357,8 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions: LayerHelper.mapResolutions,
-        matrixIds: LayerHelper.mapResolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.getMapResolutions(),
+        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
       }),
     }),
   }),
@@ -379,8 +379,8 @@ export const parks = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions: LayerHelper.mapResolutions,
-        matrixIds: LayerHelper.mapResolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.getMapResolutions(),
+        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
       }),
     }),
     opacity: 0.9,
@@ -865,8 +865,8 @@ export const zweitausbildungStations = new Layer({
           },
           tileGrid: new TileGrid({
             extent: projectionExtent,
-            resolutions: LayerHelper.mapResolutions,
-            matrixIds: LayerHelper.mapResolutions.map((r, i) => `${i}`),
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
           }),
         }),
       }),
@@ -905,8 +905,8 @@ export const zweitausbildungStations = new Layer({
           },
           tileGrid: new TileGrid({
             extent: projectionExtent,
-            resolutions: LayerHelper.mapResolutions,
-            matrixIds: LayerHelper.mapResolutions.map((r, i) => `${i}`),
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
           }),
         }),
       }),
