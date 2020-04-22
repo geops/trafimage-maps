@@ -231,6 +231,7 @@ export const tina = {
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
+  maxZoom: 13,
   hideInLayerTree: true,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
