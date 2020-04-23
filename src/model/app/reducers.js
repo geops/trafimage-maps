@@ -16,6 +16,7 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSIONS_INFOS,
+  SET_CARTARO_OLD_URL,
   SET_IS_MOBILE_WIDTH,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
@@ -119,6 +120,11 @@ export default function app(state = getInitialState(), action) {
           user: null,
           permissions: [],
         },
+      };
+    case SET_CARTARO_OLD_URL:
+      return {
+        ...state,
+        cartaroOldUrl: action.data,
       };
     case SET_IS_MOBILE_WIDTH:
       return {
