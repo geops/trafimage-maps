@@ -11,6 +11,11 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
+import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
+import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
+import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer';
+import LayerHelper from '../layers/layerHelper';
 
 proj4.defs(
   'EPSG:21781',
@@ -35,29 +40,6 @@ const projectionExtent = [
   20037508.3428,
 ];
 
-const resolutions = [
-  156543.033928,
-  78271.516964,
-  39135.758482,
-  19567.879241,
-  9783.9396205,
-  4891.96981025,
-  2445.98490513,
-  1222.99245256,
-  611.496226281,
-  305.748113141,
-  152.87405657,
-  76.4370282852,
-  38.2185141426,
-  19.1092570713,
-  9.55462853565,
-  4.77731426782,
-  2.38865713391,
-  1.19432856696,
-  0.597164283478,
-  0.298582141739,
-];
-
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
   visible: true,
@@ -71,14 +53,14 @@ export const dataLayer = new TrafimageMapboxLayer({
 });
 
 let osmPointsLayers = [];
-const updateStations = mbMap => {
+const updateStations = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
     const osmPointsRendered = mbMap
       .queryRenderedFeatures({
         layers: osmPointsLayers,
       })
-      .map(feat => {
+      .map((feat) => {
         const good = {
           id: feat.id * 1000,
           type: feat.type,
@@ -102,12 +84,12 @@ dataLayer.once('load', () => {
   const { map, mbMap } = dataLayer;
   osmPointsLayers = mbMap
     .getStyle()
-    .layers.filter(layer => {
+    .layers.filter((layer) => {
       return (
         layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
       );
     })
-    .map(layer => layer.id);
+    .map((layer) => layer.id);
   mbMap.addSource('stations', {
     type: 'geojson',
     data: {
@@ -143,7 +125,7 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   radioGroup: 'baseLayer',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /(swissimage|netzkarte)/.test(styleLayer.id);
   },
 });
@@ -155,7 +137,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   radioGroup: 'baseLayer',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /pixelkarte_farbe/.test(styleLayer.id);
   },
 });
@@ -167,7 +149,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   radioGroup: 'baseLayer',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /pixelkarte_grau/.test(styleLayer.id);
   },
 });
@@ -375,8 +357,8 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.getMapResolutions(),
+        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
       }),
     }),
   }),
@@ -397,8 +379,8 @@ export const parks = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.getMapResolutions(),
+        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
       }),
     }),
     opacity: 0.9,
@@ -685,7 +667,7 @@ export const gewässer = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.gewaesser.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: styleLayer => {
+  styleLayersFilter: (styleLayer) => {
     return /waters/.test(styleLayer.id);
   },
   properties: {
@@ -729,7 +711,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(
               styleLayer.id,
             );
@@ -744,7 +726,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(
               styleLayer.id,
             );
@@ -769,7 +751,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Kanton|border_Kanton-IMAGICO)$/.test(styleLayer.id);
           },
           properties: {
@@ -782,7 +764,7 @@ export const grenzen = new Layer({
           radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: styleLayer => {
+          styleLayersFilter: (styleLayer) => {
             return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
               styleLayer.id,
             );
@@ -790,6 +772,273 @@ export const grenzen = new Layer({
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
+          },
+        }),
+      ],
+    }),
+  ],
+});
+
+export const zweitausbildungAbroad = new ZweitausbildungAbroadLayer({
+  name: 'ch.sbb.zweitausbildung.abroad',
+  key: 'ch.sbb.zweitausbildung.abroad',
+  visible: true,
+  zIndex: 2,
+  properties: {
+    popupComponent: 'ZweitausbildungAbroadPopup',
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.abroad-title',
+        legend: {
+          image: 'button_rectangle.png',
+          name: 'ch.sbb.zweitausbildung.abroad-name',
+        },
+      },
+    },
+  },
+});
+
+export const zweitausbildungStations = new Layer({
+  name: 'ch.sbb.zweitausbildung.stationen.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.stationen.group-title',
+      },
+    },
+  },
+  children: [
+    new TrafimageGeoServerWMSLayer({
+      name: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
+      key: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
+      visible: true,
+      isQueryable: false,
+      zIndex: 3,
+      olLayer: new TileLayer({
+        source: new TileWMSSource({
+          crossOrigin: 'anonymous',
+          params: {
+            layers: 'trafimage:zweitausbildung_haltestellen_qry',
+            viewparams: 'selektion:Aufbau',
+          },
+          tileGrid: new TileGrid({
+            extent: projectionExtent,
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
+          }),
+        }),
+      }),
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          infos: {
+            title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
+            legend: [
+              {
+                image: 'station_aufbau.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-stations',
+              },
+              {
+                image: 'station_aufbau_grenzstation.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
+              },
+            ],
+          },
+        },
+      },
+    }),
+    new TrafimageGeoServerWMSLayer({
+      name: 'ch.sbb.zweitausbildung.haltestellen.basis',
+      key: 'ch.sbb.zweitausbildung.haltestellen.basis',
+      visible: true,
+      isQueryable: false,
+      zIndex: 3,
+      olLayer: new TileLayer({
+        source: new TileWMSSource({
+          crossOrigin: 'anonymous',
+          params: {
+            layers: 'trafimage:zweitausbildung_haltestellen_qry',
+            viewparams: 'selektion:Basis',
+          },
+          tileGrid: new TileGrid({
+            extent: projectionExtent,
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
+          }),
+        }),
+      }),
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          infos: {
+            title: 'ch.sbb.zweitausbildung.haltestellen.basis-title',
+            legend: [
+              {
+                image: 'station_basis.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-stations',
+              },
+              {
+                image: 'station_basis_grenzstation.png',
+                name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
+              },
+            ],
+          },
+        },
+      },
+    }),
+  ],
+});
+
+export const zweitausbildungPois = new Layer({
+  name: 'ch.sbb.zweitausbildung.tourist.pois.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.tourist.pois.group-title',
+      },
+    },
+  },
+  children: [
+    new ZweitausbildungPoisLayer({
+      name: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
+      key: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
+      visible: true,
+      zIndex: 4,
+      properties: {
+        popupComponent: 'ZweitausbildungPoisPopup',
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          viewparams: 'railway:false',
+          color: 'rgba(0, 61, 133, 0.8)',
+          infos: {
+            legend: [
+              {
+                image: 'poi_no_railaway.png',
+                name: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway-name',
+              },
+            ],
+          },
+        },
+      },
+    }),
+    new ZweitausbildungPoisLayer({
+      name: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
+      key: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
+      visible: true,
+      zIndex: 4,
+      properties: {
+        popupComponent: 'ZweitausbildungPoisPopup',
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+        zweitausbildung: {
+          viewparams: 'railaway:true',
+          color: 'rgba(235, 0, 0, 0.8)',
+          infos: {
+            legend: [
+              {
+                image: 'poi_railaway.png',
+                name: 'ch.sbb.zweitausbildung.tourist.pois.railaway-name',
+              },
+            ],
+          },
+        },
+      },
+    }),
+  ],
+});
+
+export const zweitausbildungRoutes = new Layer({
+  name: 'ch.sbb.zweitausbildung.linien.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ZweitausbildungLayerInfo',
+    zweitausbildung: {
+      infos: {
+        title: 'ch.sbb.zweitausbildung.linien.group-title',
+      },
+    },
+  },
+  children: [
+    new ZweitausbildungRoutesLayer({
+      name: 'ch.sbb.zweitausbildung.tourist.routes.group',
+      key: 'ch.sbb.zweitausbildung.tourist.routes.group',
+      visible: false,
+      isAlwaysExpanded: true,
+      radioGroup: 'zweitausbildungRoutes',
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
+        zweitausbildung: {
+          infos: {
+            title: 'ch.sbb.zweitausbildung.tourist.routes.group',
+            desc: 'ch.sbb.zweitausbildung.tourist.routes.group-desc',
+            legend: {
+              image: 'legend_tourist_strecken.png',
+            },
+          },
+          layer: 'zweitausbildung_tourist_strecken_grouped_qry',
+        },
+      },
+      children: [
+        new ZweitausbildungRoutesHighlightLayer({
+          name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
+          key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
+          visible: false,
+          zIndex: 1,
+          properties: {
+            popupComponent: 'ZweitausbildungRoutesPopup',
+            zweitausbildung: {
+              layer: 'zweitausbildung_tourist_strecken',
+              featureInfoLayer: 'zweitausbildung_tourist_strecken_qry_xyr',
+            },
+          },
+        }),
+      ],
+    }),
+    new ZweitausbildungRoutesLayer({
+      name: 'ch.sbb.zweitausbildung.hauptlinien.group',
+      key: 'ch.sbb.zweitausbildung.hauptlinien.group',
+      visible: true,
+      isAlwaysExpanded: true,
+      radioGroup: 'zweitausbildungRoutes',
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
+        zweitausbildung: {
+          infos: {
+            title: 'ch.sbb.zweitausbildung.hauptlinien.group',
+            desc: 'ch.sbb.zweitausbildung.hauptlinien.group-desc',
+            legend: {
+              image: 'legend_hauptlinien.png',
+            },
+          },
+          layer: 'zweitausbildung_hauptlinien_grouped_qry',
+        },
+      },
+      children: [
+        new ZweitausbildungRoutesHighlightLayer({
+          name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
+          key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
+          visible: true,
+          zIndex: 1,
+          properties: {
+            popupComponent: 'ZweitausbildungRoutesPopup',
+            zweitausbildung: {
+              layer: 'zweitausbildung_hauptlinien',
+              featureInfoLayer: 'zweitausbildung_hauptlinien_qry_xyr',
+            },
           },
         }),
       ],

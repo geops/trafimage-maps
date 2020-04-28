@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 const TopicTelephoneInfos = () => {
   const { t } = useTranslation();
-  const activeTopic = useSelector(state => state.app.activeTopic);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
 
   const { name } = activeTopic;
 

@@ -1,23 +1,34 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { Point, LineString } from 'ol/geom';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
 
-const Popup = () => {
-  const map = useSelector(state => state.app.map);
-  const { activeTopic, featureInfo } = useSelector(state => state.app);
+const propTypes = {
+  appBaseUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
+};
+
+const defaultProps = {
+  appBaseUrl: null,
+  staticFilesUrl: null,
+};
+
+const Popup = ({ appBaseUrl, staticFilesUrl }) => {
+  const map = useSelector((state) => state.app.map);
+  const { activeTopic, featureInfo } = useSelector((state) => state.app);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
   }
 
-  const filtered = featureInfo.filter(info => {
+  const filtered = featureInfo.filter((info) => {
     const { layer, features } = info;
 
     if (layer.get('popupComponent')) {
       if (typeof layer.hidePopup === 'function') {
-        return features.find(f => !layer.hidePopup(f));
+        return features.find((f) => !layer.hidePopup(f));
       }
       return true;
     }
@@ -60,9 +71,16 @@ const Popup = () => {
       popupCoordinate={coord}
       map={map}
     >
-      <FeatureInformation featureInfo={filtered} />
+      <FeatureInformation
+        featureInfo={filtered}
+        appBaseUrl={appBaseUrl}
+        staticFilesUrl={staticFilesUrl}
+      />
     </RSPopup>
   );
 };
+
+Popup.propTypes = propTypes;
+Popup.defaultProps = defaultProps;
 
 export default React.memo(Popup);

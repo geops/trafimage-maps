@@ -25,6 +25,8 @@ const propTypes = {
 
   showTitle: PropTypes.bool,
 
+  appBaseUrl: PropTypes.string.isRequired,
+
   // react-i18next
   t: PropTypes.func.isRequired,
 
@@ -124,7 +126,7 @@ class DeparturePopupContent extends Component {
    * @private
    */
   loadDepartures() {
-    const { platforms, uic } = this.props;
+    const { platforms, uic, appBaseUrl } = this.props;
 
     const urlParams = {};
 
@@ -136,13 +138,13 @@ class DeparturePopupContent extends Component {
       urlParams.destination = `${this.destinationFilter}`;
     }
 
-    const url = `${
-      process.env.REACT_APP_BASE_URL
-    }/search/departures/${uic}?${qs.stringify(urlParams)}`;
+    const url = `${appBaseUrl}/search/departures/${uic}?${qs.stringify(
+      urlParams,
+    )}`;
 
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         // HACK to prevent "update of unmounted component" warning
         if (!this.mounted) {
           return;
@@ -173,7 +175,7 @@ class DeparturePopupContent extends Component {
   }
 
   render() {
-    const { platforms, uic, name, icon, showTitle, t } = this.props;
+    const { platforms, uic, name, icon, showTitle, t, appBaseUrl } = this.props;
 
     const { departuresLoading, platformName } = this.state;
     let { departures } = this.state;
@@ -182,7 +184,7 @@ class DeparturePopupContent extends Component {
     let platformsFormatted = platforms || '';
     platformsFormatted = platformsFormatted
       .split(',')
-      .filter(v => v)
+      .filter((v) => v)
       .join(', ');
 
     let title = null;
@@ -227,8 +229,9 @@ class DeparturePopupContent extends Component {
         <DestinationInput
           platforms={platformsFormatted}
           destination={this.destinationFilter}
-          onSelect={d => this.onDestinationSelect(d)}
+          onSelect={(d) => this.onDestinationSelect(d)}
           uic={uic}
+          appBaseUrl={appBaseUrl}
         />
 
         {loading}
@@ -244,7 +247,7 @@ class DeparturePopupContent extends Component {
                 <th>{t('Ziel')}</th>
                 <th colSpan="2">{t('Planmässige Abfahrt')}</th>
               </tr>
-              {departures.map(d => (
+              {departures.map((d) => (
                 <tr key={d.id}>
                   <td>
                     <div className="tm-departure-name">{d.label}</div>

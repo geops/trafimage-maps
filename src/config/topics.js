@@ -25,6 +25,10 @@ import defaultBaseLayers, {
   gewässer,
   uebrigeBahnen,
   netzkarteEisenbahninfrastruktur,
+  zweitausbildungAbroad,
+  zweitausbildungPois,
+  zweitausbildungRoutes,
+  zweitausbildungStations,
 } from './layers';
 import defaultSearches, {
   handicapStopFinder,
@@ -185,14 +189,6 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
-export const infofpw = {
-  name: 'ch.sbb.infofpw',
-  key: 'ch.sbb.infofpw',
-  permission: 'sbb',
-  redirect: true,
-  layerInfoComponent: 'InfoFPWTopicInfo',
-};
-
 export const intervention = {
   name: 'ch.sbb.intervention',
   key: 'ch.sbb.intervention',
@@ -207,30 +203,6 @@ export const dfanachfuehrung = {
   description: 'ch.sbb.dfanachfuehrung-desc',
   redirect: true,
   permission: 'dfa-nf',
-};
-
-export const mobz = {
-  name: 'ch.sbb.mobz',
-  key: 'ch.sbb.mobz',
-  redirect: true,
-  permission: 'mobz',
-  layerInfoComponent: 'MobzTopicInfo',
-  infos: {
-    owner: 'I-NAT-NET-AN, Hannes Maichle',
-    email: 'hannes.maichle@sbb.ch',
-  },
-};
-
-export const mobzWhatIf = {
-  name: 'ch.sbb.mobz_what_if',
-  key: 'ch.sbb.mobz_what_if',
-  redirect: true,
-  permission: 'mobz_what_if',
-  layerInfoComponent: 'MobzTopicInfo',
-  infos: {
-    owner: 'I-NAT-INK, Martina Hauri',
-    email: 'martina.hauri@sbb.ch',
-  },
 };
 
 export const verbundzonen = {
@@ -248,6 +220,25 @@ export const tina = {
   redirect: true,
 };
 
+export const zweitausbildung = {
+  name: 'ch.sbb.zweitausbildung',
+  key: 'ch.sbb.zweitausbildung',
+  maxZoom: 13,
+  hideInLayerTree: true,
+  elements: { ...defaultElements, shareMenu: true, popup: true },
+  layers: [
+    dataLayer,
+    netzkarteLayer,
+    zweitausbildungAbroad,
+    zweitausbildungPois,
+    zweitausbildungRoutes,
+    zweitausbildungStations,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'ZweitausbildungTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -258,12 +249,10 @@ const topics = {
     regionenkarte,
     tarifverbundkarte,
     showcases,
+    zweitausbildung,
     regionenkartePrivate,
-    infofpw,
     intervention,
     dfanachfuehrung,
-    mobz,
-    mobzWhatIf,
     verbundzonen,
     tina,
   ],
@@ -271,7 +260,7 @@ const topics = {
 };
 
 export const getTopicConfig = (apiKey, name) => {
-  punctuality.getChildren().forEach(layer => {
+  punctuality.getChildren().forEach((layer) => {
     // eslint-disable-next-line no-param-reassign
     layer.apiKey = apiKey;
   });

@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
 import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
+import { setIsMobileWidth } from '../../model/app/actions';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -46,11 +47,13 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   appBaseUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
   appBaseUrl: null,
+  staticFilesUrl: null,
 };
 
 const getComponents = (defaultComponents, elementsToDisplay) =>
@@ -58,13 +61,14 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history, appBaseUrl }) {
+function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const ref = useRef(null);
-  const { activeTopic, layerService, map } = useSelector(state => state.app);
+  const dispatch = useDispatch();
+  const { activeTopic, layerService, map } = useSelector((state) => state.app);
   const [tabFocus, setTabFocus] = useState(false);
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
-    const focusTab = e => e.which === 9 && setTabFocus(true);
+    const focusTab = (e) => e.which === 9 && setTabFocus(true);
     document.addEventListener('mousedown', unfocusTab);
     document.addEventListener('keydown', focusTab);
     return function cleanup() {
@@ -82,7 +86,7 @@ function TopicElements({ history, appBaseUrl }) {
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
   if (disabled) {
-    disabled.split(',').forEach(element => {
+    disabled.split(',').forEach((element) => {
       // Backward compatibility
       if (element === 'spyLayer') {
         activeTopic.elements.baseLayerToggler = false;
@@ -97,7 +101,7 @@ function TopicElements({ history, appBaseUrl }) {
 
   const elements = activeTopic.elements || defaultElements;
   elements.telephoneInfos =
-    !disabled || !disabled.split(',').find(el => el === 'header');
+    !disabled || !disabled.split(',').find((el) => el === 'header');
 
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
@@ -108,7 +112,9 @@ function TopicElements({ history, appBaseUrl }) {
   // Define which component to display as child of Menu.
   const appMenuChildren = getComponents(
     {
-      featureMenu: <FeatureMenu />,
+      featureMenu: (
+        <FeatureMenu appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />
+      ),
       trackerMenu: <TrackerMenu />,
     },
     elements,
@@ -119,7 +125,7 @@ function TopicElements({ history, appBaseUrl }) {
     header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
     telephoneInfos: <TopicTelephoneInfos />,
-    popup: <Popup />,
+    popup: <Popup appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />,
     permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
     menu: (
       <Menu>
@@ -137,7 +143,7 @@ function TopicElements({ history, appBaseUrl }) {
           prevButton: t('Nächste Baselayer'),
           nextButton: t('Vorherige Baselayer'),
         }}
-        fallbackImgDir={`${process.env.REACT_APP_STATIC_FILES_URL}/img/baselayer/`}
+        fallbackImgDir={`${staticFilesUrl}/img/baselayer/`}
         validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
       />
     ),
@@ -147,20 +153,32 @@ function TopicElements({ history, appBaseUrl }) {
 
   const appElements = getComponents(appComponents, elements);
 
+  const onResize = (entries) => {
+    const [entry] = entries;
+    const rect = entry.contentRect;
+    const { width } = rect;
+    // tm-w-s
+    dispatch(setIsMobileWidth(width <= 768));
+  };
+
   return (
     <div
       ref={ref}
       className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}
     >
-      <ResizeHandler observe={ref.current} forceUpdate={elements.header} />
+      <ResizeHandler
+        observe={ref.current}
+        forceUpdate={elements.header}
+        onResize={onResize}
+      />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         <EventConsumer>
-          {dispatcher => (
+          {(dispatcher) => (
             <Map map={map} maxZoom={maxZoom} dispatchHtmlEvent={dispatcher} />
           )}
         </EventConsumer>
         {appElements}
-        <MainDialog />
+        <MainDialog staticFilesUrl={staticFilesUrl} />
       </div>
     </div>
   );
