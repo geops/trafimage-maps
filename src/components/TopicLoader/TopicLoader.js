@@ -25,6 +25,7 @@ const propTypes = {
   }),
   apiKey: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  activeTopicKey: PropTypes.string,
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
@@ -62,6 +63,7 @@ const defaultProps = {
   permissionUrl: null,
   permissionsInfos: null,
   staticFilesUrl: null,
+  activeTopicKey: null,
 };
 
 class TopicLoader extends Component {
@@ -128,6 +130,7 @@ class TopicLoader extends Component {
     const {
       topics,
       appBaseUrl,
+      activeTopicKey,
       permissionsInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
@@ -145,7 +148,12 @@ class TopicLoader extends Component {
             permissionsInfos.permissions.includes(t.permission))) &&
         !t.hideInLayerTree,
     );
-    let visibleActiveTopic = visibleTopics.find((t) => t.active);
+    const asyncTopics = topics.filter((t) => t.permission);
+
+    let visibleActiveTopic =
+      visibleTopics.find((t) => t.active) ||
+      asyncTopics.find((topic) => topic.key === activeTopicKey);
+    console.log('visibleActiveTopic', visibleActiveTopic);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.

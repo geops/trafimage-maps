@@ -171,7 +171,8 @@ const WebComponent = (props) => {
     [maxExtent],
   );
   const appTopics = useMemo(() => {
-    const tps = topics || getTopicConfig(apiKey, appName);
+    const tps =
+      topics && topics.length ? topics : getTopicConfig(apiKey, appName);
     if (!tps) {
       // eslint-disable-next-line no-console
       console.error('You must provide a list of topics');
