@@ -66,7 +66,7 @@ const mapboxDataResolutions = [
   4500, // etc.
   4500,
   4500,
-  4500,
+  3000,
   1500,
   500,
   250,
@@ -74,7 +74,7 @@ const mapboxDataResolutions = [
   50,
   20,
   10,
-  5,
+  10,
   5,
   5,
   5,
