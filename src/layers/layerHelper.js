@@ -91,7 +91,7 @@ const mapboxDataResolutions = [
  */
 function getMapboxDataResolution(resolution) {
   const mapRes = mapResolutions.reduce((prev, curr) =>
-    Math.abs(curr - resolution) < Math.abs(prev - resolution) ? curr : prev,
+    resolution <= curr ? curr : prev,
   );
 
   // Substract one zoom level
