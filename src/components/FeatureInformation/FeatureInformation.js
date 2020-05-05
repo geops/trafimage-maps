@@ -43,7 +43,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     return null;
   }
 
-  const comp = info.layer.get('popupComponent');
+  const comp = info.popupComponent || info.layer.get('popupComponent');
   const PopupComponent = typeof comp === 'string' ? popups[comp] : comp;
   if (!PopupComponent) {
     return null;
