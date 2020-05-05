@@ -50,5 +50,5 @@ yarn publish:public
 * Publish a beta version:
 
 ```bash
-yarn publish:public
+yarn publish:beta
 ```

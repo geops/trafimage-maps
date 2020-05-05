@@ -1,0 +1,76 @@
+.wkp-icon-list-button,
+.wkp-icon-list-current {
+  width: 210px;
+}
+
+.wkp-icon-list-button {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+
+  .wkp-icon-list-current {
+    display: flex;
+    flex-direction: row;
+
+    .wkp-icon-list-label {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 145px;
+    }
+  }
+}
+
+.wkp-icon-list-list {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+  max-height: 150px;
+  overflow-y: auto;
+
+  .tm-list-item {
+    line-height: 1.3;
+    display: flex;
+    flex-direction: row;
+    padding-right: 4px;
+    padding-left: 4px;
+    margin: 5px;
+  }
+
+  .tm-list-item:hover {
+    background-color: #e6e6e6;
+  }
+}
+
+/* General settings for both, the button and the list */
+.wkp-icon-list-icon {
+  padding-right: 5px;
+
+  & > img {
+    vertical-align: middle;
+  }
+}
+
+.wkp-icon-list-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  cursor: default;
+
+  .wkp-icon-list-modal-pos {
+    position: absolute;
+
+    .wkp-icon-list-list {
+      width: 500px;
+    }
+  }
+}
+
+.rs-layer-tree-item div.wkp-icon-list-non-modal {
+  position: fixed;
+  z-index: 2;
+}

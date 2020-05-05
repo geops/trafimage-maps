@@ -11,7 +11,7 @@ const CasaRoutePopup = ({ feature }) => {
 
   return (
     <div className="wkp-casa-route-popup">
-      {Object.keys(content).map(key => (
+      {Object.keys(content).map((key) => (
         <div className="wkp-casa-route-popup-row" key={key}>
           {key}: {content[key]}
         </div>
@@ -22,7 +22,7 @@ const CasaRoutePopup = ({ feature }) => {
 
 CasaRoutePopup.propTypes = propTypes;
 
-CasaRoutePopup.renderTitle = feature => {
+CasaRoutePopup.renderTitle = (feature) => {
   const route = feature.get('route');
   return route.popupTitle || 'Informationen';
 };

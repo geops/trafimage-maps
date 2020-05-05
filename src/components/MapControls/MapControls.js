@@ -19,7 +19,7 @@ const defaultProps = {
 };
 
 const MapControls = ({ showGeolocation }) => {
-  const map = useSelector(state => state.app.map);
+  const map = useSelector((state) => state.app.map);
   const { t } = useTranslation();
   let geolocationButton = null;
 

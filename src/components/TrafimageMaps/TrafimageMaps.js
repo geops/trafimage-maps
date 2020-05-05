@@ -11,8 +11,8 @@ import { Provider } from 'react-redux';
 import Layer from 'react-spatial/layers/Layer';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
-import { setZoom, setCenter } from '../../model/map/actions';
-import { setLanguage } from '../../model/app/actions';
+import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
+import { setLanguage, setCartaroOldUrl } from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -55,6 +55,12 @@ const propTypes = {
   zoom: PropTypes.number,
 
   /**
+   * Limit the map extent (e.g. maxExtent="502649.8980,5655117.1007,1352629.6525,6141868.0968"). Default extent has no limit.
+   * @private
+   */
+  maxExtent: PropTypes.arrayOf(PropTypes.number),
+
+  /**
    * API key for using geOps services.
    * @private
    */
@@ -65,6 +71,11 @@ const propTypes = {
    * @private
    */
   cartaroUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for the previous Cartaro.
+   */
+  cartaroOldUrl: PropTypes.string,
 
   /**
    * React app base URL
@@ -85,6 +96,11 @@ const propTypes = {
   vectorTilesUrl: PropTypes.string,
 
   /**
+   * URL endpoint for static files.
+   */
+  staticFilesUrl: PropTypes.string,
+
+  /**
    * URL to request permission.
    * @private
    */
@@ -95,21 +111,31 @@ const propTypes = {
    * @private
    */
   enableTracking: PropTypes.bool,
+
+  /**
+   * Key of the active topic.
+   * @private
+   */
+  activeTopicKey: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
   center: [925472, 5920000],
   zoom: undefined,
+  maxExtent: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
   topics: null,
   language: 'de',
   enableTracking: false,
+  activeTopicKey: null,
 };
 
 let matomo;
@@ -135,7 +161,14 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidMount() {
-    const { zoom, center, language, enableTracking } = this.props;
+    const {
+      zoom,
+      center,
+      language,
+      enableTracking,
+      cartaroOldUrl,
+      maxExtent,
+    } = this.props;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -143,6 +176,14 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (cartaroOldUrl) {
+      this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
+    }
+
+    if (maxExtent) {
+      this.store.dispatch(setMaxExtent(maxExtent));
     }
 
     if (language) {
@@ -155,7 +196,13 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { zoom, center, enableTracking } = this.props;
+    const {
+      zoom,
+      center,
+      cartaroOldUrl,
+      enableTracking,
+      maxExtent,
+    } = this.props;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -163,6 +210,14 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (cartaroOldUrl !== prevProps.cartaroOldUrl) {
+      this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
+    }
+
+    if (maxExtent !== prevProps.maxExtent) {
+      this.store.dispatch(setMaxExtent(maxExtent));
     }
 
     if (matomo && !prevProps.enableTracking && enableTracking) {
@@ -179,8 +234,10 @@ class TrafimageMaps extends React.PureComponent {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
+      staticFilesUrl,
       permissionUrl,
       enableTracking,
+      activeTopicKey,
     } = this.props;
 
     return (
@@ -190,11 +247,13 @@ class TrafimageMaps extends React.PureComponent {
             history={history}
             apiKey={apiKey}
             topics={topics}
+            activeTopicKey={activeTopicKey}
             cartaroUrl={cartaroUrl}
             appBaseUrl={appBaseUrl}
             permissionUrl={permissionUrl}
             vectorTilesKey={vectorTilesKey}
             vectorTilesUrl={vectorTilesUrl}
+            staticFilesUrl={staticFilesUrl}
           />
         </Provider>
       </MatomoProvider>

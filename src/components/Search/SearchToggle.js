@@ -13,7 +13,7 @@ const defaultProps = {
 };
 
 function SearchToggle({ children }) {
-  const searchOpen = useSelector(state => state.app.searchOpen);
+  const searchOpen = useSelector((state) => state.app.searchOpen);
   const dispatch = useDispatch();
 
   return (

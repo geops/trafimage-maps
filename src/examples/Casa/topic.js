@@ -40,7 +40,7 @@ const netzkarteLayer = new TrafimageMapboxLayer({
   visible: true,
   radioGroup: 'baseLayer',
   isBaseLayer: true,
-  style: 'netzkarte_personenverkehr_v2',
+  style: 'netzkarte_personenverkehr_v3',
 });
 
 // Remove all symbols and circl styles
@@ -57,7 +57,7 @@ netzkarteLayer.on('load', () => {
 export const netzkarteLayerLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte-labels',
   visible: true,
-  style: 'netzkarte_personenverkehr_v2',
+  style: 'netzkarte_personenverkehr_v3',
 });
 
 // Display only symbols and circle styles
