@@ -46,7 +46,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr_v2',
+  style: 'netzkarte_personenverkehr_v3',
   properties: {
     hideInLegend: true,
   },
@@ -325,7 +325,7 @@ export const buslines = new MapboxStyleLayer({
   styleLayer: {
     id: 'bus',
     type: 'line',
-    source: 'busline',
+    source: 'busses',
     'source-layer': 'busses',
     paint: {
       'line-color': 'rgba(255, 220, 0, 1)',
@@ -679,7 +679,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur_v2',
+  style: 'netzkarte_eisenbahninfrastruktur_v3',
   properties: {
     hasInfos: true,
     layerInfoComponent: 'InfrastrukturTopicInfo',
