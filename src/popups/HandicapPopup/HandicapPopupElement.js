@@ -134,6 +134,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
         <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
         <div className="wkp-handicap-popup-field-body">
           {values.map((v, idx) => {
+            console.log('eva', v);
             if (v === '') {
               return <br />;
             }

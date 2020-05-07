@@ -272,6 +272,10 @@ class TopicLoader extends Component {
       if (flatLayers[i].setStaticFilesUrl) {
         flatLayers[i].setStaticFilesUrl(staticFilesUrl);
       }
+
+      if (flatLayers[i].onClick) {
+        console.log('eva', 'TopicLoader.js', this, flatLayers[i], flatLayers[i].onClick, flatLayers[i].clickCallbacks);
+      }
     }
   }
 

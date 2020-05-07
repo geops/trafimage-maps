@@ -41,6 +41,8 @@ class TrackerMenu extends Component {
       trajectory: null,
     };
     this.onLayerClick = this.onLayerClick.bind(this);
+
+    console.log('eva', 'TrackerMenu', this, 'constructor');
   }
 
   componentDidMount() {
@@ -49,6 +51,8 @@ class TrackerMenu extends Component {
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
       .filter((l) => l instanceof TrackerLayer);
+
+    console.log('eva', 'TrackerMenu', this, 'componentDidMount', this.trackerLayers);
 
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
@@ -61,6 +65,7 @@ class TrackerMenu extends Component {
             });
           }),
         );
+        console.log('eva', 'TrackerMenu', this, 'componentDidMount', 'onClick');
         layer.onClick(this.onLayerClick);
       });
     }
@@ -71,6 +76,8 @@ class TrackerMenu extends Component {
     if (menuOpen !== prevProps.menuOpen) {
       this.closeMenu();
     }
+
+    console.log('eva', 'TrackerMenu', this, 'componentDidUpdate', this.trackerLayers);
   }
 
   componentWillUnmount() {
@@ -83,6 +90,8 @@ class TrackerMenu extends Component {
   }
 
   onLayerClick(traj) {
+    console.log('eva', 'TrackerMenu', this, 'onLayerClick');
+    debugger;
     const { dispatchSetMenuOpen } = this.props;
     if (traj) {
       dispatchSetMenuOpen(false);
@@ -95,6 +104,7 @@ class TrackerMenu extends Component {
   }
 
   closeMenu() {
+    console.log('eva', 'TrackerMenu', this, 'closeMenu');
     this.setState({
       open: false,
       collapsed: false,
@@ -105,6 +115,8 @@ class TrackerMenu extends Component {
   render() {
     const { open, collapsed, trajectory } = this.state;
     const { map, t } = this.props;
+
+    console.log('eva', 'TrackerMenu', this, 'render', open);
 
     if (!open) {
       return null;
