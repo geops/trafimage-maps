@@ -12908,6 +12908,18 @@ react-app-rewired@^2.1.5:
   dependencies:
     semver "^5.6.0"
 
+react-autosuggest@^10.0.0:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/react-autosuggest/-/react-autosuggest-10.0.2.tgz#c45cd73a7307026c932cb6a3e19c2fe35bfb6ec4"
+  integrity sha512-ouI0RJDSgM1FBfK0ZmLC3qUqithIwPVTpnC4JQW4DeId3mH2JnZmkNNDKImhcMrxLbSQRpV/DfTLn0uCs4b27w==
+  dependencies:
+    es6-promise "^4.2.8"
+    prop-types "^15.7.2"
+    react-autowhatever "^10.2.1"
+    react-themeable "^1.1.0"
+    section-iterator "^2.0.0"
+    shallow-equal "^1.2.1"
+
 react-autosuggest@^9.4.3:
   version "9.4.3"
   resolved "https://registry.yarnpkg.com/react-autosuggest/-/react-autosuggest-9.4.3.tgz#eb46852422a48144ab9f39fb5470319222f26c7c"
@@ -12917,7 +12929,7 @@ react-autosuggest@^9.4.3:
     react-autowhatever "^10.1.2"
     shallow-equal "^1.0.0"
 
-react-autowhatever@^10.1.2:
+react-autowhatever@^10.1.2, react-autowhatever@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-autowhatever/-/react-autowhatever-10.2.1.tgz#a6d421dc6135173efedc249ab7216e4f5b691bcc"
   integrity sha512-5gQyoETyBH6GmuW1N1J81CuoAV+Djeg66DEo03xiZOl3WOwJHBP5LisKUvCGOakjrXU4M3hcIvCIqMBYGUmqOA==
@@ -13282,14 +13294,14 @@ react-themeable@^1.1.0:
   dependencies:
     object-assign "^3.0.0"
 
-react-transit@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.1.tgz#a420788f1244e02eb3d829358d9c53a5e5b83bdf"
-  integrity sha512-yCsRKNwd1k0NsZFkKpAzwKMnbnxQeohYQVUYMrcugXbdhBPcE4t7K0gC8LJceYNWo4IH+v+DkJ3h/yyP7WjhgQ==
+react-transit@^0.3.2-beta.1:
+  version "0.3.2-beta.1"
+  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.2-beta.1.tgz#1b7f3b9958b9de8cfd623f57ebb29a1a3e0d9f89"
+  integrity sha512-wuyxmaRXu9LV69RyHgUHFWIRxBBH/2yPKUrcSmypel12u9GGQ2Y0RVplzNJg5HloVdkxXKe3JYiuuxE/Yc59Jg==
   dependencies:
     abortcontroller-polyfill "^1.4.0"
     query-string "^6.11.1"
-    react-autosuggest "^9.4.3"
+    react-autosuggest "^10.0.0"
     react-icons "^3.7.0"
 
 react-use@^13.22.4:
@@ -14511,7 +14523,7 @@ shallow-clone@^3.0.0:
   dependencies:
     kind-of "^6.0.2"
 
-shallow-equal@^1.0.0:
+shallow-equal@^1.0.0, shallow-equal@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/shallow-equal/-/shallow-equal-1.2.1.tgz#4c16abfa56043aa20d050324efa68940b0da79da"
   integrity sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==
