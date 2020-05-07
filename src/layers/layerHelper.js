@@ -25,6 +25,7 @@ const mapResolutions = [
 /**
  * Get the map resolutions
  * where the array index is the zoom level
+ * @private
  */
 function getMapResolutions() {
   return mapResolutions;
@@ -88,6 +89,7 @@ const mapboxDataResolutions = [
  *
  * Considers the zoom level substraction for mapbox
  * and the new data resolutions (e.g. 4500, 3000, 1500)
+ * @private
  */
 function getMapboxDataResolution(resolution) {
   const mapRes = mapResolutions.reduce((prev, curr) =>
@@ -111,6 +113,7 @@ function getMapboxDataResolution(resolution) {
  *
  * Considers the zoom level substraction for mapbox
  * and the new data resolutions (e.g. 4500, 3000, 1500)
+ * @private
  */
 function getMapboxGeneralization(resolution) {
   const res = getMapboxDataResolution(resolution);

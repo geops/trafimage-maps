@@ -74,6 +74,7 @@ const propTypes = {
 
   /**
    * URL endpoint for the previous Cartaro.
+   * @private
    */
   cartaroOldUrl: PropTypes.string,
 
@@ -97,6 +98,7 @@ const propTypes = {
 
   /**
    * URL endpoint for static files.
+   * @private
    */
   staticFilesUrl: PropTypes.string,
 
