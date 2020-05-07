@@ -15,6 +15,7 @@ const propTypes = {
 
   /**
    * Icon size in pixels
+   * @private
    */
   iconSize: PropTypes.shape({
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
