@@ -133,7 +133,7 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
     } = this.props;
 
-    // Load onl ytopics when permissions are loaded, to avoid double loading.
+    // Load only topics when permissions are loaded, to avoid double loading.
     if (!topics.length) {
       return;
     }
