@@ -171,7 +171,8 @@ const WebComponent = (props) => {
     [maxExtent],
   );
   const appTopics = useMemo(() => {
-    if (!topics) {
+    // Wait for topics if no appName given
+    if (!topics && appName === 'none') {
       return null;
     }
     const tps = topics || getTopicConfig(apiKey, appName);
