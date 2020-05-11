@@ -171,6 +171,9 @@ const WebComponent = (props) => {
     [maxExtent],
   );
   const appTopics = useMemo(() => {
+    if (!topics) {
+      return null;
+    }
     const tps = topics || getTopicConfig(apiKey, appName);
     if (!tps) {
       // eslint-disable-next-line no-console
@@ -198,6 +201,9 @@ const WebComponent = (props) => {
     return [...tps];
   }, [activeTopicKey, appName, topics, apiKey]);
 
+  if (!appTopics) {
+    return null;
+  }
   return (
     <Styled styles={styles}>
       <div
