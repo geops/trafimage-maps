@@ -260,10 +260,6 @@ const topics = {
 };
 
 export const getTopicConfig = (apiKey, name) => {
-  punctuality.getChildren().forEach((layer) => {
-    // eslint-disable-next-line no-param-reassign
-    layer.apiKey = apiKey;
-  });
   return topics[name];
 };
 

@@ -144,7 +144,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
-    return /pixelkarte_farbe/.test(styleLayer.id);
+    return /img_PK_farbe/.test(styleLayer.id);
   },
   previewImage: landeskarte,
 });
@@ -157,7 +157,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
-    return /pixelkarte_grau/.test(styleLayer.id);
+    return /img_PK_grau/.test(styleLayer.id);
   },
   previewImage: landeskarteGrau,
 });
