@@ -171,6 +171,11 @@ const WebComponent = (props) => {
     [maxExtent],
   );
   const appTopics = useMemo(() => {
+    // Wait for topics if no appName given
+    // Todo: Inspect more deeply on how to allow topic change in wkp.
+    if (!topics && appName === 'none') {
+      return null;
+    }
     const tps = topics || getTopicConfig(apiKey, appName);
     if (!tps) {
       // eslint-disable-next-line no-console
@@ -198,6 +203,9 @@ const WebComponent = (props) => {
     return [...tps];
   }, [activeTopicKey, appName, topics, apiKey]);
 
+  if (!appTopics) {
+    return null;
+  }
   return (
     <Styled styles={styles}>
       <div
