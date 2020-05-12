@@ -19,8 +19,10 @@ import CasaLayer from '../CasaLayer';
  * @class ZoneLayer
  * @extends CasaLayer
  * @param {Object} options Layer options.
- * @param {string} [validFrom] Zone validity start. Format: yyyy-mm-dd.
- * @param {string} [validTo] Zone validity end . Format: yyyy-mm-dd.
+ * @param {string} [options.validFrom] Zone validity start. Format: yyyy-mm-dd.
+ * @param {string} [options.validTo] Zone validity end . Format: yyyy-mm-dd.
+ * @param {number} [options.simplify = 100] Simplification measurement for
+ *  Douglas Peucker algorithm.
  * @param {number} [options.labelOptimizationMinResolution = 100] Minimum resolution for
  *   using optimized label placement based on the current extent.
  */
@@ -72,6 +74,9 @@ class ZoneLayer extends CasaLayer {
     this.validFrom = options.validFrom;
 
     this.validTo = options.validTo;
+
+    this.simplify =
+      typeof options.simplify === 'undefined' ? 100 : options.simplify;
 
     this.url = 'https://api.geops.io/casa-fare-network/v1';
 
@@ -248,7 +253,7 @@ class ZoneLayer extends CasaLayer {
     const urlParams = {
       ...params,
       key: this.apiKey,
-      simplify: 100,
+      simplify: this.simplify,
       srs: 3857,
       from: this.validFrom,
       to: this.validTo,
