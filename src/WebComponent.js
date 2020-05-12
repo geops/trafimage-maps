@@ -172,6 +172,7 @@ const WebComponent = (props) => {
   );
   const appTopics = useMemo(() => {
     // Wait for topics if no appName given
+    // Todo: Inspect more deeply on how to allow topic change in wkp.
     if (!topics && appName === 'none') {
       return null;
     }
