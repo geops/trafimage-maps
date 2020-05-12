@@ -41,7 +41,7 @@ const defaultElements = {
   menu: true,
   permalink: true,
   mapControls: true,
-  baseLayerToggler: true,
+  baseLayerSwitcher: true,
   popup: false,
   search: true,
 };
@@ -178,7 +178,7 @@ export const showcases = {
   key: 'ch.sbb.showcases',
   elements: {
     ...defaultElements,
-    baseLayerToggler: false,
+    baseLayerSwitcher: false,
   },
   layers: [
     netzkarteShowcasesNight,
