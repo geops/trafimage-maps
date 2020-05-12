@@ -13294,10 +13294,10 @@ react-themeable@^1.1.0:
   dependencies:
     object-assign "^3.0.0"
 
-react-transit@^0.3.2:
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.2.tgz#3a48b62d8529f65cdf84fe106c75df7e61dc129c"
-  integrity sha512-THsWrel+uvmJ8ckJveJEhABzCQM17Mktu3vXCdzbbjuq3RffjKG/G65UYVJYiSauUKnL10L81arg82f9oVn1Pw==
+react-transit@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.3.tgz#ab9a108e33911e63643e3addde4d8f3aa881180c"
+  integrity sha512-OB+5ZhPVyhU9BLpdaUKz/kTD8IXAULvpDQIuVXxctK9hvuR+k3yQiTBthq7dCeFBsLoI6xh5rYgXaSiyetfRwg==
   dependencies:
     abortcontroller-polyfill "^1.4.0"
     query-string "^6.11.1"
