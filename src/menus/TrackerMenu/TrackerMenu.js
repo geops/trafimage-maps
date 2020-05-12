@@ -6,7 +6,6 @@ import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
 import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
-import TrackerLayer from 'react-transit/layers/TrackerLayer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
@@ -48,7 +47,7 @@ class TrackerMenu extends Component {
 
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
-      .filter((l) => l instanceof TrackerLayer);
+      .filter((l) => l.isTrackerLayer);
 
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
