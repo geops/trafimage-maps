@@ -10,6 +10,13 @@ class TrafimageMapboxLayer extends MapboxLayer {
         target: this,
       });
     }
+
+    // Set zIndex if specified
+    if (this.options && this.options.zIndex) {
+      this.olLayer
+        .getLayersArray()
+        .forEach((layer) => layer.setZIndex(this.options.zIndex));
+    }
   }
 
   terminate(map) {

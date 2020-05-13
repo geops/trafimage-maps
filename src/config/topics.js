@@ -43,7 +43,7 @@ const defaultElements = {
   menu: true,
   permalink: true,
   mapControls: true,
-  baseLayerToggler: true,
+  baseLayerSwitcher: true,
   popup: false,
   search: true,
 };
@@ -186,7 +186,7 @@ export const showcases = {
   key: 'ch.sbb.showcases',
   elements: {
     ...defaultElements,
-    baseLayerToggler: false,
+    baseLayerSwitcher: false,
   },
   layers: [
     netzkarteShowcasesNight,
@@ -268,10 +268,6 @@ const topics = {
 };
 
 export const getTopicConfig = (apiKey, name) => {
-  punctuality.getChildren().forEach((layer) => {
-    // eslint-disable-next-line no-param-reassign
-    layer.apiKey = apiKey;
-  });
   return topics[name];
 };
 

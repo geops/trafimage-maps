@@ -28,6 +28,7 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
           this.olLayer.getSource().addFeatures(features);
         },
       }),
+      zIndex: options.zIndex || 0,
     });
 
     super({

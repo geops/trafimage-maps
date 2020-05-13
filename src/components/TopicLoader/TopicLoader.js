@@ -118,8 +118,10 @@ class TopicLoader extends Component {
       this.updateServices(activeTopic);
     }
 
-    if (language !== prevProps.language) {
-      this.updateLayers(activeTopic.layers);
+    if (language !== prevProps.language || apiKey !== prevProps.apiKey) {
+      if (activeTopic) {
+        this.updateLayers(activeTopic.layers);
+      }
     }
   }
 
@@ -133,7 +135,7 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
     } = this.props;
 
-    // Load onl ytopics when permissions are loaded, to avoid double loading.
+    // Load only topics when permissions are loaded, to avoid double loading.
     if (!topics.length) {
       return;
     }
@@ -217,6 +219,7 @@ class TopicLoader extends Component {
 
   updateLayers(topicLayers) {
     const {
+      apiKey,
       language,
       layerService,
       dispatchSetLayers,
@@ -271,6 +274,15 @@ class TopicLoader extends Component {
       }
       if (flatLayers[i].setStaticFilesUrl) {
         flatLayers[i].setStaticFilesUrl(staticFilesUrl);
+      }
+
+      if (
+        apiKey &&
+        flatLayers[i].setApiKey &&
+        flatLayers[i].getApiKey &&
+        !flatLayers[i].getApiKey()
+      ) {
+        flatLayers[i].setApiKey(apiKey);
       }
     }
   }
