@@ -6,6 +6,7 @@ import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
 import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
+import Layer from 'react-spatial/layers/Layer';
 import RouteSchedule from 'react-transit/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
@@ -14,6 +15,7 @@ import MenuItem from '../../components/Menu/MenuItem';
 const propTypes = {
   // mapStateToProps
   map: PropTypes.instanceOf(Map).isRequired,
+  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   layerService: PropTypes.object.isRequired,
   menuOpen: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired,
@@ -43,32 +45,17 @@ class TrackerMenu extends Component {
   }
 
   componentDidMount() {
-    const { layerService } = this.props;
-
-    this.trackerLayers = layerService
-      .getLayersAsFlatArray()
-      .filter((l) => l.isTrackerLayer);
-
-    unByKey(this.olEventsKeys);
-    this.olEventsKeys = [];
-    if (this.trackerLayers.length) {
-      this.trackerLayers.forEach((layer) => {
-        this.olEventsKeys.push(
-          layer.olLayer.on('change:visible', () => {
-            this.setState({
-              open: false,
-            });
-          }),
-        );
-        layer.onClick(this.onLayerClick);
-      });
-    }
+    this.initializeClick();
   }
 
   componentDidUpdate(prevProps) {
-    const { menuOpen } = this.props;
+    const { menuOpen, layers } = this.props;
     if (menuOpen !== prevProps.menuOpen) {
       this.closeMenu();
+    }
+
+    if (layers !== prevProps.layers) {
+      this.initializeClick();
     }
   }
 
@@ -90,6 +77,27 @@ class TrackerMenu extends Component {
       open: !!traj,
       collapsed: false,
       trajectory: traj,
+    });
+  }
+
+  initializeClick() {
+    const { layerService } = this.props;
+    this.trackerLayers = layerService
+      .getLayersAsFlatArray()
+      .filter((l) => l.isTrackerLayer);
+
+    unByKey(this.olEventsKeys);
+    this.olEventsKeys = [];
+    this.trackerLayers.forEach((layer) => {
+      layer.unClick(this.onLayerClick);
+      this.olEventsKeys.push(
+        layer.olLayer.on('change:visible', () => {
+          this.setState({
+            open: false,
+          });
+        }),
+      );
+      layer.onClick(this.onLayerClick);
     });
   }
 
@@ -142,6 +150,7 @@ class TrackerMenu extends Component {
 const mapStateToProps = (state) => ({
   map: state.app.map,
   menuOpen: state.app.menuOpen,
+  layers: state.map.layers,
   layerService: state.app.layerService,
 });
 
