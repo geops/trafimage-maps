@@ -86,13 +86,10 @@ class TrackerMenu extends Component {
       .getLayersAsFlatArray()
       .filter((l) => l.isTrackerLayer);
 
-    this.trackerLayers.forEach((layer) => {
-      layer.unClick(this.onLayerClick);
-    });
-
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
     this.trackerLayers.forEach((layer) => {
+      layer.unClick(this.onLayerClick);
       this.olEventsKeys.push(
         layer.olLayer.on('change:visible', () => {
           this.setState({
