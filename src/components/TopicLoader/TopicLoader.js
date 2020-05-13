@@ -119,7 +119,9 @@ class TopicLoader extends Component {
     }
 
     if (language !== prevProps.language || apiKey !== prevProps.apiKey) {
-      this.updateLayers(activeTopic.layers);
+      if (activeTopic) {
+        this.updateLayers(activeTopic.layers);
+      }
     }
   }
 

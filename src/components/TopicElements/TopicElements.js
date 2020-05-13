@@ -21,6 +21,7 @@ import Popup from '../Popup';
 import Search from '../Search';
 import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
+import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
 
 const defaultElements = {
   header: false,
@@ -145,6 +146,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
           openSwitcher: t('Baselayer-Menu öffnen'),
           closeSwitcher: t('Baselayer-Menu Schliessen'),
         }}
+        closeButtonImage={<ChevronLeft />}
         t={t}
       />
     ),
