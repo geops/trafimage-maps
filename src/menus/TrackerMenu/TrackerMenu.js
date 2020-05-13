@@ -92,18 +92,16 @@ class TrackerMenu extends Component {
 
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
-    if (this.trackerLayers.length) {
-      this.trackerLayers.forEach((layer) => {
-        this.olEventsKeys.push(
-          layer.olLayer.on('change:visible', () => {
-            this.setState({
-              open: false,
-            });
-          }),
-        );
-        layer.onClick(this.onLayerClick);
-      });
-    }
+    this.trackerLayers.forEach((layer) => {
+      this.olEventsKeys.push(
+        layer.olLayer.on('change:visible', () => {
+          this.setState({
+            open: false,
+          });
+        }),
+      );
+      layer.onClick(this.onLayerClick);
+    });
   }
 
   closeMenu() {
