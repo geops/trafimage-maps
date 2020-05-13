@@ -115,13 +115,13 @@ export const netzkarteLayer = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: netzkarte,
   },
   visible: true,
   mapboxLayer: dataLayer,
   styleLayersFilter: () => {
     return false;
   },
-  previewImage: netzkarte,
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
@@ -131,13 +131,13 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: luftbild,
   },
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
     return /(swissimage|netzkarte)/.test(styleLayer.id);
   },
-  previewImage: luftbild,
 });
 
 export const swisstopoLandeskarte = new MapboxStyleLayer({
@@ -146,13 +146,13 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: landeskarte,
   },
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
     return /img_PK_farbe/.test(styleLayer.id);
   },
-  previewImage: landeskarte,
 });
 
 export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
@@ -161,13 +161,13 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: landeskarteGrau,
   },
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
     return /img_PK_grau/.test(styleLayer.id);
   },
-  previewImage: landeskarteGrau,
 });
 
 export const passagierfrequenzen = new MapboxStyleLayer({
