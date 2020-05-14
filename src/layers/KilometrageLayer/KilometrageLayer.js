@@ -28,50 +28,6 @@ class KilometrageLayer extends Layer {
     this.setVisible(this.visible);
   }
 
-  // init(map) {
-  //   super.init(map);
-
-  //   if (this.map) {
-  //     this.onSingleClickRef = map.on('singleclick', (e) => this.getCustomFeatureInfoAtCoordinate(e));
-  //   }
-  // }
-
-  getCustomFeatureInfoAtCoordinate(evt) {
-    const { coordinate } = evt;
-
-    const layer = this;
-    const meterRad = this.map && this.map.getView().getZoom() > 11 ? 100 : 1000;
-
-    const [newX, newY] = transform(
-      [parseInt(coordinate[0], 10), parseInt(coordinate[1], 10)],
-      'EPSG:3857',
-      'EPSG:21781',
-    );
-
-    fetch(
-      `${this.geoServerUrl}?` +
-        'service=WFS&version=1.0.0&request=GetFeature&' +
-        `typeName=linien_qry_fanas&` +
-        'srsName=EPSG:3857&maxFeatures=50&' +
-        'outputFormat=application/json&' +
-        `viewparams=x:${parseInt(newX, 10)};y:${parseInt(
-          newY,
-          10,
-        )};r:${meterRad}`,
-    )
-      .then((data) => data.json())
-      .then((data) => {
-        const format = new GeoJSON();
-        const features = format.readFeatures(data);
-
-        return {
-          features,
-          layer,
-          coordinate,
-        };
-      });
-  }
-
   getFeatureInfoAtCoordinate(coordinate, filter, type) {
     if (type !== 'singleclick') {
       return Promise.resolve({ coordinate, features: [], layer: this });
