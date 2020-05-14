@@ -6,6 +6,7 @@ import HandicapPopup from './HandicapPopup';
 import NetzkartePopup from './NetzkartePopup';
 import ParksPopup from './ParksPopup';
 import PassagierFrequenzenPopup from './PassagierFrequenzenPopup';
+import KilometragePopup from './KilometragePopup';
 import ConstructionPopup from './ConstructionPopup';
 import DeparturePopup from './DeparturePopup';
 import ZweitausbildungAbroadPopup from './ZweitausbildungAbroadPopup';
@@ -21,6 +22,7 @@ export default {
   NetzkartePopup,
   ParksPopup,
   PassagierFrequenzenPopup,
+  KilometragePopup,
   ConstructionPopup,
   DeparturePopup,
   ZweitausbildungAbroadPopup,

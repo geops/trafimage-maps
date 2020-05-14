@@ -9,6 +9,7 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
@@ -443,6 +444,16 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte-desc',
+  },
+});
+
+export const kilometrageLayer = new KilometrageLayer({
+  name: 'ch.sbb.kilometrage',
+  key: 'ch.sbb.kilometrage',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'KilometragePopup',
   },
 });
 
