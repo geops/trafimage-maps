@@ -28,11 +28,7 @@ class KilometrageLayer extends Layer {
     this.setVisible(this.visible);
   }
 
-  getFeatureInfoAtCoordinate(coordinate, filter, type) {
-    if (type !== 'singleclick') {
-      return Promise.resolve({ coordinate, features: [], layer: this });
-    }
-
+  getFeatureInfoAtCoordinate(coordinate) {
     const layer = this;
     const meterRad = this.map && this.map.getView().getZoom() > 11 ? 100 : 1000;
 
