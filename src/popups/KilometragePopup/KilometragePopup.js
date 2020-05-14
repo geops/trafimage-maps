@@ -25,5 +25,6 @@ const KilometragePopup = ({ feature, t }) => {
 KilometragePopup.propTypes = propTypes;
 
 const memoized = React.memo(KilometragePopup);
+memoized.hideHeader = true;
 
 export default memoized;
