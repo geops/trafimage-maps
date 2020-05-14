@@ -9,10 +9,11 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import Feature from 'ol/Feature';
 import LineString from 'ol/geom/LineString';
-import { Style, Stroke } from 'ol/style';
+import { Style, Stroke, Circle, Fill, Icon } from 'ol/style';
 import RouteLayer from './RouteLayer';
 import { casa } from '../../config/topics';
 import TrafimageMaps from '../../components/TrafimageMaps';
+import finishFlag from '../../img/finish_flag.svg';
 
 configure({ adapter: new Adapter() });
 
@@ -119,6 +120,37 @@ describe('RouteLayer', () => {
         }),
       }),
     );
+  });
+
+  test('should return the correct style when selected.', () => {
+    const style = layer.defaultStyleFunction(feature);
+    const olStyles = layer.getOlStylesFromObject(style, true, false, feature);
+
+    expect(olStyles.routeStart.getImage()).toEqual(
+      new Circle({
+        radius: 4,
+        fill: new Fill({
+          color: [255, 255, 255],
+        }),
+        stroke: new Stroke({
+          color: [0, 0, 0],
+          width: 1,
+        }),
+      }),
+    );
+
+    expect(olStyles.routeEndIcon.getImage()).toEqual(
+      new Icon({
+        src: finishFlag,
+        anchor: [4.5, 3.5],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        anchorOrigin: 'bottom-left',
+        imgSize: [24, 24],
+      }),
+    );
+
+    expect(olStyles.base.getZIndex()).toEqual(0.5);
   });
 
   test('should return the correct hover style', () => {
