@@ -122,42 +122,38 @@ class Map extends PureComponent {
       return;
     }
 
-    const layers = this.getQueryableLayers('pointermove');
+    layerService.getFeatureInfoAtCoordinate(coordinate).then((newInfos) => {
+      let infos = newInfos.filter(({ features }) => features.length);
+      map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
-    layerService
-      .getFeatureInfoAtCoordinate(coordinate, layers)
-      .then((newInfos) => {
-        let infos = newInfos.filter(({ features }) => features.length);
-        map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
+      const isClickInfoOpen =
+        featureInfo.length &&
+        featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
 
-        const isClickInfoOpen =
-          featureInfo.length &&
-          featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
+      // don't continue if there's a popup that was opened by click
+      if (!isClickInfoOpen) {
+        infos = infos
+          .filter(
+            ({ layer }) =>
+              layer.get('showPopupOnHover') && layer.get('popupComponent'),
+          )
+          .map((info) => {
+            /* Apply showPopupOnHover function if defined to further filter features */
+            const showPopupOnHover = info.layer.get('showPopupOnHover');
+            if (typeof showPopupOnHover === 'function') {
+              return {
+                ...info,
+                features: info.layer.get('showPopupOnHover')(info.features),
+              };
+            }
+            return info;
+          });
 
-        // don't continue if there's a popup that was opened by click
-        if (!isClickInfoOpen) {
-          infos = infos
-            .filter(
-              ({ layer }) =>
-                layer.get('showPopupOnHover') && layer.get('popupComponent'),
-            )
-            .map((info) => {
-              /* Apply showPopupOnHover function if defined to further filter features */
-              const showPopupOnHover = info.layer.get('showPopupOnHover');
-              if (typeof showPopupOnHover === 'function') {
-                return {
-                  ...info,
-                  features: info.layer.get('showPopupOnHover')(info.features),
-                };
-              }
-              return info;
-            });
-
-          if (!Map.isSameFeatureInfo(featureInfo, infos)) {
-            dispatchSetFeatureInfo(infos);
-          }
+        if (!Map.isSameFeatureInfo(featureInfo, infos)) {
+          dispatchSetFeatureInfo(infos);
         }
-      });
+      }
+    });
   }
 
   onSingleClick(evt) {
@@ -169,37 +165,33 @@ class Map extends PureComponent {
       dispatchHtmlEvent,
     } = this.props;
 
-    const layers = this.getQueryableLayers('singleclick');
-
-    layerService
-      .getFeatureInfoAtCoordinate(coordinate, layers)
-      .then((featureInfos) => {
-        // Display only info of layers with a popup defined.
-        let infos = featureInfos
-          .reverse()
-          .filter(
-            ({ layer }) =>
-              layer.get('popupComponent') && !layer.get('showPopupOnHover'),
-          );
-
-        // Clear the select style.
-        infos.forEach(({ layer, features }) => {
-          if (layer.select) {
-            layer.select(features);
-          }
-        });
-
-        // Dispatch only infos with features found.
-        infos = infos.filter(({ features }) => features.length);
-        dispatchSetFeatureInfo(infos);
-
-        // Propagate the infos clicked to the WebComponent
-        dispatchHtmlEvent(
-          new CustomEvent('getfeatureinfo', {
-            detail: infos,
-          }),
+    layerService.getFeatureInfoAtCoordinate(coordinate).then((featureInfos) => {
+      // Display only info of layers with a popup defined.
+      let infos = featureInfos
+        .reverse()
+        .filter(
+          ({ layer }) =>
+            layer.get('popupComponent') && !layer.get('showPopupOnHover'),
         );
+
+      // Clear the select style.
+      infos.forEach(({ layer, features }) => {
+        if (layer.select) {
+          layer.select(features);
+        }
       });
+
+      // Dispatch only infos with features found.
+      infos = infos.filter(({ features }) => features.length);
+      dispatchSetFeatureInfo(infos);
+
+      // Propagate the infos clicked to the WebComponent
+      dispatchHtmlEvent(
+        new CustomEvent('getfeatureinfo', {
+          detail: infos,
+        }),
+      );
+    });
 
     // Propagate the ol event to the WebComponent
     const htmlEvent = new CustomEvent(evt.type, {
@@ -207,21 +199,6 @@ class Map extends PureComponent {
     });
     dispatchHtmlEvent(htmlEvent);
     dispatchSetSearchOpen(false);
-  }
-
-  getQueryableLayers(featureInfoEventType) {
-    const { layerService } = this.props;
-
-    return layerService
-      .getLayersAsFlatArray()
-      .filter(
-        (layer) =>
-          layer.getVisible() &&
-          layer.isQueryable &&
-          (
-            layer.get('featureInfoEventTypes') || ['pointermove', 'singleclick']
-          ).indexOf(featureInfoEventType) > -1,
-      );
   }
 
   render() {

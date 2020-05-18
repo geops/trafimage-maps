@@ -365,7 +365,6 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   }),
   properties: {
     hasInfos: true,
-    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
@@ -454,7 +453,6 @@ export const kilometrageLayer = new KilometrageLayer({
   visible: true,
   properties: {
     hideInLegend: true,
-    featureInfoEventTypes: ['singleclick'],
     popupComponent: 'KilometragePopup',
   },
 });
