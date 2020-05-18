@@ -133,7 +133,7 @@ describe('RouteLayer', () => {
 
     expect(style[1].getImage()).toEqual(
       new Circle({
-        radius: 4,
+        radius: 3,
         fill: new Fill({
           color: [255, 255, 255],
         }),

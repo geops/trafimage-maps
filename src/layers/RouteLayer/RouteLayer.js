@@ -31,7 +31,7 @@ class RouteLayer extends CasaLayer {
     new Style({
       geometry: new Point(coords),
       image: new CircleStyle({
-        radius: 4,
+        radius: 3,
         fill: new FillStyle({
           color: [255, 255, 255],
         }),
