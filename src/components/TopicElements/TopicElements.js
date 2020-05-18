@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import qs from 'query-string';
-import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
-import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
 import { setIsMobileWidth } from '../../model/app/actions';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
@@ -64,7 +62,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
 function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const ref = useRef(null);
   const dispatch = useDispatch();
-  const { activeTopic, layerService, map } = useSelector((state) => state.app);
+  const { activeTopic, map } = useSelector((state) => state.app);
   const [tabFocus, setTabFocus] = useState(false);
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
@@ -76,7 +74,6 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
       document.removeEventListener('keydown', focusTab);
     };
   });
-  const { t } = useTranslation();
   if (!activeTopic) {
     return null;
   }
@@ -132,20 +129,6 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
         {appMenuChildren}
       </Menu>
-    ),
-    baseLayerToggler: (
-      <BaseLayerToggler
-        layerService={layerService}
-        map={map}
-        mapTabIndex={-1} // No accessible via Tab nav.
-        titles={{
-          button: t('Baselayerwechsel'),
-          prevButton: t('Nächste Baselayer'),
-          nextButton: t('Vorherige Baselayer'),
-        }}
-        fallbackImgDir={`${staticFilesUrl}/img/baselayer/`}
-        validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
-      />
     ),
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
