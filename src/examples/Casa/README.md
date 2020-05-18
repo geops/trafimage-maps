@@ -17,13 +17,6 @@ const apiKey = window.apiKey;
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
-  styleFunction: (props, isSelected, isHovered) => {
-    // if (isSelected && !isHovered) {
-    //   return {
-    //     stroke: { color: '#ff0000' },
-    //   };
-    // }
-  },
   validFrom: '2019-12-16',
   validTo: '2020-12-01',
 });
@@ -130,11 +123,6 @@ zoneLayer.onClick(f => {
 const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   apiKey: apiKey,
-  styleFunction: (props, isSelected, isHovered) => {
-    // return {
-    //   stroke: { color: 'blue' },
-    // }
-  },
 });
 
 // Visualize a route on the map.
