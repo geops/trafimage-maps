@@ -125,7 +125,7 @@ class Map extends PureComponent {
     const layers = this.getQueryableLayers('pointermove');
 
     layerService
-      .getFeatureInfoAtCoordinate(coordinate, layers)
+      .getFeatureInfoAtCoordinate(coordinate)
       .then((newInfos) => {
         let infos = newInfos.filter(({ features }) => features.length);
         map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
@@ -172,7 +172,7 @@ class Map extends PureComponent {
     const layers = this.getQueryableLayers('singleclick');
 
     layerService
-      .getFeatureInfoAtCoordinate(coordinate, layers)
+      .getFeatureInfoAtCoordinate(coordinate)
       .then((featureInfos) => {
         // Display only info of layers with a popup defined.
         let infos = featureInfos
