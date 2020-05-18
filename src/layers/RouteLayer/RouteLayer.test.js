@@ -122,11 +122,16 @@ describe('RouteLayer', () => {
     );
   });
 
-  test('should return the correct style when selected.', () => {
-    const style = layer.defaultStyleFunction(feature);
-    const olStyles = layer.getOlStylesFromObject(style, true, false, feature);
+  test('should return the correct styles when selected.', async () => {
+    layer.init(map);
+    fetchMock.once(/routing/g, routeData);
 
-    expect(olStyles.routeStart.getImage()).toEqual(
+    const [route] = await layer.loadRoutes(routes);
+    const style = layer.routeStyle(route);
+
+    expect(style[0].getZIndex()).toEqual(0.5);
+
+    expect(style[1].getImage()).toEqual(
       new Circle({
         radius: 4,
         fill: new Fill({
@@ -139,7 +144,7 @@ describe('RouteLayer', () => {
       }),
     );
 
-    expect(olStyles.routeEndIcon.getImage()).toEqual(
+    expect(style[3].getImage()).toEqual(
       new Icon({
         src: finishFlag,
         anchor: [4.5, 3.5],
@@ -149,8 +154,6 @@ describe('RouteLayer', () => {
         imgSize: [24, 24],
       }),
     );
-
-    expect(olStyles.base.getZIndex()).toEqual(0.5);
   });
 
   test('should return the correct hover style', () => {
@@ -183,6 +186,7 @@ describe('RouteLayer', () => {
     fetchMock.once(/routing/g, routeData);
 
     const route = await layer.loadRoutes(routes);
+
     expect(route[0]).toBeInstanceOf(Feature);
   });
 

@@ -6,7 +6,16 @@ import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import MultiLineString from 'ol/geom/MultiLineString';
 import Feature from 'ol/Feature';
+import {
+  Style,
+  Fill as FillStyle,
+  Icon as IconStyle,
+  Stroke as StrokeStyle,
+  Circle as CircleStyle,
+} from 'ol/style';
+import { Point } from 'ol/geom';
 import CasaLayer from '../CasaLayer';
+import finishFlag from '../../img/finish_flag.svg';
 
 /**
  * Layer for visualizing routes.
@@ -18,6 +27,22 @@ import CasaLayer from '../CasaLayer';
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
  */
 class RouteLayer extends CasaLayer {
+  static getCircleStyle = (coords) =>
+    new Style({
+      geometry: new Point(coords),
+      image: new CircleStyle({
+        radius: 4,
+        fill: new FillStyle({
+          color: [255, 255, 255],
+        }),
+        stroke: new StrokeStyle({
+          color: [0, 0, 0],
+          width: 1,
+        }),
+      }),
+      zIndex: 1,
+    });
+
   constructor(options = {}) {
     super({
       name: 'RouteLayer',
@@ -154,9 +179,34 @@ class RouteLayer extends CasaLayer {
       isHovered,
     );
 
-    return Object.values(
+    const styleArray = Object.values(
       this.getOlStylesFromObject(routeStyle, isSelected, isHovered, feature),
     ).flat();
+
+    if (isSelected) {
+      /* Set route start and end style on selected routes */
+      const lineStart = feature.getGeometry().getFirstCoordinate();
+      const lineEnd = feature.getGeometry().getLastCoordinate();
+
+      styleArray.push(RouteLayer.getCircleStyle(lineStart));
+      styleArray.push(RouteLayer.getCircleStyle(lineEnd));
+      styleArray.push(
+        new Style({
+          geometry: new Point(lineEnd),
+          image: new IconStyle({
+            src: finishFlag,
+            anchor: [4.5, 3.5],
+            anchorXUnits: 'pixels',
+            anchorYUnits: 'pixels',
+            anchorOrigin: 'bottom-left',
+            imgSize: [24, 24],
+          }),
+          zIndex: 1,
+        }),
+      );
+    }
+
+    return styleArray;
   }
 
   /**

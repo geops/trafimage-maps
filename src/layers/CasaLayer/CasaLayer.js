@@ -5,12 +5,10 @@ import {
   Icon as IconStyle,
   Stroke as StrokeStyle,
   Text as TextStyle,
-  Circle as CircleStyle,
 } from 'ol/style';
 import { MultiLineString, LineString, Point } from 'ol/geom';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import ArrowImg from '../../img/arrow.png';
-import finishFlag from '../../img/finish_flag.svg';
 
 /**
  * @typedef {Object} styleObject
@@ -59,13 +57,6 @@ import finishFlag from '../../img/finish_flag.svg';
  * @param {styleFunction} [options.styleFunction] Style function.
  */
 class CasaLayer extends VectorLayer {
-  static isRoute = (geometry) => {
-    /* Returns true if the geometry is a route */
-    const route =
-      geometry instanceof LineString || geometry instanceof MultiLineString;
-    return route;
-  };
-
   constructor(options = {}) {
     super(options);
 
@@ -155,6 +146,7 @@ class CasaLayer extends VectorLayer {
     isHovered = false,
     feature,
   ) {
+    const geom = feature && feature.getGeometry();
     const defaultStyleObject = this.defaultStyleFunction(
       feature,
       isSelected,
@@ -166,43 +158,6 @@ class CasaLayer extends VectorLayer {
     });
 
     const olStyles = {};
-    if (feature && CasaLayer.isRoute(feature.getGeometry())) {
-      /* Set route start and end style on selected routes */
-      if (isSelected) {
-        const circleStyle = (coords) =>
-          new Style({
-            geometry: new Point(coords),
-            image: new CircleStyle({
-              radius: 4,
-              fill: new FillStyle({
-                color: [255, 255, 255],
-              }),
-              stroke: new StrokeStyle({
-                color: [0, 0, 0],
-                width: 1,
-              }),
-            }),
-          });
-
-        const lineStart = feature.getGeometry().getFirstCoordinate();
-        const lineEnd = feature.getGeometry().getLastCoordinate();
-
-        olStyles.routeStart = circleStyle(lineStart);
-        olStyles.routeEnd = circleStyle(lineEnd);
-        olStyles.routeEndIcon = new Style({
-          geometry: new Point(lineEnd),
-          image: new IconStyle({
-            src: finishFlag,
-            anchor: [4.5, 3.5],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            anchorOrigin: 'bottom-left',
-            imgSize: [24, 24],
-          }),
-        });
-      }
-    }
-
     if (style.strokeOutline) {
       olStyles.outline = new Style({
         stroke: new StrokeStyle({
@@ -216,12 +171,14 @@ class CasaLayer extends VectorLayer {
       fill: style.fill ? new FillStyle({ ...style.fill }) : undefined,
     });
 
-    if (style.strokeArrow && CasaLayer.isRoute(feature.getGeometry())) {
+    if (
+      style.strokeArrow &&
+      (geom instanceof LineString || geom instanceof MultiLineString)
+    ) {
       olStyles.arrows = [];
       olStyles.helpPoints = [];
       const { count, color } = style.strokeArrow;
       const fraction = 1 / (count - 1);
-      const geom = feature.getGeometry();
       const rotationFractionDiff = 0.05;
 
       const arrowColor = color || (style.stroke || {}).color;
