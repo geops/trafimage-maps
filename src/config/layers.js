@@ -9,6 +9,7 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
@@ -386,6 +387,7 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   }),
   properties: {
     hasInfos: true,
+    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
@@ -465,6 +467,17 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
     hasInfos: true,
     description: 'ch.sbb.netzkarte-desc',
     radioGroup: 'showcases',
+  },
+});
+
+export const kilometrageLayer = new KilometrageLayer({
+  name: 'ch.sbb.kilometrage',
+  key: 'ch.sbb.kilometrage',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'KilometragePopup',
   },
 });
 
