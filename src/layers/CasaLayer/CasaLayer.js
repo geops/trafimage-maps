@@ -6,7 +6,7 @@ import {
   Stroke as StrokeStyle,
   Text as TextStyle,
 } from 'ol/style';
-import { LineString, Point } from 'ol/geom';
+import { MultiLineString, LineString, Point } from 'ol/geom';
 import VectorLayer from 'react-spatial/layers/VectorLayer';
 import ArrowImg from '../../img/arrow.png';
 
@@ -73,7 +73,7 @@ class CasaLayer extends VectorLayer {
 
   /**
    * Overwrites the react-spatial function, necessary to change the target layer containing
-   * the features, since olLayer is a LayerGroup in CASA
+   * the features, since olLayer is a LayerGroup in ZoneLayer
    */
   getFeatureInfoAtCoordinate(coordinate) {
     let features = [];
@@ -146,6 +146,7 @@ class CasaLayer extends VectorLayer {
     isHovered = false,
     feature,
   ) {
+    const geom = feature && feature.getGeometry();
     const defaultStyleObject = this.defaultStyleFunction(
       feature,
       isSelected,
@@ -157,7 +158,6 @@ class CasaLayer extends VectorLayer {
     });
 
     const olStyles = {};
-
     if (style.strokeOutline) {
       olStyles.outline = new Style({
         stroke: new StrokeStyle({
@@ -171,12 +171,14 @@ class CasaLayer extends VectorLayer {
       fill: style.fill ? new FillStyle({ ...style.fill }) : undefined,
     });
 
-    if (style.strokeArrow && feature.getGeometry() instanceof LineString) {
+    if (
+      style.strokeArrow &&
+      (geom instanceof LineString || geom instanceof MultiLineString)
+    ) {
       olStyles.arrows = [];
       olStyles.helpPoints = [];
       const { count, color } = style.strokeArrow;
       const fraction = 1 / (count - 1);
-      const geom = feature.getGeometry();
       const rotationFractionDiff = 0.05;
 
       const arrowColor = color || (style.stroke || {}).color;

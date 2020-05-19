@@ -9,10 +9,11 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import Feature from 'ol/Feature';
 import LineString from 'ol/geom/LineString';
-import { Style, Stroke } from 'ol/style';
+import { Style, Stroke, Circle, Fill, Icon } from 'ol/style';
 import RouteLayer from './RouteLayer';
 import { casa } from '../../config/topics';
 import TrafimageMaps from '../../components/TrafimageMaps';
+import finishFlag from '../../img/finish_flag.svg';
 
 configure({ adapter: new Adapter() });
 
@@ -121,6 +122,40 @@ describe('RouteLayer', () => {
     );
   });
 
+  test('should return the correct styles when selected.', async () => {
+    layer.init(map);
+    fetchMock.once(/routing/g, routeData);
+
+    const [route] = await layer.loadRoutes(routes);
+    const style = layer.routeStyle(route);
+
+    expect(style[0].getZIndex()).toEqual(0.5);
+
+    expect(style[1].getImage()).toEqual(
+      new Circle({
+        radius: 3,
+        fill: new Fill({
+          color: [255, 255, 255],
+        }),
+        stroke: new Stroke({
+          color: [0, 0, 0],
+          width: 1,
+        }),
+      }),
+    );
+
+    expect(style[3].getImage()).toEqual(
+      new Icon({
+        src: finishFlag,
+        anchor: [4.5, 3.5],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        anchorOrigin: 'bottom-left',
+        imgSize: [24, 24],
+      }),
+    );
+  });
+
   test('should return the correct hover style', () => {
     const style = layer.defaultStyleFunction(feature, false, true);
     const olStyles = layer.getOlStylesFromObject(style, false, true, feature);
@@ -151,6 +186,7 @@ describe('RouteLayer', () => {
     fetchMock.once(/routing/g, routeData);
 
     const route = await layer.loadRoutes(routes);
+
     expect(route[0]).toBeInstanceOf(Feature);
   });
 
