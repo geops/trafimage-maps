@@ -1,8 +1,8 @@
 {
-  "baseBranches": ["release-1.1"],
   "extends": [
     "config:base"
   ],
+  "baseBranches": ["release-1.1"],
   "assignees": ["@oterral"],
   "automerge": false,
   "packageRules": [
