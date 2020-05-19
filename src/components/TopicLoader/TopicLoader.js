@@ -116,6 +116,8 @@ class TopicLoader extends Component {
       appBaseUrl !== prevProps.appBaseUrl ||
       staticFilesUrl !== prevProps.staticFilesUrl
     ) {
+      console.log(this.props);
+      console.log(prevProps);
       console.log(activeTopic);
       this.updateServices(activeTopic);
     }
