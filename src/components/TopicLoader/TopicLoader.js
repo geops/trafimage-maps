@@ -108,13 +108,14 @@ class TopicLoader extends Component {
     }
 
     if (
-      vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      apiKey !== prevProps.apiKey ||
-      vectorTilesKey !== prevProps.vectorTilesKey ||
-      vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      cartaroUrl !== prevProps.cartaroUrl ||
-      appBaseUrl !== prevProps.appBaseUrl ||
-      staticFilesUrl !== prevProps.staticFilesUrl
+      activeTopic &&
+      (vectorTilesUrl !== prevProps.vectorTilesUrl ||
+        apiKey !== prevProps.apiKey ||
+        vectorTilesKey !== prevProps.vectorTilesKey ||
+        vectorTilesUrl !== prevProps.vectorTilesUrl ||
+        cartaroUrl !== prevProps.cartaroUrl ||
+        appBaseUrl !== prevProps.appBaseUrl ||
+        staticFilesUrl !== prevProps.staticFilesUrl)
     ) {
       console.log(this.props);
       console.log(prevProps);
