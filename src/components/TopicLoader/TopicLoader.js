@@ -96,6 +96,7 @@ class TopicLoader extends Component {
     }
 
     if (activeTopic !== prevProps.activeTopic) {
+      console.log(activeTopic);
       this.updateServices(activeTopic);
     }
 
@@ -115,6 +116,7 @@ class TopicLoader extends Component {
       appBaseUrl !== prevProps.appBaseUrl ||
       staticFilesUrl !== prevProps.staticFilesUrl
     ) {
+      console.log(activeTopic);
       this.updateServices(activeTopic);
     }
 
@@ -138,6 +140,7 @@ class TopicLoader extends Component {
       return;
     }
     const activeTopic = topics.find((t) => t.active);
+    console.log(activeTopic);
     const visibleTopics = topics.filter(
       (t) =>
         (!t.permission ||
@@ -145,7 +148,9 @@ class TopicLoader extends Component {
             permissionsInfos.permissions.includes(t.permission))) &&
         !t.hideInLayerTree,
     );
+    console.log(visibleTopics);
     let visibleActiveTopic = visibleTopics.find((t) => t.active);
+    console.log(visibleActiveTopic);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
@@ -160,6 +165,7 @@ class TopicLoader extends Component {
     }
 
     visibleActiveTopic = visibleActiveTopic || topics[0];
+    console.log(visibleActiveTopic);
     visibleActiveTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(visibleActiveTopic);
