@@ -220,7 +220,7 @@ class Map extends PureComponent {
           layer.isQueryable &&
           (
             layer.get('featureInfoEventTypes') || ['pointermove', 'singleclick']
-          ).indexOf(featureInfoEventType) > -1,
+          ).includes(featureInfoEventType),
       );
   }
 
