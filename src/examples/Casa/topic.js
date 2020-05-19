@@ -38,9 +38,11 @@ const netzkarteLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
-  radioGroup: 'baseLayer',
   isBaseLayer: true,
   style: 'netzkarte_personenverkehr_v3',
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 // Remove all symbols and circl styles
@@ -75,17 +77,18 @@ const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.light',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
-  radioGroup: 'baseLayer',
   isBaseLayer: true,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'showcase3',
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 const swisstopoSwissImage = new Layer({
   name: 'ch.sbb.netzkarte.luftbild',
   copyright: 'swisstopo (5704003351)',
-  radioGroup: 'baseLayer',
   isBaseLayer: true,
   visible: false,
   olLayer: new TileLayer({
@@ -106,6 +109,9 @@ const swisstopoSwissImage = new Layer({
       }),
     }),
   }),
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 export default {
@@ -115,7 +121,7 @@ export default {
     menu: true,
     popup: true,
     permalink: false,
-    baseLayerToggler: true,
+    baseLayerSwitcher: true,
   },
   layers: [netzkarteShowcasesLight, netzkarteLayer, swisstopoSwissImage],
 };
