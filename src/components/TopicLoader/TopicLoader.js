@@ -107,18 +107,21 @@ class TopicLoader extends Component {
     }
 
     if (
-      vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      apiKey !== prevProps.apiKey ||
-      vectorTilesKey !== prevProps.vectorTilesKey ||
-      vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      cartaroUrl !== prevProps.cartaroUrl ||
-      appBaseUrl !== prevProps.appBaseUrl ||
-      staticFilesUrl !== prevProps.staticFilesUrl
+      activeTopic &&
+      (vectorTilesUrl !== prevProps.vectorTilesUrl ||
+        apiKey !== prevProps.apiKey ||
+        vectorTilesKey !== prevProps.vectorTilesKey ||
+        cartaroUrl !== prevProps.cartaroUrl ||
+        appBaseUrl !== prevProps.appBaseUrl ||
+        staticFilesUrl !== prevProps.staticFilesUrl)
     ) {
       this.updateServices(activeTopic);
     }
 
-    if (language !== prevProps.language || apiKey !== prevProps.apiKey) {
+    if (
+      activeTopic &&
+      (language !== prevProps.language || apiKey !== prevProps.apiKey)
+    ) {
       this.updateLayers(activeTopic.layers);
     }
   }
