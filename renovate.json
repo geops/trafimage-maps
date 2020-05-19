@@ -1,6 +1,7 @@
 {
   "extends": [
-    "config:base"
+    "config:base",
+    "schedule:monthly"
   ],
   "baseBranches": ["release-1.1"],
   "assignees": ["@oterral"],
