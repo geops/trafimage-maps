@@ -77,6 +77,7 @@ export default function app(state = getInitialState(), action) {
         featureInfo: action.data ? [...action.data] : null,
       };
     case SET_ACTIVE_TOPIC:
+      console.log('SET_ACTIVE_TOPIC', action.data);
       return {
         ...state,
         activeTopic: { ...action.data },
