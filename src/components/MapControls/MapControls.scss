@@ -1,5 +1,23 @@
 @import '../../globals.scss';
 
+.wkp-geolocation {
+  svg {
+    fill: $dark-grey;
+  }
+}
+
+.wkp-fit-extent {
+  svg {
+    height: 30px;
+    width: 30px;
+
+    path {
+      stroke: $dark-grey;
+      fill: $dark-grey;
+    }
+  }
+}
+
 .wkp-map-controls {
   position: absolute;
   right: 15px;
@@ -18,7 +36,7 @@
     .rs-zoom-out {
       margin: 10px 0;
       background: white;
-      box-shadow: 0 0 7px rgba(0,0,0,.7);
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
       border-radius: 50%;
       cursor: pointer;
       height: 40px;
@@ -36,17 +54,11 @@
   }
 }
 
-.wkp-geolocation {
-  svg {
-    fill: $dark-grey;
-  }
-}
-
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;
   background: white;
-  box-shadow: 0 0 7px rgba(0,0,0,.7);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.7);
   border-radius: 50%;
   cursor: pointer;
   height: 40px;
@@ -56,18 +68,6 @@
   align-items: center;
   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
   transition: background-color 0.5s ease, color 0.5s ease;
-}
-
-.wkp-fit-extent {
-  svg {
-    height: 30px;
-    width: 30px;
-
-    path {
-      stroke: $dark-grey;
-      fill: $dark-grey;
-    }
-  }
 }
 
 .tm-h-s {
