@@ -34,6 +34,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
       source: new OLVectorSource({
         format: new GeoJSON(),
       }),
+      zIndex: options.zIndex || 0,
     });
 
     super({
