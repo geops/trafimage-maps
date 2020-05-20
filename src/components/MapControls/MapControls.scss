@@ -1,3 +1,5 @@
+@import '../../globals.scss';
+
 .wkp-map-controls {
   position: absolute;
   right: 15px;
@@ -8,7 +10,7 @@
       border: 1px solid #5a5a5a;
 
       .ol-zoomslider-thumb {
-        background: #444444;
+        background: $dark-grey;
       }
     }
 
@@ -26,7 +28,17 @@
       align-items: center;
       -webkit-transition: background-color 0.5s ease, color 0.5s ease;
       transition: background-color 0.5s ease, color 0.5s ease;
+
+      svg {
+        fill: $dark-grey;
+      }
     }
+  }
+}
+
+.wkp-geolocation {
+  svg {
+    fill: $dark-grey;
   }
 }
 
@@ -44,6 +56,18 @@
   align-items: center;
   -webkit-transition: background-color 0.5s ease, color 0.5s ease;
   transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.wkp-fit-extent {
+  svg {
+    height: 30px;
+    width: 30px;
+
+    path {
+      stroke: $dark-grey;
+      fill: $dark-grey;
+    }
+  }
 }
 
 .tm-h-s {
