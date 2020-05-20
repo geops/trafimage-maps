@@ -4,12 +4,20 @@
   top: 110px;
 
   .rs-zooms-bar {
+    .ol-zoomslider {
+      border: 1px solid #5a5a5a;
+
+      .ol-zoomslider-thumb {
+        background: #444444;
+      }
+    }
+
     .rs-zoom-in,
     .rs-zoom-out {
       margin: 10px 0;
-      background: #003d85;
+      background: white;
+      box-shadow: 0 0 7px rgba(0,0,0,.7);
       border-radius: 50%;
-      color: white;
       cursor: pointer;
       height: 40px;
       width: 40px;
@@ -25,9 +33,9 @@
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;
-  background: #003d85;
+  background: white;
+  box-shadow: 0 0 7px rgba(0,0,0,.7);
   border-radius: 50%;
-  color: white;
   cursor: pointer;
   height: 40px;
   width: 40px;
