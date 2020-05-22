@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "config:base",
+    "schedule:monthly"
+  ],
+  "baseBranches": ["release-1.1"],
+  "assignees": ["@oterral"],
+  "automerge": false,
+  "packageRules": [
+    {
+      "depTypeList": ["dependencies"],
+      "updateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
+}

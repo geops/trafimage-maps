@@ -9,8 +9,13 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import netzkarte from '../img/netzkarte.png';
+import landeskarte from '../img/landeskarte.png';
+import landeskarteGrau from '../img/landeskarte_grau.png';
+import luftbild from '../img/luftbild.png';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
@@ -111,6 +116,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: netzkarte,
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -126,6 +132,7 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: luftbild,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -140,6 +147,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: landeskarte,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -154,6 +162,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: landeskarteGrau,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -378,6 +387,7 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   }),
   properties: {
     hasInfos: true,
+    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
@@ -457,6 +467,17 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
     hasInfos: true,
     description: 'ch.sbb.netzkarte-desc',
     radioGroup: 'showcases',
+  },
+});
+
+export const kilometrageLayer = new KilometrageLayer({
+  name: 'ch.sbb.kilometrage',
+  key: 'ch.sbb.kilometrage',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'KilometragePopup',
   },
 });
 
