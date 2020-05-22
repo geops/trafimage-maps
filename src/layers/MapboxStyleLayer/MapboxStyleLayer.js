@@ -73,9 +73,21 @@ class MapboxStyleLayer extends Layer {
   init(map) {
     super.init(map);
 
+    if (!this.map) {
+      return;
+    }
+
     // Apply the initial visibiltity.
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
+      // If the mbMap is not yet created because the  map has no target yet, we
+      // relaunch the initialisation when it's the case.
+      this.olListenersKeys.push(
+        this.map.on('change:target', () => {
+          this.init(map);
+        }),
+      );
+
       return;
     }
 
