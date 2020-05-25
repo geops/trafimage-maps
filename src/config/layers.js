@@ -2,6 +2,7 @@ import proj4 from 'proj4';
 import TileLayer from 'ol/layer/Tile';
 import TileWMSSource from 'ol/source/TileWMS';
 import TileGrid from 'ol/tilegrid/TileGrid';
+import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
@@ -9,6 +10,7 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
@@ -57,6 +59,7 @@ export const dataLayer = new TrafimageMapboxLayer({
 });
 
 let osmPointsLayers = [];
+let olListenerKey;
 const updateStations = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
@@ -84,7 +87,9 @@ const updateStations = (mbMap) => {
 };
 
 // Get list of styleLayers applied to osm_points source.
-dataLayer.once('load', () => {
+// We don't use 'once()' because when switching topics
+// (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
+dataLayer.on('load', () => {
   const { map, mbMap } = dataLayer;
   osmPointsLayers = mbMap
     .getStyle()
@@ -104,7 +109,8 @@ dataLayer.once('load', () => {
   updateStations(mbMap);
 
   // Update stations source on moveeend.
-  map.on('moveend', () => {
+  unByKey(olListenerKey);
+  olListenerKey = map.on('moveend', () => {
     updateStations(mbMap);
   });
 });
@@ -386,6 +392,7 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   }),
   properties: {
     hasInfos: true,
+    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
@@ -465,6 +472,17 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
     hasInfos: true,
     description: 'ch.sbb.netzkarte-desc',
     radioGroup: 'showcases',
+  },
+});
+
+export const kilometrageLayer = new KilometrageLayer({
+  name: 'ch.sbb.kilometrage',
+  key: 'ch.sbb.kilometrage',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'KilometragePopup',
   },
 });
 
