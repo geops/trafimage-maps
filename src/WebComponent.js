@@ -171,12 +171,17 @@ const WebComponent = (props) => {
     [maxExtent],
   );
   const appTopics = useMemo(() => {
-    // Wait for topics if no appName given
-    // Todo: Inspect more deeply on how to allow topic change in wkp.
-    if (!topics && appName === 'none') {
+    const tps = topics || getTopicConfig(apiKey, appName);
+
+    if (!tps) {
+      // eslint-disable-next-line no-console
+      console.warn(`There is no public topics for app name: ${appName}.`);
+      // It's important to return null so the permalink doesn't try to update parameters.
+      // If we return [], it will try to update paramaters and we will loose the inital
+      // parameters when the topics will be loaded.
       return null;
     }
-    const tps = topics || getTopicConfig(apiKey, appName);
+
     if (!tps) {
       // eslint-disable-next-line no-console
       console.error('You must provide a list of topics');
