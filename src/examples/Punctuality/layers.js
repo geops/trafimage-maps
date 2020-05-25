@@ -41,10 +41,12 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   visible: true,
   isQueryable: false,
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'netzkarte_personenverkehr',
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 export const swisstopoSwissImage = new Layer({
@@ -52,7 +54,6 @@ export const swisstopoSwissImage = new Layer({
   key: 'ch.sbb.netzkarte.luftbild.group',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
   visible: false,
   olLayer: new TileLayer({
     source: new WMTSSource({
@@ -72,6 +73,9 @@ export const swisstopoSwissImage = new Layer({
       }),
     }),
   }),
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 export const swisstopoLandeskarte = new Layer({
@@ -79,7 +83,6 @@ export const swisstopoLandeskarte = new Layer({
   copyright: 'swisstopo (5704003351)',
   visible: false,
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -97,6 +100,9 @@ export const swisstopoLandeskarte = new Layer({
       }),
     }),
   }),
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 export const swisstopoLandeskarteGrau = new Layer({
@@ -104,7 +110,6 @@ export const swisstopoLandeskarteGrau = new Layer({
   copyright: 'swisstopo (5704003351)',
   visible: false,
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
   olLayer: new TileLayer({
     source: new WMTSSource({
       url:
@@ -123,6 +128,9 @@ export const swisstopoLandeskarteGrau = new Layer({
       }),
     }),
   }),
+  properties: {
+    radioGroup: 'baseLayer',
+  },
 });
 
 export const buslines = new MapboxStyleLayer({

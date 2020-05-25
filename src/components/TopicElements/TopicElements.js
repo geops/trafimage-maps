@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
-import BaseLayerToggler from 'react-spatial/components/BaseLayerToggler';
+import BaseLayerSwitcher from 'react-spatial/components/BaseLayerSwitcher';
 import { setIsMobileWidth } from '../../model/app/actions';
 import MainDialog from '../MainDialog';
 import Map from '../Map';
@@ -21,6 +21,7 @@ import Popup from '../Popup';
 import Search from '../Search';
 import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
+import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
 
 const defaultElements = {
   header: false,
@@ -30,7 +31,7 @@ const defaultElements = {
   popup: false,
   mapControls: false,
   geolocationButton: true,
-  baseLayerToggler: false,
+  baseLayerSwitcher: false,
   shareMenu: false,
   trackerMenu: false,
   featureMenu: false,
@@ -83,13 +84,17 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   const { maxZoom } = activeTopic;
 
+  const baseLayers = layerService
+    .getLayers()
+    .filter((layer) => layer.getIsBaseLayer());
+
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
   if (disabled) {
     disabled.split(',').forEach((element) => {
       // Backward compatibility
       if (element === 'spyLayer') {
-        activeTopic.elements.baseLayerToggler = false;
+        activeTopic.elements.baseLayerSwitcher = false;
       }
       // Backward compatibility
       if (element === 'header') {
@@ -133,18 +138,16 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         {appMenuChildren}
       </Menu>
     ),
-    baseLayerToggler: (
-      <BaseLayerToggler
-        layerService={layerService}
-        map={map}
-        mapTabIndex={-1} // No accessible via Tab nav.
+    baseLayerSwitcher: (
+      <BaseLayerSwitcher
+        layers={baseLayers}
         titles={{
           button: t('Baselayerwechsel'),
-          prevButton: t('Nächste Baselayer'),
-          nextButton: t('Vorherige Baselayer'),
+          openSwitcher: t('Baselayer-Menu öffnen'),
+          closeSwitcher: t('Baselayer-Menu Schliessen'),
         }}
-        fallbackImgDir={`${staticFilesUrl}/img/baselayer/`}
-        validExtent={[656409.5, 5740863.4, 1200512.3, 6077033.16]}
+        closeButtonImage={<ChevronLeft />}
+        t={t}
       />
     ),
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,

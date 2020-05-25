@@ -37,7 +37,7 @@
 @import 'node_modules/react-spatial/themes/default/variables.scss';
 @import 'node_modules/react-spatial/themes/default/mixins.scss';
 @import 'node_modules/react-spatial/components/LayerTree/LayerTree.scss';
-@import 'node_modules/react-spatial/components/BaseLayerToggler/BaseLayerToggler.scss';
+@import 'node_modules/react-spatial/components/BaseLayerSwitcher/BaseLayerSwitcher.scss';
 @import 'node_modules/react-spatial/components/ScaleLine/ScaleLine.scss';
 @import 'node_modules/react-spatial/components/Zoom/Zoom.scss';
 @import 'node_modules/react-spatial/components/Geolocation/Geolocation.scss';
@@ -75,6 +75,7 @@
 @import 'src/popups/BahnhofplanPopup/BahnhofplanPopup.scss';
 @import 'src/popups/BehigPopup/BehigPopup.scss';
 @import 'src/popups/BusLinePopup/BusLinePopup.scss';
+@import 'src/popups/KilometragePopup/KilometragePopup.scss';
 @import 'src/popups/ConstructionPopup/ConstructionPopup.scss';
 @import 'src/popups/HandicapPopup/HandicapPopup.scss';
 @import 'src/popups/NetzkartePopup/NetzkartePopup.scss';

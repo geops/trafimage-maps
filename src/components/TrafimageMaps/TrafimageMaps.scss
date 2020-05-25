@@ -39,24 +39,21 @@
     position: relative;
   }
 
-  .rs-base-layer-toggler {
+  .rs-base-layer-switcher {
     position: absolute;
     bottom: 40px;
     left: 10px;
-    width: 120px;
-    height: 120px;
+    width: 162px;
+    height: 100px;
     z-index: 0; // under menu
+    padding: 4px;
 
-    // For some reasons, after a click on tm-base-layer-item button,
-    // we are not able to click on next and previous button anymore because
-    // they are behind the tm-base-layer-item button.
-    .rs-base-layer-item {
-      z-index: 0;
+    &.rs-open {
+      width: 680px;
     }
 
-    .rs-base-layer-previous,
-    .rs-base-layer-next {
-      z-index: 1;
+    .rs-base-layer-switcher-button {
+      min-width: 150px;
     }
   }
 
@@ -74,6 +71,9 @@
 
   .rs-popup {
     .rs-popup-container {
+      /* Overwrite with a very small minium width to allow small custom widths */
+      min-width: 100px;
+
       .rs-popup-body {
         padding: 0;
       }
@@ -101,7 +101,7 @@
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
-    .rs-base-layer-toggler {
+    .rs-base-layer-switcher {
       display: none;
     }
 

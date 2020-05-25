@@ -13,6 +13,7 @@ import defaultBaseLayers, {
   netzkarteShowcasesNetzkarte,
   parks,
   stuetzpunktbahnhoefe,
+  kilometrageLayer,
   constrUnterhalt,
   constrAusbau,
   constructionLayer,
@@ -41,7 +42,7 @@ const defaultElements = {
   menu: true,
   permalink: true,
   mapControls: true,
-  baseLayerToggler: true,
+  baseLayerSwitcher: true,
   popup: false,
   search: true,
 };
@@ -138,13 +139,14 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true },
+  elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     netzkarteEisenbahninfrastruktur,
     gewässer,
     grenzen,
     uebrigeBahnen,
     tochtergesellschaftenSBB,
+    kilometrageLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
@@ -178,7 +180,7 @@ export const showcases = {
   key: 'ch.sbb.showcases',
   elements: {
     ...defaultElements,
-    baseLayerToggler: false,
+    baseLayerSwitcher: false,
   },
   layers: [
     netzkarteShowcasesNight,

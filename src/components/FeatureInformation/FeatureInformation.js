@@ -84,25 +84,27 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   return (
     <div className="wkp-feature-information">
       <React.Suspense fallback="...loading">
-        <div className="wkp-feature-information-header">
-          <span>
-            {PopupComponent && PopupComponent.renderTitle && feature
-              ? PopupComponent.renderTitle(feature, t)
-              : layer && layer.getName() && t(layer.getName())}
-          </span>
-          <Button
-            className="wkp-close-bt"
-            title={t('Popup schliessen')}
-            onClick={() => {
-              dispatch(setFeatureInfo([]));
-              if (PopupComponent.onCloseBtClick) {
-                PopupComponent.onCloseBtClick();
-              }
-            }}
-          >
-            <MdClose focusable={false} alt={t('Popup schliessen')} />
-          </Button>
-        </div>
+        {PopupComponent && !PopupComponent.hideHeader ? (
+          <div className="wkp-feature-information-header">
+            <span>
+              {PopupComponent && PopupComponent.renderTitle && feature
+                ? PopupComponent.renderTitle(feature, t)
+                : layer && layer.getName() && t(layer.getName())}
+            </span>
+            <Button
+              className="wkp-close-bt"
+              title={t('Popup schliessen')}
+              onClick={() => {
+                dispatch(setFeatureInfo([]));
+                if (PopupComponent.onCloseBtClick) {
+                  PopupComponent.onCloseBtClick();
+                }
+              }}
+            >
+              <MdClose focusable={false} alt={t('Popup schliessen')} />
+            </Button>
+          </div>
+        ) : null}
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.getKey()}
