@@ -88,6 +88,8 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     .getLayers()
     .filter((layer) => layer.getIsBaseLayer());
 
+  const activeBaseLayer = baseLayers.find((layer) => layer.getVisible());
+
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
   if (disabled) {
@@ -138,7 +140,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         {appMenuChildren}
       </Menu>
     ),
-    baseLayerSwitcher: (
+    baseLayerSwitcher: activeBaseLayer ? (
       <BaseLayerSwitcher
         layers={baseLayers}
         titles={{
@@ -149,7 +151,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         closeButtonImage={<ChevronLeft />}
         t={t}
       />
-    ),
+    ) : null,
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
   };
