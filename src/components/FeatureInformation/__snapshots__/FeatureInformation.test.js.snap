@@ -129,6 +129,31 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
 </div>
 `;
 
+exports[`FeatureInformaion should match snapshot. should not display header 1`] = `
+<div
+  className="wkp-feature-information"
+>
+  <div
+    className="wkp-feature-information-body"
+  >
+    <div
+      className="wkp-kilometrage-popup"
+    >
+      <div
+        className="wkp-popup-row"
+      >
+        DfA Linien Nr.: undefined
+      </div>
+      <div
+        className="wkp-popup-row"
+      >
+        Kilometer: NaN
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`FeatureInformaion should match snapshot. using the info's popupComponent 1`] = `
 <div
   className="wkp-feature-information"

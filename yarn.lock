@@ -7094,10 +7094,10 @@ geojson-vt@^3.2.1:
   resolved "https://registry.yarnpkg.com/geojson-vt/-/geojson-vt-3.2.1.tgz#f8adb614d2c1d3f6ee7c4265cad4bbf3ad60c8b7"
   integrity sha512-EvGQQi/zPrDA6zr6BnJD/YhwAkBP8nnJ9emh3EnHQKVMfg/MRVtPbMYdgVy/IaEmn4UfagD2a6fafPDL5hbtwg==
 
-geops-docjs-template@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/geops-docjs-template/-/geops-docjs-template-1.0.2.tgz#5cf2ca063d2a32c0c653645bfd841a2a3318fe01"
-  integrity sha512-1vD1Hz3ikAu6Wc7y9vpXOiKvCdbacDvIYNzGFXC0efQ428UZnl+CYlSWqoB0Qy6qxz3j1m7wRjn5PCcMZ+di0w==
+geops-docjs-template@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/geops-docjs-template/-/geops-docjs-template-1.0.3.tgz#62412ed21060b78d039324e0d255522e31399c53"
+  integrity sha512-0Utg+0ZGx9+8jwkKXHPXtKsKUnC2yzVfjU30oKS7WC8rHnswGiOJpjIE/JhznMd7YrkhAp2cm3g8da4pAXlnDg==
   dependencies:
     anchor-js "4.2.2"
     concat-stream "2.0.0"
@@ -13178,10 +13178,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.3.0.tgz#5355172951432a0e17147ce8a943ecc5d037586f"
-  integrity sha512-Wwi3ghSM2LQGF+1eXLwyFnqxY7HRoLZOcIHJgrDVczOyHjEql0klUTy21c83qAiJKa1ekI9k/JUe2tdFzCj2Cg==
+react-spatial@0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.3.3.tgz#037e911a5e30d6a81c28fb144d6a9b23ef0c4c4f"
+  integrity sha512-5D5v6SkQStFJkGgdrSS4okC5C18X1+pZgI/j10o3s67GyxGM/MKHC6vEvDnnhSJYMBfTVPam1kGG7s9OGhG2OQ==
   dependencies:
     query-string "^6.11.1"
     radians-degrees "^1.0.0"

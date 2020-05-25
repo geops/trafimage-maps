@@ -71,6 +71,9 @@
 
   .rs-popup {
     .rs-popup-container {
+      /* Overwrite with a very small minium width to allow small custom widths */
+      min-width: 100px;
+
       .rs-popup-body {
         padding: 0;
       }
