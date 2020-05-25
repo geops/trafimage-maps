@@ -43,8 +43,7 @@
     position: absolute;
     bottom: 40px;
     left: 10px;
-    width: 162px;
-    height: 100px;
+    width: 150px;
     z-index: 0; // under menu
     padding: 4px;
 
@@ -53,7 +52,23 @@
     }
 
     .rs-base-layer-switcher-button {
+      height: 120px;
       min-width: 150px;
+
+      &.rs-opener {
+        top: 4px;
+        left: 4px;
+      }
+    }
+
+    .rs-base-layer-switcher-close-btn {
+      height: 35px;
+      width: 35px;
+
+      svg {
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 
