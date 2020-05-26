@@ -182,12 +182,6 @@ const WebComponent = (props) => {
       return null;
     }
 
-    if (!tps) {
-      // eslint-disable-next-line no-console
-      console.error('You must provide a list of topics');
-      return [];
-    }
-
     const urlTopic = window.location.pathname.replace('/', '');
     if (urlTopic && urlTopic !== activeTopicKey) {
       return [];
