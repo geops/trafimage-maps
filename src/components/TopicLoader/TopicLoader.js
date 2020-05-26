@@ -235,6 +235,17 @@ class TopicLoader extends Component {
       .getLayersAsFlatArray()
       .filter((l) => l.getIsBaseLayer() && l.getVisible());
 
+    // In case you set the topics after the default topics are loaded, you'll loose
+    // the layers visibility set initially by the permalink parameters.
+    // We try to apply the current layers visibility to the new topics.
+    layerService.getLayersAsFlatArray().forEach((layer) => {
+      topicLayers.forEach((topicLayer) => {
+        if (layer.getKey() === topicLayer.getKey()) {
+          topicLayer.setVisible(layer.getVisible());
+        }
+      });
+    });
+
     const visibleBaseLayers = topicLayers.filter(
       (l) => l.getIsBaseLayer() && l.getVisible(),
     );
