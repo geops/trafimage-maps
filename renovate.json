@@ -1,11 +1,7 @@
 {
-  "extends": [
-    "config:base",
-    "schedule:monthly"
-  ],
+  "extends": ["config:js-lib", "schedule:monthly"],
   "baseBranches": ["release-1.1"],
   "assignees": ["@oterral"],
-  "automerge": false,
   "packageRules": [
     {
       "depTypeList": ["dependencies"],
