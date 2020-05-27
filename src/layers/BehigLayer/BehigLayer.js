@@ -43,7 +43,6 @@ class BehigLayer extends VectorLayer {
     });
 
     this.toggleLayers = options.toggleLayers || [];
-    this.behigResolutions = [750, 500, 250, 100, 50, 20, 10, 5];
 
     this.styleCache = {};
     this.visibilityKeys = [];
@@ -107,10 +106,7 @@ class BehigLayer extends VectorLayer {
       return null;
     }
 
-    const res = LayerHelper.getDataResolution(
-      resolution,
-      this.behigResolutions,
-    );
+    const res = LayerHelper.getMapboxDataResolution(resolution);
     if (feature.get('resolution') === res) {
       const status = feature.get('status');
       const cacheKey = status;

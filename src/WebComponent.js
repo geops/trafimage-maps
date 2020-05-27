@@ -75,6 +75,12 @@ const propTypes = {
   cartaroUrl: PropTypes.string,
 
   /**
+   * URL of the previous cartaro instance to use.
+   * @ignore
+   */
+  cartaroOldUrl: PropTypes.string,
+
+  /**
    * Base URL to use.
    * @ignore
    */
@@ -118,6 +124,7 @@ const attributes = {
   activeTopicKey: undefined,
   apiKey: undefined,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
@@ -164,11 +171,15 @@ const WebComponent = (props) => {
     [maxExtent],
   );
   const appTopics = useMemo(() => {
-    const tps = topics || getTopicConfig(apiKey, appName);
+    const tps = topics || getTopicConfig(appName);
+
     if (!tps) {
       // eslint-disable-next-line no-console
-      console.error('You must provide a list of topics');
-      return [];
+      console.warn(`There is no public topics for app name: ${appName}.`);
+      // It's important to return null so the permalink doesn't try to update parameters.
+      // If we return [], it will try to update paramaters and we will loose the inital
+      // parameters when the topics will be loaded.
+      return null;
     }
 
     const urlTopic = window.location.pathname.replace('/', '');
@@ -189,8 +200,11 @@ const WebComponent = (props) => {
       tps[0].active = true;
     }
     return [...tps];
-  }, [activeTopicKey, appName, topics, apiKey]);
+  }, [activeTopicKey, appName, topics]);
 
+  if (!appTopics) {
+    return null;
+  }
   return (
     <Styled styles={styles}>
       <div

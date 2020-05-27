@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from '@geops/react-ui/components/Button';
@@ -24,6 +24,8 @@ const defaultProps = {
 const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const language = useSelector((state) => state.app.language);
+  const cartaroOldUrl = useSelector((state) => state.app.cartaroOldUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
@@ -41,8 +43,8 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     return null;
   }
 
-  const PopupComponent =
-    popups[info.popupComponent || info.layer.get('popupComponent')];
+  const comp = info.popupComponent || info.layer.get('popupComponent');
+  const PopupComponent = typeof comp === 'string' ? popups[comp] : comp;
   if (!PopupComponent) {
     return null;
   }
@@ -82,29 +84,34 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   return (
     <div className="wkp-feature-information">
       <React.Suspense fallback="...loading">
-        <div className="wkp-feature-information-header">
-          <span>
-            {PopupComponent && PopupComponent.renderTitle && feature
-              ? PopupComponent.renderTitle(feature, t)
-              : layer && layer.getName() && t(layer.getName())}
-          </span>
-          <Button
-            className="wkp-close-bt"
-            title={t('Popup schliessen')}
-            onClick={() => {
-              dispatch(setFeatureInfo([]));
-              if (PopupComponent.onCloseBtClick) {
-                PopupComponent.onCloseBtClick();
-              }
-            }}
-          >
-            <MdClose focusable={false} alt={t('Popup schliessen')} />
-          </Button>
-        </div>
+        {PopupComponent && !PopupComponent.hideHeader ? (
+          <div className="wkp-feature-information-header">
+            <span>
+              {PopupComponent && PopupComponent.renderTitle && feature
+                ? PopupComponent.renderTitle(feature, t)
+                : layer && layer.getName() && t(layer.getName())}
+            </span>
+            <Button
+              className="wkp-close-bt"
+              title={t('Popup schliessen')}
+              onClick={() => {
+                dispatch(setFeatureInfo([]));
+                if (PopupComponent.onCloseBtClick) {
+                  PopupComponent.onCloseBtClick();
+                }
+              }}
+            >
+              <MdClose focusable={false} alt={t('Popup schliessen')} />
+            </Button>
+          </div>
+        ) : null}
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.getKey()}
+            cartaroOldUrl={cartaroOldUrl}
+            t={t}
             feature={features[featureIndex]}
+            language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
           />

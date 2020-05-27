@@ -22,8 +22,13 @@
     display: none;
 
     .wkp-menu-header-toggler-icon {
+      display: flex;
       width: 50px;
       text-align: center;
+
+      img {
+        padding-right: 10px;
+      }
     }
   }
 
@@ -92,5 +97,26 @@
         }
       }
     }
+  }
+}
+
+.tm-w-s,
+.tm-w-xs {
+  .wkp-menu-header {
+    .wkp-menu-header-toggler {
+      .wkp-menu-header-toggler-icon {
+        justify-content: center;
+
+        img {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.tm-w-xs {
+  .wkp-menu-header-menu-title {
+    display: none;
   }
 }

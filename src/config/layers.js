@@ -2,6 +2,7 @@ import proj4 from 'proj4';
 import TileLayer from 'ol/layer/Tile';
 import TileWMSSource from 'ol/source/TileWMS';
 import TileGrid from 'ol/tilegrid/TileGrid';
+import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
@@ -9,12 +10,18 @@ import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
+import netzkarte from '../img/netzkarte.png';
+import landeskarte from '../img/landeskarte.png';
+import landeskarteGrau from '../img/landeskarte_grau.png';
+import luftbild from '../img/luftbild.png';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer';
+import LayerHelper from '../layers/layerHelper';
 
 proj4.defs(
   'EPSG:21781',
@@ -39,42 +46,20 @@ const projectionExtent = [
   20037508.3428,
 ];
 
-const resolutions = [
-  156543.033928,
-  78271.516964,
-  39135.758482,
-  19567.879241,
-  9783.9396205,
-  4891.96981025,
-  2445.98490513,
-  1222.99245256,
-  611.496226281,
-  305.748113141,
-  152.87405657,
-  76.4370282852,
-  38.2185141426,
-  19.1092570713,
-  9.55462853565,
-  4.77731426782,
-  2.38865713391,
-  1.19432856696,
-  0.597164283478,
-  0.298582141739,
-];
-
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
   visible: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr_v2',
+  style: 'netzkarte_personenverkehr_v3',
   properties: {
     hideInLegend: true,
   },
 });
 
 let osmPointsLayers = [];
+let olListenerKey;
 const updateStations = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
@@ -102,7 +87,9 @@ const updateStations = (mbMap) => {
 };
 
 // Get list of styleLayers applied to osm_points source.
-dataLayer.once('load', () => {
+// We don't use 'once()' because when switching topics
+// (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
+dataLayer.on('load', () => {
   const { map, mbMap } = dataLayer;
   osmPointsLayers = mbMap
     .getStyle()
@@ -122,7 +109,8 @@ dataLayer.once('load', () => {
   updateStations(mbMap);
 
   // Update stations source on moveeend.
-  map.on('moveend', () => {
+  unByKey(olListenerKey);
+  olListenerKey = map.on('moveend', () => {
     updateStations(mbMap);
   });
 });
@@ -131,7 +119,10 @@ export const netzkarteLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: netzkarte,
+  },
   visible: true,
   mapboxLayer: dataLayer,
   styleLayersFilter: () => {
@@ -144,7 +135,10 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   key: 'ch.sbb.netzkarte.luftbild.group',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: luftbild,
+  },
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
@@ -156,11 +150,14 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: landeskarte,
+  },
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
-    return /pixelkarte_farbe/.test(styleLayer.id);
+    return /img_PK_farbe/.test(styleLayer.id);
   },
 });
 
@@ -168,11 +165,14 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte.grau',
   copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
-  radioGroup: 'baseLayer',
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: landeskarteGrau,
+  },
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
-    return /pixelkarte_grau/.test(styleLayer.id);
+    return /img_PK_grau/.test(styleLayer.id);
   },
 });
 
@@ -225,7 +225,6 @@ export const bahnhofplaene = new Layer({
 bahnhofplaene.setChildren([
   new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.interaktiv',
-    radioGroup: 'bahnhofplaene',
     visible: false,
     mapboxLayer: dataLayer,
     styleLayer: {
@@ -243,11 +242,11 @@ bahnhofplaene.setChildren([
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
       popupComponent: 'BahnhofplanPopup',
+      radioGroup: 'bahnhofplaene',
     },
   }),
   new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.printprodukte',
-    radioGroup: 'bahnhofplaene',
     visible: false,
     mapboxLayer: dataLayer,
     styleLayer: {
@@ -269,6 +268,7 @@ bahnhofplaene.setChildren([
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
       popupComponent: 'BahnhofplanPopup',
+      radioGroup: 'bahnhofplaene',
     },
   }),
 ]);
@@ -297,21 +297,27 @@ punctuality.setChildren([
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
-    radioGroup: 'ch.sbb.punctuality',
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
+    properties: {
+      radioGroup: 'ch.sbb.punctuality',
+    },
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: true,
-    radioGroup: 'ch.sbb.punctuality',
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
+    properties: {
+      radioGroup: 'ch.sbb.punctuality',
+    },
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     useDelayStyle: true,
-    radioGroup: 'ch.sbb.punctuality',
+    properties: {
+      radioGroup: 'ch.sbb.punctuality',
+    },
   }),
 ]);
 
@@ -347,7 +353,7 @@ export const buslines = new MapboxStyleLayer({
   styleLayer: {
     id: 'bus',
     type: 'line',
-    source: 'busline',
+    source: 'busses',
     'source-layer': 'busses',
     paint: {
       'line-color': 'rgba(255, 220, 0, 1)',
@@ -379,13 +385,14 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.getMapResolutions(),
+        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
       }),
     }),
   }),
   properties: {
     hasInfos: true,
+    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
@@ -401,8 +408,8 @@ export const parks = new TrafimageGeoServerWMSLayer({
       },
       tileGrid: new TileGrid({
         extent: projectionExtent,
-        resolutions,
-        matrixIds: resolutions.map((r, i) => `${i}`),
+        resolutions: LayerHelper.getMapResolutions(),
+        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
       }),
     }),
     opacity: 0.9,
@@ -429,13 +436,13 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
-  radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'showcase2',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.night-desc',
+    radioGroup: 'showcases',
   },
 });
 
@@ -443,13 +450,13 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.light',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
-  radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'showcase3',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.light-desc',
+    radioGroup: 'showcases',
   },
 });
 
@@ -458,13 +465,24 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isQueryable: false,
-  radioGroup: 'showcases',
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'netzkarte_personenverkehr',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte-desc',
+    radioGroup: 'showcases',
+  },
+});
+
+export const kilometrageLayer = new KilometrageLayer({
+  name: 'ch.sbb.kilometrage',
+  key: 'ch.sbb.kilometrage',
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'KilometragePopup',
   },
 });
 
@@ -664,7 +682,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur',
+  style: 'netzkarte_eisenbahninfrastruktur_v3',
   properties: {
     hasInfos: true,
     layerInfoComponent: 'InfrastrukturTopicInfo',
@@ -675,8 +693,9 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: (styleLayer) => {
-    return /_SBB/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    // negative look behind regex doesn't work on all browsers.
+    return /_SBB/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
     hasInfos: true,
@@ -701,8 +720,9 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.uebrigebahnen.group',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: (styleLayer) => {
-    return /_KTU/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    // negative look behind regex doesn't work on all browsers.
+    return /_KTU/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
     hasInfos: true,
@@ -728,7 +748,6 @@ export const grenzen = new Layer({
       children: [
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
-          radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
@@ -739,11 +758,11 @@ export const grenzen = new Layer({
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
+            radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           },
         }),
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
-          radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
@@ -754,6 +773,7 @@ export const grenzen = new Layer({
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
+            radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           },
         }),
       ],
@@ -768,7 +788,6 @@ export const grenzen = new Layer({
       children: [
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
-          radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
@@ -777,11 +796,11 @@ export const grenzen = new Layer({
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
+            radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           },
         }),
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
-          radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           visible: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
@@ -792,6 +811,7 @@ export const grenzen = new Layer({
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
+            radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           },
         }),
       ],
@@ -848,8 +868,8 @@ export const zweitausbildungStations = new Layer({
           },
           tileGrid: new TileGrid({
             extent: projectionExtent,
-            resolutions,
-            matrixIds: resolutions.map((r, i) => `${i}`),
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
           }),
         }),
       }),
@@ -888,8 +908,8 @@ export const zweitausbildungStations = new Layer({
           },
           tileGrid: new TileGrid({
             extent: projectionExtent,
-            resolutions,
-            matrixIds: resolutions.map((r, i) => `${i}`),
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
           }),
         }),
       }),
@@ -996,7 +1016,6 @@ export const zweitausbildungRoutes = new Layer({
       key: 'ch.sbb.zweitausbildung.tourist.routes.group',
       visible: false,
       isAlwaysExpanded: true,
-      radioGroup: 'zweitausbildungRoutes',
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
@@ -1010,6 +1029,7 @@ export const zweitausbildungRoutes = new Layer({
           },
           layer: 'zweitausbildung_tourist_strecken_grouped_qry',
         },
+        radioGroup: 'zweitausbildungRoutes',
       },
       children: [
         new ZweitausbildungRoutesHighlightLayer({
@@ -1032,7 +1052,6 @@ export const zweitausbildungRoutes = new Layer({
       key: 'ch.sbb.zweitausbildung.hauptlinien.group',
       visible: true,
       isAlwaysExpanded: true,
-      radioGroup: 'zweitausbildungRoutes',
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
@@ -1046,6 +1065,7 @@ export const zweitausbildungRoutes = new Layer({
           },
           layer: 'zweitausbildung_hauptlinien_grouped_qry',
         },
+        radioGroup: 'zweitausbildungRoutes',
       },
       children: [
         new ZweitausbildungRoutesHighlightLayer({

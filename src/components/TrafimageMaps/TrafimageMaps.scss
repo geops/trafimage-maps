@@ -39,24 +39,59 @@
     position: relative;
   }
 
-  .rs-base-layer-toggler {
+  .rs-base-layer-switcher {
     position: absolute;
     bottom: 50px;
     left: 10px;
-    width: 120px;
-    height: 120px;
+    width: 150px;
     z-index: 0; // under menu
+    padding: 4px;
 
-    // For some reasons, after a click on tm-base-layer-item button,
-    // we are not able to click on next and previous button anymore because
-    // they are behind the tm-base-layer-item button.
-    .rs-base-layer-item {
-      z-index: 0;
+    .rs-opener {
+      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
     }
 
-    .rs-base-layer-previous,
-    .rs-base-layer-next {
-      z-index: 1;
+    .rs-base-layer-switcher-btn-wrapper {
+      margin-right: 4px;
+    }
+
+    .rs-base-layer-switcher-button {
+      height: 120px;
+      min-width: 150px;
+      margin-right: 0;
+
+      .rs-base-layer-switcher-title {
+        font-size: inherit;     //IE
+        max-height: inherit;     //IE
+      }
+
+      &.rs-opener {
+        top: 4px;
+        left: 4px;
+      }
+    }
+
+    .rs-base-layer-switcher-close-btn {
+      height: 35px;
+      width: 35px;
+
+      svg {
+        height: 100%;
+        width: 100%;
+      }
+    }
+
+    &.rs-open {
+      width: 680px;
+
+      .rs-base-layer-switcher-close-btn,
+      .rs-base-layer-switcher-btn-wrapper {
+        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+      }
+
+      .rs-base-layer-switcher-btn-wrapper:last-child {
+        box-shadow: none;
+      }
     }
   }
 
@@ -74,6 +109,9 @@
 
   .rs-popup {
     .rs-popup-container {
+      /* Overwrite with a very small minium width to allow small custom widths */
+      min-width: 100px;
+
       .rs-popup-body {
         padding: 0;
       }
@@ -159,7 +197,7 @@
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
-    .rs-base-layer-toggler {
+    .rs-base-layer-switcher {
       display: none;
     }
 
@@ -230,7 +268,7 @@
 
     .wkp-topic-menu-item {
       margin: 4px;
-      height: 52px;
+      height: 28px;
 
       &.active {
         border-bottom: 1px solid #eee;
@@ -239,7 +277,7 @@
       .wkp-layer-toggler {
         position: absolute;
         right: 5px;
-        top: 23px;
+        top: 12px;
       }
 
       .wkp-info-topic-bt {

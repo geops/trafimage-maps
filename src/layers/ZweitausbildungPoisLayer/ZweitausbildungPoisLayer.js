@@ -24,6 +24,7 @@ class ZweitausbildungPoisLayer extends VectorLayer {
   constructor(options = {}) {
     const olLayer = new OLVectorLayer({
       style: (f) => this.style(f),
+      zIndex: options.zIndex || 0,
     });
 
     super({

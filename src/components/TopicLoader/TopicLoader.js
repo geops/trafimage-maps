@@ -2,6 +2,7 @@ import { MatomoContext } from '@datapunt/matomo-tracker-react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import LayerService from 'react-spatial/LayerService';
@@ -106,18 +107,21 @@ class TopicLoader extends Component {
     }
 
     if (
-      vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      apiKey !== prevProps.apiKey ||
-      vectorTilesKey !== prevProps.vectorTilesKey ||
-      vectorTilesUrl !== prevProps.vectorTilesUrl ||
-      cartaroUrl !== prevProps.cartaroUrl ||
-      appBaseUrl !== prevProps.appBaseUrl ||
-      staticFilesUrl !== prevProps.staticFilesUrl
+      activeTopic &&
+      (vectorTilesUrl !== prevProps.vectorTilesUrl ||
+        apiKey !== prevProps.apiKey ||
+        vectorTilesKey !== prevProps.vectorTilesKey ||
+        cartaroUrl !== prevProps.cartaroUrl ||
+        appBaseUrl !== prevProps.appBaseUrl ||
+        staticFilesUrl !== prevProps.staticFilesUrl)
     ) {
       this.updateServices(activeTopic);
     }
 
-    if (language !== prevProps.language) {
+    if (
+      activeTopic &&
+      (language !== prevProps.language || apiKey !== prevProps.apiKey)
+    ) {
       this.updateLayers(activeTopic.layers);
     }
   }
@@ -132,7 +136,7 @@ class TopicLoader extends Component {
       dispatchSetActiveTopic,
     } = this.props;
 
-    // Load onl ytopics when permissions are loaded, to avoid double loading.
+    // Load only topics when permissions are loaded, to avoid double loading.
     if (!topics.length) {
       return;
     }
@@ -194,6 +198,12 @@ class TopicLoader extends Component {
       return;
     }
 
+    if (activeTopic.translations) {
+      Object.entries(activeTopic.translations).forEach(([lang, trans]) => {
+        i18next.addResourceBundle(lang, 'translation', trans);
+      });
+    }
+
     this.updateLayers(activeTopic.layers);
 
     const newSearchService = new SearchService();
@@ -210,6 +220,7 @@ class TopicLoader extends Component {
 
   updateLayers(topicLayers) {
     const {
+      apiKey,
       language,
       layerService,
       dispatchSetLayers,
@@ -223,6 +234,17 @@ class TopicLoader extends Component {
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
       .filter((l) => l.getIsBaseLayer() && l.getVisible());
+
+    // In case you set the topics after the default topics are loaded, you'll loose
+    // the layers visibility set initially by the permalink parameters.
+    // We try to apply the current layers visibility to the new topics.
+    layerService.getLayersAsFlatArray().forEach((layer) => {
+      topicLayers.forEach((topicLayer) => {
+        if (layer.getKey() === topicLayer.getKey()) {
+          topicLayer.setVisible(layer.getVisible());
+        }
+      });
+    });
 
     const visibleBaseLayers = topicLayers.filter(
       (l) => l.getIsBaseLayer() && l.getVisible(),
@@ -264,6 +286,15 @@ class TopicLoader extends Component {
       }
       if (flatLayers[i].setStaticFilesUrl) {
         flatLayers[i].setStaticFilesUrl(staticFilesUrl);
+      }
+
+      if (
+        apiKey &&
+        flatLayers[i].setApiKey &&
+        flatLayers[i].getApiKey &&
+        !flatLayers[i].getApiKey()
+      ) {
+        flatLayers[i].setApiKey(apiKey);
       }
     }
   }

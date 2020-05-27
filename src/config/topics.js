@@ -13,6 +13,7 @@ import defaultBaseLayers, {
   netzkarteShowcasesNetzkarte,
   parks,
   stuetzpunktbahnhoefe,
+  kilometrageLayer,
   constrUnterhalt,
   constrAusbau,
   constructionLayer,
@@ -41,7 +42,7 @@ const defaultElements = {
   menu: true,
   permalink: true,
   mapControls: true,
-  baseLayerToggler: true,
+  baseLayerSwitcher: true,
   popup: false,
   search: true,
 };
@@ -138,13 +139,14 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true },
+  elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     netzkarteEisenbahninfrastruktur,
     gewässer,
     grenzen,
     uebrigeBahnen,
     tochtergesellschaftenSBB,
+    kilometrageLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
@@ -178,7 +180,7 @@ export const showcases = {
   key: 'ch.sbb.showcases',
   elements: {
     ...defaultElements,
-    baseLayerToggler: false,
+    baseLayerSwitcher: false,
   },
   layers: [
     netzkarteShowcasesNight,
@@ -187,14 +189,6 @@ export const showcases = {
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ShowcasesTopicInfo',
-};
-
-export const infofpw = {
-  name: 'ch.sbb.infofpw',
-  key: 'ch.sbb.infofpw',
-  permission: 'sbb',
-  redirect: true,
-  layerInfoComponent: 'InfoFPWTopicInfo',
 };
 
 export const intervention = {
@@ -211,30 +205,6 @@ export const dfanachfuehrung = {
   description: 'ch.sbb.dfanachfuehrung-desc',
   redirect: true,
   permission: 'dfa-nf',
-};
-
-export const mobz = {
-  name: 'ch.sbb.mobz',
-  key: 'ch.sbb.mobz',
-  redirect: true,
-  permission: 'mobz',
-  layerInfoComponent: 'MobzTopicInfo',
-  infos: {
-    owner: 'I-NAT-NET-AN, Hannes Maichle',
-    email: 'hannes.maichle@sbb.ch',
-  },
-};
-
-export const mobzWhatIf = {
-  name: 'ch.sbb.mobz_what_if',
-  key: 'ch.sbb.mobz_what_if',
-  redirect: true,
-  permission: 'mobz_what_if',
-  layerInfoComponent: 'MobzTopicInfo',
-  infos: {
-    owner: 'I-NAT-INK, Martina Hauri',
-    email: 'martina.hauri@sbb.ch',
-  },
 };
 
 export const verbundzonen = {
@@ -255,6 +225,7 @@ export const tina = {
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
+  maxZoom: 13,
   hideInLayerTree: true,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
@@ -282,22 +253,15 @@ const topics = {
     showcases,
     zweitausbildung,
     regionenkartePrivate,
-    infofpw,
     intervention,
     dfanachfuehrung,
-    mobz,
-    mobzWhatIf,
     verbundzonen,
     tina,
   ],
   stelen: [netzkarteStelen],
 };
 
-export const getTopicConfig = (apiKey, name) => {
-  punctuality.getChildren().forEach((layer) => {
-    // eslint-disable-next-line no-param-reassign
-    layer.apiKey = apiKey;
-  });
+export const getTopicConfig = (name) => {
   return topics[name];
 };
 

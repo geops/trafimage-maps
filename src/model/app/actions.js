@@ -12,6 +12,7 @@ export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
 export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
+export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -74,3 +75,5 @@ export const setScreenWidth = (data) => ({
 });
 
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
+
+export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
