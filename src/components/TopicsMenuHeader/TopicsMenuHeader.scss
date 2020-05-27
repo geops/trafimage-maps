@@ -56,6 +56,21 @@
   }
 }
 
+.tm-w-s,
+.tm-w-xs {
+  .wkp-menu-header {
+    .wkp-menu-header-toggler {
+      .wkp-menu-header-toggler-icon {
+        justify-content: center;
+
+        img {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
 .tm-w-m,
 .tm-w-s,
 .tm-w-xs {
@@ -94,21 +109,6 @@
 
         .wkp-menu-toggle-text {
           display: block;
-        }
-      }
-    }
-  }
-}
-
-.tm-w-s,
-.tm-w-xs {
-  .wkp-menu-header {
-    .wkp-menu-header-toggler {
-      .wkp-menu-header-toggler-icon {
-        justify-content: center;
-
-        img {
-          padding: 0;
         }
       }
     }
