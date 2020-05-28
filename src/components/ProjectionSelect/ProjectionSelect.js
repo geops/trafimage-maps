@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from '../Select';
@@ -70,12 +70,25 @@ const propTypes = {
 const ProjectionSelect = ({ projections }) => {
   const dispatch = useDispatch();
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobileWidth = ['xs', 's'].includes(screenWidth);
+  const isMobileWidth = useMemo(() => {
+    return ['xs', 's'].includes(screenWidth);
+  }, [screenWidth]);
+
   const projection = useSelector((state) => state.app.projection);
-  const projectionsOptions = projections.map((p) => ({
-    label: p.label,
-    value: p.value,
-  }));
+  const projectionsOptions = useMemo(() => {
+    return projections.map((p) => ({
+      label: p.label,
+      value: p.value,
+    }));
+  }, [projections]);
+
+  const onSelectChange = useCallback(
+    (opt) => {
+      dispatch(setProjection(opt));
+    },
+    [dispatch],
+  );
+
   if (isMobileWidth) {
     return null;
   }
@@ -85,13 +98,11 @@ const ProjectionSelect = ({ projections }) => {
       value={projection}
       styles={selectStyles()}
       singleValueClassName="wkp-projection-select"
-      onChange={(opt) => {
-        dispatch(setProjection(opt));
-      }}
+      onChange={onSelectChange}
     />
   );
 };
 
 ProjectionSelect.propTypes = propTypes;
 
-export default ProjectionSelect;
+export default React.memo(ProjectionSelect);

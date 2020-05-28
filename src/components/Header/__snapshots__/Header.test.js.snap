@@ -15,7 +15,7 @@ exports[`Header match snapshots 1`] = `
       <UNDEFINED
         appBaseUrl="http://foo.de"
       />
-      <LanguageSelect />
+      <UNDEFINED />
     </div>
     <ForwardRef(SvgSbbLogo)
       className="wkp-header-sbb-logo"

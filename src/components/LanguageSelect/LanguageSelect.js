@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from '../Select';
 import { setLanguage } from '../../model/app/actions';
@@ -75,8 +75,21 @@ const LanguageSelect = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const [inputValue] = options.filter((opt) => opt.value === language);
-  const isMobileWidth = ['xs', 's'].includes(screenWidth);
+
+  const [inputValue] = useMemo(() => {
+    return options.filter((opt) => opt.value === language);
+  }, [language]);
+
+  const isMobileWidth = useMemo(() => {
+    return ['xs', 's'].includes(screenWidth);
+  }, [screenWidth]);
+
+  const onSelectChange = useCallback(
+    (opt) => {
+      dispatch(setLanguage(opt.value));
+    },
+    [dispatch],
+  );
 
   return (
     <Select
@@ -86,11 +99,9 @@ const LanguageSelect = () => {
       selectLabel={
         <SBBGlobe focusable={false} className="wkp-single-value-globe" />
       }
-      onChange={(opt) => {
-        dispatch(setLanguage(opt.value));
-      }}
+      onChange={onSelectChange}
     />
   );
 };
 
-export default LanguageSelect;
+export default React.memo(LanguageSelect);

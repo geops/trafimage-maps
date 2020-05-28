@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaInfo } from 'react-icons/fa';
@@ -25,7 +25,10 @@ const MainDialog = ({ staticFilesUrl }) => {
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobileWidth = ['xs', 's'].includes(screenWidth);
+  const isMobileWidth = useMemo(() => {
+    return ['xs', 's'].includes(screenWidth);
+  }, [screenWidth]);
+
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LayerInfosDialogName) {

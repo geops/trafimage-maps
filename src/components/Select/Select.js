@@ -64,4 +64,4 @@ const Select = ({
 Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
 
-export default Select;
+export default React.memo(Select);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -16,26 +16,35 @@ const defaultProps = {
   singleValueClassName: null,
 };
 
-const SingleValue = (props) => {
-  const { selectLabel, selectProps, data, singleValueClassName } = props;
+const SingleValue = ({
+  selectLabel,
+  selectProps,
+  data,
+  singleValueClassName,
+}) => {
+  const classNameWrapper = useMemo(() => {
+    return `wkp-single-value-wrapper${
+      selectProps.menuIsOpen ? ' wkp-select-menu-opened' : ''
+    }${singleValueClassName ? ` ${singleValueClassName}` : ''}`;
+  }, [selectProps, singleValueClassName]);
+
+  const classNameArrow = useMemo(() => {
+    return `wkp-select-toggle${
+      selectProps.menuIsOpen ? ' wkp-select-toggle-rotate' : ''
+    }`;
+  }, [selectProps]);
+
   return (
     <div
       // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
       tabIndex="0"
-      className={`wkp-single-value-wrapper${
-        selectProps.menuIsOpen ? ' wkp-select-menu-opened' : ''
-      }${singleValueClassName ? ` ${singleValueClassName}` : ''}`}
+      className={classNameWrapper}
     >
       {selectLabel}
       <div className="wkp-single-value-selected">
         {selectProps.getOptionLabel(data)}
       </div>
-      <MdKeyboardArrowDown
-        focusable={false}
-        className={`wkp-select-toggle${
-          selectProps.menuIsOpen ? ' wkp-select-toggle-rotate' : ''
-        }`}
-      />
+      <MdKeyboardArrowDown focusable={false} className={classNameArrow} />
     </div>
   );
 };
@@ -43,4 +52,4 @@ const SingleValue = (props) => {
 SingleValue.propTypes = propTypes;
 SingleValue.defaultProps = defaultProps;
 
-export default SingleValue;
+export default React.memo(SingleValue);
