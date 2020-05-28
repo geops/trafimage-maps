@@ -11,11 +11,11 @@ const selectStyles = () => {
     container: () => ({
       position: 'relative',
       height: '30px',
-      width: '135px',
+      width: '150px',
       display: 'flex',
       alignItems: 'center',
       flexDirection: 'column-reverse',
-      marginRight: '20px',
+      marginRight: '15px',
       color: '#000',
     }),
     control: () => ({
