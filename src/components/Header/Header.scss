@@ -18,21 +18,16 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     position: absolute;
     right: 10px;
     top: 0;
     left: calc(100% - 465px);
 
-    .wkp-header-right-bloc {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-
     .wkp-header-sbb-logo {
       height: 22px;
       width: 198px;
+      position: absolute;
+      right: 0;
     }
   }
 }
@@ -51,6 +46,7 @@
 
     .wkp-header-sbb-logo {
       width: 110px;
+      position: relative;
     }
   }
 }

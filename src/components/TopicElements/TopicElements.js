@@ -157,23 +157,8 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   const appElements = getComponents(appComponents, elements);
 
-  const getScreenSize = (size, widthBreakpoint) => {
-    let found = false;
-    Object.entries(widthBreakpoint).forEach((brkpt) => {
-      if (!found && size <= brkpt[1]) {
-        // eslint-disable-next-line prefer-destructuring
-        found = brkpt[0];
-      }
-    });
-    return found;
-  };
-
   const onResize = (entries, widthBreakpoint) => {
-    const [entry] = entries;
-    const rect = entry.contentRect;
-    const { width } = rect;
-    const screenWidth = getScreenSize(width, widthBreakpoint);
-    dispatch(setScreenWidth(screenWidth));
+    dispatch(setScreenWidth(widthBreakpoint));
   };
 
   return (
