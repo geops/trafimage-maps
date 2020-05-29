@@ -237,15 +237,29 @@
       top: 65px;
     }
 
+    .wkp-menu-wrapper {
+      width: 345px;
+      .wkp-topics-menu {
+        .wkp-collapsible-vertical {
+          &:not(:first-child) {
+            margin-top: 55px;
+          }
+        }
+      }
+    }
+
     // header component is enabled
     &.header {
-      .wkp-menu-wrapper {
-        top: 55px;
-        width: 345px;
-      }
-
       .wkp-topics-menu {
         margin-top: 0;
+
+        .wkp-menu-wrapper {
+          margin-top: 55px;
+
+          .wkp-collapsible-vertical {
+            margin-top: 0;
+          }
+        }
       }
     }
 

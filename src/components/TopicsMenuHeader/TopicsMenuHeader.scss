@@ -76,12 +76,12 @@
 .tm-w-xs {
   .wkp-menu-header {
     position: absolute;
-    top: -55px;
+    top: 0;
     margin: 0;
     border: 0;
     padding: 10px;
     height: 35px;
-    width: 35px;
+    width: 60px;
 
     .wkp-menu-toggler,
     .wkp-menu-layers {
@@ -100,17 +100,9 @@
 
   // header component is enabled
   &.header {
-    .wkp-menu {
-      top: 12px;
-
-      .wkp-menu-header {
-        margin: 0 0 0 10px;
-        width: 60px;
-
-        .wkp-menu-toggle-text {
-          display: block;
-        }
-      }
+    .wkp-menu-header {
+      margin: 0 0 0 10px;
+      width: 60px;
     }
   }
 }
