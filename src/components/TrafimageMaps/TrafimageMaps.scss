@@ -43,12 +43,17 @@
     position: absolute;
     bottom: 40px;
     left: 10px;
-    width: 150px;
+    width: 120px;
     z-index: 0; // under menu
-    padding: 4px;
+    padding: 12px;
 
     .rs-opener {
-      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.5s ease;
+
+      &:hover {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+      }
     }
 
     .rs-base-layer-switcher-btn-wrapper {
@@ -56,24 +61,24 @@
     }
 
     .rs-base-layer-switcher-button {
-      height: 100px;
-      min-width: 150px;
+      height: 90px;
+      min-width: 120px;
       margin-right: 0;
 
       .rs-base-layer-switcher-title {
-        font-size: inherit;     //IE
+        font-size: 12px;
         max-height: inherit;     //IE
       }
 
       &.rs-opener {
-        top: 4px;
-        left: 4px;
+        top: 12px;
+        left: 12px;
       }
     }
 
     .rs-base-layer-switcher-close-btn {
-      height: 35px;
-      width: 35px;
+      height: 30px;
+      width: 30px;
 
       svg {
         height: 100%;
@@ -86,7 +91,12 @@
 
       .rs-base-layer-switcher-close-btn,
       .rs-base-layer-switcher-btn-wrapper {
-        box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+        transition: box-shadow 0.5s ease;
+
+        &:hover {
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+        }
       }
 
       .rs-base-layer-switcher-btn-wrapper:last-child {
