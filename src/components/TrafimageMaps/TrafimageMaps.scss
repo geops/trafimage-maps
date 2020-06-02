@@ -209,11 +209,6 @@
       top: 60px;
     }
 
-    .wkp-menu-wrapper {
-      top: 0;
-      left: 0;
-    }
-
     .wkp-topics-menu {
       border: 0;
       padding: 0;
@@ -238,7 +233,10 @@
     }
 
     .wkp-menu-wrapper {
+      top: 0;
+      left: 0;
       width: 345px;
+
       .wkp-topics-menu {
         .wkp-collapsible-vertical {
           &:not(:first-child) {
