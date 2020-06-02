@@ -13,15 +13,18 @@
 .wkp-search-toggle-button {
   display: none;
   background: none;
-  border: none;
   position: absolute;
-  top: 11px;
   right: 0;
   font-size: 14px;
-  height: 30px;
   color: $brand-grey;
   align-items: center;
-  padding: 0 5px;
+
+  // Style specific when no header is defined.
+  border: 2px solid #b7b7b7;
+  background-color: white;
+  height: 40px;
+  padding: 5px;
+  top: 5px;
 
   svg {
     height: 25px;
@@ -38,6 +41,19 @@
 
     svg {
       fill: $brand-primary-hover;
+    }
+  }
+}
+
+.tm-trafimage-maps {
+  // header component is enabled
+  &.header {
+    .wkp-search-toggle-button {
+      border: none;
+      background-color: none;
+      height: 30px;
+      padding: 0 5px;
+      top: 11px;
     }
   }
 }
