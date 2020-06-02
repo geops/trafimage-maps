@@ -36,7 +36,7 @@
     .rs-zoom-out {
       margin: 10px 0;
       background: white;
-      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.9);
       border-radius: 50%;
       cursor: pointer;
       height: 40px;
@@ -44,11 +44,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      -webkit-transition: background-color 0.5s ease, color 0.5s ease;
-      transition: background-color 0.5s ease, color 0.5s ease;
+      transition: box-shadow 0.5s ease;
 
-      svg {
+      svg path {
+        transition: fill 0.5s ease;
         fill: $dark-grey;
+      }
+
+      &:hover {
+        box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+
+        svg path {
+          fill: #000;
+        }
       }
     }
   }
@@ -58,7 +66,7 @@
 .wkp-fit-extent {
   margin: 20px 0;
   background: white;
-  box-shadow: 0 1px 7px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.9);
   border-radius: 50%;
   cursor: pointer;
   height: 40px;
@@ -66,8 +74,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: box-shadow 0.5s ease;
+
+  svg path {
+    transition: fill 0.5s ease, stroke 0.5s ease;
+  }
+
+  &:hover {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+
+    svg path {
+      fill: #000;
+      stroke: #000;
+    }
+  }
 }
 
 .tm-h-s {
