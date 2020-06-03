@@ -23,11 +23,16 @@
     top: 0;
     left: calc(100% - 465px);
 
-    .wkp-header-sbb-logo {
+    .wkp-header-sbb-logo-wrapper {
+      display: flex;
+      justify-content: flex-end;
       height: 22px;
-      width: 198px;
-      position: absolute;
-      right: 0;
+      width: 100%;
+
+      .wkp-header-sbb-logo {
+        height: 100%;
+        width: 198px;
+      }
     }
   }
 }
@@ -44,8 +49,8 @@
       }
     }
 
-    .wkp-header-sbb-logo {
-      width: 110px;
+    .wkp-header-sbb-logo-wrapper {
+      width: 100px;
       position: relative;
     }
   }

@@ -17,7 +17,9 @@ const Header = ({ appBaseUrl }) => {
       <div className="wkp-header-right">
         <Login appBaseUrl={appBaseUrl} />
         <LanguageSelect />
-        <SBBLogo focusable={false} className="wkp-header-sbb-logo" />
+        <div className="wkp-header-sbb-logo-wrapper">
+          <SBBLogo focusable={false} className="wkp-header-sbb-logo" />
+        </div>
       </div>
     </UIHeader>
   );
