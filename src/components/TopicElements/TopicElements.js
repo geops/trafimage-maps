@@ -144,7 +144,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         titles={{
           button: t('Baselayerwechsel'),
           openSwitcher: t('Baselayer-Menu öffnen'),
-          closeSwitcher: t('Baselayer-Menu Schliessen'),
+          closeSwitcher: t('Baselayer-Menu schliessen'),
         }}
         closeButtonImage={<ChevronLeft />}
         t={t}
