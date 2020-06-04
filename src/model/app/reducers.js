@@ -16,8 +16,8 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSIONS_INFOS,
+  SET_SCREEN_WIDTH,
   SET_CARTARO_OLD_URL,
-  SET_IS_MOBILE_WIDTH,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 
@@ -45,7 +45,7 @@ const getInitialState = () => ({
   }),
   layerService: new LayerService(),
   searchService: new SearchService(),
-  isMobileWidth: false,
+  screenWidth: null,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -126,10 +126,10 @@ export default function app(state = getInitialState(), action) {
         ...state,
         cartaroOldUrl: action.data,
       };
-    case SET_IS_MOBILE_WIDTH:
+    case SET_SCREEN_WIDTH:
       return {
         ...state,
-        isMobileWidth: action.data,
+        screenWidth: action.data,
       };
     default:
       return {
