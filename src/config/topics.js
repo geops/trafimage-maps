@@ -269,7 +269,7 @@ const topics = {
   stelen: [netzkarteStelen],
 };
 
-export const getTopicConfig = (apiKey, name) => {
+export const getTopicConfig = (name) => {
   return topics[name];
 };
 

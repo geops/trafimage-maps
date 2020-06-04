@@ -8,6 +8,7 @@ import React, { useRef, useEffect } from 'react';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
 import defaultBaseLayers, { buslines } from 'trafimage-maps/examples/Punctuality/layers';
+import defaultSearches from 'trafimage-maps/config/searches';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -41,12 +42,14 @@ const App = () => {
       ],
       elements: {
         footer: true,
-        header: true,
+        header: false,
         mapControls: true,
         menu: true,
         popup: true,
         permalink: false,
+        search: true,
       },
+      searches: defaultSearches,
     }];
 
     return () => {

@@ -1126,7 +1126,7 @@ export const zweitausbildungRoutes = new Layer({
 export default [
   dataLayer,
   netzkarteLayer,
-  swisstopoLandeskarteGrau,
-  swisstopoLandeskarte,
   swisstopoSwissImage,
+  swisstopoLandeskarte,
+  swisstopoLandeskarteGrau,
 ];

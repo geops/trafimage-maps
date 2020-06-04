@@ -4,15 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import UIFooter from '@geops/react-ui/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
 import Copyright from 'react-spatial/components/Copyright';
-import Select from '@geops/react-ui/components/Select';
 import MousePosition from 'react-spatial/components/MousePosition';
 import ActionLink from '@geops/react-ui/components/ActionLink';
+import ProjectionSelect from '../ProjectionSelect';
 import coordinateHelper from '../../utils/coordinateHelper';
-import {
-  setLanguage,
-  setProjection,
-  setDialogVisible,
-} from '../../model/app/actions';
+import { setDialogVisible } from '../../model/app/actions';
 import './Footer.scss';
 
 const Footer = () => {
@@ -20,7 +16,6 @@ const Footer = () => {
   const { t } = useTranslation();
   const layerService = useSelector((state) => state.app.layerService);
   const map = useSelector((state) => state.app.map);
-  const language = useSelector((state) => state.app.language);
   const projection = useSelector((state) => state.app.projection);
 
   const projections = [
@@ -54,6 +49,15 @@ const Footer = () => {
           format={(f) => `${t('Geodaten')} ${f.join(', ')}`}
           className="tm-copyright"
         />
+        <ScaleLine map={map} />
+        <ProjectionSelect projections={projections} />
+        <MousePosition
+          map={map}
+          projections={projections}
+          projectionValue={projection}
+        />
+      </div>
+      <div className="wkp-footer-right">
         <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
           {t('Kontakt')}
         </ActionLink>
@@ -71,31 +75,6 @@ const Footer = () => {
         >
           Developer Portal
         </a>
-      </div>
-
-      <div className="wkp-footer-right">
-        <MousePosition
-          map={map}
-          onChange={(evt, proj) => {
-            dispatch(setProjection(proj));
-          }}
-          projections={projections}
-          projectionValue={projection}
-        />
-        <ScaleLine map={map} />
-        <Select
-          className="wkp-language-select"
-          options={[
-            { label: 'DE', value: 'de' },
-            { label: 'FR', value: 'fr' },
-            { label: 'IT', value: 'it' },
-            { label: 'EN', value: 'en' },
-          ]}
-          value={language}
-          onChange={(e, opt) => {
-            dispatch(setLanguage(opt.value));
-          }}
-        />
       </div>
     </UIFooter>
   );

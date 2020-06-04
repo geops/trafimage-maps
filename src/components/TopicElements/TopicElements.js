@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { EventConsumer } from '@geops/create-react-web-component';
 import ResizeHandler from '@geops/react-ui/components/ResizeHandler';
 import BaseLayerSwitcher from 'react-spatial/components/BaseLayerSwitcher';
-import { setIsMobileWidth } from '../../model/app/actions';
+import { setScreenWidth } from '../../model/app/actions';
+
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -144,7 +145,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         titles={{
           button: t('Baselayerwechsel'),
           openSwitcher: t('Baselayer-Menu öffnen'),
-          closeSwitcher: t('Baselayer-Menu Schliessen'),
+          closeSwitcher: t('Baselayer-Menu schliessen'),
         }}
         closeButtonImage={<ChevronLeft />}
         t={t}
@@ -156,12 +157,8 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   const appElements = getComponents(appComponents, elements);
 
-  const onResize = (entries) => {
-    const [entry] = entries;
-    const rect = entry.contentRect;
-    const { width } = rect;
-    // tm-w-s
-    dispatch(setIsMobileWidth(width <= 768));
+  const onResize = (entries, widthBreakpoint) => {
+    dispatch(setScreenWidth(widthBreakpoint));
   };
 
   return (

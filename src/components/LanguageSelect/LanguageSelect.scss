@@ -1,15 +1,7 @@
 @import '../../globals.scss';
 
-.wkp-login {
-  margin-right: 6px;
-  padding-top: 2px;
-  color: $brand-grey;
-  display: flex;
-  align-items: center;
-
-  .wkp-login-icon {
-    float: left;
-    margin-bottom: 2px;
+.wkp-single-value-wrapper {
+  .wkp-single-value-globe {
     height: 28px;
     width: 28px;
 
@@ -21,7 +13,7 @@
   &:hover {
     color: $brand-primary-hover;
 
-    svg {
+    .wkp-single-value-globe {
       path {
         stroke: $brand-primary-hover;
       }

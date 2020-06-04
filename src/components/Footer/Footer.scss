@@ -15,34 +15,49 @@
   padding: 0 5px;
 
   select {
-    height: 20px;
-    font-size: $footer-font-size;
-    border-radius: 0;
+    display: none; // Hide select from react-spatial MousePosition
+  }
+
+  input {
+    /*
+     * Hide dummyInput from react-select
+     * before issue resolved: https://github.com/JedWatson/react-select/issues/3995
+     */
+    position: absolute !important;
+    top: 0;
   }
 
   a {
-    margin: 0 5px;
-  }
-
-  .wkp-footer-left {
-    a {
-      white-space: nowrap;
+    &:hover {
+      text-decoration: none;
     }
   }
 
-  .wkp-footer-left,
-  .wkp-footer-right,
-  .rs-scale-line {
-    display: flex;
-    align-items: center;
-  }
-
   .tm-copyright {
-    margin-right: 10px;
+    position: absolute;
+    bottom: 42px;
+    right: 5px;
 
     a {
       margin: 0;
     }
+  }
+
+  .wkp-footer-right {
+    a {
+      margin: 0 10px;
+      white-space: nowrap;
+
+      &:hover {
+        color: $brand-primary-hover;
+      }
+    }
+  }
+
+  .wkp-footer-left,
+  .wkp-footer-right {
+    display: flex;
+    align-items: center;
   }
 
   .rs-scale-line {
@@ -61,29 +76,20 @@
   }
 
   .rs-mouse-position {
-    width: 320px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
+
+    select {
+      border: 1px solid #666;
+      border-radius: 0.14286em;
+    }
 
     span {
       display: block;
       margin-right: 10px;
+      max-width: 55px;
     }
-  }
-}
-
-.tm-w-l {
-  .rs-mouse-position {
-    width: 250px;
-    font-size: 11px;
-  }
-}
-
-.tm-w-l,
-.tm-w-m {
-  .rs-mouse-position {
-    width: 220px;
   }
 }
 
@@ -91,13 +97,9 @@
 .tm-w-s,
 .tm-w-xs {
   .tm-copyright {
-    position: absolute;
-    bottom: 32px;
     font-size: 11px;
-  }
-
-  .rs-mouse-position {
-    width: 320px;
+    left: 5px;
+    right: unset;
   }
 }
 
@@ -112,7 +114,9 @@
 .tm-w-xs {
   .wkp-footer-left {
     font-size: 11px;
+  }
 
+  .wkp-footer-right {
     .wkp-dev-portal-link {
       display: none;
     }

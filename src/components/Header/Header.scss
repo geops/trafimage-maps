@@ -15,48 +15,43 @@
   z-index: 1;
 
   .wkp-header-right {
-    margin-right: 10px;
+    height: 100%;
     display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    left: calc(100% - 465px);
 
-    .wkp-login {
-      margin-right: 45px;
-
-      a {
-        color: grey;
-      }
-    }
-
-    .wkp-header-sbb-logo {
+    .wkp-header-sbb-logo-wrapper {
+      display: flex;
+      justify-content: flex-end;
       height: 22px;
-      width: 198px;
+      width: 100%;
+
+      .wkp-header-sbb-logo {
+        height: 100%;
+        width: 198px;
+      }
     }
   }
 }
 
 .tm-trafimage-maps {
-  &.tm-w-l {
-    .wkp-header {
-      .wkp-login {
-        margin-right: 10px;
-      }
-    }
-  }
-
-  &.tm-w-m,
-  &.tm-w-s,
   &.tm-w-xs {
     .wkp-header {
       .wkp-login {
-        margin-right: 15px;
+        margin-right: 9px;
+
+        .wkp-login-text {
+          display: none;
+        }
       }
     }
-  }
 
-  &.tm-w-xs {
-    .wkp-header {
-      .wkp-login-text {
-        display: none;
-      }
+    .wkp-header-sbb-logo-wrapper {
+      width: 100px;
+      position: relative;
     }
   }
 }
