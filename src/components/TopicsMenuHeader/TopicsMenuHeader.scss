@@ -71,6 +71,16 @@
   }
 }
 
+.tm-w-xs {
+  .wkp-menu-header {
+    width: 35px;
+  }
+
+  .wkp-menu-header-menu-title {
+    display: none;
+  }
+}
+
 .tm-w-m,
 .tm-w-s,
 .tm-w-xs {
@@ -113,15 +123,5 @@
         }
       }
     }
-  }
-}
-
-.tm-w-xs {
-  .wkp-menu-header {
-    width: 35px;
-  }
-
-  .wkp-menu-header-menu-title {
-    display: none;
   }
 }
