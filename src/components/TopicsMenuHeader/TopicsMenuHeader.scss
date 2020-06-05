@@ -76,7 +76,7 @@
 .tm-w-xs {
   .wkp-menu-header {
     position: absolute;
-    top: 0;
+    top: -55px;
     margin: 0;
     border: 0;
     padding: 10px;
@@ -91,6 +91,7 @@
     .wkp-menu-header-toggler {
       display: flex;
       align-items: center;
+      justify-content: center;
 
       .wkp-menu-toggle-text {
         display: none;
@@ -100,14 +101,26 @@
 
   // header component is enabled
   &.header {
-    .wkp-menu-header {
-      margin: 0 0 0 10px;
-      width: 60px;
+    .wkp-menu {
+      top: 12px;
+
+      .wkp-menu-header {
+        margin: 0 0 0 10px;
+        width: 60px;
+
+        .wkp-menu-toggle-text {
+          display: block;
+        }
+      }
     }
   }
 }
 
 .tm-w-xs {
+  .wkp-menu-header {
+    width: 35px;
+  }
+
   .wkp-menu-header-menu-title {
     display: none;
   }
