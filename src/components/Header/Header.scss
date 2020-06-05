@@ -24,14 +24,14 @@
     left: calc(100% - 465px);
 
     .wkp-header-sbb-logo-wrapper {
-      display: flex;
-      justify-content: flex-end;
+      position: absolute;
+      right: 0;
       height: 22px;
-      width: 100%;
+      width: 198px;
 
       .wkp-header-sbb-logo {
         height: 100%;
-        width: 198px;
+        width: 100%;
       }
     }
   }

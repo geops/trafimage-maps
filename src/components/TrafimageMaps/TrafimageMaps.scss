@@ -224,9 +224,6 @@
       padding: 0;
 
       .wkp-menu-header {
-        padding: 7px;
-        margin: 3px 4px; //For barrier free outline
-
         .wkp-menu-title {
           display: none;
         }
@@ -243,17 +240,9 @@
     }
 
     .wkp-menu-wrapper {
-      top: 0;
+      top: 55px;
       left: 0;
       width: 345px;
-
-      .wkp-topics-menu {
-        .wkp-collapsible-vertical {
-          &:not(:first-child) {
-            margin-top: 55px;
-          }
-        }
-      }
     }
 
     // header component is enabled
