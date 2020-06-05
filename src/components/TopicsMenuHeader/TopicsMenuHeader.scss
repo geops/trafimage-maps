@@ -82,6 +82,13 @@
 }
 
 .tm-w-m,
+.tm-w-s {
+  .wkp-menu-header {
+    width: 60px;
+  }
+}
+
+.tm-w-m,
 .tm-w-s,
 .tm-w-xs {
   .wkp-menu-header {
@@ -91,7 +98,6 @@
     border: 0;
     padding: 10px;
     height: 35px;
-    width: 60px;
 
     .wkp-menu-toggler,
     .wkp-menu-layers {
