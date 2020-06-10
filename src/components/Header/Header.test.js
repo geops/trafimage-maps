@@ -8,5 +8,7 @@ describe('Header', () => {
     renderer.render(<Header appBaseUrl="http://foo.de" />);
     const tree = renderer.getRenderOutput();
     expect(tree).toMatchSnapshot();
+    // Login & LanguageSelect are snapshoted as 'UNDEFINED' due to React.Memo
+    // It will be solved in jest.v25: https://github.com/facebook/jest/issues/9216
   });
 });

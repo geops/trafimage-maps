@@ -1,5 +1,17 @@
 {
   "extends": ["config:js-lib", "schedule:monthly"],
   "baseBranches": ["release-1.1"],
-  "assignees": ["@oterral"]
+  "assignees": ["@oterral"],
+  "packageRules": [
+    {
+      "depTypeList": ["dependencies"],
+      "updateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
 }

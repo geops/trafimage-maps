@@ -3,28 +3,57 @@
 .wkp-search-toggle-container,
 .wkp-search-toggle-container--open {
   max-width: 400px;
+  min-width: 300px;
   position: relative;
-  margin: 0 auto;
+  padding-top: 2px;
+  margin: auto;
+  z-index: 1;
 }
 
 .wkp-search-toggle-button {
   display: none;
   background: none;
-  border: none;
   position: absolute;
-  top: 11px;
-  right: 200px;
-  width: 39px;
+  right: 0;
+  font-size: 14px;
+  color: $brand-grey;
+  align-items: center;
+
+  // Style specific when no header is defined.
+  border: 2px solid #b7b7b7;
+  background-color: white;
+  height: 40px;
+  padding: 5px;
+  top: 5px;
 
   svg {
     height: 25px;
     width: 25px;
-    fill: grey;
+    fill: $brand-grey;
+  }
+
+  span {
+    padding-left: 2px;
   }
 
   &:hover {
+    color: $brand-primary-hover;
+
     svg {
-      fill: $brand-primary;
+      fill: $brand-primary-hover;
+    }
+  }
+}
+
+.tm-trafimage-maps {
+  // header component is enabled
+  &.header {
+    .wkp-search-toggle-button {
+      border: none;
+      background-color: none;
+      height: 30px;
+      padding: 0 5px;
+      top: 11px;
     }
   }
 }

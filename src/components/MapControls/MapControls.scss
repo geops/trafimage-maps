@@ -1,23 +1,19 @@
-.wkp-map-controls {
-  position: absolute;
-  right: 15px;
-  top: 110px;
+@import '../../globals.scss';
 
-  .rs-zooms-bar {
-    .rs-zoom-in,
-    .rs-zoom-out {
-      margin: 10px 0;
-      background: #003d85;
-      border-radius: 50%;
-      color: white;
-      cursor: pointer;
-      height: 40px;
-      width: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      -webkit-transition: background-color 0.5s ease, color 0.5s ease;
-      transition: background-color 0.5s ease, color 0.5s ease;
+.wkp-geolocation {
+  svg {
+    fill: $dark-grey;
+  }
+}
+
+.wkp-fit-extent {
+  svg {
+    height: 30px;
+    width: 30px;
+
+    path {
+      stroke: $dark-grey;
+      fill: $dark-grey;
     }
   }
 }
@@ -25,17 +21,69 @@
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;
-  background: #003d85;
+  background: white;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.9);
   border-radius: 50%;
-  color: white;
   cursor: pointer;
   height: 40px;
   width: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  -webkit-transition: background-color 0.5s ease, color 0.5s ease;
-  transition: background-color 0.5s ease, color 0.5s ease;
+  transition: box-shadow 0.5s ease;
+
+  svg path {
+    transition: fill 0.5s ease, stroke 0.5s ease;
+  }
+
+  &:hover {
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.9);
+
+    svg path {
+      fill: #000;
+      stroke: #000;
+    }
+  }
+}
+
+.wkp-map-controls {
+  position: absolute;
+  right: 15px;
+  top: 110px;
+
+  .rs-zooms-bar {
+    .ol-zoomslider {
+      border: 1px solid #5a5a5a;
+
+      .ol-zoomslider-thumb {
+        background: $dark-grey;
+      }
+    }
+
+    .rs-zoom-in,
+    .rs-zoom-out {
+      margin: 10px 0;
+      background: white;
+      box-shadow: 0 0 7px rgba(0, 0, 0, 0.9);
+      border-radius: 50%;
+      cursor: pointer;
+      height: 40px;
+      width: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: box-shadow 0.5s ease;
+
+      svg path {
+        transition: fill 0.5s ease;
+        fill: $dark-grey;
+      }
+
+      &:hover {
+        box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.9);
+      }
+    }
+  }
 }
 
 .tm-h-s {

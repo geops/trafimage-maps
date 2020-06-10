@@ -17,7 +17,6 @@ function NetzkartePopup({ feature }) {
   const [showPlanLinks, setShowPlanLinks] = useState(false);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
-  const language = useSelector((state) => state.app.language);
   const projection = useSelector((state) => state.app.projection);
 
   const { t } = useTranslation();
@@ -58,18 +57,15 @@ function NetzkartePopup({ feature }) {
     '{stationname}',
     escape(name),
   );
+
   const stationServiceUrl = t('station_service_url').replace(
     '{didok}',
     escape(didok),
   );
-  const handicapUrl = t('handicap_url').replace('{didok}', escape(didok));
-  const shoppingLangUrl = feature.get(`url_shopping_${language}`);
 
   let airportLabel;
   let stationTimetableLink;
   let stationServiceLink;
-  let handicapLink;
-  let shoppingLink;
 
   const transportLink = (
     <div>
@@ -102,25 +98,7 @@ function NetzkartePopup({ feature }) {
     stationServiceLink = (
       <div>
         <a href={stationServiceUrl} rel="noopener noreferrer" target="_blank">
-          {t('Services am Bahnhof')}
-        </a>
-      </div>
-    );
-
-    handicapLink = (
-      <div>
-        <a href={handicapUrl} rel="noopener noreferrer" target="_blank">
-          {t('Reisende mit Handicap')}
-        </a>
-      </div>
-    );
-  }
-
-  if (shoppingLangUrl && layer !== 'ship') {
-    shoppingLink = (
-      <div>
-        <a href={shoppingLangUrl} rel="noopener noreferrer" target="_blank">
-          {t('Shopping im Bahnhof')}
+          {t('Webseite Bahnhof')}
         </a>
       </div>
     );
@@ -201,8 +179,6 @@ function NetzkartePopup({ feature }) {
       {stationTimetableLink}
       {transportLink}
       {stationServiceLink}
-      {shoppingLink}
-      {handicapLink}
       {coordinatesWrapper}
     </div>
   );

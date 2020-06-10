@@ -97,5 +97,26 @@ describe('FeatureInformaion', () => {
       const tree = component.toJSON();
       expect(tree).toMatchSnapshot();
     });
+
+    test('should not display header', () => {
+      const l = new Layer({
+        key: 'foo',
+      });
+      const fi = [
+        {
+          features: [new Feature(new Point([2, 2]))],
+          layer: l,
+          popupComponent: 'KilometragePopup',
+        },
+      ];
+
+      const component = renderer.create(
+        <Provider store={store}>
+          <FeatureInformation featureInfo={fi} />
+        </Provider>,
+      );
+      const tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
 });
