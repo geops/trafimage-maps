@@ -6,7 +6,6 @@ import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
-import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
@@ -58,25 +57,61 @@ export const dataLayer = new TrafimageMapboxLayer({
   },
 });
 
-let osmPointsLayers = [];
+export const handicapDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.handicap.data',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'ch.sbb.handicap',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+const dataLayers = {
+  'ch.sbb.netzkarte.data': {
+    pointLayer: [],
+    featId: (id) => id * 1000,
+    filter: (layer) => {
+      return (
+        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+      );
+    },
+    sourceId: 'stations',
+  },
+  'ch.sbb.handicap.data': {
+    pointLayer: [],
+    featId: (id) => id,
+    filter: (layer) => {
+      // return layer['source-layer'] === 'ch.sbb.handicap';
+      return (
+        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+      );
+    },
+    sourceId: 'handicapSource',
+  },
+};
+
 let olListenerKey;
-const updateStations = (mbMap) => {
+
+const updateStations = (mbMap, layers, sourceId, featId) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
     const osmPointsRendered = mbMap
       .queryRenderedFeatures({
-        layers: osmPointsLayers,
+        layers,
       })
       .map((feat) => {
         const good = {
-          id: feat.id * 1000,
+          id: featId(feat.id),
           type: feat.type,
           properties: feat.properties,
           geometry: feat.geometry,
         };
         return good;
       });
-    const source = mbMap.getSource('stations');
+    const source = mbMap.getSource(sourceId);
     if (source) {
       source.setData({
         type: 'FeatureCollection',
@@ -86,32 +121,29 @@ const updateStations = (mbMap) => {
   });
 };
 
-// Get list of styleLayers applied to osm_points source.
-// We don't use 'once()' because when switching topics
-// (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
-dataLayer.on('load', () => {
-  const { map, mbMap } = dataLayer;
-  osmPointsLayers = mbMap
-    .getStyle()
-    .layers.filter((layer) => {
-      return (
-        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
-      );
-    })
-    .map((layer) => layer.id);
-  mbMap.addSource('stations', {
-    type: 'geojson',
-    data: {
-      type: 'FeatureCollection',
-      features: [],
-    },
-  });
-  updateStations(mbMap);
+[dataLayer, handicapDataLayer].forEach((dtLayer) => {
+  dtLayer.on('load', () => {
+    const { map, mbMap } = dataLayer;
+    let { pointLayer } = dataLayers[dtLayer.name];
+    const { featId, filter, sourceId } = dataLayers[dtLayer.name];
+    pointLayer = mbMap
+      .getStyle()
+      .layers.filter((layer) => filter(layer))
+      .map((layer) => layer.id);
+    mbMap.addSource(sourceId, {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+    updateStations(mbMap, pointLayer, sourceId, featId);
 
-  // Update stations source on moveeend.
-  unByKey(olListenerKey);
-  olListenerKey = map.on('moveend', () => {
-    updateStations(mbMap);
+    // Update stations source on moveeend.
+    unByKey(olListenerKey);
+    olListenerKey = map.on('moveend', () => {
+      updateStations(mbMap, pointLayer, sourceId, featId);
+    });
   });
 });
 
@@ -421,12 +453,18 @@ export const parks = new TrafimageGeoServerWMSLayer({
   },
 });
 
-export const stuetzpunktBahnhoefe = new HandicapLayer({
+export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
   key: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: true,
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
+  styleLayer: {
+    id: 'stuetzpunkt',
+    type: 'symbol',
+    source: 'handicapSource',
+  },
   properties: {
-    zIndex: 0,
     handicapType: 'stuetzpunkt',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -443,12 +481,18 @@ export const stuetzpunktBahnhoefe = new HandicapLayer({
   },
 });
 
-export const barrierfreierBahnhoefe = new HandicapLayer({
+export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.barrierfreierbahnhoefe',
   key: 'ch.sbb.barrierfreierbahnhoefe',
   visible: true,
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ id }) => /^barrierefrei/.test(id),
+  styleLayer: {
+    id: 'barrierefrei',
+    type: 'symbol',
+    source: 'handicapSource',
+  },
   properties: {
-    zIndex: 1,
     handicapType: 'barrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -456,12 +500,18 @@ export const barrierfreierBahnhoefe = new HandicapLayer({
   },
 });
 
-export const nichtBarrierfreierBahnhoefe = new HandicapLayer({
+export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   visible: true,
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
+  styleLayer: {
+    id: 'nicht_barrierefrei',
+    type: 'symbol',
+    source: 'handicapSource',
+  },
   properties: {
-    zIndex: 1,
     handicapType: 'notBarrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',

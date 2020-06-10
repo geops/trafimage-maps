@@ -12,6 +12,7 @@ import defaultBaseLayers, {
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
   parks,
+  handicapDataLayer,
   stuetzpunktBahnhoefe,
   barrierfreierBahnhoefe,
   nichtBarrierfreierBahnhoefe,
@@ -79,6 +80,7 @@ export const handicap = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     ...defaultBaseLayers,
+    handicapDataLayer,
     bahnhofplaene,
     nichtBarrierfreierBahnhoefe,
     barrierfreierBahnhoefe,
