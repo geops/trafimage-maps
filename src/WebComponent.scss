@@ -2,9 +2,8 @@
   @each $family in $paths {
     @font-face {
       font-family: #{$family};
-      src: url('utils/fonts/#{$family}.eot');
+      src: url('utils/fonts/#{$family}.eot?#iefix') format('embedded-opentype');
       src:
-        url('utils/fonts/#{$family}.eot?#iefix') format('embedded-opentype'),
         url('utils/fonts/#{$family}.woff2') format('woff2'),
         url('utils/fonts/#{$family}.woff') format('woff');
       font-weight: normal;
