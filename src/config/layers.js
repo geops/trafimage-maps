@@ -441,6 +441,8 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
   styleLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
   queryRenderedLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
   styleLayer: {
+    id: 'ch.sbb.stuetzpunktbahnhoefe',
+    type: 'symbol',
     source: 'ch.sbb.handicap',
     'source-layer': 'ch.sbb.handicap',
   },
@@ -469,6 +471,8 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   styleLayersFilter: ({ id }) => /^barrierefrei/.test(id),
   queryRenderedLayersFilter: ({ id }) => /^barrierefrei/.test(id),
   styleLayer: {
+    id: 'ch.sbb.barrierfreierbahnhoefe',
+    type: 'symbol',
     source: 'ch.sbb.handicap',
     'source-layer': 'ch.sbb.handicap',
   },
@@ -488,6 +492,8 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   styleLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
   queryRenderedLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
   styleLayer: {
+    id: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+    type: 'symbol',
     source: 'ch.sbb.handicap',
     'source-layer': 'ch.sbb.handicap',
   },
