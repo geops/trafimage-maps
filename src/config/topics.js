@@ -34,10 +34,7 @@ import defaultBaseLayers, {
   zweitausbildungRoutes,
   zweitausbildungStations,
 } from './layers';
-import defaultSearches, {
-  handicapStopFinder,
-  handicapNoInfoFinder,
-} from './searches';
+import defaultSearches, { handicapStopFinder } from './searches';
 
 const defaultElements = {
   header: true,
@@ -90,8 +87,7 @@ export const handicap = {
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
     // prettier-ignore
-    'Stützpunktbahnhöfe': handicapStopFinder,
-    'Stationen ohne Informationen': handicapNoInfoFinder,
+    'Stationen': handicapStopFinder
   },
 };
 
