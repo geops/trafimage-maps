@@ -12,6 +12,7 @@ import defaultBaseLayers, {
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
   parks,
+  handicapDataLayer,
   stuetzpunktBahnhoefe,
   barrierfreierBahnhoefe,
   nichtBarrierfreierBahnhoefe,
@@ -33,10 +34,7 @@ import defaultBaseLayers, {
   zweitausbildungRoutes,
   zweitausbildungStations,
 } from './layers';
-import defaultSearches, {
-  handicapStopFinder,
-  handicapNoInfoFinder,
-} from './searches';
+import defaultSearches, { handicapStopFinder } from './searches';
 
 const defaultElements = {
   header: true,
@@ -79,6 +77,7 @@ export const handicap = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     ...defaultBaseLayers,
+    handicapDataLayer,
     bahnhofplaene,
     nichtBarrierfreierBahnhoefe,
     barrierfreierBahnhoefe,
@@ -88,8 +87,7 @@ export const handicap = {
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
     // prettier-ignore
-    'Stützpunktbahnhöfe': handicapStopFinder,
-    'Stationen ohne Informationen': handicapNoInfoFinder,
+    'Stationen': handicapStopFinder
   },
 };
 

@@ -219,6 +219,9 @@ class MapboxStyleLayer extends Layer {
 
   setHoverState(features = [], state) {
     const options = this.styleLayers[0];
+    if (!options) {
+      return;
+    }
     features.forEach((feature) => {
       if ((!options.source && !options['source-layer']) || !feature.getId()) {
         if (!feature.getId()) {

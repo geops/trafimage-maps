@@ -6,7 +6,6 @@ import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
 import TrajservLayer from 'react-transit/layers/TrajservLayer';
-import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
@@ -58,8 +57,21 @@ export const dataLayer = new TrafimageMapboxLayer({
   },
 });
 
+export const handicapDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.handicap.data',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'ch.sbb.handicap',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
 let osmPointsLayers = [];
 let olListenerKey;
+
 const updateStations = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
@@ -421,12 +433,20 @@ export const parks = new TrafimageGeoServerWMSLayer({
   },
 });
 
-export const stuetzpunktBahnhoefe = new HandicapLayer({
+export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
   key: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: true,
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
+  styleLayer: {
+    id: 'ch.sbb.stuetzpunktbahnhoefe',
+    type: 'symbol',
+    source: 'ch.sbb.handicap',
+    'source-layer': 'ch.sbb.handicap',
+  },
   properties: {
-    zIndex: 0,
     handicapType: 'stuetzpunkt',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -443,12 +463,20 @@ export const stuetzpunktBahnhoefe = new HandicapLayer({
   },
 });
 
-export const barrierfreierBahnhoefe = new HandicapLayer({
+export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.barrierfreierbahnhoefe',
   key: 'ch.sbb.barrierfreierbahnhoefe',
   visible: true,
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ id }) => /^barrierefrei/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /^barrierefrei/.test(id),
+  styleLayer: {
+    id: 'ch.sbb.barrierfreierbahnhoefe',
+    type: 'symbol',
+    source: 'ch.sbb.handicap',
+    'source-layer': 'ch.sbb.handicap',
+  },
   properties: {
-    zIndex: 1,
     handicapType: 'barrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -456,12 +484,20 @@ export const barrierfreierBahnhoefe = new HandicapLayer({
   },
 });
 
-export const nichtBarrierfreierBahnhoefe = new HandicapLayer({
+export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   visible: true,
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
+  styleLayer: {
+    id: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+    type: 'symbol',
+    source: 'ch.sbb.handicap',
+    'source-layer': 'ch.sbb.handicap',
+  },
   properties: {
-    zIndex: 1,
     handicapType: 'notBarrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
