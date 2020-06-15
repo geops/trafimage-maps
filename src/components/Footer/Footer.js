@@ -20,12 +20,12 @@ const Footer = () => {
 
   const projections = [
     {
-      label: 'CH1093 / LV03',
+      label: 'CH1903 / LV03',
       value: 'EPSG:21781',
       format: (c) => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
     },
     {
-      label: 'CH1093+ / LV95',
+      label: 'CH1903+ / LV95',
       value: 'EPSG:2056',
       format: (c) => `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
     },
