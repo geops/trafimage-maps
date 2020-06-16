@@ -4,6 +4,7 @@
       font-family: #{$family};
       src: url('utils/fonts/#{$family}.eot');
       src:
+        url('utils/fonts/#{$family}.eot?#iefix') format('embedded-opentype'),
         url('utils/fonts/#{$family}.woff') format('woff'),
         url('utils/fonts/#{$family}.woff2') format('woff2');
       font-weight: normal;
