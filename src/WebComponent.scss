@@ -1,7 +1,7 @@
-@mixin loadFonts($paths...) {
+@mixin loadFonts($fontFamily, $paths...) {
   @each $family in $paths {
     @font-face {
-      font-family: #{$family};
+      font-family: #{$fontFamily};
       src: url('utils/fonts/#{$family}.eot');
       src:
         url('utils/fonts/#{$family}.eot?#iefix') format('embedded-opentype'),
@@ -13,8 +13,8 @@
   }
 }
 
-@include loadFonts('SBBWeb-Roman');
-@include loadFonts('SBBWeb-Bold');
+@include loadFonts('SBBWeb Roman', 'SBBWeb-Roman');
+@include loadFonts('SBBWeb Bold', 'SBBWeb-Bold');
 
 @import 'globals.scss';
 
