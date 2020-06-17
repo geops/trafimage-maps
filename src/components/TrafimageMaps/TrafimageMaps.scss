@@ -186,7 +186,6 @@
   &.tm-w-xs {
     .wkp-search {
       min-width: unset;
-      left: 55px;
     }
 
     .wkp-search-toggle-container--open {
@@ -362,6 +361,7 @@
 
     .wkp-search {
       right: 220px;
+      left: 80px;
 
       .wkp-search-toggle-button {
         margin-right: -45px;
@@ -378,6 +378,7 @@
 
     .wkp-search {
       right: 10px;
+      left: 55px;
 
       .wkp-search-toggle-button {
         margin-right: -40px;
