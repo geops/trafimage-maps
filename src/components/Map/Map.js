@@ -9,6 +9,7 @@ import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
+import MapAccessibility from '../MapAccessibility';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 
@@ -253,6 +254,7 @@ class Map extends PureComponent {
             extent: maxExtent,
           }}
         />
+        <MapAccessibility layers={layers} map={map} />
       </>
     );
   }
