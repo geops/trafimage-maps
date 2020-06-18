@@ -16,6 +16,7 @@ const KEYCODE_ENTER = 13;
  */
 const MapAccessibility = ({ layers, map }) => {
   useEffect(() => {
+    const mapTarget = map.getTarget();
     let tabFeature;
     let tabLayer;
     let tabFeatureIndex = 0;
@@ -27,7 +28,7 @@ const MapAccessibility = ({ layers, map }) => {
           .filter((l) => l.getVisible() && l.properties.hasAccessibility)
           .map((l) => l.getVisibleChildren())
           .flat();
-        if (document.body === document.activeElement && tabLayer) {
+        if (mapTarget === document.activeElement && tabLayer) {
           if (tabLayer.isTrackerLayer) {
             const extent = map.getView().calculateExtent();
             const trajectories = tabLayer.tracker

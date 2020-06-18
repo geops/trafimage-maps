@@ -253,6 +253,7 @@ class Map extends PureComponent {
             maxZoom,
             extent: maxExtent,
           }}
+          tabIndex={0}
         />
         <MapAccessibility layers={layers} map={map} />
       </>
