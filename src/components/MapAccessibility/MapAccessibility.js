@@ -43,7 +43,7 @@ const MapAccessibility = ({ layers, map }) => {
 
             if (tabFeature) {
               tabLayer.tracker.setHoverVehicleId(tabFeature.id);
-              tabFeatureIndex += 1;
+              tabFeatureIndex += e.shiftKey ? -1 : 1;
               e.preventDefault();
             } else {
               tabLayer.tracker.setHoverVehicleId(null);
