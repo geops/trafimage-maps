@@ -30,11 +30,16 @@ const MapAccessibility = ({ layers, map }) => {
         if (document.body === document.activeElement && tabLayer) {
           if (tabLayer.isTrackerLayer) {
             const extent = map.getView().calculateExtent();
-            tabFeature = tabLayer.tracker
+            const trajectories = tabLayer.tracker
               .getTrajectories()
-              .filter((t) => containsCoordinate(extent, t.coordinate))[
-              tabFeatureIndex
-            ];
+              .filter(
+                (t) => t.coordinate && containsCoordinate(extent, t.coordinate),
+              );
+            trajectories.sort((a, b) =>
+              a.coordinate[0] < b.coordinate[0] ? -1 : 1,
+            );
+            tabFeature = trajectories[tabFeatureIndex];
+
             if (tabFeature) {
               tabLayer.tracker.setHoverVehicleId(tabFeature.id);
               tabFeatureIndex += 1;
