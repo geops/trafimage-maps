@@ -1,5 +1,8 @@
 import { containsCoordinate } from 'ol/extent';
+import OLMap from 'ol/Map';
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import Layer from 'react-spatial/layers/Layer';
 
 const KEYCODE_TAB = 9;
 const KEYCODE_ENTER = 13;
@@ -63,6 +66,11 @@ const MapAccessibility = ({ layers, map }) => {
   });
 
   return null;
+};
+
+MapAccessibility.propTypes = {
+  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
+  map: PropTypes.instanceOf(OLMap).isRequired,
 };
 
 export default MapAccessibility;
