@@ -20,8 +20,7 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc, layerFilter) => {
         if (mbMap.getLayer(styleLayer.id)) {
           mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
           if (layerFilter) {
-            const filterToAdd =
-              styleLayer && styleLayer.filter ? styleLayer.filter : ['all'];
+            const filterToAdd = styleLayer.filter ? styleLayer.filter : ['all'];
             if (visible && !filterToAdd.includes('all')) {
               filterToAdd.unshift('all');
             }
