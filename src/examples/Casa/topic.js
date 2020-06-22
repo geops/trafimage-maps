@@ -39,7 +39,7 @@ const netzkarteLayer = new TrafimageMapboxLayer({
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
-  style: 'netzkarte_personenverkehr_v3',
+  style: 'base_bright_v1',
   properties: {
     radioGroup: 'baseLayer',
   },
@@ -59,7 +59,7 @@ netzkarteLayer.on('load', () => {
 export const netzkarteLayerLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte-labels',
   visible: true,
-  style: 'netzkarte_personenverkehr_v3',
+  style: 'base_bright_v1',
 });
 
 // Display only symbols and circle styles
