@@ -20,18 +20,25 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc, layerFilter) => {
         if (mbMap.getLayer(styleLayer.id)) {
           mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
           if (layerFilter) {
-            const filterToAdd = styleLayer.filter ? styleLayer.filter : ['all'];
-            if (visible && !filterToAdd.includes('all')) {
-              filterToAdd.unshift('all');
+            let currentFilter = mbMap.getFilter(styleLayer.id);
+
+            if (
+              visible &&
+              styleLayer &&
+              currentFilter &&
+              !currentFilter.includes('all')
+            ) {
+              currentFilter = ['all', currentFilter];
             }
             const newFilters = visible
-              ? [...filterToAdd, layerFilter]
-              : (styleLayer.filter || []).filter((f) =>
-                  layerFilter.includes(f),
+              ? [...currentFilter, layerFilter]
+              : (currentFilter || []).filter(
+                  (filter) =>
+                    JSON.stringify(filter) !== JSON.stringify(layerFilter),
                 );
             mbMap.setFilter(
               styleLayer.id,
-              newFilters.length ? newFilters : ['all'],
+              newFilters.length ? newFilters : currentFilter,
             );
           }
         }
