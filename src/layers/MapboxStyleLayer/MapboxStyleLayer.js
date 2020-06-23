@@ -5,7 +5,7 @@ import Layer from 'react-spatial/layers/Layer';
  * Apply visibility to style layers that fits the filter function.
  * @private
  */
-const applyLayoutVisibility = (mbMap, visible, filterFunc, layerFilter) => {
+const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
   const style = mbMap.getStyle();
 
   if (!mbMap || !style) {
@@ -19,28 +19,6 @@ const applyLayoutVisibility = (mbMap, visible, filterFunc, layerFilter) => {
       if (filterFunc(styleLayer)) {
         if (mbMap.getLayer(styleLayer.id)) {
           mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
-          if (layerFilter) {
-            let currentFilter = mbMap.getFilter(styleLayer.id);
-
-            if (
-              visible &&
-              styleLayer &&
-              currentFilter &&
-              !currentFilter.includes('all')
-            ) {
-              currentFilter = ['all', currentFilter];
-            }
-            const newFilters = visible
-              ? [...currentFilter, layerFilter]
-              : (currentFilter || []).filter(
-                  (filter) =>
-                    JSON.stringify(filter) !== JSON.stringify(layerFilter),
-                );
-            mbMap.setFilter(
-              styleLayer.id,
-              newFilters.length ? newFilters : currentFilter,
-            );
-          }
         }
       }
     }
@@ -73,8 +51,18 @@ class MapboxStyleLayer extends Layer {
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
-    this.filters = options.filters;
+
     this.hidePopupFunc = options.hidePopup;
+    if (options.filters) {
+      this.addDynamicFilters =
+        typeof options.filters === 'function'
+          ? () => {
+              this.setFilter(options.filters(this));
+            }
+          : () => {
+              this.setFilter(options.filters);
+            };
+    }
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
@@ -125,7 +113,6 @@ class MapboxStyleLayer extends Layer {
             mbMap,
             layer.getVisible(),
             this.styleLayersFilter,
-            this.filters,
           );
         }
       }),
@@ -134,7 +121,14 @@ class MapboxStyleLayer extends Layer {
     this.olListenersKeys.push(
       this.mapboxLayer.on('change:styleurl', () => {
         this.addStyleLayers();
+        if (this.addDynamicFilters) {
+          this.addDynamicFilters();
+        }
       }),
+      // this.addDynamicFilters &&
+      //   this.map.on('moveend', () => {
+      //     this.addDynamicFilters();
+      //   }),
     );
   }
 
@@ -163,12 +157,7 @@ class MapboxStyleLayer extends Layer {
         mbMap.addLayer(styleLayer);
       }
     });
-    applyLayoutVisibility(
-      mbMap,
-      this.getVisible(),
-      this.styleLayersFilter,
-      this.filters,
-    );
+    applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
   }
 
   removeStyleLayers() {
@@ -223,6 +212,15 @@ class MapboxStyleLayer extends Layer {
 
   getFeatures2(resolve) {
     resolve(this.getFeatures());
+  }
+
+  setFilter(filter) {
+    const { mbMap } = this.mapboxLayer;
+    this.styleLayers.forEach(({ id }) => {
+      if (mbMap.getLayer(id)) {
+        mbMap.setFilter(id, filter);
+      }
+    });
   }
 
   setHoverState(features = [], state) {

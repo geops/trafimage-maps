@@ -1,17 +1,19 @@
-@mixin loadFont($fontFamily, $path) {
-  @font-face {
-    font-family: #{$fontFamily};
-    src: url('utils/fonts/#{$path}.eot');
-    src:
-      url('utils/fonts/#{$path}.woff') format('woff'),
-      url('utils/fonts/#{$path}.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+@mixin loadFonts($paths...) {
+  @each $family in $paths {
+    @font-face {
+      font-family: #{$family};
+      src: url('utils/fonts/#{$family}.eot');
+      src:
+        url('utils/fonts/#{$family}.woff2') format('woff2'),
+        url('utils/fonts/#{$family}.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
   }
 }
 
-@include loadFont('SBBWeb Roman', 'SBBWeb-Roman');
-@include loadFont('SBBWeb Bold', 'SBBWeb-Bold');
+@include loadFonts('SBBWeb-Roman');
+@include loadFonts('SBBWeb-Bold');
 
 @import 'globals.scss';
 
