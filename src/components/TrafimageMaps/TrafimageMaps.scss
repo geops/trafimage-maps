@@ -121,8 +121,10 @@
     bottom: 0;
     right: 0;
     left: 0;
+  }
 
-    &:focus {
+  :not(.tm-no-focus) {
+    .rs-map:focus {
       animation: blink 0.3s linear;
     }
   }
