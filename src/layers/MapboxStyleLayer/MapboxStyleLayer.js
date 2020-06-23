@@ -74,6 +74,7 @@ class MapboxStyleLayer extends Layer {
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
     this.filters = options.filters;
+    this.hidePopupFunc = options.hidePopup;
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
@@ -148,6 +149,10 @@ class MapboxStyleLayer extends Layer {
       this.removeStyleLayers();
     }
     super.terminate(map);
+  }
+
+  hidePopup() {
+    return this.hidePopupFunc;
   }
 
   addStyleLayers() {
