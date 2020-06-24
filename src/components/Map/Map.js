@@ -74,11 +74,6 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
-    unByKey([
-      this.onPointerDownRef,
-      this.onPointerMoveRef,
-      this.onSingleClickRef,
-    ]);
     this.onPointerDownRef = map.on('pointerdown', (e) => this.onPointerDown(e));
     this.onPointerMoveRef = map.on('pointermove', (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', (e) => this.onSingleClick(e));
