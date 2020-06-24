@@ -1,51 +1,4 @@
-/* eslint-disable no-param-reassign */
 import Layer from 'react-spatial/layers/Layer';
-
-/**
- * Apply visibility to style layers that fits the filter function.
- * @private
- */
-const applyLayoutVisibility = (mbMap, visible, filterFunc, layerFilter) => {
-  const style = mbMap.getStyle();
-
-  if (!mbMap || !style) {
-    return;
-  }
-
-  if (filterFunc) {
-    const visibilityValue = visible ? 'visible' : 'none';
-    for (let i = 0; i < style.layers.length; i += 1) {
-      const styleLayer = style.layers[i];
-      if (filterFunc(styleLayer)) {
-        if (mbMap.getLayer(styleLayer.id)) {
-          mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
-          if (layerFilter) {
-            let currentFilter = mbMap.getFilter(styleLayer.id);
-
-            if (
-              visible &&
-              styleLayer &&
-              currentFilter &&
-              !currentFilter.includes('all')
-            ) {
-              currentFilter = ['all', currentFilter];
-            }
-            const newFilters = visible
-              ? [...currentFilter, layerFilter]
-              : (currentFilter || []).filter(
-                  (filter) =>
-                    JSON.stringify(filter) !== JSON.stringify(layerFilter),
-                );
-            mbMap.setFilter(
-              styleLayer.id,
-              newFilters.length ? newFilters : currentFilter,
-            );
-          }
-        }
-      }
-    }
-  }
-};
 
 /**
  * Layer for visualizing information about stations (default) or airports.
@@ -74,6 +27,16 @@ class MapboxStyleLayer extends Layer {
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
     this.filters = options.filters;
+    if (options.filters) {
+      this.addDynamicFilters =
+        typeof options.filters === 'function'
+          ? () => {
+              this.setFilter(options.filters(this));
+            }
+          : () => {
+              this.setFilter(options.filters);
+            };
+    }
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
@@ -120,11 +83,11 @@ class MapboxStyleLayer extends Layer {
         if (this.isMbMapLoaded) {
           // Once the map is loaded we can apply vsiiblity without waiting
           // the style. Mapbox take care of the application of style changes.
-          applyLayoutVisibility(
+          this.applyLayoutVisibility(
             mbMap,
             layer.getVisible(),
             this.styleLayersFilter,
-            this.filters,
+            this.filters, // for LevelLayer
           );
         }
       }),
@@ -158,11 +121,12 @@ class MapboxStyleLayer extends Layer {
         mbMap.addLayer(styleLayer);
       }
     });
-    applyLayoutVisibility(
+    this.applyLayoutVisibility(
       mbMap,
       this.getVisible(),
       this.styleLayersFilter,
-      this.filters,
+      this.filters, // for LevelLayer
+      this.properties.radioGroup, // for LevelLayer
     );
   }
 
@@ -214,6 +178,35 @@ class MapboxStyleLayer extends Layer {
         this.highlight(features);
         return { ...featureInfo, features, layer: this };
       });
+  }
+
+  /**
+   * Apply visibility to style layers that fits the filter function.
+   * @private
+   */
+  // eslint-disable-next-line class-methods-use-this
+  applyLayoutVisibility(mbMap, visible, filterFunc) {
+    const style = mbMap.getStyle();
+
+    if (!mbMap || !style) {
+      return;
+    }
+
+    if (filterFunc) {
+      const visibilityValue = visible ? 'visible' : 'none';
+      for (let i = 0; i < style.layers.length; i += 1) {
+        const styleLayer = style.layers[i];
+        if (filterFunc(styleLayer)) {
+          if (mbMap.getLayer(styleLayer.id)) {
+            mbMap.setLayoutProperty(
+              styleLayer.id,
+              'visibility',
+              visibilityValue,
+            );
+          }
+        }
+      }
+    }
   }
 
   getFeatures2(resolve) {
