@@ -287,6 +287,7 @@ export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
   properties: {
+    hasAccessibility: true,
     hasInfos: true,
     layerInfoComponent: 'PunctualityLayerInfo',
   },

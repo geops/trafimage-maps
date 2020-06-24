@@ -9,6 +9,7 @@ import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
+import MapAccessibility from '../MapAccessibility';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 
@@ -73,14 +74,18 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
-    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
+    this.onPointerDownRef = map.on('pointerdown', (e) => this.onPointerDown(e));
     this.onPointerMoveRef = map.on('pointermove', (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent('load'));
   }
 
   componentWillUnmount() {
-    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
+    unByKey([
+      this.onPointerDownRef,
+      this.onPointerMoveRef,
+      this.onSingleClickRef,
+    ]);
   }
 
   onMapMoved(evt) {
@@ -112,6 +117,13 @@ class Map extends PureComponent {
     // Propagate the ol event to the WebComponent
     const htmlEvent = new CustomEvent(evt.type, { detail: evt });
     dispatchHtmlEvent(htmlEvent);
+  }
+
+  onPointerDown() {
+    const { map } = this.props;
+    if (document.activeElement !== map.getTargetElement()) {
+      map.getTargetElement().focus();
+    }
   }
 
   onPointerMove(evt) {
@@ -252,7 +264,9 @@ class Map extends PureComponent {
             maxZoom,
             extent: maxExtent,
           }}
+          tabIndex={0}
         />
+        <MapAccessibility layers={layers} map={map} />
       </>
     );
   }

@@ -9,6 +9,12 @@
   position: absolute;
   overflow: hidden;
 
+  @keyframes blink {
+    50% {
+      opacity: 0.4;
+    }
+  }
+
   a {
     color: initial;
     text-decoration: none;
@@ -67,7 +73,7 @@
 
       .rs-base-layer-switcher-title {
         font-size: 12px;
-        max-height: inherit;     //IE
+        max-height: inherit; //IE
       }
 
       &.rs-opener {
@@ -115,6 +121,12 @@
     bottom: 0;
     right: 0;
     left: 0;
+  }
+
+  :not(.tm-no-focus) {
+    .rs-map:focus {
+      animation: blink 0.3s linear;
+    }
   }
 
   .rs-popup {
