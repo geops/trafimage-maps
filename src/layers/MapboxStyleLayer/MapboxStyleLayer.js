@@ -1,29 +1,4 @@
-/* eslint-disable no-param-reassign */
 import Layer from 'react-spatial/layers/Layer';
-
-/**
- * Apply visibility to style layers that fits the filter function.
- * @private
- */
-const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
-  const style = mbMap.getStyle();
-
-  if (!mbMap || !style) {
-    return;
-  }
-
-  if (filterFunc) {
-    const visibilityValue = visible ? 'visible' : 'none';
-    for (let i = 0; i < style.layers.length; i += 1) {
-      const styleLayer = style.layers[i];
-      if (filterFunc(styleLayer)) {
-        if (mbMap.getLayer(styleLayer.id)) {
-          mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
-        }
-      }
-    }
-  }
-};
 
 /**
  * Layer for visualizing information about stations (default) or airports.
@@ -51,6 +26,7 @@ class MapboxStyleLayer extends Layer {
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
+    this.filters = options.filters;
     if (options.filters) {
       this.addDynamicFilters =
         typeof options.filters === 'function'
@@ -107,10 +83,11 @@ class MapboxStyleLayer extends Layer {
         if (this.isMbMapLoaded) {
           // Once the map is loaded we can apply vsiiblity without waiting
           // the style. Mapbox take care of the application of style changes.
-          applyLayoutVisibility(
+          this.applyLayoutVisibility(
             mbMap,
             layer.getVisible(),
             this.styleLayersFilter,
+            this.filters, // for LevelLayer
           );
         }
       }),
@@ -151,7 +128,13 @@ class MapboxStyleLayer extends Layer {
         mbMap.addLayer(styleLayer);
       }
     });
-    applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
+    this.applyLayoutVisibility(
+      mbMap,
+      this.getVisible(),
+      this.styleLayersFilter,
+      this.filters, // for LevelLayer
+      this.properties.radioGroup, // for LevelLayer
+    );
   }
 
   removeStyleLayers() {
@@ -202,6 +185,35 @@ class MapboxStyleLayer extends Layer {
         this.highlight(features);
         return { ...featureInfo, features, layer: this };
       });
+  }
+
+  /**
+   * Apply visibility to style layers that fits the filter function.
+   * @private
+   */
+  // eslint-disable-next-line class-methods-use-this
+  applyLayoutVisibility(mbMap, visible, filterFunc) {
+    const style = mbMap.getStyle();
+
+    if (!mbMap || !style) {
+      return;
+    }
+
+    if (filterFunc) {
+      const visibilityValue = visible ? 'visible' : 'none';
+      for (let i = 0; i < style.layers.length; i += 1) {
+        const styleLayer = style.layers[i];
+        if (filterFunc(styleLayer)) {
+          if (mbMap.getLayer(styleLayer.id)) {
+            mbMap.setLayoutProperty(
+              styleLayer.id,
+              'visibility',
+              visibilityValue,
+            );
+          }
+        }
+      }
+    }
   }
 
   getFeatures2(resolve) {
