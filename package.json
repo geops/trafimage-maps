@@ -1,6 +1,7 @@
 {
   "name": "trafimage-maps",
-  "version": "1.1.3-beta.6",
+  "version": "1.1.5-beta.1",
+  "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
@@ -187,7 +188,7 @@
       "yarn test --bail --findRelatedTests"
     ],
     "package.json": [
-      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts",
+      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop private --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts",
       "git add"
     ],
     "src/**/*.{scss}": [
