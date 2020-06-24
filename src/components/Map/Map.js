@@ -126,8 +126,8 @@ class Map extends PureComponent {
 
   onPointerDown() {
     const { map } = this.props;
-    if (document.activeElement !== map.getTarget()) {
-      map.getTarget().focus();
+    if (document.activeElement !== map.getTargetElement()) {
+      map.getTargetElement().focus();
     }
   }
 
