@@ -27,16 +27,6 @@ class MapboxStyleLayer extends Layer {
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
     this.filters = options.filters;
-    if (options.filters) {
-      this.addDynamicFilters =
-        typeof options.filters === 'function'
-          ? () => {
-              this.setFilter(options.filters(this));
-            }
-          : () => {
-              this.setFilter(options.filters);
-            };
-    }
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
@@ -96,14 +86,7 @@ class MapboxStyleLayer extends Layer {
     this.olListenersKeys.push(
       this.mapboxLayer.on('change:styleurl', () => {
         this.addStyleLayers();
-        if (this.addDynamicFilters) {
-          this.addDynamicFilters();
-        }
       }),
-      // this.addDynamicFilters &&
-      //   this.map.on('moveend', () => {
-      //     this.addDynamicFilters();
-      //   }),
     );
   }
 
@@ -192,7 +175,7 @@ class MapboxStyleLayer extends Layer {
    * @private
    */
   // eslint-disable-next-line class-methods-use-this
-  applyLayoutVisibility(mbMap, visible, filterFunc) {
+  applyLayoutVisibility(mbMap, visible, filterFunc, layerFilter) {
     const style = mbMap.getStyle();
 
     if (!mbMap || !style) {
@@ -210,6 +193,9 @@ class MapboxStyleLayer extends Layer {
               'visibility',
               visibilityValue,
             );
+            if (layerFilter) {
+              mbMap.setFilter(styleLayer.id, layerFilter);
+            }
           }
         }
       }
@@ -218,15 +204,6 @@ class MapboxStyleLayer extends Layer {
 
   getFeatures2(resolve) {
     resolve(this.getFeatures());
-  }
-
-  setFilter(filter) {
-    const { mbMap } = this.mapboxLayer;
-    this.styleLayers.forEach(({ id }) => {
-      if (mbMap.getLayer(id)) {
-        mbMap.setFilter(id, filter);
-      }
-    });
   }
 
   setHoverState(features = [], state) {
