@@ -145,8 +145,8 @@ class MapboxStyleLayer extends Layer {
     super.terminate(map);
   }
 
-  hidePopup() {
-    return this.hidePopupFunc;
+  hidePopup(feat, layer, featureInfo) {
+    return this.hidePopupFunc && this.hidePopupFunc(feat, layer, featureInfo);
   }
 
   addStyleLayers() {
