@@ -47,7 +47,13 @@ class LevelLayer extends MapboxStyleLayer {
               }
             }
             const newFilters = visible
-              ? [...currentFilter, ...layerFilter]
+              ? [...currentFilter, ...layerFilter].filter((f) => {
+                  if (f[0] === '==' && f[1] === 'level') {
+                    // Remove if there is a ['==', 'level', x] filter with another value.
+                    return f[2] === layerFilter[0][2];
+                  }
+                  return true;
+                })
               : (currentFilter || []).filter((filter) => {
                   return layerFilter.find((f) => {
                     return JSON.stringify(filter) !== JSON.stringify(f);
