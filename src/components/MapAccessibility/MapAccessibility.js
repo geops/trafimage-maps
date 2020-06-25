@@ -33,11 +33,11 @@ const MapAccessibility = ({ layers, map }) => {
             const extent = map.getView().calculateExtent();
             const trajectories = tabLayer.tracker
               .getTrajectories()
-              .filter(
-                (t) => t.coordinate && containsCoordinate(extent, t.coordinate),
+              .filter((t) =>
+                t.coordinate ? containsCoordinate(extent, t.coordinate) : true,
               );
             trajectories.sort((a, b) =>
-              a.coordinate[0] < b.coordinate[0] ? -1 : 1,
+              a.coordinate && a.coordinate[0] < b.coordinate[0] ? -1 : 1,
             );
             tabFeature = trajectories[tabFeatureIndex];
 
