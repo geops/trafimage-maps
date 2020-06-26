@@ -183,9 +183,6 @@ class MapboxStyleLayer extends Layer {
               'visibility',
               visibilityValue,
             );
-            if (this.filters) {
-              mbMap.setFilter(styleLayer.id, this.filters);
-            }
           }
         }
       }
