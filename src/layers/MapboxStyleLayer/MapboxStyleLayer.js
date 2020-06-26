@@ -69,16 +69,11 @@ class MapboxStyleLayer extends Layer {
 
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
-      this.on('change:visible', ({ target: layer }) => {
+      this.on('change:visible', () => {
         if (this.isMbMapLoaded) {
           // Once the map is loaded we can apply vsiiblity without waiting
           // the style. Mapbox take care of the application of style changes.
-          this.applyLayoutVisibility(
-            mbMap,
-            layer.getVisible(),
-            this.styleLayersFilter,
-            this.filters, // for LevelLayer
-          );
+          this.applyLayoutVisibility();
         }
       }),
     );
@@ -111,13 +106,7 @@ class MapboxStyleLayer extends Layer {
         mbMap.addLayer(styleLayer);
       }
     });
-    this.applyLayoutVisibility(
-      mbMap,
-      this.getVisible(),
-      this.styleLayersFilter,
-      this.filters, // for LevelLayer
-      this.properties.radioGroup, // for LevelLayer
-    );
+    this.applyLayoutVisibility();
   }
 
   removeStyleLayers() {
@@ -174,27 +163,28 @@ class MapboxStyleLayer extends Layer {
    * Apply visibility to style layers that fits the filter function.
    * @private
    */
-  // eslint-disable-next-line class-methods-use-this
-  applyLayoutVisibility(mbMap, visible, filterFunc, layerFilter) {
+  applyLayoutVisibility() {
+    const visible = this.getVisible();
+    const { mbMap } = this.mapboxLayer;
     const style = mbMap.getStyle();
 
     if (!mbMap || !style) {
       return;
     }
 
-    if (filterFunc) {
+    if (this.styleLayersFilter) {
       const visibilityValue = visible ? 'visible' : 'none';
       for (let i = 0; i < style.layers.length; i += 1) {
         const styleLayer = style.layers[i];
-        if (filterFunc(styleLayer)) {
+        if (this.styleLayersFilter(styleLayer)) {
           if (mbMap.getLayer(styleLayer.id)) {
             mbMap.setLayoutProperty(
               styleLayer.id,
               'visibility',
               visibilityValue,
             );
-            if (layerFilter) {
-              mbMap.setFilter(styleLayer.id, layerFilter);
+            if (this.filters) {
+              mbMap.setFilter(styleLayer.id, this.filters);
             }
           }
         }
