@@ -237,7 +237,7 @@ bahnhofplaene.setChildren([
         'icon-ignore-placement': true,
       },
     },
-    filters: [['has', 'url_interactive_plan']],
+    filters: ['has', 'url_interactive_plan'],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
