@@ -29,17 +29,6 @@ class MapboxStyleLayer extends Layer {
     this.filters = options.filters;
 
     this.hidePopupFunc = options.hidePopup;
-    if (this.filters) {
-      this.addDynamicFilters =
-        typeof this.filters === 'function'
-          ? () => {
-              this.setFilter(this.filters(this));
-            }
-          : () => {
-              this.setFilter(this.filters);
-            };
-    }
-
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
       this.styleLayersFilter = (styleLayer) => {
