@@ -73,7 +73,8 @@ class MapboxStyleLayer extends Layer {
         if (this.isMbMapLoaded) {
           // Once the map is loaded we can apply vsiiblity without waiting
           // the style. Mapbox take care of the application of style changes.
-          this.applyLayoutVisibility();
+          // pass isInit param for LevelLayer.
+          this.applyLayoutVisibility(false);
         }
       }),
     );
@@ -106,7 +107,8 @@ class MapboxStyleLayer extends Layer {
         mbMap.addLayer(styleLayer);
       }
     });
-    this.applyLayoutVisibility();
+    // pass isInit param for LevelLayer.
+    this.applyLayoutVisibility(true);
   }
 
   removeStyleLayers() {

@@ -14,7 +14,7 @@ class LevelLayer extends MapboxStyleLayer {
   /**
    * Apply visibility to style layers that fits the filter function.
    */
-  applyLayoutVisibility() {
+  applyLayoutVisibility(isInit) {
     const visible = this.getVisible();
     const { mbMap } = this.mapboxLayer;
     const style = mbMap.getStyle();
@@ -44,6 +44,14 @@ class LevelLayer extends MapboxStyleLayer {
           ) {
             // Overwrite the nested filter value of: ['==', 'level', val]
             currentFilter[1] = this.filters;
+            if (
+              !this.properties.keepFloorId &&
+              JSON.stringify(currentFilter[2]) ===
+                JSON.stringify(['==', 'floor_id', 21229])
+            ) {
+              // Remove floor_id filter.
+              currentFilter.splice(2, 1);
+            }
           } else {
             // Overwrite the filter value of: ['==', 'level', val]
             currentFilter = [...currentFilter, this.filters].filter((f) => {
@@ -54,8 +62,12 @@ class LevelLayer extends MapboxStyleLayer {
             });
           }
 
-          // If visible set the newfilter, if not visible, reset the original one.
-          if (visible || filterCache[styleLayer.id]) {
+          // If visible and isInit, set the newfilter
+          // if not visible and not initializing, reset the original one.
+          if (
+            (!isInit && (!visible || filterCache[styleLayer.id])) ||
+            (isInit && visible)
+          ) {
             mbMap.setFilter(
               styleLayer.id,
               visible ? currentFilter : filterCache[styleLayer.id],
