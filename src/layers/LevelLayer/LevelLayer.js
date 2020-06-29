@@ -37,18 +37,18 @@ class LevelLayer extends MapboxStyleLayer {
             currentFilter[1] = [
               '==',
               ['case', ['has', 'level'], ['get', 'level'], 0],
-              this.filters[0][2],
+              this.filters[2],
             ];
           } else if (
             /stationFocus_base_shadow|^stationFocus_base$/.test(styleLayer.id)
           ) {
             // Overwrite the nested filter value of: ['==', 'level', val]
-            [currentFilter[1]] = this.filters;
+            currentFilter[1] = this.filters;
           } else {
             // Overwrite the filter value of: ['==', 'level', val]
-            currentFilter = [...currentFilter, ...this.filters].filter((f) => {
+            currentFilter = [...currentFilter, this.filters].filter((f) => {
               if (f[0] === '==' && f[1] === 'level') {
-                return f[2] === this.filters[0][2];
+                return f[2] === this.filters[2];
               }
               return true;
             });
