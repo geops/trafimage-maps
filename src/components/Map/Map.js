@@ -74,18 +74,13 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
-    this.onPointerDownRef = map.on('pointerdown', (e) => this.onPointerDown(e));
     this.onPointerMoveRef = map.on('pointermove', (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent('load'));
   }
 
   componentWillUnmount() {
-    unByKey([
-      this.onPointerDownRef,
-      this.onPointerMoveRef,
-      this.onSingleClickRef,
-    ]);
+    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
   }
 
   onMapMoved(evt) {
@@ -119,16 +114,13 @@ class Map extends PureComponent {
     dispatchHtmlEvent(htmlEvent);
   }
 
-  onPointerDown() {
-    const { map } = this.props;
-    if (document.activeElement !== map.getTargetElement()) {
-      map.getTargetElement().focus();
-    }
-  }
-
   onPointerMove(evt) {
     const { map, coordinate } = evt;
     const { layerService, featureInfo, dispatchSetFeatureInfo } = this.props;
+
+    if (document.activeElement !== map.getTargetElement()) {
+      map.getTargetElement().focus();
+    }
 
     if (map.getView().getInteracting() || map.getView().getAnimating()) {
       return;

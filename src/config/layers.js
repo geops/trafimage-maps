@@ -237,7 +237,6 @@ bahnhofplaene.setChildren([
         'icon-ignore-placement': true,
       },
     },
-    filters: ['has', 'url_interactive_plan'],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
@@ -253,17 +252,17 @@ bahnhofplaene.setChildren([
       id: 'printprodukte',
       type: 'symbol',
       source: 'stations',
+      filter: [
+        'any',
+        ['has', 'url_a4'],
+        ['has', 'url_poster'],
+        ['has', 'url_shopping'],
+      ],
       layout: {
         'icon-image': 'standort',
         'icon-ignore-placement': true,
       },
     },
-    filters: [
-      'any',
-      ['has', 'url_a4'],
-      ['has', 'url_poster'],
-      ['has', 'url_shopping'],
-    ],
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',

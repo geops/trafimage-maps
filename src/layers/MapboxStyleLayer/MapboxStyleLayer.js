@@ -1,29 +1,4 @@
-/* eslint-disable no-param-reassign */
 import Layer from 'react-spatial/layers/Layer';
-
-/**
- * Apply visibility to style layers that fits the filter function.
- * @private
- */
-const applyLayoutVisibility = (mbMap, visible, filterFunc) => {
-  const style = mbMap.getStyle();
-
-  if (!mbMap || !style) {
-    return;
-  }
-
-  if (filterFunc) {
-    const visibilityValue = visible ? 'visible' : 'none';
-    for (let i = 0; i < style.layers.length; i += 1) {
-      const styleLayer = style.layers[i];
-      if (filterFunc(styleLayer)) {
-        if (mbMap.getLayer(styleLayer.id)) {
-          mbMap.setLayoutProperty(styleLayer.id, 'visibility', visibilityValue);
-        }
-      }
-    }
-  }
-};
 
 /**
  * Layer for visualizing information about stations (default) or airports.
@@ -51,16 +26,7 @@ class MapboxStyleLayer extends Layer {
       (options.styleLayer ? [options.styleLayer] : options.styleLayers) || [];
     this.addStyleLayers = this.addStyleLayers.bind(this);
     this.onLoad = this.onLoad.bind(this);
-    if (options.filters) {
-      this.addDynamicFilters =
-        typeof options.filters === 'function'
-          ? () => {
-              this.setFilter(options.filters(this));
-            }
-          : () => {
-              this.setFilter(options.filters);
-            };
-    }
+    this.filters = options.filters;
 
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
@@ -103,15 +69,12 @@ class MapboxStyleLayer extends Layer {
 
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
-      this.on('change:visible', ({ target: layer }) => {
+      this.on('change:visible', () => {
         if (this.isMbMapLoaded) {
           // Once the map is loaded we can apply vsiiblity without waiting
           // the style. Mapbox take care of the application of style changes.
-          applyLayoutVisibility(
-            mbMap,
-            layer.getVisible(),
-            this.styleLayersFilter,
-          );
+          // pass isInit param for LevelLayer.
+          this.applyLayoutVisibility(false);
         }
       }),
     );
@@ -119,14 +82,7 @@ class MapboxStyleLayer extends Layer {
     this.olListenersKeys.push(
       this.mapboxLayer.on('change:styleurl', () => {
         this.addStyleLayers();
-        if (this.addDynamicFilters) {
-          this.addDynamicFilters();
-        }
       }),
-      // this.addDynamicFilters &&
-      //   this.map.on('moveend', () => {
-      //     this.addDynamicFilters();
-      //   }),
     );
   }
 
@@ -151,7 +107,8 @@ class MapboxStyleLayer extends Layer {
         mbMap.addLayer(styleLayer);
       }
     });
-    applyLayoutVisibility(mbMap, this.getVisible(), this.styleLayersFilter);
+    // pass isInit param for LevelLayer.
+    this.applyLayoutVisibility(true);
   }
 
   removeStyleLayers() {
@@ -204,17 +161,38 @@ class MapboxStyleLayer extends Layer {
       });
   }
 
-  getFeatures2(resolve) {
-    resolve(this.getFeatures());
+  /**
+   * Apply visibility to style layers that fits the filter function.
+   * @private
+   */
+  applyLayoutVisibility() {
+    const visible = this.getVisible();
+    const { mbMap } = this.mapboxLayer;
+    const style = mbMap.getStyle();
+
+    if (!mbMap || !style) {
+      return;
+    }
+
+    if (this.styleLayersFilter) {
+      const visibilityValue = visible ? 'visible' : 'none';
+      for (let i = 0; i < style.layers.length; i += 1) {
+        const styleLayer = style.layers[i];
+        if (this.styleLayersFilter(styleLayer)) {
+          if (mbMap.getLayer(styleLayer.id)) {
+            mbMap.setLayoutProperty(
+              styleLayer.id,
+              'visibility',
+              visibilityValue,
+            );
+          }
+        }
+      }
+    }
   }
 
-  setFilter(filter) {
-    const { mbMap } = this.mapboxLayer;
-    this.styleLayers.forEach(({ id }) => {
-      if (mbMap.getLayer(id)) {
-        mbMap.setFilter(id, filter);
-      }
-    });
+  getFeatures2(resolve) {
+    resolve(this.getFeatures());
   }
 
   setHoverState(features = [], state) {

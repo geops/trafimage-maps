@@ -24,6 +24,14 @@
     }
   }
 
+  .rs-map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+
   .tm-barrier-free {
     height: 100%;
     width: 100%;
@@ -38,6 +46,12 @@
 
     &.tm-no-focus *:focus {
       outline: none;
+    }
+
+    &:not(.tm-no-focus) {
+      .rs-map:focus {
+        animation: blink 0.3s linear;
+      }
     }
   }
 
@@ -113,20 +127,6 @@
 
   .wkp-selected {
     color: $brand-primary;
-  }
-
-  .rs-map {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-
-  :not(.tm-no-focus) {
-    .rs-map:focus {
-      animation: blink 0.3s linear;
-    }
   }
 
   .rs-popup {
