@@ -2,7 +2,8 @@
   @font-face {
     font-family: #{$fontFamily};
     src: url('utils/fonts/#{$path}.eot');
-    src: url('utils/fonts/#{$path}.woff') format('woff'),
+    src:
+      url('utils/fonts/#{$path}.woff') format('woff'),
       url('utils/fonts/#{$path}.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
