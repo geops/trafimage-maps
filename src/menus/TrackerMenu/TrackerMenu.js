@@ -7,7 +7,7 @@ import { TiVideo } from 'react-icons/ti';
 import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 import Layer from 'react-spatial/layers/Layer';
-import RouteSchedule from 'react-transit/components/RouteSchedule';
+import RouteSchedule from 'react-spatial/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
 import MenuItem from '../../components/Menu/MenuItem';
