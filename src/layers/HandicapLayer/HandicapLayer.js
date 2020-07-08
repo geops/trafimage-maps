@@ -1,4 +1,4 @@
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';

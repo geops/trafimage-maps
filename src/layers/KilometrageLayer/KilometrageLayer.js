@@ -1,4 +1,4 @@
-import Layer from 'react-spatial/layers/Layer';
+import { Layer } from 'mobility-toolbox-js/src/ol/';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -6,7 +6,7 @@ import { transform } from 'ol/proj';
 
 /**
  * Layer for kilometrage popup
- * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/Layer%20js~Layer%20html}
  * @private
  * @class
  * @param {Object} [options] Layer options.

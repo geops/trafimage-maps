@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 
-import Layer from 'react-spatial/layers/Layer';
+import { Layer } from 'mobility-toolbox-js/src/ol/';
 import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
@@ -216,16 +216,15 @@ class Map extends PureComponent {
   getQueryableLayers(featureInfoEventType) {
     const { layerService } = this.props;
 
-    return layerService
-      .getLayersAsFlatArray()
-      .filter(
-        (layer) =>
-          layer.getVisible() &&
-          layer.isQueryable &&
-          (
-            layer.get('featureInfoEventTypes') || ['pointermove', 'singleclick']
-          ).includes(featureInfoEventType),
+    return layerService.getLayersAsFlatArray().filter((layer) => {
+      return (
+        layer.visible &&
+        layer.isQueryable &&
+        (layer.get('f') || ['pointermove', 'singleclick']).includes(
+          featureInfoEventType,
+        )
       );
+    });
   }
 
   render() {

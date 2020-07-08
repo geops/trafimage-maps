@@ -1,4 +1,4 @@
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import ClusterSource from 'ol/source/Cluster';
@@ -15,7 +15,7 @@ import { easeOut } from 'ol/easing';
 
 /**
  * Layer for zweitausbildung pois
- * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
  * @private
  * @class
  * @param {Object} [options] Layer options.

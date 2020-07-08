@@ -1,4 +1,4 @@
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
@@ -9,7 +9,7 @@ import LayerHelper from '../layerHelper';
 
 /**
  * Layer for behig
- * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
  * @private
  * @class
  * @param {Object} [options] Layer options.
@@ -96,9 +96,7 @@ class BehigLayer extends VectorLayer {
         layer.properties.behig.status === feature.get('status'),
     );
 
-    return toggleLayer && toggleLayer.getVisible()
-      ? feature.getGeometry()
-      : null;
+    return toggleLayer && toggleLayer.visible ? feature.getGeometry() : null;
   }
 
   style(feature, resolution) {

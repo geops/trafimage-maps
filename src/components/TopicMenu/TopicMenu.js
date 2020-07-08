@@ -52,10 +52,10 @@ class TopicMenu extends PureComponent {
 
     const { layerService } = this.props;
     const visibleBaseLayer =
-      layerService && layerService.getBaseLayers().find((l) => l.getVisible());
+      layerService && layerService.getBaseLayers().find((l) => l.visible);
     if (visibleBaseLayer) {
       this.setState({
-        currentBaseLayerKey: visibleBaseLayer.getKey(),
+        currentBaseLayerKey: visibleBaseLayer.key,
       });
     }
   }
@@ -106,9 +106,9 @@ class TopicMenu extends PureComponent {
   }
 
   updateCurrentBaseLayerKey(layer) {
-    if (layer.getIsBaseLayer() && layer.getVisible()) {
+    if (layer.isBaseLayer && layer.visible) {
       this.setState({
-        currentBaseLayerKey: layer.getKey(),
+        currentBaseLayerKey: layer.key,
       });
     }
   }
@@ -175,7 +175,7 @@ class TopicMenu extends PureComponent {
       layerTree = (
         <div className="wkp-layer-tree">
           <LayerTree
-            isItemHidden={(l) => l.getIsBaseLayer() || l.get('hideInLegend')}
+            isItemHidden={(l) => l.isBaseLayer || l.get('hideInLegend')}
             layerService={layerService}
             t={t}
             titles={{
@@ -255,8 +255,8 @@ class TopicMenu extends PureComponent {
                 <Select
                   options={layerService.getBaseLayers().map((l) => {
                     return {
-                      value: l.getKey(),
-                      label: t(l.getKey()),
+                      value: l.key,
+                      label: t(l.key),
                       layer: l,
                     };
                   })}

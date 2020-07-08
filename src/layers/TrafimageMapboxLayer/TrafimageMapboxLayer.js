@@ -1,4 +1,4 @@
-import MapboxLayer from 'react-spatial/layers/MapboxLayer';
+import { MapboxLayer } from 'mobility-toolbox-js/src/ol/';
 
 class TrafimageMapboxLayer extends MapboxLayer {
   init(map) {

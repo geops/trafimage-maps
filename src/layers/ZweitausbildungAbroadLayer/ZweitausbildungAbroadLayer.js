@@ -1,4 +1,4 @@
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
 import Fill from 'ol/style/Fill';
 import GeoJSON from 'ol/format/GeoJSON';
 import Icon from 'ol/style/Icon';
@@ -10,7 +10,7 @@ import featureCollection from './FeatureCollection.json';
 
 /**
  * Layer for Zweitausbildung Abroad
- * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
  * @private
  * @class
  * @param {Object} [options] Layer options.

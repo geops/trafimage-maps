@@ -15,7 +15,7 @@ class LevelLayer extends MapboxStyleLayer {
    * Apply visibility to style layers that fits the filter function.
    */
   applyLayoutVisibility(isInit) {
-    const visible = this.getVisible();
+    const { visible } = this;
     const { mbMap } = this.mapboxLayer;
     const style = mbMap.getStyle();
 
