@@ -19,6 +19,9 @@ const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
   validFrom: '2019-12-16',
   validTo: '2020-12-01',
+  onClick: f => {
+    console.log('Clicked', f);
+  },
 });
 
 // Select zones.
@@ -115,9 +118,11 @@ zoneLayer.loadZones([
   },
 ]);
 
+/*
 zoneLayer.onClick(f => {
   console.log('Clicked', f);
 });
+*/
 
 // Initialize route layer.
 const routeLayer = new RouteLayer({
