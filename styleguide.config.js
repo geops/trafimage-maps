@@ -74,6 +74,7 @@ module.exports = {
             /\/node_modules\/(regexpu-core|unicode-.*|chalk|acorn-.*|query-string|strict-uri-encode|proxy-polyfill)/,
             /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker|strip-ansi|javascript-stringify|mobility-toolbox-js)/,
           ],
+          exclude: /node_modules/,
           loader: 'babel-loader',
         },
         // Transpile js
