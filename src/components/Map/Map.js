@@ -220,9 +220,9 @@ class Map extends PureComponent {
       return (
         layer.visible &&
         layer.isQueryable &&
-        (layer.get('f') || ['pointermove', 'singleclick']).includes(
-          featureInfoEventType,
-        )
+        (
+          layer.get('featureInfoEventTypes') || ['pointermove', 'singleclick']
+        ).includes(featureInfoEventType)
       );
     });
   }
