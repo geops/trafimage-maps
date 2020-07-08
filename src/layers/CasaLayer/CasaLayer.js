@@ -260,7 +260,7 @@ class CasaLayer extends VectorLayer {
   }
 
   /**
-   * Override the callClickCallbacks function of react-spatial's Vectorlayer
+   * Override the callClickCallbacks function of mobility-toolbox-js's Vectorlayer
    * in order to stop the propagation if the first feature is from another layer.
    * @private
    * @inheritdoc

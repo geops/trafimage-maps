@@ -15,7 +15,8 @@ import {
 } from 'ol/style';
 import { Point } from 'ol/geom';
 import CasaLayer from '../CasaLayer';
-import finishFlag from '../../img/finish_flag.svg';
+// use flag png to ensure IE detects it in olMap.forEachLayerAtPixel.
+import finishFlag from '../../img/finish_flag.png';
 
 /**
  * Layer for visualizing routes.
@@ -200,6 +201,7 @@ class RouteLayer extends CasaLayer {
             anchorYUnits: 'pixels',
             anchorOrigin: 'bottom-left',
             imgSize: [24, 24],
+            crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
           }),
           zIndex: 1,
         }),
