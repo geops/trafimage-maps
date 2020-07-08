@@ -84,7 +84,7 @@ class ZoneLayer extends CasaLayer {
 
     this.selectedZones = [];
 
-    console.log(this, options.onClick, options);
+    console.log(options.onClick, options);
     this.onClick((features) => {
       console.log(features);
       if (features.length) {

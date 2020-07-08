@@ -128,6 +128,9 @@ zoneLayer.onClick(f => {
 const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   apiKey: apiKey,
+  onClick: f => {
+    console.log('Clicked', f);
+  },
 });
 
 // Visualize a route on the map.
@@ -165,9 +168,11 @@ routeLayer
     routeLayer.zoomToRoute();
   });
 
+/*
 routeLayer.onClick(f => {
   console.log('Clicked', f);
 });
+*/
 
 const App = () => {
   const ref = useRef();
