@@ -130,6 +130,13 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const appComponents = {
     header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
+    map: (
+      <EventConsumer>
+        {(dispatcher) => (
+          <Map map={map} maxZoom={maxZoom} dispatchHtmlEvent={dispatcher} />
+        )}
+      </EventConsumer>
+    ),
     telephoneInfos: <TopicTelephoneInfos />,
     popup: <Popup appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />,
     permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
@@ -155,6 +162,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     footer: <Footer />,
   };
 
+  elements.map = true; // make sure we always have a map element!
   const appElements = getComponents(appComponents, elements);
 
   const onResize = (entries, widthBreakpoint) => {
@@ -172,11 +180,6 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         onResize={onResize}
       />
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-        <EventConsumer>
-          {(dispatcher) => (
-            <Map map={map} maxZoom={maxZoom} dispatchHtmlEvent={dispatcher} />
-          )}
-        </EventConsumer>
         {appElements}
         <MainDialog staticFilesUrl={staticFilesUrl} />
       </div>

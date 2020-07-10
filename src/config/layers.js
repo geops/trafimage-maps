@@ -5,7 +5,7 @@ import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import Layer from 'react-spatial/layers/Layer';
-import TrajservLayer from 'react-transit/layers/TrajservLayer';
+import TrajservLayer from 'react-spatial/layers/TrajservLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';

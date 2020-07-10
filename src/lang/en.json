@@ -115,6 +115,7 @@
   "ch.sbb.netzkarte.night": "Swiss public transport network map (night)",
   "ch.sbb.netzkarte.night-desc": "The dark version of the Network map passenger Traffic could be used to display a nighttime network, for example.",
   "ch.sbb.netzkarte.relief": "Network map (Relief)",
+  "ch.sbb.netzkarte.sandbox": "Netzkarte Sandbox",
   "ch.sbb.netzkarte.stationen": "Stations",
   "ch.sbb.netzkarte.tarifverbunde": "Fare networks",
   "ch.sbb.netzkarte.tarifverbunde-desc": "Switzerland’s network landscape. Find the right travelcard for you for commuting or leisure from your region’s fare network.",

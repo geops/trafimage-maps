@@ -1,4 +1,3 @@
-import { containsCoordinate } from 'ol/extent';
 import OLMap from 'ol/Map';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
@@ -30,14 +29,9 @@ const MapAccessibility = ({ layers, map }) => {
           .flat();
         if (mapTarget === document.activeElement && tabLayer) {
           if (tabLayer.isTrackerLayer) {
-            const extent = map.getView().calculateExtent();
-            const trajectories = tabLayer.tracker
-              .getTrajectories()
-              .filter(
-                (t) => t.coordinate && containsCoordinate(extent, t.coordinate),
-              );
+            const trajectories = tabLayer.tracker.getRenderedTrajectories();
             trajectories.sort((a, b) =>
-              a.coordinate[0] < b.coordinate[0] ? -1 : 1,
+              a.coordinate && a.coordinate[0] < b.coordinate[0] ? -1 : 1,
             );
             tabFeature = trajectories[tabFeatureIndex];
 

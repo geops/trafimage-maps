@@ -13007,7 +13007,7 @@ react-app-rewired@2.1.5:
   dependencies:
     semver "^5.6.0"
 
-react-autosuggest@^10.0.0:
+react-autosuggest@^10.0.2:
   version "10.0.2"
   resolved "https://registry.yarnpkg.com/react-autosuggest/-/react-autosuggest-10.0.2.tgz#c45cd73a7307026c932cb6a3e19c2fe35bfb6ec4"
   integrity sha512-ouI0RJDSgM1FBfK0ZmLC3qUqithIwPVTpnC4JQW4DeId3mH2JnZmkNNDKImhcMrxLbSQRpV/DfTLn0uCs4b27w==
@@ -13162,7 +13162,7 @@ react-i18next@^11.3.4:
     "@babel/runtime" "^7.3.1"
     html-parse-stringify2 "2.0.1"
 
-react-icons@^3.4.0, react-icons@^3.7.0, react-icons@^3.8.0, react-icons@^3.9.0:
+react-icons@^3.4.0, react-icons@^3.8.0, react-icons@^3.9.0:
   version "3.9.0"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.9.0.tgz#89a00f20a0e02e6bfd899977eaf46eb4624239d5"
   integrity sha512-gKbYKR+4QsD3PmIHLAM9TDDpnaTsr3XZeK1NTAb6WQQ+gxEdJ0xuCgLq0pxXdS7Utg2AIpcVhM1ut/jlDhcyNg==
@@ -13298,13 +13298,15 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^0.3.7:
-  version "0.3.7"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.3.7.tgz#a8556e476b9d0a489550bfcc853aea17fd403b0f"
-  integrity sha512-CCTIVB63OpqMTjykR0U4YP8VA6Z6/0g64DPnvIKvREwQmWr5x4iCIfJLxoXwTzydTc3Qimve0mlhQUnXnjBeQg==
+react-spatial@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-0.4.0.tgz#11a5057c3813b820ee6f36e58947b6c78da28939"
+  integrity sha512-rqNUgCik9TGJVmOL2jq+39PA1ItbzT08f3aCJ0dTFXVqN/D6jXVze99I2s44p5eMI+lSH0e0N0McPZmROO0bMQ==
   dependencies:
+    abortcontroller-polyfill "^1.4.0"
     query-string "^6.11.1"
     radians-degrees "^1.0.0"
+    react-autosuggest "^10.0.2"
     react-draggable "^4.0.3"
     react-icons "^3.9.0"
     resize-observer-polyfill "^1.5.1"
@@ -13413,16 +13415,6 @@ react-themeable@^1.1.0:
   integrity sha1-fURm3ZsrX6dQWHJ4JenxUro3mg4=
   dependencies:
     object-assign "^3.0.0"
-
-react-transit@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/react-transit/-/react-transit-0.3.3.tgz#ab9a108e33911e63643e3addde4d8f3aa881180c"
-  integrity sha512-OB+5ZhPVyhU9BLpdaUKz/kTD8IXAULvpDQIuVXxctK9hvuR+k3yQiTBthq7dCeFBsLoI6xh5rYgXaSiyetfRwg==
-  dependencies:
-    abortcontroller-polyfill "^1.4.0"
-    query-string "^6.11.1"
-    react-autosuggest "^10.0.0"
-    react-icons "^3.7.0"
 
 react-transition-group@^4.3.0:
   version "4.3.0"
