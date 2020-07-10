@@ -13,7 +13,7 @@ import { Style, Stroke, Circle, Fill, Icon } from 'ol/style';
 import RouteLayer from './RouteLayer';
 import { casa } from '../../config/topics';
 import TrafimageMaps from '../../components/TrafimageMaps';
-import finishFlag from '../../img/finish_flag.svg';
+import finishFlag from '../../img/finish_flag.png';
 
 configure({ adapter: new Adapter() });
 
@@ -152,6 +152,7 @@ describe('RouteLayer', () => {
         anchorYUnits: 'pixels',
         anchorOrigin: 'bottom-left',
         imgSize: [24, 24],
+        crossOrigin: 'anonymous',
       }),
     );
   });

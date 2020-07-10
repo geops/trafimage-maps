@@ -260,14 +260,20 @@ class CasaLayer extends VectorLayer {
   }
 
   /**
-   * Override the callClickCallbacks function of react-spatial's Vectorlayer
+   * Override the callClickCallbacks function of mobility-toolbox-js's Vectorlayer
    * in order to stop the propagation if the first feature is from another layer.
    * @private
    * @inheritdoc
    */
   callClickCallbacks(features, layer, coordinate) {
     const pixel = this.map.getPixelFromCoordinate(coordinate);
-    const topLayer = this.map.forEachLayerAtPixel(pixel, (l) => l);
+    const topLayer = this.map.forEachLayerAtPixel(pixel, (l, rgba) => {
+      // this check is required for IE11 support
+      if (rgba.length === 0) {
+        return false;
+      }
+      return l;
+    });
 
     if (layer.featuresLayer !== topLayer) {
       return;
