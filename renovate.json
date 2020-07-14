@@ -1,6 +1,6 @@
 {
   "extends": ["config:js-lib", "schedule:monthly"],
-  "baseBranches": ["release-1.1"],
+  "baseBranches": ["next"],
   "assignees": ["@oterral"],
   "packageRules": [
     {
