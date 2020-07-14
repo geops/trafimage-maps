@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
-import { Layer } from 'mobility-toolbox-js/src/ol/';
+import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Vector';
 import LayerInfosDialog from '.';
 

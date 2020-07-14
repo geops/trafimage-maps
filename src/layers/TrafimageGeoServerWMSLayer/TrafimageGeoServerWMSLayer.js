@@ -1,4 +1,4 @@
-import { WMSLayer } from 'mobility-toolbox-js/src/ol/';
+import { WMSLayer } from 'mobility-toolbox-js/ol';
 
 class TrafimageGeoServerWMSLayer extends WMSLayer {
   constructor(options = {}) {

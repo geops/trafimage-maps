@@ -1,4 +1,4 @@
-import { Layer } from 'mobility-toolbox-js/src/ol/';
+import { Layer } from 'mobility-toolbox-js/ol';
 
 /**
  * Layer for visualizing information about stations (default) or airports.

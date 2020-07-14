@@ -4,7 +4,7 @@ import TileWMSSource from 'ol/source/TileWMS';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
-import { Layer, TrajservLayer } from 'mobility-toolbox-js/src/ol/';
+import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';

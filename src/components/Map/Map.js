@@ -4,7 +4,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'lodash/fp';
 
-import { Layer } from 'mobility-toolbox-js/src/ol/';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
@@ -138,6 +138,10 @@ class Map extends PureComponent {
           featureInfo.length &&
           featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
 
+        console.log(
+          isClickInfoOpen,
+          featureInfo.length && featureInfo[0].layer.get('showPopupOnHover'),
+        );
         // don't continue if there's a popup that was opened by click
         if (!isClickInfoOpen) {
           infos = infos

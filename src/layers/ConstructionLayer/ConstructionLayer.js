@@ -1,4 +1,4 @@
-import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
+import { VectorLayer } from 'mobility-toolbox-js/ol';
 import OLLayerGroup from 'ol/layer/Group';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';

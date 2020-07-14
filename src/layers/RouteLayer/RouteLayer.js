@@ -47,6 +47,7 @@ class RouteLayer extends CasaLayer {
   constructor(options = {}) {
     super({
       name: 'RouteLayer',
+      isQueryable: true,
       olLayer: new OLVectorLayer({
         className: 'RouteLayer', // needed for forEachLayerAtPixel
         style: (f) => this.routeStyle(f),

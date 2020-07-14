@@ -1,4 +1,4 @@
-import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
+import { VectorLayer } from 'mobility-toolbox-js/ol';
 import Fill from 'ol/style/Fill';
 import GeoJSON from 'ol/format/GeoJSON';
 import Icon from 'ol/style/Icon';

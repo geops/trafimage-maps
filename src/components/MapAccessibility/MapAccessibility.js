@@ -1,7 +1,7 @@
 import OLMap from 'ol/Map';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { Layer } from 'mobility-toolbox-js/src/ol/';
+import { Layer } from 'mobility-toolbox-js/ol';
 
 const KEYCODE_TAB = 9;
 const KEYCODE_ENTER = 13;

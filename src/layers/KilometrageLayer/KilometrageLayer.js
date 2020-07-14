@@ -1,4 +1,4 @@
-import { Layer } from 'mobility-toolbox-js/src/ol/';
+import { Layer } from 'mobility-toolbox-js/ol';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';

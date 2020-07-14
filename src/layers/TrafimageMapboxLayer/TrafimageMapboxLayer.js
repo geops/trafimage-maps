@@ -1,4 +1,4 @@
-import { MapboxLayer } from 'mobility-toolbox-js/src/ol/';
+import { MapboxLayer } from 'mobility-toolbox-js/ol';
 
 class TrafimageMapboxLayer extends MapboxLayer {
   init(map) {

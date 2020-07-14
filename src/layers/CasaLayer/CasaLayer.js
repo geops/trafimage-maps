@@ -7,7 +7,7 @@ import {
   Text as TextStyle,
 } from 'ol/style';
 import { MultiLineString, LineString, Point } from 'ol/geom';
-import { VectorLayer } from 'mobility-toolbox-js/src/ol/';
+import { VectorLayer } from 'mobility-toolbox-js/ol';
 import ArrowImg from '../../img/arrow.png';
 
 /**
@@ -118,6 +118,7 @@ class CasaLayer extends VectorLayer {
    */
   onMouseOver(callback) {
     if (callback && typeof callback === 'function') {
+      console.log('ici mouseover');
       this.mouseOverCallbacks.push(callback);
     }
   }
