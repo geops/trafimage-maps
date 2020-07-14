@@ -138,10 +138,6 @@ class Map extends PureComponent {
           featureInfo.length &&
           featureInfo.every(({ layer }) => !layer.get('showPopupOnHover'));
 
-        console.log(
-          isClickInfoOpen,
-          featureInfo.length && featureInfo[0].layer.get('showPopupOnHover'),
-        );
         // don't continue if there's a popup that was opened by click
         if (!isClickInfoOpen) {
           infos = infos

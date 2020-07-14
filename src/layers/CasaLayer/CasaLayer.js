@@ -118,7 +118,6 @@ class CasaLayer extends VectorLayer {
    */
   onMouseOver(callback) {
     if (callback && typeof callback === 'function') {
-      console.log('ici mouseover');
       this.mouseOverCallbacks.push(callback);
     }
   }
