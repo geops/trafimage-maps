@@ -4,8 +4,7 @@ import TileWMSSource from 'ol/source/TileWMS';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
-import Layer from 'react-spatial/layers/Layer';
-import TrajservLayer from 'react-spatial/layers/TrajservLayer';
+import { Layer, TrajservLayer } from 'mobility-toolbox-js/src/ol/';
 import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
@@ -221,8 +220,7 @@ export const bahnhofplaene = new Layer({
     description: 'ch.sbb.bahnhofplaene-desc',
   },
 });
-
-bahnhofplaene.setChildren([
+bahnhofplaene.children = [
   new MapboxStyleLayer({
     name: 'ch.sbb.bahnhofplaene.interaktiv',
     visible: false,
@@ -270,7 +268,7 @@ bahnhofplaene.setChildren([
       radioGroup: 'bahnhofplaene',
     },
   }),
-]);
+];
 
 export const tracker = new TrajservLayer({
   name: 'Zugtracker',
@@ -292,7 +290,7 @@ export const punctuality = new Layer({
   },
 });
 
-punctuality.setChildren([
+punctuality.children = [
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
@@ -319,7 +317,7 @@ punctuality.setChildren([
       radioGroup: 'ch.sbb.punctuality',
     },
   }),
-]);
+];
 
 export const netzkartePointLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.stationen',

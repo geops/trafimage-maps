@@ -185,7 +185,7 @@ class Permalink extends PureComponent {
         features: [stationFeature],
         // Fake layer binded to popup, to open it.
         layer: {
-          getKey: () => 'ch.sbb.departure.popup',
+          key: 'ch.sbb.departure.popup',
           get: (val) => (val === 'popupComponent' ? 'DeparturePopup' : null),
         },
       },

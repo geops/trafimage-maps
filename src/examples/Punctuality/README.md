@@ -5,8 +5,7 @@ This example shows how to integrate punctuality information in your map applicat
 ```jsx
 import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
-import Layer from 'react-spatial/layers/Layer';
-import TrajservLayer from 'react-spatial/layers/TrajservLayer';
+import { Layer, TrajservLayer } from 'mobility-toolbox-js/src/ol/';
 import defaultBaseLayers, {
   buslines,
 } from 'trafimage-maps/examples/Punctuality/layers';

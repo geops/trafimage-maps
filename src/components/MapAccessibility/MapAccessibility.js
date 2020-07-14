@@ -1,7 +1,7 @@
 import OLMap from 'ol/Map';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import Layer from 'react-spatial/layers/Layer';
+import { Layer } from 'mobility-toolbox-js/src/ol/';
 
 const KEYCODE_TAB = 9;
 const KEYCODE_ENTER = 13;
@@ -24,7 +24,7 @@ const MapAccessibility = ({ layers, map }) => {
       // cycle through map features
       if (e.which === KEYCODE_TAB) {
         [tabLayer] = layers
-          .filter((l) => l.getVisible() && l.properties.hasAccessibility)
+          .filter((l) => l.visible && l.properties.hasAccessibility)
           .map((l) => l.getVisibleChildren())
           .flat();
         if (mapTarget === document.activeElement && tabLayer) {

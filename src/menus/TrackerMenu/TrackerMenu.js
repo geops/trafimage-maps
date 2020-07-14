@@ -6,7 +6,7 @@ import { compose } from 'lodash/fp';
 import { TiVideo } from 'react-icons/ti';
 import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
-import Layer from 'react-spatial/layers/Layer';
+import { Layer } from 'mobility-toolbox-js/src/ol/';
 import RouteSchedule from 'react-spatial/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
@@ -130,7 +130,7 @@ class TrackerMenu extends Component {
         {trajectory ? (
           <div>
             <RouteSchedule
-              trackerLayer={this.trackerLayers.find((l) => l.getVisible())}
+              trackerLayer={this.trackerLayers.find((l) => l.visible)}
               lineInfos={trajectory}
               onStationClick={(station) => {
                 map.getView().animate({

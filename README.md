@@ -20,7 +20,7 @@ See [demo](https://apidoc.trafimage.ch/).
 * jest
 * cypress
 * react-spatial
-* react-transit
+* mobility-toolbox-js
 * eslint with airbnb
 * prettier
 * sass
