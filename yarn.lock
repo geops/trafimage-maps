@@ -14352,10 +14352,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.0.0-beta.3:
-  version "1.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.0-beta.3.tgz#bbb5d796ba8986d2e0ecea2c07ebf5b6cb4a6f76"
-  integrity sha512-OarhCSgmGznOYoL7Zo1/9vGWO80mTPB6cCzZWcV/zdh7OojpQJ3K4q5XyG2oZOR9aGwq11wsxAeDtAZhJFf0iA==
+react-spatial@1.0.0-beta.4:
+  version "1.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.0-beta.4.tgz#fe02ce860ea37644052e8c39e33d85691db75de1"
+  integrity sha512-Kms5MoXr0+W9WmFPmJTqpzTEBY+362vzTdRSn6NbZ8f9QJsVQeUjooro2bPLNGoNy2eEyWzXycED5OgJsKHJdg==
   dependencies:
     abortcontroller-polyfill "1.4.0"
     query-string "6.13.1"
