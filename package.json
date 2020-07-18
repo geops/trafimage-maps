@@ -19,7 +19,7 @@
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
     "jsts": "2.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mapbox-gl": "1.8.1",
     "node-sass": "^4.13.1",
     "ol": "6.3.1",
