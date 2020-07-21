@@ -12,6 +12,7 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
+import LevelLayer from '../layers/LevelLayer/LevelLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
 import landeskarte from '../img/landeskarte.png';
@@ -53,6 +54,18 @@ export const dataLayer = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v1',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const dataLayer2 = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.data',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'base_bright_v2',
   properties: {
     hideInLegend: true,
   },
@@ -431,6 +444,32 @@ export const stuetzpunktbahnhoefe = new HandicapLayer({
     popupComponent: 'HandicapPopup',
   },
 });
+
+export const geschosseLayer = new Layer({
+  name: 'ch.sbb.geschosse',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.geschosse-desc',
+  },
+});
+
+const levelRegex = /(^stationFocus_base|^stationFocus_shop|^stationFocus_path-steps|^poi_with_icons$)/;
+geschosseLayer.children = [-4, -3, -2, -1, 0, '2D-Ansicht', 1, 2, 3, 4].map(
+  (level) => {
+    return new LevelLayer({
+      name: `ch.sbb.geschosse${level}`,
+      visible: level === '2D-Ansicht',
+      mapboxLayer: dataLayer,
+      styleLayersFilter: ({ id }) => levelRegex.test(id),
+      filters: ['==', 'level', level === '2D-Ansicht' ? 0 : level],
+      properties: {
+        radioGroup: 'ch.sbb.geschosse-layer',
+        keepFloorId: level === '2D-Ansicht',
+      },
+    });
+  },
+);
 
 export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',

@@ -30,6 +30,8 @@ import defaultBaseLayers, {
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
+  dataLayer2,
+  geschosseLayer,
 } from './layers';
 import defaultSearches, {
   handicapStopFinder,
@@ -68,6 +70,17 @@ export const netzkarte = {
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
+  searches: defaultSearches,
+};
+
+export const netzkarteShowCase = {
+  name: 'ch.sbb.netzkarte.sandbox',
+  key: 'ch.sbb.netzkarte.sandbox',
+  elements: {
+    ...defaultElements,
+  },
+  layers: [dataLayer2, netzkarteLayer, geschosseLayer],
+  projection: 'EPSG:3857',
   searches: defaultSearches,
 };
 
@@ -248,6 +261,7 @@ const topics = {
     intervention,
     verbundzonen,
     tina,
+    netzkarteShowCase,
   ],
   stelen: [netzkarteStelen],
 };
