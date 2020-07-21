@@ -30,7 +30,6 @@ import defaultBaseLayers, {
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
-  dataLayer2,
   geschosseLayer,
 } from './layers';
 import defaultSearches, {
@@ -79,7 +78,7 @@ export const netzkarteShowCase = {
   elements: {
     ...defaultElements,
   },
-  layers: [dataLayer2, netzkarteLayer, geschosseLayer],
+  layers: [dataLayer, netzkarteLayer, geschosseLayer],
   projection: 'EPSG:3857',
   searches: defaultSearches,
 };

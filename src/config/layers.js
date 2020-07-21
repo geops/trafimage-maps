@@ -53,18 +53,6 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v1',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-export const dataLayer2 = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.data',
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2',
   properties: {
     hideInLegend: true,
