@@ -29,44 +29,76 @@ const routes = [
     sequences: [
       {
         uicFrom: 8503000,
-        uicTo: 8506306,
+        uicTo: 8507000,
         mot: 'rail',
+      },
+      {
+        uicFrom: 8507000,
+        uicTo: 8576579,
+        mot: 'bus',
       },
     ],
   },
 ];
 
-const routeData = {
-  type: 'FeatureCollection',
-  features: [
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'LineString',
-        coordinates: [
-          [1, 1],
-          [10, 10],
-        ],
-      },
-      properties: {
-        lines: [],
-        station_from: {
-          id: '8506302',
-          latitude: 9.3695504838,
-          longitude: 47.4233618848,
-          name: 'st gallen',
-          platform: '',
-        },
-        station_to: {
-          id: '8503000',
-          latitude: 8.539596174,
-          longitude: 47.3775484643,
-          name: 'zuerich hauptbahnhof',
-          platform: '',
-        },
-      },
+const routeDataRail = {
+  type: 'Feature',
+  geometry: {
+    type: 'LineString',
+    coordinates: [
+      [-1, 1],
+      [10, -10],
+    ],
+  },
+  properties: {
+    lines: [],
+    station_from: {
+      id: '8503000',
+      ident_source: 'sbb',
+      latitude: 8.5373327691,
+      longitude: 47.3785545925,
+      name: 'Zürich HB',
+      platform: '34',
     },
-  ],
+    station_to: {
+      id: '8507000',
+      ident_source: 'sbb',
+      latitude: 7.4384644,
+      longitude: 46.9493093,
+      name: 'Bern',
+      platform: '8',
+    },
+  },
+};
+
+const routeDataBus = {
+  type: 'Feature',
+  geometry: {
+    type: 'LineString',
+    coordinates: [
+      [1, 1],
+      [10, 10],
+    ],
+  },
+  properties: {
+    lines: [],
+    station_from: {
+      id: null,
+      ident_source: null,
+      latitude: 7.438445,
+      longitude: 46.9489792,
+      name: 'bern hauptbahnhof',
+      platform: '',
+    },
+    station_to: {
+      id: '8576579',
+      ident_source: 'sbb',
+      latitude: 7.6338961748,
+      longitude: 46.7801596652,
+      name: 'Steffisburg, Dorf',
+      platform: '',
+    },
+  },
 };
 
 const feature = new Feature({
@@ -124,27 +156,36 @@ describe('RouteLayer', () => {
 
   test('should return the correct styles when selected.', async () => {
     layer.init(map);
-    fetchMock.once(/routing/g, routeData);
+    /* Mock fetch for each sequence */
+    fetchMock.once(/8503000/g, routeDataRail);
+    fetchMock.once(/8576579/g, routeDataBus);
 
-    const [route] = await layer.loadRoutes(routes);
-    const style = layer.routeStyle(route);
+    const [rail, bus] = await layer.loadRoutes(routes);
 
-    expect(style[0].getZIndex()).toEqual(0.5);
+    const styleRail = layer.routeStyle(rail);
+    const styleBus = layer.routeStyle(bus);
 
-    expect(style[1].getImage()).toEqual(
-      new Circle({
-        radius: 3,
-        fill: new Fill({
-          color: [255, 255, 255],
+    /* Bus sequence should return an additional style (flag icon) because it is the last sequence */
+    expect(styleRail).toHaveLength(3);
+    expect(styleBus).toHaveLength(4);
+
+    [rail, bus].forEach(() => {
+      expect(styleRail[0].getZIndex()).toEqual(0.5);
+      expect(styleRail[1].getImage()).toEqual(
+        new Circle({
+          radius: 3,
+          fill: new Fill({
+            color: [255, 255, 255],
+          }),
+          stroke: new Stroke({
+            color: [0, 0, 0],
+            width: 1,
+          }),
         }),
-        stroke: new Stroke({
-          color: [0, 0, 0],
-          width: 1,
-        }),
-      }),
-    );
+      );
+    });
 
-    expect(style[3].getImage()).toEqual(
+    expect(styleBus[3].getImage()).toEqual(
       new Icon({
         src: finishFlag,
         anchor: [4.5, 3.5],
@@ -182,9 +223,11 @@ describe('RouteLayer', () => {
     );
   });
 
-  test('should return a feature on loadRoute.', async () => {
+  test.only('should return a feature on loadRoute.', async () => {
     layer.init(map);
-    fetchMock.once(/routing/g, routeData);
+    /* Mock fetch for each sequence */
+    fetchMock.once(/8503000/g, routeDataRail);
+    fetchMock.once(/8576579/g, routeDataBus);
 
     const route = await layer.loadRoutes(routes);
 
@@ -222,4 +265,18 @@ describe('RouteLayer', () => {
       'Von: St. GallenNach: Zürich HB',
     );
   });
+
+  // test('shoud call onClick callbacks.', async () => {
+  //   const coordinate = [50, 50];
+  //   layer.init(map);
+  //   jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([feature]);
+  //   jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);
+
+  //   expect(onClick).toHaveBeenCalledTimes(0);
+
+  //   const evt = { type: 'singleclick', map, coordinate };
+  //   await map.dispatchEvent(evt);
+
+  //   expect(onClick).toHaveBeenCalledWith([feature], layer, coordinate);
+  // });
 });

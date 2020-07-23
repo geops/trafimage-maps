@@ -146,7 +146,7 @@ routeLayer
     },
     {
       isClickable: true,
-      isSelected: false,
+      isSelected: true,
       sequences: [
         {
           uicFrom: 8503000,
