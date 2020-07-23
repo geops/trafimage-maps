@@ -128,9 +128,10 @@ class RouteLayer extends CasaLayer {
    * @param {Object} viaPoints Route Informations
    * @param {String} mot Ask for specific Route
    * @param {Object[]} sequenceProps Properties for the returned features.
+   * @param {Boolean} finalDestination Determines if the sequence ends at the final route destination.
    * @returns {array<ol.Feature>} Features
    */
-  fetchRouteForMot(viaPoints, mot, sequenceProps) {
+  fetchRouteForMot(viaPoints, mot, sequenceProps, finalDestination) {
     this.abortController = new AbortController();
 
     const via = viaPoints.map((v) => `!${v}`);
@@ -156,6 +157,7 @@ class RouteLayer extends CasaLayer {
           ),
         });
         feature.setProperties(sequenceProps);
+        if (finalDestination) feature.set('final', finalDestination);
         return feature;
       });
   }
@@ -173,6 +175,7 @@ class RouteLayer extends CasaLayer {
       this.hoverFeature &&
       (this.hoverFeature.get('route') || {}).isClickable &&
       (this.hoverFeature.get('route') || {}).routeId === routeId;
+    const isFinal = feature.get('final');
 
     const routeStyle = this.styleFunction(
       feature.getProperties(),
@@ -191,21 +194,24 @@ class RouteLayer extends CasaLayer {
 
       styleArray.push(RouteLayer.getCircleStyle(lineStart));
       styleArray.push(RouteLayer.getCircleStyle(lineEnd));
-      styleArray.push(
-        new Style({
-          geometry: new Point(lineEnd),
-          image: new IconStyle({
-            src: finishFlag,
-            anchor: [4.5, 3.5],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            anchorOrigin: 'bottom-left',
-            imgSize: [24, 24],
-            crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
+
+      /* Set flag icon if it is the final sequence of a route */
+      if (isFinal)
+        styleArray.push(
+          new Style({
+            geometry: new Point(lineEnd),
+            image: new IconStyle({
+              src: finishFlag,
+              anchor: [4.5, 3.5],
+              anchorXUnits: 'pixels',
+              anchorYUnits: 'pixels',
+              anchorOrigin: 'bottom-left',
+              imgSize: [24, 24],
+              crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
+            }),
+            zIndex: 1,
           }),
-          zIndex: 1,
-        }),
-      );
+        );
     }
 
     return styleArray;
@@ -247,7 +253,14 @@ class RouteLayer extends CasaLayer {
 
         if (mot !== nextMot) {
           const sequenceProps = { route: { ...routes[i], routeId: i }, mot };
-          routePromises.push(this.fetchRouteForMot(via, mot, sequenceProps));
+          routePromises.push(
+            this.fetchRouteForMot(
+              via,
+              mot,
+              sequenceProps,
+              j === routes[i].sequences.length - 1,
+            ),
+          );
           via = [];
         }
       }
