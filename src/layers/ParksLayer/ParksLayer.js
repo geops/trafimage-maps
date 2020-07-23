@@ -11,8 +11,11 @@ class ParksLayer extends TrafimageGeoServerWMSLayer {
     super({
       ...options,
     });
+    this.abortController = new AbortController();
+
     this.dataProjection = 'EPSG:21781';
     this.featureProjection = 'EPSG:3857';
+
     // Tile layer to display the features.
     this.tileLayer = this.olLayer
       .getLayers()
@@ -56,7 +59,10 @@ class ParksLayer extends TrafimageGeoServerWMSLayer {
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
-    return fetch(this.getFeatureInfoUrl(coordinate))
+    this.abortController.abort();
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+    return fetch(this.getFeatureInfoUrl(coordinate), { signal })
       .then((resp) => resp.json())
       .then((r) => r.features)
       .then((data) => {
