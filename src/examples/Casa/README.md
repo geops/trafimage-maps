@@ -130,7 +130,7 @@ routeLayer
   .loadRoutes([
     {
       isClickable: true,
-      isSelected: true,
+      isSelected: false,
       popupTitle: 'Route St. Gallen >> Zürich',
       popupContent: {
         Von: 'St. Gallen',
@@ -146,7 +146,7 @@ routeLayer
     },
     {
       isClickable: true,
-      isSelected: false,
+      isSelected: true,
       sequences: [
         {
           uicFrom: 8503000,
