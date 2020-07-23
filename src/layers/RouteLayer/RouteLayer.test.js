@@ -103,8 +103,8 @@ const routeDataBus = {
 
 const feature = new Feature({
   geometry: new LineString([
-    [50, 50],
-    [50, 10],
+    [1, 1],
+    [10, 10],
   ]),
   mot: 'rail',
   route: {
@@ -223,7 +223,7 @@ describe('RouteLayer', () => {
     );
   });
 
-  test.only('should return a feature on loadRoute.', async () => {
+  test('should return a feature on loadRoute.', async () => {
     layer.init(map);
     /* Mock fetch for each sequence */
     fetchMock.once(/8503000/g, routeDataRail);
@@ -234,18 +234,21 @@ describe('RouteLayer', () => {
     expect(route[0]).toBeInstanceOf(Feature);
   });
 
-  test('shoud call onClick callbacks.', async () => {
+  test('shoud call onClick callbacks and deselect on click.', async () => {
     const coordinate = [50, 50];
+    /* Mock fetch for each sequence */
+    fetchMock.once(/8503000/g, routeDataRail);
+    fetchMock.once(/8576579/g, routeDataBus);
     layer.init(map);
-    jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([feature]);
+    const features = await layer.loadRoutes(routes);
+    jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([features[0]]);
     jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);
 
     expect(onClick).toHaveBeenCalledTimes(0);
-
     const evt = { type: 'singleclick', map, coordinate };
     await map.dispatchEvent(evt);
-
-    expect(onClick).toHaveBeenCalledWith([feature], layer, coordinate);
+    expect(onClick).toHaveBeenCalledWith([features[0]], layer, coordinate);
+    expect(layer.selectedRouteIds).toEqual([]);
   });
 
   test('shoud open a popup if popupContent is defined', async () => {
@@ -265,18 +268,4 @@ describe('RouteLayer', () => {
       'Von: St. GallenNach: Zürich HB',
     );
   });
-
-  // test('shoud call onClick callbacks.', async () => {
-  //   const coordinate = [50, 50];
-  //   layer.init(map);
-  //   jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([feature]);
-  //   jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);
-
-  //   expect(onClick).toHaveBeenCalledTimes(0);
-
-  //   const evt = { type: 'singleclick', map, coordinate };
-  //   await map.dispatchEvent(evt);
-
-  //   expect(onClick).toHaveBeenCalledWith([feature], layer, coordinate);
-  // });
 });

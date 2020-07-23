@@ -271,7 +271,7 @@ class RouteLayer extends CasaLayer {
       this.olLayer.getSource().addFeatures(sequenceFeatures);
       sequenceFeatures.forEach((f) => {
         const { routeId, isSelected } = f.get('route');
-        if (isSelected) {
+        if (isSelected && this.selectedRouteIds.indexOf(routeId) === -1) {
           this.selectedRouteIds.push(routeId);
         }
       });

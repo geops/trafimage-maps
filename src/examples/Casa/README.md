@@ -130,7 +130,7 @@ routeLayer
   .loadRoutes([
     {
       isClickable: true,
-      isSelected: true,
+      isSelected: false,
       popupTitle: 'Route St. Gallen >> Zürich',
       popupContent: {
         Von: 'St. Gallen',
