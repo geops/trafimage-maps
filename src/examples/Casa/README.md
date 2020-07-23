@@ -138,8 +138,8 @@ routeLayer
       },
       sequences: [
         {
-          uicFrom: 8503000,
-          uicTo: 8506306,
+          uicFrom: 8506306,
+          uicTo: 8503000,
           mot: 'rail',
         },
       ],
@@ -150,8 +150,13 @@ routeLayer
       sequences: [
         {
           uicFrom: 8503000,
-          uicTo: 8506206,
+          uicTo: 8507000,
           mot: 'rail',
+        },
+        {
+          uicFrom: 8507000,
+          uicTo: 8576579,
+          mot: 'bus',
         },
       ],
     },
