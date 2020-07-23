@@ -76,7 +76,7 @@ const routeDataBus = {
   geometry: {
     type: 'LineString',
     coordinates: [
-      [1, 1],
+      [-1, -1],
       [10, 10],
     ],
   },
@@ -103,8 +103,8 @@ const routeDataBus = {
 
 const feature = new Feature({
   geometry: new LineString([
-    [1, 1],
     [10, 10],
+    [1, 1],
   ]),
   mot: 'rail',
   route: {
@@ -126,6 +126,12 @@ let layer;
 let map;
 let onClick;
 let onMouseOver;
+
+const fetchRoutes = () => {
+  /* Mock fetch for each sequence */
+  fetchMock.once(/8503000/g, routeDataRail);
+  fetchMock.once(/8576579/g, routeDataBus);
+};
 
 describe('RouteLayer', () => {
   beforeEach(() => {
@@ -156,9 +162,7 @@ describe('RouteLayer', () => {
 
   test('should return the correct styles when selected.', async () => {
     layer.init(map);
-    /* Mock fetch for each sequence */
-    fetchMock.once(/8503000/g, routeDataRail);
-    fetchMock.once(/8576579/g, routeDataBus);
+    fetchRoutes();
 
     const [rail, bus] = await layer.loadRoutes(routes);
 
@@ -225,20 +229,15 @@ describe('RouteLayer', () => {
 
   test('should return a feature on loadRoute.', async () => {
     layer.init(map);
-    /* Mock fetch for each sequence */
-    fetchMock.once(/8503000/g, routeDataRail);
-    fetchMock.once(/8576579/g, routeDataBus);
-
+    fetchRoutes();
     const route = await layer.loadRoutes(routes);
 
     expect(route[0]).toBeInstanceOf(Feature);
   });
 
   test('shoud call onClick callbacks and deselect on click.', async () => {
-    const coordinate = [50, 50];
-    /* Mock fetch for each sequence */
-    fetchMock.once(/8503000/g, routeDataRail);
-    fetchMock.once(/8576579/g, routeDataBus);
+    const coordinate = [10, 10];
+    fetchRoutes();
     layer.init(map);
     const features = await layer.loadRoutes(routes);
     jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([features[0]]);
