@@ -1,5 +1,6 @@
 import proj4 from 'proj4';
-import TileLayer from 'ol/layer/Tile';
+import { Vector as OLVectorLayer, Tile as TileLayer, Group } from 'ol/layer';
+import VectorSource from 'ol/source/Vector';
 import TileWMSSource from 'ol/source/TileWMS';
 import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
@@ -9,6 +10,7 @@ import TrajservLayer from 'react-spatial/layers/TrajservLayer';
 import HandicapLayer from '../layers/HandicapLayer';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
+import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
 import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
@@ -397,22 +399,29 @@ export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
   },
 });
 
-export const parks = new TrafimageGeoServerWMSLayer({
+export const parks = new ParksLayer({
   name: 'ch.sbb.parks',
   visible: false,
-  olLayer: new TileLayer({
-    source: new TileWMSSource({
-      crossOrigin: 'anonymous',
-      params: {
-        layers: 'trafimage:perimeter_parks',
-      },
-      tileGrid: new TileGrid({
-        extent: projectionExtent,
-        resolutions: LayerHelper.getMapResolutions(),
-        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
+  olLayer: new Group({
+    layers: [
+      new TileLayer({
+        source: new TileWMSSource({
+          crossOrigin: 'anonymous',
+          params: {
+            layers: 'trafimage:perimeter_parks',
+          },
+          tileGrid: new TileGrid({
+            extent: projectionExtent,
+            resolutions: LayerHelper.getMapResolutions(),
+            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
+          }),
+        }),
+        opacity: 0.9,
       }),
-    }),
-    opacity: 0.9,
+      new OLVectorLayer({
+        source: new VectorSource(),
+      }),
+    ],
   }),
   properties: {
     hasInfos: true,
