@@ -96,9 +96,13 @@ export const netzkarteStelen = {
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [netzkarteLayer],
-  elements: { popup: true },
-  projection: 'EPSG:3857',
+  layers: [netzkarteShowcasesLight, netzkarteLayer],
+  elements: {
+    menu: true,
+    popup: true,
+    permalink: false,
+    baseLayerSwitcher: true,
+  },
 };
 
 export const bauprojekte = {

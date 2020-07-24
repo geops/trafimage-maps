@@ -7,7 +7,7 @@ import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import casa from 'trafimage-maps/examples/Casa/topic';
+import { casa } from 'trafimage-maps/config/topics';
 import 'trafimage-maps/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
