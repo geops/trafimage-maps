@@ -1,11 +1,13 @@
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
-import Feature from 'ol/Feature';
-import MultiPolygon from 'ol/geom/MultiPolygon';
-import { transform } from 'ol/proj';
+import GeoJSON from 'ol/format/GeoJSON';
 import { Fill, Stroke, Style } from 'ol/style';
 import TrafimageGeoServerWMSLayer from '../TrafimageGeoServerWMSLayer';
 
+/**
+ * Layer for visualizing swiss park and highlight them on pointermove.
+ * @private
+ */
 class ParksLayer extends TrafimageGeoServerWMSLayer {
   constructor(options = {}) {
     super({
@@ -13,8 +15,10 @@ class ParksLayer extends TrafimageGeoServerWMSLayer {
     });
     this.abortController = new AbortController();
 
-    this.dataProjection = 'EPSG:21781';
-    this.featureProjection = 'EPSG:3857';
+    this.format = new GeoJSON({
+      dataProjection: 'EPSG:21781',
+      featureProjection: 'EPSG:3857',
+    });
 
     // Tile layer to display the features.
     this.tileLayer = this.olLayer
@@ -64,30 +68,9 @@ class ParksLayer extends TrafimageGeoServerWMSLayer {
     const { signal } = this.abortController;
     return fetch(this.getFeatureInfoUrl(coordinate), { signal })
       .then((resp) => resp.json())
-      .then((r) => r.features)
+      .then((response) => response.features)
       .then((data) => {
-        const dataFeats = data.map((feat) => {
-          const multipolygon = [];
-          // Read the features, transform their coordinates to highlight the hovered feature.
-          feat.geometry.coordinates.forEach((coords) => {
-            const polygon = coords[0].map((c) => {
-              const transformedCoord = transform(
-                c,
-                this.dataProjection,
-                this.featureProjection,
-              );
-              return transformedCoord;
-            });
-            multipolygon.push([polygon]);
-          });
-          const newFeature = new Feature({
-            geometry: new MultiPolygon(multipolygon),
-          });
-          newFeature.setId(feat.id);
-          newFeature.setProperties(feat.properties);
-          return newFeature;
-        });
-
+        const dataFeats = data.map((d) => this.format.readFeature(d));
         this.vectorLayer.getSource().clear();
         this.vectorLayer.getSource().addFeatures(dataFeats);
 
