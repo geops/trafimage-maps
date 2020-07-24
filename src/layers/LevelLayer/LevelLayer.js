@@ -9,6 +9,7 @@ const filterCache = {};
  * @class
  * @param {Object} [options] Layer options.
  * @inheritdoc
+ * @private
  */
 class LevelLayer extends MapboxStyleLayer {
   /**
