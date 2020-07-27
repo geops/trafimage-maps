@@ -173,7 +173,6 @@ const App = () => {
   const ref = useRef();
 
   useEffect(() => {
-    console.log(casa.layers)
     const map = ref.current;
     map.topics =  [{
       ...casa,
