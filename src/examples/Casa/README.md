@@ -7,7 +7,7 @@ import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import { casa } from 'trafimage-maps/config/topics';
+import { casa, netzkarteLayerLabels } from 'trafimage-maps/config/topics';
 import 'trafimage-maps/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
@@ -173,10 +173,11 @@ const App = () => {
   const ref = useRef();
 
   useEffect(() => {
+    console.log(casa.layers)
     const map = ref.current;
     map.topics =  [{
       ...casa,
-      layers: [...casa.layers, zoneLayer, routeLayer],
+      layers: [...casa.layers, zoneLayer, routeLayer, netzkarteLayerLabels],
       elements: {
         mapControls: true,
         menu: true,
