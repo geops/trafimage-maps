@@ -69,9 +69,7 @@ class ParksLayer extends TrafimageGeoServerWMSLayer {
     return fetch(this.getFeatureInfoUrl(coordinate), { signal })
       .then((resp) => resp.json())
       .then((response) => {
-        const dataFeats = response.features.map((feature) =>
-          this.format.readFeature(feature),
-        );
+        const dataFeats = this.format.readFeatures(response);
         this.vectorLayer.getSource().clear();
         this.vectorLayer.getSource().addFeatures(dataFeats);
 
