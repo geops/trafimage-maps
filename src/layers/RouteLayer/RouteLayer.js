@@ -128,10 +128,11 @@ class RouteLayer extends CasaLayer {
    * @param {Object} viaPoints Route Informations
    * @param {String} mot Ask for specific Route
    * @param {Object[]} sequenceProps Properties for the returned features.
-   * @param {Boolean} finalDestination Determines if the sequence ends at the final route destination.
+   * @param {Boolean} isStart Determines if the sequence is the first of the route.
+   * @param {Boolean} isEnd Determines if the sequence is the final of the route.
    * @returns {array<ol.Feature>} Features
    */
-  fetchRouteForMot(viaPoints, mot, sequenceProps, finalDestination) {
+  fetchRouteForMot(viaPoints, mot, sequenceProps, isStart, isEnd) {
     this.abortController = new AbortController();
 
     const via = viaPoints.map((v) => `!${v}`);
@@ -157,7 +158,8 @@ class RouteLayer extends CasaLayer {
           ),
         });
         feature.setProperties(sequenceProps);
-        if (finalDestination) feature.set('final', finalDestination);
+        if (isStart) feature.set('start', isStart);
+        if (isEnd) feature.set('end', isEnd);
         return feature;
       });
   }
@@ -175,7 +177,8 @@ class RouteLayer extends CasaLayer {
       this.hoverFeature &&
       (this.hoverFeature.get('route') || {}).isClickable &&
       (this.hoverFeature.get('route') || {}).routeId === routeId;
-    const isFinal = feature.get('final');
+    const isStart = feature.get('start');
+    const isEnd = feature.get('end');
 
     const routeStyle = this.styleFunction(
       feature.getProperties(),
@@ -192,11 +195,12 @@ class RouteLayer extends CasaLayer {
       const lineStart = feature.getGeometry().getFirstCoordinate();
       const lineEnd = feature.getGeometry().getLastCoordinate();
 
-      styleArray.push(RouteLayer.getCircleStyle(lineStart));
-      styleArray.push(RouteLayer.getCircleStyle(lineEnd));
+      /* Set circle icon if it is the first sequence of a route */
+      if (isStart) styleArray.push(RouteLayer.getCircleStyle(lineStart));
 
-      /* Set flag icon if it is the final sequence of a route */
-      if (isFinal)
+      /* Set flag and circle icons if it is the final sequence of a route */
+      if (isEnd) {
+        styleArray.push(RouteLayer.getCircleStyle(lineEnd));
         styleArray.push(
           new Style({
             geometry: new Point(lineEnd),
@@ -212,6 +216,7 @@ class RouteLayer extends CasaLayer {
             zIndex: 1,
           }),
         );
+      }
     }
 
     return styleArray;
@@ -258,6 +263,7 @@ class RouteLayer extends CasaLayer {
               via,
               mot,
               sequenceProps,
+              j === 0,
               j === routes[i].sequences.length - 1,
             ),
           );
