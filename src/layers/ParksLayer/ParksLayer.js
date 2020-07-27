@@ -77,7 +77,7 @@ class ParksLayer extends TrafimageGeoServerWMSLayer {
         return {
           layer: this,
           coordinate,
-          features: data.map((d) => this.format.readFeature(d)),
+          features: data.map((feature) => this.format.readFeature(feature)),
         };
       })
       .catch(() => {
