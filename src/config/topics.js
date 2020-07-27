@@ -155,7 +155,11 @@ netzkarteLayerLabels.olLayer.setZIndex(2);
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [casaNetzkarteShowcasesLight, casaNetzkartePersonenverkehr],
+  layers: [
+    casaNetzkarteShowcasesLight,
+    casaNetzkartePersonenverkehr,
+    netzkarteLayerLabels,
+  ],
   elements: {
     menu: true,
     popup: true,

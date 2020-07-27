@@ -176,7 +176,7 @@ const App = () => {
     const map = ref.current;
     map.topics =  [{
       ...casa,
-      layers: [...casa.layers, zoneLayer, routeLayer, netzkarteLayerLabels],
+      layers: [...casa.layers, zoneLayer, routeLayer],
       elements: {
         mapControls: true,
         menu: true,
