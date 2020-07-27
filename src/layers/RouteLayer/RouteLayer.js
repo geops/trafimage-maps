@@ -157,9 +157,11 @@ class RouteLayer extends CasaLayer {
             lineStrings.map((l) => l.getGeometry()),
           ),
         });
-        feature.setProperties(sequenceProps);
-        if (isStart) feature.set('start', isStart);
-        if (isEnd) feature.set('end', isEnd);
+        feature.setProperties({
+          ...sequenceProps,
+          isStart,
+          isEnd,
+        });
         return feature;
       });
   }
@@ -177,8 +179,6 @@ class RouteLayer extends CasaLayer {
       this.hoverFeature &&
       (this.hoverFeature.get('route') || {}).isClickable &&
       (this.hoverFeature.get('route') || {}).routeId === routeId;
-    const isStart = feature.get('start');
-    const isEnd = feature.get('end');
 
     const routeStyle = this.styleFunction(
       feature.getProperties(),
@@ -196,10 +196,12 @@ class RouteLayer extends CasaLayer {
       const lineEnd = feature.getGeometry().getLastCoordinate();
 
       /* Set circle icon if it is the first sequence of a route */
-      if (isStart) styleArray.push(RouteLayer.getCircleStyle(lineStart));
+      if (feature.get('isStart')) {
+        styleArray.push(RouteLayer.getCircleStyle(lineStart));
+      }
 
       /* Set flag and circle icons if it is the final sequence of a route */
-      if (isEnd) {
+      if (feature.get('isEnd')) {
         styleArray.push(RouteLayer.getCircleStyle(lineEnd));
         styleArray.push(
           new Style({
