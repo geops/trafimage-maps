@@ -169,13 +169,15 @@ describe('RouteLayer', () => {
     const styleRail = layer.routeStyle(rail);
     const styleBus = layer.routeStyle(bus);
 
-    /* Bus sequence should return an additional style (flag icon) because it is the last sequence */
-    expect(styleRail).toHaveLength(3);
-    expect(styleBus).toHaveLength(4);
+    /* Circle markers should render at the first coordinate of the rail sequence and at the last coordinate
+     * of the bus sequence. Bus sequence should return an additional style (flag icon) because it is the last sequence.
+     */
+    expect(styleRail).toHaveLength(2);
+    expect(styleBus).toHaveLength(3);
 
-    [rail, bus].forEach(() => {
-      expect(styleRail[0].getZIndex()).toEqual(0.5);
-      expect(styleRail[1].getImage()).toEqual(
+    [styleRail, styleBus].forEach((styles) => {
+      expect(styles[0].getZIndex()).toEqual(0.5);
+      expect(styles[1].getImage()).toEqual(
         new Circle({
           radius: 3,
           fill: new Fill({
@@ -189,7 +191,7 @@ describe('RouteLayer', () => {
       );
     });
 
-    expect(styleBus[3].getImage()).toEqual(
+    expect(styleBus[2].getImage()).toEqual(
       new Icon({
         src: finishFlag,
         anchor: [4.5, 3.5],
