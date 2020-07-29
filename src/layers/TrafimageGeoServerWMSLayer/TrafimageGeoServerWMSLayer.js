@@ -1,4 +1,4 @@
-import WMSLayer from 'react-spatial/layers/WMSLayer';
+import { WMSLayer } from 'mobility-toolbox-js/ol';
 
 class TrafimageGeoServerWMSLayer extends WMSLayer {
   constructor(options = {}) {

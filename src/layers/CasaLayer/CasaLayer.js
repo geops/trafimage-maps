@@ -7,7 +7,7 @@ import {
   Text as TextStyle,
 } from 'ol/style';
 import { MultiLineString, LineString, Point } from 'ol/geom';
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import { VectorLayer } from 'mobility-toolbox-js/ol';
 import ArrowImg from '../../img/arrow.png';
 
 /**
@@ -49,7 +49,7 @@ import ArrowImg from '../../img/arrow.png';
 
 /**
  * Generic layer used by RouteLayer and ZoneLayer.
- * Extends {@link https://react-spatial.geops.de/docjs.html#vectorlayer react-spatial/layers/VectorLayer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
  * @class CasaLayer
  * @param {Object} options Layer options.
  * @param {function} onMouseOver Mouse over callback. Called with the feature and the coordinate.

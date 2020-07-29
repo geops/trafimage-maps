@@ -1,4 +1,4 @@
-import VectorLayer from 'react-spatial/layers/VectorLayer';
+import { VectorLayer } from 'mobility-toolbox-js/ol';
 import OLLayerGroup from 'ol/layer/Group';
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
@@ -13,7 +13,7 @@ import { unByKey } from 'ol/Observable';
 
 /**
  * Layer for construction
- * Extends {@link https://react-spatial.geops.de/docjs.html#layer geops-spatial/Layer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
  * @private
  * @class
  * @param {Object} [options] Layer options.
@@ -47,7 +47,7 @@ class ConstructionLayer extends VectorLayer {
     this.geometryFunction = this.geometryFunction.bind(this);
 
     this.toggleLayers = options.toggleLayers || [];
-    this.grandChildren = this.toggleLayers.map((c) => c.getChildren()).flat();
+    this.grandChildren = this.toggleLayers.map((c) => c.children).flat();
     this.setVisible(this.visible);
 
     // Same source for both layers
@@ -161,7 +161,7 @@ class ConstructionLayer extends VectorLayer {
         child.properties.construction.ort === feature.get('ort'),
     );
 
-    return childLayer && childLayer.getVisible() ? feature.getGeometry() : null;
+    return childLayer && childLayer.visible ? feature.getGeometry() : null;
   }
 
   styleCluster(feature) {
