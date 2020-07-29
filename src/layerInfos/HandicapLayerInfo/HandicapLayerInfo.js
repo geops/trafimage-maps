@@ -19,39 +19,61 @@ const names = {
   stuetzpunkt: 'bahnhof_plural',
 };
 
+const descriptions = {
+  de: {
+    barrierfree: ' an denen autonomes Reisen möglich ist.',
+    notBarrierfree: ' an denen automes Reisen nicht möglich ist.',
+    stuetzpunkt: (
+      <>
+        , an denen beim SBB Call Center Handicap unter der Nummer{' '}
+        <a href="tel:0800 007 102">0800 007 102</a> eine Hilfestellung bestellt
+        werden kann.
+      </>
+    ),
+  },
+  en: {
+    barrierfree: ' where autonomous travel is possible.',
+    notBarrierfree: ' where autonomous travel is not possible.',
+    stuetzpunkt: (
+      <>
+        {' '}
+        where assistance can be requested from the SBB Call Center Handicap by
+        calling <a href="tel:0800 007 102">0800 007 102</a>.
+      </>
+    ),
+  },
+  fr: {
+    barrierfree:
+      ' dans lesquelles il est possible de se déplacer en toute autonomie.',
+    notBarrierfree:
+      ' dans lesquelles il est impossible de se déplacer en toute autonomie.',
+    stuetzpunkt: (
+      <>
+        {' '}
+        pour lesquelles il est possible de commander un service d’assistance
+        auprès du Call Center Handicap CFF au numéro{' '}
+        <a href="tel:0800 007 102">0800 007 102</a>.
+      </>
+    ),
+  },
+  it: {
+    barrierfree: ' in cui è possibile viaggiare in autonomia.',
+    notBarrierfree: ' in cui non è possibile viaggiare in autonomia.',
+    stuetzpunkt: (
+      <>
+        {' '}
+        in cui è possibile richiedere assistenza contattando il Call Center
+        Handicap FFS al numero <a href="tel:0800 007 102">0800 007 102</a>.
+      </>
+    ),
+  },
+};
+
 const HandicapLayerInfo = ({ t, properties, language, staticFilesUrl }) => {
   const handicapType = properties.get('handicapType');
 
   const name = t(names[handicapType]);
-  const comps = {
-    de: (
-      <div>
-        {name}, an denen beim SBB Call Center Handicap unter der Nummer{' '}
-        <a href="tel:0800 007 102">0800 007 102</a> eine Hilfestellung bestellt
-        werden kann.
-      </div>
-    ),
-    fr: (
-      <div>
-        {name} pour lesquelles il est possible de commander un service
-        d’assistance auprès du Call Center Handicap CFF au numéro{' '}
-        <a href="tel:0800 007 102">0800 007 102</a>.
-      </div>
-    ),
-    en: (
-      <div>
-        {name} where assistance can be requested from the SBB Call Center
-        Handicap by calling <a href="tel:0800 007 102">0800 007 102</a>.
-      </div>
-    ),
-    it: (
-      <div>
-        {name} in cui è possibile richiedere assistenza contattando il Call
-        Center Handicap FFS al numero
-        <a href="tel:0800 007 102">0800 007 102</a>.
-      </div>
-    ),
-  };
+  const description = descriptions[language][handicapType];
 
   let image = <div className="stuetzpunkt-layer-icon" />;
   if (handicapType !== 'stuetzpunkt') {
@@ -71,7 +93,10 @@ const HandicapLayerInfo = ({ t, properties, language, staticFilesUrl }) => {
   return (
     <div className="handicap-layer-info">
       {image}
-      {comps[language]}
+      <div>
+        {name}
+        {description}
+      </div>
     </div>
   );
 };
