@@ -100,6 +100,7 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   visible: true,
   isBaseLayer: true,
   style: 'base_bright_v2',
+  filters: [{ type: /symbol|circle/i }],
   properties: {
     radioGroup: 'baseLayer',
   },
@@ -113,22 +114,10 @@ const casaNetzkarteShowcasesLight = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'casa_v1',
+  filters: [{ type: /symbol|circle/i }],
   properties: {
     radioGroup: 'baseLayer',
   },
-});
-
-// Remove all symbols and circle styles from casa layers
-[casaNetzkartePersonenverkehr, casaNetzkarteShowcasesLight].forEach((layer) => {
-  layer.on('load', () => {
-    const styles = [...layer.mbMap.getStyle().layers];
-    for (let i = 0; i < styles.length; i += 1) {
-      const style = styles[i];
-      if (/symbol|circle/i.test(style.type)) {
-        layer.mbMap.removeLayer(style.id);
-      }
-    }
-  });
 });
 
 export const netzkarteLayerLabels = new TrafimageMapboxLayer({
