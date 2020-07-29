@@ -7,7 +7,7 @@ import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import casa from 'trafimage-maps/examples/Casa/topic';
+import { casa } from 'trafimage-maps/config/topics';
 import 'trafimage-maps/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
@@ -130,7 +130,7 @@ routeLayer
   .loadRoutes([
     {
       isClickable: true,
-      isSelected: true,
+      isSelected: false,
       popupTitle: 'Route St. Gallen >> Zürich',
       popupContent: {
         Von: 'St. Gallen',
@@ -138,20 +138,25 @@ routeLayer
       },
       sequences: [
         {
-          uicFrom: 8503000,
-          uicTo: 8506306,
+          uicFrom: 8506306,
+          uicTo: 8503000,
           mot: 'rail',
         },
       ],
     },
     {
       isClickable: true,
-      isSelected: false,
+      isSelected: true,
       sequences: [
         {
           uicFrom: 8503000,
-          uicTo: 8506206,
+          uicTo: 8507000,
           mot: 'rail',
+        },
+        {
+          uicFrom: 8507000,
+          uicTo: 8576579,
+          mot: 'bus',
         },
       ],
     },

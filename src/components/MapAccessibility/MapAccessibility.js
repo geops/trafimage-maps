@@ -12,6 +12,7 @@ const KEYCODE_ENTER = 13;
  * Accessibility needs to be enabled for top-level layers
  * by setting the hasAccessibility property. For now only
  * single (radioGroup) TrackerLayers are supported.
+ * @private
  */
 const MapAccessibility = ({ layers, map }) => {
   useEffect(() => {

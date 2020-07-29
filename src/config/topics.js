@@ -1,3 +1,4 @@
+import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import defaultBaseLayers, {
   swisstopoSwissImage,
   bahnhofplaene,
@@ -93,12 +94,78 @@ export const netzkarteStelen = {
   projection: 'EPSG:3857',
 };
 
+export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: true,
+  isBaseLayer: true,
+  style: 'base_bright_v2',
+  properties: {
+    radioGroup: 'baseLayer',
+  },
+});
+
+const casaNetzkarteShowcasesLight = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.light',
+  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
+  visible: true,
+  isBaseLayer: true,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'casa_v1',
+  properties: {
+    radioGroup: 'baseLayer',
+  },
+});
+
+// Remove all symbols and circle styles from casa layers
+[casaNetzkartePersonenverkehr, casaNetzkarteShowcasesLight].forEach((layer) => {
+  layer.on('load', () => {
+    const styles = [...layer.mbMap.getStyle().layers];
+    for (let i = 0; i < styles.length; i += 1) {
+      const style = styles[i];
+      if (/symbol|circle/i.test(style.type)) {
+        layer.mbMap.removeLayer(style.id);
+      }
+    }
+  });
+});
+
+export const netzkarteLayerLabels = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte-labels',
+  visible: true,
+  style: 'base_bright_v2',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+// Display only symbols and circle styles and set layer zIndex
+netzkarteLayerLabels.on('load', () => {
+  const styles = [...netzkarteLayerLabels.mbMap.getStyle().layers];
+  for (let i = 0; i < styles.length; i += 1) {
+    const style = styles[i];
+    if (!/symbol|circle/i.test(style.type)) {
+      netzkarteLayerLabels.mbMap.removeLayer(style.id);
+    }
+  }
+});
+netzkarteLayerLabels.olLayer.setZIndex(2);
+
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [netzkarteLayer],
-  elements: { popup: true },
-  projection: 'EPSG:3857',
+  layers: [
+    casaNetzkarteShowcasesLight,
+    casaNetzkartePersonenverkehr,
+    netzkarteLayerLabels,
+  ],
+  elements: {
+    menu: true,
+    popup: true,
+    permalink: false,
+    baseLayerSwitcher: true,
+  },
 };
 
 export const bauprojekte = {
