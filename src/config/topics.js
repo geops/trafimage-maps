@@ -100,7 +100,13 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   visible: true,
   isBaseLayer: true,
   style: 'base_bright_v2',
-  filters: [{ type: /symbol|circle/i }],
+  filters: [
+    {
+      field: 'type',
+      value: /symbol|circle/,
+      include: false,
+    },
+  ],
   properties: {
     radioGroup: 'baseLayer',
   },
@@ -114,7 +120,13 @@ const casaNetzkarteShowcasesLight = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'casa_v1',
-  filters: [{ type: /symbol|circle/i }],
+  filters: [
+    {
+      field: 'type',
+      value: /symbol|circle/,
+      include: false,
+    },
+  ],
   properties: {
     radioGroup: 'baseLayer',
   },
@@ -124,21 +136,18 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte-labels',
   visible: true,
   style: 'base_bright_v2',
+  filters: [
+    {
+      field: 'type',
+      value: /symbol|circle/i,
+      include: true,
+    },
+  ],
   properties: {
     hideInLegend: true,
   },
 });
 
-// Display only symbols and circle styles and set layer zIndex
-netzkarteLayerLabels.on('load', () => {
-  const styles = [...netzkarteLayerLabels.mbMap.getStyle().layers];
-  for (let i = 0; i < styles.length; i += 1) {
-    const style = styles[i];
-    if (!/symbol|circle/i.test(style.type)) {
-      netzkarteLayerLabels.mbMap.removeLayer(style.id);
-    }
-  }
-});
 netzkarteLayerLabels.olLayer.setZIndex(2);
 
 export const casa = {

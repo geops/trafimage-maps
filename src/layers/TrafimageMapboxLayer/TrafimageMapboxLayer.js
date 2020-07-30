@@ -108,21 +108,26 @@ class TrafimageMapboxLayer extends MapboxLayer {
     }
 
     /* Get the MapBox style */
-    const data = await getMapboxStyle(this.styleUrl);
+    const mapboxStyle = await getMapboxStyle(this.styleUrl);
 
     /* Apply filters, remove style layers */
     if (this.options.filters) {
+      const layers = [];
       this.options.filters.forEach((filter) => {
-        const styleLayers = data.layers;
+        const styleLayers = mapboxStyle.layers;
         for (let i = 0; i < styleLayers.length; i += 1) {
           const style = styleLayers[i];
-          if (
-            filter[Object.keys(filter)[0]].test(style[Object.keys(filter)[0]])
-          ) {
-            data.layers.splice(i, 1);
+          const condition = filter.include
+            ? filter.value.test(style[filter.field])
+            : !filter.value.test(style[filter.field]);
+
+          if (condition) {
+            // data.layers.splice(i, 1);
+            layers.push(mapboxStyle.layers[i]);
           }
         }
       });
+      mapboxStyle.layers = layers;
     }
 
     try {
@@ -131,7 +136,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
        * @type {mapboxgl.Map}
        */
       this.mbMap = new mapboxgl.Map({
-        style: data,
+        style: mapboxStyle,
         attributionControl: false,
         boxZoom: false,
         center: toLonLat([x, y]),
