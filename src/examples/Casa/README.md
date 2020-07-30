@@ -131,15 +131,15 @@ routeLayer
     {
       isClickable: true,
       isSelected: false,
-      popupTitle: 'Route St. Gallen >> Zürich',
+      popupTitle: 'Route Biel/Bienne >> Freiburg/Fribourg',
       popupContent: {
-        Von: 'St. Gallen',
-        Nach: 'Zürich HB',
+        Von: 'Bern',
+        Nach: 'Freiburg/Fribourg',
       },
       sequences: [
         {
-          uicFrom: 8506306,
-          uicTo: 8503000,
+          uicFrom: 8507000,
+          uicTo: 8504100,
           mot: 'rail',
         },
       ],
@@ -149,20 +149,20 @@ routeLayer
       isSelected: true,
       sequences: [
         {
-          uicFrom: 8503000,
+          uicFrom: 8500218,
           uicTo: 8507000,
           mot: 'rail',
         },
         {
           uicFrom: 8507000,
-          uicTo: 8576579,
+          uicTo: 8588105,
           mot: 'bus',
         },
       ],
     },
   ])
   .then(f => {
-    routeLayer.zoomToRoute();
+    routeLayer.zoomToRoute({duration: 1000});
   });
 
 routeLayer.onClick(f => {

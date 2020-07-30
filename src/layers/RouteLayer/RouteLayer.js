@@ -294,7 +294,9 @@ class RouteLayer extends CasaLayer {
    */
   zoomToRoute(options) {
     const fitOptions = { padding: [20, 20, 20, 20], ...options };
-    this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
+    if (this.map) {
+      this.map.getView().fit(this.olLayer.getSource().getExtent(), fitOptions);
+    }
   }
 
   /**

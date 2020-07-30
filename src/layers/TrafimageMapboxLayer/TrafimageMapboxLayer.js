@@ -117,12 +117,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
         const styleLayers = mapboxStyle.layers;
         for (let i = 0; i < styleLayers.length; i += 1) {
           const style = styleLayers[i];
+          /* filter.included boolean determines if the identified
+           * styleLayers or all others should be removed
+           */
           const condition = filter.include
             ? filter.value.test(style[filter.field])
             : !filter.value.test(style[filter.field]);
 
           if (condition) {
-            // data.layers.splice(i, 1);
+            // mapboxStyle.layers.splice(i, 1);
             layers.push(mapboxStyle.layers[i]);
           }
         }
@@ -181,6 +184,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
         type: 'load',
         target: this,
       });
+      this.olLayer.changed();
     });
 
     const mapboxCanvas = this.mbMap.getCanvas();
