@@ -1,4 +1,29 @@
 import { MapboxLayer } from 'mobility-toolbox-js/ol';
+import { toLonLat } from 'ol/proj';
+import mapboxgl from 'mapbox-gl';
+
+const getCopyrightFromSources = (mbMap) => {
+  let copyrights = [];
+  const regex = /<[^>]*>[^>]*<\/[^>]*>/g;
+  // Trick from Mapbox AttributionControl to know if the source is used.
+  const { sourceCaches } = mbMap.style;
+  Object.entries(sourceCaches).forEach(([, sourceCache]) => {
+    if (sourceCache.used) {
+      copyrights = copyrights.concat(
+        regex.exec(sourceCache.getSource().attribution),
+      );
+    }
+  });
+  return Array.from(
+    new Set(copyrights.filter((copyright) => !!copyright)),
+  ).join(', ');
+};
+
+const getMapboxStyle = async (url) => {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+};
 
 class TrafimageMapboxLayer extends MapboxLayer {
   init(map) {
@@ -68,6 +93,114 @@ class TrafimageMapboxLayer extends MapboxLayer {
           });
         });
       });
+  }
+
+  /**
+   * Create the mapbox map.
+   */
+  async loadMbMap() {
+    // If the map hasn't been resized, the center could be [NaN,NaN].
+    // We set default good value for the mapbox map, to avoid the app crashes.
+    let [x, y] = this.map.getView().getCenter();
+    if (!x || !y) {
+      x = 0;
+      y = 0;
+    }
+
+    /* Get the MapBox style */
+    let mapboxStyle = null;
+    try {
+      mapboxStyle = await getMapboxStyle(this.styleUrl);
+      /* Apply filters, remove style layers */
+      if (mapboxStyle && this.options.filters) {
+        const layers = [];
+        this.options.filters.forEach((filter) => {
+          const styleLayers = mapboxStyle.layers;
+          for (let i = 0; i < styleLayers.length; i += 1) {
+            const style = styleLayers[i];
+            /* filter.included boolean determines if the identified
+             * styleLayers or all others should be removed
+             */
+            const condition = filter.include
+              ? filter.value.test(style[filter.field])
+              : !filter.value.test(style[filter.field]);
+
+            if (condition) {
+              // mapboxStyle.layers.splice(i, 1);
+              layers.push(mapboxStyle.layers[i]);
+            }
+          }
+        });
+        mapboxStyle.layers = layers;
+      }
+    } catch {
+      console.error('Failed to fetch Mapbox style');
+    }
+
+    try {
+      /**
+       * A mapbox map
+       * @type {mapboxgl.Map}
+       */
+      this.mbMap = new mapboxgl.Map({
+        style: mapboxStyle || this.styleUrl,
+        attributionControl: false,
+        boxZoom: false,
+        center: toLonLat([x, y]),
+        container: this.map.getTargetElement(),
+        interactive: false,
+        fadeDuration:
+          'fadeDuration' in this.options ? this.options.fadeDuration : 300,
+        // Needs to be true to able to export the canvas, but could lead to performance issue on mobile.
+        preserveDrawingBuffer: this.options.preserveDrawingBuffer || false,
+      });
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.warn('Failed creating Mapbox map: ', err);
+    }
+
+    // Options the last render run did happen. If something changes
+    // we have to render again
+    /** @ignore */
+    this.renderState = {
+      center: [x, y],
+      zoom: null,
+      rotation: null,
+      visible: null,
+      opacity: null,
+      size: [0, 0],
+    };
+
+    this.mbMap.once('load', () => {
+      /**
+       * Is the map loaded.
+       * @type {boolean}
+       */
+      this.loaded = true;
+      if (!this.copyright) {
+        /**
+         * Copyright statement.
+         * @type {string}
+         */
+        this.copyright = getCopyrightFromSources(this.mbMap);
+      }
+      this.dispatchEvent({
+        type: 'load',
+        target: this,
+      });
+      this.olLayer.changed();
+    });
+
+    const mapboxCanvas = this.mbMap.getCanvas();
+    if (mapboxCanvas) {
+      if (this.options.tabIndex) {
+        mapboxCanvas.setAttribute('tabindex', this.options.tabIndex);
+      } else {
+        // With a tabIndex='-1' the mouse events works but the map is not focused when we click on it
+        // so we remove completely the tabIndex attribute.
+        mapboxCanvas.removeAttribute('tabindex');
+      }
+    }
   }
 
   getFeatures({ source, sourceLayer, filter } = {}) {
