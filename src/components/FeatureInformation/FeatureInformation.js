@@ -89,7 +89,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             <span>
               {PopupComponent && PopupComponent.renderTitle && feature
                 ? PopupComponent.renderTitle(feature, t)
-                : layer && layer.getName() && t(layer.getName())}
+                : layer && layer.name && t(layer.name)}
             </span>
             <Button
               className="wkp-close-bt"
@@ -107,7 +107,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         ) : null}
         <div className="wkp-feature-information-body">
           <PopupComponent
-            key={info.layer.getKey()}
+            key={info.layer.key}
             cartaroOldUrl={cartaroOldUrl}
             t={t}
             feature={features[featureIndex]}

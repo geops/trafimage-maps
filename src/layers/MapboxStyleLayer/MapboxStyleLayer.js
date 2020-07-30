@@ -1,4 +1,4 @@
-import Layer from 'react-spatial/layers/Layer';
+import { Layer } from 'mobility-toolbox-js/ol';
 
 /**
  * Layer for visualizing information about stations (default) or airports.
@@ -7,7 +7,7 @@ import Layer from 'react-spatial/layers/Layer';
  *
  * <img src="img/layers/NetzkartePointLayer/layer.png" alt="Layer preview" title="Layer preview">
  *
- * Extends {@link https://react-spatial.geops.de/docjs.html#mapboxlayer geops-spatial/layers/MapboxLayer}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/Layer%20js~Layer%20html}
  * @class
  * @param {Object} [options] Layer options.
  * @inheritdoc
@@ -171,7 +171,7 @@ class MapboxStyleLayer extends Layer {
    * @private
    */
   applyLayoutVisibility() {
-    const visible = this.getVisible();
+    const { visible } = this;
     const { mbMap } = this.mapboxLayer;
     const style = mbMap.getStyle();
 

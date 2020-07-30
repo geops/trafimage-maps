@@ -128,9 +128,11 @@ class RouteLayer extends CasaLayer {
    * @param {Object} viaPoints Route Informations
    * @param {String} mot Ask for specific Route
    * @param {Object[]} sequenceProps Properties for the returned features.
+   * @param {Boolean} isStart Determines if the sequence is the first of the route.
+   * @param {Boolean} isEnd Determines if the sequence is the final of the route.
    * @returns {array<ol.Feature>} Features
    */
-  fetchRouteForMot(viaPoints, mot, sequenceProps) {
+  fetchRouteForMot(viaPoints, mot, sequenceProps, isStart, isEnd) {
     this.abortController = new AbortController();
 
     const via = viaPoints.map((v) => `!${v}`);
@@ -155,7 +157,11 @@ class RouteLayer extends CasaLayer {
             lineStrings.map((l) => l.getGeometry()),
           ),
         });
-        feature.setProperties(sequenceProps);
+        feature.setProperties({
+          ...sequenceProps,
+          isStart,
+          isEnd,
+        });
         return feature;
       });
   }
@@ -189,23 +195,30 @@ class RouteLayer extends CasaLayer {
       const lineStart = feature.getGeometry().getFirstCoordinate();
       const lineEnd = feature.getGeometry().getLastCoordinate();
 
-      styleArray.push(RouteLayer.getCircleStyle(lineStart));
-      styleArray.push(RouteLayer.getCircleStyle(lineEnd));
-      styleArray.push(
-        new Style({
-          geometry: new Point(lineEnd),
-          image: new IconStyle({
-            src: finishFlag,
-            anchor: [4.5, 3.5],
-            anchorXUnits: 'pixels',
-            anchorYUnits: 'pixels',
-            anchorOrigin: 'bottom-left',
-            imgSize: [24, 24],
-            crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
+      /* Set circle icon if it is the first sequence of a route */
+      if (feature.get('isStart')) {
+        styleArray.push(RouteLayer.getCircleStyle(lineStart));
+      }
+
+      /* Set flag and circle icons if it is the final sequence of a route */
+      if (feature.get('isEnd')) {
+        styleArray.push(RouteLayer.getCircleStyle(lineEnd));
+        styleArray.push(
+          new Style({
+            geometry: new Point(lineEnd),
+            image: new IconStyle({
+              src: finishFlag,
+              anchor: [4.5, 3.5],
+              anchorXUnits: 'pixels',
+              anchorYUnits: 'pixels',
+              anchorOrigin: 'bottom-left',
+              imgSize: [24, 24],
+              crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
+            }),
+            zIndex: 1,
           }),
-          zIndex: 1,
-        }),
-      );
+        );
+      }
     }
 
     return styleArray;
@@ -247,7 +260,15 @@ class RouteLayer extends CasaLayer {
 
         if (mot !== nextMot) {
           const sequenceProps = { route: { ...routes[i], routeId: i }, mot };
-          routePromises.push(this.fetchRouteForMot(via, mot, sequenceProps));
+          routePromises.push(
+            this.fetchRouteForMot(
+              via,
+              mot,
+              sequenceProps,
+              j === 0,
+              j === routes[i].sequences.length - 1,
+            ),
+          );
           via = [];
         }
       }
@@ -258,7 +279,7 @@ class RouteLayer extends CasaLayer {
       this.olLayer.getSource().addFeatures(sequenceFeatures);
       sequenceFeatures.forEach((f) => {
         const { routeId, isSelected } = f.get('route');
-        if (isSelected) {
+        if (isSelected && this.selectedRouteIds.indexOf(routeId) === -1) {
           this.selectedRouteIds.push(routeId);
         }
       });

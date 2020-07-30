@@ -5,7 +5,7 @@ import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
-import Layer from 'react-spatial/layers/Layer';
+import { Layer } from 'mobility-toolbox-js/ol';
 
 import FeatureInformation from '.';
 
