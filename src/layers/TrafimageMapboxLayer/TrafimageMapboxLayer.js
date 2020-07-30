@@ -108,10 +108,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
     }
 
     /* Get the MapBox style */
-    const mapboxStyle = await getMapboxStyle(this.styleUrl);
+    let mapboxStyle = null;
+    try {
+      mapboxStyle = await getMapboxStyle(this.styleUrl);
+    } catch {
+      console.error('Failed to fetch Mapbox style');
+    }
 
     /* Apply filters, remove style layers */
-    if (this.options.filters) {
+    if (mapboxStyle && this.options.filters) {
       const layers = [];
       this.options.filters.forEach((filter) => {
         const styleLayers = mapboxStyle.layers;
@@ -139,7 +144,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
        * @type {mapboxgl.Map}
        */
       this.mbMap = new mapboxgl.Map({
-        style: mapboxStyle,
+        style: mapboxStyle || this.styleUrl,
         attributionControl: false,
         boxZoom: false,
         center: toLonLat([x, y]),
@@ -152,7 +157,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
       });
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.warn('Failed creating mapbox map: ', err);
+      console.warn('Failed creating Mapbox map: ', err);
     }
 
     // Options the last render run did happen. If something changes
