@@ -13,6 +13,10 @@ const styleLayer = {
   id: 'layer',
 };
 
+const mockFetchPromise = Promise.resolve({
+  json: () => Promise.resolve({}),
+});
+
 describe('MapboxStyleLayer', () => {
   beforeEach(() => {
     source = new TrafimageMapboxLayer({
@@ -40,7 +44,8 @@ describe('MapboxStyleLayer', () => {
     expect(layer.mbMap).toBe();
   });
 
-  test.only('should initalized mapbox map.', async () => {
+  test('should initalized mapbox map.', async () => {
+    jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
     source.init(map);
     await source.loadMbMap();
     layer.init(map);

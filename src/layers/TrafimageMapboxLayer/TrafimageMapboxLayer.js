@@ -111,31 +111,30 @@ class TrafimageMapboxLayer extends MapboxLayer {
     let mapboxStyle = null;
     try {
       mapboxStyle = await getMapboxStyle(this.styleUrl);
+      /* Apply filters, remove style layers */
+      if (mapboxStyle && this.options.filters) {
+        const layers = [];
+        this.options.filters.forEach((filter) => {
+          const styleLayers = mapboxStyle.layers;
+          for (let i = 0; i < styleLayers.length; i += 1) {
+            const style = styleLayers[i];
+            /* filter.included boolean determines if the identified
+             * styleLayers or all others should be removed
+             */
+            const condition = filter.include
+              ? filter.value.test(style[filter.field])
+              : !filter.value.test(style[filter.field]);
+
+            if (condition) {
+              // mapboxStyle.layers.splice(i, 1);
+              layers.push(mapboxStyle.layers[i]);
+            }
+          }
+        });
+        mapboxStyle.layers = layers;
+      }
     } catch {
       console.error('Failed to fetch Mapbox style');
-    }
-
-    /* Apply filters, remove style layers */
-    if (mapboxStyle && this.options.filters) {
-      const layers = [];
-      this.options.filters.forEach((filter) => {
-        const styleLayers = mapboxStyle.layers;
-        for (let i = 0; i < styleLayers.length; i += 1) {
-          const style = styleLayers[i];
-          /* filter.included boolean determines if the identified
-           * styleLayers or all others should be removed
-           */
-          const condition = filter.include
-            ? filter.value.test(style[filter.field])
-            : !filter.value.test(style[filter.field]);
-
-          if (condition) {
-            // mapboxStyle.layers.splice(i, 1);
-            layers.push(mapboxStyle.layers[i]);
-          }
-        }
-      });
-      mapboxStyle.layers = layers;
     }
 
     try {
