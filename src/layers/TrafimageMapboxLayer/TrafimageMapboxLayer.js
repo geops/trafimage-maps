@@ -114,9 +114,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
       });
   }
 
-  /**
-   * Create the mapbox map.
-   */
   loadMbMap() {
     // If the map hasn't been resized, the center could be [NaN,NaN].
     // We set default good value for the mapbox map, to avoid the app crashes.
@@ -127,10 +124,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
     }
 
     try {
-      /**
-       * A mapbox map
-       * @type {mapboxgl.Map}
-       */
       this.mbMap = new mapboxgl.Map({
         style: { version: 8, sources: {}, layers: [] },
         attributionControl: false,
@@ -151,7 +144,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
 
     // Options the last render run did happen. If something changes
     // we have to render again
-    /** @ignore */
     this.renderState = {
       center: [x, y],
       zoom: null,
@@ -188,18 +180,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
     });
   }
 
-  /** This function is called each time on new complete style is loaded */
   onStyleLoaded() {
-    /**
-     * Is the map loaded.
-     * @type {boolean}
-     */
     this.loaded = true;
 
-    /**
-     * Copyright statement.
-     * @type {string}
-     */
     this.copyright = getCopyrightFromSources(this.mbMap);
 
     this.dispatchEvent({
