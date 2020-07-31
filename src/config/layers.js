@@ -91,7 +91,6 @@ const updateStations = (mbMap) => {
 // We don't use 'once()' because when switching topics
 // (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
 dataLayer.on('load', () => {
-  console.log('datalayer.onload');
   const { map, mbMap } = dataLayer;
   osmPointsLayers = mbMap
     .getStyle()
