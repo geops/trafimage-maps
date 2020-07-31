@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
 import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 import { setFeatureInfo } from '../../model/app/actions';
 
 import DeparturePopupContent from './DeparturePopupContent';
@@ -49,7 +50,7 @@ const DeparturePopup = ({ feature, appBaseUrl }) => {
 DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;
 
-const composed = withTranslation()(DeparturePopup);
+const composed = compose(withTranslation())(DeparturePopup);
 composed.renderTitle = (feat) => feat.get('name');
 // Trigerred on popup close with close button only.
 composed.onCloseBtClick = () => {

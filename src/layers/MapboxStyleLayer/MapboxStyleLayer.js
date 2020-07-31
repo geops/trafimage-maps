@@ -28,7 +28,6 @@ class MapboxStyleLayer extends Layer {
     this.onLoad = this.onLoad.bind(this);
     this.filters = options.filters;
 
-    this.hidePopupFunc = options.hidePopup;
     if (!this.styleLayersFilter && this.styleLayers) {
       const ids = this.styleLayers.map((s) => s.id);
       this.styleLayersFilter = (styleLayer) => {
@@ -98,10 +97,6 @@ class MapboxStyleLayer extends Layer {
       this.removeStyleLayers();
     }
     super.terminate(map);
-  }
-
-  hidePopup(feat, layer, featureInfo) {
-    return this.hidePopupFunc && this.hidePopupFunc(feat, layer, featureInfo);
   }
 
   addStyleLayers() {
@@ -202,9 +197,6 @@ class MapboxStyleLayer extends Layer {
 
   setHoverState(features = [], state) {
     const options = this.styleLayers[0];
-    if (!options) {
-      return;
-    }
     features.forEach((feature) => {
       if ((!options.source && !options['source-layer']) || !feature.getId()) {
         if (!feature.getId()) {

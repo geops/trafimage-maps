@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -27,4 +28,4 @@ const NetzkarteTopicInfo = ({ t }) => {
 NetzkarteTopicInfo.propTypes = propTypes;
 NetzkarteTopicInfo.defaultProps = defaultProps;
 
-export default withTranslation()(NetzkarteTopicInfo);
+export default compose(withTranslation())(NetzkarteTopicInfo);

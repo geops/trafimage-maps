@@ -130,22 +130,19 @@ function HandicapPopup({ feature }) {
     );
   };
 
-  const titles = properties.stuetzpunktbahnhof
-    ? [`${t('Stützpunktbahnhof')}`]
-    : [];
+  let title = properties.stuetzpunktbahnhof ? `${t('Stützpunktbahnhof')}` : '';
 
   if (properties.barrierefreier_bahnhof !== null) {
-    titles.push(
-      properties.barrierefreier_bahnhof
-        ? t('Barrierefreier Bahnhof')
-        : t('Nicht barrierefreier Bahnhof'),
-    );
+    title += ' / ';
+    title += properties.barrierefreier_bahnhof
+      ? t('Barrierefreier Bahnhof')
+      : t('Nicht barrierefreier Bahnhof');
   }
 
   return (
     <div className="wkp-handicap-popup">
       <div className="wkp-handicap-popup-body">
-        <div className="wkp-handicap-popup-title">{titles.join(' / ')}</div>
+        <div className="wkp-handicap-popup-title">{title}</div>
         {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
             return null;

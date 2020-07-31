@@ -1,95 +1,58 @@
-import React from 'react';
-import { fromLonLat } from 'ol/proj';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import Search from '../Search';
+import HandicapLayer from '../../layers/HandicapLayer';
+import StopFinder from '../StopFinder';
 
-const endpoint = 'https://api.geops.io/stops/v1/';
+const findHandicapLayers = (l) => l instanceof HandicapLayer;
+const getHandicapFeatures = (layer) =>
+  layer.olLayer
+    .getSource()
+    .getFeatures()
+    .map((feature) => ({
+      didok: feature.getProperties().didok,
+      feature,
+      layer,
+    }));
 
-class HandicapStopFinder extends Search {
+class HandicapStopFinder extends StopFinder {
   constructor() {
     super();
-    this.onDataEvent = this.onDataEvent.bind(this);
-  }
-
-  setApiKey(apiKey) {
-    this.apiKey = apiKey;
+    this.placeholder = 'Suche nach Stationen';
   }
 
   search(value) {
-    return fetch(`${endpoint}?&q=${value}&key=${this.apiKey}`)
-      .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features)
+    const handicapFeatures = this.props.activeTopic.layers
+      .filter(findHandicapLayers)
+      .map(getHandicapFeatures)
+      .flat();
+    return super
+      .search(value)
+      .then((features) =>
+        features
+          ? features
+              .map((f) => ({
+                ...f,
+                handicap: handicapFeatures.find(
+                  (hf) => hf.didok === f.properties.id,
+                ),
+              }))
+              .filter((f) => f.handicap)
+          : [],
+      )
       .catch(() => {
         return [];
       });
   }
 
-  render(item) {
-    return <div>{item.properties.name}</div>;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  value(item) {
-    return item.properties.name;
-  }
-
-  openPopup(item) {
-    this.popupItem = item;
-    const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.handicap.data');
-
-    if (layer) {
-      const { mbMap } = layer;
-      mbMap.once('idle', () => {
-        if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
-          this.onDataEvent();
-        } else {
-          // We can't rely on sourcedata because isSourceLoaded returns false.
-          mbMap.on('idle', this.onDataEvent);
-        }
-      });
-    }
-  }
-
-  onDataEvent() {
-    const { layerService, dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
-
-    if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
-      mbMap.off('idle', this.onDataEvent);
-    } else {
-      return;
-    }
-
-    // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
-    const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
-      const { styleLayers } = layer;
-      if (!styleLayers) {
-        return [];
-      }
-      const sourceIds = styleLayers.map(({ source }) => source);
-      return (
-        layer.getVisible() &&
-        layer instanceof MapboxStyleLayer &&
-        sourceIds.includes('ch.sbb.handicap')
-      );
-    });
-
-    // Here we simulate a click, it's the best way to get the proper popup informations.
-    // The only drawback is that if the station is not rendered there is no popup.
-    const infos = infoLayers
-      .map((layer) =>
-        layer.getFeatureInfoAtCoordinate(
-          fromLonLat(this.popupItem.geometry.coordinates),
-        ),
-      )
-      .filter((i) => i);
-
-    Promise.all(infos).then((featureInfos) => {
-      dispatchSetFeatureInfo(
-        featureInfos.filter(({ features }) => features.length),
-      );
-    });
+  select(item) {
+    window.clearTimeout(this.selectTimeout);
+    this.selectTimeout = window.setTimeout(() => {
+      this.props.dispatchSetFeatureInfo([
+        {
+          features: [item.handicap.feature],
+          layer: item.handicap.layer,
+          coordinate: item.handicap.feature.getGeometry().getFlatCoordinates(),
+        },
+      ]);
+    }, 200);
   }
 }
 

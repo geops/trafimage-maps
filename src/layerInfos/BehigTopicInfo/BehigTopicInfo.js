@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
+import { compose } from 'lodash/fp';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -85,4 +86,4 @@ const BehigTopicInfo = ({ language, t, staticFilesUrl }) => {
 BehigTopicInfo.propTypes = propTypes;
 BehigTopicInfo.defaultProps = defaultProps;
 
-export default withTranslation()(BehigTopicInfo);
+export default compose(withTranslation())(BehigTopicInfo);

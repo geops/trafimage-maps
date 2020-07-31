@@ -13,10 +13,7 @@ import defaultBaseLayers, {
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
   parks,
-  handicapDataLayer,
-  stuetzpunktBahnhoefe,
-  barrierfreierBahnhoefe,
-  nichtBarrierfreierBahnhoefe,
+  stuetzpunktbahnhoefe,
   kilometrageLayer,
   constrUnterhalt,
   constrAusbau,
@@ -35,7 +32,10 @@ import defaultBaseLayers, {
   zweitausbildungRoutes,
   zweitausbildungStations,
 } from './layers';
-import defaultSearches, { handicapStopFinder } from './searches';
+import defaultSearches, {
+  handicapStopFinder,
+  handicapNoInfoFinder,
+} from './searches';
 
 const defaultElements = {
   header: true,
@@ -76,19 +76,13 @@ export const handicap = {
   name: 'ch.sbb.handicap',
   key: 'ch.sbb.handicap',
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    ...defaultBaseLayers,
-    handicapDataLayer,
-    bahnhofplaene,
-    nichtBarrierfreierBahnhoefe,
-    barrierfreierBahnhoefe,
-    stuetzpunktBahnhoefe,
-  ],
+  layers: [...defaultBaseLayers, stuetzpunktbahnhoefe],
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
     // prettier-ignore
-    'Stationen': handicapStopFinder
+    'Stützpunktbahnhöfe': handicapStopFinder,
+    'Stationen ohne Informationen': handicapNoInfoFinder,
   },
 };
 
@@ -270,14 +264,6 @@ export const intervention = {
   layerInfoComponent: 'InterventionTopicInfo',
 };
 
-export const dfanachfuehrung = {
-  name: 'ch.sbb.dfanachfuehrung',
-  key: 'ch.sbb.dfanachfuehrung',
-  description: 'ch.sbb.dfanachfuehrung-desc',
-  redirect: true,
-  permission: 'dfa-nf',
-};
-
 export const verbundzonen = {
   name: 'ch.sbb.verbundzonen',
   key: 'ch.sbb.verbundzonen',
@@ -325,7 +311,6 @@ const topics = {
     zweitausbildung,
     regionenkartePrivate,
     intervention,
-    dfanachfuehrung,
     verbundzonen,
     tina,
   ],
