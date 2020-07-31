@@ -80,7 +80,7 @@ class MapboxStyleLayer extends Layer {
     );
 
     this.olListenersKeys.push(
-      this.mapboxLayer.on('change:styleurl', () => {
+      this.mapboxLayer.on('load', () => {
         this.addStyleLayers();
       }),
     );

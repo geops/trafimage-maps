@@ -91,6 +91,7 @@ const updateStations = (mbMap) => {
 // We don't use 'once()' because when switching topics
 // (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
 dataLayer.on('load', () => {
+  console.log('datalayer.onload');
   const { map, mbMap } = dataLayer;
   osmPointsLayers = mbMap
     .getStyle()
@@ -100,13 +101,16 @@ dataLayer.on('load', () => {
       );
     })
     .map((layer) => layer.id);
-  mbMap.addSource('stations', {
-    type: 'geojson',
-    data: {
-      type: 'FeatureCollection',
-      features: [],
-    },
-  });
+
+  if (!mbMap.getSource('stations')) {
+    mbMap.addSource('stations', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+  }
   updateStations(mbMap);
 
   // Update stations source on moveeend.
