@@ -19,10 +19,30 @@ const getCopyrightFromSources = (mbMap) => {
   ).join(', ');
 };
 
-const getMapboxStyle = async (url) => {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
+const applyFilters = (mbStyle, filters) => {
+  const newStyle = { ...mbStyle };
+  /* Apply filters, remove style layers */
+  if (mbStyle && filters) {
+    const layers = [];
+    (filters || []).forEach((filter) => {
+      const styleLayers = mbStyle.layers;
+      for (let i = 0; i < styleLayers.length; i += 1) {
+        const style = styleLayers[i];
+        /* filter.included boolean determines if the identified
+         * styleLayers or all others should be removed
+         */
+        const condition = filter.include
+          ? filter.value.test(style[filter.field])
+          : !filter.value.test(style[filter.field]);
+        if (condition) {
+          // mapboxStyle.layers.splice(i, 1);
+          layers.push(mbStyle.layers[i]);
+        }
+      }
+    });
+    newStyle.layers = layers;
+  }
+  return newStyle;
 };
 
 class TrafimageMapboxLayer extends MapboxLayer {
@@ -66,6 +86,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     if (this.styleUrl === newStyleUrl) {
       return;
     }
+
     if (!this.mbMap) {
       // The mapbox map does not exist so we only set the good styleUrl.
       this.styleUrl = newStyleUrl;
@@ -85,12 +106,10 @@ class TrafimageMapboxLayer extends MapboxLayer {
         if (!this.mbMap) {
           return;
         }
-        this.mbMap.setStyle(data);
+        const styleFiltered = applyFilters(data, this.options.filters);
+        this.mbMap.setStyle(styleFiltered);
         this.mbMap.once('styledata', () => {
-          this.dispatchEvent({
-            type: 'change:styleurl',
-            target: this,
-          });
+          this.onStyleLoaded();
         });
       });
   }
@@ -98,7 +117,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
   /**
    * Create the mapbox map.
    */
-  async loadMbMap() {
+  loadMbMap() {
     // If the map hasn't been resized, the center could be [NaN,NaN].
     // We set default good value for the mapbox map, to avoid the app crashes.
     let [x, y] = this.map.getView().getCenter();
@@ -107,43 +126,13 @@ class TrafimageMapboxLayer extends MapboxLayer {
       y = 0;
     }
 
-    /* Get the MapBox style */
-    let mapboxStyle = null;
-    try {
-      mapboxStyle = await getMapboxStyle(this.styleUrl);
-      /* Apply filters, remove style layers */
-      if (mapboxStyle && this.options.filters) {
-        const layers = [];
-        this.options.filters.forEach((filter) => {
-          const styleLayers = mapboxStyle.layers;
-          for (let i = 0; i < styleLayers.length; i += 1) {
-            const style = styleLayers[i];
-            /* filter.included boolean determines if the identified
-             * styleLayers or all others should be removed
-             */
-            const condition = filter.include
-              ? filter.value.test(style[filter.field])
-              : !filter.value.test(style[filter.field]);
-
-            if (condition) {
-              // mapboxStyle.layers.splice(i, 1);
-              layers.push(mapboxStyle.layers[i]);
-            }
-          }
-        });
-        mapboxStyle.layers = layers;
-      }
-    } catch {
-      console.error('Failed to fetch Mapbox style');
-    }
-
     try {
       /**
        * A mapbox map
        * @type {mapboxgl.Map}
        */
       this.mbMap = new mapboxgl.Map({
-        style: mapboxStyle || this.styleUrl,
+        style: { version: 8, sources: {}, layers: [] },
         attributionControl: false,
         boxZoom: false,
         center: toLonLat([x, y]),
@@ -157,6 +146,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     } catch (err) {
       // eslint-disable-next-line no-console
       console.warn('Failed creating Mapbox map: ', err);
+      return;
     }
 
     // Options the last render run did happen. If something changes
@@ -171,26 +161,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
       size: [0, 0],
     };
 
-    this.mbMap.once('load', () => {
-      /**
-       * Is the map loaded.
-       * @type {boolean}
-       */
-      this.loaded = true;
-      if (!this.copyright) {
-        /**
-         * Copyright statement.
-         * @type {string}
-         */
-        this.copyright = getCopyrightFromSources(this.mbMap);
-      }
-      this.dispatchEvent({
-        type: 'load',
-        target: this,
-      });
-      this.olLayer.changed();
-    });
-
     const mapboxCanvas = this.mbMap.getCanvas();
     if (mapboxCanvas) {
       if (this.options.tabIndex) {
@@ -201,6 +171,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
         mapboxCanvas.removeAttribute('tabindex');
       }
     }
+
+    /* Load and apply the Mapbox style */
+    this.setStyleConfig(this.styleUrl);
   }
 
   getFeatures({ source, sourceLayer, filter } = {}) {
@@ -212,6 +185,26 @@ class TrafimageMapboxLayer extends MapboxLayer {
     return mbMap.querySourceFeatures(source, {
       sourceLayer,
       filter,
+    });
+  }
+
+  /** This function is called each time on new complete style is loaded */
+  onStyleLoaded() {
+    /**
+     * Is the map loaded.
+     * @type {boolean}
+     */
+    this.loaded = true;
+
+    /**
+     * Copyright statement.
+     * @type {string}
+     */
+    this.copyright = getCopyrightFromSources(this.mbMap);
+
+    this.dispatchEvent({
+      type: 'load',
+      target: this,
     });
   }
 }

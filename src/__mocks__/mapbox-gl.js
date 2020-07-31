@@ -11,6 +11,8 @@ class Map {
   off() {}
 
   once() {}
+
+  getLayer() {}
 }
 module.exports = {
   Map,

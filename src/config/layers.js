@@ -100,13 +100,16 @@ dataLayer.on('load', () => {
       );
     })
     .map((layer) => layer.id);
-  mbMap.addSource('stations', {
-    type: 'geojson',
-    data: {
-      type: 'FeatureCollection',
-      features: [],
-    },
-  });
+
+  if (!mbMap.getSource('stations')) {
+    mbMap.addSource('stations', {
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+  }
   updateStations(mbMap);
 
   // Update stations source on moveeend.

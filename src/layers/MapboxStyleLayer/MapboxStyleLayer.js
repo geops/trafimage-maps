@@ -70,18 +70,17 @@ class MapboxStyleLayer extends Layer {
     // Apply the visibiltity when layer's visibility change.
     this.olListenersKeys.push(
       this.on('change:visible', () => {
-        if (this.isMbMapLoaded) {
-          // Once the map is loaded we can apply vsiiblity without waiting
-          // the style. Mapbox take care of the application of style changes.
-          // pass isInit param for LevelLayer.
-          this.applyLayoutVisibility(false);
-        }
+        // Once the map is loaded we can apply vsiiblity without waiting
+        // the style. Mapbox take care of the application of style changes.
+        // pass isInit param for LevelLayer.
+        this.applyLayoutVisibility(false);
       }),
     );
 
+    // Re-apply the styleLayers if a style is loaded change.
     this.olListenersKeys.push(
-      this.mapboxLayer.on('change:styleurl', () => {
-        this.addStyleLayers();
+      this.mapboxLayer.on('load', () => {
+        this.onLoad();
       }),
     );
   }
@@ -93,26 +92,35 @@ class MapboxStyleLayer extends Layer {
     }
 
     mbMap.off('load', this.onLoad);
-    if (this.isMbMapLoaded) {
-      this.removeStyleLayers();
-    }
+    this.removeStyleLayers();
     super.terminate(map);
   }
 
   addStyleLayers() {
     const { mbMap } = this.mapboxLayer;
+
+    if (!mbMap) {
+      return;
+    }
+
     this.styleLayers.forEach((styleLayer) => {
       const { id, source } = styleLayer;
       if (mbMap.getSource(source) && !mbMap.getLayer(id)) {
         mbMap.addLayer(styleLayer);
       }
     });
+
     // pass isInit param for LevelLayer.
     this.applyLayoutVisibility(true);
   }
 
   removeStyleLayers() {
     const { mbMap } = this.mapboxLayer;
+
+    if (!mbMap) {
+      return;
+    }
+
     this.styleLayers.forEach((styleLayer) => {
       if (mbMap.getLayer(styleLayer.id)) {
         mbMap.removeLayer(styleLayer.id);
@@ -121,7 +129,6 @@ class MapboxStyleLayer extends Layer {
   }
 
   onLoad() {
-    this.isMbMapLoaded = true;
     this.addStyleLayers();
 
     if (this.addDynamicFilters) {
@@ -168,9 +175,14 @@ class MapboxStyleLayer extends Layer {
   applyLayoutVisibility() {
     const { visible } = this;
     const { mbMap } = this.mapboxLayer;
+
+    if (!mbMap) {
+      return;
+    }
+
     const style = mbMap.getStyle();
 
-    if (!mbMap || !style) {
+    if (!style) {
       return;
     }
 
