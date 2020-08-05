@@ -1,7 +1,8 @@
 @mixin loadFont($fontFamily, $path) {
   @font-face {
     font-family: #{$fontFamily};
-    src: url('#{$path}.woff') format('woff'),
+    src: 
+      url('#{$path}.woff') format('woff'),
       url('#{$path}.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
