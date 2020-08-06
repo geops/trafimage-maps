@@ -4,7 +4,6 @@ import Locations from '../searches/Locations';
 import Municipalities from '../searches/Municipalities';
 import StopFinder from '../searches/StopFinder';
 import HandicapStopFinder from '../searches/HandicapStopFinder';
-import HandicapNoInfoFinder from '../searches/HandicapNoInfoFinder';
 
 export const betriebspunkte = new Betriebspunkte();
 
@@ -17,8 +16,6 @@ export const municipalities = new Municipalities();
 export const stopFinder = new StopFinder();
 
 export const handicapStopFinder = new HandicapStopFinder();
-
-export const handicapNoInfoFinder = new HandicapNoInfoFinder();
 
 export default {
   Stationen: stopFinder,

@@ -1,7 +1,7 @@
 @import '../../globals.scss';
 
 .tm-trafimage-maps {
-  font-family: 'SBBWeb Roman', Arial, sans-serif;
+  font-family: 'SBBWeb-Roman', Arial, sans-serif;
   font-size: 14px;
   margin: 0;
   height: 100%;
@@ -198,6 +198,7 @@
   &.tm-w-xs {
     .wkp-search {
       min-width: unset;
+      left: 55px;
     }
 
     .wkp-search-toggle-container--open {
@@ -253,7 +254,7 @@
     .wkp-menu-wrapper {
       top: 55px;
       left: 0;
-      width: 345px;
+      width: 350px;
     }
 
     // header component is enabled
@@ -298,7 +299,7 @@
 
       .wkp-layer-toggler {
         position: absolute;
-        right: 5px;
+        right: 0;
         top: 12px;
       }
 
@@ -373,7 +374,6 @@
 
     .wkp-search {
       right: 220px;
-      left: 80px;
 
       .wkp-search-toggle-button {
         margin-right: -45px;
@@ -390,7 +390,6 @@
 
     .wkp-search {
       right: 10px;
-      left: 55px;
 
       .wkp-search-toggle-button {
         margin-right: -40px;
