@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -100,4 +99,4 @@ const PunctualityLayerInfo = ({ language, t, staticFilesUrl }) => {
 PunctualityLayerInfo.propTypes = propTypes;
 PunctualityLayerInfo.defaultProps = defaultProps;
 
-export default compose(withTranslation())(PunctualityLayerInfo);
+export default withTranslation()(PunctualityLayerInfo);
