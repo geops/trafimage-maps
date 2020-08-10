@@ -62,9 +62,14 @@ class TrafimageMapboxLayer extends MapboxLayer {
         .getLayersArray()
         .forEach((layer) => layer.setZIndex(this.options.zIndex));
     }
+    this.abortController = new AbortController();
   }
 
   terminate(map) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+
     super.terminate(map);
 
     this.dispatchEvent({
@@ -77,9 +82,10 @@ class TrafimageMapboxLayer extends MapboxLayer {
     if (!url) {
       return;
     }
-    const { style, url: url2 } = this.options;
-    const newStyleUrl =
-      url2 || `${url}/styles/${style}/style.json${key ? `?key=${key}` : ''}`;
+    const { style } = this.options;
+    const newStyleUrl = `${url}/styles/${style}/style.json${
+      key ? `?key=${key}` : ''
+    }`;
 
     // Don't apply style if not necessary otherwise
     // it will remove styles apply by MapboxStyleLayer layers.
@@ -89,29 +95,13 @@ class TrafimageMapboxLayer extends MapboxLayer {
 
     if (!this.mbMap) {
       // The mapbox map does not exist so we only set the good styleUrl.
+      // The style will be loaded in loadMbMap function.
       this.styleUrl = newStyleUrl;
       return;
     }
 
-    fetch(newStyleUrl)
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        // Ensure we don't reload the style for nothing.
-        if (this.styleUrl === newStyleUrl) {
-          return;
-        }
-        this.styleUrl = newStyleUrl;
-        if (!this.mbMap) {
-          return;
-        }
-        const styleFiltered = applyFilters(data, this.options.filters);
-        this.mbMap.setStyle(styleFiltered);
-        this.mbMap.once('styledata', () => {
-          this.onStyleLoaded();
-        });
-      });
+    // We load the new style.
+    this.loadStyle(newStyleUrl);
   }
 
   loadMbMap() {
@@ -164,8 +154,8 @@ class TrafimageMapboxLayer extends MapboxLayer {
       }
     }
 
-    /* Load and apply the Mapbox style */
-    this.setStyleConfig(this.styleUrl);
+    /* Load and apply the Mapbox style defined in the styleUrl property */
+    this.loadStyle(this.styleUrl);
   }
 
   getFeatures({ source, sourceLayer, filter } = {}) {
@@ -178,6 +168,39 @@ class TrafimageMapboxLayer extends MapboxLayer {
       sourceLayer,
       filter,
     });
+  }
+
+  loadStyle(newStyleUrl) {
+    if (!newStyleUrl) {
+      return;
+    }
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    fetch(newStyleUrl, { signal: this.abortController.signal })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        if (!this.mbMap) {
+          return;
+        }
+        this.styleUrl = newStyleUrl;
+        const styleFiltered = applyFilters(data, this.options.filters);
+        this.mbMap.setStyle(styleFiltered);
+        this.mbMap.once('styledata', () => {
+          this.onStyleLoaded();
+        });
+      })
+      .catch((err) => {
+        if (err && err.name === 'AbortError') {
+          // ignore user abort request
+          return;
+        }
+        // eslint-disable-next-line no-console
+        console.log('Loading of mapbox style failed: ', newStyleUrl, err);
+      });
   }
 
   onStyleLoaded() {
