@@ -102,7 +102,7 @@ export const immobilien = {
   elements: { ...defaultElements, shareMenu: true, popup: false },
   layers: [...defaultBaseLayers, immobilienDataLayer, immobilienCategories],
   projection: 'EPSG:3857',
-  TopicMenuBottom: ImmobilienMenuBottom,
+  topicMenuBottom: ImmobilienMenuBottom,
 };
 
 export const netzkarteStelen = {

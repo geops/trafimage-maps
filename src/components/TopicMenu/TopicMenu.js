@@ -166,7 +166,7 @@ class TopicMenu extends PureComponent {
     const { t, layerService, topic, activeTopic, menuOpen } = this.props;
     const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
-    const { TopicMenuBottom } = topic;
+    const TopicMenuBottom = topic.topicMenuBottom;
 
     if (
       activeTopic.key === topic.key &&
