@@ -179,7 +179,7 @@ const App = () => {
       layers: [...casa.layers, zoneLayer, routeLayer],
       elements: {
         mapControls: true,
-        menu: true,
+        menu: false,
         popup: true,
       }}];
 
