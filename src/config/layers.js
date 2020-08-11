@@ -70,6 +70,18 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   },
 });
 
+export const immobilienDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.immobilien.data',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'ch.sbb.handicap',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
 let osmPointsLayers = [];
 let olListenerKey;
 
@@ -513,6 +525,13 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
   },
+});
+
+export const immobilienCategories = new MapboxStyleLayer({
+  name: 'ch.sbb.immobilien-categories',
+  key: 'ch.sbb.immobilien-categories',
+  visible: true,
+  mapboxLayer: immobilienDataLayer,
 });
 
 export const netzkarteShowcasesNight = new TrafimageMapboxLayer({

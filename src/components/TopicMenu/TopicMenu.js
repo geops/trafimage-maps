@@ -166,6 +166,7 @@ class TopicMenu extends PureComponent {
     const { t, layerService, topic, activeTopic, menuOpen } = this.props;
     const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
+    const { TopicMenuBottom } = topic;
 
     if (
       activeTopic.key === topic.key &&
@@ -270,6 +271,9 @@ class TopicMenu extends PureComponent {
                 />
               )}
             {layerTree}
+            {topic.key === activeTopic.key && TopicMenuBottom ? (
+              <TopicMenuBottom topic={topic} />
+            ) : null}
           </Collapsible>
         </div>
       </div>

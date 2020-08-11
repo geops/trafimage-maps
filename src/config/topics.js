@@ -17,6 +17,8 @@ import defaultBaseLayers, {
   stuetzpunktBahnhoefe,
   barrierfreierBahnhoefe,
   nichtBarrierfreierBahnhoefe,
+  immobilienDataLayer,
+  immobilienCategories,
   kilometrageLayer,
   constrUnterhalt,
   constrAusbau,
@@ -35,6 +37,8 @@ import defaultBaseLayers, {
   zweitausbildungRoutes,
   zweitausbildungStations,
 } from './layers';
+import ImmobilienMenuBottom from '../menus/ImmobilienMenuBottom';
+
 import defaultSearches, { handicapStopFinder } from './searches';
 
 const defaultElements = {
@@ -90,6 +94,15 @@ export const handicap = {
     // prettier-ignore
     'Stationen': handicapStopFinder
   },
+};
+
+export const immobilien = {
+  name: 'ch.sbb.immobilien',
+  key: 'ch.sbb.immobilien',
+  elements: { ...defaultElements, shareMenu: true, popup: false },
+  layers: [...defaultBaseLayers, immobilienDataLayer, immobilienCategories],
+  projection: 'EPSG:3857',
+  TopicMenuBottom: ImmobilienMenuBottom,
 };
 
 export const netzkarteStelen = {
@@ -316,6 +329,7 @@ const topics = {
   wkp: [
     netzkarte,
     handicap,
+    immobilien,
     bauprojekte,
     behig,
     infrastruktur,
