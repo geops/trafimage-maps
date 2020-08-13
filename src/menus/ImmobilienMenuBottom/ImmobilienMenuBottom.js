@@ -10,9 +10,9 @@ const propTypes = {
 const filters = {
   region: {
     Alle: undefined,
-    ROT: ['==', 'region', 'ROT'],
-    RME: ['==', 'region', 'RME'],
-    RWT: ['==', 'region', 'RWT'],
+    ROT: ['==', 'ROT', ['get', 'region']],
+    RME: ['==', 'RME', ['get', 'region']],
+    RWT: ['==', 'RWT', ['get', 'region']],
   },
 };
 
