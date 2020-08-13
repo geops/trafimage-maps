@@ -527,6 +527,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   },
 });
 
+const immoCategories = ['circle', 'square', 'triangle'];
 export const immobilienCategories = new Layer({
   name: 'ch.sbb.immobilien-categories',
   key: 'ch.sbb.immobilien-categories',
@@ -537,22 +538,29 @@ export const immobilienCategories = new Layer({
       key: `ch.sbb.immobilien-category-${cat}`,
       styleLayer: {
         id: `ch.sbb.immobilien-category-${cat}`,
-        type: 'circle',
+        type: 'symbol',
         source: 'ch.sbb.immobilien',
         'source-layer': 'ch.sbb.immobilien',
         filter: ['all', ['==', `Kat. ${cat}`, ['get', 'bahnhofkategorie']]],
-        paint: {
-          'circle-color': [
+        layout: {
+          'icon-image': [
             'match',
             ['get', 'region'],
-            'RWT',
-            '#991818',
-            'RME',
-            '#184A99',
             'ROT',
-            '#5A9918',
-            '#000000',
+            `${immoCategories[cat - 1]}_green`,
+            'RME',
+            `${immoCategories[cat - 1]}_blue`,
+            'RWE',
+            `${immoCategories[cat - 1]}_red`,
+            `${immoCategories[cat - 1]}_red`,
           ],
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
         },
       },
       visible: true,
