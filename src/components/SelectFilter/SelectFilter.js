@@ -9,7 +9,17 @@ import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Chip from '@material-ui/core/Chip';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const RedCheckbox = withStyles({
+  root: {
+    '&$checked': {
+      color: '#eb0000',
+    },
+  },
+  checked: {},
+  // eslint-disable-next-line react/jsx-props-no-spreading
+})((props) => <Checkbox color="default" {...props} />);
 
 const propTypes = {
   // Label of the select Filter.
@@ -41,6 +51,7 @@ const useStyles = makeStyles(() => ({
   },
   menu: {
     maxHeight: 350,
+    fontSize: '14px',
   },
   chips: {
     display: 'flex',
@@ -50,6 +61,12 @@ const useStyles = makeStyles(() => ({
     height: 20,
     margin: 2,
     lineHeight: 20,
+  },
+  rootLabel: {
+    color: '#000',
+  },
+  shrink: {
+    transform: 'translate(0, 1.5px) scale(0.95)',
   },
 }));
 
@@ -76,7 +93,15 @@ const SelectFilter = ({
 
   return (
     <FormControl className={classes.formControl}>
-      <InputLabel id="ms-select-label">{label}</InputLabel>
+      <InputLabel
+        classes={{
+          root: classes.rootLabel,
+          shrink: classes.shrink,
+        }}
+        id="ms-select-label"
+      >
+        {label}
+      </InputLabel>
       <Select
         MenuProps={{
           className: classes.menu,
@@ -127,7 +152,9 @@ const SelectFilter = ({
               {multiple ? (
                 <FormControlLabel
                   label={t(value)}
-                  control={<Checkbox checked={(filters || []).includes(key)} />}
+                  control={
+                    <RedCheckbox checked={(filters || []).includes(key)} />
+                  }
                 />
               ) : (
                 t(value)

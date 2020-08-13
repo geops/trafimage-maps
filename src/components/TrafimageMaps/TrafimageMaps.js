@@ -166,10 +166,21 @@ class TrafimageMaps extends React.PureComponent {
     this.theme = createMuiTheme({
       palette: {
         primary: {
-          main: '#515151',
+          main: '#000',
         },
         text: {
-          primary: '#515151',
+          primary: '#000',
+        },
+      },
+      typography: {
+        fontFamily: ['SBBWeb-Roman', 'Arial', 'sans-serif'],
+        fontSize: 12,
+      },
+      overrides: {
+        MuiIconButton: {
+          root: {
+            fontSize: '1.5rem',
+          },
         },
       },
     });
