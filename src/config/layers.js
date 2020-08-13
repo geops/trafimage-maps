@@ -52,7 +52,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v1',
+  style: 'base_bright_v2',
   properties: {
     hideInLegend: true,
   },

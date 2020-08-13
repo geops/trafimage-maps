@@ -4,7 +4,7 @@ const netzkarteLayer = new TrafimageMapboxLayer({
   name: 'Netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
-  style: 'netzkarte_personenverkehr',
+  style: 'base_bright_v2',
 });
 
 export default {
