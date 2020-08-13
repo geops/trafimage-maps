@@ -8,6 +8,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import Chip from '@material-ui/core/Chip';
 import { makeStyles } from '@material-ui/core/styles';
 
 const propTypes = {
@@ -98,6 +99,26 @@ const SelectFilter = ({
         }}
         multiple={multiple}
         input={<Input />}
+        renderValue={(selected) => {
+          if (multiple) {
+            return (
+              <>
+                {multiple && (
+                  <div className={classes.chips}>
+                    {selected.map((value) => (
+                      <Chip
+                        key={value}
+                        label={filterChoices[value]}
+                        className={classes.chip}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
+            );
+          }
+          return filterChoices[selected];
+        }}
       >
         {Object.entries(filterChoices).map((entry) => {
           const [key, value] = entry;
