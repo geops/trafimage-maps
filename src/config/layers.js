@@ -527,11 +527,38 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   },
 });
 
-export const immobilienCategories = new MapboxStyleLayer({
+export const immobilienCategories = new Layer({
   name: 'ch.sbb.immobilien-categories',
   key: 'ch.sbb.immobilien-categories',
   visible: true,
-  mapboxLayer: immobilienDataLayer,
+  children: ['1', '2', '3'].map(cat => {
+    return new MapboxStyleLayer({
+      name: `ch.sbb.immobilien-category-${cat}`,
+      key: `ch.sbb.immobilien-category-${cat}`,
+      styleLayer: {
+        id: `ch.sbb.immobilien-category-${cat}`,
+        type: 'circle',
+        source: 'ch.sbb.immobilien',
+        'source-layer': 'ch.sbb.immobilien',
+        filter: ['all', ['==', 'bahnhofkategorie', `Kat. ${cat}`]],
+        paint: {
+          'circle-color': [
+            "match",
+            ["get", "region"],
+            "RWT",
+            "#991818",
+            "RME",
+            "#184A99",
+            "ROT",
+            "#5A9918",
+            "#000000",
+          ],
+        },
+      },
+      visible: true,
+      mapboxLayer: immobilienDataLayer,
+    });
+  }),
 });
 
 export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
