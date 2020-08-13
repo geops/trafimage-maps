@@ -560,6 +560,7 @@ export const immobilienCategories = new Layer({
               [10, 1],
             ],
           },
+          'icon-allow-overlap': true,
         },
       },
       visible: true,
