@@ -35,7 +35,24 @@ const ImmobilienMenuBottom = ({ topic }) => {
           const newStyleLayer = { ...styleLayer };
 
           if (type === 'leistungstypen' && value) {
-            newStyleLayer.filter.push(['in', type, ...value]);
+            // Remove previous leistungstypen_str filters.
+            newStyleLayer.filter = newStyleLayer.filter.filter((fil) => {
+              if (
+                Array.isArray(fil) &&
+                fil[2] &&
+                fil[2][1] === 'leistungstypen_str'
+              ) {
+                return false;
+              }
+              return true;
+            });
+            value.forEach((filterValue) => {
+              // eslint-disable-next-line no-param-reassign
+              newStyleLayer.filter.push([
+                'in',
+                filterValue[('get', 'leistungstypen_str')],
+              ]);
+            });
           } else {
             // Removed previous filter values
             Object.values(filters[type]).forEach((f) => {

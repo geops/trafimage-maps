@@ -540,7 +540,7 @@ export const immobilienCategories = new Layer({
         type: 'circle',
         source: 'ch.sbb.immobilien',
         'source-layer': 'ch.sbb.immobilien',
-        filter: ['all', ['==', 'bahnhofkategorie', `Kat. ${cat}`]],
+        filter: ['all', ['==', `Kat. ${cat}`, ['get', 'bahnhofkategorie']]],
         paint: {
           'circle-color': [
             'match',
