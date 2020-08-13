@@ -8,16 +8,21 @@ const propTypes = {
 };
 
 const filters = {
-  Alle: undefined,
-  ROT: ['all', ['==', 'region', 'ROT']],
-  RME: ['all', ['==', 'region', 'RME']],
-  RWT: ['all', ['==', 'region', 'RWT']],
+  region: {
+    Alle: undefined,
+    ROT: ['==', 'region', 'ROT'],
+    RME: ['==', 'region', 'RME'],
+    RWT: ['==', 'region', 'RWT'],
+  },
 };
 
 const ImmobilienMenuBottom = ({ topic }) => {
-  const onChangeCallback = (value) => {
+  const onChangeCallback = (value, type) => {
     topic.layers
-      .filter((l) => !l.isBaseLayer && l instanceof MapboxStyleLayer)
+      .find((l) => l.key === 'ch.sbb.immobilien-categories')
+      .children.filter(
+        (l) => !l.isBaseLayer && l.visible && l instanceof MapboxStyleLayer,
+      )
       .forEach((layer) => {
         if (layer) {
           const { mbMap } = layer.mapboxLayer;
@@ -26,10 +31,30 @@ const ImmobilienMenuBottom = ({ topic }) => {
             return;
           }
 
-          for (let i = 0; i < style.layers.length; i += 1) {
-            const styleLayer = style.layers[i];
-            mbMap.setFilter(styleLayer.id, filters[value]);
+          const styleLayer = style.layers.find((l) => l.id === layer.key);
+          const newStyleLayer = { ...styleLayer };
+
+          if (type === 'leistungstypen' && value) {
+            newStyleLayer.filter.push(['in', type, ...value]);
+          } else {
+            // Removed previous filter values
+            Object.values(filters[type]).forEach((f) => {
+              if (newStyleLayer.filter.includes(f)) {
+                newStyleLayer.filter = newStyleLayer.filter.filter(
+                  (fil) => fil !== f,
+                );
+              }
+            });
+
+            if (filters[type] && filters[type][value]) {
+              newStyleLayer.filter.push(filters[type][value]);
+            }
           }
+
+          // eslint-disable-next-line no-param-reassign
+          layer.styleLayers = [newStyleLayer];
+          layer.removeStyleLayers();
+          layer.addStyleLayers();
         }
       });
   };
@@ -45,20 +70,26 @@ const ImmobilienMenuBottom = ({ topic }) => {
           a3: 'RWT',
         }}
         defaultValue="a0"
-        onChangeCallback={onChangeCallback}
+        onChangeCallback={(e) => onChangeCallback(e, 'region')}
       />
       <SelectFilter
-        label="Leistungtypen"
+        label="Leistungstypen"
+        multiple
         fetchChoices={() => {
           return fetch(
             `https://cartaro2.dev.trafimage.ch/api/v1/immobilien/leistungstypen`,
           )
             .then((res) => res.json())
             .then((res) => {
-              return res;
+              const choices = {};
+              res.forEach((r, idx) => {
+                // eslint-disable-next-line no-param-reassign
+                choices[idx] = r.key;
+              });
+              return choices;
             });
         }}
-        onChangeCallback={onChangeCallback}
+        onChangeCallback={(e) => onChangeCallback(e, 'leistungstypen')}
       />
     </div>
   );

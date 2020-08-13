@@ -87,8 +87,14 @@ const SelectFilter = ({
         value={filters && filters.length ? filters : defaultVal}
         onChange={(e) => {
           const { value } = e.target;
-          setFilters(value);
-          onChangeCallback(filterChoices[value]);
+          if (multiple) {
+            const newValues = value.map((v) => filterChoices[v]);
+            setFilters(value);
+            onChangeCallback(newValues);
+          } else {
+            setFilters(value);
+            onChangeCallback(filterChoices[value]);
+          }
         }}
         multiple={multiple}
         input={<Input />}

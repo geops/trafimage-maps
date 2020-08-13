@@ -531,7 +531,7 @@ export const immobilienCategories = new Layer({
   name: 'ch.sbb.immobilien-categories',
   key: 'ch.sbb.immobilien-categories',
   visible: true,
-  children: ['1', '2', '3'].map(cat => {
+  children: ['1', '2', '3'].map((cat) => {
     return new MapboxStyleLayer({
       name: `ch.sbb.immobilien-category-${cat}`,
       key: `ch.sbb.immobilien-category-${cat}`,
@@ -543,15 +543,15 @@ export const immobilienCategories = new Layer({
         filter: ['all', ['==', 'bahnhofkategorie', `Kat. ${cat}`]],
         paint: {
           'circle-color': [
-            "match",
-            ["get", "region"],
-            "RWT",
-            "#991818",
-            "RME",
-            "#184A99",
-            "ROT",
-            "#5A9918",
-            "#000000",
+            'match',
+            ['get', 'region'],
+            'RWT',
+            '#991818',
+            'RME',
+            '#184A99',
+            'ROT',
+            '#5A9918',
+            '#000000',
           ],
         },
       },
