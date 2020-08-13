@@ -50,7 +50,8 @@ const ImmobilienMenuBottom = ({ topic }) => {
               // eslint-disable-next-line no-param-reassign
               newStyleLayer.filter.push([
                 'in',
-                filterValue[('get', 'leistungstypen_str')],
+                filterValue,
+                ['get', 'leistungstypen_str'],
               ]);
             });
           } else {
