@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { Layer } from 'mobility-toolbox-js/ol';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
@@ -160,6 +161,28 @@ class TrafimageMaps extends React.PureComponent {
      * @private
      */
     this.store = getStore();
+
+    this.theme = createMuiTheme({
+      palette: {
+        primary: {
+          main: '#000',
+        },
+        text: {
+          primary: '#000',
+        },
+      },
+      typography: {
+        fontFamily: ['SBBWeb-Roman', 'Arial', 'sans-serif'],
+        fontSize: 12,
+      },
+      overrides: {
+        MuiIconButton: {
+          root: {
+            fontSize: '1.5rem',
+          },
+        },
+      },
+    });
   }
 
   componentDidMount() {
@@ -245,18 +268,20 @@ class TrafimageMaps extends React.PureComponent {
     return (
       <MatomoProvider value={enableTracking && matomo}>
         <Provider store={this.store}>
-          <TopicLoader
-            history={history}
-            apiKey={apiKey}
-            topics={topics}
-            activeTopicKey={activeTopicKey}
-            cartaroUrl={cartaroUrl}
-            appBaseUrl={appBaseUrl}
-            permissionUrl={permissionUrl}
-            vectorTilesKey={vectorTilesKey}
-            vectorTilesUrl={vectorTilesUrl}
-            staticFilesUrl={staticFilesUrl}
-          />
+          <ThemeProvider theme={this.theme}>
+            <TopicLoader
+              history={history}
+              apiKey={apiKey}
+              topics={topics}
+              activeTopicKey={activeTopicKey}
+              cartaroUrl={cartaroUrl}
+              appBaseUrl={appBaseUrl}
+              permissionUrl={permissionUrl}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
+              staticFilesUrl={staticFilesUrl}
+            />
+          </ThemeProvider>
         </Provider>
       </MatomoProvider>
     );

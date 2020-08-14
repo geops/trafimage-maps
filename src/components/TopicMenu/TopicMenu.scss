@@ -137,6 +137,10 @@
     }
   }
 
+  .wkp-topic-filter {
+    margin: 10px 20px;
+  }
+
   .wkp-topic-content {
     transition: max-height 0.3s ease, margin 0.3s ease;
     max-height: 1000px;
@@ -146,6 +150,15 @@
       height: 30px;
       width: calc(100% - 42px);
       display: none;
+    }
+  }
+}
+
+.tm-w-xl,
+.tm-w-l {
+  .wkp-topic-menu {
+    .wkp-topic-filter {
+      margin: 10px 5px;
     }
   }
 }
