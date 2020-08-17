@@ -13,6 +13,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const RedCheckbox = withStyles({
   root: {
+    padding: '5px 6px',
     '&$checked': {
       color: '#eb0000',
     },
@@ -26,7 +27,13 @@ const propTypes = {
   label: PropTypes.string.isRequired,
   // values of the select Filter.
   choices: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    PropTypes.oneOfType(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    ),
   ),
   // Default value for none multiple select.
   defaultValue: PropTypes.string,
@@ -48,6 +55,8 @@ const defaultProps = {
 const useStyles = makeStyles(() => ({
   formControl: {
     width: '100%',
+    marginBottom: '5px',
+    fontSize: '14px',
   },
   menu: {
     maxHeight: 350,
@@ -61,12 +70,17 @@ const useStyles = makeStyles(() => ({
     height: 20,
     margin: 2,
     lineHeight: 20,
+    fontSize: '14px',
   },
   rootLabel: {
     color: '#000',
   },
   shrink: {
-    transform: 'translate(0, 1.5px) scale(0.95)',
+    transform: 'none',
+  },
+  menuItem: {
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 }));
 
@@ -114,12 +128,12 @@ const SelectFilter = ({
         onChange={(e) => {
           const { value } = e.target;
           if (multiple) {
-            const newValues = value.map((v) => filterChoices[v]);
+            const newValues = value.map((v) => filterChoices[v].value);
             setFilters(value);
             onChangeCallback(newValues);
           } else {
             setFilters(value);
-            onChangeCallback(filterChoices[value]);
+            onChangeCallback(filterChoices[value].value);
           }
         }}
         multiple={multiple}
@@ -133,8 +147,9 @@ const SelectFilter = ({
                     {selected.map((value) => (
                       <Chip
                         key={value}
-                        label={filterChoices[value]}
+                        label={t(filterChoices[value].value)}
                         className={classes.chip}
+                        title={t(filterChoices[value].label)}
                       />
                     ))}
                   </div>
@@ -142,22 +157,22 @@ const SelectFilter = ({
               </>
             );
           }
-          return filterChoices[selected];
+          return filterChoices[selected] ? filterChoices[selected].value : null;
         }}
       >
         {Object.entries(filterChoices).map((entry) => {
-          const [key, value] = entry;
+          const [key, item] = entry;
           return (
-            <MenuItem key={key} value={key}>
+            <MenuItem key={key} value={key} className={classes.menuItem}>
               {multiple ? (
                 <FormControlLabel
-                  label={t(value)}
+                  label={t(item.label)}
                   control={
                     <RedCheckbox checked={(filters || []).includes(key)} />
                   }
                 />
               ) : (
-                t(value)
+                t(item.label)
               )}
             </MenuItem>
           );
