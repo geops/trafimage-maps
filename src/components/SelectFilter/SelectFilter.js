@@ -13,6 +13,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 const RedCheckbox = withStyles({
   root: {
+    padding: '5px 6px',
     '&$checked': {
       color: '#eb0000',
     },
@@ -74,6 +75,10 @@ const useStyles = makeStyles(() => ({
   },
   shrink: {
     transform: 'translate(0, 1.5px) scale(0.95)',
+  },
+  menuItem: {
+    paddingTop: 0,
+    paddingBottom: 0,
   },
 }));
 
@@ -156,7 +161,7 @@ const SelectFilter = ({
         {Object.entries(filterChoices).map((entry) => {
           const [key, item] = entry;
           return (
-            <MenuItem key={key} value={key}>
+            <MenuItem key={key} value={key} className={classes.menuItem}>
               {multiple ? (
                 <FormControlLabel
                   label={t(item.label)}
