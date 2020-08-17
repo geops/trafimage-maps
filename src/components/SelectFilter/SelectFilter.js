@@ -82,6 +82,9 @@ const useStyles = makeStyles(() => ({
     paddingTop: 0,
     paddingBottom: 0,
   },
+  formControlLabel: {
+    fontSize: '14px',
+  }
 }));
 
 const SelectFilter = ({
@@ -166,6 +169,9 @@ const SelectFilter = ({
             <MenuItem key={key} value={key} className={classes.menuItem}>
               {multiple ? (
                 <FormControlLabel
+                  classes={{
+                    label: classes.formControlLabel,
+                  }}
                   label={t(item.label)}
                   control={
                     <RedCheckbox checked={(filters || []).includes(key)} />
