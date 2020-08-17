@@ -26,7 +26,13 @@ const propTypes = {
   label: PropTypes.string.isRequired,
   // values of the select Filter.
   choices: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    // PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    PropTypes.oneOfType(
+      PropTypes.shape({
+        label: PropTypes.string,
+        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    ),
   ),
   // Default value for none multiple select.
   defaultValue: PropTypes.string,
@@ -61,6 +67,7 @@ const useStyles = makeStyles(() => ({
     height: 20,
     margin: 2,
     lineHeight: 20,
+    fontSize: '0.95em',
   },
   rootLabel: {
     color: '#000',
@@ -114,12 +121,12 @@ const SelectFilter = ({
         onChange={(e) => {
           const { value } = e.target;
           if (multiple) {
-            const newValues = value.map((v) => filterChoices[v]);
+            const newValues = value.map((v) => filterChoices[v].value);
             setFilters(value);
             onChangeCallback(newValues);
           } else {
             setFilters(value);
-            onChangeCallback(filterChoices[value]);
+            onChangeCallback(filterChoices[value].value);
           }
         }}
         multiple={multiple}
@@ -133,8 +140,9 @@ const SelectFilter = ({
                     {selected.map((value) => (
                       <Chip
                         key={value}
-                        label={filterChoices[value]}
+                        label={t(filterChoices[value].value)}
                         className={classes.chip}
+                        title={t(filterChoices[value].label)}
                       />
                     ))}
                   </div>
@@ -142,22 +150,22 @@ const SelectFilter = ({
               </>
             );
           }
-          return filterChoices[selected];
+          return filterChoices[selected] ? filterChoices[selected].value : null;
         }}
       >
         {Object.entries(filterChoices).map((entry) => {
-          const [key, value] = entry;
+          const [key, item] = entry;
           return (
             <MenuItem key={key} value={key}>
               {multiple ? (
                 <FormControlLabel
-                  label={t(value)}
+                  label={t(item.label)}
                   control={
                     <RedCheckbox checked={(filters || []).includes(key)} />
                   }
                 />
               ) : (
-                t(value)
+                t(item.label)
               )}
             </MenuItem>
           );

@@ -43,7 +43,7 @@ export const netzkarteLayer = new TrafimageMapboxLayer({
   isBaseLayer: true,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr',
+  style: 'base_bright_v2',
   properties: {
     radioGroup: 'baseLayer',
   },

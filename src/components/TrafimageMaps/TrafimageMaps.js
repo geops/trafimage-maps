@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';

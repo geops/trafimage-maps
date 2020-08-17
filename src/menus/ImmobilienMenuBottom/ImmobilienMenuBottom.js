@@ -7,15 +7,6 @@ const propTypes = {
   topic: PropTypes.shape().isRequired,
 };
 
-const filters = {
-  region: {
-    Alle: undefined,
-    ROT: ['==', 'ROT', ['get', 'region']],
-    RME: ['==', 'RME', ['get', 'region']],
-    RWT: ['==', 'RWT', ['get', 'region']],
-  },
-};
-
 const ImmobilienMenuBottom = ({ topic }) => {
   const onChangeCallback = (value, type) => {
     topic.layers
@@ -54,21 +45,28 @@ const ImmobilienMenuBottom = ({ topic }) => {
                 ['get', 'leistungstypen_str'],
               ]);
             });
-          } else {
-            // Removed previous filter values
-            Object.values(filters[type]).forEach((f) => {
-              if (newStyleLayer.filter.includes(f)) {
-                newStyleLayer.filter = newStyleLayer.filter.filter(
-                  (fil) => fil !== f,
-                );
+          } else if (type === 'region' && newStyleLayer.filter) {
+            // Remove previous region filters.
+            newStyleLayer.filter = newStyleLayer.filter.filter((fil) => {
+              if (Array.isArray(fil) && fil[1] && fil[1][1] === 'region') {
+                return false;
               }
+              return true;
             });
 
-            if (filters[type] && filters[type][value]) {
-              newStyleLayer.filter.push(filters[type][value]);
+            if (value.length) {
+              // eslint-disable-next-line no-param-reassign
+              newStyleLayer.filter.push([
+                'match',
+                ['get', 'region'],
+                value,
+                true,
+                false,
+              ]);
             }
           }
 
+          console.log(newStyleLayer.filter);
           // eslint-disable-next-line no-param-reassign
           layer.styleLayers = [newStyleLayer];
           layer.removeStyleLayers();
@@ -81,13 +79,21 @@ const ImmobilienMenuBottom = ({ topic }) => {
     <div className="wkp-topic-filter">
       <SelectFilter
         label="Region"
+        multiple
         choices={{
-          a0: 'Alle',
-          a1: 'ROT',
-          a2: 'RME',
-          a3: 'RWT',
+          a1: {
+            label: 'ROT',
+            value: 'ROT',
+          },
+          a2: {
+            label: 'RME',
+            value: 'RME',
+          },
+          a3: {
+            label: 'RWT',
+            value: 'RWT',
+          },
         }}
-        defaultValue="a0"
         onChangeCallback={(e) => onChangeCallback(e, 'region')}
       />
       <SelectFilter
@@ -102,7 +108,10 @@ const ImmobilienMenuBottom = ({ topic }) => {
               const choices = {};
               res.forEach((r, idx) => {
                 // eslint-disable-next-line no-param-reassign
-                choices[idx] = r.key;
+                choices[idx] = {
+                  value: r.key,
+                  label: `${r.key} - ${r.description}`,
+                };
               });
               return choices;
             });
