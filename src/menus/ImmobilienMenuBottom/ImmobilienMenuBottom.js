@@ -65,8 +65,6 @@ const ImmobilienMenuBottom = ({ topic }) => {
               ]);
             }
           }
-
-          console.log(newStyleLayer.filter);
           // eslint-disable-next-line no-param-reassign
           layer.styleLayers = [newStyleLayer];
           layer.removeStyleLayers();

@@ -55,6 +55,8 @@ const defaultProps = {
 const useStyles = makeStyles(() => ({
   formControl: {
     width: '100%',
+    marginBottom: '5px',
+    fontSize: '14px',
   },
   menu: {
     maxHeight: 350,
@@ -68,13 +70,13 @@ const useStyles = makeStyles(() => ({
     height: 20,
     margin: 2,
     lineHeight: 20,
-    fontSize: '0.95em',
+    fontSize: '14px',
   },
   rootLabel: {
     color: '#000',
   },
   shrink: {
-    transform: 'translate(0, 1.5px) scale(0.95)',
+    transform: 'none',
   },
   menuItem: {
     paddingTop: 0,
