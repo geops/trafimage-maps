@@ -69,11 +69,11 @@ const useStyles = makeStyles(() => ({
   chip: {
     height: 20,
     margin: 2,
-    lineHeight: 20,
     fontSize: '14px',
   },
   rootLabel: {
     color: '#000',
+    fontSize: '14px',
   },
   shrink: {
     transform: 'none',
@@ -84,7 +84,7 @@ const useStyles = makeStyles(() => ({
   },
   formControlLabel: {
     fontSize: '14px',
-  }
+  },
 }));
 
 const SelectFilter = ({
