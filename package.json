@@ -87,7 +87,7 @@
     "redux-mock-store": "1.5.4",
     "rewire": "4.0.1",
     "sort-json": "2.0.0",
-    "start-server-and-test": "1.10.11",
+    "start-server-and-test": "1.11.3",
     "stream-array": "1.1.2",
     "stylelint": "13.3.0",
     "stylelint-config-recommended-scss": "4.2.0",
