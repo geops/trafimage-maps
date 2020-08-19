@@ -32,6 +32,7 @@ const Login = ({ appBaseUrl }) => {
       onClick={openLoginPage}
       onKeyPress={(evt) => evt.which === 13 && openLoginPage()}
       tabIndex={0}
+      title={permissionsInfos && permissionsInfos.user}
     >
       <SBBUser focusable={false} className="wkp-login-icon" />
       <span className="wkp-login-text">{login}</span>
