@@ -276,6 +276,7 @@ export const tina = {
   description: 'ch.sbb.lar-desc',
   permission: 'tina',
   redirect: true,
+  hideInLayerTree: true,
 };
 
 export const zweitausbildung = {
