@@ -21,7 +21,7 @@
     position: absolute;
     right: 10px;
     top: 0;
-    left: calc(100% - 465px);
+    left: calc(100% - 475px);
 
     .wkp-header-sbb-logo-wrapper {
       position: absolute;
@@ -32,6 +32,14 @@
       .wkp-header-sbb-logo {
         height: 100%;
         width: 100%;
+      }
+    }
+
+    .wkp-login {
+      .wkp-login-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 90px;
       }
     }
   }
