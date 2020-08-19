@@ -18,7 +18,7 @@
     "i18next": "^19.3.3",
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
-    "jsts": "2.1.0",
+    "jsts": "2.5.1",
     "lodash": "^4.17.11",
     "mapbox-gl": "1.11.1",
     "mobility-toolbox-js": "1.1.5",
