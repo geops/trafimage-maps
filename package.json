@@ -80,7 +80,7 @@
     "node-fetch": "2.6.0",
     "prettier": "2.0.4",
     "react-app-rewired": "2.1.5",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.4.3",
     "react-svg-loader": "3.0.3",
     "react-test-renderer": "16.13.1",
     "react-web-component-style-loader": "0.1.4-alpha",
