@@ -29,6 +29,7 @@ exports[`Login matches snapshot displaying user name 1`] = `
   onKeyPress={[Function]}
   role="button"
   tabIndex={0}
+  title="bar"
 >
   <svg
     className="wkp-login-icon"
