@@ -270,13 +270,6 @@ export const intervention = {
   layerInfoComponent: 'InterventionTopicInfo',
 };
 
-export const verbundzonen = {
-  name: 'ch.sbb.verbundzonen',
-  key: 'ch.sbb.verbundzonen',
-  redirect: true,
-  permission: 'verbundzonen',
-};
-
 export const tina = {
   name: 'ch.sbb.lar',
   key: 'ch.sbb.lar',
@@ -317,7 +310,6 @@ const topics = {
     zweitausbildung,
     regionenkartePrivate,
     intervention,
-    verbundzonen,
     tina,
   ],
   stelen: [netzkarteStelen],

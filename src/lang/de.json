@@ -141,8 +141,6 @@
   "ch.sbb.tarifverbundkarte.public": "Tarifverbundkarte",
   "ch.sbb.tracker": "Zugtracker",
   "ch.sbb.tracker-desc": "Der Zugtracker zeigt die aktuellen Verbindungen basierend auf dem Soll-Fahrplan des Schweizer ÖV.<p>Daten: <a href=\"http://fahrplanfelder.ch\" target=\"_blank\">fahrplanfelder.ch</a>.</p>",
-  "ch.sbb.verbundzonen": "Verbundzonen (Pilot)",
-  "ch.sbb.verbundzonen-desc": "Verbundzonen (Pilot)",
   "ch.sbb.weinregionen": "Raiffeisen Aktion \"Schweizer Weinregionen\"",
   "ch.sbb.weinregionen-desc": "Planen Sie Ihre Reise mit dem öffentlichen Verkehr. Geben Sie zu diesem Zweck zuerst den Abfahrtsort ein und anschliessend den Zielort. Beim Zielort sind nur Haltestellen ersichtlich, die ausserhalb des Tarifverbundes des Abfahrtsorts liegen.",
   "ch.sbb.xmas-desc": "SBB-Weihnacht",
