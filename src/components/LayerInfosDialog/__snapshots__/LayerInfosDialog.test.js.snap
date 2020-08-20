@@ -9,6 +9,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
     onMouseDown={[Function]}
     onMouseUp={[Function]}
     onTouchEnd={[Function]}
+    onTouchStart={[Function]}
     style={
       Object {
         "boxSizing": "border-box",
@@ -23,6 +24,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         "minWidth": undefined,
         "position": "absolute",
         "top": 0,
+        "touchAction": "none",
         "transform": "translate(0px,0px)",
         "userSelect": "auto",
         "width": "auto",
