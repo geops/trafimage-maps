@@ -15,7 +15,7 @@
     "abortcontroller-polyfill": "^1.4.0",
     "color": "^3.1.2",
     "deepmerge": "^4.2.2",
-    "i18next": "^19.4.1",
+    "i18next": "^19.3.3",
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
     "jsts": "2.1.0",
@@ -32,7 +32,7 @@
     "react-app-polyfill": "^1.0.6",
     "react-autosuggest": "^9.4.3",
     "react-dom": "^16.13.1",
-    "react-i18next": "^11.7.0",
+    "react-i18next": "^11.3.4",
     "react-icons": "^3.9.0",
     "react-redux": "^7.2.0",
     "react-select": "^3.1.0",
@@ -47,8 +47,8 @@
     "styled-components": "^5.0.1"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^16.11.1",
+    "react-dom": "^16.11.1"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
