@@ -47,8 +47,8 @@
     "styled-components": "^5.0.1"
   },
   "peerDependencies": {
-    "react": "^16.11.1",
-    "react-dom": "^16.11.1"
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
