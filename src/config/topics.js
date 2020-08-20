@@ -270,27 +270,13 @@ export const intervention = {
   layerInfoComponent: 'InterventionTopicInfo',
 };
 
-export const dfanachfuehrung = {
-  name: 'ch.sbb.dfanachfuehrung',
-  key: 'ch.sbb.dfanachfuehrung',
-  description: 'ch.sbb.dfanachfuehrung-desc',
-  redirect: true,
-  permission: 'dfa-nf',
-};
-
-export const verbundzonen = {
-  name: 'ch.sbb.verbundzonen',
-  key: 'ch.sbb.verbundzonen',
-  redirect: true,
-  permission: 'verbundzonen',
-};
-
 export const tina = {
   name: 'ch.sbb.lar',
   key: 'ch.sbb.lar',
   description: 'ch.sbb.lar-desc',
   permission: 'tina',
   redirect: true,
+  hideInLayerTree: true,
 };
 
 export const zweitausbildung = {
@@ -325,8 +311,6 @@ const topics = {
     zweitausbildung,
     regionenkartePrivate,
     intervention,
-    dfanachfuehrung,
-    verbundzonen,
     tina,
   ],
   stelen: [netzkarteStelen],
