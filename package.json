@@ -54,7 +54,6 @@
   "devDependencies": {
     "@babel/cli": "7.8.4",
     "babel-loader": "8.1.0",
-    "babel-plugin-named-asset-import": "^0.3.6",
     "canvas": "2.6.1",
     "cypress": "4.3.0",
     "cypress-plugin-tab": "1.0.5",
