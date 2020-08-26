@@ -69,7 +69,7 @@ class HandicapStopFinder extends Search {
       }
       const sourceIds = styleLayers.map(({ source }) => source);
       return (
-        layer.getVisible() &&
+        layer.visible &&
         layer instanceof MapboxStyleLayer &&
         sourceIds.includes('ch.sbb.handicap')
       );
