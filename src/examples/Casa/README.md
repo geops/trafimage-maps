@@ -14,6 +14,8 @@ import 'trafimage-maps/examples/Casa/casa.css'
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
+console.log(casa)
+
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
@@ -181,6 +183,7 @@ const App = () => {
         mapControls: true,
         menu: false,
         popup: true,
+        baseLayerSwitcher: true,
       }}];
 
     return () => {

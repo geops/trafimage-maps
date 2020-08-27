@@ -1,4 +1,5 @@
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import netzkarteImage from '../img/netzkarte.png';
 import defaultBaseLayers, {
   swisstopoSwissImage,
   bahnhofplaene,
@@ -115,6 +116,7 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   ],
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: netzkarteImage,
   },
 });
 
@@ -135,6 +137,7 @@ const casaNetzkarteShowcasesLight = new TrafimageMapboxLayer({
   ],
   properties: {
     radioGroup: 'baseLayer',
+    previewImage: netzkarteImage,
   },
 });
 
@@ -160,8 +163,8 @@ export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
   layers: [
+    swisstopoSwissImage,
     casaNetzkarteShowcasesLight,
-    casaNetzkartePersonenverkehr,
     netzkarteLayerLabels,
   ],
   elements: {

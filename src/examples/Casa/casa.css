@@ -19,3 +19,10 @@
 .casa .tm-trafimage-maps .wkp-geolocation {
   display: none;
 }
+
+.casa .tm-trafimage-maps .rs-base-layer-switcher {
+  display: flex;
+  bottom: 10px;
+  right: 10px;
+  left: unset;
+}

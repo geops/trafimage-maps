@@ -2491,7 +2491,12 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
-abortcontroller-polyfill@1.4.0, abortcontroller-polyfill@^1.4.0:
+abortcontroller-polyfill@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.5.0.tgz#2c562f530869abbcf88d949a2b60d1d402e87a7c"
+  integrity sha512-O6Xk757Jb4o0LMzMOMdWvxpHWrQzruYBaUruFaIOfAQRnWFxfdXYobw12jrVHGtoXk6WiiyYzc0QWN9aL62HQA==
+
+abortcontroller-polyfill@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/abortcontroller-polyfill/-/abortcontroller-polyfill-1.4.0.tgz#0d5eb58e522a461774af8086414f68e1dda7a6c4"
   integrity sha512-3ZFfCRfDzx3GFjO6RAkYx81lPGpUS20ISxux9gLxuKnqafNcFQo59+IoZqpO2WvQlyc287B62HDnDdNYRmlvWA==
@@ -14364,12 +14369,12 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.0.tgz#f649a504f447550a79cd9e9129275fde0567f915"
-  integrity sha512-TO2hmKXtyU2Z8Kban5QDEqzbLCAEAbCIGTzk6jNe1NegrpzUEko0g1kiCbRnGNpqWIuK8+GiATxsLO0GMGlzjg==
+react-spatial@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.3.tgz#e28c077406329c8e7324d4384cec152855dedd6f"
+  integrity sha512-aQquoZtCBsSbbFyuH4ZMMBVkBYKdcWx98spw47kf/7ovgpwO/Wgr0b8nzFNBxI+OK0q2W7UJiI5kJPtH/7XtYA==
   dependencies:
-    abortcontroller-polyfill "1.4.0"
+    abortcontroller-polyfill "1.5.0"
     query-string "6.13.1"
     radians-degrees "1.0.0"
     re-resizable "6.5.4"
