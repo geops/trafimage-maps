@@ -166,7 +166,7 @@ export const casa = {
   layers: [
     swisstopoSwissImage,
     casaNetzkarteShowcasesLight,
-    // netzkarteLayerLabels,
+    netzkarteLayerLabels,
   ],
   elements: {
     menu: true,
