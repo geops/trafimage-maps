@@ -152,6 +152,7 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
       include: true,
     },
   ],
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   properties: {
     hideInLegend: true,
   },
@@ -165,7 +166,7 @@ export const casa = {
   layers: [
     swisstopoSwissImage,
     casaNetzkarteShowcasesLight,
-    netzkarteLayerLabels,
+    // netzkarteLayerLabels,
   ],
   elements: {
     menu: true,
