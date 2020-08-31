@@ -25,13 +25,13 @@
   bottom: 5px;
   right: 5px;
   left: unset;
-  height: 60px;
-  width: 60px;
+  height: 48px;
+  width: 48px;
 }
 
 .casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener {
-  height: 60px;
-  width: 60px;
+  height: 48px;
+  width: 48px;
   min-width: unset;
   border-radius: 8px;
   border: 1px solid #444444; 
