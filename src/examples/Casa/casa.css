@@ -34,6 +34,7 @@
   width: 60px;
   min-width: unset;
   border-radius: 8px;
+  border: 1px solid #444444; 
   box-shadow: unset;
   overflow: hidden;
 }
