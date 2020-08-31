@@ -1,4 +1,5 @@
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import netzkarteImage from '../img/netzkarte.png';
 import defaultBaseLayers, {
   swisstopoSwissImage,
   bahnhofplaene,
@@ -105,6 +106,9 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2',
   filters: [
     {
@@ -115,31 +119,12 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   ],
   properties: {
     radioGroup: 'baseLayer',
-  },
-});
-
-const casaNetzkarteShowcasesLight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.light',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
-  visible: true,
-  isBaseLayer: true,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'casa_v1',
-  filters: [
-    {
-      field: 'type',
-      value: /symbol|circle/,
-      include: false,
-    },
-  ],
-  properties: {
-    radioGroup: 'baseLayer',
+    previewImage: netzkarteImage,
   },
 });
 
 export const netzkarteLayerLabels = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte-labels',
+  name: 'ch.sbb.netzkarte.labels',
   visible: true,
   style: 'base_bright_v2',
   filters: [
@@ -160,10 +145,12 @@ export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
   layers: [
-    casaNetzkarteShowcasesLight,
+    dataLayer,
     casaNetzkartePersonenverkehr,
+    swisstopoSwissImage,
     netzkarteLayerLabels,
   ],
+  projection: 'EPSG:3857',
   elements: {
     menu: true,
     popup: true,

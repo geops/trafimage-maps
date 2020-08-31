@@ -19,3 +19,30 @@
 .casa .tm-trafimage-maps .wkp-geolocation {
   display: none;
 }
+
+.casa .tm-trafimage-maps .rs-base-layer-switcher {
+  display: flex;
+  bottom: 5px;
+  right: 5px;
+  left: auto;
+  height: 48px;
+  width: 48px;
+}
+
+.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener {
+  height: 48px;
+  width: 48px;
+  min-width: auto;
+  border-radius: 8px;
+  border: 1px solid #444;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button .rs-base-layer-switcher-title {
+  font-size: 8px;
+}
+
+.casa .rs-base-layer-switcher-btn-wrapper {
+  display: none;
+}

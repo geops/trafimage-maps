@@ -181,6 +181,7 @@ const App = () => {
         mapControls: true,
         menu: false,
         popup: true,
+        baseLayerSwitcher: true,
       }}];
 
     return () => {
