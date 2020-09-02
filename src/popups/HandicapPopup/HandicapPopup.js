@@ -58,9 +58,11 @@ function HandicapPopup({ feature }) {
     if (status === 'NOCH NICHT OK') {
       const prognose =
         properties.prognose === 'nach 2026'
-          ? `${t('nach')} 2026`
+          ? `${t('behig_nach')} 2026`
           : properties.prognose;
-      return `${'Dieser Bahnhof wird barrierefrei umgebaut (Prognose)'}: ${prognose}.`;
+      return `${t(
+        'Dieser Bahnhof wird barrierefrei umgebaut (Prognose)',
+      )}: ${prognose}.`;
     }
     return t('Dieser Bahnhof wird nicht baulich angepasst.');
   };
@@ -94,6 +96,9 @@ function HandicapPopup({ feature }) {
     {
       element: (
         <div className="wkp-handicap-popup-element" key="BehigInfo">
+          <div className="wkp-handicap-popup-field-title">
+            {t('ch.sbb.behig')}
+          </div>
           {behigInfo()}
         </div>
       ),
