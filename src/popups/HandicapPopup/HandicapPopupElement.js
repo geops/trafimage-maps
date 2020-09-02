@@ -6,7 +6,11 @@ import Link from '../../components/Link';
 const propTypes = {
   properties: PropTypes.object.isRequired,
   propertyName: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
+};
+
+const defaultProps = {
+  label: null,
 };
 
 // 012 111 22 333
@@ -131,7 +135,9 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   if (values.length > 1) {
     content = (
       <>
-        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+        {propLabel ? (
+          <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+        ) : null}
         <div className="wkp-handicap-popup-field-body">
           {values.map((v, idx) => {
             if (v === '') {
@@ -148,7 +154,9 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   } else {
     content = (
       <>
-        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+        {propLabel ? (
+          <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+        ) : null}
         <div className="wkp-handicap-popup-field-body">
           {renderLinks(values[0])}
         </div>
@@ -164,5 +172,6 @@ function HandicapPopupElement({ properties, propertyName, label }) {
 }
 
 HandicapPopupElement.propTypes = propTypes;
+HandicapPopupElement.defaultProps = defaultProps;
 
 export default React.memo(HandicapPopupElement);
