@@ -33,7 +33,7 @@ class LevelLayer extends MapboxStyleLayer {
           }
           let currentFilter = [...styleLayer.filter] || [];
 
-          if (styleLayer.id === 'poi_with_icons') {
+          if (styleLayer.id === 'poi_with_icons-lvl') {
             // Use case filter to use poi with level field for level 0.
             currentFilter[1] = [
               '==',
