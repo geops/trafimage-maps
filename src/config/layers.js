@@ -708,6 +708,68 @@ export const constructionLayer = new ConstructionLayer({
   toggleLayers: [constrUnterhalt, constrAusbau],
 });
 
+export const constructionDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.construction.data',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'ch.sbb.bauprojekte',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const angebotsSchritt2035 = new Layer({
+  name: 'ch.sbb.construction-angebotsschritt-2035',
+  key: 'ch.sbb.construction-angebotsschritt-2035',
+  visible: true,
+  children: [
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction-fertigstellung-2035',
+      key: 'ch.sbb.construction-fertigstellung-2035',
+      styleLayer: {
+        id: 'ch.sbb.construction-fertigstellung-2035',
+        type: 'circle',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': 'rgb(100, 65, 0)',
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+        date: '2035',
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction-fertigstellung-2030',
+      key: 'ch.sbb.construction-fertigstellung-2030',
+      styleLayer: {
+        id: 'ch.sbb.construction-fertigstellung-2030',
+        type: 'circle',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        paint: {
+          'circle-radius': 10,
+          'circle-color': 'rgb(0, 0, 100)',
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+        date: '2030',
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+  ],
+});
+
 export const behigOk = new Layer({
   name: 'ch.sbb.behig.ok',
   key: 'ch.sbb.behig.ok',
