@@ -24,6 +24,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   apiKey: PropTypes.string.isRequired,
+  apiKeyName: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   cartaroUrl: PropTypes.string,
@@ -82,6 +83,7 @@ class TopicLoader extends Component {
       topics,
       permissionsInfos,
       apiKey,
+      apiKeyName,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
@@ -110,6 +112,7 @@ class TopicLoader extends Component {
       activeTopic &&
       (vectorTilesUrl !== prevProps.vectorTilesUrl ||
         apiKey !== prevProps.apiKey ||
+        apiKeyName !== prevProps.apiKeyName ||
         vectorTilesKey !== prevProps.vectorTilesKey ||
         cartaroUrl !== prevProps.cartaroUrl ||
         appBaseUrl !== prevProps.appBaseUrl ||
@@ -120,7 +123,9 @@ class TopicLoader extends Component {
 
     if (
       activeTopic &&
-      (language !== prevProps.language || apiKey !== prevProps.apiKey)
+      (language !== prevProps.language ||
+        apiKey !== prevProps.apiKey ||
+        apiKeyName !== prevProps.apiKeyName)
     ) {
       this.updateLayers(activeTopic.layers);
     }
@@ -177,6 +182,7 @@ class TopicLoader extends Component {
     const {
       t,
       apiKey,
+      apiKeyName,
       appBaseUrl,
       layerService,
       dispatchSetFeatureInfo,
@@ -208,7 +214,7 @@ class TopicLoader extends Component {
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || []);
-    newSearchService.setApiKey(apiKey);
+    newSearchService.setApiKey(apiKey, apiKeyName);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
@@ -221,6 +227,7 @@ class TopicLoader extends Component {
   updateLayers(topicLayers) {
     const {
       apiKey,
+      apiKeyName,
       language,
       layerService,
       dispatchSetLayers,
@@ -294,7 +301,7 @@ class TopicLoader extends Component {
         flatLayers[i].getApiKey &&
         !flatLayers[i].getApiKey()
       ) {
-        flatLayers[i].setApiKey(apiKey);
+        flatLayers[i].setApiKey(apiKey, apiKeyName);
       }
     }
   }

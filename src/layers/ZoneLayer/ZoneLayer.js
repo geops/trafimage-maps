@@ -252,7 +252,7 @@ class ZoneLayer extends CasaLayer {
     const format = new GeoJSON();
     const urlParams = {
       ...params,
-      key: this.apiKey,
+      [this.apiKeyName || 'key']: this.apiKey,
       simplify: this.simplify,
       srs: 3857,
       from: this.validFrom,

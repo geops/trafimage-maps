@@ -137,7 +137,7 @@ class RouteLayer extends CasaLayer {
 
     const via = viaPoints.map((v) => `!${v}`);
     const urlParams = {
-      key: this.apiKey || '',
+      [this.apiKeyName || 'key']: this.apiKey || '',
       via: via.join('|'),
       mot,
     };

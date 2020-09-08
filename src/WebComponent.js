@@ -69,6 +69,11 @@ const propTypes = {
   apiKey: PropTypes.string,
 
   /**
+   * API key name of using the application.
+   */
+  apiKeyName: PropTypes.string,
+
+  /**
    * URL of the cartaro instance to use.
    * @ignore
    */
@@ -123,6 +128,7 @@ const attributes = {
   language: 'de',
   activeTopicKey: undefined,
   apiKey: undefined,
+  apiKeyName: 'key',
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
@@ -149,6 +155,7 @@ const WebComponent = (props) => {
     appName,
     center,
     apiKey,
+    apiKeyName,
     vectorTilesKey,
     enableTracking,
   } = props;
@@ -217,6 +224,7 @@ const WebComponent = (props) => {
         <TrafimageMaps
           {...props}
           apiKey={apiKey}
+          apiKeyName={apiKeyName}
           vectorTilesKey={vectorTileApiKey}
           topics={appTopics}
           zoom={floatZoom}

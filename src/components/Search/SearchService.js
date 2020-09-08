@@ -14,10 +14,10 @@ class SearchService {
     this.clear = clear;
   }
 
-  setApiKey(apiKey) {
+  setApiKey(apiKey, apiKeyName) {
     Object.entries(this.searches).forEach(([, search]) => {
       if (typeof search.setApiKey === 'function') {
-        search.setApiKey(apiKey);
+        search.setApiKey(apiKey, apiKeyName);
       }
     });
   }

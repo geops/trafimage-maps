@@ -11,12 +11,13 @@ class StopFinder extends Search {
     this.onDataEvent = this.onDataEvent.bind(this);
   }
 
-  setApiKey(apiKey) {
+  setApiKey(apiKey, apiKeyName) {
     this.apiKey = apiKey;
+    this.apiKeyName = apiKeyName;
   }
 
   search(value) {
-    return fetch(`${endpoint}?&q=${value}&key=${this.apiKey}`)
+    return fetch(`${endpoint}?&q=${value}&${this.apiKeyName}=${this.apiKey}`)
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
       .catch(() => {
