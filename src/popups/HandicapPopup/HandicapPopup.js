@@ -50,6 +50,23 @@ function HandicapPopup({ feature }) {
     }
   });
 
+  const behigInfo = () => {
+    const status = properties.status_bahnhof;
+    if (status === 'OK') {
+      return t('Dieser Bahnhof ist barrierefrei.');
+    }
+    if (status === 'NOCH NICHT OK') {
+      const prognose =
+        properties.prognose === 'nach 2026'
+          ? `${t('behig_nach')} 2026`
+          : properties.prognose;
+      return `${t(
+        'Dieser Bahnhof wird barrierefrei umgebaut (Prognose)',
+      )}: ${prognose}.`;
+    }
+    return t('Dieser Bahnhof wird nicht baulich angepasst.');
+  };
+
   const equipmentStr = equipment.length ? (
     <div className="wkp-handicap-popup-element" key="Ausstattung">
       <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
@@ -75,6 +92,16 @@ function HandicapPopup({ feature }) {
     {
       label: 'Ausstattung',
       element: equipmentStr,
+    },
+    {
+      element: (
+        <div className="wkp-handicap-popup-element" key="BehigInfo">
+          <div className="wkp-handicap-popup-field-title">
+            {t('ch.sbb.behig')}
+          </div>
+          {behigInfo()}
+        </div>
+      ),
     },
     {
       label: 'Aktuell',
