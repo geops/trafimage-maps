@@ -19,6 +19,7 @@ import CasaLayer from '../CasaLayer';
  * @class ZoneLayer
  * @extends CasaLayer
  * @param {Object} options Layer options.
+ * @param {string} [options.url = https://api.geops.io/casa-fare-network/v1] Url to fetch zones.
  * @param {string} [options.validFrom] Zone validity start. Format: yyyy-mm-dd.
  * @param {string} [options.validTo] Zone validity end . Format: yyyy-mm-dd.
  * @param {number} [options.simplify = 100] Simplification measurement for
@@ -78,7 +79,7 @@ class ZoneLayer extends CasaLayer {
     this.simplify =
       typeof options.simplify === 'undefined' ? 100 : options.simplify;
 
-    this.url = 'https://api.geops.io/casa-fare-network/v1';
+    this.url = options.url || 'https://api.geops.io/casa-fare-network/v1';
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
