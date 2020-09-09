@@ -3,6 +3,7 @@ import BehigTopicInfo from './BehigTopicInfo';
 import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
+import ConstructionFertigstellungLayerInfo from './ConstructionFertigstellungLayerInfo';
 import HandicapTopicInfo from './HandicapTopicInfo';
 import HandicapLayerInfo from './HandicapLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
@@ -26,6 +27,7 @@ export default {
   BuslinesLayerInfo,
   ConstructionLayerInfo,
   ConstructionTopicInfo,
+  ConstructionFertigstellungLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
   InfrastrukturTopicInfo,
