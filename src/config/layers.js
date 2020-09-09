@@ -907,7 +907,7 @@ export const angebotsSchritt2035 = new Layer({
         'source-layer': 'ch.sbb.bauprojekte',
         filter: ['all', ['==', '2030', ['get', 'angebotsschritt']]],
         paint: {
-          'circle-radius': 17,
+          'circle-radius': 19,
           'circle-color': 'rgb(44, 130, 201)',
           'circle-opacity': 0.6,
         },
@@ -930,7 +930,7 @@ export const angebotsSchritt2035 = new Layer({
         'source-layer': 'ch.sbb.bauprojekte',
         filter: ['all', ['==', '2035', ['get', 'angebotsschritt']]],
         paint: {
-          'circle-radius': 17,
+          'circle-radius': 19,
           'circle-color': 'rgb(250, 190, 88)',
           'circle-opacity': 0.6,
         },
