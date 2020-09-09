@@ -592,26 +592,8 @@ export const constrAusbau = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.uebrige',
       key: 'ch.sbb.construction.ausbau.uebrige',
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.uebrige',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'ausbau', ['get', 'art']],
-          ['==', 'uebrige', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ausbau_uebrige_standorte',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /ausbau.uebrige/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -628,26 +610,8 @@ export const constrAusbau = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.bahnhof_strecke',
       key: 'ch.sbb.construction.ausbau.bahnhof_strecke',
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.bahnhof_strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'ausbau', ['get', 'art']],
-          ['==', 'bahnhof_und_strecke', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ausbau_bahnhof-strecke',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /ausbau.bahnhof_strecke/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -664,26 +628,8 @@ export const constrAusbau = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.strecke',
       key: 'ch.sbb.construction.ausbau.strecke',
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'ausbau', ['get', 'art']],
-          ['==', 'strecke', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ausbau_strecke',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /ausbau.strecke/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -700,26 +646,8 @@ export const constrAusbau = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.bahnhof',
       key: 'ch.sbb.construction.ausbau.bahnhof',
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.bahnhof',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'ausbau', ['get', 'art']],
-          ['==', 'bahnhof', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ausbau_bahnhof',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /ausbau.bahnhof/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -748,26 +676,8 @@ export const constrUnterhalt = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.unterhalt.uebrige',
       key: 'ch.sbb.construction.unterhalt.uebrige',
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.uebrige',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'unterhalt', ['get', 'art']],
-          ['==', 'uebrige', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ih_uebrige_standorte',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /unterhalt.uebrige/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -784,26 +694,8 @@ export const constrUnterhalt = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
       key: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'unterhalt', ['get', 'art']],
-          ['==', 'bahnhof_und_strecke', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ih_bahnhof-strecke',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /unterhalt.bahnhof_strecke/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -820,26 +712,8 @@ export const constrUnterhalt = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.unterhalt.strecke',
       key: 'ch.sbb.construction.unterhalt.strecke',
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'unterhalt', ['get', 'art']],
-          ['==', 'strecke', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ih_strecke',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /unterhalt.strecke/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -856,26 +730,8 @@ export const constrUnterhalt = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.unterhalt.bahnhof',
       key: 'ch.sbb.construction.unterhalt.bahnhof',
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.bahnhof',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: [
-          'all',
-          ['==', 'unterhalt', ['get', 'art']],
-          ['==', 'bahnhof', ['get', 'ort']],
-        ],
-        layout: {
-          'icon-image': 'ch.sbb.bauprojekte.ih_bahnhof-strecke',
-          'icon-size': {
-            stops: [
-              [6, 0.8],
-              [10, 1],
-            ],
-          },
-          'icon-allow-overlap': true,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /unterhalt.bahnhof/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -900,17 +756,8 @@ export const angebotsSchritt2035 = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction-fertigstellung-2035',
       key: 'ch.sbb.construction-fertigstellung-2035',
-      styleLayer: {
-        id: 'ch.sbb.construction-fertigstellung-2035',
-        type: 'circle',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: ['all', ['==', '2030', ['get', 'angebotsschritt']]],
-        paint: {
-          'circle-radius': 17,
-          'circle-color': 'rgb(44, 130, 201)',
-          'circle-opacity': 0.6,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /fertigstellung-2035/.test(styleLayer.id);
       },
       visible: true,
       properties: {
@@ -923,17 +770,8 @@ export const angebotsSchritt2035 = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.construction-fertigstellung-2030',
       key: 'ch.sbb.construction-fertigstellung-2030',
-      styleLayer: {
-        id: 'ch.sbb.construction-fertigstellung-2030',
-        type: 'circle',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-        filter: ['all', ['==', '2035', ['get', 'angebotsschritt']]],
-        paint: {
-          'circle-radius': 17,
-          'circle-color': 'rgb(250, 190, 88)',
-          'circle-opacity': 0.6,
-        },
+      styleLayersFilter: (styleLayer) => {
+        return /fertigstellung-2030/.test(styleLayer.id);
       },
       visible: true,
       properties: {
