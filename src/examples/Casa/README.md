@@ -13,10 +13,12 @@ import 'trafimage-maps/examples/Casa/casa.css'
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
+const apiKeyName = 'key';
 
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
   apiKey: apiKey,
+  apiKeyName: apiKeyName,
   validFrom: '2019-12-16',
   validTo: '2020-12-01',
 });
@@ -123,6 +125,7 @@ zoneLayer.onClick(f => {
 const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
   apiKey: apiKey,
+  apiKeyName: apiKeyName,
 });
 
 // Visualize a route on the map.
@@ -192,7 +195,7 @@ const App = () => {
   /* To use casa style sheet, add the casa class in the parent class */
   return (
     <div className="container casa">
-      <trafimage-maps ref={ref} apiKey={apiKey}/>
+      <trafimage-maps ref={ref} apiKey={apiKey} apiKeyName={apiKeyName} />
     </div>
   );
 }
