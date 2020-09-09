@@ -11,7 +11,6 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
-import ConstructionLayer from '../layers/ConstructionLayer/ConstructionLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
 import landeskarte from '../img/landeskarte.png';
@@ -569,68 +568,16 @@ export const kilometrageLayer = new KilometrageLayer({
   },
 });
 
-export const constrUnterhalt = new Layer({
-  name: 'ch.sbb.construction.unterhalt.group',
-  desc: 'ch.sbb.construction.unterhalt.group-desc',
+export const constructionDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.construction.data',
   visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'ch.sbb.bauprojekte',
   properties: {
-    hasInfos: true,
-    description: 'ch.sbb.construction.unterhalt.group-desc',
+    hideInLegend: true,
   },
-  children: [
-    new Layer({
-      name: 'ch.sbb.construction.unterhalt.uebrige',
-      key: 'ch.sbb.construction.unterhalt.uebrige',
-      visible: true,
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Übrige Standorte',
-        },
-      },
-    }),
-    new Layer({
-      name: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-      key: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-      visible: true,
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Bahnhof und Strecke',
-        },
-      },
-    }),
-    new Layer({
-      name: 'ch.sbb.construction.unterhalt.strecke',
-      key: 'ch.sbb.construction.unterhalt.strecke',
-      visible: true,
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Strecke',
-        },
-      },
-    }),
-    new Layer({
-      name: 'ch.sbb.construction.unterhalt.bahnhof',
-      key: 'ch.sbb.construction.unterhalt.bahnhof',
-      visible: true,
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Bahnhof',
-        },
-      },
-    }),
-  ],
 });
 
 export const constrAusbau = new Layer({
@@ -642,70 +589,361 @@ export const constrAusbau = new Layer({
     description: 'ch.sbb.construction.ausbau.group-desc',
   },
   children: [
-    new Layer({
+    new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.uebrige',
       key: 'ch.sbb.construction.ausbau.uebrige',
+      styleLayer: {
+        id: 'ch.sbb.construction.ausbau.uebrige',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'ausbau', ['get', 'art']],
+          ['==', 'uebrige', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ausbau_uebrige_standorte',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
       visible: true,
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
           ort: 'Übrige Standorte',
         },
       },
+      mapboxLayer: constructionDataLayer,
     }),
-    new Layer({
+    new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.bahnhof_strecke',
       key: 'ch.sbb.construction.ausbau.bahnhof_strecke',
+      styleLayer: {
+        id: 'ch.sbb.construction.ausbau.bahnhof_strecke',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'ausbau', ['get', 'art']],
+          ['==', 'bahnhof_und_strecke', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ausbau_bahnhof-strecke',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
       visible: true,
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
           ort: 'Bahnhof und Strecke',
         },
       },
+      mapboxLayer: constructionDataLayer,
     }),
-    new Layer({
+    new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.strecke',
       key: 'ch.sbb.construction.ausbau.strecke',
+      styleLayer: {
+        id: 'ch.sbb.construction.ausbau.strecke',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'ausbau', ['get', 'art']],
+          ['==', 'strecke', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ausbau_strecke',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
       visible: true,
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
           ort: 'Strecke',
         },
       },
+      mapboxLayer: constructionDataLayer,
     }),
-    new Layer({
+    new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.bahnhof',
       key: 'ch.sbb.construction.ausbau.bahnhof',
+      styleLayer: {
+        id: 'ch.sbb.construction.ausbau.bahnhof',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'ausbau', ['get', 'art']],
+          ['==', 'bahnhof', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ausbau_bahnhof',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
       visible: true,
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
           ort: 'Bahnhof',
         },
       },
+      mapboxLayer: constructionDataLayer,
     }),
   ],
 });
 
-export const constructionLayer = new ConstructionLayer({
-  name: 'ch.sbb.construction.data',
-  key: 'ch.sbb.construction.data',
+export const constrUnterhalt = new Layer({
+  name: 'ch.sbb.construction.unterhalt.group',
+  desc: 'ch.sbb.construction.unterhalt.group-desc',
   visible: true,
   properties: {
-    hideInLegend: true,
-    popupComponent: 'ConstructionPopup',
+    hasInfos: true,
+    description: 'ch.sbb.construction.unterhalt.group-desc',
   },
-  toggleLayers: [constrUnterhalt, constrAusbau],
+  children: [
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction.unterhalt.uebrige',
+      key: 'ch.sbb.construction.unterhalt.uebrige',
+      styleLayer: {
+        id: 'ch.sbb.construction.unterhalt.uebrige',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'unterhalt', ['get', 'art']],
+          ['==', 'uebrige', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ih_uebrige_standorte',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Übrige Standorte',
+        },
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+      key: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+      styleLayer: {
+        id: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'unterhalt', ['get', 'art']],
+          ['==', 'bahnhof_und_strecke', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ih_bahnhof-strecke',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Bahnhof und Strecke',
+        },
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction.unterhalt.strecke',
+      key: 'ch.sbb.construction.unterhalt.strecke',
+      styleLayer: {
+        id: 'ch.sbb.construction.unterhalt.strecke',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'unterhalt', ['get', 'art']],
+          ['==', 'strecke', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ih_strecke',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Strecke',
+        },
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction.unterhalt.bahnhof',
+      key: 'ch.sbb.construction.unterhalt.bahnhof',
+      styleLayer: {
+        id: 'ch.sbb.construction.unterhalt.bahnhof',
+        type: 'symbol',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: [
+          'all',
+          ['==', 'unterhalt', ['get', 'art']],
+          ['==', 'bahnhof', ['get', 'ort']],
+        ],
+        layout: {
+          'icon-image': 'ch.sbb.bauprojekte.ih_bahnhof-strecke',
+          'icon-size': {
+            stops: [
+              [6, 0.8],
+              [10, 1],
+            ],
+          },
+          'icon-allow-overlap': true,
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionLayerInfo',
+        popupComponent: 'ConstructionPopup',
+        construction: {
+          art: 'Unterhalt',
+          ort: 'Bahnhof',
+        },
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+  ],
+});
+
+export const angebotsSchritt2035 = new Layer({
+  name: 'ch.sbb.construction-angebotsschritt-2035',
+  key: 'ch.sbb.construction-angebotsschritt-2035',
+  visible: true,
+  children: [
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction-fertigstellung-2035',
+      key: 'ch.sbb.construction-fertigstellung-2035',
+      styleLayer: {
+        id: 'ch.sbb.construction-fertigstellung-2035',
+        type: 'circle',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: ['all', ['==', '2030', ['get', 'angebotsschritt']]],
+        paint: {
+          'circle-radius': 17,
+          'circle-color': 'rgb(44, 130, 201)',
+          'circle-opacity': 0.6,
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+        date: '2035',
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.construction-fertigstellung-2030',
+      key: 'ch.sbb.construction-fertigstellung-2030',
+      styleLayer: {
+        id: 'ch.sbb.construction-fertigstellung-2030',
+        type: 'circle',
+        source: 'ch.sbb.bauprojekte',
+        'source-layer': 'ch.sbb.bauprojekte',
+        filter: ['all', ['==', '2035', ['get', 'angebotsschritt']]],
+        paint: {
+          'circle-radius': 17,
+          'circle-color': 'rgb(250, 190, 88)',
+          'circle-opacity': 0.6,
+        },
+      },
+      visible: true,
+      properties: {
+        hasInfos: true,
+        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+        date: '2030',
+      },
+      mapboxLayer: constructionDataLayer,
+    }),
+  ],
 });
 
 export const behigOk = new Layer({
