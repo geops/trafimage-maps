@@ -70,7 +70,7 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
 });
 
 let osmPointsLayers = [];
-let olListenerKey;
+const olListenersKeys = [];
 
 const updateStations = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
@@ -124,10 +124,12 @@ dataLayer.on('load', () => {
   updateStations(mbMap);
 
   // Update stations source on moveeend.
-  unByKey(olListenerKey);
-  olListenerKey = map.on('moveend', () => {
-    updateStations(mbMap);
-  });
+  unByKey(olListenersKeys);
+  olListenersKeys.push(
+    map.on('moveend', () => {
+      updateStations(mbMap);
+    }),
+  );
 });
 
 export const netzkarteLayer = new MapboxStyleLayer({
@@ -580,66 +582,6 @@ export const constructionDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-let constrLayers = [];
-
-const updateConstructions = (mbMap) => {
-  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
-  mbMap.once('idle', () => {
-    const constrRendered = mbMap
-      .queryRenderedFeatures({
-        layers: constrLayers,
-      })
-      .map((feat) => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-    const source = mbMap.getSource('clusters');
-    if (source) {
-      source.setData({
-        type: 'FeatureCollection',
-        features: constrRendered,
-      });
-    }
-  });
-};
-
-constructionDataLayer.on('load', () => {
-  const { map, mbMap } = constructionDataLayer;
-  constrLayers = mbMap
-    .getStyle()
-    .layers.filter((layer) => {
-      return (
-        layer['source-layer'] === 'ch.sbb.bauprojekte' &&
-        layer.id === 'ch.sbb.bauprojekte.cluster.layer'
-      );
-    })
-    .map((layer) => layer.id);
-
-  if (!mbMap.getSource('clusters')) {
-    mbMap.addSource('clusters', {
-      type: 'geojson',
-      cluster: true,
-      clusterRadius: 75, // Radius of each cluster when clustering points.
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    });
-  }
-  updateConstructions(mbMap);
-
-  // Update clusters source on moveeend.
-  unByKey(olListenerKey);
-  olListenerKey = map.on('moveend', () => {
-    updateConstructions(mbMap);
-  });
-});
-
 export const angebotsSchritt2035 = new Layer({
   name: 'ch.sbb.construction-angebotsschritt-2035',
   key: 'ch.sbb.construction-angebotsschritt-2035',
@@ -893,6 +835,78 @@ export const constrUnterhalt = new Layer({
       },
     }),
   ],
+});
+
+let constrLayers = [];
+
+const updateConstructions = (mbMap) => {
+  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
+  mbMap.once('idle', () => {
+    const constrRendered = mbMap
+      .queryRenderedFeatures({
+        layers: constrLayers,
+      })
+      .map((feat) => {
+        const good = {
+          id: feat.id * 1000,
+          type: feat.type,
+          properties: feat.properties,
+          geometry: feat.geometry,
+        };
+        return good;
+      });
+    const source = mbMap.getSource('clusters');
+    if (source) {
+      source.setData({
+        type: 'FeatureCollection',
+        features: constrRendered,
+      });
+    }
+  });
+};
+
+constructionDataLayer.on('load', () => {
+  const { map, mbMap } = constructionDataLayer;
+  constrLayers = mbMap
+    .getStyle()
+    .layers.filter((layer) => {
+      return (
+        layer['source-layer'] === 'ch.sbb.bauprojekte' &&
+        /(ausbau|unterhalt)/.test(layer.id)
+      );
+    })
+    .map((layer) => layer.id);
+
+  if (!mbMap.getSource('clusters')) {
+    mbMap.addSource('clusters', {
+      type: 'geojson',
+      cluster: true,
+      clusterRadius: 75, // Radius of each cluster when clustering points.
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+  }
+  updateConstructions(mbMap);
+
+  // Update clusters source on moveeend.
+  unByKey(olListenersKeys);
+
+  olListenersKeys.push(
+    map.on('moveend', () => {
+      updateConstructions(mbMap);
+    }),
+  );
+});
+
+// Re-render cluster when change construction layers visiblity.
+[constrAusbau, constrUnterhalt].forEach((parentLayer) => {
+  parentLayer.children.forEach((l) => {
+    l.on('change:visible', ({ target: layer }) => {
+      updateConstructions(layer.mapboxLayer.mbMap);
+    });
+  });
 });
 
 export const constrClusters = new Layer({
