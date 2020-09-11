@@ -615,7 +615,7 @@ constructionDataLayer.on('load', () => {
     .layers.filter((layer) => {
       return (
         layer['source-layer'] === 'ch.sbb.bauprojekte' &&
-        !/fertigstellung-/.test(layer.id)
+        layer.id === 'ch.sbb.bauprojekte.cluster.layer'
       );
     })
     .map((layer) => layer.id);
@@ -905,8 +905,12 @@ export const constrClusters = new Layer({
   children: [
     new MapboxStyleLayer({
       name: 'ch.sbb.construction-cluster-circle',
+      key: 'ch.sbb.construction-cluster-circle',
       visible: true,
       mapboxLayer: constructionDataLayer,
+      properties: {
+        popupComponent: 'ConstructionPopup',
+      },
       styleLayer: {
         id: 'constr-cluster-circle',
         type: 'circle',
@@ -940,6 +944,7 @@ export const constrClusters = new Layer({
     }),
     new MapboxStyleLayer({
       name: 'ch.sbb.construction-cluster-number',
+      key: 'ch.sbb.construction-cluster-number',
       visible: true,
       mapboxLayer: constructionDataLayer,
       styleLayer: {
