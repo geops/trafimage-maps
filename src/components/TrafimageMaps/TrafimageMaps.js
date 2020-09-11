@@ -94,7 +94,7 @@ const propTypes = {
    * URL endpoint for vector tiles hosted by geOps.
    * @private
    */
-  // vectorTilesUrl: PropTypes.string,
+  vectorTilesUrl: PropTypes.string,
 
   /**
    * URL endpoint for static files.
@@ -130,8 +130,7 @@ const defaultProps = {
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
-  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
-  // vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
   topics: null,
@@ -235,7 +234,7 @@ class TrafimageMaps extends React.PureComponent {
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
-      // vectorTilesUrl,
+      vectorTilesUrl,
       staticFilesUrl,
       permissionUrl,
       enableTracking,
@@ -254,8 +253,7 @@ class TrafimageMaps extends React.PureComponent {
             appBaseUrl={appBaseUrl}
             permissionUrl={permissionUrl}
             vectorTilesKey={vectorTilesKey}
-            // vectorTilesUrl={vectorTilesUrl}
-            vectorTilesUrl="https://maps.style-dev.geops.io"
+            vectorTilesUrl={vectorTilesUrl}
             staticFilesUrl={staticFilesUrl}
           />
         </Provider>
