@@ -973,8 +973,8 @@ export const constrClusters = new Layer({
             ['get', 'point_count'],
             '1',
           ],
-          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-          'text-size': 12,
+          'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
+          'text-size': 13,
         },
         paint: {
           'text-color': '#ffffff',
