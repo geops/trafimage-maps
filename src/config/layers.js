@@ -586,6 +586,11 @@ const angebotsSchritt2035 = new Layer({
   name: 'ch.sbb.construction-angebotsschritt-2035',
   key: 'ch.sbb.construction-angebotsschritt-2035',
   visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+    date: '2035',
+  },
   children: [
     new MapboxStyleLayer({
       name: 'ch.sbb.bauprojekte.fertigstellung-2035',
