@@ -130,6 +130,7 @@ const defaultProps = {
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
+  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   permissionUrl: null,
