@@ -910,7 +910,10 @@ constructionDataLayer.on('load', () => {
 [constrAusbau, constrUnterhalt].forEach((parentLayer) => {
   parentLayer.children.forEach((l) => {
     l.on('change:visible', ({ target: layer }) => {
-      updateConstructions(layer.mapboxLayer.mbMap);
+      // Re-render only for children that contribute to the cluster
+      if (layer.mapboxLayer) {
+        updateConstructions(layer.mapboxLayer.mbMap);
+      }
     });
   });
 });
