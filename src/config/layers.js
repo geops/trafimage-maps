@@ -582,7 +582,7 @@ export const constructionDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const angebotsSchritt2035 = new Layer({
+const angebotsSchritt2035 = new Layer({
   name: 'ch.sbb.construction-angebotsschritt-2035',
   key: 'ch.sbb.construction-angebotsschritt-2035',
   visible: true,
@@ -637,6 +637,7 @@ export const constrAusbau = new Layer({
     description: 'ch.sbb.construction.ausbau.group-desc',
   },
   children: [
+    angebotsSchritt2035,
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.uebrige',
       key: 'ch.sbb.construction.ausbau.uebrige',
