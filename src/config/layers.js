@@ -582,10 +582,15 @@ export const constructionDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const angebotsSchritt2035 = new Layer({
+const angebotsSchritt2035 = new Layer({
   name: 'ch.sbb.construction-angebotsschritt-2035',
   key: 'ch.sbb.construction-angebotsschritt-2035',
   visible: true,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+    date: '2035',
+  },
   children: [
     new MapboxStyleLayer({
       name: 'ch.sbb.bauprojekte.fertigstellung-2035',
@@ -637,6 +642,7 @@ export const constrAusbau = new Layer({
     description: 'ch.sbb.construction.ausbau.group-desc',
   },
   children: [
+    angebotsSchritt2035,
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.uebrige',
       key: 'ch.sbb.construction.ausbau.uebrige',
@@ -904,7 +910,10 @@ constructionDataLayer.on('load', () => {
 [constrAusbau, constrUnterhalt].forEach((parentLayer) => {
   parentLayer.children.forEach((l) => {
     l.on('change:visible', ({ target: layer }) => {
-      updateConstructions(layer.mapboxLayer.mbMap);
+      // Re-render only for children that contribute to the cluster
+      if (layer.mapboxLayer) {
+        updateConstructions(layer.mapboxLayer.mbMap);
+      }
     });
   });
 });
