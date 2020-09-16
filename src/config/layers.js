@@ -205,11 +205,11 @@ export const passagierfrequenzen = new MapboxStyleLayer({
       'circle-radius': [
         'interpolate',
         ['linear'],
-        ['get', 'dwv'],
-        400,
-        8,
-        500000,
-        70,
+        ['sqrt', ['get', 'dwv']], // We use the passenger square root so the radius is proportional to the circle are
+        0, // Radius at 0 passengers should be 0
+        0,
+        Math.sqrt(500000), // Radius at 500000 passengers should be Math.sqrt(500000)/10 (divide by 10 for better proportions)
+        Math.sqrt(500000) / 10,
       ],
       'circle-color': 'rgb(255,220,0)',
       'circle-stroke-width': 2,
