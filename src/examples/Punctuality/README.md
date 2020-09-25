@@ -22,7 +22,7 @@ const App = () => {
     const map = ref.current;
     map.topics = [
       {
-        name: 'ch.sbb.netzkarte',
+        name: 'ch.sbb.netzkarte.topic',
         key: 'ch.sbb.netzkarte',
         layers: [
           ...defaultBaseLayers,

@@ -256,8 +256,8 @@ class TopicMenu extends PureComponent {
                 <Select
                   options={layerService.getBaseLayers().map((l) => {
                     return {
-                      value: l.key,
-                      label: t(l.key),
+                      value: l.name || l.key,
+                      label: t(l.name || l.key),
                       layer: l,
                     };
                   })}

@@ -132,7 +132,8 @@ dataLayer.on('load', () => {
 });
 
 export const netzkarteLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.layer',
+  key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   isBaseLayer: true,
   properties: {
@@ -536,7 +537,8 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 });
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.layer',
+  key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   isQueryable: false,
