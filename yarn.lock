@@ -4282,29 +4282,29 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codesandbox-import-util-types@^2.1.15:
-  version "2.1.15"
-  resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-2.1.15.tgz#c38b7aeedff7f2b2b285d02f828ba32f72bb9634"
-  integrity sha512-TNyIWbo2G+ytlQGgIy/LOECizWBwlUAkFPPI7GgGxhbSmz0ML00rEvxSVO5KsInzn/Nh4zDwY9G+cPn2TRR9hQ==
+codesandbox-import-util-types@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/codesandbox-import-util-types/-/codesandbox-import-util-types-2.2.0.tgz#f94799f83838a1e8ba776189a8275870d6579ab6"
+  integrity sha512-EFXFKCSE7I2VABNa11cgkFJAY8MQCMDhD147xntXw4O/wg5DkGmvor9s0bpk4IYlTOVwZT86H0My1xRhkIzHOA==
 
-codesandbox-import-utils@^2.1.16:
-  version "2.1.16"
-  resolved "https://registry.yarnpkg.com/codesandbox-import-utils/-/codesandbox-import-utils-2.1.16.tgz#0949327c4a45fb251c76972b72da7e73a9b3b9a5"
-  integrity sha512-5m3QVL27FPup6w0Mt3vFqphR0PoGK5dI99Bb+53onfwdlMLONKL4qXR2sOb+2G/IwPz7I/NjwznnPyNGmo+k1g==
+codesandbox-import-utils@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/codesandbox-import-utils/-/codesandbox-import-utils-2.2.0.tgz#281b4449746b411cca8934b93fd1817cb4a3e898"
+  integrity sha512-d2sQnwbsegkjmx6x2Q7RBiLPtSDBKQHSQgekU6h8AimtaNO9d/nc/jWWR/kMnB+T6NorUxCpmoLtHWDqBihFRw==
   dependencies:
-    codesandbox-import-util-types "^2.1.15"
+    codesandbox-import-util-types "^2.2.0"
     istextorbinary "^2.2.1"
     lz-string "^1.4.4"
 
 codesandbox@^2.1.14:
-  version "2.1.16"
-  resolved "https://registry.yarnpkg.com/codesandbox/-/codesandbox-2.1.16.tgz#0a6fedb7c71249e117daf4807885ffbc085941ce"
-  integrity sha512-oz0qUCLxbcuWP7q0+ypRsxMB7dd48D15y8N1QHeVVCHZ3qaIrNK2j0vbUdG2yzl0WzmFYXw7mY3yduVElBchHg==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/codesandbox/-/codesandbox-2.2.0.tgz#de9b993a7c32f19adac0d73c39e4a27b18ded1e1"
+  integrity sha512-+OQgbCvd79sJO5AM6kb+3mMbPo1neBR+Gf+neQZ8bakYSGVQzMmBu7xFYrGmLNkKw3mo69lWshh90T92C7CQCA==
   dependencies:
     axios "^0.18.1"
     chalk "^2.4.1"
-    codesandbox-import-util-types "^2.1.15"
-    codesandbox-import-utils "^2.1.16"
+    codesandbox-import-util-types "^2.2.0"
+    codesandbox-import-utils "^2.2.0"
     commander "^2.9.0"
     datauri "^1.1.0"
     filesize "^3.6.1"
@@ -10616,15 +10616,15 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
-lodash@4.17.15, "lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.1.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.12:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
-
 lodash@4.17.19, lodash@^4.17.11:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
+
+"lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.1.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@~4.17.12:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 lodash@^4.17.19:
   version "4.17.20"
@@ -14309,9 +14309,9 @@ react-simple-code-editor@^0.10.0:
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
 react-spatial@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.5.tgz#1e2707ae9a24ee2167add4ca45ad99c1b2e820f7"
-  integrity sha512-deZ+JKjGRjf+b12XujmnefXeozI/JJfBBXK+Lkw7H8AZykZeLFEKdzuJlehWuFLPruJe/JrJQozgtQAqnSTerw==
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.6.tgz#459bfb785ec0eeb16d5a7f989f98e58e6c28ce91"
+  integrity sha512-p2BSbmfGY5JOGekHVd6ID1iTEwVEeDdf0Ppnvr6bTwC4egJRHo7FVZ16+tH86ZIvPTPj8BemWFZ5mJtXqx5eXw==
   dependencies:
     abortcontroller-polyfill "1.5.0"
     query-string "6.13.1"

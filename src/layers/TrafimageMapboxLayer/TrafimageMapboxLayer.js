@@ -170,6 +170,51 @@ class TrafimageMapboxLayer extends MapboxLayer {
     });
   }
 
+  /**
+   * Request feature information for a given coordinate and read clustered features.
+   * @param {ol/coordinate~Coordinate} coordinate Coordinate to request the information at.
+   * @param {Object} options A [mapboxgl.Map#queryrenderedfeatures](https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures) options parameter.
+   * @returns {Promise<Object>} Promise with features, layer and coordinate
+   *  or null if no feature was hit.
+   */
+  async getFeatureInfoAtCoordinate(coordinate, options) {
+    // Ignore the getFeatureInfo until the mapbox map is loaded
+    if (
+      !options ||
+      !this.format ||
+      !this.mbMap ||
+      !this.mbMap.isStyleLoaded()
+    ) {
+      return Promise.resolve({ coordinate, features: [], layer: this });
+    }
+
+    const pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+    // At this point we get GeoJSON Mapbox feature, we transform it to an OpenLayers
+    // feature to be consistent with other layers.
+    const renderedFeatures = this.mbMap.queryRenderedFeatures(pixel, options);
+    const features = [];
+
+    for (let i = 0; i < renderedFeatures.length; i += 1) {
+      const feature = renderedFeatures[i];
+      if (feature.properties.cluster) {
+        const source = this.mbMap.getSource(feature.layer.source);
+        const { cluster_id: id, point_count: count } = feature.properties;
+        // because Mapbox GL JS should be fast ...
+        // eslint-disable-next-line no-await-in-loop
+        await new Promise((resolve) => {
+          source.getClusterLeaves(id, count, 0, (_, cfs) => {
+            cfs.forEach((cf) => features.push(this.format.readFeature(cf)));
+            resolve();
+          });
+        });
+      } else {
+        features.push(this.format.readFeature(feature));
+      }
+    }
+
+    return Promise.resolve({ layer: this, features, coordinate });
+  }
+
   loadStyle(newStyleUrl) {
     if (!newStyleUrl) {
       return;
