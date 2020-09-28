@@ -816,8 +816,8 @@ export const constrUnterhalt = new Layer({
       key: 'ch.sbb.construction.unterhalt.bahnhof',
       visible: true,
       mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /unterhalt.bahnhof/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof/.test(id),
+      styleLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
+      queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
       styleLayer: {
         id: 'ch.sbb.construction.unterhalt.bahnhof',
         type: 'symbol',
