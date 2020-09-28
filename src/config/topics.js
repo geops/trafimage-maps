@@ -51,7 +51,7 @@ const defaultElements = {
 };
 
 export const netzkarte = {
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.topic',
   key: 'ch.sbb.netzkarte',
   elements: {
     ...defaultElements,
@@ -95,7 +95,7 @@ export const handicap = {
 };
 
 export const netzkarteStelen = {
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.topic',
   key: 'ch.sbb.netzkarte',
   layers: [dataLayer, netzkarteLayer, netzkartePointLayer, bahnhofplaene],
   elements: {},
@@ -103,7 +103,8 @@ export const netzkarteStelen = {
 };
 
 export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.layer',
+  key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
