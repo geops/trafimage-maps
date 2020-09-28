@@ -711,8 +711,8 @@ export const constrAusbau = new Layer({
       key: 'ch.sbb.construction.ausbau.bahnhof',
       visible: true,
       mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /ausbau.bahnhof/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof/.test(id),
+      styleLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
+      queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
       styleLayer: {
         id: 'ch.sbb.construction.ausbau.bahnhof',
         type: 'symbol',
