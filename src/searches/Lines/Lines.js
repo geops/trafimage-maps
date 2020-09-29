@@ -68,7 +68,7 @@ class Lines extends Search {
 
   // eslint-disable-next-line class-methods-use-this
   search(value) {
-    let params = `line=${value}`;
+    let params = `line=${encodeURIComponent(value)}`;
     if (lineKilometerRegExp.test(value)) {
       const [, line, km] = value.match(lineKilometerRegExp);
       params = `line=${line}&km=${km}`;
