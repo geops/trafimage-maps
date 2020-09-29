@@ -199,7 +199,6 @@
   &.tm-w-xs {
     .wkp-search {
       min-width: unset;
-      left: 55px;
     }
 
     .wkp-search-toggle-container--open {
@@ -313,6 +312,7 @@
       top: 3px;
       right: 9px;
       max-width: 100%;
+      left: 55px;
 
       .wkp-search-toggle-button {
         svg {
