@@ -26,6 +26,7 @@ import finishFlag from '../../img/finish_flag.png';
  * @extends CasaLayer
  * @param {Object} [options] Layer options.
  *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
+ * @param {string} [options.url = https://api.geops.io/routing/v1] Url to fetch routes.
  */
 class RouteLayer extends CasaLayer {
   static getCircleStyle = (coords) =>
@@ -61,7 +62,7 @@ class RouteLayer extends CasaLayer {
 
     this.featuresLayer = this.olLayer;
 
-    this.url = 'https://api.geops.io/routing/v1/';
+    this.url = options.url || 'https://api.geops.io/routing/v1';
 
     this.selectedRouteIds = [];
 
@@ -137,12 +138,13 @@ class RouteLayer extends CasaLayer {
 
     const via = viaPoints.map((v) => `!${v}`);
     const urlParams = {
+      profile: 'sbb',
       [this.apiKeyName || 'key']: this.apiKey || '',
       via: via.join('|'),
       mot,
     };
 
-    const url = `${this.url}?${qs.stringify(urlParams)}`;
+    const url = `${this.url}/?${qs.stringify(urlParams)}`;
     const format = new GeoJSON({
       dataProjection: 'EPSG:4326',
       featureProjection: this.projection,

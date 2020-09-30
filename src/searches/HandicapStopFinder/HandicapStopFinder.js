@@ -17,7 +17,11 @@ class HandicapStopFinder extends Search {
   }
 
   search(value) {
-    return fetch(`${endpoint}?&q=${value}&${this.apiKeyName}=${this.apiKey}`)
+    return fetch(
+      `${endpoint}?&q=${encodeURIComponent(value)}&${this.apiKeyName}=${
+        this.apiKey
+      }`,
+    )
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
       .catch(() => {

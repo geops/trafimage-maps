@@ -147,16 +147,6 @@ const defaultProps = {
   activeTopicKey: null,
 };
 
-let matomo;
-const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
-if (REACT_APP_MATOMO_URL_BASE && REACT_APP_MATOMO_SITE_ID) {
-  matomo = createInstance({
-    urlBase: REACT_APP_MATOMO_URL_BASE,
-    siteId: REACT_APP_MATOMO_SITE_ID,
-    trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
-  });
-}
-
 class TrafimageMaps extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -199,8 +189,18 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setLanguage(language));
     }
 
-    if (matomo && enableTracking) {
-      matomo.trackPageView();
+    const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
+    if (
+      enableTracking &&
+      REACT_APP_MATOMO_URL_BASE &&
+      REACT_APP_MATOMO_SITE_ID
+    ) {
+      this.matomo = createInstance({
+        urlBase: REACT_APP_MATOMO_URL_BASE,
+        siteId: REACT_APP_MATOMO_SITE_ID,
+        trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
+      });
+      this.matomo.trackPageView();
     }
   }
 
@@ -229,8 +229,8 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setMaxExtent(maxExtent));
     }
 
-    if (matomo && !prevProps.enableTracking && enableTracking) {
-      matomo.trackPageView();
+    if (this.matomo && !prevProps.enableTracking && enableTracking) {
+      this.matomo.trackPageView();
     }
   }
 
@@ -246,12 +246,11 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesUrl,
       staticFilesUrl,
       permissionUrl,
-      enableTracking,
       activeTopicKey,
     } = this.props;
 
     return (
-      <MatomoProvider value={enableTracking && matomo}>
+      <MatomoProvider value={this.matomo}>
         <Provider store={this.store}>
           <TopicLoader
             history={history}

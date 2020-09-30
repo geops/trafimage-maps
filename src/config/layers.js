@@ -132,7 +132,8 @@ dataLayer.on('load', () => {
 });
 
 export const netzkarteLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.layer',
+  key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   isBaseLayer: true,
   properties: {
@@ -202,15 +203,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
     source: 'stations',
     filter: ['has', 'dwv'],
     paint: {
-      'circle-radius': [
-        'interpolate',
-        ['linear'],
-        ['get', 'dwv'],
-        400,
-        8,
-        500000,
-        70,
-      ],
+      'circle-radius': ['*', ['sqrt', ['/', ['get', 'dwv'], Math.PI]], 0.2], // Radius = (sqrt(passengers/Math.PI))*0.2 (0.2 is a constant)
       'circle-color': 'rgb(255,220,0)',
       'circle-stroke-width': 2,
       'circle-stroke-color': 'rgb(255,220,0)',
@@ -544,7 +537,8 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 });
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte',
+  name: 'ch.sbb.netzkarte.layer',
+  key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   isQueryable: false,
