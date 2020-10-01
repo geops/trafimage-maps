@@ -294,14 +294,8 @@ class TopicLoader extends Component {
       if (flatLayers[i].setStaticFilesUrl) {
         flatLayers[i].setStaticFilesUrl(staticFilesUrl);
       }
-
-      if (
-        apiKey &&
-        flatLayers[i].setApiKey &&
-        flatLayers[i].getApiKey &&
-        !flatLayers[i].getApiKey()
-      ) {
-        flatLayers[i].setApiKey(apiKey, apiKeyName);
+      if (Object.prototype.hasOwnProperty.call(flatLayers[i], 'apiKey')) {
+        flatLayers[i].apiKey = apiKey;
       }
     }
   }
