@@ -283,11 +283,7 @@ class TopicLoader extends Component {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       }
       if (flatLayers[i].setStyleConfig) {
-        flatLayers[i].setStyleConfig(
-          vectorTilesUrl,
-          vectorTilesKey,
-          apiKeyName,
-        );
+        flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
       }
       if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
