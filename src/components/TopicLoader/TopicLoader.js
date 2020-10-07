@@ -24,7 +24,6 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   apiKey: PropTypes.string.isRequired,
-  apiKeyName: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   cartaroUrl: PropTypes.string,
@@ -83,7 +82,6 @@ class TopicLoader extends Component {
       topics,
       permissionsInfos,
       apiKey,
-      apiKeyName,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
@@ -112,7 +110,6 @@ class TopicLoader extends Component {
       activeTopic &&
       (vectorTilesUrl !== prevProps.vectorTilesUrl ||
         apiKey !== prevProps.apiKey ||
-        apiKeyName !== prevProps.apiKeyName ||
         vectorTilesKey !== prevProps.vectorTilesKey ||
         cartaroUrl !== prevProps.cartaroUrl ||
         appBaseUrl !== prevProps.appBaseUrl ||
@@ -123,9 +120,7 @@ class TopicLoader extends Component {
 
     if (
       activeTopic &&
-      (language !== prevProps.language ||
-        apiKey !== prevProps.apiKey ||
-        apiKeyName !== prevProps.apiKeyName)
+      (language !== prevProps.language || apiKey !== prevProps.apiKey)
     ) {
       this.updateLayers(activeTopic.layers);
     }
@@ -182,7 +177,6 @@ class TopicLoader extends Component {
     const {
       t,
       apiKey,
-      apiKeyName,
       appBaseUrl,
       layerService,
       dispatchSetFeatureInfo,
@@ -214,7 +208,7 @@ class TopicLoader extends Component {
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || []);
-    newSearchService.setApiKey(apiKey, apiKeyName);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
