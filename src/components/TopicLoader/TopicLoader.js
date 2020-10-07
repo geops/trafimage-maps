@@ -227,7 +227,6 @@ class TopicLoader extends Component {
   updateLayers(topicLayers) {
     const {
       apiKey,
-      apiKeyName,
       language,
       layerService,
       dispatchSetLayers,
