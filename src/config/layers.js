@@ -143,7 +143,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
-    return /perimeter_mask/.test(styleLayer.id);
+    return /perimeter_mask$/.test(styleLayer.id);
   },
 });
 
