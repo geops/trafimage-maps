@@ -297,9 +297,6 @@ class TopicLoader extends Component {
       if (Object.prototype.hasOwnProperty.call(flatLayers[i], 'apiKey')) {
         flatLayers[i].apiKey = apiKey;
       }
-      if (Object.prototype.hasOwnProperty.call(flatLayers[i], 'apiKeyName')) {
-        flatLayers[i].apiKeyName = apiKeyName;
-      }
     }
   }
 
