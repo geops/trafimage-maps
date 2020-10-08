@@ -711,8 +711,8 @@ export const constrAusbau = new Layer({
       key: 'ch.sbb.construction.ausbau.bahnhof',
       visible: true,
       mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /ausbau.bahnhof/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof/.test(id),
+      styleLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
+      queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
       styleLayer: {
         id: 'ch.sbb.construction.ausbau.bahnhof',
         type: 'symbol',
@@ -816,8 +816,8 @@ export const constrUnterhalt = new Layer({
       key: 'ch.sbb.construction.unterhalt.bahnhof',
       visible: true,
       mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /unterhalt.bahnhof/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof/.test(id),
+      styleLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
+      queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
       styleLayer: {
         id: 'ch.sbb.construction.unterhalt.bahnhof',
         type: 'symbol',
@@ -905,7 +905,11 @@ constructionDataLayer.on('load', () => {
   parentLayer.children.forEach((l) => {
     l.on('change:visible', ({ target: layer }) => {
       // Re-render only for children that contribute to the cluster
-      if (layer.mapboxLayer) {
+      if (
+        layer.mapboxLayer &&
+        constructionDataLayer &&
+        constructionDataLayer.mbMap
+      ) {
         updateConstructions(layer.mapboxLayer.mbMap);
       }
     });
@@ -914,7 +918,7 @@ constructionDataLayer.on('load', () => {
 
 export const constrClusters = new Layer({
   name: 'ch.sbb.construction-clusters',
-  key: 'ch.sbb.construction-angebotsschritt-2035',
+  key: 'ch.sbb.construction-clusters',
   visible: true,
   properties: {
     hideInLegend: true,
