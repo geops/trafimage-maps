@@ -61,10 +61,13 @@ function HandicapPopup({ feature }) {
           ? `${t('behig_nach')} 2026`
           : properties.prognose;
       return `${t(
-        'Dieser Bahnhof wird barrierefrei umgebaut (Prognose)',
-      )}: ${prognose}.`;
+        `Dieser Bahnhof wird vollständig angepasst`,
+      )}: ${prognose} (${t('Prognose')}).`;
     }
-    return t('Dieser Bahnhof wird nicht baulich angepasst.');
+    if (status === 'NICHT OK') {
+      return t('Dieser Bahnhof wird nicht baulich angepasst.');
+    }
+    return t('Keine Information vorhanden.');
   };
 
   const equipmentStr = equipment.length ? (
