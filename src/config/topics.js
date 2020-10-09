@@ -104,7 +104,6 @@ export const netzkarteStelen = {
 
 export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.layer',
-  key: 'ch.sbb.netzkarte',
   copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   isBaseLayer: true,
