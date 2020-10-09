@@ -57,7 +57,7 @@
     "cypress-plugin-tab": "1.0.5",
     "documentation": "12.3.0",
     "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.2",
+    "enzyme-adapter-react-16": "1.15.5",
     "esdoc-standard-plugin": "1.0.0",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.1.0",
