@@ -22,7 +22,7 @@ const names = {
 const descriptions = {
   de: {
     barrierfree:
-      'Ganz oder hauptsächlich barrierefreie Bahnhöfen an denen das autonome Reisen möglich ist.',
+      'Ganz oder hauptsächlich barrierefreie Bahnhöfe, an denen das autonome Reisen möglich ist.',
     notBarrierfree: ' an denen automes Reisen nicht möglich ist.',
     stuetzpunkt: (
       <>
