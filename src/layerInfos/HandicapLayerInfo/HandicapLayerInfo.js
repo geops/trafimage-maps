@@ -23,7 +23,7 @@ const descriptions = {
   de: {
     barrierfree:
       'Ganz oder hauptsächlich barrierefreie Bahnhöfe, an denen das autonome Reisen möglich ist.',
-    notBarrierfree: ' an denen automes Reisen nicht möglich ist.',
+    notBarrierfree: ', an denen autonomes Reisen nicht möglich ist.',
     stuetzpunkt: (
       <>
         , an denen beim SBB Call Center Handicap unter der Nummer{' '}
