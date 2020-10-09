@@ -46,7 +46,7 @@ const descriptions = {
   },
   fr: {
     barrierfree:
-      'Gares entièrement ou majoritairement accessibles, où il est possible de se déplacer de manière autonome',
+      'Gares entièrement ou majoritairement accessibles, où il est possible de se déplacer de manière autonome.',
     notBarrierfree:
       ' dans lesquelles il est impossible de se déplacer en toute autonomie.',
     stuetzpunkt: (
