@@ -64,7 +64,7 @@ function HandicapPopup({ feature }) {
         `Dieser Bahnhof wird vollständig angepasst`,
       )}: ${prognose} (${t('Prognose')}).`;
     }
-    if (status === 'NICHT OK') {
+    if (status === 'BLEIBEN NICHT OK') {
       return t('Dieser Bahnhof wird nicht baulich angepasst.');
     }
     return t('Keine Information vorhanden.');
