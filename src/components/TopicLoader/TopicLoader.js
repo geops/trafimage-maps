@@ -24,6 +24,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   apiKey: PropTypes.string.isRequired,
+  apiKeyName: PropTypes.string.isRequired,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   cartaroUrl: PropTypes.string,
@@ -82,6 +83,7 @@ class TopicLoader extends Component {
       topics,
       permissionsInfos,
       apiKey,
+      apiKeyName,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
@@ -120,7 +122,9 @@ class TopicLoader extends Component {
 
     if (
       activeTopic &&
-      (language !== prevProps.language || apiKey !== prevProps.apiKey)
+      (language !== prevProps.language ||
+        apiKey !== prevProps.apiKey ||
+        apiKeyName !== prevProps.apiKeyName)
     ) {
       this.updateLayers(activeTopic.layers);
     }
@@ -221,6 +225,7 @@ class TopicLoader extends Component {
   updateLayers(topicLayers) {
     const {
       apiKey,
+      apiKeyName,
       language,
       layerService,
       dispatchSetLayers,
@@ -276,7 +281,11 @@ class TopicLoader extends Component {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       }
       if (flatLayers[i].setStyleConfig) {
-        flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
+        flatLayers[i].setStyleConfig(
+          vectorTilesUrl,
+          vectorTilesKey,
+          apiKeyName,
+        );
       }
       if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);
