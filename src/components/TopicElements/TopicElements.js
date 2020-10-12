@@ -35,6 +35,7 @@ const defaultElements = {
   baseLayerSwitcher: false,
   shareMenu: false,
   trackerMenu: false,
+  altTrackerMenu: false,
   featureMenu: false,
   search: false,
 };
@@ -109,6 +110,10 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   elements.telephoneInfos =
     !disabled || !disabled.split(',').find((el) => el === 'header');
 
+  // If menu disable, we should be able to see trajectories [TRAFKLEIN-475]
+  elements.altTrackerMenu =
+    disabled && disabled.split(',').find((el) => el === 'menu');
+
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
     { shareMenu: <ShareMenu appBaseUrl={appBaseUrl} /> },
@@ -144,6 +149,11 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
       <Menu>
         <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
         {appMenuChildren}
+      </Menu>
+    ),
+    altTrackerMenu: (
+      <Menu>
+        <TrackerMenu />
       </Menu>
     ),
     baseLayerSwitcher: (
