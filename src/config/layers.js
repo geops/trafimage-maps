@@ -663,8 +663,8 @@ const angebotsSchritt2035 = new Layer({
       ],
     }),
     new Layer({
-      name: 'ch.sbb.bauprojekte.fertigstellung-2035',
-      key: 'ch.sbb.bauprojekte.fertigstellung-2035',
+      name: 'ch.sbb.bauprojekte.fertigstellung-2030',
+      key: 'ch.sbb.bauprojekte.fertigstellung-2030',
       visible: true,
       children: [
         new MapboxStyleLayer({
@@ -717,8 +717,8 @@ const angebotsSchritt2035 = new Layer({
           },
         }),
         new MapboxStyleLayer({
-          name: 'ch.sbb.bauprojekte.fertigstellung-2030',
-          key: 'ch.sbb.bauprojekte.fertigstellung-2030',
+          name: 'ch.sbb.bauprojekte.fertigstellung-2030-single',
+          key: 'ch.sbb.bauprojekte.fertigstellung-2030-single',
           visible: true,
           mapboxLayer: constructionDataLayer,
           styleLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
@@ -730,6 +730,7 @@ const angebotsSchritt2035 = new Layer({
             'source-layer': 'ch.sbb.bauprojekte',
           },
           properties: {
+            hideInLegend: true,
             hasInfos: true,
             layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
             date: '2030',
