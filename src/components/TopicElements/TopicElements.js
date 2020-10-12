@@ -135,6 +135,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   const appComponents = {
     header: <Header appBaseUrl={appBaseUrl} />,
     search: <Search />,
+    mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     map: (
       <EventConsumer>
         {(dispatcher) => (
@@ -168,7 +169,6 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         t={t}
       />
     ),
-    mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
   };
 
