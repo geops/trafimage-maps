@@ -11,13 +11,16 @@ class HandicapStopFinder extends Search {
     this.onDataEvent = this.onDataEvent.bind(this);
   }
 
-  setApiKey(apiKey) {
+  setApiKey(apiKey, apiKeyName) {
     this.apiKey = apiKey;
+    this.apiKeyName = apiKeyName;
   }
 
   search(value) {
     return fetch(
-      `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      `${endpoint}?&q=${encodeURIComponent(value)}&${this.apiKeyName}=${
+        this.apiKey
+      }`,
     )
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
