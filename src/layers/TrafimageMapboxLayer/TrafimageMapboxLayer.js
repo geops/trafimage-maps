@@ -199,6 +199,12 @@ class TrafimageMapboxLayer extends MapboxLayer {
       if (feature.properties.cluster) {
         const source = this.mbMap.getSource(feature.layer.source);
         const { cluster_id: id, point_count: count } = feature.properties;
+        if (feature.properties.has_angebotsschritt_2035) {
+          debugger;
+        }
+        if (feature.properties.has_angebotsschritt_2030) {
+          debugger;
+        }
         // because Mapbox GL JS should be fast ...
         // eslint-disable-next-line no-await-in-loop
         await new Promise((resolve) => {
@@ -208,6 +214,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
           });
         });
       } else {
+        if (feature.properties.angebotsschritt) {
+          debugger;
+        }
         features.push(this.format.readFeature(feature));
       }
     }

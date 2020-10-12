@@ -22,6 +22,7 @@ const ConstructionPopup = ({ feature, t }) => {
   let link1;
   let link2;
   let link3;
+  let angebotsschritt;
 
   if (feature.get('projektort')) {
     projektort = (
@@ -73,6 +74,10 @@ const ConstructionPopup = ({ feature, t }) => {
     );
   }
 
+  if (feature.get('angebotsschritt')) {
+    angebotsschritt = <span>Angebotsschritt: {feature.get('angebotsschritt')}</span>;
+  }
+
   return (
     <div className="wkp-construction-popup">
       {projektort}
@@ -80,6 +85,7 @@ const ConstructionPopup = ({ feature, t }) => {
       {link1}
       {link2}
       {link3}
+      {angebotsschritt}
     </div>
   );
 };
