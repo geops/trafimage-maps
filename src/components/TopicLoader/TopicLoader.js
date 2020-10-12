@@ -112,7 +112,6 @@ class TopicLoader extends Component {
       activeTopic &&
       (vectorTilesUrl !== prevProps.vectorTilesUrl ||
         apiKey !== prevProps.apiKey ||
-        apiKeyName !== prevProps.apiKeyName ||
         vectorTilesKey !== prevProps.vectorTilesKey ||
         cartaroUrl !== prevProps.cartaroUrl ||
         appBaseUrl !== prevProps.appBaseUrl ||
@@ -182,7 +181,6 @@ class TopicLoader extends Component {
     const {
       t,
       apiKey,
-      apiKeyName,
       appBaseUrl,
       layerService,
       dispatchSetFeatureInfo,
@@ -214,7 +212,7 @@ class TopicLoader extends Component {
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || []);
-    newSearchService.setApiKey(apiKey, apiKeyName);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
@@ -227,6 +225,7 @@ class TopicLoader extends Component {
   updateLayers(topicLayers) {
     const {
       apiKey,
+      apiKeyName,
       language,
       layerService,
       dispatchSetLayers,
@@ -282,7 +281,11 @@ class TopicLoader extends Component {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       }
       if (flatLayers[i].setStyleConfig) {
-        flatLayers[i].setStyleConfig(vectorTilesUrl, vectorTilesKey);
+        flatLayers[i].setStyleConfig(
+          vectorTilesUrl,
+          vectorTilesKey,
+          apiKeyName,
+        );
       }
       if (flatLayers[i].setCartaroUrl) {
         flatLayers[i].setCartaroUrl(cartaroUrl);

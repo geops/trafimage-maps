@@ -78,13 +78,13 @@ class TrafimageMapboxLayer extends MapboxLayer {
     });
   }
 
-  setStyleConfig(url, key) {
+  setStyleConfig(url, key, apiKeyName) {
     if (!url) {
       return;
     }
     const { style } = this.options;
     const newStyleUrl = `${url}/styles/${style}/style.json${
-      key ? `?key=${key}` : ''
+      key ? `?${apiKeyName || 'key'}=${key}` : ''
     }`;
 
     // Don't apply style if not necessary otherwise
