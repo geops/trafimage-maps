@@ -586,43 +586,156 @@ const angebotsSchritt2035 = new Layer({
     date: '2035',
   },
   children: [
-    new MapboxStyleLayer({
+    new Layer({
       name: 'ch.sbb.bauprojekte.fertigstellung-2035',
       key: 'ch.sbb.bauprojekte.fertigstellung-2035',
       visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /fertigstellung-2035/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /fertigstellung-2035/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.bauprojekte.fertigstellung-2035',
-        type: 'circle',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
-        date: '2035',
-      },
+      children: [
+        new MapboxStyleLayer({
+          name: 'ch.sbb.construction-cluster-circle-angebotsschritt-2035',
+          key: 'ch.sbb.construction-cluster-circle-angebotsschritt-2035',
+          properties: {
+            hideInLegend: true,
+          },
+          visible: true,
+          mapboxLayer: constructionDataLayer,
+          styleLayer: {
+            id: 'constr-cluster-circle-2035',
+            type: 'circle',
+            source: 'clusters-angebotsschritt-2035',
+            maxzoom: 8,
+            paint: {
+              'circle-color': 'rgb(255, 0, 0)',
+              'circle-opacity': 0.6,
+              'circle-radius': [
+                'case',
+                [
+                  'all',
+                  ['has', 'point_count'],
+                  ['any', ['get', 'has_angebotsschritt_2035']],
+                ],
+                [
+                  'step',
+                  ['get', 'point_count'],
+                  24,
+                  2,
+                  26,
+                  5,
+                  27,
+                  6,
+                  31,
+                  10,
+                  35,
+                  15,
+                  45,
+                ],
+                [
+                  'all',
+                  ['!', ['has', 'point_count']],
+                  ['any', ['==', ['get', 'angebotsschritt'], '2035']],
+                ],
+                21,
+                0,
+              ],
+            },
+          },
+        }),
+        new MapboxStyleLayer({
+          name: 'ch.sbb.bauprojekte.fertigstellung-2035-single',
+          key: 'ch.sbb.bauprojekte.fertigstellung-2035-single',
+          visible: true,
+          mapboxLayer: constructionDataLayer,
+          styleLayersFilter: ({ id }) => /fertigstellung-2035/.test(id),
+          queryRenderedLayersFilter: ({ id }) => /fertigstellung-2035/.test(id),
+          styleLayer: {
+            id: 'ch.sbb.bauprojekte.fertigstellung-2035',
+            type: 'circle',
+            source: 'ch.sbb.bauprojekte',
+            'source-layer': 'ch.sbb.bauprojekte',
+          },
+          properties: {
+            hideInLegend: true,
+            hasInfos: true,
+            layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+            date: '2035',
+          },
+        }),
+      ],
     }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.bauprojekte.fertigstellung-2030',
-      key: 'ch.sbb.bauprojekte.fertigstellung-2030',
+    new Layer({
+      name: 'ch.sbb.bauprojekte.fertigstellung-2035',
+      key: 'ch.sbb.bauprojekte.fertigstellung-2035',
       visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.bauprojekte.fertigstellung-2030',
-        type: 'circle',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
-        date: '2030',
-      },
+      children: [
+        new MapboxStyleLayer({
+          name: 'ch.sbb.construction-cluster-circle-angebotsschritt-2030',
+          key: 'ch.sbb.construction-cluster-circle-angebotsschritt-2030',
+          properties: {
+            hideInLegend: true,
+          },
+          visible: true,
+          mapboxLayer: constructionDataLayer,
+          styleLayer: {
+            id: 'constr-cluster-circle-2030',
+            type: 'circle',
+            source: 'clusters-angebotsschritt-2030',
+            maxzoom: 8,
+            paint: {
+              'circle-color': 'rgb(255, 0, 0)',
+              'circle-opacity': 0.6,
+              'circle-radius': [
+                'case',
+                [
+                  'all',
+                  ['has', 'point_count'],
+                  ['any', ['get', 'has_angebotsschritt_2030']],
+                ],
+                [
+                  'step',
+                  ['get', 'point_count'],
+                  24,
+                  2,
+                  26,
+                  5,
+                  27,
+                  6,
+                  31,
+                  10,
+                  35,
+                  15,
+                  45,
+                ],
+                [
+                  'all',
+                  ['!', ['has', 'point_count']],
+                  ['any', ['==', ['get', 'angebotsschritt'], '2030']],
+                ],
+                21,
+                0,
+              ],
+            },
+          },
+        }),
+        new MapboxStyleLayer({
+          name: 'ch.sbb.bauprojekte.fertigstellung-2030',
+          key: 'ch.sbb.bauprojekte.fertigstellung-2030',
+          visible: true,
+          mapboxLayer: constructionDataLayer,
+          styleLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
+          queryRenderedLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
+          styleLayer: {
+            id: 'ch.sbb.bauprojekte.fertigstellung-2030',
+            type: 'circle',
+            source: 'ch.sbb.bauprojekte',
+            'source-layer': 'ch.sbb.bauprojekte',
+          },
+          properties: {
+            hasInfos: true,
+            layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
+            date: '2030',
+          },
+        }),
+      ],
     }),
   ],
 });
@@ -862,6 +975,24 @@ const updateConstructions = (mbMap) => {
         features: constrRendered,
       });
     }
+    const sourceAngebotsschritt2035 = mbMap.getSource(
+      'clusters-angebotsschritt-2035',
+    );
+    if (sourceAngebotsschritt2035) {
+      sourceAngebotsschritt2035.setData({
+        type: 'FeatureCollection',
+        features: constrRendered,
+      });
+    }
+    const sourceAngebotsschritt2030 = mbMap.getSource(
+      'clusters-angebotsschritt-2030',
+    );
+    if (sourceAngebotsschritt2030) {
+      sourceAngebotsschritt2030.setData({
+        type: 'FeatureCollection',
+        features: constrRendered,
+      });
+    }
   });
 };
 
@@ -872,7 +1003,7 @@ constructionDataLayer.on('load', () => {
     .layers.filter((layer) => {
       return (
         layer['source-layer'] === 'ch.sbb.bauprojekte' &&
-        /(ausbau|unterhalt)/.test(layer.id)
+        /(ausbau|unterhalt|fertigstellung)/.test(layer.id)
       );
     })
     .map((layer) => layer.id);
@@ -882,6 +1013,40 @@ constructionDataLayer.on('load', () => {
       type: 'geojson',
       cluster: true,
       clusterRadius: 75, // Radius of each cluster when clustering points.
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+  }
+  if (!mbMap.getSource('clusters-angebotsschritt-2035')) {
+    mbMap.addSource('clusters-angebotsschritt-2035', {
+      type: 'geojson',
+      cluster: true,
+      clusterRadius: 75, // Radius of each cluster when clustering points.
+      clusterProperties: {
+        has_angebotsschritt_2035: [
+          'any',
+          ['==', ['get', 'angebotsschritt'], '2035'],
+        ],
+      },
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    });
+  }
+  if (!mbMap.getSource('clusters-angebotsschritt-2030')) {
+    mbMap.addSource('clusters-angebotsschritt-2030', {
+      type: 'geojson',
+      cluster: true,
+      clusterRadius: 75, // Radius of each cluster when clustering points.
+      clusterProperties: {
+        has_angebotsschritt_2030: [
+          'any',
+          ['==', ['get', 'angebotsschritt'], '2030'],
+        ],
+      },
       data: {
         type: 'FeatureCollection',
         features: [],
@@ -902,18 +1067,23 @@ constructionDataLayer.on('load', () => {
 
 // Re-render cluster when change construction layers visiblity.
 [constrAusbau, constrUnterhalt].forEach((parentLayer) => {
-  parentLayer.children.forEach((l) => {
-    l.on('change:visible', ({ target: layer }) => {
-      // Re-render only for children that contribute to the cluster
-      if (
-        layer.mapboxLayer &&
-        constructionDataLayer &&
-        constructionDataLayer.mbMap
-      ) {
-        updateConstructions(layer.mapboxLayer.mbMap);
-      }
+  parentLayer.children
+    .map((l) =>
+      l.mapboxLayer ? l : (l.children || []).filter((lc) => lc.mapboxLayer),
+    )
+    .flat()
+    .forEach((l) => {
+      l.on('change:visible', ({ target: layer }) => {
+        // Re-render only for children that contribute to the cluster
+        if (
+          layer.mapboxLayer &&
+          constructionDataLayer &&
+          constructionDataLayer.mbMap
+        ) {
+          updateConstructions(layer.mapboxLayer.mbMap);
+        }
+      });
     });
-  });
 });
 
 export const constrClusters = new Layer({
