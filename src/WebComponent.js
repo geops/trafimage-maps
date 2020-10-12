@@ -224,7 +224,7 @@ const WebComponent = (props) => {
         <TrafimageMaps
           {...props}
           apiKey="12345"
-          apiKeyName={apiKeyName}
+          apiKeyName="api_key"
           vectorTilesKey={vectorTileApiKey}
           topics={appTopics}
           zoom={floatZoom}
