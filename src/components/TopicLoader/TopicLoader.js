@@ -112,7 +112,6 @@ class TopicLoader extends Component {
       activeTopic &&
       (vectorTilesUrl !== prevProps.vectorTilesUrl ||
         apiKey !== prevProps.apiKey ||
-        apiKeyName !== prevProps.apiKeyName ||
         vectorTilesKey !== prevProps.vectorTilesKey ||
         cartaroUrl !== prevProps.cartaroUrl ||
         appBaseUrl !== prevProps.appBaseUrl ||
@@ -182,7 +181,6 @@ class TopicLoader extends Component {
     const {
       t,
       apiKey,
-      apiKeyName,
       appBaseUrl,
       layerService,
       dispatchSetFeatureInfo,
@@ -214,7 +212,7 @@ class TopicLoader extends Component {
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || []);
-    newSearchService.setApiKey(apiKey, apiKeyName);
+    newSearchService.setApiKey(apiKey);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
