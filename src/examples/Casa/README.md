@@ -12,7 +12,7 @@ import 'trafimage-maps/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
-const apiKey = window.apiKey;
+const apiKey = '12345';
 const apiKeyName = 'api_key';
 const url = 'https://api.geops.io/routing/v1/TEST/'
 
