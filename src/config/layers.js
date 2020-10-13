@@ -142,8 +142,8 @@ export const netzkarteLayer = new MapboxStyleLayer({
   },
   visible: true,
   mapboxLayer: dataLayer,
-  styleLayersFilter: () => {
-    return false;
+  styleLayersFilter: (styleLayer) => {
+    return /perimeter_mask$/.test(styleLayer.id);
   },
 });
 
