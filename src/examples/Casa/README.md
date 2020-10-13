@@ -13,12 +13,10 @@ import 'trafimage-maps/examples/Casa/casa.css'
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const apiKeyName = 'api_key';
-const url = 'https://api.geops.io/routing/v1/TEST/'
+const apiKeyName = 'key';
 
 // Intialization of zone layer.
 const zoneLayer = new ZoneLayer({
-  url: url,
   apiKey: apiKey,
   apiKeyName: apiKeyName,
   validFrom: '2019-12-16',
@@ -126,7 +124,6 @@ zoneLayer.onClick(f => {
 // Initialize route layer.
 const routeLayer = new RouteLayer({
   key: 'ch.sbb.casa.routeLayer',
-  url: url,
   apiKey: apiKey,
   apiKeyName: apiKeyName,
 });
