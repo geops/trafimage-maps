@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -52,8 +53,10 @@ function HandicapPopup({ feature }) {
 
   const equipmentStr = equipment.length ? (
     <div className="wkp-handicap-popup-element" key="Ausstattung">
-      <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
-      <div className="wkp-handicap-popup-field-body">
+      <div className="wkp-handicap-popup-field-title" tabIndex={0}>
+        {t('Ausstattung')}
+      </div>
+      <div className="wkp-handicap-popup-field-body" tabIndex={0}>
         {equipment.join(', ')}
       </div>
     </div>
@@ -145,7 +148,9 @@ function HandicapPopup({ feature }) {
   return (
     <div className="wkp-handicap-popup">
       <div className="wkp-handicap-popup-body">
-        <div className="wkp-handicap-popup-title">{titles.join(' / ')}</div>
+        <div className="wkp-handicap-popup-title" tabIndex={0}>
+          {titles.join(' / ')}
+        </div>
         {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
             return null;

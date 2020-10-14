@@ -6,6 +6,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
 >
   <div
     className="wkp-handicap-popup-field-title"
+    tabIndex={0}
   >
     Zusätzliche Informationen
   </div>
@@ -13,7 +14,11 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
     className="wkp-handicap-popup-field-body"
   >
     <div>
-      Test line here
+      <span
+        tabIndex={0}
+      >
+        Test line here
+      </span>
     </div>
     <div>
       <span>
@@ -40,13 +45,25 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       </span>
     </div>
     <div>
-            (text)
+      <span
+        tabIndex={0}
+      >
+              (text)
+      </span>
     </div>
     <div>
-            LU-Tixi
+      <span
+        tabIndex={0}
+      >
+              LU-Tixi
+      </span>
     </div>
     <div>
-            foo bar baz
+      <span
+        tabIndex={0}
+      >
+              foo bar baz
+      </span>
     </div>
     <div>
       <span>
@@ -68,10 +85,18 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       </a>
     </div>
     <div>
-            Dritte Dienstleistung
+      <span
+        tabIndex={0}
+      >
+              Dritte Dienstleistung
+      </span>
     </div>
     <div>
-            Freiburg
+      <span
+        tabIndex={0}
+      >
+              Freiburg
+      </span>
     </div>
     <div>
       <span>
