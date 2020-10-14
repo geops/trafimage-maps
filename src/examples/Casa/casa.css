@@ -1,21 +1,56 @@
 .casa .tm-trafimage-maps .wkp-fit-extent,
-.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb,
 .casa .tm-trafimage-maps .rs-zoom-out,
 .casa .tm-trafimage-maps .rs-zoom-in {
-  background: #4576a2;
+  width: 22px;
+  height: 22px;
+  border: 1px solid #444;
+  box-shadow: none;
+  margin: 0;
+  z-index: 10000;
+  position: absolute;
+  right: 0;
+}
+
+.casa .tm-trafimage-maps .wkp-fit-extent {
+  border-radius: 6px;
+  bottom: 55px;
+}
+
+.casa .tm-trafimage-maps .rs-zoom-out {
+  border-radius: 0 0 6px 6px;
+  bottom: 0;
+}
+
+.casa .tm-trafimage-maps .rs-zoom-in {
+  border-radius: 6px 6px 0 0;
+  bottom: 23px;
 }
 
 .casa .tm-trafimage-maps .wkp-fit-extent:hover,
-.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb:hover,
 .casa .tm-trafimage-maps .rs-zoom-out:hover,
 .casa .tm-trafimage-maps .rs-zoom-in:hover {
-  background: #305a80;
-}
-
-.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider {
   border: 1px solid #4576a2;
+  box-shadow: none;
+  color: #4576a2;
+  z-index: 99999;
 }
 
+.casa .tm-trafimage-maps .wkp-fit-extent svg path {
+  fill: none;
+  stroke: currentColor;
+}
+
+.casa .tm-trafimage-maps .rs-zoom-out svg path,
+.casa .tm-trafimage-maps .rs-zoom-in svg path {
+  fill: currentColor;
+}
+
+.casa .tm-trafimage-maps .wkp-map-controls {
+  bottom: 17px;
+  top: auto;
+}
+
+.casa .rs-zooms-bar .rs-zoomslider-wrapper,
 .casa .tm-trafimage-maps .wkp-geolocation {
   display: none;
 }
@@ -23,7 +58,7 @@
 .casa .tm-trafimage-maps .rs-base-layer-switcher {
   display: flex;
   bottom: 5px;
-  right: 5px;
+  right: 35px;
   left: auto;
   height: 48px;
   width: 48px;
@@ -37,6 +72,10 @@
   border: 1px solid #444;
   box-shadow: none;
   overflow: hidden;
+}
+
+.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener:hover {
+  border: 1px solid #4576a2;
 }
 
 .casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button .rs-base-layer-switcher-title {
