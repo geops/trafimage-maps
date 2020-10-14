@@ -54,6 +54,7 @@ import ArrowImg from '../../img/arrow.png';
  * @param {Object} options Layer options.
  * @param {function} onMouseOver Mouse over callback. Called with the feature and the coordinate.
  * @param {String} options.apiKey Access key for [geOps services](https://developer.geops.io/).
+ * @param {String} options.apiKeyName Access key name for [geOps services](https://developer.geops.io/).
  * @param {styleFunction} [options.styleFunction] Style function.
  */
 class CasaLayer extends VectorLayer {
@@ -61,6 +62,8 @@ class CasaLayer extends VectorLayer {
     super(options);
 
     this.apiKey = options.apiKey;
+
+    this.apiKeyName = options.apiKeyName;
 
     this.projection = options.projection || 'EPSG:3857';
 

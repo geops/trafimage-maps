@@ -67,6 +67,12 @@ const propTypes = {
   apiKey: PropTypes.string,
 
   /**
+   * API key name for using geOps services.
+   * @private
+   */
+  apiKeyName: PropTypes.string,
+
+  /**
    * URL endpoint for Cartaro.
    * @private
    */
@@ -127,6 +133,7 @@ const defaultProps = {
   zoom: undefined,
   maxExtent: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  apiKeyName: 'key',
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
@@ -231,6 +238,7 @@ class TrafimageMaps extends React.PureComponent {
     const {
       history,
       apiKey,
+      apiKeyName,
       topics,
       cartaroUrl,
       appBaseUrl,
@@ -247,6 +255,7 @@ class TrafimageMaps extends React.PureComponent {
           <TopicLoader
             history={history}
             apiKey={apiKey}
+            apiKeyName={apiKeyName}
             topics={topics}
             activeTopicKey={activeTopicKey}
             cartaroUrl={cartaroUrl}
