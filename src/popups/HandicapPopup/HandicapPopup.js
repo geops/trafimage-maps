@@ -157,7 +157,7 @@ function HandicapPopup({ feature }) {
           className="wkp-handicap-popup-title"
           tabIndex={0}
           role="heading"
-          aria-level="1"
+          aria-level="2"
         >
           {titles.join(' / ')}
         </div>
