@@ -5,7 +5,9 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
   className="wkp-handicap-popup-element"
 >
   <div
+    aria-level="2"
     className="wkp-handicap-popup-field-title"
+    role="heading"
     tabIndex={0}
   >
     Zusätzliche Informationen

@@ -136,7 +136,12 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   if (values.length > 1) {
     content = (
       <>
-        <div className="wkp-handicap-popup-field-title" tabIndex={0}>
+        <div
+          className="wkp-handicap-popup-field-title"
+          role="heading"
+          aria-level="2"
+          tabIndex={0}
+        >
           {t(propLabel)}
         </div>
         <div className="wkp-handicap-popup-field-body">
@@ -155,7 +160,12 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   } else {
     content = (
       <>
-        <div className="wkp-handicap-popup-field-title" tabIndex={0}>
+        <div
+          className="wkp-handicap-popup-field-title"
+          role="heading"
+          aria-level="2"
+          tabIndex={0}
+        >
           {t(propLabel)}
         </div>
         <div className="wkp-handicap-popup-field-body">

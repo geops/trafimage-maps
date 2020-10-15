@@ -53,7 +53,12 @@ function HandicapPopup({ feature }) {
 
   const equipmentStr = equipment.length ? (
     <div className="wkp-handicap-popup-element" key="Ausstattung">
-      <div className="wkp-handicap-popup-field-title" tabIndex={0}>
+      <div
+        className="wkp-handicap-popup-field-title"
+        tabIndex={0}
+        role="heading"
+        aria-level="2"
+      >
         {t('Ausstattung')}
       </div>
       <div className="wkp-handicap-popup-field-body" tabIndex={0}>
@@ -148,7 +153,12 @@ function HandicapPopup({ feature }) {
   return (
     <div className="wkp-handicap-popup">
       <div className="wkp-handicap-popup-body">
-        <div className="wkp-handicap-popup-title" tabIndex={0}>
+        <div
+          className="wkp-handicap-popup-title"
+          tabIndex={0}
+          role="heading"
+          aria-level="1"
+        >
           {titles.join(' / ')}
         </div>
         {elementsList.map((field) => {
