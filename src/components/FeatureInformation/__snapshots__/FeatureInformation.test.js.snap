@@ -7,7 +7,11 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
   <div
     className="wkp-feature-information-header"
   >
-    <span />
+    <span
+      aria-level="1"
+      role="heading"
+      tabIndex={0}
+    />
     <div
       aria-label="Popup schliessen"
       className="wkp-close-bt"
@@ -161,7 +165,11 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
   <div
     className="wkp-feature-information-header"
   >
-    <span />
+    <span
+      aria-level="1"
+      role="heading"
+      tabIndex={0}
+    />
     <div
       aria-label="Popup schliessen"
       className="wkp-close-bt"
@@ -246,7 +254,11 @@ exports[`FeatureInformaion should match snapshot. using the layers's popupCompon
   <div
     className="wkp-feature-information-header"
   >
-    <span />
+    <span
+      aria-level="1"
+      role="heading"
+      tabIndex={0}
+    />
     <div
       aria-label="Popup schliessen"
       className="wkp-close-bt"

@@ -81,12 +81,13 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       </div>
     );
   }
+  /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
   return (
     <div className="wkp-feature-information">
       <React.Suspense fallback="...loading">
         {PopupComponent && !PopupComponent.hideHeader ? (
           <div className="wkp-feature-information-header">
-            <span>
+            <span tabIndex={0} role="heading" aria-level="1">
               {PopupComponent && PopupComponent.renderTitle && feature
                 ? PopupComponent.renderTitle(feature, t)
                 : layer && layer.name && t(layer.name)}
