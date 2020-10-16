@@ -107,10 +107,15 @@ function HandicapPopup({ feature }) {
     {
       element: (
         <div className="wkp-handicap-popup-element" key="BehigInfo">
-          <div className="wkp-handicap-popup-field-title">
+          <div
+            className="wkp-handicap-popup-field-title"
+            role="heading"
+            aria-level="2"
+            tabIndex={0}
+          >
             {t('ch.sbb.behig')}
           </div>
-          {behigInfo()}
+          <span tabIndex={0}>{behigInfo()}</span>
         </div>
       ),
     },
