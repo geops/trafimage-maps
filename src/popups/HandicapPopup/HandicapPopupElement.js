@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -104,22 +103,18 @@ const renderLinks = (intialText) => {
   ]);
   const emailMatches = searchMatches(intialText, [emailTester]);
   const urlMatches = searchMatches(intialText, [urlTester]);
-  let matched = false;
 
   let replaced = [intialText];
   if (telMatches.length) {
-    matched = true;
     replaced = replaceLinks(replaced, telMatches, telTo);
   }
   if (emailMatches.length) {
-    matched = true;
     replaced = replaceLinks(replaced, emailMatches, mailTo);
   }
   if (urlMatches.length) {
-    matched = true;
     replaced = replaceLinks(replaced, urlMatches, urlHref);
   }
-  return matched ? replaced : <span tabIndex={0}>{[intialText]}</span>;
+  return replaced;
 };
 
 function HandicapPopupElement({ properties, propertyName, label }) {
@@ -136,14 +131,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   if (values.length > 1) {
     content = (
       <>
-        <div
-          className="wkp-handicap-popup-field-title"
-          role="heading"
-          aria-level="2"
-          tabIndex={0}
-        >
-          {t(propLabel)}
-        </div>
+        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
         <div className="wkp-handicap-popup-field-body">
           {values.map((v, idx) => {
             if (v === '') {
@@ -160,14 +148,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   } else {
     content = (
       <>
-        <div
-          className="wkp-handicap-popup-field-title"
-          role="heading"
-          aria-level="2"
-          tabIndex={0}
-        >
-          {t(propLabel)}
-        </div>
+        <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
         <div className="wkp-handicap-popup-field-body">
           {renderLinks(values[0])}
         </div>
