@@ -82,8 +82,7 @@ describe('HandicapPopupElement', () => {
       );
       const children = wrapper.find('.wkp-handicap-popup-field-body').html();
       expect(children).toBe(
-        '<div class="wkp-handicap-popup-field-body">' +
-          `<span tabindex="0">${string}</span></div>`,
+        `<div class="wkp-handicap-popup-field-body">${string}</div>`,
       );
     });
   });
