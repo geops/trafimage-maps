@@ -102,7 +102,7 @@ function HandicapPopup({ feature }) {
           <div className="wkp-handicap-popup-field-title">
             {t('ch.sbb.behig')}
           </div>
-          {behigInfo()}
+          <span>{behigInfo()}</span>
         </div>
       ),
     },
