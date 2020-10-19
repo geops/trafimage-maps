@@ -1,7 +1,7 @@
 .casa .tm-trafimage-maps .wkp-fit-extent,
 .casa .tm-trafimage-maps .rs-zoom-out,
 .casa .tm-trafimage-maps .rs-zoom-in {
-  width: 22px;
+  width: 23px;
   height: 22px;
   border: 1px solid #444;
   box-shadow: none;
@@ -12,8 +12,18 @@
 }
 
 .casa .tm-trafimage-maps .wkp-fit-extent {
+  width: 23px;
+  height: 23px;
   border-radius: 6px;
   bottom: 55px;
+}
+
+.casa .tm-trafimage-maps .rs-zoom-out svg,
+.casa .tm-trafimage-maps .rs-zoom-in svg {
+  margin: auto;
+  height: 11px;
+  width: 11px;
+  stroke: currentColor;
 }
 
 .casa .tm-trafimage-maps .rs-zoom-out {
@@ -38,11 +48,6 @@
 .casa .tm-trafimage-maps .wkp-fit-extent svg path {
   fill: none;
   stroke: currentColor;
-}
-
-.casa .tm-trafimage-maps .rs-zoom-out svg path,
-.casa .tm-trafimage-maps .rs-zoom-in svg path {
-  fill: currentColor;
 }
 
 .casa .tm-trafimage-maps .wkp-map-controls {
