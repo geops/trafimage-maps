@@ -142,9 +142,12 @@ function HandicapPopup({ feature }) {
     );
   }
 
-  return (
-    <div className="wkp-handicap-popup">
-      <div className="wkp-handicap-popup-body">
+  const renderBody = () => {
+    if (properties.noInfo) {
+      return <span>{t('Keine Information vorhanden.')}</span>;
+    }
+    return (
+      <>
         <div className="wkp-handicap-popup-title">{titles.join(' / ')}</div>
         {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
@@ -165,7 +168,13 @@ function HandicapPopup({ feature }) {
           );
         })}
         {renderBottom(properties)}
-      </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="wkp-handicap-popup">
+      <div className="wkp-handicap-popup-body">{renderBody()}</div>
     </div>
   );
 }
