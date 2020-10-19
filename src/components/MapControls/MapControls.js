@@ -6,6 +6,8 @@ import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
+import { ReactComponent as ZoomOut } from '../../img/minus_small.svg';
+import { ReactComponent as ZoomIn } from '../../img/plus_small.svg';
 import './MapControls.scss';
 
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
@@ -39,6 +41,8 @@ const MapControls = ({ showGeolocation }) => {
     <div className="wkp-map-controls">
       <Zoom
         map={map}
+        zoomInChildren={<ZoomIn />}
+        zoomOutChildren={<ZoomOut />}
         zoomSlider
         title={{
           zoomIn: t('Zoom'),
