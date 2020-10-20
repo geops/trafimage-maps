@@ -22,7 +22,6 @@
 .casa .tm-trafimage-maps .rs-zoom-in svg {
   height: 11px;
   width: 11px;
-  stroke: currentColor;
 }
 
 .casa .tm-trafimage-maps .rs-zoom-out {
@@ -45,13 +44,12 @@
 }
 
 .casa .tm-trafimage-maps .wkp-fit-extent svg path {
-  fill: none;
   stroke: currentColor;
 }
 
 .casa .tm-trafimage-maps .wkp-map-controls {
   bottom: 17px;
-  top: auto;
+  top: auto; /* For IE */
 }
 
 .casa .rs-zooms-bar .rs-zoomslider-wrapper,
