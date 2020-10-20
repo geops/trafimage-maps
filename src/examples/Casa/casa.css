@@ -20,7 +20,6 @@
 
 .casa .tm-trafimage-maps .rs-zoom-out svg,
 .casa .tm-trafimage-maps .rs-zoom-in svg {
-  margin: auto;
   height: 11px;
   width: 11px;
   stroke: currentColor;
