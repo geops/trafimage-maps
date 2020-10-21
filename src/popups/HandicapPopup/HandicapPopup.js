@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
@@ -13,6 +13,18 @@ function HandicapPopup({ feature }) {
   const language = useSelector((state) => state.app.language);
   const properties = feature.getProperties();
   const { t } = useTranslation();
+  const refBody = useRef();
+  const refBodyEmpty = useRef();
+
+  useEffect(() => {
+    // focus first element to trigger screenreader to read its content:
+    // https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html
+    if (refBody && refBody.current) {
+      refBody.current.focus();
+    } else if (refBodyEmpty && refBodyEmpty.current) {
+      refBodyEmpty.current.focus();
+    }
+  }, []);
 
   // mapping of all boolean values properties and their exceptions
   const bfEquipmentExceptions = {
@@ -174,11 +186,17 @@ function HandicapPopup({ feature }) {
 
   const renderBody = () => {
     if (properties.noInfo) {
-      return <span>{t('Keine Information vorhanden.')}</span>;
+      return (
+        <span tabIndex={-1} ref={refBodyEmpty}>
+          {t('Keine Information vorhanden.')}
+        </span>
+      );
     }
     return (
       <>
-        <div className="wkp-handicap-popup-title">{titles.join(' / ')}</div>
+        <p className="wkp-handicap-popup-title" ref={refBody} tabIndex={-1}>
+          {titles.join(' / ')}
+        </p>
         {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
             return null;
@@ -204,7 +222,9 @@ function HandicapPopup({ feature }) {
 
   return (
     <div className="wkp-handicap-popup">
-      <div className="wkp-handicap-popup-body">{renderBody()}</div>
+      <div className="wkp-handicap-popup-body" id="wkp-popup-desc">
+        {renderBody()}
+      </div>
     </div>
   );
 }

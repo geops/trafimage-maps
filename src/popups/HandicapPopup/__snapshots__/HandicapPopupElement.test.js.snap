@@ -4,18 +4,18 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
 <div
   className="wkp-handicap-popup-element"
 >
-  <div
+  <p
     className="wkp-handicap-popup-field-title"
   >
     Zusätzliche Informationen
-  </div>
+  </p>
   <div
     className="wkp-handicap-popup-field-body"
   >
-    <div>
+    <p>
       Test line here
-    </div>
-    <div>
+    </p>
+    <p>
       <span>
               
       </span>
@@ -24,8 +24,8 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       >
         +33 666 66 66
       </a>
-    </div>
-    <div>
+    </p>
+    <p>
       <span>
         <span>
                 
@@ -38,17 +38,17 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
           admin@email.it
         </a>
       </span>
-    </div>
-    <div>
+    </p>
+    <p>
             (text)
-    </div>
-    <div>
+    </p>
+    <p>
             LU-Tixi
-    </div>
-    <div>
+    </p>
+    <p>
             foo bar baz
-    </div>
-    <div>
+    </p>
+    <p>
       <span>
               
       </span>
@@ -66,14 +66,14 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
           Link.svg
         </svg>
       </a>
-    </div>
-    <div>
+    </p>
+    <p>
             Dritte Dienstleistung
-    </div>
-    <div>
+    </p>
+    <p>
             Freiburg
-    </div>
-    <div>
+    </p>
+    <p>
       <span>
               
       </span>
@@ -82,8 +82,8 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       >
         +41 (0) 41 210 00 60
       </a>
-    </div>
-    <div>
+    </p>
+    <p>
       <span>
               
       </span>
@@ -101,7 +101,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
           Link.svg
         </svg>
       </a>
-    </div>
+    </p>
   </div>
 </div>
 `;

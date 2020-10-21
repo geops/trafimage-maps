@@ -82,11 +82,16 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     );
   }
   return (
-    <div className="wkp-feature-information">
+    <div
+      className="wkp-feature-information"
+      aria-labelledby="wkp-popup-label"
+      aria-describedby="wkp-popup-desc"
+      role="dialog"
+    >
       <React.Suspense fallback="...loading">
         {PopupComponent && !PopupComponent.hideHeader ? (
           <div className="wkp-feature-information-header">
-            <span>
+            <span id="wkp-popup-label">
               {PopupComponent && PopupComponent.renderTitle && feature
                 ? PopupComponent.renderTitle(feature, t)
                 : layer && layer.name && t(layer.name)}
