@@ -14629,7 +14629,7 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@^1.0.8-beta.1:
+react-spatial@1.0.8-beta.1:
   version "1.0.8-beta.1"
   resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.8-beta.1.tgz#efb61ad4f74a55e809b753823bd9ab3dbda0cb26"
   integrity sha512-0Y9tMp6NYvQvOetfreC/CAbhukRCzEgsdjxTwh2NLQ1qZ34viZFtL/Wggc1TPQDArpmho7nY3TZsBbZ7kI81XQ==
