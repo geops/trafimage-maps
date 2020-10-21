@@ -812,7 +812,7 @@ export const constrUnterhalt = new Layer({
 
 let constrLayers = [];
 
-const updateConstructions = (mbMap) => {
+export const updateConstructions = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
     const constrRendered = mbMap

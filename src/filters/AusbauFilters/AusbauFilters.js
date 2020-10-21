@@ -10,6 +10,7 @@ import {
   InputLabel,
   makeStyles,
 } from '@material-ui/core';
+import { updateConstructions } from '../../config/layers';
 
 const useStyles = makeStyles(() => ({
   formControl: {
@@ -67,6 +68,7 @@ const onChange = (value, layers) => {
       }
       mbMap.setFilter(id, newFilter);
     });
+    updateConstructions(mbMap);
   });
 };
 
