@@ -1,47 +1,32 @@
 import React from 'react';
-// import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import SelectFilter from '../SelectFilter';
 
 const propTypes = {};
 
 const defaultProps = {};
 
 const AusbauFilters = () => {
-  // const { i18n } = useTranslation();
+  const { t } = useTranslation();
 
-  // const comps = {
-  //   de: (
-  //     <div>
-  //       Zur Umsetzung des Behindertengleichstellungsgesetzes (BehiG) sind unter
-  //       anderem umfangreiche Anpassungen der Infrastruktur notwendig. Die
-  //       vorliegende Karte zeigt den aktuellen Umsetzungsstand der Bahnhöfe der
-  //       SBB.
-  //     </div>
-  //   ),
-  //   fr: (
-  //     <div>
-  //       La mise en œuvre de la loi sur l’égalité des personnes handicapées
-  //       (LHand), des ajustements importants de l’infrastructure sont
-  //       nécessaires. Cette carte indique l’état actuel des stations CFF.
-  //     </div>
-  //   ),
-  //   en: (
-  //     <div>
-  //       To implement the Disability Discrimination Act (DDA), extensive
-  //       infrastructure adjustments are necessary. This map shows the current
-  //       status of the SBB stations.
-  //     </div>
-  //   ),
-  //   it: (
-  //     <div>
-  //       L’attuazione della Legge sui disabili (LDis), sono necessari adeguamenti
-  //       significativi dell’infrastruttura. Questa mappa mostra lo stato corrente
-  //       delle stazioni FFS.
-  //     </div>
-  //   ),
-  // };
-
-  return 'AusbauFilters';
-  // comps[i18n.language];
+  return (
+    <SelectFilter
+      multiple
+      label={t('Angebotsschritte 2035')}
+      choices={[
+        { value: 'Projekte im Bau', label: 'Projekte im Bau' },
+        {
+          value: 'Fertigstellung bis 2030 ',
+          label: 'Fertigstellung bis 2030 ',
+        },
+        { value: 'Fertigstellung bis 2035', label: 'Fertigstellung bis 2035 ' },
+      ]}
+      onChange={() => {
+        // onChange(val, 'region');
+        // setRegionFilters(val);
+      }}
+    />
+  );
 };
 
 AusbauFilters.propTypes = propTypes;
