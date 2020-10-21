@@ -194,11 +194,19 @@ class TopicMenu extends PureComponent {
                 {layer.get('hasInfos') && this.renderInfoButton(layer)}
               </>
             )}
-            renderAfterChildren={(layer) => {
+            renderAfterItem={(layer, level) => {
               const component = layer.get('filtersComponent');
               if (component) {
                 const FiltersComponent = filters[component];
-                return <FiltersComponent />;
+                return (
+                  <div
+                    style={{
+                      paddingLeft: `${30 * (level + 1)}px`,
+                    }}
+                  >
+                    <FiltersComponent layer={layer} />
+                  </div>
+                );
               }
               return null;
               // {

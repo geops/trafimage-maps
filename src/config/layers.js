@@ -654,6 +654,7 @@ export const constrAusbau = new Layer({
     hasInfos: true,
     description: 'ch.sbb.construction.ausbau.group-desc',
     filtersComponent: 'AusbauFilters',
+    dataLayer: constructionDataLayer,
   },
   children: [
     // angebotsSchritt2035,
@@ -664,12 +665,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.uebrige/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.uebrige/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.uebrige',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -687,12 +682,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.bahnhof_strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof_strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.bahnhof_strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -710,12 +699,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -733,12 +716,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.bahnhof',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -768,12 +745,6 @@ export const constrUnterhalt = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
       queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.uebrige',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -792,12 +763,6 @@ export const constrUnterhalt = new Layer({
       styleLayersFilter: ({ id }) => /unterhalt.bahnhof_strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) =>
         /unterhalt.bahnhof_strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -815,12 +780,6 @@ export const constrUnterhalt = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /unterhalt.strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) => /unterhalt.strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -838,12 +797,6 @@ export const constrUnterhalt = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
       queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.bahnhof',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
