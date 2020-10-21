@@ -14,15 +14,12 @@ function HandicapPopup({ feature }) {
   const properties = feature.getProperties();
   const { t } = useTranslation();
   const refBody = useRef();
-  const refBodyEmpty = useRef();
 
   useEffect(() => {
     // focus first element to trigger screenreader to read its content:
     // https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html
     if (refBody && refBody.current) {
       refBody.current.focus();
-    } else if (refBodyEmpty && refBodyEmpty.current) {
-      refBodyEmpty.current.focus();
     }
   }, []);
 
@@ -187,7 +184,7 @@ function HandicapPopup({ feature }) {
   const renderBody = () => {
     if (properties.noInfo) {
       return (
-        <span tabIndex={-1} ref={refBodyEmpty}>
+        <span tabIndex={-1} ref={refBody}>
           {t('Keine Information vorhanden.')}
         </span>
       );
