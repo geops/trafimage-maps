@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import qs from 'query-string';
 import SelectFilter from '../SelectFilter';
 
 const propTypes = {};
@@ -8,6 +9,11 @@ const defaultProps = {};
 
 const AusbauFilters = () => {
   const { t } = useTranslation();
+  const isShowFilter = qs.parse(window.location.search).showFilter === 'true';
+
+  if (!isShowFilter) {
+    return null;
+  }
 
   return (
     <SelectFilter
