@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import Layer from 'mobility-toolbox-js/common/layers/Layer';
 import {
   Select,
   MenuItem,
@@ -9,6 +8,7 @@ import {
   InputLabel,
   makeStyles,
 } from '@material-ui/core';
+import AusbauLayer from '../../layers/AusbauLayer';
 import { updateConstructions } from '../../config/layers';
 
 const useStyles = makeStyles(() => ({
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const propTypes = {
-  layer: PropTypes.instanceOf(Layer),
+  layer: PropTypes.instanceOf(AusbauLayer),
 };
 
 const defaultProps = {
@@ -64,4 +64,4 @@ const AusbauFilters = ({ layer }) => {
 AusbauFilters.propTypes = propTypes;
 AusbauFilters.defaultProps = defaultProps;
 
-export default React.memo(AusbauFilters);
+export default AusbauFilters;
