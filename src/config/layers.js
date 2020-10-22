@@ -10,16 +10,17 @@ import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
+import KilometrageLayer from '../layers/KilometrageLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
 import landeskarte from '../img/landeskarte.png';
 import landeskarteGrau from '../img/landeskarte_grau.png';
 import luftbild from '../img/luftbild.png';
-import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
-import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
-import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
-import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer';
+import AusbauLayer from '../layers/AusbauLayer';
+import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
+import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
+import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
+import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
 
 proj4.defs(
@@ -646,15 +647,15 @@ export const constructionDataLayer = new TrafimageMapboxLayer({
 //   ],
 // });
 
-export const constrAusbau = new Layer({
+export const constrAusbau = new AusbauLayer({
   name: 'ch.sbb.construction.ausbau.group',
   desc: 'ch.sbb.construction.ausbau.group-desc',
   visible: true,
+  mapboxLayer: constructionDataLayer,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.construction.ausbau.group-desc',
     filtersComponent: 'AusbauFilters',
-    dataLayer: constructionDataLayer,
   },
   children: [
     // angebotsSchritt2035,
