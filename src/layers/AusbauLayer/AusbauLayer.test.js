@@ -89,6 +89,12 @@ describe('AusbauFilters', () => {
         'foo',
       ]);
       expect(style.layers[2].filter).toBe();
+
+      // apply filter null.
+      layer.applyNewFilter();
+      expect(style.layers[0].filter).toEqual(null);
+      expect(style.layers[1].filter).toEqual(['all', ['==', 'type', 'ausbau']]);
+      expect(style.layers[2].filter).toBe();
     });
   });
 });
