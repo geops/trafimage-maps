@@ -45,15 +45,4 @@ describe('AusbauFilters', () => {
       expect(tree).toMatchSnapshot();
     });
   });
-
-  // test("update the layer's filter on change", () => {
-  //   layer.isShowFilter = true;
-  //   // const spy = jest.spyOn(layer, 'applyNewFilter');
-  //   const wrapper = shallow(
-  //     <ThemeProvider theme={theme}>
-  //       <AusbauFilters layer={layer} />
-  //     </ThemeProvider>,
-  //   );
-  //   // wrapper.find(Select).change();
-  // });
 });
