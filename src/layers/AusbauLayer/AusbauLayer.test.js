@@ -90,7 +90,7 @@ describe('AusbauFilters', () => {
       ]);
       expect(style.layers[2].filter).toBe();
 
-      // apply filter null.
+      // apply inital filters.
       layer.applyNewFilter();
       expect(style.layers[0].filter).toEqual(null);
       expect(style.layers[1].filter).toEqual(['all', ['==', 'type', 'ausbau']]);
