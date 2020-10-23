@@ -136,7 +136,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
     content = (
       <>
         {propLabel ? (
-          <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+          <p className="wkp-handicap-popup-field-title">{t(propLabel)}</p>
         ) : null}
         <div className="wkp-handicap-popup-field-body">
           {values.map((v, idx) => {
@@ -145,7 +145,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
             }
             return (
               // eslint-disable-next-line react/no-array-index-key
-              <div key={idx}>{renderLinks(v)}</div>
+              <p key={idx}>{renderLinks(v)}</p>
             );
           })}
         </div>
@@ -155,11 +155,11 @@ function HandicapPopupElement({ properties, propertyName, label }) {
     content = (
       <>
         {propLabel ? (
-          <div className="wkp-handicap-popup-field-title">{t(propLabel)}</div>
+          <p className="wkp-handicap-popup-field-title">{t(propLabel)}</p>
         ) : null}
-        <div className="wkp-handicap-popup-field-body">
+        <p className="wkp-handicap-popup-field-body">
           {renderLinks(values[0])}
-        </div>
+        </p>
       </>
     );
   }
