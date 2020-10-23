@@ -35,8 +35,6 @@ class AusbauLayer extends MapboxStyleLayer {
     }
 
     style.layers.forEach(({ id }) => {
-      // console.log(id, mbMap.getFilter(id));
-
       // This filter must affect nur Ausbau layers.
       if (!/ausbau/.test(id)) {
         return;

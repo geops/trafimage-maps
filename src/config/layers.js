@@ -588,7 +588,6 @@ export const constrAusbau = new AusbauLayer({
     filtersComponent: 'AusbauFilters',
   },
   children: [
-    // angebotsSchritt2035,
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.uebrige',
       key: 'ch.sbb.construction.ausbau.uebrige',

@@ -209,11 +209,6 @@ class TopicMenu extends PureComponent {
                 );
               }
               return null;
-              // {
-              //   /* layer.renderAfterChildren &&
-              //   layer.renderAfterChildren(layerTreeComp)}
-              //   <div>rencijmnrmn</div> */
-              // }
             }}
           />
         </div>
