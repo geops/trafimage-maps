@@ -1,4 +1,6 @@
 import React from 'react';
+import { Feature } from 'ol';
+import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
@@ -42,14 +44,18 @@ class HandicapStopFinder extends Search {
 
     if (layer) {
       const { mbMap } = layer;
-      mbMap.once('idle', () => {
-        if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
-          this.onDataEvent();
-        } else {
-          // We can't rely on sourcedata because isSourceLoaded returns false.
-          mbMap.on('idle', this.onDataEvent);
-        }
-      });
+      if (mbMap.loaded() && mbMap.isStyleLoaded()) {
+        this.onDataEvent();
+      } else {
+        mbMap.once('idle', () => {
+          if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
+            this.onDataEvent();
+          } else {
+            // We can't rely on sourcedata because isSourceLoaded returns false.
+            mbMap.on('idle', this.onDataEvent);
+          }
+        });
+      }
     }
   }
 
@@ -87,10 +93,23 @@ class HandicapStopFinder extends Search {
       )
       .filter((i) => i);
 
-    Promise.all(infos).then((featureInfos) => {
-      dispatchSetFeatureInfo(
-        featureInfos.filter(({ features }) => features.length),
-      );
+    Promise.all(infos).then((featInfos) => {
+      let featureInfos = featInfos.filter(({ features }) => features.length);
+      if (!featureInfos.length) {
+        const errorInfo = featInfos.find(
+          (l) => l.coordinate && l.layer.get('popupComponent'),
+        );
+        errorInfo.features = [
+          // Create empty feature to open popup with no infos - TRAFHAND-104.
+          new Feature({
+            geometry: new Point(errorInfo.coordinate),
+            stationsbezeichnung: this.popupItem.properties.name,
+            noInfo: true,
+          }),
+        ];
+        featureInfos = [errorInfo];
+      }
+      dispatchSetFeatureInfo(featureInfos);
     });
   }
 }

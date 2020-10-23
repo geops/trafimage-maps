@@ -42,14 +42,18 @@ class StopFinder extends Search {
 
     if (layer) {
       const { mbMap } = layer;
-      mbMap.once('idle', () => {
-        if (mbMap.isSourceLoaded('stations')) {
-          this.onDataEvent();
-        } else {
-          // We can't rely on sourcedata because isSourceLoaded returns false.
-          mbMap.on('idle', this.onDataEvent);
-        }
-      });
+      if (mbMap.loaded() && mbMap.isStyleLoaded()) {
+        this.onDataEvent();
+      } else {
+        mbMap.once('idle', () => {
+          if (mbMap.isSourceLoaded('stations')) {
+            this.onDataEvent();
+          } else {
+            // We can't rely on sourcedata because isSourceLoaded returns false.
+            mbMap.on('idle', this.onDataEvent);
+          }
+        });
+      }
     }
   }
 
