@@ -54,7 +54,7 @@ class AusbauLayer extends MapboxStyleLayer {
       if (!newFilter && filterToApply) {
         newFilter = ['all', filterToApply];
       } else if (filterToApply && newFilter[0] === 'all') {
-        // we assume the filter is define with 'all' keyword
+        // we assume the filter is defined with 'all' keyword
         // ['all', filter1, filter2]
         newFilter.push(filterToApply);
       }
