@@ -3,7 +3,7 @@ import qs from 'query-string';
 
 /**
  * Layer for ausbau
- * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer}
  * @private
  * @class
  * @param {Object} [options] Layer options.
