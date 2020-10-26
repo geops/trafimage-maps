@@ -218,7 +218,12 @@ function HandicapPopup({ feature }) {
   };
 
   return (
-    <div className="wkp-handicap-popup">
+    <div
+      className="wkp-handicap-popup"
+      style={{
+        minWidth: properties.noInfo ? '250px' : '350px',
+      }}
+    >
       <div className="wkp-handicap-popup-body" id="wkp-popup-desc">
         {renderBody()}
       </div>
