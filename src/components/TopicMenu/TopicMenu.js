@@ -9,6 +9,7 @@ import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Collapsible from '../Collapsible';
+import filters from '../../filters';
 import {
   setActiveTopic,
   setSelectedForInfos,
@@ -193,6 +194,22 @@ class TopicMenu extends PureComponent {
                 {layer.get('hasInfos') && this.renderInfoButton(layer)}
               </>
             )}
+            renderAfterItem={(layer, level) => {
+              const component = layer.get('filtersComponent');
+              if (component) {
+                const FiltersComponent = filters[component];
+                return (
+                  <div
+                    style={{
+                      paddingLeft: `${30 * (level + 1)}px`,
+                    }}
+                  >
+                    <FiltersComponent layer={layer} />
+                  </div>
+                );
+              }
+              return null;
+            }}
           />
         </div>
       );

@@ -10,16 +10,17 @@ import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import KilometrageLayer from '../layers/KilometrageLayer/KilometrageLayer';
+import KilometrageLayer from '../layers/KilometrageLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
 import landeskarte from '../img/landeskarte.png';
 import landeskarteGrau from '../img/landeskarte_grau.png';
 import luftbild from '../img/luftbild.png';
-import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer/ZweitausbildungAbroadLayer';
-import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer/ZweitausbildungPoisLayer';
-import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer/ZweitausbildungRoutesLayer';
-import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer/ZweitausbildungRoutesHighlightLayer';
+import AusbauLayer from '../layers/AusbauLayer';
+import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
+import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
+import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
+import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
 
 proj4.defs(
@@ -576,67 +577,17 @@ export const constructionDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-const angebotsSchritt2035 = new Layer({
-  name: 'ch.sbb.construction-angebotsschritt-2035',
-  key: 'ch.sbb.construction-angebotsschritt-2035',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
-    date: '2035',
-  },
-  children: [
-    new MapboxStyleLayer({
-      name: 'ch.sbb.bauprojekte.fertigstellung-2035',
-      key: 'ch.sbb.bauprojekte.fertigstellung-2035',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /fertigstellung-2035/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /fertigstellung-2035/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.bauprojekte.fertigstellung-2035',
-        type: 'circle',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
-        date: '2035',
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.bauprojekte.fertigstellung-2030',
-      key: 'ch.sbb.bauprojekte.fertigstellung-2030',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /fertigstellung-2030/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.bauprojekte.fertigstellung-2030',
-        type: 'circle',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionFertigstellungLayerInfo',
-        date: '2030',
-      },
-    }),
-  ],
-});
-
-export const constrAusbau = new Layer({
+export const constrAusbau = new AusbauLayer({
   name: 'ch.sbb.construction.ausbau.group',
   desc: 'ch.sbb.construction.ausbau.group-desc',
   visible: true,
+  mapboxLayer: constructionDataLayer,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.construction.ausbau.group-desc',
+    filtersComponent: 'AusbauFilters',
   },
   children: [
-    angebotsSchritt2035,
     new MapboxStyleLayer({
       name: 'ch.sbb.construction.ausbau.uebrige',
       key: 'ch.sbb.construction.ausbau.uebrige',
@@ -644,12 +595,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.uebrige/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.uebrige/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.uebrige',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -667,12 +612,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.bahnhof_strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof_strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.bahnhof_strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -690,12 +629,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -713,12 +646,6 @@ export const constrAusbau = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
       queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.ausbau.bahnhof',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -748,12 +675,6 @@ export const constrUnterhalt = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
       queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.uebrige',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -772,12 +693,6 @@ export const constrUnterhalt = new Layer({
       styleLayersFilter: ({ id }) => /unterhalt.bahnhof_strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) =>
         /unterhalt.bahnhof_strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -795,12 +710,6 @@ export const constrUnterhalt = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /unterhalt.strecke/.test(id),
       queryRenderedLayersFilter: ({ id }) => /unterhalt.strecke/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.strecke',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -818,12 +727,6 @@ export const constrUnterhalt = new Layer({
       mapboxLayer: constructionDataLayer,
       styleLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
       queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
-      styleLayer: {
-        id: 'ch.sbb.construction.unterhalt.bahnhof',
-        type: 'symbol',
-        source: 'ch.sbb.bauprojekte',
-        'source-layer': 'ch.sbb.bauprojekte',
-      },
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
@@ -839,7 +742,7 @@ export const constrUnterhalt = new Layer({
 
 let constrLayers = [];
 
-const updateConstructions = (mbMap) => {
+export const updateConstructions = (mbMap) => {
   // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
   mbMap.once('idle', () => {
     const constrRendered = mbMap
