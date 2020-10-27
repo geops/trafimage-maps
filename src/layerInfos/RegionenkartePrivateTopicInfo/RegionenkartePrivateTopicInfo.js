@@ -15,10 +15,10 @@ const RegionenkartePrivateTopicInfo = ({ t }) => {
       <p>
         {t('Verantwortlich')}:
         <br />
-        I-AT-UEW, Aurelia Kollros,
+        I-VU-UEW, Anja Aebischer,
         <br />
-        <a href={`mailto:${t('aurelia.kollros@sbb.ch')}`}>
-          {t('aurelia.kollros@sbb.ch')}
+        <a href={`mailto:${t('anja.aebischer@sbb.ch')}`}>
+          {t('anja.aebischer@sbb.ch')}
         </a>
         .
       </p>
