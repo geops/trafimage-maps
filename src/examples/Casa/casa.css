@@ -1,26 +1,26 @@
-.casa .tm-trafimage-maps .wkp-fit-extent,
-.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb,
-.casa .tm-trafimage-maps .rs-zoom-out,
-.casa .tm-trafimage-maps .rs-zoom-in {
+.casa div.tm-trafimage-maps .wkp-fit-extent,
+.casa div.tm-trafimage-maps .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb,
+.casa div.tm-trafimage-maps .rs-zoom-out,
+.casa div.tm-trafimage-maps .rs-zoom-in {
   background: #4576a2;
 }
 
-.casa .tm-trafimage-maps .wkp-fit-extent:hover,
-.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb:hover,
-.casa .tm-trafimage-maps .rs-zoom-out:hover,
-.casa .tm-trafimage-maps .rs-zoom-in:hover {
+.casa div.tm-trafimage-maps .wkp-fit-extent:hover,
+.casa div.tm-trafimage-maps .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider .ol-zoomslider-thumb:hover,
+.casa div.tm-trafimage-maps .rs-zoom-out:hover,
+.casa div.tm-trafimage-maps .rs-zoom-in:hover {
   background: #305a80;
 }
 
-.casa .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider {
+.casa div.tm-trafimage-maps .rs-zooms-bar .rs-zoomslider-wrapper .ol-zoomslider {
   border: 1px solid #4576a2;
 }
 
-.casa .tm-trafimage-maps .wkp-geolocation {
+.casa div.tm-trafimage-maps .wkp-geolocation {
   display: none;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher {
   display: flex;
   bottom: 5px;
   right: 5px;
@@ -29,7 +29,7 @@
   width: 48px;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener {
   height: 48px;
   width: 48px;
   min-width: auto;
@@ -39,10 +39,10 @@
   overflow: hidden;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button .rs-base-layer-switcher-title {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button .rs-base-layer-switcher-title {
   font-size: 8px;
 }
 
-.casa .rs-base-layer-switcher-btn-wrapper {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher-btn-wrapper {
   display: none;
 }
