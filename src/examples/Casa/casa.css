@@ -1,6 +1,6 @@
 .casa div.tm-trafimage-maps .wkp-fit-extent,
-.casa div.tm-trafimage-maps .rs-zoom-out,
-.casa div.tm-trafimage-maps .rs-zoom-in {
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-out,
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-in {
   width: 23px;
   height: 22px;
   border: 1px solid #444;
@@ -18,25 +18,25 @@
   bottom: 55px;
 }
 
-.casa div.tm-trafimage-maps .rs-zoom-out svg,
-.casa div.tm-trafimage-maps .rs-zoom-in svg {
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-out svg,
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-in svg {
   height: 11px;
   width: 11px;
 }
 
-.casa div.tm-trafimage-maps .rs-zoom-out {
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-out {
   border-radius: 0 0 6px 6px;
   bottom: 0;
 }
 
-.casa div.tm-trafimage-maps .rs-zoom-in {
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-in {
   border-radius: 6px 6px 0 0;
   bottom: 23px;
 }
 
 .casa div.tm-trafimage-maps .wkp-fit-extent:hover,
-.casa div.tm-trafimage-maps .rs-zoom-out:hover,
-.casa div.tm-trafimage-maps .rs-zoom-in:hover {
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-out:hover,
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-in:hover {
   border: 1px solid #4576a2;
   box-shadow: none;
   color: #4576a2;
