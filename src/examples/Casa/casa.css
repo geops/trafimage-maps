@@ -1,6 +1,6 @@
-.casa .tm-trafimage-maps .wkp-fit-extent,
-.casa .tm-trafimage-maps .rs-zoom-out,
-.casa .tm-trafimage-maps .rs-zoom-in {
+.casa div.tm-trafimage-maps .wkp-fit-extent,
+.casa div.tm-trafimage-maps .rs-zoom-out,
+.casa div.tm-trafimage-maps .rs-zoom-in {
   width: 23px;
   height: 22px;
   border: 1px solid #444;
@@ -11,53 +11,53 @@
   right: 0;
 }
 
-.casa .tm-trafimage-maps .wkp-fit-extent {
+.casa div.tm-trafimage-maps .wkp-fit-extent {
   width: 23px;
   height: 23px;
   border-radius: 6px;
   bottom: 55px;
 }
 
-.casa .tm-trafimage-maps .rs-zoom-out svg,
-.casa .tm-trafimage-maps .rs-zoom-in svg {
+.casa div.tm-trafimage-maps .rs-zoom-out svg,
+.casa div.tm-trafimage-maps .rs-zoom-in svg {
   height: 11px;
   width: 11px;
 }
 
-.casa .tm-trafimage-maps .rs-zoom-out {
+.casa div.tm-trafimage-maps .rs-zoom-out {
   border-radius: 0 0 6px 6px;
   bottom: 0;
 }
 
-.casa .tm-trafimage-maps .rs-zoom-in {
+.casa div.tm-trafimage-maps .rs-zoom-in {
   border-radius: 6px 6px 0 0;
   bottom: 23px;
 }
 
-.casa .tm-trafimage-maps .wkp-fit-extent:hover,
-.casa .tm-trafimage-maps .rs-zoom-out:hover,
-.casa .tm-trafimage-maps .rs-zoom-in:hover {
+.casa div.tm-trafimage-maps .wkp-fit-extent:hover,
+.casa div.tm-trafimage-maps .rs-zoom-out:hover,
+.casa div.tm-trafimage-maps .rs-zoom-in:hover {
   border: 1px solid #4576a2;
   box-shadow: none;
   color: #4576a2;
   z-index: 99999;
 }
 
-.casa .tm-trafimage-maps .wkp-fit-extent svg path {
+.casa div.tm-trafimage-maps .wkp-fit-extent svg path {
   stroke: currentColor;
 }
 
-.casa .tm-trafimage-maps .wkp-map-controls {
+.casa div.tm-trafimage-maps .wkp-map-controls {
   bottom: 17px;
   top: auto; /* For IE */
 }
 
-.casa .rs-zooms-bar .rs-zoomslider-wrapper,
-.casa .tm-trafimage-maps .wkp-geolocation {
+.casa div.tm-trafimage-maps .rs-zooms-bar .rs-zoomslider-wrapper,
+.casa div.tm-trafimage-maps .wkp-geolocation {
   display: none;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher {
   display: flex;
   bottom: 5px;
   right: 35px;
@@ -66,7 +66,7 @@
   width: 48px;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener {
   height: 48px;
   width: 48px;
   min-width: auto;
@@ -76,14 +76,14 @@
   overflow: hidden;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener:hover {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button.rs-opener:hover {
   border: 1px solid #4576a2;
 }
 
-.casa .tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button .rs-base-layer-switcher-title {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher .rs-base-layer-switcher-button .rs-base-layer-switcher-title {
   font-size: 8px;
 }
 
-.casa .rs-base-layer-switcher-btn-wrapper {
+.casa div.tm-trafimage-maps .rs-base-layer-switcher-btn-wrapper {
   display: none;
 }
