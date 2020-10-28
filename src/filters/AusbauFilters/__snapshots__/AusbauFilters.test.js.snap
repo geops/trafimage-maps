@@ -39,7 +39,7 @@ exports[`AusbauFilters should match snapshot if isShowFilter is true, should dis
     />
     <svg
       aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
+      className="MuiSvgIcon-root MuiSelect-icon makeStyles-selectIcon-2"
       focusable="false"
       viewBox="0 0 24 24"
     >
