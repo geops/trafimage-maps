@@ -28,31 +28,29 @@ const defaultProps = {
   layer: null,
 };
 
-const FILTER_PROP = 'angebotsschritt';
-
 const AusbauFilters = ({ layer }) => {
   const classes = useStyles();
   const { t } = useTranslation();
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState((layer && layer.filter.value) || '');
 
   const onChange = useCallback(
     (evt) => {
       const newValue = evt.target.value;
       setValue(newValue);
-      layer.applyNewFilter(['==', newValue, ['get', FILTER_PROP]]);
+      layer.applyNewFilter(newValue);
       updateConstructions(layer.mapboxLayer.mbMap);
     },
     [layer, setValue],
   );
 
-  if (!layer || !layer.isShowFilter) {
+  if (!layer || !layer.showFilterParam) {
     return null;
   }
 
   return (
     <>
       <FormControl fullWidth className={classes.formControl}>
-        <InputLabel shrink>{t(FILTER_PROP)}</InputLabel>
+        <InputLabel shrink>{t('angebotsschritt')}</InputLabel>
         <Select
           autoWidth
           displayEmpty
@@ -60,9 +58,13 @@ const AusbauFilters = ({ layer }) => {
           onChange={onChange}
           classes={{ icon: classes.selectIcon }}
         >
-          <MenuItem value="">{t('Projekte im Bau')}</MenuItem>
-          <MenuItem value="2030">{t('Fertigstellung bis 2030')}</MenuItem>
-          <MenuItem value="2035">{t('Fertigstellung bis 2035')}</MenuItem>
+          {layer.filters.map((filter) => {
+            return (
+              <MenuItem value={filter.value} key={filter.key}>
+                {t(filter.key)}
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
     </>

@@ -17,7 +17,7 @@ describe('AusbauFilters', () => {
     test('if no layer defined, should display null.', () => {
       const component = renderer.create(
         <ThemeProvider theme={theme}>
-          <AusbauFilters layer={null} />
+          <AusbauFilters />
         </ThemeProvider>,
       );
       const tree = component.toJSON();

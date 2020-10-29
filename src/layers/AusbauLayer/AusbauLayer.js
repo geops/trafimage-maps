@@ -9,30 +9,58 @@ import qs from 'query-string';
  * @param {Object} [options] Layer options.
  */
 class AusbauLayer extends MapboxStyleLayer {
+  static updateUrl(filterValue) {
+    const params = qs.parse(window.location.search);
+
+    if (filterValue) {
+      params.showFilter = filterValue;
+      window.history.replaceState(
+        undefined,
+        undefined,
+        `${window.location.pathname}?${qs.stringify(params)}`,
+      );
+    } else {
+      params.showFilter = 'true';
+    }
+  }
+
   constructor(options = {}) {
     super(options);
 
     this.initialFiltersById = {};
 
-    // Define if we apply filters or not
-    this.isShowFilter = qs.parse(window.location.search).showFilter === 'true';
-    this.defaultFilter = ['==', '', ['get', 'angebotsschritt']];
+    this.showFilterParam = qs.parse(window.location.search).showFilter;
+
+    // List of filters availables
+    this.filters = [
+      { value: '', key: 'Projekte im Bau' },
+      { value: '2030', key: 'Fertigstellung bis 2030' },
+      { value: '2035', key: 'Fertigstellung bis 2035' },
+    ];
+    this.filter =
+      this.filters.find((filter) => filter.value === this.showFilterParam) ||
+      this.filters[0];
   }
 
   addDynamicFilters() {
-    if (!this.isShowFilter) {
+    if (!this.showFilterParam) {
       return;
     }
-
-    this.applyNewFilter(this.defaultFilter);
+    this.applyNewFilter(this.filter.value);
   }
 
-  applyNewFilter(filterToApply) {
+  applyNewFilter(filterValue) {
     const { mbMap } = this.mapboxLayer;
     const style = mbMap.getStyle();
     if (!mbMap || !style) {
       return;
     }
+    this.filter = this.filters.find((filter) => filter.value === filterValue);
+    const filterToApply = filterValue !== undefined && [
+      '==',
+      filterValue,
+      ['get', 'angebotsschritt'],
+    ];
 
     style.layers.forEach(({ id }) => {
       // This filter must affect only Ausbau layers.
@@ -58,6 +86,9 @@ class AusbauLayer extends MapboxStyleLayer {
       }
       mbMap.setFilter(id, newFilter);
     });
+
+    // Update showFilter parameter
+    AusbauLayer.updateUrl(filterValue);
   }
 }
 
