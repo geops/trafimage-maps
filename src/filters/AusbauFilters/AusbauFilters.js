@@ -15,10 +15,8 @@ const useStyles = makeStyles(() => ({
   formControl: {
     marginTop: 10,
     marginBottom: 20,
-  },
-
-  selectIcon: {
-    marginRight: -4,
+    flex: 'auto',
+    marginRight: '22px',
   },
 }));
 
