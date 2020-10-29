@@ -217,11 +217,11 @@ class TopicMenu extends PureComponent {
     }
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
-    const { key } = activeTopic.key;
-
+    const isActiveTopic = topic.key === activeTopic.key;
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
       return !l.get('hideInLegend');
     });
+
     return (
       <div className="wkp-topic-menu">
         <div className="wkp-topic-menu-item-wrapper">
@@ -234,12 +234,10 @@ class TopicMenu extends PureComponent {
             onKeyPress={(e) => e.which === 13 && this.onTopicClick(topic)}
           >
             <div
-              className={`wkp-topic-title${
-                key === topic.key ? ' wkp-active' : ''
-              }`}
+              className={`wkp-topic-title${isActiveTopic ? ' wkp-active' : ''}`}
             >
               <div className="wkp-topic-radio">
-                {topic.key === key && <div className="wkp-topic-radio-dot" />}
+                {isActiveTopic && <div className="wkp-topic-radio-dot" />}
               </div>
               {t(topic.name)}
             </div>
@@ -247,7 +245,7 @@ class TopicMenu extends PureComponent {
               <div
                 className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
                 style={{
-                  display: topic.key === key ? 'block' : 'none',
+                  display: isActiveTopic ? 'block' : 'none',
                 }}
               />
             )}
