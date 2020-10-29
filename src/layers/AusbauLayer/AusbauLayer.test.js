@@ -49,13 +49,13 @@ describe('AusbauFilters', () => {
   });
 
   describe('#addDynamicFilters()', () => {
-    test('does nothing if isShowFilter == false', () => {
+    test('does nothing if showFilterParam == false', () => {
       expect(style.layers[0].filter).toBe();
       layer.addDynamicFilters();
       expect(style.layers[0].filter).toBe();
     });
 
-    test.only('apply default filter if isShowFilter == true', () => {
+    test.only('apply default filter if showFilterParam == true', () => {
       layer.showFilterParam = 'true';
       expect(style.layers[0].filter).toBe();
 
