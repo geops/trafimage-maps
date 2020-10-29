@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "1.2.35-beta.3",
+  "version": "1.2.35",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
