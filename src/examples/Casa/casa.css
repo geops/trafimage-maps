@@ -48,9 +48,9 @@
 }
 
 .casa div.tm-trafimage-maps .wkp-map-controls,
-.casa div.tm-trafimage-maps.tm-w-m  .wkp-map-controls,
+.casa div.tm-trafimage-maps.tm-w-m .wkp-map-controls,
 .casa div.tm-trafimage-maps.tm-w-s .wkp-map-controls,
-.casa div.tm-trafimage-maps.tm-w-xs  .wkp-map-controls{
+.casa div.tm-trafimage-maps.tm-w-xs .wkp-map-controls {
   bottom: 17px;
   top: auto; /* For IE */
 }
