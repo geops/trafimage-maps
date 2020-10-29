@@ -1,3 +1,11 @@
+/*
+Those CSS are used in production so be careful.
+To test it properly, test it using the angular app set up in :
+
+https://github.com/oterral/angular-react-test
+
+*/
+
 .casa .tm-trafimage-maps .wkp-fit-extent,
 .casa .tm-trafimage-maps .rs-zoom-out,
 .casa .tm-trafimage-maps .rs-zoom-in {

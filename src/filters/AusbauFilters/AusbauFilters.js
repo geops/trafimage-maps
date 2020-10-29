@@ -15,6 +15,8 @@ const useStyles = makeStyles(() => ({
   formControl: {
     marginTop: 10,
     marginBottom: 20,
+    flex: 'auto',
+    marginRight: '22px',
   },
 }));
 
@@ -51,7 +53,13 @@ const AusbauFilters = ({ layer }) => {
     <>
       <FormControl fullWidth className={classes.formControl}>
         <InputLabel shrink>{t(FILTER_PROP)}</InputLabel>
-        <Select autoWidth displayEmpty value={value} onChange={onChange}>
+        <Select
+          autoWidth
+          displayEmpty
+          value={value}
+          onChange={onChange}
+          classes={{ icon: classes.selectIcon }}
+        >
           <MenuItem value="">{t('Projekte im Bau')}</MenuItem>
           <MenuItem value="2030">{t('Fertigstellung bis 2030')}</MenuItem>
           <MenuItem value="2035">{t('Fertigstellung bis 2035')}</MenuItem>
