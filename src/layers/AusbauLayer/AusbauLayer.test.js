@@ -43,19 +43,20 @@ describe('AusbauFilters', () => {
 
   test('has good default properties.', () => {
     expect(layer.initialFiltersById).toEqual({});
-    expect(layer.isShowFilter).toBe(false);
-    expect(layer.defaultFilter).toEqual(dfltFilter);
+    expect(layer.showFilterParam).toBe();
+    expect(layer.filter).toEqual(layer.filters[0]);
+    expect(layer.filters.length).toEqual(3);
   });
 
   describe('#addDynamicFilters()', () => {
-    test('does nothing if isShowFilter == false', () => {
+    test('does nothing if showFilterParam == false', () => {
       expect(style.layers[0].filter).toBe();
       layer.addDynamicFilters();
       expect(style.layers[0].filter).toBe();
     });
 
-    test('apply default filter if isShowFilter == true', () => {
-      layer.isShowFilter = true;
+    test.only('apply default filter if showFilterParam == true', () => {
+      layer.showFilterParam = 'true';
       expect(style.layers[0].filter).toBe();
 
       layer.addDynamicFilters();
@@ -72,27 +73,36 @@ describe('AusbauFilters', () => {
   describe('#applyNewFilter()', () => {
     test('apply new filter', () => {
       layer.applyNewFilter('bar');
-      expect(style.layers[0].filter).toEqual(['all', 'bar']);
+      expect(style.layers[0].filter).toEqual([
+        'all',
+        ['==', 'bar', ['get', 'angebotsschritt']],
+      ]);
       expect(style.layers[1].filter).toEqual([
         'all',
         ['==', 'type', 'ausbau'],
-        'bar',
+        ['==', 'bar', ['get', 'angebotsschritt']],
       ]);
       expect(style.layers[2].filter).toBe();
 
       // foo must replace bar.
       layer.applyNewFilter('foo');
-      expect(style.layers[0].filter).toEqual(['all', 'foo']);
+      expect(style.layers[0].filter).toEqual([
+        'all',
+        ['==', 'foo', ['get', 'angebotsschritt']],
+      ]);
       expect(style.layers[1].filter).toEqual([
         'all',
         ['==', 'type', 'ausbau'],
-        'foo',
+        ['==', 'foo', ['get', 'angebotsschritt']],
       ]);
       expect(style.layers[2].filter).toBe();
 
       // apply inital filters.
-      layer.applyNewFilter();
-      expect(style.layers[0].filter).toEqual(null);
+      layer.applyNewFilter('');
+      expect(style.layers[0].filter).toEqual([
+        'all',
+        ['==', '', ['get', 'angebotsschritt']],
+      ]);
       expect(style.layers[1].filter).toEqual(['all', ['==', 'type', 'ausbau']]);
       expect(style.layers[2].filter).toBe();
     });
