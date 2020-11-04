@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "1.2.35",
+  "version": "1.2.36-beta.1",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -37,7 +37,7 @@
     "react-redux": "^7.2.0",
     "react-select": "^3.1.0",
     "react-shadow": "^17.6.0",
-    "react-spatial": "^1.0.5",
+    "react-spatial": "1.0.8",
     "react-styleguidist": "^11.0.4",
     "react-web-component": "^2.0.1",
     "redux": "^4.0.5",

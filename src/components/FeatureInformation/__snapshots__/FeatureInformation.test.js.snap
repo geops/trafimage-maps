@@ -2,12 +2,17 @@
 
 exports[`FeatureInformaion should match snapshot. should display multiple features with pagination 1`] = `
 <div
+  aria-describedby="wkp-popup-desc"
+  aria-labelledby="wkp-popup-label"
   className="wkp-feature-information"
+  role="dialog"
 >
   <div
     className="wkp-feature-information-header"
   >
-    <span />
+    <span
+      id="wkp-popup-label"
+    />
     <div
       aria-label="Popup schliessen"
       className="wkp-close-bt"
@@ -131,7 +136,10 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
 
 exports[`FeatureInformaion should match snapshot. should not display header 1`] = `
 <div
+  aria-describedby="wkp-popup-desc"
+  aria-labelledby="wkp-popup-label"
   className="wkp-feature-information"
+  role="dialog"
 >
   <div
     className="wkp-feature-information-body"
@@ -156,12 +164,17 @@ exports[`FeatureInformaion should match snapshot. should not display header 1`] 
 
 exports[`FeatureInformaion should match snapshot. using the info's popupComponent 1`] = `
 <div
+  aria-describedby="wkp-popup-desc"
+  aria-labelledby="wkp-popup-label"
   className="wkp-feature-information"
+  role="dialog"
 >
   <div
     className="wkp-feature-information-header"
   >
-    <span />
+    <span
+      id="wkp-popup-label"
+    />
     <div
       aria-label="Popup schliessen"
       className="wkp-close-bt"
@@ -241,12 +254,17 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
 
 exports[`FeatureInformaion should match snapshot. using the layers's popupComponent 1`] = `
 <div
+  aria-describedby="wkp-popup-desc"
+  aria-labelledby="wkp-popup-label"
   className="wkp-feature-information"
+  role="dialog"
 >
   <div
     className="wkp-feature-information-header"
   >
-    <span />
+    <span
+      id="wkp-popup-label"
+    />
     <div
       aria-label="Popup schliessen"
       className="wkp-close-bt"

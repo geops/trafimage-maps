@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
@@ -13,6 +13,15 @@ function HandicapPopup({ feature }) {
   const language = useSelector((state) => state.app.language);
   const properties = feature.getProperties();
   const { t } = useTranslation();
+  const refBody = useRef();
+
+  useEffect(() => {
+    // focus first element to trigger screenreader to read its content:
+    // https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html
+    if (refBody && refBody.current) {
+      refBody.current.focus();
+    }
+  }, []);
 
   // mapping of all boolean values properties and their exceptions
   const bfEquipmentExceptions = {
@@ -50,6 +59,26 @@ function HandicapPopup({ feature }) {
     }
   });
 
+  const behigInfo = () => {
+    const status = properties.status_bahnhof;
+    if (status === 'OK') {
+      return t('Dieser Bahnhof ist barrierefrei.');
+    }
+    if (status === 'NOCH NICHT OK') {
+      const prognose =
+        properties.prognose === 'nach 2026'
+          ? `${t('behig_nach')} 2026`
+          : properties.prognose;
+      return `${t(
+        `Dieser Bahnhof wird vollständig angepasst`,
+      )}: ${prognose} (${t('Prognose')}).`;
+    }
+    if (status === 'BLEIBEN NICHT OK') {
+      return t('Dieser Bahnhof wird nicht baulich angepasst.');
+    }
+    return t('Keine Information vorhanden.');
+  };
+
   const equipmentStr = equipment.length ? (
     <div className="wkp-handicap-popup-element" key="Ausstattung">
       <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
@@ -75,6 +104,16 @@ function HandicapPopup({ feature }) {
     {
       label: 'Ausstattung',
       element: equipmentStr,
+    },
+    {
+      element: (
+        <div className="wkp-handicap-popup-element" key="BehigInfo">
+          <div className="wkp-handicap-popup-field-title">
+            {t('ch.sbb.behig')}
+          </div>
+          <span>{behigInfo()}</span>
+        </div>
+      ),
     },
     {
       label: 'Aktuell',
@@ -144,11 +183,17 @@ function HandicapPopup({ feature }) {
 
   const renderBody = () => {
     if (properties.noInfo) {
-      return <span>{t('Keine Information vorhanden.')}</span>;
+      return (
+        <span tabIndex={-1} ref={refBody}>
+          {t('Keine Information vorhanden.')}
+        </span>
+      );
     }
     return (
       <>
-        <div className="wkp-handicap-popup-title">{titles.join(' / ')}</div>
+        <p className="wkp-handicap-popup-title" ref={refBody} tabIndex={-1}>
+          {titles.join(' / ')}
+        </p>
         {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
             return null;
@@ -173,8 +218,15 @@ function HandicapPopup({ feature }) {
   };
 
   return (
-    <div className="wkp-handicap-popup">
-      <div className="wkp-handicap-popup-body">{renderBody()}</div>
+    <div
+      className="wkp-handicap-popup"
+      style={{
+        minWidth: properties.noInfo ? '250px' : '350px',
+      }}
+    >
+      <div className="wkp-handicap-popup-body" id="wkp-popup-desc">
+        {renderBody()}
+      </div>
     </div>
   );
 }

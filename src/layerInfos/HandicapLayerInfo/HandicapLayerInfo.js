@@ -14,15 +14,16 @@ const propTypes = {
 const defaultProps = {};
 
 const names = {
-  barrierfree: 'ch.sbb.barrierfreierbahnhoefe',
+  barrierfree: '',
   notBarrierfree: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   stuetzpunkt: 'bahnhof_plural',
 };
 
 const descriptions = {
   de: {
-    barrierfree: ' an denen autonomes Reisen möglich ist.',
-    notBarrierfree: ' an denen automes Reisen nicht möglich ist.',
+    barrierfree:
+      'Ganz oder hauptsächlich barrierefreie Bahnhöfe, an denen das autonome Reisen möglich ist.',
+    notBarrierfree: ', an denen autonomes Reisen nicht möglich ist.',
     stuetzpunkt: (
       <>
         , an denen beim SBB Call Center Handicap unter der Nummer{' '}
@@ -32,7 +33,8 @@ const descriptions = {
     ),
   },
   en: {
-    barrierfree: ' where autonomous travel is possible.',
+    barrierfree:
+      'Completely or mainly barrier-free stations where autonomous travel is possible.',
     notBarrierfree: ' where autonomous travel is not possible.',
     stuetzpunkt: (
       <>
@@ -44,7 +46,7 @@ const descriptions = {
   },
   fr: {
     barrierfree:
-      ' dans lesquelles il est possible de se déplacer en toute autonomie.',
+      'Gares entièrement ou majoritairement accessibles, où il est possible de se déplacer de manière autonome.',
     notBarrierfree:
       ' dans lesquelles il est impossible de se déplacer en toute autonomie.',
     stuetzpunkt: (
@@ -57,7 +59,8 @@ const descriptions = {
     ),
   },
   it: {
-    barrierfree: ' in cui è possibile viaggiare in autonomia.',
+    barrierfree:
+      'Stazioni completamente o parzialmente accessibili, dove è possibile viaggiare in modo autonomo.',
     notBarrierfree: ' in cui non è possibile viaggiare in autonomia.',
     stuetzpunkt: (
       <>
