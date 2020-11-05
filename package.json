@@ -113,7 +113,7 @@
     "sort": "sort-json src/lang/*.json -i",
     "start": "react-app-rewired start",
     "start:doc": "styleguidist server",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js)/).*/\""
+    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
   },
   "browserslist": [
     ">0.2%",
