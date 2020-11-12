@@ -12,7 +12,11 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
-import { setLanguage, setCartaroOldUrl } from '../../model/app/actions';
+import {
+  setLanguage,
+  setCartaroOldUrl,
+  setMapsetUrl,
+} from '../../model/app/actions';
 
 const propTypes = {
   /**
@@ -109,6 +113,12 @@ const propTypes = {
   staticFilesUrl: PropTypes.string,
 
   /**
+   * URL endpoint for mapset.
+   * @private
+   */
+  mapsetUrl: PropTypes.string,
+
+  /**
    * URL to request permission.
    * @private
    */
@@ -140,6 +150,7 @@ const defaultProps = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
+  mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   permissionUrl: null,
   topics: null,
   language: 'de',
@@ -166,6 +177,7 @@ class TrafimageMaps extends React.PureComponent {
       language,
       enableTracking,
       cartaroOldUrl,
+      mapsetUrl,
       maxExtent,
     } = this.props;
 
@@ -179,6 +191,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (cartaroOldUrl) {
       this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
+    }
+
+    if (mapsetUrl) {
+      this.store.dispatch(setMapsetUrl(mapsetUrl));
     }
 
     if (maxExtent) {
@@ -211,6 +227,7 @@ class TrafimageMaps extends React.PureComponent {
       cartaroOldUrl,
       enableTracking,
       maxExtent,
+      mapsetUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -223,6 +240,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (cartaroOldUrl !== prevProps.cartaroOldUrl) {
       this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
+    }
+
+    if (mapsetUrl !== prevProps.mapsetUrl) {
+      this.store.dispatch(setMapsetUrl(mapsetUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {
@@ -247,6 +268,7 @@ class TrafimageMaps extends React.PureComponent {
       staticFilesUrl,
       permissionUrl,
       activeTopicKey,
+      mapsetUrl,
     } = this.props;
 
     return (
@@ -264,6 +286,7 @@ class TrafimageMaps extends React.PureComponent {
             vectorTilesKey={vectorTilesKey}
             vectorTilesUrl={vectorTilesUrl}
             staticFilesUrl={staticFilesUrl}
+            mapsetUrl={mapsetUrl}
           />
         </Provider>
       </MatomoProvider>

@@ -18,6 +18,7 @@ import {
   SET_PERMISSIONS_INFOS,
   SET_SCREEN_WIDTH,
   SET_CARTARO_OLD_URL,
+  SET_MAPSET_URL,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 
@@ -120,6 +121,11 @@ export default function app(state = getInitialState(), action) {
           user: null,
           permissions: [],
         },
+      };
+    case SET_MAPSET_URL:
+      return {
+        ...state,
+        mapsetUrl: action.data,
       };
     case SET_CARTARO_OLD_URL:
       return {
