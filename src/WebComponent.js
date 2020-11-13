@@ -190,7 +190,7 @@ const WebComponent = (props) => {
     }
 
     const urlTopic = window.location.pathname.replace('/', '');
-    if (urlTopic && urlTopic !== activeTopicKey) {
+    if (urlTopic && activeTopicKey && urlTopic !== activeTopicKey) {
       return [];
     }
     if (activeTopicKey) {
