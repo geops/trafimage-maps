@@ -6,7 +6,7 @@ import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
 import withResizing from '../withResizing';
 import { setMenuOpen, setSearchOpen } from '../../model/app/actions';
-import DrawLayer from '../DrawLayer';
+import DrawLayerMenu from '../DrawLayerMenu';
 
 const propTypes = {
   menuHeight: PropTypes.number,
@@ -37,7 +37,6 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
 
   return (
     <div className="wkp-topics-menu">
-      <DrawLayer />
       <TopicsMenuHeader
         isOpen={menuOpen}
         onToggle={() => {
@@ -51,6 +50,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
         ref={bodyElementRef}
       >
         <div className="wkp-topics-menu-body">
+          <DrawLayerMenu layerService={layerService} />
           {topics.map((topic) => (
             <TopicMenu
               key={topic.key}
