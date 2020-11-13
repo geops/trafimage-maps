@@ -7,7 +7,6 @@ import qs from 'query-string';
 import OLMap from 'ol/Map';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
-import { redirect } from '../../utils/redirectHelper';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
@@ -21,7 +20,6 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
-  appBaseUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -31,6 +29,8 @@ const propTypes = {
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   departuresFilter: PropTypes.string,
+  drawUrl: PropTypes.string,
+  drawOldUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetLanguage: PropTypes.func.isRequired,
@@ -42,9 +42,10 @@ const propTypes = {
 
 const defaultProps = {
   history: undefined,
-  appBaseUrl: null,
   initialState: {},
   departuresFilter: undefined,
+  drawUrl: undefined,
+  drawOldUrl: undefined,
 };
 
 const format = new GeoJSON();
@@ -52,13 +53,14 @@ const format = new GeoJSON();
 class Permalink extends PureComponent {
   componentDidMount() {
     const {
-      appBaseUrl,
       dispatchSetZoom,
       dispatchSetCenter,
       dispatchSetLanguage,
       initialState,
       language,
       dispatchSetDeparturesFilter,
+      drawUrl,
+      drawOldUrl,
     } = this.props;
 
     const parameters = {
@@ -68,7 +70,14 @@ class Permalink extends PureComponent {
 
     if (parameters['wkp.draw']) {
       // Redirection to the old wkp to use the drawing tool.
-      redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+      // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+      fetch(drawOldUrl + parameters['wkp.draw']);
+    }
+
+    if (parameters['draw.id']) {
+      // Redirection to the old wkp to use the drawing tool.
+      // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+      fetch(`${drawUrl + parameters['draw.id']}?user=`);
     }
 
     const getUrlParamKey = (params, regex) => {
@@ -234,6 +243,8 @@ const mapStateToProps = (state) => ({
   language: state.app.language,
   layerService: state.app.layerService,
   departuresFilter: state.app.departuresFilter,
+  drawUrl: state.app.drawUrl,
+  drawOldUrl: state.app.drawOldUrl,
 });
 
 const mapDispatchToProps = {

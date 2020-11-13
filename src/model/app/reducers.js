@@ -19,6 +19,8 @@ import {
   SET_SCREEN_WIDTH,
   SET_CARTARO_OLD_URL,
   SET_MAPSET_URL,
+  SET_DRAW_URL,
+  SET_DRAW_OLD_URL,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 
@@ -126,6 +128,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         mapsetUrl: action.data,
+      };
+    case SET_DRAW_URL:
+      return {
+        ...state,
+        drawUrl: action.data,
+      };
+    case SET_DRAW_OLD_URL:
+      return {
+        ...state,
+        drawOldUrl: action.data,
       };
     case SET_CARTARO_OLD_URL:
       return {

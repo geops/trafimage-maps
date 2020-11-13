@@ -14,6 +14,8 @@ export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
 export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
 export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
 export const SET_MAPSET_URL = 'SET_MAPSET_URL';
+export const SET_DRAW_URL = 'SET_DRAW_URL';
+export const SET_DRAW_OLD_URL = 'SET_DRAW_OLD_URL';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -78,4 +80,9 @@ export const setScreenWidth = (data) => ({
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
 
 export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
+
 export const setMapsetUrl = (data) => ({ type: SET_MAPSET_URL, data });
+
+export const setDrawUrl = (data) => ({ type: SET_DRAW_URL, data });
+
+export const setDrawOldUrl = (data) => ({ type: SET_DRAW_OLD_URL, data });

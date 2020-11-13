@@ -16,6 +16,8 @@ import {
   setLanguage,
   setCartaroOldUrl,
   setMapsetUrl,
+  setDrawUrl,
+  setDrawOldUrl,
 } from '../../model/app/actions';
 
 const propTypes = {
@@ -119,6 +121,18 @@ const propTypes = {
   mapsetUrl: PropTypes.string,
 
   /**
+   * URL endpoint for draw api endpoint.
+   * @private
+   */
+  drawUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for old draw api endpoint.
+   * @private
+   */
+  drawOldUrl: PropTypes.string,
+
+  /**
    * URL to request permission.
    * @private
    */
@@ -151,6 +165,8 @@ const defaultProps = {
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
+  drawUrl: process.env.REACT_APP_DRAW_URL,
+  drawOldUrl: process.env.REACT_APP_DRAW_OLD_URL,
   permissionUrl: null,
   topics: null,
   language: 'de',
@@ -178,6 +194,8 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       cartaroOldUrl,
       mapsetUrl,
+      drawUrl,
+      drawOldUrl,
       maxExtent,
     } = this.props;
 
@@ -195,6 +213,14 @@ class TrafimageMaps extends React.PureComponent {
 
     if (mapsetUrl) {
       this.store.dispatch(setMapsetUrl(mapsetUrl));
+    }
+
+    if (drawUrl) {
+      this.store.dispatch(setDrawUrl(drawUrl));
+    }
+
+    if (drawOldUrl) {
+      this.store.dispatch(setDrawOldUrl(drawOldUrl));
     }
 
     if (maxExtent) {
@@ -228,6 +254,8 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       maxExtent,
       mapsetUrl,
+      drawUrl,
+      drawOldUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -244,6 +272,13 @@ class TrafimageMaps extends React.PureComponent {
 
     if (mapsetUrl !== prevProps.mapsetUrl) {
       this.store.dispatch(setMapsetUrl(mapsetUrl));
+    }
+    if (drawUrl !== prevProps.drawUrl) {
+      this.store.dispatch(setDrawUrl(drawUrl));
+    }
+
+    if (drawOldUrl !== prevProps.drawOldUrl) {
+      this.store.dispatch(setDrawOldUrl(drawUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {
@@ -269,6 +304,8 @@ class TrafimageMaps extends React.PureComponent {
       permissionUrl,
       activeTopicKey,
       mapsetUrl,
+      drawUrl,
+      drawOldUrl,
     } = this.props;
 
     return (
@@ -287,6 +324,8 @@ class TrafimageMaps extends React.PureComponent {
             vectorTilesUrl={vectorTilesUrl}
             staticFilesUrl={staticFilesUrl}
             mapsetUrl={mapsetUrl}
+            drawUrl={drawUrl}
+            drawOldUrl={drawOldUrl}
           />
         </Provider>
       </MatomoProvider>

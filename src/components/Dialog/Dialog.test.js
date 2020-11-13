@@ -16,7 +16,6 @@ describe('ExportDialog', () => {
     store = mockStore({
       map: {},
       app: {},
-      oidc: { user: {} },
     });
     map = new Map({ view: new View({}) });
   });

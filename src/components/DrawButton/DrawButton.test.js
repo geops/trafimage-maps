@@ -11,7 +11,6 @@ describe('DrawButton', () => {
     const store = mockStore({
       map: {},
       app: { mapsetUrl: 'foo.mapset.ch' },
-      oidc: { user: {} },
     });
 
     const component = renderer.create(
