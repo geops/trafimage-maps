@@ -1,38 +1,14 @@
-import React, { useEffect, useMemo } from 'react';
-import { Layer } from 'mobility-toolbox-js/ol';
-import PropTypes from 'prop-types';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import { FaLink, FaPencilAlt, FaTrash } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
 
 function DrawLayerMenu({ layerService }) {
   const { t } = useTranslation();
-
-  const drawLayer = useMemo(() => {
-    return new Layer({
-      name: 'draw',
-      properties: {
-        hideInLegend: true,
-      },
-      olLayer: new VectorLayer({
-        source: new VectorSource({
-          features: [],
-        }),
-      }),
-    });
-  }, []);
-
-  useEffect(() => {
-    layerService.addLayer(drawLayer);
-
-    return () => {
-      const idx = layerService.layers.indexOf(drawLayer);
-      layerService.layers.splice(idx, 1);
-    };
-  }, [layerService, drawLayer]);
+  const drawLayer = useSelector((state) => state.map.drawLayer);
 
   const titles = useMemo(() => {
     return {

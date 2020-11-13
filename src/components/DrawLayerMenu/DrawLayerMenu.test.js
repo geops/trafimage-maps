@@ -15,7 +15,11 @@ describe('DrawLayerMenu', () => {
 
   beforeEach(() => {
     store = mockStore({
-      map: {},
+      map: {
+        drawLayer: new Layer({
+          olLayer: new OLLayer({}),
+        }),
+      },
       app: {},
     });
   });
@@ -33,20 +37,10 @@ describe('DrawLayerMenu', () => {
     });
   });
 
-  test('add a layer to the layerService', () => {
-    const layerService = new LayerService([]);
-    mount(
-      <Provider store={store}>
-        <DrawLayerMenu layerService={layerService} />
-      </Provider>,
-    );
-    expect(layerService.layers.length).toBe(1);
-    expect(layerService.layers.pop().get('hideInLegend')).toBe(true);
-  });
-
   test('display only draw layer', () => {
     const layerService = new LayerService([
       new Layer({ olLayer: new OLLayer({}) }),
+      store.getState().map.drawLayer,
     ]);
     const wrapper = mount(
       <Provider store={store}>
@@ -55,15 +49,5 @@ describe('DrawLayerMenu', () => {
     );
     expect(layerService.layers.length).toBe(2);
     expect(wrapper.find('.rs-layer-tree-item').length).toBe(1);
-  });
-
-  test('hide draw layer in topic menus ', () => {
-    const layerService = new LayerService([]);
-    mount(
-      <Provider store={store}>
-        <DrawLayerMenu layerService={layerService} />
-      </Provider>,
-    );
-    expect(layerService.layers.pop().get('hideInLegend')).toBe(true);
   });
 });
