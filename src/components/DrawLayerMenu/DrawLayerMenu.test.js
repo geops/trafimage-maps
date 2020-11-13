@@ -9,7 +9,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Layer';
 import DrawLayerMenu from './DrawLayerMenu';
 
-describe('DrawLAyerMenu', () => {
+describe('DrawLayerMenu', () => {
   const mockStore = configureStore([thunk]);
   let store;
 

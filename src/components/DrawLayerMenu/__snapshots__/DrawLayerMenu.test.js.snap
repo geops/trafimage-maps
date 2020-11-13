@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeatureInformaion should match snapshot. using the layerService property 1`] = `
+exports[`DrawLayerMenu should match snapshot. using the layerService property 1`] = `
 <div
   className="wkp-draw-layer-menu"
 >
