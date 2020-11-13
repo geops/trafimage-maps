@@ -11,6 +11,12 @@
     justify-content: space-around;
   }
 
+  .ta-draw-icon {
+    svg {
+      font-size: 21px;
+    }
+  }
+
   .ta-mail-icon {
     a {
       display: flex;
@@ -21,12 +27,6 @@
         font-size: 23px;
         margin-bottom: 2px;
       }
-    }
-  }
-
-  .ta-draw-icon {
-    svg {
-      font-size: 21px;
     }
   }
 
