@@ -1,0 +1,10 @@
+.wkp-draw-layer-menu {
+  .wkp-layer-tree,
+  .wkp-layer-tree .rs-layer-tree-item {
+    margin: 0;
+  }
+
+  .rs-layer-tree .rs-layer-tree-item > :last-child {
+    margin-right: 0;
+  }
+}
