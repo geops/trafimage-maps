@@ -12,20 +12,37 @@ import DrawLayerMenu from './DrawLayerMenu';
 describe('DrawLayerMenu', () => {
   const mockStore = configureStore([thunk]);
   let store;
-
-  beforeEach(() => {
-    store = mockStore({
-      map: {
-        drawLayer: new Layer({
-          olLayer: new OLLayer({}),
-        }),
-      },
-      app: {},
-    });
+  const drawLayer = new Layer({
+    olLayer: new OLLayer({}),
   });
 
   describe('should match snapshot.', () => {
+    test('should return null', () => {
+      store = mockStore({
+        map: {
+          drawLayer,
+        },
+        app: {},
+      });
+      const layerService = new LayerService([]);
+      const component = renderer.create(
+        <Provider store={store}>
+          <DrawLayerMenu layerService={layerService} />
+        </Provider>,
+      );
+      const tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
     test('using the layerService property', () => {
+      store = mockStore({
+        map: {
+          drawLayer,
+        },
+        app: {
+          drawIds: { admin_id: 'foo' },
+        },
+      });
       const layerService = new LayerService([]);
       const component = renderer.create(
         <Provider store={store}>
@@ -38,6 +55,14 @@ describe('DrawLayerMenu', () => {
   });
 
   test('display only draw layer', () => {
+    store = mockStore({
+      map: {
+        drawLayer,
+      },
+      app: {
+        drawIds: { admin_id: 'foo' },
+      },
+    });
     const layerService = new LayerService([
       new Layer({ olLayer: new OLLayer({}) }),
       store.getState().map.drawLayer,

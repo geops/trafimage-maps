@@ -21,6 +21,7 @@ import {
   SET_MAPSET_URL,
   SET_DRAW_URL,
   SET_DRAW_OLD_URL,
+  SET_DRAW_IDS,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 
@@ -49,6 +50,7 @@ const getInitialState = () => ({
   layerService: new LayerService(),
   searchService: new SearchService(),
   screenWidth: null,
+  drawIds: null,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -148,6 +150,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         screenWidth: action.data,
+      };
+    case SET_DRAW_IDS:
+      return {
+        ...state,
+        drawIds: action.data,
       };
     default:
       return {

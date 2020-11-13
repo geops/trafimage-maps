@@ -6,6 +6,9 @@ import { useTranslation } from 'react-i18next';
 import LayerInfosDialog, {
   NAME as LayerInfosDialogName,
 } from '../LayerInfosDialog';
+import DrawRemoveDialog, {
+  NAME as DrawRemoveDialogName,
+} from '../DrawRemoveDialog';
 import Dialog from '../Dialog';
 import LegalLines from '../LegalLines';
 import { setDialogPosition } from '../../model/app/actions';
@@ -28,7 +31,6 @@ const MainDialog = ({ staticFilesUrl }) => {
   const isMobileWidth = useMemo(() => {
     return ['xs', 's'].includes(screenWidth);
   }, [screenWidth]);
-
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
@@ -64,6 +66,10 @@ const MainDialog = ({ staticFilesUrl }) => {
         }
       />
     );
+  }
+
+  if (dialogVisible === DrawRemoveDialogName) {
+    return <DrawRemoveDialog />;
   }
 
   return null;

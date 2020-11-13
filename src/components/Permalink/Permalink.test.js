@@ -9,6 +9,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Map, View } from 'ol';
+import OLLayer from 'ol/layer/Layer';
 import Permalink from './Permalink';
 
 describe('Permalink', () => {
@@ -17,7 +18,15 @@ describe('Permalink', () => {
 
   beforeEach(() => {
     store = mockStore({
-      map: {},
+      map: {
+        drawLayer: new Layer({
+          name: 'test',
+          olLayer: new OLLayer({}),
+          properties: {
+            description: 'description<br/>break',
+          },
+        }),
+      },
       app: {
         language: 'de',
         activeTopic: {

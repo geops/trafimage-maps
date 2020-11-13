@@ -1,14 +1,20 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useMemo, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { FaLink, FaPencilAlt, FaTrash } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
+import { setDialogVisible } from '../../model/app/actions';
+import DrawButton from '../DrawButton';
+import { NAME } from '../DrawRemoveDialog';
+import SharePermalinkButton from '../SharePermalinkButton';
 
 function DrawLayerMenu({ layerService }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const drawLayer = useSelector((state) => state.map.drawLayer);
+  const drawIds = useSelector((state) => state.app.drawIds);
 
   const titles = useMemo(() => {
     return {
@@ -16,6 +22,14 @@ function DrawLayerMenu({ layerService }) {
       layerHide: t('Layer verbergen'),
     };
   }, [t]);
+
+  const onRemoveClick = useCallback(() => {
+    dispatch(setDialogVisible(NAME));
+  }, [dispatch]);
+
+  if (!drawIds) {
+    return null;
+  }
 
   return (
     <div className="wkp-draw-layer-menu">
@@ -28,24 +42,14 @@ function DrawLayerMenu({ layerService }) {
           renderItemContent={(layer, layerTreeComp) => (
             <>
               {layerTreeComp.renderItemContent(layer)}
-              <div
-                role="button"
-                tabIndex="0"
-                title={t('Open tootlip with shared links')}
-              >
-                <FaLink focusable={false} />
-              </div>
-              <div
-                role="button"
-                tabIndex="0"
-                title={t('Open mapset in edit mode')}
-              >
-                <FaPencilAlt />
-              </div>
+              <SharePermalinkButton />
+              <DrawButton />
               <div
                 role="button"
                 tabIndex="0"
                 title={t('Open confirmation dialog to delete draw')}
+                onClick={onRemoveClick}
+                onKeyPress={onRemoveClick}
               >
                 <FaTrash />
               </div>

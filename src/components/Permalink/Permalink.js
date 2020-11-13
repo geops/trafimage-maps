@@ -14,6 +14,7 @@ import {
   setDeparturesFilter,
   setFeatureInfo,
   setLanguage,
+  setDrawIds,
 } from '../../model/app/actions';
 
 const propTypes = {
@@ -34,6 +35,7 @@ const propTypes = {
   drawUrl: PropTypes.string,
   drawOldUrl: PropTypes.string,
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
+  drawIds: PropTypes.object,
 
   // mapDispatchToProps
   dispatchSetLanguage: PropTypes.func.isRequired,
@@ -41,6 +43,7 @@ const propTypes = {
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetDrawIds: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -49,6 +52,7 @@ const defaultProps = {
   departuresFilter: undefined,
   drawUrl: undefined,
   drawOldUrl: undefined,
+  drawIds: undefined,
 };
 
 const format = new GeoJSON();
@@ -59,9 +63,10 @@ class Permalink extends PureComponent {
       dispatchSetZoom,
       dispatchSetCenter,
       dispatchSetLanguage,
+      dispatchSetDrawIds,
+      dispatchSetDeparturesFilter,
       initialState,
       language,
-      dispatchSetDeparturesFilter,
       drawUrl,
       drawOldUrl,
       drawLayer,
@@ -85,19 +90,26 @@ class Permalink extends PureComponent {
         )
         .then((data) => {
           if (data && data.admin_id && data.file_id) {
+            dispatchSetDrawIds(data);
+            // eslint-disable-next-line no-console
             console.log('This is an admin id', data.admin_id, data.file_id);
             return fetch(drawOldUrl + data.file_id);
           }
+
+          dispatchSetDrawIds({ file_id: parameters['wkp.draw'] });
+          // eslint-disable-next-line no-console
           console.log('This is an file id', data);
           return { text: () => data };
         })
         .then((response) => response.text())
         .then((kmlString) => {
+          // eslint-disable-next-line no-console
           console.log(kmlString);
           const features = KML.readFeatures(
             kmlString,
             map.getView().getProjection(),
           );
+          // eslint-disable-next-line no-console
           console.log(features.length);
           drawLayer.olLayer.getSource().clear(true);
           drawLayer.olLayer.getSource().addFeatures(features);
@@ -246,11 +258,15 @@ class Permalink extends PureComponent {
   }
 
   render() {
-    const { history, layerService, map } = this.props;
+    const { history, layerService, map, drawIds } = this.props;
 
     return (
       <RSPermalink
-        params={{ ...this.state }}
+        params={{
+          ...this.state,
+          'wkp.draw':
+            (drawIds && (drawIds.admin_id || drawIds.file_id)) || undefined,
+        }}
         map={map}
         layerService={layerService}
         history={history}
@@ -276,6 +292,7 @@ const mapStateToProps = (state) => ({
   drawUrl: state.app.drawUrl,
   drawOldUrl: state.app.drawOldUrl,
   drawLayer: state.map.drawLayer,
+  drawIds: state.app.drawIds,
 });
 
 const mapDispatchToProps = {
@@ -284,6 +301,7 @@ const mapDispatchToProps = {
   dispatchSetLanguage: setLanguage,
   dispatchSetDeparturesFilter: setDeparturesFilter,
   dispatchSetFeatureInfo: setFeatureInfo,
+  dispatchSetDrawIds: setDrawIds,
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

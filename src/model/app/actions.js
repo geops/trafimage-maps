@@ -16,6 +16,7 @@ export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
 export const SET_MAPSET_URL = 'SET_MAPSET_URL';
 export const SET_DRAW_URL = 'SET_DRAW_URL';
 export const SET_DRAW_OLD_URL = 'SET_DRAW_OLD_URL';
+export const SET_DRAW_IDS = 'SET_DRAW_IDS';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -86,3 +87,5 @@ export const setMapsetUrl = (data) => ({ type: SET_MAPSET_URL, data });
 export const setDrawUrl = (data) => ({ type: SET_DRAW_URL, data });
 
 export const setDrawOldUrl = (data) => ({ type: SET_DRAW_OLD_URL, data });
+
+export const setDrawIds = (data) => ({ type: SET_DRAW_IDS, data });
