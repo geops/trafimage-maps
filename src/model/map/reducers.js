@@ -1,9 +1,9 @@
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
-import VectorLayer from 'ol/layer/Vector';
+import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Layer } from 'mobility-toolbox-js/ol';
+import { VectorLayer } from 'mobility-toolbox-js/ol';
 import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
 import Circle from 'ol/style/Circle';
@@ -15,13 +15,14 @@ import {
   SET_MAX_EXTENT,
 } from './actions';
 
-const drawLayer = new Layer({
+const drawLayer = new VectorLayer({
   name: 'draw',
   key: 'draw',
   properties: {
     hideInLegend: true,
+    popupComponent: 'BasicPopup',
   },
-  olLayer: new VectorLayer({
+  olLayer: new OLVectorLayer({
     source: new VectorSource({
       features: [
         new Feature({

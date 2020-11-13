@@ -7,6 +7,8 @@ import qs from 'query-string';
 import OLMap from 'ol/Map';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
+import KML from 'react-spatial/utils/KML';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
@@ -31,6 +33,7 @@ const propTypes = {
   departuresFilter: PropTypes.string,
   drawUrl: PropTypes.string,
   drawOldUrl: PropTypes.string,
+  drawLayer: PropTypes.instanceOf(Layer).isRequired,
 
   // mapDispatchToProps
   dispatchSetLanguage: PropTypes.func.isRequired,
@@ -61,6 +64,8 @@ class Permalink extends PureComponent {
       dispatchSetDeparturesFilter,
       drawUrl,
       drawOldUrl,
+      drawLayer,
+      map,
     } = this.props;
 
     const parameters = {
@@ -71,7 +76,32 @@ class Permalink extends PureComponent {
     if (parameters['wkp.draw']) {
       // Redirection to the old wkp to use the drawing tool.
       // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
-      fetch(drawOldUrl + parameters['wkp.draw']);
+      fetch(drawOldUrl + parameters['wkp.draw'])
+        .then((response) =>
+          response
+            .clone()
+            .json()
+            .catch(() => response.text()),
+        )
+        .then((data) => {
+          if (data && data.admin_id && data.file_id) {
+            console.log('This is an admin id', data.admin_id, data.file_id);
+            return fetch(drawOldUrl + data.file_id);
+          }
+          console.log('This is an file id', data);
+          return { text: () => data };
+        })
+        .then((response) => response.text())
+        .then((kmlString) => {
+          console.log(kmlString);
+          const features = KML.readFeatures(
+            kmlString,
+            map.getView().getProjection(),
+          );
+          console.log(features.length);
+          drawLayer.olLayer.getSource().clear(true);
+          drawLayer.olLayer.getSource().addFeatures(features);
+        });
     }
 
     if (parameters['draw.id']) {
@@ -245,6 +275,7 @@ const mapStateToProps = (state) => ({
   departuresFilter: state.app.departuresFilter,
   drawUrl: state.app.drawUrl,
   drawOldUrl: state.app.drawOldUrl,
+  drawLayer: state.map.drawLayer,
 });
 
 const mapDispatchToProps = {
