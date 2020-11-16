@@ -17,7 +17,7 @@ const defaultProps = {
   children: null,
   className: '',
   transitionDuration: 300,
-  maxHeight: 1000,
+  maxHeight: 2500,
   maxWidth: 1000,
   type: 'vertical',
 };

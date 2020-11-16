@@ -13,6 +13,8 @@ const propTypes = {
 
 const defaultProps = {};
 
+const capitalize = (stg) => `${stg.charAt(0).toUpperCase()}${stg.slice(1)}`;
+
 const ConstructionPopup = ({ feature, t }) => {
   let projektort;
   let ort;
@@ -30,37 +32,43 @@ const ConstructionPopup = ({ feature, t }) => {
   }
 
   if (feature.get('ort')) {
-    ort = <span>({t(feature.get('ort'))})</span>;
+    ort = <span>({t(capitalize(feature.get('ort')))})</span>;
   }
 
   if (feature.get('art')) {
     artAndOrt = (
       <div className="wkp-construction-popup-desc">
-        <span>{t(feature.get('art'))}</span> {ort}
+        <span>{t(capitalize(feature.get('art')))}</span> {ort}
       </div>
     );
   }
 
-  if (feature.get('link1_title') && feature.get('link1')) {
+  if (feature.get('link1_title') && feature.get('link1_url')) {
     link1 = (
       <div className="wkp-construction-popup-link">
-        <Link href={feature.get('link1')}>{t(feature.get('link1_title'))}</Link>
+        <Link href={feature.get('link1_url')}>
+          {t(feature.get('link1_title'))}
+        </Link>
       </div>
     );
   }
 
-  if (feature.get('link2_title') && feature.get('link2')) {
+  if (feature.get('link2_title') && feature.get('link2_url')) {
     link2 = (
       <div className="wkp-construction-popup-link">
-        <Link href={feature.get('link2')}>{t(feature.get('link2_title'))}</Link>
+        <Link href={feature.get('link2_url')}>
+          {t(feature.get('link2_title'))}
+        </Link>
       </div>
     );
   }
 
-  if (feature.get('link3_title') && feature.get('link3')) {
+  if (feature.get('link3_title') && feature.get('link3_url')) {
     link3 = (
       <div className="wkp-construction-popup-link">
-        <Link href={feature.get('link3')}>{t(feature.get('link3_title'))}</Link>
+        <Link href={feature.get('link3_url')}>
+          {t(feature.get('link3_title'))}
+        </Link>
       </div>
     );
   }
@@ -81,5 +89,5 @@ ConstructionPopup.defaultProps = defaultProps;
 
 const composed = withTranslation()(ConstructionPopup);
 
-composed.renderTitle = (feat) => feat.get('name');
+composed.renderTitle = (feat) => feat.get('projektname');
 export default composed;

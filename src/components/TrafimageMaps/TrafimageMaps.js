@@ -8,6 +8,7 @@ import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core/styles';
 import { Layer } from 'mobility-toolbox-js/ol';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
@@ -19,6 +20,7 @@ import {
   setDrawUrl,
   setDrawOldUrl,
 } from '../../model/app/actions';
+import theme from '../../themes/default';
 
 const propTypes = {
   /**
@@ -310,24 +312,26 @@ class TrafimageMaps extends React.PureComponent {
 
     return (
       <MatomoProvider value={this.matomo}>
-        <Provider store={this.store}>
-          <TopicLoader
-            history={history}
-            apiKey={apiKey}
-            apiKeyName={apiKeyName}
-            topics={topics}
-            activeTopicKey={activeTopicKey}
-            cartaroUrl={cartaroUrl}
-            appBaseUrl={appBaseUrl}
-            permissionUrl={permissionUrl}
-            vectorTilesKey={vectorTilesKey}
-            vectorTilesUrl={vectorTilesUrl}
-            staticFilesUrl={staticFilesUrl}
-            mapsetUrl={mapsetUrl}
-            drawUrl={drawUrl}
-            drawOldUrl={drawOldUrl}
-          />
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <Provider store={this.store}>
+            <TopicLoader
+              history={history}
+              apiKey={apiKey}
+              apiKeyName={apiKeyName}
+              topics={topics}
+              activeTopicKey={activeTopicKey}
+              cartaroUrl={cartaroUrl}
+              appBaseUrl={appBaseUrl}
+              permissionUrl={permissionUrl}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
+              staticFilesUrl={staticFilesUrl}
+              mapsetUrl={mapsetUrl}
+              drawUrl={drawUrl}
+              drawOldUrl={drawOldUrl}
+            />
+          </Provider>
+        </ThemeProvider>
       </MatomoProvider>
     );
   }
