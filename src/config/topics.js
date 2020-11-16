@@ -57,6 +57,7 @@ export const netzkarte = {
     ...defaultElements,
     popup: true,
     shareMenu: true,
+    drawMenu: true,
     trackerMenu: true,
   },
   layers: [

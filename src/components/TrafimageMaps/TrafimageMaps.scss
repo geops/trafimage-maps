@@ -15,7 +15,7 @@
     }
   }
 
-  a {
+  a:not(.MuiIconButton-root) {
     color: initial;
     text-decoration: none;
 

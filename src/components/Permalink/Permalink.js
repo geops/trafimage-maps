@@ -81,44 +81,7 @@ class Permalink extends PureComponent {
     if (parameters['wkp.draw']) {
       // Redirection to the old wkp to use the drawing tool.
       // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
-      // fetch(drawOldUrl + parameters['wkp.draw'])
-      //   .then((response) =>
-      //     response
-      //       .clone()
-      //       .json()
-      //       .catch(() => response.text()),
-      //   )
-      //   .then((data) => {
-      //     if (data && data.admin_id && data.file_id) {
-      //       dispatchSetDrawIds(data);
-      //       // eslint-disable-next-line no-console
-      //       console.log('This is an admin id', data.admin_id, data.file_id);
-      //       return fetch(drawOldUrl + data.file_id);
-      //     }
-      //     dispatchSetDrawIds({ file_id: parameters['wkp.draw'] });
-      //     // eslint-disable-next-line no-console
-      //     console.log('This is an file id', data);
-      //     return { text: () => data };
-      //   })
-      //   .then((response) => response.text())
-      //   .then((kmlString) => {
-      //     // eslint-disable-next-line no-console
-      //     console.log(kmlString);
-      //     const features = KML.readFeatures(
-      //       kmlString,
-      //       map.getView().getProjection(),
-      //     );
-      //     // eslint-disable-next-line no-console
-      //     console.log(features.length);
-      //     drawLayer.olLayer.getSource().clear(true);
-      //     drawLayer.olLayer.getSource().addFeatures(features);
-      //   });
-    }
-
-    if (parameters['draw.id']) {
-      // Redirection to the old wkp to use the drawing tool.
-      // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
-      fetch(`${drawUrl + parameters['draw.id']}?user=`)
+      fetch(drawOldUrl + parameters['wkp.draw'])
         .then((response) =>
           response
             .clone()
@@ -132,8 +95,45 @@ class Permalink extends PureComponent {
             console.log('This is an admin id', data.admin_id, data.file_id);
             return fetch(drawOldUrl + data.file_id);
           }
+          dispatchSetDrawIds({ file_id: parameters['wkp.draw'] });
+          // eslint-disable-next-line no-console
+          console.log('This is an file id', data);
+          return { text: () => data };
+        })
+        .then((response) => response.text())
+        .then((kmlString) => {
+          // eslint-disable-next-line no-console
+          console.log(kmlString);
+          const features = KML.readFeatures(
+            kmlString,
+            map.getView().getProjection(),
+          );
+          // eslint-disable-next-line no-console
+          console.log(features.length);
+          drawLayer.olLayer.getSource().clear(true);
+          drawLayer.olLayer.getSource().addFeatures(features);
+        });
+    }
+    const drawId = parameters['draw.id'];
+    if (drawId) {
+      // Redirection to the old wkp to use the drawing tool.
+      // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+      fetch(`${drawUrl + drawId}`)
+        .then((response) =>
+          response
+            .clone()
+            .json()
+            .catch(() => response.text()),
+        )
+        .then((data) => {
+          if (data && data.admin_id && data.file_id) {
+            dispatchSetDrawIds(data);
+            // eslint-disable-next-line no-console
+            console.log('This is an admin id', data.admin_id, data.file_id);
+            return fetch(drawUrl + data.file_id);
+          }
 
-          dispatchSetDrawIds({ file_id: parameters['draw.id'] });
+          dispatchSetDrawIds({ file_id: drawId });
           // eslint-disable-next-line no-console
           console.log('This is an file id', data);
           return { text: () => data };

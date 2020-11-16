@@ -14,6 +14,7 @@ import Menu from '../Menu';
 import FeatureMenu from '../FeatureMenu';
 import TrackerMenu from '../../menus/TrackerMenu';
 import ShareMenu from '../../menus/ShareMenu';
+import DrawMenu from '../../menus/DrawMenu';
 import Permalink from '../Permalink';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -34,6 +35,7 @@ const defaultElements = {
   geolocationButton: true,
   baseLayerSwitcher: false,
   shareMenu: false,
+  drawMenu: true,
   trackerMenu: false,
   featureMenu: false,
   search: false,
@@ -111,7 +113,10 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
-    { shareMenu: <ShareMenu appBaseUrl={appBaseUrl} /> },
+    {
+      drawMenu: <DrawMenu />,
+      shareMenu: <ShareMenu appBaseUrl={appBaseUrl} />,
+    },
     elements,
   );
 

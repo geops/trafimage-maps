@@ -55,18 +55,19 @@ describe('DrawLayerMenu', () => {
   });
 
   test('display only draw layer', () => {
+    const layerService = new LayerService([
+      new Layer({ olLayer: new OLLayer({}) }),
+      store.getState().map.drawLayer,
+    ]);
     store = mockStore({
       map: {
         drawLayer,
       },
       app: {
         drawIds: { admin_id: 'foo' },
+        layerService,
       },
     });
-    const layerService = new LayerService([
-      new Layer({ olLayer: new OLLayer({}) }),
-      store.getState().map.drawLayer,
-    ]);
     const wrapper = mount(
       <Provider store={store}>
         <DrawLayerMenu layerService={layerService} />

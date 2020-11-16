@@ -7,7 +7,6 @@ import { FaEnvelope, FaQuestion } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import SharePermalinkButton from '../SharePermalinkButton';
-import DrawButton from '../DrawButton';
 
 const socialShareConfig = [
   {
@@ -82,7 +81,6 @@ const Share = ({ appBaseUrl }) => {
       {activeTopic.permission
         ? renderConf(config[3], t, language, appBaseUrl)
         : null}
-      <DrawButton />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 .wkp-share-permalink-button {
   .wkp-tooltip,
+  .tm-permalink-field,
   .wkp-arrow-left {
     border: 1px solid lightgray;
   }
@@ -12,10 +13,19 @@
     height: auto;
     padding: 10px;
 
-    .wkp-permalink-field {
+    .tm-permalink-field {
       position: relative;
       width: 375px;
+      height: 30px;
       padding-left: 5px;
+
+      div[role='button'] {
+        border-left: 1px solid lightgray;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   }
 

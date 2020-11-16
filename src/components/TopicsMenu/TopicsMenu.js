@@ -50,7 +50,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
         ref={bodyElementRef}
       >
         <div className="wkp-topics-menu-body">
-          <DrawLayerMenu layerService={layerService} />
+          <DrawLayerMenu />
           {topics.map((topic) => (
             <TopicMenu
               key={topic.key}

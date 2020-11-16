@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DrawRemoveDialog should match snapshot 1`] = `
+<div
+  className="wkp-dialog"
+>
+  <div
+    className="tm-modal"
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    <div
+      className="tm-dialog-container makeStyles-dialogContainer-1"
+    >
+      <div
+        className="tm-dialog-header "
+      >
+        <div
+          className="tm-header-left"
+        />
+        <span>
+          Zeichnung  löschen
+        </span>
+        <div
+          aria-label="Dialog schließen"
+          className="tm-button tm-dialog-close-bt"
+          onClick={[Function]}
+          onKeyPress={[Function]}
+          role="button"
+          tabIndex={0}
+          title="Dialog schließen"
+        >
+          <svg
+            fill="currentColor"
+            focusable={false}
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="tm-dialog-body"
+      >
+        <div>
+          <div>
+            Wollen Sie den Plan wirklich aus der Karte löschen?
+            <br />
+            Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link:
+          </div>
+          <div
+            className="makeStyles-link-2"
+          >
+            <div
+              className="makeStyles-input-4"
+            >
+              <input
+                className="tm-permalink-input"
+                onChange={[Function]}
+                onClick={[Function]}
+                tabIndex="0"
+                title=""
+                type="text"
+                value=""
+              />
+              <div
+                aria-label=""
+                className="tm-permalink-bt"
+                onClick={[Function]}
+                onKeyPress={[Function]}
+                role="button"
+                tabIndex={0}
+                title=""
+              >
+                <svg
+                  fill="currentColor"
+                  focusable={false}
+                  height="1em"
+                  stroke="currentColor"
+                  strokeWidth="0"
+                  style={
+                    Object {
+                      "color": undefined,
+                    }
+                  }
+                  viewBox="0 0 24 24"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div
+            className="makeStyles-footer-3"
+          >
+            <button
+              className="MuiButtonBase-root MuiButton-root MuiButton-text"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Löschen
+              </span>
+            </button>
+            <button
+              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+              disabled={false}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={0}
+              type="button"
+            >
+              <span
+                className="MuiButton-label"
+              >
+                Abbrechen
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

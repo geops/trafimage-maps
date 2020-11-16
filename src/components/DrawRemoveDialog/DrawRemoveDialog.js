@@ -1,13 +1,34 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import Button from '@geops/react-ui/components/Button';
+import { Button, makeStyles } from '@material-ui/core';
+import PermalinkInput from '../PermalinkInput';
 import Dialog from '../Dialog';
 import { setDialogVisible, setDrawIds } from '../../model/app/actions';
 
 export const NAME = 'drawRemoveDialog';
 
+const useStyles = makeStyles((theme) => ({
+  dialogContainer: {
+    width: '400px !important',
+  },
+  link: {
+    marginTop: theme.spacing(2),
+  },
+  footer: {
+    marginTop: theme.spacing(2),
+    display: 'flex',
+    alignContent: 'flex-end', // shpould replace float : right but doesn't work
+    float: 'right',
+
+    '& > button': {
+      marginLeft: theme.spacing(2),
+    },
+  },
+}));
+
 function DrawRemoveDialog() {
+  const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const drawLayer = useSelector((state) => state.map.drawLayer);
@@ -27,6 +48,7 @@ function DrawRemoveDialog() {
       isModal
       name={NAME}
       title={<span>{t('Zeichnung  löschen')}</span>}
+      className={`tm-dialog-container ${classes.dialogContainer}`}
       body={
         <div>
           <div>
@@ -36,10 +58,14 @@ function DrawRemoveDialog() {
               'Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link:',
             )}
           </div>
-          <hr />
-          <div className="tm-draw-remove-dialog-footer">
+          <div className={classes.link}>
+            <PermalinkInput value={window.location.href} />
+          </div>
+          <div className={classes.footer}>
             <Button onClick={clear}>{t('Löschen')}</Button>
-            <Button onClick={closeDialog}>{t('Abbrechen')}</Button>
+            <Button onClick={closeDialog} color="secondary">
+              {t('Abbrechen')}
+            </Button>
           </div>
         </div>
       }

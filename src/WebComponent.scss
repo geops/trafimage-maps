@@ -29,7 +29,6 @@
 @import 'node_modules/@geops/react-ui/components/Footer/Footer.scss';
 @import 'node_modules/@geops/react-ui/components/Button/Button.scss';
 @import 'node_modules/@geops/react-ui/components/Header/Header.scss';
-@import 'node_modules/@geops/react-ui/components/PermalinkInput/PermalinkInput.scss';
 @import 'node_modules/@geops/react-ui/components/Dialog/Dialog.scss';
 
 // React-spatial
@@ -76,6 +75,7 @@
 // Menus
 @import './menus/ShareMenu/ShareMenu.scss';
 @import './menus/TrackerMenu/TrackerMenu.scss';
+@import './menus/DrawMenu/DrawMenu.scss';
 
 // Popups
 @import './popups/BahnhofplanPopup/BahnhofplanPopup.scss';

@@ -3,22 +3,17 @@ import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
 import { FaLink } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import PermalinkInput from '@geops/react-ui/components/PermalinkInput';
 import Button from '@geops/react-ui/components/Button';
+import IconButton from '@material-ui/core/IconButton';
+import PermalinkInput from '../PermalinkInput';
 
-const propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.node,
-  className: PropTypes.string,
-};
+const propTypes = { buttonProps: PropTypes.object };
 
 const defaultProps = {
-  title: 'Permalink generieren',
-  icon: <FaLink focusable={false} />,
-  className: 'wkp-share-permalink-button',
+  buttonProps: null,
 };
 
-function SharePermalinkButton({ icon, title, className }) {
+function SharePermalinkButton({ buttonProps }) {
   const [showTooltip, setShowTooltip] = useState(null);
   const [positionTooltip, setPositionTooltip] = useState();
   const { t } = useTranslation();
@@ -42,16 +37,18 @@ function SharePermalinkButton({ icon, title, className }) {
   }, [showTooltip]);
 
   return (
-    <div className={className} ref={ref}>
-      <Button
-        title={t(title)}
+    <div className="wkp-share-permalink-button" ref={ref}>
+      <IconButton
+        title={t('Permalink generieren')}
         onClick={(e) => {
           setPositionTooltip(e.currentTarget.getBoundingClientRect());
           setShowTooltip(!showTooltip);
         }}
+        // eslint-disable-next-line react/jsx-props-no-spreading
+        {...buttonProps}
       >
-        {icon}
-      </Button>
+        <FaLink focusable={false} />
+      </IconButton>
       {showTooltip && positionTooltip && (
         <div
           className="wkp-tooltip"
@@ -69,7 +66,9 @@ function SharePermalinkButton({ icon, title, className }) {
           >
             <MdClose focusable={false} />
           </Button>
-          <PermalinkInput value={window.location.href} />
+          <div className="wkp-permalink-field">
+            <PermalinkInput value={window.location.href} />
+          </div>
           <p>
             {t(
               'Sie können auch den Link aus der Adresszeile des Browsers kopieren.',
