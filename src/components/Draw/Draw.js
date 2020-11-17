@@ -37,20 +37,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Draw() {
-  console.log('icic');
   const classes = useStyles();
-  console.log('icic');
   const { t } = useTranslation();
-  console.log('icic');
   const dispatch = useDispatch();
-  console.log('icic');
   const drawIds = useSelector((state) => state.app.drawIds);
-
-  console.log('icic');
   const onRemoveClick = useCallback(() => {
     dispatch(setDialogVisible(NAME));
   }, [dispatch]);
-  console.log('icic');
 
   return (
     <div className={classes.root}>

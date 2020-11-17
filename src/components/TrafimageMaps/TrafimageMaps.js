@@ -19,6 +19,7 @@ import {
   setMapsetUrl,
   setDrawUrl,
   setDrawOldUrl,
+  setShortenerUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -123,6 +124,12 @@ const propTypes = {
   mapsetUrl: PropTypes.string,
 
   /**
+   * URL endpoint for shortener api.
+   * @private
+   */
+  shortenerUrl: PropTypes.string,
+
+  /**
    * URL endpoint for draw api endpoint.
    * @private
    */
@@ -167,6 +174,7 @@ const defaultProps = {
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
+  shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
   drawOldUrl: process.env.REACT_APP_DRAW_OLD_URL,
   permissionUrl: null,
@@ -196,6 +204,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       cartaroOldUrl,
       mapsetUrl,
+      shortenerUrl,
       drawUrl,
       drawOldUrl,
       maxExtent,
@@ -215,6 +224,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (mapsetUrl) {
       this.store.dispatch(setMapsetUrl(mapsetUrl));
+    }
+
+    if (shortenerUrl) {
+      this.store.dispatch(setShortenerUrl(shortenerUrl));
     }
 
     if (drawUrl) {
@@ -256,6 +269,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       maxExtent,
       mapsetUrl,
+      shortenerUrl,
       drawUrl,
       drawOldUrl,
     } = this.props;
@@ -275,6 +289,11 @@ class TrafimageMaps extends React.PureComponent {
     if (mapsetUrl !== prevProps.mapsetUrl) {
       this.store.dispatch(setMapsetUrl(mapsetUrl));
     }
+
+    if (shortenerUrl !== prevProps.shortenerUrl) {
+      this.store.dispatch(setShortenerUrl(shortenerUrl));
+    }
+
     if (drawUrl !== prevProps.drawUrl) {
       this.store.dispatch(setDrawUrl(drawUrl));
     }
@@ -306,6 +325,7 @@ class TrafimageMaps extends React.PureComponent {
       permissionUrl,
       activeTopicKey,
       mapsetUrl,
+      shortenerUrl,
       drawUrl,
       drawOldUrl,
     } = this.props;
@@ -327,6 +347,7 @@ class TrafimageMaps extends React.PureComponent {
               vectorTilesUrl={vectorTilesUrl}
               staticFilesUrl={staticFilesUrl}
               mapsetUrl={mapsetUrl}
+              shortenerUrl={shortenerUrl}
               drawUrl={drawUrl}
               drawOldUrl={drawOldUrl}
             />

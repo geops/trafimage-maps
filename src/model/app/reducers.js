@@ -22,6 +22,7 @@ import {
   SET_DRAW_URL,
   SET_DRAW_OLD_URL,
   SET_DRAW_IDS,
+  SET_SHORTENER_URL,
 } from './actions';
 import SearchService from '../../components/Search/SearchService';
 
@@ -130,6 +131,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         mapsetUrl: action.data,
+      };
+    case SET_SHORTENER_URL:
+      return {
+        ...state,
+        shortenerUrl: action.data,
       };
     case SET_DRAW_URL:
       return {

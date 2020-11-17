@@ -1,11 +1,11 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
-import SharePermalinkButton from '.';
+import DrawEditLinkInput from '.';
 
-describe('SharePermalinkButton', () => {
+describe('DrawEditLinkInput', () => {
   const mockStore = configureStore([thunk]);
   let store;
   test('should match snapshot.', () => {
@@ -13,10 +13,9 @@ describe('SharePermalinkButton', () => {
       map: {},
       app: { drawIds: {} },
     });
-
     const component = renderer.create(
       <Provider store={store}>
-        <SharePermalinkButton />
+        <DrawEditLinkInput />
       </Provider>,
     );
     const tree = component.toJSON();
