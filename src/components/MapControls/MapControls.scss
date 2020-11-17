@@ -64,13 +64,13 @@
       background: white;
       box-shadow: 0 0 7px rgba(0, 0, 0, 0.9);
       border-radius: 50%;
-      cursor: pointer;
       height: 40px;
       width: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
       transition: box-shadow 0.5s ease;
+      border: none; // Already defined in react-spatial, but omitted when compiling web-component
 
       svg path {
         transition: stroke 0.5s ease;
@@ -79,6 +79,11 @@
 
       &:hover {
         box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.9);
+      }
+
+      &:disabled {
+        box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.4);
+        cursor: default;
       }
     }
   }
