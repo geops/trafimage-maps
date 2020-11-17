@@ -9,6 +9,7 @@ import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Button from '@geops/react-ui/components/Button';
 import Collapsible from '../Collapsible';
+import filters from '../../filters';
 import {
   setActiveTopic,
   setSelectedForInfos,
@@ -193,16 +194,34 @@ class TopicMenu extends PureComponent {
                 {layer.get('hasInfos') && this.renderInfoButton(layer)}
               </>
             )}
+            renderAfterItem={(layer, level) => {
+              const component = layer.get('filtersComponent');
+              if (component) {
+                const FiltersComponent = filters[component];
+                return (
+                  <div
+                    style={{
+                      display: 'flex',
+                      paddingLeft: `${30 * (level + 1)}px`,
+                    }}
+                  >
+                    <FiltersComponent layer={layer} />
+                  </div>
+                );
+              }
+              return null;
+            }}
           />
         </div>
       );
     }
 
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
-
+    const isActiveTopic = topic.key === activeTopic.key;
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
       return !l.get('hideInLegend');
     });
+
     return (
       <div className="wkp-topic-menu">
         <div className="wkp-topic-menu-item-wrapper">
@@ -215,14 +234,10 @@ class TopicMenu extends PureComponent {
             onKeyPress={(e) => e.which === 13 && this.onTopicClick(topic)}
           >
             <div
-              className={`wkp-topic-title${
-                activeTopic.key === topic.key ? ' wkp-active' : ''
-              }`}
+              className={`wkp-topic-title${isActiveTopic ? ' wkp-active' : ''}`}
             >
               <div className="wkp-topic-radio">
-                {topic.key === activeTopic.key && (
-                  <div className="wkp-topic-radio-dot" />
-                )}
+                {isActiveTopic && <div className="wkp-topic-radio-dot" />}
               </div>
               {t(topic.name)}
             </div>
@@ -230,7 +245,7 @@ class TopicMenu extends PureComponent {
               <div
                 className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
                 style={{
-                  display: topic.key === activeTopic.key ? 'block' : 'none',
+                  display: isActiveTopic ? 'block' : 'none',
                 }}
               />
             )}
