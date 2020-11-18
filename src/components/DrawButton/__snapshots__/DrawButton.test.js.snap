@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DrawButton should match snapshot appending an encoded string to mapsetUrl. 1`] = `
-<a
-  aria-disabled={false}
+<button
   className="MuiButtonBase-root MuiIconButton-root"
-  href="foo.mapset.ch?parent=http%3A%2F%2Flocalhost%2F"
+  disabled={false}
   onBlur={[Function]}
+  onClick={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -17,8 +17,8 @@ exports[`DrawButton should match snapshot appending an encoded string to mapsetU
   onTouchMove={[Function]}
   onTouchStart={[Function]}
   tabIndex={0}
-  target="blank_"
   title="Zeichnen"
+  type="button"
 >
   <span
     className="MuiIconButton-label"
@@ -49,5 +49,5 @@ exports[`DrawButton should match snapshot appending an encoded string to mapsetU
       </g>
     </svg>
   </span>
-</a>
+</button>
 `;

@@ -55,25 +55,29 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
           <FaLink focusable={false} />
         </IconButton>
       </ToggleButton>
-      <Popover
-        container={ref.current}
-        open={!!anchorEl}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        elevation={0}
-        anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'right',
-        }}
-        transformOrigin={transformOrigin}
-        elvation
-      >
-        <div className={arrowClassName} />
-        <IconButton className="wkp-close" onClick={handleClose}>
-          <MdClose focusable={false} />
-        </IconButton>
-        <div className={classes.content}>{children}</div>
-      </Popover>
+      {!!anchorEl && (
+        <Popover
+          container={ref.current}
+          open
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          elevation={0}
+          anchorOrigin={{
+            vertical: 'center',
+            horizontal: 'right',
+          }}
+          transformOrigin={transformOrigin}
+        >
+          <div className={arrowClassName} />
+          <IconButton className="wkp-close" onClick={handleClose}>
+            <MdClose focusable={false} />
+          </IconButton>
+          <div className={classes.content}>
+            {/* We use a function to be able to get the proper window.location value. */}
+            {children && children(window.location.href)};
+          </div>
+        </Popover>
+      )}
     </div>
   );
 }
@@ -81,7 +85,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
 PermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
   popoverProps: PropTypes.object,
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.func,
 };
 
 PermalinkButton.defaultProps = {

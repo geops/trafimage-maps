@@ -17,12 +17,19 @@ function SharePermalinkButton({ buttonProps }) {
 
   return (
     <PermalinkButton buttonProps={buttonProps}>
-      <PermalinkInput value={window.location.href} />
-      <Typography className={classes.margin}>
-        {t(
-          'Sie können auch den Link aus der Adresszeile des Browsers kopieren.',
-        )}
-      </Typography>
+      {/* We use a function to be able to get the proper window.location value. */}
+      {(locationHref) => {
+        return (
+          <>
+            <PermalinkInput value={locationHref} />
+            <Typography className={classes.margin}>
+              {t(
+                'Sie können auch den Link aus der Adresszeile des Browsers kopieren.',
+              )}
+            </Typography>
+          </>
+        );
+      }}
     </PermalinkButton>
   );
 }

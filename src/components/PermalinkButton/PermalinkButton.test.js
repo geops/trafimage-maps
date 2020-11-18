@@ -17,8 +17,9 @@ describe('PermalinkButton', () => {
     const component = renderer.create(
       <Provider store={store}>
         <PermalinkButton>
-          <div />
-          <div />
+          {() => {
+            return <div />;
+          }}
         </PermalinkButton>
       </Provider>,
     );

@@ -11,10 +11,14 @@ function DrawButton({ children, ...buttonProps }) {
 
   return (
     <IconButton
-      href={`${mapsetUrl}?parent=${encodeURIComponent(window.location)}`}
-      target="blank_"
       title={t('Zeichnen')}
       size="medium"
+      /* We use a function instead of href to be able to get the proper window.location value. */
+      onClick={() => {
+        window.open(
+          `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
+        );
+      }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...buttonProps}
     >
