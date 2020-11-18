@@ -48,6 +48,7 @@ const defaultElements = {
   baseLayerSwitcher: true,
   popup: false,
   search: true,
+  drawMenu: true,
 };
 
 export const netzkarte = {
@@ -57,7 +58,6 @@ export const netzkarte = {
     ...defaultElements,
     popup: true,
     shareMenu: true,
-    drawMenu: true,
     trackerMenu: true,
   },
   layers: [
@@ -78,7 +78,11 @@ export const netzkarte = {
 export const handicap = {
   name: 'ch.sbb.handicap',
   key: 'ch.sbb.handicap',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     ...defaultBaseLayers,
     handicapDataLayer,
@@ -164,7 +168,11 @@ export const casa = {
 export const bauprojekte = {
   name: 'ch.sbb.construction',
   key: 'ch.sbb.construction',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     dataLayer,
     netzkarteLayer,
@@ -182,7 +190,11 @@ export const bauprojekte = {
 export const behig = {
   name: 'ch.sbb.behig',
   key: 'ch.sbb.behig',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     dataLayer,
     netzkarteLayer,
@@ -200,7 +212,11 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     netzkarteEisenbahninfrastruktur,
     gewässer,
