@@ -1,7 +1,7 @@
 import React, { useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaLink } from 'react-icons/fa';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { MdClose } from 'react-icons/md';
 import PropTypes from 'prop-types';
 import { Popover, IconButton, makeStyles } from '@material-ui/core';
 import { ToggleButton } from '@material-ui/lab';
@@ -70,7 +70,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
       >
         <div className={arrowClassName} />
         <IconButton className="wkp-close" onClick={handleClose}>
-          <AiOutlineCloseCircle focusable={false} />
+          <MdClose focusable={false} />
         </IconButton>
         <div className={classes.content}>{children}</div>
       </Popover>

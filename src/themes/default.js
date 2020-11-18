@@ -84,16 +84,24 @@ const theme = createMuiTheme({
         overflowX: 'visible',
         overflowY: 'visible',
         maxWidth: 400,
-        '& .wkp-close': {
-          float: 'right',
-          width: 25,
-          height: 25,
-          padding: 0,
-          color: 'lightgray',
-          '& svg': {
-            width: '100%',
-            height: '100%',
-          },
+        '& .MuiIconButton-root.wkp-close': {
+          position: 'absolute',
+          border: 'none',
+          right: 0,
+          top: 0,
+          color: 'black',
+          height: '50px',
+          width: '50px',
+          // SBB design
+          // float: 'right',
+          // width: 25,
+          // height: 25,
+          // padding: 0,
+          // color: 'lightgray',
+          // '& svg': {
+          //   width: '100%',
+          //   height: '100%',
+          // },
         },
         '& .wkp-arrow-center-left': {
           position: 'absolute',
