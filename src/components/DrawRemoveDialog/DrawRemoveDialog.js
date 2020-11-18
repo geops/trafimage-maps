@@ -17,9 +17,10 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     marginTop: theme.spacing(2),
+    paddingTop: theme.spacing(2),
     display: 'flex',
-    alignContent: 'flex-end', // shpould replace float : right but doesn't work
-    float: 'right',
+    justifyContent: 'flex-end',
+    width: '100%',
 
     '& > button': {
       marginLeft: theme.spacing(2),

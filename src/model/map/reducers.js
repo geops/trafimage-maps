@@ -16,7 +16,7 @@ import {
 } from './actions';
 
 const drawLayer = new VectorLayer({
-  name: 'draw',
+  name: 'Draw layer',
   key: 'draw',
   properties: {
     hideInLegend: true,
