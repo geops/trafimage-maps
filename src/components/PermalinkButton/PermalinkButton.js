@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function PernmalinkButton({ buttonProps, children, popoverProps }) {
+function PermalinkButton({ buttonProps, children, popoverProps }) {
   const classes = useStyles();
 
   const { t } = useTranslation();
@@ -86,16 +86,16 @@ function PernmalinkButton({ buttonProps, children, popoverProps }) {
   );
 }
 
-PernmalinkButton.propTypes = {
+PermalinkButton.propTypes = {
   buttonProps: PropTypes.object,
   popoverProps: PropTypes.object,
   children: PropTypes.arrayOf(PropTypes.element),
 };
 
-PernmalinkButton.defaultProps = {
+PermalinkButton.defaultProps = {
   buttonProps: {},
   popoverProps: {},
   children: null,
 };
 
-export default React.memo(PernmalinkButton);
+export default React.memo(PermalinkButton);

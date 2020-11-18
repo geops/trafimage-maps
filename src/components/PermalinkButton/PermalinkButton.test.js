@@ -3,9 +3,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
-import PernmalinkButton from '.';
+import PermalinkButton from '.';
 
-describe('PernmalinkButton', () => {
+describe('PermalinkButton', () => {
   const mockStore = configureStore([thunk]);
   let store;
   test('should match snapshot.', () => {
@@ -16,10 +16,10 @@ describe('PernmalinkButton', () => {
 
     const component = renderer.create(
       <Provider store={store}>
-        <PernmalinkButton>
+        <PermalinkButton>
           <div />
           <div />
-        </PernmalinkButton>
+        </PermalinkButton>
       </Provider>,
     );
     const tree = component.toJSON();

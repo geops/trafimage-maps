@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
 import PermalinkInput from '../PermalinkInput';
 import DrawEditLinkInput from '../DrawEditLinkInput';
-import PermalinkButton from '../PernmalinkButton';
+import PermalinkButton from '../PermalinkButton';
 
 function DrawPermalinkButton({ buttonProps }) {
   const drawIds = useSelector((state) => state.app.drawIds);
