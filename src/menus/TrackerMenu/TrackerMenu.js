@@ -32,6 +32,42 @@ class TrackerMenu extends Component {
     ].join(':');
   }
 
+  static defaultRenderLink(text, url) {
+    return (
+      <div className="rt-route-copyright-link">
+        {url ? (
+          <a href={url} target="_blank" rel="noreferrer noopener">
+            {text}
+          </a>
+        ) : (
+          <>{text}</>
+        )}
+      </div>
+    );
+  }
+
+  static renderCopyright({ lineInfos }) {
+    return (
+      <span className="rt-route-copyright">
+        {lineInfos.operator &&
+          TrackerMenu.defaultRenderLink(
+            lineInfos.operator,
+            lineInfos.operatorUrl,
+          )}
+        {lineInfos.publisher &&
+          TrackerMenu.defaultRenderLink(
+            lineInfos.publisher,
+            lineInfos.publisherUrl,
+          )}
+        {lineInfos.license &&
+          TrackerMenu.defaultRenderLink(
+            lineInfos.license,
+            lineInfos.licenseUrl,
+          )}
+      </span>
+    );
+  }
+
   constructor(props) {
     super(props);
 
@@ -138,6 +174,7 @@ class TrackerMenu extends Component {
                   center: fromLonLat(station.coordinates),
                 });
               }}
+              renderCopyright={TrackerMenu.renderCopyright}
             />
           </div>
         ) : null}
