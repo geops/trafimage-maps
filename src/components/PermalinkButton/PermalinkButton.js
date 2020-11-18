@@ -10,14 +10,6 @@ const useStyles = makeStyles(() => ({
   content: {
     maxWidth: 300,
     paddingRight: 42,
-
-    '& > p:first-child': {
-      marginTop: 0,
-    },
-
-    '& > p:last-child': {
-      marginBottom: 0,
-    },
   },
 }));
 

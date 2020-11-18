@@ -8,13 +8,13 @@ import DrawButton from '../DrawButton';
 import { NAME } from '../DrawRemoveDialog';
 import DrawPermalinkButton from '../DrawPermalinkButton';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    padding: '15px 15px',
+    padding: theme.spacing(2),
   },
   buttons: {
     display: 'flex',
-    marginBottom: 15,
+    marginBottom: theme.spacing(2),
 
     '& > a:first-child': {
       paddingLeft: 0,
@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
     alignItems: 'start',
   },
   infoIcon: {
-    marginRight: 10,
+    marginRight: theme.spacing(1),
     flexShrink: 0,
     paddingTop: 3,
   },

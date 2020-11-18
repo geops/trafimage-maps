@@ -3,18 +3,4 @@
   .wkp-layer-tree .rs-layer-tree-item {
     margin: 0;
   }
-
-  .rs-layer-tree .rs-layer-tree-item > :last-child {
-    margin-right: 0;
-  }
-
-  /* TODO: THis css should not exist, fix the css of layer tree in react-satial */
-  .rs-layer-tree .rs-layer-tree-item div.wkp-tooltip {
-    position: fixed;
-
-    .wkp-arrow-left,
-    .wkp-close-bt {
-      position: absolute;
-    }
-  }
 }
