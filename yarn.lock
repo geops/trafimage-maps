@@ -11373,10 +11373,10 @@ mixin-object@^2.0.1:
   dependencies:
     minimist "^1.2.5"
 
-mobility-toolbox-js@1.1.12:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.1.12.tgz#c8d6fb26b510673cc6bd74583afe2a6d435915a9"
-  integrity sha512-9XLm5zjcg3Chr2a2om9pwPZ0Qiw2I29ucBr5gEOMBPikN2ZzUYEZxHwfEqGghRgQfBogdwM5L9PfRDWqtMKRLw==
+mobility-toolbox-js@1.1.13-beta.1:
+  version "1.1.13-beta.1"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.1.13-beta.1.tgz#78e05dfcdadb2107f22cc81fdbd5587668eed347"
+  integrity sha512-ruw7337PMu/odIUr7FXScrTNJVHyGMERFtkEzJP2Efyj1Geus1N07Eepfc6JgcuV4/MArrsbrwpahlo6WXXdkA==
   dependencies:
     "@geops/geops-ui" "^0.1.8"
     "@material-ui/core" "^4.9.14"
@@ -11384,7 +11384,6 @@ mobility-toolbox-js@1.1.12:
     "@material-ui/styles" "^4.9.14"
     codesandbox "^2.1.16"
     es6-mixin "^0.3.0"
-    lodash "^4.17.15"
     path "^0.12.7"
     prop-types "^15.7.2"
     query-string "^6.13.0"
