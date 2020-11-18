@@ -10,7 +10,7 @@ function DrawMenu() {
   return (
     <MenuItem
       open
-      title={t('Zeichnen of der Karte')}
+      title={t('Zeichnen auf der Karte')}
       icon={<FaPencilAlt focusable={false} />}
       collapsed={collapsed}
       onCollapseToggle={(c) => setCollapsed(c)}
