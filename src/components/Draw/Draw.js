@@ -6,7 +6,7 @@ import { Grid, Typography, IconButton, makeStyles } from '@material-ui/core';
 import { setDialogVisible } from '../../model/app/actions';
 import DrawButton from '../DrawButton';
 import { NAME } from '../DrawRemoveDialog';
-import SharePermalinkButton from '../SharePermalinkButton';
+import DrawPermalinkButton from '../DrawPermalinkButton';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -58,10 +58,15 @@ function Draw() {
           >
             <FaTrash />
           </IconButton>
-          <SharePermalinkButton buttonProps={{ disabled: !drawIds }} />
+          <DrawPermalinkButton
+            buttonProps={{
+              title: t('Draw permalink generieren'),
+              disabled: !drawIds,
+            }}
+          />
         </Grid>
         <Grid item xs={12} alignItems="center">
-          <Typography variant="caption" className={classes.caption}>
+          <Typography variant="subtitle1" className={classes.caption}>
             <FaInfoCircle
               focusable={false}
               fontSize="small"

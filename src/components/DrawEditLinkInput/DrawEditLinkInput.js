@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import qs from 'query-string';
@@ -63,9 +63,11 @@ function DrawEditLinkInput() {
     <div className={classes.root}>
       <PermalinkInput value={shortenUrl} />
       {isLoading && (
-        <span className={classes.loader}>
-          <Loader /> <span>{t('Laden...')}</span>
-        </span>
+        <Typography variant="subtitle1">
+          <span className={classes.loader}>
+            <Loader /> <span>{t('Laden...')}</span>
+          </span>
+        </Typography>
       )}
     </div>
   );

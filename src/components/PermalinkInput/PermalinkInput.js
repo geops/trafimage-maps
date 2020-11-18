@@ -19,6 +19,7 @@ const useStyles = makeStyles(() => ({
       flexGrow: 2,
       textOverflow: 'ellipsis',
       minWidth: 0,
+      paddingLeft: 5,
 
       '&::-ms-clear': {
         display: 'none',
