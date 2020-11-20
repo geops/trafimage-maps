@@ -21,6 +21,7 @@
 
   .wkp-info-topic-bt,
   .wkp-info-layer-bt {
+    &.wkp-active:hover,
     &:hover {
       color: $brand-primary-hover;
     }
