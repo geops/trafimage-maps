@@ -38,7 +38,7 @@
     "react-redux": "7.2.0",
     "react-select": "3.1.0",
     "react-shadow": "17.6.0",
-    "react-spatial": "1.0.13-beta.1",
+    "react-spatial": "1.0.13",
     "react-styleguidist": "11.0.5",
     "react-web-component": "2.0.1",
     "redux": "4.0.5",
@@ -48,8 +48,8 @@
     "styled-components": "5.1.0"
   },
   "peerDependencies": {
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react": "^16",
+    "react-dom": "^16"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
