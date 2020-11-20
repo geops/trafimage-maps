@@ -11384,10 +11384,10 @@ mixin-object@^2.0.1:
   dependencies:
     minimist "^1.2.5"
 
-mobility-toolbox-js@1.1.12:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.1.12.tgz#c8d6fb26b510673cc6bd74583afe2a6d435915a9"
-  integrity sha512-9XLm5zjcg3Chr2a2om9pwPZ0Qiw2I29ucBr5gEOMBPikN2ZzUYEZxHwfEqGghRgQfBogdwM5L9PfRDWqtMKRLw==
+mobility-toolbox-js@1.1.13:
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.1.13.tgz#4423edbce38d2da66fae600ea8abe36bb4f7985a"
+  integrity sha512-viZ/SZhrJDlvMQuSxz1ap1ziMS6YhpbKR0Jpw12LUC+8Kbq8+oUUS5DIUIhCpmEgKfBU3fSjqdhv9CbUeFOgYA==
   dependencies:
     "@geops/geops-ui" "^0.1.8"
     "@material-ui/core" "^4.9.14"
@@ -11395,7 +11395,6 @@ mobility-toolbox-js@1.1.12:
     "@material-ui/styles" "^4.9.14"
     codesandbox "^2.1.16"
     es6-mixin "^0.3.0"
-    lodash "^4.17.15"
     path "^0.12.7"
     prop-types "^15.7.2"
     query-string "^6.13.0"
@@ -14378,10 +14377,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.11.tgz#7ddbdb0fc1964b47894d72373bd897cc024d0f21"
-  integrity sha512-m4P4ZM/m5M10rmPYj8eZMEH2CnceR6uoCGem3jqeHU0N4SREMi1vU6KdinvK9Ev3O374vWTszqc0zJOI5UHA9A==
+react-spatial@1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.13.tgz#398729ec43225272c197352c2c1b3e87a41f4550"
+  integrity sha512-EMIIhFTIbILi3zpGasUhDkxsM5CZ/NgpsdMY635eDeYUPKIqy2QewQcPaxeK45redKdxEZRdS4FPrbuO8lKfYw==
   dependencies:
     "@geops/geops-ui" "0.1.8"
     "@material-ui/core" "^4.11.0"

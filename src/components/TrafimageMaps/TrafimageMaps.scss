@@ -21,6 +21,7 @@
 
     &:hover {
       text-decoration: none;
+      color: $brand-primary-hover;
     }
   }
 
@@ -124,10 +125,6 @@
         box-shadow: none;
       }
     }
-  }
-
-  .wkp-selected {
-    color: $brand-primary;
   }
 
   .rs-popup {

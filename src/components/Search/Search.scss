@@ -87,7 +87,7 @@
 
     :hover {
       .wkp-search-section-count {
-        color: $brand-primary;
+        color: $brand-primary-hover;
       }
     }
   }
@@ -110,7 +110,7 @@
     margin: 15px 15px 0;
 
     &.react-autosuggest__suggestion--highlighted {
-      color: $brand-primary;
+      color: $brand-primary-hover;
     }
 
     :hover {
