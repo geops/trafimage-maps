@@ -3,6 +3,30 @@
 .wkp-topic-menu {
   border-top-width: 0;
 
+  .wkp-topic-title,
+  .wkp-lock-icon,
+  .rs-layer-tree-item,
+  .wkp-info-topic-bt,
+  .wkp-info-layer-bt {
+    color: #888;
+
+    &.wkp-active {
+      color: #000;
+    }
+
+    &.wkp-selected {
+      color: $brand-primary-hover;
+    }
+  }
+
+  .wkp-info-topic-bt,
+  .wkp-info-layer-bt {
+    &.wkp-active:hover,
+    &:hover {
+      color: $brand-primary-hover;
+    }
+  }
+
   .wkp-topic-menu-item-wrapper {
     display: flex;
     align-items: center;
@@ -19,11 +43,6 @@
         display: flex;
         align-items: center;
         max-width: 300px;
-        color: #888;
-
-        &.wkp-active {
-          color: #000;
-        }
       }
 
       .wkp-topic-radio {
@@ -72,11 +91,6 @@
 
     .wkp-lock-icon {
       cursor: pointer;
-      color: #888;
-
-      &.wkp-active {
-        color: #000;
-      }
     }
 
     .wkp-lock-left {
@@ -86,15 +100,6 @@
     .wkp-info-topic-bt {
       display: flex;
       align-items: center;
-      color: #888;
-
-      &.wkp-active {
-        color: #000;
-      }
-
-      &.wkp-selected {
-        color: $brand-primary;
-      }
     }
   }
 
@@ -113,7 +118,6 @@
     }
 
     .rs-layer-tree-item {
-      color: #888;
       height: $menu-item-height;
       padding: 0;
       margin: 0 0 0 4px;

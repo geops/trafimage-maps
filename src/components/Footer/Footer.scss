@@ -27,30 +27,16 @@
     top: 0;
   }
 
-  a {
-    &:hover {
-      text-decoration: none;
-    }
-  }
-
   .tm-copyright {
     position: absolute;
     bottom: 42px;
     right: 5px;
-
-    a {
-      margin: 0;
-    }
   }
 
   .wkp-footer-right {
     a {
       margin: 0 10px;
       white-space: nowrap;
-
-      &:hover {
-        color: $brand-primary-hover;
-      }
     }
   }
 
