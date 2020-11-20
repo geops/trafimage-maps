@@ -1,9 +1,13 @@
-.wkp-link {
-  &:hover {
-    text-decoration: none !important;
 
-    span {
-      text-decoration: underline;
-    }
+.wkp-link {
+  span {
+    text-overflow: ellipsis;
+    max-width: 380px;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  svg {
+    height: 16px;
   }
 }

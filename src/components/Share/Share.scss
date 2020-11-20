@@ -9,6 +9,10 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+
+    svg:hover {
+      color: $brand-primary-hover;
+    }
   }
 
   .ta-mail-icon {
@@ -17,7 +21,7 @@
       align-items: center;
       justify-content: space-around;
 
-      svg {
+      & svg {
         font-size: 23px;
         margin-bottom: 2px;
       }

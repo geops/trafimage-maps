@@ -6,26 +6,6 @@
     margin-block-end: 0;
   }
 
-  a {
-    text-decoration: underline;
-  }
-
-  a.wkp-link {
-    text-decoration: none !important;
-  }
-
-  .wkp-link span {
-    text-decoration: underline;
-    text-overflow: ellipsis;
-    max-width: 380px;
-    overflow: hidden;
-    display: inline-block;
-  }
-
-  .wkp-link svg {
-    height: 16px;
-  }
-
   .wkp-handicap-popup-body {
     .wkp-handicap-popup-title {
       font-weight: bold;

@@ -33,25 +33,3 @@
     padding: 15px 10px 0 10px;
   }
 }
-
-.rt-route-schedule {
-  .rt-route-footer {
-    .rt-route-copyright {
-      font-size: 12px;
-
-      a {
-        color: #000;
-        text-decoration: none;
-
-        &:hover {
-          color: $brand-primary-hover;
-          text-decoration: none;
-        }
-
-        &:active {
-          color: $link-color-active;
-        }
-      }
-    }
-  }
-}
