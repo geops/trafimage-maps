@@ -5,8 +5,8 @@
 
   .wkp-topic-title,
   .wkp-lock-icon,
-  .wkp-info-topic-bt,
   .rs-layer-tree-item,
+  .wkp-info-topic-bt,
   .wkp-info-layer-bt {
     color: #888;
 
@@ -19,6 +19,7 @@
     }
   }
 
+  .wkp-info-topic-bt,
   .wkp-info-layer-bt {
     &:hover {
       color: $brand-primary-hover;
