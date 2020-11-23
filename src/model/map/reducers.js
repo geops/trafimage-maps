@@ -1,6 +1,3 @@
-import { Feature } from 'ol';
-import { Point } from 'ol/geom';
-import { fromLonLat } from 'ol/proj';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { VectorLayer } from 'mobility-toolbox-js/ol';
@@ -18,17 +15,13 @@ import {
 const drawLayer = new VectorLayer({
   name: 'Draw layer',
   key: 'draw',
+  isQueryable: false,
   properties: {
     hideInLegend: true,
-    popupComponent: 'BasicPopup',
   },
   olLayer: new OLVectorLayer({
     source: new VectorSource({
-      features: [
-        new Feature({
-          geometry: new Point(fromLonLat([8.1, 46.9])),
-        }),
-      ],
+      features: [],
     }),
     style: () => {
       return new Style({
