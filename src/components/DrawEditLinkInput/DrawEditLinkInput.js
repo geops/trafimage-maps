@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import qs from 'query-string';
 import { ReactComponent as Loader } from '../../img/loader.svg';
 import PermalinkInput from '../PermalinkInput';
+import { DRAW_PARAM, MAPSET_PARENT_PARAM } from '../../utils/constants';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -31,8 +32,8 @@ function DrawEditLinkInput() {
   // Get the mapset url
   const url = useMemo(() => {
     const params = qs.parse(window.location.search);
-    params['draw.id'] = drawIds.admin_id;
-    return `${mapsetUrl}?parent=${encodeURIComponent(
+    params[DRAW_PARAM] = drawIds.admin_id;
+    return `${mapsetUrl}?${MAPSET_PARENT_PARAM}=${encodeURIComponent(
       `${window.location.href.split('?')[0]}?${qs.stringify(params)}`,
     )}`;
   }, [drawIds, mapsetUrl]);

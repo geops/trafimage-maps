@@ -16,6 +16,7 @@ import {
   setLanguage,
   setDrawIds,
 } from '../../model/app/actions';
+import { DRAW_PARAM } from '../../utils/constants';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -114,7 +115,7 @@ class Permalink extends PureComponent {
       //     drawLayer.olLayer.getSource().addFeatures(features);
       //   });
     }
-    const drawId = parameters['draw.id'];
+    const drawId = parameters[DRAW_PARAM];
     if (drawId) {
       // Redirection to the old wkp to use the drawing tool.
       // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');

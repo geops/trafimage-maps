@@ -7,6 +7,7 @@ import { setDialogVisible } from '../../model/app/actions';
 import DrawButton from '../DrawButton';
 import { NAME } from '../DrawRemoveDialog';
 import DrawPermalinkButton from '../DrawPermalinkButton';
+import { ReactComponent as PencilAdd } from '../../img/pencil_add.svg';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +50,9 @@ function Draw() {
     <div className={classes.root}>
       <Grid container>
         <Grid item xs={12} className={classes.buttons}>
-          <DrawButton disabled={!!drawIds} />
+          <DrawButton disabled={!!drawIds}>
+            <PencilAdd focusable={false} />
+          </DrawButton>
           <DrawButton disabled={!drawIds} />
           <IconButton
             title={t('Open confirmation dialog to delete draw')}
@@ -65,7 +68,7 @@ function Draw() {
             }}
           />
         </Grid>
-        <Grid item xs={12} alignItems="center">
+        <Grid item xs={12}>
           <Typography variant="subtitle1" className={classes.caption}>
             <FaInfoCircle
               focusable={false}

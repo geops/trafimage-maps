@@ -62,7 +62,6 @@ const theme = createMuiTheme({
       size: 'small',
       disableRipple: true,
       disableFocusRipple: true,
-      disableElevation: true,
     },
     MuiButton: {
       variant: 'contained',

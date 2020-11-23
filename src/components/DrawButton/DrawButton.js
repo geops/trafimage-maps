@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { RiPencilFill } from 'react-icons/ri';
 import IconButton from '@material-ui/core/IconButton';
+import { ReactComponent as Pencil } from '../../img/pencil.svg';
 
 function DrawButton({ children, ...buttonProps }) {
   const mapsetUrl = useSelector((state) => state.app.mapsetUrl);
@@ -22,7 +22,7 @@ function DrawButton({ children, ...buttonProps }) {
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...buttonProps}
     >
-      {children || <RiPencilFill focusable={false} />}
+      {children || <Pencil focusable={false} />}
     </IconButton>
   );
 }
