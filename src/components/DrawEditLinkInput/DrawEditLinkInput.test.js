@@ -16,7 +16,9 @@ describe('DrawEditLinkInput', () => {
     test('return null if no admin_id value', () => {
       store = mockStore({
         map: {},
-        app: { drawIds: {} },
+        app: {
+          drawIds: {},
+        },
       });
       const component = renderer.create(
         <Provider store={store}>
@@ -51,5 +53,34 @@ describe('DrawEditLinkInput', () => {
     });
     wrapper.update();
     expect(wrapper.find('input').props().value).toBe('http://shortqux.ch/qur');
+    fetchMock.restore();
+  });
+
+  test('fails to fetch the shorten url and displays the url unshortened in an input', async () => {
+    store = mockStore({
+      map: {},
+      app: {
+        mapsetUrl: 'http://mapsetbar.ch',
+        shortenerUrl: 'http://shortenfoo.ch',
+        drawIds: { admin_id: 'foo' },
+      },
+    });
+    let wrapper;
+    await act(async () => {
+      fetchMock.once(
+        'http://shortenfoo.ch?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+        { error: 'Bad parameter' },
+      );
+      wrapper = mount(
+        <Provider store={store}>
+          <DrawEditLinkInput />
+        </Provider>,
+      );
+    });
+    wrapper.update();
+    expect(wrapper.find('input').props().value).toBe(
+      'http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+    );
+    fetchMock.restore();
   });
 });

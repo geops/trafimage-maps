@@ -40,8 +40,12 @@ function DrawEditLinkInput() {
 
   // Get the shortened url
   useEffect(() => {
+    if (!shortenerUrl) {
+      return () => {};
+    }
     setLoading(true);
-    fetch(`${shortenerUrl}?url=${url}`)
+    const abortController = new AbortController();
+    fetch(`${shortenerUrl}?url=${url}`, { signal: abortController.signal })
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
@@ -54,6 +58,9 @@ function DrawEditLinkInput() {
         setLoading(false);
         setShortenUrl(url);
       });
+    return () => {
+      abortController.abort();
+    };
   }, [url, shortenerUrl]);
 
   if (!drawIds || !drawIds.admin_id) {
