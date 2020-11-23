@@ -74,7 +74,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
           </IconButton>
           <div className={classes.content}>
             {/* We use a function to be able to get the proper window.location value. */}
-            {children && children(window.location.href)};
+            {children && children(window.location.href)}
           </div>
         </Popover>
       )}
