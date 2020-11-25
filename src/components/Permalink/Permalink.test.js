@@ -1,5 +1,6 @@
 import 'jest-canvas-mock';
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import thunk from 'redux-thunk';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -10,24 +11,28 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Map, View } from 'ol';
 import OLLayer from 'ol/layer/Layer';
+import fetchMock from 'fetch-mock';
 import Permalink from './Permalink';
 
 describe('Permalink', () => {
   const mockStore = configureStore([thunk]);
   let store;
+  let drawLayer;
 
   beforeEach(() => {
+    drawLayer = new Layer({
+      name: 'test',
+      olLayer: new OLLayer({ source: new VectorSource() }),
+      properties: {
+        description: 'description<br/>break',
+      },
+    });
     store = mockStore({
       map: {
-        drawLayer: new Layer({
-          name: 'test',
-          olLayer: new OLLayer({}),
-          properties: {
-            description: 'description<br/>break',
-          },
-        }),
+        drawLayer,
       },
       app: {
+        drawUrl: 'http://drawfoo.ch/',
         language: 'de',
         activeTopic: {
           key: 'topic',
@@ -103,5 +108,63 @@ describe('Permalink', () => {
     expect(window.location.search).toEqual(
       '?lang=de&layers=testlayer&publishedLineName=2068,3003',
     );
+  });
+
+  describe('shoud load kml if draw.id exists', () => {
+    test('shoud load kml if draw.id exists and if it is a admin_id.', async () => {
+      window.history.pushState({}, undefined, '/?lang=de&draw.id=foo');
+      expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
+      const drawIds = {
+        admin_id: 'qux',
+        file_id: 'quu',
+      };
+      let wrapper;
+      await act(async () => {
+        fetchMock.once('http://drawfoo.ch/foo', drawIds);
+        fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
+        wrapper = mount(
+          <Provider store={store}>
+            <Permalink />
+          </Provider>,
+        );
+      });
+      wrapper.update();
+      wrapper.update();
+      wrapper.update();
+      wrapper.update();
+      expect(window.location.search).toEqual(
+        '?draw.id=foo&lang=de&layers=testlayer',
+      );
+      expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
+      expect(store.getActions().pop()).toEqual({
+        data: drawIds,
+        type: 'SET_DRAW_IDS',
+      });
+      fetchMock.restore();
+    });
+
+    test('if it is a file_id.', async () => {
+      window.history.pushState({}, undefined, '/?lang=de&draw.id=quu');
+      expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
+      await act(async () => {
+        fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
+        mount(
+          <Provider store={store}>
+            <Permalink />
+          </Provider>,
+        );
+      });
+      expect(window.location.search).toEqual(
+        '?draw.id=quu&lang=de&layers=testlayer',
+      );
+      expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
+      expect(store.getActions().pop()).toEqual({
+        data: {
+          file_id: 'quu',
+        },
+        type: 'SET_DRAW_IDS',
+      });
+      fetchMock.restore();
+    });
   });
 });

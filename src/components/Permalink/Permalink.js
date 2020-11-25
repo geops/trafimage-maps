@@ -93,23 +93,18 @@ class Permalink extends PureComponent {
         .then((data) => {
           if (data && data.admin_id && data.file_id) {
             dispatchSetDrawIds(data);
-            // eslint-disable-next-line no-console
-            console.log('This is an admin id', data.admin_id, data.file_id);
             return fetch(drawUrl + data.file_id);
           }
 
           dispatchSetDrawIds({ file_id: drawId });
-          // eslint-disable-next-line no-console
-          console.log('This is an file id', data);
           return { text: () => data };
         })
         .then((response) => response.text())
         .then((kmlString) => {
-          // eslint-disable-next-line no-console
-          console.log(kmlString);
           const features = KML.readFeatures(
             kmlString,
             map.getView().getProjection(),
+            map.getView().getResolution(),
           );
           // eslint-disable-next-line no-console
           drawLayer.olLayer.getSource().clear(true);
