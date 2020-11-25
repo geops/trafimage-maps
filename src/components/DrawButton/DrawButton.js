@@ -15,6 +15,9 @@ function DrawButton({ children, ...buttonProps }) {
       size="medium"
       /* We use a function instead of href to be able to get the proper window.location value. */
       onClick={() => {
+        console.log(
+          `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
+        );
         window.open(
           `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
         );
