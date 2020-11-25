@@ -34,7 +34,7 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   departuresFilter: PropTypes.string,
   drawUrl: PropTypes.string,
-  // drawOldUrl: PropTypes.string,
+  drawOldUrl: PropTypes.string,
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   drawIds: PropTypes.object,
 
@@ -52,7 +52,7 @@ const defaultProps = {
   initialState: {},
   departuresFilter: undefined,
   drawUrl: undefined,
-  // drawOldUrl: undefined,
+  drawOldUrl: undefined,
   drawIds: undefined,
 };
 
@@ -69,7 +69,7 @@ class Permalink extends PureComponent {
       initialState,
       language,
       drawUrl,
-      // drawOldUrl,
+      drawOldUrl,
       drawLayer,
       map,
     } = this.props;
@@ -79,11 +79,12 @@ class Permalink extends PureComponent {
       ...initialState,
     };
 
-    const drawId = parameters[DRAW_PARAM];
+    const wkpDraw = parameters['wkp.draw'];
+    const drawId = parameters[DRAW_PARAM] || wkpDraw;
     if (drawId) {
       // Redirection to the old wkp to use the drawing tool.
       // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
-      fetch(`${drawUrl + drawId}`)
+      fetch(`${(wkpDraw ? drawOldUrl : drawUrl) + drawId}`)
         .then((response) =>
           response
             .clone()
@@ -93,7 +94,7 @@ class Permalink extends PureComponent {
         .then((data) => {
           if (data && data.admin_id && data.file_id) {
             dispatchSetDrawIds(data);
-            return fetch(drawUrl + data.file_id);
+            return fetch((wkpDraw ? drawOldUrl : drawUrl) + data.file_id);
           }
 
           dispatchSetDrawIds({ file_id: drawId });

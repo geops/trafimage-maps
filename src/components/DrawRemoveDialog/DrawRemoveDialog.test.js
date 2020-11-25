@@ -6,6 +6,7 @@ import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Vector';
+import { mount } from 'enzyme';
 import DrawRemoveDialog from '.';
 
 describe('DrawRemoveDialog', () => {
@@ -40,5 +41,14 @@ describe('DrawRemoveDialog', () => {
     );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  test('remove permalink on click on remove button', () => {
+    const wrapper = mount(
+      <Provider store={store}>
+        <DrawRemoveDialog />
+      </Provider>,
+    );
+    expect(wrapper.find('input').at(0).value).toBe();
   });
 });
