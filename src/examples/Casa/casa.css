@@ -14,7 +14,6 @@ https://github.com/oterral/angular-react-test
   border: 1px solid #444;
   box-shadow: none;
   margin: 0;
-  z-index: 10000;
   position: absolute;
   right: 0;
 }
@@ -50,7 +49,14 @@ https://github.com/oterral/angular-react-test
   border: 1px solid #4576a2;
   box-shadow: none;
   color: #4576a2;
-  z-index: 99999;
+}
+
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-in:hover {
+  border-bottom: 1px solid #444;
+}
+
+.casa div.tm-trafimage-maps .wkp-map-controls .rs-zooms-bar .rs-zoom-out:hover {
+  border-top: 1px solid #444;
 }
 
 .casa div.tm-trafimage-maps .wkp-map-controls .wkp-fit-extent svg path {
