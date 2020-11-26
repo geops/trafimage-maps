@@ -252,7 +252,7 @@ describe('RouteLayer', () => {
     expect(layer.selectedRouteIds).toEqual([]);
   });
 
-  test.only('shoud open a popup if popupContent is defined', async () => {
+  test('shoud open a popup if popupContent is defined', async () => {
     jest.spyOn(Map.prototype, 'getFeaturesAtPixel').mockReturnValue([feature]);
     jest.spyOn(Map.prototype, 'hasFeatureAtPixel').mockReturnValue(true);
 
