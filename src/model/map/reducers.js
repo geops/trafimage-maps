@@ -1,9 +1,4 @@
-import OLVectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { VectorLayer } from 'mobility-toolbox-js/ol';
-import Style from 'ol/style/Style';
-import Fill from 'ol/style/Fill';
-import Circle from 'ol/style/Circle';
+import DrawLayer from '../../layers/DrawLayer';
 import {
   SET_LAYERS,
   SET_CENTER,
@@ -12,30 +7,7 @@ import {
   SET_MAX_EXTENT,
 } from './actions';
 
-const drawLayer = new VectorLayer({
-  name: 'Draw layer',
-  key: 'draw',
-  isQueryable: false,
-  properties: {
-    hideInLegend: true,
-  },
-  olLayer: new OLVectorLayer({
-    source: new VectorSource({
-      features: [],
-    }),
-    style: () => {
-      return new Style({
-        zIndex: 10000,
-        image: new Circle({
-          radius: 15,
-          fill: new Fill({
-            color: 'rgba(0, 61, 133, 0.8)',
-          }),
-        }),
-      });
-    },
-  }),
-});
+const drawLayer = new DrawLayer();
 
 const initialState = {
   layers: [drawLayer],
