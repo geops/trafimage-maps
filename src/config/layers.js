@@ -546,7 +546,7 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'netzkarte_personenverkehr',
+  style: 'base_bright_v2',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte-desc',
