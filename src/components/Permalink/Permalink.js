@@ -16,7 +16,7 @@ import {
   setLanguage,
   setDrawIds,
 } from '../../model/app/actions';
-import { DRAW_PARAM } from '../../utils/constants';
+import { DRAW_PARAM, DRAW_OLD_PARAM } from '../../utils/constants';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -79,7 +79,7 @@ class Permalink extends PureComponent {
       ...initialState,
     };
 
-    const wkpDraw = parameters['wkp.draw'];
+    const wkpDraw = parameters[DRAW_OLD_PARAM];
     const drawId = parameters[DRAW_PARAM] || wkpDraw;
     if (drawId) {
       // Redirection to the old wkp to use the drawing tool.
@@ -241,9 +241,23 @@ class Permalink extends PureComponent {
 
   updateDrawIds() {
     const { drawIds } = this.props;
-    this.setState({
-      [DRAW_PARAM]: drawIds && (drawIds.adminId || drawIds.file_id),
-    });
+    let newState;
+
+    // only for wkp dra wmanagement
+    const parameters = {
+      ...qs.parse(window.location.search),
+    };
+    const drawParam = drawIds && (drawIds.admin_id || drawIds.file_id);
+    const wkpDraw = parameters[DRAW_OLD_PARAM];
+    const drawId = parameters[DRAW_PARAM];
+    if (wkpDraw && !drawId) {
+      newState = { [DRAW_OLD_PARAM]: drawParam };
+    } else {
+      newState = {
+        [DRAW_PARAM]: drawParam,
+      };
+    }
+    this.setState(newState);
   }
 
   updateDepartures() {
@@ -261,14 +275,12 @@ class Permalink extends PureComponent {
   }
 
   render() {
-    const { history, layerService, map, drawIds } = this.props;
+    const { history, layerService, map } = this.props;
 
     return (
       <RSPermalink
         params={{
           ...this.state,
-          'wkp.draw':
-            (drawIds && (drawIds.admin_id || drawIds.file_id)) || undefined,
         }}
         map={map}
         layerService={layerService}
