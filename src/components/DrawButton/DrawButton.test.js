@@ -50,6 +50,7 @@ describe('DrawButton', () => {
       .simulate('click', { target: { name: 'width', value: 50 } });
     expect(global.window.open).toBeCalledWith(
       'foo.mapset.ch?parent=http%3A%2F%2Flocalhost%2F',
+      '_self',
     );
   });
 });

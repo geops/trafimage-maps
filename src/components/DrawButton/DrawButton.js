@@ -15,11 +15,10 @@ function DrawButton({ children, ...buttonProps }) {
       size="medium"
       /* We use a function instead of href to be able to get the proper window.location value. */
       onClick={() => {
-        console.log(
-          `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
-        );
+        // window.open is esaier to test.
         window.open(
           `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
+          '_self',
         );
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
