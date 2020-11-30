@@ -258,11 +258,14 @@ describe('RouteLayer', () => {
 
     const topicConf = [{ ...casa, layers: [layer] }];
     const component = mount(<TrafimageMaps topics={topicConf} apiKey="test" />);
+    const compMapWrap = component.find('Map');
     const compMap = component.find('Map').props().map;
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
+    const spyPointerMove = jest.spyOn(compMapWrap.instance(), 'onPointerMove');
     const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };
     await compMap.dispatchEvent(evt);
     await Promise.all(spy.mock.results.map((r) => r.value));
+    await spyPointerMove;
     component.update();
 
     expect(component.find('.wkp-casa-route-popup').text()).toBe(
