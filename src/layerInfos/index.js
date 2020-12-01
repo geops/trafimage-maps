@@ -16,10 +16,6 @@ import RegionenkartePrivateTopicInfo from './RegionenkartePrivateTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
-import ZweitausbildungLayerInfo from './ZweitausbildungLayerInfo';
-import ZweitausbildungRoutesSubLayerInfo from './ZweitausbildungRoutesSubLayerInfo';
-import ZweitausbildungSubLayerInfo from './ZweitausbildungSubLayerInfo';
-import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
 
 export default {
   BehigLayerInfo,
@@ -40,8 +36,4 @@ export default {
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,
-  ZweitausbildungLayerInfo,
-  ZweitausbildungRoutesSubLayerInfo,
-  ZweitausbildungSubLayerInfo,
-  ZweitausbildungTopicInfo,
 };
