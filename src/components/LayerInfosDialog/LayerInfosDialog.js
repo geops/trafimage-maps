@@ -49,6 +49,7 @@ function LayerInfosDialog(props) {
       typeof component === 'string' ? layerInfos[component] : component;
     body = (
       <LayerInfoComponent
+        t={t}
         language={language}
         properties={selectedForInfos}
         staticFilesUrl={staticFilesUrl}
