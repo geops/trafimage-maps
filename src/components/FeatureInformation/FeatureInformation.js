@@ -49,6 +49,13 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     return null;
   }
 
+  const closePopup = () => {
+    dispatch(setFeatureInfo([]));
+    if (PopupComponent.onCloseBtClick) {
+      PopupComponent.onCloseBtClick();
+    }
+  };
+
   let pagination = null;
   const { layer } = info;
 
@@ -99,12 +106,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             <Button
               className="wkp-close-bt"
               title={t('Popup schliessen')}
-              onClick={() => {
-                dispatch(setFeatureInfo([]));
-                if (PopupComponent.onCloseBtClick) {
-                  PopupComponent.onCloseBtClick();
-                }
-              }}
+              onClick={closePopup}
             >
               <MdClose focusable={false} alt={t('Popup schliessen')} />
             </Button>
@@ -119,6 +121,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
+            closePopup={closePopup}
           />
           {pagination}
         </div>
