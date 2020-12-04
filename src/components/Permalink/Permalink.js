@@ -102,11 +102,19 @@ class Permalink extends PureComponent {
         })
         .then((response) => response.text())
         .then((kmlString) => {
+          // Old trafimage generates absolute urls in the kml for SBB images.
+          // So we replace all of them by the complete url to old trafimage.
+          const newKmlString = kmlString.replace(
+            />static\/app_trafimage/g,
+            `>https://maps.trafimage.ch/static/app_trafimage`,
+          );
+
           const features = KML.readFeatures(
-            kmlString,
+            newKmlString,
             map.getView().getProjection(),
             map.getView().getResolution(),
           );
+
           // eslint-disable-next-line no-console
           drawLayer.olLayer.getSource().clear(true);
           drawLayer.olLayer.getSource().addFeatures(features);
