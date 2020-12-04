@@ -101,10 +101,16 @@ class Permalink extends PureComponent {
           return { text: () => data };
         })
         .then((response) => response.text())
-        .then((kmlString) => {
+        .then((data) => {
+          if (data && data.error) {
+            // eslint-disable-next-line no-console
+            console.warn(`The KML ${drawId} can't be loaded:`, data.error);
+            return;
+          }
+          // TO REMOVE. This will be fixed during migration of kmls
           // Old trafimage generates absolute urls in the kml for SBB images.
           // So we replace all of them by the complete url to old trafimage.
-          const newKmlString = kmlString.replace(
+          const newKmlString = data.replace(
             />static\/app_trafimage/g,
             `>https://maps.trafimage.ch/static/app_trafimage`,
           );
