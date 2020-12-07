@@ -3,18 +3,15 @@ import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'lodash/fp';
 import PropTypes from 'prop-types';
-import { FaInfoCircle, FaLock } from 'react-icons/fa';
+import { FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
-import Button from '@geops/react-ui/components/Button';
 import Collapsible from '../Collapsible';
 import filters from '../../filters';
-import {
-  setActiveTopic,
-  setSelectedForInfos,
-  setFeatureInfo,
-} from '../../model/app/actions';
+import { setActiveTopic, setFeatureInfo } from '../../model/app/actions';
+import InfosButton from '../InfosButton';
+import TopicInfosButton from '../TopicInfosButton';
 
 const propTypes = {
   topic: PropTypes.shape().isRequired,
@@ -23,18 +20,12 @@ const propTypes = {
   // mapStateToProps
   menuOpen: PropTypes.bool.isRequired,
   activeTopic: PropTypes.shape().isRequired,
-  selectedForInfos: PropTypes.object,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
-  dispatchSetSelectedForInfos: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
-};
-
-const defaultProps = {
-  selectedForInfos: null,
 };
 
 class TopicMenu extends PureComponent {
@@ -114,38 +105,6 @@ class TopicMenu extends PureComponent {
     }
   }
 
-  renderInfoButton(selectedInfo) {
-    const {
-      t,
-      activeTopic,
-      selectedForInfos,
-      dispatchSetSelectedForInfos,
-    } = this.props;
-    const isLayerButton = selectedInfo.isReactSpatialLayer;
-    const isSelected = selectedForInfos === selectedInfo;
-
-    let className;
-    if (isLayerButton) {
-      className = `wkp-info-layer-bt${isSelected ? ' wkp-selected' : ''}`;
-    } else {
-      className = `wkp-info-topic-bt${
-        activeTopic.key === selectedInfo.key ? ' wkp-active' : ''
-      }${isSelected ? ' wkp-selected' : ''}`;
-    }
-
-    return (
-      <Button
-        className={className}
-        title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
-        onClick={() => {
-          dispatchSetSelectedForInfos(isSelected ? null : selectedInfo);
-        }}
-      >
-        <FaInfoCircle focusable={false} />
-      </Button>
-    );
-  }
-
   renderLockIcon(topic, isInfo) {
     const { activeTopic, t } = this.props;
 
@@ -191,7 +150,7 @@ class TopicMenu extends PureComponent {
                 {layer.renderItemContent
                   ? layer.renderItemContent(layerTreeComp)
                   : layerTreeComp.renderItemContent(layer)}
-                {layer.get('hasInfos') && this.renderInfoButton(layer)}
+                {layer.get('hasInfos') && <InfosButton selectedInfo={layer} />}
               </>
             )}
             renderAfterItem={(layer, level) => {
@@ -259,8 +218,9 @@ class TopicMenu extends PureComponent {
               )}
             {menuOpen &&
               topic &&
-              (topic.description || topic.layerInfoComponent) &&
-              this.renderInfoButton(topic)}
+              (topic.description || topic.layerInfoComponent) && (
+                <TopicInfosButton topic={topic} />
+              )}
           </div>
         </div>
         <div className="wkp-topic-content">
@@ -296,19 +256,16 @@ class TopicMenu extends PureComponent {
   }
 }
 
-TopicMenu.defaultProps = defaultProps;
 TopicMenu.propTypes = propTypes;
 
 const mapStateToProps = (state) => ({
   menuOpen: state.app.menuOpen,
   map: state.app.map,
   activeTopic: state.app.activeTopic,
-  selectedForInfos: state.app.selectedForInfos,
 });
 
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
-  dispatchSetSelectedForInfos: setSelectedForInfos,
   dispatchSetFeatureInfo: setFeatureInfo,
 };
 

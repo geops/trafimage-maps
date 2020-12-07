@@ -2,5 +2,13 @@
   .wkp-layer-tree,
   .wkp-layer-tree .rs-layer-tree-item {
     margin: 0;
+
+    .rs-layer-tree-toggle {
+      max-width: none;
+    }
+
+    .rs-checkbox {
+      margin-right: 7px;
+    }
   }
 }

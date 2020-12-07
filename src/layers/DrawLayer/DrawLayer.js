@@ -11,8 +11,10 @@ class DrawLayer extends VectorLayer {
       name: 'Draw layer',
       key: 'draw',
       properties: {
+        hasInfos: true,
         hideInLegend: true,
         popupComponent: 'DrawPopup',
+        layerInfoComponent: 'DrawLayerInfo',
       },
       olLayer: new OLVectorLayer({
         source: new VectorSource({

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import LayerTree from 'react-spatial/components/LayerTree';
+import InfosButton from '../InfosButton';
 
 function DrawLayerMenu() {
   const { t } = useTranslation();
@@ -25,6 +26,14 @@ function DrawLayerMenu() {
       <div className="wkp-layer-tree">
         <LayerTree
           isItemHidden={(layer) => layer !== drawLayer}
+          renderItemContent={(layer, layerTreeComp) => (
+            <>
+              {layer.renderItemContent
+                ? layer.renderItemContent(layerTreeComp)
+                : layerTreeComp.renderItemContent(layer)}
+              {layer.get('hasInfos') && <InfosButton selectedInfo={layer} />}
+            </>
+          )}
           layerService={layerService}
           titles={titles}
           t={t}

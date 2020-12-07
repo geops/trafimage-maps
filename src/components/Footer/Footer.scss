@@ -34,9 +34,10 @@
   }
 
   .wkp-footer-right {
-    a {
+    a:not(.MuiIconButton-root) {
       margin: 0 10px;
       white-space: nowrap;
+      text-decoration: none;
     }
   }
 

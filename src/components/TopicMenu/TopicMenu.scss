@@ -6,8 +6,7 @@
   .wkp-topic-title,
   .wkp-lock-icon,
   .rs-layer-tree-item,
-  .wkp-info-topic-bt,
-  .wkp-info-layer-bt {
+  .wkp-info-bt {
     color: #888;
 
     &.wkp-active {
@@ -19,8 +18,7 @@
     }
   }
 
-  .wkp-info-topic-bt,
-  .wkp-info-layer-bt {
+  .wkp-info-bt {
     &.wkp-active:hover,
     &:hover {
       color: $brand-primary-hover;
@@ -111,7 +109,7 @@
       overflow: hidden;
     }
 
-    .wkp-info-layer-bt {
+    .wkp-info-bt {
       height: 14px;
       width: 14px;
       margin-right: 0;

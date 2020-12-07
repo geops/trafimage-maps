@@ -4,6 +4,7 @@ import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
 import ConstructionFertigstellungLayerInfo from './ConstructionFertigstellungLayerInfo';
+import DrawLayerInfo from './DrawLayerInfo';
 import HandicapTopicInfo from './HandicapTopicInfo';
 import HandicapLayerInfo from './HandicapLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
@@ -28,6 +29,7 @@ export default {
   ConstructionLayerInfo,
   ConstructionTopicInfo,
   ConstructionFertigstellungLayerInfo,
+  DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
   InfrastrukturTopicInfo,
