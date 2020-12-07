@@ -32,31 +32,14 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo
-    .map((featInfo) => {
-      const { options } = featInfo.layer;
-      const modifyPopupFeatures =
-        options && options.properties && options.properties.modifyPopupFeatures;
-      if (modifyPopupFeatures) {
-        return modifyPopupFeatures(featInfo.features);
-      }
-      return featInfo.features;
-    })
-    .flat();
+  const features = featureInfo.map((featInfo) => featInfo.features).flat();
 
   const feature = features[featureIndex];
   if (!feature) {
     return null;
   }
-  const info = featureInfo.find((i) => {
-    const { options } = i.layer;
-    const modifyPopupFeatures =
-      options && options.properties && options.properties.modifyPopupFeatures;
-    if (modifyPopupFeatures) {
-      return i.features.includes(feature.get('features')[0]);
-    }
-    return i.features.includes(feature);
-  });
+
+  const info = featureInfo.find((i) => i.features.includes(feature));
   if (!info || !info.layer) {
     return null;
   }
