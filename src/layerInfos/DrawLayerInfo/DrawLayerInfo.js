@@ -25,8 +25,8 @@ const descr = {
 
   it: (
     <>
-      Bei diesem Layer handelt es sich um eine in {linkMapset} erstellte
-      Zeichnung. Der Layer bleibt beim Wechsel des Kartenthemas erhalten.
+      Questo strato è stato creato in {linkMapset}. Lo strato è mantenuto quando
+      il tema della mappa viene modificato.
     </>
   ),
 };
