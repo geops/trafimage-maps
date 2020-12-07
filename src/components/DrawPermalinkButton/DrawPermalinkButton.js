@@ -45,7 +45,7 @@ function DrawPermalinkButton({ buttonProps }) {
                 )}: `}</Typography>
                 <Typography gutterBottom>
                   {t(
-                    'Damit Sie Ihre Zeichnung erneut bearbeiten können Sie diese Link speichern.',
+                    'Damit sie ihre Zeichnung erneut bearbeiten können, müssen sie diesen Link speichern.',
                   )}
                 </Typography>
                 <DrawEditLinkInput />

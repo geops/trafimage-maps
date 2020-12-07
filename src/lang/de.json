@@ -179,7 +179,7 @@
   "ch.sbb.zweitausbildung.tourist.routes.group": "Touristische Strecken",
   "ch.sbb.zweitausbildung.tourist.routes.group-desc": "Die Touristischen Strecken umfassen alle Panorama-Strecken sowie weitere touristisch attraktive Zugstrecken.",
   "connection_plural": "Verbindung",
-  "Damit Sie Ihre Zeichnung erneut bearbeiten können Sie diese Link speichern.": "Damit Sie Ihre Zeichnung erneut bearbeiten können Sie diese Link speichern.",
+  "Damit sie ihre Zeichnung erneut bearbeiten können, müssen sie diesen Link speichern.": "Damit sie ihre Zeichnung erneut bearbeiten können, müssen sie diesen Link speichern.",
   "departure_url": "http://fahrplan.sbb.ch/bin/stboard.exe/dn?boardType=dep&editStation=yes&input={stationname}&start=yes",
   "Der barrierefreie Umbau der Gleise 1 & 2 dauert bis 2025": "Der Umbau der Gleise 1 & 2 dauert bis 2025",
   "didok": "DIDOK",

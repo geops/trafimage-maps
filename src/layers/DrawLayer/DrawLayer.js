@@ -1,8 +1,5 @@
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import Style from 'ol/style/Style';
-import Fill from 'ol/style/Fill';
-import Circle from 'ol/style/Circle';
 import { VectorLayer } from 'mobility-toolbox-js/ol';
 
 class DrawLayer extends VectorLayer {
@@ -17,20 +14,10 @@ class DrawLayer extends VectorLayer {
         layerInfoComponent: 'DrawLayerInfo',
       },
       olLayer: new OLVectorLayer({
+        zIndex: 10, // On top of the layers
         source: new VectorSource({
           features: [],
         }),
-        style: () => {
-          return new Style({
-            zIndex: 10000,
-            image: new Circle({
-              radius: 15,
-              fill: new Fill({
-                color: 'rgba(0, 61, 133, 0.8)',
-              }),
-            }),
-          });
-        },
       }),
       ...options,
     });
