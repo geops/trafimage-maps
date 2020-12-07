@@ -29,7 +29,6 @@ function InfosButton({ selectedInfo, className }) {
       className={classNam}
       title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
       onClick={() => {
-        console.log('isSelected', isSelected);
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
       }}
     >
