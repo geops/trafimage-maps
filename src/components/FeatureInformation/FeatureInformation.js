@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Feature } from 'ol';
 import Button from '@geops/react-ui/components/Button';
 import { MdClose } from 'react-icons/md';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
@@ -36,13 +35,10 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const features = featureInfo
     .map((featInfo) => {
       const { options } = featInfo.layer;
-      const mergeLayerFeatures =
-        options && options.properties && options.properties.mergeLayerFeatures;
-
-      if (mergeLayerFeatures) {
-        return new Feature({
-          features: featInfo.features,
-        });
+      const modifyPopupFeatures =
+        options && options.properties && options.properties.modifyPopupFeatures;
+      if (modifyPopupFeatures) {
+        return modifyPopupFeatures(featInfo.features);
       }
       return featInfo.features;
     })
@@ -54,9 +50,9 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   }
   const info = featureInfo.find((i) => {
     const { options } = i.layer;
-    const mergeLayerFeatures =
-      options && options.properties && options.properties.mergeLayerFeatures;
-    if (mergeLayerFeatures) {
+    const modifyPopupFeatures =
+      options && options.properties && options.properties.modifyPopupFeatures;
+    if (modifyPopupFeatures) {
       return i.features.includes(feature.get('features')[0]);
     }
     return i.features.includes(feature);
