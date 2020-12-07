@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { Feature } from 'ol';
 import Button from '@geops/react-ui/components/Button';
 import { MdClose } from 'react-icons/md';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
@@ -32,7 +33,22 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo.map((l) => l.features).flat();
+  const features = featureInfo
+    .map((featInfo) => {
+      const { options } = featInfo.layer;
+      if (
+        options &&
+        options.properties &&
+        options.properties.mergeLayerFeatures
+      ) {
+        return new Feature({
+          features: featInfo.features,
+        });
+      }
+      return featInfo.features;
+    })
+    .flat();
+
   const feature = features[featureIndex];
   if (!feature) {
     return null;
