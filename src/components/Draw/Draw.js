@@ -53,9 +53,9 @@ function Draw() {
           <DrawButton disabled={!!drawIds}>
             <PencilAdd focusable={false} />
           </DrawButton>
-          <DrawButton disabled={!drawIds} />
+          <DrawButton disabled={!drawIds} title={t('Zeichnung bearbeiten')} />
           <IconButton
-            title={t('Open confirmation dialog to delete draw')}
+            title={t('Zeichnung löschen')}
             onClick={onRemoveClick}
             disabled={!drawIds}
           >
@@ -63,7 +63,7 @@ function Draw() {
           </IconButton>
           <DrawPermalinkButton
             buttonProps={{
-              title: t('Draw permalink generieren'),
+              title: t('Zeichnung teilen'),
               disabled: !drawIds,
             }}
           />

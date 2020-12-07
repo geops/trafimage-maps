@@ -11,7 +11,7 @@ function DrawButton({ children, ...buttonProps }) {
 
   return (
     <IconButton
-      title={t('Zeichnen')}
+      title={t('Neue Zeichnung')}
       size="medium"
       /* We use a function instead of href to be able to get the proper window.location value. */
       onClick={() => {

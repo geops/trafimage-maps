@@ -22,7 +22,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
           className="tm-header-left"
         />
         <span>
-          Zeichnung  löschen
+          Zeichnung löschen
         </span>
         <div
           aria-label="Dialog schließen"

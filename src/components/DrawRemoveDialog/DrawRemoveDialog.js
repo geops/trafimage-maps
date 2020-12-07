@@ -48,7 +48,7 @@ function DrawRemoveDialog() {
     <Dialog
       isModal
       name={NAME}
-      title={<span>{t('Zeichnung  löschen')}</span>}
+      title={<span>{t('Zeichnung löschen')}</span>}
       className={`tm-dialog-container ${classes.dialogContainer}`}
       body={
         <div>
