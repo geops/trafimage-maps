@@ -36,11 +36,10 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const features = featureInfo
     .map((featInfo) => {
       const { options } = featInfo.layer;
-      if (
-        options &&
-        options.properties &&
-        options.properties.mergeLayerFeatures
-      ) {
+      const mergeLayerFeatures =
+        options && options.properties && options.properties.mergeLayerFeatures;
+
+      if (mergeLayerFeatures) {
         return new Feature({
           features: featInfo.features,
         });
@@ -53,8 +52,15 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   if (!feature) {
     return null;
   }
-
-  const info = featureInfo.find((i) => i.features.includes(feature));
+  const info = featureInfo.find((i) => {
+    const { options } = i.layer;
+    const mergeLayerFeatures =
+      options && options.properties && options.properties.mergeLayerFeatures;
+    if (mergeLayerFeatures) {
+      return i.features.includes(feature.get('features')[0]);
+    }
+    return i.features.includes(feature);
+  });
   if (!info || !info.layer) {
     return null;
   }
