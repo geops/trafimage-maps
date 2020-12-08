@@ -32,7 +32,8 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo.map((l) => l.features).flat();
+  const features = featureInfo.map((featInfo) => featInfo.features).flat();
+
   const feature = features[featureIndex];
   if (!feature) {
     return null;
