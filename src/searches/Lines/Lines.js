@@ -77,9 +77,7 @@ class Lines extends Search {
       const [, line, km, kmEnd] = value.match(lineMeasuresRegExp);
       params = `line=${line}&km=${km}&km_end=${kmEnd}`;
     }
-    return fetch(
-      `${process.env.REACT_APP_TRAFIMAGE_API_URL}/search/lines?${params}`,
-    )
+    return fetch(`${process.env.REACT_APP_SEARCH_URL}/search/lines?${params}`)
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
       .catch(() => {

@@ -7,7 +7,7 @@ class Locations extends Search {
   search(value) {
     return fetch(
       `${
-        process.env.REACT_APP_TRAFIMAGE_API_URL
+        process.env.REACT_APP_SEARCH_URL
       }/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
         value,
       )}`,

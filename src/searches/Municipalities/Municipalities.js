@@ -13,7 +13,7 @@ class Municipalities extends Search {
   search(value) {
     return fetch(
       `${
-        process.env.REACT_APP_TRAFIMAGE_API_URL
+        process.env.REACT_APP_SEARCH_URL
       }/search/municipalities?query=${encodeURIComponent(
         value,
       )}&utf8=%E2%9C%93`,
