@@ -6,7 +6,9 @@ class Locations extends Search {
   // eslint-disable-next-line class-methods-use-this
   search(value) {
     return fetch(
-      `https://maps.trafimage.ch/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
+      `${
+        process.env.REACT_APP_TRAFIMAGE_API_URL
+      }/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
         value,
       )}`,
     )
