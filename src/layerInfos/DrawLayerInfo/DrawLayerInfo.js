@@ -1,7 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const linkMapset = <a href="https://mapset.ch">mapset</a>;
+const linkMapset = (
+  <a href="https://mapset.ch" target="_blank" rel="noopener noreferrer">
+    mapset
+  </a>
+);
 const descr = {
   de: (
     <>
