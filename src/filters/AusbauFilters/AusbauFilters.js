@@ -43,7 +43,7 @@ const AusbauFilters = ({ layer }) => {
     [layer, setValue],
   );
 
-  if (!layer || !layer.showFilterParam) {
+  if (!layer || typeof layer.showFilterParam !== 'string') {
     return null;
   }
 
