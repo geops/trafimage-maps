@@ -136,7 +136,6 @@ dataLayer.on('load', () => {
 export const netzkarteLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.layer',
   key: 'ch.sbb.netzkarte',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
@@ -512,7 +511,6 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
 
 export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
@@ -526,7 +524,6 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
 
 export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.light',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: true,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
@@ -541,7 +538,6 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.layer',
   key: 'ch.sbb.netzkarte',
-  copyright: '© OpenStreetMap contributors, OpenMapTiles, imagico, SBB/CFF/FFS',
   visible: false,
   isQueryable: false,
   preserveDrawingBuffer: true,
