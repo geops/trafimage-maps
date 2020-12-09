@@ -49,13 +49,13 @@ describe('AusbauFilters', () => {
   });
 
   describe('#addDynamicFilters()', () => {
-    test('does nothing if showFilterParam == false', () => {
+    test('uses the default filter if showFilterParam == false', () => {
       expect(style.layers[0].filter).toBe();
       layer.addDynamicFilters();
-      expect(style.layers[0].filter).toBe();
+      expect(style.layers[0].filter).toEqual(['all', dfltFilter]);
     });
 
-    test.only('apply default filter if showFilterParam == true', () => {
+    test('apply default filter if showFilterParam == true', () => {
       layer.showFilterParam = 'true';
       expect(style.layers[0].filter).toBe();
 
@@ -103,7 +103,11 @@ describe('AusbauFilters', () => {
         'all',
         ['==', '', ['get', 'angebotsschritt']],
       ]);
-      expect(style.layers[1].filter).toEqual(['all', ['==', 'type', 'ausbau']]);
+      expect(style.layers[1].filter).toEqual([
+        'all',
+        ['==', 'type', 'ausbau'],
+        dfltFilter,
+      ]);
       expect(style.layers[2].filter).toBe();
     });
   });
