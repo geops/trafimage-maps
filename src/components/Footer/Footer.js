@@ -14,7 +14,6 @@ import './Footer.scss';
 const Footer = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const layerService = useSelector((state) => state.app.layerService);
   const map = useSelector((state) => state.app.map);
   const projection = useSelector((state) => state.app.projection);
 
@@ -45,7 +44,7 @@ const Footer = () => {
     <UIFooter className="wkp-footer">
       <div className="wkp-footer-left">
         <Copyright
-          layerService={layerService}
+          map={map}
           format={(f) => `${t('Geodaten')} ${f.join(', ')}`}
           className="tm-copyright"
         />

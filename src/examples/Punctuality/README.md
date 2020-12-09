@@ -6,9 +6,7 @@ This example shows how to integrate punctuality information in your map applicat
 import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
-import defaultBaseLayers, {
-  buslines,
-} from 'trafimage-maps/examples/Punctuality/layers';
+import defaultBaseLayers from 'trafimage-maps/examples/Punctuality/layers';
 import defaultSearches from 'trafimage-maps/config/searches';
 
 // The `apiKey` used here is for demonstration purposes only.
@@ -40,7 +38,6 @@ const App = () => {
             operator: 'SBB', // To filter operator
             publishedLineName: 's1,s2,s9,s10,s15', // To filter line number
           }),
-          buslines,
         ],
         elements: {
           footer: true,

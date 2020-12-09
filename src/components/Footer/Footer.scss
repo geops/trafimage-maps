@@ -44,6 +44,11 @@
   .wkp-footer-right {
     display: flex;
     align-items: center;
+
+    a:not(.MuiIconButton-root) {
+      white-space: nowrap;
+      text-decoration: none;
+    }
   }
 
   .rs-scale-line {
