@@ -36,8 +36,6 @@
   .wkp-footer-right {
     a:not(.MuiIconButton-root) {
       margin: 0 10px;
-      white-space: nowrap;
-      text-decoration: none;
     }
   }
 
@@ -45,6 +43,11 @@
   .wkp-footer-right {
     display: flex;
     align-items: center;
+
+    a:not(.MuiIconButton-root) {
+      white-space: nowrap;
+      text-decoration: none;
+    }
   }
 
   .rs-scale-line {

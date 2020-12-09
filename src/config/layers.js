@@ -151,7 +151,6 @@ export const netzkarteLayer = new MapboxStyleLayer({
 export const swisstopoSwissImage = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.luftbild.group',
   key: 'ch.sbb.netzkarte.luftbild.group',
-  copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
@@ -166,7 +165,6 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
 
 export const swisstopoLandeskarte = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte',
-  copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
@@ -181,7 +179,6 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
 
 export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte.grau',
-  copyright: 'swisstopo (5704003351)',
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
