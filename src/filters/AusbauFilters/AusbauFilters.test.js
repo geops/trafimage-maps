@@ -24,7 +24,7 @@ describe('AusbauFilters', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    test('if showFilterParam is false, should display null.', () => {
+    test('if showFilterParam is undefined or null, should display null.', () => {
       const component = renderer.create(
         <ThemeProvider theme={theme}>
           <AusbauFilters layer={layer} />
@@ -34,8 +34,19 @@ describe('AusbauFilters', () => {
       expect(tree).toMatchSnapshot();
     });
 
-    test('if showFilterParam is true, should display a select box', () => {
+    test('if showFilterParam is true, should display a select box.', () => {
       layer.showFilterParam = 'true';
+      const component = renderer.create(
+        <ThemeProvider theme={theme}>
+          <AusbauFilters layer={layer} />
+        </ThemeProvider>,
+      );
+      const tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
+
+    test('if showFilterParam is an empty string, should display a select box.', () => {
+      layer.showFilterParam = '';
       const component = renderer.create(
         <ThemeProvider theme={theme}>
           <AusbauFilters layer={layer} />
