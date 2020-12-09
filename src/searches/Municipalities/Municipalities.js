@@ -12,7 +12,9 @@ class Municipalities extends Search {
   // eslint-disable-next-line class-methods-use-this
   search(value) {
     return fetch(
-      `https://maps.trafimage.ch/search/municipalities?query=${encodeURIComponent(
+      `${
+        process.env.REACT_APP_SEARCH_URL
+      }/search/municipalities?query=${encodeURIComponent(
         value,
       )}&utf8=%E2%9C%93`,
     )
