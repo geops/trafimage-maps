@@ -17,7 +17,7 @@ describe('Barrierfree E2E', () => {
   it('should be able to navigate between menu and dialog with Tab.', () => {
     // Move focus from menu to layer information button.
     cy.tab().tab();
-    cy.focused().should('have.attr', 'class', 'wkp-info-topic-bt wkp-active');
+    cy.focused().should('have.attr', 'class', 'wkp-info-bt wkp-active');
 
     // Press enter and focus dialog closer.
     cy.focused().type('{enter}');
@@ -25,6 +25,6 @@ describe('Barrierfree E2E', () => {
 
     // Closer dialog and focus back on the information button.
     cy.focused().type('{enter}');
-    cy.focused().should('have.attr', 'class', 'wkp-info-topic-bt wkp-active');
+    cy.focused().should('have.attr', 'class', 'wkp-info-bt wkp-active');
   });
 });

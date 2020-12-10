@@ -19,6 +19,9 @@
   }
 
   .wkp-info-bt {
+    display: flex;
+    align-items: center;
+
     &.wkp-active:hover,
     &:hover {
       color: $brand-primary-hover;
@@ -93,11 +96,6 @@
 
     .wkp-lock-left {
       margin-right: 4px;
-    }
-
-    .wkp-info-topic-bt {
-      display: flex;
-      align-items: center;
     }
   }
 
