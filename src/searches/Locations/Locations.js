@@ -5,8 +5,10 @@ import Search from '../Search';
 class Locations extends Search {
   // eslint-disable-next-line class-methods-use-this
   search(value) {
+    const baseUrl =
+      process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
     return fetch(
-      `https://maps.trafimage.ch/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
+      `${baseUrl}/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
         value,
       )}`,
     )

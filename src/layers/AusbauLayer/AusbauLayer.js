@@ -43,9 +43,6 @@ class AusbauLayer extends MapboxStyleLayer {
   }
 
   addDynamicFilters() {
-    if (!this.showFilterParam) {
-      return;
-    }
     this.applyNewFilter(this.filter.value);
   }
 

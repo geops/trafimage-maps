@@ -17,10 +17,15 @@ const defaultProps = {
 
 const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
-  const { activeTopic, featureInfo } = useSelector((state) => state.app);
+  const { activeTopic } = useSelector((state) => state.app);
+  let { featureInfo } = useSelector((state) => state.app);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
+  }
+
+  if (activeTopic.modifyFeatureInfo) {
+    featureInfo = activeTopic.modifyFeatureInfo(featureInfo);
   }
 
   const filtered = featureInfo.filter((info) => {

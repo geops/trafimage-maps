@@ -77,7 +77,9 @@ class Lines extends Search {
       const [, line, km, kmEnd] = value.match(lineMeasuresRegExp);
       params = `line=${line}&km=${km}&km_end=${kmEnd}`;
     }
-    return fetch(`https://maps.trafimage.ch/search/lines?${params}`)
+    const baseUrl =
+      process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
+    return fetch(`${baseUrl}/search/lines?${params}`)
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
       .catch(() => {
