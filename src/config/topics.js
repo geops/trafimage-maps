@@ -108,7 +108,6 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   isBaseLayer: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2',
   filters: [
     {
@@ -134,12 +133,11 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
       include: true,
     },
   ],
+  zIndex: 2,
   properties: {
     hideInLegend: true,
   },
 });
-
-netzkarteLayerLabels.olLayer.setZIndex(2);
 
 export const casa = {
   name: 'CASA',
