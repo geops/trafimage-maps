@@ -14,16 +14,15 @@ const lineKilometerRegExp = new RegExp('^([0-9]+)\\s+([0-9]+\\.?[0-9]+)$');
 
 const color = 'rgba(0,61,155,0.5)';
 
-const lineResolutions = [900, 612, 611, 306, 305, 115, 100, 75, 50, 20, 10, 5];
+const lineResolutions = [900, 612, 611, 306, 305, 79, 78, 50];
 const lineGeneralisations = {
   900: 5,
   612: 5,
   611: 10, // zoom 8
   306: 10,
   305: 30, // zoom 9
-  115: 30,
-  100: 30,
-  75: 100, // zoom 11
+  79: 30,
+  78: 100, // zoom 11
   50: 100,
 };
 
