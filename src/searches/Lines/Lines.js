@@ -14,10 +14,12 @@ const lineKilometerRegExp = new RegExp('^([0-9]+)\\s+([0-9]+\\.?[0-9]+)$');
 
 const color = 'rgba(0,61,155,0.5)';
 
-const lineResolutions = [900, 611, 305, 115, 100, 75, 50, 20, 10, 5];
+const lineResolutions = [900, 612, 611, 306, 305, 115, 100, 75, 50, 20, 10, 5];
 const lineGeneralisations = {
   900: 5,
+  612: 5,
   611: 10,
+  306: 10,
   305: 30,
   115: 30,
   100: 30,
