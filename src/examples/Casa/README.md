@@ -135,10 +135,7 @@ routeLayer
       isClickable: true,
       isSelected: false,
       popupTitle: 'Route Biel/Bienne >> Freiburg/Fribourg',
-      popupContent: {
-        Von: 'Bern',
-        Nach: 'Freiburg/Fribourg',
-      },
+      popupContent: ['Von: Bern', 'Nach: Freiburg/Fribourg'],
       sequences: [
         {
           uicFrom: 8507000,

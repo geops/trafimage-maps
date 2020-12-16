@@ -22,10 +22,7 @@ const routes = [
     isClickable: true,
     isSelected: true,
     popupTitle: 'Route St. Gallen >> Zürich',
-    popupContent: {
-      Von: 'St. Gallen',
-      Nach: 'Zürich HB',
-    },
+    popupContent: ['Von: St. Gallen', 'Nach: Zürich HB'],
     sequences: [
       {
         uicFrom: 8503000,
@@ -109,10 +106,7 @@ const feature = new Feature({
   mot: 'rail',
   route: {
     isClickable: true,
-    popupContent: {
-      Von: 'St. Gallen',
-      Nach: 'Zürich HB',
-    },
+    popupContent: ['Von: St. Gallen', 'Nach: Zürich HB'],
   },
 });
 
