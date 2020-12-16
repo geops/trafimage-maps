@@ -118,10 +118,20 @@ class RouteLayer extends CasaLayer {
     };
 
     if (isHovered) {
-      style.strokeOutline = {
-        color: 'black',
-        width: 8,
+      style.hoverStyles = {
+        outline: {
+          color: 'black',
+          width: 8,
+        },
       };
+
+      if (lineDash) {
+        // Add white background if there is a line dash
+        style.hoverStyles.background = {
+          color: 'white',
+          width: 6,
+        };
+      }
     }
 
     return style;
