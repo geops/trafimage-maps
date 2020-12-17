@@ -96,14 +96,12 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
           activeTopic.popupConfig.panIntoView === false
         )
       }
-      panRect={
-        (activeTopic.popupConfig && activeTopic.popupConfig.panRect) || {
-          top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
-          bottom: mapRect.bottom,
-          left: mapRect.left + 10,
-          right: mapRect.right - paddingRight,
-        }
-      }
+      panRect={{
+        top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
+        bottom: mapRect.bottom,
+        left: mapRect.left + 10,
+        right: mapRect.right - paddingRight,
+      }}
       popupCoordinate={coord}
       map={map}
     >
