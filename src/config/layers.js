@@ -511,7 +511,7 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   visible: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'showcase2',
+  style: 'base_dark_v2',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.night-desc',
