@@ -1,3 +1,4 @@
+import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import netzkarteImage from '../img/netzkarte.png';
 import defaultBaseLayers, {
@@ -149,6 +150,12 @@ export const casa = {
     netzkarteLayerLabels,
   ],
   projection: 'EPSG:3857',
+  popupConfig: {
+    getPopupCoordinates: (feature, map) => {
+      const mapCenter = getCenter(map.getView().calculateExtent());
+      return feature.getGeometry().getClosestPoint(mapCenter);
+    },
+  },
   elements: {
     menu: true,
     popup: true,

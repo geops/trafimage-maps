@@ -15,12 +15,23 @@ const defaultProps = {
   staticFilesUrl: null,
 };
 
-// const getPopupCoordinate = (feature, customFunction) => {
-//   if (customFunction) {
-//     return customFunction(feature);
-//   }
-//   return
-// }
+const getPopupCoordinates = (
+  map,
+  feature,
+  coordinate,
+  geometry,
+  customFunction,
+) => {
+  if (customFunction) {
+    return customFunction(feature, map);
+  }
+
+  if (geometry) {
+    return geometry.getClosestPoint(coordinate);
+  }
+
+  return coordinate;
+};
 
 const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
@@ -53,14 +64,20 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
 
   const { coordinate, features } = featureInfo[0];
   const geom = features[0].getGeometry();
-  let coord = coordinate;
+  let coord = getPopupCoordinates(
+    map,
+    features[0],
+    coordinate,
+    undefined,
+    activeTopic.popupConfig && activeTopic.popupConfig.getPopupCoordinates,
+  );
 
   if (
     coordinate &&
     features.length === 1 &&
     (geom instanceof Point || geom instanceof LineString)
   ) {
-    coord = geom.getClosestPoint(coordinate);
+    coord = getPopupCoordinates(map, features[0], coordinate, geom);
   }
 
   const mapRect = map.getTarget().getBoundingClientRect();
@@ -73,13 +90,20 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
     <RSPopup
       renderHeader={() => {}}
       padding="0px"
-      panIntoView
-      panRect={{
-        top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
-        bottom: mapRect.bottom,
-        left: mapRect.left + 10,
-        right: mapRect.right - paddingRight,
-      }}
+      panIntoView={
+        !(
+          activeTopic.popupConfig &&
+          activeTopic.popupConfig.panIntoView === false
+        )
+      }
+      panRect={
+        (activeTopic.popupConfig && activeTopic.popupConfig.panRect) || {
+          top: mapRect.top + (activeTopic.elements.header ? 110 : 10),
+          bottom: mapRect.bottom,
+          left: mapRect.left + 10,
+          right: mapRect.right - paddingRight,
+        }
+      }
       popupCoordinate={coord}
       map={map}
     >
