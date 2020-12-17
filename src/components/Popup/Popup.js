@@ -15,6 +15,13 @@ const defaultProps = {
   staticFilesUrl: null,
 };
 
+// const getPopupCoordinate = (feature, customFunction) => {
+//   if (customFunction) {
+//     return customFunction(feature);
+//   }
+//   return
+// }
+
 const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
   const { activeTopic } = useSelector((state) => state.app);
