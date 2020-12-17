@@ -34,22 +34,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.filters = options.filters;
   }
 
-  updateAttribution(evt) {
-    /* Overwrites mobility-toolbox-js function.
-     * Since openlayers setAttributes on the source triggers a change event
-     * and may cause the mapbox map to rerender infinitely, the copyright is written
-     * only when it changes
-     */
-    if (
-      JSON.stringify(this.olLayer.getSource().getAttributions()()) !==
-      JSON.stringify(getMapboxMapCopyrights(evt.target))
-    ) {
-      this.olLayer
-        .getSource()
-        .setAttributions(getMapboxMapCopyrights(evt.target));
-    }
-  }
-
   init(map) {
     super.init(map);
 

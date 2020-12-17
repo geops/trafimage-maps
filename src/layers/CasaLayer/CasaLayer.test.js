@@ -92,15 +92,15 @@ describe('CasaLayer', () => {
       }),
     );
 
-    // outline
-    // expect(olStyles.background).toEqual(
-    //   new Style({
-    //     stroke: new Stroke({
-    //       width: 4,
-    //       color: 'black',
-    //     }),
-    //   }),
-    // );
+    // background
+    expect(olStyles.background).toEqual(
+      new Style({
+        stroke: new Stroke({
+          width: 4,
+          color: 'black',
+        }),
+      }),
+    );
 
     // text
     expect(olStyles.text).toEqual(
