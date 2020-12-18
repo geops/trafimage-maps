@@ -12,7 +12,6 @@ import {
   setTopics,
   setFeatureInfo,
   setSearchService,
-  fetchPermissionsInfos,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
@@ -29,7 +28,6 @@ const propTypes = {
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
-  permissionUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
@@ -49,7 +47,6 @@ const propTypes = {
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
-  dispatchFetchPermissionsInfos: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -60,20 +57,13 @@ const defaultProps = {
   cartaroUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
-  permissionUrl: null,
   permissionsInfos: null,
   staticFilesUrl: null,
 };
 
 class TopicLoader extends Component {
   componentDidMount() {
-    const { dispatchFetchPermissionsInfos, permissionUrl } = this.props;
-
-    if (permissionUrl) {
-      dispatchFetchPermissionsInfos(permissionUrl);
-    } else {
-      this.loadTopics();
-    }
+    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
@@ -88,15 +78,8 @@ class TopicLoader extends Component {
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
-      permissionUrl,
       staticFilesUrl,
-      dispatchFetchPermissionsInfos,
     } = this.props;
-
-    if (permissionUrl !== prevProps.permissionUrl && permissionUrl) {
-      dispatchFetchPermissionsInfos(permissionUrl);
-    }
-
     if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
     }
@@ -327,7 +310,6 @@ const mapDispatchToProps = {
   dispatchSetTopics: setTopics,
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchService: setSearchService,
-  dispatchFetchPermissionsInfos: fetchPermissionsInfos,
 };
 
 TopicLoader.propTypes = propTypes;

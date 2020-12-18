@@ -51,24 +51,6 @@ export const setDeparturesFilter = (data) => ({
   data,
 });
 
-export const fetchPermissionsInfos = (appBaseUrl) => (dispatch) => {
-  const url = `${appBaseUrl}/permissions`;
-  fetch(url, { credentials: 'include' })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({
-        type: SET_PERMISSIONS_INFOS,
-        data,
-      });
-    })
-    .catch(() => {
-      dispatch({
-        type: SET_PERMISSIONS_INFOS,
-        data: null,
-      });
-    });
-};
-
 export const setScreenWidth = (data) => ({
   type: SET_SCREEN_WIDTH,
   data,
