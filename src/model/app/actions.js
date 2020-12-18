@@ -59,3 +59,8 @@ export const setScreenWidth = (data) => ({
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
 
 export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
+
+export const setPermissionsInfos = (data) => ({
+  type: SET_PERMISSIONS_INFOS,
+  data,
+});

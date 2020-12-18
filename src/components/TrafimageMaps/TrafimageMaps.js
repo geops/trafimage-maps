@@ -13,7 +13,11 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
-import { setLanguage, setCartaroOldUrl } from '../../model/app/actions';
+import {
+  setLanguage,
+  setCartaroOldUrl,
+  setPermissionsInfos,
+} from '../../model/app/actions';
 import theme from '../../themes/default';
 
 const propTypes = {
@@ -121,6 +125,15 @@ const propTypes = {
    * @private
    */
   activeTopicKey: PropTypes.string,
+
+  /**
+   * Informations on logged in user and its permissions.
+   * @private
+   */
+  permissionsInfos: PropTypes.shape({
+    user: PropTypes.string,
+    permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 const defaultProps = {
@@ -140,6 +153,7 @@ const defaultProps = {
   language: 'de',
   enableTracking: false,
   activeTopicKey: null,
+  permissionsInfos: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -162,6 +176,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       cartaroOldUrl,
       maxExtent,
+      permissionsInfos,
     } = this.props;
 
     if (zoom) {
@@ -182,6 +197,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (language) {
       this.store.dispatch(setLanguage(language));
+    }
+
+    if (permissionsInfos) {
+      this.store.dispatch(setPermissionsInfos(permissionsInfos));
     }
 
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
@@ -206,6 +225,7 @@ class TrafimageMaps extends React.PureComponent {
       cartaroOldUrl,
       enableTracking,
       maxExtent,
+      permissionsInfos,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -226,6 +246,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (this.matomo && !prevProps.enableTracking && enableTracking) {
       this.matomo.trackPageView();
+    }
+
+    if (permissionsInfos !== prevProps.permissionsInfos) {
+      this.store.dispatch(setPermissionsInfos(permissionsInfos));
     }
   }
 
