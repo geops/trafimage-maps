@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import Link from '../../components/Link';
 
 import './BehigPopup.scss';
