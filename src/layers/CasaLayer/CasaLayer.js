@@ -161,11 +161,13 @@ class CasaLayer extends VectorLayer {
     });
 
     const olStyles = {};
-    if (style.strokeOutline) {
-      olStyles.outline = new Style({
-        stroke: new StrokeStyle({
-          ...style.strokeOutline,
-        }),
+    if (style.hoverStyles) {
+      Object.keys(style.hoverStyles).forEach((key) => {
+        olStyles[key] = new Style({
+          stroke: new StrokeStyle({
+            ...style.hoverStyles[key],
+          }),
+        });
       });
     }
 
