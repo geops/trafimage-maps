@@ -2,6 +2,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import '@openlayers/pepjs';
 
 // Import web-components polyfills for ie 11, see https://github.com/webcomponents/polyfills.
 // If you need to test the component with { shadow: true }, you have to add:
