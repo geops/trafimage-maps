@@ -16,7 +16,7 @@ import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import {
   setLanguage,
   setCartaroOldUrl,
-  setPermissionsInfos,
+  setPermissionInfos,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -130,7 +130,7 @@ const propTypes = {
    * Informations on logged in user and its permissions.
    * @private
    */
-  permissionsInfos: PropTypes.shape({
+  permissionInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
@@ -153,7 +153,7 @@ const defaultProps = {
   language: 'de',
   enableTracking: false,
   activeTopicKey: null,
-  permissionsInfos: null,
+  permissionInfos: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -176,7 +176,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       cartaroOldUrl,
       maxExtent,
-      permissionsInfos,
+      permissionInfos,
     } = this.props;
 
     if (zoom) {
@@ -199,8 +199,8 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setLanguage(language));
     }
 
-    if (permissionsInfos) {
-      this.store.dispatch(setPermissionsInfos(permissionsInfos));
+    if (permissionInfos) {
+      this.store.dispatch(setPermissionInfos(permissionInfos));
     }
 
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
@@ -225,7 +225,7 @@ class TrafimageMaps extends React.PureComponent {
       cartaroOldUrl,
       enableTracking,
       maxExtent,
-      permissionsInfos,
+      permissionInfos,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -248,8 +248,8 @@ class TrafimageMaps extends React.PureComponent {
       this.matomo.trackPageView();
     }
 
-    if (permissionsInfos !== prevProps.permissionsInfos) {
-      this.store.dispatch(setPermissionsInfos(permissionsInfos));
+    if (permissionInfos !== prevProps.permissionInfos) {
+      this.store.dispatch(setPermissionInfos(permissionInfos));
     }
   }
 

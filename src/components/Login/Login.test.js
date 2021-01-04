@@ -20,7 +20,7 @@ describe('Login', () => {
 
     test('displaying user name', () => {
       const store = global.mockStore({
-        app: { permissionsInfos: { user: 'bar' } },
+        app: { permissionInfos: { user: 'bar' } },
       });
       const component = renderer.create(
         <Provider store={store}>

@@ -36,7 +36,7 @@ const propTypes = {
   activeTopic: PropTypes.shape(),
   language: PropTypes.string.isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  permissionsInfos: PropTypes.shape({
+  permissionInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.array,
   }),
@@ -57,7 +57,7 @@ const defaultProps = {
   cartaroUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
-  permissionsInfos: null,
+  permissionInfos: null,
   staticFilesUrl: null,
 };
 
@@ -71,7 +71,7 @@ class TopicLoader extends Component {
       activeTopic,
       language,
       topics,
-      permissionsInfos,
+      permissionInfos,
       apiKey,
       apiKeyName,
       cartaroUrl,
@@ -85,7 +85,7 @@ class TopicLoader extends Component {
     }
 
     if (
-      permissionsInfos !== prevProps.permissionsInfos ||
+      permissionInfos !== prevProps.permissionInfos ||
       topics !== prevProps.topics
     ) {
       this.loadTopics();
@@ -118,7 +118,7 @@ class TopicLoader extends Component {
     const {
       topics,
       appBaseUrl,
-      permissionsInfos,
+      permissionInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
     } = this.props;
@@ -131,21 +131,21 @@ class TopicLoader extends Component {
     const visibleTopics = topics.filter(
       (t) =>
         (!t.permission ||
-          (permissionsInfos &&
-            permissionsInfos.permissions.includes(t.permission))) &&
+          (permissionInfos &&
+            permissionInfos.permissions.includes(t.permission))) &&
         !t.hideInLayerTree,
     );
     let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
-    if (isTopicNeedsPermission && permissionsInfos && !permissionsInfos.user) {
+    if (isTopicNeedsPermission && permissionInfos && !permissionInfos.user) {
       redirectToLogin(appBaseUrl);
       return;
     }
 
     // If the wanted topic can't be seen, we do nothing until the login redirect happens.
-    if (isTopicNeedsPermission && !permissionsInfos) {
+    if (isTopicNeedsPermission && !permissionInfos) {
       return;
     }
 
@@ -301,7 +301,7 @@ const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   language: state.app.language,
   layerService: state.app.layerService,
-  permissionsInfos: state.app.permissionsInfos,
+  permissionInfos: state.app.permissionInfos,
 });
 
 const mapDispatchToProps = {
