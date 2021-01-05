@@ -10,7 +10,7 @@ export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
 export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
 export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
-export const SET_PERMISSIONS_INFOS = 'SET_PERMISSIONS_INFOS';
+export const SET_PERMISSION_INFOS = 'SET_PERMISSION_INFOS';
 export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
 export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
 
@@ -51,24 +51,6 @@ export const setDeparturesFilter = (data) => ({
   data,
 });
 
-export const fetchPermissionsInfos = (appBaseUrl) => (dispatch) => {
-  const url = `${appBaseUrl}/permissions`;
-  fetch(url, { credentials: 'include' })
-    .then((res) => res.json())
-    .then((data) => {
-      dispatch({
-        type: SET_PERMISSIONS_INFOS,
-        data,
-      });
-    })
-    .catch(() => {
-      dispatch({
-        type: SET_PERMISSIONS_INFOS,
-        data: null,
-      });
-    });
-};
-
 export const setScreenWidth = (data) => ({
   type: SET_SCREEN_WIDTH,
   data,
@@ -77,3 +59,8 @@ export const setScreenWidth = (data) => ({
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
 
 export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
+
+export const setPermissionInfos = (data) => ({
+  type: SET_PERMISSION_INFOS,
+  data,
+});

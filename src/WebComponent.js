@@ -108,11 +108,6 @@ const propTypes = {
   staticFilesUrl: PropTypes.string,
 
   /**
-   * URL to request permission.
-   */
-  permissionUrl: PropTypes.string,
-
-  /**
    * Enable analytics tracking.
    */
   enableTracking: PropTypes.bool,
@@ -135,7 +130,6 @@ const attributes = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
-  permissionUrl: null,
   enableTracking: false,
 };
 

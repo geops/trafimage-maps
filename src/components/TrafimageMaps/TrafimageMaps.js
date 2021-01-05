@@ -13,7 +13,11 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import TopicLoader from '../TopicLoader';
 import { getStore } from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
-import { setLanguage, setCartaroOldUrl } from '../../model/app/actions';
+import {
+  setLanguage,
+  setCartaroOldUrl,
+  setPermissionInfos,
+} from '../../model/app/actions';
 import theme from '../../themes/default';
 
 const propTypes = {
@@ -111,12 +115,6 @@ const propTypes = {
   staticFilesUrl: PropTypes.string,
 
   /**
-   * URL to request permission.
-   * @private
-   */
-  permissionUrl: PropTypes.string,
-
-  /**
    * Enable analytics tracking.
    * @private
    */
@@ -127,6 +125,15 @@ const propTypes = {
    * @private
    */
   activeTopicKey: PropTypes.string,
+
+  /**
+   * Informations on logged in user and its permissions.
+   * @private
+   */
+  permissionInfos: PropTypes.shape({
+    user: PropTypes.string,
+    permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 const defaultProps = {
@@ -142,11 +149,11 @@ const defaultProps = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
-  permissionUrl: null,
   topics: null,
   language: 'de',
   enableTracking: false,
   activeTopicKey: null,
+  permissionInfos: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -169,6 +176,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       cartaroOldUrl,
       maxExtent,
+      permissionInfos,
     } = this.props;
 
     if (zoom) {
@@ -189,6 +197,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (language) {
       this.store.dispatch(setLanguage(language));
+    }
+
+    if (permissionInfos) {
+      this.store.dispatch(setPermissionInfos(permissionInfos));
     }
 
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
@@ -213,6 +225,7 @@ class TrafimageMaps extends React.PureComponent {
       cartaroOldUrl,
       enableTracking,
       maxExtent,
+      permissionInfos,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -234,6 +247,10 @@ class TrafimageMaps extends React.PureComponent {
     if (this.matomo && !prevProps.enableTracking && enableTracking) {
       this.matomo.trackPageView();
     }
+
+    if (permissionInfos !== prevProps.permissionInfos) {
+      this.store.dispatch(setPermissionInfos(permissionInfos));
+    }
   }
 
   render() {
@@ -247,7 +264,6 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
       staticFilesUrl,
-      permissionUrl,
       activeTopicKey,
     } = this.props;
 
@@ -263,7 +279,6 @@ class TrafimageMaps extends React.PureComponent {
               activeTopicKey={activeTopicKey}
               cartaroUrl={cartaroUrl}
               appBaseUrl={appBaseUrl}
-              permissionUrl={permissionUrl}
               vectorTilesKey={vectorTilesKey}
               vectorTilesUrl={vectorTilesUrl}
               staticFilesUrl={staticFilesUrl}

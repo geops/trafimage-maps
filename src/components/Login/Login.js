@@ -9,15 +9,15 @@ import './Login.scss';
 const Login = ({ appBaseUrl }) => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.app.language);
-  const permissionsInfos = useSelector((state) => state.app.permissionsInfos);
+  const permissionInfos = useSelector((state) => state.app.permissionInfos);
 
   const login = useMemo(() => {
-    if (permissionsInfos && permissionsInfos.user) {
-      return permissionsInfos.user;
+    if (permissionInfos && permissionInfos.user) {
+      return permissionInfos.user;
     }
     return t('Anmelden');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [permissionsInfos, language]);
+  }, [permissionInfos, language]);
 
   const openLoginPage = useCallback(() => {
     window.location.href = `${appBaseUrl}/login?next=${encodeURIComponent(
@@ -32,7 +32,7 @@ const Login = ({ appBaseUrl }) => {
       onClick={openLoginPage}
       onKeyPress={(evt) => evt.which === 13 && openLoginPage()}
       tabIndex={0}
-      title={permissionsInfos && permissionsInfos.user}
+      title={permissionInfos && permissionInfos.user}
     >
       <SBBUser focusable={false} className="wkp-login-icon" />
       <span className="wkp-login-text">{login}</span>
