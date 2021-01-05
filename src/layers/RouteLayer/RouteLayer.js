@@ -96,28 +96,42 @@ class RouteLayer extends CasaLayer {
    */
   // eslint-disable-next-line class-methods-use-this
   defaultStyleFunction(feature, isSelected, isHovered) {
-    const motColors = {
-      rail: [235, 0, 0],
-      bus: [255, 255, 0],
-      funicular: [0, 151, 59],
-      ship: [255, 255, 255],
+    const motLineStyles = {
+      rail: { color: [235, 0, 0] },
+      bus: { color: [255, 255, 0] },
+      funicular: { color: [0, 151, 59] },
+      ferry: { color: [255, 255, 255] },
+      foot: { color: [69, 118, 162], lineDash: [1, 10] },
     };
 
+    const lineStyle = motLineStyles[feature.get('mot')];
     const opacity = isSelected || isHovered ? 1 : 0.3;
-    const rgb = motColors[feature.get('mot')] || [68, 68, 68];
+    const rgb = (lineStyle && lineStyle.color) || [68, 68, 68];
+    const lineDash = (lineStyle && lineStyle.lineDash) || null;
 
     const style = {
       stroke: {
         color: [...rgb, opacity],
         width: 6,
+        lineDash,
       },
     };
 
     if (isHovered) {
-      style.strokeOutline = {
-        color: 'black',
-        width: 8,
+      style.hoverStyles = {
+        outline: {
+          color: 'black',
+          width: 8,
+        },
       };
+
+      if (lineDash) {
+        // Add white background if there is a line dash
+        style.hoverStyles.background = {
+          color: 'white',
+          width: 6,
+        };
+      }
     }
 
     return style;
@@ -136,7 +150,13 @@ class RouteLayer extends CasaLayer {
   fetchRouteForMot(viaPoints, mot, sequenceProps, isStart, isEnd) {
     this.abortController = new AbortController();
 
-    const via = viaPoints.map((v) => `!${v}`);
+    const via = viaPoints.map((viaPoint) => {
+      if (Array.isArray(viaPoint)) {
+        return `${viaPoint[0]},${viaPoint[1]}`;
+      }
+      return `!${viaPoint}`;
+    });
+
     const urlParams = {
       profile: 'sbb',
       [this.apiKeyName || 'key']: this.apiKey || '',
@@ -252,13 +272,15 @@ class RouteLayer extends CasaLayer {
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
-        const { mot, uicFrom, uicTo } = routes[i].sequences[j];
+        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } = routes[
+          i
+        ].sequences[j];
         const nextMot =
           j === routes[i].sequences.length - 1
             ? null
             : routes[i].sequences[j + 1].mot;
 
-        via = via.concat([uicFrom, uicTo]);
+        via = via.concat([uicFrom || lonLatFrom, uicTo || lonLatTo]);
 
         if (mot !== nextMot) {
           const sequenceProps = { route: { ...routes[i], routeId: i }, mot };

@@ -44,9 +44,15 @@ describe('CasaLayer', () => {
         color: 'rgb(255, 200, 25)',
         width: 2,
       },
-      strokeOutline: {
-        color: 'white',
-        width: 8,
+      hoverStyles: {
+        outline: {
+          color: 'white',
+          width: 8,
+        },
+        background: {
+          color: 'black',
+          width: 4,
+        },
       },
       fill: {
         color: 'rgb(255, 200, 25)',
@@ -82,6 +88,16 @@ describe('CasaLayer', () => {
         stroke: new Stroke({
           width: 8,
           color: 'white',
+        }),
+      }),
+    );
+
+    // background
+    expect(olStyles.background).toEqual(
+      new Style({
+        stroke: new Stroke({
+          width: 4,
+          color: 'black',
         }),
       }),
     );

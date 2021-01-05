@@ -1,3 +1,4 @@
+import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import netzkarteImage from '../img/netzkarte.png';
 import defaultBaseLayers, {
@@ -108,7 +109,6 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   isBaseLayer: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2',
   filters: [
     {
@@ -134,12 +134,11 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
       include: true,
     },
   ],
+  zIndex: 2,
   properties: {
     hideInLegend: true,
   },
 });
-
-netzkarteLayerLabels.olLayer.setZIndex(2);
 
 export const casa = {
   name: 'CASA',
@@ -151,6 +150,12 @@ export const casa = {
     netzkarteLayerLabels,
   ],
   projection: 'EPSG:3857',
+  popupConfig: {
+    getPopupCoordinates: (feature, map) => {
+      const mapCenter = getCenter(map.getView().calculateExtent());
+      return feature.getGeometry().getClosestPoint(mapCenter);
+    },
+  },
   elements: {
     menu: true,
     popup: true,

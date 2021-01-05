@@ -7,13 +7,13 @@ const propTypes = {
 };
 
 const CasaRoutePopup = ({ feature }) => {
-  const content = feature.get('route').popupContent;
+  const route = feature.get('route');
 
   return (
     <div className="wkp-casa-route-popup">
-      {Object.keys(content).map((key) => (
-        <div className="wkp-casa-route-popup-row" key={key}>
-          {key}: {content[key]}
+      {route.popupContent.map((item) => (
+        <div className="wkp-casa-route-popup-row" key={item}>
+          <pre>{item}</pre>
         </div>
       ))}
     </div>
@@ -22,9 +22,14 @@ const CasaRoutePopup = ({ feature }) => {
 
 CasaRoutePopup.propTypes = propTypes;
 
+CasaRoutePopup.hideHeader = (feature) => {
+  const route = feature.get('route');
+  return !route.popupTitle;
+};
+
 CasaRoutePopup.renderTitle = (feature) => {
   const route = feature.get('route');
-  return route.popupTitle || 'Informationen';
+  return route.popupTitle;
 };
 
 export default CasaRoutePopup;
