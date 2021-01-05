@@ -508,6 +508,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
 
 export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',
+  key: 'ch.sbb.netzkarte.night',
   visible: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
@@ -521,6 +522,7 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
 
 export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.light',
+  key: 'ch.sbb.netzkarte.light',
   visible: true,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
@@ -534,7 +536,7 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.layer',
-  key: 'ch.sbb.netzkarte',
+  key: 'ch.sbb.netzkarte.layer',
   visible: false,
   isQueryable: false,
   preserveDrawingBuffer: true,
