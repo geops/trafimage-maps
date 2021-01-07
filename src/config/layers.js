@@ -13,6 +13,7 @@ import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
 import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
+import netzkarteNightImg from '../img/netzkarte_night.png';
 import landeskarte from '../img/landeskarte.png';
 import landeskarteGrau from '../img/landeskarte_grau.png';
 import luftbild from '../img/luftbild.png';
@@ -145,6 +146,17 @@ export const netzkarteLayer = new MapboxStyleLayer({
   mapboxLayer: dataLayer,
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
+  },
+});
+
+export const netzkarteNight = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.night',
+  key: 'ch.sbb.netzkarte.night',
+  isBaseLayer: true,
+  style: 'base_dark_v2',
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: netzkarteNightImg,
   },
 });
 
@@ -1351,6 +1363,7 @@ export const zweitausbildungRoutes = new Layer({
 export default [
   dataLayer,
   netzkarteLayer,
+  netzkarteNight,
   swisstopoSwissImage,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,
