@@ -2,7 +2,7 @@ import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import { setFeatureInfo } from '../../model/app/actions';
 
 const propTypes = {

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { FaInfoCircle, FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';

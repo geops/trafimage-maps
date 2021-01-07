@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import { TiVideo } from 'react-icons/ti';
 import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
