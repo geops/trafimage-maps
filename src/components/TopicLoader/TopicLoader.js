@@ -132,6 +132,7 @@ class TopicLoader extends Component {
       (t) =>
         (!t.permission ||
           (permissionInfos &&
+            permissionInfos.permissions &&
             permissionInfos.permissions.includes(t.permission))) &&
         !t.hideInLayerTree,
     );
