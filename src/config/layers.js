@@ -536,7 +536,7 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.layer',
-  key: 'ch.sbb.netzkarte',
+  key: 'ch.sbb.netzkarte.layer',
   visible: false,
   isQueryable: false,
   preserveDrawingBuffer: true,
