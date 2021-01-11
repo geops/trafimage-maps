@@ -24,10 +24,6 @@ import defaultBaseLayers, {
   constrAusbau,
   constrClusters,
   constructionDataLayer,
-  behigOk,
-  behigNotYetOk,
-  behigNotOk,
-  behigParent,
   grenzen,
   tochtergesellschaftenSBB,
   gewässer,
@@ -182,23 +178,6 @@ export const bauprojekte = {
   searches: defaultSearches,
 };
 
-export const behig = {
-  name: 'ch.sbb.behig',
-  key: 'ch.sbb.behig',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    dataLayer,
-    netzkarteLayer,
-    behigNotOk,
-    behigNotYetOk,
-    behigOk,
-    behigParent,
-  ],
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'BehigTopicInfo',
-  searches: defaultSearches,
-};
-
 export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
@@ -296,7 +275,6 @@ const topics = {
     netzkarte,
     handicap,
     bauprojekte,
-    behig,
     infrastruktur,
     regionenkarte,
     tarifverbundkarte,
