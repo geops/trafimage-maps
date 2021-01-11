@@ -11,7 +11,6 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
-import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
 import netzkarteNightImg from '../img/netzkarte_night.png';
 import landeskarte from '../img/landeskarte.png';
@@ -899,56 +898,6 @@ export const constrClusters = new Layer({
       },
     }),
   ],
-});
-
-export const behigOk = new Layer({
-  name: 'ch.sbb.behig.ok',
-  key: 'ch.sbb.behig.ok',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BehigLayerInfo',
-    behig: {
-      status: 'OK',
-    },
-  },
-});
-
-export const behigNotYetOk = new Layer({
-  name: 'ch.sbb.behig.not_yet_ok',
-  key: 'ch.sbb.behig.not_yet_ok',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BehigLayerInfo',
-    behig: {
-      status: 'NOCH NICHT OK',
-    },
-  },
-});
-
-export const behigNotOk = new Layer({
-  name: 'ch.sbb.behig.not_ok',
-  key: 'ch.sbb.behig.not_ok',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BehigLayerInfo',
-    behig: {
-      status: 'BLEIBEN NICHT OK',
-    },
-  },
-});
-
-export const behigParent = new BehigLayer({
-  name: 'ch.sbb.behig.parent',
-  key: 'ch.sbb.behig.parent',
-  visible: true,
-  properties: {
-    hideInLegend: true,
-    popupComponent: 'BehigPopup',
-  },
-  toggleLayers: [behigOk, behigNotYetOk, behigNotOk],
 });
 
 export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
