@@ -30,7 +30,7 @@ describe('DrawEditLinkInput', () => {
     });
   });
 
-  test('fetches shorten url and displays result in an input', async () => {
+  test('creates a new shorten url using the draw admin id then displays result in an input', async () => {
     store = mockStore({
       map: {},
       app: {
@@ -41,8 +41,41 @@ describe('DrawEditLinkInput', () => {
     });
     let wrapper;
     await act(async () => {
+      // Updating an existing shoreten url fails
       fetchMock.once(
-        'http://shortenfoo.ch?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+        'http://shortenfoo.ch/edit/foo/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+        { error: 'Not found' },
+      );
+      // Creating an existing shorten url succeeds
+      fetchMock.once(
+        'http://shortenfoo.ch/?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo&word=foo',
+        { url: 'http://shortqux.ch/qur' },
+      );
+      wrapper = mount(
+        <Provider store={store}>
+          <DrawEditLinkInput />
+        </Provider>,
+      );
+    });
+    wrapper.update();
+    expect(wrapper.find('input').props().value).toBe('http://shortqux.ch/qur');
+    fetchMock.restore();
+  });
+
+  test('updates an existing shorten url using the draw admin id and displays result in an input', async () => {
+    store = mockStore({
+      map: {},
+      app: {
+        mapsetUrl: 'http://mapsetbar.ch',
+        shortenerUrl: 'http://shortenfoo.ch',
+        drawIds: { admin_id: 'foo' },
+      },
+    });
+    let wrapper;
+    await act(async () => {
+      // Updating an existing shoreten url succeeds
+      fetchMock.once(
+        'http://shortenfoo.ch/edit/foo/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
         { url: 'http://shortqux.ch/qur' },
       );
       wrapper = mount(
@@ -67,8 +100,14 @@ describe('DrawEditLinkInput', () => {
     });
     let wrapper;
     await act(async () => {
+      // Updating an existing shoreten url fails
       fetchMock.once(
-        'http://shortenfoo.ch?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+        'http://shortenfoo.ch/edit/foo/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+        { error: 'Not found' },
+      );
+      // Creating an existing shorten url fails too
+      fetchMock.once(
+        'http://shortenfoo.ch/?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo&word=foo',
         { error: 'Bad parameter' },
       );
       wrapper = mount(
