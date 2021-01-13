@@ -147,6 +147,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
+  style: 'base_bright_v2',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({

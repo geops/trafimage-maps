@@ -68,14 +68,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
   }
 
   setStyle(newStyle) {
-    this.style = newStyle || this.options.style;
+    // TODO manage if newStyle is null
+    if (this.style === newStyle || !newStyle) {
+      return;
+    }
+    this.style = newStyle;
     this.setStyleConfig();
   }
 
   setStyleConfig(url, key, apiKeyName) {
-    if (!url && !key && !apiKeyName) {
-      this.styleUrl = `${this.url}/styles/${this.style}/style.json?`;
-    }
     if (url && url !== this.url) {
       this.url = url;
     }
@@ -85,14 +86,11 @@ class TrafimageMapboxLayer extends MapboxLayer {
     if (apiKeyName && apiKeyName !== this.apiKeyName) {
       this.apiKeyName = apiKeyName;
     }
-
-    const newStyleUrl =
-      this.styleUrl && this.style
-        ? this.createStyleUrl()
-        : `${this.url}/styles/${this.style}/style.json?`;
-    if (this.filters) {
-      this.loadStyle(newStyleUrl);
+    if ((!url && !key && !apiKeyName) || !this.styleUrl) {
+      this.styleUrl = `${this.url}/styles/${this.style}/style.json?`;
     }
+
+    const newStyleUrl = this.createStyleUrl();
 
     // Don't apply style if not necessary otherwise
     // it will remove styles apply by MapboxStyleLayer layers.

@@ -178,7 +178,7 @@ class MapboxStyleLayer extends Layer {
    * Apply visibility to style layers that fits the filter function.
    * @private
    */
-  applyLayoutVisibility(isInit) {
+  applyLayoutVisibility() {
     const { visible } = this;
     const { mbMap } = this.mapboxLayer;
 
@@ -192,8 +192,8 @@ class MapboxStyleLayer extends Layer {
       return;
     }
 
-    if (this.style && !isInit) {
-      this.mapboxLayer.setStyle(visible ? this.style : null);
+    if (this.style && visible) {
+      this.mapboxLayer.setStyle(this.style);
     }
 
     if (this.styleLayersFilter) {
