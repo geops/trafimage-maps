@@ -23,7 +23,7 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   apiKey: PropTypes.string,
-  apiKeyName: PropTypes.string.isRequired,
+  apiKeyName: PropTypes.string,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   cartaroUrl: PropTypes.string,
@@ -53,6 +53,7 @@ const propTypes = {
 
 const defaultProps = {
   apiKey: null,
+  apiKeyName: 'key',
   history: null,
   activeTopic: null,
   cartaroUrl: null,
