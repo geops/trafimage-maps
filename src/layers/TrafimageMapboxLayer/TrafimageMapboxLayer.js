@@ -67,8 +67,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
   }
 
   setStyleConfig(url, key, apiKeyName) {
-    this.apiKey = key;
-    this.apiKeyName = apiKeyName;
+    if (url !== this.url) {
+      this.url = url;
+    }
+    if (key !== this.apiKey) {
+      this.apiKey = key;
+    }
+    if (apiKeyName !== this.apiKeyName) {
+      this.apiKeyName = apiKeyName;
+    }
     if (!url) {
       return;
     }
