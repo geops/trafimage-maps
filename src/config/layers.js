@@ -149,15 +149,17 @@ export const netzkarteLayer = new MapboxStyleLayer({
   },
 });
 
-export const netzkarteNight = new TrafimageMapboxLayer({
+export const netzkarteNight = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.night',
   key: 'ch.sbb.netzkarte.night',
   isBaseLayer: true,
-  style: 'base_dark_v2',
   properties: {
     radioGroup: 'baseLayer',
     previewImage: netzkarteNightImg,
   },
+  visible: false,
+  mapboxLayer: dataLayer,
+  style: 'base_dark_v2',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({

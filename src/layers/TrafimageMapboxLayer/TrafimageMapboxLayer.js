@@ -32,6 +32,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
   constructor(options) {
     super({ ...options, styleUrl: { version: 8, sources: {}, layers: [] } });
     this.filters = options.filters;
+    this.style = options.style;
   }
 
   init(map) {
@@ -66,24 +67,29 @@ class TrafimageMapboxLayer extends MapboxLayer {
     });
   }
 
+  setStyle(newStyle) {
+    this.style = newStyle || this.options.style;
+    this.setStyleConfig();
+  }
+
   setStyleConfig(url, key, apiKeyName) {
-    if (url !== this.url) {
+    if (!url && !key && !apiKeyName) {
+      this.styleUrl = `${this.url}/styles/${this.style}/style.json?`;
+    }
+    if (url && url !== this.url) {
       this.url = url;
     }
-    if (key !== this.apiKey) {
+    if (key && key !== this.apiKey) {
       this.apiKey = key;
     }
-    if (apiKeyName !== this.apiKeyName) {
+    if (apiKeyName && apiKeyName !== this.apiKeyName) {
       this.apiKeyName = apiKeyName;
     }
-    if (!url) {
-      return;
-    }
-    const { style } = this.options;
-    const newStyleUrl = this.styleUrl
-      ? this.createStyleUrl()
-      : `${url}/styles/${style}/style.json`;
 
+    const newStyleUrl =
+      this.styleUrl && this.style
+        ? this.createStyleUrl()
+        : `${this.url}/styles/${this.style}/style.json?`;
     if (this.filters) {
       this.loadStyle(newStyleUrl);
     }

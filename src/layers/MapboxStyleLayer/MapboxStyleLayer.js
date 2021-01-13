@@ -16,6 +16,7 @@ class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
     super(options);
     this.options = options;
+    this.style = options.style;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
     this.featureInfoFilter = options.featureInfoFilter || ((obj) => obj);
@@ -177,7 +178,7 @@ class MapboxStyleLayer extends Layer {
    * Apply visibility to style layers that fits the filter function.
    * @private
    */
-  applyLayoutVisibility() {
+  applyLayoutVisibility(isInit) {
     const { visible } = this;
     const { mbMap } = this.mapboxLayer;
 
@@ -189,6 +190,10 @@ class MapboxStyleLayer extends Layer {
 
     if (!style) {
       return;
+    }
+
+    if (this.style && !isInit) {
+      this.mapboxLayer.setStyle(visible ? this.style : null);
     }
 
     if (this.styleLayersFilter) {
