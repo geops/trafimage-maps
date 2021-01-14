@@ -146,17 +146,20 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
+  style: 'base_bright_v2',
 });
 
-export const netzkarteNight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.night',
-  key: 'ch.sbb.netzkarte.night',
+export const netzkarteNight = new MapboxStyleLayer({
+  name: 'ch.sbb.netzkarte.dark',
+  key: 'ch.sbb.netzkarte.dark',
   isBaseLayer: true,
-  style: 'base_dark_v2',
   properties: {
     radioGroup: 'baseLayer',
     previewImage: netzkarteNightImg,
   },
+  visible: false,
+  mapboxLayer: dataLayer,
+  style: 'base_dark_v2',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({

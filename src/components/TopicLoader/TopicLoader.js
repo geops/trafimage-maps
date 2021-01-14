@@ -22,8 +22,8 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-  apiKey: PropTypes.string.isRequired,
-  apiKeyName: PropTypes.string.isRequired,
+  apiKey: PropTypes.string,
+  apiKeyName: PropTypes.string,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   cartaroUrl: PropTypes.string,
@@ -52,6 +52,8 @@ const propTypes = {
 };
 
 const defaultProps = {
+  apiKey: null,
+  apiKeyName: 'key',
   history: null,
   activeTopic: null,
   cartaroUrl: null,
@@ -63,7 +65,11 @@ const defaultProps = {
 
 class TopicLoader extends Component {
   componentDidMount() {
-    this.loadTopics();
+    const { apiKey } = this.props;
+
+    if (apiKey) {
+      this.loadTopics();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -82,6 +88,10 @@ class TopicLoader extends Component {
     } = this.props;
     if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
+    }
+
+    if (!prevProps.apiKey && apiKey !== prevProps.apiKey) {
+      this.loadTopics();
     }
 
     if (

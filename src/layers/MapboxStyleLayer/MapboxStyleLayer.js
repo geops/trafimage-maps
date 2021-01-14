@@ -16,6 +16,7 @@ class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
     super(options);
     this.options = options;
+    this.style = options.style;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
     this.featureInfoFilter = options.featureInfoFilter || ((obj) => obj);
@@ -189,6 +190,10 @@ class MapboxStyleLayer extends Layer {
 
     if (!style) {
       return;
+    }
+
+    if (this.style && visible) {
+      this.mapboxLayer.setStyle(this.style);
     }
 
     if (this.styleLayersFilter) {

@@ -21,6 +21,8 @@ describe('MapboxStyleLayer', () => {
   beforeEach(() => {
     source = new TrafimageMapboxLayer({
       name: 'Layer',
+      url: 'foo.com/styles',
+      apiKey: 'test',
     });
     layer = new MapboxStyleLayer({
       name: 'mapbox layer',
