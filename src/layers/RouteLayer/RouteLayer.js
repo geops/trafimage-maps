@@ -25,7 +25,7 @@ import finishFlag from '../../img/finish_flag.png';
  * @class RouteLayer
  * @extends CasaLayer
  * @param {Object} [options] Layer options.
- *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
+ *   Default is `{ rail: '#e3000b', bus: '#ffed00', ferry: '#0074be' }`.
  * @param {string} [options.url = https://api.geops.io/routing/v1] Url to fetch routes.
  */
 class RouteLayer extends CasaLayer {
@@ -256,6 +256,10 @@ class RouteLayer extends CasaLayer {
    * @param {Object[]} routes[].sequences Route sequences.
    * @param {number} routes[].sequences[].uicFrom UIC number of start station.
    * @param {number} routes[].sequences[].uicTo UIC number of end station.
+   * @param {array} routes[].sequences[].latLonFrom Lat/Lon coordinate array of start location
+   *  (to be used if uicFrom not provided).
+   * @param {array} routes[].sequences[].latLonTo Lat/Lon coordinate array of end location
+   *  (to be used if uicTo not provided).
    * @param {string} routes[].sequences[].mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
@@ -272,7 +276,7 @@ class RouteLayer extends CasaLayer {
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
-        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } = routes[
+        const { mot, uicFrom, uicTo, latLonFrom, latLonTo } = routes[
           i
         ].sequences[j];
         const nextMot =
@@ -280,7 +284,7 @@ class RouteLayer extends CasaLayer {
             ? null
             : routes[i].sequences[j + 1].mot;
 
-        via = via.concat([uicFrom || lonLatFrom, uicTo || lonLatTo]);
+        via = via.concat([uicFrom || latLonFrom, uicTo || latLonTo]);
 
         if (mot !== nextMot) {
           const sequenceProps = { route: { ...routes[i], routeId: i }, mot };
