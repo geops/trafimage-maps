@@ -151,8 +151,8 @@ export const netzkarteLayer = new MapboxStyleLayer({
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.night',
-  key: 'ch.sbb.netzkarte.night',
+  name: 'ch.sbb.netzkarte.dark',
+  key: 'ch.sbb.netzkarte.dark',
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
