@@ -9,7 +9,11 @@ import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
 import Collapsible from '../Collapsible';
 import filters from '../../filters';
-import { setActiveTopic, setFeatureInfo } from '../../model/app/actions';
+import {
+  setActiveTopic,
+  setFeatureInfo,
+  updateDrawEditLink,
+} from '../../model/app/actions';
 import InfosButton from '../InfosButton';
 import TopicInfosButton from '../TopicInfosButton';
 
@@ -36,31 +40,6 @@ class TopicMenu extends PureComponent {
       isCollapsed: false,
       currentBaseLayerKey: null,
     };
-    this.updateCurrentBaseLayerKey = this.updateCurrentBaseLayerKey.bind(this);
-  }
-
-  componentDidMount() {
-    this.listenLayerServiceEvent();
-
-    const { layerService } = this.props;
-    const visibleBaseLayer =
-      layerService && layerService.getBaseLayers().find((l) => l.visible);
-    if (visibleBaseLayer) {
-      this.setState({
-        currentBaseLayerKey: visibleBaseLayer.key,
-      });
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { layerService } = this.props;
-    if (layerService !== prevProps.layerService) {
-      this.listenLayerServiceEvent(prevProps.layerService);
-    }
-  }
-
-  componentWillUnmount() {
-    this.unlistenLayerServiceEvent();
   }
 
   onTopicClick(topic) {
@@ -76,32 +55,6 @@ class TopicMenu extends PureComponent {
     } else {
       dispatchSetActiveTopic(topic);
       dispatchSetFeatureInfo([]);
-    }
-  }
-
-  listenLayerServiceEvent() {
-    this.unlistenLayerServiceEvent();
-    const { layerService } = this.props;
-    if (layerService) {
-      layerService.on('change:visible', this.updateCurrentBaseLayerKey);
-    }
-  }
-
-  unlistenLayerServiceEvent(prevLayerService) {
-    const { layerService } = this.props;
-    if (layerService || prevLayerService) {
-      (prevLayerService || layerService).un(
-        'change:visible',
-        this.updateCurrentBaseLayerKey,
-      );
-    }
-  }
-
-  updateCurrentBaseLayerKey(layer) {
-    if (layer.isBaseLayer && layer.visible) {
-      this.setState({
-        currentBaseLayerKey: layer.key,
-      });
     }
   }
 
@@ -180,6 +133,9 @@ class TopicMenu extends PureComponent {
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
       return !l.get('hideInLegend');
     });
+    const currentBaseLayer = layerService
+      .getBaseLayers()
+      .find((l) => l.visible);
 
     return (
       <div className="wkp-topic-menu">
@@ -236,7 +192,11 @@ class TopicMenu extends PureComponent {
                       layer: l,
                     };
                   })}
-                  value={currentBaseLayerKey}
+                  value={
+                    currentBaseLayerKey ||
+                    currentBaseLayer.name ||
+                    currentBaseLayer.key
+                  }
                   onChange={(evt, option) => {
                     option.layer.setVisible(true);
                     this.setState({
@@ -267,6 +227,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   dispatchSetActiveTopic: setActiveTopic,
   dispatchSetFeatureInfo: setFeatureInfo,
+  dispatchUpdateDrawEditLink: updateDrawEditLink,
 };
 
 export default compose(

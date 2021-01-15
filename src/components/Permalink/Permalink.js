@@ -15,6 +15,7 @@ import {
   setFeatureInfo,
   setLanguage,
   setDrawIds,
+  updateDrawEditLink,
 } from '../../model/app/actions';
 import { DRAW_PARAM, DRAW_OLD_PARAM } from '../../utils/constants';
 
@@ -45,6 +46,7 @@ const propTypes = {
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetDrawIds: PropTypes.func.isRequired,
+  dispatchUpdateDrawEditLink: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -189,6 +191,7 @@ class Permalink extends PureComponent {
       layerService,
       language,
       drawIds,
+      dispatchUpdateDrawEditLink,
     } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
@@ -220,6 +223,8 @@ class Permalink extends PureComponent {
     if (drawIds !== prevProps.drawIds) {
       this.updateDrawIds();
     }
+
+    dispatchUpdateDrawEditLink();
   }
 
   async openDepartureOnLoad() {
@@ -331,6 +336,7 @@ const mapDispatchToProps = {
   dispatchSetDeparturesFilter: setDeparturesFilter,
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetDrawIds: setDrawIds,
+  dispatchUpdateDrawEditLink: updateDrawEditLink,
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

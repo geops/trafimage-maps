@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { unByKey } from 'ol/Observable';
 import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
 import withResizing from '../withResizing';
-import { setMenuOpen, setSearchOpen } from '../../model/app/actions';
+import {
+  setMenuOpen,
+  setSearchOpen,
+  updateDrawEditLink,
+} from '../../model/app/actions';
 import DrawLayerMenu from '../DrawLayerMenu';
 
 const propTypes = {
@@ -30,6 +35,20 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const topics = useSelector((state) => state.app.topics);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    let timeout;
+    const key = layerService.on('change:visible', () => {
+      // Update link after permalink has been updated.
+      timeout = setTimeout(() => {
+        dispatch(updateDrawEditLink());
+      }, 50);
+    });
+    return () => {
+      unByKey(key);
+      clearTimeout(timeout);
+    };
+  }, [layerService, dispatch]);
 
   if (!topics || !topics.length) {
     return null;

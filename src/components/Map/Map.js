@@ -11,7 +11,11 @@ import BasicMap from 'react-spatial/components/BasicMap';
 import LayerService from 'react-spatial/LayerService';
 import MapAccessibility from '../MapAccessibility';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
-import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
+import {
+  setFeatureInfo,
+  setSearchOpen,
+  updateDrawEditLink,
+} from '../../model/app/actions';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -34,6 +38,7 @@ const propTypes = {
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchOpen: PropTypes.func.isRequired,
+  dispatchUpdateDrawEditlink: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -92,6 +97,7 @@ class Map extends PureComponent {
       dispatchSetZoom,
       zoom,
       dispatchHtmlEvent,
+      dispatchUpdateDrawEditlink,
     } = this.props;
     const newResolution = evt.map.getView().getResolution();
     const newZoom = evt.map.getView().getZoom();
@@ -99,14 +105,17 @@ class Map extends PureComponent {
 
     if (zoom !== newZoom) {
       dispatchSetZoom(newZoom);
+      dispatchUpdateDrawEditlink();
     }
 
     if (resolution !== newResolution) {
       dispatchSetResolution(newResolution);
+      dispatchUpdateDrawEditlink();
     }
 
     if (center[0] !== newCenter[0] || center[1] !== newCenter[1]) {
       dispatchSetCenter(newCenter);
+      dispatchUpdateDrawEditlink();
     }
 
     // Propagate the ol event to the WebComponent
@@ -286,6 +295,7 @@ const mapDispatchToProps = {
   dispatchSetZoom: setZoom,
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchOpen: setSearchOpen,
+  dispatchUpdateDrawEditlink: updateDrawEditLink,
 };
 
 export default compose(
