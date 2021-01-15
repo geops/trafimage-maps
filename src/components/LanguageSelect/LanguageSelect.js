@@ -20,6 +20,16 @@ const optionsMobile = [
   { label: 'EN', value: 'en' },
 ];
 
+const getOptionColor = (isFocused, isSelected) => {
+  if (isFocused) {
+    return '#c60018';
+  }
+  if (isSelected) {
+    return '#000';
+  }
+  return '#767676';
+};
+
 const selectStyles = (isMobile) => {
   return {
     container: () => ({
@@ -61,10 +71,16 @@ const selectStyles = (isMobile) => {
     option: (styles, state) => ({
       ...styles,
       padding: '10px 15px',
-      color: state.isFocused ? '#c60018' : '#767676',
+      color: getOptionColor(
+        isMobile ? false : state.isFocused,
+        state.isSelected,
+      ),
       '&:hover': {
         cursor: state.isSelected ? 'default' : 'pointer',
-        color: state.isSelected ? '#767676' : '#c60018',
+        color: getOptionColor(
+          isMobile ? false : state.isFocused,
+          state.isSelected,
+        ),
       },
       backgroundColor: 'white',
     }),
