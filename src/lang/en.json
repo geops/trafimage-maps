@@ -106,7 +106,7 @@
   "ch.sbb.netzkarte-desc": "The network map is aimed at public transport users. It is a basic map derived from timetable data. Relevant information can be accessed directly from the map by clicking on the required station.",
   "ch.sbb.netzkarte-desc-topic-info": "Under Layer, there is further content which can be displayed on the map.",
   "ch.sbb.netzkarte.buslinien": "Bus routes",
-  "ch.sbb.netzkarte.dark": "Nightmode",
+  "ch.sbb.netzkarte.dark": "Night mode",
   "ch.sbb.netzkarte.flughafen": "Airports",
   "ch.sbb.netzkarte.landeskarte": "Swiss National Map",
   "ch.sbb.netzkarte.landeskarte.grau": "Swiss National Map (grey)",
