@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import { MdLoop } from 'react-icons/md';
 import { withTranslation } from 'react-i18next';
 import qs from 'query-string';

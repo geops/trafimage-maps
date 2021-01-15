@@ -11,8 +11,8 @@ import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
-import BehigLayer from '../layers/BehigLayer/BehigLayer';
 import netzkarte from '../img/netzkarte.png';
+import netzkarteNightImg from '../img/netzkarte_night.png';
 import landeskarte from '../img/landeskarte.png';
 import landeskarteGrau from '../img/landeskarte_grau.png';
 import luftbild from '../img/luftbild.png';
@@ -146,6 +146,20 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
+  style: 'base_bright_v2',
+});
+
+export const netzkarteNight = new MapboxStyleLayer({
+  name: 'ch.sbb.netzkarte.dark',
+  key: 'ch.sbb.netzkarte.dark',
+  isBaseLayer: true,
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: netzkarteNightImg,
+  },
+  visible: false,
+  mapboxLayer: dataLayer,
+  style: 'base_dark_v2',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
@@ -508,10 +522,11 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
 
 export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.night',
+  key: 'ch.sbb.netzkarte.night',
   visible: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'showcase2',
+  style: 'base_dark_v2',
   properties: {
     hasInfos: true,
     description: 'ch.sbb.netzkarte.night-desc',
@@ -521,6 +536,7 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
 
 export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.light',
+  key: 'ch.sbb.netzkarte.light',
   visible: true,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
@@ -534,7 +550,7 @@ export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
 
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.layer',
-  key: 'ch.sbb.netzkarte',
+  key: 'ch.sbb.netzkarte.layer',
   visible: false,
   isQueryable: false,
   preserveDrawingBuffer: true,
@@ -885,56 +901,6 @@ export const constrClusters = new Layer({
       },
     }),
   ],
-});
-
-export const behigOk = new Layer({
-  name: 'ch.sbb.behig.ok',
-  key: 'ch.sbb.behig.ok',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BehigLayerInfo',
-    behig: {
-      status: 'OK',
-    },
-  },
-});
-
-export const behigNotYetOk = new Layer({
-  name: 'ch.sbb.behig.not_yet_ok',
-  key: 'ch.sbb.behig.not_yet_ok',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BehigLayerInfo',
-    behig: {
-      status: 'NOCH NICHT OK',
-    },
-  },
-});
-
-export const behigNotOk = new Layer({
-  name: 'ch.sbb.behig.not_ok',
-  key: 'ch.sbb.behig.not_ok',
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BehigLayerInfo',
-    behig: {
-      status: 'BLEIBEN NICHT OK',
-    },
-  },
-});
-
-export const behigParent = new BehigLayer({
-  name: 'ch.sbb.behig.parent',
-  key: 'ch.sbb.behig.parent',
-  visible: true,
-  properties: {
-    hideInLegend: true,
-    popupComponent: 'BehigPopup',
-  },
-  toggleLayers: [behigOk, behigNotYetOk, behigNotOk],
 });
 
 export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
@@ -1351,6 +1317,7 @@ export const zweitausbildungRoutes = new Layer({
 export default [
   dataLayer,
   netzkarteLayer,
+  netzkarteNight,
   swisstopoSwissImage,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,

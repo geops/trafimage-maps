@@ -16,7 +16,7 @@ import {
   SET_DIALOG_POSITION,
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
-  SET_PERMISSIONS_INFOS,
+  SET_PERMISSION_INFOS,
   SET_SCREEN_WIDTH,
   SET_CARTARO_OLD_URL,
   SET_MAPSET_URL,
@@ -33,7 +33,7 @@ import SearchService from '../../components/Search/SearchService';
 const getInitialState = () => ({
   // We set the permission to null instead of a default empty object
   // to know when the request has been done.
-  permissionsInfos: null,
+  permissionInfos: null,
   topics: [],
   featureInfo: [],
   language: 'de',
@@ -124,10 +124,10 @@ export default function app(state = getInitialState(), action) {
         ...state,
         departuresFilter: action.data,
       };
-    case SET_PERMISSIONS_INFOS:
+    case SET_PERMISSION_INFOS:
       return {
         ...state,
-        permissionsInfos: action.data || {
+        permissionInfos: action.data || {
           user: null,
           permissions: [],
         },

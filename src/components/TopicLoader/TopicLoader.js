@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import LayerService from 'react-spatial/LayerService';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { setLayers } from '../../model/map/actions';
@@ -13,7 +13,6 @@ import {
   setTopics,
   setFeatureInfo,
   setSearchService,
-  fetchPermissionsInfos,
 } from '../../model/app/actions';
 import SearchService from '../Search/SearchService';
 import TopicElements from '../TopicElements';
@@ -24,13 +23,12 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-  apiKey: PropTypes.string.isRequired,
-  apiKeyName: PropTypes.string.isRequired,
+  apiKey: PropTypes.string,
+  apiKeyName: PropTypes.string,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
-  permissionUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
@@ -39,7 +37,7 @@ const propTypes = {
   activeTopic: PropTypes.shape(),
   language: PropTypes.string.isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
-  permissionsInfos: PropTypes.shape({
+  permissionInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.array,
   }),
@@ -51,29 +49,27 @@ const propTypes = {
   dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
-  dispatchFetchPermissionsInfos: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
+  apiKey: null,
+  apiKeyName: 'key',
   history: null,
   activeTopic: null,
   cartaroUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
-  permissionUrl: null,
-  permissionsInfos: null,
+  permissionInfos: null,
   staticFilesUrl: null,
 };
 
 class TopicLoader extends Component {
   componentDidMount() {
-    const { dispatchFetchPermissionsInfos, permissionUrl } = this.props;
+    const { apiKey } = this.props;
 
-    if (permissionUrl) {
-      dispatchFetchPermissionsInfos(permissionUrl);
-    } else {
+    if (apiKey) {
       this.loadTopics();
     }
   }
@@ -83,28 +79,25 @@ class TopicLoader extends Component {
       activeTopic,
       language,
       topics,
-      permissionsInfos,
+      permissionInfos,
       apiKey,
       apiKeyName,
       cartaroUrl,
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
-      permissionUrl,
       staticFilesUrl,
-      dispatchFetchPermissionsInfos,
     } = this.props;
-
-    if (permissionUrl !== prevProps.permissionUrl && permissionUrl) {
-      dispatchFetchPermissionsInfos(permissionUrl);
-    }
-
     if (activeTopic !== prevProps.activeTopic) {
       this.updateServices(activeTopic);
     }
 
+    if (!prevProps.apiKey && apiKey !== prevProps.apiKey) {
+      this.loadTopics();
+    }
+
     if (
-      permissionsInfos !== prevProps.permissionsInfos ||
+      permissionInfos !== prevProps.permissionInfos ||
       topics !== prevProps.topics
     ) {
       this.loadTopics();
@@ -141,7 +134,7 @@ class TopicLoader extends Component {
     const {
       topics,
       appBaseUrl,
-      permissionsInfos,
+      permissionInfos,
       dispatchSetTopics,
       dispatchSetActiveTopic,
     } = this.props;
@@ -154,21 +147,22 @@ class TopicLoader extends Component {
     const visibleTopics = topics.filter(
       (t) =>
         (!t.permission ||
-          (permissionsInfos &&
-            permissionsInfos.permissions.includes(t.permission))) &&
+          (permissionInfos &&
+            permissionInfos.permissions &&
+            permissionInfos.permissions.includes(t.permission))) &&
         !t.hideInLayerTree,
     );
     let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
-    if (isTopicNeedsPermission && permissionsInfos && !permissionsInfos.user) {
+    if (isTopicNeedsPermission && permissionInfos && !permissionInfos.user) {
       redirectToLogin(appBaseUrl);
       return;
     }
 
     // If the wanted topic can't be seen, we do nothing until the login redirect happens.
-    if (isTopicNeedsPermission && !permissionsInfos) {
+    if (isTopicNeedsPermission && !permissionInfos) {
       return;
     }
 
@@ -330,6 +324,7 @@ const mapStateToProps = (state) => ({
   layerService: state.app.layerService,
   permissionsInfos: state.app.permissionsInfos,
   drawLayer: state.map.drawLayer,
+  permissionInfos: state.app.permissionInfos,
 });
 
 const mapDispatchToProps = {
@@ -338,7 +333,6 @@ const mapDispatchToProps = {
   dispatchSetTopics: setTopics,
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchService: setSearchService,
-  dispatchFetchPermissionsInfos: fetchPermissionsInfos,
 };
 
 TopicLoader.propTypes = propTypes;

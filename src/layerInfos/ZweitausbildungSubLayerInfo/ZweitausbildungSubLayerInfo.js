@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 
 const propTypes = {
   t: PropTypes.func.isRequired,

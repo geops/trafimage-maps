@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 
 import './ZweitausbildungPoisPopup.scss';
 

@@ -1,5 +1,3 @@
-import BehigLayerInfo from './BehigLayerInfo';
-import BehigTopicInfo from './BehigTopicInfo';
 import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
@@ -23,8 +21,6 @@ import ZweitausbildungSubLayerInfo from './ZweitausbildungSubLayerInfo';
 import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
 
 export default {
-  BehigLayerInfo,
-  BehigTopicInfo,
   BuslinesLayerInfo,
   ConstructionLayerInfo,
   ConstructionTopicInfo,

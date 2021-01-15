@@ -89,7 +89,10 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       role="dialog"
     >
       <React.Suspense fallback="...loading">
-        {PopupComponent && !PopupComponent.hideHeader ? (
+        {PopupComponent &&
+        (!PopupComponent.hideHeader ||
+          (PopupComponent.hideHeader && // For dynamic header rendering (e.g. CASA)
+            !PopupComponent.hideHeader(feature))) ? (
           <div className="wkp-feature-information-header">
             <span id="wkp-popup-label">
               {PopupComponent && PopupComponent.renderTitle && feature

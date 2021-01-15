@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 
 import { Layer } from 'mobility-toolbox-js/ol';
 import { unByKey } from 'ol/Observable';

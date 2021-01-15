@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { compose } from 'lodash/fp';
+import { compose } from 'redux';
 import GeoJSON from 'ol/format/GeoJSON';
 import qs from 'query-string';
 import OLMap from 'ol/Map';

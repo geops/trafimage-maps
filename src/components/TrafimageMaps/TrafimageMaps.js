@@ -20,6 +20,7 @@ import {
   setDrawUrl,
   setDrawOldUrl,
   setShortenerUrl,
+  setPermissionInfos,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -142,12 +143,6 @@ const propTypes = {
   drawOldUrl: PropTypes.string,
 
   /**
-   * URL to request permission.
-   * @private
-   */
-  permissionUrl: PropTypes.string,
-
-  /**
    * Enable analytics tracking.
    * @private
    */
@@ -158,6 +153,15 @@ const propTypes = {
    * @private
    */
   activeTopicKey: PropTypes.string,
+
+  /**
+   * Informations on logged in user and its permissions.
+   * @private
+   */
+  permissionInfos: PropTypes.shape({
+    user: PropTypes.string,
+    permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }),
 };
 
 const defaultProps = {
@@ -177,11 +181,11 @@ const defaultProps = {
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
   drawOldUrl: process.env.REACT_APP_DRAW_OLD_URL,
-  permissionUrl: null,
   topics: null,
   language: 'de',
   enableTracking: false,
   activeTopicKey: null,
+  permissionInfos: null,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -208,6 +212,7 @@ class TrafimageMaps extends React.PureComponent {
       drawUrl,
       drawOldUrl,
       maxExtent,
+      permissionInfos,
     } = this.props;
 
     if (zoom) {
@@ -246,6 +251,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setLanguage(language));
     }
 
+    if (permissionInfos) {
+      this.store.dispatch(setPermissionInfos(permissionInfos));
+    }
+
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
     if (
       enableTracking &&
@@ -272,6 +281,7 @@ class TrafimageMaps extends React.PureComponent {
       shortenerUrl,
       drawUrl,
       drawOldUrl,
+      permissionInfos,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -309,6 +319,10 @@ class TrafimageMaps extends React.PureComponent {
     if (this.matomo && !prevProps.enableTracking && enableTracking) {
       this.matomo.trackPageView();
     }
+
+    if (permissionInfos !== prevProps.permissionInfos) {
+      this.store.dispatch(setPermissionInfos(permissionInfos));
+    }
   }
 
   render() {
@@ -322,7 +336,6 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
       staticFilesUrl,
-      permissionUrl,
       activeTopicKey,
       mapsetUrl,
       shortenerUrl,
@@ -342,7 +355,6 @@ class TrafimageMaps extends React.PureComponent {
               activeTopicKey={activeTopicKey}
               cartaroUrl={cartaroUrl}
               appBaseUrl={appBaseUrl}
-              permissionUrl={permissionUrl}
               vectorTilesKey={vectorTilesKey}
               vectorTilesUrl={vectorTilesUrl}
               staticFilesUrl={staticFilesUrl}

@@ -108,11 +108,6 @@ const propTypes = {
   staticFilesUrl: PropTypes.string,
 
   /**
-   * URL to request permission.
-   */
-  permissionUrl: PropTypes.string,
-
-  /**
    * Enable analytics tracking.
    */
   enableTracking: PropTypes.bool,
@@ -139,7 +134,6 @@ const attributes = {
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
   drawOldUrl: process.env.REACT_APP_DRAW_OLD_URL,
-  permissionUrl: null,
   enableTracking: false,
 };
 
