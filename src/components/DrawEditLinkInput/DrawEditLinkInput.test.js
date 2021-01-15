@@ -15,9 +15,7 @@ describe('DrawEditLinkInput', () => {
     test('return null if no admin_id value', () => {
       store = mockStore({
         map: {},
-        app: {
-          drawEditLink: '',
-        },
+        app: {},
       });
       const component = renderer.create(
         <Provider store={store}>
