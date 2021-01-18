@@ -135,9 +135,19 @@ export const updateDrawEditLink = () => (dispatch, getState) => {
 
   // we try to update an existing shorten url, if it fails we create a new shorten url.
   // The / before the ? avoid a redirect.
-  fetch(`${shortenerUrl}/edit/${drawAdminId}/?target=${urlToShorten}`, {
-    signal: abortController.signal,
-  })
+  fetch(
+    `${shortenerUrl}/edit/${drawAdminId}/?target=${encodeURIComponent(
+      urlToShorten,
+    )}`,
+    {
+      // method: 'POST',
+      // headers: {
+      //   'Content-Type': 'application/x-www-form-urlencoded',
+      // },
+      // body: `target=${encodeURIComponent(urlToShorten)}`,
+      signal: abortController.signal,
+    },
+  )
     .then((res) => res.json())
     .then((data) => {
       if (data.error) {
@@ -157,11 +167,22 @@ export const updateDrawEditLink = () => (dispatch, getState) => {
         abortController2.abort();
       }
       abortController2 = new AbortController();
+
       // No shorten url for this drawAdminId so we create a new shorten url.
       // The / before the ? avoid a redirect.
-      fetch(`${shortenerUrl}/?url=${urlToShorten}&word=${drawAdminId}`, {
-        signal: abortController2.signal,
-      })
+      fetch(
+        `${shortenerUrl}/?url=${encodeURIComponent(
+          urlToShorten,
+        )}&word=${drawAdminId}`,
+        {
+          // method: 'POST',
+          // headers: {
+          //   'Content-Type': 'application/x-www-form-urlencoded',
+          // },
+          // body: `url=${urlToShorten}&word=${drawAdminId}`,
+          signal: abortController2.signal,
+        },
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.error) {

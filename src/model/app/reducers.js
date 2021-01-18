@@ -3,7 +3,6 @@ import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
 import {
-  updateDrawEditLink,
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
   SET_FEATURE_INFO,
@@ -59,7 +58,6 @@ const getInitialState = () => ({
 });
 
 export default function app(state = getInitialState(), action) {
-  updateDrawEditLink();
   switch (action.type) {
     case SET_SEARCH_SERVICE:
       return {

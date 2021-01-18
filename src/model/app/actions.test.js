@@ -9,12 +9,12 @@ describe('actions', () => {
       await act(async () => {
         // Updating an existing shoreten url fails
         fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo',
           { error: 'Not found' },
         );
         // Creating an existing shorten url succeeds
         fetchMock.once(
-          'http://shortenfoo.ch/?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo&word=foo',
+          'http://shortenfoo.ch/?url=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo&word=foo',
           { url: 'http://shortqux.ch/qur' },
         );
 
@@ -44,17 +44,6 @@ describe('actions', () => {
 
       // Don't make twice the same request
       await act(async () => {
-        // Updating an existing shoreten url fails
-        fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
-          { error: 'Not found' },
-        );
-        // Creating an existing shorten url succeeds
-        fetchMock.once(
-          'http://shortenfoo.ch/?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo&word=foo',
-          { url: 'http://shortqux.ch/qur' },
-        );
-
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
@@ -73,7 +62,7 @@ describe('actions', () => {
       await act(async () => {
         // Updating an existing shoreten url succeeds
         fetchMock.once(
-          'http://shortenfoo.ch/edit/fooch/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfooch',
+          'http://shortenfoo.ch/edit/fooch/?target=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfooch',
           { url: 'http://shortqux.ch/qur' },
         );
 
@@ -107,12 +96,12 @@ describe('actions', () => {
       await act(async () => {
         // Updating an existing shoreten url fails
         fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo',
           { error: 'Not found' },
         );
         // Creating an existing shorten url fails too
         fetchMock.once(
-          'http://shortenfoo.ch/?url=http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo&word=foo',
+          'http://shortenfoo.ch/?url=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo&word=foo',
           { error: 'Bad parameter' },
         );
 
