@@ -60,7 +60,7 @@ const PunctualityLayerInfo = ({ language, t }) => {
           </>
         ) : null}
       </svg>
-      {t(d.legend)}
+      <span>{t(d.legend)}</span>
     </div>
   ));
 
