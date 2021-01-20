@@ -11485,7 +11485,7 @@ mixin-object@^2.0.1:
   dependencies:
     minimist "^1.2.5"
 
-mobility-toolbox-js@^1.2.8:
+mobility-toolbox-js@1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.2.8.tgz#449c362ceb100e09b43f2bbffdb78820f712355c"
   integrity sha512-CFvdCYBTNFAPXgwUm0GYuHt57Fg4XuFAJDs7QkSMzfSUU1JDFj8AficRWXzE4GA2lrg7E/7+Yzcd4HudDxz01g==
