@@ -37,23 +37,30 @@ const PunctualityLayerInfo = ({ language, t }) => {
 
   const legend = delays.map((d) => (
     <div className="tm-punctuality-delay">
-      <svg height="21" width="21">
-        <circle cx="10" cy="10" r="10" fill={d.color} />
+      <svg height="23" width="23">
+        <circle
+          cx="11"
+          cy="11"
+          r="10"
+          fill={d.color}
+          strokeWidth="1.1"
+          stroke="black"
+        />
         {d.crossed ? (
           <>
             <line
-              x1="3"
-              y1="17"
-              x2="17"
-              y2="3"
+              x1="4"
+              y1="18"
+              x2="18"
+              y2="4"
               strokeWidth="1.1"
               stroke="black"
             />
             <line
-              x1="17"
-              y1="17"
-              x2="3"
-              y2="3"
+              x1="18"
+              y1="18"
+              x2="4"
+              y2="4"
               strokeWidth="1.1"
               stroke="black"
             />
