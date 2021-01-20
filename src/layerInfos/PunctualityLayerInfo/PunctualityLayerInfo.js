@@ -43,8 +43,8 @@ const PunctualityLayerInfo = ({ language, t }) => {
           cy="11"
           r="10"
           fill={d.color}
-          strokeWidth="1.1"
-          stroke="black"
+          strokeWidth="1.5"
+          stroke="#404040"
         />
         {d.crossed ? (
           <>
@@ -54,7 +54,7 @@ const PunctualityLayerInfo = ({ language, t }) => {
               x2="18"
               y2="4"
               strokeWidth="1.1"
-              stroke="black"
+              stroke="#404040"
             />
             <line
               x1="18"
@@ -62,7 +62,7 @@ const PunctualityLayerInfo = ({ language, t }) => {
               x2="4"
               y2="4"
               strokeWidth="1.1"
-              stroke="black"
+              stroke="#404040"
             />
           </>
         ) : null}
