@@ -25,13 +25,13 @@ const PunctualityLayerInfo = ({ language, t }) => {
       legend: 'ch.sbb.puenktlichkeit-high-delay',
     },
     {
-      color: '#a0a0a0', // grey
-      legend: 'ch.sbb.puenktlichkeit-company-no-realtime',
-    },
-    {
       crossed: true,
       color: '#a0a0a0', // grey
       legend: 'ch.sbb.puenktlichkeit-journey-no-realtime',
+    },
+    {
+      color: '#a0a0a0', // grey
+      legend: 'ch.sbb.puenktlichkeit-company-no-realtime',
     },
   ];
 
