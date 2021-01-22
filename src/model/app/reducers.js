@@ -28,6 +28,7 @@ import {
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
+import { isOpenedByMapset } from '../../utils/redirectHelper';
 
 const getInitialState = () => ({
   // We set the permission to null instead of a default empty object
@@ -41,7 +42,8 @@ const getInitialState = () => ({
     value: 'EPSG:4326',
     format: (c) => c,
   },
-  menuOpen: false,
+  // Open the menu when mapset has opened the page.
+  menuOpen: isOpenedByMapset(),
   searchOpen: false,
   selectedForInfos: null,
   map: new OLMap({

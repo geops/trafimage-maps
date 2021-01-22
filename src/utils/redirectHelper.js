@@ -58,3 +58,7 @@ export function redirectToLogin(appBaseUrl) {
     window.location.href,
   )}`;
 }
+
+export function isOpenedByMapset() {
+  return (document.referrer && /(mapset)/.test(document.referrer)) || false;
+}
