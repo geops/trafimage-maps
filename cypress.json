@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://localhost:3000",
+  "baseUrl": "http://localhost:3000",
   "numTestsKeptInMemory": 0,
   "chromeWebSecurity": false,
   "video": false
