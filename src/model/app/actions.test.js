@@ -9,12 +9,12 @@ describe('actions', () => {
       await act(async () => {
         // Updating an existing shoreten url fails
         fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo',
+          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue',
           { error: 'Not found' },
         );
         // Creating an existing shorten url succeeds
         fetchMock.once(
-          'http://shortenfoo.ch/?url=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo&word=foo',
+          'http://shortenfoo.ch/?url=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue&word=foo',
           { url: 'http://shortqux.ch/qur' },
         );
 
@@ -62,7 +62,7 @@ describe('actions', () => {
       await act(async () => {
         // Updating an existing shoreten url succeeds
         fetchMock.once(
-          'http://shortenfoo.ch/edit/fooch/?target=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfooch',
+          'http://shortenfoo.ch/edit/fooch/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfooch%26draw.redirect%3Dtrue',
           { url: 'http://shortqux.ch/qur' },
         );
 
@@ -96,12 +96,12 @@ describe('actions', () => {
       await act(async () => {
         // Updating an existing shoreten url fails
         fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo',
+          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue',
           { error: 'Not found' },
         );
         // Creating an existing shorten url fails too
         fetchMock.once(
-          'http://shortenfoo.ch/?url=http%3A%2F%2Fmapsetbar.ch%3Fparent%3Dhttp%253A%252F%252Flocalhost%252F%253Fdraw.id%253Dfoo&word=foo',
+          'http://shortenfoo.ch/?url=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue&word=foo',
           { error: 'Bad parameter' },
         );
 
@@ -124,8 +124,7 @@ describe('actions', () => {
         type: 'SET_DRAW_EDIT_LINK_LOADING',
       });
       expect(spy.mock.calls[2][0]).toEqual({
-        data:
-          'http://mapsetbar.ch?parent=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo',
+        data: 'http://localhost/?draw.id=foo&draw.redirect=true',
         type: 'SET_DRAW_EDIT_LINK',
       });
       fetchMock.restore();

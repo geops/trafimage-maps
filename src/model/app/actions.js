@@ -1,5 +1,5 @@
 import qs from 'query-string';
-import { DRAW_PARAM, MAPSET_PARENT_PARAM } from '../../utils/constants';
+import { DRAW_PARAM, DRAW_REDIRECT_PARAM } from '../../utils/constants';
 
 export const SET_TOPICS = 'SET_TOPICS';
 export const SET_ACTIVE_TOPIC = 'SET_ACTIVE_TOPIC';
@@ -97,9 +97,10 @@ let abortController2;
 let oldUrlToShorten;
 // This variable is used to avoid having aborted request in the console.
 let currentUrlRequested;
+
 export const updateDrawEditLink = () => (dispatch, getState) => {
   const {
-    app: { mapsetUrl, shortenerUrl, drawIds },
+    app: { shortenerUrl, drawIds },
   } = getState();
   const drawAdminId = drawIds && drawIds.admin_id;
 
@@ -108,11 +109,10 @@ export const updateDrawEditLink = () => (dispatch, getState) => {
   }
 
   // Build the url to shorten
-  const params = qs.parse(window.location.search);
-  params[DRAW_PARAM] = drawAdminId;
-  const urlToShorten = `${mapsetUrl}?${MAPSET_PARENT_PARAM}=${encodeURIComponent(
-    `${window.location.href.split('?')[0]}?${qs.stringify(params)}`,
-  )}`;
+  const parsed = qs.parseUrl(window.location.href);
+  parsed.query[DRAW_PARAM] = drawAdminId;
+  parsed.query[DRAW_REDIRECT_PARAM] = true;
+  const urlToShorten = qs.stringifyUrl(parsed);
 
   if (
     urlToShorten === oldUrlToShorten ||

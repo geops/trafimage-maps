@@ -17,7 +17,12 @@ import {
   setDrawIds,
   updateDrawEditLink,
 } from '../../model/app/actions';
-import { DRAW_PARAM, DRAW_OLD_PARAM } from '../../utils/constants';
+import {
+  DRAW_PARAM,
+  DRAW_OLD_PARAM,
+  DRAW_REDIRECT_PARAM,
+  MAPSET_PARENT_PARAM,
+} from '../../utils/constants';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -38,6 +43,7 @@ const propTypes = {
   drawOldUrl: PropTypes.string,
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   drawIds: PropTypes.object,
+  mapsetUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetLanguage: PropTypes.func.isRequired,
@@ -56,6 +62,7 @@ const defaultProps = {
   drawUrl: undefined,
   drawOldUrl: undefined,
   drawIds: undefined,
+  mapsetUrl: undefined,
 };
 
 const format = new GeoJSON();
@@ -74,6 +81,7 @@ class Permalink extends PureComponent {
       drawOldUrl,
       drawLayer,
       map,
+      mapsetUrl,
     } = this.props;
 
     const parameters = {
@@ -83,6 +91,18 @@ class Permalink extends PureComponent {
 
     const wkpDraw = parameters[DRAW_OLD_PARAM];
     const drawId = parameters[DRAW_PARAM] || wkpDraw;
+
+    // if the draw.redirect parameter is true, that means we must redirect the page to mapset.
+    const mustRedirectToMapset = parameters[DRAW_REDIRECT_PARAM] === 'true';
+    if (drawId && mustRedirectToMapset && mapsetUrl) {
+      const params = qs.parse(window.location.search);
+      params[DRAW_PARAM] = drawId;
+      delete params[DRAW_REDIRECT_PARAM];
+      window.location.href = `${mapsetUrl}?${MAPSET_PARENT_PARAM}=${encodeURIComponent(
+        `${window.location.href.split('?')[0]}?${qs.stringify(params)}`,
+      )}`;
+    }
+
     if (drawId) {
       // Redirection to the old wkp to use the drawing tool.
       // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
@@ -327,6 +347,7 @@ const mapStateToProps = (state) => ({
   drawOldUrl: state.app.drawOldUrl,
   drawLayer: state.map.drawLayer,
   drawIds: state.app.drawIds,
+  mapsetUrl: state.app.mapsetUrl,
 });
 
 const mapDispatchToProps = {
