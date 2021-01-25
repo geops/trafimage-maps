@@ -68,27 +68,11 @@ const defaultProps = {
 const format = new GeoJSON();
 
 class Permalink extends PureComponent {
-  componentDidMount() {
-    const {
-      dispatchSetZoom,
-      dispatchSetCenter,
-      dispatchSetLanguage,
-      dispatchSetDrawIds,
-      dispatchSetDeparturesFilter,
-      initialState,
-      language,
-      drawUrl,
-      drawOldUrl,
-      drawLayer,
-      map,
-      mapsetUrl,
-    } = this.props;
+  constructor(props) {
+    super(props);
+    const { mapsetUrl } = this.props;
 
-    const parameters = {
-      ...qs.parse(window.location.search),
-      ...initialState,
-    };
-
+    const parameters = qs.parse(window.location.search);
     const wkpDraw = parameters[DRAW_OLD_PARAM];
     const drawId = parameters[DRAW_PARAM] || wkpDraw;
 
@@ -102,6 +86,30 @@ class Permalink extends PureComponent {
         `${window.location.href.split('?')[0]}?${qs.stringify(params)}`,
       )}`;
     }
+  }
+
+  componentDidMount() {
+    const {
+      dispatchSetZoom,
+      dispatchSetCenter,
+      dispatchSetLanguage,
+      dispatchSetDrawIds,
+      dispatchSetDeparturesFilter,
+      initialState,
+      language,
+      drawUrl,
+      drawOldUrl,
+      drawLayer,
+      map,
+    } = this.props;
+
+    const parameters = {
+      ...qs.parse(window.location.search),
+      ...initialState,
+    };
+
+    const wkpDraw = parameters[DRAW_OLD_PARAM];
+    const drawId = parameters[DRAW_PARAM] || wkpDraw;
 
     if (drawId) {
       // Redirection to the old wkp to use the drawing tool.
