@@ -247,22 +247,29 @@ class RouteLayer extends CasaLayer {
   }
 
   /**
-   * Load routes based on a given configuration.
-   * @param {Object[]} routes Routes.
-   * @param {boolean} routes[].isSelected If true, the route is
-   *   selected initially.
-   * @param {boolean} routes[].isClickable If true, the route can be
-   *   selected or unselected by click.
-   * @param {Object[]} routes[].sequences Route sequences.
-   * @param {number} routes[].sequences[].uicFrom UIC number of start station.
-   * @param {number} routes[].sequences[].uicTo UIC number of end station.
-   * @param {array} routes[].sequences[].latLonFrom Lat/Lon coordinate array of start location
-   *  (to be used if uicFrom not provided).
-   * @param {array} routes[].sequences[].latLonTo Lat/Lon coordinate array of end location
+   * @typedef {Object} Sequence
+   * @property {Array<number>} uicFrom UIC number of start station.
+   * @property {number} uicTo UIC number of end station.
+   * @property {number} latLonTo Lat/Lon coordinate array of end location
    *  (to be used if uicTo not provided).
-   * @param {string} routes[].sequences[].mot Method of transportation.
+   * @property {Array<number>} latLonFrom Lat/Lon coordinate array of start location
+   *  (to be used if uicFrom not provided).
+   * @property {string} mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
+   */
+
+  /**
+   * @typedef {Object} Route
+   * @property {boolean} isSelected If true, the route is
+   *   selected initially.
+   * @property {boolean} isClickable If true, the route can be
+   *   selected or unselected by click.
+   * @property {Array<Sequence>} sequences Route sequences.
+   */
+
+  /**
+   * @param {Array<Route>} routes
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   loadRoutes(routes) {
