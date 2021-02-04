@@ -102,7 +102,7 @@
     "coverage": "yarn test  --watchAll=false  --coverage --coverageDirectory=coverage",
     "cp": "generact --root src/components",
     "cy:open": "cypress open",
-    "cy:test": "start-server-and-test start http://localhost:3000 'cypress run'",
+    "cy:test": "start-server-and-test start:http http://localhost:3000 'cypress run'",
     "doc": "bash ./scripts/prepare-doc.sh",
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.js' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
@@ -114,6 +114,7 @@
     "sort": "sort-json src/lang/*.json -i",
     "start": "HTTPS=true react-app-rewired start",
     "start:doc": "styleguidist server",
+    "start:http": "react-app-rewired start",
     "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
   },
   "browserslist": [
