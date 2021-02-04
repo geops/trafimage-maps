@@ -40,7 +40,6 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   departuresFilter: PropTypes.string,
   drawUrl: PropTypes.string,
-  drawOldUrl: PropTypes.string,
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   drawIds: PropTypes.object,
   mapsetUrl: PropTypes.string,
@@ -60,7 +59,6 @@ const defaultProps = {
   initialState: {},
   departuresFilter: undefined,
   drawUrl: undefined,
-  drawOldUrl: undefined,
   drawIds: undefined,
   mapsetUrl: undefined,
 };
@@ -98,7 +96,6 @@ class Permalink extends PureComponent {
       initialState,
       language,
       drawUrl,
-      drawOldUrl,
       drawLayer,
       map,
     } = this.props;
@@ -108,13 +105,10 @@ class Permalink extends PureComponent {
       ...initialState,
     };
 
-    const wkpDraw = parameters[DRAW_OLD_PARAM];
-    const drawId = parameters[DRAW_PARAM] || wkpDraw;
+    const drawId = parameters[DRAW_PARAM] || parameters[DRAW_OLD_PARAM];
 
     if (drawId) {
-      // Redirection to the old wkp to use the drawing tool.
-      // redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
-      fetch(`${(wkpDraw ? drawOldUrl : drawUrl) + drawId}`)
+      fetch(`${drawUrl}${drawId}`)
         .then((response) =>
           response
             .clone()
@@ -124,7 +118,7 @@ class Permalink extends PureComponent {
         .then((data) => {
           if (data && data.admin_id && data.file_id) {
             dispatchSetDrawIds(data);
-            return fetch((wkpDraw ? drawOldUrl : drawUrl) + data.file_id);
+            return fetch(`${drawUrl}${data.file_id}`);
           }
 
           dispatchSetDrawIds({ file_id: drawId });
@@ -208,6 +202,8 @@ class Permalink extends PureComponent {
       [routeFilterKey]: routeFilter,
       [operatorFilterKey]: operatorFilter,
       [departuresFilterKey]: this.departures,
+      [DRAW_OLD_PARAM]: undefined,
+      [DRAW_PARAM]: drawId,
     });
   }
 
@@ -352,7 +348,6 @@ const mapStateToProps = (state) => ({
   layerService: state.app.layerService,
   departuresFilter: state.app.departuresFilter,
   drawUrl: state.app.drawUrl,
-  drawOldUrl: state.app.drawOldUrl,
   drawLayer: state.map.drawLayer,
   drawIds: state.app.drawIds,
   mapsetUrl: state.app.mapsetUrl,

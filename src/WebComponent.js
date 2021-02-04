@@ -133,7 +133,6 @@ const attributes = {
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
-  drawOldUrl: process.env.REACT_APP_DRAW_OLD_URL,
   enableTracking: false,
 };
 

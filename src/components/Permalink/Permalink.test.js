@@ -111,7 +111,7 @@ describe('Permalink', () => {
   });
 
   describe('shoud load kml if draw.id exists', () => {
-    test('shoud load kml if draw.id exists and if it is a admin_id.', async () => {
+    test('if it is a admin_id.', async () => {
       window.history.pushState({}, undefined, '/?lang=de&draw.id=foo');
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
       const drawIds = {
@@ -166,5 +166,30 @@ describe('Permalink', () => {
       });
       fetchMock.restore();
     });
+  });
+
+  test('shoud load kml if wkp.draw exists', async () => {
+    window.history.pushState({}, undefined, '/?lang=de&wkp.draw=quu');
+    expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
+    await act(async () => {
+      fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
+      const wrapper = mount(
+        <Provider store={store}>
+          <Permalink />
+        </Provider>,
+      );
+      wrapper.update();
+    });
+    expect(window.location.search).toEqual(
+      '?draw.id=quu&lang=de&layers=testlayer',
+    );
+    expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
+    expect(store.getActions().pop()).toEqual({
+      data: {
+        file_id: 'quu',
+      },
+      type: 'SET_DRAW_IDS',
+    });
+    fetchMock.restore();
   });
 });

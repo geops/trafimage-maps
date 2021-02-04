@@ -20,7 +20,6 @@ import {
   SET_CARTARO_OLD_URL,
   SET_MAPSET_URL,
   SET_DRAW_URL,
-  SET_DRAW_OLD_URL,
   SET_DRAW_IDS,
   SET_SHORTENER_URL,
   SET_DRAW_EDIT_LINK_LOADING,
@@ -146,11 +145,6 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         drawUrl: action.data,
-      };
-    case SET_DRAW_OLD_URL:
-      return {
-        ...state,
-        drawOldUrl: action.data,
       };
     case SET_CARTARO_OLD_URL:
       return {

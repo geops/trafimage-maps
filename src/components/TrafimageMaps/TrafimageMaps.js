@@ -18,7 +18,6 @@ import {
   setCartaroOldUrl,
   setMapsetUrl,
   setDrawUrl,
-  setDrawOldUrl,
   setShortenerUrl,
   setPermissionInfos,
 } from '../../model/app/actions';
@@ -137,12 +136,6 @@ const propTypes = {
   drawUrl: PropTypes.string,
 
   /**
-   * URL endpoint for old draw api endpoint.
-   * @private
-   */
-  drawOldUrl: PropTypes.string,
-
-  /**
    * Enable analytics tracking.
    * @private
    */
@@ -180,7 +173,6 @@ const defaultProps = {
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
-  drawOldUrl: process.env.REACT_APP_DRAW_OLD_URL,
   topics: null,
   language: 'de',
   enableTracking: false,
@@ -210,7 +202,6 @@ class TrafimageMaps extends React.PureComponent {
       mapsetUrl,
       shortenerUrl,
       drawUrl,
-      drawOldUrl,
       maxExtent,
       permissionInfos,
     } = this.props;
@@ -238,11 +229,6 @@ class TrafimageMaps extends React.PureComponent {
     if (drawUrl) {
       this.store.dispatch(setDrawUrl(drawUrl));
     }
-
-    if (drawOldUrl) {
-      this.store.dispatch(setDrawOldUrl(drawOldUrl));
-    }
-
     if (maxExtent) {
       this.store.dispatch(setMaxExtent(maxExtent));
     }
@@ -280,7 +266,6 @@ class TrafimageMaps extends React.PureComponent {
       mapsetUrl,
       shortenerUrl,
       drawUrl,
-      drawOldUrl,
       permissionInfos,
     } = this.props;
 
@@ -306,10 +291,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (drawUrl !== prevProps.drawUrl) {
       this.store.dispatch(setDrawUrl(drawUrl));
-    }
-
-    if (drawOldUrl !== prevProps.drawOldUrl) {
-      this.store.dispatch(setDrawOldUrl(drawUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {
@@ -340,7 +321,6 @@ class TrafimageMaps extends React.PureComponent {
       mapsetUrl,
       shortenerUrl,
       drawUrl,
-      drawOldUrl,
     } = this.props;
 
     return (
@@ -361,7 +341,6 @@ class TrafimageMaps extends React.PureComponent {
               mapsetUrl={mapsetUrl}
               shortenerUrl={shortenerUrl}
               drawUrl={drawUrl}
-              drawOldUrl={drawOldUrl}
             />
           </Provider>
         </ThemeProvider>
