@@ -290,7 +290,7 @@ class Permalink extends PureComponent {
     const { drawIds } = this.props;
     let newState;
 
-    // only for wkp dra wmanagement
+    // only for wkp draw management
     const parameters = {
       ...qs.parse(window.location.search),
     };
@@ -298,7 +298,7 @@ class Permalink extends PureComponent {
     const wkpDraw = parameters[DRAW_OLD_PARAM];
     const drawId = parameters[DRAW_PARAM];
     if (wkpDraw && !drawId) {
-      newState = { [DRAW_OLD_PARAM]: drawParam };
+      newState = { [DRAW_PARAM]: drawParam };
     } else {
       newState = {
         [DRAW_PARAM]: drawParam,
