@@ -80,7 +80,7 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-mail-icon"
   >
     <a
-      href="mailto:?body=http://localhost/"
+      href="mailto:?body=http%3A%2F%2Flocalhost%2F"
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"
@@ -150,7 +150,7 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-facebook-icon"
   >
     <a
-      href="//www.facebook.com/sharer.php?u=http://localhost/"
+      href="//www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%2F"
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"
@@ -183,7 +183,7 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-twitter-icon"
   >
     <a
-      href="//twitter.com/intent/tweet?url=http://localhost/"
+      href="//twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%2F"
       rel="noopener noreferrer"
       tabIndex="0"
       target="_blank"
