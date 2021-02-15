@@ -86,34 +86,35 @@ class TopicLoader extends Component {
       vectorTilesUrl,
       staticFilesUrl,
     } = this.props;
-    if (activeTopic !== prevProps.activeTopic) {
-      this.updateServices(activeTopic);
-    }
 
-    if (!prevProps.apiKey && apiKey !== prevProps.apiKey) {
-      this.loadTopics();
-    }
+    // Sometimes the array object is different but the content is the same as before.
+    const areTopicsReallyUpdated =
+      topics !== prevProps.topics &&
+      ((topics || []).length !== (prevProps.topics || []).length ||
+        (topics || []).some((topic, index) => {
+          return topic !== (prevProps.topics || [])[index];
+        }));
 
+    // Here the "if/else if" are important to avoid loading multiple time the layers in the layerService,
+    // which can results to a wrong orders of "change:visible" listeners.
     if (
+      (!prevProps.apiKey && apiKey !== prevProps.apiKey) ||
       permissionInfos !== prevProps.permissionInfos ||
-      topics !== prevProps.topics
+      areTopicsReallyUpdated
     ) {
-      this.loadTopics();
-    }
-
-    if (
-      activeTopic &&
-      (vectorTilesUrl !== prevProps.vectorTilesUrl ||
-        apiKey !== prevProps.apiKey ||
-        vectorTilesKey !== prevProps.vectorTilesKey ||
-        cartaroUrl !== prevProps.cartaroUrl ||
-        appBaseUrl !== prevProps.appBaseUrl ||
-        staticFilesUrl !== prevProps.staticFilesUrl)
+      this.loadTopics(); // loadTopics calls updateServices and updateLayers
+    } else if (
+      (activeTopic || {}).key !== (prevProps.activeTopic || {}).key ||
+      (activeTopic &&
+        (vectorTilesUrl !== prevProps.vectorTilesUrl ||
+          apiKey !== prevProps.apiKey ||
+          vectorTilesKey !== prevProps.vectorTilesKey ||
+          cartaroUrl !== prevProps.cartaroUrl ||
+          appBaseUrl !== prevProps.appBaseUrl ||
+          staticFilesUrl !== prevProps.staticFilesUrl))
     ) {
-      this.updateServices(activeTopic);
-    }
-
-    if (
+      this.updateServices(activeTopic); // updateServices calls updateLayers
+    } else if (
       activeTopic &&
       (language !== prevProps.language ||
         apiKey !== prevProps.apiKey ||
@@ -139,12 +140,12 @@ class TopicLoader extends Component {
     }
     const activeTopic = topics.find((t) => t.active);
     const visibleTopics = topics.filter(
-      (t) =>
-        (!t.permission ||
+      (topic) =>
+        (!topic.permission ||
           (permissionInfos &&
             permissionInfos.permissions &&
-            permissionInfos.permissions.includes(t.permission))) &&
-        !t.hideInLayerTree,
+            permissionInfos.permissions.includes(topic.permission))) &&
+        !topic.hideInLayerTree,
     );
     let visibleActiveTopic = visibleTopics.find((t) => t.active);
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
