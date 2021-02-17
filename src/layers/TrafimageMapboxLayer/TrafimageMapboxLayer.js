@@ -92,8 +92,13 @@ class TrafimageMapboxLayer extends MapboxLayer {
 
     const newStyleUrl = this.createStyleUrl();
 
+    if (this.filters) {
+      // Force loadStyle to apply filters
+      this.loadStyle(newStyleUrl);
+    }
+
     // Don't apply style if not necessary otherwise
-    // it will remove styles apply by MapboxStyleLayer layers.
+    // it will remove styles applied by MapboxStyleLayer layers.
     if (this.styleUrl === newStyleUrl) {
       return;
     }
@@ -183,7 +188,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
           return;
         }
         this.styleUrl = newStyleUrl;
-        const styleFiltered = applyFilters(data, this.options.filters);
+        const styleFiltered = applyFilters(data, this.filters);
         this.mbMap.setStyle(styleFiltered);
         this.mbMap.once('styledata', () => {
           this.onStyleLoaded();
