@@ -76,6 +76,14 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.setStyleConfig();
   }
 
+  applyStyle(data) {
+    const styleFiltered = applyFilters(data, this.filters);
+    this.mbMap.setStyle(styleFiltered);
+    this.mbMap.once('styledata', () => {
+      this.onStyleLoaded();
+    });
+  }
+
   setStyleConfig(url, key, apiKeyName) {
     if (url && url !== this.url) {
       this.url = url;
@@ -93,7 +101,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     const newStyleUrl = this.createStyleUrl();
 
     // Don't apply style if not necessary otherwise
-    // it will remove styles apply by MapboxStyleLayer layers.
+    // it will remove styles applied by MapboxStyleLayer layers.
     if (this.styleUrl === newStyleUrl) {
       return;
     }
@@ -102,6 +110,12 @@ class TrafimageMapboxLayer extends MapboxLayer {
       // The mapbox map does not exist so we only set the good styleUrl.
       // The style will be loaded in loadMbMap function.
       this.styleUrl = newStyleUrl;
+      // this.mbMap.once('load', () => {
+      if (this.filters) {
+        this.once('load', () => {
+          this.applyStyle(this.mbMap.getStyle());
+        });
+      }
       return;
     }
 
@@ -183,11 +197,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
           return;
         }
         this.styleUrl = newStyleUrl;
-        const styleFiltered = applyFilters(data, this.options.filters);
-        this.mbMap.setStyle(styleFiltered);
-        this.mbMap.once('styledata', () => {
-          this.onStyleLoaded();
-        });
+        this.applyStyle(data);
       })
       .catch((err) => {
         if (err && err.name === 'AbortError') {
