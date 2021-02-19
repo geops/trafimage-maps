@@ -227,6 +227,7 @@ class ZweitausbildungRoutesHighlightLayer extends VectorLayer {
   style(feature, resolution) {
     if (feature.get('highlight')) {
       const color = feature.get('color') || 'rgba(50, 50, 50, 0.8)';
+      console.log(feature, color);
       const network = feature.get('network');
 
       const currentNetwork = `trackit${layerHelper.getOldGeneralization(
