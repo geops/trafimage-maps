@@ -6,6 +6,7 @@ import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
+import { TrajservAPI } from 'mobility-toolbox-js/api';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
@@ -45,6 +46,10 @@ const projectionExtent = [
   20037508.3428,
   20037508.3428,
 ];
+
+const sbbTrackerApi = new TrajservAPI({
+  url: 'https://api.geops.io/tracker/sbb',
+});
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
@@ -321,6 +326,7 @@ punctuality.children = [
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
+    api: sbbTrackerApi,
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
@@ -330,6 +336,7 @@ punctuality.children = [
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
+    api: sbbTrackerApi,
   }),
   new TrajservLayer({
     name: 'ch.sbb.puenktlichkeit-all',
@@ -338,6 +345,7 @@ punctuality.children = [
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
+    api: sbbTrackerApi,
   }),
 ];
 

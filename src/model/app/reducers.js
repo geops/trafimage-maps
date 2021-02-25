@@ -68,7 +68,7 @@ export default function app(state = getInitialState(), action) {
     case SET_TOPICS:
       return {
         ...state,
-        topics: [...action.data],
+        topics: action.data,
       };
     case SET_LANGUAGE:
       i18n.changeLanguage(action.data);
@@ -89,7 +89,7 @@ export default function app(state = getInitialState(), action) {
     case SET_ACTIVE_TOPIC:
       return {
         ...state,
-        activeTopic: { ...action.data },
+        activeTopic: action.data,
       };
     case SET_MENU_OPEN:
       return {
