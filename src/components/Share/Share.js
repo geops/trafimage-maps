@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope, FaPencilAlt, FaQuestion } from 'react-icons/fa';
+import { FaEnvelope, FaQuestion } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
-import Button from '@geops/react-ui/components/Button';
 import SharePermalinkButton from '../SharePermalinkButton';
-import { redirect } from '../../utils/redirectHelper';
 
 const socialShareConfig = [
   {
@@ -47,7 +45,7 @@ const defaultProps = {
 
 const replaceParams = (url, language, appBaseUrl) => {
   return url
-    .replace('{url}', window.location.href)
+    .replace('{url}', encodeURIComponent(window.location.href))
     .replace('{language}', language)
     .replace('{appBaseUrl}', appBaseUrl);
 };
@@ -83,18 +81,6 @@ const Share = ({ appBaseUrl }) => {
       {activeTopic.permission
         ? renderConf(config[3], t, language, appBaseUrl)
         : null}
-      <div className="ta-draw-icon">
-        <Button
-          onClick={() =>
-            redirect(appBaseUrl, 'ch.sbb.netzkarte.draw', {
-              'wkp.draw': '',
-            })
-          }
-          title={`${t('Zeichnen')}.`}
-        >
-          <FaPencilAlt focusable={false} />
-        </Button>
-      </div>
     </div>
   );
 };

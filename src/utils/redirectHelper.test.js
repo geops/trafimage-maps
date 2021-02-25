@@ -4,6 +4,7 @@ import {
   convertUrlParams,
   redirect,
   redirectToLogin,
+  isOpenedByMapset,
 } from './redirectHelper';
 
 describe('redirectHelper', () => {
@@ -64,6 +65,37 @@ describe('redirectHelper', () => {
         expect(window.location.href).toBe(
           'bar.ch/login?next=bar.ch%2F%23%2FfooTopic%3Fx%3D500000%26y%3D500000%26z%3D9',
         );
+      });
+    });
+  });
+
+  describe('#isOpenedByMapset()', () => {
+    ['editor.dev.mapset.ch', 'mapset.ch', 'mapset.io'].forEach((referer) => {
+      test(`returns true for ${referer}`, () => {
+        const originalReferrer = document.referrer;
+        Object.defineProperty(document, 'referrer', {
+          value: referer,
+          configurable: true,
+        });
+        expect(isOpenedByMapset()).toBe(true);
+        Object.defineProperty(document, 'referrer', {
+          value: originalReferrer,
+        });
+      });
+    });
+
+    [null, undefined, '', 'trafimage'].forEach((referer) => {
+      test(`returns false for ${referer}`, () => {
+        expect(isOpenedByMapset()).toBe(false);
+        const originalReferrer = document.referrer;
+        Object.defineProperty(document, 'referrer', {
+          value: referer,
+          configurable: true,
+        });
+        expect(isOpenedByMapset()).toBe(false);
+        Object.defineProperty(document, 'referrer', {
+          value: originalReferrer,
+        });
       });
     });
   });

@@ -16,6 +16,9 @@ import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import {
   setLanguage,
   setCartaroOldUrl,
+  setMapsetUrl,
+  setDrawUrl,
+  setShortenerUrl,
   setPermissionInfos,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
@@ -115,6 +118,24 @@ const propTypes = {
   staticFilesUrl: PropTypes.string,
 
   /**
+   * URL endpoint for mapset.
+   * @private
+   */
+  mapsetUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for shortener api.
+   * @private
+   */
+  shortenerUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for draw api endpoint.
+   * @private
+   */
+  drawUrl: PropTypes.string,
+
+  /**
    * Enable analytics tracking.
    * @private
    */
@@ -149,6 +170,9 @@ const defaultProps = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
+  mapsetUrl: process.env.REACT_APP_MAPSET_URL,
+  shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
+  drawUrl: process.env.REACT_APP_DRAW_URL,
   topics: null,
   language: 'de',
   enableTracking: false,
@@ -175,6 +199,9 @@ class TrafimageMaps extends React.PureComponent {
       language,
       enableTracking,
       cartaroOldUrl,
+      mapsetUrl,
+      shortenerUrl,
+      drawUrl,
       maxExtent,
       permissionInfos,
     } = this.props;
@@ -191,6 +218,17 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
     }
 
+    if (mapsetUrl) {
+      this.store.dispatch(setMapsetUrl(mapsetUrl));
+    }
+
+    if (shortenerUrl) {
+      this.store.dispatch(setShortenerUrl(shortenerUrl));
+    }
+
+    if (drawUrl) {
+      this.store.dispatch(setDrawUrl(drawUrl));
+    }
     if (maxExtent) {
       this.store.dispatch(setMaxExtent(maxExtent));
     }
@@ -225,6 +263,9 @@ class TrafimageMaps extends React.PureComponent {
       cartaroOldUrl,
       enableTracking,
       maxExtent,
+      mapsetUrl,
+      shortenerUrl,
+      drawUrl,
       permissionInfos,
     } = this.props;
 
@@ -238,6 +279,18 @@ class TrafimageMaps extends React.PureComponent {
 
     if (cartaroOldUrl !== prevProps.cartaroOldUrl) {
       this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
+    }
+
+    if (mapsetUrl !== prevProps.mapsetUrl) {
+      this.store.dispatch(setMapsetUrl(mapsetUrl));
+    }
+
+    if (shortenerUrl !== prevProps.shortenerUrl) {
+      this.store.dispatch(setShortenerUrl(shortenerUrl));
+    }
+
+    if (drawUrl !== prevProps.drawUrl) {
+      this.store.dispatch(setDrawUrl(drawUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {
@@ -265,6 +318,9 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesUrl,
       staticFilesUrl,
       activeTopicKey,
+      mapsetUrl,
+      shortenerUrl,
+      drawUrl,
     } = this.props;
 
     return (
@@ -282,6 +338,9 @@ class TrafimageMaps extends React.PureComponent {
               vectorTilesKey={vectorTilesKey}
               vectorTilesUrl={vectorTilesUrl}
               staticFilesUrl={staticFilesUrl}
+              mapsetUrl={mapsetUrl}
+              shortenerUrl={shortenerUrl}
+              drawUrl={drawUrl}
             />
           </Provider>
         </ThemeProvider>

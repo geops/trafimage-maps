@@ -130,6 +130,9 @@ const attributes = {
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
+  mapsetUrl: process.env.REACT_APP_MAPSET_URL,
+  shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
+  drawUrl: process.env.REACT_APP_DRAW_URL,
   enableTracking: false,
 };
 
@@ -206,6 +209,7 @@ const WebComponent = (props) => {
   if (!appTopics) {
     return null;
   }
+
   return (
     <Styled styles={styles}>
       <div

@@ -17,7 +17,6 @@ describe('FeatureInformaion', () => {
     store = mockStore({
       map: {},
       app: { projection: { value: 'EPSG:3857' } },
-      oidc: { user: {} },
     });
   });
 
