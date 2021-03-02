@@ -4746,7 +4746,7 @@ color-string@^1.5.2:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
 
-color@3.1.2, color@^3.0.0:
+color@^3.0.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/color/-/color-3.1.2.tgz#68148e7f85d41ad7649c5fa8c8106f098d229e10"
   integrity sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
@@ -6858,7 +6858,7 @@ eslint-visitor-keys@^1.0.0, eslint-visitor-keys@^1.1.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.1.0.tgz#e2a82cea84ff246ad6fb57f9bde5b46621459ec2"
   integrity sha512-8y9YjtM1JBJU/A9Kc+SbaOV4y29sSWckBwMHa+FGtVj5gN/sbnKDf6xJUl+8g7FAij9LVaP8C24DUiH/f/2Z9A==
 
-eslint@6.8.0, eslint@^6.6.0, eslint@^6.8.0:
+eslint@6.8.0, eslint@^6.6.0:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.8.0.tgz#62262d6729739f9275723824302fb227c8c93ffb"
   integrity sha512-K+Iayyo2LtyYhDSYwz5D5QdWw0hCacNzyq1Y821Xna2xSJj7cijoLLYmLxTQgcgZ9mC61nryMy9S7GRbYpI5Ig==
@@ -10653,11 +10653,6 @@ jss@^10.0.3, jss@^10.3.0:
     csstype "^2.6.5"
     is-in-browser "^1.1.3"
     tiny-warning "^1.0.2"
-
-jsts@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jsts/-/jsts-2.1.0.tgz#6a724e9d38de8a69585f7ace09d87bf4bbda68e5"
-  integrity sha512-gxv7hw5FmXwoieHBNKyrl+DZVp1aaJbUPDgPRGf54y7owWoq75CWwL6VCmdKxt5jaMHh9CKOaG1u/WZJRUM5NA==
 
 jsx-ast-utils@^2.2.1, jsx-ast-utils@^2.2.3:
   version "2.2.3"
@@ -14845,11 +14840,6 @@ react-is@^16.12.0, react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-lib-adler32@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/react-lib-adler32/-/react-lib-adler32-1.0.3.tgz#63df1aed274eabcc1c5067077ea281ec30888ba7"
-  integrity sha512-AqFqdt4cP0RPffHNjVHZ7tyIgnoSzNxgFhG8XKMXCtA1dZ72gTPO4iYFwWDKHqvE8sHS14rhltQTdbXU5G4BFA==
-
 react-markdown@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-4.3.1.tgz#39f0633b94a027445b86c9811142d05381300f2f"
@@ -14999,7 +14989,7 @@ react-shadow-dom-retarget-events@^1.0.8:
   resolved "https://registry.yarnpkg.com/react-shadow-dom-retarget-events/-/react-shadow-dom-retarget-events-1.0.11.tgz#e57ce3ba0bc8159fec4861778daf02161440f156"
   integrity sha512-4ExKxKEWUCEmVBZmtly5lgHd9vz/NDKv5H7KmFZZxHZW/W6EmmzyOA928OqeWPxcfXUjfNG8q3hpwCD9O7CRRg==
 
-react-shadow@17.6.0, react-shadow@^17.1.3:
+react-shadow@^17.1.3:
   version "17.6.0"
   resolved "https://registry.yarnpkg.com/react-shadow/-/react-shadow-17.6.0.tgz#74cee9dbe1dbb723ae559c392575513f41d97cf2"
   integrity sha512-rMHknSM7KNm7SvBFqoAJqXgpcuq2ZqLlXFMpL1j02b17jgqKVx8ukNptUaweWuLcksB55U3Y/oYnTEGrfEU3pw==
@@ -15982,13 +15972,6 @@ reusify@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/reusify/-/reusify-1.0.4.tgz#90da382b1e126efc02146e90845a88db12925d76"
   integrity sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==
-
-rewire@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/rewire/-/rewire-5.0.0.tgz#c4e6558206863758f6234d8f11321793ada2dbff"
-  integrity sha512-1zfitNyp9RH5UDyGGLe9/1N0bMlPQ0WrX0Tmg11kMHBpqwPJI4gfPpP7YngFyLbFmhXh19SToAG0sKKEFcOIJA==
-  dependencies:
-    eslint "^6.8.0"
 
 rework-visit@1.0.0:
   version "1.0.0"
@@ -17282,13 +17265,6 @@ strip-json-comments@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.0.tgz#7638d31422129ecf4457440009fba03f9f9ac180"
   integrity sha512-e6/d0eBu7gHtdCqFt0xJr642LdToM5/cN4Qb9DbHjVx1CP5RyeM+zH7pbecEmDv/lBqb0QH+6Uqq75rxFPkM0w==
-
-style-it@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/style-it/-/style-it-2.1.4.tgz#bae8e73c69a9586a138a31fd3104182171b7149c"
-  integrity sha512-9eoEdUGD68XjvW/+BWo5Ir7d5+cXChcQMAuYHmgrHImz/jIfabxNj4pc+6DxVhxHnW92+ZzMVVUuxs4iTOXjsQ==
-  dependencies:
-    react-lib-adler32 "^1.0.3"
 
 style-loader@0.23.1:
   version "0.23.1"
