@@ -41,6 +41,7 @@
     "redux": "4.0.5",
     "redux-debounced": "0.5.0",
     "redux-thunk": "2.3.0",
+    "style-it": "2.1.4",
     "styled-components": "5.2.1"
   },
   "peerDependencies": {
