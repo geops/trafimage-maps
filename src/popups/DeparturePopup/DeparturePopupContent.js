@@ -8,6 +8,7 @@ import qs from 'query-string';
 
 import DestinationInput from './DestinationInput';
 
+import { ReactComponent as SBBClock } from '../../img/clock_10_large.svg';
 import { setDeparturesFilter } from '../../model/app/actions';
 
 import './DeparturePopupContent.scss';
@@ -78,6 +79,25 @@ class DeparturePopupContent extends Component {
     return min > 0 && min < 60 ? [min, "'"].join('') : null;
   }
 
+  static getDelayColor(estimatedTimeLocal, timetabledTimeLocal) {
+    if (!estimatedTimeLocal || !timetabledTimeLocal) {
+      return 'green';
+    }
+
+    const min = Math.floor(
+      (new Date(estimatedTimeLocal) - new Date(timetabledTimeLocal)) /
+        1000 /
+        60,
+    );
+    if (min >= 3 && min < 5) {
+      return 'orange';
+    }
+    if (min >= 5) {
+      return 'red';
+    }
+    return 'green';
+  }
+
   constructor(props) {
     super(props);
 
@@ -85,6 +105,7 @@ class DeparturePopupContent extends Component {
       departures: [],
       departuresLoading: true,
       destinationFilter: null,
+      platformName: 'abfahrtszeiten_kante',
     };
     this.loadInterval = null;
     this.mounted = false;
@@ -170,10 +191,26 @@ class DeparturePopupContent extends Component {
           console.warn(data.error);
           return;
         }
+        // mode of transport does not change between departures
+        const platformType =
+          data && data.length ? data[0].modeOfTransport : null;
+        let platformName = null;
 
+        switch (platformType) {
+          case 'rail':
+            platformName = 'abfahrtszeiten_gleis';
+            break;
+          case 'water':
+            platformName = 'abfahrtszeiten_steg';
+            break;
+          default:
+            platformName = 'abfahrtszeiten_kante';
+            break;
+        }
         this.setState({
           departures: data,
           departuresLoading: false,
+          platformName,
         });
       });
   }
@@ -181,7 +218,12 @@ class DeparturePopupContent extends Component {
   render() {
     const { uic, name, icon, showTitle, t } = this.props;
 
-    const { departures, destinationFilter, departuresLoading } = this.state;
+    const {
+      departures,
+      destinationFilter,
+      departuresLoading,
+      platformName,
+    } = this.state;
 
     let title = null;
     if (showTitle) {
@@ -235,14 +277,27 @@ class DeparturePopupContent extends Component {
           <table className="tm-departures">
             <tbody>
               <tr>
-                <th>{t('Linie')}</th>
+                <th
+                  style={{
+                    padding: '1px 7px 1px 3px',
+                  }}
+                >
+                  {t('Linie')}
+                </th>
                 <th>{t('Ziel')}</th>
-                <th colSpan="2">{t('Planmässige Abfahrt')}</th>
+                <th colSpan="2">
+                  <SBBClock focusable={false} height="23px" width="23px" />
+                </th>
+                <th>{t(platformName)}</th>
               </tr>
               {departures.map((d, idx) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <tr key={idx}>
-                  <td>
+                  <td
+                    style={{
+                      padding: '1px 7px 1px 3px',
+                    }}
+                  >
                     <div className="tm-departure-name">{d.lineName}</div>
                   </td>
                   <td>
@@ -251,9 +306,22 @@ class DeparturePopupContent extends Component {
                     </div>
                   </td>
                   <td>
-                    {DeparturePopupContent.formatTime(
-                      d.estimatedTimeLocal || d.timetabledTimeLocal,
-                    )}
+                    {DeparturePopupContent.formatTime(d.timetabledTimeLocal)}
+                  </td>
+                  <td>
+                    <div
+                      className="tm-departure-min"
+                      style={{
+                        color: DeparturePopupContent.getDelayColor(
+                          d.estimatedTimeLocal,
+                          d.timetabledTimeLocal,
+                        ),
+                      }}
+                    >
+                      {DeparturePopupContent.getMinDiff(
+                        d.estimatedTimeLocal || d.timetabledTimeLocal,
+                      )}
+                    </div>
                   </td>
                   <td>
                     <div
@@ -263,13 +331,6 @@ class DeparturePopupContent extends Component {
                       }
                     >
                       <div className="tm-platform-inner">{d.plannedQuay}</div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="tm-departure-min">
-                      {DeparturePopupContent.getMinDiff(
-                        d.estimatedTimeLocal || d.timetabledTimeLocal,
-                      )}
                     </div>
                   </td>
                 </tr>
