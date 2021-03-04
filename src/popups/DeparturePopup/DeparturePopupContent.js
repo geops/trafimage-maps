@@ -17,30 +17,54 @@ const DESTINATION_FILTER = 'destination';
 const propTypes = {
   uic: PropTypes.number.isRequired,
 
-  platforms: PropTypes.string,
-
   icon: PropTypes.object,
 
   name: PropTypes.string.isRequired,
 
   showTitle: PropTypes.bool,
 
-  appBaseUrl: PropTypes.string.isRequired,
-
   // react-i18next
   t: PropTypes.func.isRequired,
+
+  // mapStateToProps
+  departuresUrl: PropTypes.string.isRequired,
+  destinationUrl: PropTypes.string.isRequired,
+  apiKey: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
-  platforms: null,
   icon: null,
   showTitle: false,
+  apiKey: null,
 };
 
 class DeparturePopupContent extends Component {
+  static updatePermalink(destination) {
+    const oldParams = qs.parse(window.location.search);
+    const parameters = {
+      ...oldParams,
+      ...{
+        [DESTINATION_FILTER]: destination ? destination.label : null,
+      },
+    };
+    const qStr = qs.stringify(parameters);
+    const search = qStr ? `?${qStr}` : '';
+    if (
+      (!qStr && window.location.search) ||
+      (qStr && search !== window.location.search)
+    ) {
+      const { hash } = window.location;
+      window.history.replaceState(
+        undefined,
+        undefined,
+        `${search}${hash || ''}`,
+      );
+    }
+  }
+
   static formatTime(time) {
     const d = new Date(time);
 
@@ -60,26 +84,38 @@ class DeparturePopupContent extends Component {
     this.state = {
       departures: [],
       departuresLoading: true,
-      platformName: 'abfahrtszeiten_kante',
+      destinationFilter: null,
     };
-
-    const parameters = qs.parse(window.location.search);
-    this.destinationFilter = parameters[DESTINATION_FILTER];
-
     this.loadInterval = null;
     this.mounted = false;
   }
 
   componentDidMount() {
-    const { dispatchSetDeparturesFilter, uic } = this.props;
-
+    const { destinationUrl, dispatchSetDeparturesFilter, uic } = this.props;
+    const { destinationFilter } = this.state;
     this.mounted = true;
     this.loadDepartures();
     this.loadInterval = window.setInterval(() => this.loadDepartures(), 5000);
 
     dispatchSetDeparturesFilter(uic.toString());
 
-    this.onDestinationSelect(this.destinationFilter);
+    const parameters = qs.parse(window.location.search);
+    if (parameters[DESTINATION_FILTER]) {
+      const url = `${destinationUrl}/${uic}?&destination=${parameters[DESTINATION_FILTER]}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const destination = data
+            ? {
+                label: data[0].dest,
+                id: data[0].stop,
+              }
+            : null;
+          this.onDestinationSelect(destination);
+        });
+    } else {
+      this.onDestinationSelect(destinationFilter);
+    }
   }
 
   componentWillUnmount() {
@@ -92,32 +128,11 @@ class DeparturePopupContent extends Component {
    * @private
    */
   onDestinationSelect(selectedDestination) {
-    this.destinationFilter = selectedDestination;
-    this.updatePermalink();
+    this.setState({
+      destinationFilter: selectedDestination,
+    });
+    DeparturePopupContent.updatePermalink(selectedDestination);
     this.loadDepartures();
-  }
-
-  updatePermalink() {
-    const oldParams = qs.parse(window.location.search);
-    const parameters = {
-      ...oldParams,
-      ...{
-        [DESTINATION_FILTER]: this.destinationFilter,
-      },
-    };
-    const qStr = qs.stringify(parameters);
-    const search = qStr ? `?${qStr}` : '';
-    if (
-      (!qStr && window.location.search) ||
-      (qStr && search !== window.location.search)
-    ) {
-      const { hash } = window.location;
-      window.history.replaceState(
-        undefined,
-        undefined,
-        `${search}${hash || ''}`,
-      );
-    }
   }
 
   /**
@@ -126,21 +141,22 @@ class DeparturePopupContent extends Component {
    * @private
    */
   loadDepartures() {
-    const { platforms, uic, appBaseUrl } = this.props;
+    const { apiKey, uic, departuresUrl } = this.props;
+    const { destinationFilter } = this.state;
 
-    const urlParams = {};
-
-    if (platforms) {
-      urlParams.platforms = `${platforms || ''}`;
+    const urlParams = {
+      key: apiKey,
+      limit: '20',
+    };
+    if (uic) {
+      urlParams.uic = uic;
     }
 
-    if (this.destinationFilter) {
-      urlParams.destination = `${this.destinationFilter}`;
+    if (destinationFilter) {
+      urlParams.destination_uic = `${destinationFilter.id}`;
     }
 
-    const url = `${appBaseUrl}/search/departures/${uic}?${qs.stringify(
-      urlParams,
-    )}`;
+    const url = `${departuresUrl}/?${qs.stringify(urlParams)}`;
 
     fetch(url)
       .then((response) => response.json())
@@ -149,49 +165,27 @@ class DeparturePopupContent extends Component {
         if (!this.mounted) {
           return;
         }
-
-        // platform type does not change between departures
-        const platformType = data && data.length ? data[0].type : null;
-        let platformName = null;
-
-        switch (platformType) {
-          case 2:
-            platformName = 'abfahrtszeiten_gleis';
-            break;
-          case 4:
-            platformName = 'abfahrtszeiten_steg';
-            break;
-          default:
-            platformName = 'abfahrtszeiten_kante';
-            break;
+        if (data.error) {
+          // eslint-disable-next-line no-console
+          console.warn(data.error);
+          return;
         }
 
         this.setState({
           departures: data,
           departuresLoading: false,
-          platformName,
         });
       });
   }
 
   render() {
-    const { platforms, uic, name, icon, showTitle, t, appBaseUrl } = this.props;
+    const { uic, name, icon, showTitle, t } = this.props;
 
-    const { departuresLoading, platformName } = this.state;
-    let { departures } = this.state;
-    departures = departures.slice(0, 7);
-
-    let platformsFormatted = platforms || '';
-    platformsFormatted = platformsFormatted
-      .split(',')
-      .filter((v) => v)
-      .join(', ');
+    const { departures, destinationFilter, departuresLoading } = this.state;
 
     let title = null;
     if (showTitle) {
-      const text = platformsFormatted
-        ? `${t('Abfahrtszeiten')} ${t(platformName)} ${platformsFormatted}`
-        : `${t('Abfahrtszeiten')} ${name}`;
+      const text = `${t('Abfahrtszeiten')} ${name}`;
 
       title = (
         <div className="tm-departure-title" title={text}>
@@ -227,11 +221,9 @@ class DeparturePopupContent extends Component {
         {title}
 
         <DestinationInput
-          platforms={platformsFormatted}
-          destination={this.destinationFilter}
+          destination={destinationFilter}
           onSelect={(d) => this.onDestinationSelect(d)}
           uic={uic}
-          appBaseUrl={appBaseUrl}
         />
 
         {loading}
@@ -247,30 +239,37 @@ class DeparturePopupContent extends Component {
                 <th>{t('Ziel')}</th>
                 <th colSpan="2">{t('Planmässige Abfahrt')}</th>
               </tr>
-              {departures.map((d) => (
-                <tr key={d.id}>
+              {departures.map((d, idx) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <tr key={idx}>
                   <td>
-                    <div className="tm-departure-name">{d.label}</div>
+                    <div className="tm-departure-name">{d.lineName}</div>
                   </td>
                   <td>
                     <div className="tm-departure-destination">
-                      {d.destination}
+                      {d.destinationText}
                     </div>
                   </td>
-                  <td>{DeparturePopupContent.formatTime(d.time)}</td>
+                  <td>
+                    {DeparturePopupContent.formatTime(
+                      d.estimatedTimeLocal || d.timetabledTimeLocal,
+                    )}
+                  </td>
                   <td>
                     <div
                       className={
                         'tm-departure-platform ' +
-                        `${d.type === 2 ? 'train' : ''}`
+                        `${d.modeOfTransport === 'rail' ? 'train' : ''}`
                       }
                     >
-                      <div className="tm-platform-inner">{d.platform}</div>
+                      <div className="tm-platform-inner">{d.plannedQuay}</div>
                     </div>
                   </td>
                   <td>
                     <div className="tm-departure-min">
-                      {DeparturePopupContent.getMinDiff(d.time)}
+                      {DeparturePopupContent.getMinDiff(
+                        d.estimatedTimeLocal || d.timetabledTimeLocal,
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -283,6 +282,12 @@ class DeparturePopupContent extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  departuresUrl: state.app.departuresUrl,
+  destinationUrl: state.app.destinationUrl,
+  apiKey: state.app.apiKey,
+});
+
 const mapDispatchToProps = {
   dispatchSetDeparturesFilter: setDeparturesFilter,
 };
@@ -292,5 +297,5 @@ DeparturePopupContent.defaultProps = defaultProps;
 
 export default compose(
   withTranslation(),
-  connect(null, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(DeparturePopupContent);

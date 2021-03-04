@@ -20,6 +20,9 @@ import {
   setDrawUrl,
   setShortenerUrl,
   setPermissionInfos,
+  setDestinationUrl,
+  setDeparturesUrl,
+  setApiKey,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -136,6 +139,18 @@ const propTypes = {
   drawUrl: PropTypes.string,
 
   /**
+   * URL endpoint for destination search.
+   * @private
+   */
+  destinationUrl: PropTypes.string,
+
+  /**
+   * URL endpoint for departures search.
+   * @private
+   */
+  departuresUrl: PropTypes.string,
+
+  /**
    * Enable analytics tracking.
    * @private
    */
@@ -173,6 +188,8 @@ const defaultProps = {
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
+  destinationUrl: process.env.REACT_APP_DESTINATION_URL,
+  departuresUrl: process.env.REACT_APP_DEPARTURES_URL,
   topics: null,
   language: 'de',
   enableTracking: false,
@@ -204,6 +221,9 @@ class TrafimageMaps extends React.PureComponent {
       drawUrl,
       maxExtent,
       permissionInfos,
+      destinationUrl,
+      departuresUrl,
+      apiKey,
     } = this.props;
 
     if (zoom) {
@@ -241,6 +261,18 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setPermissionInfos(permissionInfos));
     }
 
+    if (destinationUrl) {
+      this.store.dispatch(setDestinationUrl(destinationUrl));
+    }
+
+    if (departuresUrl) {
+      this.store.dispatch(setDeparturesUrl(departuresUrl));
+    }
+
+    if (apiKey) {
+      this.store.dispatch(setApiKey(apiKey));
+    }
+
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
     if (
       enableTracking &&
@@ -267,6 +299,9 @@ class TrafimageMaps extends React.PureComponent {
       shortenerUrl,
       drawUrl,
       permissionInfos,
+      destinationUrl,
+      departuresUrl,
+      apiKey,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -303,6 +338,18 @@ class TrafimageMaps extends React.PureComponent {
 
     if (permissionInfos !== prevProps.permissionInfos) {
       this.store.dispatch(setPermissionInfos(permissionInfos));
+    }
+
+    if (destinationUrl !== prevProps.destinationUrl) {
+      this.store.dispatch(setDestinationUrl(destinationUrl));
+    }
+
+    if (departuresUrl !== prevProps.departuresUrl) {
+      this.store.dispatch(setDeparturesUrl(departuresUrl));
+    }
+
+    if (apiKey !== prevProps.apiKey) {
+      this.store.dispatch(setApiKey(apiKey));
     }
   }
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import Autocomplete from '@geops/react-ui/components/Autocomplete';
 
@@ -9,10 +11,11 @@ import './DestinationInput.scss';
 
 const propTypes = {
   destination: PropTypes.string,
-  platforms: PropTypes.string,
   onSelect: PropTypes.func.isRequired,
   uic: PropTypes.number.isRequired,
-  appBaseUrl: PropTypes.string.isRequired,
+
+  // mapStateToProps
+  destinationUrl: PropTypes.string.isRequired,
 
   // react-i18next
   t: PropTypes.func.isRequired,
@@ -20,7 +23,6 @@ const propTypes = {
 
 const defaultProps = {
   destination: '',
-  platforms: null,
 };
 
 class DestinationInput extends Component {
@@ -29,13 +31,21 @@ class DestinationInput extends Component {
 
     this.state = {
       destinations: [],
-      destinationInputValue: props.destination,
+      destinationInputValue: props.destination ? props.destination.label : null,
     };
 
     // Abort fetch requests
     this.abortController = new AbortController();
 
     this.loadDestinations(props.destination);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { destination } = this.props;
+
+    if (destination !== prevProps.destination) {
+      this.updateInputValue(destination.label);
+    }
   }
 
   /**
@@ -54,13 +64,17 @@ class DestinationInput extends Component {
     }
   }
 
+  updateInputValue(val) {
+    this.setState({ destinationInputValue: val });
+  }
+
   /**
    * Selection is selected by click or key event.
    * @private
    */
   selectDestination(item) {
     const { onSelect } = this.props;
-    onSelect(item.label);
+    onSelect(item);
     this.setState({
       destinations: [],
       destinationInputValue: item.label,
@@ -73,11 +87,12 @@ class DestinationInput extends Component {
    * @private
    */
   loadDestinations(value) {
-    const { uic, platforms, appBaseUrl } = this.props;
+    const { uic, destinationUrl } = this.props;
 
-    const url =
-      `${appBaseUrl}/search/destinations/${uic}` +
-      `?platforms=${platforms || ''}&destination=${value}`;
+    if (!value) {
+      return;
+    }
+    const url = `${destinationUrl}/${uic}?&destination=${value}`;
 
     this.abortController.abort();
     this.abortController = new AbortController();
@@ -85,9 +100,9 @@ class DestinationInput extends Component {
     fetch(url, { signal })
       .then((response) => response.json())
       .then((data) => {
-        const destinations = data.map((d, i) => ({
-          id: i,
-          label: d,
+        const destinations = data.map(({ dest, stop }) => ({
+          id: stop,
+          label: dest,
         }));
 
         this.setState({ destinations });
@@ -132,7 +147,14 @@ class DestinationInput extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  destinationUrl: state.app.destinationUrl,
+});
+
 DestinationInput.propTypes = propTypes;
 DestinationInput.defaultProps = defaultProps;
 
-export default withTranslation()(DestinationInput);
+export default compose(
+  withTranslation(),
+  connect(mapStateToProps, null),
+)(DestinationInput);
