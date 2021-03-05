@@ -3,11 +3,24 @@
   align-items: center;
   padding-bottom: 5px;
 
-  svg {
+  svg,
+  .tm-punctuality-character {
     padding-right: 10px;
   }
 
   span {
     max-width: 85%;
+  }
+
+  .tm-punctuality-character {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px black;
+    height: 23px;
+    width: 23px;
   }
 }
