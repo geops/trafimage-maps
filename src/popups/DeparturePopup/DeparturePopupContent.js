@@ -217,13 +217,9 @@ class DeparturePopupContent extends Component {
 
   render() {
     const { uic, name, icon, showTitle, t } = this.props;
-
-    const {
-      departures,
-      destinationFilter,
-      departuresLoading,
-      platformName,
-    } = this.state;
+    let { departures } = this.state;
+    departures = departures.slice(0, 9);
+    const { destinationFilter, departuresLoading, platformName } = this.state;
 
     let title = null;
     if (showTitle) {
