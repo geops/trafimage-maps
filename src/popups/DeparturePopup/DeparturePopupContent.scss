@@ -36,14 +36,14 @@ $tm-destination-input-height: 25px;
     text-align: center;
   }
 
+  .tm-platform-inner {
+    white-space: nowrap;
+  }
+
   .tm-departure-plaform.train .tm-platform-inner {
     border: 1px solid white;
     border-radius: 3px;
     margin: 1px;
-  }
-
-  .tm-platform-inner {
-    white-space: nowrap;
   }
 
   .departure-platform {
