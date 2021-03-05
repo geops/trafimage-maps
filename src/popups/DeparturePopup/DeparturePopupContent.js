@@ -139,6 +139,14 @@ class DeparturePopupContent extends Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { destinationFilter } = this.state;
+
+    if (destinationFilter !== prevState.destinationFilter) {
+      this.loadDepartures();
+    }
+  }
+
   componentWillUnmount() {
     this.mounted = false;
     window.clearInterval(this.loadInterval);
@@ -153,7 +161,6 @@ class DeparturePopupContent extends Component {
       destinationFilter: selectedDestination,
     });
     DeparturePopupContent.updatePermalink(selectedDestination);
-    this.loadDepartures();
   }
 
   /**
@@ -167,7 +174,7 @@ class DeparturePopupContent extends Component {
 
     const urlParams = {
       key: apiKey,
-      limit: '20',
+      limit: '10',
     };
     if (uic) {
       urlParams.uic = uic;
@@ -218,7 +225,11 @@ class DeparturePopupContent extends Component {
   render() {
     const { uic, name, icon, showTitle, t } = this.props;
     let { departures } = this.state;
-    departures = departures.slice(0, 9);
+    departures = departures.sort(
+      (a, b) =>
+        new Date(a.estimatedTimeLocal || a.timetabledTimeLocal).getTime() -
+        new Date(b.estimatedTimeLocal || b.timetabledTimeLocal).getTime(),
+    );
     const { destinationFilter, departuresLoading, platformName } = this.state;
 
     let title = null;

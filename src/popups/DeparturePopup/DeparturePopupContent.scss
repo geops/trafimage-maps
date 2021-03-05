@@ -42,6 +42,10 @@ $tm-destination-input-height: 25px;
     margin: 1px;
   }
 
+  .tm-platform-inner {
+    white-space: nowrap;
+  }
+
   .departure-platform {
     border: 1px solid $brand-secondary;
   }
