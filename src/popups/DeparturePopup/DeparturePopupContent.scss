@@ -117,3 +117,12 @@ $tm-destination-input-height: 25px;
     transform: rotate(360deg);
   }
 }
+
+.tm-w-xs {
+  .tm-departure-popup-body {
+    .tm-table-wrapper {
+      max-height: 150px;
+      overflow: scroll;
+    }
+  }
+}
