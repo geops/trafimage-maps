@@ -1,0 +1,65 @@
+{
+  "Bernina Express: Chur – Poschiavo – Tirano (– Lugano mit Bus)": {
+    "color": "#7c00ff"
+  },
+  "Bernina Express: Landquart – Klosters Platz – Davos – Poschiavo – Tirano (– Lugano mit Bus)": {
+    "color": "#00aaff"
+  },
+  "Bernina Express: St. Moritz – Poschiavo – Tirano (– Lugano mit Bus)": {
+    "color": "#ffff00"
+  },
+  "Brienzer Rothorn: Brienz – Brienzer Rothorn": {
+    "color": "#00d1ff"
+  },
+  "Centovalli: Domodossola – Locarno": {
+    "color": "#8ae234"
+  },
+  "Chur – Arosa: Chur – Arosa": {
+    "color": "#00ff00"
+  },
+  "Chur – St.Moritz: Chur – St.Moritz": {
+    "color": "#007832"
+  },
+  "Glacier Express: Zermatt – Visp – Brig – Andermatt – Chur – St.Moritz": {
+    "color": "#ff00fa"
+  },
+  "Golden Pass Panoramic: Luzern – Brünig-Hasliberg – Interlaken Ost – Zweisimmen – Montreux": {
+    "color": "#ff0000"
+  },
+  "Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Locarno": {
+    "color": "#ab267d"
+  },
+  "Gotthard Panorama Express: Luzern – Vierwaldstättersee – Flüelen – Gotthard-Bergstrecke – Bellinzona – Lugano": {
+    "color": "#fff200"
+  },
+  "Jungfrau-Region: Interlaken Ost – Grindelwald – Kleine Scheidegg – Jungfraujoch": {
+    "color": "#00b9c0"
+  },
+  "Jungfrau-Region: Interlaken Ost – Lauterbrunnen – Wengen – Kleine Scheidegg – Jungfraujoch": {
+    "color": "#000000"
+  },
+  "Landquart – Scuol-Tarasp: Landquart – Klosters Platz – Sagliains – Scuol-Tarasp": {
+    "color": "#ff004c"
+  },
+  "Mont Blanc Express: Martigny – Le Châtelard – Chamonix": {
+    "color": "#ff9f00"
+  },
+  "Pilatus: Alpnachstad – Pilatus Kulm": {
+    "color": "#00ff21"
+  },
+  "Rigi-Region: Arth-Goldau – Rigi Kulm": {
+    "color": "#aaad00"
+  },
+  "Rigi-Region: Vitznau – Rigi Kulm": {
+    "color": "#00fff1"
+  },
+  "Rigi-Region: Weggis – Rigi Kaltbad": {
+    "color": "#16cb00"
+  },
+  "Titlis-Region: Engelberg – Titlis": {
+    "color": "#6800ff"
+  },
+  "Voralpenexpress: St. Gallen – Rapperswil – Arth-Goldau – Küssnacht am Rigi – Luzern": {
+    "color": "#0000ff"
+  }
+}

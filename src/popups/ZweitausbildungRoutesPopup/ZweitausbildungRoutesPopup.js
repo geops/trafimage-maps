@@ -17,8 +17,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
     super(props);
 
     // Sorted unique features by the unique label
-    const singleFeatures = props.feature
-      .get('features')
+    const singleFeatures = (props.feature.get('features') || [])
       .filter((feat, pos, arr) => {
         return (
           arr.map((f) => f.get('label')).indexOf(feat.get('label')) === pos
@@ -40,7 +39,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
 
   componentWillUnmount() {
     const { feature } = this.props;
-    const highlightFeatures = feature.get('highlightFeatures');
+    const highlightFeatures = feature.get('highlightFeatures') || [];
 
     // Update the features in the map
     for (let i = 0; i < highlightFeatures.length; i += 1) {
@@ -51,7 +50,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
   highlight(singleFeature) {
     const { feature } = this.props;
     const { features } = this.state;
-    const highlightFeatures = feature.get('highlightFeatures');
+    const highlightFeatures = feature.get('highlightFeatures') || [];
 
     // Update the features in the popup
     const singleFeatures = features;
@@ -60,13 +59,25 @@ class ZweitausbildungRoutesPopup extends PureComponent {
     }
 
     // Update the features in the map, depending on the unique label
+    const col = {};
     for (let i = 0; i < highlightFeatures.length; i += 1) {
       highlightFeatures[i].set(
         'highlight',
         highlightFeatures[i].get('label') === singleFeature.get('label'),
       );
+      // if (highlightFeatures[i].get('label') === singleFeature.get('label')) {
+      // console.log(
+      //   `"${highlightFeatures[i].get('label')}": "${highlightFeatures[i].get(
+      //     'color',
+      //   )}",`,
+      // );
+      // }
+      col[highlightFeatures[i].get('label')] = highlightFeatures[i].get(
+        'color',
+      );
       highlightFeatures[i].changed();
     }
+    // console.log(JSON.stringify(col));
 
     this.setState({ features: [...singleFeatures] });
   }
