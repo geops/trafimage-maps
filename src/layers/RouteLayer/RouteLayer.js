@@ -58,9 +58,13 @@ class RouteLayer extends CasaLayer {
     this.set('showPopupOnHover', (features = []) => {
       return features.filter((f) => {
         const { popupContent } = f.get('route');
-        if (popupContent && !Array.isArray(popupContent)) {
+        if (
+          popupContent &&
+          (!Array.isArray(popupContent) ||
+            !popupContent.every((item) => typeof item === 'string'))
+        ) {
           throw new Error(
-            `Popup content was provided with type ${typeof popupContent}. Please use an array instead (e.g. ['some content', 'more content']).`,
+            `Popup content was provided with type ${typeof popupContent}. Please use an array of strings instead (e.g. ['some content', 'more content']).`,
           );
         }
         return popupContent;
