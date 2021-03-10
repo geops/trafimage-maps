@@ -319,6 +319,9 @@ class DeparturePopupContent extends Component {
                     {DeparturePopupContent.formatTime(d.timetabledTimeLocal)}
                   </td>
                   <td>
+                    {DeparturePopupContent.formatTime(d.estimatedTimeLocal)}
+                  </td>
+                  <td>
                     <div
                       className="tm-departure-min"
                       style={{
