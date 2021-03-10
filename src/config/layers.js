@@ -20,11 +20,11 @@ import luftbild from '../img/luftbild.png';
 import AusbauLayer from '../layers/AusbauLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
+// import ZweitausbildungRoutesLayerOld from '../layers/ZweitausbildungRoutesLayerOld';
+// import ZweitausbildungRoutesHighlightLayerOld from '../layers/ZweitausbildungRoutesHighlightLayerOld';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
-import ZweitausbildungRoutesHighlightLayer2 from '../layers/ZweitausbildungRoutesHighlightLayer2';
 import LayerHelper from '../layers/layerHelper';
-import ZweitausbildungRoutesLayer2 from '../layers/ZweitausbildungRoutesLayer2';
 
 proj4.defs(
   'EPSG:21781',
@@ -1249,9 +1249,9 @@ export const zweitausbildungRoutes = new Layer({
     },
   },
   children: [
-    new ZweitausbildungRoutesLayer2({
-      name: 'ch.sbb.zweitausbildung.tourist.routes.group2',
-      key: 'ch.sbb.zweitausbildung.tourist.routes.group2',
+    new ZweitausbildungRoutesLayer({
+      name: 'ch.sbb.zweitausbildung.tourist.routes.group',
+      key: 'ch.sbb.zweitausbildung.tourist.routes.group',
       isAlwaysExpanded: true,
       visible: false,
       mapboxLayer: dataLayer,
@@ -1259,7 +1259,6 @@ export const zweitausbildungRoutes = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
-        popupComponent: 'ZweitausbildungRoutesPopup',
         radioGroup: 'zweitausbildungRoutes',
         zweitausbildung: {
           property: 'touristische_linie',
@@ -1274,50 +1273,16 @@ export const zweitausbildungRoutes = new Layer({
         },
       },
       children: [
-        new ZweitausbildungRoutesHighlightLayer2({
-          name: 'ch.sbb.zweitausbildung.tourist.routes.grouped2',
-          key: 'ch.sbb.zweitausbildung.tourist.routes.grouped2',
-          visible: false,
-          zIndex: 1,
-          properties: {
-            popupComponent: 'ZweitausbildungRoutesPopup',
-            zweitausbildung: {
-              layer: 'zweitausbildung_tourist_strecken',
-              featureInfoLayer: 'zweitausbildung_tourist_strecken_qry_xyr',
-            },
-          },
-        }),
-      ],
-    }),
-    new ZweitausbildungRoutesLayer({
-      name: 'ch.sbb.zweitausbildung.tourist.routes.group',
-      key: 'ch.sbb.zweitausbildung.tourist.routes.group',
-      visible: false,
-      isAlwaysExpanded: true,
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
-        zweitausbildung: {
-          infos: {
-            title: 'ch.sbb.zweitausbildung.tourist.routes.group',
-            desc: 'ch.sbb.zweitausbildung.tourist.routes.group-desc',
-            legend: {
-              image: 'legend_tourist_strecken.png',
-            },
-          },
-          layer: 'zweitausbildung_tourist_strecken_grouped_qry',
-        },
-        radioGroup: 'zweitausbildungRoutes',
-      },
-      children: [
         new ZweitausbildungRoutesHighlightLayer({
           name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           visible: false,
           zIndex: 1,
+          mapboxLayer: dataLayer,
           properties: {
             popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
+              property: 'touristische_linie',
               layer: 'zweitausbildung_tourist_strecken',
               featureInfoLayer: 'zweitausbildung_tourist_strecken_qry_xyr',
             },
@@ -1325,9 +1290,45 @@ export const zweitausbildungRoutes = new Layer({
         }),
       ],
     }),
-    new ZweitausbildungRoutesLayer2({
-      name: 'ch.sbb.zweitausbildung.hauptlinien.group2',
-      key: 'ch.sbb.zweitausbildung.hauptlinien.group2',
+    // new ZweitausbildungRoutesLayerOld({
+    //   name: 'ch.sbb.zweitausbildung.tourist.routes.group',
+    //   key: 'ch.sbb.zweitausbildung.tourist.routes.group',
+    //   visible: false,
+    //   isAlwaysExpanded: true,
+    //   properties: {
+    //     hasInfos: true,
+    //     layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
+    //     zweitausbildung: {
+    //       infos: {
+    //         title: 'ch.sbb.zweitausbildung.tourist.routes.group',
+    //         desc: 'ch.sbb.zweitausbildung.tourist.routes.group-desc',
+    //         legend: {
+    //           image: 'legend_tourist_strecken.png',
+    //         },
+    //       },
+    //       layer: 'zweitausbildung_tourist_strecken_grouped_qry',
+    //     },
+    //     radioGroup: 'zweitausbildungRoutes',
+    //   },
+    //   children: [
+    //     new ZweitausbildungRoutesHighlightLayerOld({
+    //       name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
+    //       key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
+    //       visible: false,
+    //       zIndex: 1,
+    //       properties: {
+    //         popupComponent: 'ZweitausbildungRoutesPopupOld',
+    //         zweitausbildung: {
+    //           layer: 'zweitausbildung_tourist_strecken',
+    //           featureInfoLayer: 'zweitausbildung_tourist_strecken_qry_xyr',
+    //         },
+    //       },
+    //     }),
+    //   ],
+    // }),
+    new ZweitausbildungRoutesLayer({
+      name: 'ch.sbb.zweitausbildung.hauptlinien.group',
+      key: 'ch.sbb.zweitausbildung.hauptlinien.group',
       visible: true,
       isQueryable: false,
       isAlwaysExpanded: true,
@@ -1350,49 +1351,15 @@ export const zweitausbildungRoutes = new Layer({
       },
       children: [
         new ZweitausbildungRoutesHighlightLayer({
-          name: 'ch.sbb.zweitausbildung.hauptlinien.grouped2',
-          key: 'ch.sbb.zweitausbildung.hauptlinien.grouped2',
-          visible: true,
-          zIndex: 1,
-          properties: {
-            popupComponent: 'ZweitausbildungRoutesPopup',
-            zweitausbildung: {
-              layer: 'zweitausbildung_hauptlinien',
-              featureInfoLayer: 'zweitausbildung_hauptlinien_qry_xyr',
-            },
-          },
-        }),
-      ],
-    }),
-    new ZweitausbildungRoutesLayer({
-      name: 'ch.sbb.zweitausbildung.hauptlinien.group',
-      key: 'ch.sbb.zweitausbildung.hauptlinien.group',
-      visible: true,
-      isAlwaysExpanded: true,
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
-        zweitausbildung: {
-          infos: {
-            title: 'ch.sbb.zweitausbildung.hauptlinien.group',
-            desc: 'ch.sbb.zweitausbildung.hauptlinien.group-desc',
-            legend: {
-              image: 'legend_hauptlinien.png',
-            },
-          },
-          layer: 'zweitausbildung_hauptlinien_grouped_qry',
-        },
-        radioGroup: 'zweitausbildungRoutes',
-      },
-      children: [
-        new ZweitausbildungRoutesHighlightLayer({
           name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           visible: true,
           zIndex: 1,
+          mapboxLayer: dataLayer,
           properties: {
             popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
+              property: 'hauptlinie',
               layer: 'zweitausbildung_hauptlinien',
               featureInfoLayer: 'zweitausbildung_hauptlinien_qry_xyr',
             },
@@ -1400,6 +1367,42 @@ export const zweitausbildungRoutes = new Layer({
         }),
       ],
     }),
+    // new ZweitausbildungRoutesLayerOld({
+    //   name: 'ch.sbb.zweitausbildung.hauptlinien.group',
+    //   key: 'ch.sbb.zweitausbildung.hauptlinien.group',
+    //   visible: true,
+    //   isAlwaysExpanded: true,
+    //   properties: {
+    //     hasInfos: true,
+    //     layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
+    //     zweitausbildung: {
+    //       infos: {
+    //         title: 'ch.sbb.zweitausbildung.hauptlinien.group',
+    //         desc: 'ch.sbb.zweitausbildung.hauptlinien.group-desc',
+    //         legend: {
+    //           image: 'legend_hauptlinien.png',
+    //         },
+    //       },
+    //       layer: 'zweitausbildung_hauptlinien_grouped_qry',
+    //     },
+    //     radioGroup: 'zweitausbildungRoutes',
+    //   },
+    //   children: [
+    //     new ZweitausbildungRoutesHighlightLayerOld({
+    //       name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
+    //       key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
+    //       visible: true,
+    //       zIndex: 1,
+    //       properties: {
+    //         popupComponent: 'ZweitausbildungRoutesPopupOld',
+    //         zweitausbildung: {
+    //           layer: 'zweitausbildung_hauptlinien',
+    //           featureInfoLayer: 'zweitausbildung_hauptlinien_qry_xyr',
+    //         },
+    //       },
+    //     }),
+    //   ],
+    // }),
   ],
 });
 

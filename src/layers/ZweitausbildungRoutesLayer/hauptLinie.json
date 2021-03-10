@@ -1,86 +1,86 @@
 {
   "Basel SBB - Aarau - Zürich HB - St. Gallen": {
-    "shortname": "IR37",
+    "shortname": "IR 37",
     "color": "#B8D989"
   },
   "Basel SBB - Bern - Brig": {
-    "shortname": "IC6",
+    "shortname": "IC 6",
     "color": "#8BC63E"
   },
   "Basel SBB - Bern - Interlaken Ost": {
-    "shortname": "IC61",
+    "shortname": "IC 61",
     "color": "#EF59A1"
   },
   "Basel SBB - Biel/Bienne": {
-    "shortname": "IC51",
+    "shortname": "IC 51",
     "color": "#B00D15"
   },
   "Basel SBB - Brugg AG - Zürich HB (- Zürich Flughafen)": {
-    "shortname": "IR36",
+    "shortname": "IR 36",
     "color": "#AD227A"
   },
   "Basel SBB - Luzern - Erstfeld (- Göschenen)": {
-    "shortname": "IR26",
+    "shortname": "IR 26",
     "color": "#AF8789"
   },
   "Basel SBB - Luzern - Lugano": {
-    "shortname": "IC21",
+    "shortname": "IC 21",
     "color": "#FEC70C"
   },
   "Basel SBB - Olten - Luzern": {
-    "shortname": "IR27",
+    "shortname": "IR 27",
     "color": "#5B6E24"
   },
   "Basel SBB - Zürich HB - Chur": {
-    "shortname": "IC3",
+    "shortname": "IC 3",
     "color": "#00984A"
   },
   "Bern - Burgdorf - Olten (- Zürich HB)": {
-    "shortname": "IR17",
+    "shortname": "IR 17",
     "color": "#24529B"
   },
   "Bern - Olten - Brugg AG - Zürich HB": {
-    "shortname": "IR16",
+    "shortname": "IR 16",
     "color": "#9F6F32"
   },
   "Brig - Bern - Zürich HB - Romanshorn": {
-    "shortname": "IC8",
+    "shortname": "IC 8",
     "color": "#009BDE"
   },
   "Genève-Aéroport - Bern - Zürich HB - St.Gallen": {
-    "shortname": "IC1",
+    "shortname": "IC 1",
     "color": "#E43A2B"
   },
   "Genève-Aeroport - Lausanne - Bern - Luzern": {
-    "shortname": "IR15",
+    "shortname": "IR 15",
     "color": "#0CB795"
   },
   "Genève-Aéroport - Lausanne - Brig": {
-    "shortname": "IR90",
+    "shortname": "IR 90",
     "color": "#007CA3"
   },
   "Genève-Aéroport/Lausanne - Biel/Bienne - Zürich HB (- St.Gallen)": {
-    "shortname": "IC5",
+    "shortname": "IC 5",
     "color": "#F7931D"
   },
   "Luzern - Zürich HB - Konstanz": {
-    "shortname": "IR75",
+    "shortname": "IR 75",
     "color": "#744B97"
   },
   "Luzern - Zürich HB (- Zürich Flughafen)": {
-    "shortname": "IR70",
+    "shortname": "IR 70",
     "color": "#F390BC"
   },
   "Zürich HB - Schaffhausen": {
-    "shortname": "IC4",
+    "shortname": "IC 4",
     "color": "#C9A428"
   },
   "Zürich HB - Zug - Erstfeld (- Göschenen)": {
-    "shortname": "IR46",
+    "shortname": "IR 46",
     "color": "#006C89"
   },
   "Zürich HB - Zug - Lugano": {
-    "shortname": "IC2",
+    "shortname": "IC 2",
     "color": "#8781BD"
   }
 }

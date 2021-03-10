@@ -1,10 +1,14 @@
-import { VectorLayer } from 'mobility-toolbox-js/ol';
-import OLVectorLayer from 'ol/layer/Vector';
-import OLVectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import Style from 'ol/style/Style';
-import Stroke from 'ol/style/Stroke';
-import layerHelper from '../layerHelper';
+import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { Feature } from 'ol';
+import { MultiLineString } from 'ol/geom';
+import { GeoJSON } from 'ol/format';
+import { getLineColorExpr } from './lineColors';
+import touristicLine from './touristischeLinie.json';
+import hauptLinie from './hauptLinie.json';
+
+const sourceId = 'base';
+const sourceLayer = 'osm_edges';
+const format = new GeoJSON();
 
 /**
  * Layer for zweitausbildung routes
@@ -13,98 +17,257 @@ import layerHelper from '../layerHelper';
  * @class
  * @param {Object} [options] Layer options.
  */
-class ZweitausbildungRoutesLayer extends VectorLayer {
-  /**
-   * Create a dashed line style for the given colors
-   * @param  {String} colors Semicolon separated list of colors
-   * @return {Array<ol.style.Style>} Style
-   */
-  static createDashedLinesStyle(colors) {
-    const style = [];
-    const colorArray = colors.split(';');
-    const len = 8;
-
-    for (let i = 0; i < colorArray.length; i += 1) {
-      style.push(
-        new Style({
-          stroke: new Stroke({
-            color: colorArray[i],
-            width: 4,
-            lineCap: 'butt',
-            lineDash: [0, i * len, len, (colorArray.length - i - 1) * len],
-          }),
-        }),
-      );
-    }
-
-    return style;
-  }
-
+class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const olLayer = new OLVectorLayer({
-      style: (f, r) => this.style(f, r),
-    });
+    // Very important that styleLayers is not empty otherwise the visibility is not apply properly.
+    super(options);
 
-    super({
-      ...options,
-      olLayer,
-    });
+    this.property = options.properties.zweitausbildung.property;
+    this.lines = this.property === 'hauptlinie' ? hauptLinie : touristicLine;
 
-    this.styleCache = {};
-    this.setVisible(this.visible);
-
-    this.zweitProps = this.get('zweitausbildung') || {};
-    const layerParam = this.zweitProps.layer
-      ? `layer=${this.zweitProps.layer}&`
-      : '';
-
-    this.source = new OLVectorSource({
-      format: new GeoJSON(),
-      loader: () => {
-        fetch(
-          `${this.geoJsonCacheUrl}?` +
-            `${layerParam}workspace=trafimage` +
-            '&srsName=EPSG:3857&geoserver=wkp',
-        )
-          .then((data) => data.json())
-          .then((data) => {
-            const format = new GeoJSON();
-            const features = format.readFeatures(data);
-            this.olLayer.getSource().clear();
-            this.olLayer.getSource().addFeatures(features);
-          });
+    this.singleLineStyleLayer = {
+      id: options.name || options.key,
+      type: 'line',
+      source: sourceId,
+      'source-layer': sourceLayer,
+      filter: ['has', this.property],
+      paint: {
+        'line-color': getLineColorExpr(this.property),
+        'line-width': [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          10,
+          4,
+        ],
+        'line-opacity': 1,
       },
-    });
+    };
 
-    olLayer.setSource(this.source);
+    this.multiLinesLabels = [];
+    this.multiLinesSources = [];
+    this.multiLinesStyleLayers = [];
   }
 
-  setGeoJsonUrl(geoJsonCacheUrl) {
-    this.geoJsonCacheUrl = geoJsonCacheUrl;
+  async init(map) {
+    await fetch('https://maps.style-dev.geops.io/data/base_v3.json')
+      .then((data) => data.json())
+      .then((data) => {
+        const values = data.tilestats.layers
+          .find((layer) => layer.layer === sourceLayer)
+          ?.attributes.find((attr) => attr.attribute === this.property)?.values;
+        values.forEach((value) => {
+          const split = value.split(',');
+          if (split.length > 1) {
+            this.multiLinesLabels.push(value);
+          }
+        });
+        this.multiLinesSources = this.generateMultiLinesSources();
+        this.multiLinesStyleLayers = this.generateMultiLinesStyleLayers();
+      });
+    super.init(map);
+
+    this.olListenersKeys.push([
+      this.on('change:visible', () => {
+        if (this.visible) {
+          this.updateMultiLinesSources();
+        }
+      }),
+      this.map.on('moveend', () => {
+        this.updateMultiLinesSources();
+      }),
+    ]);
   }
 
-  style(feature, resolution) {
-    const colors = feature.get('colors');
-    const network = feature.get('network');
-
-    const currentNetwork = `trackit${layerHelper.getOldGeneralization(
-      resolution,
-    )}`;
-    const visible = network === currentNetwork;
-
-    const styleName = visible ? colors : visible;
-
-    if (!this.styleCache[styleName]) {
-      if (visible) {
-        this.styleCache[
-          styleName
-        ] = ZweitausbildungRoutesLayer.createDashedLinesStyle(colors);
-      } else {
-        this.styleCache[styleName] = new Style();
-      }
+  terminate(map) {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
     }
+    super.terminate(map);
+    this.removeMultiLinesSources();
+  }
 
-    return this.styleCache[styleName];
+  /**
+   * On Mapbox map load callback function. Add style sources then style layers.
+   * @ignore
+   */
+  onLoad() {
+    this.addMultiLinesSources();
+    this.styleLayers = [
+      this.singleLineStyleLayer,
+      ...this.multiLinesStyleLayers,
+    ];
+    // We must also reset the default filterFunc to be sure the visibility is set properly
+    const ids = this.styleLayers.map((s) => s.id);
+    this.styleLayersFilter = (styleLayer) => {
+      return ids.includes(styleLayer.id);
+    };
+
+    super.onLoad();
+    this.updateMultiLinesSources();
+  }
+
+  // Generate emtpy mapbox sources object for features with multiple lines.
+  generateMultiLinesSources() {
+    const sources = [];
+    this.multiLinesLabels.forEach((line) => {
+      const data = {
+        type: 'FeatureCollection',
+        features: [],
+      };
+
+      sources.push({
+        id: line,
+        type: 'geojson',
+        // lineMetrics: true,
+        data,
+      });
+    });
+    return sources;
+  }
+
+  // Generate dashed styles features with multiple lines.
+  generateMultiLinesStyleLayers() {
+    const styleLayers = [];
+    this.multiLinesLabels.forEach((line) => {
+      const linesLabels = line.split(',');
+      linesLabels.forEach((label, index) => {
+        const color = this.lines[label]?.color;
+        if (!color) {
+          // eslint-disable-next-line no-console
+          console.log(
+            `There is no color defined for ${label}, available labels are `,
+            this.lines,
+          );
+          return;
+        }
+        styleLayers.push({
+          id: `${line}${index}`,
+          source: line,
+          type: 'line',
+          paint: {
+            'line-color': color,
+            'line-width': [
+              'case',
+              ['boolean', ['feature-state', 'hover'], false],
+              10,
+              4,
+            ],
+            'line-dasharray': [(linesLabels.length - index) * 2, index * 2],
+          },
+          layout: {
+            // 'line-cap': 'round',
+            // 'line-join': 'round',
+          },
+        });
+      });
+    });
+    return styleLayers;
+  }
+
+  // Add sources for features with multiple lines.
+  addMultiLinesSources(sources) {
+    if (!this.mapboxLayer.mbMap) {
+      return;
+    }
+    const { mbMap } = this.mapboxLayer;
+    (sources || this.multiLinesSources).forEach((source) => {
+      const { id } = source;
+      if (!mbMap.getSource(id)) {
+        const withoutId = { ...source };
+        delete withoutId.id;
+        mbMap.addSource(id, withoutId);
+      } else {
+        mbMap.getSource(id).setData(source.data);
+      }
+    });
+  }
+
+  // Remove source for features with multiple lines.
+  removeMultiLinesSources() {
+    if (!this.mapboxLayer.mbMap) {
+      return;
+    }
+    const { mbMap } = this.mapboxLayer;
+    this.multiLinesSources.forEach(({ id }) => {
+      if (mbMap.getSource(id)) {
+        mbMap.removeSource(id);
+      }
+    });
+  }
+
+  // Upodate sources for features with multiple lines.
+  updateMultiLinesSources() {
+    if (!this.visible || !this.map || !this.mapboxLayer.mbMap) {
+      return;
+    }
+    const sources = [];
+    const { mbMap } = this.mapboxLayer;
+
+    this.multiLinesLabels.forEach((line) => {
+      // console.log(line);
+      let features;
+      try {
+        features = mbMap.querySourceFeatures(sourceId, {
+          sourceLayer,
+          filter: ['all', ['==', ['get', this.property], line]],
+        });
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        // console.error(e);
+      }
+      if (!features?.length) {
+        return;
+      }
+      // console.log(features);
+      // console.log(
+      //   (features || []).map((a) => {
+      //     return {
+      //       to_id: a.properties.to_id,
+      //       from_id: a.properties.from_id,
+      //       line_number: a.properties.line_number,
+      //     };
+      //   }),
+      // );
+      const ids = [];
+      const nbCoord = [];
+      const uniqueFeatures = [];
+      features.forEach((linee) => {
+        const indexOf = ids.indexOf(linee.id);
+        if (indexOf === -1) {
+          nbCoord.push(linee.geometry.coordinates.length);
+          ids.push(linee.id);
+          uniqueFeatures.push(linee);
+        } else if (nbCoord[indexOf] < linee.geometry.coordinates.length) {
+          uniqueFeatures[indexOf] = linee;
+        }
+        // if (linee.id === 67650) {
+        //   console.log(linee.id);
+        //   console.log(linee.properties);
+        //   console.log(linee.geometry);
+        // }
+      });
+      // features = uniqueFeatures;
+
+      // console.log(features);
+      const multiLine = new Feature(
+        new MultiLineString(
+          features.map((lineString) => lineString.geometry.coordinates),
+        ),
+      );
+      const data = {
+        type: 'FeatureCollection',
+        features: [format.writeFeatureObject(multiLine)],
+      };
+
+      sources.push({
+        id: line,
+        type: 'geojson',
+        // lineMetrics: true,
+        data,
+      });
+    });
+    this.addMultiLinesSources(sources);
   }
 }
 
