@@ -75,7 +75,10 @@ class DeparturePopupContent extends Component {
   }
 
   static getMinDiff(time) {
-    const min = Math.floor(Math.abs(new Date(time) - new Date()) / 1000 / 60);
+    const min = Math.floor((new Date(time) - new Date()) / 1000 / 60);
+    if (min < 0) {
+      return null;
+    }
     return min > 0 && min < 60 ? [min, "'"].join('') : null;
   }
 
