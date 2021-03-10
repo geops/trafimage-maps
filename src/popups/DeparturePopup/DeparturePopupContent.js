@@ -67,6 +67,9 @@ class DeparturePopupContent extends Component {
   }
 
   static formatTime(time) {
+    if (!time) {
+      return <>&nbsp;&nbsp;-&nbsp;</>;
+    }
     const d = new Date(time);
 
     return [`0${d.getHours()}`.slice(-2), `0${d.getMinutes()}`.slice(-2)].join(
@@ -222,6 +225,24 @@ class DeparturePopupContent extends Component {
           departuresLoading: false,
           platformName,
         });
+      })
+      .catch(() => {
+        const { departures } = this.state;
+        if (!navigator.onLine) {
+          // When offline, remove all time information from the popup.
+          const offlineDepartures = [...departures].map((d) => {
+            // eslint-disable-next-line no-param-reassign
+            d.estimatedTimeLocal = null;
+            // eslint-disable-next-line no-param-reassign
+            d.timetabledTimeLocal = null;
+            return d;
+          });
+
+          this.setState({
+            departures: offlineDepartures,
+            departuresLoading: false,
+          });
+        }
       });
   }
 
