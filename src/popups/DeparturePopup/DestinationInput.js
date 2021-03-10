@@ -48,6 +48,12 @@ class DestinationInput extends Component {
     }
   }
 
+  componentWillUnmount() {
+    const { onSelect } = this.props;
+
+    onSelect(undefined);
+  }
+
   /**
    * Fired if user selects a destination from the input
    * @param {string} value Selected value.
