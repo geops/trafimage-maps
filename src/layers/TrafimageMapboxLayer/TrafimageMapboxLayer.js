@@ -110,9 +110,8 @@ class TrafimageMapboxLayer extends MapboxLayer {
       // The mapbox map does not exist so we only set the good styleUrl.
       // The style will be loaded in loadMbMap function.
       this.styleUrl = newStyleUrl;
-      // this.mbMap.once('load', () => {
       if (this.filters) {
-        this.once('load', () => {
+        this.on('load', () => {
           this.applyStyle(this.mbMap.getStyle());
         });
       }
