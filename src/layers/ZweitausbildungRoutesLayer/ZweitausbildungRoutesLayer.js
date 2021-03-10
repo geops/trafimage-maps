@@ -33,19 +33,15 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
       filter: ['has', this.property],
       paint: {
         'line-color': getLineColorExpr(this.property),
-        'line-width': [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          10,
-          4,
-        ],
-        'line-opacity': 1,
+        'line-width': 4,
       },
     };
 
     this.multiLinesLabels = [];
     this.multiLinesSources = [];
     this.multiLinesStyleLayers = [];
+    this.updateTimeout = null;
+    this.onIdle = this.onIdle.bind(this);
   }
 
   async init(map) {
@@ -73,18 +69,30 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
         }
       }),
       this.map.on('moveend', () => {
-        this.updateMultiLinesSources();
+        this.mapboxLayer.mbMap.once('idle', this.onIdle);
       }),
     ]);
   }
 
   terminate(map) {
+    window.clearTimeout(this.updateTimeout);
+    super.terminate(map);
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
     }
-    super.terminate(map);
+    mbMap.off('idle', this.onIdle);
     this.removeMultiLinesSources();
+  }
+
+  /**
+   * Callback when the map is on idle state after a moveend event.
+   */
+  onIdle() {
+    window.clearTimeout(this.updateTimeout);
+    this.updateTimeout = window.setTimeout(() => {
+      this.updateMultiLinesSources();
+    }, 50);
   }
 
   /**
@@ -147,12 +155,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
           type: 'line',
           paint: {
             'line-color': color,
-            'line-width': [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              10,
-              4,
-            ],
+            'line-width': 4,
             'line-dasharray': [(linesLabels.length - index) * 2, index * 2],
           },
           layout: {
