@@ -9,7 +9,6 @@ import './ZweitausbildungPoisPopup.scss';
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
-  appBaseUrl: PropTypes.string.isRequired,
 };
 
 class ZweitausbildungPoisPopup extends PureComponent {
@@ -19,7 +18,7 @@ class ZweitausbildungPoisPopup extends PureComponent {
   }
 
   render() {
-    const { feature, t, appBaseUrl } = this.props;
+    const { feature, t } = this.props;
     const features = feature.get('features');
 
     return (
@@ -27,30 +26,20 @@ class ZweitausbildungPoisPopup extends PureComponent {
         {features.map((singleFeature) => (
           <div
             className="wkp-zweitausbildung-pois-popup-row"
-            key={singleFeature.get('bezeichnung')}
+            key={singleFeature.get('name')}
             onMouseEnter={() => this.highlight(singleFeature, true)}
             onMouseLeave={() => this.highlight(singleFeature, false)}
           >
-            <b>{singleFeature.get('bezeichnung')}</b>
-            {singleFeature.get('railaway') ? (
+            <b>{singleFeature.get('name')}</b>
+            {singleFeature.get('rail_away') ? (
               <div className="wkp-zweitausbildung-pois-popup-railaway">
                 RailAway
               </div>
             ) : null}
             <div className="wkp-zweitausbildung-pois-popup-image">
-              {singleFeature.get('image') ? (
+              {singleFeature.get('foto') ? (
                 <img
-                  src={`${appBaseUrl}/cached_image?url=${encodeURIComponent(
-                    encodeURI(singleFeature.get('image')),
-                  )}`}
-                  height={
-                    singleFeature.get('image_height') *
-                    (60 / singleFeature.get('image_height'))
-                  }
-                  width={
-                    singleFeature.get('image_width') *
-                    (60 / singleFeature.get('image_height'))
-                  }
+                  src={singleFeature.get('foto')}
                   draggable="false"
                   alt={t('Kein Bildtext')}
                 />

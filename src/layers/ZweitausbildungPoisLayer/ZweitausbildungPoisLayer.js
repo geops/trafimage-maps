@@ -35,44 +35,31 @@ class ZweitausbildungPoisLayer extends VectorLayer {
     this.styleCache = {};
     this.setVisible(this.visible);
 
-    this.zweitProps = this.get('zweitausbildung') || {};
-    this.color = this.zweitProps.color || 'rgba(0, 61, 133, 0.8)';
-    const viewparams = this.zweitProps.viewparams
-      ? `viewparams=${this.zweitProps.viewparams}&`
-      : '';
-
-    this.source = new OLVectorSource({
-      format: new GeoJSON(),
-      loader: () => {
-        fetch(
-          `${this.geoServerUrl}?` +
-            'service=WFS&version=1.0.0&request=GetFeature&' +
-            'typeName=trafimage:zweitausbildung_pois_qry&' +
-            `srsName=EPSG:3857&${viewparams}` +
-            'outputFormat=application/json',
-        )
-          .then((data) => data.json())
-          .then((data) => {
-            const format = new GeoJSON();
-            const features = format.readFeatures(data);
-            this.source.clear();
-            this.source.addFeatures(features);
-          });
-      },
-    });
+    this.color =
+      (this.get('zweitausbildung') || {}).color || 'rgba(0, 61, 133, 0.8)';
 
     olLayer.setSource(
       new ClusterSource({
         distance: 70,
-        source: this.source,
+        source: new OLVectorSource({
+          format: new GeoJSON({ dataProjection: 'EPSG:3857' }),
+          features: [],
+        }),
       }),
     );
 
     this.animate = this.animate.bind(this);
   }
 
-  setGeoServerUrl(geoServerUrl) {
-    this.geoServerUrl = geoServerUrl;
+  setCartaroUrl(cartaroUrl) {
+    if (cartaroUrl && cartaroUrl !== this.cartaroUrl) {
+      this.cartaroUrl = cartaroUrl;
+      const { viewparams } = this.get('zweitausbildung') || {};
+      this.olLayer
+        .getSource()
+        .getSource()
+        .setUrl(`${this.cartaroUrl}zweitausbildung_pois/items/?${viewparams}`);
+    }
   }
 
   setStaticFilesUrl(staticFilesUrl) {

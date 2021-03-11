@@ -1197,7 +1197,7 @@ export const zweitausbildungPois = new Layer({
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          viewparams: 'railway:false',
+          viewparams: 'rail_away=false',
           color: 'rgba(0, 61, 133, 0.8)',
           infos: {
             legend: [
@@ -1220,7 +1220,7 @@ export const zweitausbildungPois = new Layer({
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          viewparams: 'railaway:true',
+          viewparams: 'rail_away=true',
           color: 'rgba(235, 0, 0, 0.8)',
           infos: {
             legend: [

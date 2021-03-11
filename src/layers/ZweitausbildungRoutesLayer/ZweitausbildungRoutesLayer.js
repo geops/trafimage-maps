@@ -22,7 +22,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     // Very important that styleLayers is not empty otherwise the visibility is not apply properly.
     super(options);
 
-    this.property = options.properties.zweitausbildung.property;
+    this.property = (this.get('zweitausbildung') || {}).property;
     this.lines = this.property === 'hauptlinie' ? hauptLinie : touristicLine;
 
     this.singleLineStyleLayer = {
