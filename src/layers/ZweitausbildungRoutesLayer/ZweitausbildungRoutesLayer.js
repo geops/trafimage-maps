@@ -44,29 +44,12 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     this.onIdle = this.onIdle.bind(this);
   }
 
-  async init(map) {
-    await fetch('https://maps.style-dev.geops.io/data/base_v3.json')
-      .then((data) => data.json())
-      .then((data) => {
-        const values = data.tilestats.layers
-          .find((layer) => layer.layer === sourceLayer)
-          ?.attributes.find((attr) => attr.attribute === this.property)?.values;
-        values.forEach((value) => {
-          const split = value.split(',');
-          if (split.length > 1) {
-            this.multiLinesLabels.push(value);
-          }
-        });
-        this.multiLinesSources = this.generateMultiLinesSources();
-        this.multiLinesStyleLayers = this.generateMultiLinesStyleLayers();
-      });
+  init(map) {
     super.init(map);
 
     this.olListenersKeys.push([
       this.on('change:visible', () => {
-        if (this.visible) {
-          this.updateMultiLinesSources();
-        }
+        this.updateMultiLinesSources();
       }),
       this.map.on('moveend', () => {
         this.mapboxLayer.mbMap.once('idle', this.onIdle);
@@ -99,7 +82,8 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
    * On Mapbox map load callback function. Add style sources then style layers.
    * @ignore
    */
-  onLoad() {
+  async onLoad() {
+    await this.loadSourceData();
     this.addMultiLinesSources();
     this.styleLayers = [
       this.singleLineStyleLayer,
@@ -113,6 +97,29 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
 
     super.onLoad();
     this.updateMultiLinesSources();
+  }
+
+  /**
+   * Load the source data to get all the possible values for hauptlinie
+   * or touristische_linie property.
+   */
+  async loadSourceData() {
+    const source = this.mapboxLayer.mbMap.getSource(sourceId);
+    await fetch(source.url)
+      .then((data) => data.json())
+      .then((data) => {
+        const values = data.tilestats.layers
+          .find((layer) => layer.layer === sourceLayer)
+          ?.attributes.find((attr) => attr.attribute === this.property)?.values;
+        values.forEach((value) => {
+          const split = value.split(',');
+          if (split.length > 1) {
+            this.multiLinesLabels.push(value);
+          }
+        });
+        this.multiLinesSources = this.generateMultiLinesSources();
+        this.multiLinesStyleLayers = this.generateMultiLinesStyleLayers();
+      });
   }
 
   // Generate emtpy mapbox sources object for features with multiple lines.
@@ -201,7 +208,12 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
 
   // Upodate sources for features with multiple lines.
   updateMultiLinesSources() {
-    if (!this.visible || !this.map || !this.mapboxLayer.mbMap) {
+    if (
+      !this.visible ||
+      !this.multiLinesLabels ||
+      !this.map ||
+      !this.mapboxLayer.mbMap
+    ) {
       return;
     }
     const sources = [];
