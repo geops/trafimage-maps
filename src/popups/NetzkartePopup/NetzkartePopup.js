@@ -74,6 +74,7 @@ function NetzkartePopup({ feature }) {
         role="button"
         onClick={() => openDeparturePopup()}
         onKeyPress={() => openDeparturePopup()}
+        className="wkp-departure-btn"
       >
         {t('Abfahrtszeiten')}
       </div>

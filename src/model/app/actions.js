@@ -22,6 +22,9 @@ export const SET_DRAW_URL = 'SET_DRAW_URL';
 export const SET_DRAW_IDS = 'SET_DRAW_IDS';
 export const SET_DRAW_EDIT_LINK_LOADING = 'SET_DRAW_EDIT_LINK_LOADING';
 export const SET_DRAW_EDIT_LINK = 'SET_DRAW_EDIT_LINK';
+export const SET_DESTINATION_URL = 'SET_DESTINATION_URL';
+export const SET_DEPARTURES_URL = 'SET_DEPARTURES_URL';
+export const SET_API_KEY = 'SET_API_KEY';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -72,6 +75,21 @@ export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
 export const setMapsetUrl = (data) => ({ type: SET_MAPSET_URL, data });
 
 export const setShortenerUrl = (data) => ({ type: SET_SHORTENER_URL, data });
+
+export const setDestinationUrl = (data) => ({
+  type: SET_DESTINATION_URL,
+  data,
+});
+
+export const setDeparturesUrl = (data) => ({
+  type: SET_DEPARTURES_URL,
+  data,
+});
+
+export const setApiKey = (data) => ({
+  type: SET_API_KEY,
+  data,
+});
 
 export const setDrawUrl = (data) => ({ type: SET_DRAW_URL, data });
 

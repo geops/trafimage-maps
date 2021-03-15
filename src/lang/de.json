@@ -1,6 +1,9 @@
 {
   "Abbrechen": "Abbrechen",
   "Abfahrtszeiten": "Abfahrtszeiten",
+  "abfahrtszeiten_gleis": "Gleis",
+  "abfahrtszeiten_kante": "Kante",
+  "abfahrtszeiten_steg": "Steg",
   "abkuerzung": "Abkürzung",
   "Aktuell": "Aktuell",
   "angebotsschritt": "Angebotsschritt 2035",
@@ -271,7 +274,6 @@
   "Permalink generieren": "Permalink.",
   "perronhoehe_P55": "Perronhöhe P55",
   "Plakat": "Plakat",
-  "Planmässige Abfahrt": "Planmässige Abfahrt",
   "Printprodukte": "Printprodukte",
   "Projekte im Bau": "Projekte im Bau",
   "Projektionswahl": "Projektionswahl",
