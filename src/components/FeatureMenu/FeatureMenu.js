@@ -20,7 +20,7 @@ const FeatureMenu = ({ appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const [collapsed, setCollapsed] = useState(false);
-
+  console.log(featureInfo);
   if (!featureInfo || !featureInfo.length) {
     return null;
   }

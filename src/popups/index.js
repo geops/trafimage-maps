@@ -1,3 +1,4 @@
+import RegionenkarteSegmentPopup from './RegionenkarteSegmentPopup';
 import BahnhofplanPopup from './BahnhofplanPopup';
 import BusLinePopup from './BusLinePopup';
 import CasaRoutePopup from './CasaRoutePopup';
@@ -27,5 +28,6 @@ export default {
   ZweitausbildungAbroadPopup,
   ZweitausbildungPoisPopup,
   ZweitausbildungRoutesPopup,
+  RegionenkarteSegmentPopup,
   DrawPopup,
 };

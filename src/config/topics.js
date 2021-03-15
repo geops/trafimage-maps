@@ -33,6 +33,7 @@ import defaultBaseLayers, {
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
+  regionenkartePublicSegment,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -46,6 +47,7 @@ const defaultElements = {
   popup: false,
   search: true,
   drawMenu: true,
+  overlay: true,
 };
 
 export const netzkarte = {
@@ -209,10 +211,15 @@ export const infrastruktur = {
   searches: defaultSearches,
 };
 
-export const regionenkarte = {
+export const regionenkartePublic = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  redirect: true,
+  elements: {
+    ...defaultElements,
+    popup: true,
+  },
+  layers: [dataLayer, netzkarteLayer, regionenkartePublicSegment],
+  // redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
@@ -289,7 +296,7 @@ const topics = {
     handicap,
     bauprojekte,
     infrastruktur,
-    regionenkarte,
+    regionenkartePublic,
     tarifverbundkarte,
     showcases,
     zweitausbildung,

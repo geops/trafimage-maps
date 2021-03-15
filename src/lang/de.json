@@ -135,6 +135,10 @@
   "ch.sbb.regionenkarte.intern": "Anlagenverantwortliche Überwachung",
   "ch.sbb.regionenkarte.intern-desc": "Übersicht der Anlagenverantwortungen AT-UEW für die Anlagengattungen Fahrbahn, Fahrstrom, Bahnzugang, Ingenieurbau, Wasser, Abwasser, Natur, Naturrisiken und Koordinatoren Bahnnahes Bauen. Die Karten enthalten zusätzlich Informationen über regionale Aufgaben (Fahrweg, Regionenleitung) in der Anlagenüberwachung.",
   "ch.sbb.regionenkarte.public": "Koordinatoren Bahnnahes Bauen",
+  "ch.sbb.regionenkarte.public-desc": "Hier finden Sie Ihre örtlichen Ansprechpartner zur Gewährleistung der Arbeitsstellensicherheit auf Baustellen von Dritten im Gefahrenbereich der Bahninfrastruktur. Die Koordinatoren Bahnnahes Bauen unterstützen Sie bei der korrekten Abwicklung Ihres Vorhabens. <p>Verantwortlich: SBB Infrastruktur, Anlagen&Technologie, Überwachung, Hilfikerstrasse 3, 3000 Bern 65, <a href=\"mailto:ueberwachung@sbb.ch\">ueberwachung@sbb.ch</a></p>",
+  "ch.sbb.regionenkarte.intern.av_segmente.public": "Regionenkarte I-AT-UEW",
+  "ch.sbb.regionenkarte.intern.av_segmente.public-desc": "<p>Regionenkarte I-AT-UEW</p><img class='legendGraphicFloat' src='/static/app_trafimage/img/regionenkarte/grun.png'>Region Ost</p><p><img class='legendGraphicFloat' src='/static/app_trafimage/img/regionenkarte/rot.png'>Region Süd</p><p><img class='legendGraphicFloat' src='/static/app_trafimage/img/regionenkarte/lila.png'>Region Mitte</p><p><img class='legendGraphicFloat' src='/static/app_trafimage/img/regionenkarte/gelb.png'>Region West</p><p>Örtliche Ansprechpartner für Arbeitsstellensicherheit auf Baustellen Dritter im Gefahrenbereich der Bahninfrastruktur.</p>",
+
   "ch.sbb.sandbox": "Trafimage Sandbox",
   "ch.sbb.sandbox-desc": "Trafimage Sandbox",
   "ch.sbb.showcases": "Showcases",

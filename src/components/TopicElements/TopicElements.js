@@ -23,6 +23,7 @@ import Popup from '../Popup';
 import Search from '../Search';
 import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
+import Overlay from '../Overlay';
 import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
 
 const defaultElements = {
@@ -39,6 +40,7 @@ const defaultElements = {
   trackerMenu: false,
   featureMenu: false,
   search: false,
+  overlay: true,
 };
 
 const propTypes = {
@@ -165,6 +167,9 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     ),
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
+    overlay: (
+      <Overlay appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />
+    ),
   };
 
   elements.map = true; // make sure we always have a map element!
