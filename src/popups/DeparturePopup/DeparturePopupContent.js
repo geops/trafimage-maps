@@ -308,13 +308,7 @@ class DeparturePopupContent extends Component {
           <table className="tm-departures">
             <tbody>
               <tr>
-                <th
-                  style={{
-                    padding: '1px 7px 1px 3px',
-                  }}
-                >
-                  {t('Linie')}
-                </th>
+                <th className="tm-departure-line-cell">{t('Linie')}</th>
                 <th>{t('Ziel')}</th>
                 <th colSpan="2">
                   <SBBClock focusable={false} height="23px" width="23px" />
@@ -324,11 +318,7 @@ class DeparturePopupContent extends Component {
               {departures.map((d, idx) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <tr key={idx}>
-                  <td
-                    style={{
-                      padding: '1px 7px 1px 3px',
-                    }}
-                  >
+                  <td className="tm-departure-line-cell">
                     <div className="tm-departure-name">{d.lineName}</div>
                   </td>
                   <td>
