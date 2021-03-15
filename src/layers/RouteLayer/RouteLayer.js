@@ -56,7 +56,19 @@ class RouteLayer extends CasaLayer {
       ...options,
     });
     this.set('showPopupOnHover', (features = []) => {
-      return features.filter((f) => f.get('route').popupContent);
+      return features.filter((f) => {
+        const { popupContent } = f.get('route');
+        if (
+          popupContent &&
+          (!Array.isArray(popupContent) ||
+            !popupContent.every((item) => typeof item === 'string'))
+        ) {
+          throw new Error(
+            `Popup content was provided with type ${typeof popupContent}. Please use an array of strings instead (e.g. ['some content', 'more content']).`,
+          );
+        }
+        return popupContent;
+      });
     });
     this.set('popupComponent', 'CasaRoutePopup');
 
