@@ -315,19 +315,23 @@ class DeparturePopupContent extends Component {
                 </th>
                 <th>{t(platformName)}</th>
               </tr>
-              {departures.map((d, idx) => (
+              {departures.map((departure, idx) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <tr key={idx}>
                   <td className="tm-departure-line-cell">
-                    <div className="tm-departure-name">{d.lineName}</div>
-                  </td>
-                  <td>
-                    <div className="tm-departure-destination">
-                      {d.destinationText}
+                    <div className="tm-departure-name">
+                      {departure.lineName}
                     </div>
                   </td>
                   <td>
-                    {DeparturePopupContent.formatTime(d.timetabledTimeLocal)}
+                    <div className="tm-departure-destination">
+                      {departure.destinationText}
+                    </div>
+                  </td>
+                  <td>
+                    {DeparturePopupContent.formatTime(
+                      departure.timetabledTimeLocal,
+                    )}
                   </td>
                   <td>
                     <div
@@ -336,14 +340,15 @@ class DeparturePopupContent extends Component {
                         color: isOffline
                           ? '#333'
                           : DeparturePopupContent.getDelayColor(
-                              d.estimatedTimeLocal,
-                              d.timetabledTimeLocal,
+                              departure.estimatedTimeLocal,
+                              departure.timetabledTimeLocal,
                             ),
                       }}
                     >
                       {this.renderMinDiff(
                         DeparturePopupContent.getMinDiff(
-                          d.estimatedTimeLocal || d.timetabledTimeLocal,
+                          departure.estimatedTimeLocal ||
+                            departure.timetabledTimeLocal,
                         ),
                       )}
                     </div>
@@ -352,10 +357,12 @@ class DeparturePopupContent extends Component {
                     <div
                       className={
                         'tm-departure-platform ' +
-                        `${d.modeOfTransport === 'rail' ? 'train' : ''}`
+                        `${departure.modeOfTransport === 'rail' ? 'train' : ''}`
                       }
                     >
-                      <div className="tm-platform-inner">{d.plannedQuay}</div>
+                      <div className="tm-platform-inner">
+                        {departure.plannedQuay}
+                      </div>
                     </div>
                   </td>
                 </tr>
