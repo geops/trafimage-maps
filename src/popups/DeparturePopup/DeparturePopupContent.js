@@ -67,9 +67,6 @@ class DeparturePopupContent extends Component {
   }
 
   static formatTime(time) {
-    if (!time) {
-      return <>&nbsp;&nbsp;-&nbsp;</>;
-    }
     const d = new Date(time);
 
     return [`0${d.getHours()}`.slice(-2), `0${d.getMinutes()}`.slice(-2)].join(
@@ -112,6 +109,7 @@ class DeparturePopupContent extends Component {
       departuresLoading: true,
       destinationFilter: null,
       platformName: 'abfahrtszeiten_kante',
+      isOffline: false,
     };
     this.loadInterval = null;
     this.mounted = false;
@@ -224,24 +222,23 @@ class DeparturePopupContent extends Component {
           departures: data,
           departuresLoading: false,
           platformName,
+          isOffline: !navigator.onLine,
         });
       })
       .catch(() => {
-        const { departures } = this.state;
-        // When offline, remove all time information from the popup.
-        const offlineDepartures = [...departures].map((d) => {
-          // eslint-disable-next-line no-param-reassign
-          d.estimatedTimeLocal = null;
-          // eslint-disable-next-line no-param-reassign
-          d.timetabledTimeLocal = null;
-          return d;
-        });
-
         this.setState({
-          departures: offlineDepartures,
           departuresLoading: false,
+          isOffline: true,
         });
       });
+  }
+
+  renderMinDiff(minDiff) {
+    const { isOffline } = this.state;
+    if (isOffline && minDiff) {
+      return <>&nbsp;&nbsp;-&nbsp;</>;
+    }
+    return minDiff;
   }
 
   render() {
@@ -252,7 +249,12 @@ class DeparturePopupContent extends Component {
         new Date(a.estimatedTimeLocal || a.timetabledTimeLocal).getTime() -
         new Date(b.estimatedTimeLocal || b.timetabledTimeLocal).getTime(),
     );
-    const { destinationFilter, departuresLoading, platformName } = this.state;
+    const {
+      destinationFilter,
+      departuresLoading,
+      platformName,
+      isOffline,
+    } = this.state;
 
     let title = null;
     if (showTitle) {
@@ -341,14 +343,18 @@ class DeparturePopupContent extends Component {
                     <div
                       className="tm-departure-min"
                       style={{
-                        color: DeparturePopupContent.getDelayColor(
-                          d.estimatedTimeLocal,
-                          d.timetabledTimeLocal,
-                        ),
+                        color: isOffline
+                          ? '#333'
+                          : DeparturePopupContent.getDelayColor(
+                              d.estimatedTimeLocal,
+                              d.timetabledTimeLocal,
+                            ),
                       }}
                     >
-                      {DeparturePopupContent.getMinDiff(
-                        d.estimatedTimeLocal || d.timetabledTimeLocal,
+                      {this.renderMinDiff(
+                        DeparturePopupContent.getMinDiff(
+                          d.estimatedTimeLocal || d.timetabledTimeLocal,
+                        ),
                       )}
                     </div>
                   </td>
