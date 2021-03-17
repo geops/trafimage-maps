@@ -6,8 +6,8 @@ import { getLineColorExpr } from './lineColors';
 import touristicLine from './touristischeLinie.json';
 import hauptLinie from './hauptLinie.json';
 
-const sourceId = 'base';
-const sourceLayer = 'osm_edges';
+const sourceId = 'ch.sbb.zweitausbildung';
+const sourceLayer = 'ch.sbb.zweitausbildung';
 const format = new GeoJSON();
 
 /**
@@ -83,6 +83,14 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
    * @ignore
    */
   async onLoad() {
+    const { mbMap } = this.mapboxLayer;
+    const source = mbMap.getSource(sourceId);
+    if (!source) {
+      mbMap.addSource(sourceId, {
+        type: 'vector',
+        url: this.dataUrl,
+      });
+    }
     await this.loadSourceData();
     this.addMultiLinesSources();
     this.styleLayers = [
@@ -249,6 +257,21 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
 
       source.setData(format.writeFeaturesObject([multiLine]));
     });
+  }
+
+  setStyleConfig(url, key, apiKeyName) {
+    if (url && url !== this.url) {
+      this.url = url;
+    }
+    if (key && key !== this.apiKey) {
+      this.apiKey = key;
+    }
+    if (apiKeyName && apiKeyName !== this.apiKeyName) {
+      this.apiKeyName = apiKeyName;
+    }
+    if ((!url && !key && !apiKeyName) || !this.styleUrl) {
+      this.dataUrl = `${this.url}/data/ch.sbb.zweitausbildung.json?${apiKeyName}=${key}`;
+    }
   }
 }
 
