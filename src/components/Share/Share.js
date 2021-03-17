@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope, FaQuestion } from 'react-icons/fa';
+import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import BlankLink from '@geops/react-ui/components/BlankLink';
 import SharePermalinkButton from '../SharePermalinkButton';
@@ -26,12 +26,6 @@ const socialShareConfig = [
     title: 'Auf Twitter teilen',
     icon: <TiSocialTwitter focusable={false} />,
     className: 'ta-twitter-icon',
-  },
-  {
-    url: '{appBaseUrl}/static/app_trafimage/docs/{language}/Quickstart.pdf',
-    title: 'Quickstart Manual Trafimage Webkartenportal',
-    icon: <FaQuestion focusable={false} />,
-    className: 'ta-manual-icon',
   },
 ];
 
@@ -62,7 +56,6 @@ const renderConf = (conf, t, lang, appBaseUrl) => (
 );
 
 const Share = ({ appBaseUrl }) => {
-  const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
   const map = useSelector((state) => state.app.map);
   const { t } = useTranslation();
@@ -78,9 +71,6 @@ const Share = ({ appBaseUrl }) => {
       </CanvasSaveButton>
       {renderConf(config[1], t, language, appBaseUrl)}
       {renderConf(config[2], t, language, appBaseUrl)}
-      {activeTopic.permission
-        ? renderConf(config[3], t, language, appBaseUrl)
-        : null}
     </div>
   );
 };

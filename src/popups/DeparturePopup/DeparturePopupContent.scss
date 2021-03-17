@@ -36,6 +36,11 @@ $tm-destination-input-height: 25px;
     text-align: center;
   }
 
+  .tm-platform-inner {
+    white-space: nowrap;
+    padding: 0 3px;
+  }
+
   .tm-departure-plaform.train .tm-platform-inner {
     border: 1px solid white;
     border-radius: 3px;
@@ -79,6 +84,10 @@ $tm-destination-input-height: 25px;
       font-weight: normal;
       text-align: left;
     }
+
+    .tm-departure-line-cell {
+      padding: 1px 7px 1px 3px;
+    }
   }
 
   .tm-departure-min {
@@ -111,5 +120,14 @@ $tm-destination-input-height: 25px;
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+.tm-w-xs {
+  .tm-departure-popup-body {
+    .tm-table-wrapper {
+      max-height: 150px;
+      overflow: scroll;
+    }
   }
 }
