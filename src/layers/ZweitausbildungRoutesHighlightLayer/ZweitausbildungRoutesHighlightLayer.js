@@ -26,6 +26,10 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
         type: 'line',
         source: sourceId,
         'source-layer': sourceLayer,
+        paint: {
+          'line-color': 'rgba(0,0,0,0)',
+          'line-width': 10,
+        },
       },
       queryRenderedLayersFilter: (layer) => {
         return (
@@ -53,10 +57,12 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       /**
        * Remove highlighted line on click on the map.
        */
-      this.map.on('singleclick', () => {
-        this.onSelect();
-        this.forceRenderList();
-      });
+      this.olListenersKeys.push(
+        this.map.on('singleclick', () => {
+          this.onSelect();
+          this.forceRenderList();
+        }),
+      );
     }
   }
 
@@ -119,18 +125,16 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return;
     }
-    if (mbMap.getLayer(this.key)) {
-      mbMap.removeLayer(this.key);
-    }
+    mbMap.setPaintProperty(this.key, 'line-color', 'rgba(0,0,0,0)');
     if (this.selected) {
-      this.addHighlightLayer();
+      this.highlightLine();
     }
   }
 
   /**
    * Highlight the line selected in the select box.
    */
-  addHighlightLayer() {
+  highlightLine() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
@@ -146,17 +150,14 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       return;
     }
 
-    mbMap.addLayer({
-      id: this.key,
-      type: 'line',
-      source: sourceId,
-      'source-layer': sourceLayer,
-      filter: ['in', this.selected, ['get', this.property]],
-      paint: {
-        'line-color': color,
-        'line-width': 10,
-      },
-    });
+    if (mbMap.getLayer(this.key)) {
+      mbMap.setPaintProperty(this.key, 'line-color', [
+        'case',
+        ['in', this.selected, ['get', this.property]],
+        color,
+        'rgba(0,0,0,0)',
+      ]);
+    }
   }
 
   setStaticFilesUrl(staticFilesUrl) {

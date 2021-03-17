@@ -33,6 +33,8 @@ import defaultBaseLayers, {
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
+  zweitausbildungStationsDataLayer,
+  zweitausbildungPoisDataLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -272,6 +274,8 @@ export const zweitausbildung = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     dataLayer,
+    zweitausbildungStationsDataLayer,
+    zweitausbildungPoisDataLayer,
     netzkarteLayer,
     zweitausbildungAbroad,
     zweitausbildungPois,

@@ -3,50 +3,40 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
+import ZweitausbildungPoisLayer from '../../layers/ZweitausbildungPoisLayer';
 
 import './ZweitausbildungPoisPopup.scss';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  layer: PropTypes.instanceOf(ZweitausbildungPoisLayer).isRequired,
   t: PropTypes.func.isRequired,
 };
 
 class ZweitausbildungPoisPopup extends PureComponent {
-  // eslint-disable-next-line class-methods-use-this
-  highlight(singleFeature, highlight) {
-    singleFeature.set('highlight', highlight);
-  }
-
   render() {
-    const { feature, t } = this.props;
-    const features = feature.get('features');
-
+    const { feature, layer, t } = this.props;
+    const { name, rail_away: railAway, foto } = feature.getProperties() || {};
     return (
       <div className="wkp-zweitausbildung-pois-popup">
-        {features.map((singleFeature) => (
-          <div
-            className="wkp-zweitausbildung-pois-popup-row"
-            key={singleFeature.get('name')}
-            onMouseEnter={() => this.highlight(singleFeature, true)}
-            onMouseLeave={() => this.highlight(singleFeature, false)}
-          >
-            <b>{singleFeature.get('name')}</b>
-            {singleFeature.get('rail_away') ? (
-              <div className="wkp-zweitausbildung-pois-popup-railaway">
-                RailAway
-              </div>
-            ) : null}
-            <div className="wkp-zweitausbildung-pois-popup-image">
-              {singleFeature.get('foto') ? (
-                <img
-                  src={singleFeature.get('foto')}
-                  draggable="false"
-                  alt={t('Kein Bildtext')}
-                />
-              ) : null}
+        <div
+          className="wkp-zweitausbildung-pois-popup-row"
+          key={name}
+          onMouseEnter={() => layer.highlightFromPopup(feature, true)}
+          onMouseLeave={() => layer.highlightFromPopup(feature, false)}
+        >
+          <b>{name}</b>
+          {railAway ? (
+            <div className="wkp-zweitausbildung-pois-popup-railaway">
+              RailAway
             </div>
+          ) : null}
+          <div className="wkp-zweitausbildung-pois-popup-image">
+            {!!foto && (
+              <img src={foto} draggable="false" alt={t('Kein Bildtext')} />
+            )}
           </div>
-        ))}
+        </div>
       </div>
     );
   }

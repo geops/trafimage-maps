@@ -25,7 +25,7 @@ import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
-import ZweitausbildungStationsLayer from '../layers/ZweitausbildungStationsLayer';
+// import ZweitausbildungStationsLayer from '../layers/ZweitausbildungStationsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1079,6 +1079,18 @@ export const zweitausbildungAbroad = new ZweitausbildungAbroadLayer({
   },
 });
 
+export const zweitausbildungStationsDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.zweitausbildung_stations',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'ch.sbb.zweitausbildung_stations',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
 export const zweitausbildungStations = new Layer({
   name: 'ch.sbb.zweitausbildung.stationen.group',
   visible: true,
@@ -1092,18 +1104,17 @@ export const zweitausbildungStations = new Layer({
     },
   },
   children: [
-    new ZweitausbildungStationsLayer({
+    new MapboxStyleLayer({
       name: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
-      key: 'ch.sbb.zweitausbildung.haltestellen.aufbau',
-      visible: true,
       isQueryable: false,
       zIndex: 3,
+      mapboxLayer: zweitausbildungStationsDataLayer,
+      styleLayersFilter: (styleLayer) =>
+        /ch\.sbb\.zweitausbildung_stations\.aufbau/.test(styleLayer.id),
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          color: '#2b64ee',
-          viewparams: 'selection=Aufbau',
           infos: {
             title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
             legend: [
@@ -1120,18 +1131,17 @@ export const zweitausbildungStations = new Layer({
         },
       },
     }),
-    new ZweitausbildungStationsLayer({
+    new MapboxStyleLayer({
       name: 'ch.sbb.zweitausbildung.haltestellen.basis',
-      key: 'ch.sbb.zweitausbildung.haltestellen.basis',
-      visible: true,
       isQueryable: false,
       zIndex: 3,
+      mapboxLayer: zweitausbildungStationsDataLayer,
+      styleLayersFilter: (styleLayer) =>
+        /ch\.sbb\.zweitausbildung_stations\.basis/.test(styleLayer.id),
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          color: '#eb0000',
-          viewparams: 'selection=Basis',
           infos: {
             title: 'ch.sbb.zweitausbildung.haltestellen.basis-title',
             legend: [
@@ -1151,9 +1161,21 @@ export const zweitausbildungStations = new Layer({
   ],
 });
 
+export const zweitausbildungPoisDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.zweitausbildung_pois',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'ch.sbb.zweitausbildung_pois',
+  properties: {
+    hideInLegend: true,
+  },
+});
 export const zweitausbildungPois = new Layer({
   name: 'ch.sbb.zweitausbildung.tourist.pois.group',
   visible: true,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     layerInfoComponent: 'ZweitausbildungLayerInfo',
@@ -1169,13 +1191,15 @@ export const zweitausbildungPois = new Layer({
       key: 'ch.sbb.zweitausbildung.tourist.pois.no_railaway',
       visible: true,
       zIndex: 4,
+      mapboxLayer: zweitausbildungPoisDataLayer,
       properties: {
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          viewparams: 'rail_away=false',
+          filter: ['==', 'rail_away', false],
           color: 'rgba(0, 61, 133, 0.8)',
+          icon: 'flag_blue',
           infos: {
             legend: [
               {
@@ -1192,13 +1216,15 @@ export const zweitausbildungPois = new Layer({
       key: 'ch.sbb.zweitausbildung.tourist.pois.railaway',
       visible: true,
       zIndex: 4,
+      mapboxLayer: zweitausbildungPoisDataLayer,
       properties: {
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
-          viewparams: 'rail_away=true',
+          filter: ['==', 'rail_away', true],
           color: 'rgba(235, 0, 0, 0.8)',
+          icon: 'flag_red',
           infos: {
             legend: [
               {
@@ -1232,6 +1258,7 @@ export const zweitausbildungRoutes = new Layer({
       isAlwaysExpanded: true,
       visible: false,
       mapboxLayer: dataLayer,
+      beforeId: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
       isQueryable: false,
       properties: {
         hasInfos: true,
@@ -1252,7 +1279,6 @@ export const zweitausbildungRoutes = new Layer({
       children: [
         new ZweitausbildungRoutesHighlightLayer({
           name: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
-          key: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
           visible: false,
           zIndex: 1,
           mapboxLayer: dataLayer,
@@ -1269,11 +1295,11 @@ export const zweitausbildungRoutes = new Layer({
     }),
     new ZweitausbildungRoutesLayer({
       name: 'ch.sbb.zweitausbildung.hauptlinien.group',
-      key: 'ch.sbb.zweitausbildung.hauptlinien.group',
       visible: true,
       isQueryable: false,
       isAlwaysExpanded: true,
       mapboxLayer: dataLayer,
+      beforeId: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
@@ -1293,7 +1319,6 @@ export const zweitausbildungRoutes = new Layer({
       children: [
         new ZweitausbildungRoutesHighlightLayer({
           name: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
-          key: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
           visible: true,
           zIndex: 1,
           mapboxLayer: dataLayer,
