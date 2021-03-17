@@ -207,6 +207,11 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
 
     this.multiLinesLabels.forEach((line) => {
+      const source = mbMap.getSource(line);
+      if (!source) {
+        return;
+      }
+
       let features;
       try {
         features = mbMap.querySourceFeatures(sourceId, {
@@ -242,14 +247,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
         ),
       );
 
-      const data = {
-        type: 'FeatureCollection',
-        features: [format.writeFeatureObject(multiLine)],
-      };
-
-      if (mbMap.getSource(line)) {
-        mbMap.getSource(line).setData(data);
-      }
+      source.setData(format.writeFeaturesObject([multiLine]));
     });
   }
 }
