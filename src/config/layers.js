@@ -20,12 +20,9 @@ import luftbild from '../img/luftbild.png';
 import AusbauLayer from '../layers/AusbauLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
-// import ZweitausbildungRoutesLayerOld from '../layers/ZweitausbildungRoutesLayerOld';
-// import ZweitausbildungRoutesHighlightLayerOld from '../layers/ZweitausbildungRoutesHighlightLayerOld';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
-// import ZweitausbildungStationsLayer from '../layers/ZweitausbildungStationsLayer';
 
 proj4.defs(
   'EPSG:21781',

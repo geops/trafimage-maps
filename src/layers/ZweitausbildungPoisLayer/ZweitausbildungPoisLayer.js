@@ -12,33 +12,13 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     const { color, icon, filter } = options.properties.zweitausbildung;
     const suffixId = filter[1] + filter[2];
+    const clusterSourceId = `clusters-${suffixId}`;
+    const highlightSourceId = 'highlight';
     const styleLayers = [
-      // {
-      //   id: `highlight-${suffixId}`,
-      //   source: 'ch.sbb.zweitausbildung_pois',
-      //   'source-layer': 'ch.sbb.zweitausbildung_pois',
-      //   type: 'circle',
-      //   filter,
-      //   paint: {
-      //     'circle-color': [
-      //       'case',
-      //       ['boolean', ['feature-state', 'hover'], false],
-      //       'red',
-      //       'blue',
-      //     ],
-      //     'circle-radius': [
-      //       'case',
-      //       ['boolean', ['feature-state', 'hover'], false],
-      //       5,
-      //       15,
-      //     ],
-      //   },
-      // },
-
       {
-        id: `clusters-${suffixId}`,
+        id: clusterSourceId,
         type: 'circle',
-        source: `clusters-${suffixId}`,
+        source: clusterSourceId,
         filter: ['has', 'point_count'],
         paint: {
           'circle-color': color,
@@ -50,9 +30,9 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
         },
       },
       {
-        id: `cluster-count-${suffixId}`,
+        id: `${clusterSourceId}-count`,
         type: 'symbol',
-        source: `clusters-${suffixId}`,
+        source: clusterSourceId,
         filter: ['has', 'point_count'],
         paint: {
           'text-color': 'rgba(255,255,255,1)',
@@ -66,23 +46,35 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
       {
         id: `unclustered-point-${suffixId}`,
         type: 'symbol',
-        source: `clusters-${suffixId}`,
+        source: clusterSourceId,
         filter: ['!', ['has', 'point_count']],
         layout: {
           'icon-image': icon,
         },
       },
+      {
+        id: highlightSourceId,
+        source: highlightSourceId,
+        type: 'circle',
+        paint: {
+          'circle-color': 'rgba(50, 50, 50, 0.8)',
+          'circle-radius': 0,
+          'circle-radius-transition': {
+            duration: 300,
+            delay: 0,
+          },
+        },
+      },
     ];
-    // Very important that styleLayers is not empty otherwise the visibility is not apply properly.
     super({
       ...options,
       styleLayers,
       queryRenderedLayersFilter: ({ id }) =>
-        `unclustered-point-${suffixId}` === id || `clusters-${suffixId}` === id,
+        `unclustered-point-${suffixId}` === id || clusterSourceId === id,
     });
 
     this.clusterSource = {
-      id: `clusters-${suffixId}`,
+      id: clusterSourceId,
       type: 'geojson',
       cluster: true,
       clusterRadius: 75, // Radius of each cluster when clustering points.
@@ -91,6 +83,15 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
         features: [],
       },
     };
+    this.highlightSource = {
+      id: highlightSourceId,
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    };
+    this.sources = [this.clusterSource, this.highlightSource];
     this.filter = filter;
     this.updateTimeout = null;
     this.format = new GeoJSON({
@@ -124,11 +125,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       mbMap.off('idle', this.onIdle);
-      this.removeClusterSource();
-
-      if (mbMap.getSource('highlight')) {
-        mbMap.removeSource('highlight');
-      }
+      this.removeSources();
     }
     super.terminate(map);
   }
@@ -138,7 +135,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
    * @override
    */
   onLoad() {
-    this.addClusterSource();
+    this.addSources();
     super.onLoad();
     this.updateClusterSource();
   }
@@ -153,34 +150,35 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     }, 50);
   }
 
-  // Add sources for features using clustering.
-  addClusterSource(source) {
+  // Add sources for features using clustering and for highligting.
+  addSources() {
     if (!this.mapboxLayer.mbMap) {
       return;
     }
     const { mbMap } = this.mapboxLayer;
 
-    const sourceToAdd = source || this.clusterSource;
-    const { id } = sourceToAdd;
-    if (!mbMap.getSource(id)) {
-      const withoutId = { ...sourceToAdd };
-      delete withoutId.id;
-      mbMap.addSource(id, withoutId);
-    } else {
-      mbMap.getSource(id).setData(sourceToAdd.data);
-    }
+    this.sources.forEach((source) => {
+      const { id } = source;
+      if (!mbMap.getSource(id)) {
+        const withoutId = { ...source };
+        delete withoutId.id;
+        mbMap.addSource(id, withoutId);
+      }
+    });
   }
 
-  // Remove source for features with multiple lines.
-  removeClusterSource() {
+  // Remove sources added by addSources().
+  removeSources() {
     if (!this.mapboxLayer.mbMap) {
       return;
     }
     const { mbMap } = this.mapboxLayer;
-    const { id } = this.clusterSource;
-    if (mbMap.getSource(id)) {
-      mbMap.removeSource(id);
-    }
+    this.sources.forEach((source) => {
+      const { id } = source;
+      if (mbMap.getSource(id)) {
+        mbMap.removeSource(id);
+      }
+    });
   }
 
   // Upodate sources for features with multiple lines.
@@ -189,6 +187,10 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
       return;
     }
     const { mbMap } = this.mapboxLayer;
+    const source = mbMap.getSource(this.clusterSource.id);
+    if (!source) {
+      return;
+    }
 
     let features;
     try {
@@ -204,6 +206,8 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     if (!features?.length) {
       return;
     }
+
+    // Remove duplicated features.
     const ids = [];
     const uniqueFeatures = [];
     features.forEach((linee) => {
@@ -213,17 +217,10 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
         uniqueFeatures.push(linee);
       }
     });
-    features = uniqueFeatures;
 
-    const data = {
+    source.setData({
       type: 'FeatureCollection',
-      features,
-    };
-
-    this.addClusterSource({
-      id: this.clusterSource.id,
-      type: 'geojson',
-      data,
+      features: uniqueFeatures,
     });
   }
 
@@ -234,30 +231,17 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     }
 
     const data = this.format.writeFeaturesObject(toggle ? [feature] : []);
-    const source = mbMap.getSource('highlight');
-    if (mbMap.getSource('highlight')) {
+    const source = mbMap.getSource(this.highlightSource.id);
+    if (source) {
       source.setData(data);
-    } else {
-      mbMap.addLayer({
-        id: `highlight`,
-        source: {
-          type: 'geojson',
-          data,
-        },
-        type: 'circle',
-        paint: {
-          'circle-color': 'rgba(50, 50, 50, 0.8)',
-          'circle-radius': 0,
-          'circle-radius-transition': {
-            duration: 300,
-            delay: 0,
-          },
-        },
-      });
     }
 
     // Launch animation
-    mbMap.setPaintProperty(`highlight`, 'circle-radius', toggle ? 14 : 0);
+    mbMap.setPaintProperty(
+      this.highlightSource.id,
+      'circle-radius',
+      toggle ? 14 : 0,
+    );
   }
 }
 
