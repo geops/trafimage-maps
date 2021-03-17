@@ -26,11 +26,11 @@ class ZweitausbildungPoisPopup extends PureComponent {
           onMouseLeave={() => layer.highlightFromPopup(feature, false)}
         >
           <b>{name}</b>
-          {railAway ? (
+          {!!railAway && (
             <div className="wkp-zweitausbildung-pois-popup-railaway">
               RailAway
             </div>
-          ) : null}
+          )}
           <div className="wkp-zweitausbildung-pois-popup-image">
             {!!foto && (
               <img src={foto} draggable="false" alt={t('Kein Bildtext')} />
