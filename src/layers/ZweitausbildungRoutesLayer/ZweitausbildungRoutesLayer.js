@@ -1,14 +1,10 @@
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import { Feature } from 'ol';
-import { MultiLineString } from 'ol/geom';
-import { GeoJSON } from 'ol/format';
 import { getLineColorExpr } from './lineColors';
 import touristicLine from './touristischeLinie.json';
 import hauptLinie from './hauptLinie.json';
 
 const sourceId = 'ch.sbb.zweitausbildung';
 const sourceLayer = 'ch.sbb.zweitausbildung';
-const format = new GeoJSON();
 
 /**
  * Layer for zweitausbildung routes
@@ -22,7 +18,6 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     super(options);
 
     const zweitProps = this.get('zweitausbildung') || {};
-    this.highlightLayerKey = zweitProps.highlightLayerKey;
     this.property = zweitProps.property;
     this.lines = this.property === 'hauptlinie' ? hauptLinie : touristicLine;
 
@@ -38,44 +33,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
       },
     };
 
-    this.multiLinesLabels = [];
-    this.multiLinesSources = {};
     this.multiLinesStyleLayers = [];
-    this.updateTimeout = null;
-    this.onIdle = this.onIdle.bind(this);
-  }
-
-  init(map) {
-    super.init(map);
-
-    this.olListenersKeys.push(
-      this.on('change:visible', () => {
-        this.updateMultiLinesSources();
-      }),
-      this.map.on('moveend', () => {
-        this.mapboxLayer.mbMap.once('idle', this.onIdle);
-      }),
-    );
-  }
-
-  terminate(map) {
-    window.clearTimeout(this.updateTimeout);
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.off('idle', this.onIdle);
-      this.removeMultiLinesSources();
-    }
-    super.terminate(map);
-  }
-
-  /**
-   * Callback when the map is on idle state after a moveend event.
-   */
-  onIdle() {
-    window.clearTimeout(this.updateTimeout);
-    this.updateTimeout = window.setTimeout(() => {
-      this.updateMultiLinesSources();
-    }, 100);
   }
 
   /**
@@ -92,7 +50,6 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
       });
     }
     await this.loadSourceData();
-    this.addMultiLinesSources();
     this.styleLayers = [
       this.singleLineStyleLayer,
       ...this.multiLinesStyleLayers,
@@ -104,7 +61,6 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     };
 
     super.onLoad();
-    this.updateMultiLinesSources();
   }
 
   /**
@@ -116,39 +72,26 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     await fetch(source.url)
       .then((data) => data.json())
       .then((data) => {
+        const multiLinesLabels = [];
         const values = data.tilestats.layers
           .find((layer) => layer.layer === sourceLayer)
           ?.attributes.find((attr) => attr.attribute === this.property)?.values;
         values.forEach((value) => {
           const split = value.split(',');
           if (split.length > 1) {
-            this.multiLinesLabels.push(value);
+            multiLinesLabels.push(value);
           }
         });
-        this.multiLinesSources = this.generateMultiLinesSources();
-        this.multiLinesStyleLayers = this.generateMultiLinesStyleLayers();
+        this.multiLinesStyleLayers = this.generateMultiLinesStyleLayers(
+          multiLinesLabels,
+        );
       });
   }
 
-  // Generate emtpy mapbox sources object for features with multiple lines.
-  generateMultiLinesSources() {
-    const sources = [];
-    this.multiLinesLabels.forEach((line) => {
-      sources[line] = {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [],
-        },
-      };
-    });
-    return sources;
-  }
-
-  // Generate dashed styles features with multiple lines.
-  generateMultiLinesStyleLayers() {
+  // Generate dashed styles for features with multiple lines.
+  generateMultiLinesStyleLayers(multiLinesLabels) {
     const styleLayers = [];
-    this.multiLinesLabels.forEach((line) => {
+    multiLinesLabels.forEach((line) => {
       const linesLabels = line.split(',');
       linesLabels.forEach((label, index) => {
         const color = this.lines[label]?.color;
@@ -162,8 +105,10 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
         }
         styleLayers.push({
           id: `${line}${index}`,
-          source: line,
+          source: sourceId,
+          'source-layer': sourceLayer,
           type: 'line',
+          filter: ['==', line, ['get', this.property]],
           paint: {
             'line-color': color,
             'line-width': 4,
@@ -173,90 +118,6 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
       });
     });
     return styleLayers;
-  }
-
-  // Add sources for features with multiple lines.
-  addMultiLinesSources() {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
-      return;
-    }
-
-    Object.entries(this.multiLinesSources).forEach(([id, source]) => {
-      if (!mbMap.getSource(id)) {
-        mbMap.addSource(id, source);
-      }
-    });
-  }
-
-  // Remove source for features with multiple lines.
-  removeMultiLinesSources() {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
-      return;
-    }
-    Object.keys(this.multiLinesSources).forEach((id) => {
-      if (mbMap.getSource(id)) {
-        mbMap.removeSource(id);
-      }
-    });
-  }
-
-  // Update sources for features with multiple lines.
-  updateMultiLinesSources() {
-    if (
-      !this.visible ||
-      !this.multiLinesLabels ||
-      !this.map ||
-      !this.mapboxLayer.mbMap
-    ) {
-      return;
-    }
-    const { mbMap } = this.mapboxLayer;
-
-    this.multiLinesLabels.forEach((line) => {
-      const source = mbMap.getSource(line);
-      if (!source) {
-        return;
-      }
-
-      let features;
-      try {
-        features = mbMap.querySourceFeatures(sourceId, {
-          sourceLayer,
-          filter: ['==', ['get', this.property], line],
-        });
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        // console.error(e);
-      }
-
-      if (!features?.length) {
-        return;
-      }
-
-      const ids = [];
-      const nbCoord = [];
-      const uniqueFeatures = [];
-      features.forEach((linee) => {
-        const indexOf = ids.indexOf(linee.id);
-        if (indexOf === -1) {
-          nbCoord.push(linee.geometry.coordinates.length);
-          ids.push(linee.id);
-          uniqueFeatures.push(linee);
-        } else if (nbCoord[indexOf] < linee.geometry.coordinates.length) {
-          uniqueFeatures[indexOf] = linee;
-        }
-      });
-
-      const multiLine = new Feature(
-        new MultiLineString(
-          uniqueFeatures.map((lineString) => lineString.geometry.coordinates),
-        ),
-      );
-
-      source.setData(format.writeFeaturesObject([multiLine]));
-    });
   }
 
   setStyleConfig(url, key, apiKeyName) {
