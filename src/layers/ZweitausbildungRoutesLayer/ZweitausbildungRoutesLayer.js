@@ -1,7 +1,5 @@
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import { getLineColorExpr } from './lineColors';
-import touristicLine from './touristischeLinie.json';
-import hauptLinie from './hauptLinie.json';
+import colorsByLine from './lines.json';
 import zweitTilestats from './zweitausbildung_tilestats.json';
 
 const sourceId = 'ch.sbb.zweitausbildung';
@@ -15,9 +13,19 @@ const sourceLayer = 'ch.sbb.zweitausbildung';
  * @param {Object} [options] Layer options.
  */
 class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
+  // Get mapbox line-color expression.
+  static getLineColorExpr = (property) => {
+    const expr = ['case'];
+    Object.entries(colorsByLine).forEach(([key, { color }]) => {
+      expr.push(['==', ['get', property], key]);
+      expr.push(color);
+    });
+    expr.push('rgba(0, 0, 0, 0)');
+    return expr;
+  };
+
   // Generate dashed styles for features with multiple lines in the label.
   static generateDashedStyleLayers(line, property) {
-    const colorsByLine = property === 'hauptlinie' ? hauptLinie : touristicLine;
     const styleLayers = [];
     const linesLabels = line.split(',');
     linesLabels.forEach((label, index) => {
@@ -79,7 +87,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
         'source-layer': sourceLayer,
         filter: ['has', property],
         paint: {
-          'line-color': getLineColorExpr(property),
+          'line-color': ZweitausbildungRoutesLayer.getLineColorExpr(property),
           'line-width': 4,
         },
       },

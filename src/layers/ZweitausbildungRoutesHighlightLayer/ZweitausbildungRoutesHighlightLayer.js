@@ -1,8 +1,7 @@
 import React from 'react';
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 import IconList from '../../components/IconList';
-import touristicLine from '../ZweitausbildungRoutesLayer/touristischeLinie.json';
-import hauptLinie from '../ZweitausbildungRoutesLayer/hauptLinie.json';
+import lines from '../ZweitausbildungRoutesLayer/lines.json';
 
 const sourceId = 'base';
 const sourceLayer = 'osm_edges';
@@ -41,7 +40,6 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     });
 
     this.property = property;
-    this.lines = this.property === 'hauptlinie' ? hauptLinie : touristicLine;
     this.icons = {};
     this.onSelect = this.onSelect.bind(this);
     this.populate();
@@ -71,7 +69,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
    */
   populate() {
     this.options = [];
-    Object.entries(this.lines).forEach(([label, { shortname }]) => {
+    Object.entries(lines).forEach(([label, { shortname }]) => {
       if (this.options.indexOf(label) === -1) {
         this.options.push(label);
         this.icons[label] = shortname
@@ -140,12 +138,12 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       return;
     }
 
-    const color = this.lines[this.selected]?.color;
+    const color = lines[this.selected]?.color;
     if (!color) {
       // eslint-disable-next-line no-console
       console.log(
         `There is no color defined for ${this.selected}, available labels are `,
-        this.lines,
+        lines,
       );
       return;
     }
