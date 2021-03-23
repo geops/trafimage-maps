@@ -29,6 +29,9 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
           'line-color': 'rgba(0,0,0,0)',
           'line-width': 10,
         },
+        layout: {
+          'line-cap': 'round',
+        },
       },
       queryRenderedLayersFilter: (layer) => {
         return (
@@ -40,6 +43,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     });
 
     this.property = property;
+    this.lines = lines; // useful for the popup
     this.icons = {};
     this.onSelect = this.onSelect.bind(this);
     this.populate();
@@ -69,7 +73,10 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
    */
   populate() {
     this.options = [];
-    Object.entries(lines).forEach(([label, { shortname }]) => {
+    Object.entries(lines).forEach(([label, { property, shortname }]) => {
+      if (property !== this.property) {
+        return;
+      }
       if (this.options.indexOf(label) === -1) {
         this.options.push(label);
         this.icons[label] = shortname

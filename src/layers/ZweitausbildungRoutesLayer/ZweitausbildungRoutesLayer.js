@@ -14,11 +14,13 @@ const sourceLayer = 'ch.sbb.zweitausbildung';
  */
 class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
   // Get mapbox line-color expression.
-  static getLineColorExpr = (property) => {
+  static getLineColorExpr = (lineProperty) => {
     const expr = ['case'];
-    Object.entries(colorsByLine).forEach(([key, { color }]) => {
-      expr.push(['==', ['get', property], key]);
-      expr.push(color);
+    Object.entries(colorsByLine).forEach(([key, { property, color }]) => {
+      if (property === lineProperty) {
+        expr.push(['==', ['get', property], key]);
+        expr.push(color);
+      }
     });
     expr.push('rgba(0, 0, 0, 0)');
     return expr;
