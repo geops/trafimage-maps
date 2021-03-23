@@ -1255,7 +1255,6 @@ export const zweitausbildungRoutes = new Layer({
       isAlwaysExpanded: true,
       visible: false,
       mapboxLayer: dataLayer,
-      beforeId: 'ch.sbb.zweitausbildung.tourist.routes.grouped',
       isQueryable: false,
       properties: {
         hasInfos: true,
@@ -1296,7 +1295,6 @@ export const zweitausbildungRoutes = new Layer({
       isQueryable: false,
       isAlwaysExpanded: true,
       mapboxLayer: dataLayer,
-      beforeId: 'ch.sbb.zweitausbildung.hauptlinien.grouped',
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
