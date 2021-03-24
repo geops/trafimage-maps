@@ -1,5 +1,5 @@
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import colorsByLine from './lines.json';
+import lines from './lines';
 import zweitTilestats from './zweitausbildung_tilestats.json';
 
 const sourceId = 'ch.sbb.zweitausbildung';
@@ -16,7 +16,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
   // Get mapbox line-color expression.
   static getLineColorExpr = (lineProperty) => {
     const expr = ['case'];
-    Object.entries(colorsByLine).forEach(([key, { property, color }]) => {
+    Object.entries(lines).forEach(([key, { property, color }]) => {
       if (property === lineProperty) {
         expr.push(['==', ['get', property], key]);
         expr.push(color);
@@ -31,12 +31,12 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     const styleLayers = [];
     const linesLabels = line.split(',');
     linesLabels.forEach((label, index) => {
-      const color = colorsByLine[label]?.color;
+      const color = lines[label]?.color;
       if (!color) {
         // eslint-disable-next-line no-console
         console.log(
           `There is no color defined for ${label}, available labels are `,
-          colorsByLine,
+          lines,
         );
         return;
       }
@@ -80,24 +80,48 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
 
   constructor(options = {}) {
     const { property } = options.properties.zweitausbildung || {};
+    const defautStyle = {
+      type: 'line',
+      filter: ['has', property],
+      paint: {
+        'line-color': ZweitausbildungRoutesLayer.getLineColorExpr(property),
+        'line-width': 4,
+      },
+      layout: {
+        'line-cap': 'round',
+      },
+    };
     const styleLayers = [
       // Lines with only one color.
       {
+        ...defautStyle,
         id: options.name || options.key,
-        type: 'line',
         source: sourceId,
         'source-layer': sourceLayer,
-        filter: ['has', property],
-        paint: {
-          'line-color': ZweitausbildungRoutesLayer.getLineColorExpr(property),
-          'line-width': 4,
-        },
       },
       // Lines with a dashed style.
       ...ZweitausbildungRoutesLayer.getDashedStyleLayers(property),
     ];
 
+    // if a line has others sources to add, we add the corresponding style layer.
+    Object.values(lines).forEach(
+      ({ property: prop, extraSources, extraStyleLayers = [] }) => {
+        if (prop !== property || !extraSources) {
+          return;
+        }
+        Object.keys(extraSources).forEach((key, index) => {
+          styleLayers.push({
+            ...defautStyle,
+            id: key,
+            source: key,
+            ...(extraStyleLayers[index] || {}),
+          });
+        });
+      },
+    );
+
     super({ ...options, styleLayers });
+    this.property = property;
   }
 
   /**
@@ -113,6 +137,24 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
         url: this.dataUrl,
       });
     }
+
+    // if the selected lines as extra sources we add it now.
+    Object.entries(lines).forEach(([key, { property, extraSources }]) => {
+      if (property !== this.property || !extraSources) {
+        return;
+      }
+
+      Object.entries(extraSources).forEach(([sourceKey, sourceToAdd]) => {
+        if (!mbMap.getSource(sourceKey)) {
+          // First we add a property to the features so the lines will be automatically highlighted.
+          sourceToAdd.data.features.forEach((feat) => {
+            // eslint-disable-next-line no-param-reassign
+            feat.properties[this.property] = key;
+          });
+          mbMap.addSource(sourceKey, sourceToAdd);
+        }
+      });
+    });
     super.onLoad();
   }
 

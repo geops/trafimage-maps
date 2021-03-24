@@ -1,7 +1,7 @@
 import React from 'react';
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 import IconList from '../../components/IconList';
-import lines from '../ZweitausbildungRoutesLayer/lines.json';
+import lines from '../ZweitausbildungRoutesLayer/lines';
 
 const sourceId = 'base';
 const sourceLayer = 'osm_edges';
@@ -15,24 +15,46 @@ const sourceLayer = 'osm_edges';
  */
 class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
   constructor(options = {}) {
+    const defautStyle = {
+      type: 'line',
+      paint: {
+        'line-color': 'rgba(0,0,0,0)',
+        'line-width': 10,
+      },
+      layout: {
+        'line-cap': 'round',
+      },
+    };
     const { property } = options.properties.zweitausbildung;
-    // Here we set an empty styleLayer so the MapboxStyleLayer.getFeatureAtCoordinate methode
-    // can use the source and the source-layer properties.
-    super({
-      ...options,
-      styleLayer: {
+    const styleLayers = [
+      {
+        ...defautStyle,
         id: options.key || options.name,
-        type: 'line',
         source: sourceId,
         'source-layer': sourceLayer,
-        paint: {
-          'line-color': 'rgba(0,0,0,0)',
-          'line-width': 10,
-        },
-        layout: {
-          'line-cap': 'round',
-        },
       },
+    ];
+
+    // if a line has others sources to add, we add the corresponding highlight layer now.
+    Object.values(lines).forEach(
+      ({ property: prop, extraSources, extraStyleLayers = [] }) => {
+        if (prop !== property || !extraSources) {
+          return;
+        }
+        Object.keys(extraSources).forEach((key, index) => {
+          styleLayers.push({
+            ...defautStyle,
+            id: options.key || options.name + key,
+            source: key,
+            ...(extraStyleLayers[index] || {}),
+          });
+        });
+      },
+    );
+
+    super({
+      ...options,
+      styleLayers,
       queryRenderedLayersFilter: (layer) => {
         return (
           layer.filter &&
@@ -130,7 +152,11 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return;
     }
-    mbMap.setPaintProperty(this.key, 'line-color', 'rgba(0,0,0,0)');
+
+    this.styleLayers.forEach(({ id }) => {
+      mbMap.setPaintProperty(id, 'line-color', 'rgba(0,0,0,0)');
+    });
+
     if (this.selected) {
       this.highlightLine();
     }
@@ -145,7 +171,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       return;
     }
 
-    const color = lines[this.selected]?.color;
+    const { color } = lines[this.selected];
     if (!color) {
       // eslint-disable-next-line no-console
       console.log(
@@ -155,14 +181,14 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       return;
     }
 
-    if (mbMap.getLayer(this.key)) {
-      mbMap.setPaintProperty(this.key, 'line-color', [
+    this.styleLayers.forEach(({ id }) => {
+      mbMap.setPaintProperty(id, 'line-color', [
         'case',
         ['in', this.selected, ['get', this.property]],
         color,
         'rgba(0,0,0,0)',
       ]);
-    }
+    });
   }
 
   setStaticFilesUrl(staticFilesUrl) {
