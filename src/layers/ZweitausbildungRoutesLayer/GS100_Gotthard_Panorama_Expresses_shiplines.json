@@ -8,6 +8,7 @@
   "features": [
     {
       "type": "Feature",
+      "id": 1,
       "properties": {
         "station1_idC": "8508470",
         "station1_naC": "Brunnen SGV",
@@ -75,6 +76,7 @@
     },
     {
       "type": "Feature",
+      "id": 2,
       "properties": {
         "station1_idC": "8508471",
         "station1_naC": "Flüelen SGV",
@@ -142,6 +144,7 @@
     },
     {
       "type": "Feature",
+      "id": 3,
       "properties": {
         "station1_idC": "8508489",
         "station1_naC": "Kehrsiten-Bürgenstock",
@@ -459,6 +462,7 @@
     },
     {
       "type": "Feature",
+      "id": 4,
       "properties": {
         "station1_idC": "8508470",
         "station1_naC": "Treib",
@@ -526,6 +530,7 @@
     },
     {
       "type": "Feature",
+      "id": 5,
       "properties": {
         "station1_idC": "8508463",
         "station1_naC": "Weggis",
@@ -593,6 +598,7 @@
     },
     {
       "type": "Feature",
+      "id": 6,
       "properties": {
         "station1_idC": "8508463",
         "station1_naC": "Weggis",
@@ -660,6 +666,7 @@
     },
     {
       "type": "Feature",
+      "id": 7,
       "properties": {
         "station1_idC": "8508464",
         "station1_naC": "Vitznau",
