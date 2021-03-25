@@ -270,7 +270,7 @@ export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
   maxZoom: 13,
-  hideInLayerTree: false,
+  hideInLayerTree: true,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     dataLayer,
