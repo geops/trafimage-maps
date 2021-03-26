@@ -10,7 +10,6 @@ import ConstructionPopup from './ConstructionPopup';
 import DeparturePopup from './DeparturePopup';
 import ZweitausbildungAbroadPopup from './ZweitausbildungAbroadPopup';
 import ZweitausbildungPoisPopup from './ZweitausbildungPoisPopup';
-// import ZweitausbildungRoutesPopupOld from './ZweitausbildungRoutesPopupOld';
 import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
 import DrawPopup from './DrawPopup';
 
