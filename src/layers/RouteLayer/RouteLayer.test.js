@@ -127,6 +127,12 @@ const fetchRoutes = () => {
   fetchMock.once(/8576579/g, routeDataBus);
 };
 
+const fetchRoutesError = () => {
+  /* Mock fetch for each sequence with HTTP errors */
+  fetchMock.once(/8503000/g, 400);
+  fetchMock.once(/8576579/g, 500);
+};
+
 describe('RouteLayer', () => {
   beforeEach(() => {
     onClick = jest.fn();
@@ -229,6 +235,14 @@ describe('RouteLayer', () => {
     const route = await layer.loadRoutes(routes);
 
     expect(route[0]).toBeInstanceOf(Feature);
+  });
+
+  test('should skip failed API requests on loadRoute.', async () => {
+    layer.init(map);
+    fetchRoutesError();
+    const route = await layer.loadRoutes(routes);
+
+    expect(route).toEqual([]);
   });
 
   test('shoud call onClick callbacks and deselect on click.', async () => {
