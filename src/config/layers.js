@@ -911,6 +911,29 @@ export const constrClusters = new Layer({
   ],
 });
 
+export const betriebsRegionenInfrastruktur = new TrafimageMapboxLayer({
+  name: 'ch.sbb.betriebsregionen.infrastruktur',
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'ch.sbb.statistikportal',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const betriebsRegionen = new MapboxStyleLayer({
+  name: 'ch.sbb.betriebsregionen',
+  visible: false,
+  mapboxLayer: betriebsRegionenInfrastruktur,
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BetriebsRegionenPopup',
+    layerInfoComponent: 'BetriebsRegionenLayerInfo',
+  },
+});
+
 export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   name: 'ch.sbb.infrastruktur',
   isBaseLayer: true,

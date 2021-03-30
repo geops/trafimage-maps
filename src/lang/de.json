@@ -41,6 +41,8 @@
   "ch.sbb.behig": "Umsetzung BehiG",
   "ch.sbb.betriebslage": "Betriebslage",
   "ch.sbb.betriebslage-desc": "Betriebslage",
+  "ch.sbb.betriebsregionen": "Regionen",
+  "ch.sbb.betriebsregionen-desc": "Geographische Aufteilung der Infrastruktur SBB.",
   "ch.sbb.casa": "CASA",
   "ch.sbb.ch_gemeinden": "Gemeindegrenzen",
   "ch.sbb.ch_gemeinden-desc": "Blenden Sie die Gemeindegrenzen ein/aus. Die Gemeinden finden Sie über das Suchfeld.<p>Daten:<br/>Bundesamt für Statistik, swisstopo (01.01.2018)</p>",

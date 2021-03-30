@@ -1,3 +1,4 @@
+import BetriebsRegionenLayerInfo from './BetriebsRegionenLayerInfo';
 import BuslinesLayerInfo from './BuslinesLayerInfo';
 import ConstructionLayerInfo from './ConstructionLayerInfo';
 import ConstructionTopicInfo from './ConstructionTopicInfo';
@@ -21,6 +22,7 @@ import ZweitausbildungSubLayerInfo from './ZweitausbildungSubLayerInfo';
 import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
 
 export default {
+  BetriebsRegionenLayerInfo,
   BuslinesLayerInfo,
   ConstructionLayerInfo,
   ConstructionTopicInfo,
