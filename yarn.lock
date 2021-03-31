@@ -14310,7 +14310,7 @@ re-resizable@6.5.4:
   dependencies:
     fast-memoize "^2.5.1"
 
-re-resizable@6.9.0, re-resizable@^6.3.2:
+re-resizable@6.9.0, re-resizable@^6.3.2, re-resizable@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.0.tgz#9c3059b389ced6ade602234cc5bb1e12d231cd47"
   integrity sha512-3cUDG81ylyqI0Pdgle/RHwwRYq0ORZzsUaySOCO8IbEtNyaRtrIHYm/jMQ5pjcNiKCxR3vsSymIQZHwJq4gg2Q==

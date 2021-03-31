@@ -1368,6 +1368,7 @@ export const regionenkartePublicSegment = new TrafimageGeoServerWMSLayer({
       properties: {
         hasInfos: true,
         popupComponent: 'RegionenkarteSegmentPopup',
+        useOverlay: true,
         hideInLegend: true,
         custom: {
           featureInfoLayer: 'regionenkarte_av_segmente_qry_xyr',
