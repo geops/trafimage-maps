@@ -1,19 +1,18 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
-  // properties: PropTypes.object.isRequired,
+  properties: PropTypes.object.isRequired,
 };
 
-const BetriebsRegionenPopup = ({ t }) => {
+const BetriebsRegionenPopup = ({ properties }) => {
+  const { region } = properties;
   return (
     <div>
-      <span>{t('BetriebsRegionenPopup')}</span>
+      <span>{region}</span>
     </div>
   );
 };
 
 BetriebsRegionenPopup.propTypes = propTypes;
-export default memo(withTranslation()(BetriebsRegionenPopup));
+export default memo(BetriebsRegionenPopup);

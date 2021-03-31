@@ -211,6 +211,19 @@ export const infrastruktur = {
   searches: defaultSearches,
 };
 
+export const betriebsregionen = {
+  name: 'ch.sbb.infrastruktur',
+  key: 'ch.sbb.infrastruktur',
+  elements: {
+    ...defaultElements,
+    header: false,
+    search: false,
+    drawMenu: false,
+  },
+  layers: [netzkarteEisenbahninfrastruktur, betriebsRegionen],
+  projection: 'EPSG:3857',
+};
+
 export const regionenkarte = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
@@ -300,6 +313,7 @@ const topics = {
     tina,
   ],
   stelen: [netzkarteStelen],
+  betriebsregionen: [betriebsregionen],
 };
 
 export const getTopicConfig = (name) => {

@@ -929,8 +929,8 @@ export const betriebsRegionen = new MapboxStyleLayer({
   name: 'ch.sbb.betriebsregionen',
   visible: false,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ styleLayer }) => {
-    return /$statistik_/.test(styleLayer.id);
+  styleLayersFilter: ({ id }) => {
+    return /statistik_/.test(id);
   },
   properties: {
     hasInfos: true,
