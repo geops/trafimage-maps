@@ -219,6 +219,7 @@ export const betriebsregionen = {
     header: false,
     search: false,
     drawMenu: false,
+    popup: true,
   },
   layers: [netzkarteEisenbahninfrastruktur, betriebsRegionen],
   projection: 'EPSG:3857',
