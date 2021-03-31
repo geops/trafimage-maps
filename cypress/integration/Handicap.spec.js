@@ -2,7 +2,7 @@ import lang from '../../src/lang/de.json';
 
 describe('Handicap Topic', () => {
   beforeEach(() => {
-    cy.visit('https://localhost:3000');
+    cy.visit('');
     cy.get('.wkp-menu-header ').click();
     cy.wait(1000);
   });
