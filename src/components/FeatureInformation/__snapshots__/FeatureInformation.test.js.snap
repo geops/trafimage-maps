@@ -52,6 +52,7 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
     >
       <div>
         <div
+          className="wkp-departure-btn"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
@@ -214,6 +215,7 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
     >
       <div>
         <div
+          className="wkp-departure-btn"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"
@@ -304,6 +306,7 @@ exports[`FeatureInformaion should match snapshot. using the layers's popupCompon
     >
       <div>
         <div
+          className="wkp-departure-btn"
           onClick={[Function]}
           onKeyPress={[Function]}
           role="button"

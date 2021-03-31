@@ -197,6 +197,9 @@ class RouteLayer extends CasaLayer {
           isEnd,
         });
         return feature;
+      })
+      .catch(() => {
+        // Ignore failed API requests.
       });
   }
 

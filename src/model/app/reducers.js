@@ -24,6 +24,9 @@ import {
   SET_SHORTENER_URL,
   SET_DRAW_EDIT_LINK_LOADING,
   SET_DRAW_EDIT_LINK,
+  SET_DESTINATION_URL,
+  SET_DEPARTURES_URL,
+  SET_API_KEY,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -56,6 +59,9 @@ const getInitialState = () => ({
   searchService: new SearchService(),
   screenWidth: null,
   drawIds: null,
+  destinationUrl: null,
+  departuresUrl: null,
+  apiKey: null,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -170,6 +176,21 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         drawEditLink: action.data,
+      };
+    case SET_DESTINATION_URL:
+      return {
+        ...state,
+        destinationUrl: action.data,
+      };
+    case SET_DEPARTURES_URL:
+      return {
+        ...state,
+        departuresUrl: action.data,
+      };
+    case SET_API_KEY:
+      return {
+        ...state,
+        apiKey: action.data,
       };
     default:
       return {
