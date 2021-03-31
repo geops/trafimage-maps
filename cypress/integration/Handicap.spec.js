@@ -2,7 +2,7 @@ import lang from '../../src/lang/de.json';
 
 describe('Handicap Topic', () => {
   beforeEach(() => {
-    cy.visit('');
+    cy.visit('https://localhost:3000');
     cy.get('.wkp-menu-header ').click();
     cy.wait(1000);
   });
@@ -26,8 +26,9 @@ describe('Handicap Topic', () => {
       .type('r')
       .type('n');
 
-    cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true});
+    cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
 
+    cy.wait(1000);
     // Popup is opened.
     cy.get('.rs-popup-container').should('be.visible');
   });
