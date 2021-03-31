@@ -10,23 +10,23 @@ const propTypes = {
 const regions = [
   {
     title: 'West',
-    fill: '#0079C7',
+    fill: '#ff0000',
   },
   {
     title: 'Mitte',
-    fill: '#6F2282',
+    fill: '#FCBB00',
   },
   {
     title: 'Süd',
-    fill: '#C60018',
+    fill: '#F27E00',
   },
   {
     title: 'Ost',
-    fill: '#BDBDBD',
+    fill: '#00973B',
   },
   {
     title: 'Andere Infrastrukturbetreiberinnen',
-    fill: '#2d327d',
+    fill: '#BDBDBD',
   },
 ];
 
