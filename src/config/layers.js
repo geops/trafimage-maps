@@ -925,65 +925,6 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   },
 });
 
-let regionenDataLayers = [];
-
-const updateRegions = (mbMap) => {
-  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
-  mbMap.once('idle', () => {
-    const regionsRendered = mbMap
-      .queryRenderedFeatures({
-        layers: regionenDataLayers,
-      })
-      .map((feat) => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-    const source = mbMap.getSource('regions');
-    if (source) {
-      source.setData({
-        type: 'FeatureCollection',
-        features: regionsRendered,
-      });
-    }
-  });
-};
-
-netzkarteEisenbahninfrastruktur.on('load', () => {
-  const { map, mbMap } = netzkarteEisenbahninfrastruktur;
-  regionenDataLayers = mbMap
-    .getStyle()
-    .layers.filter((layer) => {
-      return (
-        layer['source-layer'] === 'ch.sbb.statistikportal' &&
-        /statistik_/.test(layer.id)
-      );
-    })
-    .map((layer) => layer.id);
-
-  if (!mbMap.getSource('regions')) {
-    mbMap.addSource('regions', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    });
-  }
-  updateRegions(mbMap);
-
-  unByKey(olListenersKeys);
-  olListenersKeys.push(
-    map.on('moveend', () => {
-      updateRegions(mbMap);
-    }),
-  );
-});
-
 export const betriebsRegionen = new MapboxStyleLayer({
   name: 'ch.sbb.betriebsregionen',
   visible: false,
