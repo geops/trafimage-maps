@@ -222,7 +222,7 @@ export const betriebsregionen = {
     drawMenu: false,
     popup: true,
   },
-  layers: [netzkarteEisenbahninfrastruktur, betriebsRegionen],
+  layers: [netzkarteEisenbahninfrastruktur, betriebsRegionenVisible],
   projection: 'EPSG:3857',
 };
 
@@ -315,7 +315,7 @@ const topics = {
     tina,
   ],
   stelen: [netzkarteStelen],
-  betriebsregionen: [betriebsRegionenVisible],
+  betriebsregionen: [betriebsregionen],
 };
 
 export const getTopicConfig = (name) => {
