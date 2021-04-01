@@ -8,6 +8,19 @@ import { setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles({
   drawer: {
+    '& .wkp-feature-information': {
+      height: '100%',
+    },
+    '& .wkp-feature-information-body': {
+      height: 'calc(100% - 36px)',
+      display: 'flex',
+      flexDirection: 'column',
+      '& > div': {
+        maxHeight: '100%',
+      },
+    },
+  },
+  drawerDesktop: {
     width: 300,
     '& .wkp-feature-information': {
       width: 300,
@@ -19,11 +32,18 @@ const useStyles = makeStyles({
       width: '100%',
     },
   },
+  resizeHandler: {
+    display: 'flex',
+    width: '100%',
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });
 
 const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
   const classes = useStyles();
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'));
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
@@ -60,7 +80,9 @@ const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
       }}
     >
       <Drawer
-        className={isMobile ? classes.drawerMobile : classes.drawer}
+        className={`${classes.drawer} ${
+          isMobile ? classes.drawerMobile : classes.drawerDesktop
+        }`}
         anchor={isMobile ? 'bottom' : 'left'}
         open
         onClose={() => {
@@ -68,26 +90,35 @@ const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
         }}
         ModalProps={{
           container: node,
-          BackdropProps: {
-            invisible: true,
-          },
           BackdropComponent: () => {
             return null;
           },
         }}
       >
-        <Resizable
-          enable={{ top: isMobile }}
-          handleComponent={{
-            top: <div>AAAAAAAAAAAa</div>,
-          }}
-        >
+        {isMobile && (
+          <Resizable
+            enable={{ top: isMobile }}
+            defaultSize={{
+              height: 250,
+            }}
+            handleComponent={{
+              top: <div className={classes.resizeHandler}>&mdash;</div>,
+            }}
+          >
+            <FeatureInformation
+              featureInfo={filtered}
+              appBaseUrl={appBaseUrl}
+              staticFilesUrl={staticFilesUrl}
+            />
+          </Resizable>
+        )}
+        {!isMobile && (
           <FeatureInformation
             featureInfo={filtered}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
           />
-        </Resizable>
+        )}
       </Drawer>
     </div>
   );

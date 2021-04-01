@@ -55,11 +55,11 @@ class RegionenkarteSegmentHighlightLayer extends VectorLayer {
     )
       .then((data) => data.json())
       .then((data) => {
-        const format = new GeoJSON({
+        const format = new GeoJSON();
+        const features = format.readFeatures(data, {
           dataProjection: 'EPSG:21781',
           featureProjection: 'EPSG:3857',
         });
-        const features = format.readFeatures(data);
         this.olLayer.getSource().clear();
         this.olLayer.getSource().addFeatures(features);
         return {
