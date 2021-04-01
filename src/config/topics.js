@@ -29,6 +29,7 @@ import defaultBaseLayers, {
   gewässer,
   uebrigeBahnen,
   betriebsRegionen,
+  betriebsRegionenVisible,
   netzkarteEisenbahninfrastruktur,
   zweitausbildungAbroad,
   zweitausbildungPois,
@@ -314,7 +315,7 @@ const topics = {
     tina,
   ],
   stelen: [netzkarteStelen],
-  betriebsregionen: [betriebsregionen],
+  betriebsregionen: [betriebsRegionenVisible],
 };
 
 export const getTopicConfig = (name) => {

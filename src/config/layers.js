@@ -997,6 +997,20 @@ export const betriebsRegionen = new MapboxStyleLayer({
   },
 });
 
+// Clone layer to set visibility true by default for appName="betriebsregionen" [TRAFDIV-421]
+export const betriebsRegionenVisible = new MapboxStyleLayer({
+  name: 'ch.sbb.betriebsregionen',
+  visible: true,
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
+  styleLayersFilter: ({ id }) => /statistik_/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /statistik_/.test(id),
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BetriebsRegionenPopup',
+    layerInfoComponent: 'BetriebsRegionenLayerInfo',
+  },
+});
+
 export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
   visible: true,
