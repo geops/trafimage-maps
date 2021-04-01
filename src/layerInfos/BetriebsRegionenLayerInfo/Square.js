@@ -13,7 +13,14 @@ const Square = ({ fill }) => {
       height="20"
       viewBox="0 0 20 20"
     >
-      <rect id="rect" data-name="rect" width="20" height="20" fill={fill} />
+      <rect
+        id="rect"
+        data-name="rect"
+        width="20"
+        height="20"
+        fill={fill}
+        opacity="0.2"
+      />
     </svg>
   );
 };
