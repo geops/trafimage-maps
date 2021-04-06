@@ -1,7 +1,11 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
-import Square from './Square';
+import ostImg from '../../img/layers/Betriebsregionen/ost.png';
+import sudImg from '../../img/layers/Betriebsregionen/sud.png';
+import westImg from '../../img/layers/Betriebsregionen/west.png';
+import mitteImg from '../../img/layers/Betriebsregionen/mitte.png';
+import otherImg from '../../img/layers/Betriebsregionen/other.png';
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -10,23 +14,23 @@ const propTypes = {
 const regions = [
   {
     title: 'West',
-    fill: '#ff0000',
+    img: westImg,
   },
   {
     title: 'Mitte',
-    fill: '#FCBB00',
+    img: mitteImg,
   },
   {
     title: 'Süd',
-    fill: '#F27E00',
+    img: sudImg,
   },
   {
     title: 'Ost',
-    fill: '#00973B',
+    img: ostImg,
   },
   {
     title: 'Andere Infrastrukturbetreiberinnen',
-    fill: '#BDBDBD',
+    img: otherImg,
   },
 ];
 
@@ -37,7 +41,7 @@ const BetriebsRegionenLayerInfo = ({ t }) => {
       <div className="wkp-betriebsregionen">
         {regions.map((region) => (
           <div className="wkp-betriebsregion">
-            <Square fill={region.fill} />
+            <img src={region.img} height={25} width={25} alt={region.title} />
             {t(region.title)}
           </div>
         ))}
