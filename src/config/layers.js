@@ -929,8 +929,8 @@ export const betriebsRegionen = new MapboxStyleLayer({
   name: 'ch.sbb.betriebsregionen',
   visible: false,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => /statistik_/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /statistik_/.test(id),
+  styleLayersFilter: ({ id }) => /pattern_/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
     popupComponent: 'BetriebsRegionenPopup',
@@ -943,8 +943,8 @@ export const betriebsRegionenVisible = new MapboxStyleLayer({
   name: 'ch.sbb.betriebsregionen',
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => /statistik_/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /statistik_/.test(id),
+  styleLayersFilter: ({ id }) => /pattern_/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
     popupComponent: 'BetriebsRegionenPopup',
