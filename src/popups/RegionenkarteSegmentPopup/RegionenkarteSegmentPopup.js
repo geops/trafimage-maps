@@ -46,7 +46,8 @@ const blockSkype = (phone) => {
 };
 
 function RegionenkarteSegmentPopup({ feature }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  console.log(i18n.language);
   const classes = useStyles();
   const parsed = qs.parseUrl(window.location.href);
   const { anlagegattung = 'av_bnb' } = parsed.query;
@@ -112,9 +113,12 @@ function RegionenkarteSegmentPopup({ feature }) {
           <div>
             {lineData.map((data) => {
               return (
-                <div>{`${data.linie ? `${data.linie}, ` : ''}km ${
-                  data.km_von
-                } - ${data.km_bis}`}</div>
+                <div
+                  key={`${data.linie}-${data.km_von}
+                }-${data.km_bis}`}
+                >{`${data.linie ? `${data.linie}, ` : ''}km ${data.km_von} - ${
+                  data.km_bis
+                }`}</div>
               );
             })}
           </div>

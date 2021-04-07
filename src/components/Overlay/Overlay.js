@@ -89,6 +89,7 @@ const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
           dispatch(setFeatureInfo([]));
         }}
         ModalProps={{
+          disableEnforceFocus: true,
           container: node,
           BackdropComponent: () => {
             return null;
