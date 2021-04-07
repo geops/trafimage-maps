@@ -1,4 +1,3 @@
-import React from 'react';
 import { act } from 'react-dom/test-utils';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';

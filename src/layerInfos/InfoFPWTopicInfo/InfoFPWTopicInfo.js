@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 
@@ -20,7 +19,7 @@ const InfoFPWTopicInfo = ({ language, t }) => {
     fr: (
       <span>
         L’infographie donne un aperçu des changements et de l’aménagement de
-        l’offre prévus au changement d’horaire 2019.
+        l’offre prévus au changement d’horaire 2019.
       </span>
     ),
     it: (

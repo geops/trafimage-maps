@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
@@ -186,7 +186,7 @@ function NetzkartePopup({ feature }) {
 
 NetzkartePopup.propTypes = propTypes;
 
-const memoized = React.memo(NetzkartePopup);
+const memoized = memo(NetzkartePopup);
 memoized.renderTitle = (feat) => feat.get('name');
 
 export default memoized;

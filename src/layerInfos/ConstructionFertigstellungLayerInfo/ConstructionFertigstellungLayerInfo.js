@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
@@ -33,4 +33,4 @@ const ConstructionFertigstellungLayerInfo = ({ language, properties }) => {
 
 ConstructionFertigstellungLayerInfo.propTypes = propTypes;
 
-export default React.memo(ConstructionFertigstellungLayerInfo);
+export default memo(ConstructionFertigstellungLayerInfo);

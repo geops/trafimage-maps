@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -488,4 +488,4 @@ function Imprint({ language }) {
   return comps[language];
 }
 
-export default React.memo(Imprint);
+export default memo(Imprint);

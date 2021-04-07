@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import MenuItemHeader from './MenuItemHeader';
 import Collapsible from '../Collapsible';
@@ -65,4 +65,4 @@ function MenuItem(props) {
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
 
-export default React.memo(withResizing(MenuItem));
+export default memo(withResizing(MenuItem));

@@ -1,7 +1,8 @@
-import React from 'react';
+import { memo } from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+// import { Loader } from '../../img';
 import { ReactComponent as Loader } from '../../img/loader.svg';
 import PermalinkInput from '../PermalinkInput';
 
@@ -42,4 +43,4 @@ function DrawEditLinkInput() {
   );
 }
 
-export default React.memo(DrawEditLinkInput);
+export default memo(DrawEditLinkInput);

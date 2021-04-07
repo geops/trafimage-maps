@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { memo, useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaPencilAlt } from 'react-icons/fa';
 import MenuItem from '../../components/Menu/MenuItem';
@@ -42,4 +42,4 @@ function DrawMenu() {
   );
 }
 
-export default React.memo(DrawMenu);
+export default memo(DrawMenu);

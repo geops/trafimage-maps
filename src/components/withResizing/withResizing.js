@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { createRef, Component } from 'react';
 import Map from 'ol/Map';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -20,7 +20,7 @@ function withResizing(MenuToBeResized) {
   class ResizedWrapper extends Component {
     constructor(props) {
       super(props);
-      this.bodyElementRef = React.createRef();
+      this.bodyElementRef = createRef();
       this.olEventKey = null;
 
       this.state = {

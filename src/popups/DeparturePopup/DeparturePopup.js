@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';

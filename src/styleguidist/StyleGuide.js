@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Logo from 'react-styleguidist/lib/client/rsg-components/Logo';
 import Version from 'react-styleguidist/lib/client/rsg-components/Version';

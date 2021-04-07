@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 
@@ -24,7 +24,7 @@ const KilometragePopup = ({ feature, t }) => {
 
 KilometragePopup.propTypes = propTypes;
 
-const memoized = React.memo(KilometragePopup);
+const memoized = memo(KilometragePopup);
 memoized.hideHeader = () => true;
 
 export default memoized;

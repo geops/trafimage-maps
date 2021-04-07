@@ -1,4 +1,3 @@
-import React from 'react';
 import { Style, Circle, Fill, Stroke as OLStroke } from 'ol/style';
 import { MultiLineString } from 'ol/geom';
 import GeoJSON from 'ol/format/GeoJSON';

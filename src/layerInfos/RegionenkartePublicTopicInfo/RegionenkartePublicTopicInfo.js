@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -59,4 +59,4 @@ const RegionenkartePublicTopicInfo = ({ language }) => {
   return comps[language];
 };
 
-export default React.memo(RegionenkartePublicTopicInfo);
+export default memo(RegionenkartePublicTopicInfo);

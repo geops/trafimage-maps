@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from 'react';
+import { useState, memo, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaLink } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
@@ -18,7 +18,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
 
   const { t } = useTranslation();
   const ref = useRef();
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = useCallback((event) => {
     setAnchorEl(event.currentTarget);
@@ -94,4 +94,4 @@ PermalinkButton.defaultProps = {
   children: null,
 };
 
-export default React.memo(PermalinkButton);
+export default memo(PermalinkButton);

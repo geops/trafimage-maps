@@ -5,7 +5,7 @@ import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '../../i18n';
 
 import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react';
-import React from 'react';
+import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -180,7 +180,7 @@ const defaultProps = {
   permissionInfos: null,
 };
 
-class TrafimageMaps extends React.PureComponent {
+class TrafimageMaps extends PureComponent {
   constructor(props) {
     super(props);
 

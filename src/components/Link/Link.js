@@ -1,6 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { ReactComponent as LinkIcon } from './Link.svg';
+import { ReactComponent as LinkSvg } from '../../img/link.svg';
 
 import './Link.scss';
 
@@ -14,7 +13,7 @@ const defaultProps = {};
 const Link = ({ href, children }) => (
   <a className="wkp-link" href={href} rel="noopener noreferrer" target="_blank">
     <span>{children}</span>&nbsp;
-    <LinkIcon />
+    <LinkSvg />
   </a>
 );
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -75,4 +75,4 @@ const ParksLayerInfo = ({ language }) => {
   return comps[language];
 };
 
-export default React.memo(ParksLayerInfo);
+export default memo(ParksLayerInfo);

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import Link from '../../components/Link';
@@ -174,4 +174,4 @@ function HandicapPopupElement({ properties, propertyName, label }) {
 HandicapPopupElement.propTypes = propTypes;
 HandicapPopupElement.defaultProps = defaultProps;
 
-export default React.memo(HandicapPopupElement);
+export default memo(HandicapPopupElement);

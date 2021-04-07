@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -78,4 +78,4 @@ const Share = ({ appBaseUrl }) => {
 Share.propTypes = propTypes;
 Share.defaultProps = defaultProps;
 
-export default React.memo(Share);
+export default memo(Share);

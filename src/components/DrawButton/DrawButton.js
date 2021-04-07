@@ -1,8 +1,9 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import IconButton from '@material-ui/core/IconButton';
+// import { Pencil } from '../../img';
 import { ReactComponent as Pencil } from '../../img/pencil.svg';
 
 function DrawButton({ children, ...buttonProps }) {
@@ -37,4 +38,4 @@ DrawButton.defaultProps = {
   children: null,
 };
 
-export default React.memo(DrawButton);
+export default memo(DrawButton);

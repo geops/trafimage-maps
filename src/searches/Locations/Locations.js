@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Search from '../Search';
 
 class Locations extends Search {

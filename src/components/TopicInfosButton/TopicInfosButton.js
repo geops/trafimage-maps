@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import InfosButton from '../InfosButton';
@@ -26,4 +26,4 @@ TopicInfosButton.propTypes = {
   topic: PropTypes.object.isRequired,
 };
 
-export default React.memo(TopicInfosButton);
+export default memo(TopicInfosButton);

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Search from '../Search';
 
 class Betriebspunkte extends Search {

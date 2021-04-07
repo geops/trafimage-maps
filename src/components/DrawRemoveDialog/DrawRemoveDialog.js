@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Button, makeStyles } from '@material-ui/core';
@@ -74,4 +74,4 @@ function DrawRemoveDialog() {
   );
 }
 
-export default React.memo(DrawRemoveDialog);
+export default memo(DrawRemoveDialog);

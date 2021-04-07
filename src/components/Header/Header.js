@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import UIHeader from '@geops/react-ui/components/Header';
 import Login from '../Login';
+// import { SBBLogo } from '../../img';
 import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
 import LanguageSelect from '../LanguageSelect';
 

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FaTrash, FaInfoCircle } from 'react-icons/fa';
@@ -7,6 +7,7 @@ import { setDialogVisible } from '../../model/app/actions';
 import DrawButton from '../DrawButton';
 import { NAME } from '../DrawRemoveDialog';
 import DrawPermalinkButton from '../DrawPermalinkButton';
+// import { PencilAdd } from '../../img';
 import { ReactComponent as PencilAdd } from '../../img/pencil_add.svg';
 
 const useStyles = makeStyles((theme) => ({
@@ -86,4 +87,4 @@ function Draw() {
     </div>
   );
 }
-export default React.memo(Draw);
+export default memo(Draw);

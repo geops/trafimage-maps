@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { memo, Suspense, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -88,7 +88,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       aria-describedby="wkp-popup-desc"
       role="dialog"
     >
-      <React.Suspense fallback="...loading">
+      <Suspense fallback="...loading">
         {PopupComponent &&
         (!PopupComponent.hideHeader ||
           (PopupComponent.hideHeader && // For dynamic header rendering (e.g. CASA)
@@ -125,7 +125,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
           />
           {pagination}
         </div>
-      </React.Suspense>
+      </Suspense>
     </div>
   );
 };
@@ -133,4 +133,4 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 FeatureInformation.propTypes = propTypes;
 FeatureInformation.defaultProps = defaultProps;
 
-export default React.memo(FeatureInformation);
+export default memo(FeatureInformation);

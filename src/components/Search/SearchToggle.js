@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchOpen } from '../../model/app/actions';
-import { ReactComponent as SearchIcon } from './Search.svg';
+import { ReactComponent as SearchBigIcon } from '../../img/searchbig.svg';
 
 const propTypes = {
   children: PropTypes.node,
@@ -31,7 +30,7 @@ function SearchToggle({ children }) {
           type="button"
           onClick={() => dispatch(setSearchOpen(true))}
         >
-          <SearchIcon />
+          <SearchBigIcon />
           <span>{t('Suchen')}</span>
         </button>
       )}

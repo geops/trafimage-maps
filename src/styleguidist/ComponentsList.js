@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 // Import default implementation from react-styleguidist using the full path
 import ComponentsListRenderer from 'react-styleguidist/lib/client/rsg-components/ComponentsList/ComponentsListRenderer';

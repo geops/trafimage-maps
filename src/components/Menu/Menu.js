@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -19,4 +19,4 @@ function Menu({ children }) {
 
 Menu.propTypes = propTypes;
 
-export default React.memo(Menu);
+export default memo(Menu);

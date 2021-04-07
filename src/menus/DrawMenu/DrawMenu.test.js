@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import DrawMenu from './DrawMenu';
 import MenuItem from '../../components/Menu/MenuItem';

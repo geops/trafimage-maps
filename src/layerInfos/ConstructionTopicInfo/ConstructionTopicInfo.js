@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -68,4 +68,4 @@ const HandicapTopicInfo = ({ language }) => {
   return comps[language];
 };
 
-export default React.memo(HandicapTopicInfo);
+export default memo(HandicapTopicInfo);

@@ -1,13 +1,19 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
+// import { SwissBounds, ZoomOut, ZoomIn } from '../../img';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
+/*
+import SwissBounds from '../../img/swissbounds.svg';
+import ZoomOut from '../../img/minus.svg';
+import ZoomIn from '../../img/plus.svg';
+*/
 import './MapControls.scss';
 
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
@@ -65,4 +71,4 @@ const MapControls = ({ showGeolocation }) => {
 MapControls.propTypes = propTypes;
 MapControls.defaultProps = defaultProps;
 
-export default React.memo(MapControls);
+export default memo(MapControls);

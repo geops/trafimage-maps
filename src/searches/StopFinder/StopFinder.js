@@ -1,4 +1,3 @@
-import React from 'react';
 import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';

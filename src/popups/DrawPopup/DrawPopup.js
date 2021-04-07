@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 
@@ -20,7 +20,7 @@ DrawPopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const composed = React.memo(DrawPopup);
+const composed = memo(DrawPopup);
 
 composed.renderTitle = (feature) => feature.get('name');
 export default composed;

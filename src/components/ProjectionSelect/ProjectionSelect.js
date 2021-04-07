@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from '../Select';
@@ -105,4 +105,4 @@ const ProjectionSelect = ({ projections }) => {
 
 ProjectionSelect.propTypes = propTypes;
 
-export default React.memo(ProjectionSelect);
+export default memo(ProjectionSelect);

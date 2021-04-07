@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { Typography, makeStyles } from '@material-ui/core';
@@ -42,4 +42,4 @@ SharePermalinkButton.defaultProps = {
   buttonProps: {},
 };
 
-export default React.memo(SharePermalinkButton);
+export default memo(SharePermalinkButton);

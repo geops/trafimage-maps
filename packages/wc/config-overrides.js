@@ -22,26 +22,26 @@ module.exports = function override(config, env) {
 };
 
 const overrideModule = module => {
-  const cssRuleIndex = module.rules[2].oneOf.findIndex(rule =>
+  const cssRuleIndex = module.rules[1].oneOf.findIndex(rule =>
     '.css'.match(rule.test),
   );
-  const scssRuleIndex = module.rules[2].oneOf.findIndex(rule =>
+  const scssRuleIndex = module.rules[1].oneOf.findIndex(rule =>
     '.scss'.match(rule.test),
   );
   if (cssRuleIndex !== -1) {
-    module.rules[2].oneOf[cssRuleIndex].use[0] = {
+    module.rules[1].oneOf[cssRuleIndex].use[0] = {
       loader: 'to-string-loader',
     };
-    module.rules[2].oneOf[cssRuleIndex].use[1] = {
+    module.rules[1].oneOf[cssRuleIndex].use[1] = {
       loader: 'css-loader',
     };
   }
 
   if (scssRuleIndex !== -1) {
-    module.rules[2].oneOf[scssRuleIndex].use[0] = {
+    module.rules[1].oneOf[scssRuleIndex].use[0] = {
       loader: 'to-string-loader',
     };
-    module.rules[2].oneOf[scssRuleIndex].use[1] = {
+    module.rules[1].oneOf[scssRuleIndex].use[1] = {
       loader: 'css-loader',
     };
   }

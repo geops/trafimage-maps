@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import UIFooter from '@geops/react-ui/components/Footer';
@@ -79,4 +79,4 @@ const Footer = () => {
   );
 };
 
-export default React.memo(Footer);
+export default memo(Footer);

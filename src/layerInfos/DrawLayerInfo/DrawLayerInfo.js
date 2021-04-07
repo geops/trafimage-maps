@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const linkMapset = (
@@ -40,4 +40,4 @@ const DrawLayerInfo = () => {
   return descr[i18n.language];
 };
 
-export default React.memo(DrawLayerInfo);
+export default memo(DrawLayerInfo);

@@ -1,7 +1,8 @@
-import React, { useMemo, useCallback } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+// import { SBBUser } from '../../img/sbb';
 import { ReactComponent as SBBUser } from '../../img/sbb/user_92_large.svg';
 
 import './Login.scss';
@@ -44,4 +45,4 @@ Login.propTypes = {
   appBaseUrl: PropTypes.string.isRequired,
 };
 
-export default React.memo(Login);
+export default memo(Login);

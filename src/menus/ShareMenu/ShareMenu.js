@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { FaShareAlt } from 'react-icons/fa';
@@ -35,4 +35,4 @@ const ShareMenu = ({ appBaseUrl }) => {
 ShareMenu.propTypes = propTypes;
 ShareMenu.defaultProps = defaultProps;
 
-export default React.memo(ShareMenu);
+export default memo(ShareMenu);

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
@@ -87,4 +87,4 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
 TopicsMenu.propTypes = propTypes;
 TopicsMenu.defaultProps = defaultProps;
 
-export default React.memo(withResizing(TopicsMenu));
+export default memo(withResizing(TopicsMenu));

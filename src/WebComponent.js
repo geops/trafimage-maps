@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import TrafimageMaps from './components/TrafimageMaps';
@@ -237,7 +237,7 @@ const WebComponent = (props) => {
 
 WebComponent.propTypes = propTypes;
 WebComponent.defaultProps = defaultProps;
-const memoized = React.memo(WebComponent);
+const memoized = memo(WebComponent);
 memoized.defaultProps = defaultProps;
 memoized.attributes = attributes;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 
@@ -27,4 +27,4 @@ const BusLinePopup = ({ feature }) => {
 
 BusLinePopup.propTypes = propTypes;
 
-export default React.memo(BusLinePopup);
+export default memo(BusLinePopup);

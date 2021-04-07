@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -74,4 +74,4 @@ const PassagierFrequenzenLayerInfo = ({ language }) => {
   return comps[language];
 };
 
-export default React.memo(PassagierFrequenzenLayerInfo);
+export default memo(PassagierFrequenzenLayerInfo);

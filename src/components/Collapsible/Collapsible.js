@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import { createRef, PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import './Collapsible.scss';
@@ -25,7 +25,7 @@ const defaultProps = {
 class Collapsible extends PureComponent {
   constructor(props) {
     super(props);
-    this.ref = React.createRef();
+    this.ref = createRef();
     this.state = {
       isHidden: false,
     };

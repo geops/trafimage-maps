@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import Autocomplete from '@geops/react-ui/components/Autocomplete';
 
+// import { SearchIcon } from '../../img';
 import { ReactComponent as SearchIcon } from '../../img/search.svg';
 
 import './DestinationInput.scss';

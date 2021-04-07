@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import LayerTree from 'react-spatial/components/LayerTree';
@@ -43,4 +43,4 @@ function DrawLayerMenu() {
   );
 }
 
-export default React.memo(DrawLayerMenu);
+export default memo(DrawLayerMenu);

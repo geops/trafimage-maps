@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
@@ -233,7 +233,7 @@ function HandicapPopup({ feature }) {
 
 HandicapPopup.propTypes = propTypes;
 
-const memoized = React.memo(HandicapPopup);
+const memoized = memo(HandicapPopup);
 memoized.renderTitle = (feat) => feat.get('stationsbezeichnung');
 
 export default memoized;

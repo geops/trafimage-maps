@@ -1,5 +1,5 @@
 import { MatomoContext } from '@datapunt/matomo-tracker-react';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import i18next from 'i18next';

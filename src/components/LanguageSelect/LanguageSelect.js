@@ -1,7 +1,8 @@
-import React, { useMemo, useCallback } from 'react';
+import { memo, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from '../Select';
 import { setLanguage } from '../../model/app/actions';
+// import { SBBGlobe } from '../../img/sbb';
 import { ReactComponent as SBBGlobe } from '../../img/sbb/globe_210_large.svg';
 
 import './LanguageSelect.scss';
@@ -120,4 +121,4 @@ const LanguageSelect = () => {
   );
 };
 
-export default React.memo(LanguageSelect);
+export default memo(LanguageSelect);

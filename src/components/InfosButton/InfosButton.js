@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -47,4 +47,4 @@ InfosButton.defaultProps = {
   className: 'wkp-info-bt',
 };
 
-export default React.memo(InfosButton);
+export default memo(InfosButton);

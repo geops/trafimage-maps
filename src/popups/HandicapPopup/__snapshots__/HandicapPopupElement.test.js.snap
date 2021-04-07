@@ -63,7 +63,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
         </span>
          
         <svg>
-          Link.svg
+          link.svg
         </svg>
       </a>
     </p>
@@ -98,7 +98,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
         </span>
          
         <svg>
-          Link.svg
+          link.svg
         </svg>
       </a>
     </p>

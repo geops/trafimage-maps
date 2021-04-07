@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,6 +23,7 @@ import Popup from '../Popup';
 import Search from '../Search';
 import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
+// import { ChevronLeft } from '../../img';
 import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
 
 const defaultElements = {

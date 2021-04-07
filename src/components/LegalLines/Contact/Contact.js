@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -118,4 +118,4 @@ function Contact({ language }) {
   return comps[language];
 }
 
-export default React.memo(Contact);
+export default memo(Contact);

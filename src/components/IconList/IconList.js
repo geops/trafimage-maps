@@ -1,4 +1,4 @@
-import React, { PureComponent, createRef } from 'react';
+import { PureComponent, createRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import List from '@geops/react-ui/components/List';

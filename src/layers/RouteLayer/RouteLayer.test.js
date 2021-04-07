@@ -1,4 +1,3 @@
-import React from 'react';
 import 'jest-canvas-mock';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

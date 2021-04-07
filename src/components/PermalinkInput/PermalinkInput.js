@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { makeStyles } from '@material-ui/core';
 import UIPermalinkInput from '@geops/react-ui/components/PermalinkInput';
 
@@ -50,4 +50,4 @@ function PermalinkInput(props) {
   );
 }
 
-export default React.memo(PermalinkInput);
+export default memo(PermalinkInput);

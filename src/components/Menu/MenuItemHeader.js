@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Button from '@geops/react-ui/components/Button';
@@ -35,4 +35,4 @@ const MenuItemHeader = ({ className, title, icon, isOpen, onToggle }) => (
 MenuItemHeader.propTypes = propTypes;
 MenuItemHeader.defaultProps = defaultProps;
 
-export default React.memo(MenuItemHeader);
+export default memo(MenuItemHeader);

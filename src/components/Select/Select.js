@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { memo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
 import SingleValue from './SingleValue';
@@ -64,4 +64,4 @@ const Select = ({
 Select.propTypes = propTypes;
 Select.defaultProps = defaultProps;
 
-export default React.memo(Select);
+export default memo(Select);

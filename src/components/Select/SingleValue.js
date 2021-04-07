@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 
@@ -52,4 +52,4 @@ const SingleValue = ({
 SingleValue.propTypes = propTypes;
 SingleValue.defaultProps = defaultProps;
 
-export default React.memo(SingleValue);
+export default memo(SingleValue);

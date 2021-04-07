@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import {
@@ -157,4 +157,4 @@ function Search() {
   );
 }
 
-export default React.memo(Search);
+export default memo(Search);

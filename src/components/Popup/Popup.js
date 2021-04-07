@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Point, LineString } from 'ol/geom';
@@ -117,4 +117,4 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
 Popup.propTypes = propTypes;
 Popup.defaultProps = defaultProps;
 
-export default React.memo(Popup);
+export default memo(Popup);

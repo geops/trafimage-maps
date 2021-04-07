@@ -1,5 +1,4 @@
 import 'jest-canvas-mock';
-import React from 'react';
 import { act } from 'react-dom/test-utils';
 import thunk from 'redux-thunk';
 import { mount } from 'enzyme';

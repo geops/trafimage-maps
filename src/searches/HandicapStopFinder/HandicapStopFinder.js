@@ -1,4 +1,3 @@
-import React from 'react';
 import { Feature } from 'ol';
 import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';

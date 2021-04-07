@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 
 const comps = {
   de: (
@@ -445,4 +445,4 @@ function Legal({ language }) {
   return comps[language];
 }
 
-export default React.memo(Legal);
+export default memo(Legal);
