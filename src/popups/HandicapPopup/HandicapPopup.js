@@ -41,8 +41,14 @@ function HandicapPopup({ feature }) {
   // build string for equipment
   const equipment = [];
 
+  const treppenfreiString = `${t('treppenfrei')}${
+    properties[bfEquipmentExceptions.rampe]
+      ? ` (${properties[bfEquipmentExceptions.rampe]})`
+      : ''
+  }`;
+
   equipment.unshift(
-    properties.treppenfrei ? t('treppenfrei') : t('nicht treppenfrei'),
+    properties.treppenfrei ? treppenfreiString : t('nicht treppenfrei'),
   );
 
   Object.keys(bfEquipmentExceptions).forEach((key) => {
