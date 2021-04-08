@@ -168,7 +168,11 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
     overlay: (
-      <Overlay appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />
+      <Overlay
+        appBaseUrl={appBaseUrl}
+        staticFilesUrl={staticFilesUrl}
+        elements={elements}
+      />
     ),
   };
 

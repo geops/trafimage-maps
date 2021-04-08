@@ -26,6 +26,22 @@ const useStyles = makeStyles({
       width: 300,
     },
   },
+  drawerDesktopPaper: {
+    boxShadow: '-5px 0px 10px -6px rgb(0 0 0 / 40%)',
+    height: 'initial',
+    borderColor: '#cdcdcd',
+    borderStyle: 'solid',
+    borderWidth: '1px 0 1px 0',
+  },
+  headerActive: {
+    top: 100,
+  },
+  mobileHeader: {
+    top: 55,
+  },
+  footerActive: {
+    bottom: 40,
+  },
   drawerMobile: {
     width: '100%',
     '& .wkp-feature-information': {
@@ -41,9 +57,16 @@ const useStyles = makeStyles({
   },
 });
 
-const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
+const propTypes = {
+  appBaseUrl: PropTypes.string.isRequired,
+  staticFilesUrl: PropTypes.string.isRequired,
+  elements: PropTypes.shape().isRequired,
+};
+
+const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'));
+  const isSmallerThanM = useMediaQuery((theme) => theme.breakpoints.down('md'));
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
@@ -83,7 +106,17 @@ const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
         className={`${classes.drawer} ${
           isMobile ? classes.drawerMobile : classes.drawerDesktop
         }`}
-        anchor={isMobile ? 'bottom' : 'left'}
+        classes={{
+          paper: isMobile
+            ? ''
+            : `${[
+                classes.drawerDesktopPaper,
+                elements.header && !isSmallerThanM ? classes.headerActive : '',
+                elements.header && isSmallerThanM ? classes.mobileHeader : '',
+                elements.footer ? classes.footerActive : '',
+              ].join(' ')}`,
+        }}
+        anchor={isMobile ? 'bottom' : 'right'}
         open
         onClose={() => {
           dispatch(setFeatureInfo([]));
@@ -125,14 +158,5 @@ const Overlay = ({ appBaseUrl, staticFilesUrl }) => {
   );
 };
 
-Overlay.propTypes = {
-  appBaseUrl: PropTypes.string,
-  staticFilesUrl: PropTypes.string,
-};
-
-Overlay.defaultProps = {
-  appBaseUrl: null,
-  staticFilesUrl: null,
-};
-
+Overlay.propTypes = propTypes;
 export default React.memo(Overlay);
