@@ -30,6 +30,6 @@ describe('Handicap Topic', () => {
 
     // Popup is opened.
     // temporary disable for preview branch
-    // cy.get('.rs-popup-container').should('be.visible');
+    cy.get('.rs-popup-container').should('be.visible');
   });
 });
