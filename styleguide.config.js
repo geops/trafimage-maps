@@ -59,6 +59,11 @@ module.exports = {
           content: 'src/examples/Construction/README.md',
           exampleMode: 'expand',
         },
+        {
+          name: 'Infrastruktur Betriebsregionen',
+          content: 'src/examples/Betriebsregionen/README.md',
+          exampleMode: 'expand',
+        },
       ],
     },
   ],
