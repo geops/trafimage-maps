@@ -23,7 +23,7 @@
     "i18next-xhr-backend": "3.2.2",
     "mapbox-gl": "1.11.1",
     "mobility-toolbox-js": "1.2.17",
-    "node-sass": "4.14.1",
+    "node-sass": "4.13.1",
     "ol": "6.5.0",
     "proj4": "2.7.2",
     "prop-types": "15.7.2",
