@@ -28,6 +28,8 @@ import defaultBaseLayers, {
   tochtergesellschaftenSBB,
   gewässer,
   uebrigeBahnen,
+  betriebsRegionen,
+  betriebsRegionenVisible,
   netzkarteEisenbahninfrastruktur,
   zweitausbildungAbroad,
   zweitausbildungPois,
@@ -200,6 +202,7 @@ export const infrastruktur = {
     netzkarteEisenbahninfrastruktur,
     gewässer,
     grenzen,
+    betriebsRegionen,
     uebrigeBahnen,
     tochtergesellschaftenSBB,
     kilometrageLayer,
@@ -207,6 +210,20 @@ export const infrastruktur = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
   searches: defaultSearches,
+};
+
+export const betriebsregionen = {
+  name: 'ch.sbb.infrastruktur',
+  key: 'ch.sbb.infrastruktur',
+  elements: {
+    ...defaultElements,
+    header: false,
+    search: false,
+    drawMenu: false,
+    popup: true,
+  },
+  layers: [netzkarteEisenbahninfrastruktur, betriebsRegionenVisible],
+  projection: 'EPSG:3857',
 };
 
 export const regionenkarte = {
@@ -298,6 +315,7 @@ const topics = {
     tina,
   ],
   stelen: [netzkarteStelen],
+  betriebsregionen: [betriebsregionen],
 };
 
 export const getTopicConfig = (name) => {
