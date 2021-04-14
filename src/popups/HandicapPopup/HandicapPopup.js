@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import { useTranslation } from 'react-i18next';
 import PopupElement from './HandicapPopupElement';
+import Link from '../../components/Link';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -124,6 +125,29 @@ function HandicapPopup({ feature }) {
     {
       label: 'Aktuell',
       propertyName: `aktuell_${language}`,
+    },
+    {
+      element: properties.barrierefreie_touristische_Angebote?.length && (
+        <div className="wkp-handicap-popup-element" key="TouristischeAngebote">
+          <div className="wkp-handicap-popup-field-title">
+            {t('Barrierefreie touristische Angebote')}
+          </div>
+          {properties.barrierefreie_touristische_Angebote.map(
+            (offer, index) => {
+              return (
+                <span>
+                  <Link key={offer.label} href={offer.url}>
+                    {offer.label}
+                  </Link>
+                  {index !==
+                    properties.barrierefreie_touristische_Angebote.length -
+                      1 && <br />}
+                </span>
+              );
+            },
+          )}
+        </div>
+      ),
     },
   ];
 
