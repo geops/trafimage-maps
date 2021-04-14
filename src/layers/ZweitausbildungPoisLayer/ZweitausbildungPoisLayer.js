@@ -1,215 +1,247 @@
-import { VectorLayer } from 'mobility-toolbox-js/ol';
-import OLVectorLayer from 'ol/layer/Vector';
-import OLVectorSource from 'ol/source/Vector';
-import ClusterSource from 'ol/source/Cluster';
-import GeoJSON from 'ol/format/GeoJSON';
-import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
-import Text from 'ol/style/Text';
-import Fill from 'ol/style/Fill';
-import Circle from 'ol/style/Circle';
-import Stroke from 'ol/style/Stroke';
-import { getVectorContext } from 'ol/render';
-import { unByKey } from 'ol/Observable';
-import { easeOut } from 'ol/easing';
+import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { GeoJSON } from 'ol/format';
 
 /**
  * Layer for zweitausbildung pois
- * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
  * @private
  * @class
  * @param {Object} [options] Layer options.
  */
-class ZweitausbildungPoisLayer extends VectorLayer {
+class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const olLayer = new OLVectorLayer({
-      style: (f) => this.style(f),
-      zIndex: options.zIndex || 0,
-    });
-
+    const { color, icon, filter } = options.properties.zweitausbildung;
+    const suffixId = filter[1] + filter[2];
+    const clusterSourceId = `clusters-${suffixId}`;
+    const highlightSourceId = 'highlight';
+    const styleLayers = [
+      {
+        id: clusterSourceId,
+        type: 'circle',
+        source: clusterSourceId,
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': color,
+          'circle-radius': [
+            '*',
+            9,
+            ['sqrt', ['/', ['+', ['get', 'point_count'], 15], ['pi']]],
+          ],
+        },
+      },
+      {
+        id: `${clusterSourceId}-count`,
+        type: 'symbol',
+        source: clusterSourceId,
+        filter: ['has', 'point_count'],
+        paint: {
+          'text-color': 'rgba(255,255,255,1)',
+        },
+        layout: {
+          'text-field': '{point_count_abbreviated}',
+          'text-font': ['Arial Unicode MS Bold'],
+          'text-size': 14,
+        },
+      },
+      {
+        id: `unclustered-point-${suffixId}`,
+        type: 'symbol',
+        source: clusterSourceId,
+        filter: ['!', ['has', 'point_count']],
+        layout: {
+          'icon-image': icon,
+        },
+      },
+      {
+        id: highlightSourceId,
+        source: highlightSourceId,
+        type: 'circle',
+        paint: {
+          'circle-color': 'rgba(50, 50, 50, 0.8)',
+          'circle-radius': 0,
+          'circle-radius-transition': {
+            duration: 300,
+            delay: 0,
+          },
+        },
+      },
+    ];
     super({
       ...options,
-      olLayer,
+      styleLayers,
+      queryRenderedLayersFilter: ({ id }) =>
+        `unclustered-point-${suffixId}` === id || clusterSourceId === id,
     });
 
-    this.styleCache = {};
-    this.setVisible(this.visible);
-
-    this.zweitProps = this.get('zweitausbildung') || {};
-    this.color = this.zweitProps.color || 'rgba(0, 61, 133, 0.8)';
-    const viewparams = this.zweitProps.viewparams
-      ? `viewparams=${this.zweitProps.viewparams}&`
-      : '';
-
-    this.source = new OLVectorSource({
-      format: new GeoJSON(),
-      loader: () => {
-        fetch(
-          `${this.geoServerUrl}?` +
-            'service=WFS&version=1.0.0&request=GetFeature&' +
-            'typeName=trafimage:zweitausbildung_pois_qry&' +
-            `srsName=EPSG:3857&${viewparams}` +
-            'outputFormat=application/json',
-        )
-          .then((data) => data.json())
-          .then((data) => {
-            const format = new GeoJSON();
-            const features = format.readFeatures(data);
-            this.source.clear();
-            this.source.addFeatures(features);
-          });
+    this.clusterSource = {
+      id: clusterSourceId,
+      type: 'geojson',
+      cluster: true,
+      clusterRadius: 75, // Radius of each cluster when clustering points.
+      data: {
+        type: 'FeatureCollection',
+        features: [],
       },
+    };
+    this.highlightSource = {
+      id: highlightSourceId,
+      type: 'geojson',
+      data: {
+        type: 'FeatureCollection',
+        features: [],
+      },
+    };
+    this.sources = [this.clusterSource, this.highlightSource];
+    this.filter = filter;
+    this.updateTimeout = null;
+    this.format = new GeoJSON({
+      dataProjection: 'EPSG:4326',
+      featureProjection: 'EPSG:3857',
     });
-
-    olLayer.setSource(
-      new ClusterSource({
-        distance: 70,
-        source: this.source,
-      }),
-    );
-
-    this.animate = this.animate.bind(this);
-  }
-
-  setGeoServerUrl(geoServerUrl) {
-    this.geoServerUrl = geoServerUrl;
-  }
-
-  setStaticFilesUrl(staticFilesUrl) {
-    this.staticFilesUrl = staticFilesUrl;
-  }
-
-  init(map) {
-    super.init(map);
-
-    this.olLayerHighlight = new OLVectorLayer({
-      map,
-      // Use a dummy geometry to avoid rendering the default style
-      // under the animation circle.
-      // With a null style or an empty new Style(),
-      // the postrender callback function would not be called.
-      style: new Style({
-        image: new Circle(),
-      }),
-      source: new OLVectorSource(),
-    });
-
-    this.olLayerHighlight.getSource().on('addfeature', () => {
-      this.animationStartTime = new Date().getTime();
-      unByKey(this.postrenderKey);
-      this.postrenderKey = this.olLayerHighlight.on('postrender', this.animate);
-    });
+    this.onIdle = this.onIdle.bind(this);
   }
 
   /**
-   * Animate the highlight feature
-   * based on https://openlayers.org/en/latest/examples/feature-animation.html
+   * @override
    */
-  animate(event) {
-    const duration = 200;
-    const maxRadius = 14;
-    const color = this.highlightFeature.get('color') || 'rgba(50, 50, 50, 0.8)';
+  init(map) {
+    super.init(map);
 
-    const elapsed = event.frameState.time - this.animationStartTime;
-
-    if (elapsed < 0) {
-      return;
-    }
-
-    const elapsedRatio = Math.min(elapsed, duration) / duration;
-    // radius will be >= 1 at start and maxRadius+1 at end
-    const radius = easeOut(elapsedRatio) * maxRadius + 1;
-
-    const style = new Style({
-      image: new Circle({
-        fill: new Fill({
-          color,
-        }),
-        radius,
+    this.olListenersKeys.push(
+      this.on('change:visible', () => {
+        this.updateClusterSource();
       }),
-      stroke: new Stroke({
-        color,
-        width: 8,
+      this.map.on('moveend', () => {
+        this.mapboxLayer.mbMap.once('idle', this.onIdle);
       }),
-      fill: new Fill({
-        color,
-      }),
-    });
-
-    const vectorContext = getVectorContext(event);
-    vectorContext.setStyle(style);
-    vectorContext.drawGeometry(this.highlightFeature.getGeometry().clone());
-
-    if (elapsed > duration) {
-      unByKey(this.postrenderKey);
-      return;
-    }
-
-    // Tell OpenLayers to continue postrender animation
-    this.map.render();
+    );
   }
 
-  style(feature) {
-    const features = feature.get('features');
-    const count = feature.get('features').length;
-    const cacheKey = count;
+  /**
+   * @override
+   */
+  terminate(map) {
+    window.clearTimeout(this.updateTimeout);
+    const { mbMap } = this.mapboxLayer;
+    if (mbMap) {
+      mbMap.off('idle', this.onIdle);
+      this.removeSources();
+    }
+    super.terminate(map);
+  }
 
-    for (let i = 0; i < count; i += 1) {
-      if (features[i].get('highlight')) {
-        this.highlightFeature = features[i];
-        this.olLayerHighlight.getSource().clear();
-        this.olLayerHighlight.getSource().addFeature(this.highlightFeature);
+  /**
+   * On Mapbox map load callback function. Add style sources then style layers.
+   * @override
+   */
+  onLoad() {
+    this.addSources();
+    super.onLoad();
+    this.updateClusterSource();
+  }
+
+  /**
+   * Callback when the map is on idle state after a moveend event.
+   */
+  onIdle() {
+    window.clearTimeout(this.updateTimeout);
+    this.updateTimeout = window.setTimeout(() => {
+      this.updateClusterSource();
+    }, 50);
+  }
+
+  // Add sources for features using clustering and for highligting.
+  addSources() {
+    if (!this.mapboxLayer.mbMap) {
+      return;
+    }
+    const { mbMap } = this.mapboxLayer;
+
+    this.sources.forEach((source) => {
+      const { id } = source;
+      if (!mbMap.getSource(id)) {
+        const withoutId = { ...source };
+        delete withoutId.id;
+        mbMap.addSource(id, withoutId);
       }
+    });
+  }
+
+  // Remove sources added by addSources().
+  removeSources() {
+    if (!this.mapboxLayer.mbMap) {
+      return;
+    }
+    const { mbMap } = this.mapboxLayer;
+    this.sources.forEach((source) => {
+      const { id } = source;
+      if (mbMap.getSource(id)) {
+        mbMap.removeSource(id);
+      }
+    });
+  }
+
+  // Upodate sources for features with multiple lines.
+  updateClusterSource() {
+    if (!this.visible || !this.map || !this.mapboxLayer.mbMap) {
+      return;
+    }
+    const { mbMap } = this.mapboxLayer;
+    const source = mbMap.getSource(this.clusterSource.id);
+    if (!source) {
+      return;
     }
 
-    if (!this.styleCache[cacheKey]) {
-      if (count === 1) {
-        this.styleCache[cacheKey] = [
-          new Style({
-            zIndex: 2,
-            radius: 14,
-            image: new Circle({
-              radius: 14,
-              fill: new Fill({
-                color: this.color,
-              }),
-            }),
-          }),
-          new Style({
-            zIndex: 3,
-            image: new Icon({
-              src: `${this.staticFilesUrl}/img/layers/zweitausbildung/poi.png`,
-            }),
-          }),
-        ];
-      } else {
-        const radius = 9 * Math.sqrt((count + 15) / Math.PI);
-
-        this.styleCache[cacheKey] = [
-          new Style({
-            zIndex: 3,
-            text: new Text({
-              textBaseline: 'middle',
-              textAlign: 'center',
-              offsetY: 0,
-              text: count.toString(),
-              fill: new Fill({
-                color: 'rgba(255, 255, 255, 1)',
-              }),
-              font: 'bold 14px Arial, Verdana, Helvetica, sans-serif',
-            }),
-            image: new Circle({
-              radius,
-              fill: new Fill({
-                color: this.color,
-              }),
-            }),
-          }),
-        ];
-      }
+    let features;
+    try {
+      features = mbMap.querySourceFeatures('ch.sbb.zweitausbildung_pois', {
+        sourceLayer: 'ch.sbb.zweitausbildung_pois',
+        filter: this.filter,
+      });
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      // console.error(e);
     }
 
-    return this.styleCache[cacheKey];
+    if (!features?.length) {
+      return;
+    }
+
+    // Remove duplicated features.
+    const ids = [];
+    const uniqueFeatures = [];
+    features.forEach((linee) => {
+      const indexOf = ids.indexOf(linee.id);
+      if (indexOf === -1) {
+        ids.push(linee.id);
+        uniqueFeatures.push(linee);
+      }
+    });
+
+    source.setData({
+      type: 'FeatureCollection',
+      features: uniqueFeatures,
+    });
+  }
+
+  highlightFromPopup(feature, toggle) {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
+    }
+
+    const data = this.format.writeFeaturesObject(toggle ? [feature] : []);
+    const source = mbMap.getSource(this.highlightSource.id);
+    if (source) {
+      source.setData(data);
+    }
+
+    // Launch animation
+    mbMap.setPaintProperty(
+      this.highlightSource.id,
+      'circle-radius',
+      toggle ? 14 : 0,
+    );
   }
 }
 

@@ -1,110 +1,176 @@
-import { VectorLayer } from 'mobility-toolbox-js/ol';
-import OLVectorLayer from 'ol/layer/Vector';
-import OLVectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import Style from 'ol/style/Style';
-import Stroke from 'ol/style/Stroke';
-import layerHelper from '../layerHelper';
+import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import lines from './lines';
+import zweitTilestats from './zweitausbildung_tilestats.json';
+
+const sourceId = 'ch.sbb.zweitausbildung';
+const sourceLayer = 'ch.sbb.zweitausbildung';
 
 /**
  * Layer for zweitausbildung routes
- * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/VectorLayer%20js~VectorLayer%20html}
+ * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
  * @private
  * @class
  * @param {Object} [options] Layer options.
  */
-class ZweitausbildungRoutesLayer extends VectorLayer {
+class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
+  // Get mapbox line-color expression.
+  static getLineColorExpr = (lineProperty) => {
+    const expr = ['case'];
+    Object.entries(lines).forEach(([key, { property, color }]) => {
+      if (property === lineProperty) {
+        expr.push(['==', ['get', property], key]);
+        expr.push(color);
+      }
+    });
+    expr.push('rgba(0, 0, 0, 0)');
+    return expr;
+  };
+
+  // Generate dashed styles for features with multiple lines in the label.
+  static generateDashedStyleLayers(line, property) {
+    const styleLayers = [];
+    const linesLabels = line.split(',');
+    linesLabels.forEach((label, index) => {
+      const color = lines[label]?.color;
+      if (!color) {
+        // eslint-disable-next-line no-console
+        console.log(
+          `There is no color defined for ${label}, available labels are `,
+          lines,
+        );
+        return;
+      }
+      styleLayers.push({
+        id: `${line}${index}`,
+        source: sourceId,
+        'source-layer': sourceLayer,
+        type: 'line',
+        filter: ['==', line, ['get', property]],
+        paint: {
+          'line-color': color,
+          'line-width': 4,
+          'line-dasharray': [(linesLabels.length - index) * 2, index * 2],
+        },
+      });
+    });
+    return styleLayers;
+  }
+
   /**
-   * Create a dashed line style for the given colors
-   * @param  {String} colors Semicolon separated list of colors
-   * @return {Array<ol.style.Style>} Style
+   * Load the tilestats data to get all the possible values for hauptlinie or touristische_linie property.
    */
-  static createDashedLinesStyle(colors) {
-    const style = [];
-    const colorArray = colors.split(';');
-    const len = 8;
-
-    for (let i = 0; i < colorArray.length; i += 1) {
-      style.push(
-        new Style({
-          stroke: new Stroke({
-            color: colorArray[i],
-            width: 4,
-            lineCap: 'butt',
-            lineDash: [0, i * len, len, (colorArray.length - i - 1) * len],
-          }),
-        }),
-      );
-    }
-
-    return style;
+  static getDashedStyleLayers(property) {
+    const styleLayers = [];
+    const values = zweitTilestats.tilestats.layers
+      .find((layer) => layer.layer === sourceLayer)
+      ?.attributes.find((attr) => attr.attribute === property)?.values;
+    values.forEach((value) => {
+      const split = value.split(',');
+      if (split.length > 1) {
+        styleLayers.push(
+          ...ZweitausbildungRoutesLayer.generateDashedStyleLayers(
+            value,
+            property,
+          ),
+        );
+      }
+    });
+    return styleLayers;
   }
 
   constructor(options = {}) {
-    const olLayer = new OLVectorLayer({
-      style: (f, r) => this.style(f, r),
-    });
-
-    super({
-      ...options,
-      olLayer,
-    });
-
-    this.styleCache = {};
-    this.setVisible(this.visible);
-
-    this.zweitProps = this.get('zweitausbildung') || {};
-    const layerParam = this.zweitProps.layer
-      ? `layer=${this.zweitProps.layer}&`
-      : '';
-
-    this.source = new OLVectorSource({
-      format: new GeoJSON(),
-      loader: () => {
-        fetch(
-          `${this.geoJsonCacheUrl}?` +
-            `${layerParam}workspace=trafimage` +
-            '&srsName=EPSG:3857&geoserver=wkp',
-        )
-          .then((data) => data.json())
-          .then((data) => {
-            const format = new GeoJSON();
-            const features = format.readFeatures(data);
-            this.olLayer.getSource().clear();
-            this.olLayer.getSource().addFeatures(features);
-          });
+    const { property } = options.properties.zweitausbildung || {};
+    const defautStyle = {
+      type: 'line',
+      filter: ['has', property],
+      paint: {
+        'line-color': ZweitausbildungRoutesLayer.getLineColorExpr(property),
+        'line-width': 4,
       },
-    });
+      layout: {
+        'line-cap': 'round',
+      },
+    };
+    const styleLayers = [
+      // Lines with only one color.
+      {
+        ...defautStyle,
+        id: options.name || options.key,
+        source: sourceId,
+        'source-layer': sourceLayer,
+      },
+      // Lines with a dashed style.
+      ...ZweitausbildungRoutesLayer.getDashedStyleLayers(property),
+    ];
 
-    olLayer.setSource(this.source);
+    // if a line has others sources to add, we add the corresponding style layer.
+    Object.values(lines).forEach(
+      ({ property: prop, extraSources, extraStyleLayers = [] }) => {
+        if (prop !== property || !extraSources) {
+          return;
+        }
+        Object.keys(extraSources).forEach((key, index) => {
+          styleLayers.push({
+            ...defautStyle,
+            id: key,
+            source: key,
+            ...(extraStyleLayers[index] || {}),
+          });
+        });
+      },
+    );
+
+    super({ ...options, styleLayers });
+    this.property = property;
   }
 
-  setGeoJsonUrl(geoJsonCacheUrl) {
-    this.geoJsonCacheUrl = geoJsonCacheUrl;
-  }
-
-  style(feature, resolution) {
-    const colors = feature.get('colors');
-    const network = feature.get('network');
-
-    const currentNetwork = `trackit${layerHelper.getOldGeneralization(
-      resolution,
-    )}`;
-    const visible = network === currentNetwork;
-
-    const styleName = visible ? colors : visible;
-
-    if (!this.styleCache[styleName]) {
-      if (visible) {
-        this.styleCache[
-          styleName
-        ] = ZweitausbildungRoutesLayer.createDashedLinesStyle(colors);
-      } else {
-        this.styleCache[styleName] = new Style();
-      }
+  /**
+   * On Mapbox map load callback function. Add the zweitausbildung data source then style layers.
+   * @ignore
+   */
+  onLoad() {
+    const { mbMap } = this.mapboxLayer;
+    const source = mbMap.getSource(sourceId);
+    if (!source) {
+      mbMap.addSource(sourceId, {
+        type: 'vector',
+        url: this.dataUrl,
+      });
     }
 
-    return this.styleCache[styleName];
+    // if the selected lines as extra sources we add it now.
+    Object.entries(lines).forEach(([key, { property, extraSources }]) => {
+      if (property !== this.property || !extraSources) {
+        return;
+      }
+
+      Object.entries(extraSources).forEach(([sourceKey, sourceToAdd]) => {
+        if (!mbMap.getSource(sourceKey)) {
+          // First we add a property to the features so the lines will be automatically highlighted.
+          sourceToAdd.data.features.forEach((feat) => {
+            // eslint-disable-next-line no-param-reassign
+            feat.properties[this.property] = key;
+          });
+          mbMap.addSource(sourceKey, sourceToAdd);
+        }
+      });
+    });
+    super.onLoad();
+  }
+
+  setStyleConfig(url, key, apiKeyName) {
+    if (url && url !== this.url) {
+      this.url = url;
+    }
+    if (key && key !== this.apiKey) {
+      this.apiKey = key;
+    }
+    if (apiKeyName && apiKeyName !== this.apiKeyName) {
+      this.apiKeyName = apiKeyName;
+    }
+    if ((!url && !key && !apiKeyName) || !this.styleUrl) {
+      this.dataUrl = `${this.url}/data/ch.sbb.zweitausbildung.json?${apiKeyName}=${key}`;
+    }
   }
 }
 
