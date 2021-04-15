@@ -127,12 +127,12 @@ function HandicapPopup({ feature }) {
       propertyName: `aktuell_${language}`,
     },
     {
-      element: properties.barrierefreie_touristische_Angebote?.length && (
+      element: properties.barrierefreie_touristische_angebote?.length && (
         <div className="wkp-handicap-popup-element" key="TouristischeAngebote">
           <div className="wkp-handicap-popup-field-title">
             {t('Barrierefreie touristische Angebote')}
           </div>
-          {properties.barrierefreie_touristische_Angebote.map(
+          {properties.barrierefreie_touristische_angebote.map(
             (offer, index) => {
               return (
                 <span>
@@ -140,7 +140,7 @@ function HandicapPopup({ feature }) {
                     {offer.label}
                   </Link>
                   {index !==
-                    properties.barrierefreie_touristische_Angebote.length -
+                    properties.barrierefreie_touristische_angebote.length -
                       1 && <br />}
                 </span>
               );
