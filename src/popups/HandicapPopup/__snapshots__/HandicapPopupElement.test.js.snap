@@ -60,8 +60,8 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       >
         <span>
           www.test.ch
+           
         </span>
-         
         <svg>
           Link.svg
         </svg>
@@ -95,8 +95,8 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       >
         <span>
           www.geops.ch
+           
         </span>
-         
         <svg>
           Link.svg
         </svg>

@@ -16,7 +16,6 @@ const ZweitausbildungRoutesSubLayerInfo = ({
 }) => {
   const { infos } = properties.get('zweitausbildung');
   const { title, desc, legend } = infos;
-
   return (
     <div className="wkp-zweitausbildung-routes-sub-layer-info">
       {t(title)}

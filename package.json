@@ -1,6 +1,6 @@
 {
   "name": "trafimage-maps",
-  "version": "1.5.8",
+  "version": "1.5.10",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -23,7 +23,7 @@
     "i18next-xhr-backend": "3.2.2",
     "mapbox-gl": "1.11.1",
     "mobility-toolbox-js": "1.2.17",
-    "node-sass": "4.13.1",
+    "node-sass": "4.14.1",
     "ol": "6.3.1",
     "proj4": "2.7.2",
     "prop-types": "15.7.2",

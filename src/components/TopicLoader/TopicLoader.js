@@ -277,6 +277,7 @@ class TopicLoader extends Component {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
       }
+
       if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(
           `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,

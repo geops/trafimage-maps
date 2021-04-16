@@ -22,7 +22,7 @@ const ZweitausbildungSubLayerInfo = ({ t, properties, staticFilesUrl }) => {
       ) : null}
       <div className="wkp-zweitausbildung-sub-layer-info-legend">
         {legend.map((item) => (
-          <div>
+          <div key={item.name}>
             <img
               src={`${staticFilesUrl}/img/layers/zweitausbildung/${item.image}`}
               draggable="false"

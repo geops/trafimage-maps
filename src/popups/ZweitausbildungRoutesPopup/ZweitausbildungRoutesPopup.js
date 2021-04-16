@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
+import ZweitausbildungRoutesHighlightLayer from '../../layers/ZweitausbildungRoutesHighlightLayer';
 
 import './ZweitausbildungRoutesPopup.scss';
 
 const propTypes = {
+  layer: PropTypes.instanceOf(ZweitausbildungRoutesHighlightLayer).isRequired,
   feature: PropTypes.instanceOf(Feature).isRequired,
   t: PropTypes.func.isRequired,
   staticFilesUrl: PropTypes.string.isRequired,
@@ -16,81 +18,48 @@ class ZweitausbildungRoutesPopup extends PureComponent {
   constructor(props) {
     super(props);
 
-    // Sorted unique features by the unique label
-    const singleFeatures = props.feature
-      .get('features')
-      .filter((feat, pos, arr) => {
-        return (
-          arr.map((f) => f.get('label')).indexOf(feat.get('label')) === pos
-        );
-      })
-      .sort((a, b) => (a.get('label') > b.get('label') ? 1 : -1));
-
     this.state = {
-      features: singleFeatures,
+      labelSelected: null,
     };
   }
 
   componentDidMount() {
-    const { features } = this.state;
-
-    // Highlight the first feature
-    this.highlight(features[0]);
+    const { layer, feature } = this.props;
+    const labels = feature.get(layer.property).split(',');
+    layer.onSelect(labels[0], true);
+    layer.forceRenderList();
+    this.setState({ labelSelected: labels[0] });
   }
 
   componentWillUnmount() {
-    const { feature } = this.props;
-    const highlightFeatures = feature.get('highlightFeatures');
-
-    // Update the features in the map
-    for (let i = 0; i < highlightFeatures.length; i += 1) {
-      highlightFeatures[i].set('highlight', false);
-    }
-  }
-
-  highlight(singleFeature) {
-    const { feature } = this.props;
-    const { features } = this.state;
-    const highlightFeatures = feature.get('highlightFeatures');
-
-    // Update the features in the popup
-    const singleFeatures = features;
-    for (let j = 0; j < singleFeatures.length; j += 1) {
-      singleFeatures[j].set('highlight', singleFeatures[j] === singleFeature);
-    }
-
-    // Update the features in the map, depending on the unique label
-    for (let i = 0; i < highlightFeatures.length; i += 1) {
-      highlightFeatures[i].set(
-        'highlight',
-        highlightFeatures[i].get('label') === singleFeature.get('label'),
-      );
-      highlightFeatures[i].changed();
-    }
-
-    this.setState({ features: [...singleFeatures] });
+    const { layer } = this.props;
+    layer.onSelect();
+    layer.forceRenderList();
   }
 
   render() {
-    const { t, staticFilesUrl } = this.props;
-    const { features } = this.state;
+    const { labelSelected } = this.state;
+    const { t, staticFilesUrl, layer, feature } = this.props;
+    const labels = feature.get(layer.property).split(',');
 
     return (
       <div className="wkp-zweitausbildung-routes-popup">
-        {features.map((singleFeature) => (
+        {labels.map((label) => (
           <div
             className={`wkp-zweitausbildung-routes-popup-row${
-              singleFeature.get('highlight') ? ' highlight' : ''
+              labelSelected === label ? ' highlight' : ''
             }`}
-            key={singleFeature.get('label')}
-            onMouseEnter={() => this.highlight(singleFeature)}
+            key={label}
+            onMouseEnter={() => {
+              layer.onSelect(label);
+              layer.forceRenderList();
+              this.setState({ labelSelected: label });
+            }}
           >
-            {singleFeature.get('line_number') ? (
+            {layer.lines[label].shortname ? (
               <span className="wkp-zweitausbildung-routes-popup-image">
                 <img
-                  src={`${staticFilesUrl}/img/layers/zweitausbildung/${singleFeature.get(
-                    'line_number',
-                  )}.png`}
+                  src={`${staticFilesUrl}/img/layers/zweitausbildung/${layer.lines[label].shortname}.png`}
                   height="16"
                   width="42"
                   draggable="false"
@@ -98,11 +67,9 @@ class ZweitausbildungRoutesPopup extends PureComponent {
                 />
               </span>
             ) : null}
-            <b>{singleFeature.get('bezeichnung')}</b>
+            <b>{label.split(':')[0]}</b>
             <div className="wkp-zweitausbildung-routes-popup-desc">
-              {singleFeature.get('viadescription')
-                ? singleFeature.get('viadescription')
-                : singleFeature.get('description')}
+              {label.split(':')[1]}
             </div>
           </div>
         ))}
