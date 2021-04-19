@@ -16,10 +16,6 @@ function HandicapPopup({ feature }) {
   const { t } = useTranslation();
   const refBody = useRef();
 
-  // '[{"label":"geOps","url":"https://geops.de/"}, {"label":"geOps 1234565fsdfsdf","url":"https://geops.ch"}]'
-
-  properties.barrierefreie_touristische_angebote = [];
-
   const parsedTouristOffers =
     properties.barrierefreie_touristische_angebote &&
     (typeof properties.barrierefreie_touristische_angebote === 'string' ||
