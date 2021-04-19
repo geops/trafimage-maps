@@ -16,6 +16,17 @@ function HandicapPopup({ feature }) {
   const { t } = useTranslation();
   const refBody = useRef();
 
+  // '[{"label":"geOps","url":"https://geops.de/"}, {"label":"geOps 1234565fsdfsdf","url":"https://geops.ch"}]'
+
+  properties.barrierefreie_touristische_angebote = [];
+
+  const parsedTouristOffers =
+    properties.barrierefreie_touristische_angebote &&
+    (typeof properties.barrierefreie_touristische_angebote === 'string' ||
+      properties.barrierefreie_touristische_angebote instanceof String) // Ensure property value is defined and of type string
+      ? JSON.parse(properties.barrierefreie_touristische_angebote)
+      : [];
+
   useEffect(() => {
     // focus first element to trigger screenreader to read its content:
     // https://www.w3.org/TR/wai-aria-practices-1.1/examples/dialog-modal/dialog.html
@@ -127,25 +138,19 @@ function HandicapPopup({ feature }) {
       propertyName: `aktuell_${language}`,
     },
     {
-      element: properties.barrierefreie_touristische_angebote?.length && (
+      element: parsedTouristOffers?.length && (
         <div className="wkp-handicap-popup-element" key="TouristischeAngebote">
           <div className="wkp-handicap-popup-field-title">
             {t('Barrierefreie touristische Angebote')}
           </div>
-          {properties.barrierefreie_touristische_angebote.map(
-            (offer, index) => {
-              return (
-                <span>
-                  <Link key={offer.label} href={offer.url}>
-                    {offer.label}
-                  </Link>
-                  {index !==
-                    properties.barrierefreie_touristische_angebote.length -
-                      1 && <br />}
-                </span>
-              );
-            },
-          )}
+          {parsedTouristOffers.map((offer, index) => {
+            return (
+              <span key={offer.label}>
+                <Link href={offer.url}>{offer.label}</Link>
+                {index !== parsedTouristOffers.length - 1 && <br />}
+              </span>
+            );
+          })}
         </div>
       ),
     },
