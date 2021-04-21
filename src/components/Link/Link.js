@@ -13,7 +13,7 @@ const defaultProps = {};
 
 const Link = ({ href, children }) => (
   <a className="wkp-link" href={href} rel="noopener noreferrer" target="_blank">
-    <span>{children}</span>&nbsp;
+    <span>{children}&nbsp;</span>
     <LinkIcon />
   </a>
 );

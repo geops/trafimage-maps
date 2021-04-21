@@ -118,6 +118,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             key={info.layer.key}
             cartaroOldUrl={cartaroOldUrl}
             t={t}
+            layer={info.layer}
             feature={features[featureIndex]}
             language={language}
             appBaseUrl={appBaseUrl}

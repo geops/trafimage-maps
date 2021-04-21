@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import { useTranslation } from 'react-i18next';
 import PopupElement from './HandicapPopupElement';
+import Link from '../../components/Link';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -14,6 +15,13 @@ function HandicapPopup({ feature }) {
   const properties = feature.getProperties();
   const { t } = useTranslation();
   const refBody = useRef();
+
+  const parsedTouristOffers =
+    properties.barrierefreie_touristische_angebote &&
+    (typeof properties.barrierefreie_touristische_angebote === 'string' ||
+      properties.barrierefreie_touristische_angebote instanceof String) // Ensure property value is defined and of type string
+      ? JSON.parse(properties.barrierefreie_touristische_angebote)
+      : [];
 
   useEffect(() => {
     // focus first element to trigger screenreader to read its content:
@@ -41,8 +49,14 @@ function HandicapPopup({ feature }) {
   // build string for equipment
   const equipment = [];
 
+  const treppenfreiString = `${t('treppenfrei')}${
+    properties[bfEquipmentExceptions.rampe]
+      ? ` (${properties[bfEquipmentExceptions.rampe]})`
+      : ''
+  }`;
+
   equipment.unshift(
-    properties.treppenfrei ? t('treppenfrei') : t('nicht treppenfrei'),
+    properties.treppenfrei ? treppenfreiString : t('nicht treppenfrei'),
   );
 
   Object.keys(bfEquipmentExceptions).forEach((key) => {
@@ -118,6 +132,23 @@ function HandicapPopup({ feature }) {
     {
       label: 'Aktuell',
       propertyName: `aktuell_${language}`,
+    },
+    {
+      element: parsedTouristOffers?.length && (
+        <div className="wkp-handicap-popup-element" key="TouristischeAngebote">
+          <div className="wkp-handicap-popup-field-title">
+            {t('Barrierefreie touristische Angebote')}
+          </div>
+          {parsedTouristOffers.map((offer, index) => {
+            return (
+              <span key={offer.label}>
+                <Link href={offer.url}>{offer.label}</Link>
+                {index !== parsedTouristOffers.length - 1 && <br />}
+              </span>
+            );
+          })}
+        </div>
+      ),
     },
   ];
 

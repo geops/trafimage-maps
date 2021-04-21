@@ -1,4 +1,3 @@
-
 import lang from '../../src/lang/de.json';
 
 describe('Handicap Topic', () => {
@@ -27,7 +26,7 @@ describe('Handicap Topic', () => {
       .type('r')
       .type('n');
 
-    cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true});
+    cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
 
     // Popup is opened.
     cy.get('.rs-popup-container').should('be.visible');
