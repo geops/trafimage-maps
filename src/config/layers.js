@@ -22,7 +22,6 @@ import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
-import RegionenkarteSegmentHighlightLayer from '../layers/RegionenkarteSegmentHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
 
 proj4.defs(
@@ -1359,56 +1358,133 @@ export const zweitausbildungRoutes = new Layer({
   ],
 });
 
-export const regionenkartePublicSegment = new TrafimageGeoServerWMSLayer({
-  name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
+// export const regionenkartePublicSegment = new TrafimageGeoServerWMSLayer({
+//   name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
+//   visible: true,
+//   isQueryable: false,
+//   zIndex: 1,
+//   olLayer: new TileLayer({
+//     source: new TileWMSSource({
+//       crossOrigin: 'anonymous',
+//       params: {
+//         layers: 'trafimage:regionenkarte_av_segmente',
+//       },
+//       tileGrid: new TileGrid({
+//         extent: projectionExtent,
+//         resolutions: LayerHelper.getMapResolutions(),
+//         matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
+//       }),
+//     }),
+//   }),
+//   properties: {
+//     hasInfos: false,
+//     layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+//     // zweitausbildung: {
+//     //   infos: {
+//     //     title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
+//     //     legend: [
+//     //       {
+//     //         image: 'station_aufbau.png',
+//     //         name: 'ch.sbb.zweitausbildung.haltestellen-stations',
+//     //       },
+//     //       {
+//     //         image: 'station_aufbau_grenzstation.png',
+//     //         name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
+//     //       },
+//     //     ],
+//     //   },
+//     // },
+//   },
+//   children: [
+//     new RegionenkarteSegmentHighlightLayer({
+//       name: 'ch.sbb.regionenkarte.intern.av_segmente.public.highlight',
+//       visible: true,
+//       zIndex: 1,
+//       properties: {
+//         hasInfos: true,
+//         popupComponent: 'RegionenkarteSegmentPopup',
+//         useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
+//         hideInLegend: true,
+//         custom: {
+//           featureInfoLayer: 'regionenkarte_av_segmente_qry_xyr',
+//         },
+//       },
+//     }),
+//   ],
+// });
+
+export const anlagenverantwortliche = new TrafimageMapboxLayer({
+  name: 'ch.sbb.anlagenverantwortliche',
+  isBaseLayer: false,
   visible: true,
   isQueryable: false,
-  zIndex: 1,
-  olLayer: new TileLayer({
-    source: new TileWMSSource({
-      crossOrigin: 'anonymous',
-      params: {
-        layers: 'trafimage:regionenkarte_av_segmente',
-      },
-      tileGrid: new TileGrid({
-        extent: projectionExtent,
-        resolutions: LayerHelper.getMapResolutions(),
-        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'ch.sbb.anlagenverantwortliche',
   properties: {
     hasInfos: false,
-    layerInfoComponent: 'ZweitausbildungSubLayerInfo',
-    // zweitausbildung: {
-    //   infos: {
-    //     title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
-    //     legend: [
-    //       {
-    //         image: 'station_aufbau.png',
-    //         name: 'ch.sbb.zweitausbildung.haltestellen-stations',
-    //       },
-    //       {
-    //         image: 'station_aufbau_grenzstation.png',
-    //         name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
-    //       },
-    //     ],
-    //   },
-    // },
+    hideInLegend: true,
+  },
+});
+export const regionenkartePublicSegment = new MapboxStyleLayer({
+  name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
+  visible: true,
+  mapboxLayer: anlagenverantwortliche,
+  styleLayer: {
+    id: 'lines',
+    type: 'line',
+    source: 'ch.sbb.anlagenverantwortliche',
+    'source-layer': 'ch.sbb.anlagenverantwortliche',
+    paint: {
+      'line-color': [
+        'case',
+        ['==', ['get', 'region'], 'Ost'],
+        '#FFCC00',
+        ['==', ['get', 'region'], 'Mitte'],
+        '#A083C7',
+        ['==', ['get', 'region'], 'West'],
+        '#2F9F48',
+        ['==', ['get', 'region'], 'Süd'],
+        '#DC320A',
+        '#00ff00',
+      ],
+      'line-width': 2,
+    },
+  },
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'RegionenkartePublicLayerInfo',
+  },
+});
+
+export const regionenkarteOverlayGroup = new Layer({
+  name: 'ch.sbb.infrastruktur.overlay.group',
+  visible: true,
+  properties: {
+    hasInfos: true,
+    description: 'ch.sbb.infrastruktur.overlay.group-desc',
   },
   children: [
-    new RegionenkarteSegmentHighlightLayer({
-      name: 'ch.sbb.regionenkarte.intern.av_segmente.public.highlight',
+    new MapboxStyleLayer({
+      name: 'ch.sbb.infrastruktur.line_point',
       visible: true,
-      zIndex: 1,
+      mapboxLayer: netzkarteEisenbahninfrastruktur,
+      // styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
+      // queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
       properties: {
         hasInfos: true,
-        popupComponent: 'RegionenkarteSegmentPopup',
-        useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
-        hideInLegend: true,
-        custom: {
-          featureInfoLayer: 'regionenkarte_av_segmente_qry_xyr',
-        },
+        description: 'ch.sbb.infrastruktur.line_point-desc',
+      },
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.infrastruktur.betriebspunkte',
+      visible: true,
+      mapboxLayer: netzkarteEisenbahninfrastruktur,
+      // styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
+      // queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
+      properties: {
+        hasInfos: true,
+        description: 'ch.sbb.infrastruktur.betriebspunkte-desc',
       },
     }),
   ],

@@ -20,6 +20,7 @@ import ZweitausbildungLayerInfo from './ZweitausbildungLayerInfo';
 import ZweitausbildungRoutesSubLayerInfo from './ZweitausbildungRoutesSubLayerInfo';
 import ZweitausbildungSubLayerInfo from './ZweitausbildungSubLayerInfo';
 import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
+import RegionenkartePublicLayerInfo from './RegionenkartePublicLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -37,6 +38,7 @@ export default {
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
   RegionenkartePrivateTopicInfo,
+  RegionenkartePublicLayerInfo,
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,

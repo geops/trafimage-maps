@@ -35,9 +35,11 @@ import defaultBaseLayers, {
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
-  regionenkartePublicSegment,
   zweitausbildungStationsDataLayer,
   zweitausbildungPoisDataLayer,
+  anlagenverantwortliche,
+  regionenkartePublicSegment,
+  regionenkarteOverlayGroup,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -237,7 +239,12 @@ export const regionenkartePublic = {
     ...defaultElements,
     popup: true,
   },
-  layers: [dataLayer, netzkarteLayer, regionenkartePublicSegment],
+  layers: [
+    netzkarteEisenbahninfrastruktur,
+    anlagenverantwortliche,
+    regionenkarteOverlayGroup,
+    regionenkartePublicSegment,
+  ],
   // redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
