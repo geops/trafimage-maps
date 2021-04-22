@@ -244,6 +244,7 @@ export const regionenkartePublic = {
     anlagenverantwortliche,
     regionenkarteOverlayGroup,
     regionenkartePublicSegment,
+    kilometrageLayer,
   ],
   // redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',

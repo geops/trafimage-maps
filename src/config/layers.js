@@ -79,7 +79,7 @@ let osmPointsLayers = [];
 const olListenersKeys = [];
 
 const updateStations = (mbMap) => {
-  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
+  // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
   mbMap.once('idle', () => {
     const osmPointsRendered = mbMap
       .queryRenderedFeatures({
@@ -105,7 +105,7 @@ const updateStations = (mbMap) => {
 };
 
 // Get list of styleLayers applied to osm_points source.
-// We don't use 'once()' because when switching topics
+// We don"t use "once()" because when switching topics
 // (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
 dataLayer.on('load', () => {
   const { map, mbMap } = dataLayer;
@@ -760,7 +760,7 @@ export const constrUnterhalt = new Layer({
 let constrLayers = [];
 
 export const updateConstructions = (mbMap) => {
-  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
+  // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
   mbMap.once('idle', () => {
     const constrRendered = mbMap
       .queryRenderedFeatures({
@@ -957,7 +957,7 @@ export const tochtergesellschaftenSBB = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ id }) => {
-    // negative look behind regex doesn't work on all browsers.
+    // negative look behind regex doesn"t work on all browsers.
     return /_SBB/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
@@ -984,7 +984,7 @@ export const uebrigeBahnen = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ id }) => {
-    // negative look behind regex doesn't work on all browsers.
+    // negative look behind regex doesn"t work on all browsers.
     return /_KTU/.test(id) && id.indexOf('_only_') === -1;
   },
   properties: {
@@ -1359,15 +1359,15 @@ export const zweitausbildungRoutes = new Layer({
 });
 
 // export const regionenkartePublicSegment = new TrafimageGeoServerWMSLayer({
-//   name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
+//   name: "ch.sbb.regionenkarte.intern.av_segmente.public",
 //   visible: true,
 //   isQueryable: false,
 //   zIndex: 1,
 //   olLayer: new TileLayer({
 //     source: new TileWMSSource({
-//       crossOrigin: 'anonymous',
+//       crossOrigin: "anonymous",
 //       params: {
-//         layers: 'trafimage:regionenkarte_av_segmente',
+//         layers: "trafimage:regionenkarte_av_segmente",
 //       },
 //       tileGrid: new TileGrid({
 //         extent: projectionExtent,
@@ -1378,18 +1378,18 @@ export const zweitausbildungRoutes = new Layer({
 //   }),
 //   properties: {
 //     hasInfos: false,
-//     layerInfoComponent: 'ZweitausbildungSubLayerInfo',
+//     layerInfoComponent: "ZweitausbildungSubLayerInfo",
 //     // zweitausbildung: {
 //     //   infos: {
-//     //     title: 'ch.sbb.zweitausbildung.haltestellen.aufbau-title',
+//     //     title: "ch.sbb.zweitausbildung.haltestellen.aufbau-title",
 //     //     legend: [
 //     //       {
-//     //         image: 'station_aufbau.png',
-//     //         name: 'ch.sbb.zweitausbildung.haltestellen-stations',
+//     //         image: "station_aufbau.png",
+//     //         name: "ch.sbb.zweitausbildung.haltestellen-stations",
 //     //       },
 //     //       {
-//     //         image: 'station_aufbau_grenzstation.png',
-//     //         name: 'ch.sbb.zweitausbildung.haltestellen-border-stations',
+//     //         image: "station_aufbau_grenzstation.png",
+//     //         name: "ch.sbb.zweitausbildung.haltestellen-border-stations",
 //     //       },
 //     //     ],
 //     //   },
@@ -1397,16 +1397,16 @@ export const zweitausbildungRoutes = new Layer({
 //   },
 //   children: [
 //     new RegionenkarteSegmentHighlightLayer({
-//       name: 'ch.sbb.regionenkarte.intern.av_segmente.public.highlight',
+//       name: "ch.sbb.regionenkarte.intern.av_segmente.public.highlight",
 //       visible: true,
 //       zIndex: 1,
 //       properties: {
 //         hasInfos: true,
-//         popupComponent: 'RegionenkarteSegmentPopup',
+//         popupComponent: "RegionenkarteSegmentPopup",
 //         useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
 //         hideInLegend: true,
 //         custom: {
-//           featureInfoLayer: 'regionenkarte_av_segmente_qry_xyr',
+//           featureInfoLayer: "regionenkarte_av_segmente_qry_xyr",
 //         },
 //       },
 //     }),
@@ -1430,31 +1430,146 @@ export const regionenkartePublicSegment = new MapboxStyleLayer({
   name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
   visible: true,
   mapboxLayer: anlagenverantwortliche,
-  styleLayer: {
-    id: 'lines',
-    type: 'line',
-    source: 'ch.sbb.anlagenverantwortliche',
-    'source-layer': 'ch.sbb.anlagenverantwortliche',
-    paint: {
-      'line-color': [
-        'case',
-        ['==', ['get', 'region'], 'Ost'],
-        '#FFCC00',
-        ['==', ['get', 'region'], 'Mitte'],
-        '#A083C7',
-        ['==', ['get', 'region'], 'West'],
-        '#2F9F48',
-        ['==', ['get', 'region'], 'Süd'],
-        '#DC320A',
-        '#00ff00',
-      ],
-      'line-width': 2,
+  styleLayers: [
+    {
+      id: 'lines',
+      type: 'line',
+      source: 'ch.sbb.anlagenverantwortliche',
+      'source-layer': 'ch.sbb.anlagenverantwortliche',
+      paint: {
+        'line-color': [
+          'case',
+          ['==', ['get', 'region'], 'Ost'],
+          '#FFCC00',
+          ['==', ['get', 'region'], 'Mitte'],
+          '#A083C7',
+          ['==', ['get', 'region'], 'West'],
+          '#2F9F48',
+          ['==', ['get', 'region'], 'Süd'],
+          '#DC320A',
+          '#00ff00',
+        ],
+        'line-width': 2,
+      },
     },
-  },
+  ],
   properties: {
     hasInfos: true,
     layerInfoComponent: 'RegionenkartePublicLayerInfo',
   },
+  children: [
+    new MapboxStyleLayer({
+      name: 'ch.sbb.regionenkarte.intern.av_stations.public',
+      visible: true,
+      mapboxLayer: netzkarteEisenbahninfrastruktur,
+      styleLayers: [
+        {
+          id: 'stations1',
+          type: 'circle',
+          source: 'base',
+          'source-layer': 'osm_points',
+          filter: [
+            'all',
+            ['==', 'layer', 'railway'],
+            ['==', 'is_sbb', 1],
+            ['any', ['==', 'level_station', 1], ['==', 'level_station', 10]],
+          ],
+          paint: {
+            'circle-color': '#000000',
+            'circle-radius': [
+              'case',
+              ['==', ['get', 'level_station'], 1],
+              10,
+              ['==', ['get', 'level_station'], 10],
+              8,
+              0,
+            ],
+          },
+          layout: { visibility: 'visible' },
+        },
+        {
+          id: 'stations2',
+          type: 'circle',
+          source: 'base',
+          'source-layer': 'osm_points',
+          filter: ['all', ['==', 'layer', 'railway'], ['==', 'is_sbb', 1]],
+          paint: {
+            'circle-radius': [
+              'case',
+              ['==', ['get', 'level_station'], 1],
+              6,
+              ['==', ['get', 'level_station'], 10],
+              4.5,
+              ['==', ['get', 'level_station'], 11],
+              5,
+              ['==', ['get', 'level_station'], 12],
+              4.5,
+              ['==', ['get', 'level_station'], 13],
+              4,
+              ['==', ['get', 'level_station'], 20],
+              3.5,
+              ['==', ['get', 'level_station'], 21],
+              3,
+              ['==', ['get', 'level_station'], 22],
+              3,
+              2,
+            ],
+            'circle-blur': 0,
+            'circle-stroke-color': [
+              'case',
+              [
+                'any',
+                ['==', ['get', 'level_station'], 11],
+                ['==', ['get', 'level_station'], 12],
+                ['==', ['get', 'level_station'], 13],
+                ['==', ['get', 'level_station'], 20],
+                ['==', ['get', 'level_station'], 21],
+                ['==', ['get', 'level_station'], 22],
+              ],
+              '#000000',
+              [
+                'case',
+                ['==', ['get', 'region'], 'Ost'],
+                '#FFCC00',
+                ['==', ['get', 'region'], 'Mitte'],
+                '#A083C7',
+                ['==', ['get', 'region'], 'West'],
+                '#2F9F48',
+                ['==', ['get', 'region'], 'Süd'],
+                '#DC320A',
+                '#00ff00',
+              ],
+            ],
+            'circle-color': [
+              'case',
+              [
+                'any',
+                ['==', ['get', 'level_station'], 1],
+                ['==', ['get', 'level_station'], 10],
+              ],
+              '#ffffff',
+              [
+                'case',
+                ['==', ['get', 'region'], 'Ost'],
+                '#FFCC00',
+                ['==', ['get', 'region'], 'Mitte'],
+                '#A083C7',
+                ['==', ['get', 'region'], 'West'],
+                '#2F9F48',
+                ['==', ['get', 'region'], 'Süd'],
+                '#DC320A',
+                '#00ff00',
+              ],
+            ],
+            'circle-stroke-width': 1.5,
+          },
+        },
+      ],
+      properties: {
+        hideInLegend: true,
+      },
+    }),
+  ],
 });
 
 export const regionenkarteOverlayGroup = new Layer({
@@ -1469,8 +1584,15 @@ export const regionenkarteOverlayGroup = new Layer({
       name: 'ch.sbb.infrastruktur.line_point',
       visible: true,
       mapboxLayer: netzkarteEisenbahninfrastruktur,
-      // styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
-      // queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
+      styleLayersFilter: ({ id, type }) => {
+        // We select all lines which are not water and borders.
+        // and DFA are line numbers.
+        return (
+          (/line/.test(type) || /DFA/.test(id)) &&
+          id.indexOf('water') === -1 &&
+          id.indexOf('border') === -1
+        );
+      },
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.line_point-desc',
@@ -1480,8 +1602,10 @@ export const regionenkarteOverlayGroup = new Layer({
       name: 'ch.sbb.infrastruktur.betriebspunkte',
       visible: true,
       mapboxLayer: netzkarteEisenbahninfrastruktur,
-      // styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
-      // queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
+      styleLayersFilter: ({ id }) => {
+        // We select all stations
+        return /FanasStation/.test(id);
+      },
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.betriebspunkte-desc',
