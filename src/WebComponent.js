@@ -209,6 +209,7 @@ const WebComponent = (props) => {
   if (!appTopics) {
     return null;
   }
+  console.log('icic');
 
   return (
     <Styled styles={styles}>
