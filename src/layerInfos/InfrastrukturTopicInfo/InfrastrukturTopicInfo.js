@@ -29,7 +29,7 @@ const comps = {
       <p>État des données: 2020</p>
       <p>État de la base de données de la carte: 2020</p>
       <p>
-        Responsable: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
+        Responsable: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
     </div>

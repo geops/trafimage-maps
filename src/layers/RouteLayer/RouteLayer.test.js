@@ -1,7 +1,5 @@
 import React from 'react';
-import 'jest-canvas-mock';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import fetchMock from 'fetch-mock';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -14,8 +12,6 @@ import RouteLayer from './RouteLayer';
 import { casa } from '../../config/topics';
 import TrafimageMaps from '../../components/TrafimageMaps';
 import finishFlag from '../../img/finish_flag.png';
-
-configure({ adapter: new Adapter() });
 
 const routes = [
   {
@@ -146,6 +142,10 @@ describe('RouteLayer', () => {
     map = new Map({ view: new View({ resution: 5 }) });
   });
 
+  afterEach(() => {
+    fetchMock.reset();
+  });
+
   test('should return the correct default style.', () => {
     const style = layer.defaultStyleFunction(feature);
     const olStyles = layer.getOlStylesFromObject(style, false, false, feature);
@@ -160,6 +160,7 @@ describe('RouteLayer', () => {
     );
   });
 
+  // This test failed because of the canvas mock but we don't know why.
   test('should return the correct styles when selected.', async () => {
     layer.init(map);
     fetchRoutes();

@@ -9,10 +9,10 @@ exports[`Header match snapshots 1`] = `
   <div
     className="wkp-header-right"
   >
-    <UNDEFINED
+    <Memo(Login)
       appBaseUrl="http://foo.de"
     />
-    <UNDEFINED />
+    <Memo(LanguageSelect) />
     <div
       className="wkp-header-sbb-logo-wrapper"
     >

@@ -95,8 +95,7 @@ export const handicap = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
-    // prettier-ignore
-    'Stationen': handicapStopFinder
+    Stationen: handicapStopFinder,
   },
 };
 

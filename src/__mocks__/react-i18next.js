@@ -1,5 +1,6 @@
 /* eslint-disable */
 const React = require('react');
+const reactI18next = require('react-i18next');
 const i18n = {
   changeLanguage: jest.fn(() => {}),
 };
@@ -71,9 +72,7 @@ module.exports = {
   Interpolate: () => {},
   I18nextProvider: () => {},
   loadNamespaces: () => {},
-  initReactI18next: () => ({
-    type,
-  }),
+  initReactI18next: reactI18next.initReactI18next,
   setDefaults: () => {},
   getDefaults: () => {},
   setI18n: () => {},

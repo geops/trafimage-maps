@@ -1,4 +1,3 @@
-import 'jest-canvas-mock';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Map from 'ol/Map';

@@ -8,23 +8,21 @@ const propTypes = {
 
 const defaultProps = {};
 
-const RegionenkartePrivateTopicInfo = ({ t }) => {
-  return (
-    <div>
-      {t('ch.sbb.regionenkarte.intern-desc')}
-      <p>
-        {t('Verantwortlich')}:
-        <br />
-        I-VU-UEW, Anja Aebischer,
-        <br />
-        <a href={`mailto:${t('anja.aebischer@sbb.ch')}`}>
-          {t('anja.aebischer@sbb.ch')}
-        </a>
-        .
-      </p>
-    </div>
-  );
-};
+const RegionenkartePrivateTopicInfo = ({ t }) => (
+  <div>
+    {t('ch.sbb.regionenkarte.intern-desc')}
+    <p>
+      {t('Verantwortlich')}:
+      <br />
+      I-VU-UEW, Anja Aebischer,
+      <br />
+      <a href={`mailto:${t('anja.aebischer@sbb.ch')}`}>
+        {t('anja.aebischer@sbb.ch')}
+      </a>
+      .
+    </p>
+  </div>
+);
 
 RegionenkartePrivateTopicInfo.propTypes = propTypes;
 RegionenkartePrivateTopicInfo.defaultProps = defaultProps;

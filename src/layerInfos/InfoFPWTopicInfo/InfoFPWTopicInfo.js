@@ -20,7 +20,7 @@ const InfoFPWTopicInfo = ({ language, t }) => {
     fr: (
       <span>
         L’infographie donne un aperçu des changements et de l’aménagement de
-        l’offre prévus au changement d’horaire 2019.
+        l’offre prévus au changement d’horaire 2019.
       </span>
     ),
     it: (

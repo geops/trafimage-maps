@@ -1,4 +1,3 @@
-import 'jest-canvas-mock';
 import coordinateHelper from './coordinateHelper';
 
 describe('coordinateHelper', () => {
