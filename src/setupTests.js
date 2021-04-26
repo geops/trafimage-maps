@@ -2,7 +2,6 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-import 'jest-canvas-mock';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
@@ -59,3 +58,26 @@ global.sampleKml = `
         </Placemark>
       </Document>
     </kml>`;
+
+// const d = window.document;
+// const f = window.document.createElement;
+
+// // Check if 2D context already present. That happens either when running in a browser,
+// // or this is node.js with 'canvas' installed.
+// const ctx = d.createElement('canvas').getContext('2d');
+// if (ctx !== null && ctx !== undefined) {
+//   // console.log('2D context is present, no need to override');
+//   return;
+// }
+
+// window.document.createElement = function (param) {
+//   if (param === 'canvas') {
+//     return new Canvas();
+//     //   if (myHackedInCanvas === undefined) {
+//     //     myHackedInCanvas = f.call(d, 'canvas');
+//     //     replaceCanvasContext(myHackedInCanvas);
+//     //   }
+//     //   return myHackedInCanvas;
+//   }
+//   return f.call(d, param);
+// };
