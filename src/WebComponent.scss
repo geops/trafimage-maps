@@ -77,23 +77,3 @@
 @import './layerInfos/ZweitausbildungRoutesSubLayerInfo/ZweitausbildungRoutesSubLayerInfo.scss';
 @import './layerInfos/ZweitausbildungSubLayerInfo/ZweitausbildungSubLayerInfo.scss';
 @import './layerInfos/PunctualityLayerInfo/PunctualityLayerInfo.scss';
-
-@mixin loadFont($fontFamily, $path) {
-  @font-face {
-    font-family: #{$fontFamily};
-    src:
-      url('#{$path}.woff') format('woff'),
-      url('#{$path}.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
-}
-
-@include loadFont(
-  'SBBWeb Roman',
-  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman'
-);
-@include loadFont(
-  'SBBWeb Bold',
-  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
-);
