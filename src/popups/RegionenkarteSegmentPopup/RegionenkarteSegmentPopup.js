@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Tabs, Tab } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
+import { Layer } from 'mobility-toolbox-js/ol';
+
+import Region from './Region';
+import Nl from './Nl';
+import Av from './Av';
+
+const PERMALINK_PARAM = 'rkTab';
+const TABS = ['av', 'nl', 'region'];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,125 +20,65 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
   },
-  title: {
+  tabPanel: {
+    paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
-    flex: '0 0',
-  },
-  km: {
+    paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
-  },
-  description: {
-    flex: '0 0',
-    '& > div:first-child': {
-      paddingBottom: theme.spacing(2),
-    },
-  },
-  otherLines: {
-    flex: '1 1',
-    overflow: 'auto',
-    border: '1px dashed #dddddd',
-    margin: 0,
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(1),
   },
 }));
 
-const blockSkype = (phone) => {
-  const index = Math.ceil(phone.length / 2);
-  return (
-    <>
-      <span>{phone.slice(0, index)}</span>
-      <span>{phone.slice(index)}</span>
-    </>
-  );
-};
-
-function RegionenkarteSegmentPopup({ feature }) {
-  const { t, i18n } = useTranslation();
-  console.log(i18n.language);
+function RegionenkarteSegmentPopup({ layer, feature }) {
+  const { t } = useTranslation();
   const classes = useStyles();
+  const accessType = layer.get('accessType') || 'public';
+  const isPrivate = accessType !== 'private';
   const parsed = qs.parseUrl(window.location.href);
-  const { anlagegattung = 'av_bnb' } = parsed.query;
-  const {
-    linie,
-    bp_von: bpVon,
-    bp_bis: bpBis,
-    km_von: kmVon,
-    km_bis: kmBis,
-    [`${anlagegattung}_name`]: name,
-    [`${anlagegattung}_organisation`]: organisation,
-    [`${anlagegattung}_telefon`]: telefon,
-    [`${anlagegattung}_email`]: email,
-    [`${anlagegattung}_line_data`]: lineDataStr,
-  } = feature.getProperties();
-  const str = `[${lineDataStr.slice(1, lineDataStr.length - 1)}]`;
-  const lineData = JSON.parse(str).map((obj) => {
-    return JSON.parse(obj);
-  });
+  const [tab, setTab] = useState(parsed.query[PERMALINK_PARAM] || TABS[0]);
+  console.log(tab);
+  const handleChange = (event, newTab) => {
+    setTab(TABS[newTab]);
+  };
+
+  useEffect(() => {
+    if (isPrivate && tab !== parsed.query[PERMALINK_PARAM]) {
+      parsed.query[PERMALINK_PARAM] = tab;
+      window.history.replaceState(
+        undefined,
+        undefined,
+        `?${qs.stringify(parsed.query)}`,
+      );
+    }
+  }, [isPrivate, parsed, tab]);
+
   return (
     <div className={classes.root}>
-      <div className={classes.title}>
-        <div>
-          {!!linie && `${t('Linie')} ${linie}, `}
-          {bpVon && bpBis && `${t('BPs')} ${bpVon} - ${bpBis}`}
-          {((bpVon && !bpBis) || (!bpVon && bpBis)) &&
-            `${t('BP')} ${bpVon || bpBis}`}
-        </div>
-        <div className={classes.km}>{`km ${kmVon} - ${kmBis}`}</div>
-      </div>
-
-      <div className={classes.description}>
-        <div>
-          <b>
-            {t(
-              anlagegattung === 'av_bnb' ? 'Koordinator Bahnnahes Bauen' : 'Av',
-            )}
-          </b>
-        </div>
-
-        <div>
-          {!name && <i>{t('Information nicht verfügbar')}</i>}
-          {name && (
-            <>
-              <div>
-                <b>{name}</b>
-              </div>
-              {organisation && <div>{organisation}</div>}
-              {telefon && <div>{blockSkype(telefon)}</div>}
-              {email && (
-                <div>
-                  <a href={`mailto:${email}`}>{`${email}`}</a>
-                </div>
-              )}
-            </>
-          )}
-        </div>
-      </div>
-
-      <fieldset className={classes.otherLines}>
-        <legend>{t('Linien')}</legend>
-        {lineData && lineData.length ? (
-          <div>
-            {lineData.map((data) => {
-              return (
-                <div
-                  key={`${data.linie}-${data.km_von}
-                }-${data.km_bis}`}
-                >{`${data.linie ? `${data.linie}, ` : ''}km ${data.km_von} - ${
-                  data.km_bis
-                }`}</div>
-              );
-            })}
+      {isPrivate && (
+        <>
+          <Tabs
+            value={TABS.indexOf(tab)}
+            onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
+          >
+            <Tab label={t('Region')} />
+            <Tab label={t('NL')} />
+            <Tab label={t('Av')} />
+          </Tabs>
+          <div className={classes.tabPanel}>
+            {!tab && <Region layer={layer} feature={feature} />}
+            {tab === TABS[1] && <Nl layer={layer} feature={feature} />}
+            {tab === TABS[2] && <Av layer={layer} feature={feature} />}
           </div>
-        ) : (
-          <div>{t('Information nicht verfügbar')}</div>
-        )}
-      </fieldset>
+        </>
+      )}
+      {!isPrivate && <Av layer={layer} feature={feature} />}
     </div>
   );
 }
 
 RegionenkarteSegmentPopup.propTypes = {
+  layer: PropTypes.instanceOf(Layer).isRequired,
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 

@@ -246,17 +246,15 @@ export const regionenkartePublic = {
     regionenkartePublicSegment,
     kilometrageLayer,
   ],
-  // redirect: true,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
 };
 
-export const regionenkartePrivate = {
-  name: 'ch.sbb.regionenkarte.intern',
-  key: 'ch.sbb.regionenkarte.intern',
-  permission: 'sbb',
-  redirect: true,
-  layerInfoComponent: 'RegionenkartePrivateTopicInfo',
-};
+// export const regionenkartePrivate = {
+//   name: 'ch.sbb.regionenkarte.intern',
+//   key: 'ch.sbb.regionenkarte.intern',
+//   permission: 'sbb',
+//   layerInfoComponent: 'RegionenkartePrivateTopicInfo',
+// };
 
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
@@ -329,7 +327,7 @@ const topics = {
     tarifverbundkarte,
     showcases,
     zweitausbildung,
-    regionenkartePrivate,
+    // regionenkartePrivate,
     intervention,
     tina,
   ],

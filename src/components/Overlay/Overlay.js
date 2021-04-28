@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     },
   },
   drawerDesktop: {
-    width: 300,
+    width: 0,
     '& .wkp-feature-information': {
       width: 300,
     },
@@ -29,8 +29,7 @@ const useStyles = makeStyles({
   drawerDesktopPaper: {
     boxShadow: '-5px 0px 10px -6px rgb(0 0 0 / 40%)',
     height: 'initial',
-    borderColor: '#cdcdcd',
-    borderStyle: 'solid',
+    borderColor: 'solid #cdcdcd',
     borderWidth: '1px 0 1px 0',
   },
   headerActive: {

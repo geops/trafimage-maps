@@ -1455,7 +1455,9 @@ export const regionenkartePublicSegment = new MapboxStyleLayer({
   ],
   properties: {
     hasInfos: true,
+    useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
     layerInfoComponent: 'RegionenkartePublicLayerInfo',
+    popupComponent: 'RegionenkarteSegmentPopup',
   },
   children: [
     new MapboxStyleLayer({
@@ -1581,6 +1583,19 @@ export const regionenkarteOverlayGroup = new Layer({
   },
   children: [
     new MapboxStyleLayer({
+      name: 'ch.sbb.infrastruktur.betriebspunkte',
+      visible: true,
+      mapboxLayer: netzkarteEisenbahninfrastruktur,
+      styleLayersFilter: ({ id }) => {
+        // We select all stations
+        return /FanasStation/.test(id);
+      },
+      properties: {
+        hasInfos: true,
+        description: 'ch.sbb.infrastruktur.betriebspunkte-desc',
+      },
+    }),
+    new MapboxStyleLayer({
       name: 'ch.sbb.infrastruktur.line_point',
       visible: true,
       mapboxLayer: netzkarteEisenbahninfrastruktur,
@@ -1596,19 +1611,6 @@ export const regionenkarteOverlayGroup = new Layer({
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.line_point-desc',
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.infrastruktur.betriebspunkte',
-      visible: true,
-      mapboxLayer: netzkarteEisenbahninfrastruktur,
-      styleLayersFilter: ({ id }) => {
-        // We select all stations
-        return /FanasStation/.test(id);
-      },
-      properties: {
-        hasInfos: true,
-        description: 'ch.sbb.infrastruktur.betriebspunkte-desc',
       },
     }),
   ],

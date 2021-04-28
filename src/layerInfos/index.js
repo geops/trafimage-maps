@@ -12,7 +12,6 @@ import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
-import RegionenkartePrivateTopicInfo from './RegionenkartePrivateTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
@@ -37,7 +36,6 @@ export default {
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
-  RegionenkartePrivateTopicInfo,
   RegionenkartePublicLayerInfo,
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
