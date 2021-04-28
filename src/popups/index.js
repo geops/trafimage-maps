@@ -12,6 +12,7 @@ import DeparturePopup from './DeparturePopup';
 import ZweitausbildungAbroadPopup from './ZweitausbildungAbroadPopup';
 import ZweitausbildungPoisPopup from './ZweitausbildungPoisPopup';
 import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
+import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
 
 export default {
@@ -29,5 +30,6 @@ export default {
   ZweitausbildungAbroadPopup,
   ZweitausbildungPoisPopup,
   ZweitausbildungRoutesPopup,
+  TarifverbundkartePopup,
   DrawPopup,
 };

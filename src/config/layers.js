@@ -23,6 +23,7 @@ import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
+import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1356,6 +1357,15 @@ export const zweitausbildungRoutes = new Layer({
       ],
     }),
   ],
+});
+
+export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
+  mapboxLayer: dataLayer,
+  visible: true,
+  properties: {
+    hideInLegend: true,
+    popupComponent: 'TarifverbundkartePopup',
+  },
 });
 
 export default [

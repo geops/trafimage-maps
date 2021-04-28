@@ -37,6 +37,7 @@ import defaultBaseLayers, {
   zweitausbildungStations,
   zweitausbildungStationsDataLayer,
   zweitausbildungPoisDataLayer,
+  tarifverbundkarteLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -246,8 +247,14 @@ export const regionenkartePrivate = {
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  redirect: true,
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
+  layers: [dataLayer, tarifverbundkarteLayer],
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+    trackerMenu: true,
+  },
 };
 
 export const showcases = {
