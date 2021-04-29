@@ -13,11 +13,11 @@ const TarifverbundkartePopup = ({ feature }) => {
   const { t } = useTranslation();
   const properties = feature.getProperties();
   const municipality = properties.name;
-  const tarifGroup = properties.zone?.zoneplan;
-  const tarifGroupUrl = properties.zone?.url;
+  const tarifGroup = properties.partners;
+  const tarifGroupUrl = properties.tarifverbund_urls;
   const tarifZone = properties.zone?.zone;
   const zPass = properties.zPass?.partners;
-  const zPassUrl = properties.zPass?.url;
+  const zPassUrl = properties.zPass?.tarifverbund_urls;
 
   return (
     <div className="wkp-tarifverbundkarte-popup">
@@ -25,14 +25,22 @@ const TarifverbundkartePopup = ({ feature }) => {
         {`${t('Gemeinde')}:`}
       </div>
       <div className="wkp-tarifverbundkarte-popup-cell">{municipality}</div>
-      {properties.zone && (
+      {tarifGroup && (
         <>
           <div className="wkp-tarifverbundkarte-popup-cell-head">
             {`${t('Verbund')}:`}
           </div>
           <div className="wkp-tarifverbundkarte-popup-cell">
-            <Link href={tarifGroupUrl}>{tarifGroup}</Link>
+            {tarifGroupUrl ? (
+              <Link href={tarifGroupUrl}>{tarifGroup}</Link>
+            ) : (
+              `${tarifGroup}`
+            )}
           </div>
+        </>
+      )}
+      {tarifZone && (
+        <>
           <div className="wkp-tarifverbundkarte-popup-cell-head">
             {`${t('Zone')}:`}
           </div>
