@@ -47,7 +47,7 @@ const TarifverbundkartePopup = ({ feature }) => {
           <div className="wkp-tarifverbundkarte-popup-cell">{tarifZone}</div>
         </>
       )}
-      {properties.zPass && (
+      {zPass && zPassUrl && (
         <>
           <div className="wkp-tarifverbundkarte-popup-cell-head">
             {`${t('Z-Pass')}:`}
