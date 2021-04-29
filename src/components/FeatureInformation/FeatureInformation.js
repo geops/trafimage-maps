@@ -52,7 +52,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   let pagination = null;
   const { layer } = info;
 
-  if (features.length > 1) {
+  if (features.length > 1 && !PopupComponent.hidePagination) {
     pagination = (
       <div className="wkp-pagination-wrapper">
         <span className="wkp-pagination-button-wrapper">
@@ -120,6 +120,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             t={t}
             layer={info.layer}
             feature={features[featureIndex]}
+            features={features}
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
