@@ -250,6 +250,7 @@ export const tarifverbundkarte = {
   key: 'ch.sbb.tarifverbundkarte.public',
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
   layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
+  maxZoom: 11,
   elements: {
     ...defaultElements,
     popup: true,

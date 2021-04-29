@@ -25,14 +25,22 @@ const TarifverbundkartePopup = ({ feature }) => {
         {`${t('Gemeinde')}:`}
       </div>
       <div className="wkp-tarifverbundkarte-popup-cell">{municipality}</div>
-      {properties.zone && (
+      {tarifGroup && (
         <>
           <div className="wkp-tarifverbundkarte-popup-cell-head">
             {`${t('Verbund')}:`}
           </div>
           <div className="wkp-tarifverbundkarte-popup-cell">
-            <Link href={tarifGroupUrl}>{tarifGroup}</Link>
+            {tarifGroupUrl ? (
+              <Link href={tarifGroupUrl}>{tarifGroup}</Link>
+            ) : (
+              `${tarifGroup}`
+            )}
           </div>
+        </>
+      )}
+      {tarifZone && (
+        <>
           <div className="wkp-tarifverbundkarte-popup-cell-head">
             {`${t('Zone')}:`}
           </div>
