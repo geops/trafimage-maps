@@ -28,11 +28,17 @@ import defaultBaseLayers, {
   tochtergesellschaftenSBB,
   gewässer,
   uebrigeBahnen,
+  betriebsRegionen,
+  betriebsRegionenVisible,
   netzkarteEisenbahninfrastruktur,
   zweitausbildungAbroad,
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
+  zweitausbildungStationsDataLayer,
+  zweitausbildungPoisDataLayer,
+  tarifverbundkarteDataLayer,
+  tarifverbundkarteLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -45,6 +51,7 @@ const defaultElements = {
   baseLayerSwitcher: true,
   popup: false,
   search: true,
+  drawMenu: true,
 };
 
 export const netzkarte = {
@@ -74,7 +81,11 @@ export const netzkarte = {
 export const handicap = {
   name: 'ch.sbb.handicap',
   key: 'ch.sbb.handicap',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     ...defaultBaseLayers,
     handicapDataLayer,
@@ -163,7 +174,11 @@ export const casa = {
 export const bauprojekte = {
   name: 'ch.sbb.construction',
   key: 'ch.sbb.construction',
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     dataLayer,
     netzkarteLayer,
@@ -182,11 +197,16 @@ export const infrastruktur = {
   name: 'ch.sbb.infrastruktur',
   key: 'ch.sbb.infrastruktur',
   maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true, popup: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
   layers: [
     netzkarteEisenbahninfrastruktur,
     gewässer,
     grenzen,
+    betriebsRegionen,
     uebrigeBahnen,
     tochtergesellschaftenSBB,
     kilometrageLayer,
@@ -194,6 +214,20 @@ export const infrastruktur = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
   searches: defaultSearches,
+};
+
+export const betriebsregionen = {
+  name: 'ch.sbb.infrastruktur',
+  key: 'ch.sbb.infrastruktur',
+  elements: {
+    ...defaultElements,
+    header: false,
+    search: false,
+    drawMenu: false,
+    popup: true,
+  },
+  layers: [netzkarteEisenbahninfrastruktur, betriebsRegionenVisible],
+  projection: 'EPSG:3857',
 };
 
 export const regionenkarte = {
@@ -214,8 +248,14 @@ export const regionenkartePrivate = {
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  redirect: true,
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
+  layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+    trackerMenu: true,
+  },
 };
 
 export const showcases = {
@@ -259,6 +299,8 @@ export const zweitausbildung = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     dataLayer,
+    zweitausbildungStationsDataLayer,
+    zweitausbildungPoisDataLayer,
     netzkarteLayer,
     zweitausbildungAbroad,
     zweitausbildungPois,
@@ -285,6 +327,7 @@ const topics = {
     tina,
   ],
   stelen: [netzkarteStelen],
+  betriebsregionen: [betriebsregionen],
 };
 
 export const getTopicConfig = (name) => {

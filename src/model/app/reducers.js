@@ -18,8 +18,19 @@ import {
   SET_PERMISSION_INFOS,
   SET_SCREEN_WIDTH,
   SET_CARTARO_OLD_URL,
+  SET_MAPSET_URL,
+  SET_DRAW_URL,
+  SET_DRAW_IDS,
+  SET_SHORTENER_URL,
+  SET_DRAW_EDIT_LINK_LOADING,
+  SET_DRAW_EDIT_LINK,
+  SET_DESTINATION_URL,
+  SET_DEPARTURES_URL,
+  SET_API_KEY,
 } from './actions';
+
 import SearchService from '../../components/Search/SearchService';
+import { isOpenedByMapset } from '../../utils/redirectHelper';
 
 const getInitialState = () => ({
   // We set the permission to null instead of a default empty object
@@ -33,7 +44,8 @@ const getInitialState = () => ({
     value: 'EPSG:4326',
     format: (c) => c,
   },
-  menuOpen: false,
+  // Open the menu when mapset has opened the page.
+  menuOpen: isOpenedByMapset(),
   searchOpen: false,
   selectedForInfos: null,
   map: new OLMap({
@@ -46,6 +58,10 @@ const getInitialState = () => ({
   layerService: new LayerService(),
   searchService: new SearchService(),
   screenWidth: null,
+  drawIds: null,
+  destinationUrl: null,
+  departuresUrl: null,
+  apiKey: null,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -121,6 +137,21 @@ export default function app(state = getInitialState(), action) {
           permissions: [],
         },
       };
+    case SET_MAPSET_URL:
+      return {
+        ...state,
+        mapsetUrl: action.data,
+      };
+    case SET_SHORTENER_URL:
+      return {
+        ...state,
+        shortenerUrl: action.data,
+      };
+    case SET_DRAW_URL:
+      return {
+        ...state,
+        drawUrl: action.data,
+      };
     case SET_CARTARO_OLD_URL:
       return {
         ...state,
@@ -130,6 +161,36 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         screenWidth: action.data,
+      };
+    case SET_DRAW_IDS:
+      return {
+        ...state,
+        drawIds: action.data,
+      };
+    case SET_DRAW_EDIT_LINK_LOADING:
+      return {
+        ...state,
+        isDrawEditLinkLoading: action.data,
+      };
+    case SET_DRAW_EDIT_LINK:
+      return {
+        ...state,
+        drawEditLink: action.data,
+      };
+    case SET_DESTINATION_URL:
+      return {
+        ...state,
+        destinationUrl: action.data,
+      };
+    case SET_DEPARTURES_URL:
+      return {
+        ...state,
+        departuresUrl: action.data,
+      };
+    case SET_API_KEY:
+      return {
+        ...state,
+        apiKey: action.data,
       };
     default:
       return {

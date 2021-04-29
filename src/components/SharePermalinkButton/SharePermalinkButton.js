@@ -1,87 +1,45 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MdClose } from 'react-icons/md';
-import { FaLink } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import PermalinkInput from '@geops/react-ui/components/PermalinkInput';
-import Button from '@geops/react-ui/components/Button';
+import { Typography, makeStyles } from '@material-ui/core';
+import PermalinkInput from '../PermalinkInput';
+import PermalinkButton from '../PermalinkButton';
 
-const propTypes = {
-  title: PropTypes.string,
-  icon: PropTypes.node,
-  className: PropTypes.string,
-};
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
-const defaultProps = {
-  title: 'Permalink generieren',
-  icon: <FaLink focusable={false} />,
-  className: 'wkp-share-permalink-button',
-};
-
-function SharePermalinkButton({ icon, title, className }) {
-  const [showTooltip, setShowTooltip] = useState(null);
-  const [positionTooltip, setPositionTooltip] = useState();
+function SharePermalinkButton({ buttonProps }) {
+  const classes = useStyles();
   const { t } = useTranslation();
-  const ref = useRef();
-
-  // Close the tooltip when clicking outside the tooltip
-  useEffect(() => {
-    const onDocClick = (e) => {
-      // If the click comes from an element of Autocomplete, don't close the list.
-      if (ref && ref.current && ref.current.contains(e.target)) {
-        return;
-      }
-      setShowTooltip(false);
-    };
-    if (showTooltip) {
-      document.addEventListener('click', onDocClick);
-    }
-    return function cleanup() {
-      document.removeEventListener('click', onDocClick);
-    };
-  }, [showTooltip]);
 
   return (
-    <div className={className} ref={ref}>
-      <Button
-        title={t(title)}
-        onClick={(e) => {
-          setPositionTooltip(e.currentTarget.getBoundingClientRect());
-          setShowTooltip(!showTooltip);
-        }}
-      >
-        {icon}
-      </Button>
-      {showTooltip && positionTooltip && (
-        <div
-          className="wkp-tooltip"
-          style={{
-            left: positionTooltip.left + 30,
-            top: positionTooltip.top,
-          }}
-        >
-          <div className="wkp-arrow-left" />
-          <Button
-            className="wkp-close-bt"
-            onClick={() => {
-              setShowTooltip(false);
-            }}
-          >
-            <MdClose focusable={false} />
-          </Button>
-          <PermalinkInput value={window.location.href} />
-          <p>
-            {t(
-              'Sie können auch den Link aus der Adresszeile des Browsers kopieren.',
-            )}
-          </p>
-        </div>
-      )}
-    </div>
+    <PermalinkButton buttonProps={buttonProps}>
+      {/* We use a function to be able to get the proper window.location value. */}
+      {(locationHref) => {
+        return (
+          <>
+            <PermalinkInput value={locationHref} />
+            <Typography className={classes.margin}>
+              {t(
+                'Sie können auch den Link aus der Adresszeile des Browsers kopieren.',
+              )}
+            </Typography>
+          </>
+        );
+      }}
+    </PermalinkButton>
   );
 }
 
-SharePermalinkButton.propTypes = propTypes;
-SharePermalinkButton.defaultProps = defaultProps;
+SharePermalinkButton.propTypes = {
+  buttonProps: PropTypes.object,
+};
+
+SharePermalinkButton.defaultProps = {
+  buttonProps: {},
+};
 
 export default React.memo(SharePermalinkButton);

@@ -7,13 +7,22 @@ import qs from 'query-string';
 import OLMap from 'ol/Map';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
-import { redirect } from '../../utils/redirectHelper';
+import KML from 'react-spatial/utils/KML';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { setCenter, setZoom } from '../../model/map/actions';
 import {
   setDeparturesFilter,
   setFeatureInfo,
   setLanguage,
+  setDrawIds,
+  updateDrawEditLink,
 } from '../../model/app/actions';
+import {
+  DRAW_PARAM,
+  DRAW_OLD_PARAM,
+  DRAW_REDIRECT_PARAM,
+  MAPSET_PARENT_PARAM,
+} from '../../utils/constants';
 
 const propTypes = {
   history: PropTypes.shape({
@@ -21,7 +30,6 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   initialState: PropTypes.shape(),
-  appBaseUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape({
@@ -31,6 +39,10 @@ const propTypes = {
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   departuresFilter: PropTypes.string,
+  drawUrl: PropTypes.string,
+  drawLayer: PropTypes.instanceOf(Layer).isRequired,
+  drawIds: PropTypes.object,
+  mapsetUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetLanguage: PropTypes.func.isRequired,
@@ -38,27 +50,54 @@ const propTypes = {
   dispatchSetZoom: PropTypes.func.isRequired,
   dispatchSetDeparturesFilter: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
+  dispatchSetDrawIds: PropTypes.func.isRequired,
+  dispatchUpdateDrawEditLink: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
   history: undefined,
-  appBaseUrl: null,
   initialState: {},
   departuresFilter: undefined,
+  drawUrl: undefined,
+  drawIds: undefined,
+  mapsetUrl: undefined,
 };
 
 const format = new GeoJSON();
 
 class Permalink extends PureComponent {
+  constructor(props) {
+    super(props);
+    const { mapsetUrl } = this.props;
+
+    const parameters = qs.parse(window.location.search);
+    const wkpDraw = parameters[DRAW_OLD_PARAM];
+    const drawId = parameters[DRAW_PARAM] || wkpDraw;
+
+    // if the draw.redirect parameter is true, that means we must redirect the page to mapset.
+    const mustRedirectToMapset = parameters[DRAW_REDIRECT_PARAM] === 'true';
+    if (drawId && mustRedirectToMapset && mapsetUrl) {
+      const params = qs.parse(window.location.search);
+      params[DRAW_PARAM] = drawId;
+      delete params[DRAW_REDIRECT_PARAM];
+      window.location.href = `${mapsetUrl}?${MAPSET_PARENT_PARAM}=${encodeURIComponent(
+        `${window.location.href.split('?')[0]}?${qs.stringify(params)}`,
+      )}`;
+    }
+  }
+
   componentDidMount() {
     const {
-      appBaseUrl,
       dispatchSetZoom,
       dispatchSetCenter,
       dispatchSetLanguage,
+      dispatchSetDrawIds,
+      dispatchSetDeparturesFilter,
       initialState,
       language,
-      dispatchSetDeparturesFilter,
+      drawUrl,
+      drawLayer,
+      map,
     } = this.props;
 
     const parameters = {
@@ -66,9 +105,50 @@ class Permalink extends PureComponent {
       ...initialState,
     };
 
-    if (parameters['wkp.draw']) {
-      // Redirection to the old wkp to use the drawing tool.
-      redirect(appBaseUrl, 'ch.sbb.netzkarte.draw');
+    const drawId = parameters[DRAW_PARAM] || parameters[DRAW_OLD_PARAM];
+
+    if (drawId) {
+      fetch(`${drawUrl}${drawId}`)
+        .then((response) =>
+          response
+            .clone()
+            .json()
+            .catch(() => response.text()),
+        )
+        .then((data) => {
+          if (data && data.admin_id && data.file_id) {
+            dispatchSetDrawIds(data);
+            return fetch(`${drawUrl}${data.file_id}`);
+          }
+
+          dispatchSetDrawIds({ file_id: drawId });
+          return { text: () => data };
+        })
+        .then((response) => response.text())
+        .then((data) => {
+          if (data && data.error) {
+            // eslint-disable-next-line no-console
+            console.warn(`The KML ${drawId} can't be loaded:`, data.error);
+            return;
+          }
+          // TO REMOVE. This will be fixed during migration of kmls
+          // Old trafimage generates absolute urls in the kml for SBB images.
+          // So we replace all of them by the complete url to old trafimage.
+          const newKmlString = data.replace(
+            />static\/app_trafimage/g,
+            `>https://maps.trafimage.ch/static/app_trafimage`,
+          );
+
+          const features = KML.readFeatures(
+            newKmlString,
+            map.getView().getProjection(),
+            map.getView().getResolution(),
+          );
+
+          // eslint-disable-next-line no-console
+          drawLayer.olLayer.getSource().clear(true);
+          drawLayer.olLayer.getSource().addFeatures(features);
+        });
     }
 
     const getUrlParamKey = (params, regex) => {
@@ -122,6 +202,8 @@ class Permalink extends PureComponent {
       [routeFilterKey]: routeFilter,
       [operatorFilterKey]: operatorFilter,
       [departuresFilterKey]: this.departures,
+      [DRAW_OLD_PARAM]: undefined,
+      [DRAW_PARAM]: drawId,
     });
   }
 
@@ -132,6 +214,8 @@ class Permalink extends PureComponent {
       departuresFilter,
       layerService,
       language,
+      drawIds,
+      dispatchUpdateDrawEditLink,
     } = this.props;
 
     if (history && activeTopic !== prevProps.activeTopic) {
@@ -159,6 +243,12 @@ class Permalink extends PureComponent {
         });
       }
     }
+
+    if (drawIds !== prevProps.drawIds) {
+      this.updateDrawIds();
+    }
+
+    dispatchUpdateDrawEditLink();
   }
 
   async openDepartureOnLoad() {
@@ -192,6 +282,27 @@ class Permalink extends PureComponent {
     ]);
   }
 
+  updateDrawIds() {
+    const { drawIds } = this.props;
+    let newState;
+
+    // only for wkp draw management
+    const parameters = {
+      ...qs.parse(window.location.search),
+    };
+    const drawParam = drawIds && (drawIds.admin_id || drawIds.file_id);
+    const wkpDraw = parameters[DRAW_OLD_PARAM];
+    const drawId = parameters[DRAW_PARAM];
+    if (wkpDraw && !drawId) {
+      newState = { [DRAW_PARAM]: drawParam };
+    } else {
+      newState = {
+        [DRAW_PARAM]: drawParam,
+      };
+    }
+    this.setState(newState);
+  }
+
   updateDepartures() {
     const { departuresFilter } = this.props;
     this.setState({
@@ -211,7 +322,9 @@ class Permalink extends PureComponent {
 
     return (
       <RSPermalink
-        params={{ ...this.state }}
+        params={{
+          ...this.state,
+        }}
         map={map}
         layerService={layerService}
         history={history}
@@ -234,6 +347,10 @@ const mapStateToProps = (state) => ({
   language: state.app.language,
   layerService: state.app.layerService,
   departuresFilter: state.app.departuresFilter,
+  drawUrl: state.app.drawUrl,
+  drawLayer: state.map.drawLayer,
+  drawIds: state.app.drawIds,
+  mapsetUrl: state.app.mapsetUrl,
 });
 
 const mapDispatchToProps = {
@@ -242,6 +359,8 @@ const mapDispatchToProps = {
   dispatchSetLanguage: setLanguage,
   dispatchSetDeparturesFilter: setDeparturesFilter,
   dispatchSetFeatureInfo: setFeatureInfo,
+  dispatchSetDrawIds: setDrawIds,
+  dispatchUpdateDrawEditLink: updateDrawEditLink,
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

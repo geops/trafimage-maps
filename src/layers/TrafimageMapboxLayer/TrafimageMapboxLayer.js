@@ -76,6 +76,14 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.setStyleConfig();
   }
 
+  applyStyle(data) {
+    const styleFiltered = applyFilters(data, this.filters);
+    this.mbMap.setStyle(styleFiltered);
+    this.mbMap.once('styledata', () => {
+      this.onStyleLoaded();
+    });
+  }
+
   setStyleConfig(url, key, apiKeyName) {
     if (url && url !== this.url) {
       this.url = url;
@@ -93,7 +101,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     const newStyleUrl = this.createStyleUrl();
 
     // Don't apply style if not necessary otherwise
-    // it will remove styles apply by MapboxStyleLayer layers.
+    // it will remove styles applied by MapboxStyleLayer layers.
     if (this.styleUrl === newStyleUrl) {
       return;
     }
@@ -102,6 +110,11 @@ class TrafimageMapboxLayer extends MapboxLayer {
       // The mapbox map does not exist so we only set the good styleUrl.
       // The style will be loaded in loadMbMap function.
       this.styleUrl = newStyleUrl;
+      if (this.filters) {
+        this.on('load', () => {
+          this.applyStyle(this.mbMap.getStyle());
+        });
+      }
       return;
     }
 
@@ -134,7 +147,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
       !options ||
       !this.format ||
       !this.mbMap ||
-      !this.mbMap.isStyleLoaded()
+      !this.mbMap.isStyleLoaded() ||
+      this.map?.getView().getAnimating() ||
+      this.map?.getView().getInteracting()
     ) {
       return Promise.resolve({ coordinate, features: [], layer: this });
     }
@@ -144,6 +159,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     // feature to be consistent with other layers.
     const renderedFeatures = this.mbMap.queryRenderedFeatures(pixel, options);
     const features = [];
+    const promises = [];
 
     for (let i = 0; i < renderedFeatures.length; i += 1) {
       const feature = renderedFeatures[i];
@@ -152,15 +168,23 @@ class TrafimageMapboxLayer extends MapboxLayer {
         const { cluster_id: id, point_count: count } = feature.properties;
         // because Mapbox GL JS should be fast ...
         // eslint-disable-next-line no-await-in-loop
-        await new Promise((resolve) => {
-          source.getClusterLeaves(id, count, 0, (_, cfs) => {
-            cfs.forEach((cf) => features.push(this.format.readFeature(cf)));
-            resolve();
-          });
-        });
+        promises.push(
+          new Promise((resolve) => {
+            source.getClusterLeaves(id, count, 0, (_, cfs) => {
+              cfs.forEach((cf) => features.push(this.format.readFeature(cf)));
+              resolve(cfs);
+            });
+          }),
+        );
       } else {
         features.push(this.format.readFeature(feature));
       }
+    }
+
+    if (promises.length) {
+      return Promise.all(promises).then(() => {
+        return { layer: this, features, coordinate };
+      });
     }
 
     return Promise.resolve({ layer: this, features, coordinate });
@@ -183,11 +207,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
           return;
         }
         this.styleUrl = newStyleUrl;
-        const styleFiltered = applyFilters(data, this.options.filters);
-        this.mbMap.setStyle(styleFiltered);
-        this.mbMap.once('styledata', () => {
-          this.onStyleLoaded();
-        });
+        this.applyStyle(data);
       })
       .catch((err) => {
         if (err && err.name === 'AbortError') {

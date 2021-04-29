@@ -25,7 +25,7 @@ const PunctualityLayerInfo = ({ language, t }) => {
       legend: 'ch.sbb.puenktlichkeit-high-delay',
     },
     {
-      crossed: true,
+      dashed: true,
       color: '#a0a0a0', // grey
       legend: 'ch.sbb.puenktlichkeit-journey-no-realtime',
     },
@@ -33,40 +33,29 @@ const PunctualityLayerInfo = ({ language, t }) => {
       color: '#a0a0a0', // grey
       legend: 'ch.sbb.puenktlichkeit-company-no-realtime',
     },
+    {
+      character: String.fromCodePoint(0x00d7),
+      legend: 'Ausfall',
+    },
   ];
 
   const legend = delays.map((d) => (
     <div className="tm-punctuality-delay">
-      <svg height="23" width="23">
-        <circle
-          cx="11"
-          cy="11"
-          r="10"
-          fill={d.color}
-          strokeWidth="1.5"
-          stroke="#404040"
-        />
-        {d.crossed ? (
-          <>
-            <line
-              x1="4"
-              y1="18"
-              x2="18"
-              y2="4"
-              strokeWidth="1.1"
-              stroke="#404040"
-            />
-            <line
-              x1="18"
-              y1="18"
-              x2="4"
-              y2="4"
-              strokeWidth="1.1"
-              stroke="#404040"
-            />
-          </>
-        ) : null}
-      </svg>
+      {d.character ? (
+        <span className="tm-punctuality-character">{d.character}</span>
+      ) : (
+        <svg height="23" width="23">
+          <circle
+            cx="11"
+            cy="11"
+            r="10"
+            fill={d.color}
+            strokeWidth="1.5"
+            stroke="#404040"
+            strokeDasharray={d.dashed ? '5 3' : null}
+          />
+        </svg>
+      )}
       <span>{t(d.legend)}</span>
     </div>
   ));

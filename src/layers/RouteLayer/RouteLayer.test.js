@@ -127,6 +127,12 @@ const fetchRoutes = () => {
   fetchMock.once(/8576579/g, routeDataBus);
 };
 
+const fetchRoutesError = () => {
+  /* Mock fetch for each sequence with HTTP errors */
+  fetchMock.once(/8503000/g, 400);
+  fetchMock.once(/8576579/g, 500);
+};
+
 describe('RouteLayer', () => {
   beforeEach(() => {
     onClick = jest.fn();
@@ -231,6 +237,14 @@ describe('RouteLayer', () => {
     expect(route[0]).toBeInstanceOf(Feature);
   });
 
+  test('should skip failed API requests on loadRoute.', async () => {
+    layer.init(map);
+    fetchRoutesError();
+    const route = await layer.loadRoutes(routes);
+
+    expect(route).toEqual([]);
+  });
+
   test('shoud call onClick callbacks and deselect on click.', async () => {
     const coordinate = [10, 10];
     fetchRoutes();
@@ -252,11 +266,14 @@ describe('RouteLayer', () => {
 
     const topicConf = [{ ...casa, layers: [layer] }];
     const component = mount(<TrafimageMaps topics={topicConf} apiKey="test" />);
+    const compMapWrap = component.find('Map');
     const compMap = component.find('Map').props().map;
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
+    const spyPointerMove = jest.spyOn(compMapWrap.instance(), 'onPointerMove');
     const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };
     await compMap.dispatchEvent(evt);
     await Promise.all(spy.mock.results.map((r) => r.value));
+    await spyPointerMove;
     component.update();
 
     expect(component.find('.wkp-casa-route-popup').text()).toBe(

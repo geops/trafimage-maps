@@ -2,11 +2,13 @@
 
 exports[`ExportDialog should match snapshot. 1`] = `
 <div
+  autoDownload={false}
   className="no-css"
   disabled={true}
   onClick={[Function]}
   onKeyPress={[Function]}
   role="button"
+  scale={1}
   style={
     Object {
       "opacity": 0.3,

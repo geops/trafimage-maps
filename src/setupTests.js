@@ -31,3 +31,31 @@ register(proj4);
 global.URL.createObjectURL = jest.fn(() => 'fooblob');
 
 global.mockStore = configureStore([thunk]);
+
+global.sampleKml = `
+  <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">
+    <Document>
+        <name>editLayer</name>
+        <Placemark>
+            <description />
+            <Style>
+                <IconStyle>
+                    <scale>0.333333</scale>
+                    <Icon>
+                        <href>http://localhost:3000/static/images/RBS/5022_Einfahrt_Verboten.png</href>
+                        <gx:w>144</gx:w>
+                        <gx:h>144</gx:h>
+                    </Icon>
+                </IconStyle>
+            </Style>
+            <ExtendedData>
+                <Data name="zIndex">
+                    <value>3</value>
+                </Data>
+            </ExtendedData>
+            <Point>
+                <coordinates>7.85387959595456,46.72612847778316</coordinates>
+            </Point>
+        </Placemark>
+      </Document>
+    </kml>`;

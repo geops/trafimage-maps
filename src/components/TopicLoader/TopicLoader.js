@@ -6,6 +6,7 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import LayerService from 'react-spatial/LayerService';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -40,6 +41,7 @@ const propTypes = {
     user: PropTypes.string,
     permissions: PropTypes.array,
   }),
+  drawLayer: PropTypes.instanceOf(Layer).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -121,6 +123,10 @@ class TopicLoader extends Component {
         apiKeyName !== prevProps.apiKeyName)
     ) {
       this.updateLayers(activeTopic.layers);
+    }
+
+    if (activeTopic !== prevProps.activeTopic) {
+      this.updateServices(activeTopic);
     }
   }
 
@@ -229,6 +235,7 @@ class TopicLoader extends Component {
       vectorTilesKey,
       vectorTilesUrl,
       staticFilesUrl,
+      drawLayer,
     } = this.props;
 
     const [currentBaseLayer] = layerService
@@ -259,7 +266,10 @@ class TopicLoader extends Component {
         });
     }
 
-    layerService.setLayers(topicLayers);
+    // TODO: It seems there is a mix of using layerService and layers.
+    // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService
+    // then update the flatLayers.
+    layerService.setLayers([...topicLayers, drawLayer]);
     const flatLayers = layerService.getLayersAsFlatArray();
     dispatchSetLayers(topicLayers);
 
@@ -267,6 +277,7 @@ class TopicLoader extends Component {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
       }
+
       if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(
           `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
@@ -313,6 +324,8 @@ const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   language: state.app.language,
   layerService: state.app.layerService,
+  permissionsInfos: state.app.permissionsInfos,
+  drawLayer: state.map.drawLayer,
   permissionInfos: state.app.permissionInfos,
 });
 

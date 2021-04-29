@@ -1,3 +1,4 @@
+import DrawLayer from '../../layers/DrawLayer';
 import {
   SET_LAYERS,
   SET_CENTER,
@@ -6,8 +7,11 @@ import {
   SET_MAX_EXTENT,
 } from './actions';
 
+const drawLayer = new DrawLayer();
+
 const initialState = {
-  layers: [],
+  layers: [drawLayer],
+  drawLayer,
 };
 
 export default function app(state = initialState, action) {
@@ -20,7 +24,8 @@ export default function app(state = initialState, action) {
       }
       return {
         ...state,
-        layers: [...action.data],
+        layers: [...action.data, drawLayer],
+        drawLayer,
       };
     case SET_CENTER:
       if (!Array.isArray(action.data)) {

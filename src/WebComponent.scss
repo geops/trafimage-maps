@@ -29,7 +29,6 @@
 @import 'node_modules/@geops/react-ui/components/Footer/Footer.scss';
 @import 'node_modules/@geops/react-ui/components/Button/Button.scss';
 @import 'node_modules/@geops/react-ui/components/Header/Header.scss';
-@import 'node_modules/@geops/react-ui/components/PermalinkInput/PermalinkInput.scss';
 @import 'node_modules/@geops/react-ui/components/Dialog/Dialog.scss';
 
 // React-spatial
@@ -64,12 +63,12 @@
 @import './components/Search/Search.scss';
 @import './components/Search/SearchToggle.scss';
 @import './components/Share/Share.scss';
-@import './components/SharePermalinkButton/SharePermalinkButton.scss';
 @import './components/TopicMenu/TopicMenu.scss';
 @import './components/TopicsMenu/TopicsMenu.scss';
 @import './components/TopicsMenuHeader/TopicsMenuHeader.scss';
 @import './components/TopicTelephoneInfos/TopicTelephoneInfos.scss';
 @import './components/TrafimageMaps/TrafimageMaps.scss';
+@import './components/DrawLayerMenu/DrawLayerMenu.scss';
 
 // Menus
 @import './menus/ShareMenu/ShareMenu.scss';
@@ -89,8 +88,10 @@
 @import './popups/CasaRoutePopup/CasaRoutePopup.scss';
 @import './popups/ZweitausbildungPoisPopup/ZweitausbildungPoisPopup.scss';
 @import './popups/ZweitausbildungRoutesPopup/ZweitausbildungRoutesPopup.scss';
+@import './popups/TarifverbundkartePopup/TarifverbundkartePopup.scss';
 
 // LayerInfos
+@import './layerInfos/BetriebsRegionenLayerInfo/BetriebsRegionenLayerInfo.scss';
 @import './layerInfos/ConstructionLayerInfo/ConstructionLayerInfo.scss';
 @import './layerInfos/HandicapLayerInfo/HandicapLayerInfo.scss';
 @import './layerInfos/ZweitausbildungLayerInfo/ZweitausbildungLayerInfo.scss';

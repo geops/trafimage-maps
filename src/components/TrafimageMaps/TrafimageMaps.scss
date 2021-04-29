@@ -15,12 +15,11 @@
     }
   }
 
-  a {
+  a:not(.MuiIconButton-root) {
     color: initial;
-    text-decoration: none;
+    text-decoration: underline; /* SBB CD */
 
     &:hover {
-      text-decoration: none;
       color: $brand-primary-hover;
     }
   }
@@ -271,22 +270,24 @@
 
     .wkp-topic-content {
       border-bottom: 1px solid #eee;
-      padding: 0 10px 0 0;
 
       select {
         display: block;
       }
     }
 
-    .wkp-topic-menu-item-wrapper {
+    .wkp-draw-layer-menu,
+    .wkp-topic-menu-item-wrapper,
+    .wkp-topic-content {
       padding: 0 10px;
-      height: 100%;
+    }
+
+    .wkp-draw-layer-menu .rs-layer-tree-item,
+    .wkp-topic-menu-item-wrapper {
+      height: 36px;
     }
 
     .wkp-topic-menu-item {
-      margin: 4px;
-      height: 28px;
-
       &.active {
         border-bottom: 1px solid #eee;
       }
@@ -294,11 +295,7 @@
       .wkp-layer-toggler {
         position: absolute;
         right: 0;
-        top: 12px;
-      }
-
-      .wkp-info-topic-bt {
-        bottom: 0;
+        top: 14px;
       }
     }
 

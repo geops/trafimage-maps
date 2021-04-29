@@ -56,7 +56,7 @@ const defaultProps = {
 
 const replaceParams = (url, language, appBaseUrl) => {
   return url
-    .replace('{url}', window.location.href)
+    .replace('{url}', encodeURIComponent(window.location.href))
     .replace('{language}', language)
     .replace('{appBaseUrl}', appBaseUrl);
 };
