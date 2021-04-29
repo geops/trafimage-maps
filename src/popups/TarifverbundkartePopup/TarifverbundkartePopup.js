@@ -13,11 +13,11 @@ const TarifverbundkartePopup = ({ feature }) => {
   const { t } = useTranslation();
   const properties = feature.getProperties();
   const municipality = properties.name;
-  const tarifGroup = properties.zone?.zoneplan;
-  const tarifGroupUrl = properties.zone?.url;
+  const tarifGroup = properties.partners;
+  const tarifGroupUrl = properties.tarifverbund_urls;
   const tarifZone = properties.zone?.zone;
   const zPass = properties.zPass?.partners;
-  const zPassUrl = properties.zPass?.url;
+  const zPassUrl = properties.zPass?.tarifverbund_urls;
 
   return (
     <div className="wkp-tarifverbundkarte-popup">

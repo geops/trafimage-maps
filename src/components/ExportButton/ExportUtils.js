@@ -117,12 +117,14 @@ export const getMapHd = (
     );
   }
 
-  const bg = layerService.getBaseLayers()[0].mapboxLayer;
+  const mbMap =
+    layerService.getBaseLayers()[0]?.mbMap ||
+    layerService.getBaseLayers()[0]?.mapboxLayer.mbMap;
   return buildMapboxMapHd(
     map,
     div,
     center,
-    bg.mbMap.getStyle(),
+    mbMap.getStyle(),
     scale,
     targetZoom,
   ).then(() => {
