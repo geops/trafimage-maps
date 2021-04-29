@@ -2,7 +2,7 @@
 
 exports[`ExportDialog should match snapshot. 1`] = `
 <div
-  autoDownload={false}
+  autodownload="false"
   className="no-css"
   disabled={true}
   onClick={[Function]}

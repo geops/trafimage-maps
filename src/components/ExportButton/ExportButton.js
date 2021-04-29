@@ -89,7 +89,7 @@ function ExportButton({
         title={t('Als PNG speichern')}
         disabled={isExportSizeTooBig || isLoading}
         extraData={generateExtraData(layerService, true)}
-        autoDownload={false}
+        autodownload="false"
         format="image/jpeg"
         onSaveStart={() => {
           setLoading(true);
@@ -104,6 +104,10 @@ function ExportButton({
           );
         }}
         onSaveEnd={(mapToExport, canvas) => {
+          if (!mapToExport || !canvas) {
+            setLoading(false);
+            return;
+          }
           clean(mapToExport, map, layerService);
 
           // add the image to a newly created PDF

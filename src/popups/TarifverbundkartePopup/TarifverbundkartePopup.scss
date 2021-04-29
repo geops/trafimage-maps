@@ -1,23 +1,23 @@
 .wkp-tarifverbundkarte-popup {
   display: inline-grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 100px max-content;
   padding: 0 !important;
   grid-gap: 1px;
   background-color: #888;
-  min-width: 280px !important;
+  min-width: auto !important;
 }
 
 .wkp-tarifverbundkarte-popup-cell-head,
 .wkp-tarifverbundkarte-popup-cell {
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 10px 5px;
+  padding: 10px;
   min-height: 25px;
 }
 
 .wkp-tarifverbundkarte-popup-cell {
   background-color: white;
+  min-width: 80px;
 }
 
 .wkp-tarifverbundkarte-popup-cell-head {
