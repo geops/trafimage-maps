@@ -9,75 +9,7 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
  */
 class TarifverbundkarteLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const tarifverbundskarteSourceId = 'verbundskarte-source';
-    const styleLayers = [
-      {
-        id: 'verbundskarte',
-        source: tarifverbundskarteSourceId,
-        'source-layer': 'ch.sbb.tarifverbundkarte',
-        type: 'fill',
-        paint: {
-          'fill-color': '#8cb22a',
-        },
-      },
-      {
-        id: 'verbundskarte.zonen',
-        source: tarifverbundskarteSourceId,
-        'source-layer': 'ch.sbb.tarifverbundkarte.zonen',
-        type: 'fill',
-        paint: {
-          'fill-color': '#ead267',
-        },
-      },
-      {
-        id: 'verbundskarte.zpass',
-        source: tarifverbundskarteSourceId,
-        'source-layer': 'ch.sbb.tarifverbundkarte.zpass',
-        type: 'fill',
-        paint: {
-          'fill-color': '#0ef783',
-        },
-      },
-    ];
-    super({
-      ...options,
-      styleLayers,
-      queryRenderedLayersFilter: ({ id }) => {
-        return id.includes('verbundskarte');
-      },
-    });
-
-    this.zonesSource = {
-      id: tarifverbundskarteSourceId,
-      type: 'vector',
-      url: 'https://maps.style-dev.geops.io/data/ch.sbb.tarifverbundkarte.json',
-    };
-  }
-
-  /**
-   * On Mapbox map load callback function. Add style sources then style layers.
-   * @override
-   */
-  onLoad() {
-    this.addSources();
-    super.onLoad();
-  }
-
-  // Add sources for features using clustering and for highligting.
-  addSources() {
-    if (!this.mapboxLayer.mbMap) {
-      return;
-    }
-    const { mbMap } = this.mapboxLayer;
-
-    [this.zonesSource].forEach((source) => {
-      const { id } = source;
-      if (!mbMap.getSource(id)) {
-        const withoutId = { ...source };
-        delete withoutId.id;
-        mbMap.addSource(id, withoutId);
-      }
-    });
+    super({ ...options });
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
@@ -92,7 +24,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
        * - There is no feature in verbundskarte layer (in some places the other two layers overlap with overflow)
        * - There is no feature in verbundskarte layer, but no zones and no z-pass features
        */
-      if (featureInfo.features.length <= 1 || !verbundFeature) {
+      if (!verbundFeature) {
         featureInfo.features = [];
         return featureInfo;
       }

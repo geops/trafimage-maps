@@ -37,6 +37,7 @@ import defaultBaseLayers, {
   zweitausbildungStations,
   zweitausbildungStationsDataLayer,
   zweitausbildungPoisDataLayer,
+  tarifverbundkarteDataLayer,
   tarifverbundkarteLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -248,7 +249,7 @@ export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
-  layers: [dataLayer, tarifverbundkarteLayer],
+  layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
   elements: {
     ...defaultElements,
     popup: true,
