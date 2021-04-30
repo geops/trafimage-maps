@@ -32,7 +32,7 @@ const roles = [
 
 const PERMALINK_PARAM = 'anlagegattung';
 
-function Av({ layer, feature }) {
+function Av({ layer, feature, onChangeRole }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
@@ -80,8 +80,9 @@ function Av({ layer, feature }) {
         undefined,
         `?${qs.stringify(parsed.query)}`,
       );
+      onChangeRole(role);
     }
-  }, [parsed, role]);
+  }, [parsed, role, onChangeRole]);
 
   return (
     <>
@@ -119,6 +120,7 @@ function Av({ layer, feature }) {
 Av.propTypes = {
   layer: PropTypes.instanceOf(Layer).isRequired,
   feature: PropTypes.instanceOf(Feature).isRequired,
+  onChangeRole: PropTypes.func.isRequired,
 };
 
 export default Av;

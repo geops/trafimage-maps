@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     minWidth: '155px !important',
 
     '& > div': {
-      paddingTop: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
+      padding: '3px 0',
 
       '&:first-child': {
         border: '0 solid  #eee',
