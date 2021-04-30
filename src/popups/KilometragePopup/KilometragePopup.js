@@ -1,30 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
+import { makeStyles } from '@material-ui/core';
 
-import './KilometragePopup.scss';
+const useStyles = makeStyles((theme) => ({
+  root: {
+    minWidth: '155px !important',
 
-const propTypes = {
-  feature: PropTypes.instanceOf(Feature).isRequired,
-  t: PropTypes.func.isRequired,
-};
+    '& > div': {
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+
+      '&:first-child': {
+        border: '0 solid  #eee',
+        borderBottomWidth: 1,
+      },
+    },
+  },
+}));
 
 const KilometragePopup = ({ feature, t }) => {
+  const classes = useStyles();
+  const { line_number: lineNumber, kilometration } = feature.getProperties();
   return (
-    <div className="wkp-kilometrage-popup">
-      <div className="wkp-popup-row">
-        {`${t('DfA Linien Nr.')}: ${feature.get('linie')}`}
-      </div>
-      <div className="wkp-popup-row">
-        {`${t('Kilometer')}: ${Number(feature.get('clicked_km')).toFixed(2)}`}
-      </div>
+    <div className={classes.root}>
+      <div>{`${t('DfA Linien Nr.')}: ${lineNumber}`}</div>
+      <div>{`${t('Kilometer')}: ${Number(kilometration).toFixed(2)}`}</div>
     </div>
   );
 };
 
-KilometragePopup.propTypes = propTypes;
+KilometragePopup.propTypes = {
+  feature: PropTypes.instanceOf(Feature).isRequired,
+  t: PropTypes.func.isRequired,
+};
 
-const memoized = React.memo(KilometragePopup);
-memoized.hideHeader = () => true;
+KilometragePopup.hideHeader = () => true;
 
-export default memoized;
+export default KilometragePopup;

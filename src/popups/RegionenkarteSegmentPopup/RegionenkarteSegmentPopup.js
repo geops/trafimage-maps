@@ -5,13 +5,12 @@ import { makeStyles, Tabs, Tab } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
 import { Layer } from 'mobility-toolbox-js/ol';
-
 import Region from './Region';
 import Nl from './Nl';
 import Av from './Av';
 
 const PERMALINK_PARAM = 'rkTab';
-const TABS = ['av', 'nl', 'region'];
+const TABS = ['region', 'nl', 'av'];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +24,35 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
+    border: '1px solid #dddddd',
+    marginTop: -1,
+  },
+  tabs: {
+    '& .MuiTabs-indicator': {
+      backgroundColor: 'transparent',
+    },
+  },
+  tab: {
+    minWidth: 0,
+    marginLeft: 2,
+    marginRight: 2,
+    marginBottom: -1,
+    border: '1px solid #dddddd',
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    textTransform: 'none',
+    '&:first-child': {
+      marginLeft: theme.spacing(2),
+    },
+    '&:last-child': {
+      marginRight: theme.spacing(2),
+    },
+    '&:hover': {
+      color: theme.palette.secondary.dark,
+    },
+    '&.Mui-selected': {
+      borderBottomColor: 'white',
+    },
   },
 }));
 
@@ -34,8 +62,8 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
   const accessType = layer.get('accessType') || 'public';
   const isPrivate = accessType !== 'private';
   const parsed = qs.parseUrl(window.location.href);
-  const [tab, setTab] = useState(parsed.query[PERMALINK_PARAM] || TABS[0]);
-  console.log(tab);
+  const [tab, setTab] = useState(parsed.query[PERMALINK_PARAM] || TABS[2]);
+
   const handleChange = (event, newTab) => {
     setTab(TABS[newTab]);
   };
@@ -58,17 +86,17 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
           <Tabs
             value={TABS.indexOf(tab)}
             onChange={handleChange}
-            variant="scrollable"
-            scrollButtons="auto"
+            variant="fullWidth"
+            className={classes.tabs}
           >
-            <Tab label={t('Region')} />
-            <Tab label={t('NL')} />
-            <Tab label={t('Av')} />
+            <Tab className={classes.tab} label={t('Region')} />
+            <Tab className={classes.tab} label={t('NL')} />
+            <Tab className={classes.tab} label={t('Av')} />
           </Tabs>
           <div className={classes.tabPanel}>
-            {!tab && <Region layer={layer} feature={feature} />}
-            {tab === TABS[1] && <Nl layer={layer} feature={feature} />}
             {tab === TABS[2] && <Av layer={layer} feature={feature} />}
+            {tab === TABS[1] && <Nl layer={layer} feature={feature} />}
+            {tab === TABS[0] && <Region layer={layer} feature={feature} />}
           </div>
         </>
       )}

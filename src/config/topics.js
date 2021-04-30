@@ -180,6 +180,8 @@ export const bauprojekte = {
     ...defaultElements,
     shareMenu: true,
     popup: true,
+    filter: true,
+    filters: true,
   },
   layers: [
     dataLayer,
