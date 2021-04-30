@@ -31,11 +31,9 @@ const oldRoles = [
   'Leiter KBN',
   'Leiter Natur',
   'Leiter FW TEC',
-  'Mitarbeitende KBN', // not sure if it's the good one
+  'Mitarbeitende KBN',
   'Mitarbeitende FW TEC',
 ];
-// Role missing from old wkp
-// "Mitarbeitende KBN": "Av NR/Tunnel",
 
 const PERMALINK_PARAM = 'regionRole';
 
@@ -97,9 +95,31 @@ function Region({ feature }) {
           </Select>
         </div>
       </div>
-      {(Array.isArray(person) ? person : [person]).map((data) => (
-        <Person key={data.toString()} person={data} />
-      ))}
+      {(Array.isArray(person) ? person : [person])
+        .sort(
+          (
+            { unterrolle: unterrolleA, kommentar: kommentarA, name: nameA },
+            { unterrolle: unterrolleB, kommentar: kommentarB, name: nameB },
+          ) => {
+            // First, persons with unterolle, then persons without.
+            if (unterrolleA || unterrolleB) {
+              if (!unterrolleA || !unterrolleB) {
+                return unterrolleA < unterrolleB ? 1 : -1;
+              }
+              if (kommentarA || kommentarB) {
+                return `${unterrolleA} ${kommentarA}` <
+                  `${unterrolleB} ${kommentarB}`
+                  ? -1
+                  : 1;
+              }
+              return unterrolleA < unterrolleB ? -1 : 1;
+            }
+            return nameA < nameB ? -1 : 1;
+          },
+        )
+        .map((data) => (
+          <Person key={JSON.stringify(data)} person={data} />
+        ))}
     </>
   );
 }

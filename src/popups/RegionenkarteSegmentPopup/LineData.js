@@ -22,21 +22,35 @@ function LineData({ lineData }) {
       <legend>{t('Linien')}</legend>
       {lineData && lineData.length ? (
         <div>
-          {lineData.map((data) => {
-            const {
-              line_number: lineNumber,
-              km_start: kmStart,
-              km_end: kmEnd,
-            } = data;
-            return (
-              <div
-                key={`${lineNumber}-${kmStart}
+          {lineData
+            .sort(
+              (
+                { line_number: lineNumberA, km_start: kmStartA },
+                { line_number: lineNumberB, km_start: kmStartB },
+              ) => {
+                if (lineNumberA === lineNumberB) {
+                  return kmStartA < kmStartB ? -1 : 1;
+                }
+                return parseFloat(lineNumberA) < parseFloat(lineNumberB)
+                  ? -1
+                  : 1;
+              },
+            )
+            .map((data) => {
+              const {
+                line_number: lineNumber,
+                km_start: kmStart,
+                km_end: kmEnd,
+              } = data;
+              return (
+                <div
+                  key={`${lineNumber}-${kmStart}
                 }-${kmEnd}`}
-              >{`${
-                lineNumber ? `${lineNumber}, ` : ''
-              }km ${kmStart} - ${kmEnd}`}</div>
-            );
-          })}
+                >{`${
+                  lineNumber ? `${lineNumber}, ` : ''
+                }km ${kmStart} - ${kmEnd}`}</div>
+              );
+            })}
         </div>
       ) : (
         <div>{t('Information nicht verfügbar')}</div>

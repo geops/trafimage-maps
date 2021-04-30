@@ -1358,61 +1358,6 @@ export const zweitausbildungRoutes = new Layer({
   ],
 });
 
-// export const regionenkartePublicSegment = new TrafimageGeoServerWMSLayer({
-//   name: "ch.sbb.regionenkarte.intern.av_segmente.public",
-//   visible: true,
-//   isQueryable: false,
-//   zIndex: 1,
-//   olLayer: new TileLayer({
-//     source: new TileWMSSource({
-//       crossOrigin: "anonymous",
-//       params: {
-//         layers: "trafimage:regionenkarte_av_segmente",
-//       },
-//       tileGrid: new TileGrid({
-//         extent: projectionExtent,
-//         resolutions: LayerHelper.getMapResolutions(),
-//         matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-//       }),
-//     }),
-//   }),
-//   properties: {
-//     hasInfos: false,
-//     layerInfoComponent: "ZweitausbildungSubLayerInfo",
-//     // zweitausbildung: {
-//     //   infos: {
-//     //     title: "ch.sbb.zweitausbildung.haltestellen.aufbau-title",
-//     //     legend: [
-//     //       {
-//     //         image: "station_aufbau.png",
-//     //         name: "ch.sbb.zweitausbildung.haltestellen-stations",
-//     //       },
-//     //       {
-//     //         image: "station_aufbau_grenzstation.png",
-//     //         name: "ch.sbb.zweitausbildung.haltestellen-border-stations",
-//     //       },
-//     //     ],
-//     //   },
-//     // },
-//   },
-//   children: [
-//     new RegionenkarteSegmentHighlightLayer({
-//       name: "ch.sbb.regionenkarte.intern.av_segmente.public.highlight",
-//       visible: true,
-//       zIndex: 1,
-//       properties: {
-//         hasInfos: true,
-//         popupComponent: "RegionenkarteSegmentPopup",
-//         useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
-//         hideInLegend: true,
-//         custom: {
-//           featureInfoLayer: "regionenkarte_av_segmente_qry_xyr",
-//         },
-//       },
-//     }),
-//   ],
-// });
-
 export const anlagenverantwortliche = new TrafimageMapboxLayer({
   name: 'ch.sbb.anlagenverantwortliche',
   isBaseLayer: false,
