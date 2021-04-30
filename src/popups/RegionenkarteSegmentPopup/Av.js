@@ -37,7 +37,7 @@ function Av({ layer, feature, onChangeRole }) {
   const classes = useStyles();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const accessType = layer.get('accessType') || 'public';
-  const isPrivate = accessType !== 'private';
+  const isPrivate = accessType === 'private';
   const parsed = qs.parseUrl(window.location.href);
   const permalinkParam = parsed.query[PERMALINK_PARAM];
   const [role, setRole] = useState(

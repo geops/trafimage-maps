@@ -60,7 +60,7 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const accessType = layer.get('accessType') || 'public';
-  const isPrivate = accessType !== 'private';
+  const isPrivate = accessType === 'private';
   const parsed = qs.parseUrl(window.location.href);
   const [tab, setTab] = useState(parsed.query[PERMALINK_PARAM] || TABS[2]);
   const [avRole, setAvRole] = useState();
