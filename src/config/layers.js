@@ -83,7 +83,7 @@ export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
   isBaseLayer: true,
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'tarifverbundkarte',
+  style: 'ch.sbb.tarifverbund',
   properties: {
     hideInLegend: true,
   },

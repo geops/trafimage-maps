@@ -133,10 +133,6 @@ export const getMapHd = (
 };
 
 export const clean = (mapToExport) => {
-  if (!mapToExport.getTarget()) {
-    return;
-  }
-
   mapToExport.getLayers().clear();
   document.body.removeChild(mapToExport.getTarget());
   mapToExport.setTarget(null);

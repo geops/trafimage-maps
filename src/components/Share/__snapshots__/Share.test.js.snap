@@ -5,13 +5,11 @@ exports[`Share should match snapshot. 1`] = `
   className="wkp-share"
 >
   <div
-    autodownload="false"
     className="no-css"
     disabled={false}
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    scale={1}
     style={
       Object {
         "opacity": 1,
@@ -29,13 +27,11 @@ exports[`Share should match snapshot. 1`] = `
     </button>
   </div>
   <div
-    autodownload="false"
     className="no-css"
     disabled={false}
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    scale={1}
     style={
       Object {
         "opacity": 1,
@@ -53,13 +49,11 @@ exports[`Share should match snapshot. 1`] = `
     </button>
   </div>
   <div
-    autodownload="false"
     className="no-css"
     disabled={false}
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    scale={1}
     style={
       Object {
         "opacity": 1,
@@ -77,13 +71,11 @@ exports[`Share should match snapshot. 1`] = `
     </button>
   </div>
   <div
-    autodownload="false"
     className="no-css"
     disabled={false}
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    scale={1}
     style={
       Object {
         "opacity": 1,
@@ -101,13 +93,11 @@ exports[`Share should match snapshot. 1`] = `
     </button>
   </div>
   <div
-    autodownload="false"
     className="no-css"
     disabled={false}
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    scale={1}
     style={
       Object {
         "opacity": 1,
@@ -125,13 +115,11 @@ exports[`Share should match snapshot. 1`] = `
     </button>
   </div>
   <div
-    autodownload="false"
     className="no-css"
     disabled={false}
     onClick={[Function]}
     onKeyPress={[Function]}
     role="button"
-    scale={1}
     style={
       Object {
         "opacity": 1,

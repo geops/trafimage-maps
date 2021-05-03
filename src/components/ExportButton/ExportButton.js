@@ -4,8 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import { jsPDF as JsPDF } from 'jspdf';
+import Canvg from 'canvg';
 import determineMaxCanvasSize from '../../utils/canvasSize';
 import { ReactComponent as Loader } from './loader.svg';
+import legend from './tarifverbund_legend.svg';
 
 import './ExportButton.scss';
 
@@ -89,7 +91,7 @@ function ExportButton({
         title={t('Als PNG speichern')}
         disabled={isExportSizeTooBig || isLoading}
         extraData={generateExtraData(layerService, true)}
-        autodownload="false"
+        autoDownload={false}
         format="image/jpeg"
         onSaveStart={() => {
           setLoading(true);
@@ -103,11 +105,8 @@ function ExportButton({
             exportExtent,
           );
         }}
-        onSaveEnd={(mapToExport, canvas) => {
-          if (!mapToExport || !canvas) {
-            setLoading(false);
-            return;
-          }
+        onSaveEnd={async (mapToExport, canvas) => {
+          console.log(legend);
           clean(mapToExport, map, layerService);
 
           // add the image to a newly created PDF
@@ -120,6 +119,12 @@ function ExportButton({
           const ctx = canvas.getContext('2d');
           ctx.scale(1 / exportScale, 1 / exportScale);
           doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
+
+          const svgCanvas = document.createElement('canvas');
+          const canvg = await Canvg.from(svgCanvas, legend);
+          canvg.start();
+          const imgData = svgCanvas.toDataURL('image/png');
+          doc.addImage(imgData, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
           // download the result
           const filename = `trafimage-${new Date()
