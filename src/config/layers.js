@@ -1408,6 +1408,7 @@ export const regionenkartePublicSegment = new MapboxStyleLayer({
     new MapboxStyleLayer({
       name: 'ch.sbb.regionenkarte.intern.av_stations.public',
       visible: true,
+      isQueryable: false,
       mapboxLayer: anlagenverantwortliche,
       styleLayers: [
         {
@@ -1519,6 +1520,7 @@ export const regionenkartePublicSegment = new MapboxStyleLayer({
 export const regionenkarteOverlayGroup = new Layer({
   name: 'ch.sbb.infrastruktur.overlay.group',
   visible: true,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.infrastruktur.overlay.group-desc',
@@ -1527,6 +1529,7 @@ export const regionenkarteOverlayGroup = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.infrastruktur.betriebspunkte',
       visible: true,
+      isQueryable: false,
       mapboxLayer: netzkarteEisenbahninfrastruktur,
       styleLayersFilter: ({ id }) => {
         // We select all stations
@@ -1540,6 +1543,7 @@ export const regionenkarteOverlayGroup = new Layer({
     new MapboxStyleLayer({
       name: 'ch.sbb.infrastruktur.line_point',
       visible: true,
+      isQueryable: false,
       mapboxLayer: netzkarteEisenbahninfrastruktur,
       styleLayersFilter: ({ id, type }) => {
         // We select all lines which are not water and borders.

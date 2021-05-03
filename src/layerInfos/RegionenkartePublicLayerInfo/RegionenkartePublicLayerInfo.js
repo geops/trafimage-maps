@@ -7,10 +7,10 @@ import lila from './lila.png';
 import rot from './rot.png';
 
 const title = {
-  de: 'Regionenkarte I-AT-UEW',
-  fr: 'Cartes régionales I-AT-UEW',
-  en: 'Regional map I-AT-UEW',
-  it: 'Cartina della regione I-AT-UEW',
+  de: 'Regionenkarte I-VU-UEW',
+  fr: 'Cartes régionales I-VU-UEW',
+  en: 'Regional map I-VU-UEW',
+  it: 'Cartina della regione I-VU-UEW',
 };
 
 const description = {
