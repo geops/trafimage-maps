@@ -35,6 +35,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
     // Remove selected feature on terminate
     if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
       this.source.removeFeature(this.selectedZone);
+      this.selectedZone = null;
     }
     super.terminate(map);
   }
@@ -43,6 +44,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
     // Remove previous selection
     if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
       this.source.removeFeature(this.selectedZone);
+      this.selectedZone = null;
     }
     this.getFeatureInfoAtCoordinate(e.coordinate).then((data) => {
       const [feature] = data.features; // Municipality feature containing the zone objects in the properties
