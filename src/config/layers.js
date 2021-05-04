@@ -1378,6 +1378,7 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
     hideInLegend: true,
     popupComponent: 'TarifverbundkartePopup',
   },
+  onClick: () => {},
   styleLayers: [
     {
       id: 'verbundskarte',

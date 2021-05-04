@@ -12,50 +12,46 @@ const propTypes = {
 const TarifverbundkartePopup = ({ feature }) => {
   const { t } = useTranslation();
   const properties = feature.getProperties();
-  const municipality = properties.name;
-  const tarifGroup = properties.partners;
-  const tarifGroupUrl = properties.tarifverbund_urls;
-  const tarifZone = properties.zone?.zone;
-  const zPass = properties.zPass?.partners;
-  const zPassUrl = properties.zPass?.tarifverbund_urls;
+  const { zPass, zones } = properties;
+  // const zones = [
+  //   { partner: 'geOps', tarifverbund_url: 'https://www.geops.ch/', zone: 4 },
+  //   {
+  //     partner: 'Loooooong link',
+  //     tarifverbund_url: 'https://www.geops.ch/',
+  //     zone: 4,
+  //   },
+  // ];
+  // const zPass = { partner: 'Z-Pass', url: 'https://www.geops.ch/' };
+
+  if (!zones && !zPass?.tarifverbund_urls) {
+    return null;
+  }
 
   return (
     <div className="wkp-tarifverbundkarte-popup">
-      <div className="wkp-tarifverbundkarte-popup-cell-head">
-        {`${t('Gemeinde')}:`}
-      </div>
-      <div className="wkp-tarifverbundkarte-popup-cell">{municipality}</div>
-      {tarifGroup && (
-        <>
-          <div className="wkp-tarifverbundkarte-popup-cell-head">
-            {`${t('Verbund')}:`}
+      {zones?.map((tarifZone, idx, array) => {
+        return (
+          <div key={tarifZone.id}>
+            <div className="wkp-tarifverbundkarte-tarifzone">
+              {tarifZone.tarifverbund_urls ? (
+                <Link href={tarifZone.tarifverbund_urls}>
+                  {tarifZone.verbund}
+                </Link>
+              ) : (
+                tarifZone.verbund
+              )}
+            </div>
+            <div className="wkp-tarifverbundkarte-tarifzone-number">
+              {`${t('Zone')} ${tarifZone.zone}`}
+            </div>
+            {(idx !== array.length - 1 || zPass) && <hr />}
           </div>
-          <div className="wkp-tarifverbundkarte-popup-cell">
-            {tarifGroupUrl ? (
-              <Link href={tarifGroupUrl}>{tarifGroup}</Link>
-            ) : (
-              `${tarifGroup}`
-            )}
-          </div>
-        </>
-      )}
-      {tarifZone && (
-        <>
-          <div className="wkp-tarifverbundkarte-popup-cell-head">
-            {`${t('Zone')}:`}
-          </div>
-          <div className="wkp-tarifverbundkarte-popup-cell">{tarifZone}</div>
-        </>
-      )}
-      {zPass && zPassUrl && (
-        <>
-          <div className="wkp-tarifverbundkarte-popup-cell-head">
-            {`${t('Z-Pass')}:`}
-          </div>
-          <div className="wkp-tarifverbundkarte-popup-cell">
-            <Link href={zPassUrl}>{zPass}</Link>
-          </div>
-        </>
+        );
+      })}
+      {zPass?.tarifverbund_urls && (
+        <div key="z-pass" className="wkp-tarifverbundkarte-zpass">
+          <Link href={zPass.tarifverbund_urls}>{zPass.partners}</Link>
+        </div>
       )}
     </div>
   );
@@ -64,6 +60,6 @@ const TarifverbundkartePopup = ({ feature }) => {
 TarifverbundkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(TarifverbundkartePopup);
-memoized.hideHeader = () => true;
+memoized.renderTitle = (feat) => feat.get('name');
 
 export default memoized;

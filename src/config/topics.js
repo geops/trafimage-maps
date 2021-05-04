@@ -257,6 +257,7 @@ export const tarifverbundkarte = {
     shareMenu: true,
     trackerMenu: true,
   },
+  searches: defaultSearches,
 };
 
 export const showcases = {
