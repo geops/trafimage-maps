@@ -1411,9 +1411,6 @@ export const regionenkartePublicSegment = new Layer({
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.stations/.test(id);
       },
-      queryRenderedLayersFilter: ({ id }) => {
-        return false;
-      },
       properties: {
         hideInLegend: true,
       },
