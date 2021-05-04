@@ -1360,156 +1360,49 @@ export const zweitausbildungRoutes = new Layer({
 
 export const anlagenverantwortliche = new TrafimageMapboxLayer({
   name: 'ch.sbb.anlagenverantwortliche',
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.anlagenverantwortliche',
   isBaseLayer: false,
   visible: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'ch.sbb.anlagenverantwortliche',
   properties: {
-    hasInfos: false,
     hideInLegend: true,
   },
 });
-export const regionenkartePublicSegment = new MapboxStyleLayer({
+
+export const regionenkartePublicSegment = new Layer({
   name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
   visible: true,
-  mapboxLayer: anlagenverantwortliche,
-  styleLayers: [
-    {
-      id: 'lines',
-      type: 'line',
-      source: 'ch.sbb.anlagenverantwortliche',
-      'source-layer': 'ch.sbb.anlagenverantwortliche',
-      paint: {
-        'line-color': [
-          'case',
-          ['==', ['get', 'region'], 'Ost'],
-          '#2F9F48',
-          ['==', ['get', 'region'], 'Mitte'],
-          '#A083C7',
-          ['==', ['get', 'region'], 'West'],
-          '#FFCC00',
-          ['==', ['get', 'region'], 'Süd'],
-          '#DC320A',
-          '#00ff00',
-        ],
-        'line-width': 2,
-      },
-    },
-  ],
+  isQueryable: false,
   properties: {
     hasInfos: true,
-    useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
     layerInfoComponent: 'RegionenkartePublicLayerInfo',
-    popupComponent: 'RegionenkarteSegmentPopup',
   },
   children: [
     new MapboxStyleLayer({
-      name: 'ch.sbb.regionenkarte.intern.av_stations.public',
-      visible: true,
+      name: 'ch.sbb.regionenkarte.lines',
+      isQueryable: true,
+      mapboxLayer: anlagenverantwortliche,
+      styleLayersFilter: ({ id }) => {
+        return /anlagenverantwortliche.lines/.test(id);
+      },
+      queryRenderedLayersFilter: ({ id }) => {
+        return /anlagenverantwortliche.lines/.test(id);
+      },
+      properties: {
+        hideInLegend: true,
+        useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
+        popupComponent: 'RegionenkarteSegmentPopup',
+      },
+    }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.regionenkarte.stations',
       isQueryable: false,
       mapboxLayer: anlagenverantwortliche,
-      styleLayers: [
-        {
-          id: 'stations_circle_black',
-          type: 'circle',
-          source: 'ch.sbb.anlagenverantwortliche',
-          'source-layer': 'ch.sbb.anlagenverantwortliche',
-          filter: [
-            'all',
-            ['any', ['==', 'level_station', 1], ['==', 'level_station', 10]],
-          ],
-          paint: {
-            'circle-color': '#000000',
-            'circle-radius': [
-              'case',
-              ['==', ['get', 'level_station'], 1],
-              10,
-              ['==', ['get', 'level_station'], 10],
-              8,
-              0,
-            ],
-          },
-        },
-        {
-          id: 'stations_circle_colored',
-          type: 'circle',
-          source: 'ch.sbb.anlagenverantwortliche',
-          'source-layer': 'ch.sbb.anlagenverantwortliche',
-          filter: ['has', 'level_station'],
-          paint: {
-            'circle-radius': [
-              'case',
-              ['==', ['get', 'level_station'], 1],
-              6,
-              ['==', ['get', 'level_station'], 10],
-              4.5,
-              ['==', ['get', 'level_station'], 11],
-              5,
-              ['==', ['get', 'level_station'], 12],
-              4.5,
-              ['==', ['get', 'level_station'], 13],
-              4,
-              ['==', ['get', 'level_station'], 20],
-              3.5,
-              ['==', ['get', 'level_station'], 21],
-              3,
-              ['==', ['get', 'level_station'], 22],
-              3,
-              2,
-            ],
-            'circle-blur': 0,
-            'circle-stroke-color': [
-              'case',
-              [
-                'any',
-                ['==', ['get', 'level_station'], 11],
-                ['==', ['get', 'level_station'], 12],
-                ['==', ['get', 'level_station'], 13],
-                ['==', ['get', 'level_station'], 20],
-                ['==', ['get', 'level_station'], 21],
-                ['==', ['get', 'level_station'], 22],
-              ],
-              '#000000',
-              [
-                'case',
-                ['==', ['get', 'region'], 'Ost'],
-                '#2F9F48',
-                ['==', ['get', 'region'], 'Mitte'],
-                '#A083C7',
-                ['==', ['get', 'region'], 'West'],
-                '#FFCC00',
-                ['==', ['get', 'region'], 'Süd'],
-                '#DC320A',
-                '#00ff00',
-              ],
-            ],
-            'circle-color': [
-              'case',
-              [
-                'any',
-                ['==', ['get', 'level_station'], 1],
-                ['==', ['get', 'level_station'], 10],
-              ],
-              '#ffffff',
-              [
-                'case',
-                ['==', ['get', 'region'], 'Ost'],
-                '#2F9F48',
-                ['==', ['get', 'region'], 'Mitte'],
-                '#A083C7',
-                ['==', ['get', 'region'], 'West'],
-                '#FFCC00',
-                ['==', ['get', 'region'], 'Süd'],
-                '#DC320A',
-                '#00ff00',
-              ],
-            ],
-            'circle-stroke-width': 1.5,
-          },
-        },
-      ],
+      styleLayersFilter: ({ id }) => {
+        return /anlagenverantwortliche\.stations/.test(id);
+      },
       properties: {
         hideInLegend: true,
       },
@@ -1530,7 +1423,7 @@ export const regionenkarteOverlayGroup = new Layer({
       name: 'ch.sbb.infrastruktur.betriebspunkte',
       visible: true,
       isQueryable: false,
-      mapboxLayer: netzkarteEisenbahninfrastruktur,
+      mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
         // We select all stations
         return /FanasStation/.test(id);
@@ -1544,15 +1437,9 @@ export const regionenkarteOverlayGroup = new Layer({
       name: 'ch.sbb.infrastruktur.line_point',
       visible: true,
       isQueryable: false,
-      mapboxLayer: netzkarteEisenbahninfrastruktur,
-      styleLayersFilter: ({ id, type }) => {
-        // We select all lines which are not water and borders.
-        // and DFA are line numbers.
-        return (
-          (/line/.test(type) || /DFA/.test(id)) &&
-          id.indexOf('water') === -1 &&
-          id.indexOf('border') === -1
-        );
+      mapboxLayer: anlagenverantwortliche,
+      styleLayersFilter: ({ id }) => {
+        return /FanasLine|DFA/.test(id);
       },
       properties: {
         hasInfos: true,

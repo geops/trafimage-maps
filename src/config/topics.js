@@ -242,7 +242,6 @@ export const regionenkartePublic = {
     popup: true,
   },
   layers: [
-    netzkarteEisenbahninfrastruktur,
     anlagenverantwortliche,
     regionenkarteOverlayGroup,
     regionenkartePublicSegment,

@@ -206,7 +206,15 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
           </div>
         </>
       )}
-      {!isPrivate && <Av layer={layer} feature={feature} />}
+      {!isPrivate && (
+        <Av
+          layer={layer}
+          feature={feature}
+          onChangeRole={(role) => {
+            setAvRole(role);
+          }}
+        />
+      )}
     </div>
   );
 }

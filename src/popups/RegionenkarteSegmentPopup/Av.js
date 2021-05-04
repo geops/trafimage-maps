@@ -73,7 +73,7 @@ function Av({ layer, feature, onChangeRole }) {
   }, [cartaroUrl, feature, role]);
 
   useEffect(() => {
-    if (role !== parsed.query[PERMALINK_PARAM]) {
+    if (isPrivate && role !== parsed.query[PERMALINK_PARAM]) {
       parsed.query[PERMALINK_PARAM] = role;
       window.history.replaceState(
         undefined,
@@ -81,8 +81,10 @@ function Av({ layer, feature, onChangeRole }) {
         `?${qs.stringify(parsed.query)}`,
       );
       onChangeRole(role);
+    } else if (!isPrivate) {
+      onChangeRole(role);
     }
-  }, [parsed, role, onChangeRole]);
+  }, [parsed, role, onChangeRole, isPrivate]);
 
   return (
     <>

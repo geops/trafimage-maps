@@ -29,44 +29,17 @@ class KilometrageLayer extends Layer {
     )
       .then((data) => data.json())
       .then((data) => {
-        if (data.error || data.detail) {
+        if (data.error || data.detail || !data.line_number) {
           return { features: [], layer, coordinate };
         }
 
-        const feature = new Feature();
-        feature.setProperties(data);
+        const feature = new Feature(data);
         return {
           features: [feature],
           layer,
           coordinate,
         };
       });
-    // return fetch(
-    //   `${this.geoServerUrl}?` +
-    //     'service=WFS&version=1.0.0&request=GetFeature&' +
-    //     `typeName=linien_qry_fanas&` +
-    //     'srsName=EPSG:3857&maxFeatures=50&' +
-    //     'outputFormat=application/json&' +
-    //     `viewparams=x:${parseInt(newX, 10)};y:${parseInt(
-    //       newY,
-    //       10,
-    //     )};r:${meterRad}`,
-    // )
-    //   .then((data) => data.json())
-    //   .then((data) => {
-    //     const format = new GeoJSON();
-    //     const features = format.readFeatures(data);
-
-    //     return {
-    //       features,
-    //       layer,
-    //       coordinate,
-    //     };
-    //   });
-  }
-
-  setGeoServerUrl(geoServerUrl) {
-    this.geoServerUrl = geoServerUrl;
   }
 
   setCartaroUrl(cartaroUrl) {
