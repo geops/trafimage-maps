@@ -28,6 +28,17 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
     this.olListenersKeys.push(this.map.on('click', (e) => this.selectZone(e))); // Add click listener
   }
 
+  /**
+   * @override
+   */
+  terminate(map) {
+    // Remove selected feature on terminate
+    if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
+      this.source.removeFeature(this.selectedZone);
+    }
+    super.terminate(map);
+  }
+
   selectZone(e) {
     // Remove previous selection
     if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
