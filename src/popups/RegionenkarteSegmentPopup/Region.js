@@ -118,7 +118,7 @@ function Region({ feature }) {
           },
         )
         .map((data) => (
-          <Person key={JSON.stringify(data)} person={data} />
+          <Person key={JSON.stringify(data)} person={data} isIntern />
         ))}
     </>
   );

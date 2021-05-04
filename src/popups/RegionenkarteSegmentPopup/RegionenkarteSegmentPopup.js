@@ -60,17 +60,17 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const accessType = layer.get('accessType') || 'public';
-  const isPrivate = accessType === 'private';
+  const isIntern = accessType === 'intern';
   const parsed = qs.parseUrl(window.location.href);
   const [tab, setTab] = useState(parsed.query[PERMALINK_PARAM] || TABS[2]);
   const [avRole, setAvRole] = useState();
-
+  console.log(feature);
   const handleChange = (event, newTab) => {
     setTab(TABS[newTab]);
   };
 
   useEffect(() => {
-    if (isPrivate && tab !== parsed.query[PERMALINK_PARAM]) {
+    if (isIntern && tab !== parsed.query[PERMALINK_PARAM]) {
       parsed.query[PERMALINK_PARAM] = tab;
       window.history.replaceState(
         undefined,
@@ -78,108 +78,45 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
         `?${qs.stringify(parsed.query)}`,
       );
     }
-  }, [isPrivate, parsed, tab]);
+  }, [isIntern, parsed, tab]);
 
   useEffect(() => {
+    const layerId = 'anlagenverantwortliche.lines.highlight';
     const mbMap = layer?.mapboxLayer?.mbMap;
-    if (!mbMap) {
+
+    if (!mbMap || !mbMap.getLayer(layerId)) {
       return () => {};
     }
-    const layerId = 'highlightlines';
+
+    let property;
+    let value;
+
     if (tab === TABS[0]) {
-      mbMap.addLayer({
-        id: layerId,
-        type: 'line',
-        source: 'ch.sbb.anlagenverantwortliche',
-        'source-layer': 'ch.sbb.anlagenverantwortliche',
-        filter: ['==', 'region', feature.get('region')],
-        paint: {
-          'line-color': [
-            'case',
-            ['==', ['get', 'region'], 'Ost'],
-            '#2F9F48',
-            ['==', ['get', 'region'], 'Mitte'],
-            '#A083C7',
-            ['==', ['get', 'region'], 'West'],
-            '#FFCC00',
-            ['==', ['get', 'region'], 'Süd'],
-            '#DC320A',
-            '#00ff00',
-          ],
-          'line-width': 8,
-          'line-opacity': 0.5,
-        },
-        layout: {
-          'line-join': 'round',
-        },
-      });
+      property = 'region';
+      value = feature.get('region');
     } else if (tab === TABS[1]) {
-      const name = feature.get('niederlassung_name');
-      mbMap.addLayer({
-        id: layerId,
-        type: 'line',
-        source: 'ch.sbb.anlagenverantwortliche',
-        'source-layer': 'ch.sbb.anlagenverantwortliche',
-        filter: ['==', 'niederlassung_name', name],
-        paint: {
-          'line-color': [
-            'case',
-            ['==', ['get', 'region'], 'Ost'],
-            '#2F9F48',
-            ['==', ['get', 'region'], 'Mitte'],
-            '#A083C7',
-            ['==', ['get', 'region'], 'West'],
-            '#FFCC00',
-            ['==', ['get', 'region'], 'Süd'],
-            '#DC320A',
-            '#00ff00',
-          ],
-          'line-width': 8,
-          'line-opacity': 0.5,
-        },
-        layout: {
-          'line-join': 'round',
-        },
-      });
+      property = 'niederlassung_name';
+      value = feature.get('niederlassung_name');
     } else if (tab === TABS[2]) {
-      const name = feature.get(avRole);
-      mbMap.addLayer({
-        id: layerId,
-        type: 'line',
-        source: 'ch.sbb.anlagenverantwortliche',
-        'source-layer': 'ch.sbb.anlagenverantwortliche',
-        filter: ['==', avRole, name],
-        paint: {
-          'line-color': [
-            'case',
-            ['==', ['get', 'region'], 'Ost'],
-            '#2F9F48',
-            ['==', ['get', 'region'], 'Mitte'],
-            '#A083C7',
-            ['==', ['get', 'region'], 'West'],
-            '#FFCC00',
-            ['==', ['get', 'region'], 'Süd'],
-            '#DC320A',
-            '#00ff00',
-          ],
-          'line-width': 8,
-          'line-opacity': 0.5,
-        },
-        layout: {
-          'line-join': 'round',
-        },
-      });
+      property = avRole;
+      value = feature.get(avRole);
     }
+
+    if (property && value) {
+      mbMap.setFilter(layerId, ['==', property, value]);
+      mbMap.setLayoutProperty(layerId, 'visibility', 'visible');
+    }
+
     return () => {
       if (mbMap.getLayer(layerId)) {
-        mbMap.removeLayer('highlightlines');
+        mbMap.setLayoutProperty(layerId, 'visibility', 'none');
       }
     };
-  }, [feature, isPrivate, layer.mapboxLayer, tab, avRole]);
+  }, [feature, isIntern, layer.mapboxLayer, tab, avRole]);
 
   return (
     <div className={classes.root}>
-      {isPrivate && (
+      {isIntern && (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -206,7 +143,7 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
           </div>
         </>
       )}
-      {!isPrivate && (
+      {!isIntern && (
         <Av
           layer={layer}
           feature={feature}

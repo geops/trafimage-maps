@@ -154,6 +154,7 @@ class MapboxStyleLayer extends Layer {
     if (!mbMap || !mbMap.isStyleLoaded()) {
       return Promise.resolve({ coordinate, features: [], layer: this });
     }
+
     return this.mapboxLayer
       .getFeatureInfoAtCoordinate(coordinate, {
         layers: (this.queryRenderedLayersFilter

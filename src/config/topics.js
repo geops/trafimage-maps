@@ -237,6 +237,7 @@ export const betriebsregionen = {
 export const regionenkartePublic = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
+  maxZoom: 14,
   elements: {
     ...defaultElements,
     popup: true,
@@ -248,6 +249,7 @@ export const regionenkartePublic = {
     kilometrageLayer,
   ],
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
+  searches: defaultSearches,
 };
 
 export const tarifverbundkarte = {

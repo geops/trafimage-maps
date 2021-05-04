@@ -7,6 +7,7 @@ import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import { TrajservAPI } from 'mobility-toolbox-js/api';
+import { LineString, MultiLineString } from 'ol/geom';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
@@ -1385,10 +1386,17 @@ export const regionenkartePublicSegment = new Layer({
       isQueryable: true,
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
-        return /anlagenverantwortliche.lines/.test(id);
+        return /anlagenverantwortliche\.lines$/.test(id);
       },
       queryRenderedLayersFilter: ({ id }) => {
-        return /anlagenverantwortliche.lines/.test(id);
+        return /anlagenverantwortliche\.lines$/.test(id);
+      },
+      featureInfoFilter: (feature) => {
+        // There is some points in this data source and we don't want them.
+        return (
+          feature.getGeometry() instanceof LineString ||
+          feature.getGeometry() instanceof MultiLineString
+        );
       },
       properties: {
         hideInLegend: true,
@@ -1402,6 +1410,9 @@ export const regionenkartePublicSegment = new Layer({
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.stations/.test(id);
+      },
+      queryRenderedLayersFilter: ({ id }) => {
+        return false;
       },
       properties: {
         hideInLegend: true,

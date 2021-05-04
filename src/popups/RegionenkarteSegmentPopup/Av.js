@@ -37,7 +37,7 @@ function Av({ layer, feature, onChangeRole }) {
   const classes = useStyles();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const accessType = layer.get('accessType') || 'public';
-  const isPrivate = accessType === 'private';
+  const isIntern = accessType === 'intern';
   const parsed = qs.parseUrl(window.location.href);
   const permalinkParam = parsed.query[PERMALINK_PARAM];
   const [role, setRole] = useState(
@@ -64,7 +64,16 @@ function Av({ layer, feature, onChangeRole }) {
         .then((resp) => resp.json())
         .then((newLineData) => {
           setLineData(newLineData);
+        })
+        .catch((err) => {
+          if (err && err.name === 'AbortError') {
+            // ignore user abort request
+          } else {
+            setLineData([]);
+          }
         });
+    } else {
+      setLineData([]);
     }
 
     return () => {
@@ -73,7 +82,7 @@ function Av({ layer, feature, onChangeRole }) {
   }, [cartaroUrl, feature, role]);
 
   useEffect(() => {
-    if (isPrivate && role !== parsed.query[PERMALINK_PARAM]) {
+    if (isIntern && role !== parsed.query[PERMALINK_PARAM]) {
       parsed.query[PERMALINK_PARAM] = role;
       window.history.replaceState(
         undefined,
@@ -81,17 +90,17 @@ function Av({ layer, feature, onChangeRole }) {
         `?${qs.stringify(parsed.query)}`,
       );
       onChangeRole(role);
-    } else if (!isPrivate) {
+    } else if (!isIntern) {
       onChangeRole(role);
     }
-  }, [parsed, role, onChangeRole, isPrivate]);
+  }, [parsed, role, onChangeRole, isIntern]);
 
   return (
     <>
       <Line feature={feature} />
       <div className={classes.description}>
         <div>
-          {isPrivate && (
+          {isIntern && (
             <Select
               value={role}
               onChange={(evt) => setRole(evt.target.value)}
@@ -108,12 +117,12 @@ function Av({ layer, feature, onChangeRole }) {
                 })}
             </Select>
           )}
-          {!isPrivate && (
+          {!isIntern && (
             <b>{t(role === 'av_bnb' ? 'Koordinator Bahnnahes Bauen' : 'Av')}</b>
           )}
         </div>
       </div>
-      <Person person={person} />
+      <Person person={person} isIntern={isIntern} />
       {lineData && <LineData lineData={lineData} />}
     </>
   );

@@ -22,7 +22,7 @@ const blockSkype = (phone) => {
   );
 };
 
-function Person({ person }) {
+function Person({ isIntern, person }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const { name, phone, email, division, unterrolle, kommentar } = person;
@@ -36,7 +36,7 @@ function Person({ person }) {
           <div>{name}</div>
           {division && <div>{division}</div>}
           {phone && <div>{blockSkype(phone)}</div>}
-          {email && (
+          {isIntern && email && (
             <div>
               <a href={`mailto:${email.toLowerCase()}`}>
                 {email.toLowerCase()}
@@ -58,6 +58,7 @@ Person.propTypes = {
     unterrolle: PropTypes.string,
     kommentar: PropTypes.string,
   }),
+  isIntern: PropTypes.bool.isRequired,
 };
 
 Person.defaultProps = {
