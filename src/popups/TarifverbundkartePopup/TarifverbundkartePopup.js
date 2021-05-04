@@ -13,15 +13,6 @@ const TarifverbundkartePopup = ({ feature }) => {
   const { t } = useTranslation();
   const properties = feature.getProperties();
   const { zPass, zones } = properties;
-  // const zones = [
-  //   { partner: 'geOps', tarifverbund_url: 'https://www.geops.ch/', zone: 4 },
-  //   {
-  //     partner: 'Loooooong link',
-  //     tarifverbund_url: 'https://www.geops.ch/',
-  //     zone: 4,
-  //   },
-  // ];
-  // const zPass = { partner: 'Z-Pass', url: 'https://www.geops.ch/' };
 
   if (!zones && !zPass?.tarifverbund_urls) {
     return null;
@@ -38,7 +29,7 @@ const TarifverbundkartePopup = ({ feature }) => {
                   {tarifZone.verbund}
                 </Link>
               ) : (
-                tarifZone.verbund
+                <span>{tarifZone.verbund}</span>
               )}
             </div>
             <div className="wkp-tarifverbundkarte-tarifzone-number">
