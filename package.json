@@ -50,8 +50,8 @@
     "styled-components": "5.1.0"
   },
   "peerDependencies": {
-    "react": "^16",
-    "react-dom": "^16"
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
@@ -108,6 +108,7 @@
     "doc": "bash ./scripts/prepare-doc.sh",
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.js' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
+    "link2": "cmdToAdd=$(node ./scripts/read-pkg-json.js add) && $cmdToAdd && yarn build && cmdToRemove=$(node ./scripts/read-pkg-json.js remove) && $cmdToRemove && cd build && yarn link",
     "lint": "eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
     "prebuild": "rm -rf build/",
     "publish:alpha": "yarn publish:public --tag alpha",

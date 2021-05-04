@@ -64,7 +64,6 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
   const parsed = qs.parseUrl(window.location.href);
   const [tab, setTab] = useState(parsed.query[PERMALINK_PARAM] || TABS[2]);
   const [avRole, setAvRole] = useState();
-  console.log(feature);
   const handleChange = (event, newTab) => {
     setTab(TABS[newTab]);
   };

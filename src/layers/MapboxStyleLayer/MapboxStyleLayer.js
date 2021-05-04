@@ -15,7 +15,6 @@ import { Layer } from 'mobility-toolbox-js/ol';
 class MapboxStyleLayer extends Layer {
   constructor(options = {}) {
     super(options);
-    this.options = options;
     this.style = options.style;
     this.mapboxLayer = options.mapboxLayer;
     this.styleLayersFilter = options.styleLayersFilter;
@@ -273,9 +272,8 @@ class MapboxStyleLayer extends Layer {
    * Create exact copy of the MapboxLayer
    * @returns {MapboxLayer} MapboxLayer
    */
-  clone(mapboxLayer) {
-    const options = { ...this.options, mapboxLayer };
-    return new MapboxStyleLayer(options);
+  clone(newOptions) {
+    return new MapboxStyleLayer({ ...this.options, newOptions });
   }
 }
 
