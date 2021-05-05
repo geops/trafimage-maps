@@ -39,16 +39,12 @@ const PERMALINK_PARAM = 'regionRole';
 
 const getRoleFromPermalinkParam = (param) => {
   const idx = oldRoles.indexOf(param);
-  if (idx > -1) {
-    return roles[idx];
-  }
+  return idx > -1 ? roles[idx] : null;
 };
 
 const getPermalinkParamFromRole = (role) => {
   const idx = roles.indexOf(role);
-  if (idx > -1) {
-    return oldRoles[idx];
-  }
+  return idx > -1 ? oldRoles[idx] : null;
 };
 
 function Region({ feature }) {

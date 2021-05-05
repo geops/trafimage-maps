@@ -11689,10 +11689,10 @@ mixin-object@^2.0.1:
   dependencies:
     minimist "^1.2.5"
 
-mobility-toolbox-js@1.2.18-beta.1:
-  version "1.2.18-beta.1"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.2.18-beta.1.tgz#a487d2f73a288c13f956b3a22f5118e47a77863e"
-  integrity sha512-Mi0KRygqxnbwSy2fxaptkMXmdUqvI+3xC2QQQ4EBA1tvoBUsifv+8OYYxBkmqb+jk+7ttvKIQlbDgEe0yqYIhg==
+mobility-toolbox-js@1.2.18:
+  version "1.2.18"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.2.18.tgz#f7d5497998acd500045f94cf3f79e3925d87026d"
+  integrity sha512-UeachpHihuN35eQurOCBH0LJymi8YpKOKqBz8O4g1Aym/7qSVkSkq75LlfgV1jJ6o7S6OaZqO6ze36loquQyZg==
   dependencies:
     "@geops/geops-ui" "^0.1.8"
     "@material-ui/core" "^4.9.14"
