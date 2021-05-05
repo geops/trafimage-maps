@@ -75,15 +75,15 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
         [zonesIntersection] = zoneFeatureArray;
       }
 
-      // Intersect zones with municipality feature and create ol feature
+      // Intersect zones with municipality feature
       const finalIntersection = intersect(
         format.writeFeatureObject(zonesIntersection),
         format.writeFeatureObject(feature),
       );
-      const intersection = format.readFeature(finalIntersection);
 
-      // Highlight feature
-      intersection.setStyle(
+      // Create and highlight ol feature
+      const highlightedFeature = format.readFeature(finalIntersection);
+      highlightedFeature.setStyle(
         new Style({
           fill: new Fill({
             color: [192, 57, 43, 0.5],
@@ -98,8 +98,8 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       );
 
       // Add feature to map and store it for reference
-      this.source.addFeature(intersection);
-      this.selectedZone = intersection;
+      this.source.addFeature(highlightedFeature);
+      this.selectedZone = highlightedFeature;
       return null;
     });
   }
@@ -143,7 +143,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
         municipalityFeature.set('zPass', zPassFeature.getProperties());
       }
 
-      // Return municipality feature only to avoid popup pagination
+      // Return only municipality feature to prevent multiple feature info and popup pagination
       featureInfo.features = [municipalityFeature];
       return featureInfo;
     });
