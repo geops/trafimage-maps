@@ -121,11 +121,17 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
           zIndex: 999,
         }),
       );
-      highlightedFeature.setProperties(feature.getProperties());
 
       // Add feature to map and store it for reference
       this.source.addFeature(highlightedFeature);
       this.selectedZone = highlightedFeature;
+
+      /**
+       * Signals to the popup (if there is one open) that a feature was clicked.
+       * Used for popup close handling
+       */
+      this.set('clicked', true);
+
       return null;
     });
   }
