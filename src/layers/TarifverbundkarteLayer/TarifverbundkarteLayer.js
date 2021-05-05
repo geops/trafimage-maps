@@ -64,19 +64,15 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
    */
   terminate(map) {
     // Remove selected feature on terminate
-    if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
-      this.source.removeFeature(this.selectedZone);
-      this.selectedZone = null;
-    }
+    this.removeSelection();
     super.terminate(map);
   }
 
   selectZone(e) {
     // Remove previous selection
-    if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
-      this.source.removeFeature(this.selectedZone);
-      this.selectedZone = null;
-    }
+    this.removeSelection();
+
+    // Select new zone
     this.getFeatureInfoAtCoordinate(e.coordinate).then((data) => {
       const [feature] = data.features; // Municipality feature containing the zone objects in the properties
       const zones = feature?.get('zones');
@@ -125,12 +121,21 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
           zIndex: 999,
         }),
       );
+      highlightedFeature.setProperties(feature.getProperties());
 
       // Add feature to map and store it for reference
       this.source.addFeature(highlightedFeature);
       this.selectedZone = highlightedFeature;
       return null;
     });
+  }
+
+  removeSelection() {
+    // Remove previous selection
+    if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
+      this.source.clear();
+      this.selectedZone = null;
+    }
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
