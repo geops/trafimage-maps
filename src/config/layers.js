@@ -1388,9 +1388,6 @@ export const regionenkartePublicSegment = new Layer({
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.lines$/.test(id);
       },
-      queryRenderedLayersFilter: ({ id }) => {
-        return /anlagenverantwortliche\.lines$/.test(id);
-      },
       featureInfoFilter: (feature) => {
         // There is some points in this data source and we don't want them.
         return (
@@ -1400,7 +1397,7 @@ export const regionenkartePublicSegment = new Layer({
       },
       properties: {
         hideInLegend: true,
-        useOverlay: true, // instead of a Popup , on click an Overlay will be dsplayed.
+        useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
         popupComponent: 'RegionenkarteSegmentPopup',
       },
     }),
