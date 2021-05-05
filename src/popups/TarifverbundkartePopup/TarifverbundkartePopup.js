@@ -28,12 +28,14 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
   const { zPass, zones } = properties;
 
   useEffect(() => {
+    layer.set('clicked', false);
     return () => {
       /**
-       * The layer selction is removed on unmount if the feature hasn't changed
-       * (when the popup is closed with the "x"-Button).
+       * When the unmount happens due to a click on the map (with the clicked property === true),
+       * the deselection is handled in TarifverbundkarteLayer. If the "x"-Button in the popup is clicked
+       * it is handled here.
        */
-      if (layer.selectedZone?.get('id') === feature.get('id')) {
+      if (!layer.get('clicked')) {
         layer.removeSelection();
       }
     };
