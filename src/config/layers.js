@@ -1389,13 +1389,6 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
         'fill-color': '#627BC1',
         'fill-outline-color': '#627BC1',
         'fill-opacity': 0,
-        // Disabled for now due to a mobility-toolbox bug
-        // 'fill-opacity': [
-        //   'case',
-        //   ['boolean', ['feature-state', 'hover'], false],
-        //   0.5,
-        //   0,
-        // ],
       },
     },
     {
