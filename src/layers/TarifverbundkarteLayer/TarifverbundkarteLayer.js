@@ -22,8 +22,6 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
         'source-layer': 'ch.sbb.tarifverbundkarte',
         type: 'fill',
         paint: {
-          'fill-color': '#627BC1',
-          'fill-outline-color': '#627BC1',
           'fill-opacity': 0,
         },
       },
@@ -56,7 +54,9 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   init(map) {
     super.init(map);
     this.source = map.getLayers().getArray()[0].getSource(); // Get vector layer source
-    this.olListenersKeys.push(this.map.on('click', (e) => this.selectZone(e))); // Add click listener
+    this.olListenersKeys.push(
+      this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
+    );
   }
 
   /**
@@ -106,7 +106,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
         format.writeFeatureObject(feature),
       );
 
-      // Create and highlight ol feature
+      // Create and highlight ol feature, add properties for use in popup
       const highlightedFeature = format.readFeature(finalIntersection);
       highlightedFeature.setStyle(
         new Style({
