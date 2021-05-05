@@ -174,7 +174,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
             source.getClusterLeaves(id, count, 0, (_, cfs) => {
               cfs.forEach((cf) => {
                 const olFeature = this.format.readFeature(cf);
-                olFeature.set('mapboxFeature', cf);
+                if (olFeature) {
+                  olFeature.set('mapboxFeature', cf);
+                }
                 features.push(olFeature);
               });
               resolve(cfs);
@@ -183,7 +185,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
         );
       } else {
         const olFeature = this.format.readFeature(feature);
-        olFeature.set('mapboxFeature', feature);
+        if (olFeature) {
+          olFeature.set('mapboxFeature', feature);
+        }
         features.push(olFeature);
       }
     }

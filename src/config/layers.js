@@ -7,7 +7,7 @@ import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import { TrajservAPI } from 'mobility-toolbox-js/api';
-import { LineString, MultiLineString } from 'ol/geom';
+import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
@@ -1391,8 +1391,8 @@ export const regionenkartePublicSegment = new Layer({
       featureInfoFilter: (feature) => {
         // There is some points in this data source and we don't want them.
         return (
-          feature.getGeometry() instanceof LineString ||
-          feature.getGeometry() instanceof MultiLineString
+          feature.getGeometry().getType() === GeometryType.LINE_STRING ||
+          feature.getGeometry().getType() === GeometryType.MULTI_LINE_STRING
         );
       },
       properties: {

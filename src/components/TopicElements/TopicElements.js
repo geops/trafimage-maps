@@ -40,7 +40,7 @@ const defaultElements = {
   trackerMenu: false,
   featureMenu: false,
   search: false,
-  overlay: true,
+  overlay: false,
 };
 
 const propTypes = {

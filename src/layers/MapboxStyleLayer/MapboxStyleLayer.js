@@ -277,7 +277,7 @@ class MapboxStyleLayer extends Layer {
    * @returns {MapboxLayer} MapboxLayer
    */
   clone(newOptions) {
-    return new MapboxStyleLayer({ ...this.options, newOptions });
+    return new MapboxStyleLayer({ ...this.options, ...newOptions });
   }
 }
 

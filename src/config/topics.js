@@ -241,6 +241,7 @@ export const regionenkartePublic = {
   elements: {
     ...defaultElements,
     popup: true,
+    overlay: true,
   },
   layers: [
     anlagenverantwortliche,
