@@ -62,22 +62,20 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       const zoneFeatureArray = zones.map((zone) => {
         return new Feature(zone.geometry);
       });
-      let zonesIntersection;
-      let intersected = format.writeFeatureObject(zoneFeatureArray[0]);
+      let intersectedZones = format.writeFeatureObject(zoneFeatureArray[0]);
       if (zoneFeatureArray.length > 1) {
         // When there are multiple zones intersect them
         zoneFeatureArray.forEach((feat) => {
-          intersected = intersect(intersected, format.writeFeatureObject(feat));
+          intersectedZones = intersect(
+            intersectedZones,
+            format.writeFeatureObject(feat),
+          );
         });
-        zonesIntersection = format.readFeature(intersected);
-      } else {
-        // When there is one zone
-        [zonesIntersection] = zoneFeatureArray;
       }
 
       // Intersect zones with municipality feature
       const finalIntersection = intersect(
-        format.writeFeatureObject(zonesIntersection),
+        intersectedZones,
         format.writeFeatureObject(feature),
       );
 
