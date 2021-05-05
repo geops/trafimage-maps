@@ -1379,37 +1379,6 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
     hideInLegend: true,
     popupComponent: 'TarifverbundkartePopup',
   },
-  styleLayers: [
-    {
-      id: 'verbundskarte',
-      source: 'tarifverbundkarte',
-      'source-layer': 'ch.sbb.tarifverbundkarte',
-      type: 'fill',
-      paint: {
-        'fill-color': '#627BC1',
-        'fill-outline-color': '#627BC1',
-        'fill-opacity': 0,
-      },
-    },
-    {
-      id: 'verbundskarte.zpass',
-      source: 'tarifverbundkarte',
-      'source-layer': 'ch.sbb.tarifverbundkarte.zpass',
-      type: 'fill',
-      paint: {
-        'fill-opacity': 0,
-      },
-    },
-    {
-      id: 'verbundskarte.zonen',
-      source: 'tarifverbundkarte',
-      'source-layer': 'ch.sbb.tarifverbundkarte.zonen',
-      type: 'fill',
-      paint: {
-        'fill-opacity': 0,
-      },
-    },
-  ],
 });
 
 export default [
