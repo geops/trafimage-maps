@@ -53,7 +53,9 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
    */
   init(map) {
     super.init(map);
-    this.source = map.getLayers().getArray()[0].getSource(); // Get vector layer source
+    if (this.map) {
+      this.source = map.getLayers().getArray()[0].getSource(); // Get vector layer source
+    }
   }
 
   /**
