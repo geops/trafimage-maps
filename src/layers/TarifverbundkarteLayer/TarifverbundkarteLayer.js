@@ -1,4 +1,6 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer, VectorLayer } from 'mobility-toolbox-js/ol';
+import { Vector as OLVectorLayer } from 'ol/layer';
+import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import Feature from 'ol/Feature';
 import intersect from '@turf/intersect';
@@ -44,8 +46,17 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
         },
       },
     ];
-    super({ ...options, styleLayers });
+    const children = [
+      // Layer for feature highlighting on click
+      new VectorLayer({
+        olLayer: new OLVectorLayer({
+          source: new VectorSource(),
+        }),
+      }),
+    ];
+    super({ ...options, styleLayers, children });
     this.selectedZone = null;
+    this.highlightSource = this.children[0].olLayer.getSource(); // Get vector layer source
   }
 
   /**
@@ -53,9 +64,9 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
    */
   init(map) {
     super.init(map);
-    if (this.map) {
-      this.source = map.getLayers().getArray()[0].getSource(); // Get vector layer source
-    }
+    this.olListenersKeys.push(
+      this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
+    );
   }
 
   /**
@@ -65,17 +76,6 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
     // Remove selected feature on terminate
     this.removeSelection();
     super.terminate(map);
-  }
-
-  /**
-   * On Mapbox map load callback function. Add click listener.
-   * @override
-   */
-  onLoad() {
-    super.onLoad();
-    this.olListenersKeys.push(
-      this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
-    );
   }
 
   selectZone(e) {
@@ -133,7 +133,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       );
 
       // Add feature to map and store it for reference
-      this.source.addFeature(highlightedFeature);
+      this.highlightSource.addFeature(highlightedFeature);
       this.selectedZone = highlightedFeature;
 
       /**
@@ -148,8 +148,11 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
 
   removeSelection() {
     // Remove previous selection
-    if (this.selectedZone && this.source.hasFeature(this.selectedZone)) {
-      this.source.clear();
+    if (
+      this.selectedZone &&
+      this.highlightSource.hasFeature(this.selectedZone)
+    ) {
+      this.highlightSource.clear();
       this.selectedZone = null;
     }
   }
