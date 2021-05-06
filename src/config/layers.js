@@ -1412,6 +1412,19 @@ export const regionenkartePublicSegment = new Layer({
         hideInLegend: true,
       },
     }),
+    new MapboxStyleLayer({
+      name: 'ch.sbb.regionenkarte.regionintersection',
+      isQueryable: true,
+      mapboxLayer: anlagenverantwortliche,
+      styleLayersFilter: ({ id }) => {
+        return /anlagenverantwortliche\.regionintersection/.test(id);
+      },
+      properties: {
+        hideInLegend: true,
+        showPopupOnHover: true,
+        popupComponent: 'RegionenkarteIntersectionPopup',
+      },
+    }),
   ],
 });
 

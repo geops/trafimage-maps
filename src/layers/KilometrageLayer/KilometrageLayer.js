@@ -1,5 +1,4 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import OLVectorLayer from 'ol/layer/Vector';
 import { Feature } from 'ol';
 
 /**
@@ -10,22 +9,15 @@ import { Feature } from 'ol';
  * @param {Object} [options] Layer options.
  */
 class KilometrageLayer extends Layer {
-  constructor(options = {}) {
-    const olLayer = new OLVectorLayer({});
-
-    super({
-      ...options,
-      olLayer,
-    });
-
-    this.setVisible(this.visible);
-  }
-
   getFeatureInfoAtCoordinate(coordinate) {
     const layer = this;
-
+    // radius = 5 pixel * mapResolution
     return fetch(
-      `${this.cartaroUrl}lines/kilometration/?coord=${coordinate.toString()}`,
+      `${
+        this.cartaroUrl
+      }lines/kilometration/?coord=${coordinate.toString()}&radius=${
+        5 * this.map.getView().getResolution()
+      }`,
     )
       .then((data) => data.json())
       .then((data) => {
