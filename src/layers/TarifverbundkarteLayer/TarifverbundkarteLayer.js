@@ -51,21 +51,22 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  init(map) {
-    super.init(map);
-    this.source = map.getLayers().getArray()[0].getSource(); // Get vector layer source
-    this.olListenersKeys.push(
-      this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
-    );
-  }
-
-  /**
-   * @override
-   */
   terminate(map) {
     // Remove selected feature on terminate
     this.removeSelection();
     super.terminate(map);
+  }
+
+  /**
+   * On Mapbox map load callback function. Add click listener.
+   * @override
+   */
+  onLoad() {
+    super.onLoad();
+    this.source = this.map.getLayers().getArray()[0].getSource(); // Get vector layer source
+    this.olListenersKeys.push(
+      this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
+    );
   }
 
   selectZone(e) {
