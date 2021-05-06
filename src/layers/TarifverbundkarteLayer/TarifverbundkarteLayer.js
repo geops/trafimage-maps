@@ -51,6 +51,14 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   /**
    * @override
    */
+  init(map) {
+    super.init(map);
+    this.source = map.getLayers().getArray()[0].getSource(); // Get vector layer source
+  }
+
+  /**
+   * @override
+   */
   terminate(map) {
     // Remove selected feature on terminate
     this.removeSelection();
@@ -63,7 +71,6 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
    */
   onLoad() {
     super.onLoad();
-    this.source = this.map.getLayers().getArray()[0].getSource(); // Get vector layer source
     this.olListenersKeys.push(
       this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
     );
