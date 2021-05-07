@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import { jsPDF as JsPDF } from 'jspdf';
+import { useTranslation } from 'react-i18next';
+import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import Canvg from 'canvg';
 import determineMaxCanvasSize from '../../utils/canvasSize';
 import { ReactComponent as Loader } from './loader.svg';
@@ -116,15 +116,17 @@ function ExportButton({
             format: exportFormat,
           });
 
+          // Add map image
           const ctx = canvas.getContext('2d');
           ctx.scale(1 / exportScale, 1 / exportScale);
           doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
-          const svgCanvas = document.createElement('canvas');
-          const canvg = await Canvg.from(svgCanvas, legend);
-          canvg.start();
-          const imgData = svgCanvas.toDataURL('image/png');
-          doc.addImage(imgData, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
+          // Add legend SVG
+          const canvass = document.createElement('canvas');
+          const ctxx = canvass.getContext('2d');
+          const instance = await Canvg.from(ctxx, legend);
+          await instance.render();
+          doc.addImage(canvass.toDataURL('image/png'), 'PNG', 0, 0);
 
           // download the result
           const filename = `trafimage-${new Date()
