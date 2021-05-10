@@ -21,7 +21,7 @@ const ExportMenu = () => {
   const classes = useStyles();
   const [collapsed, setCollapsed] = useState(false);
   const [maxCanvasSize, setMaxCanvasSize] = useState(
-    localStorage.getItem(LS_SIZE_KEY),
+    parseFloat(localStorage.getItem(LS_SIZE_KEY)),
   );
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
   const { t } = useTranslation();

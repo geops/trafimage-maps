@@ -58,7 +58,7 @@ function ExportButton({
   }, [exportFormat]);
 
   const isExportSizeTooBig = useMemo(() => {
-    if (!map || maxCanvasSize) {
+    if (!map || !maxCanvasSize) {
       return true;
     }
     const mapSize = map.getSize();
