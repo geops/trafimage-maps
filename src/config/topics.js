@@ -251,6 +251,12 @@ export const tarifverbundkarte = {
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
   layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
   maxZoom: 12,
+  exportConfig: {
+    publisher: 'tobias.hauser@sbb.ch',
+    publishedAt: '12/2020',
+    dateDe: '13.12.2020',
+    dateFr: '13.12.2020',
+  },
   elements: {
     ...defaultElements,
     popup: true,

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { jsPDF as JsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
+import { parse as parseSvg, stringify as stringifySvgObject } from 'svgson';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import Canvg from 'canvg';
 import determineMaxCanvasSize from '../../utils/canvasSize';
@@ -30,6 +31,7 @@ function ExportButton({
   children,
 }) {
   const map = useSelector((state) => state.app.map);
+  const topic = useSelector((state) => state.app.activeTopic);
   const layerService = useSelector((state) => state.app.layerService);
   const { t } = useTranslation();
 
@@ -77,8 +79,6 @@ function ExportButton({
     );
   }, [exportScale, exportSize, map, maxCanvasSize]);
 
-  console.log('maxCanvasSize=', maxCanvasSize);
-  console.log('exportSize=', exportSize);
   return (
     <>
       <CanvasSaveButton
@@ -120,10 +120,46 @@ function ExportButton({
           ctx.scale(1 / exportScale, 1 / exportScale);
           doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
+          // Fetch local svg
+          const svgString = await fetch(legend).then((response) =>
+            response.text(),
+          );
+
+          // svgson parse string to json to access values
+          const svgJson = await parseSvg(svgString).then((json) => json);
+          const legendElements = svgJson.children.find(
+            (tag) => tag.attributes.id === 'legend_elements',
+          ).children;
+
+          // Set date DE
+          legendElements.find(
+            (element) => element.attributes.id === 'date_DE',
+          ).children[0].children[0].value = topic.exportConfig.dateDe;
+
+          // Set date FR
+          legendElements.find(
+            (element) => element.attributes.id === 'date_FR',
+          ).children[0].children[0].value = topic.exportConfig.dateFr;
+
+          // Set published at
+          legendElements.find(
+            (element) => element.attributes.id === 'published_at',
+          ).children[0].children[0].children[0].value =
+            topic.exportConfig.publishedAt;
+
+          // Set publisher
+          legendElements.find(
+            (element) => element.attributes.id === 'publisher',
+          ).children[0].children[0].children[0].value =
+            topic.exportConfig.publisher;
+
+          // svgson stringify the new object
+          const updatedSvg = stringifySvgObject(svgJson);
+
           // Add legend SVG
           const canvass = document.createElement('canvas');
           const ctxx = canvass.getContext('2d');
-          const instance = await Canvg.from(ctxx, legend);
+          const instance = await Canvg.fromString(ctxx, updatedSvg);
           await instance.render();
           doc.addImage(
             canvass.toDataURL('image/png'),
@@ -166,7 +202,7 @@ ExportButton.defaultProps = {
   //   [1200000, 6076000],
   // ],
   exportZoom: null, // 10,
-  exportExtent: [656000, 5741000, 1200000, 6076000],
+  exportExtent: [620000, 5741000, 1200000, 6076000],
   children: [],
 };
 
