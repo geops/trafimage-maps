@@ -156,6 +156,7 @@ function determineMaxCanvasSize() {
   if (log) {
     console.log('max canvas size:', maxSize, maxSize);
   }
+  console.log(maxSize);
   return maxSize;
 }
 

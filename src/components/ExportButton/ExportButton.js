@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { jsPDF as JsPDF } from 'jspdf';
@@ -7,13 +7,10 @@ import { parse as parseSvg, stringify as stringifySvgObject } from 'svgson';
 import { makeStyles } from '@material-ui/core';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import Canvg from 'canvg';
-import determineMaxCanvasSize from '../../utils/canvasSize';
 import { ReactComponent as Loader } from './loader.svg';
 import legend from './tarifverbund_legend.svg';
 
 import { getMapHd, clean, generateExtraData } from './ExportUtils';
-
-const LS_SIZE_KEY = 'tm.max.canvas.size';
 
 const sizesByFormat = {
   // https://www.din-formate.de/reihe-a-din-groessen-mm-pixel-dpi.html
@@ -47,6 +44,7 @@ function ExportButton({
   exportZoom,
   exportExtent,
   children,
+  maxCanvasSize,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -55,33 +53,12 @@ function ExportButton({
   const { t } = useTranslation();
 
   const [isLoading, setLoading] = useState(false);
-  const [maxCanvasSize, setMaxCanvasSize] = useState(
-    localStorage.getItem(LS_SIZE_KEY),
-  );
-
-  useEffect(() => {
-    let timeout = null;
-    if (maxCanvasSize) {
-      return () => {};
-    }
-    timeout = setTimeout(() => {
-      const size = determineMaxCanvasSize();
-      if (size) {
-        setMaxCanvasSize(size);
-        localStorage.setItem(LS_SIZE_KEY, size);
-      }
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   const exportSize = useMemo(() => {
     return sizesByFormat[exportFormat];
   }, [exportFormat]);
 
   const isExportSizeTooBig = useMemo(() => {
-    if (!map) {
+    if (!map || maxCanvasSize) {
       return true;
     }
     const mapSize = map.getSize();
@@ -211,19 +188,17 @@ ExportButton.propTypes = {
   exportZoom: PropTypes.number,
   exportCoordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   children: PropTypes.node,
+  maxCanvasSize: PropTypes.number,
 };
 
 ExportButton.defaultProps = {
   exportFormat: 'a0',
   exportScale: 1, // High res,
   exportCoordinates: null,
-  // [
-  //   [656000, 5741000],
-  //   [1200000, 6076000],
-  // ],
   exportZoom: null, // 10,
   exportExtent: [620000, 5741000, 1200000, 6076000],
   children: [],
+  maxCanvasSize: null,
 };
 
 export default React.memo(ExportButton);
