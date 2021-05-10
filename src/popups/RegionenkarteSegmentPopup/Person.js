@@ -5,21 +5,27 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: theme.spacing(2),
     '& > div:first-child': {
       fontWeight: 'bold',
     },
   },
+  contact: {
+    padding: `${theme.spacing(1)}px 0`,
+    '& a': {
+      textDecoration: 'none !important',
+    },
+  },
 }));
 
-const blockSkype = (phone) => {
-  const index = Math.ceil(phone.length / 2);
-  return (
-    <>
-      <span>{phone.slice(0, index)}</span>
-      <span>{phone.slice(index)}</span>
-    </>
-  );
+const formatPhone = (phone) => {
+  try {
+    return phone
+      .split(/(\+41)(\d{2})(\d{3})(\d{2})(\d{2})/g)
+      .join(' ')
+      .trim();
+  } catch (e) {
+    return phone;
+  }
 };
 
 function Person({ isIntern, person }) {
@@ -33,11 +39,17 @@ function Person({ isIntern, person }) {
       {name && (
         <>
           {unterrolle && <div>{`${unterrolle} ${kommentar}`}</div>}
-          <div>{name}</div>
-          {division && <div>{division}</div>}
-          {phone && <div>{blockSkype(phone)}</div>}
+          <div>
+            {name}
+            {division && ` (${division})`}
+          </div>
+          {phone && (
+            <div className={classes.contact}>
+              <a href={`tel:${phone}`}>{formatPhone(phone)}</a>
+            </div>
+          )}
           {isIntern && email && (
-            <div>
+            <div className={classes.contact}>
               <a href={`mailto:${email.toLowerCase()}`}>
                 {email.toLowerCase()}
               </a>
