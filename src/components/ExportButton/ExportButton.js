@@ -4,13 +4,12 @@ import { useSelector } from 'react-redux';
 import { jsPDF as JsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
 import { parse as parseSvg, stringify as stringifySvgObject } from 'svgson';
+import { makeStyles } from '@material-ui/core';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import Canvg from 'canvg';
 import determineMaxCanvasSize from '../../utils/canvasSize';
 import { ReactComponent as Loader } from './loader.svg';
 import legend from './tarifverbund_legend.svg';
-
-import './ExportButton.scss';
 
 import { getMapHd, clean, generateExtraData } from './ExportUtils';
 
@@ -22,6 +21,25 @@ const sizesByFormat = {
   a1: [2384, 1684],
 };
 
+const useStyles = makeStyles(() => ({
+  buttonWrapper: {
+    border: '1px solid #e5e5e5',
+    margin: 10,
+    minWidth: 85,
+  },
+  button: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px',
+    height: 35,
+    width: 85,
+    '&:hover': {
+      color: '#eb0000',
+    },
+  },
+}));
+
 function ExportButton({
   exportFormat,
   exportScale,
@@ -30,6 +48,7 @@ function ExportButton({
   exportExtent,
   children,
 }) {
+  const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layerService = useSelector((state) => state.app.layerService);
@@ -80,11 +99,11 @@ function ExportButton({
   }, [exportScale, exportSize, map, maxCanvasSize]);
 
   return (
-    <>
+    <div className={classes.buttonWrapper}>
       <CanvasSaveButton
-        className="no-css"
+        className={classes.button}
         style={{
-          width: 'auto',
+          // width: 'auto',
           pointerEvents: isExportSizeTooBig ? 'none' : 'default',
           opacity: isExportSizeTooBig ? 0.3 : 1,
         }}
@@ -179,8 +198,9 @@ function ExportButton({
         }}
       >
         <>{isLoading ? <Loader /> : children}</>
+        {/* <Loader /> */}
       </CanvasSaveButton>
-    </>
+    </div>
   );
 }
 

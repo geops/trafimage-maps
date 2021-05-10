@@ -15,6 +15,7 @@ import FeatureMenu from '../FeatureMenu';
 import TrackerMenu from '../../menus/TrackerMenu';
 import ShareMenu from '../../menus/ShareMenu';
 import DrawMenu from '../../menus/DrawMenu';
+import ExportMenu from '../../menus/ExportMenu';
 import Permalink from '../Permalink';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -38,6 +39,7 @@ const defaultElements = {
   drawMenu: true,
   trackerMenu: false,
   featureMenu: false,
+  exportMenu: false,
   search: false,
 };
 
@@ -116,6 +118,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     {
       drawMenu: <DrawMenu />,
       shareMenu: <ShareMenu appBaseUrl={appBaseUrl} />,
+      exportMenu: <ExportMenu />,
     },
     elements,
   );

@@ -262,6 +262,7 @@ export const tarifverbundkarte = {
     popup: true,
     shareMenu: true,
     trackerMenu: true,
+    exportMenu: true,
   },
   searches: defaultSearches,
 };
