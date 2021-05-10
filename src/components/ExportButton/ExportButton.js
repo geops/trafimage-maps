@@ -106,7 +106,6 @@ function ExportButton({
           );
         }}
         onSaveEnd={async (mapToExport, canvas) => {
-          console.log(legend);
           clean(mapToExport, map, layerService);
 
           // add the image to a newly created PDF
@@ -126,7 +125,14 @@ function ExportButton({
           const ctxx = canvass.getContext('2d');
           const instance = await Canvg.from(ctxx, legend);
           await instance.render();
-          doc.addImage(canvass.toDataURL('image/png'), 'PNG', 0, 0);
+          doc.addImage(
+            canvass.toDataURL('image/png'),
+            'PNG',
+            0,
+            0,
+            exportSize[0],
+            exportSize[1],
+          );
 
           // download the result
           const filename = `trafimage-${new Date()
