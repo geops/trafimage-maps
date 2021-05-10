@@ -21,7 +21,7 @@ const ExportMenu = () => {
   const { t } = useTranslation();
   const ref = useRef();
 
-  if (!permissionInfos?.user) {
+  if (!permissionInfos || !permissionInfos.user) {
     return null;
   }
 
