@@ -116,6 +116,12 @@ function ExportButton({
           ctx.scale(1 / exportScale, 1 / exportScale);
           doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
+          /**
+           * CAUTION: SVG parsing and dynamic value insertion will break if the legend SVG tree and tag IDs
+           * are not maintained. If changes in the legend SVG are necessary, make sure the tree and IDs are maintained
+           * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
+           * without major alterations)
+           */
           // Fetch local svg
           const svgString = await fetch(legend).then((response) =>
             response.text(),
@@ -196,7 +202,7 @@ ExportButton.defaultProps = {
   exportScale: 1, // High res,
   exportCoordinates: null,
   exportZoom: null, // 10,
-  exportExtent: [620000, 5741000, 1200000, 6076000],
+  exportExtent: [620000, 5741000, 1200000, 6058000],
   children: [],
   maxCanvasSize: null,
 };
