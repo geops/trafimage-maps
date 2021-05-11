@@ -108,15 +108,6 @@ export const getMapHd = (
     targetZoom = map.getView().getZoomForResolution(targetResolution);
   }
 
-  if (window.Cypress) {
-    /* If the export is run during a Cypress test, we only export the vector
-     * layer to avoid having to update the fixtures every time the basemap changes
-     */
-    return new Promise((resolve) =>
-      resolve(buildOlMapHd(map, div, center, scale, targetResolution)),
-    );
-  }
-
   const mbMap =
     layerService.getBaseLayers()[0]?.mbMap ||
     layerService.getBaseLayers()[0]?.mapboxLayer.mbMap;
