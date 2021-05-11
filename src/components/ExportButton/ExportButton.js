@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { jsPDF as JsPDF } from 'jspdf';
@@ -12,16 +12,10 @@ import legend from './tarifverbund_legend.svg';
 
 import { getMapHd, clean, generateExtraData } from './ExportUtils';
 
-const sizesByFormat = {
-  // https://www.din-formate.de/reihe-a-din-groessen-mm-pixel-dpi.html
-  a0: [3370, 2384],
-  a1: [2384, 1684],
-};
-
 const useStyles = makeStyles(() => ({
   buttonWrapper: {
-    border: '1px solid #e5e5e5',
-    margin: 10,
+    border: '1px solid rgba(0, 0, 0, 0.30)',
+    margin: '10px 20px',
     minWidth: 85,
   },
   button: {
@@ -35,57 +29,39 @@ const useStyles = makeStyles(() => ({
       color: '#eb0000',
     },
   },
+  loading: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
 
 function ExportButton({
   exportFormat,
   exportScale,
+  exportSize,
   exportCoordinates,
   exportZoom,
   exportExtent,
   children,
-  maxCanvasSize,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layerService = useSelector((state) => state.app.layerService);
   const { t } = useTranslation();
-
   const [isLoading, setLoading] = useState(false);
-  const exportSize = useMemo(() => {
-    return sizesByFormat[exportFormat];
-  }, [exportFormat]);
-
-  const isExportSizeTooBig = useMemo(() => {
-    if (!map || !maxCanvasSize) {
-      return true;
-    }
-    const mapSize = map.getSize();
-    return (
-      (maxCanvasSize &&
-        ((exportSize &&
-          (maxCanvasSize < exportSize[0] * exportScale ||
-            maxCanvasSize < exportSize[1] * exportScale)) ||
-          (!exportSize &&
-            mapSize &&
-            (maxCanvasSize < mapSize[0] * exportScale ||
-              maxCanvasSize < mapSize[1] * exportScale)))) ||
-      false
-    );
-  }, [exportScale, exportSize, map, maxCanvasSize]);
 
   return (
     <div className={classes.buttonWrapper}>
       <CanvasSaveButton
         className={classes.button}
-        style={{
-          // width: 'auto',
-          pointerEvents: isExportSizeTooBig ? 'none' : 'default',
-          opacity: isExportSizeTooBig ? 0.3 : 1,
-        }}
         title={t('Als PNG speichern')}
-        disabled={isExportSizeTooBig || isLoading}
+        style={{
+          pointerEvents: isLoading ? 'none' : 'default',
+          opacity: isLoading ? 0.3 : 1,
+          width: 'auto',
+        }}
         extraData={generateExtraData(layerService, true)}
         autoDownload={false}
         format="image/jpeg"
@@ -180,8 +156,16 @@ function ExportButton({
           setLoading(false);
         }}
       >
-        <>{isLoading ? <Loader /> : children}</>
-        {/* <Loader /> */}
+        <>
+          {isLoading ? (
+            <span className={classes.loading}>
+              <Loader />
+              {t('Export läuft...')}
+            </span>
+          ) : (
+            children
+          )}
+        </>
       </CanvasSaveButton>
     </div>
   );
@@ -194,7 +178,7 @@ ExportButton.propTypes = {
   exportZoom: PropTypes.number,
   exportCoordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   children: PropTypes.node,
-  maxCanvasSize: PropTypes.number,
+  exportSize: PropTypes.arrayOf(PropTypes.number),
 };
 
 ExportButton.defaultProps = {
@@ -204,7 +188,7 @@ ExportButton.defaultProps = {
   exportZoom: null, // 10,
   exportExtent: [620000, 5741000, 1200000, 6058000],
   children: [],
-  maxCanvasSize: null,
+  exportSize: [3370, 2384],
 };
 
 export default React.memo(ExportButton);

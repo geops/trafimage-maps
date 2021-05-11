@@ -74,6 +74,10 @@ const theme = createMuiTheme({
       disableRipple: true,
       disableFocusRipple: true,
     },
+    MuiMenuItem: {
+      disableRipple: true,
+      disableFocusRipple: true,
+    },
   },
   overrides: {
     MuiPopover: {
