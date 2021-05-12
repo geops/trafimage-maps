@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     flexShrink: 0,
     paddingTop: 3,
+    color: '#767676',
   },
 }));
 
