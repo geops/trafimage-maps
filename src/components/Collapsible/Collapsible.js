@@ -11,6 +11,7 @@ const propTypes = {
   maxHeight: PropTypes.number,
   maxWidth: PropTypes.number,
   type: PropTypes.oneOf(['vertical', 'horizontal']),
+  hideScrollbar: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -20,6 +21,7 @@ const defaultProps = {
   maxHeight: 2500,
   maxWidth: 1000,
   type: 'vertical',
+  hideScrollbar: false,
 };
 
 class Collapsible extends PureComponent {
@@ -57,6 +59,7 @@ class Collapsible extends PureComponent {
       maxWidth,
       transitionDuration,
       type,
+      hideScrollbar,
     } = this.props;
     const { isHidden } = this.state;
     const style = {};
@@ -80,7 +83,9 @@ class Collapsible extends PureComponent {
       <div
         ref={this.ref}
         style={style}
-        className={`${className} wkp-collapsible-${type}`}
+        className={`${className} wkp-collapsible-${type}${
+          hideScrollbar ? ' wkp-collapsible-hide-scrollbar' : ''
+        }`}
       >
         {isHidden ? null : children}
       </div>

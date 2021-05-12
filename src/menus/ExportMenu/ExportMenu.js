@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     borderRadius: 2,
-    width: 150,
+    width: 140,
   },
   select: {
     padding: '15px !important',
@@ -84,7 +84,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       padding: 0,
-      minWidth: 146,
+      minWidth: 136,
       border: '2px solid #888',
       borderTop: '1px solid rgba(0, 0, 0, 0.30)',
       borderRadius: '0 0 2px 2px',
