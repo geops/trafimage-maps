@@ -62,7 +62,7 @@ function ExportButton({
           opacity: isLoading ? 0.3 : 1,
           width: 'auto',
         }}
-        extraData={generateExtraData(layerService, true)}
+        extraData={generateExtraData(layerService)}
         autoDownload={false}
         format="image/jpeg"
         onSaveStart={() => {

@@ -2,10 +2,13 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { FaDownload, FaInfoCircle } from 'react-icons/fa';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core';
 import MuiMenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '../../components/Menu/MenuItem';
 import ExportButton from '../../components/ExportButton';
 import determineMaxCanvasSize from '../../utils/canvasSize';
@@ -19,25 +22,29 @@ const useStyles = makeStyles((theme) => ({
   selectWrapper: {
     display: 'flex',
     alignItems: 'center',
+    justifyContent: 'space-between',
     marginLeft: 20,
   },
-  input: {
-    margin: '10px 10px 10px 20px',
-    borderRadius: 0,
+  label: {
+    top: -18,
   },
   select: {
-    padding: '10px 32px 10px 10px',
-    textAlign: 'center',
-    width: 100,
+    padding: '15px !important',
+    width: 150,
+  },
+  arrow: {
+    width: 25,
+    height: 25,
   },
   menuItem: {
+    paddingLeft: 12,
     '&:hover': {
-      color: 'red',
+      color: '#eb0000',
       backgroundColor: 'white',
     },
   },
   itemSelected: {
-    color: 'red',
+    color: '#eb0000',
     backgroundColor: 'white !important',
   },
   infoWrapper: {
@@ -62,55 +69,30 @@ const sizesByFormat = {
 };
 
 const options = [
-  { label: '72 dpi', value: 1 },
-  { label: '150 dpi', value: 2 },
-  { label: '300 dpi', value: 3 },
+  { label: 'A0 (72 dpi)', value: 1, format: 'a0' },
+  { label: 'A0 (150 dpi)', value: 2, format: 'a0' },
+  { label: 'A0 300 dpi', value: 3, format: 'a0' },
+  { label: 'A1 (72 dpi)', value: 1, format: 'a1' },
+  { label: 'A1 (150 dpi)', value: 2, format: 'a1' },
+  { label: 'A1 300 dpi', value: 3, format: 'a1' },
 ];
 
 const MenuProps = {
+  getContentAnchorEl: null,
+  anchorOrigin: {
+    vertical: 'bottom',
+    horizontal: 'left',
+  },
   PaperProps: {
-    square: true,
     style: {
       padding: 0,
-      minWidth: 138,
+      minWidth: 165,
+      border: '2px solid black',
+      borderTop: '1px solid rgba(0, 0, 0, 0.30)',
+      borderRadius: '0 0 4px 4px',
+      marginTop: -3,
     },
   },
-};
-
-const renderDropdown = (
-  format,
-  classes,
-  getValueFct,
-  handleChangeFct,
-  validateOptionFct,
-) => {
-  return (
-    <div className={classes.selectWrapper}>
-      <span>{format.toUpperCase()}</span>
-      <Select
-        className={classes.input}
-        classes={{ outlined: classes.select }}
-        value={getValueFct(`${format}`)}
-        onChange={(evt) => handleChangeFct(evt, `${format}`)}
-        MenuProps={MenuProps}
-        variant="outlined"
-      >
-        {options.map((opt) => {
-          return (
-            <MuiMenuItem
-              key={`a1-${opt.value}`}
-              value={opt}
-              disabled={validateOptionFct(`${format}`, opt.value)}
-              className={classes.menuItem}
-              classes={{ selected: classes.itemSelected }}
-            >
-              {opt.label}
-            </MuiMenuItem>
-          );
-        })}
-      </Select>
-    </div>
-  );
 };
 
 const ExportMenu = () => {
@@ -119,7 +101,6 @@ const ExportMenu = () => {
   const [maxCanvasSize, setMaxCanvasSize] = useState(
     parseFloat(localStorage.getItem(LS_SIZE_KEY)),
   );
-  const permissionInfos = useSelector((state) => state.app.permissionInfos);
   const map = useSelector((state) => state.app.map);
   const [exportSelection, setExportSelection] = useState({
     format: 'a0',
@@ -146,22 +127,20 @@ const ExportMenu = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleChange = (event, format) => {
+  const handleChange = (event) => {
     setExportSelection({
-      format,
+      format: event.target.value.format,
       resolution: event.target.value.value,
     });
   };
 
-  const getValue = useCallback(
-    (format) => {
-      if (exportSelection.format !== format) {
-        return { value: '' };
-      }
-      return options.find((opt) => opt.value === exportSelection.resolution);
-    },
-    [exportSelection],
-  );
+  const getValue = useCallback(() => {
+    return options.find(
+      (opt) =>
+        opt.value === exportSelection.resolution &&
+        opt.format === exportSelection.format,
+    );
+  }, [exportSelection]);
 
   const validateOption = useCallback(
     (format, exportScale) => {
@@ -185,10 +164,6 @@ const ExportMenu = () => {
     [map, maxCanvasSize],
   );
 
-  if (!permissionInfos || !permissionInfos.user || !maxCanvasSize) {
-    return null;
-  }
-
   return (
     <div ref={ref} id="wkp-export-menu">
       <MenuItem
@@ -199,20 +174,50 @@ const ExportMenu = () => {
         onCollapseToggle={(c) => setCollapsed(c)}
       >
         <div className={classes.menuContent}>
-          {renderDropdown(
-            'a0',
-            classes,
-            getValue,
-            handleChange,
-            validateOption,
-          )}
-          {renderDropdown(
-            'a1',
-            classes,
-            getValue,
-            handleChange,
-            validateOption,
-          )}
+          <div className={classes.selectWrapper}>
+            <FormControl className={classes.formControl}>
+              <InputLabel
+                className={classes.label}
+                id="pdf-format-select-label"
+              >
+                Aulösung
+              </InputLabel>
+              <Select
+                labelId="pdf-format-select-label"
+                id="pdf-format-select-label"
+                // IconComponent={() => <ExpandMoreIcon className="MuiSelect-iconOutlined"/>}
+                className={classes.input}
+                classes={{
+                  outlined: classes.select,
+                  iconOutlined: classes.arrow,
+                }}
+                value={getValue()}
+                onChange={(evt) => handleChange(evt)}
+                MenuProps={MenuProps}
+                variant="outlined"
+              >
+                {options.map((opt) => {
+                  return (
+                    <MuiMenuItem
+                      key={`${opt.format}-${opt.value}`}
+                      value={opt}
+                      disabled={validateOption(`${opt.format}`, opt.value)}
+                      className={classes.menuItem}
+                      classes={{ selected: classes.itemSelected }}
+                    >
+                      {opt.label}
+                    </MuiMenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <ExportButton
+              exportScale={exportSelection.resolution}
+              maxCanvasSize={maxCanvasSize}
+            >
+              {t('PDF exportieren')}
+            </ExportButton>
+          </div>
           <div className={classes.infoWrapper}>
             <FaInfoCircle
               focusable={false}
@@ -232,12 +237,6 @@ const ExportMenu = () => {
               </Typography>
             </div>
           </div>
-          <ExportButton
-            exportScale={exportSelection.resolution}
-            maxCanvasSize={maxCanvasSize}
-          >
-            {t('PDF exportieren')}
-          </ExportButton>
         </div>
       </MenuItem>
     </div>

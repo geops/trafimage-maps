@@ -260,9 +260,9 @@ export const tarifverbundkarte = {
   elements: {
     ...defaultElements,
     popup: true,
+    exportMenu: true,
     shareMenu: true,
     trackerMenu: true,
-    exportMenu: true,
   },
   searches: defaultSearches,
 };

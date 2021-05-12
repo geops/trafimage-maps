@@ -76,7 +76,6 @@ const theme = createMuiTheme({
     },
     MuiMenuItem: {
       disableRipple: true,
-      disableFocusRipple: true,
     },
   },
   overrides: {
