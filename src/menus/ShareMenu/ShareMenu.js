@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { FaShareAlt } from 'react-icons/fa';
@@ -7,15 +7,22 @@ import MenuItem from '../../components/Menu/MenuItem';
 
 const propTypes = {
   appBaseUrl: PropTypes.string,
+  collapsedOnLoad: PropTypes.bool,
 };
 
 const defaultProps = {
   appBaseUrl: null,
+  collapsedOnLoad: false,
 };
 
-const ShareMenu = ({ appBaseUrl }) => {
-  const [collapsed, setCollapsed] = useState(false);
+const ShareMenu = ({ appBaseUrl, collapsedOnLoad }) => {
+  const [collapsed, setCollapsed] = useState(collapsedOnLoad);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    // When switching topics
+    setCollapsed(collapsedOnLoad);
+  }, [collapsedOnLoad]);
 
   return (
     <MenuItem

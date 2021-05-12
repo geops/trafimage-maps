@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { FaDownload, FaInfoCircle } from 'react-icons/fa';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core';
 import MuiMenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
@@ -28,13 +29,12 @@ const useStyles = makeStyles((theme) => ({
   label: {
     top: -18,
   },
-  select: {
-    padding: '15px !important',
+  input: {
+    borderRadius: 2,
     width: 150,
   },
-  arrow: {
-    width: 25,
-    height: 25,
+  select: {
+    padding: '15px !important',
   },
   menuItem: {
     paddingLeft: 12,
@@ -50,10 +50,7 @@ const useStyles = makeStyles((theme) => ({
   infoWrapper: {
     display: 'flex',
     alignItems: 'start',
-    margin: '20px 0',
-    color: '#767676',
-    fontSize: 13,
-    lineHeight: '19.5px',
+    margin: '10px 0',
   },
   infoIcon: {
     marginRight: theme.spacing(1),
@@ -69,12 +66,12 @@ const sizesByFormat = {
 };
 
 const options = [
-  { label: 'A0 (72 dpi)', value: 1, format: 'a0' },
-  { label: 'A0 (150 dpi)', value: 2, format: 'a0' },
-  { label: 'A0 300 dpi', value: 3, format: 'a0' },
-  { label: 'A1 (72 dpi)', value: 1, format: 'a1' },
-  { label: 'A1 (150 dpi)', value: 2, format: 'a1' },
-  { label: 'A1 300 dpi', value: 3, format: 'a1' },
+  { label: 'A0 (72 dpi)', value: 1, format: 'a0', weight: 2 },
+  { label: 'A0 (150 dpi)', value: 2, format: 'a0', weight: 4 },
+  { label: 'A0 300 dpi', value: 3, format: 'a0', weight: 6 },
+  { label: 'A1 (72 dpi)', value: 1, format: 'a1', weight: 1 },
+  { label: 'A1 (150 dpi)', value: 2, format: 'a1', weight: 3 },
+  { label: 'A1 300 dpi', value: 3, format: 'a1', weight: 5 },
 ];
 
 const MenuProps = {
@@ -86,26 +83,58 @@ const MenuProps = {
   PaperProps: {
     style: {
       padding: 0,
-      minWidth: 165,
-      border: '2px solid black',
+      minWidth: 146,
+      border: '2px solid #888',
       borderTop: '1px solid rgba(0, 0, 0, 0.30)',
-      borderRadius: '0 0 4px 4px',
+      borderRadius: '0 0 2px 2px',
       marginTop: -3,
     },
   },
 };
 
-const ExportMenu = () => {
+const validateOption = (format, exportScale, maxCanvasSize, map) => {
+  if (!map || !maxCanvasSize) {
+    return true;
+  }
+  const exportSize = sizesByFormat[format];
+  const mapSize = map.getSize();
+  return (
+    (maxCanvasSize &&
+      ((exportSize &&
+        (maxCanvasSize < exportSize[0] * exportScale ||
+          maxCanvasSize < exportSize[1] * exportScale)) ||
+        (!exportSize &&
+          mapSize &&
+          (maxCanvasSize < mapSize[0] * exportScale ||
+            maxCanvasSize < mapSize[1] * exportScale)))) ||
+    false
+  );
+};
+
+const getHighestPossibleRes = (maxCanvasSize, map) => {
+  const highestRes = options.reduce((final, option) => {
+    let newFinal = { ...final };
+    if (
+      !validateOption(option.format, option.value, maxCanvasSize, map) &&
+      option.weight > (final.weight || 0)
+    ) {
+      newFinal = option;
+    }
+    return newFinal;
+  });
+  return { format: highestRes.format, resolution: highestRes.value };
+};
+
+const ExportMenu = ({ collapsedOnLoad }) => {
   const classes = useStyles();
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(collapsedOnLoad);
   const [maxCanvasSize, setMaxCanvasSize] = useState(
     parseFloat(localStorage.getItem(LS_SIZE_KEY)),
   );
   const map = useSelector((state) => state.app.map);
-  const [exportSelection, setExportSelection] = useState({
-    format: 'a0',
-    resolution: 1,
-  });
+  const [exportSelection, setExportSelection] = useState(
+    getHighestPossibleRes(maxCanvasSize, map),
+  );
   const { t } = useTranslation();
   const ref = useRef();
 
@@ -127,6 +156,11 @@ const ExportMenu = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  useEffect(() => {
+    // When switching topics
+    setCollapsed(collapsedOnLoad);
+  }, [collapsedOnLoad]);
+
   const handleChange = (event) => {
     setExportSelection({
       format: event.target.value.format,
@@ -142,28 +176,6 @@ const ExportMenu = () => {
     );
   }, [exportSelection]);
 
-  const validateOption = useCallback(
-    (format, exportScale) => {
-      if (!map || !maxCanvasSize) {
-        return true;
-      }
-      const exportSize = sizesByFormat[format];
-      const mapSize = map.getSize();
-      return (
-        (maxCanvasSize &&
-          ((exportSize &&
-            (maxCanvasSize < exportSize[0] * exportScale ||
-              maxCanvasSize < exportSize[1] * exportScale)) ||
-            (!exportSize &&
-              mapSize &&
-              (maxCanvasSize < mapSize[0] * exportScale ||
-                maxCanvasSize < mapSize[1] * exportScale)))) ||
-        false
-      );
-    },
-    [map, maxCanvasSize],
-  );
-
   return (
     <div ref={ref} id="wkp-export-menu">
       <MenuItem
@@ -172,6 +184,7 @@ const ExportMenu = () => {
         icon={<FaDownload focusable={false} />}
         collapsed={collapsed}
         onCollapseToggle={(c) => setCollapsed(c)}
+        fixedHeight={200}
       >
         <div className={classes.menuContent}>
           <div className={classes.selectWrapper}>
@@ -180,17 +193,14 @@ const ExportMenu = () => {
                 className={classes.label}
                 id="pdf-format-select-label"
               >
-                Aulösung
+                {t('Format')}
               </InputLabel>
               <Select
                 labelId="pdf-format-select-label"
                 id="pdf-format-select-label"
-                // IconComponent={() => <ExpandMoreIcon className="MuiSelect-iconOutlined"/>}
+                IconComponent={ExpandMoreIcon}
                 className={classes.input}
-                classes={{
-                  outlined: classes.select,
-                  iconOutlined: classes.arrow,
-                }}
+                classes={{ outlined: classes.select }}
                 value={getValue()}
                 onChange={(evt) => handleChange(evt)}
                 MenuProps={MenuProps}
@@ -201,7 +211,12 @@ const ExportMenu = () => {
                     <MuiMenuItem
                       key={`${opt.format}-${opt.value}`}
                       value={opt}
-                      disabled={validateOption(`${opt.format}`, opt.value)}
+                      disabled={validateOption(
+                        `${opt.format}`,
+                        opt.value,
+                        maxCanvasSize,
+                        map,
+                      )}
                       className={classes.menuItem}
                       classes={{ selected: classes.itemSelected }}
                     >
@@ -241,6 +256,14 @@ const ExportMenu = () => {
       </MenuItem>
     </div>
   );
+};
+
+ExportMenu.propTypes = {
+  collapsedOnLoad: PropTypes.bool,
+};
+
+ExportMenu.defaultProps = {
+  collapsedOnLoad: false,
 };
 
 export default React.memo(ExportMenu);

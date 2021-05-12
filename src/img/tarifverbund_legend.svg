@@ -1450,7 +1450,7 @@
          x="828.39563"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.62371063px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.34370399"
          class="cls-5"
-         id="text1562">date_value</text>
+         id="text1562">***date_FR***</text>
     </g>
     <g
        inkscape:label="date_DE"
@@ -1464,7 +1464,7 @@
          x="935.10089"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.62371063px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.34370399"
          class="cls-5"
-         id="text1565">date_value</text>
+         id="text1565">***date_DE***</text>
     </g>
     <g
        inkscape:label="published_at"
@@ -1480,7 +1480,7 @@
          id="text1595">
         <tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.09785271px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-           id="tspan1800">published_at_value</tspan>
+           id="tspan1800">***published_at***</tspan>
       </text>
     </g>
     <g
@@ -1499,7 +1499,7 @@
         <tspan
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.56222153px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.002em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.99216664"
            letter-spacing="-.002em"
-           id="tspan1570">publisher_value</tspan>
+           id="tspan1570">***publisher***</tspan>
       </text>
     </g>
   </g>

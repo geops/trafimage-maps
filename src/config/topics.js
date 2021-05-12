@@ -1,6 +1,7 @@
 import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import netzkarteImage from '../img/netzkarte.png';
+import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import defaultBaseLayers, {
   swisstopoSwissImage,
   bahnhofplaene,
@@ -256,13 +257,15 @@ export const tarifverbundkarte = {
     publishedAt: '12/2020',
     dateDe: '13.12.2020',
     dateFr: '13.12.2020',
+    overlayImageUrl: tarifverbundkarteLegend,
   },
   elements: {
     ...defaultElements,
     popup: true,
-    exportMenu: true,
-    shareMenu: true,
+    shareMenu: { collapsedOnLoad: true },
     trackerMenu: true,
+    exportMenu: true,
+    drawMenu: { collapsedOnLoad: true },
   },
   searches: defaultSearches,
 };

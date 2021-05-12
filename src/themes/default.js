@@ -138,6 +138,21 @@ const theme = createMuiTheme({
         fontSize: '1em',
       },
     },
+    MuiOutlinedInput: {
+      root: {
+        '& $notchedOutline': {
+          borderColor: '#888',
+        },
+        '&:hover $notchedOutline': {
+          borderColor: '#888',
+        },
+        '&$focused $notchedOutline': {
+          borderColor: '#888',
+        },
+      },
+      focused: {},
+      notchedOutline: {},
+    },
     MuiMenuItem: {
       root: {
         fontSize: '14px',

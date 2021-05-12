@@ -3,30 +3,28 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { jsPDF as JsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
-import { parse as parseSvg, stringify as stringifySvgObject } from 'svgson';
 import { makeStyles } from '@material-ui/core';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import Canvg from 'canvg';
 import { ReactComponent as Loader } from './loader.svg';
-import legend from './tarifverbund_legend.svg';
 
 import { getMapHd, clean, generateExtraData } from './ExportUtils';
 
 const useStyles = makeStyles(() => ({
   buttonWrapper: {
-    border: '1px solid rgba(0, 0, 0, 0.30)',
     margin: '10px 20px',
-    minWidth: 85,
+    minWidth: 100,
   },
   button: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '5px',
+    padding: '5px 10px',
     height: 35,
-    width: 85,
+    width: 110,
+    backgroundColor: '#dcdcdc',
     '&:hover': {
-      color: '#eb0000',
+      backgroundColor: '#cdcdcd',
     },
   },
   loading: {
@@ -58,9 +56,8 @@ function ExportButton({
         className={classes.button}
         title={t('Als PNG speichern')}
         style={{
-          pointerEvents: isLoading ? 'none' : 'default',
+          pointerEvents: isLoading ? 'none' : 'auto',
           opacity: isLoading ? 0.3 : 1,
-          width: 'auto',
         }}
         extraData={generateExtraData(layerService)}
         autoDownload={false}
@@ -92,68 +89,71 @@ function ExportButton({
           ctx.scale(1 / exportScale, 1 / exportScale);
           doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
-          /**
-           * CAUTION: SVG parsing and dynamic value insertion will break if the legend SVG tree and tag IDs
-           * are not maintained. If changes in the legend SVG are necessary, make sure the tree and IDs are maintained
-           * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
-           * without major alterations)
-           */
-          // Fetch local svg
-          const svgString = await fetch(legend).then((response) =>
-            response.text(),
-          );
+          // Apply SVG overlay if provided
+          if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
+            /**
+             * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
+             * If changes in the legend SVG are necessary, make sure the values to insert are maintained
+             * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
+             * without major alterations)
+             */
+            // Fetch local svg
+            const svgString = await fetch(
+              topic.exportConfig.overlayImageUrl,
+            ).then((response) => response.text());
 
-          // svgson parse string to json to access values
-          const svgJson = await parseSvg(svgString).then((json) => json);
-          const legendElements = svgJson.children.find(
-            (tag) => tag.attributes.id === 'legend_elements',
-          ).children;
+            let updatedSvg = svgString.slice(); // Clone the string
 
-          // Set date DE
-          legendElements.find(
-            (element) => element.attributes.id === 'date_DE',
-          ).children[0].children[0].value = topic.exportConfig.dateDe;
+            // Replace dates and publisher data
+            if (topic.exportConfig.dateDe) {
+              updatedSvg = svgString.replace(
+                '***date_DE***',
+                topic.exportConfig.dateDe,
+              );
+            }
 
-          // Set date FR
-          legendElements.find(
-            (element) => element.attributes.id === 'date_FR',
-          ).children[0].children[0].value = topic.exportConfig.dateFr;
+            if (topic.exportConfig.dateFr) {
+              updatedSvg = updatedSvg.replace(
+                '***date_FR***',
+                topic.exportConfig.dateFr,
+              );
+            }
 
-          // Set published at
-          legendElements.find(
-            (element) => element.attributes.id === 'published_at',
-          ).children[0].children[0].children[0].value =
-            topic.exportConfig.publishedAt;
+            if (topic.exportConfig.publisher) {
+              updatedSvg = updatedSvg.replace(
+                '***publisher***',
+                topic.exportConfig.publisher,
+              );
+            }
 
-          // Set publisher
-          legendElements.find(
-            (element) => element.attributes.id === 'publisher',
-          ).children[0].children[0].children[0].value =
-            topic.exportConfig.publisher;
+            if (topic.exportConfig.PublishedAt) {
+              updatedSvg = updatedSvg.replace(
+                '***published_at***',
+                topic.exportConfig.publishedAt,
+              );
+            }
 
-          // svgson stringify the new object
-          const updatedSvg = stringifySvgObject(svgJson);
+            // Add legend SVG
+            const canvass = document.createElement('canvas');
+            const ctxx = canvass.getContext('2d');
+            const instance = await Canvg.fromString(ctxx, updatedSvg);
+            await instance.render();
+            doc.addImage(
+              canvass.toDataURL('image/png'),
+              'PNG',
+              0,
+              0,
+              exportSize[0],
+              exportSize[1],
+            );
+          }
 
-          // Add legend SVG
-          const canvass = document.createElement('canvas');
-          const ctxx = canvass.getContext('2d');
-          const instance = await Canvg.fromString(ctxx, updatedSvg);
-          await instance.render();
-          doc.addImage(
-            canvass.toDataURL('image/png'),
-            'PNG',
-            0,
-            0,
-            exportSize[0],
-            exportSize[1],
-          );
-
+          setLoading(false);
           // download the result
           const filename = `trafimage-${new Date()
             .toISOString()
             .substr(0, 10)}.pdf`;
           doc.save(filename);
-          setLoading(false);
         }}
       >
         <>
