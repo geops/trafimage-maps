@@ -150,20 +150,16 @@ const ExportMenu = () => {
   const ref = useRef();
 
   useEffect(() => {
-    let timeout = null;
     if (maxCanvasSize) {
       return () => {};
     }
-    timeout = setTimeout(() => {
-      const size = determineMaxCanvasSize();
-      if (size) {
-        setMaxCanvasSize(size);
-        localStorage.setItem(LS_SIZE_KEY, size);
-      }
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
+    // Calculate maxCanvasSize on topic load when not already in local storage
+    const size = determineMaxCanvasSize();
+    if (size) {
+      setMaxCanvasSize(size);
+      localStorage.setItem(LS_SIZE_KEY, size);
+    }
+    return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -173,13 +169,6 @@ const ExportMenu = () => {
       setCollapsed(collapsedOnLoad);
     }
   }, [menuOpen, collapsedOnLoad]);
-
-  const handleChange = (event) => {
-    setExportSelection({
-      format: event.target.value.format,
-      resolution: event.target.value.resolution,
-    });
-  };
 
   const getValue = useCallback(() => {
     return options.find(
@@ -215,7 +204,12 @@ const ExportMenu = () => {
                 className={classes.input}
                 classes={{ outlined: classes.select }}
                 value={getValue()}
-                onChange={(evt) => handleChange(evt)}
+                onChange={(evt) =>
+                  setExportSelection({
+                    format: evt.target.value.format,
+                    resolution: evt.target.value.resolution,
+                  })
+                }
                 MenuProps={MenuProps}
                 variant="outlined"
               >
