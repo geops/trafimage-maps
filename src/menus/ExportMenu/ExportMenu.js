@@ -1,5 +1,10 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useMemo,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { FaDownload, FaInfoCircle } from 'react-icons/fa';
@@ -67,12 +72,12 @@ const sizesByFormat = {
 };
 
 const options = [
-  { label: 'A0 (72 dpi)', value: 1, format: 'a0', weight: 2 },
-  { label: 'A0 (150 dpi)', value: 2, format: 'a0', weight: 4 },
-  { label: 'A0 300 dpi', value: 3, format: 'a0', weight: 6 },
-  { label: 'A1 (72 dpi)', value: 1, format: 'a1', weight: 1 },
-  { label: 'A1 (150 dpi)', value: 2, format: 'a1', weight: 3 },
-  { label: 'A1 300 dpi', value: 3, format: 'a1', weight: 5 },
+  { label: 'A0 (72 dpi)', resolution: 1, format: 'a0', weight: 2 },
+  { label: 'A0 (150 dpi)', resolution: 2, format: 'a0', weight: 4 },
+  { label: 'A0 300 dpi', resolution: 3, format: 'a0', weight: 6 },
+  { label: 'A1 (72 dpi)', resolution: 1, format: 'a1', weight: 1 },
+  { label: 'A1 (150 dpi)', resolution: 2, format: 'a1', weight: 3 },
+  { label: 'A1 300 dpi', resolution: 3, format: 'a1', weight: 5 },
 ];
 
 const MenuProps = {
@@ -116,18 +121,23 @@ const getHighestPossibleRes = (maxCanvasSize, map) => {
   const highestRes = options.reduce((final, option) => {
     let newFinal = { ...final };
     if (
-      !validateOption(option.format, option.value, maxCanvasSize, map) &&
+      !validateOption(option.format, option.resolution, maxCanvasSize, map) &&
       option.weight > (final.weight || 0)
     ) {
       newFinal = option;
     }
     return newFinal;
   });
-  return { format: highestRes.format, resolution: highestRes.value };
+  return { format: highestRes.format, resolution: highestRes.resolution };
 };
 
-const ExportMenu = ({ collapsedOnLoad }) => {
+const ExportMenu = () => {
   const classes = useStyles();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
+  const collapsedOnLoad = useMemo(() => {
+    return activeTopic.elements.exportMenu?.collapsedOnLoad || false;
+  }, [activeTopic]);
   const [collapsed, setCollapsed] = useState(collapsedOnLoad);
   const [maxCanvasSize, setMaxCanvasSize] = useState(
     parseFloat(localStorage.getItem(LS_SIZE_KEY)),
@@ -158,21 +168,23 @@ const ExportMenu = ({ collapsedOnLoad }) => {
   }, []);
 
   useEffect(() => {
-    // When switching topics
-    setCollapsed(collapsedOnLoad);
-  }, [collapsedOnLoad]);
+    // Open menu item when loading/switching topic
+    if (menuOpen) {
+      setCollapsed(collapsedOnLoad);
+    }
+  }, [menuOpen, collapsedOnLoad]);
 
   const handleChange = (event) => {
     setExportSelection({
       format: event.target.value.format,
-      resolution: event.target.value.value,
+      resolution: event.target.value.resolution,
     });
   };
 
   const getValue = useCallback(() => {
     return options.find(
       (opt) =>
-        opt.value === exportSelection.resolution &&
+        opt.resolution === exportSelection.resolution &&
         opt.format === exportSelection.format,
     );
   }, [exportSelection]);
@@ -210,11 +222,11 @@ const ExportMenu = ({ collapsedOnLoad }) => {
                 {options.map((opt) => {
                   return (
                     <MuiMenuItem
-                      key={`${opt.format}-${opt.value}`}
+                      key={`${opt.format}-${opt.resolution}`}
                       value={opt}
                       disabled={validateOption(
                         `${opt.format}`,
-                        opt.value,
+                        opt.resolution,
                         maxCanvasSize,
                         map,
                       )}
@@ -228,8 +240,8 @@ const ExportMenu = ({ collapsedOnLoad }) => {
               </Select>
             </FormControl>
             <ExportButton
+              exportFormat={exportSelection.format}
               exportScale={exportSelection.resolution}
-              maxCanvasSize={maxCanvasSize}
             >
               {t('PDF exportieren')}
             </ExportButton>
@@ -257,14 +269,6 @@ const ExportMenu = ({ collapsedOnLoad }) => {
       </MenuItem>
     </div>
   );
-};
-
-ExportMenu.propTypes = {
-  collapsedOnLoad: PropTypes.bool,
-};
-
-ExportMenu.defaultProps = {
-  collapsedOnLoad: false,
 };
 
 export default React.memo(ExportMenu);

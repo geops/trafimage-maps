@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FaPencilAlt } from 'react-icons/fa';
 import MenuItem from '../../components/Menu/MenuItem';
@@ -8,8 +8,13 @@ import { isOpenedByMapset } from '../../utils/redirectHelper';
 
 let shouldScroll = isOpenedByMapset();
 
-function DrawMenu({ collapsedOnLoad }) {
-  const [collapsed, setCollapsed] = useState(collapsedOnLoad);
+function DrawMenu() {
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
+  const collapsedOnLoad = useMemo(() => {
+    return activeTopic.elements.drawMenu?.collapsedOnLoad || false;
+  }, [activeTopic]);
+  const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   const ref = useRef();
 
@@ -29,9 +34,11 @@ function DrawMenu({ collapsedOnLoad }) {
   }, [ref]);
 
   useEffect(() => {
-    // When switching topics
-    setCollapsed(collapsedOnLoad);
-  }, [collapsedOnLoad]);
+    // Open menu item when loading/switching topic
+    if (menuOpen) {
+      setCollapsed(collapsedOnLoad);
+    }
+  }, [menuOpen, collapsedOnLoad]);
 
   return (
     <div ref={ref} id="wkp-draw-menu">
@@ -48,13 +55,5 @@ function DrawMenu({ collapsedOnLoad }) {
     </div>
   );
 }
-
-DrawMenu.propTypes = {
-  collapsedOnLoad: PropTypes.bool,
-};
-
-DrawMenu.defaultProps = {
-  collapsedOnLoad: false,
-};
 
 export default React.memo(DrawMenu);

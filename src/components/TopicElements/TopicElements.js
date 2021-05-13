@@ -116,22 +116,9 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
     {
-      exportMenu: (
-        <ExportMenu
-          collapsedOnLoad={activeTopic.elements.exportMenu?.collapsedOnLoad}
-        />
-      ),
-      drawMenu: (
-        <DrawMenu
-          collapsedOnLoad={activeTopic.elements.drawMenu?.collapsedOnLoad}
-        />
-      ),
-      shareMenu: (
-        <ShareMenu
-          appBaseUrl={appBaseUrl}
-          collapsedOnLoad={activeTopic.elements.shareMenu?.collapsedOnLoad}
-        />
-      ),
+      exportMenu: <ExportMenu />,
+      drawMenu: <DrawMenu />,
+      shareMenu: <ShareMenu appBaseUrl={appBaseUrl} />,
     },
     elements,
   );
