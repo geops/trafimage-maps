@@ -126,7 +126,7 @@ function ExportButton({
               );
             }
 
-            if (topic.exportConfig.PublishedAt) {
+            if (topic.exportConfig.publishedAt) {
               updatedSvg = updatedSvg.replace(
                 '***published_at***',
                 topic.exportConfig.publishedAt,
@@ -148,12 +148,13 @@ function ExportButton({
             );
           }
 
-          setLoading(false);
           // download the result
           const filename = `trafimage-${new Date()
             .toISOString()
             .substr(0, 10)}.pdf`;
           doc.save(filename);
+
+          setLoading(false);
         }}
       >
         <>
@@ -188,7 +189,7 @@ ExportButton.defaultProps = {
   exportZoom: null, // 10,
   exportExtent: [620000, 5741000, 1200000, 6058000],
   children: [],
-  exportSize: [3370, 2384],
+  exportSize: [3370, 2384], // a0
 };
 
 export default React.memo(ExportButton);

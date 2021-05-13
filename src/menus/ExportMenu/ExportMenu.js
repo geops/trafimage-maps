@@ -236,6 +236,7 @@ const ExportMenu = () => {
             <ExportButton
               exportFormat={exportSelection.format}
               exportScale={exportSelection.resolution}
+              exportSize={sizesByFormat[exportSelection.format]}
             >
               {t('PDF exportieren')}
             </ExportButton>
