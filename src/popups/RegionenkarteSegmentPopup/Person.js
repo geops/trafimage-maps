@@ -4,9 +4,16 @@ import { makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as PhoneIcon } from './icons/phone.svg';
 import { ReactComponent as MailIcon } from './icons/mail.svg';
+import { ReactComponent as PersonIcon } from './icons/person.svg';
 
-const useStyles = makeStyles({
-  contact: {
+const useStyles = makeStyles((theme) => ({
+  card: {
+    border: '1px solid #ddd',
+    borderRadius: 2,
+    padding: theme.spacing(1),
+    margin: `${theme.spacing(1)}px 0`,
+  },
+  contactDetail: {
     padding: `4px 0`,
     display: 'flex',
     alignItems: 'center',
@@ -19,7 +26,7 @@ const useStyles = makeStyles({
       width: 30,
     },
   },
-});
+}));
 
 const formatPhone = (phone) => {
   try {
@@ -38,27 +45,28 @@ function Person({ isIntern, person }) {
   const { name, phone, email, division, unterrolle, kommentar } = person;
 
   return (
-    <div>
+    <div className={classes.card}>
       {!name && <i>{t('Information nicht verfügbar')}</i>}
       {name && (
         <>
           {unterrolle && (
-            <div className={classes.contact}>
+            <div className={classes.contactDetail}>
               {`${unterrolle} ${kommentar}`}
             </div>
           )}
-          <div className={classes.contact}>
+          <div className={classes.contactDetail}>
+            <PersonIcon />
             {name}
             {division && ` (${division})`}
           </div>
           {phone && (
-            <div className={classes.contact}>
+            <div className={classes.contactDetail}>
               <PhoneIcon />
               <a href={`tel:${phone}`}>{formatPhone(phone)}</a>
             </div>
           )}
           {isIntern && email && (
-            <div className={classes.contact}>
+            <div className={classes.contactDetail}>
               <MailIcon />
               <a href={`mailto:${email.toLowerCase()}`}>
                 {email.toLowerCase()}

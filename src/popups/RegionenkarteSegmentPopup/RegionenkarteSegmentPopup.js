@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
-    border: '1px solid #dddddd',
+    borderTop: '1px solid #dddddd',
     marginTop: -1,
   },
   tabs: {
@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 2,
     marginBottom: -1,
     border: '1px solid #dddddd',
-    borderTopLeftRadius: 3,
-    borderTopRightRadius: 3,
+    borderTopLeftRadius: 2,
+    borderTopRightRadius: 2,
     textTransform: 'none',
     '&:first-child': {
       marginLeft: theme.spacing(2),
