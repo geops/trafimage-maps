@@ -4,10 +4,6 @@ import createDebounce from 'redux-debounced';
 import map from './map/reducers';
 import app from './app/reducers';
 
-// Allow to use Redux dev tools in FF and Chrome
-// eslint-disable-next-line no-underscore-dangle
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 /* eslint-disable */
 export const getStore = () => {
   const store = createStore(
@@ -15,7 +11,7 @@ export const getStore = () => {
       app,
       map,
     }),
-    composeEnhancers(applyMiddleware(createDebounce(), thunk)),
+    compose(applyMiddleware(createDebounce(), thunk)),
   );
 
   return store;
