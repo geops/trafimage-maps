@@ -237,7 +237,7 @@ export const betriebsregionen = {
 export const regionenkartePublic = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  maxZoom: 14,
+  maxZoom: 13,
   elements: {
     ...defaultElements,
     popup: true,
