@@ -87,7 +87,6 @@ function ExportButton({
           // Add map image
           const ctx = canvas.getContext('2d');
           ctx.scale(1 / exportScale, 1 / exportScale);
-          doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
           // Apply SVG overlay if provided
           if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
@@ -138,15 +137,13 @@ function ExportButton({
             const ctxx = canvass.getContext('2d');
             const instance = await Canvg.fromString(ctxx, updatedSvg);
             await instance.render();
-            doc.addImage(
-              canvass.toDataURL('image/png'),
-              'PNG',
-              0,
-              0,
-              exportSize[0],
-              exportSize[1],
-            );
+
+            // Add SVG to map canvas
+            ctx.drawImage(canvass, 0, 0);
           }
+
+          // Add canvas to PDF
+          doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
           // download the result
           const filename = `trafimage-${new Date()
