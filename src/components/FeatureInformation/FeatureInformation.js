@@ -21,6 +21,11 @@ const defaultProps = {
   staticFilesUrl: null,
 };
 
+const getPopupComponent = ({ popupComponent, layer }) => {
+  const comp = popupComponent || layer.get('popupComponent');
+  return typeof comp === 'string' ? popups[comp] : comp;
+};
+
 const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -32,27 +37,56 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
-  const features = featureInfo.map((featInfo) => featInfo.features).flat();
+  // List of features available for pagination.
+  const features = [];
 
+  // When a popup use hidePagination, we store the index for each popup.
+  const indexByPopup = {};
+
+  featureInfo.forEach((featInfo) => {
+    const PopupComponent = getPopupComponent(featInfo);
+    if (PopupComponent && PopupComponent.hidePagination) {
+      const name = PopupComponent.displayName;
+      // All features using this PopupComponent will be render on the same page
+      if (indexByPopup[name] !== undefined) {
+        features[indexByPopup[name]].push(...featInfo.features);
+      } else {
+        features.push([...featInfo.features]);
+        indexByPopup[name] = features.length - 1;
+      }
+    } else if (PopupComponent) {
+      features.push(...featInfo.features);
+    }
+  });
+
+  // The current feature(s) to display.
   const feature = features[featureIndex];
   if (!feature) {
     return null;
   }
-  const info = featureInfo.find((i) => i.features.includes(feature));
+
+  // Get the feature info corresponding to the feature(s) selected.
+  const info = featureInfo.find((i) => {
+    if (Array.isArray(feature)) {
+      return i.features.includes(feature[0]);
+    }
+    return i.features.includes(feature);
+  });
+
   if (!info || !info.layer) {
     return null;
   }
 
-  const comp = info.popupComponent || info.layer.get('popupComponent');
-  const PopupComponent = typeof comp === 'string' ? popups[comp] : comp;
+  const PopupComponent = getPopupComponent(info);
   if (!PopupComponent) {
     return null;
   }
 
   let pagination = null;
   const { layer } = info;
+  const { hideHeader, renderTitle, onCloseBtClick = () => {} } = PopupComponent;
 
-  if (features.length > 1 && !PopupComponent.hidePagination) {
+  if (features.length > 1) {
     pagination = (
       <div className="wkp-pagination-wrapper">
         <span className="wkp-pagination-button-wrapper">
@@ -89,14 +123,13 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       role="dialog"
     >
       <React.Suspense fallback="...loading">
-        {PopupComponent &&
-        (!PopupComponent.hideHeader ||
-          (PopupComponent.hideHeader && // For dynamic header rendering (e.g. CASA)
-            !PopupComponent.hideHeader(feature))) ? (
+        {!hideHeader ||
+        (hideHeader && // For dynamic header rendering (e.g. CASA)
+          !hideHeader(feature)) ? (
           <div className="wkp-feature-information-header">
             <span id="wkp-popup-label">
-              {PopupComponent && PopupComponent.renderTitle && feature
-                ? PopupComponent.renderTitle(feature, t)
+              {renderTitle
+                ? renderTitle(feature, t)
                 : layer && layer.name && t(layer.name)}
             </span>
             <Button
@@ -104,9 +137,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
               title={t('Popup schliessen')}
               onClick={() => {
                 dispatch(setFeatureInfo([]));
-                if (PopupComponent.onCloseBtClick) {
-                  PopupComponent.onCloseBtClick();
-                }
+                onCloseBtClick();
               }}
             >
               <MdClose focusable={false} alt={t('Popup schliessen')} />
@@ -120,7 +151,6 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             t={t}
             layer={info.layer}
             feature={features[featureIndex]}
-            features={features}
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}

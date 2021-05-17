@@ -8,33 +8,33 @@ import ZweitausbildungPoisLayer from '../../layers/ZweitausbildungPoisLayer';
 import './ZweitausbildungPoisPopup.scss';
 
 const propTypes = {
-  features: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
+  feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
   layer: PropTypes.instanceOf(ZweitausbildungPoisLayer).isRequired,
   t: PropTypes.func.isRequired,
 };
 
 class ZweitausbildungPoisPopup extends PureComponent {
   render() {
-    const { features, layer, t } = this.props;
+    const { feature, layer, t } = this.props;
     return (
       <div className="wkp-zweitausbildung-pois-popup">
-        {features.map((feature) => (
+        {feature.map((feat) => (
           <div
             className="wkp-zweitausbildung-pois-popup-row"
-            key={feature.get('name')}
-            onMouseEnter={() => layer.highlightFromPopup(feature, true)}
-            onMouseLeave={() => layer.highlightFromPopup(feature, false)}
+            key={feat.get('name')}
+            onMouseEnter={() => layer.highlightFromPopup(feat, true)}
+            onMouseLeave={() => layer.highlightFromPopup(feat, false)}
           >
-            <b>{feature.get('name')}</b>
-            {!!feature.get('rail_away') && (
+            <b>{feat.get('name')}</b>
+            {!!feat.get('rail_away') && (
               <div className="wkp-zweitausbildung-pois-popup-railaway">
                 RailAway
               </div>
             )}
             <div className="wkp-zweitausbildung-pois-popup-image">
-              {!!feature.get('foto') && (
+              {!!feat.get('foto') && (
                 <img
-                  src={feature.get('foto')}
+                  src={feat.get('foto')}
                   draggable="false"
                   alt={t('Kein Bildtext')}
                 />
