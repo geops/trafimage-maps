@@ -1,6 +1,4 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
 import Select from '@material-ui/core/Select';
 import { makeStyles } from '@material-ui/core/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -16,14 +14,6 @@ const useStyles = makeStyles({
     paddingBottom: 15,
   },
 });
-
-const propTypes = {
-  props: PropTypes.shape(),
-};
-
-const defaultProps = {
-  props: {},
-};
 
 const SBBSelect = (props) => {
   const classes = useStyles();
@@ -61,11 +51,10 @@ const SBBSelect = (props) => {
           },
         },
       }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );
 };
 
-SBBSelect.propTypes = propTypes;
-SBBSelect.defaultProps = defaultProps;
 export default SBBSelect;

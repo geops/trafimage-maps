@@ -1379,6 +1379,7 @@ export const regionenkartePublicSegment = new Layer({
   properties: {
     hasInfos: true,
     layerInfoComponent: 'RegionenkartePublicLayerInfo',
+    accessType: 'intern',
   },
   children: [
     new MapboxStyleLayer({
@@ -1399,6 +1400,7 @@ export const regionenkartePublicSegment = new Layer({
         hideInLegend: true,
         useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
         popupComponent: 'RegionenkarteSegmentPopup',
+        accessType: 'intern',
       },
     }),
     new MapboxStyleLayer({
@@ -1410,6 +1412,7 @@ export const regionenkartePublicSegment = new Layer({
       },
       properties: {
         hideInLegend: true,
+        accessType: 'intern',
       },
     }),
     new MapboxStyleLayer({
@@ -1422,6 +1425,7 @@ export const regionenkartePublicSegment = new Layer({
       properties: {
         hideInLegend: true,
         showPopupOnHover: true,
+        accessType: 'intern',
         popupComponent: 'RegionenkarteIntersectionPopup',
       },
     }),
