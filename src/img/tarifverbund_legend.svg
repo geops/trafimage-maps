@@ -10,146 +10,346 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="630.54639mm"
-   height="445.95801mm"
-   viewBox="0 0 630.54639 445.95801"
+   width="629.81415mm"
+   height="445.32312mm"
+   viewBox="0 0 629.81415 445.32312"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="tarifverbund_legend3.svg">
+   sodipodi:docname="tarifLegend5.svg">
   <defs
      id="defs2">
-    <filter
-       id="a"
-       style="color-interpolation-filters:sRGB">
-      <feFlood
-         id="feFlood1298"
-         result="result1"
-         flood-color="#9CBFDB"
-         flood-opacity="1" />
-      <feImage
-         id="feImage1300"
-         result="result2" />
-      <feBlend
-         id="feBlend1302"
-         result="result4"
-         in2="result1"
-         mode="multiply" />
-      <feMerge
-         id="feMerge1308"
-         result="result3">
-        <feMergeNode
-           id="feMergeNode1304"
-           in="result1" />
-        <feMergeNode
-           id="feMergeNode1306"
-           in="SourceGraphic" />
-      </feMerge>
-    </filter>
-    <filter
-       id="b"
-       style="color-interpolation-filters:sRGB">
-      <feFlood
-         id="feFlood1311"
-         result="result1"
-         flood-color="#9CBFDB"
-         flood-opacity="1" />
-      <feImage
-         id="feImage1313"
-         result="result2" />
-      <feBlend
-         id="feBlend1315"
-         result="result4"
-         in2="result1"
-         mode="multiply" />
-      <feMerge
-         id="feMerge1321"
-         result="result3">
-        <feMergeNode
-           id="feMergeNode1317"
-           in="result1" />
-        <feMergeNode
-           id="feMergeNode1319"
-           in="SourceGraphic" />
-      </feMerge>
-    </filter>
-    <filter
-       id="c"
-       style="color-interpolation-filters:sRGB">
-      <feFlood
-         id="feFlood1324"
-         result="result1"
-         flood-color="#9CBFDB"
-         flood-opacity="1" />
-      <feImage
-         id="feImage1326"
-         result="result2" />
-      <feBlend
-         id="feBlend1328"
-         result="result4"
-         in2="result1"
-         mode="multiply" />
-      <feMerge
-         id="feMerge1334"
-         result="result3">
-        <feMergeNode
-           id="feMergeNode1330"
-           in="result1" />
-        <feMergeNode
-           id="feMergeNode1332"
-           in="SourceGraphic" />
-      </feMerge>
-    </filter>
     <clipPath
        id="clip-path">
-      <path
-         inkscape:connector-curvature="0"
-         id="path1545"
-         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
-         class="cls-1" />
+      <rect
+         id="rect2286"
+         style="fill:none"
+         height="51.437599"
+         width="488.57782"
+         y="99.000763"
+         x="3948.4805" />
     </clipPath>
     <clipPath
        id="clip-path-2">
+      <rect
+         id="rect2289"
+         style="fill:none"
+         height="36.06641"
+         width="74.539192"
+         y="3090.7598"
+         x="101.70849" />
+    </clipPath>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="a">
+      <feFlood
+         flood-opacity="1"
+         flood-color="#9CBFDB"
+         result="result1"
+         id="feFlood1298" />
+      <feImage
+         result="result2"
+         id="feImage1300" />
+      <feBlend
+         mode="multiply"
+         in2="result1"
+         result="result4"
+         id="feBlend1302" />
+      <feMerge
+         result="result3"
+         id="feMerge1308">
+        <feMergeNode
+           in="result1"
+           id="feMergeNode1304" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode1306" />
+      </feMerge>
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="b">
+      <feFlood
+         flood-opacity="1"
+         flood-color="#9CBFDB"
+         result="result1"
+         id="feFlood1311" />
+      <feImage
+         result="result2"
+         id="feImage1313" />
+      <feBlend
+         mode="multiply"
+         in2="result1"
+         result="result4"
+         id="feBlend1315" />
+      <feMerge
+         result="result3"
+         id="feMerge1321">
+        <feMergeNode
+           in="result1"
+           id="feMergeNode1317" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode1319" />
+      </feMerge>
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="c">
+      <feFlood
+         flood-opacity="1"
+         flood-color="#9CBFDB"
+         result="result1"
+         id="feFlood1324" />
+      <feImage
+         result="result2"
+         id="feImage1326" />
+      <feBlend
+         mode="multiply"
+         in2="result1"
+         result="result4"
+         id="feBlend1328" />
+      <feMerge
+         result="result3"
+         id="feMerge1334">
+        <feMergeNode
+           in="result1"
+           id="feMergeNode1330" />
+        <feMergeNode
+           in="SourceGraphic"
+           id="feMergeNode1332" />
+      </feMerge>
+    </filter>
+    <clipPath
+       id="clip-path-77">
       <path
-         inkscape:connector-curvature="0"
-         id="path1548"
+         class="cls-1"
+         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         id="path1545"
+         inkscape:connector-curvature="0" />
+    </clipPath>
+    <clipPath
+       id="clip-path-2-6">
+      <path
+         class="cls-1"
          d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
-         class="cls-1" />
+         id="path1548"
+         inkscape:connector-curvature="0" />
     </clipPath>
     <style
        id="style1551">.cls-1,.cls-25{fill:none}.cls-2{fill:#9cbfdb}.cls-23,.cls-26,.cls-3,.cls-36,.cls-5{isolation:isolate}.cls-5{font-size:42.06px}.cls-23{font-size:26.56px}.cls-25{stroke:#1d1d1b;stroke-miterlimit:10}.cls-26,.cls-36{font-size:22px}.cls-33,.cls-34{fill:#221e20}.cls-34{fill-rule:evenodd}.cls-36{letter-spacing:-.14em}.cls-56{letter-spacing:-.00999em}.cls-71{fill:#7a92b4}</style>
+    <filter
+       id="filter2830"
+       style="color-interpolation-filters:sRGB"
+       inkscape:menu-tooltip="Adds a colorizable opaque background"
+       inkscape:menu="Fill and Transparency"
+       inkscape:label="Fill Background">
+      <feFlood
+         id="feFlood2818"
+         flood-opacity="1"
+         flood-color="rgb(200,55,55)"
+         result="result1" />
+      <feImage
+         id="feImage2820"
+         result="result2"
+         xlink:href="" />
+      <feMerge
+         id="feMerge2828"
+         result="fbSourceGraphic">
+        <feMergeNode
+           id="feMergeNode2824"
+           in="result1" />
+        <feMergeNode
+           id="feMergeNode2826"
+           in="SourceGraphic" />
+      </feMerge>
+      <feBlend
+         id="feBlend2822"
+         mode="multiply"
+         in2="result1"
+         result="result4" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1690" />
+      <feFlood
+         id="feFlood1692"
+         result="result1"
+         flood-color="rgb(200,55,55)"
+         flood-opacity="1"
+         in="fbSourceGraphic" />
+      <feImage
+         id="feImage1694"
+         xlink:href=""
+         result="result2" />
+      <feBlend
+         in2="result1"
+         id="feBlend1696"
+         result="result4"
+         mode="multiply" />
+      <feMerge
+         id="feMerge1698"
+         result="result3">
+        <feMergeNode
+           id="feMergeNode1700"
+           in="result1" />
+        <feMergeNode
+           id="feMergeNode1702"
+           in="fbSourceGraphic" />
+      </feMerge>
+    </filter>
+    <clipPath
+       id="clip-path-7">
+      <path
+         class="cls-1"
+         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         id="path1545-6"
+         inkscape:connector-curvature="0"
+         style="fill:none" />
+    </clipPath>
+    <clipPath
+       id="clip-path-2-7">
+      <path
+         class="cls-1"
+         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
+         id="path1548-3"
+         inkscape:connector-curvature="0"
+         style="fill:none" />
+    </clipPath>
+    <filter
+       id="a-2"
+       style="color-interpolation-filters:sRGB">
+      <feFlood
+         id="feFlood1298-7"
+         result="result1"
+         flood-color="#9CBFDB"
+         flood-opacity="1" />
+      <feImage
+         id="feImage1300-6"
+         result="result2" />
+      <feBlend
+         id="feBlend1302-1"
+         result="result4"
+         in2="result1"
+         mode="multiply" />
+      <feMerge
+         id="feMerge1308-3"
+         result="result3">
+        <feMergeNode
+           id="feMergeNode1304-2"
+           in="result1" />
+        <feMergeNode
+           id="feMergeNode1306-1"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="b-5"
+       style="color-interpolation-filters:sRGB">
+      <feFlood
+         id="feFlood1311-9"
+         result="result1"
+         flood-color="#9CBFDB"
+         flood-opacity="1" />
+      <feImage
+         id="feImage1313-9"
+         result="result2" />
+      <feBlend
+         id="feBlend1315-1"
+         result="result4"
+         in2="result1"
+         mode="multiply" />
+      <feMerge
+         id="feMerge1321-4"
+         result="result3">
+        <feMergeNode
+           id="feMergeNode1317-9"
+           in="result1" />
+        <feMergeNode
+           id="feMergeNode1319-1"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter
+       id="c-0"
+       style="color-interpolation-filters:sRGB">
+      <feFlood
+         id="feFlood1324-7"
+         result="result1"
+         flood-color="#9CBFDB"
+         flood-opacity="1" />
+      <feImage
+         id="feImage1326-5"
+         result="result2" />
+      <feBlend
+         id="feBlend1328-8"
+         result="result4"
+         in2="result1"
+         mode="multiply" />
+      <feMerge
+         id="feMerge1334-7"
+         result="result3">
+        <feMergeNode
+           id="feMergeNode1330-0"
+           in="result1" />
+        <feMergeNode
+           id="feMergeNode1332-4"
+           in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <clipPath
+       id="clip-path-8">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1545-0"
+         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         class="cls-1"
+         style="fill:none" />
+    </clipPath>
+    <clipPath
+       id="clip-path-2-4">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1548-2"
+         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
+         class="cls-1"
+         style="fill:none" />
+    </clipPath>
+    <style
+       id="style1551-9">.cls-1,.cls-25{fill:none}.cls-2{fill:#9cbfdb}.cls-23,.cls-26,.cls-3,.cls-36,.cls-5{isolation:isolate}.cls-5{font-size:42.06px}.cls-23{font-size:26.56px}.cls-25{stroke:#1d1d1b;stroke-miterlimit:10}.cls-26,.cls-36{font-size:22px}.cls-33,.cls-34{fill:#221e20}.cls-34{fill-rule:evenodd}.cls-36{letter-spacing:-.14em}.cls-56{letter-spacing:-.00999em}.cls-71{fill:#7a92b4}</style>
     <filter
        inkscape:label="Fill Background"
        inkscape:menu="Fill and Transparency"
        inkscape:menu-tooltip="Adds a colorizable opaque background"
        style="color-interpolation-filters:sRGB"
-       id="filter2830">
+       id="filter2830-6">
       <feFlood
          result="result1"
          flood-color="rgb(200,55,55)"
          flood-opacity="1"
-         id="feFlood2818" />
+         id="feFlood2818-1" />
       <feImage
          xlink:href=""
          result="result2"
-         id="feImage2820" />
+         id="feImage2820-0" />
       <feMerge
          result="fbSourceGraphic"
-         id="feMerge2828">
+         id="feMerge2828-4">
         <feMergeNode
            in="result1"
-           id="feMergeNode2824" />
+           id="feMergeNode2824-2" />
         <feMergeNode
            in="SourceGraphic"
-           id="feMergeNode2826" />
+           id="feMergeNode2826-2" />
       </feMerge>
       <feBlend
          result="result4"
          in2="result1"
          mode="multiply"
-         id="feBlend2822" />
+         id="feBlend2822-2" />
       <feColorMatrix
-         id="feColorMatrix1690"
+         id="feColorMatrix1690-0"
          values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
          in="fbSourceGraphic"
          result="fbSourceGraphicAlpha" />
@@ -158,242 +358,62 @@
          flood-opacity="1"
          flood-color="rgb(200,55,55)"
          result="result1"
-         id="feFlood1692" />
+         id="feFlood1692-5" />
       <feImage
          result="result2"
          xlink:href=""
-         id="feImage1694" />
+         id="feImage1694-5" />
       <feBlend
          mode="multiply"
          result="result4"
-         id="feBlend1696"
+         id="feBlend1696-2"
          in2="result1" />
       <feMerge
          result="result3"
-         id="feMerge1698">
+         id="feMerge1698-9">
         <feMergeNode
            in="result1"
-           id="feMergeNode1700" />
+           id="feMergeNode1700-0" />
         <feMergeNode
            in="fbSourceGraphic"
-           id="feMergeNode1702" />
-      </feMerge>
-    </filter>
-    <clipPath
-       id="clip-path-7">
-      <path
-         style="fill:none"
-         inkscape:connector-curvature="0"
-         id="path1545-6"
-         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
-         class="cls-1" />
-    </clipPath>
-    <clipPath
-       id="clip-path-2-7">
-      <path
-         style="fill:none"
-         inkscape:connector-curvature="0"
-         id="path1548-3"
-         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
-         class="cls-1" />
-    </clipPath>
-    <filter
-       style="color-interpolation-filters:sRGB"
-       id="a-2">
-      <feFlood
-         flood-opacity="1"
-         flood-color="#9CBFDB"
-         result="result1"
-         id="feFlood1298-7" />
-      <feImage
-         result="result2"
-         id="feImage1300-6" />
-      <feBlend
-         mode="multiply"
-         in2="result1"
-         result="result4"
-         id="feBlend1302-1" />
-      <feMerge
-         result="result3"
-         id="feMerge1308-3">
-        <feMergeNode
-           in="result1"
-           id="feMergeNode1304-2" />
-        <feMergeNode
-           in="SourceGraphic"
-           id="feMergeNode1306-1" />
-      </feMerge>
-    </filter>
-    <filter
-       style="color-interpolation-filters:sRGB"
-       id="b-5">
-      <feFlood
-         flood-opacity="1"
-         flood-color="#9CBFDB"
-         result="result1"
-         id="feFlood1311-9" />
-      <feImage
-         result="result2"
-         id="feImage1313-9" />
-      <feBlend
-         mode="multiply"
-         in2="result1"
-         result="result4"
-         id="feBlend1315-1" />
-      <feMerge
-         result="result3"
-         id="feMerge1321-4">
-        <feMergeNode
-           in="result1"
-           id="feMergeNode1317-9" />
-        <feMergeNode
-           in="SourceGraphic"
-           id="feMergeNode1319-1" />
-      </feMerge>
-    </filter>
-    <filter
-       style="color-interpolation-filters:sRGB"
-       id="c-0">
-      <feFlood
-         flood-opacity="1"
-         flood-color="#9CBFDB"
-         result="result1"
-         id="feFlood1324-7" />
-      <feImage
-         result="result2"
-         id="feImage1326-5" />
-      <feBlend
-         mode="multiply"
-         in2="result1"
-         result="result4"
-         id="feBlend1328-8" />
-      <feMerge
-         result="result3"
-         id="feMerge1334-7">
-        <feMergeNode
-           in="result1"
-           id="feMergeNode1330-0" />
-        <feMergeNode
-           in="SourceGraphic"
-           id="feMergeNode1332-4" />
-      </feMerge>
-    </filter>
-    <clipPath
-       id="clip-path-8">
-      <path
-         style="fill:none"
-         class="cls-1"
-         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
-         id="path1545-0"
-         inkscape:connector-curvature="0" />
-    </clipPath>
-    <clipPath
-       id="clip-path-2-4">
-      <path
-         style="fill:none"
-         class="cls-1"
-         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
-         id="path1548-2"
-         inkscape:connector-curvature="0" />
-    </clipPath>
-    <style
-       id="style1551-9">.cls-1,.cls-25{fill:none}.cls-2{fill:#9cbfdb}.cls-23,.cls-26,.cls-3,.cls-36,.cls-5{isolation:isolate}.cls-5{font-size:42.06px}.cls-23{font-size:26.56px}.cls-25{stroke:#1d1d1b;stroke-miterlimit:10}.cls-26,.cls-36{font-size:22px}.cls-33,.cls-34{fill:#221e20}.cls-34{fill-rule:evenodd}.cls-36{letter-spacing:-.14em}.cls-56{letter-spacing:-.00999em}.cls-71{fill:#7a92b4}</style>
-    <filter
-       id="filter2830-6"
-       style="color-interpolation-filters:sRGB"
-       inkscape:menu-tooltip="Adds a colorizable opaque background"
-       inkscape:menu="Fill and Transparency"
-       inkscape:label="Fill Background">
-      <feFlood
-         id="feFlood2818-1"
-         flood-opacity="1"
-         flood-color="rgb(200,55,55)"
-         result="result1" />
-      <feImage
-         id="feImage2820-0"
-         result="result2"
-         xlink:href="" />
-      <feMerge
-         id="feMerge2828-4"
-         result="fbSourceGraphic">
-        <feMergeNode
-           id="feMergeNode2824-2"
-           in="result1" />
-        <feMergeNode
-           id="feMergeNode2826-2"
-           in="SourceGraphic" />
-      </feMerge>
-      <feBlend
-         id="feBlend2822-2"
-         mode="multiply"
-         in2="result1"
-         result="result4" />
-      <feColorMatrix
-         result="fbSourceGraphicAlpha"
-         in="fbSourceGraphic"
-         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
-         id="feColorMatrix1690-0" />
-      <feFlood
-         id="feFlood1692-5"
-         result="result1"
-         flood-color="rgb(200,55,55)"
-         flood-opacity="1"
-         in="fbSourceGraphic" />
-      <feImage
-         id="feImage1694-5"
-         xlink:href=""
-         result="result2" />
-      <feBlend
-         in2="result1"
-         id="feBlend1696-2"
-         result="result4"
-         mode="multiply" />
-      <feMerge
-         id="feMerge1698-9"
-         result="result3">
-        <feMergeNode
-           id="feMergeNode1700-0"
-           in="result1" />
-        <feMergeNode
-           id="feMergeNode1702-2"
-           in="fbSourceGraphic" />
+           id="feMergeNode1702-2" />
       </feMerge>
     </filter>
     <clipPath
        id="clip-path-8-0">
       <path
-         style="fill:none"
-         class="cls-1"
-         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         inkscape:connector-curvature="0"
          id="path1545-0-4"
-         inkscape:connector-curvature="0" />
+         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         class="cls-1"
+         style="fill:none" />
     </clipPath>
     <clipPath
        id="clip-path-2-4-0">
       <path
-         style="fill:none"
-         class="cls-1"
-         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
+         inkscape:connector-curvature="0"
          id="path1548-2-9"
-         inkscape:connector-curvature="0" />
+         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
+         class="cls-1"
+         style="fill:none" />
     </clipPath>
     <clipPath
        id="clip-path-8-0-0">
       <path
-         style="fill:none"
-         class="cls-1"
-         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         inkscape:connector-curvature="0"
          id="path1545-0-4-9"
-         inkscape:connector-curvature="0" />
+         d="m 3910.071,19.321 h 708.661 v 74.608 h -708.661 z"
+         class="cls-1"
+         style="fill:none" />
     </clipPath>
     <clipPath
        id="clip-path-2-4-0-1">
       <path
-         style="fill:none"
-         class="cls-1"
-         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
+         inkscape:connector-curvature="0"
          id="path1548-2-9-7"
-         inkscape:connector-curvature="0" />
+         d="m 12.701,3161.651 h 57.046 v 28.745 H 12.701 Z"
+         class="cls-1"
+         style="fill:none" />
     </clipPath>
   </defs>
   <sodipodi:namedview
@@ -403,11 +423,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="3030.1092"
-     inkscape:cy="1244.8803"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="214.84207"
+     inkscape:cy="713.49773"
      inkscape:document-units="mm"
-     inkscape:current-layer="svg8"
+     inkscape:current-layer="Gruppe_18"
      showgrid="false"
      inkscape:window-width="3440"
      inkscape:window-height="1403"
@@ -426,1081 +446,982 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <rect
+     y="364.61221"
+     x="60.823757"
+     height="34.131016"
+     width="27.454216"
+     id="rect2498"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999995;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <rect
+     y="346.78464"
+     x="60.823761"
+     height="17.827574"
+     width="12.546846"
+     id="rect2210"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999992;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <rect
+     y="346.78464"
+     x="12.72848"
+     height="88.653999"
+     width="48.473255"
+     id="rect2206"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999998;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <rect
+     y="109.22459"
+     x="69.575798"
+     height="15.517034"
+     width="34.773815"
+     id="rect2204"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.40000004;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <rect
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect2202"
+     width="34.773815"
+     height="24.871468"
+     x="46.001102"
+     y="99.920845" />
+  <rect
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999998;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect2197"
+     width="54.639927"
+     height="71.682381"
+     x="12.659093"
+     y="53.223579" />
+  <rect
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999995;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect2208"
+     width="7.2324901"
+     height="34.131016"
+     x="60.823761"
+     y="346.78464" />
+  <rect
+     y="392.04251"
+     x="60.587524"
+     height="43.396095"
+     width="23.131355"
+     id="rect2212"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999992;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <rect
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999998;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect2214"
+     width="15.668673"
+     height="25.221767"
+     x="83.600769"
+     y="392.04251" />
+  <rect
+     y="407.65063"
+     x="92.042328"
+     height="9.757864"
+     width="15.501629"
+     id="rect2216"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999992;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  <rect
+     y="82.364098"
+     x="55.67625"
+     height="17.595427"
+     width="34.773815"
+     id="rect2200"
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="legend_elements"
-     transform="translate(1075.7613,313.02663)">
-    <rect
-       style="opacity:0.7;fill:#ffffff;fill-opacity:1;stroke:#9cbfdb;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
-       id="rect2409"
-       width="126.9407"
-       height="108.76886"
-       x="-1065.1102"
-       y="-278.27362" />
-    <rect
-       style="opacity:0.7;fill:#ffffff;fill-opacity:1;stroke:#9cbfdb;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
-       id="rect2409-8"
-       width="263.34879"
-       height="20.095989"
-       x="-1065.6393"
-       y="-301.20392" />
-    <rect
-       style="opacity:0.7;fill:#ffffff;fill-opacity:1;stroke:#9cbfdb;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
-       id="rect2409-4"
-       width="118.1208"
-       height="88.225426"
-       x="-1065.7782"
-       y="39.216232" />
+     id="layer1"
+     transform="translate(881.61863,210.47822)"
+     style="display:inline">
     <g
-       transform="translate(-828.19291,-222.83587)"
-       id="layer1-0"
-       inkscape:label="Legend">
+       id="layer1-9"
+       inkscape:label="Ebene 1"
+       transform="matrix(0.5294749,0,0,0.5294749,-881.68853,-210.69326)"
+       style="stroke-width:1.88866365">
       <g
-         style="stroke-width:1.90541625"
-         transform="matrix(0.13885855,0,0,0.13885855,-247.63951,-89.820669)"
-         id="Ebene_2"
-         data-name="Ebene 2">
+         transform="matrix(0.26209585,0,0,0.26209585,0.13202062,0.40614699)"
+         id="g3541"
+         style="stroke-width:1.88866365">
+        <rect
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:1.88866365"
+           height="65.49662"
+           width="502.60037"
+           y="91.885071"
+           x="3941.5371"
+           data-name="Rechteck 52"
+           id="Rechteck_52" />
+        <rect
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:1.91338634"
+           height="50"
+           width="436.90549"
+           y="2563.064"
+           x="91.721451"
+           data-name="Rechteck 43"
+           id="Rechteck_43" />
+        <rect
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:1.97167039"
+           height="133.06296"
+           width="1653.4867"
+           y="92.001106"
+           x="91.221451"
+           data-name="Rechteck 34"
+           id="Rechteck_34" />
+        <rect
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:2.70615268"
+           height="97.09491"
+           width="268.58102"
+           y="250.39532"
+           x="91.221451"
+           data-name="Rechteck 33"
+           id="Rechteck_33" />
+        <rect
+           transform="scale(1,-1)"
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:2.18165231"
+           height="97.09491"
+           width="334.99969"
+           y="-347.49023"
+           x="551.89307"
+           data-name="Rechteck 32"
+           id="Rechteck_32" />
+        <rect
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:1.88866365"
+           height="50"
+           width="393.16666"
+           y="396.07275"
+           x="91.221451"
+           data-name="Rechteck 31"
+           id="Rechteck_31" />
         <g
-           style="stroke-width:1.90541625"
-           id="Ebene_1-2"
-           data-name="Ebene 1">
+           data-name="Tarif- und Verkehrsverbunde Schweiz gültig ab"
+           id="Tarif-_und_Verkehrsverbunde_Schweiz_gültig_ab"
+           style="stroke-width:1.88866365">
+          <text
+             id="text2308"
+             style="font-weight:700;font-size:47px;font-family:Arial-BoldMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(103.01161,143.06407)">Tarif- und Verkehrsverbunde Schweiz gültig ab ***date_DE***</text>
+        </g>
+        <g
+           transform="translate(4.037963)"
+           data-name=" 13.12.2020"
+           id="_13.12.2020"
+           style="stroke-width:1.88866365">
+          <text
+             id="text2311"
+             style="font-weight:700;font-size:47px;font-family:Arial-BoldMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(1159.9981,145.06407)" />
+        </g>
+        <g
+           transform="translate(38.360641)"
+           data-name=" 13.12.2020-2"
+           id="_13.12.2020-2"
+           style="stroke-width:1.88866365">
+          <text
+             id="text2314"
+             style="font-weight:700;font-size:47px;font-family:Arial-BoldMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(1360.4271,206.12816)" />
+        </g>
+        <g
+           data-name="Communautés tarifaires et de trafic Suisse valable dès le"
+           id="Communautés_tarifaires_et_de_trafic_Suisse_valable_dès_le"
+           style="stroke-width:1.88866365">
+          <text
+             id="text2317"
+             style="font-weight:700;font-size:47px;font-family:Arial-BoldMT, Arial;letter-spacing:-0.0100046em;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(103.01161,206.12816)">Communautés tarifaires et de trafic Suisse valable dès le ***date_FR***</text>
+        </g>
+        <g
+           transform="translate(0,2.0189815)"
+           style="opacity:1;stroke-width:1.88866365"
+           data-name="Name Nom"
+           id="Name_Nom">
+          <text
+             id="text2320"
+             style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(561.73109,287.02928)">Name/Nom</text>
+        </g>
+        <g
+           transform="translate(0,6.0569445)"
+           data-name="tobias.hauser sbb.ch"
+           id="tobias.hauser_sbb.ch"
+           style="stroke-width:1.88866365">
           <g
-             style="stroke-width:1.90541625"
-             id="Ebene_2-2"
-             data-name="Ebene 2">
+             id="g2325"
+             style="opacity:1;isolation:isolate;stroke-width:1.88866365">
+            <text
+               id="text2323"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(561.73109,321.45628)">***publisher***</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 15"
+           id="Gruppe_15">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="66.001152"
+             width="473.98013"
+             y="988.96295"
+             x="91.221451"
+             data-name="Rechteck 42"
+             id="Rechteck_42" />
+          <line
+             style="fill:none;stroke:#000000;stroke-width:1.88866365;stroke-miterlimit:10"
+             y2="1001.7548"
+             x2="234.61034"
+             y1="1001.7548"
+             x1="113.277"
+             data-name="Linie 1"
+             id="Linie_1" />
+          <line
+             style="fill:none;stroke:#000000;stroke-width:1.88866365;stroke-miterlimit:10"
+             y2="1001.7548"
+             x2="362.90662"
+             y1="1001.7548"
+             x1="242.90663"
+             data-name="Linie 2"
+             id="Linie_2" />
+          <line
+             style="fill:none;stroke:#000000;stroke-width:1.88866365;stroke-miterlimit:10"
+             y2="1001.7548"
+             x2="492.46811"
+             y1="1001.7548"
+             x1="372.23996"
+             data-name="Linie 3"
+             id="Linie_3" />
+          <g
+             data-name=" 0"
+             id="_0"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2332"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(105.22145,1038.7317)">0</text>
+          </g>
+          <g
+             data-name=" 10"
+             id="_10"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2335"
+               style="font-size:30px;font-family:ArialMT, Arial;letter-spacing:-0.05em;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(224.10036,1038.7307)">10</text>
+          </g>
+          <g
+             data-name=" 20"
+             id="_20"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2340"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(348.95643,1038.7307)">20</text>
+          </g>
+          <g
+             data-name=" 30 km"
+             id="_30_km"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2343"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(473.24147,1038.7307)">30 km</text>
+          </g>
+        </g>
+        <g
+           transform="translate(0,2.0189815)"
+           style="opacity:1;stroke-width:1.88866365"
+           data-name="Stand Etat"
+           id="Stand_Etat">
+          <text
+             id="text2347"
+             style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(102.9225,287.02928)">Stand/Etat</text>
+        </g>
+        <g
+           transform="translate(0,6.0569445)"
+           style="opacity:1;stroke-width:1.88866365"
+           data-name=" 12.2020"
+           id="_12.2020">
+          <text
+             id="text2350"
+             style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(102.92238,321.45738)">***published_at***</text>
+        </g>
+        <g
+           id="layer1-4"
+           style="stroke-width:1.88866365">
+          <g
+             id="q10"
+             style="stroke-width:1.88866365">
             <g
-               style="stroke-width:1.90541625"
-               id="Ebene_1-3"
-               data-name="Ebene 1">
-              <path
-                 style="fill:none;stroke-width:1.90541625"
-                 inkscape:connector-curvature="0"
-                 id="Rechteck_52"
-                 data-name="Rechteck 52"
-                 class="cls-2"
-                 d="m 3766.622,31.864992 h 729 v 94.999988 h -729 z" />
-              <path
-                 style="fill:none;fill-opacity:1;stroke-width:1.90541613"
-                 inkscape:connector-curvature="0"
-                 id="Rechteck_43"
-                 data-name="Rechteck 43"
-                 class="cls-2"
-                 d="M 72.405814,2275.0221 H 588.31765 v 78.406 H 72.405814 Z" />
-              <path
-                 style="fill:none;stroke-width:1.90541637"
-                 inkscape:connector-curvature="0"
-                 id="Rechteck_34"
-                 data-name="Rechteck 34"
-                 class="cls-2"
-                 d="M 73.405813,45.729986 H 1884.2333 V 218.72996 H 73.405813 Z" />
-              <path
-                 style="fill:none;stroke-width:1.90541625"
-                 inkscape:connector-curvature="0"
-                 id="Rechteck_33"
-                 data-name="Rechteck 33"
-                 class="cls-2"
-                 d="M 73.405813,218.72997 H 305.12843 V 356.8113 H 73.405813 Z" />
-              <path
-                 style="fill:none;stroke-width:1.90541625"
-                 inkscape:connector-curvature="0"
-                 id="Rechteck_32"
-                 data-name="Rechteck 32"
-                 class="cls-2"
-                 d="m 438.44834,218.72997 h 430.1154 V 356.8113 h -430.1154 z" />
-              <path
-                 style="fill:none;stroke-width:1.90541637"
-                 inkscape:connector-curvature="0"
-                 id="Rechteck_31"
-                 data-name="Rechteck 31"
-                 class="cls-2"
-                 d="M 87.662248,385.78889 H 488.79457 V 452.6443 H 87.662248 Z" />
-              <text
-                 y="210.16339"
-                 x="93.614716"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.35165405px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.01em;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.90541637"
-                 letter-spacing="-.01em"
-                 font-size="42.06"
-                 id="Communautés_tarifaires_et_de_trafic_Suisse_valable_dès_le"
-                 data-name="Communautés tarifaires et de trafic Suisse valable dès le">Communautés tarifaires et de trafic Suisse valable dès le</text>
-              <text
-                 y="285.91934"
-                 x="561.33258"
-                 style="font-size:27.63582039px;letter-spacing:-0.01em;isolation:isolate;stroke-width:1.90541613"
-                 letter-spacing="-.01em"
-                 font-size="26.56"
-                 id="Name_Nom"
-                 data-name="Name Nom">
-                <tspan
-                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30.48666px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                   id="tspan1802">Name/Nom</tspan>
-              </text>
+               id="g2871"
+               style="stroke-width:1.88866365">
               <g
-                 transform="matrix(1.1896013,0,0,1.1896013,87.600148,-450.92863)"
-                 style="stroke-width:1.60172677"
-                 id="Gruppe_15"
-                 data-name="Gruppe 15">
-                <path
-                   style="fill:none;stroke-width:1.60172677"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_42"
-                   data-name="Rechteck 42"
-                   class="cls-2"
-                   d="m 1,1181 h 381 v 48 H 1 Z" />
-                <path
-                   style="fill:none;stroke:#1d1d1b;stroke-width:1.60172677;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Linie_1"
-                   data-name="Linie 1"
-                   class="cls-25"
-                   d="M 12.334,1191.051 H 114.582" />
-                <path
-                   style="fill:none;stroke:#1d1d1b;stroke-width:1.60172677;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Linie_2"
-                   data-name="Linie 2"
-                   class="cls-25"
-                   d="M 120.569,1191.051 H 222.817" />
-                <path
-                   style="fill:none;stroke:#1d1d1b;stroke-width:1.60172677;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Linie_3"
-                   data-name="Linie 3"
-                   class="cls-25"
-                   d="M 229.332,1191.051 H 331.58" />
+                 id="q11"
+                 style="stroke-width:1.88866365">
                 <g
-                   style="isolation:isolate;stroke-width:1.60172677"
-                   id="_0"
-                   data-name="0"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.60172677"
-                     class="cls-26"
-                     transform="translate(9,1223.028)"
-                     id="text1579">0</text>
-                </g>
-                <g
-                   style="isolation:isolate;stroke-width:1.60172677"
-                   id="_10"
-                   data-name="10"
-                   class="cls-3">
-                  <text
-                     transform="translate(106.219,1223.027)"
-                     style="font-size:22px;letter-spacing:-0.05em;isolation:isolate;stroke-width:1.60172677"
-                     letter-spacing="-.05em"
-                     font-size="22"
-                     id="text1582">1</text>
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.60172677"
-                     class="cls-26"
-                     transform="translate(117.879,1223.027)"
-                     id="text1584">0</text>
-                </g>
-                <g
-                   style="isolation:isolate;stroke-width:1.60172677"
-                   id="_20"
-                   data-name="20"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.60172677"
-                     class="cls-26"
-                     transform="translate(212.735,1223.027)"
-                     id="text1587">20</text>
-                </g>
-                <g
-                   style="isolation:isolate;stroke-width:1.60172677"
-                   id="_30_km"
-                   data-name="30 km"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.60172677"
-                     class="cls-26"
-                     transform="translate(312.02,1223.027)"
-                     id="text1590">30 km</text>
-                </g>
-              </g>
-              <text
-                 y="287.75385"
-                 x="102.49368"
-                 style="font-size:28.60839844px;letter-spacing:-0.02em;isolation:isolate;stroke-width:1.90541613"
-                 letter-spacing="-.02em"
-                 font-size="26.56"
-                 id="Stand_Etat"
-                 data-name="Stand Etat">
-                <tspan
-                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30.48666px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                   id="tspan1798">Stand/Etat</tspan>
-              </text>
-              <g
-                 transform="translate(-45.729985)"
-                 style="stroke-width:1.90541625"
-                 id="layer1-9">
-                <g
-                   transform="translate(-87.649142,22.864993)"
-                   style="stroke-width:1.90541625"
-                   id="q10">
+                   id="g2366"
+                   clip-path="url(#clip-path)"
+                   style="stroke-width:1.88866365">
                   <g
-                     style="stroke-width:1.90541625"
-                     id="g2871">
+                     data-name="Gruppe 16"
+                     id="Gruppe_16"
+                     style="stroke-width:1.88866365">
                     <g
-                       style="stroke-width:1.90541625"
-                       clip-path="url(#clip-path-8-0-0)"
-                       id="q11">
-                      <g
-                         style="stroke-width:1.90541625"
-                         id="Gruppe_16"
-                         data-name="Gruppe 16">
-                        <g
-                           style="stroke-width:1.90541625"
-                           id="g2877">
-                          <path
-                             style="fill:#e42328;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2879"
-                             d="m 3910.071,93.929 h 223.823 V 19.321 h -223.823 z" />
-                          <path
-                             style="fill:#ffffff;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2881"
-                             d="m 4041.821,50.915 h 24.2 V 31.756 h 11.4 v 19.159 h 24.2 l -19.47,-19.159 h 14.448 l 24.869,24.869 -24.87,24.869 h -14.457 l 19.47,-19.159 h -24.19 v 19.159 h -11.4 V 62.336 h -24.2 l 19.468,19.159 h -14.438 l -24.869,-24.869 24.869,-24.869 h 14.441" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2883"
-                             class="cls-33"
-                             d="m 4156.991,66.639 c -0.145,12.875 10.678,18.58 22.231,18.58 14.191,0 21.725,-7.165 21.725,-16.75 0,-11.842 -11.7,-14.257 -15.507,-15.2 -13.091,-3.369 -15.573,-3.882 -15.573,-7.9 0,-4.388 4.237,-5.921 7.9,-5.921 5.487,0 9.948,1.605 10.31,7.9 h 11.12 c 0,-12.066 -10.02,-16.816 -20.916,-16.816 -9.435,0 -19.527,5.119 -19.527,15.8 0,9.8 7.824,12.8 15.58,14.843 7.679,2.046 15.5,3 15.5,8.625 0,5.342 -6.144,6.513 -10.164,6.513 -6.145,0 -11.554,-2.711 -11.554,-9.658" />
-                          <path
-                             style="fill:#221e20;fill-rule:evenodd;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2885"
-                             class="cls-34"
-                             d="m 4219.51,40.684 h 10.75 c 4.093,0 7.9,1.02 7.9,5.994 0,4.388 -3,6.217 -7.02,6.217 h -11.63 z m -11.48,43.291 h 25.3 c 9.436,0 18.436,-4.533 18.436,-15.139 0,-6.507 -3.224,-11.408 -9.586,-13.237 4.54,-2.191 7.1,-5.777 7.1,-10.9 0,-9.724 -6.73,-12.941 -16.678,-12.941 h -24.571 z m 11.48,-23.257 h 12.5 c 4.9,0 8.264,2.125 8.264,7.461 0,5.408 -3.947,6.875 -8.48,6.875 h -12.283" />
-                          <path
-                             style="fill:#221e20;fill-rule:evenodd;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2887"
-                             class="cls-34"
-                             d="m 4270.9,40.684 h 10.75 c 4.093,0 7.9,1.02 7.9,5.994 0,4.388 -3,6.217 -7.02,6.217 h -11.63 z m -11.48,43.291 h 25.3 c 9.436,0 18.429,-4.533 18.429,-15.139 0,-6.507 -3.217,-11.408 -9.58,-13.237 4.534,-2.191 7.093,-5.777 7.093,-10.9 0,-9.724 -6.724,-12.941 -16.671,-12.941 h -24.57 z m 11.488,-23.257 h 12.5 c 4.9,0 8.264,2.125 8.264,7.461 0,5.408 -3.947,6.875 -8.48,6.875 h -12.283" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2889"
-                             class="cls-33"
-                             d="m 4376.081,49.309 c -1.388,-12.066 -11.04,-18.79 -22.52,-18.79 -16.166,0 -25.667,12.066 -25.667,27.567 0,15.066 9.5,27.132 25.666,27.132 12.8,0 21.79,-8.336 22.961,-21.356 h -11.12 c -0.875,6.875 -4.823,11.7 -11.842,11.7 -10.31,0 -14.19,-8.777 -14.19,-17.481 0,-9.138 3.881,-17.915 14.19,-17.915 5.7,0 10.678,3.948 11.408,9.138" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2891"
-                             class="cls-33"
-                             d="m 4383.59,83.975 h 11.48 V 62.401 h 21.87 V 53.48 h -21.87 V 41.414 h 25.23 v -9.651 h -36.711" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2893"
-                             class="cls-33"
-                             d="m 4427.28,83.975 h 11.449 V 62.401 h 21.843 V 53.48 h -21.85 V 41.414 h 25.2 v -9.651 h -36.641" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2895"
-                             class="cls-33"
-                             d="m 4488.791,83.975 h 11.51 V 62.401 h 21.843 V 53.48 H 4500.3 V 41.414 h 25.2 v -9.651 h -36.71" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2897"
-                             class="cls-33"
-                             d="m 4533.86,83.975 h 11.45 V 62.401 h 21.84 V 53.48 h -21.842 V 41.414 h 25.264 v -9.651 h -36.712" />
-                          <path
-                             style="fill:#221e20;stroke-width:1.90541625"
-                             inkscape:connector-curvature="0"
-                             id="path2899"
-                             class="cls-33"
-                             d="m 4574.78,66.639 c -0.13,12.875 10.659,18.58 22.239,18.58 14.21,0 21.71,-7.165 21.71,-16.75 0,-11.842 -11.71,-14.257 -15.46,-15.2 -13.092,-3.369 -15.593,-3.882 -15.593,-7.9 0,-4.388 4.21,-5.921 7.9,-5.921 5.46,0 9.935,1.605 10.329,7.9 h 11.053 c 0,-12.066 -10,-16.816 -20.856,-16.816 -9.474,0 -19.54,5.119 -19.54,15.8 0,9.8 7.83,12.8 15.593,14.843 7.632,2.046 15.46,3 15.46,8.625 0,5.342 -6.118,6.513 -10.131,6.513 -6.185,0 -11.58,-2.711 -11.58,-9.658" />
-                        </g>
-                      </g>
+                       id="g2877"
+                       style="stroke-width:1.88866365">
+                      <path
+                         style="fill:#e42328;stroke-width:1.88866365"
+                         d="m 3948.4805,150.43836 h 154.3121 v -51.4376 h -154.3121 z"
+                         id="path2879"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#ffffff;stroke-width:1.88866365"
+                         d="m 4039.314,120.78287 h 16.6844 v -13.20894 h 7.8595 v 13.20894 h 16.6842 l -13.4233,-13.20894 h 9.9609 l 17.1458,17.14563 -17.1458,17.14564 h -9.9679 l 13.4236,-13.20895 h -16.6775 v 13.20895 h -7.8595 v -13.20826 h -16.6844 l 13.422,13.20894 h -9.9541 l -17.1456,-17.14563 17.1456,-17.14564 h 9.9561"
+                         id="path2881"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4118.7167,131.62359 c -0.1,8.87652 7.362,12.80977 15.3269,12.80977 9.7837,0 14.9781,-4.93983 14.9781,-11.54809 0,-8.16433 -8.0666,-9.82932 -10.691,-10.47946 -9.026,-2.32272 -10.7368,-2.6764 -10.7368,-5.44656 0,-3.02526 2.921,-4.08217 5.4465,-4.08217 3.7828,0 6.8587,1.10655 7.1081,5.44656 h 7.666 c 0,-8.31876 -6.9081,-11.59359 -14.4196,-11.59359 -6.5049,0 -13.4625,3.52924 -13.4625,10.89313 0,6.75649 5.3936,8.8248 10.7415,10.23333 5.2936,1.41059 10.6862,2.06831 10.6862,5.9464 0,3.683 -4.2366,4.49031 -7.0081,4.49031 -4.2366,0 -7.9652,-1.86906 -7.9652,-6.65859"
+                         id="path2883"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;fill-rule:evenodd;stroke-width:1.88866365"
+                         d="m 4161.82,113.72923 h 7.4115 c 2.821,0 5.4465,0.70322 5.4465,4.13249 0,3.02525 -2.0683,4.28623 -4.8399,4.28623 h -8.018 z m -7.9147,29.84646 h 17.4427 c 6.5049,0 12.7098,-3.12522 12.7098,-10.4374 0,-4.48618 -2.2228,-7.86511 -6.6089,-9.12609 a 7.8944,7.8944 0 0 0 4.8951,-7.51488 c 0,-6.70409 -4.6399,-8.922 -11.4986,-8.922 h -16.94 z m 7.9147,-16.03426 h 8.6181 c 3.3781,0 5.6969,1.46506 5.6969,5.1439 0,3.72848 -2.7211,4.73989 -5.8464,4.73989 h -8.4685"
+                         id="path2885"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;fill-rule:evenodd;stroke-width:1.88866365"
+                         d="m 4197.2504,113.72923 h 7.4114 c 2.821,0 5.4465,0.70322 5.4465,4.13249 0,3.02525 -2.0683,4.28623 -4.8398,4.28623 h -8.0181 z m -7.9148,29.84646 h 17.4427 c 6.5049,0 12.7051,-3.12522 12.7051,-10.4374 0,-4.48618 -2.2178,-7.86511 -6.6042,-9.12609 a 7.89628,7.89628 0 0 0 4.8894,-7.51488 c 0,-6.70409 -4.6359,-8.922 -11.4936,-8.922 h -16.9394 z m 7.9195,-16.03426 h 8.618 c 3.3782,0 5.6976,1.46506 5.6976,5.1439 0,3.72848 -2.721,4.73989 -5.8464,4.73989 h -8.4685"
+                         id="path2887"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4269.7656,119.67563 c -0.9571,-8.31876 -7.6114,-12.95454 -15.5268,-12.95454 -11.1448,0 -17.6952,8.31876 -17.6952,19.00574 0,10.38707 6.5497,18.70584 17.6952,18.70584 8.8246,0 15.0228,-5.74716 15.8301,-14.72365 h -7.6666 c -0.6033,4.73989 -3.3254,8.06643 -8.1642,8.06643 -7.1082,0 -9.7838,-6.0512 -9.7838,-12.05207 0,-6.30009 2.6763,-12.35129 9.7838,-12.35129 3.9299,0 7.362,2.7219 7.8652,6.30009"
+                         id="path2889"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4274.9431,143.57569 h 7.9147 v -14.87393 h 15.0775 v -6.15048 h -15.0775 v -8.31876 h 17.3946 v -6.65377 h -25.3106"
+                         id="path2891"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4305.0646,143.57569 h 7.8929 v -14.87393 h 15.0592 v -6.15048 h -15.0643 v -8.31876 h 17.374 v -6.65377 h -25.2618"
+                         id="path2893"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4347.4721,143.57569 h 7.9353 v -14.87393 h 15.0592 v -6.15048 h -15.0592 v -8.31876 h 17.374 v -6.65377 h -25.3092"
+                         id="path2895"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4378.545,143.57569 h 7.8928 v -14.87393 h 15.0586 v -6.15048 h -15.0592 v -8.31876 h 17.4181 v -6.65377 h -25.3106"
+                         id="path2897"
+                         inkscape:connector-curvature="0" />
+                      <path
+                         style="fill:#221e20;stroke-width:1.88866365"
+                         d="m 4406.7567,131.62359 c -0.09,8.87652 7.3482,12.80977 15.3316,12.80977 9.7976,0 14.9684,-4.93983 14.9684,-11.54809 0,-8.16433 -8.074,-9.82932 -10.6594,-10.47946 -9.026,-2.32272 -10.7502,-2.6764 -10.7502,-5.44656 0,-3.02526 2.9025,-4.08217 5.4465,-4.08217 3.7643,0 6.8496,1.10655 7.1212,5.44656 h 7.6205 c 0,-8.31876 -6.8943,-11.59359 -14.3788,-11.59359 -6.5319,0 -13.4717,3.52924 -13.4717,10.89313 0,6.75649 5.3977,8.8248 10.7503,10.23333 5.2616,1.41059 10.6593,2.06831 10.6593,5.9464 0,3.683 -4.2188,4.49031 -6.9853,4.49031 -4.2642,0 -7.983,-1.86906 -7.983,-6.65859"
+                         id="path2899"
+                         inkscape:connector-curvature="0" />
                     </g>
                   </g>
                 </g>
               </g>
-              <g
-                 transform="matrix(1.3425424,0,0,1.3366279,87.741696,-1005.4059)"
-                 style="stroke-width:1.42239618"
-                 id="Gruppe_17"
-                 data-name="Gruppe 17">
-                <path
-                   style="fill:#b2ddc2;stroke:#fcfcfc;stroke-width:1.42239618;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_7"
-                   data-name="Rechteck 7"
-                   stroke-miterlimit="10"
-                   d="m 12.701,2672.701 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="display:inline;isolation:isolate;stroke-width:1.42239618"
-                   id="Tarifverbund_OSTWIND"
-                   data-name="Tarifverbund OSTWIND"
-                   class="cls-3"
-                   transform="translate(17.204025,-5.7600505)">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-weight:normal;font-size:56.89585114px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.023211"
-                     x="69.901138"
-                     y="2695.489"
-                     id="text1325"
-                     transform="scale(0.99779482,1.00221)"><tspan
-                       sodipodi:role="line"
-                       id="tspan1323"
-                       x="69.901138"
-                       y="2695.489"
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.75834084px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:2.023211">Tarifverbund OSTWIND</tspan></text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.33715,0,0,1.33715,87.542503,-1017.7291)"
-                 style="stroke-width:1.42498314"
-                 id="Gruppe_18"
-                 data-name="Gruppe 18">
-                <path
-                   style="fill:none;stroke-width:1.42498314"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_44"
-                   data-name="Rechteck 44"
-                   class="cls-2"
-                   d="m 0,2720 h 656 v 50 H 0 Z" />
-                <path
-                   style="fill:#f49ec3;stroke:#fcfcfc;stroke-width:1.42498314;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_8"
-                   data-name="Rechteck 8"
-                   stroke-miterlimit="10"
-                   d="m 12.701,2730.501 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.42498314"
-                   id="Tarifverbund_Luzern_Obwalden_Nidwalden_Passepartout_"
-                   data-name="Tarifverbund Luzern Obwalden Nidwalden Passepartout"
-                   class="cls-3">
-                  <text
-                     id="text1416"
-                     y="2742.1042"
-                     x="86.279968"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.9993248px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.02689052"
-                     xml:space="preserve"><tspan
-                       sodipodi:role="line"
-                       id="tspan1810"
-                       x="86.279968"
-                       y="2742.1042"
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.7997303px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Tarifverbund Luzern, Obwalden,</tspan></text>
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.9993248px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.02689052"
-                     x="85.020447"
-                     y="2767.4746"
-                     id="text1806"><tspan
-                       sodipodi:role="line"
-                       id="tspan1808"
-                       x="85.020447"
-                       y="2767.4746"
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.7997303px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Nidwalden (Passepartout)</tspan></text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.2794071,0,0,1.2794071,87.542503,-869.29606)"
-                 style="stroke-width:1.4892962"
-                 id="Gruppe_19"
-                 data-name="Gruppe 19">
-                <path
-                   style="fill:none;stroke-width:1.4892962"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_45"
-                   data-name="Rechteck 45"
-                   class="cls-2"
-                   d="m 0,2779 h 297 v 50 H 0 Z" />
-                <path
-                   style="fill:#89b5e4;stroke:#fcfcfc;stroke-width:1.4892962;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_9"
-                   data-name="Rechteck 9"
-                   stroke-miterlimit="10"
-                   d="m 12.701,2789.951 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.4892962"
-                   id="Tarifverbund_Schwyz"
-                   data-name="Tarifverbund Schwyz"
-                   class="cls-3"
-                   transform="translate(-0.18805205,2.0685726)">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.82874107px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.1183691"
-                     x="89.542358"
-                     y="2810.5056"
-                     id="text1325-5-7"><tspan
-                       sodipodi:role="line"
-                       id="tspan1388"
-                       x="89.542358"
-                       y="2810.5056">Tarifverbund Schwyz</tspan></text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.2710788,0,0,1.2710788,87.542503,-857.17483)"
-                 style="stroke-width:1.49905431"
-                 id="Gruppe_20"
-                 data-name="Gruppe 20">
-                <path
-                   style="fill:none;stroke-width:1.49905431"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_46"
-                   data-name="Rechteck 46"
-                   class="cls-2"
-                   d="m 0,2838 h 260 v 50 H 0 Z" />
-                <path
-                   style="fill:#d59241;stroke:#fcfcfc;stroke-width:1.49905431;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_10"
-                   data-name="Rechteck 10"
-                   stroke-miterlimit="10"
-                   d="m 12.701,2849.411 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.49905431"
-                   id="Tarifverbund_Zug"
-                   data-name="Tarifverbund Zug"
-                   class="cls-3">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.984869px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.13224912"
-                     x="89.508347"
-                     y="2871.8511"
-                     id="text1325-5-7-6"><tspan
-                       sodipodi:role="line"
-                       id="tspan1412"
-                       x="89.508347"
-                       y="2871.8511">Tarifverbund Zug</tspan></text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.3003093,0,0,1.3003093,88.598496,-952.07895)"
-                 style="stroke-width:1.46535611"
-                 id="Gruppe_21"
-                 data-name="Gruppe 21">
-                <path
-                   style="fill:none;stroke-width:1.46535611"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_47"
-                   data-name="Rechteck 47"
-                   class="cls-2"
-                   d="m 0,2898 h 465 v 50 H 0 Z" />
-                <path
-                   style="fill:#cad320;stroke:#fcfcfc;stroke-width:1.46535611;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_11"
-                   data-name="Rechteck 11"
-                   stroke-miterlimit="10"
-                   d="m 12.701,2908.861 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.46535611"
-                   id="Tarifverbund_Nordwestschweiz_TNW_"
-                   data-name="Tarifverbund Nordwestschweiz TNW"
-                   class="cls-3">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.44569778px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;isolation:isolate;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.02689052"
-                     x="85.756615"
-                     y="2931.1631"
-                     id="text1325-5"><tspan
-                       sodipodi:role="line"
-                       id="tspan1420"
-                       x="85.756615"
-                       y="2931.1631">Tarifverbund Nordwestschweiz (TNW)</tspan></text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.295919,0,0,1.295919,88.598496,-952.09543)"
-                 style="stroke-width:1.47032046"
-                 id="Gruppe_22"
-                 data-name="Gruppe 22">
-                <path
-                   style="fill:none;stroke-width:1.47032046"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_48"
-                   data-name="Rechteck 48"
-                   class="cls-2"
-                   d="m 0,2958 h 498 v 50 H 0 Z" />
-                <path
-                   style="fill:#8fcc93;stroke:#fcfcfc;stroke-width:1.47032046;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_12"
-                   data-name="Rechteck 12"
-                   stroke-miterlimit="10"
-                   d="m 12.701,2968.311 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.47032046"
-                   id="Communauté_tarifaire_genevoise_unireso_"
-                   data-name="Communauté tarifaire genevoise unireso"
-                   class="cls-3">
-                  <text
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.52512741px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.47032046"
-                     class="cls-26"
-                     transform="translate(88.55,2989.53)"
-                     id="text1648">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.52512741px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.00999em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.47032046"
-                       class="cls-56"
-                       id="tspan1646">Communauté tarifaire genevoise (unireso)</tspan>
-                  </text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.2823089,0,0,1.2823089,88.598496,-922.69703)"
-                 style="stroke-width:1.48592615"
-                 id="Gruppe_23"
-                 data-name="Gruppe 23">
-                <path
-                   style="fill:none;stroke-width:1.48592615"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_49"
-                   data-name="Rechteck 49"
-                   class="cls-2"
-                   d="m 0,3017 h 536 v 50 H 0 Z" />
-                <path
-                   style="fill:#4ac4f5;stroke:#fcfcfc;stroke-width:1.48592615;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_13"
-                   data-name="Rechteck 13"
-                   stroke-miterlimit="10"
-                   d="m 12.701,3027.771 h 57.046 v 28.745 H 12.701 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.48592615"
-                   id="Communauté_tarifaire_jurassienne_Vagabond_"
-                   data-name="Communauté tarifaire jurassienne Vagabond"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.48592615"
-                     class="cls-26"
-                     transform="translate(88.55,3049.197)"
-                     id="text1656">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:23.77481651px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.00999em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.48592615"
-                       class="cls-56"
-                       id="tspan1654">Communauté tarifaire jurassienne (Vagabond)</tspan>
-                  </text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.5681213,0,0,1.5681213,72.405813,-1899.3181)"
-                 style="stroke-width:1.21509492"
-                 id="Gruppe_24"
-                 data-name="Gruppe 24">
-                <path
-                   style="fill:none;stroke-width:1.21509492"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_50"
-                   data-name="Rechteck 50"
-                   class="cls-2"
-                   d="m 0,3077 h 369 v 50 H 0 Z" />
-                <path
-                   style="fill:#fbd80c;stroke:#fcfcfc;stroke-width:1.21509492;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_14"
-                   data-name="Rechteck 14"
-                   stroke-miterlimit="10"
-                   d="m 20.896397,3140.8315 h 45.333811 v 22.6829 H 20.896397 Z" />
-                <text
-                   transform="scale(1.0035301,0.99648232)"
-                   y="3169.7175"
-                   x="80.887199"
-                   style="font-size:17.42165184px;letter-spacing:-0.02em;isolation:isolate;stroke-width:1.21509492"
-                   letter-spacing="-.02em"
-                   font-size="22"
-                   id="Zürcher_Verkehrsbund_ZVV_"
-                   data-name="Zürcher Verkehrsbund ZVV">
-                  <tspan
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.44151878px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                     id="tspan1704">Zürcher Verkehrsbund (ZVV)</tspan>
-                </text>
-              </g>
-              <g
-                 transform="matrix(1.2175577,0,0,1.2175577,91.459976,-771.46079)"
-                 style="stroke-width:1.56494951"
-                 id="Gruppe_27"
-                 data-name="Gruppe 27">
-                <path
-                   style="fill:none;stroke-width:1.56494951"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_51"
-                   data-name="Rechteck 51"
-                   class="cls-2"
-                   d="m 0,3155.151 h 462 v 66 H 0 Z" />
-                <g
-                   transform="translate(0,12.150949)"
-                   style="stroke-width:1.56494951"
-                   clip-path="url(#clip-path-2-4-0-1)"
-                   id="g1669">
-                  <g
-                     style="stroke-width:1.56494951"
-                     id="Gruppe_25"
-                     data-name="Gruppe 25">
-                    <path
-                       style="fill:#c8464b;fill-opacity:1;stroke-width:1.56494951"
-                       inkscape:connector-curvature="0"
-                       id="Rechteck_15"
-                       data-name="Rechteck 15"
-                       class="cls-71"
-                       transform="rotate(-47.148,60.3,3167.847)"
-                       d="M 59.002,3145.809 H 61.6 v 44.075 h -2.598 z" />
-                    <path
-                       style="fill:#c8464b;fill-opacity:1;stroke-width:1.56494951"
-                       inkscape:connector-curvature="0"
-                       id="Rechteck_16"
-                       data-name="Rechteck 16"
-                       class="cls-71"
-                       transform="rotate(-47.148,40.924,3176.406)"
-                       d="m 39.626,3152.651 h 2.598 v 47.51 h -2.598 z" />
-                    <path
-                       style="fill:#c8464b;fill-opacity:1;stroke-width:1.56494951"
-                       inkscape:connector-curvature="0"
-                       id="Rechteck_17"
-                       data-name="Rechteck 17"
-                       class="cls-71"
-                       transform="rotate(-47.148,21.522,3184.965)"
-                       d="m 20.224,3161.21 h 2.598 v 47.51 h -2.598 z" />
-                  </g>
-                </g>
-                <path
-                   style="fill:none;stroke:#ffffff;stroke-width:1.56494951;stroke-miterlimit:10;stroke-opacity:1"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_19"
-                   data-name="Rechteck 19"
-                   stroke-miterlimit="10"
-                   d="m 12.701,3173.802 h 57.046 v 28.745 H 12.701 Z" />
-                <text
-                   transform="scale(1.0035301,0.99648232)"
-                   y="3224.4468"
-                   x="86.683273"
-                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.43720245px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.02em;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.56494939"
-                   letter-spacing="-.02em"
-                   font-size="22"
-                   id="Zürcher_Verkehrsbund_ZVV_-4"
-                   data-name="Zürcher Verkehrsbund ZVV">
-                  <tspan
-                     sodipodi:role="line"
-                     id="tspan1794"
-                     x="86.683273"
-                     y="3224.4468"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.03919029px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Lebensraum Zürich (Z-Pass)</tspan>
-                </text>
-                <text
-                   data-name="Zürcher Verkehrsbund ZVV"
-                   id="text1792"
-                   font-size="22"
-                   letter-spacing="-.02em"
-                   style="font-size:22.43775749px;letter-spacing:-0.02em;isolation:isolate;stroke-width:1.56494939"
-                   x="87.79715"
-                   y="3194.8162"
-                   transform="scale(1.0035301,0.99648232)">
-                  <tspan
-                     sodipodi:role="line"
-                     id="tspan1796"
-                     x="87.79715"
-                     y="3194.8162"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.03919029px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Tarifverbund für den Wirtschafts- und</tspan>
-                </text>
-              </g>
-              <g
-                 transform="matrix(1.3371079,0,0,1.3371079,86.32514,-423.16141)"
-                 style="stroke-width:1.42502809"
-                 id="Gruppe_28"
-                 data-name="Gruppe 28">
-                <path
-                   style="fill:#8cd5dc;stroke:#ffffff;stroke-width:1.42502809;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_20"
-                   data-name="Rechteck 20"
-                   stroke-miterlimit="10"
-                   d="m 12.79,616.182 h 57.046 v 28.745 H 12.79 Z" />
-                <text
-                   y="637.9964"
-                   x="89.232491"
-                   data-name="Engadin Mobil"
-                   id="text2440"
-                   font-size="22"
-                   letter-spacing="-.01em"
-                   style="font-size:22px;letter-spacing:-0.01em;isolation:isolate;stroke-width:1.42502809"
-                   inkscape:label="Tarifverbund A-Welle">
-                  <tspan
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.80044746px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                     id="tspan1335">Tarifverbund A-Welle</tspan>
-                </text>
-              </g>
-              <g
-                 transform="matrix(1.3446799,0,0,1.3446799,84.674681,-441.46522)"
-                 style="stroke-width:1.41700363"
-                 id="Gruppe_29"
-                 data-name="Gruppe 29">
-                <path
-                   style="fill:none;stroke-width:1.41700363"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_35"
-                   data-name="Rechteck 35"
-                   class="cls-2"
-                   d="m 1,665 h 597 v 50 H 1 Z" />
-                <path
-                   style="fill:#f89e5f;stroke:#ffffff;stroke-width:1.41700363;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_21"
-                   data-name="Rechteck 21"
-                   stroke-miterlimit="10"
-                   d="m 12.79,675.61 h 57.046 v 28.745 H 12.79 Z" />
-                <g
-                   transform="translate(-2.3477224e-7,-2.4854362)"
-                   style="isolation:isolate;stroke-width:1.41700363"
-                   id="Communità_tariffale_Ticino_e_Moesano_Aecobaleno_"
-                   data-name="Communità tariffale Ticino e Moesano Aecobaleno"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.41700363"
-                     class="cls-26"
-                     id="text1739"
-                     x="87.33107"
-                     y="688.3941">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.6720562px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.00999em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.41700363"
-                       class="cls-56"
-                       id="tspan1737">Communità tariffale Ticino e</tspan>
-                  </text>
-                  <text
-                     y="711.93054"
-                     x="87.808479"
-                     style="font-size:22px;letter-spacing:-0.01em;isolation:isolate;stroke-width:1.41700363"
-                     letter-spacing="-.01em"
-                     font-size="22"
-                     id="text1741">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.6720562px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                       id="tspan1333">Moesano (Aecobaleno)</tspan>
-                  </text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.3406935,0,0,1.3406935,84.678667,-450.68121)"
-                 style="stroke-width:1.42121685"
-                 id="Gruppe_30"
-                 data-name="Gruppe 30">
-                <path
-                   style="fill:none;stroke-width:1.42121685"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_36"
-                   data-name="Rechteck 36"
-                   class="cls-2"
-                   d="m 1,724 h 236 v 50 H 1 Z" />
-                <path
-                   style="fill:#f0ea60;stroke:#ffffff;stroke-width:1.42121685;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_22"
-                   data-name="Rechteck 22"
-                   stroke-miterlimit="10"
-                   d="m 12.79,735.039 h 57.046 v 28.745 H 12.79 Z" />
-                <text
-                   transform="translate(89.836,756.723)"
-                   style="font-size:22px;letter-spacing:-0.01em;isolation:isolate;stroke-width:1.42121685"
-                   letter-spacing="-.01em"
-                   font-size="22"
-                   id="Engadin_Mobil"
-                   data-name="Engadin Mobil">
-                  <tspan
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.73946953px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                     id="tspan1331">Engadin Mobil</tspan>
-                </text>
-              </g>
-              <g
-                 transform="matrix(1.3310697,0,0,1.3310697,84.688291,-456.54309)"
-                 style="stroke-width:1.43149245"
-                 id="Gruppe_31"
-                 data-name="Gruppe 31">
-                <path
-                   style="fill:none;stroke-width:1.43149245"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_37"
-                   data-name="Rechteck 37"
-                   class="cls-2"
-                   d="m 1,784 h 417 v 50 H 1 Z" />
-                <path
-                   style="fill:#ca68a3;stroke:#ffffff;stroke-width:1.43149245;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_23"
-                   data-name="Rechteck 23"
-                   stroke-miterlimit="10"
-                   d="m 12.79,794.467 h 57.046 v 28.745 H 12.79 Z" />
-                <text
-                   inkscape:label="Tarifgemeinschaft_Davos_Klosters"
-                   style="font-size:22px;letter-spacing:-0.01em;isolation:isolate;stroke-width:1.43149245"
-                   letter-spacing="-.01em"
-                   font-size="22"
-                   id="Engadin_Mobil-1"
-                   data-name="Engadin Mobil"
-                   x="88.985672"
-                   y="816.34924">
-                  <tspan
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.90387917px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                     id="tspan1329">Tarifgemeinschaft Davos Klosters</tspan>
-                </text>
-              </g>
-              <g
-                 transform="matrix(1.3706492,0,0,1.3706492,83.500519,-527.10559)"
-                 style="stroke-width:1.39015603"
-                 id="Gruppe_32"
-                 data-name="Gruppe 32">
-                <path
-                   style="fill:none;stroke-width:1.39015603"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_38"
-                   data-name="Rechteck 38"
-                   class="cls-2"
-                   d="m 1,843 h 547 v 76 H 1 Z" />
-                <path
-                   style="fill:#92c0d8;stroke:#ffffff;stroke-width:1.39015603;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_24"
-                   data-name="Rechteck 24"
-                   stroke-miterlimit="10"
-                   d="m 12.79,868.268 h 57.046 v 28.745 H 12.79 Z" />
-                <g
-                   transform="translate(-3.5106741,3.1596066)"
-                   style="isolation:isolate;stroke-width:1.39015603"
-                   id="Communautés_tarifaire_fribourgeoise_Frimobil_"
-                   data-name="Communautés tarifaire fribourgeoise Frimobil"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.39015603"
-                     class="cls-26"
-                     transform="translate(89.837,874.641)"
-                     id="text1759">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.24249649px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.00999em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.39015603"
-                       class="cls-56"
-                       id="tspan1757">Communautés tarifaire fribourgeoise (Frimobil)</tspan>
-                  </text>
-                </g>
-                <g
-                   transform="translate(-2.962194,28.74606)"
-                   style="isolation:isolate;stroke-width:1.39015603"
-                   id="Communautés_tarifaire_fribourgeoise_Frimobil_-7"
-                   data-name="Communautés tarifaire fribourgeoise Frimobil"
-                   class="cls-3">
-                  <text
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:21.99968338px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.39015603"
-                     class="cls-26"
-                     transform="translate(89.837,874.641)"
-                     id="text1759-7">
-                    <tspan
-                       y="0"
-                       x="0"
-                       id="tspan2800"
-                       sodipodi:role="line"
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.24249649px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start">Tarifverbund Freiburg (Frimobil)</tspan>
-                  </text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.3801483,0,0,1.3801483,81.392308,-574.30458)"
-                 style="stroke-width:1.38058805"
-                 id="Gruppe_33"
-                 data-name="Gruppe 33">
-                <path
-                   style="fill:none;stroke-width:1.38058805"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_39"
-                   data-name="Rechteck 39"
-                   class="cls-2"
-                   d="m 1,931 h 361 v 50 H 1 Z" />
-                <path
-                   style="fill:#ffc439;stroke:#ffffff;stroke-width:1.38058805;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_25"
-                   data-name="Rechteck 25"
-                   stroke-miterlimit="10"
-                   d="m 12.79,942.069 h 57.046 v 28.745 H 12.79 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.38058805"
-                   id="Libero-Tarifverbund_Libero_"
-                   data-name="Libero-Tarifverbund Libero"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.38058805"
-                     class="cls-26"
-                     transform="translate(89.836,964.394)"
-                     id="text1768">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.08940887px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-                       id="tspan1327">Libero-Tarifverbund (Libero)</tspan>
-                  </text>
-                </g>
-              </g>
-              <g
-                 transform="matrix(1.3446799,0,0,1.3446799,81.427776,-552.95688)"
-                 style="stroke-width:1.41700363"
-                 id="Gruppe_34"
-                 data-name="Gruppe 34">
-                <path
-                   style="fill:none;stroke-width:1.41700363"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_40"
-                   data-name="Rechteck 40"
-                   class="cls-2"
-                   d="m 1,991 h 487 v 50 H 1 Z" />
-                <path
-                   style="fill:#d1b673;stroke:#ffffff;stroke-width:1.41700363;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_26"
-                   data-name="Rechteck 26"
-                   stroke-miterlimit="10"
-                   d="m 12.79,1001.497 h 57.046 v 28.745 H 12.79 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.41700363"
-                   id="Communauté_tarifaire_vaudoise_Mobilis_"
-                   data-name="Communauté tarifaire vaudoise Mobilis"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.41700363"
-                     class="cls-26"
-                     transform="translate(89.836,1023.057)"
-                     id="text1776">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.6720562px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.00999em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.41700363"
-                       class="cls-56"
-                       id="tspan1774">Communauté tarifaire vaudoise (Mobilis)</tspan>
-                  </text>
-                </g>
-              </g>
-              <g
-                 inkscape:label="Gruppe_35"
-                 transform="matrix(1.3719001,0,0,1.3719001,81.468607,-597.38298)"
-                 style="stroke-width:1.38888848"
-                 id="Gruppe_35"
-                 data-name="Gruppe 35">
-                <path
-                   style="fill:none;stroke-width:1.38888848"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_41"
-                   data-name="Rechteck 41"
-                   class="cls-2"
-                   d="m 1,1050 h 574 v 50 H 1 Z" />
-                <path
-                   style="fill:#bf9394;stroke:#ffffff;stroke-width:1.38888848;stroke-miterlimit:10"
-                   inkscape:connector-curvature="0"
-                   id="Rechteck_27"
-                   data-name="Rechteck 27"
-                   stroke-miterlimit="10"
-                   d="m 12.79,1060.931 h 57.046 v 28.745 H 12.79 Z" />
-                <g
-                   style="isolation:isolate;stroke-width:1.38888848"
-                   id="Communauté_tarifaire_neuchâteloise_Onde_Verte_"
-                   data-name="Communauté tarifaire neuchâteloise Onde Verte"
-                   class="cls-3">
-                  <text
-                     style="font-size:22px;isolation:isolate;stroke-width:1.38888848"
-                     class="cls-26"
-                     transform="translate(89.836,1081.323)"
-                     id="text1784">
-                    <tspan
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.22221565px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.00999em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.38888848"
-                       class="cls-56"
-                       id="tspan1782">Communauté tarifaire neuchâteloise (Onde Verte)</tspan>
-                  </text>
-                </g>
-              </g>
-              <text
-                 y="140.98128"
-                 x="101.71121"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:53.35165405px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.01em;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.90541649"
-                 letter-spacing="-.01em"
-                 font-size="42.06"
-                 id="Communautés_tarifaires_et_de_trafic_Suisse_valable_dès_le-9"
-                 data-name="Communautés tarifaires et de trafic Suisse valable dès le">Tarif- und Verkehrsbünde Schweiz gültig ab</text>
-              <text
-                 xml:space="preserve"
-                 style="font-style:normal;font-weight:normal;font-size:76.21664429px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:3.63061094"
-                 x="1062.6442"
-                 y="133.91286"
-                 id="text1688"><tspan
-                   sodipodi:role="line"
-                   id="tspan1686"
-                   x="1062.6442"
-                   y="201.34673"
-                   style="stroke-width:3.63061094" /></text>
             </g>
           </g>
         </g>
+        <g
+           data-name="Gruppe 17"
+           id="Gruppe_17"
+           style="stroke-width:1.88866365">
+          <rect
+             style="fill:#b2ddc2;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.086021"
+             width="73.5989"
+             y="2569.521"
+             x="101.72145"
+             data-name="Rechteck 7"
+             id="Rechteck_7" />
+          <g
+             data-name="Tarifverbund OSTWIND"
+             id="Tarifverbund_OSTWIND"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2377"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(203.2715,2598.0428)">Tarifverbund OSTWIND</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 18"
+           id="Gruppe_18">
+          <rect
+             style="fill:#9cbfdb;stroke-width:2.2064693"
+             height="50"
+             width="894.01849"
+             y="2627.064"
+             x="91.721451"
+             data-name="Rechteck 44"
+             id="Rechteck_44" />
+          <rect
+             style="fill:#f49ec3;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="2634.9631"
+             x="101.72145"
+             data-name="Rechteck 8"
+             id="Rechteck_8" />
+          <g
+             data-name="Tarifverbund Luzern Obwalden Nidwalden Passepartout "
+             id="Tarifverbund_Luzern_Obwalden_Nidwalden_Passepartout_"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2387"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(203.2715,2663.3719)">Tarifverbund Luzern, Obwalden, Nidwalden (Passepartout)</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 19"
+           id="Gruppe_19">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="398.31073"
+             y="2693.064"
+             x="91.721451"
+             data-name="Rechteck 45"
+             id="Rechteck_45" />
+          <rect
+             style="fill:#89b5e4;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="2699.6914"
+             x="101.72145"
+             data-name="Rechteck 9"
+             id="Rechteck_9" />
+          <g
+             data-name="Tarifverbund Schwyz"
+             id="Tarifverbund_Schwyz"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2397"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(204.2715,2728.0392)">Tarifverbund Schwyz</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 20"
+           id="Gruppe_20">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="347.10446"
+             y="2756.064"
+             x="91.721451"
+             data-name="Rechteck 46"
+             id="Rechteck_46" />
+          <rect
+             style="fill:#d59241;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="2764.0305"
+             x="101.72145"
+             data-name="Rechteck 10"
+             id="Rechteck_10" />
+          <g
+             data-name="Tarifverbund Zug"
+             id="Tarifverbund_Zug"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2407"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(204.2715,2792.4833)">Tarifverbund Zug</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 21"
+           id="Gruppe_21">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="623.41559"
+             y="2825.064"
+             x="91.721451"
+             data-name="Rechteck 47"
+             id="Rechteck_47" />
+          <rect
+             style="fill:#cad320;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="2830.1826"
+             x="101.72145"
+             data-name="Rechteck 11"
+             id="Rechteck_11" />
+          <g
+             data-name="Tarifverbund Nordwestschweiz TNW "
+             id="Tarifverbund_Nordwestschweiz_TNW_"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2417"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(204.2715,2858.9277)">Tarifverbund Nordwestschweiz (TNW)</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 22"
+           id="Gruppe_22">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="683.24072"
+             y="2889.064"
+             x="91.721451"
+             data-name="Rechteck 48"
+             id="Rechteck_48" />
+          <rect
+             style="fill:#8fcc93;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="2896.4861"
+             x="101.72145"
+             data-name="Rechteck 12"
+             id="Rechteck_12" />
+          <g
+             data-name="Communauté tarifaire genevoise unireso "
+             id="Communauté_tarifaire_genevoise_unireso_"
+             style="stroke-width:1.88866365">
+            <g
+               id="g2425"
+               style="isolation:isolate;stroke-width:1.88866365">
+              <text
+                 id="text2423"
+                 style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+                 transform="translate(204.2715,2922.5942)">Communauté tarifaire genevoise (unireso)</text>
+            </g>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 23"
+           id="Gruppe_23">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="735.461"
+             y="2958.064"
+             x="91.721451"
+             data-name="Rechteck 49"
+             id="Rechteck_49" />
+          <rect
+             style="fill:#4ac4f5;stroke:#ffffff;stroke-width:1.41649771px;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="2961.5161"
+             x="101.72145"
+             data-name="Rechteck 13"
+             id="Rechteck_13" />
+          <g
+             data-name="Communauté tarifaire jurassienne Vagabond "
+             id="Communauté_tarifaire_jurassienne_Vagabond_"
+             style="stroke-width:1.88866365">
+            <g
+               id="g2437"
+               style="isolation:isolate;stroke-width:1.88866365">
+              <text
+                 id="text2435"
+                 style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+                 transform="translate(204.2715,2990.2612)">Communauté tarifaire jurassienne (Vagabond)</text>
+            </g>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 24"
+           id="Gruppe_24">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.92554939"
+             height="50"
+             width="510.71796"
+             y="3019.064"
+             x="91.721451"
+             data-name="Rechteck 50"
+             id="Rechteck_50" />
+          <rect
+             style="fill:#fbd80c;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.608551"
+             width="74.635887"
+             y="3026.0161"
+             x="101.72145"
+             data-name="Rechteck 14"
+             id="Rechteck_14" />
+          <g
+             data-name="Zürcher Verkehrsbund ZVV "
+             id="Zürcher_Verkehrsbund_ZVV_"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2447"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(204.2715,3054.7612)">Zürcher Verkehrsbund (ZVV)</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 27"
+           id="Gruppe_27">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866377"
+             height="68.818962"
+             width="1003.1533"
+             y="3079.064"
+             x="91.721451"
+             data-name="Rechteck 51"
+             id="Rechteck_51" />
+          <g
+             id="g2456"
+             clip-path="url(#clip-path-2)"
+             style="stroke-width:1.88866365">
+            <g
+               data-name="Gruppe 25"
+               id="Gruppe_25"
+               style="stroke-width:1.88866365">
+              <polygon
+                 style="fill:#e83835;fill-opacity:1;stroke-width:1.88866365"
+                 points="143.948,3078.534 186.169,3116.144 183.86,3118.534 141.64,3080.923 "
+                 data-name="Rechteck 15"
+                 id="Rechteck_15" />
+              <polygon
+                 style="fill:#e83835;fill-opacity:1;stroke-width:1.88866365"
+                 points="116.986,3087.807 162.496,3128.348 160.188,3130.738 114.677,3090.197 "
+                 data-name="Rechteck 16"
+                 id="Rechteck_16" />
+              <polygon
+                 style="fill:#e83835;fill-opacity:1;stroke-width:1.88866365"
+                 points="91.634,3098.546 137.144,3139.088 134.836,3141.477 89.325,3100.936 "
+                 data-name="Rechteck 17"
+                 id="Rechteck_17" />
+            </g>
+          </g>
+          <rect
+             style="fill:none;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="36.06641"
+             width="74.539192"
+             y="3090.2534"
+             x="101.70849"
+             data-name="Rechteck 19"
+             id="Rechteck_19" />
+        </g>
+        <g
+           data-name="Gruppe 28"
+           id="Gruppe_28"
+           style="stroke-width:1.88866365">
+          <rect
+             style="fill:#8cd5dc;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="36.078072"
+             width="71.598892"
+             y="402.58832"
+             x="104.34478"
+             data-name="Rechteck 20"
+             id="Rechteck_20" />
+          <g
+             style="opacity:1;stroke-width:1.88866365"
+             data-name="Tarifverbund A-Welle"
+             id="Tarifverbund_A-Welle">
+            <text
+               id="text2473"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(201.39088,431.46629)">Tarifverbund A-Welle</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 29"
+           id="Gruppe_29">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="811.38892"
+             y="462.73404"
+             x="91.221451"
+             data-name="Rechteck 35"
+             id="Rechteck_35" />
+          <rect
+             style="fill:#f89e5f;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="36.749931"
+             width="72.93222"
+             y="469.35907"
+             x="104.34478"
+             data-name="Rechteck 21"
+             id="Rechteck_21" />
+          <g
+             data-name="Communità tariffale Ticino e Moesano Aecobaleno "
+             id="Communità_tariffale_Ticino_e_Moesano_Aecobaleno_"
+             style="stroke-width:1.88866365">
+            <g
+               id="g2491"
+               style="isolation:isolate;stroke-width:1.88866365">
+              <text
+                 id="text2489"
+                 style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+                 transform="translate(201.39088,497.79002)">Communità tarriffale Ticino e Moesano (Arcobaleno)</text>
+            </g>
+            <text
+               id="text2493"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(583.06434,498.79002)" />
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 30"
+           id="Gruppe_30">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="309.61111"
+             y="527.40607"
+             x="91.221451"
+             data-name="Rechteck 36"
+             id="Rechteck_36" />
+          <rect
+             style="fill:#f0ea60;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="36.749931"
+             width="72.93222"
+             y="534.53113"
+             x="103.67812"
+             data-name="Rechteck 22"
+             id="Rechteck_22" />
+          <g
+             data-name="Engadin Mobil"
+             id="Engadin_Mobil"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2499"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(201.39076,563.12914)">Engadin Mobil</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 31"
+           id="Gruppe_31">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866353"
+             height="50"
+             width="559.87384"
+             y="592.40338"
+             x="91.221451"
+             data-name="Rechteck 37"
+             id="Rechteck_37" />
+          <rect
+             style="fill:#ca68a3;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="36.749931"
+             width="72.93222"
+             y="599.02844"
+             x="103.67812"
+             data-name="Rechteck 23"
+             id="Rechteck_23" />
+          <g
+             data-name="Tarifgemeinschaft Davos Klosters"
+             id="Tarifgemeinschaft_Davos_Klosters"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2509"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(201.39076,627.57042)">Tarifgemeinschaft Davos Klosters</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 32"
+           id="Gruppe_32">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="76"
+             width="740.27777"
+             y="644.73938"
+             x="91.221451"
+             data-name="Rechteck 38"
+             id="Rechteck_38" />
+          <rect
+             style="fill:#92c0d8;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="36.749931"
+             width="72.93222"
+             y="663.56299"
+             x="103.67812"
+             data-name="Rechteck 24"
+             id="Rechteck_24" />
+          <g
+             data-name="Communautés tarifaire fribourgeoise Frimobil "
+             id="Communautés_tarifaire_fribourgeoise_Frimobil_"
+             style="stroke-width:1.88866365">
+            <g
+               id="g2517"
+               style="isolation:isolate;stroke-width:1.88866365">
+              <text
+                 id="text2515"
+                 style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+                 transform="translate(201.39088,678.38036)">Communauté tarifaire fribourgeoise (Frimobil)</text>
+            </g>
+          </g>
+          <g
+             data-name="Tarifverbund Freiburg Frimobil "
+             id="Tarifverbund_Freiburg_Frimobil_"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2524"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(201.39088,707.48143)">Tarifverbund Freiburg (Frimobil)</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 33"
+           id="Gruppe_33">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="490.8215"
+             y="722.07275"
+             x="91.242836"
+             data-name="Rechteck 39"
+             id="Rechteck_39" />
+          <rect
+             style="fill:#ffc439;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.085861"
+             width="73.598892"
+             y="728.52979"
+             x="102.01145"
+             data-name="Rechteck 25"
+             id="Rechteck_25" />
+          <g
+             data-name="Libero-Tarifverbund Libero "
+             id="Libero-Tarifverbund_Libero_"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2534"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(200.39076,756.46666)">Libero-Tarifverbund (Libero)</text>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 34"
+           id="Gruppe_34">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="50"
+             width="660.72223"
+             y="787.07275"
+             x="91.221451"
+             data-name="Rechteck 40"
+             id="Rechteck_40" />
+          <rect
+             style="fill:#d1b673;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.08593"
+             width="73.598892"
+             y="793.52979"
+             x="103.01145"
+             data-name="Rechteck 26"
+             id="Rechteck_26" />
+          <g
+             data-name="Communauté tarifaire vaudoise Mobilis "
+             id="Communauté_tarifaire_vaudoise_Mobilis_"
+             style="stroke-width:1.88866365">
+            <g
+               id="g2542"
+               style="isolation:isolate;stroke-width:1.88866365">
+              <text
+                 id="text2540"
+                 style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+                 transform="translate(201.39076,822.12975)">Communauté tarifaire vaudoise (Mobilis)</text>
+            </g>
+          </g>
+        </g>
+        <g
+           style="opacity:0.98999999;stroke-width:1.88866365"
+           data-name="Gruppe 35"
+           id="Gruppe_35">
+          <rect
+             style="fill:#9cbfdb;stroke-width:1.88866365"
+             height="59.980209"
+             width="779.83331"
+             y="850.07275"
+             x="91.221451"
+             data-name="Rechteck 41"
+             id="Rechteck_41" />
+          <rect
+             style="fill:#bf9394;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.085861"
+             width="73.5989"
+             y="856.52979"
+             x="103.01144"
+             data-name="Rechteck 27"
+             id="Rechteck_27" />
+          <g
+             data-name="Communauté tarifaire neuchâteloise Onde Verte "
+             id="Communauté_tarifaire_neuchâteloise_Onde_Verte_"
+             style="stroke-width:1.88866365">
+            <g
+               id="g2554"
+               style="isolation:isolate;stroke-width:1.88866365">
+              <text
+                 id="text2552"
+                 style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+                 transform="translate(201.39076,886.39574)">Communauté tarifaire neuchâteloise (Onde Verte)</text>
+            </g>
+          </g>
+        </g>
+        <g
+           data-name="Zürcher Verkehrsbund ZVV "
+           id="Zürcher_Verkehrsbund_ZVV_2"
+           style="stroke-width:1.88866365">
+          <text
+             id="text2562"
+             style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+             transform="translate(204.2715,3120.0642)">Tarifverbund für den Wirtschafts- und Lebensraum Zürich (Z-Pass)</text>
+        </g>
+        <rect
+           y="0"
+           x="0"
+           id="rect2565"
+           style="fill:none;stroke-width:1.88866365"
+           height="3209"
+           width="4538.4429" />
+        <rect
+           style="opacity:0.98999999;fill:#9cbfdb;stroke-width:1.91338634"
+           height="62.937546"
+           width="436.90549"
+           y="2485.9939"
+           x="91.721466"
+           data-name="Rechteck 43"
+           id="Rechteck_43-2" />
+        <g
+           transform="translate(2.0542969e-5,-64.132939)"
+           data-name="Gruppe 17"
+           id="Gruppe_17-3"
+           style="stroke-width:1.88866365">
+          <rect
+             style="fill:#e16153;fill-opacity:1;stroke:#ffffff;stroke-width:1.88866365;stroke-miterlimit:10"
+             height="37.086021"
+             width="73.5989"
+             y="2569.521"
+             x="101.72145"
+             data-name="Rechteck 7"
+             id="Rechteck_7-4" />
+          <g
+             data-name="Tarifverbund transreno"
+             id="Tarifverbund_transreno-5"
+             style="stroke-width:1.88866365">
+            <text
+               id="text2377-1"
+               style="font-size:30px;font-family:ArialMT, Arial;isolation:isolate;stroke-width:1.88866365"
+               transform="translate(203.2715,2598.0428)">Tarifverbund TransReno</text>
+          </g>
+        </g>
       </g>
-      <rect
-         style="opacity:1;fill:none;fill-opacity:1;stroke:#9cbfdb;stroke-width:0.40000001;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0"
-         id="rect2407"
-         width="630.14636"
-         height="445.55801"
-         x="-247.36836"
-         y="-89.990761" />
-    </g>
-    <g
-       inkscape:label="date_FR"
-       transform="matrix(0.19690598,0,0,0.19690598,-1061.9329,-305.99557)"
-       style="isolation:isolate;stroke-width:1.34370399"
-       id="date_FR"
-       data-name="date_FR"
-       class="cls-3">
-      <text
-         y="66.989029"
-         x="828.39563"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.62371063px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.34370399"
-         class="cls-5"
-         id="text1562">***date_FR***</text>
-    </g>
-    <g
-       inkscape:label="date_DE"
-       transform="matrix(0.19690598,0,0,0.19690598,-1031.0935,-306.28357)"
-       style="isolation:isolate;stroke-width:1.34370399"
-       id="date_DE"
-       data-name="date_DE"
-       class="cls-3">
-      <text
-         y="116.63746"
-         x="935.10089"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.62371063px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;isolation:isolate;stroke-width:1.34370399"
-         class="cls-5"
-         id="text1565">***date_DE***</text>
-    </g>
-    <g
-       inkscape:label="published_at"
-       transform="matrix(0.14056094,0,0,0.14056094,-1063.4863,-302.86529)"
-       style="isolation:isolate;stroke-width:1.88233888"
-       id="published_at"
-       data-name="published_at"
-       class="cls-3">
-      <text
-         style="font-size:26.55999947px;isolation:isolate;stroke-width:1.88233888"
-         class="cls-23"
-         transform="translate(12.701,244.062)"
-         id="text1595">
-        <tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25.09785271px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start"
-           id="tspan1800">***published_at***</tspan>
-      </text>
-    </g>
-    <g
-       inkscape:label="publisher"
-       transform="matrix(0.13281185,0,0,0.13281185,-1030.0367,-301.25106)"
-       style="isolation:isolate;stroke-width:1.99216664"
-       id="publisher"
-       data-name="publisher"
-       class="cls-3">
-      <text
-         y="243.35567"
-         x="244.35968"
-         style="font-size:26.55999947px;isolation:isolate;stroke-width:1.99216664"
-         class="cls-23"
-         id="text1572">
-        <tspan
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.56222153px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:-0.002em;writing-mode:lr-tb;text-anchor:start;stroke-width:1.99216664"
-           letter-spacing="-.002em"
-           id="tspan1570">***publisher***</tspan>
-      </text>
     </g>
   </g>
 </svg>
