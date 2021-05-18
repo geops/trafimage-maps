@@ -8,7 +8,7 @@ import ZweitausbildungPoisLayer from '../../layers/ZweitausbildungPoisLayer';
 import './ZweitausbildungPoisPopup.scss';
 
 const propTypes = {
-  feature: PropTypes.instanceOf(Feature).isRequired,
+  feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
   layer: PropTypes.instanceOf(ZweitausbildungPoisLayer).isRequired,
   t: PropTypes.func.isRequired,
 };
@@ -16,27 +16,32 @@ const propTypes = {
 class ZweitausbildungPoisPopup extends PureComponent {
   render() {
     const { feature, layer, t } = this.props;
-    const { name, rail_away: railAway, foto } = feature.getProperties() || {};
     return (
       <div className="wkp-zweitausbildung-pois-popup">
-        <div
-          className="wkp-zweitausbildung-pois-popup-row"
-          key={name}
-          onMouseEnter={() => layer.highlightFromPopup(feature, true)}
-          onMouseLeave={() => layer.highlightFromPopup(feature, false)}
-        >
-          <b>{name}</b>
-          {!!railAway && (
-            <div className="wkp-zweitausbildung-pois-popup-railaway">
-              RailAway
-            </div>
-          )}
-          <div className="wkp-zweitausbildung-pois-popup-image">
-            {!!foto && (
-              <img src={foto} draggable="false" alt={t('Kein Bildtext')} />
+        {feature.map((feat) => (
+          <div
+            className="wkp-zweitausbildung-pois-popup-row"
+            key={feat.get('name')}
+            onMouseEnter={() => layer.highlightFromPopup(feat, true)}
+            onMouseLeave={() => layer.highlightFromPopup(feat, false)}
+          >
+            <b>{feat.get('name')}</b>
+            {!!feat.get('rail_away') && (
+              <div className="wkp-zweitausbildung-pois-popup-railaway">
+                RailAway
+              </div>
             )}
+            <div className="wkp-zweitausbildung-pois-popup-image">
+              {!!feat.get('foto') && (
+                <img
+                  src={feat.get('foto')}
+                  draggable="false"
+                  alt={t('Kein Bildtext')}
+                />
+              )}
+            </div>
           </div>
-        </div>
+        ))}
       </div>
     );
   }
@@ -47,4 +52,5 @@ ZweitausbildungPoisPopup.propTypes = propTypes;
 const composed = compose(withTranslation())(ZweitausbildungPoisPopup);
 
 composed.renderTitle = (feature, t) => t('Detailinformationen');
+composed.hidePagination = true;
 export default composed;
