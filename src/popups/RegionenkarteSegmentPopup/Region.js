@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles, Select, MenuItem } from '@material-ui/core';
+import { makeStyles, MenuItem } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
+import Select from '../../components/Select/SBBSelect';
 import Person from './Person';
 import Line from './Line';
 
