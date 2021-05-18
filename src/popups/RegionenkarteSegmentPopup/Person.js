@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { ReactComponent as PhoneIcon } from './icons/phone.svg';
-import { ReactComponent as MailIcon } from './icons/mail.svg';
-import { ReactComponent as PersonIcon } from './icons/person.svg';
+import { ReactComponent as PhoneIcon } from '../../img/phone.svg';
+import { ReactComponent as MailIcon } from '../../img/mail.svg';
+import { ReactComponent as PersonIcon } from '../../img/person.svg';
 
 const useStyles = makeStyles((theme) => ({
   card: {
