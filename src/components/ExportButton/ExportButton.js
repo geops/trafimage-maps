@@ -86,10 +86,16 @@ function ExportButton({
 
           // Add map image
           const ctx = canvas.getContext('2d');
-          ctx.scale(1 / exportScale, 1 / exportScale);
 
           // Apply SVG overlay if provided
           if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
+            const {
+              overlayImageUrl,
+              dateDe,
+              dateFr,
+              publisher,
+              publishedAt,
+            } = topic.exportConfig;
             /**
              * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
              * If changes in the legend SVG are necessary, make sure the values to insert are maintained
@@ -97,50 +103,60 @@ function ExportButton({
              * without major alterations)
              */
             // Fetch local svg
-            const svgString = await fetch(
-              topic.exportConfig.overlayImageUrl,
-            ).then((response) => response.text());
+            const svgString = await fetch(overlayImageUrl).then((response) =>
+              response.text(),
+            );
 
             let updatedSvg = svgString.slice(); // Clone the string
 
             // Replace dates and publisher data
-            if (topic.exportConfig.dateDe) {
-              updatedSvg = svgString.replace(
-                '***date_DE***',
-                topic.exportConfig.dateDe,
-              );
+            if (dateDe) {
+              updatedSvg = updatedSvg.replace('***date_DE***', dateDe);
             }
 
-            if (topic.exportConfig.dateFr) {
-              updatedSvg = updatedSvg.replace(
-                '***date_FR***',
-                topic.exportConfig.dateFr,
-              );
+            if (dateFr) {
+              updatedSvg = updatedSvg.replace('***date_FR***', dateFr);
             }
 
-            if (topic.exportConfig.publisher) {
-              updatedSvg = updatedSvg.replace(
-                '***publisher***',
-                topic.exportConfig.publisher,
-              );
+            if (publisher) {
+              updatedSvg = updatedSvg.replace('***publisher***', publisher);
             }
 
-            if (topic.exportConfig.publishedAt) {
+            if (publishedAt) {
               updatedSvg = updatedSvg.replace(
                 '***published_at***',
-                topic.exportConfig.publishedAt,
+                publishedAt,
               );
             }
+
+            // The legend SVG MUST NOT contains width and height attributes (only a viewBox)
+            // because it breaks canvg rendering: a bad canvas size is set.
+            // so we remove it before the conversion to canvas.
+            const svgDoc = new DOMParser().parseFromString(
+              updatedSvg,
+              'application/xml',
+            );
+            svgDoc.documentElement.removeAttribute('width');
+            svgDoc.documentElement.removeAttribute('height');
+            updatedSvg = new XMLSerializer().serializeToString(svgDoc);
 
             // Add legend SVG
             const canvass = document.createElement('canvas');
-            const ctxx = canvass.getContext('2d');
-            const instance = await Canvg.fromString(ctxx, updatedSvg);
+            canvass.width = canvas.width;
+            canvass.height = canvas.height;
+
+            const instance = await Canvg.fromString(
+              canvass.getContext('2d'),
+              updatedSvg,
+            );
             await instance.render();
 
             // Add SVG to map canvas
             ctx.drawImage(canvass, 0, 0);
           }
+
+          // Scale to fit the export size
+          ctx.scale(1 / exportScale, 1 / exportScale);
 
           // Add canvas to PDF
           doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
