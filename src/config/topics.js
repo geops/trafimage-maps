@@ -257,6 +257,7 @@ export const tarifverbundkarte = {
     publishedAt: '12/2020',
     dateDe: '13.12.2020',
     dateFr: '13.12.2020',
+    year: '2020',
     overlayImageUrl: tarifverbundkarteLegend,
   },
   elements: {

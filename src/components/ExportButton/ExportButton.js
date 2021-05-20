@@ -95,6 +95,7 @@ function ExportButton({
               dateFr,
               publisher,
               publishedAt,
+              year,
             } = topic.exportConfig;
             /**
              * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
@@ -110,6 +111,9 @@ function ExportButton({
             let updatedSvg = svgString.slice(); // Clone the string
 
             // Replace dates and publisher data
+            if (year) {
+              updatedSvg = updatedSvg.replace('***Year***', year);
+            }
             if (dateDe) {
               updatedSvg = updatedSvg.replace('***date_DE***', dateDe);
             }
