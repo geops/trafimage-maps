@@ -66,7 +66,7 @@ const propTypes = {
 const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'));
-  const isSmallerThanM = useMediaQuery((theme) => theme.breakpoints.down('md'));
+  const isSmallerThanS = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
@@ -111,8 +111,8 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
             ? ''
             : `${[
                 classes.drawerDesktopPaper,
-                elements.header && !isSmallerThanM ? classes.headerActive : '',
-                elements.header && isSmallerThanM ? classes.mobileHeader : '',
+                elements.header && !isSmallerThanS ? classes.headerActive : '',
+                elements.header && isSmallerThanS ? classes.mobileHeader : '',
                 elements.footer ? classes.footerActive : '',
               ].join(' ')}`,
         }}
