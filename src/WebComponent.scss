@@ -10,11 +10,11 @@
 }
 
 @include loadFont(
-  'SBBWeb Roman',
+  'SBBWeb-Roman',
   'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman'
 );
 @include loadFont(
-  'SBBWeb Bold',
+  'SBBWeb-Bold',
   'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
 );
 

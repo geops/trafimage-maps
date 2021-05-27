@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
   otherLines: {
     flex: '1 1',
     overflow: 'auto',
-    border: '1px dashed #dddddd',
+    border: '1px solid #dddddd',
+    borderRadius: 2,
     margin: 0,
     marginTop: theme.spacing(2),
     padding: theme.spacing(1),

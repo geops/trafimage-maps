@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles, Select, MenuItem } from '@material-ui/core';
+import { makeStyles, MenuItem } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
+import SBBSelect from '../../components/Select/SBBSelect';
 import Person from './Person';
 import Line from './Line';
 
@@ -76,7 +77,7 @@ function Region({ feature }) {
       <Line feature={feature} />
       <div className={classes.description}>
         <div>
-          <Select
+          <SBBSelect
             value={role}
             fullWidth
             onChange={(evt) => setRole(evt.target.value)}
@@ -88,7 +89,7 @@ function Region({ feature }) {
                 </MenuItem>
               );
             })}
-          </Select>
+          </SBBSelect>
         </div>
       </div>
       {(Array.isArray(person) ? person : [person])
