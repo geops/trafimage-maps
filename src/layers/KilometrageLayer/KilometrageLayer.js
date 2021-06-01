@@ -1,8 +1,5 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import OLVectorLayer from 'ol/layer/Vector';
-import OLVectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import { transform } from 'ol/proj';
+import { Feature } from 'ol';
 
 /**
  * Layer for kilometrage popup
@@ -12,58 +9,33 @@ import { transform } from 'ol/proj';
  * @param {Object} [options] Layer options.
  */
 class KilometrageLayer extends Layer {
-  constructor(options = {}) {
-    const olLayer = new OLVectorLayer({
-      style: (f, r) => this.style(f, r),
-      source: new OLVectorSource({
-        format: new GeoJSON(),
-      }),
-    });
-
-    super({
-      ...options,
-      olLayer,
-    });
-
-    this.setVisible(this.visible);
-  }
-
   getFeatureInfoAtCoordinate(coordinate) {
     const layer = this;
-    const meterRad = this.map && this.map.getView().getZoom() > 11 ? 100 : 1000;
-
-    const [newX, newY] = transform(
-      [parseInt(coordinate[0], 10), parseInt(coordinate[1], 10)],
-      'EPSG:3857',
-      'EPSG:21781',
-    );
-
+    // radius = 5 pixel * mapResolution
     return fetch(
-      `${this.geoServerUrl}?` +
-        'service=WFS&version=1.0.0&request=GetFeature&' +
-        `typeName=linien_qry_fanas&` +
-        'srsName=EPSG:3857&maxFeatures=50&' +
-        'outputFormat=application/json&' +
-        `viewparams=x:${parseInt(newX, 10)};y:${parseInt(
-          newY,
-          10,
-        )};r:${meterRad}`,
+      `${
+        this.cartaroUrl
+      }lines/kilometration/?coord=${coordinate.toString()}&radius=${
+        5 * this.map.getView().getResolution()
+      }`,
     )
       .then((data) => data.json())
       .then((data) => {
-        const format = new GeoJSON();
-        const features = format.readFeatures(data);
+        if (data.error || data.detail || !data.line_number) {
+          return { features: [], layer, coordinate };
+        }
 
+        const feature = new Feature(data);
         return {
-          features,
+          features: [feature],
           layer,
           coordinate,
         };
       });
   }
 
-  setGeoServerUrl(geoServerUrl) {
-    this.geoServerUrl = geoServerUrl;
+  setCartaroUrl(cartaroUrl) {
+    this.cartaroUrl = cartaroUrl;
   }
 }
 

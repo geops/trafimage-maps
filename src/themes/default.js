@@ -5,6 +5,10 @@ const theme = createMuiTheme({
     primary: {
       main: '#000',
     },
+    secondary: {
+      main: '#eb0000',
+      dark: '#c60018',
+    },
     text: {
       primary: '#000',
     },
@@ -77,6 +81,10 @@ const theme = createMuiTheme({
     MuiMenuItem: {
       disableRipple: true,
     },
+    MuiTab: {
+      disableRipple: true,
+      disableFocusRipple: true,
+    },
   },
   overrides: {
     MuiPopover: {
@@ -116,6 +124,10 @@ const theme = createMuiTheme({
           display: 'inline-block',
           transform: 'rotate(135deg)',
           background: 'white',
+        },
+        // Remove the padding for menu or select
+        '&.MuiMenu-paper': {
+          padding: 0,
         },
       },
     },

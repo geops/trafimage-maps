@@ -155,6 +155,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     }
 
     const pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+
     // At this point we get GeoJSON Mapbox feature, we transform it to an OpenLayers
     // feature to be consistent with other layers.
     const renderedFeatures = this.mbMap.queryRenderedFeatures(pixel, options);
@@ -171,13 +172,23 @@ class TrafimageMapboxLayer extends MapboxLayer {
         promises.push(
           new Promise((resolve) => {
             source.getClusterLeaves(id, count, 0, (_, cfs) => {
-              cfs.forEach((cf) => features.push(this.format.readFeature(cf)));
+              cfs.forEach((cf) => {
+                const olFeature = this.format.readFeature(cf);
+                if (olFeature) {
+                  olFeature.set('mapboxFeature', cf);
+                }
+                features.push(olFeature);
+              });
               resolve(cfs);
             });
           }),
         );
       } else {
-        features.push(this.format.readFeature(feature));
+        const olFeature = this.format.readFeature(feature);
+        if (olFeature) {
+          olFeature.set('mapboxFeature', feature);
+        }
+        features.push(olFeature);
       }
     }
 

@@ -1,3 +1,5 @@
+import RegionenkarteSegmentPopup from './RegionenkarteSegmentPopup';
+import RegionenkarteIntersectionPopup from './RegionenkarteIntersectionPopup';
 import BahnhofplanPopup from './BahnhofplanPopup';
 import BetriebsRegionenPopup from './BetriebsRegionenPopup';
 import BusLinePopup from './BusLinePopup';
@@ -31,5 +33,7 @@ export default {
   ZweitausbildungPoisPopup,
   ZweitausbildungRoutesPopup,
   TarifverbundkartePopup,
+  RegionenkarteSegmentPopup,
+  RegionenkarteIntersectionPopup,
   DrawPopup,
 };

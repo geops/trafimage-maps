@@ -34,7 +34,7 @@ const comps = {
       infrastructure. The coordinators for construction work near railway
       installations will help you implement your projects correctly.
       <p>
-        Responsible: I-AT-UEW, Aurelia Kollros,&nbsp;
+        Responsible: I-VU-UEW, Aurelia Kollros,&nbsp;
         <a href="mailto:aurelia.kollros@sbb.ch">aurelia.kollros@sbb.ch</a>.
       </p>
     </div>

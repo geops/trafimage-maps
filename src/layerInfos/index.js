@@ -12,7 +12,6 @@ import ParksLayerInfo from './ParksLayerInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
-import RegionenkartePrivateTopicInfo from './RegionenkartePrivateTopicInfo';
 import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
@@ -20,6 +19,7 @@ import ZweitausbildungLayerInfo from './ZweitausbildungLayerInfo';
 import ZweitausbildungRoutesSubLayerInfo from './ZweitausbildungRoutesSubLayerInfo';
 import ZweitausbildungSubLayerInfo from './ZweitausbildungSubLayerInfo';
 import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
+import RegionenkartePublicLayerInfo from './RegionenkartePublicLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -36,7 +36,7 @@ export default {
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
-  RegionenkartePrivateTopicInfo,
+  RegionenkartePublicLayerInfo,
   ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,
