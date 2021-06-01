@@ -4,6 +4,10 @@
   transition: max-height 0.3s ease;
 }
 
+.wkp-collapsible-hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .wkp-collapsible-horizontal {
   overflow: hidden;
   transition: max-width 0.3s ease;
