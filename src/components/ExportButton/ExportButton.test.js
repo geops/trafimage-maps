@@ -10,7 +10,7 @@ describe('ExportButton', () => {
       );
       svgDoc.documentElement.removeAttribute('width');
       svgDoc.documentElement.removeAttribute('height');
-      // The real XMLSerializer eas drop by node 12, see https://github.com/facebook/jest/issues/7537
+      // The real XMLSerializer was drop by node 12, see https://github.com/facebook/jest/issues/7537
       // so we use an npm module that does the same.
       XMLSerializer.serializeToString(svgDoc);
       done();
