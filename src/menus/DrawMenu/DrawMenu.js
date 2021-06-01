@@ -41,7 +41,7 @@ function DrawMenu() {
   }, [menuOpen, collapsedOnLoad]);
 
   return (
-    <div ref={ref} id="wkp-draw-menu">
+    <div ref={ref}>
       <MenuItem
         open
         title={t('Zeichnen auf der Karte')}

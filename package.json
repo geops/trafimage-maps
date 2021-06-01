@@ -99,7 +99,8 @@
     "stylelint-config-standard": "20.0.0",
     "stylelint-scss": "3.16.0",
     "to-string-loader": "1.1.6",
-    "vinyl-fs": "3.0.3"
+    "vinyl-fs": "3.0.3",
+    "xmlserializer": "^0.6.1"
   },
   "scripts": {
     "build": "GENERATE_SOURCEMAP=false  react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
