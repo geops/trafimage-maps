@@ -155,7 +155,7 @@ routeLayer
         },
         {
           uicFrom: 8507000,
-          latLonTo: [46.94691, 7.44079],
+          lonLatTo: [46.94691, 7.44079],
           mot: 'foot',
         },
         {
@@ -170,7 +170,7 @@ routeLayer
         },
         {
           uicFrom: 8507150,
-          latLonTo: [46.68848, 7.68974],
+          lonLatTo: [46.68848, 7.68974],
           mot: 'ferry',
         },
       ],

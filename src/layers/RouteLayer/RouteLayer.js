@@ -250,9 +250,9 @@ class RouteLayer extends CasaLayer {
    * @typedef {Object} Sequence
    * @property {Array<number>} uicFrom UIC number of start station.
    * @property {number} uicTo UIC number of end station.
-   * @property {number} latLonTo Lat/Lon coordinate array of end location
+   * @property {number} lonLatTo Lat/Lon coordinate array of end location
    *  (to be used if uicTo not provided).
-   * @property {Array<number>} latLonFrom Lat/Lon coordinate array of start location
+   * @property {Array<number>} lonLatFrom Lat/Lon coordinate array of start location
    *  (to be used if uicFrom not provided).
    * @property {string} mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
@@ -283,7 +283,7 @@ class RouteLayer extends CasaLayer {
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
-        const { mot, uicFrom, uicTo, latLonFrom, latLonTo } = routes[
+        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } = routes[
           i
         ].sequences[j];
         const nextMot =
@@ -291,7 +291,7 @@ class RouteLayer extends CasaLayer {
             ? null
             : routes[i].sequences[j + 1].mot;
 
-        via = via.concat([uicFrom || latLonFrom, uicTo || latLonTo]);
+        via = via.concat([uicFrom || lonLatFrom, uicTo || lonLatTo]);
 
         if (mot !== nextMot) {
           const sequenceProps = { route: { ...routes[i], routeId: i }, mot };
