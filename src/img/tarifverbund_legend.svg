@@ -491,6 +491,13 @@
     </rdf:RDF>
   </metadata>
   <rect
+     style="opacity:1;fill:#9cbfdb;fill-opacity:1;stroke:none;stroke-width:0.39999995;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     id="rect2966"
+     width="5.7205853"
+     height="192.31404"
+     x="611.80933"
+     y="169.89209" />
+  <rect
      y="364.61221"
      x="60.823757"
      height="34.131016"
@@ -1466,12 +1473,22 @@
           </g>
         </g>  
       </g>
-      <g  data-name="Gruppe 360" id="Gruppe_360" transform="translate(1163,820) rotate(-90)">
-         <text style="font-family: Arial-BoldMT, Arial; font-size: 9px; font-weight: 700;">SBB-Personenverkehr-Verbund-S-***Year*** </text>
+      <g
+         data-name="Gruppe 360"
+         id="Gruppe_360"
+         transform="rotate(-90,991.5,-171.5)">
+        <text
+           style="font-weight:700;font-size:7px;font-family:Arial-BoldMT, Arial"
+           id="text1948">SBB-Personenverkehr-Verbund-S-***Year***</text>
       </g>
-      <g  data-name="Gruppe 361" id="Gruppe_361" transform="translate(1163,640) rotate(-90)">
-         <text style="font-family: ArialMT, Arial; font-size: 8px;">Quelle: Bundesamt für Statistik (BFS), GEOSTAT Generalisierte Gemeindegrenzen © SBB/CFF/FFS  www.traﬁmage.ch www.geops.ch</text>
-      </g>        
+      <g
+         data-name="Gruppe 361"
+         id="Gruppe_361"
+         transform="rotate(-90,921.4884,-241.5116)">
+        <text
+           style="font-size:6px;font-family:ArialMT, Arial"
+           id="text1951">Quelle: Bundesamt für Statistik (BFS), GEOSTAT Generalisierte Gemeindegrenzen © SBB/CFF/FFS www.traﬁmage.ch www.geops.ch</text>
+      </g>  
     </g>
   </g>
 </svg>
