@@ -11774,10 +11774,10 @@ mixin-object@^2.0.1:
   dependencies:
     minimist "^1.2.5"
 
-mobility-toolbox-js@1.2.16:
-  version "1.2.16"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.2.16.tgz#af684a3bca9b36ffb777b1d8cc686f0d6b80bd1f"
-  integrity sha512-hYKNWL0IsU1Fg6e9/XZRUDjVCBsIxr5WVKrQWQ02vkZRE9rpmKX5gMq0ki06HZnE5biVP8UwUssD49pHSV/+Pw==
+mobility-toolbox-js@1.2.19:
+  version "1.2.19"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.2.19.tgz#754764dfdeeeff0de3d2672e24539dc27f6d8483"
+  integrity sha512-uSozmA/2mia1moSlK4rvhWi4G3xl6PBTW6W4l/dr+FXB8V8yLBwN/JB32gzIueU1EE2Vdalk3nGL7vOTkORdNQ==
   dependencies:
     "@geops/geops-ui" "^0.1.8"
     "@material-ui/core" "^4.9.14"
@@ -14404,7 +14404,7 @@ re-resizable@6.5.4:
   dependencies:
     fast-memoize "^2.5.1"
 
-re-resizable@6.9.0, re-resizable@^6.3.2:
+re-resizable@6.9.0, re-resizable@^6.3.2, re-resizable@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.0.tgz#9c3059b389ced6ade602234cc5bb1e12d231cd47"
   integrity sha512-3cUDG81ylyqI0Pdgle/RHwwRYq0ORZzsUaySOCO8IbEtNyaRtrIHYm/jMQ5pjcNiKCxR3vsSymIQZHwJq4gg2Q==

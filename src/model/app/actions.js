@@ -15,6 +15,7 @@ export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 export const SET_PERMISSION_INFOS = 'SET_PERMISSION_INFOS';
 export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
+export const SET_CARTARO_URL = 'SET_CARTARO_URL';
 export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
 export const SET_MAPSET_URL = 'SET_MAPSET_URL';
 export const SET_SHORTENER_URL = 'SET_SHORTENER_URL';
@@ -69,6 +70,8 @@ export const setScreenWidth = (data) => ({
 });
 
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
+
+export const setCartaroUrl = (data) => ({ type: SET_CARTARO_URL, data });
 
 export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
 

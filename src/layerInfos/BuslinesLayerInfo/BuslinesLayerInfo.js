@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const comps = {
   de: (
@@ -62,8 +63,9 @@ const comps = {
   ),
 };
 
-const BuslinesLayerInfo = ({ language }) => {
-  return comps[language];
+const BuslinesLayerInfo = () => {
+  const { i18n } = useTranslation();
+  return comps[i18n.language];
 };
 
-export default React.memo(BuslinesLayerInfo);
+export default BuslinesLayerInfo;

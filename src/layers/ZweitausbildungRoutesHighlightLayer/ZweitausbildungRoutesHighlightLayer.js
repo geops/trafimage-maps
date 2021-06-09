@@ -94,27 +94,27 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
    * Add options to the select box.
    */
   populate() {
-    this.options = [];
+    this.selectOptions = [];
     Object.entries(lines).forEach(([label, { property, shortname }]) => {
       if (property !== this.property) {
         return;
       }
-      if (this.options.indexOf(label) === -1) {
-        this.options.push(label);
+      if (this.selectOptions.indexOf(label) === -1) {
+        this.selectOptions.push(label);
         this.icons[label] = shortname
           ? `${this.staticFilesUrl}/img/layers/zweitausbildung/${shortname}.png`
           : null;
       }
     });
-    this.options = this.options.sort((a, b) => a.localeCompare(b));
-    this.options.unshift('Alle');
+    this.selectOptions = this.selectOptions.sort((a, b) => a.localeCompare(b));
+    this.selectOptions.unshift('Alle');
   }
 
   /**
    * Render the select box.
    */
   renderItemContent(comp) {
-    if (!this.options || !this.options.length) {
+    if (!this.selectOptions || !this.selectOptions.length) {
       return null;
     }
 
@@ -125,7 +125,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
         }}
         t={comp.props.t}
         disabled={!this.visible}
-        options={this.options}
+        options={this.selectOptions}
         selected={this.selected}
         icons={this.icons}
         onSelect={this.onSelect}

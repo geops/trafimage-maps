@@ -15,6 +15,7 @@ import { getStore } from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import {
   setLanguage,
+  setCartaroUrl,
   setCartaroOldUrl,
   setMapsetUrl,
   setDrawUrl,
@@ -215,6 +216,7 @@ class TrafimageMaps extends React.PureComponent {
       center,
       language,
       enableTracking,
+      cartaroUrl,
       cartaroOldUrl,
       mapsetUrl,
       shortenerUrl,
@@ -232,6 +234,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (cartaroUrl) {
+      this.store.dispatch(setCartaroUrl(cartaroUrl));
     }
 
     if (cartaroOldUrl) {
@@ -292,6 +298,7 @@ class TrafimageMaps extends React.PureComponent {
     const {
       zoom,
       center,
+      cartaroUrl,
       cartaroOldUrl,
       enableTracking,
       maxExtent,
@@ -310,6 +317,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center));
+    }
+
+    if (cartaroUrl !== prevProps.cartaroUrl) {
+      this.store.dispatch(setCartaroUrl(cartaroUrl));
     }
 
     if (cartaroOldUrl !== prevProps.cartaroOldUrl) {

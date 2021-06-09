@@ -40,6 +40,9 @@ import defaultBaseLayers, {
   zweitausbildungPoisDataLayer,
   tarifverbundkarteDataLayer,
   tarifverbundkarteLayer,
+  anlagenverantwortliche,
+  regionenkartePublicSegment,
+  regionenkarteOverlayGroup,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -53,6 +56,7 @@ const defaultElements = {
   popup: false,
   search: true,
   drawMenu: true,
+  overlay: true,
 };
 
 export const netzkarte = {
@@ -179,6 +183,8 @@ export const bauprojekte = {
     ...defaultElements,
     shareMenu: true,
     popup: true,
+    filter: true,
+    filters: true,
   },
   layers: [
     dataLayer,
@@ -231,19 +237,23 @@ export const betriebsregionen = {
   projection: 'EPSG:3857',
 };
 
-export const regionenkarte = {
+export const regionenkartePublic = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  redirect: true,
+  maxZoom: 13,
+  elements: {
+    ...defaultElements,
+    popup: true,
+    overlay: true,
+  },
+  layers: [
+    anlagenverantwortliche,
+    regionenkarteOverlayGroup,
+    regionenkartePublicSegment,
+    kilometrageLayer,
+  ],
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
-};
-
-export const regionenkartePrivate = {
-  name: 'ch.sbb.regionenkarte.intern',
-  key: 'ch.sbb.regionenkarte.intern',
-  permission: 'sbb',
-  redirect: true,
-  layerInfoComponent: 'RegionenkartePrivateTopicInfo',
+  searches: defaultSearches,
 };
 
 export const tarifverbundkarte = {
@@ -331,11 +341,11 @@ const topics = {
     handicap,
     bauprojekte,
     infrastruktur,
-    regionenkarte,
+    regionenkartePublic,
     tarifverbundkarte,
     showcases,
     zweitausbildung,
-    regionenkartePrivate,
+    // regionenkartePrivate,
     intervention,
     tina,
   ],
