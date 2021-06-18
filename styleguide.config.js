@@ -70,6 +70,9 @@ module.exports = {
     },
   ],
   webpackConfig: {
+    devServer: {
+      https: true,
+    },
     module: {
       rules: [
         // Babel loader, will use your project’s .babelrc
@@ -105,16 +108,22 @@ module.exports = {
                 cacheDirectory: true,
               },
             },
-            require.resolve('@svgr/webpack'),
+            {
+              loader: require.resolve('@svgr/webpack'),
+              options: {
+                svgoConfig: {
+                  plugins: [
+                    {
+                      removeViewBox: false,
+                    },
+                  ],
+                },
+              },
+            },
             {
               loader: require.resolve('file-loader'),
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
-                svgoConfig: {
-                  plugins: {
-                    removeViewBox: false,
-                  },
-                },
               },
             },
           ],
