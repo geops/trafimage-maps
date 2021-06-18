@@ -152,6 +152,7 @@ export const casa = {
     dataLayer,
     casaNetzkartePersonenverkehr,
     swisstopoSwissImage,
+    netzkartePointLayer,
     netzkarteLayerLabels,
   ],
   projection: 'EPSG:3857',
