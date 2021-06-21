@@ -129,7 +129,6 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   },
 });
 
-// We keep this export for backward compatibility.
 export const netzkarteLayerLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.labels',
   visible: true,
@@ -146,6 +145,7 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
     hideInLegend: true,
   },
 });
+
 // Add stations (blue style on hover) to labelsDataLayer.
 const netzkartePointLabelsLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen.casa',
