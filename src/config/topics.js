@@ -1,5 +1,6 @@
 import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
+import StationsLayer from '../layers/StationsLayer';
 import netzkarteImage from '../img/netzkarte.png';
 import defaultBaseLayers, {
   swisstopoSwissImage,
@@ -128,6 +129,7 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
   },
 });
 
+// We keep this export for backward compatibility.
 export const netzkarteLayerLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.labels',
   visible: true,
@@ -144,6 +146,11 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
     hideInLegend: true,
   },
 });
+// Add stations (blue style on hover) to labelsDataLayer.
+const netzkartePointLabelsLayer = new StationsLayer({
+  name: 'ch.sbb.netzkarte.stationen.casa',
+  mapboxLayer: netzkarteLayerLabels,
+});
 
 export const casa = {
   name: 'CASA',
@@ -152,8 +159,8 @@ export const casa = {
     dataLayer,
     casaNetzkartePersonenverkehr,
     swisstopoSwissImage,
-    netzkartePointLayer,
     netzkarteLayerLabels,
+    netzkartePointLabelsLayer,
   ],
   projection: 'EPSG:3857',
   popupConfig: {
