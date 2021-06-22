@@ -23,6 +23,7 @@ import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
+import StationsLayer from '../layers/StationsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -73,69 +74,6 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   properties: {
     hideInLegend: true,
   },
-});
-
-let osmPointsLayers = [];
-const olListenersKeys = [];
-
-const updateStations = (mbMap) => {
-  // Modifying the source triggers an idle state so we use 'once' to avoid an infinite loop.
-  mbMap.once('idle', () => {
-    const osmPointsRendered = mbMap
-      .queryRenderedFeatures({
-        layers: osmPointsLayers,
-      })
-      .map((feat) => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-    const source = mbMap.getSource('stations');
-    if (source) {
-      source.setData({
-        type: 'FeatureCollection',
-        features: osmPointsRendered,
-      });
-    }
-  });
-};
-
-// Get list of styleLayers applied to osm_points source.
-// We don't use 'once()' because when switching topics
-// (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
-dataLayer.on('load', () => {
-  const { map, mbMap } = dataLayer;
-  osmPointsLayers = mbMap
-    .getStyle()
-    .layers.filter((layer) => {
-      return (
-        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
-      );
-    })
-    .map((layer) => layer.id);
-
-  if (!mbMap.getSource('stations')) {
-    mbMap.addSource('stations', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    });
-  }
-  updateStations(mbMap);
-
-  // Update stations source on moveeend.
-  unByKey(olListenersKeys);
-  olListenersKeys.push(
-    map.on('moveend', () => {
-      updateStations(mbMap);
-    }),
-  );
 });
 
 export const netzkarteLayer = new MapboxStyleLayer({
@@ -349,29 +287,9 @@ punctuality.children = [
   }),
 ];
 
-export const netzkartePointLayer = new MapboxStyleLayer({
+export const netzkartePointLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen',
-  visible: true,
   mapboxLayer: dataLayer,
-  styleLayer: {
-    id: 'stations',
-    type: 'circle',
-    source: 'stations',
-    paint: {
-      'circle-radius': 10,
-      'circle-color': 'rgb(0, 61, 155)',
-      'circle-opacity': [
-        'case',
-        ['boolean', ['feature-state', 'hover'], false],
-        0.5,
-        0,
-      ],
-    },
-  },
-  properties: {
-    hideInLegend: true,
-    popupComponent: 'NetzkartePopup',
-  },
 });
 
 export const buslines = new MapboxStyleLayer({
@@ -785,6 +703,7 @@ export const updateConstructions = (mbMap) => {
   });
 };
 
+const constrOlListenersKeys = [];
 constructionDataLayer.on('load', () => {
   const { map, mbMap } = constructionDataLayer;
   constrLayers = mbMap
@@ -811,9 +730,9 @@ constructionDataLayer.on('load', () => {
   updateConstructions(mbMap);
 
   // Update clusters source on moveeend.
-  unByKey(olListenersKeys);
+  unByKey(constrOlListenersKeys);
 
-  olListenersKeys.push(
+  constrOlListenersKeys.push(
     map.on('moveend', () => {
       updateConstructions(mbMap);
     }),
