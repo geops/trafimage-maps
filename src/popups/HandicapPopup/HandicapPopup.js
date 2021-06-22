@@ -50,7 +50,7 @@ function HandicapPopup({ feature }) {
   const equipment = [];
 
   const treppenfreiString = `${t('treppenfrei')}${
-    properties[bfEquipmentExceptions.rampe]
+    properties[bfEquipmentExceptions.rampe] && !properties.rampe
       ? ` (${properties[bfEquipmentExceptions.rampe]})`
       : ''
   }`;
