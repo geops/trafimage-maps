@@ -60,7 +60,6 @@ function HandicapPopup({ feature }) {
   );
 
   Object.keys(bfEquipmentExceptions).forEach((key) => {
-    console.log(key, properties[key]);
     if (properties[key]) {
       let str = t(key);
 
