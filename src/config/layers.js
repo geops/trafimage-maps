@@ -8,7 +8,6 @@ import { register } from 'ol/proj/proj4';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import { TrajservAPI } from 'mobility-toolbox-js/api';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
-import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
@@ -319,26 +318,15 @@ export const buslines = new MapboxStyleLayer({
   },
 });
 
-export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
+export const gemeindegrenzen = new MapboxStyleLayer({
   name: 'ch.sbb.ch_gemeinden',
+  mapboxLayer: dataLayer,
   visible: false,
-  olLayer: new TileLayer({
-    source: new TileWMSSource({
-      crossOrigin: 'anonymous',
-      params: {
-        layers: 'trafimage:gemeindegrenzen',
-        STYLES: 'gemeindegrenzen_netzkarte',
-      },
-      tileGrid: new TileGrid({
-        extent: projectionExtent,
-        resolutions: LayerHelper.getMapResolutions(),
-        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  isQueryable: false,
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['trafimage.filter'] === 'municipality_borders',
   properties: {
     hasInfos: true,
-    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
