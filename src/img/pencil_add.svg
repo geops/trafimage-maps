@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="17.998" height="17.29" viewBox="0 0 17.998 17.29" stroke="currentColor" fill="currentColor">
-  <g id="Gruppe_121" data-name="Gruppe 121" transform="translate(-279.96 -1680)">
-    <path id="Icon_material-edit" data-name="Icon material-edit" d="M0,13.688v3.6H3.6L14.224,6.668l-3.6-3.6ZM17.009,3.883a.956.956,0,0,0,0-1.354L14.762.281a.956.956,0,0,0-1.354,0L11.65,2.038l3.6,3.6Z" transform="translate(279.96 1680)"/>
-    <path id="Pfad_118" data-name="Pfad 118" d="M318.387,1684.6v6.895" transform="translate(-23.876 5.766)" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    <path id="Pfad_119" data-name="Pfad 119" d="M0,0V6.895" transform="translate(297.958 1693.817) rotate(90)" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  </g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="17.998" height="17.29" fill="currentColor" stroke="currentColor" viewBox="0 0 17.998 17.29"><g id="Gruppe_121" data-name="Gruppe 121" transform="translate(-279.96 -1680)"><path id="Icon_material-edit" d="M0,13.688v3.6H3.6L14.224,6.668l-3.6-3.6ZM17.009,3.883a.956.956,0,0,0,0-1.354L14.762.281a.956.956,0,0,0-1.354,0L11.65,2.038l3.6,3.6Z" data-name="Icon material-edit" transform="translate(279.96 1680)"/><path id="Pfad_118" fill="none" stroke="currentColor" stroke-width="1.5" d="M318.387,1684.6v6.895" data-name="Pfad 118" transform="translate(-23.876 5.766)"/><path id="Pfad_119" fill="none" stroke="currentColor" stroke-width="1.5" d="M0,0V6.895" data-name="Pfad 119" transform="translate(297.958 1693.817) rotate(90)"/></g></svg>
