@@ -1,3 +1,5 @@
+import RegionenkarteSegmentPopup from './RegionenkarteSegmentPopup';
+import RegionenkarteIntersectionPopup from './RegionenkarteIntersectionPopup';
 import BahnhofplanPopup from './BahnhofplanPopup';
 import BetriebsRegionenPopup from './BetriebsRegionenPopup';
 import BusLinePopup from './BusLinePopup';
@@ -12,6 +14,7 @@ import DeparturePopup from './DeparturePopup';
 import ZweitausbildungAbroadPopup from './ZweitausbildungAbroadPopup';
 import ZweitausbildungPoisPopup from './ZweitausbildungPoisPopup';
 import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
+import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
 
 export default {
@@ -29,5 +32,8 @@ export default {
   ZweitausbildungAbroadPopup,
   ZweitausbildungPoisPopup,
   ZweitausbildungRoutesPopup,
+  TarifverbundkartePopup,
+  RegionenkarteSegmentPopup,
+  RegionenkarteIntersectionPopup,
   DrawPopup,
 };

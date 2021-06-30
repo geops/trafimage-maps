@@ -2,6 +2,7 @@ import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import StationsLayer from '../layers/StationsLayer';
 import netzkarteImage from '../img/netzkarte.png';
+import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import defaultBaseLayers, {
   swisstopoSwissImage,
   bahnhofplaene,
@@ -38,6 +39,11 @@ import defaultBaseLayers, {
   zweitausbildungStations,
   zweitausbildungStationsDataLayer,
   zweitausbildungPoisDataLayer,
+  tarifverbundkarteDataLayer,
+  tarifverbundkarteLayer,
+  anlagenverantwortliche,
+  regionenkartePublicSegment,
+  regionenkarteOverlayGroup,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -51,6 +57,7 @@ const defaultElements = {
   popup: false,
   search: true,
   drawMenu: true,
+  overlay: true,
 };
 
 export const netzkarte = {
@@ -184,6 +191,8 @@ export const bauprojekte = {
     ...defaultElements,
     shareMenu: true,
     popup: true,
+    filter: true,
+    filters: true,
   },
   layers: [
     dataLayer,
@@ -236,26 +245,49 @@ export const betriebsregionen = {
   projection: 'EPSG:3857',
 };
 
-export const regionenkarte = {
+export const regionenkartePublic = {
   name: 'ch.sbb.regionenkarte.public',
   key: 'ch.sbb.regionenkarte.public',
-  redirect: true,
+  maxZoom: 13,
+  elements: {
+    ...defaultElements,
+    popup: true,
+    overlay: true,
+  },
+  layers: [
+    anlagenverantwortliche,
+    regionenkarteOverlayGroup,
+    regionenkartePublicSegment,
+    kilometrageLayer,
+  ],
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
-};
-
-export const regionenkartePrivate = {
-  name: 'ch.sbb.regionenkarte.intern',
-  key: 'ch.sbb.regionenkarte.intern',
-  permission: 'sbb',
-  redirect: true,
-  layerInfoComponent: 'RegionenkartePrivateTopicInfo',
+  searches: defaultSearches,
+  redirect: true, // Remove once Bahnnahes Bauen (aka. Anlagenverantwortliche) is ready for publication
 };
 
 export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
-  redirect: true,
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
+  layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
+  maxZoom: 12,
+  exportConfig: {
+    publisher: 'tobias.hauser@sbb.ch',
+    publishedAt: '12/2020',
+    dateDe: '13.12.2020',
+    dateFr: '13.12.2020',
+    year: '2020',
+    overlayImageUrl: tarifverbundkarteLegend,
+  },
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: { collapsedOnLoad: true },
+    trackerMenu: true,
+    exportMenu: true,
+    drawMenu: { collapsedOnLoad: true },
+  },
+  searches: defaultSearches,
 };
 
 export const showcases = {
@@ -318,11 +350,10 @@ const topics = {
     handicap,
     bauprojekte,
     infrastruktur,
-    regionenkarte,
+    regionenkartePublic,
     tarifverbundkarte,
     showcases,
     zweitausbildung,
-    regionenkartePrivate,
     intervention,
     tina,
   ],

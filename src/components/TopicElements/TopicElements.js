@@ -15,6 +15,7 @@ import FeatureMenu from '../FeatureMenu';
 import TrackerMenu from '../../menus/TrackerMenu';
 import ShareMenu from '../../menus/ShareMenu';
 import DrawMenu from '../../menus/DrawMenu';
+import ExportMenu from '../../menus/ExportMenu';
 import Permalink from '../Permalink';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -23,6 +24,7 @@ import Popup from '../Popup';
 import Search from '../Search';
 import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
+import Overlay from '../Overlay';
 import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
 
 const defaultElements = {
@@ -38,7 +40,9 @@ const defaultElements = {
   drawMenu: true,
   trackerMenu: false,
   featureMenu: false,
+  exportMenu: false,
   search: false,
+  overlay: false,
 };
 
 const propTypes = {
@@ -114,6 +118,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
   // Define which component to display as child of TopicsMenu.
   const appTopicsMenuChildren = getComponents(
     {
+      exportMenu: <ExportMenu />,
       drawMenu: <DrawMenu />,
       shareMenu: <ShareMenu appBaseUrl={appBaseUrl} />,
     },
@@ -165,6 +170,13 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
     ),
     mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
     footer: <Footer />,
+    overlay: (
+      <Overlay
+        appBaseUrl={appBaseUrl}
+        staticFilesUrl={staticFilesUrl}
+        elements={elements}
+      />
+    ),
   };
 
   elements.map = true; // make sure we always have a map element!

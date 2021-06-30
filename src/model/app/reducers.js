@@ -27,6 +27,7 @@ import {
   SET_DESTINATION_URL,
   SET_DEPARTURES_URL,
   SET_API_KEY,
+  SET_CARTARO_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -151,6 +152,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         drawUrl: action.data,
+      };
+    case SET_CARTARO_URL:
+      return {
+        ...state,
+        cartaroUrl: action.data,
       };
     case SET_CARTARO_OLD_URL:
       return {
