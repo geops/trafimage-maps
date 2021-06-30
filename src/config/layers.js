@@ -9,7 +9,6 @@ import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import { TrajservAPI } from 'mobility-toolbox-js/api';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
-import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
 import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
@@ -25,6 +24,7 @@ import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import LayerHelper from '../layers/layerHelper';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
+import StationsLayer from '../layers/StationsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -364,29 +364,9 @@ punctuality.children = [
   }),
 ];
 
-export const netzkartePointLayer = new MapboxStyleLayer({
+export const netzkartePointLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen',
-  visible: true,
   mapboxLayer: dataLayer,
-  styleLayer: {
-    id: 'stations',
-    type: 'circle',
-    source: 'stations',
-    paint: {
-      'circle-radius': 10,
-      'circle-color': 'rgb(0, 61, 155)',
-      'circle-opacity': [
-        'case',
-        ['boolean', ['feature-state', 'hover'], false],
-        0.5,
-        0,
-      ],
-    },
-  },
-  properties: {
-    hideInLegend: true,
-    popupComponent: 'NetzkartePopup',
-  },
 });
 
 export const buslines = new MapboxStyleLayer({
@@ -416,26 +396,15 @@ export const buslines = new MapboxStyleLayer({
   },
 });
 
-export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
+export const gemeindegrenzen = new MapboxStyleLayer({
   name: 'ch.sbb.ch_gemeinden',
+  mapboxLayer: dataLayer,
   visible: false,
-  olLayer: new TileLayer({
-    source: new TileWMSSource({
-      crossOrigin: 'anonymous',
-      params: {
-        layers: 'trafimage:gemeindegrenzen',
-        STYLES: 'gemeindegrenzen_netzkarte',
-      },
-      tileGrid: new TileGrid({
-        extent: projectionExtent,
-        resolutions: LayerHelper.getMapResolutions(),
-        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  isQueryable: false,
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['trafimage.filter'] === 'municipality_borders',
   properties: {
     hasInfos: true,
-    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
@@ -800,6 +769,7 @@ export const updateConstructions = (mbMap) => {
   });
 };
 
+const constrOlListenersKeys = [];
 constructionDataLayer.on('load', () => {
   const { map, mbMap } = constructionDataLayer;
   constrLayers = mbMap
@@ -826,9 +796,9 @@ constructionDataLayer.on('load', () => {
   updateConstructions(mbMap);
 
   // Update clusters source on moveeend.
-  unByKey(olListenersKeys);
+  unByKey(constrOlListenersKeys);
 
-  olListenersKeys.push(
+  constrOlListenersKeys.push(
     map.on('moveend', () => {
       updateConstructions(mbMap);
     }),
