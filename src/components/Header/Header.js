@@ -9,13 +9,18 @@ import './Header.scss';
 
 const propTypes = {
   appBaseUrl: PropTypes.string.isRequired,
+  loginUrl: PropTypes.string,
 };
 
-const Header = ({ appBaseUrl }) => {
+const defaultProps = {
+  loginUrl: undefined,
+};
+
+const Header = ({ appBaseUrl, loginUrl }) => {
   return (
     <UIHeader className="wkp-header">
       <div className="wkp-header-right">
-        <Login appBaseUrl={appBaseUrl} />
+        <Login appBaseUrl={appBaseUrl} loginUrl={loginUrl} />
         <LanguageSelect />
         <div className="wkp-header-sbb-logo-wrapper">
           <SBBLogo focusable={false} className="wkp-header-sbb-logo" />
@@ -26,5 +31,6 @@ const Header = ({ appBaseUrl }) => {
 };
 
 Header.propTypes = propTypes;
+Header.defaultProps = defaultProps;
 
 export default Header;

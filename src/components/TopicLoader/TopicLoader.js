@@ -29,6 +29,7 @@ const propTypes = {
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
+  loginUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
@@ -59,6 +60,7 @@ const defaultProps = {
   history: null,
   activeTopic: null,
   cartaroUrl: null,
+  loginUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionInfos: null,
@@ -309,10 +311,11 @@ class TopicLoader extends Component {
   }
 
   render() {
-    const { history, appBaseUrl, staticFilesUrl } = this.props;
+    const { loginUrl, history, appBaseUrl, staticFilesUrl } = this.props;
     return (
       <TopicElements
         history={history}
+        loginUrl={loginUrl}
         appBaseUrl={appBaseUrl}
         staticFilesUrl={staticFilesUrl}
       />

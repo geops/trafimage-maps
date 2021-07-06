@@ -30,7 +30,6 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
-  const cartaroOldUrl = useSelector((state) => state.app.cartaroOldUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
@@ -147,7 +146,6 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.key}
-            cartaroOldUrl={cartaroOldUrl}
             t={t}
             layer={info.layer}
             feature={features[featureIndex]}

@@ -17,7 +17,6 @@ import {
   SET_SEARCH_SERVICE,
   SET_PERMISSION_INFOS,
   SET_SCREEN_WIDTH,
-  SET_CARTARO_OLD_URL,
   SET_MAPSET_URL,
   SET_DRAW_URL,
   SET_DRAW_IDS,
@@ -157,11 +156,6 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         cartaroUrl: action.data,
-      };
-    case SET_CARTARO_OLD_URL:
-      return {
-        ...state,
-        cartaroOldUrl: action.data,
       };
     case SET_SCREEN_WIDTH:
       return {
