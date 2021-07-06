@@ -73,7 +73,8 @@ class Collapsible extends PureComponent {
 
     if (isHidden !== isCollapsed) {
       const duration = isCollapsed ? transitionDuration : 0;
-      window.setTimeout(
+      window.clearTimeout(this.timeout);
+      this.timeout = window.setTimeout(
         () => this.setState({ isHidden: isCollapsed }),
         duration,
       );
