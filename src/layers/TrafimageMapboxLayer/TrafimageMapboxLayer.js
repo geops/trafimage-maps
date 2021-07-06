@@ -79,7 +79,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
   applyStyle(data) {
     const styleFiltered = applyFilters(data, this.filters);
 
-    console.log('applyFilters', styleFiltered);
     this.mbMap.setStyle(styleFiltered);
     this.mbMap.once('styledata', () => {
       this.onStyleLoaded();

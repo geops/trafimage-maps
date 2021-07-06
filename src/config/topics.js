@@ -1,8 +1,6 @@
 import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import StationsLayer from '../layers/StationsLayer';
-import netzkarteImage from '../img/netzkarte.png';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import defaultBaseLayers, {
   swisstopoSwissImage,
