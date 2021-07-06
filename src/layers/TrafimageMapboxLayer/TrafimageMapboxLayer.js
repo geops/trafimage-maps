@@ -78,6 +78,8 @@ class TrafimageMapboxLayer extends MapboxLayer {
 
   applyStyle(data) {
     const styleFiltered = applyFilters(data, this.filters);
+
+    console.log('applyFilters', styleFiltered);
     this.mbMap.setStyle(styleFiltered);
     this.mbMap.once('styledata', () => {
       this.onStyleLoaded();
@@ -241,6 +243,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
       type: 'load',
       target: this,
     });
+  }
+
+  /**
+   * Create a copy of the TrafimageMapboxLayer.
+   * @param {Object} newOptions Options to override
+   * @returns {TrafimageMapboxLayer} A TrafimageMapboxLayer
+   */
+  clone(newOptions) {
+    return new TrafimageMapboxLayer({ ...this.options, ...newOptions });
   }
 }
 
