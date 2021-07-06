@@ -58,6 +58,7 @@ const defaultElements = {
   search: true,
   drawMenu: true,
   overlay: true,
+  copyright: true,
 };
 
 export const netzkarte = {
@@ -181,6 +182,7 @@ export const casa = {
     popup: true,
     permalink: false,
     baseLayerSwitcher: true,
+    copyright: true,
   },
 };
 

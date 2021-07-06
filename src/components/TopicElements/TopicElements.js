@@ -25,6 +25,7 @@ import Search from '../Search';
 import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
 import Overlay from '../Overlay';
+import Copyright from '../Copyright';
 import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
 
 const defaultElements = {
@@ -43,6 +44,7 @@ const defaultElements = {
   exportMenu: false,
   search: false,
   overlay: false,
+  copyright: true,
 };
 
 const propTypes = {
@@ -177,6 +179,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
         elements={elements}
       />
     ),
+    copyright: <Copyright />,
   };
 
   elements.map = true; // make sure we always have a map element!

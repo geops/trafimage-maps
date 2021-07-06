@@ -197,6 +197,7 @@ const App = () => {
         menu: false,
         popup: true,
         baseLayerSwitcher: true,
+        copyright: true,
       }}];
 
     return () => {

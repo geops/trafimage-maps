@@ -14,6 +14,7 @@ export default {
     header: true,
     footer: true,
     permalink: false,
+    copyright: true,
   },
   layers: [netzkarteLayer],
 };
