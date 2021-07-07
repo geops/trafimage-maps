@@ -109,3 +109,15 @@ https://github.com/oterral/angular-react-test
 .casa div.tm-trafimage-maps .rs-base-layer-switcher-btn-wrapper {
   display: none;
 }
+
+.casa div.tm-trafimage-maps .wkp-copyright {
+  left: 0;
+}
+
+.casa div.tm-trafimage-maps.tm-w-s .wkp-copyright {
+  max-width: 80%;
+}
+
+.casa div.tm-trafimage-maps.tm-w-xs .wkp-copyright {
+  max-width: 70%;
+}
