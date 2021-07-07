@@ -254,7 +254,7 @@ class Map extends PureComponent {
     } = this.props;
 
     return (
-      <div ref={this.mapContainerRef}>
+      <>
         <BasicMap
           center={center}
           resolution={resolution}
@@ -272,7 +272,7 @@ class Map extends PureComponent {
         />
         <MapAccessibility layers={layers} map={map} />
         <Copyright />
-      </div>
+      </>
     );
   }
 }
