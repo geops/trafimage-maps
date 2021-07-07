@@ -270,9 +270,8 @@ class TopicLoader extends Component {
     // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService
     // then update the flatLayers.
     layerService.setLayers([...topicLayers, drawLayer]);
-    const flatLayers = layerService.getLayersAsFlatArray();
-    dispatchSetLayers(topicLayers);
 
+    const flatLayers = layerService.getLayersAsFlatArray();
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
@@ -306,6 +305,8 @@ class TopicLoader extends Component {
         flatLayers[i].api.apiKey = apiKey;
       }
     }
+
+    dispatchSetLayers(topicLayers);
   }
 
   render() {
