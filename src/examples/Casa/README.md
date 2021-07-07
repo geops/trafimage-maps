@@ -4,7 +4,7 @@ The Casa module is a sub module of trafimage-maps which is integrated in the SBB
 
 ```jsx
 import 'trafimage-maps';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef,useState } from 'react';
 import RouteLayer from 'trafimage-maps/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
 import { casa } from 'trafimage-maps/config/topics';
@@ -127,87 +127,160 @@ const routeLayer = new RouteLayer({
   apiKey: apiKey,
   apiKeyName: apiKeyName,
 });
-
+window.routeLayer=routeLayer;
 // Visualize a route on the map.
-routeLayer
-  .loadRoutes([
-    {
-      isClickable: true,
-      isSelected: false,
-      popupTitle: 'Route Biel/Bienne >> Freiburg/Fribourg',
-      popupContent: ['Von: Bern', 'Nach: Freiburg/Fribourg'],
-      sequences: [
-        {
-          uicFrom: 8507000,
-          uicTo: 8504100,
-          mot: 'rail',
-        },
-      ],
-    },
-    {
-      isClickable: true,
-      isSelected: true,
-      sequences: [
-        {
-          uicFrom: 8500218,
-          uicTo: 8507000,
-          mot: 'rail',
-        },
-        {
-          uicFrom: 8507000,
-          lonLatTo: [46.94691, 7.44079],
-          mot: 'foot',
-        },
-        {
-          uicFrom: 8576646,
-          uicTo: 8507180,
-          mot: 'bus',
-        },
-        {
-          uicFrom: 8507180,
-          uicTo: 8507150,
-          mot: 'foot',
-        },
-        {
-          uicFrom: 8507150,
-          lonLatTo: [46.68848, 7.68974],
-          mot: 'ferry',
-        },
-      ],
-    },
-  ])
-  .then(f => {
-    routeLayer.zoomToRoute({duration: 1000});
-  });
+// routeLayer
+//   .loadRoutes([
+//     {
+//       isClickable: true,
+//       isSelected: false,
+//       popupTitle: 'Route Biel/Bienne >> Freiburg/Fribourg',
+//       popupContent: ['Von: Bern', 'Nach: Freiburg/Fribourg'],
+//       sequences: [
+//         {
+//           uicFrom: 8507000,
+//           uicTo: 8504100,
+//           mot: 'rail',
+//         },
+//       ],
+//     },
+//     {
+//       isClickable: true,
+//       isSelected: true,
+//       sequences: [
+//         {
+//           uicFrom: 8500218,
+//           uicTo: 8507000,
+//           mot: 'rail',
+//         },
+//         {
+//           uicFrom: 8507000,
+//           lonLatTo: [46.94691, 7.44079],
+//           mot: 'foot',
+//         },
+//         {
+//           uicFrom: 8576646,
+//           uicTo: 8507180,
+//           mot: 'bus',
+//         },
+//         {
+//           uicFrom: 8507180,
+//           uicTo: 8507150,
+//           mot: 'foot',
+//         },
+//         {
+//           uicFrom: 8507150,
+//           lonLatTo: [46.68848, 7.68974],
+//           mot: 'ferry',
+//         },
+//       ],
+//     },
+//   ])
+//   .then(f => {
+//     routeLayer.zoomToRoute({duration: 1000});
+//   });
 
 routeLayer.onClick(f => {
   console.log('Clicked', f);
 });
-
-const App = () => {
-  const ref = useRef();
-
-  useEffect(() => {
-    const map = ref.current;
-    map.topics =  [{
+const topics = 
+[{
       ...casa,
-      layers: [...casa.layers, zoneLayer, routeLayer],
+      layers: [...casa.layers,  routeLayer],
       elements: {
         mapControls: true,
         menu: false,
         popup: true,
         baseLayerSwitcher: true,
       }}];
+const App = () => {
+  const ref = useRef();
+  const [show,setShow] = useState(false);
+
+  useEffect(() => {
+    console.log(ref.current);
+    if (!show || !ref.current){
+      return;
+    }
+    const map = ref.current;
+      console.log('set topics ', casa.layers);
+    map.topics =  topics;
 
     return () => {
+      routeLayer.terminate();
+      console.log('topics=null');casa.layers.forEach((l)=> {
+l.terminate();
+      });
       map.topics = null;
     };
-  }, []);
+  }, [ref.current, show]);
 
   /* To use casa style sheet, add the casa class in the parent class */
   return (
+    <div>
+    <button onClick={()=> {
+      setShow(!show);
+    }} >Show/hide</button>
+    <button onClick={()=> {// Visualize a route on the map.
+      // setShow(false);
+      routeLayer
+        .loadRoutes([
+          {
+            isClickable: true,
+            isSelected: false,
+            popupTitle: 'Route Biel/Bienne >> Freiburg/Fribourg',
+            popupContent: ['Von: Bern', 'Nach: Freiburg/Fribourg'],
+            sequences: [
+              {
+                uicFrom: 8507000,
+                uicTo: 8504100,
+                mot: 'rail',
+              },
+            ],
+          },
+          {
+            isClickable: true,
+            isSelected: true,
+            sequences: [
+              {
+                uicFrom: 8500218,
+                uicTo: 8507000,
+                mot: 'rail',
+              },
+              {
+                uicFrom: 8507000,
+                lonLatTo: [46.94691, 7.44079],
+                mot: 'foot',
+              },
+              {
+                uicFrom: 8576646,
+                uicTo: 8507180,
+                mot: 'bus',
+              },
+              {
+                uicFrom: 8507180,
+                uicTo: 8507150,
+                mot: 'foot',
+              },
+              {
+                uicFrom: 8507150,
+                lonLatTo: [46.68848, 7.68974],
+                mot: 'ferry',
+              },
+            ],
+          },
+        ])
+        .then(f => {
+          window.setTimeout(()=> {
+             routeLayer.zoomToRoute({duration: 1000});
+
+          }, 3000);
+      // setShow(true);
+        });
+    }} >load route</button>
     <div className="container casa">
-      <trafimage-maps ref={ref} appName="casa" apiKey={apiKey} apiKeyName={apiKeyName} />
+      { show && <trafimage-maps ref={ref} appName="casa" apiKey={apiKey} apiKeyName={apiKeyName} />}
+    </div>
     </div>
   );
 }
