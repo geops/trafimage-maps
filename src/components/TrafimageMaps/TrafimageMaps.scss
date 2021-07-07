@@ -312,6 +312,11 @@
         }
       }
     }
+
+    .wkp-copyright {
+      font-size: 11px;
+      right: unset;
+    }
   }
 
   &.tm-w-s,
@@ -333,15 +338,6 @@
 
     .wkp-header-right {
       left: calc(100% - 400px);
-    }
-  }
-
-  &.tm-w-s,
-  &.tm-w-xs,
-  &.tm-w-m {
-    .wkp-copyright {
-      font-size: 11px;
-      right: unset;
     }
   }
 
