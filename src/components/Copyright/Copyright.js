@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
     right: 5,
     paddingLeft: 5,
     fontSize: 12,
-    bottom: (props) => (props.footer ? 42 : 2),
+    bottom: ({ footer }) => (footer ? 42 : 2),
     '& a:not(.MuiIconButton-root)': {
       whiteSpace: 'nowrap',
       textDecoration: 'none !important',
