@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import RsCopyright from 'react-spatial/components/Copyright';
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   wrapper: {
     position: 'absolute',
     right: 5,
@@ -14,10 +14,6 @@ const useStyles = makeStyles((theme) => ({
     '& a:not(.MuiIconButton-root)': {
       whiteSpace: 'nowrap',
       textDecoration: 'none !important',
-    },
-    [theme.breakpoints.down('md')]: {
-      fontSize: 11,
-      right: 'unset',
     },
   },
 }));

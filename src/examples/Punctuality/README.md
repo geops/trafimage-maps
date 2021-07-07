@@ -47,7 +47,6 @@ const App = () => {
           popup: true,
           permalink: false,
           search: false,
-          copyright: true,
         },
         searches: defaultSearches,
       },

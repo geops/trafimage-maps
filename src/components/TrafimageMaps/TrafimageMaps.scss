@@ -336,6 +336,16 @@
     }
   }
 
+  &.tm-w-s,
+  &.tm-w-xs,
+  &.tm-w-m {
+    .wkp-copyright {
+      font-size: 11px;
+      right: unset;
+    }
+  }
+
+
   &.tm-w-l,
   &.tm-w-m {
     .wkp-header {

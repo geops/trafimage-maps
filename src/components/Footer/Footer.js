@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import UIFooter from '@geops/react-ui/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
-// import RsCopyright from 'react-spatial/components/Copyright';
 import MousePosition from 'react-spatial/components/MousePosition';
 import ActionLink from '@geops/react-ui/components/ActionLink';
 import ProjectionSelect from '../ProjectionSelect';

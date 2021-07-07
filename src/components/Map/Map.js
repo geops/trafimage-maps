@@ -16,6 +16,7 @@ import {
   setSearchOpen,
   updateDrawEditLink,
 } from '../../model/app/actions';
+import Copyright from '../Copyright/Copyright';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -253,7 +254,7 @@ class Map extends PureComponent {
     } = this.props;
 
     return (
-      <>
+      <div ref={this.mapContainerRef}>
         <BasicMap
           center={center}
           resolution={resolution}
@@ -270,7 +271,8 @@ class Map extends PureComponent {
           tabIndex={0}
         />
         <MapAccessibility layers={layers} map={map} />
-      </>
+        <Copyright />
+      </div>
     );
   }
 }
