@@ -19,20 +19,25 @@ const defaultProps = {
 
 const BahnhofplanPopup = ({ feature, language, t }) => {
   const iabpUrl = feature.get('url_interactive_plan');
-  const iabpUrlLang = `${iabpUrl}#?lang=${language}`;
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
+  const bepUrl = feature.get('url_bep');
 
   let iabpLink;
   let a4Link;
   let posterLink;
   let shoppingLink;
+  let bepLink;
 
   if (iabpUrl) {
     iabpLink = (
       <div>
-        <a href={iabpUrlLang} rel="noopener noreferrer" target="_blank">
+        <a
+          href={`${iabpUrl}#?lang=${language}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {t('Interaktiver Bahnhofplan')}
         </a>
       </div>
@@ -72,6 +77,17 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
     );
   }
 
+  if (bepUrl) {
+    bepLink = (
+      <div>
+        <a href={bepUrl} rel="noopener noreferrer" target="_blank">
+          {t('url_bep')}
+          <FaRegFilePdf />
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="wkp-bahnhofplan-popup">
       {/*
@@ -83,6 +99,7 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
       {a4Link}
       {posterLink}
       {shoppingLink}
+      {bepLink}
     </div>
   );
 };
