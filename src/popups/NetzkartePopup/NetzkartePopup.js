@@ -41,8 +41,10 @@ function NetzkartePopup({ feature }) {
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
+  const bepUrl = feature.get('url_bep');
 
-  const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
+  const hasPlanLinks =
+    !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl || !!bepUrl;
 
   const name = feature.get('name');
   const didok = feature.get('sbb_id') - 8500000;
