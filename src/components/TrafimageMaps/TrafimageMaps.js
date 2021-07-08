@@ -364,6 +364,14 @@ class TrafimageMaps extends React.PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    // The Map is created in the store so trafimage- maps is responsible
+    // to clear the map before unmount.
+    // Make sure all layers and their listeners (ol and mobility-toolbox-js)
+    // are well removed.
+    this.store.getState().app.map.getLayers().clear();
+  }
+
   render() {
     const {
       history,
