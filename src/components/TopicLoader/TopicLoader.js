@@ -266,10 +266,13 @@ class TopicLoader extends Component {
         });
     }
 
+    // Layers to display
+    const layers = [...topicLayers, drawLayer];
+
     // TODO: It seems there is a mix of using layerService and layers.
     // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService
     // then update the flatLayers.
-    layerService.setLayers([...topicLayers, drawLayer]);
+    layerService.setLayers(layers);
 
     const flatLayers = layerService.getLayersAsFlatArray();
     for (let i = 0; i < flatLayers.length; i += 1) {
@@ -306,7 +309,7 @@ class TopicLoader extends Component {
       }
     }
 
-    dispatchSetLayers(topicLayers);
+    dispatchSetLayers(layers);
   }
 
   render() {
