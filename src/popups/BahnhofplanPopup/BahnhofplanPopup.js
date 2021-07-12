@@ -22,13 +22,11 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
-  const bepUrl = feature.get('url_bep');
 
   let iabpLink;
   let a4Link;
   let posterLink;
   let shoppingLink;
-  let bepLink;
 
   if (iabpUrl) {
     iabpLink = (
@@ -77,17 +75,6 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
     );
   }
 
-  if (bepUrl) {
-    bepLink = (
-      <div>
-        <a href={bepUrl} rel="noopener noreferrer" target="_blank">
-          {t('url_bep')}
-          <FaRegFilePdf />
-        </a>
-      </div>
-    );
-  }
-
   return (
     <div className="wkp-bahnhofplan-popup">
       {/*
@@ -99,7 +86,6 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
       {a4Link}
       {posterLink}
       {shoppingLink}
-      {bepLink}
     </div>
   );
 };
