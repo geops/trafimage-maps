@@ -259,7 +259,6 @@ export const regionenkartePublic = {
   ],
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
   searches: defaultSearches,
-  redirect: true, // Remove once Bahnnahes Bauen (aka. Anlagenverantwortliche) is ready for publication
 };
 
 export const tarifverbundkarte = {
