@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
+import { FaRegFilePdf } from 'react-icons/fa';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -43,8 +44,7 @@ function NetzkartePopup({ feature }) {
   const shoppingUrl = feature.get('url_shopping');
   const bepUrl = feature.get('url_bep');
 
-  const hasPlanLinks =
-    !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl || !!bepUrl;
+  const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
   const name = feature.get('name');
   const didok = feature.get('sbb_id') - 8500000;
@@ -68,6 +68,18 @@ function NetzkartePopup({ feature }) {
   let airportLabel;
   let stationTimetableLink;
   let stationServiceLink;
+  let bepLink;
+
+  if (bepUrl) {
+    bepLink = (
+      <div>
+        <a href={bepUrl} rel="noopener noreferrer" target="_blank">
+          {t('url_bep')}
+          <FaRegFilePdf />
+        </a>
+      </div>
+    );
+  }
 
   const transportLink = (
     <div>
@@ -179,6 +191,7 @@ function NetzkartePopup({ feature }) {
           </div>
         </>
       ) : null}
+      {bepLink}
       {stationTimetableLink}
       {transportLink}
       {stationServiceLink}
