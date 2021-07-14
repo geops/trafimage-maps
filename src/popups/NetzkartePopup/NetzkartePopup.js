@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
-import { FaRegFilePdf } from 'react-icons/fa';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -75,7 +74,6 @@ function NetzkartePopup({ feature }) {
       <div>
         <a href={bepUrl} rel="noopener noreferrer" target="_blank">
           {t('url_bep')}
-          <FaRegFilePdf />
         </a>
       </div>
     );
