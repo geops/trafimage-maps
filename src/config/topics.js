@@ -15,7 +15,6 @@ import defaultBaseLayers, {
   netzkarteShowcasesNight,
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
-  parks,
   handicapDataLayer,
   stuetzpunktBahnhoefe,
   barrierfreierBahnhoefe,
@@ -71,7 +70,6 @@ export const netzkarte = {
   layers: [
     ...defaultBaseLayers,
     gemeindegrenzen,
-    parks,
     punctuality,
     buslines,
     netzkartePointLayer,

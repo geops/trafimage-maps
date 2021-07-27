@@ -1,15 +1,10 @@
 import proj4 from 'proj4';
-import { Vector as OLVectorLayer, Tile as TileLayer, Group } from 'ol/layer';
-import VectorSource from 'ol/source/Vector';
-import TileWMSSource from 'ol/source/TileWMS';
-import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import { TrajservAPI } from 'mobility-toolbox-js/api';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
-import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
 import netzkarte from '../img/netzkarte.png';
@@ -22,7 +17,6 @@ import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
-import LayerHelper from '../layers/layerHelper';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import StationsLayer from '../layers/StationsLayer';
 
@@ -41,13 +35,6 @@ proj4.defs(
 );
 
 register(proj4);
-
-const projectionExtent = [
-  -20037509.3428,
-  -20037508.3428,
-  20037508.3428,
-  20037508.3428,
-];
 
 const sbbTrackerApi = new TrajservAPI({
   url: 'https://api.geops.io/tracker/sbb',
@@ -406,37 +393,6 @@ export const gemeindegrenzen = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.ch_gemeinden-desc',
-  },
-});
-
-export const parks = new ParksLayer({
-  name: 'ch.sbb.parks',
-  visible: false,
-  olLayer: new Group({
-    layers: [
-      new TileLayer({
-        source: new TileWMSSource({
-          crossOrigin: 'anonymous',
-          params: {
-            layers: 'trafimage:perimeter_parks',
-          },
-          tileGrid: new TileGrid({
-            extent: projectionExtent,
-            resolutions: LayerHelper.getMapResolutions(),
-            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-          }),
-        }),
-        opacity: 0.9,
-      }),
-      new OLVectorLayer({
-        source: new VectorSource(),
-      }),
-    ],
-  }),
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'ParksLayerInfo',
-    popupComponent: 'ParksPopup',
   },
 });
 
