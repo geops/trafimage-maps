@@ -259,7 +259,6 @@ export const regionenkartePublic = {
   ],
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
   searches: defaultSearches,
-  redirect: true, // Remove once Bahnnahes Bauen (aka. Anlagenverantwortliche) is ready for publication
 };
 
 export const tarifverbundkarte = {
@@ -303,23 +302,6 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
-export const intervention = {
-  name: 'ch.sbb.intervention',
-  key: 'ch.sbb.intervention',
-  redirect: true,
-  permission: 'sbb',
-  layerInfoComponent: 'InterventionTopicInfo',
-};
-
-export const tina = {
-  name: 'ch.sbb.lar',
-  key: 'ch.sbb.lar',
-  description: 'ch.sbb.lar-desc',
-  permission: 'tina',
-  redirect: true,
-  hideInLayerTree: true,
-};
-
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
@@ -351,8 +333,6 @@ const topics = {
     tarifverbundkarte,
     showcases,
     zweitausbildung,
-    intervention,
-    tina,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],
