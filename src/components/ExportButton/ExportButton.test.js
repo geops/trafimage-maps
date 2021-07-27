@@ -19,6 +19,7 @@ describe('ExportButton', () => {
       console.error(
         'tarifverbund_legend.svg is not parseable/serializable by native parser/serializer',
       );
+      // eslint-disable-next-line no-console
       console.error(e);
     }
   });

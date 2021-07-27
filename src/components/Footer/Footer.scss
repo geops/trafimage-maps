@@ -27,12 +27,6 @@
     top: 0;
   }
 
-  .tm-copyright {
-    position: absolute;
-    bottom: 42px;
-    right: 5px;
-  }
-
   .wkp-footer-right {
     a:not(.MuiIconButton-root) {
       margin: 0 10px;
@@ -82,16 +76,6 @@
       margin-right: 10px;
       max-width: 55px;
     }
-  }
-}
-
-.tm-w-m,
-.tm-w-s,
-.tm-w-xs {
-  .tm-copyright {
-    font-size: 11px;
-    left: 5px;
-    right: unset;
   }
 }
 

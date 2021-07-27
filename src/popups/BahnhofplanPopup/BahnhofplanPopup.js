@@ -19,7 +19,6 @@ const defaultProps = {
 
 const BahnhofplanPopup = ({ feature, language, t }) => {
   const iabpUrl = feature.get('url_interactive_plan');
-  const iabpUrlLang = `${iabpUrl}#?lang=${language}`;
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
@@ -32,7 +31,11 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
   if (iabpUrl) {
     iabpLink = (
       <div>
-        <a href={iabpUrlLang} rel="noopener noreferrer" target="_blank">
+        <a
+          href={`${iabpUrl}#?lang=${language}`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {t('Interaktiver Bahnhofplan')}
         </a>
       </div>

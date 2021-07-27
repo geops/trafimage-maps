@@ -268,13 +268,15 @@ class TopicLoader extends Component {
         });
     }
 
+    // Layers to display
+    const layers = [...topicLayers, drawLayer];
+
     // TODO: It seems there is a mix of using layerService and layers.
     // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService
     // then update the flatLayers.
-    layerService.setLayers([...topicLayers, drawLayer]);
-    const flatLayers = layerService.getLayersAsFlatArray();
-    dispatchSetLayers(topicLayers);
+    layerService.setLayers(layers);
 
+    const flatLayers = layerService.getLayersAsFlatArray();
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
@@ -308,6 +310,8 @@ class TopicLoader extends Component {
         flatLayers[i].api.apiKey = apiKey;
       }
     }
+
+    dispatchSetLayers(layers);
   }
 
   render() {

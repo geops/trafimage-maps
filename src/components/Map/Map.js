@@ -16,6 +16,7 @@ import {
   setSearchOpen,
   updateDrawEditLink,
 } from '../../model/app/actions';
+import Copyright from '../Copyright/Copyright';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -270,6 +271,7 @@ class Map extends PureComponent {
           tabIndex={0}
         />
         <MapAccessibility layers={layers} map={map} />
+        <Copyright />
       </>
     );
   }

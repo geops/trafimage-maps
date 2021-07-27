@@ -1,7 +1,6 @@
 import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import StationsLayer from '../layers/StationsLayer';
-import netzkarteImage from '../img/netzkarte.png';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import defaultBaseLayers, {
   swisstopoSwissImage,
@@ -116,13 +115,7 @@ export const netzkarteStelen = {
   projection: 'EPSG:3857',
 };
 
-export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.layer',
-  visible: true,
-  isBaseLayer: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  style: 'base_bright_v2',
+export const casaDataLayerWithoutLabels = dataLayer.clone({
   filters: [
     {
       field: 'type',
@@ -130,13 +123,17 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
       include: false,
     },
   ],
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: netzkarteImage,
-  },
 });
 
-export const netzkarteLayerLabels = new TrafimageMapboxLayer({
+export const casaNetzkarteLayerWithoutLabels = netzkarteLayer.clone({
+  mapboxLayer: casaDataLayerWithoutLabels,
+});
+
+const casaSwisstopoSwissImage = swisstopoSwissImage.clone({
+  mapboxLayer: casaDataLayerWithoutLabels,
+});
+
+export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.labels',
   visible: true,
   style: 'base_bright_v2',
@@ -154,20 +151,20 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
 });
 
 // Add stations (blue style on hover) to labelsDataLayer.
-const netzkartePointLabelsLayer = new StationsLayer({
+const casaNetzkarteStationsLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen.casa',
-  mapboxLayer: netzkarteLayerLabels,
+  mapboxLayer: casaNetzkarteLayerWithLabels,
 });
 
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
   layers: [
-    dataLayer,
-    casaNetzkartePersonenverkehr,
-    swisstopoSwissImage,
-    netzkarteLayerLabels,
-    netzkartePointLabelsLayer,
+    casaDataLayerWithoutLabels,
+    casaNetzkarteLayerWithoutLabels,
+    casaSwisstopoSwissImage,
+    casaNetzkarteLayerWithLabels,
+    casaNetzkarteStationsLayer,
   ],
   projection: 'EPSG:3857',
   popupConfig: {
