@@ -134,23 +134,31 @@ function HandicapPopup({ feature }) {
       propertyName: `aktuell_${language}`,
     },
     {
-      element: parsedTouristOffers?.length && (
-        <div className="wkp-handicap-popup-element" key="TouristischeAngebote">
-          <div className="wkp-handicap-popup-field-title">
-            {t('Barrierefreie touristische Angebote')}
+      element: parsedTouristOffers?.length &&
+        parsedTouristOffers.find((p) => p[`label_${language}`]) && (
+          <div
+            className="wkp-handicap-popup-element"
+            key="TouristischeAngebote"
+          >
+            <div className="wkp-handicap-popup-field-title">
+              {t('Barrierefreie touristische Angebote')}
+            </div>
+            {parsedTouristOffers.map((offer, index) => {
+              return (
+                <>
+                  {offer[`label_${language}`] && (
+                    <span key={offer.label}>
+                      <Link href={offer[`url_${language}`]}>
+                        {offer[`label_${language}`]}
+                      </Link>
+                      {index !== parsedTouristOffers.length - 1 && <br />}
+                    </span>
+                  )}
+                </>
+              );
+            })}
           </div>
-          {parsedTouristOffers.map((offer, index) => {
-            return (
-              <span key={offer.label}>
-                <Link href={offer[`url_${language}`]}>
-                  {offer[`label_${language}`]}
-                </Link>
-                {index !== parsedTouristOffers.length - 1 && <br />}
-              </span>
-            );
-          })}
-        </div>
-      ),
+        ),
     },
   ];
 
