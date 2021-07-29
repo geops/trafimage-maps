@@ -142,7 +142,9 @@ function HandicapPopup({ feature }) {
           {parsedTouristOffers.map((offer, index) => {
             return (
               <span key={offer.label}>
-                <Link href={offer.url}>{offer.label}</Link>
+                <Link href={offer[`url_${language}`]}>
+                  {offer[`label_${language}`]}
+                </Link>
                 {index !== parsedTouristOffers.length - 1 && <br />}
               </span>
             );
