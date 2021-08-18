@@ -1,6 +1,11 @@
 import React from 'react';
 import { Style, Circle, Fill, Stroke as OLStroke } from 'ol/style';
-import { MultiLineString, GeometryCollection } from 'ol/geom';
+import {
+  MultiLineString,
+  GeometryCollection,
+  MultiPoint,
+  Point,
+} from 'ol/geom';
 import GeoJSON from 'ol/format/GeoJSON';
 
 import Search from '../Search';
@@ -54,6 +59,19 @@ class Lines extends Search {
               color,
               width: 10,
             }),
+            image:
+              geometry.getGeometries &&
+              geometry
+                .getGeometries()
+                .find(
+                  (geom) => geom instanceof MultiPoint || geom instanceof Point,
+                ) &&
+              new Circle({
+                radius: 10,
+                fill: new Fill({
+                  color,
+                }),
+              }),
           })
         : new Style({
             geometry,
