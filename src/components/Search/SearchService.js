@@ -60,7 +60,6 @@ class SearchService {
       ? this.searches[item.section].getFeature(item, { featureProjection })
       : this.highlightFeature;
 
-    console.log(feature);
     if (feature) {
       this.highlightLayer.getSource().addFeature(feature);
       if (persistent) {
