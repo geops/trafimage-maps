@@ -15,6 +15,7 @@ import {
   setFeatureInfo,
   setLanguage,
   setDrawIds,
+  setShowPopups,
   updateDrawEditLink,
 } from '../../model/app/actions';
 import {
@@ -52,6 +53,7 @@ const propTypes = {
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetDrawIds: PropTypes.func.isRequired,
   dispatchUpdateDrawEditLink: PropTypes.func.isRequired,
+  dispatchSetShowPopups: PropTypes.func.isRequired,
 };
 
 const defaultProps = {
@@ -93,6 +95,7 @@ class Permalink extends PureComponent {
       dispatchSetLanguage,
       dispatchSetDrawIds,
       dispatchSetDeparturesFilter,
+      dispatchSetShowPopups,
       initialState,
       language,
       drawUrl,
@@ -177,6 +180,10 @@ class Permalink extends PureComponent {
     const { lang } = parameters;
     if (lang) {
       dispatchSetLanguage(lang);
+    }
+
+    if (parameters.showpopups) {
+      dispatchSetShowPopups(parameters.showpopups !== 'false');
     }
 
     const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
@@ -361,6 +368,7 @@ const mapDispatchToProps = {
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetDrawIds: setDrawIds,
   dispatchUpdateDrawEditLink: updateDrawEditLink,
+  dispatchSetShowPopups: setShowPopups,
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Permalink);

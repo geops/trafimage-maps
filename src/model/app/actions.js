@@ -25,6 +25,7 @@ export const SET_DRAW_EDIT_LINK = 'SET_DRAW_EDIT_LINK';
 export const SET_DESTINATION_URL = 'SET_DESTINATION_URL';
 export const SET_DEPARTURES_URL = 'SET_DEPARTURES_URL';
 export const SET_API_KEY = 'SET_API_KEY';
+export const SET_SHOW_POPUPS = 'SET_SHOW_POPUPS';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -75,6 +76,8 @@ export const setCartaroUrl = (data) => ({ type: SET_CARTARO_URL, data });
 export const setMapsetUrl = (data) => ({ type: SET_MAPSET_URL, data });
 
 export const setShortenerUrl = (data) => ({ type: SET_SHORTENER_URL, data });
+
+export const setShowPopups = (data) => ({ type: SET_SHOW_POPUPS, data });
 
 export const setDestinationUrl = (data) => ({
   type: SET_DESTINATION_URL,
