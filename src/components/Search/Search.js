@@ -48,6 +48,8 @@ function Search() {
     return null;
   }
 
+  console.log(searchService);
+
   return (
     <div className="wkp-search">
       <SearchToggle>

@@ -128,7 +128,7 @@ class Lines extends Search {
   // eslint-disable-next-line class-methods-use-this
   value({ properties }) {
     return properties.start !== properties.end
-      ? `${properties.linie} ${properties.start}${
+      ? `${properties.linie} ${!properties.end ? '+' : ''}${properties.start}${
           properties.end ? `-${properties.end}` : ''
         }`
       : `${properties.linie}`;
