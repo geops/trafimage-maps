@@ -27,6 +27,7 @@ import {
   SET_DEPARTURES_URL,
   SET_API_KEY,
   SET_CARTARO_URL,
+  SET_SHOW_POPUPS,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -62,6 +63,7 @@ const getInitialState = () => ({
   destinationUrl: null,
   departuresUrl: null,
   apiKey: null,
+  showPopups: true,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -191,6 +193,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         apiKey: action.data,
+      };
+    case SET_SHOW_POPUPS:
+      return {
+        ...state,
+        showPopups: action.data,
       };
     default:
       return {

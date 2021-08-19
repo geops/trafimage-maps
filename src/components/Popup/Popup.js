@@ -36,9 +36,10 @@ const getPopupCoordinates = (
 const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
   const activeTopic = useSelector((state) => state.app.activeTopic);
+  const showPopups = useSelector((state) => state.app.showPopups);
   let featureInfo = useSelector((state) => state.app.featureInfo);
 
-  if (!featureInfo || !featureInfo.length) {
+  if (!featureInfo || !featureInfo.length || !showPopups) {
     return null;
   }
 
