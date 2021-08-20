@@ -33,8 +33,7 @@ const topicInfo = {
       Übersicht der Zuständigkeiten der Netzentwicklung von I-NAT-NET für die
       Rollen Strecken + Knoten Planer, Netzentwickler Strategisch, Programm
       Manager, Fachführung Anlagen Güterverkehr. Die Karten enthalten zusätzlich
-      Informationen über regionale Aufgaben (Leiter Netzentwicklung Region,
-      Anforderungsmanager Netz).
+      Informationen über regionale Aufgaben (Leiter Netzentwicklung Region).
       <br />
       <br />
       Verantwortlich: I-NAT-NET-UM, Christof Mahnig,{' '}
@@ -47,8 +46,7 @@ const topicInfo = {
       rôles de planificateur de lignes et de nœuds, développeur stratégique de
       réseau, manager de programme, conduite technique des installations fret.
       Les cartes contiennent en outre des informations sur les tâches régionales
-      (chef de région Développement du réseau) et nationales (manager des
-      exigences du réseau).
+      (chef de région Développement du réseau).
       <br />
       <br />
       Responsable: I-NAT-NET-UM, Christof Mahnig,{' '}
@@ -61,8 +59,7 @@ const topicInfo = {
       ruoli di Pianificatore tratte&nodi, Sviluppatore rete strategico, Manager
       di programma, Gestione specialistica impianti traffico merci. Le mappe
       contengono ulteriori informazioni sui compiti regionali (dirigente
-      sviluppo della rete regione) e nazionali (manager di requisiti della
-      rete).
+      sviluppo della rete regione).
       <br />
       <br />
       Responsabile: I-NAT-NET-UM, Christof Mahnig,{' '}
