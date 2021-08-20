@@ -1,3 +1,4 @@
+import React from 'react';
 import proj4 from 'proj4';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
@@ -19,6 +20,7 @@ import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import StationsLayer from '../layers/StationsLayer';
+import NetzentwicklungLayerInfo from '../layerInfos/NetzentwicklungLayerInfo';
 
 proj4.defs(
   'EPSG:21781',
@@ -1414,6 +1416,109 @@ export const regionenkarteOverlayGroup = new Layer({
       },
     }),
   ],
+});
+
+export const netzentwicklungDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.data',
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.netzentwicklung',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.programm_manager',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: false,
+  queryRenderedLayersFilter: ({ id }) => /programm_manager/.test(id),
+  styleLayersFilter: ({ id }) => /programm_manager/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    popupRoleType: 'Programm Manager', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    // eslint-disable-next-line react/prop-types
+    layerInfoComponent: ({ language, t }) => (
+      <NetzentwicklungLayerInfo
+        layerName="Programm Manager"
+        language={language}
+        t={t}
+      />
+    ),
+  },
+});
+
+export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.sk_planer',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  queryRenderedLayersFilter: ({ id }) => /sk_planer/.test(id),
+  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    popupRoleType: 'S&K Planer', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    // eslint-disable-next-line react/prop-types
+    layerInfoComponent: ({ language, t }) => (
+      <NetzentwicklungLayerInfo
+        layerName="S&K Planer"
+        language={language}
+        t={t}
+      />
+    ),
+  },
+});
+
+export const netzentwicklungGvLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.gueterverkehr',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: false,
+  queryRenderedLayersFilter: ({ id }) => /fachfuehrung_gueterverkehr/.test(id),
+  styleLayersFilter: ({ id }) => /fachfuehrung_gueterverkehr$/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    popupRoleType: 'Fachführung Anlagen Güterverkehr', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    // eslint-disable-next-line react/prop-types
+    layerInfoComponent: ({ language, t }) => (
+      <NetzentwicklungLayerInfo
+        layerName="Fachführung Anlagen Güterverkehr"
+        language={language}
+        t={t}
+      />
+    ),
+  },
+});
+
+export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.strategisch',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: false,
+  queryRenderedLayersFilter: ({ id }) => /strategisch/.test(id),
+  styleLayersFilter: ({ id }) => /strategisch$/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    popupRoleType: 'Netzentwickler Strategisch', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    // eslint-disable-next-line react/prop-types
+    layerInfoComponent: ({ language, t }) => (
+      <NetzentwicklungLayerInfo
+        layerName="Netzentwickler Strategisch"
+        language={language}
+        t={t}
+      />
+    ),
+  },
 });
 
 export default [

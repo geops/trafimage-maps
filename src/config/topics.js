@@ -42,6 +42,11 @@ import defaultBaseLayers, {
   anlagenverantwortliche,
   regionenkartePublicSegment,
   regionenkarteOverlayGroup,
+  netzentwicklungDataLayer,
+  netzentwicklungGvLayer,
+  netzentwicklungStrategischLayer,
+  netzentwicklungProgrammManagerLayer,
+  netzentwicklungSkPlanerLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -321,6 +326,24 @@ export const zweitausbildung = {
   searches: defaultSearches,
 };
 
+export const netzentwicklung = {
+  name: 'ch.sbb.netzentwicklung',
+  key: 'ch.sbb.netzentwicklung',
+  maxZoom: 13,
+  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  layers: [
+    kilometrageLayer,
+    netzentwicklungDataLayer,
+    netzentwicklungGvLayer,
+    netzentwicklungStrategischLayer,
+    netzentwicklungProgrammManagerLayer,
+    netzentwicklungSkPlanerLayer,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'NetzentwicklungLayerInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -331,6 +354,7 @@ const topics = {
     tarifverbundkarte,
     showcases,
     zweitausbildung,
+    netzentwicklung,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],

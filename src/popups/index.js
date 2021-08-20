@@ -15,6 +15,7 @@ import ZweitausbildungPoisPopup from './ZweitausbildungPoisPopup';
 import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
 import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
+import NetzentwicklungPopup from './NetzentwicklungPopup';
 
 export default {
   BahnhofplanPopup,
@@ -34,4 +35,5 @@ export default {
   RegionenkarteSegmentPopup,
   RegionenkarteIntersectionPopup,
   DrawPopup,
+  NetzentwicklungPopup,
 };
