@@ -32,8 +32,8 @@ const topicInfo = {
     <>
       Übersicht der Zuständigkeiten der Netzentwicklung von I-NAT-NET für die
       Rollen Strecken + Knoten Planer, Netzentwickler Strategisch, Programm
-      Manager, Fachführung Anlagen Güterverkehr. Die Karten enthalten zusätzlich
-      Informationen über regionale Aufgaben (Leiter Netzentwicklung Region).
+      Manager. Die Karten enthalten zusätzlich Informationen über regionale
+      Aufgaben (Leiter Netzentwicklung Region).
       <br />
       <br />
       Verantwortlich: I-NAT-NET-UM, Christof Mahnig,{' '}
@@ -44,9 +44,9 @@ const topicInfo = {
     <>
       Aperçu des responsabilités du développement du réseau I-NAT-NET pour les
       rôles de planificateur de lignes et de nœuds, développeur stratégique de
-      réseau, manager de programme, conduite technique des installations fret.
-      Les cartes contiennent en outre des informations sur les tâches régionales
-      (chef de région Développement du réseau).
+      réseau, manager de programme. Les cartes contiennent en outre des
+      informations sur les tâches régionales (chef de région Développement du
+      réseau).
       <br />
       <br />
       Responsable: I-NAT-NET-UM, Christof Mahnig,{' '}
@@ -57,9 +57,8 @@ const topicInfo = {
     <>
       Visione delle responsabilità dello sviluppo della rete di I-NAT-NET per i
       ruoli di Pianificatore tratte&nodi, Sviluppatore rete strategico, Manager
-      di programma, Gestione specialistica impianti traffico merci. Le mappe
-      contengono ulteriori informazioni sui compiti regionali (dirigente
-      sviluppo della rete regione).
+      di programma. Le mappe contengono ulteriori informazioni sui compiti
+      regionali (dirigente sviluppo della rete regione).
       <br />
       <br />
       Responsabile: I-NAT-NET-UM, Christof Mahnig,{' '}
@@ -70,9 +69,8 @@ const topicInfo = {
     <>
       Overview of the responsibilities of the network development of I-NAT-NET
       for the roles of Route + Node Planner, Network Developer Strategic,
-      Programme Manager, Technical Management of Freight Transport Facilities.
-      The maps also contain information on regional tasks (Head of Network
-      Development Region).
+      Programme Manager. The maps also contain information on regional tasks
+      (Head of Network Development Region).
       <br />
       <br />
       Responsible: I-NAT-NET-UM, Christof Mahnig,{' '}
@@ -91,11 +89,6 @@ const layerInfo = {
     de: 'Strecken- und Knoten Planer',
     fr: 'Planificateur de lignes et de nœuds.',
     it: 'Pianificatore di tratte e nodi.',
-  },
-  'Fachführung Anlagen Güterverkehr': {
-    de: 'Fachführung Anlagen Güterverkehr',
-    fr: 'Conduite spécialisée des installations du trafic marchandises',
-    it: 'Gestione specializzata di impianti per il traffico merci',
   },
   'Netzentwickler Strategisch': {
     de: 'Netzentwickler Strategisch',

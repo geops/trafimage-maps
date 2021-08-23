@@ -1475,29 +1475,6 @@ export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
   },
 });
 
-export const netzentwicklungGvLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.netzentwicklung.gueterverkehr',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: false,
-  queryRenderedLayersFilter: ({ id }) => /fachfuehrung_gueterverkehr/.test(id),
-  styleLayersFilter: ({ id }) => /fachfuehrung_gueterverkehr$/.test(id),
-  properties: {
-    radioGroup: 'netzentwicklung',
-    popupComponent: 'NetzentwicklungPopup',
-    popupRoleType: 'Fachführung Anlagen Güterverkehr', // display only roles of this type
-    hasInfos: true,
-    useOverlay: true,
-    // eslint-disable-next-line react/prop-types
-    layerInfoComponent: ({ language, t }) => (
-      <NetzentwicklungLayerInfo
-        layerName="Fachführung Anlagen Güterverkehr"
-        language={language}
-        t={t}
-      />
-    ),
-  },
-});
-
 export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.strategisch',
   mapboxLayer: netzentwicklungDataLayer,

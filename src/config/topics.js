@@ -44,7 +44,6 @@ import defaultBaseLayers, {
   regionenkartePublicSegment,
   regionenkarteOverlayGroup,
   netzentwicklungDataLayer,
-  netzentwicklungGvLayer,
   netzentwicklungStrategischLayer,
   netzentwicklungProgrammManagerLayer,
   netzentwicklungSkPlanerLayer,
@@ -336,7 +335,6 @@ export const netzentwicklung = {
   layers: [
     kilometrageLayer,
     netzentwicklungDataLayer,
-    netzentwicklungGvLayer,
     netzentwicklungStrategischLayer,
     netzentwicklungProgrammManagerLayer,
     netzentwicklungSkPlanerLayer,
