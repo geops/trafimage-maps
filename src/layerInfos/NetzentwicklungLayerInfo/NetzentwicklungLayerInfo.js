@@ -66,6 +66,19 @@ const topicInfo = {
       <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
     </>
   ),
+  en: (
+    <>
+      Overview of the responsibilities of the network development of I-NAT-NET
+      for the roles of Route + Node Planner, Network Developer Strategic,
+      Programme Manager, Technical Management of Freight Transport Facilities.
+      The maps also contain information on regional tasks (Head of Network
+      Development Region).
+      <br />
+      <br />
+      Responsible: I-NAT-NET-UM, Christof Mahnig,{' '}
+      <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
+    </>
+  ),
 };
 
 const layerInfo = {
