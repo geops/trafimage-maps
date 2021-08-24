@@ -1,4 +1,3 @@
-import React from 'react';
 import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import StationsLayer from '../layers/StationsLayer';
@@ -49,7 +48,6 @@ import defaultBaseLayers, {
   netzentwicklungSkPlanerLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
-import NetzentwicklungLayerInfo from '../layerInfos/NetzentwicklungLayerInfo';
 
 const defaultElements = {
   header: true,
@@ -340,10 +338,7 @@ export const netzentwicklung = {
     netzentwicklungSkPlanerLayer,
   ],
   projection: 'EPSG:3857',
-  // eslint-disable-next-line react/prop-types
-  layerInfoComponent: ({ language, t }) => (
-    <NetzentwicklungLayerInfo language={language} t={t} />
-  ),
+  layerInfoComponent: 'NetzentwicklungTopicInfo',
   searches: defaultSearches,
 };
 

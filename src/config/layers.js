@@ -1,4 +1,3 @@
-import React from 'react';
 import proj4 from 'proj4';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
@@ -20,7 +19,6 @@ import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import StationsLayer from '../layers/StationsLayer';
-import NetzentwicklungLayerInfo from '../layerInfos/NetzentwicklungLayerInfo';
 
 proj4.defs(
   'EPSG:21781',
@@ -1441,14 +1439,8 @@ export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
     popupRoleType: 'Programm Manager', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
-    // eslint-disable-next-line react/prop-types
-    layerInfoComponent: ({ language, t }) => (
-      <NetzentwicklungLayerInfo
-        layerName="Programm Manager"
-        language={language}
-        t={t}
-      />
-    ),
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+    netzentwicklungType: 'Programm Manager',
   },
 });
 
@@ -1464,14 +1456,8 @@ export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
     popupRoleType: 'S&K Planer', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
-    // eslint-disable-next-line react/prop-types
-    layerInfoComponent: ({ language, t }) => (
-      <NetzentwicklungLayerInfo
-        layerName="S&K Planer"
-        language={language}
-        t={t}
-      />
-    ),
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+    netzentwicklungType: 'S&K Planer',
   },
 });
 
@@ -1487,14 +1473,8 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
     popupRoleType: 'Netzentwickler Strategisch', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
-    // eslint-disable-next-line react/prop-types
-    layerInfoComponent: ({ language, t }) => (
-      <NetzentwicklungLayerInfo
-        layerName="Netzentwickler Strategisch"
-        language={language}
-        t={t}
-      />
-    ),
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+    netzentwicklungType: 'Netzentwickler Strategisch',
   },
 });
 
