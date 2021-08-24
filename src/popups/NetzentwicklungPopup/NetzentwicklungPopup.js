@@ -104,12 +104,10 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
         />
         {`${t('Region')} ${t(feature.get('region'))}`}
       </div>
-      <div>
-        {regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
-      </div>
       <div className={classes.title}>{renderTitle(feature, t, true)}</div>
-      <div className={classes.row}>
+      <div>
         {rollen.map((rolle) => renderRoleCard(rolle, classes, t))}
+        {regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
       </div>
     </>
   );
