@@ -1436,11 +1436,10 @@ export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   properties: {
     radioGroup: 'netzentwicklung',
     popupComponent: 'NetzentwicklungPopup',
-    popupRoleType: 'Programm Manager', // display only roles of this type
+    netzentwicklungRoleType: 'Programm Manager', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
-    netzentwicklungType: 'Programm Manager',
   },
 });
 
@@ -1453,11 +1452,10 @@ export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
   properties: {
     radioGroup: 'netzentwicklung',
     popupComponent: 'NetzentwicklungPopup',
-    popupRoleType: 'S&K Planer', // display only roles of this type
+    netzentwicklungRoleType: 'S&K Planer', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
-    netzentwicklungType: 'S&K Planer',
   },
 });
 
@@ -1470,11 +1468,10 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   properties: {
     radioGroup: 'netzentwicklung',
     popupComponent: 'NetzentwicklungPopup',
-    popupRoleType: 'Netzentwickler Strategisch', // display only roles of this type
+    netzentwicklungRoleType: 'Netzentwickler Strategisch', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
-    netzentwicklungType: 'Netzentwickler Strategisch',
   },
 });
 

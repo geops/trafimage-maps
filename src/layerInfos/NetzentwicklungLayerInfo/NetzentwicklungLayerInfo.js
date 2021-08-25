@@ -27,7 +27,7 @@ const propTypes = {
 };
 
 const NetzentwicklungLayerInfo = ({ t, properties }) => {
-  const netzentwicklungType = properties.get('netzentwicklungType');
+  const netzentwicklungRoleType = properties.get('netzentwicklungRoleType');
   const [regions, setRegions] = useState();
   const classes = useStyles();
 
@@ -40,7 +40,7 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
   return (
     <>
       <div className={classes.title}>
-        {t(`${netzentwicklungType}-layer-info`)}
+        {t(`${netzentwicklungRoleType}-layer-info`)}
       </div>
       {regions &&
         Array.isArray(regions) &&

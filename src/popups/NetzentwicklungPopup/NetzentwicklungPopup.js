@@ -85,11 +85,13 @@ const renderRoleCard = (rolle, classes, t) => {
 const NetzentwicklungPopup = ({ feature, layer, t }) => {
   const classes = useStyles();
   const rollen = JSON.parse(feature.get('rollen') || '[]').filter((r) =>
-    ['Alle', layer.properties.popupRoleType].includes(r.typ),
+    ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
   const regionRollen = JSON.parse(
     feature.get('region_rollen') || '[]',
-  ).filter((r) => ['Alle', layer.properties.popupRoleType].includes(r.typ));
+  ).filter((r) =>
+    ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
+  );
   return (
     <>
       <div className={classes.title}>
