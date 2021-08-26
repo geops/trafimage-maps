@@ -19,6 +19,8 @@ import ZweitausbildungRoutesSubLayerInfo from './ZweitausbildungRoutesSubLayerIn
 import ZweitausbildungSubLayerInfo from './ZweitausbildungSubLayerInfo';
 import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
 import RegionenkartePublicLayerInfo from './RegionenkartePublicLayerInfo';
+import NetzentwicklungTopicInfo from './NetzentwicklungTopicInfo';
+import NetzentwicklungLayerInfo from './NetzentwicklungLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -42,4 +44,6 @@ export default {
   ZweitausbildungRoutesSubLayerInfo,
   ZweitausbildungSubLayerInfo,
   ZweitausbildungTopicInfo,
+  NetzentwicklungTopicInfo,
+  NetzentwicklungLayerInfo,
 };
