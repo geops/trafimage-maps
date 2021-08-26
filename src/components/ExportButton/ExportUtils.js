@@ -6,7 +6,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { LineString } from 'ol/geom';
 import { getCenter } from 'ol/extent';
-import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
+// import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -158,7 +158,7 @@ export const generateExtraData = (layerService, exportNorthArrow) => {
 
   if (exportNorthArrow) {
     extraData.northArrow = {
-      src: NorthArrowCircle,
+      src: '',
     };
   }
   return extraData;

@@ -7,11 +7,11 @@ import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
-import netzkarte from '../img/netzkarte.png';
-import netzkarteNightImg from '../img/netzkarte_night.png';
-import landeskarte from '../img/landeskarte.png';
-import landeskarteGrau from '../img/landeskarte_grau.png';
-import luftbild from '../img/luftbild.png';
+// import netzkarte from '../img/netzkarte.png';
+// import netzkarteNightImg from '../img/netzkarte_night.png';
+// import landeskarte from '../img/landeskarte.png';
+// import landeskarteGrau from '../img/landeskarte_grau.png';
+// import luftbild from '../img/luftbild.png';
 import AusbauLayer from '../layers/AusbauLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
@@ -146,7 +146,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
-    previewImage: netzkarte,
+    previewImage: null,
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -162,7 +162,7 @@ export const netzkarteNight = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
-    previewImage: netzkarteNightImg,
+    previewImage: null,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -175,7 +175,7 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
-    previewImage: luftbild,
+    previewImage: null,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -189,7 +189,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
-    previewImage: landeskarte,
+    previewImage: null,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -203,7 +203,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   isBaseLayer: true,
   properties: {
     radioGroup: 'baseLayer',
-    previewImage: landeskarteGrau,
+    previewImage: null,
   },
   visible: false,
   mapboxLayer: dataLayer,

@@ -16,7 +16,7 @@ import {
 import { Point } from 'ol/geom';
 import CasaLayer from '../CasaLayer';
 // use flag png to ensure IE detects it in olMap.forEachLayerAtPixel.
-import finishFlag from '../../img/finish_flag.png';
+// import finishFlag from '../../img/finish_flag.png';
 
 /**
  * Layer for visualizing routes.
@@ -244,7 +244,7 @@ class RouteLayer extends CasaLayer {
           new Style({
             geometry: new Point(lineEnd),
             image: new IconStyle({
-              src: finishFlag,
+              src: '',
               anchor: [4.5, 3.5],
               anchorXUnits: 'pixels',
               anchorYUnits: 'pixels',

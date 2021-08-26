@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
-import grun from './grun.png';
-import gelb from './gelb.png';
-import lila from './lila.png';
-import rot from './rot.png';
+// import grun from './grun.png';
+// import gelb from './gelb.png';
+// import lila from './lila.png';
+// import rot from './rot.png';
 
 const title = {
   de: 'Regionenkarte I-VU-UEW',
@@ -64,19 +64,19 @@ const RegionenkartePublicLayerInfo = ({ language }) => {
       <div>{title[language]}</div>
       <div className={classes.legend}>
         <div>
-          <img src={grun} alt="grun" />
+          <img src="" alt="grun" />
           Region Ost
         </div>
         <div>
-          <img src={rot} alt="rot" />
+          <img src="" alt="rot" />
           Region Süd
         </div>
         <div>
-          <img src={lila} alt="lila" />
+          <img src="" alt="lila" />
           Region Mitte
         </div>
         <div>
-          <img src={gelb} alt="gelb" />
+          <img src="" alt="gelb" />
           Region West
         </div>
       </div>

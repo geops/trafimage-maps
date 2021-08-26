@@ -8,7 +8,7 @@ import {
 } from 'ol/style';
 import { MultiLineString, LineString, Point } from 'ol/geom';
 import { VectorLayer } from 'mobility-toolbox-js/ol';
-import ArrowImg from '../../img/arrow.png';
+// import ArrowImg from '../../img/arrow.png';
 
 /**
  * @typedef {Object} styleObject
@@ -223,7 +223,7 @@ class CasaLayer extends VectorLayer {
             geometry: new Point(coords),
             image: new IconStyle({
               rotation,
-              src: ArrowImg,
+              src: '',
               color: arrowColor,
               opacity,
             }),

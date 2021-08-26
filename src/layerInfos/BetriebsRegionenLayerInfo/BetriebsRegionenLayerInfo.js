@@ -1,31 +1,31 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import ostImg from '../../img/layers/Betriebsregionen/ost.png';
-import sudImg from '../../img/layers/Betriebsregionen/sud.png';
-import westImg from '../../img/layers/Betriebsregionen/west.png';
-import mitteImg from '../../img/layers/Betriebsregionen/mitte.png';
-import otherImg from '../../img/layers/Betriebsregionen/other.png';
+// import ostImg from '../../img/layers/Betriebsregionen/ost.png';
+// import sudImg from '../../img/layers/Betriebsregionen/sud.png';
+// import westImg from '../../img/layers/Betriebsregionen/west.png';
+// import mitteImg from '../../img/layers/Betriebsregionen/mitte.png';
+// import otherImg from '../../img/layers/Betriebsregionen/other.png';
 
 const regions = [
   {
     title: 'West',
-    img: westImg,
+    img: '',
   },
   {
     title: 'Mitte',
-    img: mitteImg,
+    img: '',
   },
   {
     title: 'Süd',
-    img: sudImg,
+    img: '',
   },
   {
     title: 'Ost',
-    img: ostImg,
+    img: '',
   },
   {
     title: 'Andere Infrastrukturbetreiberinnen',
-    img: otherImg,
+    img: '',
   },
 ];
 
