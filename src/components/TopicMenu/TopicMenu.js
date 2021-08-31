@@ -108,6 +108,7 @@ class TopicMenu extends PureComponent {
             )}
             renderAfterItem={(layer, level) => {
               const component = layer.get('filtersComponent');
+
               if (component) {
                 const FiltersComponent = filters[component];
                 return (

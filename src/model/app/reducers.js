@@ -17,7 +17,6 @@ import {
   SET_SEARCH_SERVICE,
   SET_PERMISSION_INFOS,
   SET_SCREEN_WIDTH,
-  SET_CARTARO_OLD_URL,
   SET_MAPSET_URL,
   SET_DRAW_URL,
   SET_DRAW_IDS,
@@ -27,6 +26,8 @@ import {
   SET_DESTINATION_URL,
   SET_DEPARTURES_URL,
   SET_API_KEY,
+  SET_CARTARO_URL,
+  SET_SHOW_POPUPS,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -62,6 +63,7 @@ const getInitialState = () => ({
   destinationUrl: null,
   departuresUrl: null,
   apiKey: null,
+  showPopups: true,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -152,10 +154,10 @@ export default function app(state = getInitialState(), action) {
         ...state,
         drawUrl: action.data,
       };
-    case SET_CARTARO_OLD_URL:
+    case SET_CARTARO_URL:
       return {
         ...state,
-        cartaroOldUrl: action.data,
+        cartaroUrl: action.data,
       };
     case SET_SCREEN_WIDTH:
       return {
@@ -191,6 +193,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         apiKey: action.data,
+      };
+    case SET_SHOW_POPUPS:
+      return {
+        ...state,
+        showPopups: action.data,
       };
     default:
       return {

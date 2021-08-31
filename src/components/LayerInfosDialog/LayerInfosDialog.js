@@ -52,6 +52,7 @@ function LayerInfosDialog(props) {
         language={language}
         properties={selectedForInfos}
         staticFilesUrl={staticFilesUrl}
+        t={t}
       />
     );
   } else if (description) {

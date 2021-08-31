@@ -1,6 +1,11 @@
 import React from 'react';
 import { Style, Circle, Fill, Stroke as OLStroke } from 'ol/style';
-import { MultiLineString } from 'ol/geom';
+import {
+  MultiLineString,
+  GeometryCollection,
+  MultiPoint,
+  Point,
+} from 'ol/geom';
 import GeoJSON from 'ol/format/GeoJSON';
 
 import Search from '../Search';
@@ -10,7 +15,9 @@ const lineMeasuresRegExp = new RegExp(
   '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
 );
 
-const lineKilometerRegExp = new RegExp('^([0-9]+)\\s+([0-9]+\\.?[0-9]+)$');
+const lineKilometerRegExp = new RegExp(
+  '^([0-9]+)(\\s)(\\+)?(\\s+)?([0-9]+(\\.[0-9]+)?)$',
+);
 
 const color = 'rgba(0,61,155,0.5)';
 
@@ -44,13 +51,27 @@ class Lines extends Search {
           featureProjection: 'EPSG:3857',
         }) || f.getGeometry();
 
-      return geometry instanceof MultiLineString
+      return geometry instanceof MultiLineString ||
+        geometry instanceof GeometryCollection
         ? new Style({
             geometry,
             stroke: new OLStroke({
               color,
               width: 10,
             }),
+            image:
+              geometry.getGeometries &&
+              geometry
+                .getGeometries()
+                .find(
+                  (geom) => geom instanceof MultiPoint || geom instanceof Point,
+                ) &&
+              new Circle({
+                radius: 10,
+                fill: new Fill({
+                  color,
+                }),
+              }),
           })
         : new Style({
             geometry,
@@ -70,7 +91,7 @@ class Lines extends Search {
   search(value) {
     let params = `line=${encodeURIComponent(value)}`;
     if (lineKilometerRegExp.test(value)) {
-      const [, line, km] = value.match(lineKilometerRegExp);
+      const [, line, , , , km] = value.match(lineKilometerRegExp);
       params = `line=${line}&km=${km}`;
     }
     if (lineMeasuresRegExp.test(value)) {
@@ -81,7 +102,9 @@ class Lines extends Search {
       process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
     return fetch(`${baseUrl}/search/lines?${params}`)
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features)
+      .then((featureCollection) => {
+        return featureCollection.features;
+      })
       .catch(() => {
         return [];
       });
@@ -105,7 +128,7 @@ class Lines extends Search {
   // eslint-disable-next-line class-methods-use-this
   value({ properties }) {
     return properties.start !== properties.end
-      ? `${properties.linie} ${properties.start}${
+      ? `${properties.linie} ${!properties.end ? '+' : ''}${properties.start}${
           properties.end ? `-${properties.end}` : ''
         }`
       : `${properties.linie}`;

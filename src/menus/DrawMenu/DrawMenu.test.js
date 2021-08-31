@@ -1,14 +1,36 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import OLMap from 'ol/Map';
 import DrawMenu from './DrawMenu';
-import MenuItem from '../../components/Menu/MenuItem';
 import Draw from '../../components/Draw';
 
 describe('DrawMenu', () => {
+  const mockStore = configureStore([thunk]);
+  let store;
   test('should use MenuItem and display Draw', () => {
-    const wrapper = shallow(<DrawMenu />);
-    expect(wrapper.find(MenuItem).length).toBe(1);
-    expect(wrapper.find(MenuItem).prop('title')).toBe('Zeichnen auf der Karte');
+    const info = {
+      key: 'foo',
+      elements: {
+        drawMenu: true,
+      },
+    };
+    store = mockStore({
+      map: {},
+      app: { activeTopic: info, map: new OLMap(), menuOpen: true },
+    });
+    const wrapper = mount(
+      <Provider store={store}>
+        <DrawMenu />
+      </Provider>,
+    );
+
+    expect(wrapper.find('.wkp-menu-item').length).toBe(1);
+    expect(wrapper.find('.wkp-menu-item-header-title').childAt(0).text()).toBe(
+      'Zeichnen auf der Karte',
+    );
     expect(wrapper.find(Draw).length).toBe(1);
   });
 });

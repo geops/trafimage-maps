@@ -1,9 +1,22 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
+const breakpointValues = {
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+};
+
 const theme = createMuiTheme({
+  breakpoints: { values: breakpointValues },
   palette: {
     primary: {
       main: '#000',
+    },
+    secondary: {
+      main: '#eb0000',
+      dark: '#c60018',
     },
     text: {
       primary: '#000',
@@ -74,6 +87,13 @@ const theme = createMuiTheme({
       disableRipple: true,
       disableFocusRipple: true,
     },
+    MuiMenuItem: {
+      disableRipple: true,
+    },
+    MuiTab: {
+      disableRipple: true,
+      disableFocusRipple: true,
+    },
   },
   overrides: {
     MuiPopover: {
@@ -114,6 +134,10 @@ const theme = createMuiTheme({
           transform: 'rotate(135deg)',
           background: 'white',
         },
+        // Remove the padding for menu or select
+        '&.MuiMenu-paper': {
+          padding: 0,
+        },
       },
     },
     // This css was done for IconButton as child of the ToggleButton.
@@ -134,6 +158,21 @@ const theme = createMuiTheme({
       root: {
         fontSize: '1em',
       },
+    },
+    MuiOutlinedInput: {
+      root: {
+        '& $notchedOutline': {
+          borderColor: '#888',
+        },
+        '&:hover $notchedOutline': {
+          borderColor: '#888',
+        },
+        '&$focused $notchedOutline': {
+          borderColor: '#888',
+        },
+      },
+      focused: {},
+      notchedOutline: {},
     },
     MuiMenuItem: {
       root: {

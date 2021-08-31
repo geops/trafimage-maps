@@ -146,16 +146,12 @@ exports[`FeatureInformaion should match snapshot. should not display header 1`] 
     className="wkp-feature-information-body"
   >
     <div
-      className="wkp-kilometrage-popup"
+      className="makeStyles-root-1"
     >
-      <div
-        className="wkp-popup-row"
-      >
+      <div>
         DfA Linien Nr.: undefined
       </div>
-      <div
-        className="wkp-popup-row"
-      >
+      <div>
         Kilometer: NaN
       </div>
     </div>

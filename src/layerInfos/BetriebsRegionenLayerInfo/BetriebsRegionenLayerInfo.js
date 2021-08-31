@@ -1,15 +1,10 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ostImg from '../../img/layers/Betriebsregionen/ost.png';
 import sudImg from '../../img/layers/Betriebsregionen/sud.png';
 import westImg from '../../img/layers/Betriebsregionen/west.png';
 import mitteImg from '../../img/layers/Betriebsregionen/mitte.png';
 import otherImg from '../../img/layers/Betriebsregionen/other.png';
-
-const propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 const regions = [
   {
@@ -34,7 +29,8 @@ const regions = [
   },
 ];
 
-const BetriebsRegionenLayerInfo = ({ t }) => {
+const BetriebsRegionenLayerInfo = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <span>{t('ch.sbb.betriebsregionen-desc')}</span>
@@ -50,5 +46,4 @@ const BetriebsRegionenLayerInfo = ({ t }) => {
   );
 };
 
-BetriebsRegionenLayerInfo.propTypes = propTypes;
-export default memo(withTranslation()(BetriebsRegionenLayerInfo));
+export default BetriebsRegionenLayerInfo;

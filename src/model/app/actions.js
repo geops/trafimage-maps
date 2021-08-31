@@ -15,7 +15,7 @@ export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
 export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
 export const SET_PERMISSION_INFOS = 'SET_PERMISSION_INFOS';
 export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
-export const SET_CARTARO_OLD_URL = 'SET_CARTARO_OLD_URL';
+export const SET_CARTARO_URL = 'SET_CARTARO_URL';
 export const SET_MAPSET_URL = 'SET_MAPSET_URL';
 export const SET_SHORTENER_URL = 'SET_SHORTENER_URL';
 export const SET_DRAW_URL = 'SET_DRAW_URL';
@@ -25,6 +25,7 @@ export const SET_DRAW_EDIT_LINK = 'SET_DRAW_EDIT_LINK';
 export const SET_DESTINATION_URL = 'SET_DESTINATION_URL';
 export const SET_DEPARTURES_URL = 'SET_DEPARTURES_URL';
 export const SET_API_KEY = 'SET_API_KEY';
+export const SET_SHOW_POPUPS = 'SET_SHOW_POPUPS';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -70,11 +71,13 @@ export const setScreenWidth = (data) => ({
 
 export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
 
-export const setCartaroOldUrl = (data) => ({ type: SET_CARTARO_OLD_URL, data });
+export const setCartaroUrl = (data) => ({ type: SET_CARTARO_URL, data });
 
 export const setMapsetUrl = (data) => ({ type: SET_MAPSET_URL, data });
 
 export const setShortenerUrl = (data) => ({ type: SET_SHORTENER_URL, data });
+
+export const setShowPopups = (data) => ({ type: SET_SHOW_POPUPS, data });
 
 export const setDestinationUrl = (data) => ({
   type: SET_DESTINATION_URL,

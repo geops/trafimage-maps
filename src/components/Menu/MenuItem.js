@@ -55,6 +55,7 @@ function MenuItem(props) {
         isCollapsed={collapsed}
         maxHeight={fixedHeight || menuHeight}
         ref={bodyElementRef}
+        hideScrollbar
       >
         {children}
       </Collapsible>

@@ -35,10 +35,11 @@ const getPopupCoordinates = (
 
 const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
-  const { activeTopic } = useSelector((state) => state.app);
-  let { featureInfo } = useSelector((state) => state.app);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+  const showPopups = useSelector((state) => state.app.showPopups);
+  let featureInfo = useSelector((state) => state.app.featureInfo);
 
-  if (!featureInfo || !featureInfo.length) {
+  if (!featureInfo || !featureInfo.length || !showPopups) {
     return null;
   }
 
@@ -49,7 +50,7 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const filtered = featureInfo.filter((info) => {
     const { layer, features } = info;
 
-    if (layer.get('popupComponent')) {
+    if (layer.get('popupComponent') && !layer.get('useOverlay')) {
       if (typeof layer.hidePopup === 'function') {
         return features.find((f) => !layer.hidePopup(f, layer, featureInfo));
       }

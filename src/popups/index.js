@@ -1,10 +1,11 @@
+import RegionenkarteSegmentPopup from './RegionenkarteSegmentPopup';
+import RegionenkarteIntersectionPopup from './RegionenkarteIntersectionPopup';
 import BahnhofplanPopup from './BahnhofplanPopup';
 import BetriebsRegionenPopup from './BetriebsRegionenPopup';
 import BusLinePopup from './BusLinePopup';
 import CasaRoutePopup from './CasaRoutePopup';
 import HandicapPopup from './HandicapPopup';
 import NetzkartePopup from './NetzkartePopup';
-import ParksPopup from './ParksPopup';
 import PassagierFrequenzenPopup from './PassagierFrequenzenPopup';
 import KilometragePopup from './KilometragePopup';
 import ConstructionPopup from './ConstructionPopup';
@@ -12,7 +13,9 @@ import DeparturePopup from './DeparturePopup';
 import ZweitausbildungAbroadPopup from './ZweitausbildungAbroadPopup';
 import ZweitausbildungPoisPopup from './ZweitausbildungPoisPopup';
 import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
+import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
+import NetzentwicklungPopup from './NetzentwicklungPopup';
 
 export default {
   BahnhofplanPopup,
@@ -21,7 +24,6 @@ export default {
   CasaRoutePopup,
   HandicapPopup,
   NetzkartePopup,
-  ParksPopup,
   PassagierFrequenzenPopup,
   KilometragePopup,
   ConstructionPopup,
@@ -29,5 +31,9 @@ export default {
   ZweitausbildungAbroadPopup,
   ZweitausbildungPoisPopup,
   ZweitausbildungRoutesPopup,
+  TarifverbundkartePopup,
+  RegionenkarteSegmentPopup,
+  RegionenkarteIntersectionPopup,
   DrawPopup,
+  NetzentwicklungPopup,
 };

@@ -41,6 +41,7 @@ function NetzkartePopup({ feature }) {
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
+  const bepUrl = feature.get('url_bep');
 
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
@@ -66,6 +67,17 @@ function NetzkartePopup({ feature }) {
   let airportLabel;
   let stationTimetableLink;
   let stationServiceLink;
+  let bepLink;
+
+  if (bepUrl) {
+    bepLink = (
+      <div>
+        <a href={bepUrl} rel="noopener noreferrer" target="_blank">
+          {t('url_bep')}
+        </a>
+      </div>
+    );
+  }
 
   const transportLink = (
     <div>
@@ -177,6 +189,7 @@ function NetzkartePopup({ feature }) {
           </div>
         </>
       ) : null}
+      {bepLink}
       {stationTimetableLink}
       {transportLink}
       {stationServiceLink}
