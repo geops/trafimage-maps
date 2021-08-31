@@ -1475,6 +1475,35 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
+export const direktverbindungenDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.direktverbindungen',
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
+  isBaseLayer: false,
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const direktverbindungenDay = new MapboxStyleLayer({
+  name: 'ch.sbb.direktverbindungen.day',
+  mapboxLayer: direktverbindungenDataLayer,
+  visible: true,
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['trafimage.filter'] === 'lines_day',
+});
+
+export const direktverbindungenNight = new MapboxStyleLayer({
+  name: 'ch.sbb.direktverbindungen.night',
+  mapboxLayer: direktverbindungenDataLayer,
+  visible: true,
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['trafimage.filter'] === 'lines_night',
+});
+
 export default [
   dataLayer,
   netzkarteLayer,
