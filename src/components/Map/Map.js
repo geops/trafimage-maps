@@ -128,12 +128,8 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const {
-      layerService,
-      featureInfo,
-      dispatchSetFeatureInfo,
-      showPopups,
-    } = this.props;
+    const { layerService, featureInfo, dispatchSetFeatureInfo, showPopups } =
+      this.props;
 
     if (document.activeElement !== map.getTargetElement()) {
       map.getTargetElement().focus();

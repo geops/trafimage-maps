@@ -18,10 +18,8 @@ const useStyles = makeStyles((theme) => ({
 function Nl({ feature }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const {
-    niederlassung_name: name,
-    niederlassung_leiter: leiter,
-  } = feature.getProperties();
+  const { niederlassung_name: name, niederlassung_leiter: leiter } =
+    feature.getProperties();
   const person = leiter && JSON.parse(leiter);
   return (
     <>

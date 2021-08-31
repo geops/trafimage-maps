@@ -147,8 +147,8 @@
       "prettier"
     ],
     "rules": {
-      "linebreak-style": "Off",
-      "arrow-body-style": "Off",
+      "linebreak-style": 0,
+      "arrow-body-style": 0,
       "react/jsx-filename-extension": [
         1,
         {
@@ -191,6 +191,7 @@
     "(src|__mocks__)/**/*.js": [
       "eslint --fix",
       "prettier --write",
+      "yarn lint",
       "yarn test --bail --findRelatedTests"
     ],
     "package.json": [

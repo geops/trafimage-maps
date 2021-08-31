@@ -164,10 +164,10 @@ const WebComponent = (props) => {
     return JSON.parse(center);
   }, [center]);
 
-  const vectorTileApiKey = useMemo(() => vectorTilesKey || apiKey, [
-    apiKey,
-    vectorTilesKey,
-  ]);
+  const vectorTileApiKey = useMemo(
+    () => vectorTilesKey || apiKey,
+    [apiKey, vectorTilesKey],
+  );
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(
