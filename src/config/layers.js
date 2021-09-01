@@ -1477,7 +1477,9 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
 
 export const direktverbindungenDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.direktverbindungen',
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
+  // style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
+  style:
+    'review-geops-tgma-odemxi.netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
   isBaseLayer: false,
   visible: true,
   isQueryable: false,

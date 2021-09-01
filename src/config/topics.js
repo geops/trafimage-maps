@@ -371,7 +371,7 @@ const topics = {
     showcases,
     zweitausbildung,
     netzentwicklung,
-    direktverbindung,
+    direktverbindungen,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],
