@@ -345,9 +345,9 @@ export const netzentwicklung = {
 const topics = {
   wkp: [
     netzkarte,
-    zweitausbildung,
     bauprojekte,
     handicap,
+    zweitausbildung,
     tarifverbundkarte,
     infrastruktur,
     regionenkartePublic,
