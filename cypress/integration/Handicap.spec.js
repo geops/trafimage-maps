@@ -11,7 +11,7 @@ describe('Handicap Topic', () => {
     cy.viewport(1440, 900);
     cy.get('.rs-popup').should('not.exist');
 
-    cy.get('.wkp-topic-menu-item').eq(1).click();
+    cy.get('.wkp-topic-menu-item').eq(2).click();
     cy.wait(1000);
 
     // In handicap topic
