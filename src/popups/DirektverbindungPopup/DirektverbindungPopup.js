@@ -48,7 +48,7 @@ const propTypes = {
 //   return ''itle';
 // };
 
-const DirektverbindungPopup = ({ feature, layer, t }) => {
+const DirektverbindungPopup = ({ feature }) => {
   const classes = useStyles();
   console.log(feature.getProperties());
   const {
@@ -59,7 +59,7 @@ const DirektverbindungPopup = ({ feature, layer, t }) => {
   return (
     <div className={classes.container}>
       <div className={classes.title}>
-        {start} --> {end}
+        {start} --&gt; {end}
       </div>
       <br />
       <div>Via:</div>
