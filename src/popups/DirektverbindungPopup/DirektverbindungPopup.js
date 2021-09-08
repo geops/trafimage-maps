@@ -39,9 +39,7 @@ const useStyles = makeStyles({
 });
 
 const propTypes = {
-  layer: PropTypes.instanceOf(MapboxStyleLayer).isRequired,
   feature: PropTypes.instanceOf(Feature).isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 // const renderTitle = (feat, t) => {
@@ -50,7 +48,7 @@ const propTypes = {
 
 const DirektverbindungPopup = ({ feature }) => {
   const classes = useStyles();
-  console.log(feature.getProperties());
+  // console.log(feature.getProperties());
   const {
     start_station_name: start,
     end_station_name: end,
