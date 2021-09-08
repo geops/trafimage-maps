@@ -1496,6 +1496,9 @@ export const direktverbindungenDay = new MapboxStyleLayer({
   visible: true,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['trafimage.filter'] === 'lines_day',
+  properties: {
+    popupComponent: 'DirektverbindungPopup',
+  },
 });
 
 export const direktverbindungenNight = new MapboxStyleLayer({
@@ -1504,6 +1507,9 @@ export const direktverbindungenNight = new MapboxStyleLayer({
   visible: true,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['trafimage.filter'] === 'lines_night',
+  properties: {
+    popupComponent: 'DirektverbindungPopup',
+  },
 });
 
 export default [
