@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   vias: {
-    maxHeight: 200,
+    maxHeight: 150,
     overflowY: 'auto',
   },
   card: {
