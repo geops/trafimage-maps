@@ -76,11 +76,11 @@ export const netzkarte = {
   },
   layers: [
     ...defaultBaseLayers,
-    gemeindegrenzen,
     punctuality,
-    buslines,
     netzkartePointLayer,
     passagierfrequenzen,
+    gemeindegrenzen,
+    buslines,
     bahnhofplaene,
   ],
   projection: 'EPSG:3857',
@@ -108,7 +108,7 @@ export const handicap = {
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
     // prettier-ignore
-    'Stationen': handicapStopFinder,
+    'Stationen': handicapStopFinder
   },
 };
 
@@ -221,11 +221,11 @@ export const infrastruktur = {
   },
   layers: [
     netzkarteEisenbahninfrastruktur,
-    gewässer,
-    grenzen,
-    betriebsRegionen,
     uebrigeBahnen,
     tochtergesellschaftenSBB,
+    grenzen,
+    gewässer,
+    betriebsRegionen,
     kilometrageLayer,
   ],
   projection: 'EPSG:3857',
@@ -363,15 +363,15 @@ export const direktverbindungen = {
 const topics = {
   wkp: [
     netzkarte,
-    handicap,
+    zweitausbildung,
     bauprojekte,
+    handicap,
+    tarifverbundkarte,
     infrastruktur,
     regionenkartePublic,
-    tarifverbundkarte,
-    showcases,
-    zweitausbildung,
     netzentwicklung,
     direktverbindungen,
+    showcases,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],
