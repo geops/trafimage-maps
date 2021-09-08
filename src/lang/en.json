@@ -461,5 +461,8 @@
   "Zone": "Zone",
   "Zugtracker": "Train tracker",
   "zurück": "previous",
-  "Zusätzliche Informationen": "Additional information"
+  "Zusätzliche Informationen": "Additional information",
+  "ch.sbb.direktverbindungen": " Direct connection",
+  "ch.sbb.direktverbindungen.day": "Day",
+  "ch.sbb.direktverbindungen.night": "Night"
 }

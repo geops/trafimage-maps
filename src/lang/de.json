@@ -396,5 +396,8 @@
   "Ziel": "Ziel",
   "Zone": "Zone",
   "Zugtracker": "Zugtracker",
-  "Zusätzliche Informationen": "Zusätzliche Informationen"
+  "Zusätzliche Informationen": "Zusätzliche Informationen",
+  "ch.sbb.direktverbindungen": " Direkt verbindungen",
+  "ch.sbb.direktverbindungen.day": "Tag",
+  "ch.sbb.direktverbindungen.night": "Nacht"
 }

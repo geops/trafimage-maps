@@ -512,5 +512,8 @@
   "Zugtracker": "Train tracker",
   "zurück": "précédent",
   "Zurücksetzen": "Réinitialiser",
-  "Zusätzliche Informationen": "Informations complémentaires"
+  "Zusätzliche Informationen": "Informations complémentaires",
+  "ch.sbb.direktverbindungen": "Connections directes",
+  "ch.sbb.direktverbindungen.day": "Day",
+  "ch.sbb.direktverbindungen.night": "Night"
 }
