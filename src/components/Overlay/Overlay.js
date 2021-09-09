@@ -7,6 +7,9 @@ import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles({
+  drawerRoot: {
+    position: 'relative !important',
+  },
   drawer: {
     '& .wkp-feature-information': {
       height: '100%',
@@ -107,6 +110,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
           isMobile ? classes.drawerMobile : classes.drawerDesktop
         }`}
         classes={{
+          root: classes.drawerRoot,
           paper: isMobile
             ? ''
             : `${[
