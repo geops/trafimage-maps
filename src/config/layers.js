@@ -1431,8 +1431,8 @@ export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.programm_manager',
   mapboxLayer: netzentwicklungDataLayer,
   visible: false,
-  queryRenderedLayersFilter: ({ id }) => /programm_manager/.test(id),
-  styleLayersFilter: ({ id }) => /programm_manager/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /programm_manager$/.test(id),
+  styleLayersFilter: ({ id }) => /programm_manager$/.test(id),
   properties: {
     radioGroup: 'netzentwicklung',
     popupComponent: 'NetzentwicklungPopup',
@@ -1447,7 +1447,7 @@ export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.sk_planer',
   mapboxLayer: netzentwicklungDataLayer,
   visible: true,
-  queryRenderedLayersFilter: ({ id }) => /sk_planer/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /sk_planer$/.test(id),
   styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
   properties: {
     radioGroup: 'netzentwicklung',
@@ -1463,7 +1463,7 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.strategisch',
   mapboxLayer: netzentwicklungDataLayer,
   visible: false,
-  queryRenderedLayersFilter: ({ id }) => /strategisch/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /strategisch$/.test(id),
   styleLayersFilter: ({ id }) => /strategisch$/.test(id),
   properties: {
     radioGroup: 'netzentwicklung',
