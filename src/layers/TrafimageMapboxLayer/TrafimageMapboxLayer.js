@@ -1,5 +1,5 @@
 import { MapboxLayer } from 'mobility-toolbox-js/ol';
-import getMapboxMapCopyrights from 'mobility-toolbox-js/common/utils/getMapboxMapCopyrights';
+import { getMapboxMapCopyrights } from 'mobility-toolbox-js/common/utils';
 import { toLonLat } from 'ol/proj';
 
 const applyFilters = (mbStyle, filters) => {
