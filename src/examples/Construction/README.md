@@ -10,7 +10,7 @@ import 'trafimage-maps';
 const apiKey = window.apiKey;
 
 <trafimage-maps
-  activeTopicKey="ch.sbb.construction"
+  activeTopicKey="ch.sbb.netzkarte"
   apiKey={apiKey}
   height="500px"
   language="en"
