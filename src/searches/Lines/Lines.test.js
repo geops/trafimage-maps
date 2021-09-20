@@ -1,14 +1,14 @@
 import Lines from './Lines';
 
 const linesSearch = new Lines();
-
-const fetchMock = jest
-  .spyOn(global, 'fetch')
-  .mockImplementation(() =>
-    Promise.resolve({ json: () => Promise.resolve([]) }),
-  );
-
+let fetchMock;
 describe('Lines', () => {
+  beforeEach(() => {
+    fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => {
+      return Promise.resolve({ json: () => Promise.resolve([]) });
+    });
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
