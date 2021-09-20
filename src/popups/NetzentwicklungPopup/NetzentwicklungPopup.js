@@ -59,7 +59,7 @@ const renderTitle = (feat, t, includeLineInfo) => {
 
 const renderRoleCard = (rolle, classes, t) => {
   return (
-    <div key={rolle.typ} className={classes.card}>
+    <div key={rolle.typ + rolle.person.name} className={classes.card}>
       <div>{t(rolle.name)}</div>
       <div className={classes.row}>
         <img src={personIcon} alt="Person" />
