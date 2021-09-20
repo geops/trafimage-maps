@@ -72,7 +72,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jsx-a11y": "6.4.1",
-    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.25.3",
     "eslint-plugin-react-hooks": "4.2.0",
     "fetch-mock": "9.11.0",
@@ -83,7 +83,7 @@
     "husky": "4.3.8",
     "jest-serializer-html": "7.1.0",
     "lint-staged": "11.1.2",
-    "node-fetch": "2.6.1",
+    "node-fetch": "3.0.0",
     "prettier": "2.4.1",
     "react-app-rewired": "2.1.8",
     "react-scripts": "4.0.3",
@@ -121,7 +121,7 @@
     "start": "HTTPS=true react-app-rewired start",
     "start:doc": "styleguidist server",
     "start:http": "react-app-rewired start",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
+    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
   },
   "browserslist": [
     ">0.2%",
