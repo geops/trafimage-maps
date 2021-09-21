@@ -70,7 +70,7 @@ const DVPopupTitle = ({ feature }) => {
 
 const DirektverbindungPopup = ({ feature }) => {
   const classes = useStyles();
-  console.log(feature.getProperties());
+  // console.log(feature.getProperties());
   const {
     start_station_name: start,
     end_station_name: end,
@@ -80,7 +80,7 @@ const DirektverbindungPopup = ({ feature }) => {
   const switchVias = JSON.parse(vias).filter(
     (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
   );
-  console.log(switchVias);
+  // console.log(switchVias);
   return (
     <div className={classes.container}>
       <div className={classes.fromTo}>
