@@ -54,19 +54,15 @@ const DVPopupTitle = ({ feature }) => {
   const classes = useStyles();
   return (
     <div className={classes.titleWrapper}>
-      {feature.get('nachtverbindung') ? (
-        <img
-          src="https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg"
-          alt="icon"
-          className={classes.titleIcon}
-        />
-      ) : (
-        <img
-          src="https://icons.app.sbb.ch/kom/train-profile-small.svg"
-          alt="icon"
-          className={classes.titleIcon}
-        />
-      )}
+      <img
+        src={
+          feature.get('nachtverbindung')
+            ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
+            : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
+        }
+        alt="icon"
+        className={classes.titleIcon}
+      />
       {feature.get('name')}
     </div>
   );
@@ -74,27 +70,27 @@ const DVPopupTitle = ({ feature }) => {
 
 const DirektverbindungPopup = ({ feature }) => {
   const classes = useStyles();
-  // console.log(feature.getProperties());
+  console.log(feature.getProperties());
   const {
     start_station_name: start,
     end_station_name: end,
     vias,
   } = feature.getProperties();
 
-  // console.log(JSON.parse(vias));
+  const switchVias = JSON.parse(vias).filter(
+    (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
+  );
+  console.log(switchVias);
   return (
     <div className={classes.container}>
       <div className={classes.fromTo}>
         {start}-{end}
       </div>
-      <br />
-      <div>Via:</div>
-      <br />
-      <div className={classes.vias}>
-        {JSON.parse(vias).map(({ station_name: via }) => {
-          return <div>{via} </div>;
-        })}
-      </div>
+      {switchVias.length ? (
+        <div>{`via: ${switchVias.map((via, idx, array) => {
+          return `${via.station_name}${idx + 1 !== array.length ? ',' : null}`;
+        })}`}</div>
+      ) : null}
     </div>
   );
 };
