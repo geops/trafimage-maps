@@ -1512,6 +1512,12 @@ export const direktverbindungenNight = new MapboxStyleLayer({
   },
 });
 
+export const direktverbindungenLayer = new Layer({
+  name: 'ch.sbb.direktverbindungen',
+  visible: true,
+  children: [direktverbindungenDay, direktverbindungenNight],
+});
+
 export default [
   dataLayer,
   netzkarteLayer,

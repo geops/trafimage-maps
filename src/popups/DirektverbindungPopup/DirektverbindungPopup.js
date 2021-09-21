@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,7 +19,15 @@ const useStyles = makeStyles({
       marginRight: 5,
     },
   },
-  title: {
+  titleWrapper: {
+    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  titleIcon: {
+    marginRight: 10,
+  },
+  fromTo: {
     fontWeight: 'bold',
     marginBottom: 10,
     display: 'flex',
@@ -41,9 +50,27 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-// const renderTitle = (feat, t) => {
-//   return ''itle';
-// };
+const DVPopupTitle = ({ feature }) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.titleWrapper}>
+      {feature.get('nachtverbindung') ? (
+        <img
+          src="https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg"
+          alt="icon"
+          className={classes.titleIcon}
+        />
+      ) : (
+        <img
+          src="https://icons.app.sbb.ch/kom/train-profile-small.svg"
+          alt="icon"
+          className={classes.titleIcon}
+        />
+      )}
+      {feature.get('name')}
+    </div>
+  );
+};
 
 const DirektverbindungPopup = ({ feature }) => {
   const classes = useStyles();
@@ -53,10 +80,12 @@ const DirektverbindungPopup = ({ feature }) => {
     end_station_name: end,
     vias,
   } = feature.getProperties();
+
+  // console.log(JSON.parse(vias));
   return (
     <div className={classes.container}>
-      <div className={classes.title}>
-        {start} --&gt; {end}
+      <div className={classes.fromTo}>
+        {start}-{end}
       </div>
       <br />
       <div>Via:</div>
@@ -70,6 +99,6 @@ const DirektverbindungPopup = ({ feature }) => {
   );
 };
 
-// DirektverbindungPopup.renderTitle = (feat, t) => renderTitle(feat, t);
+DirektverbindungPopup.renderTitle = (feat) => <DVPopupTitle feature={feat} />;
 DirektverbindungPopup.propTypes = propTypes;
 export default DirektverbindungPopup;

@@ -46,9 +46,8 @@ import defaultBaseLayers, {
   netzentwicklungStrategischLayer,
   netzentwicklungProgrammManagerLayer,
   netzentwicklungSkPlanerLayer,
+  direktverbindungenLayer,
   direktverbindungenDataLayer,
-  direktverbindungenDay,
-  direktverbindungenNight,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -82,6 +81,8 @@ export const netzkarte = {
     gemeindegrenzen,
     buslines,
     bahnhofplaene,
+    direktverbindungenDataLayer,
+    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
@@ -350,11 +351,7 @@ export const direktverbindungen = {
   key: 'ch.sbb.direktverbindungen',
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    direktverbindungenDataLayer,
-    direktverbindungenDay,
-    direktverbindungenNight,
-  ],
+  layers: [direktverbindungenLayer],
   projection: 'EPSG:3857',
   // layerInfoComponent: 'NetzentwicklungTopicInfo',
   searches: defaultSearches,
@@ -370,7 +367,7 @@ const topics = {
     infrastruktur,
     regionenkartePublic,
     netzentwicklung,
-    direktverbindungen,
+    // direktverbindungen,
     showcases,
   ],
   stelen: [netzkarteStelen],
