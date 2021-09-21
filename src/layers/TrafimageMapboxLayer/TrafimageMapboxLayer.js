@@ -1,5 +1,5 @@
 import { MapboxLayer } from 'mobility-toolbox-js/ol';
-import getMapboxMapCopyrights from 'mobility-toolbox-js/common/utils/getMapboxMapCopyrights';
+import { getMapboxMapCopyrights } from 'mobility-toolbox-js/common/utils';
 import { toLonLat } from 'ol/proj';
 
 const applyFilters = (mbStyle, filters) => {
@@ -155,7 +155,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
       return Promise.resolve({ coordinate, features: [], layer: this });
     }
 
-    const pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+    let pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+
+    if (this.hitTolerance) {
+      const { x, y } = pixel;
+      pixel = [
+        { x: x - this.hitTolerance, y: y - this.hitTolerance },
+        { x: x + this.hitTolerance, y: y + this.hitTolerance },
+      ];
+    }
 
     // At this point we get GeoJSON Mapbox feature, we transform it to an OpenLayers
     // feature to be consistent with other layers.
