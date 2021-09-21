@@ -90,10 +90,8 @@ function Av({ layer, feature, onChangeRole }) {
         undefined,
         `?${qs.stringify(parsed.query)}`,
       );
-      onChangeRole(role);
-    } else if (!isIntern) {
-      onChangeRole(role);
     }
+    onChangeRole(role);
   }, [parsed, role, onChangeRole, isIntern]);
 
   return (
