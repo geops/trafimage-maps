@@ -81,8 +81,6 @@ export const netzkarte = {
     gemeindegrenzen,
     buslines,
     bahnhofplaene,
-    direktverbindungenDataLayer,
-    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
@@ -228,6 +226,8 @@ export const infrastruktur = {
     gewässer,
     betriebsRegionen,
     kilometrageLayer,
+    direktverbindungenDataLayer,
+    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
@@ -346,17 +346,6 @@ export const netzentwicklung = {
   searches: defaultSearches,
 };
 
-export const direktverbindungen = {
-  name: 'ch.sbb.direktverbindungen',
-  key: 'ch.sbb.direktverbindungen',
-  maxZoom: 13,
-  elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [direktverbindungenLayer],
-  projection: 'EPSG:3857',
-  // layerInfoComponent: 'NetzentwicklungTopicInfo',
-  searches: defaultSearches,
-};
-
 const topics = {
   wkp: [
     netzkarte,
@@ -367,7 +356,6 @@ const topics = {
     infrastruktur,
     regionenkartePublic,
     netzentwicklung,
-    // direktverbindungen,
     showcases,
   ],
   stelen: [netzkarteStelen],

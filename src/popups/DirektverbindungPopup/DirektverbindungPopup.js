@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
@@ -53,7 +53,7 @@ const DVPopupTitle = ({ feature }) => {
   );
 };
 
-const DirektverbindungPopup = ({ feature }) => {
+const DirektverbindungPopup = ({ feature, layer }) => {
   const { i18n, t } = useTranslation();
   const classes = useStyles();
 
@@ -70,11 +70,19 @@ const DirektverbindungPopup = ({ feature }) => {
     (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
   );
 
+  useEffect(() => {
+    if (layer.visible) {
+      layer.select([feature]);
+      layer.siblingLayer.select();
+    }
+    return () => layer.select();
+  }, [layer, feature]);
+
   return (
     <div className={classes.container}>
       <div className={`${classes.routeStops} ${classes.row}`}>
         <div className={classes.fromTo}>
-          {start}-{end}
+          {start}–{end}
         </div>
         {switchVias.length ? (
           <div>{`via ${switchVias.map((via) => ` ${via.station_name}`)}`}</div>
