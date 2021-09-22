@@ -98,6 +98,9 @@
   "ch.sbb.construction.unterhalt.strecke-desc": "This shows you maintenance projects that SBB is carrying out on railway lines, for example renovating tunnels or replacing contact lines between stations.",
   "ch.sbb.construction.unterhalt.uebrige": "Other locations",
   "ch.sbb.construction.unterhalt.uebrige-desc": "This shows you maintenance projects that SBB is carrying out elsewhere other than on lines or at stations, for example replacing an existing rail power transmission line or hydro power plant.",
+  "ch.sbb.direktverbindungen": " Direct connections",
+  "ch.sbb.direktverbindungen.day": "Day",
+  "ch.sbb.direktverbindungen.night": "Night",
   "ch.sbb.handicap": "Persons with reduced mobility",
   "ch.sbb.infrastruktur": "Network map railway infrastructure",
   "ch.sbb.infrastruktur.betriebspunkte": "Operating points",
@@ -315,6 +318,7 @@
   "liniensegment": "Line segment",
   "liniensegment_plural": "Line segments",
   "Link Übersichtsliste Geografie im Produkte-eSpace VM HR-BIL": "Link to geographical overview list in the VM HR-BIL product eSpace",
+  "Link zum Angebot": "Link to the offer",
   "Link zum Editieren": "Link to edit",
   "Link zum Teilen": "Link to share",
   "login_url": "http://www.sbb.ch/en/meta/login.html",
@@ -331,6 +335,7 @@
   "nach": "to",
   "Nach:": "To:",
   "Nachricht": "Message",
+  "Nachtverbindung": "Night connection",
   "Nationalpark": "National park",
   "Naturerlebnispark": "Nature discovery park",
   "Netzentwickler strategisch": "Network developer Strategic",
@@ -403,6 +408,7 @@
   "Suchergebnisse sind verfügbar. Verwenden Sie die TAB-Taste um zu navigieren.": "Search results are avaiable. Use the tab key to navigate.",
   "Suchtext löschen": "Clear search text",
   "Süd": "South",
+  "Tagverbindung": "Day connection",
   "taktile_sicherheitslinien": "Tactile safety line",
   "Teilen": "Share",
   "Themen": "Topics",
@@ -461,8 +467,5 @@
   "Zone": "Zone",
   "Zugtracker": "Train tracker",
   "zurück": "previous",
-  "Zusätzliche Informationen": "Additional information",
-  "ch.sbb.direktverbindungen": " Direct connection",
-  "ch.sbb.direktverbindungen.day": "Day",
-  "ch.sbb.direktverbindungen.night": "Night"
+  "Zusätzliche Informationen": "Additional information"
 }
