@@ -109,15 +109,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       }
     }
   }
-
-  getFeatureInfoAtCoordinate(coordinate) {
-    return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
-      return {
-        ...data,
-        siblingLayer: this.siblingLayer,
-      };
-    });
-  }
 }
 
 export default DirektverbindungenLayer;
