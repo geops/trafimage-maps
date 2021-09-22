@@ -2,22 +2,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
+import Link from '../../components/Link';
 
 const useStyles = makeStyles({
   container: {
     padding: 8,
   },
   row: {
-    minWidth: 250,
-    alignItems: 'center',
-    display: 'flex',
-
-    '& img': {
-      height: 24,
-      width: 24,
-      marginRight: 5,
-    },
+    margin: '8px 0',
   },
   titleWrapper: {
     padding: 0,
@@ -27,22 +21,13 @@ const useStyles = makeStyles({
   titleIcon: {
     marginRight: 10,
   },
-  fromTo: {
+  routeStops: {
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  fromTo: {
     display: 'flex',
     alignItems: 'center',
-  },
-  vias: {
-    maxHeight: 150,
-    overflowY: 'auto',
-  },
-  card: {
-    flex: 1,
-    border: '1px solid #ddd',
-    padding: 8,
-    margin: 8,
-    borderRadius: 2,
   },
 });
 
@@ -69,28 +54,37 @@ const DVPopupTitle = ({ feature }) => {
 };
 
 const DirektverbindungPopup = ({ feature }) => {
+  const { i18n, t } = useTranslation();
   const classes = useStyles();
-  // console.log(feature.getProperties());
+
   const {
     start_station_name: start,
     end_station_name: end,
     vias,
+    nachtverbindung: night,
+    [`description_${i18n.language}`]: description,
+    [`url_${i18n.language}`]: link,
   } = feature.getProperties();
 
   const switchVias = JSON.parse(vias).filter(
     (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
   );
-  // console.log(switchVias);
+
   return (
     <div className={classes.container}>
-      <div className={classes.fromTo}>
-        {start}-{end}
+      <div className={`${classes.routeStops} ${classes.row}`}>
+        <div className={classes.fromTo}>
+          {start}-{end}
+        </div>
+        {switchVias.length ? (
+          <div>{`via ${switchVias.map((via) => ` ${via.station_name}`)}`}</div>
+        ) : null}
       </div>
-      {switchVias.length ? (
-        <div>{`via: ${switchVias.map((via, idx, array) => {
-          return `${via.station_name}${idx + 1 !== array.length ? ',' : null}`;
-        })}`}</div>
-      ) : null}
+      <div className={classes.row}>
+        <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
+      </div>
+      {description && <div className={classes.row}>{description}</div>}
+      {link && <Link href={link}>{t('Link zum Angebot')}</Link>}
     </div>
   );
 };
