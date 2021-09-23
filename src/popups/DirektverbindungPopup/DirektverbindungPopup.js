@@ -73,7 +73,6 @@ const DirektverbindungPopup = ({ feature, layer }) => {
   useEffect(() => {
     if (layer.visible) {
       layer.select([feature]);
-      layer.siblingLayer.select();
     }
     return () => layer.select();
   }, [layer, feature]);

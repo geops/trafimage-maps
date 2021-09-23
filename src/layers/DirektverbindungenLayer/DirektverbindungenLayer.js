@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import MapboxStyleLayer from '../MapboxStyleLayer';
 
-const VIAPOINTSLAYER_KEY = 'ch.sbb.direktverbindungen.points';
+const VIAPOINTSLAYER_KEY = 'dv_points';
 /**
  * Layer for visualizing station levels.
  *
@@ -12,64 +12,19 @@ const VIAPOINTSLAYER_KEY = 'ch.sbb.direktverbindungen.points';
  */
 class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const routeType = options.routeType === 'night' ? 'night' : 'day';
-    const viaPointsLayerId = `${VIAPOINTSLAYER_KEY}.${routeType}`;
-    super({
-      styleLayers: [
-        {
-          id: viaPointsLayerId,
-          type: 'circle',
-          source: 'ch.sbb.direktverbindungen',
-          'source-layer': 'ch.sbb.direktverbindungen_points',
-          metadata: {
-            'trafimage.filter': 'via_points',
-          },
-          paint: {
-            'circle-radius': 4,
-            'circle-stroke-width': 2,
-            'circle-stroke-color':
-              routeType === 'night'
-                ? 'rgba(5, 21, 156, 1)'
-                : 'rgba(9, 194, 242, 1)',
-            'circle-color': 'rgb(255,255,255)',
-          },
-          layout: {
-            visibility: 'none',
-          },
-        },
-      ],
-      ...options,
-    });
-
-    this.viaPointsLayerId = viaPointsLayerId;
-    this.routeType = routeType;
+    super(options);
+    this.routeType = options.routeType === 'night' ? 'night' : 'day';
     this.styleLayersFilter = (layer) => {
       return (
         layer.metadata &&
         layer.metadata['trafimage.filter'] ===
-          `lines_${options.routeType === 'night' ? 'night' : 'day'}`
+          `lines_${this.routeType === 'night' ? 'night' : 'day'}`
       );
     };
-    this.setHoverPaint = this.setHoverPaint.bind(this);
-  }
-
-  setHoverPaint() {
-    const { mbMap } = this.mapboxLayer;
-    mbMap.setPaintProperty(`lines_${this.routeType}`, 'line-width', [
-      'case',
-      ['boolean', ['feature-state', 'hover'], false],
-      6,
-      this.routeType === 'night' ? 2 : 4,
-    ]);
-    mbMap.setPaintProperty(`lines_${this.routeType}`, 'line-dasharray', [1]);
-  }
-
-  init(map) {
-    super.init(map);
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.on('load', this.setHoverPaint);
-    }
+    this.featureInfoFilter = (feature) => {
+      const mapboxFeature = feature.get('mapboxFeature');
+      return mapboxFeature && !/outline/.test(mapboxFeature.layer.id);
+    };
   }
 
   setVisible(
@@ -89,6 +44,21 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     );
   }
 
+  init(map) {
+    super.init(map);
+    const { mbMap } = this.mapboxLayer;
+    if (mbMap) {
+      mbMap.on('load', () =>
+        mbMap.setPaintProperty(`dv_lines_${this.routeType}`, 'line-width', [
+          'case',
+          ['boolean', ['feature-state', 'hover'], false],
+          8,
+          2,
+        ]),
+      );
+    }
+  }
+
   select(features = []) {
     const { mbMap } = this.mapboxLayer;
     super.select(features);
@@ -96,16 +66,23 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (mbMap) {
       if (this.selectedFeatures.length) {
         this.selectedFeatures.forEach((feature) => {
-          mbMap.setFilter(this.viaPointsLayerId, [
+          mbMap.setFilter(VIAPOINTSLAYER_KEY, [
             '==',
             ['get', 'route_id'],
             feature.get('id'),
           ]);
         });
-        mbMap.setLayoutProperty(this.viaPointsLayerId, 'visibility', 'visible');
+        mbMap.setLayoutProperty(VIAPOINTSLAYER_KEY, 'visibility', 'visible');
+        mbMap.setPaintProperty(
+          VIAPOINTSLAYER_KEY,
+          'circle-stroke-color',
+          this.routeType === 'night'
+            ? 'rgba(5, 21, 156, 1)'
+            : 'rgba(9, 194, 242, 1)',
+        );
       } else {
-        mbMap.setFilter(this.viaPointsLayerId, null);
-        mbMap.setLayoutProperty(this.viaPointsLayerId, 'visibility', 'none');
+        mbMap.setFilter(VIAPOINTSLAYER_KEY, null);
+        mbMap.setLayoutProperty(VIAPOINTSLAYER_KEY, 'visibility', 'none');
       }
     }
   }

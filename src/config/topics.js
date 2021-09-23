@@ -47,7 +47,6 @@ import defaultBaseLayers, {
   netzentwicklungProgrammManagerLayer,
   netzentwicklungSkPlanerLayer,
   direktverbindungenLayer,
-  direktverbindungenDataLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -81,6 +80,7 @@ export const netzkarte = {
     gemeindegrenzen,
     buslines,
     bahnhofplaene,
+    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
@@ -226,8 +226,6 @@ export const infrastruktur = {
     gewässer,
     betriebsRegionen,
     kilometrageLayer,
-    direktverbindungenDataLayer,
-    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',

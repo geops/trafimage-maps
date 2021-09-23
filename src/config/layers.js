@@ -49,7 +49,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
@@ -156,7 +156,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
@@ -1472,23 +1472,9 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
-export const direktverbindungenDataLayer = new TrafimageMapboxLayer({
-  name: `${DIREKTVERBINDUNGEN_KEY}.data`,
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
-  isBaseLayer: false,
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1,
-  properties: {
-    hideInLegend: true,
-  },
-});
-
 export const direktverbindungenDay = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.day`,
-  mapboxLayer: direktverbindungenDataLayer,
-  visible: true,
+  mapboxLayer: dataLayer,
   properties: {
     popupComponent: 'DirektverbindungPopup',
   },
@@ -1496,20 +1482,15 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
 
 export const direktverbindungenNight = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.night`,
-  mapboxLayer: direktverbindungenDataLayer,
+  mapboxLayer: dataLayer,
   routeType: 'night',
-  visible: true,
   properties: {
     popupComponent: 'DirektverbindungPopup',
   },
 });
 
-direktverbindungenNight.siblingLayer = direktverbindungenDay;
-direktverbindungenDay.siblingLayer = direktverbindungenNight;
-
 export const direktverbindungenLayer = new Layer({
   name: DIREKTVERBINDUNGEN_KEY,
-  visible: true,
   children: [direktverbindungenDay, direktverbindungenNight],
 });
 
