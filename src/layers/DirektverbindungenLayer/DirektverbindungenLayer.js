@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import MapboxStyleLayer from '../MapboxStyleLayer';
 
-const VIAPOINTSLAYER_KEY = 'dv_points';
+const VIAPOINTSLAYER_ID = 'dv_points';
 /**
  * Layer for visualizing station levels.
  *
@@ -44,20 +44,20 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     );
   }
 
-  init(map) {
-    super.init(map);
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.on('load', () =>
-        mbMap.setPaintProperty(`dv_lines_${this.routeType}`, 'line-width', [
-          'case',
-          ['boolean', ['feature-state', 'hover'], false],
-          8,
-          2,
-        ]),
-      );
-    }
-  }
+  // init(map) {
+  //   super.init(map);
+  //   const { mbMap } = this.mapboxLayer;
+  //   if (mbMap) {
+  //     mbMap.on('load', () =>
+  //       mbMap.setPaintProperty(`dv_lines_${this.routeType}`, 'line-width', [
+  //         'case',
+  //         ['boolean', ['feature-state', 'hover'], false],
+  //         8,
+  //         2,
+  //       ]),
+  //     );
+  //   }
+  // }
 
   select(features = []) {
     const { mbMap } = this.mapboxLayer;
@@ -66,23 +66,23 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (mbMap) {
       if (this.selectedFeatures.length) {
         this.selectedFeatures.forEach((feature) => {
-          mbMap.setFilter(VIAPOINTSLAYER_KEY, [
+          mbMap.setFilter(VIAPOINTSLAYER_ID, [
             '==',
-            ['get', 'route_id'],
+            ['get', 'direktverbindung_id'],
             feature.get('id'),
           ]);
         });
-        mbMap.setLayoutProperty(VIAPOINTSLAYER_KEY, 'visibility', 'visible');
+        mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
         mbMap.setPaintProperty(
-          VIAPOINTSLAYER_KEY,
+          VIAPOINTSLAYER_ID,
           'circle-stroke-color',
           this.routeType === 'night'
             ? 'rgba(5, 21, 156, 1)'
             : 'rgba(9, 194, 242, 1)',
         );
       } else {
-        mbMap.setFilter(VIAPOINTSLAYER_KEY, null);
-        mbMap.setLayoutProperty(VIAPOINTSLAYER_KEY, 'visibility', 'none');
+        mbMap.setFilter(VIAPOINTSLAYER_ID, null);
+        mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'none');
       }
     }
   }
