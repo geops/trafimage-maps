@@ -44,21 +44,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     );
   }
 
-  // init(map) {
-  //   super.init(map);
-  //   const { mbMap } = this.mapboxLayer;
-  //   if (mbMap) {
-  //     mbMap.on('load', () =>
-  //       mbMap.setPaintProperty(`dv_lines_${this.routeType}`, 'line-width', [
-  //         'case',
-  //         ['boolean', ['feature-state', 'hover'], false],
-  //         8,
-  //         2,
-  //       ]),
-  //     );
-  //   }
-  // }
-
   select(features = []) {
     const { mbMap } = this.mapboxLayer;
     super.select(features);
