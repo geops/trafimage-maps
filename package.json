@@ -3,8 +3,8 @@
   "description": "trafimage-maps web component",
   "version": "1.5.44",
   "private": true,
-  "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
+  "main": "build/bundle.js",
   "dependencies": {
     "@datapunt/matomo-tracker-react": "0.5.1",
     "@geops/create-react-web-component": "2.0.19",
@@ -192,7 +192,7 @@
       "yarn test --bail --findRelatedTests"
     ],
     "package.json": [
-      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop private --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts"
+      "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop private --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts",
     ],
     "src/**/*.{scss}": [
       "stylelint --fix"
