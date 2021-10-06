@@ -1,5 +1,3 @@
-#
-
 Example how to load 'trafimage-maps' with a specific topic without using React.
 
 ```js
