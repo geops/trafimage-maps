@@ -195,7 +195,8 @@
       "stylelint --fix"
     ],
     "package.json": [
-      "yarn fixpack"
+      "yarn fixpack",
+      "git add"
     ]
   },
   "prettier": {
