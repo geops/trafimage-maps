@@ -149,9 +149,12 @@ export const generateExtraData = (layerService, exportNorthArrow) => {
               'text/html',
             );
             const copyrightArray = [];
-            parsed
-              .getElementsByTagName('a')
-              .forEach((copyright) => copyrightArray.push(copyright.text));
+            const coll = parsed.getElementsByTagName('a');
+
+            for (let i = 0; i < coll.length; i += 1) {
+              const copyright = coll[i];
+              copyrightArray.push(copyright.text);
+            }
             return copyrightArray;
           });
         const unique = Array.from(new Set(copyrights));

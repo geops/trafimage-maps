@@ -16,8 +16,17 @@ class StopFinder extends Search {
   }
 
   search(value) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     return fetch(
       `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      {
+        signal,
+      },
     )
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)

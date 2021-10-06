@@ -100,7 +100,16 @@ class Lines extends Search {
     }
     const baseUrl =
       process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-    return fetch(`${baseUrl}/search/lines?${params}`)
+
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
+    return fetch(`${baseUrl}/search/lines?${params}`, {
+      signal,
+    })
       .then((data) => data.json())
       .then((featureCollection) => {
         return featureCollection.features;
