@@ -193,6 +193,9 @@
     ],
     "src/**/*.scss": [
       "stylelint --fix"
+    ],
+    "package.json": [
+      "yarn fixpack"
     ]
   },
   "prettier": {
