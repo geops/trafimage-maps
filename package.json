@@ -170,13 +170,6 @@
       }
     }
   },
-  "exports": {
-    ".": "./index.js",
-    "./layers": "./layers/index.js",
-    "./searches": "./searches/index.js",
-    "./popups": "./popups/index.js",
-    "./layerInfos/": "./layerInfos/index.js"
-  },
   "jest": {
     "coverageReporters": [
       "text",
