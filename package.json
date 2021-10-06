@@ -184,15 +184,18 @@
   },
   "lint-staged": {
     "src/lang/*.json": [
-      "yarn sort"
+      "yarn sort",
+      "git add"
     ],
     "(src|__mocks__)/**/*.js": [
       "eslint --fix",
       "prettier --write",
+      "git add",
       "yarn test --bail --findRelatedTests"
     ],
     "src/**/*.scss": [
-      "stylelint --fix"
+      "stylelint --fix",
+      "git add"
     ],
     "package.json": [
       "yarn fixpack",
