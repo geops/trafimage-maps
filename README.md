@@ -60,4 +60,5 @@ react-styleguidist@11.0.8:  We can't update after `11.0.8`. `10.0.9` and `10.0.1
 react@16.14.0:  React 17 is not well supported by `material-ui`. In the tarifverbundkarte topic, the select box used to update the import format crashes the app when we click on it.
 
 fixpack@3.0.6: Fixpack `4.0.0` returns an exit code of 1 everytime, so it breaks the lint-staged hook. See [bug](https://github.com/HenrikJoreteg/fixpack/issues/50).
-  
+
+ol@6.6.1: The version `6.7.0` has some dependencies for the module `geotiff` like `txml` that the compiler can't find.
