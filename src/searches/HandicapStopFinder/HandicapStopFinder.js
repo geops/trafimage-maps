@@ -57,7 +57,10 @@ class HandicapStopFinder extends Search {
         this.onDataEvent();
       } else {
         mbMap.once('idle', () => {
-          if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
+          if (
+            mbMap.getSource('ch.sbb.handicap') &&
+            mbMap.isSourceLoaded('ch.sbb.handicap')
+          ) {
             this.onDataEvent();
           } else {
             // We can't rely on sourcedata because isSourceLoaded returns false.
@@ -72,7 +75,10 @@ class HandicapStopFinder extends Search {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
 
-    if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
+    if (
+      mbMap.getSource('ch.sbb.handicap') &&
+      mbMap.isSourceLoaded('ch.sbb.handicap')
+    ) {
       mbMap.off('idle', this.onDataEvent);
     } else {
       return;
