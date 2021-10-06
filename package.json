@@ -112,7 +112,6 @@
     "link2": "cmdToAdd=$(node ./scripts/read-pkg-json.js add) && $cmdToAdd && yarn build && cmdToRemove=$(node ./scripts/read-pkg-json.js remove) && $cmdToRemove && cd build && yarn link",
     "lint": "eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
     "prebuild": "rm -rf build/",
-    "prepare": "husky install",
     "publish:alpha": "yarn publish:public --tag alpha",
     "publish:beta": "yarn publish:public --tag beta",
     "publish:public": "yarn version && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version",
