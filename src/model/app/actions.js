@@ -109,6 +109,7 @@ export const setDrawEditLink = (data) => ({
 
 /**
  * This function updates the content of a shorten url in backend.
+ * @ignore
  */
 let abortController;
 let abortController2;

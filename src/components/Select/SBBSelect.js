@@ -31,6 +31,7 @@ const SBBSelect = (props) => {
            * The MUI width calculation fails because of the border.
            * The element is always 2 x borderWidth too wide.
            * With this hack I reduce the width to make it fit.
+           * @ignore
            */
           const menuEl = el;
           menuEl.style.minWidth = `${

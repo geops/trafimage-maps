@@ -141,6 +141,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
    * @param {Object} options A [mapboxgl.Map#queryrenderedfeatures](https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures) options parameter.
    * @returns {Promise<Object>} Promise with features, layer and coordinate
    *  or null if no feature was hit.
+   * @ignore
    */
   async getFeatureInfoAtCoordinate(coordinate, options) {
     // Ignore the getFeatureInfo until the mapbox map is loaded
@@ -256,6 +257,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
    * Create a copy of the TrafimageMapboxLayer.
    * @param {Object} newOptions Options to override
    * @returns {TrafimageMapboxLayer} A TrafimageMapboxLayer
+   * @ignore
    */
   clone(newOptions) {
     return new TrafimageMapboxLayer({ ...this.options, ...newOptions });
