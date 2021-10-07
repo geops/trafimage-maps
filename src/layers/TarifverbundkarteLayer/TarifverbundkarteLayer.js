@@ -95,6 +95,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       /**
        * If multiple zones present, the zones are intersected with one another
        * Then they are intersected with the municipality feature separately for readability
+       * @ignore
        */
       const zoneFeatureArray = zones.map((zone) => {
         return new Feature(zone.geometry);
@@ -139,6 +140,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       /**
        * Signals to the popup (if there is one open) that a feature was clicked.
        * Used for popup close handling
+       * @ignore
        */
       this.set('clicked', true);
 
@@ -168,6 +170,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
        * We omit getFeatureInfo if:
        * - There is no feature in verbundskarte layer (in some places the other two layers overlap with overflow)
        * - There is a feature in verbundskarte layer, but no zones and no z-pass features
+       * @ignore
        */
       if (!municipalityFeature) {
         featureInfo.features = [];

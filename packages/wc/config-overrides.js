@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /*!
  * Caution! You should not edit this file.
  *
@@ -21,35 +22,47 @@ module.exports = function override(config, env) {
   return overridenConfig;
 };
 
-const overrideModule = module => {
-  const cssRuleIndex = module.rules[2].oneOf.findIndex(rule =>
+const overrideModule = (module) => {
+  // We override css and scss rules to generate a string css instead of an object.
+  // See the first <style> tag in the web-component.
+  const ruleIndex = 1;
+  const cssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.css'.match(rule.test),
   );
-  const scssRuleIndex = module.rules[2].oneOf.findIndex(rule =>
+  const scssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.scss'.match(rule.test),
   );
   if (cssRuleIndex !== -1) {
-    module.rules[2].oneOf[cssRuleIndex].use[0] = {
+    module.rules[ruleIndex].oneOf[cssRuleIndex].use[0] = {
       loader: 'to-string-loader',
     };
-    module.rules[2].oneOf[cssRuleIndex].use[1] = {
+    module.rules[ruleIndex].oneOf[cssRuleIndex].use[1] = {
       loader: 'css-loader',
+      options: {
+        // Needed until a new version of to-string-loader.
+        // See https://github.com/gajus/to-string-loader/pull/20 and https://github.com/gajus/to-string-loader/issues/21
+        esModule: false,
+      },
     };
   }
-
   if (scssRuleIndex !== -1) {
-    module.rules[2].oneOf[scssRuleIndex].use[0] = {
+    module.rules[ruleIndex].oneOf[scssRuleIndex].use[0] = {
       loader: 'to-string-loader',
     };
-    module.rules[2].oneOf[scssRuleIndex].use[1] = {
+    module.rules[ruleIndex].oneOf[scssRuleIndex].use[1] = {
       loader: 'css-loader',
+      options: {
+        // Needed until a new version of to-string-loader
+        // See https://github.com/gajus/to-string-loader/pull/20 and https://github.com/gajus/to-string-loader/issues/21
+        esModule: false,
+      },
     };
   }
 
   return module;
 };
 
-const overrideOutput = output => {
+const overrideOutput = (output) => {
   const { checkFilename, ...newOutput } = output;
 
   return {
@@ -61,8 +74,8 @@ const overrideOutput = output => {
 const overrideOptimization = (optimization, env) => {
   const newOptions = optimization.minimizer[0].options;
 
-  //newOptions.sourceMap = env === 'development';
-  //optimization.minimizer[0].options = newOptions;
+  // newOptions.sourceMap = env === 'development';
+  // optimization.minimizer[0].options = newOptions;
 
   return {
     ...optimization,
@@ -74,16 +87,16 @@ const overrideOptimization = (optimization, env) => {
 const overridePlugins = (plugins, env) => {
   plugins[0].options.inject = 'head';
 
-  /*plugins.push(
+  /* plugins.push(
     new EventHooksPlugin({
       done: new PromiseTask(() => copyBundleScript(env)),
     }),
-  );*/
+  ); */
 
   return plugins;
 };
 
-const copyBundleScript = async env => {
+const copyBundleScript = async (env) => {
   if (env !== 'production') {
     return;
   }
@@ -92,9 +105,9 @@ const copyBundleScript = async env => {
     return;
   }
 
-  fs.readdirSync('build').forEach(file => {
+  fs.readdirSync('build').forEach((file) => {
     if (file !== 'bundle.js') {
-      //rimraf.sync(`build/${file}`);
+      // rimraf.sync(`build/${file}`);
     }
   });
 };

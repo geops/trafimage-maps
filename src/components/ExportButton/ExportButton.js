@@ -102,6 +102,7 @@ function ExportButton({
              * If changes in the legend SVG are necessary, make sure the values to insert are maintained
              * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
              * without major alterations)
+             * @ignore
              */
             // Fetch local svg
             const svgString = await fetch(overlayImageUrl).then((response) =>

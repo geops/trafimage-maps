@@ -12,6 +12,7 @@
  * calculate the maximum canvas size to then store it in local storage in order to avoid having
  * to recalculate the maximum canvas every time the ExportDialog is mounted (creates a short,
  * slight lag while calculating)
+ * @ignore
  */
 
 const log = false;

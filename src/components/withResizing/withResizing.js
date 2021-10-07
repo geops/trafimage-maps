@@ -61,7 +61,8 @@ function withResizing(MenuToBeResized) {
         this.bodyElementRef.current.ref.current
       ) {
         const mapBottom = map.getTarget().getBoundingClientRect().bottom;
-        const elemRect = this.bodyElementRef.current.ref.current.getBoundingClientRect();
+        const elemRect =
+          this.bodyElementRef.current.ref.current.getBoundingClientRect();
         menuHeight = mapBottom - elemRect.top - 35;
       }
 

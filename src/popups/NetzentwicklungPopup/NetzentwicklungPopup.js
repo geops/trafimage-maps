@@ -87,10 +87,8 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
   const rollen = JSON.parse(feature.get('rollen') || '[]').filter((r) =>
     ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
-  const regionRollen = JSON.parse(
-    feature.get('region_rollen') || '[]',
-  ).filter((r) =>
-    ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
+  const regionRollen = JSON.parse(feature.get('region_rollen') || '[]').filter(
+    (r) => ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
   return (
     <>

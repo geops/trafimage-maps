@@ -13,10 +13,20 @@ class Municipalities extends Search {
   search(value) {
     const baseUrl =
       process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
+
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     return fetch(
       `${baseUrl}/search/municipalities?query=${encodeURIComponent(
         value,
       )}&utf8=%E2%9C%93`,
+      {
+        signal,
+      },
     )
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)

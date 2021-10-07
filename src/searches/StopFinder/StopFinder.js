@@ -16,8 +16,17 @@ class StopFinder extends Search {
   }
 
   search(value) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     return fetch(
       `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      {
+        signal,
+      },
     )
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
@@ -46,7 +55,7 @@ class StopFinder extends Search {
         this.onDataEvent();
       } else {
         mbMap.once('idle', () => {
-          if (mbMap.isSourceLoaded('stations')) {
+          if (mbMap.getSource('stations') && mbMap.isSourceLoaded('stations')) {
             this.onDataEvent();
           } else {
             // We can't rely on sourcedata because isSourceLoaded returns false.
@@ -61,7 +70,7 @@ class StopFinder extends Search {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.netzkarte.data');
 
-    if (mbMap.isSourceLoaded('stations')) {
+    if (mbMap.getSource('stations') && mbMap.isSourceLoaded('stations')) {
       mbMap.off('idle', this.onDataEvent);
     } else {
       return;

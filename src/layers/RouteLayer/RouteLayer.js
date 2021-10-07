@@ -298,9 +298,8 @@ class RouteLayer extends CasaLayer {
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
-        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } = routes[
-          i
-        ].sequences[j];
+        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } =
+          routes[i].sequences[j];
         const nextMot =
           j === routes[i].sequences.length - 1
             ? null
