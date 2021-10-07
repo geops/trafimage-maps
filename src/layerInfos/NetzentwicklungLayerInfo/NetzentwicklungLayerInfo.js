@@ -35,7 +35,7 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
     fetch(`${cartaroURL}netzentwicklung/region/items/`)
       .then((res) => res.json())
       .then((res) => setRegions(res));
-  });
+  }, []);
 
   return (
     <>
