@@ -62,3 +62,5 @@ react@16.14.0:  React 17 is not well supported by `material-ui`. In the tarifver
 fixpack@3.0.6: Fixpack `4.0.0` returns an exit code of 1 everytime, so it breaks the lint-staged hook. See [bug](https://github.com/HenrikJoreteg/fixpack/issues/50).
 
 ol@6.6.1: The version `6.7.0` has some dependencies for the module `geotiff` like `txml` that the compiler can't find.
+
+babel-preset-react-app@9: The version `10.0.0` doesn't compile the same way the files in the `build/es` folder, it removed the option `modules: false` for the preset-env. That double the size of the code when we compile in a parent project.
