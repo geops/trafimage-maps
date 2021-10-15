@@ -314,6 +314,8 @@ class TrafimageMaps extends React.PureComponent {
       });
       if (requireConsent) {
         this.matomo.pushInstruction('requireConsent');
+      } else {
+        this.matomo.trackPageView();
       }
     }
   }
