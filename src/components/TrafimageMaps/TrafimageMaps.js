@@ -157,6 +157,18 @@ const propTypes = {
   enableTracking: PropTypes.bool,
 
   /**
+   * True if the tracker has to wait the user consent, see consentGiven property
+   * @private
+   */
+  requireConsent: PropTypes.bool,
+
+  /**
+   * True if the consent has been given, work only with requireConsent=true.
+   * @private
+   */
+  consentGiven: PropTypes.bool,
+
+  /**
    * Disable use fo cookies for analytics.
    * @private
    */
@@ -200,6 +212,8 @@ const defaultProps = {
   language: 'de',
   enableTracking: false,
   disableCookies: false,
+  requireConsent: false,
+  consentGiven: false,
   activeTopicKey: null,
   permissionInfos: null,
 };
@@ -232,6 +246,7 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      requireConsent,
     } = this.props;
 
     if (zoom) {
@@ -297,7 +312,9 @@ class TrafimageMaps extends React.PureComponent {
           disableCookies,
         },
       });
-      this.matomo.trackPageView();
+      if (requireConsent) {
+        this.matomo.pushInstruction('requireConsent');
+      }
     }
   }
 
@@ -308,6 +325,8 @@ class TrafimageMaps extends React.PureComponent {
       cartaroUrl,
       enableTracking,
       disableCookies,
+      consentGiven,
+      requireConsent,
       maxExtent,
       mapsetUrl,
       shortenerUrl,
@@ -348,13 +367,29 @@ class TrafimageMaps extends React.PureComponent {
 
     if (
       this.matomo &&
+      enableTracking &&
       disableCookies &&
-      disableCookies !== !prevProps.disableCookies
+      disableCookies !== prevProps.disableCookies
     ) {
       this.matomo.pushInstruction('disableCookies');
     }
 
-    if (this.matomo && !prevProps.enableTracking && enableTracking) {
+    if (
+      this.matomo &&
+      enableTracking &&
+      consentGiven &&
+      consentGiven !== prevProps.consentGiven
+    ) {
+      this.matomo.pushInstruction('setConsentGiven');
+      this.matomo.trackPageView();
+    }
+
+    if (
+      this.matomo &&
+      !requireConsent &&
+      !prevProps.enableTracking &&
+      enableTracking
+    ) {
       this.matomo.trackPageView();
     }
 
