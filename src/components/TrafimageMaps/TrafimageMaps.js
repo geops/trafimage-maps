@@ -306,15 +306,13 @@ class TrafimageMaps extends React.PureComponent {
         urlBase: REACT_APP_MATOMO_URL_BASE,
         siteId: REACT_APP_MATOMO_SITE_ID,
         trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
-        configurations: {
-          // optional, default value: {}
-          // any valid matomo configuration, all below are optional
-          disableCookies,
-        },
       });
       if (requireConsent) {
         this.matomo.pushInstruction('requireConsent');
       } else {
+        if (disableCookies) {
+          this.matomo.pushInstruction('disableCookies');
+        }
         this.matomo.trackPageView();
       }
     }

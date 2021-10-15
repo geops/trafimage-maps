@@ -229,6 +229,7 @@ const WebComponent = (props) => {
           maxExtent={extentArray}
           center={arrayCenter}
           enableTracking={enableTracking}
+          disableCookies={false}
         />
       </div>
     </Styled>
