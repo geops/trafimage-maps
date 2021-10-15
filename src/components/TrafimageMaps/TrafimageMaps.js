@@ -157,6 +157,12 @@ const propTypes = {
   enableTracking: PropTypes.bool,
 
   /**
+   * Disable use fo cookies for analytics.
+   * @private
+   */
+  disableCookies: PropTypes.bool,
+
+  /**
    * Key of the active topic.
    * @private
    */
@@ -193,6 +199,7 @@ const defaultProps = {
   topics: null,
   language: 'de',
   enableTracking: false,
+  disableCookies: false,
   activeTopicKey: null,
   permissionInfos: null,
 };
@@ -215,6 +222,7 @@ class TrafimageMaps extends React.PureComponent {
       center,
       language,
       enableTracking,
+      disableCookies,
       cartaroUrl,
       mapsetUrl,
       shortenerUrl,
@@ -283,6 +291,11 @@ class TrafimageMaps extends React.PureComponent {
         urlBase: REACT_APP_MATOMO_URL_BASE,
         siteId: REACT_APP_MATOMO_SITE_ID,
         trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
+        configurations: {
+          // optional, default value: {}
+          // any valid matomo configuration, all below are optional
+          disableCookies,
+        },
       });
       this.matomo.trackPageView();
     }
@@ -294,6 +307,7 @@ class TrafimageMaps extends React.PureComponent {
       center,
       cartaroUrl,
       enableTracking,
+      disableCookies,
       maxExtent,
       mapsetUrl,
       shortenerUrl,
@@ -330,6 +344,14 @@ class TrafimageMaps extends React.PureComponent {
 
     if (maxExtent !== prevProps.maxExtent) {
       this.store.dispatch(setMaxExtent(maxExtent));
+    }
+
+    if (
+      this.matomo &&
+      disableCookies &&
+      disableCookies !== !prevProps.disableCookies
+    ) {
+      this.matomo.pushInstruction('disableCookies');
     }
 
     if (this.matomo && !prevProps.enableTracking && enableTracking) {

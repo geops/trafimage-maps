@@ -13208,10 +13208,10 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@1.3.12:
-  version "1.3.12"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.3.12.tgz#fc0048281594b973504c7275be819cef7b1e8f2e"
-  integrity sha512-9j0jfG+rJOo7/MAzc03xdLeioXTPTvgUdlbDLpgJUeHhT06N20EfW8Cmoq5fiF9juDajdTzJnD2J+rheCz46ig==
+mobility-toolbox-js@1.3.13-beta.8:
+  version "1.3.13-beta.8"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.3.13-beta.8.tgz#971c2136f1e6c3d10b7f77c77d7073132430c55a"
+  integrity sha512-r8NqHHXzKKT/dkOeIbJopBKFVQRMWcoOTGyZxbQPc+LzZ5UDSMDpBtRlWkEx6v7DA6guLJ32YPzdKx2W0VSkdg==
   dependencies:
     "@geops/geops-ui" "0.1.11"
     "@material-ui/core" "^4.9.14"
