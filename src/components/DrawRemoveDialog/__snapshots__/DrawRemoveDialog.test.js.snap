@@ -61,7 +61,8 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
           <div>
             Wollen Sie den Plan wirklich aus der Karte löschen?
             <br />
-            Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link:
+            Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link
+            :
           </div>
           <div
             className="makeStyles-link-2"
