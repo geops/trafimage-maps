@@ -501,7 +501,7 @@
   "Werkzeuge": "Strumenti",
   "West": "Ovest",
   "wkp.draw": "Disegno",
-  "Wollen Sie den Plan wirklich aus der Karte löschen?": "Volete davvero cancellare la mappa dalla mappa?",
+  "Wollen Sie den Plan wirklich aus der Karte löschen?": "Volete davvero cancellare il piano dalla mappa?",
   "www.sbb.ch/handicap": "www.sbb.ch/it/handicap",
   "xmas": "SBB Natale",
   "xmastr": "Tracker",
@@ -514,5 +514,6 @@
   "Zugtracker": "Train tracker",
   "zurück": "precedente",
   "Zurücksetzen": "Ripristinare",
-  "Zusätzliche Informationen": "Informazioni complementari"
+  "Zusätzliche Informationen": "Informazioni complementari",
+  "Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link": "Salvate il seguente collegamento per continuare a modificare il piano in un secondo momento"
 }

@@ -499,7 +499,7 @@
   "Werkzeuge": "Outils",
   "West": "Ouest",
   "wkp.draw": "Dessin",
-  "Wollen Sie den Plan wirklich aus der Karte löschen?": "Voulez-vous vraiment supprimer la carte de la carte ?",
+  "Wollen Sie den Plan wirklich aus der Karte löschen?": "Voulez-vous vraiment supprimer le plan de la carte?",
   "www.sbb.ch/handicap": "www.sbb.ch/fr/handicap",
   "xmas": "SBB Noël",
   "xmastr": "Tracker",
@@ -512,5 +512,6 @@
   "Zugtracker": "Train tracker",
   "zurück": "précédent",
   "Zurücksetzen": "Réinitialiser",
-  "Zusätzliche Informationen": "Informations complémentaires"
+  "Zusätzliche Informationen": "Informations complémentaires",
+  "Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link": "Veuillez enregistrer le lien suivant pour continuer par la suite à éditer le plan"
 }
