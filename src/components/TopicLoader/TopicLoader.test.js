@@ -48,6 +48,11 @@ describe('TopicLoader', () => {
         />
       </Provider>,
     );
+    const action = store
+      .getActions()
+      .filter((act) => act.type === 'SET_LAYERS');
+    expect(action.length).toBe(1);
+    expect(action[0].data).toEqual(layerService.getLayers());
     expect(layerService.getLayersAsFlatArray()).toEqual([
       ...topicDflt.layers,
       drawLayer,
@@ -78,6 +83,14 @@ describe('TopicLoader', () => {
         />
       </Provider>,
     );
+    expect(layerService.getLayersAsFlatArray()).toEqual(
+      topicPermalinkFalse.layers,
+    );
+    const action = store
+      .getActions()
+      .filter((act) => act.type === 'SET_LAYERS');
+    expect(action.length).toBe(1);
+    expect(action[0].data).toEqual(layerService.getLayers());
     expect(layerService.getLayersAsFlatArray()).toEqual(
       topicPermalinkFalse.layers,
     );
