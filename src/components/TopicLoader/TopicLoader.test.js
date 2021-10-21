@@ -1,0 +1,85 @@
+import React from 'react';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import configureStore from 'redux-mock-store';
+import LayerService from 'react-spatial/LayerService';
+import { Layer } from 'mobility-toolbox-js/ol';
+import OLLayer from 'ol/layer/Layer';
+import { Map, View } from 'ol';
+import { mount } from 'enzyme';
+import TopicLoader from '.';
+
+describe('TopicLoader', () => {
+  const mockStore = configureStore([thunk]);
+  let layerService;
+  let initialStore = {};
+  let store;
+  let map;
+  const drawLayer = new Layer({ olLayer: new OLLayer({}) });
+
+  beforeEach(() => {
+    map = new Map({ view: new View({}) });
+    layerService = new LayerService([]);
+    initialStore = {
+      map: { drawLayer },
+      app: { map, language: 'de', layerService },
+    };
+  });
+
+  test('add draw layer if activeTopic.elements.permalink=true', () => {
+    const topicDflt = {
+      layers: [new Layer({ olLayer: new OLLayer({}) })],
+      elements: { permalink: true },
+    };
+    store = mockStore({
+      ...initialStore,
+      app: {
+        ...initialStore.app,
+        activeTopic: topicDflt,
+      },
+    });
+
+    mount(
+      <Provider store={store}>
+        <TopicLoader
+          topics={[topicDflt]}
+          appBaseUrl="appBaseUrl"
+          apiKey="apikey"
+        />
+      </Provider>,
+    );
+    expect(layerService.getLayersAsFlatArray()).toEqual([
+      ...topicDflt.layers,
+      drawLayer,
+    ]);
+  });
+
+  test("doesn't add draw layer when activeTopic.elements.permalink=false.", () => {
+    const topicPermalinkFalse = {
+      layers: [new Layer({ olLayer: new OLLayer({}) })],
+      elements: {
+        permalink: false,
+      },
+    };
+    store = mockStore({
+      ...initialStore,
+      app: {
+        ...initialStore.app,
+        activeTopic: topicPermalinkFalse,
+      },
+    });
+
+    mount(
+      <Provider store={store}>
+        <TopicLoader
+          topics={[topicPermalinkFalse]}
+          appBaseUrl="appBaseUrl"
+          apiKey="apikey"
+        />
+      </Provider>,
+    );
+    expect(layerService.getLayersAsFlatArray()).toEqual(
+      topicPermalinkFalse.layers,
+    );
+  });
+});
