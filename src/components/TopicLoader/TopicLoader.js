@@ -238,6 +238,7 @@ class TopicLoader extends Component {
       vectorTilesUrl,
       staticFilesUrl,
       drawLayer,
+      activeTopic,
     } = this.props;
 
     const [currentBaseLayer] = layerService
@@ -269,7 +270,15 @@ class TopicLoader extends Component {
     }
 
     // Layers to display
-    const layers = [...topicLayers, drawLayer];
+    const layers = [...topicLayers];
+
+    // Draw layer is only useful with the permalink draw.id parameter.
+    // So if there is no permalink no need to add this layer.
+    // This fix a bug in CASA where ol_uid of the drawLayer is the same as another
+    // layer creating a js error when the web component is unmounted.
+    if (activeTopic?.elements?.permalink) {
+      layers.push(drawLayer);
+    }
 
     // TODO: It seems there is a mix of using layerService and layers.
     // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService

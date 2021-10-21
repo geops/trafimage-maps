@@ -55,7 +55,7 @@ class StationsLayer extends MapboxStyleLayer {
         this.updateSource();
       }),
       this.map.on('moveend', () => {
-        this.mapboxLayer.mbMap.once('idle', this.onIdle);
+        this.mapboxLayer.mbMap?.once('idle', this.onIdle);
       }),
     );
   }
