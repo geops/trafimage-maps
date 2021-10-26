@@ -414,6 +414,7 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
   hidePopup: (feat, layer, featureInfo) => {
     const otherFeatsClicked = featureInfo
@@ -444,6 +445,7 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
@@ -465,6 +467,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
