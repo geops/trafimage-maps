@@ -18,6 +18,13 @@ const useStyles = makeStyles({
       height: 'calc(100% - 36px)',
       display: 'flex',
       flexDirection: 'column',
+      '& > div:first-child': {
+        // Normally this div is the root element of a popup component
+        flex: 1,
+        overflow: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+      },
       '& > div': {
         maxHeight: '100%',
       },
