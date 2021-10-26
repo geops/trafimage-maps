@@ -27,7 +27,8 @@ class StationsLayer extends MapboxStyleLayer {
       },
       properties: {
         hideInLegend: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: 'StationPopup',
+        useOverlay: true,
       },
       ...options,
     });

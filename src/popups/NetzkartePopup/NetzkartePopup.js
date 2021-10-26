@@ -185,7 +185,7 @@ function NetzkartePopup({ feature }) {
               showPlanLinks ? ' wkp-visible' : ''
             }`}
           >
-            <BahnhofplanPopup feature={feature} showOnlyLinks />
+            <BahnhofplanPopup feature={feature} />
           </div>
         </>
       ) : null}

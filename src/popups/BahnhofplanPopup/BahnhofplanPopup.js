@@ -10,12 +10,9 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   language: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  // showOnlyLinks: PropTypes.bool,
 };
 
-const defaultProps = {
-  // showOnlyLinks: false,
-};
+const defaultProps = {};
 
 const BahnhofplanPopup = ({ feature, language, t }) => {
   const iabpUrl = feature.get('url_interactive_plan');
@@ -77,11 +74,6 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
 
   return (
     <div className="wkp-bahnhofplan-popup">
-      {/*
-      !showOnlyLinks ? (
-        <div className="wkp-bahnhofplan-popup-title">{feature.get('name')}</div>
-      ) : null
-      */}
       {iabpLink}
       {a4Link}
       {posterLink}

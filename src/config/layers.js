@@ -267,8 +267,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
   new MapboxStyleLayer({
@@ -293,8 +294,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
 ];
