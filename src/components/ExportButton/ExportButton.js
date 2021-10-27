@@ -54,7 +54,7 @@ function ExportButton({
     <div className={classes.buttonWrapper}>
       <CanvasSaveButton
         className={classes.button}
-        title={t('Als PNG speichern')}
+        title={t('Als PDF speichern')}
         style={{
           pointerEvents: isLoading ? 'none' : 'auto',
           opacity: isLoading ? 0.3 : 1,
