@@ -20,6 +20,11 @@ function StationPopup({ feature, layer }) {
   const features = feature.length ? [...feature.reverse()] : [feature];
   const layers = layer.length ? [...layer.reverse()] : [layer];
 
+  // if a a station has been clicked, don't show the bahnhohfplans features.
+  const isStationClicked = features.find((feat, idx) => {
+    return layers[idx].name === 'ch.sbb.netzkarte.stationen';
+  });
+
   return (
     <div className="wkp-station-popup">
       {features.map((feat, idx) => {
@@ -28,6 +33,10 @@ function StationPopup({ feature, layer }) {
         const key = layers[idx].name + feat.getId();
         if (displayNetzkartePopup) {
           return <NetzkartePopup feature={feat} key={key} />;
+        }
+
+        if (isStationClicked) {
+          return null;
         }
         return <BahnhofplanPopup feature={feat} key={key} />;
       })}

@@ -5,6 +5,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { FaRegFilePdf } from 'react-icons/fa';
+import Link from '../../components/Link';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -28,13 +29,9 @@ const BahnhofplanPopup = ({ feature, language, t }) => {
   if (iabpUrl) {
     iabpLink = (
       <div>
-        <a
-          href={`${iabpUrl}#?lang=${language}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
+        <Link href={`${iabpUrl}#?lang=${language}`}>
           {t('Interaktiver Bahnhofplan')}
-        </a>
+        </Link>
       </div>
     );
   }

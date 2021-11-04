@@ -8,6 +8,7 @@ import { transform as transformCoords } from 'ol/proj';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
+import Link from '../../components/Link';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -72,9 +73,7 @@ function NetzkartePopup({ feature }) {
   if (bepUrl) {
     bepLink = (
       <div>
-        <a href={bepUrl} rel="noopener noreferrer" target="_blank">
-          {t('url_bep')}
-        </a>
+        <Link href={bepUrl}> {t('url_bep')}</Link>
       </div>
     );
   }
@@ -100,9 +99,7 @@ function NetzkartePopup({ feature }) {
   if (name && !isAirport) {
     stationTimetableLink = (
       <div>
-        <a href={stationTimetableUrl} rel="noopener noreferrer" target="_blank">
-          {t('Fahrplan')}
-        </a>
+        <Link href={stationTimetableUrl}> {t('Fahrplan')}</Link>
       </div>
     );
   }
@@ -110,9 +107,7 @@ function NetzkartePopup({ feature }) {
   if (didok && layer === 'railway') {
     stationServiceLink = (
       <div>
-        <a href={stationServiceUrl} rel="noopener noreferrer" target="_blank">
-          {t('Webseite Bahnhof')}
-        </a>
+        <Link href={stationServiceUrl}> {t('Webseite Bahnhof')}</Link>
       </div>
     );
   }

@@ -1,5 +1,8 @@
 
 .wkp-link {
+  align-items: center;
+  display: flex;
+
   span {
     text-overflow: ellipsis;
     max-width: 380px;
@@ -9,5 +12,6 @@
 
   svg {
     height: 16px;
+    margin-left: 5px;
   }
 }
