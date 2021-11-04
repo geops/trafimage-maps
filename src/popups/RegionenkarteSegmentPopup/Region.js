@@ -22,7 +22,7 @@ const roles = [
   'leiter_kbn',
   'leiter_natur',
   'leiter_fahrweg',
-  'mitarbeitende_natur',
+  'mitarbeitende_kbn',
   'mitarbeitende_fahrweg',
 ];
 

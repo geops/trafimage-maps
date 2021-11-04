@@ -74,10 +74,10 @@ const sizesByFormat = {
 const options = [
   { label: 'A0 (72 dpi)', resolution: 1, format: 'a0', weight: 2 },
   { label: 'A0 (150 dpi)', resolution: 2, format: 'a0', weight: 4 },
-  { label: 'A0 300 dpi', resolution: 3, format: 'a0', weight: 6 },
+  { label: 'A0 (300 dpi)', resolution: 3, format: 'a0', weight: 6 },
   { label: 'A1 (72 dpi)', resolution: 1, format: 'a1', weight: 1 },
   { label: 'A1 (150 dpi)', resolution: 2, format: 'a1', weight: 3 },
-  { label: 'A1 300 dpi', resolution: 3, format: 'a1', weight: 5 },
+  { label: 'A1 (300 dpi)', resolution: 3, format: 'a1', weight: 5 },
 ];
 
 const MenuProps = {
