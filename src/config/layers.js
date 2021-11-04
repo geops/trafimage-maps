@@ -19,6 +19,7 @@ import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import StationsLayer from '../layers/StationsLayer';
+import PlatformsLayer from '../layers/PlatformsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -353,6 +354,11 @@ punctuality.children = [
 
 export const netzkartePointLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen',
+  mapboxLayer: dataLayer,
+});
+
+export const platformsLayer = new PlatformsLayer({
+  name: 'ch.sbb.netzkarte.platforms',
   mapboxLayer: dataLayer,
 });
 
