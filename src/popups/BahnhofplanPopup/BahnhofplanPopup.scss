@@ -7,12 +7,8 @@
     font-weight: bold;
   }
 
-  a.wkp-link {
-    text-decoration: none;
-  }
-
-  .wkp-link span {
-    text-decoration: none;
+  a {
+    text-decoration: none !important;
   }
 
   div {
