@@ -24,7 +24,6 @@
     .wkp-coordinates-infos {
       overflow: hidden;
       max-height: 150px;
-      transition: all 0.3s;
       display: block;
       cursor: initial;
       margin-left: 15px;
@@ -59,12 +58,11 @@
 
     & > .wkp-bahnhofplan-links {
       height: 0;
-      transition: height 900ms;
       display: none;
       margin-left: 15px;
 
       &.wkp-visible {
-        height: 100%;
+        height: auto;
         display: block;
       }
 

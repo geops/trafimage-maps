@@ -33,8 +33,7 @@ const useStyles = makeStyles({
   drawerDesktop: {
     width: 0,
     '& .wkp-feature-information': {
-      minWidth: 300,
-      maxWidth: 450,
+      width: 400,
     },
   },
   drawerDesktopPaper: {

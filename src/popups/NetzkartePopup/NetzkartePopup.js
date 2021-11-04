@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 function NetzkartePopup({ feature }) {
-  const [showPlanLinks, setShowPlanLinks] = useState(false);
+  const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
   const projection = useSelector((state) => state.app.projection);
