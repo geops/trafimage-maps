@@ -2,6 +2,7 @@
 .wkp-link {
   align-items: center;
   display: flex;
+  text-decoration: none !important;
 
   span {
     text-overflow: ellipsis;
