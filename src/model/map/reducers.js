@@ -7,11 +7,9 @@ import {
   SET_MAX_EXTENT,
 } from './actions';
 
-const drawLayer = new DrawLayer();
-
 const initialState = {
-  layers: [drawLayer],
-  drawLayer,
+  layers: [],
+  drawLayer: new DrawLayer(),
 };
 
 export default function app(state = initialState, action) {
@@ -24,8 +22,7 @@ export default function app(state = initialState, action) {
       }
       return {
         ...state,
-        layers: [...action.data, drawLayer],
-        drawLayer,
+        layers: [...action.data],
       };
     case SET_CENTER:
       if (!Array.isArray(action.data)) {

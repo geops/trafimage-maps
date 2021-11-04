@@ -29,6 +29,7 @@ const propTypes = {
 
   cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
+  loginUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
@@ -59,6 +60,7 @@ const defaultProps = {
   history: null,
   activeTopic: null,
   cartaroUrl: null,
+  loginUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionInfos: null,
@@ -236,6 +238,7 @@ class TopicLoader extends Component {
       vectorTilesUrl,
       staticFilesUrl,
       drawLayer,
+      activeTopic,
     } = this.props;
 
     const [currentBaseLayer] = layerService
@@ -266,13 +269,23 @@ class TopicLoader extends Component {
         });
     }
 
+    // Layers to display
+    const layers = [...topicLayers];
+
+    // Draw layer is only useful with the permalink draw.id parameter.
+    // So if there is no permalink no need to add this layer.
+    // This fix a bug in CASA where ol_uid of the drawLayer is the same as another
+    // layer creating a js error when the web component is unmounted.
+    if (activeTopic?.elements?.permalink) {
+      layers.push(drawLayer);
+    }
+
     // TODO: It seems there is a mix of using layerService and layers.
     // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService
     // then update the flatLayers.
-    layerService.setLayers([...topicLayers, drawLayer]);
-    const flatLayers = layerService.getLayersAsFlatArray();
-    dispatchSetLayers(topicLayers);
+    layerService.setLayers(layers);
 
+    const flatLayers = layerService.getLayersAsFlatArray();
     for (let i = 0; i < flatLayers.length; i += 1) {
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
@@ -306,13 +319,16 @@ class TopicLoader extends Component {
         flatLayers[i].api.apiKey = apiKey;
       }
     }
+
+    dispatchSetLayers(layers);
   }
 
   render() {
-    const { history, appBaseUrl, staticFilesUrl } = this.props;
+    const { loginUrl, history, appBaseUrl, staticFilesUrl } = this.props;
     return (
       <TopicElements
         history={history}
+        loginUrl={loginUrl}
         appBaseUrl={appBaseUrl}
         staticFilesUrl={staticFilesUrl}
       />

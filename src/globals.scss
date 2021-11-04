@@ -18,3 +18,23 @@ $menu-item-height: 30px;
 // BarrierFree
 $bf-large-outline: 4px solid black !important;
 $bf-outline: 2px solid black !important;
+
+@mixin loadFont($fontFamily, $path) {
+  @font-face {
+    font-family: #{$fontFamily};
+    src:
+      url('#{$path}.woff') format('woff'),
+      url('#{$path}.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+}
+
+@include loadFont(
+  'SBBWeb-Roman',
+  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman'
+);
+@include loadFont(
+  'SBBWeb-Bold',
+  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
+);

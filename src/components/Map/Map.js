@@ -16,6 +16,7 @@ import {
   setSearchOpen,
   updateDrawEditLink,
 } from '../../model/app/actions';
+import Copyright from '../Copyright/Copyright';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -31,6 +32,7 @@ const propTypes = {
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   resolution: PropTypes.number,
   zoom: PropTypes.number,
+  showPopups: PropTypes.bool,
 
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
@@ -54,6 +56,7 @@ const defaultProps = {
   zoom: 9,
   maxZoom: 20,
   dispatchHtmlEvent: () => {},
+  showPopups: true,
 };
 
 class Map extends PureComponent {
@@ -125,7 +128,8 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const { layerService, featureInfo, dispatchSetFeatureInfo } = this.props;
+    const { layerService, featureInfo, dispatchSetFeatureInfo, showPopups } =
+      this.props;
 
     if (document.activeElement !== map.getTargetElement()) {
       map.getTargetElement().focus();
@@ -135,45 +139,46 @@ class Map extends PureComponent {
       return;
     }
 
-    const layers = this.getQueryableLayers('pointermove');
+    if (showPopups) {
+      const layers = this.getQueryableLayers('pointermove');
+      layerService
+        .getFeatureInfoAtCoordinate(coordinate, layers)
+        .then((newInfos) => {
+          let infos = newInfos.filter(({ features }) => features.length);
+          map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
-    layerService
-      .getFeatureInfoAtCoordinate(coordinate, layers)
-      .then((newInfos) => {
-        let infos = newInfos.filter(({ features }) => features.length);
-        map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
-
-        const isClickInfoOpen =
-          featureInfo.length &&
-          featureInfo.every(
-            ({ layer }) =>
-              layer.get('popupComponent') && !layer.get('showPopupOnHover'),
-          );
-
-        // don't continue if there's a popup that was opened by click
-        if (!isClickInfoOpen) {
-          infos = infos
-            .filter(
+          const isClickInfoOpen =
+            featureInfo.length &&
+            featureInfo.every(
               ({ layer }) =>
-                layer.get('showPopupOnHover') && layer.get('popupComponent'),
-            )
-            .map((info) => {
-              /* Apply showPopupOnHover function if defined to further filter features */
-              const showPopupOnHover = info.layer.get('showPopupOnHover');
-              if (typeof showPopupOnHover === 'function') {
-                return {
-                  ...info,
-                  features: info.layer.get('showPopupOnHover')(info.features),
-                };
-              }
-              return info;
-            });
+                layer.get('popupComponent') && !layer.get('showPopupOnHover'),
+            );
 
-          if (!Map.isSameFeatureInfo(featureInfo, infos)) {
-            dispatchSetFeatureInfo(infos);
+          // don't continue if there's a popup that was opened by click
+          if (!isClickInfoOpen) {
+            infos = infos
+              .filter(
+                ({ layer }) =>
+                  layer.get('showPopupOnHover') && layer.get('popupComponent'),
+              )
+              .map((info) => {
+                /* Apply showPopupOnHover function if defined to further filter features */
+                const showPopupOnHover = info.layer.get('showPopupOnHover');
+                if (typeof showPopupOnHover === 'function') {
+                  return {
+                    ...info,
+                    features: info.layer.get('showPopupOnHover')(info.features),
+                  };
+                }
+                return info;
+              });
+
+            if (!Map.isSameFeatureInfo(featureInfo, infos)) {
+              dispatchSetFeatureInfo(infos);
+            }
           }
-        }
-      });
+        });
+    }
   }
 
   onSingleClick(evt) {
@@ -270,6 +275,7 @@ class Map extends PureComponent {
           tabIndex={0}
         />
         <MapAccessibility layers={layers} map={map} />
+        <Copyright />
       </>
     );
   }
@@ -287,6 +293,7 @@ const mapStateToProps = (state) => ({
   resolution: state.map.resolution,
   zoom: state.map.zoom,
   maxExtent: state.map.maxExtent,
+  showPopups: state.app.showPopups,
 });
 
 const mapDispatchToProps = {

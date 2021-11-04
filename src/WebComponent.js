@@ -83,7 +83,7 @@ const propTypes = {
    * URL of the previous cartaro instance to use.
    * @ignore
    */
-  cartaroOldUrl: PropTypes.string,
+  loginUrl: PropTypes.string,
 
   /**
    * Base URL to use.
@@ -125,7 +125,7 @@ const attributes = {
   apiKey: undefined,
   apiKeyName: 'key',
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
+  loginUrl: undefined,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
@@ -164,10 +164,10 @@ const WebComponent = (props) => {
     return JSON.parse(center);
   }, [center]);
 
-  const vectorTileApiKey = useMemo(() => vectorTilesKey || apiKey, [
-    apiKey,
-    vectorTilesKey,
-  ]);
+  const vectorTileApiKey = useMemo(
+    () => vectorTilesKey || apiKey,
+    [apiKey, vectorTilesKey],
+  );
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(

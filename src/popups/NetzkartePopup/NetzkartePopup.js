@@ -8,13 +8,14 @@ import { transform as transformCoords } from 'ol/proj';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
+import Link from '../../components/Link';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
 function NetzkartePopup({ feature }) {
-  const [showPlanLinks, setShowPlanLinks] = useState(false);
+  const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
   const projection = useSelector((state) => state.app.projection);
@@ -41,6 +42,7 @@ function NetzkartePopup({ feature }) {
   const a4Url = feature.get('url_a4');
   const posterUrl = feature.get('url_poster');
   const shoppingUrl = feature.get('url_shopping');
+  const bepUrl = feature.get('url_bep');
 
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
@@ -66,6 +68,15 @@ function NetzkartePopup({ feature }) {
   let airportLabel;
   let stationTimetableLink;
   let stationServiceLink;
+  let bepLink;
+
+  if (bepUrl) {
+    bepLink = (
+      <div>
+        <Link href={bepUrl}> {t('url_bep')}</Link>
+      </div>
+    );
+  }
 
   const transportLink = (
     <div>
@@ -88,9 +99,7 @@ function NetzkartePopup({ feature }) {
   if (name && !isAirport) {
     stationTimetableLink = (
       <div>
-        <a href={stationTimetableUrl} rel="noopener noreferrer" target="_blank">
-          {t('Fahrplan')}
-        </a>
+        <Link href={stationTimetableUrl}> {t('Fahrplan')}</Link>
       </div>
     );
   }
@@ -98,9 +107,7 @@ function NetzkartePopup({ feature }) {
   if (didok && layer === 'railway') {
     stationServiceLink = (
       <div>
-        <a href={stationServiceUrl} rel="noopener noreferrer" target="_blank">
-          {t('Webseite Bahnhof')}
-        </a>
+        <Link href={stationServiceUrl}> {t('Webseite Bahnhof')}</Link>
       </div>
     );
   }
@@ -173,10 +180,11 @@ function NetzkartePopup({ feature }) {
               showPlanLinks ? ' wkp-visible' : ''
             }`}
           >
-            <BahnhofplanPopup feature={feature} showOnlyLinks />
+            <BahnhofplanPopup feature={feature} />
           </div>
         </>
       ) : null}
+      {bepLink}
       {stationTimetableLink}
       {transportLink}
       {stationServiceLink}

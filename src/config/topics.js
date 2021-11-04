@@ -1,6 +1,6 @@
 import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import netzkarteImage from '../img/netzkarte.png';
+import StationsLayer from '../layers/StationsLayer';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import defaultBaseLayers, {
   swisstopoSwissImage,
@@ -15,7 +15,6 @@ import defaultBaseLayers, {
   netzkarteShowcasesNight,
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
-  parks,
   handicapDataLayer,
   stuetzpunktBahnhoefe,
   barrierfreierBahnhoefe,
@@ -43,6 +42,10 @@ import defaultBaseLayers, {
   anlagenverantwortliche,
   regionenkartePublicSegment,
   regionenkarteOverlayGroup,
+  netzentwicklungDataLayer,
+  netzentwicklungStrategischLayer,
+  netzentwicklungProgrammManagerLayer,
+  netzentwicklungSkPlanerLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -70,12 +73,11 @@ export const netzkarte = {
   },
   layers: [
     ...defaultBaseLayers,
-    gemeindegrenzen,
-    parks,
     punctuality,
-    buslines,
     netzkartePointLayer,
     passagierfrequenzen,
+    gemeindegrenzen,
+    buslines,
     bahnhofplaene,
   ],
   projection: 'EPSG:3857',
@@ -102,8 +104,7 @@ export const handicap = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
-    // prettier-ignore
-    'Stationen': handicapStopFinder
+    Stationen: handicapStopFinder,
   },
 };
 
@@ -115,13 +116,7 @@ export const netzkarteStelen = {
   projection: 'EPSG:3857',
 };
 
-export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.layer',
-  visible: true,
-  isBaseLayer: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  style: 'base_bright_v2',
+export const casaDataLayerWithoutLabels = dataLayer.clone({
   filters: [
     {
       field: 'type',
@@ -129,13 +124,17 @@ export const casaNetzkartePersonenverkehr = new TrafimageMapboxLayer({
       include: false,
     },
   ],
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: netzkarteImage,
-  },
 });
 
-export const netzkarteLayerLabels = new TrafimageMapboxLayer({
+export const casaNetzkarteLayerWithoutLabels = netzkarteLayer.clone({
+  mapboxLayer: casaDataLayerWithoutLabels,
+});
+
+const casaSwisstopoSwissImage = swisstopoSwissImage.clone({
+  mapboxLayer: casaDataLayerWithoutLabels,
+});
+
+export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.labels',
   visible: true,
   style: 'base_bright_v2',
@@ -152,14 +151,21 @@ export const netzkarteLayerLabels = new TrafimageMapboxLayer({
   },
 });
 
+// Add stations (blue style on hover) to labelsDataLayer.
+const casaNetzkarteStationsLayer = new StationsLayer({
+  name: 'ch.sbb.netzkarte.stationen.casa',
+  mapboxLayer: casaNetzkarteLayerWithLabels,
+});
+
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
   layers: [
-    dataLayer,
-    casaNetzkartePersonenverkehr,
-    swisstopoSwissImage,
-    netzkarteLayerLabels,
+    casaDataLayerWithoutLabels,
+    casaNetzkarteLayerWithoutLabels,
+    casaSwisstopoSwissImage,
+    casaNetzkarteLayerWithLabels,
+    casaNetzkarteStationsLayer,
   ],
   projection: 'EPSG:3857',
   popupConfig: {
@@ -211,11 +217,11 @@ export const infrastruktur = {
   },
   layers: [
     netzkarteEisenbahninfrastruktur,
-    gewässer,
-    grenzen,
-    betriebsRegionen,
     uebrigeBahnen,
     tochtergesellschaftenSBB,
+    grenzen,
+    gewässer,
+    betriebsRegionen,
     kilometrageLayer,
   ],
   projection: 'EPSG:3857',
@@ -297,23 +303,6 @@ export const showcases = {
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
 
-export const intervention = {
-  name: 'ch.sbb.intervention',
-  key: 'ch.sbb.intervention',
-  redirect: true,
-  permission: 'sbb',
-  layerInfoComponent: 'InterventionTopicInfo',
-};
-
-export const tina = {
-  name: 'ch.sbb.lar',
-  key: 'ch.sbb.lar',
-  description: 'ch.sbb.lar-desc',
-  permission: 'tina',
-  redirect: true,
-  hideInLayerTree: true,
-};
-
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
@@ -335,19 +324,34 @@ export const zweitausbildung = {
   searches: defaultSearches,
 };
 
+export const netzentwicklung = {
+  name: 'ch.sbb.netzentwicklung',
+  key: 'ch.sbb.netzentwicklung',
+  maxZoom: 13,
+  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  layers: [
+    kilometrageLayer,
+    netzentwicklungDataLayer,
+    netzentwicklungStrategischLayer,
+    netzentwicklungProgrammManagerLayer,
+    netzentwicklungSkPlanerLayer,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'NetzentwicklungTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
-    handicap,
+    zweitausbildung,
     bauprojekte,
+    handicap,
+    tarifverbundkarte,
     infrastruktur,
     regionenkartePublic,
-    tarifverbundkarte,
+    netzentwicklung,
     showcases,
-    zweitausbildung,
-    // regionenkartePrivate,
-    intervention,
-    tina,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],

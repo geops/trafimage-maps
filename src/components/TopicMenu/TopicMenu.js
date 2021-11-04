@@ -43,11 +43,8 @@ class TopicMenu extends PureComponent {
   }
 
   onTopicClick(topic) {
-    const {
-      activeTopic,
-      dispatchSetActiveTopic,
-      dispatchSetFeatureInfo,
-    } = this.props;
+    const { activeTopic, dispatchSetActiveTopic, dispatchSetFeatureInfo } =
+      this.props;
     const { isCollapsed } = this.state;
 
     if (topic.key === activeTopic.key) {

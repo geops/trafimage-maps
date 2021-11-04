@@ -25,7 +25,7 @@ import finishFlag from '../../img/finish_flag.png';
  * @class RouteLayer
  * @extends CasaLayer
  * @param {Object} [options] Layer options.
- *   Default is `{ rail: '#e3000b', bus: '#ffed00', ship: '#0074be' }`.
+ *   Default is `{ rail: '#e3000b', bus: '#ffed00', ferry: '#0074be' }`.
  * @param {string} [options.url = https://api.geops.io/routing/v1] Url to fetch routes.
  */
 class RouteLayer extends CasaLayer {
@@ -262,18 +262,29 @@ class RouteLayer extends CasaLayer {
   }
 
   /**
-   * Load routes based on a given configuration.
-   * @param {Object[]} routes Routes.
-   * @param {boolean} routes[].isSelected If true, the route is
-   *   selected initially.
-   * @param {boolean} routes[].isClickable If true, the route can be
-   *   selected or unselected by click.
-   * @param {Object[]} routes[].sequences Route sequences.
-   * @param {number} routes[].sequences[].uicFrom UIC number of start station.
-   * @param {number} routes[].sequences[].uicTo UIC number of end station.
-   * @param {string} routes[].sequences[].mot Method of transportation.
+   * @typedef {Object} Sequence
+   * @property {Array<number>} uicFrom UIC number of start station.
+   * @property {number} uicTo UIC number of end station.
+   * @property {number} lonLatTo Lat/Lon coordinate array of end location
+   *  (to be used if uicTo not provided).
+   * @property {Array<number>} lonLatFrom Lat/Lon coordinate array of start location
+   *  (to be used if uicFrom not provided).
+   * @property {string} mot Method of transportation.
    *   Allowed values are "rail", "bus", "tram", "subway", "gondola",
    *   "funicular" and "ferry"
+   */
+
+  /**
+   * @typedef {Object} Route
+   * @property {boolean} isSelected If true, the route is
+   *   selected initially.
+   * @property {boolean} isClickable If true, the route can be
+   *   selected or unselected by click.
+   * @property {Array<Sequence>} sequences Route sequences.
+   */
+
+  /**
+   * @param {Array<Route>} routes
    * @returns {Promise<Feature[]>} Promise resolving OpenLayers features.
    */
   loadRoutes(routes) {
@@ -287,9 +298,8 @@ class RouteLayer extends CasaLayer {
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
-        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } = routes[
-          i
-        ].sequences[j];
+        const { mot, uicFrom, uicTo, lonLatFrom, lonLatTo } =
+          routes[i].sequences[j];
         const nextMot =
           j === routes[i].sequences.length - 1
             ? null

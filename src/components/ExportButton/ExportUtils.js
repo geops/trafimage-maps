@@ -54,12 +54,14 @@ const buildOlMapHd = (map, elt, center, scale = 1, resolution) => {
     }),
   });
 
-  map.getLayers().forEach((layer) => {
+  const addLayer = (layer) => {
     if (!layer.getVisible()) {
       return;
     }
-
-    if (layer.getSource() instanceof VectorSource) {
+    // ol.layer.Group
+    if (layer.getLayers) {
+      layer.getLayers().forEach(addLayer);
+    } else if (layer.getSource() instanceof VectorSource) {
       const newLayer = new VectorLayer({
         source: new VectorSource({
           features: [],
@@ -70,7 +72,9 @@ const buildOlMapHd = (map, elt, center, scale = 1, resolution) => {
       });
       mapToExport.addLayer(newLayer);
     }
-  });
+  };
+
+  map.getLayers().forEach(addLayer);
   return mapToExport;
 };
 
@@ -145,9 +149,12 @@ export const generateExtraData = (layerService, exportNorthArrow) => {
               'text/html',
             );
             const copyrightArray = [];
-            parsed
-              .getElementsByTagName('a')
-              .forEach((copyright) => copyrightArray.push(copyright.text));
+            const coll = parsed.getElementsByTagName('a');
+
+            for (let i = 0; i < coll.length; i += 1) {
+              const copyright = coll[i];
+              copyrightArray.push(copyright.text);
+            }
             return copyrightArray;
           });
         const unique = Array.from(new Set(copyrights));

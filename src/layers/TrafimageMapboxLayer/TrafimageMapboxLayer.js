@@ -1,5 +1,5 @@
 import { MapboxLayer } from 'mobility-toolbox-js/ol';
-import getMapboxMapCopyrights from 'mobility-toolbox-js/common/utils/getMapboxMapCopyrights';
+import { getMapboxMapCopyrights } from 'mobility-toolbox-js/common/utils';
 import { toLonLat } from 'ol/proj';
 
 const applyFilters = (mbStyle, filters) => {
@@ -78,6 +78,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
 
   applyStyle(data) {
     const styleFiltered = applyFilters(data, this.filters);
+
     this.mbMap.setStyle(styleFiltered);
     this.mbMap.once('styledata', () => {
       this.onStyleLoaded();
@@ -125,7 +126,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
   getFeatures({ source, sourceLayer, filter } = {}) {
     const { mbMap } = this;
     // Ignore the getFeatureInfo until the source is loaded
-    if (!mbMap || !mbMap.isSourceLoaded(source)) {
+    if (!mbMap || !mbMap.getSource(source) || !mbMap.isSourceLoaded(source)) {
       return [];
     }
     return mbMap.querySourceFeatures(source, {
@@ -140,6 +141,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
    * @param {Object} options A [mapboxgl.Map#queryrenderedfeatures](https://docs.mapbox.com/mapbox-gl-js/api/map/#map#queryrenderedfeatures) options parameter.
    * @returns {Promise<Object>} Promise with features, layer and coordinate
    *  or null if no feature was hit.
+   * @ignore
    */
   async getFeatureInfoAtCoordinate(coordinate, options) {
     // Ignore the getFeatureInfo until the mapbox map is loaded
@@ -154,7 +156,15 @@ class TrafimageMapboxLayer extends MapboxLayer {
       return Promise.resolve({ coordinate, features: [], layer: this });
     }
 
-    const pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+    let pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+
+    if (this.hitTolerance) {
+      const { x, y } = pixel;
+      pixel = [
+        { x: x - this.hitTolerance, y: y - this.hitTolerance },
+        { x: x + this.hitTolerance, y: y + this.hitTolerance },
+      ];
+    }
 
     // At this point we get GeoJSON Mapbox feature, we transform it to an OpenLayers
     // feature to be consistent with other layers.
@@ -241,6 +251,16 @@ class TrafimageMapboxLayer extends MapboxLayer {
       type: 'load',
       target: this,
     });
+  }
+
+  /**
+   * Create a copy of the TrafimageMapboxLayer.
+   * @param {Object} newOptions Options to override
+   * @returns {TrafimageMapboxLayer} A TrafimageMapboxLayer
+   * @ignore
+   */
+  clone(newOptions) {
+    return new TrafimageMapboxLayer({ ...this.options, ...newOptions });
   }
 }
 

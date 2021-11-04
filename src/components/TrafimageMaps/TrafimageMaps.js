@@ -16,7 +16,6 @@ import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import {
   setLanguage,
   setCartaroUrl,
-  setCartaroOldUrl,
   setMapsetUrl,
   setDrawUrl,
   setShortenerUrl,
@@ -95,7 +94,7 @@ const propTypes = {
    * URL endpoint for the previous Cartaro.
    * @private
    */
-  cartaroOldUrl: PropTypes.string,
+  loginUrl: PropTypes.string,
 
   /**
    * React app base URL
@@ -181,7 +180,7 @@ const defaultProps = {
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   apiKeyName: 'key',
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
-  cartaroOldUrl: process.env.REACT_APP_CARTARO_OLD_URL,
+  loginUrl: undefined,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
@@ -217,7 +216,6 @@ class TrafimageMaps extends React.PureComponent {
       language,
       enableTracking,
       cartaroUrl,
-      cartaroOldUrl,
       mapsetUrl,
       shortenerUrl,
       drawUrl,
@@ -238,10 +236,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (cartaroUrl) {
       this.store.dispatch(setCartaroUrl(cartaroUrl));
-    }
-
-    if (cartaroOldUrl) {
-      this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
     }
 
     if (mapsetUrl) {
@@ -299,7 +293,6 @@ class TrafimageMaps extends React.PureComponent {
       zoom,
       center,
       cartaroUrl,
-      cartaroOldUrl,
       enableTracking,
       maxExtent,
       mapsetUrl,
@@ -321,10 +314,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (cartaroUrl !== prevProps.cartaroUrl) {
       this.store.dispatch(setCartaroUrl(cartaroUrl));
-    }
-
-    if (cartaroOldUrl !== prevProps.cartaroOldUrl) {
-      this.store.dispatch(setCartaroOldUrl(cartaroOldUrl));
     }
 
     if (mapsetUrl !== prevProps.mapsetUrl) {
@@ -364,6 +353,14 @@ class TrafimageMaps extends React.PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    // The Map is created in the store so trafimage- maps is responsible
+    // to clear the map before unmount.
+    // Make sure all layers and their listeners (ol and mobility-toolbox-js)
+    // are well removed.
+    this.store.getState().app.map.getLayers().clear();
+  }
+
   render() {
     const {
       history,
@@ -371,6 +368,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKeyName,
       topics,
       cartaroUrl,
+      loginUrl,
       appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
@@ -392,6 +390,7 @@ class TrafimageMaps extends React.PureComponent {
               topics={topics}
               activeTopicKey={activeTopicKey}
               cartaroUrl={cartaroUrl}
+              loginUrl={loginUrl}
               appBaseUrl={appBaseUrl}
               vectorTilesKey={vectorTilesKey}
               vectorTilesUrl={vectorTilesUrl}

@@ -1,16 +1,10 @@
 import proj4 from 'proj4';
-import { Vector as OLVectorLayer, Tile as TileLayer, Group } from 'ol/layer';
-import VectorSource from 'ol/source/Vector';
-import TileWMSSource from 'ol/source/TileWMS';
-import TileGrid from 'ol/tilegrid/TileGrid';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
 import { TrajservAPI } from 'mobility-toolbox-js/api';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
-import TrafimageGeoServerWMSLayer from '../layers/TrafimageGeoServerWMSLayer';
-import ParksLayer from '../layers/ParksLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
 import netzkarte from '../img/netzkarte.png';
@@ -23,8 +17,8 @@ import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
-import LayerHelper from '../layers/layerHelper';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
+import StationsLayer from '../layers/StationsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -41,13 +35,6 @@ proj4.defs(
 );
 
 register(proj4);
-
-const projectionExtent = [
-  -20037509.3428,
-  -20037508.3428,
-  20037508.3428,
-  20037508.3428,
-];
 
 const sbbTrackerApi = new TrajservAPI({
   url: 'https://api.geops.io/tracker/sbb',
@@ -280,8 +267,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
   new MapboxStyleLayer({
@@ -306,8 +294,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
 ];
@@ -364,29 +353,9 @@ punctuality.children = [
   }),
 ];
 
-export const netzkartePointLayer = new MapboxStyleLayer({
+export const netzkartePointLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen',
-  visible: true,
   mapboxLayer: dataLayer,
-  styleLayer: {
-    id: 'stations',
-    type: 'circle',
-    source: 'stations',
-    paint: {
-      'circle-radius': 10,
-      'circle-color': 'rgb(0, 61, 155)',
-      'circle-opacity': [
-        'case',
-        ['boolean', ['feature-state', 'hover'], false],
-        0.5,
-        0,
-      ],
-    },
-  },
-  properties: {
-    hideInLegend: true,
-    popupComponent: 'NetzkartePopup',
-  },
 });
 
 export const buslines = new MapboxStyleLayer({
@@ -416,58 +385,16 @@ export const buslines = new MapboxStyleLayer({
   },
 });
 
-export const gemeindegrenzen = new TrafimageGeoServerWMSLayer({
+export const gemeindegrenzen = new MapboxStyleLayer({
   name: 'ch.sbb.ch_gemeinden',
+  mapboxLayer: dataLayer,
   visible: false,
-  olLayer: new TileLayer({
-    source: new TileWMSSource({
-      crossOrigin: 'anonymous',
-      params: {
-        layers: 'trafimage:gemeindegrenzen',
-        STYLES: 'gemeindegrenzen_netzkarte',
-      },
-      tileGrid: new TileGrid({
-        extent: projectionExtent,
-        resolutions: LayerHelper.getMapResolutions(),
-        matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-      }),
-    }),
-  }),
+  isQueryable: false,
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['trafimage.filter'] === 'municipality_borders',
   properties: {
     hasInfos: true,
-    featureInfoEventTypes: [],
     description: 'ch.sbb.ch_gemeinden-desc',
-  },
-});
-
-export const parks = new ParksLayer({
-  name: 'ch.sbb.parks',
-  visible: false,
-  olLayer: new Group({
-    layers: [
-      new TileLayer({
-        source: new TileWMSSource({
-          crossOrigin: 'anonymous',
-          params: {
-            layers: 'trafimage:perimeter_parks',
-          },
-          tileGrid: new TileGrid({
-            extent: projectionExtent,
-            resolutions: LayerHelper.getMapResolutions(),
-            matrixIds: LayerHelper.getMapResolutions().map((r, i) => `${i}`),
-          }),
-        }),
-        opacity: 0.9,
-      }),
-      new OLVectorLayer({
-        source: new VectorSource(),
-      }),
-    ],
-  }),
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'ParksLayerInfo',
-    popupComponent: 'ParksPopup',
   },
 });
 
@@ -489,6 +416,7 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
   hidePopup: (feat, layer, featureInfo) => {
     const otherFeatsClicked = featureInfo
@@ -519,6 +447,7 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
@@ -540,6 +469,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
@@ -800,6 +730,7 @@ export const updateConstructions = (mbMap) => {
   });
 };
 
+const constrOlListenersKeys = [];
 constructionDataLayer.on('load', () => {
   const { map, mbMap } = constructionDataLayer;
   constrLayers = mbMap
@@ -826,9 +757,9 @@ constructionDataLayer.on('load', () => {
   updateConstructions(mbMap);
 
   // Update clusters source on moveeend.
-  unByKey(olListenersKeys);
+  unByKey(constrOlListenersKeys);
 
-  olListenersKeys.push(
+  constrOlListenersKeys.push(
     map.on('moveend', () => {
       updateConstructions(mbMap);
     }),
@@ -1488,6 +1419,65 @@ export const regionenkarteOverlayGroup = new Layer({
       },
     }),
   ],
+});
+
+export const netzentwicklungDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.netzkarte.data',
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.netzentwicklung',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.programm_manager',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: false,
+  queryRenderedLayersFilter: ({ id }) => /programm_manager$/.test(id),
+  styleLayersFilter: ({ id }) => /programm_manager$/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    netzentwicklungRoleType: 'Programm Manager', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
+});
+
+export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.sk_planer',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  queryRenderedLayersFilter: ({ id }) => /sk_planer$/.test(id),
+  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    netzentwicklungRoleType: 'S&K Planer', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
+});
+
+export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.strategisch',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: false,
+  queryRenderedLayersFilter: ({ id }) => /strategisch$/.test(id),
+  styleLayersFilter: ({ id }) => /strategisch$/.test(id),
+  properties: {
+    radioGroup: 'netzentwicklung',
+    popupComponent: 'NetzentwicklungPopup',
+    netzentwicklungRoleType: 'Netzentwickler Strategisch', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
 });
 
 export default [

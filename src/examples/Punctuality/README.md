@@ -1,5 +1,3 @@
-#
-
 This example shows how to integrate punctuality information in your map application.
 
 ```jsx

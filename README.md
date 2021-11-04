@@ -52,3 +52,15 @@ yarn publish:public
 ```bash
 yarn publish:beta
 ```
+
+## Udpate dependencies problems
+
+react-styleguidist@11.0.8:  We can't update after `11.0.8`. `10.0.9` and `10.0.10` have the `CopyWebpackPlugin` bug. `10.0.11` have fixed it but another errors occurs when we run `yarn doc`. It seems jsx code is not well parsed anymore.
+
+react@16.14.0:  React 17 is not well supported by `material-ui`. In the tarifverbundkarte topic, the select box used to update the import format crashes the app when we click on it. The search component also have troubles when dev tools are open and try to navigate in the results with the keyboard.
+
+fixpack@3.0.6: Fixpack `4.0.0` returns an exit code of 1 everytime, so it breaks the lint-staged hook. See [bug](https://github.com/HenrikJoreteg/fixpack/issues/50).
+
+ol@6.6.1: The version `6.7.0` has some dependencies for the module `geotiff` like `txml` that the compiler can't find.
+
+babel-preset-react-app@9: The version `10.0.0` doesn't compile the same way the files in the `build/es` folder, it removed the option `modules: false` for the preset-env. That double the size of the code when we compile in a parent project.

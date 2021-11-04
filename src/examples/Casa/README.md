@@ -1,5 +1,3 @@
-#
-
 The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
 ```jsx
@@ -207,7 +205,7 @@ const App = () => {
   /* To use casa style sheet, add the casa class in the parent class */
   return (
     <div className="container casa">
-      <trafimage-maps ref={ref} apiKey={apiKey} apiKeyName={apiKeyName} />
+      <trafimage-maps ref={ref} appName="casa" apiKey={apiKey} apiKeyName={apiKeyName} />
     </div>
   );
 }

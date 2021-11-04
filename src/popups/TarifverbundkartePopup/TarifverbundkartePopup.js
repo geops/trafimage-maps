@@ -34,6 +34,7 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
        * When the unmount happens due to a click on the map (with the clicked property === true),
        * the deselection is handled in TarifverbundkarteLayer. If the "x"-Button in the popup is clicked
        * it is handled here.
+       * @ignore
        */
       if (!layer.get('clicked')) {
         layer.removeSelection();

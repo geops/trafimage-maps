@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import UIFooter from '@geops/react-ui/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
-import Copyright from 'react-spatial/components/Copyright';
 import MousePosition from 'react-spatial/components/MousePosition';
 import ActionLink from '@geops/react-ui/components/ActionLink';
 import ProjectionSelect from '../ProjectionSelect';
@@ -43,11 +42,6 @@ const Footer = () => {
   return (
     <UIFooter className="wkp-footer">
       <div className="wkp-footer-left">
-        <Copyright
-          map={map}
-          format={(f) => `${t('Geodaten')} ${f.join(', ')}`}
-          className="tm-copyright"
-        />
         <ScaleLine map={map} />
         <ProjectionSelect projections={projections} />
         <MousePosition

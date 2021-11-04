@@ -7,6 +7,9 @@ import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles({
+  drawerRoot: {
+    position: 'relative !important',
+  },
   drawer: {
     '& .wkp-feature-information': {
       height: '100%',
@@ -15,6 +18,13 @@ const useStyles = makeStyles({
       height: 'calc(100% - 36px)',
       display: 'flex',
       flexDirection: 'column',
+      '& > div:first-child': {
+        // Normally this div is the root element of a popup component
+        flex: 1,
+        overflow: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+      },
       '& > div': {
         maxHeight: '100%',
       },
@@ -23,7 +33,7 @@ const useStyles = makeStyles({
   drawerDesktop: {
     width: 0,
     '& .wkp-feature-information': {
-      width: 300,
+      width: 400,
     },
   },
   drawerDesktopPaper: {
@@ -107,6 +117,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
           isMobile ? classes.drawerMobile : classes.drawerDesktop
         }`}
         classes={{
+          root: classes.drawerRoot,
           paper: isMobile
             ? ''
             : `${[

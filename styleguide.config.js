@@ -14,8 +14,6 @@ module.exports = {
   styleguideDir: 'styleguide-build',
   require: [
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
-    'react-app-polyfill/ie11',
-    'react-app-polyfill/stable',
     '@webcomponents/webcomponents-platform',
     '@webcomponents/custom-elements',
     '@webcomponents/webcomponentsjs/custom-elements-es5-adapter',
@@ -70,6 +68,9 @@ module.exports = {
     },
   ],
   webpackConfig: {
+    devServer: {
+      https: true,
+    },
     module: {
       rules: [
         // Babel loader, will use your project’s .babelrc
@@ -105,7 +106,18 @@ module.exports = {
                 cacheDirectory: true,
               },
             },
-            require.resolve('@svgr/webpack'),
+            {
+              loader: require.resolve('@svgr/webpack'),
+              options: {
+                svgoConfig: {
+                  plugins: [
+                    {
+                      removeViewBox: false,
+                    },
+                  ],
+                },
+              },
+            },
             {
               loader: require.resolve('file-loader'),
               options: {

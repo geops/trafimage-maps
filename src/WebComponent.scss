@@ -1,23 +1,3 @@
-@mixin loadFont($fontFamily, $path) {
-  @font-face {
-    font-family: #{$fontFamily};
-    src:
-      url('#{$path}.woff') format('woff'),
-      url('#{$path}.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-  }
-}
-
-@include loadFont(
-  'SBBWeb-Roman',
-  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman'
-);
-@include loadFont(
-  'SBBWeb-Bold',
-  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
-);
-
 @import 'globals.scss';
 
 // @geops/react-ui
@@ -80,7 +60,7 @@
 @import './popups/ConstructionPopup/ConstructionPopup.scss';
 @import './popups/HandicapPopup/HandicapPopup.scss';
 @import './popups/NetzkartePopup/NetzkartePopup.scss';
-@import './popups/ParksPopup/ParksPopup.scss';
+@import './popups/StationPopup/StationPopup.scss';
 @import './popups/PassagierFrequenzenPopup/PassagierFrequenzenPopup.scss';
 @import './popups/DeparturePopup/DeparturePopupContent.scss';
 @import './popups/DeparturePopup/DestinationInput.scss';

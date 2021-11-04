@@ -55,12 +55,14 @@ const propTypes = {
     replace: PropTypes.func,
   }),
   appBaseUrl: PropTypes.string,
+  loginUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
   appBaseUrl: null,
+  loginUrl: null,
   staticFilesUrl: null,
 };
 
@@ -69,7 +71,7 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
+function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
   const ref = useRef(null);
   const dispatch = useDispatch();
   const { activeTopic, layerService, map } = useSelector((state) => state.app);
@@ -138,7 +140,7 @@ function TopicElements({ history, appBaseUrl, staticFilesUrl }) {
 
   // Define which components to display.
   const appComponents = {
-    header: <Header appBaseUrl={appBaseUrl} />,
+    header: <Header appBaseUrl={appBaseUrl} loginUrl={loginUrl} />,
     search: <Search />,
     map: (
       <EventConsumer>

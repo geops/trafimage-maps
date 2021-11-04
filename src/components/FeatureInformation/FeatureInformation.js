@@ -30,7 +30,6 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
-  const cartaroOldUrl = useSelector((state) => state.app.cartaroOldUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
@@ -39,6 +38,9 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
   // List of features available for pagination.
   const features = [];
+
+  // List of corresponding layer for each features in the array.
+  const layers = [];
 
   // When a popup use hidePagination, we store the index for each popup.
   const indexByPopup = {};
@@ -50,12 +52,26 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       // All features using this PopupComponent will be render on the same page
       if (indexByPopup[name] !== undefined) {
         features[indexByPopup[name]].push(...featInfo.features);
+        featInfo.features.forEach(() => {
+          if (!layers[indexByPopup[name]]) {
+            layers[indexByPopup[name]] = [];
+          }
+          layers[indexByPopup[name]].push(featInfo.layer);
+        });
       } else {
         features.push([...featInfo.features]);
+        const arr = [];
+        featInfo.features.forEach(() => {
+          arr.push(featInfo.layer);
+        });
+        layers.push(arr);
         indexByPopup[name] = features.length - 1;
       }
     } else if (PopupComponent) {
       features.push(...featInfo.features);
+      featInfo.features.forEach(() => {
+        layers.push(featInfo.layer);
+      });
     }
   });
 
@@ -147,9 +163,8 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.key}
-            cartaroOldUrl={cartaroOldUrl}
             t={t}
-            layer={info.layer}
+            layer={layers[featureIndex]}
             feature={features[featureIndex]}
             language={language}
             appBaseUrl={appBaseUrl}

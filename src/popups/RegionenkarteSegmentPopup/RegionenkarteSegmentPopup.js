@@ -13,12 +13,6 @@ const PERMALINK_PARAM = 'rkTab';
 const TABS = ['region', 'nl', 'av'];
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flex: 1,
-    overflow: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-  },
   tabPanel: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
@@ -80,7 +74,8 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
   }, [isIntern, parsed, tab]);
 
   useEffect(() => {
-    const layerId = 'anlagenverantwortliche.lines.highlight';
+    // highlight style on mouse over and the style when selected use 2 different styles.
+    const layerId = 'anlagenverantwortliche.lines.select';
     const mbMap = layer?.mapboxLayer?.mbMap;
 
     if (!mbMap || !mbMap.getLayer(layerId)) {

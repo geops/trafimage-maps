@@ -154,9 +154,8 @@ class IconList extends PureComponent {
     };
 
     if (displayOnTop) {
-      const targetElements = document.getElementsByClassName(
-        'tm-trafimage-maps',
-      );
+      const targetElements =
+        document.getElementsByClassName('tm-trafimage-maps');
 
       if (!targetElements || !targetElements.length) {
         return null;

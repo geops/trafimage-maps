@@ -2,13 +2,13 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-import 'jest-canvas-mock';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
+import fetch from 'node-fetch';
 
 configure({ adapter: new Adapter() });
 
@@ -27,6 +27,10 @@ proj4.defs(
 );
 
 register(proj4);
+
+if (!global.fetch) {
+  global.fetch = fetch;
+}
 
 global.URL.createObjectURL = jest.fn(() => 'fooblob');
 
