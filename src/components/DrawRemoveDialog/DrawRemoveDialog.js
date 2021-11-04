@@ -56,8 +56,9 @@ function DrawRemoveDialog() {
             {t('Wollen Sie den Plan wirklich aus der Karte löschen?')}
             <br />
             {t(
-              'Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link:',
+              'Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link',
             )}
+            :
           </div>
           <div className={classes.link}>
             <PermalinkInput value={window.location.href} />
