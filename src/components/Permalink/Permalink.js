@@ -281,10 +281,13 @@ class Permalink extends PureComponent {
         coordinate: stationFeature.getGeometry().getCoordinates(),
         features: [stationFeature],
         // Fake layer binded to popup, to open it.
-        layer: {
+        layer: new Layer({
           key: 'ch.sbb.departure.popup',
-          get: (val) => (val === 'popupComponent' ? 'DeparturePopup' : null),
-        },
+          properties: {
+            popupComponent: 'DeparturePopup',
+            useOverlay: true,
+          },
+        }),
       },
     ]);
   }
