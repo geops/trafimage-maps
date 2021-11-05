@@ -1,4 +1,5 @@
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import centroid from '@turf/centroid';
 
 /**
  * Layer for displaying blue stations circle on hover.
@@ -24,9 +25,6 @@ class PlatformsLayer extends MapboxStyleLayer {
             0.5,
             0,
           ],
-        },
-        layout: {
-          'symbol-placement': 'point',
         },
       },
       properties: {
@@ -85,7 +83,6 @@ class PlatformsLayer extends MapboxStyleLayer {
     this.platformLayers = mbMap.getStyle().layers.filter((layer) => {
       return layer.type === 'symbol' && layer['source-layer'] === 'platform';
     });
-    console.log(this.platformLayers);
 
     this.platformLayers = this.platformLayers.map((layer) => layer.id);
 
@@ -115,11 +112,19 @@ class PlatformsLayer extends MapboxStyleLayer {
         layers: this.platformLayers,
       })
       .map((feat) => {
+        let { geometry } = feat;
+
+        // If it's a polygon we need to get the centroid of the polygon.
+        if (geometry.type === 'Polygon') {
+          const centrod = centroid(geometry);
+          geometry = centrod.geometry;
+        }
+
         const good = {
           id: (feat.id || Math.random()) * 1000,
           type: feat.type,
           properties: feat.properties,
-          geometry: feat.geometry,
+          geometry,
         };
         return good;
       });

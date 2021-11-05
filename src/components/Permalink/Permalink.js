@@ -10,6 +10,7 @@ import LayerService from 'react-spatial/LayerService';
 import KML from 'react-spatial/utils/KML';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { setCenter, setZoom } from '../../model/map/actions';
+import { netzkartePointLayer } from '../../config/layers';
 import {
   setDeparturesFilter,
   setFeatureInfo,
@@ -219,7 +220,6 @@ class Permalink extends PureComponent {
       activeTopic,
       history,
       departuresFilter,
-      layerService,
       language,
       drawIds,
       dispatchUpdateDrawEditLink,
@@ -238,17 +238,12 @@ class Permalink extends PureComponent {
     }
 
     if (this.loadDepartureOnce && this.departures) {
-      const dataLayer = layerService.getLayer('ch.sbb.netzkarte.data');
       this.loadDepartureOnce = false;
-      if (dataLayer && dataLayer.mbMap) {
-        const { mbMap } = dataLayer;
 
-        // We need to wait until mapbox layer is loaded.
-        dataLayer.on('load', () => {
-          // then we wait the stations source has been updated.
-          mbMap.once('idle', this.openDepartureOnLoad.bind(this));
-        });
-      }
+      // We need to wait until stations layer has been updated and rendered.
+      netzkartePointLayer.once('datarendered', () => {
+        this.openDepartureOnLoad();
+      });
     }
 
     if (drawIds !== prevProps.drawIds) {
@@ -259,11 +254,12 @@ class Permalink extends PureComponent {
   }
 
   async openDepartureOnLoad() {
-    const { layerService, dispatchSetFeatureInfo } = this.props;
-    const dataLayer = layerService.getLayer('ch.sbb.netzkarte.data');
-    const departures = dataLayer.getFeatures({
-      source: 'base',
-      sourceLayer: 'osm_points',
+    const { dispatchSetFeatureInfo } = this.props;
+    const { mbMap } = netzkartePointLayer.mapboxLayer;
+
+    // We display the departures popup only on features of the station layer (not on platform).
+    const departures = mbMap.queryRenderedFeatures({
+      layers: [netzkartePointLayer.styleLayers[0].id],
       filter: ['==', ['get', 'sbb_id'], this.departures],
     });
 
