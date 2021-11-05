@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -29,10 +30,13 @@ function NetzkartePopup({ feature }) {
           coordinate: feature.getGeometry().getCoordinates(),
           features: [feature],
           // Fake layer binded to popup, to open it.
-          layer: {
+          layer: new Layer({
             key: 'ch.sbb.departure.popup',
-            get: (val) => (val === 'popupComponent' ? 'DeparturePopup' : null),
-          },
+            properties: {
+              popupComponent: 'DeparturePopup',
+              useOverlay: true,
+            },
+          }),
         },
       ]),
     );
