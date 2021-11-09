@@ -146,10 +146,8 @@ class PlatformsLayer extends MapboxStyleLayer {
       .map((feat) => {
         const { geometry } = feat;
 
-        // If it's a polygon we need to get the centroid of the polygon.
         if (geometry.type === 'Polygon') {
-          // const centrod = centroid(geometry);
-          // geometry = centrod.geometry;
+          // if it's a polygon we store the uid for the filter.
           uids.push(feat.properties.uid);
         }
 

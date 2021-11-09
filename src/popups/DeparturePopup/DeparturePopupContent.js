@@ -22,6 +22,8 @@ const propTypes = {
 
   name: PropTypes.string.isRequired,
 
+  platform: PropTypes.string,
+
   showTitle: PropTypes.bool,
 
   // react-i18next
@@ -40,6 +42,7 @@ const defaultProps = {
   icon: null,
   showTitle: false,
   apiKey: null,
+  platform: undefined, // important to avoid the platform param to be add in the url.
 };
 
 class DeparturePopupContent extends Component {
@@ -48,7 +51,7 @@ class DeparturePopupContent extends Component {
     const parameters = {
       ...oldParams,
       ...{
-        [DESTINATION_FILTER]: destination ? destination.label : null,
+        [DESTINATION_FILTER]: destination ? destination.label : undefined,
       },
     };
     const qStr = qs.stringify(parameters);
@@ -116,13 +119,14 @@ class DeparturePopupContent extends Component {
   }
 
   componentDidMount() {
-    const { destinationUrl, dispatchSetDeparturesFilter, uic } = this.props;
+    const { destinationUrl, dispatchSetDeparturesFilter, uic, platform } =
+      this.props;
     const { destinationFilter } = this.state;
     this.mounted = true;
     this.loadDepartures();
     this.loadInterval = window.setInterval(() => this.loadDepartures(), 5000);
 
-    dispatchSetDeparturesFilter(uic.toString());
+    dispatchSetDeparturesFilter(uic.toString(), platform);
 
     const parameters = qs.parse(window.location.search);
     if (parameters[DESTINATION_FILTER]) {
