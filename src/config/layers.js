@@ -1,8 +1,8 @@
 import proj4 from 'proj4';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
-import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
-import { TrajservAPI } from 'mobility-toolbox-js/api';
+import { Layer, TralisLayer } from 'mobility-toolbox-js/ol';
+import { TralisAPI } from 'mobility-toolbox-js/api';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
@@ -36,8 +36,8 @@ proj4.defs(
 
 register(proj4);
 
-const sbbTrackerApi = new TrajservAPI({
-  url: 'https://api.geops.io/tracker/sbb',
+const sbbTrackerApi = new TralisAPI({
+  url: 'wss://api.geops.io/realtime-ws/v1/?key=5cc87b12d7c5370001c1d655112ec5c21e0f441792cfc2fafe3e7a1e', // https://api.geops.io/tracker/sbb',
 });
 
 export const dataLayer = new TrafimageMapboxLayer({
@@ -299,16 +299,6 @@ bahnhofplaene.children = [
   }),
 ];
 
-export const tracker = new TrajservLayer({
-  name: 'Zugtracker',
-  key: 'ch.sbb.tracker',
-  visible: false,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.tracker-desc',
-  },
-});
-
 export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
@@ -320,7 +310,7 @@ export const punctuality = new Layer({
 });
 
 punctuality.children = [
-  new TrajservLayer({
+  new TralisLayer({
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
@@ -330,7 +320,7 @@ punctuality.children = [
     },
     api: sbbTrackerApi,
   }),
-  new TrajservLayer({
+  new TralisLayer({
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: true,
@@ -340,7 +330,7 @@ punctuality.children = [
     },
     api: sbbTrackerApi,
   }),
-  new TrajservLayer({
+  new TralisLayer({
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     useDelayStyle: true,

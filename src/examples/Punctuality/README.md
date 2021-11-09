@@ -3,7 +3,7 @@ This example shows how to integrate punctuality information in your map applicat
 ```jsx
 import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
-import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
+import { Layer, TralisLayer } from 'mobility-toolbox-js/ol';
 import defaultBaseLayers from 'trafimage-maps/examples/Punctuality/layers';
 import defaultSearches from 'trafimage-maps/config/searches';
 
@@ -22,12 +22,12 @@ const App = () => {
         key: 'ch.sbb.netzkarte',
         layers: [
           ...defaultBaseLayers,
-          new TrajservLayer({
+          new TralisLayer({
             name: 'Zugtracker',
             key: 'ch.sbb.tracker',
             apiKey: apiKey,
           }),
-          new TrajservLayer({
+          new TralisLayer({
             name: 'ch.sbb.puenktlichkeit',
             key: 'ch.sbb.puenktlichkeit',
             apiKey: apiKey,
