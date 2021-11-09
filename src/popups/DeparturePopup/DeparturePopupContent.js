@@ -309,7 +309,10 @@ class DeparturePopupContent extends Component {
                 <th colSpan="2">
                   <SBBClock focusable={false} height="23px" width="23px" />
                 </th>
-                <th>{t(platformName)}</th>
+                <th>
+                  {t(platformName)[0].toUpperCase() +
+                    t(platformName).substring(1)}
+                </th>
               </tr>
               {departures.map((departure, idx) => (
                 // eslint-disable-next-line react/no-array-index-key
