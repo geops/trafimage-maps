@@ -35,7 +35,7 @@ class Betriebspunkte extends Search {
     return (
       <div>
         {name}
-        {abbreviated ? ` ${abbreviated}` : ''}
+        {abbreviated ? ` (${abbreviated})` : ''}
       </div>
     );
   }
