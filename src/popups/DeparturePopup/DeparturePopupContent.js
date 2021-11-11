@@ -20,8 +20,6 @@ const propTypes = {
 
   icon: PropTypes.object,
 
-  name: PropTypes.string.isRequired,
-
   platform: PropTypes.string,
 
   showTitle: PropTypes.bool,
@@ -246,7 +244,7 @@ class DeparturePopupContent extends Component {
   }
 
   render() {
-    const { uic, name, icon, showTitle, t } = this.props;
+    const { uic, icon, showTitle, t } = this.props;
     let { departures } = this.state;
     departures = departures.sort(
       (a, b) =>
@@ -255,17 +253,6 @@ class DeparturePopupContent extends Component {
     );
     const { destinationFilter, departuresLoading, platformName, isOffline } =
       this.state;
-
-    let title = null;
-    if (showTitle) {
-      const text = `${t('Abfahrtszeiten')} ${name}`;
-
-      title = (
-        <div className="tm-departure-title" title={text}>
-          {text}
-        </div>
-      );
-    }
 
     const loading = departuresLoading ? (
       <div className="tm-loader">
@@ -291,7 +278,11 @@ class DeparturePopupContent extends Component {
     return (
       <div className="tm-departure-popup-body">
         {icon}
-        {title}
+        {showTitle && (
+          <div className="tm-departure-title">
+            {`${t(`Abfahrtszeiten aller ${platformName}`)}`}
+          </div>
+        )}
 
         <DestinationInput
           destination={destinationFilter}
