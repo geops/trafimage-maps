@@ -19,7 +19,6 @@ const DeparturePopup = ({ feature }) => {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layerService = useSelector((state) => state.app.layerService);
-  const name = feature.get('name');
   const platform = feature.get('platform');
   const uic = parseFloat(feature.get('sbb_id'));
 
@@ -41,7 +40,7 @@ const DeparturePopup = ({ feature }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <DeparturePopupContent name={name} uic={uic} platform={platform} />;
+  return <DeparturePopupContent uic={uic} platform={platform} showTitle />;
 };
 
 DeparturePopup.propTypes = propTypes;
