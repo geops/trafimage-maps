@@ -1,7 +1,7 @@
 import proj4 from 'proj4';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
-import { Layer, TralisLayer } from 'mobility-toolbox-js/ol';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { TralisAPI } from 'mobility-toolbox-js/api';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
@@ -19,6 +19,7 @@ import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import StationsLayer from '../layers/StationsLayer';
+import TralisLayer from '../layers/TralisLayer';
 
 proj4.defs(
   'EPSG:21781',
