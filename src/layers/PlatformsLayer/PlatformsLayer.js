@@ -1,40 +1,73 @@
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 
 /**
- * Layer for displaying blue stations circle on hover.
+ * Layer for displaying blue circle on platforms on hover.
  * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
  * @private
  * @class
  * @param {Object} [options] Layer options.
  */
-class StationsLayer extends MapboxStyleLayer {
+class PlatformsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
+    const id = 'platforms';
+    const paint = {
+      'icon-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        0.5,
+        0,
+      ],
+    };
+    const layout = {
+      'icon-image': '111_circle-blue-big-01',
+      'icon-ignore-placement': true,
+      'icon-allow-overlap': true,
+    };
     super({
-      styleLayer: {
-        id: 'stations',
-        type: 'circle',
-        source: 'stations',
-        paint: {
-          'circle-radius': 10,
-          'circle-color': 'rgb(0, 61, 155)',
-          'circle-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.5,
-            0,
-          ],
+      styleLayers: [
+        // Icons are not well placed on platform polygons because we don't
+        // have the exact same polygon as mapbox. So we can't use the new
+        // source to display the icons, we have to use the original source
+        // and set a filter (using uid) to the layer to display only rendered
+        // plaforms polygons.
+        {
+          id: `${id}_polygon`,
+          type: 'symbol',
+          source: 'openmaptiles',
+          'source-layer': 'platform',
+          filter: ['all', false],
+          paint,
+          layout,
         },
-      },
+        {
+          id: `${id}_linestring`,
+          type: 'symbol',
+          source: id,
+          filter: ['==', ['geometry-type'], 'LineString'],
+          paint,
+          layout: {
+            ...layout,
+            'symbol-placement': 'line-center',
+          },
+        },
+        {
+          id: `${id}_point`,
+          type: 'symbol',
+          source: id,
+          filter: ['==', ['geometry-type'], 'Point'],
+          paint,
+          layout,
+        },
+      ],
       properties: {
         hideInLegend: true,
-        popupComponent: 'StationPopup',
-        useOverlay: true,
+        popupComponent: 'NetzkartePopup',
       },
       ...options,
     });
 
     this.source = {
-      id: 'stations',
+      id,
       type: 'geojson',
       data: {
         type: 'FeatureCollection',
@@ -79,14 +112,11 @@ class StationsLayer extends MapboxStyleLayer {
    */
   onLoad() {
     const { mbMap } = this.mapboxLayer;
-    this.osmPointsLayers = mbMap
-      .getStyle()
-      .layers.filter((layer) => {
-        return (
-          layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
-        );
-      })
-      .map((layer) => layer.id);
+    this.platformLayers = mbMap.getStyle().layers.filter((layer) => {
+      return layer.type === 'symbol' && layer['source-layer'] === 'platform';
+    });
+
+    this.platformLayers = this.platformLayers.map((layer) => layer.id);
 
     this.addSource();
     super.onLoad();
@@ -98,15 +128,6 @@ class StationsLayer extends MapboxStyleLayer {
    */
   onIdle() {
     this.updateSource();
-
-    // We warn the permalink that new data have been rendered.
-    this.mapboxLayer.mbMap?.once('idle', () => {
-      // New data are rendered
-      this.dispatchEvent({
-        type: 'datarendered',
-        target: this,
-      });
-    });
   }
 
   // Query the rendered stations then add them to the source.
@@ -114,27 +135,40 @@ class StationsLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     const source = mbMap.getSource(this.source.id);
 
-    if (!this.osmPointsLayers || !source) {
+    if (!this.platformLayers || !source) {
       return;
     }
-
-    const osmPointsRendered = mbMap
+    const uids = []; // ['==', 'uid', '496211a5d7ec6962'];
+    const pointsRendered = mbMap
       .queryRenderedFeatures({
-        layers: this.osmPointsLayers,
+        layers: this.platformLayers,
       })
       .map((feat) => {
+        const { geometry } = feat;
+
+        if (geometry.type === 'Polygon') {
+          // if it's a polygon we store the uid for the filter.
+          uids.push(feat.properties.uid);
+        }
+
         const good = {
-          id: feat.id * 1000,
+          id: (feat.id || Math.random()) * 1000,
           type: feat.type,
           properties: feat.properties,
-          geometry: feat.geometry,
+          geometry,
         };
         return good;
       });
 
+    // we display only visible platorm polygons
+    mbMap.setFilter('platforms_polygon', [
+      'all',
+      ['==', ['geometry-type'], 'Polygon'],
+      ['in', ['get', 'uid'], ['literal', uids]],
+    ]);
     source.setData({
       type: 'FeatureCollection',
-      features: osmPointsRendered,
+      features: pointsRendered,
     });
   }
 
@@ -165,4 +199,4 @@ class StationsLayer extends MapboxStyleLayer {
   }
 }
 
-export default StationsLayer;
+export default PlatformsLayer;

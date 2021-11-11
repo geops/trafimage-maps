@@ -20,6 +20,7 @@ const DeparturePopup = ({ feature }) => {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layerService = useSelector((state) => state.app.layerService);
   const name = feature.get('name');
+  const platform = feature.get('platform');
   const uic = parseFloat(feature.get('sbb_id'));
 
   const openNetzkartePopup = () => {
@@ -40,14 +41,20 @@ const DeparturePopup = ({ feature }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <DeparturePopupContent name={name} uic={uic} />;
+  return <DeparturePopupContent name={name} uic={uic} platform={platform} />;
 };
 
 DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;
 
 const composed = withTranslation()(DeparturePopup);
-composed.renderTitle = (feat) => feat.get('name');
+composed.renderTitle = (feat, t) => {
+  const platform = feat.get('platform');
+  if (platform) {
+    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+  }
+  return feat.get('name');
+};
 // Trigerred on popup close with close button only.
 composed.onCloseBtClick = () => {
   returnToNetzkarte = true;
