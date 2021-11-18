@@ -9,31 +9,40 @@ import {
 } from 'mobility-toolbox-js/common/trackerConfig';
 
 class TralisLayer extends MBTTralisLayer {
-  defaultStyle(props, zoom) {
+  defaultStyle(trajectory, viewState) {
+    const { zoom, pixelRatio } = viewState;
+    let { line = {} } = trajectory;
     const {
-      type,
-      name,
       id,
-      color,
-      textColor,
       delay,
-      cancelled,
-      operatorProvidesRealtime,
-    } = props;
+      type = 'Rail',
+      cancelled = false,
+      operatorProvidesRealtime = 'no',
+    } = trajectory;
+
+    if (!line) {
+      line = {};
+    }
+
+    const { name = 'I', color = '#ffffff' } = line;
+    let { text_color: textColor } = line;
+    if (!textColor) {
+      textColor = '#000000';
+    }
     const z = Math.min(Math.floor(zoom || 1), 16);
     const hover = this.hoverVehicleId === id;
     const selected = this.selectedVehicleId === id;
     let key = `${z}${type}${name}${operatorProvidesRealtime}${delay}${hover}${selected}${cancelled}`;
 
     // Calcul the radius of the circle
-    let radius = getRadius(type, z) * this.pixelRatio;
-    const isDisplayStrokeAndDelay = radius >= 7 * this.pixelRatio;
+    let radius = getRadius(type, z) * pixelRatio;
+    const isDisplayStrokeAndDelay = radius >= 7 * pixelRatio;
     if (hover || selected) {
       radius = isDisplayStrokeAndDelay
-        ? radius + 5 * this.pixelRatio
-        : 14 * this.pixelRatio;
+        ? radius + 5 * pixelRatio
+        : 14 * pixelRatio;
     }
-    const mustDrawText = radius > 10 * this.pixelRatio;
+    const mustDrawText = radius > 10 * pixelRatio;
 
     // Optimize the cache key, very important in high zoom level
     if (!mustDrawText) {
@@ -46,14 +55,14 @@ class TralisLayer extends MBTTralisLayer {
         return null;
       }
 
-      const margin = 1 * this.pixelRatio;
+      const margin = 1 * pixelRatio;
       const radiusDelay = radius + 2;
       const markerSize = radius * 2;
 
       const canvas = document.createElement('canvas');
       // add space for delay information
-      canvas.width = radiusDelay * 2 + margin * 2 + 100 * this.pixelRatio;
-      canvas.height = radiusDelay * 2 + margin * 2 + 100 * this.pixelRatio;
+      canvas.width = radiusDelay * 2 + margin * 2 + 100 * pixelRatio;
+      canvas.height = radiusDelay * 2 + margin * 2 + 100 * pixelRatio;
       const ctx = canvas.getContext('2d');
       const origin = canvas.width / 2;
 
@@ -84,7 +93,7 @@ class TralisLayer extends MBTTralisLayer {
         ctx.fillStyle = getDelayColor(delay, cancelled, true);
 
         ctx.strokeStyle = this.delayOutlineColor;
-        ctx.lineWidth = 1.5 * this.pixelRatio;
+        ctx.lineWidth = 1.5 * pixelRatio;
         const delayText = getDelayText(delay, cancelled);
         ctx.strokeText(delayText, origin + radiusDelay + margin, origin);
         ctx.fillText(delayText, origin + radiusDelay + margin, origin);
@@ -101,7 +110,7 @@ class TralisLayer extends MBTTralisLayer {
 
       ctx.save();
       if (isDisplayStrokeAndDelay || hover || selected) {
-        ctx.lineWidth = 1 * this.pixelRatio;
+        ctx.lineWidth = 1 * pixelRatio;
         ctx.strokeStyle = '#000000';
       }
       ctx.fillStyle = circleFillColor;
@@ -124,7 +133,7 @@ class TralisLayer extends MBTTralisLayer {
 
       // Draw text in the circle
       if (mustDrawText) {
-        const fontSize = Math.max(radius, 10 * this.pixelRatio);
+        const fontSize = Math.max(radius, 10 * pixelRatio);
         const textSize = getTextSize(ctx, markerSize, name, fontSize);
 
         // Draw a stroke to the text only if a provider provides realtime but we don't use it.

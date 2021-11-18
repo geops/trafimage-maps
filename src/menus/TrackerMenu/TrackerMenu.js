@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import { TiVideo } from 'react-icons/ti';
-import { fromLonLat } from 'ol/proj';
+// import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 import { Layer } from 'mobility-toolbox-js/ol';
 import RouteSchedule from 'react-spatial/components/RouteSchedule';
@@ -39,8 +39,9 @@ class TrackerMenu extends Component {
     this.state = {
       open: false,
       collapsed: true,
-      trajectory: null,
+      lineInfos: null,
     };
+    this.onStopSequence = this.onStopSequence.bind(this);
     this.onLayerClick = this.onLayerClick.bind(this);
   }
 
@@ -48,7 +49,8 @@ class TrackerMenu extends Component {
     this.initializeClick();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    const { layer, feature } = this.state;
     const { menuOpen, layers } = this.props;
     if (menuOpen !== prevProps.menuOpen) {
       this.closeMenu();
@@ -57,27 +59,66 @@ class TrackerMenu extends Component {
     if (layers !== prevProps.layers) {
       this.initializeClick();
     }
+
+    if (layer !== prevState.layer || feature !== prevState.feature) {
+      if (layer && feature) {
+        this.unsubscribeStopSequence(prevState);
+        this.subscribeStopSequence();
+      } else {
+        this.unsubscribeStopSequence(prevState);
+      }
+    }
   }
 
   componentWillUnmount() {
+    this.unsubscribeStopSequence();
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
-
     this.trackerLayers.forEach((layer) => {
       layer.unClick(this.onLayerClick);
     });
   }
 
-  onLayerClick(traj) {
+  onLayerClick(featureInfo) {
     const { dispatchSetMenuOpen } = this.props;
-    if (traj) {
+
+    if (!featureInfo.features.length) {
       dispatchSetMenuOpen(false);
+    } else {
+      this.setState({
+        open: true,
+        collapsed: false,
+        feature: featureInfo.features[0],
+        layer: featureInfo.layer,
+        lineInfos: null,
+      });
     }
-    this.setState({
-      open: !!traj,
-      collapsed: false,
-      trajectory: traj,
-    });
+  }
+
+  onStopSequence(stopSequence) {
+    this.setState({ lineInfos: stopSequence[0] });
+  }
+
+  subscribeStopSequence() {
+    const { feature, layer } = this.state;
+    const { api } = layer;
+    const vehicleId = feature.get('train_id');
+    api.subscribeStopSequence(vehicleId, this.onStopSequence);
+  }
+
+  unsubscribeStopSequence(prevState = {}) {
+    const { feature, layer } = this.state;
+
+    if (!prevState.layer && !layer && !prevState.feature && !feature) {
+      return;
+    }
+
+    const { api } = prevState.layer || layer;
+    const vehicleId = (prevState.feature || feature).get('train_id');
+    if (api && vehicleId) {
+      this.setState({ lineInfos: null });
+      api.unsubscribeStopSequence(vehicleId);
+    }
   }
 
   initializeClick() {
@@ -105,12 +146,12 @@ class TrackerMenu extends Component {
     this.setState({
       open: false,
       collapsed: false,
-      trajectory: null,
+      lineInfos: null,
     });
   }
 
   render() {
-    const { open, collapsed, trajectory } = this.state;
+    const { open, collapsed, lineInfos } = this.state;
     const { map, t } = this.props;
 
     if (!open) {
@@ -127,17 +168,20 @@ class TrackerMenu extends Component {
         collapsed={collapsed}
         onCollapseToggle={(c) => this.setState({ collapsed: c })}
       >
-        {trajectory ? (
+        {lineInfos ? (
           <div>
             <RouteSchedule
               trackerLayer={this.trackerLayers.find((l) => l.visible)}
-              lineInfos={trajectory}
-              onStationClick={(station) => {
-                map.getView().animate({
-                  zoom: map.getView().getZoom(),
-                  center: fromLonLat(station.coordinates),
-                });
-              }}
+              lineInfos={lineInfos}
+              // station.coordinates doesn't exist
+              // onStationClick={(station) => {
+              //   if (!station.coordinates) {
+              //     map.getView().animate({
+              //       zoom: map.getView().getZoom(),
+              //       center: fromLonLat(station.coordinates),
+              //     });
+              //   }
+              // }}
             />
           </div>
         ) : null}

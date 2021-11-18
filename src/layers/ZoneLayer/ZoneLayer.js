@@ -85,7 +85,7 @@ class ZoneLayer extends CasaLayer {
 
     this.selectedZones = [];
 
-    this.onClick((features) => {
+    this.onClick(({ features }) => {
       if (features.length) {
         const [feature] = features;
 

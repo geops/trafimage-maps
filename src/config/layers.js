@@ -303,6 +303,9 @@ bahnhofplaene.children = [
 export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
+  isQueryable: false,
+  isClickActive: false,
+  isHoverActive: false,
   properties: {
     hasAccessibility: true,
     hasInfos: true,
