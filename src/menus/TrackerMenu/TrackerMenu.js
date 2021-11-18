@@ -79,17 +79,17 @@ class TrackerMenu extends Component {
     });
   }
 
-  onLayerClick(featureInfo) {
+  onLayerClick(features, layer) {
     const { dispatchSetMenuOpen } = this.props;
 
-    if (!featureInfo.features.length) {
+    if (!features.length) {
       dispatchSetMenuOpen(false);
     } else {
       this.setState({
         open: true,
         collapsed: false,
-        feature: featureInfo.features[0],
-        layer: featureInfo.layer,
+        feature: features[0],
+        layer,
         lineInfos: null,
       });
     }
