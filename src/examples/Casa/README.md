@@ -115,7 +115,7 @@ zoneLayer.loadZones([
   },
 ]);
 
-zoneLayer.onClick(({features}) => {
+zoneLayer.onClick((features) => {
   console.log('Clicked', features);
 });
 
@@ -178,7 +178,7 @@ routeLayer
     routeLayer.zoomToRoute({duration: 1000});
   });
 
-routeLayer.onClick(({features}) => {
+routeLayer.onClick((features) => {
   console.log('Clicked', features);
 });
 

@@ -78,7 +78,7 @@ class RouteLayer extends CasaLayer {
 
     this.selectedRouteIds = [];
 
-    this.onClick(({ features }) => {
+    this.onClick((features) => {
       if (features.length) {
         const [feature] = features;
         const { isClickable, routeId } = feature.get('route');

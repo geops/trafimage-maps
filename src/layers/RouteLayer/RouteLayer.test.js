@@ -246,7 +246,7 @@ describe('RouteLayer', () => {
     expect(route).toEqual([]);
   });
 
-  test.only('shoud call onClick callbacks and deselect on click.', async () => {
+  test('shoud call onClick callbacks and deselect on click.', async () => {
     const coordinate = [10, 10];
     fetchRoutes();
     layer.init(map);
@@ -257,11 +257,7 @@ describe('RouteLayer', () => {
     expect(onClick).toHaveBeenCalledTimes(0);
     const evt = { type: 'singleclick', map, coordinate };
     await map.dispatchEvent(evt);
-    expect(onClick).toHaveBeenCalledWith({
-      features: [features[0]],
-      layer,
-      coordinate,
-    });
+    expect(onClick).toHaveBeenCalledWith([features[0]], layer, coordinate);
     expect(layer.selectedRouteIds).toEqual([]);
   });
 
