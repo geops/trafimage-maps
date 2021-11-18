@@ -46,6 +46,11 @@ import defaultBaseLayers, {
   netzentwicklungStrategischLayer,
   netzentwicklungProgrammManagerLayer,
   netzentwicklungSkPlanerLayer,
+  beleuchtungstaerken1,
+  beleuchtungstaerken2a,
+  beleuchtungstaerken2b,
+  beleuchtungstaerken3,
+  beleuchtungstaerken4,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -341,6 +346,24 @@ export const netzentwicklung = {
   searches: defaultSearches,
 };
 
+export const beleuchtungsstaerken = {
+  name: 'ch.sbb.beleuchtungsstaerken',
+  key: 'ch.sbb.beleuchtungsstaerken',
+  maxZoom: 13,
+  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  layers: [
+    netzentwicklungDataLayer,
+    beleuchtungstaerken4,
+    beleuchtungstaerken3,
+    beleuchtungstaerken2b,
+    beleuchtungstaerken2a,
+    beleuchtungstaerken1,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'BeleuchtungTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -351,6 +374,7 @@ const topics = {
     infrastruktur,
     regionenkartePublic,
     netzentwicklung,
+    beleuchtungsstaerken,
     showcases,
   ],
   stelen: [netzkarteStelen],

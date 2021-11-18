@@ -1475,6 +1475,86 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
+export const beleuchtungstaerken1 = new MapboxStyleLayer({
+  name: 'ch.sbb.beleuchtungsstaerken1',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  // TODO: Set correct stylelayer once style is ready
+  styleLayer: {
+    id: 'beleuchtungstaerken1',
+    type: 'symbol',
+    source: 'stations',
+    filter: ['has', 'dwv'],
+  },
+  properties: {
+    popupComponent: 'BeleuchtungsPopup',
+  },
+});
+
+export const beleuchtungstaerken2a = new MapboxStyleLayer({
+  name: 'ch.sbb.beleuchtungsstaerken2a',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  // TODO: Set correct stylelayer once style is ready
+  styleLayer: {
+    id: 'beleuchtungstaerken2a',
+    type: 'symbol',
+    source: 'stations',
+    filter: ['has', 'dwv'],
+  },
+  properties: {
+    popupComponent: 'BeleuchtungsPopup',
+  },
+});
+
+export const beleuchtungstaerken2b = new MapboxStyleLayer({
+  name: 'ch.sbb.beleuchtungsstaerken2b',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  // TODO: Set correct stylelayer once style is ready
+  styleLayer: {
+    id: 'beleuchtungstaerken2b',
+    type: 'symbol',
+    source: 'stations',
+    filter: ['has', 'dwv'],
+  },
+  properties: {
+    popupComponent: 'BeleuchtungsPopup',
+  },
+});
+
+export const beleuchtungstaerken3 = new MapboxStyleLayer({
+  name: 'ch.sbb.beleuchtungsstaerken3',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  // TODO: Set correct stylelayer once style is ready
+  styleLayer: {
+    id: 'beleuchtungstaerken3',
+    type: 'symbol',
+    source: 'stations',
+    filter: ['has', 'dwv'],
+  },
+  properties: {
+    popupComponent: 'BeleuchtungsPopup',
+  },
+});
+
+export const beleuchtungstaerken4 = new MapboxStyleLayer({
+  name: 'ch.sbb.beleuchtungsstaerken4',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  // TODO: Set correct stylelayer once style is ready
+  styleLayer: {
+    id: 'beleuchtungstaerken4',
+    type: 'symbol',
+    source: 'stations',
+    filter: ['has', 'dwv'],
+  },
+  properties: {
+    popupComponent: 'BeleuchtungsPopup',
+  },
+});
+
 export default [
   dataLayer,
   netzkarteLayer,

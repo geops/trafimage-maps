@@ -16,6 +16,7 @@ import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
 import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
 import NetzentwicklungPopup from './NetzentwicklungPopup';
+import BeleuchtunsPopup from './BeleuchtunsPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
 export { default as RegionenkarteIntersectionPopup } from './RegionenkarteIntersectionPopup';
@@ -35,6 +36,7 @@ export { default as ZweitausbildungRoutesPopup } from './ZweitausbildungRoutesPo
 export { default as TarifverbundkartePopup } from './TarifverbundkartePopup';
 export { default as DrawPopup } from './DrawPopup';
 export { default as NetzentwicklungPopup } from './NetzentwicklungPopup';
+export { default as BeleuchtunsPopup } from './BeleuchtunsPopup';
 
 export default {
   BahnhofplanPopup,
@@ -55,4 +57,5 @@ export default {
   RegionenkarteIntersectionPopup,
   DrawPopup,
   NetzentwicklungPopup,
+  BeleuchtunsPopup,
 };
