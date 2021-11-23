@@ -59,7 +59,7 @@ const BetriebsRegionenLayerInfo = () => {
               <LightIcon
                 color={item.color}
                 label={item.info[0]}
-                fontColor={item.info[0].match(/(3|4)/) && 'white'}
+                fontColor={item.info[0].match(/(3|4|2b)/) && 'white'}
               />
             </div>
             <div>
