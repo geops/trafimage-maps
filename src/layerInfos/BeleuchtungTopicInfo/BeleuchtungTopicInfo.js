@@ -5,29 +5,24 @@ import LightIcon from './LightIcon';
 
 const lightMapping = [
   {
-    key: '1',
-    info: ['>= 20000', 'Hohes Personenaufkommen'],
-    icon: <LightIcon color="#eace28" label="1" />,
+    color: '#eace28',
+    info: ['1', '>= 20000', 'Hohes Personenaufkommen'],
   },
   {
-    key: '2a',
-    info: ['10000 - 19999', 'Mittleres Personenaufkommen'],
-    icon: <LightIcon color="#eaaf0a" label="2a" />,
+    color: '#eaaf0a',
+    info: ['2a', '10000 - 19999', 'Mittleres Personenaufkommen'],
   },
   {
-    key: '2b',
-    info: ['1500 - 9999', 'Mittleres Personenaufkommen'],
-    icon: <LightIcon color="#cc8912" label="2b" />,
+    color: '#cc8912',
+    info: ['2b', '1500 - 9999', 'Mittleres Personenaufkommen'],
   },
   {
-    key: '3',
-    info: ['50 - 1499', 'Geringes Personenaufkommen'],
-    icon: <LightIcon color="#996717" label="3" fontColor="white" />,
+    color: '#996717',
+    info: ['3', '50 - 1499', 'Geringes Personenaufkommen'],
   },
   {
-    key: '4',
-    info: ['< 50', 'Sehr geringes Personenaufkommen'],
-    icon: <LightIcon color="#684614" label="4" fontColor="white" />,
+    color: '#684614',
+    info: ['4', '< 50', 'Sehr geringes Personenaufkommen'],
   },
 ];
 
@@ -59,11 +54,17 @@ const BetriebsRegionenLayerInfo = () => {
     <div>
       {lightMapping.map((item) => {
         return (
-          <div className={classes.legendRow} key={item.key}>
-            <div className={classes.iconWrapper}>{item.icon}</div>
+          <div className={classes.legendRow} key={item.info[0]}>
+            <div className={classes.iconWrapper}>
+              <LightIcon
+                color={item.color}
+                label={item.info[0]}
+                fontColor={item.info[0].match(/(3|4)/) && 'white'}
+              />
+            </div>
             <div>
-              {t(item.info[1])} <br />
-              <span className={classes.subtext}>{`${item.info[0]} ${t(
+              {t(item.info[2])} <br />
+              <span className={classes.subtext}>{`${item.info[1]} ${t(
                 'Passagiere/Tag',
               )}`}</span>
             </div>

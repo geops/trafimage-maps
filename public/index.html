@@ -104,33 +104,33 @@
     </style>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
     <script type="text/javascript">
-      window.changeAttr = function(attr, val) {
+      window.changeAttr = function (attr, val) {
         // If attribute value is the same the update is not triggered,
         // so we set it to null first before setting it to the new value.
         var map = document.getElementById('map');
         // On IE only lowercase attribute are detected.
         map.setAttribute(attr.toLowerCase(), val);
       };
-      window.changeProp = function(attr, val) {
+      window.changeProp = function (attr, val) {
         var map = document.getElementById('map');
         map[attr] = val;
       };
 
-      window.onload = function() {
+      window.onload = function () {
         fetch('https://developer.geops.io/publickey')
-          .then(function(response) {
+          .then(function (response) {
             return response.json();
           })
-          .then(function(data) {
+          .then(function (data) {
             changeAttr('apiKey', data.key);
           })
-          .catch(function() {
+          .catch(function () {
             console.error('Request to get the apiKey failed');
           });
 
         var map = document.getElementById('map');
         var log = document.getElementById('log');
-        map.addEventListener('moveend', function(evt) {
+        map.addEventListener('moveend', function (evt) {
           console.log(evt);
           log.innerHTML =
             evt.type +
@@ -141,11 +141,11 @@
             '<br>' +
             log.innerHTML;
         });
-        map.addEventListener('singleclick', function(evt) {
+        map.addEventListener('singleclick', function (evt) {
           log.innerHTML =
             evt.type + ':<br>' + evt.detail + '<br>' + log.innerHTML;
         });
-        map.addEventListener('getfeatureinfo', function(evt) {
+        map.addEventListener('getfeatureinfo', function (evt) {
           log.innerHTML =
             evt.type + ':<br>' + evt.detail + '<br>' + log.innerHTML;
         });
@@ -159,7 +159,7 @@
       zoom="14"
       center="[810000, 5900000]"
       appName="wkp"
-      activeTopicKey="ch.sbb.netzkarte"
+      activeTopicKey="ch.sbb.beleuchtungsstaerken"
     ></trafimage-maps>
     <button
       type="button"
@@ -194,7 +194,7 @@
               type="button"
               onclick="changeAttr('activeTopicKey', document.getElementById('topic').value)"
             >
-            change topic
+              change topic
             </button>
           </label>
         </div>
@@ -224,7 +224,10 @@
           </button>
         </div>
         <div class="buttons-row">
-          <button type="button" onclick="changeAttr('vectorTilesKey', 'abcdefgh')">
+          <button
+            type="button"
+            onclick="changeAttr('vectorTilesKey', 'abcdefgh')"
+          >
             change vectorTilesKey to 'abcdefgh'
           </button>
           <button
@@ -235,10 +238,16 @@
           </button>
         </div>
         <div class="buttons-row">
-          <button type="button" onclick="changeAttr('cartaroUrl', 'http://foo.ch')">
+          <button
+            type="button"
+            onclick="changeAttr('cartaroUrl', 'http://foo.ch')"
+          >
             change cartaroUrl to http://foo.ch
           </button>
-          <button type="button" onclick="changeAttr('center', '[950000, 6000000]')">
+          <button
+            type="button"
+            onclick="changeAttr('center', '[950000, 6000000]')"
+          >
             change center to '[950000, 5900000]'
           </button>
         </div>
@@ -246,8 +255,12 @@
           <button type="button" onclick="changeAttr('zoom', 16)">
             change zoom to 16
           </button>
-          <button type="button" onclick="changeAttr('maxExtent', '502649.8980,5655117.1007,1352629.6525,6141868.0968')">
-            change max extent to "502649.8980,5655117.1007,1352629.6525,6141868.0968"
+          <button
+            type="button"
+            onclick="changeAttr('maxExtent', '502649.8980,5655117.1007,1352629.6525,6141868.0968')"
+          >
+            change max extent to
+            "502649.8980,5655117.1007,1352629.6525,6141868.0968"
           </button>
         </div>
       </div>

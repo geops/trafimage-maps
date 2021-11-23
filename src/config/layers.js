@@ -79,7 +79,7 @@ export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
 });
 
 export const beleuchtungDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.beleuchtungsstaerkens.data',
+  name: 'ch.sbb.beleuchtungsstaerken.data',
   visible: true,
   preserveDrawingBuffer: true,
   isBaseLayer: true,
