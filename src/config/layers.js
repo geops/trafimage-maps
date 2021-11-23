@@ -1151,6 +1151,7 @@ export const zweitausbildungPoisDataLayer = new TrafimageMapboxLayer({
     hideInLegend: true,
   },
 });
+
 export const zweitausbildungPois = new Layer({
   name: 'ch.sbb.zweitausbildung.tourist.pois.group',
   visible: true,
@@ -1489,7 +1490,7 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
-export const beleuchtungstaerken1 = new BeleuchtungsLayer({
+export const beleuchtungstaerken1Layer = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken1',
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '1',
@@ -1498,7 +1499,7 @@ export const beleuchtungstaerken1 = new BeleuchtungsLayer({
   },
 });
 
-export const beleuchtungstaerken2a = new BeleuchtungsLayer({
+export const beleuchtungstaerken2aLayer = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken2a',
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2a',
@@ -1507,7 +1508,7 @@ export const beleuchtungstaerken2a = new BeleuchtungsLayer({
   },
 });
 
-export const beleuchtungstaerken2b = new BeleuchtungsLayer({
+export const beleuchtungstaerken2bLayer = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken2b',
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2b',
@@ -1516,7 +1517,7 @@ export const beleuchtungstaerken2b = new BeleuchtungsLayer({
   },
 });
 
-export const beleuchtungstaerken3 = new BeleuchtungsLayer({
+export const beleuchtungstaerken3Layer = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken3',
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '3',
@@ -1525,13 +1526,109 @@ export const beleuchtungstaerken3 = new BeleuchtungsLayer({
   },
 });
 
-export const beleuchtungstaerken4 = new BeleuchtungsLayer({
+export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken4',
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '4',
   properties: {
     popupComponent: 'BeleuchtungsPopup',
   },
+});
+
+export const blnLandschaftNaturdenkmaelerLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.bln',
+  key: 'ch.sbb.bln',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.bln/.test(id);
+  },
+});
+
+export const schweizNationalparkLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.nationalpark',
+  key: 'ch.sbb.nationalpark',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.nationalpark/.test(id);
+  },
+});
+
+export const ramsarLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.ramsar',
+  key: 'ch.sbb.ramsar',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.ramsar/.test(id);
+  },
+});
+
+export const schweizPaerkePerimeterLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.paerke.perimeter',
+  key: 'ch.sbb.paerke.perimeter',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.paerke.perimeter/.test(id);
+  },
+});
+
+export const weidenLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.weiden',
+  key: 'ch.sbb.weiden',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.weiden/.test(id);
+  },
+});
+
+export const unescoLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.unesco',
+  key: 'ch.sbb.unesco',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.unesco/.test(id);
+  },
+});
+
+export const vogelreservateLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.vogelreservate',
+  key: 'ch.sbb.vogelreservate',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.vogelreservate/.test(id);
+  },
+});
+
+export const wildruhezonen = new MapboxStyleLayer({
+  name: 'ch.sbb.wildruhezonen',
+  key: 'ch.sbb.wildruhezonen',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.sbb.wildruhezonen/.test(id);
+  },
+});
+
+export const beleuchtungstaerkenBafuLayers = new Layer({
+  name: 'ch.sbb.beleuchtungsstaerken.bafu.group',
+  visible: false,
+  isQueryable: false,
+  children: [
+    blnLandschaftNaturdenkmaelerLayer,
+    schweizNationalparkLayer,
+    ramsarLayer,
+    schweizPaerkePerimeterLayer,
+    weidenLayer,
+    unescoLayer,
+    vogelreservateLayer,
+    wildruhezonen,
+  ],
 });
 
 export default [
