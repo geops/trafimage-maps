@@ -19,6 +19,7 @@ import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import StationsLayer from '../layers/StationsLayer';
+import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -72,6 +73,19 @@ export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'ch.sbb.tarifverbund',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const beleuchtungDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.beleuchtungsstaerkens.data',
+  visible: true,
+  preserveDrawingBuffer: true,
+  isBaseLayer: true,
+  isQueryable: false,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.beleuchtung',
   properties: {
     hideInLegend: true,
   },
@@ -1475,81 +1489,46 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
-export const beleuchtungstaerken1 = new MapboxStyleLayer({
+export const beleuchtungstaerken1 = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken1',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  // TODO: Set correct stylelayer once style is ready
-  styleLayer: {
-    id: 'beleuchtungstaerken1',
-    type: 'symbol',
-    source: 'stations',
-    filter: ['has', 'dwv'],
-  },
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '1',
   properties: {
     popupComponent: 'BeleuchtungsPopup',
   },
 });
 
-export const beleuchtungstaerken2a = new MapboxStyleLayer({
+export const beleuchtungstaerken2a = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken2a',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  // TODO: Set correct stylelayer once style is ready
-  styleLayer: {
-    id: 'beleuchtungstaerken2a',
-    type: 'symbol',
-    source: 'stations',
-    filter: ['has', 'dwv'],
-  },
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2a',
   properties: {
     popupComponent: 'BeleuchtungsPopup',
   },
 });
 
-export const beleuchtungstaerken2b = new MapboxStyleLayer({
+export const beleuchtungstaerken2b = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken2b',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  // TODO: Set correct stylelayer once style is ready
-  styleLayer: {
-    id: 'beleuchtungstaerken2b',
-    type: 'symbol',
-    source: 'stations',
-    filter: ['has', 'dwv'],
-  },
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2b',
   properties: {
     popupComponent: 'BeleuchtungsPopup',
   },
 });
 
-export const beleuchtungstaerken3 = new MapboxStyleLayer({
+export const beleuchtungstaerken3 = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken3',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  // TODO: Set correct stylelayer once style is ready
-  styleLayer: {
-    id: 'beleuchtungstaerken3',
-    type: 'symbol',
-    source: 'stations',
-    filter: ['has', 'dwv'],
-  },
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '3',
   properties: {
     popupComponent: 'BeleuchtungsPopup',
   },
 });
 
-export const beleuchtungstaerken4 = new MapboxStyleLayer({
+export const beleuchtungstaerken4 = new BeleuchtungsLayer({
   name: 'ch.sbb.beleuchtungsstaerken4',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  // TODO: Set correct stylelayer once style is ready
-  styleLayer: {
-    id: 'beleuchtungstaerken4',
-    type: 'symbol',
-    source: 'stations',
-    filter: ['has', 'dwv'],
-  },
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '4',
   properties: {
     popupComponent: 'BeleuchtungsPopup',
   },

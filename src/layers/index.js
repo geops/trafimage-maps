@@ -14,6 +14,7 @@ import ZweitausbildungAbroadLayer from './ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from './ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesHighlightLayer from './ZweitausbildungRoutesHighlightLayer';
 import ZweitausbildungRoutesLayer from './ZweitausbildungRoutesLayer';
+import BeleuchtungsLayer from './BeleuchtungsLayer/BeleuchtungsLayer';
 
 export { default as AusbauLayer } from './AusbauLayer';
 export { default as CasaLayer } from './CasaLayer';
@@ -31,6 +32,7 @@ export { default as ZweitausbildungAbroadLayer } from './ZweitausbildungAbroadLa
 export { default as ZweitausbildungPoisLayer } from './ZweitausbildungPoisLayer';
 export { default as ZweitausbildungRoutesHighlightLayer } from './ZweitausbildungRoutesHighlightLayer';
 export { default as ZweitausbildungRoutesLayer } from './ZweitausbildungRoutesLayer';
+export { default as BeleuchtungsLayer } from './BeleuchtungsLayer';
 
 export default {
   AusbauLayer,
@@ -49,4 +51,5 @@ export default {
   ZweitausbildungPoisLayer,
   ZweitausbildungRoutesHighlightLayer,
   ZweitausbildungRoutesLayer,
+  BeleuchtungsLayer,
 };
