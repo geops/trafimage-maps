@@ -312,6 +312,7 @@ export const tracker = new TrajservLayer({
 export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
+  isQueryable: false,
   properties: {
     hasAccessibility: true,
     hasInfos: true,
