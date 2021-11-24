@@ -17,6 +17,7 @@
     "@webcomponents/webcomponents-platform": "1.0.1",
     "@webcomponents/webcomponentsjs": "2.6.0",
     "abortcontroller-polyfill": "1.7.3",
+    "canvas-size": "^1.2.5",
     "canvg": "3.0.9",
     "color": "4.0.1",
     "deepmerge": "4.2.2",
