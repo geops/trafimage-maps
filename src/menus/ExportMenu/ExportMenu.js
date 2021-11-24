@@ -6,6 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 import canvasSize from 'canvas-size';
+import { cancelable } from 'cancelable-promise';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { FaDownload, FaInfoCircle } from 'react-icons/fa';
@@ -150,18 +151,20 @@ const ExportMenu = () => {
   const ref = useRef();
 
   useEffect(() => {
-    if (!maxCanvasSize) {
-      canvasSize
-        .maxArea({ usePromise: true })
-        .then((result) => {
-          const size = Math.max(result.width, result.height);
-          setMaxCanvasSize(size);
-          localStorage.setItem(LS_SIZE_KEY, size);
-        })
-        // eslint-disable-next-line no-console
-        .catch((result) => console.log('Error', result));
-    }
-    return () => {};
+    const maxCanvasPromise =
+      !maxCanvasSize &&
+      cancelable(
+        canvasSize
+          .maxArea({ usePromise: true })
+          .then((result) => {
+            const size = Math.max(result.width, result.height);
+            setMaxCanvasSize(size);
+            localStorage.setItem(LS_SIZE_KEY, size);
+          })
+          // eslint-disable-next-line no-console
+          .catch((result) => console.log('Error', result)),
+      );
+    return () => maxCanvasPromise && maxCanvasPromise.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
