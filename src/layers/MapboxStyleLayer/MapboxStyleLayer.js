@@ -14,7 +14,7 @@ import { MapboxStyleLayer as MTMapboxStyleLayer } from 'mobility-toolbox-js/ol';
  */
 class MapboxStyleLayer extends MTMapboxStyleLayer {
   constructor(options = {}) {
-    super(options);
+    super({ ...options, isHoverActive: false, isClickActive: false });
 
     this.style = options.style;
     this.filters = options.filters;
