@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const LightIcon = ({ color, label, fontColor }) => (
+const LightIcon = ({ color, label, fontColor, size }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="30"
-    height="30"
+    width={size}
+    height={size}
     viewBox="0 0 100 100"
   >
     <circle
@@ -33,12 +33,14 @@ LightIcon.propTypes = {
   color: PropTypes.string,
   fontColor: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  size: PropTypes.number,
 };
 
 LightIcon.defaultProps = {
   color: 'none',
   label: undefined,
   fontColor: 'black',
+  size: 30,
 };
 
 export default LightIcon;
