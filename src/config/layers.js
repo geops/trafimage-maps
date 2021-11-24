@@ -38,7 +38,8 @@ proj4.defs(
 register(proj4);
 
 const sbbTrackerApi = new TralisAPI({
-  url: 'wss://api.geops.io/realtime-ws/v1/?key=5cc87b12d7c5370001c1d655112ec5c21e0f441792cfc2fafe3e7a1e', // https://api.geops.io/tracker/sbb',
+  url: 'wss://tralis-tracker-api.geops.io/ws?key=5cc87b12d7c5370001c1d655112ec5c21e0f441792cfc2fafe3e7a1e', // https://api.geops.io/tracker/sbb',
+  isUpdateBboxOnMoveEnd: true,
 });
 
 export const dataLayer = new TrafimageMapboxLayer({
@@ -315,6 +316,7 @@ export const punctuality = new Layer({
 
 punctuality.children = [
   new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
@@ -325,6 +327,7 @@ punctuality.children = [
     api: sbbTrackerApi,
   }),
   new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: true,
@@ -335,6 +338,7 @@ punctuality.children = [
     api: sbbTrackerApi,
   }),
   new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     useDelayStyle: true,

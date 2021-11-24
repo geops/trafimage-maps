@@ -30,18 +30,18 @@ const MapAccessibility = ({ layers, map }) => {
           .flat();
         if (mapTarget === document.activeElement && tabLayer) {
           if (tabLayer.isTrackerLayer) {
-            const trajectories = tabLayer.tracker.getRenderedTrajectories();
+            const trajectories = tabLayer.renderedTrajectories;
             trajectories.sort((a, b) =>
               a.coordinate && a.coordinate[0] < b.coordinate[0] ? -1 : 1,
             );
             tabFeature = trajectories[tabFeatureIndex];
 
             if (tabFeature) {
-              tabLayer.tracker.setHoverVehicleId(tabFeature.id);
+              tabLayer.hoverVehicleId = tabFeature.id;
               tabFeatureIndex += e.shiftKey ? -1 : 1;
               e.preventDefault();
             } else {
-              tabLayer.tracker.setHoverVehicleId(null);
+              tabLayer.hoverVehicleId = null;
               tabFeature = null;
               tabFeatureIndex = 0;
             }

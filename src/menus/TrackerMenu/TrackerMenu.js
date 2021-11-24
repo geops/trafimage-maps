@@ -157,6 +157,10 @@ class TrackerMenu extends Component {
     if (!open) {
       return null;
     }
+    // TO REMOVE
+    if (lineInfos) {
+      lineInfos.routeIdentifier = lineInfos.routeIdentifier || '';
+    }
 
     return (
       <MenuItem

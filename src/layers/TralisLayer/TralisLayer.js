@@ -24,10 +24,10 @@ class TralisLayer extends MBTTralisLayer {
       line = {};
     }
 
-    const { name = 'I', color = '#ffffff' } = line;
+    const { name = 'I', color = '#000000' } = line;
     let { text_color: textColor } = line;
     if (!textColor) {
-      textColor = '#000000';
+      textColor = '#ffffff';
     }
     const z = Math.min(Math.floor(zoom || 1), 16);
     const hover = this.hoverVehicleId === id;
