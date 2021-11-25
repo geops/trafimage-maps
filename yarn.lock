@@ -5041,7 +5041,7 @@ camelize@^1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
-cancelable-promise@^4.2.1:
+cancelable-promise@4.2.1:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/cancelable-promise/-/cancelable-promise-4.2.1.tgz#b02f79c5dde2704acfff1bc1ac2b4090f55541fe"
   integrity sha512-PJZ/000ocWhPZQBAuNewAOMA2WEkJ8RhXI6AxeGLiGdW8EYDmumzo9wKyNgjDgxc1q/HbXuTdlcI+wXrOe/jMw==
@@ -5061,7 +5061,7 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30000989, can
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001265.tgz#0613c9e6c922e422792e6fcefdf9a3afeee4f8c3"
   integrity sha512-YzBnspggWV5hep1m9Z6sZVLOt7vrju8xWooFAgN6BA5qvy98qPAPb7vNUzypFaoh2pb3vlfzbDO8tB57UPGbtw==
 
-canvas-size@^1.2.5:
+canvas-size@1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/canvas-size/-/canvas-size-1.2.5.tgz#284443298da0ca533aba3461dd373f4551ea5a03"
   integrity sha512-e13DLjXM75GIz6Bx1bhxsSP+4DrX8020TMaZw4XGcM9PQtM4IPo8xj9HzgJEn6RrhfGZZ2H4FFrzSjT3QhBXdA==
@@ -13310,10 +13310,10 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.5.1.tgz#094f1f8167ca9b273227933c45f421e39d2e3d29"
-  integrity sha512-xCoD3FzTTV1tl5RJEeZQi1uLg9xkPM5OSHizfZqUPiw1j8k9jmWw6bYfeITYAonFcoNL7nZd0R6sqhsoF2oFJA==
+mobility-toolbox-js@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.5.2.tgz#1107de315a98cd5923c8596d8ba15385a773e82f"
+  integrity sha512-iCkCeD3VnED/QK6XUBT7GHvgYwyMJVX0Kl0QUxrP+eFqKmWpusxGn8/AyfzAq6Wz+1lOhzBHyScdBiTuXETpKg==
   dependencies:
     "@geops/geops-ui" "0.1.11"
     "@material-ui/core" "^4.9.14"
