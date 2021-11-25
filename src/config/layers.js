@@ -332,25 +332,25 @@ punctuality.children = [
     },
     api: sbbTrackerApi,
   }),
-  // new TrajservLayer({
-  //   name: 'ch.sbb.puenktlichkeit-fv',
-  //   visible: false,
-  //   useDelayStyle: true,
-  //   regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
-  //   properties: {
-  //     radioGroup: 'ch.sbb.punctuality',
-  //   },
-  //   api: sbbTrackerApi,
-  // }),
-  // new TrajservLayer({
-  //   name: 'ch.sbb.puenktlichkeit-all',
-  //   visible: false,
-  //   useDelayStyle: true,
-  //   properties: {
-  //     radioGroup: 'ch.sbb.punctuality',
-  //   },
-  //   api: sbbTrackerApi,
-  // }),
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-fv',
+    visible: false,
+    useDelayStyle: true,
+    regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
+    properties: {
+      radioGroup: 'ch.sbb.punctuality',
+    },
+    api: sbbTrackerApi,
+  }),
+  new TrajservLayer({
+    name: 'ch.sbb.puenktlichkeit-all',
+    visible: false,
+    useDelayStyle: true,
+    properties: {
+      radioGroup: 'ch.sbb.punctuality',
+    },
+    api: sbbTrackerApi,
+  }),
 ];
 
 export const netzkartePointLayer = new StationsLayer({
