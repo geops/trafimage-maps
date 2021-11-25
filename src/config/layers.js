@@ -246,6 +246,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
 export const bahnhofplaene = new Layer({
   name: 'ch.sbb.bahnhofplaene',
   visible: false,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.bahnhofplaene-desc',
@@ -305,8 +306,6 @@ export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
   isQueryable: false,
-  isClickActive: false,
-  isHoverActive: false,
   properties: {
     hasAccessibility: true,
     hasInfos: true,
@@ -618,6 +617,7 @@ export const constrUnterhalt = new Layer({
   name: 'ch.sbb.construction.unterhalt.group',
   desc: 'ch.sbb.construction.unterhalt.group-desc',
   visible: true,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.construction.unterhalt.group-desc',
@@ -779,6 +779,7 @@ export const constrClusters = new Layer({
   name: 'ch.sbb.construction-clusters',
   key: 'ch.sbb.construction-clusters',
   visible: true,
+  isQueryable: false,
   properties: {
     hideInLegend: true,
   },
@@ -935,6 +936,7 @@ export const uebrigeBahnen = new MapboxStyleLayer({
 export const grenzen = new Layer({
   name: 'ch.sbb.infrastruktur.grenzen.group',
   visible: false,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.infrastruktur.grenzen.group',
@@ -943,6 +945,7 @@ export const grenzen = new Layer({
     new Layer({
       name: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
       visible: false,
+      isQueryable: false,
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.gemeindegrenzen.group-desc',
@@ -951,6 +954,7 @@ export const grenzen = new Layer({
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
           visible: false,
+          isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
             return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(
@@ -966,6 +970,7 @@ export const grenzen = new Layer({
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
           visible: false,
+          isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
             return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(
@@ -983,6 +988,7 @@ export const grenzen = new Layer({
     new Layer({
       name: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
       visible: false,
+      isQueryable: false,
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.kantonsgrenzen.group-desc',
@@ -991,6 +997,7 @@ export const grenzen = new Layer({
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
           visible: false,
+          isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
             return /(border_Kanton|border_Kanton-IMAGICO)$/.test(styleLayer.id);
@@ -1004,6 +1011,7 @@ export const grenzen = new Layer({
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
           visible: false,
+          isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
             return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
@@ -1057,6 +1065,7 @@ export const zweitausbildungStationsDataLayer = new TrafimageMapboxLayer({
 export const zweitausbildungStations = new Layer({
   name: 'ch.sbb.zweitausbildung.stationen.group',
   visible: true,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     layerInfoComponent: 'ZweitausbildungLayerInfo',
@@ -1205,6 +1214,7 @@ export const zweitausbildungPois = new Layer({
 export const zweitausbildungRoutes = new Layer({
   name: 'ch.sbb.zweitausbildung.linien.group',
   visible: true,
+  isQueryable: false,
   properties: {
     hasInfos: true,
     layerInfoComponent: 'ZweitausbildungLayerInfo',

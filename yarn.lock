@@ -1816,6 +1816,16 @@
     react-router-dom "^5.2.0"
     uuid "^8.3.1"
 
+"@geops/geops-ui@0.1.12":
+  version "0.1.12"
+  resolved "https://registry.yarnpkg.com/@geops/geops-ui/-/geops-ui-0.1.12.tgz#fe52dc609cad9f0ce928a2673825cfcb180b6471"
+  integrity sha512-qKtrnvbvux4Pxz5eK5H6a75BdS6AfdRwfJJj1Bpzui/2+m4i6g0QV9xisQEAqcfZ4rqhF+5BO5XM5Ljrwr5psQ==
+  dependencies:
+    prop-types "^15.7.2"
+    react-app-polyfill "^2.0.0"
+    react-router-dom "^5.2.0"
+    uuid "^8.3.1"
+
 "@geops/react-ui@1.1.5":
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/@geops/react-ui/-/react-ui-1.1.5.tgz#145a7e47d0aa032dd92081ddf0e9a5cbee14bab4"
@@ -2156,24 +2166,6 @@
   resolved "https://registry.yarnpkg.com/@mapbox/whoots-js/-/whoots-js-3.1.0.tgz#497c67a1cef50d1a2459ba60f315e448d2ad87fe"
   integrity sha512-Es6WcD0nO5l+2BOQS4uLfNPYQaNDfbot3X1XUoloz+x0mPDS3eeORZJl06HXjwBG1fOGwCRnzK88LMdxKRrd6Q==
 
-"@material-ui/core@4.11.4":
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.4.tgz#4fb9fe5dec5dcf780b687e3a40cff78b2b9640a4"
-  integrity sha512-oqb+lJ2Dl9HXI9orc6/aN8ZIAMkeThufA5iZELf2LQeBn2NtjVilF5D2w7e9RpntAzDb4jK5DsVhkfOvFY/8fg==
-  dependencies:
-    "@babel/runtime" "^7.4.4"
-    "@material-ui/styles" "^4.11.4"
-    "@material-ui/system" "^4.11.3"
-    "@material-ui/types" "5.1.0"
-    "@material-ui/utils" "^4.11.2"
-    "@types/react-transition-group" "^4.2.0"
-    clsx "^1.0.4"
-    hoist-non-react-statics "^3.3.2"
-    popper.js "1.16.1-lts"
-    prop-types "^15.7.2"
-    react-is "^16.8.0 || ^17.0.0"
-    react-transition-group "^4.4.0"
-
 "@material-ui/core@4.12.3", "@material-ui/core@^4.9.14":
   version "4.12.3"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.12.3.tgz#80d665caf0f1f034e52355c5450c0e38b099d3ca"
@@ -2198,17 +2190,6 @@
   integrity sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
-
-"@material-ui/lab@4.0.0-alpha.58":
-  version "4.0.0-alpha.58"
-  resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.58.tgz#c7ebb66f49863c5acbb20817163737caa299fafc"
-  integrity sha512-GKHlJqLxUeHH3L3dGQ48ZavYrqGOTXkFkiEiuYMAnAvXAZP4rhMIqeHOPXSUQan4Bd8QnafDcpovOSLnadDmKw==
-  dependencies:
-    "@babel/runtime" "^7.4.4"
-    "@material-ui/utils" "^4.11.2"
-    clsx "^1.0.4"
-    prop-types "^15.7.2"
-    react-is "^16.8.0 || ^17.0.0"
 
 "@material-ui/lab@4.0.0-alpha.60":
   version "4.0.0-alpha.60"
@@ -2243,7 +2224,7 @@
     jss-plugin-vendor-prefixer "^10.5.1"
     prop-types "^15.7.2"
 
-"@material-ui/system@^4.11.3", "@material-ui/system@^4.12.1":
+"@material-ui/system@^4.12.1":
   version "4.12.1"
   resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.12.1.tgz#2dd96c243f8c0a331b2bb6d46efd7771a399707c"
   integrity sha512-lUdzs4q9kEXZGhbN7BptyiS1rLNHe6kG9o8Y307HCvF4sQxbCgpL2qi+gUk+yI8a2DNk48gISEQxoxpgph0xIw==
@@ -5060,6 +5041,11 @@ camelize@^1.0.0:
   resolved "https://registry.yarnpkg.com/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
   integrity sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
 
+cancelable-promise@4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/cancelable-promise/-/cancelable-promise-4.2.1.tgz#b02f79c5dde2704acfff1bc1ac2b4090f55541fe"
+  integrity sha512-PJZ/000ocWhPZQBAuNewAOMA2WEkJ8RhXI6AxeGLiGdW8EYDmumzo9wKyNgjDgxc1q/HbXuTdlcI+wXrOe/jMw==
+
 caniuse-api@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-3.0.0.tgz#5e4d90e2274961d46291997df599e3ed008ee4c0"
@@ -5074,6 +5060,11 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000981, caniuse-lite@^1.0.30000989, can
   version "1.0.30001265"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001265.tgz#0613c9e6c922e422792e6fcefdf9a3afeee4f8c3"
   integrity sha512-YzBnspggWV5hep1m9Z6sZVLOt7vrju8xWooFAgN6BA5qvy98qPAPb7vNUzypFaoh2pb3vlfzbDO8tB57UPGbtw==
+
+canvas-size@1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/canvas-size/-/canvas-size-1.2.5.tgz#284443298da0ca533aba3461dd373f4551ea5a03"
+  integrity sha512-e13DLjXM75GIz6Bx1bhxsSP+4DrX8020TMaZw4XGcM9PQtM4IPo8xj9HzgJEn6RrhfGZZ2H4FFrzSjT3QhBXdA==
 
 canvas@2.8.0:
   version "2.8.0"
@@ -5522,7 +5513,7 @@ cloneable-readable@^1.0.0:
     process-nextick-args "^2.0.0"
     readable-stream "^2.3.5"
 
-clsx@^1.0.4:
+clsx@^1.0.4, clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -15948,13 +15939,6 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-re-resizable@6.9.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.0.tgz#9c3059b389ced6ade602234cc5bb1e12d231cd47"
-  integrity sha512-3cUDG81ylyqI0Pdgle/RHwwRYq0ORZzsUaySOCO8IbEtNyaRtrIHYm/jMQ5pjcNiKCxR3vsSymIQZHwJq4gg2Q==
-  dependencies:
-    fast-memoize "^2.5.1"
-
 re-resizable@6.9.1, re-resizable@^6.3.2:
   version "6.9.1"
   resolved "https://registry.yarnpkg.com/re-resizable/-/re-resizable-6.9.1.tgz#6be082b55d02364ca4bfee139e04feebdf52441c"
@@ -16111,6 +16095,14 @@ react-draggable@4.4.3:
     classnames "^2.2.5"
     prop-types "^15.6.0"
 
+react-draggable@4.4.4:
+  version "4.4.4"
+  resolved "https://registry.yarnpkg.com/react-draggable/-/react-draggable-4.4.4.tgz#5b26d9996be63d32d285a426f41055de87e59b2f"
+  integrity sha512-6e0WdcNLwpBx/YIDpoyd2Xb04PB0elrDrulKUgdrIlwuYvxh5Ok9M+F8cljm8kPXXs43PmMzek9RrB1b7mLMqA==
+  dependencies:
+    clsx "^1.1.1"
+    prop-types "^15.6.0"
+
 react-error-overlay@^6.0.3, react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.9.tgz#3c743010c9359608c375ecd6bc76f35d93995b0a"
@@ -16130,11 +16122,6 @@ react-i18next@11.12.0:
   dependencies:
     "@babel/runtime" "^7.14.5"
     html-parse-stringify "^3.0.1"
-
-react-icons@4.2.0:
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.2.0.tgz#6dda80c8a8f338ff96a1851424d63083282630d0"
-  integrity sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ==
 
 react-icons@4.3.1, react-icons@^4.2.0:
   version "4.3.1"
@@ -16344,24 +16331,24 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.0.33:
-  version "1.0.33"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.33.tgz#53f40ce54e5f302f5a8b0b90b624f76db577605e"
-  integrity sha512-cq1tTXfqPeerrPYxe9APa/F/dFTP4JMxUt3AuRu8i5vkU42C2Wn6R+zILPP1PS6yabak6KX/YQ+zJZQ9Um0RVw==
+react-spatial@1.0.35:
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.35.tgz#fec542631deef3f63fcb85d4db08fab1db8c42ed"
+  integrity sha512-DzHRmO0OHXDBEveq6PfLRKXv1NSv/ABWshL3PV4+N1Cw2n/vMJVeJ5gGZFgNPrwFeZfVLkhi0eduJB5icu+Pyg==
   dependencies:
-    "@geops/geops-ui" "0.1.11"
-    "@material-ui/core" "4.11.4"
+    "@geops/geops-ui" "0.1.12"
+    "@material-ui/core" "4.12.3"
     "@material-ui/icons" "4.11.2"
-    "@material-ui/lab" "4.0.0-alpha.58"
+    "@material-ui/lab" "4.0.0-alpha.60"
     "@svgr/webpack" "^5.5.0"
     abortcontroller-polyfill "1.7.3"
     file-loader "6.2.0"
     query-string "7.0.1"
     radians-degrees "1.0.0"
-    re-resizable "6.9.0"
+    re-resizable "6.9.1"
     react-autosuggest "10.1.0"
-    react-draggable "4.4.3"
-    react-icons "4.2.0"
+    react-draggable "4.4.4"
+    react-icons "4.3.1"
     resize-observer-polyfill "1.5.1"
 
 react-styleguidist@11.0.8:
