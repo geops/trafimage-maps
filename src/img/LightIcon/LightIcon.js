@@ -18,7 +18,7 @@ const LightIcon = ({ color, label, fontColor, size }) => (
     />
     <text
       x="50%"
-      y="65%"
+      y="68%"
       textAnchor="middle"
       fontSize={45}
       fontWeight="bold"
