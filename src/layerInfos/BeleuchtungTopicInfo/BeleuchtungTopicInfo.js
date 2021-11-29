@@ -1,59 +1,81 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
-import LightIcon from '../../img/LightIcon';
-import { lightingMapping } from './lightingMapping';
+import BeleuchtungLegende from './BeleuchtungLegende';
 
-const useStyles = makeStyles(() => {
-  return {
-    legendRow: {
-      display: 'flex',
-      alignItems: 'center',
-      minHeight: 50,
-    },
-    iconWrapper: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      minWidth: 60,
-    },
-    subtext: {
-      color: '#888',
-      fontSize: 12,
-    },
-  };
-});
+const comps = {
+  de: (
+    <div>
+      Werkzeug für Grundlagengespräche u.a. mit Behörden, Gemeinden, Projekt-
+      und Anlagenverantwortlichen über die Spezifikationen von
+      Beleuchtungsanlagen.
+      <BeleuchtungLegende />
+      <p>Bahnhofklasse gemäss VöV RTE 26201.</p>
+      <p>
+        Verantwortlich: SBB Infrastruktur, Anlagenmanagement für Beleuchtung,
+        &nbsp;
+        <a href="mailto:784dad45.sbb.onmicrosoft.com@emea.teams.ms">
+          784dad45.sbb.onmicrosoft.com@emea.teams.ms
+        </a>
+        .
+      </p>
+    </div>
+  ),
+  fr: (
+    <div>
+      Outil pour les discussions de base, entre autres avec les autorités, les
+      communes, les responsables de projets et d&apos;installations, sur les
+      spécifications des installations d&apos;éclairage.
+      <BeleuchtungLegende />
+      <p>Classes de gare selon VÖV RTE 26201.</p>
+      <p>
+        Responsable: CFF Infrastructure, gestion des installations pour
+        l&apos;éclairage, &nbsp;
+        <a href="mailto:784dad45.sbb.onmicrosoft.com@emea.teams.ms">
+          784dad45.sbb.onmicrosoft.com@emea.teams.ms
+        </a>
+        .
+      </p>
+    </div>
+  ),
+  it: (
+    <div>
+      Strumento per discussioni di base sulle specifiche degli impianti di
+      illuminazione con autorità, comuni, responsabili di progetti e
+      installazioni, tra gli altri.
+      <BeleuchtungLegende />
+      <p>Classi di stazioni secondo VÖV RTE 26201.</p>
+      <p>
+        Responsabile: SBB Infrastructure, gestione degli asset per
+        l&apos;illuminazione, &nbsp;
+        <a href="mailto:784dad45.sbb.onmicrosoft.com@emea.teams.ms">
+          784dad45.sbb.onmicrosoft.com@emea.teams.ms
+        </a>
+        .
+      </p>
+    </div>
+  ),
+  en: (
+    <div>
+      Tool for basic discussions with, among others, authorities,
+      municipalities, project and plant managers on the specifications of
+      lighting installations.
+      <BeleuchtungLegende />
+      <p>Station classes according to VÖV RTE 26201.</p>
+      <p>
+        Responsibility lies with: SBB Infrastructure, asset management for
+        lighting, &nbsp;
+        <a href="mailto:784dad45.sbb.onmicrosoft.com@emea.teams.ms">
+          784dad45.sbb.onmicrosoft.com@emea.teams.ms
+        </a>
+        .
+      </p>
+    </div>
+  ),
+};
 
 const BetriebsRegionenLayerInfo = () => {
-  const classes = useStyles();
-  const { t } = useTranslation();
-
-  return (
-    <div>
-      {Object.keys(lightingMapping)
-        .sort()
-        .map((lightClass) => {
-          const classData = lightingMapping[lightClass];
-          return (
-            <div className={classes.legendRow} key={lightClass}>
-              <div className={classes.iconWrapper}>
-                <LightIcon
-                  color={classData.color}
-                  label={lightClass}
-                  fontColor={lightClass.match(/(3|4|2b)/) && 'white'}
-                />
-              </div>
-              <div>
-                {t(classData.info[1])} <br />
-                <span className={classes.subtext}>{`${classData.info[0]} ${t(
-                  'Passagiere/Tag',
-                )}`}</span>
-              </div>
-            </div>
-          );
-        })}
-    </div>
-  );
+  const { i18n } = useTranslation();
+  return <div>{comps[i18n.language]}</div>;
 };
 
 export default BetriebsRegionenLayerInfo;
