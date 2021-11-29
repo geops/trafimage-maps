@@ -169,9 +169,7 @@ class TrackerMenu extends Component {
               trackerLayer={this.trackerLayers.find((l) => l.visible)}
               lineInfos={lineInfos}
               onStationClick={(station) => {
-                console.log(station.coordinate);
-                if (!station.coordinate) {
-                  console.log(station.coordinate);
+                if (station.coordinate) {
                   map.getView().animate({
                     zoom: map.getView().getZoom(),
                     center: station.coordinate,
