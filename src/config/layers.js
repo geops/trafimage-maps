@@ -2,7 +2,6 @@ import proj4 from 'proj4';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer } from 'mobility-toolbox-js/ol';
-import { TralisAPI } from 'mobility-toolbox-js/api';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
@@ -37,10 +36,13 @@ proj4.defs(
 
 register(proj4);
 
-const sbbTrackerApi = new TralisAPI({
-  url: 'wss://tralis-tracker-api.geops.io/ws?key=5cc87b12d7c5370001c1d655112ec5c21e0f441792cfc2fafe3e7a1e', // https://api.geops.io/tracker/sbb',
-  isUpdateBboxOnMoveEnd: true,
-});
+// const sbbTrackerApi = new TralisAPI({
+//   url: 'wss://tralis-tracker-api.geops.io/ws?key=5cc87b12d7c5370001c1d655112ec5c21e0f441792cfc2fafe3e7a1e', // https://api.geops.io/tracker/sbb',
+//   isUpdateBboxOnMoveEnd: true,
+// });
+const trackerUrl =
+  'wss://tralis-tracker-api.geops.io/ws?key=5cc87b12d7c5370001c1d655112ec5c21e0f441792cfc2fafe3e7a1e';
+// https://api.geops.io/tracker/sbb',
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
@@ -319,32 +321,38 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
+    tenant: 'sbb',
+    minZoomNonTrain: 14,
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
-    api: sbbTrackerApi,
+    url: trackerUrl,
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: true,
+    tenant: 'sbb',
+    minZoomNonTrain: 14,
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
-    api: sbbTrackerApi,
+    url: trackerUrl,
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     useDelayStyle: true,
+    tenant: 'sbb',
+    minZoomNonTrain: 14,
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
-    api: sbbTrackerApi,
+    url: trackerUrl,
   }),
 ];
 

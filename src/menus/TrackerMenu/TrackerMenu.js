@@ -62,16 +62,12 @@ class TrackerMenu extends Component {
 
     if (layer !== prevState.layer || feature !== prevState.feature) {
       if (layer && feature) {
-        this.unsubscribeStopSequence(prevState);
-        this.subscribeStopSequence();
-      } else {
-        this.unsubscribeStopSequence(prevState);
+        this.getStopSequence();
       }
     }
   }
 
   componentWillUnmount() {
-    this.unsubscribeStopSequence();
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
     this.trackerLayers.forEach((layer) => {
@@ -82,9 +78,8 @@ class TrackerMenu extends Component {
   onLayerClick(features, layer) {
     const { dispatchSetMenuOpen } = this.props;
 
-    if (!features.length) {
+    if (features.length) {
       dispatchSetMenuOpen(false);
-    } else {
       this.setState({
         open: true,
         collapsed: false,
@@ -96,29 +91,25 @@ class TrackerMenu extends Component {
   }
 
   onStopSequence(stopSequence) {
-    this.setState({ lineInfos: stopSequence[0] });
+    if (stopSequence[0]) {
+      // eslint-disable-next-line no-param-reassign
+      stopSequence[0].backgroundColor = stopSequence[0].stroke;
+      // eslint-disable-next-line no-param-reassign
+      stopSequence[0].color = stopSequence[0].text_color;
+    }
+
+    this.setState({
+      lineInfos: stopSequence[0],
+    });
   }
 
-  subscribeStopSequence() {
+  getStopSequence() {
     const { feature, layer } = this.state;
     const { api } = layer;
     const vehicleId = feature.get('train_id');
-    api.subscribeStopSequence(vehicleId, this.onStopSequence);
-  }
-
-  unsubscribeStopSequence(prevState = {}) {
-    const { feature, layer } = this.state;
-
-    if (!prevState.layer && !layer && !prevState.feature && !feature) {
-      return;
-    }
-
-    const { api } = prevState.layer || layer;
-    const vehicleId = (prevState.feature || feature).get('train_id');
-    if (api && vehicleId) {
-      this.setState({ lineInfos: null });
-      api.unsubscribeStopSequence(vehicleId);
-    }
+    api.getStopSequence(vehicleId).then((data) => {
+      this.onStopSequence(data);
+    });
   }
 
   initializeClick() {
@@ -177,15 +168,16 @@ class TrackerMenu extends Component {
             <RouteSchedule
               trackerLayer={this.trackerLayers.find((l) => l.visible)}
               lineInfos={lineInfos}
-              // station.coordinates doesn't exist
-              // onStationClick={(station) => {
-              //   if (!station.coordinates) {
-              //     map.getView().animate({
-              //       zoom: map.getView().getZoom(),
-              //       center: fromLonLat(station.coordinates),
-              //     });
-              //   }
-              // }}
+              onStationClick={(station) => {
+                console.log(station.coordinate);
+                if (!station.coordinate) {
+                  console.log(station.coordinate);
+                  map.getView().animate({
+                    zoom: map.getView().getZoom(),
+                    center: station.coordinate,
+                  });
+                }
+              }}
             />
           </div>
         ) : null}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
+import { touchOnly } from 'ol/events/condition';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
@@ -135,7 +135,11 @@ class Map extends PureComponent {
       map.getTargetElement().focus();
     }
 
-    if (map.getView().getInteracting() || map.getView().getAnimating()) {
+    if (
+      touchOnly(evt) ||
+      map.getView().getInteracting() ||
+      map.getView().getAnimating()
+    ) {
       return;
     }
 
