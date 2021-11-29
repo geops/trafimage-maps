@@ -31,7 +31,7 @@ const BeleuchtungsPopup = ({ feature }) => {
   return (
     <div>
       <p className={classes.line}>
-        {t('Beleuchtungsstärke:')}
+        {t('Bahnhofklasse')}
         <LightIcon
           color={color}
           label={stationClass}
@@ -39,7 +39,6 @@ const BeleuchtungsPopup = ({ feature }) => {
           size={25}
         />
       </p>
-      <p>{t('Bahnhofklasse gemäss VöV RTE 26201')}</p>
     </div>
   );
 };
