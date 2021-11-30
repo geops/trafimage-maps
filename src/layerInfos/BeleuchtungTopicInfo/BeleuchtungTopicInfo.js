@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import BeleuchtungLegende from './BeleuchtungLegende';
 
 const comps = {
   de: (
@@ -8,7 +7,6 @@ const comps = {
       Werkzeug für Grundlagengespräche u.a. mit Behörden, Gemeinden, Projekt-
       und Anlagenverantwortlichen über die Spezifikationen von
       Beleuchtungsanlagen.
-      <BeleuchtungLegende />
       <p>Bahnhofklasse gemäss VöV RTE 26201.</p>
       <p>
         Verantwortlich: SBB Infrastruktur, Anlagenmanagement für Beleuchtung,
@@ -25,7 +23,6 @@ const comps = {
       Outil pour les discussions de base, entre autres avec les autorités, les
       communes, les responsables de projets et d&apos;installations, sur les
       spécifications des installations d&apos;éclairage.
-      <BeleuchtungLegende />
       <p>Classes de gare selon VÖV RTE 26201.</p>
       <p>
         Responsable: CFF Infrastructure, gestion des installations pour
@@ -42,7 +39,6 @@ const comps = {
       Strumento per discussioni di base sulle specifiche degli impianti di
       illuminazione con autorità, comuni, responsabili di progetti e
       installazioni, tra gli altri.
-      <BeleuchtungLegende />
       <p>Classi di stazioni secondo VÖV RTE 26201.</p>
       <p>
         Responsabile: SBB Infrastructure, gestione degli asset per
@@ -59,7 +55,6 @@ const comps = {
       Tool for basic discussions with, among others, authorities,
       municipalities, project and plant managers on the specifications of
       lighting installations.
-      <BeleuchtungLegende />
       <p>Station classes according to VÖV RTE 26201.</p>
       <p>
         Responsibility lies with: SBB Infrastructure, asset management for
@@ -73,9 +68,9 @@ const comps = {
   ),
 };
 
-const BetriebsRegionenLayerInfo = () => {
+const BeleuchtungTopicInfo = () => {
   const { i18n } = useTranslation();
   return <div>{comps[i18n.language]}</div>;
 };
 
-export default BetriebsRegionenLayerInfo;
+export default BeleuchtungTopicInfo;

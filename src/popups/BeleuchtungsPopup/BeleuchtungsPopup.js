@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import LightIcon from '../../img/LightIcon';
-import { lightingMapping } from '../../layerInfos/BeleuchtungTopicInfo/lightingMapping';
+import { lightingMapping } from '../../layerInfos/BeleuchtungLayerInfo/lightingMapping';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

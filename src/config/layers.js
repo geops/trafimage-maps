@@ -1495,7 +1495,9 @@ export const beleuchtungstaerken1Layer = new BeleuchtungsLayer({
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '1',
   properties: {
+    hasInfos: true,
     popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
   },
 });
 
@@ -1504,7 +1506,9 @@ export const beleuchtungstaerken2aLayer = new BeleuchtungsLayer({
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2a',
   properties: {
+    hasInfos: true,
     popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
   },
 });
 
@@ -1513,7 +1517,9 @@ export const beleuchtungstaerken2bLayer = new BeleuchtungsLayer({
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2b',
   properties: {
+    hasInfos: true,
     popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
   },
 });
 
@@ -1522,7 +1528,9 @@ export const beleuchtungstaerken3Layer = new BeleuchtungsLayer({
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '3',
   properties: {
+    hasInfos: true,
     popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
   },
 });
 
@@ -1531,7 +1539,9 @@ export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '4',
   properties: {
+    hasInfos: true,
     popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
   },
 });
 
