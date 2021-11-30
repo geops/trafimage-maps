@@ -134,6 +134,16 @@ class TrackerMenu extends Component {
   }
 
   closeMenu() {
+    // Clear selected trains.
+    this.trackerLayers.forEach((layer) => {
+      // eslint-disable-next-line no-param-reassign
+      layer.selectedVehicleId = null;
+      const source = layer.vectorLayer.getSource();
+      if (source.getFeatures().length) {
+        source.clear();
+      }
+    });
+
     this.setState({
       open: false,
       collapsed: false,
@@ -162,6 +172,7 @@ class TrackerMenu extends Component {
         open={open}
         collapsed={collapsed}
         onCollapseToggle={(c) => this.setState({ collapsed: c })}
+        onClose={() => this.closeMenu()}
       >
         {lineInfos ? (
           <div>
