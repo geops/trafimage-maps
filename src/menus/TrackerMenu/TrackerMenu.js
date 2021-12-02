@@ -7,6 +7,7 @@ import { TiVideo } from 'react-icons/ti';
 import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 import { Layer } from 'mobility-toolbox-js/ol';
+import { getUTCTimeString } from 'mobility-toolbox-js/common/timeUtils';
 import RouteSchedule from 'react-spatial/components/RouteSchedule';
 import { unByKey } from 'ol/Observable';
 import { setMenuOpen } from '../../model/app/actions';
@@ -68,16 +69,31 @@ class TrackerMenu extends Component {
     });
   }
 
-  onLayerClick(traj) {
+  onLayerClick([feature], layer) {
     const { dispatchSetMenuOpen } = this.props;
-    if (traj) {
+    if (feature) {
       dispatchSetMenuOpen(false);
+      layer.api
+        .fetchTrajectoryStations(
+          layer.getParams({
+            id: feature.get('id'),
+            time: getUTCTimeString(new Date()),
+          }),
+        )
+        .then((trajStations) => {
+          this.setState({
+            open: !!feature,
+            collapsed: false,
+            trajectory: { ...feature.getProperties(), ...trajStations },
+          });
+        });
+    } else {
+      this.setState({
+        open: !!feature,
+        collapsed: false,
+        trajectory: null,
+      });
     }
-    this.setState({
-      open: !!traj,
-      collapsed: false,
-      trajectory: traj,
-    });
   }
 
   initializeClick() {
