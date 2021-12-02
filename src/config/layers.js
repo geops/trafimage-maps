@@ -18,6 +18,7 @@ import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
+import DirektverbindungenLayer from '../layers/DirektverbindungenLayer';
 import StationsLayer from '../layers/StationsLayer';
 
 proj4.defs(
@@ -40,13 +41,15 @@ const sbbTrackerApi = new TrajservAPI({
   url: 'https://api.geops.io/tracker/sbb',
 });
 
+const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
+
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
   visible: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
@@ -153,7 +156,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
@@ -226,12 +229,6 @@ export const passagierfrequenzen = new MapboxStyleLayer({
       'circle-color': 'rgb(255,220,0)',
       'circle-stroke-width': 2,
       'circle-stroke-color': 'rgb(255,220,0)',
-      'circle-opacity': [
-        'case',
-        ['boolean', ['feature-state', 'hover'], false],
-        1,
-        0.7,
-      ],
     },
   },
   properties: {
@@ -1488,41 +1485,26 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
-export const direktverbindungenDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.direktverbindungen',
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
-  // style:
-  //   'review-geops-tgma-odemxi.netzkarte_eisenbahninfrastruktur_v3_ch.sbb.direktverbindungen',
-  isBaseLayer: false,
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1,
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-export const direktverbindungenDay = new MapboxStyleLayer({
-  name: 'ch.sbb.direktverbindungen.day',
-  mapboxLayer: direktverbindungenDataLayer,
-  visible: true,
-  styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['trafimage.filter'] === 'lines_day',
+export const direktverbindungenDay = new DirektverbindungenLayer({
+  name: `${DIREKTVERBINDUNGEN_KEY}.day`,
+  mapboxLayer: dataLayer,
   properties: {
     popupComponent: 'DirektverbindungPopup',
   },
 });
 
-export const direktverbindungenNight = new MapboxStyleLayer({
-  name: 'ch.sbb.direktverbindungen.night',
-  mapboxLayer: direktverbindungenDataLayer,
-  visible: true,
-  styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['trafimage.filter'] === 'lines_night',
+export const direktverbindungenNight = new DirektverbindungenLayer({
+  name: `${DIREKTVERBINDUNGEN_KEY}.night`,
+  mapboxLayer: dataLayer,
+  routeType: 'night',
   properties: {
     popupComponent: 'DirektverbindungPopup',
   },
+});
+
+export const direktverbindungenLayer = new Layer({
+  name: DIREKTVERBINDUNGEN_KEY,
+  children: [direktverbindungenDay, direktverbindungenNight],
 });
 
 export default [
