@@ -24,6 +24,7 @@ module.exports = {
     text: 'Fork me on GitHub',
   },
   moduleAliases: {
+    'trafimage-maps/es': path.resolve(__dirname, 'src'),
     'trafimage-maps': path.resolve(__dirname, 'src'),
   },
   pagePerSection: true,
@@ -62,6 +63,11 @@ module.exports = {
         {
           name: 'Infrastruktur Betriebsregionen',
           content: 'src/examples/Betriebsregionen/README.md',
+          exampleMode: 'expand',
+        },
+        {
+          name: 'Schulzug',
+          content: 'src/examples/Schulzug/README.md',
           exampleMode: 'expand',
         },
       ],
