@@ -1,5 +1,5 @@
 import React from 'react';
-import { Feature } from 'ol';
+import Feature from 'ol/Feature';
 import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
@@ -18,8 +18,17 @@ class HandicapStopFinder extends Search {
   }
 
   search(value) {
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
     return fetch(
       `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      {
+        signal,
+      },
     )
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
@@ -48,7 +57,10 @@ class HandicapStopFinder extends Search {
         this.onDataEvent();
       } else {
         mbMap.once('idle', () => {
-          if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
+          if (
+            mbMap.getSource('ch.sbb.handicap') &&
+            mbMap.isSourceLoaded('ch.sbb.handicap')
+          ) {
             this.onDataEvent();
           } else {
             // We can't rely on sourcedata because isSourceLoaded returns false.
@@ -63,7 +75,10 @@ class HandicapStopFinder extends Search {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
 
-    if (mbMap.isSourceLoaded('ch.sbb.handicap')) {
+    if (
+      mbMap.getSource('ch.sbb.handicap') &&
+      mbMap.isSourceLoaded('ch.sbb.handicap')
+    ) {
       mbMap.off('idle', this.onDataEvent);
     } else {
       return;

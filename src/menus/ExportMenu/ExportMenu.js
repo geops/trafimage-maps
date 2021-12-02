@@ -5,6 +5,8 @@ import React, {
   useCallback,
   useMemo,
 } from 'react';
+import canvasSize from 'canvas-size';
+import { cancelable } from 'cancelable-promise';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { FaDownload, FaInfoCircle } from 'react-icons/fa';
@@ -17,7 +19,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import MenuItem from '../../components/Menu/MenuItem';
 import ExportButton from '../../components/ExportButton';
-import determineMaxCanvasSize from '../../utils/canvasSize';
 
 const LS_SIZE_KEY = 'tm.max.canvas.size';
 
@@ -74,10 +75,10 @@ const sizesByFormat = {
 const options = [
   { label: 'A0 (72 dpi)', resolution: 1, format: 'a0', weight: 2 },
   { label: 'A0 (150 dpi)', resolution: 2, format: 'a0', weight: 4 },
-  { label: 'A0 300 dpi', resolution: 3, format: 'a0', weight: 6 },
+  { label: 'A0 (300 dpi)', resolution: 3, format: 'a0', weight: 6 },
   { label: 'A1 (72 dpi)', resolution: 1, format: 'a1', weight: 1 },
   { label: 'A1 (150 dpi)', resolution: 2, format: 'a1', weight: 3 },
-  { label: 'A1 300 dpi', resolution: 3, format: 'a1', weight: 5 },
+  { label: 'A1 (300 dpi)', resolution: 3, format: 'a1', weight: 5 },
 ];
 
 const MenuProps = {
@@ -150,16 +151,20 @@ const ExportMenu = () => {
   const ref = useRef();
 
   useEffect(() => {
-    if (maxCanvasSize) {
-      return () => {};
-    }
-    // Calculate maxCanvasSize on topic load when not already in local storage
-    const size = determineMaxCanvasSize();
-    if (size) {
-      setMaxCanvasSize(size);
-      localStorage.setItem(LS_SIZE_KEY, size);
-    }
-    return () => {};
+    const maxCanvasPromise =
+      !maxCanvasSize &&
+      cancelable(
+        canvasSize
+          .maxArea({ usePromise: true })
+          .then((result) => {
+            const size = Math.max(result.width, result.height);
+            setMaxCanvasSize(size);
+            localStorage.setItem(LS_SIZE_KEY, size);
+          })
+          // eslint-disable-next-line no-console
+          .catch((result) => console.log('Error', result)),
+      );
+    return () => maxCanvasPromise && maxCanvasPromise.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

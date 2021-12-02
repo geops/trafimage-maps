@@ -112,10 +112,11 @@ export default {
     property: 'touristische_linie',
     color: '#7c00ff',
   },
-  'Bernina Express: Landquart – Klosters Platz – Davos – Poschiavo – Tirano (– Lugano mit Bus)': {
-    property: 'touristische_linie',
-    color: '#00aaff',
-  },
+  'Bernina Express: Landquart – Klosters Platz – Davos – Poschiavo – Tirano (– Lugano mit Bus)':
+    {
+      property: 'touristische_linie',
+      color: '#00aaff',
+    },
   'Bernina Express: St. Moritz – Poschiavo – Tirano (– Lugano mit Bus)': {
     property: 'touristische_linie',
     color: '#ffff00',
@@ -140,48 +141,54 @@ export default {
     property: 'touristische_linie',
     color: '#ff00fa',
   },
-  'Golden Pass Panoramic: Luzern – Brünig-Hasliberg – Interlaken Ost – Zweisimmen – Montreux': {
-    property: 'touristische_linie',
-    color: '#ff0000',
-  },
-  'Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Locarno': {
-    property: 'touristische_linie',
-    color: '#ab267d',
-  },
-  'Gotthard Panorama Express: Luzern – Vierwaldstättersee – Flüelen – Gotthard-Bergstrecke – Bellinzona – Lugano': {
-    property: 'touristische_linie',
-    color: '#fff200',
-    extraSources: {
-      ship100: {
-        type: 'geojson',
-        data: ship100GothardPanoramExpress,
-      },
-      ship150: {
-        type: 'geojson',
-        data: ship150GothardPanoramExpress,
-      },
+  'Golden Pass Panoramic: Luzern – Brünig-Hasliberg – Interlaken Ost – Zweisimmen – Montreux':
+    {
+      property: 'touristische_linie',
+      color: '#ff0000',
     },
-    extraStyleLayers: [
-      {
-        maxzoom: 12,
+  'Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Locarno':
+    {
+      property: 'touristische_linie',
+      color: '#ab267d',
+    },
+  'Gotthard Panorama Express: Luzern – Vierwaldstättersee – Flüelen – Gotthard-Bergstrecke – Bellinzona – Lugano':
+    {
+      property: 'touristische_linie',
+      color: '#fff200',
+      extraSources: {
+        ship100: {
+          type: 'geojson',
+          data: ship100GothardPanoramExpress,
+        },
+        ship150: {
+          type: 'geojson',
+          data: ship150GothardPanoramExpress,
+        },
       },
-      {
-        minzoom: 12,
-      },
-    ],
-  },
-  'Jungfrau-Region: Interlaken Ost – Grindelwald – Kleine Scheidegg – Jungfraujoch': {
-    property: 'touristische_linie',
-    color: '#00b9c0',
-  },
-  'Jungfrau-Region: Interlaken Ost – Lauterbrunnen – Wengen – Kleine Scheidegg – Jungfraujoch': {
-    property: 'touristische_linie',
-    color: '#000000',
-  },
-  'Landquart – Scuol-Tarasp: Landquart – Klosters Platz – Sagliains – Scuol-Tarasp': {
-    property: 'touristische_linie',
-    color: '#ff004c',
-  },
+      extraStyleLayers: [
+        {
+          maxzoom: 12,
+        },
+        {
+          minzoom: 12,
+        },
+      ],
+    },
+  'Jungfrau-Region: Interlaken Ost – Grindelwald – Kleine Scheidegg – Jungfraujoch':
+    {
+      property: 'touristische_linie',
+      color: '#00b9c0',
+    },
+  'Jungfrau-Region: Interlaken Ost – Lauterbrunnen – Wengen – Kleine Scheidegg – Jungfraujoch':
+    {
+      property: 'touristische_linie',
+      color: '#000000',
+    },
+  'Landquart – Scuol-Tarasp: Landquart – Klosters Platz – Sagliains – Scuol-Tarasp':
+    {
+      property: 'touristische_linie',
+      color: '#ff004c',
+    },
   'Mont Blanc Express: Martigny – Le Châtelard – Chamonix': {
     property: 'touristische_linie',
     color: '#ff9f00',
@@ -206,8 +213,9 @@ export default {
     property: 'touristische_linie',
     color: '#6800ff',
   },
-  'Voralpenexpress: St. Gallen – Rapperswil – Arth-Goldau – Küssnacht am Rigi – Luzern': {
-    property: 'touristische_linie',
-    color: '#0000ff',
-  },
+  'Voralpenexpress: St. Gallen – Rapperswil – Arth-Goldau – Küssnacht am Rigi – Luzern':
+    {
+      property: 'touristische_linie',
+      color: '#0000ff',
+    },
 };

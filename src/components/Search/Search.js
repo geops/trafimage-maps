@@ -39,10 +39,10 @@ function Search() {
     );
   }, [searchService, setSuggestions]);
 
-  useEffect(() => searchService && map && searchService.setMap(map), [
-    searchService,
-    map,
-  ]);
+  useEffect(
+    () => searchService && map && searchService.setMap(map),
+    [searchService, map],
+  );
 
   if (!searchService || !Object.keys(searchService.searches || []).length) {
     return null;

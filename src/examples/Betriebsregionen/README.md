@@ -1,5 +1,3 @@
-#
-
 Example for the appName 'betriebsregionen'.
 
 ```js

@@ -13,7 +13,16 @@ class Betriebspunkte extends Search {
   search(value) {
     const baseUrl =
       process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-    return fetch(`${baseUrl}/search/bps?name=${encodeURIComponent(value)}`)
+
+    if (this.abortController) {
+      this.abortController.abort();
+    }
+    this.abortController = new AbortController();
+    const { signal } = this.abortController;
+
+    return fetch(`${baseUrl}/search/bps?name=${encodeURIComponent(value)}`, {
+      signal,
+    })
       .then((data) => data.json())
       .then((featureCollection) => featureCollection.features)
       .catch(() => {
@@ -22,7 +31,13 @@ class Betriebspunkte extends Search {
   }
 
   render(item) {
-    return <div>{item.properties.bezeichnung}</div>;
+    const { bezeichnung: name, abkuerzung: abbreviated } = item.properties;
+    return (
+      <div>
+        {name}
+        {abbreviated ? ` (${abbreviated})` : ''}
+      </div>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -1,5 +1,3 @@
-#
-
 The Casa module is a sub module of trafimage-maps which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
 
 ```jsx
@@ -117,7 +115,7 @@ zoneLayer.loadZones([
   },
 ]);
 
-zoneLayer.onClick(f => {
+zoneLayer.onClick(([f]) => {
   console.log('Clicked', f);
 });
 
@@ -180,7 +178,7 @@ routeLayer
     routeLayer.zoomToRoute({duration: 1000});
   });
 
-routeLayer.onClick(f => {
+routeLayer.onClick(([f]) => {
   console.log('Clicked', f);
 });
 

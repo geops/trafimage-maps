@@ -249,12 +249,8 @@ class DeparturePopupContent extends Component {
         new Date(a.estimatedTimeLocal || a.timetabledTimeLocal).getTime() -
         new Date(b.estimatedTimeLocal || b.timetabledTimeLocal).getTime(),
     );
-    const {
-      destinationFilter,
-      departuresLoading,
-      platformName,
-      isOffline,
-    } = this.state;
+    const { destinationFilter, departuresLoading, platformName, isOffline } =
+      this.state;
 
     let title = null;
     if (showTitle) {

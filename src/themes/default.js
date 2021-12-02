@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
 const breakpointValues = {
   xs: 0,
@@ -8,7 +8,7 @@ const breakpointValues = {
   xl: 1200,
 };
 
-const theme = createMuiTheme({
+const theme = createTheme({
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {

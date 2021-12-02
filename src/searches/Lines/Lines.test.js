@@ -1,14 +1,14 @@
 import Lines from './Lines';
 
 const linesSearch = new Lines();
-
-const fetchMock = jest
-  .spyOn(global, 'fetch')
-  .mockImplementation(() =>
-    Promise.resolve({ json: () => Promise.resolve([]) }),
-  );
-
+let fetchMock;
 describe('Lines', () => {
+  beforeEach(() => {
+    fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => {
+      return Promise.resolve({ json: () => Promise.resolve([]) });
+    });
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -18,18 +18,21 @@ describe('Lines', () => {
       await linesSearch.search('500 +50');
       expect(fetchMock).toHaveBeenCalledWith(
         'https://maps.trafimage.ch/search/lines?line=500&km=50',
+        { signal: new AbortSignal() },
       );
     });
     test('with 500 50', async () => {
       await linesSearch.search('500 50');
       expect(fetchMock).toHaveBeenCalledWith(
         'https://maps.trafimage.ch/search/lines?line=500&km=50',
+        { signal: new AbortSignal() },
       );
     });
     test('with 500 +  50', async () => {
       await linesSearch.search('500 +  50');
       expect(fetchMock).toHaveBeenCalledWith(
         'https://maps.trafimage.ch/search/lines?line=500&km=50',
+        { signal: new AbortSignal() },
       );
     });
   });
@@ -39,6 +42,7 @@ describe('Lines', () => {
       await linesSearch.search('500+50');
       expect(fetchMock).toHaveBeenCalledWith(
         'https://maps.trafimage.ch/search/lines?line=500%2B50',
+        { signal: new AbortSignal() },
       );
     });
   });
@@ -48,6 +52,7 @@ describe('Lines', () => {
       await linesSearch.search('500 10-50');
       expect(fetchMock).toHaveBeenCalledWith(
         'https://maps.trafimage.ch/search/lines?line=500&km=10&km_end=50',
+        { signal: new AbortSignal() },
       );
     });
   });
@@ -57,6 +62,7 @@ describe('Lines', () => {
       await linesSearch.search('500 50 -80');
       expect(fetchMock).toHaveBeenCalledWith(
         'https://maps.trafimage.ch/search/lines?line=500%2050%20-80',
+        { signal: new AbortSignal() },
       );
     });
   });

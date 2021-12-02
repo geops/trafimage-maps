@@ -1,4 +1,3 @@
-import 'jest-canvas-mock';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import mapboxgl from 'mapbox-gl';

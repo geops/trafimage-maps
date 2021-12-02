@@ -54,7 +54,7 @@ function ExportButton({
     <div className={classes.buttonWrapper}>
       <CanvasSaveButton
         className={classes.button}
-        title={t('Als PNG speichern')}
+        title={t('Karte als PDF exportieren')}
         style={{
           pointerEvents: isLoading ? 'none' : 'auto',
           opacity: isLoading ? 0.3 : 1,
@@ -102,6 +102,7 @@ function ExportButton({
              * If changes in the legend SVG are necessary, make sure the values to insert are maintained
              * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
              * without major alterations)
+             * @ignore
              */
             // Fetch local svg
             const svgString = await fetch(overlayImageUrl).then((response) =>

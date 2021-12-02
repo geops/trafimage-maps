@@ -4,13 +4,13 @@ on: [push]
 
 jobs:
   build:
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: [14.x]
 
       - name: Get yarn cache
         id: yarn-cache

@@ -120,6 +120,7 @@ function HandicapPopup({ feature }) {
       element: equipmentStr,
     },
     {
+      key: 'behigInfo',
       element: (
         <div className="wkp-handicap-popup-element" key="BehigInfo">
           <div className="wkp-handicap-popup-field-title">
@@ -134,6 +135,7 @@ function HandicapPopup({ feature }) {
       propertyName: `aktuell_${language}`,
     },
     {
+      key: 'touristOffers',
       element: parsedTouristOffers?.length &&
         parsedTouristOffers.find((p) => p[`label_${language}`]) && (
           <div
@@ -143,20 +145,20 @@ function HandicapPopup({ feature }) {
             <div className="wkp-handicap-popup-field-title">
               {t('Barrierefreie touristische Angebote')}
             </div>
-            {parsedTouristOffers.map((offer, index) => {
-              return (
-                <>
-                  {offer[`label_${language}`] && (
-                    <span key={offer.label}>
-                      <Link href={offer[`url_${language}`]}>
-                        {offer[`label_${language}`]}
-                      </Link>
-                      {index !== parsedTouristOffers.length - 1 && <br />}
-                    </span>
-                  )}
-                </>
-              );
-            })}
+            {parsedTouristOffers
+              .filter((offer) => offer[`label_${language}`])
+              .map((offer, index) => {
+                return (
+                  <span
+                    key={offer.label_de || offer.label_fr || offer.label_it}
+                  >
+                    <Link href={offer[`url_${language}`]}>
+                      {offer[`label_${language}`]}
+                    </Link>
+                    {index !== parsedTouristOffers.length - 1 && <br />}
+                  </span>
+                );
+              })}
           </div>
         ),
     },
@@ -242,7 +244,7 @@ function HandicapPopup({ feature }) {
           return (
             field.element || (
               <PopupElement
-                key={field.label}
+                key={field.label || field.key}
                 label={t(field.label)}
                 properties={properties}
                 propertyName={field.propertyName.replace(
