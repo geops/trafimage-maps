@@ -80,7 +80,7 @@ class TrackerMenu extends Component {
     if (features.length) {
       dispatchSetMenuOpen(false);
       this.setState({
-        open: true,
+        open: !!features.length,
         collapsed: false,
         feature: features[0],
         layer,
