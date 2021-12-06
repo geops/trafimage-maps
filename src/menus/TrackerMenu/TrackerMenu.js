@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import { TiVideo } from 'react-icons/ti';
-// import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 import { Layer } from 'mobility-toolbox-js/ol';
 import RouteSchedule from 'react-spatial/components/RouteSchedule';
