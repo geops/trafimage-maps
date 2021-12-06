@@ -74,8 +74,12 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
 function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
   const ref = useRef(null);
   const dispatch = useDispatch();
-  const { activeTopic, layerService, map } = useSelector((state) => state.app);
+  const { t } = useTranslation();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+  const layerService = useSelector((state) => state.app.layerService);
+  const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
+
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
     const focusTab = (e) => e.which === 9 && setTabFocus(true);
@@ -86,7 +90,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
       document.removeEventListener('keydown', focusTab);
     };
   });
-  const { t } = useTranslation();
+
   if (!activeTopic) {
     return null;
   }
