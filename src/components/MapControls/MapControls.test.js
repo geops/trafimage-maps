@@ -1,20 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Layer, TrackerLayer } from 'mobility-toolbox-js/ol';
 import { Map, View } from 'ol';
 import { Provider } from 'react-redux';
 import MapControls from '.';
 
 let map;
 let mapElement;
-const trackerLayer = new TrackerLayer({
-  visible: true,
-});
-const layer = new Layer({
-  visible: true,
-  properties: { hasAccessibility: true },
-  children: [trackerLayer],
-});
 
 describe('MapControls', () => {
   beforeEach(() => {
@@ -40,7 +31,7 @@ describe('MapControls', () => {
     });
     const component = mount(
       <Provider store={store}>
-        <MapControls map={map} layers={[layer]} />,
+        <MapControls map={map} />,
       </Provider>,
     );
     expect(component.find('Zoom').length).toBe(1);

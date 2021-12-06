@@ -163,4 +163,4 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
 };
 
 Overlay.propTypes = propTypes;
-export default React.memo(Overlay);
+export default Overlay;

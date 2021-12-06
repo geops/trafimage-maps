@@ -66,6 +66,7 @@
     "babel-plugin-named-asset-import": "0.3.7",
     "babel-preset-react-app": "9",
     "canvas": "2.8.0",
+    "css-mediaquery": "0.1.2",
     "cypress": "8.5.0",
     "cypress-plugin-tab": "1.0.5",
     "documentation": "13.2.5",
