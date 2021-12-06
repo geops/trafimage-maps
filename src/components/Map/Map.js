@@ -197,10 +197,16 @@ class Map extends PureComponent {
       dispatchSetFeatureInfo,
       dispatchSetSearchOpen,
       dispatchHtmlEvent,
+      activeTopic,
+      showPopups,
     } = this.props;
 
-    const layers = this.getQueryableLayers('singleclick');
+    // If there is no popup to display just ignore the click event.
+    if (!showPopups || !activeTopic?.elements?.popup) {
+      return;
+    }
 
+    const layers = this.getQueryableLayers('singleclick');
     layerService
       .getFeatureInfoAtCoordinate(coordinate, layers)
       .then((featureInfos) => {
