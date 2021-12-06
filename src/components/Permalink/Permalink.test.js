@@ -109,6 +109,38 @@ describe('Permalink', () => {
     );
   });
 
+  test('shoud use x,y in mercator.', () => {
+    window.history.pushState({}, undefined, '/?x=6456530&y=-7170156 ');
+    mount(
+      <Provider store={store}>
+        <Permalink />
+      </Provider>,
+    );
+
+    expect(window.location.search).toEqual(
+      '?lang=de&layers=testlayer&x=6456530&y=-7170156',
+    );
+    expect(store.getActions()[0]).toEqual({
+      data: [6456530, -7170156],
+      type: 'SET_CENTER',
+    });
+  });
+
+  test('shoud transform lon,lat to mercator.', () => {
+    window.history.pushState({}, undefined, '/?lon=58&lat=-54 ');
+    mount(
+      <Provider store={store}>
+        <Permalink />
+      </Provider>,
+    );
+
+    expect(window.location.search).toEqual('?lang=de&layers=testlayer');
+    expect(store.getActions()[0]).toEqual({
+      data: [6456530.466009867, -7170156.29399995],
+      type: 'SET_CENTER',
+    });
+  });
+
   describe('shoud load kml if draw.id exists', () => {
     test('if it is a admin_id.', async () => {
       window.history.pushState({}, undefined, '/?lang=de&draw.id=foo');

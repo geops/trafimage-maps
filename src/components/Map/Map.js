@@ -30,6 +30,7 @@ const propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
+  activeTopic: PropTypes.shape().isRequired,
   resolution: PropTypes.number,
   zoom: PropTypes.number,
   showPopups: PropTypes.bool,
@@ -128,8 +129,13 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const { layerService, featureInfo, dispatchSetFeatureInfo, showPopups } =
-      this.props;
+    const {
+      layerService,
+      featureInfo,
+      dispatchSetFeatureInfo,
+      showPopups,
+      activeTopic,
+    } = this.props;
 
     if (document.activeElement !== map.getTargetElement()) {
       map.getTargetElement().focus();
@@ -137,52 +143,52 @@ class Map extends PureComponent {
 
     if (
       touchOnly(evt) ||
+      !showPopups ||
+      !activeTopic?.elements?.popup ||
       map.getView().getInteracting() ||
       map.getView().getAnimating()
     ) {
       return;
     }
 
-    if (showPopups) {
-      const layers = this.getQueryableLayers('pointermove');
-      layerService
-        .getFeatureInfoAtCoordinate(coordinate, layers)
-        .then((newInfos) => {
-          let infos = newInfos.filter(({ features }) => features.length);
-          map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
+    const layers = this.getQueryableLayers('pointermove');
+    layerService
+      .getFeatureInfoAtCoordinate(coordinate, layers)
+      .then((newInfos) => {
+        let infos = newInfos.filter(({ features }) => features.length);
+        map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
-          const isClickInfoOpen =
-            featureInfo.length &&
-            featureInfo.every(
+        const isClickInfoOpen =
+          featureInfo.length &&
+          featureInfo.every(
+            ({ layer }) =>
+              layer.get('popupComponent') && !layer.get('showPopupOnHover'),
+          );
+
+        // don't continue if there's a popup that was opened by click
+        if (!isClickInfoOpen) {
+          infos = infos
+            .filter(
               ({ layer }) =>
-                layer.get('popupComponent') && !layer.get('showPopupOnHover'),
-            );
+                layer.get('showPopupOnHover') && layer.get('popupComponent'),
+            )
+            .map((info) => {
+              /* Apply showPopupOnHover function if defined to further filter features */
+              const showPopupOnHover = info.layer.get('showPopupOnHover');
+              if (typeof showPopupOnHover === 'function') {
+                return {
+                  ...info,
+                  features: info.layer.get('showPopupOnHover')(info.features),
+                };
+              }
+              return info;
+            });
 
-          // don't continue if there's a popup that was opened by click
-          if (!isClickInfoOpen) {
-            infos = infos
-              .filter(
-                ({ layer }) =>
-                  layer.get('showPopupOnHover') && layer.get('popupComponent'),
-              )
-              .map((info) => {
-                /* Apply showPopupOnHover function if defined to further filter features */
-                const showPopupOnHover = info.layer.get('showPopupOnHover');
-                if (typeof showPopupOnHover === 'function') {
-                  return {
-                    ...info,
-                    features: info.layer.get('showPopupOnHover')(info.features),
-                  };
-                }
-                return info;
-              });
-
-            if (!Map.isSameFeatureInfo(featureInfo, infos)) {
-              dispatchSetFeatureInfo(infos);
-            }
+          if (!Map.isSameFeatureInfo(featureInfo, infos)) {
+            dispatchSetFeatureInfo(infos);
           }
-        });
-    }
+        }
+      });
   }
 
   onSingleClick(evt) {
@@ -192,10 +198,16 @@ class Map extends PureComponent {
       dispatchSetFeatureInfo,
       dispatchSetSearchOpen,
       dispatchHtmlEvent,
+      activeTopic,
+      showPopups,
     } = this.props;
 
-    const layers = this.getQueryableLayers('singleclick');
+    // If there is no popup to display just ignore the click event.
+    if (!showPopups || !activeTopic?.elements?.popup) {
+      return;
+    }
 
+    const layers = this.getQueryableLayers('singleclick');
     layerService
       .getFeatureInfoAtCoordinate(coordinate, layers)
       .then((featureInfos) => {
@@ -298,6 +310,7 @@ const mapStateToProps = (state) => ({
   zoom: state.map.zoom,
   maxExtent: state.map.maxExtent,
   showPopups: state.app.showPopups,
+  activeTopic: state.app.activeTopic,
 });
 
 const mapDispatchToProps = {

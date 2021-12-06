@@ -33,4 +33,4 @@ const Header = ({ appBaseUrl, loginUrl }) => {
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
 
-export default Header;
+export default React.memo(Header);
