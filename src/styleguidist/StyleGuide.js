@@ -93,6 +93,9 @@ const styles = ({ font, mq }) => ({
     width: '220px',
     overflow: 'auto',
   },
+  preview: {
+    padding: '0!important',
+  },
 });
 
 export function StyleGuideRenderer({

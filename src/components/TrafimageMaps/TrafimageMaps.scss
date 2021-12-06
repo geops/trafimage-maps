@@ -212,6 +212,16 @@
     }
   }
 
+  .wkp-map-controls {
+    top: 10px;
+  }
+
+  &.header {
+    .wkp-map-controls {
+      top: 110px;
+    }
+  }
+
   &.tm-w-m,
   &.tm-w-s,
   &.tm-w-xs {
@@ -221,10 +231,6 @@
 
     .wkp-header {
       height: 55px;
-    }
-
-    .wkp-map-controls {
-      top: 60px;
     }
 
     .wkp-topics-menu {
@@ -255,6 +261,10 @@
 
     // header component is enabled
     &.header {
+      .wkp-map-controls {
+        top: 60px;
+      }
+
       .wkp-topics-menu {
         margin-top: 0;
 

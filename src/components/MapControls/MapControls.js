@@ -13,29 +13,20 @@ import './MapControls.scss';
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
 
 const propTypes = {
-  showGeolocation: PropTypes.bool,
+  geolocation: PropTypes.bool,
+  zoomSlider: PropTypes.bool,
+  fitExtent: PropTypes.bool,
 };
 
 const defaultProps = {
-  showGeolocation: true,
+  geolocation: true,
+  zoomSlider: true,
+  fitExtent: true,
 };
 
-const MapControls = ({ showGeolocation }) => {
+const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const { t } = useTranslation();
-  let geolocationButton = null;
-
-  if (showGeolocation) {
-    geolocationButton = (
-      <Geolocation
-        title={t('Lokalisieren')}
-        className="wkp-geolocation"
-        map={map}
-        noCenterAfterDrag
-        colorOrStyleFunc={[0, 61, 133]}
-      />
-    );
-  }
 
   return (
     <div className="wkp-map-controls">
@@ -43,21 +34,31 @@ const MapControls = ({ showGeolocation }) => {
         map={map}
         zoomInChildren={<ZoomIn />}
         zoomOutChildren={<ZoomOut />}
-        zoomSlider
+        zoomSlider={zoomSlider}
         title={{
           zoomIn: t('Zoom'),
           zoomOut: t('Zoom'),
         }}
       />
-      {geolocationButton}
-      <FitExtent
-        map={map}
-        title={t('Ganze Schweiz')}
-        extent={swissExtent}
-        className="wkp-fit-extent"
-      >
-        <SwissBounds focusable={false} />
-      </FitExtent>
+      {geolocation && (
+        <Geolocation
+          title={t('Lokalisieren')}
+          className="wkp-geolocation"
+          map={map}
+          noCenterAfterDrag
+          colorOrStyleFunc={[0, 61, 133]}
+        />
+      )}
+      {fitExtent && (
+        <FitExtent
+          map={map}
+          title={t('Ganze Schweiz')}
+          extent={swissExtent}
+          className="wkp-fit-extent"
+        >
+          <SwissBounds focusable={false} />
+        </FitExtent>
+      )}
     </div>
   );
 };
