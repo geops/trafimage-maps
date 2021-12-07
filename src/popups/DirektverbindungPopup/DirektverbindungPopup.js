@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
-import Link from '../../components/Link';
 
 const useStyles = makeStyles({
   container: {
     padding: 8,
+  },
+  title: {
+    marginTop: 5,
   },
   row: {
     margin: 0,
@@ -43,9 +45,10 @@ const useStyles = makeStyles({
     right: 0,
   },
   routeIcon: {
-    width: 50,
-    minWidth: 50,
+    width: 20,
+    minWidth: 20,
     height: 35,
+    marginRight: 10,
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -99,7 +102,7 @@ const DVPopupTitle = ({ feature }) => {
 };
 
 const DirektverbindungPopup = ({ feature, layer }) => {
-  const { i18n, t } = useTranslation();
+  const { t } = useTranslation();
   const classes = useStyles();
 
   const {
@@ -107,13 +110,13 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     end_station_name: end,
     vias,
     nachtverbindung: night,
-    [`description_${i18n.language}`]: description,
-    [`url_${i18n.language}`]: link,
+    // [`description_${i18n.language}`]: description,
+    // [`url_${i18n.language}`]: link,
   } = feature.getProperties();
 
-  const switchVias = JSON.parse(vias).filter(
-    (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
-  );
+  // const switchVias = JSON.parse(vias).filter(
+  //   (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
+  // );
 
   useEffect(() => {
     if (layer.visible) {
@@ -122,15 +125,11 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     return () => layer.select();
   }, [layer, feature]);
 
-  console.log(switchVias);
-  console.log(vias);
   return (
     <div className={classes.container}>
-      <div className={classes.row}>
+      <div className={classes.title}>
         <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
       </div>
-      {description && <div className={classes.row}>{description}</div>}
-      {link && <Link href={link}>{t('Link zum Angebot')}</Link>}
       <div className={classes.route}>
         {[
           { station_name: start },
@@ -141,6 +140,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
           let extraVerticalClass = '';
           const isFirst = index === 0;
           const isLast = index === arr.length - 1;
+
           if (isFirst) {
             extraRowClass = ` ${classes.rowFirst}`;
             extraVerticalClass = ` ${classes.routeVerticalFirst}`;
@@ -148,6 +148,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
             extraRowClass = ` ${classes.rowLast}`;
             extraVerticalClass = ` ${classes.routeVerticalLast}`;
           }
+
           return (
             <div key={via.station_name} className={classes.row + extraRowClass}>
               <div className={classes.routeIcon}>
@@ -174,5 +175,6 @@ const DirektverbindungPopup = ({ feature, layer }) => {
 };
 
 DirektverbindungPopup.renderTitle = (feat) => <DVPopupTitle feature={feat} />;
+
 DirektverbindungPopup.propTypes = propTypes;
 export default DirektverbindungPopup;
