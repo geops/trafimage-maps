@@ -26,24 +26,15 @@ const propTypes = {
 
 const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
   const classes = useStyles();
-  const legend = (
-    <div>
-      <div className={classes.legendItem}>
-        <div
-          className={classes.itemColor}
-          style={{ backgroundColor: properties.children[0].get('color') }}
-        />
-        <div>{t(properties.children[0].key)}</div>
-      </div>
-      <div className={classes.legendItem}>
-        <div
-          className={classes.itemColor}
-          style={{ backgroundColor: properties.children[1].get('color') }}
-        />
-        <div>{t(properties.children[1].key)}</div>
-      </div>
+  const legend = properties.children.map((child) => (
+    <div className={classes.legendItem}>
+      <div
+        className={classes.itemColor}
+        style={{ backgroundColor: child.get('color') }}
+      />
+      <div>{t(child.key)}</div>
     </div>
-  );
+  ));
   return (
     <>
       {language === 'de' && (
