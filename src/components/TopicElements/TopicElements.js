@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import qs from 'query-string';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
@@ -72,10 +72,14 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
   );
 
 function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
-  const ref = useRef(null);
   const dispatch = useDispatch();
-  const { activeTopic, layerService, map } = useSelector((state) => state.app);
+  const { t } = useTranslation();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
+  const layerService = useSelector((state) => state.app.layerService);
+  const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
+  const [node, setNode] = useState(null);
+
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
     const focusTab = (e) => e.which === 9 && setTabFocus(true);
@@ -86,7 +90,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
       document.removeEventListener('keydown', focusTab);
     };
   });
-  const { t } = useTranslation();
+
   if (!activeTopic) {
     return null;
   }
@@ -170,7 +174,13 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
         t={t}
       />
     ),
-    mapControls: <MapControls showGeolocation={elements.geolocationButton} />,
+    mapControls: (
+      <MapControls
+        geolocation={elements.geolocationButton}
+        fitExtent={elements.fitExtent}
+        zoomSlider={elements.zoomSlider}
+      />
+    ),
     footer: <Footer />,
     overlay: (
       <Overlay
@@ -190,14 +200,21 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
 
   return (
     <div
-      ref={ref}
+      // Using useRef it breaks the doc. ref.current is always null.
+      ref={(elt) => {
+        if (node !== elt) {
+          setNode(elt);
+        }
+      }}
       className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}
     >
-      <ResizeHandler
-        observe={ref.current}
-        forceUpdate={elements.header}
-        onResize={onResize}
-      />
+      {node && (
+        <ResizeHandler
+          observe={node}
+          forceUpdate={elements.header}
+          onResize={onResize}
+        />
+      )}
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         {appElements}
         <MainDialog staticFilesUrl={staticFilesUrl} />

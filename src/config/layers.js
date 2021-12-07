@@ -1,8 +1,7 @@
 import proj4 from 'proj4';
 import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
-import { Layer, TrajservLayer } from 'mobility-toolbox-js/ol';
-import { TrajservAPI } from 'mobility-toolbox-js/api';
+import { Layer } from 'mobility-toolbox-js/ol';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
@@ -20,6 +19,7 @@ import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutes
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import DirektverbindungenLayer from '../layers/DirektverbindungenLayer';
 import StationsLayer from '../layers/StationsLayer';
+import TralisLayer from '../layers/TralisLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -36,12 +36,6 @@ proj4.defs(
 );
 
 register(proj4);
-
-const sbbTrackerApi = new TrajservAPI({
-  url: 'https://api.geops.io/tracker/sbb',
-});
-
-const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
@@ -297,16 +291,6 @@ bahnhofplaene.children = [
   }),
 ];
 
-export const tracker = new TrajservLayer({
-  name: 'Zugtracker',
-  key: 'ch.sbb.tracker',
-  visible: false,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.tracker-desc',
-  },
-});
-
 export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
@@ -319,34 +303,40 @@ export const punctuality = new Layer({
 });
 
 punctuality.children = [
-  new TrajservLayer({
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     useDelayStyle: true,
+    tenant: 'sbb',
+    minZoomNonTrain: 14,
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
-    api: sbbTrackerApi,
   }),
-  new TrajservLayer({
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     useDelayStyle: true,
+    tenant: 'sbb',
+    minZoomNonTrain: 14,
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
-    api: sbbTrackerApi,
   }),
-  new TrajservLayer({
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     useDelayStyle: true,
+    tenant: 'sbb',
+    minZoomNonTrain: 14,
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
-    api: sbbTrackerApi,
   }),
 ];
 
@@ -1484,6 +1474,8 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
     layerInfoComponent: 'NetzentwicklungLayerInfo',
   },
 });
+
+const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
 
 export const direktverbindungenDay = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.day`,
