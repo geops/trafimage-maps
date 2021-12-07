@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import Link from '../../components/Link';
@@ -11,7 +11,9 @@ const useStyles = makeStyles({
     padding: 8,
   },
   row: {
-    margin: '8px 0',
+    margin: 0,
+    display: 'flex',
+    alignItems: 'center',
   },
   titleWrapper: {
     padding: 0,
@@ -29,6 +31,49 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
   },
+  route: {
+    marginTop: 10,
+  },
+  routeAbsolute: {
+    position: 'absolute',
+    margin: 'auto',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  routeIcon: {
+    width: 50,
+    minWidth: 50,
+    height: 35,
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  routeVertical: {
+    width: 5,
+    height: '100%',
+  },
+  routeVerticalFirst: {
+    top: '50%',
+    height: '50%',
+  },
+  routeVerticalLast: {
+    height: '50%',
+    marginTop: 0,
+  },
+  routeCircleMiddle: {
+    height: 7,
+    width: 7,
+    borderRadius: 7,
+    border: '4px solid',
+    backgroundColor: '#fff',
+    opacity: 1,
+    zIndex: 10,
+  },
+  rowFirst: { fontWeight: 'bold' },
+  rowLast: { fontWeight: 'bold' },
 });
 
 const propTypes = {
@@ -77,21 +122,53 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     return () => layer.select();
   }, [layer, feature]);
 
+  console.log(switchVias);
+  console.log(vias);
   return (
     <div className={classes.container}>
-      <div className={`${classes.routeStops} ${classes.row}`}>
-        <div className={classes.fromTo}>
-          {start}–{end}
-        </div>
-        {switchVias.length ? (
-          <div>{`via ${switchVias.map((via) => ` ${via.station_name}`)}`}</div>
-        ) : null}
-      </div>
       <div className={classes.row}>
         <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
       </div>
       {description && <div className={classes.row}>{description}</div>}
       {link && <Link href={link}>{t('Link zum Angebot')}</Link>}
+      <div className={classes.route}>
+        {[
+          { station_name: start },
+          ...JSON.parse(vias),
+          { station_name: end },
+        ].map((via, index, arr) => {
+          let extraRowClass = '';
+          let extraVerticalClass = '';
+          const isFirst = index === 0;
+          const isLast = index === arr.length - 1;
+          if (isFirst) {
+            extraRowClass = ` ${classes.rowFirst}`;
+            extraVerticalClass = ` ${classes.routeVerticalFirst}`;
+          } else if (isLast) {
+            extraRowClass = ` ${classes.rowLast}`;
+            extraVerticalClass = ` ${classes.routeVerticalLast}`;
+          }
+          return (
+            <div key={via.station_name} className={classes.row + extraRowClass}>
+              <div className={classes.routeIcon}>
+                <div
+                  className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
+                  style={{ backgroundColor: layer.get('color') }}
+                />
+                <div
+                  className={classes.routeCircleMiddle}
+                  style={{ borderColor: layer.get('color') }}
+                />
+              </div>
+              <div>
+                <Typography variant={isFirst || isLast ? 'h4' : 'body'}>
+                  {via.station_name}
+                </Typography>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

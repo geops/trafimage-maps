@@ -27,7 +27,7 @@ const propTypes = {
 const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
   const classes = useStyles();
   const legend = properties.children.reverse().map((child) => (
-    <div className={classes.legendItem}>
+    <div className={classes.legendItem} key={child.key}>
       <div
         className={classes.itemColor}
         style={{ backgroundColor: child.get('color') }}
