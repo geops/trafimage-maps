@@ -26,7 +26,7 @@ const propTypes = {
 
 const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
   const classes = useStyles();
-  const legend = properties.children.map((child) => (
+  const legend = properties.children.reverse().map((child) => (
     <div className={classes.legendItem}>
       <div
         className={classes.itemColor}
