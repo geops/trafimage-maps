@@ -59,7 +59,7 @@ const DirektVerbindungenTagLayerInfo = ({ t, language, properties }) => {
       <div className={classes.legendItem}>
         <div
           className={classes.itemColor}
-          style={{ backgroundColor: 'rgba(235, 0, 0, 1)' }}
+          style={{ backgroundColor: properties.get('color') }}
         />
         <div>{t(properties.key)}</div>
       </div>

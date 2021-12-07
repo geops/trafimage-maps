@@ -59,7 +59,7 @@ const DirektVerbindungenNachtLayerInfo = ({ t, language, properties }) => {
       <div className={classes.legendItem}>
         <div
           className={classes.itemColor}
-          style={{ backgroundColor: 'rgba(5, 21, 156, 1)' }}
+          style={{ backgroundColor: properties.get('color') }}
         />
         <div>{t(properties.key)}</div>
       </div>

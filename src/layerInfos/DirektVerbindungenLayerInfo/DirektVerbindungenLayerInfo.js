@@ -31,14 +31,14 @@ const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
       <div className={classes.legendItem}>
         <div
           className={classes.itemColor}
-          style={{ backgroundColor: 'rgba(5, 21, 156, 1)' }}
+          style={{ backgroundColor: properties.children[0].get('color') }}
         />
         <div>{t(properties.children[0].key)}</div>
       </div>
       <div className={classes.legendItem}>
         <div
           className={classes.itemColor}
-          style={{ backgroundColor: 'rgba(235, 0, 0, 1)' }}
+          style={{ backgroundColor: properties.children[1].get('color') }}
         />
         <div>{t(properties.children[1].key)}</div>
       </div>
