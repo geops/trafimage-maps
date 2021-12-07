@@ -75,8 +75,8 @@ const useStyles = makeStyles({
     opacity: 1,
     zIndex: 10,
   },
-  rowFirst: { fontWeight: 'bold' },
-  rowLast: { fontWeight: 'bold' },
+  rowFirst: { fontSize: '1.1em' },
+  rowLast: { fontSize: '1.1em' },
 });
 
 const propTypes = {
