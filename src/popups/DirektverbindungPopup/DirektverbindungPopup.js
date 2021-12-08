@@ -114,9 +114,9 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     // [`url_${i18n.language}`]: link,
   } = feature.getProperties();
 
-  // const switchVias = JSON.parse(vias).filter(
-  //   (via) => via.via_type === 'switch' || via.via_type === 'switch_visible',
-  // );
+  const switchVias = JSON.parse(vias).filter(
+    (via) => via.via_type === 'switch' || via.via_type === 'visible',
+  );
 
   useEffect(() => {
     if (layer.visible) {
@@ -131,44 +131,45 @@ const DirektverbindungPopup = ({ feature, layer }) => {
         <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
       </div>
       <div className={classes.route}>
-        {[
-          { station_name: start },
-          ...JSON.parse(vias),
-          { station_name: end },
-        ].map((via, index, arr) => {
-          let extraRowClass = '';
-          let extraVerticalClass = '';
-          const isFirst = index === 0;
-          const isLast = index === arr.length - 1;
+        {[{ station_name: start }, ...switchVias, { station_name: end }].map(
+          (via, index, arr) => {
+            let extraRowClass = '';
+            let extraVerticalClass = '';
+            const isFirst = index === 0;
+            const isLast = index === arr.length - 1;
 
-          if (isFirst) {
-            extraRowClass = ` ${classes.rowFirst}`;
-            extraVerticalClass = ` ${classes.routeVerticalFirst}`;
-          } else if (isLast) {
-            extraRowClass = ` ${classes.rowLast}`;
-            extraVerticalClass = ` ${classes.routeVerticalLast}`;
-          }
+            if (isFirst) {
+              extraRowClass = ` ${classes.rowFirst}`;
+              extraVerticalClass = ` ${classes.routeVerticalFirst}`;
+            } else if (isLast) {
+              extraRowClass = ` ${classes.rowLast}`;
+              extraVerticalClass = ` ${classes.routeVerticalLast}`;
+            }
 
-          return (
-            <div key={via.station_name} className={classes.row + extraRowClass}>
-              <div className={classes.routeIcon}>
-                <div
-                  className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
-                  style={{ backgroundColor: layer.get('color') }}
-                />
-                <div
-                  className={classes.routeCircleMiddle}
-                  style={{ borderColor: layer.get('color') }}
-                />
+            return (
+              <div
+                key={via.station_name}
+                className={classes.row + extraRowClass}
+              >
+                <div className={classes.routeIcon}>
+                  <div
+                    className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
+                    style={{ backgroundColor: layer.get('color') }}
+                  />
+                  <div
+                    className={classes.routeCircleMiddle}
+                    style={{ borderColor: layer.get('color') }}
+                  />
+                </div>
+                <div>
+                  <Typography variant={isFirst || isLast ? 'h4' : 'body'}>
+                    {via.station_name}
+                  </Typography>
+                </div>
               </div>
-              <div>
-                <Typography variant={isFirst || isLast ? 'h4' : 'body'}>
-                  {via.station_name}
-                </Typography>
-              </div>
-            </div>
-          );
-        })}
+            );
+          },
+        )}
       </div>
     </div>
   );
