@@ -224,6 +224,7 @@ class Map extends PureComponent {
       dispatchHtmlEvent,
       activeTopic,
       showPopups,
+      featureInfo,
     } = this.props;
 
     // If there is no popup to display just ignore the click event.
@@ -248,12 +249,22 @@ class Map extends PureComponent {
           const allow =
             layer.get('popupComponent') && !layer.get('showPopupOnHover');
           if (hasPriorityLayer) {
+            // Clear the highlight style when there is priority layers
+            if (layer.highlight && !layer.get('priorityFeatureInfo')) {
+              layer.highlight([]);
+            }
             return allow && layer.get('priorityFeatureInfo');
           }
           return allow;
         });
 
-        // Clear the select style.
+        // Clear the previous select style.
+        (featureInfo || []).forEach(({ layer }) => {
+          if (layer.select) {
+            layer.select([]);
+          }
+        });
+
         infos.forEach(({ layer, features }) => {
           if (layer.select) {
             layer.select(features);

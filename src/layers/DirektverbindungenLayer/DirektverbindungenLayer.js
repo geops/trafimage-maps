@@ -50,13 +50,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           this.originalLineWidth[layerId] = layer.paint['line-width'];
 
           // We retrieve the colro and save it to use it in the popup.
-          const rgba = this.originalColor[layerId];
-          if (rgba) {
-            this.originalColor[layerId] = `rgba(${rgba.r * 255},${
-              rgba.g * 255
-            },${rgba.b * 255},${rgba.a})`;
-            this.set('color', this.originalColor[layerId]);
-          }
+          this.set('color', this.originalColor[layerId]);
           // mbMap.setPaintProperty(`${layerId}_oultine_1`, 'line-width', [
           //   'case',
           //   ['boolean', ['feature-state', 'hover'], false],
@@ -116,6 +110,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
 
   select(features = []) {
     const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
+    }
     super.select(features);
     mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
     if (mbMap) {
