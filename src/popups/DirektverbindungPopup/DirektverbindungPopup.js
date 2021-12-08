@@ -162,7 +162,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
                   />
                 </div>
                 <div>
-                  <Typography variant={isFirst || isLast ? 'h4' : 'body'}>
+                  <Typography variant={isFirst || isLast ? 'h4' : 'body1'}>
                     {via.station_name}
                   </Typography>
                 </div>

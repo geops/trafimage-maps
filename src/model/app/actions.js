@@ -38,10 +38,28 @@ export const setLanguage = (data) => {
 };
 export const setProjection = (data) => ({ type: SET_PROJECTION, data });
 
-export const setFeatureInfo = (data) => ({
-  type: SET_FEATURE_INFO,
-  data,
-});
+export const setFeatureInfo = (data) => (dispatch, getState) => {
+  const {
+    app: { featureInfo },
+  } = getState();
+
+  if (!data.length) {
+    // Clean previous highlight and select styles.
+    featureInfo.forEach(({ layer }) => {
+      if (layer.highlight) {
+        layer.highlight([]);
+      }
+      if (layer.select) {
+        layer.select([]);
+      }
+    });
+  }
+
+  dispatch({
+    type: SET_FEATURE_INFO,
+    data,
+  });
+};
 
 export const setMenuOpen = (data) => ({ type: SET_MENU_OPEN, data });
 

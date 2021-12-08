@@ -223,6 +223,12 @@ export const passagierfrequenzen = new MapboxStyleLayer({
       'circle-color': 'rgb(255,220,0)',
       'circle-stroke-width': 2,
       'circle-stroke-color': 'rgb(255,220,0)',
+      'circle-opacity': [
+        'case',
+        ['boolean', ['feature-state', 'hover'], false],
+        1,
+        0.7,
+      ],
     },
   },
   properties: {
@@ -1486,6 +1492,7 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
     popupComponent: 'DirektverbindungPopup',
     useOverlay: true,
     color: 'rgba(235, 0, 0, 1)', // Comes from der mapbox style
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
 
@@ -1499,6 +1506,7 @@ export const direktverbindungenNight = new DirektverbindungenLayer({
     popupComponent: 'DirektverbindungPopup',
     useOverlay: true,
     color: 'rgba(5, 21, 156, 1)', // Comes from der mapbox style
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
 
