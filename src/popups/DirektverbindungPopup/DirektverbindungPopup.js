@@ -55,7 +55,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
   },
   routeVertical: {
-    width: 5,
+    width: 4,
     height: '100%',
   },
   routeVerticalFirst: {
@@ -67,10 +67,10 @@ const useStyles = makeStyles({
     marginTop: 0,
   },
   routeCircleMiddle: {
-    height: 7,
-    width: 7,
-    borderRadius: 7,
-    border: '4px solid',
+    height: 6,
+    width: 6,
+    borderRadius: 6,
+    border: '3px solid',
     backgroundColor: '#fff',
     opacity: 1,
     zIndex: 10,
