@@ -21,6 +21,8 @@ import ZweitausbildungTopicInfo from './ZweitausbildungTopicInfo';
 import RegionenkartePublicLayerInfo from './RegionenkartePublicLayerInfo';
 import NetzentwicklungTopicInfo from './NetzentwicklungTopicInfo';
 import NetzentwicklungLayerInfo from './NetzentwicklungLayerInfo';
+import BeleuchtungTopicInfo from './BeleuchtungTopicInfo';
+import BeleuchtungLayerInfo from './BeleuchtungLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -45,6 +47,8 @@ export { default as ZweitausbildungTopicInfo } from './ZweitausbildungTopicInfo'
 export { default as RegionenkartePublicLayerInfo } from './RegionenkartePublicLayerInfo';
 export { default as NetzentwicklungTopicInfo } from './NetzentwicklungTopicInfo';
 export { default as NetzentwicklungLayerInfo } from './NetzentwicklungLayerInfo';
+export { default as BeleuchtungTopicInfo } from './BeleuchtungTopicInfo';
+export { default as BeleuchtungLayerInfo } from './BeleuchtungLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -70,4 +74,6 @@ export default {
   ZweitausbildungTopicInfo,
   NetzentwicklungTopicInfo,
   NetzentwicklungLayerInfo,
+  BeleuchtungTopicInfo,
+  BeleuchtungLayerInfo,
 };
