@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import MapboxStyleLayer from '../MapboxStyleLayer';
 
 const VIAPOINTSLAYER_ID = 'dv_points';
@@ -12,19 +11,90 @@ const VIAPOINTSLAYER_ID = 'dv_points';
  */
 class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    super(options);
-    this.routeType = options.routeType === 'night' ? 'night' : 'day';
-    this.styleLayersFilter = (layer) => {
-      return (
-        layer.metadata &&
-        layer.metadata['trafimage.filter'] ===
-          `lines_${this.routeType === 'night' ? 'night' : 'day'}`
-      );
-    };
-    this.featureInfoFilter = (feature) => {
-      const mapboxFeature = feature.get('mapboxFeature');
-      return mapboxFeature && !/outline/.test(mapboxFeature.layer.id);
-    };
+    super({
+      ...options,
+      featureInfoFilter: (feature) => {
+        const mapboxFeature = feature.get('mapboxFeature');
+        return mapboxFeature && !/outline/.test(mapboxFeature.layer.id);
+      },
+      styleLayersFilter: (layer) => {
+        return (
+          // !/outline/.test(layer.id) &&
+          layer.metadata &&
+          layer.metadata['trafimage.filter'] ===
+            `lines_${this.get('routeType')}`
+        );
+      },
+    });
+  }
+
+  onLoad() {
+    if (!this.originalColor) {
+      this.originalColor = {};
+    }
+
+    if (!this.originalLineWidth) {
+      this.originalLineWidth = {};
+    }
+
+    const { mbMap } = this.mapboxLayer;
+    this.osmPointsLayers = mbMap
+      .getStyle()
+      .layers.filter((layer) => {
+        return this.styleLayersFilter(layer); // && /outline/.test(layer.id);
+      })
+      .forEach((layer) => {
+        const layerId = layer.id;
+        if (!this.originalColor[layerId]) {
+          this.originalColor[layerId] = layer.paint['line-color'];
+          this.originalLineWidth[layerId] = layer.paint['line-width'];
+
+          // We retrieve the colro and save it to use it in the popup.
+          const rgba = this.originalColor[layerId];
+          if (rgba) {
+            this.originalColor[layerId] = `rgba(${rgba.r * 255},${
+              rgba.g * 255
+            },${rgba.b * 255},${rgba.a})`;
+            this.set('color', this.originalColor[layerId]);
+          }
+          // mbMap.setPaintProperty(`${layerId}_oultine_1`, 'line-width', [
+          //   'case',
+          //   ['boolean', ['feature-state', 'hover'], false],
+          //   this.originalLineWidth[layerId] * 2, // (this.get('routeType') === 'day' ? 3 : 4),
+          //   this.originalLineWidth[layerId],
+          // ]);
+          // mbMap.setPaintProperty(`${layerId}_oultine_2`, 'line-width', [
+          //   'case',
+          //   ['boolean', ['feature-state', 'hover'], false],
+          //   this.originalLineWidth[layerId] * 2, // (this.get('routeType') === 'day' ? 3 : 4),
+          //   this.originalLineWidth[layerId],
+          // ]);
+          mbMap.setPaintProperty(layerId, 'line-width', [
+            'case',
+            ['boolean', ['feature-state', 'hover'], false],
+            this.originalLineWidth[layerId] * (/outline/.test(layerId) ? 3 : 2), // (this.get('routeType') === 'day' ? 3 : 4),
+            this.originalLineWidth[layerId],
+          ]);
+          // mbMap.setPaintProperty(layerId, 'line-color', [
+          //   'case',
+          //   ['boolean', ['feature-state', 'hover'], false],
+          //   lighten(this.originalColor[layerId], 0.5),
+          //   this.originalColor[layerId],
+          // ]);
+        }
+        // mbMap.setPaintProperty(layerId, 'line-color', [
+        //   'case',
+        //   ['boolean', ['feature-state', 'hover'], false],
+        //   'red',
+        //   'green',
+        // ]);
+        // this.setHoverState(features, true);
+        // console.log(features[0].get('mapboxFeature'));
+      });
+
+    // this.addSource();
+    super.onLoad();
+    // this.updateSource();
   }
 
   setVisible(
@@ -47,7 +117,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   select(features = []) {
     const { mbMap } = this.mapboxLayer;
     super.select(features);
-
+    mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
     if (mbMap) {
       if (this.selectedFeatures.length) {
         this.selectedFeatures.forEach((feature) => {
@@ -61,7 +131,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         mbMap.setPaintProperty(
           VIAPOINTSLAYER_ID,
           'circle-stroke-color',
-          this.routeType === 'night'
+          this.get('routeType') === 'night'
             ? 'rgba(5, 21, 156, 1)'
             : 'rgba(9, 194, 242, 1)',
         );

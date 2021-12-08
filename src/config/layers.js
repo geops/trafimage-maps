@@ -1487,6 +1487,7 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.day`,
   mapboxLayer: dataLayer,
   properties: {
+    routeType: 'day',
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
     popupComponent: 'DirektverbindungPopup',
@@ -1499,8 +1500,8 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
 export const direktverbindungenNight = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.night`,
   mapboxLayer: dataLayer,
-  routeType: 'night',
   properties: {
+    routeType: 'night',
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
     popupComponent: 'DirektverbindungPopup',
