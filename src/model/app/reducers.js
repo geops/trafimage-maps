@@ -45,6 +45,7 @@ const getInitialState = () => ({
     value: 'EPSG:4326',
     format: (c) => c,
   },
+  dialogPosition: { x: 390, y: 110 },
   // Open the menu when mapset has opened the page.
   menuOpen: isOpenedByMapset(),
   searchOpen: false,
