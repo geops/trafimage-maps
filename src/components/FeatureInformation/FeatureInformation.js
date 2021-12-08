@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Button from '@geops/react-ui/components/Button';
 import { MdClose } from 'react-icons/md';
+import GeometryType from 'ol/geom/GeometryType';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import Feature from 'ol/Feature';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { setFeatureInfo } from '../../model/app/actions';
 import popups from '../../popups';
+import highlightPointStyle from '../../utils/highlightPointStyle';
 
 import './FeatureInformation.scss';
 
@@ -26,37 +31,61 @@ const getPopupComponent = ({ popupComponent, layer }) => {
   return typeof comp === 'string' ? popups[comp] : comp;
 };
 
+const highlightLayer = new VectorLayer({
+  source: new VectorSource({ features: [] }),
+});
+highlightLayer.setStyle(highlightPointStyle);
+
 const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const map = useSelector((state) => state.app.map);
   const language = useSelector((state) => state.app.language);
   const [featureIndex, setFeatureIndex] = useState(0);
+
+  useEffect(() => {
+    map.addLayer(highlightLayer);
+    return () => {
+      highlightLayer.getSource().clear();
+      map.removeLayer(highlightLayer);
+    };
+  }, [map]);
 
   useEffect(() => {
     setFeatureIndex(0);
   }, [featureInfo]);
 
   // List of features available for pagination.
-  const features = [];
-
-  // When a popup use hidePagination, we store the index for each popup.
-  const indexByPopup = {};
-
-  featureInfo.forEach((featInfo) => {
-    const PopupComponent = getPopupComponent(featInfo);
-    if (PopupComponent && PopupComponent.hidePagination) {
-      const name = PopupComponent.displayName;
-      // All features using this PopupComponent will be render on the same page
-      if (indexByPopup[name] !== undefined) {
-        features[indexByPopup[name]].push(...featInfo.features);
-      } else {
-        features.push([...featInfo.features]);
-        indexByPopup[name] = features.length - 1;
+  const features = useMemo(() => {
+    const feats = [];
+    // When a popup use hidePagination, we store the index for each popup.
+    const indexByPopup = {};
+    featureInfo.forEach((featInfo) => {
+      const PopupComponent = getPopupComponent(featInfo);
+      if (PopupComponent && PopupComponent.hidePagination) {
+        const name = PopupComponent.displayName;
+        // All features using this PopupComponent will be render on the same page
+        if (indexByPopup[name] !== undefined) {
+          feats[indexByPopup[name]].push(...featInfo.features);
+        } else {
+          feats.push([...featInfo.features]);
+          indexByPopup[name] = feats.length - 1;
+        }
+      } else if (PopupComponent) {
+        feats.push(...featInfo.features);
       }
-    } else if (PopupComponent) {
-      features.push(...featInfo.features);
+    });
+    return feats;
+  }, [featureInfo]);
+
+  useEffect(() => {
+    highlightLayer.getSource().clear();
+    // When the featureIndex change we addd the red circle.
+    const feature = features[featureIndex];
+    if (feature && feature.getGeometry().getType() === GeometryType.POINT) {
+      highlightLayer.getSource().addFeature(new Feature(feature.getGeometry()));
     }
-  });
+  }, [featureIndex, featureInfo, features]);
 
   // The current feature(s) to display.
   const feature = features[featureIndex];
@@ -81,39 +110,9 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     return null;
   }
 
-  let pagination = null;
   const { layer } = info;
   const { hideHeader, renderTitle, onCloseBtClick = () => {} } = PopupComponent;
 
-  if (features.length > 1) {
-    pagination = (
-      <div className="wkp-pagination-wrapper">
-        <span className="wkp-pagination-button-wrapper">
-          {featureIndex > 0 ? (
-            <Button
-              className="wkp-pagination-button"
-              title={t('zurück')}
-              onClick={() => setFeatureIndex(featureIndex - 1)}
-            >
-              <IoIosArrowRoundBack />
-            </Button>
-          ) : null}
-        </span>
-        {featureIndex + 1} {t('von')} {features.length}
-        <span className="wkp-pagination-button-wrapper">
-          {featureIndex + 1 < features.length ? (
-            <Button
-              className="wkp-pagination-button"
-              title={t('weiter')}
-              onClick={() => setFeatureIndex(featureIndex + 1)}
-            >
-              <IoIosArrowRoundForward />
-            </Button>
-          ) : null}
-        </span>
-      </div>
-    );
-  }
   return (
     <div
       className="wkp-feature-information"
@@ -153,7 +152,33 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}
           />
-          {pagination}
+          {features.length > 1 && (
+            <div className="wkp-pagination-wrapper">
+              <span className="wkp-pagination-button-wrapper">
+                {featureIndex > 0 && (
+                  <Button
+                    className="wkp-pagination-button"
+                    title={t('zurück')}
+                    onClick={() => setFeatureIndex(featureIndex - 1)}
+                  >
+                    <IoIosArrowRoundBack />
+                  </Button>
+                )}
+              </span>
+              {featureIndex + 1} {t('von')} {features.length}
+              <span className="wkp-pagination-button-wrapper">
+                {featureIndex < features.length - 1 && (
+                  <Button
+                    className="wkp-pagination-button"
+                    title={t('weiter')}
+                    onClick={() => setFeatureIndex(featureIndex + 1)}
+                  >
+                    <IoIosArrowRoundForward />
+                  </Button>
+                )}
+              </span>
+            </div>
+          )}
         </div>
       </React.Suspense>
     </div>
