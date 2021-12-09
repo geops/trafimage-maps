@@ -10,6 +10,8 @@ import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
 import fetch from 'node-fetch';
 
+import mediaQuery from 'css-mediaquery';
+
 configure({ adapter: new Adapter() });
 
 proj4.defs(
@@ -35,6 +37,18 @@ if (!global.fetch) {
 global.URL.createObjectURL = jest.fn(() => 'fooblob');
 
 global.mockStore = configureStore([thunk]);
+
+// See https://mui.com/components/use-media-query/#testing
+global.createMatchMedia = (width) => {
+  return (query) => ({
+    matches: mediaQuery.match(query, {
+      width,
+    }),
+    addListener: () => {},
+    removeListener: () => {},
+  });
+};
+global.matchMedia = global.createMatchMedia(window.innerWidth);
 
 global.sampleKml = `
   <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 https://developers.google.com/kml/schema/kml22gx.xsd">

@@ -18,6 +18,7 @@ const layer = new Layer({
 
 describe('MapAccessibility', () => {
   beforeEach(() => {
+    TrackerLayer.prototype.hasFeatureInfoAtCoordinate = jest.fn(() => true);
     mapElement = document.createElement('div');
     mapElement.tabIndex = 1;
     mapElement.tabindex = 1;
@@ -37,6 +38,7 @@ describe('MapAccessibility', () => {
   });
 
   afterEach(() => {
+    TrackerLayer.prototype.hasFeatureInfoAtCoordinate.mockRestore();
     trackerLayer.terminate(map);
     document.body.removeChild(mapElement);
   });

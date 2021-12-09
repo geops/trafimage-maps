@@ -5,6 +5,7 @@ import { compose } from 'redux';
 import GeoJSON from 'ol/format/GeoJSON';
 import qs from 'query-string';
 import OLMap from 'ol/Map';
+import { fromLonLat } from 'ol/proj';
 import RSPermalink from 'react-spatial/components/Permalink';
 import LayerService from 'react-spatial/LayerService';
 import KML from 'react-spatial/utils/KML';
@@ -169,8 +170,15 @@ class Permalink extends PureComponent {
     };
 
     const z = parseInt(parameters.z, 10);
-    const x = parseFloat(parameters.x);
-    const y = parseFloat(parameters.y);
+    let x = parseFloat(parameters.x);
+    let y = parseFloat(parameters.y);
+    const lon = parseFloat(parameters.lon);
+    const lat = parseFloat(parameters.lat);
+
+    // if coordinateas are in epsg:4326
+    if (!x && !y && lon && lat) {
+      [x, y] = fromLonLat([lon, lat]);
+    }
 
     if (x && y) {
       dispatchSetCenter([x, y]);
@@ -218,6 +226,8 @@ class Permalink extends PureComponent {
       [platformFilterKey]: this.platform,
       [DRAW_OLD_PARAM]: undefined,
       [DRAW_PARAM]: drawId,
+      lon: undefined,
+      lat: undefined,
     };
     this.setState(state);
   }
