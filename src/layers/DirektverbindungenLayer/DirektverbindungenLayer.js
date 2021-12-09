@@ -91,7 +91,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         id: 'dv_lines_night_outline_highlight',
         layout: { visibility: 'visible' },
         paint: {
-          'line-color': 'rgba(0, 230, 235, 1)',
+          'line-color': 'rgba(112, 228, 228, 0.05)',
           'line-width': [
             'case',
             ['boolean', ['feature-state', 'hover'], false],
