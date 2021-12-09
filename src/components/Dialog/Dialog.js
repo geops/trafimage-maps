@@ -18,27 +18,34 @@ import Draggable from 'react-draggable';
 import { setDialogVisible, setDialogPosition } from '../../model/app/actions';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    zIndex: (props) => (props.isModal ? 1300 : '0 !important'),
-    pointerEvents: (props) => (props.isModal ? 'auto' : 'none'),
+  rootDesktop: {
+    zIndex: '0!important',
   },
-  modalRoot: {
-    zIndex: 1300,
-    pointerEvents: 'auto',
-  },
+
   paper: {
     minWidth: 320,
+    zIndex: 0,
   },
-  modalPaper: {
+  paperModal: {
     width: '90%',
     maxHeight: 'calc(100% - 125px)',
   },
+  paperMobile: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    right: 10,
+    width: 'auto',
+    zIndex: 1300,
+  },
+
   scrollPaper: {
     display: 'block', // Prevent Dialog from growing in all directions
   },
-  modalScrollPaper: {
+  scrollPaperModal: {
     display: 'flex', // Prevent Dialog from growing in all directions
   },
+
   dialogBody: {
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.htmlFontSize,
@@ -67,13 +74,6 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     cursor: (props) => (props.isModal ? 'auto' : 'move'),
-  },
-  dialogMobile: {
-    position: 'absolute',
-    bottom: 10,
-    left: 10,
-    right: 10,
-    width: 'auto',
   },
 }));
 
@@ -167,10 +167,10 @@ function Dialog(props) {
     maxWidth: false,
     PaperComponent: isSmallScreen ? PaperComponent : DraggablePaperComponent,
     classes: {
-      root: classes.root,
+      root: !isSmallScreen ? classes.rootDesktop : '',
       scrollPaper: classes.scrollPaper,
       paper: `${classes.paper} ${className || ''} ${
-        isSmallScreen ? classes.dialogMobile : ''
+        isSmallScreen ? classes.paperMobile : ''
       }`,
     },
   };
@@ -182,9 +182,8 @@ function Dialog(props) {
       maxWidth: 'md',
       PaperComponent,
       classes: {
-        root: classes.root,
-        scrollPaper: classes.modalScrollPaper,
-        paper: `${classes.modalPaper} ${className || ''}`,
+        scrollPaper: classes.scrollPaperModal,
+        paper: `${classes.paperModal} ${className || ''}`,
       },
     };
   }

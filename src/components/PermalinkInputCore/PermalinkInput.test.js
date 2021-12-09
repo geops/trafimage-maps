@@ -20,8 +20,8 @@ describe('PermalinkInput', () => {
     let getShortenedUrl = null;
 
     beforeEach(() => {
-      getShortenedUrl = jest.fn(val => {
-        return new Promise(resolve => {
+      getShortenedUrl = jest.fn((val) => {
+        return new Promise((resolve) => {
           return resolve(val);
         });
       });
@@ -36,10 +36,7 @@ describe('PermalinkInput', () => {
         .instance()
         .updatePermalinkValue()
         .then(() => {
-          const input = wrapper
-            .find('input')
-            .first()
-            .getElement();
+          const input = wrapper.find('input').first().getElement();
 
           expect(input.props.value).toBe('http://url.test');
         });
@@ -74,10 +71,7 @@ describe('PermalinkInput', () => {
         .updatePermalinkValue()
         .then(() => {
           wrapper.update();
-          wrapper
-            .find('input')
-            .first()
-            .simulate('click');
+          wrapper.find('input').first().simulate('click');
 
           expect(spy).toHaveBeenCalledTimes(1);
         });
@@ -100,10 +94,7 @@ describe('PermalinkInput', () => {
         .updatePermalinkValue()
         .then(() => {
           wrapper.update();
-          wrapper
-            .find('.tm-permalink-bt')
-            .first()
-            .simulate('click');
+          wrapper.find('.tm-permalink-bt').first().simulate('click');
           expect(spy).toHaveBeenCalledTimes(1);
         });
     });
