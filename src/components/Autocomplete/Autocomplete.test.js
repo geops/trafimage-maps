@@ -33,9 +33,10 @@ const items = [
 const state = {
   showList: false,
 };
+let wrapper = null;
 
 const mountDflt = () => {
-  return mount(
+  wrapper = mount(
     <Autocomplete
       value="fooval"
       defaultItems={defaultItems}
@@ -44,6 +45,9 @@ const mountDflt = () => {
       getItemKey={(item) => item.label}
     />,
   );
+
+  document.body.appendChild(wrapper.getDOMNode());
+  return wrapper;
 };
 
 describe('Autocomplete', () => {
@@ -58,6 +62,11 @@ describe('Autocomplete', () => {
     afterEach(() => {
       spy.mockRestore();
       window.console.error.mockRestore();
+      if (wrapper && wrapper.getDOMNode()) {
+        document.body.removeChild(wrapper.getDOMNode());
+        wrapper.unmount();
+      }
+      wrapper = null;
     });
 
     test('matches snapshot', () => {

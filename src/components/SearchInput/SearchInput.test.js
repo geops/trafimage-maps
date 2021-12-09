@@ -147,14 +147,13 @@ describe('SearchInput', () => {
 
     test('focuses the input on state change.', () => {
       const wrapper = mount(<SearchInput />);
-      expect(document.activeElement).toBe(document.body);
       expect(wrapper.state('focus')).toBe(false);
+      wrapper.instance().refInput.focus = jest.fn();
+      expect(wrapper.instance().refInput.focus).toHaveBeenCalledTimes(0);
       wrapper.setState({
         focus: true,
       });
-      wrapper.update();
-      expect(wrapper.instance().refInput).toBeDefined();
-      expect(document.activeElement).toBe(wrapper.instance().refInput);
+      expect(wrapper.instance().refInput.focus).toHaveBeenCalledTimes(1);
     });
   });
 });
