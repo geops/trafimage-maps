@@ -9,7 +9,6 @@
 @import 'node_modules/@geops/react-ui/components/Footer/Footer.scss';
 @import 'node_modules/@geops/react-ui/components/Button/Button.scss';
 @import 'node_modules/@geops/react-ui/components/Header/Header.scss';
-@import 'node_modules/@geops/react-ui/components/Dialog/Dialog.scss';
 
 // React-spatial
 @import 'node_modules/react-spatial/themes/default/components.scss';
@@ -25,7 +24,6 @@
 
 // Components
 @import './components/Collapsible/Collapsible.scss';
-@import './components/Dialog/Dialog.scss';
 @import './components/FeatureInformation/FeatureInformation.scss';
 @import './components/FeatureInformation/FeaturePagination.scss';
 @import './components/Footer/Footer.scss';
@@ -74,4 +72,3 @@
 @import './layerInfos/ZweitausbildungLayerInfo/ZweitausbildungLayerInfo.scss';
 @import './layerInfos/ZweitausbildungRoutesSubLayerInfo/ZweitausbildungRoutesSubLayerInfo.scss';
 @import './layerInfos/ZweitausbildungSubLayerInfo/ZweitausbildungSubLayerInfo.scss';
-@import './layerInfos/PunctualityLayerInfo/PunctualityLayerInfo.scss';

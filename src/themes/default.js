@@ -234,14 +234,16 @@ const theme = createTheme({
     MuiDialog: {
       paper: {
         pointerEvents: 'auto',
-        width: 'min-content',
-        minWidth: '320px',
         textAlign: 'left',
         minHeight: 65,
         backgroundColor: '#fff',
-        overflow: 'auto',
+        overflowY: 'hidden',
         borderRadius: 0,
         margin: 0,
+        width: 'min-content',
+      },
+      paperWidthFalse: {
+        maxWidth: 'none',
       },
     },
     MuiDialogTitle: {

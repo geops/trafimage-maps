@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import { withTranslation } from 'react-i18next';
 
-import './PunctualityLayerInfo.scss';
-
 const useStyles = makeStyles(() => ({
   legendWrapper: {
     margin: '10px 0',
@@ -15,6 +13,9 @@ const useStyles = makeStyles(() => ({
     paddingBottom: 5,
     '& svg': {
       paddingRight: 10,
+    },
+    '& span': {
+      maxWidth: '85%',
     },
   },
   punctualityCharacter: {

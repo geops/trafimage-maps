@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import { Map, View } from 'ol';
-import ExportDialog from '.';
+import Dialog from './Dialog';
 
 describe('ExportDialog', () => {
   const mockStore = configureStore([thunk]);
@@ -22,7 +22,7 @@ describe('ExportDialog', () => {
   test('should match snapshot.', () => {
     const component = renderer.create(
       <Provider store={store}>
-        <ExportDialog map={map} name="foo" />
+        <Dialog map={map} name="foo" />
       </Provider>,
     );
     const tree = component.toJSON();

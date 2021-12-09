@@ -15,18 +15,18 @@ import { MdClose } from 'react-icons/md';
 import Draggable from 'react-draggable';
 import { setDialogVisible, setDialogPosition } from '../../model/app/actions';
 
-import './Dialog.scss';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     zIndex: (props) => (props.isModal ? 1300 : '0 !important'),
     pointerEvents: (props) => (props.isModal ? 'auto' : 'none'),
   },
+  paper: {
+    minWidth: (props) => (props.isModal ? 650 : 320),
+  },
   scrollPaper: {
     display: (props) => (props.isModal ? 'flex' : 'block'), // Prevent Dialog from growing in all directions
   },
   dialogBody: {
-    padding: 20,
     fontFamily: theme.typography.fontFamily,
     fontSize: theme.typography.htmlFontSize,
     '& a': {
@@ -35,9 +35,11 @@ const useStyles = makeStyles((theme) => ({
     '& a:hover': {
       color: theme.palette.secondary.main,
     },
-  },
-  bold: {
-    fontWeight: 'bold',
+    '&>div:first-child': {
+      padding: 20,
+    },
+    maxHeight: (props) => (props.isModal ? 620 : 'none'),
+    overflowY: 'auto',
   },
   closeBtn: {
     position: 'absolute',
@@ -45,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
   },
   title: {
+    fontWeight: 'bold',
     cursor: (props) => (props.isModal ? 'auto' : 'move'),
   },
 }));
@@ -71,7 +74,7 @@ function DraggablePaperComponent(props) {
         );
       }}
     >
-      <Paper square {...props} elevation={4} />
+      <PaperComponent {...props} />
     </Draggable>
   );
 }
@@ -82,6 +85,7 @@ const propTypes = {
   body: PropTypes.element,
   // footer: PropTypes.element,
   isModal: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 const defaultProps = {
@@ -89,12 +93,13 @@ const defaultProps = {
   body: null,
   // footer: null,
   isModal: false,
+  className: null,
 };
 
 function Dialog(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { body, title, name, isModal } = props;
+  const { body, title, name, isModal, className } = props;
   const classes = useStyles({ isModal });
   const closeDialog = () => dispatch(setDialogVisible());
 
@@ -107,14 +112,14 @@ function Dialog(props) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const { activeElement } = document;
-    const dialogFocusables = dialogRef?.current?.ref.current
-      ? dialogRef.current.ref.current.querySelectorAll('[tabindex="0"]')
-      : [];
+    // const dialogFocusables = dialogRef?.current?.ref.current
+    //   ? dialogRef.current.ref.current.querySelectorAll('[tabindex="0"]')
+    //   : [];
 
-    if (dialogFocusables.length) {
-      // Focus the first focusable element in the popup.
-      dialogFocusables[0].focus();
-    }
+    // if (dialogFocusables.length) {
+    //   // Focus the first focusable element in the popup.
+    //   dialogFocusables[0].focus();
+    // }
     // ComponentWillUnmount
     return () => {
       document.removeEventListener('keydown', escFunction, false);
@@ -125,36 +130,39 @@ function Dialog(props) {
   }, [dialogRef]);
 
   return (
-    <div className="wkp-dialog" aria-labelledby="draggable-dialog-title">
-      <MuiDialog
-        onClose={closeDialog}
-        open
-        PaperComponent={isModal ? PaperComponent : DraggablePaperComponent}
-        hideBackdrop={!isModal}
-        maxWidth="xs"
-        classes={{ root: classes.root, scrollPaper: classes.scrollPaper }}
-        // {...props}
-        name={name}
+    <MuiDialog
+      aria-labelledby="draggable-dialog-title"
+      onClose={closeDialog}
+      open
+      PaperComponent={isModal ? PaperComponent : DraggablePaperComponent}
+      hideBackdrop={!isModal}
+      maxWidth={false}
+      classes={{
+        root: classes.root,
+        scrollPaper: classes.scrollPaper,
+        paper: `${classes.paper} ${className}`,
+      }}
+      // {...props}
+      name={name}
+    >
+      <DialogTitle
+        disableTypography
+        id="draggable-dialog-title"
+        className={classes.title}
       >
-        <DialogTitle
-          disableTypography
-          id="draggable-dialog-title"
-          className={classes.title}
+        <Typography className={classes.title}>{title}</Typography>
+        <IconButton
+          title={t('Dialog schließen')}
+          onClick={closeDialog}
+          className={classes.closeBtn}
         >
-          <Typography className={classes.bold}>{title}</Typography>
-          <IconButton
-            title={t('Dialog schließen')}
-            onClick={closeDialog}
-            className={classes.closeBtn}
-          >
-            <MdClose />
-          </IconButton>
-        </DialogTitle>
-        <div ref={dialogRef} className={classes.dialogBody}>
-          {body}
-        </div>
-      </MuiDialog>
-    </div>
+          <MdClose />
+        </IconButton>
+      </DialogTitle>
+      <div ref={dialogRef} className={classes.dialogBody}>
+        {body}
+      </div>
+    </MuiDialog>
   );
 }
 
