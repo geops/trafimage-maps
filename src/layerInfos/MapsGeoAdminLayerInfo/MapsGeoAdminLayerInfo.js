@@ -83,11 +83,13 @@ const MapsGeoAdminLayerInfo = ({ language, t, properties }) => {
 
   return (
     <div className="wkp-maps-geo-admin-layer-info">
-      <div
-        dangerouslySetInnerHTML={{
-          __html: legendHtml.innerHTML,
-        }}
-      />
+      {legendHtml && (
+        <div
+          dangerouslySetInnerHTML={{
+            __html: legendHtml.innerHTML,
+          }}
+        />
+      )}
       <div className="wkp-maps-geo-admin-layer-info-footer">
         <p className="bod-title">
           <span>{t('Legende')}</span>
