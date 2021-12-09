@@ -69,12 +69,14 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           //   this.originalLineWidth[layerId] * (/outline/.test(layerId) ? 3 : 2), // (this.get('routeType') === 'day' ? 3 : 4),
           //   this.originalLineWidth[layerId],
           // ]);
-          // mbMap.setPaintProperty(layerId, 'line-color', [
-          //   'case',
-          //   ['boolean', ['feature-state', 'hover'], false],
-          //   lighten(this.originalColor[layerId], 0.5),
-          //   this.originalColor[layerId],
-          // ]);
+          if (this.get('routeType') === 'day') {
+            // rgba(0, 230, 235, 1
+            mbMap.setPaintProperty(
+              layerId,
+              'line-color',
+              'rgba(0, 230, 235, 1)',
+            );
+          }
         }
         // mbMap.setPaintProperty(layerId, 'line-color', [
         //   'case',
@@ -92,7 +94,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           id: 'dv_lines_night_outline_highlight',
           layout: { visibility: 'visible' },
           paint: {
-            'line-color': 'rgba(200, 230, 230, 1)',
+            'line-color': 'rgba(195, 239, 239, 1)',
             'line-width': [
               'case',
               ['boolean', ['feature-state', 'hover'], false],
