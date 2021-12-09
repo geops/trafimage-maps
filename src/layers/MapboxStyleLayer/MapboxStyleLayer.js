@@ -50,10 +50,6 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
     super.applyLayoutVisibility(evt);
   }
 
-  getFeatures2(resolve) {
-    resolve(this.getFeatures());
-  }
-
   /**
    * Create exact copy of the MapboxLayer
    * @returns {MapboxLayer} MapboxLayer
