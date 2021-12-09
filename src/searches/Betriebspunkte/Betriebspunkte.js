@@ -31,7 +31,13 @@ class Betriebspunkte extends Search {
   }
 
   render(item) {
-    return <div>{item.properties.bezeichnung}</div>;
+    const { bezeichnung: name, abkuerzung: abbreviated } = item.properties;
+    return (
+      <div>
+        {name}
+        {abbreviated ? ` (${abbreviated})` : ''}
+      </div>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
