@@ -23,6 +23,7 @@ import NetzentwicklungTopicInfo from './NetzentwicklungTopicInfo';
 import NetzentwicklungLayerInfo from './NetzentwicklungLayerInfo';
 import BeleuchtungTopicInfo from './BeleuchtungTopicInfo';
 import BeleuchtungLayerInfo from './BeleuchtungLayerInfo';
+import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -49,6 +50,7 @@ export { default as NetzentwicklungTopicInfo } from './NetzentwicklungTopicInfo'
 export { default as NetzentwicklungLayerInfo } from './NetzentwicklungLayerInfo';
 export { default as BeleuchtungTopicInfo } from './BeleuchtungTopicInfo';
 export { default as BeleuchtungLayerInfo } from './BeleuchtungLayerInfo';
+export { default as MapsGeoAdminLayerInfo } from './MapsGeoAdminLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -76,4 +78,5 @@ export default {
   NetzentwicklungLayerInfo,
   BeleuchtungTopicInfo,
   BeleuchtungLayerInfo,
+  MapsGeoAdminLayerInfo,
 };
