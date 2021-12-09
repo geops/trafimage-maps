@@ -85,27 +85,29 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         // this.setHoverState(features, true);
         // console.log(features[0].get('mapboxFeature'));
       });
-    mbMap.addLayer(
-      {
-        filter: ['all'],
-        id: 'dv_lines_night_outline_highlight',
-        layout: { visibility: 'visible' },
-        paint: {
-          'line-color': 'rgba(112, 228, 228, 0.05)',
-          'line-width': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            15, // (this.get('routeType') === 'day' ? 3 : 4),
-            0,
-          ],
+    if (!mbMap.getLayer('dv_lines_outline_highlight')) {
+      mbMap.addLayer(
+        {
+          filter: ['all'],
+          id: 'dv_lines_night_outline_highlight',
+          layout: { visibility: 'visible' },
+          paint: {
+            'line-color': 'rgba(200, 230, 230, 1)',
+            'line-width': [
+              'case',
+              ['boolean', ['feature-state', 'hover'], false],
+              15, // (this.get('routeType') === 'day' ? 3 : 4),
+              0,
+            ],
+          },
+          // yellow rgba(252,187,0, 1)
+          source: 'ch.sbb.direktverbindungen',
+          'source-layer': 'ch.sbb.direktverbindungen_lines',
+          type: 'line',
         },
-        // yellow rgba(252,187,0, 1)
-        source: 'ch.sbb.direktverbindungen',
-        'source-layer': 'ch.sbb.direktverbindungen_lines',
-        type: 'line',
-      },
-      'dv_lines_night_outline_1',
-    );
+        'dv_lines_night_outline_1',
+      );
+    }
     // this.addSource();
     super.onLoad();
     // this.updateSource();
