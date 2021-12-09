@@ -1,17 +1,23 @@
 .wkp-maps-geo-admin-layer-info {
-  .legend-container {
-    .bod-title {
-      font-weight: bold;
+  .bod-title {
+    font-weight: bold;
+  }
+
+  .legend-footer {
+    display: none;
+  }
+
+  .wkp-maps-geo-admin-layer-info-footer {
+    margin: 10px 0;
+
+    img {
+      margin: 10px 0;
     }
 
-    .legend-footer {
-      span {
-        font-weight: bold;
-      }
-
-      .img-container {
-        padding: 10px 0;
-      }
+    span {
+      display: flex;
+      align-items: baseline;
+      white-space: pre;
     }
   }
 }
