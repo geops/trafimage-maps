@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import { TiVideo } from 'react-icons/ti';
-import { fromLonLat } from 'ol/proj';
 import Map from 'ol/Map';
 import { Layer } from 'mobility-toolbox-js/ol';
 import RouteSchedule from 'react-spatial/components/RouteSchedule';
@@ -39,8 +38,9 @@ class TrackerMenu extends Component {
     this.state = {
       open: false,
       collapsed: true,
-      trajectory: null,
+      lineInfos: null,
     };
+    this.onStopSequence = this.onStopSequence.bind(this);
     this.onLayerClick = this.onLayerClick.bind(this);
   }
 
@@ -48,7 +48,8 @@ class TrackerMenu extends Component {
     this.initializeClick();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
+    const { layer, feature } = this.state;
     const { menuOpen, layers } = this.props;
     if (menuOpen !== prevProps.menuOpen) {
       this.closeMenu();
@@ -57,26 +58,56 @@ class TrackerMenu extends Component {
     if (layers !== prevProps.layers) {
       this.initializeClick();
     }
+
+    if (layer !== prevState.layer || feature !== prevState.feature) {
+      if (layer && feature) {
+        this.getStopSequence();
+      }
+    }
   }
 
   componentWillUnmount() {
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
-
     this.trackerLayers.forEach((layer) => {
       layer.unClick(this.onLayerClick);
     });
   }
 
-  onLayerClick(traj) {
+  onLayerClick(features, layer) {
     const { dispatchSetMenuOpen } = this.props;
-    if (traj) {
+
+    if (features.length) {
       dispatchSetMenuOpen(false);
+      this.setState({
+        open: !!features.length,
+        collapsed: false,
+        feature: features[0],
+        layer,
+        lineInfos: null,
+      });
     }
+  }
+
+  onStopSequence(stopSequence) {
+    if (stopSequence[0]) {
+      // eslint-disable-next-line no-param-reassign
+      stopSequence[0].backgroundColor = stopSequence[0].stroke;
+      // eslint-disable-next-line no-param-reassign
+      stopSequence[0].color = stopSequence[0].text_color;
+    }
+
     this.setState({
-      open: !!traj,
-      collapsed: false,
-      trajectory: traj,
+      lineInfos: stopSequence[0],
+    });
+  }
+
+  getStopSequence() {
+    const { feature, layer } = this.state;
+    const { api } = layer;
+    const vehicleId = feature.get('train_id');
+    api.getStopSequence(vehicleId).then((data) => {
+      this.onStopSequence(data);
     });
   }
 
@@ -102,19 +133,33 @@ class TrackerMenu extends Component {
   }
 
   closeMenu() {
+    // Clear selected trains.
+    this.trackerLayers.forEach((layer) => {
+      // eslint-disable-next-line no-param-reassign
+      layer.selectedVehicleId = null;
+      const source = layer.vectorLayer.getSource();
+      if (source.getFeatures().length) {
+        source.clear();
+      }
+    });
+
     this.setState({
       open: false,
       collapsed: false,
-      trajectory: null,
+      lineInfos: null,
     });
   }
 
   render() {
-    const { open, collapsed, trajectory } = this.state;
+    const { open, collapsed, lineInfos } = this.state;
     const { map, t } = this.props;
 
     if (!open) {
       return null;
+    }
+    // TO REMOVE
+    if (lineInfos) {
+      lineInfos.routeIdentifier = lineInfos.routeIdentifier || '';
     }
 
     return (
@@ -126,17 +171,20 @@ class TrackerMenu extends Component {
         open={open}
         collapsed={collapsed}
         onCollapseToggle={(c) => this.setState({ collapsed: c })}
+        onClose={() => this.closeMenu()}
       >
-        {trajectory ? (
+        {lineInfos ? (
           <div>
             <RouteSchedule
               trackerLayer={this.trackerLayers.find((l) => l.visible)}
-              lineInfos={trajectory}
+              lineInfos={lineInfos}
               onStationClick={(station) => {
-                map.getView().animate({
-                  zoom: map.getView().getZoom(),
-                  center: fromLonLat(station.coordinates),
-                });
+                if (station.coordinate) {
+                  map.getView().animate({
+                    zoom: map.getView().getZoom(),
+                    center: station.coordinate,
+                  });
+                }
               }}
             />
           </div>

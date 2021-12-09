@@ -64,12 +64,12 @@ class StationsLayer extends MapboxStyleLayer {
    * @override
    */
   terminate(map) {
+    super.terminate(map);
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       mbMap.off('idle', this.onIdle);
       this.removeSource();
     }
-    super.terminate(map);
   }
 
   /**
@@ -159,7 +159,13 @@ class StationsLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     const { id } = this.source;
     if (mbMap.getSource(id)) {
-      mbMap.removeSource(id);
+      // Remove the source if no layers use it
+      const found = mbMap
+        .getStyle()
+        .layers.find((layer) => layer.source === id);
+      if (!found) {
+        mbMap.removeSource(id);
+      }
     }
   }
 }

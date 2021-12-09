@@ -19,43 +19,44 @@ const MapAccessibility = ({ layers, map }) => {
     const mapTarget = map.getTarget();
     let tabFeature;
     let tabLayer;
-    let tabFeatureIndex = 0;
+    let tabFeatureIndex = -1;
 
-    const mapAccessibility = (e) => {
+    const mapAccessibility = (evt) => {
       // cycle through map features
-      if (e.which === KEYCODE_TAB) {
+      if (evt.which === KEYCODE_TAB && mapTarget === document.activeElement) {
         [tabLayer] = layers
           .filter((l) => l.visible && l.properties.hasAccessibility)
           .map((l) => l.getVisibleChildren())
           .flat();
-        if (mapTarget === document.activeElement && tabLayer) {
-          if (tabLayer.isTrackerLayer) {
-            const trajectories = tabLayer.tracker.getRenderedTrajectories();
-            trajectories.sort((a, b) =>
-              a.coordinate && a.coordinate[0] < b.coordinate[0] ? -1 : 1,
-            );
-            tabFeature = trajectories[tabFeatureIndex];
+        if (tabLayer && tabLayer.isTrackerLayer) {
+          const trajectories = tabLayer.renderedTrajectories;
+          trajectories.sort((a, b) =>
+            a.coordinate && a.coordinate[0] < b.coordinate[0] ? -1 : 1,
+          );
+          tabFeatureIndex += evt.shiftKey ? -1 : 1;
+          tabFeature = trajectories[tabFeatureIndex];
 
-            if (tabFeature) {
-              tabLayer.tracker.setHoverVehicleId(tabFeature.id);
-              tabFeatureIndex += e.shiftKey ? -1 : 1;
-              e.preventDefault();
-            } else {
-              tabLayer.tracker.setHoverVehicleId(null);
-              tabFeature = null;
-              tabFeatureIndex = 0;
-            }
+          if (tabFeature) {
+            tabLayer.hoverVehicleId = tabFeature.id;
+            evt.preventDefault();
+          } else {
+            tabLayer.hoverVehicleId = null;
+            tabFeature = null;
+            tabFeatureIndex = -1;
           }
         }
       }
 
       // click on highlighted feature
-      if (e.which === KEYCODE_ENTER && tabFeature && tabLayer) {
-        if (tabLayer.isTrackerLayer) {
-          const { coordinate } = tabFeature;
-          map.dispatchEvent({ type: 'singleclick', map, coordinate });
-          e.preventDefault();
-        }
+      if (
+        evt.which === KEYCODE_ENTER &&
+        tabFeature &&
+        tabLayer &&
+        tabLayer.isTrackerLayer
+      ) {
+        const { coordinate } = tabFeature;
+        map.dispatchEvent({ type: 'singleclick', map, coordinate });
+        evt.preventDefault();
       }
     };
 

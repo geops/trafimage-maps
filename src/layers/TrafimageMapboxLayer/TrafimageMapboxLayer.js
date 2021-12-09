@@ -30,7 +30,12 @@ const applyFilters = (mbStyle, filters) => {
 
 class TrafimageMapboxLayer extends MapboxLayer {
   constructor(options) {
-    super({ ...options, styleUrl: { version: 8, sources: {}, layers: [] } });
+    super({
+      ...options,
+      styleUrl: { version: 8, sources: {}, layers: [] },
+      isHoverActive: false,
+      isClickActive: false,
+    });
     this.filters = options.filters;
     this.style = options.style;
   }

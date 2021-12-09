@@ -115,8 +115,8 @@ zoneLayer.loadZones([
   },
 ]);
 
-zoneLayer.onClick(f => {
-  console.log('Clicked', f);
+zoneLayer.onClick((features) => {
+  console.log('Clicked', features);
 });
 
 // Initialize route layer.
@@ -178,8 +178,8 @@ routeLayer
     routeLayer.zoomToRoute({duration: 1000});
   });
 
-routeLayer.onClick(f => {
-  console.log('Clicked', f);
+routeLayer.onClick((features) => {
+  console.log('Clicked', features);
 });
 
 const App = () => {
