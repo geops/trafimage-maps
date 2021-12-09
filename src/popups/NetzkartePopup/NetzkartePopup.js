@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
-import Button from '@geops/react-ui/components/Button';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
+import { Link } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -139,7 +140,7 @@ function NetzkartePopup({ feature }) {
       : coordinateHelper.meterFormat(coordinates);
 
   const coordinatesWrapper = (
-    <div>
+    <>
       <div
         tabIndex={0}
         role="button"
@@ -163,7 +164,7 @@ function NetzkartePopup({ feature }) {
           <span>{`${t('Höhe')}: ${feature.get('altitude')}m`}</span>
         )}
       </div>
-    </div>
+    </>
   );
 
   return (
@@ -171,15 +172,18 @@ function NetzkartePopup({ feature }) {
       {airportLabel}
       {hasPlanLinks ? (
         <>
-          <Button
-            onClick={() => {
-              setShowPlanLinks(!showPlanLinks);
-            }}
-            ariaExpanded={showPlanLinks}
-            className="wkp-popup-plans"
-          >
-            {t('Bahnhofpläne')}
-          </Button>
+          <div>
+            <Link
+              onClick={() => {
+                setShowPlanLinks(!showPlanLinks);
+              }}
+              aria-expanded={showPlanLinks}
+              className="wkp-popup-plans"
+              tabIndex="0"
+            >
+              {t('Bahnhofpläne')}
+            </Link>
+          </div>
           <div
             className={`wkp-bahnhofplan-links${
               showPlanLinks ? ' wkp-visible' : ''

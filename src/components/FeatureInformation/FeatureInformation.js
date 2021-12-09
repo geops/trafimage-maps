@@ -1,10 +1,11 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import Button from '@geops/react-ui/components/Button';
 import { MdClose } from 'react-icons/md';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
+import { Link, IconButton } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
 import popups from '../../popups';
 
@@ -90,25 +91,27 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       <div className="wkp-pagination-wrapper">
         <span className="wkp-pagination-button-wrapper">
           {featureIndex > 0 ? (
-            <Button
+            <Link
               className="wkp-pagination-button"
               title={t('zurück')}
               onClick={() => setFeatureIndex(featureIndex - 1)}
+              tabIndex="0"
             >
               <IoIosArrowRoundBack />
-            </Button>
+            </Link>
           ) : null}
         </span>
         {featureIndex + 1} {t('von')} {features.length}
         <span className="wkp-pagination-button-wrapper">
           {featureIndex + 1 < features.length ? (
-            <Button
+            <Link
               className="wkp-pagination-button"
               title={t('weiter')}
               onClick={() => setFeatureIndex(featureIndex + 1)}
+              tabIndex="0"
             >
               <IoIosArrowRoundForward />
-            </Button>
+            </Link>
           ) : null}
         </span>
       </div>
@@ -131,7 +134,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
                 ? renderTitle(feature, t)
                 : layer && layer.name && t(layer.name)}
             </span>
-            <Button
+            <IconButton
               className="wkp-close-bt"
               title={t('Popup schliessen')}
               onClick={() => {
@@ -140,7 +143,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
               }}
             >
               <MdClose focusable={false} alt={t('Popup schliessen')} />
-            </Button>
+            </IconButton>
           </div>
         ) : null}
         <div className="wkp-feature-information-body">

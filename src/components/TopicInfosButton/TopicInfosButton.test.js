@@ -20,7 +20,7 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe(
+    expect(wrapper.find('IconButton').prop('className')).toBe(
       'wkp-info-bt wkp-active',
     );
   });
@@ -36,7 +36,7 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe(
+    expect(wrapper.find('IconButton').prop('className')).toBe(
       'wkp-info-bt wkp-active wkp-selected',
     );
   });

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
-import Autocomplete from '@geops/react-ui/components/Autocomplete';
+import Autocomplete from '../../components/Autocomplete';
 
 import { ReactComponent as SearchIcon } from '../../img/search.svg';
 

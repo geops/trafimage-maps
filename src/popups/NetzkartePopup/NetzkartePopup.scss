@@ -6,18 +6,15 @@
       margin-left: 5px;
     }
 
-    div {
-      padding: 3px 0;
+    > div {
+      padding: 4px 0;
       border-width: 0 0 1px 0;
       border-style: solid;
       border-color: #eee;
-
-      &:last-child {
-        border: none;
-      }
     }
 
     a {
+      cursor: pointer;
       text-decoration: none;
     }
 
@@ -44,11 +41,6 @@
       }
     }
 
-    .wkp-coordinate-toggle {
-      padding: 0;
-      padding-bottom: 3px;
-    }
-
     .wkp-departure-btn,
     .wkp-popup-plans,
     .wkp-coordinate-toggle {
@@ -58,13 +50,14 @@
     }
 
     & > .wkp-bahnhofplan-links {
-      height: 0;
-      transition: height 900ms;
+      max-height: 0;
+      transition: all 0.3s;
       display: none;
       margin-left: 15px;
+      border: none;
 
       &.wkp-visible {
-        height: 100%;
+        max-height: 150px;
         display: block;
       }
 

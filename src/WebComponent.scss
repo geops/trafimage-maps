@@ -1,14 +1,12 @@
 @import 'globals.scss';
 
 // @geops/react-ui
-@import 'node_modules/@geops/react-ui/themes/default/variables.scss';
-@import 'node_modules/@geops/react-ui/themes/default/mixins.scss';
-@import 'node_modules/@geops/react-ui/components/List/List.scss';
-@import 'node_modules/@geops/react-ui/components/SearchInput/SearchInput.scss';
-@import 'node_modules/@geops/react-ui/components/Autocomplete/Autocomplete.scss';
-@import 'node_modules/@geops/react-ui/components/Footer/Footer.scss';
-@import 'node_modules/@geops/react-ui/components/Button/Button.scss';
-@import 'node_modules/@geops/react-ui/components/Header/Header.scss';
+@import './themes/react-ui/variables.scss';
+@import './themes/react-ui/mixins.scss';
+@import './components/List/List.scss';
+@import './components/SearchInput/SearchInput.scss';
+@import './components/Autocomplete/Autocomplete.scss';
+@import './components/Button/Button.scss';
 
 // React-spatial
 @import 'node_modules/react-spatial/themes/default/components.scss';

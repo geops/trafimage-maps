@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
-import Select from '@geops/react-ui/components/Select';
 import LayerService from 'react-spatial/LayerService';
+import { Select, MenuItem } from '@material-ui/core';
 import Collapsible from '../Collapsible';
 import filters from '../../filters';
 import {
@@ -131,9 +131,8 @@ class TopicMenu extends PureComponent {
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
       return !l.get('hideInLegend');
     });
-    const currentBaseLayer = layerService
-      .getBaseLayers()
-      .find((l) => l.visible);
+    const baseLayers = layerService.getBaseLayers();
+    const currentBaseLayer = baseLayers.find((l) => l.visible);
 
     return (
       <div className="wkp-topic-menu">
@@ -179,30 +178,37 @@ class TopicMenu extends PureComponent {
         </div>
         <div className="wkp-topic-content">
           <Collapsible isCollapsed={isCollapsed}>
-            {topic.key === activeTopic.key &&
-              layerService.getBaseLayers() &&
-              layerService.getBaseLayers().length > 1 && (
-                <Select
-                  options={layerService.getBaseLayers().map((l) => {
-                    return {
-                      value: l.name || l.key,
-                      label: t(l.name || l.key),
-                      layer: l,
-                    };
-                  })}
-                  value={
-                    currentBaseLayerKey ||
-                    currentBaseLayer.name ||
-                    currentBaseLayer.key
-                  }
-                  onChange={(evt, option) => {
-                    option.layer.setVisible(true);
-                    this.setState({
-                      currentBaseLayerKey: option.value,
-                    });
-                  }}
-                />
-              )}
+            {topic.key === activeTopic.key && baseLayers.length > 1 && (
+              <Select
+                variant="outlined"
+                className="wkp-base-layers-select"
+                value={
+                  currentBaseLayerKey ||
+                  currentBaseLayer.name ||
+                  currentBaseLayer.key
+                }
+                onChange={(evt) => {
+                  const { value } = evt.target;
+                  const baseLayer = baseLayers.find(({ name, key }) => {
+                    const val = name || key;
+                    return val === value || val === value;
+                  });
+                  baseLayer.setVisible(true);
+                  this.setState({
+                    currentBaseLayerKey: baseLayer.name || baseLayer.key,
+                  });
+                }}
+              >
+                {baseLayers.map(({ name, key }) => {
+                  const value = name || key;
+                  return (
+                    <MenuItem key={value} value={value}>
+                      {t(value)}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            )}
             {layerTree}
             {topic.key === activeTopic.key && TopicMenuBottom ? (
               <TopicMenuBottom topic={topic} />

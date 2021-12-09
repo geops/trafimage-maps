@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import Button from '@geops/react-ui/components/Button';
+import Button from '../Button';
 import menuOpenImg from '../../img/menu.png';
 import menuClosedImg from '../../img/menu_closed.png';
 

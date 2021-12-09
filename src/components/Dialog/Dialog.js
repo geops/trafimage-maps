@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,6 +10,8 @@ import {
   Paper,
   Typography,
   IconButton,
+  useTheme,
+  useMediaQuery,
 } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
 import Draggable from 'react-draggable';
@@ -20,11 +22,22 @@ const useStyles = makeStyles((theme) => ({
     zIndex: (props) => (props.isModal ? 1300 : '0 !important'),
     pointerEvents: (props) => (props.isModal ? 'auto' : 'none'),
   },
+  modalRoot: {
+    zIndex: 1300,
+    pointerEvents: 'auto',
+  },
   paper: {
-    minWidth: (props) => (props.isModal ? 650 : 320),
+    minWidth: 320,
+  },
+  modalPaper: {
+    width: '90%',
+    maxHeight: 'calc(100% - 125px)',
   },
   scrollPaper: {
-    display: (props) => (props.isModal ? 'flex' : 'block'), // Prevent Dialog from growing in all directions
+    display: 'block', // Prevent Dialog from growing in all directions
+  },
+  modalScrollPaper: {
+    display: 'flex', // Prevent Dialog from growing in all directions
   },
   dialogBody: {
     fontFamily: theme.typography.fontFamily,
@@ -38,17 +51,29 @@ const useStyles = makeStyles((theme) => ({
     '&>div:first-child': {
       padding: 20,
     },
-    maxHeight: (props) => (props.isModal ? 620 : 'none'),
     overflowY: 'auto',
+  },
+  dialogBodyDesktop: {
+    maxHeight: (props) => (props.isModal ? 620 : 'none'),
+  },
+  dialogBodyMobile: {
+    maxHeight: (props) => (props.isModal ? 360 : 280),
   },
   closeBtn: {
     position: 'absolute',
     right: 0,
     top: 0,
+    width: 44,
   },
   title: {
-    fontWeight: 'bold',
     cursor: (props) => (props.isModal ? 'auto' : 'move'),
+  },
+  dialogMobile: {
+    position: 'absolute',
+    bottom: 10,
+    left: 10,
+    right: 10,
+    width: 'auto',
   },
 }));
 
@@ -100,26 +125,33 @@ function Dialog(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { body, title, name, isModal, className } = props;
+  const [dialogNode, setDialogNode] = useState(null);
   const classes = useStyles({ isModal });
   const closeDialog = () => dispatch(setDialogVisible());
-
-  const dialogRef = useRef(null);
   const escFunction = (e) => e.which === 27 && dispatch(setDialogVisible());
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const isSmallScreen = !!matches;
 
   useEffect(() => {
     // ComponentDidMount
     document.addEventListener('keydown', escFunction, false);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const { activeElement } = document;
-    // const dialogFocusables = dialogRef?.current?.ref.current
-    //   ? dialogRef.current.ref.current.querySelectorAll('[tabindex="0"]')
-    //   : [];
 
-    // if (dialogFocusables.length) {
-    //   // Focus the first focusable element in the popup.
-    //   dialogFocusables[0].focus();
-    // }
+    if (dialogNode) {
+      const dialogFocusables = dialogNode
+        ? dialogNode.querySelectorAll('[tabindex="0"]')
+        : [];
+
+      if (dialogFocusables.length) {
+        // Transform NodeList to array
+        const visibleElt = [...dialogFocusables].find((elt) => elt.className);
+        // Focus the first focusable element in the popup.
+        visibleElt.focus();
+      }
+    }
     // ComponentWillUnmount
     return () => {
       document.removeEventListener('keydown', escFunction, false);
@@ -127,42 +159,71 @@ function Dialog(props) {
       activeElement.focus();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dialogRef]);
+  }, [dialogNode]);
+
+  // Props for non modal dialog
+  let dialogProps = {
+    hideBackdrop: true,
+    maxWidth: false,
+    PaperComponent: isSmallScreen ? PaperComponent : DraggablePaperComponent,
+    classes: {
+      root: classes.root,
+      scrollPaper: classes.scrollPaper,
+      paper: `${classes.paper} ${className || ''} ${
+        isSmallScreen ? classes.dialogMobile : ''
+      }`,
+    },
+  };
+
+  // Props for modal dialog
+  if (isModal) {
+    dialogProps = {
+      hideBackdrop: false,
+      maxWidth: 'md',
+      PaperComponent,
+      classes: {
+        root: classes.root,
+        scrollPaper: classes.modalScrollPaper,
+        paper: `${classes.modalPaper} ${className || ''}`,
+      },
+    };
+  }
 
   return (
-    <MuiDialog
-      aria-labelledby="draggable-dialog-title"
-      onClose={closeDialog}
-      open
-      PaperComponent={isModal ? PaperComponent : DraggablePaperComponent}
-      hideBackdrop={!isModal}
-      maxWidth={false}
-      classes={{
-        root: classes.root,
-        scrollPaper: classes.scrollPaper,
-        paper: `${classes.paper} ${className}`,
-      }}
-      // {...props}
-      name={name}
-    >
-      <DialogTitle
-        disableTypography
-        id="draggable-dialog-title"
-        className={classes.title}
+    <div>
+      <MuiDialog
+        ref={(elt) => setDialogNode(elt)}
+        onClose={closeDialog}
+        disablePortal
+        open
+        name={name}
+        {...dialogProps}
       >
-        <Typography className={classes.title}>{title}</Typography>
-        <IconButton
-          title={t('Dialog schließen')}
-          onClick={closeDialog}
-          className={classes.closeBtn}
+        <DialogTitle
+          id="draggable-dialog-title"
+          disableTypography
+          className={classes.title}
         >
-          <MdClose />
-        </IconButton>
-      </DialogTitle>
-      <div ref={dialogRef} className={classes.dialogBody}>
-        {body}
-      </div>
-    </MuiDialog>
+          <Typography variant="h4" className={classes.title}>
+            {title}
+          </Typography>
+          <IconButton
+            title={t('Dialog schließen')}
+            onClick={closeDialog}
+            className={classes.closeBtn}
+          >
+            <MdClose />
+          </IconButton>
+        </DialogTitle>
+        <div
+          className={`${classes.dialogBody} ${
+            isSmallScreen ? classes.dialogBodyMobile : ''
+          }`}
+        >
+          {body}
+        </div>
+      </MuiDialog>
+    </div>
   );
 }
 
