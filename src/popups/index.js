@@ -18,6 +18,7 @@ import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
 import NetzentwicklungPopup from './NetzentwicklungPopup';
 import BeleuchtungsPopup from './BeleuchtungsPopup';
+import DirektverbindungPopup from './DirektverbindungPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
 export { default as RegionenkarteIntersectionPopup } from './RegionenkarteIntersectionPopup';
@@ -39,6 +40,7 @@ export { default as TarifverbundkartePopup } from './TarifverbundkartePopup';
 export { default as DrawPopup } from './DrawPopup';
 export { default as NetzentwicklungPopup } from './NetzentwicklungPopup';
 export { default as BeleuchtungsPopup } from './BeleuchtungsPopup';
+export { default as DirektverbindungPopup } from './DirektverbindungPopup';
 
 export default {
   BahnhofplanPopup,
@@ -61,4 +63,5 @@ export default {
   DrawPopup,
   NetzentwicklungPopup,
   BeleuchtungsPopup,
+  DirektverbindungPopup,
 };

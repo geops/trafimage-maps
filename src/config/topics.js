@@ -54,6 +54,7 @@ import defaultBaseLayers, {
   beleuchtungstaerken3Layer,
   beleuchtungstaerken4Layer,
   beleuchtungstaerkenBafuLayers,
+  direktverbindungenLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -88,6 +89,7 @@ export const netzkarte = {
     gemeindegrenzen,
     buslines,
     bahnhofplaene,
+    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
