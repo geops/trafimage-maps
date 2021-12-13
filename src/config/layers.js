@@ -1498,7 +1498,6 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
     layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
     popupComponent: 'DirektverbindungPopup',
     useOverlay: true,
-    color: 'rgba(235, 0, 0, 1)', // Comes from der mapbox style
     priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
@@ -1512,7 +1511,6 @@ export const direktverbindungenNight = new DirektverbindungenLayer({
     layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
     popupComponent: 'DirektverbindungPopup',
     useOverlay: true,
-    color: 'rgba(5, 21, 156, 1)', // Comes from der mapbox style
     priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
