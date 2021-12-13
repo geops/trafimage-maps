@@ -1492,6 +1492,7 @@ const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
 export const direktverbindungenDay = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.day`,
   mapboxLayer: dataLayer,
+  visible: false,
   properties: {
     routeType: 'day',
     hasInfos: true,
@@ -1505,6 +1506,7 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
 export const direktverbindungenNight = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.night`,
   mapboxLayer: dataLayer,
+  visible: false,
   properties: {
     routeType: 'night',
     hasInfos: true,
@@ -1519,6 +1521,7 @@ export const direktverbindungenLayer = new Layer({
   name: DIREKTVERBINDUNGEN_KEY,
   children: [direktverbindungenDay, direktverbindungenNight],
   isQueryable: false,
+  visible: false,
   properties: {
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenLayerInfo',
