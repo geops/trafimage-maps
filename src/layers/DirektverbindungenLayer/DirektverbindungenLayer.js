@@ -49,78 +49,11 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           this.originalColor[layerId] = layer.paint['line-color'];
           this.originalLineWidth[layerId] = layer.paint['line-width'];
 
-          // We retrieve the colro and save it to use it in the popup.
+          // We retrieve the color and save it to use it in the popup.
           this.set('color', this.originalColor[layerId]);
-          // mbMap.setPaintProperty(`${layerId}_oultine_1`, 'line-width', [
-          //   'case',
-          //   ['boolean', ['feature-state', 'hover'], false],
-          //   this.originalLineWidth[layerId] * 2, // (this.get('routeType') === 'day' ? 3 : 4),
-          //   this.originalLineWidth[layerId],
-          // ]);
-          // mbMap.setPaintProperty(`${layerId}_oultine_2`, 'line-width', [
-          //   'case',
-          //   ['boolean', ['feature-state', 'hover'], false],
-          //   this.originalLineWidth[layerId] * 2, // (this.get('routeType') === 'day' ? 3 : 4),
-          //   this.originalLineWidth[layerId],
-          // ]);
-          // mbMap.setPaintProperty(layerId, 'line-width', [
-          //   'case',
-          //   ['boolean', ['feature-state', 'hover'], false],
-          //   this.originalLineWidth[layerId] * (/outline/.test(layerId) ? 3 : 2), // (this.get('routeType') === 'day' ? 3 : 4),
-          //   this.originalLineWidth[layerId],
-          // ]);
-          if (this.get('routeType') === 'day') {
-            // rgba(0, 230, 235, 1
-            // mbMap.setPaintProperty(
-            //   layerId,
-            //   'line-color',
-            //   'rgba(0, 230, 235, 1)',// lightblue
-            // );
-          }
-          if (this.get('routeType') === 'night') {
-            // rgba(0, 230, 235, 1
-            mbMap.setPaintProperty(
-              layerId,
-              'line-color',
-              'rgba(0, 230, 235, 1)', // turkis
-            );
-          }
         }
-        // mbMap.setPaintProperty(layerId, 'line-color', [
-        //   'case',
-        //   ['boolean', ['feature-state', 'hover'], false],
-        //   'red',
-        //   'green',
-        // ]);
-        // this.setHoverState(features, true);
-        // console.log(features[0].get('mapboxFeature'));
       });
-    if (!mbMap.getLayer('dv_lines_outline_highlight')) {
-      mbMap.addLayer(
-        {
-          filter: ['all'],
-          id: 'dv_lines_night_outline_highlight',
-          layout: { visibility: 'visible' },
-          paint: {
-            'line-color': 'rgba(20,58,133,1)', // rgba(195, 239, 239, 1)',
-            'line-width': [
-              'case',
-              ['boolean', ['feature-state', 'hover'], false],
-              14, // (this.get('routeType') === 'day' ? 3 : 4),
-              0,
-            ],
-          },
-          // yellow rgba(252,187,0, 1)
-          source: 'ch.sbb.direktverbindungen',
-          'source-layer': 'ch.sbb.direktverbindungen_lines',
-          type: 'line',
-        },
-        'dv_lines_night_outline_1',
-      );
-    }
-    // this.addSource();
     super.onLoad();
-    // this.updateSource();
   }
 
   setVisible(
