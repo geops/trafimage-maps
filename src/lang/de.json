@@ -1,6 +1,9 @@
 {
   "Abbrechen": "Abbrechen",
   "Abfahrtszeiten": "Abfahrtszeiten",
+  "Abfahrtszeiten aller abfahrtszeiten_gleis": "Abfahrtszeiten aller Gleise",
+  "Abfahrtszeiten aller abfahrtszeiten_kante": "Abfahrtszeiten aller Kanten",
+  "Abfahrtszeiten aller abfahrtszeiten_steg": "Abfahrtszeiten aller Stege",
   "abfahrtszeiten_gleis": "Gleis",
   "abfahrtszeiten_kante": "Kante",
   "abfahrtszeiten_steg": "Steg",

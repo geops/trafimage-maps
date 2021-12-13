@@ -77,9 +77,12 @@ export const setDialogPosition = (data) => ({
   data,
 });
 
-export const setDeparturesFilter = (data) => ({
+export const setDeparturesFilter = (departuresFilter, platformFilter) => ({
   type: SET_DEPARTURES_FILTER,
-  data,
+  data: {
+    departuresFilter,
+    platformFilter,
+  },
 });
 
 export const setScreenWidth = (data) => ({
