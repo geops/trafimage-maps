@@ -43,7 +43,8 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_ch.sbb.netzkarte',
+  // style: 'base_bright_v2_ch.sbb.netzkarte',
+  style: 'review-geops-tgma-de3912.base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
