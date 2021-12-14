@@ -14,7 +14,7 @@ const propTypes = {
 const footer = {
   de: (
     <span>
-      Mehr information unter{' '}
+      Mehr Informationen unter{' '}
       <a
         href="https://map.geo.admin.ch/?topic=bafu&lang=de"
         target="_blank"
