@@ -20,7 +20,7 @@ const footer = {
         target="_blank"
         rel="noreferrer"
       >
-        maps.geo.admin.ch
+        map.geo.admin.ch
       </a>
     </span>
   ),
@@ -32,7 +32,7 @@ const footer = {
         target="_blank"
         rel="noreferrer"
       >
-        maps.geo.admin.ch
+        map.geo.admin.ch
       </a>
     </span>
   ),
@@ -44,7 +44,7 @@ const footer = {
         target="_blank"
         rel="noreferrer"
       >
-        maps.geo.admin.ch
+        map.geo.admin.ch
       </a>
     </span>
   ),
@@ -56,7 +56,7 @@ const footer = {
         target="_blank"
         rel="noreferrer"
       >
-        maps.geo.admin.ch
+        map.geo.admin.ch
       </a>
     </span>
   ),
