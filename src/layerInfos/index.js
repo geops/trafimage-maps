@@ -26,6 +26,7 @@ import BeleuchtungLayerInfo from './BeleuchtungLayerInfo';
 import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
 import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
 import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
+import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -55,6 +56,7 @@ export { default as BeleuchtungLayerInfo } from './BeleuchtungLayerInfo';
 export { default as DirektVerbindungenLayerInfo } from './DirektVerbindungenLayerInfo';
 export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenTagLayerInfo';
 export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
+export { default as MapsGeoAdminLayerInfo } from './MapsGeoAdminLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -85,4 +87,5 @@ export default {
   NetzentwicklungLayerInfo,
   BeleuchtungTopicInfo,
   BeleuchtungLayerInfo,
+  MapsGeoAdminLayerInfo,
 };

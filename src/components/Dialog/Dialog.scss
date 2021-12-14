@@ -45,6 +45,10 @@
     height: auto;
     cursor: initial;
     left: 390px;
+
+    .tm-dialog-body {
+      max-height: 60vh;
+    }
   }
 
   .tm-modal {

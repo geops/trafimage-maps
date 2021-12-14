@@ -22,6 +22,7 @@ import StationsLayer from '../layers/StationsLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
 import TralisLayer from '../layers/TralisLayer';
+import MapsGeoAdminWmtsLayer from '../layers/MapsGeoAdminWmtsLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1565,82 +1566,132 @@ export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
 });
 
 export const blnLandschaftNaturdenkmaelerLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.bln',
-  key: 'ch.sbb.bln',
+  name: 'ch.bafu.bundesinventare-bln',
+  key: 'ch.bafu.bundesinventare-bln',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.bln/.test(id);
+    return /ch.bafu.bundesinventare-bln/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.bundesinventare-bln',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
 export const schweizNationalparkLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.nationalpark',
-  key: 'ch.sbb.nationalpark',
+  name: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
+  key: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.nationalpark/.test(id);
+    return /ch.bafu.schutzgebiete-schweizerischer_nationalpark/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
 export const ramsarLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.ramsar',
-  key: 'ch.sbb.ramsar',
+  name: 'ch.bafu.schutzgebiete-ramsar',
+  key: 'ch.bafu.schutzgebiete-ramsar',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.ramsar/.test(id);
+    return /ch.bafu.schutzgebiete-ramsar/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.schutzgebiete-ramsar',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
 export const schweizPaerkePerimeterLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.paerke.perimeter',
-  key: 'ch.sbb.paerke.perimeter',
+  name: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
+  key: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.paerke.perimeter/.test(id);
+    return /ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter/.test(
+      id,
+    );
+  },
+  properties: {
+    legendKey: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
 export const weidenLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.weiden',
-  key: 'ch.sbb.weiden',
+  name: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
+  key: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.weiden/.test(id);
+    return /ch.bafu.bundesinventare-trockenwiesen_trockenweiden/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
 export const unescoLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.unesco',
-  key: 'ch.sbb.unesco',
+  name: 'ch.bafu.unesco-weltnaturerbe',
+  key: 'ch.bafu.unesco-weltnaturerbe',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.unesco/.test(id);
+    return /ch.bafu.unesco-weltnaturerbe/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.unesco-weltnaturerbe',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
 export const vogelreservateLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.vogelreservate',
-  key: 'ch.sbb.vogelreservate',
+  name: 'ch.bafu.bundesinventare-vogelreservate',
+  key: 'ch.bafu.bundesinventare-vogelreservate',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.vogelreservate/.test(id);
+    return /ch.bafu.bundesinventare-vogelreservate/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.bundesinventare-vogelreservate',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
-export const wildruhezonen = new MapboxStyleLayer({
-  name: 'ch.sbb.wildruhezonen',
-  key: 'ch.sbb.wildruhezonen',
+export const wildruhezonen = new MapsGeoAdminWmtsLayer({
+  name: 'ch.bafu.wrz-wildruhezonen',
+  key: 'ch.bafu.wrz-wildruhezonen',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
-    return /ch.sbb.wildruhezonen/.test(id);
+    return /ch.bafu.wrz-wildruhezonen/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.wrz-wildruhezonen_portal',
+    hasInfos: true,
+    // popupComponent: 'MapsGeoAdminPopup',
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 

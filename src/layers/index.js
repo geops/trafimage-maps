@@ -16,6 +16,7 @@ import ZweitausbildungPoisLayer from './ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesHighlightLayer from './ZweitausbildungRoutesHighlightLayer';
 import ZweitausbildungRoutesLayer from './ZweitausbildungRoutesLayer';
 import BeleuchtungsLayer from './BeleuchtungsLayer/BeleuchtungsLayer';
+import MapsGeoAdminWmtsLayer from './MapsGeoAdminWmtsLayer/MapsGeoAdminWmtsLayer';
 
 export { default as AusbauLayer } from './AusbauLayer';
 export { default as CasaLayer } from './CasaLayer';
@@ -55,4 +56,5 @@ export default {
   ZweitausbildungRoutesHighlightLayer,
   ZweitausbildungRoutesLayer,
   BeleuchtungsLayer,
+  MapsGeoAdminWmtsLayer,
 };
