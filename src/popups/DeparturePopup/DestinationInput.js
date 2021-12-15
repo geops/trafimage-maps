@@ -133,7 +133,7 @@ class DestinationInput extends Component {
       <div className="tm-departure-input">
         <Autocomplete
           button={<SearchIcon />}
-          value={destinationInputValue}
+          value={destinationInputValue || ''}
           items={destinations}
           placeholder={t('Direkt erreichbares Ziel auswählen')}
           renderItem={(item) => item.label}
