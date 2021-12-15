@@ -100,7 +100,8 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             layers[indexByPopup[name]].push(featInfo.layer);
           });
         } else {
-          features.push(...featInfo.features);
+          // At this point features must be displaye din the same popup, that's why we push an array.
+          features.push([...featInfo.features]);
           const arr = [];
           featInfo.features.forEach(() => {
             arr.push(featInfo.layer);
@@ -123,13 +124,16 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
     // When the featureIndex change we addd the red circle.
     const feature = infoIndexed.features[featureIndex];
-    if (
-      feature &&
-      feature.getGeometry() &&
-      feature.getGeometry().getType() === GeometryType.POINT
-    ) {
-      highlightLayer.getSource().addFeature(new Feature(feature.getGeometry()));
-    }
+    // 'feature' can be a feature or an array
+    (Array.isArray(feature) ? feature : [feature]).forEach((feat) => {
+      if (
+        feat &&
+        feat.getGeometry() &&
+        feat.getGeometry().getType() === GeometryType.POINT
+      ) {
+        highlightLayer.getSource().addFeature(new Feature(feat.getGeometry()));
+      }
+    });
   }, [featureIndex, featureInfo, infoIndexed]);
 
   // The current feature(s) to display.
