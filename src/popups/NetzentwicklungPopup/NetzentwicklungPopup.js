@@ -102,7 +102,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
     regionColor = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
   }
   return (
-    <>
+    <div>
       <div className={classes.title}>
         <div
           style={{
@@ -120,7 +120,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
         {rollen.map((rolle) => renderRoleCard(rolle, classes, t))}
         {regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
       </div>
-    </>
+    </div>
   );
 };
 
