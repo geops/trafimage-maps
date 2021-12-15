@@ -45,10 +45,30 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
-    map.addLayer(highlightLayer);
+    // The featureInformation component can be display twice at the same time (in the popup and in the overlay).
+    // So to avoid a js error we have to check if the layer is already on the map or not.
+    if (
+      map &&
+      !map
+        .getLayers()
+        .getArray()
+        .find((layer) => layer === highlightLayer)
+    ) {
+      map.addLayer(highlightLayer);
+    }
+
     return () => {
       highlightLayer.getSource().clear();
-      map.removeLayer(highlightLayer);
+
+      if (
+        map &&
+        map
+          .getLayers()
+          .getArray()
+          .find((layer) => layer === highlightLayer)
+      ) {
+        map.removeLayer(highlightLayer);
+      }
     };
   }, [map]);
 
