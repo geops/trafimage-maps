@@ -20,7 +20,9 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe('wkp-info-bt');
+    expect(wrapper.find('button').prop('className')).toBe(
+      'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
+    );
   });
 
   test('renders selected info button ', () => {
@@ -35,8 +37,8 @@ describe('InfosButton', () => {
       </Provider>,
     );
     wrapper.update();
-    expect(wrapper.find('Button').prop('className')).toBe(
-      'wkp-info-bt wkp-selected',
+    expect(wrapper.find('button').prop('className')).toBe(
+      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
     );
   });
 
@@ -51,8 +53,10 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe('wkp-info-bt');
-    wrapper.find('Button').simulate('click');
+    expect(wrapper.find('button').prop('className')).toBe(
+      'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
+    );
+    wrapper.find('button').simulate('click');
     expect(store.getActions()[0]).toEqual({
       data: { key: 'foo' },
       type: 'SET_SELECTED_FOR_INFOS',
@@ -70,10 +74,11 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe(
-      'wkp-info-bt wkp-selected',
+    // console.log(wrapper.debug());
+    expect(wrapper.find('button').prop('className')).toBe(
+      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
     );
-    wrapper.find('Button').simulate('click');
+    wrapper.find('button').simulate('click');
     expect(store.getActions()[0]).toEqual({
       data: null,
       type: 'SET_SELECTED_FOR_INFOS',

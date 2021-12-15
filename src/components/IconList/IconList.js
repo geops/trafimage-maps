@@ -1,9 +1,9 @@
 import React, { PureComponent, createRef } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import List from '@geops/react-ui/components/List';
-import Button from '@geops/react-ui/components/Button';
 import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
+import Button from '../Button';
+import List from '../List';
 
 import './IconList.scss';
 

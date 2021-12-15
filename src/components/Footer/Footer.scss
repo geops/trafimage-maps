@@ -28,6 +28,10 @@
   }
 
   .wkp-footer-right {
+    a {
+      cursor: pointer;
+    }
+
     a:not(.MuiIconButton-root) {
       margin: 0 10px;
     }

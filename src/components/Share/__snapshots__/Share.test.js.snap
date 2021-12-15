@@ -80,8 +80,10 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-mail-icon"
   >
     <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       href="mailto:?body=http%3A%2F%2Flocalhost%2F"
-      rel="noopener noreferrer"
+      onBlur={[Function]}
+      onFocus={[Function]}
       tabIndex="0"
       target="_blank"
       title="Per Email versenden"
@@ -149,8 +151,10 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-facebook-icon"
   >
     <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       href="//www.facebook.com/sharer.php?u=http%3A%2F%2Flocalhost%2F"
-      rel="noopener noreferrer"
+      onBlur={[Function]}
+      onFocus={[Function]}
       tabIndex="0"
       target="_blank"
       title="Auf Facebook teilen"
@@ -182,8 +186,10 @@ exports[`Share should match snapshot. 1`] = `
     className="ta-twitter-icon"
   >
     <a
+      className="MuiTypography-root MuiLink-root MuiLink-underlineHover MuiTypography-colorPrimary"
       href="//twitter.com/intent/tweet?url=http%3A%2F%2Flocalhost%2F"
-      rel="noopener noreferrer"
+      onBlur={[Function]}
+      onFocus={[Function]}
       tabIndex="0"
       target="_blank"
       title="Auf Twitter teilen"

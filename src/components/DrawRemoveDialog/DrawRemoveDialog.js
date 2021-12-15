@@ -10,7 +10,7 @@ export const NAME = 'drawRemoveDialog';
 
 const useStyles = makeStyles((theme) => ({
   dialogContainer: {
-    width: '400px !important',
+    minWidth: '400px !important',
   },
   link: {
     marginTop: theme.spacing(2),
