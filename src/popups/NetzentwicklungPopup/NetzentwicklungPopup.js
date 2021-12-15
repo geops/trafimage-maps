@@ -93,7 +93,12 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
   const mbFeature = feature.get('mapboxFeature');
   let regionColor = 'transparent';
   if (mbFeature) {
-    const { r, g, b, a } = mbFeature.layer.paint['line-color'] || {};
+    const { r, g, b, a } = mbFeature.layer.paint['line-color'] || {
+      r: 1,
+      g: 1,
+      b: 1,
+      a: 1,
+    };
     regionColor = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
   }
   return (
