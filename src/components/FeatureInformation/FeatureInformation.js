@@ -102,13 +102,16 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     highlightLayer.getSource().clear();
     // When the featureIndex change we addd the red circle.
     const feature = features[featureIndex];
-    if (
-      feature &&
-      feature.getGeometry() &&
-      feature.getGeometry().getType() === GeometryType.POINT
-    ) {
-      highlightLayer.getSource().addFeature(new Feature(feature.getGeometry()));
-    }
+    // 'feature' can be a feature or an array
+    (Array.isArray(feature) ? feature : [feature]).forEach((feat) => {
+      if (
+        feat &&
+        feat.getGeometry() &&
+        feat.getGeometry().getType() === GeometryType.POINT
+      ) {
+        highlightLayer.getSource().addFeature(new Feature(feat.getGeometry()));
+      }
+    });
   }, [featureIndex, featureInfo, features]);
 
   // The current feature(s) to display.
