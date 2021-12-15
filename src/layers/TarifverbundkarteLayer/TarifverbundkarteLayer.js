@@ -97,45 +97,55 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
        * Then they are intersected with the municipality feature separately for readability
        * @ignore
        */
-      const zoneFeatureArray = zones.map((zone) => {
-        return new Feature(zone.geometry);
-      });
-      let intersectedZones = format.writeFeatureObject(zoneFeatureArray[0]);
-      if (zoneFeatureArray.length > 1) {
-        // When there are multiple zones intersect them
-        zoneFeatureArray.forEach((feat) => {
+      let intersectedZones = null;
+      zones.forEach((zone, index) => {
+        const olFeature = new Feature(zone.geometry);
+        if (index === 0) {
+          intersectedZones = format.writeFeatureObject(olFeature);
+        } else if (intersectedZones) {
           intersectedZones = intersect(
             intersectedZones,
-            format.writeFeatureObject(feat),
+            format.writeFeatureObject(olFeature),
           );
-        });
+        }
+      });
+
+      let finalIntersection = null;
+      if (intersectedZones) {
+        // Intersect zones with municipality feature
+        finalIntersection = intersect(
+          intersectedZones,
+          format.writeFeatureObject(feature),
+        );
       }
 
-      // Intersect zones with municipality feature
-      const finalIntersection = intersect(
-        intersectedZones,
-        format.writeFeatureObject(feature),
-      );
-
-      // Create and highlight ol feature, add properties for use in popup
-      const highlightedFeature = format.readFeature(finalIntersection);
-      highlightedFeature.setStyle(
-        new Style({
-          fill: new Fill({
-            color: [192, 57, 43, 0.5],
+      if (finalIntersection) {
+        // Create and highlight ol feature, add properties for use in popup
+        const highlightedFeature = format.readFeature(finalIntersection);
+        highlightedFeature.setStyle(
+          new Style({
+            fill: new Fill({
+              color: [192, 57, 43, 0.5],
+            }),
+            stroke: new Stroke({
+              color: [207, 0, 15, 1],
+              lineDash: [10, 10],
+              width: 4,
+            }),
+            zIndex: 999,
           }),
-          stroke: new Stroke({
-            color: [207, 0, 15, 1],
-            lineDash: [10, 10],
-            width: 4,
-          }),
-          zIndex: 999,
-        }),
-      );
+        );
 
-      // Add feature to map and store it for reference
-      this.highlightSource.addFeature(highlightedFeature);
-      this.selectedZone = highlightedFeature;
+        // Add feature to map and store it for reference
+        this.highlightSource.addFeature(highlightedFeature);
+        this.selectedZone = highlightedFeature;
+      } else {
+        // If we click in the middle of 3 zones, intersectedZones or finalIntersection could be null then the app crashed.
+        // ex click at the intersection of  Vitnau, Gersau and Rigi scheidegg zones.
+        // --> ?lang=de&layers=&x=926439.62&y=5959367.46&z=10.46
+        this.selectedZone = null;
+        this.highlightSource.clear();
+      }
 
       /**
        * Signals to the popup (if there is one open) that a feature was clicked.

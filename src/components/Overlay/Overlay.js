@@ -16,7 +16,7 @@ const useStyles = makeStyles({
       overflow: 'hidden',
     },
     '& .wkp-feature-information-body': {
-      height: 'calc(100% - 52px)',
+      height: 'calc(100% - 38px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -26,10 +26,6 @@ const useStyles = makeStyles({
         overflow: 'auto',
         display: 'flex',
         flexDirection: 'column',
-      },
-      '& > div': {
-        maxHeight: '100%',
-        overflow: 'auto',
       },
     },
   },
@@ -45,6 +41,7 @@ const useStyles = makeStyles({
     borderColor: '#cdcdcd',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px 0',
+    overflow: 'hidden',
   },
   headerActive: {
     top: 100,
