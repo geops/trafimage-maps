@@ -80,7 +80,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             layers[indexByPopup[name]].push(featInfo.layer);
           });
         } else {
-          features.push([...featInfo.features]);
+          features.push(...featInfo.features);
           const arr = [];
           featInfo.features.forEach(() => {
             arr.push(featInfo.layer);
