@@ -18,6 +18,7 @@ const useStyles = makeStyles({
       height: 'calc(100% - 36px)',
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'space-between',
       '& > div': {
         maxHeight: '100%',
       },
