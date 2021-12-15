@@ -134,6 +134,14 @@
       .rs-popup-body {
         padding: 0;
       }
+
+      &::after {
+        margin-left: -8px;
+      }
+
+      &::before {
+        margin-left: -9px;
+      }
     }
   }
 

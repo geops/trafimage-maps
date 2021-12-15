@@ -21,7 +21,7 @@ const style = new Style({
       outerRadius,
     );
     gradient.addColorStop(0, 'rgba(235,0,0,0)');
-    gradient.addColorStop(0.5, 'rgba(235,0,0,0)');
+    gradient.addColorStop(0.2, 'rgba(235,0,0,0)');
     gradient.addColorStop(0.6, 'rgba(235,0,0,0.4)');
     gradient.addColorStop(0.8, 'rgba(235,0,0,0.8)');
     gradient.addColorStop(1, 'rgba(235,0,0,1)');
@@ -32,6 +32,7 @@ const style = new Style({
 
     ctx.arc(x, y, radius, 0, 2 * Math.PI, true);
     ctx.strokeStyle = 'rgba(235,0,0,1)';
+    ctx.lineWidth = 4;
     ctx.stroke();
   },
 });
