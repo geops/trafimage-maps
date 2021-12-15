@@ -28,7 +28,7 @@
   text-decoration: none;
 }
 
-.rsg--preview-44 {
+div[class*="rsg--preview"] {
   padding: 0 !important;
 }
 

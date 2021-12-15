@@ -200,6 +200,12 @@ function NetzkartePopup({ feature }) {
 NetzkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(NetzkartePopup);
-memoized.renderTitle = (feat) => feat.get('name');
+memoized.renderTitle = (feat, t) => {
+  const platform = feat.get('platform');
+  if (platform) {
+    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+  }
+  return feat.get('name');
+};
 
 export default memoized;

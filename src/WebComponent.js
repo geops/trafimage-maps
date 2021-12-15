@@ -103,6 +103,17 @@ const propTypes = {
   vectorTilesUrl: PropTypes.string,
 
   /**
+   * API key for accessing tracker data.
+   * Details at 'https://developer.geops.io'.
+   */
+  realtimeKey: PropTypes.string,
+
+  /**
+   * URL of the websocket realtime server. Default is 'https://maps.geops.io'.
+   */
+  realtimeUrl: PropTypes.string,
+
+  /**
    * URL of the static files. Default is 'https://maps2.trafimage.ch'.
    */
   staticFilesUrl: PropTypes.string,
@@ -129,6 +140,8 @@ const attributes = {
   appBaseUrl: process.env.REACT_APP_BASE_URL,
   vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  vectorRealtimeKey: process.env.REACT_APP_REALTIME_KEY,
+  vectorRealtimeUrl: process.env.REACT_APP_REALTIME_URL,
   staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,

@@ -98,6 +98,15 @@ class StationsLayer extends MapboxStyleLayer {
    */
   onIdle() {
     this.updateSource();
+
+    // We warn the permalink that new data have been rendered.
+    this.mapboxLayer.mbMap?.once('idle', () => {
+      // New data are rendered
+      this.dispatchEvent({
+        type: 'datarendered',
+        target: this,
+      });
+    });
   }
 
   // Query the rendered stations then add them to the source.
