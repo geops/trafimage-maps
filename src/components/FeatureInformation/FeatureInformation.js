@@ -103,7 +103,11 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
     // When the featureIndex change we addd the red circle.
     const feature = infoIndexed.features[featureIndex];
-    if (feature && feature.getGeometry().getType() === GeometryType.POINT) {
+    if (
+      feature &&
+      feature.getGeometry() &&
+      feature.getGeometry().getType() === GeometryType.POINT
+    ) {
       highlightLayer.getSource().addFeature(new Feature(feature.getGeometry()));
     }
   }, [featureIndex, featureInfo, infoIndexed]);
