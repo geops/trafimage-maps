@@ -90,12 +90,23 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
   const regionRollen = JSON.parse(feature.get('region_rollen') || '[]').filter(
     (r) => ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
+  const mbFeature = feature.get('mapboxFeature');
+  let regionColor = 'transparent';
+  if (mbFeature) {
+    const { r, g, b, a } = mbFeature.layer.paint['line-color'] || {
+      r: 1,
+      g: 1,
+      b: 1,
+      a: 1,
+    };
+    regionColor = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
+  }
   return (
     <>
       <div className={classes.title}>
         <div
           style={{
-            backgroundColor: feature.get('region_color'),
+            backgroundColor: regionColor,
             width: 19,
             height: 19,
             borderRadius: '50%',

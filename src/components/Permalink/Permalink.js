@@ -11,6 +11,7 @@ import LayerService from 'react-spatial/LayerService';
 import KML from 'react-spatial/utils/KML';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { setCenter, setZoom } from '../../model/map/actions';
+import { netzkartePointLayer, platformsLayer } from '../../config/layers';
 import {
   setDeparturesFilter,
   setFeatureInfo,
@@ -41,6 +42,7 @@ const propTypes = {
   map: PropTypes.instanceOf(OLMap).isRequired,
   layerService: PropTypes.instanceOf(LayerService).isRequired,
   departuresFilter: PropTypes.string,
+  platformFilter: PropTypes.string,
   drawUrl: PropTypes.string,
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   drawIds: PropTypes.object,
@@ -61,6 +63,7 @@ const defaultProps = {
   history: undefined,
   initialState: {},
   departuresFilter: undefined,
+  platformFilter: undefined,
   drawUrl: undefined,
   drawIds: undefined,
   mapsetUrl: undefined,
@@ -198,6 +201,7 @@ class Permalink extends PureComponent {
     const routeFilterKey = getUrlParamKey(parameters, /tripnumber/i);
     const operatorFilterKey = getUrlParamKey(parameters, /operator/i);
     const departuresFilterKey = getUrlParamKey(parameters, /departures/i);
+    const platformFilterKey = getUrlParamKey(parameters, /platform/i);
 
     const lineFilter =
       lineFilterKey && getUrlParamVal(parameters[lineFilterKey]);
@@ -208,20 +212,24 @@ class Permalink extends PureComponent {
     this.loadDepartureOnce = true;
     this.departures =
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
+    this.platform =
+      platformFilterKey && getUrlParamVal(parameters[platformFilterKey]);
 
-    dispatchSetDeparturesFilter(this.departures);
+    dispatchSetDeparturesFilter(this.departures, this.platform);
 
-    this.setState({
+    const state = {
       lang: lang || language, // take from permalink, else from redux.
       [lineFilterKey]: lineFilter,
       [routeFilterKey]: routeFilter,
       [operatorFilterKey]: operatorFilter,
       [departuresFilterKey]: this.departures,
+      [platformFilterKey]: this.platform,
       [DRAW_OLD_PARAM]: undefined,
       [DRAW_PARAM]: drawId,
       lon: undefined,
       lat: undefined,
-    });
+    };
+    this.setState(state);
   }
 
   componentDidUpdate(prevProps) {
@@ -229,9 +237,9 @@ class Permalink extends PureComponent {
       activeTopic,
       history,
       departuresFilter,
-      layerService,
       language,
       drawIds,
+      platformFilter,
       dispatchUpdateDrawEditLink,
     } = this.props;
 
@@ -239,7 +247,10 @@ class Permalink extends PureComponent {
       history.replace(`/${activeTopic.key}${window.location.search}`);
     }
 
-    if (departuresFilter !== prevProps.departuresFilter) {
+    if (
+      departuresFilter !== prevProps.departuresFilter ||
+      platformFilter !== prevProps.platformFilter
+    ) {
       this.updateDepartures();
     }
 
@@ -248,17 +259,12 @@ class Permalink extends PureComponent {
     }
 
     if (this.loadDepartureOnce && this.departures) {
-      const dataLayer = layerService.getLayer('ch.sbb.netzkarte.data');
       this.loadDepartureOnce = false;
-      if (dataLayer && dataLayer.mbMap) {
-        const { mbMap } = dataLayer;
 
-        // We need to wait until mapbox layer is loaded.
-        dataLayer.on('load', () => {
-          // then we wait the stations source has been updated.
-          mbMap.once('idle', this.openDepartureOnLoad.bind(this));
-        });
-      }
+      // We need to wait until stations layer has been updated and rendered.
+      netzkartePointLayer.once('datarendered', () => {
+        this.openDepartureOnLoad();
+      });
     }
 
     if (drawIds !== prevProps.drawIds) {
@@ -269,12 +275,25 @@ class Permalink extends PureComponent {
   }
 
   async openDepartureOnLoad() {
-    const { layerService, dispatchSetFeatureInfo } = this.props;
-    const dataLayer = layerService.getLayer('ch.sbb.netzkarte.data');
-    const departures = dataLayer.getFeatures({
-      source: 'base',
-      sourceLayer: 'osm_points',
-      filter: ['==', ['get', 'sbb_id'], this.departures],
+    const { dispatchSetFeatureInfo } = this.props;
+    const { mbMap } = netzkartePointLayer.mapboxLayer;
+
+    const filter = ['all', ['==', ['get', 'sbb_id'], this.departures]];
+
+    if (this.platform) {
+      filter.push(['==', ['get', 'platform'], this.platform]);
+    }
+
+    const layers = [
+      ...netzkartePointLayer.styleLayers.map((style) => style.id),
+      ...(this.platform
+        ? platformsLayer.styleLayers.map((style) => style.id)
+        : []),
+    ];
+    // We display the departures popup only on features of the station layer (not on platform).
+    const departures = mbMap.queryRenderedFeatures({
+      layers,
+      filter,
     });
 
     const [departure] = departures;
@@ -321,10 +340,13 @@ class Permalink extends PureComponent {
   }
 
   updateDepartures() {
-    const { departuresFilter } = this.props;
-    this.setState({
+    const { departuresFilter, platformFilter } = this.props;
+
+    const state = {
       departures: departuresFilter,
-    });
+      platform: platformFilter,
+    };
+    this.setState(state);
   }
 
   updateLanguage() {
@@ -364,6 +386,7 @@ const mapStateToProps = (state) => ({
   language: state.app.language,
   layerService: state.app.layerService,
   departuresFilter: state.app.departuresFilter,
+  platformFilter: state.app.platformFilter,
   drawUrl: state.app.drawUrl,
   drawLayer: state.map.drawLayer,
   drawIds: state.app.drawIds,
