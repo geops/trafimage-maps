@@ -41,6 +41,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
   const language = useSelector((state) => state.app.language);
+  const searchService = useSelector((state) => state.app.searchService);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   useEffect(() => {
@@ -54,6 +55,10 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         .find((layer) => layer === highlightLayer)
     ) {
       map.addLayer(highlightLayer);
+      // Clear the highlight for search
+      if (searchService) {
+        searchService.clearHighlight();
+      }
     }
 
     return () => {
@@ -69,7 +74,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         map.removeLayer(highlightLayer);
       }
     };
-  }, [map]);
+  }, [map, searchService]);
 
   useEffect(() => {
     setFeatureIndex(0);
