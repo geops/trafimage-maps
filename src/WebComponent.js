@@ -168,6 +168,10 @@ const defaultProps = {
   history: undefined,
 };
 
+// Since we won't clone all layers, we store here the initial visibility of
+// layers to be able to set it back if the layersVisibility parameter change.
+const initialLayersVisibility = {};
+
 const WebComponent = (props) => {
   const {
     activeTopicKey,
@@ -257,7 +261,19 @@ const WebComponent = (props) => {
         const layers = layerService.getLayersAsFlatArray();
         Object.entries(obj).forEach(([key, value]) => {
           layers.forEach((layer) => {
+            const initalVisibility = initialLayersVisibility[layer.key];
+            if (
+              (initalVisibility === true || initalVisibility === false) &&
+              obj[layer.key] === undefined
+            ) {
+              layer.setVisible(initialLayersVisibility[layer.key]);
+              delete initialLayersVisibility[layer.key];
+            }
+
             if (layer.key === key) {
+              if (!initialLayersVisibility[key]) {
+                initialLayersVisibility[key] = layer.visible;
+              }
               // eslint-disable-next-line no-param-reassign
               layer.setVisible(value);
             }
