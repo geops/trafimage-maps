@@ -5,28 +5,12 @@ This section shows you how to configure your own map for integrating it in your 
 
 ```jsx
 import 'trafimage-maps';
-import React, { useRef, useEffect } from 'react';
-import topic from 'trafimage-maps/examples/WebComponent/topic';
-
-// The `apiKey` used here is for demonstration purposes only.
-// Please get your own api key at https://developer.geops.io/.
-const apiKey = window.apiKey;
+import React from 'react';
 
 const App = () => {
-  const ref = useRef();
-
-  useEffect(() => {
-    const map = ref.current;
-    map.topics =  [topic];
-
-    return () => {
-      map.topics = null;
-    };
-  }, []);
-
   return (
     <div className="container">
-      <trafimage-maps ref={ref} zoom="7" apiKey={apiKey} />
+      <trafimage-maps zoom="7" apiKey={apiKey} />
     </div>
   );
 }

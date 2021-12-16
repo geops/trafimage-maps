@@ -3,6 +3,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
+import LayerService from 'react-spatial/LayerService';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
 import { getTopicConfig } from './config/topics';
@@ -14,6 +15,17 @@ const propTypes = {
    * topic configuration (ask us for help).
    */
   topics: PropTypes.array,
+
+  /**
+   * Set the default visiblity of HTML elements. It will override all the topics configuration.
+   */
+  elements: PropTypes.string,
+
+  /**
+   * Set the default visiblity of the layers in the topic. It will override all the topics configuration.
+   * Warning: Used with caution if you also use Permalink functionnality.
+   */
+  layersVisibility: PropTypes.string,
 
   /**
    * @ignore
@@ -165,6 +177,8 @@ const attributes = {
   disableCookies: false,
   requireConsent: false,
   consentGiven: false,
+  elements: undefined,
+  layersVisibility: undefined,
 };
 
 const defaultProps = {
@@ -189,6 +203,8 @@ const WebComponent = (props) => {
     disableCookies,
     requireConsent,
     consentGiven,
+    elements,
+    layersVisibility,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -237,8 +253,42 @@ const WebComponent = (props) => {
     } else {
       tps[0].active = true;
     }
+
+    // Override topic config with web componenet parameters.
+    // TODO improve the code, particularly the transformation string to object.
+    tps.forEach((topic) => {
+      // Override elements.
+      if (elements) {
+        const obj = {};
+        elements.split(',').forEach((elt) => {
+          const [key, value] = elt.split('=');
+          obj[key] = value === 'true';
+        });
+        // eslint-disable-next-line no-param-reassign
+        topic.elements = { ...topic.elements, ...obj };
+      }
+      // Override layers visiblity.
+      if (layersVisibility && topic.layers.length) {
+        const obj = {};
+        layersVisibility.split(',').forEach((elt) => {
+          const [key, value] = elt.split('=');
+          obj[key] = value === 'true';
+        });
+        const layerService = new LayerService(topic.layers);
+        const layers = layerService.getLayersAsFlatArray();
+        Object.entries(obj).forEach(([key, value]) => {
+          layers.forEach((layer) => {
+            if (layer.key === key) {
+              // eslint-disable-next-line no-param-reassign
+              layer.setVisible(value);
+            }
+          });
+        });
+      }
+    });
+
     return [...tps];
-  }, [activeTopicKey, appName, topics]);
+  }, [topics, appName, activeTopicKey, elements, layersVisibility]);
 
   if (!appTopics) {
     return null;
