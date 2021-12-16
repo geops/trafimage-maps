@@ -5,13 +5,12 @@ const style = new Style({
     if (coordinates.length !== 2 || Array.isArray(coordinates[0])) {
       return;
     }
+    const pixelRatio = state.pixelRatio || 1;
     const [x, y] = coordinates;
     const ctx = state.context;
-    const radius = 20;
-
+    const radius = 20 * pixelRatio;
     const innerRadius = 0;
     const outerRadius = radius * 1.4;
-
     const gradient = ctx.createRadialGradient(
       x,
       y,
@@ -32,7 +31,7 @@ const style = new Style({
 
     ctx.arc(x, y, radius, 0, 2 * Math.PI, true);
     ctx.strokeStyle = 'rgba(235,0,0,1)';
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 4 * pixelRatio;
     ctx.stroke();
   },
 });
