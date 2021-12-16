@@ -255,13 +255,11 @@ const WebComponent = (props) => {
         });
         const layerService = new LayerService(topic.layers);
         const layers = layerService.getLayersAsFlatArray();
-        console.log('TOPIC', topic.key, topic, layers);
         Object.entries(obj).forEach(([key, value]) => {
           layers.forEach((layer) => {
             if (layer.key === key) {
               // eslint-disable-next-line no-param-reassign
               layer.setVisible(value);
-              console.log(layer.key, layer.visible);
             }
           });
         });
