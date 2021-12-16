@@ -71,6 +71,11 @@ module.exports = {
           exampleMode: 'expand',
         },
         {
+          name: 'Nacht Verbindungen',
+          content: 'src/examples/DirektVerbindung/README.md',
+          exampleMode: 'expand',
+        },
+        {
           name: 'Infrastruktur Betriebsregionen',
           content: 'src/examples/Betriebsregionen/README.md',
           exampleMode: 'expand',
