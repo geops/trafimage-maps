@@ -16,7 +16,7 @@ const apiKey = window.apiKey;
   activeTopicKey="ch.sbb.netzkarte"
   apiKey={apiKey}
   height="500px"
-  zoom="8"
+  zoom="6"
   language="en"
   elements="menu=false,header=false,permalink=false,search=false"
   
