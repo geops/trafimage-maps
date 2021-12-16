@@ -24,26 +24,37 @@ module.exports = {
     text: 'Fork me on GitHub',
   },
   moduleAliases: {
+    'trafimage-maps/es': path.resolve(__dirname, 'src'),
     'trafimage-maps': path.resolve(__dirname, 'src'),
   },
   pagePerSection: true,
   sections: [
     {
-      name: 'Trafimage Maps',
-      content: 'src/examples/README.md',
-      exampleMode: 'expand',
+      name: 'trafimage-maps',
       sections: [
         {
+          content: 'src/examples/README.md',
           components: 'src/WebComponent.js',
+          exampleMode: 'expand',
         },
       ],
     },
     {
       name: 'Examples',
-      href: '/#/Examples/Punctuality%20Map',
+      href: '/#/Examples/Custom%20Topic',
       external: true,
       sectionDepth: 2,
       sections: [
+        {
+          name: 'Custom Topic',
+          content: 'src/examples/CustomTopic/README.md',
+          exampleMode: 'expand',
+        },
+        {
+          name: 'Override Topic',
+          content: 'src/examples/OverrideTopic/README.md',
+          exampleMode: 'expand',
+        },
         {
           name: 'Punctuality Map',
           content: 'src/examples/Punctuality/README.md',
