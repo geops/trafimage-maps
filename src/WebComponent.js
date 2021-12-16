@@ -19,13 +19,13 @@ const propTypes = {
   /**
    * Set the default visiblity of HTML elements. It will override all the topics configuration.
    */
-  elements: PropTypes.object,
+  elements: PropTypes.string,
 
   /**
    * Set the default visiblity of the layers in the topic. It will override all the topics configuration.
    * Warning: Used with caution if you also use Permalink functionnality.
    */
-  layersVisibility: PropTypes.object,
+  layersVisibility: PropTypes.string,
 
   /**
    * @ignore
