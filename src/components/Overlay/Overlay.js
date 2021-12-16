@@ -20,7 +20,6 @@ const useStyles = makeStyles({
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-
       '& > div:first-child': {
         maxHeight: '100%',
         overflow: 'auto',
