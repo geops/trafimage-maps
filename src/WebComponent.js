@@ -247,7 +247,7 @@ const WebComponent = (props) => {
         topic.elements = { ...topic.elements, ...obj };
       }
       // Override layers visiblity.
-      if (layersVisibility) {
+      if (layersVisibility && topic.layers.length) {
         const obj = {};
         layersVisibility.split(',').forEach((elt) => {
           const [key, value] = elt.split('=');
@@ -255,11 +255,15 @@ const WebComponent = (props) => {
         });
         const layerService = new LayerService(topic.layers);
         const layers = layerService.getLayersAsFlatArray();
-        layers.forEach((layer) => {
-          if (obj[layer.key]) {
-            // eslint-disable-next-line no-param-reassign
-            layer.setVisible(obj[layer.key]);
-          }
+        console.log('TOPIC', topic.key, topic, layers);
+        Object.entries(obj).forEach(([key, value]) => {
+          layers.forEach((layer) => {
+            if (layer.key === key) {
+              // eslint-disable-next-line no-param-reassign
+              layer.setVisible(value);
+              console.log(layer.key, layer.visible);
+            }
+          });
         });
       }
     });
