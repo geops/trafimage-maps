@@ -180,7 +180,7 @@ class DeparturePopupContent extends Component {
 
     const urlParams = {
       key: apiKey,
-      limit: '10',
+      limit: '60',
     };
     if (uic) {
       urlParams.uic = uic;
