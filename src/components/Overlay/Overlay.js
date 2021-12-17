@@ -16,7 +16,7 @@ const useStyles = makeStyles({
       overflow: 'hidden',
     },
     '& .wkp-feature-information-body': {
-      height: 'calc(100% - 52px)',
+      height: 'calc(100% - 38px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
