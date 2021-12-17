@@ -80,6 +80,11 @@ module.exports = {
           content: 'src/examples/Betriebsregionen/README.md',
           exampleMode: 'expand',
         },
+        {
+          name: 'Schulzug',
+          content: 'src/examples/Schulzug/README.md',
+          exampleMode: 'expand',
+        },
       ],
     },
   ],
