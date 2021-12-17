@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import UIHeader from '@geops/react-ui/components/Header';
 import Login from '../Login';
 import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
 import LanguageSelect from '../LanguageSelect';
@@ -18,7 +17,7 @@ const defaultProps = {
 
 const Header = ({ appBaseUrl, loginUrl }) => {
   return (
-    <UIHeader className="wkp-header">
+    <div className="wkp-header">
       <div className="wkp-header-right">
         <Login appBaseUrl={appBaseUrl} loginUrl={loginUrl} />
         <LanguageSelect />
@@ -26,7 +25,7 @@ const Header = ({ appBaseUrl, loginUrl }) => {
           <SBBLogo focusable={false} className="wkp-header-sbb-logo" />
         </div>
       </div>
-    </UIHeader>
+    </div>
   );
 };
 

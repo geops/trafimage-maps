@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import UIPermalinkInput from '@geops/react-ui/components/PermalinkInput';
+import UIPermalinkInput from '../PermalinkInputCore';
 
 const useStyles = makeStyles(() => ({
   input: {
