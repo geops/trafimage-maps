@@ -17,6 +17,7 @@ import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
+import DirektverbindungenLayer from '../layers/DirektverbindungenLayer';
 import StationsLayer from '../layers/StationsLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import TralisLayer from '../layers/TralisLayer';
@@ -43,7 +44,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
@@ -150,7 +151,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
@@ -1490,6 +1491,47 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
+});
+
+const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
+
+export const direktverbindungenDay = new DirektverbindungenLayer({
+  name: `${DIREKTVERBINDUNGEN_KEY}.day`,
+  mapboxLayer: dataLayer,
+  visible: false,
+  properties: {
+    routeType: 'day',
+    hasInfos: true,
+    layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
+    popupComponent: 'DirektverbindungPopup',
+    useOverlay: true,
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
+  },
+});
+
+export const direktverbindungenNight = new DirektverbindungenLayer({
+  name: `${DIREKTVERBINDUNGEN_KEY}.night`,
+  mapboxLayer: dataLayer,
+  visible: false,
+  properties: {
+    routeType: 'night',
+    hasInfos: true,
+    layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
+    popupComponent: 'DirektverbindungPopup',
+    useOverlay: true,
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
+  },
+});
+
+export const direktverbindungenLayer = new Layer({
+  name: DIREKTVERBINDUNGEN_KEY,
+  children: [direktverbindungenDay, direktverbindungenNight],
+  isQueryable: false,
+  visible: false,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'DirektVerbindungenLayerInfo',
   },
 });
 

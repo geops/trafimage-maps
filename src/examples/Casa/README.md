@@ -3,10 +3,10 @@ The Casa module is a sub module of trafimage-maps which is integrated in the SBB
 ```jsx
 import 'trafimage-maps';
 import React, { useEffect, useRef } from 'react';
-import RouteLayer from 'trafimage-maps/layers/RouteLayer';
-import ZoneLayer from 'trafimage-maps/layers/ZoneLayer';
-import { casa } from 'trafimage-maps/config/topics';
-import 'trafimage-maps/examples/Casa/casa.css'
+import RouteLayer from 'trafimage-maps/es/layers/RouteLayer';
+import ZoneLayer from 'trafimage-maps/es/layers/ZoneLayer';
+import { casa } from 'trafimage-maps/es/config/topics';
+import 'trafimage-maps/es/examples/Casa/casa.css'
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.

@@ -17,6 +17,7 @@ import ZweitausbildungRoutesPopup from './ZweitausbildungRoutesPopup';
 import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
 import NetzentwicklungPopup from './NetzentwicklungPopup';
+import DirektverbindungPopup from './DirektverbindungPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
 export { default as RegionenkarteIntersectionPopup } from './RegionenkarteIntersectionPopup';
@@ -58,4 +59,5 @@ export default {
   RegionenkarteIntersectionPopup,
   DrawPopup,
   NetzentwicklungPopup,
+  DirektverbindungPopup,
 };

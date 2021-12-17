@@ -47,6 +47,7 @@ import defaultBaseLayers, {
   netzentwicklungStrategischLayer,
   netzentwicklungProgrammManagerLayer,
   netzentwicklungSkPlanerLayer,
+  direktverbindungenLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -81,6 +82,7 @@ export const netzkarte = {
     gemeindegrenzen,
     buslines,
     bahnhofplaene,
+    direktverbindungenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
@@ -272,10 +274,10 @@ export const tarifverbundkarte = {
   maxZoom: 12,
   exportConfig: {
     publisher: 'tobias.hauser@sbb.ch',
-    publishedAt: '12/2020',
-    dateDe: '13.12.2020',
-    dateFr: '13.12.2020',
-    year: '2020',
+    publishedAt: '12/2021',
+    dateDe: '12.12.2021',
+    dateFr: '12.12.2021',
+    year: '2021',
     overlayImageUrl: tarifverbundkarteLegend,
   },
   elements: {

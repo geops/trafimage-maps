@@ -13,9 +13,10 @@ const useStyles = makeStyles({
   drawer: {
     '& .wkp-feature-information': {
       height: '100%',
+      overflow: 'hidden',
     },
     '& .wkp-feature-information-body': {
-      height: 'calc(100% - 36px)',
+      height: 'calc(100% - 52px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -74,7 +75,9 @@ const propTypes = {
 const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'));
-  const isSmallerThanS = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const isSmallerThanMd = useMediaQuery((theme) =>
+    theme.breakpoints.down('md'),
+  );
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
@@ -120,8 +123,8 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
             ? ''
             : `${[
                 classes.drawerDesktopPaper,
-                elements.header && !isSmallerThanS ? classes.headerActive : '',
-                elements.header && isSmallerThanS ? classes.mobileHeader : '',
+                elements.header && !isSmallerThanMd ? classes.headerActive : '',
+                elements.header && isSmallerThanMd ? classes.mobileHeader : '',
                 elements.footer ? classes.footerActive : '',
               ].join(' ')}`,
         }}
