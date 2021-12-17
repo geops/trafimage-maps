@@ -1,22 +1,12 @@
 import OLVectorLayer from 'ol/layer/Vector';
 import OLVectorSource from 'ol/source/Vector';
-import { Style, Fill, Stroke } from 'ol/style';
-import highlightPointStyle from '../../utils/highlightPointStyle';
 
 class SearchService {
-  constructor() {
+  constructor(highlightStyle) {
     this.searches = [];
     this.highlightLayer = new OLVectorLayer({
       source: new OLVectorSource({}),
-      style: [
-        // For lines and polygon
-        new Style({
-          fill: new Fill({ color: 'rgba(0,61,155,0.2)' }),
-          stroke: new Stroke({ color: 'rgba(0,61,155,0.5)', width: 10 }),
-        }),
-        // For points
-        highlightPointStyle,
-      ],
+      style: highlightStyle,
     });
   }
 

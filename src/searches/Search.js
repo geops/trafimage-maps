@@ -1,4 +1,6 @@
 import OLGeoJSON from 'ol/format/GeoJSON';
+import { Style, Fill, Stroke } from 'ol/style';
+import highlightPointStyle from '../utils/highlightPointStyle';
 
 class Search {
   constructor() {
@@ -6,6 +8,15 @@ class Search {
     this.collapsed = true;
     this.showInPlaceholder = true;
     this.dataProjection = 'EPSG:4326';
+    this.highlightStyle = [
+      // For lines and polygon
+      new Style({
+        fill: new Fill({ color: 'rgba(0,61,155,0.2)' }),
+        stroke: new Stroke({ color: 'rgba(0,61,155,0.5)', width: 10 }),
+      }),
+      // For points
+      highlightPointStyle,
+    ];
   }
 
   getItems() {
@@ -17,7 +28,7 @@ class Search {
       ...options,
       dataProjection: this.dataProjection,
     });
-
+    feature.setStyle(this.highlightStyle);
     return feature;
   }
 
