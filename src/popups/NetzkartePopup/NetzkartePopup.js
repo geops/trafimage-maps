@@ -5,6 +5,7 @@ import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
+import { Layer } from 'mobility-toolbox-js/ol';
 import { Link } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
@@ -15,7 +16,7 @@ const propTypes = {
 };
 
 function NetzkartePopup({ feature }) {
-  const [showPlanLinks, setShowPlanLinks] = useState(false);
+  const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
   const projection = useSelector((state) => state.app.projection);
@@ -29,10 +30,13 @@ function NetzkartePopup({ feature }) {
           coordinate: feature.getGeometry().getCoordinates(),
           features: [feature],
           // Fake layer binded to popup, to open it.
-          layer: {
+          layer: new Layer({
             key: 'ch.sbb.departure.popup',
-            get: (val) => (val === 'popupComponent' ? 'DeparturePopup' : null),
-          },
+            properties: {
+              popupComponent: 'DeparturePopup',
+              useOverlay: true,
+            },
+          }),
         },
       ]),
     );
@@ -73,9 +77,7 @@ function NetzkartePopup({ feature }) {
   if (bepUrl) {
     bepLink = (
       <div>
-        <a href={bepUrl} rel="noopener noreferrer" target="_blank">
-          {t('url_bep')}
-        </a>
+        <Link href={bepUrl}> {t('url_bep')}</Link>
       </div>
     );
   }
@@ -101,9 +103,7 @@ function NetzkartePopup({ feature }) {
   if (name && !isAirport) {
     stationTimetableLink = (
       <div>
-        <a href={stationTimetableUrl} rel="noopener noreferrer" target="_blank">
-          {t('Fahrplan')}
-        </a>
+        <Link href={stationTimetableUrl}> {t('Fahrplan')}</Link>
       </div>
     );
   }
@@ -111,9 +111,7 @@ function NetzkartePopup({ feature }) {
   if (didok && layer === 'railway') {
     stationServiceLink = (
       <div>
-        <a href={stationServiceUrl} rel="noopener noreferrer" target="_blank">
-          {t('Webseite Bahnhof')}
-        </a>
+        <Link href={stationServiceUrl}> {t('Webseite Bahnhof')}</Link>
       </div>
     );
   }
@@ -189,7 +187,7 @@ function NetzkartePopup({ feature }) {
               showPlanLinks ? ' wkp-visible' : ''
             }`}
           >
-            <BahnhofplanPopup feature={feature} showOnlyLinks />
+            <BahnhofplanPopup feature={feature} />
           </div>
         </>
       ) : null}

@@ -6,6 +6,7 @@ import BusLinePopup from './BusLinePopup';
 import CasaRoutePopup from './CasaRoutePopup';
 import HandicapPopup from './HandicapPopup';
 import NetzkartePopup from './NetzkartePopup';
+import StationPopup from './StationPopup';
 import PassagierFrequenzenPopup from './PassagierFrequenzenPopup';
 import KilometragePopup from './KilometragePopup';
 import ConstructionPopup from './ConstructionPopup';
@@ -26,6 +27,7 @@ export { default as BusLinePopup } from './BusLinePopup';
 export { default as CasaRoutePopup } from './CasaRoutePopup';
 export { default as HandicapPopup } from './HandicapPopup';
 export { default as NetzkartePopup } from './NetzkartePopup';
+export { default as StationPopup } from './StationPopup';
 export { default as PassagierFrequenzenPopup } from './PassagierFrequenzenPopup';
 export { default as KilometragePopup } from './KilometragePopup';
 export { default as ConstructionPopup } from './ConstructionPopup';
@@ -44,6 +46,7 @@ export default {
   CasaRoutePopup,
   HandicapPopup,
   NetzkartePopup,
+  StationPopup,
   PassagierFrequenzenPopup,
   KilometragePopup,
   ConstructionPopup,

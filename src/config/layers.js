@@ -236,6 +236,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
     popupComponent: 'PassagierFrequenzenPopup',
+    useOverlay: true,
   },
 });
 
@@ -266,8 +267,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
   new MapboxStyleLayer({
@@ -292,8 +294,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
 ];
@@ -381,6 +384,7 @@ export const buslines = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'BuslinesLayerInfo',
     popupComponent: 'BusLinePopup',
+    useOverlay: true,
   },
 });
 
@@ -415,6 +419,7 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
   hidePopup: (feat, layer, featureInfo) => {
     const otherFeatsClicked = featureInfo
@@ -445,6 +450,7 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
@@ -466,6 +472,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 

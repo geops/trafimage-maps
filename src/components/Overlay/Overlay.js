@@ -21,15 +21,18 @@ const useStyles = makeStyles({
       flexDirection: 'column',
       justifyContent: 'space-between',
       '& > div:first-child': {
-        maxHeight: '100%',
+        // Normally this div is the root element of a popup component
+        flex: 1,
         overflow: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
       },
     },
   },
   drawerDesktop: {
     width: 0,
     '& .wkp-feature-information': {
-      width: 300,
+      width: 400,
     },
   },
   drawerDesktopPaper: {
