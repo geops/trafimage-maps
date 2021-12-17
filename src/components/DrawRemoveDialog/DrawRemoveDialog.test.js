@@ -2,7 +2,6 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Vector';
 import { mount } from 'enzyme';
@@ -33,13 +32,12 @@ describe('DrawRemoveDialog', () => {
   });
 
   test('should match snapshot', () => {
-    const component = renderer.create(
+    const component = mount(
       <Provider store={store}>
         <DrawRemoveDialog />
       </Provider>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(component.html()).toMatchSnapshot();
   });
 
   test('remove permalink on click on remove button', () => {

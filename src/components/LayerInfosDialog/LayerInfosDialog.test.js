@@ -2,8 +2,8 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
 import { Layer } from 'mobility-toolbox-js/ol';
+import { mount } from 'enzyme';
 import OLLayer from 'ol/layer/Vector';
 import LayerInfosDialog from '.';
 
@@ -29,22 +29,20 @@ describe('LayerInfosDialog', () => {
   });
 
   test('should match snapshot when Layer is null', () => {
-    const component = renderer.create(
+    const component = mount(
       <Provider store={store}>
         <LayerInfosDialog />
       </Provider>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(component.html()).toMatchSnapshot();
   });
 
   test('should match snapshot when Layer is defined', () => {
-    const component = renderer.create(
+    const component = mount(
       <Provider store={store}>
         <LayerInfosDialog selectedForInfos={layer} />
       </Provider>,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(component.html()).toMatchSnapshot();
   });
 });

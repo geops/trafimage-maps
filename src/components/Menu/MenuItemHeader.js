@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import Button from '@geops/react-ui/components/Button';
+import Button from '../Button';
 import './MenuItemHeader.scss';
 
 const propTypes = {

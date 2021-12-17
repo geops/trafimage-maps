@@ -231,6 +231,33 @@ const theme = createTheme({
         padding: 15,
       },
     },
+    MuiDialog: {
+      paper: {
+        pointerEvents: 'auto',
+        textAlign: 'left',
+        minHeight: 65,
+        backgroundColor: '#fff',
+        overflowY: 'hidden',
+        borderRadius: 0,
+        margin: 0,
+        width: 'min-content',
+      },
+      paperWidthFalse: {
+        maxWidth: 'none',
+      },
+    },
+    MuiDialogTitle: {
+      root: {
+        fontSize: 14,
+        borderBottom: '1px solid #eee',
+        height: 50,
+        padding: '0 20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'relative',
+      },
+    },
   },
 });
 
