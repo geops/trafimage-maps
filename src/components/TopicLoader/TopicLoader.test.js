@@ -22,7 +22,11 @@ describe('TopicLoader', () => {
     layerService = new LayerService([]);
     initialStore = {
       map: { drawLayer },
-      app: { map, language: 'de', layerService },
+      app: {
+        map,
+        language: 'de',
+        layerService,
+      },
     };
   });
 
@@ -44,6 +48,7 @@ describe('TopicLoader', () => {
         <TopicLoader
           topics={[topicDflt]}
           appBaseUrl="appBaseUrl"
+          staticFilesUrl="foostatic.ch"
           apiKey="apikey"
         />
       </Provider>,
@@ -78,6 +83,7 @@ describe('TopicLoader', () => {
       <Provider store={store}>
         <TopicLoader
           topics={[topicPermalinkFalse]}
+          staticFilesUrl="foostatic.ch"
           appBaseUrl="appBaseUrl"
           apiKey="apikey"
         />

@@ -1,10 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header match snapshots 1`] = `
-<Header
+<div
   className="wkp-header"
-  classNameLeft="tm-header-left"
-  left={null}
 >
   <div
     className="wkp-header-right"
@@ -22,5 +20,5 @@ exports[`Header match snapshots 1`] = `
       />
     </div>
   </div>
-</Header>
+</div>
 `;

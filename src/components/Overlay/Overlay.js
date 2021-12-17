@@ -41,6 +41,7 @@ const useStyles = makeStyles({
     borderColor: '#cdcdcd',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px 0',
+    overflow: 'hidden',
   },
   headerActive: {
     top: 100,
