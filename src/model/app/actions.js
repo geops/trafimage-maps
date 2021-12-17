@@ -90,7 +90,15 @@ export const setScreenWidth = (data) => ({
   data,
 });
 
-export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
+export const setSearchService = (data) => (dispatch, getState) => {
+  const {
+    app: { searchService },
+  } = getState();
+  if (searchService && searchService !== data) {
+    searchService.clearHighlight();
+  }
+  dispatch({ type: SET_SEARCH_SERVICE, data });
+};
 
 export const setCartaroUrl = (data) => ({ type: SET_CARTARO_URL, data });
 
