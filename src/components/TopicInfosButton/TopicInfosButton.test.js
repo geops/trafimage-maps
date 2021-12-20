@@ -20,8 +20,8 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe(
-      'wkp-info-bt wkp-active',
+    expect(wrapper.find('button').prop('className')).toBe(
+      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-active',
     );
   });
 
@@ -36,8 +36,8 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(wrapper.find('Button').prop('className')).toBe(
-      'wkp-info-bt wkp-active wkp-selected',
+    expect(wrapper.find('button').prop('className')).toBe(
+      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-active wkp-selected',
     );
   });
 });

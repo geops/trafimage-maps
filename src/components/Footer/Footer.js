@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import UIFooter from '@geops/react-ui/components/Footer';
 import ScaleLine from 'react-spatial/components/ScaleLine';
 import MousePosition from 'react-spatial/components/MousePosition';
-import ActionLink from '@geops/react-ui/components/ActionLink';
+import { Link } from '@material-ui/core';
 import ProjectionSelect from '../ProjectionSelect';
 import coordinateHelper from '../../utils/coordinateHelper';
 import { setDialogVisible } from '../../model/app/actions';
@@ -40,7 +40,7 @@ const Footer = () => {
   ];
 
   return (
-    <UIFooter className="wkp-footer">
+    <div className="wkp-footer">
       <div className="wkp-footer-left">
         <ScaleLine map={map} />
         <ProjectionSelect projections={projections} />
@@ -51,25 +51,34 @@ const Footer = () => {
         />
       </div>
       <div className="wkp-footer-right">
-        <ActionLink onClick={() => dispatch(setDialogVisible('Kontakt'))}>
+        <Link
+          onClick={() => dispatch(setDialogVisible('Kontakt'))}
+          tabIndex="0"
+        >
           {t('Kontakt')}
-        </ActionLink>
-        <ActionLink onClick={() => dispatch(setDialogVisible('Impressum'))}>
+        </Link>
+        <Link
+          onClick={() => dispatch(setDialogVisible('Impressum'))}
+          tabIndex="0"
+        >
           {t('Impressum')}
-        </ActionLink>
-        <ActionLink onClick={() => dispatch(setDialogVisible('Rechtliches'))}>
+        </Link>
+        <Link
+          onClick={() => dispatch(setDialogVisible('Rechtliches'))}
+          tabIndex="0"
+        >
           {t('Rechtliches')}
-        </ActionLink>
-        <a
+        </Link>
+        <Link
           className="wkp-dev-portal-link"
           href="https://doc.trafimage.ch"
           rel="noopener noreferrer"
           target="_blank"
         >
           Developer Portal
-        </a>
+        </Link>
       </div>
-    </UIFooter>
+    </div>
   );
 };
 

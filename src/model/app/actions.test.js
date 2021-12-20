@@ -1,6 +1,6 @@
 import { act } from 'react-dom/test-utils';
 import fetchMock from 'fetch-mock';
-import { updateDrawEditLink } from './actions';
+import { setSearchService, updateDrawEditLink } from './actions';
 
 describe('actions', () => {
   describe('updateDrawEditLink', () => {
@@ -128,6 +128,35 @@ describe('actions', () => {
         type: 'SET_DRAW_EDIT_LINK',
       });
       fetchMock.restore();
+    });
+
+    test('clears highlight of previous search service', () => {
+      const dispatch = jest.fn();
+      const searchService = { clearHighlight: jest.fn() };
+      const getState = jest.fn(() => ({ app: { searchService } }));
+      const searchService1 = { clearHighlight: jest.fn() };
+      setSearchService(searchService)(dispatch, getState);
+      expect(searchService.clearHighlight).toHaveBeenCalledTimes(0);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        data: searchService,
+        type: 'SET_SEARCH_SERVICE',
+      });
+      dispatch.mockReset();
+      setSearchService(searchService)(dispatch, getState);
+      expect(searchService.clearHighlight).toHaveBeenCalledTimes(0);
+      expect(dispatch).toHaveBeenCalledWith({
+        data: searchService,
+        type: 'SET_SEARCH_SERVICE',
+      });
+      dispatch.mockReset();
+      setSearchService(searchService1)(dispatch, getState);
+      expect(searchService.clearHighlight).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledTimes(1);
+      expect(dispatch).toHaveBeenCalledWith({
+        data: searchService1,
+        type: 'SET_SEARCH_SERVICE',
+      });
     });
   });
 });

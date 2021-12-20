@@ -271,7 +271,14 @@ describe('RouteLayer', () => {
     const compMap = component.find('Map').props().map;
     const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
     const spyPointerMove = jest.spyOn(compMapWrap.instance(), 'onPointerMove');
-    const evt = { type: 'pointermove', map: compMap, coordinate: [50, 50] };
+    const evt = {
+      type: 'pointermove',
+      map: compMap,
+      coordinate: [50, 50],
+      originalEvent: {
+        pointerType: 'mouse',
+      },
+    };
     await compMap.dispatchEvent(evt);
     await Promise.all(spy.mock.results.map((r) => r.value));
     await spyPointerMove;

@@ -13,20 +13,26 @@ const useStyles = makeStyles({
   drawer: {
     '& .wkp-feature-information': {
       height: '100%',
+      overflow: 'hidden',
     },
     '& .wkp-feature-information-body': {
-      height: 'calc(100% - 36px)',
+      height: 'calc(100% - 38px)',
       display: 'flex',
       flexDirection: 'column',
-      '& > div': {
-        maxHeight: '100%',
+      justifyContent: 'space-between',
+      '& > div:first-child': {
+        // Normally this div is the root element of a popup component
+        flex: 1,
+        overflow: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
       },
     },
   },
   drawerDesktop: {
     width: 0,
     '& .wkp-feature-information': {
-      width: 300,
+      width: 400,
     },
   },
   drawerDesktopPaper: {
@@ -35,6 +41,7 @@ const useStyles = makeStyles({
     borderColor: '#cdcdcd',
     borderStyle: 'solid',
     borderWidth: '1px 0 1px 0',
+    overflow: 'hidden',
   },
   headerActive: {
     top: 100,
@@ -69,7 +76,9 @@ const propTypes = {
 const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   const classes = useStyles();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'));
-  const isSmallerThanS = useMediaQuery((theme) => theme.breakpoints.down('sm'));
+  const isSmallerThanMd = useMediaQuery((theme) =>
+    theme.breakpoints.down('md'),
+  );
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
@@ -115,8 +124,8 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
             ? ''
             : `${[
                 classes.drawerDesktopPaper,
-                elements.header && !isSmallerThanS ? classes.headerActive : '',
-                elements.header && isSmallerThanS ? classes.mobileHeader : '',
+                elements.header && !isSmallerThanMd ? classes.headerActive : '',
+                elements.header && isSmallerThanMd ? classes.mobileHeader : '',
                 elements.footer ? classes.footerActive : '',
               ].join(' ')}`,
         }}
@@ -163,4 +172,4 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
 };
 
 Overlay.propTypes = propTypes;
-export default React.memo(Overlay);
+export default Overlay;

@@ -13,12 +13,6 @@ const PERMALINK_PARAM = 'rkTab';
 const TABS = ['region', 'nl', 'av'];
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    flex: 1,
-    overflow: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-  },
   tabPanel: {
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),

@@ -45,6 +45,7 @@ const getInitialState = () => ({
     value: 'EPSG:4326',
     format: (c) => c,
   },
+  dialogPosition: { x: 390, y: 110 },
   // Open the menu when mapset has opened the page.
   menuOpen: isOpenedByMapset(),
   searchOpen: false,
@@ -129,7 +130,7 @@ export default function app(state = getInitialState(), action) {
     case SET_DEPARTURES_FILTER:
       return {
         ...state,
-        departuresFilter: action.data,
+        ...action.data,
       };
     case SET_PERMISSION_INFOS:
       return {

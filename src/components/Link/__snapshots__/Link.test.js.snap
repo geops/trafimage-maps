@@ -9,7 +9,6 @@ exports[`Link should match snapshot. 1`] = `
 >
   <span>
     geOps
-     
   </span>
   <svg>
     Link.svg

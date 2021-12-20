@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
-import Autocomplete from '@geops/react-ui/components/Autocomplete';
+import Autocomplete from '../../components/Autocomplete';
 
 import { ReactComponent as SearchIcon } from '../../img/search.svg';
 
@@ -133,7 +133,7 @@ class DestinationInput extends Component {
       <div className="tm-departure-input">
         <Autocomplete
           button={<SearchIcon />}
-          value={destinationInputValue}
+          value={destinationInputValue || ''}
           items={destinations}
           placeholder={t('Direkt erreichbares Ziel auswählen')}
           renderItem={(item) => item.label}

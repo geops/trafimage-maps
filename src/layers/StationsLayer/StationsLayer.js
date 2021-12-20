@@ -27,7 +27,8 @@ class StationsLayer extends MapboxStyleLayer {
       },
       properties: {
         hideInLegend: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: 'StationPopup',
+        useOverlay: true,
       },
       ...options,
     });
@@ -64,12 +65,12 @@ class StationsLayer extends MapboxStyleLayer {
    * @override
    */
   terminate(map) {
+    super.terminate(map);
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       mbMap.off('idle', this.onIdle);
       this.removeSource();
     }
-    super.terminate(map);
   }
 
   /**
@@ -97,6 +98,15 @@ class StationsLayer extends MapboxStyleLayer {
    */
   onIdle() {
     this.updateSource();
+
+    // We warn the permalink that new data have been rendered.
+    this.mapboxLayer.mbMap?.once('idle', () => {
+      // New data are rendered
+      this.dispatchEvent({
+        type: 'datarendered',
+        target: this,
+      });
+    });
   }
 
   // Query the rendered stations then add them to the source.
@@ -150,8 +160,21 @@ class StationsLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     const { id } = this.source;
     if (mbMap.getSource(id)) {
-      mbMap.removeSource(id);
+      // Remove the source if no layers use it
+      const found = mbMap
+        .getStyle()
+        .layers.find((layer) => layer.source === id);
+      if (!found) {
+        mbMap.removeSource(id);
+      }
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  // Deactivate select style.
+  select() {
+    this.setHoverState(this.highlightedFeatures, false);
+    this.setHoverState(this.selectedFeatures, false);
   }
 }
 

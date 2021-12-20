@@ -20,7 +20,7 @@ const propTypes = {
 
   icon: PropTypes.object,
 
-  name: PropTypes.string.isRequired,
+  platform: PropTypes.string,
 
   showTitle: PropTypes.bool,
 
@@ -40,6 +40,7 @@ const defaultProps = {
   icon: null,
   showTitle: false,
   apiKey: null,
+  platform: undefined, // important to avoid the platform param to be add in the url.
 };
 
 class DeparturePopupContent extends Component {
@@ -48,7 +49,7 @@ class DeparturePopupContent extends Component {
     const parameters = {
       ...oldParams,
       ...{
-        [DESTINATION_FILTER]: destination ? destination.label : null,
+        [DESTINATION_FILTER]: destination ? destination.label : undefined,
       },
     };
     const qStr = qs.stringify(parameters);
@@ -116,13 +117,14 @@ class DeparturePopupContent extends Component {
   }
 
   componentDidMount() {
-    const { destinationUrl, dispatchSetDeparturesFilter, uic } = this.props;
+    const { destinationUrl, dispatchSetDeparturesFilter, uic, platform } =
+      this.props;
     const { destinationFilter } = this.state;
     this.mounted = true;
     this.loadDepartures();
     this.loadInterval = window.setInterval(() => this.loadDepartures(), 5000);
 
-    dispatchSetDeparturesFilter(uic.toString());
+    dispatchSetDeparturesFilter(uic.toString(), platform);
 
     const parameters = qs.parse(window.location.search);
     if (parameters[DESTINATION_FILTER]) {
@@ -178,7 +180,7 @@ class DeparturePopupContent extends Component {
 
     const urlParams = {
       key: apiKey,
-      limit: '10',
+      limit: '30',
     };
     if (uic) {
       urlParams.uic = uic;
@@ -242,7 +244,7 @@ class DeparturePopupContent extends Component {
   }
 
   render() {
-    const { uic, name, icon, showTitle, t } = this.props;
+    const { uic, icon, showTitle, t } = this.props;
     let { departures } = this.state;
     departures = departures.sort(
       (a, b) =>
@@ -251,17 +253,6 @@ class DeparturePopupContent extends Component {
     );
     const { destinationFilter, departuresLoading, platformName, isOffline } =
       this.state;
-
-    let title = null;
-    if (showTitle) {
-      const text = `${t('Abfahrtszeiten')} ${name}`;
-
-      title = (
-        <div className="tm-departure-title" title={text}>
-          {text}
-        </div>
-      );
-    }
 
     const loading = departuresLoading ? (
       <div className="tm-loader">
@@ -287,7 +278,11 @@ class DeparturePopupContent extends Component {
     return (
       <div className="tm-departure-popup-body">
         {icon}
-        {title}
+        {showTitle && (
+          <div className="tm-departure-title">
+            {`${t(`Abfahrtszeiten aller ${platformName}`)}`}
+          </div>
+        )}
 
         <DestinationInput
           destination={destinationFilter}
@@ -309,7 +304,10 @@ class DeparturePopupContent extends Component {
                 <th colSpan="2">
                   <SBBClock focusable={false} height="23px" width="23px" />
                 </th>
-                <th>{t(platformName)}</th>
+                <th>
+                  {t(platformName)[0].toUpperCase() +
+                    t(platformName).substring(1)}
+                </th>
               </tr>
               {departures.map((departure, idx) => (
                 // eslint-disable-next-line react/no-array-index-key
