@@ -20,7 +20,7 @@ import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import DirektverbindungenLayer from '../layers/DirektverbindungenLayer';
 import StationsLayer from '../layers/StationsLayer';
 import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
-import MapsGeoAdminWmtsLayer from '../layers/MapsGeoAdminWmtsLayer';
+import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import TralisLayer from '../layers/TralisLayer';
 
@@ -1576,7 +1576,6 @@ export const blnLandschaftNaturdenkmaelerLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.bundesinventare-bln',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
@@ -1592,7 +1591,6 @@ export const schweizNationalparkLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
@@ -1608,7 +1606,6 @@ export const ramsarLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.schutzgebiete-ramsar',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
@@ -1626,7 +1623,6 @@ export const schweizPaerkePerimeterLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
@@ -1642,7 +1638,6 @@ export const weidenLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
@@ -1658,7 +1653,6 @@ export const unescoLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.unesco-weltnaturerbe',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
@@ -1674,14 +1668,13 @@ export const vogelreservateLayer = new MapboxStyleLayer({
   properties: {
     legendKey: 'ch.bafu.bundesinventare-vogelreservate',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
-export const wildruhezonen = new MapsGeoAdminWmtsLayer({
-  name: 'ch.bafu.wrz-wildruhezonen',
-  key: 'ch.bafu.wrz-wildruhezonen',
+export const wildruhezonen = new MapboxStyleLayer({
+  name: 'ch.bafu.wrz-wildruhezonen_portal',
+  key: 'ch.bafu.wrz-wildruhezonen_portal',
   visible: false,
   mapboxLayer: beleuchtungDataLayer,
   styleLayersFilter: ({ id }) => {
@@ -1690,15 +1683,13 @@ export const wildruhezonen = new MapsGeoAdminWmtsLayer({
   properties: {
     legendKey: 'ch.bafu.wrz-wildruhezonen_portal',
     hasInfos: true,
-    // popupComponent: 'MapsGeoAdminPopup',
     layerInfoComponent: 'MapsGeoAdminLayerInfo',
   },
 });
 
-export const beleuchtungstaerkenBafuLayers = new Layer({
+export const beleuchtungstaerkenBafuLayers = new MapsGeoAdminLayer({
   name: 'ch.sbb.beleuchtungsstaerken.bafu.group',
   visible: false,
-  isQueryable: false,
   children: [
     blnLandschaftNaturdenkmaelerLayer,
     schweizNationalparkLayer,
@@ -1709,6 +1700,10 @@ export const beleuchtungstaerkenBafuLayers = new Layer({
     vogelreservateLayer,
     wildruhezonen,
   ],
+  properties: {
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'MapsGeoAdminPopup',
+  },
 });
 
 const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';

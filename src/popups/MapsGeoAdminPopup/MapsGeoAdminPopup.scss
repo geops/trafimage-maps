@@ -1,0 +1,21 @@
+.wkp-maps-geo-admin-popup {
+  .wkp-maps-geo-admin-popup-body {
+    max-height: 200px;
+    min-width: 300px;
+  }
+
+  .htmlpopup-header {
+    font-weight: bold;
+  }
+
+  .htmlpopup-content {
+    table {
+      border-spacing: 0 4px;
+      padding: 10px 0;
+    }
+    .cell-left {
+      vertical-align: top;
+      min-width: 150px;
+    }
+  }
+}
