@@ -23,7 +23,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Run and record Cypress tests
         run: yarn run cy:test
