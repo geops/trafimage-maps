@@ -68,7 +68,7 @@
     "babel-preset-react-app": "9",
     "canvas": "2.8.0",
     "css-mediaquery": "0.1.2",
-    "cypress": "9.2.0",
+    "cypress": "8.5.0",
     "cypress-plugin-tab": "1.0.5",
     "cypress-enter-plugin": "1.0.1",
     "documentation": "13.2.5",
