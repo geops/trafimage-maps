@@ -96,6 +96,12 @@ const theme = createTheme({
     },
   },
   overrides: {
+    MuiSelect: {
+      icon: {
+        transition: 'transform 400ms',
+        color: 'inherit',
+      },
+    },
     MuiPopover: {
       paper: {
         border: '2px solid #666',

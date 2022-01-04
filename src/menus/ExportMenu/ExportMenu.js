@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
   input: {
     borderRadius: 2,
     width: 140,
+    '&:hover': {
+      color: '#eb0000',
+    },
   },
   select: {
     padding: '15px !important',
