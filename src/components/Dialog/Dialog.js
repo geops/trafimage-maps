@@ -20,6 +20,7 @@ import { setDialogVisible, setDialogPosition } from '../../model/app/actions';
 const useStyles = makeStyles((theme) => ({
   rootDesktop: {
     zIndex: '0!important',
+    pointerEvents: 'none',
   },
 
   paper: {
