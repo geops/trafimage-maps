@@ -116,6 +116,7 @@ const LanguageSelect = () => {
   return (
     <div className={classes.wrapper}>
       <Select
+        data-cy="lang-select"
         value={inputValue.value}
         renderValue={(opt) => (
           <span className={classes.currentValue}>
@@ -130,6 +131,7 @@ const LanguageSelect = () => {
         className={classes.input}
         classes={{ outlined: classes.select, icon: classes.expandIcon }}
         MenuProps={{
+          'data-cy': 'lang-select-options',
           getContentAnchorEl: null,
           anchorOrigin: {
             vertical: 'top',
