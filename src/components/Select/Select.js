@@ -1,67 +1,61 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
-import ReactSelect from 'react-select';
-import SingleValue from './SingleValue';
+import { Select as MuiSelect } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  value: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  }).isRequired,
-  styles: PropTypes.object.isRequired,
-  singleValueClassName: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  selectLabel: PropTypes.element,
-};
+const borderWidth = 2;
 
-const defaultProps = {
-  selectLabel: null,
-  singleValueClassName: null,
-};
+const useStyles = makeStyles({
+  root: {
+    borderRadius: 2,
+  },
+  outlined: {
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+});
 
-const Select = ({
-  options,
-  value,
-  styles,
-  onChange,
-  singleValueClassName,
-  selectLabel,
-}) => {
+const Select = (props) => {
+  const classes = useStyles();
   const ref = useRef();
   return (
-    <ReactSelect
+    <MuiSelect
+      className={classes.root}
+      classes={classes}
+      variant="outlined"
       ref={ref}
-      onKeyDown={(evt) => {
-        if (evt.key === 'Enter' && !ref.current.state.menuIsOpen) {
-          ref.current.onMenuOpen();
-        }
+      IconComponent={ExpandMoreIcon}
+      MenuProps={{
+        onEnter: (el) => {
+          /**
+           * The MUI width calculation fails because of the border.
+           * The element is always 2 x borderWidth too wide.
+           * With this hack I reduce the width to make it fit.
+           * @ignore
+           */
+          const menuEl = el;
+          menuEl.style.minWidth = `${
+            ref.current.clientWidth - borderWidth * 2
+          }px`;
+        },
+        getContentAnchorEl: null,
+        anchorOrigin: {
+          vertical: 'bottom',
+        },
+        PaperProps: {
+          style: {
+            marginRight: 2,
+            border: `${borderWidth}px solid #888`,
+            borderTop: '1px solid rgba(0, 0, 0, 0.30)',
+            borderRadius: '0 0 2px 2px',
+            marginTop: -3,
+          },
+        },
       }}
-      options={options}
-      isSearchable={false}
-      value={value}
-      styles={styles}
-      components={{
-        SingleValue: (singleValueProps) => (
-          <SingleValue
-            selectLabel={selectLabel}
-            singleValueClassName={singleValueClassName}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...singleValueProps}
-          />
-        ),
-      }}
-      onChange={onChange}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   );
 };
 
-Select.propTypes = propTypes;
-Select.defaultProps = defaultProps;
-
-export default React.memo(Select);
+export default Select;

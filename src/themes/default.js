@@ -94,12 +94,16 @@ const theme = createTheme({
       disableRipple: true,
       disableFocusRipple: true,
     },
+    MuiMenu: {
+      transitionDuration: 0,
+    },
   },
   overrides: {
     MuiSelect: {
       icon: {
         transition: 'transform 400ms',
         color: 'inherit',
+        width: 18,
       },
     },
     MuiPopover: {
@@ -162,19 +166,25 @@ const theme = createTheme({
     },
     MuiInputBase: {
       root: {
+        borderRadius: 2,
         fontSize: '1em',
       },
     },
     MuiOutlinedInput: {
       root: {
+        borderWidth: 1,
+        boxSizing: 'border-box',
         '& $notchedOutline': {
           borderColor: '#888',
+          borderWidth: 1,
         },
         '&:hover $notchedOutline': {
           borderColor: '#888',
+          borderWidth: 1,
         },
         '&$focused $notchedOutline': {
           borderColor: '#888',
+          borderWidth: 1,
         },
       },
       focused: {},
@@ -183,6 +193,10 @@ const theme = createTheme({
     MuiMenuItem: {
       root: {
         fontSize: '14px',
+        '&:hover,&:focus': {
+          color: '#eb0000',
+          backgroundColor: 'white',
+        },
       },
     },
     MuiButton: {

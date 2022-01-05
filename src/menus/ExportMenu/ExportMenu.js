@@ -47,10 +47,6 @@ const useStyles = makeStyles((theme) => ({
   },
   menuItem: {
     paddingLeft: 12,
-    '&:hover': {
-      color: '#eb0000',
-      backgroundColor: 'white',
-    },
   },
   itemSelected: {
     color: '#eb0000',
@@ -93,10 +89,10 @@ const MenuProps = {
   PaperProps: {
     style: {
       padding: 0,
-      minWidth: 136,
-      border: '2px solid #888',
-      borderTop: '1px solid rgba(0, 0, 0, 0.30)',
-      borderRadius: '0 0 2px 2px',
+      minWidth: 138,
+      border: '1px solid #888',
+      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+      borderRadius: 0,
       marginTop: -3,
     },
   },
