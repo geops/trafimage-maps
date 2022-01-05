@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: (props) => (props.isMobileWidth ? 55 : 120),
     color: '#767676',
     '&:hover': {
-      color: '#eb0000',
+      color: theme.palette.secondary.dark,
     },
     '&:hover .MuiOutlinedInput-notchedOutline,& .MuiOutlinedInput-notchedOutline':
       {
@@ -56,10 +56,10 @@ const useStyles = makeStyles((theme) => ({
       stroke: '#767676',
     },
     '&:hover': {
-      color: theme.palette.secondary.main,
+      color: theme.palette.secondary.dark,
     },
     '&:hover path': {
-      stroke: theme.palette.secondary.main,
+      stroke: theme.palette.secondary.dark,
     },
   },
   menuItem: {

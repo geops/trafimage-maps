@@ -6,12 +6,12 @@ import { useTranslation } from 'react-i18next';
 import Select from '../Select';
 import { setProjection } from '../../model/app/actions';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   input: {
     borderRadius: 2,
     width: 150,
     '&:hover': {
-      color: '#eb0000',
+      color: theme.palette.secondary.dark,
     },
     '&:hover .MuiOutlinedInput-notchedOutline,& .MuiOutlinedInput-notchedOutline':
       {
@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
     paddingLeft: 12,
   },
   itemSelected: {
-    color: '#eb0000',
+    color: theme.palette.secondary.dark,
     backgroundColor: 'white !important',
   },
 }));

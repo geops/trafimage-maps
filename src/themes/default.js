@@ -194,7 +194,7 @@ const theme = createTheme({
       root: {
         fontSize: '14px',
         '&:hover,&:focus': {
-          color: '#eb0000',
+          color: '#c60018',
           backgroundColor: 'white',
         },
       },
