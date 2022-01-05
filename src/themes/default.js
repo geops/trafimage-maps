@@ -1,5 +1,11 @@
 import { createTheme } from '@material-ui/core/styles';
 
+const colors = {
+  red: '#eb0000',
+  darkRed: '#c60018',
+  darkGray: '#000',
+};
+
 const breakpointValues = {
   xs: 0,
   sm: 576,
@@ -12,14 +18,14 @@ const theme = createTheme({
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {
-      main: '#000',
+      main: colors.darkGray,
     },
     secondary: {
-      main: '#eb0000',
-      dark: '#c60018',
+      main: colors.red,
+      dark: colors.darkRed,
     },
     text: {
-      primary: '#000',
+      primary: colors.darkGray,
     },
   },
   typography: {
@@ -160,7 +166,7 @@ const theme = createTheme({
           backgroundColor: 'transparent',
         },
         '&$selected svg': {
-          color: '#eb0000',
+          color: colors.red,
         },
       },
     },
@@ -194,7 +200,7 @@ const theme = createTheme({
       root: {
         fontSize: '14px',
         '&:hover,&:focus': {
-          color: '#c60018',
+          color: colors.darkRed,
           backgroundColor: 'white',
         },
       },
@@ -220,15 +226,15 @@ const theme = createTheme({
       },
       containedPrimary: {
         color: '#fff',
-        backgroundColor: '#eb0000',
-        borderColor: '#eb0000',
+        backgroundColor: colors.red,
+        borderColor: colors.red,
         '&:hover': {
-          borderColor: '#c60018',
-          backgroundColor: '#c60018',
+          borderColor: colors.darkRed,
+          backgroundColor: colors.darkRed,
         },
       },
       containedSecondary: {
-        color: '#000',
+        color: colors.darkGray,
         backgroundColor: '#dcdcdc',
         borderColor: '#dcdcdc',
         '&:hover': {
@@ -239,7 +245,7 @@ const theme = createTheme({
     },
     MuiIconButton: {
       root: {
-        color: '#000',
+        color: colors.darkGray,
         '&:hover': {
           backgroundColor: 'transparent',
         },
