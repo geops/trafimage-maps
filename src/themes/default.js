@@ -111,6 +111,11 @@ const theme = createTheme({
         color: 'inherit',
         width: 18,
       },
+      select: {
+        '&:focus': {
+          backgroundColor: 'white',
+        },
+      },
     },
     MuiPopover: {
       paper: {
