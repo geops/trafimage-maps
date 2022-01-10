@@ -22,7 +22,6 @@ const optionsMobile = [
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     position: 'relative',
-    width: 120,
   },
   icon: {
     width: (props) => (props.isMobileWidth ? 25 : 28),
