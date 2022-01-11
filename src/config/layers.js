@@ -1589,8 +1589,8 @@ const mapsGeoAdminSchutzgebieteLayerKeys = [
   'ch.bafu.schutzgebiete-smaragd',
   'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
   'ch.bafu.schutzgebiete-ramsar',
-  'ch.pronatura.naturschutzgebiete',
   'ch.pronatura.waldreservate',
+  'ch.pronatura.naturschutzgebiete',
   'ch.bafu.schutzgebiete-biosphaerenreservate',
 ];
 
@@ -1618,9 +1618,9 @@ const mapsGeoAdminBundesinventareLayerKeys = [
   'ch.bafu.bundesinventare-bln',
   'ch.bafu.bundesinventare-auen_anhang2',
   'ch.bafu.bundesinventare-auen',
-  'ch.bafu.bundesinventare-amphibien_anhang4',
   'ch.bafu.bundesinventare-amphibien_wanderobjekte',
   'ch.bafu.bundesinventare-amphibien',
+  'ch.bafu.bundesinventare-amphibien_anhang4',
 ];
 
 export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
