@@ -21,9 +21,9 @@ const propTypes = {
 };
 
 function StationPopup({ feature, layer, coordinate }) {
-  const features = feature.length ? [...feature.reverse()] : [feature];
-  const layers = layer.length ? [...layer.reverse()] : [layer];
-  const coordinates = coordinate.length
+  const features = Array.isArray(feature) ? [...feature.reverse()] : [feature];
+  const layers = Array.isArray(layer) ? [...layer.reverse()] : [layer];
+  const coordinates = Array.isArray((coordinate || [])[0])
     ? [...coordinate.reverse()]
     : [coordinate];
 
@@ -72,7 +72,15 @@ function StationPopup({ feature, layer, coordinate }) {
 StationPopup.propTypes = propTypes;
 
 const memoized = React.memo(StationPopup);
-memoized.renderTitle = (feat) => (feat.length ? feat[0] : feat).get('name');
+
+memoized.renderTitle = (feature, t) => {
+  const feat = feature.length ? feature[0] : feature;
+  const platform = feat.get('platform');
+  if (platform) {
+    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+  }
+  return feat.get('name');
+};
 memoized.hidePagination = true;
 
 export default memoized;
