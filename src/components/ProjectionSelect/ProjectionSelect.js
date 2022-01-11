@@ -8,29 +8,14 @@ import { setProjection } from '../../model/app/actions';
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    borderRadius: 2,
     width: 150,
-    '&:hover': {
-      color: theme.palette.secondary.dark,
-    },
-    '&:hover .MuiOutlinedInput-notchedOutline,& .MuiOutlinedInput-notchedOutline':
-      {
-        borderWidth: 0,
-      },
-    '& Mui-focused .MuiOutlinedInput-notchedOutline': {
-      outline: 'none',
-      borderWidth: 1,
-    },
   },
   select: {
     padding: '10px 14px !important',
   },
   menuItem: {
     paddingLeft: 12,
-  },
-  itemSelected: {
-    color: theme.palette.secondary.dark,
-    backgroundColor: 'white !important',
+    fontSize: theme.typography.fontSize,
   },
 }));
 
@@ -57,12 +42,7 @@ const ProjectionSelect = ({ projections }) => {
   const projectionsOptions = useMemo(() => {
     return projections.map((p) => {
       return (
-        <MenuItem
-          key={p.value}
-          value={p.value}
-          className={classes.menuItem}
-          classes={{ selected: classes.itemSelected }}
-        >
+        <MenuItem key={p.value} value={p.value} className={classes.menuItem}>
           {t(p.label)}
         </MenuItem>
       );
@@ -87,6 +67,7 @@ const ProjectionSelect = ({ projections }) => {
 
   return (
     <Select
+      hideOutline
       value={projection.value}
       onChange={onSelectChange}
       className={classes.input}
@@ -102,7 +83,7 @@ const ProjectionSelect = ({ projections }) => {
             border: `1px solid #888`,
             borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
             borderRadius: 0,
-            marginTop: -20,
+            marginTop: -19,
             minWidth: 148,
           },
         },

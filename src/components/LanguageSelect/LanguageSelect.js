@@ -22,37 +22,24 @@ const optionsMobile = [
 const useStyles = makeStyles((theme) => ({
   wrapper: {
     position: 'relative',
+    paddingTop: 2,
   },
   icon: {
     width: (props) => (props.isMobileWidth ? 25 : 28),
     height: (props) => (props.isMobileWidth ? 25 : 28),
-  },
-  expandIcon: {
-    width: 18,
   },
   currentValue: {
     display: 'flex',
     alignItems: 'center',
   },
   input: {
-    borderRadius: 2,
     width: (props) => (props.isMobileWidth ? 55 : 120),
-    color: '#767676',
-    '&:hover': {
-      color: theme.palette.secondary.dark,
-    },
-    '&:hover .MuiOutlinedInput-notchedOutline,& .MuiOutlinedInput-notchedOutline':
-      {
-        borderWidth: 0,
-      },
-    '& Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderWidth: 1,
-    },
+    color: theme.palette.text.secondary,
   },
   select: {
     padding: '6px 10px !important',
     '& path': {
-      stroke: '#767676',
+      stroke: theme.palette.text.secondary,
     },
     '&:hover': {
       color: theme.palette.secondary.dark,
@@ -63,11 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuItem: {
     paddingLeft: 12,
-    color: '#767676',
-  },
-  itemSelected: {
-    color: '#000',
-    backgroundColor: 'white !important',
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -104,7 +87,6 @@ const LanguageSelect = () => {
           key={opt.value}
           value={opt.value}
           className={classes.menuItem}
-          classes={{ selected: classes.itemSelected }}
         >
           {opt.label}
         </MenuItem>
@@ -115,6 +97,7 @@ const LanguageSelect = () => {
   return (
     <div className={classes.wrapper}>
       <Select
+        hideOutline
         data-cy="lang-select"
         value={inputValue.value}
         renderValue={(opt) => (
