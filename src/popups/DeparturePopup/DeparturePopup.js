@@ -9,24 +9,29 @@ import DeparturePopupContent from './DeparturePopupContent';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  coordinate: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
 const defaultProps = {};
 
 let returnToNetzkarte = false;
 
-const DeparturePopup = ({ feature }) => {
+const DeparturePopup = ({ feature, coordinate }) => {
   const dispatch = useDispatch();
-  const featureInfo = useSelector((state) => state.app.featureInfo);
   const layerService = useSelector((state) => state.app.layerService);
   const platform = feature.get('platform');
   const uic = parseFloat(feature.get('sbb_id'));
 
   const openNetzkartePopup = () => {
-    const netkarteFeature = { ...featureInfo[0] };
-    const stationsLayer = layerService.getLayer('ch.sbb.netzkarte.stationen');
-    netkarteFeature.layer = stationsLayer;
-    dispatch(setFeatureInfo([netkarteFeature]));
+    dispatch(
+      setFeatureInfo([
+        {
+          features: [feature],
+          coordinate,
+          layer: layerService.getLayer('ch.sbb.netzkarte.stationen'),
+        },
+      ]),
+    );
   };
 
   useEffect(() => {

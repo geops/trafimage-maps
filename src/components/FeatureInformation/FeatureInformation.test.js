@@ -10,7 +10,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import highlightPointStyle from '../../utils/highlightPointStyle';
 import FeatureInformation from '.';
 
-describe('FeatureInformaion', () => {
+describe('FeatureInformation', () => {
   const mockStore = configureStore([thunk]);
   let store;
   let layers = [];
@@ -45,6 +45,7 @@ describe('FeatureInformaion', () => {
       {
         features: [new Feature(new Point([2, 2]))],
         layer: l,
+        coordinate: [2, 2],
       },
     ];
     const wraper = mount(
@@ -72,6 +73,7 @@ describe('FeatureInformaion', () => {
       {
         features: [new Feature(new Point([2, 2]))],
         layer: l,
+        coordinate: [2, 2],
       },
     ];
     const wraper = mount(
@@ -177,6 +179,7 @@ describe('FeatureInformaion', () => {
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
+          coordinate: [2, 2],
         },
       ];
 
@@ -197,6 +200,7 @@ describe('FeatureInformaion', () => {
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'NetzkartePopup',
         },
       ];
@@ -221,6 +225,7 @@ describe('FeatureInformaion', () => {
             new Feature(new Point([1, 1])),
           ],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'NetzkartePopup',
         },
         {
@@ -229,6 +234,7 @@ describe('FeatureInformaion', () => {
             new Feature(new Point([1, 1])),
           ],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'NetzkartePopup',
         },
       ];
@@ -250,6 +256,7 @@ describe('FeatureInformaion', () => {
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'KilometragePopup',
         },
       ];

@@ -97,6 +97,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
     featureInfo.forEach((featInfo) => {
       const PopupComponent = getPopupComponent(featInfo);
+
       if (PopupComponent && PopupComponent.hidePagination) {
         const name = PopupComponent.displayName;
         // All features using this PopupComponent will be render on the same page
@@ -107,11 +108,14 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
               layers[indexByPopup[name]] = [];
               coordinates[indexByPopup[name]] = [];
             }
+            if (!coordinates[indexByPopup[name]]) {
+              coordinates[indexByPopup[name]] = [];
+            }
             layers[indexByPopup[name]].push(featInfo.layer);
             coordinates[indexByPopup[name]].push(featInfo.coordinate);
           });
         } else {
-          // At this point features must be displaye din the same popup, that's why we push an array.
+          // At this point features must be displayed in the same popup, that's why we push an array.
           features.push([...featInfo.features]);
           const arr = [];
           const arrCoord = [];
@@ -134,12 +138,18 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     return { features, layers, coordinates };
   }, [featureInfo]);
 
+  // When the featureIndex change we add the red circle.
   useEffect(() => {
     highlightLayer.getSource().clear();
-    // When the featureIndex change we addd the red circle.
-    const feature = infoIndexed.features[featureIndex];
+
     // 'feature' can be a feature or an array
-    (Array.isArray(feature) ? feature : [feature]).forEach((feat) => {
+    const feature = infoIndexed.features[featureIndex];
+    const features = Array.isArray(feature) ? feature : [feature];
+    const coordinate = infoIndexed.coordinates[featureIndex];
+    const coordinates = Array.isArray((coordinate || [])[0])
+      ? coordinate
+      : [coordinate];
+    features.forEach((feat, idx) => {
       if (feat && feat.getGeometry()) {
         if (feat.getGeometry().getType() === GeometryType.POINT) {
           highlightLayer
@@ -153,9 +163,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
           if (layer && layer.layout && layer.layout['icon-image']) {
             highlightLayer
               .getSource()
-              .addFeature(
-                new Feature(new Point(infoIndexed.coordinates[featureIndex])),
-              );
+              .addFeature(new Feature(new Point(coordinates[idx])));
           }
         }
       }
@@ -186,7 +194,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   }
 
   const { layer } = info;
-  const { layers, features } = infoIndexed;
+  const { layers, features, coordinates } = infoIndexed;
   const { hideHeader, renderTitle, onCloseBtClick = () => {} } = PopupComponent;
 
   return (
@@ -224,6 +232,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
             t={t}
             layer={layers[featureIndex]}
             feature={features[featureIndex]}
+            coordinate={coordinates[featureIndex]}
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}

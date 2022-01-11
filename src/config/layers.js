@@ -90,69 +90,6 @@ export const beleuchtungDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-let osmPointsLayers = [];
-const olListenersKeys = [];
-
-const updateStations = (mbMap) => {
-  // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
-  mbMap.once('idle', () => {
-    const osmPointsRendered = mbMap
-      .queryRenderedFeatures({
-        layers: osmPointsLayers,
-      })
-      .map((feat) => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-    const source = mbMap.getSource('stations');
-    if (source) {
-      source.setData({
-        type: 'FeatureCollection',
-        features: osmPointsRendered,
-      });
-    }
-  });
-};
-
-// Get list of styleLayers applied to osm_points source.
-// We don"t use "once()" because when switching topics
-// (ex: netzkarte->eisenbahn->netzkarte), the layer is removed then reloaded.
-dataLayer.on('load', () => {
-  const { map, mbMap } = dataLayer;
-  osmPointsLayers = mbMap
-    .getStyle()
-    .layers.filter((layer) => {
-      return (
-        layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
-      );
-    })
-    .map((layer) => layer.id);
-
-  if (!mbMap.getSource('stations')) {
-    mbMap.addSource('stations', {
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    });
-  }
-  updateStations(mbMap);
-
-  // Update stations source on moveeend.
-  unByKey(olListenersKeys);
-  olListenersKeys.push(
-    map.on('moveend', () => {
-      updateStations(mbMap);
-    }),
-  );
-});
-
 export const netzkarteLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.layer',
   key: 'ch.sbb.netzkarte',

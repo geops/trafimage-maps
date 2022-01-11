@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeatureInformaion should match snapshot. should display multiple features with pagination 1`] = `
+exports[`FeatureInformation should match snapshot. should display multiple features with pagination 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -150,7 +150,7 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
 </div>
 `;
 
-exports[`FeatureInformaion should match snapshot. should not display header 1`] = `
+exports[`FeatureInformation should match snapshot. should not display header 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -174,7 +174,7 @@ exports[`FeatureInformaion should match snapshot. should not display header 1`] 
 </div>
 `;
 
-exports[`FeatureInformaion should match snapshot. using the info's popupComponent 1`] = `
+exports[`FeatureInformation should match snapshot. using the info's popupComponent 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -284,7 +284,7 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
 </div>
 `;
 
-exports[`FeatureInformaion should match snapshot. using the layers's popupComponent 1`] = `
+exports[`FeatureInformation should match snapshot. using the layers's popupComponent 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
