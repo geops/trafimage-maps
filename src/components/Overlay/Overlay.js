@@ -89,7 +89,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   }, [screenWidth]);
 
   const isSmallerThanMd = useMemo(() => {
-    return ['xs', 's'].includes(screenWidth);
+    return ['xs', 's', 'm'].includes(screenWidth);
   }, [screenWidth]);
 
   const dispatch = useDispatch();
