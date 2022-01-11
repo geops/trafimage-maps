@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { makeStyles, useMediaQuery, Drawer } from '@material-ui/core';
+import { makeStyles, Drawer } from '@material-ui/core';
 import { Resizable } from 're-resizable';
 import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles({
   drawerRoot: {
-    position: 'relative !important',
+    position: 'absolute !important',
   },
   drawer: {
     '& .wkp-feature-information': {
@@ -30,8 +30,9 @@ const useStyles = makeStyles({
     },
   },
   drawerDesktop: {
-    width: 0,
+    pointerEvents: 'none',
     '& .wkp-feature-information': {
+      pointerEvents: 'all',
       width: 400,
     },
   },
@@ -42,6 +43,8 @@ const useStyles = makeStyles({
     borderStyle: 'solid',
     borderWidth: '1px 0 1px 0',
     overflow: 'hidden',
+    position: 'absolute',
+    pointerEvents: 'all',
   },
   headerActive: {
     top: 100,
@@ -53,10 +56,14 @@ const useStyles = makeStyles({
     bottom: 40,
   },
   drawerMobile: {
-    width: '100%',
+    pointerEvents: 'none',
     '& .wkp-feature-information': {
       width: '100%',
     },
+  },
+  drawerMobilePaper: {
+    position: 'absolute',
+    pointerEvents: 'all',
   },
   resizeHandler: {
     display: 'flex',
@@ -75,14 +82,19 @@ const propTypes = {
 
 const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   const classes = useStyles();
-  const isMobile = useMediaQuery((theme) => theme.breakpoints.down('xs'));
-  const isSmallerThanMd = useMediaQuery((theme) =>
-    theme.breakpoints.down('md'),
-  );
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+
+  const isMobile = useMemo(() => {
+    return ['xs'].includes(screenWidth);
+  }, [screenWidth]);
+
+  const isSmallerThanMd = useMemo(() => {
+    return ['xs', 's'].includes(screenWidth);
+  }, [screenWidth]);
+
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
-  const [node, setNode] = useState(null);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
@@ -109,11 +121,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
   }
 
   return (
-    <div
-      ref={(nodee) => {
-        setNode(nodee);
-      }}
-    >
+    <div>
       <Drawer
         className={`${classes.drawer} ${
           isMobile ? classes.drawerMobile : classes.drawerDesktop
@@ -121,7 +129,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
         classes={{
           root: classes.drawerRoot,
           paper: isMobile
-            ? ''
+            ? `${classes.drawerMobilePaper}`
             : `${[
                 classes.drawerDesktopPaper,
                 elements.header && !isSmallerThanMd ? classes.headerActive : '',
@@ -136,7 +144,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
         }}
         ModalProps={{
           disableEnforceFocus: true,
-          container: node,
+          disablePortal: true,
           BackdropComponent: () => {
             return null;
           },
