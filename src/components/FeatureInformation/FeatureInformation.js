@@ -8,6 +8,7 @@ import GeometryType from 'ol/geom/GeometryType';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
+import Point from 'ol/geom/Point';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { Link, IconButton } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
@@ -88,6 +89,9 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     // List of corresponding layer for each features in the array.
     const layers = [];
 
+    // List of corresponding coordinates clicked for each features in the array.
+    const coordinates = [];
+
     // When a popup use hidePagination, we store the index for each popup.
     const indexByPopup = {};
 
@@ -101,45 +105,62 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
           featInfo.features.forEach(() => {
             if (!layers[indexByPopup[name]]) {
               layers[indexByPopup[name]] = [];
+              coordinates[indexByPopup[name]] = [];
             }
             layers[indexByPopup[name]].push(featInfo.layer);
+            coordinates[indexByPopup[name]].push(featInfo.coordinate);
           });
         } else {
           // At this point features must be displaye din the same popup, that's why we push an array.
           features.push([...featInfo.features]);
           const arr = [];
+          const arrCoord = [];
           featInfo.features.forEach(() => {
             arr.push(featInfo.layer);
+            arrCoord.push(featInfo.coordinate);
           });
           layers.push(arr);
+          coordinates.push(arrCoord);
           indexByPopup[name] = features.length - 1;
         }
       } else if (PopupComponent) {
         features.push(...featInfo.features);
         featInfo.features.forEach(() => {
           layers.push(featInfo.layer);
+          coordinates.push(featInfo.coordinate);
         });
       }
     });
-    return { features, layers };
+    return { features, layers, coordinates };
   }, [featureInfo]);
 
   useEffect(() => {
     highlightLayer.getSource().clear();
-
     // When the featureIndex change we addd the red circle.
     const feature = infoIndexed.features[featureIndex];
     // 'feature' can be a feature or an array
     (Array.isArray(feature) ? feature : [feature]).forEach((feat) => {
-      if (
-        feat &&
-        feat.getGeometry() &&
-        feat.getGeometry().getType() === GeometryType.POINT
-      ) {
-        highlightLayer.getSource().addFeature(new Feature(feat.getGeometry()));
+      if (feat && feat.getGeometry()) {
+        if (feat.getGeometry().getType() === GeometryType.POINT) {
+          highlightLayer
+            .getSource()
+            .addFeature(new Feature(feat.getGeometry()));
+        } else {
+          // In case mapbox render an icon for a polygon or a line we display
+          // the highlight style on the coordinate clicked.
+          // Needed for platforms layer.
+          const { layer } = feat.get('mapboxFeature') || {};
+          if (layer && layer.layout && layer.layout['icon-image']) {
+            highlightLayer
+              .getSource()
+              .addFeature(
+                new Feature(new Point(infoIndexed.coordinates[featureIndex])),
+              );
+          }
+        }
       }
     });
-  }, [featureIndex, featureInfo, infoIndexed]);
+  }, [featureIndex, infoIndexed]);
 
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
