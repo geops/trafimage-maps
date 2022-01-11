@@ -2,8 +2,9 @@ import { createTheme } from '@material-ui/core/styles';
 
 const colors = {
   red: '#eb0000',
-  darkRed: '#c60018',
-  darkGray: '#000',
+  redDark: '#c60018',
+  black: '#000',
+  gray: '#767676',
 };
 
 const breakpointValues = {
@@ -18,14 +19,15 @@ const theme = createTheme({
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {
-      main: colors.darkGray,
+      main: colors.black,
     },
     secondary: {
       main: colors.red,
-      dark: colors.darkRed,
+      dark: colors.redDark,
     },
     text: {
-      primary: colors.darkGray,
+      primary: colors.black,
+      secondary: colors.gray,
     },
   },
   typography: {
@@ -47,7 +49,7 @@ const theme = createTheme({
     subtitle1: {
       fontSize: 13,
       lineHeight: '19.5px',
-      color: '#767676',
+      color: colors.gray,
     },
     button: {
       fontSize: '1em',
@@ -116,6 +118,10 @@ const theme = createTheme({
           backgroundColor: 'white',
         },
       },
+      outlined: {
+        paddingTop: 15,
+        paddingBottom: 15,
+      },
     },
     MuiPopover: {
       paper: {
@@ -183,6 +189,7 @@ const theme = createTheme({
     },
     MuiOutlinedInput: {
       root: {
+        borderRadius: 2,
         borderWidth: 1,
         boxSizing: 'border-box',
         '& $notchedOutline': {
@@ -205,8 +212,16 @@ const theme = createTheme({
       root: {
         fontSize: '14px',
         '&:hover,&:focus': {
-          color: colors.darkRed,
-          backgroundColor: 'white',
+          color: colors.redDark,
+          backgroundColor: 'white !important',
+        },
+      },
+    },
+    MuiListItem: {
+      root: {
+        backgroundColor: 'white !important',
+        '&:hover': {
+          backgroundColor: 'white !important',
         },
       },
     },
@@ -234,12 +249,12 @@ const theme = createTheme({
         backgroundColor: colors.red,
         borderColor: colors.red,
         '&:hover': {
-          borderColor: colors.darkRed,
-          backgroundColor: colors.darkRed,
+          borderColor: colors.redDark,
+          backgroundColor: colors.redDark,
         },
       },
       containedSecondary: {
-        color: colors.darkGray,
+        color: colors.black,
         backgroundColor: '#dcdcdc',
         borderColor: '#dcdcdc',
         '&:hover': {
@@ -250,7 +265,7 @@ const theme = createTheme({
     },
     MuiIconButton: {
       root: {
-        color: colors.darkGray,
+        color: colors.black,
         '&:hover': {
           backgroundColor: 'transparent',
         },

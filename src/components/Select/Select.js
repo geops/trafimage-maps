@@ -1,27 +1,38 @@
 import React, { useRef } from 'react';
-import { Select as MuiSelect } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Select as MuiSelect, makeStyles } from '@material-ui/core';
+import propTypes from 'prop-types';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const borderWidth = 2;
-
-const useStyles = makeStyles({
-  root: {
-    borderRadius: 2,
-  },
-  outlined: {
-    paddingTop: 15,
-    paddingBottom: 15,
-  },
+const useStyles = makeStyles((theme) => {
+  return {
+    outlineHidden: {
+      '&:hover': {
+        color: theme.palette.secondary.dark,
+      },
+      '&:hover .MuiOutlinedInput-notchedOutline,& .MuiOutlinedInput-notchedOutline':
+        {
+          borderWidth: 0,
+        },
+      '& Mui-focused .MuiOutlinedInput-notchedOutline': {
+        outline: 'none',
+        borderWidth: 1,
+      },
+    },
+  };
 });
 
+const borderWidth = 1;
+
 const Select = (props) => {
+  const { hideOutline, className } = props;
   const classes = useStyles();
   const ref = useRef();
+  const selectClasses = `${className || ''}${
+    hideOutline ? ` ${classes.outlineHidden}` : ''
+  }`;
+
   return (
     <MuiSelect
-      className={classes.root}
-      classes={classes}
       variant="outlined"
       ref={ref}
       IconComponent={ExpandMoreIcon}
@@ -54,8 +65,19 @@ const Select = (props) => {
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
+      className={selectClasses}
     />
   );
+};
+
+Select.propTypes = {
+  hideOutline: propTypes.bool,
+  className: propTypes.string,
+};
+
+Select.defaultProps = {
+  hideOutline: false,
+  className: undefined,
 };
 
 export default Select;
