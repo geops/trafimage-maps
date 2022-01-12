@@ -14,9 +14,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core';
 import MuiMenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
+import Select from '../../components/Select';
 import MenuItem from '../../components/Menu/MenuItem';
 import ExportButton from '../../components/ExportButton';
 
@@ -36,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
     top: -18,
   },
   input: {
-    borderRadius: 2,
     width: 140,
   },
   select: {
@@ -44,14 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   menuItem: {
     paddingLeft: 12,
-    '&:hover': {
-      color: '#eb0000',
-      backgroundColor: 'white',
-    },
-  },
-  itemSelected: {
-    color: '#eb0000',
-    backgroundColor: 'white !important',
   },
   infoWrapper: {
     display: 'flex',
@@ -62,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     flexShrink: 0,
     paddingTop: 3,
-    color: '#767676',
+    color: theme.palette.text.secondary,
   },
 }));
 
@@ -90,10 +81,10 @@ const MenuProps = {
   PaperProps: {
     style: {
       padding: 0,
-      minWidth: 136,
-      border: '2px solid #888',
-      borderTop: '1px solid rgba(0, 0, 0, 0.30)',
-      borderRadius: '0 0 2px 2px',
+      minWidth: 138,
+      border: '1px solid #888',
+      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+      borderRadius: 0,
       marginTop: -3,
     },
   },

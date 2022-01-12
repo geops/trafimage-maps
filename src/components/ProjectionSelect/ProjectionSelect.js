@@ -1,61 +1,23 @@
 import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles, MenuItem } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 import Select from '../Select';
 import { setProjection } from '../../model/app/actions';
 
-import './ProjectionSelect.scss';
-
-const selectStyles = () => {
-  return {
-    container: () => ({
-      position: 'relative',
-      height: '30px',
-      width: '150px',
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column-reverse',
-      marginRight: '15px',
-      color: '#000',
-    }),
-    control: () => ({
-      position: 'relative',
-      height: '100%',
-      width: '100%',
-    }),
-    valueContainer: () => ({
-      position: 'relative',
-      height: 'calc(100% - 10px)',
-      width: '100%',
-      cursor: 'pointer',
-    }),
-    indicatorsContainer: () => ({
-      display: 'none',
-    }),
-    menu: (provided, state) => ({
-      ...provided,
-      width: '100%',
-      color: state.selectProps.menuColor,
-      border: '1px solid #666',
-      borderRadius: 'none',
-      borderBottom: '1px solid #e5e5e5',
-      position: 'absolute',
-      left: '0',
-      top: '-153px',
-      boxShadow: 'none',
-    }),
-    option: (styles, state) => ({
-      ...styles,
-      padding: '10px 15px',
-      color: state.isFocused ? '#c60018' : '#000',
-      '&:hover': {
-        cursor: state.isSelected ? 'default' : 'pointer',
-        color: state.isSelected ? '#000' : '#c60018',
-      },
-      backgroundColor: 'white',
-    }),
-  };
-};
+const useStyles = makeStyles((theme) => ({
+  input: {
+    width: 150,
+  },
+  select: {
+    padding: '10px 14px !important',
+  },
+  menuItem: {
+    paddingLeft: 12,
+    fontSize: theme.typography.fontSize,
+  },
+}));
 
 const propTypes = {
   projections: PropTypes.arrayOf(
@@ -68,7 +30,9 @@ const propTypes = {
 };
 
 const ProjectionSelect = ({ projections }) => {
+  const classes = useStyles();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobileWidth = useMemo(() => {
     return ['xs', 's'].includes(screenWidth);
@@ -76,15 +40,23 @@ const ProjectionSelect = ({ projections }) => {
 
   const projection = useSelector((state) => state.app.projection);
   const projectionsOptions = useMemo(() => {
-    return projections.map((p) => ({
-      label: p.label,
-      value: p.value,
-    }));
-  }, [projections]);
+    return projections.map((p) => {
+      return (
+        <MenuItem key={p.value} value={p.value} className={classes.menuItem}>
+          {t(p.label)}
+        </MenuItem>
+      );
+    });
+  }, [projections, t, classes]);
 
   const onSelectChange = useCallback(
-    (opt) => {
-      dispatch(setProjection(opt));
+    (evt) => {
+      dispatch(
+        setProjection({
+          label: evt.target.value,
+          value: evt.target.value,
+        }),
+      );
     },
     [dispatch],
   );
@@ -92,14 +64,34 @@ const ProjectionSelect = ({ projections }) => {
   if (isMobileWidth) {
     return null;
   }
+
   return (
     <Select
-      options={projectionsOptions}
-      value={projection}
-      styles={selectStyles()}
-      singleValueClassName="wkp-projection-select"
+      hideOutline
+      value={projection.value}
       onChange={onSelectChange}
-    />
+      className={classes.input}
+      classes={{ outlined: classes.select }}
+      MenuProps={{
+        anchorPosition: {
+          left: 0,
+          top: 0,
+        },
+        PaperProps: {
+          style: {
+            marginRight: 2,
+            border: `1px solid #888`,
+            borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+            borderRadius: 0,
+            marginTop: -19,
+            minWidth: 148,
+          },
+        },
+      }}
+      variant="outlined"
+    >
+      {projectionsOptions}
+    </Select>
   );
 };
 

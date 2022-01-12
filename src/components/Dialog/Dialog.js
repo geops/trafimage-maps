@@ -162,6 +162,7 @@ function Dialog(props) {
 
   // Props for non modal dialog
   let dialogProps = {
+    disableEnforceFocus: true,
     hideBackdrop: true,
     maxWidth: false,
     PaperComponent: isSmallScreen ? PaperComponent : DraggablePaperComponent,
