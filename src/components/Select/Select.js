@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => {
         {
           borderWidth: 0,
         },
-      '& Mui-focused .MuiOutlinedInput-notchedOutline': {
+      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
         outline: 'none',
         borderWidth: 1,
       },
