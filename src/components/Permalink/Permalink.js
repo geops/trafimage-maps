@@ -371,7 +371,6 @@ class Permalink extends PureComponent {
   render() {
     const { history, layerService, map } = this.props;
 
-    window.map = map;
     return (
       <RSPermalink
         params={{
