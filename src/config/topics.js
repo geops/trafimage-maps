@@ -53,8 +53,7 @@ import defaultBaseLayers, {
   beleuchtungstaerken2bLayer,
   beleuchtungstaerken3Layer,
   beleuchtungstaerken4Layer,
-  beleuchtungstaerkenSchutzgebieteLayer,
-  beleuchtungstaerkenBundesInventareLayer,
+  beleuchtungstaerkenBafuLayers,
   direktverbindungenLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -360,8 +359,7 @@ export const beleuchtungsstaerken = {
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: [
     beleuchtungDataLayer,
-    beleuchtungstaerkenBundesInventareLayer,
-    beleuchtungstaerkenSchutzgebieteLayer,
+    beleuchtungstaerkenBafuLayers,
     beleuchtungstaerken4Layer,
     beleuchtungstaerken3Layer,
     beleuchtungstaerken2bLayer,
