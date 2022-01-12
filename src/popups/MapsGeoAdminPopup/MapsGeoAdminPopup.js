@@ -1,7 +1,6 @@
 /* eslint-disable react/no-danger */
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import { Layer } from 'mobility-toolbox-js/ol';
 import Feature from 'ol/Feature';
 import { useTranslation } from 'react-i18next';
 

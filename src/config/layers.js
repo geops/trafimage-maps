@@ -1565,140 +1565,69 @@ export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
   },
 });
 
-export const blnLandschaftNaturdenkmaelerLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.bundesinventare-bln',
-  key: 'ch.bafu.bundesinventare-bln',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.bundesinventare-bln/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.bundesinventare-bln',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
+const createMapsGeoAdminStyleLayer = (key) => {
+  return new MapboxStyleLayer({
+    name: key,
+    key,
+    visible: false,
+    mapboxLayer: beleuchtungDataLayer,
+    styleLayersFilter: ({ id }) => id === key,
+    properties: {
+      legendKey: key,
+      hasInfos: true,
+      layerInfoComponent: 'MapsGeoAdminLayerInfo',
+    },
+  });
+};
 
-export const schweizNationalparkLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
-  key: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.schutzgebiete-schweizerischer_nationalpark/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
+const mapsGeoAdminSchutzgebieteLayerKeys = [
+  'ch.bafu.wrz-jagdbanngebiete_select',
+  'ch.bafu.wrz-wildruhezonen_portal',
+  'ch.bafu.waldreservate',
+  'ch.bafu.unesco-weltnaturerbe',
+  'ch.bak.schutzgebiete-unesco_weltkulturerbe',
+  'ch.bafu.schutzgebiete-smaragd',
+  'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
+  'ch.bafu.schutzgebiete-ramsar',
+  'ch.pronatura.waldreservate',
+  'ch.pronatura.naturschutzgebiete',
+  'ch.bafu.schutzgebiete-biosphaerenreservate',
+];
 
-export const ramsarLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.schutzgebiete-ramsar',
-  key: 'ch.bafu.schutzgebiete-ramsar',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.schutzgebiete-ramsar/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.schutzgebiete-ramsar',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
-
-export const schweizPaerkePerimeterLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
-  key: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter/.test(
-      id,
-    );
-  },
-  properties: {
-    legendKey: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
-
-export const weidenLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
-  key: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.bundesinventare-trockenwiesen_trockenweiden/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
-
-export const unescoLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.unesco-weltnaturerbe',
-  key: 'ch.bafu.unesco-weltnaturerbe',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.unesco-weltnaturerbe/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.unesco-weltnaturerbe',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
-
-export const vogelreservateLayer = new MapboxStyleLayer({
-  name: 'ch.bafu.bundesinventare-vogelreservate',
-  key: 'ch.bafu.bundesinventare-vogelreservate',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.bundesinventare-vogelreservate/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.bundesinventare-vogelreservate',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
-
-export const wildruhezonen = new MapboxStyleLayer({
-  name: 'ch.bafu.wrz-wildruhezonen_portal',
-  key: 'ch.bafu.wrz-wildruhezonen_portal',
-  visible: false,
-  mapboxLayer: beleuchtungDataLayer,
-  styleLayersFilter: ({ id }) => {
-    return /ch.bafu.wrz-wildruhezonen/.test(id);
-  },
-  properties: {
-    legendKey: 'ch.bafu.wrz-wildruhezonen_portal',
-    hasInfos: true,
-    layerInfoComponent: 'MapsGeoAdminLayerInfo',
-  },
-});
-
-export const beleuchtungstaerkenBafuLayers = new MapsGeoAdminLayer({
-  name: 'ch.sbb.beleuchtungsstaerken.bafu.group',
+export const beleuchtungstaerkenSchutzgebieteLayer = new MapsGeoAdminLayer({
+  name: 'ch.sbb.beleuchtungsstaerken.bafu-schutzgebiete.group',
   visible: false,
   children: [
-    blnLandschaftNaturdenkmaelerLayer,
-    schweizNationalparkLayer,
-    ramsarLayer,
-    schweizPaerkePerimeterLayer,
-    weidenLayer,
-    unescoLayer,
-    vogelreservateLayer,
-    wildruhezonen,
+    ...mapsGeoAdminSchutzgebieteLayerKeys.map(createMapsGeoAdminStyleLayer),
+  ],
+  properties: {
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'MapsGeoAdminPopup',
+  },
+});
+
+const mapsGeoAdminBundesinventareLayerKeys = [
+  'ch.bafu.bundesinventare-vogelreservate',
+  'ch.bafu.bundesinventare-auen_vegetation_alpin',
+  'ch.bafu.bundesinventare-trockenwiesen_trockenweiden_anhang2',
+  'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
+  'ch.bafu.bundesinventare-moorlandschaften',
+  'ch.bafu.bundesinventare-bln',
+  'ch.bafu.bundesinventare-jagdbanngebiete',
+  'ch.bafu.bundesinventare-hochmoore',
+  'ch.bafu.bundesinventare-flachmoore',
+  'ch.bafu.bundesinventare-auen_anhang2',
+  'ch.bafu.bundesinventare-auen',
+  'ch.bafu.bundesinventare-amphibien_wanderobjekte',
+  'ch.bafu.bundesinventare-amphibien',
+  'ch.bafu.bundesinventare-amphibien_anhang4',
+];
+
+export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
+  name: 'ch.sbb.beleuchtungsstaerken.bafu-bundesinventare.group',
+  visible: false,
+  children: [
+    ...mapsGeoAdminBundesinventareLayerKeys.map(createMapsGeoAdminStyleLayer),
   ],
   properties: {
     featureInfoEventTypes: ['singleclick'],
