@@ -354,7 +354,6 @@ class Permalink extends PureComponent {
 
   updateDepartures() {
     const { departuresFilter, platformFilter } = this.props;
-
     const state = {
       departures: departuresFilter,
       platform: platformFilter,
