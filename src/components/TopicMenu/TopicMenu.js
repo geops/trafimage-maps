@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import LayerService from 'react-spatial/LayerService';
-import { Select, MenuItem } from '@material-ui/core';
+import { withStyles, MenuItem } from '@material-ui/core';
 import Collapsible from '../Collapsible';
 import filters from '../../filters';
 import {
@@ -14,8 +14,20 @@ import {
   setFeatureInfo,
   updateDrawEditLink,
 } from '../../model/app/actions';
+import Select from '../Select/Select';
 import InfosButton from '../InfosButton';
 import TopicInfosButton from '../TopicInfosButton';
+
+const styles = (theme) => ({
+  baselayerSelect: {
+    margin: '4px 20px 5px 23px',
+    height: 30,
+    width: 'calc(100% - 42px)',
+    [theme.breakpoints.up('lg')]: {
+      display: 'none',
+    },
+  },
+});
 
 const propTypes = {
   topic: PropTypes.shape().isRequired,
@@ -28,6 +40,9 @@ const propTypes = {
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
+
+  // Mui
+  classes: PropTypes.object.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -73,7 +88,8 @@ class TopicMenu extends PureComponent {
   }
 
   render() {
-    const { t, layerService, topic, activeTopic, menuOpen } = this.props;
+    const { t, layerService, topic, activeTopic, menuOpen, classes } =
+      this.props;
     const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
     const TopicMenuBottom = topic.topicMenuBottom;
@@ -180,8 +196,7 @@ class TopicMenu extends PureComponent {
           <Collapsible isCollapsed={isCollapsed}>
             {topic.key === activeTopic.key && baseLayers.length > 1 && (
               <Select
-                variant="outlined"
-                className="wkp-base-layers-select"
+                className={classes.baselayerSelect}
                 value={
                   currentBaseLayerKey ||
                   currentBaseLayer.name ||
@@ -198,6 +213,15 @@ class TopicMenu extends PureComponent {
                     currentBaseLayerKey: baseLayer.name || baseLayer.key,
                   });
                 }}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      padding: 0,
+                      marginTop: -10,
+                    },
+                  },
+                }}
+                data-cy="baselayer-select"
               >
                 {baseLayers.map(({ name, key }) => {
                   const value = name || key;
@@ -237,4 +261,5 @@ const mapDispatchToProps = {
 export default compose(
   withTranslation(),
   connect(mapStateToProps, mapDispatchToProps),
+  withStyles(styles, { withTheme: true }),
 )(TopicMenu);

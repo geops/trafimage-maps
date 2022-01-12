@@ -73,18 +73,11 @@ const ProjectionSelect = ({ projections }) => {
       className={classes.input}
       classes={{ outlined: classes.select }}
       MenuProps={{
-        anchorPosition: {
-          left: 0,
-          top: 0,
-        },
         PaperProps: {
           style: {
-            marginRight: 2,
-            border: `1px solid #888`,
+            borderTop: `1px solid #888`,
             borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-            borderRadius: 0,
             marginTop: -19,
-            minWidth: 148,
           },
         },
       }}
