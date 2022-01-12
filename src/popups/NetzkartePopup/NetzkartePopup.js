@@ -59,6 +59,9 @@ function NetzkartePopup({ feature, coordinate }) {
     styleLayer = 'ship';
   }
 
+  // TODO: verify that this code is used, it seems the airport label is never displayed.
+  // because there is no translations with flug text and the indexOf test seems wrong
+  // (it should be > -1).
   const isAirport = styleLayer && styleLayer.indexOf('flug') > 0;
 
   const stationTimetableUrl = t('station_timetable_url').replace(
