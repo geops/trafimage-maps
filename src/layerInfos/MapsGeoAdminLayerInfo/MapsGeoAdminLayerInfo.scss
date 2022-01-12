@@ -1,4 +1,6 @@
 .wkp-maps-geo-admin-layer-info {
+  max-height: 50vh;
+
   .bod-title {
     font-family: 'SBBWeb-Bold', Arial, sans-serif;
   }
@@ -9,6 +11,7 @@
 
   .wkp-maps-geo-admin-layer-info-footer {
     margin: 10px 0;
+    padding-bottom: 20px;
 
     img {
       margin: 10px 0;
