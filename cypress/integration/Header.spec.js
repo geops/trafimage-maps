@@ -119,13 +119,13 @@ describe('Header components', () => {
 
       it(`should display language select`, () => {
         setViewPort(viewport);
-        cy.get('.wkp-single-value-wrapper').should('be.visible');
+        cy.get('[data-cy=lang-select]').should('be.visible');
 
         // Click the react-select element
-        cy.get('.wkp-header .css-m869aq-ValueContainer').click();
+        cy.get('[data-cy=lang-select]').click();
 
         // The select list should open
-        cy.get('.wkp-header .css-13ee3a5-menu').should('be.visible');
+        cy.get('[data-cy=lang-select-options]').should('be.visible');
       });
 
       it(`should display search input`, () => {

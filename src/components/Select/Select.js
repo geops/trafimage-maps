@@ -1,67 +1,83 @@
 import React, { useRef } from 'react';
-import PropTypes from 'prop-types';
-import ReactSelect from 'react-select';
-import SingleValue from './SingleValue';
+import { Select as MuiSelect, makeStyles } from '@material-ui/core';
+import propTypes from 'prop-types';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
-  value: PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  }).isRequired,
-  styles: PropTypes.object.isRequired,
-  singleValueClassName: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  selectLabel: PropTypes.element,
-};
+const useStyles = makeStyles((theme) => {
+  return {
+    outlineHidden: {
+      '&:hover': {
+        color: theme.palette.secondary.dark,
+      },
+      '&:hover .MuiOutlinedInput-notchedOutline,& .MuiOutlinedInput-notchedOutline':
+        {
+          borderWidth: 0,
+        },
+      '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        outline: 'none',
+        borderWidth: 1,
+      },
+    },
+  };
+});
 
-const defaultProps = {
-  selectLabel: null,
-  singleValueClassName: null,
-};
+const borderWidth = 1;
 
-const Select = ({
-  options,
-  value,
-  styles,
-  onChange,
-  singleValueClassName,
-  selectLabel,
-}) => {
+const Select = (props) => {
+  const { hideOutline, className } = props;
+  const classes = useStyles();
   const ref = useRef();
+  const selectClasses = `${className || ''}${
+    hideOutline ? ` ${classes.outlineHidden}` : ''
+  }`;
+
   return (
-    <ReactSelect
+    <MuiSelect
+      variant="outlined"
       ref={ref}
-      onKeyDown={(evt) => {
-        if (evt.key === 'Enter' && !ref.current.state.menuIsOpen) {
-          ref.current.onMenuOpen();
-        }
+      IconComponent={ExpandMoreIcon}
+      MenuProps={{
+        onEnter: (el) => {
+          /**
+           * The MUI width calculation fails because of the border.
+           * The element is always 2 x borderWidth too wide.
+           * With this hack I reduce the width to make it fit.
+           * @ignore
+           */
+          const menuEl = el;
+          menuEl.style.minWidth = `${
+            ref.current.clientWidth - borderWidth * 2
+          }px`;
+        },
+        getContentAnchorEl: null,
+        anchorOrigin: {
+          vertical: 'bottom',
+        },
+        PaperProps: {
+          style: {
+            marginRight: 2,
+            border: `${borderWidth}px solid #888`,
+            borderTop: '1px solid rgba(0, 0, 0, 0.30)',
+            borderRadius: '0 0 2px 2px',
+            marginTop: -3,
+          },
+        },
       }}
-      options={options}
-      isSearchable={false}
-      value={value}
-      styles={styles}
-      components={{
-        SingleValue: (singleValueProps) => (
-          <SingleValue
-            selectLabel={selectLabel}
-            singleValueClassName={singleValueClassName}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...singleValueProps}
-          />
-        ),
-      }}
-      onChange={onChange}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
+      className={selectClasses}
     />
   );
 };
 
-Select.propTypes = propTypes;
-Select.defaultProps = defaultProps;
+Select.propTypes = {
+  hideOutline: propTypes.bool,
+  className: propTypes.string,
+};
 
-export default React.memo(Select);
+Select.defaultProps = {
+  hideOutline: false,
+  className: undefined,
+};
+
+export default Select;

@@ -1,5 +1,12 @@
 import { createTheme } from '@material-ui/core/styles';
 
+const colors = {
+  red: '#eb0000',
+  redDark: '#c60018',
+  black: '#000',
+  gray: '#767676',
+};
+
 const breakpointValues = {
   xs: 0,
   sm: 576,
@@ -12,14 +19,15 @@ const theme = createTheme({
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {
-      main: '#000',
+      main: colors.black,
     },
     secondary: {
-      main: '#eb0000',
-      dark: '#c60018',
+      main: colors.red,
+      dark: colors.redDark,
     },
     text: {
-      primary: '#000',
+      primary: colors.black,
+      secondary: colors.gray,
     },
   },
   typography: {
@@ -41,7 +49,7 @@ const theme = createTheme({
     subtitle1: {
       fontSize: 13,
       lineHeight: '19.5px',
-      color: '#767676',
+      color: colors.gray,
     },
     button: {
       fontSize: '1em',
@@ -94,8 +102,27 @@ const theme = createTheme({
       disableRipple: true,
       disableFocusRipple: true,
     },
+    MuiMenu: {
+      transitionDuration: 0,
+    },
   },
   overrides: {
+    MuiSelect: {
+      icon: {
+        transition: 'transform 400ms',
+        color: 'inherit',
+        width: 18,
+      },
+      select: {
+        '&:focus': {
+          backgroundColor: 'white',
+        },
+      },
+      outlined: {
+        paddingTop: 15,
+        paddingBottom: 15,
+      },
+    },
     MuiPopover: {
       paper: {
         border: '2px solid #666',
@@ -150,25 +177,32 @@ const theme = createTheme({
           backgroundColor: 'transparent',
         },
         '&$selected svg': {
-          color: '#eb0000',
+          color: colors.red,
         },
       },
     },
     MuiInputBase: {
       root: {
+        borderRadius: 2,
         fontSize: '1em',
       },
     },
     MuiOutlinedInput: {
       root: {
+        borderRadius: 2,
+        borderWidth: 1,
+        boxSizing: 'border-box',
         '& $notchedOutline': {
           borderColor: '#888',
+          borderWidth: 1,
         },
         '&:hover $notchedOutline': {
           borderColor: '#888',
+          borderWidth: 1,
         },
         '&$focused $notchedOutline': {
           borderColor: '#888',
+          borderWidth: 1,
         },
       },
       focused: {},
@@ -177,6 +211,18 @@ const theme = createTheme({
     MuiMenuItem: {
       root: {
         fontSize: '14px',
+        '&:hover,&:focus': {
+          color: colors.redDark,
+          backgroundColor: 'white !important',
+        },
+      },
+    },
+    MuiListItem: {
+      root: {
+        backgroundColor: 'white !important',
+        '&:hover': {
+          backgroundColor: 'white !important',
+        },
       },
     },
     MuiButton: {
@@ -200,15 +246,15 @@ const theme = createTheme({
       },
       containedPrimary: {
         color: '#fff',
-        backgroundColor: '#eb0000',
-        borderColor: '#eb0000',
+        backgroundColor: colors.red,
+        borderColor: colors.red,
         '&:hover': {
-          borderColor: '#c60018',
-          backgroundColor: '#c60018',
+          borderColor: colors.redDark,
+          backgroundColor: colors.redDark,
         },
       },
       containedSecondary: {
-        color: '#000',
+        color: colors.black,
         backgroundColor: '#dcdcdc',
         borderColor: '#dcdcdc',
         '&:hover': {
@@ -219,7 +265,7 @@ const theme = createTheme({
     },
     MuiIconButton: {
       root: {
-        color: '#000',
+        color: colors.black,
         '&:hover': {
           backgroundColor: 'transparent',
         },
