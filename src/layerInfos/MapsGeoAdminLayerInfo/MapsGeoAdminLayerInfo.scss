@@ -1,0 +1,23 @@
+.wkp-maps-geo-admin-layer-info {
+  .bod-title {
+    font-family: 'SBBWeb-Bold', Arial, sans-serif;
+  }
+
+  .legend-footer {
+    display: none;
+  }
+
+  .wkp-maps-geo-admin-layer-info-footer {
+    margin: 10px 0;
+
+    img {
+      margin: 10px 0;
+    }
+
+    span {
+      display: flex;
+      align-items: baseline;
+      white-space: pre;
+    }
+  }
+}

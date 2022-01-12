@@ -17,7 +17,10 @@ import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
+import DirektverbindungenLayer from '../layers/DirektverbindungenLayer';
 import StationsLayer from '../layers/StationsLayer';
+import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
+import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import TralisLayer from '../layers/TralisLayer';
 
@@ -43,7 +46,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
@@ -69,6 +72,19 @@ export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'ch.sbb.tarifverbund',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
+export const beleuchtungDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.beleuchtungsstaerken.data',
+  visible: true,
+  preserveDrawingBuffer: true,
+  isBaseLayer: true,
+  isQueryable: false,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.beleuchtung',
   properties: {
     hideInLegend: true,
   },
@@ -150,7 +166,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
-  style: 'base_bright_v2',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
@@ -235,6 +251,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
     popupComponent: 'PassagierFrequenzenPopup',
+    useOverlay: true,
   },
 });
 
@@ -265,8 +282,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
   new MapboxStyleLayer({
@@ -291,8 +309,9 @@ bahnhofplaene.children = [
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-      popupComponent: 'BahnhofplanPopup',
+      popupComponent: 'StationPopup',
       radioGroup: 'bahnhofplaene',
+      useOverlay: true,
     },
   }),
 ];
@@ -380,6 +399,7 @@ export const buslines = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'BuslinesLayerInfo',
     popupComponent: 'BusLinePopup',
+    useOverlay: true,
   },
 });
 
@@ -414,6 +434,7 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
   hidePopup: (feat, layer, featureInfo) => {
     const otherFeatsClicked = featureInfo
@@ -444,6 +465,7 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
@@ -465,6 +487,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
     popupComponent: 'HandicapPopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
@@ -1147,6 +1170,7 @@ export const zweitausbildungPoisDataLayer = new TrafimageMapboxLayer({
     hideInLegend: true,
   },
 });
+
 export const zweitausbildungPois = new Layer({
   name: 'ch.sbb.zweitausbildung.tourist.pois.group',
   visible: true,
@@ -1483,6 +1507,243 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
+});
+
+export const beleuchtungstaerken1Layer = new BeleuchtungsLayer({
+  name: 'ch.sbb.beleuchtungsstaerken1',
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '1',
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
+  },
+});
+
+export const beleuchtungstaerken2aLayer = new BeleuchtungsLayer({
+  name: 'ch.sbb.beleuchtungsstaerken2a',
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2a',
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
+  },
+});
+
+export const beleuchtungstaerken2bLayer = new BeleuchtungsLayer({
+  name: 'ch.sbb.beleuchtungsstaerken2b',
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2b',
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
+  },
+});
+
+export const beleuchtungstaerken3Layer = new BeleuchtungsLayer({
+  name: 'ch.sbb.beleuchtungsstaerken3',
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '3',
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
+  },
+});
+
+export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
+  name: 'ch.sbb.beleuchtungsstaerken4',
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '4',
+  properties: {
+    hasInfos: true,
+    popupComponent: 'BeleuchtungsPopup',
+    layerInfoComponent: 'BeleuchtungLayerInfo',
+  },
+});
+
+export const blnLandschaftNaturdenkmaelerLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.bundesinventare-bln',
+  key: 'ch.bafu.bundesinventare-bln',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.bundesinventare-bln/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.bundesinventare-bln',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const schweizNationalparkLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
+  key: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.schutzgebiete-schweizerischer_nationalpark/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.schutzgebiete-schweizerischer_nationalpark',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const ramsarLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.schutzgebiete-ramsar',
+  key: 'ch.bafu.schutzgebiete-ramsar',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.schutzgebiete-ramsar/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.schutzgebiete-ramsar',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const schweizPaerkePerimeterLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
+  key: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter/.test(
+      id,
+    );
+  },
+  properties: {
+    legendKey: 'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const weidenLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
+  key: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.bundesinventare-trockenwiesen_trockenweiden/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.bundesinventare-trockenwiesen_trockenweiden',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const unescoLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.unesco-weltnaturerbe',
+  key: 'ch.bafu.unesco-weltnaturerbe',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.unesco-weltnaturerbe/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.unesco-weltnaturerbe',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const vogelreservateLayer = new MapboxStyleLayer({
+  name: 'ch.bafu.bundesinventare-vogelreservate',
+  key: 'ch.bafu.bundesinventare-vogelreservate',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.bundesinventare-vogelreservate/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.bundesinventare-vogelreservate',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const wildruhezonen = new MapboxStyleLayer({
+  name: 'ch.bafu.wrz-wildruhezonen_portal',
+  key: 'ch.bafu.wrz-wildruhezonen_portal',
+  visible: false,
+  mapboxLayer: beleuchtungDataLayer,
+  styleLayersFilter: ({ id }) => {
+    return /ch.bafu.wrz-wildruhezonen/.test(id);
+  },
+  properties: {
+    legendKey: 'ch.bafu.wrz-wildruhezonen_portal',
+    hasInfos: true,
+    layerInfoComponent: 'MapsGeoAdminLayerInfo',
+  },
+});
+
+export const beleuchtungstaerkenBafuLayers = new MapsGeoAdminLayer({
+  name: 'ch.sbb.beleuchtungsstaerken.bafu.group',
+  visible: false,
+  children: [
+    blnLandschaftNaturdenkmaelerLayer,
+    schweizNationalparkLayer,
+    ramsarLayer,
+    schweizPaerkePerimeterLayer,
+    weidenLayer,
+    unescoLayer,
+    vogelreservateLayer,
+    wildruhezonen,
+  ],
+  properties: {
+    featureInfoEventTypes: ['singleclick'],
+    popupComponent: 'MapsGeoAdminPopup',
+  },
+});
+
+const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
+
+export const direktverbindungenDay = new DirektverbindungenLayer({
+  name: `${DIREKTVERBINDUNGEN_KEY}.day`,
+  mapboxLayer: dataLayer,
+  visible: false,
+  properties: {
+    routeType: 'day',
+    hasInfos: true,
+    layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
+    popupComponent: 'DirektverbindungPopup',
+    useOverlay: true,
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
+  },
+});
+
+export const direktverbindungenNight = new DirektverbindungenLayer({
+  name: `${DIREKTVERBINDUNGEN_KEY}.night`,
+  mapboxLayer: dataLayer,
+  visible: false,
+  properties: {
+    routeType: 'night',
+    hasInfos: true,
+    layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
+    popupComponent: 'DirektverbindungPopup',
+    useOverlay: true,
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
+  },
+});
+
+export const direktverbindungenLayer = new Layer({
+  name: DIREKTVERBINDUNGEN_KEY,
+  children: [direktverbindungenDay, direktverbindungenNight],
+  isQueryable: false,
+  visible: false,
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'DirektVerbindungenLayerInfo',
   },
 });
 

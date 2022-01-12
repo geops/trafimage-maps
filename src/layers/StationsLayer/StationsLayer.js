@@ -27,7 +27,8 @@ class StationsLayer extends MapboxStyleLayer {
       },
       properties: {
         hideInLegend: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: 'StationPopup',
+        useOverlay: true,
       },
       ...options,
     });
@@ -167,6 +168,13 @@ class StationsLayer extends MapboxStyleLayer {
         mbMap.removeSource(id);
       }
     }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  // Deactivate select style.
+  select() {
+    this.setHoverState(this.highlightedFeatures, false);
+    this.setHoverState(this.selectedFeatures, false);
   }
 }
 

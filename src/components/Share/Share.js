@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
 import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
-import BlankLink from '@geops/react-ui/components/BlankLink';
+import { Link } from '@material-ui/core';
 import SharePermalinkButton from '../SharePermalinkButton';
 
 const socialShareConfig = [
@@ -46,12 +46,14 @@ const replaceParams = (url, language, appBaseUrl) => {
 
 const renderConf = (conf, t, lang, appBaseUrl) => (
   <div className={conf.className} key={conf.title}>
-    <BlankLink
+    <Link
       href={replaceParams(conf.url, lang, appBaseUrl)}
       title={t(conf.title)}
+      target="_blank"
+      tabIndex="0"
     >
       {conf.icon}
-    </BlankLink>
+    </Link>
   </div>
 );
 

@@ -1,34 +1,79 @@
+/* eslint-disable no-undef */
+
+const expectBaseLayersSelectVisible = () => {
+  cy.get('.rs-base-layer-switcher').should('be.hidden');
+  cy.get('.wkp-base-layers-select').should('be.visible');
+};
+
+const expectBaseLayersSwitcherVisible = () => {
+  cy.get('.rs-base-layer-switcher').should('be.visible');
+  cy.get('.wkp-base-layers-select').should('be.hidden');
+};
+const expectDevPortalLinkVisible = () => {
+  cy.get('.wkp-dev-portal-link').should('be.visible');
+};
+const expectDevPortalLinkHidden = () => {
+  cy.get('.wkp-dev-portal-link').should('be.hidden');
+};
+
+const expectOnWidthXs = () => {
+  expectBaseLayersSelectVisible();
+  expectDevPortalLinkHidden();
+};
+
+// const expectOnWidthS = () => {
+//   expectBaseLayersSelectVisible();
+//   expectDevPortalLinkVisible();
+// };
+
+const expectOnWidthMd = () => {
+  expectBaseLayersSelectVisible();
+  expectDevPortalLinkVisible();
+};
+
+const expectOnWidthLg = () => {
+  expectBaseLayersSwitcherVisible();
+  expectDevPortalLinkVisible();
+};
+
 const viewports = [
   // Desktop
   {
     size: [1440, 900],
+    otherExpect: [expectOnWidthLg],
   },
   // Large mobile phone
   {
     preset: 'samsung-s10',
     orientation: 'portrait',
+    otherExpect: [expectOnWidthXs],
   },
   {
     preset: 'samsung-s10',
     orientation: 'landscape',
+    otherExpect: [expectOnWidthMd],
   },
   // Small mobile phone
   {
     preset: 'iphone-3',
     orientation: 'portrait',
+    otherExpect: [expectOnWidthXs],
   },
   {
     preset: 'iphone-3',
     orientation: 'landscape',
+    otherExpect: [expectOnWidthXs],
   },
   // Tablet
   {
     preset: 'ipad-2',
     orientation: 'portrait',
+    otherExpect: [expectOnWidthMd],
   },
   {
     preset: 'ipad-2',
     orientation: 'landscape',
+    otherExpect: [expectOnWidthLg],
   },
 ];
 
@@ -74,13 +119,13 @@ describe('Header components', () => {
 
       it(`should display language select`, () => {
         setViewPort(viewport);
-        cy.get('.wkp-single-value-wrapper').should('be.visible');
+        cy.get('[data-cy=lang-select]').should('be.visible');
 
         // Click the react-select element
-        cy.get('.wkp-header .css-m869aq-ValueContainer').click();
+        cy.get('[data-cy=lang-select]').click();
 
         // The select list should open
-        cy.get('.wkp-header .css-13ee3a5-menu').should('be.visible');
+        cy.get('[data-cy=lang-select-options]').should('be.visible');
       });
 
       it(`should display search input`, () => {
@@ -104,6 +149,12 @@ describe('Header components', () => {
           .focus()
           .type('B')
           .should('have.value', 'B');
+      });
+
+      it('should be visible depending on size', () => {
+        setViewPort(viewport);
+        cy.get('.wkp-menu-header').click(); // Ensure the menu is open
+        viewport.otherExpect.forEach((expect) => expect());
       });
     });
   });

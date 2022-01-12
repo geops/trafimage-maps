@@ -155,7 +155,31 @@ class Map extends PureComponent {
     layerService
       .getFeatureInfoAtCoordinate(coordinate, layers)
       .then((newInfos) => {
-        let infos = newInfos.filter(({ features }) => features.length);
+        // If the featureInfos contains one from a priority layer.
+        // We display only these featureInfos.
+        // See DirektVerbindungen layers for an example.
+        const hasPriorityLayer = newInfos.find(
+          ({ features, layer }) =>
+            features.length && layer.get('priorityFeatureInfo'),
+        );
+
+        let infos = newInfos.filter(({ features, layer }) => {
+          const allow = features.length;
+          if (hasPriorityLayer) {
+            return allow && layer.get('priorityFeatureInfo');
+          }
+          return allow;
+        });
+
+        // Clear the highlight style when there is priority layers
+        if (hasPriorityLayer) {
+          newInfos.forEach(({ layer }) => {
+            if (layer.highlight && !layer.get('priorityFeatureInfo')) {
+              layer.highlight([]);
+            }
+          });
+        }
+
         map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
         const isClickInfoOpen =
@@ -200,6 +224,7 @@ class Map extends PureComponent {
       dispatchHtmlEvent,
       activeTopic,
       showPopups,
+      featureInfo,
     } = this.props;
 
     // If there is no popup to display just ignore the click event.
@@ -211,15 +236,35 @@ class Map extends PureComponent {
     layerService
       .getFeatureInfoAtCoordinate(coordinate, layers)
       .then((featureInfos) => {
-        // Display only info of layers with a popup defined.
-        let infos = featureInfos
-          .reverse()
-          .filter(
-            ({ layer }) =>
-              layer.get('popupComponent') && !layer.get('showPopupOnHover'),
-          );
+        // If the featureInfos contains one from a priority layer.
+        // We display only these featureInfos.
+        // See DirektVerbindungen layers for an example.
+        const hasPriorityLayer = featureInfos.find(
+          ({ features, layer }) =>
+            features.length && layer.get('priorityFeatureInfo'),
+        );
 
-        // Clear the select style.
+        // Display only info of layers with a popup defined.
+        let infos = featureInfos.reverse().filter(({ layer }) => {
+          const allow =
+            layer.get('popupComponent') && !layer.get('showPopupOnHover');
+          if (hasPriorityLayer) {
+            // Clear the highlight style when there is priority layers
+            if (layer.highlight && !layer.get('priorityFeatureInfo')) {
+              layer.highlight([]);
+            }
+            return allow && layer.get('priorityFeatureInfo');
+          }
+          return allow;
+        });
+
+        // Clear the previous select style.
+        (featureInfo || []).forEach(({ layer }) => {
+          if (layer.select) {
+            layer.select([]);
+          }
+        });
+
         infos.forEach(({ layer, features }) => {
           if (layer.select) {
             layer.select(features);

@@ -1,12 +1,11 @@
 import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { makeStyles, MenuItem } from '@material-ui/core';
 import Select from '../Select';
 import { setLanguage } from '../../model/app/actions';
 import { ReactComponent as SBBGlobe } from '../../img/sbb/globe_210_large.svg';
 
-import './LanguageSelect.scss';
-
-const options = [
+const optionsDesktop = [
   { label: 'Deutsch', value: 'de' },
   { label: 'Français', value: 'fr' },
   { label: 'Italiano', value: 'it' },
@@ -20,103 +19,122 @@ const optionsMobile = [
   { label: 'EN', value: 'en' },
 ];
 
-const getOptionColor = (isFocused, isSelected) => {
-  if (isFocused) {
-    return '#c60018';
-  }
-  if (isSelected) {
-    return '#000';
-  }
-  return '#767676';
-};
-
-const selectStyles = (isMobile) => {
-  return {
-    container: () => ({
-      position: 'relative',
-      height: 'calc(100% - 20px)',
-      maxHeight: '38px',
-      width: isMobile ? '55px' : '120px',
-      display: 'flex',
-      alignItems: 'center',
-      flexDirection: 'column',
-      marginRight: isMobile ? '5px' : '0',
-      color: 'grey',
-    }),
-    control: () => ({
-      position: 'relative',
-      height: '100%',
-      width: '100%',
-    }),
-    valueContainer: () => ({
-      position: 'relative',
-      height: 'calc(100% - 10px)',
-      width: '100%',
-      cursor: 'pointer',
-    }),
-    indicatorsContainer: () => ({
-      display: 'none',
-    }),
-    menu: (provided, state) => ({
-      ...provided,
-      width: '100%',
-      color: state.selectProps.menuColor,
-      border: '1px solid #666',
-      borderRadius: 'none',
-      borderTop: 'none',
-      position: 'absolute',
-      left: '0',
-      margin: '0',
-    }),
-    option: (styles, state) => ({
-      ...styles,
-      padding: '10px 15px',
-      color: getOptionColor(
-        isMobile ? false : state.isFocused,
-        state.isSelected,
-      ),
-      '&:hover': {
-        cursor: state.isSelected ? 'default' : 'pointer',
-        color: getOptionColor(
-          isMobile ? false : state.isFocused,
-          state.isSelected,
-        ),
-      },
-      backgroundColor: 'white',
-    }),
-  };
-};
+const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    position: 'relative',
+    paddingTop: 2,
+  },
+  icon: {
+    width: (props) => (props.isMobileWidth ? 25 : 28),
+    height: (props) => (props.isMobileWidth ? 25 : 28),
+  },
+  currentValue: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  input: {
+    width: (props) => (props.isMobileWidth ? 55 : 120),
+    color: theme.palette.text.secondary,
+  },
+  select: {
+    padding: '6px 10px !important',
+    '& path': {
+      stroke: theme.palette.text.secondary,
+    },
+    '&:hover': {
+      color: theme.palette.secondary.dark,
+    },
+    '&:hover path': {
+      stroke: theme.palette.secondary.dark,
+    },
+  },
+  menuItem: {
+    paddingLeft: 12,
+    color: theme.palette.text.secondary,
+  },
+}));
 
 const LanguageSelect = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
-
-  const [inputValue] = useMemo(() => {
-    return options.filter((opt) => opt.value === language);
-  }, [language]);
-
-  const isMobileWidth = useMemo(() => {
-    return ['xs', 's'].includes(screenWidth);
-  }, [screenWidth]);
+  const isTabletWidth = useMemo(
+    () => ['m'].includes(screenWidth),
+    [screenWidth],
+  );
+  const isMobileWidth = useMemo(
+    () => ['xs', 's'].includes(screenWidth),
+    [screenWidth],
+  );
+  const classes = useStyles({ isMobileWidth });
+  const options = isMobileWidth ? optionsMobile : optionsDesktop;
+  const inputValue = useMemo(
+    () => options.find((opt) => opt.value === language),
+    [language, options],
+  );
 
   const onSelectChange = useCallback(
     (opt) => {
-      dispatch(setLanguage(opt.value));
+      dispatch(setLanguage(opt.target.value));
     },
     [dispatch],
   );
 
+  const langOptions = useMemo(() => {
+    return options.map((opt) => {
+      return (
+        <MenuItem
+          key={opt.value}
+          value={opt.value}
+          className={classes.menuItem}
+        >
+          {opt.label}
+        </MenuItem>
+      );
+    });
+  }, [options, classes]);
+
   return (
-    <Select
-      options={isMobileWidth ? optionsMobile : options}
-      value={inputValue}
-      styles={selectStyles(isMobileWidth)}
-      selectLabel={
-        <SBBGlobe focusable={false} className="wkp-single-value-globe" />
-      }
-      onChange={onSelectChange}
-    />
+    <div className={classes.wrapper}>
+      <Select
+        hideOutline
+        data-cy="lang-select"
+        value={inputValue.value}
+        renderValue={(opt) => (
+          <span className={classes.currentValue}>
+            <SBBGlobe
+              focusable={false}
+              className={`${classes.icon} wkp-single-value-globe`}
+            />
+            {!isMobileWidth && options.find((lang) => lang.value === opt).label}
+          </span>
+        )}
+        onChange={onSelectChange}
+        className={classes.input}
+        classes={{ outlined: classes.select, icon: classes.expandIcon }}
+        MenuProps={{
+          'data-cy': 'lang-select-options',
+          getContentAnchorEl: null,
+          anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'left',
+          },
+          PaperProps: {
+            style: {
+              border: `1px solid #888`,
+              borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+              borderRadius: 0,
+              marginTop: isMobileWidth || isTabletWidth ? 28 : 38,
+              minWidth: isMobileWidth ? 53 : 118,
+              top: '26 !important',
+            },
+          },
+        }}
+        variant="outlined"
+      >
+        {langOptions}
+      </Select>
+    </div>
   );
 };
 

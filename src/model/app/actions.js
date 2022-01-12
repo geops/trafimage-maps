@@ -38,10 +38,28 @@ export const setLanguage = (data) => {
 };
 export const setProjection = (data) => ({ type: SET_PROJECTION, data });
 
-export const setFeatureInfo = (data) => ({
-  type: SET_FEATURE_INFO,
-  data,
-});
+export const setFeatureInfo = (data) => (dispatch, getState) => {
+  const {
+    app: { featureInfo },
+  } = getState();
+
+  if (!data.length) {
+    // Clean previous highlight and select styles.
+    featureInfo.forEach(({ layer }) => {
+      if (layer.highlight) {
+        layer.highlight([]);
+      }
+      if (layer.select) {
+        layer.select([]);
+      }
+    });
+  }
+
+  dispatch({
+    type: SET_FEATURE_INFO,
+    data,
+  });
+};
 
 export const setMenuOpen = (data) => ({ type: SET_MENU_OPEN, data });
 
@@ -72,7 +90,15 @@ export const setScreenWidth = (data) => ({
   data,
 });
 
-export const setSearchService = (data) => ({ type: SET_SEARCH_SERVICE, data });
+export const setSearchService = (data) => (dispatch, getState) => {
+  const {
+    app: { searchService },
+  } = getState();
+  if (searchService && searchService !== data) {
+    searchService.clearHighlight();
+  }
+  dispatch({ type: SET_SEARCH_SERVICE, data });
+};
 
 export const setCartaroUrl = (data) => ({ type: SET_CARTARO_URL, data });
 

@@ -204,7 +204,7 @@ describe('TopicElements', () => {
       );
     });
 
-    expect(wrapper.find('Header').length).toBe(2);
+    expect(wrapper.find('Header').length).toBe(1);
     expect(wrapper.find('Memo(Footer)').length).toBe(1);
     expect(wrapper.find('BaseLayerSwitcher').length).toBe(1);
     expect(wrapper.find('Permalink').length).toBe(2);

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
-import Button from '@geops/react-ui/components/Button';
+import { IconButton } from '@material-ui/core';
 import { setSelectedForInfos } from '../../model/app/actions';
 
 function InfosButton({ selectedInfo, className }) {
@@ -25,7 +25,7 @@ function InfosButton({ selectedInfo, className }) {
   }, [className, isSelected]);
 
   return (
-    <Button
+    <IconButton
       className={classNam}
       title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
       onClick={() => {
@@ -33,7 +33,7 @@ function InfosButton({ selectedInfo, className }) {
       }}
     >
       <FaInfoCircle focusable={false} />
-    </Button>
+    </IconButton>
   );
 }
 

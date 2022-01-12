@@ -16,14 +16,15 @@ const propTypes = {
 class ZweitausbildungPoisPopup extends PureComponent {
   render() {
     const { feature, layer, t } = this.props;
+    // if feature is an array, layer is also an array
     return (
       <div className="wkp-zweitausbildung-pois-popup">
-        {feature.map((feat) => (
+        {(Array.isArray(feature) ? feature : [feature]).map((feat, index) => (
           <div
             className="wkp-zweitausbildung-pois-popup-row"
             key={feat.get('name')}
-            onMouseEnter={() => layer.highlightFromPopup(feat, true)}
-            onMouseLeave={() => layer.highlightFromPopup(feat, false)}
+            onMouseEnter={() => layer[index].highlightFromPopup(feat, true)}
+            onMouseLeave={() => layer[index].highlightFromPopup(feat, false)}
           >
             <b>{feat.get('name')}</b>
             {!!feat.get('rail_away') && (

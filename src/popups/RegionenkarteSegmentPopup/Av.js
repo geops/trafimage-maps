@@ -6,7 +6,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import { makeStyles, MenuItem } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
-import SBBSelect from '../../components/Select/SBBSelect';
+import Select from '../../components/Select';
 import Person from './Person';
 import Line from './Line';
 import LineData from './LineData';
@@ -100,7 +100,7 @@ function Av({ layer, feature, onChangeRole }) {
       <div className={classes.description}>
         <div>
           {isIntern && (
-            <SBBSelect
+            <Select
               value={role}
               onChange={(evt) => setRole(evt.target.value)}
               fullWidth
@@ -114,7 +114,7 @@ function Av({ layer, feature, onChangeRole }) {
                     </MenuItem>
                   );
                 })}
-            </SBBSelect>
+            </Select>
           )}
           {!isIntern && (
             <b>{t(role === 'av_bnb' ? 'Koordinator Bahnnahes Bauen' : 'Av')}</b>

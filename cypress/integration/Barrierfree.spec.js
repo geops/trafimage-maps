@@ -1,4 +1,5 @@
 import 'cypress-plugin-tab';
+import 'cypress-enter-plugin';
 import lang from '../../src/lang/de.json';
 
 describe('Barrierfree E2E', () => {
@@ -14,17 +15,23 @@ describe('Barrierfree E2E', () => {
     );
   });
 
-  it('should be able to navigate between menu and dialog with Tab.', () => {
+  it.only('should be able to navigate between menu and dialog with Tab.', () => {
     // Move focus from menu to layer information button.
-    cy.tab().tab();
-    cy.focused().should('have.attr', 'class', 'wkp-info-bt wkp-active');
+    cy.focused().tab().tab();
+    ['wkp-info-bt', 'wkp-active'].forEach((cls) => {
+      cy.focused().should('have.class', cls);
+    });
 
     // Press enter and focus dialog closer.
     cy.focused().type('{enter}');
-    cy.focused().should('have.attr', 'class', 'tm-button tm-dialog-close-bt');
+    cy.focused().then(($el) => {
+      expect($el[0].title).to.equal('Dialog schließen');
+    });
 
     // Closer dialog and focus back on the information button.
     cy.focused().type('{enter}');
-    cy.focused().should('have.attr', 'class', 'wkp-info-bt wkp-active');
+    ['wkp-info-bt', 'wkp-active'].forEach((cls) => {
+      cy.focused().should('have.class', cls);
+    });
   });
 });

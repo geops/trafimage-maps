@@ -1,169 +1,132 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DrawRemoveDialog should match snapshot 1`] = `
-<div
-  className="wkp-dialog"
->
-  <div
-    className="tm-modal"
-    style={
-      Object {
-        "display": "block",
-      }
-    }
+<div>
+  <div role="presentation"
+       class="MuiDialog-root"
+       name="drawRemoveDialog"
+       style="position: fixed; z-index: 1300; right: 0px; bottom: 0px; top: 0px; left: 0px;"
   >
-    <div
-      className="tm-dialog-container makeStyles-dialogContainer-1"
+    <div class="MuiBackdrop-root"
+         aria-hidden="true"
+         style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     >
-      <div
-        className="tm-dialog-header "
+    </div>
+    <div tabindex="0"
+         data-test="sentinelStart"
+    >
+    </div>
+    <div class="MuiDialog-container MuiDialog-scrollPaper makeStyles-scrollPaperModal-9"
+         style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+         role="none presentation"
+         tabindex="-1"
+    >
+      <div class="MuiPaper-root MuiDialog-paper makeStyles-paperModal-6 tm-dialog-container makeStyles-dialogContainer-1 MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation4"
+           role="dialog"
       >
-        <div
-          className="tm-header-left"
-        />
-        <span>
-          Zeichnung löschen
-        </span>
-        <div
-          aria-label="Dialog schließen"
-          className="tm-button tm-dialog-close-bt"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-          title="Dialog schließen"
+        <div class="MuiDialogTitle-root makeStyles-title-14 makeStyles-title-17"
+             id="draggable-dialog-title"
         >
-          <svg
-            fill="currentColor"
-            focusable={false}
-            height="1em"
-            stroke="currentColor"
-            strokeWidth="0"
-            style={
-              Object {
-                "color": undefined,
-              }
-            }
-            viewBox="0 0 24 24"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
+          <h4 class="MuiTypography-root makeStyles-title-14 makeStyles-title-17 MuiTypography-h4">
+            <span>
+              Zeichnung löschen
+            </span>
+          </h4>
+          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-13"
+                  tabindex="0"
+                  type="button"
+                  title="Dialog schließen"
           >
-            <path
-              d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-            />
-          </svg>
-        </div>
-      </div>
-      <div
-        className="tm-dialog-body"
-      >
-        <div>
-          <div>
-            Wollen Sie den Plan wirklich aus der Karte löschen?
-            <br />
-            Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link
-            :
-          </div>
-          <div
-            className="makeStyles-link-2"
-          >
-            <div
-              className="makeStyles-input-4"
-            >
-              <input
-                className="tm-permalink-input"
-                onChange={[Function]}
-                onClick={[Function]}
-                tabIndex="0"
-                title=""
-                type="text"
-                value=""
-              />
-              <div
-                aria-label=""
-                className="tm-permalink-bt"
-                onClick={[Function]}
-                onKeyPress={[Function]}
-                role="button"
-                tabIndex={0}
-                title=""
+            <span class="MuiIconButton-label">
+              <svg stroke="currentColor"
+                   fill="currentColor"
+                   stroke-width="0"
+                   viewbox="0 0 24 24"
+                   height="1em"
+                   width="1em"
+                   xmlns="http://www.w3.org/2000/svg"
               >
-                <svg
-                  fill="currentColor"
-                  focusable={false}
-                  height="1em"
-                  stroke="currentColor"
-                  strokeWidth="0"
-                  style={
-                    Object {
-                      "color": undefined,
-                    }
-                  }
-                  viewBox="0 0 24 24"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
+                <path fill="none"
+                      d="M0 0h24v24H0z"
                 >
-                  <path
-                    d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
-                  />
-                </svg>
+                </path>
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+                </path>
+              </svg>
+            </span>
+            <span class="MuiTouchRipple-root">
+            </span>
+          </button>
+        </div>
+        <div class="makeStyles-dialogBody-10 ">
+          <div>
+            <div>
+              Wollen Sie den Plan wirklich aus der Karte löschen?
+              <br>
+              Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link:
+            </div>
+            <div class="makeStyles-link-2">
+              <div class="makeStyles-input-18">
+                <input type="text"
+                       tabindex="0"
+                       title
+                       class="tm-permalink-input"
+                       value
+                >
+                <div role="button"
+                     tabindex="0"
+                     class="tm-permalink-bt"
+                     title
+                     aria-label
+                >
+                  <svg stroke="currentColor"
+                       fill="currentColor"
+                       stroke-width="0"
+                       viewbox="0 0 24 24"
+                       focusable="false"
+                       height="1em"
+                       width="1em"
+                       xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path fill="none"
+                          d="M0 0h24v24H0z"
+                    >
+                    </path>
+                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z">
+                    </path>
+                  </svg>
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            className="makeStyles-footer-3"
-          >
-            <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-text"
-              disabled={false}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={0}
-              type="button"
-            >
-              <span
-                className="MuiButton-label"
+            <div class="makeStyles-footer-3">
+              <button class="MuiButtonBase-root MuiButton-root MuiButton-text"
+                      tabindex="0"
+                      type="button"
               >
-                Löschen
-              </span>
-            </button>
-            <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
-              disabled={false}
-              onBlur={[Function]}
-              onClick={[Function]}
-              onDragLeave={[Function]}
-              onFocus={[Function]}
-              onKeyDown={[Function]}
-              onKeyUp={[Function]}
-              onMouseDown={[Function]}
-              onMouseLeave={[Function]}
-              onMouseUp={[Function]}
-              onTouchEnd={[Function]}
-              onTouchMove={[Function]}
-              onTouchStart={[Function]}
-              tabIndex={0}
-              type="button"
-            >
-              <span
-                className="MuiButton-label"
+                <span class="MuiButton-label">
+                  Löschen
+                </span>
+                <span class="MuiTouchRipple-root">
+                </span>
+              </button>
+              <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+                      tabindex="0"
+                      type="button"
               >
-                Abbrechen
-              </span>
-            </button>
+                <span class="MuiButton-label">
+                  Abbrechen
+                </span>
+                <span class="MuiTouchRipple-root">
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div tabindex="0"
+         data-test="sentinelEnd"
+    >
     </div>
   </div>
 </div>

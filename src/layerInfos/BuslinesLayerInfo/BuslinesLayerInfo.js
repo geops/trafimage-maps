@@ -7,7 +7,7 @@ const comps = {
       Der geographisch exakte Verlauf der Buslinien wurde über ein
       automatisiertes Routing-Verfahren (
       <a
-        href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs"
+        href="https://geops.ch/blog/mapping-von-netzen-des-offentlichen-verkehrs"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -22,7 +22,7 @@ const comps = {
       Le tracé géographique exact des lignes de bus a été déduit d’une procédure
       d’itinérance automatisée (
       <a
-        href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs"
+        href="https://geops.ch/en/blog/mapping-public-transit-networks"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -37,7 +37,7 @@ const comps = {
       The exact geographic course of the bus routes was established via an
       automated routing procedure (
       <a
-        href="http://geops.de/node/171?language=en"
+        href="https://geops.ch/en/blog/mapping-public-transit-networks"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -51,7 +51,7 @@ const comps = {
       Il tracciato geografico esatto delle linee di autobus è stato ricavato
       tramite una procedura di routing automatizzata (
       <a
-        href="http://geops.de/blog/mapping-von-netzen-des-%C3%B6ffentlichen-verkehrs"
+        href="https://geops.ch/en/blog/mapping-public-transit-networks"
         rel="noopener noreferrer"
         target="_blank"
       >
