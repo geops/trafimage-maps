@@ -9,7 +9,7 @@ import {
 import GeoJSON from 'ol/format/GeoJSON';
 
 import Search from '../Search';
-import LayerHelper from '../../layers/layerHelper';
+import getGreaterNumber from '../../utils/getGreaterNumber';
 
 const lineMeasuresRegExp = new RegExp(
   '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
@@ -21,16 +21,11 @@ const lineKilometerRegExp = new RegExp(
 
 const color = 'rgba(0,61,155,0.5)';
 
-const lineResolutions = [900, 612, 611, 306, 305, 79, 78, 50];
-const lineGeneralisations = {
-  900: 5,
-  612: 5,
-  611: 10, // zoom 8
-  306: 10,
-  305: 30, // zoom 9
-  79: 30,
-  78: 100, // zoom 11
-  50: 100,
+const genLevelByMapRes = {
+  21685.61508959875: 5, // zoom 0
+  611.49622628141: 10, // zoom 8
+  305.748113140705: 30, // zoom 9
+  76.43702828517625: 100, // zoom 11
 };
 
 class Lines extends Search {
@@ -38,18 +33,18 @@ class Lines extends Search {
     super();
     this.dataProjection = 'EPSG:21781';
 
-    this.highlightStyle = (f, r) => {
-      const gen = LayerHelper.getGeneralization(
-        r,
-        lineResolutions,
-        lineGeneralisations,
+    this.highlightStyle = (feature, resolution) => {
+      const dataRes = getGreaterNumber(
+        resolution,
+        Object.keys(genLevelByMapRes),
       );
+      const gen = genLevelByMapRes[dataRes];
       const format = new GeoJSON();
       const geometry =
-        format.readGeometry(f.get('geoms')[gen], {
+        format.readGeometry(feature.get('geoms')[gen], {
           dataProjection: this.dataProjection,
           featureProjection: 'EPSG:3857',
-        }) || f.getGeometry();
+        }) || feature.getGeometry();
 
       return geometry instanceof MultiLineString ||
         geometry instanceof GeometryCollection
