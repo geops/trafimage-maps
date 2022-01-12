@@ -1,6 +1,4 @@
 .wkp-handicap-popup {
-  max-width: 420px;
-
   p {
     margin-block-start: 0;
     margin-block-end: 0;
@@ -37,24 +35,14 @@
     }
 
     .wkp-handicap-popup-bottom {
-      min-width: 400px;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
 
       .wkp-handicap-popup-element {
+        min-width: 180px;
         width: 50%;
       }
-    }
-  }
-}
-
-.tm-app.tm-w-s,
-.tm-app.tm-w-xs {
-  .wkp-handicap-popup {
-    min-width: 200px;
-
-    .wkp-handicap-popup-bottom {
-      min-width: 200px;
     }
   }
 }

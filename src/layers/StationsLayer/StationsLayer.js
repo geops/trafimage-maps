@@ -83,7 +83,9 @@ class StationsLayer extends MapboxStyleLayer {
       .getStyle()
       .layers.filter((layer) => {
         return (
-          layer['source-layer'] === 'osm_points' && layer.id !== 'osm_points'
+          (layer['source-layer'] === 'osm_points' &&
+            layer.id !== 'osm_points') ||
+          (layer['source-layer'] === 'poi' && /^station_ship/.test(layer.id))
         );
       })
       .map((layer) => layer.id);

@@ -5,12 +5,12 @@ import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Feature } from 'ol';
-import { Point } from 'ol/geom';
+import { Point, Polygon } from 'ol/geom';
 import { Layer } from 'mobility-toolbox-js/ol';
 import highlightPointStyle from '../../utils/highlightPointStyle';
 import FeatureInformation from '.';
 
-describe('FeatureInformaion', () => {
+describe('FeatureInformation', () => {
   const mockStore = configureStore([thunk]);
   let store;
   let layers = [];
@@ -45,6 +45,7 @@ describe('FeatureInformaion', () => {
       {
         features: [new Feature(new Point([2, 2]))],
         layer: l,
+        coordinate: [2, 2],
       },
     ];
     const wraper = mount(
@@ -72,6 +73,7 @@ describe('FeatureInformaion', () => {
       {
         features: [new Feature(new Point([2, 2]))],
         layer: l,
+        coordinate: [2, 2],
       },
     ];
     const wraper = mount(
@@ -89,6 +91,82 @@ describe('FeatureInformaion', () => {
     expect(highlighLayer.getStyle()).toBe(highlightPointStyle);
   });
 
+  test('adds an hihglight feature if the feature is not a point but mapbox displays an icon', () => {
+    const l = new Layer({
+      key: 'foo',
+      properties: {
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const fi = [
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [2, 2],
+                [3, 3],
+                [4, 4],
+              ],
+            ]),
+          ),
+        ],
+        layer: l,
+        coordinate: [2.5, 2.5],
+      },
+    ];
+    fi[0].features[0].set('mapboxFeature', {
+      layer: { layout: { 'icon-image': 'foo' } },
+    });
+    const wrapper = mount(
+      <Provider store={store}>
+        <FeatureInformation featureInfo={fi} />
+      </Provider>,
+    );
+    expect(store.getState().app.map.addLayer).toHaveBeenCalledTimes(1);
+    const highlighLayer = store.getState().app.map.addLayer.mock.calls[0][0];
+    expect(highlighLayer.getSource().getFeatures().length).toBe(1);
+    expect(
+      highlighLayer.getSource().getFeatures()[0].getGeometry().getCoordinates(),
+    ).toEqual([2.5, 2.5]);
+    wrapper.unmount();
+  });
+
+  test("doesn't add an hihglight feature if the feature is not a point and not a mapbox feature", () => {
+    const l = new Layer({
+      key: 'foo',
+      properties: {
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const fi = [
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [2, 2],
+                [3, 3],
+                [4, 4],
+              ],
+            ]),
+          ),
+        ],
+        layer: l,
+        coordinate: [2.5, 2.5],
+      },
+    ];
+    const wrapper = mount(
+      <Provider store={store}>
+        <FeatureInformation featureInfo={fi} />
+      </Provider>,
+    );
+    expect(store.getState().app.map.addLayer).toHaveBeenCalledTimes(1);
+    const highlighLayer = store.getState().app.map.addLayer.mock.calls[0][0];
+    expect(highlighLayer.getSource().getFeatures().length).toBe(0);
+    wrapper.unmount();
+  });
+
   describe('should match snapshot.', () => {
     test("using the layers's popupComponent", () => {
       const l = new Layer({
@@ -101,6 +179,7 @@ describe('FeatureInformaion', () => {
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
+          coordinate: [2, 2],
         },
       ];
 
@@ -121,6 +200,7 @@ describe('FeatureInformaion', () => {
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'NetzkartePopup',
         },
       ];
@@ -145,6 +225,7 @@ describe('FeatureInformaion', () => {
             new Feature(new Point([1, 1])),
           ],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'NetzkartePopup',
         },
         {
@@ -153,6 +234,7 @@ describe('FeatureInformaion', () => {
             new Feature(new Point([1, 1])),
           ],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'NetzkartePopup',
         },
       ];
@@ -174,6 +256,7 @@ describe('FeatureInformaion', () => {
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
+          coordinate: [2, 2],
           popupComponent: 'KilometragePopup',
         },
       ];

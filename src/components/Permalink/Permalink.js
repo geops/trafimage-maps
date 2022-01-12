@@ -286,10 +286,9 @@ class Permalink extends PureComponent {
 
     const layers = [
       ...netzkartePointLayer.styleLayers.map((style) => style.id),
-      ...(this.platform
-        ? platformsLayer.styleLayers.map((style) => style.id)
-        : []),
+      ...platformsLayer.styleLayers.map((style) => style.id),
     ];
+
     // We display the departures popup only on features of the station layer (not on platform).
     const departures = mbMap.queryRenderedFeatures({
       layers,
@@ -304,10 +303,21 @@ class Permalink extends PureComponent {
     const stationFeature = format.readFeature(departure, {
       featureProjection: 'EPSG:3857',
     });
+    stationFeature.set('mapboxFeature', departure);
+    const geometry = stationFeature.getGeometry();
+
+    // Feature can be a Point, LineString or a Polygon.
+    let coordinate = geometry.getCoordinates();
+
+    if (geometry.getCoordinateAt) {
+      coordinate = geometry.getCoordinateAt(0.5);
+    } else if (geometry.getInteriorPoint) {
+      coordinate = geometry.getInteriorPoint().getCoordinates();
+    }
 
     dispatchSetFeatureInfo([
       {
-        coordinate: stationFeature.getGeometry().getCoordinates(),
+        coordinate,
         features: [stationFeature],
         // Fake layer binded to popup, to open it.
         layer: new Layer({
@@ -344,7 +354,6 @@ class Permalink extends PureComponent {
 
   updateDepartures() {
     const { departuresFilter, platformFilter } = this.props;
-
     const state = {
       departures: departuresFilter,
       platform: platformFilter,

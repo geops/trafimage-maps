@@ -14,31 +14,56 @@ const propTypes = {
     PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
     PropTypes.instanceOf(Layer),
   ]).isRequired,
+  coordinate: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+    PropTypes.arrayOf(PropTypes.number),
+  ]).isRequired,
 };
 
-function StationPopup({ feature, layer }) {
-  const features = feature.length ? [...feature.reverse()] : [feature];
-  const layers = layer.length ? [...layer.reverse()] : [layer];
+function StationPopup({ feature, layer, coordinate }) {
+  const features = Array.isArray(feature) ? [...feature.reverse()] : [feature];
+  const layers = Array.isArray(layer) ? [...layer.reverse()] : [layer];
+  const coordinates = Array.isArray((coordinate || [])[0])
+    ? [...coordinate.reverse()]
+    : [coordinate];
 
   // if a a station has been clicked, don't show the bahnhohfplans features.
   const isStationClicked = features.find((feat, idx) => {
-    return layers[idx].name === 'ch.sbb.netzkarte.stationen';
+    return (
+      layers[idx].name === 'ch.sbb.netzkarte.stationen' ||
+      layers[idx].name === 'ch.sbb.netzkarte.platforms'
+    );
   });
 
   return (
     <div className="wkp-station-popup">
       {features.map((feat, idx) => {
         const displayNetzkartePopup =
-          layers[idx].name === 'ch.sbb.netzkarte.stationen';
+          layers[idx].name === 'ch.sbb.netzkarte.stationen' ||
+          layers[idx].name === 'ch.sbb.netzkarte.platforms';
         const key = layers[idx].name + feat.getId();
         if (displayNetzkartePopup) {
-          return <NetzkartePopup feature={feat} key={key} />;
+          return (
+            <NetzkartePopup
+              feature={feat}
+              key={key}
+              layer={layers[idx]}
+              coordinate={coordinates[idx]}
+            />
+          );
         }
 
         if (isStationClicked) {
           return null;
         }
-        return <BahnhofplanPopup feature={feat} key={key} />;
+        return (
+          <BahnhofplanPopup
+            feature={feat}
+            key={key}
+            layer={layers[idx]}
+            coordinate={coordinates[idx]}
+          />
+        );
       })}
     </div>
   );
@@ -47,7 +72,15 @@ function StationPopup({ feature, layer }) {
 StationPopup.propTypes = propTypes;
 
 const memoized = React.memo(StationPopup);
-memoized.renderTitle = (feat) => (feat.length ? feat[0] : feat).get('name');
+
+memoized.renderTitle = (feature, t) => {
+  const feat = feature.length ? feature[0] : feature;
+  const platform = feat.get('platform');
+  if (platform) {
+    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+  }
+  return feat.get('name');
+};
 memoized.hidePagination = true;
 
 export default memoized;

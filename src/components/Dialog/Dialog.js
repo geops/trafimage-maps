@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,8 +10,6 @@ import {
   Paper,
   Typography,
   IconButton,
-  useTheme,
-  useMediaQuery,
 } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
 import Draggable from 'react-draggable';
@@ -130,10 +128,10 @@ function Dialog(props) {
   const classes = useStyles({ isModal });
   const closeDialog = () => dispatch(setDialogVisible());
   const escFunction = (e) => e.which === 27 && dispatch(setDialogVisible());
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const isSmallScreen = !!matches;
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+  const isSmallScreen = useMemo(() => {
+    return ['xs', 's'].includes(screenWidth);
+  }, [screenWidth]);
 
   useEffect(() => {
     // ComponentDidMount
