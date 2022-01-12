@@ -84,7 +84,7 @@ function NetzkartePopup({ feature, coordinate }) {
     );
   }
 
-  const transportLink = (
+  const transportLink = feature.get('sbb_id') ? (
     <div>
       <div
         tabIndex={0}
@@ -96,7 +96,7 @@ function NetzkartePopup({ feature, coordinate }) {
         {t('Abfahrtszeiten')}
       </div>
     </div>
-  );
+  ) : null;
 
   if (isAirport) {
     airportLabel = <div>{t(styleLayer)}</div>;

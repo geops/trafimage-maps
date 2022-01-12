@@ -68,17 +68,6 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
     <div
       className="wkp-netzkarte-popup"
     >
-      <div>
-        <div
-          className="wkp-departure-btn"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Abfahrtszeiten
-        </div>
-      </div>
       <div
         aria-expanded={false}
         className="wkp-coordinate-toggle"
@@ -245,17 +234,6 @@ exports[`FeatureInformation should match snapshot. using the info's popupCompone
     <div
       className="wkp-netzkarte-popup"
     >
-      <div>
-        <div
-          className="wkp-departure-btn"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Abfahrtszeiten
-        </div>
-      </div>
       <div
         aria-expanded={false}
         className="wkp-coordinate-toggle"
@@ -352,17 +330,6 @@ exports[`FeatureInformation should match snapshot. using the layers's popupCompo
     <div
       className="wkp-netzkarte-popup"
     >
-      <div>
-        <div
-          className="wkp-departure-btn"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Abfahrtszeiten
-        </div>
-      </div>
       <div
         aria-expanded={false}
         className="wkp-coordinate-toggle"
