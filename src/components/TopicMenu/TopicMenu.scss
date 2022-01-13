@@ -146,21 +146,6 @@
   .wkp-topic-content {
     transition: max-height 0.3s ease, margin 0.3s ease;
     max-height: 2500px;
-
-    .wkp-base-layers-select {
-      margin: 4px 20px 5px 23px;
-      height: 30px;
-      width: calc(100% - 42px);
-      display: none;
-
-      & .MuiSelect-root:focus {
-        background-color: transparent;
-      }
-
-      & .MuiOutlinedInput-input {
-        padding: 8px 14px;
-      }
-    }
   }
 }
 

@@ -2,12 +2,12 @@
 
 const expectBaseLayersSelectVisible = () => {
   cy.get('.rs-base-layer-switcher').should('be.hidden');
-  cy.get('.wkp-base-layers-select').should('be.visible');
+  cy.get('[data-cy=baselayer-select]').should('be.visible');
 };
 
 const expectBaseLayersSwitcherVisible = () => {
   cy.get('.rs-base-layer-switcher').should('be.visible');
-  cy.get('.wkp-base-layers-select').should('be.hidden');
+  cy.get('[data-cy=baselayer-select]').should('be.hidden');
 };
 const expectDevPortalLinkVisible = () => {
   cy.get('.wkp-dev-portal-link').should('be.visible');

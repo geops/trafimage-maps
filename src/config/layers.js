@@ -1597,9 +1597,9 @@ const mapsGeoAdminSchutzgebieteLayerKeys = [
 export const beleuchtungstaerkenSchutzgebieteLayer = new MapsGeoAdminLayer({
   name: 'ch.sbb.beleuchtungsstaerken.bafu-schutzgebiete.group',
   visible: false,
-  children: [
-    ...mapsGeoAdminSchutzgebieteLayerKeys.map(createMapsGeoAdminStyleLayer),
-  ],
+  children: mapsGeoAdminSchutzgebieteLayerKeys.map(
+    createMapsGeoAdminStyleLayer,
+  ),
   properties: {
     featureInfoEventTypes: ['singleclick'],
     popupComponent: 'MapsGeoAdminPopup',
@@ -1626,9 +1626,9 @@ const mapsGeoAdminBundesinventareLayerKeys = [
 export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
   name: 'ch.sbb.beleuchtungsstaerken.bafu-bundesinventare.group',
   visible: false,
-  children: [
-    ...mapsGeoAdminBundesinventareLayerKeys.map(createMapsGeoAdminStyleLayer),
-  ],
+  children: mapsGeoAdminBundesinventareLayerKeys.map(
+    createMapsGeoAdminStyleLayer,
+  ),
   properties: {
     featureInfoEventTypes: ['singleclick'],
     popupComponent: 'MapsGeoAdminPopup',

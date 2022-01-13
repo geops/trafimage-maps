@@ -58,10 +58,6 @@ const LanguageSelect = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isTabletWidth = useMemo(
-    () => ['m'].includes(screenWidth),
-    [screenWidth],
-  );
   const isMobileWidth = useMemo(
     () => ['xs', 's'].includes(screenWidth),
     [screenWidth],
@@ -112,24 +108,7 @@ const LanguageSelect = () => {
         onChange={onSelectChange}
         className={classes.input}
         classes={{ outlined: classes.select, icon: classes.expandIcon }}
-        MenuProps={{
-          'data-cy': 'lang-select-options',
-          getContentAnchorEl: null,
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'left',
-          },
-          PaperProps: {
-            style: {
-              border: `1px solid #888`,
-              borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-              borderRadius: 0,
-              marginTop: isMobileWidth || isTabletWidth ? 28 : 38,
-              minWidth: isMobileWidth ? 53 : 118,
-              top: '26 !important',
-            },
-          },
-        }}
+        MenuProps={{ 'data-cy': 'lang-select-options' }}
         variant="outlined"
       >
         {langOptions}
