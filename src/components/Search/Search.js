@@ -78,7 +78,10 @@ function Search() {
                   tabIndex={0}
                 >
                   <div className="wkp-search-section-header">{t(section)}</div>
-                  <div className="wkp-search-section-count">
+                  <div
+                    className="wkp-search-section-count"
+                    data-cy="wkp-search-section-title"
+                  >
                     {t('overallResult', { count })}
                     {searchService.sectionCollapsed(section) ? (
                       <FaChevronCircleDown focusable={false} />

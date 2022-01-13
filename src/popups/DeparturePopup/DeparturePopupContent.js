@@ -154,8 +154,10 @@ class DeparturePopupContent extends Component {
   }
 
   componentWillUnmount() {
+    const { dispatchSetDeparturesFilter } = this.props;
     this.mounted = false;
     window.clearInterval(this.loadInterval);
+    dispatchSetDeparturesFilter();
   }
 
   /**

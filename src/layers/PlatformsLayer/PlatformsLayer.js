@@ -61,7 +61,8 @@ class PlatformsLayer extends MapboxStyleLayer {
       ],
       properties: {
         hideInLegend: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: 'StationPopup',
+        useOverlay: true,
       },
       ...options,
     });

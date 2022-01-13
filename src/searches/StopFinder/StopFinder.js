@@ -23,7 +23,7 @@ class StopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}&limit=50`,
       {
         signal,
       },
