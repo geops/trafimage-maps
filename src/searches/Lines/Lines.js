@@ -26,7 +26,10 @@ const genLevelByMapRes = {
   611.49622628141: 10, // zoom 8
   305.748113140705: 30, // zoom 9
   76.43702828517625: 100, // zoom 11
+  9.554628535647032: 150, // zoom 14, the 150 generalization geometry is the same as the 100.
 };
+
+const format = new GeoJSON();
 
 class Lines extends Search {
   constructor() {
@@ -38,13 +41,16 @@ class Lines extends Search {
         resolution,
         Object.keys(genLevelByMapRes),
       );
-      const gen = genLevelByMapRes[dataRes];
-      const format = new GeoJSON();
-      const geometry =
-        format.readGeometry(feature.get('geoms')[gen], {
-          dataProjection: this.dataProjection,
-          featureProjection: 'EPSG:3857',
-        }) || feature.getGeometry();
+      const generalizationLevel = genLevelByMapRes[dataRes];
+      const generalizedGeometry =
+        feature.get('geoms') && feature.get('geoms')[generalizationLevel];
+
+      const geometry = generalizedGeometry
+        ? format.readGeometry(generalizedGeometry, {
+            dataProjection: this.dataProjection,
+            featureProjection: 'EPSG:3857',
+          })
+        : feature.getGeometry();
 
       return geometry instanceof MultiLineString ||
         geometry instanceof GeometryCollection
