@@ -90,6 +90,7 @@ class TopicLoader extends Component {
       vectorTilesUrl,
       staticFilesUrl,
     } = this.props;
+    const matomo = this.context;
 
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
@@ -128,12 +129,18 @@ class TopicLoader extends Component {
     }
 
     if (activeTopic !== prevProps.activeTopic) {
+      if (matomo) {
+        // Track the topic change
+        matomo.trackEvent({
+          category: activeTopic.name,
+          action: 'load',
+        });
+      }
       this.updateServices(activeTopic);
     }
   }
 
   loadTopics() {
-    const matomo = this.context;
     const {
       topics,
       appBaseUrl,
@@ -174,10 +181,6 @@ class TopicLoader extends Component {
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(visibleActiveTopic);
     this.updateServices(visibleActiveTopic);
-
-    if (matomo) {
-      matomo.trackEvent({ category: visibleActiveTopic.name, action: 'load' });
-    }
   }
 
   updateServices(activeTopic) {
