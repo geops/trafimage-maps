@@ -1,12 +1,20 @@
 This example shows how to integrate punctuality information in your map application.
 
+The vehicles displayed can be filtered using layer's properties, see 'view code' section for an example of use.
+
+The vehicles displayed can also be filtered using url parameters:
+
+- operator : The operator of the train (ex: [operator=vbz](/?operator=vbz#/Examples/Punctuality%20Map))
+- publishedlinename : a comma separated list of line's name (ex: [publishedlinename=RE,IC5,S3,17](/?publishedlinename=RE,IC5,S3,17#/Examples/Punctuality%20Map))
+- tripnumber : a comma separated list of trip's number (ex: [tripnumber=5712,6553](/?tripnumber=5712,6553#/Examples/Punctuality%20Map))
+
+Important to know, filters using layer's properties have precedence over url parameters.
+
 ```jsx
 import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
-import { Layer } from 'mobility-toolbox-js/ol';
-import defaultBaseLayers from 'trafimage-maps/es/examples/Punctuality/layers';
-import defaultSearches from 'trafimage-maps/es/config/searches';
 import TralisLayer from 'trafimage-maps/es/layers/TralisLayer';
+import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -18,36 +26,37 @@ const App = () => {
   useEffect(() => {
     const map = ref.current;
     map.topics = [
-      {
-        name: 'ch.sbb.netzkarte.topic',
-        key: 'ch.sbb.netzkarte',
+      { 
+        name: 'Punctuality topic',
         layers: [
-          ...defaultBaseLayers,
-          new TralisLayer({
-            name: 'Zugtracker',
-            key: 'ch.sbb.tracker',
-            apiKey: apiKey,
+          new TrafimageMapboxLayer({
+            name: 'Background layer',
+            style: 'base_bright_v2',
           }),
           new TralisLayer({
-            name: 'ch.sbb.puenktlichkeit',
-            key: 'ch.sbb.puenktlichkeit',
+            name: 'Punctuality Layer',
             apiKey: apiKey,
-            visible: false,
-            useDelayStyle: true,
-            operator: 'SBB', // To filter operator
-            publishedLineName: 's1,s2,s9,s10,s15', // To filter line number
-          }),
+            onClick: (features) => {
+              // Show the raw features clicked in the browser console (press F12).
+              console.log(features);
+            },
+            // You can filter the trains displayed using the following properties:
+            // operator: 'vbz',
+            // tripNumber: '5712,6553',
+            // publishedLineName: 'RE,IC5,S3,17',
+            // regexPublishedLineName: '^S[0-5]$'
+          })
         ],
         elements: {
           footer: true,
-          header: false,
+          header: true,
           mapControls: true,
-          menu: false,
-          popup: true,
+          menu: true,
+          popup: false,
           permalink: false,
           search: false,
+          trackerMenu: true
         },
-        searches: defaultSearches,
       },
     ];
 
