@@ -71,7 +71,7 @@ module.exports = {
           exampleMode: 'expand',
         },
         {
-          name: 'Nacht Verbindungen',
+          name: 'Direct connections by night',
           content: 'src/examples/DirektVerbindung/README.md',
           exampleMode: 'expand',
         },
