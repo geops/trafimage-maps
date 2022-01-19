@@ -134,6 +134,21 @@ const propTypes = {
    * Enable analytics tracking.
    */
   enableTracking: PropTypes.bool,
+
+  /**
+   * True if the tracker has to wait the user consent, see consentGiven property
+   */
+  requireConsent: PropTypes.bool,
+
+  /**
+   * True if the consent has been given, work only with requireConsent=true.
+   */
+  consentGiven: PropTypes.bool,
+
+  /**
+   * Disable use fo cookies for analytics.
+   */
+  disableCookies: PropTypes.bool,
 };
 
 const attributes = {
@@ -159,6 +174,9 @@ const attributes = {
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
   enableTracking: false,
+  disableCookies: false,
+  requireConsent: false,
+  consentGiven: false,
   elements: undefined,
   layersVisibility: undefined,
 };
@@ -186,6 +204,9 @@ const WebComponent = (props) => {
     apiKeyName,
     vectorTilesKey,
     enableTracking,
+    disableCookies,
+    requireConsent,
+    consentGiven,
     elements,
     layersVisibility,
   } = props;
@@ -308,6 +329,9 @@ const WebComponent = (props) => {
           maxExtent={extentArray}
           center={arrayCenter}
           enableTracking={enableTracking}
+          disableCookies={disableCookies}
+          requireConsent={requireConsent}
+          consentGiven={consentGiven}
         />
       </div>
     </Styled>
