@@ -23,6 +23,8 @@ import {
   setDestinationUrl,
   setDeparturesUrl,
   setApiKey,
+  setEnableTracking,
+  setConsentGiven,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -157,6 +159,24 @@ const propTypes = {
   enableTracking: PropTypes.bool,
 
   /**
+   * True if the tracker has to wait the user consent, see consentGiven property
+   * @private
+   */
+  requireConsent: PropTypes.bool,
+
+  /**
+   * True if the consent has been given, work only with requireConsent=true.
+   * @private
+   */
+  consentGiven: PropTypes.bool,
+
+  /**
+   * Disable use fo cookies for analytics.
+   * @private
+   */
+  disableCookies: PropTypes.bool,
+
+  /**
    * Key of the active topic.
    * @private
    */
@@ -193,6 +213,9 @@ const defaultProps = {
   topics: null,
   language: 'de',
   enableTracking: false,
+  disableCookies: false,
+  requireConsent: false,
+  consentGiven: false,
   activeTopicKey: null,
   permissionInfos: null,
 };
@@ -215,6 +238,7 @@ class TrafimageMaps extends React.PureComponent {
       center,
       language,
       enableTracking,
+      disableCookies,
       cartaroUrl,
       mapsetUrl,
       shortenerUrl,
@@ -224,8 +248,9 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      requireConsent,
     } = this.props;
-
+    console.log(requireConsent, enableTracking);
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
     }
@@ -284,7 +309,14 @@ class TrafimageMaps extends React.PureComponent {
         siteId: REACT_APP_MATOMO_SITE_ID,
         trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
       });
-      this.matomo.trackPageView();
+      if (requireConsent) {
+        this.matomo.pushInstruction('requireConsent');
+      } else {
+        if (disableCookies) {
+          this.matomo.pushInstruction('disableCookies');
+        }
+        this.matomo.trackPageView();
+      }
     }
   }
 
@@ -294,6 +326,9 @@ class TrafimageMaps extends React.PureComponent {
       center,
       cartaroUrl,
       enableTracking,
+      disableCookies,
+      consentGiven,
+      requireConsent,
       maxExtent,
       mapsetUrl,
       shortenerUrl,
@@ -332,8 +367,34 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setMaxExtent(maxExtent));
     }
 
-    if (this.matomo && !prevProps.enableTracking && enableTracking) {
+    if (
+      this.matomo &&
+      enableTracking &&
+      disableCookies &&
+      disableCookies !== prevProps.disableCookies
+    ) {
+      this.matomo.pushInstruction('disableCookies');
+    }
+
+    if (
+      this.matomo &&
+      enableTracking &&
+      consentGiven &&
+      consentGiven !== prevProps.consentGiven
+    ) {
+      this.matomo.pushInstruction('setConsentGiven');
       this.matomo.trackPageView();
+      this.store.dispatch(setConsentGiven(consentGiven));
+    }
+
+    if (
+      this.matomo &&
+      !requireConsent &&
+      !prevProps.enableTracking &&
+      enableTracking
+    ) {
+      this.matomo.trackPageView();
+      this.store.dispatch(setEnableTracking(enableTracking));
     }
 
     if (permissionInfos !== prevProps.permissionInfos) {

@@ -15,6 +15,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const projection = useSelector((state) => state.app.projection);
+  const consentGiven = useSelector((state) => state.app.consentGiven);
 
   const projections = [
     {
@@ -51,6 +52,18 @@ const Footer = () => {
         />
       </div>
       <div className="wkp-footer-right">
+        {
+          // Open the OneTrust consent management dialog
+          // It's very important that this element is in the DOM asap otherwise
+          // OneTrust doesn't see there is a new element added to the DOM.
+          // eslint-disable-next-line jsx-a11y/control-has-associated-label
+          <button
+            id="ot-sdk-btn"
+            type="button"
+            className="ot-sdk-show-settings"
+            style={{ display: consentGiven ? 'inline-block' : 'none' }}
+          />
+        }
         <Link
           onClick={() => dispatch(setDialogVisible('Kontakt'))}
           tabIndex="0"
