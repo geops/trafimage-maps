@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FeatureInformaion should match snapshot. should display multiple features with pagination 1`] = `
+exports[`FeatureInformation should match snapshot. should display multiple features with pagination 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -68,17 +68,6 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
     <div
       className="wkp-netzkarte-popup"
     >
-      <div>
-        <div
-          className="wkp-departure-btn"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Abfahrtszeiten
-        </div>
-      </div>
       <div
         aria-expanded={false}
         className="wkp-coordinate-toggle"
@@ -150,7 +139,7 @@ exports[`FeatureInformaion should match snapshot. should display multiple featur
 </div>
 `;
 
-exports[`FeatureInformaion should match snapshot. should not display header 1`] = `
+exports[`FeatureInformation should match snapshot. should not display header 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -174,7 +163,7 @@ exports[`FeatureInformaion should match snapshot. should not display header 1`] 
 </div>
 `;
 
-exports[`FeatureInformaion should match snapshot. using the info's popupComponent 1`] = `
+exports[`FeatureInformation should match snapshot. using the info's popupComponent 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -245,17 +234,6 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
     <div
       className="wkp-netzkarte-popup"
     >
-      <div>
-        <div
-          className="wkp-departure-btn"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Abfahrtszeiten
-        </div>
-      </div>
       <div
         aria-expanded={false}
         className="wkp-coordinate-toggle"
@@ -284,7 +262,7 @@ exports[`FeatureInformaion should match snapshot. using the info's popupComponen
 </div>
 `;
 
-exports[`FeatureInformaion should match snapshot. using the layers's popupComponent 1`] = `
+exports[`FeatureInformation should match snapshot. using the layers's popupComponent 1`] = `
 <div
   aria-describedby="wkp-popup-desc"
   aria-labelledby="wkp-popup-label"
@@ -352,17 +330,6 @@ exports[`FeatureInformaion should match snapshot. using the layers's popupCompon
     <div
       className="wkp-netzkarte-popup"
     >
-      <div>
-        <div
-          className="wkp-departure-btn"
-          onClick={[Function]}
-          onKeyPress={[Function]}
-          role="button"
-          tabIndex={0}
-        >
-          Abfahrtszeiten
-        </div>
-      </div>
       <div
         aria-expanded={false}
         className="wkp-coordinate-toggle"

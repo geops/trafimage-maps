@@ -74,7 +74,6 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    // console.log(wrapper.debug());
     expect(wrapper.find('button').prop('className')).toBe(
       'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
     );

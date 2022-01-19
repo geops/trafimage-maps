@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
+import { ZoomSlider } from 'ol/control';
+import { unByKey } from 'ol/Observable';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
@@ -27,6 +29,29 @@ const defaultProps = {
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    let key = null;
+    // on resize reload the zoomSlider control
+    if (zoomSlider) {
+      key = map.on('change:size', () => {
+        const control = map
+          .getControls()
+          .getArray()
+          .find((ctrl) => ctrl instanceof ZoomSlider);
+        if (control) {
+          // Force reinitialization of the control
+          // eslint-disable-next-line no-underscore-dangle
+          control.sliderInitialized_ = false;
+        }
+      });
+    }
+    return () => {
+      if (map && key) {
+        unByKey(key);
+      }
+    };
+  }, [map, zoomSlider]);
 
   return (
     <div className="wkp-map-controls">

@@ -7,28 +7,29 @@ import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Link } from '@material-ui/core';
+import GeometryType from 'ol/geom/GeometryType';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  coordinate: PropTypes.arrayOf(PropTypes.number).isRequired,
 };
 
-function NetzkartePopup({ feature }) {
+function NetzkartePopup({ feature, coordinate }) {
   const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
   const dispatch = useDispatch();
   const projection = useSelector((state) => state.app.projection);
-
   const { t } = useTranslation();
 
   const openDeparturePopup = () => {
     dispatch(
       setFeatureInfo([
         {
-          coordinate: feature.getGeometry().getCoordinates(),
           features: [feature],
+          coordinate,
           // Fake layer binded to popup, to open it.
           layer: new Layer({
             key: 'ch.sbb.departure.popup',
@@ -52,12 +53,16 @@ function NetzkartePopup({ feature }) {
 
   const name = feature.get('name');
   const didok = feature.get('sbb_id') - 8500000;
-  let layer = feature.get('layer') || (feature.get('rail') ? 'railway' : '');
+  let styleLayer =
+    feature.get('layer') || (feature.get('rail') ? 'railway' : '');
   if (feature.get('ferry')) {
-    layer = 'ship';
+    styleLayer = 'ship';
   }
 
-  const isAirport = layer && layer.indexOf('flug') > 0;
+  // TODO: verify that this code is used, it seems the airport label is never displayed.
+  // because there is no translations with flug text and the indexOf test seems wrong
+  // (it should be > -1).
+  const isAirport = styleLayer && styleLayer.indexOf('flug') > 0;
 
   const stationTimetableUrl = t('station_timetable_url').replace(
     '{stationname}',
@@ -82,7 +87,7 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  const transportLink = (
+  const transportLink = feature.get('sbb_id') ? (
     <div>
       <div
         tabIndex={0}
@@ -94,10 +99,10 @@ function NetzkartePopup({ feature }) {
         {t('Abfahrtszeiten')}
       </div>
     </div>
-  );
+  ) : null;
 
   if (isAirport) {
-    airportLabel = <div>{t(layer)}</div>;
+    airportLabel = <div>{t(styleLayer)}</div>;
   }
 
   if (name && !isAirport) {
@@ -108,7 +113,7 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  if (didok && layer === 'railway') {
+  if (didok && styleLayer === 'railway') {
     stationServiceLink = (
       <div>
         <Link href={stationServiceUrl}> {t('Webseite Bahnhof')}</Link>
@@ -116,26 +121,37 @@ function NetzkartePopup({ feature }) {
     );
   }
 
-  const coordinates =
-    feature.get('longitude') && feature.get('latitude')
-      ? transformCoords(
-          [
-            parseFloat(feature.get('longitude'), 10),
-            parseFloat(feature.get('latitude'), 10),
-          ],
-          'EPSG:4326',
-          projection.value,
-        )
-      : transformCoords(
-          feature.getGeometry().getCoordinates(),
-          'EPSG:3857',
-          projection.value,
-        );
+  // The feature is not necessarly a point.
+  // If it's the case and if there is no properties, we use the coordinate of the click event
+  let pointCoordinate = [0, 0];
+
+  if (feature.get('longitude') && feature.get('latitude')) {
+    pointCoordinate = transformCoords(
+      [
+        parseFloat(feature.get('longitude'), 10),
+        parseFloat(feature.get('latitude'), 10),
+      ],
+      'EPSG:4326',
+      projection.value,
+    );
+  } else if (feature.getGeometry().getType() === GeometryType.POINT) {
+    pointCoordinate = transformCoords(
+      feature.getGeometry().getCoordinates(),
+      'EPSG:3857',
+      projection.value,
+    );
+  } else if (coordinate) {
+    pointCoordinate = transformCoords(
+      coordinate,
+      'EPSG:3857',
+      projection.value,
+    );
+  }
 
   const formatedCoords =
     projection.value === 'EPSG:4326'
-      ? coordinateHelper.wgs84Format(coordinates, ',')
-      : coordinateHelper.meterFormat(coordinates);
+      ? coordinateHelper.wgs84Format(pointCoordinate, ',')
+      : coordinateHelper.meterFormat(pointCoordinate);
 
   const coordinatesWrapper = (
     <>
