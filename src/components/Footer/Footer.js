@@ -52,16 +52,18 @@ const Footer = () => {
         />
       </div>
       <div className="wkp-footer-right">
-        {/* Open the OneTrust consent management dialog */}
-        {consentGiven && (
+        {
+          // Open the OneTrust consent management dialog
+          // It's very important that this element is in the DOM asap otherwise
+          // OneTrust doesn't see there is a new element added to the DOM.
+          // eslint-disable-next-line jsx-a11y/control-has-associated-label
           <button
             id="ot-sdk-btn"
             type="button"
             className="ot-sdk-show-settings"
-          >
-            Cookie-Einstellungen
-          </button>
-        )}
+            style={{ display: consentGiven ? 'inline-block' : 'none' }}
+          />
+        }
         <Link
           onClick={() => dispatch(setDialogVisible('Kontakt'))}
           tabIndex="0"

@@ -27,8 +27,24 @@
     top: 0;
   }
 
+  #ot-sdk-btn.ot-sdk-show-settings {
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    transition: none;
+
+    &:hover {
+      background: transparent;
+      color: $brand-primary-hover;
+    }
+  }
+
   .wkp-footer-right {
-    a {
+    a,
+    button {
       cursor: pointer;
     }
 

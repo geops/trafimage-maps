@@ -27,7 +27,11 @@ describe('Footer', () => {
     expect(wrapper.find('Memo(ProjectionSelect)').length).toBe(1);
     expect(wrapper.find('MousePosition').length).toBe(1);
     expect(wrapper.find('a').length).toBe(4);
-    expect(wrapper.find('#ot-sdk-btn.ot-sdk-show-settings').length).toBe(0);
+    expect(wrapper.find('#ot-sdk-btn.ot-sdk-show-settings').length).toBe(1);
+    expect(
+      wrapper.find('#ot-sdk-btn.ot-sdk-show-settings').first().getDOMNode()
+        .style.display,
+    ).toBe('none');
   });
 
   test('renders cookies settings link if consentGiven is true', () => {
@@ -48,5 +52,9 @@ describe('Footer', () => {
     expect(wrapper.find('MousePosition').length).toBe(1);
     expect(wrapper.find('a').length).toBe(4);
     expect(wrapper.find('#ot-sdk-btn.ot-sdk-show-settings').length).toBe(1);
+    expect(
+      wrapper.find('#ot-sdk-btn.ot-sdk-show-settings').first().getDOMNode()
+        .style.display,
+    ).toBe('inline-block');
   });
 });
