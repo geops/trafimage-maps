@@ -15,6 +15,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const projection = useSelector((state) => state.app.projection);
+  const consentGiven = useSelector((state) => state.app.consentGiven);
 
   const projections = [
     {
@@ -51,6 +52,16 @@ const Footer = () => {
         />
       </div>
       <div className="wkp-footer-right">
+        {/* Open the OneTrust consent management dialog */}
+        {consentGiven && (
+          <button
+            id="ot-sdk-btn"
+            type="button"
+            className="ot-sdk-show-settings"
+          >
+            Cookie-Einstellungen
+          </button>
+        )}
         <Link
           onClick={() => dispatch(setDialogVisible('Kontakt'))}
           tabIndex="0"

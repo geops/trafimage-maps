@@ -23,6 +23,8 @@ import {
   setDestinationUrl,
   setDeparturesUrl,
   setApiKey,
+  setEnableTracking,
+  setConsentGiven,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -248,7 +250,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       requireConsent,
     } = this.props;
-
+    console.log(requireConsent, enableTracking);
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
     }
@@ -382,6 +384,7 @@ class TrafimageMaps extends React.PureComponent {
     ) {
       this.matomo.pushInstruction('setConsentGiven');
       this.matomo.trackPageView();
+      this.store.dispatch(setConsentGiven(consentGiven));
     }
 
     if (
@@ -391,6 +394,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking
     ) {
       this.matomo.trackPageView();
+      this.store.dispatch(setEnableTracking(enableTracking));
     }
 
     if (permissionInfos !== prevProps.permissionInfos) {
