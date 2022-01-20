@@ -250,7 +250,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       requireConsent,
     } = this.props;
-    console.log(requireConsent, enableTracking);
+
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
     }
