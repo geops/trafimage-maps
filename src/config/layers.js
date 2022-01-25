@@ -478,6 +478,7 @@ export const kilometrageLayer = new KilometrageLayer({
   properties: {
     hideInLegend: true,
     featureInfoEventTypes: ['singleclick'],
+    useOverlay: false,
     popupComponent: 'KilometragePopup',
   },
 });
@@ -845,6 +846,7 @@ export const betriebsRegionen = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
     layerInfoComponent: 'BetriebsRegionenLayerInfo',
   },
@@ -859,6 +861,7 @@ export const betriebsRegionenVisible = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
     layerInfoComponent: 'BetriebsRegionenLayerInfo',
   },
