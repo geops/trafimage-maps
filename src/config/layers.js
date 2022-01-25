@@ -1470,6 +1470,7 @@ export const beleuchtungstaerken1Layer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '1',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1481,6 +1482,7 @@ export const beleuchtungstaerken2aLayer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2a',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1492,6 +1494,7 @@ export const beleuchtungstaerken2bLayer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2b',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1503,6 +1506,7 @@ export const beleuchtungstaerken3Layer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '3',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1514,6 +1518,7 @@ export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '4',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1556,6 +1561,7 @@ export const beleuchtungstaerkenSchutzgebieteLayer = new MapsGeoAdminLayer({
   ),
   properties: {
     featureInfoEventTypes: ['singleclick'],
+    useOverlay: true,
     popupComponent: 'MapsGeoAdminPopup',
   },
 });
@@ -1585,6 +1591,7 @@ export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
   ),
   properties: {
     featureInfoEventTypes: ['singleclick'],
+    useOverlay: true,
     popupComponent: 'MapsGeoAdminPopup',
   },
 });
