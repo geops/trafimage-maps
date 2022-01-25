@@ -12,16 +12,28 @@ import FeatureInformation from '.';
 
 describe('FeatureInformation', () => {
   const mockStore = configureStore([thunk]);
+  let storeUnMocked;
   let store;
   let layers = [];
+  let fit;
+  let cancelAnimations;
 
   beforeEach(() => {
     layers = [];
-    store = mockStore({
+    fit = jest.fn();
+    cancelAnimations = jest.fn();
+    storeUnMocked = {
       map: {},
       app: {
         projection: { value: 'EPSG:3857' },
         map: {
+          getView: () => ({
+            cancelAnimations,
+            fit,
+            getZoom: () => {
+              return 10;
+            },
+          }),
           getLayers: () => ({
             getArray: () => layers,
           }),
@@ -31,7 +43,12 @@ describe('FeatureInformation', () => {
           ),
         },
       },
-    });
+    };
+    store = mockStore(storeUnMocked);
+  });
+  afterEach(() => {
+    fit.mockRestore();
+    cancelAnimations.mockRestore();
   });
 
   test('adds/removes an highlightLayer on mount/unmount', () => {
@@ -164,6 +181,165 @@ describe('FeatureInformation', () => {
     expect(store.getState().app.map.addLayer).toHaveBeenCalledTimes(1);
     const highlighLayer = store.getState().app.map.addLayer.mock.calls[0][0];
     expect(highlighLayer.getSource().getFeatures().length).toBe(0);
+    wrapper.unmount();
+  });
+
+  test('center the map on selected features if one of them is using an Overlay', () => {
+    const l = new Layer({
+      key: 'foo',
+      properties: {
+        useOverlay: true,
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const l2 = new Layer({
+      key: 'bar',
+      properties: {
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const fi = [
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [0, 0],
+                [1, 1],
+                [2, 2],
+              ],
+            ]),
+          ),
+        ],
+        layer: l,
+        coordinate: [2.5, 2.5],
+      },
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [2, 2],
+                [3, 3],
+                [4, 4],
+              ],
+            ]),
+          ),
+        ],
+        layer: l2,
+        coordinate: [2.5, 2.5],
+      },
+    ];
+    storeUnMocked.app.screenWidth = 's';
+    const wrapper = mount(
+      <Provider store={mockStore(storeUnMocked)}>
+        <FeatureInformation featureInfo={fi} />
+      </Provider>,
+    );
+    expect(cancelAnimations).toHaveBeenCalledTimes(1);
+    expect(fit).toHaveBeenCalledTimes(1);
+    expect(fit).toHaveBeenCalledWith([0, 0, 2, 2], {
+      duration: 500,
+      maxZoom: 10,
+      padding: [0, 400, 0, 0],
+    });
+    wrapper.unmount();
+  });
+
+  test("center the map on selected feature if it's using an Overlay (mobile)", () => {
+    const l = new Layer({
+      key: 'foo',
+      properties: {
+        useOverlay: true,
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const fi = [
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [0, 0],
+                [1, 1],
+                [2, 2],
+              ],
+            ]),
+          ),
+        ],
+        layer: l,
+        coordinate: [2.5, 2.5],
+      },
+    ];
+    storeUnMocked.app.screenWidth = 'xs';
+    const wrapper = mount(
+      <Provider store={mockStore(storeUnMocked)}>
+        <FeatureInformation featureInfo={fi} />
+      </Provider>,
+    );
+    expect(cancelAnimations).toHaveBeenCalledTimes(1);
+    expect(fit).toHaveBeenCalledTimes(1);
+    expect(fit).toHaveBeenCalledWith([0, 0, 2, 2], {
+      duration: 500,
+      maxZoom: 10,
+      padding: [0, 0, 250, 0],
+    });
+    wrapper.unmount();
+  });
+
+  test("doesn't center the map on selected feature if it's not using an Overlay'", () => {
+    const l = new Layer({
+      key: 'foo',
+      properties: {
+        useOverlay: true,
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const l2 = new Layer({
+      key: 'bar',
+      properties: {
+        popupComponent: 'NetzkartePopup',
+      },
+    });
+    const fi = [
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [0, 0],
+                [1, 1],
+                [2, 2],
+              ],
+            ]),
+          ),
+        ],
+        layer: l2,
+        coordinate: [2.5, 2.5],
+      },
+      {
+        features: [
+          new Feature(
+            new Polygon([
+              [
+                [2, 2],
+                [3, 3],
+                [4, 4],
+              ],
+            ]),
+          ),
+        ],
+        layer: l,
+        coordinate: [2.5, 2.5],
+      },
+    ];
+    const wrapper = mount(
+      <Provider store={store}>
+        <FeatureInformation featureInfo={fi} />
+      </Provider>,
+    );
+    expect(cancelAnimations).toHaveBeenCalledTimes(0);
+    expect(fit).toHaveBeenCalledTimes(0);
     wrapper.unmount();
   });
 
