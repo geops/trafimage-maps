@@ -1129,6 +1129,7 @@ export const zweitausbildungPois = new Layer({
       zIndex: 4,
       mapboxLayer: zweitausbildungPoisDataLayer,
       properties: {
+        useOverlay: true,
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
@@ -1154,6 +1155,7 @@ export const zweitausbildungPois = new Layer({
       zIndex: 4,
       mapboxLayer: zweitausbildungPoisDataLayer,
       properties: {
+        useOverlay: true,
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
@@ -1219,6 +1221,7 @@ export const zweitausbildungRoutes = new Layer({
           zIndex: 1,
           mapboxLayer: dataLayer,
           properties: {
+            useOverlay: true,
             popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
               property: 'touristische_linie',
@@ -1258,6 +1261,7 @@ export const zweitausbildungRoutes = new Layer({
           zIndex: 1,
           mapboxLayer: dataLayer,
           properties: {
+            useOverlay: true,
             popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
               property: 'hauptlinie',

@@ -1,9 +1,7 @@
 .wkp-zweitausbildung-pois-popup {
   overflow-y: auto;
-  max-height: 300px;
 
   .wkp-zweitausbildung-pois-popup-row {
-    min-height: 50px;
     border-bottom: dashed 1px #bebebe;
     padding-top: 5px;
 
@@ -20,7 +18,7 @@
     padding: 6px;
 
     img {
-      max-width: 50%;
+      max-width: 100%;
     }
   }
 }
