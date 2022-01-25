@@ -515,6 +515,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -532,6 +533,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -549,6 +551,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -566,6 +569,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -596,6 +600,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -614,6 +619,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -631,6 +637,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -648,6 +655,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -753,6 +761,7 @@ export const constrClusters = new Layer({
       visible: true,
       mapboxLayer: constructionDataLayer,
       properties: {
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
       },
       styleLayer: {
