@@ -44,7 +44,12 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const map = useSelector((state) => state.app.map);
   const language = useSelector((state) => state.app.language);
   const searchService = useSelector((state) => state.app.searchService);
+  const screenWidth = useSelector((state) => state.app.screenWidth);
   const [featureIndex, setFeatureIndex] = useState(0);
+
+  const isMobile = useMemo(() => {
+    return ['xs'].includes(screenWidth);
+  }, [screenWidth]);
 
   useEffect(() => {
     // The featureInformation component can be display twice at the same time (in the popup and in the overlay).
@@ -138,13 +143,15 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     return { features, layers, coordinates };
   }, [featureInfo]);
 
-  // When the featureIndex change we add the red circle.
+  // When the featureIndex change we add the red circle then we pan on it.
   useEffect(() => {
     highlightLayer.getSource().clear();
 
     // 'feature' can be a feature or an array
     const feature = infoIndexed.features[featureIndex];
     const features = Array.isArray(feature) ? feature : [feature];
+    const layerr = infoIndexed.layers[featureIndex];
+    const layers = Array.isArray(layerr) ? layerr : [layerr];
     const coordinate = infoIndexed.coordinates[featureIndex];
     const coordinates = Array.isArray((coordinate || [])[0])
       ? coordinate
@@ -168,7 +175,18 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         }
       }
     });
-  }, [featureIndex, infoIndexed]);
+    const source = new VectorSource({ features });
+    const extent = source.getExtent();
+    const isUsingOverlay = !!layers.find((l) => l.get('useOverlay'));
+    if (isUsingOverlay) {
+      map.getView().cancelAnimations();
+      map.getView().fit(extent, {
+        padding: isMobile ? [0, 0, 250, 0] : [0, 400, 0, 0],
+        maxZoom: map.getView().getZoom(), // only pan
+        duration: 1000,
+      });
+    }
+  }, [map, isMobile, featureIndex, infoIndexed]);
 
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
