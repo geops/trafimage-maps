@@ -183,7 +183,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       map.getView().fit(extent, {
         padding: isMobile ? [0, 0, 250, 0] : [0, 400, 0, 0],
         maxZoom: map.getView().getZoom(), // only pan
-        duration: 1000,
+        duration: 500,
       });
     }
   }, [map, isMobile, featureIndex, infoIndexed]);
