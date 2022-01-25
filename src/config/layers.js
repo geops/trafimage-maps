@@ -1289,6 +1289,7 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
   visible: true,
   properties: {
     hideInLegend: true,
+    useOverlay: true,
     popupComponent: 'TarifverbundkartePopup',
   },
 });
