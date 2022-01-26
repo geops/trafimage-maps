@@ -846,6 +846,7 @@ export const betriebsRegionen = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
     layerInfoComponent: 'BetriebsRegionenLayerInfo',
   },
