@@ -25,6 +25,7 @@ import {
   setDeparturesUrl,
   setApiKey,
   setEnableTracking,
+  setConsentGiven,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -266,6 +267,9 @@ class TrafimageMaps extends React.PureComponent {
       this.setState({
         consentGiven: true,
       });
+      // Display the consent settings link
+      this.store.dispatch(setConsentGiven(true));
+
       if (!/,C0002,/.test(window.OptanonActiveGroups)) {
         this.setState({
           disableCookies: true,
@@ -461,11 +465,13 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
     } = this.props;
 
+    const { consentGiven } = this.state;
     return (
       <>
         <Head
           topics={topics}
           displayConsent={enableTracking}
+          consentGiven={consentGiven}
           domainConsentId="784d5a56-cba1-4b22-9cde-019c2e67555a-test"
         />
         <MatomoProvider value={this.matomo}>
