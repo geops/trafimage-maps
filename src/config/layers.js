@@ -478,6 +478,7 @@ export const kilometrageLayer = new KilometrageLayer({
   properties: {
     hideInLegend: true,
     featureInfoEventTypes: ['singleclick'],
+    useOverlay: false,
     popupComponent: 'KilometragePopup',
   },
 });
@@ -515,6 +516,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -532,6 +534,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -549,6 +552,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -566,6 +570,7 @@ export const constrAusbau = new AusbauLayer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Ausbau',
@@ -596,6 +601,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -614,6 +620,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -631,6 +638,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -648,6 +656,7 @@ export const constrUnterhalt = new Layer({
       properties: {
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
         construction: {
           art: 'Unterhalt',
@@ -753,6 +762,7 @@ export const constrClusters = new Layer({
       visible: true,
       mapboxLayer: constructionDataLayer,
       properties: {
+        useOverlay: true,
         popupComponent: 'ConstructionPopup',
       },
       styleLayer: {
@@ -836,6 +846,7 @@ export const betriebsRegionen = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
     layerInfoComponent: 'BetriebsRegionenLayerInfo',
   },
@@ -850,6 +861,7 @@ export const betriebsRegionenVisible = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
     layerInfoComponent: 'BetriebsRegionenLayerInfo',
   },
@@ -1129,6 +1141,7 @@ export const zweitausbildungPois = new Layer({
       zIndex: 4,
       mapboxLayer: zweitausbildungPoisDataLayer,
       properties: {
+        useOverlay: true,
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
@@ -1154,6 +1167,7 @@ export const zweitausbildungPois = new Layer({
       zIndex: 4,
       mapboxLayer: zweitausbildungPoisDataLayer,
       properties: {
+        useOverlay: true,
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
@@ -1219,6 +1233,7 @@ export const zweitausbildungRoutes = new Layer({
           zIndex: 1,
           mapboxLayer: dataLayer,
           properties: {
+            useOverlay: true,
             popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
               property: 'touristische_linie',
@@ -1258,6 +1273,7 @@ export const zweitausbildungRoutes = new Layer({
           zIndex: 1,
           mapboxLayer: dataLayer,
           properties: {
+            useOverlay: true,
             popupComponent: 'ZweitausbildungRoutesPopup',
             zweitausbildung: {
               property: 'hauptlinie',
@@ -1276,6 +1292,7 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
   visible: true,
   properties: {
     hideInLegend: true,
+    useOverlay: true,
     popupComponent: 'TarifverbundkartePopup',
   },
 });
@@ -1453,6 +1470,7 @@ export const beleuchtungstaerken1Layer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '1',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1464,6 +1482,7 @@ export const beleuchtungstaerken2aLayer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2a',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1475,6 +1494,7 @@ export const beleuchtungstaerken2bLayer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '2b',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1486,6 +1506,7 @@ export const beleuchtungstaerken3Layer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '3',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1497,6 +1518,7 @@ export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
   styleLayersFilter: ({ metadata }) => metadata && metadata.rte_klasse === '4',
   properties: {
     hasInfos: true,
+    useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
   },
@@ -1539,6 +1561,7 @@ export const beleuchtungstaerkenSchutzgebieteLayer = new MapsGeoAdminLayer({
   ),
   properties: {
     featureInfoEventTypes: ['singleclick'],
+    useOverlay: true,
     popupComponent: 'MapsGeoAdminPopup',
   },
 });
@@ -1568,6 +1591,7 @@ export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
   ),
   properties: {
     featureInfoEventTypes: ['singleclick'],
+    useOverlay: true,
     popupComponent: 'MapsGeoAdminPopup',
   },
 });
