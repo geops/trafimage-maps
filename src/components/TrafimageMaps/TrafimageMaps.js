@@ -24,6 +24,7 @@ import {
   setDestinationUrl,
   setDeparturesUrl,
   setApiKey,
+  setEnableTracking,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -413,6 +414,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking
     ) {
       this.matomo.trackPageView();
+      this.store.dispatch(setEnableTracking(enableTracking));
     }
 
     if (permissionInfos !== prevProps.permissionInfos) {

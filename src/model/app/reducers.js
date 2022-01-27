@@ -28,6 +28,8 @@ import {
   SET_API_KEY,
   SET_CARTARO_URL,
   SET_SHOW_POPUPS,
+  SET_ENABLE_TRACKING,
+  SET_CONSENT_GIVEN,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -199,6 +201,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         showPopups: action.data,
+      };
+    case SET_ENABLE_TRACKING:
+      return {
+        ...state,
+        enableTracking: action.data,
+      };
+    case SET_CONSENT_GIVEN:
+      return {
+        ...state,
+        consentGiven: action.data,
       };
     default:
       return {

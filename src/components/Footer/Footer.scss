@@ -27,13 +27,39 @@
     top: 0;
   }
 
+  #ot-sdk-btn.ot-sdk-show-settings {
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    transition: none;
+    min-width: 65px; // Text must be max on 2 lines.
+
+    &:hover {
+      background: transparent;
+      color: $brand-primary-hover;
+    }
+  }
+
   .wkp-footer-right {
-    a {
+    justify-content: flex-end;
+
+    > a,
+    > button {
       cursor: pointer;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      flex: 0 0 auto;
+      margin: 0 10px;
+      text-align: right;
     }
 
-    a:not(.MuiIconButton-root) {
-      margin: 0 10px;
+    #ot-sdk-btn.ot-sdk-show-settings,
+    a.wkp-dev-portal-link {
+      text-align: left;
+      flex: 0 1 auto;
     }
   }
 
@@ -41,10 +67,10 @@
   .wkp-footer-right {
     display: flex;
     align-items: center;
+    flex: 1 1;
 
-    a:not(.MuiIconButton-root) {
-      white-space: nowrap;
-      text-decoration: none;
+    > a {
+      text-decoration: none !important;
     }
   }
 
@@ -69,6 +95,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    width: 115px;
 
     select {
       border: 1px solid #666;
@@ -77,32 +104,41 @@
 
     span {
       display: block;
-      margin-right: 10px;
-      max-width: 55px;
+      max-width: 115px;
+    }
+  }
+}
+
+.tm-w-m {
+  .wkp-footer {
+    .wkp-footer-right {
+      > a,
+      > button {
+        margin: 0 5px;
+      }
     }
   }
 }
 
 .tm-w-s,
 .tm-w-xs {
-  .rs-mouse-position,
-  .rs-scale-line {
-    display: none;
+  .wkp-footer {
+    .wkp-footer-left {
+      display: none;
+    }
   }
 }
 
 .tm-w-xs {
-  .wkp-footer-left {
-    font-size: 11px;
-  }
-
-  .wkp-footer-right {
-    .wkp-dev-portal-link {
-      display: none;
+  .wkp-footer {
+    .wkp-footer-right {
+      .wkp-dev-portal-link {
+        display: none;
+      }
     }
-  }
 
-  .wkp-language-select {
-    padding-right: 0;
+    .wkp-language-select {
+      padding-right: 0;
+    }
   }
 }

@@ -8,7 +8,8 @@ import { setProjection } from '../../model/app/actions';
 
 const useStyles = makeStyles((theme) => ({
   input: {
-    width: 150,
+    width: 130,
+    minWidth: 130,
   },
   select: {
     padding: '10px 14px !important',
