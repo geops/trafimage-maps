@@ -10,7 +10,7 @@ import React from 'react';
 const App = () => {
   return (
     <div className="container">
-      <trafimage-maps zoom="7" apiKey={apiKey} enableTracking="true"/>
+      <trafimage-maps zoom="7" apiKey={apiKey} enableTracking="true" />
     </div>
   );
 }

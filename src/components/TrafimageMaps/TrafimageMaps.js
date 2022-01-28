@@ -298,18 +298,21 @@ class TrafimageMaps extends React.PureComponent {
       });
       this.matomo.pushInstruction('requireConsent');
 
+      console.log('this.matomo ', this.matomo);
       // Function called on consent change event
       window.OptanonWrapper = () => {
         if (!window.Optanon || !window.Optanon.IsAlertBoxClosed()) {
           return;
         }
 
+        console.log('C0002', !/,C0002,/.test(window.OptanonActiveGroups));
         if (!/,C0002,/.test(window.OptanonActiveGroups)) {
           // Disable Matomo cookies
           this.store.dispatch(setDisableCookies(true));
         }
 
         // Start the page tracking.
+        console.log('dispatch(setConsentGiven');
         this.store.dispatch(setConsentGiven(true));
       };
     }
@@ -402,7 +405,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       domainConsentId,
     } = this.props;
-
+    console.log(enableTracking);
     return (
       <>
         <MatomoProvider value={this.matomo}>

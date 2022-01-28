@@ -68,6 +68,8 @@ const getInitialState = () => ({
   departuresUrl: null,
   apiKey: null,
   showPopups: true,
+  consentGiven: false,
+  disableCookies: false,
 });
 
 export default function app(state = getInitialState(), action) {
