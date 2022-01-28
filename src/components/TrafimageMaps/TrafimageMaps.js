@@ -10,9 +10,10 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Layer } from 'mobility-toolbox-js/ol';
+import MatomoTracker from '../MatomoTracker';
 import Head from '../Head';
 import TopicLoader from '../TopicLoader';
-import { getStore } from '../../model/store';
+import getStore from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import {
   setLanguage,
@@ -24,7 +25,7 @@ import {
   setDestinationUrl,
   setDeparturesUrl,
   setApiKey,
-  setEnableTracking,
+  setDisableCookies,
   setConsentGiven,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
@@ -159,24 +160,6 @@ const propTypes = {
    */
   enableTracking: PropTypes.bool,
 
-  // /**
-  //  * True if the tracker has to wait the user consent, see consentGiven property
-  //  * @private
-  //  */
-  // requireConsent: PropTypes.bool,
-
-  // /**
-  //  * True if the consent has been given, work only with requireConsent=true.
-  //  * @private
-  //  */
-  // consentGiven: PropTypes.bool,
-
-  // /**
-  //  * Disable use fo cookies for analytics.
-  //  * @private
-  //  */
-  // disableCookies: PropTypes.bool,
-
   /**
    * Key of the active topic.
    * @private
@@ -214,9 +197,6 @@ const defaultProps = {
   topics: null,
   language: 'de',
   enableTracking: false,
-  // disableCookies: false,
-  // requireConsent: false,
-  // consentGiven: false,
   activeTopicKey: null,
   permissionInfos: null,
 };
@@ -231,11 +211,6 @@ class TrafimageMaps extends React.PureComponent {
      * @private
      */
     this.store = getStore();
-    this.state = {
-      requireConsent: true,
-      consentGiven: false,
-      disableCookies: false,
-    };
   }
 
   componentDidMount() {
@@ -255,26 +230,19 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
     } = this.props;
 
-    const { disableCookies, requireConsent } = this.state;
-
     // Function called on consent change event
     window.OptanonWrapper = () => {
       if (!window.Optanon.IsAlertBoxClosed()) {
         return;
       }
 
-      // User as given is consent or not.
-      this.setState({
-        consentGiven: true,
-      });
-      // Display the consent settings link
-      this.store.dispatch(setConsentGiven(true));
-
       if (!/,C0002,/.test(window.OptanonActiveGroups)) {
-        this.setState({
-          disableCookies: true,
-        });
+        // Disable Matomo cookies
+        this.store.dispatch(setDisableCookies(true));
       }
+
+      // Start the page tracking.
+      this.store.dispatch(setConsentGiven(true));
     };
 
     if (zoom) {
@@ -324,6 +292,7 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
+    // Create the matomo instance
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
     if (
       enableTracking &&
@@ -335,23 +304,15 @@ class TrafimageMaps extends React.PureComponent {
         siteId: REACT_APP_MATOMO_SITE_ID,
         trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
       });
-      if (requireConsent) {
-        this.matomo.pushInstruction('requireConsent');
-      } else {
-        if (disableCookies) {
-          this.matomo.pushInstruction('disableCookies');
-        }
-        this.matomo.trackPageView();
-      }
+      this.matomo.pushInstruction('requireConsent');
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const {
       zoom,
       center,
       cartaroUrl,
-      enableTracking,
       maxExtent,
       mapsetUrl,
       shortenerUrl,
@@ -361,8 +322,6 @@ class TrafimageMaps extends React.PureComponent {
       departuresUrl,
       apiKey,
     } = this.props;
-
-    const { disableCookies, consentGiven, requireConsent } = this.state;
 
     if (zoom !== prevProps.zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -390,35 +349,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (maxExtent !== prevProps.maxExtent) {
       this.store.dispatch(setMaxExtent(maxExtent));
-    }
-
-    if (
-      this.matomo &&
-      enableTracking &&
-      disableCookies &&
-      disableCookies !== prevState.disableCookies
-    ) {
-      this.matomo.pushInstruction('disableCookies');
-    }
-
-    if (
-      this.matomo &&
-      enableTracking &&
-      consentGiven &&
-      consentGiven !== prevState.consentGiven
-    ) {
-      this.matomo.pushInstruction('setConsentGiven');
-      this.matomo.trackPageView();
-    }
-
-    if (
-      this.matomo &&
-      !requireConsent &&
-      !prevProps.enableTracking &&
-      enableTracking
-    ) {
-      this.matomo.trackPageView();
-      this.store.dispatch(setEnableTracking(enableTracking));
     }
 
     if (permissionInfos !== prevProps.permissionInfos) {
@@ -465,18 +395,17 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
     } = this.props;
 
-    const { consentGiven } = this.state;
     return (
       <>
-        <Head
-          topics={topics}
-          displayConsent={enableTracking}
-          consentGiven={consentGiven}
-          domainConsentId="784d5a56-cba1-4b22-9cde-019c2e67555a-test"
-        />
         <MatomoProvider value={this.matomo}>
           <ThemeProvider theme={theme}>
             <Provider store={this.store}>
+              <Head
+                topics={topics}
+                displayConsent={enableTracking}
+                domainConsentId="784d5a56-cba1-4b22-9cde-019c2e67555a-test"
+              />
+              <MatomoTracker />
               <TopicLoader
                 history={history}
                 apiKey={apiKey}

@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 /**
  * This component add tag in the htm head tag for sbb consent management.
  */
-function Head({ topics, displayConsent, consentGiven, domainConsentId }) {
-  const lang = 'de';
-  console.log('ici', displayConsent, domainConsentId);
-
+function Head({ topics, displayConsent, domainConsentId }) {
+  const consentGiven = useSelector((state) => state.app.consentGiven);
+  const language = useSelector((state) => state.app.language);
   const cssText = useMemo(() => {
     return consentGiven
       ? ''
@@ -48,7 +48,7 @@ function Head({ topics, displayConsent, consentGiven, domainConsentId }) {
             type="text/javascript"
             charset="UTF-8"
             data-domain-script={domainConsentId}
-            data-language={`${lang}-ch`}
+            data-language={`${language}-ch`}
           />
         )}
       </Helmet>
@@ -65,13 +65,11 @@ Head.propTypes = {
   ),
   displayConsent: PropTypes.bool,
   domainConsentId: PropTypes.string.isRequired,
-  consentGiven: PropTypes.bool,
 };
 
 Head.defaultProps = {
   topics: [],
   displayConsent: false,
-  consentGiven: false,
 };
 
 export default Head;
