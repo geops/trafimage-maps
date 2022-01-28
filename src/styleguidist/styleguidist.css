@@ -4,6 +4,14 @@
   font-weight: bold !important;
 }
 
+[data-testid='WebComponent-container'] header {
+  display: none;
+}
+
+a[href='#/Web%20component?id=section-trafimage-maps'] + ul {
+  display: none;
+}
+
 #promo {
   position: absolute;
   bottom: 50px;

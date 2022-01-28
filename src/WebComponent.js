@@ -133,22 +133,12 @@ const propTypes = {
   /**
    * Enable analytics tracking.
    */
-  enableTracking: PropTypes.bool,
+  enableTracking: PropTypes.string,
 
   /**
-   * True if the tracker has to wait the user consent, see consentGiven property
+   * OneTrust id used for consent Management.
    */
-  requireConsent: PropTypes.bool,
-
-  /**
-   * True if the consent has been given, work only with requireConsent=true.
-   */
-  consentGiven: PropTypes.bool,
-
-  /**
-   * Disable use fo cookies for analytics.
-   */
-  disableCookies: PropTypes.bool,
+  domainConsentId: PropTypes.string,
 };
 
 const attributes = {
@@ -173,12 +163,10 @@ const attributes = {
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
-  enableTracking: false,
-  disableCookies: false,
-  requireConsent: false,
-  consentGiven: false,
+  enableTracking: 'false',
   elements: undefined,
   layersVisibility: undefined,
+  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
 };
 
 const defaultProps = {
@@ -204,11 +192,9 @@ const WebComponent = (props) => {
     apiKeyName,
     vectorTilesKey,
     enableTracking,
-    disableCookies,
-    requireConsent,
-    consentGiven,
     elements,
     layersVisibility,
+    domainConsentId,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -328,10 +314,8 @@ const WebComponent = (props) => {
           zoom={floatZoom}
           maxExtent={extentArray}
           center={arrayCenter}
-          enableTracking={enableTracking}
-          disableCookies={disableCookies}
-          requireConsent={requireConsent}
-          consentGiven={consentGiven}
+          enableTracking={enableTracking === 'true'}
+          domainConsentId={domainConsentId}
         />
       </div>
     </Styled>

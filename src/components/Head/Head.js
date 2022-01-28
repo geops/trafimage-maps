@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
@@ -7,26 +7,7 @@ import Helmet from 'react-helmet';
  * This component add tag in the htm head tag for sbb consent management.
  */
 function Head({ topics, displayConsent, domainConsentId }) {
-  const consentGiven = useSelector((state) => state.app.consentGiven);
   const language = useSelector((state) => state.app.language);
-  const cssText = useMemo(() => {
-    return consentGiven
-      ? ''
-      : `            
-    /* Put the consent popup inside the web component */
-    #onetrust-consent-sdk {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top:0;
-      left: 0;
-    }
-
-    #onetrust-consent-sdk > div {
-      position: absolute !important;
-    }
-  `;
-  }, [consentGiven]);
 
   if (!displayConsent || !topics || !topics.length || !domainConsentId) {
     return null;
@@ -34,13 +15,7 @@ function Head({ topics, displayConsent, domainConsentId }) {
 
   return (
     <>
-      <Helmet
-        style={[
-          {
-            cssText,
-          },
-        ]}
-      >
+      <Helmet>
         <script
           data-cy="consent-script"
           src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
@@ -71,4 +46,4 @@ Head.defaultProps = {
   domainConsentId: null,
 };
 
-export default Head;
+export default React.memo(Head);
