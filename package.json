@@ -179,6 +179,7 @@
     }
   },
   "jest": {
+    "resetMocks": false,
     "coverageReporters": [
       "text",
       "html"

@@ -161,6 +161,12 @@ const propTypes = {
   enableTracking: PropTypes.bool,
 
   /**
+   * Domain consent id for OneTrust consent window.
+   * @private
+   */
+  domainConsentId: PropTypes.string,
+
+  /**
    * Key of the active topic.
    * @private
    */
@@ -199,6 +205,7 @@ const defaultProps = {
   enableTracking: false,
   activeTopicKey: null,
   permissionInfos: null,
+  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -229,21 +236,6 @@ class TrafimageMaps extends React.PureComponent {
       departuresUrl,
       apiKey,
     } = this.props;
-
-    // Function called on consent change event
-    window.OptanonWrapper = () => {
-      if (!window.Optanon.IsAlertBoxClosed()) {
-        return;
-      }
-
-      if (!/,C0002,/.test(window.OptanonActiveGroups)) {
-        // Disable Matomo cookies
-        this.store.dispatch(setDisableCookies(true));
-      }
-
-      // Start the page tracking.
-      this.store.dispatch(setConsentGiven(true));
-    };
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -305,6 +297,21 @@ class TrafimageMaps extends React.PureComponent {
         trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
       });
       this.matomo.pushInstruction('requireConsent');
+
+      // Function called on consent change event
+      window.OptanonWrapper = () => {
+        if (!window.Optanon || !window.Optanon.IsAlertBoxClosed()) {
+          return;
+        }
+
+        if (!/,C0002,/.test(window.OptanonActiveGroups)) {
+          // Disable Matomo cookies
+          this.store.dispatch(setDisableCookies(true));
+        }
+
+        // Start the page tracking.
+        this.store.dispatch(setConsentGiven(true));
+      };
     }
   }
 
@@ -393,6 +400,7 @@ class TrafimageMaps extends React.PureComponent {
       shortenerUrl,
       drawUrl,
       enableTracking,
+      domainConsentId,
     } = this.props;
 
     return (
@@ -403,7 +411,7 @@ class TrafimageMaps extends React.PureComponent {
               <Head
                 topics={topics}
                 displayConsent={enableTracking}
-                domainConsentId="784d5a56-cba1-4b22-9cde-019c2e67555a-test"
+                domainConsentId={domainConsentId}
               />
               <MatomoTracker />
               <TopicLoader
