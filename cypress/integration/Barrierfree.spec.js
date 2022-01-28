@@ -15,7 +15,7 @@ describe('Barrierfree E2E', () => {
     );
   });
 
-  it.only('should be able to navigate between menu and dialog with Tab.', () => {
+  it('should be able to navigate between menu and dialog with Tab.', () => {
     // Move focus from menu to layer information button.
     cy.focused().tab().tab();
     ['wkp-info-bt', 'wkp-active'].forEach((cls) => {

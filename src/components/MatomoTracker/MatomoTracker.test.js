@@ -11,7 +11,7 @@ import {
   setDisableCookies,
 } from '../../model/app/actions';
 
-describe.only('MatomoTracker', () => {
+describe('MatomoTracker', () => {
   let matomo;
   let store;
 

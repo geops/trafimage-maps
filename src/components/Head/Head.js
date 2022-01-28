@@ -28,13 +28,12 @@ function Head({ topics, displayConsent, domainConsentId }) {
   `;
   }, [consentGiven]);
 
-  if (!topics || !topics.length) {
+  if (!displayConsent || !topics || !topics.length || !domainConsentId) {
     return null;
   }
 
   return (
     <>
-      {/* {!consentGiven && <div id="onetrust-consent-sdk" />} */}
       <Helmet
         style={[
           {
@@ -42,15 +41,14 @@ function Head({ topics, displayConsent, domainConsentId }) {
           },
         ]}
       >
-        {displayConsent && (
-          <script
-            src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
-            type="text/javascript"
-            charset="UTF-8"
-            data-domain-script={domainConsentId}
-            data-language={`${language}-ch`}
-          />
-        )}
+        <script
+          data-cy="consent-script"
+          src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+          type="text/javascript"
+          charset="UTF-8"
+          data-domain-script={domainConsentId}
+          data-language={`${language}-ch`}
+        />
       </Helmet>
     </>
   );
@@ -64,12 +62,13 @@ Head.propTypes = {
     }),
   ),
   displayConsent: PropTypes.bool,
-  domainConsentId: PropTypes.string.isRequired,
+  domainConsentId: PropTypes.string,
 };
 
 Head.defaultProps = {
   topics: [],
   displayConsent: false,
+  domainConsentId: null,
 };
 
 export default Head;
