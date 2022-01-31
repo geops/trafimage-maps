@@ -218,6 +218,24 @@ class TrafimageMaps extends React.PureComponent {
      * @private
      */
     this.store = getStore();
+
+    // Create the matomo instance asap.
+    // Very important to do it here otherwise on the first render this.matomo will be undefined
+    // and the useMatomo hook in MatomoTracker will not use the instance to track the view.
+    // This happened on the doc page (yarn start:doc) but not on the app page (yarn start).
+    const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
+    if (
+      props.enableTracking &&
+      REACT_APP_MATOMO_URL_BASE &&
+      REACT_APP_MATOMO_SITE_ID
+    ) {
+      this.matomo = createInstance({
+        urlBase: REACT_APP_MATOMO_URL_BASE,
+        siteId: REACT_APP_MATOMO_SITE_ID,
+        trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
+      });
+      this.matomo.pushInstruction('requireConsent');
+    }
   }
 
   componentDidMount() {
@@ -284,20 +302,7 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
-    // Create the matomo instance
-    const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
-    if (
-      enableTracking &&
-      REACT_APP_MATOMO_URL_BASE &&
-      REACT_APP_MATOMO_SITE_ID
-    ) {
-      this.matomo = createInstance({
-        urlBase: REACT_APP_MATOMO_URL_BASE,
-        siteId: REACT_APP_MATOMO_SITE_ID,
-        trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
-      });
-      this.matomo.pushInstruction('requireConsent');
-
+    if (enableTracking) {
       // Function called on consent change event
       window.OptanonWrapper = () => {
         if (!window.Optanon || !window.Optanon.IsAlertBoxClosed()) {
@@ -376,7 +381,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    // The Map is created in the store so trafimage- maps is responsible
+    // The Map is created in the store so trafimage-maps is responsible
     // to clear the map before unmount.
     // Make sure all layers and their listeners (ol and mobility-toolbox-js)
     // are well removed.
@@ -404,36 +409,35 @@ class TrafimageMaps extends React.PureComponent {
     } = this.props;
 
     return (
-      <>
-        <MatomoProvider value={this.matomo}>
-          <ThemeProvider theme={theme}>
-            <Provider store={this.store}>
-              <Head
-                topics={topics}
-                displayConsent={enableTracking}
-                domainConsentId={domainConsentId}
-              />
-              <MatomoTracker />
-              <TopicLoader
-                history={history}
-                apiKey={apiKey}
-                apiKeyName={apiKeyName}
-                topics={topics}
-                activeTopicKey={activeTopicKey}
-                cartaroUrl={cartaroUrl}
-                loginUrl={loginUrl}
-                appBaseUrl={appBaseUrl}
-                vectorTilesKey={vectorTilesKey}
-                vectorTilesUrl={vectorTilesUrl}
-                staticFilesUrl={staticFilesUrl}
-                mapsetUrl={mapsetUrl}
-                shortenerUrl={shortenerUrl}
-                drawUrl={drawUrl}
-              />
-            </Provider>
-          </ThemeProvider>
-        </MatomoProvider>
-      </>
+      <MatomoProvider value={this.matomo}>
+        <ThemeProvider theme={theme}>
+          <Provider store={this.store}>
+            <Head
+              topics={topics}
+              displayConsent={enableTracking}
+              domainConsentId={domainConsentId}
+            />
+            {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
+            {this.matomo && <MatomoTracker />}
+            <TopicLoader
+              history={history}
+              apiKey={apiKey}
+              apiKeyName={apiKeyName}
+              topics={topics}
+              activeTopicKey={activeTopicKey}
+              cartaroUrl={cartaroUrl}
+              loginUrl={loginUrl}
+              appBaseUrl={appBaseUrl}
+              vectorTilesKey={vectorTilesKey}
+              vectorTilesUrl={vectorTilesUrl}
+              staticFilesUrl={staticFilesUrl}
+              mapsetUrl={mapsetUrl}
+              shortenerUrl={shortenerUrl}
+              drawUrl={drawUrl}
+            />
+          </Provider>
+        </ThemeProvider>
+      </MatomoProvider>
     );
   }
 }

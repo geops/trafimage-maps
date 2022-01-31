@@ -111,7 +111,7 @@ describe('MatomoTracker', () => {
 
     expect(matomo.trackEvent).toHaveBeenCalledTimes(1);
     expect(matomo.trackEvent).toHaveBeenCalledWith({
-      action: 'User topic change',
+      action: 'load',
       category: 'foo',
     });
   });
@@ -134,7 +134,7 @@ describe('MatomoTracker', () => {
 
     expect(matomo.trackEvent).toHaveBeenCalledTimes(1);
     expect(matomo.trackEvent.mock.calls[0][0]).toEqual({
-      action: 'User topic change',
+      action: 'load',
       category: 'foo',
     });
 
@@ -144,7 +144,7 @@ describe('MatomoTracker', () => {
 
     expect(matomo.trackEvent).toHaveBeenCalledTimes(2);
     expect(matomo.trackEvent.mock.calls[1][0]).toEqual({
-      action: 'User topic change',
+      action: 'load',
       category: 'bar',
     });
 

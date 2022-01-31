@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
 
+const LS_MATOMO_USER_SESSION_TIMER = 'matomo_user_session_timer';
+const LS_MATOMO_TOPIC_VISITED = 'matomo_topic_visited';
+const MATOMO_TOPIC_CHANGE_ACTION = 'load';
+
 function MatomoTracker() {
   const { trackPageView, trackEvent, pushInstruction } = useMatomo();
   const disableCookies = useSelector((state) => state.app.disableCookies);
@@ -24,8 +28,8 @@ function MatomoTracker() {
     trackPageView();
 
     // Start the clock to avoid duplicate 'User topic change' event tracking.
-    window.localStorage?.setItem('matomo_user_session_timer', Date.now());
-    window.localStorage?.setItem('matomo_topic_visited', '');
+    localStorage?.setItem(LS_MATOMO_USER_SESSION_TIMER, Date.now());
+    localStorage?.setItem(LS_MATOMO_TOPIC_VISITED, '');
   }, [disableCookies, consentGiven, trackPageView, pushInstruction]);
 
   // Track topic change event within 30 min.
@@ -33,8 +37,8 @@ function MatomoTracker() {
     if (!activeTopicKey || !consentGiven || !trackEvent || !localStorage) {
       return;
     }
-    const startDate = localStorage?.getItem('matomo_user_session_timer') || 0;
-    const topicVisited = localStorage?.getItem('matomo_topic_visited') || '';
+    const startDate = localStorage?.getItem(LS_MATOMO_USER_SESSION_TIMER) || 0;
+    const topicVisited = localStorage?.getItem(LS_MATOMO_TOPIC_VISITED) || '';
 
     // A matomo user session is 30 min by default.
     if (
@@ -45,10 +49,10 @@ function MatomoTracker() {
       // Track the topic change
       trackEvent({
         category: activeTopicKey,
-        action: 'User topic change',
+        action: MATOMO_TOPIC_CHANGE_ACTION,
       });
       localStorage?.setItem(
-        'matomo_topic_visited',
+        LS_MATOMO_TOPIC_VISITED,
         `${topicVisited + activeTopicKey},`,
       );
     }
