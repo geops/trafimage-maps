@@ -1649,10 +1649,10 @@ export const energieLeitungenLayer = new Layer({
 });
 
 export const energieAnlagenLayer = new Layer({
-  name: 'ch.sbb.energie_anlagen',
+  name: 'ch.sbb.energie_unterwerke',
   mapboxLayer: netzentwicklungDataLayer,
-  queryRenderedLayersFilter: ({ id }) => /energie_anlagen$/.test(id),
-  styleLayersFilter: ({ id }) => /energie_anlagen$/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /energie_unterwerke$/.test(id),
+  styleLayersFilter: ({ id }) => /energie_unterwerke$/.test(id),
   properties: {
     popupComponent: 'EnergiePopup',
     useOverlay: true,
