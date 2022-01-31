@@ -27,9 +27,6 @@ describe('TrafimageMaps', () => {
       expect(component.getInstance().matomo).toBeDefined();
       expect(
         component.getInstance().matomo.pushInstruction,
-      ).toHaveBeenCalledWith('requireConsent');
-      expect(
-        component.getInstance().matomo.pushInstruction,
       ).toHaveBeenCalledTimes(1);
       expect(
         component.getInstance().matomo.pushInstruction,
