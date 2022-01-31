@@ -3,6 +3,7 @@ import lang from '../../src/lang/de.json';
 describe('Handicap Topic', () => {
   beforeEach(() => {
     cy.visit('');
+    cy.get('#onetrust-accept-btn-handler').click();
     cy.get('.wkp-menu-header ').click();
     cy.server();
     cy.wait(1000);

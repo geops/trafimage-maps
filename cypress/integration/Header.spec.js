@@ -102,8 +102,10 @@ describe('Header components', () => {
     describe(`${getViewPortName(viewport)} screen`, () => {
       it(`should display menu`, () => {
         setViewPort(viewport);
+        // Click the consent button
+        cy.get('#onetrust-accept-btn-handler').click();
         cy.get('.wkp-menu-header').should('be.visible');
-        cy.get('.wkp-topics-menu-body').should('not.be.visible');
+        cy.get('.wkp-topics-menu-body').should('not.exist');
         cy.get('.wkp-menu-header').click();
 
         // Menu should open
