@@ -402,7 +402,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       domainConsentId,
     } = this.props;
-    console.log(enableTracking);
+
     return (
       <>
         <MatomoProvider value={this.matomo}>
