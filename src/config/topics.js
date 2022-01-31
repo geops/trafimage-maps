@@ -56,6 +56,8 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
+  energieAnlagenLayer,
+  energieLeitungenLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -373,6 +375,21 @@ export const beleuchtungsstaerken = {
   searches: defaultSearches,
 };
 
+export const energie = {
+  name: 'ch.sbb.energie',
+  key: 'ch.sbb.energie',
+  maxZoom: 13,
+  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  layers: [
+    netzentwicklungDataLayer,
+    energieAnlagenLayer,
+    energieLeitungenLayer,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'EnergieTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -384,6 +401,7 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
+    energie,
     showcases,
   ],
   stelen: [netzkarteStelen],

@@ -1457,7 +1457,7 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   properties: {
     radioGroup: 'netzentwicklung',
     popupComponent: 'NetzentwicklungPopup',
-    netzentwicklungRoleType: 'Netzentwickler Strategisch', // display only roles of this type
+    netzentwicklungRoleType: 'Netzentwickler Strategisch', // display only roles of this typedirektverbindungenLayer
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
@@ -1634,6 +1634,28 @@ export const direktverbindungenLayer = new Layer({
   properties: {
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenLayerInfo',
+  },
+});
+
+export const energieLeitungenLayer = new Layer({
+  name: 'ch.sbb.energie_leitungen',
+  mapboxLayer: netzentwicklungDataLayer,
+  queryRenderedLayersFilter: ({ id }) => /energie_leitungen$/.test(id),
+  styleLayersFilter: ({ id }) => /energie_leitungen$/.test(id),
+  properties: {
+    popupComponent: 'EnergiePopup',
+    useOverlay: true,
+  },
+});
+
+export const energieAnlagenLayer = new Layer({
+  name: 'ch.sbb.energie_anlagen',
+  mapboxLayer: netzentwicklungDataLayer,
+  queryRenderedLayersFilter: ({ id }) => /energie_anlagen$/.test(id),
+  styleLayersFilter: ({ id }) => /energie_anlagen$/.test(id),
+  properties: {
+    popupComponent: 'EnergiePopup',
+    useOverlay: true,
   },
 });
 
