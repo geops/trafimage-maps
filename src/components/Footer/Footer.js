@@ -61,7 +61,9 @@ const Footer = () => {
             id="ot-sdk-btn"
             type="button"
             className="ot-sdk-show-settings"
-            style={{ display: consentGiven ? 'inline-block' : 'none' }}
+            style={{
+              display: consentGiven ? 'inline-block' : 'none',
+            }}
           />
         }
         <Link
