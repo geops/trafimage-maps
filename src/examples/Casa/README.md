@@ -205,7 +205,7 @@ const App = () => {
   /* To use casa style sheet, add the casa class in the parent class */
   return (
     <div className="container casa">
-      <trafimage-maps ref={ref} appName="casa" apiKey={apiKey} apiKeyName={apiKeyName} />
+      <trafimage-maps ref={ref} appName="casa" apiKey={apiKey} apiKeyName={apiKeyName} enableTracking="true"/>
     </div>
   );
 }
