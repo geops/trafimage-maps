@@ -163,7 +163,7 @@ const attributes = {
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
-  enableTracking: 'false',
+  enableTracking: 'true',
   elements: undefined,
   layersVisibility: undefined,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,

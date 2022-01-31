@@ -5,18 +5,18 @@ import TrafimageMaps from '.';
 
 describe('TrafimageMaps', () => {
   describe('tracking and consent', () => {
-    test('disabled by default', () => {
+    test('disabled', () => {
       const component = renderer.create(
-        <TrafimageMaps apiKey="" topics={[]} />,
+        <TrafimageMaps apiKey="" enableTracking={false} topics={[]} />,
       );
       expect(component.getInstance().matomo).toBeUndefined();
       expect(createInstance).toHaveBeenCalledTimes(0);
       expect(window.OptanonWrapper).toBeUndefined();
     });
 
-    test('enabled and active consent mechanism.', () => {
+    test.only('enabled by default and active consent mechanism.', () => {
       const component = renderer.create(
-        <TrafimageMaps apiKey="" enableTracking topics={[]} />,
+        <TrafimageMaps apiKey="" topics={[]} />,
       );
       expect(createInstance).toHaveBeenCalledTimes(1);
       expect(createInstance).toHaveBeenCalledWith({
@@ -25,6 +25,9 @@ describe('TrafimageMaps', () => {
         urlBase: 'https://analytics.geops.de/',
       });
       expect(component.getInstance().matomo).toBeDefined();
+      expect(
+        component.getInstance().matomo.pushInstruction,
+      ).toHaveBeenCalledWith('requireConsent');
       expect(
         component.getInstance().matomo.pushInstruction,
       ).toHaveBeenCalledTimes(1);

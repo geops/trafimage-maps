@@ -202,7 +202,7 @@ const defaultProps = {
   departuresUrl: process.env.REACT_APP_DEPARTURES_URL,
   topics: null,
   language: 'de',
-  enableTracking: false,
+  enableTracking: true,
   activeTopicKey: null,
   permissionInfos: null,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
