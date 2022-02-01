@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useMatomo } from '@datapunt/matomo-tracker-react';
-
-const LS_MATOMO_USER_SESSION_TIMER = 'matomo_user_session_timer';
-const LS_MATOMO_TOPIC_VISITED = 'matomo_topic_visited';
-const MATOMO_TOPIC_CHANGE_ACTION = 'load';
+import {
+  LS_MATOMO_USER_SESSION_TIMER,
+  LS_MATOMO_TOPIC_VISITED,
+  MATOMO_TOPIC_CHANGE_ACTION,
+  MATOMO_TOPIC_CHANGE_TIMER,
+} from '../../utils/constants';
 
 function MatomoTracker() {
   const { trackPageView, trackEvent, pushInstruction } = useMatomo();
@@ -42,7 +44,7 @@ function MatomoTracker() {
 
     // A matomo user session is 30 min by default.
     if (
-      Date.now() - startDate > 30 * 60 * 1000 ||
+      Date.now() - startDate > MATOMO_TOPIC_CHANGE_TIMER ||
       topicVisited.indexOf(`${activeTopicKey},`) === -1
     ) {
       // within 30 min

@@ -11,6 +11,8 @@ import {
   setDisableCookies,
 } from '../../model/app/actions';
 
+import { MATOMO_TOPIC_CHANGE_TIMER } from '../../utils/constants';
+
 describe('MatomoTracker', () => {
   let matomo;
   let store;
@@ -155,7 +157,7 @@ describe('MatomoTracker', () => {
     expect(matomo.trackEvent).toHaveBeenCalledTimes(2);
 
     // > 1s + 30min + 1s
-    Date.now = jest.fn(() => 30 * 60 * 1000 + 2);
+    Date.now = jest.fn(() => MATOMO_TOPIC_CHANGE_TIMER + 2);
 
     act(() => {
       store.dispatch(setActiveTopic({ key: 'bar' }));
