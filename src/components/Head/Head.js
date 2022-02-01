@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 /**
- * This component add tag in the htm head tag for sbb consent management.
+ * This component adds a script tag in the HTML head for SBB consent management.
  */
 function Head({ topics, displayConsent, domainConsentId }) {
   const language = useSelector((state) => state.app.language);
