@@ -272,6 +272,7 @@ punctuality.children = [
     useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
+    generalizationLevelsByZoom: [],
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
     properties: {
       radioGroup: 'ch.sbb.punctuality',
@@ -284,6 +285,7 @@ punctuality.children = [
     useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
+    generalizationLevelsByZoom: [],
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
     properties: {
       radioGroup: 'ch.sbb.punctuality',
@@ -296,6 +298,7 @@ punctuality.children = [
     useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
+    generalizationLevelsByZoom: [],
     properties: {
       radioGroup: 'ch.sbb.punctuality',
     },
