@@ -1640,6 +1640,32 @@ export const direktverbindungenLayer = new Layer({
   },
 });
 
+export const infrastrukturBetreiberNoTVS = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastrukturbetreiber.notvs',
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
+  // styleLayersFilter: ({ id }) => /pattern_/.test(id),
+  // queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
+  properties: {
+    // hasInfos: true,
+    useOverlay: true,
+    popupComponent: 'InfrastrukturBetreiberPopup',
+    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
+  },
+});
+
+export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastrukturbetreiber.tvs',
+  mapboxLayer: netzkarteEisenbahninfrastruktur,
+  // styleLayersFilter: ({ id }) => /pattern_/.test(id),
+  // queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
+  properties: {
+    // hasInfos: true,
+    useOverlay: true,
+    popupComponent: 'InfrastrukturBetreiberPopup',
+    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
+  },
+});
+
 export default [
   dataLayer,
   netzkarteLayer,

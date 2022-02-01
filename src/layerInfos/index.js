@@ -8,6 +8,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import HandicapLayerInfo from './HandicapLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import InterventionTopicInfo from './InterventionTopicInfo';
+import InfrastrukturBetreiberTopicInfo from './InfrastrukturBetreiberTopicInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
@@ -37,6 +38,7 @@ export { default as DrawLayerInfo } from './DrawLayerInfo';
 export { default as HandicapTopicInfo } from './HandicapTopicInfo';
 export { default as HandicapLayerInfo } from './HandicapLayerInfo';
 export { default as InfrastrukturTopicInfo } from './InfrastrukturTopicInfo';
+export { default as InfrastrukturBetreiberTopicInfo } from './InfrastrukturBetreiberTopicInfo';
 export { default as InterventionTopicInfo } from './InterventionTopicInfo';
 export { default as PassagierFrequenzenLayerInfo } from './PassagierFrequenzenLayerInfo';
 export { default as PunctualityLayerInfo } from './PunctualityLayerInfo';
@@ -71,6 +73,7 @@ export default {
   HandicapTopicInfo,
   HandicapLayerInfo,
   InfrastrukturTopicInfo,
+  InfrastrukturBetreiberTopicInfo,
   InterventionTopicInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
