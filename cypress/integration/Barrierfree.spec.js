@@ -5,7 +5,7 @@ import lang from '../../src/lang/de.json';
 describe('Barrierfree E2E', () => {
   beforeEach(() => {
     cy.visit('');
-    cy.get('#onetrust-accept-btn-handler').click();
+    cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
     cy.get('.wkp-menu-header ').click();
     cy.wait(1000);
   });
