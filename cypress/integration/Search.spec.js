@@ -3,9 +3,9 @@
 describe('Search', () => {
   beforeEach(() => {
     cy.visit('');
+    cy.get('#onetrust-accept-btn-handler').click();
   });
   it(`should display plural texts`, () => {
-    cy.get('#onetrust-accept-btn-handler').click();
     // Input is not visible
     cy.get('.wkp-search-toggle-button').click();
     cy.get('.wkp-search-input input').focus().type('Bern');
