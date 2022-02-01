@@ -145,8 +145,6 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
   // When the featureIndex change we add the red circle then we pan on it.
   useEffect(() => {
-    highlightLayer.getSource().clear();
-
     // 'feature' can be a feature or an array
     const feature = infoIndexed.features[featureIndex];
     if (!feature) {
