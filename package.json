@@ -80,6 +80,7 @@
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-prettier": "4.0.0",
@@ -146,7 +147,8 @@
       "node": true,
       "browser": true,
       "es6": true,
-      "jest": true
+      "jest": true,
+      "cypress/globals": true
     },
     "parser": "@babel/eslint-parser",
     "extends": [
@@ -155,6 +157,7 @@
       "prettier"
     ],
     "plugins": [
+      "cypress",
       "prettier"
     ],
     "rules": {

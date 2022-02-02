@@ -226,7 +226,11 @@ const WebComponent = (props) => {
       return null;
     }
 
-    const urlTopic = window.location.pathname.replace('/', '');
+    // This comparaison is really bad, depending on which is the pathname the web component
+    // could load nothing. Example with a pathname like this /build.d/index.html
+    // We expect a topic is composed at least like this xxxx.xxxx.xxxx.
+    const urlTopic =
+      !!window.location.pathname.replace('/', '').split('.').length > 1;
     if (urlTopic && activeTopicKey && urlTopic !== activeTopicKey) {
       return [];
     }
