@@ -13491,10 +13491,10 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@1.6.2:
-  version "1.6.2"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.6.2.tgz#943262fa8ee3b28029202a64da433c0738e90bf9"
-  integrity sha512-aTxAd2tdi/OetpUWGVB+FF0vLQlHCCq3x3mcfLOG404CLXpOeI+DI8GvVtK1nSu6yDcGIOSIAZIwSKFJB0FL2A==
+mobility-toolbox-js@1.6.5:
+  version "1.6.5"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-1.6.5.tgz#8fba66688374b3511812a83454689926e0362567"
+  integrity sha512-t9dLjFT4Axcj3Mquk2rGk9P+CGtrZos3Kr2vN0kOBjMsg7JUDGKKSK6ZeFx+w/yxQnLAra3rtf9gv7LqUFfdaQ==
   dependencies:
     "@geops/geops-ui" "0.1.11"
     "@material-ui/core" "^4.9.14"
@@ -16521,10 +16521,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.0.36:
-  version "1.0.36"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.0.36.tgz#6ff113f267c9adfbefa39b506d858b3abbc004f2"
-  integrity sha512-kmoiUgz0b1WhCXHU9Hpsjm3/tSUP1+cw2a3pVDgkVMolcip07xCfNB+zT7cRYkGTXfuxG/IQHRPk0g7zG5/4VA==
+react-spatial@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.1.0.tgz#beccc827c3b4f93963103bb1d47ecca13bd2bf7f"
+  integrity sha512-3tdlXuixILakNx0UjJdqoLF2FjkUgYAT2N9q37hKd007WqC3ty1f53L/qL+45Q1WEs/UocZbKRLYshS7oycWnA==
   dependencies:
     "@geops/geops-ui" "0.1.12"
     "@material-ui/core" "4.12.3"
