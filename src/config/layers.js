@@ -841,6 +841,20 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   },
 });
 
+export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
+  name: 'ch.sbb.infrastrukturbetreiber',
+  isBaseLayer: true,
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber',
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'InfrastrukturTopicInfo',
+  },
+});
+
 export const betriebsRegionen = new MapboxStyleLayer({
   name: 'ch.sbb.betriebsregionen',
   visible: false,
@@ -1642,9 +1656,11 @@ export const direktverbindungenLayer = new Layer({
 
 export const infrastrukturBetreiberNoTVS = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.notvs',
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  // styleLayersFilter: ({ id }) => /pattern_/.test(id),
-  // queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
+  mapboxLayer: netzkarteinfrastrukturbetreiber,
+  styleLayersFilter: ({ metadata }) =>
+    metadata &&
+    metadata['isb.filter'] &&
+    /^(?!tvs_).*$/.test(metadata['isb.filter']),
   properties: {
     // hasInfos: true,
     useOverlay: true,
@@ -1655,9 +1671,9 @@ export const infrastrukturBetreiberNoTVS = new MapboxStyleLayer({
 
 export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.tvs',
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  // styleLayersFilter: ({ id }) => /pattern_/.test(id),
-  // queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
+  mapboxLayer: netzkarteinfrastrukturbetreiber,
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['isb.filter'] && /tvs_/.test(metadata['isb.filter']),
   properties: {
     // hasInfos: true,
     useOverlay: true,

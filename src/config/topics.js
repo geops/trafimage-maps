@@ -56,6 +56,7 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
+  netzkarteinfrastrukturbetreiber,
   infrastrukturBetreiberNoTVS,
   infrastrukturBetreiberTVS,
 } from './layers';
@@ -385,7 +386,7 @@ export const infrastrukturbetreiber = {
     popup: true,
   },
   layers: [
-    netzkarteEisenbahninfrastruktur,
+    netzkarteinfrastrukturbetreiber,
     infrastrukturBetreiberNoTVS,
     infrastrukturBetreiberTVS,
   ],
