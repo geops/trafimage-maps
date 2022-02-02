@@ -149,6 +149,12 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
     // 'feature' can be a feature or an array
     const feature = infoIndexed.features[featureIndex];
+    if (!feature) {
+      // When the user click on map to get new feature info, the infoIndexed is
+      // changed before the featureIndex. So the featureIndex is not reinitialized yet.
+      // It will be on the next render. So we just ignore if there is no feature to display.
+      return;
+    }
     const features = Array.isArray(feature) ? feature : [feature];
     const layerr = infoIndexed.layers[featureIndex];
     const layers = Array.isArray(layerr) ? layerr : [layerr];
