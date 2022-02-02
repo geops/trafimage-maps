@@ -39,6 +39,7 @@
     "react-autosuggest": "10.1.0",
     "react-dom": "16.14.0",
     "react-draggable": "^4.4.4",
+    "react-helmet": "^6.1.0",
     "react-i18next": "11.12.0",
     "react-icons": "^4.3.1",
     "react-redux": "7.2.5",
@@ -178,6 +179,7 @@
     }
   },
   "jest": {
+    "resetMocks": false,
     "coverageReporters": [
       "text",
       "html"

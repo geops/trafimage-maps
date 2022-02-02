@@ -10,8 +10,10 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { Layer } from 'mobility-toolbox-js/ol';
+import MatomoTracker from '../MatomoTracker';
+import Head from '../Head';
 import TopicLoader from '../TopicLoader';
-import { getStore } from '../../model/store';
+import getStore from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
 import {
   setLanguage,
@@ -23,7 +25,7 @@ import {
   setDestinationUrl,
   setDeparturesUrl,
   setApiKey,
-  setEnableTracking,
+  setDisableCookies,
   setConsentGiven,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
@@ -159,22 +161,10 @@ const propTypes = {
   enableTracking: PropTypes.bool,
 
   /**
-   * True if the tracker has to wait the user consent, see consentGiven property
+   * Domain consent id for OneTrust consent window.
    * @private
    */
-  requireConsent: PropTypes.bool,
-
-  /**
-   * True if the consent has been given, work only with requireConsent=true.
-   * @private
-   */
-  consentGiven: PropTypes.bool,
-
-  /**
-   * Disable use fo cookies for analytics.
-   * @private
-   */
-  disableCookies: PropTypes.bool,
+  domainConsentId: PropTypes.string,
 
   /**
    * Key of the active topic.
@@ -212,12 +202,10 @@ const defaultProps = {
   departuresUrl: process.env.REACT_APP_DEPARTURES_URL,
   topics: null,
   language: 'de',
-  enableTracking: false,
-  disableCookies: false,
-  requireConsent: false,
-  consentGiven: false,
+  enableTracking: true,
   activeTopicKey: null,
   permissionInfos: null,
+  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -230,6 +218,24 @@ class TrafimageMaps extends React.PureComponent {
      * @private
      */
     this.store = getStore();
+
+    // Create the matomo instance asap.
+    // Very important to do it here otherwise on the first render this.matomo will be undefined
+    // and the useMatomo hook in MatomoTracker will not use the instance to track the view.
+    // This happened on the doc page (yarn start:doc) but not on the app page (yarn start).
+    const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
+    if (
+      props.enableTracking &&
+      REACT_APP_MATOMO_URL_BASE &&
+      REACT_APP_MATOMO_SITE_ID
+    ) {
+      this.matomo = createInstance({
+        urlBase: REACT_APP_MATOMO_URL_BASE,
+        siteId: REACT_APP_MATOMO_SITE_ID,
+        trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
+      });
+      this.matomo.pushInstruction('requireConsent');
+    }
   }
 
   componentDidMount() {
@@ -238,7 +244,6 @@ class TrafimageMaps extends React.PureComponent {
       center,
       language,
       enableTracking,
-      disableCookies,
       cartaroUrl,
       mapsetUrl,
       shortenerUrl,
@@ -248,7 +253,6 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
-      requireConsent,
     } = this.props;
 
     if (zoom) {
@@ -298,25 +302,21 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
-    const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
-    if (
-      enableTracking &&
-      REACT_APP_MATOMO_URL_BASE &&
-      REACT_APP_MATOMO_SITE_ID
-    ) {
-      this.matomo = createInstance({
-        urlBase: REACT_APP_MATOMO_URL_BASE,
-        siteId: REACT_APP_MATOMO_SITE_ID,
-        trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
-      });
-      if (requireConsent) {
-        this.matomo.pushInstruction('requireConsent');
-      } else {
-        if (disableCookies) {
-          this.matomo.pushInstruction('disableCookies');
+    if (enableTracking) {
+      // Function called on consent change event
+      window.OptanonWrapper = () => {
+        if (!window.Optanon || !window.Optanon.IsAlertBoxClosed()) {
+          return;
         }
-        this.matomo.trackPageView();
-      }
+
+        if (!/,C0002,/.test(window.OptanonActiveGroups)) {
+          // Disable Matomo cookies
+          this.store.dispatch(setDisableCookies(true));
+        }
+
+        // Start the page tracking.
+        this.store.dispatch(setConsentGiven(true));
+      };
     }
   }
 
@@ -325,10 +325,6 @@ class TrafimageMaps extends React.PureComponent {
       zoom,
       center,
       cartaroUrl,
-      enableTracking,
-      disableCookies,
-      consentGiven,
-      requireConsent,
       maxExtent,
       mapsetUrl,
       shortenerUrl,
@@ -367,36 +363,6 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setMaxExtent(maxExtent));
     }
 
-    if (
-      this.matomo &&
-      enableTracking &&
-      disableCookies &&
-      disableCookies !== prevProps.disableCookies
-    ) {
-      this.matomo.pushInstruction('disableCookies');
-    }
-
-    if (
-      this.matomo &&
-      enableTracking &&
-      consentGiven &&
-      consentGiven !== prevProps.consentGiven
-    ) {
-      this.matomo.pushInstruction('setConsentGiven');
-      this.matomo.trackPageView();
-      this.store.dispatch(setConsentGiven(consentGiven));
-    }
-
-    if (
-      this.matomo &&
-      !requireConsent &&
-      !prevProps.enableTracking &&
-      enableTracking
-    ) {
-      this.matomo.trackPageView();
-      this.store.dispatch(setEnableTracking(enableTracking));
-    }
-
     if (permissionInfos !== prevProps.permissionInfos) {
       this.store.dispatch(setPermissionInfos(permissionInfos));
     }
@@ -415,7 +381,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   componentWillUnmount() {
-    // The Map is created in the store so trafimage- maps is responsible
+    // The Map is created in the store so trafimage-maps is responsible
     // to clear the map before unmount.
     // Make sure all layers and their listeners (ol and mobility-toolbox-js)
     // are well removed.
@@ -438,12 +404,21 @@ class TrafimageMaps extends React.PureComponent {
       mapsetUrl,
       shortenerUrl,
       drawUrl,
+      enableTracking,
+      domainConsentId,
     } = this.props;
 
     return (
       <MatomoProvider value={this.matomo}>
         <ThemeProvider theme={theme}>
           <Provider store={this.store}>
+            <Head
+              topics={topics}
+              displayConsent={enableTracking}
+              domainConsentId={domainConsentId}
+            />
+            {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
+            {this.matomo && <MatomoTracker />}
             <TopicLoader
               history={history}
               apiKey={apiKey}
