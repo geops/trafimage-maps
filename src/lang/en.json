@@ -171,7 +171,7 @@
   "ch.sbb.infrastruktur.uebrigebahnen.group-desc": "This layer group comprises the operating points and routes of infrastructure operated by other railway companies.",
   "ch.sbb.infrastrukturbetreiber": "Infrastructure operators",
   "ch.sbb.infrastrukturbetreiber.tvs": "Standard gauge lines - TVS",
-  "ch.sbb.infrastrukturbetreiber.notvs": "Standard gauge lines - Non TVS",
+  "ch.sbb.infrastrukturbetreiber.other": "Standard gauge lines - Other",
   "ch.sbb.kfk": "Timetable change on 13 December 2015",
   "ch.sbb.kfk-desc": "The timetable change on 13 December 2015 is the most challenging since the launch of \"Rail 2000\" in 2004. The map shows the most important changes to SBB long-distance and regional services and building sites which affect the timetable.<p>Responsible: SBB Passenger Communications, <a href=\"mailto:pkom@sbb.ch\">pkom@sbb.ch</a>.</p>",
   "ch.sbb.lakai.carte_blanche": "Carte Blanche",

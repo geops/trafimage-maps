@@ -23,6 +23,7 @@ import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
 import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import TralisLayer from '../layers/TralisLayer';
+import InfrastrukturBetreiberLayer from '../layers/InfrastrukturBetreiberLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1654,13 +1655,15 @@ export const direktverbindungenLayer = new Layer({
   },
 });
 
-export const infrastrukturBetreiberNoTVS = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiber.notvs',
+export const infrastrukturBetreiberNoTVS = new InfrastrukturBetreiberLayer({
+  name: 'ch.sbb.infrastrukturbetreiber.other',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['isb.filter'] && /other/.test(metadata['isb.filter']),
+  queryRenderedLayersFilter: ({ metadata }) =>
     metadata &&
     metadata['isb.filter'] &&
-    /^(?!tvs_).*$/.test(metadata['isb.filter']),
+    /^other$/.test(metadata['isb.filter']),
   properties: {
     // hasInfos: true,
     useOverlay: true,
@@ -1669,11 +1672,13 @@ export const infrastrukturBetreiberNoTVS = new MapboxStyleLayer({
   },
 });
 
-export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
+export const infrastrukturBetreiberTVS = new InfrastrukturBetreiberLayer({
   name: 'ch.sbb.infrastrukturbetreiber.tvs',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['isb.filter'] && /tvs_/.test(metadata['isb.filter']),
+    metadata && metadata['isb.filter'] && /tvs/.test(metadata['isb.filter']),
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
   properties: {
     // hasInfos: true,
     useOverlay: true,

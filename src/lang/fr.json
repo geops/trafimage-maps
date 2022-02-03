@@ -184,7 +184,7 @@
   "ch.sbb.infrastruktur.uebrigebahnen.group-desc": "Ce groupe de layers comprend les points d’exploitation, et les tronçons des infrastructures exploitées par les autres entreprises de chemin de fer.",
   "ch.sbb.infrastrukturbetreiber": "Opérateurs d'infrastructures",
   "ch.sbb.infrastrukturbetreiber.tvs": "Lignes à voie normale - SAS",
-  "ch.sbb.infrastrukturbetreiber.notvs": "Lignes à voie normale - Non SAS",
+  "ch.sbb.infrastrukturbetreiber.other": "Lignes à voie normale - Autres",
   "ch.sbb.intervention": "Intervention CFF",
   "ch.sbb.intervention-desc": "Les sites principaux et annexes ainsi que l'appartenance des points d'exploitation à chaque site seront représentés sur la carte signalétique Intervention. En plus, les données clés concernant la disponibilité, le personnel et le matériel des sites principaux et annexes seront indiquées.",
   "ch.sbb.kfk": "Changement d'horaire du 13 décembre 2015",
