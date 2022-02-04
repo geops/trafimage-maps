@@ -62,6 +62,7 @@
     "@babel/eslint-parser": "7.15.7",
     "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "@svgr/webpack": "5.5.0",
+    "@testing-library/react": "12.1.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-jest": "26.6.3",
     "babel-loader": "8.1.0",

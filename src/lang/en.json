@@ -276,6 +276,7 @@
   "ch.sbb.zweitausbildung.tourist.routes.group-desc": "The tourist routes cover all panoramic routes as well as further attractive tourist train routes.",
   "connection": "Verbindung",
   "connection_other": "Verbindungen",
+  "Cookie-Einstellungen": "Cookie setting",
   "Damit sie ihre Zeichnung erneut bearbeiten können, müssen sie diesen Link speichern.": "You can save this link to edit your drawing again.",
   "departure_url": "http://fahrplan.sbb.ch/bin/stboard.exe/en?boardType=dep&editStation=yes&input={stationname}&start=yes",
   "Der barrierefreie Umbau der Gleise 1 & 2 dauert bis 2025": "The modification of the tracks 1 and 2 lasts until 2025",
