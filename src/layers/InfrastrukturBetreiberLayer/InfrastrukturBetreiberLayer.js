@@ -48,7 +48,7 @@ class InfrastrukturBetreiberLayer extends MapboxStyleLayer {
   }
 
   getFeatureInfoAtCoordinate(coordinate) {
-    console.log(this);
+    // console.log(this);
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
       this.highlightSource.clear();
       this.hightlightFeature(this.selectedFeatures[0]);
