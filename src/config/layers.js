@@ -23,6 +23,7 @@ import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
 import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import TralisLayer from '../layers/TralisLayer';
+import LevelLayer from '../layers/LevelLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1688,6 +1689,25 @@ export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
     popupComponent: 'InfrastrukturBetreiberPopup',
     // layerInfoComponent: 'InfrastrukturBetreiberPopup',
   },
+});
+
+export const geschosseLayer = new Layer({
+  name: 'ch.sbb.geschosse',
+  visible: true,
+});
+
+geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
+  return new LevelLayer({
+    name: `ch.sbb.geschosse${level}`,
+    visible: level === '2D',
+    mapboxLayer: dataLayer,
+    isQueryable: false,
+    styleLayersFilter: ({ metadata }) => metadata && metadata['geops.filter'],
+    level,
+    properties: {
+      radioGroup: 'ch.sbb.geschosse-layer',
+    },
+  });
 });
 
 export default [
