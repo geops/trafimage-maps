@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
+import DblPointerDblClickZoomOut from '../../ol/interaction/DblPointerDblClickZoomOut';
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
@@ -35,6 +36,14 @@ import {
 import SearchService from '../../components/Search/SearchService';
 import { isOpenedByMapset } from '../../utils/redirectHelper';
 
+const dftlInteractions = defaultInteractions({
+  altShiftDragRotate: false,
+  pinchRotate: false,
+});
+
+// It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.
+dftlInteractions.insertAt(0, new DblPointerDblClickZoomOut());
+
 const getInitialState = () => ({
   // We set the permission to null instead of a default empty object
   // to know when the request has been done.
@@ -54,10 +63,7 @@ const getInitialState = () => ({
   selectedForInfos: null,
   map: new OLMap({
     controls: [],
-    interactions: defaultInteractions({
-      altShiftDragRotate: false,
-      pinchRotate: false,
-    }),
+    interactions: dftlInteractions,
   }),
   layerService: new LayerService(),
   searchService: new SearchService(),
