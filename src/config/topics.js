@@ -56,13 +56,10 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
-<<<<<<< HEAD
   netzkarteinfrastrukturbetreiber,
   infrastrukturBetreiberNoTVS,
   infrastrukturBetreiberTVS,
-=======
   geschosseLayer,
->>>>>>> master
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -397,7 +394,7 @@ export const infrastrukturbetreiber = {
   projection: 'EPSG:3857',
   // layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
   searches: defaultSearches,
-}
+};
 
 const sandbox = {
   name: 'ch.sbb.netzkarte.sandbox',
