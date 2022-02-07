@@ -391,7 +391,7 @@ export const infrastrukturbetreiber = {
     infrastrukturBetreiberTVS,
   ],
   projection: 'EPSG:3857',
-  layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
+  // layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
   searches: defaultSearches,
 };
 
