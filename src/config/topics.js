@@ -57,7 +57,7 @@ import defaultBaseLayers, {
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
   netzkarteinfrastrukturbetreiber,
-  infrastrukturBetreiberNoTVS,
+  infrastrukturBetreiberOther,
   infrastrukturBetreiberTVS,
   geschosseLayer,
 } from './layers';
@@ -388,7 +388,7 @@ export const infrastrukturbetreiber = {
   },
   layers: [
     netzkarteinfrastrukturbetreiber,
-    infrastrukturBetreiberNoTVS,
+    infrastrukturBetreiberOther,
     infrastrukturBetreiberTVS,
   ],
   projection: 'EPSG:3857',

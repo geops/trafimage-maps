@@ -1655,7 +1655,7 @@ export const direktverbindungenLayer = new Layer({
   },
 });
 
-export const infrastrukturBetreiberNoTVS = new MapboxStyleLayer({
+export const infrastrukturBetreiberOther = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.other',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
