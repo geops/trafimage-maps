@@ -14,7 +14,7 @@ describe('TrafimageMaps', () => {
       expect(window.OptanonWrapper).toBeUndefined();
     });
 
-    test.only('enabled by default and active consent mechanism.', () => {
+    test('enabled by default and active consent mechanism.', () => {
       const component = renderer.create(
         <TrafimageMaps apiKey="" topics={[]} />,
       );
@@ -32,7 +32,6 @@ describe('TrafimageMaps', () => {
         component.getInstance().matomo.pushInstruction,
       ).toHaveBeenCalledWith('requireConsent');
       expect(window.OptanonWrapper).toBeDefined();
-      console.log(document.cookie);
     });
 
     describe('OptanonWrapper callback .', () => {
