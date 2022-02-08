@@ -842,6 +842,20 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   },
 });
 
+export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
+  name: 'ch.sbb.infrastrukturbetreiber',
+  isBaseLayer: true,
+  visible: true,
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber',
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: 'InfrastrukturTopicInfo',
+  },
+});
+
 export const betriebsRegionen = new MapboxStyleLayer({
   name: 'ch.sbb.betriebsregionen',
   visible: false,
@@ -1638,6 +1652,42 @@ export const direktverbindungenLayer = new Layer({
   properties: {
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenLayerInfo',
+  },
+});
+
+export const infrastrukturBetreiberOther = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastrukturbetreiber.other',
+  mapboxLayer: netzkarteinfrastrukturbetreiber,
+  styleLayersFilter: ({ metadata }) =>
+    metadata &&
+    metadata['isb.filter'] &&
+    /^(other|other_flag)$/.test(metadata['isb.filter']),
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata &&
+    metadata['isb.filter'] &&
+    /^other$/.test(metadata['isb.filter']),
+  properties: {
+    // hasInfos: true,
+    useOverlay: true,
+    popupComponent: 'InfrastrukturBetreiberPopup',
+    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
+  },
+});
+
+export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
+  name: 'ch.sbb.infrastrukturbetreiber.tvs',
+  mapboxLayer: netzkarteinfrastrukturbetreiber,
+  styleLayersFilter: ({ metadata }) =>
+    metadata &&
+    metadata['isb.filter'] &&
+    /^(tvs|tvs_flag)$/.test(metadata['isb.filter']),
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
+  properties: {
+    // hasInfos: true,
+    useOverlay: true,
+    popupComponent: 'InfrastrukturBetreiberPopup',
+    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
   },
 });
 

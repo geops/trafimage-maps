@@ -56,6 +56,9 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
+  netzkarteinfrastrukturbetreiber,
+  infrastrukturBetreiberOther,
+  infrastrukturBetreiberTVS,
   geschosseLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -374,6 +377,25 @@ export const beleuchtungsstaerken = {
   searches: defaultSearches,
 };
 
+export const infrastrukturbetreiber = {
+  name: 'ch.sbb.infrastrukturbetreiber',
+  key: 'ch.sbb.infrastrukturbetreiber',
+  maxZoom: 14,
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
+  layers: [
+    netzkarteinfrastrukturbetreiber,
+    infrastrukturBetreiberOther,
+    infrastrukturBetreiberTVS,
+  ],
+  projection: 'EPSG:3857',
+  // layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
+  searches: defaultSearches,
+};
+
 const sandbox = {
   name: 'ch.sbb.netzkarte.sandbox',
   key: 'ch.sbb.netzkarte.sandbox',
@@ -394,6 +416,7 @@ const topics = {
     handicap,
     tarifverbundkarte,
     infrastruktur,
+    infrastrukturbetreiber,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
