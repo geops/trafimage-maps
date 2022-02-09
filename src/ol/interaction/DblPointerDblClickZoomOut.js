@@ -46,9 +46,9 @@ class DblPointerDblClickZoomOut extends Interaction {
 
     /**
      * @type {boolean}
-     * @protected
+     * @private
      */
-    this.handlingDownUpSequence = false;
+    this.handlingDownUpSequence_ = false;
 
     /**
      * @type {!Object<string, PointerEvent>}
@@ -82,7 +82,7 @@ class DblPointerDblClickZoomOut extends Interaction {
       mapBrowserEvent.type === MapBrowserEventType.POINTERMOVE
     ) {
       // If the user drag the map we abort this interaction.
-      this.handlingDownUpSequence = false;
+      this.handlingDownUpSequence_ = false;
       stopEvent = false;
       return !stopEvent;
     }
@@ -94,11 +94,11 @@ class DblPointerDblClickZoomOut extends Interaction {
       stopEvent = this.stopDown(false);
       this.waitForDblTap(mapBrowserEvent);
     } else if (
-      this.handlingDownUpSequence &&
+      this.handlingDownUpSequence_ &&
       mapBrowserEvent.type === MapBrowserEventType.POINTERUP
     ) {
       const handledUp = this.handleUpEvent(mapBrowserEvent);
-      this.handlingDownUpSequence = false;
+      this.handlingDownUpSequence_ = false;
       stopEvent = handledUp;
     }
     return !stopEvent;
@@ -157,14 +157,14 @@ class DblPointerDblClickZoomOut extends Interaction {
   waitForDblTap() {
     if (this.doubleTapTimeoutId_ !== undefined) {
       // double-click
-      clearTimeout(this.clickTimeoutId_);
+      clearTimeout(this.doubleTapTimeoutId_);
       this.doubleTapTimeoutId_ = undefined;
-      this.handlingDownUpSequence = true;
+      this.handlingDownUpSequence_ = true;
     } else {
       this.doubleTapTimeoutId_ = setTimeout(
         /** @this {MapBrowserEventHandler} */
         () => {
-          this.handlingDownUpSequence = false;
+          this.handlingDownUpSequence_ = false;
           this.doubleTapTimeoutId_ = undefined;
         },
         250,
