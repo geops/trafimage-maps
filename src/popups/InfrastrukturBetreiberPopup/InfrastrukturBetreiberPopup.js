@@ -22,15 +22,23 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const getUrl = (properties, language) => {
-  if (properties[`url_isb_${language}`]) {
-    return properties[`url_isb_${language}`];
+const urlIsDefined = (url) => !!url;
+
+const getUrls = (properties, language) => {
+  let urls = JSON.parse(properties[`url_isb_${language}`]);
+  if (urls.some(urlIsDefined)) {
+    return urls.filter(urlIsDefined);
   }
+  // If there are no urls in the current language default to first defined
   const linkKeys = Object.keys(properties).filter((key) =>
     /url_isb_/.test(key),
   );
-  // If there is no link in the current language default to first defined
-  return properties[linkKeys.find((key) => !!properties[key])];
+  urls = JSON.parse(
+    properties[
+      linkKeys.find((key) => JSON.parse(properties[key]).some(urlIsDefined))
+    ],
+  );
+  return urls.filter(urlIsDefined);
 };
 
 const propTypes = {
@@ -50,7 +58,9 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
     mail_isb: mail,
     isb_tu_name: operator,
   } = feature.getProperties();
-  const linkUrl = getUrl(properties, i18n.language);
+  const urls = getUrls(properties, i18n.language);
+  const mainUrl = urls[0];
+  const secondaryUrl = urls[1];
 
   useEffect(() => {
     if (layer) {
@@ -62,11 +72,16 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
     <div>
       {operator && (
         <div className={classes.row}>
-          {linkUrl ? (
-            <Link href={linkUrl}>{operator}</Link>
+          {mainUrl ? (
+            <Link href={mainUrl}>{operator}</Link>
           ) : (
             <strong> {operator}</strong>
           )}
+        </div>
+      )}
+      {secondaryUrl && (
+        <div className={classes.row}>
+          <Link href={secondaryUrl}>{new URL(secondaryUrl).hostname}</Link>
         </div>
       )}
       {phone && (
