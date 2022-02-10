@@ -139,16 +139,22 @@ class DblPointerDblClickZoomOut extends Interaction {
   updateTrackedPointers_(mapBrowserEvent) {
     const event = mapBrowserEvent.originalEvent;
 
-    const id = event.pointerId.toString();
-    if (mapBrowserEvent.type === MapBrowserEventType.POINTERUP) {
-      delete this.trackedPointers_[id];
-    } else if (mapBrowserEvent.type === MapBrowserEventType.POINTERDOWN) {
-      this.trackedPointers_[id] = event;
-    } else if (id in this.trackedPointers_) {
-      // update only when there was a pointerdown event for this pointer
-      this.trackedPointers_[id] = event;
+    // On some other event, pointerId can be empty.
+    if (
+      mapBrowserEvent.type === MapBrowserEventType.POINTERUP ||
+      mapBrowserEvent.type === MapBrowserEventType.POINTERDOWN
+    ) {
+      const id = event.pointerId.toString();
+      if (mapBrowserEvent.type === MapBrowserEventType.POINTERUP) {
+        delete this.trackedPointers_[id];
+      } else if (mapBrowserEvent.type === MapBrowserEventType.POINTERDOWN) {
+        this.trackedPointers_[id] = event;
+      } else if (id in this.trackedPointers_) {
+        // update only when there was a pointerdown event for this pointer
+        this.trackedPointers_[id] = event;
+      }
+      this.targetPointers = getValues(this.trackedPointers_);
     }
-    this.targetPointers = getValues(this.trackedPointers_);
   }
 
   /**
