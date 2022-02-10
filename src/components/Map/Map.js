@@ -17,6 +17,7 @@ import {
   updateDrawEditLink,
 } from '../../model/app/actions';
 import Copyright from '../Copyright/Copyright';
+import NoDragPanWarning from '../NoDragPanWarning';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -34,7 +35,6 @@ const propTypes = {
   resolution: PropTypes.number,
   zoom: PropTypes.number,
   showPopups: PropTypes.bool,
-
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
@@ -337,6 +337,7 @@ class Map extends PureComponent {
         />
         <MapAccessibility layers={layers} map={map} />
         <Copyright />
+        <NoDragPanWarning />
       </>
     );
   }

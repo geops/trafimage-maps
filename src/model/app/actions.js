@@ -28,6 +28,7 @@ export const SET_API_KEY = 'SET_API_KEY';
 export const SET_SHOW_POPUPS = 'SET_SHOW_POPUPS';
 export const SET_ENABLE_TRACKING = 'SET_ENABLE_TRACKING';
 export const SET_CONSENT_GIVEN = 'SET_CONSENT_GIVEN';
+export const SET_EMBEDDED = 'SET_EMBEDDED';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -266,5 +267,10 @@ export const setEnableTracking = (data) => ({
 
 export const setConsentGiven = (data) => ({
   type: SET_CONSENT_GIVEN,
+  data,
+});
+
+export const setEmbedded = (data) => ({
+  type: SET_EMBEDDED,
   data,
 });

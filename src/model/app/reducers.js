@@ -33,6 +33,7 @@ import {
   SET_SHOW_POPUPS,
   SET_ENABLE_TRACKING,
   SET_CONSENT_GIVEN,
+  SET_EMBEDDED,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -81,6 +82,7 @@ const getInitialState = () => ({
   departuresUrl: null,
   apiKey: null,
   showPopups: true,
+  embeddded: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -225,6 +227,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         consentGiven: action.data,
+      };
+    case SET_EMBEDDED:
+      return {
+        ...state,
+        embedded: action.data,
       };
     default:
       return {

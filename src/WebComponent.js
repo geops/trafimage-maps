@@ -149,6 +149,11 @@ const propTypes = {
    * Disable use fo cookies for analytics.
    */
   disableCookies: PropTypes.bool,
+
+  /**
+   * Improve mouse/touch interactions to avoid conflict with parent page.
+   */
+  embedded: PropTypes.string,
 };
 
 const attributes = {
@@ -179,6 +184,7 @@ const attributes = {
   consentGiven: false,
   elements: undefined,
   layersVisibility: undefined,
+  embedded: undefined,
 };
 
 const defaultProps = {
@@ -209,6 +215,7 @@ const WebComponent = (props) => {
     consentGiven,
     elements,
     layersVisibility,
+    embedded,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -332,6 +339,7 @@ const WebComponent = (props) => {
           disableCookies={disableCookies}
           requireConsent={requireConsent}
           consentGiven={consentGiven}
+          embedded={embedded === 'true'}
         />
       </div>
     </Styled>

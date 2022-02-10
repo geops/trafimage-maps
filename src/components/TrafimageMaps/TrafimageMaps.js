@@ -25,6 +25,7 @@ import {
   setApiKey,
   setEnableTracking,
   setConsentGiven,
+  setEmbedded,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -190,6 +191,11 @@ const propTypes = {
     user: PropTypes.string,
     permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
+
+  /**
+   * Improve mouse/touch interactions to avoid conflict with parent page.
+   */
+  embedded: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -218,6 +224,7 @@ const defaultProps = {
   consentGiven: false,
   activeTopicKey: null,
   permissionInfos: null,
+  embedded: false,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -249,6 +256,7 @@ class TrafimageMaps extends React.PureComponent {
       departuresUrl,
       apiKey,
       requireConsent,
+      embedded,
     } = this.props;
 
     if (zoom) {
@@ -298,6 +306,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
+    if (embedded) {
+      this.store.dispatch(setEmbedded(embedded));
+    }
+
     const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
     if (
       enableTracking &&
@@ -337,6 +349,7 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      embedded,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -411,6 +424,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (apiKey !== prevProps.apiKey) {
       this.store.dispatch(setApiKey(apiKey));
+    }
+
+    if (embedded !== prevProps.embedded) {
+      this.store.dispatch(setEmbedded(embedded));
     }
   }
 
