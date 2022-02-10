@@ -91,7 +91,6 @@ class DblPointerClickZoomOut extends Interaction {
       this.targetPointers.length === 2 &&
       mapBrowserEvent.type === MapBrowserEventType.POINTERDOWN
     ) {
-      console.log('ici');
       this.handlingDownUpSequence_ = true;
       stopEvent = this.stopDown(true);
     } else if (
