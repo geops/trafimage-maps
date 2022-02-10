@@ -2,6 +2,8 @@ import i18n from 'i18next';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
+import DragPan from 'ol/interaction/DragPan';
+import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
 import DblPointerDblClickZoomOut from '../../ol/interaction/DblPointerDblClickZoomOut';
 import {
   SET_TOPICS,
@@ -43,6 +45,12 @@ const dftlInteractions = defaultInteractions({
 
 // It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.
 dftlInteractions.insertAt(0, new DblPointerDblClickZoomOut());
+
+// It's important to put it just after DragPan otherwise the interaction also drag the map.
+const index = dftlInteractions
+  .getArray()
+  .findIndex((interaction) => interaction instanceof DragPan);
+dftlInteractions.insertAt(index + 1, new DblClickDragZoom());
 
 const getInitialState = () => ({
   // We set the permission to null instead of a default empty object
