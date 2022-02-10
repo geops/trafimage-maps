@@ -139,6 +139,11 @@ const propTypes = {
    * OneTrust id used for consent Management.
    */
   domainConsentId: PropTypes.string,
+
+  /**
+   * Improve mouse/touch interactions to avoid conflict with parent page.
+   */
+  embedded: PropTypes.string,
 };
 
 const attributes = {
@@ -167,6 +172,7 @@ const attributes = {
   elements: undefined,
   layersVisibility: undefined,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
+  embedded: undefined,
 };
 
 const defaultProps = {
@@ -195,6 +201,7 @@ const WebComponent = (props) => {
     elements,
     layersVisibility,
     domainConsentId,
+    embedded,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -320,6 +327,7 @@ const WebComponent = (props) => {
           center={arrayCenter}
           enableTracking={enableTracking === 'true'}
           domainConsentId={domainConsentId}
+          embedded={embedded === 'true'}
         />
       </div>
     </Styled>

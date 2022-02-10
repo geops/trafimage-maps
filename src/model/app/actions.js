@@ -29,6 +29,7 @@ export const SET_SHOW_POPUPS = 'SET_SHOW_POPUPS';
 export const SET_ENABLE_TRACKING = 'SET_ENABLE_TRACKING';
 export const SET_CONSENT_GIVEN = 'SET_CONSENT_GIVEN';
 export const SET_DISABLE_COOKIES = 'SET_DISABLE_COOKIES';
+export const SET_EMBEDDED = 'SET_EMBEDDED';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -272,5 +273,10 @@ export const setConsentGiven = (data) => ({
 
 export const setDisableCookies = (data) => ({
   type: SET_DISABLE_COOKIES,
+  data,
+});
+
+export const setEmbedded = (data) => ({
+  type: SET_EMBEDDED,
   data,
 });

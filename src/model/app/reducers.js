@@ -2,6 +2,9 @@ import i18n from 'i18next';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
+import DragPan from 'ol/interaction/DragPan';
+import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
+import DblPointerClickZoomOut from '../../ol/interaction/DblPointerClickZoomOut';
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
@@ -31,10 +34,25 @@ import {
   SET_ENABLE_TRACKING,
   SET_CONSENT_GIVEN,
   SET_DISABLE_COOKIES,
+  SET_EMBEDDED,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
 import { isOpenedByMapset } from '../../utils/redirectHelper';
+
+const dftlInteractions = defaultInteractions({
+  altShiftDragRotate: false,
+  pinchRotate: false,
+});
+
+// It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.
+dftlInteractions.insertAt(0, new DblPointerClickZoomOut());
+
+// It's important to put it just after DragPan otherwise the interaction also drag the map.
+const index = dftlInteractions
+  .getArray()
+  .findIndex((interaction) => interaction instanceof DragPan);
+dftlInteractions.insertAt(index + 1, new DblClickDragZoom());
 
 const getInitialState = () => ({
   // We set the permission to null instead of a default empty object
@@ -55,10 +73,7 @@ const getInitialState = () => ({
   selectedForInfos: null,
   map: new OLMap({
     controls: [],
-    interactions: defaultInteractions({
-      altShiftDragRotate: false,
-      pinchRotate: false,
-    }),
+    interactions: dftlInteractions,
   }),
   layerService: new LayerService(),
   searchService: new SearchService(),
@@ -70,6 +85,7 @@ const getInitialState = () => ({
   showPopups: true,
   consentGiven: false,
   disableCookies: false,
+  embeddded: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -219,6 +235,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         disableCookies: action.data,
+      };
+    case SET_EMBEDDED:
+      return {
+        ...state,
+        embedded: action.data,
       };
     default:
       return {
