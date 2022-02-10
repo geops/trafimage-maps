@@ -45,6 +45,8 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     position: 'absolute',
     pointerEvents: 'all',
+    top: 0,
+    bottom: 0,
   },
   headerActive: {
     top: 100,
