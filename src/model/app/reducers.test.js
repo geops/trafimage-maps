@@ -1,6 +1,6 @@
 import DragPan from 'ol/interaction/DragPan';
 import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
-import DblPointerDblClickZoomOut from '../../ol/interaction/DblPointerDblClickZoomOut';
+import DblPointerClickZoomOut from '../../ol/interaction/DblPointerClickZoomOut';
 import app from './reducers';
 
 describe('reducers', () => {
@@ -21,11 +21,11 @@ describe('reducers', () => {
     });
   });
 
-  test('DblPointerDblClickZoomOut is put at the beginning', () => {
+  test('DblPointerClickZoomOut is put at the beginning', () => {
     const { map } = app(undefined, {});
     const interactions = map.getInteractions().getArray();
     const index = interactions.findIndex(
-      (interaction) => interaction instanceof DblPointerDblClickZoomOut,
+      (interaction) => interaction instanceof DblPointerClickZoomOut,
     );
     expect(index).toBe(0);
   });

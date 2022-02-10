@@ -19,7 +19,7 @@ import { getValues } from 'ol/obj';
  * on a touch screen.
  * @api
  */
-class DblPointerDblClickZoomOut extends Interaction {
+class DblPointerClickZoomOut extends Interaction {
   /**
    * @param {Options} [opt_options] Options.
    */
@@ -91,8 +91,9 @@ class DblPointerDblClickZoomOut extends Interaction {
       this.targetPointers.length === 2 &&
       mapBrowserEvent.type === MapBrowserEventType.POINTERDOWN
     ) {
-      stopEvent = this.stopDown(false);
-      this.waitForDblTap(mapBrowserEvent);
+      console.log('ici');
+      this.handlingDownUpSequence_ = true;
+      stopEvent = this.stopDown(true);
     } else if (
       this.handlingDownUpSequence_ &&
       mapBrowserEvent.type === MapBrowserEventType.POINTERUP
@@ -156,27 +157,6 @@ class DblPointerDblClickZoomOut extends Interaction {
       this.targetPointers = getValues(this.trackedPointers_);
     }
   }
-
-  /**
-   * Wait the second double finger tap.
-   */
-  waitForDblTap() {
-    if (this.doubleTapTimeoutId_ !== undefined) {
-      // double-click
-      clearTimeout(this.doubleTapTimeoutId_);
-      this.doubleTapTimeoutId_ = undefined;
-      this.handlingDownUpSequence_ = true;
-    } else {
-      this.doubleTapTimeoutId_ = setTimeout(
-        /** @this {MapBrowserEventHandler} */
-        () => {
-          this.handlingDownUpSequence_ = false;
-          this.doubleTapTimeoutId_ = undefined;
-        },
-        250,
-      );
-    }
-  }
 }
 
-export default DblPointerDblClickZoomOut;
+export default DblPointerClickZoomOut;

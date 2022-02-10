@@ -4,7 +4,7 @@ import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
 import DragPan from 'ol/interaction/DragPan';
 import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
-import DblPointerDblClickZoomOut from '../../ol/interaction/DblPointerDblClickZoomOut';
+import DblPointerClickZoomOut from '../../ol/interaction/DblPointerClickZoomOut';
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
@@ -44,7 +44,7 @@ const dftlInteractions = defaultInteractions({
 });
 
 // It's important to put it before PinchZoom otherwise the pointerdown is stopped by the PinchZoom.
-dftlInteractions.insertAt(0, new DblPointerDblClickZoomOut());
+dftlInteractions.insertAt(0, new DblPointerClickZoomOut());
 
 // It's important to put it just after DragPan otherwise the interaction also drag the map.
 const index = dftlInteractions
