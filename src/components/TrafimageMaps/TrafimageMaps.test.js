@@ -14,7 +14,7 @@ describe('TrafimageMaps', () => {
       expect(window.OptanonWrapper).toBeUndefined();
     });
 
-    test.only('enabled by default and active consent mechanism.', () => {
+    test('enabled by default and active consent mechanism.', () => {
       const component = renderer.create(
         <TrafimageMaps apiKey="" topics={[]} />,
       );
