@@ -133,7 +133,6 @@ class TopicLoader extends Component {
   }
 
   loadTopics() {
-    const matomo = this.context;
     const {
       topics,
       appBaseUrl,
@@ -174,10 +173,6 @@ class TopicLoader extends Component {
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(visibleActiveTopic);
     this.updateServices(visibleActiveTopic);
-
-    if (matomo) {
-      matomo.trackEvent({ category: visibleActiveTopic.name, action: 'load' });
-    }
   }
 
   updateServices(activeTopic) {

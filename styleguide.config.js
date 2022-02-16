@@ -30,9 +30,10 @@ module.exports = {
   pagePerSection: true,
   sections: [
     {
-      name: 'trafimage-maps',
+      name: 'Web component',
       sections: [
         {
+          name: 'trafimage-maps',
           content: 'src/examples/README.md',
           components: 'src/WebComponent.js',
           exampleMode: 'expand',

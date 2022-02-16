@@ -39,6 +39,7 @@
     "react-autosuggest": "10.1.0",
     "react-dom": "16.14.0",
     "react-draggable": "^4.4.4",
+    "react-helmet": "^6.1.0",
     "react-i18next": "11.12.0",
     "react-icons": "^4.3.1",
     "react-redux": "7.2.5",
@@ -80,6 +81,7 @@
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-prettier": "4.0.0",
@@ -146,7 +148,8 @@
       "node": true,
       "browser": true,
       "es6": true,
-      "jest": true
+      "jest": true,
+      "cypress/globals": true
     },
     "parser": "@babel/eslint-parser",
     "extends": [
@@ -155,6 +158,7 @@
       "prettier"
     ],
     "plugins": [
+      "cypress",
       "prettier"
     ],
     "rules": {
@@ -179,6 +183,7 @@
     }
   },
   "jest": {
+    "resetMocks": false,
     "coverageReporters": [
       "text",
       "html"

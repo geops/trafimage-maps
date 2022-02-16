@@ -30,6 +30,7 @@ import {
   SET_SHOW_POPUPS,
   SET_ENABLE_TRACKING,
   SET_CONSENT_GIVEN,
+  SET_DISABLE_COOKIES,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -67,6 +68,8 @@ const getInitialState = () => ({
   departuresUrl: null,
   apiKey: null,
   showPopups: true,
+  consentGiven: false,
+  disableCookies: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -211,6 +214,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         consentGiven: action.data,
+      };
+    case SET_DISABLE_COOKIES:
+      return {
+        ...state,
+        disableCookies: action.data,
       };
     default:
       return {

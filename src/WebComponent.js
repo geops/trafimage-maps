@@ -133,22 +133,12 @@ const propTypes = {
   /**
    * Enable analytics tracking.
    */
-  enableTracking: PropTypes.bool,
+  enableTracking: PropTypes.string,
 
   /**
-   * True if the tracker has to wait the user consent, see consentGiven property
+   * OneTrust id used for consent Management.
    */
-  requireConsent: PropTypes.bool,
-
-  /**
-   * True if the consent has been given, work only with requireConsent=true.
-   */
-  consentGiven: PropTypes.bool,
-
-  /**
-   * Disable use fo cookies for analytics.
-   */
-  disableCookies: PropTypes.bool,
+  domainConsentId: PropTypes.string,
 };
 
 const attributes = {
@@ -173,12 +163,10 @@ const attributes = {
   mapsetUrl: process.env.REACT_APP_MAPSET_URL,
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
-  enableTracking: false,
-  disableCookies: false,
-  requireConsent: false,
-  consentGiven: false,
+  enableTracking: 'true',
   elements: undefined,
   layersVisibility: undefined,
+  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
 };
 
 const defaultProps = {
@@ -204,11 +192,9 @@ const WebComponent = (props) => {
     apiKeyName,
     vectorTilesKey,
     enableTracking,
-    disableCookies,
-    requireConsent,
-    consentGiven,
     elements,
     layersVisibility,
+    domainConsentId,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -240,7 +226,11 @@ const WebComponent = (props) => {
       return null;
     }
 
-    const urlTopic = window.location.pathname.replace('/', '');
+    // This comparaison is really bad, depending on which is the pathname the web component
+    // could load nothing. Example with a pathname like this /build.d/index.html
+    // We expect a topic is composed at least like this xxxx.xxxx.xxxx.
+    const urlTopic =
+      !!window.location.pathname.replace('/', '').split('.').length > 1;
     if (urlTopic && activeTopicKey && urlTopic !== activeTopicKey) {
       return [];
     }
@@ -328,10 +318,8 @@ const WebComponent = (props) => {
           zoom={floatZoom}
           maxExtent={extentArray}
           center={arrayCenter}
-          enableTracking={enableTracking}
-          disableCookies={disableCookies}
-          requireConsent={requireConsent}
-          consentGiven={consentGiven}
+          enableTracking={enableTracking === 'true'}
+          domainConsentId={domainConsentId}
         />
       </div>
     </Styled>

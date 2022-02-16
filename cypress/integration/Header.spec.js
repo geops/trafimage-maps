@@ -83,6 +83,8 @@ const setViewPort = (viewport) => {
   } else {
     cy.viewport(viewport.preset, viewport.orientation);
   }
+  // Click the consent button
+  cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
 };
 
 const getViewPortName = (viewport) => {
@@ -103,7 +105,7 @@ describe('Header components', () => {
       it(`should display menu`, () => {
         setViewPort(viewport);
         cy.get('.wkp-menu-header').should('be.visible');
-        cy.get('.wkp-topics-menu-body').should('not.be.visible');
+        cy.get('.wkp-topics-menu-body').should('not.exist');
         cy.get('.wkp-menu-header').click();
 
         // Menu should open

@@ -4,6 +4,16 @@
   font-weight: bold !important;
 }
 
+/* Hide WebComponent header section in main page */
+[data-testid='WebComponent-container'] header {
+  display: none;
+}
+
+/* Hide WebComponent section in left menu */
+a[href='#/Web%20component?id=section-trafimage-maps'] + ul {
+  display: none;
+}
+
 #promo {
   position: absolute;
   bottom: 50px;

@@ -5,7 +5,7 @@ import map from './map/reducers';
 import app from './app/reducers';
 
 /* eslint-disable */
-export const getStore = () => {
+const getStore = () => {
   const store = createStore(
     combineReducers({
       app,
