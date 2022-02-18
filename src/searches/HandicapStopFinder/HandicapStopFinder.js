@@ -1,6 +1,4 @@
 import React from 'react';
-import Feature from 'ol/Feature';
-import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
@@ -109,22 +107,7 @@ class HandicapStopFinder extends Search {
       .filter((i) => i);
 
     Promise.all(infos).then((featInfos) => {
-      let featureInfos = featInfos.filter(({ features }) => features.length);
-      if (!featureInfos.length) {
-        const errorInfo = {
-          layer: handicapLayers[0],
-          coordinates,
-          features: [
-            // Create empty feature to open popup with no infos - TRAFHAND-104.
-            new Feature({
-              geometry: new Point(coordinates),
-              stationsbezeichnung: this.popupItem.properties.name,
-              noInfo: true,
-            }),
-          ],
-        };
-        featureInfos = [errorInfo];
-      }
+      const featureInfos = featInfos.filter(({ features }) => features.length);
       dispatchSetFeatureInfo(featureInfos);
     });
   }
