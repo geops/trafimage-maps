@@ -28,6 +28,7 @@ import {
   setDisableCookies,
   setSearchUrl,
   setConsentGiven,
+  setEmbedded,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -199,6 +200,11 @@ const propTypes = {
     user: PropTypes.string,
     permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
+
+  /**
+   * Improve mouse/touch interactions to avoid conflict with parent page.
+   */
+  embedded: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -224,6 +230,7 @@ const defaultProps = {
   enableTracking: true,
   activeTopicKey: null,
   permissionInfos: null,
+  embedded: false,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
   matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
@@ -271,6 +278,7 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      embedded,
       searchUrl,
     } = this.props;
 
@@ -326,6 +334,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
+    if (embedded) {
+      this.store.dispatch(setEmbedded(embedded));
+    }
+
     if (enableTracking) {
       // Function called on consent change event
       window.OptanonWrapper = () => {
@@ -357,6 +369,7 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      embedded,
       searchUrl,
     } = this.props;
 
@@ -406,6 +419,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (apiKey !== prevProps.apiKey) {
       this.store.dispatch(setApiKey(apiKey));
+    }
+
+    if (embedded !== prevProps.embedded) {
+      this.store.dispatch(setEmbedded(embedded));
     }
   }
 

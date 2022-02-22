@@ -149,6 +149,11 @@ const propTypes = {
    * OneTrust id used for consent Management.
    */
   domainConsentId: PropTypes.string,
+
+  /**
+   * Improve mouse/touch interactions to avoid conflict with parent page.
+   */
+  embedded: PropTypes.string,
 };
 
 const attributes = {
@@ -176,6 +181,7 @@ const attributes = {
   enableTracking: 'true',
   elements: undefined,
   layersVisibility: undefined,
+  embedded: undefined,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
   matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
@@ -207,6 +213,7 @@ const WebComponent = (props) => {
     enableTracking,
     elements,
     layersVisibility,
+    embedded,
     domainConsentId,
   } = props;
 
@@ -331,6 +338,7 @@ const WebComponent = (props) => {
           zoom={floatZoom}
           maxExtent={extentArray}
           center={arrayCenter}
+          embedded={embedded === 'true'}
           enableTracking={enableTracking === 'true'}
           domainConsentId={domainConsentId}
         />

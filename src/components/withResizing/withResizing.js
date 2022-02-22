@@ -57,6 +57,7 @@ function withResizing(MenuToBeResized) {
       let menuHeight;
 
       if (
+        map.getTarget() &&
         this.bodyElementRef.current &&
         this.bodyElementRef.current.ref.current
       ) {
