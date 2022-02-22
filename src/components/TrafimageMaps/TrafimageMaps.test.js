@@ -32,7 +32,6 @@ describe('TrafimageMaps', () => {
         component.getInstance().matomo.pushInstruction,
       ).toHaveBeenCalledWith('requireConsent');
       expect(window.OptanonWrapper).toBeDefined();
-      console.log(document.cookie);
     });
 
     describe('OptanonWrapper callback .', () => {
