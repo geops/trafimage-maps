@@ -26,6 +26,7 @@ import {
   setDeparturesUrl,
   setApiKey,
   setDisableCookies,
+  setSearchUrl,
   setConsentGiven,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
@@ -155,10 +156,28 @@ const propTypes = {
   departuresUrl: PropTypes.string,
 
   /**
+   * URL endpoint for main search.
+   * @private
+   */
+  searchUrl: PropTypes.string,
+
+  /**
    * Enable analytics tracking.
    * @private
    */
   enableTracking: PropTypes.bool,
+
+  /**
+   * URL endpoint for matomo.
+   * @private
+   */
+  matomoUrl: PropTypes.string,
+
+  /**
+   * Site id used by matomo
+   * @private
+   */
+  matomoSiteId: PropTypes.string,
 
   /**
    * Domain consent id for OneTrust consent window.
@@ -206,6 +225,9 @@ const defaultProps = {
   activeTopicKey: null,
   permissionInfos: null,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
+  matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
+  matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
+  searchUrl: process.env.REACT_APP_SEARCH_URL,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -223,16 +245,12 @@ class TrafimageMaps extends React.PureComponent {
     // Very important to do it here otherwise on the first render this.matomo will be undefined
     // and the useMatomo hook in MatomoTracker will not use the instance to track the view.
     // This happened on the doc page (yarn start:doc) but not on the app page (yarn start).
-    const { REACT_APP_MATOMO_URL_BASE, REACT_APP_MATOMO_SITE_ID } = process.env;
-    if (
-      props.enableTracking &&
-      REACT_APP_MATOMO_URL_BASE &&
-      REACT_APP_MATOMO_SITE_ID
-    ) {
+    const { enableTracking, matomoUrl, matomoSiteId } = props;
+    if (enableTracking && matomoUrl && matomoSiteId) {
       this.matomo = createInstance({
-        urlBase: REACT_APP_MATOMO_URL_BASE,
-        siteId: REACT_APP_MATOMO_SITE_ID,
-        trackerUrl: `${REACT_APP_MATOMO_URL_BASE}piwik.php`,
+        urlBase: matomoUrl,
+        siteId: matomoSiteId,
+        trackerUrl: `${matomoUrl}piwik.php`,
       });
       this.matomo.pushInstruction('requireConsent');
     }
@@ -253,6 +271,7 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      searchUrl,
     } = this.props;
 
     if (zoom) {
@@ -278,6 +297,11 @@ class TrafimageMaps extends React.PureComponent {
     if (drawUrl) {
       this.store.dispatch(setDrawUrl(drawUrl));
     }
+
+    if (searchUrl) {
+      this.store.dispatch(setSearchUrl(searchUrl));
+    }
+
     if (maxExtent) {
       this.store.dispatch(setMaxExtent(maxExtent));
     }
@@ -333,6 +357,7 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      searchUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -357,6 +382,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (drawUrl !== prevProps.drawUrl) {
       this.store.dispatch(setDrawUrl(drawUrl));
+    }
+
+    if (searchUrl !== prevProps.searchUrl) {
+      this.store.dispatch(setSearchUrl(searchUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {

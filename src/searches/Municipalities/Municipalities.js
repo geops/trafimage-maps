@@ -11,9 +11,6 @@ class Municipalities extends Search {
 
   // eslint-disable-next-line class-methods-use-this
   search(value) {
-    const baseUrl =
-      process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-
     if (this.abortController) {
       this.abortController.abort();
     }
@@ -21,7 +18,7 @@ class Municipalities extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${baseUrl}/search/municipalities?query=${encodeURIComponent(
+      `${this.searchUrl}/search/municipalities?query=${encodeURIComponent(
         value,
       )}&utf8=%E2%9C%93`,
       {

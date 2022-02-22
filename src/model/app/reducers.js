@@ -31,6 +31,7 @@ import {
   SET_ENABLE_TRACKING,
   SET_CONSENT_GIVEN,
   SET_DISABLE_COOKIES,
+  SET_SEARCH_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -164,6 +165,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         cartaroUrl: action.data,
+      };
+    case SET_SEARCH_URL:
+      return {
+        ...state,
+        searchUrl: action.data,
       };
     case SET_SCREEN_WIDTH:
       return {

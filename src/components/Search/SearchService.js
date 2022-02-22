@@ -22,6 +22,14 @@ class SearchService {
     });
   }
 
+  setSearchUrl(url) {
+    Object.values(this.searches).forEach((search) => {
+      if (typeof search.setSearchUrl === 'function') {
+        search.setSearchUrl(url);
+      }
+    });
+  }
+
   setMap(map) {
     this.map = map;
     this.highlightLayer.setMap(map);

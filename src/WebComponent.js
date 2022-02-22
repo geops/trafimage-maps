@@ -136,6 +136,16 @@ const propTypes = {
   enableTracking: PropTypes.string,
 
   /**
+   * URL endpoint for matomo.
+   */
+  matomoUrl: PropTypes.string,
+
+  /**
+   * Site id used by matomo
+   */
+  matomoSiteId: PropTypes.string,
+
+  /**
    * OneTrust id used for consent Management.
    */
   domainConsentId: PropTypes.string,
@@ -167,6 +177,9 @@ const attributes = {
   elements: undefined,
   layersVisibility: undefined,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
+  matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
+  matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
+  searchUrl: process.env.REACT_APP_SEARCH_URL,
 };
 
 const defaultProps = {

@@ -8,7 +8,6 @@ import RouteLayer from './RouteLayer';
 import StationsLayer from './StationsLayer';
 import PlatformsLayer from './PlatformsLayer';
 import TarifverbundkarteLayer from './TarifverbundkarteLayer';
-import TrafimageGeoServerWMSLayer from './TrafimageGeoServerWMSLayer';
 import TrafimageMapboxLayer from './TrafimageMapboxLayer';
 import ZoneLayer from './ZoneLayer';
 import ZweitausbildungAbroadLayer from './ZweitausbildungAbroadLayer';
@@ -28,7 +27,6 @@ export { default as RouteLayer } from './RouteLayer';
 export { default as StationsLayer } from './StationsLayer';
 export { default as PlatformsLayer } from './PlatformsLayer';
 export { default as TarifverbundkarteLayer } from './TarifverbundkarteLayer';
-export { default as TrafimageGeoServerWMSLayer } from './TrafimageGeoServerWMSLayer';
 export { default as TrafimageMapboxLayer } from './TrafimageMapboxLayer';
 export { default as ZoneLayer } from './ZoneLayer';
 export { default as ZweitausbildungAbroadLayer } from './ZweitausbildungAbroadLayer';
@@ -48,7 +46,6 @@ export default {
   StationsLayer,
   PlatformsLayer,
   TarifverbundkarteLayer,
-  TrafimageGeoServerWMSLayer,
   TrafimageMapboxLayer,
   ZoneLayer,
   ZweitausbildungAbroadLayer,
