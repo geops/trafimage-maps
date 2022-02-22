@@ -9,10 +9,15 @@ import {
   FaChevronCircleUp,
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { IconButton } from '@material-ui/core';
 import { setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
+
+// Used to show suggestions on click of the search button
+let lastValue = null;
+let lastSuggestions = [];
 
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
@@ -44,6 +49,15 @@ function Search() {
     [searchService, map],
   );
 
+  // Store the last list of suggestions the autocomplete component empty this list on blur.
+  // We use these variables to toggle the suggestions list on click of the search button.
+  useEffect(() => {
+    if (value && suggestions && suggestions.length) {
+      lastValue = value;
+      lastSuggestions = suggestions;
+    }
+  }, [value, suggestions]);
+
   if (!searchService || !Object.keys(searchService.searches || []).length) {
     return null;
   }
@@ -53,10 +67,15 @@ function Search() {
       <SearchToggle>
         <Autosuggest
           multiSection
+          alwaysRenderSuggestions
           suggestions={suggestions}
-          onSuggestionsFetchRequested={(event) =>
-            searchService.search(event.value)
-          }
+          onSuggestionsFetchRequested={(evt) => {
+            if (evt.value && evt.value.trim().length > 2) {
+              searchService.search(evt.value);
+            } else {
+              setSuggestions([]);
+            }
+          }}
           onSuggestionsClearRequested={() => searchService.clear('')}
           onSuggestionHighlighted={({ suggestion }) =>
             searchService.highlight(suggestion)
@@ -93,7 +112,6 @@ function Search() {
               )
             );
           }}
-          shouldRenderSuggestions={(val) => val.trim().length > 2}
           getSectionSuggestions={(result) =>
             result.items
               ? result.items.map((i) => ({ ...i, section: result.section }))
@@ -125,8 +143,7 @@ function Search() {
               <div className="wkp-search-input">
                 <input {...inputProps} />
                 {value && (
-                  <button
-                    type="button"
+                  <IconButton
                     tabIndex={0}
                     aria-label={t('Suchtext löschen')}
                     className="wkp-search-button wkp-search-button-clear"
@@ -135,22 +152,27 @@ function Search() {
                       searchService.clearHighlight();
                     }}
                   >
-                    <FaTimes />
-                  </button>
+                    <FaTimes focusable={false} />
+                  </IconButton>
                 )}
-                <button
-                  type="button"
+                <IconButton
                   tabIndex={0}
                   aria-label="Suche"
                   className="wkp-search-button wkp-search-button-submit"
                   onClick={() => {
                     if (!value) {
+                      // Hide the search input on small screen
                       dispatch(setSearchOpen(false));
+                    }
+
+                    if (value && lastValue && value === lastValue) {
+                      // Toggle the suggestions list visibility
+                      setSuggestions(suggestions.length ? [] : lastSuggestions);
                     }
                   }}
                 >
                   <FaSearch focusable={false} />
-                </button>
+                </IconButton>
               </div>
             );
           }}

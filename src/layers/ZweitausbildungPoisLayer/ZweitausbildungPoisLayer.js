@@ -175,8 +175,14 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     this.sources.forEach((source) => {
       const { id } = source;
-      if (mbMap.getSource(id)) {
-        mbMap.removeSource(id);
+      const sourcee = mbMap.getSource(id);
+      if (sourcee) {
+        // Don't remove source just make it empty.
+        // Because others layers during unmount still could rely on it.
+        sourcee.setData({
+          type: 'FeatureCollection',
+          features: [],
+        });
       }
     });
   }

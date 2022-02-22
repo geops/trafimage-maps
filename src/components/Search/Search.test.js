@@ -62,7 +62,7 @@ describe('Search', () => {
       </Provider>,
     );
     expect(wrapper.find('input').length).toBe(1);
-    expect(wrapper.find('.wkp-search-button').length).toBe(1);
+    expect(wrapper.find('.wkp-search-button').length).toBe(5); // The class name is forwarded by mui on child elements.
   });
 
   test('launch search and render multiple collapsed sections.', async () => {
