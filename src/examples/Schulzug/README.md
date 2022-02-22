@@ -89,7 +89,6 @@ const App = () => {
   useEffect(() => {
     const map = ref.current;
     map.topics = [topic];
-    console.log(topic);
 
     return () => {
       map.topics = null;

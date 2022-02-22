@@ -5,6 +5,7 @@ import lang from '../../src/lang/de.json';
 describe('Barrierfree E2E', () => {
   beforeEach(() => {
     cy.visit('');
+    cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
     cy.get('.wkp-menu-header ').click();
     cy.wait(1000);
   });
@@ -15,7 +16,7 @@ describe('Barrierfree E2E', () => {
     );
   });
 
-  it.only('should be able to navigate between menu and dialog with Tab.', () => {
+  it('should be able to navigate between menu and dialog with Tab.', () => {
     // Move focus from menu to layer information button.
     cy.focused().tab().tab();
     ['wkp-info-bt', 'wkp-active'].forEach((cls) => {

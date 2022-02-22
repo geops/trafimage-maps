@@ -27,7 +27,6 @@ const propTypes = {
   apiKeyName: PropTypes.string,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
-  cartaroUrl: PropTypes.string,
   appBaseUrl: PropTypes.string.isRequired,
   loginUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
@@ -43,6 +42,8 @@ const propTypes = {
     permissions: PropTypes.array,
   }),
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
+  cartaroUrl: PropTypes.string,
+  searchUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -65,6 +66,7 @@ const defaultProps = {
   vectorTilesUrl: null,
   permissionInfos: null,
   staticFilesUrl: null,
+  searchUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -89,6 +91,7 @@ class TopicLoader extends Component {
       vectorTilesKey,
       vectorTilesUrl,
       staticFilesUrl,
+      searchUrl,
     } = this.props;
 
     // Sometimes the array object is different but the content is the same as before.
@@ -115,7 +118,8 @@ class TopicLoader extends Component {
           vectorTilesKey !== prevProps.vectorTilesKey ||
           cartaroUrl !== prevProps.cartaroUrl ||
           appBaseUrl !== prevProps.appBaseUrl ||
-          staticFilesUrl !== prevProps.staticFilesUrl))
+          staticFilesUrl !== prevProps.staticFilesUrl ||
+          searchUrl !== prevProps.searchUrl))
     ) {
       this.updateServices(activeTopic); // updateServices calls updateLayers
     } else if (
@@ -133,7 +137,6 @@ class TopicLoader extends Component {
   }
 
   loadTopics() {
-    const matomo = this.context;
     const {
       topics,
       appBaseUrl,
@@ -174,16 +177,13 @@ class TopicLoader extends Component {
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(visibleActiveTopic);
     this.updateServices(visibleActiveTopic);
-
-    if (matomo) {
-      matomo.trackEvent({ category: visibleActiveTopic.name, action: 'load' });
-    }
   }
 
   updateServices(activeTopic) {
     const {
       t,
       apiKey,
+      searchUrl,
       appBaseUrl,
       layerService,
       dispatchSetFeatureInfo,
@@ -214,8 +214,9 @@ class TopicLoader extends Component {
     this.updateLayers(activeTopic.layers);
 
     const newSearchService = new SearchService();
-    newSearchService.setSearches(activeTopic.searches || []);
+    newSearchService.setSearches(activeTopic.searches || {});
     newSearchService.setApiKey(apiKey);
+    newSearchService.setSearchUrl(searchUrl);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
@@ -340,9 +341,10 @@ const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   language: state.app.language,
   layerService: state.app.layerService,
-  permissionsInfos: state.app.permissionsInfos,
   drawLayer: state.map.drawLayer,
   permissionInfos: state.app.permissionInfos,
+  cartaroUrl: state.app.cartaroUrl,
+  searchUrl: state.app.searchUrl,
 });
 
 const mapDispatchToProps = {

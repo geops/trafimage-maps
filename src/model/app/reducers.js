@@ -34,6 +34,8 @@ import {
   SET_ENABLE_TRACKING,
   SET_CONSENT_GIVEN,
   SET_EMBEDDED,
+  SET_DISABLE_COOKIES,
+  SET_SEARCH_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -83,6 +85,8 @@ const getInitialState = () => ({
   apiKey: null,
   showPopups: true,
   embeddded: false,
+  consentGiven: false,
+  disableCookies: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -178,6 +182,11 @@ export default function app(state = getInitialState(), action) {
         ...state,
         cartaroUrl: action.data,
       };
+    case SET_SEARCH_URL:
+      return {
+        ...state,
+        searchUrl: action.data,
+      };
     case SET_SCREEN_WIDTH:
       return {
         ...state,
@@ -227,6 +236,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         consentGiven: action.data,
+      };
+    case SET_DISABLE_COOKIES:
+      return {
+        ...state,
+        disableCookies: action.data,
       };
     case SET_EMBEDDED:
       return {

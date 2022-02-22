@@ -17,6 +17,17 @@ class Search {
       // For points
       highlightPointStyle,
     ];
+    this.searchUrl =
+      process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
+    this.stopsUrl = 'https://api.geops.io/stops/v1/';
+  }
+
+  setSearchUrl(url) {
+    this.searchUrl = url;
+  }
+
+  setStopsUrl(url) {
+    this.stopsUrl = url;
   }
 
   getItems() {

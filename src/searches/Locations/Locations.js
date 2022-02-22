@@ -5,9 +5,6 @@ import Search from '../Search';
 class Locations extends Search {
   // eslint-disable-next-line class-methods-use-this
   search(value) {
-    const baseUrl =
-      process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-
     if (this.abortController) {
       this.abortController.abort();
     }
@@ -15,7 +12,9 @@ class Locations extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${baseUrl}/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
+      `${
+        this.searchUrl
+      }/api3-geo-admin/SearchServer?type=locations&searchText=${encodeURIComponent(
         value,
       )}`,
       {
