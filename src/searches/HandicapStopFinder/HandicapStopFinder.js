@@ -3,8 +3,6 @@ import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
 
-const endpoint = 'https://api.geops.io/stops/v1/';
-
 class HandicapStopFinder extends Search {
   constructor() {
     super();
@@ -23,7 +21,7 @@ class HandicapStopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      `${this.stopsUrl}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
       {
         signal,
       },

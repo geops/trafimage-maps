@@ -95,7 +95,6 @@ class DblClickDragZoom extends Interaction {
     this.updateTrackedPointers_(mapBrowserEvent);
     if (this.handlingDownUpSequence_) {
       if (mapBrowserEvent.type === MapBrowserEventType.POINTERDRAG) {
-        // console.log('icPOINTERDRAGi');
         this.handleDragEvent(mapBrowserEvent);
         // prevent page scrolling during dragging
         mapBrowserEvent.originalEvent.preventDefault();
@@ -113,8 +112,6 @@ class DblClickDragZoom extends Interaction {
         stopEvent = this.stopDown(false);
         this.waitForDblTap(mapBrowserEvent);
       }
-    } else if (mapBrowserEvent.type === MapBrowserEventType.POINTERMOVE) {
-      // this.handleMoveEvent(mapBrowserEvent);
     }
     return !stopEvent;
   }
@@ -132,7 +129,7 @@ class DblClickDragZoom extends Interaction {
 
     if (this.lastDistance_ !== undefined) {
       scaleDelta =
-        1 - (this.lastDistance_ - distance) * this.scaleDeltaByPixel_;
+        1 - -(this.lastDistance_ - distance) * this.scaleDeltaByPixel_;
     }
     this.lastDistance_ = distance;
 

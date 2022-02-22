@@ -136,6 +136,16 @@ const propTypes = {
   enableTracking: PropTypes.string,
 
   /**
+   * URL endpoint for matomo.
+   */
+  matomoUrl: PropTypes.string,
+
+  /**
+   * Site id used by matomo
+   */
+  matomoSiteId: PropTypes.string,
+
+  /**
    * OneTrust id used for consent Management.
    */
   domainConsentId: PropTypes.string,
@@ -171,8 +181,11 @@ const attributes = {
   enableTracking: 'true',
   elements: undefined,
   layersVisibility: undefined,
-  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
   embedded: undefined,
+  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
+  matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
+  matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
+  searchUrl: process.env.REACT_APP_SEARCH_URL,
 };
 
 const defaultProps = {
@@ -200,8 +213,8 @@ const WebComponent = (props) => {
     enableTracking,
     elements,
     layersVisibility,
-    domainConsentId,
     embedded,
+    domainConsentId,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -325,9 +338,9 @@ const WebComponent = (props) => {
           zoom={floatZoom}
           maxExtent={extentArray}
           center={arrayCenter}
+          embedded={embedded === 'true'}
           enableTracking={enableTracking === 'true'}
           domainConsentId={domainConsentId}
-          embedded={embedded === 'true'}
         />
       </div>
     </Styled>

@@ -99,16 +99,13 @@ class Lines extends Search {
       const [, line, km, kmEnd] = value.match(lineMeasuresRegExp);
       params = `line=${line}&km=${km}&km_end=${kmEnd}`;
     }
-    const baseUrl =
-      process.env.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-
     if (this.abortController) {
       this.abortController.abort();
     }
     this.abortController = new AbortController();
     const { signal } = this.abortController;
 
-    return fetch(`${baseUrl}/search/lines?${params}`, {
+    return fetch(`${this.searchUrl}/search/lines?${params}`, {
       signal,
     })
       .then((data) => data.json())
