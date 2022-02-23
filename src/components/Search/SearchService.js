@@ -63,6 +63,7 @@ class SearchService {
   }
 
   clearSelect() {
+    this.selectItem = null;
     this.selectLayer.getSource().clear();
   }
 
