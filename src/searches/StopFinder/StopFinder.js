@@ -1,6 +1,5 @@
 import React from 'react';
 import { fromLonLat } from 'ol/proj';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
 
 class StopFinder extends Search {
@@ -80,13 +79,11 @@ class StopFinder extends Search {
     const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
       const { styleLayers } = layer;
       if (!styleLayers) {
-        return [];
+        return false;
       }
       const sourceIds = styleLayers.map(({ source }) => source);
       return (
-        layer.visible &&
-        layer instanceof MapboxStyleLayer &&
-        sourceIds.includes('stations')
+        layer.visible && layer.isQueryable && sourceIds.includes('stations')
       );
     });
 
