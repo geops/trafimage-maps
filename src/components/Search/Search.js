@@ -131,7 +131,8 @@ function Search() {
                     tabIndex={0}
                     aria-label={t('Suchtext löschen')}
                     className="wkp-search-button wkp-search-button-clear"
-                    onClick={() => {
+                    onClick={(evt) => {
+                      console.log(evt);
                       setValue('');
                       searchService.clearHighlight();
                       searchService.clearSelect();
@@ -148,9 +149,25 @@ function Search() {
                     if (!value) {
                       // Hide the search input on small screen
                       dispatch(setSearchOpen(false));
-                    } else if (searchService.selectItem) {
+                    }
+
+                    if (searchService.selectItem) {
                       // Will zoom on the current selected feature
                       searchService.select(searchService.selectItem);
+                    }
+
+                    // Launch a search
+                    if (!suggestions.length && value) {
+                      searchService.search(value).then((searchResults) => {
+                        const result = searchResults.find(
+                          (results) => results.items.length > 0,
+                        );
+                        if (result) {
+                          const { items, section } = result;
+                          dispatch(setSearchOpen(false));
+                          searchService.select({ ...items[0], section });
+                        }
+                      });
                     }
                   }}
                 >

@@ -98,12 +98,17 @@ class SearchService {
   search(value) {
     this.clearHighlight();
     this.clearSelect();
+    const promises = [];
     Object.entries(this.searches).forEach(([section, search], position) => {
-      search.search(value).then((items) => {
-        search.setItems(items);
-        this.upsert(section, search.getItems(), position);
-      });
+      promises.push(
+        search.search(value).then((items) => {
+          search.setItems(items);
+          this.upsert(section, search.getItems(), position);
+          return { section, items };
+        }),
+      );
     });
+    return Promise.all(promises);
   }
 
   render(item) {
