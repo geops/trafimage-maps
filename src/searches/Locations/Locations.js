@@ -38,16 +38,21 @@ class Locations extends Search {
   }
 
   getFeature(item, options) {
-    return super.getFeature(
+    const feature = super.getFeature(
       {
         type: 'Feature',
         geometry: {
           type: 'Point',
           coordinates: [item.attrs.lon, item.attrs.lat],
         },
+        properties: {
+          ...item.attrs,
+          section: item.section,
+        },
       },
       options,
     );
+    return feature;
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -15,10 +15,6 @@ import SearchToggle from './SearchToggle';
 
 import './Search.scss';
 
-// Used to show suggestions on click of the search button
-let lastValue = null;
-let lastSuggestions = [];
-
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
@@ -31,7 +27,6 @@ function Search() {
     if (!searchService) {
       return;
     }
-    searchService.setClear(() => setSuggestions([]));
     searchService.setUpsert((section, items, position) =>
       setSuggestions((oldSuggestions) => {
         const index = oldSuggestions.findIndex((s) => s.section === section);
@@ -49,15 +44,6 @@ function Search() {
     [searchService, map],
   );
 
-  // Store the last list of suggestions the autocomplete component empty this list on blur.
-  // We use these variables to toggle the suggestions list on click of the search button.
-  useEffect(() => {
-    if (value && suggestions && suggestions.length) {
-      lastValue = value;
-      lastSuggestions = suggestions;
-    }
-  }, [value, suggestions]);
-
   if (!searchService || !Object.keys(searchService.searches || []).length) {
     return null;
   }
@@ -67,16 +53,14 @@ function Search() {
       <SearchToggle>
         <Autosuggest
           multiSection
-          alwaysRenderSuggestions
+          shouldRenderSuggestions={(val) => val.trim().length > 2}
           suggestions={suggestions}
           onSuggestionsFetchRequested={(evt) => {
-            if (evt.value && evt.value.trim().length > 2) {
-              searchService.search(evt.value);
-            } else {
-              setSuggestions([]);
-            }
+            searchService.search(evt.value);
           }}
-          onSuggestionsClearRequested={() => searchService.clear('')}
+          onSuggestionsClearRequested={() => {
+            setSuggestions([]);
+          }}
           onSuggestionHighlighted={({ suggestion }) =>
             searchService.highlight(suggestion)
           }
@@ -150,6 +134,7 @@ function Search() {
                     onClick={() => {
                       setValue('');
                       searchService.clearHighlight();
+                      searchService.clearSelect();
                     }}
                   >
                     <FaTimes focusable={false} />
@@ -165,9 +150,23 @@ function Search() {
                       dispatch(setSearchOpen(false));
                     }
 
-                    if (value && lastValue && value === lastValue) {
-                      // Toggle the suggestions list visibility
-                      setSuggestions(suggestions.length ? [] : lastSuggestions);
+                    if (searchService.selectItem) {
+                      // Will zoom on the current selected feature
+                      searchService.select(searchService.selectItem);
+                    }
+
+                    // Launch a search
+                    if (!suggestions.length && value) {
+                      searchService.search(value).then((searchResults) => {
+                        const result = searchResults.find(
+                          (results) => results.items.length > 0,
+                        );
+                        if (result) {
+                          const { items, section } = result;
+                          dispatch(setSearchOpen(false));
+                          searchService.select({ ...items[0], section });
+                        }
+                      });
                     }
                   }}
                 >
