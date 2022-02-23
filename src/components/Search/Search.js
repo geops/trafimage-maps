@@ -131,8 +131,7 @@ function Search() {
                     tabIndex={0}
                     aria-label={t('Suchtext löschen')}
                     className="wkp-search-button wkp-search-button-clear"
-                    onClick={(evt) => {
-                      console.log(evt);
+                    onClick={() => {
                       setValue('');
                       searchService.clearHighlight();
                       searchService.clearSelect();
