@@ -1653,9 +1653,9 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
   name: 'ch.sbb.energie.leitungen',
   mapboxLayer: energieDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && /^leitungen$/.test(metadata['energie.filter']),
+    metadata && /^leitung$/.test(metadata['energie.filter']),
   styleLayersFilter: ({ metadata }) =>
-    metadata && /^leitungen$/.test(metadata['energie.filter']),
+    metadata && /^leitung$/.test(metadata['energie.filter']),
   properties: {
     popupComponent: 'EnergiePopup',
     useOverlay: true,
