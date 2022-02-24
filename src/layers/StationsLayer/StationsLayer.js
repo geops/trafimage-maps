@@ -161,14 +161,14 @@ class StationsLayer extends MapboxStyleLayer {
     }
     const { mbMap } = this.mapboxLayer;
     const { id } = this.source;
-    if (mbMap.getSource(id)) {
-      // Remove the source if no layers use it
-      const found = mbMap
-        .getStyle()
-        .layers.find((layer) => layer.source === id);
-      if (!found) {
-        mbMap.removeSource(id);
-      }
+    const source = mbMap.getSource(id);
+    if (source) {
+      // Don't remove source just make it empty.
+      // Because others layers during unmount still could rely on it.
+      source.setData({
+        type: 'FeatureCollection',
+        features: [],
+      });
     }
   }
 

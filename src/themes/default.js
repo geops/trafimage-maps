@@ -265,6 +265,7 @@ const theme = createTheme({
     },
     MuiIconButton: {
       root: {
+        borderRadius: 0,
         color: colors.black,
         '&:hover': {
           backgroundColor: 'transparent',

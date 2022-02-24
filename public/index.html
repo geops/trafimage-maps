@@ -155,13 +155,20 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript
     ><!-- center="[1286668,6130216]" -->
-    <trafimage-maps
-      id="map"
-      zoom="8"
-      center="[810000, 5900000]"
-      appName="wkp"
-      activeTopicKey="ch.sbb.infrastrukturbetreiber"
-    ></trafimage-maps>
+
+    <div style="width: 100%; height: 100%">
+      <trafimage-maps
+        id="map"
+        zoom="8"
+        center="[810000, 5900000]"
+        appName="wkp"
+        activeTopicKey="ch.sbb.netzkarte"
+        enableTracking="true"
+      ></trafimage-maps>
+      <!-- <div id="onetrust-consent-sdk">
+        <div id="#onetrust-pc-sdk"></div>
+      </div> -->
+    </div>
     <!-- zoom="14" center="[810000, 5900000]" -->
     <button
       type="button"

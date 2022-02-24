@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, shrink-to-fit=no"
+    />
+    <title>Trafimage Webkarten</title>
+    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
+    <script src="./bundle.js"></script>
+    <script>
+      fetch('https://developer.geops.io/publickey')
+        .then((response) => response.json())
+        .then((data) => {
+          document.getElementById('map').setAttribute('apiKey', data.key);
+        });
+    </script>
+  </head>
+  <body style="height: 1000px">
+    <div>
+      <h1>Test web component in custom page</h1>
+    </div>
+    <div id="root" style="width: 800px; height: 500px; border: solid 1px black">
+      <trafimage-maps id="map" embedded="true"></trafimage-maps>
+    </div>
+  </body>
+</html>

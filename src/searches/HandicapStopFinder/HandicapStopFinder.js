@@ -1,11 +1,7 @@
 import React from 'react';
-import Feature from 'ol/Feature';
-import { Point } from 'ol/geom';
 import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
-
-const endpoint = 'https://api.geops.io/stops/v1/';
 
 class HandicapStopFinder extends Search {
   constructor() {
@@ -25,7 +21,7 @@ class HandicapStopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
+      `${this.stopsUrl}?&q=${encodeURIComponent(value)}&key=${this.apiKey}`,
       {
         signal,
       },
@@ -85,45 +81,31 @@ class HandicapStopFinder extends Search {
     }
 
     // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
-    const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
-      const { styleLayers } = layer;
-      if (!styleLayers) {
-        return [];
-      }
-      const sourceIds = styleLayers.map(({ source }) => source);
-      return (
-        layer.visible &&
-        layer instanceof MapboxStyleLayer &&
-        sourceIds.includes('ch.sbb.handicap')
-      );
-    });
+    const handicapLayers = layerService
+      .getLayersAsFlatArray()
+      .filter((layer) => {
+        const { styleLayers } = layer;
+        if (!styleLayers) {
+          return false;
+        }
+        const sourceIds = styleLayers.map(({ source }) => source);
+        return (
+          layer instanceof MapboxStyleLayer &&
+          sourceIds.includes('ch.sbb.handicap')
+        );
+      });
+
+    const infoLayers = handicapLayers.filter((layer) => layer.visible);
+    const coordinates = fromLonLat(this.popupItem.geometry.coordinates);
 
     // Here we simulate a click, it's the best way to get the proper popup informations.
     // The only drawback is that if the station is not rendered there is no popup.
     const infos = infoLayers
-      .map((layer) =>
-        layer.getFeatureInfoAtCoordinate(
-          fromLonLat(this.popupItem.geometry.coordinates),
-        ),
-      )
+      .map((layer) => layer.getFeatureInfoAtCoordinate(coordinates))
       .filter((i) => i);
 
     Promise.all(infos).then((featInfos) => {
-      let featureInfos = featInfos.filter(({ features }) => features.length);
-      if (!featureInfos.length) {
-        const errorInfo = featInfos.find(
-          (l) => l.coordinate && l.layer.get('popupComponent'),
-        );
-        errorInfo.features = [
-          // Create empty feature to open popup with no infos - TRAFHAND-104.
-          new Feature({
-            geometry: new Point(errorInfo.coordinate),
-            stationsbezeichnung: this.popupItem.properties.name,
-            noInfo: true,
-          }),
-        ];
-        featureInfos = [errorInfo];
-      }
+      const featureInfos = featInfos.filter(({ features }) => features.length);
       dispatchSetFeatureInfo(featureInfos);
     });
   }

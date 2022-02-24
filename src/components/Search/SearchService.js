@@ -4,14 +4,17 @@ import OLVectorSource from 'ol/source/Vector';
 class SearchService {
   constructor(highlightStyle) {
     this.searches = [];
+    // Contains the highlighted suggestion
     this.highlightLayer = new OLVectorLayer({
       source: new OLVectorSource({}),
       style: highlightStyle,
     });
-  }
 
-  setClear(clear) {
-    this.clear = clear;
+    // Contains the selected suggestion
+    this.selectLayer = new OLVectorLayer({
+      source: new OLVectorSource({}),
+      style: highlightStyle,
+    });
   }
 
   setApiKey(apiKey) {
@@ -22,9 +25,18 @@ class SearchService {
     });
   }
 
+  setSearchUrl(url) {
+    Object.values(this.searches).forEach((search) => {
+      if (typeof search.setSearchUrl === 'function') {
+        search.setSearchUrl(url);
+      }
+    });
+  }
+
   setMap(map) {
     this.map = map;
     this.highlightLayer.setMap(map);
+    this.selectLayer.setMap(map);
   }
 
   setSearches(searches = {}) {
@@ -47,29 +59,30 @@ class SearchService {
   }
 
   clearHighlight() {
-    this.highlightFeature = null;
     this.highlightLayer.getSource().clear();
   }
 
-  highlight(item, persistent = false) {
+  clearSelect() {
+    this.selectItem = null;
+    this.selectLayer.getSource().clear();
+  }
+
+  highlight(item) {
+    this.highlightItem = item;
+
     this.highlightLayer.getSource().clear();
 
-    this.highlightItem = item;
+    if (!item) {
+      return;
+    }
+
     const featureProjection = this.map.getView().getProjection();
-    const feature = item
-      ? this.searches[item.section].getFeature(item, { featureProjection })
-      : this.highlightFeature;
+    const feature = this.searches[item.section].getFeature(item, {
+      featureProjection,
+    });
 
     if (feature) {
       this.highlightLayer.getSource().addFeature(feature);
-      if (persistent) {
-        this.highlightFeature = feature;
-        this.map.getView().fit(this.highlightLayer.getSource().getExtent(), {
-          padding: [50, 50, 50, 50],
-          maxZoom: 15,
-          callback: () => this.searches[item.section].openPopup(item),
-        });
-      }
     }
   }
 
@@ -84,12 +97,18 @@ class SearchService {
 
   search(value) {
     this.clearHighlight();
+    this.clearSelect();
+    const promises = [];
     Object.entries(this.searches).forEach(([section, search], position) => {
-      search.search(value).then((items) => {
-        search.setItems(items);
-        this.upsert(section, search.getItems(), position);
-      });
+      promises.push(
+        search.search(value).then((items) => {
+          search.setItems(items);
+          this.upsert(section, search.getItems(), position);
+          return { section, items };
+        }),
+      );
     });
+    return Promise.all(promises);
   }
 
   render(item) {
@@ -97,8 +116,31 @@ class SearchService {
   }
 
   select(item) {
+    // If item is not defined, we zoom on the current highlighted feature.
     this.searches[item.section].select(item);
-    this.highlight(item, true);
+    this.selectItem = item;
+    this.selectLayer.getSource().clear();
+
+    if (!item) {
+      return;
+    }
+
+    const featureProjection = this.map.getView().getProjection();
+    const feature = this.searches[item.section].getFeature(item, {
+      featureProjection,
+    });
+
+    if (feature) {
+      this.selectLayer.getSource().addFeature(feature);
+    }
+
+    this.map.getView().fit(this.selectLayer.getSource().getExtent(), {
+      padding: [50, 50, 50, 50],
+      maxZoom: 15,
+      callback: () => {
+        this.searches[item.section].openPopup(item);
+      },
+    });
   }
 
   countItems(section) {
