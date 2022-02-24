@@ -1417,6 +1417,17 @@ export const netzentwicklungDataLayer = new TrafimageMapboxLayer({
   },
 });
 
+export const energieDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.energie.data',
+  isQueryable: false,
+  preserveDrawingBuffer: true,
+  zIndex: -1,
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie',
+  properties: {
+    hideInLegend: true,
+  },
+});
+
 export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.programm_manager',
   mapboxLayer: netzentwicklungDataLayer,
@@ -1638,9 +1649,9 @@ export const direktverbindungenLayer = new Layer({
   },
 });
 
-export const energieLeitungenLayer = new Layer({
-  name: 'ch.sbb.energie_leitungen',
-  mapboxLayer: netzentwicklungDataLayer,
+export const energieLeitungenLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.energie.leitungen',
+  mapboxLayer: energieDataLayer,
   queryRenderedLayersFilter: ({ id }) => /energie_leitungen$/.test(id),
   styleLayersFilter: ({ id }) => /energie_leitungen$/.test(id),
   properties: {
@@ -1649,11 +1660,26 @@ export const energieLeitungenLayer = new Layer({
   },
 });
 
-export const energieAnlagenLayer = new Layer({
-  name: 'ch.sbb.energie_unterwerke',
-  mapboxLayer: netzentwicklungDataLayer,
-  queryRenderedLayersFilter: ({ id }) => /energie_unterwerke$/.test(id),
-  styleLayersFilter: ({ id }) => /energie_unterwerke$/.test(id),
+export const energieUnterwerkeLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.energie.unterwerke',
+  mapboxLayer: energieDataLayer,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && /^UW$/.test(metadata.kategorie),
+  styleLayersFilter: ({ metadata }) =>
+    metadata && /^UW$/.test(metadata.kategorie),
+  properties: {
+    popupComponent: 'EnergiePopup',
+    useOverlay: true,
+  },
+});
+
+export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.energie.produktionsanlagen',
+  mapboxLayer: energieDataLayer,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && /^KW$/.test(metadata.kategorie),
+  styleLayersFilter: ({ metadata }) =>
+    metadata && /^UW$/.test(metadata.kategorie),
   properties: {
     popupComponent: 'EnergiePopup',
     useOverlay: true,

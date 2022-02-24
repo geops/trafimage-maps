@@ -56,9 +56,11 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
-  energieAnlagenLayer,
+  energieUnterwerkeLayer,
+  energieProduktionsanlagenLayer,
   energieLeitungenLayer,
   geschosseLayer,
+  energieDataLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -382,9 +384,10 @@ export const energie = {
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
   layers: [
-    netzentwicklungDataLayer,
-    energieAnlagenLayer,
+    energieDataLayer,
     energieLeitungenLayer,
+    energieUnterwerkeLayer,
+    energieProduktionsanlagenLayer,
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergieTopicInfo',

@@ -34,7 +34,11 @@ const EnergiePopup = ({ feature }) => {
     }
   }, [personsData]);
 
-  return <p>This is the EnergiePopup</p>;
+  return (
+    <div>
+      <p>This is the EnergiePopup</p>
+    </div>
+  );
 };
 
 EnergiePopup.propTypes = {
@@ -42,9 +46,7 @@ EnergiePopup.propTypes = {
 };
 
 EnergiePopup.renderTitle = (feat) =>
-  feat.get(
-    feat.getGeometry().getType() === GeometryType.POINT
-      ? 'anlage_id'
-      : 'trassennummer',
-  );
+  feat.getGeometry().getType() === GeometryType.POINT
+    ? `${feat.get('bezeichnung')} (${feat.get('anlage_id')})`
+    : feat.get('bezeichnung');
 export default EnergiePopup;
