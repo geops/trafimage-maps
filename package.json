@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.7.8",
+  "version": "1.7.19",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -26,7 +26,7 @@
     "i18next-xhr-backend": "3.2.2",
     "jspdf": "2.4.0",
     "mapbox-gl": "1.13.1",
-    "mobility-toolbox-js": "1.6.2",
+    "mobility-toolbox-js": "1.7.6",
     "node-sass": "6.0.1",
     "ol": "6.6.1",
     "proj4": "2.7.5",
@@ -39,11 +39,12 @@
     "react-autosuggest": "10.1.0",
     "react-dom": "16.14.0",
     "react-draggable": "^4.4.4",
+    "react-helmet": "^6.1.0",
     "react-i18next": "11.12.0",
     "react-icons": "^4.3.1",
     "react-redux": "7.2.5",
     "react-select": "5.1.0",
-    "react-spatial": "1.0.36",
+    "react-spatial": "1.1.0",
     "react-styleguidist": "11.0.8",
     "react-web-component": "2.0.2",
     "redux": "4.1.1",
@@ -62,6 +63,7 @@
     "@babel/eslint-parser": "7.15.7",
     "@babel/plugin-proposal-private-property-in-object": "^7.16.7",
     "@svgr/webpack": "5.5.0",
+    "@testing-library/react": "12.1.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-jest": "26.6.3",
     "babel-loader": "8.1.0",
@@ -79,6 +81,7 @@
     "eslint": "7.32.0",
     "eslint-config-airbnb": "18.2.1",
     "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-prettier": "4.0.0",
@@ -145,7 +148,8 @@
       "node": true,
       "browser": true,
       "es6": true,
-      "jest": true
+      "jest": true,
+      "cypress/globals": true
     },
     "parser": "@babel/eslint-parser",
     "extends": [
@@ -154,6 +158,7 @@
       "prettier"
     ],
     "plugins": [
+      "cypress",
       "prettier"
     ],
     "rules": {
@@ -178,6 +183,7 @@
     }
   },
   "jest": {
+    "resetMocks": false,
     "coverageReporters": [
       "text",
       "html"

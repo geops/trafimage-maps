@@ -27,37 +27,30 @@
     top: 0;
   }
 
-  #ot-sdk-btn.ot-sdk-show-settings {
-    font-size: inherit;
-    font-family: inherit;
-    border: none;
-    background: transparent;
-    color: inherit;
-    padding: 0;
-    transition: none;
-    min-width: 65px; // Text must be max on 2 lines.
-
-    &:hover {
-      background: transparent;
-      color: $brand-primary-hover;
-    }
-  }
-
   .wkp-footer-right {
     justify-content: flex-end;
 
-    > a,
-    > button {
-      cursor: pointer;
+    & > a,
+    & > button {
+      font-size: inherit;
+      font-family: inherit;
       text-overflow: ellipsis;
       overflow: hidden;
       flex: 0 0 auto;
       margin: 0 10px;
+      text-decoration: none !important;
       text-align: right;
     }
 
-    #ot-sdk-btn.ot-sdk-show-settings,
-    a.wkp-dev-portal-link {
+    & > button {
+      &:hover {
+        background: transparent;
+        color: $brand-primary-hover;
+      }
+    }
+
+    .wkp-dev-portal-link,
+    .wkp-cookies-link {
       text-align: left;
       flex: 0 1 auto;
     }
@@ -68,10 +61,6 @@
     display: flex;
     align-items: center;
     flex: 1 1;
-
-    > a {
-      text-decoration: none !important;
-    }
   }
 
   .rs-scale-line {

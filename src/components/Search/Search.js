@@ -9,6 +9,7 @@ import {
   FaChevronCircleUp,
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { IconButton } from '@material-ui/core';
 import { setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
@@ -26,7 +27,6 @@ function Search() {
     if (!searchService) {
       return;
     }
-    searchService.setClear(() => setSuggestions([]));
     searchService.setUpsert((section, items, position) =>
       setSuggestions((oldSuggestions) => {
         const index = oldSuggestions.findIndex((s) => s.section === section);
@@ -53,11 +53,14 @@ function Search() {
       <SearchToggle>
         <Autosuggest
           multiSection
+          shouldRenderSuggestions={(val) => val.trim().length > 2}
           suggestions={suggestions}
-          onSuggestionsFetchRequested={(event) =>
-            searchService.search(event.value)
-          }
-          onSuggestionsClearRequested={() => searchService.clear('')}
+          onSuggestionsFetchRequested={(evt) => {
+            searchService.search(evt.value);
+          }}
+          onSuggestionsClearRequested={() => {
+            setSuggestions([]);
+          }}
           onSuggestionHighlighted={({ suggestion }) =>
             searchService.highlight(suggestion)
           }
@@ -93,7 +96,6 @@ function Search() {
               )
             );
           }}
-          shouldRenderSuggestions={(val) => val.trim().length > 2}
           getSectionSuggestions={(result) =>
             result.items
               ? result.items.map((i) => ({ ...i, section: result.section }))
@@ -125,32 +127,51 @@ function Search() {
               <div className="wkp-search-input">
                 <input {...inputProps} />
                 {value && (
-                  <button
-                    type="button"
+                  <IconButton
                     tabIndex={0}
                     aria-label={t('Suchtext löschen')}
                     className="wkp-search-button wkp-search-button-clear"
                     onClick={() => {
                       setValue('');
                       searchService.clearHighlight();
+                      searchService.clearSelect();
                     }}
                   >
-                    <FaTimes />
-                  </button>
+                    <FaTimes focusable={false} />
+                  </IconButton>
                 )}
-                <button
-                  type="button"
+                <IconButton
                   tabIndex={0}
                   aria-label="Suche"
                   className="wkp-search-button wkp-search-button-submit"
                   onClick={() => {
                     if (!value) {
+                      // Hide the search input on small screen
                       dispatch(setSearchOpen(false));
+                    }
+
+                    if (searchService.selectItem) {
+                      // Will zoom on the current selected feature
+                      searchService.select(searchService.selectItem);
+                    }
+
+                    // Launch a search
+                    if (!suggestions.length && value) {
+                      searchService.search(value).then((searchResults) => {
+                        const result = searchResults.find(
+                          (results) => results.items.length > 0,
+                        );
+                        if (result) {
+                          const { items, section } = result;
+                          dispatch(setSearchOpen(false));
+                          searchService.select({ ...items[0], section });
+                        }
+                      });
                     }
                   }}
                 >
                   <FaSearch focusable={false} />
-                </button>
+                </IconButton>
               </div>
             );
           }}

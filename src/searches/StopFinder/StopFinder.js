@@ -1,9 +1,6 @@
 import React from 'react';
 import { fromLonLat } from 'ol/proj';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
-
-const endpoint = 'https://api.geops.io/stops/v1/';
 
 class StopFinder extends Search {
   constructor() {
@@ -23,7 +20,9 @@ class StopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${endpoint}?&q=${encodeURIComponent(value)}&key=${this.apiKey}&limit=50`,
+      `${this.stopsUrl}?&q=${encodeURIComponent(value)}&key=${
+        this.apiKey
+      }&limit=50`,
       {
         signal,
       },
@@ -80,13 +79,11 @@ class StopFinder extends Search {
     const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
       const { styleLayers } = layer;
       if (!styleLayers) {
-        return [];
+        return false;
       }
       const sourceIds = styleLayers.map(({ source }) => source);
       return (
-        layer.visible &&
-        layer instanceof MapboxStyleLayer &&
-        sourceIds.includes('stations')
+        layer.visible && layer.isQueryable && sourceIds.includes('stations')
       );
     });
 
