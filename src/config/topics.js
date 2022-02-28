@@ -381,7 +381,7 @@ export const beleuchtungsstaerken = {
 export const energie = {
   name: 'ch.sbb.energie',
   key: 'ch.sbb.energie',
-  maxZoom: 13,
+  maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
   layers: [
     energieDataLayer,
