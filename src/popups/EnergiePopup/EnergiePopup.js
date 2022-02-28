@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
@@ -7,7 +8,14 @@ import React, { useMemo } from 'react';
 
 import PersonCard from '../../components/PersonCard';
 
+const useStyles = makeStyles({
+  subtitle: {
+    padding: 8,
+  },
+});
+
 const EnergiePopup = ({ feature }) => {
+  const classes = useStyles();
   const { t } = useTranslation();
   const anlageEigner = useMemo(
     () =>
@@ -26,9 +34,14 @@ const EnergiePopup = ({ feature }) => {
       JSON.parse(feature.get('life_cycle_manager')),
     [feature],
   );
+  const kategorie = feature.get('kategorie');
 
   return (
     <div>
+      <div className={classes.subtitle}>
+        {kategorie === 'UW' && t('ch.sbb.energie.unterwerk')}
+        {kategorie === 'KW' && t('ch.sbb.energie.produktionsanlage')}
+      </div>
       <div>
         {anlageEigner && (
           <PersonCard
