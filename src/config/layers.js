@@ -1665,8 +1665,7 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
 export const energieUnterwerkeLayer = new MapboxStyleLayer({
   name: 'ch.sbb.energie.unterwerke',
   mapboxLayer: energieDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
+  queryRenderedLayersFilter: ({ id }) => id === 'energie_UW',
   styleLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
   properties: {
@@ -1678,8 +1677,7 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
 export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
   name: 'ch.sbb.energie.produktionsanlagen',
   mapboxLayer: energieDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && /^anlagen.kw$/.test(metadata['energie.filter']),
+  queryRenderedLayersFilter: ({ id }) => id === 'energie_KW',
   styleLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.kw$/.test(metadata['energie.filter']),
   properties: {
