@@ -59,11 +59,11 @@ function NoDragPanWarning() {
   const [target, setTarget] = useState(null);
 
   useEffect(() => {
-    const un = map.on('change:target', () => {
+    const onChangeTargetRef = map.on('change:target', () => {
       setTarget(map.getViewport());
     });
     return () => {
-      unByKey(un);
+      unByKey(onChangeTargetRef);
     };
   }, [map]);
 
@@ -103,7 +103,7 @@ function NoDragPanWarning() {
           return false;
         });
 
-        // When touch-action css is set to 'pan-x pan-y', the map pointer events are cancelled to allow default touch scroll behavior.
+        // When touch-action css is set to 'pan-x pan-y', the map pointer events are cancelled.
         // In that case we use the touchend event to hide the warning.
         onPointerCancel = () => {
           isCancelled = true;
