@@ -56,18 +56,38 @@ function NoDragPanWarning() {
   const { t } = useTranslation();
   const classes = useStyles();
   const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+
+  useEffect(() => {
+    const un = map.on('change:target', () => {
+      setTarget(map.getViewport());
+    });
+    return () => {
+      unByKey(un);
+    };
+  }, [map]);
 
   useEffect(() => {
     let onPointerDownRef;
     let onPointerDragRef;
     let oncePointerUpRef;
+    let oncePointerCancelRef;
+    let onPointerCancel;
+    let onTouchEnd;
 
-    if (embedded && map) {
+    if (embedded && map && target) {
+      // We allow default scroll behavior for touch events.
+      map.getViewport().style.touchAction = 'pan-x pan-y';
+
       const dragPan = map
         .getInteractions()
         .getArray()
         .find((interaction) => interaction instanceof DragPan);
       onPointerDownRef = map.on('pointerdown', (evt) => {
+        let isCancelled = false;
+        target.removeEventListener('touchend', onTouchEnd);
+        target.removeEventListener('pointercancel', onPointerCancel);
+
         // eslint-disable-next-line no-underscore-dangle
         if (!dragPan.condition_(evt)) {
           return true;
@@ -80,13 +100,30 @@ function NoDragPanWarning() {
           }
 
           setShow(true);
+          return false;
+        });
 
-          // Hide the warning on next pointerup event.
-          oncePointerUpRef = map.once('pointerup', () => {
+        // When touch-action css is set to 'pan-x pan-y', the map pointer events are cancelled to allow default touch scroll behavior.
+        // In that case we use the touchend event to hide the warning.
+        onPointerCancel = () => {
+          isCancelled = true;
+          onTouchEnd = () => {
             unByKey(onPointerDragRef);
             setShow(false);
-          });
-          return false;
+            target.removeEventListener('touchend', onTouchEnd);
+          };
+          target.addEventListener('touchend', onTouchEnd);
+        };
+        target.addEventListener('pointercancel', onPointerCancel);
+
+        // Use pointerup to hide the warning if the pointer event is not cancelled before.
+        oncePointerUpRef = map.once('pointerup', () => {
+          if (isCancelled) {
+            // let touchend event handle the warning
+            return;
+          }
+          unByKey(onPointerDragRef);
+          setShow(false);
         });
 
         return true;
@@ -94,16 +131,38 @@ function NoDragPanWarning() {
     }
 
     return () => {
-      unByKey([onPointerDownRef, onPointerDragRef, oncePointerUpRef]);
+      unByKey([
+        onPointerDownRef,
+        onPointerDragRef,
+        oncePointerUpRef,
+        oncePointerCancelRef,
+      ]);
+
+      if (target) {
+        target.removeEventListener('pointercancel', onPointerCancel);
+        target.removeEventListener('touchend', onTouchEnd);
+      }
     };
-  }, [embedded, map]);
+  }, [embedded, map, target]);
 
   if (!embedded || !map || !show) {
     return null;
   }
 
   return (
-    <div className={classes.wrapper}>
+    <div
+      className={classes.wrapper}
+      tabIndex={0}
+      role="button"
+      onClick={() => {
+        setShow(false);
+      }}
+      onKeyUp={(evt) => {
+        if (evt.which === 13) {
+          setShow(false);
+        }
+      }}
+    >
       <div className={classes.icon}>
         <NoDragPanWarningIcon />
       </div>
