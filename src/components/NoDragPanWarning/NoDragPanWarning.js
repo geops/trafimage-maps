@@ -88,8 +88,11 @@ function NoDragPanWarning() {
         target.removeEventListener('touchend', onTouchEnd);
         target.removeEventListener('pointercancel', onPointerCancel);
 
-        // eslint-disable-next-line no-underscore-dangle
-        if (!dragPan.condition_(evt)) {
+        if (
+          evt.originalEvent.pointerType !== 'touch' ||
+          // eslint-disable-next-line no-underscore-dangle
+          !dragPan.condition_(evt)
+        ) {
           return true;
         }
 
