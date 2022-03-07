@@ -18,6 +18,7 @@ import {
 } from '../../model/app/actions';
 import Copyright from '../Copyright/Copyright';
 import NoDragPanWarning from '../NoDragPanWarning';
+import NoMouseWheelWarning from '../NoMouseWheelWarning';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -338,6 +339,7 @@ class Map extends PureComponent {
         <MapAccessibility layers={layers} map={map} />
         <Copyright />
         <NoDragPanWarning />
+        <NoMouseWheelWarning />
       </>
     );
   }
