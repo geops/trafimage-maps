@@ -79,6 +79,7 @@ function NoDragPanWarning() {
       // We allow default scroll behavior for touch events.
       map.getViewport().style.touchAction = 'pan-x pan-y';
 
+      // Dactivate drag pan only on touch events.
       const dragPan = map
         .getInteractions()
         .getArray()
