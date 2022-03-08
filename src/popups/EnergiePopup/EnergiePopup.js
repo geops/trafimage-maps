@@ -80,7 +80,7 @@ const EnergiePopup = ({ feature }) => {
 
   return (
     <div>
-      <EnergiePopupSubtitle feature={kategorie} />
+      <EnergiePopupSubtitle kategorie={kategorie} />
       <div>
         {anlageEigner && (
           <PersonCard
