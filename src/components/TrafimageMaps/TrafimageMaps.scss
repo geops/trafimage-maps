@@ -245,12 +245,6 @@
       border: 0;
       padding: 0;
 
-      .wkp-menu-header {
-        .wkp-menu-title {
-          display: none;
-        }
-      }
-
       .wkp-topics-menu-body {
         padding: 0;
         border-top: 1px solid #eee;
@@ -265,6 +259,12 @@
       top: 55px;
       left: 0;
       width: 350px;
+
+      .wkp-menu-header {
+        position: absolute;
+        top: -55px;
+        height: 55px;
+      }
     }
 
     // header component is enabled
