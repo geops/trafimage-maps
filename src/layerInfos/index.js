@@ -27,6 +27,7 @@ import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
 import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
 import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
 import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
+import EnergieLayerInfo from './EnergieLayerInfo';
 import EnergieTopicInfo from './EnergieTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
 
@@ -92,6 +93,7 @@ export default {
   BeleuchtungTopicInfo,
   BeleuchtungLayerInfo,
   MapsGeoAdminLayerInfo,
+  EnergieLayerInfo,
   EnergieTopicInfo,
   SandboxTopicInfo,
 };

@@ -11,11 +11,53 @@ import PersonCard from '../../components/PersonCard';
 const useStyles = makeStyles({
   subtitle: {
     padding: 8,
+    fontFamily: ['SBBWeb-Bold', 'Arial', 'sans-serif'],
+  },
+  unterwerk: {
+    backgroundColor: 'black',
+    marginRight: '10px',
+    width: '10px',
+    height: '10px',
+    display: 'inline-block',
+  },
+  produktionsanlage: {
+    width: '7px',
+    height: '7px',
+    display: 'inline-block',
+    marginRight: '10px',
+    backgroundColor: 'black',
+    borderRadius: '8px',
+    border: '2px solid white',
+    outline: '1.5px solid black',
   },
 });
 
-const EnergiePopup = ({ feature }) => {
+export const EnergiePopupSubtitle = ({ kategorie }) => {
   const classes = useStyles();
+  const { t } = useTranslation();
+  return (
+    <div className={classes.subtitle}>
+      {kategorie === 'UW' && (
+        <>
+          <div className={classes.unterwerk} />
+          {t('ch.sbb.energie.unterwerk')}
+        </>
+      )}
+      {kategorie === 'KW' && (
+        <>
+          <div className={classes.produktionsanlage} />
+          {t('ch.sbb.energie.produktionsanlage')}
+        </>
+      )}
+    </div>
+  );
+};
+
+EnergiePopupSubtitle.propTypes = {
+  kategorie: PropTypes.string.isRequired,
+};
+
+const EnergiePopup = ({ feature }) => {
   const { t } = useTranslation();
   const anlageEigner = useMemo(
     () =>
@@ -38,10 +80,7 @@ const EnergiePopup = ({ feature }) => {
 
   return (
     <div>
-      <div className={classes.subtitle}>
-        {kategorie === 'UW' && t('ch.sbb.energie.unterwerk')}
-        {kategorie === 'KW' && t('ch.sbb.energie.produktionsanlage')}
-      </div>
+      <EnergiePopupSubtitle feature={kategorie} />
       <div>
         {anlageEigner && (
           <PersonCard

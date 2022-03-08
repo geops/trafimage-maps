@@ -1657,6 +1657,8 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata && /^leitung$/.test(metadata['energie.filter']),
   properties: {
+    hasInfos: true,
+    layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
   },
@@ -1669,6 +1671,8 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
   properties: {
+    hasInfos: true,
+    layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
   },
@@ -1681,6 +1685,8 @@ export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.kw$/.test(metadata['energie.filter']),
   properties: {
+    hasInfos: true,
+    layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
   },
