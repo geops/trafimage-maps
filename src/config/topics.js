@@ -394,6 +394,7 @@ export const energie = {
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergieTopicInfo',
+  searches: defaultSearches,
 };
 
 export const infrastrukturbetreiber = {
