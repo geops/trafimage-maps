@@ -187,6 +187,11 @@ const propTypes = {
   domainConsentId: PropTypes.string,
 
   /**
+   * Disable use of cookies when tracking is enabled and no domainConsentId is provided.
+   */
+  disableCookies: PropTypes.bool,
+
+  /**
    * Key of the active topic.
    * @private
    */
@@ -232,6 +237,7 @@ const defaultProps = {
   permissionInfos: null,
   embedded: false,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
+  disableCookies: false,
   matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
   searchUrl: process.env.REACT_APP_SEARCH_URL,
@@ -252,14 +258,24 @@ class TrafimageMaps extends React.PureComponent {
     // Very important to do it here otherwise on the first render this.matomo will be undefined
     // and the useMatomo hook in MatomoTracker will not use the instance to track the view.
     // This happened on the doc page (yarn start:doc) but not on the app page (yarn start).
-    const { enableTracking, matomoUrl, matomoSiteId } = props;
+    const {
+      enableTracking,
+      matomoUrl,
+      matomoSiteId,
+      domainConsentId,
+      disableCookies,
+    } = props;
     if (enableTracking && matomoUrl && matomoSiteId) {
       this.matomo = createInstance({
         urlBase: matomoUrl,
         siteId: matomoSiteId,
         trackerUrl: `${matomoUrl}piwik.php`,
       });
-      this.matomo.pushInstruction('requireConsent');
+      if (domainConsentId) {
+        this.matomo.pushInstruction('requireConsent');
+      } else if (disableCookies) {
+        this.store.dispatch(setDisableCookies(true));
+      }
     }
   }
 

@@ -136,6 +136,11 @@ const propTypes = {
   enableTracking: PropTypes.string,
 
   /**
+   * Disable use of cookies when tracking is enabled and no domainConsentId is provided.
+   */
+  disableCookies: 'false',
+
+  /**
    * URL endpoint for matomo.
    */
   matomoUrl: PropTypes.string,
@@ -179,6 +184,7 @@ const attributes = {
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
   enableTracking: 'true',
+  disableCookies: 'false',
   elements: undefined,
   layersVisibility: undefined,
   embedded: undefined,
@@ -215,6 +221,7 @@ const WebComponent = (props) => {
     layersVisibility,
     embedded,
     domainConsentId,
+    disableCookies,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -320,6 +327,8 @@ const WebComponent = (props) => {
     return null;
   }
 
+  const disableCookiess = disableCookies === 'true';
+
   return (
     <Styled styles={styles}>
       <div
@@ -340,7 +349,8 @@ const WebComponent = (props) => {
           center={arrayCenter}
           embedded={embedded === 'true'}
           enableTracking={enableTracking === 'true'}
-          domainConsentId={domainConsentId}
+          disableCookies={disableCookiess}
+          domainConsentId={!disableCookiess ? domainConsentId : null}
         />
       </div>
     </Styled>

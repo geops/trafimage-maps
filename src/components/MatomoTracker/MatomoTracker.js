@@ -12,11 +12,16 @@ function MatomoTracker() {
   const { trackPageView, trackEvent, pushInstruction } = useMatomo();
   const disableCookies = useSelector((state) => state.app.disableCookies);
   const consentGiven = useSelector((state) => state.app.consentGiven);
+  const domainConsentId = useSelector((state) => state.app.domainConsentId);
   const activeTopicKey = useSelector((state) => state.app.activeTopic?.key);
 
   // Start tracking page view when the consent has been given
   useEffect(() => {
-    if (!trackPageView || !pushInstruction || !consentGiven) {
+    if (
+      !trackPageView ||
+      !pushInstruction ||
+      (domainConsentId && !consentGiven)
+    ) {
       return;
     }
 
@@ -32,11 +37,22 @@ function MatomoTracker() {
     // Start the clock to avoid duplicate 'User topic change' event tracking.
     localStorage?.setItem(LS_MATOMO_USER_SESSION_TIMER, Date.now());
     localStorage?.setItem(LS_MATOMO_TOPIC_VISITED, '');
-  }, [disableCookies, consentGiven, trackPageView, pushInstruction]);
+  }, [
+    disableCookies,
+    consentGiven,
+    trackPageView,
+    pushInstruction,
+    domainConsentId,
+  ]);
 
   // Track topic change event within 30 min.
   useEffect(() => {
-    if (!activeTopicKey || !consentGiven || !trackEvent || !localStorage) {
+    if (
+      !activeTopicKey ||
+      (domainConsentId && !consentGiven) ||
+      !trackEvent ||
+      !localStorage
+    ) {
       return;
     }
     const startDate = localStorage?.getItem(LS_MATOMO_USER_SESSION_TIMER) || 0;
@@ -58,7 +74,7 @@ function MatomoTracker() {
         `${topicVisited + activeTopicKey},`,
       );
     }
-  }, [activeTopicKey, trackEvent, consentGiven]);
+  }, [activeTopicKey, trackEvent, consentGiven, domainConsentId]);
 
   return null;
 }

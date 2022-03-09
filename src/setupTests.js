@@ -2,6 +2,7 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
+import '@testing-library/jest-dom';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
