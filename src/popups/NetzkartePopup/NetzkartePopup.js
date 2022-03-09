@@ -52,6 +52,9 @@ function NetzkartePopup({ feature, coordinate }) {
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
   const name = feature.get('name');
+
+  // We want certain link only for swiss stations.
+  // They all start with 85. We could also use the country_code='CH' property.
   const didok = /^85/.test(feature.get('sbb_id'))
     ? feature.get('sbb_id') - 8500000
     : null;
