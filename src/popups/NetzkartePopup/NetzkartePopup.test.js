@@ -129,7 +129,7 @@ describe('NetzkartePopup', () => {
     );
   });
 
-  test('displays the departures link if sbb_id is available and begins with 85.', () => {
+  test('displays the departures link if station is in Switzerland.', () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -140,6 +140,7 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('sbb_id', '8500000');
+    feature.set('country_code', 'CH');
     const wrapper = mount(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
@@ -151,27 +152,7 @@ describe('NetzkartePopup', () => {
     );
   });
 
-  test("doesn't display the departures link if sbb_id doesn't begin with 85.", () => {
-    const feature = new Feature(
-      new Polygon([
-        [
-          [2, 2],
-          [3, 3],
-          [4, 4],
-        ],
-      ]),
-    );
-    feature.set('sbb_id', '123');
-    const wrapper = mount(
-      <Provider store={store}>
-        <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
-      </Provider>,
-    );
-    expect(wrapper.find('[role="button"]').length).toBe(1);
-    expect(wrapper.find('[role="button"]').first().text()).toBe('Koordinaten');
-  });
-
-  test('displays the station service link if sbb_id and layer (only railway) are available and sbb_id begins with 85..', () => {
+  test("doesn't display the departures link if station outside CH.", () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -182,6 +163,28 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('sbb_id', '8500000');
+    feature.set('country_code', 'FR');
+    const wrapper = mount(
+      <Provider store={store}>
+        <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
+      </Provider>,
+    );
+    expect(wrapper.find('[role="button"]').length).toBe(1);
+    expect(wrapper.find('[role="button"]').first().text()).toBe('Koordinaten');
+  });
+
+  test('displays the station service link if if station is in Switzerland and layer (only railway) is available.', () => {
+    const feature = new Feature(
+      new Polygon([
+        [
+          [2, 2],
+          [3, 3],
+          [4, 4],
+        ],
+      ]),
+    );
+    feature.set('sbb_id', '8500000');
+    feature.set('country_code', 'CH');
     feature.set('rail', 1);
     const wrapper = mount(
       <Provider store={store}>
@@ -194,7 +197,7 @@ describe('NetzkartePopup', () => {
     );
   });
 
-  test("doesn't display the station service link if sbb_id doesn't begin with 85.", () => {
+  test("doesn't display the station service link if station outside CH.", () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -204,7 +207,8 @@ describe('NetzkartePopup', () => {
         ],
       ]),
     );
-    feature.set('sbb_id', '123');
+    feature.set('sbb_id', '8500000');
+    feature.set('country_code', 'FR');
     feature.set('rail', 1);
     const wrapper = mount(
       <Provider store={store}>

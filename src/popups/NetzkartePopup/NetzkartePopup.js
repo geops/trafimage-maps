@@ -53,11 +53,11 @@ function NetzkartePopup({ feature, coordinate }) {
 
   const name = feature.get('name');
 
-  // We want certain link only for swiss stations.
-  // They all start with 85. We could also use the country_code='CH' property.
-  const didok = /^85/.test(feature.get('sbb_id'))
-    ? feature.get('sbb_id') - 8500000
-    : null;
+  // We want certain links only for swiss stations.
+  const didok =
+    feature.get('country_code') === 'CH'
+      ? feature.get('sbb_id') - 8500000
+      : null;
   let styleLayer =
     feature.get('layer') || (feature.get('rail') ? 'railway' : '');
   if (feature.get('ferry')) {
