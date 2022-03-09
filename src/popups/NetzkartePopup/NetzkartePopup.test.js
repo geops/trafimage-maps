@@ -129,7 +129,29 @@ describe('NetzkartePopup', () => {
     );
   });
 
-  test('displays the departures link if sbb_id is available.', () => {
+  test('displays the departures link if sbb_id is available and begins with 85.', () => {
+    const feature = new Feature(
+      new Polygon([
+        [
+          [2, 2],
+          [3, 3],
+          [4, 4],
+        ],
+      ]),
+    );
+    feature.set('sbb_id', '8500000');
+    const wrapper = mount(
+      <Provider store={store}>
+        <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
+      </Provider>,
+    );
+    expect(wrapper.find('[role="button"]').length).toBe(2);
+    expect(wrapper.find('[role="button"]').first().text()).toBe(
+      'Abfahrtszeiten',
+    );
+  });
+
+  test("doesn't display the departures link if sbb_id doesn't begin with 85.", () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -145,13 +167,11 @@ describe('NetzkartePopup', () => {
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('[role="button"]').length).toBe(2);
-    expect(wrapper.find('[role="button"]').first().text()).toBe(
-      'Abfahrtszeiten',
-    );
+    expect(wrapper.find('[role="button"]').length).toBe(1);
+    expect(wrapper.find('[role="button"]').first().text()).toBe('Koordinaten');
   });
 
-  test('displays the station service link if sbb_id and layer (only railway) is available.', () => {
+  test('displays the station service link if sbb_id and layer (only railway) are available and sbb_id begins with 85..', () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -161,7 +181,7 @@ describe('NetzkartePopup', () => {
         ],
       ]),
     );
-    feature.set('sbb_id', '18500000');
+    feature.set('sbb_id', '8500000');
     feature.set('rail', 1);
     const wrapper = mount(
       <Provider store={store}>
@@ -172,5 +192,25 @@ describe('NetzkartePopup', () => {
     expect(wrapper.find('a[href="station_service_url"]').first().text()).toBe(
       ' Webseite Bahnhof',
     );
+  });
+
+  test("doesn't display the station service link if sbb_id doesn't begin with 85.", () => {
+    const feature = new Feature(
+      new Polygon([
+        [
+          [2, 2],
+          [3, 3],
+          [4, 4],
+        ],
+      ]),
+    );
+    feature.set('sbb_id', '123');
+    feature.set('rail', 1);
+    const wrapper = mount(
+      <Provider store={store}>
+        <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
+      </Provider>,
+    );
+    expect(wrapper.find('a[href="station_service_url"]').length).toBe(0);
   });
 });
