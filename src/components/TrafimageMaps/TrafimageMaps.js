@@ -169,6 +169,11 @@ const propTypes = {
   enableTracking: PropTypes.bool,
 
   /**
+   * Disable use of cookies and consent banner when tracking is enabled.
+   */
+  disableCookies: PropTypes.bool,
+
+  /**
    * URL endpoint for matomo.
    * @private
    */
@@ -181,8 +186,14 @@ const propTypes = {
   matomoSiteId: PropTypes.string,
 
   /**
-   * Domain consent id for OneTrust consent window.
-   * @private
+   * Domain for which the domainConsentId is configured for.
+   */
+  domainConsent: PropTypes.string,
+
+  /**
+   * OneTrust id used for consent Management.
+   * WARNING: OneTrust id can be domain dependent and with SameSite=LAX configured,
+   * so make sure OneTrust is properly configured for your domain.
    */
   domainConsentId: PropTypes.string,
 
@@ -228,9 +239,11 @@ const defaultProps = {
   topics: null,
   language: 'de',
   enableTracking: true,
+  disableCookies: false,
   activeTopicKey: null,
   permissionInfos: null,
   embedded: false,
+  domainConsent: process.env.REACT_APP_DOMAIN_CONSENT,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
   matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
@@ -248,18 +261,81 @@ class TrafimageMaps extends React.PureComponent {
      */
     this.store = getStore();
 
+    this.state = {
+      requireConsent: false,
+    };
+
     // Create the matomo instance asap.
     // Very important to do it here otherwise on the first render this.matomo will be undefined
     // and the useMatomo hook in MatomoTracker will not use the instance to track the view.
     // This happened on the doc page (yarn start:doc) but not on the app page (yarn start).
-    const { enableTracking, matomoUrl, matomoSiteId } = props;
+    const {
+      enableTracking,
+      matomoUrl,
+      matomoSiteId,
+      disableCookies,
+      domainConsent,
+      domainConsentId,
+    } = props;
     if (enableTracking && matomoUrl && matomoSiteId) {
+      // Consent management is tricky.
+      // OneTrust cookies are domain dependent (trafimage.ch using the default id) and use SameSite=LAX by default.
+      // Owner of OneTrust id must ask OneTrust guy to change this SameSite property to work in a iframe in a 3rd party website.
+      // Matomo cookies are not domain dependent and use SameSite=LAX by default.
+      // SameSite=LAX forbid use of cookies when the page is called from a 3rd party website,
+      // so when called in an iframe from a 3rd party website like sob cookies are never set. So no need of consent banner.
+      const isIframe = window !== window.parent;
+
+      // Would be nice if this could be done accessing the OneTrust config.
+      const allowedDomainRegex = new RegExp(domainConsent);
+      const isDomainAllowed = allowedDomainRegex.test(window.location.host);
+      const isParentDomainAllowed =
+        isIframe && allowedDomainRegex.test(window.parent.location.host);
+      const isHttps = window.location.protocol === 'https:';
+      const configurations =
+        isIframe && isHttps
+          ? {
+              // Chrome will use SameSite=LAX as fallback if the website use http, but we are not sure for other browsers.
+              setSecureCookie: true,
+              setCookieSameSite: 'None',
+            }
+          : {
+              setCookieSameSite: 'LAX',
+            };
+      // console.log(window.OneTrust.GetDomainData());
       this.matomo = createInstance({
         urlBase: matomoUrl,
         siteId: matomoSiteId,
         trackerUrl: `${matomoUrl}piwik.php`,
+        configurations,
       });
-      this.matomo.pushInstruction('requireConsent');
+
+      if (disableCookies) {
+        this.matomo.pushInstruction('disableCookies');
+      }
+
+      // Need of the consent  if:
+      // - if the user has not specifically disabled cookies.
+      // - if the current domain is the same as the one configured by OneTrust for this domain consent id.
+      // - if the web component is used in an iframe and the parent domain is also the one configured by OneTrust.
+      // - if the web component is used in an iframe using https outside the OneTrust id domain,
+      //   in the case it uses http in an iframe Matomo cookies will use SameSite=LAX and will not add cookie to the page from
+      //   a 3rd party website, so no need a consent.
+      if (
+        domainConsentId &&
+        !disableCookies &&
+        isDomainAllowed &&
+        (!isIframe ||
+          (isIframe && isParentDomainAllowed) ||
+          (isIframe && !isParentDomainAllowed && isHttps))
+      ) {
+        this.matomo.pushInstruction('requireConsent');
+        this.state = {
+          requireConsent: true,
+        };
+      } else {
+        this.matomo.trackPageView();
+      }
     }
   }
 
@@ -268,7 +344,6 @@ class TrafimageMaps extends React.PureComponent {
       zoom,
       center,
       language,
-      enableTracking,
       cartaroUrl,
       mapsetUrl,
       shortenerUrl,
@@ -281,6 +356,7 @@ class TrafimageMaps extends React.PureComponent {
       embedded,
       searchUrl,
     } = this.props;
+    const { requireConsent } = this.state;
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -338,7 +414,7 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setEmbedded(embedded));
     }
 
-    if (enableTracking) {
+    if (requireConsent) {
       // Function called on consent change event
       window.OptanonWrapper = () => {
         if (!window.Optanon || !window.Optanon.IsAlertBoxClosed()) {
@@ -453,6 +529,7 @@ class TrafimageMaps extends React.PureComponent {
       enableTracking,
       domainConsentId,
     } = this.props;
+    const { requireConsent } = this.state;
 
     return (
       <MatomoProvider value={this.matomo}>
@@ -461,7 +538,7 @@ class TrafimageMaps extends React.PureComponent {
             <Head
               topics={topics}
               displayConsent={enableTracking}
-              domainConsentId={domainConsentId}
+              domainConsentId={requireConsent ? domainConsentId : null}
             />
             {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
             {this.matomo && <MatomoTracker />}

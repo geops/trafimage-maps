@@ -16,13 +16,16 @@ describe('TrafimageMaps', () => {
 
     test('enabled by default and active consent mechanism.', () => {
       const component = renderer.create(
-        <TrafimageMaps apiKey="" topics={[]} />,
+        <TrafimageMaps apiKey="" topics={[]} domainConsent=".*" />,
       );
       expect(createInstance).toHaveBeenCalledTimes(1);
       expect(createInstance).toHaveBeenCalledWith({
         siteId: '9',
         trackerUrl: 'https://analytics.geops.de/piwik.php',
         urlBase: 'https://analytics.geops.de/',
+        configurations: {
+          setCookieSameSite: 'LAX',
+        },
       });
       expect(component.getInstance().matomo).toBeDefined();
       expect(
@@ -40,7 +43,12 @@ describe('TrafimageMaps', () => {
 
       beforeEach(() => {
         const component = renderer.create(
-          <TrafimageMaps apiKey="" enableTracking topics={[]} />,
+          <TrafimageMaps
+            apiKey=""
+            enableTracking
+            topics={[]}
+            domainConsent=".*"
+          />,
         );
         store = component.getInstance().store;
         store.dispatch = jest.fn();
