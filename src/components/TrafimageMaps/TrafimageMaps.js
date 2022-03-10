@@ -292,14 +292,18 @@ class TrafimageMaps extends React.PureComponent {
       const isParentDomainAllowed =
         isIframe && allowedDomainRegex.test(window.parent.location.host);
       const isHttps = window.location.protocol === 'https:';
+
+      // Separate the logic avoid a warning if Secure=true and the site is http.
       const configurations =
         isIframe && isHttps
           ? {
-              // Chrome will use SameSite=LAX as fallback if the website use http, but we are not sure for other browsers.
+              // It's important that the OneTrust cookies also ahve the same properties,
+              // otherwise results of consent will never be saved
               setSecureCookie: true,
               setCookieSameSite: 'None',
             }
           : {
+              // Matomo set SameSite=LAX by default if nothing is provided.
               setCookieSameSite: 'LAX',
             };
       // console.log(window.OneTrust.GetDomainData());
@@ -319,8 +323,8 @@ class TrafimageMaps extends React.PureComponent {
       // - if the current domain is the same as the one configured by OneTrust for this domain consent id.
       // - if the web component is used in an iframe and the parent domain is also the one configured by OneTrust.
       // - if the web component is used in an iframe using https outside the OneTrust id domain,
-      //   in the case it uses http in an iframe Matomo cookies will use SameSite=LAX and will not add cookie to the page from
-      //   a 3rd party website, so no need a consent.
+      //   in the case it uses http in an iframe, Matomo cookies will use SameSite=LAX and will not add cookie to the page from
+      //   a 3rd party website, so no need of a consent.
       if (
         domainConsentId &&
         !disableCookies &&
