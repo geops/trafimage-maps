@@ -24,6 +24,7 @@ function MatomoTracker() {
     ) {
       return;
     }
+    console.log('icici');
 
     pushInstruction('setConsentGiven');
 

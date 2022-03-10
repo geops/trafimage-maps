@@ -265,16 +265,38 @@ class TrafimageMaps extends React.PureComponent {
       domainConsentId,
       disableCookies,
     } = props;
+
+    // Consent management is tricky.
+    // OneTrust cookies are domain dependent (trafimage.ch) and use SameSite=LAX by default
+    // Matomo cookies are not domain dependent and use SameSite=LAX by default.
+    // SameSite=LAX forbid use of cookies when the page is called from a 3rd party website,
+    // so when called in an iframe from a 3rd party website like sob cookies are never set. So no need of consent banner.
+    const isIframe = window !== window.parent;
+    const isHttps =
+      (isIframe ? window.parent.location : window.location).protocol ===
+      'https:';
+    const configurations =
+      isIframe && isHttps
+        ? {
+            setSecureCookie: true,
+            setCookieSameSite: 'None',
+          }
+        : {
+            setCookieSameSite: 'LAX',
+          };
     if (enableTracking && matomoUrl && matomoSiteId) {
       this.matomo = createInstance({
         urlBase: matomoUrl,
         siteId: matomoSiteId,
         trackerUrl: `${matomoUrl}piwik.php`,
+        // configurations,
       });
       if (domainConsentId) {
+        console.log('ici');
         this.matomo.pushInstruction('requireConsent');
       } else if (disableCookies) {
-        this.store.dispatch(setDisableCookies(true));
+        console.log('la');
+        // this.store.dispatch(setDisableCookies(true));
       }
     }
   }
