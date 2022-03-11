@@ -321,7 +321,10 @@ class TrafimageMaps extends React.PureComponent {
         configurations,
       });
 
-      if (disableCookies) {
+      // In case we are in a iframe and parent is not allowed and in http the cookie
+      // will not work because SameSite=LAX so we have better time to disableCookies
+      // to avoid errors message.
+      if (disableCookies || (isIframe && !isParentDomainAllowed && !isHttps)) {
         this.matomo.pushInstruction('disableCookies');
       }
 
