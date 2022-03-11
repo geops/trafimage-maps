@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { useTranslation } from 'react-i18next';
-import Link from '../../components/Link';
-import InfrastruktueBetrieberLegend from './InfrastruktueBetrieberLegend';
+import InfrastruktueBetrieberLegend from '../InfrastrukturBetreiberTVSLayerInfo/InfrastruktueBetrieberLegend';
 
 const propTypes = {
   properties: PropTypes.instanceOf(Layer).isRequired,
@@ -11,44 +10,44 @@ const propTypes = {
 
 const translations = {
   de: {
-    title: 'Normalspurstrecken - TVS',
+    title: 'Normalspurstrecken - übrige',
     description:
-      'Infrastrukturbetreiberinnen, die sich im Zuständigkeitsbereich der Schweizerischen Trassenvergabestelle TVS befinden.',
-    dataInfo1: 'Datengrundlage: BAV und SBB',
+      'Übrige Normalspurstrecken, die sich nicht im Zuständigkeitsbereich der Schweizerischen Trassenvergabestelle TVS befinden.',
+    dataInfo1: 'Datengrundlage: BAV',
     dataInfo2: 'Datenstand: 02.2022',
   },
   fr: {
-    title: 'Voies normales - SAS',
+    title: 'Voies normales - autres',
     description:
-      "Gestionnaires d'infrastructure qui se trouvent dans le domaine de compétence du service suisse d'attribution des sillons SAS.",
-    dataInfo1: 'Base de données: OFT et CFF',
+      "Autres lignes à voie normale qui ne se trouvent pas dans le domaine de compétence du service suisse d'attribution des sillons SAS.",
+    dataInfo1: 'Base de données: OFT',
     dataInfo2: 'État des données: 02.2022',
   },
   it: {
-    title: 'Tratte a scartamento normale - SAT',
+    title: 'Tratte a scartamento normale - altre',
     description:
-      "I gestori dell'infrastruttura che rientrano nell'area di responsabilità del Servizio svizzero di assegnazione delle tracce SAT.",
-    dataInfo1: 'Base dati: UFT e FFS',
+      "Altre linee a scartamento normale che non rientrano nell'area di responsabilità del Servizio svizzero di assegnazione delle tracce SAT.",
+    dataInfo1: 'Base dati: UFT',
     dataInfo2: 'Aggiornamento dei dati: 02.2022',
   },
   en: {
-    title: 'Standard gauge - TVS',
+    title: 'Standard gauge - other',
     description:
-      'Infrastructure managers who are within the area of responsibility of the Swiss train path allocation body TVS.',
-    dataInfo1: 'Data basis: FOT and SBB',
+      'Other standard gauge lines which are not within the area of responsibility of the Swiss train path allocation body TVS.',
+    dataInfo1: 'Data basis: FOT',
     dataInfo2: 'Data status: 02.2022',
   },
 };
 
-const InfrastrukturBetreiberTVSLayerInfo = ({ properties: layer }) => {
+const InfrastrukturBetreiberOtherLayerInfo = ({ properties: layer }) => {
   const { i18n } = useTranslation();
   const { title, description, dataInfo1, dataInfo2 } =
     translations[i18n.language];
-  const defaultColor = layer.get('defaultColor');
-  const colors = layer.get('colors');
-  const shortToLongName = layer.get('shortToLongName');
+  const defaultColor = layer.get('defaultColor') || {};
+  const colors = layer.get('colors') || '';
+  const shortToLongName = layer.get('shortToLongName') || {};
 
-  // SBB , BLS, SOB
+  // Importamt operators
   const operators = Object.entries(shortToLongName).filter(
     ([key]) => !!colors[key],
   );
@@ -76,7 +75,6 @@ const InfrastrukturBetreiberTVSLayerInfo = ({ properties: layer }) => {
         })}
       </div>
       <p>
-        <Link href="www.tvs.ch">www.tvs.ch</Link>
         {dataInfo1}
         <br />
         {dataInfo2}
@@ -85,6 +83,6 @@ const InfrastrukturBetreiberTVSLayerInfo = ({ properties: layer }) => {
   );
 };
 
-InfrastrukturBetreiberTVSLayerInfo.propTypes = propTypes;
+InfrastrukturBetreiberOtherLayerInfo.propTypes = propTypes;
 
-export default React.memo(InfrastrukturBetreiberTVSLayerInfo);
+export default React.memo(InfrastrukturBetreiberOtherLayerInfo);

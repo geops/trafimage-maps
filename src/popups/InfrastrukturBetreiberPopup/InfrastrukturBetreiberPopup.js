@@ -61,7 +61,7 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
   const urls = getUrls(properties, i18n.language);
   const mainUrl = urls[0];
   const secondaryUrl = urls[1];
-  console.log(feature.getProperties());
+
   useEffect(() => {
     if (layer) {
       layer.select([feature]);

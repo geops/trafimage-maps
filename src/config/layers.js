@@ -1644,6 +1644,12 @@ export const direktverbindungenLayer = new Layer({
   },
 });
 
+// Order is important for the legend
+const shortToLongNameOther = {
+  DB: 'Deutsche Bahn AG',
+  ÖBB: 'Österreichische Bundesbahnen',
+};
+
 export const infrastrukturBetreiberOther = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.other',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
@@ -1656,21 +1662,23 @@ export const infrastrukturBetreiberOther = new MapboxStyleLayer({
     metadata['isb.filter'] &&
     /^other$/.test(metadata['isb.filter']),
   properties: {
-    // hasInfos: true,
+    hasInfos: true,
     useOverlay: true,
     popupComponent: 'InfrastrukturBetreiberPopup',
+    layerInfoComponent: 'InfrastrukturBetreiberOtherLayerInfo',
+    shortToLongName: shortToLongNameOther,
+    defaultColor: 'rgba(174, 148, 209, 1)', // Must be the same as in the style.
   },
 });
 
 // Order is important for the legend
-const shortToLongName = {
+const shortToLongNameTVS = {
   'SBB CFF FFS': 'SBB Infrastruktur',
   BLS: 'BLS Netz AG',
   SOB: 'SOB AG Infrastruktur',
   AB: 'Appenzeller Bahnen',
   AVA: 'Aargau Verkehr AG',
   CJ: 'Compagnie des chemins de fer du Jura SA',
-  DB: 'Deutsche Bahn AG',
   ETB: 'Emmentalbahn GmbH',
   HBS: 'Hafenbahn Schweiz AG',
   OeBB: 'Oensingen-Balsthal-Bahn',
@@ -1685,7 +1693,6 @@ const shortToLongName = {
   TRAVYS: 'Travys',
   TRN: 'Transports Publics Neuchâtelois',
   VVT: 'Vapeur Val-de-Travers',
-  ÖBB: 'Österreichische Bundesbahnen',
 };
 
 export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
@@ -1702,7 +1709,13 @@ export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
     useOverlay: true,
     popupComponent: 'InfrastrukturBetreiberPopup',
     layerInfoComponent: 'InfrastrukturBetreiberTVSLayerInfo',
-    shortToLongName,
+    shortToLongName: shortToLongNameTVS,
+    defaultColor: 'rgba(0,91,169 , 1)', // Must be the same as in the style.
+    colors: {
+      'SBB CFF FFS': 'rgba(209, 1, 7, 1)',
+      BLS: 'rgba(53,164,48, 1)',
+      SOB: 'rgba(195, 156, 54, 1)',
+    },
   },
 });
 
