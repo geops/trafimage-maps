@@ -1648,6 +1648,7 @@ export const direktverbindungenLayer = new Layer({
 const shortToLongNameOther = {
   DB: 'Deutsche Bahn AG',
   ÖBB: 'Österreichische Bundesbahnen',
+  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
 };
 
 export const infrastrukturBetreiberOther = new MapboxStyleLayer({
