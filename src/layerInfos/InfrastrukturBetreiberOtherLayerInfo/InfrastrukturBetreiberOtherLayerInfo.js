@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { useTranslation } from 'react-i18next';
-import InfrastruktueBetrieberLegend from '../InfrastrukturBetreiberTVSLayerInfo/InfrastruktueBetrieberLegend';
+import OperatorLegend from '../InfrastrukturBetreiberTVSLayerInfo/OperatorLegend';
+import OperatorShortAndLongName from '../InfrastrukturBetreiberTVSLayerInfo/OperatorShortAndLongName';
 
 const propTypes = {
   properties: PropTypes.instanceOf(Layer).isRequired,
@@ -65,7 +66,7 @@ const InfrastrukturBetreiberOtherLayerInfo = ({ properties: layer }) => {
         {operators.map(([shortName, longName]) => {
           const color = colors[shortName] || defaultColor;
           return (
-            <InfrastruktueBetrieberLegend
+            <OperatorLegend
               key={shortName}
               color={color}
               longName={longName}
@@ -74,6 +75,17 @@ const InfrastrukturBetreiberOtherLayerInfo = ({ properties: layer }) => {
           );
         })}
       </div>
+      <p>
+        {othersOperators.map((shortName) => {
+          return (
+            <OperatorShortAndLongName
+              key={shortName}
+              shortName={shortName}
+              longName={shortToLongName[shortName]}
+            />
+          );
+        })}
+      </p>
       <p>
         {dataInfo1}
         <br />

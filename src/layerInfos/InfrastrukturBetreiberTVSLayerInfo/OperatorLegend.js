@@ -43,11 +43,7 @@ const propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-const InfrastrukturBetreiberOperatorLegend = ({
-  shortName,
-  longName,
-  color,
-}) => {
+const OperatorLegend = ({ shortName, longName, color }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -66,6 +62,6 @@ const InfrastrukturBetreiberOperatorLegend = ({
   );
 };
 
-InfrastrukturBetreiberOperatorLegend.propTypes = propTypes;
+OperatorLegend.propTypes = propTypes;
 
-export default React.memo(InfrastrukturBetreiberOperatorLegend);
+export default React.memo(OperatorLegend);
