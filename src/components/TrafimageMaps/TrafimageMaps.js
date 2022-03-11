@@ -289,8 +289,15 @@ class TrafimageMaps extends React.PureComponent {
       // Would be nice if this could be done accessing the OneTrust config.
       const allowedDomainRegex = new RegExp(domainConsent);
       const isDomainAllowed = allowedDomainRegex.test(window.location.host);
-      const isParentDomainAllowed =
-        isIframe && allowedDomainRegex.test(window.parent.location.host);
+      let isParentDomainAllowed = false;
+      try {
+        isParentDomainAllowed =
+          isIframe && allowedDomainRegex.test(window.parent.location.host);
+      } catch (e) {
+        // Accessing parent variables in a cross-origin domain triggers a SecurityException.
+        // So we are sure that the parent is not allowed.
+        isParentDomainAllowed = false;
+      }
       const isHttps = window.location.protocol === 'https:';
 
       // Separate the logic avoid a warning if Secure=true and the site is http.
