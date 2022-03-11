@@ -83,8 +83,8 @@ const colors = {
   'SBB CFF FFS': 'rgba(209, 1, 7, 1)',
   BLS: 'rgba(53,164,48, 1)',
   SOB: 'rgba(195, 156, 54, 1)',
-  default: 'rgba(0,91,169 , 1)',
 };
+const defaultColor = 'rgba(0,91,169 , 1)';
 
 const InfrastrukturBetreiberTVSLayerInfo = ({
   t,
@@ -93,33 +93,42 @@ const InfrastrukturBetreiberTVSLayerInfo = ({
 }) => {
   const classes = useStyles();
   const { title, description, dataInfo1, dataInfo2 } = translations[language];
+
+  // SBB , BLS, SOB
+  const operators = Object.entries(layer.get('shortToLongName')).filter(
+    ([key]) => !!colors[key],
+  );
+
+  // Others
+  const othersOperators = Object.keys(layer.get('shortToLongName')).filter(
+    ([key]) => !colors[key],
+  );
+  operators.push(['OTH', othersOperators.join(', ')]);
   return (
     <div>
       {title}
       <p>{description}</p>
       <div className={classes.legend}>
-        {Object.entries(layer.get('shortToLongName')).map(
-          ([shortName, longName]) => {
-            const color = colors[shortName] || colors.default;
-            return (
-              <div className={classes.legendItem} key={shortName}>
-                <div className={classes.legendSymbol}>
-                  <div
-                    className={classes.legendLine}
-                    style={{ backgroundColor: color }}
-                  />
-                  <div
-                    className={classes.legendText}
-                    style={{ backgroundColor: color }}
-                  >
-                    <span>{shortName.substring(0, 3)}</span>
-                  </div>
+        {operators.map(([shortName, longName]) => {
+          const color = colors[shortName] || defaultColor;
+          return (
+            <div className={classes.legendItem} key={shortName}>
+              <div className={classes.legendSymbol}>
+                <div
+                  className={classes.legendLine}
+                  style={{ backgroundColor: color }}
+                />
+                <div
+                  className={classes.legendText}
+                  style={{ backgroundColor: color }}
+                >
+                  <span>{shortName.substring(0, 3)}</span>
                 </div>
-                <div>{t(longName)}</div>
               </div>
-            );
-          },
-        )}
+              <div>{t(longName)}</div>
+            </div>
+          );
+        })}
       </div>
       <p>
         <Link href="www.tvs.ch">www.tvs.ch</Link>
