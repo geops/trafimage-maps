@@ -833,10 +833,6 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3',
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'InfrastrukturTopicInfo',
-  },
 });
 
 export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
@@ -847,10 +843,6 @@ export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber',
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'InfrastrukturTopicInfo',
-  },
 });
 
 export const betriebsRegionen = new MapboxStyleLayer({
