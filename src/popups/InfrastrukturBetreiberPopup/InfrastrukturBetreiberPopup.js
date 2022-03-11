@@ -22,31 +22,6 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const shortToLongName = {
-  AB: 'AB',
-  AVA: 'AVA',
-  BLS: 'BLS Netz AG',
-  CJ: 'Compagnie des chemins de fer du Jura SA',
-  DB: 'DB',
-  ETB: 'Emmentalbahn GmbH',
-  HBS: 'Hafenbahn Schweiz AG',
-  OeBB: 'Oensingen-Balsthal-Bahn',
-  RB: 'RB',
-  'SBB CFF FFS': 'SBB Infrastruktur',
-  SEHR: 'SEHR',
-  SOB: 'SOB AG Infrastruktur',
-  ST: 'Sensetalbahn AG',
-  STB: 'Sursee-Triengen-Bahn',
-  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
-  TL: 'TL',
-  TMR: 'Transports de Martigny et Régions SA',
-  TPF: 'Transports publics fribourgeois SA',
-  TRAVYS: 'Travys',
-  TRN: 'Transports Publics Neuchâtelois',
-  VVT: 'VVT',
-  ÖBB: 'ÖBB',
-};
-
 const urlIsDefined = (url) => !!url;
 
 const getUrls = (properties, language) => {
@@ -86,7 +61,7 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
   const urls = getUrls(properties, i18n.language);
   const mainUrl = urls[0];
   const secondaryUrl = urls[1];
-
+  console.log(feature.getProperties());
   useEffect(() => {
     if (layer) {
       layer.select([feature]);
@@ -96,7 +71,7 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
   return (
     <div>
       <div className={classes.row}>
-        {`${t('bei')} ${t(shortToLongName[operator])}`}
+        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}`}
       </div>
       {operator && (
         <div className={classes.row}>

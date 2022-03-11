@@ -1659,9 +1659,34 @@ export const infrastrukturBetreiberOther = new MapboxStyleLayer({
     // hasInfos: true,
     useOverlay: true,
     popupComponent: 'InfrastrukturBetreiberPopup',
-    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
   },
 });
+
+// Order is important for the legend
+const shortToLongName = {
+  'SBB CFF FFS': 'SBB Infrastruktur',
+  BLS: 'BLS Netz AG',
+  SOB: 'SOB AG Infrastruktur',
+  AB: 'Appenzeller Bahnen',
+  AVA: 'Aargau Verkehr AG',
+  CJ: 'Compagnie des chemins de fer du Jura SA',
+  DB: 'Deutsche Bahn AG',
+  ETB: 'Emmentalbahn GmbH',
+  HBS: 'Hafenbahn Schweiz AG',
+  OeBB: 'Oensingen-Balsthal-Bahn',
+  RB: 'Rhätische Bahn AG',
+  SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
+  ST: 'Sensetalbahn AG',
+  STB: 'Sursee-Triengen-Bahn',
+  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
+  TL: 'Transports publics de la région lausannoise',
+  TMR: 'Transports de Martigny et Régions SA',
+  TPF: 'Transports publics fribourgeois SA',
+  TRAVYS: 'Travys',
+  TRN: 'Transports Publics Neuchâtelois',
+  VVT: 'Vapeur Val-de-Travers',
+  ÖBB: 'Österreichische Bundesbahnen',
+};
 
 export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.tvs',
@@ -1673,10 +1698,11 @@ export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
   properties: {
-    // hasInfos: true,
+    hasInfos: true,
     useOverlay: true,
     popupComponent: 'InfrastrukturBetreiberPopup',
-    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
+    layerInfoComponent: 'InfrastrukturBetreiberTVSLayerInfo',
+    shortToLongName,
   },
 });
 
