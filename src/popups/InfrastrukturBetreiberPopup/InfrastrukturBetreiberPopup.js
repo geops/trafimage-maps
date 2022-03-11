@@ -22,6 +22,31 @@ const useStyles = makeStyles(() => {
   };
 });
 
+const shortToLongName = {
+  AB: 'AB',
+  AVA: 'AVA',
+  BLS: 'BLS Netz AG',
+  CJ: 'Compagnie des chemins de fer du Jura SA',
+  DB: 'DB',
+  ETB: 'Emmentalbahn GmbH',
+  HBS: 'Hafenbahn Schweiz AG',
+  OeBB: 'Oensingen-Balsthal-Bahn',
+  RB: 'RB',
+  'SBB CFF FFS': 'SBB Infrastruktur',
+  SEHR: 'SEHR',
+  SOB: 'SOB AG Infrastruktur',
+  ST: 'Sensetalbahn AG',
+  STB: 'Sursee-Triengen-Bahn',
+  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
+  TL: 'TL',
+  TMR: 'Transports de Martigny et Régions SA',
+  TPF: 'Transports publics fribourgeois SA',
+  TRAVYS: 'Travys',
+  TRN: 'Transports Publics Neuchâtelois',
+  VVT: 'VVT',
+  ÖBB: 'ÖBB',
+};
+
 const urlIsDefined = (url) => !!url;
 
 const getUrls = (properties, language) => {
@@ -51,7 +76,7 @@ const propTypes = {
 
 const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
   const classes = useStyles();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const properties = feature.getProperties();
   const {
     phone_isb: phone,
@@ -70,10 +95,13 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
 
   return (
     <div>
+      <div className={classes.row}>
+        {`${t('bei')} ${t(shortToLongName[operator])}`}
+      </div>
       {operator && (
         <div className={classes.row}>
           {mainUrl ? (
-            <Link href={mainUrl}>{operator}</Link>
+            <Link href={mainUrl}>{t('zur Webseite von', { operator })}</Link>
           ) : (
             <strong> {operator}</strong>
           )}
@@ -81,7 +109,9 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
       )}
       {secondaryUrl && (
         <div className={classes.row}>
-          <Link href={secondaryUrl}>{new URL(secondaryUrl).hostname}</Link>
+          <Link href={secondaryUrl}>
+            {t('weitere Informationen von', { operator })}
+          </Link>
         </div>
       )}
       {phone && (
@@ -103,7 +133,7 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
 };
 
 InfrastrukturBetreiberPopup.propTypes = propTypes;
-InfrastrukturBetreiberPopup.renderTitle = (feat, t) =>
-  `${t('linie')} ${feat.get('line_number')}`;
-
+InfrastrukturBetreiberPopup.renderTitle = (feat, t) => {
+  return t('Informationen zum Netzzugang bei');
+};
 export default InfrastrukturBetreiberPopup;
