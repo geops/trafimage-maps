@@ -387,6 +387,7 @@ export const infrastrukturbetreiber = {
     popup: true,
   },
   layers: [
+    kilometrageLayer,
     netzkarteinfrastrukturbetreiber,
     infrastrukturBetreiberOther,
     infrastrukturBetreiberTVS,
