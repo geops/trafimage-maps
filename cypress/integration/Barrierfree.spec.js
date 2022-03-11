@@ -11,7 +11,7 @@ describe('Barrierfree E2E', () => {
   });
 
   it('should show visible layer title in menu.', () => {
-    cy.get('.wkp-menu-header > .wkp-menu-title').contains(
+    cy.get('.wkp-menu-header .wkp-menu-title').contains(
       lang['ch.sbb.netzkarte.layer'],
     );
   });

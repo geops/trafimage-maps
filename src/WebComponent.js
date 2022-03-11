@@ -136,6 +136,11 @@ const propTypes = {
   enableTracking: PropTypes.string,
 
   /**
+   * Disable use of cookies when tracking is enabled and no domainConsentId is provided.
+   */
+  disableCookies: PropTypes.string,
+
+  /**
    * URL endpoint for matomo.
    */
   matomoUrl: PropTypes.string,
@@ -146,7 +151,14 @@ const propTypes = {
   matomoSiteId: PropTypes.string,
 
   /**
+   * Domain for which the domainConsentId is configured for.
+   */
+  domainConsent: PropTypes.string,
+
+  /**
    * OneTrust id used for consent Management.
+   * WARNING: OneTrust id can be domain dependent and with SameSite=LAX configured,
+   * so make sure OneTrust is properly configured for your domain.
    */
   domainConsentId: PropTypes.string,
 
@@ -179,9 +191,11 @@ const attributes = {
   shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
   drawUrl: process.env.REACT_APP_DRAW_URL,
   enableTracking: 'true',
+  disableCookies: null,
   elements: undefined,
   layersVisibility: undefined,
   embedded: undefined,
+  domainConsent: process.env.REACT_APP_DOMAIN_CONSENT,
   domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
   matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
@@ -214,7 +228,9 @@ const WebComponent = (props) => {
     elements,
     layersVisibility,
     embedded,
+    domainConsent,
     domainConsentId,
+    disableCookies,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -340,6 +356,8 @@ const WebComponent = (props) => {
           center={arrayCenter}
           embedded={embedded === 'true'}
           enableTracking={enableTracking === 'true'}
+          disableCookies={disableCookies === 'true'}
+          domainConsent={domainConsent}
           domainConsentId={domainConsentId}
         />
       </div>

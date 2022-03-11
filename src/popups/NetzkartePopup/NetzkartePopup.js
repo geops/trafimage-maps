@@ -52,7 +52,12 @@ function NetzkartePopup({ feature, coordinate }) {
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
   const name = feature.get('name');
-  const didok = feature.get('sbb_id') - 8500000;
+
+  // We want certain links only for swiss stations.
+  const didok =
+    feature.get('country_code') === 'CH'
+      ? feature.get('sbb_id') - 8500000
+      : null;
   let styleLayer =
     feature.get('layer') || (feature.get('rail') ? 'railway' : '');
   if (feature.get('ferry')) {
@@ -63,16 +68,6 @@ function NetzkartePopup({ feature, coordinate }) {
   // because there is no translations with flug text and the indexOf test seems wrong
   // (it should be > -1).
   const isAirport = styleLayer && styleLayer.indexOf('flug') > 0;
-
-  const stationTimetableUrl = t('station_timetable_url').replace(
-    '{stationname}',
-    escape(name),
-  );
-
-  const stationServiceUrl = t('station_service_url').replace(
-    '{didok}',
-    escape(didok),
-  );
 
   let airportLabel;
   let stationTimetableLink;
@@ -87,7 +82,7 @@ function NetzkartePopup({ feature, coordinate }) {
     );
   }
 
-  const transportLink = feature.get('sbb_id') ? (
+  const transportLink = Number.isFinite(didok) ? (
     <div>
       <div
         tabIndex={0}
@@ -106,14 +101,21 @@ function NetzkartePopup({ feature, coordinate }) {
   }
 
   if (name && !isAirport) {
+    const stationTimetableUrl = t('station_timetable_url').replace(
+      '{stationname}',
+      escape(name),
+    );
     stationTimetableLink = (
       <div>
         <Link href={stationTimetableUrl}> {t('Fahrplan')}</Link>
       </div>
     );
   }
-
-  if (didok && styleLayer === 'railway') {
+  if (Number.isFinite(didok) && styleLayer === 'railway') {
+    const stationServiceUrl = t('station_service_url').replace(
+      '{didok}',
+      escape(didok),
+    );
     stationServiceLink = (
       <div>
         <Link href={stationServiceUrl}> {t('Webseite Bahnhof')}</Link>

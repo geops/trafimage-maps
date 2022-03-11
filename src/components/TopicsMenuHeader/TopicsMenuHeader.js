@@ -62,25 +62,27 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
       title={t('Menü')}
       onClick={() => onToggle()}
     >
-      <div className="wkp-menu-header-toggler">
-        <div className="wkp-menu-header-toggler-icon">
+      <div className="wkp-menu-header-mobile">
+        <div className="wkp-menu-header-toggler">
           <img src={isOpen ? menuClosedImg : menuOpenImg} alt={t('Menü')} />
           <span className="wkp-menu-header-menu-title">{t('Menü')}</span>
         </div>
-        <span className="wkp-menu-toggle-text">{t('Menü')}</span>
       </div>
-      <div className={`wkp-menu-title ${!subtitle ? '' : 'large'}`}>
-        {t(name)}
-      </div>
-      <div className="wkp-menu-toggler">
-        {isOpen ? (
-          <FaAngleUp focusable={false} />
-        ) : (
-          <FaAngleDown focusable={false} />
-        )}
-      </div>
-      <div className={`wkp-menu-layers ${subtitle ? '' : 'hidden'}`}>
-        {subtitle}
+
+      <div className="wkp-menu-header-desktop">
+        <div className={`wkp-menu-title ${!subtitle ? '' : 'large'}`}>
+          {t(name)}
+        </div>
+        <div className="wkp-menu-toggler">
+          {isOpen ? (
+            <FaAngleUp focusable={false} />
+          ) : (
+            <FaAngleDown focusable={false} />
+          )}
+        </div>
+        <div className={`wkp-menu-layers ${subtitle ? '' : 'hidden'}`}>
+          {subtitle}
+        </div>
       </div>
     </Button>
   );

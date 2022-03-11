@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.7.20-beta.4",
+  "version": "1.7.24",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -139,7 +139,6 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not ie < 11",
     "not op_mini all"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
