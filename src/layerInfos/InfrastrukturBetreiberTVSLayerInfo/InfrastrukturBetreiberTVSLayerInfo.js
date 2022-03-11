@@ -93,15 +93,16 @@ const InfrastrukturBetreiberTVSLayerInfo = ({
 }) => {
   const classes = useStyles();
   const { title, description, dataInfo1, dataInfo2 } = translations[language];
+  const shortToLongName = layer.get('shortToLongName');
 
   // SBB , BLS, SOB
-  const operators = Object.entries(layer.get('shortToLongName')).filter(
+  const operators = Object.entries(shortToLongName).filter(
     ([key]) => !!colors[key],
   );
 
   // Others
-  const othersOperators = Object.keys(layer.get('shortToLongName')).filter(
-    ([key]) => !colors[key],
+  const othersOperators = Object.keys(shortToLongName).filter(
+    (key) => !colors[key],
   );
   operators.push(['OTH', othersOperators.join(', ')]);
   return (
