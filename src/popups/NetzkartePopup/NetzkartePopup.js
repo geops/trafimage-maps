@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +8,7 @@ import { transform as transformCoords } from 'ol/proj';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Link } from '@material-ui/core';
 import GeometryType from 'ol/geom/GeometryType';
+import qs from 'query-string';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -20,47 +21,64 @@ const propTypes = {
 function NetzkartePopup({ feature, coordinate }) {
   const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
+  const [showDeparturesLink, setShowDeparturesLink] = useState(false);
   const dispatch = useDispatch();
   const projection = useSelector((state) => state.app.projection);
+  const departuresUrl = useSelector((state) => state.app.departuresUrl);
+  const apiKey = useSelector((state) => state.app.apiKey);
   const { t } = useTranslation();
 
-  const openDeparturePopup = () => {
-    dispatch(
-      setFeatureInfo([
-        {
-          features: [feature],
-          coordinate,
-          // Fake layer binded to popup, to open it.
-          layer: new Layer({
-            key: 'ch.sbb.departure.popup',
-            properties: {
-              popupComponent: 'DeparturePopup',
-              useOverlay: true,
-            },
-          }),
-        },
-      ]),
-    );
-  };
-
-  const iabpUrl = feature.get('url_interactive_plan');
-  const a4Url = feature.get('url_a4');
-  const posterUrl = feature.get('url_poster');
-  const shoppingUrl = feature.get('url_shopping');
-  const bepUrl = feature.get('url_bep');
+  const {
+    name,
+    latitude,
+    longitude,
+    altitude,
+    sbb_id: sbbId,
+    layer,
+    rail,
+    ferry,
+    url_interactive_plan: iabpUrl,
+    url_a4: a4Url,
+    url_poster: posterUrl,
+    url_shopping: shoppingUrl,
+    url_bep: bepUrl,
+  } = feature.getProperties();
 
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
-  const name = feature.get('name');
+  // If the feature returns some departures we display the link.
+  useEffect(() => {
+    const abortController = new AbortController();
+    if (departuresUrl && apiKey && sbbId) {
+      fetch(
+        `${departuresUrl}/?${qs.stringify({
+          uic: sbbId,
+          key: apiKey,
+          limit: '1',
+        })}`,
+        {
+          signal: abortController.signal,
+        },
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          if (data && data.length) {
+            setShowDeparturesLink(true);
+          } else {
+            setShowDeparturesLink(false);
+          }
+        })
+        .catch(() => {
+          setShowDeparturesLink(false);
+        });
+    }
+    return () => {
+      abortController.abort();
+    };
+  }, [showDeparturesLink, departuresUrl, apiKey, sbbId]);
 
-  // We want certain links only for swiss stations.
-  const didok =
-    feature.get('country_code') === 'CH'
-      ? feature.get('sbb_id') - 8500000
-      : null;
-  let styleLayer =
-    feature.get('layer') || (feature.get('rail') ? 'railway' : '');
-  if (feature.get('ferry')) {
+  let styleLayer = layer || (rail ? 'railway' : '');
+  if (ferry) {
     styleLayer = 'ship';
   }
 
@@ -82,19 +100,40 @@ function NetzkartePopup({ feature, coordinate }) {
     );
   }
 
-  const transportLink = Number.isFinite(didok) ? (
-    <div>
-      <div
-        tabIndex={0}
-        role="button"
-        onClick={() => openDeparturePopup()}
-        onKeyPress={() => openDeparturePopup()}
-        className="wkp-departure-btn"
-      >
-        {t('Abfahrtszeiten')}
+  let transportLink = null;
+  if (showDeparturesLink) {
+    const openDeparturePopup = () => {
+      dispatch(
+        setFeatureInfo([
+          {
+            features: [feature],
+            coordinate,
+            // Fake layer binded to popup, to open it.
+            layer: new Layer({
+              key: 'ch.sbb.departure.popup',
+              properties: {
+                popupComponent: 'DeparturePopup',
+                useOverlay: true,
+              },
+            }),
+          },
+        ]),
+      );
+    };
+    transportLink = (
+      <div>
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={() => openDeparturePopup()}
+          onKeyPress={() => openDeparturePopup()}
+          className="wkp-departure-btn"
+        >
+          {t('Abfahrtszeiten')}
+        </div>
       </div>
-    </div>
-  ) : null;
+    );
+  }
 
   if (isAirport) {
     airportLabel = <div>{t(styleLayer)}</div>;
@@ -111,6 +150,11 @@ function NetzkartePopup({ feature, coordinate }) {
       </div>
     );
   }
+
+  // We want certain links only for swiss stations.
+  const floatSbbId = parseFloat(sbbId);
+  const didok =
+    floatSbbId >= 8500000 && /^85/.test(sbbId) ? floatSbbId - 8500000 : null;
   if (Number.isFinite(didok) && styleLayer === 'railway') {
     const stationServiceUrl = t('station_service_url').replace(
       '{didok}',
@@ -127,12 +171,9 @@ function NetzkartePopup({ feature, coordinate }) {
   // If it's the case and if there is no properties, we use the coordinate of the click event
   let pointCoordinate = [0, 0];
 
-  if (feature.get('longitude') && feature.get('latitude')) {
+  if (longitude && latitude) {
     pointCoordinate = transformCoords(
-      [
-        parseFloat(feature.get('longitude'), 10),
-        parseFloat(feature.get('latitude'), 10),
-      ],
+      [parseFloat(longitude, 10), parseFloat(latitude, 10)],
       'EPSG:4326',
       projection.value,
     );
@@ -176,9 +217,7 @@ function NetzkartePopup({ feature, coordinate }) {
         <span className="wkp-projection-label">{projection.label}</span>
         <span>{`${t('Länge')} (X): ${formatedCoords[0]}`}</span>
         <span>{`${t('Breite')} (Y): ${formatedCoords[1]}`}</span>
-        {feature.get('altitude') && (
-          <span>{`${t('Höhe')}: ${feature.get('altitude')}m`}</span>
-        )}
+        {altitude && <span>{`${t('Höhe')}: ${altitude}m`}</span>}
       </div>
     </>
   );
@@ -222,11 +261,11 @@ NetzkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(NetzkartePopup);
 memoized.renderTitle = (feat, t) => {
-  const platform = feat.get('platform');
+  const { name, platform } = feat.getProperties();
   if (platform) {
-    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+    return `${name} (${t('abfahrtszeiten_kante')} ${platform})`;
   }
-  return feat.get('name');
+  return name;
 };
 
 export default memoized;
