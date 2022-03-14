@@ -37,22 +37,22 @@ const PersonCard = ({ role, name, email, phone, division }) => {
         <b>{role}</b>
       </div>
       <br />
-      <div className={classes.row}>
-        <img src={personIcon} alt="Person" />
-        <div>{`${name}${division ? ` (${division})` : ''}`}</div>
-      </div>
+      {permissionInfos?.user && (
+        <div className={classes.row}>
+          <img src={personIcon} alt="Person" />
+          <div>{`${name}${division ? ` (${division})` : ''}`}</div>
+        </div>
+      )}
       {permissionInfos?.user && phone && (
         <div className={classes.row}>
           <img src={phoneIcon} alt="Phone" />
           <a href={`tel:${phone}`}>{phone || '-'}</a>
         </div>
       )}
-      {permissionInfos?.user && email && (
-        <div className={classes.row}>
-          <img src={mailIcon} alt="Mail" />
-          <a href={`mailto:${email}`}>{(email || '-').toLowerCase()}</a>
-        </div>
-      )}
+      <div className={classes.row}>
+        <img src={mailIcon} alt="Mail" />
+        <a href={`mailto:${email}`}>{(email || '-').toLowerCase()}</a>
+      </div>
     </div>
   );
 };
