@@ -17,7 +17,7 @@ describe('Handicap Topic', () => {
     cy.wait(1000);
 
     // In handicap topic
-    cy.get('.wkp-menu-header > .wkp-menu-title').contains(
+    cy.get('.wkp-menu-header .wkp-menu-title').contains(
       lang['ch.sbb.handicap'],
     );
 
