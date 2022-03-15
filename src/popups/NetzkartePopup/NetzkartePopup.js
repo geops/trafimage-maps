@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,7 +8,6 @@ import { transform as transformCoords } from 'ol/proj';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Link } from '@material-ui/core';
 import GeometryType from 'ol/geom/GeometryType';
-import qs from 'query-string';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -21,11 +20,8 @@ const propTypes = {
 function NetzkartePopup({ feature, coordinate }) {
   const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
-  const [showDeparturesLink, setShowDeparturesLink] = useState(false);
   const dispatch = useDispatch();
   const projection = useSelector((state) => state.app.projection);
-  const departuresUrl = useSelector((state) => state.app.departuresUrl);
-  const apiKey = useSelector((state) => state.app.apiKey);
   const { t } = useTranslation();
 
   const {
@@ -44,38 +40,13 @@ function NetzkartePopup({ feature, coordinate }) {
     url_bep: bepUrl,
   } = feature.getProperties();
 
-  const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
+  let airportLabel = null;
+  let stationTimetableLink = null;
+  let stationServiceLink = null;
+  let bepLink = null;
+  let transportLink = null;
 
-  // If the feature returns some departures we display the link.
-  useEffect(() => {
-    const abortController = new AbortController();
-    if (departuresUrl && apiKey && sbbId) {
-      fetch(
-        `${departuresUrl}/?${qs.stringify({
-          uic: sbbId,
-          key: apiKey,
-          limit: '1',
-        })}`,
-        {
-          signal: abortController.signal,
-        },
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data.length) {
-            setShowDeparturesLink(true);
-          } else {
-            setShowDeparturesLink(false);
-          }
-        })
-        .catch(() => {
-          setShowDeparturesLink(false);
-        });
-    }
-    return () => {
-      abortController.abort();
-    };
-  }, [showDeparturesLink, departuresUrl, apiKey, sbbId]);
+  const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
   let styleLayer = layer || (rail ? 'railway' : '');
   if (ferry) {
@@ -87,10 +58,9 @@ function NetzkartePopup({ feature, coordinate }) {
   // (it should be > -1).
   const isAirport = styleLayer && styleLayer.indexOf('flug') > 0;
 
-  let airportLabel;
-  let stationTimetableLink;
-  let stationServiceLink;
-  let bepLink;
+  const floatSbbId = parseFloat(sbbId);
+  const didok =
+    floatSbbId >= 8500000 && /^85/.test(sbbId) ? floatSbbId - 8500000 : null;
 
   if (bepUrl) {
     bepLink = (
@@ -100,8 +70,7 @@ function NetzkartePopup({ feature, coordinate }) {
     );
   }
 
-  let transportLink = null;
-  if (showDeparturesLink) {
+  if (Number.isFinite(didok)) {
     const openDeparturePopup = () => {
       dispatch(
         setFeatureInfo([
@@ -152,9 +121,6 @@ function NetzkartePopup({ feature, coordinate }) {
   }
 
   // We want certain links only for swiss stations.
-  const floatSbbId = parseFloat(sbbId);
-  const didok =
-    floatSbbId >= 8500000 && /^85/.test(sbbId) ? floatSbbId - 8500000 : null;
   if (Number.isFinite(didok) && styleLayer === 'railway') {
     const stationServiceUrl = t('station_service_url').replace(
       '{didok}',

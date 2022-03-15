@@ -1,12 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import { Feature } from 'ol';
 import { Polygon } from 'ol/geom';
-import fetchMock from 'fetch-mock';
 import NetzkartePopup from '.';
 
 describe('NetzkartePopup', () => {
@@ -17,16 +16,10 @@ describe('NetzkartePopup', () => {
     store = mockStore({
       map: {},
       app: {
-        departuresUrl: '//foodepartures',
-        apiKey: 'key',
         projection: { value: 'EPSG:3857' },
         language: 'de',
       },
     });
-  });
-
-  afterEach(() => {
-    fetchMock.reset();
   });
 
   test('displays only coordinates menu by default', () => {
@@ -137,7 +130,7 @@ describe('NetzkartePopup', () => {
     );
   });
 
-  test('displays the departures link if station has departures.', async () => {
+  test('displays the departures link if station is in switzerland.', () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -148,18 +141,15 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('sbb_id', '8500000');
-    fetchMock.mock(/foodepartures\/\?key=key&limit=1&uic=8500000/, [{}]);
-    await act(async () => {
-      render(
-        <Provider store={store}>
-          <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
-        </Provider>,
-      );
-    });
+    render(
+      <Provider store={store}>
+        <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
+      </Provider>,
+    );
     expect(screen.getByText('Abfahrtszeiten')).toBeInTheDocument();
   });
 
-  test("doesn't display the departures link if station has no departures.", async () => {
+  test("doesn't display the departures link if station is outside switzerland.", () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -170,14 +160,11 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('sbb_id', '8500');
-    fetchMock.mock(/foodepartures\/\?key=key&limit=1&uic=8500/, []);
-    await act(async () => {
-      render(
-        <Provider store={store}>
-          <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
-        </Provider>,
-      );
-    });
+    render(
+      <Provider store={store}>
+        <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
+      </Provider>,
+    );
     expect(screen.queryByText('Abfahrtszeiten')).toBe(null);
   });
 
