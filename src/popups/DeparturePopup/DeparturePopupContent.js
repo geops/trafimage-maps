@@ -114,6 +114,7 @@ class DeparturePopupContent extends Component {
     };
     this.loadInterval = null;
     this.mounted = false;
+    this.abortController = new AbortController();
   }
 
   componentDidMount() {
@@ -139,7 +140,8 @@ class DeparturePopupContent extends Component {
               }
             : null;
           this.onDestinationSelect(destination);
-        });
+        })
+        .catch(() => {});
     } else {
       this.onDestinationSelect(destinationFilter);
     }
@@ -155,6 +157,7 @@ class DeparturePopupContent extends Component {
 
   componentWillUnmount() {
     const { dispatchSetDeparturesFilter } = this.props;
+    this.abortController.abort();
     this.mounted = false;
     window.clearInterval(this.loadInterval);
     dispatchSetDeparturesFilter();
@@ -193,8 +196,9 @@ class DeparturePopupContent extends Component {
     }
 
     const url = `${departuresUrl}/?${qs.stringify(urlParams)}`;
-
-    fetch(url)
+    this.abortController.abort();
+    this.abortController = new AbortController();
+    fetch(url, { signal: this.abortController.signal })
       .then((response) => response.json())
       .then((data) => {
         // HACK to prevent "update of unmounted component" warning
@@ -229,7 +233,11 @@ class DeparturePopupContent extends Component {
           isOffline: !navigator.onLine,
         });
       })
-      .catch(() => {
+      .catch((err) => {
+        if (err && err.name === 'AbortError') {
+          // ignore user abort request
+          return;
+        }
         this.setState({
           departuresLoading: false,
           isOffline: true,
