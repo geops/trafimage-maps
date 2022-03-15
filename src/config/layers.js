@@ -1668,7 +1668,7 @@ export const infrastrukturBetreiberOther = new MapboxStyleLayer({
     popupComponent: 'InfrastrukturBetreiberPopup',
     layerInfoComponent: 'InfrastrukturBetreiberOtherLayerInfo',
     shortToLongName: shortToLongNameOther,
-    defaultColor: 'rgba(174, 148, 209, 1)', // Must be the same as in the style.
+    defaultColor: 'rgba(153, 71, 241, 1)', // Must be the same as in the style.
   },
 });
 

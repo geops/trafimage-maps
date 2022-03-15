@@ -11,8 +11,8 @@ const useStyles = makeStyles({
     position: 'relative',
   },
   legendSymbol: {
-    width: 35,
-    minWidth: 35,
+    width: 45,
+    minWidth: 45,
     height: 18,
     margin: 5,
     marginLeft: 0,
@@ -27,12 +27,11 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     padding: '0 3px',
     fontSize: 13,
-    transform: 'scale(.8)',
   },
   legendLine: {
     position: 'absolute',
     width: 4,
-    height: 35,
+    height: 44, // not 45, otherwise it looks blurry
     transform: 'rotate(90deg)',
   },
 });
