@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { render, screen } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
@@ -129,7 +130,7 @@ describe('NetzkartePopup', () => {
     );
   });
 
-  test('displays the departures link if station is in Switzerland.', () => {
+  test('displays the departures link if station is in switzerland.', () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -140,19 +141,15 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('sbb_id', '8500000');
-    feature.set('country_code', 'CH');
-    const wrapper = mount(
+    render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('[role="button"]').length).toBe(2);
-    expect(wrapper.find('[role="button"]').first().text()).toBe(
-      'Abfahrtszeiten',
-    );
+    expect(screen.getByText('Abfahrtszeiten')).toBeInTheDocument();
   });
 
-  test("doesn't display the departures link if station outside CH.", () => {
+  test("doesn't display the departures link if station is outside switzerland.", () => {
     const feature = new Feature(
       new Polygon([
         [
@@ -162,15 +159,13 @@ describe('NetzkartePopup', () => {
         ],
       ]),
     );
-    feature.set('sbb_id', '8500000');
-    feature.set('country_code', 'FR');
-    const wrapper = mount(
+    feature.set('sbb_id', '8500');
+    render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('[role="button"]').length).toBe(1);
-    expect(wrapper.find('[role="button"]').first().text()).toBe('Koordinaten');
+    expect(screen.queryByText('Abfahrtszeiten')).toBe(null);
   });
 
   test('displays the station service link if if station is in Switzerland and layer (only railway) is available.', () => {
@@ -184,7 +179,6 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('sbb_id', '8500000');
-    feature.set('country_code', 'CH');
     feature.set('rail', 1);
     const wrapper = mount(
       <Provider store={store}>
@@ -207,8 +201,7 @@ describe('NetzkartePopup', () => {
         ],
       ]),
     );
-    feature.set('sbb_id', '8500000');
-    feature.set('country_code', 'FR');
+    feature.set('sbb_id', '85000');
     feature.set('rail', 1);
     const wrapper = mount(
       <Provider store={store}>

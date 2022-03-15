@@ -4,25 +4,31 @@ import PropTypes from 'prop-types';
 const propTypes = {
   /**
    * Css class of the li tag.
+   * @ignore
    */
   className: PropTypes.string,
+
   /**
    * Item of the list.
+   * @ignore
    */
   item: PropTypes.any.isRequired,
 
   /**
    * Children content of the button.
+   * @ignore
    */
   children: PropTypes.node.isRequired,
 
   /**
    * Function triggered when you select the item.
+   * @ignore
    */
   onSelect: PropTypes.func,
 
   /**
    * Function triggered when you press a key.
+   * @ignore
    */
   onKeyDown: PropTypes.func,
 };
@@ -35,6 +41,7 @@ const defaultProps = {
 
 /**
  * This component displays a `<li>` tag.
+ * @ignore
  */
 class ListItem extends PureComponent {
   render() {

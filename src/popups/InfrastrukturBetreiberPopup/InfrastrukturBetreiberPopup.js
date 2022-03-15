@@ -51,7 +51,7 @@ const propTypes = {
 
 const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
   const classes = useStyles();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const properties = feature.getProperties();
   const {
     phone_isb: phone,
@@ -70,10 +70,13 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
 
   return (
     <div>
+      <div className={classes.row}>
+        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}`}
+      </div>
       {operator && (
         <div className={classes.row}>
           {mainUrl ? (
-            <Link href={mainUrl}>{operator}</Link>
+            <Link href={mainUrl}>{t('zur Webseite von', { operator })}</Link>
           ) : (
             <strong> {operator}</strong>
           )}
@@ -81,7 +84,9 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
       )}
       {secondaryUrl && (
         <div className={classes.row}>
-          <Link href={secondaryUrl}>{new URL(secondaryUrl).hostname}</Link>
+          <Link href={secondaryUrl}>
+            {t('weitere Informationen von', { operator })}
+          </Link>
         </div>
       )}
       {phone && (
@@ -103,7 +108,7 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
 };
 
 InfrastrukturBetreiberPopup.propTypes = propTypes;
-InfrastrukturBetreiberPopup.renderTitle = (feat, t) =>
-  `${t('linie')} ${feat.get('line_number')}`;
-
+InfrastrukturBetreiberPopup.renderTitle = (feat, t) => {
+  return t('Informationen zum Netzzugang bei');
+};
 export default InfrastrukturBetreiberPopup;

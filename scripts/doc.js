@@ -6,7 +6,7 @@ const docConfig = require('../doc/doc-config.json');
 
 // Use geOps default template (https://github.com/geops/geops-docjs-template)
 documentation
-  .build([`./src/layers/**`], { shallow: false })
+  .build(['src/layers/*'], { shallow: false })
   .then((out) =>
     documentation.formats.html(out, {
       'project-name': docConfig.appName,

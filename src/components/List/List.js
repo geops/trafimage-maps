@@ -25,6 +25,8 @@ const defaultProps = {
  *
  * This component also add keyboard navigation (arrow up/down, w/s) between list
  * items.
+ *
+ * @ignore
  */
 class List extends PureComponent {
   render() {

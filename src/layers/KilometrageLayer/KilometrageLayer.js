@@ -31,6 +31,11 @@ class KilometrageLayer extends Layer {
           layer,
           coordinate,
         };
+      })
+      .catch(() => {
+        // eslint-disable-next-line no-console
+        console.error('Kilometrage request needs CORS to work properly');
+        return { features: [], layer, coordinate };
       });
   }
 

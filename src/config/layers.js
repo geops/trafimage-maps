@@ -833,10 +833,6 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3',
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'InfrastrukturTopicInfo',
-  },
 });
 
 export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
@@ -847,10 +843,6 @@ export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber',
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'InfrastrukturTopicInfo',
-  },
 });
 
 export const betriebsRegionen = new MapboxStyleLayer({
@@ -1706,6 +1698,13 @@ export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
   },
 });
 
+// Order is important for the legend
+const shortToLongNameOther = {
+  DB: 'Deutsche Bahn AG',
+  ÖBB: 'Österreichische Bundesbahnen',
+  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
+};
+
 export const infrastrukturBetreiberOther = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.other',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
@@ -1718,12 +1717,38 @@ export const infrastrukturBetreiberOther = new MapboxStyleLayer({
     metadata['isb.filter'] &&
     /^other$/.test(metadata['isb.filter']),
   properties: {
-    // hasInfos: true,
+    hasInfos: true,
     useOverlay: true,
     popupComponent: 'InfrastrukturBetreiberPopup',
-    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
+    layerInfoComponent: 'InfrastrukturBetreiberOtherLayerInfo',
+    shortToLongName: shortToLongNameOther,
+    defaultColor: 'rgba(153, 71, 241, 1)', // Must be the same as in the style.
   },
 });
+
+// Order is important for the legend
+const shortToLongNameTVS = {
+  'SBB CFF FFS': 'SBB Infrastruktur',
+  BLS: 'BLS Netz AG',
+  SOB: 'SOB AG Infrastruktur',
+  AB: 'Appenzeller Bahnen',
+  AVA: 'Aargau Verkehr AG',
+  CJ: 'Compagnie des chemins de fer du Jura SA',
+  ETB: 'Emmentalbahn GmbH',
+  HBS: 'Hafenbahn Schweiz AG',
+  OeBB: 'Oensingen-Balsthal-Bahn',
+  RB: 'Rhätische Bahn AG',
+  SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
+  ST: 'Sensetalbahn AG',
+  STB: 'Sursee-Triengen-Bahn',
+  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
+  TL: 'Transports publics de la région lausannoise',
+  TMR: 'Transports de Martigny et Régions SA',
+  TPF: 'Transports publics fribourgeois SA',
+  TRAVYS: 'Travys',
+  TRN: 'Transports Publics Neuchâtelois',
+  VVT: 'Vapeur Val-de-Travers',
+};
 
 export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
   name: 'ch.sbb.infrastrukturbetreiber.tvs',
@@ -1735,10 +1760,17 @@ export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
   properties: {
-    // hasInfos: true,
+    hasInfos: true,
     useOverlay: true,
     popupComponent: 'InfrastrukturBetreiberPopup',
-    // layerInfoComponent: 'InfrastrukturBetreiberPopup',
+    layerInfoComponent: 'InfrastrukturBetreiberTVSLayerInfo',
+    shortToLongName: shortToLongNameTVS,
+    defaultColor: 'rgba(0,91,169 , 1)', // Must be the same as in the style.
+    colors: {
+      'SBB CFF FFS': 'rgba(209, 1, 7, 1)',
+      BLS: 'rgba(53,164,48, 1)',
+      SOB: 'rgba(195, 156, 54, 1)',
+    },
   },
 });
 

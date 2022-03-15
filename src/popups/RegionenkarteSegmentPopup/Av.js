@@ -69,9 +69,9 @@ function Av({ layer, feature, onChangeRole }) {
         .catch((err) => {
           if (err && err.name === 'AbortError') {
             // ignore user abort request
-          } else {
-            setLineData([]);
+            return;
           }
+          setLineData([]);
         });
     } else {
       setLineData([]);

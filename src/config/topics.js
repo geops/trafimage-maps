@@ -407,12 +407,13 @@ export const infrastrukturbetreiber = {
     popup: true,
   },
   layers: [
+    kilometrageLayer,
     netzkarteinfrastrukturbetreiber,
     infrastrukturBetreiberOther,
     infrastrukturBetreiberTVS,
   ],
   projection: 'EPSG:3857',
-  // layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
+  layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
   searches: defaultSearches,
 };
 

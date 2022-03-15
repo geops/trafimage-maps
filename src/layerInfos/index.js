@@ -31,6 +31,8 @@ import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo
 import EnergieLayerInfo from './EnergieLayerInfo';
 import EnergieTopicInfo from './EnergieTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
+import InfrastrukturBetreiberTVSLayerInfo from './InfrastrukturBetreiberTVSLayerInfo';
+import InfrastrukturBetreiberOtherLayerInfo from './InfrastrukturBetreiberOtherLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -64,7 +66,8 @@ export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenT
 export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
 export { default as EnergieTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
-
+export { default as InfrastrukturBetreiberTVSLayerInfo } from './InfrastrukturBetreiberTVSLayerInfo';
+export { default as InfrastrukturBetreiberOtherLayerInfo } from './InfrastrukturBetreiberOtherLayerInfo';
 export default {
   BetriebsRegionenLayerInfo,
   BuslinesLayerInfo,
@@ -99,4 +102,6 @@ export default {
   EnergieLayerInfo,
   EnergieTopicInfo,
   SandboxTopicInfo,
+  InfrastrukturBetreiberTVSLayerInfo,
+  InfrastrukturBetreiberOtherLayerInfo,
 };

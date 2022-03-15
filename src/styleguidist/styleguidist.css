@@ -10,7 +10,7 @@
 }
 
 /* Hide WebComponent section in left menu */
-a[href='#/Web%20component?id=section-trafimage-maps'] + ul {
+a[href='/#/Web%20component?id=section-trafimage-maps'] + ul {
   display: none;
 }
 

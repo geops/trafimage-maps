@@ -5,46 +5,55 @@ import PropTypes from 'prop-types';
 const propTypes = {
   /**
    * Function triggered on button's click event.
+   * @ignore
    */
   onClick: PropTypes.func.isRequired,
 
   /**
    * Children content of the button.
+   * @ignore
    */
   children: PropTypes.node,
 
   /**
    * CSS class of the button.
+   * @ignore
    */
   className: PropTypes.string,
 
   /**
    * HTML tabIndex attribute
+   * @ignore
    */
   tabIndex: PropTypes.number,
 
   /**
    * Title of the button.
+   * @ignore
    */
   title: PropTypes.string,
 
   /**
    * Keyboard accesskey shortcut.
+   * @ignore
    */
   accessKey: PropTypes.string,
 
   /**
    * Arai global attribute that indicates if the element is expandable.
+   * @ignore
    */
   ariaExpanded: PropTypes.bool,
 
   /**
    * HTML style attribute
+   * @ignore
    */
   style: PropTypes.object,
 
   /**
    * HTML disabled attribute
+   * @ignore
    */
   disabled: PropTypes.bool,
 };
@@ -62,6 +71,7 @@ const defaultProps = {
 
 /**
  * This component displays a simple button.
+ * @ignore
  */
 class Button extends PureComponent {
   render() {
