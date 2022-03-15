@@ -107,6 +107,18 @@ export const netzkarteLayer = new MapboxStyleLayer({
   style: 'base_bright_v2_ch.sbb.netzkarte',
 });
 
+export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
+  name: 'ch.sbb.geltungsbereiche.data',
+  visible: true,
+  preserveDrawingBuffer: true,
+  isBaseLayer: true,
+  isQueryable: false,
+  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
+  style: 'base_bright_v2_ch.sbb.geltungsbereiche',
+  properties: {
+    hideInLegend: true,
+  },
+});
 export const netzkarteNight = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.dark',
   key: 'ch.sbb.netzkarte.dark',
@@ -1655,6 +1667,48 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
       radioGroup: 'ch.sbb.geschosse-layer',
     },
   });
+});
+
+export const geltungsbereicheBahnlinien = new MapboxStyleLayer({
+  name: 'ch.sbb.geltungsbereiche.bahnlinien',
+  mapboxLayer: geltungsbereicheDataLayer,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'bahnlinien',
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'bahnlinien',
+  properties: {
+    popupComponent: 'GeltungsbereichePopup',
+    // hasInfos: true,
+    useOverlay: true,
+  },
+});
+
+export const geltungsbereicheBuslinien = new MapboxStyleLayer({
+  name: 'ch.sbb.geltungsbereiche.buslinien',
+  mapboxLayer: geltungsbereicheDataLayer,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'buslinien',
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'buslinien',
+  properties: {
+    popupComponent: 'GeltungsbereichePopup',
+    // hasInfos: true,
+    useOverlay: true,
+  },
+});
+
+export const geltungsbereicheOther = new MapboxStyleLayer({
+  name: 'ch.sbb.geltungsbereiche.other',
+  mapboxLayer: geltungsbereicheDataLayer,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'other',
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'other',
+  properties: {
+    popupComponent: 'GeltungsbereichePopup',
+    // hasInfos: true,
+    useOverlay: true,
+  },
 });
 
 export default [

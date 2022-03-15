@@ -57,6 +57,10 @@ import defaultBaseLayers, {
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
   geschosseLayer,
+  geltungsbereicheBahnlinien,
+  geltungsbereicheDataLayer,
+  geltungsbereicheBuslinien,
+  geltungsbereicheOther,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -386,6 +390,26 @@ const sandbox = {
   searches: defaultSearches,
 };
 
+export const geltungsbereiche = {
+  name: 'ch.sbb.geltungsbereiche',
+  key: 'ch.sbb.geltungsbereiche',
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+  },
+  layers: [
+    ...defaultBaseLayers,
+    geltungsbereicheDataLayer,
+    geltungsbereicheOther,
+    geltungsbereicheBuslinien,
+    geltungsbereicheBahnlinien,
+  ],
+  projection: 'EPSG:3857',
+  // layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -397,6 +421,7 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
+    geltungsbereiche,
     showcases,
     sandbox,
   ],
