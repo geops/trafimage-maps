@@ -62,6 +62,7 @@ const defaultProps = {
 
 /**
  * This component displays a permalink field.
+ * @ignore
  */
 class PermalinkInput extends PureComponent {
   static selectInput() {
