@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '@testing-library/jest-dom';
@@ -9,7 +8,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
-import fetch from 'node-fetch';
 
 import mediaQuery from 'css-mediaquery';
 
@@ -30,10 +28,6 @@ proj4.defs(
 );
 
 register(proj4);
-
-if (!global.fetch) {
-  global.fetch = fetch;
-}
 
 global.URL.createObjectURL = jest.fn(() => 'fooblob');
 
