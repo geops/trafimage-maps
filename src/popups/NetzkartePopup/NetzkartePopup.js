@@ -24,43 +24,32 @@ function NetzkartePopup({ feature, coordinate }) {
   const projection = useSelector((state) => state.app.projection);
   const { t } = useTranslation();
 
-  const openDeparturePopup = () => {
-    dispatch(
-      setFeatureInfo([
-        {
-          features: [feature],
-          coordinate,
-          // Fake layer binded to popup, to open it.
-          layer: new Layer({
-            key: 'ch.sbb.departure.popup',
-            properties: {
-              popupComponent: 'DeparturePopup',
-              useOverlay: true,
-            },
-          }),
-        },
-      ]),
-    );
-  };
+  const {
+    name,
+    latitude,
+    longitude,
+    altitude,
+    sbb_id: sbbId,
+    layer,
+    rail,
+    ferry,
+    url_interactive_plan: iabpUrl,
+    url_a4: a4Url,
+    url_poster: posterUrl,
+    url_shopping: shoppingUrl,
+    url_bep: bepUrl,
+  } = feature.getProperties();
 
-  const iabpUrl = feature.get('url_interactive_plan');
-  const a4Url = feature.get('url_a4');
-  const posterUrl = feature.get('url_poster');
-  const shoppingUrl = feature.get('url_shopping');
-  const bepUrl = feature.get('url_bep');
+  let airportLabel = null;
+  let stationTimetableLink = null;
+  let stationServiceLink = null;
+  let bepLink = null;
+  let transportLink = null;
 
   const hasPlanLinks = !!iabpUrl || !!a4Url || !!posterUrl || !!shoppingUrl;
 
-  const name = feature.get('name');
-
-  // We want certain links only for swiss stations.
-  const didok =
-    feature.get('country_code') === 'CH'
-      ? feature.get('sbb_id') - 8500000
-      : null;
-  let styleLayer =
-    feature.get('layer') || (feature.get('rail') ? 'railway' : '');
-  if (feature.get('ferry')) {
+  let styleLayer = layer || (rail ? 'railway' : '');
+  if (ferry) {
     styleLayer = 'ship';
   }
 
@@ -69,10 +58,9 @@ function NetzkartePopup({ feature, coordinate }) {
   // (it should be > -1).
   const isAirport = styleLayer && styleLayer.indexOf('flug') > 0;
 
-  let airportLabel;
-  let stationTimetableLink;
-  let stationServiceLink;
-  let bepLink;
+  const floatSbbId = parseFloat(sbbId);
+  const didok =
+    floatSbbId >= 8500000 && /^85/.test(sbbId) ? floatSbbId - 8500000 : null;
 
   if (bepUrl) {
     bepLink = (
@@ -82,19 +70,39 @@ function NetzkartePopup({ feature, coordinate }) {
     );
   }
 
-  const transportLink = Number.isFinite(didok) ? (
-    <div>
-      <div
-        tabIndex={0}
-        role="button"
-        onClick={() => openDeparturePopup()}
-        onKeyPress={() => openDeparturePopup()}
-        className="wkp-departure-btn"
-      >
-        {t('Abfahrtszeiten')}
+  if (Number.isFinite(didok)) {
+    const openDeparturePopup = () => {
+      dispatch(
+        setFeatureInfo([
+          {
+            features: [feature],
+            coordinate,
+            // Fake layer binded to popup, to open it.
+            layer: new Layer({
+              key: 'ch.sbb.departure.popup',
+              properties: {
+                popupComponent: 'DeparturePopup',
+                useOverlay: true,
+              },
+            }),
+          },
+        ]),
+      );
+    };
+    transportLink = (
+      <div>
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={() => openDeparturePopup()}
+          onKeyPress={() => openDeparturePopup()}
+          className="wkp-departure-btn"
+        >
+          {t('Abfahrtszeiten')}
+        </div>
       </div>
-    </div>
-  ) : null;
+    );
+  }
 
   if (isAirport) {
     airportLabel = <div>{t(styleLayer)}</div>;
@@ -111,6 +119,8 @@ function NetzkartePopup({ feature, coordinate }) {
       </div>
     );
   }
+
+  // We want certain links only for swiss stations.
   if (Number.isFinite(didok) && styleLayer === 'railway') {
     const stationServiceUrl = t('station_service_url').replace(
       '{didok}',
@@ -127,12 +137,9 @@ function NetzkartePopup({ feature, coordinate }) {
   // If it's the case and if there is no properties, we use the coordinate of the click event
   let pointCoordinate = [0, 0];
 
-  if (feature.get('longitude') && feature.get('latitude')) {
+  if (longitude && latitude) {
     pointCoordinate = transformCoords(
-      [
-        parseFloat(feature.get('longitude'), 10),
-        parseFloat(feature.get('latitude'), 10),
-      ],
+      [parseFloat(longitude, 10), parseFloat(latitude, 10)],
       'EPSG:4326',
       projection.value,
     );
@@ -176,9 +183,7 @@ function NetzkartePopup({ feature, coordinate }) {
         <span className="wkp-projection-label">{projection.label}</span>
         <span>{`${t('Länge')} (X): ${formatedCoords[0]}`}</span>
         <span>{`${t('Breite')} (Y): ${formatedCoords[1]}`}</span>
-        {feature.get('altitude') && (
-          <span>{`${t('Höhe')}: ${feature.get('altitude')}m`}</span>
-        )}
+        {altitude && <span>{`${t('Höhe')}: ${altitude}m`}</span>}
       </div>
     </>
   );
@@ -222,11 +227,11 @@ NetzkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(NetzkartePopup);
 memoized.renderTitle = (feat, t) => {
-  const platform = feat.get('platform');
+  const { name, platform } = feat.getProperties();
   if (platform) {
-    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+    return `${name} (${t('abfahrtszeiten_kante')} ${platform})`;
   }
-  return feat.get('name');
+  return name;
 };
 
 export default memoized;

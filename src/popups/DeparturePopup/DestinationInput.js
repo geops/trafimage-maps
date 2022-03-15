@@ -116,7 +116,7 @@ class DestinationInput extends Component {
       .catch((err) => {
         if (err.name === 'AbortError') {
           // eslint-disable-next-line no-console
-          console.warn(`Abort ${url}`);
+          // console.warn(`Abort ${url}`);
           return;
         }
         // It's important to rethrow all other errors so you don't silence them!
