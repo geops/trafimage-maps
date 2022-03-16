@@ -14,10 +14,10 @@
       {
         "loaderMap": {
           "svg": {
-            "ReactComponent": "@svgr/webpack?-svgo![path]",
-          },
-        },
-      },
+            "ReactComponent": "@svgr/webpack?-svgo![path]"
+          }
+        }
+      }
     ]
   ],
   "ignore": ["**/*.test.js"]
