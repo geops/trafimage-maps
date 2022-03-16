@@ -1,7 +1,4 @@
+// This conf file is needed to compile each file in es format, see scripts/build-es.sh
 module.exports = {
   presets: ['@babel/preset-env', '@babel/preset-react'],
-  plugins: [
-    '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-proposal-class-properties',
-  ],
 };

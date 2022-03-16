@@ -9,11 +9,16 @@ module.exports = {
   template: {
     favicon: 'img/favicon.png',
   },
-  assetsDir: 'src/',
   components: [],
-  styleguideDir: 'styleguide-build',
   require: [
     path.join(__dirname, 'src/styleguidist/styleguidist.css'),
+
+    // I have no idea why I need to re-add these file, they are already in src/index.js
+    // When you use the "components" property (ex: components: ['src/components/Autocomplete/Autocomplete.js']),
+    // the web-component works as expected.
+    // but if you use the "sections" property, the web-component doesn't work.
+    'react-app-polyfill/stable',
+    'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
     '@webcomponents/webcomponents-platform',
     '@webcomponents/custom-elements',
     '@webcomponents/webcomponentsjs/custom-elements-es5-adapter',
@@ -89,87 +94,6 @@ module.exports = {
       ],
     },
   ],
-  webpackConfig: {
-    devServer: {
-      https: true,
-    },
-    module: {
-      rules: [
-        // Babel loader, will use your project’s .babelrc
-        // Transpile node dependencies, node deps are often not transpiled for IE11
-        {
-          test: [
-            /\/node_modules\/(regexpu-core|unicode-.*|chalk|acorn-.*|query-string|strict-uri-encode|proxy-polyfill)/,
-            /\/node_modules\/(split-on-first|react-dev-utils|ansi-styles|jsts|estree-walker|strip-ansi|javascript-stringify|mobility-toolbox-js)/,
-          ],
-          loader: 'babel-loader',
-        },
-        // Transpile js
-        {
-          test: /\.jsx?$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-        },
-        // Load css and scss files.
-        {
-          test: /\.s?css$/,
-          use: ['style-loader', 'css-loader', 'sass-loader'],
-        },
-        {
-          test: /^((?!url).)*\.svg$/,
-          use: [
-            {
-              loader: require.resolve('babel-loader'),
-              options: {
-                // @remove-on-eject-begin
-                babelrc: false,
-                presets: [require.resolve('babel-preset-react-app')],
-                // @remove-on-eject-end
-                cacheDirectory: true,
-              },
-            },
-            {
-              loader: require.resolve('@svgr/webpack'),
-              options: {
-                svgoConfig: {
-                  plugins: [
-                    {
-                      removeViewBox: false,
-                    },
-                  ],
-                },
-              },
-            },
-            {
-              loader: require.resolve('file-loader'),
-              options: {
-                name: 'static/media/[name].[hash:8].[ext]',
-              },
-            },
-          ],
-        },
-        {
-          test: /\.url\.svg$/,
-          loader: 'url-loader',
-        },
-        {
-          test: /\.(woff|woff2|ttf|eot)$/,
-          use: 'file-loader?name=fonts/[name].[ext]!static',
-        },
-        {
-          test: /\.png$/,
-          use: [
-            {
-              loader: 'url-loader',
-            },
-          ],
-        },
-      ],
-    },
-    plugins: [
-      new webpack.DefinePlugin({ 'process.env': JSON.stringify(process.env) }),
-    ],
-  },
   styles: {
     StyleGuide: {
       '@global body': {
