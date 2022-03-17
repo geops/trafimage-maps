@@ -3,8 +3,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import Link from '../../components/Link';
 import Feature from 'ol/Feature';
+import Link from '../../components/Link';
 
 const useStyles = makeStyles({
   container: {
