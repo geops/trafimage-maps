@@ -3,13 +3,14 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import Link from '../../components/Link';
 import Feature from 'ol/Feature';
 
 const useStyles = makeStyles({
   container: {
     padding: 8,
   },
-  title: {
+  header: {
     marginTop: 5,
   },
   row: {
@@ -102,7 +103,7 @@ const DVPopupTitle = ({ feature }) => {
 };
 
 const DirektverbindungPopup = ({ feature, layer }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
 
   const {
@@ -110,8 +111,8 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     end_station_name: end,
     vias,
     nachtverbindung: night,
-    // [`description_${i18n.language}`]: description,
-    // [`url_${i18n.language}`]: link,
+    [`description_${i18n.language}`]: description,
+    [`url_${i18n.language}`]: link,
   } = feature.getProperties();
 
   const switchVias = JSON.parse(vias).filter(
@@ -127,8 +128,14 @@ const DirektverbindungPopup = ({ feature, layer }) => {
 
   return (
     <div className={classes.container}>
-      <div className={classes.title}>
+      <div className={classes.header}>
         <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
+        {description && <p>{description}</p>}
+        {link && (
+          <p>
+            <Link href={link}>{t('Link zum Angebot')}</Link>
+          </p>
+        )}
       </div>
       <div className={classes.route}>
         {[{ station_name: start }, ...switchVias, { station_name: end }].map(
