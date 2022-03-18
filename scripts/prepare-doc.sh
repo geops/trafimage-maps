@@ -22,7 +22,7 @@ else
 fi
 
 # Move all styleguidist build in in documentation folder.
-if mv styleguide-build doc/build; then
+if mv styleguide doc/build; then
   echo "Move Styleguidist build suceeds."
 else
   echo "Move styleguidist build failed."
