@@ -835,8 +835,8 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   style: 'netzkarte_eisenbahninfrastruktur_v3',
 });
 
-export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
-  name: 'ch.sbb.infrastrukturbetreiber',
+export const netzkarteIsb = new TrafimageMapboxLayer({
+  name: 'ch.sbb.isb',
   isBaseLayer: true,
   visible: true,
   isQueryable: false,
@@ -1705,9 +1705,9 @@ const shortToLongNameOther = {
   SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
 };
 
-export const infrastrukturBetreiberOther = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiber.other',
-  mapboxLayer: netzkarteinfrastrukturbetreiber,
+export const isbOther = new MapboxStyleLayer({
+  name: 'ch.sbb.isb.other',
+  mapboxLayer: netzkarteIsb,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata['isb.filter'] &&
@@ -1719,8 +1719,8 @@ export const infrastrukturBetreiberOther = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     useOverlay: true,
-    popupComponent: 'InfrastrukturBetreiberPopup',
-    layerInfoComponent: 'InfrastrukturBetreiberOtherLayerInfo',
+    popupComponent: 'IsbPopup',
+    layerInfoComponent: 'IsbOtherLayerInfo',
     shortToLongName: shortToLongNameOther,
     defaultColor: 'rgba(153, 71, 241, 1)', // Must be the same as in the style.
   },
@@ -1750,9 +1750,9 @@ const shortToLongNameTVS = {
   VVT: 'Vapeur Val-de-Travers',
 };
 
-export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiber.tvs',
-  mapboxLayer: netzkarteinfrastrukturbetreiber,
+export const isbTVS = new MapboxStyleLayer({
+  name: 'ch.sbb.isb.tvs',
+  mapboxLayer: netzkarteIsb,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata['isb.filter'] &&
@@ -1762,8 +1762,8 @@ export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     useOverlay: true,
-    popupComponent: 'InfrastrukturBetreiberPopup',
-    layerInfoComponent: 'InfrastrukturBetreiberTVSLayerInfo',
+    popupComponent: 'IsbPopup',
+    layerInfoComponent: 'IsbTVSLayerInfo',
     shortToLongName: shortToLongNameTVS,
     defaultColor: 'rgba(0,91,169 , 1)', // Must be the same as in the style.
     colors: {

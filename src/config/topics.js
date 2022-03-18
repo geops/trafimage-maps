@@ -59,9 +59,9 @@ import defaultBaseLayers, {
   energieUnterwerkeLayer,
   energieProduktionsanlagenLayer,
   energieLeitungenLayer,
-  netzkarteinfrastrukturbetreiber,
-  infrastrukturBetreiberOther,
-  infrastrukturBetreiberTVS,
+  netzkarteIsb,
+  isbOther,
+  isbTVS,
   geschosseLayer,
   energieDataLayer,
 } from './layers';
@@ -397,23 +397,18 @@ export const energie = {
   searches: defaultSearches,
 };
 
-export const infrastrukturbetreiber = {
-  name: 'ch.sbb.infrastrukturbetreiber',
-  key: 'ch.sbb.infrastrukturbetreiber',
+export const isb = {
+  name: 'ch.sbb.isb',
+  key: 'ch.sbb.isb',
   maxZoom: 14,
   elements: {
     ...defaultElements,
     shareMenu: true,
     popup: true,
   },
-  layers: [
-    kilometrageLayer,
-    netzkarteinfrastrukturbetreiber,
-    infrastrukturBetreiberOther,
-    infrastrukturBetreiberTVS,
-  ],
+  layers: [kilometrageLayer, netzkarteIsb, isbOther, isbTVS],
   projection: 'EPSG:3857',
-  layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
+  layerInfoComponent: 'IsbTopicInfo',
   searches: defaultSearches,
 };
 
@@ -437,7 +432,7 @@ const topics = {
     handicap,
     tarifverbundkarte,
     infrastruktur,
-    infrastrukturbetreiber,
+    isb,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,

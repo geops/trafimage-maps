@@ -1,17 +1,11 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { infrastrukturBetreiberTVS } from '../../config/layers';
-import InfrastrukturBetreiberTVSLayerInfo from '.';
+import { isbTVS } from '../../config/layers';
+import IsbTVSLayerInfo from '.';
 
-describe('InfrastrukturBetreiberTVSLayerInfo', () => {
+describe('IsbTVSLayerInfo', () => {
   test('render something', () => {
-    render(
-      <InfrastrukturBetreiberTVSLayerInfo
-        t={(a) => a}
-        language="de"
-        properties={infrastrukturBetreiberTVS}
-      />,
-    );
+    render(<IsbTVSLayerInfo t={(a) => a} language="de" properties={isbTVS} />);
     // Test important operator
     expect(screen.getByText('SBB')).toBeInTheDocument();
     expect(screen.getByText('SBB Infrastruktur')).toBeInTheDocument();

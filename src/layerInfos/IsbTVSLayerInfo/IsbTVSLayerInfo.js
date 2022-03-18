@@ -41,7 +41,7 @@ const translations = {
   },
 };
 
-const InfrastrukturBetreiberTVSLayerInfo = ({ properties: layer }) => {
+const IsbTVSLayerInfo = ({ properties: layer }) => {
   const { i18n } = useTranslation();
   const { title, description, dataInfo1, dataInfo2 } =
     translations[i18n.language];
@@ -97,6 +97,6 @@ const InfrastrukturBetreiberTVSLayerInfo = ({ properties: layer }) => {
   );
 };
 
-InfrastrukturBetreiberTVSLayerInfo.propTypes = propTypes;
+IsbTVSLayerInfo.propTypes = propTypes;
 
-export default React.memo(InfrastrukturBetreiberTVSLayerInfo);
+export default React.memo(IsbTVSLayerInfo);

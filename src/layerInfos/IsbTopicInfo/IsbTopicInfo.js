@@ -36,7 +36,7 @@ const propTypes = {
   language: PropTypes.string.isRequired,
 };
 
-const InfrastrukturBetreiberTopicInfo = ({ language }) => {
+const IsbTopicInfo = ({ language }) => {
   const { title, description, responsible, responsibleContent } =
     translations[language];
   return (
@@ -54,6 +54,6 @@ const InfrastrukturBetreiberTopicInfo = ({ language }) => {
   );
 };
 
-InfrastrukturBetreiberTopicInfo.propTypes = propTypes;
+IsbTopicInfo.propTypes = propTypes;
 
-export default React.memo(InfrastrukturBetreiberTopicInfo);
+export default React.memo(IsbTopicInfo);

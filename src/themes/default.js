@@ -279,6 +279,9 @@ const theme = createTheme({
       },
     },
     MuiDialog: {
+      root: {
+        position: 'absolute !important',
+      },
       paper: {
         pointerEvents: 'auto',
         textAlign: 'left',

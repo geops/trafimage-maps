@@ -49,7 +49,7 @@ const propTypes = {
   layer: PropTypes.instanceOf(Layer).isRequired,
 };
 
-const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
+const IsbPopup = ({ feature, layer }) => {
   const classes = useStyles();
   const { i18n, t } = useTranslation();
   const properties = feature.getProperties();
@@ -107,8 +107,8 @@ const InfrastrukturBetreiberPopup = ({ feature, layer }) => {
   );
 };
 
-InfrastrukturBetreiberPopup.propTypes = propTypes;
-InfrastrukturBetreiberPopup.renderTitle = (feat, t) => {
+IsbPopup.propTypes = propTypes;
+IsbPopup.renderTitle = (feat, t) => {
   return t('Informationen zum Netzzugang bei');
 };
-export default InfrastrukturBetreiberPopup;
+export default IsbPopup;

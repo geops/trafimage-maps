@@ -19,7 +19,7 @@ the documentation build of both tools.
 
 ## Configuration
 
-Variables shared among both documentation are written in /doc/doc-config.json
+Variables shared among both documentation are written in /src/config/doc-config.json
 
 - Styleguidist: 'styleguide.config.js
     two components need to be overwritten:

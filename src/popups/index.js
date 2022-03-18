@@ -21,7 +21,7 @@ import BeleuchtungsPopup from './BeleuchtungsPopup';
 import DirektverbindungPopup from './DirektverbindungPopup';
 import MapsGeoAdminPopup from './MapsGeoAdminPopup';
 import EnergiePopup from './EnergiePopup/EnergiePopup';
-import InfrastrukturBetreiberPopup from './InfrastrukturBetreiberPopup';
+import IsbPopup from './IsbPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
 export { default as RegionenkarteIntersectionPopup } from './RegionenkarteIntersectionPopup';
@@ -45,7 +45,7 @@ export { default as NetzentwicklungPopup } from './NetzentwicklungPopup';
 export { default as BeleuchtungsPopup } from './BeleuchtungsPopup';
 export { default as MapsGeoAdminPopup } from './MapsGeoAdminPopup';
 export { default as EnergiePopup } from './EnergiePopup';
-export { default as InfrastrukturBetreiberPopup } from './InfrastrukturBetreiberPopup';
+export { default as IsbPopup } from './IsbPopup';
 
 export default {
   BahnhofplanPopup,
@@ -71,5 +71,5 @@ export default {
   DirektverbindungPopup,
   MapsGeoAdminPopup,
   EnergiePopup,
-  InfrastrukturBetreiberPopup,
+  IsbPopup,
 };

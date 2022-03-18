@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { useTranslation } from 'react-i18next';
-import OperatorLegend from '../InfrastrukturBetreiberTVSLayerInfo/OperatorLegend';
-import OperatorShortAndLongName from '../InfrastrukturBetreiberTVSLayerInfo/OperatorShortAndLongName';
+import OperatorLegend from '../IsbTVSLayerInfo/OperatorLegend';
+import OperatorShortAndLongName from '../IsbTVSLayerInfo/OperatorShortAndLongName';
 
 const propTypes = {
   properties: PropTypes.instanceOf(Layer).isRequired,
@@ -40,7 +40,7 @@ const translations = {
   },
 };
 
-const InfrastrukturBetreiberOtherLayerInfo = ({ properties: layer }) => {
+const IsbOtherLayerInfo = ({ properties: layer }) => {
   const { i18n } = useTranslation();
   const { title, description, dataInfo1, dataInfo2 } =
     translations[i18n.language];
@@ -95,6 +95,6 @@ const InfrastrukturBetreiberOtherLayerInfo = ({ properties: layer }) => {
   );
 };
 
-InfrastrukturBetreiberOtherLayerInfo.propTypes = propTypes;
+IsbOtherLayerInfo.propTypes = propTypes;
 
-export default React.memo(InfrastrukturBetreiberOtherLayerInfo);
+export default React.memo(IsbOtherLayerInfo);
