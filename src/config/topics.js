@@ -377,7 +377,7 @@ export const beleuchtungsstaerken = {
   searches: defaultSearches,
 };
 
-export const infrastrukturbetreiber = {
+export const isb = {
   name: 'ch.sbb.isb',
   key: 'ch.sbb.isb',
   maxZoom: 14,
@@ -388,7 +388,7 @@ export const infrastrukturbetreiber = {
   },
   layers: [kilometrageLayer, netzkarteIsb, isbOther, isbTVS],
   projection: 'EPSG:3857',
-  layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
+  layerInfoComponent: 'IsbTopicInfo',
   searches: defaultSearches,
 };
 
@@ -412,7 +412,7 @@ const topics = {
     handicap,
     tarifverbundkarte,
     infrastruktur,
-    infrastrukturbetreiber,
+    isb,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,

@@ -1665,8 +1665,8 @@ export const isbOther = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     useOverlay: true,
-    popupComponent: 'InfrastrukturBetreiberPopup',
-    layerInfoComponent: 'InfrastrukturBetreiberOtherLayerInfo',
+    popupComponent: 'IsbPopup',
+    layerInfoComponent: 'IsbOtherLayerInfo',
     shortToLongName: shortToLongNameOther,
     defaultColor: 'rgba(153, 71, 241, 1)', // Must be the same as in the style.
   },
@@ -1708,8 +1708,8 @@ export const isbTVS = new MapboxStyleLayer({
   properties: {
     hasInfos: true,
     useOverlay: true,
-    popupComponent: 'InfrastrukturBetreiberPopup',
-    layerInfoComponent: 'InfrastrukturBetreiberTVSLayerInfo',
+    popupComponent: 'IsbPopup',
+    layerInfoComponent: 'IsbTVSLayerInfo',
     shortToLongName: shortToLongNameTVS,
     defaultColor: 'rgba(0,91,169 , 1)', // Must be the same as in the style.
     colors: {
