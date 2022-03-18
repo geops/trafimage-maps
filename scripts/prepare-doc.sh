@@ -14,20 +14,20 @@ else
 fi
 
 # Build styleguidist documentation (based on styleguide.config.js).
-# if styleguidist build; then
-#   echo "Styleguidist build suceeds."
-# else
-#   echo "Building styleguidist failed."
-#   exit 1
-# fi
+if styleguidist build; then
+  echo "Styleguidist build suceeds."
+else
+  echo "Building styleguidist failed."
+  exit 1
+fi
 
-# # Move all styleguidist build in in documentation folder.
-# if mv styleguide-build doc/build; then
-#   echo "Move Styleguidist build suceeds."
-# else
-#   echo "Move styleguidist build failed."
-#   exit 1
-# fi
+# Move all styleguidist build in in documentation folder.
+if mv styleguide doc/build; then
+  echo "Move Styleguidist build suceeds."
+else
+  echo "Move styleguidist build failed."
+  exit 1
+fi
 
 # Copy images in documentation folder.
 if cp -rf src/img/ doc/build; then

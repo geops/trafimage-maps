@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Logo from 'react-styleguidist/lib/client/rsg-components/Logo';
 import Version from 'react-styleguidist/lib/client/rsg-components/Version';
 import Styled from 'react-styleguidist/lib/client/rsg-components/Styled';
-import docConfig from '../../doc/doc-config.json';
+import docConfig from '../config/doc-config.json';
 
 const xsmall = '@media (max-width: 600px)';
 
