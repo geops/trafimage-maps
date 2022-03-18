@@ -1646,15 +1646,15 @@ export const direktverbindungenLayer = new Layer({
 
 // Order is important for the legend
 const shortToLongNameOther = {
-  DB: 'Deutsche Bahn AG',
   AB: 'Appenzeller Bahnen',
+  AVA: 'Aargau Verkehr AG',
+  DB: 'Deutsche Bahn AG',
+  ÖBB: 'Österreichische Bundesbahnen',
   RB: 'Rigi Bahnen',
+  SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
+  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
   TL: 'Transports publics de la région lausannoise',
   VVT: 'Vapeur Val-de-Travers',
-  SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
-  ÖBB: 'Österreichische Bundesbahnen',
-  SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
-  AVA: 'Aargau Verkehr AG',
 };
 
 export const isbOther = new MapboxStyleLayer({
