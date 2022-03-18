@@ -378,8 +378,8 @@ export const beleuchtungsstaerken = {
 };
 
 export const infrastrukturbetreiber = {
-  name: 'ch.sbb.infrastrukturbetreiber',
-  key: 'ch.sbb.infrastrukturbetreiber',
+  name: 'ch.sbb.infrastrukturbetreiberinnen',
+  key: 'ch.sbb.infrastrukturbetreiberinnen',
   maxZoom: 14,
   elements: {
     ...defaultElements,

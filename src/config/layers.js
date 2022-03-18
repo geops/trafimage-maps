@@ -836,7 +836,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
 });
 
 export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
-  name: 'ch.sbb.infrastrukturbetreiber',
+  name: 'ch.sbb.infrastrukturbetreiberinnen',
   isBaseLayer: true,
   visible: true,
   isQueryable: false,
@@ -1652,7 +1652,7 @@ const shortToLongNameOther = {
 };
 
 export const infrastrukturBetreiberOther = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiber.other',
+  name: 'ch.sbb.infrastrukturbetreiberinnen.other',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
@@ -1697,7 +1697,7 @@ const shortToLongNameTVS = {
 };
 
 export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiber.tvs',
+  name: 'ch.sbb.infrastrukturbetreiberinnen.tvs',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
