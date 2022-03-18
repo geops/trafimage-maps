@@ -836,7 +836,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
 });
 
 export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
-  name: 'ch.sbb.infrastrukturbetreiberinnen',
+  name: 'ch.sbb.isb',
   isBaseLayer: true,
   visible: true,
   isQueryable: false,
@@ -1651,8 +1651,8 @@ const shortToLongNameOther = {
   SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
 };
 
-export const infrastrukturBetreiberOther = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiberinnen.other',
+export const isbOther = new MapboxStyleLayer({
+  name: 'ch.sbb.isb.other',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
@@ -1697,7 +1697,7 @@ const shortToLongNameTVS = {
 };
 
 export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastrukturbetreiberinnen.tvs',
+  name: 'ch.sbb.isb.tvs',
   mapboxLayer: netzkarteinfrastrukturbetreiber,
   styleLayersFilter: ({ metadata }) =>
     metadata &&

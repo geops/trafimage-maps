@@ -57,7 +57,7 @@ import defaultBaseLayers, {
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
   netzkarteinfrastrukturbetreiber,
-  infrastrukturBetreiberOther,
+  isbOther,
   infrastrukturBetreiberTVS,
   geschosseLayer,
 } from './layers';
@@ -378,8 +378,8 @@ export const beleuchtungsstaerken = {
 };
 
 export const infrastrukturbetreiber = {
-  name: 'ch.sbb.infrastrukturbetreiberinnen',
-  key: 'ch.sbb.infrastrukturbetreiberinnen',
+  name: 'ch.sbb.isb',
+  key: 'ch.sbb.isb',
   maxZoom: 14,
   elements: {
     ...defaultElements,
@@ -389,7 +389,7 @@ export const infrastrukturbetreiber = {
   layers: [
     kilometrageLayer,
     netzkarteinfrastrukturbetreiber,
-    infrastrukturBetreiberOther,
+    isbOther,
     infrastrukturBetreiberTVS,
   ],
   projection: 'EPSG:3857',
