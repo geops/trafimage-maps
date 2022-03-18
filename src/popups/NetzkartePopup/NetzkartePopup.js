@@ -33,6 +33,7 @@ function NetzkartePopup({ feature, coordinate }) {
     layer,
     rail,
     ferry,
+    country_code: countryCode,
     url_interactive_plan: iabpUrl,
     url_a4: a4Url,
     url_poster: posterUrl,
@@ -60,7 +61,10 @@ function NetzkartePopup({ feature, coordinate }) {
 
   const floatSbbId = parseFloat(sbbId);
   const didok =
-    floatSbbId >= 8500000 && /^85/.test(sbbId) ? floatSbbId - 8500000 : null;
+    (countryCode && countryCode === 'CH') ||
+    (!countryCode && floatSbbId >= 8500000 && /^85/.test(sbbId))
+      ? floatSbbId - 8500000
+      : null;
 
   if (bepUrl) {
     bepLink = (
