@@ -63,6 +63,9 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
     <div>
       {title}
       <p>{description}</p>
+      <p>
+        <Link href="www.tvs.ch">www.tvs.ch</Link>
+      </p>
       <div>
         {operators.map(([shortName, longName]) => {
           const color = colors[shortName] || defaultColor;
@@ -88,7 +91,6 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
         })}
       </p>
       <p>
-        <Link href="www.tvs.ch">www.tvs.ch</Link>
         {dataInfo1}
         <br />
         {dataInfo2}

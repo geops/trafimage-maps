@@ -1647,8 +1647,14 @@ export const direktverbindungenLayer = new Layer({
 // Order is important for the legend
 const shortToLongNameOther = {
   DB: 'Deutsche Bahn AG',
-  ÖBB: 'Österreichische Bundesbahnen',
+  AB: 'Appenzeller Bahnen',
+  RB: 'Rigi Bahnen',
+  TL: 'Transports publics de la région lausannoise',
+  VVT: 'Vapeur Val-de-Travers',
   SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
+  ÖBB: 'Österreichische Bundesbahnen',
+  SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
+  AVA: 'Aargau Verkehr AG',
 };
 
 export const isbOther = new MapboxStyleLayer({
@@ -1677,23 +1683,17 @@ const shortToLongNameTVS = {
   'SBB CFF FFS': 'SBB Infrastruktur',
   BLS: 'BLS Netz AG',
   SOB: 'SOB AG Infrastruktur',
-  AB: 'Appenzeller Bahnen',
-  AVA: 'Aargau Verkehr AG',
   CJ: 'Compagnie des chemins de fer du Jura SA',
   ETB: 'Emmentalbahn GmbH',
   HBS: 'Hafenbahn Schweiz AG',
   OeBB: 'Oensingen-Balsthal-Bahn',
-  RB: 'Rhätische Bahn AG',
-  SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
   ST: 'Sensetalbahn AG',
   STB: 'Sursee-Triengen-Bahn',
   SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
-  TL: 'Transports publics de la région lausannoise',
   TMR: 'Transports de Martigny et Régions SA',
   TPF: 'Transports publics fribourgeois SA',
   TRAVYS: 'Travys',
   TRN: 'Transports Publics Neuchâtelois',
-  VVT: 'Vapeur Val-de-Travers',
 };
 
 export const isbTVS = new MapboxStyleLayer({
