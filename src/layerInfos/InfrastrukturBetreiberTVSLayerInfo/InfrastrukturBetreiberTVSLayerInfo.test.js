@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { infrastrukturBetreiberTVS } from '../../config/layers';
+import { isbTVS } from '../../config/layers';
 import InfrastrukturBetreiberTVSLayerInfo from '.';
 
 describe('InfrastrukturBetreiberTVSLayerInfo', () => {
@@ -9,7 +9,7 @@ describe('InfrastrukturBetreiberTVSLayerInfo', () => {
       <InfrastrukturBetreiberTVSLayerInfo
         t={(a) => a}
         language="de"
-        properties={infrastrukturBetreiberTVS}
+        properties={isbTVS}
       />,
     );
     // Test important operator

@@ -56,9 +56,9 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
-  netzkarteinfrastrukturbetreiber,
+  netzkarteIsb,
   isbOther,
-  infrastrukturBetreiberTVS,
+  isbTVS,
   geschosseLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -386,12 +386,7 @@ export const infrastrukturbetreiber = {
     shareMenu: true,
     popup: true,
   },
-  layers: [
-    kilometrageLayer,
-    netzkarteinfrastrukturbetreiber,
-    isbOther,
-    infrastrukturBetreiberTVS,
-  ],
+  layers: [kilometrageLayer, netzkarteIsb, isbOther, isbTVS],
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturBetreiberTopicInfo',
   searches: defaultSearches,

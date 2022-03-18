@@ -835,7 +835,7 @@ export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   style: 'netzkarte_eisenbahninfrastruktur_v3',
 });
 
-export const netzkarteinfrastrukturbetreiber = new TrafimageMapboxLayer({
+export const netzkarteIsb = new TrafimageMapboxLayer({
   name: 'ch.sbb.isb',
   isBaseLayer: true,
   visible: true,
@@ -1653,7 +1653,7 @@ const shortToLongNameOther = {
 
 export const isbOther = new MapboxStyleLayer({
   name: 'ch.sbb.isb.other',
-  mapboxLayer: netzkarteinfrastrukturbetreiber,
+  mapboxLayer: netzkarteIsb,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata['isb.filter'] &&
@@ -1696,9 +1696,9 @@ const shortToLongNameTVS = {
   VVT: 'Vapeur Val-de-Travers',
 };
 
-export const infrastrukturBetreiberTVS = new MapboxStyleLayer({
+export const isbTVS = new MapboxStyleLayer({
   name: 'ch.sbb.isb.tvs',
-  mapboxLayer: netzkarteinfrastrukturbetreiber,
+  mapboxLayer: netzkarteIsb,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata['isb.filter'] &&
