@@ -1,0 +1,4 @@
+// This babel config is used by babel-eslint (using yarn lint and yarn build)
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}

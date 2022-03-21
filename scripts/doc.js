@@ -2,7 +2,7 @@ const documentation = require('documentation');
 const streamArray = require('stream-array');
 const vfs = require('vinyl-fs');
 
-const docConfig = require('../doc/doc-config.json');
+const docConfig = require('../src/config/doc-config.json');
 
 // Use geOps default template (https://github.com/geops/geops-docjs-template)
 documentation
