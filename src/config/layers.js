@@ -24,6 +24,7 @@ import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
 import PlatformsLayer from '../layers/PlatformsLayer';
 import TralisLayer from '../layers/TralisLayer';
 import LevelLayer from '../layers/LevelLayer';
+import GeltungsbereicheLayer from '../layers/GeltungsbereicheLayer';
 
 proj4.defs(
   'EPSG:21781',
@@ -1669,7 +1670,7 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
   });
 });
 
-export const geltungsbereicheBahnlinien = new MapboxStyleLayer({
+export const geltungsbereicheBahnlinien = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche-rail',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -1683,7 +1684,7 @@ export const geltungsbereicheBahnlinien = new MapboxStyleLayer({
   },
 });
 
-export const geltungsbereicheBuslinien = new MapboxStyleLayer({
+export const geltungsbereicheBuslinien = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche-bus',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -1697,7 +1698,7 @@ export const geltungsbereicheBuslinien = new MapboxStyleLayer({
   },
 });
 
-export const geltungsbereicheOther = new MapboxStyleLayer({
+export const geltungsbereicheOther = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche-other',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
