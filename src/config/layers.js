@@ -1670,12 +1670,12 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
 });
 
 export const geltungsbereicheBahnlinien = new MapboxStyleLayer({
-  name: 'ch.sbb.geltungsbereiche.bahnlinien',
+  name: 'ch.sbb.geltungsbereiche-rail',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'bahnlinien',
+    metadata && metadata['geltungsbereiche.filter'] === 'rail',
   styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'bahnlinien',
+    metadata && metadata['geltungsbereiche.filter'] === 'rail',
   properties: {
     popupComponent: 'GeltungsbereichePopup',
     // hasInfos: true,
@@ -1684,12 +1684,12 @@ export const geltungsbereicheBahnlinien = new MapboxStyleLayer({
 });
 
 export const geltungsbereicheBuslinien = new MapboxStyleLayer({
-  name: 'ch.sbb.geltungsbereiche.buslinien',
+  name: 'ch.sbb.geltungsbereiche-bus',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'buslinien',
+    metadata && metadata['geltungsbereiche.filter'] === 'bus',
   styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'buslinien',
+    metadata && metadata['geltungsbereiche.filter'] === 'bus',
   properties: {
     popupComponent: 'GeltungsbereichePopup',
     // hasInfos: true,
@@ -1698,7 +1698,7 @@ export const geltungsbereicheBuslinien = new MapboxStyleLayer({
 });
 
 export const geltungsbereicheOther = new MapboxStyleLayer({
-  name: 'ch.sbb.geltungsbereiche.other',
+  name: 'ch.sbb.geltungsbereiche-other',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter'] === 'other',

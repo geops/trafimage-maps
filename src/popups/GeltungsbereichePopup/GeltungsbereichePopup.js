@@ -10,6 +10,7 @@ const defaultProps = {};
 
 const GeltungsbereichePopup = ({ feature }) => {
   const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
+  console.log(feature);
   return (
     <div className="wkp-geltungsbereiche-popup">
       {geltungsbereiche &&
