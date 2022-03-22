@@ -46,14 +46,14 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
               Array.isArray(fil) &&
               Array.isArray(fil[1]) &&
               fil[1][2] &&
-              fil[1][2][1] === 'geltungsbereich_ids'
+              fil[1][2][1] === 'geltungsbereiche_str'
             ) {
               return false;
             }
             return true;
           });
           const productFilters = value.map((filterValue) => {
-            return ['in', filterValue, ['get', 'geltungsbereich_ids']];
+            return ['in', filterValue, ['get', 'geltungsbereiche_str']];
           });
           if (productFilters.length) {
             newStyleLayer.filter.push(['any', ...productFilters]);
@@ -76,7 +76,9 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
         showAllOption={9}
         choices={providerChoices}
         onChange={onChange}
-        renderChip={(val) => providerChoices[val]?.label}
+        renderChip={(val) =>
+          providerChoices.find((product) => product.value === val)?.label
+        }
       />
     </div>
   );
