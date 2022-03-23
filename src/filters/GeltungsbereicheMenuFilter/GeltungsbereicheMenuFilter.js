@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import {
   InputLabel,
@@ -10,7 +10,6 @@ import {
 } from '@material-ui/core';
 import { MdClear } from 'react-icons/md';
 import Select from '../../components/Select';
-import { geltungsbereicheDataLayer } from '../../config/layers';
 import geltungsbereicheMapping from '../../utils/geltungsbereicheMapping.json';
 
 const useStyles = makeStyles(() => ({
@@ -59,9 +58,8 @@ const providerChoices = [
   }),
 ];
 
-const GeltungsbereicheMenuFilter = () => {
+const GeltungsbereicheMenuFilter = ({ topic }) => {
   const { t } = useTranslation();
-  const topic = useSelector((state) => state.app.activeTopic);
   const [filterValue, setFilterValue] = useState(nullOption);
   const classes = useStyles();
 
@@ -70,29 +68,18 @@ const GeltungsbereicheMenuFilter = () => {
   });
 
   const onChange = (value) => {
-    const { mbMap } = topic.layers.find((l) => {
-      return l.key === geltungsbereicheDataLayer.key;
-    });
-    const style = mbMap.getStyle();
-
-    // Get the ID of the first layer beneath the gb layers
-    const beforeLayerIdx =
-      style.layers.reduce((lastIndex, l, idx) =>
-        l.metadata && 'geltungsbereiche.filter' in l.metadata ? idx : lastIndex,
-      ) + 1;
-    const beforeLayerId = style.layers[beforeLayerIdx].id;
-
-    // Add filters to gb layers
     layers.flat().forEach((layer) => {
+      const { mbMap } = layer.mapboxLayer;
+      const style = mbMap.getStyle();
+
       if (!mbMap || !style) {
         return;
       }
       const styleLayer = style.layers.find((l) => {
         return layer.styleLayersFilter(l);
       });
-      const newStyleLayer = { ...styleLayer };
-      // Remove previous product filters.
-      newStyleLayer.filter = newStyleLayer.filter.filter((fil) => {
+      const newFilter = styleLayer.filter.filter((fil) => {
+        // Remove previous product filters.
         if (
           Array.isArray(fil) &&
           Array.isArray(fil[2]) &&
@@ -104,23 +91,11 @@ const GeltungsbereicheMenuFilter = () => {
       });
 
       if (value && value !== nullOption.value) {
-        newStyleLayer.filter.push([
-          'in',
-          value,
-          ['get', 'geltungsbereiche_str'],
-        ]);
+        // Add new filter
+        newFilter.push(['in', value, ['get', 'geltungsbereiche_str']]);
       }
-      // eslint-disable-next-line no-param-reassign
-      layer.styleLayers = [newStyleLayer];
-      layer.removeStyleLayers();
-      layer.addStyleLayers();
-    });
 
-    // Move gb layers back under the labels
-    style.layers.forEach((l) => {
-      return (
-        /^geltungsbereiche./.test(l.id) && mbMap.moveLayer(l.id, beforeLayerId)
-      );
+      mbMap.setFilter(styleLayer.id, newFilter);
     });
 
     setFilterValue(providerChoices.find((opt) => opt.value === value));
@@ -170,5 +145,11 @@ const GeltungsbereicheMenuFilter = () => {
     </div>
   );
 };
+
+const propTypes = {
+  topic: PropTypes.shape().isRequired,
+};
+
+GeltungsbereicheMenuFilter.propTypes = propTypes;
 
 export default GeltungsbereicheMenuFilter;
