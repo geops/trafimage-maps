@@ -8,10 +8,6 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
  * @param {Object} [options] Layer options.
  */
 class GeltungsbereicheLayer extends MapboxStyleLayer {
-  constructor(options = {}) {
-    super(options);
-  }
-
   getFeatureInfoAtCoordinate(coordinate) {
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
       const featureInfo = { ...data };

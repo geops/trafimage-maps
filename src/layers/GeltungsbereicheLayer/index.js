@@ -1,1 +1,1 @@
-export { default } from './GeltungsbereicheLayer.js';
+export { default } from './GeltungsbereicheLayer';

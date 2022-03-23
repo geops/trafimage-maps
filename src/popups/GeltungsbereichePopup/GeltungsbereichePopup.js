@@ -30,7 +30,7 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
   });
 
   useEffect(() => {
-    // Shift select style tu current feature
+    // Shift select style to current feature
     layers.forEach((l) => l.select([]));
     if (layer) {
       layer.select([feature]);
@@ -42,21 +42,13 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
       {geltungsbereiche &&
         Object.keys(geltungsbereiche).map((product) => {
           return (
-            <React.Fragment key={product}>
-              <Typography paragraph>
-                <b>{geltungsbereicheMapping[product]}</b>
-                <br />
-                <span className={classes.subtext}>
-                  {geltungsbereiche[product].reduce(
-                    (providers, provider, idx, arr) =>
-                      `${providers}${`${provider}${
-                        idx !== arr.length - 1 ? ', ' : ''
-                      }`}`,
-                    '',
-                  )}
-                </span>
-              </Typography>
-            </React.Fragment>
+            <Typography paragraph key={product}>
+              <b>{geltungsbereicheMapping[product]}</b>
+              <br />
+              <span className={classes.subtext}>
+                {geltungsbereiche[product].join(', ')}
+              </span>
+            </Typography>
           );
         })}
     </div>

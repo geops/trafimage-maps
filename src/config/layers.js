@@ -1672,8 +1672,6 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
 export const geltungsbereicheBahnlinien = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche-rail',
   mapboxLayer: geltungsbereicheDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'rail',
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter'] === 'rail',
   properties: {
@@ -1685,8 +1683,6 @@ export const geltungsbereicheBahnlinien = new GeltungsbereicheLayer({
 export const geltungsbereicheBuslinien = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche-bus',
   mapboxLayer: geltungsbereicheDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'bus',
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter'] === 'bus',
   properties: {
@@ -1698,8 +1694,6 @@ export const geltungsbereicheBuslinien = new GeltungsbereicheLayer({
 export const geltungsbereicheOther = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche-other',
   mapboxLayer: geltungsbereicheDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter'] === 'other',
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter'] === 'other',
   properties: {
