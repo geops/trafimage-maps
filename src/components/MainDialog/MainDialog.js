@@ -37,9 +37,6 @@ const MainDialog = ({ staticFilesUrl }) => {
         selectedForInfos={selectedForInfos}
         isDraggable={!isMobileWidth}
         staticFilesUrl={staticFilesUrl}
-        title={
-          <span>{t(`${selectedForInfos.name || selectedForInfos.key}`)}</span>
-        }
       />
     );
   }
