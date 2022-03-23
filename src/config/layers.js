@@ -112,7 +112,6 @@ export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.geltungsbereiche.data',
   visible: true,
   preserveDrawingBuffer: true,
-  isBaseLayer: true,
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2_ch.sbb.geltungsbereiche',
@@ -1679,7 +1678,6 @@ export const geltungsbereicheBahnlinien = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter'] === 'rail',
   properties: {
     popupComponent: 'GeltungsbereichePopup',
-    // hasInfos: true,
     useOverlay: true,
   },
 });
@@ -1693,7 +1691,6 @@ export const geltungsbereicheBuslinien = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter'] === 'bus',
   properties: {
     popupComponent: 'GeltungsbereichePopup',
-    // hasInfos: true,
     useOverlay: true,
   },
 });
@@ -1707,7 +1704,6 @@ export const geltungsbereicheOther = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter'] === 'other',
   properties: {
     popupComponent: 'GeltungsbereichePopup',
-    // hasInfos: true,
     useOverlay: true,
   },
 });

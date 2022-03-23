@@ -401,14 +401,13 @@ export const geltungsbereiche = {
     shareMenu: true,
   },
   layers: [
-    ...defaultBaseLayers,
     geltungsbereicheDataLayer,
     geltungsbereicheOther,
     geltungsbereicheBuslinien,
     geltungsbereicheBahnlinien,
   ],
   projection: 'EPSG:3857',
-  // layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  layerInfoComponent: 'GeltungsbereicheTopicInfo',
   topicMenuBottom: ({ topic }) => <GeltungsBereicheMenuFilter topic={topic} />,
   searches: defaultSearches,
 };
