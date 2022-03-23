@@ -1,5 +1,4 @@
 // import polyfills if application is not loaded via index.js
-import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '../../i18n';

@@ -279,6 +279,9 @@ const theme = createTheme({
       },
     },
     MuiDialog: {
+      root: {
+        position: 'absolute !important',
+      },
       paper: {
         pointerEvents: 'auto',
         textAlign: 'left',
@@ -298,7 +301,7 @@ const theme = createTheme({
         fontSize: 14,
         borderBottom: '1px solid #eee',
         height: 50,
-        padding: '0 20px',
+        padding: '0 40px 0 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',

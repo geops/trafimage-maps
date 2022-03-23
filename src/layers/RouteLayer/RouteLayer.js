@@ -1,4 +1,3 @@
-import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 import qs from 'query-string';
 import OLVectorLayer from 'ol/layer/Vector';

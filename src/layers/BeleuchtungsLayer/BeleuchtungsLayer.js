@@ -19,6 +19,7 @@ class BeleuchtungsLayer extends MapboxStyleLayer {
         /**
          * Every station has two point features with different styles (small icon for low resolution, large icon for large resolution)
          * We make sure only unique features are selected for the popup to avoid unnecessary pagination.
+         * @ignore
          */
         const feats = featureInfo.features.reduce((uniques, feature) => {
           const isUnique = !uniques.find(
