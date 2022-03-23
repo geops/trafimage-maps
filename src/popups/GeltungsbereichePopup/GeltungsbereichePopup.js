@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Typography, makeStyles } from '@material-ui/core';
-import geltungsbereicheMapping from '../../utils/geltungsbereicheMapping.json';
+import { geltungsbereicheDataLayer } from '../../config/layers';
+// import geltungsbereicheMapping from '../../utils/geltungsbereicheMapping.json';
 
 const useStyles = makeStyles(() => {
   return {
@@ -24,10 +25,29 @@ const defaultProps = {};
 const GeltungsbereichePopup = ({ feature, layer }) => {
   const classes = useStyles();
   const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
+  const [geltungsbereicheMapping, setGeltungsbereicheMapping] = useState();
+  const apiKey = useSelector((state) => state.app.apiKey);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = topic.layers.filter((l) => {
     return /^ch.sbb.geltungsbereiche-/.test(l.key);
   });
+
+  useEffect(() => {
+    fetch(
+      `${geltungsbereicheDataLayer.url}/data/ch.sbb.geltungsbereiche.json?key=${apiKey}`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setGeltungsbereicheMapping(data['geops.geltungsbereiche']);
+      })
+      .catch((err) =>
+        // eslint-disable-next-line no-console
+        console.error(
+          err,
+          new Error('Failed to fetch ch.sbb.geltungsbereiche.json'),
+        ),
+      );
+  }, [apiKey]);
 
   useEffect(() => {
     // Shift select style to current feature
@@ -40,6 +60,7 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
   return (
     <div className="wkp-geltungsbereiche-popup">
       {geltungsbereiche &&
+        geltungsbereicheMapping &&
         Object.keys(geltungsbereiche).map((product) => {
           return (
             <Typography paragraph key={product}>
