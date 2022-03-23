@@ -58,7 +58,10 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 GeltungsbereichePopup.defaultProps = defaultProps;
 
-GeltungsbereichePopup.renderTitle = (f, t) => {
-  return t('ch.sbb.geltungsbereiche');
+GeltungsbereichePopup.renderTitle = (feat, t) => {
+  const mot = /^(rail|bus)$/.test(feat.get('mot')) ? feat.get('mot') : 'other';
+  return `${t('ch.sbb.geltungsbereiche')} - ${t(
+    `ch.sbb.geltungsbereiche-${mot}`,
+  )}`;
 };
 export default GeltungsbereichePopup;
