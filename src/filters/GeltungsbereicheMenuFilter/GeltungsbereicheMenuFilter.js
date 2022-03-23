@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import {
@@ -10,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { MdClear } from 'react-icons/md';
 import Select from '../../components/Select';
-import geltungsbereicheMapping from '../../utils/geltungsbereicheMapping.json';
+import { geltungsbereicheDataLayer } from '../../config/layers';
 
 const useStyles = makeStyles(() => ({
   selectWrapper: {
@@ -48,20 +49,38 @@ const nullOption = {
   label: 'Alle Produkte',
 };
 
-const providerChoices = [
-  nullOption,
-  ...Object.keys(geltungsbereicheMapping).map((key) => {
-    return {
-      value: key,
-      label: geltungsbereicheMapping[key],
-    };
-  }),
-];
-
 const GeltungsbereicheMenuFilter = ({ topic }) => {
   const { t } = useTranslation();
+  const apiKey = useSelector((state) => state.app.apiKey);
   const [filterValue, setFilterValue] = useState(nullOption);
+  const [productChoices, setProductChoices] = useState([]);
   const classes = useStyles();
+
+  useEffect(() => {
+    fetch(
+      `${geltungsbereicheDataLayer.url}/data/ch.sbb.geltungsbereiche.json?key=${apiKey}`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const choices = [
+          nullOption,
+          ...Object.keys(data['geops.geltungsbereiche']).map((key) => {
+            return {
+              value: key,
+              label: data['geops.geltungsbereiche'][key],
+            };
+          }),
+        ];
+        setProductChoices(choices);
+      })
+      .catch((err) =>
+        // eslint-disable-next-line no-console
+        console.error(
+          err,
+          new Error('Failed to fetch ch.sbb.geltungsbereiche.json'),
+        ),
+      );
+  }, [apiKey]);
 
   const layers = topic.layers.filter((l) => {
     return /^ch.sbb.geltungsbereiche-/.test(l.key);
@@ -98,10 +117,10 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
       mbMap.setFilter(styleLayer.id, newFilter);
     });
 
-    setFilterValue(providerChoices.find((opt) => opt.value === value));
+    setFilterValue(productChoices.find((opt) => opt.value === value));
   };
 
-  return (
+  return productChoices.length ? (
     <div className={`wkp-topic-filter ${classes.selectWrapper}`}>
       <FormControl className={classes.formControl}>
         <InputLabel shrink htmlFor="gb-product-filter">
@@ -120,7 +139,7 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
             <div className={classes.value}>{t(filterValue.label)}</div>
           )}
         >
-          {providerChoices.map((opt) => {
+          {productChoices.map((opt) => {
             return (
               <MenuItem
                 key={opt.value}
@@ -143,7 +162,7 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
         )}
       </FormControl>
     </div>
-  );
+  ) : null;
 };
 
 const propTypes = {
