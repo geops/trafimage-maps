@@ -35,7 +35,7 @@ const useStyles = makeStyles({
 export const EnergiePopupSubtitle = ({ kategorie }) => {
   const classes = useStyles();
   const { t } = useTranslation();
-  return (
+  return kategorie ? (
     <div className={classes.subtitle}>
       {kategorie === 'UW' && (
         <>
@@ -50,11 +50,15 @@ export const EnergiePopupSubtitle = ({ kategorie }) => {
         </>
       )}
     </div>
-  );
+  ) : null;
 };
 
 EnergiePopupSubtitle.propTypes = {
-  kategorie: PropTypes.string.isRequired,
+  kategorie: PropTypes.string,
+};
+
+EnergiePopupSubtitle.defaultProps = {
+  kategorie: undefined,
 };
 
 const EnergiePopup = ({ feature }) => {
