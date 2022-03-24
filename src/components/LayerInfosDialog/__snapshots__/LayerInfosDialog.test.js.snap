@@ -25,7 +25,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         >
           <h4 class="MuiTypography-root makeStyles-title-11 makeStyles-title-14 MuiTypography-h4">
             <span>
-              Informationen
+              test
             </span>
           </h4>
           <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-10"
