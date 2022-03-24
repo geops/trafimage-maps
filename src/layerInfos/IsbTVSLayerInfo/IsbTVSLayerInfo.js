@@ -64,7 +64,7 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
       {title}
       <p>{description}</p>
       <p>
-        <Link href="www.tvs.ch">www.tvs.ch</Link>
+        <Link href="https://www.tvs.ch/">www.tvs.ch</Link>
       </p>
       <div>
         {operators.map(([shortName, longName]) => {
@@ -79,17 +79,16 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
           );
         })}
       </div>
-      <p>
-        {othersOperators.map((shortName) => {
-          return (
-            <OperatorShortAndLongName
-              key={shortName}
-              shortName={shortName}
-              longName={shortToLongName[shortName]}
-            />
-          );
-        })}
-      </p>
+      <br />
+      {othersOperators.map((shortName) => {
+        return (
+          <OperatorShortAndLongName
+            key={shortName}
+            shortName={shortName}
+            longName={shortToLongName[shortName]}
+          />
+        );
+      })}
       <p>
         {dataInfo1}
         <br />
