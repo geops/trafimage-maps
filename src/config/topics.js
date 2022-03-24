@@ -383,12 +383,7 @@ export const energie = {
   key: 'ch.sbb.energie',
   maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
-  layers: [
-    energieDataLayer,
-    energieLeitungenLayer,
-    energieUnterwerkeLayer,
-    energieProduktionsanlagenLayer,
-  ],
+  layers: [energieDataLayer, energieLeitungenLayer, energieUnterwerkeLayer],
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergieTopicInfo',
   searches: defaultSearches,

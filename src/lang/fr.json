@@ -78,6 +78,7 @@
   "BPs": "BPs",
   "Breite": "Latitude",
   "ch.sbb.energie": "Réseau énergétique",
+  "ch.sbb.energie.intern": "Réseau énergétique (interne)",
   "ch.sbb.energie.leitungen": "Lignes de transmission",
   "ch.sbb.energie.los1": "Los 1",
   "ch.sbb.energie.los2": "Los 2",
