@@ -82,5 +82,5 @@ ZweitausbildungRoutesPopup.propTypes = propTypes;
 
 const composed = compose(withTranslation())(ZweitausbildungRoutesPopup);
 
-composed.renderTitle = (feature, t) => t('Detailinformationen');
+composed.renderTitle = (feat, layer, t) => t('Detailinformationen');
 export default composed;

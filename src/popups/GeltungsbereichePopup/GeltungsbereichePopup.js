@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Typography, makeStyles } from '@material-ui/core';
@@ -24,6 +25,7 @@ const defaultProps = {};
 let geltungsbereicheGlobal;
 
 const GeltungsbereichePopup = ({ feature, layer }) => {
+  const { t } = useTranslation();
   const classes = useStyles();
   const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
   const [geltungsbereicheMapping, setGeltungsbereicheMapping] = useState();
@@ -66,19 +68,18 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
 
   return (
     <div className="wkp-geltungsbereiche-popup">
-      {geltungsbereiche &&
+      {(geltungsbereiche &&
         geltungsbereicheMapping &&
-        Object.keys(geltungsbereiche).map((product) => {
+        Object.entries(geltungsbereiche).map((entry) => {
           return (
-            <Typography paragraph key={product}>
-              <b>{geltungsbereicheMapping[product]}</b>
+            <Typography paragraph key={entry[0]}>
+              <b>{geltungsbereicheMapping[entry[0]]}</b>
               <br />
-              <span className={classes.subtext}>
-                {geltungsbereiche[product].join(', ')}
-              </span>
+              <span className={classes.subtext}>{entry[1].join(', ')}</span>
             </Typography>
           );
-        })}
+        })) ||
+        t('Keine Geltungsbereiche gefunden')}
     </div>
   );
 };
@@ -86,10 +87,7 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 GeltungsbereichePopup.defaultProps = defaultProps;
 
-GeltungsbereichePopup.renderTitle = (feat, t) => {
-  const mot = /^(rail|bus)$/.test(feat.get('mot')) ? feat.get('mot') : 'other';
-  return `${t('ch.sbb.geltungsbereiche')} - ${t(
-    `ch.sbb.geltungsbereiche-${mot}`,
-  )}`;
+GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
+  return `${t('ch.sbb.geltungsbereiche')} - ${t(`${layer.name || layer.key}`)}`;
 };
 export default GeltungsbereichePopup;

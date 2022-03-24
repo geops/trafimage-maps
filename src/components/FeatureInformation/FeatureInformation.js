@@ -235,7 +235,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
           <div className="wkp-feature-information-header">
             <span id="wkp-popup-label">
               {renderTitle
-                ? renderTitle(feature, t)
+                ? renderTitle(feature, layer, t)
                 : layer && layer.name && t(layer.name)}
             </span>
             <IconButton
