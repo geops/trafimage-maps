@@ -56,6 +56,7 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
+  energieProduktionsanlagenLayer,
   energieUnterwerkeLayer,
   energieLeitungenLayer,
   geschosseLayer,
@@ -382,7 +383,12 @@ export const energie = {
   key: 'ch.sbb.energie',
   maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
-  layers: [energieDataLayer, energieLeitungenLayer, energieUnterwerkeLayer],
+  layers: [
+    energieDataLayer,
+    energieLeitungenLayer,
+    energieUnterwerkeLayer,
+    energieProduktionsanlagenLayer, // Is visible=false (in the style it's visible by default) and hidden in legend in the public topic
+  ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergieTopicInfo',
   searches: defaultSearches,
