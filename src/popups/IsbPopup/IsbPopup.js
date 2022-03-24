@@ -108,7 +108,7 @@ const IsbPopup = ({ feature, layer }) => {
 };
 
 IsbPopup.propTypes = propTypes;
-IsbPopup.renderTitle = (feat, t) => {
+IsbPopup.renderTitle = (feat, layer, t) => {
   return t('Informationen zum Netzzugang bei');
 };
 export default IsbPopup;
