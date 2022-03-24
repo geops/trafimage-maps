@@ -5,7 +5,6 @@ import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Typography, makeStyles } from '@material-ui/core';
 import { geltungsbereicheDataLayer } from '../../config/layers';
-// import geltungsbereicheMapping from '../../utils/geltungsbereicheMapping.json';
 
 const useStyles = makeStyles(() => {
   return {
@@ -22,6 +21,8 @@ const propTypes = {
 
 const defaultProps = {};
 
+let geltungsbereicheGlobal;
+
 const GeltungsbereichePopup = ({ feature, layer }) => {
   const classes = useStyles();
   const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
@@ -33,11 +34,17 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
   });
 
   useEffect(() => {
+    if (geltungsbereicheGlobal) {
+      setGeltungsbereicheMapping(geltungsbereicheGlobal);
+      return;
+    }
     fetch(
       `${geltungsbereicheDataLayer.url}/data/ch.sbb.geltungsbereiche.json?key=${apiKey}`,
     )
       .then((res) => res.json())
       .then((data) => {
+        // We store the products in global variable to avoid fetching it every time
+        geltungsbereicheGlobal = data['geops.geltungsbereiche'];
         setGeltungsbereicheMapping(data['geops.geltungsbereiche']);
       })
       .catch((err) =>
