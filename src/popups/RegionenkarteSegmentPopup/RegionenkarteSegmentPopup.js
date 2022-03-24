@@ -155,7 +155,7 @@ RegionenkarteSegmentPopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-RegionenkarteSegmentPopup.renderTitle = (feature, t) =>
+RegionenkarteSegmentPopup.renderTitle = (feat, layer, t) =>
   t('Detailinformationen');
 
 export default RegionenkarteSegmentPopup;

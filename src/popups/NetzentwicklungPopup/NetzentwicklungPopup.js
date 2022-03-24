@@ -124,6 +124,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
   );
 };
 
-NetzentwicklungPopup.renderTitle = (feat, t) => renderTitle(feat, t, false);
+NetzentwicklungPopup.renderTitle = (feat, layer, t) =>
+  renderTitle(feat, t, false);
 NetzentwicklungPopup.propTypes = propTypes;
 export default NetzentwicklungPopup;
