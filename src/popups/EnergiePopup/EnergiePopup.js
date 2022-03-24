@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const EnergiePopupSubtitle = ({ kategorie }) => {
+export const EnergiePopupSubtitle = ({ kategorie, unterkategorie }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   return kategorie ? (
@@ -41,7 +41,9 @@ export const EnergiePopupSubtitle = ({ kategorie }) => {
       {kategorie === 'UW' && (
         <>
           <div className={classes.unterwerk} />
-          {t('ch.sbb.energie.unterwerk')}
+          {`${t('ch.sbb.energie.unterwerk')}${
+            unterkategorie ? ` (${unterkategorie})` : ''
+          }`}
         </>
       )}
       {kategorie === 'KW' && (
@@ -56,10 +58,12 @@ export const EnergiePopupSubtitle = ({ kategorie }) => {
 
 EnergiePopupSubtitle.propTypes = {
   kategorie: PropTypes.string,
+  unterkategorie: PropTypes - string,
 };
 
 EnergiePopupSubtitle.defaultProps = {
   kategorie: undefined,
+  unterkategorie: undefined,
 };
 
 const EnergiePopup = ({ feature }) => {
@@ -77,17 +81,32 @@ const EnergiePopup = ({ feature }) => {
       JSON.parse(feature.get('betrieb_instandhaltung')),
     [feature],
   );
-  const lifeCycleManagerJson = useMemo(
+  const lifeCycleManager = useMemo(
     () =>
       feature.get('life_cycle_manager') &&
       JSON.parse(feature.get('life_cycle_manager')),
     [feature],
   );
+  const intervention = useMemo(
+    () =>
+      feature.get('intervention') && JSON.parse(feature.get('intervention')),
+    [feature],
+  );
+  const schaltErdBerechtigung = useMemo(
+    () =>
+      feature.get('schalt_erd_berechtigung') &&
+      JSON.parse(feature.get('schalt_erd_berechtigung')),
+    [feature],
+  );
   const kategorie = feature.get('kategorie');
+  const unterkategorie = feature.get('unterkategorie');
 
   return (
     <div>
-      <EnergiePopupSubtitle kategorie={kategorie} />
+      <EnergiePopupSubtitle
+        kategorie={kategorie}
+        unterkategorie={unterkategorie}
+      />
       {permissionInfos?.user ? (
         <div>
           {anlageBetreuer && (
@@ -108,13 +127,31 @@ const EnergiePopup = ({ feature }) => {
               division={betriebInstandhaltung.division}
             />
           )}
-          {lifeCycleManagerJson && (
+          {lifeCycleManager && (
             <PersonCard
               title={t('Life-Cycle Manager')}
-              name={lifeCycleManagerJson.name}
-              email={lifeCycleManagerJson.email}
-              phone={lifeCycleManagerJson.phone}
-              division={lifeCycleManagerJson.division}
+              name={lifeCycleManager.name}
+              email={lifeCycleManager.email}
+              phone={lifeCycleManager.phone}
+              division={lifeCycleManager.division}
+            />
+          )}
+          {intervention && (
+            <PersonCard
+              title={t('Intervention')}
+              name={intervention.name}
+              email={intervention.email}
+              phone={intervention.phone}
+              division={intervention.division}
+            />
+          )}
+          {schaltErdBerechtigung && (
+            <PersonCard
+              title={t('Schalt- und Erdberechtigung')}
+              name={schaltErdBerechtigung.name}
+              email={schaltErdBerechtigung.email}
+              phone={schaltErdBerechtigung.phone}
+              division={schaltErdBerechtigung.division}
             />
           )}
         </div>
