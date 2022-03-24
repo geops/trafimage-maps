@@ -64,10 +64,10 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
       .then((data) => {
         const choices = [
           nullOption,
-          ...Object.keys(data['geops.geltungsbereiche']).map((key) => {
+          ...Object.entries(data['geops.geltungsbereiche']).map((entry) => {
             return {
-              value: key,
-              label: data['geops.geltungsbereiche'][key],
+              value: entry[0],
+              label: entry[1],
             };
           }),
         ];
@@ -94,9 +94,7 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
       if (!mbMap || !style) {
         return;
       }
-      const styleLayer = style.layers.find((l) => {
-        return layer.styleLayersFilter(l);
-      });
+      const styleLayer = style.layers.find(layer.styleLayersFilter);
       const newFilter = styleLayer.filter.filter((fil) => {
         // Remove previous product filters.
         if (
@@ -120,7 +118,11 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
     setFilterValue(productChoices.find((opt) => opt.value === value));
   };
 
-  return productChoices.length ? (
+  if (!productChoices.length) {
+    return null;
+  }
+
+  return (
     <div className={`wkp-topic-filter ${classes.selectWrapper}`}>
       <FormControl className={classes.formControl}>
         <InputLabel shrink htmlFor="gb-product-filter">
@@ -162,7 +164,7 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
         )}
       </FormControl>
     </div>
-  ) : null;
+  );
 };
 
 const propTypes = {
