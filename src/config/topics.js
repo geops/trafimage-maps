@@ -57,7 +57,6 @@ import defaultBaseLayers, {
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
   energieUnterwerkeLayer,
-  energieProduktionsanlagenLayer,
   energieLeitungenLayer,
   geschosseLayer,
   energieDataLayer,
