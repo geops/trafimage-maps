@@ -73,13 +73,13 @@ StationPopup.propTypes = propTypes;
 
 const memoized = React.memo(StationPopup);
 
-memoized.renderTitle = (feature, t) => {
-  const feat = feature.length ? feature[0] : feature;
-  const platform = feat.get('platform');
+memoized.renderTitle = (feat, layer, t) => {
+  const feature = feat.length ? feat[0] : feat;
+  const platform = feature.get('platform');
   if (platform) {
-    return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+    return `${feature.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
   }
-  return feat.get('name');
+  return feature.get('name');
 };
 memoized.hidePagination = true;
 
