@@ -1698,6 +1698,7 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
 
 export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
   name: 'ch.sbb.energie.produktionsanlagen',
+  visible: false,
   mapboxLayer: energieDataLayer,
   queryRenderedLayersFilter: ({ id }) => id === 'energie_KW',
   styleLayersFilter: ({ metadata }) =>
@@ -1707,6 +1708,7 @@ export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
     layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
+    hideInLegend: true,
   },
 });
 

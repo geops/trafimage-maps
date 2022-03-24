@@ -58,8 +58,8 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
-  energieUnterwerkeLayer,
   energieProduktionsanlagenLayer,
+  energieUnterwerkeLayer,
   energieLeitungenLayer,
   netzkarteIsb,
   isbOther,
@@ -396,7 +396,7 @@ export const energie = {
     energieDataLayer,
     energieLeitungenLayer,
     energieUnterwerkeLayer,
-    energieProduktionsanlagenLayer,
+    energieProduktionsanlagenLayer, // Is visible=false (in the style it's visible by default) and hidden in legend in the public topic
   ],
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergieTopicInfo',
