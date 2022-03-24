@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
+import React, { useMemo } from 'react';
+import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
-import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import GeometryType from 'ol/geom/GeometryType';
-import React, { useMemo } from 'react';
 
 import PersonCard from '../../components/PersonCard';
 
@@ -63,9 +64,11 @@ EnergiePopupSubtitle.defaultProps = {
 
 const EnergiePopup = ({ feature }) => {
   const { t } = useTranslation();
-  const anlageEigner = useMemo(
+  const permissionInfos = useSelector((state) => state.app.permissionInfos);
+  const anlageBetreuer = useMemo(
     () =>
-      feature.get('anlageeigner') && JSON.parse(feature.get('anlageeigner')),
+      feature.get('anlagebetreuer') &&
+      JSON.parse(feature.get('anlagebetreuer')),
     [feature],
   );
   const betriebInstandhaltung = useMemo(
@@ -85,35 +88,47 @@ const EnergiePopup = ({ feature }) => {
   return (
     <div>
       <EnergiePopupSubtitle kategorie={kategorie} />
-      <div>
-        {anlageEigner && (
-          <PersonCard
-            role={t('Anlageeigner')}
-            name={anlageEigner.name}
-            email={anlageEigner.email}
-            phone={anlageEigner.phone}
-            division={anlageEigner.division}
-          />
-        )}
-        {betriebInstandhaltung && (
-          <PersonCard
-            role={t('Verantwortlich Betrieb und Instandhaltung')}
-            name={betriebInstandhaltung.name}
-            email={betriebInstandhaltung.email}
-            phone={betriebInstandhaltung.phone}
-            division={betriebInstandhaltung.division}
-          />
-        )}
-        {lifeCycleManagerJson && (
-          <PersonCard
-            role={t('Life-Cycle-Manager')}
-            name={lifeCycleManagerJson.name}
-            email={lifeCycleManagerJson.email}
-            phone={lifeCycleManagerJson.phone}
-            division={lifeCycleManagerJson.division}
-          />
-        )}
-      </div>
+      {permissionInfos?.user ? (
+        <div>
+          {anlageBetreuer && (
+            <PersonCard
+              title={`AVANT/${t('Anlagebetreuer')}`}
+              name={anlageBetreuer.name}
+              email={anlageBetreuer.email}
+              phone={anlageBetreuer.phone}
+              division={anlageBetreuer.division}
+            />
+          )}
+          {betriebInstandhaltung && (
+            <PersonCard
+              title={t('Verantwortlich Betrieb und Instandhaltung')}
+              name={betriebInstandhaltung.name}
+              email={betriebInstandhaltung.email}
+              phone={betriebInstandhaltung.phone}
+              division={betriebInstandhaltung.division}
+            />
+          )}
+          {lifeCycleManagerJson && (
+            <PersonCard
+              title={t('Life-Cycle Manager')}
+              name={lifeCycleManagerJson.name}
+              email={lifeCycleManagerJson.email}
+              phone={lifeCycleManagerJson.phone}
+              division={lifeCycleManagerJson.division}
+            />
+          )}
+        </div>
+      ) : (
+        <p>
+          <a
+            href="mailto:trassensicherung-energie@sbb.ch"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            trassensicherung-energie@sbb.ch
+          </a>
+        </p>
+      )}
     </div>
   );
 };
