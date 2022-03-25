@@ -90,7 +90,7 @@ const IsbPopup = ({ feature, layer }) => {
   return (
     <div>
       <div className={classes.row}>
-        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}`}
+        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}.`}
       </div>
       {operator && (
         <div className={classes.row}>
