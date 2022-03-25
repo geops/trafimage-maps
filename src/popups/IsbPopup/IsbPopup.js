@@ -49,6 +49,25 @@ const propTypes = {
   layer: PropTypes.instanceOf(Layer).isRequired,
 };
 
+const translations = {
+  de: {
+    vorgabenUrl:
+      'https://vorgaben.sbb.ch/inhalte/18027?jump-to=&regulation-redirect=0',
+  },
+  fr: {
+    vorgabenUrl:
+      'https://vorgaben.sbb.ch/fr/contenu/18027?jump-to=&regulation-redirect=0',
+  },
+  it: {
+    vorgabenUrl:
+      'https://vorgaben.sbb.ch/it/contenuti/18027?jump-to=&regulation-redirect=0',
+  },
+  en: {
+    vorgabenUrl:
+      'https://vorgaben.sbb.ch/en/content/18027?jump-to=&regulation-redirect=0',
+  },
+};
+
 const IsbPopup = ({ feature, layer }) => {
   const classes = useStyles();
   const { i18n, t } = useTranslation();
@@ -71,22 +90,30 @@ const IsbPopup = ({ feature, layer }) => {
   return (
     <div>
       <div className={classes.row}>
-        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}`}
+        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}.`}
       </div>
       {operator && (
         <div className={classes.row}>
           {mainUrl ? (
-            <Link href={mainUrl}>{t('zur Webseite von', { operator })}</Link>
+            <Link href={mainUrl}>
+              {t('zur Webseite von', { operator: t(operator) })}
+            </Link>
           ) : (
-            <strong> {operator}</strong>
+            <strong> {t(operator)}</strong>
           )}
         </div>
       )}
       {secondaryUrl && (
         <div className={classes.row}>
-          <Link href={secondaryUrl}>
-            {t('weitere Informationen von', { operator })}
-          </Link>
+          {/(networkstatement|vorgaben)/.test(secondaryUrl) ? (
+            <Link href={translations[i18n.language].vorgabenUrl}>
+              www.networkstatement.ch
+            </Link>
+          ) : (
+            <Link href={secondaryUrl}>
+              {t('weitere Informationen von', { operator: t(operator) })}
+            </Link>
+          )}
         </div>
       )}
       {phone && (
@@ -108,7 +135,7 @@ const IsbPopup = ({ feature, layer }) => {
 };
 
 IsbPopup.propTypes = propTypes;
-IsbPopup.renderTitle = (feat, t) => {
+IsbPopup.renderTitle = (feat, layer, t) => {
   return t('Informationen zum Netzzugang bei');
 };
 export default IsbPopup;

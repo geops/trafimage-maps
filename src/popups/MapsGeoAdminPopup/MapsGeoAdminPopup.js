@@ -45,7 +45,7 @@ function MapsGeoAdminPopup({ feature }) {
 MapsGeoAdminPopup.propTypes = propTypes;
 
 const memoized = React.memo(MapsGeoAdminPopup);
-memoized.renderTitle = (feature, t) =>
-  feature.get('name') || t('Informationen');
+memoized.renderTitle = (feat, layer, t) =>
+  feat.get('name') || t('Informationen');
 
 export default memoized;

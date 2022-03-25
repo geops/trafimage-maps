@@ -52,6 +52,6 @@ ZweitausbildungPoisPopup.propTypes = propTypes;
 
 const composed = compose(withTranslation())(ZweitausbildungPoisPopup);
 
-composed.renderTitle = (feature, t) => t('Detailinformationen');
+composed.renderTitle = (feat, layer, t) => t('Detailinformationen');
 composed.hidePagination = true;
 export default composed;

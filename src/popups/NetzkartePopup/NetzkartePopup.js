@@ -230,7 +230,7 @@ function NetzkartePopup({ feature, coordinate }) {
 NetzkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(NetzkartePopup);
-memoized.renderTitle = (feat, t) => {
+memoized.renderTitle = (feat, layer, t) => {
   const { name, platform } = feat.getProperties();
   if (platform) {
     return `${name} (${t('abfahrtszeiten_kante')} ${platform})`;

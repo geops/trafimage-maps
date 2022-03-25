@@ -52,7 +52,7 @@ DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;
 
 const composed = withTranslation()(DeparturePopup);
-composed.renderTitle = (feat, t) => {
+composed.renderTitle = (feat, layer, t) => {
   const platform = feat.get('platform');
   if (platform) {
     return `${feat.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;

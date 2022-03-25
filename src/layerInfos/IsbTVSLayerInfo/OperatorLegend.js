@@ -27,6 +27,8 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     padding: '0 3px',
     fontSize: 13,
+    width: 26,
+    height: 15,
   },
   legendLine: {
     position: 'absolute',

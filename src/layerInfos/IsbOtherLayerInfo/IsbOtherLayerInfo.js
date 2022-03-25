@@ -57,7 +57,7 @@ const IsbOtherLayerInfo = ({ properties: layer }) => {
   const othersOperators = Object.keys(shortToLongName).filter(
     (key) => !colors[key],
   );
-  operators.push(['OTH', othersOperators.join(', ')]);
+  operators.push(['', othersOperators.join(', ')]);
   return (
     <div>
       {title}
@@ -75,17 +75,16 @@ const IsbOtherLayerInfo = ({ properties: layer }) => {
           );
         })}
       </div>
-      <p>
-        {othersOperators.map((shortName) => {
-          return (
-            <OperatorShortAndLongName
-              key={shortName}
-              shortName={shortName}
-              longName={shortToLongName[shortName]}
-            />
-          );
-        })}
-      </p>
+      <br />
+      {othersOperators.map((shortName) => {
+        return (
+          <OperatorShortAndLongName
+            key={shortName}
+            shortName={shortName}
+            longName={shortToLongName[shortName]}
+          />
+        );
+      })}
       <p>
         {dataInfo1}
         <br />
