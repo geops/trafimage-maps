@@ -1,4 +1,6 @@
+import React from 'react';
 import { getCenter } from 'ol/extent';
+import GeltungsBereicheMenuFilter from '../filters/GeltungsbereicheMenuFilter';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import StationsLayer from '../layers/StationsLayer';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
@@ -57,13 +59,16 @@ import defaultBaseLayers, {
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
   energieUnterwerkeLayer,
-  energieProduktionsanlagenLayer,
   energieLeitungenLayer,
   netzkarteIsb,
   isbOther,
   isbTVS,
   geschosseLayer,
   energieDataLayer,
+  geltungsbereicheBahnlinien,
+  geltungsbereicheDataLayer,
+  geltungsbereicheBuslinien,
+  geltungsbereicheOther,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
 
@@ -386,12 +391,7 @@ export const energie = {
   key: 'ch.sbb.energie',
   maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
-  layers: [
-    energieDataLayer,
-    energieLeitungenLayer,
-    energieUnterwerkeLayer,
-    energieProduktionsanlagenLayer,
-  ],
+  layers: [energieDataLayer, energieLeitungenLayer, energieUnterwerkeLayer],
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergieTopicInfo',
   searches: defaultSearches,
@@ -424,6 +424,26 @@ const sandbox = {
   searches: defaultSearches,
 };
 
+export const geltungsbereiche = {
+  name: 'ch.sbb.geltungsbereiche',
+  key: 'ch.sbb.geltungsbereiche',
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+  },
+  layers: [
+    geltungsbereicheDataLayer,
+    geltungsbereicheOther,
+    geltungsbereicheBuslinien,
+    geltungsbereicheBahnlinien,
+  ],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  topicMenuBottom: ({ topic }) => <GeltungsBereicheMenuFilter topic={topic} />,
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -437,6 +457,7 @@ const topics = {
     netzentwicklung,
     beleuchtungsstaerken,
     energie,
+    geltungsbereiche,
     showcases,
     sandbox,
   ],

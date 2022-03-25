@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector } from 'react-redux';
 import personIcon from '../../img/popups/NetzentwicklungPopup/person.svg';
 import mailIcon from '../../img/popups/NetzentwicklungPopup/mail.svg';
 import phoneIcon from '../../img/popups/NetzentwicklungPopup/phone.svg';
@@ -28,26 +27,27 @@ const useStyles = makeStyles({
   },
 });
 
-const PersonCard = ({ role, name, email, phone, division }) => {
+const PersonCard = ({ title, name, email, phone, division }) => {
   const classes = useStyles();
-  const permissionInfos = useSelector((state) => state.app.permissionInfos);
   return (
-    <div key={role + name} className={classes.card}>
+    <div key={title + name} className={classes.card}>
       <div>
-        <b>{role}</b>
+        <b>{title}</b>
       </div>
       <br />
-      <div className={classes.row}>
-        <img src={personIcon} alt="Person" />
-        <div>{`${name}${division ? ` (${division})` : ''}`}</div>
-      </div>
-      {permissionInfos?.user && phone && (
+      {name && (
+        <div className={classes.row}>
+          <img src={personIcon} alt="Person" />
+          <div>{`${name}${division ? ` (${division})` : ''}`}</div>
+        </div>
+      )}
+      {phone && (
         <div className={classes.row}>
           <img src={phoneIcon} alt="Phone" />
           <a href={`tel:${phone}`}>{phone || '-'}</a>
         </div>
       )}
-      {permissionInfos?.user && email && (
+      {email && (
         <div className={classes.row}>
           <img src={mailIcon} alt="Mail" />
           <a href={`mailto:${email}`}>{(email || '-').toLowerCase()}</a>
@@ -58,7 +58,7 @@ const PersonCard = ({ role, name, email, phone, division }) => {
 };
 
 PersonCard.propTypes = {
-  role: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   email: PropTypes.string,
   phone: PropTypes.string,
