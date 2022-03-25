@@ -58,7 +58,7 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
   const othersOperators = Object.keys(shortToLongName).filter(
     (key) => !colors[key],
   );
-  operators.push(['OTH', othersOperators.join(', ')]);
+  operators.push(['', othersOperators.join(', ')]);
   return (
     <div>
       {title}
