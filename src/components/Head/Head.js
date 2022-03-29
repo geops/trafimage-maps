@@ -17,6 +17,10 @@ function Head({ topics, displayConsent, domainConsentId }) {
     <>
       <Helmet>
         <script
+          type="text/javascript"
+          src={`https://cdn.cookielaw.org/consent/${domainConsentId}/OtAutoBlock.js`}
+        />
+        <script
           data-cy="consent-script"
           src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
           type="text/javascript"
