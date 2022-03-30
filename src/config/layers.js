@@ -1653,13 +1653,13 @@ const shortToLongNameOther = {
   DB: 'Deutsche Bahn AG',
   ÖBB: 'Österreichische Bundesbahnen',
   RB: 'Rigi Bahnen',
-  RBS: 'Regionalverkehr Bern-Solothurn',
-  RhB: 'Rhätische Bahnen',
+  RBS: 'Regionalverkehr Bern-Solothurn AG',
+  RhB: 'Rhätische Bahnen AG',
   SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
   SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
   TL: 'Transports publics de la région lausannoise',
   VVT: 'Vapeur Val-de-Travers',
-  zb: 'Luzern: Zentralbahn',
+  zb: 'Zentralbahn AG',
 };
 
 export const isbOther = new MapboxStyleLayer({
