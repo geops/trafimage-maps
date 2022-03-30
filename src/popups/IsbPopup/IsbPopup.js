@@ -25,7 +25,8 @@ const useStyles = makeStyles(() => {
 const urlIsDefined = (url) => !!url;
 
 const getUrls = (properties, language) => {
-  let urls = JSON.parse(properties[`url_isb_${language}`]);
+  let value = properties[`url_isb_${language}`];
+  const urls = JSON.parse(value || '[]');
   if (urls.some(urlIsDefined)) {
     return urls.filter(urlIsDefined);
   }
@@ -33,11 +34,10 @@ const getUrls = (properties, language) => {
   const linkKeys = Object.keys(properties).filter((key) =>
     /url_isb_/.test(key),
   );
-  urls = JSON.parse(
+  value =
     properties[
       linkKeys.find((key) => JSON.parse(properties[key]).some(urlIsDefined))
-    ],
-  );
+    ];
   return urls.filter(urlIsDefined);
 };
 
@@ -71,15 +71,17 @@ const translations = {
 const IsbPopup = ({ feature, layer }) => {
   const classes = useStyles();
   const { i18n, t } = useTranslation();
+  const shortToLongName = layer.get('shortToLongName') || {};
   const properties = feature.getProperties();
   const {
     phone_isb: phone,
     mail_isb: mail,
     isb_tu_name: operator,
   } = feature.getProperties();
-  const urls = getUrls(properties, i18n.language);
+  const urls = getUrls(properties, i18n.language) || [];
   const mainUrl = urls[0];
   const secondaryUrl = urls[1];
+  const operatorLongName = shortToLongName[operator] || operator;
 
   useEffect(() => {
     if (layer) {
@@ -89,18 +91,16 @@ const IsbPopup = ({ feature, layer }) => {
 
   return (
     <div>
-      <div className={classes.row}>
-        {`${t('bei')} ${t(layer.get('shortToLongName')[operator])}.`}
-      </div>
-      {operator && (
+      {operatorLongName && (
         <div className={classes.row}>
-          {mainUrl ? (
-            <Link href={mainUrl}>
-              {t('zur Webseite von', { operator: t(operator) })}
-            </Link>
-          ) : (
-            <strong> {t(operator)}</strong>
-          )}
+          {`${t('bei')} ${t(operatorLongName)}.`}
+        </div>
+      )}
+      {mainUrl && (
+        <div className={classes.row}>
+          <Link href={mainUrl}>
+            {t('zur Webseite von', { operator: t(operator) })}
+          </Link>
         </div>
       )}
       {secondaryUrl && (
