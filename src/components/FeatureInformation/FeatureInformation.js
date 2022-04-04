@@ -9,6 +9,7 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import { getTopRight, getTopLeft } from 'ol/extent';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { Link, IconButton } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
@@ -45,6 +46,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const language = useSelector((state) => state.app.language);
   const searchService = useSelector((state) => state.app.searchService);
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   const isMobile = useMemo(() => {
@@ -183,16 +185,58 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     });
     const source = new VectorSource({ features });
     const extent = source.getExtent();
+
+    // When features have no geometries (ex with KilometrageLayer), extent is Infinity
+    // if (extent && !Number.isFinite(extent[0]) && coordinates[0]) {
+    //   extent = [...coordinates[0], ...coordinates[0]];
+    // }
+
+    // We want to recenter the map only if the features selected are under
+    // the Overlay (mobile and desktop) or Menu element (only desktop).
+    const overlayWidthDesktop = 400;
+    const overlayHeightMobile = 250;
+    const menuWidthDesktop = 381;
+    const redCircleWidth = 25;
+    const [width, height] = map.getSize();
+    const [leftPixel] = map.getPixelFromCoordinate(getTopLeft(extent));
+    const [rightPixel, topPixel] = map.getPixelFromCoordinate(
+      getTopRight(extent),
+    );
     const isUsingOverlay = !!layers.find((l) => l.get('useOverlay'));
-    if (isUsingOverlay) {
+    const isHiddenByOverlayOnDesktop =
+      isUsingOverlay &&
+      rightPixel >= width - overlayWidthDesktop - redCircleWidth;
+    const isHiddenByOverlayOnMobile =
+      isUsingOverlay &&
+      topPixel >= height - overlayHeightMobile - redCircleWidth;
+    const isHiddenByMenuOnDesktop =
+      menuOpen && leftPixel <= menuWidthDesktop + redCircleWidth;
+
+    let padding = null;
+
+    if (isMobile && isHiddenByOverlayOnMobile) {
+      padding = [0, 0, overlayHeightMobile, 0];
+    } else if (
+      !isMobile &&
+      (isHiddenByOverlayOnDesktop || isHiddenByMenuOnDesktop)
+    ) {
+      padding = [
+        0,
+        isUsingOverlay ? overlayWidthDesktop : 0,
+        0,
+        menuOpen ? menuWidthDesktop : 0,
+      ];
+    }
+
+    if (padding) {
       map.getView().cancelAnimations();
       map.getView().fit(extent, {
-        padding: isMobile ? [0, 0, 250, 0] : [0, 400, 0, 0],
+        padding,
         maxZoom: map.getView().getZoom(), // only pan
         duration: 500,
       });
     }
-  }, [map, isMobile, featureIndex, infoIndexed]);
+  }, [map, isMobile, featureIndex, infoIndexed, menuOpen]);
 
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];

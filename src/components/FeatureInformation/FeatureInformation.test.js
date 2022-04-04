@@ -27,6 +27,8 @@ describe('FeatureInformation', () => {
       app: {
         projection: { value: 'EPSG:3857' },
         map: {
+          getPixelFromCoordinate: jest.fn(() => [50, 50]),
+          getSize: () => [100, 100],
           getView: () => ({
             cancelAnimations,
             fit,

@@ -1,5 +1,3 @@
-import React from 'react';
-import { mount } from 'enzyme';
 import fetchMock from 'fetch-mock';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
@@ -9,8 +7,6 @@ import Feature from 'ol/Feature';
 import LineString from 'ol/geom/LineString';
 import { Style, Stroke, Circle, Fill, Icon } from 'ol/style';
 import RouteLayer from './RouteLayer';
-import { casa } from '../../config/topics';
-import TrafimageMaps from '../../components/TrafimageMaps';
 import finishFlag from '../../img/finish_flag.png';
 
 const routes = [
@@ -116,6 +112,7 @@ let layer;
 let map;
 let onClick;
 let onMouseOver;
+let mapElement;
 
 const fetchRoutes = () => {
   /* Mock fetch for each sequence */
@@ -131,6 +128,10 @@ const fetchRoutesError = () => {
 
 describe('RouteLayer', () => {
   beforeEach(() => {
+    mapElement = document.createElement('div');
+    mapElement.style.width = '100px';
+    mapElement.style.height = '100px';
+    document.body.appendChild(mapElement);
     onClick = jest.fn();
     onMouseOver = jest.fn();
     layer = new RouteLayer({
@@ -139,11 +140,15 @@ describe('RouteLayer', () => {
       onClick,
       onMouseOver,
     });
-    map = new Map({ view: new View({ resution: 5 }) });
+    map = new Map({
+      target: mapElement,
+      view: new View({ center: [0, 0], zoom: 1 }),
+    });
   });
 
   afterEach(() => {
     fetchMock.reset();
+    document.body.removeChild(mapElement);
   });
 
   test('should return the correct default style.', () => {
@@ -259,33 +264,5 @@ describe('RouteLayer', () => {
     await map.dispatchEvent(evt);
     expect(onClick).toHaveBeenCalledWith([features[0]], layer, coordinate);
     expect(layer.selectedRouteIds).toEqual([]);
-  });
-
-  test('shoud open a popup if popupContent is defined', async () => {
-    jest.spyOn(Map.prototype, 'getFeaturesAtPixel').mockReturnValue([feature]);
-    jest.spyOn(Map.prototype, 'hasFeatureAtPixel').mockReturnValue(true);
-
-    const topicConf = [{ ...casa, layers: [layer] }];
-    const component = mount(<TrafimageMaps topics={topicConf} apiKey="test" />);
-    const compMapWrap = component.find('Map');
-    const compMap = component.find('Map').props().map;
-    const spy = jest.spyOn(layer, 'getFeatureInfoAtCoordinate');
-    const spyPointerMove = jest.spyOn(compMapWrap.instance(), 'onPointerMove');
-    const evt = {
-      type: 'pointermove',
-      map: compMap,
-      coordinate: [50, 50],
-      originalEvent: {
-        pointerType: 'mouse',
-      },
-    };
-    await compMap.dispatchEvent(evt);
-    await Promise.all(spy.mock.results.map((r) => r.value));
-    await spyPointerMove;
-    component.update();
-
-    expect(component.find('.wkp-casa-route-popup').text()).toBe(
-      'Von: St. GallenNach: Zürich HB',
-    );
   });
 });
