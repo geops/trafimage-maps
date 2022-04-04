@@ -1720,7 +1720,7 @@ const shortToLongNameOther = {
   ÖBB: 'Österreichische Bundesbahnen',
   RB: 'Rigi Bahnen',
   RBS: 'Regionalverkehr Bern-Solothurn AG',
-  RhB: 'Rhätische Bahnen AG',
+  RhB: 'Rhätische Bahn AG',
   SEHR: 'Stein am Rhein-Etzwilen-Hemishofen-Ramsen-Bahn',
   SZU: 'Sihltal Zürich Uetliberg Bahn SZU AG',
   TL: 'Transports publics de la région lausannoise',
