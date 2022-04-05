@@ -9,7 +9,6 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
-import { getTopRight, getTopLeft } from 'ol/extent';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { Link, IconButton } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
@@ -164,6 +163,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     const coordinates = Array.isArray((coordinate || [])[0])
       ? coordinate
       : [coordinate];
+
     features.forEach((feat, idx) => {
       if (feat && feat.getGeometry()) {
         if (feat.getGeometry().getType() === GeometryType.POINT) {
@@ -183,34 +183,29 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         }
       }
     });
-    const source = new VectorSource({ features });
-    const extent = source.getExtent();
 
-    // When features have no geometries (ex with KilometrageLayer), extent is Infinity
-    // if (extent && !Number.isFinite(extent[0]) && coordinates[0]) {
-    //   extent = [...coordinates[0], ...coordinates[0]];
-    // }
+    // We have to render the map otherwise the last selected features are displayed during animation.
+    map.renderSync();
 
-    // We want to recenter the map only if the features selected are under
+    // We want to recenter the map only if the coordinates clicked are under
     // the Overlay (mobile and desktop) or Menu element (only desktop).
+    const coordinateClicked = coordinates[0];
+    if (!coordinateClicked) {
+      return;
+    }
     const overlayWidthDesktop = 400;
     const overlayHeightMobile = 250;
     const menuWidthDesktop = 381;
     const redCircleWidth = 25;
     const [width, height] = map.getSize();
-    const [leftPixel] = map.getPixelFromCoordinate(getTopLeft(extent));
-    const [rightPixel, topPixel] = map.getPixelFromCoordinate(
-      getTopRight(extent),
-    );
+    const [pixelX, pixelY] = map.getPixelFromCoordinate(coordinateClicked);
     const isUsingOverlay = !!layers.find((l) => l.get('useOverlay'));
     const isHiddenByOverlayOnDesktop =
-      isUsingOverlay &&
-      rightPixel >= width - overlayWidthDesktop - redCircleWidth;
+      isUsingOverlay && pixelX >= width - overlayWidthDesktop - redCircleWidth;
     const isHiddenByOverlayOnMobile =
-      isUsingOverlay &&
-      topPixel >= height - overlayHeightMobile - redCircleWidth;
+      isUsingOverlay && pixelY >= height - overlayHeightMobile - redCircleWidth;
     const isHiddenByMenuOnDesktop =
-      menuOpen && leftPixel <= menuWidthDesktop + redCircleWidth;
+      menuOpen && pixelX <= menuWidthDesktop + redCircleWidth;
 
     let padding = null;
 
@@ -230,10 +225,10 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
 
     if (padding) {
       map.getView().cancelAnimations();
-      map.getView().fit(extent, {
+      map.getView().fit([...coordinateClicked, ...coordinateClicked], {
         padding,
         maxZoom: map.getView().getZoom(), // only pan
-        duration: 500,
+        duration: 1000,
       });
     }
   }, [map, isMobile, featureIndex, infoIndexed, menuOpen]);
