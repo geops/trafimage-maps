@@ -228,7 +228,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
       map.getView().fit([...coordinateClicked, ...coordinateClicked], {
         padding,
         maxZoom: map.getView().getZoom(), // only pan
-        duration: 1000,
+        duration: 500,
       });
     }
   }, [map, isMobile, featureIndex, infoIndexed, menuOpen]);

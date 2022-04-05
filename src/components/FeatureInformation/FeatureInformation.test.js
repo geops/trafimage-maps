@@ -242,7 +242,7 @@ describe('FeatureInformation', () => {
     expect(cancelAnimations).toHaveBeenCalledTimes(1);
     expect(fit).toHaveBeenCalledTimes(1);
     expect(fit).toHaveBeenCalledWith([2.5, 2.5, 2.5, 2.5], {
-      duration: 1000,
+      duration: 500,
       maxZoom: 10,
       padding: [0, 400, 0, 0],
     });
@@ -283,7 +283,7 @@ describe('FeatureInformation', () => {
     expect(cancelAnimations).toHaveBeenCalledTimes(1);
     expect(fit).toHaveBeenCalledTimes(1);
     expect(fit).toHaveBeenCalledWith([2.5, 2.5, 2.5, 2.5], {
-      duration: 1000,
+      duration: 500,
       maxZoom: 10,
       padding: [0, 0, 250, 0],
     });
