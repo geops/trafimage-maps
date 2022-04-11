@@ -14,6 +14,7 @@ import { setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
+import SearchInfoButton from './SearchInfoButton';
 
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
@@ -177,6 +178,7 @@ function Search() {
           }}
         />
       </SearchToggle>
+      <SearchInfoButton />
     </div>
   );
 }
