@@ -86,8 +86,8 @@ const defaultProps = {
 function SearchInfo({ anchorEl }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const classes = useStyles({ screenWidth });
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const searchInfoOpen = useSelector((state) => state.app.searchInfoOpen);
 
