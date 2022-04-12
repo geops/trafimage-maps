@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
 import {
@@ -15,6 +15,7 @@ import {
   ListItemText,
 } from '@material-ui/core';
 import { ReactComponent as QuestionIcon } from '../../img/circleQuestionMark.svg';
+import { setSearchInfoOpen } from '../../model/app/actions';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -49,11 +50,12 @@ const useStyles = makeStyles((theme) => {
       zIndex: 1500,
       left: '10px !important',
       width: '32vw',
-      maxWidth: (props) => (props.screenWidth === 'xl' ? 'none' : 262),
+      maxWidth: 262,
     },
     searchInfoContent: {
       padding: '5px 10px',
       position: 'relative',
+      maxHeight: '90vh',
       '&::before': {
         content: '""',
         height: 0,
@@ -65,6 +67,10 @@ const useStyles = makeStyles((theme) => {
         borderRight: '8px solid white',
         filter: 'drop-shadow(-8px 2px 5px rgba(130,130,130,1))',
       },
+    },
+    searchInfoList: {
+      maxHeight: '88vh',
+      overflow: 'auto',
     },
   };
 });
@@ -78,18 +84,23 @@ const defaultProps = {
 };
 
 function SearchInfo({ anchorEl }) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const classes = useStyles({ screenWidth });
   const searchOpen = useSelector((state) => state.app.searchOpen);
-  const [open, setOpen] = useState(false);
-  const { t } = useTranslation();
+  const searchInfoOpen = useSelector((state) => state.app.searchInfoOpen);
+
+  const togglePopup = useCallback(() => {
+    dispatch(setSearchInfoOpen(!searchInfoOpen));
+  }, [dispatch, searchInfoOpen]);
 
   useEffect(() => {
     // Ensure the popup is always closed on mount
     if (screenWidth !== 'xl' && !searchOpen) {
-      setOpen(false);
+      dispatch(setSearchInfoOpen(false));
     }
-  }, [searchOpen, screenWidth]);
+  }, [searchOpen, screenWidth, dispatch]);
 
   if (['s', 'xs'].includes(screenWidth)) {
     return null;
@@ -98,16 +109,12 @@ function SearchInfo({ anchorEl }) {
   return (
     <div className={classes.searchInfoOuterWrapper}>
       <div className={classes.searchInfoInnerWrapper}>
-        <IconButton
-          className={classes.searchInfoBtn}
-          onClick={() => setOpen(!open)}
-        >
+        <IconButton className={classes.searchInfoBtn} onClick={togglePopup}>
           <QuestionIcon />
         </IconButton>
         {anchorEl && (
           <Popper
-            // disablePortal
-            open={open}
+            open={searchInfoOpen}
             anchorEl={anchorEl}
             transition
             placement="right-start"
@@ -122,12 +129,12 @@ function SearchInfo({ anchorEl }) {
                 >
                   <IconButton
                     title={t('Schliessen')}
-                    onClick={() => setOpen(false)}
+                    onClick={togglePopup}
                     className={classes.closeBtn}
                   >
                     <MdClose />
                   </IconButton>
-                  <List dense disablePadding>
+                  <List dense disablePadding className={classes.searchInfoList}>
                     <ListItem disableGutters>
                       <ListItemText
                         primary={
@@ -137,7 +144,7 @@ function SearchInfo({ anchorEl }) {
                           </span>
                         }
                         secondary={t(
-                          'z.B. "Bern Europlatz" für Bahnstation oder "Bern Europaplatz, Bahnhof" für Bus-/Tramstation)',
+                          'z.B. "Bern Europlatz" für Bahnstation oder "Bern Europaplatz, Bahnhof" für Bus-/Tramstation',
                         )}
                       />
                     </ListItem>
@@ -146,7 +153,7 @@ function SearchInfo({ anchorEl }) {
                         primary={
                           <span>
                             <b>{t('Gemeinden')}</b>:{' '}
-                            {t('Eingabe offizieller Stationsname')}
+                            {t('Eingabe Gemeindenamen')}
                           </span>
                         }
                         secondary={t('z.B. "Eriz", "Mesocco"')}
@@ -158,7 +165,7 @@ function SearchInfo({ anchorEl }) {
                           <span>
                             <b>{t('Orte')}</b>:{' '}
                             {t(
-                              'Suche nach Ortsnamen, Pässen, Berge, Gewässer usw.  aus den Landeskarten',
+                              'Suche nach Ortsnamen, Pässen, Bergen, Gewässern usw. aus den Landeskarten',
                             )}
                           </span>
                         }
