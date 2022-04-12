@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchOpen } from '../../model/app/actions';
 import { ReactComponent as SearchIcon } from './Search.svg';
+import SearchInfo from './SearchInfo';
 
 const propTypes = {
   children: PropTypes.node,
@@ -23,6 +24,7 @@ function SearchToggle({ children }) {
         className={`wkp-search-toggle-container${searchOpen ? '--open' : ''}`}
       >
         {children}
+        <SearchInfo />
       </div>
       {!searchOpen && (
         <button

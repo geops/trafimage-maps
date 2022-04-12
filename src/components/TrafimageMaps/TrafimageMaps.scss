@@ -197,6 +197,15 @@
     }
   }
 
+  &.tm-w-xl,
+  &.tm-w-l,
+  &.tm-w-m {
+    .wkp-search-toggle-container,
+    .wkp-search-toggle-container--open {
+      padding-right: 50px;
+    }
+  }
+
   &.tm-w-l,
   &.tm-w-m,
   &.tm-w-s,
@@ -343,8 +352,17 @@
       max-width: 200px;
     }
 
+    .wkp-search-toggle-container--open {
+      padding-right: 0;
+    }
+
     .wkp-search-button {
       width: 42px;
+      right: 2px;
+    }
+
+    .wkp-search-button-clear {
+      right: 48px;
     }
 
     .react-autosuggest__input {
