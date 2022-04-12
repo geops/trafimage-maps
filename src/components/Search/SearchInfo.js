@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
@@ -41,12 +42,11 @@ const useStyles = makeStyles((theme) => {
       position: 'absolute',
       right: 0,
       top: 0,
-      zIndex: 999,
+      zIndex: 1500,
       padding: 8,
     },
     searchInfoBox: {
-      zIndex: 999,
-      transform: 'none !important',
+      zIndex: 1500,
       left: '10px !important',
       width: '32vw',
       maxWidth: (props) => (props.screenWidth === 'xl' ? 'none' : 262),
@@ -63,19 +63,25 @@ const useStyles = makeStyles((theme) => {
         position: 'absolute',
         border: '10px solid transparent',
         borderRight: '8px solid white',
-        webkitFilter: 'drop-shadow(-8px 2px 5px rgba(130,130,130,1))',
         filter: 'drop-shadow(-8px 2px 5px rgba(130,130,130,1))',
       },
     },
   };
 });
 
-function SearchInfo() {
+const propTypes = {
+  anchorEl: PropTypes.instanceOf(Element),
+};
+
+const defaultProps = {
+  anchorEl: null,
+};
+
+function SearchInfo({ anchorEl }) {
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const classes = useStyles({ screenWidth });
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const [open, setOpen] = useState(false);
-  const [buttonElement, setButtonElement] = useState(false);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -93,19 +99,18 @@ function SearchInfo() {
     <div className={classes.searchInfoOuterWrapper}>
       <div className={classes.searchInfoInnerWrapper}>
         <IconButton
-          ref={(el) => setButtonElement(el)}
           className={classes.searchInfoBtn}
           onClick={() => setOpen(!open)}
         >
           <QuestionIcon />
         </IconButton>
-        {buttonElement && (
+        {anchorEl && (
           <Popper
-            disablePortal
+            // disablePortal
             open={open}
-            anchorEl={buttonElement}
+            anchorEl={anchorEl}
             transition
-            placement="left"
+            placement="right-start"
             className={classes.searchInfoBox}
           >
             {({ TransitionProps }) => (
@@ -232,5 +237,8 @@ function SearchInfo() {
     </div>
   );
 }
+
+SearchInfo.propTypes = propTypes;
+SearchInfo.defaultProps = defaultProps;
 
 export default SearchInfo;

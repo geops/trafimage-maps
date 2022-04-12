@@ -8,13 +8,15 @@ import SearchInfo from './SearchInfo';
 
 const propTypes = {
   children: PropTypes.node,
+  popupAnchor: PropTypes.instanceOf(Element),
 };
 
 const defaultProps = {
   children: null,
+  popupAnchor: null,
 };
 
-function SearchToggle({ children }) {
+function SearchToggle({ popupAnchor, children }) {
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -24,7 +26,7 @@ function SearchToggle({ children }) {
         className={`wkp-search-toggle-container${searchOpen ? '--open' : ''}`}
       >
         {children}
-        <SearchInfo />
+        <SearchInfo anchorEl={popupAnchor} />
       </div>
       {!searchOpen && (
         <button
