@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@material-ui/core';
-import { setSearchInfoOpen, setSearchOpen } from '../../model/app/actions';
+import { setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
@@ -68,7 +68,6 @@ function Search() {
           onSuggestionSelected={(e, { suggestion }) => {
             searchService.select(suggestion);
             dispatch(setSearchOpen(false));
-            dispatch(setSearchInfoOpen(false));
           }}
           getSuggestionValue={(suggestion) => searchService.value(suggestion)}
           renderSuggestion={(suggestion) => searchService.render(suggestion)}
@@ -117,7 +116,6 @@ function Search() {
                   dispatch(setSearchOpen(false));
                   searchService.select({ ...items[0], section });
                 }
-                dispatch(setSearchInfoOpen(false));
               } else if (key === 'ArrowDown' || key === 'ArrowUp') {
                 searchService.highlightSection(); // for improved accessibility
               }
@@ -171,7 +169,6 @@ function Search() {
                         }
                       });
                     }
-                    dispatch(setSearchInfoOpen(false));
                   }}
                 >
                   <FaSearch focusable={false} />

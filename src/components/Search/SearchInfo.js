@@ -13,6 +13,8 @@ import {
   List,
   ListItem,
   ListItemText,
+  ClickAwayListener,
+  Typography,
 } from '@material-ui/core';
 import { ReactComponent as QuestionIcon } from '../../img/circleQuestionMark.svg';
 import { setSearchInfoOpen } from '../../model/app/actions';
@@ -39,21 +41,24 @@ const useStyles = makeStyles((theme) => {
         color: theme.palette.secondary.main,
       },
     },
+    popupHeader: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingLeft: 10,
+    },
     closeBtn: {
-      position: 'absolute',
-      right: 0,
-      top: 0,
       zIndex: 1500,
-      padding: 8,
+      padding: '4px 8px',
     },
     searchInfoBox: {
       zIndex: 1500,
       left: '10px !important',
       width: '32vw',
-      maxWidth: 262,
+      maxWidth: (props) => (props.screenWidth !== 'xl' ? 258 : '30vw'),
     },
     searchInfoContent: {
-      padding: '5px 10px',
+      padding: '5px 0',
       position: 'relative',
       maxHeight: '90vh',
       '&::before': {
@@ -69,7 +74,8 @@ const useStyles = makeStyles((theme) => {
       },
     },
     searchInfoList: {
-      maxHeight: '88vh',
+      maxHeight: '50vh',
+      padding: '0 10px',
       overflow: 'auto',
     },
   };
@@ -86,8 +92,8 @@ const defaultProps = {
 function SearchInfo({ anchorEl }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const classes = useStyles({ screenWidth });
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const searchInfoOpen = useSelector((state) => state.app.searchInfoOpen);
 
@@ -121,122 +127,141 @@ function SearchInfo({ anchorEl }) {
             className={classes.searchInfoBox}
           >
             {({ TransitionProps }) => (
-              <Fade {...TransitionProps} timeout={350}>
-                <Paper
-                  square
-                  elevation={4}
-                  className={classes.searchInfoContent}
+              <ClickAwayListener
+                mouseEvent="onMouseDown"
+                touchEvent="onTouchStart"
+                onClickAway={() => dispatch(setSearchInfoOpen(false))}
+              >
+                <Fade
+                  {...TransitionProps}
+                  timeout={searchOpen || screenWidth === 'xl' ? 350 : 0}
                 >
-                  <IconButton
-                    title={t('Schliessen')}
-                    onClick={togglePopup}
-                    className={classes.closeBtn}
+                  <Paper
+                    square
+                    elevation={4}
+                    className={classes.searchInfoContent}
                   >
-                    <MdClose />
-                  </IconButton>
-                  <List dense disablePadding className={classes.searchInfoList}>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Stationen')}</b>:{' '}
-                            {t('Eingabe offizieller Stationsname')}
-                          </span>
-                        }
-                        secondary={t(
-                          'z.B. "Bern Europlatz" für Bahnstation oder "Bern Europaplatz, Bahnhof" für Bus-/Tramstation',
-                        )}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Gemeinden')}</b>:{' '}
-                            {t('Eingabe Gemeindenamen')}
-                          </span>
-                        }
-                        secondary={t('z.B. "Eriz", "Mesocco"')}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Orte')}</b>:{' '}
-                            {t(
-                              'Suche nach Ortsnamen, Pässen, Bergen, Gewässern usw. aus den Landeskarten',
-                            )}
-                          </span>
-                        }
-                        secondary={t(
-                          'z.B. "Le Chasseron", "Passo del San Bernardino", "Louwibach"',
-                        )}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Adressen')}</b>: {t('Eingabe einer Adresse')}
-                          </span>
-                        }
-                        secondary={t('z.B. "Trüsselstrasse 2 3014 Bern"')}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Betriebspunkte')}</b>:{' '}
-                            {t(
-                              'Suche nach Betriebspunkten auf dem Streckennetz oder nach Betriebspunkt-Abkürzungen',
-                            )}
-                          </span>
-                        }
-                        secondary={t('z.B. "Aespli" oder "AESP"')}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Linien')}</b>:{' '}
-                            {t('Eingabe einer Liniennummer')}
-                          </span>
-                        }
-                        secondary={t('z.B. "210"')}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Kilometerpunkt auf Linie')}</b>:{' '}
-                            {t(
-                              'Suche nach einem Streckenkilometer auf einer Linie durch Eingabe der Liniennummer und des Streckenkilometers',
-                            )}
-                          </span>
-                        }
-                        secondary={t('z.B. "210 +35.74"')}
-                      />
-                    </ListItem>
-                    <ListItem disableGutters>
-                      <ListItemText
-                        primary={
-                          <span>
-                            <b>{t('Liniensegment')}</b>:{' '}
-                            {t(
-                              'Suche nach einem Streckensegement durch Eingabe der Liniennummer und Kilometer von - Kilometer bis',
-                            )}
-                          </span>
-                        }
-                        secondary={t('z.B. "210 29.5-35.7"')}
-                      />
-                    </ListItem>
-                  </List>
-                </Paper>
-              </Fade>
+                    <div className={classes.popupHeader}>
+                      <Typography>
+                        <b>{t('Suche')}</b>
+                      </Typography>
+                      <IconButton
+                        title={t('Schliessen')}
+                        onClick={togglePopup}
+                        className={classes.closeBtn}
+                      >
+                        <MdClose />
+                      </IconButton>
+                    </div>
+                    <List
+                      dense
+                      disablePadding
+                      className={classes.searchInfoList}
+                    >
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Stationen')}</b>:{' '}
+                              {t('Eingabe offizieller Stationsname')}
+                            </span>
+                          }
+                          secondary={t(
+                            'z.B. "Bern Europlatz" für Bahnstation oder "Bern Europaplatz, Bahnhof" für Bus-/Tramstation',
+                          )}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Gemeinden')}</b>:{' '}
+                              {t('Eingabe Gemeindenamen')}
+                            </span>
+                          }
+                          secondary={t('z.B. "Eriz", "Mesocco"')}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Orte')}</b>:{' '}
+                              {t(
+                                'Suche nach Ortsnamen, Pässen, Bergen, Gewässern usw. aus den Landeskarten',
+                              )}
+                            </span>
+                          }
+                          secondary={t(
+                            'z.B. "Le Chasseron", "Passo del San Bernardino", "Louwibach"',
+                          )}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Adressen')}</b>:{' '}
+                              {t('Eingabe einer Adresse')}
+                            </span>
+                          }
+                          secondary={t('z.B. "Trüsselstrasse 2 3014 Bern"')}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Betriebspunkte')}</b>:{' '}
+                              {t(
+                                'Suche nach Betriebspunkten auf dem Streckennetz oder nach Betriebspunkt-Abkürzungen',
+                              )}
+                            </span>
+                          }
+                          secondary={t('z.B. "Aespli" oder "AESP"')}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Linien')}</b>:{' '}
+                              {t('Eingabe einer Liniennummer')}
+                            </span>
+                          }
+                          secondary={t('z.B. "210"')}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Kilometerpunkt auf Linie')}</b>:{' '}
+                              {t(
+                                'Suche nach einem Streckenkilometer auf einer Linie durch Eingabe der Liniennummer und des Streckenkilometers',
+                              )}
+                            </span>
+                          }
+                          secondary={t('z.B. "210 +35.74"')}
+                        />
+                      </ListItem>
+                      <ListItem disableGutters>
+                        <ListItemText
+                          primary={
+                            <span>
+                              <b>{t('Liniensegment')}</b>:{' '}
+                              {t(
+                                'Suche nach einem Streckensegement durch Eingabe der Liniennummer und Kilometer von - Kilometer bis',
+                              )}
+                            </span>
+                          }
+                          secondary={t('z.B. "210 29.5-35.7"')}
+                        />
+                      </ListItem>
+                    </List>
+                  </Paper>
+                </Fade>
+              </ClickAwayListener>
             )}
           </Popper>
         )}

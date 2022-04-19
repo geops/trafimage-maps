@@ -72,6 +72,7 @@ const getInitialState = () => ({
   // Open the menu when mapset has opened the page.
   menuOpen: isOpenedByMapset(),
   searchOpen: false,
+  searchInfoOpen: false,
   selectedForInfos: null,
   map: new OLMap({
     controls: [],
