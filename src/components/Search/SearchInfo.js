@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => {
       zIndex: 1500,
       left: '10px !important',
       width: '32vw',
-      maxWidth: (props) => (props.screenWidth !== 'xl' ? 258 : '30vw'),
+      maxWidth: (props) => (props.screenWidth !== 'xl' ? 258 : 420),
     },
     searchInfoContent: {
       padding: '5px 0',
