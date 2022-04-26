@@ -624,8 +624,8 @@
   "search.info.addresses.desc": "Saisie d'une adresse",
   "search.info.operatingpoints.desc": "Recherche de points d'exploitation sur le réseau ou d'abréviations de points d'exploitation",
   "search.info.lines.desc": "Saisie d'un numéro de ligne",
-  "search.info.lineskilometer.desc": "Recherche d'un kilomètre de ligne sur une ligne en saisissant le numéro de ligne et le kilomètre de ligne",
-  "search.info.linessegment.desc": "Recherche d'un segment de ligne en saisissant le numéro de ligne et le kilomètre de - kilomètre à",
+  "search.info.lineskilometer.desc": "Recherche d'un kilomètre précis d'une ligne en saisissant le numéro de ligne puis le kilomètre souhaité",
+  "search.info.linessegment.desc": "Recherche d'un segment précis d'une ligne en saisissant le numéro de ligne puis le kilomètre de - le kilomètre à",
   "Adressen": "Les adresses",
   "Kilometerpunkt auf Linie": "Point kilométrique sur ligne",
   "Liniensegment": "Segment de ligne"
