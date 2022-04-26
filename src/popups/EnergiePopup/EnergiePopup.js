@@ -1,17 +1,19 @@
 /* eslint-disable no-param-reassign */
 import React, { useMemo } from 'react';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
+import { Divider, Typography } from '@material-ui/core';
+import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 
 import PersonCard from '../../components/PersonCard';
 
 const useStyles = makeStyles({
   subtitle: {
-    padding: 8,
+    padding: '8px 0',
     fontFamily: ['SBBWeb-Bold', 'Arial', 'sans-serif'],
   },
   unterwerk: {
@@ -30,6 +32,9 @@ const useStyles = makeStyles({
     borderRadius: '8px',
     border: '2px solid white',
     outline: '1.5px solid black',
+  },
+  divider: {
+    margin: '10px 0',
   },
 });
 
@@ -58,7 +63,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie }) => {
 
 EnergiePopupSubtitle.propTypes = {
   kategorie: PropTypes.string,
-  unterkategorie: PropTypes - string,
+  unterkategorie: PropTypes.string,
 };
 
 EnergiePopupSubtitle.defaultProps = {
@@ -66,9 +71,18 @@ EnergiePopupSubtitle.defaultProps = {
   unterkategorie: undefined,
 };
 
-const EnergiePopup = ({ feature }) => {
+const EnergiePopup = ({ feature, layer }) => {
   const { t } = useTranslation();
+  const classes = useStyles();
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
+  const description = useMemo(
+    () =>
+      feature.getGeometry().getType() === GeometryType.POINT
+        ? `${feature.get('bezeichnung')} (${feature.get('anlage_id')})`
+        : feature.get('bezeichnung'),
+    [feature],
+  );
   const anlageBetreuer = useMemo(
     () =>
       feature.get('anlagebetreuer') &&
@@ -103,11 +117,19 @@ const EnergiePopup = ({ feature }) => {
 
   return (
     <div>
-      <EnergiePopupSubtitle
-        kategorie={kategorie}
-        unterkategorie={unterkategorie}
-      />
-      {permissionInfos?.user ? (
+      {kategorie ? (
+        <EnergiePopupSubtitle
+          kategorie={kategorie}
+          unterkategorie={unterkategorie}
+        />
+      ) : (
+        <Typography className={classes.subtitle}>
+          <b>{t(layer.name)}</b>
+        </Typography>
+      )}
+      <Divider className={classes.divider} />
+      <Typography>{description}</Typography>
+      {permissionInfos?.user && activeTopic.permission === 'sbb' ? (
         <div>
           {anlageBetreuer && (
             <PersonCard
@@ -172,10 +194,8 @@ const EnergiePopup = ({ feature }) => {
 
 EnergiePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
+  layer: PropTypes.instanceOf(MapboxStyleLayer).isRequired,
 };
 
-EnergiePopup.renderTitle = (feat) =>
-  feat.getGeometry().getType() === GeometryType.POINT
-    ? `${feat.get('bezeichnung')} (${feat.get('anlage_id')})`
-    : feat.get('bezeichnung');
+EnergiePopup.renderTitle = (feat, layer, t) => t('Detailinformation');
 export default EnergiePopup;
