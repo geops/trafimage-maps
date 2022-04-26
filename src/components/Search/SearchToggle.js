@@ -4,16 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchOpen } from '../../model/app/actions';
 import { ReactComponent as SearchIcon } from './Search.svg';
+import SearchInfo from './SearchInfo';
 
 const propTypes = {
   children: PropTypes.node,
+  popupAnchor: PropTypes.instanceOf(Element),
 };
 
 const defaultProps = {
   children: null,
+  popupAnchor: null,
 };
 
-function SearchToggle({ children }) {
+function SearchToggle({ popupAnchor, children }) {
   const searchOpen = useSelector((state) => state.app.searchOpen);
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ function SearchToggle({ children }) {
         className={`wkp-search-toggle-container${searchOpen ? '--open' : ''}`}
       >
         {children}
+        <SearchInfo anchorEl={popupAnchor} />
       </div>
       {!searchOpen && (
         <button

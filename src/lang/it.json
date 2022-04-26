@@ -590,5 +590,19 @@
   "zur Webseite von": "al sito di {{operator}}",
   "zurück": "precedente",
   "Zurücksetzen": "Ripristinare",
-  "Zusätzliche Informationen": "Informazioni complementari"
+  "Zusätzliche Informationen": "Informazioni complementari",
+  "oder": "o",
+  "z.B.": "per es.",
+  "search.info.stations.desc": "Inserisci il nome ufficiale della stazione",
+  "search.info.stations.example": "\"Bern Europaplatz\" per la stazione ferroviaria o \"Bern Europaplatz, Bahnhof\" per la stazione degli autobus/tram",
+  "search.info.municipalities.desc": "Inserisci il nome del comune",
+  "search.info.places.desc": "Ricerca di nomi di luoghi, passi, montagne, corpi d'acqua, ecc. dalle mappe nazionali",
+  "search.info.addresses.desc": "Inserisci un indirizzo",
+  "search.info.operatingpoints.desc": "Ricerca di punti operativi sulla rete delle rotte o le abbreviazioni dei punti operativi",
+  "search.info.lines.desc": "Inserisci un numero di linea",
+  "search.info.lineskilometer.desc": "Ricerca di un chilometro di percorso su una linea inserendo il numero della linea e il chilometro del percorso",
+  "search.info.linessegment.desc": "Ricerca di un segmento di linea inserendo il numero di linea e il chilometro da - chilometro a",
+  "Adressen": "Indirizzi",
+  "Kilometerpunkt auf Linie": "Punto chilometrico sulla linea",
+  "Liniensegment": "Segmento di linea"
 }
