@@ -462,5 +462,19 @@
   "Ziel": "Ziel",
   "Zone": "Zone",
   "Zugtracker": "Zugtracker",
-  "Zusätzliche Informationen": "Zusätzliche Informationen"
+  "Zusätzliche Informationen": "Zusätzliche Informationen",
+  "oder": "oder",
+  "z.B.": "z.B.",
+  "search.info.stations.desc": "Eingabe offizieller Stationsname",
+  "search.info.stations.example": "\"Bern Europaplatz\" für Bahnstation oder \"Bern Europaplatz, Bahnhof\" für Bus-/Tramstation",
+  "search.info.municipalities.desc": "Eingabe Gemeindenamen",
+  "search.info.places.desc": "Suche nach Ortsnamen, Pässen, Bergen, Gewässern usw. aus den Landeskarten",
+  "search.info.addresses.desc": "Eingabe einer Adresse",
+  "search.info.operatingpoints.desc": "Suche nach Betriebspunkten auf dem Streckennetz oder nach Betriebspunkt-Abkürzungen",
+  "search.info.lines.desc": "Eingabe einer Liniennummer",
+  "search.info.lineskilometer.desc": "Suche nach einem Streckenkilometer auf einer Linie durch Eingabe der Liniennummer und des Streckenkilometers",
+  "search.info.linessegment.desc": "Suche nach einem Streckensegement durch Eingabe der Liniennummer und Kilometer von - Kilometer bis",
+  "Adressen": "Adressen",
+  "Kilometerpunkt auf Linie": "Kilometerpunkt auf Linie",
+  "Liniensegment": "Liniensegment"
 }

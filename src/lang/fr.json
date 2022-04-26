@@ -579,5 +579,19 @@
   "Zugtracker": "Train tracker",
   "zurück": "précédent",
   "Zurücksetzen": "Réinitialiser",
-  "Zusätzliche Informationen": "Informations complémentaires"
+  "Zusätzliche Informationen": "Informations complémentaires",
+  "oder": "ou",
+  "z.B.": "par ex.",
+  "search.info.stations.desc": "Saisie du nom officiel de la station",
+  "search.info.stations.example": "\"Bern Europaplatz\" pour une station de train ou \"Bern Europaplatz, Bahnhof\" pour une station de bus/tramway",
+  "search.info.municipalities.desc": "Saisie du nom de la commune",
+  "search.info.places.desc": "Recherche de noms de lieux, de cols, de montagnes, de cours d'eau, etc. à partir des cartes nationales",
+  "search.info.addresses.desc": "Saisie d'une adresse",
+  "search.info.operatingpoints.desc": "Recherche de points d'exploitation sur le réseau ou d'abréviations de points d'exploitation",
+  "search.info.lines.desc": "Saisie d'un numéro de ligne",
+  "search.info.lineskilometer.desc": "Recherche d'un kilomètre de ligne sur une ligne en saisissant le numéro de ligne et le kilomètre de ligne",
+  "search.info.linessegment.desc": "Recherche d'un segment de ligne en saisissant le numéro de ligne et le kilomètre de - kilomètre à",
+  "Adressen": "Les adresses",
+  "Kilometerpunkt auf Linie": "Point kilométrique sur ligne",
+  "Liniensegment": "Segment de ligne"
 }
