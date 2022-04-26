@@ -163,12 +163,12 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Stationen')}</b>:{' '}
-                              {t('Eingabe offizieller Stationsname')}
+                              {t('search.info.stations.desc')}
                             </span>
                           }
-                          secondary={t(
-                            'z.B. "Bern Europlatz" für Bahnstation oder "Bern Europaplatz, Bahnhof" für Bus-/Tramstation',
-                          )}
+                          secondary={`${t('z.B.')} ${t(
+                            'search.info.stations.example',
+                          )}`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -176,25 +176,22 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Gemeinden')}</b>:{' '}
-                              {t('Eingabe Gemeindenamen')}
+                              {t('search.info.municipalities.desc')}
                             </span>
                           }
-                          secondary={t('z.B. "Eriz", "Mesocco"')}
+                          secondary={`${t('z.B.')} "Eriz", "Mesocco"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Orte')}</b>:{' '}
-                              {t(
-                                'Suche nach Ortsnamen, Pässen, Bergen, Gewässern usw. aus den Landeskarten',
-                              )}
+                              <b>{t('Orte')}</b>: {t('search.info.places.desc')}
                             </span>
                           }
-                          secondary={t(
-                            'z.B. "Le Chasseron", "Passo del San Bernardino", "Louwibach"',
-                          )}
+                          secondary={`${t(
+                            'z.B.',
+                          )} "Le Chasseron", "Passo del San Bernardino", "Louwibach"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -202,10 +199,12 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Adressen')}</b>:{' '}
-                              {t('Eingabe einer Adresse')}
+                              {t('search.info.addresses.desc')}
                             </span>
                           }
-                          secondary={t('z.B. "Trüsselstrasse 2 3014 Bern"')}
+                          secondary={`${t(
+                            'z.B.',
+                          )} "Trüsselstrasse 2 3014 Bern"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -213,12 +212,12 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Betriebspunkte')}</b>:{' '}
-                              {t(
-                                'Suche nach Betriebspunkten auf dem Streckennetz oder nach Betriebspunkt-Abkürzungen',
-                              )}
+                              {t('search.info.operatingpoints.desc')}
                             </span>
                           }
-                          secondary={t('z.B. "Aespli" oder "AESP"')}
+                          secondary={`${t('z.B.')} "Aespli" ${t(
+                            'oder',
+                          )} "AESP"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -226,10 +225,10 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Linien')}</b>:{' '}
-                              {t('Eingabe einer Liniennummer')}
+                              {t('search.info.lines.desc')}
                             </span>
                           }
-                          secondary={t('z.B. "210"')}
+                          secondary={`${t('z.B.')} "210"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -237,12 +236,10 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Kilometerpunkt auf Linie')}</b>:{' '}
-                              {t(
-                                'Suche nach einem Streckenkilometer auf einer Linie durch Eingabe der Liniennummer und des Streckenkilometers',
-                              )}
+                              {t('search.info.lineskilometer.desc')}
                             </span>
                           }
-                          secondary={t('z.B. "210 +35.74"')}
+                          secondary={`${t('z.B.')} "210 +35.74"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -250,12 +247,10 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <b>{t('Liniensegment')}</b>:{' '}
-                              {t(
-                                'Suche nach einem Streckensegement durch Eingabe der Liniennummer und Kilometer von - Kilometer bis',
-                              )}
+                              {t('search.info.linessegment.desc')}
                             </span>
                           }
-                          secondary={t('z.B. "210 29.5-35.7"')}
+                          secondary={`${t('z.B.')} "210 29.5-35.7"`}
                         />
                       </ListItem>
                     </List>
