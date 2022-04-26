@@ -37,16 +37,14 @@ describe('Head', () => {
         <Head topics={[{}]} domainConsentId="foo" displayConsent />
       </Provider>,
     );
-    expect(wrapper.find('NullComponent').props().script).toEqual([
-      {
-        charset: 'UTF-8',
-        'data-cy': 'consent-script',
-        'data-domain-script': 'foo',
-        'data-language': 'de-ch',
-        src: 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
-        type: 'text/javascript',
-      },
-    ]);
+    expect(wrapper.find('NullComponent').props().script[1]).toEqual({
+      charset: 'UTF-8',
+      'data-cy': 'consent-script',
+      'data-domain-script': 'foo',
+      'data-language': 'de-ch',
+      src: 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js',
+      type: 'text/javascript',
+    });
   });
 
   test('add consent script in HEAD with the current language value', () => {
@@ -61,7 +59,7 @@ describe('Head', () => {
       </Provider>,
     );
     expect(
-      wrapper.find('NullComponent').props().script[0]['data-language'],
+      wrapper.find('NullComponent').props().script[1]['data-language'],
     ).toEqual('fr-ch');
   });
 });

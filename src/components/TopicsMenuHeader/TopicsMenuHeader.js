@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Button from '../Button';
-import menuOpenImg from '../../img/menu.png';
-import menuClosedImg from '../../img/menu_closed.png';
+import { ReactComponent as MenuOpenImg } from '../../img/sbb/040_hamburgermenu_102_36.svg';
+import { ReactComponent as MenuClosedImg } from '../../img/sbb/040_schliessen_104_36.svg';
 
 const propTypes = {
   onToggle: PropTypes.func.isRequired,
@@ -64,7 +64,7 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
     >
       <div className="wkp-menu-header-mobile">
         <div className="wkp-menu-header-toggler">
-          <img src={isOpen ? menuClosedImg : menuOpenImg} alt={t('Menü')} />
+          {isOpen ? <MenuClosedImg /> : <MenuOpenImg />}
           <span className="wkp-menu-header-menu-title">{t('Menü')}</span>
         </div>
       </div>

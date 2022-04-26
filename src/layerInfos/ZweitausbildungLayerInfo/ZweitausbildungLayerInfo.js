@@ -49,7 +49,7 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
         <br />
         {t('HR-BIL-SKK-PM (VM und VS)')},
         <br />
-        <a href="mailto:pm.skk@sbb.ch">pm.skk@sbb.ch</a>.
+        <a href="mailto:pm.skk.kbc@sbb.ch">pm.skk.kbc@sbb.ch</a>.
       </div>
     </div>
   );

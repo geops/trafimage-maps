@@ -36,6 +36,7 @@ import {
   SET_EMBEDDED,
   SET_DISABLE_COOKIES,
   SET_SEARCH_URL,
+  SET_SEARCH_INFO_OPEN,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -71,6 +72,7 @@ const getInitialState = () => ({
   // Open the menu when mapset has opened the page.
   menuOpen: isOpenedByMapset(),
   searchOpen: false,
+  searchInfoOpen: false,
   selectedForInfos: null,
   map: new OLMap({
     controls: [],
@@ -246,6 +248,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         embedded: action.data,
+      };
+    case SET_SEARCH_INFO_OPEN:
+      return {
+        ...state,
+        searchInfoOpen: action.data,
       };
     default:
       return {

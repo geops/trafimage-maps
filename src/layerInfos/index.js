@@ -8,6 +8,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import HandicapLayerInfo from './HandicapLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import InterventionTopicInfo from './InterventionTopicInfo';
+import IsbTopicInfo from './IsbTopicInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
@@ -30,6 +31,8 @@ import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo
 import EnergieLayerInfo from './EnergieLayerInfo';
 import EnergieTopicInfo from './EnergieTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
+import IsbTVSLayerInfo from './IsbTVSLayerInfo';
+import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -62,6 +65,9 @@ export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenT
 export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
 export { default as EnergieTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
+export { default as IsbTopicInfo } from './IsbTopicInfo';
+export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
+export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -75,8 +81,8 @@ export default {
   DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
-  InfrastrukturTopicInfo,
   InterventionTopicInfo,
+  InfrastrukturTopicInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
@@ -96,4 +102,7 @@ export default {
   EnergieLayerInfo,
   EnergieTopicInfo,
   SandboxTopicInfo,
+  IsbTopicInfo,
+  IsbTVSLayerInfo,
+  IsbOtherLayerInfo,
 };

@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.7.28",
+  "version": "1.7.31",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -113,7 +113,7 @@
   "scripts": {
     "build": "GENERATE_SOURCEMAP=false  react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
     "coverage": "yarn test  --watchAll=false  --coverage --coverageDirectory=coverage",
-    "cp": "generact --root src/components",
+    "cp": "generact --root src",
     "cy:open": "cypress open",
     "cy:test": "start-server-and-test start:http http://localhost:3000 'cypress run'",
     "doc": "bash ./scripts/prepare-doc.sh",

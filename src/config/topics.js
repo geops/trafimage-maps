@@ -58,6 +58,9 @@ import defaultBaseLayers, {
   direktverbindungenLayer,
   energieUnterwerkeLayer,
   energieLeitungenLayer,
+  netzkarteIsb,
+  isbOther,
+  isbTVS,
   geschosseLayer,
   energieDataLayer,
 } from './layers';
@@ -388,6 +391,21 @@ export const energie = {
   searches: defaultSearches,
 };
 
+export const isb = {
+  name: 'ch.sbb.isb',
+  key: 'ch.sbb.isb',
+  maxZoom: 14,
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
+  layers: [kilometrageLayer, netzkarteIsb, isbOther, isbTVS],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'IsbTopicInfo',
+  searches: defaultSearches,
+};
+
 const sandbox = {
   name: 'ch.sbb.netzkarte.sandbox',
   key: 'ch.sbb.netzkarte.sandbox',
@@ -408,6 +426,7 @@ const topics = {
     handicap,
     tarifverbundkarte,
     infrastruktur,
+    isb,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
