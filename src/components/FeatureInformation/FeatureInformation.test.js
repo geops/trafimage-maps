@@ -27,6 +27,9 @@ describe('FeatureInformation', () => {
       app: {
         projection: { value: 'EPSG:3857' },
         map: {
+          renderSync: () => {},
+          getPixelFromCoordinate: jest.fn(() => [50, 50]),
+          getSize: () => [100, 100],
           getView: () => ({
             cancelAnimations,
             fit,
@@ -238,7 +241,7 @@ describe('FeatureInformation', () => {
     );
     expect(cancelAnimations).toHaveBeenCalledTimes(1);
     expect(fit).toHaveBeenCalledTimes(1);
-    expect(fit).toHaveBeenCalledWith([0, 0, 2, 2], {
+    expect(fit).toHaveBeenCalledWith([2.5, 2.5, 2.5, 2.5], {
       duration: 500,
       maxZoom: 10,
       padding: [0, 400, 0, 0],
@@ -279,7 +282,7 @@ describe('FeatureInformation', () => {
     );
     expect(cancelAnimations).toHaveBeenCalledTimes(1);
     expect(fit).toHaveBeenCalledTimes(1);
-    expect(fit).toHaveBeenCalledWith([0, 0, 2, 2], {
+    expect(fit).toHaveBeenCalledWith([2.5, 2.5, 2.5, 2.5], {
       duration: 500,
       maxZoom: 10,
       padding: [0, 0, 250, 0],

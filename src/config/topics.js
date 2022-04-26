@@ -56,6 +56,9 @@ import defaultBaseLayers, {
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
   direktverbindungenLayer,
+  netzkarteIsb,
+  isbOther,
+  isbTVS,
   geschosseLayer,
 } from './layers';
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -374,6 +377,21 @@ export const beleuchtungsstaerken = {
   searches: defaultSearches,
 };
 
+export const isb = {
+  name: 'ch.sbb.isb',
+  key: 'ch.sbb.isb',
+  maxZoom: 14,
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
+  layers: [kilometrageLayer, netzkarteIsb, isbOther, isbTVS],
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'IsbTopicInfo',
+  searches: defaultSearches,
+};
+
 const sandbox = {
   name: 'ch.sbb.netzkarte.sandbox',
   key: 'ch.sbb.netzkarte.sandbox',
@@ -394,6 +412,7 @@ const topics = {
     handicap,
     tarifverbundkarte,
     infrastruktur,
+    isb,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,

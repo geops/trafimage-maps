@@ -8,6 +8,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import HandicapLayerInfo from './HandicapLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import InterventionTopicInfo from './InterventionTopicInfo';
+import IsbTopicInfo from './IsbTopicInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
@@ -28,6 +29,8 @@ import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
 import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
 import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
+import IsbTVSLayerInfo from './IsbTVSLayerInfo';
+import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -59,6 +62,9 @@ export { default as DirektVerbindungenLayerInfo } from './DirektVerbindungenLaye
 export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenTagLayerInfo';
 export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
+export { default as IsbTopicInfo } from './IsbTopicInfo';
+export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
+export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -72,8 +78,8 @@ export default {
   DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
-  InfrastrukturTopicInfo,
   InterventionTopicInfo,
+  InfrastrukturTopicInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
@@ -91,4 +97,7 @@ export default {
   BeleuchtungLayerInfo,
   MapsGeoAdminLayerInfo,
   SandboxTopicInfo,
+  IsbTopicInfo,
+  IsbTVSLayerInfo,
+  IsbOtherLayerInfo,
 };
