@@ -1661,7 +1661,10 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && /^leitung$/.test(metadata['energie.filter']),
   styleLayersFilter: ({ metadata }) =>
-    metadata && /^leitung$/.test(metadata['energie.filter']),
+    metadata &&
+    /^(leitung|leitung.label|leitung.label.lc)$/.test(
+      metadata['energie.filter'],
+    ),
   properties: {
     hasInfos: true,
     layerInfoComponent: 'EnergieLayerInfo',
