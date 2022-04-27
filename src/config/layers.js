@@ -1424,11 +1424,11 @@ export const netzentwicklungDataLayer = new TrafimageMapboxLayer({
 });
 
 export const energieDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.energie.data',
+  name: 'ch.sbb.energie.public.data',
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie',
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie.public',
   properties: {
     hideInLegend: true,
   },
@@ -1685,23 +1685,6 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
     layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
-  },
-});
-
-export const energieProduktionsanlagenLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.energie.produktionsanlagen',
-  visible: false,
-  mapboxLayer: energieDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && /^anlagen.kw$/.test(metadata['energie.filter']),
-  styleLayersFilter: ({ metadata }) =>
-    metadata && /^anlagen.kw$/.test(metadata['energie.filter']),
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'EnergieLayerInfo',
-    popupComponent: 'EnergiePopup',
-    useOverlay: true,
-    hideInLegend: true,
   },
 });
 
