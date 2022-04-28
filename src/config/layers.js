@@ -1668,7 +1668,7 @@ export const direktverbindungenLayer = new Layer({
 });
 
 export const energieLeitungenLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.energie.leitungen',
+  name: 'ch.sbb.energie.public.leitungen',
   mapboxLayer: energieDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && /^leitung$/.test(metadata['energie.filter']),
@@ -1686,7 +1686,7 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
 });
 
 export const energieUnterwerkeLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.energie.unterwerke',
+  name: 'ch.sbb.energie.public.unterwerke',
   mapboxLayer: energieDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
