@@ -48,11 +48,11 @@ const useStyles = makeStyles({
 const EnergieLayerInfo = ({ properties, t }) => {
   const classes = useStyles();
 
-  if (properties.name === 'ch.sbb.energie.unterwerke') {
+  if (properties.name.match(/ch.sbb.energie(.public)?.unterwerke/)) {
     return <EnergiePopupSubtitle kategorie="UW" />;
   }
 
-  if (properties.name === 'ch.sbb.energie.produktionsanlagen') {
+  if (properties.name.match(/ch.sbb.energie(.public)?.produktionsanlagen/)) {
     return <EnergiePopupSubtitle kategorie="KW" />;
   }
 

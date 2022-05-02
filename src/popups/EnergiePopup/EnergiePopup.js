@@ -12,44 +12,55 @@ import { energieleitungenColorMapping } from '../../utils/constants';
 
 import PersonCard from '../../components/PersonCard';
 
-const useStyles = makeStyles({
-  subtitle: {
-    padding: '8px 0',
-    fontFamily: ['SBBWeb-Bold', 'Arial', 'sans-serif'],
-  },
-  unterwerk: {
-    backgroundColor: 'black',
-    marginRight: '10px',
-    width: '10px',
-    height: '10px',
-    display: 'inline-block',
-  },
-  produktionsanlage: {
-    width: '7px',
-    height: '7px',
-    display: 'inline-block',
-    marginRight: '10px',
-    backgroundColor: 'black',
-    borderRadius: '8px',
-    border: '2px solid white',
-    outline: '1.5px solid black',
-  },
-  divider: {
-    margin: '10px 0',
-  },
+const useStyles = makeStyles((theme) => {
+  return {
+    title: {
+      padding: '8px 0',
+      fontFamily: ['SBBWeb-Bold', 'Arial', 'sans-serif'],
+    },
+    subtitle: {
+      color: theme.palette.text.secondary,
+    },
+    unterwerk: {
+      backgroundColor: 'black',
+      marginRight: '10px',
+      width: '10px',
+      height: '10px',
+      display: 'inline-block',
+    },
+    produktionsanlage: {
+      width: '7px',
+      height: '7px',
+      display: 'inline-block',
+      marginRight: '10px',
+      backgroundColor: 'black',
+      borderRadius: '8px',
+      border: '2px solid white',
+      outline: '1.5px solid black',
+    },
+    divider: {
+      margin: '10px 0',
+    },
+  };
 });
 
 export const EnergiePopupSubtitle = ({ kategorie, unterkategorie }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   return kategorie ? (
-    <div className={classes.subtitle}>
+    <div className={classes.title}>
       {kategorie === 'UW' && (
         <>
           <div className={classes.unterwerk} />
-          {`${t('ch.sbb.energie.unterwerk')}${
-            unterkategorie ? ` (${unterkategorie})` : ''
-          }`}
+          {t('ch.sbb.energie.unterwerk')}
+          {unterkategorie ? (
+            <span className={classes.subtitle}>
+              {' - '}
+              {unterkategorie}
+            </span>
+          ) : (
+            ''
+          )}
         </>
       )}
       {kategorie === 'KW' && (
@@ -126,7 +137,7 @@ const EnergiePopup = ({ feature, layer }) => {
           unterkategorie={unterkategorie}
         />
       ) : (
-        <Typography className={classes.subtitle}>
+        <Typography className={classes.title}>
           <b>{t(layer.name)}</b>
         </Typography>
       )}
