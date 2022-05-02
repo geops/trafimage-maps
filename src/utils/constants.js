@@ -9,3 +9,18 @@ export const LS_MATOMO_USER_SESSION_TIMER = 'matomo_user_session_timer';
 export const LS_MATOMO_TOPIC_VISITED = 'matomo_topic_visited';
 export const MATOMO_TOPIC_CHANGE_ACTION = 'load';
 export const MATOMO_TOPIC_CHANGE_TIMER = 30 * 60 * 1000;
+
+export const energieleitungenColorMapping = {
+  los1: '#12919a',
+  los2: '#da1720',
+  los3: '#71c520',
+  los4: '#f057b3',
+  los5: '#f27211',
+  los6: '#1486da',
+  los7: '#7346bc',
+  los8: '#1abebc',
+  los9: '#f9b914',
+  los10: '#128939',
+  los11: '#a3005b',
+  ausserhalb: 'black',
+};
