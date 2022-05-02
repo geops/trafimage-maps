@@ -8,6 +8,7 @@ import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
 import { Divider, Typography } from '@material-ui/core';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+import { energieleitungenColorMapping } from '../../utils/constants';
 
 import PersonCard from '../../components/PersonCard';
 
@@ -114,6 +115,8 @@ const EnergiePopup = ({ feature, layer }) => {
   );
   const kategorie = feature.get('kategorie');
   const unterkategorie = feature.get('unterkategorie');
+  const trassennummer = feature.get('trassennummer');
+  const losNr = feature.get('los_nr');
 
   return (
     <div>
@@ -128,7 +131,16 @@ const EnergiePopup = ({ feature, layer }) => {
         </Typography>
       )}
       <Divider className={classes.divider} />
-      <Typography>{description}</Typography>
+      <Typography>
+        {trassennummer ? (
+          <b style={{ color: energieleitungenColorMapping[`los${losNr}`] }}>
+            {trassennummer}{' '}
+          </b>
+        ) : (
+          ''
+        )}
+        {description}
+      </Typography>
       {permissionInfos?.user && activeTopic.permission === 'sbb' ? (
         <div>
           {anlageBetreuer && (
