@@ -69,10 +69,10 @@ class SearchService {
 
   highlight(item) {
     this.highlightItem = item;
-
     this.highlightLayer.getSource().clear();
 
-    if (!item) {
+    // it can happens on page load, that if you type very fast then highlight a result this.map is null.
+    if (!item || !this.map) {
       return;
     }
 
@@ -121,7 +121,7 @@ class SearchService {
     this.selectItem = item;
     this.selectLayer.getSource().clear();
 
-    if (!item) {
+    if (!item || !this.map) {
       return;
     }
 
