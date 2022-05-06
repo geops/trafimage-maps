@@ -15,6 +15,7 @@ const dfltApp = {
     key: 'test',
   },
   language: 'de',
+  searchInfoOpen: false,
 };
 const mockStore = configureStore([thunk]);
 
