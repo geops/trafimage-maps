@@ -45,7 +45,7 @@ export const setProjection = (data) => ({ type: SET_PROJECTION, data });
 
 export const setFeatureInfo = (data) => (dispatch, getState) => {
   const {
-    app: { featureInfo },
+    app: { searchService, featureInfo },
   } = getState();
 
   if (!data.length) {
@@ -58,6 +58,10 @@ export const setFeatureInfo = (data) => (dispatch, getState) => {
         layer.select([]);
       }
     });
+  } else if (searchService) {
+    // Never display 2 different highlights at the same time.
+    searchService.clearHighlight();
+    searchService.clearSelect();
   }
 
   dispatch({
