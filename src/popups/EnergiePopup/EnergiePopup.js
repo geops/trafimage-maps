@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
 import { Divider, Typography } from '@material-ui/core';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import { energieleitungenColorMapping } from '../../utils/constants';
 
 import PersonCard from '../../components/PersonCard';
@@ -17,26 +16,31 @@ const useStyles = makeStyles((theme) => {
     title: {
       padding: '8px 0',
       fontFamily: ['SBBWeb-Bold', 'Arial', 'sans-serif'],
+      display: 'flex',
+      alignItems: 'baseline',
+      gap: 10,
     },
     subtitle: {
       color: theme.palette.text.secondary,
     },
+    icon: {
+      backgroundColor: 'black',
+      display: 'inline-block',
+    },
     unterwerk: {
       backgroundColor: 'black',
-      marginRight: '10px',
       width: '10px',
       height: '10px',
       display: 'inline-block',
+      flex: '0 0 10px',
     },
     produktionsanlage: {
       width: '7px',
       height: '7px',
-      display: 'inline-block',
-      marginRight: '10px',
-      backgroundColor: 'black',
       borderRadius: '8px',
       border: '2px solid white',
       outline: '1.5px solid black',
+      flex: '0 0 7px',
     },
     divider: {
       margin: '10px 0',
@@ -44,29 +48,41 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export const EnergiePopupSubtitle = ({ kategorie, unterkategorie }) => {
+export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   return kategorie ? (
     <div className={classes.title}>
       {kategorie === 'UW' && (
         <>
-          <div className={classes.unterwerk} />
-          {t('ch.sbb.energie.unterwerk')}
-          {unterkategorie ? (
-            <span className={classes.subtitle}>
-              {' - '}
-              {unterkategorie}
-            </span>
-          ) : (
-            ''
-          )}
+          <div className={`${classes.unterwerk} ${classes.icon}`} />
+          <div className={classes.label}>
+            {label || t('Unterwerk')}
+            {unterkategorie ? (
+              <span className={classes.subtitle}>
+                {' - '}
+                {t(`${unterkategorie}`)}
+              </span>
+            ) : (
+              ''
+            )}
+          </div>
         </>
       )}
       {kategorie === 'KW' && (
         <>
-          <div className={classes.produktionsanlage} />
-          {t('ch.sbb.energie.produktionsanlage')}
+          <div className={`${classes.produktionsanlage} ${classes.icon}`} />
+          <div className={classes.label}>
+            {label || t('Produktionsanlage')}
+            {unterkategorie ? (
+              <span className={classes.subtitle}>
+                {' - '}
+                {t(`${unterkategorie}`)}
+              </span>
+            ) : (
+              ''
+            )}
+          </div>
         </>
       )}
     </div>
@@ -76,14 +92,16 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie }) => {
 EnergiePopupSubtitle.propTypes = {
   kategorie: PropTypes.string,
   unterkategorie: PropTypes.string,
+  label: PropTypes.string,
 };
 
 EnergiePopupSubtitle.defaultProps = {
   kategorie: undefined,
   unterkategorie: undefined,
+  label: undefined,
 };
 
-const EnergiePopup = ({ feature, layer }) => {
+const EnergiePopup = ({ feature }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -138,7 +156,7 @@ const EnergiePopup = ({ feature, layer }) => {
         />
       ) : (
         <Typography className={classes.title}>
-          <b>{t(layer.name)}</b>
+          <b>{t('Leitung')}</b>
         </Typography>
       )}
       <Divider className={classes.divider} />
@@ -217,7 +235,6 @@ const EnergiePopup = ({ feature, layer }) => {
 
 EnergiePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
-  layer: PropTypes.instanceOf(MapboxStyleLayer).isRequired,
 };
 
 EnergiePopup.renderTitle = (feat, layer, t) => t('Detailinformation');

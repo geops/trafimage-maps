@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { energieleitungenColorMapping } from '../../utils/constants';
@@ -45,26 +45,61 @@ const useStyles = makeStyles({
   },
 });
 
-const EnergieLayerInfo = ({ properties, t }) => {
+const InfoBody = ({ name, t }) => {
   const classes = useStyles();
-
-  if (properties.name.match(/ch.sbb.energie(.public)?.unterwerke/)) {
-    return <EnergiePopupSubtitle kategorie="UW" />;
+  if (name.match(/ch.sbb.energie(.public)?.unterwerke/)) {
+    return (
+      <EnergiePopupSubtitle
+        kategorie="UW"
+        label={t(
+          'Unterwerke (UW), fahrbare Unterwerke (fUW), Autrotrafo (AT) Schaltposten 132kV (SP)',
+        )}
+      />
+    );
   }
 
-  if (properties.name.match(/ch.sbb.energie(.public)?.produktionsanlagen/)) {
-    return <EnergiePopupSubtitle kategorie="KW" />;
+  if (name.match(/ch.sbb.energie(.public)?.produktionsanlagen/)) {
+    return (
+      <EnergiePopupSubtitle
+        kategorie="KW"
+        label={t(
+          'Kraftwerk (KW), Frequenzumfomer/Umrichter (FU/UR), Blindleistungskompensator (BLK)',
+        )}
+      />
+    );
   }
 
   return (
     <ul className={classes.leitungen}>
-      <li className={classes.subtitle}>{t('ch.sbb.energie.leitungen')}</li>
+      <li className={classes.subtitle}>
+        {t('ch.sbb.energie.leitungen')} {t('UL')}
+      </li>
       {Object.keys(energieleitungenColorMapping).map((los) => (
         <li key={los} className={classes[los]}>
           {t(`ch.sbb.energie.${los}`)}
         </li>
       ))}
     </ul>
+  );
+};
+
+InfoBody.propTypes = {
+  name: PropTypes.string.isRequired,
+  t: PropTypes.func.isRequired,
+};
+
+const EnergieLayerInfo = ({ properties, t }) => {
+  return (
+    <>
+      <InfoBody name={properties.name} t={t} />
+      <p>
+        {t('Verantwortlich')}:
+        <br />
+        I-EN-DAE-OAN-BUI,&nbsp;
+        <br />
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>.
+      </p>
+    </>
   );
 };
 

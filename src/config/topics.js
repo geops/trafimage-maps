@@ -380,14 +380,14 @@ export const beleuchtungsstaerken = {
   searches: defaultSearches,
 };
 
-export const energie = {
+export const energiePublic = {
   name: 'ch.sbb.energie',
   key: 'ch.sbb.energie',
   maxZoom: 14,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
   layers: [energieDataLayer, energieLeitungenLayer, energieUnterwerkeLayer],
   projection: 'EPSG:3857',
-  layerInfoComponent: 'EnergieTopicInfo',
+  layerInfoComponent: 'EnergiePublicTopicInfo',
   searches: defaultSearches,
 };
 
@@ -430,7 +430,7 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
-    energie,
+    energiePublic,
     showcases,
     sandbox,
   ],
