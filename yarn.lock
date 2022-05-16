@@ -1333,16 +1333,6 @@
     react-shadow "^17.1.3"
     rimraf "^3.0.0"
 
-"@geops/geops-ui@0.1.12":
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/@geops/geops-ui/-/geops-ui-0.1.12.tgz#fe52dc609cad9f0ce928a2673825cfcb180b6471"
-  integrity sha512-qKtrnvbvux4Pxz5eK5H6a75BdS6AfdRwfJJj1Bpzui/2+m4i6g0QV9xisQEAqcfZ4rqhF+5BO5XM5Ljrwr5psQ==
-  dependencies:
-    prop-types "^15.7.2"
-    react-app-polyfill "^2.0.0"
-    react-router-dom "^5.2.0"
-    uuid "^8.3.1"
-
 "@geops/geops-ui@0.1.13":
   version "0.1.13"
   resolved "https://registry.yarnpkg.com/@geops/geops-ui/-/geops-ui-0.1.13.tgz#ba796cf574a74eb90e68e7f34aa7cd3303e711c4"
@@ -8147,14 +8137,6 @@ file-loader@6.1.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-6.1.1.tgz#a6f29dfb3f5933a1c350b2dbaa20ac5be0539baa"
   integrity sha512-Klt8C4BjWSXYQAfhpYYkG4qHNTna4toMHEbWrI5IuVoxbU6uiDKeKAP99R8mmbJi3lvewn/jQBOgU4+NS3tDQw==
-  dependencies:
-    loader-utils "^2.0.0"
-    schema-utils "^3.0.0"
-
-file-loader@6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-6.2.0.tgz#baef7cf8e1840df325e4390b4484879480eebe4d"
-  integrity sha512-qo3glqyTa61Ytg4u73GultjHGjdRyig3tG6lPtyX/jOEJvHif9uB0/OCI2Kif6ctF3caQTW2G5gym21oAsI4pw==
   dependencies:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
@@ -15904,18 +15886,16 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.1.0.tgz#beccc827c3b4f93963103bb1d47ecca13bd2bf7f"
-  integrity sha512-3tdlXuixILakNx0UjJdqoLF2FjkUgYAT2N9q37hKd007WqC3ty1f53L/qL+45Q1WEs/UocZbKRLYshS7oycWnA==
+react-spatial@1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.1.6.tgz#c0fb24c0dd4fe3319556db32dcdb85c4d3e36580"
+  integrity sha512-0D5VjJQ6+COqNIs0uk4bp572LU6YA1cuS8pVU1sDXv7wCDNBJN6aHeps+0l7CTZAmA0TS/1gxmR3Ddx2CSwQ2g==
   dependencies:
-    "@geops/geops-ui" "0.1.12"
+    "@geops/geops-ui" "0.1.13"
     "@material-ui/core" "4.12.3"
     "@material-ui/icons" "4.11.2"
     "@material-ui/lab" "4.0.0-alpha.60"
-    "@svgr/webpack" "5.5.0"
     abortcontroller-polyfill "1.7.3"
-    file-loader "6.2.0"
     query-string "7.0.1"
     radians-degrees "1.0.0"
     re-resizable "6.9.1"
