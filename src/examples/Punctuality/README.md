@@ -28,6 +28,7 @@ const App = () => {
     map.topics = [
       { 
         name: 'Punctuality topic',
+        key: 'punctuality',
         layers: [
           new TrafimageMapboxLayer({
             name: 'Background layer',
