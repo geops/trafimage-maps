@@ -75,6 +75,8 @@ class LevelLayer extends MapboxStyleLayer {
           }
         } else if (!isInit && styleLayer.layout.visibility === 'visible') {
           // We set the visibility to none only if others siblings level layer are also hidden.
+          // it can happens when we load the topic via urls aand then we switch topic.
+          // In that case change:visible events are not registered in the same order.
           if (
             !this.get('parent').children.find(
               (child) => child.level !== '2D' && child.visible,
