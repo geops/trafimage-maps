@@ -122,6 +122,7 @@ class PlatformsLayer extends MapboxStyleLayer {
     this.addSource();
     super.onLoad();
     this.updateSource();
+    mbMap.once('idle', this.onIdle);
   }
 
   /**

@@ -47,7 +47,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_ch.sbb.netzkarte',
+  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
@@ -104,7 +104,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   styleLayersFilter: (styleLayer) => {
     return /perimeter_mask$/.test(styleLayer.id);
   },
-  style: 'base_bright_v2_ch.sbb.netzkarte',
+  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.netzkarte',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
@@ -117,7 +117,7 @@ export const netzkarteNight = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'base_dark_v2',
+  style: 'review-geops-tgma-a7je7m.base_dark_v2_ch.sbb.netzkarte.dark',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
