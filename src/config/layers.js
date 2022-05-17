@@ -1741,6 +1741,7 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
     level,
     properties: {
       radioGroup: 'ch.sbb.geschosse-layer',
+      parent: geschosseLayer,
     },
   });
 });
