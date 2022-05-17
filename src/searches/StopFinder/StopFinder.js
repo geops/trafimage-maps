@@ -22,7 +22,7 @@ class StopFinder extends Search {
     return fetch(
       `${this.stopsUrl}?&q=${encodeURIComponent(value)}&key=${
         this.apiKey
-      }&limit=50`,
+      }&limit=50&ref_location=46.80121,8.226692&radius=100000`,
       {
         signal,
       },
