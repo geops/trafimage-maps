@@ -167,24 +167,26 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   name: 'ch.sbb.bahnhoffrequenzen',
   visible: false,
   mapboxLayer: dataLayer,
-  styleLayer: {
-    id: 'passagierfrequenzen',
-    type: 'circle',
-    source: 'stations',
-    filter: ['has', 'dwv'],
-    paint: {
-      'circle-radius': ['*', ['sqrt', ['/', ['get', 'dwv'], Math.PI]], 0.2], // Radius = (sqrt(passengers/Math.PI))*0.2 (0.2 is a constant)
-      'circle-color': 'rgb(255,220,0)',
-      'circle-stroke-width': 2,
-      'circle-stroke-color': 'rgb(255,220,0)',
-      'circle-opacity': [
-        'case',
-        ['boolean', ['feature-state', 'hover'], false],
-        1,
-        0.7,
-      ],
-    },
-  },
+  styleLayersFilter: ({ metadata }) =>
+    !!metadata && metadata['trafimage.filter'] === 'passagierfrequenzen',
+  // styleLayer: {
+  //   id: 'passagierfrequenzen',
+  //   type: 'circle',
+  //   source: 'stations',
+  //   filter: ['has', 'dwv'],
+  //   paint: {
+  //     'circle-radius': ['*', ['sqrt', ['/', ['get', 'dwv'], Math.PI]], 0.2], // Radius = (sqrt(passengers/Math.PI))*0.2 (0.2 is a constant)
+  //     'circle-color': 'rgb(255,220,0)',
+  //     'circle-stroke-width': 2,
+  //     'circle-stroke-color': 'rgb(255,220,0)',
+  //     'circle-opacity': [
+  //       'case',
+  //       ['boolean', ['feature-state', 'hover'], false],
+  //       1,
+  //       0.7,
+  //     ],
+  //   },
+  // },
   properties: {
     hasInfos: true,
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
@@ -207,16 +209,18 @@ bahnhofplaene.children = [
     name: 'ch.sbb.bahnhofplaene.interaktiv',
     visible: false,
     mapboxLayer: dataLayer,
-    styleLayer: {
-      id: 'interaktiv',
-      type: 'symbol',
-      source: 'stations',
-      filter: ['has', 'url_interactive_plan'],
-      layout: {
-        'icon-image': 'standort',
-        'icon-ignore-placement': true,
-      },
-    },
+    styleLayersFilter: ({ metadata }) =>
+      !!metadata && metadata['trafimage.filter'] === 'interaktiv',
+    // styleLayer: {
+    //   id: 'interaktiv',
+    //   type: 'symbol',
+    //   source: 'stations',
+    //   filter: ['has', 'url_interactive_plan'],
+    //   layout: {
+    //     'icon-image': 'standort',
+    //     'icon-ignore-placement': true,
+    //   },
+    // },
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
@@ -229,21 +233,23 @@ bahnhofplaene.children = [
     name: 'ch.sbb.bahnhofplaene.printprodukte',
     visible: false,
     mapboxLayer: dataLayer,
-    styleLayer: {
-      id: 'printprodukte',
-      type: 'symbol',
-      source: 'stations',
-      filter: [
-        'any',
-        ['has', 'url_a4'],
-        ['has', 'url_poster'],
-        ['has', 'url_shopping'],
-      ],
-      layout: {
-        'icon-image': 'standort',
-        'icon-ignore-placement': true,
-      },
-    },
+    styleLayersFilter: ({ metadata }) =>
+      !!metadata && metadata['trafimage.filter'] === 'printprodukte',
+    // styleLayer: {
+    //   id: 'printprodukte',
+    //   type: 'symbol',
+    //   source: 'stations',
+    //   filter: [
+    //     'any',
+    //     ['has', 'url_a4'],
+    //     ['has', 'url_poster'],
+    //     ['has', 'url_shopping'],
+    //   ],
+    //   layout: {
+    //     'icon-image': 'standort',
+    //     'icon-ignore-placement': true,
+    //   },
+    // },
     properties: {
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
@@ -316,23 +322,25 @@ export const platformsLayer = new PlatformsLayer({
 export const buslines = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.buslinien',
   mapboxLayer: dataLayer,
+  styleLayersFilter: ({ metadata }) =>
+    !!metadata && metadata['trafimage.filter'] === 'bus',
   visible: false,
-  styleLayer: {
-    id: 'bus',
-    type: 'line',
-    source: 'busses',
-    'source-layer': 'busses',
-    paint: {
-      'line-color': 'rgba(255, 220, 0, 1)',
-      'line-width': [
-        'case',
-        ['boolean', ['feature-state', 'hover'], false],
-        10,
-        3,
-      ],
-      'line-opacity': 1,
-    },
-  },
+  // styleLayer: {
+  //   id: 'bus',
+  //   type: 'line',
+  //   source: 'busses',
+  //   'source-layer': 'busses',
+  //   paint: {
+  //     'line-color': 'rgba(255, 220, 0, 1)',
+  //     'line-width': [
+  //       'case',
+  //       ['boolean', ['feature-state', 'hover'], false],
+  //       10,
+  //       3,
+  //     ],
+  //     'line-opacity': 1,
+  //   },
+  // },
   properties: {
     hasInfos: true,
     layerInfoComponent: 'BuslinesLayerInfo',
