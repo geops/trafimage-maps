@@ -114,7 +114,7 @@ class StationsLayer extends MapboxStyleLayer {
   // Query the rendered stations then add them to the source.
   updateSource() {
     const { mbMap } = this.mapboxLayer;
-    const source = mbMap.getSource(this.source.id);
+    const source = mbMap?.getSource(this.source.id);
 
     if (!this.osmPointsLayers || !source) {
       return;
