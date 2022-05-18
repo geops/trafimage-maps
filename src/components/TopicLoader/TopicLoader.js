@@ -109,9 +109,9 @@ class TopicLoader extends Component {
       permissionInfos !== prevProps.permissionInfos ||
       areTopicsReallyUpdated
     ) {
-      this.loadTopics(); // loadTopics calls updateServices and updateLayers
+      this.loadTopics(prevProps); // loadTopics calls updateServices and updateLayers
     } else if (
-      (activeTopic || {}).key !== (prevProps.activeTopic || {}).key ||
+      activeTopic?.key !== prevProps.activeTopic?.key ||
       (activeTopic &&
         (vectorTilesUrl !== prevProps.vectorTilesUrl ||
           apiKey !== prevProps.apiKey ||
@@ -121,22 +121,18 @@ class TopicLoader extends Component {
           staticFilesUrl !== prevProps.staticFilesUrl ||
           searchUrl !== prevProps.searchUrl))
     ) {
-      this.updateServices(activeTopic); // updateServices calls updateLayers
+      this.updateServices(activeTopic, prevProps); // updateServices calls updateLayers
     } else if (
       activeTopic &&
       (language !== prevProps.language ||
         apiKey !== prevProps.apiKey ||
         apiKeyName !== prevProps.apiKeyName)
     ) {
-      this.updateLayers(activeTopic.layers);
-    }
-
-    if (activeTopic !== prevProps.activeTopic) {
-      this.updateServices(activeTopic);
+      this.updateLayers(activeTopic.layers, prevProps);
     }
   }
 
-  loadTopics() {
+  loadTopics(prevProps) {
     const {
       topics,
       appBaseUrl,
@@ -176,10 +172,10 @@ class TopicLoader extends Component {
     visibleActiveTopic.active = true; // in case we fall back to the first topic.
     dispatchSetTopics(visibleTopics);
     dispatchSetActiveTopic(visibleActiveTopic);
-    this.updateServices(visibleActiveTopic);
+    this.updateServices(visibleActiveTopic, prevProps);
   }
 
-  updateServices(activeTopic) {
+  updateServices(activeTopic, prevProps) {
     const {
       t,
       apiKey,
@@ -191,7 +187,7 @@ class TopicLoader extends Component {
     } = this.props;
 
     if (!activeTopic) {
-      this.updateLayers([]);
+      this.updateLayers([], prevProps);
       dispatchSetSearchService();
       return;
     }
@@ -211,7 +207,7 @@ class TopicLoader extends Component {
       });
     }
 
-    this.updateLayers(activeTopic.layers);
+    this.updateLayers(activeTopic.layers, prevProps);
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || {});
@@ -226,7 +222,7 @@ class TopicLoader extends Component {
     dispatchSetSearchService(newSearchService);
   }
 
-  updateLayers(topicLayers) {
+  updateLayers(topicLayers, prevProps) {
     const {
       apiKey,
       apiKeyName,
@@ -288,15 +284,18 @@ class TopicLoader extends Component {
 
     const flatLayers = layerService.getLayersAsFlatArray();
     for (let i = 0; i < flatLayers.length; i += 1) {
+      // TODO: seems unused so should we remove it?
       if (flatLayers[i].setGeoServerUrl) {
         flatLayers[i].setGeoServerUrl(`${appBaseUrl}/geoserver/trafimage/ows`);
       }
 
+      // TODO: seems unused so should we remove it?
       if (flatLayers[i].setGeoServerWMSUrl) {
         flatLayers[i].setGeoServerWMSUrl(
           `${appBaseUrl}/geoserver/trafimage/ows/service/wms`,
         );
       }
+      // TODO: seems unused so should we remove it?
       if (flatLayers[i].setGeoJsonUrl) {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       }
@@ -321,6 +320,16 @@ class TopicLoader extends Component {
       }
     }
 
+    // Add layers to the map only when a topic is activated or changed.
+    // Very important otherwise style are loaded multiple time son load.
+    if (
+      !activeTopic ||
+      prevProps?.activeTopic?.key === activeTopic.key ||
+      prevProps?.prevLayers?.map((layer) => layer.key).join() ===
+        layers?.map((layer) => layer.key).join()
+    ) {
+      return;
+    }
     dispatchSetLayers(layers);
   }
 

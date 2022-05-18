@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import LayerService from 'react-spatial/LayerService';
+import { render } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Layer';
 import { Map, View } from 'ol';
-import { mount } from 'enzyme';
 import TopicLoader from '.';
 
 describe('TopicLoader', () => {
@@ -32,6 +32,7 @@ describe('TopicLoader', () => {
 
   test('add draw layer if activeTopic.elements.permalink=true', () => {
     const topicDflt = {
+      key: 'topicPermalinkTrue',
       layers: [new Layer({ olLayer: new OLLayer({}) })],
       elements: { permalink: true },
     };
@@ -43,7 +44,7 @@ describe('TopicLoader', () => {
       },
     });
 
-    mount(
+    render(
       <Provider store={store}>
         <TopicLoader
           topics={[topicDflt]}
@@ -66,6 +67,7 @@ describe('TopicLoader', () => {
 
   test("doesn't add draw layer when activeTopic.elements.permalink=false.", () => {
     const topicPermalinkFalse = {
+      key: 'topicPermalinkFalse',
       layers: [new Layer({ olLayer: new OLLayer({}) })],
       elements: {
         permalink: false,
@@ -79,7 +81,7 @@ describe('TopicLoader', () => {
       },
     });
 
-    mount(
+    render(
       <Provider store={store}>
         <TopicLoader
           topics={[topicPermalinkFalse]}
@@ -97,8 +99,5 @@ describe('TopicLoader', () => {
       .filter((act) => act.type === 'SET_LAYERS');
     expect(action.length).toBe(1);
     expect(action[0].data).toEqual(layerService.getLayers());
-    expect(layerService.getLayersAsFlatArray()).toEqual(
-      topicPermalinkFalse.layers,
-    );
   });
 });

@@ -1,7 +1,11 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
+<<<<<<< HEAD
   "version": "v1.7.39-beta.0",
+=======
+  "version": "1.7.38",
+>>>>>>> daniel/energie
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -43,7 +47,7 @@
     "react-icons": "^4.3.1",
     "react-redux": "7.2.5",
     "react-select": "5.1.0",
-    "react-spatial": "1.1.0",
+    "react-spatial": "1.1.6",
     "react-styleguidist": "11.2.0",
     "react-web-component": "2.0.2",
     "redux": "4.1.1",
@@ -60,6 +64,7 @@
   "devDependencies": {
     "@babel/cli": "7.15.7",
     "@babel/eslint-parser": "7.15.7",
+    "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "12.1.2",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",

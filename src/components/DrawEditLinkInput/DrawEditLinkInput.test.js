@@ -1,10 +1,8 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import { mount } from 'enzyme';
+import { render, waitFor } from '@testing-library/react';
 import DrawEditLinkInput from '.';
 
 describe('DrawEditLinkInput', () => {
@@ -17,13 +15,12 @@ describe('DrawEditLinkInput', () => {
         map: {},
         app: {},
       });
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <DrawEditLinkInput />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toBe('');
     });
   });
 
@@ -34,15 +31,12 @@ describe('DrawEditLinkInput', () => {
         drawEditLink: 'http://foo.ch',
       },
     });
-    let wrapper;
-    await act(async () => {
-      wrapper = mount(
-        <Provider store={store}>
-          <DrawEditLinkInput />
-        </Provider>,
-      );
-    });
-    wrapper.update();
-    expect(wrapper.find('input').props().value).toBe('http://foo.ch');
+    const { container } = render(
+      <Provider store={store}>
+        <DrawEditLinkInput />
+      </Provider>,
+    );
+    await waitFor(() => container.querySelector('input').value);
+    expect(container.querySelector('input').value).toBe('http://foo.ch');
   });
 });

@@ -10,7 +10,7 @@
         // On IE only lowercase attribute are detected.
         map.setAttribute(attr.toLowerCase(), val);
       };
-      fetch('https://developer.geops.io/publickey')
+      fetch('https://backend.developer.geops.io/publickey')
         .then(function(response) {
           return response.json();
         })

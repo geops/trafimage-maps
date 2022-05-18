@@ -142,7 +142,7 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
         anchor={isMobile ? 'bottom' : 'right'}
         open
         onClose={() => {
-          dispatch(setFeatureInfo([]));
+          dispatch(setFeatureInfo());
         }}
         ModalProps={{
           disableEnforceFocus: true,

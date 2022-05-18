@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { Map, View } from 'ol';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import Dialog from './Dialog';
 
 describe('Dialog', () => {
@@ -20,12 +20,12 @@ describe('Dialog', () => {
   });
 
   test('should match snapshot.', () => {
-    const component = mount(
+    const component = render(
       <Provider store={store}>
         <Dialog map={map} name="foo" />
       </Provider>,
     );
-    expect(component.html()).toMatchSnapshot();
+    expect(component.container.innerHTML).toMatchSnapshot();
   });
 
   // TODO: test focus document.activeElement on popup close
