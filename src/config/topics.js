@@ -10,12 +10,16 @@ import constructionLayers from './ch.sbb.construction';
 import handicapLayers from './ch.sbb.handicap';
 import casaLayers from './ch.sbb.casa';
 import infrastrukturLayers, {
-  kilometrageLayer,
   netzkarteEisenbahninfrastruktur,
   betriebsRegionenVisible,
 } from './ch.sbb.infrastruktur';
 import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
 import showcaseslayers from './ch.sbb.showcases';
+import regionenkarteLayers from './ch.sbb.regionenkarte.public';
+import netzentwicklungLayers from './ch.sbb.netzentwicklung';
+import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
+import isbLayers from './ch.sbb.isb';
+import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 
 import {
   zweitausbildungAbroad,
@@ -24,25 +28,6 @@ import {
   zweitausbildungStations,
   zweitausbildungStationsDataLayer,
   zweitausbildungPoisDataLayer,
-  anlagenverantwortliche,
-  regionenkartePublicSegment,
-  regionenkarteOverlayGroup,
-  netzentwicklungDataLayer,
-  netzentwicklungStrategischLayer,
-  netzentwicklungProgrammManagerLayer,
-  netzentwicklungSkPlanerLayer,
-  beleuchtungDataLayer,
-  beleuchtungstaerken1Layer,
-  beleuchtungstaerken2aLayer,
-  beleuchtungstaerken2bLayer,
-  beleuchtungstaerken3Layer,
-  beleuchtungstaerken4Layer,
-  beleuchtungstaerkenSchutzgebieteLayer,
-  beleuchtungstaerkenBundesInventareLayer,
-  netzkarteIsb,
-  isbOther,
-  isbTVS,
-  geschosseLayer,
 } from './layers';
 
 import defaultSearches, { handicapStopFinder } from './searches';
@@ -76,7 +61,7 @@ export const netzkarte = {
     shareMenu: true,
     trackerMenu: true,
   },
-  layers: [...netzkarteLayers],
+  layers: netzkarteLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
@@ -90,7 +75,7 @@ export const handicap = {
     shareMenu: true,
     popup: true,
   },
-  layers: [...handicapLayers],
+  layers: handicapLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
@@ -135,7 +120,7 @@ export const bauprojekte = {
     filter: true,
     filters: true,
   },
-  layers: [...constructionLayers],
+  layers: constructionLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
   searches: defaultSearches,
@@ -179,12 +164,7 @@ export const regionenkartePublic = {
     popup: true,
     overlay: true,
   },
-  layers: [
-    anlagenverantwortliche,
-    regionenkarteOverlayGroup,
-    regionenkartePublicSegment,
-    kilometrageLayer,
-  ],
+  layers: regionenkarteLayers,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
   searches: defaultSearches,
 };
@@ -252,13 +232,7 @@ export const netzentwicklung = {
   key: 'ch.sbb.netzentwicklung',
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
-  layers: [
-    kilometrageLayer,
-    netzentwicklungDataLayer,
-    netzentwicklungStrategischLayer,
-    netzentwicklungProgrammManagerLayer,
-    netzentwicklungSkPlanerLayer,
-  ],
+  layers: netzentwicklungLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzentwicklungTopicInfo',
   searches: defaultSearches,
@@ -269,16 +243,7 @@ export const beleuchtungsstaerken = {
   key: 'ch.sbb.beleuchtungsstaerken',
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    beleuchtungDataLayer,
-    beleuchtungstaerkenBundesInventareLayer,
-    beleuchtungstaerkenSchutzgebieteLayer,
-    beleuchtungstaerken4Layer,
-    beleuchtungstaerken3Layer,
-    beleuchtungstaerken2bLayer,
-    beleuchtungstaerken2aLayer,
-    beleuchtungstaerken1Layer,
-  ],
+  layers: beleuchtungLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'BeleuchtungTopicInfo',
   searches: defaultSearches,
@@ -293,7 +258,7 @@ export const isb = {
     shareMenu: true,
     popup: true,
   },
-  layers: [kilometrageLayer, netzkarteIsb, isbOther, isbTVS],
+  layers: isbLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'IsbTopicInfo',
   searches: defaultSearches,
@@ -302,7 +267,7 @@ export const isb = {
 const sandbox = {
   name: 'ch.sbb.netzkarte.sandbox',
   key: 'ch.sbb.netzkarte.sandbox',
-  layers: [dataLayer, netzkarteLayer, geschosseLayer],
+  layers: sandboxLayers,
   projection: 'EPSG:3857',
   elements: {
     ...defaultElements,
