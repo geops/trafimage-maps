@@ -7,7 +7,7 @@ import ZweitausbildungRoutesLayer from '../../layers/ZweitausbildungRoutesLayer'
 import ZweitausbildungRoutesHighlightLayer from '../../layers/ZweitausbildungRoutesHighlightLayer';
 
 export const zweitausbildungDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.zweitausbildung_stations',
+  name: 'ch.sbb.zweitausbildung',
   visible: true,
   isQueryable: false,
   preserveDrawingBuffer: true,
