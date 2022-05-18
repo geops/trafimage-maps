@@ -62,7 +62,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
             {unterkategorie ? (
               <span className={classes.subtitle}>
                 {' - '}
-                {t(`${unterkategorie}`)}
+                {t(`${unterkategorie.trim()}`)}
               </span>
             ) : (
               ''
@@ -78,7 +78,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
             {unterkategorie ? (
               <span className={classes.subtitle}>
                 {' - '}
-                {t(`${unterkategorie}`)}
+                {t(`${unterkategorie.trim()}`)}
               </span>
             ) : (
               ''
