@@ -4,12 +4,10 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import KilometrageLayer from '../layers/KilometrageLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
-import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
 import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
 import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
 import LevelLayer from '../layers/LevelLayer';
@@ -31,19 +29,6 @@ proj4.defs(
 
 register(proj4);
 
-export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.tarifverbundkarte.data',
-  visible: true,
-  preserveDrawingBuffer: true,
-  isBaseLayer: true,
-  isQueryable: false,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'ch.sbb.tarifverbund',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
 export const beleuchtungDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.beleuchtungsstaerken.data',
   visible: true,
@@ -57,71 +42,6 @@ export const beleuchtungDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.night',
-  key: 'ch.sbb.netzkarte.night',
-  visible: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_dark_v2',
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.netzkarte.night-desc',
-    radioGroup: 'showcases',
-  },
-});
-
-export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.light',
-  key: 'ch.sbb.netzkarte.light',
-  visible: true,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'showcase3',
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.netzkarte.light-desc',
-    radioGroup: 'showcases',
-  },
-});
-
-export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.layer',
-  key: 'ch.sbb.netzkarte.layer',
-  visible: false,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2',
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.netzkarte-desc',
-    radioGroup: 'showcases',
-  },
-});
-
-export const kilometrageLayer = new KilometrageLayer({
-  name: 'ch.sbb.kilometrage',
-  key: 'ch.sbb.kilometrage',
-  visible: true,
-  properties: {
-    hideInLegend: true,
-    featureInfoEventTypes: ['singleclick'],
-    useOverlay: false,
-    popupComponent: 'KilometragePopup',
-  },
-});
-
-export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
-  name: 'ch.sbb.infrastruktur',
-  isBaseLayer: true,
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur_v3',
-});
-
 export const netzkarteIsb = new TrafimageMapboxLayer({
   name: 'ch.sbb.isb',
   isBaseLayer: true,
@@ -130,170 +50,6 @@ export const netzkarteIsb = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber',
-});
-
-export const betriebsRegionen = new MapboxStyleLayer({
-  name: 'ch.sbb.betriebsregionen',
-  visible: false,
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => /pattern_/.test(id),
-  properties: {
-    hasInfos: true,
-    useOverlay: true,
-    popupComponent: 'BetriebsRegionenPopup',
-    layerInfoComponent: 'BetriebsRegionenLayerInfo',
-  },
-});
-
-// Clone layer to set visibility true by default for appName="betriebsregionen" [TRAFDIV-421]
-export const betriebsRegionenVisible = new MapboxStyleLayer({
-  name: 'ch.sbb.betriebsregionen',
-  visible: true,
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => /pattern_/.test(id),
-  properties: {
-    hasInfos: true,
-    useOverlay: true,
-    popupComponent: 'BetriebsRegionenPopup',
-    layerInfoComponent: 'BetriebsRegionenLayerInfo',
-  },
-});
-
-export const tochtergesellschaftenSBB = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastruktur.tochtergesellschaften.group',
-  visible: true,
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => {
-    // negative look behind regex doesn"t work on all browsers.
-    return /_SBB/.test(id) && id.indexOf('_only_') === -1;
-  },
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.infrastruktur.tochtergesellschaften.group-desc',
-  },
-});
-
-export const gewässer = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastruktur.gewaesser.group',
-  visible: true,
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: (styleLayer) => {
-    return /waters/.test(styleLayer.id);
-  },
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.infrastruktur.gewaesser.group-desc',
-  },
-});
-
-export const uebrigeBahnen = new MapboxStyleLayer({
-  name: 'ch.sbb.infrastruktur.uebrigebahnen.group',
-  visible: true,
-  mapboxLayer: netzkarteEisenbahninfrastruktur,
-  styleLayersFilter: ({ id }) => {
-    // negative look behind regex doesn"t work on all browsers.
-    return /_KTU/.test(id) && id.indexOf('_only_') === -1;
-  },
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.infrastruktur.uebrigebahnen.group-desc',
-  },
-});
-
-export const grenzen = new Layer({
-  name: 'ch.sbb.infrastruktur.grenzen.group',
-  visible: false,
-  isQueryable: false,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.infrastruktur.grenzen.group',
-  },
-  children: [
-    new Layer({
-      name: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
-      visible: false,
-      isQueryable: false,
-      properties: {
-        hasInfos: true,
-        description: 'ch.sbb.infrastruktur.gemeindegrenzen.group-desc',
-      },
-      children: [
-        new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
-          visible: false,
-          isQueryable: false,
-          mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Gemeinde|border_Gemeinde-IMAGICO)$/.test(
-              styleLayer.id,
-            );
-          },
-          properties: {
-            hasInfos: true,
-            description: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
-          },
-        }),
-        new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
-          visible: false,
-          isQueryable: false,
-          mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Gemeinde-Grey|border_Gemeinde-IMAGICO-Grey)$/.test(
-              styleLayer.id,
-            );
-          },
-          properties: {
-            hasInfos: true,
-            description: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
-          },
-        }),
-      ],
-    }),
-    new Layer({
-      name: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
-      visible: false,
-      isQueryable: false,
-      properties: {
-        hasInfos: true,
-        description: 'ch.sbb.infrastruktur.kantonsgrenzen.group-desc',
-      },
-      children: [
-        new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
-          visible: false,
-          isQueryable: false,
-          mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Kanton|border_Kanton-IMAGICO)$/.test(styleLayer.id);
-          },
-          properties: {
-            hasInfos: true,
-            description: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
-          },
-        }),
-        new MapboxStyleLayer({
-          name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
-          visible: false,
-          isQueryable: false,
-          mapboxLayer: netzkarteEisenbahninfrastruktur,
-          styleLayersFilter: (styleLayer) => {
-            return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
-              styleLayer.id,
-            );
-          },
-          properties: {
-            hasInfos: true,
-            description: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
-          },
-        }),
-      ],
-    }),
-  ],
 });
 
 export const zweitausbildungAbroad = new ZweitausbildungAbroadLayer({
@@ -577,16 +333,6 @@ export const zweitausbildungRoutes = new Layer({
       ],
     }),
   ],
-});
-
-export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
-  mapboxLayer: tarifverbundkarteDataLayer,
-  visible: true,
-  properties: {
-    hideInLegend: true,
-    useOverlay: true,
-    popupComponent: 'TarifverbundkartePopup',
-  },
 });
 
 export const anlagenverantwortliche = new TrafimageMapboxLayer({

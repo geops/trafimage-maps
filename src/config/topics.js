@@ -1,37 +1,29 @@
 import { getCenter } from 'ol/extent';
-import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import StationsLayer from '../layers/StationsLayer';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
   stationsLayer,
   bahnhofplaene,
-  swisstopoSwissImage,
 } from './ch.sbb.netzkarte';
 import constructionLayers from './ch.sbb.construction';
 import handicapLayers from './ch.sbb.handicap';
+import casaLayers from './ch.sbb.casa';
+import infrastrukturLayers, {
+  kilometrageLayer,
+  netzkarteEisenbahninfrastruktur,
+  betriebsRegionenVisible,
+} from './ch.sbb.infrastruktur';
+import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
+import showcaseslayers from './ch.sbb.showcases';
 
 import {
-  netzkarteShowcasesNight,
-  netzkarteShowcasesLight,
-  netzkarteShowcasesNetzkarte,
-  kilometrageLayer,
-  grenzen,
-  tochtergesellschaftenSBB,
-  gewässer,
-  uebrigeBahnen,
-  betriebsRegionen,
-  betriebsRegionenVisible,
-  netzkarteEisenbahninfrastruktur,
   zweitausbildungAbroad,
   zweitausbildungPois,
   zweitausbildungRoutes,
   zweitausbildungStations,
   zweitausbildungStationsDataLayer,
   zweitausbildungPoisDataLayer,
-  tarifverbundkarteDataLayer,
-  tarifverbundkarteLayer,
   anlagenverantwortliche,
   regionenkartePublicSegment,
   regionenkarteOverlayGroup,
@@ -54,6 +46,13 @@ import {
 } from './layers';
 
 import defaultSearches, { handicapStopFinder } from './searches';
+
+// For backward compatibility
+export {
+  casaDataLayerWithoutLabels,
+  casaNetzkarteLayerWithLabels,
+  casaNetzkarteLayerWithoutLabels,
+} from './ch.sbb.casa';
 
 const defaultElements = {
   header: true,
@@ -107,57 +106,10 @@ export const netzkarteStelen = {
   projection: 'EPSG:3857',
 };
 
-export const casaDataLayerWithoutLabels = dataLayer.clone({
-  filters: [
-    {
-      field: 'type',
-      value: /symbol|circle/,
-      include: false,
-    },
-  ],
-});
-
-export const casaNetzkarteLayerWithoutLabels = netzkarteLayer.clone({
-  mapboxLayer: casaDataLayerWithoutLabels,
-});
-
-const casaSwisstopoSwissImage = swisstopoSwissImage.clone({
-  mapboxLayer: casaDataLayerWithoutLabels,
-});
-
-export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.labels',
-  visible: true,
-  style: 'base_bright_v2',
-  filters: [
-    {
-      field: 'type',
-      value: /symbol|circle/i,
-      include: true,
-    },
-  ],
-  zIndex: 2,
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-// Add stations (blue style on hover) to labelsDataLayer.
-const casaNetzkarteStationsLayer = new StationsLayer({
-  name: 'ch.sbb.netzkarte.stationen.casa',
-  mapboxLayer: casaNetzkarteLayerWithLabels,
-});
-
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [
-    casaDataLayerWithoutLabels,
-    casaNetzkarteLayerWithoutLabels,
-    casaSwisstopoSwissImage,
-    casaNetzkarteLayerWithLabels,
-    casaNetzkarteStationsLayer,
-  ],
+  layers: casaLayers,
   projection: 'EPSG:3857',
   popupConfig: {
     getPopupCoordinates: (feature, map) => {
@@ -198,15 +150,7 @@ export const infrastruktur = {
     shareMenu: true,
     popup: true,
   },
-  layers: [
-    netzkarteEisenbahninfrastruktur,
-    uebrigeBahnen,
-    tochtergesellschaftenSBB,
-    grenzen,
-    gewässer,
-    betriebsRegionen,
-    kilometrageLayer,
-  ],
+  layers: infrastrukturLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
   searches: defaultSearches,
@@ -249,7 +193,7 @@ export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
-  layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
+  layers: tarifverbundkarteLayers,
   maxZoom: 12,
   exportConfig: {
     publisher: 'tobias.hauser@sbb.ch',
@@ -277,11 +221,7 @@ export const showcases = {
     ...defaultElements,
     baseLayerSwitcher: false,
   },
-  layers: [
-    netzkarteShowcasesNight,
-    netzkarteShowcasesLight,
-    netzkarteShowcasesNetzkarte,
-  ],
+  layers: showcaseslayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
