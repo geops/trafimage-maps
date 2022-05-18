@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@material-ui/core';
-import { setSearchOpen } from '../../model/app/actions';
+import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
@@ -66,6 +66,7 @@ function Search() {
             searchService.highlight(suggestion)
           }
           onSuggestionSelected={(e, { suggestion }) => {
+            dispatch(setFeatureInfo());
             searchService.select(suggestion);
             dispatch(setSearchOpen(false));
           }}

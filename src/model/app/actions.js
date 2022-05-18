@@ -44,28 +44,34 @@ export const setLanguage = (data) => {
 };
 export const setProjection = (data) => ({ type: SET_PROJECTION, data });
 
-export const setFeatureInfo = (data) => (dispatch, getState) => {
-  const {
-    app: { featureInfo },
-  } = getState();
+export const setFeatureInfo =
+  (data = []) =>
+  (dispatch, getState) => {
+    const {
+      app: { searchService, featureInfo },
+    } = getState();
 
-  if (!data.length) {
-    // Clean previous highlight and select styles.
-    featureInfo.forEach(({ layer }) => {
-      if (layer.highlight) {
-        layer.highlight([]);
-      }
-      if (layer.select) {
-        layer.select([]);
-      }
+    if (!data.length) {
+      // Clean previous highlight and select styles.
+      featureInfo.forEach(({ layer }) => {
+        if (layer.highlight) {
+          layer.highlight([]);
+        }
+        if (layer.select) {
+          layer.select([]);
+        }
+      });
+    } else if (searchService) {
+      // Never display 2 different highlights at the same time.
+      searchService.clearHighlight();
+      searchService.clearSelect();
+    }
+
+    dispatch({
+      type: SET_FEATURE_INFO,
+      data,
     });
-  }
-
-  dispatch({
-    type: SET_FEATURE_INFO,
-    data,
-  });
-};
+  };
 
 export const setMenuOpen = (data) => ({ type: SET_MENU_OPEN, data });
 

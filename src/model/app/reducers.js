@@ -78,7 +78,7 @@ const getInitialState = () => ({
     controls: [],
     interactions: dftlInteractions,
   }),
-  layerService: new LayerService(),
+  layerService: new LayerService([]),
   searchService: new SearchService(),
   screenWidth: null,
   drawIds: null,

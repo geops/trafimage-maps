@@ -16,7 +16,7 @@ class ZweitausbildungAbroadPopup extends PureComponent {
   componentDidMount() {
     const { feature, dispatchSetFeatureInfo } = this.props;
     window.open(feature.get('url'), '_blank');
-    dispatchSetFeatureInfo([]);
+    dispatchSetFeatureInfo();
   }
 
   render() {

@@ -48,6 +48,7 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
 
   setStaticFilesUrl(staticFilesUrl) {
     this.staticFilesUrl = staticFilesUrl;
+    this.olLayer.changed();
   }
 
   style(feature, resolution) {

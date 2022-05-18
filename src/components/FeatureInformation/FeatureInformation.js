@@ -281,7 +281,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
               className="wkp-close-bt"
               title={t('Popup schliessen')}
               onClick={() => {
-                dispatch(setFeatureInfo([]));
+                dispatch(setFeatureInfo());
                 onCloseBtClick();
               }}
             >

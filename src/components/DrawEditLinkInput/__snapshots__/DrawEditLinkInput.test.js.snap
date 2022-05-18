@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`DrawEditLinkInput should match snapshot. return null if no admin_id value 1`] = `null`;
