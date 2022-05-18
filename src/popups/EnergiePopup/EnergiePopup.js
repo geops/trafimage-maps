@@ -8,6 +8,7 @@ import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
 import { Divider, Typography } from '@material-ui/core';
 import { energieleitungenColorMapping } from '../../utils/constants';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 import PersonCard from '../../components/PersonCard';
 
@@ -57,7 +58,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
         <>
           <div className={`${classes.unterwerk} ${classes.icon}`} />
           <div className={classes.label}>
-            {label || t('Unterwerk')}
+            {capitalizeFirstLetter(label || t('Unterwerk'))}
             {unterkategorie ? (
               <span className={classes.subtitle}>
                 {' - '}
@@ -73,7 +74,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
         <>
           <div className={`${classes.produktionsanlage} ${classes.icon}`} />
           <div className={classes.label}>
-            {label || t('Produktionsanlage')}
+            {capitalizeFirstLetter(label || t('Produktionsanlage'))}
             {unterkategorie ? (
               <span className={classes.subtitle}>
                 {' - '}
@@ -156,7 +157,7 @@ const EnergiePopup = ({ feature }) => {
         />
       ) : (
         <Typography className={classes.title}>
-          <b>{t('Leitung')}</b>
+          <b>{t('Übertragungsleitung')}</b>
         </Typography>
       )}
       <Divider className={classes.divider} />

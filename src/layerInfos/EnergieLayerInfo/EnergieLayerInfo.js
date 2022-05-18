@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { energieleitungenColorMapping } from '../../utils/constants';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 import { EnergiePopupSubtitle } from '../../popups/EnergiePopup/EnergiePopup';
 
@@ -51,8 +52,10 @@ const InfoBody = ({ name, t }) => {
     return (
       <EnergiePopupSubtitle
         kategorie="UW"
-        label={t(
-          'Unterwerke (UW), fahrbare Unterwerke (fUW), Autrotrafo (AT) Schaltposten 132kV (SP)',
+        label={capitalizeFirstLetter(
+          `${t(name)} (UW), ${t('fahrbare Unterwerke')} (fUW), ${t(
+            'Autrotrafo',
+          )} (AT), ${t('Schaltposten')} 132kV (SP)`,
         )}
       />
     );
@@ -62,8 +65,10 @@ const InfoBody = ({ name, t }) => {
     return (
       <EnergiePopupSubtitle
         kategorie="KW"
-        label={t(
-          'Kraftwerk (KW), Frequenzumfomer/Umrichter (FU/UR), Blindleistungskompensator (BLK)',
+        label={capitalizeFirstLetter(
+          `${t('Kraftwerk')} (KW), ${t(
+            'Frequenzumfomer/Umrichter',
+          )} (FU/UR),  ${t('Blindleistungskompensator')} (BLK)`,
         )}
       />
     );
