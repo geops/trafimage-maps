@@ -130,15 +130,20 @@ export const zweitausbildungPois = new Layer({
       visible: true,
       zIndex: 4,
       mapboxLayer: zweitausbildungDataLayer,
+      styleLayersFilter: ({ metadata }) => {
+        return (
+          !!metadata &&
+          /clusters\.no_railaway/.test(metadata['trafimage.filter'])
+        );
+      },
       properties: {
         useOverlay: true,
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
+          sourceId: 'clusters.no_railaway',
           filter: ['==', 'rail_away', false],
-          color: 'rgba(0, 61, 133, 0.8)',
-          icon: 'flag_blue',
           infos: {
             legend: [
               {
@@ -156,15 +161,19 @@ export const zweitausbildungPois = new Layer({
       visible: true,
       zIndex: 4,
       mapboxLayer: zweitausbildungDataLayer,
+      styleLayersFilter: ({ metadata }) => {
+        return (
+          !!metadata && /clusters\.railaway/.test(metadata['trafimage.filter'])
+        );
+      },
       properties: {
         useOverlay: true,
         popupComponent: 'ZweitausbildungPoisPopup',
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungSubLayerInfo',
         zweitausbildung: {
+          sourceId: 'clusters.railaway',
           filter: ['==', 'rail_away', true],
-          color: 'rgba(235, 0, 0, 0.8)',
-          icon: 'flag_red',
           infos: {
             legend: [
               {

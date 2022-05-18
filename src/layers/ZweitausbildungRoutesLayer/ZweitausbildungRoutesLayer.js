@@ -123,7 +123,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     super({
       ...options,
       styleLayers,
-      beforeId: 'ch.sbb.zweitausbildung_pois.railaway',
+      beforeId: 'ch.sbb.zweitausbildung_stations.aufbau.not.border',
     });
     this.property = property;
   }
