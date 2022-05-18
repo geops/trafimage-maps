@@ -203,7 +203,7 @@ punctuality.children = [
   }),
 ];
 
-export const netzkartePointLayer = new StationsLayer({
+export const stationsLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen',
   mapboxLayer: dataLayer,
 });
@@ -280,12 +280,23 @@ export const direktverbindungenLayer = new Layer({
     layerInfoComponent: 'DirektVerbindungenLayerInfo',
   },
 });
-
-export default [
+export const defaultBaseLayers = [
   dataLayer,
   netzkarteLayer,
   netzkarteNight,
   swisstopoSwissImage,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,
+];
+
+export default [
+  ...defaultBaseLayers,
+  punctuality,
+  stationsLayer,
+  platformsLayer,
+  passagierfrequenzen,
+  gemeindegrenzen,
+  buslines,
+  bahnhofplaene,
+  direktverbindungenLayer,
 ];

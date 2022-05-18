@@ -3,6 +3,7 @@ import { unByKey } from 'ol/Observable';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import AusbauLayer from '../../layers/AusbauLayer';
+import { netzkarteLayer, swisstopoSwissImage } from '../ch.sbb.netzkarte';
 
 export const constructionDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.construction.data',
@@ -285,3 +286,19 @@ export const constrClusters = new MapboxStyleLayer({
     );
   },
 });
+
+export default [
+  constructionDataLayer,
+  netzkarteLayer.clone({
+    mapboxLayer: constructionDataLayer,
+    style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.bauprojekte',
+  }),
+  swisstopoSwissImage.clone({
+    mapboxLayer: constructionDataLayer,
+    style:
+      'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.bauprojekte.swisstopo',
+  }),
+  constrUnterhalt,
+  constrAusbau,
+  constrClusters,
+];

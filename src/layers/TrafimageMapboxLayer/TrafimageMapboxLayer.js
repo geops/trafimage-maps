@@ -180,7 +180,6 @@ class TrafimageMapboxLayer extends MapboxLayer {
     for (let i = 0; i < renderedFeatures.length; i += 1) {
       const feature = renderedFeatures[i];
       if (feature.properties.cluster) {
-        console.log('icic');
         const source = this.mbMap.getSource(feature.layer.source);
         const { cluster_id: id, point_count: count } = feature.properties;
         // because Mapbox GL JS should be fast ...

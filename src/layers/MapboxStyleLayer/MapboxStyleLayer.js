@@ -5,7 +5,7 @@ import { MapboxStyleLayer as MTMapboxStyleLayer } from 'mobility-toolbox-js/ol';
  * The popup contains links to station plans, station coordinates
  * and links to timetable, services, shopping, handicap information.
  *
- * <img src="img/layers/NetzkartePointLayer/layer.png" alt="Layer preview" title="Layer preview">
+ * <img src="img/layers/stationsLayer/layer.png" alt="Layer preview" title="Layer preview">
  *
  * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/Layer%20js~Layer%20html}
  * @class

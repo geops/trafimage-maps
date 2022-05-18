@@ -2,35 +2,20 @@ import { getCenter } from 'ol/extent';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import StationsLayer from '../layers/StationsLayer';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
-import defaultBaseLayers, {
+import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
-  punctuality,
-  netzkartePointLayer,
-  platformsLayer,
-  passagierfrequenzen,
-  gemeindegrenzen,
-  buslines,
+  stationsLayer,
   bahnhofplaene,
-  direktverbindungenLayer,
   swisstopoSwissImage,
 } from './ch.sbb.netzkarte';
-
-import {
-  constrUnterhalt,
-  constrAusbau,
-  constrClusters,
-  constructionDataLayer,
-} from './ch.sbb.construction';
+import constructionLayers from './ch.sbb.construction';
+import handicapLayers from './ch.sbb.handicap';
 
 import {
   netzkarteShowcasesNight,
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
-  handicapDataLayer,
-  stuetzpunktBahnhoefe,
-  barrierfreierBahnhoefe,
-  nichtBarrierfreierBahnhoefe,
   kilometrageLayer,
   grenzen,
   tochtergesellschaftenSBB,
@@ -92,17 +77,7 @@ export const netzkarte = {
     shareMenu: true,
     trackerMenu: true,
   },
-  layers: [
-    ...defaultBaseLayers,
-    punctuality,
-    netzkartePointLayer,
-    platformsLayer,
-    passagierfrequenzen,
-    gemeindegrenzen,
-    buslines,
-    bahnhofplaene,
-    direktverbindungenLayer,
-  ],
+  layers: [...netzkarteLayers],
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
@@ -116,14 +91,7 @@ export const handicap = {
     shareMenu: true,
     popup: true,
   },
-  layers: [
-    ...defaultBaseLayers,
-    handicapDataLayer,
-    bahnhofplaene,
-    nichtBarrierfreierBahnhoefe,
-    barrierfreierBahnhoefe,
-    stuetzpunktBahnhoefe,
-  ],
+  layers: [...handicapLayers],
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
@@ -134,7 +102,7 @@ export const handicap = {
 export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte.topic',
   key: 'ch.sbb.netzkarte',
-  layers: [dataLayer, netzkarteLayer, netzkartePointLayer, bahnhofplaene],
+  layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
   elements: {},
   projection: 'EPSG:3857',
 };
@@ -215,21 +183,7 @@ export const bauprojekte = {
     filter: true,
     filters: true,
   },
-  layers: [
-    constructionDataLayer,
-    netzkarteLayer.clone({
-      mapboxLayer: constructionDataLayer,
-      style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.bauprojekte',
-    }),
-    swisstopoSwissImage.clone({
-      mapboxLayer: constructionDataLayer,
-      style:
-        'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.bauprojekte.swisstopo',
-    }),
-    constrUnterhalt,
-    constrAusbau,
-    constrClusters,
-  ],
+  layers: [...constructionLayers],
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
   searches: defaultSearches,

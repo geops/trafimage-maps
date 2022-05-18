@@ -31,18 +31,6 @@ proj4.defs(
 
 register(proj4);
 
-export const handicapDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.handicap.data',
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'ch.sbb.handicap',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
 export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.tarifverbundkarte.data',
   visible: true,
@@ -66,78 +54,6 @@ export const beleuchtungDataLayer = new TrafimageMapboxLayer({
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.beleuchtung',
   properties: {
     hideInLegend: true,
-  },
-});
-
-export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
-  name: 'ch.sbb.stuetzpunktbahnhoefe',
-  key: 'ch.sbb.stuetzpunktbahnhoefe',
-  visible: true,
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
-  styleLayer: {
-    id: 'ch.sbb.stuetzpunktbahnhoefe',
-    type: 'symbol',
-    source: 'ch.sbb.handicap',
-    'source-layer': 'ch.sbb.handicap',
-  },
-  properties: {
-    handicapType: 'stuetzpunkt',
-    hasInfos: true,
-    layerInfoComponent: 'HandicapLayerInfo',
-    popupComponent: 'HandicapPopup',
-    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  },
-  hidePopup: (feat, layer, featureInfo) => {
-    const otherFeatsClicked = featureInfo
-      .filter((info) => info.layer !== layer)
-      .map((info) => info.features)
-      .flat()
-      .map((f) => f.get('stationsbezeichnung'));
-
-    return otherFeatsClicked.includes(feat.get('stationsbezeichnung'));
-  },
-});
-
-export const barrierfreierBahnhoefe = new MapboxStyleLayer({
-  name: 'ch.sbb.barrierfreierbahnhoefe',
-  key: 'ch.sbb.barrierfreierbahnhoefe',
-  visible: true,
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ id }) => /^barrierefrei/.test(id),
-  styleLayer: {
-    id: 'ch.sbb.barrierfreierbahnhoefe',
-    type: 'symbol',
-    source: 'ch.sbb.handicap',
-    'source-layer': 'ch.sbb.handicap',
-  },
-  properties: {
-    handicapType: 'barrierfree',
-    hasInfos: true,
-    layerInfoComponent: 'HandicapLayerInfo',
-    popupComponent: 'HandicapPopup',
-    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  },
-});
-
-export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
-  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-  key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-  visible: true,
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
-  styleLayer: {
-    id: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-    type: 'symbol',
-    source: 'ch.sbb.handicap',
-    'source-layer': 'ch.sbb.handicap',
-  },
-  properties: {
-    handicapType: 'notBarrierfree',
-    hasInfos: true,
-    layerInfoComponent: 'HandicapLayerInfo',
-    popupComponent: 'HandicapPopup',
-    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 

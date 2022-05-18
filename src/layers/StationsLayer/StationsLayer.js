@@ -161,6 +161,10 @@ class StationsLayer extends MapboxStyleLayer {
     this.setHoverState(this.highlightedFeatures, false);
     this.setHoverState(this.selectedFeatures, false);
   }
+
+  clone(newOptions) {
+    return new StationsLayer({ ...this.options, ...newOptions });
+  }
 }
 
 export default StationsLayer;
