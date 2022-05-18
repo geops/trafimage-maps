@@ -296,7 +296,7 @@ export default [
   swisstopoSwissImage.clone({
     mapboxLayer: constructionDataLayer,
     style:
-      'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.bauprojekte.swisstopo',
+      'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.bauprojekte',
   }),
   constrUnterhalt,
   constrAusbau,

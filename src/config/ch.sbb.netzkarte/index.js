@@ -48,7 +48,7 @@ export const netzkarteNight = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'review-geops-tgma-a7je7m.base_dark_v2_ch.sbb.netzkarte.dark',
+  style: 'review-geops-tgma-a7je7m.base_dark_v2_ch.sbb.netzkarte',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
