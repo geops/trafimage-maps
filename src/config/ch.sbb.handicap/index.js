@@ -17,7 +17,7 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.handicap',
+  style: 'base_bright_v2_ch.sbb.handicap',
   properties: {
     hideInLegend: true,
   },
@@ -102,23 +102,23 @@ export default [
   handicapDataLayer,
   netzkarteLayer.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.handicap',
+    style: 'base_bright_v2_ch.sbb.handicap',
   }),
   netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'review-geops-tgma-a7je7m.base_dark_v2_ch.sbb.handicap',
+    style: 'base_dark_v2_ch.sbb.handicap',
   }),
   swisstopoSwissImage.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
   }),
   swisstopoLandeskarte.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
   }),
   swisstopoLandeskarteGrau.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
   }),
   stationsLayer.clone({
     mapboxLayer: handicapDataLayer,

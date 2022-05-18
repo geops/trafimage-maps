@@ -17,7 +17,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   isQueryable: false,
   preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.netzkarte',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
   },
@@ -35,7 +35,7 @@ export const netzkarteLayer = new MapboxStyleLayer({
   mapboxLayer: dataLayer,
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'perimeter_mask',
-  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.netzkarte',
+  style: 'base_bright_v2_ch.sbb.netzkarte',
 });
 
 export const netzkarteNight = new MapboxStyleLayer({
@@ -48,7 +48,7 @@ export const netzkarteNight = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'review-geops-tgma-a7je7m.base_dark_v2_ch.sbb.netzkarte',
+  style: 'base_dark_v2_ch.sbb.netzkarte',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
@@ -62,8 +62,7 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style:
-    'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo',
+  style: 'ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo',
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'swissimage',
 });
@@ -78,8 +77,7 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style:
-    'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo',
+  style: 'ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo',
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'pixelkarte_farbe',
 });
@@ -94,8 +92,7 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style:
-    'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo',
+  style: 'ch.swisstopo.backgrounds_ch.sbb.netzkarte.swisstopo',
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'pixelkarte_grau',
 });

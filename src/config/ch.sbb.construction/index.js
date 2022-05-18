@@ -12,7 +12,7 @@ export const constructionDataLayer = new TrafimageMapboxLayer({
   isBaseLayer: false,
   preserveDrawingBuffer: true,
   zIndex: -1,
-  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.bauprojekte',
+  style: 'base_bright_v2_ch.sbb.bauprojekte',
   properties: {
     hideInLegend: true,
   },
@@ -291,12 +291,11 @@ export default [
   constructionDataLayer,
   netzkarteLayer.clone({
     mapboxLayer: constructionDataLayer,
-    style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.bauprojekte',
+    style: 'base_bright_v2_ch.sbb.bauprojekte',
   }),
   swisstopoSwissImage.clone({
     mapboxLayer: constructionDataLayer,
-    style:
-      'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.bauprojekte',
+    style: 'ch.swisstopo.backgrounds_ch.sbb.bauprojekte',
   }),
   constrUnterhalt,
   constrAusbau,

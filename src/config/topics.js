@@ -1,3 +1,4 @@
+import './proj4';
 import { getCenter } from 'ol/extent';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import netzkarteLayers, {
@@ -20,16 +21,7 @@ import netzentwicklungLayers from './ch.sbb.netzentwicklung';
 import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
 import isbLayers from './ch.sbb.isb';
 import sandboxLayers from './ch.sbb.netzkarte.sandbox';
-
-import {
-  zweitausbildungAbroad,
-  zweitausbildungPois,
-  zweitausbildungRoutes,
-  zweitausbildungStations,
-  zweitausbildungStationsDataLayer,
-  zweitausbildungPoisDataLayer,
-} from './layers';
-
+import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import defaultSearches, { handicapStopFinder } from './searches';
 
 // For backward compatibility
@@ -212,16 +204,7 @@ export const zweitausbildung = {
   maxZoom: 13,
   hideInLayerTree: true,
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    dataLayer,
-    zweitausbildungStationsDataLayer,
-    zweitausbildungPoisDataLayer,
-    netzkarteLayer,
-    zweitausbildungAbroad,
-    zweitausbildungPois,
-    zweitausbildungRoutes,
-    zweitausbildungStations,
-  ],
+  layers: zweitausbildungLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'ZweitausbildungTopicInfo',
   searches: defaultSearches,
