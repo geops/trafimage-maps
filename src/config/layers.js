@@ -1,29 +1,19 @@
 import proj4 from 'proj4';
-import { unByKey } from 'ol/Observable';
 import { register } from 'ol/proj/proj4';
 import { Layer } from 'mobility-toolbox-js/ol';
 import GeometryType from 'ol/geom/GeometryType';
 import MapboxStyleLayer from '../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import KilometrageLayer from '../layers/KilometrageLayer';
-import netzkarte from '../img/netzkarte.png';
-import netzkarteNightImg from '../img/netzkarte_night.png';
-import landeskarte from '../img/landeskarte.png';
-import landeskarteGrau from '../img/landeskarte_grau.png';
-import luftbild from '../img/luftbild.png';
-import AusbauLayer from '../layers/AusbauLayer';
 import ZweitausbildungAbroadLayer from '../layers/ZweitausbildungAbroadLayer';
 import ZweitausbildungPoisLayer from '../layers/ZweitausbildungPoisLayer';
 import ZweitausbildungRoutesLayer from '../layers/ZweitausbildungRoutesLayer';
 import ZweitausbildungRoutesHighlightLayer from '../layers/ZweitausbildungRoutesHighlightLayer';
 import TarifverbundkarteLayer from '../layers/TarifverbundkarteLayer';
-import DirektverbindungenLayer from '../layers/DirektverbindungenLayer';
-import StationsLayer from '../layers/StationsLayer';
 import BeleuchtungsLayer from '../layers/BeleuchtungsLayer';
 import MapsGeoAdminLayer from '../layers/MapsGeoAdminLayer';
-import PlatformsLayer from '../layers/PlatformsLayer';
-import TralisLayer from '../layers/TralisLayer';
 import LevelLayer from '../layers/LevelLayer';
+import { dataLayer } from './ch.sbb.netzkarte';
 
 proj4.defs(
   'EPSG:21781',
@@ -40,18 +30,6 @@ proj4.defs(
 );
 
 register(proj4);
-
-export const dataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.data',
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.netzkarte',
-  properties: {
-    hideInLegend: true,
-  },
-});
 
 export const handicapDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.handicap.data',
@@ -91,284 +69,12 @@ export const beleuchtungDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const netzkarteLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.layer',
-  key: 'ch.sbb.netzkarte',
-  isBaseLayer: true,
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: netzkarte,
-  },
-  visible: true,
-  mapboxLayer: dataLayer,
-  styleLayersFilter: (styleLayer) => {
-    return /perimeter_mask$/.test(styleLayer.id);
-  },
-  style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.netzkarte',
-});
-
-export const netzkarteNight = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.dark',
-  key: 'ch.sbb.netzkarte.dark',
-  isBaseLayer: true,
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: netzkarteNightImg,
-  },
-  visible: false,
-  mapboxLayer: dataLayer,
-  style: 'review-geops-tgma-a7je7m.base_dark_v2_ch.sbb.netzkarte.dark',
-});
-
-export const swisstopoSwissImage = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.luftbild.group',
-  key: 'ch.sbb.netzkarte.luftbild.group',
-  isBaseLayer: true,
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: luftbild,
-  },
-  visible: false,
-  mapboxLayer: dataLayer,
-  styleLayersFilter: (styleLayer) => {
-    return /(swissimage|netzkarte)/.test(styleLayer.id);
-  },
-});
-
-export const swisstopoLandeskarte = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.landeskarte',
-  isBaseLayer: true,
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: landeskarte,
-  },
-  visible: false,
-  mapboxLayer: dataLayer,
-  styleLayersFilter: (styleLayer) => {
-    return /img_PK_farbe/.test(styleLayer.id);
-  },
-});
-
-export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.landeskarte.grau',
-  isBaseLayer: true,
-  properties: {
-    radioGroup: 'baseLayer',
-    previewImage: landeskarteGrau,
-  },
-  visible: false,
-  mapboxLayer: dataLayer,
-  styleLayersFilter: (styleLayer) => {
-    return /img_PK_grau/.test(styleLayer.id);
-  },
-});
-
-export const passagierfrequenzen = new MapboxStyleLayer({
-  name: 'ch.sbb.bahnhoffrequenzen',
-  visible: false,
-  mapboxLayer: dataLayer,
-  styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'passagierfrequenzen',
-  // styleLayer: {
-  //   id: 'passagierfrequenzen',
-  //   type: 'circle',
-  //   source: 'stations',
-  //   filter: ['has', 'dwv'],
-  //   paint: {
-  //     'circle-radius': ['*', ['sqrt', ['/', ['get', 'dwv'], Math.PI]], 0.2], // Radius = (sqrt(passengers/Math.PI))*0.2 (0.2 is a constant)
-  //     'circle-color': 'rgb(255,220,0)',
-  //     'circle-stroke-width': 2,
-  //     'circle-stroke-color': 'rgb(255,220,0)',
-  //     'circle-opacity': [
-  //       'case',
-  //       ['boolean', ['feature-state', 'hover'], false],
-  //       1,
-  //       0.7,
-  //     ],
-  //   },
-  // },
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'PassagierFrequenzenLayerInfo',
-    popupComponent: 'PassagierFrequenzenPopup',
-    useOverlay: true,
-  },
-});
-
-export const bahnhofplaene = new Layer({
-  name: 'ch.sbb.bahnhofplaene',
-  visible: false,
-  isQueryable: false,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.bahnhofplaene-desc',
-  },
-});
-bahnhofplaene.children = [
-  new MapboxStyleLayer({
-    name: 'ch.sbb.bahnhofplaene.interaktiv',
-    visible: false,
-    mapboxLayer: dataLayer,
-    styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata['trafimage.filter'] === 'interaktiv',
-    // styleLayer: {
-    //   id: 'interaktiv',
-    //   type: 'symbol',
-    //   source: 'stations',
-    //   filter: ['has', 'url_interactive_plan'],
-    //   layout: {
-    //     'icon-image': 'standort',
-    //     'icon-ignore-placement': true,
-    //   },
-    // },
-    properties: {
-      hasInfos: true,
-      description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
-      popupComponent: 'StationPopup',
-      radioGroup: 'bahnhofplaene',
-      useOverlay: true,
-    },
-  }),
-  new MapboxStyleLayer({
-    name: 'ch.sbb.bahnhofplaene.printprodukte',
-    visible: false,
-    mapboxLayer: dataLayer,
-    styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata['trafimage.filter'] === 'printprodukte',
-    // styleLayer: {
-    //   id: 'printprodukte',
-    //   type: 'symbol',
-    //   source: 'stations',
-    //   filter: [
-    //     'any',
-    //     ['has', 'url_a4'],
-    //     ['has', 'url_poster'],
-    //     ['has', 'url_shopping'],
-    //   ],
-    //   layout: {
-    //     'icon-image': 'standort',
-    //     'icon-ignore-placement': true,
-    //   },
-    // },
-    properties: {
-      hasInfos: true,
-      description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
-      popupComponent: 'StationPopup',
-      radioGroup: 'bahnhofplaene',
-      useOverlay: true,
-    },
-  }),
-];
-
-export const punctuality = new Layer({
-  name: 'ch.sbb.puenktlichkeit',
-  visible: false,
-  isQueryable: false,
-  properties: {
-    hasAccessibility: true,
-    hasInfos: true,
-    layerInfoComponent: 'PunctualityLayerInfo',
-  },
-});
-
-punctuality.children = [
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
-    name: 'ch.sbb.puenktlichkeit-nv',
-    visible: false,
-    useDelayStyle: true,
-    tenant: 'sbb',
-    minZoomNonTrain: 14,
-    regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
-    properties: {
-      radioGroup: 'ch.sbb.punctuality',
-    },
-  }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
-    name: 'ch.sbb.puenktlichkeit-fv',
-    visible: false,
-    useDelayStyle: true,
-    tenant: 'sbb',
-    minZoomNonTrain: 14,
-    regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
-    properties: {
-      radioGroup: 'ch.sbb.punctuality',
-    },
-  }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
-    name: 'ch.sbb.puenktlichkeit-all',
-    visible: false,
-    useDelayStyle: true,
-    tenant: 'sbb',
-    minZoomNonTrain: 14,
-    properties: {
-      radioGroup: 'ch.sbb.punctuality',
-    },
-  }),
-];
-
-export const netzkartePointLayer = new StationsLayer({
-  name: 'ch.sbb.netzkarte.stationen',
-  mapboxLayer: dataLayer,
-});
-
-export const platformsLayer = new PlatformsLayer({
-  name: 'ch.sbb.netzkarte.platforms',
-  mapboxLayer: dataLayer,
-});
-
-export const buslines = new MapboxStyleLayer({
-  name: 'ch.sbb.netzkarte.buslinien',
-  mapboxLayer: dataLayer,
-  styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'bus',
-  visible: false,
-  // styleLayer: {
-  //   id: 'bus',
-  //   type: 'line',
-  //   source: 'busses',
-  //   'source-layer': 'busses',
-  //   paint: {
-  //     'line-color': 'rgba(255, 220, 0, 1)',
-  //     'line-width': [
-  //       'case',
-  //       ['boolean', ['feature-state', 'hover'], false],
-  //       10,
-  //       3,
-  //     ],
-  //     'line-opacity': 1,
-  //   },
-  // },
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'BuslinesLayerInfo',
-    popupComponent: 'BusLinePopup',
-    useOverlay: true,
-  },
-});
-
-export const gemeindegrenzen = new MapboxStyleLayer({
-  name: 'ch.sbb.ch_gemeinden',
-  mapboxLayer: dataLayer,
-  visible: false,
-  isQueryable: false,
-  styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['trafimage.filter'] === 'municipality_borders',
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.ch_gemeinden-desc',
-  },
-});
-
 export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
   name: 'ch.sbb.stuetzpunktbahnhoefe',
   key: 'ch.sbb.stuetzpunktbahnhoefe',
   visible: true,
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /stuetzpunkt/.test(id),
   styleLayer: {
     id: 'ch.sbb.stuetzpunktbahnhoefe',
     type: 'symbol',
@@ -399,7 +105,6 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ id }) => /^barrierefrei/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /^barrierefrei/.test(id),
   styleLayer: {
     id: 'ch.sbb.barrierfreierbahnhoefe',
     type: 'symbol',
@@ -421,7 +126,6 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /^nicht_barrierefrei/.test(id),
   styleLayer: {
     id: 'ch.sbb.nichtbarrierfreierbahnhoefe',
     type: 'symbol',
@@ -492,347 +196,6 @@ export const kilometrageLayer = new KilometrageLayer({
   },
 });
 
-export const constructionDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.construction.data',
-  visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
-  zIndex: -1,
-  style: 'ch.sbb.bauprojekte',
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-export const constrAusbau = new AusbauLayer({
-  name: 'ch.sbb.construction.ausbau.group',
-  desc: 'ch.sbb.construction.ausbau.group-desc',
-  visible: true,
-  mapboxLayer: constructionDataLayer,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.construction.ausbau.group-desc',
-    filtersComponent: 'AusbauFilters',
-  },
-  children: [
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.ausbau.uebrige',
-      key: 'ch.sbb.construction.ausbau.uebrige',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /ausbau.uebrige/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /ausbau.uebrige/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Ausbau',
-          ort: 'Übrige Standorte',
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.ausbau.bahnhof_strecke',
-      key: 'ch.sbb.construction.ausbau.bahnhof_strecke',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /ausbau.bahnhof_strecke/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof_strecke/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Ausbau',
-          ort: 'Bahnhof und Strecke',
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.ausbau.strecke',
-      key: 'ch.sbb.construction.ausbau.strecke',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /ausbau.strecke/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /ausbau.strecke/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Ausbau',
-          ort: 'Strecke',
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.ausbau.bahnhof',
-      key: 'ch.sbb.construction.ausbau.bahnhof',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /ausbau.bahnhof$/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Ausbau',
-          ort: 'Bahnhof',
-        },
-      },
-    }),
-  ],
-});
-
-export const constrUnterhalt = new Layer({
-  name: 'ch.sbb.construction.unterhalt.group',
-  desc: 'ch.sbb.construction.unterhalt.group-desc',
-  visible: true,
-  isQueryable: false,
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.construction.unterhalt.group-desc',
-  },
-  children: [
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.unterhalt.uebrige',
-      key: 'ch.sbb.construction.unterhalt.uebrige',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /unterhalt.uebrige/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Übrige Standorte',
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-      key: 'ch.sbb.construction.unterhalt.bahnhof_strecke',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /unterhalt.bahnhof_strecke/.test(id),
-      queryRenderedLayersFilter: ({ id }) =>
-        /unterhalt.bahnhof_strecke/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Bahnhof und Strecke',
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.unterhalt.strecke',
-      key: 'ch.sbb.construction.unterhalt.strecke',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /unterhalt.strecke/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /unterhalt.strecke/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Strecke',
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction.unterhalt.bahnhof',
-      key: 'ch.sbb.construction.unterhalt.bahnhof',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
-      queryRenderedLayersFilter: ({ id }) => /unterhalt.bahnhof$/.test(id),
-      properties: {
-        hasInfos: true,
-        layerInfoComponent: 'ConstructionLayerInfo',
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-        construction: {
-          art: 'Unterhalt',
-          ort: 'Bahnhof',
-        },
-      },
-    }),
-  ],
-});
-
-let constrLayers = [];
-
-export const updateConstructions = (mbMap) => {
-  // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
-  mbMap.once('idle', () => {
-    const constrRendered = mbMap
-      .queryRenderedFeatures({
-        layers: constrLayers,
-      })
-      .map((feat) => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-    const source = mbMap.getSource('clusters');
-    if (source) {
-      source.setData({
-        type: 'FeatureCollection',
-        features: constrRendered,
-      });
-    }
-  });
-};
-
-const constrOlListenersKeys = [];
-constructionDataLayer.on('load', () => {
-  const { map, mbMap } = constructionDataLayer;
-  constrLayers = mbMap
-    .getStyle()
-    .layers.filter((layer) => {
-      return (
-        layer['source-layer'] === 'ch.sbb.bauprojekte' &&
-        /(ausbau|unterhalt)/.test(layer.id)
-      );
-    })
-    .map((layer) => layer.id);
-
-  if (!mbMap.getSource('clusters')) {
-    mbMap.addSource('clusters', {
-      type: 'geojson',
-      cluster: true,
-      clusterRadius: 75, // Radius of each cluster when clustering points.
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    });
-  }
-  updateConstructions(mbMap);
-
-  // Update clusters source on moveeend.
-  unByKey(constrOlListenersKeys);
-
-  constrOlListenersKeys.push(
-    map.on('moveend', () => {
-      updateConstructions(mbMap);
-    }),
-  );
-});
-
-// Re-render cluster when change construction layers visiblity.
-[constrAusbau, constrUnterhalt].forEach((parentLayer) => {
-  parentLayer.children.forEach((l) => {
-    l.on('change:visible', ({ target: layer }) => {
-      // Re-render only for children that contribute to the cluster
-      if (
-        layer.mapboxLayer &&
-        constructionDataLayer &&
-        constructionDataLayer.mbMap
-      ) {
-        updateConstructions(layer.mapboxLayer.mbMap);
-      }
-    });
-  });
-});
-
-export const constrClusters = new Layer({
-  name: 'ch.sbb.construction-clusters',
-  key: 'ch.sbb.construction-clusters',
-  visible: true,
-  isQueryable: false,
-  properties: {
-    hideInLegend: true,
-  },
-  children: [
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction-cluster-circle',
-      key: 'ch.sbb.construction-cluster-circle',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      properties: {
-        useOverlay: true,
-        popupComponent: 'ConstructionPopup',
-      },
-      styleLayer: {
-        id: 'constr-cluster-circle',
-        type: 'circle',
-        source: 'clusters',
-        maxzoom: 8,
-        paint: {
-          'circle-color': 'rgb(0, 61, 133)',
-          'circle-opacity': 0.8,
-          'circle-radius': [
-            'case',
-            ['has', 'point_count'],
-            [
-              'step',
-              ['get', 'point_count'],
-              19,
-              2,
-              20,
-              5,
-              22,
-              6,
-              26,
-              10,
-              30,
-              15,
-              40,
-            ],
-            16,
-          ],
-        },
-      },
-    }),
-    new MapboxStyleLayer({
-      name: 'ch.sbb.construction-cluster-number',
-      key: 'ch.sbb.construction-cluster-number',
-      visible: true,
-      mapboxLayer: constructionDataLayer,
-      styleLayer: {
-        id: 'constr-cluster-number',
-        type: 'symbol',
-        source: 'clusters',
-        maxzoom: 8,
-        layout: {
-          'text-field': [
-            'case',
-            ['has', 'point_count'],
-            ['get', 'point_count'],
-            '1',
-          ],
-          'text-font': ['Open Sans Bold', 'Arial Unicode MS Bold'],
-          'text-size': 13,
-        },
-        paint: {
-          'text-color': '#ffffff',
-        },
-      },
-    }),
-  ],
-});
-
 export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   name: 'ch.sbb.infrastruktur',
   isBaseLayer: true,
@@ -858,7 +221,6 @@ export const betriebsRegionen = new MapboxStyleLayer({
   visible: false,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ id }) => /pattern_/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
     useOverlay: true,
@@ -873,7 +235,6 @@ export const betriebsRegionenVisible = new MapboxStyleLayer({
   visible: true,
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ id }) => /pattern_/.test(id),
-  queryRenderedLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
     hasInfos: true,
     useOverlay: true,
@@ -1435,7 +796,6 @@ export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.programm_manager',
   mapboxLayer: netzentwicklungDataLayer,
   visible: false,
-  queryRenderedLayersFilter: ({ id }) => /programm_manager$/.test(id),
   styleLayersFilter: ({ id }) => /programm_manager$/.test(id),
   properties: {
     radioGroup: 'netzentwicklung',
@@ -1451,7 +811,6 @@ export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.sk_planer',
   mapboxLayer: netzentwicklungDataLayer,
   visible: true,
-  queryRenderedLayersFilter: ({ id }) => /sk_planer$/.test(id),
   styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
   properties: {
     radioGroup: 'netzentwicklung',
@@ -1467,7 +826,6 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.strategisch',
   mapboxLayer: netzentwicklungDataLayer,
   visible: false,
-  queryRenderedLayersFilter: ({ id }) => /strategisch$/.test(id),
   styleLayersFilter: ({ id }) => /strategisch$/.test(id),
   properties: {
     radioGroup: 'netzentwicklung',
@@ -1611,47 +969,6 @@ export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
   },
 });
 
-const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
-
-export const direktverbindungenDay = new DirektverbindungenLayer({
-  name: `${DIREKTVERBINDUNGEN_KEY}.day`,
-  mapboxLayer: dataLayer,
-  visible: false,
-  properties: {
-    routeType: 'day',
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
-    popupComponent: 'DirektverbindungPopup',
-    useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
-  },
-});
-
-export const direktverbindungenNight = new DirektverbindungenLayer({
-  name: `${DIREKTVERBINDUNGEN_KEY}.night`,
-  mapboxLayer: dataLayer,
-  visible: false,
-  properties: {
-    routeType: 'night',
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
-    popupComponent: 'DirektverbindungPopup',
-    useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
-  },
-});
-
-export const direktverbindungenLayer = new Layer({
-  name: DIREKTVERBINDUNGEN_KEY,
-  children: [direktverbindungenDay, direktverbindungenNight],
-  isQueryable: false,
-  visible: false,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenLayerInfo',
-  },
-});
-
 // Order is important for the legend
 // WARNING: use UPPER CASE for the key
 const shortToLongNameOther = {
@@ -1753,12 +1070,3 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
     },
   });
 });
-
-export default [
-  dataLayer,
-  netzkarteLayer,
-  netzkarteNight,
-  swisstopoSwissImage,
-  swisstopoLandeskarte,
-  swisstopoLandeskarteGrau,
-];

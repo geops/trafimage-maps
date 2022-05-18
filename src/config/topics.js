@@ -3,16 +3,27 @@ import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
 import StationsLayer from '../layers/StationsLayer';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import defaultBaseLayers, {
-  swisstopoSwissImage,
-  bahnhofplaene,
-  passagierfrequenzen,
-  netzkarteLayer,
   dataLayer,
+  netzkarteLayer,
+  punctuality,
   netzkartePointLayer,
   platformsLayer,
-  buslines,
+  passagierfrequenzen,
   gemeindegrenzen,
-  punctuality,
+  buslines,
+  bahnhofplaene,
+  direktverbindungenLayer,
+  swisstopoSwissImage,
+} from './ch.sbb.netzkarte';
+
+import {
+  constrUnterhalt,
+  constrAusbau,
+  constrClusters,
+  constructionDataLayer,
+} from './ch.sbb.construction';
+
+import {
   netzkarteShowcasesNight,
   netzkarteShowcasesLight,
   netzkarteShowcasesNetzkarte,
@@ -21,10 +32,6 @@ import defaultBaseLayers, {
   barrierfreierBahnhoefe,
   nichtBarrierfreierBahnhoefe,
   kilometrageLayer,
-  constrUnterhalt,
-  constrAusbau,
-  constrClusters,
-  constructionDataLayer,
   grenzen,
   tochtergesellschaftenSBB,
   gewässer,
@@ -55,12 +62,12 @@ import defaultBaseLayers, {
   beleuchtungstaerken4Layer,
   beleuchtungstaerkenSchutzgebieteLayer,
   beleuchtungstaerkenBundesInventareLayer,
-  direktverbindungenLayer,
   netzkarteIsb,
   isbOther,
   isbTVS,
   geschosseLayer,
 } from './layers';
+
 import defaultSearches, { handicapStopFinder } from './searches';
 
 const defaultElements = {
@@ -209,10 +216,16 @@ export const bauprojekte = {
     filters: true,
   },
   layers: [
-    dataLayer,
-    netzkarteLayer,
-    swisstopoSwissImage,
     constructionDataLayer,
+    netzkarteLayer.clone({
+      mapboxLayer: constructionDataLayer,
+      style: 'review-geops-tgma-a7je7m.base_bright_v2_ch.sbb.bauprojekte',
+    }),
+    swisstopoSwissImage.clone({
+      mapboxLayer: constructionDataLayer,
+      style:
+        'review-geops-tgma-a7je7m.ch.swisstopo.backgrounds_ch.sbb.bauprojekte.swisstopo',
+    }),
     constrUnterhalt,
     constrAusbau,
     constrClusters,

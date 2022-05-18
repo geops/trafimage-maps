@@ -9,7 +9,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import AusbauLayer from '../../layers/AusbauLayer';
-import { updateConstructions } from '../../config/layers';
+import { updateConstructions } from '../../config/ch.sbb.construction';
 
 const useStyles = makeStyles(() => ({
   formControl: {

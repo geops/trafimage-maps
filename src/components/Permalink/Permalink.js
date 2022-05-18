@@ -11,7 +11,10 @@ import LayerService from 'react-spatial/LayerService';
 import KML from 'react-spatial/utils/KML';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { setCenter, setZoom } from '../../model/map/actions';
-import { netzkartePointLayer, platformsLayer } from '../../config/layers';
+import {
+  netzkartePointLayer,
+  platformsLayer,
+} from '../../config/ch.sbb.netzkarte';
 import {
   setDeparturesFilter,
   setFeatureInfo,
