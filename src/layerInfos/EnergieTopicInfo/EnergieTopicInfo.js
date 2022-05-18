@@ -9,7 +9,10 @@ const comps = {
       Informationen über Innhaber und regionale Zuständigkeiten der Rollen
       Anlagenmanager (LCM), Anlagenmanager Betrieb und Instandhaltung (BUI),
       Anlagenverantwortlicher/AVANT, Anlagenbetreuer UL, Intervention und
-      Schalt- und Erdberechtigt
+      Schalt- und Erdberechtigt.
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+      </p>
     </div>
   ),
   fr: (
@@ -20,7 +23,10 @@ const comps = {
       Informationen über Innhaber und regionale Zuständigkeiten der Rollen
       Anlagenmanager (LCM), Anlagenmanager Betrieb und Instandhaltung (BUI),
       Anlagenverantwortlicher/AVANT, Anlagenbetreuer UL, Intervention und
-      Schalt- und Erdberechtigt
+      Schalt- und Erdberechtigt.
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+      </p>
     </div>
   ),
   en: (
@@ -31,7 +37,10 @@ const comps = {
       Informationen über Innhaber und regionale Zuständigkeiten der Rollen
       Anlagenmanager (LCM), Anlagenmanager Betrieb und Instandhaltung (BUI),
       Anlagenverantwortlicher/AVANT, Anlagenbetreuer UL, Intervention und
-      Schalt- und Erdberechtigt
+      Schalt- und Erdberechtigt.
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+      </p>
     </div>
   ),
   it: (
@@ -42,7 +51,10 @@ const comps = {
       Informationen über Innhaber und regionale Zuständigkeiten der Rollen
       Anlagenmanager (LCM), Anlagenmanager Betrieb und Instandhaltung (BUI),
       Anlagenverantwortlicher/AVANT, Anlagenbetreuer UL, Intervention und
-      Schalt- und Erdberechtigt
+      Schalt- und Erdberechtigt.
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+      </p>
     </div>
   ),
 };

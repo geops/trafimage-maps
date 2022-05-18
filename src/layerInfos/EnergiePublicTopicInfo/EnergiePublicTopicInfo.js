@@ -15,6 +15,9 @@ const comps = {
         </a>
         .
       </p>
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+      </p>
     </div>
   ),
   fr: (
@@ -33,6 +36,9 @@ const comps = {
         </a>
         .
       </p>
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+      </p>
     </div>
   ),
   en: (
@@ -48,6 +54,9 @@ const comps = {
           Authorisation for works/projects near railways, RA 18m
         </a>
         .
+      </p>
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
       </p>
     </div>
   ),
@@ -66,6 +75,9 @@ const comps = {
           LCdF 18m
         </a>
         .
+      </p>
+      <p>
+        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
       </p>
     </div>
   ),
