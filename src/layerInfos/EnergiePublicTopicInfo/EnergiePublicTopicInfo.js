@@ -22,13 +22,14 @@ const comps = {
   ),
   fr: (
     <div>
-      La carte réseau énergie constitue le réseau à haute tension des CFF lignes
-      de transmission (UL). La carte s&apos;adresse aux constructeurs avec des
-      projets de construction à moins de 51 m de la ligne de transmission. Les
-      projets de construction dans cette zone sont, conformément à
-      l&apos;article 18m des Loi sur les chemins de fer à CFF Energie pour
-      approbation. Des informations détaillées et la soumission peuvent être
-      trouvées à:
+      La carte du réseau énergétique représente le réseau des lignes de
+      transport d&apos;électricité à haute tension (UL) des CFF. La carte
+      s&apos;adresse aux maîtres d&apos;ouvrage dont les projets de construction
+      se situent à moins de 51 m de la ligne de transport. Conformément à
+      l&apos;art. 18m de la loi sur les chemins de fer, les projets de
+      construction situés dans cette zone doivent être soumis à CFF Energie pour
+      approbation. Vous trouverez des informations détaillées et la soumission
+      sous:
       <p>
         <a href="https://company.sbb.ch/fr/entreprise/projets/autorisation-de-travaux-projets-en-voisinage.html">
           Autorisation de travaux/ projets en voisinage des chemins de fer, LCdF
@@ -43,12 +44,12 @@ const comps = {
   ),
   en: (
     <div>
-      The energy network map displays the SBB high-voltage network transmission
-      lines (UL). The map is aimed at the builder-owners with construction
+      The Energy Network Map displays the network of SBB high-voltage
+      transmission lines (UL). The map is intended for developers with building
       projects less than 51m from the transmission line. Construction projects
-      within this area are, according to Art. 18m of the Railway Act, to be
-      submitted to SBB Energie for approval. Detailed information and submission
-      can be found at:
+      within this area must be submitted to SBB Energie for approval in
+      accordance with Art. 18m of the Railway Act. Detailed information and
+      submission can be found at:
       <p>
         <a href="https://company.sbb.ch/en/the-company/projects/authorisation-for-works-projects-near-railways.html">
           Authorisation for works/projects near railways, RA 18m
@@ -62,13 +63,14 @@ const comps = {
   ),
   it: (
     <div>
-      La carta di rete energetica costituisce la rete ad alta tensione delle FFS
-      linee di trasmissione (UL). La carta è rivolta ai costruttori con progetti
-      di costruzione a meno di 51 m dalla linea di trasmissione. I progetti di
-      costruzione all&apos;interno di quest&apos;area sono, secondo
-      l&apos;articolo 18m della Legge sulle ferrovie alle FFS Energie per
-      l&apos;approvazione. Informazioni dettagliate e presentazione sono
-      disponibili su:
+      La carta della rete energetica visualizza la rete delle linee di
+      trasmissione ad alta tensione delle FFS (UL). La mappa è destinata agli
+      sviluppatori con progetti di costruzione a meno di 51 metri dalla linea di
+      trasmissione. I progetti di costruzione all&apos;interno di
+      quest&apos;area devono essere sottoposti all&apos;approvazione di FFS
+      Energia ai sensi dell&apos;art. 18m della Legge sulle ferrovie.
+      Informazioni dettagliate e modalità di presentazione sono disponibili sul
+      sito::
       <p>
         <a href="https://company.sbb.ch/it/azienda/progetti/autorizzazione-ai-lavori-progetti.html">
           Autorizzazione ai lavori/ progetti nelle vicinanze della ferrovia,
