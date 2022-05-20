@@ -14,20 +14,6 @@ export const netzkarteShowcasesNight = new TrafimageMapboxLayer({
   },
 });
 
-export const netzkarteShowcasesLight = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.light',
-  key: 'ch.sbb.netzkarte.light',
-  visible: true,
-  preserveDrawingBuffer: true,
-  zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'showcase3',
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.netzkarte.light-desc',
-    radioGroup: 'showcases',
-  },
-});
-
 export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.layer',
   key: 'ch.sbb.netzkarte.layer',
@@ -43,8 +29,4 @@ export const netzkarteShowcasesNetzkarte = new TrafimageMapboxLayer({
   },
 });
 
-export default [
-  netzkarteShowcasesNight,
-  netzkarteShowcasesLight,
-  netzkarteShowcasesNetzkarte,
-];
+export default [netzkarteShowcasesNight, netzkarteShowcasesNetzkarte];
