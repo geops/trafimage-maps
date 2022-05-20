@@ -132,9 +132,15 @@ describe('actions', () => {
 
     test('clears highlight of previous search service', () => {
       const dispatch = jest.fn();
-      const searchService = { clearHighlight: jest.fn() };
+      const searchService = {
+        clearHighlight: jest.fn(),
+        clearSelect: jest.fn(),
+      };
       const getState = jest.fn(() => ({ app: { searchService } }));
-      const searchService1 = { clearHighlight: jest.fn() };
+      const searchService1 = {
+        clearHighlight: jest.fn(),
+        clearSelect: jest.fn(),
+      };
       setSearchService(searchService)(dispatch, getState);
       expect(searchService.clearHighlight).toHaveBeenCalledTimes(0);
       expect(dispatch).toHaveBeenCalledTimes(1);
@@ -145,6 +151,7 @@ describe('actions', () => {
       dispatch.mockReset();
       setSearchService(searchService)(dispatch, getState);
       expect(searchService.clearHighlight).toHaveBeenCalledTimes(0);
+      expect(searchService.clearSelect).toHaveBeenCalledTimes(0);
       expect(dispatch).toHaveBeenCalledWith({
         data: searchService,
         type: 'SET_SEARCH_SERVICE',
@@ -152,6 +159,7 @@ describe('actions', () => {
       dispatch.mockReset();
       setSearchService(searchService1)(dispatch, getState);
       expect(searchService.clearHighlight).toHaveBeenCalledTimes(1);
+      expect(searchService.clearSelect).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         data: searchService1,
