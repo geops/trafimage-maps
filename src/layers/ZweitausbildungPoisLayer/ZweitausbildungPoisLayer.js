@@ -57,19 +57,19 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       mbMap.off('idle', this.onIdle);
-    }
 
-    [this.sourceId, this.highlightSourceId].forEach(() => {
-      const source = mbMap.getSource(this.sourceId);
-      if (source) {
-        // Don't remove source just make it empty.
-        // Because others layers during unmount still could rely on it.
-        source.setData({
-          type: 'FeatureCollection',
-          features: [],
-        });
-      }
-    });
+      [this.sourceId, this.highlightSourceId].forEach((id) => {
+        const source = mbMap.getSource(id);
+        if (source) {
+          // Don't remove source just make it empty.
+          // Because others layers during unmount still could rely on it.
+          source.setData({
+            type: 'FeatureCollection',
+            features: [],
+          });
+        }
+      });
+    }
     super.terminate(map);
   }
 
