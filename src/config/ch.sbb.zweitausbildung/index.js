@@ -288,8 +288,8 @@ export const zweitausbildungRoutes = new Layer({
 
 export default [
   zweitausbildungDataLayer,
-  zweitausbildungRoutes,
   zweitausbildungAbroad,
   zweitausbildungPois,
+  zweitausbildungRoutes,
   zweitausbildungStations,
 ];
