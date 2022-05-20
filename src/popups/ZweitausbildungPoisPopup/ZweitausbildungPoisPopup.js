@@ -9,7 +9,7 @@ import './ZweitausbildungPoisPopup.scss';
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
-  layer: PropTypes.oneOf([
+  layer: PropTypes.oneOfType([
     PropTypes.instanceOf(ZweitausbildungPoisLayer),
     PropTypes.arrayOf(PropTypes.instanceOf(ZweitausbildungPoisLayer)),
   ]).isRequired,

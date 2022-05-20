@@ -115,6 +115,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     }
 
     if (!features?.length) {
+      console.log('noe feature');
       return;
     }
 
