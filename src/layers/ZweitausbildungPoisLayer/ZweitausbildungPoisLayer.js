@@ -10,89 +10,18 @@ import { GeoJSON } from 'ol/format';
  */
 class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const { color, icon, filter } = options.properties.zweitausbildung;
-    const suffixId = filter[1] + filter[2];
-    const clusterSourceId = `clusters-${suffixId}`;
-    const highlightSourceId = 'highlight';
-    const styleLayers = [
-      {
-        id: clusterSourceId,
-        type: 'circle',
-        source: clusterSourceId,
-        filter: ['has', 'point_count'],
-        paint: {
-          'circle-color': color,
-          'circle-radius': [
-            '*',
-            9,
-            ['sqrt', ['/', ['+', ['get', 'point_count'], 15], ['pi']]],
-          ],
-        },
-      },
-      {
-        id: `${clusterSourceId}-count`,
-        type: 'symbol',
-        source: clusterSourceId,
-        filter: ['has', 'point_count'],
-        paint: {
-          'text-color': 'rgba(255,255,255,1)',
-        },
-        layout: {
-          'text-field': '{point_count_abbreviated}',
-          'text-font': ['Arial Unicode MS Bold'],
-          'text-size': 14,
-        },
-      },
-      {
-        id: `unclustered-point-${suffixId}`,
-        type: 'symbol',
-        source: clusterSourceId,
-        filter: ['!', ['has', 'point_count']],
-        layout: {
-          'icon-image': icon,
-        },
-      },
-      {
-        id: highlightSourceId,
-        source: highlightSourceId,
-        type: 'circle',
-        paint: {
-          'circle-color': 'rgba(50, 50, 50, 0.8)',
-          'circle-radius': 0,
-          'circle-radius-transition': {
-            duration: 300,
-            delay: 0,
-          },
-        },
-      },
-    ];
+    const { filter, sourceId } = options.properties.zweitausbildung;
+    // We request cluster and unclustered point, not the number.
     super({
       ...options,
-      styleLayers,
-      queryRenderedLayersFilter: ({ id }) =>
-        `unclustered-point-${suffixId}` === id || clusterSourceId === id,
+      queryRenderedLayersFilter: ({ metadata }) => {
+        const mdValue = !!metadata && metadata['trafimage.filter'];
+        return mdValue === sourceId && !/number/.test(mdValue);
+      },
     });
-
-    this.clusterSource = {
-      id: clusterSourceId,
-      type: 'geojson',
-      cluster: true,
-      clusterRadius: 75, // Radius of each cluster when clustering points.
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    };
-    this.highlightSource = {
-      id: highlightSourceId,
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    };
-    this.sources = [this.clusterSource, this.highlightSource];
     this.filter = filter;
+    this.sourceId = sourceId;
+    this.highlightSourceId = 'highlight';
     this.updateTimeout = null;
     this.format = new GeoJSON({
       dataProjection: 'EPSG:4326',
@@ -111,6 +40,9 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
       this.on('change:visible', () => {
         this.updateClusterSource();
       }),
+      this.map.on('movestart', () => {
+        window.clearTimeout(this.updateTimeout);
+      }),
       this.map.on('moveend', () => {
         this.mapboxLayer.mbMap?.once('idle', this.onIdle);
       }),
@@ -125,7 +57,18 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       mbMap.off('idle', this.onIdle);
-      this.removeSources();
+
+      [this.sourceId, this.highlightSourceId].forEach((id) => {
+        const source = mbMap.getSource(id);
+        if (source) {
+          // Don't remove source just make it empty.
+          // Because others layers during unmount still could rely on it.
+          source.setData({
+            type: 'FeatureCollection',
+            features: [],
+          });
+        }
+      });
     }
     super.terminate(map);
   }
@@ -135,7 +78,6 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
    * @override
    */
   onLoad() {
-    this.addSources();
     super.onLoad();
     this.updateClusterSource();
   }
@@ -147,44 +89,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     window.clearTimeout(this.updateTimeout);
     this.updateTimeout = window.setTimeout(() => {
       this.updateClusterSource();
-    }, 50);
-  }
-
-  // Add sources for features using clustering and for highligting.
-  addSources() {
-    if (!this.mapboxLayer.mbMap) {
-      return;
-    }
-    const { mbMap } = this.mapboxLayer;
-
-    this.sources.forEach((source) => {
-      const { id } = source;
-      if (!mbMap.getSource(id)) {
-        const withoutId = { ...source };
-        delete withoutId.id;
-        mbMap.addSource(id, withoutId);
-      }
-    });
-  }
-
-  // Remove sources added by addSources().
-  removeSources() {
-    if (!this.mapboxLayer.mbMap) {
-      return;
-    }
-    const { mbMap } = this.mapboxLayer;
-    this.sources.forEach((source) => {
-      const { id } = source;
-      const sourcee = mbMap.getSource(id);
-      if (sourcee) {
-        // Don't remove source just make it empty.
-        // Because others layers during unmount still could rely on it.
-        sourcee.setData({
-          type: 'FeatureCollection',
-          features: [],
-        });
-      }
-    });
+    }, 150);
   }
 
   // Upodate sources for features with multiple lines.
@@ -193,7 +98,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
       return;
     }
     const { mbMap } = this.mapboxLayer;
-    const source = mbMap.getSource(this.clusterSource.id);
+    const source = mbMap.getSource(this.sourceId);
     if (!source) {
       return;
     }
@@ -210,6 +115,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     }
 
     if (!features?.length) {
+      console.log('noe feature');
       return;
     }
 
@@ -237,14 +143,14 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     }
 
     const data = this.format.writeFeaturesObject(toggle ? [feature] : []);
-    const source = mbMap.getSource(this.highlightSource.id);
+    const source = mbMap.getSource(this.highlightSourceId);
     if (source) {
       source.setData(data);
     }
 
     // Launch animation
     mbMap.setPaintProperty(
-      this.highlightSource.id,
+      this.highlightSourceId,
       'circle-radius',
       toggle ? 14 : 0,
     );

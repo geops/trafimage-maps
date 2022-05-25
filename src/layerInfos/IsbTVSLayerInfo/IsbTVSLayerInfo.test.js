@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { isbTVS } from '../../config/layers';
+import { isbTVS } from '../../config/ch.sbb.isb';
 import IsbTVSLayerInfo from '.';
 
 describe('IsbTVSLayerInfo', () => {

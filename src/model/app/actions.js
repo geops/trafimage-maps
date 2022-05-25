@@ -108,6 +108,7 @@ export const setSearchService = (data) => (dispatch, getState) => {
   } = getState();
   if (searchService && searchService !== data) {
     searchService.clearHighlight();
+    searchService.clearSelect();
   }
   dispatch({ type: SET_SEARCH_SERVICE, data });
 };
