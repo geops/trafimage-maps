@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { MdClear } from 'react-icons/md';
 import Select from '../../components/Select';
-import { geltungsbereicheDataLayer } from '../../config/layers';
+import { geltungsbereicheDataLayer } from '../../config/ch.sbb.geltungsbereiche';
 
 const useStyles = makeStyles(() => ({
   selectWrapper: {
