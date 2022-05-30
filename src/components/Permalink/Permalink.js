@@ -284,9 +284,14 @@ class Permalink extends PureComponent {
       filter.push(['==', ['get', 'platform'], this.platform]);
     }
 
+    const styleLayers = mbMap?.getStyle()?.layers || [];
     const layers = [
-      ...stationsLayer.styleLayers.map((style) => style.id),
-      ...platformsLayer.styleLayers.map((style) => style.id),
+      ...styleLayers
+        .filter(stationsLayer.styleLayersFilter)
+        .map(({ id }) => id),
+      ...styleLayers
+        .filter(platformsLayer.styleLayersFilter)
+        .map(({ id }) => id),
     ];
 
     // We display the departures popup only on features of the station layer (not on platform).
