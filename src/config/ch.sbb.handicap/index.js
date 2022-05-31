@@ -30,12 +30,6 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
-  styleLayer: {
-    id: 'ch.sbb.stuetzpunktbahnhoefe',
-    type: 'symbol',
-    source: 'ch.sbb.handicap',
-    'source-layer': 'ch.sbb.handicap',
-  },
   properties: {
     handicapType: 'stuetzpunkt',
     hasInfos: true,
@@ -61,12 +55,6 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'barrierefrei',
-  styleLayer: {
-    id: 'ch.sbb.barrierfreierbahnhoefe',
-    type: 'symbol',
-    source: 'ch.sbb.handicap',
-    'source-layer': 'ch.sbb.handicap',
-  },
   properties: {
     handicapType: 'barrierfree',
     hasInfos: true,
@@ -83,12 +71,6 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'nicht_barrierefrei',
-  styleLayer: {
-    id: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-    type: 'symbol',
-    source: 'ch.sbb.handicap',
-    'source-layer': 'ch.sbb.handicap',
-  },
   properties: {
     handicapType: 'notBarrierfree',
     hasInfos: true,

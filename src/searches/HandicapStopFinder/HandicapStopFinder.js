@@ -80,26 +80,26 @@ class HandicapStopFinder extends Search {
       return;
     }
 
-    // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
-    const handicapLayers = layerService
-      .getLayersAsFlatArray()
-      .filter((layer) => {
-        const { styleLayers } = layer;
-        if (!styleLayers) {
-          return false;
-        }
-        const sourceIds = styleLayers.map(({ source }) => source);
-        return (
-          layer instanceof MapboxStyleLayer &&
-          sourceIds.includes('ch.sbb.handicap')
-        );
-      });
+    const styleLayers = mbMap?.getStyle()?.layers;
 
-    const infoLayers = handicapLayers.filter((layer) => layer.visible);
-    const coordinates = fromLonLat(this.popupItem.geometry.coordinates);
+    // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
+    const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
+      const { visible, styleLayersFilter } = layer;
+      if (!visible || !styleLayers || !styleLayersFilter) {
+        return false;
+      }
+      const sourceIds = styleLayers
+        .filter(styleLayersFilter)
+        .map(({ source }) => source);
+      return (
+        layer instanceof MapboxStyleLayer &&
+        sourceIds.includes('ch.sbb.handicap')
+      );
+    });
 
     // Here we simulate a click, it's the best way to get the proper popup informations.
     // The only drawback is that if the station is not rendered there is no popup.
+    const coordinates = fromLonLat(this.popupItem.geometry.coordinates);
     const infos = infoLayers
       .map((layer) => layer.getFeatureInfoAtCoordinate(coordinates))
       .filter((i) => i);
