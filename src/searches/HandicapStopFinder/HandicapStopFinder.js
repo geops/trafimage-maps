@@ -6,7 +6,7 @@ import Search from '../Search';
 class HandicapStopFinder extends Search {
   constructor() {
     super();
-    this.onDataEvent = this.onDataEvent.bind(this);
+    this.onIdle = this.onIdle.bind(this);
   }
 
   setApiKey(apiKey) {
@@ -50,24 +50,15 @@ class HandicapStopFinder extends Search {
     if (layer) {
       const { mbMap } = layer;
       if (mbMap.loaded() && mbMap.isStyleLoaded()) {
-        this.onDataEvent();
+        this.onIdle();
       } else {
-        mbMap.once('idle', () => {
-          if (
-            mbMap.getSource('ch.sbb.handicap') &&
-            mbMap.isSourceLoaded('ch.sbb.handicap')
-          ) {
-            this.onDataEvent();
-          } else {
-            // We can't rely on sourcedata because isSourceLoaded returns false.
-            mbMap.on('idle', this.onDataEvent);
-          }
-        });
+        // We can't rely on sourcedata because isSourceLoaded returns false.
+        mbMap.on('idle', this.onIdle);
       }
     }
   }
 
-  onDataEvent() {
+  onIdle() {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
 
@@ -75,7 +66,7 @@ class HandicapStopFinder extends Search {
       mbMap.getSource('ch.sbb.handicap') &&
       mbMap.isSourceLoaded('ch.sbb.handicap')
     ) {
-      mbMap.off('idle', this.onDataEvent);
+      mbMap.off('idle', this.onIdle);
     } else {
       return;
     }

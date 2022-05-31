@@ -5,7 +5,7 @@ import Search from '../Search';
 class StopFinder extends Search {
   constructor() {
     super();
-    this.onDataEvent = this.onDataEvent.bind(this);
+    this.onIdle = this.onIdle.bind(this);
   }
 
   setApiKey(apiKey) {
@@ -51,26 +51,20 @@ class StopFinder extends Search {
     if (layer) {
       const { mbMap } = layer;
       if (mbMap.loaded() && mbMap.isStyleLoaded()) {
-        this.onDataEvent();
+        this.onIdle();
       } else {
-        mbMap.once('idle', () => {
-          if (mbMap.getSource('stations') && mbMap.isSourceLoaded('stations')) {
-            this.onDataEvent();
-          } else {
-            // We can't rely on sourcedata because isSourceLoaded returns false.
-            mbMap.on('idle', this.onDataEvent);
-          }
-        });
+        // We can't rely on sourcedata because isSourceLoaded returns false.
+        mbMap.on('idle', this.onIdle);
       }
     }
   }
 
-  onDataEvent() {
+  onIdle() {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.netzkarte.data');
 
     if (mbMap.getSource('stations') && mbMap.isSourceLoaded('stations')) {
-      mbMap.off('idle', this.onDataEvent);
+      mbMap.off('idle', this.onIdle);
     } else {
       return;
     }
