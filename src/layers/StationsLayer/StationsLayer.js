@@ -10,21 +10,8 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 class StationsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
-      styleLayer: {
-        id: 'stations',
-        type: 'circle',
-        source: 'stations',
-        paint: {
-          'circle-radius': 10,
-          'circle-color': 'rgb(0, 61, 155)',
-          'circle-opacity': [
-            'case',
-            ['boolean', ['feature-state', 'hover'], false],
-            0.5,
-            0,
-          ],
-        },
-      },
+      styleLayersFilter: ({ metadata }) =>
+        !!metadata && metadata['trafimage.filter'] === 'stations',
       properties: {
         hideInLegend: true,
         popupComponent: 'StationPopup',
@@ -33,14 +20,7 @@ class StationsLayer extends MapboxStyleLayer {
       ...options,
     });
 
-    this.source = {
-      id: 'stations',
-      type: 'geojson',
-      data: {
-        type: 'FeatureCollection',
-        features: [],
-      },
-    };
+    this.sourceId = 'stations';
 
     this.onIdle = this.onIdle.bind(this);
   }
@@ -93,6 +73,7 @@ class StationsLayer extends MapboxStyleLayer {
     this.addSource();
     super.onLoad();
     this.updateSource();
+    mbMap.once('idle', this.onIdle);
   }
 
   /**
@@ -114,7 +95,7 @@ class StationsLayer extends MapboxStyleLayer {
   // Query the rendered stations then add them to the source.
   updateSource() {
     const { mbMap } = this.mapboxLayer;
-    const source = mbMap?.getSource(this.source.id);
+    const source = mbMap?.getSource(this.sourceId);
 
     if (!this.osmPointsLayers || !source) {
       return;
@@ -146,11 +127,14 @@ class StationsLayer extends MapboxStyleLayer {
       return;
     }
     const { mbMap } = this.mapboxLayer;
-    const { id } = this.source;
-    if (!mbMap.getSource(id)) {
-      const withoutId = { ...this.source };
-      delete withoutId.id;
-      mbMap.addSource(id, withoutId);
+    if (!mbMap.getSource(this.sourceId)) {
+      mbMap.addSource(this.sourceId, {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [],
+        },
+      });
     }
   }
 
@@ -160,8 +144,7 @@ class StationsLayer extends MapboxStyleLayer {
       return;
     }
     const { mbMap } = this.mapboxLayer;
-    const { id } = this.source;
-    const source = mbMap.getSource(id);
+    const source = mbMap.getSource(this.sourceId);
     if (source) {
       // Don't remove source just make it empty.
       // Because others layers during unmount still could rely on it.
@@ -177,6 +160,10 @@ class StationsLayer extends MapboxStyleLayer {
   select() {
     this.setHoverState(this.highlightedFeatures, false);
     this.setHoverState(this.selectedFeatures, false);
+  }
+
+  clone(newOptions) {
+    return new StationsLayer({ ...this.options, ...newOptions });
   }
 }
 

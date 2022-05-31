@@ -11,7 +11,7 @@ import LayerService from 'react-spatial/LayerService';
 import KML from 'react-spatial/utils/KML';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { setCenter, setZoom } from '../../model/map/actions';
-import { netzkartePointLayer, platformsLayer } from '../../config/layers';
+import { stationsLayer, platformsLayer } from '../../config/ch.sbb.netzkarte';
 import {
   setDeparturesFilter,
   setFeatureInfo,
@@ -262,7 +262,7 @@ class Permalink extends PureComponent {
       this.loadDepartureOnce = false;
 
       // We need to wait until stations layer has been updated and rendered.
-      netzkartePointLayer.once('datarendered', () => {
+      stationsLayer.once('datarendered', () => {
         this.openDepartureOnLoad();
       });
     }
@@ -276,7 +276,7 @@ class Permalink extends PureComponent {
 
   async openDepartureOnLoad() {
     const { dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = netzkartePointLayer.mapboxLayer;
+    const { mbMap } = stationsLayer.mapboxLayer;
 
     const filter = ['all', ['==', ['get', 'sbb_id'], this.departures]];
 
@@ -284,9 +284,14 @@ class Permalink extends PureComponent {
       filter.push(['==', ['get', 'platform'], this.platform]);
     }
 
+    const styleLayers = mbMap?.getStyle()?.layers || [];
     const layers = [
-      ...netzkartePointLayer.styleLayers.map((style) => style.id),
-      ...platformsLayer.styleLayers.map((style) => style.id),
+      ...styleLayers
+        .filter(stationsLayer.styleLayersFilter)
+        .map(({ id }) => id),
+      ...styleLayers
+        .filter(platformsLayer.styleLayersFilter)
+        .map(({ id }) => id),
     ];
 
     // We display the departures popup only on features of the station layer (not on platform).
