@@ -36,7 +36,7 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.uw.icon$/.test(metadata['energie.filter']),
   styleLayersFilter: ({ metadata }) =>
-    metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
+    metadata && /^anlagen.uw/.test(metadata['energie.filter']),
   properties: {
     hasInfos: true,
     layerInfoComponent: 'EnergieLayerInfo',
