@@ -120,7 +120,11 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
       },
     );
 
-    super({ ...options, styleLayers });
+    super({
+      ...options,
+      styleLayers,
+      beforeId: 'ch.sbb.zweitausbildung_stations.aufbau.not.border',
+    });
     this.property = property;
   }
 
@@ -130,13 +134,6 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
    */
   onLoad() {
     const { mbMap } = this.mapboxLayer;
-    const source = mbMap.getSource(sourceId);
-    if (!source) {
-      mbMap.addSource(sourceId, {
-        type: 'vector',
-        url: this.dataUrl,
-      });
-    }
 
     // if the selected lines as extra sources we add it now.
     Object.entries(lines).forEach(([key, { property, extraSources }]) => {
@@ -156,21 +153,6 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
       });
     });
     super.onLoad();
-  }
-
-  setStyleConfig(url, key, apiKeyName) {
-    if (url && url !== this.url) {
-      this.url = url;
-    }
-    if (key && key !== this.apiKey) {
-      this.apiKey = key;
-    }
-    if (apiKeyName && apiKeyName !== this.apiKeyName) {
-      this.apiKeyName = apiKeyName;
-    }
-    if ((!url && !key && !apiKeyName) || !this.styleUrl) {
-      this.dataUrl = `${this.url}/data/ch.sbb.zweitausbildung.json?${apiKeyName}=${key}`;
-    }
   }
 }
 

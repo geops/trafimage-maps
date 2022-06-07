@@ -1,6 +1,6 @@
-import { isbOther, isbTVS } from './layers';
+import { isbOther, isbTVS } from './index';
 
-describe('layers', () => {
+describe('ch.sbb.isb', () => {
   describe('isbOther', () => {
     test("has a shortToLongName property set and only unique keys, it's important for the layer infos", () => {
       expect(isbOther.get('shortToLongName')).toBeDefined();

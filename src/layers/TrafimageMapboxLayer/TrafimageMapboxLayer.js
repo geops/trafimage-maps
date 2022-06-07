@@ -101,7 +101,9 @@ class TrafimageMapboxLayer extends MapboxLayer {
       this.apiKeyName = apiKeyName;
     }
     if ((!url && !key && !apiKeyName) || !this.styleUrl) {
-      this.styleUrl = `${this.url}/styles/${this.style}/style.json?`;
+      this.styleUrl = `${this.url}/styles/${
+        process?.env?.REACT_APP_REVIEW_PREFIX || ''
+      }${this.style}/style.json?`;
     }
 
     const newStyleUrl = this.createStyleUrl();
