@@ -1677,7 +1677,7 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
   name: 'ch.sbb.energie.public.unterwerke',
   mapboxLayer: energieDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
+    metadata && /^anlagen.uw.icon$/.test(metadata['energie.filter']),
   styleLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.uw$/.test(metadata['energie.filter']),
   properties: {
