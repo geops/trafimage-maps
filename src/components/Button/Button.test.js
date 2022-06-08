@@ -1,17 +1,13 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { fireEvent, render } from '@testing-library/react';
 import Button from './Button';
-
-configure({ adapter: new Adapter() });
 
 const funcs = {
   onClick: () => {},
 };
 
 test('Button should match snapshot.', () => {
-  const component = renderer.create(
+  const { container } = render(
     <Button
       className="tm-zoom in"
       title="Zoom in"
@@ -20,19 +16,24 @@ test('Button should match snapshot.', () => {
       +
     </Button>,
   );
-  const tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+  expect(container.innerHTML).toMatchSnapshot();
 });
 
 test('Button should update.', () => {
   const spy = jest.spyOn(funcs, 'onClick');
-  const bt = shallow(
+  const { container } = render(
     <Button className="tm-class" title="Zoom" onClick={() => funcs.onClick()}>
       +
     </Button>,
   );
 
-  bt.find('.tm-class').first().simulate('click');
-  bt.find('.tm-class').first().simulate('keypress', { which: 13 });
+  fireEvent.click(container.querySelector('.tm-class'));
+  fireEvent.keyPress(container.querySelector('.tm-class'), {
+    key: 'Enter',
+    code: 'Enter',
+    charCode: 13,
+    which: 13,
+  });
+
   expect(spy).toHaveBeenCalledTimes(2);
 });
