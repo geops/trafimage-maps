@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import { mount } from 'enzyme';
 import { Feature } from 'ol';
 import { Polygon } from 'ol/geom';
 import NetzkartePopup from '.';
@@ -32,13 +31,14 @@ describe('NetzkartePopup', () => {
         ],
       ]),
     );
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('[role="button"]').length).toBe(1);
-    expect(wrapper.find('[role="button"]').first().text()).toBe('Koordinaten');
+    expect(container.querySelector('[role="button"]').textContent).toBe(
+      'Koordinaten',
+    );
   });
 
   test('displays airport label.', () => {
@@ -52,13 +52,13 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('layer', ' flug');
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('.wkp-netzkarte-popup').children().first().text()).toBe(
-      ' flug',
+    expect(container.querySelector('.wkp-netzkarte-popup').textContent).toBe(
+      ' flugKoordinatenLänge (X): 3Breite (Y): 3',
     );
   });
 
@@ -75,16 +75,14 @@ describe('NetzkartePopup', () => {
           ]),
         );
         feature.set(property, 'foo');
-        const wrapper = mount(
+        const { container } = render(
           <Provider store={store}>
             <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
           </Provider>,
         );
-        expect(wrapper.find('a.wkp-popup-plans').length).toBe(1);
-        expect(wrapper.find('a.wkp-popup-plans').first().text()).toBe(
+        expect(container.querySelector('a.wkp-popup-plans').textContent).toBe(
           'Bahnhofpläne',
         );
-        expect(wrapper.find('BahnhofplanPopup').length).toBe(1);
       });
     },
   );
@@ -100,12 +98,14 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('url_bep', 'url_bep');
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('a[href="url_bep"]').length).toBe(1);
+    expect(container.querySelector('a[href="url_bep"]').textContent).toBe(
+      ' url_bep',
+    );
   });
 
   test('displays the sbb timetable link if name is available.', () => {
@@ -119,15 +119,14 @@ describe('NetzkartePopup', () => {
       ]),
     );
     feature.set('name', 'foo');
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('a[href="station_timetable_url"]').length).toBe(1);
-    expect(wrapper.find('a[href="station_timetable_url"]').first().text()).toBe(
-      ' Fahrplan',
-    );
+    expect(
+      container.querySelector('a[href="station_timetable_url"]').textContent,
+    ).toBe(' Fahrplan');
   });
 
   test('displays the departures link if station is in switzerland.', () => {
@@ -180,15 +179,14 @@ describe('NetzkartePopup', () => {
     );
     feature.set('sbb_id', '8500000');
     feature.set('rail', 1);
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('a[href="station_service_url"]').length).toBe(1);
-    expect(wrapper.find('a[href="station_service_url"]').first().text()).toBe(
-      ' Webseite Bahnhof',
-    );
+    expect(
+      container.querySelector('a[href="station_service_url"]').textContent,
+    ).toBe(' Webseite Bahnhof');
   });
 
   test("doesn't display the station service link if station outside CH.", () => {
@@ -203,11 +201,13 @@ describe('NetzkartePopup', () => {
     );
     feature.set('sbb_id', '85000');
     feature.set('rail', 1);
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(wrapper.find('a[href="station_service_url"]').length).toBe(0);
+    expect(
+      container.querySelectorAll('a[href="station_service_url"]').length,
+    ).toBe(0);
   });
 });
