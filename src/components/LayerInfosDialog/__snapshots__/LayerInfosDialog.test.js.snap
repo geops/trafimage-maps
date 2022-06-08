@@ -28,7 +28,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
               test
             </span>
           </h4>
-          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-10"
+          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-10 Mui-focusVisible"
                   tabindex="0"
                   type="button"
                   title="Dialog schließen"
@@ -51,6 +51,12 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
               </svg>
             </span>
             <span class="MuiTouchRipple-root">
+              <span class="MuiTouchRipple-ripple MuiTouchRipple-rippleVisible MuiTouchRipple-ripplePulsate"
+                    style="width: 1px; height: 1px; top: -0.5px; left: -0.5px;"
+              >
+                <span class="MuiTouchRipple-child MuiTouchRipple-childPulsate">
+                </span>
+              </span>
             </span>
           </button>
         </div>
