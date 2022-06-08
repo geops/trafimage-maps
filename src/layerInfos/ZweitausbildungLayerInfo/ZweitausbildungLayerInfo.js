@@ -1,23 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
+import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
   staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
+const useStyles = makeStyles(() => ({
+  legend: {
+    display: 'table',
+    marginTop: '1em',
+
+    '& img': {
+      verticalAlign: 'middle',
+      paddingRight: 10,
+    },
+  },
+}));
+
+const ZweitausbildungLayerInfo = ({ properties, staticFilesUrl }) => {
+  const { t } = useTranslation();
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;
+  const classes = useStyles();
 
   return (
     <div>
       <p>{t(title)}</p>
       {legend ? (
-        <div>
+        <div className={classes.legend}>
           <img
             src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
             draggable="false"
@@ -57,4 +70,4 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
 
 ZweitausbildungLayerInfo.propTypes = propTypes;
 
-export default compose(withTranslation())(ZweitausbildungLayerInfo);
+export default ZweitausbildungLayerInfo;
