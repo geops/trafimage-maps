@@ -61,7 +61,7 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
   operators.push(['', othersOperators.join(', ')]);
   return (
     <div>
-      {title}
+      <p>{title}</p>
       <p>{description}</p>
       <p>
         <Link href="https://www.tvs.ch/">www.tvs.ch</Link>

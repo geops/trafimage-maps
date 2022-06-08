@@ -11,9 +11,6 @@ const regionColors = {
 };
 
 const useStyles = makeStyles({
-  title: {
-    margin: '5px 0',
-  },
   regionLegendItem: {
     display: 'flex',
     alignItems: 'center',
@@ -44,10 +41,8 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
   }, []);
 
   return (
-    <>
-      <div className={classes.title}>
-        {t(`${netzentwicklungRoleType}-layer-info`)}
-      </div>
+    <div>
+      <p>{t(`${netzentwicklungRoleType}-layer-info`)}</p>
       {regions &&
         Array.isArray(regions) &&
         regions.map((region) => (
@@ -59,7 +54,7 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
             <div>{t(region.name)}</div>
           </div>
         ))}
-    </>
+    </div>
   );
 };
 

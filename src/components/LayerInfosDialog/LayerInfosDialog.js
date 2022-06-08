@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from 'react-i18next';
 import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
+import Link from '../Link';
 
 const propTypes = {
   style: PropTypes.object,
@@ -31,12 +32,14 @@ function LayerInfosDialog(props) {
 
   let component = null;
   let description = null;
+  let dataLink = null;
 
   // use ducktyping instead of `instanceof` since the layer may be created
   // outside this bundle
   if (selectedForInfos.isReactSpatialLayer) {
     component = selectedForInfos.get('layerInfoComponent');
     description = selectedForInfos.get('description');
+    dataLink = selectedForInfos.get('dataLink');
   } else {
     component = selectedForInfos.layerInfoComponent;
     description = selectedForInfos.description;
@@ -56,9 +59,23 @@ function LayerInfosDialog(props) {
       />
     );
   } else if (description) {
+    const translated = t(description);
     body = (
       <div>
-        <Trans i18nKey={description} />
+        {/* We use trans component when description contains html tags */}
+        {/<.*>/.test(translated) ? (
+          <Trans i18nKey={description} />
+        ) : (
+          <p>{translated}</p>
+        )}
+        {dataLink && (
+          <>
+            <hr />
+            <p>
+              <Link href={dataLink}>{t('Diesen Datensatz einbinden')}</Link>
+            </p>
+          </>
+        )}
       </div>
     );
   }
@@ -71,7 +88,7 @@ function LayerInfosDialog(props) {
       title={
         <span>{t(`${selectedForInfos.name || selectedForInfos.key}`)}</span>
       }
-      body={<div>{body}</div>}
+      body={body}
       style={style}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

@@ -14,10 +14,10 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
   const { title, legend } = infos;
 
   return (
-    <div className="wkp-zweitausbildung-layer-info">
-      <div>{t(title)}</div>
+    <div>
+      <p>{t(title)}</p>
       {legend ? (
-        <div className="wkp-zweitausbildung-layer-info-legend">
+        <div>
           <img
             src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
             draggable="false"
@@ -26,7 +26,7 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
           {t(legend.name)}
         </div>
       ) : null}
-      <div>
+      <p>
         {t('Datengrundlage')}:
         <br />
         <a
@@ -36,21 +36,21 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
         >
           {t('Link Übersichtsliste Geografie im Produkte-eSpace VM HR-BIL')}
         </a>
-      </div>
-      <div>
+      </p>
+      <p>
         {t('Aktualisierungs-Zyklus')}:
         <br />
         {t(
           'Gemäss Life Cycle Management des Produktemanagements von HR-BIL-SKK(-PM)',
         )}
-      </div>
-      <div>
+      </p>
+      <p>
         {t('Verantwortlich')}:
         <br />
         {t('HR-BIL-SKK-PM (VM und VS)')},
         <br />
         <a href="mailto:pm.skk.kbc@sbb.ch">pm.skk.kbc@sbb.ch</a>.
-      </div>
+      </p>
     </div>
   );
 };
