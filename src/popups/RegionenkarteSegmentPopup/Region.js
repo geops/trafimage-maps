@@ -92,31 +92,33 @@ function Region({ feature }) {
           </Select>
         </div>
       </div>
-      {(Array.isArray(person) ? person : [person])
-        .sort(
-          (
-            { unterrolle: unterrolleA, kommentar: kommentarA, name: nameA },
-            { unterrolle: unterrolleB, kommentar: kommentarB, name: nameB },
-          ) => {
-            // First, persons with unterolle, then persons without.
-            if (unterrolleA || unterrolleB) {
-              if (!unterrolleA || !unterrolleB) {
-                return unterrolleA < unterrolleB ? 1 : -1;
+      <div>
+        {(Array.isArray(person) ? person : [person])
+          .sort(
+            (
+              { unterrolle: unterrolleA, kommentar: kommentarA, name: nameA },
+              { unterrolle: unterrolleB, kommentar: kommentarB, name: nameB },
+            ) => {
+              // First, persons with unterolle, then persons without.
+              if (unterrolleA || unterrolleB) {
+                if (!unterrolleA || !unterrolleB) {
+                  return unterrolleA < unterrolleB ? 1 : -1;
+                }
+                if (kommentarA || kommentarB) {
+                  return `${unterrolleA} ${kommentarA}` <
+                    `${unterrolleB} ${kommentarB}`
+                    ? -1
+                    : 1;
+                }
+                return unterrolleA < unterrolleB ? -1 : 1;
               }
-              if (kommentarA || kommentarB) {
-                return `${unterrolleA} ${kommentarA}` <
-                  `${unterrolleB} ${kommentarB}`
-                  ? -1
-                  : 1;
-              }
-              return unterrolleA < unterrolleB ? -1 : 1;
-            }
-            return nameA < nameB ? -1 : 1;
-          },
-        )
-        .map((data) => (
-          <Person key={JSON.stringify(data)} person={data} isIntern />
-        ))}
+              return nameA < nameB ? -1 : 1;
+            },
+          )
+          .map((data) => (
+            <Person key={JSON.stringify(data)} person={data} isIntern />
+          ))}
+      </div>
     </>
   );
 }

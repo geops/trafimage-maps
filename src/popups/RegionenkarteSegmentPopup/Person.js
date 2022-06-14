@@ -2,80 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { ReactComponent as PhoneIcon } from '../../img/phone.svg';
-import { ReactComponent as MailIcon } from '../../img/mail.svg';
-import { ReactComponent as PersonIcon } from '../../img/person.svg';
+import PersonCard from '../../components/PersonCard';
+import formatPhone from '../../utils/formatPhone';
 
-const useStyles = makeStyles((theme) => ({
-  card: {
-    border: '1px solid #ddd',
-    borderRadius: 2,
-    padding: theme.spacing(1),
-    margin: `${theme.spacing(1)}px 0`,
-  },
-  contactDetail: {
-    padding: `4px 0`,
-    display: 'flex',
-    alignItems: 'center',
-
+const useStyles = makeStyles({
+  personCard: {
     '& a': {
       textDecoration: 'none !important',
     },
-
-    '& svg': {
-      width: 30,
-    },
   },
-}));
-
-const formatPhone = (phone) => {
-  try {
-    return phone
-      .split(/(\+41)(\d{2})(\d{3})(\d{2})(\d{2})/g)
-      .join(' ')
-      .trim();
-  } catch (e) {
-    return phone;
-  }
-};
+});
 
 function Person({ isIntern, person }) {
-  const classes = useStyles();
   const { t } = useTranslation();
+  const classes = useStyles();
   const { name, phone, email, division, unterrolle, kommentar } = person;
 
-  return (
-    <div className={classes.card}>
-      {!name && <i>{t('Information nicht verfügbar')}</i>}
-      {name && (
-        <>
-          {unterrolle && (
-            <div className={classes.contactDetail}>
-              {`${unterrolle} ${kommentar}`}
-            </div>
-          )}
-          <div className={classes.contactDetail}>
-            <PersonIcon />
-            {name}
-            {division && ` (${division})`}
-          </div>
-          {phone && (
-            <div className={classes.contactDetail}>
-              <PhoneIcon />
-              <a href={`tel:${phone}`}>{formatPhone(phone)}</a>
-            </div>
-          )}
-          {isIntern && email && (
-            <div className={classes.contactDetail}>
-              <MailIcon />
-              <a href={`mailto:${email.toLowerCase()}`}>
-                {email.toLowerCase()}
-              </a>
-            </div>
-          )}
-        </>
-      )}
-    </div>
+  return name ? (
+    <PersonCard
+      title={unterrolle && `${unterrolle}${kommentar ? ` ${kommentar}` : ''}`}
+      name={name}
+      division={division}
+      phone={formatPhone(phone)}
+      email={isIntern && email}
+      className={classes.personCard}
+    />
+  ) : (
+    <i>{t('Information nicht verfügbar')}</i>
   );
 }
 

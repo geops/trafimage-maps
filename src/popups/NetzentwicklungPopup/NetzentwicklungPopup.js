@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Feature from 'ol/Feature';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import personIcon from '../../img/popups/NetzentwicklungPopup/person.svg';
-import mailIcon from '../../img/popups/NetzentwicklungPopup/mail.svg';
-import phoneIcon from '../../img/popups/NetzentwicklungPopup/phone.svg';
+import PersonCard from '../../components/PersonCard/PersonCard';
 
 const useStyles = makeStyles({
   row: {
@@ -59,26 +57,12 @@ const renderTitle = (feat, t, includeLineInfo) => {
 
 const renderRoleCard = (rolle, classes, t) => {
   return (
-    <div key={rolle.typ + rolle.person.name} className={classes.card}>
-      <div>{t(rolle.name)}</div>
-      <div className={classes.row}>
-        <img src={personIcon} alt="Person" />
-        <div>
-          {t(rolle.bezeichnung || rolle.typ)}: {rolle.person.name} (
-          {rolle.person.division})
-        </div>
-      </div>
-      <div className={classes.row}>
-        <img src={phoneIcon} alt="Phone" />
-        <a href={`tel:${rolle.person.phone}`}>{rolle.person.phone || '-'}</a>
-      </div>
-      <div className={classes.row}>
-        <img src={mailIcon} alt="Mail" />
-        <a href={`mailto:${rolle.person.email}`}>
-          {(rolle.person.email || '-').toLowerCase()}
-        </a>
-      </div>
-    </div>
+    <PersonCard
+      key={`${t(rolle.bezeichnung || rolle.typ)}: ${rolle.person.name}`}
+      name={`${t(rolle.bezeichnung || rolle.typ)}: ${rolle.person.name}`}
+      phone={rolle.person.phone || '-'}
+      email={rolle.person.email || '-'}
+    />
   );
 };
 
