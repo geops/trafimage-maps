@@ -67,12 +67,13 @@ const PersonCard = ({
           </Typography>
         </div>
       )}
-      {otherDetails.map((detail) => (
-        <div className={classes.row} key={detail.id}>
-          <img src={detail.icon} alt={detail.id} />
-          <Typography>{detail.label}</Typography>
-        </div>
-      ))}
+      {otherDetails?.length &&
+        otherDetails.map((detail) => (
+          <div className={classes.row} key={detail.id}>
+            <img src={detail.icon} alt={detail.id} />
+            <Typography>{detail.label}</Typography>
+          </div>
+        ))}
     </div>
   );
 };
