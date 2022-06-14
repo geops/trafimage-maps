@@ -99,12 +99,7 @@ PersonCard.propTypes = {
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       icon: PropTypes.element.isRequired,
-      label: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node,
-        PropTypes.element,
-        PropTypes.number,
-      ]).isRequired,
+      label: PropTypes.string.isRequired,
     }),
   ),
   className: PropTypes.string,
