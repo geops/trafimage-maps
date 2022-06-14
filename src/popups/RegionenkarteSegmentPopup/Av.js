@@ -121,7 +121,9 @@ function Av({ layer, feature, onChangeRole }) {
           )}
         </div>
       </div>
-      <Person person={person} isIntern={isIntern} />
+      <div>
+        <Person person={person} isIntern={isIntern} />
+      </div>
       {lineData && <LineData lineData={lineData} />}
     </>
   );
