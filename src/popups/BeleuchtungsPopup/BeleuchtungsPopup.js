@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import LightIcon from '../../img/LightIcon';
-import PersonCard from '../../components/PersonCard';
-import question from '../../img/circleQuestionMark.svg';
 import { lightingMapping } from '../../layerInfos/BeleuchtungLayerInfo/lightingMapping';
 
 const propTypes = {
@@ -41,24 +39,6 @@ const BeleuchtungsPopup = ({ feature }) => {
           size={25}
         />
       </p>
-      <div>
-        <PersonCard
-          title={<b>FOOO</b>}
-          name="Foo Wank"
-          email="foo@wank.co.uk"
-        />
-        <PersonCard
-          title="Wank"
-          name="Wanky Wank"
-          email="wank@wank.co.uk"
-          phone="0471 1234567"
-          otherDetails={[
-            { id: 'test', icon: question, label: 'extrawank' },
-            { id: 'test2', icon: question, label: 'extrawank' },
-            { id: 'test1', icon: question, label: 'extrawank' },
-          ]}
-        />
-      </div>
     </div>
   );
 };
