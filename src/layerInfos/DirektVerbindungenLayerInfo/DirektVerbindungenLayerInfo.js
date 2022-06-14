@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
-import Link from '../../components/Link';
+import DataLink from '../../components/DataLink';
 
 const useStyles = makeStyles({
   legendItem: {
@@ -41,9 +41,7 @@ const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
     <>
       <hr />
       <p style={{ marginBottom: 0 }}>
-        <Link href={layer.get('dataLink')}>
-          {t('Diesen Datensatz einbinden')}
-        </Link>
+        <DataLink layer={layer} />
       </p>
     </>
   );

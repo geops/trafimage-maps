@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import Link from '../../components/Link';
+import DataLink from '../../components/DataLink';
 
 const comps = {
   de: (
@@ -55,15 +55,13 @@ const comps = {
 };
 
 const HandicapTopicInfo = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   return (
     <div>
       {comps[i18n.language]}
       <hr />
       <p>
-        <Link href="https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/">
-          {t('Diesen Datensatz einbinden')}
-        </Link>
+        <DataLink href="https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/" />
       </p>
     </div>
   );

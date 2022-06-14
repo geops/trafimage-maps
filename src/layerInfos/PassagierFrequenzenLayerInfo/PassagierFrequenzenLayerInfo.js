@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PropTypes } from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
-import Link from '../../components/Link';
+import DataLink from '../../components/DataLink';
 
 const comps = {
   de: (
@@ -84,19 +84,14 @@ const comps = {
 };
 
 const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
-  const { t, i18n } = useTranslation();
-  const dataLink = layer.get('dataLink');
+  const { i18n } = useTranslation();
   return (
     <div>
       {comps[i18n.language]}
-      {dataLink && (
-        <>
-          <hr />
-          <p>
-            <Link href={dataLink}>{t('Diesen Datensatz einbinden')}</Link>
-          </p>
-        </>
-      )}
+      <hr />
+      <p>
+        <DataLink layer={layer} />
+      </p>
     </div>
   );
 };

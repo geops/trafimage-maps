@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Trans, useTranslation } from 'react-i18next';
 import Dialog from '../Dialog';
 import layerInfos from '../../layerInfos';
-import Link from '../Link';
+import DataLink from '../DataLink/DataLink';
 
 const propTypes = {
   style: PropTypes.object,
@@ -72,7 +72,7 @@ function LayerInfosDialog(props) {
           <>
             <hr />
             <p>
-              <Link href={dataLink}>{t('Diesen Datensatz einbinden')}</Link>
+              <DataLink layer={selectedForInfos} />
             </p>
           </>
         )}

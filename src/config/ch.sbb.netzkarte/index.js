@@ -109,6 +109,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
     popupComponent: 'PassagierFrequenzenPopup',
     useOverlay: true,
     dataLink: 'https://reporting.sbb.ch/bahnhoefe',
+    dataLinkPortalName: 'Statistikportal',
   },
 });
 
