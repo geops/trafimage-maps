@@ -6,7 +6,7 @@ import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/es/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/es/layers/ZoneLayer';
 import { casa } from 'trafimage-maps/es/config/topics';
-import 'trafimage-maps/es/examples/Casa/casa.css'
+import 'trafimage-maps/es/examples/Casa/casa.css';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -36,7 +36,7 @@ zoneLayer.loadZones([
   {
     partnerCode: 490,
     zones: [
-       {
+      {
         zoneCode: 163,
         isSelected: true,
         isClickable: true,
@@ -174,8 +174,8 @@ routeLayer
       ],
     },
   ])
-  .then(f => {
-    routeLayer.zoomToRoute({duration: 1000});
+  .then((f) => {
+    routeLayer.zoomToRoute({ duration: 1000 });
   });
 
 routeLayer.onClick((features) => {
@@ -187,15 +187,18 @@ const App = () => {
 
   useEffect(() => {
     const map = ref.current;
-    map.topics =  [{
-      ...casa,
-      layers: [...casa.layers, zoneLayer, routeLayer],
-      elements: {
-        mapControls: true,
-        menu: false,
-        popup: true,
-        baseLayerSwitcher: true,
-      }}];
+    map.topics = [
+      {
+        ...casa,
+        layers: [...casa.layers, zoneLayer, routeLayer],
+        elements: {
+          mapControls: true,
+          menu: false,
+          popup: true,
+          baseLayerSwitcher: true,
+        },
+      },
+    ];
 
     return () => {
       map.topics = null;
@@ -205,11 +208,15 @@ const App = () => {
   /* To use casa style sheet, add the casa class in the parent class */
   return (
     <div className="container casa">
-      <trafimage-maps ref={ref} appName="casa" apiKey={apiKey} apiKeyName={apiKeyName} />
+      <trafimage-maps
+        ref={ref}
+        appName="casa"
+        apiKey={apiKey}
+        apiKeyName={apiKeyName}
+      />
     </div>
   );
-}
+};
 
-<App />
-
+<App />;
 ```
