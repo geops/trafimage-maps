@@ -28,6 +28,9 @@ import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
 import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
 import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
 import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
+import EnergieLayerInfo from './EnergieLayerInfo';
+import EnergieTopicInfo from './EnergieTopicInfo';
+import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
 import IsbTVSLayerInfo from './IsbTVSLayerInfo';
 import IsbOtherLayerInfo from './IsbOtherLayerInfo';
@@ -61,6 +64,8 @@ export { default as MapsGeoAdminLayerInfo } from './MapsGeoAdminLayerInfo';
 export { default as DirektVerbindungenLayerInfo } from './DirektVerbindungenLayerInfo';
 export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenTagLayerInfo';
 export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
+export { default as EnergieTopicInfo } from './EnergieTopicInfo';
+export { default as EnergiePublicTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
 export { default as IsbTopicInfo } from './IsbTopicInfo';
 export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
@@ -96,6 +101,9 @@ export default {
   BeleuchtungTopicInfo,
   BeleuchtungLayerInfo,
   MapsGeoAdminLayerInfo,
+  EnergieLayerInfo,
+  EnergieTopicInfo,
+  EnergiePublicTopicInfo,
   SandboxTopicInfo,
   IsbTopicInfo,
   IsbTVSLayerInfo,
