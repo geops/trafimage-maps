@@ -123,7 +123,7 @@ class DeparturePopupContent extends Component {
     const { destinationFilter } = this.state;
     this.mounted = true;
     this.loadDepartures();
-    this.loadInterval = window.setInterval(() => this.loadDepartures(), 5000);
+    this.loadInterval = window.setInterval(() => this.loadDepartures(), 10000);
 
     dispatchSetDeparturesFilter(uic.toString(), platform);
 

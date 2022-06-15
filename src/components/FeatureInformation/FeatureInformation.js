@@ -45,6 +45,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const language = useSelector((state) => state.app.language);
   const searchService = useSelector((state) => state.app.searchService);
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   const isMobile = useMemo(() => {
@@ -162,6 +163,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
     const coordinates = Array.isArray((coordinate || [])[0])
       ? coordinate
       : [coordinate];
+
     features.forEach((feat, idx) => {
       if (feat && feat.getGeometry()) {
         if (feat.getGeometry().getType() === GeometryType.POINT) {
@@ -181,18 +183,55 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
         }
       }
     });
-    const source = new VectorSource({ features });
-    const extent = source.getExtent();
+
+    // We have to render the map otherwise the last selected features are displayed during animation.
+    map.renderSync();
+
+    // We want to recenter the map only if the coordinates clicked are under
+    // the Overlay (mobile and desktop) or Menu element (only desktop).
+    const coordinateClicked = coordinates[0];
+    if (!coordinateClicked) {
+      return;
+    }
+    const overlayWidthDesktop = 400;
+    const overlayHeightMobile = 250;
+    const menuWidthDesktop = 381;
+    const redCircleWidth = 25;
+    const [width, height] = map.getSize();
+    const [pixelX, pixelY] = map.getPixelFromCoordinate(coordinateClicked);
     const isUsingOverlay = !!layers.find((l) => l.get('useOverlay'));
-    if (isUsingOverlay) {
+    const isHiddenByOverlayOnDesktop =
+      isUsingOverlay && pixelX >= width - overlayWidthDesktop - redCircleWidth;
+    const isHiddenByOverlayOnMobile =
+      isUsingOverlay && pixelY >= height - overlayHeightMobile - redCircleWidth;
+    const isHiddenByMenuOnDesktop =
+      menuOpen && pixelX <= menuWidthDesktop + redCircleWidth;
+
+    let padding = null;
+
+    if (isMobile && isHiddenByOverlayOnMobile) {
+      padding = [0, 0, overlayHeightMobile, 0];
+    } else if (
+      !isMobile &&
+      (isHiddenByOverlayOnDesktop || isHiddenByMenuOnDesktop)
+    ) {
+      padding = [
+        0,
+        isUsingOverlay ? overlayWidthDesktop : 0,
+        0,
+        menuOpen ? menuWidthDesktop : 0,
+      ];
+    }
+
+    if (padding) {
       map.getView().cancelAnimations();
-      map.getView().fit(extent, {
-        padding: isMobile ? [0, 0, 250, 0] : [0, 400, 0, 0],
+      map.getView().fit([...coordinateClicked, ...coordinateClicked], {
+        padding,
         maxZoom: map.getView().getZoom(), // only pan
         duration: 500,
       });
     }
-  }, [map, isMobile, featureIndex, infoIndexed]);
+  }, [map, isMobile, featureIndex, infoIndexed, menuOpen]);
 
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
@@ -242,7 +281,7 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
               className="wkp-close-bt"
               title={t('Popup schliessen')}
               onClick={() => {
-                dispatch(setFeatureInfo([]));
+                dispatch(setFeatureInfo());
                 onCloseBtClick();
               }}
             >

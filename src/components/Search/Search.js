@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import {
@@ -10,7 +10,7 @@ import {
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@material-ui/core';
-import { setSearchOpen } from '../../model/app/actions';
+import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
@@ -20,6 +20,7 @@ function Search() {
   const [value, setValue] = useState('');
   const map = useSelector((state) => state.app.map);
   const searchService = useSelector((state) => state.app.searchService);
+  const searchContainerRef = useRef();
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ function Search() {
 
   return (
     <div className="wkp-search">
-      <SearchToggle>
+      <SearchToggle popupAnchor={searchContainerRef?.current}>
         <Autosuggest
           multiSection
           shouldRenderSuggestions={(val) => val.trim().length > 2}
@@ -65,6 +66,7 @@ function Search() {
             searchService.highlight(suggestion)
           }
           onSuggestionSelected={(e, { suggestion }) => {
+            dispatch(setFeatureInfo());
             searchService.select(suggestion);
             dispatch(setSearchOpen(false));
           }}
@@ -124,7 +126,7 @@ function Search() {
           }}
           renderInputComponent={(inputProps) => {
             return (
-              <div className="wkp-search-input">
+              <div className="wkp-search-input" ref={searchContainerRef}>
                 <input {...inputProps} />
                 {value && (
                   <IconButton

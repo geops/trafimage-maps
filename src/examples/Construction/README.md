@@ -12,5 +12,5 @@ const apiKey = window.apiKey;
   apiKey={apiKey}
   height="500px"
   language="en"
-/>
+/>;
 ```

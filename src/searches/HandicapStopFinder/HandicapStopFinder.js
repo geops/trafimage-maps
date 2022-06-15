@@ -6,7 +6,7 @@ import Search from '../Search';
 class HandicapStopFinder extends Search {
   constructor() {
     super();
-    this.onDataEvent = this.onDataEvent.bind(this);
+    this.onIdle = this.onIdle.bind(this);
   }
 
   setApiKey(apiKey) {
@@ -50,24 +50,15 @@ class HandicapStopFinder extends Search {
     if (layer) {
       const { mbMap } = layer;
       if (mbMap.loaded() && mbMap.isStyleLoaded()) {
-        this.onDataEvent();
+        this.onIdle();
       } else {
-        mbMap.once('idle', () => {
-          if (
-            mbMap.getSource('ch.sbb.handicap') &&
-            mbMap.isSourceLoaded('ch.sbb.handicap')
-          ) {
-            this.onDataEvent();
-          } else {
-            // We can't rely on sourcedata because isSourceLoaded returns false.
-            mbMap.on('idle', this.onDataEvent);
-          }
-        });
+        // We can't rely on sourcedata because isSourceLoaded returns false.
+        mbMap.on('idle', this.onIdle);
       }
     }
   }
 
-  onDataEvent() {
+  onIdle() {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
 
@@ -75,31 +66,31 @@ class HandicapStopFinder extends Search {
       mbMap.getSource('ch.sbb.handicap') &&
       mbMap.isSourceLoaded('ch.sbb.handicap')
     ) {
-      mbMap.off('idle', this.onDataEvent);
+      mbMap.off('idle', this.onIdle);
     } else {
       return;
     }
 
-    // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
-    const handicapLayers = layerService
-      .getLayersAsFlatArray()
-      .filter((layer) => {
-        const { styleLayers } = layer;
-        if (!styleLayers) {
-          return false;
-        }
-        const sourceIds = styleLayers.map(({ source }) => source);
-        return (
-          layer instanceof MapboxStyleLayer &&
-          sourceIds.includes('ch.sbb.handicap')
-        );
-      });
+    const styleLayers = mbMap?.getStyle()?.layers;
 
-    const infoLayers = handicapLayers.filter((layer) => layer.visible);
-    const coordinates = fromLonLat(this.popupItem.geometry.coordinates);
+    // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
+    const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {
+      const { visible, styleLayersFilter } = layer;
+      if (!visible || !styleLayers || !styleLayersFilter) {
+        return false;
+      }
+      const sourceIds = styleLayers
+        .filter(styleLayersFilter)
+        .map(({ source }) => source);
+      return (
+        layer instanceof MapboxStyleLayer &&
+        sourceIds.includes('ch.sbb.handicap')
+      );
+    });
 
     // Here we simulate a click, it's the best way to get the proper popup informations.
     // The only drawback is that if the station is not rendered there is no popup.
+    const coordinates = fromLonLat(this.popupItem.geometry.coordinates);
     const infos = infoLayers
       .map((layer) => layer.getFeatureInfoAtCoordinate(coordinates))
       .filter((i) => i);

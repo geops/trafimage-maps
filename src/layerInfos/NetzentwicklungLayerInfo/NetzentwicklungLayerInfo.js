@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
-const cartaroURL = process.env.REACT_APP_CARTARO_URL;
+const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const regionColors = {
   Ost: '#2F9F48',
   Süd: '#DC320A',

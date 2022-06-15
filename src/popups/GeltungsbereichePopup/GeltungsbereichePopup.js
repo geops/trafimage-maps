@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Typography, makeStyles } from '@material-ui/core';
-import { geltungsbereicheDataLayer } from '../../config/layers';
+import { geltungsbereicheDataLayer } from '../../config/ch.sbb.geltungsbereiche';
 
 const useStyles = makeStyles(() => {
   return {

@@ -1,70 +1,39 @@
 import React from 'react';
 import { getCenter } from 'ol/extent';
 import GeltungsBereicheMenuFilter from '../filters/GeltungsbereicheMenuFilter';
-import TrafimageMapboxLayer from '../layers/TrafimageMapboxLayer';
-import StationsLayer from '../layers/StationsLayer';
+import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
-import defaultBaseLayers, {
-  swisstopoSwissImage,
-  bahnhofplaene,
-  passagierfrequenzen,
-  netzkarteLayer,
+import netzkarteLayers, {
   dataLayer,
-  netzkartePointLayer,
-  platformsLayer,
-  buslines,
-  gemeindegrenzen,
-  punctuality,
-  netzkarteShowcasesNight,
-  netzkarteShowcasesLight,
-  netzkarteShowcasesNetzkarte,
-  handicapDataLayer,
-  stuetzpunktBahnhoefe,
-  barrierfreierBahnhoefe,
-  nichtBarrierfreierBahnhoefe,
-  kilometrageLayer,
-  constrUnterhalt,
-  constrAusbau,
-  constrClusters,
-  constructionDataLayer,
-  grenzen,
-  tochtergesellschaftenSBB,
-  gewässer,
-  uebrigeBahnen,
-  betriebsRegionen,
-  betriebsRegionenVisible,
+  netzkarteLayer,
+  stationsLayer,
+  bahnhofplaene,
+} from './ch.sbb.netzkarte';
+import constructionLayers from './ch.sbb.construction';
+import handicapLayers from './ch.sbb.handicap';
+import casaLayers from './ch.sbb.casa';
+import infrastrukturLayers, {
   netzkarteEisenbahninfrastruktur,
-  zweitausbildungAbroad,
-  zweitausbildungPois,
-  zweitausbildungRoutes,
-  zweitausbildungStations,
-  zweitausbildungStationsDataLayer,
-  zweitausbildungPoisDataLayer,
-  tarifverbundkarteDataLayer,
-  tarifverbundkarteLayer,
-  anlagenverantwortliche,
-  regionenkartePublicSegment,
-  regionenkarteOverlayGroup,
-  netzentwicklungDataLayer,
-  netzentwicklungStrategischLayer,
-  netzentwicklungProgrammManagerLayer,
-  netzentwicklungSkPlanerLayer,
-  beleuchtungDataLayer,
-  beleuchtungstaerken1Layer,
-  beleuchtungstaerken2aLayer,
-  beleuchtungstaerken2bLayer,
-  beleuchtungstaerken3Layer,
-  beleuchtungstaerken4Layer,
-  beleuchtungstaerkenSchutzgebieteLayer,
-  beleuchtungstaerkenBundesInventareLayer,
-  direktverbindungenLayer,
-  geschosseLayer,
-  geltungsbereicheBahnlinien,
-  geltungsbereicheDataLayer,
-  geltungsbereicheBuslinien,
-  geltungsbereicheOther,
-} from './layers';
+  betriebsRegionenVisible,
+} from './ch.sbb.infrastruktur';
+import energieLayers from './ch.sbb.energie';
+import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
+import showcaseslayers from './ch.sbb.showcases';
+import regionenkarteLayers from './ch.sbb.regionenkarte.public';
+import netzentwicklungLayers from './ch.sbb.netzentwicklung';
+import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
+import isbLayers from './ch.sbb.isb';
+import sandboxLayers from './ch.sbb.netzkarte.sandbox';
+import zweitausbildungLayers from './ch.sbb.zweitausbildung';
+import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import defaultSearches, { handicapStopFinder } from './searches';
+
+// For backward compatibility
+export {
+  casaDataLayerWithoutLabels,
+  casaNetzkarteLayerWithLabels,
+  casaNetzkarteLayerWithoutLabels,
+} from './ch.sbb.casa';
 
 const defaultElements = {
   header: true,
@@ -88,17 +57,7 @@ export const netzkarte = {
     shareMenu: true,
     trackerMenu: true,
   },
-  layers: [
-    ...defaultBaseLayers,
-    punctuality,
-    netzkartePointLayer,
-    platformsLayer,
-    passagierfrequenzen,
-    gemeindegrenzen,
-    buslines,
-    bahnhofplaene,
-    direktverbindungenLayer,
-  ],
+  layers: netzkarteLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzkarteTopicInfo',
   searches: defaultSearches,
@@ -112,14 +71,7 @@ export const handicap = {
     shareMenu: true,
     popup: true,
   },
-  layers: [
-    ...defaultBaseLayers,
-    handicapDataLayer,
-    bahnhofplaene,
-    nichtBarrierfreierBahnhoefe,
-    barrierfreierBahnhoefe,
-    stuetzpunktBahnhoefe,
-  ],
+  layers: handicapLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'HandicapTopicInfo',
   searches: {
@@ -130,62 +82,15 @@ export const handicap = {
 export const netzkarteStelen = {
   name: 'ch.sbb.netzkarte.topic',
   key: 'ch.sbb.netzkarte',
-  layers: [dataLayer, netzkarteLayer, netzkartePointLayer, bahnhofplaene],
+  layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
   elements: {},
   projection: 'EPSG:3857',
 };
 
-export const casaDataLayerWithoutLabels = dataLayer.clone({
-  filters: [
-    {
-      field: 'type',
-      value: /symbol|circle/,
-      include: false,
-    },
-  ],
-});
-
-export const casaNetzkarteLayerWithoutLabels = netzkarteLayer.clone({
-  mapboxLayer: casaDataLayerWithoutLabels,
-});
-
-const casaSwisstopoSwissImage = swisstopoSwissImage.clone({
-  mapboxLayer: casaDataLayerWithoutLabels,
-});
-
-export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.labels',
-  visible: true,
-  style: 'base_bright_v2',
-  filters: [
-    {
-      field: 'type',
-      value: /symbol|circle/i,
-      include: true,
-    },
-  ],
-  zIndex: 2,
-  properties: {
-    hideInLegend: true,
-  },
-});
-
-// Add stations (blue style on hover) to labelsDataLayer.
-const casaNetzkarteStationsLayer = new StationsLayer({
-  name: 'ch.sbb.netzkarte.stationen.casa',
-  mapboxLayer: casaNetzkarteLayerWithLabels,
-});
-
 export const casa = {
   name: 'CASA',
   key: 'ch.sbb.casa',
-  layers: [
-    casaDataLayerWithoutLabels,
-    casaNetzkarteLayerWithoutLabels,
-    casaSwisstopoSwissImage,
-    casaNetzkarteLayerWithLabels,
-    casaNetzkarteStationsLayer,
-  ],
+  layers: casaLayers,
   projection: 'EPSG:3857',
   popupConfig: {
     getPopupCoordinates: (feature, map) => {
@@ -211,15 +116,7 @@ export const bauprojekte = {
     filter: true,
     filters: true,
   },
-  layers: [
-    dataLayer,
-    netzkarteLayer,
-    swisstopoSwissImage,
-    constructionDataLayer,
-    constrUnterhalt,
-    constrAusbau,
-    constrClusters,
-  ],
+  layers: constructionLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'ConstructionTopicInfo',
   searches: defaultSearches,
@@ -234,15 +131,7 @@ export const infrastruktur = {
     shareMenu: true,
     popup: true,
   },
-  layers: [
-    netzkarteEisenbahninfrastruktur,
-    uebrigeBahnen,
-    tochtergesellschaftenSBB,
-    grenzen,
-    gewässer,
-    betriebsRegionen,
-    kilometrageLayer,
-  ],
+  layers: infrastrukturLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'InfrastrukturTopicInfo',
   searches: defaultSearches,
@@ -271,12 +160,7 @@ export const regionenkartePublic = {
     popup: true,
     overlay: true,
   },
-  layers: [
-    anlagenverantwortliche,
-    regionenkarteOverlayGroup,
-    regionenkartePublicSegment,
-    kilometrageLayer,
-  ],
+  layers: regionenkarteLayers,
   layerInfoComponent: 'RegionenkartePublicTopicInfo',
   searches: defaultSearches,
 };
@@ -285,7 +169,7 @@ export const tarifverbundkarte = {
   name: 'ch.sbb.tarifverbundkarte.public',
   key: 'ch.sbb.tarifverbundkarte.public',
   layerInfoComponent: 'TarifverbundkarteTopicInfo',
-  layers: [tarifverbundkarteDataLayer, tarifverbundkarteLayer],
+  layers: tarifverbundkarteLayers,
   maxZoom: 12,
   exportConfig: {
     publisher: 'tobias.hauser@sbb.ch',
@@ -313,11 +197,7 @@ export const showcases = {
     ...defaultElements,
     baseLayerSwitcher: false,
   },
-  layers: [
-    netzkarteShowcasesNight,
-    netzkarteShowcasesLight,
-    netzkarteShowcasesNetzkarte,
-  ],
+  layers: showcaseslayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'ShowcasesTopicInfo',
 };
@@ -328,16 +208,7 @@ export const zweitausbildung = {
   maxZoom: 13,
   hideInLayerTree: true,
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    dataLayer,
-    zweitausbildungStationsDataLayer,
-    zweitausbildungPoisDataLayer,
-    netzkarteLayer,
-    zweitausbildungAbroad,
-    zweitausbildungPois,
-    zweitausbildungRoutes,
-    zweitausbildungStations,
-  ],
+  layers: zweitausbildungLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'ZweitausbildungTopicInfo',
   searches: defaultSearches,
@@ -348,13 +219,7 @@ export const netzentwicklung = {
   key: 'ch.sbb.netzentwicklung',
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
-  layers: [
-    kilometrageLayer,
-    netzentwicklungDataLayer,
-    netzentwicklungStrategischLayer,
-    netzentwicklungProgrammManagerLayer,
-    netzentwicklungSkPlanerLayer,
-  ],
+  layers: netzentwicklungLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'NetzentwicklungTopicInfo',
   searches: defaultSearches,
@@ -365,25 +230,42 @@ export const beleuchtungsstaerken = {
   key: 'ch.sbb.beleuchtungsstaerken',
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true },
-  layers: [
-    beleuchtungDataLayer,
-    beleuchtungstaerkenBundesInventareLayer,
-    beleuchtungstaerkenSchutzgebieteLayer,
-    beleuchtungstaerken4Layer,
-    beleuchtungstaerken3Layer,
-    beleuchtungstaerken2bLayer,
-    beleuchtungstaerken2aLayer,
-    beleuchtungstaerken1Layer,
-  ],
+  layers: beleuchtungLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'BeleuchtungTopicInfo',
+  searches: defaultSearches,
+};
+
+export const energiePublic = {
+  name: 'ch.sbb.energie',
+  key: 'ch.sbb.energie',
+  maxZoom: 14,
+  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  layers: energieLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'EnergiePublicTopicInfo',
+  searches: defaultSearches,
+};
+
+export const isb = {
+  name: 'ch.sbb.isb',
+  key: 'ch.sbb.isb',
+  maxZoom: 14,
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+  },
+  layers: isbLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'IsbTopicInfo',
   searches: defaultSearches,
 };
 
 const sandbox = {
   name: 'ch.sbb.netzkarte.sandbox',
   key: 'ch.sbb.netzkarte.sandbox',
-  layers: [dataLayer, netzkarteLayer, geschosseLayer],
+  layers: sandboxLayers,
   projection: 'EPSG:3857',
   elements: {
     ...defaultElements,
@@ -400,12 +282,7 @@ export const geltungsbereiche = {
     popup: true,
     shareMenu: true,
   },
-  layers: [
-    geltungsbereicheDataLayer,
-    geltungsbereicheOther,
-    geltungsbereicheBuslinien,
-    geltungsbereicheBahnlinien,
-  ],
+  layers: [geltungsbereicheLayers],
   projection: 'EPSG:3857',
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
   topicMenuBottom: ({ topic }) => <GeltungsBereicheMenuFilter topic={topic} />,
@@ -420,10 +297,12 @@ const topics = {
     handicap,
     tarifverbundkarte,
     infrastruktur,
+    isb,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
     geltungsbereiche,
+    energiePublic,
     showcases,
     sandbox,
   ],

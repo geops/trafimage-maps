@@ -8,6 +8,7 @@ import HandicapTopicInfo from './HandicapTopicInfo';
 import HandicapLayerInfo from './HandicapLayerInfo';
 import InfrastrukturTopicInfo from './InfrastrukturTopicInfo';
 import InterventionTopicInfo from './InterventionTopicInfo';
+import IsbTopicInfo from './IsbTopicInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
@@ -27,7 +28,12 @@ import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
 import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
 import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
 import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
+import EnergieLayerInfo from './EnergieLayerInfo';
+import EnergieTopicInfo from './EnergieTopicInfo';
+import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
+import IsbTVSLayerInfo from './IsbTVSLayerInfo';
+import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 import GeltungsbereicheTopicInfo from './GeltungsbereicheTopicInfo/GeltungsbereicheTopicInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
@@ -59,7 +65,12 @@ export { default as MapsGeoAdminLayerInfo } from './MapsGeoAdminLayerInfo';
 export { default as DirektVerbindungenLayerInfo } from './DirektVerbindungenLayerInfo';
 export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenTagLayerInfo';
 export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
+export { default as EnergieTopicInfo } from './EnergieTopicInfo';
+export { default as EnergiePublicTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
+export { default as IsbTopicInfo } from './IsbTopicInfo';
+export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
+export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
 export { default as GeltungsbereicheTopicInfo } from './GeltungsbereicheTopicInfo';
 
 export default {
@@ -74,8 +85,8 @@ export default {
   DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
-  InfrastrukturTopicInfo,
   InterventionTopicInfo,
+  InfrastrukturTopicInfo,
   PassagierFrequenzenLayerInfo,
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
@@ -92,6 +103,12 @@ export default {
   BeleuchtungTopicInfo,
   BeleuchtungLayerInfo,
   MapsGeoAdminLayerInfo,
+  EnergieLayerInfo,
+  EnergieTopicInfo,
+  EnergiePublicTopicInfo,
   SandboxTopicInfo,
+  IsbTopicInfo,
+  IsbTVSLayerInfo,
+  IsbOtherLayerInfo,
   GeltungsbereicheTopicInfo,
 };
