@@ -7,9 +7,5 @@ import 'trafimage-maps';
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
-<trafimage-maps
-  appName="betriebsregionen"
-  apiKey={apiKey}
-  height="500px"
-/>
+<trafimage-maps appName="betriebsregionen" apiKey={apiKey} height="500px" />;
 ```
