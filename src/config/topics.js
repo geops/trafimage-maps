@@ -14,6 +14,7 @@ import infrastrukturLayers, {
   netzkarteEisenbahninfrastruktur,
   betriebsRegionenVisible,
 } from './ch.sbb.infrastruktur';
+import energieLayers from './ch.sbb.energie';
 import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
 import showcaseslayers from './ch.sbb.showcases';
 import regionenkarteLayers from './ch.sbb.regionenkarte.public';
@@ -232,6 +233,17 @@ export const beleuchtungsstaerken = {
   searches: defaultSearches,
 };
 
+export const energiePublic = {
+  name: 'ch.sbb.energie',
+  key: 'ch.sbb.energie',
+  maxZoom: 14,
+  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  layers: energieLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'EnergiePublicTopicInfo',
+  searches: defaultSearches,
+};
+
 export const isb = {
   name: 'ch.sbb.isb',
   key: 'ch.sbb.isb',
@@ -271,6 +283,7 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
+    energiePublic,
     showcases,
     sandbox,
   ],

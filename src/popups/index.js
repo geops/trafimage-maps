@@ -20,6 +20,7 @@ import NetzentwicklungPopup from './NetzentwicklungPopup';
 import BeleuchtungsPopup from './BeleuchtungsPopup';
 import DirektverbindungPopup from './DirektverbindungPopup';
 import MapsGeoAdminPopup from './MapsGeoAdminPopup';
+import EnergiePopup from './EnergiePopup/EnergiePopup';
 import IsbPopup from './IsbPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
@@ -43,6 +44,7 @@ export { default as DrawPopup } from './DrawPopup';
 export { default as NetzentwicklungPopup } from './NetzentwicklungPopup';
 export { default as BeleuchtungsPopup } from './BeleuchtungsPopup';
 export { default as MapsGeoAdminPopup } from './MapsGeoAdminPopup';
+export { default as EnergiePopup } from './EnergiePopup';
 export { default as IsbPopup } from './IsbPopup';
 
 export default {
@@ -68,5 +70,6 @@ export default {
   BeleuchtungsPopup,
   DirektverbindungPopup,
   MapsGeoAdminPopup,
+  EnergiePopup,
   IsbPopup,
 };
