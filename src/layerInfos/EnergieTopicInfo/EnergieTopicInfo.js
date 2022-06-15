@@ -11,7 +11,11 @@ const comps = {
       Anlagenverantwortlicher/AVANT, Anlagenbetreuer UL, Intervention und
       Schalt- und Erdberechtigt.
       <p>
-        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+        Verantwortlich: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz,
+        Betrieb und Instandhaltung (trassensicherung-energie@sbb.ch)
+        <a href="mailto:trassensicherung-energie@sbb.ch">
+          trassensicherung-energie@sbb.ch
+        </a>
       </p>
     </div>
   ),
@@ -27,7 +31,11 @@ const comps = {
       d&apos;installation UL, d&apos;intervention et d&apos;autorisation de
       couplage et de mise à terre.
       <p>
-        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+        Responsable: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz, Betrieb
+        und Instandhaltung (trassensicherung-energie@sbb.ch)
+        <a href="mailto:trassensicherung-energie@sbb.ch">
+          trassensicherung-energie@sbb.ch
+        </a>
       </p>
     </div>
   ),
@@ -41,7 +49,11 @@ const comps = {
       manager/AVANT, plant supervisor UL, intervention and switching and
       grounding authority.
       <p>
-        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+        Responsible: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz, Betrieb
+        und Instandhaltung (trassensicherung-energie@sbb.ch)
+        <a href="mailto:trassensicherung-energie@sbb.ch">
+          trassensicherung-energie@sbb.ch
+        </a>
       </p>
     </div>
   ),
@@ -56,7 +68,11 @@ const comps = {
       dell&apos;impianto/AVANT, supervisore dell&apos;impianto UL, intervento e
       commutazione e autorità di terra.
       <p>
-        <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>
+        Responsabile: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz,
+        Betrieb und Instandhaltung (trassensicherung-energie@sbb.ch)
+        <a href="mailto:trassensicherung-energie@sbb.ch">
+          trassensicherung-energie@sbb.ch
+        </a>
       </p>
     </div>
   ),
