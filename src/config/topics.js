@@ -15,6 +15,7 @@ import infrastrukturLayers, {
   netzkarteEisenbahninfrastruktur,
   betriebsRegionenVisible,
 } from './ch.sbb.infrastruktur';
+import energieLayers from './ch.sbb.energie';
 import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
 import showcaseslayers from './ch.sbb.showcases';
 import regionenkarteLayers from './ch.sbb.regionenkarte.public';
@@ -23,7 +24,6 @@ import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
 import isbLayers from './ch.sbb.isb';
 import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 import zweitausbildungLayers from './ch.sbb.zweitausbildung';
-import energieLayers from './ch.sbb.energie';
 import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsBereicheMenuFilter from '../filters/GeltungsbereicheMenuFilter';
