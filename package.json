@@ -129,15 +129,15 @@
     "prebuild": "rm -rf build/",
     "publish:alpha": "yarn release -- --prerelease alpha --skip.changelog && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version",
     "publish:beta": "yarn release -- --prerelease beta --skip.changelog && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version --tag beta",
-    "publish:public": "yarn release && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version",
     "publish:beta:dryrun": "yarn release -- --prerelease beta --dry-run --skip.changelog",
+    "publish:public": "yarn release && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version",
     "publish:public:dryrun": "yarn release --dry-run",
+    "release": "standard-version",
     "sort": "sort-json src/lang/*.json -i",
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
     "start:doc": "styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\"",
-    "release": "standard-version"
+    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
   },
   "browserslist": [
     ">0.2%",
@@ -182,12 +182,6 @@
       "react": {
         "version": "detect"
       }
-    }
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "CI=true lint-staged"
     }
   },
   "jest": {
