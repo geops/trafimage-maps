@@ -12,10 +12,11 @@ const comps = {
       Schalt- und Erdberechtigt.
       <p>
         Verantwortlich: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz,
-        Betrieb und Instandhaltung (trassensicherung-energie@sbb.ch)
+        Betrieb und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
@@ -32,10 +33,11 @@ const comps = {
       couplage et de mise à terre.
       <p>
         Responsable: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz, Betrieb
-        und Instandhaltung (trassensicherung-energie@sbb.ch)
+        und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
@@ -50,10 +52,11 @@ const comps = {
       grounding authority.
       <p>
         Responsible: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz, Betrieb
-        und Instandhaltung (trassensicherung-energie@sbb.ch)
+        und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
@@ -69,10 +72,11 @@ const comps = {
       commutazione e autorità di terra.
       <p>
         Responsabile: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz,
-        Betrieb und Instandhaltung (trassensicherung-energie@sbb.ch)
+        Betrieb und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),

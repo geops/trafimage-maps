@@ -17,10 +17,11 @@ const comps = {
       </p>
       <p>
         Verantwortlich: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz,
-        Betrieb und Instandhaltung (trassensicherung-energie@sbb.ch)
+        Betrieb und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
@@ -43,10 +44,11 @@ const comps = {
       </p>
       <p>
         Responsable: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz, Betrieb
-        und Instandhaltung (trassensicherung-energie@sbb.ch)
+        und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
@@ -66,10 +68,11 @@ const comps = {
       </p>
       <p>
         Responsible: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz, Betrieb
-        und Instandhaltung (trassensicherung-energie@sbb.ch)
+        und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
@@ -92,10 +95,11 @@ const comps = {
       </p>
       <p>
         Responsabile: I-EN-DAE-OAN-BUI, Operatives Anlagemanagement Netz,
-        Betrieb und Instandhaltung (trassensicherung-energie@sbb.ch)
+        Betrieb und Instandhaltung (
         <a href="mailto:trassensicherung-energie@sbb.ch">
           trassensicherung-energie@sbb.ch
         </a>
+        )
       </p>
     </div>
   ),
