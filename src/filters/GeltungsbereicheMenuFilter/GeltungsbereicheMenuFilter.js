@@ -49,12 +49,50 @@ const nullOption = {
   label: 'Alle Produkte',
 };
 
+const isGbFilter = (filter) => {
+  return (
+    Array.isArray(filter) &&
+    Array.isArray(filter[2]) &&
+    filter[2][1] === 'geltungsbereiche_str'
+  );
+};
+
 const GeltungsbereicheMenuFilter = ({ topic }) => {
   const { t } = useTranslation();
   const apiKey = useSelector((state) => state.app.apiKey);
   const [filterValue, setFilterValue] = useState(nullOption);
   const [productChoices, setProductChoices] = useState([]);
   const classes = useStyles();
+  const layers = topic.layers.filter((l) => {
+    return /^ch.sbb.geltungsbereiche-/.test(l.key);
+  });
+
+  useEffect(() => {
+    // Update current filter value in dropdown on mount by getting the current gb filter from the stylelayer
+    const { mbMap } = layers[0]?.mapboxLayer;
+    const updateFilter = (mbStyle) => {
+      const styleLayer = mbStyle.layers.find(layers[0].styleLayersFilter);
+      const newFilter = styleLayer.filter.find(isGbFilter);
+      const filter =
+        newFilter && productChoices.length
+          ? productChoices.find((opt) => opt.value === newFilter[1])
+          : nullOption;
+      setFilterValue(filter);
+    };
+    // If style is not loaded yet the map listens for styledata to apply the filter
+    if (!mbMap.isStyleLoaded()) {
+      mbMap.once('styledata', () => () => {
+        const style = mbMap?.getStyle();
+        if (!mbMap || !style) {
+          return;
+        }
+        updateFilter(style);
+      });
+      return;
+    }
+    const style = mbMap?.getStyle();
+    updateFilter(style);
+  }, [layers, productChoices]);
 
   useEffect(() => {
     fetch(
@@ -82,10 +120,6 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
       );
   }, [apiKey]);
 
-  const layers = topic.layers.filter((l) => {
-    return /^ch.sbb.geltungsbereiche-/.test(l.key);
-  });
-
   const onChange = (value) => {
     layers.flat().forEach((layer) => {
       const { mbMap } = layer.mapboxLayer;
@@ -94,14 +128,11 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
       if (!mbMap || !style) {
         return;
       }
+
       const styleLayer = style.layers.find(layer.styleLayersFilter);
       const newFilter = styleLayer.filter.filter((fil) => {
         // Remove previous product filters.
-        if (
-          Array.isArray(fil) &&
-          Array.isArray(fil[2]) &&
-          fil[2][1] === 'geltungsbereiche_str'
-        ) {
+        if (isGbFilter(fil)) {
           return false;
         }
         return true;
