@@ -282,7 +282,7 @@ export const geltungsbereiche = {
     popup: true,
     shareMenu: true,
   },
-  layers: [geltungsbereicheLayers],
+  layers: geltungsbereicheLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
   topicMenuBottom: ({ topic }) => <GeltungsBereicheMenuFilter topic={topic} />,
