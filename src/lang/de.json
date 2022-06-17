@@ -438,6 +438,7 @@
   "station_service_url": "https://www.sbb.ch/de/bahnhof-services/am-bahnhof/bahnhoefe/bahnhof-finden/bahnhof.{didok}.html",
   "station_timetable_url": "https://www.sbb.ch/de/kaufen/pages/fahrplan/fahrplan.xhtml?nach={stationname}",
   "Stationen, Verbindungen, Orte": "Stationen, Verbindungen, Orte",
+  "Statistikportal": "SBB Statistikportal",
   "Suche": "Suche",
   "Suchergebnisse sind verfügbar. Verwenden Sie die TAB-Taste um zu navigieren.": "Suchergebnisse sind verfügbar. Verwenden Sie die TAB-Taste um zu navigieren.",
   "Suchtext löschen": "Suchtext löschen",

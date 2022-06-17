@@ -50,7 +50,7 @@ describe('A link to data', () => {
     cy.get('a[href="https://reporting.sbb.ch/bahnhoefe"]')
       .should(([a]) => {
         expect(a.textContent).to.equal(
-          'Diesen Datensatz beziehen (Statistikportal)',
+          'Diesen Datensatz beziehen (SBB Statistikportal)',
         );
         expect(a.target).to.equal('_blank');
         // eslint-disable-next-line no-param-reassign
