@@ -1,26 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
+import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
   staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const ZweitausbildungSubLayerInfo = ({ t, properties, staticFilesUrl }) => {
+const useStyles = makeStyles(() => ({
+  legend: {
+    '& > div': {
+      height: 31,
+      margin: 0,
+      display: 'flex',
+      alignItems: 'center',
+    },
+
+    '& img': {
+      float: 'left',
+      paddingRight: 10,
+    },
+  },
+}));
+
+const ZweitausbildungSubLayerInfo = ({ properties, staticFilesUrl }) => {
+  const { t } = useTranslation();
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;
+  const classes = useStyles();
 
   return (
-    <div className="wkp-zweitausbildung-sub-layer-info">
-      {title ? (
-        <div className="wkp-zweitausbildung-sub-layer-info-title">
-          {t(title)}
-        </div>
-      ) : null}
-      <div className="wkp-zweitausbildung-sub-layer-info-legend">
+    <div>
+      {title ? <p>{t(title)}</p> : null}
+      <div className={classes.legend}>
         {legend.map((item) => (
           <div key={item.name}>
             <img
@@ -38,4 +51,4 @@ const ZweitausbildungSubLayerInfo = ({ t, properties, staticFilesUrl }) => {
 
 ZweitausbildungSubLayerInfo.propTypes = propTypes;
 
-export default compose(withTranslation())(ZweitausbildungSubLayerInfo);
+export default ZweitausbildungSubLayerInfo;

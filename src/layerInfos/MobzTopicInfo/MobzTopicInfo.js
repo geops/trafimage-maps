@@ -14,30 +14,30 @@ const MobzTopicInfo = ({ language, t, properties }) => {
   const { infos } = properties;
   const desc = {
     de: (
-      <span>
+      <p>
         Multimodale Umsteigedrehscheiben des öffentlichen Personenverkehrs.
         Möglichst attraktive Umsteigebeziehungen zwischen der Bahn und der
         Anschlussmobilität mit zum Teil auch neuen Verkehrsträgern. Auf Stärken
         der Bahn in der Reisekette setzen und diese weiter ausbauen.
-      </span>
+      </p>
     ),
     fr: (
-      <span>
+      <p>
         Plaques tournantes multimodales (correspondances) du trafic voyageurs
         par les transports publics. Liaisons aussi attrayantes que possible
         entre le rail et la mobilité combinée, avec des modes de transport en
         partie nouveaux. S’appuyer sur les atouts du chemin de fer dans la
         chaîne de voyage et continuer à les renforcer.
-      </span>
+      </p>
     ),
     it: (
-      <span>
+      <p>
         Nodo multimodale di cambio del trasporto pubblico viaggiatori.
         Interessanti coincidenze per il cambio tra ferrovia e mobilità
         combinata, in parte anche con nuovi modi di trasporto. Puntare sui punti
         di forza della ferrovia nella catena di viaggio per ampliarla
         ulteriormente.
-      </span>
+      </p>
     ),
   };
 

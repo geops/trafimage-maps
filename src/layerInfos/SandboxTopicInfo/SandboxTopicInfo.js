@@ -38,7 +38,7 @@ const propTypes = {
 const SandboxTopicInfo = ({ language }) => {
   return (
     <div>
-      {translations[language]['ch.sbb.netzkarte.sandbox-desc']}
+      <p>{translations[language]['ch.sbb.netzkarte.sandbox-desc']}</p>
       <p>
         {translations[language].Verantwortlich}:
         <br />
