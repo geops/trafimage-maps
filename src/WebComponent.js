@@ -12,7 +12,7 @@ const propTypes = {
   /**
    * Configuration of the topics to load. See examples to learn how topics
    * can be configured or use the 'appName' attribute to load a predefined
-   * topic configuration (ask us for help).
+   * topic configuration (ask us for help). lalal
    */
   topics: PropTypes.array,
 
