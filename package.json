@@ -127,8 +127,8 @@
     "link2": "cmdToAdd=$(node ./scripts/read-pkg-json.js add) && $cmdToAdd && yarn build && cmdToRemove=$(node ./scripts/read-pkg-json.js remove) && $cmdToRemove && cd build && yarn link",
     "lint": "eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
     "prebuild": "rm -rf build/",
-    "publish:alpha": "yarn release -- --prerelease alpha --skip.changelog && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version",
-    "publish:beta": "yarn release -- --prerelease beta --skip.changelog && git push origin HEAD && yarn run build && yarn publish build/ --access public --no-git-tag-version --tag beta",
+    "publish:alpha": "yarn release -- --prerelease alpha --skip.changelog && git push origin HEAD && yarn run build  && git push --tags && yarn publish build/ --access public --tag beta",
+    "publish:beta": "yarn release -- --prerelease beta --skip.changelog && git push origin HEAD && yarn run build  && git push --tags && yarn publish build/ --access public --tag beta",
     "publish:beta:dryrun": "yarn release -- --prerelease beta --dry-run --skip.changelog",
     "publish:public": "yarn release && git push origin HEAD && yarn run build && git push --tags && yarn publish build/ --access public",
     "publish:public:dryrun": "yarn release --dry-run",
@@ -144,6 +144,15 @@
     "not dead",
     "not op_mini all"
   ],
+  "commitlint": {
+    "rules": {
+      "body-case": [
+        0,
+        "always",
+        "sentence-case"
+      ]
+    }
+  },
   "config-overrides-path": "packages/wc/config-overrides.js",
   "eslintConfig": {
     "env": {
