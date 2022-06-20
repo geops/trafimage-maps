@@ -104,6 +104,7 @@
     "release-please": "13.18.3",
     "sass": "1.49.9",
     "sort-json": "2.0.0",
+    "standard-version": "9.5.0",
     "start-server-and-test": "1.14.0",
     "stream-array": "1.1.2",
     "stylelint": "13.13.1",
