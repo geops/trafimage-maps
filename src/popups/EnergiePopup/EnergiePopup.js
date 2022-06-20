@@ -238,5 +238,5 @@ EnergiePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-EnergiePopup.renderTitle = (feat, layer, t) => t('Detailinformation');
+EnergiePopup.renderTitle = (feat, layer, t) => t('Detailinformationen');
 export default EnergiePopup;
