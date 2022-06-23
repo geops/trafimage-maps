@@ -34,8 +34,26 @@ class StopFinder extends Search {
       });
   }
 
+  getItems() {
+    if (this.collapsed) {
+      // When collapsed we move first Swiss result to second position
+      const sorted = [...this.items];
+      console.log(sorted[0]);
+      const firstSwissStationIdx = sorted.findIndex(
+        (feat) => feat.properties.country_code === 'CH',
+      );
+      if (firstSwissStationIdx > 0) {
+        sorted.splice(1, 0, sorted.splice(firstSwissStationIdx, 1)[0]);
+      }
+      return sorted.slice(0, 2);
+    }
+    return this.items;
+  }
+
   render(item) {
-    return <div>{item.properties.name}</div>;
+    return (
+      <div>{`${item.properties.name} - ${item.properties.municipality_name} (${item.properties.country_code})`}</div>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this
