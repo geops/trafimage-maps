@@ -38,7 +38,6 @@ class StopFinder extends Search {
     if (this.collapsed) {
       // When collapsed we move first Swiss result to second position
       const sorted = [...this.items];
-      console.log(sorted[0]);
       const firstSwissStationIdx = sorted.findIndex(
         (feat) => feat.properties.country_code === 'CH',
       );
