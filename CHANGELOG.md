@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.1](https://github.com/geops/trafimage-maps/compare/v1.12.0...v1.12.1) (2022-06-27)
+
+
+### Bug Fixes
+
+* **station-search:** always show first Swiss station in search results when collapsed ([#1013](https://github.com/geops/trafimage-maps/issues/1013)) ([d196004](https://github.com/geops/trafimage-maps/commit/d196004ba5fbb8dc82913511ea723e2862d6b361))
+
 ## [1.12.0](https://github.com/geops/trafimage-maps/compare/v1.11.0...v1.12.0) (2022-06-20)
 
 ## [1.11.0](https://github.com/geops/trafimage-maps/compare/v1.8.0...v1.11.0) (2022-06-17)
