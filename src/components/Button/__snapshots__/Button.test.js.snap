@@ -1,14 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button should match snapshot. 1`] = `
-<div
-  aria-label="Zoom in"
-  className="tm-zoom in"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex={0}
-  title="Zoom in"
+<div role="button"
+     tabindex="0"
+     class="tm-zoom in"
+     title="Zoom in"
+     aria-label="Zoom in"
 >
   +
 </div>
