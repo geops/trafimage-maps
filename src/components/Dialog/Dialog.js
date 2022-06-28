@@ -56,6 +56,14 @@ const useStyles = makeStyles((theme) => ({
     },
     '&>div:first-child': {
       padding: 20,
+
+      '& > *:first-child': {
+        marginTop: 0,
+      },
+
+      '& > *:last-child': {
+        marginBottom: 0,
+      },
     },
     overflowY: 'auto',
   },

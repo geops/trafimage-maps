@@ -1,7 +1,7 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import thunk from 'redux-thunk';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import LayerService from 'react-spatial/LayerService';
@@ -53,7 +53,7 @@ describe('Permalink', () => {
 
   test('shoud initialize Permalink with layerService.', () => {
     expect(window.location.search).toEqual('');
-    mount(
+    render(
       <Provider store={store}>
         <Permalink />
       </Provider>,
@@ -68,7 +68,7 @@ describe('Permalink', () => {
       undefined,
       '/?lang=de&tripNumber=150, 200, 300',
     );
-    mount(
+    render(
       <Provider store={store}>
         <Permalink />
       </Provider>,
@@ -81,7 +81,7 @@ describe('Permalink', () => {
 
   test("shoud remove space from 'operator' Tracker filter.", () => {
     window.history.pushState({}, undefined, '/?lang=de&operator=sbb,  zsg');
-    mount(
+    render(
       <Provider store={store}>
         <Permalink />
       </Provider>,
@@ -98,7 +98,7 @@ describe('Permalink', () => {
       undefined,
       '/?lang=de&publishedLineName=2068, 3003 ',
     );
-    mount(
+    render(
       <Provider store={store}>
         <Permalink />
       </Provider>,
@@ -111,7 +111,7 @@ describe('Permalink', () => {
 
   test('shoud use x,y in mercator.', () => {
     window.history.pushState({}, undefined, '/?x=6456530&y=-7170156 ');
-    mount(
+    render(
       <Provider store={store}>
         <Permalink />
       </Provider>,
@@ -128,7 +128,7 @@ describe('Permalink', () => {
 
   test('shoud transform lon,lat to mercator.', () => {
     window.history.pushState({}, undefined, '/?lon=58&lat=-54 ');
-    mount(
+    render(
       <Provider store={store}>
         <Permalink />
       </Provider>,
@@ -149,20 +149,15 @@ describe('Permalink', () => {
         admin_id: 'qux',
         file_id: 'quu',
       };
-      let wrapper;
       await act(async () => {
         fetchMock.once('http://drawfoo.ch/foo', drawIds);
         fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
-        wrapper = mount(
+        render(
           <Provider store={store}>
             <Permalink />
           </Provider>,
         );
       });
-      wrapper.update();
-      wrapper.update();
-      wrapper.update();
-      wrapper.update();
       expect(window.location.search).toEqual(
         '?draw.id=foo&lang=de&layers=testlayer',
       );
@@ -179,7 +174,7 @@ describe('Permalink', () => {
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
       await act(async () => {
         fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
-        mount(
+        render(
           <Provider store={store}>
             <Permalink />
           </Provider>,
@@ -204,12 +199,11 @@ describe('Permalink', () => {
     expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
     await act(async () => {
       fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
-      const wrapper = mount(
+      render(
         <Provider store={store}>
           <Permalink />
         </Provider>,
       );
-      wrapper.update();
     });
     expect(window.location.search).toEqual(
       '?draw.id=quu&lang=de&layers=testlayer',

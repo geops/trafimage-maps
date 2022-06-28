@@ -1,28 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
+import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
   staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const ZweitausbildungRoutesSubLayerInfo = ({
-  t,
-  properties,
-  staticFilesUrl,
-}) => {
+const useStyles = makeStyles(() => ({
+  legend: {
+    overflowY: 'auto',
+    height: 120,
+    boxShadow: '-1px 1px 2px rgba(0, 0, 0, 0.4)',
+  },
+}));
+
+const ZweitausbildungRoutesSubLayerInfo = ({ properties, staticFilesUrl }) => {
+  const { t } = useTranslation();
   const { infos } = properties.get('zweitausbildung');
   const { title, desc, legend } = infos;
+  const classes = useStyles();
+
   return (
-    <div className="wkp-zweitausbildung-routes-sub-layer-info">
-      {t(title)}
-      <div className="wkp-zweitausbildung-routes-sub-layer-info-desc">
-        {t(desc)}
-      </div>
-      <div className="wkp-zweitausbildung-routes-sub-layer-info-legend">
+    <div>
+      <p>{t(title)}</p>
+      <p>{t(desc)}</p>
+      <div className={classes.legend}>
         <img
           src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
           draggable="false"
@@ -35,4 +39,4 @@ const ZweitausbildungRoutesSubLayerInfo = ({
 
 ZweitausbildungRoutesSubLayerInfo.propTypes = propTypes;
 
-export default compose(withTranslation())(ZweitausbildungRoutesSubLayerInfo);
+export default ZweitausbildungRoutesSubLayerInfo;

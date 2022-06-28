@@ -11,8 +11,10 @@ const defaultProps = {};
 
 const desc = {
   de: (
-    <div>
-      Das Kartenthema zeigt verschiedene Varianten der Trafimage Netzkarte.
+    <>
+      <p>
+        Das Kartenthema zeigt verschiedene Varianten der Trafimage Netzkarte.
+      </p>
       <p>
         Die Karten unterscheiden sich im Hinblick auf die Informationsdichte und
         die farbliche Gestaltung. Für die flexible Erstellung dieser und
@@ -20,12 +22,14 @@ const desc = {
         Datenintegration über Styling bis hin zur Publikation alle Aspekte der
         Kartenproduktion abdeckt.
       </p>
-    </div>
+    </>
   ),
   fr: (
-    <div>
-      La carte thématique présente différentes variantes de la carte de réseau
-      Trafimage.
+    <>
+      <p>
+        La carte thématique présente différentes variantes de la carte de réseau
+        Trafimage.
+      </p>
       <p>
         Les cartes se différencient par la densité des informations présentées
         et l’agencement des couleurs. Pour la création flexible de ces cartes et
@@ -33,22 +37,26 @@ const desc = {
         les aspects de la production de cartes, de l’intégration des données à
         la publication, en passant par le style.
       </p>
-    </div>
+    </>
   ),
   en: (
-    <div>
-      The map theme shows different variants of the Trafimage network map.
+    <>
+      <p>
+        The map theme shows different variants of the Trafimage network map.
+      </p>
       <p>
         The maps differ in terms of level of information and colour design. For
         the flexible creation of these and other maps, we use our web-based
         workflow, which covers all aspects of map production from data
         integration and styling to publication.
       </p>
-    </div>
+    </>
   ),
   it: (
-    <div>
-      Il tema carta mostra diverse varianti della carta della rete Trafimage.
+    <>
+      <p>
+        Il tema carta mostra diverse varianti della carta della rete Trafimage.
+      </p>
       <p>
         Le carte si differenziano a livello cromatico e di quantità
         d’informazioni. Per la configurazione flessibile delle carte utilizziamo
@@ -56,7 +64,7 @@ const desc = {
         produzione della carta (dall’integrazione dei dati, allo styling, alla
         pubblicazione).
       </p>
-    </div>
+    </>
   ),
 };
 
