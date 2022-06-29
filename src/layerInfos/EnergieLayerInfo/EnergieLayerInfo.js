@@ -95,7 +95,7 @@ InfoBody.propTypes = {
 
 const EnergieLayerInfo = ({ properties, t }) => {
   return (
-    <>
+    <div>
       <InfoBody name={properties.name} t={t} />
       <p>
         {t('Verantwortlich')}:
@@ -104,7 +104,7 @@ const EnergieLayerInfo = ({ properties, t }) => {
         <br />
         <a href="mailto:energienetz-b-i@sbb.ch">energienetz-b-i@sbb.ch</a>.
       </p>
-    </>
+    </div>
   );
 };
 
