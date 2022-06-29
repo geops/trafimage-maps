@@ -54,7 +54,7 @@ const InfoBody = ({ name, t }) => {
         kategorie="UW"
         label={capitalizeFirstLetter(
           `${t(name)} (UW), ${t('fahrbare Unterwerke')} (fUW), ${t(
-            'Autrotrafo',
+            'Autotrafo',
           )} (AT), ${t('Schaltposten')} 132kV (SP)`,
         )}
       />
