@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.2](https://github.com/geops/trafimage-maps/compare/v1.12.1...v1.12.2) (2022-06-29)
+
+
+### Bug Fixes
+
+* **energie:** fix Energie-LayerInfo layout ([1fc0faa](https://github.com/geops/trafimage-maps/commit/1fc0faaf8b04cfab2b1a1684de486cb227da8404))
+* **translations:** corrected typography errors ([2d002fe](https://github.com/geops/trafimage-maps/commit/2d002fec1007948d502a4d9ef0ac0846705b9b4d))
+
 ### [1.12.1](https://github.com/geops/trafimage-maps/compare/v1.12.0...v1.12.1) (2022-06-27)
 
 
