@@ -85,7 +85,7 @@ const comps = {
       quest&apos;area devono essere sottoposti all&apos;approvazione di FFS
       Energia ai sensi dell&apos;art. 18m della Legge sulle ferrovie.
       Informazioni dettagliate e modalità di presentazione sono disponibili sul
-      sito::
+      sito:
       <p>
         <a href="https://company.sbb.ch/it/azienda/progetti/autorizzazione-ai-lavori-progetti.html">
           Autorizzazione ai lavori/ progetti nelle vicinanze della ferrovia,
@@ -105,8 +105,8 @@ const comps = {
   ),
 };
 
-const EnergieTopicInfo = ({ language }) => {
+const EnergiePublicTopicInfo = ({ language }) => {
   return comps[language];
 };
 
-export default EnergieTopicInfo;
+export default EnergiePublicTopicInfo;
