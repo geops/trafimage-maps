@@ -2,9 +2,10 @@ import React from 'react';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
+import { render } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
-import { mount } from 'enzyme';
 import OLLayer from 'ol/layer/Vector';
+import { bahnhofplaene } from '../../config/ch.sbb.netzkarte';
 import LayerInfosDialog from '.';
 
 describe('LayerInfosDialog', () => {
@@ -29,20 +30,35 @@ describe('LayerInfosDialog', () => {
   });
 
   test('should match snapshot when Layer is null', () => {
-    const component = mount(
+    const { container } = render(
       <Provider store={store}>
         <LayerInfosDialog />
       </Provider>,
     );
-    expect(component.html()).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
   });
 
   test('should match snapshot when Layer is defined', () => {
-    const component = mount(
+    const { container } = render(
       <Provider store={store}>
         <LayerInfosDialog selectedForInfos={layer} />
       </Provider>,
     );
-    expect(component.html()).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
+  });
+
+  describe('should display data link ', () => {
+    test('for layer bahnhofplaene', () => {
+      const { container } = render(
+        <Provider store={store}>
+          <LayerInfosDialog selectedForInfos={bahnhofplaene} />
+        </Provider>,
+      );
+
+      const link = container.querySelector('a.wkp-link');
+      expect(link.href).toBe(
+        'https://data.sbb.ch/explore/dataset/haltestelle-karte-trafimage/information/',
+      );
+    });
   });
 });

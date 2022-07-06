@@ -12,22 +12,22 @@ const defaultProps = {};
 const InfoFPWTopicInfo = ({ language, t }) => {
   const desc = {
     de: (
-      <span>
+      <p>
         Die Infografik gibt eine Übersicht zu den Änderungen und zum Ausbau des
         Angebotes per Fahrplanwechsel 2019.
-      </span>
+      </p>
     ),
     fr: (
-      <span>
+      <p>
         L’infographie donne un aperçu des changements et de l’aménagement de
         l’offre prévus au changement d’horaire 2019.
-      </span>
+      </p>
     ),
     it: (
-      <span>
+      <p>
         L’infografica fornisce una panoramica delle modifiche e dello sviluppo
         dell’offerta dal cambiamento d’orario 2019.
-      </span>
+      </p>
     ),
   };
 

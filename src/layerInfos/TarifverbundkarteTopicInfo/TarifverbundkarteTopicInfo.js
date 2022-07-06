@@ -22,8 +22,10 @@ const TarifverbundkarteTopicInfo = ({ language, t, staticFilesUrl }) => {
   const comps = {
     de: (
       <div>
-        Die Verbund-Landschaft der Schweiz. Finden Sie das für Sie passende
-        Pendler- und Freizeitabo im Tarifverbund Ihrer Region.
+        <p>
+          Die Verbund-Landschaft der Schweiz. Finden Sie das für Sie passende
+          Pendler- und Freizeitabo im Tarifverbund Ihrer Region.
+        </p>
         <p>{img}</p>
         <p>
           Verantwortlich: SBB Personenverkehr – Marketing – Konzeption
@@ -33,9 +35,11 @@ const TarifverbundkarteTopicInfo = ({ language, t, staticFilesUrl }) => {
     ),
     fr: (
       <div>
-        Les communautés tarifaires en Suisse: trouvez l’abonnement pendulaire
-        et/ou loisirs qui vous convient dans la communauté tarifaire de votre
-        région.
+        <p>
+          Les communautés tarifaires en Suisse: trouvez l’abonnement pendulaire
+          et/ou loisirs qui vous convient dans la communauté tarifaire de votre
+          région.
+        </p>
         <p>{img}</p>
         <p>
           Responsable: CFF Voyageurs – Marketing – Conception
@@ -45,8 +49,10 @@ const TarifverbundkarteTopicInfo = ({ language, t, staticFilesUrl }) => {
     ),
     en: (
       <div>
-        Switzerland’s network landscape. Find the right travelcard for you for
-        commuting or leisure from your region’s fare network.
+        <p>
+          Switzerland’s network landscape. Find the right travelcard for you for
+          commuting or leisure from your region’s fare network.
+        </p>
         <p>{img}</p>
         <p>
           Responsible: SBB Passenger Traffic – Marketing – Conception
@@ -56,9 +62,11 @@ const TarifverbundkarteTopicInfo = ({ language, t, staticFilesUrl }) => {
     ),
     it: (
       <div>
-        La cartina delle comunità tariffarie svizzere. Cercate l’abbonamento per
-        pendolari o per il tempo libero più adatto a voi nella comunità
-        tariffaria della vostra regione.
+        <p>
+          La cartina delle comunità tariffarie svizzere. Cercate l’abbonamento
+          per pendolari o per il tempo libero più adatto a voi nella comunità
+          tariffaria della vostra regione.
+        </p>
         <p>{img}</p>
         <p>
           Responsabile: FFS Viaggiatori – Marketing – Concezione

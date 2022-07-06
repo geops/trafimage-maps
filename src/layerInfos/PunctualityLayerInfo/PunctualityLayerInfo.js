@@ -99,8 +99,10 @@ const PunctualityLayerInfo = ({ language, t }) => {
   const comps = {
     de: (
       <div>
-        Der Zugtracker zeigt die aktuellen Verbindungen basierend auf dem Soll-
-        und Ist-Fahrplan des Schweizer ÖV.
+        <p>
+          Der Zugtracker zeigt die aktuellen Verbindungen basierend auf dem
+          Soll- und Ist-Fahrplan des Schweizer ÖV.
+        </p>
         {legend}
         <p>
           Daten:&nbsp;
@@ -117,8 +119,10 @@ const PunctualityLayerInfo = ({ language, t }) => {
     ),
     fr: (
       <div>
-        Le train tracker indique les trajets en cours en se basant sur l’horaire
-        théorique et réel des transports publiques suisses.
+        <p>
+          Le train tracker indique les trajets en cours en se basant sur
+          l’horaire théorique et réel des transports publiques suisses.
+        </p>
         {legend}
         <p>
           Données:&nbsp;
@@ -135,8 +139,10 @@ const PunctualityLayerInfo = ({ language, t }) => {
     ),
     en: (
       <div>
-        The train tracker shows current connections based on the planned and
-        actual timetable for Swiss public transport.
+        <p>
+          The train tracker shows current connections based on the planned and
+          actual timetable for Swiss public transport.
+        </p>
         {legend}
         <p>
           Data:&nbsp;
@@ -153,8 +159,10 @@ const PunctualityLayerInfo = ({ language, t }) => {
     ),
     it: (
       <div>
-        Il train tracker mostra i collegamenti aggiornati sulla base dell’orario
-        teorico e attuale dei trasporti pubblici svizzeri.
+        <p>
+          Il train tracker mostra i collegamenti aggiornati sulla base
+          dell’orario teorico e attuale dei trasporti pubblici svizzeri.
+        </p>
         {legend}
         <p>
           Dati:&nbsp;

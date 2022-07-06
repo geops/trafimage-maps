@@ -108,6 +108,8 @@ export const passagierfrequenzen = new MapboxStyleLayer({
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
     popupComponent: 'PassagierFrequenzenPopup',
     useOverlay: true,
+    dataLink: 'https://reporting.sbb.ch/bahnhoefe',
+    dataLinkPortalName: 'Statistikportal',
   },
 });
 
@@ -118,6 +120,8 @@ export const bahnhofplaene = new Layer({
   properties: {
     hasInfos: true,
     description: 'ch.sbb.bahnhofplaene-desc',
+    dataLink:
+      'https://data.sbb.ch/explore/dataset/haltestelle-karte-trafimage/information/',
   },
 });
 bahnhofplaene.children = [
@@ -275,6 +279,8 @@ export const direktverbindungenLayer = new Layer({
   properties: {
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenLayerInfo',
+    dataLink:
+      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
   },
 });
 export const defaultBaseLayers = [

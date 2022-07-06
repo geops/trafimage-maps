@@ -15,36 +15,34 @@ const title = {
 
 const description = {
   de: (
-    <>
+    <p>
       Örtliche Ansprechpartner für Arbeitsstellensicherheit auf Baustellen
       Dritter im Gefahrenbereich der Bahninfrastruktur.
-    </>
+    </p>
   ),
   fr: (
-    <>
+    <p>
       Partenaire local pour la securité des chantiers sur des chantiers de tiers
       dans la zone de danger de l’infrastructure ferroviaire.
-    </>
+    </p>
   ),
   en: (
-    <>
+    <p>
       Local contacts for occuppational safety on third-party construction sites
       in the hazardous area of railway infrastructure.
-    </>
+    </p>
   ),
   it: (
-    <>
+    <p>
       Interlocutori in loco per la sicurezza sulle aree dei lavori presso
       cantieri di terzi ubicati nella zona di pericolo dell’infrastruttura
       ferroviaria.
-    </>
+    </p>
   ),
 };
 
 const useStyles = makeStyles((theme) => ({
   legend: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
     '& > div': {
       display: 'flex',
       alignItems: 'center',
@@ -61,7 +59,7 @@ const RegionenkartePublicLayerInfo = ({ language }) => {
   const classes = useStyles();
   return (
     <div>
-      <div>{title[language]}</div>
+      <p>{title[language]}</p>
       <div className={classes.legend}>
         <div>
           <img src={grun} alt="grun" />

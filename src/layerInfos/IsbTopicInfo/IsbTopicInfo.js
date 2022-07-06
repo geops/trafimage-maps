@@ -41,7 +41,7 @@ const IsbTopicInfo = ({ language }) => {
     translations[language];
   return (
     <div>
-      {title}
+      <p>{title}</p>
       <p>{description}</p>
       <p>
         {responsible}:

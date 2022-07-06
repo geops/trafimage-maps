@@ -10,7 +10,7 @@ const propTypes = {
 const ZweitausbildungTopicInfo = ({ t }) => {
   return (
     <div>
-      {t('ch.sbb.zweitausbildung-desc')}
+      <p>{t('ch.sbb.zweitausbildung-desc')}</p>
       <p>
         {t('Verantwortlich')}:
         <br />

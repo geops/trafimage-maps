@@ -60,7 +60,7 @@ const IsbOtherLayerInfo = ({ properties: layer }) => {
   operators.push(['', othersOperators.join(', ')]);
   return (
     <div>
-      {title}
+      <p>{title}</p>
       <p>{description}</p>
       <div>
         {operators.map(([shortName, longName]) => {

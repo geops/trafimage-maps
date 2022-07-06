@@ -5,7 +5,6 @@ import { Layer } from 'mobility-toolbox-js/ol';
 
 const useStyles = makeStyles({
   legendItem: {
-    margin: '10px 0',
     display: 'flex',
     alignItems: 'center',
   },
@@ -26,35 +25,35 @@ const propTypes = {
 
 const comps = {
   de: (
-    <div>
+    <p>
       Diese Karte bildet alle Fernverkehrsverbindungen ab, welche über Nacht
       direkt ab der Schweiz nach Europa verkehren.
-    </div>
+    </p>
   ),
   fr: (
-    <div>
+    <p>
       Cette carte représente toutes les relations de trafic longue distance qui
       circulent la nuit directement de la Suisse vers l&apos;Europe.
-    </div>
+    </p>
   ),
   en: (
-    <div>
+    <p>
       This map shows all long-distance train services run overnight directly
       from Switzerland to Europe.
-    </div>
+    </p>
   ),
   it: (
-    <div>
+    <p>
       Questa mappa mostra tutti i servizi a lunga percorrenza che circulano
       durante la notte direttamente tra la Svizzera e l&apos;Europa.
-    </div>
+    </p>
   ),
 };
 
 const DirektVerbindungenNachtLayerInfo = ({ t, language, properties }) => {
   const classes = useStyles();
   return (
-    <>
+    <div>
       {comps[language]}
       <div className={classes.legendItem}>
         <div
@@ -63,7 +62,7 @@ const DirektVerbindungenNachtLayerInfo = ({ t, language, properties }) => {
         />
         <div>{t(properties.key)}</div>
       </div>
-    </>
+    </div>
   );
 };
 

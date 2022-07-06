@@ -1,23 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
+import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
   staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
+const useStyles = makeStyles(() => ({
+  legend: {
+    display: 'table',
+    marginTop: '1em',
+
+    '& img': {
+      verticalAlign: 'middle',
+      paddingRight: 10,
+    },
+  },
+}));
+
+const ZweitausbildungLayerInfo = ({ properties, staticFilesUrl }) => {
+  const { t } = useTranslation();
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;
+  const classes = useStyles();
 
   return (
-    <div className="wkp-zweitausbildung-layer-info">
-      <div>{t(title)}</div>
+    <div>
+      <p>{t(title)}</p>
       {legend ? (
-        <div className="wkp-zweitausbildung-layer-info-legend">
+        <div className={classes.legend}>
           <img
             src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
             draggable="false"
@@ -26,7 +39,7 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
           {t(legend.name)}
         </div>
       ) : null}
-      <div>
+      <p>
         {t('Datengrundlage')}:
         <br />
         <a
@@ -36,25 +49,25 @@ const ZweitausbildungLayerInfo = ({ t, properties, staticFilesUrl }) => {
         >
           {t('Link Übersichtsliste Geografie im Produkte-eSpace VM HR-BIL')}
         </a>
-      </div>
-      <div>
+      </p>
+      <p>
         {t('Aktualisierungs-Zyklus')}:
         <br />
         {t(
           'Gemäss Life Cycle Management des Produktemanagements von HR-BIL-SKK(-PM)',
         )}
-      </div>
-      <div>
+      </p>
+      <p>
         {t('Verantwortlich')}:
         <br />
         {t('HR-BIL-SKK-PM (VM und VS)')},
         <br />
         <a href="mailto:pm.skk.kbc@sbb.ch">pm.skk.kbc@sbb.ch</a>.
-      </div>
+      </p>
     </div>
   );
 };
 
 ZweitausbildungLayerInfo.propTypes = propTypes;
 
-export default compose(withTranslation())(ZweitausbildungLayerInfo);
+export default ZweitausbildungLayerInfo;

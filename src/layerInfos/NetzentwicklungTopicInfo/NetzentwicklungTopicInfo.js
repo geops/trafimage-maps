@@ -9,13 +9,11 @@ const propTypes = {
 
 const NetzentwicklungTopicInfo = ({ t }) => {
   return (
-    <>
-      {t('ch.sbb.netzentwicklung-desc')}
-      <br />
-      <br />
+    <div>
+      <p>{t('ch.sbb.netzentwicklung-desc')}</p>
       {t('Verantwortlich')}: I-NAT-NET-UM, Christof Mahnig,{' '}
       <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
-    </>
+    </div>
   );
 };
 
