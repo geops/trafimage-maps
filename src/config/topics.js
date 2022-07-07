@@ -1,6 +1,4 @@
-import React from 'react';
 import { getCenter } from 'ol/extent';
-import GeltungsBereicheMenuFilter from '../filters/GeltungsbereicheMenuFilter';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import netzkarteLayers, {
@@ -285,7 +283,6 @@ export const geltungsbereiche = {
   layers: geltungsbereicheLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
-  topicMenuBottom: ({ topic }) => <GeltungsBereicheMenuFilter topic={topic} />,
   searches: defaultSearches,
 };
 

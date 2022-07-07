@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
-import { Typography, makeStyles } from '@material-ui/core';
-import { geltungsbereicheDataLayer } from '../../config/ch.sbb.geltungsbereiche';
+import { Typography } from '@material-ui/core';
 
-const useStyles = makeStyles(() => {
-  return {
-    subtext: {
-      color: '#888',
-    },
-  };
-});
+// const useStyles = makeStyles(() => {
+//   return {
+//     subtext: {
+//       color: '#888',
+//     },
+//   };
+// });
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -22,41 +21,87 @@ const propTypes = {
 
 const defaultProps = {};
 
-let geltungsbereicheGlobal;
+const desc = {
+  de: (
+    <>
+      <Typography paragraph>
+        <b>General-Abo, seven25-Abo und GA-Monatskarte</b>: Freie Fahrt
+      </Typography>
+      <Typography paragraph>
+        <b>Halbtax-Abo</b>: Fahrt zum ermässigten Preis
+      </Typography>
+      <Typography paragraph>
+        <b>
+          Tageskarte zum Halbtax, Tageskarte Gemeinde, Spartageskarte und
+          Aktionstageskarte
+        </b>
+        : Freie Fahrt
+      </Typography>
+    </>
+  ),
+  fr: (
+    <>
+      <Typography paragraph>
+        <b>Abonnement général/seven25 et carte mensuelle AG</b>: Libre
+        circulation
+      </Typography>
+      <Typography paragraph>
+        <b>Abonnement demi-tarif</b>: Voyages à prix réduit
+      </Typography>
+      <Typography paragraph>
+        <b>
+          Carte journalière pour le demi-tarif, carte journalière Commune, carte
+          journalière dégriffée et carte journalière promo
+        </b>
+        : Libre circulation
+      </Typography>
+    </>
+  ),
+  it: (
+    <>
+      <Typography paragraph>
+        <b>Abbonamento generale, seven25 e carta mensile AG</b>: Libera
+        circolazione
+      </Typography>
+      <Typography paragraph>
+        <b>Abbonamento metà-prezzo</b>: Viaggi a prezzo ridotto
+      </Typography>
+      <Typography paragraph>
+        <b>
+          Carta giornaliera per il metà-prezzo, carta giornaliera Comune, carta
+          giornaliera risparmio e carta giornaliera promo
+        </b>
+        : Libera circolazione
+      </Typography>
+    </>
+  ),
+  en: (
+    <>
+      <Typography paragraph>
+        <b>GA, seven25 Travelcard and 1-month GA Travelcard</b>: Free travel
+      </Typography>
+      <Typography paragraph>
+        <b>Half Fare Card</b>: Reduced price
+      </Typography>
+      <Typography paragraph>
+        <b>
+          One-day travelpass for the Half Fare Card, municipal one-day
+          travelpass, Saver Day Pass and special Day Pass
+        </b>
+        : Free travel
+      </Typography>
+    </>
+  ),
+};
 
 const GeltungsbereichePopup = ({ feature, layer }) => {
-  const { t } = useTranslation();
-  const classes = useStyles();
-  const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
-  const [geltungsbereicheMapping, setGeltungsbereicheMapping] = useState();
-  const apiKey = useSelector((state) => state.app.apiKey);
+  const { t, i18n } = useTranslation();
+  // const classes = useStyles();
+  // const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = topic.layers.filter((l) => {
     return /^ch.sbb.geltungsbereiche-/.test(l.key);
   });
-
-  useEffect(() => {
-    if (geltungsbereicheGlobal) {
-      setGeltungsbereicheMapping(geltungsbereicheGlobal);
-      return;
-    }
-    fetch(
-      `${geltungsbereicheDataLayer.url}/data/ch.sbb.geltungsbereiche.json?key=${apiKey}`,
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // We store the products in global variable to avoid fetching it every time
-        geltungsbereicheGlobal = data['geops.geltungsbereiche'];
-        setGeltungsbereicheMapping(data['geops.geltungsbereiche']);
-      })
-      .catch((err) =>
-        // eslint-disable-next-line no-console
-        console.error(
-          err,
-          new Error('Failed to fetch ch.sbb.geltungsbereiche.json'),
-        ),
-      );
-  }, [apiKey]);
 
   useEffect(() => {
     // Shift select style to current feature
@@ -68,18 +113,7 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
 
   return (
     <div className="wkp-geltungsbereiche-popup">
-      {(geltungsbereiche &&
-        geltungsbereicheMapping &&
-        Object.entries(geltungsbereiche).map((entry) => {
-          return (
-            <Typography paragraph key={entry[0]}>
-              <b>{geltungsbereicheMapping[entry[0]]}</b>
-              <br />
-              <span className={classes.subtext}>{entry[1].join(', ')}</span>
-            </Typography>
-          );
-        })) ||
-        t('Keine Geltungsbereiche gefunden')}
+      {desc[i18n.language] || t('Keine Geltungsbereiche gefunden')}
     </div>
   );
 };
