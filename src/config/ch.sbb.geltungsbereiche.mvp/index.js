@@ -27,23 +27,23 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
   },
 });
 
-export const geltungsbereicheSTS = new GeltungsbereicheLayer({
-  name: 'ch.sbb.geltungsbereiche.mvp-sts',
-  visible: false,
-  mapboxLayer: geltungsbereicheDataLayer,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['geltungsbereiche.filter'] &&
-    /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
-  properties: {
-    popupComponent: 'GeltungsbereicheGaPopup',
-    useOverlay: true,
-    radioGroup: 'ch.sbb.geltungsbereiche.group',
-  },
-});
+// export const geltungsbereicheSTS = new GeltungsbereicheLayer({
+//   name: 'ch.sbb.geltungsbereiche.mvp-sts',
+//   visible: false,
+//   mapboxLayer: geltungsbereicheDataLayer,
+//   queryRenderedLayersFilter: ({ metadata }) =>
+//     metadata &&
+//     metadata['geltungsbereiche.filter'] &&
+//     /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
+//   properties: {
+//     popupComponent: 'GeltungsbereicheGaPopup',
+//     useOverlay: true,
+//     radioGroup: 'ch.sbb.geltungsbereiche.group',
+//   },
+// });
 
 export default [
   geltungsbereicheDataLayer,
-  geltungsbereicheSTS,
+  // geltungsbereicheSTS,
   geltungsbereicheGA,
 ];

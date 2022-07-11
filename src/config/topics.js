@@ -275,8 +275,8 @@ const sandbox = {
 };
 
 export const geltungsbereicheMvp = {
-  name: 'ch.sbb.geltungsbereiche.mvp',
-  key: 'ch.sbb.geltungsbereiche.mvp',
+  name: 'ch.sbb.geltungsbereiche',
+  key: 'ch.sbb.geltungsbereiche',
   elements: {
     ...defaultElements,
     popup: true,
@@ -289,8 +289,8 @@ export const geltungsbereicheMvp = {
 };
 
 export const geltungsbereiche = {
-  name: 'ch.sbb.geltungsbereiche',
-  key: 'ch.sbb.geltungsbereiche',
+  name: 'ch.sbb.geltungsbereiche-beta',
+  key: 'ch.sbb.geltungsbereiche-beta',
   elements: {
     ...defaultElements,
     popup: true,
