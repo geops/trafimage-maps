@@ -1,6 +1,5 @@
 import React from 'react';
 import { getCenter } from 'ol/extent';
-import GeltungsBereicheMenuFilter from '../filters/GeltungsbereicheMenuFilter';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import netzkarteLayers, {
@@ -26,8 +25,9 @@ import isbLayers from './ch.sbb.isb';
 import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
+import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import defaultSearches, { handicapStopFinder } from './searches';
-
+import { GeltungsbereicheMenuFilter } from '../filters';
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -274,9 +274,23 @@ const sandbox = {
   searches: defaultSearches,
 };
 
-export const geltungsbereiche = {
+export const geltungsbereicheMvp = {
   name: 'ch.sbb.geltungsbereiche',
   key: 'ch.sbb.geltungsbereiche',
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+  },
+  layers: geltungsbereicheMvpLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  searches: defaultSearches,
+};
+
+export const geltungsbereiche = {
+  name: 'ch.sbb.geltungsbereiche-beta',
+  key: 'ch.sbb.geltungsbereiche-beta',
   elements: {
     ...defaultElements,
     popup: true,
@@ -285,7 +299,7 @@ export const geltungsbereiche = {
   layers: geltungsbereicheLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
-  topicMenuBottom: ({ topic }) => <GeltungsBereicheMenuFilter topic={topic} />,
+  topicMenuBottom: ({ topic }) => <GeltungsbereicheMenuFilter topic={topic} />,
   searches: defaultSearches,
 };
 
@@ -301,6 +315,7 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
+    geltungsbereicheMvp,
     geltungsbereiche,
     energiePublic,
     showcases,
