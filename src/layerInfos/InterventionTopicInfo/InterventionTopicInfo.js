@@ -11,7 +11,7 @@ const defaultProps = {};
 const InterventionTopicInfo = ({ t }) => {
   return (
     <div>
-      {t('ch.sbb.intervention-desc')}
+      <p>{t('ch.sbb.intervention-desc')}</p>
       <p>
         {t('Verantwortlich')}:
         <br />

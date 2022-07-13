@@ -1,6 +1,6 @@
 import React from 'react';
 import { MatomoProvider } from '@datapunt/matomo-tracker-react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
 import MatomoTracker from './MatomoTracker';
@@ -28,7 +28,7 @@ describe('MatomoTracker', () => {
   });
 
   test('shoud do nothing before consent is given.', () => {
-    mount(
+    render(
       <MatomoProvider value={matomo}>
         <Provider store={store}>
           <MatomoTracker />
@@ -42,7 +42,7 @@ describe('MatomoTracker', () => {
   });
 
   test('shoud do nothing if matomo is not defined.', () => {
-    mount(
+    render(
       <MatomoProvider value={null}>
         <Provider store={store}>
           <MatomoTracker />
@@ -56,7 +56,7 @@ describe('MatomoTracker', () => {
   });
 
   test('shoud start tracking page view when consent is given.', () => {
-    mount(
+    render(
       <MatomoProvider value={matomo}>
         <Provider store={store}>
           <MatomoTracker />
@@ -75,7 +75,7 @@ describe('MatomoTracker', () => {
   });
 
   test('shoud disable cookies just after that the consent is given.', () => {
-    mount(
+    render(
       <MatomoProvider value={matomo}>
         <Provider store={store}>
           <MatomoTracker />
@@ -96,7 +96,7 @@ describe('MatomoTracker', () => {
   });
 
   test('shoud sent tracking event when active topic changed,', () => {
-    mount(
+    render(
       <MatomoProvider value={matomo}>
         <Provider store={store}>
           <MatomoTracker />
@@ -120,7 +120,7 @@ describe('MatomoTracker', () => {
 
   test('shoud not sent tracking event when topic has already been visited within 30 min,', () => {
     Date.now = jest.fn(() => 1);
-    mount(
+    render(
       <MatomoProvider value={matomo}>
         <Provider store={store}>
           <MatomoTracker />

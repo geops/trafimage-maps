@@ -1,7 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
+import DataLink from '../../components/DataLink';
 
 const useStyles = makeStyles({
   legendItem: {
@@ -19,14 +21,13 @@ const useStyles = makeStyles({
 });
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
-  language: PropTypes.string.isRequired,
   properties: PropTypes.instanceOf(Layer).isRequired,
 };
 
-const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
+const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
-  const legend = properties.children.reverse().map((child) => (
+  const legend = layer.children.reverse().map((child) => (
     <div className={classes.legendItem} key={child.key}>
       <div
         className={classes.itemColor}
@@ -35,15 +36,26 @@ const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
       <div>{t(child.key)}</div>
     </div>
   ));
+
+  const dataLink = layer.get('dataLink') && (
+    <>
+      <hr />
+      <p style={{ marginBottom: 0 }}>
+        <DataLink layer={layer} />
+      </p>
+    </>
+  );
   return (
     <>
-      {language === 'de' && (
+      {i18n.language === 'de' && (
         <div>
-          Die Karte bildet alle Fernverkehrsverbindungen ab, welche direkt ab
-          der Schweiz nach Europa verkehren. Auf der Karte können Informationen
-          zu allen abgebildeten Linien mit einem Klick abgefragt werden. Es
-          besteht die Option nur Tages- oder nur Nachtzuglinien anzuzeigen.
-          <br />
+          <p>
+            Die Karte bildet alle Fernverkehrsverbindungen ab, welche direkt ab
+            der Schweiz nach Europa verkehren. Auf der Karte können
+            Informationen zu allen abgebildeten Linien mit einem Klick abgefragt
+            werden. Es besteht die Option nur Tages- oder nur Nachtzuglinien
+            anzuzeigen.
+          </p>
           <div>{legend}</div>
           <p>
             Datenstand 12. Dezember 2021.
@@ -52,16 +64,18 @@ const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
             <br />
             Internationaler Personenverkehr, SBB AG
           </p>
+          {dataLink}
         </div>
       )}
-      {language === 'fr' && (
+      {i18n.language === 'fr' && (
         <div>
-          La carte représente toutes les liaisons longue distance qui circulent
-          directement de la Suisse vers l&apos;Europe. Sur la carte, il est
-          possible d&apos;obtenir des informations sur toutes les lignes
-          représentées en un seul clic. Il est possible d&apos;afficher
-          uniquement les lignes de jour ou uniquement les lignes de nuit.
-          <br />
+          <p>
+            La carte représente toutes les liaisons longue distance qui
+            circulent directement de la Suisse vers l&apos;Europe. Sur la carte,
+            il est possible d&apos;obtenir des informations sur toutes les
+            lignes représentées en un seul clic. Il est possible d&apos;afficher
+            uniquement les lignes de jour ou uniquement les lignes de nuit.
+          </p>
           <div>{legend}</div>
           <p>
             Mise à jour des données le 12 décembre 2021.
@@ -71,15 +85,17 @@ const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
             <br />
             Trafic voyageurs international, CFF SA
           </p>
+          {dataLink}
         </div>
       )}
-      {language === 'en' && (
+      {i18n.language === 'en' && (
         <div>
-          The map shows all long-distance services that run directly from
-          Switzerland to Europe. Information on all the lines shown on the map
-          can be called up with one click. There is the option to display only
-          day or only night train lines.
-          <br />
+          <p>
+            The map shows all long-distance services that run directly from
+            Switzerland to Europe. Information on all the lines shown on the map
+            can be called up with one click. There is the option to display only
+            day or only night train lines.
+          </p>
           <div>{legend}</div>
           <p>
             Data updated on 12 December 2021.
@@ -88,16 +104,18 @@ const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
             <br />
             International Passenger Traffic, SBB
           </p>
+          {dataLink}
         </div>
       )}
-      {language === 'it' && (
+      {i18n.language === 'it' && (
         <div>
-          La mappa mostra tutti i collegamenti a lunga percorrenza che circolano
-          direttamente tra la Svizzera e l&apos;Europa. Le informazioni su tutte
-          le linee mostrate sulla mappa possono essere richiamate con un clic.
-          C&apos;è l&apos;opzione di visualizzare solo le linee ferroviarie
-          diurne o solo quelle notturne.
-          <br />
+          <p>
+            La mappa mostra tutti i collegamenti a lunga percorrenza che
+            circolano direttamente tra la Svizzera e l&apos;Europa. Le
+            informazioni su tutte le linee mostrate sulla mappa possono essere
+            richiamate con un clic. C&apos;è l&apos;opzione di visualizzare solo
+            le linee ferroviarie diurne o solo quelle notturne.
+          </p>
           <div>{legend}</div>
           <p>
             Stato dei dati 12 dicembre 2021.
@@ -107,6 +125,7 @@ const DirektVerbindungenLayerInfo = ({ t, language, properties }) => {
             <br />
             Traffico passeggeri internazionale, FFS
           </p>
+          {dataLink}
         </div>
       )}
     </>
