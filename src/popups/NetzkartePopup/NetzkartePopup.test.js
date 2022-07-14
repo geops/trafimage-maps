@@ -103,9 +103,9 @@ describe('NetzkartePopup', () => {
         <NetzkartePopup feature={feature} coordinate={[2.5, 2.5]} />
       </Provider>,
     );
-    expect(container.querySelector('a[href="url_bep"]').textContent).toBe(
-      ' url_bep',
-    );
+    expect(
+      container.querySelector('a[href="url_bep"][target="_blank"]').textContent,
+    ).toBe(' url_bepLink.svg');
   });
 
   test('displays the sbb timetable link if name is available.', () => {
@@ -125,8 +125,10 @@ describe('NetzkartePopup', () => {
       </Provider>,
     );
     expect(
-      container.querySelector('a[href="station_timetable_url"]').textContent,
-    ).toBe(' Fahrplan');
+      container.querySelector(
+        'a[href="station_timetable_url"][target="_blank"]',
+      ).textContent,
+    ).toBe(' FahrplanLink.svg');
   });
 
   test('displays the departures link if station is in switzerland.', () => {
@@ -185,8 +187,9 @@ describe('NetzkartePopup', () => {
       </Provider>,
     );
     expect(
-      container.querySelector('a[href="station_service_url"]').textContent,
-    ).toBe(' Webseite Bahnhof');
+      container.querySelector('a[href="station_service_url"][target="_blank"]')
+        .textContent,
+    ).toBe(' Webseite BahnhofLink.svg');
   });
 
   test("doesn't display the station service link if station outside CH.", () => {

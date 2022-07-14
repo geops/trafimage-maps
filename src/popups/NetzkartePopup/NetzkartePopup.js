@@ -6,8 +6,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
 import { Layer } from 'mobility-toolbox-js/ol';
-import { Link } from '@material-ui/core';
+import { Link as MuiLink } from '@material-ui/core';
 import GeometryType from 'ol/geom/GeometryType';
+import Link from '../../components/Link';
 import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
@@ -198,7 +199,7 @@ function NetzkartePopup({ feature, coordinate }) {
       {hasPlanLinks ? (
         <>
           <div>
-            <Link
+            <MuiLink
               onClick={() => {
                 setShowPlanLinks(!showPlanLinks);
               }}
@@ -207,7 +208,7 @@ function NetzkartePopup({ feature, coordinate }) {
               tabIndex="0"
             >
               {t('Bahnhofpläne')}
-            </Link>
+            </MuiLink>
           </div>
           <div
             className={`wkp-bahnhofplan-links${
