@@ -85,8 +85,6 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
-  return `${t('ch.sbb.geltungsbereiche.mvp')} - ${t(
-    `${layer.name || layer.key}`,
-  )}`;
+  return `${t('ch.sbb.geltungsbereiche')} - ${t(`${layer.name || layer.key}`)}`;
 };
 export default GeltungsbereichePopup;
