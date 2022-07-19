@@ -11,6 +11,59 @@ const propTypes = {
   layer: PropTypes.instanceOf(Layer).isRequired,
 };
 
+const ReducedScopeInfo = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Typography paragraph>
+        <b>
+          {t('General-Abo')}, {t('seven25-Abo')} {t('und')}{' '}
+          {t('GA-Monatskarte')}
+        </b>
+        : {t('Fahrt zum ermässigten Preis')}
+      </Typography>
+      <Typography paragraph>
+        <b>{t('Halbtax-Abo')}</b>: {t('Fahrt zum ermässigten Preis')}
+      </Typography>
+      <Typography paragraph>
+        <b>{t('Tageskarte zum Halbtax')}</b>: {t('Fahrt zum ermässigten Preis')}
+      </Typography>
+      <Typography paragraph>
+        <b>
+          {t('Tageskarte Gemeinde')}, {t('Spartageskarte')} {t('und')}{' '}
+          {t('Aktionstageskarte')} {t('ohne GA/Halbtax-Abo')}
+        </b>
+        : {t('Fahrt zum ganzen Preis')}
+      </Typography>
+    </>
+  );
+};
+
+const FullScopeInfo = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Typography paragraph>
+        <b>
+          {t('General-Abo')}, {t('seven25-Abo')} {t('und')}{' '}
+          {t('GA-Monatskarte')}
+        </b>
+        : {t('Freie Fahrt')}
+      </Typography>
+      <Typography paragraph>
+        <b>{t('Halbtax-Abo')}</b>: {t('Fahrt zum ermässigten Preis')}
+      </Typography>
+      <Typography paragraph>
+        <b>
+          {t('Tageskarte zum Halbtax')}, {t('Tageskarte Gemeinde')},{' '}
+          {t('Spartageskarte')} {t('und')} {t('Aktionstageskarte')}
+        </b>
+        : {t('Freie Fahrt')}
+      </Typography>
+    </>
+  );
+};
+
 const GeltungsbereichePopup = ({ feature, layer }) => {
   const { t } = useTranslation();
   const topic = useSelector((state) => state.app.activeTopic);
@@ -19,53 +72,9 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
   });
 
   const content = useMemo(() => {
-    const reduced = feature.get('mapboxFeature').layer.id.includes('_50');
-    return reduced ? (
-      <>
-        <Typography paragraph>
-          <b>
-            {t('General-Abo')}, {t('seven25-Abo')} {t('und')}{' '}
-            {t('GA-Monatskarte')}
-          </b>
-          : {t('Fahrt zum ermässigten Preis')}
-        </Typography>
-        <Typography paragraph>
-          <b>{t('Halbtax-Abo')}</b>: {t('Fahrt zum ermässigten Preis')}
-        </Typography>
-        <Typography paragraph>
-          <b>{t('Tageskarte zum Halbtax')}</b>:{' '}
-          {t('Fahrt zum ermässigten Preis')}
-        </Typography>
-        <Typography paragraph>
-          <b>
-            {t('Tageskarte Gemeinde')}, {t('Spartageskarte')} {t('und')}{' '}
-            {t('Aktionstageskarte')} {t('ohne GA/Halbtax-Abo')}
-          </b>
-          : {t('Fahrt zum ganzen Preis')}
-        </Typography>
-      </>
-    ) : (
-      <>
-        <Typography paragraph>
-          <b>
-            {t('General-Abo')}, {t('seven25-Abo')} {t('und')}{' '}
-            {t('GA-Monatskarte')}
-          </b>
-          : {t('Freie Fahrt')}
-        </Typography>
-        <Typography paragraph>
-          <b>{t('Halbtax-Abo')}</b>: {t('Fahrt zum ermässigten Preis')}
-        </Typography>
-        <Typography paragraph>
-          <b>
-            {t('Tageskarte zum Halbtax')}, {t('Tageskarte Gemeinde')},{' '}
-            {t('Spartageskarte')} {t('und')} {t('Aktionstageskarte')}
-          </b>
-          : {t('Freie Fahrt')}
-        </Typography>
-      </>
-    );
-  }, [t, feature]);
+    const reduced = feature.get('valid_ga_hta') === 50;
+    return reduced ? <ReducedScopeInfo /> : <FullScopeInfo />;
+  }, [feature]);
 
   useEffect(() => {
     // Shift select style to current feature
@@ -85,8 +94,6 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
-  return `${t('ch.sbb.geltungsbereiche.mvp')} - ${t(
-    `${layer.name || layer.key}`,
-  )}`;
+  return `${t('ch.sbb.geltungsbereiche')} - ${t(`${layer.name || layer.key}`)}`;
 };
 export default GeltungsbereichePopup;
