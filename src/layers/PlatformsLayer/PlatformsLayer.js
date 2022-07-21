@@ -207,6 +207,20 @@ class PlatformsLayer extends MapboxStyleLayer {
       });
     }
   }
+
+  getFeatureInfoAtCoordinate(coordinate, options) {
+    return super
+      .getFeatureInfoAtCoordinate(coordinate, options)
+      .then((featureInfo) => {
+        // We want only one platform selected at a time, to avoid having duplication of data in the popup
+        return {
+          ...featureInfo,
+          features: featureInfo.features.length
+            ? [featureInfo.features[0]]
+            : [],
+        };
+      });
+  }
 }
 
 export default PlatformsLayer;
