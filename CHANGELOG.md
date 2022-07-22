@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.4](https://github.com/geops/trafimage-maps/compare/v1.12.3...v1.12.4) (2022-07-22)
+
+
+### Bug Fixes
+
+* deactivate tracking in local development ([db4238e](https://github.com/geops/trafimage-maps/commit/db4238e5e28d897f63663543af79c8ff78da4d96))
+* display stops as cancelled when the all journey is cancelled ([8d7c1c1](https://github.com/geops/trafimage-maps/commit/8d7c1c10df6c8efeb07582f1d4271cc17bb922ed))
+* netzkarte popup links opens a new window ([521407e](https://github.com/geops/trafimage-maps/commit/521407e299e46f9314e64e82dfb0b4bd77366554))
+* only return one platform at a time ([#1018](https://github.com/geops/trafimage-maps/issues/1018)) ([b41d6ba](https://github.com/geops/trafimage-maps/commit/b41d6ba63ce12e6e8f316a2cc1f23df31d377d92))
+
 ### [1.12.3](https://github.com/geops/trafimage-maps/compare/v1.12.2...v1.12.3) (2022-07-13)
 
 
