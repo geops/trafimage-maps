@@ -16,7 +16,6 @@ import infrastrukturLayers, {
 } from './ch.sbb.infrastruktur';
 import energieLayers from './ch.sbb.energie';
 import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
-import showcaseslayers from './ch.sbb.showcases';
 import regionenkarteLayers from './ch.sbb.regionenkarte.public';
 import netzentwicklungLayers from './ch.sbb.netzentwicklung';
 import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
@@ -187,18 +186,6 @@ export const tarifverbundkarte = {
   searches: defaultSearches,
 };
 
-export const showcases = {
-  name: 'ch.sbb.showcases',
-  key: 'ch.sbb.showcases',
-  elements: {
-    ...defaultElements,
-    baseLayerSwitcher: false,
-  },
-  layers: showcaseslayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'ShowcasesTopicInfo',
-};
-
 export const zweitausbildung = {
   name: 'ch.sbb.zweitausbildung',
   key: 'ch.sbb.zweitausbildung',
@@ -284,7 +271,6 @@ const topics = {
     netzentwicklung,
     beleuchtungsstaerken,
     energiePublic,
-    showcases,
     sandbox,
   ],
   stelen: [netzkarteStelen],
