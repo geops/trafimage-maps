@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.12.5](https://github.com/geops/trafimage-maps/compare/v1.12.4...v1.12.5) (2022-07-26)
+
+
+### Bug Fixes
+
+* **direktverbindung:** make sure highlighted feature does not appear in featureinfo ([f9b0575](https://github.com/geops/trafimage-maps/commit/f9b0575cc8cf6340e241193ee71c06624f402d0a))
+* display consent only once on development environment ([cb1216c](https://github.com/geops/trafimage-maps/commit/cb1216c6c0055336d6e82c628eab63442663c0c0))
+* display consent only once on development environment ([bff3650](https://github.com/geops/trafimage-maps/commit/bff3650dea8644e7ab3bbd3f13fbc638563dedec))
+* open feature information when we search for a station ([6556293](https://github.com/geops/trafimage-maps/commit/65562938e1ed92fd9c7fe4e531489d40d2946e94))
+* remove showcases topic ([#1019](https://github.com/geops/trafimage-maps/issues/1019)) ([5d4699f](https://github.com/geops/trafimage-maps/commit/5d4699fda9630bf3aabe1459911ba5fc68e4aab1))
+
 ### [1.12.4](https://github.com/geops/trafimage-maps/compare/v1.12.3...v1.12.4) (2022-07-22)
 
 
