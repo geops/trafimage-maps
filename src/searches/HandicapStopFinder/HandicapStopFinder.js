@@ -45,16 +45,13 @@ class HandicapStopFinder extends Search {
   openPopup(item) {
     this.popupItem = item;
     const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.handicap.data');
+    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
 
-    if (layer) {
-      const { mbMap } = layer;
-      if (mbMap.loaded() && mbMap.isStyleLoaded()) {
-        this.onIdle();
-      } else {
-        // We can't rely on sourcedata because isSourceLoaded returns false.
-        mbMap.on('idle', this.onIdle);
-      }
+    // We try to display the overlay only when the stations layer is ready and has all the stations loaded.
+    if (layer.ready) {
+      this.onIdle();
+    } else {
+      layer.on('datarendered', this.onIdle);
     }
   }
 

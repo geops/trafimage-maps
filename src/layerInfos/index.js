@@ -12,7 +12,6 @@ import IsbTopicInfo from './IsbTopicInfo';
 import PassagierFrequenzenLayerInfo from './PassagierFrequenzenLayerInfo';
 import PunctualityLayerInfo from './PunctualityLayerInfo';
 import RegionenkartePublicTopicInfo from './RegionenkartePublicTopicInfo';
-import ShowcasesTopicInfo from './ShowcasesTopicInfo';
 import TarifverbundkarteTopicInfo from './TarifverbundkarteTopicInfo';
 import NetzkarteTopicInfo from './NetzkarteTopicInfo';
 import ZweitausbildungLayerInfo from './ZweitausbildungLayerInfo';
@@ -49,7 +48,6 @@ export { default as InterventionTopicInfo } from './InterventionTopicInfo';
 export { default as PassagierFrequenzenLayerInfo } from './PassagierFrequenzenLayerInfo';
 export { default as PunctualityLayerInfo } from './PunctualityLayerInfo';
 export { default as RegionenkartePublicTopicInfo } from './RegionenkartePublicTopicInfo';
-export { default as ShowcasesTopicInfo } from './ShowcasesTopicInfo';
 export { default as TarifverbundkarteTopicInfo } from './TarifverbundkarteTopicInfo';
 export { default as NetzkarteTopicInfo } from './NetzkarteTopicInfo';
 export { default as ZweitausbildungLayerInfo } from './ZweitausbildungLayerInfo';
@@ -91,7 +89,6 @@ export default {
   PunctualityLayerInfo,
   RegionenkartePublicTopicInfo,
   RegionenkartePublicLayerInfo,
-  ShowcasesTopicInfo,
   TarifverbundkarteTopicInfo,
   NetzkarteTopicInfo,
   ZweitausbildungLayerInfo,
