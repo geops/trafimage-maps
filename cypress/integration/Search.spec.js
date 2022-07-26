@@ -32,4 +32,17 @@ describe('Search', () => {
     cy.wait(10000);
     cy.get('.wkp-feature-information').should('be.visible');
   });
+
+  it('should open a popup on station search using a station that appears after zoom 15.5', () => {
+    cy.viewport(1440, 900);
+    cy.get('.wkp-feature-information').should('not.exist');
+
+    cy.get('.wkp-search-input input').focus().type('Bern Bahnhof');
+
+    cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
+
+    // Popup is opened.
+    cy.wait(10000);
+    cy.get('.wkp-feature-information').should('be.visible');
+  });
 });
