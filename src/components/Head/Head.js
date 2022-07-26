@@ -16,6 +16,7 @@ function Head({ topics, displayConsent, domainConsentId }) {
   // By request from colleagues when the domain is not the one configured
   // on one trust we want that the site does a fake save of the user consent
   // after click on the button. It's avoid to display the consent everytime.
+  // We test localhost: so that doesn't impact jest tests.
   if (/localhost:|trafimage\.geops\.ch|\.app/.test(window.location.hostname)) {
     // Simulate that the consent has already been given.
     if (window.localStorage.getItem('wkp.fake.consent') === 'true') {
