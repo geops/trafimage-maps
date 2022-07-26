@@ -257,7 +257,6 @@
   "ch.sbb.regionenkarte.public": "Koordinatoren Bahnnahes Bauen",
   "ch.sbb.sandbox": "Trafimage Sandbox",
   "ch.sbb.sandbox-desc": "Trafimage Sandbox",
-  "ch.sbb.showcases": "Showcases",
   "ch.sbb.stationen": "Vergleich Stationsdaten",
   "ch.sbb.stationen-desc": "Die Lage und Attribute von Stationen stehen aus verschiedenen Datenquellen zur Verfügung. Dieser Layer zeigt für alle Stationen der Schweiz die Abweichungen zwischen den Datenquellen. Die Zurodnung der Stationen erfolgt über die Bahnhfosnummer (IBNR).",
   "ch.sbb.stationen.haltestellen_oev": "öV-Haltestellen",
