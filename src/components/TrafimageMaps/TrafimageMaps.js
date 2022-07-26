@@ -428,6 +428,7 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (requireConsent) {
+      // lala
       // Function called on consent change event
       window.OptanonWrapper = () => {
         if (!window.Optanon || !window.Optanon.IsAlertBoxClosed()) {
