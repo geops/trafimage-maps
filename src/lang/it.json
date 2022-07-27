@@ -131,6 +131,7 @@
   "ch.sbb.beleuchtungsstaerken4": "Classe stazione 4",
   "ch.sbb.betriebsregionen": "Regioni operative",
   "ch.sbb.betriebsregionen-desc": "Distribuzione geografica dell'infrastruttura delle FFS.",
+  "ch.sbb.bps": "Regioni BPS",
   "ch.sbb.casa": "CASA",
   "ch.sbb.ch_gemeinden": "Limiti comunali",
   "ch.sbb.ch_gemeinden-desc": "<p>Visualizzazione dei confini comunali. I Comuni vengono individuati dal campo di ricerca.</p><p>Dati:<br/>Ufficio federale di statistica, swisstopo (01.01.2018)</p>",

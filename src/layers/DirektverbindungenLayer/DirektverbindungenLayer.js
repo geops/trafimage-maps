@@ -15,7 +15,11 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       ...options,
       featureInfoFilter: (feature) => {
         const mapboxFeature = feature.get('mapboxFeature');
-        return mapboxFeature && !/outline/.test(mapboxFeature.layer.id);
+        return (
+          mapboxFeature &&
+          !/outline/.test(mapboxFeature.layer.id) &&
+          !/highlight/.test(mapboxFeature.layer.id)
+        );
       },
       styleLayersFilter: (layer) => {
         return (

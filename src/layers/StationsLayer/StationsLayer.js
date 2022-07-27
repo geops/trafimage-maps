@@ -23,6 +23,7 @@ class StationsLayer extends MapboxStyleLayer {
     this.sourceId = 'stations';
 
     this.onIdle = this.onIdle.bind(this);
+    this.ready = false;
   }
 
   /**
@@ -33,9 +34,11 @@ class StationsLayer extends MapboxStyleLayer {
 
     this.olListenersKeys.push(
       this.on('change:visible', () => {
+        this.ready = false;
         this.updateSource();
       }),
       this.map.on('moveend', () => {
+        this.ready = false;
         this.mapboxLayer.mbMap?.once('idle', this.onIdle);
       }),
     );
@@ -84,6 +87,8 @@ class StationsLayer extends MapboxStyleLayer {
 
     // We warn the permalink that new data have been rendered.
     this.mapboxLayer.mbMap?.once('idle', () => {
+      this.ready = true;
+
       // New data are rendered
       this.dispatchEvent({
         type: 'datarendered',

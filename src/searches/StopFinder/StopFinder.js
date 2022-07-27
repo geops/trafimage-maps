@@ -63,28 +63,19 @@ class StopFinder extends Search {
   openPopup(item) {
     this.popupItem = item;
     const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.data');
+    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
 
-    if (layer) {
-      const { mbMap } = layer;
-      if (mbMap.loaded() && mbMap.isStyleLoaded()) {
-        this.onIdle();
-      } else {
-        // We can't rely on sourcedata because isSourceLoaded returns false.
-        mbMap.on('idle', this.onIdle);
-      }
+    // We try to display the overlay only when the stations layer is ready and has all the stations loaded.
+    if (layer.ready) {
+      this.onIdle();
+    } else {
+      layer.on('datarendered', this.onIdle);
     }
   }
 
   onIdle() {
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.netzkarte.data');
-
-    if (mbMap.getSource('stations') && mbMap.isSourceLoaded('stations')) {
-      mbMap.off('idle', this.onIdle);
-    } else {
-      return;
-    }
     const styleLayers = mbMap?.getStyle()?.layers;
 
     // We get feature infos only for layer that use the source 'stations'.
@@ -110,7 +101,6 @@ class StopFinder extends Search {
         ),
       )
       .filter((i) => i);
-
     Promise.all(infos).then((featureInfos) => {
       dispatchSetFeatureInfo(
         featureInfos.filter(({ features }) => features.length),

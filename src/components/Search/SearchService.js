@@ -136,7 +136,7 @@ class SearchService {
 
     this.map.getView().fit(this.selectLayer.getSource().getExtent(), {
       padding: [50, 50, 50, 50],
-      maxZoom: 15,
+      maxZoom: 15.6,
       callback: () => {
         this.searches[item.section].openPopup(item);
       },
