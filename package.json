@@ -62,6 +62,7 @@
     "@babel/eslint-parser": "7.15.7",
     "@commitlint/cli": "17.0.2",
     "@commitlint/config-conventional": "17.0.2",
+    "@mapbox/mapbox-gl-style-spec": "^13.25.0",
     "@svgr/webpack": "5.5.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "12.1.2",

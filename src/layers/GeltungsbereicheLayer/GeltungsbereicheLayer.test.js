@@ -1,9 +1,9 @@
-import { Feature } from 'ol';
+import { Feature, Map, View } from 'ol';
 import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 import GeltungsbereicheLayer from '.';
 
 describe('GeltungsbereicheLayer', () => {
-  test('should return one feature with the highest valid_ga_hta value (topic NON BETA)', async () => {
+  test('should return all features (topic NON BETA)', async () => {
     const feat50 = new Feature({ valid_ga_hta: 50 });
     const feat100 = new Feature({ valid_ga_hta: 100 });
     MapboxStyleLayer.prototype.getFeatureInfoAtCoordinate = jest.fn(() => {
@@ -12,9 +12,12 @@ describe('GeltungsbereicheLayer', () => {
       });
     });
     const layer = new GeltungsbereicheLayer({});
+    layer.map = new Map({ view: new View({ zoom: 15 }) });
+    layer.mapboxLayer = {};
     const fi = await layer.getFeatureInfoAtCoordinate();
-    expect(fi.features.length).toBe(1);
+    expect(fi.features.length).toBe(2);
     expect(fi.features[0]).toBe(feat100);
+    expect(fi.features[1]).toBe(feat50);
     MapboxStyleLayer.prototype.getFeatureInfoAtCoordinate.mockRestore();
   });
 
@@ -28,6 +31,8 @@ describe('GeltungsbereicheLayer', () => {
       });
     });
     const layer = new GeltungsbereicheLayer({});
+    layer.map = new Map({ view: new View({ zoom: 15 }) });
+    layer.mapboxLayer = {};
     const fi = await layer.getFeatureInfoAtCoordinate();
     expect(fi.features.length).toBe(2);
     expect(fi.features[0]).toBe(featA);

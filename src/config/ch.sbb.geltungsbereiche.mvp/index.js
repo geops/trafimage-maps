@@ -20,10 +20,15 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     metadata &&
     metadata['geltungsbereiche.filter'] &&
     /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata['geltungsbereiche.filter'] === 'ga.line',
   properties: {
-    popupComponent: 'GeltungsbereicheGaPopup',
-    useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
+    hasInfos: true,
+    useOverlay: true,
+    popupComponent: 'GeltungsbereicheGaPopup',
+    layerInfoComponent: 'GeltungsbereicheLayerInfo',
+    validForCards: 'ga',
   },
 });
 

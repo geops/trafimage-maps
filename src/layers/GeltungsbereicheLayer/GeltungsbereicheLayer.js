@@ -9,6 +9,9 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
  */
 class GeltungsbereicheLayer extends MapboxStyleLayer {
   getFeatureInfoAtCoordinate(coordinate) {
+    const zoom = this.map?.getView().getZoom();
+    this.mapboxLayer.hitTolerance = zoom < 15 ? 15 : 5;
+
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
       // const sortedData = data.sort((a, b) => {
       //   if (a.get('valid_ga_hta'))
@@ -35,11 +38,15 @@ class GeltungsbereicheLayer extends MapboxStyleLayer {
          * @ignore
          */
         const feats = featureInfo.features.reduce((uniques, feature) => {
-          const isUnique = !uniques.find(
-            (f) =>
-              f.get('geltungsbereiche') === feature.get('geltungsbereiche'),
-          );
-          return isUnique ? [...uniques, feature] : uniques;
+          // Geltungsbereiche topic BETA
+          if (feature.get('geltungsbereiche')) {
+            const isUnique = !uniques.find(
+              (f) =>
+                f.get('geltungsbereiche') === feature.get('geltungsbereiche'),
+            );
+            return isUnique ? [...uniques, feature] : uniques;
+          }
+          return [...uniques, feature];
         }, []);
         featureInfo.features = feats;
       }
