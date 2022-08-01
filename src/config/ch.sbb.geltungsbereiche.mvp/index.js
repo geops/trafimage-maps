@@ -7,7 +7,7 @@ export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   preserveDrawingBuffer: true,
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_ch.sbb.geltungsbereiche_ga',
+  style: 'base_bright_v2_ch.sbb.geltungsbereiche_preview',
   properties: {
     hideInLegend: true,
   },
