@@ -24,11 +24,9 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter'] === 'ga.line',
   properties: {
     radioGroup: 'ch.sbb.geltungsbereiche.group',
-    hasInfos: true,
+    hasInfos: false,
     useOverlay: true,
     popupComponent: 'GeltungsbereicheGaPopup',
-    layerInfoComponent: 'GeltungsbereicheLayerInfo',
-    validForCards: 'ga',
   },
 });
 
