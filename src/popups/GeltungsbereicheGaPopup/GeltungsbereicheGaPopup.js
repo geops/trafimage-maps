@@ -14,29 +14,43 @@ const propTypes = {
   layer: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
 };
 
-const infoForGaId = 'ch.sbb.geltungsbereiche.mvp-ga_hta_s25.info';
+const infoForGaId = 'ch.sbb.geltungsbereiche.mvp-ga_s25.info';
+const infoForGaSubId = 'ch.sbb.geltungsbereiche.mvp-ga_sub.info';
+const infoForHtaId = 'ch.sbb.geltungsbereiche.mvp-hta.info';
+const infoForStsId = 'ch.sbb.geltungsbereiche.mvp-sts.info';
 
 const translations = {
   de: {
     [infoForGaId]:
       'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
-    subsortiment:
+    [infoForGaSubId]:
       'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
-    hta: 'Halbtax-Abo',
-    sts: 'Swiss Travel Pass',
+    [infoForHtaId]: 'Halbtax-Abo',
+    [infoForStsId]: 'Swiss Travel Pass',
   },
   en: {
     [infoForGaId]:
       'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
+    [infoForGaSubId]:
+      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
+    [infoForHtaId]: 'Halbtax-Abo',
+    [infoForStsId]: 'Swiss Travel Pass',
   },
   fr: {
     [infoForGaId]:
       'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
+    [infoForGaSubId]:
+      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
+    [infoForHtaId]: 'Halbtax-Abo',
+    [infoForStsId]: 'Swiss Travel Pass',
   },
-
   it: {
     [infoForGaId]:
       'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
+    [infoForGaSubId]:
+      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
+    [infoForHtaId]: 'Halbtax-Abo',
+    [infoForStsId]: 'Swiss Travel Pass',
   },
 };
 

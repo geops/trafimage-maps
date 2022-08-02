@@ -149,6 +149,7 @@ const GeltungsbereicheLegend = ({ mot, valid }) => {
       {legend.paint.map((paint) => {
         return (
           <line
+            key={paint['line-dasharray'] + paint['line-color']}
             x1="0"
             y1="5"
             x2="50"

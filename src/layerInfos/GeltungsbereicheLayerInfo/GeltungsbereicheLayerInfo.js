@@ -109,65 +109,76 @@ const GeltungsbereicheLayerInfo = () => {
           return null;
         }
         return (
-          <table style={{ marginBottom: 10 }}>
-            {validity.map(({ value }, index) => {
-              return (
-                <tr>
-                  <td>
-                    <GeltungsbereicheLegend mot={mot} valid={value} />
-                  </td>
-                  {index === 0 && (
-                    <td rowSpan={validity.length}>{t(`gb.mot.${mot}`)}</td>
-                  )}
-                </tr>
-              );
-            })}
+          <table key={mot + validity} style={{ marginBottom: 10 }}>
+            <thead />
+            <tbody>
+              {validity.map(({ value }, index) => {
+                return (
+                  <tr key={mot + value}>
+                    <td>
+                      <GeltungsbereicheLegend mot={mot} valid={value} />
+                    </td>
+                    {index === 0 && (
+                      <td rowSpan={validity.length}>{t(`gb.mot.${mot}`)}</td>
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
         );
       })}
       <br />
       <br />
-
       <table style={{ marginBottom: 10 }}>
-        <tr>
-          {legends.map(({ mots: [mot] }) => {
-            if (mot === null) {
-              return null;
-            }
-            return (
-              <td>
-                <GeltungsbereicheLegend mot={mot} valid={100} />
-              </td>
-            );
-          })}
-        </tr>
+        <thead />
+        <tbody>
+          <tr>
+            {legends.map(({ mots: [mot] }) => {
+              if (mot === null) {
+                return null;
+              }
+              return (
+                <td key={mot}>
+                  <GeltungsbereicheLegend mot={mot} valid={100} />
+                </td>
+              );
+            })}
+          </tr>
+        </tbody>
       </table>
       <FullScopeInfo />
       <br />
       <br />
       <table style={{ marginBottom: 10 }}>
-        <tr>
-          {legends.map(({ mots: [mot] }) => {
-            if (mot === null) {
-              return null;
-            }
-            return (
-              <td>
-                <GeltungsbereicheLegend mot={mot} valid={50} />
-              </td>
-            );
-          })}
-        </tr>
+        <thead />
+        <tbody>
+          <tr>
+            {legends.map(({ mots: [mot] }) => {
+              if (mot === null) {
+                return null;
+              }
+              return (
+                <td key={mot}>
+                  <GeltungsbereicheLegend mot={mot} valid={50} />
+                </td>
+              );
+            })}
+          </tr>
+        </tbody>
       </table>
       <ReducedScopeInfo />
       <br />
       <br />
       <table style={{ marginBottom: 10 }}>
-        <tr>
-          <td>
-            <GeltungsbereicheLegend />
-          </td>
-        </tr>
+        <thead />
+        <tbody>
+          <tr>
+            <td>
+              <GeltungsbereicheLegend />
+            </td>
+          </tr>
+        </tbody>
       </table>
       <Typography paragraph>{t('Keine Ermässigung')}</Typography>
       <br />
