@@ -237,7 +237,6 @@
   "ch.sbb.netzentwicklung.strategisch": "Développeur stratégique de réseau",
   "ch.sbb.netzkarte-desc": "La carte du réseau est destinée aux utilisatrices et utilisateurs des transports publics. Il s’agit d’une carte de base reposant sur les données horaire. Il est possible de consulter les informations relatives à une gare donnée en cliquant directement sur la carte.",
   "ch.sbb.netzkarte-desc-topic-info": "D’autres contenus pouvant être représentés sur la carte figurent sous «Couche».",
-  "ch.sbb.netzkarte.aerial": "Photo aérienne",
   "ch.sbb.netzkarte.buslinien": "Lignes de bus",
   "ch.sbb.netzkarte.dark": "Mode nuit",
   "ch.sbb.netzkarte.flughafen": "Airports",

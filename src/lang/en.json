@@ -222,7 +222,6 @@
   "ch.sbb.netzentwicklung.strategisch": "Network developer Strategic",
   "ch.sbb.netzkarte-desc": "The network map is aimed at public transport users. It is a basic map derived from timetable data. Relevant information can be accessed directly from the map by clicking on the required station.",
   "ch.sbb.netzkarte-desc-topic-info": "Under Layer, there is further content which can be displayed on the map.",
-  "ch.sbb.netzkarte.aerial": "Aerial imagery",
   "ch.sbb.netzkarte.buslinien": "Bus routes",
   "ch.sbb.netzkarte.dark": "Night mode",
   "ch.sbb.netzkarte.flughafen": "Airports",
