@@ -28,6 +28,8 @@ const applyFilters = (mbStyle, filters) => {
   return newStyle;
 };
 
+const stylePrefix = process.env.REACT_APP_STYLE_REVIEW_PREFIX || '';
+
 class TrafimageMapboxLayer extends MapboxLayer {
   constructor(options) {
     super({
@@ -37,7 +39,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
       isClickActive: false,
     });
     this.filters = options.filters;
-    this.style = options.style;
+    this.style = stylePrefix + options.style;
   }
 
   init(map) {
@@ -77,7 +79,7 @@ class TrafimageMapboxLayer extends MapboxLayer {
     if (this.style === newStyle || !newStyle) {
       return;
     }
-    this.style = newStyle;
+    this.style = stylePrefix + newStyle;
     this.setStyleConfig();
   }
 

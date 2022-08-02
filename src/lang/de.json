@@ -219,6 +219,7 @@
   "ch.sbb.netzentwicklung.strategisch": "Netzentwickler Strategisch",
   "ch.sbb.netzkarte-desc": "Die Netzkarte richtet sich an die Nutzerinnen und Nutzer des öffentlichen Verkehrs. Es handelt sich um eine Basiskarte auf der Grundlage von  Fahrplandaten. Direkt auf der Karte können mit einem Klick auf die  gewünschte Station die entsprechenden Informationen abgefragt werden.",
   "ch.sbb.netzkarte-desc-topic-info": "Unter Layer gibt es weitere Inhalte, die auf der Karte abgebildet werden  können.",
+  "ch.sbb.netzkarte.aerial": "Luftbild",
   "ch.sbb.netzkarte.buslinien": "Buslinien",
   "ch.sbb.netzkarte.dark": "Nachtmodus",
   "ch.sbb.netzkarte.flughafen": "Flughäfen",

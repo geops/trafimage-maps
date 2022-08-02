@@ -4,9 +4,9 @@ import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import {
   netzkarteLayer,
   netzkarteNight,
+  netzkarteAerial,
   stationsLayer,
   bahnhofplaene,
-  swisstopoSwissImage,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,
 } from '../ch.sbb.netzkarte';
@@ -90,9 +90,9 @@ export default [
     mapboxLayer: handicapDataLayer,
     style: 'base_dark_v2_ch.sbb.handicap',
   }),
-  swisstopoSwissImage.clone({
+  netzkarteAerial.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: 'aerial_sbb_ch.sbb.handicap',
   }),
   swisstopoLandeskarte.clone({
     mapboxLayer: handicapDataLayer,

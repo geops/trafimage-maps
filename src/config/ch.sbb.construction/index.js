@@ -3,7 +3,7 @@ import { unByKey } from 'ol/Observable';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import AusbauLayer from '../../layers/AusbauLayer';
-import { netzkarteLayer, swisstopoSwissImage } from '../ch.sbb.netzkarte';
+import { netzkarteLayer, netzkarteAerial } from '../ch.sbb.netzkarte';
 
 export const constructionDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.construction.data',
@@ -293,9 +293,9 @@ export default [
     mapboxLayer: constructionDataLayer,
     style: 'base_bright_v2_ch.sbb.bauprojekte',
   }),
-  swisstopoSwissImage.clone({
+  netzkarteAerial.clone({
     mapboxLayer: constructionDataLayer,
-    style: 'ch.swisstopo.backgrounds_ch.sbb.bauprojekte',
+    style: 'aerial_sbb_ch.sbb.bauprojekte',
   }),
   constrUnterhalt,
   constrAusbau,

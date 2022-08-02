@@ -51,9 +51,23 @@ export const netzkarteNight = new MapboxStyleLayer({
   style: 'base_dark_v2_ch.sbb.netzkarte',
 });
 
-export const swisstopoSwissImage = new MapboxStyleLayer({
+export const netzkarteAerial = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.luftbild.group',
   key: 'ch.sbb.netzkarte.luftbild.group',
+  isQueryable: false,
+  isBaseLayer: true,
+  properties: {
+    radioGroup: 'baseLayer',
+    previewImage: luftbild,
+  },
+  visible: false,
+  mapboxLayer: dataLayer,
+  style: 'aerial_sbb_ch.sbb.netzkarte.aerial',
+});
+
+export const swisstopoSwissImage = new MapboxStyleLayer({
+  name: 'ch.sbb.netzkarte.luftbild.group',
+  key: 'ch.sbb.netzkarte.luftbild.group.old',
   isQueryable: false,
   isBaseLayer: true,
   properties: {
@@ -287,7 +301,7 @@ export const defaultBaseLayers = [
   dataLayer,
   netzkarteLayer,
   netzkarteNight,
-  swisstopoSwissImage,
+  netzkarteAerial,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,
 ];
