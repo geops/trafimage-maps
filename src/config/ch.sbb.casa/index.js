@@ -3,7 +3,7 @@ import StationsLayer from '../../layers/StationsLayer';
 import {
   dataLayer,
   netzkarteLayer,
-  swisstopoSwissImage,
+  netzkarteAerial,
 } from '../ch.sbb.netzkarte';
 
 export const casaDataLayerWithoutLabels = dataLayer.clone({
@@ -20,7 +20,7 @@ export const casaNetzkarteLayerWithoutLabels = netzkarteLayer.clone({
   mapboxLayer: casaDataLayerWithoutLabels,
 });
 
-const casaSwisstopoSwissImage = swisstopoSwissImage.clone({
+const casaNetzkarteAerial = netzkarteAerial.clone({
   mapboxLayer: casaDataLayerWithoutLabels,
 });
 
@@ -50,7 +50,7 @@ const casaNetzkarteStationsLayer = new StationsLayer({
 export default [
   casaDataLayerWithoutLabels,
   casaNetzkarteLayerWithoutLabels,
-  casaSwisstopoSwissImage,
+  casaNetzkarteAerial,
   casaNetzkarteLayerWithLabels,
   casaNetzkarteStationsLayer,
 ];
