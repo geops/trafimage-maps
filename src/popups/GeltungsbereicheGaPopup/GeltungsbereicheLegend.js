@@ -25,7 +25,7 @@ export const legends = [
         ],
       },
       {
-        value: 50,
+        value: [50, 25],
         paint: [
           {
             'line-color': 'rgba(74, 74, 74, 1)',
@@ -54,7 +54,7 @@ export const legends = [
         ],
       },
       {
-        value: 50,
+        value: [50, 25],
         paint: [
           {
             'line-color': colorRed,
@@ -78,7 +78,7 @@ export const legends = [
         ],
       },
       {
-        value: 50,
+        value: [50, 25],
         paint: [
           {
             'line-color': colorBlue,
@@ -102,7 +102,7 @@ export const legends = [
         ],
       },
       {
-        value: 50,
+        value: [50, 25],
         paint: [
           {
             'line-color': colorBlack,
@@ -137,8 +137,9 @@ const GeltungsbereicheLegend = ({ mot, valid }) => {
       return mots.includes(mot);
     })
     .validity.find(({ value }) => {
-      return value === valid;
+      return Array.isArray(value) ? value.includes(valid) : value === valid;
     });
+
   return (
     <svg
       viewBox="0 0 80 10"

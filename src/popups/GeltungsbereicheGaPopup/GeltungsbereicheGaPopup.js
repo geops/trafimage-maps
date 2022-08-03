@@ -15,7 +15,7 @@ const propTypes = {
 };
 
 const infoForGaId = 'ch.sbb.geltungsbereiche.mvp-ga_s25.info';
-const infoForGaSubId = 'ch.sbb.geltungsbereiche.mvp-ga_sub.info';
+const infoForGaSubId = 'ch.sbb.geltungsbereiche.mvp-tk.info';
 const infoForHtaId = 'ch.sbb.geltungsbereiche.mvp-hta.info';
 const infoForStsId = 'ch.sbb.geltungsbereiche.mvp-sts.info';
 
@@ -57,6 +57,9 @@ const translations = {
 const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
   const { t, i18n } = useTranslation();
 
+  const layer = layers[0];
+  const validPropertyName = layer.get('validPropertyName');
+
   const featuresByMot = {};
   features.forEach((feat) => {
     let mot = feat.get('mot');
@@ -69,8 +72,9 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
     if (!featuresByMot[mot]) {
       featuresByMot[mot] = {};
     }
-    if (!featuresByMot[mot][feat.get('valid_ga_hta')]) {
-      featuresByMot[mot][feat.get('valid_ga_hta')] = feat;
+
+    if (!featuresByMot[mot][feat.get(validPropertyName)]) {
+      featuresByMot[mot][feat.get(validPropertyName)] = feat;
     }
   });
 
@@ -98,7 +102,14 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
               return 0;
             })
             .map(([, feature]) => {
-              const valid = feature.get('valid_ga_hta');
+              const valid = feature.get(validPropertyName);
+              let text = t('Fahrt zum ganzen Preis');
+              if (valid === 50 || valid === 25) {
+                text = t('Fahrt zum ermässigten Preis');
+              }
+              if (valid === 100) {
+                text = t('Freie Fahrt');
+              }
               return (
                 <div key={mot + valid}>
                   <GeltungsbereicheLegend
@@ -106,10 +117,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
                     valid={valid}
                   />
                   <div>
-                    {t(`gb.mot.${mot}`)}:{' '}
-                    {valid === 50
-                      ? t('Fahrt zum ermässigten Preis')
-                      : t('Freie Fahrt')}
+                    {t(`gb.mot.${mot}`)}: {text}
                   </div>
                   <br />
                 </div>
@@ -138,7 +146,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
-  return `${t('ch.sbb.geltungsbereiche')}`; // - ${t(`${layer.name || layer.key}`)}`;
+  return `${t('ch.sbb.geltungsbereiche')} - ${t(`${layer.name || layer.key}`)}`;
 };
 
 GeltungsbereichePopup.hidePagination = true;

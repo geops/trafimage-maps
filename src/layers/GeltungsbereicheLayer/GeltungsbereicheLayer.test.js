@@ -11,7 +11,9 @@ describe('GeltungsbereicheLayer', () => {
         features: [feat50, feat100],
       });
     });
-    const layer = new GeltungsbereicheLayer({});
+    const layer = new GeltungsbereicheLayer({
+      properties: { validPropertyName: 'valid_ga_hta' },
+    });
     layer.map = new Map({ view: new View({ zoom: 15 }) });
     layer.mapboxLayer = {};
     const fi = await layer.getFeatureInfoAtCoordinate();
@@ -30,7 +32,9 @@ describe('GeltungsbereicheLayer', () => {
         features: [featA, featB, featA2],
       });
     });
-    const layer = new GeltungsbereicheLayer({});
+    const layer = new GeltungsbereicheLayer({
+      properties: { validPropertyName: 'valid_ga_hta' },
+    });
     layer.map = new Map({ view: new View({ zoom: 15 }) });
     layer.mapboxLayer = {};
     const fi = await layer.getFeatureInfoAtCoordinate();

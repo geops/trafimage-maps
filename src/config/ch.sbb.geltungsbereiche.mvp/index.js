@@ -27,11 +27,12 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     hasInfos: false,
     useOverlay: true,
     popupComponent: 'GeltungsbereicheGaPopup',
+    validPropertyName: 'valid_ga',
   },
 });
 
-export const geltungsbereicheGASub = new GeltungsbereicheLayer({
-  name: 'ch.sbb.geltungsbereiche.mvp-ga_sub',
+export const geltungsbereicheTk = new GeltungsbereicheLayer({
+  name: 'ch.sbb.geltungsbereiche.mvp-tk',
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -39,11 +40,12 @@ export const geltungsbereicheGASub = new GeltungsbereicheLayer({
     metadata['geltungsbereiche.filter'] &&
     /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
   styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['geltungsbereiche.filter']?.includes('gasub.line'),
+    metadata && metadata['geltungsbereiche.filter']?.includes('tk.line'),
   properties: {
     popupComponent: 'GeltungsbereicheGaPopup',
     useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
+    validPropertyName: 'valid_ga',
   },
 });
 
@@ -61,6 +63,7 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
     popupComponent: 'GeltungsbereicheGaPopup',
     useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
+    validPropertyName: 'valid_hta',
   },
 });
 
@@ -78,13 +81,14 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
     popupComponent: 'GeltungsbereicheGaPopup',
     useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
+    validPropertyName: 'valid_sts',
   },
 });
 
 export default [
   geltungsbereicheDataLayer,
-  // geltungsbereicheSTS,
-  // geltungsbereicheHta,
-  // geltungsbereicheGASub,
+  geltungsbereicheSTS,
+  geltungsbereicheHta,
+  geltungsbereicheTk,
   geltungsbereicheGA,
 ];

@@ -11,21 +11,19 @@ class GeltungsbereicheLayer extends MapboxStyleLayer {
   getFeatureInfoAtCoordinate(coordinate) {
     const zoom = this.map?.getView().getZoom();
     this.mapboxLayer.hitTolerance = zoom < 15 ? 15 : 5;
+    const validPropertyName = this.get('validPropertyName');
 
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
-      // const sortedData = data.sort((a, b) => {
-      //   if (a.get('valid_ga_hta'))
-      // }
       const featureInfo = {
         ...data,
 
         // The sort only work for geltungsbereiche non BETA topic
         features: data.features.sort((a, b) => {
-          // Sort by highest valid_ga_hta value
-          if (a.get('valid_ga_hta') > b.get('valid_ga_hta')) {
+          // Sort by highest valid_XXX value
+          if (a.get(validPropertyName) > b.get(validPropertyName)) {
             return -1;
           }
-          if (a.get('valid_ga_hta') < b.get('valid_ga_hta')) {
+          if (a.get(validPropertyName) < b.get(validPropertyName)) {
             return 1;
           }
           return 0;
