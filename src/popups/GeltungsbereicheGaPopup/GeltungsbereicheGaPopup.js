@@ -59,6 +59,18 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 
   const layer = layers[0];
   const validPropertyName = layer.get('validPropertyName');
+  const getTextFromValid =
+    layer.get('getTextFromValid') ||
+    ((valid) => {
+      let text = 'Keine Ermässigung';
+      if (valid === 50 || valid === 25) {
+        text = 'Fahrt zum ermässigten Preis';
+      }
+      if (valid === 100) {
+        text = 'Freie Fahrt';
+      }
+      return text;
+    });
 
   const featuresByMot = {};
   features.forEach((feat) => {
@@ -103,13 +115,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
             })
             .map(([, feature]) => {
               const valid = feature.get(validPropertyName);
-              let text = t('Fahrt zum ganzen Preis');
-              if (valid === 50 || valid === 25) {
-                text = t('Fahrt zum ermässigten Preis');
-              }
-              if (valid === 100) {
-                text = t('Freie Fahrt');
-              }
+              const text = getTextFromValid(valid);
               return (
                 <div key={mot + valid}>
                   <GeltungsbereicheLegend

@@ -24,10 +24,12 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter']?.includes('ga.line'),
   properties: {
     radioGroup: 'ch.sbb.geltungsbereiche.group',
-    hasInfos: false,
+    hasInfos: true,
+    layerInfoComponent: 'GeltungsbereicheLayerInfo',
     useOverlay: true,
     popupComponent: 'GeltungsbereicheGaPopup',
     validPropertyName: 'valid_ga',
+    cardsScope: 'ga',
   },
 });
 
@@ -46,6 +48,9 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
     useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
     validPropertyName: 'valid_ga',
+    cardsScope: 'tk',
+    hasInfos: true,
+    layerInfoComponent: 'GeltungsbereicheLayerInfo',
   },
 });
 
@@ -64,6 +69,12 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
     useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
     validPropertyName: 'valid_hta',
+    cardsScope: 'hta',
+    hasInfos: true,
+    layerInfoComponent: 'GeltungsbereicheLayerInfo',
+    getTextFromValid: () => {
+      return 'Fahrt zum ermässigten Preis';
+    },
   },
 });
 
@@ -82,6 +93,18 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
     useOverlay: true,
     radioGroup: 'ch.sbb.geltungsbereiche.group',
     validPropertyName: 'valid_sts',
+    cardsScope: 'sts',
+    hasInfos: true,
+    layerInfoComponent: 'GeltungsbereicheLayerInfo',
+    getTextFromValid: (valid) => {
+      if (valid === 50) {
+        return '50% Ermässigung';
+      }
+      if (valid === 25) {
+        return '25% Ermässigung';
+      }
+      return 'Freie Fahrt';
+    },
   },
 });
 

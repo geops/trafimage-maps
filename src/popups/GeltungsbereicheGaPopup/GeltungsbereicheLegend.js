@@ -25,7 +25,22 @@ export const legends = [
         ],
       },
       {
-        value: [50, 25],
+        value: 50,
+        paint: [
+          {
+            'line-color': 'rgba(74, 74, 74, 1)',
+            'line-width': lineWidth + 0.5,
+            'line-dasharray': dashArray,
+          },
+          {
+            'line-color': colorYellow,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
+      {
+        value: 25,
         paint: [
           {
             'line-color': 'rgba(74, 74, 74, 1)',
@@ -54,7 +69,17 @@ export const legends = [
         ],
       },
       {
-        value: [50, 25],
+        value: 50,
+        paint: [
+          {
+            'line-color': colorRed,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
+      {
+        value: 25,
         paint: [
           {
             'line-color': colorRed,
@@ -78,7 +103,17 @@ export const legends = [
         ],
       },
       {
-        value: [50, 25],
+        value: 50,
+        paint: [
+          {
+            'line-color': colorBlue,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
+      {
+        value: 25,
         paint: [
           {
             'line-color': colorBlue,
@@ -102,7 +137,17 @@ export const legends = [
         ],
       },
       {
-        value: [50, 25],
+        value: 50,
+        paint: [
+          {
+            'line-color': colorBlack,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
+      {
+        value: 25,
         paint: [
           {
             'line-color': colorBlack,

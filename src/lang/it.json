@@ -1,4 +1,7 @@
 {
+  "25% Ermässigung": "25% di riduzione",
+  "50% Ermässigung": "50% di riduzione",
+  "50% oder 25% Ermässigung": "50% o 25% di riduzione",
   "A0 Format": "Formato A0",
   "A4 Format": "Formato A4",
   "Abbrechen": "Annullare",
@@ -392,6 +395,7 @@
   "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.": "Impossibile trovare collegamenti per l’intervallo corrente.",
   "fUW (Fahrbares Unterwerk)": "fUW (sottostazione mobile)",
   "GA-Monatskarte": "carta mensile AG",
+  "GA-Monatskarte mit Halbtax": "carta mensile AG per il metà-prezzo",
   "Ganze Schweiz": "Tutta la Svizzera",
   "gb.mot.bus": "Bus",
   "gb.mot.ferry": "Batelli",
@@ -511,6 +515,7 @@
   "Nord": "Nord",
   "oder": "o",
   "ohne GA/Halbtax-Abo": "senza abbonamento generale/metà-prezzo",
+  "ohne Halbtax": "senza abbonamento metà-prezzo",
   "ort": "Luogo",
   "ort_other": "Luoghi",
   "Orte": "Luoghi",

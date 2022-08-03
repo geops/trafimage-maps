@@ -1,6 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import { Typography } from '@material-ui/core';
+import { Layer } from 'mobility-toolbox-js/ol';
 import GeltungsbereicheLegend, {
   legends,
 } from '../../popups/GeltungsbereicheGaPopup/GeltungsbereicheLegend';
@@ -45,52 +47,29 @@ import GeltungsbereicheLegend, {
 //   ),
 // };
 
-const ReducedScopeInfo = () => {
+const GaReducedScopeInfo = () => {
   const { t } = useTranslation();
   return (
     <>
       <Typography paragraph>
         <b>
-          {t('General-Abo')}, {t('seven25-Abo')} {t('und')}{' '}
-          {t('GA-Monatskarte')}
+          {t('General-Abo')}, {t('seven25-Abo')}, {t('Tageskarte zum Halbtax')},{' '}
+          {t('und')} {t('GA-Monatskarte mit Halbtax')}
         </b>
         : {t('Fahrt zum ermässigten Preis')}
       </Typography>
-      <Typography paragraph>
-        <b>{t('Halbtax-Abo')}</b>: {t('Fahrt zum ermässigten Preis')}
-      </Typography>
-      <Typography paragraph>
-        <b>{t('Tageskarte zum Halbtax')}</b>: {t('Fahrt zum ermässigten Preis')}
-      </Typography>
-      <Typography paragraph>
-        <b>
-          {t('Tageskarte Gemeinde')}, {t('Spartageskarte')} {t('und')}{' '}
-          {t('Aktionstageskarte')} {t('ohne GA/Halbtax-Abo')}
-        </b>
-        : {t('Fahrt zum ganzen Preis')}
-      </Typography>
     </>
   );
 };
 
-const FullScopeInfo = () => {
+const GaFullScopeInfo = () => {
   const { t } = useTranslation();
   return (
     <>
       <Typography paragraph>
         <b>
-          {t('General-Abo')}, {t('seven25-Abo')} {t('und')}{' '}
-          {t('GA-Monatskarte')}
-        </b>
-        : {t('Freie Fahrt')}
-      </Typography>
-      <Typography paragraph>
-        <b>{t('Halbtax-Abo')}</b>: {t('Fahrt zum ermässigten Preis')}
-      </Typography>
-      <Typography paragraph>
-        <b>
-          {t('Tageskarte zum Halbtax')}, {t('Tageskarte Gemeinde')},{' '}
-          {t('Spartageskarte')} {t('und')} {t('Aktionstageskarte')}
+          {t('General-Abo')}, {t('seven25-Abo')}, {t('Tageskarte zum Halbtax')},{' '}
+          {t('und')} {t('GA-Monatskarte mit Halbtax')}
         </b>
         : {t('Freie Fahrt')}
       </Typography>
@@ -98,8 +77,102 @@ const FullScopeInfo = () => {
   );
 };
 
-const GeltungsbereicheLayerInfo = () => {
+const TkFullScopeInfo = () => {
   const { t } = useTranslation();
+  return (
+    <>
+      <Typography paragraph>
+        <b>
+          {t('Tageskarte Gemeinde')},{' '}
+          {`${t('Spartageskarte ')} ${t('ohne GA/Halbtax-Abo')}`},{' '}
+          {`${t('Aktionstageskarte ')} ${t('ohne GA/Halbtax-Abo')}`},{' '}
+          {`${t('GA-Monatskarte ')} ${t('ohne Halbtax-Abo')}`}
+        </b>
+        : {t('Freie Fahrt')}
+      </Typography>
+    </>
+  );
+};
+
+const HtaFullScopeInfo = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Typography paragraph>
+        <b>{t('Halbtax')}</b>: {t('Fahrt zum ermässigten Preis')}
+      </Typography>
+    </>
+  );
+};
+
+// const StsReduced25ScopeInfo = () => {
+//   const { t } = useTranslation();
+//   return (
+//     <>
+//       <Typography paragraph>
+//         <b>SwissTravelPass</b>: {t('25% reduction')}
+//       </Typography>
+//     </>
+//   );
+// };
+
+// const StsReduced50ScopeInfo = () => {
+//   const { t } = useTranslation();
+//   return (
+//     <>
+//       <Typography paragraph>
+//         <b>SwissTravelPass</b>: {t('50% reduction')}
+//       </Typography>
+//     </>
+//   );
+// };
+
+const StsReducedScopeInfo = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Typography paragraph>
+        <b>Swiss Travel Pass</b>: {t('50% oder 25% reduction')}
+      </Typography>
+    </>
+  );
+};
+
+const StsFullScopeInfo = () => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <Typography paragraph>
+        <b>Swiss Travel Pass</b>: {t('Freie Fahrt')}
+      </Typography>
+    </>
+  );
+};
+
+const infos = {
+  ga: {
+    100: <GaFullScopeInfo />,
+    50: <GaReducedScopeInfo />,
+  },
+  tk: {
+    100: <TkFullScopeInfo />,
+    // reduced: <TkReducedScopeInfo />,
+  },
+  hta: {
+    100: <HtaFullScopeInfo />,
+  },
+  sts: {
+    100: <StsFullScopeInfo />,
+    50: <StsReducedScopeInfo />,
+  },
+};
+
+const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
+  const { t } = useTranslation();
+  const cardsScope = layer.get('cardsScope') || 'ga';
+  const cardsInfos = infos[cardsScope];
+  const full = infos[cardsScope]['100'];
+  const reduced = infos[cardsScope]['50'];
   return (
     <div style={{ maxHeight: 450 }}>
       {/* <Typography paragraph>{comps[i18n.language]}</Typography> */}
@@ -113,6 +186,9 @@ const GeltungsbereicheLayerInfo = () => {
             <thead />
             <tbody>
               {validity.map(({ value }, index) => {
+                if (!cardsInfos[`${value}`]) {
+                  return null;
+                }
                 return (
                   <tr key={mot + value}>
                     <td>
@@ -147,29 +223,34 @@ const GeltungsbereicheLayerInfo = () => {
           </tr>
         </tbody>
       </table>
-      <FullScopeInfo />
+      {full}
       <br />
       <br />
-      <table style={{ marginBottom: 10 }}>
-        <thead />
-        <tbody>
-          <tr>
-            {legends.map(({ mots: [mot] }) => {
-              if (mot === null) {
-                return null;
-              }
-              return (
-                <td key={mot}>
-                  <GeltungsbereicheLegend mot={mot} valid={50} />
-                </td>
-              );
-            })}
-          </tr>
-        </tbody>
-      </table>
-      <ReducedScopeInfo />
-      <br />
-      <br />
+
+      {reduced && (
+        <>
+          <table style={{ marginBottom: 10 }}>
+            <thead />
+            <tbody>
+              <tr>
+                {legends.map(({ mots: [mot] }) => {
+                  if (mot === null) {
+                    return null;
+                  }
+                  return (
+                    <td key={mot}>
+                      <GeltungsbereicheLegend mot={mot} valid={50} />
+                    </td>
+                  );
+                })}
+              </tr>
+            </tbody>
+          </table>
+          {reduced}
+          <br />
+          <br />
+        </>
+      )}
       <table style={{ marginBottom: 10 }}>
         <thead />
         <tbody>
@@ -185,6 +266,10 @@ const GeltungsbereicheLayerInfo = () => {
       <br />
     </div>
   );
+};
+
+GeltungsbereicheLayerInfo.propTypes = {
+  properties: PropTypes.instanceOf(Layer).isRequired,
 };
 
 export default GeltungsbereicheLayerInfo;

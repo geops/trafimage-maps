@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import GeltungsbereicheLayerInfo from '../GeltungsbereicheLayerInfo';
 
 const comps = {
   de: (
@@ -47,9 +46,6 @@ const GeltungsbereicheTopicInfo = () => {
   return (
     <div>
       <div>{comps[i18n.language]}</div>
-      <br />
-      <br />
-      <GeltungsbereicheLayerInfo />
     </div>
   );
 };

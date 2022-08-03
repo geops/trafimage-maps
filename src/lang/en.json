@@ -1,4 +1,7 @@
 {
+  "25% Ermässigung": "25% reduction",
+  "50% Ermässigung": "50% reduction",
+  "50% oder 25% Ermässigung": "50% or 25% reduction",
   "A0 Format": "A0 format",
   "A4 Format": "A4 format",
   "Abbrechen": "Cancel",
@@ -362,6 +365,7 @@
   "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.": "No journeys could be found for this time frame.",
   "fUW (Fahrbares Unterwerk)": "fUW (mobile substation)",
   "GA-Monatskarte": "1-month GA Travelcard",
+  "GA-Monatskarte mit Halbtax": "1-month GA Travelcard with Half Fare Card",
   "Ganze Schweiz": "Whole Switzerland",
   "gb.mot.bus": "Bus",
   "gb.mot.ferry": "Boats",
@@ -471,6 +475,7 @@
   "Nord": "nord",
   "oder": "or",
   "ohne GA/Halbtax-Abo": "without GA Travelcard or Half Fare Card",
+  "ohne Halbtax": "without Half Fare Card",
   "ort": "Place",
   "ort_other": "Places",
   "Orte": "Places",

@@ -1,4 +1,7 @@
 {
+  "25% Ermässigung": "25% de reduction",
+  "50% Ermässigung": "50% de reduction",
+  "50% oder 25% Ermässigung": "50% ou 25% de reduction",
   "A0 Format": "Format A0",
   "A4 Format": "Format A4",
   "Abbrechen": "Annuler",
@@ -391,6 +394,7 @@
   "Für den aktuellen Zeitraum konnten keine Verbindungen gefunden werden.": "Aucune liaison trouvée pour la période actuelle.",
   "fUW (Fahrbares Unterwerk)": "fUW (sous-station mobile)",
   "GA-Monatskarte": "carte mensuelle AG",
+  "GA-Monatskarte mit Halbtax": "carte mensuelle AG avec abonnement demi-tarif",
   "Ganze Schweiz": "Toute la Suisse",
   "gb.mot.bus": "Bus",
   "gb.mot.ferry": "Bateaux",
@@ -510,6 +514,7 @@
   "Nord": "Nord",
   "oder": "ou",
   "ohne GA/Halbtax-Abo": "sans abonnement général/demi-tarif",
+  "ohne Halbtax": "sans abonnemen demi-tarif",
   "ort": "Lieu",
   "ort_other": "Lieux",
   "Orte": "Lieux",
