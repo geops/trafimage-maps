@@ -137,7 +137,13 @@ const GeltungsbereicheLegend = ({ mot, valid }) => {
       return mots.includes(mot);
     })
     .validity.find(({ value }) => {
-      return Array.isArray(value) ? value.includes(valid) : value === valid;
+      if (Array.isArray(value) && !Array.isArray(valid)) {
+        return value.includes(valid);
+      }
+      if (Array.isArray(value) && !Array.isArray(valid)) {
+        return value.toString() === valid.toString();
+      }
+      return value === valid;
     });
 
   return (
