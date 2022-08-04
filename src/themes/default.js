@@ -300,7 +300,8 @@ const theme = createTheme({
       root: {
         fontSize: 14,
         borderBottom: '1px solid #eee',
-        height: 50,
+        minHeight: 50,
+        height: 'auto',
         padding: '0 40px 0 20px',
         display: 'flex',
         alignItems: 'center',

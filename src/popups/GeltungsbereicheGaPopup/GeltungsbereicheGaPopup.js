@@ -123,7 +123,13 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
                     valid={valid}
                   />
                   <div>
-                    {t(`gb.mot.${mot}`)}: {text}
+                    <Typography
+                      variant="h4"
+                      style={{ display: 'inline-block' }}
+                    >
+                      {t(`gb.mot.${mot}`)}
+                    </Typography>
+                    : {text}
                   </div>
                   <br />
                 </div>
@@ -137,7 +143,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
         <br />
       </div>
       <br />
-      <Typography paragraph>
+      <Typography variant="h4">
         {t('Information gilt für diese Produkte')}:
       </Typography>
       {translations[i18n.language][`${layers[0].key}.info`]
@@ -152,7 +158,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
-  return `${t('ch.sbb.geltungsbereiche')} - ${t(`${layer.name || layer.key}`)}`;
+  return `${t('ch.sbb.geltungsbereiche')} `; // - ${t(`${layer.name || layer.key}`)}`;
 };
 
 GeltungsbereichePopup.hidePagination = true;
