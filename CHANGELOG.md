@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/geops/trafimage-maps/compare/v1.13.0...v1.13.1) (2022-08-05)
+
+
+### Bug Fixes
+
+* dont reopen overlay of a searched station after zoom changes ([4587234](https://github.com/geops/trafimage-maps/commit/4587234b3a9103b96e536c436945ff6668d7d5ec))
+
 ## [1.13.0](https://github.com/geops/trafimage-maps/compare/v1.12.5...v1.13.0) (2022-08-02)
 
 
