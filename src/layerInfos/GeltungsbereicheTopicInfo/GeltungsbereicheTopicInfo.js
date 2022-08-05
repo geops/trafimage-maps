@@ -43,7 +43,11 @@ const comps = {
 
 const GeltungsbereicheTopicInfo = () => {
   const { i18n } = useTranslation();
-  return <div>{comps[i18n.language]}</div>;
+  return (
+    <div>
+      <div>{comps[i18n.language]}</div>
+    </div>
+  );
 };
 
 export default GeltungsbereicheTopicInfo;

@@ -65,11 +65,15 @@ class StopFinder extends Search {
     const { layerService } = this.props;
     const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
 
+    if (!layer) {
+      return;
+    }
+
     // We try to display the overlay only when the stations layer is ready and has all the stations loaded.
     if (layer.ready) {
       this.onIdle();
     } else {
-      layer.on('datarendered', this.onIdle);
+      layer.once('datarendered', this.onIdle);
     }
   }
 

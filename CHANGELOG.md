@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/geops/trafimage-maps/compare/v1.13.0...v1.13.1) (2022-08-05)
+
+
+### Bug Fixes
+
+* dont reopen overlay of a searched station after zoom changes ([4587234](https://github.com/geops/trafimage-maps/commit/4587234b3a9103b96e536c436945ff6668d7d5ec))
+
+## [1.13.0](https://github.com/geops/trafimage-maps/compare/v1.12.5...v1.13.0) (2022-08-02)
+
+
+### Features
+
+* replace swissimage by aerial_sbb style ([#1022](https://github.com/geops/trafimage-maps/issues/1022)) ([478c5ba](https://github.com/geops/trafimage-maps/commit/478c5baad0289e8d54863f94733eaf49fb9725da))
+
 ### [1.12.5](https://github.com/geops/trafimage-maps/compare/v1.12.4...v1.12.5) (2022-07-26)
 
 
