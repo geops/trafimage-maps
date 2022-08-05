@@ -55,7 +55,7 @@ class HandicapStopFinder extends Search {
     if (layer.ready) {
       this.onIdle();
     } else {
-      layer.on('datarendered', this.onIdle);
+      layer.once('datarendered', this.onIdle);
     }
   }
 
