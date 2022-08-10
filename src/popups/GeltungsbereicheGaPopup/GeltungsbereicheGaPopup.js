@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
-// import { Typography } from '@material-ui/core';
-// import { SportsRugbySharp } from '@material-ui/icons';
-import { Typography } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import GeltungsbereicheLegend from './GeltungsbereicheLegend';
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
   layer: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
 };
+
+const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 300,
+  },
+}));
 
 const infoForGaId = 'ch.sbb.geltungsbereiche.mvp-ga_s25.info';
 const infoForGaSubId = 'ch.sbb.geltungsbereiche.mvp-tk.info';
@@ -56,7 +59,7 @@ const translations = {
 
 const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
   const { t, i18n } = useTranslation();
-
+  const classes = useStyles();
   const layer = layers[0];
   const validPropertyName = layer.get('validPropertyName');
   const getTextFromValid =
@@ -91,7 +94,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
   });
 
   return (
-    <div className="wkp-geltungsbereiche-popup">
+    <div className={classes.root}>
       {Object.entries(featuresByMot)
         .sort(([keyA], [keyB]) => {
           if (keyA < keyB) {
