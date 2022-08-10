@@ -1,6 +1,7 @@
 import React from 'react';
 import { fromLonLat } from 'ol/proj';
 import Search from '../Search';
+import isoToIntlVehicleCode from '../../utils/isoToIntlVehicleCode';
 
 class StopFinder extends Search {
   constructor() {
@@ -50,9 +51,15 @@ class StopFinder extends Search {
   }
 
   render(item) {
-    return (
-      <div>{`${item.properties.name} - ${item.properties.municipality_name} (${item.properties.country_code})`}</div>
-    );
+    let str = item.properties.name;
+
+    if (item.properties.municipality_name) {
+      str += ` - ${item.properties.municipality_name}`;
+    }
+    if (item.properties.country_code) {
+      str += ` (${isoToIntlVehicleCode(item.properties.country_code)})`;
+    }
+    return <div>{str}</div>;
   }
 
   // eslint-disable-next-line class-methods-use-this
