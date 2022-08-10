@@ -130,6 +130,7 @@ const isoCountryCode = [
   'NC',
   'NP',
   'NG',
+  'NI', // Northern Ireland. The country code for this one is not in the wikipedia page, so I take the vehicle code.
   'NI',
   'NL',
   'MK',
@@ -140,6 +141,7 @@ const isoCountryCode = [
   'PW',
   'PE',
   'PK',
+  'PMR', // Transinistrie The country code for this one is not in the wikipedia page, so I take the vehicle code.
   'PL',
   'PG',
   'PR',
@@ -447,6 +449,12 @@ const intlVehicleCode = [
 ];
 
 const isoToIntlVehicleCode = (countryCode) => {
+  if (isoCountryCode.length !== intlVehicleCode.length) {
+    // eslint-disable-next-line no-console
+    console.warning(
+      'isoCountryCode and intlVehicleCode arrays are not the same length. So the function could return a wrong value.',
+    );
+  }
   const index = isoCountryCode.indexOf(countryCode);
   return intlVehicleCode[index] || countryCode;
 };
