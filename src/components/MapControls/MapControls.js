@@ -44,7 +44,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     }
   };
 
-  const onGeolocateSuccess = () => {
+  const onGeolocateActivate = () => {
     if ('ondeviceorientationabsolute' in window) {
       window.addEventListener(
         'deviceorientationabsolute',
@@ -117,7 +117,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          onSuccess={onGeolocateSuccess}
+          onActivate={onGeolocateActivate}
           onDeactivate={() =>
             window.removeEventListener(
               'deviceorientation',
