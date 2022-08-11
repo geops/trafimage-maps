@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -31,6 +31,7 @@ const defaultProps = {
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [deviceDirection, setDeviceDirection] = useState('nuthing');
+  const [debug, setDebug] = useState('debug');
   const { t } = useTranslation();
   const deviceOrientationListener = (evt) => {
     setDeviceDirection(
@@ -76,11 +77,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     };
   }, [map, zoomSlider]);
 
-  const onGeolocateSuccess = useCallback(() => {
-    // Listen for the deviceorientation event and handle the raw data
-    window.addEventListener('deviceorientation', deviceOrientationListener);
-  }, []);
-
   return (
     <div className="wkp-map-controls">
       <Zoom
@@ -99,7 +95,14 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          onSuccess={onGeolocateSuccess}
+          onSuccess={() => {
+            setDebug('Success');
+            // Listen for the deviceorientation event and handle the raw data
+            window.addEventListener(
+              'deviceorientation',
+              deviceOrientationListener,
+            );
+          }}
           onDeactivate={() =>
             window.removeEventListener(
               'deviceorientation',
@@ -120,9 +123,10 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           }}
         />
       )}
-      {deviceDirection && (
-        <span style={{ position: 'absolute', right: '50vw' }}>
-          {deviceDirection}
+      {debug && (
+        <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
+          <div>Direction: {deviceDirection}</div>
+          <div>Debug: {debug}</div>
         </span>
       )}
       {fitExtent && (
