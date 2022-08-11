@@ -32,13 +32,17 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [deviceDirection, setDeviceDirection] = useState('nuthing');
   const { t } = useTranslation();
-  const deviceOrientationListener = (event) => {
-    if (event.webkitCompassHeading) {
-      // Apple works only with this, alpha doesn't work
-      setDeviceDirection(event.webkitCompassHeading);
-    } else {
-      setDeviceDirection(event.alpha);
-    }
+  const deviceOrientationListener = (evt) => {
+    console.log(evt.webkitCompassHeading);
+    setDeviceDirection(
+      `webkitCompassHeading: ${evt.webkitCompassHeading}, alpha: ${evt.alpha}`,
+    );
+    // if (evt.webkitCompassHeading) {
+    //   // Apple works only with this, alpha doesn't work
+    //   setDeviceDirection(evt.webkitCompassHeading);
+    // } else {
+    //   setDeviceDirection(evt.alpha);
+    // }
   };
 
   useEffect(() => {
@@ -119,7 +123,11 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           }}
         />
       )}
-      {deviceDirection && <span>{deviceDirection}</span>}
+      {deviceDirection && (
+        <span style={{ position: 'absolute', right: '50vw' }}>
+          {deviceDirection}
+        </span>
+      )}
       {fitExtent && (
         <FitExtent
           map={map}
