@@ -33,16 +33,15 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const [deviceDirection, setDeviceDirection] = useState('nuthing');
   const { t } = useTranslation();
   const deviceOrientationListener = (evt) => {
-    console.log(evt.webkitCompassHeading);
     setDeviceDirection(
       `webkitCompassHeading: ${evt.webkitCompassHeading}, alpha: ${evt.alpha}`,
     );
-    // if (evt.webkitCompassHeading) {
-    //   // Apple works only with this, alpha doesn't work
-    //   setDeviceDirection(evt.webkitCompassHeading);
-    // } else {
-    //   setDeviceDirection(evt.alpha);
-    // }
+    if (evt.webkitCompassHeading) {
+      // Apple works only with this, alpha doesn't work
+      setDeviceDirection(evt.webkitCompassHeading);
+    } else {
+      setDeviceDirection(evt.alpha);
+    }
   };
 
   useEffect(() => {
@@ -78,10 +77,8 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   }, [map, zoomSlider]);
 
   const onGeolocateSuccess = useCallback(() => {
-    if (window.DeviceOrientationEvent) {
-      // Listen for the deviceorientation event and handle the raw data
-      window.addEventListener('deviceorientation', deviceOrientationListener);
-    }
+    // Listen for the deviceorientation event and handle the raw data
+    window.addEventListener('deviceorientation', deviceOrientationListener);
   }, []);
 
   return (
