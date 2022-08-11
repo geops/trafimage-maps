@@ -31,7 +31,6 @@ const defaultProps = {
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [deviceDirection, setDeviceDirection] = useState('nuthing');
-  const [debug, setDebug] = useState('debug');
   const { t } = useTranslation();
   const deviceOrientationListener = (evt) => {
     setDeviceDirection(
@@ -45,14 +44,37 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     }
   };
 
-  // useEffect(() => {
-  //   // Remove geolocate listener on component unmount
-  //   return () =>
-  //     window.removeEventListener(
-  //       'deviceorientation',
-  //       deviceOrientationListener,
-  //     );
-  // }, []);
+  const onGeolocateSuccess = () => {
+    if ('ondeviceorientationabsolute' in window) {
+      window.addEventListener(
+        'deviceorientationabsolute',
+        deviceOrientationListener,
+      );
+    } else if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      DeviceOrientationEvent.requestPermission()
+        .then((permissionState) => {
+          if (permissionState === 'granted') {
+            window.addEventListener(
+              'deviceorientation',
+              deviceOrientationListener,
+              true,
+            );
+          }
+        })
+        .catch(alert);
+    } else {
+      window.addEventListener('deviceorientation', deviceOrientationListener);
+    }
+  };
+
+  useEffect(() => {
+    // Remove geolocate listener on component unmount
+    return () =>
+      window.removeEventListener(
+        'deviceorientation',
+        deviceOrientationListener,
+      );
+  }, []);
 
   useEffect(() => {
     let key = null;
@@ -95,14 +117,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          onSuccess={() => {
-            setDebug('Success');
-            // Listen for the deviceorientation event and handle the raw data
-            window.addEventListener(
-              'deviceorientation',
-              deviceOrientationListener,
-            );
-          }}
+          onSuccess={onGeolocateSuccess}
           onDeactivate={() =>
             window.removeEventListener(
               'deviceorientation',
@@ -123,12 +138,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           }}
         />
       )}
-      {debug && (
-        <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
-          <div>Direction: {deviceDirection}</div>
-          <div>Debug: {debug}</div>
-        </span>
-      )}
+      <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
+        <div>Direction: {deviceDirection}</div>
+      </span>
       {fitExtent && (
         <FitExtent
           map={map}
