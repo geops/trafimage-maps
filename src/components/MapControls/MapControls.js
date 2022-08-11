@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -7,9 +7,11 @@ import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
 import { ZoomSlider } from 'ol/control';
 import { unByKey } from 'ol/Observable';
+import { Style, Icon } from 'ol/style';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
+import geolocate from '../../img/geolocate_animated.svg';
 import './MapControls.scss';
 
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
@@ -28,7 +30,25 @@ const defaultProps = {
 
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
+  const [deviceDirection, setDeviceDirection] = useState('nuthing');
   const { t } = useTranslation();
+  const deviceOrientationListener = (event) => {
+    if (event.webkitCompassHeading) {
+      // Apple works only with this, alpha doesn't work
+      setDeviceDirection(event.webkitCompassHeading);
+    } else {
+      setDeviceDirection(event.alpha);
+    }
+  };
+
+  useEffect(() => {
+    // Remove geolocate listener on component unmount
+    return () =>
+      window.removeEventListener(
+        'deviceorientation',
+        deviceOrientationListener,
+      );
+  }, []);
 
   useEffect(() => {
     let key = null;
@@ -53,6 +73,13 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     };
   }, [map, zoomSlider]);
 
+  const onGeolocateSuccess = useCallback(() => {
+    if (window.DeviceOrientationEvent) {
+      // Listen for the deviceorientation event and handle the raw data
+      window.addEventListener('deviceorientation', deviceOrientationListener);
+    }
+  }, []);
+
   return (
     <div className="wkp-map-controls">
       <Zoom
@@ -71,9 +98,28 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          colorOrStyleFunc={[0, 61, 133]}
+          onSuccess={onGeolocateSuccess}
+          onDeactivate={() =>
+            window.removeEventListener(
+              'deviceorientation',
+              deviceOrientationListener,
+            )
+          }
+          colorOrStyleFunc={() => {
+            return new Style({
+              image: new Icon({
+                src: geolocate,
+                anchor: [49, 63],
+                anchorXUnits: 'pixels',
+                anchorYUnits: 'pixels',
+                rotation: 0,
+                rotateWithView: true,
+              }),
+            });
+          }}
         />
       )}
+      {deviceDirection && <span>{deviceDirection}</span>}
       {fitExtent && (
         <FitExtent
           map={map}
