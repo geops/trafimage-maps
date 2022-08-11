@@ -45,14 +45,14 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     }
   };
 
-  useEffect(() => {
-    // Remove geolocate listener on component unmount
-    return () =>
-      window.removeEventListener(
-        'deviceorientation',
-        deviceOrientationListener,
-      );
-  }, []);
+  // useEffect(() => {
+  //   // Remove geolocate listener on component unmount
+  //   return () =>
+  //     window.removeEventListener(
+  //       'deviceorientation',
+  //       deviceOrientationListener,
+  //     );
+  // }, []);
 
   useEffect(() => {
     let key = null;
