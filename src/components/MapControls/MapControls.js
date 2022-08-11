@@ -117,7 +117,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          onActivate={onGeolocateActivate}
           onDeactivate={() =>
             window.removeEventListener(
               'deviceorientation',
@@ -136,7 +135,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
               }),
             });
           }}
-        />
+        >
+          <ZoomIn focusable={false} onClick={onGeolocateActivate} />
+        </Geolocation>
       )}
       <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
         <div>Direction: {deviceDirection}</div>
