@@ -15,45 +15,29 @@ const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 300,
   },
+  abos: {
+    '&::first-letter': {
+      textTransform: 'uppercase',
+    },
+  },
 }));
-
-const infoForGaId = 'ch.sbb.geltungsbereiche.mvp-ga_s25.info';
-const infoForGaSubId = 'ch.sbb.geltungsbereiche.mvp-tk.info';
-const infoForHtaId = 'ch.sbb.geltungsbereiche.mvp-hta.info';
-const infoForStsId = 'ch.sbb.geltungsbereiche.mvp-sts.info';
 
 const translations = {
   de: {
-    [infoForGaId]:
-      'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
-    [infoForGaSubId]:
-      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
-    [infoForHtaId]: 'Halbtax-Abo',
-    [infoForStsId]: 'Swiss Travel Pass',
+    'Information gilt für diese Produkte':
+      'Information gilt für diese Produkte',
   },
   en: {
-    [infoForGaId]:
-      'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
-    [infoForGaSubId]:
-      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
-    [infoForHtaId]: 'Halbtax-Abo',
-    [infoForStsId]: 'Swiss Travel Pass',
+    'Information gilt für diese Produkte':
+      'Information applies to these products',
   },
   fr: {
-    [infoForGaId]:
-      'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
-    [infoForGaSubId]:
-      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
-    [infoForHtaId]: 'Halbtax-Abo',
-    [infoForStsId]: 'Swiss Travel Pass',
+    'Information gilt für diese Produkte':
+      "L'information s'applique à ces produits",
   },
   it: {
-    [infoForGaId]:
-      'General-Abo, seven25-Abo, Tageskarte zum Halbtax , GA-Monatskarte mit Halbtax',
-    [infoForGaSubId]:
-      'Tageskarte Gemeinde, Spartageskarte ohne GA oder Halbtax, Aktionstageskarte ohne GA oder Halbtax, GA-Monatskarte ohne Halbtax',
-    [infoForHtaId]: 'Halbtax-Abo',
-    [infoForStsId]: 'Swiss Travel Pass',
+    'Information gilt für diese Produkte':
+      'Informazioni applicabili a questi prodotti',
   },
 };
 
@@ -126,7 +110,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
                   <Typography variant="h4" style={{ display: 'inline-block' }}>
                     {t(`gb.mot.${mot}`)}
                   </Typography>
-                  : {text}
+                  : {t(text)}
                 </div>
                 <br />
               </div>
@@ -141,12 +125,16 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       </div>
       <br />
       <Typography variant="h4">
-        {t('Information gilt für diese Produkte')}:
+        {translations[i18n.language]['Information gilt für diese Produkte']}:
       </Typography>
-      {translations[i18n.language][`${layers[0].key}.info`]
+      {t(layer.name)
         .split(', ')
         .map((text) => {
-          return <Typography key={text}>{text}</Typography>;
+          return (
+            <Typography key={text} className={classes.abos}>
+              {t(text)}
+            </Typography>
+          );
         })}
     </div>
   );
@@ -155,7 +143,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 GeltungsbereichePopup.propTypes = propTypes;
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
-  return `${t('ch.sbb.geltungsbereiche')} `; // - ${t(`${layer.name || layer.key}`)}`;
+  return t('ch.sbb.geltungsbereiche');
 };
 
 GeltungsbereichePopup.hidePagination = true;

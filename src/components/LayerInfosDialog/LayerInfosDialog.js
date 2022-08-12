@@ -47,9 +47,10 @@ function LayerInfosDialog(props) {
 
   let body;
 
+  const LayerInfoComponent =
+    typeof component === 'string' ? layerInfos[component] : component;
+
   if (component) {
-    const LayerInfoComponent =
-      typeof component === 'string' ? layerInfos[component] : component;
     body = (
       <LayerInfoComponent
         language={language}
@@ -86,7 +87,11 @@ function LayerInfosDialog(props) {
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={
-        <span>{t(`${selectedForInfos.name || selectedForInfos.key}`)}</span>
+        LayerInfoComponent?.renderTitle ? (
+          LayerInfoComponent.renderTitle(selectedForInfos, t)
+        ) : (
+          <span>{t(`${selectedForInfos.name || selectedForInfos.key}`)}</span>
+        )
       }
       body={body}
       style={style}
