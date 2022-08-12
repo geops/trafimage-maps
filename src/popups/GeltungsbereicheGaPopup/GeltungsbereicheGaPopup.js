@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { makeStyles, Typography } from '@material-ui/core';
-import GeltungsbereicheLegend from './GeltungsbereicheLegend';
+import GeltungsbereicheLegend, { legends } from './GeltungsbereicheLegend';
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
@@ -75,7 +75,14 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       return text;
     });
 
+  // Keep same mot order as in the legends
   const featuresByMot = {};
+  legends.forEach((legend) => {
+    if (legend.mots.length) {
+      featuresByMot[legend.mots[0]] = {};
+    }
+  });
+
   features.forEach((feat) => {
     let mot = feat.get('mot');
     if (mot === 'tram') {
@@ -95,50 +102,37 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 
   return (
     <div className={classes.root}>
-      {Object.entries(featuresByMot)
-        .sort(([keyA], [keyB]) => {
-          if (keyA < keyB) {
-            return -1;
-          }
-          if (keyA > keyB) {
-            return 1;
-          }
-          return 0;
-        })
-        .map(([mot, validGa]) => {
-          return Object.entries(validGa)
-            .sort(([keyA], [keyB]) => {
-              if (keyA < keyB) {
-                return -1;
-              }
-              if (keyA > keyB) {
-                return 1;
-              }
-              return 0;
-            })
-            .map(([, feature]) => {
-              const valid = feature.get(validPropertyName);
-              const text = getTextFromValid(valid);
-              return (
-                <div key={mot + valid}>
-                  <GeltungsbereicheLegend
-                    mot={feature.get('mot')}
-                    valid={valid}
-                  />
-                  <div>
-                    <Typography
-                      variant="h4"
-                      style={{ display: 'inline-block' }}
-                    >
-                      {t(`gb.mot.${mot}`)}
-                    </Typography>
-                    : {text}
-                  </div>
-                  <br />
+      {Object.entries(featuresByMot).map(([mot, validGa]) => {
+        return Object.entries(validGa)
+          .sort(([keyA], [keyB]) => {
+            if (keyA < keyB) {
+              return -1;
+            }
+            if (keyA > keyB) {
+              return 1;
+            }
+            return 0;
+          })
+          .map(([, feature]) => {
+            const valid = feature.get(validPropertyName);
+            const text = getTextFromValid(valid);
+            return (
+              <div key={mot + valid}>
+                <GeltungsbereicheLegend
+                  mot={feature.get('mot')}
+                  valid={valid}
+                />
+                <div>
+                  <Typography variant="h4" style={{ display: 'inline-block' }}>
+                    {t(`gb.mot.${mot}`)}
+                  </Typography>
+                  : {text}
                 </div>
-              );
-            });
-        })}
+                <br />
+              </div>
+            );
+          });
+      })}
 
       <div>
         <GeltungsbereicheLegend />

@@ -7,7 +7,43 @@ const colorYellow = 'rgba(255, 242, 0, 1)';
 const colorRed = 'rgba(235, 0, 0, 1)';
 const colorBlue = 'rgba(42, 102, 152, 1)';
 const colorBlack = 'rgba(0, 0, 0, 1)';
+
+// Be aware that order is important here!
 export const legends = [
+  {
+    mots: ['rail', 'tram'],
+    validity: [
+      {
+        value: 100,
+        paint: [
+          {
+            'line-color': colorRed,
+            'line-width': lineWidth,
+          },
+        ],
+      },
+      {
+        value: 50,
+        paint: [
+          {
+            'line-color': colorRed,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
+      {
+        value: 25,
+        paint: [
+          {
+            'line-color': colorRed,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
+    ],
+  },
   {
     mots: ['bus'],
     validity: [
@@ -57,13 +93,13 @@ export const legends = [
     ],
   },
   {
-    mots: ['rail', 'tram'],
+    mots: ['gondola', 'funicular'],
     validity: [
       {
         value: 100,
         paint: [
           {
-            'line-color': colorRed,
+            'line-color': colorBlack,
             'line-width': lineWidth,
           },
         ],
@@ -72,7 +108,7 @@ export const legends = [
         value: 50,
         paint: [
           {
-            'line-color': colorRed,
+            'line-color': colorBlack,
             'line-width': lineWidth,
             'line-dasharray': dashArray,
           },
@@ -82,7 +118,7 @@ export const legends = [
         value: 25,
         paint: [
           {
-            'line-color': colorRed,
+            'line-color': colorBlack,
             'line-width': lineWidth,
             'line-dasharray': dashArray,
           },
@@ -117,40 +153,6 @@ export const legends = [
         paint: [
           {
             'line-color': colorBlue,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    mots: ['gondola', 'funicular'],
-    validity: [
-      {
-        value: 100,
-        paint: [
-          {
-            'line-color': colorBlack,
-            'line-width': lineWidth,
-          },
-        ],
-      },
-      {
-        value: 50,
-        paint: [
-          {
-            'line-color': colorBlack,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
-          },
-        ],
-      },
-      {
-        value: 25,
-        paint: [
-          {
-            'line-color': colorBlack,
             'line-width': lineWidth,
             'line-dasharray': dashArray,
           },
