@@ -67,7 +67,7 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
   }, [layers, layer, feature]);
 
   return (
-    <div className="wkp-geltungsbereiche-popup">
+    <div>
       {(geltungsbereiche &&
         geltungsbereicheMapping &&
         Object.entries(geltungsbereiche).map((entry) => {

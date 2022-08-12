@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
-// import { Typography } from '@material-ui/core';
-// import { SportsRugbySharp } from '@material-ui/icons';
-import { Typography } from '@material-ui/core';
-import GeltungsbereicheLegend from './GeltungsbereicheLegend';
+import { makeStyles, Typography } from '@material-ui/core';
+import GeltungsbereicheLegend, { legends } from './GeltungsbereicheLegend';
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
   layer: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
 };
+
+const useStyles = makeStyles(() => ({
+  root: {
+    maxWidth: 300,
+  },
+}));
 
 const infoForGaId = 'ch.sbb.geltungsbereiche.mvp-ga_s25.info';
 const infoForGaSubId = 'ch.sbb.geltungsbereiche.mvp-tk.info';
@@ -56,7 +59,7 @@ const translations = {
 
 const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
   const { t, i18n } = useTranslation();
-
+  const classes = useStyles();
   const layer = layers[0];
   const validPropertyName = layer.get('validPropertyName');
   const getTextFromValid =
@@ -72,7 +75,14 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       return text;
     });
 
+  // Keep same mot order as in the legends
   const featuresByMot = {};
+  legends.forEach((legend) => {
+    if (legend.mots.length) {
+      featuresByMot[legend.mots[0]] = {};
+    }
+  });
+
   features.forEach((feat) => {
     let mot = feat.get('mot');
     if (mot === 'tram') {
@@ -91,51 +101,38 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
   });
 
   return (
-    <div className="wkp-geltungsbereiche-popup">
-      {Object.entries(featuresByMot)
-        .sort(([keyA], [keyB]) => {
-          if (keyA < keyB) {
-            return -1;
-          }
-          if (keyA > keyB) {
-            return 1;
-          }
-          return 0;
-        })
-        .map(([mot, validGa]) => {
-          return Object.entries(validGa)
-            .sort(([keyA], [keyB]) => {
-              if (keyA < keyB) {
-                return -1;
-              }
-              if (keyA > keyB) {
-                return 1;
-              }
-              return 0;
-            })
-            .map(([, feature]) => {
-              const valid = feature.get(validPropertyName);
-              const text = getTextFromValid(valid);
-              return (
-                <div key={mot + valid}>
-                  <GeltungsbereicheLegend
-                    mot={feature.get('mot')}
-                    valid={valid}
-                  />
-                  <div>
-                    <Typography
-                      variant="h4"
-                      style={{ display: 'inline-block' }}
-                    >
-                      {t(`gb.mot.${mot}`)}
-                    </Typography>
-                    : {text}
-                  </div>
-                  <br />
+    <div className={classes.root}>
+      {Object.entries(featuresByMot).map(([mot, validGa]) => {
+        return Object.entries(validGa)
+          .sort(([keyA], [keyB]) => {
+            if (keyA < keyB) {
+              return -1;
+            }
+            if (keyA > keyB) {
+              return 1;
+            }
+            return 0;
+          })
+          .map(([, feature]) => {
+            const valid = feature.get(validPropertyName);
+            const text = getTextFromValid(valid);
+            return (
+              <div key={mot + valid}>
+                <GeltungsbereicheLegend
+                  mot={feature.get('mot')}
+                  valid={valid}
+                />
+                <div>
+                  <Typography variant="h4" style={{ display: 'inline-block' }}>
+                    {t(`gb.mot.${mot}`)}
+                  </Typography>
+                  : {text}
                 </div>
-              );
-            });
-        })}
+                <br />
+              </div>
+            );
+          });
+      })}
 
       <div>
         <GeltungsbereicheLegend />
