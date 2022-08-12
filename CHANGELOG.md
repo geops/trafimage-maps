@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.2](https://github.com/geops/trafimage-maps/compare/v1.13.1...v1.13.2) (2022-08-11)
+
+
+### Bug Fixes
+
+* **BPS:** update BPS topic name ([#1024](https://github.com/geops/trafimage-maps/issues/1024)) ([90b949e](https://github.com/geops/trafimage-maps/commit/90b949ebdc7c8f8a7157047b9809c0fcfe788a98))
+
 ### [1.13.1](https://github.com/geops/trafimage-maps/compare/v1.13.0...v1.13.1) (2022-08-05)
 
 
