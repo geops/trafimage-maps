@@ -31,31 +31,28 @@ const defaultProps = {
 };
 
 function degreesToRadians(degrees) {
-  const pi = Math.PI;
-  return degrees * (pi / 180);
+  return degrees * (Math.PI / 180);
 }
 
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
-  const [geolocating, setGeolocating] = useState(false);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const featureRef = useRef(geolocationFeature);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
     setGeolocationFeature(feature);
   };
-  // const [geolocationStyle] = useState(new Style());
 
   const deviceOrientationListener = useCallback(
     (evt) => {
-      console.log(evt);
       const feature = featureRef.current;
       if (feature) {
         if (evt.webkitCompassHeading) {
           // For iOS
           feature.set('rotation', degreesToRadians(evt.webkitCompassHeading));
         } else if (evt.alpha || evt.alpha === 0) {
+          // For normal OS
           feature.set('rotation', degreesToRadians(360 - evt.alpha));
         }
       }
@@ -64,15 +61,14 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   );
 
   const onGeolocateToggle = useCallback(() => {
-    if (geolocating) {
-      setGeolocating(false);
+    if (geolocationFeature) {
+      setGeolocFeatureWithRef();
       window.removeEventListener(
         'deviceorientation',
         deviceOrientationListener,
       );
       return;
     }
-    setGeolocating(true);
     if ('ondeviceorientationabsolute' in window) {
       window.addEventListener(
         'deviceorientationabsolute',
@@ -93,7 +89,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     } else {
       window.addEventListener('deviceorientation', deviceOrientationListener);
     }
-  }, [deviceOrientationListener, geolocating]);
+  }, [deviceOrientationListener, geolocationFeature]);
 
   useEffect(() => {
     // Remove geolocate listener on component unmount
@@ -143,7 +139,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
         <Geolocation
           title={t('Lokalisieren')}
           className={`wkp-geolocation${
-            geolocating ? ' wkp-geolocation-active' : ''
+            geolocationFeature ? ' wkp-geolocation-active' : ''
           }`}
           map={map}
           noCenterAfterDrag
