@@ -28,6 +28,13 @@ const defaultProps = {
   fitExtent: true,
 };
 
+const geoLocationOrientedIcon = new Icon({
+  src: geolocate,
+  anchor: [21, 46],
+  anchorXUnits: 'pixels',
+  anchorYUnits: 'pixels',
+});
+
 function degreesToRadians(degrees) {
   const pi = Math.PI;
   return degrees * (pi / 180);
@@ -37,14 +44,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [geolocating, setGeolocating] = useState(false);
   const [geolocationStyle] = useState(
-    new Style({
-      image: new Icon({
-        src: geolocate,
-        anchor: [21, 46],
-        anchorXUnits: 'pixels',
-        anchorYUnits: 'pixels',
-      }),
-    }),
+    new Style({ image: geoLocationOrientedIcon }),
   );
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const featureRef = useRef(geolocationFeature);
@@ -55,9 +55,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const deviceOrientationListener = useCallback(
     (evt) => {
-      console.log('evt: ', evt);
       const feature = featureRef.current;
-      console.log('featureRef.current: ', feature);
       if (feature) {
         if (evt.webkitCompassHeading) {
           // For iOS
@@ -159,14 +157,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             if (!geolocationFeature || feature !== geolocationFeature) {
               setGeolocFeatureWithRef(feature);
             }
-            geolocationStyle.setImage(
-              new Icon({
-                src: geolocate,
-                anchor: [21, 46],
-                anchorXUnits: 'pixels',
-                anchorYUnits: 'pixels',
-              }),
-            );
+            geolocationStyle.setImage(geoLocationOrientedIcon);
             geolocationStyle
               .getImage()
               .setRotation(feature.get('rotation') || 0);
@@ -176,11 +167,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           <ZoomIn focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
-      {/* <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
-        <div>
-          Direction: {geolocationFeature?.getStyle()?.getImage().getRotation()}
-        </div>
-      </span> */}
       {fitExtent && (
         <FitExtent
           map={map}
