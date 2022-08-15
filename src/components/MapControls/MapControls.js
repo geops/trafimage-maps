@@ -62,6 +62,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
 
   const onGeolocateToggle = useCallback(() => {
     if (geolocationFeature) {
+      // Deactivate geolocation
       setGeolocFeatureWithRef();
       window.removeEventListener(
         'deviceorientation',
