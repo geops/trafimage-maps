@@ -43,6 +43,7 @@ function degreesToRadians(degrees) {
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [geolocating, setGeolocating] = useState(false);
+  const [coord, setCoord] = useState(null);
   const [geolocationStyle] = useState(
     new Style({ image: geoLocationOrientedIcon }),
   );
@@ -163,10 +164,16 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
               .setRotation(feature.get('rotation') || 0);
             return geolocationStyle;
           }}
+          onSuccess={(olMap, coordinate) => {
+            setCoord(coordinate);
+          }}
         >
           <ZoomIn focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
+      <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
+        <div>coord: {coord}</div>
+      </span>
       {fitExtent && (
         <FitExtent
           map={map}
