@@ -28,19 +28,21 @@ const defaultProps = {
   fitExtent: true,
 };
 
+function degreesToRadians(degrees) {
+  const pi = Math.PI;
+  return degrees * (pi / 180);
+}
+
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
-  const [deviceDirection, setDeviceDirection] = useState('nuthing');
+  const [deviceDirection, setDeviceDirection] = useState(degreesToRadians(0));
   const { t } = useTranslation();
   const deviceOrientationListener = (evt) => {
-    setDeviceDirection(
-      `webkitCompassHeading: ${evt.webkitCompassHeading}, alpha: ${evt.alpha}`,
-    );
     if (evt.webkitCompassHeading) {
       // Apple works only with this, alpha doesn't work
-      setDeviceDirection(evt.webkitCompassHeading);
+      setDeviceDirection(degreesToRadians(evt.webkitCompassHeading));
     } else {
-      setDeviceDirection(evt.alpha);
+      setDeviceDirection(degreesToRadians(evt.alpha));
     }
   };
 
@@ -130,7 +132,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
                 anchor: [49, 63],
                 anchorXUnits: 'pixels',
                 anchorYUnits: 'pixels',
-                rotation: 0,
+                rotation: deviceDirection,
                 rotateWithView: true,
               }),
             });
