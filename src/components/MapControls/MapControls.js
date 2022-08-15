@@ -36,19 +36,40 @@ function degreesToRadians(degrees) {
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [geolocating, setGeolocating] = useState(false);
-  const [deviceDirection, setDeviceDirection] = useState(degreesToRadians(0));
+  const [geolocationStyle] = useState(
+    new Style({
+      image: new Icon({
+        src: geolocate,
+        anchor: [49, 63],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
+        rotation: 0,
+        rotateWithView: true,
+      }),
+    }),
+  );
+  const [geolocationFeature, setGeolocationFeature] = useState(null);
   const { t } = useTranslation();
-  const deviceOrientationListener = (evt) => {
-    if (evt.webkitCompassHeading) {
-      // Apple works only with this, alpha doesn't work
-      setDeviceDirection(degreesToRadians(evt.webkitCompassHeading));
-    } else {
-      setDeviceDirection(degreesToRadians(evt.alpha));
-    }
-  };
+  const deviceOrientationListener = useCallback(
+    (evt) => {
+      if (geolocationFeature) {
+        if (evt.webkitCompassHeading) {
+          // For iOS
+          geolocationFeature.set(
+            'rotation',
+            degreesToRadians(evt.webkitCompassHeading),
+          );
+        } else {
+          geolocationFeature.set('rotation', degreesToRadians(360 - evt.alpha));
+        }
+      }
+    },
+    [geolocationFeature],
+  );
 
   const onGeolocateToggle = useCallback(() => {
     if (geolocating) {
+      console.log('deactivating');
       setGeolocating(false);
       return;
     }
@@ -73,7 +94,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     } else {
       window.addEventListener('deviceorientation', deviceOrientationListener);
     }
-  }, [geolocating]);
+  }, [deviceOrientationListener, geolocating]);
 
   useEffect(() => {
     // Remove geolocate listener on component unmount
@@ -82,7 +103,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
         'deviceorientation',
         deviceOrientationListener,
       );
-  }, []);
+  }, [deviceOrientationListener]);
 
   useEffect(() => {
     let key = null;
@@ -126,33 +147,32 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           map={map}
           noCenterAfterDrag
           onDeactivate={() => {
-            console.log(geolocating);
             window.removeEventListener(
               'deviceorientation',
               deviceOrientationListener,
             );
           }}
           colorOrStyleFunc={(feature) => {
-            console.log(feature);
-            const style = new Style({
-              image: new Icon({
-                src: geolocate,
-                anchor: [49, 63],
-                anchorXUnits: 'pixels',
-                anchorYUnits: 'pixels',
-                rotateWithView: true,
-              }),
-            });
-            style.getImage().setRotation(deviceDirection);
-            return style;
+            if (!feature) {
+              return null;
+            }
+            if (!geolocationFeature || feature !== geolocationFeature) {
+              setGeolocationFeature(feature);
+            }
+            geolocationStyle
+              .getImage()
+              .setRotation(feature.get('rotation') || 0);
+            return geolocationStyle;
           }}
         >
           <ZoomIn focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
-      <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
-        <div>Direction: {deviceDirection}</div>
-      </span>
+      {/* <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
+        <div>
+          Direction: {geolocationFeature?.getStyle()?.getImage().getRotation()}
+        </div>
+      </span> */}
       {fitExtent && (
         <FitExtent
           map={map}
