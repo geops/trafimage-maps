@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -48,6 +48,11 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     }),
   );
   const [geolocationFeature, setGeolocationFeature] = useState(null);
+  const featureRef = useRef(geolocationFeature);
+  const setGeolocFeatureWithRef = (feature) => {
+    featureRef.current = feature;
+    setGeolocationFeature(feature);
+  };
   const { t } = useTranslation();
   const deviceOrientationListener = useCallback(
     (evt) => {
@@ -158,7 +163,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
               return null;
             }
             if (!geolocationFeature || feature !== geolocationFeature) {
-              setGeolocationFeature(feature);
+              setGeolocFeatureWithRef(feature);
             }
             geolocationStyle.setImage(
               new Icon({
