@@ -164,8 +164,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
               .setRotation(feature.get('rotation') || 0);
             return geolocationStyle;
           }}
-          onSuccess={(olMap, coordinate) => {
-            setCoord(coordinate);
+          onSuccess={(olMap, coordinate, cmpt) => {
+            console.log(cmpt.point);
+            setCoord(cmpt.point.getCoordinates());
           }}
         >
           <ZoomIn focusable={false} onClick={onGeolocateToggle} />
