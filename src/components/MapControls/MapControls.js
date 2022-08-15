@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -11,7 +17,9 @@ import { Style, Icon } from 'ol/style';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
-import geolocate from '../../img/geolocate_animated.svg';
+import { ReactComponent as Geolocate } from '../../img/geolocate.svg';
+import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
+import geolocateMarker from '../../img/geolocate_marker.svg';
 import './MapControls.scss';
 
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
@@ -28,13 +36,6 @@ const defaultProps = {
   fitExtent: true,
 };
 
-const geoLocationOrientedIcon = new Icon({
-  src: geolocate,
-  anchor: [21, 46],
-  anchorXUnits: 'pixels',
-  anchorYUnits: 'pixels',
-});
-
 function degreesToRadians(degrees) {
   const pi = Math.PI;
   return degrees * (pi / 180);
@@ -44,15 +45,29 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
   const [testString, setTestString] = useState();
   const [geolocating, setGeolocating] = useState(false);
-  const [geolocationStyle] = useState(
-    new Style({ image: geoLocationOrientedIcon }),
-  );
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const featureRef = useRef(geolocationFeature);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
     setGeolocationFeature(feature);
   };
+  const geolocationIcon = useMemo(() => {
+    const rotation = featureRef.current?.get('rotation');
+    return new Icon({
+      src:
+        rotation || rotation === 0
+          ? geolocateMarkerWithDirection
+          : geolocateMarker,
+      anchor: [21, 46],
+      anchorXUnits: 'pixels',
+      anchorYUnits: 'pixels',
+    });
+  }, [featureRef]);
+  const geolocationStyle = useMemo(
+    () => new Style({ image: geolocationIcon }),
+    [geolocationIcon],
+  );
+
   const { t } = useTranslation();
   const deviceOrientationListener = useCallback(
     (evt) => {
@@ -158,7 +173,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             if (!geolocationFeature || feature !== geolocationFeature) {
               setGeolocFeatureWithRef(feature);
             }
-            geolocationStyle.setImage(geoLocationOrientedIcon);
+            geolocationStyle.setImage(geolocationIcon);
             geolocationStyle
               .getImage()
               .setRotation(feature.get('rotation') || 0);
@@ -168,7 +183,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             setTestString(coordinate.toString());
           }}
         >
-          <ZoomIn focusable={false} onClick={onGeolocateToggle} />
+          <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
       <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
