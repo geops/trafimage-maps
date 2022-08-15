@@ -42,6 +42,7 @@ function degreesToRadians(degrees) {
 }
 
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
+  const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const [testString, setTestString] = useState();
   const [geolocating, setGeolocating] = useState(false);
@@ -52,7 +53,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     setGeolocationFeature(feature);
   };
   const geolocationIcon = useMemo(() => {
-    const rotation = featureRef.current?.get('rotation');
+    const rotation = geolocationFeature?.get('rotation');
     return new Icon({
       src:
         rotation || rotation === 0
@@ -62,13 +63,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
       anchorXUnits: 'pixels',
       anchorYUnits: 'pixels',
     });
-  }, [featureRef]);
-  const geolocationStyle = useMemo(
-    () => new Style({ image: geolocationIcon }),
-    [geolocationIcon],
-  );
+  }, [geolocationFeature]);
+  const [geolocationStyle] = useState(new Style({ image: geolocationIcon }));
 
-  const { t } = useTranslation();
   const deviceOrientationListener = useCallback(
     (evt) => {
       const feature = featureRef.current;
