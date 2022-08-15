@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -35,6 +35,7 @@ function degreesToRadians(degrees) {
 
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const map = useSelector((state) => state.app.map);
+  const [geolocating, setGeolocating] = useState(false);
   const [deviceDirection, setDeviceDirection] = useState(degreesToRadians(0));
   const { t } = useTranslation();
   const deviceOrientationListener = (evt) => {
@@ -46,7 +47,12 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     }
   };
 
-  const onGeolocateActivate = () => {
+  const onGeolocateToggle = useCallback(() => {
+    if (geolocating) {
+      setGeolocating(false);
+      return;
+    }
+    setGeolocating(true);
     if ('ondeviceorientationabsolute' in window) {
       window.addEventListener(
         'deviceorientationabsolute',
@@ -67,7 +73,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     } else {
       window.addEventListener('deviceorientation', deviceOrientationListener);
     }
-  };
+  }, [geolocating]);
 
   useEffect(() => {
     // Remove geolocate listener on component unmount
@@ -120,26 +126,28 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           map={map}
           noCenterAfterDrag
           onDeactivate={() => {
-            setDeviceDirection('wank');
+            console.log(geolocating);
             window.removeEventListener(
               'deviceorientation',
               deviceOrientationListener,
             );
           }}
-          colorOrStyleFunc={() => {
-            return new Style({
+          colorOrStyleFunc={(feature) => {
+            console.log(feature);
+            const style = new Style({
               image: new Icon({
                 src: geolocate,
                 anchor: [49, 63],
                 anchorXUnits: 'pixels',
                 anchorYUnits: 'pixels',
-                rotation: deviceDirection,
                 rotateWithView: true,
               }),
             });
+            style.getImage().setRotation(deviceDirection);
+            return style;
           }}
         >
-          <ZoomIn focusable={false} onClick={onGeolocateActivate} />
+          <ZoomIn focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
       <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
