@@ -38,7 +38,6 @@ function degreesToRadians(degrees) {
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
-  const [testString, setTestString] = useState();
   const [geolocating, setGeolocating] = useState(false);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const featureRef = useRef(geolocationFeature);
@@ -46,10 +45,11 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     featureRef.current = feature;
     setGeolocationFeature(feature);
   };
-  const [geolocationStyle] = useState(new Style());
+  // const [geolocationStyle] = useState(new Style());
 
   const deviceOrientationListener = useCallback(
     (evt) => {
+      console.log(evt);
       const feature = featureRef.current;
       if (feature) {
         if (evt.webkitCompassHeading) {
@@ -142,7 +142,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
       {geolocation && (
         <Geolocation
           title={t('Lokalisieren')}
-          className="wkp-geolocation"
+          className={`wkp-geolocation${
+            geolocating ? ' wkp-geolocation-active' : ''
+          }`}
           map={map}
           noCenterAfterDrag
           colorOrStyleFunc={(feature) => {
@@ -152,31 +154,26 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             if (!geolocationFeature || feature !== geolocationFeature) {
               setGeolocFeatureWithRef(feature);
             }
+            const style = new Style();
             const rotation = feature.get('rotation');
-            geolocationStyle.setImage(
+            style.setImage(
               new Icon({
                 src:
                   rotation || rotation === 0
                     ? geolocateMarkerWithDirection
                     : geolocateMarker,
+                rotation: rotation || 0,
                 anchor: [21, 46],
                 anchorXUnits: 'pixels',
                 anchorYUnits: 'pixels',
               }),
             );
-            geolocationStyle.getImage().setRotation(rotation || 0);
-            return geolocationStyle;
-          }}
-          onSuccess={(olMap, coordinate) => {
-            setTestString(coordinate.toString());
+            return style;
           }}
         >
           <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
-      <span style={{ position: 'absolute', left: '-50vw', width: 100 }}>
-        <div>coord: {testString}</div>
-      </span>
       {fitExtent && (
         <FitExtent
           map={map}
