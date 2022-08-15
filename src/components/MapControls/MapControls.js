@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useMemo,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -52,19 +46,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     featureRef.current = feature;
     setGeolocationFeature(feature);
   };
-  const geolocationIcon = useMemo(() => {
-    const rotation = geolocationFeature?.get('rotation');
-    return new Icon({
-      src:
-        rotation || rotation === 0
-          ? geolocateMarkerWithDirection
-          : geolocateMarker,
-      anchor: [21, 46],
-      anchorXUnits: 'pixels',
-      anchorYUnits: 'pixels',
-    });
-  }, [geolocationFeature]);
-  const [geolocationStyle] = useState(new Style({ image: geolocationIcon }));
+  const [geolocationStyle] = useState(new Style());
 
   const deviceOrientationListener = useCallback(
     (evt) => {
@@ -170,7 +152,18 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             if (!geolocationFeature || feature !== geolocationFeature) {
               setGeolocFeatureWithRef(feature);
             }
-            geolocationStyle.setImage(geolocationIcon);
+            const rotation = geolocationFeature?.get('rotation');
+            geolocationStyle.setImage(
+              new Icon({
+                src:
+                  rotation || rotation === 0
+                    ? geolocateMarkerWithDirection
+                    : geolocateMarker,
+                anchor: [21, 46],
+                anchorXUnits: 'pixels',
+                anchorYUnits: 'pixels',
+              }),
+            );
             geolocationStyle
               .getImage()
               .setRotation(feature.get('rotation') || 0);
