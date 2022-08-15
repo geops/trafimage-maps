@@ -152,7 +152,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             if (!geolocationFeature || feature !== geolocationFeature) {
               setGeolocFeatureWithRef(feature);
             }
-            const rotation = geolocationFeature?.get('rotation');
+            const rotation = feature.get('rotation');
             geolocationStyle.setImage(
               new Icon({
                 src:
@@ -164,9 +164,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
                 anchorYUnits: 'pixels',
               }),
             );
-            geolocationStyle
-              .getImage()
-              .setRotation(feature.get('rotation') || 0);
+            geolocationStyle.getImage().setRotation(rotation || 0);
             return geolocationStyle;
           }}
           onSuccess={(olMap, coordinate) => {
