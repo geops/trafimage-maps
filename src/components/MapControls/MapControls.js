@@ -124,6 +124,8 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     };
   }, [map, zoomSlider]);
 
+  console.log('isSecureContext:', window.isSecureContext);
+
   return (
     <div className="wkp-map-controls">
       <Zoom
@@ -168,6 +170,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             return style;
           }}
         >
+          <span style={{ position: 'absolute', right: '20vw' }}>
+            isSecureContext: {`${window.isSecureContext}`}
+          </span>
           <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
