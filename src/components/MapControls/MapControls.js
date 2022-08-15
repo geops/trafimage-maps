@@ -43,7 +43,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
         anchor: [49, 63],
         anchorXUnits: 'pixels',
         anchorYUnits: 'pixels',
-        rotation: 0,
         rotateWithView: true,
       }),
     }),
@@ -52,6 +51,8 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const deviceOrientationListener = useCallback(
     (evt) => {
+      console.log('evt: ', evt);
+      console.log('geolocationFeature: ', geolocationFeature);
       if (geolocationFeature) {
         if (evt.webkitCompassHeading) {
           // For iOS
@@ -159,6 +160,15 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             if (!geolocationFeature || feature !== geolocationFeature) {
               setGeolocationFeature(feature);
             }
+            geolocationStyle.setImage(
+              new Icon({
+                src: geolocate,
+                anchor: [49, 63],
+                anchorXUnits: 'pixels',
+                anchorYUnits: 'pixels',
+                rotateWithView: true,
+              }),
+            );
             geolocationStyle
               .getImage()
               .setRotation(feature.get('rotation') || 0);
