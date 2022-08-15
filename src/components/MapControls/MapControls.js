@@ -40,7 +40,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     new Style({
       image: new Icon({
         src: geolocate,
-        rotateWithView: true,
+        anchor: [21, 46],
+        anchorXUnits: 'pixels',
+        anchorYUnits: 'pixels',
       }),
     }),
   );
@@ -70,8 +72,11 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
 
   const onGeolocateToggle = useCallback(() => {
     if (geolocating) {
-      console.log('deactivating');
       setGeolocating(false);
+      window.removeEventListener(
+        'deviceorientation',
+        deviceOrientationListener,
+      );
       return;
     }
     setGeolocating(true);
@@ -147,12 +152,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          onDeactivate={() => {
-            window.removeEventListener(
-              'deviceorientation',
-              deviceOrientationListener,
-            );
-          }}
           colorOrStyleFunc={(feature) => {
             if (!feature) {
               return null;
@@ -163,7 +162,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             geolocationStyle.setImage(
               new Icon({
                 src: geolocate,
-                rotateWithView: true,
+                anchor: [21, 46],
+                anchorXUnits: 'pixels',
+                anchorYUnits: 'pixels',
               }),
             );
             geolocationStyle
