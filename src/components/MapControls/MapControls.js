@@ -170,9 +170,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             return style;
           }}
         >
-          <span style={{ position: 'absolute', right: '20vw' }}>
+          {/* <span style={{ position: 'absolute', right: '20vw' }}>
             isSecureContext: {`${window.isSecureContext}`}
-          </span>
+          </span> */}
           <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
