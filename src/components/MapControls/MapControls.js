@@ -55,7 +55,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
         if (evt.webkitCompassHeading) {
           // For iOS
           feature.set('rotation', degreesToRadians(evt.webkitCompassHeading));
-        } else {
+        } else if (evt.alpha || evt.alpha === 0) {
           feature.set('rotation', degreesToRadians(360 - evt.alpha));
         }
       }
