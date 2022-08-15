@@ -119,12 +119,13 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           className="wkp-geolocation"
           map={map}
           noCenterAfterDrag
-          onDeactivate={() =>
+          onDeactivate={() => {
+            setDeviceDirection('wank');
             window.removeEventListener(
               'deviceorientation',
               deviceOrientationListener,
-            )
-          }
+            );
+          }}
           colorOrStyleFunc={() => {
             return new Style({
               image: new Icon({
