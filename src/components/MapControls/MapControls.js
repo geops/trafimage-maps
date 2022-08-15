@@ -57,20 +57,18 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const deviceOrientationListener = useCallback(
     (evt) => {
       console.log('evt: ', evt);
-      console.log('geolocationFeature: ', geolocationFeature);
-      if (geolocationFeature) {
+      const feature = featureRef.current;
+      console.log('featureRef.current: ', feature);
+      if (feature) {
         if (evt.webkitCompassHeading) {
           // For iOS
-          geolocationFeature.set(
-            'rotation',
-            degreesToRadians(evt.webkitCompassHeading),
-          );
+          feature.set('rotation', degreesToRadians(evt.webkitCompassHeading));
         } else {
-          geolocationFeature.set('rotation', degreesToRadians(360 - evt.alpha));
+          feature.set('rotation', degreesToRadians(360 - evt.alpha));
         }
       }
     },
-    [geolocationFeature],
+    [featureRef],
   );
 
   const onGeolocateToggle = useCallback(() => {
