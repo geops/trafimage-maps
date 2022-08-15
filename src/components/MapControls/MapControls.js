@@ -40,9 +40,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     new Style({
       image: new Icon({
         src: geolocate,
-        anchor: [49, 63],
-        anchorXUnits: 'pixels',
-        anchorYUnits: 'pixels',
         rotateWithView: true,
       }),
     }),
@@ -166,9 +163,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             geolocationStyle.setImage(
               new Icon({
                 src: geolocate,
-                anchor: [49, 63],
-                anchorXUnits: 'pixels',
-                anchorYUnits: 'pixels',
                 rotateWithView: true,
               }),
             );
