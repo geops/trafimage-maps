@@ -1,0 +1,41 @@
+<svg width="42" height="66" viewBox="0 0 42 66" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .pulse {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            from {
+                stroke-width: 4;
+            }
+
+            to {
+                stroke-width: 3;
+            }
+        }
+    </style>
+    <path d="M0 0H42L29.5 46H12L0 0Z" fill="url(#paint0_linear_1_41)" />
+    <g filter="url(#filter0_d_1_41)">
+        <circle cx="21" cy="46" r="12" fill="#006AFF" />
+        <circle class="pulse" cx="21" cy="46" r="10.5" stroke="white" />
+    </g>
+    <defs>
+        <filter id="filter0_d_1_41" x="1" y="26" width="40" height="40" filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha" />
+            <feMorphology radius="4" operator="erode" in="SourceAlpha" result="effect1_dropShadow_1_41" />
+            <feOffset />
+            <feGaussianBlur stdDeviation="6" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0" />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_41" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_41" result="shape" />
+        </filter>
+        <linearGradient id="paint0_linear_1_41" x1="21" y1="0" x2="21" y2="57" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#006AFF" stop-opacity="0" />
+            <stop offset="1" stop-color="#006AFF" stop-opacity="0.3" />
+        </linearGradient>
+    </defs>
+</svg>
