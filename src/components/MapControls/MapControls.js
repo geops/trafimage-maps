@@ -11,7 +11,7 @@ import { Style, Icon } from 'ol/style';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
-import { ReactComponent as Geolocate } from '../../img/geolocate.svg';
+import Geolocate from '../../img/Geolocate';
 import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
 import geolocateMarker from '../../img/geolocate_marker.svg';
 import './MapControls.scss';
@@ -30,9 +30,9 @@ const defaultProps = {
   fitExtent: true,
 };
 
-function degreesToRadians(degrees) {
+const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
-}
+};
 
 const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
