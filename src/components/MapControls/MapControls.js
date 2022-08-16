@@ -52,8 +52,13 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           // For iOS
           feature.set('rotation', degreesToRadians(evt.webkitCompassHeading));
         } else if (evt.alpha || evt.alpha === 0) {
-          // For normal OS
-          feature.set('rotation', degreesToRadians(360 - evt.alpha));
+          if (!window.chrome) {
+            // most likely firefox on android
+            feature.set('rotation', degreesToRadians(180 - evt.alpha));
+          } else {
+            // For normal OS
+            feature.set('rotation', degreesToRadians(360 - evt.alpha));
+          }
         }
       }
     },
