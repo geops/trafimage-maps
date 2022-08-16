@@ -46,7 +46,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
 
   const deviceOrientationListener = useCallback(
     (evt) => {
-      const feature = featureRef.current;
+      const feature = featureRef.current; // Use ref to always get the current feature
       if (feature) {
         if (evt.webkitCompassHeading) {
           // For iOS
@@ -124,8 +124,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     };
   }, [map, zoomSlider]);
 
-  console.log('isSecureContext:', window.isSecureContext);
-
   return (
     <div className="wkp-map-controls">
       <Zoom
@@ -170,9 +168,6 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
             return style;
           }}
         >
-          {/* <span style={{ position: 'absolute', right: '20vw' }}>
-            isSecureContext: {`${window.isSecureContext}`}
-          </span> */}
           <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
       )}
