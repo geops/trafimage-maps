@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const dashArray = '6 4';
+const dashArray = '1 7';
 const lineWidth = 3.5;
 const colorYellow = 'rgba(255, 242, 0, 1)';
 const colorRed = 'rgba(235, 0, 0, 1)';
@@ -177,7 +177,7 @@ export const legends = [
 ];
 
 // eslint-disable-next-line react/prop-types
-const GeltungsbereicheLegend = ({ mot, valid }) => {
+const GeltungsbereicheLegend = ({ mot, valid, background }) => {
   // const mapboxFeature = feature.get('mapboxFeature');
   const legend = legends
     .find(({ mots }) => {
@@ -195,22 +195,24 @@ const GeltungsbereicheLegend = ({ mot, valid }) => {
 
   return (
     <svg
-      viewBox="0 0 80 10"
-      width="80"
-      height="10"
+      viewBox={`0 0 50 ${background ? '50' : '10'}`}
+      width="50"
+      height={background ? '50' : '10'}
       xmlns="http://www.w3.org/2000/svg"
     >
+      {background ? <circle cx="25" cy="25" r="25" fill="#f5f5f5" /> : null}
       {legend.paint.map((paint) => {
         return (
           <line
             key={paint['line-dasharray'] + paint['line-color']}
             x1="0"
-            y1="5"
+            y1={background ? '25' : '5'}
             x2="50"
-            y2="5"
+            y2={background ? '25' : '5'}
             stroke={paint['line-color']}
             strokeWidth={paint['line-width']}
             strokeDasharray={paint['line-dasharray']}
+            strokeLinecap={paint['line-dasharray'] && 'round'}
           />
         );
       })}
@@ -221,11 +223,13 @@ const GeltungsbereicheLegend = ({ mot, valid }) => {
 GeltungsbereicheLegend.propTypes = {
   mot: PropTypes.string,
   valid: PropTypes.number,
+  background: PropTypes.bool,
 };
 
 GeltungsbereicheLegend.defaultProps = {
   mot: null,
   valid: null,
+  background: false,
 };
 
 export default GeltungsbereicheLegend;

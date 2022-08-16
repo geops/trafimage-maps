@@ -12,8 +12,11 @@ const propTypes = {
 };
 
 const useStyles = makeStyles(() => ({
-  root: {
-    maxWidth: 300,
+  legendItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 15,
+    padding: '10px 0',
   },
   abos: {
     '&::first-letter': {
@@ -22,27 +25,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const translations = {
-  de: {
-    'Information gilt für diese Produkte':
-      'Information gilt für diese Produkte',
-  },
-  en: {
-    'Information gilt für diese Produkte':
-      'Information applies to these products',
-  },
-  fr: {
-    'Information gilt für diese Produkte':
-      "L'information s'applique à ces produits",
-  },
-  it: {
-    'Information gilt für diese Produkte':
-      'Informazioni applicabili a questi prodotti',
-  },
-};
-
 const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
   const validPropertyName = layer.get('validPropertyName');
@@ -86,6 +70,16 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 
   return (
     <div className={classes.root}>
+      {t(layer.name)
+        .split(', ')
+        .map((text) => {
+          return (
+            <Typography paragraph key={text} className={classes.abos}>
+              {t(text)}
+            </Typography>
+          );
+        })}
+      <br />
       {Object.entries(featuresByMot).map(([mot, validGa]) => {
         return Object.entries(validGa)
           .sort(([keyA], [keyB]) => {
@@ -101,41 +95,24 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
             const valid = feature.get(validPropertyName);
             const text = getTextFromValid(valid);
             return (
-              <div key={mot + valid}>
+              <div key={mot + valid} className={classes.legendItem}>
                 <GeltungsbereicheLegend
                   mot={feature.get('mot')}
                   valid={valid}
+                  background
                 />
                 <div>
-                  <Typography variant="h4" style={{ display: 'inline-block' }}>
-                    {t(`gb.mot.${mot}`)}
-                  </Typography>
-                  : {t(text)}
+                  <Typography variant="h4">{t(`gb.mot.${mot}`)}</Typography>
+                  <Typography variant="subtitle1">{t(text)}</Typography>
                 </div>
-                <br />
               </div>
             );
           });
       })}
-
-      <div>
-        <GeltungsbereicheLegend />
-        <div>{t('Keine Ermässigung')}</div>
-        <br />
+      <div className={classes.legendItem}>
+        <GeltungsbereicheLegend background />
+        <Typography variant="subtitle1">{t('Keine Ermässigung')}</Typography>
       </div>
-      <br />
-      <Typography variant="h4">
-        {translations[i18n.language]['Information gilt für diese Produkte']}:
-      </Typography>
-      {t(layer.name)
-        .split(', ')
-        .map((text) => {
-          return (
-            <Typography key={text} className={classes.abos}>
-              {t(text)}
-            </Typography>
-          );
-        })}
     </div>
   );
 };
