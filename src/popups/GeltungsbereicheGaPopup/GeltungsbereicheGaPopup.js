@@ -70,16 +70,6 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
 
   return (
     <div className={classes.root}>
-      {t(layer.name)
-        .split(', ')
-        .map((text) => {
-          return (
-            <Typography paragraph key={text} className={classes.abos}>
-              {t(text)}
-            </Typography>
-          );
-        })}
-      <br />
       {Object.entries(featuresByMot).map(([mot, validGa]) => {
         return Object.entries(validGa)
           .sort(([keyA], [keyB]) => {
@@ -113,6 +103,16 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
         <GeltungsbereicheLegend background />
         <Typography variant="subtitle1">{t('Keine Ermässigung')}</Typography>
       </div>
+      <br />
+      {t(layer.name)
+        .split(', ')
+        .map((text) => {
+          return (
+            <Typography paragraph key={text} className={classes.abos}>
+              {t(text)}
+            </Typography>
+          );
+        })}
     </div>
   );
 };
