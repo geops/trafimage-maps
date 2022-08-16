@@ -17,9 +17,7 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
   name: 'ch.sbb.geltungsbereiche.mvp-ga_s25',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['geltungsbereiche.filter'] &&
-    /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
+    metadata && metadata['geltungsbereiche.filter']?.includes('ga.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('ga.line'),
   properties: {
@@ -38,9 +36,7 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['geltungsbereiche.filter'] &&
-    /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
+    metadata && metadata['geltungsbereiche.filter']?.includes('tk.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('tk.line'),
   properties: {
@@ -59,9 +55,7 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['geltungsbereiche.filter'] &&
-    /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
+    metadata && metadata['geltungsbereiche.filter']?.includes('hta.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('hta.line'),
   properties: {
@@ -83,9 +77,7 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['geltungsbereiche.filter'] &&
-    /.*(?<!\.select)$/.test(metadata['geltungsbereiche.filter']),
+    metadata && metadata['geltungsbereiche.filter']?.includes('sts.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('sts.line'),
   properties: {
