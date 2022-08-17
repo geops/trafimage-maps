@@ -150,7 +150,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
                 <ListItemIcon className={classes.listItemIcon}>
                   <AiTwotoneCopyrightCircle size={7} />
                 </ListItemIcon>
-                <ListItemText>{t(text)}</ListItemText>
+                <ListItemText className={classes.abos}>{t(text)}</ListItemText>
               </ListItem>
             );
           })}
