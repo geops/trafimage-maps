@@ -148,7 +148,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           noCenterAfterDrag
           onSuccess={() => setGeolocating(true)}
           colorOrStyleFunc={(feature) => {
-            if (!feature) {
+            if (!feature || !geolocating) {
               return null;
             }
             if (!geolocationFeature || feature !== geolocationFeature) {
