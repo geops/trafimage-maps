@@ -38,6 +38,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
+  const [geolocating, setGeolocating] = useState(false);
   const featureRef = useRef(geolocationFeature);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
@@ -61,8 +62,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   );
 
   const onGeolocateToggle = useCallback(() => {
-    if (geolocationFeature) {
+    if (geolocating) {
       // Deactivate geolocation
+      setGeolocating(false);
       setGeolocFeatureWithRef();
       window.removeEventListener(
         'deviceorientation',
@@ -90,7 +92,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     } else {
       window.addEventListener('deviceorientation', deviceOrientationListener);
     }
-  }, [deviceOrientationListener, geolocationFeature]);
+  }, [deviceOrientationListener, geolocating]);
 
   useEffect(() => {
     // Remove geolocate listener on component unmount
@@ -140,10 +142,11 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
         <Geolocation
           title={t('Lokalisieren')}
           className={`wkp-geolocation${
-            geolocationFeature ? ' wkp-geolocation-active' : ''
+            geolocating ? ' wkp-geolocation-active' : ''
           }`}
           map={map}
           noCenterAfterDrag
+          onSuccess={() => setGeolocating(true)}
           colorOrStyleFunc={(feature) => {
             if (!feature) {
               return null;
