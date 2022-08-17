@@ -147,6 +147,12 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           map={map}
           noCenterAfterDrag
           onSuccess={() => setGeolocating(true)}
+          onError={() =>
+            // eslint-disable-next-line no-alert
+            alert(
+              'Failed to get current location. Check your device and browser settings',
+            )
+          }
           colorOrStyleFunc={(feature) => {
             if (!feature || !geolocating) {
               return null;
