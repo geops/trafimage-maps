@@ -38,6 +38,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
+  const [geolocating, setGeolocating] = useState(false);
   const featureRef = useRef(geolocationFeature);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
@@ -61,8 +62,9 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
   );
 
   const onGeolocateToggle = useCallback(() => {
-    if (geolocationFeature) {
+    if (geolocating) {
       // Deactivate geolocation
+      setGeolocating(false);
       setGeolocFeatureWithRef();
       window.removeEventListener(
         'deviceorientation',
@@ -90,7 +92,34 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     } else {
       window.addEventListener('deviceorientation', deviceOrientationListener);
     }
-  }, [deviceOrientationListener, geolocationFeature]);
+  }, [deviceOrientationListener, geolocating]);
+
+  const styleFunction = useCallback(
+    (feature) => {
+      if (!feature) {
+        return null;
+      }
+      if (!geolocationFeature || feature !== geolocationFeature) {
+        setGeolocFeatureWithRef(feature);
+      }
+      const style = new Style();
+      const rotation = feature.get('rotation');
+      style.setImage(
+        new Icon({
+          src:
+            rotation || rotation === 0
+              ? geolocateMarkerWithDirection
+              : geolocateMarker,
+          rotation: rotation || 0,
+          anchor: [21, 46],
+          anchorXUnits: 'pixels',
+          anchorYUnits: 'pixels',
+        }),
+      );
+      return style;
+    },
+    [geolocationFeature],
+  );
 
   useEffect(() => {
     // Remove geolocate listener on component unmount
@@ -140,33 +169,13 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
         <Geolocation
           title={t('Lokalisieren')}
           className={`wkp-geolocation${
-            geolocationFeature ? ' wkp-geolocation-active' : ''
+            geolocating ? ' wkp-geolocation-active' : ''
           }`}
           map={map}
           noCenterAfterDrag
-          colorOrStyleFunc={(feature) => {
-            if (!feature) {
-              return null;
-            }
-            if (!geolocationFeature || feature !== geolocationFeature) {
-              setGeolocFeatureWithRef(feature);
-            }
-            const style = new Style();
-            const rotation = feature.get('rotation');
-            style.setImage(
-              new Icon({
-                src:
-                  rotation || rotation === 0
-                    ? geolocateMarkerWithDirection
-                    : geolocateMarker,
-                rotation: rotation || 0,
-                anchor: [21, 46],
-                anchorXUnits: 'pixels',
-                anchorYUnits: 'pixels',
-              }),
-            );
-            return style;
-          }}
+          onSuccess={() => setGeolocating(true)}
+          onError={() => setGeolocating(false)}
+          colorOrStyleFunc={styleFunction}
         >
           <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
