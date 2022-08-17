@@ -3,7 +3,15 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
-import { makeStyles, Typography } from '@material-ui/core';
+import {
+  makeStyles,
+  Typography,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+} from '@material-ui/core';
+import { AiTwotoneCopyrightCircle } from 'react-icons/ai';
 import GeltungsbereicheLegend, { legends } from './GeltungsbereicheLegend';
 
 const propTypes = {
@@ -11,12 +19,19 @@ const propTypes = {
   layer: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
 };
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   legendItem: {
     display: 'flex',
     alignItems: 'center',
     gap: 15,
     padding: '10px 0',
+  },
+  listItem: {
+    padding: '0 10px 0',
+  },
+  listItemIcon: {
+    minWidth: 20,
+    color: theme.palette.text.primary,
   },
   abos: {
     '&::first-letter': {
@@ -25,8 +40,27 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const translations = {
+  de: {
+    'Information gilt für diese Produkte':
+      'Information gilt für diese Produkte',
+  },
+  en: {
+    'Information gilt für diese Produkte':
+      'Information applies to these products',
+  },
+  fr: {
+    'Information gilt für diese Produkte':
+      "L'information s'applique à ces produits",
+  },
+  it: {
+    'Information gilt für diese Produkte':
+      'Informazioni applicabili a questi prodotti',
+  },
+};
+
 const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
   const validPropertyName = layer.get('validPropertyName');
@@ -104,15 +138,23 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
         <Typography variant="subtitle1">{t('Keine Ermässigung')}</Typography>
       </div>
       <br />
-      {t(layer.name)
-        .split(', ')
-        .map((text) => {
-          return (
-            <Typography paragraph key={text} className={classes.abos}>
-              {t(text)}
-            </Typography>
-          );
-        })}
+      <Typography variant="h4">
+        {translations[i18n.language]['Information gilt für diese Produkte']}:
+      </Typography>
+      <List dense>
+        {t(layer.name)
+          .split(', ')
+          .map((text) => {
+            return (
+              <ListItem className={classes.listItem}>
+                <ListItemIcon className={classes.listItemIcon}>
+                  <AiTwotoneCopyrightCircle size={7} />
+                </ListItemIcon>
+                <ListItemText>{t(text)}</ListItemText>
+              </ListItem>
+            );
+          })}
+      </List>
     </div>
   );
 };
