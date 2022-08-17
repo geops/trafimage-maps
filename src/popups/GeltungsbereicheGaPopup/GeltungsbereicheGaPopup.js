@@ -146,7 +146,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
           .split(', ')
           .map((text) => {
             return (
-              <ListItem className={classes.listItem}>
+              <ListItem className={classes.listItem} key={text}>
                 <ListItemIcon className={classes.listItemIcon}>
                   <AiTwotoneCopyrightCircle size={7} />
                 </ListItemIcon>
