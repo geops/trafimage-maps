@@ -94,6 +94,33 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     }
   }, [deviceOrientationListener, geolocating]);
 
+  const styleFunction = useCallback(
+    (feature) => {
+      if (!feature) {
+        return null;
+      }
+      if (!geolocationFeature || feature !== geolocationFeature) {
+        setGeolocFeatureWithRef(feature);
+      }
+      const style = new Style();
+      const rotation = feature.get('rotation');
+      style.setImage(
+        new Icon({
+          src:
+            rotation || rotation === 0
+              ? geolocateMarkerWithDirection
+              : geolocateMarker,
+          rotation: rotation || 0,
+          anchor: [21, 46],
+          anchorXUnits: 'pixels',
+          anchorYUnits: 'pixels',
+        }),
+      );
+      return style;
+    },
+    [geolocationFeature],
+  );
+
   useEffect(() => {
     // Remove geolocate listener on component unmount
     return () =>
@@ -147,36 +174,8 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           map={map}
           noCenterAfterDrag
           onSuccess={() => setGeolocating(true)}
-          onError={() => {
-            setGeolocating(false);
-            // eslint-disable-next-line no-alert
-            alert(
-              'Failed to get current location. Check your device and browser settings',
-            );
-          }}
-          colorOrStyleFunc={(feature) => {
-            if (!feature || !geolocating) {
-              return null;
-            }
-            if (!geolocationFeature || feature !== geolocationFeature) {
-              setGeolocFeatureWithRef(feature);
-            }
-            const style = new Style();
-            const rotation = feature.get('rotation');
-            style.setImage(
-              new Icon({
-                src:
-                  rotation || rotation === 0
-                    ? geolocateMarkerWithDirection
-                    : geolocateMarker,
-                rotation: rotation || 0,
-                anchor: [21, 46],
-                anchorXUnits: 'pixels',
-                anchorYUnits: 'pixels',
-              }),
-            );
-            return style;
-          }}
+          onError={() => setGeolocating(false)}
+          colorOrStyleFunc={styleFunction}
         >
           <Geolocate focusable={false} onClick={onGeolocateToggle} />
         </Geolocation>
