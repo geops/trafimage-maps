@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.3](https://github.com/geops/trafimage-maps/compare/v1.13.2...v1.13.3) (2022-08-18)
+
+
+### Bug Fixes
+
+* display international vehicle registration code instead of iso c… ([#1023](https://github.com/geops/trafimage-maps/issues/1023)) ([e0c518c](https://github.com/geops/trafimage-maps/commit/e0c518c85acf72737f3893c8197d9c15b56f907f))
+* **handicap:** updated equipment translations ([#1027](https://github.com/geops/trafimage-maps/issues/1027)) ([1d5688b](https://github.com/geops/trafimage-maps/commit/1d5688bd6e70cdd50fb477566b4fbabcc00c5961))
+
 ### [1.13.2](https://github.com/geops/trafimage-maps/compare/v1.13.1...v1.13.2) (2022-08-11)
 
 
