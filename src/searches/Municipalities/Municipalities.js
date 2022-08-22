@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import React from 'react';
 
 import Search from '../Search';
@@ -33,7 +34,11 @@ class Municipalities extends Search {
   }
 
   render(item) {
-    return <div>{item.properties.name}</div>;
+    return (
+      <Typography>
+        <strong>{item.properties.name}</strong>
+      </Typography>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -60,65 +60,66 @@
     border: 2px solid #666;
     margin-top: 5px;
     width: 100%;
-    padding-top: 15px;
     max-height: calc(100vh - 150px);
     overflow: auto;
   }
 
   .react-autosuggest__section-title {
-    padding: 10px 15px 0;
-    border-top: 1px solid lightgray;
+    span {
+      color: #666;
+    }
 
     .wkp-search-section-header {
       font-weight: bold;
     }
 
-    .wkp-search-section-count {
-      color: #666;
-      padding-top: 5px;
-      position: relative;
-
-      svg {
-        position: absolute;
-        top: -15px;
-        right: 0;
-      }
+    .wkp-search-section-opener {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f5f5f5;
+      padding: 0 15px;
     }
 
     :hover {
-      .wkp-search-section-count {
+      svg {
         color: $brand-primary-hover;
       }
     }
   }
 
-  .react-autosuggest__section-container--first {
-    .react-autosuggest__section-title {
-      margin: 0;
-      padding: 0 15px;
-      border: none;
-    }
-  }
-
   .react-autosuggest__suggestions-list {
     list-style: none;
-    padding: 0;
+    padding: 5px 0;
     margin: 0;
   }
 
   .react-autosuggest__suggestion {
-    margin: 15px 15px 0;
+    padding: 0 15px;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+
+    & > div:only-child {
+      height: 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
     &.react-autosuggest__suggestion--highlighted {
-      color: $brand-primary-hover;
+      p {
+        color: $brand-primary-hover !important;
+      }
     }
 
-    :hover {
-      cursor: pointer;
-    }
-
-    :last-child {
-      margin-bottom: 15px;
+    &:hover {
+      p {
+        color: $brand-primary-hover !important;
+      }
     }
   }
 }
