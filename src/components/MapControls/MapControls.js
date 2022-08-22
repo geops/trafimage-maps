@@ -69,6 +69,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
     [featureRef],
   );
 
+  // eslint-disable-next-line no-unused-vars
   const onGeolocateToggle = useCallback(() => {
     if (geolocating) {
       // Deactivate geolocation
@@ -185,7 +186,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           onError={() => setGeolocating(false)}
           colorOrStyleFunc={styleFunction}
         >
-          <Geolocate focusable={false} onClick={onGeolocateToggle} />
+          <Geolocate focusable={false} />
         </Geolocation>
       )}
       {fitExtent && (
