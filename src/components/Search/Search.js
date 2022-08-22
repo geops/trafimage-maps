@@ -77,23 +77,20 @@ function Search() {
             return (
               count > 0 && (
                 <div
+                  className="wkp-search-section-opener"
                   onClick={() => searchService.toggleSection(section)}
                   onKeyPress={() => searchService.toggleSection(section)}
                   role="button"
                   tabIndex={0}
                 >
-                  <div className="wkp-search-section-header">{t(section)}</div>
-                  <div
-                    className="wkp-search-section-count"
-                    data-cy="wkp-search-section-title"
-                  >
-                    {t('overallResult', { count })}
-                    {searchService.sectionCollapsed(section) ? (
-                      <FaChevronCircleDown focusable={false} />
-                    ) : (
-                      <FaChevronCircleUp focusable={false} />
-                    )}
+                  <div className="wkp-search-section-header">
+                    {t(section)}: <span>{t('overallResult', { count })}</span>
                   </div>
+                  {searchService.sectionCollapsed(section) ? (
+                    <FaChevronCircleDown focusable={false} />
+                  ) : (
+                    <FaChevronCircleUp focusable={false} />
+                  )}
                 </div>
               )
             );

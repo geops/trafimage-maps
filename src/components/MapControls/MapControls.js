@@ -53,8 +53,16 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
           // For iOS
           feature.set('rotation', degreesToRadians(evt.webkitCompassHeading));
         } else if (evt.alpha || evt.alpha === 0) {
-          // For normal OS
-          feature.set('rotation', degreesToRadians(360 - evt.alpha));
+          if (evt.absolute) {
+            feature.set('rotation', degreesToRadians(360 - evt.alpha));
+          } else {
+            // not absolute event; e.g. firefox, lets disable everything again
+            window.removeEventListener(
+              'deviceorientation',
+              deviceOrientationListener,
+            );
+            feature.set('rotation', false);
+          }
         }
       }
     },

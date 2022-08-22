@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 import Search from '../Search';
 
@@ -33,10 +34,10 @@ class Betriebspunkte extends Search {
   render(item) {
     const { bezeichnung: name, abkuerzung: abbreviated } = item.properties;
     return (
-      <div>
-        {name}
-        {abbreviated ? ` (${abbreviated})` : ''}
-      </div>
+      <Typography>
+        <strong>{name}</strong>
+        <strong>{abbreviated ? ` (${abbreviated})` : ''}</strong>
+      </Typography>
     );
   }
 
