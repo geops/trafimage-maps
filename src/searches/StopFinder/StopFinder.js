@@ -66,14 +66,14 @@ class StopFinder extends Search {
       )})`;
     }
     return (
-      <div className="wkp-search-suggestion-with-subtitle">
+      <>
         <Typography>
           <strong>{title}</strong>
         </Typography>
         {subtitle ? (
           <Typography variant="subtitle1">{subtitle}</Typography>
         ) : null}
-      </div>
+      </>
     );
   }
 
