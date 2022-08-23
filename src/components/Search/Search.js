@@ -9,7 +9,7 @@ import {
   FaChevronCircleUp,
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Typography } from '@material-ui/core';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
@@ -84,7 +84,12 @@ function Search() {
                   tabIndex={0}
                 >
                   <div className="wkp-search-section-header">
-                    {t(section)}: <span>{t('overallResult', { count })}</span>
+                    <Typography variant="body2">
+                      <strong>
+                        {t(section)}:{' '}
+                        <span>{t('overallResult', { count })}</span>
+                      </strong>
+                    </Typography>
                   </div>
                   {searchService.sectionCollapsed(section) ? (
                     <FaChevronCircleDown focusable={false} />

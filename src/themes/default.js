@@ -15,6 +15,13 @@ const breakpointValues = {
   xl: 1200,
 };
 
+const typoBody = {
+  fontSize: '1em',
+  fontWeight: 'normal',
+  lineHeight: '19.5px',
+  color: '#000000',
+};
+
 const theme = createTheme({
   breakpoints: { values: breakpointValues },
   palette: {
@@ -40,11 +47,10 @@ const theme = createTheme({
       fontSize: '1em',
       lineHeight: '22.5px',
     },
-    body1: {
-      fontSize: '1em',
-      fontWeight: 'normal',
-      lineHeight: '19.5px',
-      color: '#000000',
+    body1: typoBody,
+    body2: {
+      ...typoBody,
+      fontSize: '1.02em',
     },
     subtitle1: {
       fontSize: 13,

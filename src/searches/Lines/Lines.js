@@ -121,7 +121,7 @@ class Lines extends Search {
   render({ properties }) {
     const { t } = this.props;
     return (
-      <div className="wkp-search-suggestion-with-subtitle">
+      <>
         <Typography>
           <strong>{`${t('Linie')} ${properties.linie}`}</strong>
         </Typography>
@@ -136,7 +136,7 @@ class Lines extends Search {
             )}
           </Typography>
         ) : null}
-      </div>
+      </>
     );
   }
 

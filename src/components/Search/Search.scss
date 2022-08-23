@@ -71,6 +71,7 @@
 
     .wkp-search-section-header {
       font-weight: bold;
+      font-size: 15px;
     }
 
     .wkp-search-section-opener {
@@ -78,7 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #f5f5f5;
+      background-color: #e7e5e5;
       padding: 0 15px;
     }
 
@@ -91,24 +92,25 @@
 
   .react-autosuggest__suggestions-list {
     list-style: none;
-    padding: 5px 0;
+    padding: 0;
     margin: 0;
+
+    li:first-child {
+      padding-top: 5px;
+    }
+
+    li:last-child {
+      padding-bottom: 5px;
+    }
   }
 
   .react-autosuggest__suggestion {
     padding: 0 15px;
-    min-height: 40px;
+    min-height: 55px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
-
-    & > div:only-child {
-      height: 55px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
 
     &.react-autosuggest__suggestion--highlighted {
       p {
