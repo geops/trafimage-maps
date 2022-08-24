@@ -16,9 +16,9 @@ const breakpointValues = {
 };
 
 const typoBody = {
-  fontSize: '1em',
+  fontSize: 14,
   fontWeight: 'normal',
-  lineHeight: '19.5px',
+  lineHeight: '16.8px',
   color: '#000000',
 };
 
@@ -50,7 +50,7 @@ const theme = createTheme({
     body1: typoBody,
     body2: {
       ...typoBody,
-      fontSize: '1.02em',
+      fontSize: 16,
     },
     subtitle1: {
       fontSize: 13,

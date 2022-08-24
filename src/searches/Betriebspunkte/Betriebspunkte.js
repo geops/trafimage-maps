@@ -34,10 +34,12 @@ class Betriebspunkte extends Search {
   render(item) {
     const { bezeichnung: name, abkuerzung: abbreviated } = item.properties;
     return (
-      <Typography>
-        <strong>{name}</strong>
-        <strong>{abbreviated ? ` (${abbreviated})` : ''}</strong>
-      </Typography>
+      <div className="wkp-search-suggestion">
+        <Typography>
+          <strong>{name}</strong>
+          <strong>{abbreviated ? ` (${abbreviated})` : ''}</strong>
+        </Typography>
+      </div>
     );
   }
 
