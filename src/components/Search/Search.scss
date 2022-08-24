@@ -106,11 +106,18 @@
 
   .react-autosuggest__suggestion {
     padding: 0 15px;
-    min-height: 55px;
+    min-height: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     cursor: pointer;
+
+    .wkp-search-suggestion-subtitled {
+      min-height: 55px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
     &.react-autosuggest__suggestion--highlighted {
       p {
