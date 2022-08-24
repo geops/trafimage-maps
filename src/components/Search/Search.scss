@@ -75,7 +75,7 @@
     }
 
     .wkp-search-section-opener {
-      height: 50px;
+      height: 54px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -106,17 +106,22 @@
 
   .react-autosuggest__suggestion {
     padding: 0 15px;
-    min-height: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     cursor: pointer;
 
+    .wkp-search-suggestion,
     .wkp-search-suggestion-subtitled {
-      min-height: 55px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+    }
+
+    .wkp-search-suggestion {
+      min-height: 30px;
+      padding: 3px 0;
+    }
+
+    .wkp-search-suggestion-subtitled {
+      min-height: 50px;
     }
 
     &.react-autosuggest__suggestion--highlighted {

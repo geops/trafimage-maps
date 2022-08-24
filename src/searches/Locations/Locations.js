@@ -36,9 +36,11 @@ class Locations extends Search {
 
   render(item) {
     return (
-      <Typography>
-        <strong>{item.label}</strong>
-      </Typography>
+      <div className="wkp-search-suggestion">
+        <Typography>
+          <strong>{item.label}</strong>
+        </Typography>
+      </div>
     );
   }
 
