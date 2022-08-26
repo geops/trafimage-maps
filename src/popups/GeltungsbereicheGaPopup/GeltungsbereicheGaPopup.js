@@ -74,9 +74,6 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       if (valid === 100) {
         text = 'Freie Fahrt';
       }
-      if (valid === -1) {
-        text = 'Gültigkeit vor Ort erfragen';
-      }
       return text;
     });
 
@@ -121,6 +118,9 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
           .map(([, feature]) => {
             const valid = feature.get(validPropertyName);
             const text = getTextFromValid(valid);
+            if (valid === -1) {
+              return null;
+            }
             return (
               <div key={mot + valid} className={classes.legendItem}>
                 <GeltungsbereicheLegend
@@ -140,6 +140,14 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
         <GeltungsbereicheLegend background />
         <Typography variant="subtitle1">{t('Keine Ermässigung')}</Typography>
       </div>
+      {featuresByMot?.ferry?.[-1] ? (
+        <div className={classes.legendItem}>
+          <GeltungsbereicheLegend background valid={-1} />
+          <Typography variant="subtitle1">
+            {t('Gültigkeit vor Ort erfragen')}
+          </Typography>
+        </div>
+      ) : null}
       <br />
       <Typography variant="h4">
         {translations[i18n.language]['Information gilt für diese Produkte']}:
