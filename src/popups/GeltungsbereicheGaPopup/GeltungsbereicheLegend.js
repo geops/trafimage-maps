@@ -204,6 +204,13 @@ const GeltungsbereicheLegend = ({ mot, valid, background }) => {
       return value === valid;
     });
 
+  if (!legend) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      'No legend found! Check feature data and extend legend options if necessary',
+    );
+  }
+
   return (
     <svg
       viewBox={`0 0 50 ${background ? '50' : '10'}`}
@@ -212,7 +219,7 @@ const GeltungsbereicheLegend = ({ mot, valid, background }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       {background ? <circle cx="25" cy="25" r="25" fill="#f5f5f5" /> : null}
-      {legend.paint.map((paint) => {
+      {legend?.paint.map((paint) => {
         return (
           <line
             key={paint['line-dasharray'] + paint['line-color']}
