@@ -55,7 +55,8 @@
   },
   "peerDependencies": {
     "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "react-dom": "16.14.0",
+    "react-error-overlay": "6.0.9"
   },
   "devDependencies": {
     "@babel/cli": "7.15.7",
@@ -116,9 +117,6 @@
     "to-string-loader": "1.1.6",
     "vinyl-fs": "3.0.3",
     "xmlserializer": "^0.6.1"
-  },
-  "resolutions": {
-    "react-error-overlay": "6.0.9"
   },
   "scripts": {
     "build": "GENERATE_SOURCEMAP=false  react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
