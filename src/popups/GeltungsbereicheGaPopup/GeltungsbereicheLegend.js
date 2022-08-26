@@ -7,6 +7,7 @@ const colorYellow = 'rgba(255, 242, 0, 1)';
 const colorRed = 'rgba(235, 0, 0, 1)';
 const colorBlue = 'rgba(42, 102, 152, 1)';
 const colorBlack = 'rgba(0, 0, 0, 1)';
+const colorGray = 'rgba(180,180,180, 1)';
 
 // Be aware that order is important here!
 export const legends = [
@@ -158,6 +159,16 @@ export const legends = [
           },
         ],
       },
+      {
+        value: -1,
+        paint: [
+          {
+            'line-color': colorGray,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
     ],
   },
   {
@@ -167,7 +178,7 @@ export const legends = [
         value: null,
         paint: [
           {
-            'line-color': 'rgba(180,180,180, 1)',
+            'line-color': colorGray,
             'line-width': lineWidth,
           },
         ],

@@ -66,7 +66,9 @@ function BeleuchtungLegende() {
       {Object.keys(lightingMapping)
         .sort()
         .map((lightClass) => {
-          return <BeleuchtungLegendeRow lightClass={lightClass} />;
+          return (
+            <BeleuchtungLegendeRow lightClass={lightClass} key={lightClass} />
+          );
         })}
     </div>
   );
