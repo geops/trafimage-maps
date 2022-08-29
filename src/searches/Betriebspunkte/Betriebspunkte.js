@@ -36,8 +36,8 @@ class Betriebspunkte extends Search {
     return (
       <div className="wkp-search-suggestion">
         <Typography>
-          <strong>{name}</strong>
-          <strong>{abbreviated ? ` (${abbreviated})` : ''}</strong>
+          {name}
+          {abbreviated ? ` (${abbreviated})` : ''}
         </Typography>
       </div>
     );

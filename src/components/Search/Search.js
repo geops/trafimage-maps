@@ -2,12 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
-import {
-  FaSearch,
-  FaTimes,
-  FaChevronCircleDown,
-  FaChevronCircleUp,
-} from 'react-icons/fa';
+import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { IconButton, Typography } from '@material-ui/core';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
@@ -84,17 +79,17 @@ function Search() {
                   tabIndex={0}
                 >
                   <div className="wkp-search-section-header">
-                    <Typography variant="body2">
-                      <strong>
-                        {t(section)}:{' '}
-                        <span>{t('overallResult', { count })}</span>
-                      </strong>
+                    <Typography variant="h4" component="span">
+                      {t(section)}:{' '}
+                    </Typography>
+                    <Typography variant="subtitle1" component="span">
+                      {t('overallResult', { count })}
                     </Typography>
                   </div>
                   {searchService.sectionCollapsed(section) ? (
-                    <FaChevronCircleDown focusable={false} />
+                    <FaAngleDown focusable={false} />
                   ) : (
-                    <FaChevronCircleUp focusable={false} />
+                    <FaAngleUp focusable={false} />
                   )}
                 </div>
               )

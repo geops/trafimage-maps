@@ -5,9 +5,7 @@ describe('StopFinder', () => {
     test('renders only the name', () => {
       const stopFinder = new StopFinder();
       const rendered = stopFinder.render({ properties: { name: 'name' } });
-      expect(rendered.props.children[0].props.children.props.children).toEqual(
-        'name',
-      );
+      expect(rendered.props.children[0].props.children).toEqual('name');
       expect(rendered.props.children[1]).toEqual(null);
     });
 
@@ -16,7 +14,7 @@ describe('StopFinder', () => {
       const { children } = stopFinder.render({
         properties: { name: 'name', municipality_name: 'foo' },
       }).props;
-      expect(children[0].props.children.props.children).toEqual('name');
+      expect(children[0].props.children).toEqual('name');
       expect(children[1].props.children).toEqual('foo');
     });
 
@@ -25,7 +23,7 @@ describe('StopFinder', () => {
       const { children } = stopFinder.render({
         properties: { name: 'name', country_code: 'bar' },
       }).props;
-      expect(children[0].props.children.props.children).toEqual('name');
+      expect(children[0].props.children).toEqual('name');
       expect(children[1].props.children).toEqual('bar');
     });
 
@@ -38,7 +36,7 @@ describe('StopFinder', () => {
           country_code: 'bar',
         },
       }).props;
-      expect(children[0].props.children.props.children).toEqual('name');
+      expect(children[0].props.children).toEqual('name');
       expect(children[1].props.children).toEqual('foo (bar)');
     });
 

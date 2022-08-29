@@ -70,21 +70,22 @@
     }
 
     .wkp-search-section-header {
-      font-weight: bold;
-      font-size: 15px;
+      & > span:first-child {
+        color: black;
+      }
     }
 
     .wkp-search-section-opener {
-      height: 54px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #e7e5e5;
-      padding: 0 15px;
+      background-color: #f5f5f5;
+      padding: 10px 15px;
     }
 
     :hover {
-      svg {
+      svg,
+      .MuiTypography-subtitle1 {
         color: $brand-primary-hover;
       }
     }

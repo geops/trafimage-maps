@@ -37,9 +37,7 @@ class HandicapStopFinder extends Search {
   render(item) {
     return (
       <div className="wkp-search-suggestion">
-        <Typography>
-          <strong>{item.properties.name}</strong>
-        </Typography>
+        <Typography>{item.properties.name}</Typography>
       </div>
     );
   }
