@@ -88,9 +88,9 @@ describe('Search', () => {
       wrapper.update();
     });
     expect(wrapper.find('.wkp-search-section-header').length).toBe(2);
-    expect(wrapper.find('.wkp-search-section-count').first().text()).toBe(
-      'overallResult',
-    );
+    expect(
+      wrapper.find('.wkp-search-section-header').find('span').at(0).text(),
+    ).toBe('overallResult');
     expect(wrapper.find('Item').length).toBe(4);
   });
 });

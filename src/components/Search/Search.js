@@ -9,7 +9,7 @@ import {
   FaChevronCircleUp,
 } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Typography } from '@material-ui/core';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
@@ -77,23 +77,25 @@ function Search() {
             return (
               count > 0 && (
                 <div
+                  className="wkp-search-section-opener"
                   onClick={() => searchService.toggleSection(section)}
                   onKeyPress={() => searchService.toggleSection(section)}
                   role="button"
                   tabIndex={0}
                 >
-                  <div className="wkp-search-section-header">{t(section)}</div>
-                  <div
-                    className="wkp-search-section-count"
-                    data-cy="wkp-search-section-title"
-                  >
-                    {t('overallResult', { count })}
-                    {searchService.sectionCollapsed(section) ? (
-                      <FaChevronCircleDown focusable={false} />
-                    ) : (
-                      <FaChevronCircleUp focusable={false} />
-                    )}
+                  <div className="wkp-search-section-header">
+                    <Typography variant="body2">
+                      <strong>
+                        {t(section)}:{' '}
+                        <span>{t('overallResult', { count })}</span>
+                      </strong>
+                    </Typography>
                   </div>
+                  {searchService.sectionCollapsed(section) ? (
+                    <FaChevronCircleDown focusable={false} />
+                  ) : (
+                    <FaChevronCircleUp focusable={false} />
+                  )}
                 </div>
               )
             );
