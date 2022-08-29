@@ -67,9 +67,7 @@ class StopFinder extends Search {
     }
     return (
       <div className="wkp-search-suggestion-subtitled">
-        <Typography>
-          <strong>{title}</strong>
-        </Typography>
+        <Typography>{title}</Typography>
         {subtitle ? (
           <Typography variant="subtitle1">{subtitle}</Typography>
         ) : null}
