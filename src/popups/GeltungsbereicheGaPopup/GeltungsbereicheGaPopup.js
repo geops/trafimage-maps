@@ -74,6 +74,9 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       if (valid === 100) {
         text = 'Freie Fahrt';
       }
+      if (valid === -1) {
+        text = 'Gültigkeit vor Ort erfragen';
+      }
       return text;
     });
 

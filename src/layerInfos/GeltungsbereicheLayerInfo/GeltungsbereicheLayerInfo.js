@@ -138,6 +138,17 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
         </tbody>
       </table>
       <Typography paragraph>{t('Keine Ermässigung')}</Typography>
+      <table style={{ marginBottom: 10 }}>
+        <thead />
+        <tbody>
+          <tr>
+            <td>
+              <GeltungsbereicheLegend mot="ferry" valid={-1} />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <Typography paragraph>{t('Gültigkeit vor Ort erfragen')}</Typography>
       <br />
       <br />
     </div>
