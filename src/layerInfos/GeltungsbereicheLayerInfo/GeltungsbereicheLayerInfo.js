@@ -143,7 +143,7 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
         <tbody>
           <tr>
             <td>
-              <GeltungsbereicheLegend valid={-1} />
+              <GeltungsbereicheLegend mot="ferry" valid={-1} />
             </td>
           </tr>
         </tbody>

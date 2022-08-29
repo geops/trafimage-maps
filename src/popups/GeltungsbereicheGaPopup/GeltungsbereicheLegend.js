@@ -159,6 +159,16 @@ export const legends = [
           },
         ],
       },
+      {
+        value: -1,
+        paint: [
+          {
+            'line-color': colorGray,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
     ],
   },
   {
@@ -170,16 +180,6 @@ export const legends = [
           {
             'line-color': colorGray,
             'line-width': lineWidth,
-          },
-        ],
-      },
-      {
-        value: -1,
-        paint: [
-          {
-            'line-color': colorGray,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
           },
         ],
       },
