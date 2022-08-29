@@ -122,9 +122,7 @@ class Lines extends Search {
     const { t } = this.props;
     return (
       <div className="wkp-search-suggestion-subtitled">
-        <Typography>
-          <strong>{`${t('Linie')} ${properties.linie}`}</strong>
-        </Typography>
+        <Typography>{`${t('Linie')} ${properties.linie}`}</Typography>
         {properties.name ? (
           <Typography variant="subtitle1">
             {properties.name}
