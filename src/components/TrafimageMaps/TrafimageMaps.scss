@@ -24,6 +24,14 @@
     }
   }
 
+  /**
+  * This bold font should be defined using mui tpography them but for old content (impressum, ...),
+  * we force the <b> tag to use the good font.
+  */
+  b {
+    font-family: 'SBBWeb-Bold', Arial, sans-serif;
+  }
+
   .rs-map {
     position: absolute;
     top: 0;
