@@ -2,14 +2,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
-import {
-  FaSearch,
-  FaTimes,
-  FaChevronCircleDown,
-  FaChevronCircleUp,
-} from 'react-icons/fa';
+import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Typography } from '@material-ui/core';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
@@ -77,23 +72,25 @@ function Search() {
             return (
               count > 0 && (
                 <div
+                  className="wkp-search-section-opener"
                   onClick={() => searchService.toggleSection(section)}
                   onKeyPress={() => searchService.toggleSection(section)}
                   role="button"
                   tabIndex={0}
                 >
-                  <div className="wkp-search-section-header">{t(section)}</div>
-                  <div
-                    className="wkp-search-section-count"
-                    data-cy="wkp-search-section-title"
-                  >
-                    {t('overallResult', { count })}
-                    {searchService.sectionCollapsed(section) ? (
-                      <FaChevronCircleDown focusable={false} />
-                    ) : (
-                      <FaChevronCircleUp focusable={false} />
-                    )}
+                  <div className="wkp-search-section-header">
+                    <Typography variant="h4" component="span">
+                      {t(section)}:{' '}
+                    </Typography>
+                    <Typography variant="subtitle1" component="span">
+                      {t('overallResult', { count })}
+                    </Typography>
                   </div>
+                  {searchService.sectionCollapsed(section) ? (
+                    <FaAngleDown focusable={false} />
+                  ) : (
+                    <FaAngleUp focusable={false} />
+                  )}
                 </div>
               )
             );

@@ -142,9 +142,7 @@ function SearchInfo({ anchorEl }) {
                     className={classes.searchInfoContent}
                   >
                     <div className={classes.popupHeader}>
-                      <Typography>
-                        <b>{t('Suche')}</b>
-                      </Typography>
+                      <Typography variant="h4">{t('Suche')}</Typography>
                       <IconButton
                         title={t('Schliessen')}
                         onClick={togglePopup}
@@ -162,8 +160,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Stationen')}</b>:{' '}
-                              {t('search.info.stations.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Stationen')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.stations.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t('z.B.')} ${t(
@@ -175,8 +178,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Gemeinden')}</b>:{' '}
-                              {t('search.info.municipalities.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Gemeinden')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.municipalities.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t('z.B.')} "Eriz", "Mesocco"`}
@@ -186,7 +194,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Orte')}</b>: {t('search.info.places.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Orte')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.places.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t(
@@ -198,8 +212,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Adressen')}</b>:{' '}
-                              {t('search.info.addresses.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Adressen')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.addresses.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t(
@@ -211,8 +230,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Betriebspunkte')}</b>:{' '}
-                              {t('search.info.operatingpoints.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Betriebspunkte')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.operatingpoints.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t('z.B.')} "Aespli" ${t(
@@ -224,8 +248,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Linien')}</b>:{' '}
-                              {t('search.info.lines.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Linien')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.lines.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t('z.B.')} "210"`}
@@ -235,8 +264,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Kilometerpunkt auf Linie')}</b>:{' '}
-                              {t('search.info.lineskilometer.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Kilometerpunkt auf Linie')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.lineskilometer.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t('z.B.')} "210 +35.74"`}
@@ -246,8 +280,13 @@ function SearchInfo({ anchorEl }) {
                         <ListItemText
                           primary={
                             <span>
-                              <b>{t('Liniensegment')}</b>:{' '}
-                              {t('search.info.linessegment.desc')}
+                              <Typography component="span" variant="h4">
+                                {t('Liniensegment')}
+                              </Typography>
+                              :{' '}
+                              <Typography component="span">
+                                {t('search.info.linessegment.desc')}
+                              </Typography>
                             </span>
                           }
                           secondary={`${t('z.B.')} "210 29.5-35.7"`}
