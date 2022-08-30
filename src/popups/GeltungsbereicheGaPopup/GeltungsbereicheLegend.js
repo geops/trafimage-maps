@@ -7,6 +7,7 @@ const colorYellow = 'rgba(255, 242, 0, 1)';
 const colorRed = 'rgba(235, 0, 0, 1)';
 const colorBlue = 'rgba(42, 102, 152, 1)';
 const colorBlack = 'rgba(0, 0, 0, 1)';
+const colorGray = 'rgba(180,180,180, 1)';
 
 // Be aware that order is important here!
 export const legends = [
@@ -158,6 +159,16 @@ export const legends = [
           },
         ],
       },
+      {
+        value: -1,
+        paint: [
+          {
+            'line-color': colorGray,
+            'line-width': lineWidth,
+            'line-dasharray': dashArray,
+          },
+        ],
+      },
     ],
   },
   {
@@ -167,7 +178,7 @@ export const legends = [
         value: null,
         paint: [
           {
-            'line-color': 'rgba(180,180,180, 1)',
+            'line-color': colorGray,
             'line-width': lineWidth,
           },
         ],
@@ -193,6 +204,13 @@ const GeltungsbereicheLegend = ({ mot, valid, background }) => {
       return value === valid;
     });
 
+  if (!legend) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      'No legend found! Check feature data and extend legend options if necessary',
+    );
+  }
+
   return (
     <svg
       viewBox={`0 0 50 ${background ? '50' : '10'}`}
@@ -201,7 +219,7 @@ const GeltungsbereicheLegend = ({ mot, valid, background }) => {
       xmlns="http://www.w3.org/2000/svg"
     >
       {background ? <circle cx="25" cy="25" r="25" fill="#f5f5f5" /> : null}
-      {legend.paint.map((paint) => {
+      {legend?.paint.map((paint) => {
         return (
           <line
             key={paint['line-dasharray'] + paint['line-color']}

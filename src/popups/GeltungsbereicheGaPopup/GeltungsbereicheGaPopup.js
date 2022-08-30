@@ -74,6 +74,9 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       if (valid === 100) {
         text = 'Freie Fahrt';
       }
+      if (valid === -1) {
+        text = 'Gültigkeit vor Ort erfragen';
+      }
       return text;
     });
 
@@ -150,7 +153,12 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
                 <ListItemIcon className={classes.listItemIcon}>
                   <AiTwotoneCopyrightCircle size={7} />
                 </ListItemIcon>
-                <ListItemText className={classes.abos}>{t(text)}</ListItemText>
+                <ListItemText
+                  primaryTypographyProps={{ variant: 'body1' }}
+                  className={classes.abos}
+                >
+                  {t(text)}
+                </ListItemText>
               </ListItem>
             );
           })}

@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.14.0-beta.15",
+  "version": "1.14.0-beta.17",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -55,7 +55,8 @@
   },
   "peerDependencies": {
     "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "react-dom": "16.14.0",
+    "react-error-overlay": "6.0.9"
   },
   "devDependencies": {
     "@babel/cli": "7.15.7",
@@ -98,6 +99,7 @@
     "lint-staged": "11.2.0",
     "prettier": "2.4.1",
     "react-app-rewired": "2.1.8",
+    "react-error-overlay": "6.0.9",
     "react-scripts": "4.0.3",
     "react-svg-loader": "3.0.3",
     "react-test-renderer": "17.0.2",

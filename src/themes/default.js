@@ -107,6 +107,9 @@ const theme = createTheme({
     MuiMenu: {
       transitionDuration: 0,
     },
+    MuiListItemText: {
+      primaryTypographyProps: { variant: 'body1' },
+    },
   },
   overrides: {
     MuiSelect: {

@@ -269,6 +269,7 @@ export const geltungsbereicheMvp = {
     popup: true,
     shareMenu: true,
   },
+  maxZoom: 14,
   layers: geltungsbereicheMvpLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
