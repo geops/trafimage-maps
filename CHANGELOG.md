@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.14.0](https://github.com/geops/trafimage-maps/compare/v1.13.3...v1.14.0) (2022-08-30)
+
+
+### Bug Fixes
+
+* **geolocation:** add direction to geolocation marker ([#1025](https://github.com/geops/trafimage-maps/issues/1025)) ([930f570](https://github.com/geops/trafimage-maps/commit/930f570d1eec23a1a6191f52a6455bf459c6f5fd)), closes [#1028](https://github.com/geops/trafimage-maps/issues/1028)
+
 ### [1.13.3](https://github.com/geops/trafimage-maps/compare/v1.13.2...v1.13.3) (2022-08-18)
 
 
