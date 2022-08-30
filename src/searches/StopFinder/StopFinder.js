@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import { fromLonLat } from 'ol/proj';
 import Search from '../Search';
 import isoToIntlVehicleCode from '../../utils/isoToIntlVehicleCode';
@@ -51,15 +52,27 @@ class StopFinder extends Search {
   }
 
   render(item) {
-    let str = item.properties.name;
+    const title = item.properties.name;
+    const municipality = item.properties.municipality_name;
+    const countryCode = item.properties.country_code;
+    let subtitle = municipality;
 
-    if (item.properties.municipality_name) {
-      str += ` - ${item.properties.municipality_name}`;
+    if (!municipality && countryCode) {
+      subtitle = isoToIntlVehicleCode(item.properties.country_code);
     }
-    if (item.properties.country_code) {
-      str += ` (${isoToIntlVehicleCode(item.properties.country_code)})`;
+    if (municipality && countryCode) {
+      subtitle = `${municipality} (${isoToIntlVehicleCode(
+        item.properties.country_code,
+      )})`;
     }
-    return <div>{str}</div>;
+    return (
+      <div className="wkp-search-suggestion-subtitled">
+        <Typography>{title}</Typography>
+        {subtitle ? (
+          <Typography variant="subtitle1">{subtitle}</Typography>
+        ) : null}
+      </div>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this

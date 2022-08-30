@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 import { fromLonLat } from 'ol/proj';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import Search from '../Search';
@@ -34,7 +35,11 @@ class HandicapStopFinder extends Search {
   }
 
   render(item) {
-    return <div>{item.properties.name}</div>;
+    return (
+      <div className="wkp-search-suggestion">
+        <Typography>{item.properties.name}</Typography>
+      </div>
+    );
   }
 
   // eslint-disable-next-line class-methods-use-this

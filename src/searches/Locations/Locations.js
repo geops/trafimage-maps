@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 import Search from '../Search';
 
@@ -34,7 +35,11 @@ class Locations extends Search {
   }
 
   render(item) {
-    return <div>{item.label}</div>;
+    return (
+      <div className="wkp-search-suggestion">
+        <Typography>{item.label}</Typography>
+      </div>
+    );
   }
 
   getFeature(item, options) {

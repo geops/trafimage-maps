@@ -1,8 +1,10 @@
 @import '../../globals.scss';
 
 .wkp-geolocation {
-  svg {
-    fill: $dark-grey;
+  color: $dark-grey;
+
+  &.wkp-geolocation-active {
+    color: #006aff;
   }
 }
 

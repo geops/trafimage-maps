@@ -60,43 +60,34 @@
     border: 2px solid #666;
     margin-top: 5px;
     width: 100%;
-    padding-top: 15px;
     max-height: calc(100vh - 150px);
     overflow: auto;
   }
 
   .react-autosuggest__section-title {
-    padding: 10px 15px 0;
-    border-top: 1px solid lightgray;
-
-    .wkp-search-section-header {
-      font-weight: bold;
+    span {
+      color: #666;
     }
 
-    .wkp-search-section-count {
-      color: #666;
-      padding-top: 5px;
-      position: relative;
-
-      svg {
-        position: absolute;
-        top: -15px;
-        right: 0;
+    .wkp-search-section-header {
+      & > span:first-child {
+        color: black;
       }
+    }
+
+    .wkp-search-section-opener {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f5f5f5;
+      padding: 10px 15px;
     }
 
     :hover {
-      .wkp-search-section-count {
+      svg,
+      .MuiTypography-subtitle1 {
         color: $brand-primary-hover;
       }
-    }
-  }
-
-  .react-autosuggest__section-container--first {
-    .react-autosuggest__section-title {
-      margin: 0;
-      padding: 0 15px;
-      border: none;
     }
   }
 
@@ -104,21 +95,46 @@
     list-style: none;
     padding: 0;
     margin: 0;
+
+    li:first-child {
+      padding-top: 5px;
+    }
+
+    li:last-child {
+      padding-bottom: 5px;
+    }
   }
 
   .react-autosuggest__suggestion {
-    margin: 15px 15px 0;
+    padding: 0 15px;
+    cursor: pointer;
+
+    .wkp-search-suggestion,
+    .wkp-search-suggestion-subtitled {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .wkp-search-suggestion {
+      min-height: 25px;
+      padding: 3px 0;
+    }
+
+    .wkp-search-suggestion-subtitled {
+      min-height: 50px;
+    }
 
     &.react-autosuggest__suggestion--highlighted {
-      color: $brand-primary-hover;
+      p {
+        color: $brand-primary-hover !important;
+      }
     }
 
-    :hover {
-      cursor: pointer;
-    }
-
-    :last-child {
-      margin-bottom: 15px;
+    &:hover {
+      p {
+        color: $brand-primary-hover !important;
+      }
     }
   }
 }
