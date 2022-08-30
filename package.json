@@ -25,7 +25,7 @@
     "i18next-browser-languagedetector": "6.1.2",
     "i18next-xhr-backend": "3.2.2",
     "jspdf": "2.4.0",
-    "mapbox-gl": "npm:maplibre-gl@1.15.3",
+    "mapbox-gl": "npm:maplibre-gl@2.4.0",
     "mobility-toolbox-js": "1.7.13",
     "ol": "6.6.1",
     "proj4": "2.7.5",
@@ -144,7 +144,9 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not op_mini all"
+    "not op_mini all",
+    "not ie <= 11",
+    "not android < 5"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
   "eslintConfig": {
