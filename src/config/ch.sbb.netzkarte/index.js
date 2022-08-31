@@ -1,4 +1,5 @@
 import { Layer } from 'mobility-toolbox-js/ol';
+import { createTrackerFilters } from 'mobility-toolbox-js/common';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import netzkarte from '../../img/netzkarte.png';
@@ -188,27 +189,34 @@ punctuality.children = [
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
-    useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
+    filter: createTrackerFilters(
+      undefined,
+      undefined,
+      undefined,
+      '^(S|R$|RE|PE|D|IRE|RB|TER)',
+    ),
     group: 'ch.sbb.punctuality',
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
-    useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
+    filter: createTrackerFilters(
+      undefined,
+      undefined,
+      undefined,
+      '(IR|IC|EC|RJX|TGV)',
+    ),
     group: 'ch.sbb.punctuality',
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
-    useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
     group: 'ch.sbb.punctuality',
