@@ -44,9 +44,7 @@ export const zweitausbildungAbroad = new ZweitausbildungAbroadLayer({
 export const zweitausbildungStations = new Layer({
   name: 'ch.sbb.zweitausbildung.stationen.group',
   visible: true,
-  isQueryable: false,
   properties: {
-    isQueryable: true,
     hasInfos: true,
     layerInfoComponent: 'ZweitausbildungLayerInfo',
     zweitausbildung: {
