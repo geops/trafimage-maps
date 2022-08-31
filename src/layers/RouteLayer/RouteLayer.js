@@ -45,6 +45,7 @@ class RouteLayer extends CasaLayer {
     });
 
   constructor(options = {}) {
+    const properties = { isQueryable: true, ...(options.properties || {}) };
     super({
       name: 'RouteLayer',
       olLayer: new OLVectorLayer({
@@ -53,6 +54,7 @@ class RouteLayer extends CasaLayer {
         source: new VectorSource(),
       }),
       ...options,
+      properties,
     });
     this.set('showPopupOnHover', (features = []) => {
       return features.filter((f) => {

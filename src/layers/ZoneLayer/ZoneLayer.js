@@ -49,6 +49,7 @@ class ZoneLayer extends CasaLayer {
   }
 
   constructor(options = {}) {
+    const properties = { isQueryable: true, ...(options.properties || {}) };
     super({
       name: 'Verbundzonen',
       olLayer: new LayerGroup({
@@ -65,6 +66,7 @@ class ZoneLayer extends CasaLayer {
         ],
       }),
       ...options,
+      properties,
     });
 
     this.layers = this.olLayer.getLayers().getArray();
