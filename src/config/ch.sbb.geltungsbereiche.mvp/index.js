@@ -66,7 +66,10 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
     cardsScope: 'hta',
     hasInfos: true,
     layerInfoComponent: 'GeltungsbereicheLayerInfo',
-    getTextFromValid: () => {
+    getTextFromValid: (valid) => {
+      if (valid === -1) {
+        return 'Gültigkeit vor Ort erfragen';
+      }
       return 'Fahrt zum ermässigten Preis';
     },
   },
@@ -94,6 +97,9 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
       }
       if (valid === 25) {
         return '25% Ermässigung';
+      }
+      if (valid === -1) {
+        return 'Gültigkeit vor Ort erfragen';
       }
       return 'Freie Fahrt';
     },
