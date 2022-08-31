@@ -110,11 +110,11 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       {Object.entries(featuresByMot).map(([mot, validGa]) => {
         return Object.entries(validGa)
           .sort(([keyA], [keyB]) => {
+            if (keyA > keyB || keyA === '-1') {
+              return 1;
+            }
             if (keyA < keyB) {
               return -1;
-            }
-            if (keyA > keyB) {
-              return 1;
             }
             return 0;
           })
