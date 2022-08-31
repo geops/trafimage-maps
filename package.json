@@ -145,7 +145,9 @@
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not op_mini all"
+    "not op_mini all",
+    "not ie <= 11",
+    "not android < 5"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
   "eslintConfig": {
