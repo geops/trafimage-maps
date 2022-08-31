@@ -28,7 +28,7 @@
     "mapbox-gl": "1.13.1",
     "maplibre-gl": "2.4.0",
     "mobility-toolbox-js": "2.0.0-beta.46",
-    "ol": "6.14.1",
+    "ol": "6.6.1",
     "proj4": "2.7.5",
     "prop-types": "15.7.2",
     "proxy-polyfill": "0.3.2",

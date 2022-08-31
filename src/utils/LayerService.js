@@ -69,7 +69,7 @@ export default class LayerService {
   getRadioGroupLayers(radioGroupName) {
     if (radioGroupName) {
       return this.getLayersAsFlatArray().filter((l) => {
-        return l.get('radioGroup') === radioGroupName;
+        return l.get('group') === radioGroupName;
       });
     }
 
@@ -78,13 +78,13 @@ export default class LayerService {
 
   getBaseLayers() {
     return this.getLayersAsFlatArray().filter((l) => {
-      return l.isBaseLayer;
+      return l.get('isBaseLayer');
     });
   }
 
   getQueryableLayers() {
     return this.getLayersAsFlatArray().filter((layer) => {
-      return layer.visible && layer.isQueryable;
+      return layer.visible && layer.get('isQueryable');
     });
   }
 

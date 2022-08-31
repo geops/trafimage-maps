@@ -14,15 +14,11 @@ describe('LayerService', () => {
         children: [
           new Layer({
             name: '1-1',
-            properties: {
-              radioGroup: 'radio',
-            },
+            group: 'radio',
           }),
           new Layer({
             name: '1-2',
-            properties: {
-              radioGroup: 'radio',
-            },
+            group: 'radio',
             visible: false,
             children: [
               new Layer({
