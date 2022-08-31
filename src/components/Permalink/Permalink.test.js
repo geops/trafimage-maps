@@ -59,7 +59,7 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual('?lang=de&layers=testlayer');
+    expect(window.location.search).toEqual('?lang=de&layers=testLayer');
   });
 
   test("shoud remove space from 'tripNumber' Tracker filter.", () => {
@@ -75,7 +75,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?lang=de&layers=testlayer&tripNumber=150,200,300',
+      '?lang=de&layers=testLayer&tripNumber=150,200,300',
     );
   });
 
@@ -88,7 +88,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?lang=de&layers=testlayer&operator=sbb,zsg',
+      '?lang=de&layers=testLayer&operator=sbb,zsg',
     );
   });
 
@@ -105,7 +105,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?lang=de&layers=testlayer&publishedLineName=2068,3003',
+      '?lang=de&layers=testLayer&publishedLineName=2068,3003',
     );
   });
 
@@ -118,7 +118,7 @@ describe('Permalink', () => {
     );
 
     expect(window.location.search).toEqual(
-      '?lang=de&layers=testlayer&x=6456530&y=-7170156',
+      '?lang=de&layers=testLayer&x=6456530&y=-7170156',
     );
     expect(store.getActions()[0]).toEqual({
       data: [6456530, -7170156],
@@ -134,7 +134,7 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual('?lang=de&layers=testlayer');
+    expect(window.location.search).toEqual('?lang=de&layers=testLayer');
     expect(store.getActions()[0]).toEqual({
       data: [6456530.466009867, -7170156.29399995],
       type: 'SET_CENTER',
@@ -159,7 +159,7 @@ describe('Permalink', () => {
         );
       });
       expect(window.location.search).toEqual(
-        '?draw.id=foo&lang=de&layers=testlayer',
+        '?draw.id=foo&lang=de&layers=testLayer',
       );
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
       expect(store.getActions().pop()).toEqual({
@@ -181,7 +181,7 @@ describe('Permalink', () => {
         );
       });
       expect(window.location.search).toEqual(
-        '?draw.id=quu&lang=de&layers=testlayer',
+        '?draw.id=quu&lang=de&layers=testLayer',
       );
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
       expect(store.getActions().pop()).toEqual({
@@ -206,7 +206,7 @@ describe('Permalink', () => {
       );
     });
     expect(window.location.search).toEqual(
-      '?draw.id=quu&lang=de&layers=testlayer',
+      '?draw.id=quu&lang=de&layers=testLayer',
     );
     expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
     expect(store.getActions().pop()).toEqual({

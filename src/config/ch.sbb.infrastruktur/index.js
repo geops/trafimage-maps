@@ -5,12 +5,15 @@ import KilometrageLayer from '../../layers/KilometrageLayer';
 
 export const netzkarteEisenbahninfrastruktur = new TrafimageMapboxLayer({
   name: 'ch.sbb.infrastruktur',
-  isBaseLayer: true,
   visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3',
+  properties: {
+    isBaseLayer: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
+  },
 });
 
 export const kilometrageLayer = new KilometrageLayer({
@@ -18,6 +21,7 @@ export const kilometrageLayer = new KilometrageLayer({
   key: 'ch.sbb.kilometrage',
   visible: true,
   properties: {
+    isQueryable: true,
     hideInLegend: true,
     featureInfoEventTypes: ['singleclick'],
     useOverlay: false,
@@ -31,6 +35,7 @@ export const betriebsRegionen = new MapboxStyleLayer({
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
+    isQueryable: true,
     hasInfos: true,
     useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
@@ -45,6 +50,7 @@ export const betriebsRegionenVisible = new MapboxStyleLayer({
   mapboxLayer: netzkarteEisenbahninfrastruktur,
   styleLayersFilter: ({ id }) => /pattern_/.test(id),
   properties: {
+    isQueryable: true,
     hasInfos: true,
     useOverlay: true,
     popupComponent: 'BetriebsRegionenPopup',
@@ -96,7 +102,6 @@ export const uebrigeBahnen = new MapboxStyleLayer({
 export const grenzen = new Layer({
   name: 'ch.sbb.infrastruktur.grenzen.group',
   visible: false,
-  isQueryable: false,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.infrastruktur.grenzen.group',
@@ -105,7 +110,6 @@ export const grenzen = new Layer({
     new Layer({
       name: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
       visible: false,
-      isQueryable: false,
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.gemeindegrenzen.group-desc',
@@ -121,10 +125,10 @@ export const grenzen = new Layer({
               styleLayer.id,
             );
           },
+          group: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.gemeindegrenzen.greengrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           },
         }),
         new MapboxStyleLayer({
@@ -137,10 +141,10 @@ export const grenzen = new Layer({
               styleLayer.id,
             );
           },
+          group: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.gemeindegrenzen.greygrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.gemeindegrenzen.group',
           },
         }),
       ],
@@ -148,7 +152,6 @@ export const grenzen = new Layer({
     new Layer({
       name: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
       visible: false,
-      isQueryable: false,
       properties: {
         hasInfos: true,
         description: 'ch.sbb.infrastruktur.kantonsgrenzen.group-desc',
@@ -157,31 +160,29 @@ export const grenzen = new Layer({
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
           visible: false,
-          isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
             return /(border_Kanton|border_Kanton-IMAGICO)$/.test(styleLayer.id);
           },
+          group: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           },
         }),
         new MapboxStyleLayer({
           name: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
           visible: false,
-          isQueryable: false,
           mapboxLayer: netzkarteEisenbahninfrastruktur,
           styleLayersFilter: (styleLayer) => {
             return /(border_Kanton-Grey|border_Kanton-IMAGICO-Grey)$/.test(
               styleLayer.id,
             );
           },
+          group: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           properties: {
             hasInfos: true,
             description: 'ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen',
-            radioGroup: 'ch.sbb.infrastruktur.kantonsgrenzen.group',
           },
         }),
       ],

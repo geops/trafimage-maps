@@ -18,16 +18,16 @@ describe('DrawLayerMenu', () => {
 
   describe('should match snapshot.', () => {
     test('should return null', () => {
+      const layerService = new LayerService([]);
       store = mockStore({
         map: {
           drawLayer,
         },
-        app: {},
+        app: { layerService },
       });
-      const layerService = new LayerService([]);
       const component = renderer.create(
         <Provider store={store}>
-          <DrawLayerMenu layerService={layerService} />
+          <DrawLayerMenu />
         </Provider>,
       );
       const tree = component.toJSON();
@@ -35,18 +35,19 @@ describe('DrawLayerMenu', () => {
     });
 
     test('using the layerService property', () => {
+      const layerService = new LayerService([]);
       store = mockStore({
         map: {
           drawLayer,
         },
         app: {
           drawIds: { admin_id: 'foo' },
+          layerService,
         },
       });
-      const layerService = new LayerService([]);
       const component = renderer.create(
         <Provider store={store}>
-          <DrawLayerMenu layerService={layerService} />
+          <DrawLayerMenu />
         </Provider>,
       );
       const tree = component.toJSON();
@@ -70,7 +71,7 @@ describe('DrawLayerMenu', () => {
     });
     const wrapper = mount(
       <Provider store={store}>
-        <DrawLayerMenu layerService={layerService} />
+        <DrawLayerMenu />
       </Provider>,
     );
     expect(layerService.layers.length).toBe(2);

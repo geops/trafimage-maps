@@ -14,12 +14,13 @@ import {
 export const handicapDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.handicap.data',
   visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2_ch.sbb.handicap',
   properties: {
     hideInLegend: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 
@@ -31,6 +32,7 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
   properties: {
+    isQueryable: true,
     handicapType: 'stuetzpunkt',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -56,6 +58,7 @@ export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'barrierefrei',
   properties: {
+    isQueryable: true,
     handicapType: 'barrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',
@@ -72,6 +75,7 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'nicht_barrierefrei',
   properties: {
+    isQueryable: true,
     handicapType: 'notBarrierfree',
     hasInfos: true,
     layerInfoComponent: 'HandicapLayerInfo',

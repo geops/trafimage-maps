@@ -26,8 +26,9 @@
     "i18next-xhr-backend": "3.2.2",
     "jspdf": "2.4.0",
     "mapbox-gl": "1.13.1",
-    "mobility-toolbox-js": "1.7.13",
-    "ol": "6.6.1",
+    "maplibre-gl": "2.4.0",
+    "mobility-toolbox-js": "2.0.0-beta.45",
+    "ol": "6.14.1",
     "proj4": "2.7.5",
     "prop-types": "15.7.2",
     "proxy-polyfill": "0.3.2",
@@ -43,7 +44,7 @@
     "react-icons": "^4.3.1",
     "react-redux": "7.2.5",
     "react-select": "5.1.0",
-    "react-spatial": "1.2.2",
+    "react-spatial": "1.2.3-beta.4",
     "react-styleguidist": "11.2.0",
     "react-web-component": "2.0.2",
     "redux": "4.1.1",
@@ -139,7 +140,7 @@
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
     "start:doc": "styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
+    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\""
   },
   "browserslist": [
     ">0.2%",

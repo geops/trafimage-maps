@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Layer, TrackerLayer } from 'mobility-toolbox-js/ol';
+import { Layer, RealtimeLayer as TrackerLayer } from 'mobility-toolbox-js/ol';
 import { Map, View } from 'ol';
 import renderer from 'react-test-renderer';
 import MapAccessibility from './MapAccessibility';
@@ -9,6 +9,7 @@ let map;
 let mapElement;
 const trackerLayer = new TrackerLayer({
   visible: true,
+  url: 'ws://foo.ch/style',
 });
 const layer = new Layer({
   visible: true,
@@ -18,6 +19,10 @@ const layer = new Layer({
 
 describe('MapAccessibility', () => {
   beforeEach(() => {
+    TrackerLayer.prototype.purgeTrajectory = () => {
+      return false;
+    };
+    TrackerLayer.prototype.renderTrajectoriesInternal = () => {};
     TrackerLayer.prototype.hasFeatureInfoAtCoordinate = jest.fn(() => true);
     mapElement = document.createElement('div');
     mapElement.tabIndex = 1;
@@ -30,16 +35,25 @@ describe('MapAccessibility', () => {
         zoom: 0,
       }),
     });
-    trackerLayer.init(map);
-    trackerLayer.tracker.renderedTrajectories = [
-      { id: 1, coordinate: [1, 0] },
-      { id: 2, coordinate: [0, 1] },
-    ];
+    trackerLayer.attachToMap(map);
+    trackerLayer.trajectories = {
+      1: {
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [1, 0] },
+        properties: { id: 1, train_id: 1, coordinate: [1, 0] },
+      },
+      2: {
+        type: 'Feature',
+        geometry: { type: 'Point', coordinates: [1, 0] },
+        properties: { id: 2, train_id: 2, coordinate: [0, 1] },
+      },
+    };
   });
 
   afterEach(() => {
+    TrackerLayer.prototype.renderTrajectoriesInternal = () => {};
     TrackerLayer.prototype.hasFeatureInfoAtCoordinate.mockRestore();
-    trackerLayer.terminate(map);
+    trackerLayer.detachFromMap(map);
     document.body.removeChild(mapElement);
   });
 

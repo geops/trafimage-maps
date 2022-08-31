@@ -8,13 +8,14 @@ import { netzkarteLayer, netzkarteAerial } from '../ch.sbb.netzkarte';
 export const constructionDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.construction.data',
   visible: true,
-  isQueryable: false,
-  isBaseLayer: false,
-  preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'base_bright_v2_ch.sbb.bauprojekte',
   properties: {
     hideInLegend: true,
+    isBaseLayer: false,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 
@@ -37,6 +38,7 @@ export const constrAusbau = new AusbauLayer({
       styleLayersFilter: ({ metadata }) =>
         !!metadata && metadata['trafimage.filter'] === 'ausbau.uebrige',
       properties: {
+        isQueryable: true,
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
@@ -55,6 +57,7 @@ export const constrAusbau = new AusbauLayer({
       styleLayersFilter: ({ metadata }) =>
         !!metadata && metadata['trafimage.filter'] === 'ausbau.bahnhof_strecke',
       properties: {
+        isQueryable: true,
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
@@ -73,6 +76,7 @@ export const constrAusbau = new AusbauLayer({
       styleLayersFilter: ({ metadata }) =>
         !!metadata && metadata['trafimage.filter'] === 'ausbau.strecke',
       properties: {
+        isQueryable: true,
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
@@ -91,6 +95,7 @@ export const constrAusbau = new AusbauLayer({
       styleLayersFilter: ({ metadata }) =>
         !!metadata && metadata['trafimage.filter'] === 'ausbau.bahnhof',
       properties: {
+        isQueryable: true,
         hasInfos: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
@@ -108,7 +113,6 @@ export const constrUnterhalt = new Layer({
   name: 'ch.sbb.construction.unterhalt.group',
   desc: 'ch.sbb.construction.unterhalt.group-desc',
   visible: true,
-  isQueryable: false,
   properties: {
     hasInfos: true,
     description: 'ch.sbb.construction.unterhalt.group-desc',
@@ -123,6 +127,7 @@ export const constrUnterhalt = new Layer({
         !!metadata && metadata['trafimage.filter'] === 'unterhalt.uebrige',
       properties: {
         hasInfos: true,
+        isQueryable: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
         popupComponent: 'ConstructionPopup',
@@ -142,6 +147,7 @@ export const constrUnterhalt = new Layer({
         metadata['trafimage.filter'] === 'unterhalt.bahnhof_strecke',
       properties: {
         hasInfos: true,
+        isQueryable: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
         popupComponent: 'ConstructionPopup',
@@ -160,6 +166,7 @@ export const constrUnterhalt = new Layer({
         !!metadata && metadata['trafimage.filter'] === 'unterhalt.strecke',
       properties: {
         hasInfos: true,
+        isQueryable: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
         popupComponent: 'ConstructionPopup',
@@ -178,6 +185,7 @@ export const constrUnterhalt = new Layer({
         !!metadata && metadata['trafimage.filter'] === 'unterhalt.bahnhof',
       properties: {
         hasInfos: true,
+        isQueryable: true,
         layerInfoComponent: 'ConstructionLayerInfo',
         useOverlay: true,
         popupComponent: 'ConstructionPopup',
@@ -266,9 +274,9 @@ export const constrClusters = new MapboxStyleLayer({
   name: 'ch.sbb.construction-cluster',
   key: 'ch.sbb.construction-cluster',
   visible: true,
-  isQueryable: true,
   mapboxLayer: constructionDataLayer,
   properties: {
+    isQueryable: true,
     useOverlay: true,
     popupComponent: 'ConstructionPopup',
     hideInLegend: true,

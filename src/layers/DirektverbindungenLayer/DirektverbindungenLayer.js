@@ -60,22 +60,22 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super.onLoad();
   }
 
-  setVisible(
-    visible,
-    stopPropagationDown,
-    stopPropagationUp,
-    stopPropagationSiblings,
-  ) {
-    if (!visible) {
-      this.select();
-    }
-    super.setVisible(
-      visible,
-      stopPropagationDown,
-      stopPropagationUp,
-      stopPropagationSiblings,
-    );
-  }
+  // setVisible(
+  //   visible,
+  //   stopPropagationDown,
+  //   stopPropagationUp,
+  //   stopPropagationSiblings,
+  // ) {
+  //   if (!visible) {
+  //     this.select();
+  //   }
+  //   super.setVisible(
+  //     visible,
+  //     stopPropagationDown,
+  //     stopPropagationUp,
+  //     stopPropagationSiblings,
+  //   );
+  // }
 
   select(features = []) {
     const { mbMap } = this.mapboxLayer;

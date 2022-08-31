@@ -7,9 +7,9 @@ import qs from 'query-string';
 import OLMap from 'ol/Map';
 import { fromLonLat } from 'ol/proj';
 import RSPermalink from 'react-spatial/components/Permalink';
-import LayerService from 'react-spatial/LayerService';
 import KML from 'react-spatial/utils/KML';
 import { Layer } from 'mobility-toolbox-js/ol';
+import LayerService from '../../utils/LayerService';
 import { setCenter, setZoom } from '../../model/map/actions';
 import { stationsLayer, platformsLayer } from '../../config/ch.sbb.netzkarte';
 import {
@@ -328,6 +328,7 @@ class Permalink extends PureComponent {
         layer: new Layer({
           key: 'ch.sbb.departure.popup',
           properties: {
+            isQueryable: true,
             popupComponent: 'DeparturePopup',
             useOverlay: true,
           },
@@ -382,8 +383,9 @@ class Permalink extends PureComponent {
           ...this.state,
         }}
         map={map}
-        layerService={layerService}
+        layers={layerService.getLayers()}
         history={history}
+        isBaseLayer={(l) => l.get('isBaseLayer')}
         isLayerHidden={(l) =>
           l.get('hideInLegend') ||
           layerService.getParents(l).some((pl) => pl.get('hideInLegend'))

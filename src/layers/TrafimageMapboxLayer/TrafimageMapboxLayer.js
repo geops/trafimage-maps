@@ -1,5 +1,8 @@
 import { MapboxLayer } from 'mobility-toolbox-js/ol';
-import { getMapboxMapCopyrights } from 'mobility-toolbox-js/common/utils';
+import {
+  getUrlWithParams,
+  getMapboxMapCopyrights,
+} from 'mobility-toolbox-js/common/utils';
 import { toLonLat } from 'ol/proj';
 
 const applyFilters = (mbStyle, filters) => {
@@ -42,8 +45,8 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.style = stylePrefix + options.style;
   }
 
-  init(map) {
-    super.init(map);
+  attachToMap(map) {
+    super.attachToMap(map);
 
     if (this.map) {
       this.dispatchEvent({
@@ -61,12 +64,12 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.abortController = new AbortController();
   }
 
-  terminate(map) {
+  detachFromMap(map) {
     if (this.abortController) {
       this.abortController.abort();
     }
 
-    super.terminate(map);
+    super.detachFromMap(map);
 
     this.dispatchEvent({
       type: 'terminate',
@@ -90,6 +93,16 @@ class TrafimageMapboxLayer extends MapboxLayer {
     this.mbMap.once('styledata', () => {
       this.onStyleLoaded();
     });
+  }
+
+  /**
+   * Returns a style URL with apiKey & apiKeyName infos.
+   * @private
+   */
+  createStyleUrl() {
+    return getUrlWithParams(this.styleUrl, {
+      [this.apiKeyName]: this.apiKey,
+    }).toString();
   }
 
   setStyleConfig(url, key, apiKeyName) {

@@ -291,8 +291,8 @@ class CasaLayer extends VectorLayer {
    * Set the hoverFeature when hovering a feature.
    * @private
    */
-  init(map) {
-    super.init(map);
+  attachToMap(map) {
+    super.attachToMap(map);
     this.map.on('pointermove', (e) => {
       const feature = this.map.forEachFeatureAtPixel(e.pixel, (f) => f);
       if (feature !== this.hoverFeature) {

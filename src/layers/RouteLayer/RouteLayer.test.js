@@ -167,7 +167,7 @@ describe('RouteLayer', () => {
 
   // This test failed because of the canvas mock but we don't know why.
   test('should return the correct styles when selected.', async () => {
-    layer.init(map);
+    layer.attachToMap(map);
     fetchRoutes();
 
     const [rail, bus] = await layer.loadRoutes(routes);
@@ -236,7 +236,7 @@ describe('RouteLayer', () => {
   });
 
   test('should return a feature on loadRoute.', async () => {
-    layer.init(map);
+    layer.attachToMap(map);
     fetchRoutes();
     const route = await layer.loadRoutes(routes);
 
@@ -244,7 +244,7 @@ describe('RouteLayer', () => {
   });
 
   test('should skip failed API requests on loadRoute.', async () => {
-    layer.init(map);
+    layer.attachToMap(map);
     fetchRoutesError();
     const route = await layer.loadRoutes(routes);
 
@@ -254,7 +254,7 @@ describe('RouteLayer', () => {
   test('shoud call onClick callbacks and deselect on click.', async () => {
     const coordinate = [10, 10];
     fetchRoutes();
-    layer.init(map);
+    layer.attachToMap(map);
     const features = await layer.loadRoutes(routes);
     jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([features[0]]);
     jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);

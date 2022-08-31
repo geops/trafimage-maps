@@ -23,7 +23,9 @@ const getSubtitle = (layerService, t) => {
     .reverse()
     .filter(
       (l) =>
-        !l.isBaseLayer && !l.get('hideInLegend') && !layerService.getParent(l),
+        !l.get('isBaseLayer') &&
+        !l.get('hideInLegend') &&
+        !layerService.getParent(l),
     );
   const menuLayers = topicLayers.filter((l) => l.visible);
   return menuLayers.length > 0 && menuLayers.length === topicLayers.length

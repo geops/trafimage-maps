@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
-import LayerService from 'react-spatial/LayerService';
 import { Layer } from 'mobility-toolbox-js/ol';
+import LayerService from '../../utils/LayerService';
 import { setLayers } from '../../model/map/actions';
 import {
   setActiveTopic,
@@ -240,7 +240,7 @@ class TopicLoader extends Component {
 
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
-      .filter((l) => l.isBaseLayer && l.visible);
+      .filter((l) => l.get('isBaseLayer') && l.visible);
 
     // In case you set the topics after the default topics are loaded, you'll loose
     // the layers visibility set initially by the permalink parameters.
@@ -248,21 +248,25 @@ class TopicLoader extends Component {
     layerService.getLayersAsFlatArray().forEach((layer) => {
       topicLayers.forEach((topicLayer) => {
         if (layer.key === topicLayer.key) {
-          topicLayer.setVisible(layer.visible);
+          // topicLayer.setVisible(layer.visible);
+          // eslint-disable-next-line no-param-reassign
+          topicLayer.visible = layer.visible;
         }
       });
     });
 
     const visibleBaseLayers = topicLayers.filter(
-      (l) => l.isBaseLayer && l.visible,
+      (l) => l.get('isBaseLayer') && l.visible,
     );
 
     // Set the visible baselayer if need to be changed on topic change.
     if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
       topicLayers
-        .filter((l) => l.isBaseLayer)
+        .filter((l) => l.get('isBaseLayer'))
         .forEach((lay, idx) => {
-          lay.setVisible(idx === 0);
+          // lay.setVisible(idx === 0);
+          // eslint-disable-next-line no-param-reassign
+          lay.visible = idx === 0;
         });
     }
 

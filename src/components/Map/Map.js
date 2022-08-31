@@ -8,7 +8,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import { unByKey } from 'ol/Observable';
 import OLMap from 'ol/Map';
 import BasicMap from 'react-spatial/components/BasicMap';
-import LayerService from 'react-spatial/LayerService';
+import LayerService from '../../utils/LayerService';
 import MapAccessibility from '../MapAccessibility';
 import { setResolution, setCenter, setZoom } from '../../model/map/actions';
 import {
@@ -298,7 +298,7 @@ class Map extends PureComponent {
     return layerService.getLayersAsFlatArray().filter((layer) => {
       return (
         layer.visible &&
-        layer.isQueryable &&
+        layer.get('isQueryable') &&
         (
           layer.get('featureInfoEventTypes') || ['pointermove', 'singleclick']
         ).includes(featureInfoEventType)

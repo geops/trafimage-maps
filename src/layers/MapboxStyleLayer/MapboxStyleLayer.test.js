@@ -20,7 +20,7 @@ describe('MapboxStyleLayer', () => {
   beforeEach(() => {
     source = new TrafimageMapboxLayer({
       name: 'Layer',
-      url: 'foo.com/styles',
+      url: 'http://foo.com/styles',
       apiKey: 'test',
     });
     layer = new MapboxStyleLayer({
@@ -41,27 +41,27 @@ describe('MapboxStyleLayer', () => {
   });
 
   test('should not initalized mapbox map.', () => {
-    layer.init();
+    layer.attachToMap();
     expect(layer.mbMap).toBe();
   });
 
   test('should initalized mapbox map.', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
-    source.init(map);
+    source.attachToMap(map);
     await source.loadMbMap();
-    layer.init(map);
+    layer.attachToMap(map);
     expect(layer.mapboxLayer.mbMap).toBeInstanceOf(mapboxgl.Map);
   });
 
-  test('should called terminate on initalization.', () => {
-    const spy = jest.spyOn(layer, 'terminate');
-    layer.init();
+  test('should called detachFromMap on initalization.', () => {
+    const spy = jest.spyOn(layer, 'detachFromMap');
+    layer.attachToMap();
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
   test('should return coordinates, features and a layer instance.', async () => {
-    source.init(map);
-    layer.init(map);
+    source.attachToMap(map);
+    layer.attachToMap(map);
     const data = await layer.getFeatureInfoAtCoordinate([50, 50]);
     expect(data.coordinate).toEqual([50, 50]);
     expect(data.features).toEqual([]);
