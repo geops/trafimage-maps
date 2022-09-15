@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.15.0](https://github.com/geops/trafimage-maps/compare/v1.14.0...v1.15.0) (2022-09-14)
+
+
+### Features
+
+* use maplibre-gl instead of mapbox-gl ([#1030](https://github.com/geops/trafimage-maps/issues/1030)) ([1a7c3ea](https://github.com/geops/trafimage-maps/commit/1a7c3ea134f90e7db6716463b99a3719c865ec3f))
+
 ## [1.14.0](https://github.com/geops/trafimage-maps/compare/v1.13.3...v1.14.0) (2022-08-30)
 
 
