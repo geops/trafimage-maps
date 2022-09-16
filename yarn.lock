@@ -12337,10 +12337,10 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@2.0.0-beta.49:
-  version "2.0.0-beta.49"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-2.0.0-beta.49.tgz#f5fb86d607391ca6d3c0d3810257bf34717e97c5"
-  integrity sha512-Sc80KrgP+Y2fDnBXknkP2/QdxaUndgP7KUxdvloF92CFWaa+VIVI1q+l2NuMrOgUw0yYzC9F7qt8gNESib5G5g==
+mobility-toolbox-js@2.0.0-beta.51:
+  version "2.0.0-beta.51"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-2.0.0-beta.51.tgz#8f264c32927a25b7fccfe82fd7c73b926f2f568b"
+  integrity sha512-T2g8atWZGLoKuXmtXLnKY+g6priy4NKYZkpMqX1HpMhtQUyvGmgnE7ZH3LsHZYeD70ulHpGat/jfO07C0vfi+Q==
   dependencies:
     "@turf/helpers" "^6.5.0"
     "@turf/transform-rotate" "^6.5.0"
@@ -14902,10 +14902,10 @@ react-i18next@11.12.0:
     "@babel/runtime" "^7.14.5"
     html-parse-stringify "^3.0.1"
 
-react-icons@4.3.1, react-icons@^4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
-  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
+react-icons@4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.4.0.tgz#a13a8a20c254854e1ec9aecef28a95cdf24ef703"
+  integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
 
 react-icons@^3.8.0:
   version "3.11.0"
@@ -14913,6 +14913,11 @@ react-icons@^3.8.0:
   integrity sha512-JRgiI/vdF6uyBgyZhVyYJUZAop95Sy4XDe/jmT3R/bKliFWpO/uZBwvSjWEdxwzec7SYbEPNPck0Kff2tUGM2Q==
   dependencies:
     camelcase "^5.0.0"
+
+react-icons@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
+  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
 
 "react-is@^16.12.0 || ^17.0.0", "react-is@^16.8.0 || ^17.0.0", react-is@^17.0.0, react-is@^17.0.1, react-is@^17.0.2:
   version "17.0.2"
@@ -15085,10 +15090,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.2.3-beta.4:
-  version "1.2.3-beta.4"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.2.3-beta.4.tgz#94bef57f4465bfa27e9711c2eec04179f955557d"
-  integrity sha512-GBGjaf2w/DjtLxuEIjGv+j9jXDKuWYAoEoesU3wTdk22l2/Pkg+Wu9QpOqiloN0WivPzWakvqcsNlLT01PfCOQ==
+react-spatial@1.2.3-beta.7:
+  version "1.2.3-beta.7"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.2.3-beta.7.tgz#2992acca2fbf97db2e51bf362db896e1ecdc1735"
+  integrity sha512-oUqVp3DvhitF8gYtk+5PAZ2wpbJujzNLl+g0k/7Depn/3tAAwbt1jDyUrAbDbTQMr1WoOBkATkB5qRLRQyPllA==
   dependencies:
     "@geops/geops-ui" "0.1.13"
     "@material-ui/core" "4.12.3"
@@ -15100,7 +15105,7 @@ react-spatial@1.2.3-beta.4:
     re-resizable "6.9.1"
     react-autosuggest "10.1.0"
     react-draggable "4.4.4"
-    react-icons "4.3.1"
+    react-icons "4.4.0"
     resize-observer-polyfill "1.5.1"
 
 react-styleguidist@11.2.0:
