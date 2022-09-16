@@ -4,13 +4,13 @@ import thunk from 'redux-thunk';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import LayerService from 'react-spatial/LayerService';
 import { Layer } from 'mobility-toolbox-js/ol';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Map, View } from 'ol';
 import OLLayer from 'ol/layer/Layer';
 import fetchMock from 'fetch-mock';
+import LayerService from '../../utils/LayerService';
 import Permalink from './Permalink';
 
 describe('Permalink', () => {

@@ -4,8 +4,8 @@ import { mount } from 'enzyme';
 import { Map, View } from 'ol';
 import { Provider } from 'react-redux';
 import { Layer } from 'mobility-toolbox-js/ol';
-import LayerService from 'react-spatial/LayerService';
 import { ThemeProvider } from '@material-ui/core/styles';
+import LayerService from '../../utils/LayerService';
 import theme from '../../themes/default';
 import TopicElements from '.';
 

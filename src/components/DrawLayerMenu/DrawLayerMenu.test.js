@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
-import LayerService from 'react-spatial/LayerService';
 import { mount } from 'enzyme';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Layer';
+import LayerService from '../../utils/LayerService';
 import DrawLayerMenu from './DrawLayerMenu';
 
 describe('DrawLayerMenu', () => {

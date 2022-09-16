@@ -262,7 +262,9 @@ describe('RouteLayer', () => {
     expect(onClick).toHaveBeenCalledTimes(0);
     const evt = { type: 'singleclick', map, coordinate };
     await map.dispatchEvent(evt);
-    expect(onClick).toHaveBeenCalledWith([features[0]], layer, coordinate);
+    expect(onClick.mock.calls[0][0]).toEqual([features[0]]);
+    expect(onClick.mock.calls[0][1]).toBe(layer);
+    expect(onClick.mock.calls[0][2]).toBe(coordinate);
     expect(layer.selectedRouteIds).toEqual([]);
   });
 });
