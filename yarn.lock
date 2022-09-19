@@ -6433,6 +6433,13 @@ cypress-enter-plugin@1.0.1:
   resolved "https://registry.yarnpkg.com/cypress-enter-plugin/-/cypress-enter-plugin-1.0.1.tgz#40dda5479a0c85ef28516a8d52cb16917721a4b9"
   integrity sha512-qN8nVJ9kSnw9MelT8mf2MiX7cwno+bBIIaEudVg8yMlLRSvF2Gr8xL5cs+ftNTvMhU9ko9IbxzwfNGYEoSKBGw==
 
+cypress-plugin-retries@1.5.2:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/cypress-plugin-retries/-/cypress-plugin-retries-1.5.2.tgz#21d5247cd77013b95bbfdd914f2de66f91f76a2e"
+  integrity sha512-o1xVIGtv4WvNVxoVJ2X08eAuvditPHrePRzHqhwwHbMKu3C2rtxCdanRCZdO5fjh8ww+q4v4V0e9GmysbOvu3A==
+  dependencies:
+    chalk "^3.0.0"
+
 cypress-plugin-tab@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/cypress-plugin-tab/-/cypress-plugin-tab-1.0.5.tgz#a40714148104004bb05ed62b1bf46bb544f8eb4a"
