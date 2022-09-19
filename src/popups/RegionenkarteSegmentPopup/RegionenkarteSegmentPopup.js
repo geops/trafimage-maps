@@ -82,6 +82,12 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
       return () => {};
     }
 
+    // We don't want to highlight the features selected on click.
+    // We want only to highlight the lines of the coordinator of the current feature selected in the overlay.
+    // So here we clean all the style
+    layer.select([]);
+    layer.highlight([]);
+
     let property;
     let value;
 
@@ -106,7 +112,7 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
         mbMap.setLayoutProperty(layerId, 'visibility', 'none');
       }
     };
-  }, [feature, isIntern, layer.mapboxLayer, tab, avRole]);
+  }, [feature, isIntern, layer, layer.mapboxLayer, tab, avRole]);
 
   return (
     <div className={classes.root}>
