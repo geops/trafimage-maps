@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.16.0](https://github.com/geops/trafimage-maps/compare/v1.15.0...v1.16.0) (2022-09-20)
+
+
+### Features
+
+* use mobility-toolbox-js v2 ([#1031](https://github.com/geops/trafimage-maps/issues/1031)) ([76b0071](https://github.com/geops/trafimage-maps/commit/76b0071a8ce287b53aae472ea66eda2081b64f3a))
+
+
+### Bug Fixes
+
+* **anlageverantwortliche:** only highlight the current author displayed in the overlay ([d1de023](https://github.com/geops/trafimage-maps/commit/d1de023f2debecc059be101614d5996bce4954aa))
+* **zweitausbildung:** highlight the first selected line even if the overlay is already open ([87ba017](https://github.com/geops/trafimage-maps/commit/87ba017223892ee7bf77d188925fcd1edeef7e51))
+
 ## [1.15.0](https://github.com/geops/trafimage-maps/compare/v1.14.0...v1.15.0) (2022-09-14)
 
 
