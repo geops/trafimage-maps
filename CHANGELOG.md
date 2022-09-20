@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.2](https://github.com/geops/trafimage-maps/compare/v1.16.1...v1.16.2) (2022-09-20)
+
+
+### Bug Fixes
+
+* add back url parameters to filter trains on punctuality layers ([0e367e7](https://github.com/geops/trafimage-maps/commit/0e367e7a4c7f8b656b4c5c76b896cc9f36973655))
+* make punctuality layers queryable ([162d3be](https://github.com/geops/trafimage-maps/commit/162d3be24beb92e611f1d76449cd5b23c8e1a4f3))
+* use delay style for full trajectory ([fe51757](https://github.com/geops/trafimage-maps/commit/fe51757f73b2a055aef93de81bbd1b863b5e6819))
+
 ### [1.16.1](https://github.com/geops/trafimage-maps/compare/v1.16.0...v1.16.1) (2022-09-20)
 
 
