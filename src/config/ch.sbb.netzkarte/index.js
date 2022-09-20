@@ -176,7 +176,6 @@ bahnhofplaene.children = [
 export const punctuality = new Layer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
-  isQueryable: false,
   properties: {
     hasAccessibility: true,
     hasInfos: true,
@@ -198,6 +197,9 @@ punctuality.children = [
       '^(S|R$|RE|PE|D|IRE|RB|TER)',
     ),
     group: 'ch.sbb.punctuality',
+    properties: {
+      isQueryable: true,
+    },
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
@@ -212,6 +214,9 @@ punctuality.children = [
       '(IR|IC|EC|RJX|TGV)',
     ),
     group: 'ch.sbb.punctuality',
+    properties: {
+      isQueryable: true,
+    },
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
@@ -220,6 +225,9 @@ punctuality.children = [
     tenant: 'sbb',
     minZoomNonTrain: 14,
     group: 'ch.sbb.punctuality',
+    properties: {
+      isQueryable: true,
+    },
   }),
 ];
 
