@@ -1,5 +1,4 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import { createTrackerFilters } from 'mobility-toolbox-js/common';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import netzkarte from '../../img/netzkarte.png';
@@ -190,12 +189,7 @@ punctuality.children = [
     visible: false,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    filter: createTrackerFilters(
-      undefined,
-      undefined,
-      undefined,
-      '^(S|R$|RE|PE|D|IRE|RB|TER)',
-    ),
+    regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
@@ -207,12 +201,7 @@ punctuality.children = [
     visible: false,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    filter: createTrackerFilters(
-      undefined,
-      undefined,
-      undefined,
-      '(IR|IC|EC|RJX|TGV)',
-    ),
+    regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
