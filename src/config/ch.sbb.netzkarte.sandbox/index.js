@@ -12,11 +12,10 @@ geschosseLayer.children = [-4, -3, -2, -1, 0, '2D', 1, 2, 3, 4].map((level) => {
     name: `ch.sbb.geschosse${level}`,
     visible: level === '2D',
     mapboxLayer: dataLayer,
-    isQueryable: false,
     styleLayersFilter: ({ metadata }) => metadata && metadata['geops.filter'],
     level,
+    group: 'ch.sbb.geschosse-layer',
     properties: {
-      radioGroup: 'ch.sbb.geschosse-layer',
       parent: geschosseLayer,
     },
   });

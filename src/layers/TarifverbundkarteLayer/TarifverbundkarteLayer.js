@@ -62,8 +62,8 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  init(map) {
-    super.init(map);
+  attachToMap(map) {
+    super.attachToMap(map);
     this.olListenersKeys.push(
       this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
     );
@@ -72,10 +72,10 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  terminate(map) {
-    // Remove selected feature on terminate
+  detachFromMap(map) {
+    // Remove selected feature on detachFromMap
     this.removeSelection();
-    super.terminate(map);
+    super.detachFromMap(map);
   }
 
   selectZone(e) {

@@ -16,6 +16,7 @@ class StationsLayer extends MapboxStyleLayer {
         hideInLegend: true,
         popupComponent: 'StationPopup',
         useOverlay: true,
+        isQueryable: true,
       },
       ...options,
     });
@@ -29,8 +30,8 @@ class StationsLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  init(map) {
-    super.init(map);
+  attachToMap(map) {
+    super.attachToMap(map);
 
     this.olListenersKeys.push(
       this.on('change:visible', () => {
@@ -47,8 +48,8 @@ class StationsLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  terminate(map) {
-    super.terminate(map);
+  detachFromMap(map) {
+    super.detachFromMap(map);
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       mbMap.off('idle', this.onIdle);

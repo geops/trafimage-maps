@@ -1,4 +1,5 @@
 import { Layer } from 'mobility-toolbox-js/ol';
+import { createTrackerFilters } from 'mobility-toolbox-js/common';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import netzkarte from '../../img/netzkarte.png';
@@ -14,22 +15,23 @@ import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
   visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2_ch.sbb.netzkarte',
   properties: {
     hideInLegend: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 
 export const netzkarteLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.layer',
   key: 'ch.sbb.netzkarte',
-  isBaseLayer: true,
+  group: 'baseLayer',
   properties: {
-    radioGroup: 'baseLayer',
     previewImage: netzkarte,
+    isBaseLayer: true,
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -41,10 +43,10 @@ export const netzkarteLayer = new MapboxStyleLayer({
 export const netzkarteNight = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.dark',
   key: 'ch.sbb.netzkarte.dark',
-  isBaseLayer: true,
+  group: 'baseLayer',
   properties: {
-    radioGroup: 'baseLayer',
     previewImage: netzkarteNightImg,
+    isBaseLayer: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -54,11 +56,10 @@ export const netzkarteNight = new MapboxStyleLayer({
 export const netzkarteAerial = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.luftbild.group',
   key: 'ch.sbb.netzkarte.luftbild.group',
-  isQueryable: false,
-  isBaseLayer: true,
+  group: 'baseLayer',
   properties: {
-    radioGroup: 'baseLayer',
     previewImage: luftbild,
+    isBaseLayer: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -68,11 +69,10 @@ export const netzkarteAerial = new MapboxStyleLayer({
 export const swisstopoSwissImage = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.luftbild.group',
   key: 'ch.sbb.netzkarte.luftbild.group.old',
-  isQueryable: false,
-  isBaseLayer: true,
+  group: 'baseLayer',
   properties: {
-    radioGroup: 'baseLayer',
     previewImage: luftbild,
+    isBaseLayer: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -83,11 +83,11 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
 
 export const swisstopoLandeskarte = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte',
-  isQueryable: false,
-  isBaseLayer: true,
+  key: 'ch.sbb.netzkarte.landeskarte',
+  group: 'baseLayer',
   properties: {
-    radioGroup: 'baseLayer',
     previewImage: landeskarte,
+    isBaseLayer: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -98,11 +98,11 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
 
 export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   name: 'ch.sbb.netzkarte.landeskarte.grau',
-  isQueryable: false,
-  isBaseLayer: true,
+  key: 'ch.sbb.netzkarte.landeskarte.grau',
+  group: 'baseLayer',
   properties: {
-    radioGroup: 'baseLayer',
     previewImage: landeskarteGrau,
+    isBaseLayer: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -118,6 +118,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata['trafimage.filter'] === 'passagierfrequenzen',
   properties: {
+    isQueryable: true,
     hasInfos: true,
     layerInfoComponent: 'PassagierFrequenzenLayerInfo',
     popupComponent: 'PassagierFrequenzenPopup',
@@ -132,6 +133,7 @@ export const bahnhofplaene = new Layer({
   visible: false,
   isQueryable: false,
   properties: {
+    isQueryable: true,
     hasInfos: true,
     description: 'ch.sbb.bahnhofplaene-desc',
     dataLink:
@@ -145,11 +147,12 @@ bahnhofplaene.children = [
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) =>
       !!metadata && metadata['trafimage.filter'] === 'interaktiv',
+    group: 'bahnhofplaene',
     properties: {
+      isQueryable: true,
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.interaktiv-desc',
       popupComponent: 'StationPopup',
-      radioGroup: 'bahnhofplaene',
       useOverlay: true,
     },
   }),
@@ -159,11 +162,12 @@ bahnhofplaene.children = [
     mapboxLayer: dataLayer,
     styleLayersFilter: ({ metadata }) =>
       !!metadata && metadata['trafimage.filter'] === 'printprodukte',
+    group: 'bahnhofplaene',
     properties: {
+      isQueryable: true,
       hasInfos: true,
       description: 'ch.sbb.bahnhofplaene.printprodukte-desc',
       popupComponent: 'StationPopup',
-      radioGroup: 'bahnhofplaene',
       useOverlay: true,
     },
   }),
@@ -185,36 +189,37 @@ punctuality.children = [
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
-    useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
-    properties: {
-      radioGroup: 'ch.sbb.punctuality',
-    },
+    filter: createTrackerFilters(
+      undefined,
+      undefined,
+      undefined,
+      '^(S|R$|RE|PE|D|IRE|RB|TER)',
+    ),
+    group: 'ch.sbb.punctuality',
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
-    useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
-    properties: {
-      radioGroup: 'ch.sbb.punctuality',
-    },
+    filter: createTrackerFilters(
+      undefined,
+      undefined,
+      undefined,
+      '(IR|IC|EC|RJX|TGV)',
+    ),
+    group: 'ch.sbb.punctuality',
   }),
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
-    useDelayStyle: true,
     tenant: 'sbb',
     minZoomNonTrain: 14,
-    properties: {
-      radioGroup: 'ch.sbb.punctuality',
-    },
+    group: 'ch.sbb.punctuality',
   }),
 ];
 
@@ -235,6 +240,7 @@ export const buslines = new MapboxStyleLayer({
     !!metadata && metadata['trafimage.filter'] === 'bus',
   visible: false,
   properties: {
+    isQueryable: true,
     hasInfos: true,
     layerInfoComponent: 'BuslinesLayerInfo',
     popupComponent: 'BusLinePopup',
@@ -246,7 +252,6 @@ export const gemeindegrenzen = new MapboxStyleLayer({
   name: 'ch.sbb.ch_gemeinden',
   mapboxLayer: dataLayer,
   visible: false,
-  isQueryable: false,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['trafimage.filter'] === 'municipality_borders',
   properties: {
@@ -262,6 +267,7 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
   mapboxLayer: dataLayer,
   visible: false,
   properties: {
+    isQueryable: true,
     routeType: 'day',
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
@@ -276,6 +282,7 @@ export const direktverbindungenNight = new DirektverbindungenLayer({
   mapboxLayer: dataLayer,
   visible: false,
   properties: {
+    isQueryable: true,
     routeType: 'night',
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',

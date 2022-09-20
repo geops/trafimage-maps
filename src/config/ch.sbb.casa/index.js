@@ -38,6 +38,7 @@ export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
   zIndex: 2,
   properties: {
     hideInLegend: true,
+    isQueryable: true,
   },
 });
 

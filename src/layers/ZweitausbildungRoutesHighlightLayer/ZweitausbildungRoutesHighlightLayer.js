@@ -74,8 +74,8 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  init(map) {
-    super.init(map);
+  attachToMap(map) {
+    super.attachToMap(map);
 
     if (this.map) {
       /**

@@ -33,7 +33,7 @@ const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
         className={classes.itemColor}
         style={{ backgroundColor: child.get('color') }}
       />
-      <div>{t(child.key)}</div>
+      <div>{t(child.name)}</div>
     </div>
   ));
 

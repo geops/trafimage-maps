@@ -6,13 +6,13 @@ import MapsGeoAdminLayer from '../../layers/MapsGeoAdminLayer';
 export const beleuchtungDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.beleuchtungsstaerken.data',
   visible: true,
-  preserveDrawingBuffer: true,
-  isBaseLayer: true,
-  isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.beleuchtung',
   properties: {
     hideInLegend: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 
@@ -25,6 +25,7 @@ export const beleuchtungstaerken1Layer = new BeleuchtungsLayer({
     useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
+    isQueryable: true,
   },
 });
 
@@ -37,6 +38,7 @@ export const beleuchtungstaerken2aLayer = new BeleuchtungsLayer({
     useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
+    isQueryable: true,
   },
 });
 
@@ -49,6 +51,7 @@ export const beleuchtungstaerken2bLayer = new BeleuchtungsLayer({
     useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
+    isQueryable: true,
   },
 });
 
@@ -61,6 +64,7 @@ export const beleuchtungstaerken3Layer = new BeleuchtungsLayer({
     useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
+    isQueryable: true,
   },
 });
 
@@ -73,6 +77,7 @@ export const beleuchtungstaerken4Layer = new BeleuchtungsLayer({
     useOverlay: true,
     popupComponent: 'BeleuchtungsPopup',
     layerInfoComponent: 'BeleuchtungLayerInfo',
+    isQueryable: true,
   },
 });
 
@@ -87,6 +92,7 @@ const createMapsGeoAdminStyleLayer = (key) => {
       legendKey: key,
       hasInfos: true,
       layerInfoComponent: 'MapsGeoAdminLayerInfo',
+      isQueryable: true,
     },
   });
 };
@@ -115,6 +121,7 @@ export const beleuchtungstaerkenSchutzgebieteLayer = new MapsGeoAdminLayer({
     featureInfoEventTypes: ['singleclick'],
     useOverlay: true,
     popupComponent: 'MapsGeoAdminPopup',
+    isQueryable: true,
   },
 });
 
@@ -145,6 +152,7 @@ export const beleuchtungstaerkenBundesInventareLayer = new MapsGeoAdminLayer({
     featureInfoEventTypes: ['singleclick'],
     useOverlay: true,
     popupComponent: 'MapsGeoAdminPopup',
+    isQueryable: true,
   },
 });
 

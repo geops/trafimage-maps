@@ -34,7 +34,7 @@ function DrawLayerMenu() {
               {layer.get('hasInfos') && <InfosButton selectedInfo={layer} />}
             </>
           )}
-          layerService={layerService}
+          layers={layerService.getLayers()}
           titles={titles}
           t={t}
         />
