@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.1](https://github.com/geops/trafimage-maps/compare/v1.16.0...v1.16.1) (2022-09-20)
+
+
+### Bug Fixes
+
+* allow to use non-integer zoom ([cf5800f](https://github.com/geops/trafimage-maps/commit/cf5800f470cb501b3cc8868cba9e31ad5114342e))
+* allow to use non-integer zoom ([3d11bc4](https://github.com/geops/trafimage-maps/commit/3d11bc4f813751ae4d4221d9f10bffb9b37ef4ce))
+
 ## [1.16.0](https://github.com/geops/trafimage-maps/compare/v1.15.0...v1.16.0) (2022-09-20)
 
 
