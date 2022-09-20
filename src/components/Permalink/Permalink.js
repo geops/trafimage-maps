@@ -169,7 +169,7 @@ class Permalink extends PureComponent {
       return param ? param.replace(/\s+/g, '') : undefined;
     };
 
-    const { z } = parameters;
+    const z = parseFloat(parameters.z);
     let x = parseFloat(parameters.x);
     let y = parseFloat(parameters.y);
     const lon = parseFloat(parameters.lon);
