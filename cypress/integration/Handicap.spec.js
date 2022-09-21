@@ -32,7 +32,7 @@ describe('Handicap Topic', () => {
     cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
 
     // Popup is opened.
-    cy.wait(10000);
+    cy.wait(20000);
     cy.get('.wkp-feature-information').should('be.visible');
   });
 });

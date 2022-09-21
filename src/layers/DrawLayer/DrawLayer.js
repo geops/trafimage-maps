@@ -8,6 +8,7 @@ class DrawLayer extends VectorLayer {
       name: 'Draw layer',
       key: 'draw',
       properties: {
+        isQueryable: true,
         hasInfos: true,
         hideInLegend: true,
         popupComponent: 'DrawPopup',

@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
-import LayerService from 'react-spatial/LayerService';
+import LayerService from './utils/LayerService';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
 import { getTopicConfig } from './config/topics';
@@ -313,7 +313,9 @@ const WebComponent = (props) => {
               (initalVisibility === true || initalVisibility === false) &&
               obj[layer.key] === undefined
             ) {
-              layer.setVisible(initialLayersVisibility[layer.key]);
+              // layer.setVisible(initialLayersVisibility[layer.key]);
+              // eslint-disable-next-line no-param-reassign
+              layer.visible = initialLayersVisibility[layer.key];
               delete initialLayersVisibility[layer.key];
             }
 
@@ -322,7 +324,8 @@ const WebComponent = (props) => {
                 initialLayersVisibility[key] = layer.visible;
               }
               // eslint-disable-next-line no-param-reassign
-              layer.setVisible(value);
+              layer.visible = value;
+              // layer.setVisible(value);
             }
           });
         });

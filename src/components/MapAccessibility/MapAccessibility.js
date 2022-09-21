@@ -26,18 +26,23 @@ const MapAccessibility = ({ layers, map }) => {
       if (evt.which === KEYCODE_TAB && mapTarget === document.activeElement) {
         [tabLayer] = layers
           .filter((l) => l.visible && l.properties.hasAccessibility)
-          .map((l) => l.getVisibleChildren())
+          .map((l) => l.children.filter((ll) => ll.visible))
           .flat();
-        if (tabLayer && tabLayer.isTrackerLayer) {
-          const trajectories = tabLayer.renderedTrajectories;
-          trajectories.sort((a, b) =>
-            a.coordinate && a.coordinate[0] < b.coordinate[0] ? -1 : 1,
+
+        if (tabLayer && tabLayer.trajectories) {
+          const { trajectories } = tabLayer;
+
+          const sortedTrajectories = Object.values(trajectories).sort((a, b) =>
+            a.properties.coordinate &&
+            a.properties.coordinate[0] < b.properties.coordinate[0]
+              ? -1
+              : 1,
           );
           tabFeatureIndex += evt.shiftKey ? -1 : 1;
-          tabFeature = trajectories[tabFeatureIndex];
+          tabFeature = sortedTrajectories[tabFeatureIndex];
 
           if (tabFeature) {
-            tabLayer.hoverVehicleId = tabFeature.id;
+            tabLayer.hoverVehicleId = tabFeature.properties.id;
             evt.preventDefault();
           } else {
             tabLayer.hoverVehicleId = null;
@@ -52,9 +57,9 @@ const MapAccessibility = ({ layers, map }) => {
         evt.which === KEYCODE_ENTER &&
         tabFeature &&
         tabLayer &&
-        tabLayer.isTrackerLayer
+        tabLayer.trajectories
       ) {
-        const { coordinate } = tabFeature;
+        const { coordinate } = tabFeature.properties;
         map.dispatchEvent({ type: 'singleclick', map, coordinate });
         evt.preventDefault();
       }

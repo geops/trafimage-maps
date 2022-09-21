@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.2](https://github.com/geops/trafimage-maps/compare/v1.16.1...v1.16.2) (2022-09-20)
+
+
+### Bug Fixes
+
+* add back url parameters to filter trains on punctuality layers ([0e367e7](https://github.com/geops/trafimage-maps/commit/0e367e7a4c7f8b656b4c5c76b896cc9f36973655))
+* make punctuality layers queryable ([162d3be](https://github.com/geops/trafimage-maps/commit/162d3be24beb92e611f1d76449cd5b23c8e1a4f3))
+* use delay style for full trajectory ([fe51757](https://github.com/geops/trafimage-maps/commit/fe51757f73b2a055aef93de81bbd1b863b5e6819))
+
+### [1.16.1](https://github.com/geops/trafimage-maps/compare/v1.16.0...v1.16.1) (2022-09-20)
+
+
+### Bug Fixes
+
+* allow to use non-integer zoom ([cf5800f](https://github.com/geops/trafimage-maps/commit/cf5800f470cb501b3cc8868cba9e31ad5114342e))
+* allow to use non-integer zoom ([3d11bc4](https://github.com/geops/trafimage-maps/commit/3d11bc4f813751ae4d4221d9f10bffb9b37ef4ce))
+
+## [1.16.0](https://github.com/geops/trafimage-maps/compare/v1.15.0...v1.16.0) (2022-09-20)
+
+
+### Features
+
+* use mobility-toolbox-js v2 ([#1031](https://github.com/geops/trafimage-maps/issues/1031)) ([76b0071](https://github.com/geops/trafimage-maps/commit/76b0071a8ce287b53aae472ea66eda2081b64f3a))
+
+
+### Bug Fixes
+
+* **anlageverantwortliche:** only highlight the current author displayed in the overlay ([d1de023](https://github.com/geops/trafimage-maps/commit/d1de023f2debecc059be101614d5996bce4954aa))
+* **zweitausbildung:** highlight the first selected line even if the overlay is already open ([87ba017](https://github.com/geops/trafimage-maps/commit/87ba017223892ee7bf77d188925fcd1edeef7e51))
+
 ## [1.15.0](https://github.com/geops/trafimage-maps/compare/v1.14.0...v1.15.0) (2022-09-14)
 
 

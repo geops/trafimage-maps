@@ -33,8 +33,8 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  init(map) {
-    super.init(map);
+  attachToMap(map) {
+    super.attachToMap(map);
 
     this.olListenersKeys.push(
       this.on('change:visible', () => {
@@ -52,7 +52,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   /**
    * @override
    */
-  terminate(map) {
+  detachFromMap(map) {
     window.clearTimeout(this.updateTimeout);
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
@@ -70,7 +70,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
         }
       });
     }
-    super.terminate(map);
+    super.detachFromMap(map);
   }
 
   /**

@@ -99,7 +99,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
 
   const baseLayers = layerService
     .getLayers()
-    .filter((layer) => layer.isBaseLayer);
+    .filter((layer) => layer.get('isBaseLayer'));
 
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);

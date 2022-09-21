@@ -2,11 +2,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import LayerService from 'react-spatial/LayerService';
 import { render } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Layer';
 import { Map, View } from 'ol';
+import LayerService from '../../utils/LayerService';
 import TopicLoader from '.';
 
 describe('TopicLoader', () => {

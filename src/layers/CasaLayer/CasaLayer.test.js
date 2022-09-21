@@ -34,7 +34,7 @@ describe('CasaLayer', () => {
       onMouseOver,
     });
     map = new Map({ view: new View({ resution: 5 }) });
-    layer.init(map);
+    layer.attachToMap(map);
   });
 
   test('should convert a style to an object.', () => {

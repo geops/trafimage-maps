@@ -4,12 +4,15 @@ import { kilometrageLayer } from '../ch.sbb.infrastruktur';
 
 export const netzkarteIsb = new TrafimageMapboxLayer({
   name: 'ch.sbb.isb',
-  isBaseLayer: true,
   visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.infrastrukturbetreiber',
+  properties: {
+    isBaseLayer: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
+  },
 });
 
 // Order is important for the legend
@@ -42,6 +45,7 @@ export const isbOther = new MapboxStyleLayer({
     metadata['isb.filter'] &&
     /^other$/.test(metadata['isb.filter']),
   properties: {
+    isQueryable: true,
     hasInfos: true,
     useOverlay: true,
     popupComponent: 'IsbPopup',
@@ -80,6 +84,7 @@ export const isbTVS = new MapboxStyleLayer({
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
   properties: {
+    isQueryable: true,
     hasInfos: true,
     useOverlay: true,
     popupComponent: 'IsbPopup',
