@@ -15,7 +15,7 @@ const ZweitausbildungTopicInfo = ({ t }) => {
       <p>
         {t('Verantwortlich')}:
         <br />
-        {t('HR-POK-SKK-PM (KBC und VSV)')},
+        {`HR-POK-SKK-PM (KBC ${t('und')} VSV)`},
         <br />
         <a href="mailto:pm.skk.kbc@sbb.ch">pm.skk.kbc@sbb.ch</a>.
       </p>
