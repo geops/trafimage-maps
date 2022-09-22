@@ -2,7 +2,7 @@ import ship100GothardPanoramExpress from './GS100_Gotthard_Panorama_Expresses_sh
 import ship150GothardPanoramExpress from './GS150_Gotthard_Panorama_Expresses_shiplines.json';
 
 export default {
-  'Basel SBB - Aarau - Zürich HB - St. Gallen': {
+  'Basel SBB - Aarau - Zürich HB': {
     property: 'hauptlinie',
     shortname: 'IR 37',
     color: '#B8D989',
@@ -27,7 +27,7 @@ export default {
     shortname: 'IR 36',
     color: '#AD227A',
   },
-  'Basel SBB - Luzern - Erstfeld (- Göschenen)': {
+  'Basel SBB - Luzern - Locarno': {
     property: 'hauptlinie',
     shortname: 'IR 26',
     color: '#AF8789',
@@ -47,7 +47,7 @@ export default {
     shortname: 'IC 3',
     color: '#00984A',
   },
-  'Bern - Burgdorf - Olten (- Zürich HB)': {
+  'Bern - Burgdorf - Olten': {
     property: 'hauptlinie',
     shortname: 'IR 17',
     color: '#24529B',
@@ -67,7 +67,7 @@ export default {
     shortname: 'IC 1',
     color: '#E43A2B',
   },
-  'Genève-Aeroport - Lausanne - Bern - Luzern': {
+  'Genève-Aéroport - Lausanne - Bern - Luzern': {
     property: 'hauptlinie',
     shortname: 'IR 15',
     color: '#0CB795',
@@ -77,17 +77,18 @@ export default {
     shortname: 'IR 90',
     color: '#007CA3',
   },
-  'Genève-Aéroport/Lausanne - Biel/Bienne - Zürich HB (- St.Gallen)': {
-    property: 'hauptlinie',
-    shortname: 'IC 5',
-    color: '#F7931D',
-  },
+  'Genève-Aéroport/Lausanne - Biel/Bienne - Zürich HB (- St.Gallen/Rorschach)':
+    {
+      property: 'hauptlinie',
+      shortname: 'IC 5',
+      color: '#F7931D',
+    },
   'Luzern - Zürich HB - Konstanz': {
     property: 'hauptlinie',
     shortname: 'IR 75',
     color: '#744B97',
   },
-  'Luzern - Zürich HB (- Zürich Flughafen)': {
+  'Luzern - Zürich HB (- St.Gallen - Chur)': {
     property: 'hauptlinie',
     shortname: 'IR 70',
     color: '#F390BC',
@@ -97,7 +98,7 @@ export default {
     shortname: 'IC 4',
     color: '#C9A428',
   },
-  'Zürich HB - Zug - Erstfeld (- Göschenen)': {
+  'Zürich HB - Zug - Locarno': {
     property: 'hauptlinie',
     shortname: 'IR 46',
     color: '#006C89',
@@ -112,11 +113,6 @@ export default {
     property: 'touristische_linie',
     color: '#7c00ff',
   },
-  'Bernina Express: Landquart – Klosters Platz – Davos – Poschiavo – Tirano (– Lugano mit Bus)':
-    {
-      property: 'touristische_linie',
-      color: '#00aaff',
-    },
   'Bernina Express: St. Moritz – Poschiavo – Tirano (– Lugano mit Bus)': {
     property: 'touristische_linie',
     color: '#ffff00',
@@ -141,12 +137,11 @@ export default {
     property: 'touristische_linie',
     color: '#ff00fa',
   },
-  'Golden Pass Panoramic: Luzern – Brünig-Hasliberg – Interlaken Ost – Zweisimmen – Montreux':
-    {
-      property: 'touristische_linie',
-      color: '#ff0000',
-    },
-  'Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Locarno':
+  'Golden Pass Express: Interlaken Ost – Zweisimmen – Montreux': {
+    property: 'touristische_linie',
+    color: '#ff0000',
+  },
+  'Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Lugano':
     {
       property: 'touristische_linie',
       color: '#ab267d',
