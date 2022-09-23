@@ -80,6 +80,7 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
 
   constructor(options = {}) {
     const { property } = options.properties.zweitausbildung || {};
+
     const defautStyle = {
       type: 'line',
       filter: ['has', property],

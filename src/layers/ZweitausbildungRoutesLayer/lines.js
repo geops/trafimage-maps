@@ -2,6 +2,11 @@ import ship100GothardPanoramExpress from './GS100_Gotthard_Panorama_Expresses_sh
 import ship150GothardPanoramExpress from './GS150_Gotthard_Panorama_Expresses_shiplines.json';
 
 export default {
+  '(Luzern -) Zürich HB - St.Gallen - Chur': {
+    property: 'hauptlinie',
+    shortname: 'IR 13',
+    color: '#f573c0',
+  },
   'Basel SBB - Aarau - Zürich HB': {
     property: 'hauptlinie',
     shortname: 'IR 37',
@@ -47,10 +52,25 @@ export default {
     shortname: 'IC 3',
     color: '#00984A',
   },
+  'Bern - Biel/Bienne': {
+    property: 'hauptlinie',
+    shortname: 'IR 65',
+    color: '#0c7bc1',
+  },
   'Bern - Burgdorf - Olten': {
     property: 'hauptlinie',
     shortname: 'IR 17',
     color: '#24529B',
+  },
+  'Bern - Burgdorf - Olten - Zürich HB - Chur': {
+    property: 'hauptlinie',
+    shortname: 'IR 35',
+    color: '#0e521c',
+  },
+  'Bern - Neuchâtel - La Chaux-de-Fonds': {
+    property: 'hauptlinie',
+    shortname: 'IR 66',
+    color: '#48b7b0',
   },
   'Bern - Olten - Brugg AG - Zürich HB': {
     property: 'hauptlinie',
@@ -83,6 +103,11 @@ export default {
       shortname: 'IC 5',
       color: '#F7931D',
     },
+  'Interlaken Ost - Bern - Zürich HB - Romanshorn': {
+    property: 'hauptlinie',
+    shortname: 'IC 81',
+    color: '#71a3b8',
+  },
   'Luzern - Zürich HB - Konstanz': {
     property: 'hauptlinie',
     shortname: 'IR 75',
