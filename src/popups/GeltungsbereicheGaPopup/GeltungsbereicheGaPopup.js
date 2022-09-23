@@ -28,15 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     padding: '0 10px 0',
+    maxWidth: 280,
   },
   listItemIcon: {
     minWidth: 20,
     color: theme.palette.text.primary,
-  },
-  abos: {
-    '&::first-letter': {
-      textTransform: 'uppercase',
-    },
   },
 }));
 
@@ -63,6 +59,8 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
+  const products = layer.get('products');
+  const productsRemark = layer.get('productsRemark');
   const validPropertyName = layer.get('validPropertyName');
   const getTextFromValid =
     layer.get('getTextFromValid') ||
@@ -151,24 +149,25 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
         {translations[i18n.language]['Information gilt für diese Produkte']}:
       </Typography>
       <List dense>
-        {t(layer.name)
-          .split(', ')
-          .map((text) => {
-            return (
-              <ListItem className={classes.listItem} key={text}>
-                <ListItemIcon className={classes.listItemIcon}>
-                  <AiTwotoneCopyrightCircle size={7} />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTypographyProps={{ variant: 'body1' }}
-                  className={classes.abos}
-                >
-                  {t(text)}
-                </ListItemText>
-              </ListItem>
-            );
-          })}
+        {products.map((product) => {
+          return (
+            <ListItem className={classes.listItem} key={product}>
+              <ListItemIcon className={classes.listItemIcon}>
+                <AiTwotoneCopyrightCircle size={7} />
+              </ListItemIcon>
+              <ListItemText primaryTypographyProps={{ variant: 'body1' }}>
+                {
+                  // eslint-disable-next-line react/no-danger
+                  <span dangerouslySetInnerHTML={{ __html: t(product) }} />
+                }
+              </ListItemText>
+            </ListItem>
+          );
+        })}
       </List>
+      {productsRemark ? (
+        <Typography variant="body1">{t(productsRemark)}</Typography>
+      ) : null}
     </div>
   );
 };

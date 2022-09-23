@@ -8,9 +8,9 @@ import GeltungsbereicheLegend, {
 } from '../../popups/GeltungsbereicheGaPopup/GeltungsbereicheLegend';
 
 const useStyles = makeStyles(() => ({
-  firstLetter: {
+  lowerCase: {
     '&::first-letter': {
-      textTransform: 'uppercase',
+      textTransform: 'lowercase',
     },
   },
 }));
@@ -39,10 +39,10 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
   const cardsInfos = infos[cardsScope];
   const full = infos[cardsScope]['100'];
   const reduced = infos[cardsScope]['50'];
+  const products = layer.get('products');
+  const productsRemark = layer.get('productsRemark');
   return (
     <div style={{ maxHeight: 450 }}>
-      {/* <Typography paragraph>{comps[i18n.language]}</Typography> */}
-
       {legends.map(({ mots: [mot], validity }) => {
         if (mot === null) {
           return null;
@@ -90,11 +90,24 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
         </tbody>
       </table>
       {full && (
-        <>
-          <Typography paragraph className={classes.firstLetter}>
-            <b>{t(layer.name)}</b>: {t(full)}
-          </Typography>
-        </>
+        <Typography paragraph>
+          {products.map((p, idx, arr) => (
+            <b
+              // eslint-disable-next-line react/no-danger
+              dangerouslySetInnerHTML={{
+                __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
+              }}
+            />
+          ))}
+          {productsRemark ? (
+            <b>
+              , <span className={classes.lowerCase}>{t(productsRemark)}</span>
+            </b>
+          ) : (
+            ''
+          )}
+          : {t(full)}
+        </Typography>
       )}
       <br />
       <br />
@@ -119,8 +132,24 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
             </tbody>
           </table>
           <>
-            <Typography paragraph className={classes.firstLetter}>
-              <b>{t(layer.name)}</b>: {t(reduced)}
+            <Typography paragraph>
+              {products.map((p, idx, arr) => (
+                <b
+                  // eslint-disable-next-line react/no-danger
+                  dangerouslySetInnerHTML={{
+                    __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
+                  }}
+                />
+              ))}
+              {productsRemark ? (
+                <b>
+                  ,{' '}
+                  <span className={classes.lowerCase}>{t(productsRemark)}</span>
+                </b>
+              ) : (
+                ''
+              )}
+              : {t(reduced)}
             </Typography>
           </>
           <br />

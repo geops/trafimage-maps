@@ -28,6 +28,14 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     popupComponent: 'GeltungsbereicheGaPopup',
     validPropertyName: 'valid_ga',
     cardsScope: 'ga',
+    products: [
+      'ch.sbb.geltungsbereiche.products.ga',
+      'ch.sbb.geltungsbereiche.products.s25',
+      'ch.sbb.geltungsbereiche.products.ga-month',
+      'ch.sbb.geltungsbereiche.products.excursion',
+      'ch.sbb.geltungsbereiche.products.hta-day',
+      'ch.sbb.geltungsbereiche.products.hta-combi',
+    ],
   },
 });
 
@@ -47,6 +55,12 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
     cardsScope: 'tk',
     hasInfos: true,
     layerInfoComponent: 'GeltungsbereicheLayerInfo',
+    products: [
+      'ch.sbb.geltungsbereiche.products.saver',
+      'ch.sbb.geltungsbereiche.products.promo',
+      'ch.sbb.geltungsbereiche.products.municipal-day',
+    ],
+    productsRemark: 'ch.sbb.geltungsbereiche.products.tk-no-hta',
   },
 });
 
@@ -72,6 +86,7 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
       }
       return 'Fahrt zum ermässigten Preis';
     },
+    products: ['ch.sbb.geltungsbereiche.products.hta'],
   },
 });
 
@@ -103,6 +118,10 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
       }
       return 'Freie Fahrt';
     },
+    products: [
+      'ch.sbb.geltungsbereiche.products.sts',
+      'ch.sbb.geltungsbereiche.products.sts-half',
+    ],
   },
 });
 
