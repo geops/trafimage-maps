@@ -20,8 +20,9 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter']?.includes('ga.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('ga.line'),
+  group: 'ch.sbb.geltungsbereiche.group',
   properties: {
-    radioGroup: 'ch.sbb.geltungsbereiche.group',
+    isQueryable: true,
     hasInfos: true,
     layerInfoComponent: 'GeltungsbereicheLayerInfo',
     useOverlay: true,
@@ -47,10 +48,11 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter']?.includes('tk.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('tk.line'),
+  group: 'ch.sbb.geltungsbereiche.group',
   properties: {
+    isQueryable: true,
     popupComponent: 'GeltungsbereicheGaPopup',
     useOverlay: true,
-    radioGroup: 'ch.sbb.geltungsbereiche.group',
     validPropertyName: 'valid_ga',
     cardsScope: 'tk',
     hasInfos: true,
@@ -72,10 +74,11 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter']?.includes('hta.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('hta.line'),
+  group: 'ch.sbb.geltungsbereiche.group',
   properties: {
+    isQueryable: true,
     popupComponent: 'GeltungsbereicheGaPopup',
     useOverlay: true,
-    radioGroup: 'ch.sbb.geltungsbereiche.group',
     validPropertyName: 'valid_hta',
     cardsScope: 'hta',
     hasInfos: true,
@@ -98,10 +101,11 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
     metadata && metadata['geltungsbereiche.filter']?.includes('sts.line'),
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('sts.line'),
+  group: 'ch.sbb.geltungsbereiche.group',
   properties: {
+    isQueryable: true,
     popupComponent: 'GeltungsbereicheGaPopup',
     useOverlay: true,
-    radioGroup: 'ch.sbb.geltungsbereiche.group',
     validPropertyName: 'valid_sts',
     cardsScope: 'sts',
     hasInfos: true,

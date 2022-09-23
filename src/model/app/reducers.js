@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import { defaults as defaultInteractions } from 'ol/interaction';
-import LayerService from 'react-spatial/LayerService';
 import OLMap from 'ol/Map';
 import DragPan from 'ol/interaction/DragPan';
+import LayerService from '../../utils/LayerService';
 import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
 import DblPointerClickZoomOut from '../../ol/interaction/DblPointerClickZoomOut';
 import {

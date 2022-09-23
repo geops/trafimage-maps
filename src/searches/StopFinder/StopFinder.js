@@ -112,7 +112,9 @@ class StopFinder extends Search {
         .filter(styleLayersFilter)
         .map(({ source }) => source);
       return (
-        layer.visible && layer.isQueryable && sourceIds.includes('stations')
+        layer.visible &&
+        layer.get('isQueryable') &&
+        sourceIds.includes('stations')
       );
     });
 

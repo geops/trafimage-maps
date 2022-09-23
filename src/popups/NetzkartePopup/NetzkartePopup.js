@@ -86,6 +86,7 @@ function NetzkartePopup({ feature, coordinate }) {
             layer: new Layer({
               key: 'ch.sbb.departure.popup',
               properties: {
+                isQueryable: true,
                 popupComponent: 'DeparturePopup',
                 useOverlay: true,
               },

@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
-import LayerService from 'react-spatial/LayerService';
 import { withStyles, MenuItem } from '@material-ui/core';
+import LayerService from '../../utils/LayerService';
 import Collapsible from '../Collapsible';
 import filters from '../../filters';
 import {
@@ -102,8 +102,8 @@ class TopicMenu extends PureComponent {
       layerTree = (
         <div className="wkp-layer-tree">
           <LayerTree
-            isItemHidden={(l) => l.isBaseLayer || l.get('hideInLegend')}
-            layerService={layerService}
+            isItemHidden={(l) => l.get('isBaseLayer') || l.get('hideInLegend')}
+            layers={layerService.getLayers()}
             t={t}
             titles={{
               layerShow: t('Layer anzeigen'),
@@ -208,7 +208,8 @@ class TopicMenu extends PureComponent {
                     const val = name || key;
                     return val === value || val === value;
                   });
-                  baseLayer.setVisible(true);
+                  // baseLayer.setVisible(true);
+                  baseLayer.visible = true;
                   this.setState({
                     currentBaseLayerKey: baseLayer.name || baseLayer.key,
                   });

@@ -3,12 +3,13 @@ import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 
 export const energieDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.energie.public.data',
-  isQueryable: false,
-  preserveDrawingBuffer: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie.public',
   properties: {
     hideInLegend: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 
@@ -23,6 +24,7 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
       metadata['energie.filter'],
     ),
   properties: {
+    isQueryable: true,
     hasInfos: true,
     layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
@@ -38,6 +40,7 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata && /^anlagen.uw/.test(metadata['energie.filter']),
   properties: {
+    isQueryable: true,
     hasInfos: true,
     layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',

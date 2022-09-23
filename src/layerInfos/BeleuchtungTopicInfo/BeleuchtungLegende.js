@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-
 import LightIcon from '../../img/LightIcon';
 import { lightingMapping } from '../BeleuchtungLayerInfo/lightingMapping';
 
@@ -10,11 +9,6 @@ const useStyles = makeStyles(() => {
   return {
     legendWrapper: {
       margin: '10px 0',
-    },
-    title: {
-      display: 'flex',
-      alignItems: 'center',
-      margin: '5px 0',
     },
     legendRow: {
       display: 'flex',
@@ -43,9 +37,9 @@ export const BeleuchtungLegendeRow = ({ lightClass }) => {
         size={35}
       />
       <div>
-        <h4 className={classes.title}>
+        <Typography variant="h4">
           {`${t('Bahnhofklasse')} ${lightClass}`}
-        </h4>
+        </Typography>
         {t(lightingMapping[lightClass].info[1])} <br />
         <span className={classes.subtext}>{`${
           lightingMapping[lightClass].info[0]

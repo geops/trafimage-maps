@@ -45,7 +45,7 @@ describe('ZoneLayer', () => {
       onMouseOver,
     });
     map = new Map({ view: new View({ resution: 5 }) });
-    layer.init(map);
+    layer.attachToMap(map);
   });
 
   test('should return the correct default style.', () => {

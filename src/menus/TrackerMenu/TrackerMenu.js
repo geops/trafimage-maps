@@ -115,7 +115,7 @@ class TrackerMenu extends Component {
     const { layerService } = this.props;
     this.trackerLayers = layerService
       .getLayersAsFlatArray()
-      .filter((l) => l.isTrackerLayer);
+      .filter((l) => !!l.trajectories);
 
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];

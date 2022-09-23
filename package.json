@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.14.0-beta.10",
+  "version": "1.16.2",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -25,8 +25,9 @@
     "i18next-browser-languagedetector": "6.1.2",
     "i18next-xhr-backend": "3.2.2",
     "jspdf": "2.4.0",
-    "mapbox-gl": "1.13.1",
-    "mobility-toolbox-js": "1.7.13",
+    "mapbox-gl": "npm:maplibre-gl@2.4.0",
+    "maplibre-gl": "npm:empty-npm-package@1.0.0",
+    "mobility-toolbox-js": "2.0.0-beta.52",
     "ol": "6.6.1",
     "proj4": "2.7.5",
     "prop-types": "15.7.2",
@@ -43,7 +44,7 @@
     "react-icons": "^4.3.1",
     "react-redux": "7.2.5",
     "react-select": "5.1.0",
-    "react-spatial": "1.2.2",
+    "react-spatial": "1.2.3-beta.7",
     "react-styleguidist": "11.2.0",
     "react-web-component": "2.0.2",
     "redux": "4.1.1",
@@ -74,6 +75,7 @@
     "css-mediaquery": "0.1.2",
     "cypress": "9.2.0",
     "cypress-enter-plugin": "1.0.1",
+    "cypress-plugin-retries": "1.5.2",
     "cypress-plugin-tab": "1.0.5",
     "documentation": "13.2.5",
     "enzyme": "3.11.0",
@@ -141,12 +143,14 @@
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
     "start:doc": "styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style)/).*/\""
+    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\""
   },
   "browserslist": [
     ">0.2%",
     "not dead",
-    "not op_mini all"
+    "not op_mini all",
+    "not ie <= 11",
+    "not android < 5"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
   "eslintConfig": {

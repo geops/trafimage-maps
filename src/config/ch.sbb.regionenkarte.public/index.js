@@ -7,20 +7,20 @@ import { kilometrageLayer } from '../ch.sbb.infrastruktur';
 export const anlagenverantwortliche = new TrafimageMapboxLayer({
   name: 'ch.sbb.anlagenverantwortliche',
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.anlagenverantwortliche',
-  isBaseLayer: false,
   visible: true,
-  isQueryable: false,
-  preserveDrawingBuffer: true,
   zIndex: -1,
   properties: {
     hideInLegend: true,
+    isBaseLayer: false,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 
 export const regionenkartePublicSegment = new Layer({
   name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
   visible: true,
-  isQueryable: false,
   properties: {
     hasInfos: true,
     layerInfoComponent: 'RegionenkartePublicLayerInfo',
@@ -28,7 +28,6 @@ export const regionenkartePublicSegment = new Layer({
   children: [
     new MapboxStyleLayer({
       name: 'ch.sbb.regionenkarte.lines',
-      isQueryable: true,
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.lines$/.test(id);
@@ -41,6 +40,7 @@ export const regionenkartePublicSegment = new Layer({
         );
       },
       properties: {
+        isQueryable: true,
         hideInLegend: true,
         useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
         popupComponent: 'RegionenkarteSegmentPopup',
@@ -59,7 +59,6 @@ export const regionenkartePublicSegment = new Layer({
     }),
     new MapboxStyleLayer({
       name: 'ch.sbb.regionenkarte.regionintersection',
-      isQueryable: true,
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.regionintersection/.test(id);
@@ -68,6 +67,7 @@ export const regionenkartePublicSegment = new Layer({
         hideInLegend: true,
         showPopupOnHover: true,
         popupComponent: 'RegionenkarteIntersectionPopup',
+        isQueryable: true,
       },
     }),
   ],

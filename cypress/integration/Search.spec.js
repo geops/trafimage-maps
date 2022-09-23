@@ -9,7 +9,7 @@ describe('Search', () => {
     // Input is not visible
     cy.get('.wkp-search-toggle-button').click();
     cy.get('.wkp-search-input input').focus().type('Bern');
-    cy.get('[data-cy=wkp-search-section-title]').should(
+    cy.get('.wkp-search-section-header').should(
       'contain',
       'Ergebnisse', // plural
     );

@@ -21,6 +21,7 @@ export const geltungsbereicheBahnlinien = new GeltungsbereicheLayer({
   properties: {
     popupComponent: 'GeltungsbereichePopup',
     useOverlay: true,
+    isQueryable: true,
   },
 });
 
@@ -32,6 +33,7 @@ export const geltungsbereicheBuslinien = new GeltungsbereicheLayer({
   properties: {
     popupComponent: 'GeltungsbereichePopup',
     useOverlay: true,
+    isQueryable: true,
   },
 });
 
@@ -43,6 +45,7 @@ export const geltungsbereicheOther = new GeltungsbereicheLayer({
   properties: {
     popupComponent: 'GeltungsbereichePopup',
     useOverlay: true,
+    isQueryable: true,
   },
 });
 

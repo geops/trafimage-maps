@@ -24,17 +24,29 @@ class ZweitausbildungRoutesPopup extends PureComponent {
   }
 
   componentDidMount() {
-    const { layer, feature } = this.props;
-    const labels = feature.get(layer.property).split(',');
-    layer.onSelect(labels[0], true);
-    layer.forceRenderList();
-    this.setState({ labelSelected: labels[0] });
+    this.highlightFirstLine();
+  }
+
+  componentDidUpdate(prevProps) {
+    const { feature } = this.props;
+
+    if (feature !== prevProps.feature) {
+      this.highlightFirstLine();
+    }
   }
 
   componentWillUnmount() {
     const { layer } = this.props;
     layer.onSelect();
     layer.forceRenderList();
+  }
+
+  highlightFirstLine() {
+    const { layer, feature } = this.props;
+    const labels = feature.get(layer.property).split(',');
+    layer.onSelect(labels[0], true);
+    layer.forceRenderList();
+    this.setState({ labelSelected: labels[0] });
   }
 
   render() {

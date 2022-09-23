@@ -34,9 +34,9 @@ function LayerInfosDialog(props) {
   let description = null;
   let dataLink = null;
 
-  // use ducktyping instead of `instanceof` since the layer may be created
-  // outside this bundle
-  if (selectedForInfos.isReactSpatialLayer) {
+  // test if get function exist instead of `instanceof` since the layer may be created
+  // outside this bundle.
+  if (selectedForInfos.get) {
     component = selectedForInfos.get('layerInfoComponent');
     description = selectedForInfos.get('description');
     dataLink = selectedForInfos.get('dataLink');
