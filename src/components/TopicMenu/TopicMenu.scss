@@ -116,8 +116,12 @@
     }
 
     .rs-layer-tree-item {
-      height: $menu-item-height;
-      padding: 0;
+      /*
+      Before we set a fixed 30px height but it's not nice when the layer is on multiple line
+      With height auto and a padding the height is the same when the layer's name is on one line
+      */
+      height: auto;
+      padding: 6px 0;
       margin: 0 0 0 4px;
 
       .rs-layer-tree-toggle {

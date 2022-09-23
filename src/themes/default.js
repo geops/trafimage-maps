@@ -48,6 +48,10 @@ const theme = createTheme({
       lineHeight: '22.5px',
     },
     body1: typoBody,
+    body2: {
+      ...typoBody,
+      fontSize: 16,
+    },
     subtitle1: {
       fontSize: 13,
       lineHeight: '19.5px',
@@ -106,6 +110,9 @@ const theme = createTheme({
     },
     MuiMenu: {
       transitionDuration: 0,
+    },
+    MuiListItemText: {
+      primaryTypographyProps: { variant: 'body1' },
     },
   },
   overrides: {
@@ -302,7 +309,8 @@ const theme = createTheme({
       root: {
         fontSize: 14,
         borderBottom: '1px solid #eee',
-        height: 50,
+        minHeight: 50,
+        height: 'auto',
         padding: '0 40px 0 20px',
         display: 'flex',
         alignItems: 'center',

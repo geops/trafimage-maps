@@ -33,6 +33,8 @@ import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
 import IsbTVSLayerInfo from './IsbTVSLayerInfo';
 import IsbOtherLayerInfo from './IsbOtherLayerInfo';
+import GeltungsbereicheTopicInfo from './GeltungsbereicheTopicInfo';
+import GeltungsbereicheLayerInfo from './GeltungsbereicheLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -68,6 +70,8 @@ export { default as SandboxTopicInfo } from './SandboxTopicInfo';
 export { default as IsbTopicInfo } from './IsbTopicInfo';
 export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
 export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
+export { default as GeltungsbereicheTopicInfo } from './GeltungsbereicheTopicInfo';
+export { default as GeltungsbereicheLayerInfo } from './GeltungsbereicheLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -105,4 +109,6 @@ export default {
   IsbTopicInfo,
   IsbTVSLayerInfo,
   IsbOtherLayerInfo,
+  GeltungsbereicheTopicInfo,
+  GeltungsbereicheLayerInfo,
 };

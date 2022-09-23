@@ -108,8 +108,8 @@ class TopicMenu extends PureComponent {
             titles={{
               layerShow: t('Layer anzeigen'),
               layerHide: t('Layer verbergen'),
-              subLayerShow: t('Unterlayer anzeigen'),
-              subLayerHide: t('Unterlayer verbergen'),
+              subLayerShow: t('Layer anzeigen'),
+              subLayerHide: t('Layer verbergen'),
             }}
             renderItemContent={(layer, layerTreeComp) => (
               <>
