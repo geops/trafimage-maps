@@ -61,7 +61,7 @@ class TrackerMenu extends Component {
 
     if (layer !== prevState.layer || feature !== prevState.feature) {
       if (layer && feature) {
-        this.getStopSequence();
+        this.subscribeStopSequence();
       }
     }
   }
@@ -69,7 +69,12 @@ class TrackerMenu extends Component {
   componentWillUnmount() {
     unByKey(this.olEventsKeys);
     this.olEventsKeys = [];
+    const { feature } = this.state;
+    const vehicleId = feature?.get('train_id');
     this.trackerLayers.forEach((layer) => {
+      if (vehicleId) {
+        layer.api.unsubscribeStopSequence(vehicleId, this.onStopSequence);
+      }
       layer.unClick(this.onLayerClick);
     });
   }
@@ -102,13 +107,12 @@ class TrackerMenu extends Component {
     });
   }
 
-  getStopSequence() {
+  subscribeStopSequence() {
     const { feature, layer } = this.state;
     const { api } = layer;
     const vehicleId = feature.get('train_id');
-    api.getStopSequence(vehicleId).then((data) => {
-      this.onStopSequence(data);
-    });
+    // api.unsubscribeStopSequence(vehicleId, this.stopSequence);
+    api.subscribeStopSequence(vehicleId, this.onStopSequence);
   }
 
   initializeClick() {
