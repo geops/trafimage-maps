@@ -172,13 +172,15 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       return;
     }
 
-    const { color } = lines[this.selected];
+    const { color } = lines[this.selected] || {};
     if (!color) {
-      // eslint-disable-next-line no-console
-      console.log(
-        `There is no color defined for ${this.selected}, available labels are `,
-        lines,
-      );
+      if (this.selected !== 'Alle') {
+        // eslint-disable-next-line no-console
+        console.log(
+          `There is no color defined for ${this.selected}, available labels are `,
+          lines,
+        );
+      }
       return;
     }
 
