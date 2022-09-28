@@ -1,13 +1,10 @@
 import {
   RealtimeLayer,
   fullTrajectoryDelayStyle,
-} from 'mobility-toolbox-js/ol';
-
-import {
   createTrackerFilters,
   realtimeDelayStyle,
   sortByDelay,
-} from 'mobility-toolbox-js/common';
+} from 'mobility-toolbox-js/ol';
 
 class TralisLayer extends RealtimeLayer {
   constructor(options) {
