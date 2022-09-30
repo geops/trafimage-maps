@@ -7,7 +7,6 @@ import LanguageSelect from '../LanguageSelect';
 import './Header.scss';
 
 const propTypes = {
-  appBaseUrl: PropTypes.string.isRequired,
   loginUrl: PropTypes.string,
 };
 
@@ -15,11 +14,11 @@ const defaultProps = {
   loginUrl: undefined,
 };
 
-const Header = ({ appBaseUrl, loginUrl }) => {
+const Header = ({ loginUrl }) => {
   return (
     <div className="wkp-header">
       <div className="wkp-header-right">
-        <Login appBaseUrl={appBaseUrl} loginUrl={loginUrl} />
+        <Login loginUrl={loginUrl} />
         <LanguageSelect />
         <div className="wkp-header-sbb-logo-wrapper">
           <SBBLogo focusable={false} className="wkp-header-sbb-logo" />

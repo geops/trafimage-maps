@@ -193,6 +193,8 @@ punctuality.children = [
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
     },
   }),
   new TralisLayer({
@@ -205,6 +207,8 @@ punctuality.children = [
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
     },
   }),
   new TralisLayer({
@@ -216,6 +220,8 @@ punctuality.children = [
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
     },
   }),
 ];
