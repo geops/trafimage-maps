@@ -3,8 +3,8 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 import IconList from '../../components/IconList';
 import lines from '../ZweitausbildungRoutesLayer/lines';
 
-const sourceId = 'base';
-const sourceLayer = 'osm_edges';
+const sourceId = 'ch.sbb.zweitausbildung';
+const sourceLayer = 'ch.sbb.zweitausbildung';
 
 /**
  * Layer for zweitausbildung highlight routes.
