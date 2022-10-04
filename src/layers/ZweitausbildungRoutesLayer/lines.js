@@ -210,6 +210,10 @@ export default {
       property: 'touristische_linie',
       color: '#ff004c',
     },
+  'Luzern–Interlaken Express: Luzern – Interlaken': {
+    property: 'touristische_linie',
+    color: '#97004d',
+  },
   'Mont Blanc Express: Martigny – Le Châtelard – Chamonix': {
     property: 'touristische_linie',
     color: '#ff9f00',
