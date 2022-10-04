@@ -1,7 +1,7 @@
 import {
   RealtimeLayer,
   fullTrajectoryDelayStyle,
-  createTrackerFilters,
+  createRealtimeFilters,
   realtimeDelayStyle,
   sortByDelay,
 } from 'mobility-toolbox-js/ol';
@@ -25,7 +25,7 @@ class TralisLayer extends RealtimeLayer {
       !options.filter
     ) {
       // eslint-disable-next-line no-param-reassign
-      options.filter = createTrackerFilters(
+      options.filter = createRealtimeFilters(
         publishedLineName,
         tripNumber,
         operator,
