@@ -120,8 +120,8 @@ export default {
   },
   'Zürich HB - Schaffhausen': {
     property: 'hauptlinie',
-    shortname: 'IC 4',
-    color: '#C9A428',
+    shortname: 'IC',
+    color: '#4f4c4c',
   },
   'Zürich HB - Zug - Locarno': {
     property: 'hauptlinie',
