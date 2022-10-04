@@ -153,7 +153,6 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return;
     }
-
     this.styleLayers.forEach(({ id }) => {
       mbMap.setPaintProperty(id, 'line-color', 'rgba(0,0,0,0)');
     });
