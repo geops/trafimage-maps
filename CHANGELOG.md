@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.4](https://github.com/geops/trafimage-maps/compare/v1.16.3...v1.16.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* use a specific aerial style for sbb ([c32f97a](https://github.com/geops/trafimage-maps/commit/c32f97ac2ca193aa088c3d6d6d2ae5a8bc72bad8))
+
 ### [1.16.3](https://github.com/geops/trafimage-maps/compare/v1.16.2...v1.16.3) (2022-10-05)
 
 
