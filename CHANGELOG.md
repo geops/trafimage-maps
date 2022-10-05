@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.3](https://github.com/geops/trafimage-maps/compare/v1.16.2...v1.16.3) (2022-10-05)
+
+
+### Bug Fixes
+
+* subscribe stop sequence instead of simply get ([#1036](https://github.com/geops/trafimage-maps/issues/1036)) ([e0aea26](https://github.com/geops/trafimage-maps/commit/e0aea260a6a9ea1b95f16bb0dd2f97f38245ac79))
+
 ### [1.16.2](https://github.com/geops/trafimage-maps/compare/v1.16.1...v1.16.2) (2022-09-20)
 
 
