@@ -32,6 +32,8 @@ export const SET_EMBEDDED = 'SET_EMBEDDED';
 export const SET_DISABLE_COOKIES = 'SET_DISABLE_COOKIES';
 export const SET_SEARCH_URL = 'SET_SEARCH_URL';
 export const SET_SEARCH_INFO_OPEN = 'SET_SEARCH_INFO_OPEN';
+export const SET_APP_BASE_URL = 'SET_APP_BASE_URL';
+export const SET_STATIC_FILES_URL = 'SET_STATIC_FILES_URL';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -53,7 +55,7 @@ export const setFeatureInfo =
 
     if (!data.length) {
       // Clean previous highlight and select styles.
-      featureInfo.forEach(({ layer }) => {
+      featureInfo?.forEach(({ layer }) => {
         if (layer.highlight) {
           layer.highlight([]);
         }
@@ -122,6 +124,13 @@ export const setShortenerUrl = (data) => ({ type: SET_SHORTENER_URL, data });
 export const setSearchUrl = (data) => ({ type: SET_SEARCH_URL, data });
 
 export const setShowPopups = (data) => ({ type: SET_SHOW_POPUPS, data });
+
+export const setAppBaseUrl = (data) => ({ type: SET_APP_BASE_URL, data });
+
+export const setStaticFilesUrl = (data) => ({
+  type: SET_STATIC_FILES_URL,
+  data,
+});
 
 export const setDestinationUrl = (data) => ({
   type: SET_DESTINATION_URL,

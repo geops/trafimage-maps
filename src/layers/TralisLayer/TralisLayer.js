@@ -42,6 +42,18 @@ class TralisLayer extends RealtimeLayer {
       ...options,
     });
   }
+
+  getFeatureInfoAtCoordinate(...props) {
+    // We return only one trajectory
+    return super.getFeatureInfoAtCoordinate(...props).then((featureInfo) => {
+      return {
+        ...featureInfo,
+        features: featureInfo?.features?.length
+          ? [featureInfo.features[0]]
+          : [],
+      };
+    });
+  }
 }
 
 export default TralisLayer;

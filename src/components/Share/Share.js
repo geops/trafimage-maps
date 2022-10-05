@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
@@ -29,14 +28,6 @@ const socialShareConfig = [
   },
 ];
 
-const propTypes = {
-  appBaseUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  appBaseUrl: null,
-};
-
 const replaceParams = (url, language, appBaseUrl) => {
   return url
     .replace('{url}', encodeURIComponent(window.location.href))
@@ -57,7 +48,8 @@ const renderConf = (conf, t, lang, appBaseUrl) => (
   </div>
 );
 
-const Share = ({ appBaseUrl }) => {
+const Share = () => {
+  const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);
   const map = useSelector((state) => state.app.map);
   const { t } = useTranslation();
@@ -76,8 +68,5 @@ const Share = ({ appBaseUrl }) => {
     </div>
   );
 };
-
-Share.propTypes = propTypes;
-Share.defaultProps = defaultProps;
 
 export default React.memo(Share);

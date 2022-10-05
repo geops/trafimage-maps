@@ -27,7 +27,7 @@ const propTypes = {
   apiKeyName: PropTypes.string,
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
-  appBaseUrl: PropTypes.string.isRequired,
+  appBaseUrl: PropTypes.string,
   loginUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
@@ -67,6 +67,7 @@ const defaultProps = {
   permissionInfos: null,
   staticFilesUrl: null,
   searchUrl: null,
+  appBaseUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -338,15 +339,8 @@ class TopicLoader extends Component {
   }
 
   render() {
-    const { loginUrl, history, appBaseUrl, staticFilesUrl } = this.props;
-    return (
-      <TopicElements
-        history={history}
-        loginUrl={loginUrl}
-        appBaseUrl={appBaseUrl}
-        staticFilesUrl={staticFilesUrl}
-      />
-    );
+    const { loginUrl, history } = this.props;
+    return <TopicElements history={history} loginUrl={loginUrl} />;
   }
 }
 
@@ -358,6 +352,12 @@ const mapStateToProps = (state) => ({
   permissionInfos: state.app.permissionInfos,
   cartaroUrl: state.app.cartaroUrl,
   searchUrl: state.app.searchUrl,
+  appBaseUrl: state.app.appBaseUrl,
+  staticFilesUrl: state.app.staticFilesUrl,
+  apiKey: state.app.apiKey,
+  mapsetUrl: state.app.mapsetUrl,
+  shortenerUrl: state.app.shortenerUrl,
+  drawUrl: state.app.drawUrl,
 });
 
 const mapDispatchToProps = {

@@ -7,11 +7,11 @@ describe('Login', () => {
   describe('matches snapshot', () => {
     test('displaying default text', () => {
       const store = global.mockStore({
-        app: {},
+        app: { appBaseUrl: 'http://foo.de' },
       });
       const component = renderer.create(
         <Provider store={store}>
-          <Login appBaseUrl="http://foo.de" />
+          <Login />
         </Provider>,
       );
       const tree = component.toJSON();
@@ -20,11 +20,11 @@ describe('Login', () => {
 
     test('displaying user name', () => {
       const store = global.mockStore({
-        app: { permissionInfos: { user: 'bar' } },
+        app: { permissionInfos: { user: 'bar' }, appBaseUrl: 'http://foo.de' },
       });
       const component = renderer.create(
         <Provider store={store}>
-          <Login appBaseUrl="http://foo.de" />
+          <Login />
         </Provider>,
       );
       const tree = component.toJSON();

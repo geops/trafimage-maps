@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { FaInfo } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
@@ -12,17 +11,9 @@ import DrawRemoveDialog, {
 import Dialog from '../Dialog';
 import LegalLines from '../LegalLines';
 
-const propTypes = {
-  staticFilesUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  staticFilesUrl: null,
-};
-
-const MainDialog = ({ staticFilesUrl }) => {
+const MainDialog = () => {
   const { t } = useTranslation();
-
+  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -64,8 +55,5 @@ const MainDialog = ({ staticFilesUrl }) => {
 
   return null;
 };
-
-MainDialog.propTypes = propTypes;
-MainDialog.defaultProps = defaultProps;
 
 export default MainDialog;
