@@ -28,6 +28,8 @@ import {
   setSearchUrl,
   setConsentGiven,
   setEmbedded,
+  setAppBaseUrl,
+  setStaticFilesUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -368,8 +370,18 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       embedded,
       searchUrl,
+      appBaseUrl,
+      staticFilesUrl,
     } = this.props;
     const { requireConsent } = this.state;
+
+    if (appBaseUrl) {
+      this.store.dispatch(setAppBaseUrl(appBaseUrl));
+    }
+
+    if (staticFilesUrl) {
+      this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
+    }
 
     if (zoom) {
       this.store.dispatch(setZoom(zoom));
@@ -460,6 +472,8 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       embedded,
       searchUrl,
+      appBaseUrl,
+      staticFilesUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -513,6 +527,14 @@ class TrafimageMaps extends React.PureComponent {
     if (embedded !== prevProps.embedded) {
       this.store.dispatch(setEmbedded(embedded));
     }
+
+    if (appBaseUrl !== prevProps.appBaseUrl) {
+      this.store.dispatch(setAppBaseUrl(appBaseUrl));
+    }
+
+    if (staticFilesUrl !== prevProps.staticFilesUrl) {
+      this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
+    }
   }
 
   componentWillUnmount() {
@@ -526,19 +548,12 @@ class TrafimageMaps extends React.PureComponent {
   render() {
     const {
       history,
-      apiKey,
       apiKeyName,
       topics,
-      cartaroUrl,
       loginUrl,
-      appBaseUrl,
       vectorTilesKey,
       vectorTilesUrl,
-      staticFilesUrl,
       activeTopicKey,
-      mapsetUrl,
-      shortenerUrl,
-      drawUrl,
       enableTracking,
       domainConsentId,
     } = this.props;
@@ -557,19 +572,12 @@ class TrafimageMaps extends React.PureComponent {
             {this.matomo && <MatomoTracker />}
             <TopicLoader
               history={history}
-              apiKey={apiKey}
               apiKeyName={apiKeyName}
               topics={topics}
               activeTopicKey={activeTopicKey}
-              cartaroUrl={cartaroUrl}
               loginUrl={loginUrl}
-              appBaseUrl={appBaseUrl}
               vectorTilesKey={vectorTilesKey}
               vectorTilesUrl={vectorTilesUrl}
-              staticFilesUrl={staticFilesUrl}
-              mapsetUrl={mapsetUrl}
-              shortenerUrl={shortenerUrl}
-              drawUrl={drawUrl}
             />
           </Provider>
         </ThemeProvider>

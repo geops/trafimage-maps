@@ -53,7 +53,7 @@ const App = () => {
           header: true,
           mapControls: true,
           menu: true,
-          popup: false,
+          popup: true,
           permalink: false,
           search: false,
           trackerMenu: true

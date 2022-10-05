@@ -1,13 +1,10 @@
 import {
   RealtimeLayer,
   fullTrajectoryDelayStyle,
-} from 'mobility-toolbox-js/ol';
-
-import {
-  createTrackerFilters,
+  createRealtimeFilters,
   realtimeDelayStyle,
   sortByDelay,
-} from 'mobility-toolbox-js/common';
+} from 'mobility-toolbox-js/ol';
 
 class TralisLayer extends RealtimeLayer {
   constructor(options) {
@@ -28,7 +25,7 @@ class TralisLayer extends RealtimeLayer {
       !options.filter
     ) {
       // eslint-disable-next-line no-param-reassign
-      options.filter = createTrackerFilters(
+      options.filter = createRealtimeFilters(
         publishedLineName,
         tripNumber,
         operator,
@@ -37,12 +34,32 @@ class TralisLayer extends RealtimeLayer {
     }
     // TODO this url should be set like others url
     super({
+      isUpdateBboxOnMoveEnd: true,
+      minZoomNonTrain: 14,
       url: 'wss://tralis-tracker-api.geops.io/ws',
       tenant: 'sbb',
       style: realtimeDelayStyle,
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,
       ...options,
+      properties: {
+        isQueryable: true,
+        popupComponent: 'PunctualityPopup',
+        useTrackerMenu: true,
+        ...(options.properties || {}),
+      },
+    });
+  }
+
+  getFeatureInfoAtCoordinate(...props) {
+    // We return only one trajectory
+    return super.getFeatureInfoAtCoordinate(...props).then((featureInfo) => {
+      return {
+        ...featureInfo,
+        features: featureInfo?.features?.length
+          ? [featureInfo.features[0]]
+          : [],
+      };
     });
   }
 }

@@ -13349,10 +13349,10 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@2.0.0-beta.52:
-  version "2.0.0-beta.52"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-2.0.0-beta.52.tgz#391f243b6dabd7bff2acf5a22151b0eca8070b51"
-  integrity sha512-q7DkJvUjwltXZufpuD2D2ckrm8gv+I9fn9sT9B5PEZC+VTWJ9slVILfxaQAEkdBKhp9t5z/Tm6wTfiiZKuagbQ==
+mobility-toolbox-js@2.0.0-beta.53:
+  version "2.0.0-beta.53"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-2.0.0-beta.53.tgz#d512c0cd718fc8fc7946e9e80fe9aa4c8d47a3f5"
+  integrity sha512-9jn7O1TrkvnmMWK3pkx5wHhW60BcrTQiOmGOgf73j9wRah9SSmrzBkDn8RQv/MaYxZcyIfFV/8NtJLwqTLcGdA==
   dependencies:
     "@turf/helpers" "^6.5.0"
     "@turf/transform-rotate" "^6.5.0"
@@ -16162,10 +16162,10 @@ react-simple-code-editor@^0.10.0:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.10.0.tgz#73e7ac550a928069715482aeb33ccba36efe2373"
   integrity sha512-bL5W5mAxSW6+cLwqqVWY47Silqgy2DKDTR4hDBrLrUqC5BXc29YVx17l2IZk5v36VcDEq1Bszu2oHm1qBwKqBA==
 
-react-spatial@1.2.3-beta.7:
-  version "1.2.3-beta.7"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.2.3-beta.7.tgz#2992acca2fbf97db2e51bf362db896e1ecdc1735"
-  integrity sha512-oUqVp3DvhitF8gYtk+5PAZ2wpbJujzNLl+g0k/7Depn/3tAAwbt1jDyUrAbDbTQMr1WoOBkATkB5qRLRQyPllA==
+react-spatial@1.2.3-beta.8:
+  version "1.2.3-beta.8"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.2.3-beta.8.tgz#651e37e35b1e0d613d01446441d348528f3c4f88"
+  integrity sha512-NY+MLMaSyjysX3yU20RfG0HqJfcw9tPi09YC+fThf9D/DqFsRpgMIGKvFbYT60GcHt6aGfY8Lou+47xgMWULsw==
   dependencies:
     "@geops/geops-ui" "0.1.13"
     "@material-ui/core" "4.12.3"

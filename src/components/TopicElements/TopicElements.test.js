@@ -44,6 +44,8 @@ describe('TopicElements', () => {
         layerService: new LayerService([]),
         topics: [topic],
         activeTopic: topic,
+        appBaseUrl: 'foo.ch',
+        staticFilesUrl: 'staticfoo.ch',
       },
       map: { layers: [], drawLayer: new Layer() },
     };
@@ -60,14 +62,17 @@ describe('TopicElements', () => {
     };
     const store = global.mockStore({
       ...dfltStore,
-      app: { ...dfltStore.app, activeTopic: tpc },
+      app: {
+        ...dfltStore.app,
+        activeTopic: tpc,
+      },
     });
     let wrapper = null;
     await act(async () => {
       wrapper = mount(
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <TopicElements appBaseUrl="foo.ch" staticFilesUrl="staticfoo.ch" />
+            <TopicElements />
           </Provider>
         </ThemeProvider>,
       );
@@ -132,7 +137,7 @@ describe('TopicElements', () => {
       wrapper = mount(
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <TopicElements appBaseUrl="foo.ch" staticFilesUrl="staticfoo.ch" />
+            <TopicElements />
           </Provider>
         </ThemeProvider>,
       );
@@ -198,7 +203,7 @@ describe('TopicElements', () => {
       wrapper = mount(
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <TopicElements appBaseUrl="foo.ch" staticFilesUrl="staticfoo.ch" />
+            <TopicElements />
           </Provider>
         </ThemeProvider>,
       );
@@ -208,15 +213,15 @@ describe('TopicElements', () => {
     expect(wrapper.find('Memo(Footer)').length).toBe(1);
     expect(wrapper.find('BaseLayerSwitcher').length).toBe(1);
     expect(wrapper.find('Permalink').length).toBe(2);
-    expect(wrapper.find('Popup').length).toBe(1);
+    expect(wrapper.find('Popup').length).toBe(0);
     expect(wrapper.find('Overlay').length).toBe(1);
     expect(wrapper.find('Memo(Search)').length).toBe(1);
 
     // Menu
     expect(wrapper.find('TopicsMenu').length).toBe(1);
-    expect(wrapper.find('TrackerMenu').length).toBe(1);
-    expect(wrapper.find('FeatureMenu').length).toBe(1);
-    expect(wrapper.find('ShareMenu').length).toBe(1);
+    expect(wrapper.find('TrackerMenu').length).toBe(0); // TrackerMenu onl ydisplayed if there is a featureinfo
+    expect(wrapper.find('FeatureMenu').length).toBe(2); // FeatureMenu + TrackerMenu
+    expect(wrapper.find('ShareMenu').length).toBe(0);
     expect(wrapper.find('Memo(DrawMenu)').length).toBe(1);
     expect(wrapper.find('Memo(ExportMenu)').length).toBe(1);
 

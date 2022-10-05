@@ -37,6 +37,8 @@ import {
   SET_DISABLE_COOKIES,
   SET_SEARCH_URL,
   SET_SEARCH_INFO_OPEN,
+  SET_APP_BASE_URL,
+  SET_STATIC_FILES_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -253,6 +255,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         searchInfoOpen: action.data,
+      };
+    case SET_APP_BASE_URL:
+      return {
+        ...state,
+        appBaseUrl: action.data,
+      };
+    case SET_STATIC_FILES_URL:
+      return {
+        ...state,
+        staticFilesUrl: action.data,
       };
     default:
       return {
