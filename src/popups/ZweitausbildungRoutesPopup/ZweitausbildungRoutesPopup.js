@@ -56,35 +56,37 @@ class ZweitausbildungRoutesPopup extends PureComponent {
 
     return (
       <div className="wkp-zweitausbildung-routes-popup">
-        {labels.map((label) => (
-          <div
-            className={`wkp-zweitausbildung-routes-popup-row${
-              labelSelected === label ? ' highlight' : ''
-            }`}
-            key={label}
-            onMouseEnter={() => {
-              layer.onSelect(label);
-              layer.forceRenderList();
-              this.setState({ labelSelected: label });
-            }}
-          >
-            {layer.lines[label].shortname ? (
-              <span className="wkp-zweitausbildung-routes-popup-image">
-                <img
-                  src={`${staticFilesUrl}/img/layers/zweitausbildung/${layer.lines[label].shortname}.png`}
-                  height="16"
-                  width="42"
-                  draggable="false"
-                  alt={t('Kein Bildtext')}
-                />
-              </span>
-            ) : null}
-            <b>{label.split(':')[0]}</b>
-            <div className="wkp-zweitausbildung-routes-popup-desc">
-              {label.split(':')[1]}
+        {labels.map((label) => {
+          return (
+            <div
+              className={`wkp-zweitausbildung-routes-popup-row${
+                labelSelected === label ? ' highlight' : ''
+              }`}
+              key={label}
+              onMouseEnter={() => {
+                layer.onSelect(label);
+                layer.forceRenderList();
+                this.setState({ labelSelected: label });
+              }}
+            >
+              {layer.lines[label]?.shortname ? (
+                <span className="wkp-zweitausbildung-routes-popup-image">
+                  <img
+                    src={`${staticFilesUrl}/img/layers/zweitausbildung/${layer.lines[label].shortname}.png`}
+                    height="16"
+                    width="42"
+                    draggable="false"
+                    alt={t('Kein Bildtext')}
+                  />
+                </span>
+              ) : null}
+              <b>{label.split(':')[0]}</b>
+              <div className="wkp-zweitausbildung-routes-popup-desc">
+                {label.split(':')[1]}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     );
   }
