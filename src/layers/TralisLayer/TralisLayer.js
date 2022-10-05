@@ -34,12 +34,20 @@ class TralisLayer extends RealtimeLayer {
     }
     // TODO this url should be set like others url
     super({
+      isUpdateBboxOnMoveEnd: true,
+      minZoomNonTrain: 14,
       url: 'wss://tralis-tracker-api.geops.io/ws',
       tenant: 'sbb',
       style: realtimeDelayStyle,
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,
       ...options,
+      properties: {
+        isQueryable: true,
+        popupComponent: 'PunctualityPopup',
+        useTrackerMenu: true,
+        ...(options.properties || {}),
+      },
     });
   }
 

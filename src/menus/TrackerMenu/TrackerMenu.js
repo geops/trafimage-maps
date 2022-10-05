@@ -8,6 +8,7 @@ import FeatureMenu from '../../components/FeatureMenu';
  */
 const TrackerMenu = (props) => {
   const { t } = useTranslation();
+
   return (
     <FeatureMenu
       // eslint-disable-next-line react/jsx-props-no-spreading

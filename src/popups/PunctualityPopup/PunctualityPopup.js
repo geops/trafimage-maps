@@ -33,19 +33,15 @@ const PunctualityPopup = ({ feature, layer }) => {
       if (layer && trainId) {
         // Unsubscribe without cb function, because it does not work properly.
         layer.api.unsubscribeStopSequence(trainId);
+
+        // Clear the highlighted trajectory
+        layer.vectorLayer.getSource().clear();
+        // eslint-disable-next-line no-param-reassign
+        layer.selectedVehicleId = null;
       }
       setLineInfos();
     };
   }, [dispatch, layer, feature]);
-
-  useEffect(() => {
-    return () => {
-      if (layer) {
-        // eslint-disable-next-line no-param-reassign
-        layer.selectedVehicleId = null;
-      }
-    };
-  }, [layer]);
 
   if (!lineInfos) {
     return null;
