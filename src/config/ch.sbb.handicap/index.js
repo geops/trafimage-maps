@@ -96,7 +96,7 @@ export default [
   }),
   netzkarteAerial.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'aerial_sbb_ch.sbb.handicap',
+    style: 'aerial_sbb_sbbkey_ch.sbb.handicap',
   }),
   swisstopoLandeskarte.clone({
     mapboxLayer: handicapDataLayer,

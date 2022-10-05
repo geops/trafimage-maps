@@ -62,7 +62,7 @@ export const netzkarteAerial = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'aerial_sbb_ch.sbb.netzkarte.aerial',
+  style: 'aerial_sbb_sbbkey_ch.sbb.netzkarte.aerial',
 });
 
 export const swisstopoSwissImage = new MapboxStyleLayer({
@@ -193,6 +193,8 @@ punctuality.children = [
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
     },
   }),
   new TralisLayer({
@@ -205,6 +207,8 @@ punctuality.children = [
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
     },
   }),
   new TralisLayer({
@@ -216,6 +220,8 @@ punctuality.children = [
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
     },
   }),
 ];

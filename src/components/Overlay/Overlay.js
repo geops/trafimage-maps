@@ -77,12 +77,10 @@ const useStyles = makeStyles({
 });
 
 const propTypes = {
-  appBaseUrl: PropTypes.string.isRequired,
-  staticFilesUrl: PropTypes.string.isRequired,
   elements: PropTypes.shape().isRequired,
 };
 
-const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
+const Overlay = ({ elements }) => {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
 
@@ -162,20 +160,10 @@ const Overlay = ({ elements, appBaseUrl, staticFilesUrl }) => {
               top: <div className={classes.resizeHandler}>&mdash;</div>,
             }}
           >
-            <FeatureInformation
-              featureInfo={filtered}
-              appBaseUrl={appBaseUrl}
-              staticFilesUrl={staticFilesUrl}
-            />
+            <FeatureInformation featureInfo={filtered} />
           </Resizable>
         )}
-        {!isMobile && (
-          <FeatureInformation
-            featureInfo={filtered}
-            appBaseUrl={appBaseUrl}
-            staticFilesUrl={staticFilesUrl}
-          />
-        )}
+        {!isMobile && <FeatureInformation featureInfo={filtered} />}
       </Drawer>
     </div>
   );

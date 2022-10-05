@@ -7,9 +7,7 @@ exports[`Header match snapshots 1`] = `
   <div
     className="wkp-header-right"
   >
-    <Memo(Login)
-      appBaseUrl="http://foo.de"
-    />
+    <Memo(Login) />
     <Memo(LanguageSelect) />
     <div
       className="wkp-header-sbb-logo-wrapper"

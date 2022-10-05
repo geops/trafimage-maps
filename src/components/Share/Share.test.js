@@ -17,12 +17,13 @@ describe('Share', () => {
           key: 'test',
         },
         language: 'de',
+        appBaseUrl: 'https://maps.trafimage.ch',
       },
     });
 
     const component = renderer.create(
       <Provider store={store}>
-        <Share appBaseUrl="https://maps.trafimage.ch" />
+        <Share />
       </Provider>,
     );
     const tree = component.toJSON();

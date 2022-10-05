@@ -30,16 +30,34 @@
   }
 
   .rt-route-schedule {
+    width: calc(100% - 20px);
+
+    .rt-route-header {
+      padding: 0;
+    }
+
+    .rt-route-body {
+      padding: 0 10px;
+    }
+
+    .rt-route-footer {
+      padding: 20px 10px;
+      font-size: $footer-font-size;
+    }
+
     .rt-route-icon {
       display: table;
+    }
+    // Use proper font for bold
+    .rt-route-header .rt-route-title .rt-route-name,
+    .rt-route-station:first-child,
+    .rt-route-station:last-child {
+      font-family: 'SBBWeb-Bold', Arial, sans-serif;
+      font-weight: normal;
     }
   }
 
   .rt-tracker-control {
     padding: 15px 10px 0 10px;
-  }
-
-  .rt-route-footer {
-    font-size: $footer-font-size;
   }
 }

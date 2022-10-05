@@ -6,8 +6,9 @@ import { ReactComponent as SBBUser } from '../../img/sbb/user_92_large.svg';
 
 import './Login.scss';
 
-const Login = ({ appBaseUrl, loginUrl }) => {
+const Login = ({ loginUrl }) => {
   const { t } = useTranslation();
+  const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
 
@@ -41,7 +42,6 @@ const Login = ({ appBaseUrl, loginUrl }) => {
 };
 
 Login.propTypes = {
-  appBaseUrl: PropTypes.string.isRequired,
   loginUrl: PropTypes.string,
 };
 

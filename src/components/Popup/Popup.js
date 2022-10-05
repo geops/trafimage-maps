@@ -1,19 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 import { Point, LineString } from 'ol/geom';
 import RSPopup from 'react-spatial/components/Popup';
 import FeatureInformation from '../FeatureInformation';
-
-const propTypes = {
-  appBaseUrl: PropTypes.string,
-  staticFilesUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  appBaseUrl: null,
-  staticFilesUrl: null,
-};
 
 const getPopupCoordinates = (
   map,
@@ -33,7 +22,7 @@ const getPopupCoordinates = (
   return coordinate;
 };
 
-const Popup = ({ appBaseUrl, staticFilesUrl }) => {
+const Popup = () => {
   const map = useSelector((state) => state.app.map);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const showPopups = useSelector((state) => state.app.showPopups);
@@ -50,7 +39,12 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
   const filtered = featureInfo.filter((info) => {
     const { layer, features } = info;
 
-    if (layer.get('popupComponent') && !layer.get('useOverlay')) {
+    if (
+      layer.get('popupComponent') &&
+      !layer.get('useOverlay') &&
+      !layer.get('useMenu') &&
+      !layer.get('useTrackerMenu')
+    ) {
       if (typeof layer.hidePopup === 'function') {
         return features.find((f) => !layer.hidePopup(f, layer, featureInfo));
       }
@@ -106,16 +100,9 @@ const Popup = ({ appBaseUrl, staticFilesUrl }) => {
       popupCoordinate={coord}
       map={map}
     >
-      <FeatureInformation
-        featureInfo={filtered}
-        appBaseUrl={appBaseUrl}
-        staticFilesUrl={staticFilesUrl}
-      />
+      <FeatureInformation featureInfo={filtered} />
     </RSPopup>
   );
 };
-
-Popup.propTypes = propTypes;
-Popup.defaultProps = defaultProps;
 
 export default React.memo(Popup);
