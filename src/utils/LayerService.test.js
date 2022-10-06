@@ -150,7 +150,7 @@ describe('LayerService', () => {
   });
 
   test('should unlisten keys in LayerService', () => {
-    expect(layerService.keys.length).toBe(7);
+    expect(layerService.keys.length).toBe(14);
     layerService.setLayers([]);
     expect(layerService.keys.length).toBe(0);
   });

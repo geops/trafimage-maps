@@ -126,62 +126,62 @@ export default class LayerService {
             return cb(evt.target);
           });
         }),
-        // layer.on('change:visible', (evt) => {
-        //   const { visible } = evt.target;
+        layer.on('change:visible', (evt) => {
+          const { visible } = evt.target;
 
-        //   // Apply to siblings only if it's a radio group.
-        //   if (
-        //     !evt.stopPropagationSiblings &&
-        //     layer.get('radioGroup') &&
-        //     visible
-        //   ) {
-        //     const siblings = this.getRadioGroupLayers(
-        //       layer.get('radioGroup'),
-        //     ).filter((l) => {
-        //       return l !== layer;
-        //     });
+          // Apply to siblings only if it's a radio group.
+          if (
+            !evt.stopPropagationSiblings &&
+            layer.get('radioGroup') &&
+            visible
+          ) {
+            const siblings = this.getRadioGroupLayers(
+              layer.get('radioGroup'),
+            ).filter((l) => {
+              return l !== layer;
+            });
 
-        //     siblings.forEach((s) => {
-        //       if (
-        //         visible &&
-        //         s.get('radioGroup') &&
-        //         evt.target.get('radioGroup') === s.get('radioGroup')
-        //       ) {
-        //         // eslint-disable-next-line no-param-reassign
-        //         s.visible = false;
-        //       }
-        //     });
-        //   }
+            siblings.forEach((s) => {
+              if (
+                visible &&
+                s.get('radioGroup') &&
+                evt.target.get('radioGroup') === s.get('radioGroup')
+              ) {
+                // eslint-disable-next-line no-param-reassign
+                s.visible = false;
+              }
+            });
+          }
 
-        //   // Apply to children
-        //   if (!evt.stopPropagationDown && layer.children) {
-        //     layer.children.forEach((child) => {
-        //       // eslint-disable-next-line no-param-reassign
-        //       child.visible = visible;
-        //     });
-        //   }
+          // Apply to children
+          if (!evt.stopPropagationDown && layer.children) {
+            layer.children.forEach((child) => {
+              // eslint-disable-next-line no-param-reassign
+              child.visible = visible;
+            });
+          }
 
-        //   // Apply to parent only if:
-        //   //   - a child is visible
-        //   //   - all children are hidden
-        //   const parentLayer = this.getParent(layer);
+          // Apply to parent only if:
+          //   - a child is visible
+          //   - all children are hidden
+          const parentLayer = this.getParent(layer);
 
-        //   if (
-        //     !evt.stopPropagationUp &&
-        //     parentLayer &&
-        //     (visible ||
-        //       (!visible &&
-        //         !parentLayer.children.find((c) => {
-        //           return c.visible;
-        //         })))
-        //   ) {
-        //     parentLayer.visible = visible;
-        //   }
+          if (
+            !evt.stopPropagationUp &&
+            parentLayer &&
+            (visible ||
+              (!visible &&
+                !parentLayer.children.find((c) => {
+                  return c.visible;
+                })))
+          ) {
+            parentLayer.visible = visible;
+          }
 
-        //   (this.callbacks['change:visible'] || []).forEach((cb) => {
-        //     return cb(evt.target);
-        //   });
-        // }),
+          (this.callbacks['change:visible'] || []).forEach((cb) => {
+            return cb(evt.target);
+          });
+        }),
       );
     });
   }
