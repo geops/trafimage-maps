@@ -325,7 +325,7 @@ class Map extends PureComponent {
           center={center}
           resolution={resolution}
           extent={extent}
-          layers={[...layers]}
+          layers={layers}
           zoom={zoom}
           map={map}
           ariaLabel={t('Karte')}
