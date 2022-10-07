@@ -75,7 +75,6 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  const layerService = useSelector((state) => state.app.layerService);
   const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
   const [node, setNode] = useState(null);
@@ -95,11 +94,9 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
     return null;
   }
 
-  const { maxZoom } = activeTopic;
+  const { maxZoom, layers } = activeTopic;
 
-  const baseLayers = layerService
-    .getLayers()
-    .filter((layer) => layer.get('isBaseLayer'));
+  const baseLayers = (layers || []).filter((layer) => layer.get('isBaseLayer'));
 
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
