@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
+import { getLayersAsFlatArray } from 'mobility-toolbox-js/common';
 import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
@@ -31,24 +32,29 @@ const defaultProps = {
 };
 
 function TopicsMenu({ children, menuHeight, bodyElementRef }) {
-  const layerService = useSelector((state) => state.app.layerService);
   const menuOpen = useSelector((state) => state.app.menuOpen);
+  const layers = useSelector((state) => state.map.layers || []);
   const topics = useSelector((state) => state.app.topics);
   const dispatch = useDispatch();
 
   useEffect(() => {
     let timeout;
-    const key = layerService.on('change:visible', () => {
+    const cb = () => {
       // Update link after permalink has been updated.
       timeout = setTimeout(() => {
         dispatch(updateDrawEditLink());
       }, 50);
-    });
+    };
+
+    const keys = getLayersAsFlatArray(layers).map((layer) =>
+      layer.on('change:visible', cb),
+    );
+
     return () => {
-      unByKey(key);
+      unByKey(keys);
       clearTimeout(timeout);
     };
-  }, [layerService, dispatch]);
+  }, [layers, dispatch]);
 
   if (!topics || !topics.length) {
     return null;
@@ -71,11 +77,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
         <div className="wkp-topics-menu-body">
           <DrawLayerMenu />
           {topics.map((topic) => (
-            <TopicMenu
-              key={topic.key}
-              layerService={layerService}
-              topic={topic}
-            />
+            <TopicMenu key={topic.key} topic={topic} />
           ))}
         </div>
         {children}

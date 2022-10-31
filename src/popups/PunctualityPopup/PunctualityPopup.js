@@ -12,8 +12,8 @@ const PunctualityPopup = ({ feature, layer }) => {
 
   useEffect(() => {
     let trainId;
-    const onStopSequence = (stopSequence) => {
-      if (stopSequence[0]) {
+    const onStopSequence = ({ content: stopSequence }) => {
+      if (stopSequence && stopSequence[0]) {
         // eslint-disable-next-line no-param-reassign
         stopSequence[0].backgroundColor = stopSequence[0].stroke;
         // eslint-disable-next-line no-param-reassign

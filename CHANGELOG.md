@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.16.5](https://github.com/geops/trafimage-maps/compare/v1.16.4...v1.16.5) (2022-10-07)
+
+
+### Bug Fixes
+
+* display correct subtitle in menu header ([#1037](https://github.com/geops/trafimage-maps/issues/1037)) ([eac8f78](https://github.com/geops/trafimage-maps/commit/eac8f7835dccacef711efeb5ddc37c5e7b909343))
+
 ### [1.16.4](https://github.com/geops/trafimage-maps/compare/v1.16.3...v1.16.4) (2022-10-05)
 
 

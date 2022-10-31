@@ -31,11 +31,11 @@ const styles = (theme) => ({
 
 const propTypes = {
   topic: PropTypes.shape().isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
 
   // mapStateToProps
   menuOpen: PropTypes.bool.isRequired,
   activeTopic: PropTypes.shape().isRequired,
+  layerService: PropTypes.instanceOf(LayerService).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -251,6 +251,7 @@ const mapStateToProps = (state) => ({
   menuOpen: state.app.menuOpen,
   map: state.app.map,
   activeTopic: state.app.activeTopic,
+  layerService: state.app.layerService,
 });
 
 const mapDispatchToProps = {
