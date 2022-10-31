@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.0](https://github.com/geops/trafimage-maps/compare/v1.16.5...v1.17.0) (2022-10-31)
+
+
+### Features
+
+* make zweitausbildung topic public ([c9e57de](https://github.com/geops/trafimage-maps/commit/c9e57de409fa8236c213a811a840a25a388f6165))
+
+
+### Bug Fixes
+
+* **zweitausbildung:** highlight the first selected line even if the overlay is already open ([f7dc932](https://github.com/geops/trafimage-maps/commit/f7dc932ee9b1d06412d49cc2cc4d979116f34640))
+* **zweitausbildung:** update responsible and add date of the last data update ([3a4bbeb](https://github.com/geops/trafimage-maps/commit/3a4bbebe8bbcc46d429c49c6a3b0851e6cf85919))
+
 ### [1.16.5](https://github.com/geops/trafimage-maps/compare/v1.16.4...v1.16.5) (2022-10-07)
 
 
