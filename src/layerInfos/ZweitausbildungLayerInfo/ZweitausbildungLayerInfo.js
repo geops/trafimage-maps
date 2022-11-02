@@ -1,66 +1,53 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
-  staticFilesUrl: PropTypes.string.isRequired,
 };
 
-const useStyles = makeStyles(() => ({
-  legend: {
-    display: 'table',
-    marginTop: '1em',
-
-    '& img': {
-      verticalAlign: 'middle',
-      paddingRight: 10,
-    },
-  },
-}));
-
-const ZweitausbildungLayerInfo = ({ properties, staticFilesUrl }) => {
+const ZweitausbildungLayerInfo = ({ properties: layer }) => {
   const { t } = useTranslation();
-  const { infos } = properties.get('zweitausbildung');
-  const { title, legend } = infos;
-  const classes = useStyles();
+  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
+  const {
+    infos: { title, legend },
+  } = layer.get('zweitausbildung');
 
   return (
     <div>
       <p>{t(title)}</p>
-      {legend ? (
-        <div className={classes.legend}>
+      {!!legend && (
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
           <img
             src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
-            draggable="false"
-            alt={t('Kein Bildtext')}
+            alt={t(legend.name)}
           />
           {t(legend.name)}
         </div>
-      ) : null}
+      )}
       <p>
         {t('Datengrundlage')}:
         <br />
         <a
-          href="http://espace.sbb.ch/teams/526/1775/_layouts/DocIdRedir.aspx?ID=T0526-1440065995-48"
+          href={t('overview_list_url')}
           rel="noopener noreferrer"
           target="_blank"
         >
-          {t('Link Übersichtsliste Geografie im Produkte-eSpace VM HR-BIL')}
+          {t('Übersichtsliste Geografie')}
         </a>
       </p>
       <p>
         {t('Aktualisierungs-Zyklus')}:
         <br />
         {t(
-          'Gemäss Life Cycle Management des Produktemanagements von HR-BIL-SKK(-PM)',
+          'Gemäss Life Cycle Management des Produktmanagements von HR-POK-SKK',
         )}
       </p>
       <p>
         {t('Verantwortlich')}:
         <br />
-        {t('HR-BIL-SKK-PM (VM und VS)')},
+        {t('HR-POK-SKK-PM1 (KBC und VSV)')},
         <br />
         <a href="mailto:pm.skk.kbc@sbb.ch">pm.skk.kbc@sbb.ch</a>.
       </p>
