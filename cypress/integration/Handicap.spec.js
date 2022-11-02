@@ -13,7 +13,7 @@ describe('Handicap Topic', () => {
     cy.viewport(1440, 900);
     cy.get('.wkp-feature-information').should('not.exist');
 
-    cy.get('.wkp-topic-menu-item').eq(2).click();
+    cy.get('.wkp-topic-menu-item').eq(3).click();
     cy.wait(1000);
 
     // In handicap topic
