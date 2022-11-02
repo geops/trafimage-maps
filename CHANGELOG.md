@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.1](https://github.com/geops/trafimage-maps/compare/v1.17.0...v1.17.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* **zweitausbildung:** change text in layer info ([#1038](https://github.com/geops/trafimage-maps/issues/1038)) ([8fc1072](https://github.com/geops/trafimage-maps/commit/8fc10729676ee34a106c54aaf797fe99b5cab695))
+
 ## [1.17.0](https://github.com/geops/trafimage-maps/compare/v1.16.5...v1.17.0) (2022-10-31)
 
 
