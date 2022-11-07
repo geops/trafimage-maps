@@ -206,11 +206,11 @@ export const zweitausbildungRoutes = new Layer({
       key: 'ch.sbb.zweitausbildung.tourist.routes.group',
       visible: false,
       mapboxLayer: zweitausbildungDataLayer,
+      group: 'zweitausbildungRoutes',
       properties: {
         isAlwaysExpanded: true,
         hasInfos: true,
         layerInfoComponent: 'ZweitausbildungRoutesSubLayerInfo',
-        group: 'zweitausbildungRoutes',
         zweitausbildung: {
           property: 'touristische_linie',
           infos: {

@@ -63,7 +63,7 @@ describe('A link to data', () => {
   it('is available for construction topic', () => {
     // Click info button
     cy.get(
-      ':nth-child(2) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
+      ':nth-child(3) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
     ).click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/construction-projects/information/"]',
@@ -84,7 +84,7 @@ describe('A link to data', () => {
   it('is available for handicap topic', () => {
     // Click info button
     cy.get(
-      ':nth-child(3) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
+      ':nth-child(4) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
     ).click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/"]',

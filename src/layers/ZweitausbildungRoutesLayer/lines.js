@@ -2,107 +2,134 @@ import ship100GothardPanoramExpress from './GS100_Gotthard_Panorama_Expresses_sh
 import ship150GothardPanoramExpress from './GS150_Gotthard_Panorama_Expresses_shiplines.json';
 
 export default {
-  'Basel SBB - Aarau - Zürich HB - St. Gallen': {
+  '(Luzern –) Zürich HB – St.Gallen – Chur': {
+    property: 'hauptlinie',
+    shortname: 'IR 13',
+    color: '#f573c0',
+  },
+  'Basel SBB – Aarau – Zürich HB': {
     property: 'hauptlinie',
     shortname: 'IR 37',
     color: '#B8D989',
   },
-  'Basel SBB - Bern - Brig': {
+  'Basel SBB – Bern – Brig': {
     property: 'hauptlinie',
     shortname: 'IC 6',
     color: '#8BC63E',
   },
-  'Basel SBB - Bern - Interlaken Ost': {
+  'Basel SBB – Bern – Interlaken Ost': {
     property: 'hauptlinie',
     shortname: 'IC 61',
     color: '#EF59A1',
   },
-  'Basel SBB - Biel/Bienne': {
+  'Basel SBB – Biel/Bienne': {
     property: 'hauptlinie',
     shortname: 'IC 51',
     color: '#B00D15',
   },
-  'Basel SBB - Brugg AG - Zürich HB (- Zürich Flughafen)': {
+  'Basel SBB – Brugg AG – Zürich HB (– Zürich Flughafen)': {
     property: 'hauptlinie',
     shortname: 'IR 36',
     color: '#AD227A',
   },
-  'Basel SBB - Luzern - Erstfeld (- Göschenen)': {
+  'Basel SBB – Luzern – Locarno': {
     property: 'hauptlinie',
     shortname: 'IR 26',
     color: '#AF8789',
   },
-  'Basel SBB - Luzern - Lugano': {
+  'Basel SBB – Luzern – Lugano': {
     property: 'hauptlinie',
     shortname: 'IC 21',
     color: '#FEC70C',
   },
-  'Basel SBB - Olten - Luzern': {
+  'Basel SBB – Olten – Luzern': {
     property: 'hauptlinie',
     shortname: 'IR 27',
     color: '#5B6E24',
   },
-  'Basel SBB - Zürich HB - Chur': {
+  'Basel SBB – Zürich HB – Chur': {
     property: 'hauptlinie',
     shortname: 'IC 3',
     color: '#00984A',
   },
-  'Bern - Burgdorf - Olten (- Zürich HB)': {
+  'Bern – Biel/Bienne': {
+    property: 'hauptlinie',
+    shortname: 'IR 65',
+    color: '#0c7bc1',
+  },
+  'Bern – Burgdorf – Olten  ': {
+    // We add 2 spaces at the end to avoid problem with next line Bern – Burgdorf – Olten – Zürich HB – Chur
     property: 'hauptlinie',
     shortname: 'IR 17',
     color: '#24529B',
   },
-  'Bern - Olten - Brugg AG - Zürich HB': {
+  'Bern – Burgdorf – Olten – Zürich HB – Chur': {
+    property: 'hauptlinie',
+    shortname: 'IR 35',
+    color: '#0e521c',
+  },
+  'Bern – Neuchâtel – La Chaux-de-Fonds': {
+    property: 'hauptlinie',
+    shortname: 'IR 66',
+    color: '#48b7b0',
+  },
+  'Bern – Olten – Brugg AG – Zürich HB': {
     property: 'hauptlinie',
     shortname: 'IR 16',
     color: '#9F6F32',
   },
-  'Brig - Bern - Zürich HB - Romanshorn': {
+  'Brig – Bern – Zürich HB – Romanshorn': {
     property: 'hauptlinie',
     shortname: 'IC 8',
     color: '#009BDE',
   },
-  'Genève-Aéroport - Bern - Zürich HB - St.Gallen': {
+  'Genève-Aéroport – Bern – Zürich HB – St.Gallen': {
     property: 'hauptlinie',
     shortname: 'IC 1',
     color: '#E43A2B',
   },
-  'Genève-Aeroport - Lausanne - Bern - Luzern': {
+  'Genève-Aéroport – Lausanne – Bern – Luzern': {
     property: 'hauptlinie',
     shortname: 'IR 15',
     color: '#0CB795',
   },
-  'Genève-Aéroport - Lausanne - Brig': {
+  'Genève-Aéroport – Lausanne – Brig': {
     property: 'hauptlinie',
     shortname: 'IR 90',
     color: '#007CA3',
   },
-  'Genève-Aéroport/Lausanne - Biel/Bienne - Zürich HB (- St.Gallen)': {
+  'Genève-Aéroport/Lausanne – Biel/Bienne – Zürich HB (– St.Gallen/Rorschach)':
+    {
+      property: 'hauptlinie',
+      shortname: 'IC 5',
+      color: '#F7931D',
+    },
+  'Interlaken Ost – Bern – Zürich HB – Romanshorn': {
     property: 'hauptlinie',
-    shortname: 'IC 5',
-    color: '#F7931D',
+    shortname: 'IC 81',
+    color: '#71a3b8',
   },
-  'Luzern - Zürich HB - Konstanz': {
+  'Luzern – Zürich HB – Konstanz': {
     property: 'hauptlinie',
     shortname: 'IR 75',
     color: '#744B97',
   },
-  'Luzern - Zürich HB (- Zürich Flughafen)': {
+  'Luzern – Zürich HB (– St.Gallen – Chur)': {
     property: 'hauptlinie',
     shortname: 'IR 70',
     color: '#F390BC',
   },
-  'Zürich HB - Schaffhausen': {
+  'Zürich HB – Schaffhausen': {
     property: 'hauptlinie',
-    shortname: 'IC 4',
-    color: '#C9A428',
+    shortname: 'IC',
+    color: '#4f4c4c',
   },
-  'Zürich HB - Zug - Erstfeld (- Göschenen)': {
+  'Zürich HB – Zug – Locarno': {
     property: 'hauptlinie',
     shortname: 'IR 46',
     color: '#006C89',
   },
-  'Zürich HB - Zug - Lugano': {
+  'Zürich HB – Zug – Lugano': {
     property: 'hauptlinie',
     shortname: 'IC 2',
     color: '#8781BD',
@@ -112,11 +139,6 @@ export default {
     property: 'touristische_linie',
     color: '#7c00ff',
   },
-  'Bernina Express: Landquart – Klosters Platz – Davos – Poschiavo – Tirano (– Lugano mit Bus)':
-    {
-      property: 'touristische_linie',
-      color: '#00aaff',
-    },
   'Bernina Express: St. Moritz – Poschiavo – Tirano (– Lugano mit Bus)': {
     property: 'touristische_linie',
     color: '#ffff00',
@@ -141,12 +163,11 @@ export default {
     property: 'touristische_linie',
     color: '#ff00fa',
   },
-  'Golden Pass Panoramic: Luzern – Brünig-Hasliberg – Interlaken Ost – Zweisimmen – Montreux':
-    {
-      property: 'touristische_linie',
-      color: '#ff0000',
-    },
-  'Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Locarno':
+  'Golden Pass Express: Interlaken Ost – Zweisimmen – Montreux': {
+    property: 'touristische_linie',
+    color: '#ff0000',
+  },
+  'Gotthard Panorama Express: Arth-Goldau – Flüelen – Gotthard-Bergstrecke – Bellinzona – Lugano':
     {
       property: 'touristische_linie',
       color: '#ab267d',
@@ -189,6 +210,10 @@ export default {
       property: 'touristische_linie',
       color: '#ff004c',
     },
+  'Luzern–Interlaken Express: Luzern – Interlaken': {
+    property: 'touristische_linie',
+    color: '#97004d',
+  },
   'Mont Blanc Express: Martigny – Le Châtelard – Chamonix': {
     property: 'touristische_linie',
     color: '#ff9f00',

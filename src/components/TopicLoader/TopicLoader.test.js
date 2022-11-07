@@ -21,11 +21,16 @@ describe('TopicLoader', () => {
     map = new Map({ view: new View({}) });
     layerService = new LayerService([]);
     initialStore = {
-      map: { drawLayer },
+      map: {
+        drawLayer,
+      },
       app: {
         map,
         language: 'de',
         layerService,
+        staticFilesUrl: 'foostatic.ch',
+        appBaseUrl: 'appBaseUrl',
+        apiKey: 'apikey',
       },
     };
   });
@@ -46,12 +51,7 @@ describe('TopicLoader', () => {
 
     render(
       <Provider store={store}>
-        <TopicLoader
-          topics={[topicDflt]}
-          appBaseUrl="appBaseUrl"
-          staticFilesUrl="foostatic.ch"
-          apiKey="apikey"
-        />
+        <TopicLoader topics={[topicDflt]} />
       </Provider>,
     );
     const action = store
@@ -83,12 +83,7 @@ describe('TopicLoader', () => {
 
     render(
       <Provider store={store}>
-        <TopicLoader
-          topics={[topicPermalinkFalse]}
-          staticFilesUrl="foostatic.ch"
-          appBaseUrl="appBaseUrl"
-          apiKey="apikey"
-        />
+        <TopicLoader topics={[topicPermalinkFalse]} />
       </Provider>,
     );
     expect(layerService.getLayersAsFlatArray()).toEqual(

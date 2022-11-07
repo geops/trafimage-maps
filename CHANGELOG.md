@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.17.1](https://github.com/geops/trafimage-maps/compare/v1.17.0...v1.17.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* **zweitausbildung:** change text in layer info ([#1038](https://github.com/geops/trafimage-maps/issues/1038)) ([8fc1072](https://github.com/geops/trafimage-maps/commit/8fc10729676ee34a106c54aaf797fe99b5cab695))
+
+## [1.17.0](https://github.com/geops/trafimage-maps/compare/v1.16.5...v1.17.0) (2022-10-31)
+
+
+### Features
+
+* make zweitausbildung topic public ([c9e57de](https://github.com/geops/trafimage-maps/commit/c9e57de409fa8236c213a811a840a25a388f6165))
+
+
+### Bug Fixes
+
+* **zweitausbildung:** highlight the first selected line even if the overlay is already open ([f7dc932](https://github.com/geops/trafimage-maps/commit/f7dc932ee9b1d06412d49cc2cc4d979116f34640))
+* **zweitausbildung:** update responsible and add date of the last data update ([3a4bbeb](https://github.com/geops/trafimage-maps/commit/3a4bbebe8bbcc46d429c49c6a3b0851e6cf85919))
+
+### [1.16.5](https://github.com/geops/trafimage-maps/compare/v1.16.4...v1.16.5) (2022-10-07)
+
+
+### Bug Fixes
+
+* display correct subtitle in menu header ([#1037](https://github.com/geops/trafimage-maps/issues/1037)) ([eac8f78](https://github.com/geops/trafimage-maps/commit/eac8f7835dccacef711efeb5ddc37c5e7b909343))
+
+### [1.16.4](https://github.com/geops/trafimage-maps/compare/v1.16.3...v1.16.4) (2022-10-05)
+
+
+### Bug Fixes
+
+* use a specific aerial style for sbb ([c32f97a](https://github.com/geops/trafimage-maps/commit/c32f97ac2ca193aa088c3d6d6d2ae5a8bc72bad8))
+
+### [1.16.3](https://github.com/geops/trafimage-maps/compare/v1.16.2...v1.16.3) (2022-10-05)
+
+
+### Bug Fixes
+
+* subscribe stop sequence instead of simply get ([#1036](https://github.com/geops/trafimage-maps/issues/1036)) ([e0aea26](https://github.com/geops/trafimage-maps/commit/e0aea260a6a9ea1b95f16bb0dd2f97f38245ac79))
+
 ### [1.16.2](https://github.com/geops/trafimage-maps/compare/v1.16.1...v1.16.2) (2022-09-20)
 
 

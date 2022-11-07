@@ -1,20 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
+import { useTranslation } from 'react-i18next';
 
-const propTypes = {
-  t: PropTypes.func.isRequired,
-};
-
-const ZweitausbildungTopicInfo = ({ t }) => {
+const ZweitausbildungTopicInfo = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <p>{t('ch.sbb.zweitausbildung-desc')}</p>
       <p>
+        {t('Datenstand')}: {t('ch.sbb.zweitausbildung-datastatus')}
+      </p>
+      <p>
         {t('Verantwortlich')}:
         <br />
-        {t('HR-BIL-SKK-PM (VM und VS)')},
+        HR-POK-SKK-PM
         <br />
         <a href="mailto:pm.skk.kbc@sbb.ch">pm.skk.kbc@sbb.ch</a>.
       </p>
@@ -22,6 +20,4 @@ const ZweitausbildungTopicInfo = ({ t }) => {
   );
 };
 
-ZweitausbildungTopicInfo.propTypes = propTypes;
-
-export default compose(withTranslation())(ZweitausbildungTopicInfo);
+export default ZweitausbildungTopicInfo;

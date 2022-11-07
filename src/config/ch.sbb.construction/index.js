@@ -303,7 +303,7 @@ export default [
   }),
   netzkarteAerial.clone({
     mapboxLayer: constructionDataLayer,
-    style: 'aerial_sbb_ch.sbb.bauprojekte',
+    style: 'aerial_sbb_sbbkey_ch.sbb.bauprojekte',
   }),
   constrUnterhalt,
   constrAusbau,

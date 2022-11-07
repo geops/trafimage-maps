@@ -17,17 +17,6 @@ import highlightPointStyle from '../../utils/highlightPointStyle';
 
 import './FeatureInformation.scss';
 
-const propTypes = {
-  featureInfo: PropTypes.array.isRequired,
-  appBaseUrl: PropTypes.string,
-  staticFilesUrl: PropTypes.string,
-};
-
-const defaultProps = {
-  appBaseUrl: null,
-  staticFilesUrl: null,
-};
-
 const getPopupComponent = ({ popupComponent, layer }) => {
   const comp = popupComponent || layer.get('popupComponent');
   return typeof comp === 'string' ? popups[comp] : comp;
@@ -38,7 +27,7 @@ const highlightLayer = new VectorLayer({
 });
 highlightLayer.setStyle(highlightPointStyle);
 
-const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
+const FeatureInformation = ({ featureInfo }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
@@ -46,6 +35,8 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   const searchService = useSelector((state) => state.app.searchService);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const menuOpen = useSelector((state) => state.app.menuOpen);
+  const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
+  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   const isMobile = useMemo(() => {
@@ -335,7 +326,8 @@ const FeatureInformation = ({ featureInfo, appBaseUrl, staticFilesUrl }) => {
   );
 };
 
-FeatureInformation.propTypes = propTypes;
-FeatureInformation.defaultProps = defaultProps;
+FeatureInformation.propTypes = {
+  featureInfo: PropTypes.array.isRequired,
+};
 
 export default React.memo(FeatureInformation);

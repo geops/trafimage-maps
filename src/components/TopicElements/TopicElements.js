@@ -54,16 +54,13 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-  appBaseUrl: PropTypes.string,
+
   loginUrl: PropTypes.string,
-  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
-  appBaseUrl: null,
   loginUrl: null,
-  staticFilesUrl: null,
 };
 
 const getComponents = (defaultComponents, elementsToDisplay) =>
@@ -71,11 +68,10 @@ const getComponents = (defaultComponents, elementsToDisplay) =>
     elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
   );
 
-function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
+function TopicElements({ history, loginUrl }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  const layerService = useSelector((state) => state.app.layerService);
   const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
   const [node, setNode] = useState(null);
@@ -95,11 +91,9 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
     return null;
   }
 
-  const { maxZoom } = activeTopic;
+  const { maxZoom, layers } = activeTopic;
 
-  const baseLayers = layerService
-    .getLayers()
-    .filter((layer) => layer.get('isBaseLayer'));
+  const baseLayers = (layers || []).filter((layer) => layer.get('isBaseLayer'));
 
   // Disabled elements from permalink
   const { disabled } = qs.parse((history || window).location.search);
@@ -126,7 +120,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
     {
       exportMenu: <ExportMenu />,
       drawMenu: <DrawMenu />,
-      shareMenu: <ShareMenu appBaseUrl={appBaseUrl} />,
+      shareMenu: <ShareMenu />,
     },
     elements,
   );
@@ -134,9 +128,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
   // Define which component to display as child of Menu.
   const appMenuChildren = getComponents(
     {
-      featureMenu: (
-        <FeatureMenu appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />
-      ),
+      featureMenu: <FeatureMenu />,
       trackerMenu: <TrackerMenu />,
     },
     elements,
@@ -144,7 +136,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
 
   // Define which components to display.
   const appComponents = {
-    header: <Header appBaseUrl={appBaseUrl} loginUrl={loginUrl} />,
+    header: <Header loginUrl={loginUrl} />,
     search: <Search />,
     map: (
       <EventConsumer>
@@ -154,8 +146,8 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
       </EventConsumer>
     ),
     telephoneInfos: <TopicTelephoneInfos />,
-    popup: <Popup appBaseUrl={appBaseUrl} staticFilesUrl={staticFilesUrl} />,
-    permalink: <Permalink history={history} appBaseUrl={appBaseUrl} />,
+    popup: <Popup />,
+    permalink: <Permalink history={history} />,
     menu: (
       <Menu>
         <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
@@ -182,13 +174,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
       />
     ),
     footer: <Footer />,
-    overlay: (
-      <Overlay
-        appBaseUrl={appBaseUrl}
-        staticFilesUrl={staticFilesUrl}
-        elements={elements}
-      />
-    ),
+    overlay: <Overlay elements={elements} />,
   };
 
   elements.map = true; // make sure we always have a map element!
@@ -217,7 +203,7 @@ function TopicElements({ history, appBaseUrl, loginUrl, staticFilesUrl }) {
       )}
       <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
         {appElements}
-        <MainDialog staticFilesUrl={staticFilesUrl} />
+        <MainDialog />
       </div>
     </div>
   );
