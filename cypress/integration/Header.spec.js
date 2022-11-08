@@ -37,6 +37,11 @@ const expectOnWidthLg = () => {
 };
 
 const viewports = [
+  // Desktop fullHD
+  {
+    size: [1920, 1080],
+    otherExpect: [expectOnWidthLg],
+  },
   // Desktop
   {
     size: [1440, 900],

@@ -93,6 +93,7 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
         <Typography paragraph>
           {products.map((p, idx, arr) => (
             <b
+              key={p}
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
                 __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
@@ -135,6 +136,7 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
             <Typography paragraph>
               {products.map((p, idx, arr) => (
                 <b
+                  key={p}
                   // eslint-disable-next-line react/no-danger
                   dangerouslySetInnerHTML={{
                     __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks

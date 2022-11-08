@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
@@ -35,6 +35,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const layers = useSelector((state) => state.map.layers || []);
   const topics = useSelector((state) => state.app.topics);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -56,6 +57,10 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
     };
   }, [layers, dispatch]);
 
+  const topicsToDisplay = useMemo(() => {
+    return activeTopic?.only ? [activeTopic] : topics.filter((t) => !t.only);
+  }, [activeTopic, topics]);
+
   if (!topics || !topics.length) {
     return null;
   }
@@ -76,7 +81,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
       >
         <div className="wkp-topics-menu-body">
           <DrawLayerMenu />
-          {topics.map((topic) => (
+          {topicsToDisplay.map((topic) => (
             <TopicMenu key={topic.key} topic={topic} />
           ))}
         </div>

@@ -28,9 +28,13 @@ describe('TopicLoader', () => {
         map,
         language: 'de',
         layerService,
-        staticFilesUrl: 'foostatic.ch',
-        appBaseUrl: 'appBaseUrl',
         apiKey: 'apikey',
+        apiKeyName: 'apiKeyName',
+        appBaseUrl: 'https://appBaseUrl.ch',
+        staticFilesUrl: 'https://foostatic.ch',
+        vectorTilesUrl: 'https://vectorTilesUrl.ch',
+        vectorTilesKey: 'apikey',
+        searchUrl: 'https://searchUrl.ch',
       },
     };
   });
@@ -46,12 +50,13 @@ describe('TopicLoader', () => {
       app: {
         ...initialStore.app,
         activeTopic: topicDflt,
+        topics: [topicDflt],
       },
     });
 
     render(
       <Provider store={store}>
-        <TopicLoader topics={[topicDflt]} />
+        <TopicLoader />
       </Provider>,
     );
     const action = store
@@ -78,21 +83,19 @@ describe('TopicLoader', () => {
       app: {
         ...initialStore.app,
         activeTopic: topicPermalinkFalse,
+        topics: [topicPermalinkFalse],
       },
     });
 
     render(
       <Provider store={store}>
-        <TopicLoader topics={[topicPermalinkFalse]} />
+        <TopicLoader />
       </Provider>,
-    );
-    expect(layerService.getLayersAsFlatArray()).toEqual(
-      topicPermalinkFalse.layers,
     );
     const action = store
       .getActions()
       .filter((act) => act.type === 'SET_LAYERS');
     expect(action.length).toBe(1);
-    expect(action[0].data).toEqual(layerService.getLayers());
+    expect(action[0].data).toEqual(topicPermalinkFalse.layers);
   });
 });

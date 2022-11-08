@@ -30,6 +30,12 @@ import {
   setEmbedded,
   setAppBaseUrl,
   setStaticFilesUrl,
+  setActiveTopic,
+  setTopics,
+  setVectorTilesKey,
+  setVectorTilesUrl,
+  setApiKeyName,
+  setLoginUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -199,12 +205,6 @@ const propTypes = {
   domainConsentId: PropTypes.string,
 
   /**
-   * Key of the active topic.
-   * @private
-   */
-  activeTopicKey: PropTypes.string,
-
-  /**
    * Informations on logged in user and its permissions.
    * @private
    */
@@ -217,6 +217,11 @@ const propTypes = {
    * Improve mouse/touch interactions to avoid conflict with parent page.
    */
   embedded: PropTypes.bool,
+
+  /**
+   * Key of the current active topic
+   */
+  activeTopicKey: PropTypes.string,
 };
 
 const defaultProps = {
@@ -224,10 +229,17 @@ const defaultProps = {
   center: [925472, 5920000],
   zoom: undefined,
   maxExtent: undefined,
-  apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
+  topics: null,
+  language: 'de',
+  enableTracking: true,
+  disableCookies: false,
+  permissionInfos: null,
+  embedded: false,
   apiKeyName: 'key',
-  cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   loginUrl: undefined,
+  activeTopicKey: null,
+  apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
+  cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
   vectorTilesKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process?.env?.REACT_APP_VECTOR_TILES_URL,
@@ -237,13 +249,6 @@ const defaultProps = {
   drawUrl: process?.env?.REACT_APP_DRAW_URL,
   destinationUrl: process?.env?.REACT_APP_DESTINATION_URL,
   departuresUrl: process?.env?.REACT_APP_DEPARTURES_URL,
-  topics: null,
-  language: 'de',
-  enableTracking: true,
-  disableCookies: false,
-  activeTopicKey: null,
-  permissionInfos: null,
-  embedded: false,
   domainConsent: process?.env?.REACT_APP_DOMAIN_CONSENT,
   domainConsentId: process?.env?.REACT_APP_DOMAIN_CONSENT_ID,
   matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
@@ -372,6 +377,12 @@ class TrafimageMaps extends React.PureComponent {
       searchUrl,
       appBaseUrl,
       staticFilesUrl,
+      activeTopicKey,
+      topics,
+      vectorTilesKey,
+      vectorTilesUrl,
+      apiKeyName,
+      loginUrl,
     } = this.props;
     const { requireConsent } = this.state;
 
@@ -431,8 +442,23 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setDeparturesUrl(departuresUrl));
     }
 
+    if (vectorTilesKey) {
+      this.store.dispatch(setVectorTilesKey(vectorTilesKey));
+    }
+
+    if (vectorTilesUrl) {
+      this.store.dispatch(setVectorTilesUrl(vectorTilesUrl));
+    }
+
+    if (loginUrl) {
+      this.store.dispatch(setLoginUrl(loginUrl));
+    }
+
     if (apiKey) {
       this.store.dispatch(setApiKey(apiKey));
+    }
+    if (apiKeyName) {
+      this.store.dispatch(setApiKeyName(apiKeyName));
     }
 
     if (embedded) {
@@ -455,6 +481,18 @@ class TrafimageMaps extends React.PureComponent {
         this.store.dispatch(setConsentGiven(true));
       };
     }
+
+    if (topics) {
+      this.store.dispatch(setTopics(topics));
+    }
+
+    if (activeTopicKey && topics) {
+      this.store.dispatch(
+        setActiveTopic(
+          (topics || []).find((topic) => topic.key === activeTopicKey),
+        ),
+      );
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -470,10 +508,16 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      apiKeyName,
       embedded,
       searchUrl,
       appBaseUrl,
       staticFilesUrl,
+      activeTopicKey,
+      topics,
+      vectorTilesKey,
+      vectorTilesUrl,
+      loginUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -524,6 +568,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
+    if (apiKeyName !== prevProps.apiKeyName) {
+      this.store.dispatch(setApiKeyName(apiKeyName));
+    }
+
     if (embedded !== prevProps.embedded) {
       this.store.dispatch(setEmbedded(embedded));
     }
@@ -534,6 +582,33 @@ class TrafimageMaps extends React.PureComponent {
 
     if (staticFilesUrl !== prevProps.staticFilesUrl) {
       this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
+    }
+
+    if (vectorTilesKey !== prevProps.vectorTilesKey) {
+      this.store.dispatch(setVectorTilesKey(vectorTilesKey));
+    }
+
+    if (vectorTilesUrl !== prevProps.vectorTilesUrl) {
+      this.store.dispatch(setVectorTilesUrl(vectorTilesUrl));
+    }
+
+    if (loginUrl !== prevProps.loginUrl) {
+      this.store.dispatch(setLoginUrl(loginUrl));
+    }
+
+    if (topics !== prevProps.topics) {
+      this.store.dispatch(setTopics(topics));
+    }
+
+    if (
+      activeTopicKey !== prevProps.activeTopicKey ||
+      topics !== prevProps.topics
+    ) {
+      this.store.dispatch(
+        setActiveTopic(
+          (topics || []).find((topic) => topic.key === activeTopicKey),
+        ),
+      );
     }
   }
 
@@ -546,17 +621,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   render() {
-    const {
-      history,
-      apiKeyName,
-      topics,
-      loginUrl,
-      vectorTilesKey,
-      vectorTilesUrl,
-      activeTopicKey,
-      enableTracking,
-      domainConsentId,
-    } = this.props;
+    const { history, topics, enableTracking, domainConsentId } = this.props;
     const { requireConsent } = this.state;
 
     return (
@@ -570,15 +635,7 @@ class TrafimageMaps extends React.PureComponent {
             />
             {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
             {this.matomo && <MatomoTracker />}
-            <TopicLoader
-              history={history}
-              apiKeyName={apiKeyName}
-              topics={topics}
-              activeTopicKey={activeTopicKey}
-              loginUrl={loginUrl}
-              vectorTilesKey={vectorTilesKey}
-              vectorTilesUrl={vectorTilesUrl}
-            />
+            <TopicLoader history={history} />
           </Provider>
         </ThemeProvider>
       </MatomoProvider>

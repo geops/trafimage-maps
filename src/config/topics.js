@@ -25,6 +25,7 @@ import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
+import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import defaultSearches, { handicapStopFinder } from './searches';
 import { GeltungsbereicheMenuFilter } from '../filters';
 // For backward compatibility
@@ -45,6 +46,7 @@ const defaultElements = {
   search: true,
   drawMenu: true,
   overlay: true,
+  geolocationButton: true,
 };
 
 export const netzkarte = {
@@ -275,6 +277,23 @@ export const geltungsbereicheMvp = {
   searches: defaultSearches,
 };
 
+export const geltungsbereicheIframe = {
+  ...geltungsbereicheMvp,
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: false,
+    drawMenu: false,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+  },
+  key: 'ch.sbb.geltungsbereiche-iframe',
+  layers: geltungsbereicheIframeLayers,
+  onlyTopic: true,
+};
+
 export const geltungsbereiche = {
   name: 'ch.sbb.geltungsbereiche-beta',
   key: 'ch.sbb.geltungsbereiche-beta',
@@ -303,6 +322,7 @@ const topics = {
     netzentwicklung,
     beleuchtungsstaerken,
     geltungsbereicheMvp,
+    geltungsbereicheIframe,
     geltungsbereiche,
     energiePublic,
     sandbox,

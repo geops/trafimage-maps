@@ -91,6 +91,11 @@ module.exports = {
           content: 'src/examples/Schulzug/README.md',
           exampleMode: 'expand',
         },
+        {
+          name: 'Geltungsbereiche',
+          content: 'src/examples/Geltungsbereiche/README.md',
+          exampleMode: 'expand',
+        },
       ],
     },
   ],

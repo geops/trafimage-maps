@@ -140,7 +140,7 @@
     "release": "standard-version",
     "sort": "sort-json src/lang/*.json -i",
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
-    "start:doc": "styleguidist server",
+    "start:doc": "ESLINT_NO_DEV_ERRORS=true  styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
     "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\""
   },

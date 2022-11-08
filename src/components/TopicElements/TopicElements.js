@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import qs from 'query-string';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,7 +6,6 @@ import { EventConsumer } from '@geops/create-react-web-component';
 import BaseLayerSwitcher from 'react-spatial/components/BaseLayerSwitcher';
 import ResizeHandler from '../ResizeHandler';
 import { setScreenWidth } from '../../model/app/actions';
-
 import MainDialog from '../MainDialog';
 import Map from '../Map';
 import Menu from '../Menu';
@@ -34,10 +32,10 @@ const defaultElements = {
   permalink: false,
   popup: false,
   mapControls: false,
-  geolocationButton: true,
+  geolocationButton: false,
   baseLayerSwitcher: false,
   shareMenu: false,
-  drawMenu: true,
+  drawMenu: false,
   trackerMenu: false,
   featureMenu: false,
   exportMenu: false,
@@ -54,24 +52,17 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-
-  loginUrl: PropTypes.string,
 };
 
 const defaultProps = {
   history: null,
-  loginUrl: null,
 };
 
-const getComponents = (defaultComponents, elementsToDisplay) =>
-  Object.entries(defaultComponents).map(([k, v]) =>
-    elementsToDisplay[k] ? <div key={k}>{v}</div> : null,
-  );
-
-function TopicElements({ history, loginUrl }) {
+function TopicElements({ history }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
+  const loginUrl = useSelector((state) => state.app.loginUrl);
   const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
   const [node, setNode] = useState(null);
@@ -87,112 +78,71 @@ function TopicElements({ history, loginUrl }) {
     };
   });
 
+  const elements = useMemo(() => {
+    const disabled = new URL(window.location.href).searchParams.get('disabled');
+    const elts = activeTopic?.elements || defaultElements;
+    if (disabled) {
+      disabled.split(',').forEach((element) => {
+        // Backward compatibility
+        if (element === 'spyLayer') {
+          elts.baseLayerSwitcher = false;
+        }
+        // Backward compatibility
+        if (element === 'header') {
+          elts.search = false;
+          elts.telephoneInfos = false;
+        }
+        elts[element] = false;
+      });
+    }
+
+    return elts;
+  }, [activeTopic]);
+
+  const baseLayers = useMemo(() => {
+    return (activeTopic?.layers || []).filter((layer) =>
+      layer.get('isBaseLayer'),
+    );
+  }, [activeTopic]);
+
+  const className = useMemo(() => {
+    const classNames = ['tm-trafimage-maps'];
+
+    if (elements.header) {
+      classNames.push('header');
+    }
+    return classNames.join(' ');
+  }, [elements]);
+
+  const barrierFreeClassName = useMemo(() => {
+    const classNames = ['tm-barrier-free'];
+
+    if (!tabFocus) {
+      classNames.push('tm-no-focus');
+    }
+    return classNames.join(' ');
+  }, [tabFocus]);
+
+  const onResize = useCallback(
+    (entries, widthBreakpoint) => {
+      dispatch(setScreenWidth(widthBreakpoint));
+    },
+    [dispatch],
+  );
+
   if (!activeTopic) {
     return null;
   }
 
-  const { maxZoom, layers } = activeTopic;
-
-  const baseLayers = (layers || []).filter((layer) => layer.get('isBaseLayer'));
-
-  // Disabled elements from permalink
-  const { disabled } = qs.parse((history || window).location.search);
-  if (disabled) {
-    disabled.split(',').forEach((element) => {
-      // Backward compatibility
-      if (element === 'spyLayer') {
-        activeTopic.elements.baseLayerSwitcher = false;
-      }
-      // Backward compatibility
-      if (element === 'header') {
-        activeTopic.elements.search = false;
-      }
-      activeTopic.elements[element] = false;
-    });
-  }
-
-  const elements = activeTopic.elements || defaultElements;
-  elements.telephoneInfos =
-    !disabled || !disabled.split(',').find((el) => el === 'header');
-
-  // Define which component to display as child of TopicsMenu.
-  const appTopicsMenuChildren = getComponents(
-    {
-      exportMenu: <ExportMenu />,
-      drawMenu: <DrawMenu />,
-      shareMenu: <ShareMenu />,
-    },
-    elements,
-  );
-
-  // Define which component to display as child of Menu.
-  const appMenuChildren = getComponents(
-    {
-      featureMenu: <FeatureMenu />,
-      trackerMenu: <TrackerMenu />,
-    },
-    elements,
-  );
-
-  // Define which components to display.
-  const appComponents = {
-    header: <Header loginUrl={loginUrl} />,
-    search: <Search />,
-    map: (
-      <EventConsumer>
-        {(dispatcher) => (
-          <Map map={map} maxZoom={maxZoom} dispatchHtmlEvent={dispatcher} />
-        )}
-      </EventConsumer>
-    ),
-    telephoneInfos: <TopicTelephoneInfos />,
-    popup: <Popup />,
-    permalink: <Permalink history={history} />,
-    menu: (
-      <Menu>
-        <TopicsMenu>{appTopicsMenuChildren}</TopicsMenu>
-        {appMenuChildren}
-      </Menu>
-    ),
-    baseLayerSwitcher: (
-      <BaseLayerSwitcher
-        layers={baseLayers}
-        titles={{
-          button: t('Baselayerwechsel'),
-          openSwitcher: t('Baselayer-Menu öffnen'),
-          closeSwitcher: t('Baselayer-Menu schliessen'),
-        }}
-        closeButtonImage={<ChevronLeft />}
-        t={t}
-      />
-    ),
-    mapControls: (
-      <MapControls
-        geolocation={elements.geolocationButton}
-        fitExtent={elements.fitExtent}
-        zoomSlider={elements.zoomSlider}
-      />
-    ),
-    footer: <Footer />,
-    overlay: <Overlay elements={elements} />,
-  };
-
-  elements.map = true; // make sure we always have a map element!
-  const appElements = getComponents(appComponents, elements);
-
-  const onResize = (entries, widthBreakpoint) => {
-    dispatch(setScreenWidth(widthBreakpoint));
-  };
-
   return (
     <div
-      // Using useRef it breaks the doc. ref.current is always null.
+      className={className}
+      // Using useRef, it breaks the doc. ref.current is always null.
       ref={(elt) => {
         if (node !== elt) {
           setNode(elt);
         }
       }}
-      className={`tm-trafimage-maps ${elements.header ? 'header' : ''}`}
     >
       {node && (
         <ResizeHandler
@@ -201,8 +151,54 @@ function TopicElements({ history, loginUrl }) {
           onResize={onResize}
         />
       )}
-      <div className={`tm-barrier-free ${tabFocus ? '' : 'tm-no-focus'}`}>
-        {appElements}
+      <div className={barrierFreeClassName}>
+        <EventConsumer>
+          {(dispatcher) => (
+            <Map
+              map={map}
+              maxZoom={activeTopic.maxZoom}
+              dispatchHtmlEvent={dispatcher}
+            />
+          )}
+        </EventConsumer>
+        {elements.permalink && <Permalink history={history} />}
+        {elements.header && <Header loginUrl={loginUrl} />}
+        {elements.search && <Search />}
+        {elements.header && <TopicTelephoneInfos />}
+        {elements.popup && <Popup />}
+        {elements.mapControls && (
+          <MapControls
+            geolocation={elements.geolocationButton}
+            fitExtent={elements.fitExtent}
+            zoomSlider={elements.zoomSlider}
+          />
+        )}
+        {elements.baseLayerSwitcher && (
+          <BaseLayerSwitcher
+            layers={baseLayers}
+            titles={{
+              button: t('Baselayerwechsel'),
+              openSwitcher: t('Baselayer-Menu öffnen'),
+              closeSwitcher: t('Baselayer-Menu schliessen'),
+            }}
+            closeButtonImage={<ChevronLeft />}
+            t={t}
+          />
+        )}
+        <Menu>
+          {elements.menu && (
+            <TopicsMenu>
+              {elements.exportMenu && <ExportMenu />}
+              {elements.drawMenu && <DrawMenu />}
+              {elements.shareMenu && <ShareMenu />}
+            </TopicsMenu>
+          )}
+          {elements.featureMenu && <FeatureMenu />}
+          {elements.trackerMenu && <TrackerMenu />}
+          {elements.topicMenu && activeTopic.menu}
+        </Menu>
+        {elements.footer && <Footer />}
+        {elements.overlay && <Overlay elements={elements} />}
         <MainDialog />
       </div>
     </div>
@@ -212,4 +208,4 @@ function TopicElements({ history, loginUrl }) {
 TopicElements.propTypes = propTypes;
 TopicElements.defaultProps = defaultProps;
 
-export default TopicElements;
+export default React.memo(TopicElements);

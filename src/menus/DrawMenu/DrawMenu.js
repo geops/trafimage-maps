@@ -44,6 +44,7 @@ function DrawMenu() {
     <div ref={ref}>
       <MenuItem
         open
+        className="wkp-draw-menu"
         title={t('Zeichnen auf der Karte')}
         icon={<FaPencilAlt focusable={false} />}
         collapsed={collapsed}

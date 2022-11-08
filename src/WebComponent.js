@@ -213,7 +213,6 @@ const initialLayersVisibility = {};
 
 const WebComponent = (props) => {
   const {
-    activeTopicKey,
     width,
     height,
     zoom,
@@ -222,7 +221,6 @@ const WebComponent = (props) => {
     appName,
     center,
     apiKey,
-    apiKeyName,
     vectorTilesKey,
     enableTracking,
     elements,
@@ -244,6 +242,7 @@ const WebComponent = (props) => {
     () => vectorTilesKey || apiKey,
     [apiKey, vectorTilesKey],
   );
+
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(
@@ -265,24 +264,16 @@ const WebComponent = (props) => {
     // This comparaison is really bad, depending on which is the pathname the web component
     // could load nothing. Example with a pathname like this /build.d/index.html
     // We expect a topic is composed at least like this xxxx.xxxx.xxxx.
-    const urlTopic =
-      !!window.location.pathname.replace('/', '').split('.').length > 1;
-    if (urlTopic && activeTopicKey && urlTopic !== activeTopicKey) {
-      return [];
-    }
-    if (activeTopicKey) {
-      tps.forEach((topic) => {
-        // eslint-disable-next-line no-param-reassign
-        topic.active = topic.key === activeTopicKey;
-        // eslint-disable-next-line no-param-reassign
-        topic.hideInLayerTree =
-          topic.hideInLayerTree && topic.key === activeTopicKey
-            ? false
-            : topic.hideInLayerTree;
-      });
-    } else {
-      tps[0].active = true;
-    }
+    // const urlTopic = window.location.pathname.split('/').pop();
+    // const isTopicInUrl = urlTopic.split('.').length > 1;
+    // if (
+    //   isTopicInUrl &&
+    //   urlTopic &&
+    //   activeTopicKey &&
+    //   urlTopic !== activeTopicKey
+    // ) {
+    //   return [];
+    // }
 
     // Override topic config with web componenet parameters.
     // TODO improve the code, particularly the transformation string to object.
@@ -331,9 +322,8 @@ const WebComponent = (props) => {
         });
       }
     });
-
     return [...tps];
-  }, [topics, appName, activeTopicKey, elements, layersVisibility]);
+  }, [topics, appName, elements, layersVisibility]);
 
   if (!appTopics) {
     return null;
@@ -350,8 +340,6 @@ const WebComponent = (props) => {
       >
         <TrafimageMaps
           {...props}
-          apiKey={apiKey}
-          apiKeyName={apiKeyName}
           vectorTilesKey={vectorTileApiKey}
           topics={appTopics}
           zoom={floatZoom}
