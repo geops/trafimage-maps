@@ -58,7 +58,11 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
   }, [layers, dispatch]);
 
   const topicsToDisplay = useMemo(() => {
-    return activeTopic?.only ? [activeTopic] : topics.filter((t) => !t.only);
+    return activeTopic?.only
+      ? [activeTopic]
+      : topics.filter(
+          (t) => !t.only || (t.key !== activeTopic?.key && !t.hideInLayerTree),
+        );
   }, [activeTopic, topics]);
 
   if (!topics || !topics.length) {

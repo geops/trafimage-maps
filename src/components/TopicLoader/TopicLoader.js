@@ -70,11 +70,7 @@ const defaultProps = {
 
 class TopicLoader extends PureComponent {
   componentDidMount() {
-    const { apiKey } = this.props;
-
-    if (apiKey) {
-      this.loadTopics();
-    }
+    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
@@ -101,9 +97,9 @@ class TopicLoader extends PureComponent {
     // Here the "if/else if" are important to avoid loading multiple time the layers in the layerService,
     // which can results to a wrong orders of "change:visible" listeners.
     if (
-      (!prevProps.apiKey && apiKey !== prevProps.apiKey) ||
-      permissionInfos !== prevProps.permissionInfos ||
-      areTopicsReallyUpdated
+      areTopicsReallyUpdated ||
+      (!prevProps.activeTopic && activeTopic) ||
+      permissionInfos !== prevProps.permissionInfos
     ) {
       this.loadTopics(prevProps);
     } else if (
@@ -128,11 +124,11 @@ class TopicLoader extends PureComponent {
   }
 
   loadTopics() {
-    const { apiKey, topics, appBaseUrl, permissionInfos, activeTopic } =
-      this.props;
+    const { topics, appBaseUrl, permissionInfos, activeTopic } = this.props;
 
+    console.log('loadTopics', !topics?.length, !activeTopic);
     // wait until all web components attributes are properly set
-    if (!topics?.length || !apiKey || !activeTopic) {
+    if (!topics?.length || !activeTopic) {
       return;
     }
 
@@ -159,20 +155,23 @@ class TopicLoader extends PureComponent {
     if (isTopicNeedsPermission && !permissionInfos) {
       return;
     }
-    this.updateServices(activeTopic);
+
+    this.updateServices();
   }
 
-  updateServices(activeTopic) {
+  updateServices() {
     const {
       t,
       apiKey,
       searchUrl,
       appBaseUrl,
       layerService,
+      activeTopic,
       dispatchSetFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
 
+    console.log('updateServices', !apiKey || !searchUrl);
     // wait until all web components attributes are properly set
     if (!apiKey || !searchUrl) {
       return;
@@ -199,7 +198,7 @@ class TopicLoader extends PureComponent {
       });
     }
 
-    this.updateLayers(activeTopic.layers);
+    this.updateLayers();
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || {});
@@ -214,7 +213,7 @@ class TopicLoader extends PureComponent {
     dispatchSetSearchService(newSearchService);
   }
 
-  updateLayers(topicLayers) {
+  updateLayers() {
     const {
       apiKey,
       apiKeyName,
@@ -230,6 +229,15 @@ class TopicLoader extends PureComponent {
       activeTopic,
     } = this.props;
 
+    console.log(
+      'ici',
+      !apiKey ||
+        !apiKeyName ||
+        !appBaseUrl ||
+        !activeTopic ||
+        !vectorTilesUrl ||
+        !vectorTilesKey,
+    );
     // wait until all web components attributes are properly set
     if (
       !apiKey ||
@@ -242,6 +250,7 @@ class TopicLoader extends PureComponent {
       return;
     }
 
+    const topicLayers = activeTopic.layers;
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
       .filter((l) => l.get('isBaseLayer') && l.visible);
@@ -307,6 +316,7 @@ class TopicLoader extends PureComponent {
       if (flatLayers[i].setGeoJsonUrl) {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       }
+
       if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(
           vectorTilesUrl,

@@ -16,7 +16,7 @@ const propTypes = {
   title: PropTypes.string,
   open: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
-  onCollapseToggle: PropTypes.func.isRequired,
+  onCollapseToggle: PropTypes.func,
 };
 
 const defaultProps = {
@@ -27,9 +27,10 @@ const defaultProps = {
   className: '',
   icon: null,
   title: '',
+  onCollapseToggle: () => {},
 };
 
-function MenuItem(props) {
+function MenuItem(props, ref) {
   const {
     open,
     collapsed,
@@ -44,13 +45,18 @@ function MenuItem(props) {
   } = props;
 
   return (
-    <div className={`wkp-menu-item ${className} ${open ? '' : 'closed'}`}>
-      <MenuItemHeader
-        icon={icon}
-        title={title}
-        isOpen={!collapsed}
-        onToggle={() => onCollapseToggle(!collapsed)}
-      />
+    <div
+      ref={ref}
+      className={`wkp-menu-item ${className} ${open ? '' : 'closed'}`}
+    >
+      {(title || icon) && (
+        <MenuItemHeader
+          icon={icon}
+          title={title}
+          isOpen={!collapsed}
+          onToggle={() => onCollapseToggle(!collapsed)}
+        />
+      )}
       <Collapsible
         isCollapsed={collapsed}
         maxHeight={fixedHeight || menuHeight}
@@ -66,4 +72,11 @@ function MenuItem(props) {
 MenuItem.propTypes = propTypes;
 MenuItem.defaultProps = defaultProps;
 
-export default React.memo(withResizing(MenuItem));
+// const WithResizingMenuItem = ;
+
+export default React.memo(withResizing(React.forwardRef(MenuItem)));
+//   React.forwardRef((props, ref) => {
+//     // eslint-disable-next-line react/jsx-props-no-spreading
+//     return <WithResizingMenuItem {...props} forwardedRef={ref} />;
+//   }),
+// );

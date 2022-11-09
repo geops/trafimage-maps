@@ -10,6 +10,7 @@ export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   style: 'base_bright_v2_ch.sbb.geltungsbereiche_ga',
   properties: {
     hideInLegend: true,
+    isBaseLayer: true,
   },
 });
 

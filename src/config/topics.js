@@ -28,6 +28,8 @@ import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import defaultSearches, { handicapStopFinder } from './searches';
 import { GeltungsbereicheMenuFilter } from '../filters';
+import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
+
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -284,14 +286,18 @@ export const geltungsbereicheIframe = {
     popup: true,
     shareMenu: false,
     drawMenu: false,
+    permalink: false,
     geolocationButton: false,
     header: false,
     search: false,
     footer: false,
+    menu: false,
   },
   key: 'ch.sbb.geltungsbereiche-iframe',
   layers: geltungsbereicheIframeLayers,
-  onlyTopic: true,
+  only: true,
+  hideInLayerTree: true,
+  menu: <GeltungsbereicheTopicMenu />,
 };
 
 export const geltungsbereiche = {

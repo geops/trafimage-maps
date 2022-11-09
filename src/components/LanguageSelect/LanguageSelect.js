@@ -107,7 +107,11 @@ const LanguageSelect = () => {
         )}
         onChange={onSelectChange}
         className={classes.input}
-        classes={{ outlined: classes.select, icon: classes.expandIcon }}
+        classes={{
+          outlined: classes.select,
+          icon: classes.expandIcon,
+          ...classes,
+        }}
         MenuProps={{ 'data-cy': 'lang-select-options' }}
         variant="outlined"
       >

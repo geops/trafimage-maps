@@ -195,7 +195,7 @@ function TopicElements({ history }) {
           )}
           {elements.featureMenu && <FeatureMenu />}
           {elements.trackerMenu && <TrackerMenu />}
-          {elements.topicMenu && activeTopic.menu}
+          {activeTopic?.menu}
         </Menu>
         {elements.footer && <Footer />}
         {elements.overlay && <Overlay elements={elements} />}
