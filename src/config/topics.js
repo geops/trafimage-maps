@@ -286,7 +286,7 @@ export const geltungsbereicheIframe = {
     popup: true,
     shareMenu: false,
     drawMenu: false,
-    permalink: false,
+    permalink: true,
     geolocationButton: false,
     header: false,
     search: false,

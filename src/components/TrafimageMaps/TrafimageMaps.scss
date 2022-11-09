@@ -32,6 +32,14 @@
     font-family: 'SBBWeb-Bold', Arial, sans-serif;
   }
 
+  .wkp-selected {
+    color: $brand-primary-hover;
+  }
+
+  .wkp-info-bt:hover {
+    color: $brand-primary-hover;
+  }
+
   .rs-map {
     position: absolute;
     top: 0;
@@ -280,7 +288,8 @@
       top: 65px;
     }
 
-    .wkp-menu-wrapper {
+    // topics menu component is enabled
+    &.menu .wkp-menu-wrapper {
       top: 55px;
       left: 0;
       width: 350px;
@@ -300,14 +309,6 @@
 
       .wkp-topics-menu {
         margin-top: 0;
-
-        .wkp-menu-wrapper {
-          margin-top: 55px;
-
-          .wkp-collapsible-vertical {
-            margin-top: 0;
-          }
-        }
       }
     }
 
@@ -447,6 +448,11 @@
           display: none;
         }
       }
+    }
+
+    // geltungsbereiche iframe topic
+    &:not(.menu) .wkp-menu-wrapper {
+      width: 335px;
     }
   }
 }

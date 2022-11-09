@@ -126,7 +126,8 @@ class TopicLoader extends PureComponent {
   loadTopics() {
     const { topics, appBaseUrl, permissionInfos, activeTopic } = this.props;
 
-    console.log('loadTopics', !topics?.length, !activeTopic);
+    // console.log('loadTopics', !topics?.length, !activeTopic);
+
     // wait until all web components attributes are properly set
     if (!topics?.length || !activeTopic) {
       return;
@@ -171,7 +172,7 @@ class TopicLoader extends PureComponent {
       dispatchSetSearchService,
     } = this.props;
 
-    console.log('updateServices', !apiKey || !searchUrl);
+    // console.log('updateServices', !apiKey || !searchUrl);
     // wait until all web components attributes are properly set
     if (!apiKey || !searchUrl) {
       return;
@@ -229,15 +230,15 @@ class TopicLoader extends PureComponent {
       activeTopic,
     } = this.props;
 
-    console.log(
-      'ici',
-      !apiKey ||
-        !apiKeyName ||
-        !appBaseUrl ||
-        !activeTopic ||
-        !vectorTilesUrl ||
-        !vectorTilesKey,
-    );
+    // console.log(
+    //   'ici',
+    //   !apiKey ||
+    //     !apiKeyName ||
+    //     !appBaseUrl ||
+    //     !activeTopic ||
+    //     !vectorTilesUrl ||
+    //     !vectorTilesKey,
+    // );
     // wait until all web components attributes are properly set
     if (
       !apiKey ||

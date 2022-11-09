@@ -30,7 +30,7 @@ const defaultProps = {
   onCollapseToggle: () => {},
 };
 
-function MenuItem(props, ref) {
+const ForwardedRefComp = React.forwardRef((props, ref) => {
   const {
     open,
     collapsed,
@@ -67,16 +67,9 @@ function MenuItem(props, ref) {
       </Collapsible>
     </div>
   );
-}
+});
 
-MenuItem.propTypes = propTypes;
-MenuItem.defaultProps = defaultProps;
+ForwardedRefComp.propTypes = propTypes;
+ForwardedRefComp.defaultProps = defaultProps;
 
-// const WithResizingMenuItem = ;
-
-export default React.memo(withResizing(React.forwardRef(MenuItem)));
-//   React.forwardRef((props, ref) => {
-//     // eslint-disable-next-line react/jsx-props-no-spreading
-//     return <WithResizingMenuItem {...props} forwardedRef={ref} />;
-//   }),
-// );
+export default React.memo(withResizing(ForwardedRefComp));

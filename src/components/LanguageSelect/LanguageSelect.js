@@ -110,7 +110,6 @@ const LanguageSelect = () => {
         classes={{
           outlined: classes.select,
           icon: classes.expandIcon,
-          ...classes,
         }}
         MenuProps={{ 'data-cy': 'lang-select-options' }}
         variant="outlined"

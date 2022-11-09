@@ -188,7 +188,7 @@
   "ch.sbb.geltungsbereiche.mvp-ga_s25": "Clienti con abbonamento generale, abbonamento seven25, carta mensile AG, abbonamento Svago, carta giornaliera per il metà-prezzo e clienti con abbonamento metà-prezzo valido in combinazione con carta giornaliera risparmio, carta giornaliera promo o carta giornaliera Comune",
   "ch.sbb.geltungsbereiche.mvp-hta": "Clienti con abbonamento metà-prezzo",
   "ch.sbb.geltungsbereiche.mvp-sts": "Clienti con Swiss Travel Pass e Swiss Half Fare Card",
-  "ch.sbb.geltungsbereiche.mvp-tk": "Clienti con carta giornaliera risparmio, carta giornaliera promo o carta giornaliera Comune senza abbonamento metà-prezzo valido",
+  "ch.sbb.geltungsbereiche.mvp-tk": "Clienti senza abbonamento metà-prezzo valido in combinazione con carta giornaliera risparmio, carta giornaliera promo o carta giornaliera Comune",
   "ch.sbb.geltungsbereiche.products.excursion": "Abbonamento Svago",
   "ch.sbb.geltungsbereiche.products.ga": "Abbonamento generale",
   "ch.sbb.geltungsbereiche.products.ga-month": "Carta mensile AG",

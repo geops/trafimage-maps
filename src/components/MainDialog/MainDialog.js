@@ -13,7 +13,6 @@ import LegalLines from '../LegalLines';
 
 const MainDialog = () => {
   const { t } = useTranslation();
-  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -27,7 +26,6 @@ const MainDialog = () => {
       <LayerInfosDialog
         selectedForInfos={selectedForInfos}
         isDraggable={!isMobileWidth}
-        staticFilesUrl={staticFilesUrl}
       />
     );
   }

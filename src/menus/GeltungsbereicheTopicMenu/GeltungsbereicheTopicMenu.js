@@ -5,13 +5,14 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { makeStyles, MenuItem as MuiMenuItem } from '@material-ui/core';
 import { unByKey } from 'ol/Observable';
 import MenuItem from '../../components/Menu/MenuItem';
 import Select from '../../components/Select';
 import InfosButton from '../../components/InfosButton';
+import { setDialogPosition } from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
   return {
@@ -34,17 +35,39 @@ const useStyles = makeStyles(() => {
       textOverflow: 'unset',
       whiteSpace: 'unset',
     },
+    infoButton: {
+      position: 'absolute',
+      right: 33,
+      margin: 'auto',
+      bottom: 0,
+      padding: 0,
+      width: 18,
+      top: 0,
+      height: 18,
+      paddingTop: 5, // needed because the MenuItem has an 5px margin top
+    },
   };
 });
 
 function GeltungsbereicheTopicMenu() {
+  const dispatch = useDispatch();
   const layers = useSelector((state) => state.map.layers);
+  const drawLayer = useSelector((state) => state.map.drawLayer);
   const ref = useRef();
   const { t } = useTranslation();
   const classes = useStyles();
+
+  useEffect(() => {
+    dispatch(setDialogPosition({ x: 390, y: 17 }));
+  }, [dispatch]);
+
   const nonBaseLayers = useMemo(() => {
-    return layers?.filter((layer) => !layer.get('isBaseLayer')).reverse() || [];
-  }, [layers]);
+    return (
+      layers
+        ?.filter((layer) => layer !== drawLayer && !layer.get('isBaseLayer'))
+        .reverse() || []
+    );
+  }, [drawLayer, layers]);
 
   const [value, setValue] = useState(
     (nonBaseLayers?.find((layer) => layer.visible) || {}).name,
@@ -93,7 +116,12 @@ function GeltungsbereicheTopicMenu() {
           fullWidth
           data-cy="gb-select"
           value={value}
-          renderValue={() => <span>{t(value)}</span>}
+          renderValue={() => (
+            <span style={{ display: 'flex' }}>
+              <span style={{ flex: 2 }}>{t(value)}</span>
+              <span style={{ width: 20 }} />
+            </span>
+          )}
           onChange={onChange}
           MenuProps={{
             disablePortal: true,
@@ -113,8 +141,6 @@ function GeltungsbereicheTopicMenu() {
                  * @ignore
                  */
                 const menuEl = el;
-                window.el = ref.current;
-                console.log(ref.current.clientWidth);
                 menuEl.style.minWidth = `${ref.current.clientWidth}px`;
                 menuEl.style.width = `${ref.current.clientWidth}px`;
               },
@@ -133,19 +159,26 @@ function GeltungsbereicheTopicMenu() {
           }}
         >
           {nonBaseLayers.map((layer) => {
+            if (layer.name === value) {
+              return null;
+            }
+
             return (
               <MuiMenuItem
                 key={layer.key}
                 value={layer.name}
                 style={{ display: 'flex' }}
               >
-                <span style={{ flex: 2 }}>{t(layer.name)}</span>
-                <InfosButton selectedInfo={layer} />
+                {t(layer.name)}
               </MuiMenuItem>
             );
           })}
         </Select>
       )}
+      <InfosButton
+        className={`wkp-info-bt ${classes.infoButton}`}
+        selectedInfo={layers.find((l) => l.name === value)}
+      />
     </MenuItem>
   );
 }

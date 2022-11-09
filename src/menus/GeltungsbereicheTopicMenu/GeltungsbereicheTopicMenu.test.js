@@ -1,36 +1,37 @@
 import React from 'react';
-import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
+import { render, screen } from '@testing-library/react';
 import OLMap from 'ol/Map';
+import { Layer } from 'mobility-toolbox-js/ol';
 import GeltungsbereicheTopicMenu from './GeltungsbereicheTopicMenu';
-import Draw from '../../components/Draw';
 
 describe('GeltungsbereicheTopicMenu', () => {
   const mockStore = configureStore([thunk]);
   let store;
-  test('should use MenuItem and display Draw', () => {
-    const info = {
-      key: 'foo',
-      elements: {
-        drawMenu: true,
-      },
-    };
+  const baseLayer = new Layer({
+    name: 'base',
+    visible: true,
+    properties: { isBaseLayer: true },
+  });
+  const layer1 = new Layer({ name: 'foo', visible: false });
+  const layer2 = new Layer({ name: 'bar', visible: true });
+
+  test('should display the menu and select the good value', () => {
     store = mockStore({
-      map: {},
-      app: { activeTopic: info, map: new OLMap(), menuOpen: true },
+      map: { layers: [baseLayer, layer1, layer2] },
+      app: { map: new OLMap({}), menuOpen: false },
     });
-    const wrapper = mount(
+
+    const { container } = render(
       <Provider store={store}>
         <GeltungsbereicheTopicMenu />
       </Provider>,
     );
 
-    expect(wrapper.find('.wkp-menu-item').length).toBe(1);
-    expect(wrapper.find('.wkp-menu-item-header-title').childAt(0).text()).toBe(
-      'Zeichnen auf der Karte',
-    );
-    expect(wrapper.find(Draw).length).toBe(1);
+    expect(container.querySelectorAll('.wkp-menu-item').length).toBe(1);
+    expect(container.querySelectorAll('.wkp-gb-topic-menu').length).toBe(1);
+    expect(screen.getByText('bar')).toBeInTheDocument();
   });
 });

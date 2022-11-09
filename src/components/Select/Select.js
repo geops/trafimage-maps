@@ -71,7 +71,7 @@ const Select = (props) => {
       },
       MenuProps,
     );
-  }, [MenuProps]);
+  }, [ref, MenuProps]);
 
   const newProps = { ...props };
   delete newProps.hideOutline;

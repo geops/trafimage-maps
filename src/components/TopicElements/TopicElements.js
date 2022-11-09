@@ -111,6 +111,11 @@ function TopicElements({ history }) {
     if (elements.header) {
       classNames.push('header');
     }
+
+    if (elements.menu) {
+      classNames.push('menu');
+    }
+
     return classNames.join(' ');
   }, [elements]);
 
