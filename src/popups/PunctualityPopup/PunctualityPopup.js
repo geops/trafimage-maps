@@ -26,6 +26,8 @@ const PunctualityPopup = ({ feature, layer }) => {
       trainId = feature.get('train_id');
 
       if (trainId && layer instanceof TralisLayer) {
+        // eslint-disable-next-line no-param-reassign
+        layer.selectedVehicleId = trainId;
         layer.api.subscribeStopSequence(trainId, onStopSequence);
       }
     }
