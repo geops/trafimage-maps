@@ -34,6 +34,8 @@ export const SET_SEARCH_URL = 'SET_SEARCH_URL';
 export const SET_SEARCH_INFO_OPEN = 'SET_SEARCH_INFO_OPEN';
 export const SET_APP_BASE_URL = 'SET_APP_BASE_URL';
 export const SET_STATIC_FILES_URL = 'SET_STATIC_FILES_URL';
+export const SET_REALTIME_KEY = 'SET_REALTIME_KEY';
+export const SET_REALTIME_URL = 'SET_REALTIME_URL';
 
 export const setTopics = (data) => ({ type: SET_TOPICS, data });
 
@@ -126,6 +128,10 @@ export const setSearchUrl = (data) => ({ type: SET_SEARCH_URL, data });
 export const setShowPopups = (data) => ({ type: SET_SHOW_POPUPS, data });
 
 export const setAppBaseUrl = (data) => ({ type: SET_APP_BASE_URL, data });
+
+export const setRealtimeKey = (data) => ({ type: SET_REALTIME_KEY, data });
+
+export const setRealtimeUrl = (data) => ({ type: SET_REALTIME_URL, data });
 
 export const setStaticFilesUrl = (data) => ({
   type: SET_STATIC_FILES_URL,

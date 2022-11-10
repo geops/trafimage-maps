@@ -30,6 +30,8 @@ import {
   setEmbedded,
   setAppBaseUrl,
   setStaticFilesUrl,
+  setRealtimeKey,
+  setRealtimeUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -164,6 +166,18 @@ const propTypes = {
   searchUrl: PropTypes.string,
 
   /**
+   * Api key for Realtime api.
+   * @private
+   */
+  realtimeKey: PropTypes.string,
+
+  /**
+   * URL endpoint for Realtime api.
+   * @private
+   */
+  realtimeUrl: PropTypes.string,
+
+  /**
    * Enable analytics tracking.
    * @private
    */
@@ -224,10 +238,17 @@ const defaultProps = {
   center: [925472, 5920000],
   zoom: undefined,
   maxExtent: undefined,
-  apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   apiKeyName: 'key',
-  cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   loginUrl: undefined,
+  topics: null,
+  language: 'de',
+  enableTracking: true,
+  disableCookies: false,
+  activeTopicKey: null,
+  permissionInfos: null,
+  embedded: false,
+  apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
+  cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
   vectorTilesKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process?.env?.REACT_APP_VECTOR_TILES_URL,
@@ -237,18 +258,13 @@ const defaultProps = {
   drawUrl: process?.env?.REACT_APP_DRAW_URL,
   destinationUrl: process?.env?.REACT_APP_DESTINATION_URL,
   departuresUrl: process?.env?.REACT_APP_DEPARTURES_URL,
-  topics: null,
-  language: 'de',
-  enableTracking: true,
-  disableCookies: false,
-  activeTopicKey: null,
-  permissionInfos: null,
-  embedded: false,
   domainConsent: process?.env?.REACT_APP_DOMAIN_CONSENT,
   domainConsentId: process?.env?.REACT_APP_DOMAIN_CONSENT_ID,
   matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
   searchUrl: process?.env?.REACT_APP_SEARCH_URL,
+  realtimeKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
+  realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -372,6 +388,8 @@ class TrafimageMaps extends React.PureComponent {
       searchUrl,
       appBaseUrl,
       staticFilesUrl,
+      realtimeKey,
+      realtimeUrl,
     } = this.props;
     const { requireConsent } = this.state;
 
@@ -431,6 +449,14 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setDeparturesUrl(departuresUrl));
     }
 
+    if (realtimeKey) {
+      this.store.dispatch(setRealtimeKey(realtimeKey));
+    }
+
+    if (realtimeUrl) {
+      this.store.dispatch(setRealtimeUrl(realtimeUrl));
+    }
+
     if (apiKey) {
       this.store.dispatch(setApiKey(apiKey));
     }
@@ -474,6 +500,8 @@ class TrafimageMaps extends React.PureComponent {
       searchUrl,
       appBaseUrl,
       staticFilesUrl,
+      realtimeKey,
+      realtimeUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -534,6 +562,14 @@ class TrafimageMaps extends React.PureComponent {
 
     if (staticFilesUrl !== prevProps.staticFilesUrl) {
       this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
+    }
+
+    if (realtimeKey !== prevProps.realtimeKey) {
+      this.store.dispatch(setRealtimeKey(realtimeKey));
+    }
+
+    if (realtimeUrl !== prevProps.realtimeUrl) {
+      this.store.dispatch(setRealtimeUrl(realtimeUrl));
     }
   }
 

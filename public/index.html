@@ -127,7 +127,13 @@
           .catch(function () {
             console.error('Request to get the apiKey failed');
           });
-
+        var searchParams = new URL(window.location.href).searchParams?.forEach(
+          (value, key) => {
+            if (/(Url|Key)/.test(key)) {
+              changeAttr(key, value);
+            }
+          },
+        );
         var map = document.getElementById('map');
         var log = document.getElementById('log');
         map.addEventListener('moveend', function (evt) {

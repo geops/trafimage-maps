@@ -39,6 +39,8 @@ import {
   SET_SEARCH_INFO_OPEN,
   SET_APP_BASE_URL,
   SET_STATIC_FILES_URL,
+  SET_REALTIME_URL,
+  SET_REALTIME_KEY,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -175,6 +177,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         shortenerUrl: action.data,
+      };
+    case SET_REALTIME_KEY:
+      return {
+        ...state,
+        realtimeKey: action.data,
+      };
+    case SET_REALTIME_URL:
+      return {
+        ...state,
+        realtimeUrl: action.data,
       };
     case SET_DRAW_URL:
       return {

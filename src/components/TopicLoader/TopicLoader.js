@@ -44,6 +44,8 @@ const propTypes = {
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   cartaroUrl: PropTypes.string,
   searchUrl: PropTypes.string,
+  realtimeKey: PropTypes.string,
+  realtimeUrl: PropTypes.string,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -68,6 +70,8 @@ const defaultProps = {
   staticFilesUrl: null,
   searchUrl: null,
   appBaseUrl: null,
+  realtimeKey: null,
+  realtimeUrl: null,
 };
 
 class TopicLoader extends Component {
@@ -237,6 +241,8 @@ class TopicLoader extends Component {
       staticFilesUrl,
       drawLayer,
       activeTopic,
+      realtimeKey,
+      realtimeUrl,
     } = this.props;
 
     const [currentBaseLayer] = layerService
@@ -323,6 +329,16 @@ class TopicLoader extends Component {
       if (flatLayers[i].api) {
         flatLayers[i].api.apiKey = apiKey;
       }
+
+      // Realtime layers
+      if (flatLayers[i].api?.wsApi) {
+        if (realtimeKey) {
+          flatLayers[i].api.apiKey = realtimeKey;
+        }
+        if (realtimeUrl) {
+          flatLayers[i].api.url = realtimeUrl;
+        }
+      }
     }
 
     // Add layers to the map only when a topic is activated or changed.
@@ -358,6 +374,8 @@ const mapStateToProps = (state) => ({
   mapsetUrl: state.app.mapsetUrl,
   shortenerUrl: state.app.shortenerUrl,
   drawUrl: state.app.drawUrl,
+  realtimeKey: state.app.realtimeKey,
+  realtimeUrl: state.app.realtimeUrl,
 });
 
 const mapDispatchToProps = {
