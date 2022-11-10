@@ -98,6 +98,19 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'Iframe',
+      content: 'src/examples/iframe/README.md',
+      external: true,
+      sectionDepth: 2,
+      sections: [
+        {
+          name: 'Geltungsbereiche',
+          content: 'src/examples/iframe/Geltungsbereiche/README.md',
+          exampleMode: 'expand',
+        },
+      ],
+    },
   ],
   styles: {
     StyleGuide: {

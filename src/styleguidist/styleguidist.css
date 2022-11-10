@@ -14,6 +14,10 @@ a[href='/#/Web%20component?id=section-trafimage-maps'] + ul {
   display: none;
 }
 
+div[class*="rsg--preview"] {
+  border: none;
+}
+
 #promo {
   position: absolute;
   bottom: 50px;
@@ -46,4 +50,16 @@ div[class*="rsg--preview"] {
   position: relative;
   width: 100%;
   height: 500px;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+iframe,
+.tm-trafimage-maps {
+  border: 1px solid rgb(232, 232, 232);
+  border-radius: 3px;
 }

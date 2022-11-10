@@ -153,7 +153,7 @@ function GeltungsbereicheTopicMenu() {
                  * @ignore
                  */
                 const menuEl = el;
-                menuEl.style.left = '10px';
+                menuEl.style.left = `${Math.floor(menuEl.style.left) - 2}px`;
               },
             },
           }}
