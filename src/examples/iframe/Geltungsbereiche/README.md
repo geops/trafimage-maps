@@ -9,7 +9,7 @@ import { TextField } from '@material-ui/core'
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const baseUrl = 'https://maps.trafimage.ch';
+const baseUrl = 'https://dev-trafimage-maps-git-daniel-geltungsbereiche-geops.vercel.app/';
 const topic = 'ch.geltungs.bereiche-iframe';
 
 const App = () => {
