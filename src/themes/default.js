@@ -127,7 +127,7 @@ const theme = createTheme({
       icon: {
         transition: 'transform 400ms',
         width: 18,
-        color: colors.gray,
+        color: 'inherit', // on SBB design it will be more colors.gray, but it's nicer like this.
       },
       outlined: {
         padding: '10px 44px 11px 14px',

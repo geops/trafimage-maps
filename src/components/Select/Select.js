@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Select as MuiSelect, makeStyles } from '@material-ui/core';
 import propTypes from 'prop-types';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -32,18 +32,16 @@ const useStyles = makeStyles((theme) => {
 const Select = (props) => {
   const { MenuProps } = props;
   const classesMenu = useStyles();
-  const ref = useRef();
 
   return (
     <MuiSelect
       variant="outlined"
-      ref={ref}
       IconComponent={ExpandMoreIcon}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       // The following props need to be set after {...newProps}, since they overwrite some of them
       MenuProps={{
-        getContentAnchorEl: () => ref.current,
+        getContentAnchorEl: () => null,
         anchorOrigin: {
           vertical: 'bottom',
           horizontal: 'left',

@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     '& svg:not(.MuiSelect-iconOpen) + .MuiOutlinedInput-notchedOutline': {
       border: 0,
     },
+    '&:hover': {
+      color: theme.palette.secondary.dark,
+    },
   },
 }));
 
