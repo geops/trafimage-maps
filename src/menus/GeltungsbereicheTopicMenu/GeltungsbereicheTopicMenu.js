@@ -15,6 +15,7 @@ import InfosButton from '../../components/InfosButton';
 import {
   setDialogPosition,
   setSelectedForInfos,
+  setFeatureInfo,
 } from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
@@ -121,6 +122,7 @@ function GeltungsbereicheTopicMenu() {
 
   const onChange = useCallback(
     (opt) => {
+      dispatch(setFeatureInfo());
       dispatch(setSelectedForInfos());
       setValue(opt.target.value);
       nonBaseLayers.forEach((layer) => {
