@@ -12,11 +12,26 @@ import { unByKey } from 'ol/Observable';
 import MenuItem from '../../components/Menu/MenuItem';
 import Select from '../../components/Select';
 import InfosButton from '../../components/InfosButton';
-import { setDialogPosition } from '../../model/app/actions';
+import {
+  setDialogPosition,
+  setSelectedForInfos,
+} from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
   return {
     root: {
+      '& .MuiPaper-root[style]': {
+        // We hardcode left to avoid bad effect when we open the menu
+        left: '10px !important',
+        width: 'unset !important',
+        minWidth: 'unset !important',
+      },
+      '& .MuiSelect-iconOpen + div + fieldset': {
+        borderBottom: 'none',
+      },
+      '& fieldset': {
+        borderRadius: 0,
+      },
       background: 'transparent !important',
       border: 'none !important',
       '& .MuiSelect-root': {
@@ -29,6 +44,18 @@ const useStyles = makeStyles(() => {
       },
       ' & .MuiMenu-paper': {
         boxSizing: 'border-box',
+      },
+      '& li:first-child': {
+        paddingTop: '6px',
+      },
+      '& li': {
+        paddingTop: '14px',
+        paddingBottom: '14px',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+      },
+      '& li:last-child': {
+        borderBottom: 'none',
+        paddingBottom: '6px',
       },
     },
     menuItem: {
@@ -94,14 +121,14 @@ function GeltungsbereicheTopicMenu() {
 
   const onChange = useCallback(
     (opt) => {
+      dispatch(setSelectedForInfos());
       setValue(opt.target.value);
-
       nonBaseLayers.forEach((layer) => {
         // eslint-disable-next-line no-param-reassign
         layer.visible = layer.name === opt.target.value;
       });
     },
-    [nonBaseLayers],
+    [dispatch, nonBaseLayers],
   );
 
   return (
@@ -141,19 +168,12 @@ function GeltungsbereicheTopicMenu() {
                  * @ignore
                  */
                 const menuEl = el;
-                menuEl.style.minWidth = `${ref.current.clientWidth}px`;
-                menuEl.style.width = `${ref.current.clientWidth}px`;
-              },
-              onEntered: (el) => {
-                /**
-                 * Dynamic width calculation por dropdown.
-                 * The MUI width calculation fails because of the border.
-                 * The element is always 2 x borderWidth too wide.
-                 * With this hack I reduce the width to make it fit.
-                 * @ignore
-                 */
-                const menuEl = el;
-                menuEl.style.left = `${Math.floor(menuEl.style.left) - 2}px`;
+                menuEl.style.maxWidth = window.getComputedStyle(
+                  ref.current.parentElement,
+                ).maxWidth;
+                menuEl.style.right = window.getComputedStyle(
+                  ref.current.parentElement,
+                ).right;
               },
             },
           }}

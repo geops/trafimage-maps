@@ -116,6 +116,10 @@ function TopicElements({ history }) {
       classNames.push('menu');
     }
 
+    if (elements.mapControls) {
+      classNames.push('map-controls');
+    }
+
     return classNames.join(' ');
   }, [elements]);
 

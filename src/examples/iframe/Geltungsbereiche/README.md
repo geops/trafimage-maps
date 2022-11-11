@@ -1,23 +1,32 @@
 The Geltungsbereiche topic provides a topic specific for iframe use.
 
+
+
 ```jsx
-import React, { useMemo } from 'react';
+import React, { useMemo, useState} from 'react';
+import { TextField } from '@material-ui/core'
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
+const baseUrl = 'https://maps.trafimage.ch';
+const topic = 'ch.geltungs.bereiche-iframe';
 
 const App = () => {
-
-  const url = 'https://maps.trafimage.ch/ch.geltungs.bereiche-iframe';
+  const [url, setUrl] = useState(baseUrl + '/' + topic);
 
   return (
-    <div className="container">
-      <input type="text" value={url}></input>
-      <iframe href={url}  width="550" height="300"/>
-    </div>
+    <>
+      <TextField label="Iframe URL" variant="outlined" defaultValue={url} margin="normal" fullWidth onChange={(evt) => {
+          setUrl(evt.target.value);
+      }}/>
+      <div className="container">
+        <iframe src={url}/>
+      </div>
+    </>
   );
 }
 
 <App />
 ```
+

@@ -292,7 +292,8 @@
     &.menu .wkp-menu-wrapper {
       top: 55px;
       left: 0;
-      width: 350px;
+      max-width: 350px;
+      right: 0;
 
       .wkp-menu-header {
         position: absolute;
@@ -448,11 +449,6 @@
           display: none;
         }
       }
-    }
-
-    // geltungsbereiche iframe topic
-    &:not(.menu) .wkp-menu-wrapper {
-      width: 335px;
     }
   }
 }
