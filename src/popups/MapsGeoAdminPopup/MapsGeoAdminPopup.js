@@ -17,7 +17,7 @@ function MapsGeoAdminPopup({ feature }) {
   useEffect(() => {
     const fetchHtml = () => {
       fetch(
-        `https://api3.geo.admin.ch/1909260825/rest/services/ech/MapServer/${layer.key}/${featureId}/htmlPopup?&lang=${i18n.language}`,
+        `https://api3.geo.admin.ch/rest/services/ech/MapServer/${layer.key}/${featureId}/htmlPopup?&lang=${i18n.language}`,
       )
         .then((res) => res.text())
         .then((text) => {
