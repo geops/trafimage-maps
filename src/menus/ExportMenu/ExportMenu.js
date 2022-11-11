@@ -10,7 +10,6 @@ import { cancelable } from 'cancelable-promise';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { FaDownload, FaInfoCircle } from 'react-icons/fa';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core';
 import MuiMenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
@@ -37,12 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     width: 140,
-  },
-  select: {
-    padding: '15px !important',
-  },
-  menuItem: {
-    paddingLeft: 12,
+    height: 44,
   },
   infoWrapper: {
     display: 'flex',
@@ -71,24 +65,6 @@ const options = [
   { label: 'A1 (150 dpi)', resolution: 2, format: 'a1', weight: 3 },
   { label: 'A1 (300 dpi)', resolution: 3, format: 'a1', weight: 5 },
 ];
-
-const MenuProps = {
-  getContentAnchorEl: null,
-  anchorOrigin: {
-    vertical: 'bottom',
-    horizontal: 'left',
-  },
-  PaperProps: {
-    style: {
-      padding: 0,
-      minWidth: 138,
-      border: '1px solid #888',
-      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-      borderRadius: 0,
-      marginTop: -3,
-    },
-  },
-};
 
 const validateOption = (format, exportScale, maxCanvasSize, map) => {
   if (!map || !maxCanvasSize) {
@@ -196,9 +172,7 @@ const ExportMenu = () => {
               <Select
                 labelId="pdf-format-select-label"
                 id="pdf-format-select-label"
-                IconComponent={ExpandMoreIcon}
                 className={classes.input}
-                classes={{ outlined: classes.select }}
                 value={getValue()}
                 onChange={(evt) =>
                   setExportSelection({
@@ -206,8 +180,6 @@ const ExportMenu = () => {
                     resolution: evt.target.value.resolution,
                   })
                 }
-                MenuProps={MenuProps}
-                variant="outlined"
               >
                 {options.map((opt) => {
                   return (
@@ -220,8 +192,6 @@ const ExportMenu = () => {
                         maxCanvasSize,
                         map,
                       )}
-                      className={classes.menuItem}
-                      classes={{ selected: classes.itemSelected }}
                     >
                       {opt.label}
                     </MuiMenuItem>

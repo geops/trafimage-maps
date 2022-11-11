@@ -186,11 +186,7 @@ function GeltungsbereicheTopicMenu() {
             }
 
             return (
-              <MuiMenuItem
-                key={layer.key}
-                value={layer.name}
-                style={{ display: 'flex' }}
-              >
+              <MuiMenuItem key={layer.key} value={layer.name}>
                 {t(layer.name)}
               </MuiMenuItem>
             );

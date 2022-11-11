@@ -143,28 +143,28 @@
         }
 
         var appName = url.searchParams.get('embedded');
-        if(appName) {}
+        if (appName) {
           changeAttr('appName', embedded);
         }
 
         var zoom = url.searchParams.get('zoom') || url.searchParams.get('z');
-        if(zoom) {
+        if (zoom) {
           changeAttr('zoom', zoom);
         }
 
         var x = url.searchParams.get('x');
         var y = url.searchParams.get('y');
-        if(x && y) {
-          changeAttr('center', "[" + x + ", " + y + "]");
+        if (x && y) {
+          changeAttr('center', '[' + x + ', ' + y + ']');
         }
 
         var enableTracking = url.searchParams.get('enableTracking');
-        if(enableTracking) {
+        if (enableTracking) {
           changeAttr('enableTracking', enableTracking);
         }
 
         var domainConsent = url.searchParams.get('domainConsent');
-        if(domainConsent) {
+        if (domainConsent) {
           changeAttr('domainConsent', domainConsent);
         }
 
