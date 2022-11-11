@@ -119,20 +119,54 @@
       };
 
       window.onload = function () {
+        var url = new URL(window.location.href);
         fetch('https://backend.developer.geops.io/publickey')
           .then(function (response) {
             return response.json();
           })
           .then(function (data) {
             changeAttr('apiKey', data.key);
-            const topicFromUrl = window.location.pathname.split('/').pop();
+            var topicFromUrl = url.pathname.split('/').pop();
             if (topicFromUrl) {
               changeAttr('activeTopicKey', topicFromUrl);
+            } else {
+              changeAttr('activeTopicKey', 'ch.sbb.netzkarte');
             }
           })
           .catch(function () {
             console.error('Request to get the apiKey failed');
           });
+
+        var embedded = url.searchParams.get('embedded');
+        if (embedded) {
+          changeAttr('embedded', embedded);
+        }
+
+        var appName = url.searchParams.get('embedded');
+        if(appName) {}
+          changeAttr('appName', embedded);
+        }
+
+        var zoom = url.searchParams.get('zoom') || url.searchParams.get('z');
+        if(zoom) {
+          changeAttr('zoom', zoom);
+        }
+
+        var x = url.searchParams.get('x');
+        var y = url.searchParams.get('y');
+        if(x && y) {
+          changeAttr('center', "[" + x + ", " + y + "]");
+        }
+
+        var enableTracking = url.searchParams.get('enableTracking');
+        if(enableTracking) {
+          changeAttr('enableTracking', enableTracking);
+        }
+
+        var domainConsent = url.searchParams.get('domainConsent');
+        if(domainConsent) {
+          changeAttr('domainConsent', domainConsent);
+        }
 
         var map = document.getElementById('map');
         var log = document.getElementById('log');
@@ -168,7 +202,6 @@
         zoom="8"
         center="[810000, 5900000]"
         appName="wkp"
-        activeTopicKey="ch.sbb.netzkarte"
         enableTracking="true"
         domainConsent=".*"
       ></trafimage-maps>

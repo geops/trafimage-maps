@@ -10,10 +10,11 @@ import { TextField } from '@material-ui/core'
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 const baseUrl = 'https://dev-trafimage-maps-git-daniel-geltungsbereiche-geops.vercel.app';
-const topic = 'ch.sbbgeltungsbereiche-iframe';
+const topic = '/ch.sbb.geltungsbereiche-iframe';
+const params = '?embedded=true';
 
 const App = () => {
-  const [url, setUrl] = useState(baseUrl + '/' + topic);
+  const [url, setUrl] = useState(baseUrl + topic + params);
 
   return (
     <>

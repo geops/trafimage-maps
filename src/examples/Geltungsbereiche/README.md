@@ -15,5 +15,6 @@ const apiKey = window.apiKey;
   zoom="7"
   language="en"
   elements="permalink=false"
+  embedded="true"
 />
 ```
