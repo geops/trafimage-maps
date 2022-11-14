@@ -212,12 +212,12 @@ const theme = createTheme({
         },
       },
     },
+    // MenuItem are only used for Select component.
     MuiMenuItem: {
       root: {
-        fontSize: '14px',
+        color: colors.gray,
         '&:hover,&:focus': {
           color: colors.redDark,
-          backgroundColor: 'white !important',
         },
         paddingLeft: 14,
       },

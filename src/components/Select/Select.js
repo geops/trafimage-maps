@@ -5,10 +5,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => {
   const list = {
-    color: theme.palette.text.secondary,
-
-    '& .MuiMenuItem-root:not(.Mui-selected)': {
-      color: 'inherit',
+    // Should be apply by theme but it's not
+    '& .Mui-selected': {
+      color: theme.palette.secondary.main,
     },
   };
   const paper = {
