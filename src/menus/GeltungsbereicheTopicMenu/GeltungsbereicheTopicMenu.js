@@ -25,10 +25,6 @@ const useStyles = makeStyles((theme) => {
       // Hide the MenuItem css, display only the select box.
       border: 'none !important',
       boxShadow,
-
-      '& .MuiInputBase-root': {
-        // color: theme.palette.text.secondary,
-      },
       '& .MuiPaper-root[style]': {
         boxShadow,
         // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
@@ -90,7 +86,6 @@ const useStyles = makeStyles((theme) => {
       top: 0,
       height: 18,
       paddingTop: 5, // needed because the MenuItem has an 5px margin top
-      // color: theme.palette.text.secondary,
     },
   };
 });
