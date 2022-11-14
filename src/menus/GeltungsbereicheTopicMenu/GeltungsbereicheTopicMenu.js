@@ -23,19 +23,19 @@ const useStyles = makeStyles((theme) => {
     root: {
       // Hide the MenuItem css, display only the select box.
       border: 'none !important',
+      boxShadow: '7px 7px 10px -6px rgb(0 0 0 / 40%)',
 
       '& .MuiInputBase-root': {
         // color: theme.palette.text.secondary,
-        // boxShadow:
-        //   '-5px 0px 10px -6px rgb(0 0 0 / 40%), 5px 0px 10px -6px rgb(0 0 0 / 40%), 0px 5px 10px -6px rgb(0 0 0 / 40%), 0px -5px 10px -6px rgb(0 0 0 / 40%)',
       },
       '& .MuiPaper-root[style]': {
         overflow: 'auto',
         // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
         left: '10px !important',
+        boxShadow: '7px 7px 10px -6px rgb(0 0 0 / 40%)',
       },
       '& .MuiSelect-iconOpen + div + fieldset': {
-        borderBottom: 'none',
+        // borderBottom: 'none',
       },
       '& fieldset': {
         borderRadius: 0,

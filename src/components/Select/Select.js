@@ -3,24 +3,36 @@ import { Select as MuiSelect, makeStyles } from '@material-ui/core';
 import propTypes from 'prop-types';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-const borderWidth = 2;
-
 const useStyles = makeStyles((theme) => {
-  return {
-    paper: {
-      boxSizing: 'border-box',
-      border: `${borderWidth}px solid ${theme.palette.text.secondary}`,
-      borderTop: 0,
-      borderRadius: 0,
-      marginTop: -2,
-    },
-    list: {
-      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-      color: theme.palette.text.secondary,
+  const list = {
+    color: theme.palette.text.secondary,
 
-      '& .MuiMenuItem-root:not(.Mui-selected)': {
-        color: 'inherit',
-      },
+    '& .MuiMenuItem-root:not(.Mui-selected)': {
+      color: 'inherit',
+    },
+  };
+  const paper = {
+    boxSizing: 'border-box',
+    borderRadius: 0,
+    marginTop: -2,
+  };
+  return {
+    paperAnchorBottom: {
+      borderTop: 0,
+      marginTop: -2,
+      ...paper,
+    },
+    paperAnchorTop: {
+      borderBottom: 0,
+      ...paper,
+    },
+    listAnchorBottom: {
+      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+      ...list,
+    },
+    listAnchorTop: {
+      borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+      ...list,
     },
   };
 });
@@ -31,7 +43,20 @@ const useStyles = makeStyles((theme) => {
  */
 const Select = (props) => {
   const { MenuProps } = props;
-  const classesMenu = useStyles();
+  const classes = useStyles();
+  const isAnchorTop = MenuProps?.anchorOrigin?.vertical === 'top';
+
+  let classesMenu = {
+    paper: classes.paperAnchorBottom,
+    list: classes.listAnchorBottom,
+  };
+
+  if (isAnchorTop) {
+    classesMenu = {
+      paper: classes.paperAnchorTop,
+      list: classes.listAnchorTop,
+    };
+  }
 
   return (
     <MuiSelect
@@ -57,7 +82,13 @@ const Select = (props) => {
 };
 
 Select.propTypes = {
-  MenuProps: propTypes.object,
+  MenuProps: propTypes.shape({
+    classes: propTypes.object,
+    anchorOrigin: propTypes.shape({
+      vertical: propTypes.oneOf(['top', 'bottom']),
+      horizontal: propTypes.oneOf(['left', 'right']),
+    }),
+  }),
 };
 
 Select.defaultProps = {

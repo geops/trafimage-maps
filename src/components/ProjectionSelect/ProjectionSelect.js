@@ -65,8 +65,6 @@ const ProjectionSelect = ({ projections }) => {
         },
         PaperProps: {
           style: {
-            borderTop: '2px solid #767676',
-            borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
             marginTop: -19,
           },
         },
