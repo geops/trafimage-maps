@@ -115,13 +115,13 @@ const propTypes = {
   vectorTilesUrl: PropTypes.string,
 
   /**
-   * API key for accessing tracker data.
+   * API key for accessing Realtime api.
    * Details at 'https://developer.geops.io'.
    */
   realtimeKey: PropTypes.string,
 
   /**
-   * URL of the websocket realtime server. Default is 'https://maps.geops.io'.
+   * URL of the websocket realtime server. Default is 'wss://tralis-tracker-api.geops.io/ws'.
    */
   realtimeUrl: PropTypes.string,
 
@@ -184,8 +184,8 @@ const attributes = {
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
   vectorTilesKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   vectorTilesUrl: process?.env?.REACT_APP_VECTOR_TILES_URL,
-  vectorRealtimeKey: process?.env?.REACT_APP_REALTIME_KEY,
-  vectorRealtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
+  realtimeKey: process?.env?.REACT_APP_REALTIME_KEY,
+  realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
   staticFilesUrl: process?.env?.REACT_APP_STATIC_FILES_URL,
   mapsetUrl: process?.env?.REACT_APP_MAPSET_URL,
   shortenerUrl: process?.env?.REACT_APP_SHORTENER_URL,

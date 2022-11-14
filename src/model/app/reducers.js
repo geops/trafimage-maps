@@ -43,6 +43,8 @@ import {
   SET_LOGIN_URL,
   SET_VECTOR_TILES_KEY,
   SET_API_KEY_NAME,
+  SET_REALTIME_URL,
+  SET_REALTIME_KEY,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -195,6 +197,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         shortenerUrl: action.data,
+      };
+    case SET_REALTIME_KEY:
+      return {
+        ...state,
+        realtimeKey: action.data,
+      };
+    case SET_REALTIME_URL:
+      return {
+        ...state,
+        realtimeUrl: action.data,
       };
     case SET_DRAW_URL:
       return {

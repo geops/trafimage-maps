@@ -38,6 +38,8 @@ export const SET_API_KEY_NAME = 'SET_API_KEY_NAME';
 export const SET_VECTOR_TILES_URL = 'SET_VECTOR_TILES_URL';
 export const SET_VECTOR_TILES_KEY = 'SET_VECTOR_TILES_KEY';
 export const SET_LOGIN_URL = 'SET_LOGIN_URL';
+export const SET_REALTIME_KEY = 'SET_REALTIME_KEY';
+export const SET_REALTIME_URL = 'SET_REALTIME_URL';
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
 
@@ -152,6 +154,10 @@ export const setVectorTilesKey = (data) => ({
 });
 
 export const setLoginUrl = (data) => ({ type: SET_LOGIN_URL, data });
+
+export const setRealtimeKey = (data) => ({ type: SET_REALTIME_KEY, data });
+
+export const setRealtimeUrl = (data) => ({ type: SET_REALTIME_URL, data });
 
 export const setStaticFilesUrl = (data) => ({
   type: SET_STATIC_FILES_URL,

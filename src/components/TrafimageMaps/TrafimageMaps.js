@@ -36,6 +36,8 @@ import {
   setVectorTilesUrl,
   setApiKeyName,
   setLoginUrl,
+  setRealtimeKey,
+  setRealtimeUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -170,6 +172,18 @@ const propTypes = {
   searchUrl: PropTypes.string,
 
   /**
+   * Api key for Realtime api.
+   * @private
+   */
+  realtimeKey: PropTypes.string,
+
+  /**
+   * URL endpoint for Realtime api.
+   * @private
+   */
+  realtimeUrl: PropTypes.string,
+
+  /**
    * Enable analytics tracking.
    * @private
    */
@@ -229,15 +243,15 @@ const defaultProps = {
   center: [925472, 5920000],
   zoom: undefined,
   maxExtent: undefined,
+  apiKeyName: 'key',
+  loginUrl: undefined,
   topics: null,
   language: 'de',
   enableTracking: true,
   disableCookies: false,
+  activeTopicKey: null,
   permissionInfos: null,
   embedded: false,
-  apiKeyName: 'key',
-  loginUrl: undefined,
-  activeTopicKey: null,
   apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
@@ -254,6 +268,8 @@ const defaultProps = {
   matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
   searchUrl: process?.env?.REACT_APP_SEARCH_URL,
+  realtimeKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
+  realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
 };
 
 class TrafimageMaps extends React.PureComponent {
@@ -383,6 +399,8 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesUrl,
       apiKeyName,
       loginUrl,
+      realtimeKey,
+      realtimeUrl,
     } = this.props;
     const { requireConsent } = this.state;
 
@@ -454,6 +472,14 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setLoginUrl(loginUrl));
     }
 
+    if (realtimeKey) {
+      this.store.dispatch(setRealtimeKey(realtimeKey));
+    }
+
+    if (realtimeUrl) {
+      this.store.dispatch(setRealtimeUrl(realtimeUrl));
+    }
+
     if (apiKey) {
       this.store.dispatch(setApiKey(apiKey));
     }
@@ -518,6 +544,8 @@ class TrafimageMaps extends React.PureComponent {
       vectorTilesKey,
       vectorTilesUrl,
       loginUrl,
+      realtimeKey,
+      realtimeUrl,
     } = this.props;
 
     if (zoom !== prevProps.zoom) {
@@ -594,6 +622,14 @@ class TrafimageMaps extends React.PureComponent {
 
     if (loginUrl !== prevProps.loginUrl) {
       this.store.dispatch(setLoginUrl(loginUrl));
+    }
+
+    if (realtimeKey !== prevProps.realtimeKey) {
+      this.store.dispatch(setRealtimeKey(realtimeKey));
+    }
+
+    if (realtimeUrl !== prevProps.realtimeUrl) {
+      this.store.dispatch(setRealtimeUrl(realtimeUrl));
     }
 
     if (topics !== prevProps.topics) {
