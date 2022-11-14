@@ -55,7 +55,6 @@ const ProjectionSelect = ({ projections }) => {
 
   return (
     <Select
-      hideOutline
       value={projection.value}
       onChange={onSelectChange}
       className={classes.input}

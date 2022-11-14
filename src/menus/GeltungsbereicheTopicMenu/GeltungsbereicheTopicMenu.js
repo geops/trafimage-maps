@@ -18,14 +18,21 @@ import {
   setFeatureInfo,
 } from '../../model/app/actions';
 
-const useStyles = makeStyles(() => {
+const useStyles = makeStyles((theme) => {
   return {
     root: {
+      // Hide the MenuItem css, display only the select box.
+      border: 'none !important',
+
+      '& .MuiInputBase-root': {
+        color: theme.palette.text.secondary,
+        // boxShadow:
+        //   '-5px 0px 10px -6px rgb(0 0 0 / 40%), 5px 0px 10px -6px rgb(0 0 0 / 40%), 0px 5px 10px -6px rgb(0 0 0 / 40%), 0px -5px 10px -6px rgb(0 0 0 / 40%)',
+      },
       '& .MuiPaper-root[style]': {
-        // We hardcode left to avoid bad effect when we open the menu
+        overflow: 'auto',
+        // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
         left: '10px !important',
-        width: 'unset !important',
-        minWidth: 'unset !important',
       },
       '& .MuiSelect-iconOpen + div + fieldset': {
         borderBottom: 'none',
@@ -33,18 +40,9 @@ const useStyles = makeStyles(() => {
       '& fieldset': {
         borderRadius: 0,
       },
-      background: 'transparent !important',
-      border: 'none !important',
-      '& .MuiSelect-root': {
-        background: 'white',
-      },
       '& .MuiSelect-selectMenu, & .MuiMenuItem-root ': {
         textOverflow: 'unset',
         whiteSpace: 'unset',
-        boxSizing: 'border-box',
-      },
-      ' & .MuiMenu-paper': {
-        boxSizing: 'border-box',
       },
       '& li:first-child': {
         paddingTop: '6px',
@@ -58,10 +56,27 @@ const useStyles = makeStyles(() => {
         borderBottom: 'none',
         paddingBottom: '6px',
       },
+      [theme.breakpoints.down('md')]: {
+        '& .MuiSelect-root': {
+          maxHeight: 69,
+        },
+      },
     },
-    menuItem: {
-      textOverflow: 'unset',
-      whiteSpace: 'unset',
+    currentValue: {
+      display: 'flex',
+
+      [theme.breakpoints.down('md')]: {
+        height: '100%',
+
+        '& > span:first-child': {
+          height: '100%',
+          overflow: 'hidden',
+          // Multiline overflow ellipsis
+          display: '-webkit-box',
+          '-webkitLineClamp': 3,
+          '-webkitBoxOrient': 'vertical',
+        },
+      },
     },
     infoButton: {
       position: 'absolute',
@@ -146,7 +161,7 @@ function GeltungsbereicheTopicMenu() {
           data-cy="gb-select"
           value={value}
           renderValue={() => (
-            <span style={{ display: 'flex' }}>
+            <span className={classes.currentValue}>
               <span style={{ flex: 2 }}>{t(value)}</span>
               <span style={{ width: 20 }} />
             </span>
