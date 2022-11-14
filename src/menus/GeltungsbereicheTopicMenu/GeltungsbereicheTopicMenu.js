@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => {
       border: 'none !important',
 
       '& .MuiInputBase-root': {
-        color: theme.palette.text.secondary,
+        // color: theme.palette.text.secondary,
         // boxShadow:
         //   '-5px 0px 10px -6px rgb(0 0 0 / 40%), 5px 0px 10px -6px rgb(0 0 0 / 40%), 0px 5px 10px -6px rgb(0 0 0 / 40%), 0px -5px 10px -6px rgb(0 0 0 / 40%)',
       },
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => {
         borderBottom: 'none',
         paddingBottom: '6px',
       },
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('sm')]: {
         '& .MuiSelect-root': {
           maxHeight: 69,
         },
@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => {
     currentValue: {
       display: 'flex',
 
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('sm')]: {
         height: '100%',
 
         '& > span:first-child': {
@@ -88,6 +88,7 @@ const useStyles = makeStyles((theme) => {
       top: 0,
       height: 18,
       paddingTop: 5, // needed because the MenuItem has an 5px margin top
+      // color: theme.palette.text.secondary,
     },
   };
 });
