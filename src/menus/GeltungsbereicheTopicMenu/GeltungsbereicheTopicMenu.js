@@ -19,31 +19,31 @@ import {
 } from '../../model/app/actions';
 
 const useStyles = makeStyles((theme) => {
+  const boxShadow = '7px 7px 10px -6px rgb(0 0 0 / 40%)';
   return {
     root: {
       // Hide the MenuItem css, display only the select box.
       border: 'none !important',
-      boxShadow: '7px 7px 10px -6px rgb(0 0 0 / 40%)',
+      boxShadow,
 
       '& .MuiInputBase-root': {
         // color: theme.palette.text.secondary,
       },
       '& .MuiPaper-root[style]': {
-        overflow: 'auto',
+        boxShadow,
         // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
+        // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
+        overflow: 'auto',
         left: '10px !important',
-        boxShadow: '7px 7px 10px -6px rgb(0 0 0 / 40%)',
       },
-      '& .MuiSelect-iconOpen + div + fieldset': {
-        // borderBottom: 'none',
-      },
-      '& fieldset': {
-        borderRadius: 0,
-      },
+
+      // Allow multiline display
       '& .MuiSelect-selectMenu, & .MuiMenuItem-root ': {
         textOverflow: 'unset',
         whiteSpace: 'unset',
       },
+
+      // Display proper padding and border inside the list
       '& li:first-child': {
         paddingTop: '6px',
       },
@@ -56,6 +56,8 @@ const useStyles = makeStyles((theme) => {
         borderBottom: 'none',
         paddingBottom: '6px',
       },
+
+      // Fixed height on small screen
       [theme.breakpoints.down('sm')]: {
         '& .MuiSelect-root': {
           maxHeight: 69,
@@ -170,19 +172,10 @@ function GeltungsbereicheTopicMenu() {
           onChange={onChange}
           MenuProps={{
             disablePortal: true,
-            PaperProps: {
-              style: {
-                marginTop: 'unset',
-                marginRight: 'unset',
-              },
-            },
             TransitionProps: {
               onEnter: (el) => {
                 /**
-                 * Dynamic width calculation por dropdown.
-                 * The MUI width calculation fails because of the border.
-                 * The element is always 2 x borderWidth too wide.
-                 * With this hack I reduce the width to make it fit.
+                 * Apply css of the current element
                  * @ignore
                  */
                 const menuEl = el;
