@@ -139,12 +139,13 @@
 
         var embedded = url.searchParams.get('embedded');
         if (embedded) {
+          console.log(embedded);
           changeAttr('embedded', embedded);
         }
 
         var appName = url.searchParams.get('embedded');
         if (appName) {
-          changeAttr('appName', embedded);
+          changeAttr('appName', appName);
         }
 
         var zoom = url.searchParams.get('zoom') || url.searchParams.get('z');
