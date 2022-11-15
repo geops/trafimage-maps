@@ -52,22 +52,12 @@ const useStyles = makeStyles((theme) => {
         borderBottom: 'none',
         paddingBottom: '6px',
       },
-
-      // Fixed height on small screen
-      [theme.breakpoints.down('sm')]: {
-        '& .MuiSelect-root': {
-          maxHeight: 69,
-        },
-      },
     },
     currentValue: {
       display: 'flex',
 
       [theme.breakpoints.down('sm')]: {
-        height: '100%',
-
         '& > span:first-child': {
-          height: '100%',
           overflow: 'hidden',
           // Multiline overflow ellipsis
           display: '-webkit-box',
@@ -95,6 +85,7 @@ function GeltungsbereicheTopicMenu() {
   const layers = useSelector((state) => state.map.layers);
   const drawLayer = useSelector((state) => state.map.drawLayer);
   const ref = useRef();
+  const [node, setNode] = useState();
   const { t } = useTranslation();
   const classes = useStyles();
 
@@ -160,7 +151,9 @@ function GeltungsbereicheTopicMenu() {
           value={value}
           renderValue={() => (
             <span className={classes.currentValue}>
-              <span style={{ flex: 2 }}>{t(value)}</span>
+              <span style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
+                {t(value)}
+              </span>
               <span style={{ width: 20 }} />
             </span>
           )}
@@ -169,17 +162,23 @@ function GeltungsbereicheTopicMenu() {
             disablePortal: true,
             TransitionProps: {
               onEnter: (el) => {
+                // Show all the text of the current value
+                node.style.display = 'inline-block';
+
                 /**
                  * Apply css of the current element
                  * @ignore
                  */
                 const menuEl = el;
-                menuEl.style.maxWidth = window.getComputedStyle(
+                const parentStyle = window.getComputedStyle(
                   ref.current.parentElement,
-                ).maxWidth;
-                menuEl.style.right = window.getComputedStyle(
-                  ref.current.parentElement,
-                ).right;
+                );
+                menuEl.style.maxWidth = parentStyle.maxWidth;
+                menuEl.style.right = parentStyle.right;
+              },
+              onExit: () => {
+                // Apply text overflow
+                node.style.display = '-webkit-box';
               },
             },
           }}
