@@ -289,16 +289,27 @@ function IframeDoc({ value, onChange }) {
           }) => {
             let currentValue = pathname
               ? url.pathname.split('/')[1] || ''
-              : searchParams.get(name)?.split(',');
+              : searchParams.get(name);
 
             const isSelectMultiple = comp === 'select' && /Array/i.test(type);
 
-            if (type === 'boolean') {
-              currentValue = currentValue === 'true';
-            } else {
+            if (pathname) {
+              currentValue = url.pathname.split('/')[1] || '';
+            } else if (comp === 'checkbox') {
+              currentValue = currentValue === 'true' || currentValue === true;
+            } else if (comp === 'select') {
+              currentValue = searchParams.get(name);
+
+              if (isSelectMultiple) {
+                currentValue = searchParams.get(name)?.split(',');
+              }
               if (!currentValue && isSelectMultiple) {
                 currentValue = [];
               }
+              if (!currentValue) {
+                currentValue = '';
+              }
+            } else if (comp === 'input') {
               if (!currentValue) {
                 currentValue = '';
               }
@@ -379,6 +390,7 @@ function IframeDoc({ value, onChange }) {
                           <Checkbox
                             checked={currentValue}
                             onChange={(evt) => {
+                              console.log(name, evt.target.checked);
                               if (evt.target.checked) {
                                 searchParams.set(name, evt.target.checked);
                               } else {
