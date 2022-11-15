@@ -93,6 +93,13 @@ module.exports = {
         },
       ],
     },
+    {
+      name: 'Iframe',
+      content: 'src/examples/iframe/README.md',
+      external: true,
+      sectionDepth: 2,
+      sections: [],
+    },
   ],
   styles: {
     StyleGuide: {
