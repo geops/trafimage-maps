@@ -99,6 +99,7 @@ module.exports = {
       external: true,
       sectionDepth: 2,
       sections: [],
+      exampleMode: 'hide',
     },
   ],
   styles: {

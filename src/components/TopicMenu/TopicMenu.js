@@ -18,14 +18,12 @@ import Select from '../Select/Select';
 import InfosButton from '../InfosButton';
 import TopicInfosButton from '../TopicInfosButton';
 
-const styles = (theme) => ({
+const styles = () => ({
   baselayerSelect: {
     margin: '4px 20px 5px 23px',
     height: 30,
     width: 'calc(100% - 42px)',
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    },
+    display: 'none',
   },
 });
 
@@ -196,7 +194,7 @@ class TopicMenu extends PureComponent {
           <Collapsible isCollapsed={isCollapsed}>
             {topic.key === activeTopic.key && baseLayers.length > 1 && (
               <Select
-                className={classes.baselayerSelect}
+                className={`wkp-base-layer-switcher-mobile ${classes.baselayerSelect}`}
                 value={
                   currentBaseLayerKey ||
                   currentBaseLayer.name ||

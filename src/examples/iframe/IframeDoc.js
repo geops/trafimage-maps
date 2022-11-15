@@ -6,6 +6,8 @@ import {
   InputLabel,
   MenuItem,
   makeStyles,
+  Checkbox,
+  FormControlLabel,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
@@ -14,7 +16,7 @@ import topics, { getTopicConfig } from '../../config/topics';
 const defaultPermalinkParams = [
   {
     name: 'topic',
-    type: 'String',
+    type: 'string',
     comp: 'select',
     pathname: true,
     defaultValue: 'ch.sbb.netzkarte',
@@ -25,7 +27,7 @@ const defaultPermalinkParams = [
   },
   {
     name: 'baselayers',
-    type: 'String',
+    type: 'string',
     comp: 'select',
     defaultValue: '',
     values: [],
@@ -40,7 +42,7 @@ const defaultPermalinkParams = [
   },
   {
     name: 'layers',
-    type: 'Array<String>',
+    type: 'array<string>',
     comp: 'select',
     defaultValue: '',
     values: [],
@@ -55,7 +57,7 @@ const defaultPermalinkParams = [
   },
   {
     name: 'disabled',
-    type: 'Array<String>',
+    type: 'array<string>',
     defaultValue: '',
     comp: 'select',
     values: [
@@ -85,7 +87,7 @@ const defaultPermalinkParams = [
           <li>geolocationButtonn</li>
           <li>header</li>
           <li>mapControls</li>
-          <li>menuu</li>
+          <li>menu</li>
           <li>overlay </li>
           <li>permalink</li>
           <li>shareMenu</li>
@@ -101,7 +103,7 @@ const defaultPermalinkParams = [
   },
   {
     name: 'lang',
-    type: 'String',
+    type: 'string',
     comp: 'select',
     defaultValue: 'de',
     values: ['de', 'fr', 'it', 'en'],
@@ -150,6 +152,23 @@ const defaultPermalinkParams = [
         min: 0,
         max: 20,
       },
+    },
+  },
+  {
+    name: 'embedded',
+    type: 'boolean',
+    comp: 'checkbox',
+    defaultValue: false,
+    description: () => {
+      return (
+        <span>
+          If true, it improves mouse/touch interactions to avoid conflict with
+          parent page.
+        </span>
+      );
+    },
+    props: {
+      type: 'checkbox',
     },
   },
 ];
@@ -271,13 +290,18 @@ function IframeDoc({ value, onChange }) {
             let currentValue = pathname
               ? url.pathname.split('/')[1] || ''
               : searchParams.get(name)?.split(',');
-            const isSelectMultiple = comp === 'select' && /Array/.test(type);
 
-            if (!currentValue && isSelectMultiple) {
-              currentValue = [];
-            }
-            if (!currentValue) {
-              currentValue = '';
+            const isSelectMultiple = comp === 'select' && /Array/i.test(type);
+
+            if (type === 'boolean') {
+              currentValue = currentValue === 'true';
+            } else {
+              if (!currentValue && isSelectMultiple) {
+                currentValue = [];
+              }
+              if (!currentValue) {
+                currentValue = '';
+              }
             }
 
             return (
@@ -300,7 +324,7 @@ function IframeDoc({ value, onChange }) {
                       </InputLabel>
                       <Select
                         labelId="demo-mutiple-name-label"
-                        multiple={/Array/.test(type)}
+                        multiple={/Array/i.test(type)}
                         value={currentValue}
                         onChange={(evt) => {
                           if (pathname) {
@@ -346,6 +370,30 @@ function IframeDoc({ value, onChange }) {
                       // eslint-disable-next-line react/jsx-props-no-spreading
                       {...(props || {})}
                     />
+                  )}
+                  {comp === 'checkbox' && (
+                    <FormControl>
+                      <FormControlLabel
+                        style={{ marginTop: 16 }}
+                        control={
+                          <Checkbox
+                            checked={currentValue}
+                            onChange={(evt) => {
+                              if (evt.target.checked) {
+                                searchParams.set(name, evt.target.checked);
+                              } else {
+                                searchParams.delete(name);
+                              }
+
+                              onChange(url.toString());
+                            }}
+                            // eslint-disable-next-line react/jsx-props-no-spreading
+                            {...(props || {})}
+                          />
+                        }
+                        label={name}
+                      />
+                    </FormControl>
                   )}
                 </td>
               </tr>
