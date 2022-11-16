@@ -397,6 +397,14 @@
     .wkp-header-right {
       left: calc(100% - 400px);
     }
+
+    .wkp-gb-menu-current-value > span:first-child {
+      overflow: hidden;
+      // Multiline overflow ellipsis
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
   }
 
   &.tm-w-l,

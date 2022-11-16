@@ -18,7 +18,7 @@ import {
   setFeatureInfo,
 } from '../../model/app/actions';
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(() => {
   const boxShadow = '7px 7px 10px -6px rgb(0 0 0 / 40%)';
   return {
     root: {
@@ -55,16 +55,6 @@ const useStyles = makeStyles((theme) => {
     },
     currentValue: {
       display: 'flex',
-
-      [theme.breakpoints.down('sm')]: {
-        '& > span:first-child': {
-          overflow: 'hidden',
-          // Multiline overflow ellipsis
-          display: '-webkit-box',
-          '-webkitLineClamp': 3,
-          '-webkitBoxOrient': 'vertical',
-        },
-      },
     },
     infoButton: {
       position: 'absolute',
@@ -150,7 +140,9 @@ function GeltungsbereicheTopicMenu() {
           data-cy="gb-select"
           value={value}
           renderValue={() => (
-            <span className={classes.currentValue}>
+            <span
+              className={`wkp-gb-menu-current-value ${classes.currentValue}`}
+            >
               <span style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
                 {t(value)}
               </span>
