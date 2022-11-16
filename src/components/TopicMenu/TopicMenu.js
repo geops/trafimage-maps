@@ -18,13 +18,11 @@ import Select from '../Select/Select';
 import InfosButton from '../InfosButton';
 import TopicInfosButton from '../TopicInfosButton';
 
-const styles = (theme) => ({
-  wrapper: {
+const styles = () => ({
+  wrapperBaseLayerSelect: {
     margin: '4px 20px 5px 23px',
     width: 'calc(100% - 42px)',
-    [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    },
+    display: 'none',
   },
 });
 
@@ -194,7 +192,9 @@ class TopicMenu extends PureComponent {
         <div className="wkp-topic-content">
           <Collapsible isCollapsed={isCollapsed}>
             {topic.key === activeTopic.key && baseLayers.length > 1 && (
-              <div className={classes.wrapper}>
+              <div
+                className={`wkp-base-layer-switcher-mobile ${classes.wrapperBaseLayerSelect}`}
+              >
                 <Select
                   fullWidth
                   value={

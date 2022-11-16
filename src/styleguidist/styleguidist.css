@@ -16,6 +16,7 @@ a[href='/#/Web%20component?id=section-trafimage-maps'] + ul {
 
 div[class*="rsg--preview"] {
   border: none;
+  padding: 0 !important;
 }
 
 #promo {
@@ -42,10 +43,6 @@ div[class*="rsg--preview"] {
   text-decoration: none;
 }
 
-div[class*="rsg--preview"] {
-  padding: 0 !important;
-}
-
 .container {
   position: relative;
   width: 100%;
@@ -62,4 +59,9 @@ iframe,
 .tm-trafimage-maps {
   border: 1px solid rgb(232, 232, 232);
   border-radius: 3px;
+}
+
+/* hide hot reload iframe */
+body > iframe {
+  display: none;
 }

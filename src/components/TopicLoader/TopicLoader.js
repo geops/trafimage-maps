@@ -279,8 +279,11 @@ class TopicLoader extends PureComponent {
       (l) => l.get('isBaseLayer') && l.visible,
     );
 
-    // Set the visible baselayer if need to be changed on topic change.
-    if (visibleBaseLayers.indexOf(currentBaseLayer) === -1) {
+    // Make sure a base layer is a visible on topic change
+    if (
+      !visibleBaseLayers.length ||
+      (currentBaseLayer && visibleBaseLayers.indexOf(currentBaseLayer) === -1)
+    ) {
       topicLayers
         .filter((l) => l.get('isBaseLayer'))
         .forEach((lay, idx) => {
