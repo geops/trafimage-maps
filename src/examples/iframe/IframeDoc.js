@@ -390,7 +390,6 @@ function IframeDoc({ value, onChange }) {
                           <Checkbox
                             checked={currentValue}
                             onChange={(evt) => {
-                              console.log(name, evt.target.checked);
                               if (evt.target.checked) {
                                 searchParams.set(name, evt.target.checked);
                               } else {
