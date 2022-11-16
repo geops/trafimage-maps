@@ -3,6 +3,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
+import { Layer } from 'mobility-toolbox-js/ol';
 import LayerService from './utils/LayerService';
 import TrafimageMaps from './components/TrafimageMaps';
 import styles from './WebComponent.scss';
@@ -306,14 +307,16 @@ const WebComponent = (props) => {
         });
         const layerService = new LayerService(topic.layers);
         const layers = layerService.getLayersAsFlatArray();
+
+        // We put then in a rootLayer to be sure the group property is properly applied
+        const rootLayer = new Layer({ children: layers });
         Object.entries(obj).forEach(([key, value]) => {
-          layers.forEach((layer) => {
+          rootLayer.children.forEach((layer) => {
             const initalVisibility = initialLayersVisibility[layer.key];
             if (
               (initalVisibility === true || initalVisibility === false) &&
               obj[layer.key] === undefined
             ) {
-              // layer.setVisible(initialLayersVisibility[layer.key]);
               // eslint-disable-next-line no-param-reassign
               layer.visible = initialLayersVisibility[layer.key];
               delete initialLayersVisibility[layer.key];
@@ -325,7 +328,6 @@ const WebComponent = (props) => {
               }
               // eslint-disable-next-line no-param-reassign
               layer.visible = value;
-              // layer.setVisible(value);
             }
           });
         });

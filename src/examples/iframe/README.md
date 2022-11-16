@@ -35,13 +35,11 @@ const getCodeFromUrl = (urlString) => {
 
   // baselayers 
   let layersVisibility = '';
-  // TODO see why it does not work, conflict with permalink maybe?
-  // layersVisibility doesn't affect the visibility of base layer.
-  // let baselayers = searchParams.get('baselayers');
-  // if (baselayers) {
-  //   // only the first is relevant
-  //   layersVisibility = `${baselayers.split(',')[0]}=true`;
-  // }
+  let baselayers = searchParams.get('baselayers');
+  if (baselayers) {
+    // only the first is relevant
+    layersVisibility = `${baselayers.split(',')[0]}=true`;
+  }
 
   // layers
   let layers = searchParams.get('layers');
