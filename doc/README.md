@@ -1,6 +1,7 @@
 # Documentation in Trafimage-maps
 
 Two documentation tools are combined:
+
 - react-styleguidist (https://github.com/styleguidist/react-styleguidist)
 - documentation.js (https://github.com/documentationjs/documentation)
 
@@ -19,25 +20,26 @@ the documentation build of both tools.
 
 ## Configuration
 
-Variables shared among both documentation are written in /src/config/doc-config.json
+Variables for both documentation are written in /src/config/doc-config.json
 
 - Styleguidist: 'styleguide.config.js
-    two components need to be overwritten:
-    - 'StyleGuideRenderer': to customize the style of the page, with our own
-        header, ribbon footer, etc.
-    - 'ComponentsList': to change the href and ensure the page
-        doesn't reload on item click.
+  two components need to be overwritten:
 
+  - 'StyleGuideRenderer': to customize the style of the page, with our own
+    header, ribbon footer, etc.
+  - 'ComponentsList': to change the href and ensure the page
+    doesn't reload on item click.
 
 - Documentation.js:
-    scripts/doc.js is the script aimed to configure the documentation.js html building
+  scripts/doc.mjs is the script aimed to configure the documentation.js html building
 
-    Params to pass for html creation:
-    - 'project-name': displayed in the header
-    - 'project-url': href for the footer's ribbon
-    - 'theme': custom style from a npm package
-        Use geOps default template (https://github.com/geops/geops-docjs-template)
-        Same header and footer than styleguidist
+  Params to pass for html creation:
+
+  - 'project-name': displayed in the header
+  - 'project-url': href for the footer's ribbon
+  - 'theme': custom style from a npm package
+    Use geOps default template (https://github.com/geops/geops-docjs-template)
+    Same header and footer than styleguidist
 
 /!\ to change the style consistently it needs to be changed
 in both places ('geops-docjs-template' & stylegudist)
