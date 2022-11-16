@@ -16,6 +16,7 @@ a[href='/#/Web%20component?id=section-trafimage-maps'] + ul {
 
 div[class*="rsg--preview"] {
   border: none;
+  padding: 0 !important;
 }
 
 #promo {
@@ -40,10 +41,6 @@ div[class*="rsg--preview"] {
 #promo a,
 #promo a:hover {
   text-decoration: none;
-}
-
-div[class*="rsg--preview"] {
-  padding: 0 !important;
 }
 
 .container {
