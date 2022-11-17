@@ -19,9 +19,8 @@ import InfosButton from '../InfosButton';
 import TopicInfosButton from '../TopicInfosButton';
 
 const styles = () => ({
-  baselayerSelect: {
+  wrapperBaseLayerSelect: {
     margin: '4px 20px 5px 23px',
-    height: 30,
     width: 'calc(100% - 42px)',
     display: 'none',
   },
@@ -106,8 +105,8 @@ class TopicMenu extends PureComponent {
             titles={{
               layerShow: t('Layer anzeigen'),
               layerHide: t('Layer verbergen'),
-              subLayerShow: t('Unterlayer anzeigen'),
-              subLayerHide: t('Unterlayer verbergen'),
+              subLayerShow: t('Layer anzeigen'),
+              subLayerHide: t('Layer verbergen'),
             }}
             renderItemContent={(layer, layerTreeComp) => (
               <>
@@ -193,44 +192,40 @@ class TopicMenu extends PureComponent {
         <div className="wkp-topic-content">
           <Collapsible isCollapsed={isCollapsed}>
             {topic.key === activeTopic.key && baseLayers.length > 1 && (
-              <Select
-                className={`wkp-base-layer-switcher-mobile ${classes.baselayerSelect}`}
-                value={
-                  currentBaseLayerKey ||
-                  currentBaseLayer.name ||
-                  currentBaseLayer.key
-                }
-                onChange={(evt) => {
-                  const { value } = evt.target;
-                  const baseLayer = baseLayers.find(({ name, key }) => {
-                    const val = name || key;
-                    return val === value || val === value;
-                  });
-                  // baseLayer.setVisible(true);
-                  baseLayer.visible = true;
-                  this.setState({
-                    currentBaseLayerKey: baseLayer.name || baseLayer.key,
-                  });
-                }}
-                MenuProps={{
-                  PaperProps: {
-                    style: {
-                      padding: 0,
-                      marginTop: -10,
-                    },
-                  },
-                }}
-                data-cy="baselayer-select"
+              <div
+                className={`wkp-base-layer-switcher-mobile ${classes.wrapperBaseLayerSelect}`}
               >
-                {baseLayers.map(({ name, key }) => {
-                  const value = name || key;
-                  return (
-                    <MenuItem key={value} value={value}>
-                      {t(value)}
-                    </MenuItem>
-                  );
-                })}
-              </Select>
+                <Select
+                  fullWidth
+                  value={
+                    currentBaseLayerKey ||
+                    currentBaseLayer.name ||
+                    currentBaseLayer.key
+                  }
+                  onChange={(evt) => {
+                    const { value } = evt.target;
+                    const baseLayer = baseLayers.find(({ name, key }) => {
+                      const val = name || key;
+                      return val === value || val === value;
+                    });
+                    // baseLayer.setVisible(true);
+                    baseLayer.visible = true;
+                    this.setState({
+                      currentBaseLayerKey: baseLayer.name || baseLayer.key,
+                    });
+                  }}
+                  data-cy="baselayer-select"
+                >
+                  {baseLayers.map(({ name, key }) => {
+                    const value = name || key;
+                    return (
+                      <MenuItem key={value} value={value}>
+                        {t(value)}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+              </div>
             )}
             {layerTree}
             {topic.key === activeTopic.key && TopicMenuBottom ? (

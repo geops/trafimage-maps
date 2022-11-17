@@ -10,22 +10,21 @@ const propTypes = {
   style: PropTypes.object,
   isDraggable: PropTypes.bool,
   selectedForInfos: PropTypes.object,
-  staticFilesUrl: PropTypes.string,
 };
 
 const defaultProps = {
   style: undefined,
   isDraggable: true,
   selectedForInfos: null,
-  staticFilesUrl: null,
 };
 
 export const NAME = 'infoDialog';
 
 function LayerInfosDialog(props) {
   const language = useSelector((state) => state.app.language);
+  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const { t } = useTranslation();
-  const { style, isDraggable, selectedForInfos, staticFilesUrl } = props;
+  const { style, isDraggable, selectedForInfos } = props;
   if (!selectedForInfos) {
     return null;
   }
@@ -47,9 +46,10 @@ function LayerInfosDialog(props) {
 
   let body;
 
+  const LayerInfoComponent =
+    typeof component === 'string' ? layerInfos[component] : component;
+
   if (component) {
-    const LayerInfoComponent =
-      typeof component === 'string' ? layerInfos[component] : component;
     body = (
       <LayerInfoComponent
         language={language}
@@ -86,7 +86,11 @@ function LayerInfosDialog(props) {
       cancelDraggable=".tm-dialog-body"
       name={NAME}
       title={
-        <span>{t(`${selectedForInfos.name || selectedForInfos.key}`)}</span>
+        LayerInfoComponent?.renderTitle ? (
+          LayerInfoComponent.renderTitle(selectedForInfos, t)
+        ) : (
+          <span>{t(`${selectedForInfos.name || selectedForInfos.key}`)}</span>
+        )
       }
       body={body}
       style={style}

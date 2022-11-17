@@ -2,6 +2,11 @@
   position: absolute;
   top: 12px;
   left: 10px;
-  width: 371px;
+  max-width: 371px;
   z-index: 1;
+  right: 10px;
+}
+
+.map-controls .wkp-menu-wrapper {
+  right: 75px; // map-controls + margin*2
 }

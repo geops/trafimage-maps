@@ -1,6 +1,6 @@
 import Map from 'ol/Map';
 import View from 'ol/View';
-import mapboxgl from 'mapbox-gl';
+import maplibregl from 'maplibre-gl';
 import TrafimageMapboxLayer from '../TrafimageMapboxLayer';
 import MapboxStyleLayer from '.';
 
@@ -50,7 +50,7 @@ describe('MapboxStyleLayer', () => {
     source.attachToMap(map);
     await source.loadMbMap();
     layer.attachToMap(map);
-    expect(layer.mapboxLayer.mbMap).toBeInstanceOf(mapboxgl.Map);
+    expect(layer.mapboxLayer.mbMap).toBeInstanceOf(maplibregl.Map);
   });
 
   test('should called detachFromMap on initalization.', () => {

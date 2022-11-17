@@ -28,8 +28,9 @@ function InfosButton({ selectedInfo, className }) {
     <IconButton
       className={classNam}
       title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
-      onClick={() => {
+      onClick={(evt) => {
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
+        evt.stopPropagation();
       }}
     >
       <FaInfoCircle focusable={false} />

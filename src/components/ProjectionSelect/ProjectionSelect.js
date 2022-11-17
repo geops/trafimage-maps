@@ -6,17 +6,14 @@ import { useTranslation } from 'react-i18next';
 import Select from '../Select';
 import { setProjection } from '../../model/app/actions';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   input: {
-    width: 130,
-    minWidth: 130,
-  },
-  select: {
-    padding: '10px 14px !important',
-  },
-  menuItem: {
-    paddingLeft: 12,
-    fontSize: theme.typography.fontSize,
+    width: 138,
+    minWidth: 138,
+
+    '& svg:not(.MuiSelect-iconOpen) + .MuiOutlinedInput-notchedOutline': {
+      border: 0,
+    },
   },
 }));
 
@@ -34,21 +31,11 @@ const ProjectionSelect = ({ projections }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const projection = useSelector((state) => state.app.projection);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobileWidth = useMemo(() => {
     return ['xs', 's'].includes(screenWidth);
   }, [screenWidth]);
-
-  const projection = useSelector((state) => state.app.projection);
-  const projectionsOptions = useMemo(() => {
-    return projections.map((p) => {
-      return (
-        <MenuItem key={p.value} value={p.value} className={classes.menuItem}>
-          {t(p.label)}
-        </MenuItem>
-      );
-    });
-  }, [projections, t, classes]);
 
   const onSelectChange = useCallback(
     (evt) => {
@@ -68,23 +55,28 @@ const ProjectionSelect = ({ projections }) => {
 
   return (
     <Select
-      hideOutline
       value={projection.value}
       onChange={onSelectChange}
       className={classes.input}
-      classes={{ outlined: classes.select }}
       MenuProps={{
+        anchorOrigin: {
+          vertical: 'top',
+          horizontal: 'left',
+        },
         PaperProps: {
           style: {
-            borderTop: `1px solid #888`,
-            borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
             marginTop: -19,
           },
         },
       }}
-      variant="outlined"
     >
-      {projectionsOptions}
+      {projections.map((p) => {
+        return (
+          <MenuItem key={p.value} value={p.value}>
+            {t(p.label)}
+          </MenuItem>
+        );
+      })}
     </Select>
   );
 };

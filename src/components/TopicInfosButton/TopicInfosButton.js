@@ -9,7 +9,7 @@ function TopicInfosButton({ topic }) {
   const className = useMemo(() => {
     const classes = ['wkp-info-bt'];
 
-    if (activeTopic.key === topic.key) {
+    if (activeTopic?.key === topic.key) {
       classes.push('wkp-active');
     }
     return classes.join(' ');

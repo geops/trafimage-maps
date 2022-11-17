@@ -102,9 +102,11 @@
         margin: -55px;
       }
     </style>
-    <script src="https://cdn.polyfill.io/v2/polyfill.js?features=fetch"></script>
     <script type="text/javascript">
       window.changeAttr = function (attr, val) {
+        if (attr === 'activeTopicKey') {
+          window.history.pushState({}, '', '/' + val);
+        }
         // If attribute value is the same the update is not triggered,
         // so we set it to null first before setting it to the new value.
         var map = document.getElementById('map');
@@ -117,23 +119,63 @@
       };
 
       window.onload = function () {
+        var url = new URL(window.location.href);
         fetch('https://backend.developer.geops.io/publickey')
           .then(function (response) {
             return response.json();
           })
           .then(function (data) {
             changeAttr('apiKey', data.key);
+            var topicFromUrl = url.pathname.split('/').pop();
+            if (topicFromUrl) {
+              changeAttr('activeTopicKey', topicFromUrl);
+            } else {
+              changeAttr('activeTopicKey', 'ch.sbb.netzkarte');
+            }
           })
           .catch(function () {
             console.error('Request to get the apiKey failed');
           });
-        var searchParams = new URL(window.location.href).searchParams?.forEach(
-          (value, key) => {
-            if (/(Url|Key)/.test(key)) {
-              changeAttr(key, value);
-            }
-          },
-        );
+        
+
+        url.searchParams?.forEach((value, key) => {
+          if (/(Url|Key)/.test(key)) {
+            changeAttr(key, value);
+          }
+        });
+
+        var embedded = url.searchParams.get('embedded');
+        if (embedded) {
+          console.log(embedded);
+          changeAttr('embedded', embedded);
+        }
+
+        var appName = url.searchParams.get('appName');
+        if (appName) {
+          changeAttr('appName', appName);
+        }
+
+        var zoom = url.searchParams.get('zoom') || url.searchParams.get('z');
+        if (zoom) {
+          changeAttr('zoom', zoom);
+        }
+
+        var x = url.searchParams.get('x');
+        var y = url.searchParams.get('y');
+        if (x && y) {
+          changeAttr('center', '[' + x + ', ' + y + ']');
+        }
+
+        var enableTracking = url.searchParams.get('enableTracking');
+        if (enableTracking) {
+          changeAttr('enableTracking', enableTracking);
+        }
+
+        var domainConsent = url.searchParams.get('domainConsent');
+        if (domainConsent) {
+          changeAttr('domainConsent', domainConsent);
+        }
+
         var map = document.getElementById('map');
         var log = document.getElementById('log');
         map.addEventListener('moveend', function (evt) {
@@ -169,7 +211,6 @@
         center="[810000, 5900000]"
         appName="wkp"
         enableTracking="true"
-        activeTopicKey="ch.sbb.netzkarte"
         domainConsent=".*"
       ></trafimage-maps>
       <!-- <div id="onetrust-consent-sdk">

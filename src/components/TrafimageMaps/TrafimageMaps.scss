@@ -32,6 +32,14 @@
     font-family: 'SBBWeb-Bold', Arial, sans-serif;
   }
 
+  .wkp-selected {
+    color: $brand-primary-hover;
+  }
+
+  .wkp-info-bt:hover {
+    color: $brand-primary-hover;
+  }
+
   .rs-map {
     position: absolute;
     top: 0;
@@ -284,10 +292,12 @@
       top: 65px;
     }
 
-    .wkp-menu-wrapper {
+    // topics menu component is enabled
+    &.menu .wkp-menu-wrapper {
       top: 55px;
       left: 0;
-      width: 350px;
+      max-width: 350px;
+      right: 0;
 
       .wkp-menu-header {
         position: absolute;
@@ -304,14 +314,6 @@
 
       .wkp-topics-menu {
         margin-top: 0;
-
-        .wkp-menu-wrapper {
-          margin-top: 55px;
-
-          .wkp-collapsible-vertical {
-            margin-top: 0;
-          }
-        }
       }
     }
 
@@ -394,6 +396,14 @@
 
     .wkp-header-right {
       left: calc(100% - 400px);
+    }
+
+    .wkp-gb-menu-current-value > span:first-child {
+      overflow: hidden;
+      // Multiline overflow ellipsis
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
     }
   }
 

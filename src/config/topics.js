@@ -1,5 +1,6 @@
-import './proj4';
+import React from 'react';
 import { getCenter } from 'ol/extent';
+import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import netzkarteLayers, {
   dataLayer,
@@ -22,7 +23,12 @@ import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
 import isbLayers from './ch.sbb.isb';
 import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 import zweitausbildungLayers from './ch.sbb.zweitausbildung';
+import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
+import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
+import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import defaultSearches, { handicapStopFinder } from './searches';
+import { GeltungsbereicheMenuFilter } from '../filters';
+import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 
 // For backward compatibility
 export {
@@ -42,6 +48,7 @@ const defaultElements = {
   search: true,
   drawMenu: true,
   overlay: true,
+  geolocationButton: true,
 };
 
 export const netzkarte = {
@@ -257,6 +264,57 @@ const sandbox = {
   searches: defaultSearches,
 };
 
+export const geltungsbereicheMvp = {
+  name: 'ch.sbb.geltungsbereiche',
+  key: 'ch.sbb.geltungsbereiche',
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+  },
+  maxZoom: 14,
+  layers: geltungsbereicheMvpLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  searches: defaultSearches,
+};
+
+export const geltungsbereicheIframe = {
+  ...geltungsbereicheMvp,
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+  },
+  key: 'ch.sbb.geltungsbereiche-iframe',
+  layers: geltungsbereicheIframeLayers,
+  only: true,
+  hideInLayerTree: true,
+  menu: <GeltungsbereicheTopicMenu />,
+};
+
+export const geltungsbereiche = {
+  name: 'ch.sbb.geltungsbereiche-beta',
+  key: 'ch.sbb.geltungsbereiche-beta',
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+  },
+  layers: geltungsbereicheLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  topicMenuBottom: ({ topic }) => <GeltungsbereicheMenuFilter topic={topic} />,
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -269,6 +327,9 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
+    geltungsbereicheMvp,
+    geltungsbereicheIframe,
+    geltungsbereiche,
     energiePublic,
     sandbox,
   ],

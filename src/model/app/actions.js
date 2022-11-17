@@ -34,12 +34,26 @@ export const SET_SEARCH_URL = 'SET_SEARCH_URL';
 export const SET_SEARCH_INFO_OPEN = 'SET_SEARCH_INFO_OPEN';
 export const SET_APP_BASE_URL = 'SET_APP_BASE_URL';
 export const SET_STATIC_FILES_URL = 'SET_STATIC_FILES_URL';
+export const SET_API_KEY_NAME = 'SET_API_KEY_NAME';
+export const SET_VECTOR_TILES_URL = 'SET_VECTOR_TILES_URL';
+export const SET_VECTOR_TILES_KEY = 'SET_VECTOR_TILES_KEY';
+export const SET_LOGIN_URL = 'SET_LOGIN_URL';
 export const SET_REALTIME_KEY = 'SET_REALTIME_KEY';
 export const SET_REALTIME_URL = 'SET_REALTIME_URL';
 
-export const setTopics = (data) => ({ type: SET_TOPICS, data });
-
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
+
+export const setTopics =
+  (data = []) =>
+  (dispatch, getState) => {
+    const {
+      app: { activeTopicKey },
+    } = getState();
+    if (data[0] && !activeTopicKey) {
+      dispatch(setActiveTopic(data[0]));
+    }
+    dispatch({ type: SET_TOPICS, data });
+  };
 
 export const setLanguage = (data) => {
   // Set HTML language for screen readers.
@@ -129,6 +143,18 @@ export const setShowPopups = (data) => ({ type: SET_SHOW_POPUPS, data });
 
 export const setAppBaseUrl = (data) => ({ type: SET_APP_BASE_URL, data });
 
+export const setVectorTilesUrl = (data) => ({
+  type: SET_VECTOR_TILES_URL,
+  data,
+});
+
+export const setVectorTilesKey = (data) => ({
+  type: SET_VECTOR_TILES_KEY,
+  data,
+});
+
+export const setLoginUrl = (data) => ({ type: SET_LOGIN_URL, data });
+
 export const setRealtimeKey = (data) => ({ type: SET_REALTIME_KEY, data });
 
 export const setRealtimeUrl = (data) => ({ type: SET_REALTIME_URL, data });
@@ -150,6 +176,11 @@ export const setDeparturesUrl = (data) => ({
 
 export const setApiKey = (data) => ({
   type: SET_API_KEY,
+  data,
+});
+
+export const setApiKeyName = (data) => ({
+  type: SET_API_KEY_NAME,
   data,
 });
 
