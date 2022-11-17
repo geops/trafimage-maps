@@ -26,9 +26,11 @@ import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
+import stsIframeLayers from './ch.sbb.sts.iframe';
 import defaultSearches, { handicapStopFinder } from './searches';
 import { GeltungsbereicheMenuFilter } from '../filters';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
+import StsIframeMenu from '../menus/StsIframeMenu';
 
 // For backward compatibility
 export {
@@ -300,6 +302,29 @@ export const geltungsbereicheIframe = {
   menu: <GeltungsbereicheTopicMenu />,
 };
 
+export const stsIframe = {
+  ...geltungsbereicheMvp,
+  elements: {
+    ...defaultElements,
+    overlay: false,
+    popup: false,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+  },
+  key: 'ch.sbb.sts-iframe',
+  layers: stsIframeLayers,
+  only: true,
+  hideInLayerTree: true,
+  menu: <StsIframeMenu />,
+  enableFeatureClick: true,
+};
+
 export const geltungsbereiche = {
   name: 'ch.sbb.geltungsbereiche-beta',
   key: 'ch.sbb.geltungsbereiche-beta',
@@ -327,9 +352,10 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
-    // geltungsbereicheMvp,
-    // geltungsbereicheIframe,
-    // geltungsbereiche,
+    geltungsbereicheMvp,
+    geltungsbereicheIframe,
+    geltungsbereiche,
+    stsIframe,
     energiePublic,
     sandbox,
   ],

@@ -145,7 +145,7 @@ class Map extends PureComponent {
     if (
       touchOnly(evt) ||
       !showPopups ||
-      !activeTopic?.elements?.popup ||
+      (!activeTopic?.elements?.popup && !activeTopic.enableFeatureClick) ||
       map.getView().getInteracting() ||
       map.getView().getAnimating()
     ) {
@@ -229,7 +229,10 @@ class Map extends PureComponent {
     } = this.props;
 
     // If there is no popup to display just ignore the click event.
-    if (!showPopups || !activeTopic?.elements?.popup) {
+    if (
+      !showPopups ||
+      (!activeTopic?.elements?.popup && !activeTopic.enableFeatureClick)
+    ) {
       return;
     }
 
@@ -248,7 +251,8 @@ class Map extends PureComponent {
         // Display only info of layers with a popup defined.
         let infos = featureInfos.reverse().filter(({ layer }) => {
           const allow =
-            layer.get('popupComponent') && !layer.get('showPopupOnHover');
+            (layer.get('popupComponent') && !layer.get('showPopupOnHover')) ||
+            activeTopic.enableFeatureClick;
           if (hasPriorityLayer) {
             // Clear the highlight style when there is priority layers
             if (layer.highlight && !layer.get('priorityFeatureInfo')) {
