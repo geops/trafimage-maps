@@ -30,6 +30,12 @@ import {
   setEmbedded,
   setAppBaseUrl,
   setStaticFilesUrl,
+  setActiveTopic,
+  setTopics,
+  setVectorTilesKey,
+  setVectorTilesUrl,
+  setApiKeyName,
+  setLoginUrl,
   setRealtimeKey,
   setRealtimeUrl,
 } from '../../model/app/actions';
@@ -213,12 +219,6 @@ const propTypes = {
   domainConsentId: PropTypes.string,
 
   /**
-   * Key of the active topic.
-   * @private
-   */
-  activeTopicKey: PropTypes.string,
-
-  /**
    * Informations on logged in user and its permissions.
    * @private
    */
@@ -231,6 +231,11 @@ const propTypes = {
    * Improve mouse/touch interactions to avoid conflict with parent page.
    */
   embedded: PropTypes.bool,
+
+  /**
+   * Key of the current active topic
+   */
+  activeTopicKey: PropTypes.string,
 };
 
 const defaultProps = {
@@ -388,6 +393,12 @@ class TrafimageMaps extends React.PureComponent {
       searchUrl,
       appBaseUrl,
       staticFilesUrl,
+      activeTopicKey,
+      topics,
+      vectorTilesKey,
+      vectorTilesUrl,
+      apiKeyName,
+      loginUrl,
       realtimeKey,
       realtimeUrl,
     } = this.props;
@@ -449,6 +460,18 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setDeparturesUrl(departuresUrl));
     }
 
+    if (vectorTilesKey) {
+      this.store.dispatch(setVectorTilesKey(vectorTilesKey));
+    }
+
+    if (vectorTilesUrl) {
+      this.store.dispatch(setVectorTilesUrl(vectorTilesUrl));
+    }
+
+    if (loginUrl) {
+      this.store.dispatch(setLoginUrl(loginUrl));
+    }
+
     if (realtimeKey) {
       this.store.dispatch(setRealtimeKey(realtimeKey));
     }
@@ -459,6 +482,9 @@ class TrafimageMaps extends React.PureComponent {
 
     if (apiKey) {
       this.store.dispatch(setApiKey(apiKey));
+    }
+    if (apiKeyName) {
+      this.store.dispatch(setApiKeyName(apiKeyName));
     }
 
     if (embedded) {
@@ -481,6 +507,18 @@ class TrafimageMaps extends React.PureComponent {
         this.store.dispatch(setConsentGiven(true));
       };
     }
+
+    if (topics) {
+      this.store.dispatch(setTopics(topics));
+    }
+
+    if (activeTopicKey && topics) {
+      this.store.dispatch(
+        setActiveTopic(
+          (topics || []).find((topic) => topic.key === activeTopicKey),
+        ),
+      );
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -496,10 +534,16 @@ class TrafimageMaps extends React.PureComponent {
       destinationUrl,
       departuresUrl,
       apiKey,
+      apiKeyName,
       embedded,
       searchUrl,
       appBaseUrl,
       staticFilesUrl,
+      activeTopicKey,
+      topics,
+      vectorTilesKey,
+      vectorTilesUrl,
+      loginUrl,
       realtimeKey,
       realtimeUrl,
     } = this.props;
@@ -552,6 +596,10 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKey(apiKey));
     }
 
+    if (apiKeyName !== prevProps.apiKeyName) {
+      this.store.dispatch(setApiKeyName(apiKeyName));
+    }
+
     if (embedded !== prevProps.embedded) {
       this.store.dispatch(setEmbedded(embedded));
     }
@@ -564,12 +612,39 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
     }
 
+    if (vectorTilesKey !== prevProps.vectorTilesKey) {
+      this.store.dispatch(setVectorTilesKey(vectorTilesKey));
+    }
+
+    if (vectorTilesUrl !== prevProps.vectorTilesUrl) {
+      this.store.dispatch(setVectorTilesUrl(vectorTilesUrl));
+    }
+
+    if (loginUrl !== prevProps.loginUrl) {
+      this.store.dispatch(setLoginUrl(loginUrl));
+    }
+
     if (realtimeKey !== prevProps.realtimeKey) {
       this.store.dispatch(setRealtimeKey(realtimeKey));
     }
 
     if (realtimeUrl !== prevProps.realtimeUrl) {
       this.store.dispatch(setRealtimeUrl(realtimeUrl));
+    }
+
+    if (topics !== prevProps.topics) {
+      this.store.dispatch(setTopics(topics));
+    }
+
+    if (
+      activeTopicKey !== prevProps.activeTopicKey ||
+      topics !== prevProps.topics
+    ) {
+      this.store.dispatch(
+        setActiveTopic(
+          (topics || []).find((topic) => topic.key === activeTopicKey),
+        ),
+      );
     }
   }
 
@@ -582,17 +657,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   render() {
-    const {
-      history,
-      apiKeyName,
-      topics,
-      loginUrl,
-      vectorTilesKey,
-      vectorTilesUrl,
-      activeTopicKey,
-      enableTracking,
-      domainConsentId,
-    } = this.props;
+    const { history, topics, enableTracking, domainConsentId } = this.props;
     const { requireConsent } = this.state;
 
     return (
@@ -606,15 +671,7 @@ class TrafimageMaps extends React.PureComponent {
             />
             {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
             {this.matomo && <MatomoTracker />}
-            <TopicLoader
-              history={history}
-              apiKeyName={apiKeyName}
-              topics={topics}
-              activeTopicKey={activeTopicKey}
-              loginUrl={loginUrl}
-              vectorTilesKey={vectorTilesKey}
-              vectorTilesUrl={vectorTilesUrl}
-            />
+            <TopicLoader history={history} />
           </Provider>
         </ThemeProvider>
       </MatomoProvider>

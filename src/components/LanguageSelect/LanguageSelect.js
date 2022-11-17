@@ -23,34 +23,27 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     position: 'relative',
     paddingTop: 2,
+    width: (props) => (props.isMobileWidth ? 64 : 120),
   },
   icon: {
+    color: 'inherit',
     width: (props) => (props.isMobileWidth ? 25 : 28),
+    minWidth: (props) => (props.isMobileWidth ? 25 : 28),
     height: (props) => (props.isMobileWidth ? 25 : 28),
+    marginLeft: -2, // align with menu item
   },
   currentValue: {
     display: 'flex',
     alignItems: 'center',
   },
-  input: {
-    width: (props) => (props.isMobileWidth ? 55 : 120),
-    color: theme.palette.text.secondary,
-  },
   select: {
-    padding: '6px 10px !important',
-    '& path': {
-      stroke: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
+    '& svg:not(.MuiSelect-iconOpen) + .MuiOutlinedInput-notchedOutline': {
+      border: 0,
     },
     '&:hover': {
       color: theme.palette.secondary.dark,
     },
-    '&:hover path': {
-      stroke: theme.palette.secondary.dark,
-    },
-  },
-  menuItem: {
-    paddingLeft: 12,
-    color: theme.palette.text.secondary,
   },
 }));
 
@@ -79,21 +72,17 @@ const LanguageSelect = () => {
   const langOptions = useMemo(() => {
     return options.map((opt) => {
       return (
-        <MenuItem
-          key={opt.value}
-          value={opt.value}
-          className={classes.menuItem}
-        >
+        <MenuItem key={opt.value} value={opt.value}>
           {opt.label}
         </MenuItem>
       );
     });
-  }, [options, classes]);
+  }, [options]);
 
   return (
     <div className={classes.wrapper}>
       <Select
-        hideOutline
+        fullWidth
         data-cy="lang-select"
         value={inputValue.value}
         renderValue={(opt) => (
@@ -102,14 +91,16 @@ const LanguageSelect = () => {
               focusable={false}
               className={`${classes.icon} wkp-single-value-globe`}
             />
-            {!isMobileWidth && options.find((lang) => lang.value === opt).label}
+            {!isMobileWidth && (
+              <span style={{ paddingTop: 1 }}>
+                {options.find((lang) => lang.value === opt).label}
+              </span>
+            )}
           </span>
         )}
         onChange={onSelectChange}
-        className={classes.input}
-        classes={{ outlined: classes.select, icon: classes.expandIcon }}
+        className={classes.select}
         MenuProps={{ 'data-cy': 'lang-select-options' }}
-        variant="outlined"
       >
         {langOptions}
       </Select>

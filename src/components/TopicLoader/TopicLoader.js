@@ -1,5 +1,5 @@
 import { MatomoContext } from '@datapunt/matomo-tracker-react';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import i18next from 'i18next';
@@ -28,7 +28,6 @@ const propTypes = {
   topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
 
   appBaseUrl: PropTypes.string,
-  loginUrl: PropTypes.string,
   vectorTilesKey: PropTypes.string,
   vectorTilesUrl: PropTypes.string,
   staticFilesUrl: PropTypes.string,
@@ -48,9 +47,9 @@ const propTypes = {
   realtimeUrl: PropTypes.string,
 
   // mapDispatchToProps
-  dispatchSetActiveTopic: PropTypes.func.isRequired,
+  // dispatchSetActiveTopic: PropTypes.func.isRequired,
   dispatchSetLayers: PropTypes.func.isRequired,
-  dispatchSetTopics: PropTypes.func.isRequired,
+  // dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
 
@@ -63,7 +62,6 @@ const defaultProps = {
   history: null,
   activeTopic: null,
   cartaroUrl: null,
-  loginUrl: null,
   vectorTilesKey: null,
   vectorTilesUrl: null,
   permissionInfos: null,
@@ -74,13 +72,9 @@ const defaultProps = {
   realtimeUrl: null,
 };
 
-class TopicLoader extends Component {
+class TopicLoader extends PureComponent {
   componentDidMount() {
-    const { apiKey } = this.props;
-
-    if (apiKey) {
-      this.loadTopics();
-    }
+    this.loadTopics();
   }
 
   componentDidUpdate(prevProps) {
@@ -101,65 +95,59 @@ class TopicLoader extends Component {
 
     // Sometimes the array object is different but the content is the same as before.
     const areTopicsReallyUpdated =
-      topics !== prevProps.topics &&
-      ((topics || []).length !== (prevProps.topics || []).length ||
-        (topics || []).some((topic, index) => {
-          return topic !== (prevProps.topics || [])[index];
-        }));
+      topics?.map((t) => `${t.key}`).join() !==
+      prevProps.topics?.map((t) => `${t.key}`).join();
 
     // Here the "if/else if" are important to avoid loading multiple time the layers in the layerService,
     // which can results to a wrong orders of "change:visible" listeners.
     if (
-      (!prevProps.apiKey && apiKey !== prevProps.apiKey) ||
-      permissionInfos !== prevProps.permissionInfos ||
-      areTopicsReallyUpdated
+      areTopicsReallyUpdated ||
+      (!prevProps.activeTopic && activeTopic) ||
+      permissionInfos !== prevProps.permissionInfos
     ) {
-      this.loadTopics(prevProps); // loadTopics calls updateServices and updateLayers
+      this.loadTopics(prevProps);
     } else if (
       activeTopic?.key !== prevProps.activeTopic?.key ||
       (activeTopic &&
-        (vectorTilesUrl !== prevProps.vectorTilesUrl ||
-          apiKey !== prevProps.apiKey ||
-          vectorTilesKey !== prevProps.vectorTilesKey ||
-          cartaroUrl !== prevProps.cartaroUrl ||
-          appBaseUrl !== prevProps.appBaseUrl ||
-          staticFilesUrl !== prevProps.staticFilesUrl ||
-          searchUrl !== prevProps.searchUrl))
+        (apiKey !== prevProps.apiKey || searchUrl !== prevProps.searchUrl))
     ) {
-      this.updateServices(activeTopic, prevProps); // updateServices calls updateLayers
+      this.updateServices(activeTopic); // updateServices calls updateLayers
     } else if (
       activeTopic &&
-      (language !== prevProps.language ||
-        apiKey !== prevProps.apiKey ||
-        apiKeyName !== prevProps.apiKeyName)
+      (apiKey !== prevProps.apiKey ||
+        language !== prevProps.language ||
+        apiKeyName !== prevProps.apiKeyName ||
+        appBaseUrl !== prevProps.appBaseUrl ||
+        cartaroUrl !== prevProps.cartaroUrl ||
+        vectorTilesKey !== prevProps.vectorTilesKey ||
+        vectorTilesUrl !== prevProps.vectorTilesUrl ||
+        staticFilesUrl !== prevProps.staticFilesUrl)
     ) {
-      this.updateLayers(activeTopic.layers, prevProps);
+      this.updateLayers(activeTopic.layers);
     }
   }
 
-  loadTopics(prevProps) {
-    const {
-      topics,
-      appBaseUrl,
-      permissionInfos,
-      dispatchSetTopics,
-      dispatchSetActiveTopic,
-    } = this.props;
+  loadTopics() {
+    const { topics, appBaseUrl, permissionInfos, activeTopic } = this.props;
 
-    // Load only topics when permissions are loaded, to avoid double loading.
-    if (!topics.length) {
+    // console.log('loadTopics', !topics?.length, !activeTopic);
+
+    // wait until all web components attributes are properly set
+    if (!topics?.length || !activeTopic) {
       return;
     }
-    const activeTopic = topics.find((t) => t.active);
+
     const visibleTopics = topics.filter(
       (topic) =>
         (!topic.permission ||
           (permissionInfos &&
             permissionInfos.permissions &&
             permissionInfos.permissions.includes(topic.permission))) &&
-        !topic.hideInLayerTree,
+        (topic.key === activeTopic?.key || !topic.hideInLayerTree),
     );
-    let visibleActiveTopic = visibleTopics.find((t) => t.active);
+    const visibleActiveTopic = visibleTopics.find(
+      (t) => t.key === activeTopic?.key,
+    );
     const isTopicNeedsPermission = activeTopic && !visibleActiveTopic;
 
     // If the user has received permissions info, is not logged in and the topic is hidden, we redirect to the login page.
@@ -173,26 +161,29 @@ class TopicLoader extends Component {
       return;
     }
 
-    visibleActiveTopic = visibleActiveTopic || topics[0];
-    visibleActiveTopic.active = true; // in case we fall back to the first topic.
-    dispatchSetTopics(visibleTopics);
-    dispatchSetActiveTopic(visibleActiveTopic);
-    this.updateServices(visibleActiveTopic, prevProps);
+    this.updateServices();
   }
 
-  updateServices(activeTopic, prevProps) {
+  updateServices() {
     const {
       t,
       apiKey,
       searchUrl,
       appBaseUrl,
       layerService,
+      activeTopic,
       dispatchSetFeatureInfo,
       dispatchSetSearchService,
     } = this.props;
 
+    // console.log('updateServices', !apiKey || !searchUrl);
+    // wait until all web components attributes are properly set
+    if (!apiKey || !searchUrl) {
+      return;
+    }
+
     if (!activeTopic) {
-      this.updateLayers([], prevProps);
+      this.updateLayers([]);
       dispatchSetSearchService();
       return;
     }
@@ -212,7 +203,7 @@ class TopicLoader extends Component {
       });
     }
 
-    this.updateLayers(activeTopic.layers, prevProps);
+    this.updateLayers();
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || {});
@@ -227,7 +218,7 @@ class TopicLoader extends Component {
     dispatchSetSearchService(newSearchService);
   }
 
-  updateLayers(topicLayers, prevProps) {
+  updateLayers() {
     const {
       apiKey,
       apiKeyName,
@@ -245,6 +236,28 @@ class TopicLoader extends Component {
       realtimeUrl,
     } = this.props;
 
+    // console.log(
+    //   'ici',
+    //   !apiKey ||
+    //     !apiKeyName ||
+    //     !appBaseUrl ||
+    //     !activeTopic ||
+    //     !vectorTilesUrl ||
+    //     !vectorTilesKey,
+    // );
+    // wait until all web components attributes are properly set
+    if (
+      !apiKey ||
+      !apiKeyName ||
+      !appBaseUrl ||
+      !activeTopic ||
+      !vectorTilesUrl ||
+      !vectorTilesKey
+    ) {
+      return;
+    }
+
+    const topicLayers = activeTopic.layers;
     const [currentBaseLayer] = layerService
       .getLayersAsFlatArray()
       .filter((l) => l.get('isBaseLayer') && l.visible);
@@ -313,6 +326,7 @@ class TopicLoader extends Component {
       if (flatLayers[i].setGeoJsonUrl) {
         flatLayers[i].setGeoJsonUrl(`${appBaseUrl}/service/gjc/ows`);
       }
+
       if (flatLayers[i].setStyleConfig) {
         flatLayers[i].setStyleConfig(
           vectorTilesUrl,
@@ -344,27 +358,18 @@ class TopicLoader extends Component {
       }
     }
 
-    // Add layers to the map only when a topic is activated or changed.
-    // Very important otherwise style are loaded multiple time son load.
-    if (
-      !activeTopic ||
-      prevProps?.activeTopic?.key === activeTopic.key ||
-      prevProps?.prevLayers?.map((layer) => layer.key).join() ===
-        layers?.map((layer) => layer.key).join()
-    ) {
-      return;
-    }
     dispatchSetLayers(layers);
   }
 
   render() {
-    const { loginUrl, history } = this.props;
-    return <TopicElements history={history} loginUrl={loginUrl} />;
+    const { history } = this.props;
+    return <TopicElements history={history} />;
   }
 }
 
 const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
+  topics: state.app.topics,
   language: state.app.language,
   layerService: state.app.layerService,
   drawLayer: state.map.drawLayer,
@@ -374,9 +379,13 @@ const mapStateToProps = (state) => ({
   appBaseUrl: state.app.appBaseUrl,
   staticFilesUrl: state.app.staticFilesUrl,
   apiKey: state.app.apiKey,
+  apiKeyName: state.app.apiKeyName,
   mapsetUrl: state.app.mapsetUrl,
   shortenerUrl: state.app.shortenerUrl,
   drawUrl: state.app.drawUrl,
+  vectorTilesUrl: state.app.vectorTilesUrl,
+  vectorTilesKey: state.app.vectorTilesKey,
+  loginUrl: state.app.loginUrl,
   realtimeKey: state.app.realtimeKey,
   realtimeUrl: state.app.realtimeUrl,
 });

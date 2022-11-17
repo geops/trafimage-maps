@@ -39,6 +39,10 @@ import {
   SET_SEARCH_INFO_OPEN,
   SET_APP_BASE_URL,
   SET_STATIC_FILES_URL,
+  SET_VECTOR_TILES_URL,
+  SET_LOGIN_URL,
+  SET_VECTOR_TILES_KEY,
+  SET_API_KEY_NAME,
   SET_REALTIME_URL,
   SET_REALTIME_KEY,
 } from './actions';
@@ -89,6 +93,7 @@ const getInitialState = () => ({
   destinationUrl: null,
   departuresUrl: null,
   apiKey: null,
+  apiKeyName: 'key',
   showPopups: true,
   embeddded: false,
   consentGiven: false,
@@ -105,7 +110,7 @@ export default function app(state = getInitialState(), action) {
     case SET_TOPICS:
       return {
         ...state,
-        topics: action.data,
+        topics: action.data || [],
       };
     case SET_LANGUAGE:
       i18n.changeLanguage(action.data);
@@ -167,6 +172,21 @@ export default function app(state = getInitialState(), action) {
           user: null,
           permissions: [],
         },
+      };
+    case SET_VECTOR_TILES_URL:
+      return {
+        ...state,
+        vectorTilesUrl: action.data,
+      };
+    case SET_VECTOR_TILES_KEY:
+      return {
+        ...state,
+        vectorTilesKey: action.data,
+      };
+    case SET_LOGIN_URL:
+      return {
+        ...state,
+        loginUrl: action.data,
       };
     case SET_MAPSET_URL:
       return {
@@ -237,6 +257,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         apiKey: action.data,
+      };
+    case SET_API_KEY_NAME:
+      return {
+        ...state,
+        apiKeyName: action.data,
       };
     case SET_SHOW_POPUPS:
       return {

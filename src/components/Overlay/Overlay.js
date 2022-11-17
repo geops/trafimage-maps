@@ -33,7 +33,8 @@ const useStyles = makeStyles({
     pointerEvents: 'none',
     '& .wkp-feature-information': {
       pointerEvents: 'all',
-      width: 400,
+      maxWidth: 400,
+      minWidth: 250,
     },
   },
   drawerDesktopPaper: {

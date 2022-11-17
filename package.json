@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.17.3",
+  "version": "1.18.0-beta.6",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -25,9 +25,9 @@
     "i18next-browser-languagedetector": "6.1.2",
     "i18next-xhr-backend": "3.2.2",
     "jspdf": "2.4.0",
-    "mapbox-gl": "npm:maplibre-gl@2.4.0",
-    "maplibre-gl": "npm:empty-npm-package@1.0.0",
-    "mobility-toolbox-js": "2.0.0-beta.54",
+    "mapbox-gl": "npm:empty-npm-package@1.0.0",
+    "maplibre-gl": "2.4.0",
+    "mobility-toolbox-js": "2.0.0-beta.69",
     "ol": "6.6.1",
     "proj4": "2.7.5",
     "prop-types": "15.7.2",
@@ -56,7 +56,8 @@
   },
   "peerDependencies": {
     "react": "16.14.0",
-    "react-dom": "16.14.0"
+    "react-dom": "16.14.0",
+    "react-error-overlay": "6.0.9"
   },
   "devDependencies": {
     "@babel/cli": "7.15.7",
@@ -100,6 +101,7 @@
     "lint-staged": "11.2.0",
     "prettier": "2.4.1",
     "react-app-rewired": "2.1.8",
+    "react-error-overlay": "6.0.9",
     "react-scripts": "4.0.3",
     "react-svg-loader": "3.0.3",
     "react-test-renderer": "17.0.2",
@@ -140,7 +142,7 @@
     "release": "standard-version",
     "sort": "sort-json src/lang/*.json -i",
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
-    "start:doc": "styleguidist server",
+    "start:doc": "ESLINT_NO_DEV_ERRORS=true  styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
     "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\""
   },

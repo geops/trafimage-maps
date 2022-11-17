@@ -1,5 +1,5 @@
 import {
-  MapboxLayer,
+  MaplibreLayer,
   getUrlWithParams,
   getMapboxMapCopyrights,
 } from 'mobility-toolbox-js/ol';
@@ -33,7 +33,7 @@ const applyFilters = (mbStyle, filters) => {
 
 const stylePrefix = process.env.REACT_APP_STYLE_REVIEW_PREFIX || '';
 
-class TrafimageMapboxLayer extends MapboxLayer {
+class TrafimageMapboxLayer extends MaplibreLayer {
   constructor(options) {
     super({
       ...options,

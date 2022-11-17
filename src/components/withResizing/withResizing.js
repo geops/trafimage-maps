@@ -10,12 +10,8 @@ function withResizing(MenuToBeResized) {
   const propTypes = {
     menuOpen: PropTypes.bool.isRequired,
     map: PropTypes.instanceOf(Map).isRequired,
+    forwardedRef: PropTypes.object,
   };
-
-  const mapStateToProps = (state) => ({
-    menuOpen: state.app.menuOpen,
-    map: state.app.map,
-  });
 
   class ResizedWrapper extends Component {
     constructor(props) {
@@ -74,21 +70,37 @@ function withResizing(MenuToBeResized) {
 
     render() {
       const { menuHeight } = this.state;
-
+      const { forwardedRef } = this.props;
       return (
         <MenuToBeResized
           bodyElementRef={this.bodyElementRef}
           menuHeight={menuHeight}
           // eslint-disable-next-line react/jsx-props-no-spreading
           {...this.props}
+          ref={forwardedRef}
         />
       );
     }
   }
 
   ResizedWrapper.propTypes = propTypes;
+  ResizedWrapper.defaultProps = {
+    forwardedRef: null,
+  };
 
-  return connect(mapStateToProps)(ResizedWrapper);
+  const mapStateToProps = (state) => ({
+    menuOpen: state.app.menuOpen,
+    map: state.app.map,
+  });
+
+  const ConnectComp = connect(mapStateToProps, null, null, {
+    forwardRef: true,
+  })(ResizedWrapper);
+
+  return React.forwardRef((props, ref) => {
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <ConnectComp {...props} forwardedRef={ref} />;
+  });
 }
 
 export default withResizing;

@@ -5,6 +5,7 @@ const colors = {
   redDark: '#c60018',
   black: '#000',
   gray: '#767676',
+  lightgray: '#b7b7b7',
 };
 
 const breakpointValues = {
@@ -48,6 +49,10 @@ const theme = createTheme({
       lineHeight: '22.5px',
     },
     body1: typoBody,
+    body2: {
+      ...typoBody,
+      fontSize: 16,
+    },
     subtitle1: {
       fontSize: 13,
       lineHeight: '19.5px',
@@ -107,22 +112,25 @@ const theme = createTheme({
     MuiMenu: {
       transitionDuration: 0,
     },
+    MuiListItemText: {
+      primaryTypographyProps: { variant: 'body1' },
+    },
   },
   overrides: {
+    // from sbb design, see 'select' angular components
     MuiSelect: {
-      icon: {
-        transition: 'transform 400ms',
-        color: 'inherit',
-        width: 18,
-      },
       select: {
         '&:focus': {
           backgroundColor: 'white',
         },
       },
+      icon: {
+        transition: 'transform 400ms',
+        width: 18,
+        color: 'inherit', // on SBB design it will be more colors.gray, but it's nicer like this.
+      },
       outlined: {
-        paddingTop: 15,
-        paddingBottom: 15,
+        padding: '10px 44px 11px 14px',
       },
     },
     MuiPopover: {
@@ -190,33 +198,28 @@ const theme = createTheme({
       },
     },
     MuiOutlinedInput: {
-      root: {
+      notchedOutline: {
         borderRadius: 2,
-        borderWidth: 1,
-        boxSizing: 'border-box',
-        '& $notchedOutline': {
-          borderColor: '#888',
-          borderWidth: 1,
+        borderWidth: 2,
+        borderColor: colors.lightgray,
+      },
+      root: {
+        '&:hover .MuiOutlinedInput-notchedOutline': {
+          borderColor: colors.lightgray,
         },
-        '&:hover $notchedOutline': {
-          borderColor: '#888',
-          borderWidth: 1,
-        },
-        '&$focused $notchedOutline': {
-          borderColor: '#888',
-          borderWidth: 1,
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: '#666',
         },
       },
-      focused: {},
-      notchedOutline: {},
     },
+    // MenuItem are only used for Select component.
     MuiMenuItem: {
       root: {
-        fontSize: '14px',
+        color: colors.gray,
         '&:hover,&:focus': {
           color: colors.redDark,
-          backgroundColor: 'white !important',
         },
+        paddingLeft: 14,
       },
     },
     MuiListItem: {
@@ -302,7 +305,8 @@ const theme = createTheme({
       root: {
         fontSize: 14,
         borderBottom: '1px solid #eee',
-        height: 50,
+        minHeight: 50,
+        height: 'auto',
         padding: '0 40px 0 20px',
         display: 'flex',
         alignItems: 'center',

@@ -61,6 +61,7 @@ iframe,
   border-radius: 3px;
 }
 
+/* hide hot reload iframe */
 body > iframe {
   display: none;
 }

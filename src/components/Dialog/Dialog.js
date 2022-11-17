@@ -113,7 +113,7 @@ function DraggablePaperComponent(props) {
 
 const propTypes = {
   name: PropTypes.string.isRequired,
-  title: PropTypes.element,
+  title: PropTypes.node,
   body: PropTypes.element,
   // footer: PropTypes.element,
   isModal: PropTypes.bool,
