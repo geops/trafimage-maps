@@ -40,12 +40,22 @@ describe('MapAccessibility', () => {
       1: {
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [1, 0] },
-        properties: { id: 1, train_id: 1, coordinate: [1, 0] },
+        properties: {
+          id: 1,
+          train_id: 1,
+          coordinate: [1, 0],
+          time_intervals: [],
+        },
       },
       2: {
         type: 'Feature',
         geometry: { type: 'Point', coordinates: [1, 0] },
-        properties: { id: 2, train_id: 2, coordinate: [0, 1] },
+        properties: {
+          id: 2,
+          train_id: 2,
+          coordinate: [0, 1],
+          time_intervals: [],
+        },
       },
     };
   });
