@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { build, formats } from 'documentation';
 import streamArray from 'stream-array';
 import vfs from 'vinyl-fs';
