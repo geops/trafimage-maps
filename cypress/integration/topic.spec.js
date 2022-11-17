@@ -1,4 +1,5 @@
 describe('topic', () => {
+  /*
   describe('ch.sbb.geltungsbereiche-iframe', () => {
     beforeEach(() => {
       cy.visit('/ch.sbb.geltungsbereiche-iframe');
@@ -33,4 +34,5 @@ describe('topic', () => {
       cy.get('.wkp-gb-topic-menu').should('exist');
     });
   });
+  */
 });
