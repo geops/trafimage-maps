@@ -5,6 +5,7 @@
 
 # others
 /doc/build
+/docjs
 
 # testing
 /coverage

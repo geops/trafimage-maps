@@ -11,6 +11,7 @@ import { MapboxStyleLayer as MTMapboxStyleLayer } from 'mobility-toolbox-js/ol';
  * @class
  * @param {Object} [options] Layer options.
  * @inheritdoc
+ * @private
  */
 class MapboxStyleLayer extends MTMapboxStyleLayer {
   constructor(options = {}) {

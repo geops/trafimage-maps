@@ -44,9 +44,7 @@ const generateDashedStyleLayers = (line, layer) => {
   return styleLayers;
 };
 
-/**
- * Load the tilestats data to get all the possible values for hauptlinie or touristische_linie property.
- */
+// Load the tilestats data to get all the possible values for hauptlinie or touristische_linie property.
 const getDashedStyleLayers = (layer, zweitTilestats = {}) => {
   const { property } = layer;
   const styleLayers = [];

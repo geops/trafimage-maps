@@ -38,7 +38,7 @@ else
 fi
 
 # Build jsdoc documentation for layers, in jsdoc folder (based on jsdoc_conf.json).
-if node ./scripts/doc.js; then
+if node ./scripts/doc.mjs; then
   echo "jsdoc build suceeds."
 else
   echo "Building jsdoc failed."
