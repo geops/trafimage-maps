@@ -89,6 +89,11 @@ class Map extends PureComponent {
     dispatchHtmlEvent(new CustomEvent('load'));
   }
 
+  componentDidUpdate() {
+    const { featureInfo } = this.props;
+    console.log(featureInfo);
+  }
+
   componentWillUnmount() {
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
   }
@@ -183,15 +188,22 @@ class Map extends PureComponent {
 
         map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
-        const isClickInfoOpen =
+        const shouldNotSetInfoOnHover =
           featureInfo.length &&
-          featureInfo.every(
-            ({ layer }) =>
-              layer.get('popupComponent') && !layer.get('showPopupOnHover'),
+          featureInfo.every(({ layer }) =>
+            layer.get('disableSetFeatureInfoOnHover'),
           );
 
+        const clickInfoOpen =
+          featureInfo.length &&
+          featureInfo.every(({ layer }) => {
+            return (
+              layer.get('popupComponent') && !layer.get('showPopupOnHover')
+            );
+          });
+
         // don't continue if there's a popup that was opened by click
-        if (!isClickInfoOpen) {
+        if (!clickInfoOpen && !shouldNotSetInfoOnHover) {
           infos = infos
             .filter(
               ({ layer }) =>

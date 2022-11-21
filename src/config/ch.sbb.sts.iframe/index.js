@@ -45,6 +45,7 @@ const highlights = new Layer({
   }),
   properties: {
     isQueryable: true,
+    disableSetFeatureInfoOnHover: true,
   },
 });
 
@@ -68,6 +69,7 @@ export const highlightRoutes = new HighlightRoutesLayer({
     metadata && metadata[FILTER_KEY] === FILTER_HIGHLIGHT_VALUE,
   properties: {
     isQueryable: true,
+    disableSetFeatureInfoOnHover: true,
   },
 });
 
@@ -75,15 +77,21 @@ export const othersRoutes = new MapboxStyleLayer({
   name: 'Other routes',
   mapboxLayer: stsDataLayer,
   visible: true,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata[FILTER_KEY] === FILTER_OTHERS_VALUE,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_OTHERS_VALUE,
+  properties: {
+    isQueryable: true,
+    disableSetFeatureInfoOnHover: true,
+  },
 });
 
 export const gttos = new MapboxStyleLayer({
   name: 'Grand Train Tour of Switzerland',
   key: 'ch.sbb.sts.sts.gttos',
   mapboxLayer: stsDataLayer,
-  visible: false,
+  visible: true,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_GTTOS_VALUE,
   styleLayersFilter: ({ metadata }) =>
@@ -91,6 +99,23 @@ export const gttos = new MapboxStyleLayer({
   group: 'ch.sbb.sts.sts.group',
   properties: {
     isQueryable: true,
+    disableSetFeatureInfoOnHover: true,
+    getTextFromValid: (valid) => {
+      if (valid === 50) {
+        return '50% Ermässigung';
+      }
+      if (valid === 25) {
+        return '25% Ermässigung';
+      }
+      if (valid === -1) {
+        return 'Gültigkeit vor Ort erfragen';
+      }
+      return 'Freie Fahrt';
+    },
+    products: [
+      'ch.sbb.geltungsbereiche.products.sts',
+      'ch.sbb.geltungsbereiche.products.sts-half',
+    ],
   },
 });
 
@@ -98,20 +123,37 @@ export const premium = new MapboxStyleLayer({
   name: 'Premium Panoramic Trains',
   key: 'ch.sbb.sts.sts.premium',
   mapboxLayer: stsDataLayer,
-  visible: true,
+  visible: false,
   group: 'ch.sbb.sts.sts.group',
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_PREMIUM_VALUE,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_PREMIUM_VALUE,
   properties: {
+    disableSetFeatureInfoOnHover: true,
     isQueryable: true,
+    getTextFromValid: (valid) => {
+      if (valid === 50) {
+        return '50% Ermässigung';
+      }
+      if (valid === 25) {
+        return '25% Ermässigung';
+      }
+      if (valid === -1) {
+        return 'Gültigkeit vor Ort erfragen';
+      }
+      return 'Freie Fahrt';
+    },
+    products: [
+      'ch.sbb.geltungsbereiche.products.sts',
+      'ch.sbb.geltungsbereiche.products.sts-half',
+    ],
   },
 });
 
 export default [
   stsDataLayer,
-  //   othersRoutes,
+  othersRoutes,
   highlightRoutes,
   premium,
   gttos,
