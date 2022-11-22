@@ -5,7 +5,6 @@ import { Map, View } from 'ol';
 import { Provider } from 'react-redux';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { ThemeProvider } from '@material-ui/core/styles';
-import LayerService from '../../utils/LayerService';
 import theme from '../../themes/default';
 import TopicElements from '.';
 
@@ -41,7 +40,6 @@ describe('TopicElements', () => {
         language: 'de',
         menuOpen: true,
         projection: proj,
-        layerService: new LayerService([]),
         topics: [topic],
         activeTopic: topic,
         appBaseUrl: 'foo.ch',

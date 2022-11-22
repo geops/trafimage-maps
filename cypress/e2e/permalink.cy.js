@@ -161,16 +161,20 @@ describe('permalink', () => {
 
     describe('using tarifverbundkarte topic', () => {
       it("should display some elements when it's not set", () => {
-        cy.visit('/ch.sbb.tarifverbundkarte.public?disabled=exportMenu');
+        cy.visit('/ch.sbb.tarifverbundkarte.public');
         cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
+        cy.get('.wkp-menu-header').click();
+        cy.get('.tm-trafimage-maps').should('exist');
         // See tarifverbundkarte topic for this test
         // exportMenu
         cy.get('.wkp-export-menu').should('exist');
       });
 
       it('should hide export menu', () => {
-        cy.get('.tm-trafimage-maps').should('exist');
+        cy.visit('/ch.sbb.tarifverbundkarte.public?disabled=exportMenu');
+        cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
         cy.get('.wkp-menu-header').click();
+        cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-export-menu').should('not.exist');
       });
     });

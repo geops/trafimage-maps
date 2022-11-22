@@ -1,4 +1,4 @@
-import mapboxgl from 'mapbox-gl';
+import maplibregl from 'maplibre-gl';
 import OLMap from 'ol/Map';
 import View from 'ol/View';
 import { toLonLat } from 'ol/proj';
@@ -16,7 +16,7 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
       return scale;
     },
   });
-  const mbMap = new mapboxgl.Map({
+  const mbMap = new maplibregl.Map({
     style,
     attributionControl: false,
     boxZoom: false,

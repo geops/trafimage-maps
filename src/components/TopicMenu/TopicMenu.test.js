@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Provider } from 'react-redux';
-import LayerService from '../../utils/LayerService';
 import TopicMenu from './TopicMenu';
 
 const layer1 = new Layer({
@@ -21,10 +20,9 @@ const layer2 = new Layer({
 describe('TopicMenu', () => {
   it('renders the topic name and not layers when topic is not active', () => {
     const store = global.mockStore({
-      map: {},
+      map: { layers: [layer1, layer2] },
       app: {
         menuOpen: true,
-        layerService: new LayerService([layer1, layer2]),
         activeTopic: {},
       },
     });
@@ -42,10 +40,11 @@ describe('TopicMenu', () => {
   it("renders the topic's layers name when topic is active", () => {
     const topic = { name: 'topicName', key: 'topic' };
     const store = global.mockStore({
-      map: {},
+      map: {
+        layers: [layer1, layer2],
+      },
       app: {
         menuOpen: true,
-        layerService: new LayerService([layer1, layer2]),
         activeTopic: topic,
       },
     });

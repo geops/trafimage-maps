@@ -40,7 +40,7 @@ const propTypes = {
   }).isRequired,
   language: PropTypes.string.isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
+  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
   departuresFilter: PropTypes.string,
   platformFilter: PropTypes.string,
   drawUrl: PropTypes.string,
@@ -375,7 +375,7 @@ class Permalink extends PureComponent {
   }
 
   render() {
-    const { history, layerService, map } = this.props;
+    const { history, layers, map } = this.props;
 
     return (
       <RSPermalink
@@ -383,12 +383,14 @@ class Permalink extends PureComponent {
           ...this.state,
         }}
         map={map}
-        layers={layerService.getLayers()}
+        layers={layers}
         history={history}
         isBaseLayer={(l) => l.get('isBaseLayer')}
         isLayerHidden={(l) =>
           l.get('hideInLegend') ||
-          layerService.getParents(l).some((pl) => pl.get('hideInLegend'))
+          new LayerService(layers)
+            .getParents(l)
+            .some((pl) => pl.get('hideInLegend'))
         }
       />
     );
@@ -403,7 +405,7 @@ const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   map: state.app.map,
   language: state.app.language,
-  layerService: state.app.layerService,
+  layers: state.map.layers,
   departuresFilter: state.app.departuresFilter,
   platformFilter: state.app.platformFilter,
   drawUrl: state.app.drawUrl,
