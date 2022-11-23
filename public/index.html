@@ -136,7 +136,6 @@
           .catch(function () {
             console.error('Request to get the apiKey failed');
           });
-        
 
         url.searchParams?.forEach((value, key) => {
           if (/(Url|Key)/.test(key)) {

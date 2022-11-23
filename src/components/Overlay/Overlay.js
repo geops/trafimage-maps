@@ -69,6 +69,7 @@ const useStyles = makeStyles({
     pointerEvents: 'all',
   },
   resizeHandler: {
+    position: 'fixed',
     display: 'flex',
     width: '100%',
     height: 20,
@@ -79,9 +80,21 @@ const useStyles = makeStyles({
 
 const propTypes = {
   elements: PropTypes.shape().isRequired,
+  children: PropTypes.node,
+  disablePortal: PropTypes.bool,
+  defaultSize: PropTypes.shape({
+    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
 };
 
-const Overlay = ({ elements }) => {
+const defaultProps = {
+  children: null,
+  disablePortal: true,
+  defaultSize: { height: 250 },
+};
+
+const Overlay = ({ elements, children, disablePortal, defaultSize }) => {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
 
@@ -117,7 +130,7 @@ const Overlay = ({ elements }) => {
     return false;
   });
 
-  if (!filtered.length) {
+  if (!children && !filtered.length) {
     return null;
   }
 
@@ -145,7 +158,10 @@ const Overlay = ({ elements }) => {
         }}
         ModalProps={{
           disableEnforceFocus: true,
-          disablePortal: true,
+          disablePortal,
+          container: !disablePortal
+            ? document.getElementsByClassName('tm-barrier-free')[0]
+            : null,
           BackdropComponent: () => {
             return null;
           },
@@ -154,21 +170,22 @@ const Overlay = ({ elements }) => {
         {isMobile && (
           <Resizable
             enable={{ top: isMobile }}
-            defaultSize={{
-              height: 250,
-            }}
+            defaultSize={defaultSize}
             handleComponent={{
               top: <div className={classes.resizeHandler}>&mdash;</div>,
             }}
           >
-            <FeatureInformation featureInfo={filtered} />
+            {children || <FeatureInformation featureInfo={filtered} />}
           </Resizable>
         )}
-        {!isMobile && <FeatureInformation featureInfo={filtered} />}
+        {!isMobile &&
+          (children || <FeatureInformation featureInfo={filtered} />)}
       </Drawer>
     </div>
   );
 };
 
 Overlay.propTypes = propTypes;
+Overlay.defaultProps = defaultProps;
+
 export default Overlay;

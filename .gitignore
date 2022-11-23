@@ -13,6 +13,9 @@
 # production
 /build
 
+#scripts
+/scripts/venv
+
 # misc
 .vscode
 .DS_Store
