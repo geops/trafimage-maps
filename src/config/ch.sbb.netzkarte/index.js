@@ -10,6 +10,7 @@ import StationsLayer from '../../layers/StationsLayer';
 import PlatformsLayer from '../../layers/PlatformsLayer';
 import TralisLayer from '../../layers/TralisLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
+import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
@@ -262,8 +263,6 @@ export const gemeindegrenzen = new MapboxStyleLayer({
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
-
-const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
 
 export const direktverbindungenDay = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.day`,

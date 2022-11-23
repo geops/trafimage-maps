@@ -7,6 +7,7 @@ import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import featureStyler from './FeatureStyler';
+import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
 
 // const { POIS_URL } = process.env;
 const FILTER_KEY = 'sts.filter';
@@ -22,6 +23,8 @@ const ROUTES_HIGHLIGHT_LAYER_KEY = 'ch.sbb.sts.validity.routes_highlight';
 const OTHER_LAYER_KEY = 'ch.sbb.sts.validity.other';
 const GTTOS_LAYER_KEY = 'ch.sbb.sts.validity.gttos';
 const PREMIUM_LAYER_KEY = 'ch.sbb.sts.validity.premium';
+const DIREKTVERBINDUNGEN_DAY_LAYER_KEY = `${DIREKTVERBINDUNGEN_KEY}.day`;
+const DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY = `${DIREKTVERBINDUNGEN_KEY}.night`;
 
 const params = new URLSearchParams(window.location.search);
 const permalinkLayers = params.get('layers')?.split(',') || [];
@@ -29,6 +32,12 @@ const gttosVisible = permalinkLayers.includes(GTTOS_LAYER_KEY);
 const premiumVisible =
   !gttosVisible && permalinkLayers.includes(PREMIUM_LAYER_KEY);
 const highlightsVisible = permalinkLayers.includes(HIGHLIGHTS_LAYER_KEY);
+const direktverbindungenDayVisible = permalinkLayers.includes(
+  DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
+);
+const direktverbindungenNightVisible = permalinkLayers.includes(
+  DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
+);
 
 const stsDataLayer = new TrafimageMapboxLayer({
   name: DATA_LAYER_KEY,
@@ -175,20 +184,27 @@ export const premium = new MapboxStyleLayer({
   },
 });
 
-export const direktverbindungenDay = new DirektverbindungenLayer({
-  name: 'Day trains',
-  shortName: 'day',
+export const direktverbindungenNight = new DirektverbindungenLayer({
+  name: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
+  key: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  // visible: permalinkLayers ? /day/.test(permalinkLayers) : false,
-  visible: true,
+  visible: direktverbindungenNightVisible,
+  properties: {
+    routeType: 'night',
+    isQueryable: true,
+    disableSetFeatureInfoOnHover: true,
+  },
+});
+
+export const direktverbindungenDay = new DirektverbindungenLayer({
+  name: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
+  key: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
+  mapboxLayer: stsDataLayer,
+  visible: direktverbindungenDayVisible,
   properties: {
     routeType: 'day',
     isQueryable: true,
-    // hasInfos: true,
-    // layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
-    // popupComponent: 'DirektverbindungPopup',
-    // useOverlay: true,
-    // priorityFeatureInfo: true, // This property will block display of others featureInfos
+    disableSetFeatureInfoOnHover: true,
   },
 });
 
@@ -201,4 +217,5 @@ export default [
   gttos,
   highlights,
   direktverbindungenDay,
+  direktverbindungenNight,
 ];

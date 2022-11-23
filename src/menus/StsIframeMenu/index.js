@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core';
 import StsIframeMenu from './StsIframeMenu';
-import StsDirektVerbindungenIframeMenu from './StsDirektVerbindungenIframeMenu';
+import stsLayers from '../../config/ch.sbb.sts.iframe';
 
 const useStyles = makeStyles(() => {
   return {
@@ -12,9 +14,9 @@ const useStyles = makeStyles(() => {
     },
   };
 });
-
 function StsMenu() {
   const classes = useStyles();
+  const { t } = useTranslation();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const [activeMenu, setActiveMenu] = useState('sts');
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -25,33 +27,51 @@ function StsMenu() {
     }
   }, [featureInfo]);
 
+  const onClick = useCallback(
+    (key) => {
+      if (key === 'sts') {
+        if (activeMenu !== key) {
+          stsLayers.forEach((layer) => {
+            layer.visible = /(ch.sbb.sts.validity|\.data)/.test(layer.key);
+          });
+          setActiveMenu(key);
+          setIsCollapsed(false);
+          return;
+        }
+        setIsCollapsed(!isCollapsed);
+      }
+      if (key === 'dv') {
+        if (activeMenu !== key) {
+          stsLayers.forEach((layer) => {
+            layer.visible = /(direktverbindungen|\.data)/.test(layer.key);
+          });
+          setActiveMenu(key);
+          setIsCollapsed(false);
+          return;
+        }
+        setIsCollapsed(!isCollapsed);
+      }
+    },
+    [activeMenu, isCollapsed],
+  );
+
   return (
     <div className={classes.container}>
       <StsIframeMenu
         active={activeMenu === 'sts'}
+        activeMenu={activeMenu}
         collapsed={
           activeMenu !== 'sts' || (activeMenu === 'sts' && isCollapsed)
         }
-        onClick={() => {
-          if (activeMenu !== 'sts') {
-            setActiveMenu('sts');
-            setIsCollapsed(false);
-            return;
-          }
-          setIsCollapsed(!isCollapsed);
-        }}
+        onClick={() => onClick('sts')}
+        title={t('Validity of Swiss Travel Pass')}
       />
-      <StsDirektVerbindungenIframeMenu
+      <StsIframeMenu
         active={activeMenu === 'dv'}
+        activeMenu={activeMenu}
         collapsed={activeMenu !== 'dv' || (activeMenu === 'dv' && isCollapsed)}
-        onClick={() => {
-          if (activeMenu !== 'dv') {
-            setActiveMenu('dv');
-            setIsCollapsed(false);
-            return;
-          }
-          setIsCollapsed(!isCollapsed);
-        }}
+        onClick={() => onClick('dv')}
+        title={t('Direct trains to Switzerland')}
       />
     </div>
   );

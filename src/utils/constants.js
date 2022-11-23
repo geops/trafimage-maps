@@ -10,6 +10,9 @@ export const LS_MATOMO_TOPIC_VISITED = 'matomo_topic_visited';
 export const MATOMO_TOPIC_CHANGE_ACTION = 'load';
 export const MATOMO_TOPIC_CHANGE_TIMER = 30 * 60 * 1000;
 
+// Direktverbindungen
+export const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
+
 // sts
 export const DETAILS_BASE_URL =
   'https://www.myswitzerland.com/en-ch/transport-travel/getting-around/navigation-bernese-oberland.html?cmsHighlightID=';

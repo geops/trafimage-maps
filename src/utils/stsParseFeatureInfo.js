@@ -3,8 +3,8 @@ import Feature from 'ol/Feature';
 import {
   gttos,
   premium,
-  // direktverbindungenDay,
-  // direktverbindungenNight
+  direktverbindungenDay,
+  direktverbindungenNight,
   highlights,
 } from '../config/ch.sbb.sts.iframe';
 
@@ -35,31 +35,31 @@ export const parseFeaturesInfos = (infos, tours) => {
   }
 
   // Then we put all direktverbindung features
-  //   if (
-  //     infoFeatures[direktverbindungenDay.name] ||
-  //     infoFeatures[direktverbindungenNight.name]
-  //   ) {
-  //     [
-  //       ...(infoFeatures[direktverbindungenDay.name] || []),
-  //       ...(infoFeatures[direktverbindungenNight.name] || []),
-  //     ].forEach((feature) => {
-  //       const {
-  //         start_station_name: start,
-  //         end_station_name: end,
-  //         vias,
-  //       } = feature.getProperties();
+  if (
+    infoFeatures[direktverbindungenDay.name] ||
+    infoFeatures[direktverbindungenNight.name]
+  ) {
+    [
+      ...(infoFeatures[direktverbindungenDay.name] || []),
+      ...(infoFeatures[direktverbindungenNight.name] || []),
+    ].forEach((feature) => {
+      const {
+        start_station_name: start,
+        end_station_name: end,
+        vias,
+      } = feature.getProperties();
 
-  //       const switchVias = JSON.parse(vias).filter(
-  //         (via) => via.via_type === 'switch' || via.via_type === 'visible',
-  //       );
-  //       feature.set('vias', [
-  //         { station_name: start },
-  //         ...switchVias,
-  //         { station_name: end },
-  //       ]);
-  //       featuresForPopup.push(feature);
-  //     });
-  //   }
+      const switchVias = JSON.parse(vias).filter(
+        (via) => via.via_type === 'switch' || via.via_type === 'visible',
+      );
+      feature.set('vias', [
+        { station_name: start },
+        ...switchVias,
+        { station_name: end },
+      ]);
+      featuresForPopup.push(feature);
+    });
+  }
 
   // Then we display the gttos and premium features if a validity text has not been
   // found with the poi highlights.
