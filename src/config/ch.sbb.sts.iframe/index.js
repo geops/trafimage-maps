@@ -7,7 +7,6 @@ import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import featureStyler from './FeatureStyler';
 import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
 import poiImage from './img/poi.png';
 import poiImageHL from './img/poi_hl.png';
@@ -80,7 +79,6 @@ export const highlights = new MTVectorLayer({
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
-    featureStyler,
   },
 });
 
@@ -106,7 +104,6 @@ export const highlightRoutes = new HighlightRoutesLayer({
   properties: {
     isQueryable: false,
     disableSetFeatureInfoOnHover: true,
-    featureStyler,
   },
 });
 
@@ -180,7 +177,6 @@ export const gttos = new MapboxStyleLayer({
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
-    featureStyler,
   },
 });
 
@@ -197,7 +193,6 @@ export const premium = new MapboxStyleLayer({
   properties: {
     disableSetFeatureInfoOnHover: true,
     isQueryable: true,
-    featureStyler,
   },
 });
 

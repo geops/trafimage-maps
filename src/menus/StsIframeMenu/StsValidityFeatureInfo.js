@@ -25,8 +25,8 @@ const useStyles = makeStyles(() => {
           borderBottom: '1px solid #666 !important',
           borderBottomWidth: '1px !important',
         },
-        '&.open': {
-          borderBottom: '1px solid #eee',
+        '& .wkp-menu-item-header.open': {
+          borderBottom: 'none !important',
         },
       },
     },
@@ -40,7 +40,6 @@ const useStyles = makeStyles(() => {
     },
     featureInfoItem: {
       padding: 15,
-      borderBottom: '1px solid #eee',
     },
     imageLine: {
       '& img': {
@@ -91,7 +90,6 @@ function StsValidityFeatureInfo() {
       if (!feature) {
         clearHighlightsSelection();
         highlightRoutes.highlightRoutes([]);
-        setSelectedFeature(null);
         return;
       }
       if (feature.getGeometry() instanceof Point) {
@@ -181,6 +179,7 @@ function StsValidityFeatureInfo() {
                   collapsed={!active}
                   title={active ? <b>{title}</b> : title}
                   open={active}
+                  menuHeight="unset"
                 >
                   <div className={classes.featureInfoItem}>
                     {images ? (

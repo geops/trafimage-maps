@@ -1,13 +1,16 @@
 import React, { useRef, useMemo } from 'react';
 import { PropTypes } from 'prop-types';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { makeStyles, IconButton } from '@material-ui/core';
+import { MdClose } from 'react-icons/md';
 import MenuItem from '../../components/Menu/MenuItem';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
 import StsDirektVerbindungenFeatureInfo from './StsDirektVerbindungenFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import Overlay from '../../components/Overlay/Overlay';
+import { setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
   return {
@@ -51,7 +54,7 @@ const useStyles = makeStyles(() => {
     mobileHandleWrapper: {
       position: 'absolute',
       width: '100%',
-      height: 20,
+      height: 30,
       top: 0,
       right: 0,
     },
@@ -60,6 +63,12 @@ const useStyles = makeStyles(() => {
       backgroundColor: '#f5f5f5',
       width: 'inherit',
       height: 'inherit',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+    },
+    closeBtn: {
+      padding: 8,
     },
   };
 });
@@ -72,9 +81,12 @@ function StsIframeMenu({
   title,
   displayMenu,
 }) {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
@@ -120,10 +132,25 @@ function StsIframeMenu({
         </MenuItem>
       )}
       {active && isMobile && featureInfo?.length ? (
-        <Overlay disablePortal={false}>
+        <Overlay
+          elements={activeTopic.elements}
+          disablePortal={false}
+          defaultSize={{ height: 580 }}
+          transitionDuration={0}
+        >
           {isMobile && (
             <div className={classes.mobileHandleWrapper}>
-              <div className={classes.mobileHandle} />
+              <div className={classes.mobileHandle}>
+                <IconButton
+                  className={`wkp-close-bt ${classes.closeBtn}`}
+                  title={t('Popup schliessen')}
+                  onClick={() => {
+                    dispatch(setFeatureInfo());
+                  }}
+                >
+                  <MdClose focusable={false} alt={t('Popup schliessen')} />
+                </IconButton>
+              </div>
             </div>
           )}
           <div className={classes.menuContent}>{featureInfos}</div>

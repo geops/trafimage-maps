@@ -86,15 +86,30 @@ const propTypes = {
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
+  transitionDuration: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.shape({
+      appear: PropTypes.number,
+      enter: PropTypes.number,
+      exit: PropTypes.number,
+    }),
+  ]),
 };
 
 const defaultProps = {
   children: null,
   disablePortal: true,
   defaultSize: { height: 250 },
+  transitionDuration: undefined,
 };
 
-const Overlay = ({ elements, children, disablePortal, defaultSize }) => {
+const Overlay = ({
+  elements,
+  children,
+  disablePortal,
+  defaultSize,
+  transitionDuration,
+}) => {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
 
@@ -137,6 +152,7 @@ const Overlay = ({ elements, children, disablePortal, defaultSize }) => {
   return (
     <div>
       <Drawer
+        transitionDuration={transitionDuration}
         className={`${classes.drawer} ${
           isMobile ? classes.drawerMobile : classes.drawerDesktop
         }`}

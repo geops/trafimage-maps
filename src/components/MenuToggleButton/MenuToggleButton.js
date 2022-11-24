@@ -11,7 +11,7 @@ function MenuToggleButton() {
 
   return (
     <IconButton
-      className="wkp-menu-toggler"
+      className="wkp-display-menu-toggler"
       onClick={() => dispatch(setDisplayMenu(!displayMenu))}
       size="medium"
     >
