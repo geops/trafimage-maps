@@ -75,6 +75,7 @@ const useStyles = makeStyles({
     height: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: 1001,
   },
 });
 

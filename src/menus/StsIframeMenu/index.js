@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core';
 import StsMenu from './StsMenu';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
+import { setMaxExtent } from '../../model/map/actions';
+import { swissExtent } from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -28,6 +30,14 @@ function StsTopicMenu() {
   }, [screenWidth]);
   const [activeMenu, setActiveMenu] = useState('sts');
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  useEffect(() => {
+    if (activeMenu === 'sts') {
+      dispatch(setMaxExtent(swissExtent));
+    } else {
+      dispatch(setMaxExtent(null));
+    }
+  }, [activeMenu, dispatch]);
 
   useEffect(() => {
     if (featureInfo?.length) {

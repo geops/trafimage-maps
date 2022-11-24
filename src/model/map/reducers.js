@@ -58,6 +58,7 @@ export default function app(state = initialState, action) {
       if (!action.data) {
         return {
           ...state,
+          maxExtent: undefined,
         };
       }
       return {

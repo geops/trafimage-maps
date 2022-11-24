@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Point from 'ol/geom/Point';
 import { makeStyles, Divider } from '@material-ui/core';
 import MenuItem from '../../components/Menu/MenuItem';
@@ -14,6 +14,7 @@ import {
 import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
 import { DETAILS_BASE_URL } from '../../utils/constants';
 import { getId } from '../../utils/removeDuplicateFeatures';
+import { setCenter } from '../../model/map/actions';
 
 const useStyles = makeStyles(() => {
   return {
@@ -56,6 +57,7 @@ const clearHighlightsSelection = () =>
     .forEach((feat) => feat.set('selected', false));
 
 function StsValidityFeatureInfo() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -94,6 +96,7 @@ function StsValidityFeatureInfo() {
       }
       if (feature.getGeometry() instanceof Point) {
         feature.set('selected', true);
+        dispatch(setCenter(feature.getGeometry().getCoordinates()));
         highlightRoutes.highlightRoutes([]);
       } else {
         clearHighlightsSelection();
@@ -104,7 +107,7 @@ function StsValidityFeatureInfo() {
       }
       setSelectedFeature(feature);
     },
-    [previousSelectedFeature],
+    [previousSelectedFeature, dispatch],
   );
 
   const onCollapseToggle = useCallback(

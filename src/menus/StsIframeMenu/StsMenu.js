@@ -41,6 +41,9 @@ const useStyles = makeStyles(() => {
     menuContent: {
       padding: '0 15px 0',
     },
+    mobileMenuContent: {
+      padding: '40px 15px 15px',
+    },
     fullHeight: {
       '& .wkp-collapsible-vertical': {
         height: 'calc(100vh - 100px)',
@@ -56,6 +59,7 @@ const useStyles = makeStyles(() => {
       height: 30,
       top: 0,
       right: 0,
+      zIndex: 1000,
     },
     mobileHandle: {
       position: 'fixed',
@@ -68,6 +72,7 @@ const useStyles = makeStyles(() => {
     },
     closeBtn: {
       padding: 8,
+      marginRight: 10,
     },
   };
 });
@@ -133,8 +138,8 @@ function StsMenu({
         <Overlay
           elements={activeTopic.elements}
           disablePortal={false}
-          defaultSize={{ height: 580 }}
           transitionDuration={0}
+          defaultSize={{ height: 400 }}
         >
           {isMobile && (
             <div className={classes.mobileHandleWrapper}>
@@ -151,7 +156,7 @@ function StsMenu({
               </div>
             </div>
           )}
-          <div className={classes.menuContent}>{featureInfos}</div>
+          <div className={classes.mobileMenuContent}>{featureInfos}</div>
         </Overlay>
       ) : null}
     </>
