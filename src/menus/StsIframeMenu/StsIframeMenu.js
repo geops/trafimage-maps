@@ -13,18 +13,40 @@ const useStyles = makeStyles(() => {
   return {
     root: {
       '&.wkp-menu-item': {
+        position: 'relative',
         marginTop: '0 !important',
-        '&:not(:last-child)': {
-          borderBottom: '1px solid gray !important',
+        '&:not(:last-child).closed': {
+          borderBottom: '1px solid #666 !important',
           borderBottomWidth: '1px !important',
         },
-        '&.open': {
-          borderBottom: '1px solid #eee',
+        '&:not(.closed)': {
+          boxShadow: '7px 7px 10px -6px rgb(0 0 0 / 40%)',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: 'calc(100% - 4px)',
+          zIndex: 1000,
         },
       },
     },
+
+    active: {
+      border: '2px solid #666 !important',
+    },
+    layerSwitcher: {
+      top: 50,
+    },
     menuContent: {
       padding: 15,
+    },
+    fullHeight: {
+      '& .wkp-collapsible-vertical': {
+        height: 'calc(100vh - 100px)',
+      },
+    },
+    featureInfo: {
+      maxHeight: 'calc(90vh - 100px)',
+      overflow: 'hidden',
     },
     mobileHandleWrapper: {
       position: 'absolute',
@@ -42,7 +64,14 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function StsIframeMenu({ collapsed, onClick, activeMenu, active, title }) {
+function StsIframeMenu({
+  collapsed,
+  onClick,
+  activeMenu,
+  active,
+  title,
+  displayMenu,
+}) {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -61,31 +90,36 @@ function StsIframeMenu({ collapsed, onClick, activeMenu, active, title }) {
     [activeMenu],
   );
 
-  const featureInfos = useMemo(
-    () =>
-      activeMenu === 'sts' ? (
-        <StsValidityFeatureInfo />
-      ) : (
-        <StsDirektVerbindungenFeatureInfo />
-      ),
-    [activeMenu],
-  );
+  const featureInfos =
+    activeMenu === 'sts' ? (
+      <StsValidityFeatureInfo />
+    ) : (
+      <StsDirektVerbindungenFeatureInfo />
+    );
 
   return (
     <>
-      <MenuItem
-        onCollapseToggle={onClick}
-        className={`wkp-gb-topic-menu ${classes.root}`}
-        collapsed={collapsed}
-        ref={ref}
-        title={active ? <b>{title}</b> : title}
-      >
-        <div className={classes.menuContent}>
-          {layerSwitcher}
-          {!isMobile && featureInfo?.length ? featureInfos : null}
-        </div>
-      </MenuItem>
-      {isMobile && featureInfo?.length ? (
+      {displayMenu && (
+        <MenuItem
+          onCollapseToggle={onClick}
+          className={`${classes.root}${!collapsed ? ` ${classes.active}` : ''}${
+            featureInfo?.length && !isMobile ? ` ${classes.fullHeight}` : ''
+          }`}
+          collapsed={collapsed}
+          open={!collapsed}
+          ref={ref}
+          title={active ? <b>{title}</b> : title}
+          menuHeight="calc(100vh - 100px)"
+        >
+          <div className={classes.menuContent}>
+            <div className={classes.layerSwitcher}>{layerSwitcher}</div>
+            {!isMobile && featureInfo?.length ? (
+              <div className={classes.featureInfo}>{featureInfos}</div>
+            ) : null}
+          </div>
+        </MenuItem>
+      )}
+      {active && isMobile && featureInfo?.length ? (
         <Overlay disablePortal={false}>
           {isMobile && (
             <div className={classes.mobileHandleWrapper}>
@@ -105,6 +139,7 @@ StsIframeMenu.propTypes = {
   activeMenu: PropTypes.string,
   onClick: PropTypes.func,
   title: PropTypes.string.isRequired,
+  displayMenu: PropTypes.bool,
 };
 
 StsIframeMenu.defaultProps = {
@@ -112,6 +147,7 @@ StsIframeMenu.defaultProps = {
   onClick: () => {},
   active: false,
   activeMenu: 'sts',
+  displayMenu: true,
 };
 
 export default React.memo(StsIframeMenu);

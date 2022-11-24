@@ -8,6 +8,7 @@ import FitExtent from 'react-spatial/components/FitExtent';
 import { ZoomSlider } from 'ol/control';
 import { unByKey } from 'ol/Observable';
 import { Style, Icon } from 'ol/style';
+import MenuToggleButton from '../MenuToggleButton/MenuToggleButton';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
@@ -22,19 +23,21 @@ const propTypes = {
   geolocation: PropTypes.bool,
   zoomSlider: PropTypes.bool,
   fitExtent: PropTypes.bool,
+  menuToggler: PropTypes.bool,
 };
 
 const defaultProps = {
   geolocation: true,
   zoomSlider: true,
   fitExtent: true,
+  menuToggler: false,
 };
 
 const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
 };
 
-const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
+const MapControls = ({ menuToggler, geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
@@ -163,6 +166,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
 
   return (
     <div className="wkp-map-controls">
+      {menuToggler && <MenuToggleButton />}
       <Zoom
         map={map}
         zoomInChildren={<ZoomIn />}

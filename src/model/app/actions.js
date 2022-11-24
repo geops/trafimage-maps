@@ -40,6 +40,7 @@ export const SET_VECTOR_TILES_KEY = 'SET_VECTOR_TILES_KEY';
 export const SET_LOGIN_URL = 'SET_LOGIN_URL';
 export const SET_REALTIME_KEY = 'SET_REALTIME_KEY';
 export const SET_REALTIME_URL = 'SET_REALTIME_URL';
+export const SET_DISPLAY_MENU = 'SET_DISPLAY_MENU';
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
 
@@ -340,5 +341,10 @@ export const setEmbedded = (data) => ({
 
 export const setSearchInfoOpen = (data) => ({
   type: SET_SEARCH_INFO_OPEN,
+  data,
+});
+
+export const setDisplayMenu = (data) => ({
+  type: SET_DISPLAY_MENU,
   data,
 });

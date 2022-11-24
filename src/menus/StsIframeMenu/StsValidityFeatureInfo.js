@@ -1,21 +1,28 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Point from 'ol/geom/Point';
 import { makeStyles, Divider } from '@material-ui/core';
 import MenuItem from '../../components/Menu/MenuItem';
 import Link from '../../components/Link';
 import usePrevious from '../../utils/usePrevious';
 import GeltungsbereichePopup from '../../popups/GeltungsbereicheGaPopup/GeltungsbereicheGaPopup';
-import { otherRoutes } from '../../config/ch.sbb.sts.iframe';
+import {
+  otherRoutes,
+  highlightRoutes,
+  highlights,
+} from '../../config/ch.sbb.sts.iframe';
 import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
 import { DETAILS_BASE_URL } from '../../utils/constants';
+import { getId } from '../../utils/removeDuplicateFeatures';
 
 const useStyles = makeStyles(() => {
   return {
     root: {
       '&.wkp-menu-item': {
         marginTop: '0 !important',
+        border: '1px solid #666 !important',
         '&:not(:last-child)': {
-          borderBottom: '1px solid gray !important',
+          borderBottom: '1px solid #666 !important',
           borderBottomWidth: '1px !important',
         },
         '&.open': {
@@ -23,8 +30,13 @@ const useStyles = makeStyles(() => {
         },
       },
     },
+    fit: {
+      '& .wkp-collapsible-vertical': {
+        height: 'fit-content !important',
+      },
+    },
     featureInfos: {
-      border: '1px solid gray',
+      border: '1px solid #666',
     },
     featureInfoItem: {
       padding: 15,
@@ -38,6 +50,12 @@ const useStyles = makeStyles(() => {
   };
 });
 
+const clearHighlightsSelection = () =>
+  highlights.olLayer
+    .getSource()
+    .getFeatures()
+    .forEach((feat) => feat.set('selected', false));
+
 function StsValidityFeatureInfo() {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
@@ -47,7 +65,8 @@ function StsValidityFeatureInfo() {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
 
-  const [infoKey, setInfoKey] = useState(undefined);
+  const [selectedFeature, setSelectedFeature] = useState();
+  const previousSelectedFeature = usePrevious(selectedFeature);
 
   const mainFeatureInfos = useMemo(
     () => featureInfo.filter((info) => info.layer.key !== otherRoutes.key),
@@ -64,24 +83,66 @@ function StsValidityFeatureInfo() {
   }, [mainFeatureInfos, tours]);
   const prevMainFeatures = usePrevious(mainFeatures);
 
+  const select = useCallback(
+    (feature) => {
+      if (previousSelectedFeature) {
+        previousSelectedFeature.set('selected', false);
+      }
+      if (!feature) {
+        clearHighlightsSelection();
+        highlightRoutes.highlightRoutes([]);
+        setSelectedFeature(null);
+        return;
+      }
+      if (feature.getGeometry() instanceof Point) {
+        feature.set('selected', true);
+        highlightRoutes.highlightRoutes([]);
+      } else {
+        clearHighlightsSelection();
+        highlightRoutes.highlightRoutes(
+          [feature.get('title')],
+          feature.get('routeProperty') || null,
+        );
+      }
+      setSelectedFeature(feature);
+    },
+    [previousSelectedFeature],
+  );
+
+  const onCollapseToggle = useCallback(
+    (open, feat) => {
+      setSelectedFeature(open ? null : feat);
+      select(open ? null : feat);
+    },
+    [select],
+  );
+
   useEffect(() => {
     fetch('../data/tours.json')
       .then((response) => response.json())
       .then((data) => setTours(data));
+    return () => select();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
+    if (!mainFeatures?.length) {
+      select();
+    }
     if (mainFeatures !== prevMainFeatures) {
-      setInfoKey();
+      setSelectedFeature();
     }
-    if (mainFeatures?.length && infoKey === undefined) {
-      setInfoKey(mainFeatures[0].getId() || mainFeatures[0].get('id'));
+    if (mainFeatures?.length && selectedFeature === undefined) {
+      setSelectedFeature(mainFeatures[0]);
+      select(mainFeatures[0]);
     }
-  }, [mainFeatures, prevMainFeatures, infoKey]);
+  }, [mainFeatures, prevMainFeatures, selectedFeature, select]);
 
   if (!gbFeatureInfo?.features?.length && !mainFeatures.length) {
+    select();
     return null;
   }
+
   return (
     <>
       <br />
@@ -103,7 +164,7 @@ function StsValidityFeatureInfo() {
           <br />
           <div className={classes.featureInfos}>
             {mainFeatures.map((feat) => {
-              const id = feat.getId() || feat.get('id');
+              const id = getId(feat) || feat.get('title');
               const title =
                 feat.get('route_names_premium') ||
                 feat.get('route_names_gttos') ||
@@ -111,13 +172,15 @@ function StsValidityFeatureInfo() {
               const images = feat.get('images') && feat.get('images').length;
               const description = feat.get('lead_text');
               const link = id && DETAILS_BASE_URL + id;
+              const active = !!selectedFeature && getId(selectedFeature) === id;
               return (
                 <MenuItem
-                  onCollapseToggle={(open) => setInfoKey(open ? null : id)}
-                  className={`wkp-gb-topic-menu ${classes.root}`}
-                  collapsed={infoKey !== id}
-                  title={<b>{title}</b>}
-                  menuHeight={400}
+                  key={id}
+                  onCollapseToggle={(open) => onCollapseToggle(open, feat)}
+                  className={`wkp-gb-topic-menu ${classes.root} ${classes.fit}`}
+                  collapsed={!active}
+                  title={active ? <b>{title}</b> : title}
+                  open={active}
                 >
                   <div className={classes.featureInfoItem}>
                     {images ? (

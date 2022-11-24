@@ -7,11 +7,12 @@ import {
   direktverbindungenNight,
   highlights,
 } from '../config/ch.sbb.sts.iframe';
+import { getId } from './removeDuplicateFeatures';
 
 /**
  * Rearrange the features for the popup
  */
-export const parseFeaturesInfos = (infos, tours) => {
+export const parseFeaturesInfos = (infos, tours = []) => {
   const infoFeatures = {};
   let featuresForPopup = [];
 
@@ -49,7 +50,7 @@ export const parseFeaturesInfos = (infos, tours) => {
         vias,
       } = feature.getProperties();
 
-      const switchVias = JSON.parse(vias).filter(
+      const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
         (via) => via.via_type === 'switch' || via.via_type === 'visible',
       );
       feature.set('vias', [
@@ -83,6 +84,7 @@ export const parseFeaturesInfos = (infos, tours) => {
         featuresForPopup.push(
           new Feature({
             title: 'Optional Shortcut',
+            routeProperty: propertyName,
           }),
         );
       } else {
@@ -93,7 +95,7 @@ export const parseFeaturesInfos = (infos, tours) => {
         clone.setProperties({
           ...feature.getProperties(),
           ...toursByRoute[routeName],
-          id: feature.getId(),
+          id: getId(feature),
         });
         if (toursByRoute[routeName]) {
           featuresForPopup = featuresForPopup.concat(clone);

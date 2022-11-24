@@ -1,6 +1,7 @@
 import GeoJSON from 'ol/format/GeoJSON';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
+import { Style, Icon } from 'ol/style';
 import { VectorLayer as MTVectorLayer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
@@ -8,6 +9,8 @@ import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import featureStyler from './FeatureStyler';
 import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
+import poiImage from './img/poi.png';
+import poiImageHL from './img/poi_hl.png';
 
 // const { POIS_URL } = process.env;
 const FILTER_KEY = 'sts.filter';
@@ -26,19 +29,6 @@ const PREMIUM_LAYER_KEY = 'ch.sbb.sts.validity.premium';
 const DIREKTVERBINDUNGEN_DAY_LAYER_KEY = `${DIREKTVERBINDUNGEN_KEY}.day`;
 const DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY = `${DIREKTVERBINDUNGEN_KEY}.night`;
 
-const params = new URLSearchParams(window.location.search);
-const permalinkLayers = params.get('layers')?.split(',') || [];
-const gttosVisible = permalinkLayers.includes(GTTOS_LAYER_KEY);
-const premiumVisible =
-  !gttosVisible && permalinkLayers.includes(PREMIUM_LAYER_KEY);
-const highlightsVisible = permalinkLayers.includes(HIGHLIGHTS_LAYER_KEY);
-const direktverbindungenDayVisible = permalinkLayers.includes(
-  DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
-);
-const direktverbindungenNightVisible = permalinkLayers.includes(
-  DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
-);
-
 const stsDataLayer = new TrafimageMapboxLayer({
   name: DATA_LAYER_KEY,
   key: DATA_LAYER_KEY,
@@ -56,17 +46,41 @@ const stsDataLayer = new TrafimageMapboxLayer({
 export const highlights = new MTVectorLayer({
   name: 'Highlights',
   key: HIGHLIGHTS_LAYER_KEY,
-  visible: highlightsVisible,
+  visible: true,
   olLayer: new VectorLayer({
     minZoom: 8.5,
     source: new VectorSource({
       format: new GeoJSON(),
     }),
-    style: (feature) => featureStyler.poisStyleFunction(feature),
+    style: (feature) => {
+      if (!feature.get('highlight_url')) {
+        return null;
+      }
+      return feature.get('selected')
+        ? [
+            new Style({
+              image: new Icon({
+                src: poiImageHL,
+                anchor: [0.5, 41],
+                anchorYUnits: 'pixels',
+              }),
+            }),
+          ]
+        : [
+            new Style({
+              image: new Icon({
+                src: poiImage,
+                anchor: [0.5, 41],
+                anchorYUnits: 'pixels',
+              }),
+            }),
+          ];
+    },
   }),
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
+    featureStyler,
   },
 });
 
@@ -84,14 +98,15 @@ export const highlightRoutes = new HighlightRoutesLayer({
   name: 'Highlight routes',
   key: ROUTES_HIGHLIGHT_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: false,
+  visible: true,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_HIGHLIGHT_VALUE,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_HIGHLIGHT_VALUE,
   properties: {
-    isQueryable: true,
+    isQueryable: false,
     disableSetFeatureInfoOnHover: true,
+    featureStyler,
   },
 });
 
@@ -156,7 +171,7 @@ export const gttos = new MapboxStyleLayer({
   name: 'Grand Train Tour of Switzerland',
   key: GTTOS_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: gttosVisible,
+  visible: true,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_GTTOS_VALUE,
   styleLayersFilter: ({ metadata }) =>
@@ -165,6 +180,7 @@ export const gttos = new MapboxStyleLayer({
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
+    featureStyler,
   },
 });
 
@@ -172,7 +188,7 @@ export const premium = new MapboxStyleLayer({
   name: 'Premium Panoramic Trains',
   key: PREMIUM_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: premiumVisible,
+  visible: false,
   group: 'ch.sbb.sts.validity.group',
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_PREMIUM_VALUE,
@@ -181,6 +197,7 @@ export const premium = new MapboxStyleLayer({
   properties: {
     disableSetFeatureInfoOnHover: true,
     isQueryable: true,
+    featureStyler,
   },
 });
 
@@ -188,11 +205,12 @@ export const direktverbindungenNight = new DirektverbindungenLayer({
   name: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
   key: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: direktverbindungenNightVisible,
+  visible: true,
   properties: {
     routeType: 'night',
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
+    useDvPoints: false,
   },
 });
 
@@ -200,11 +218,12 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
   name: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
   key: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: direktverbindungenDayVisible,
+  visible: true,
   properties: {
     routeType: 'day',
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
+    useDvPoints: false,
   },
 });
 

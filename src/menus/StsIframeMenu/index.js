@@ -1,23 +1,31 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core';
 import StsIframeMenu from './StsIframeMenu';
 import stsLayers from '../../config/ch.sbb.sts.iframe';
+import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
   return {
     container: {
-      border: '1px solid gray',
+      border: (props) => (props.displayMenu ? '1px solid #666' : 'none'),
       boxShadow: '7px 7px 10px -6px rgb(0 0 0 / 40%)',
+      boxSizing: 'border-box',
     },
   };
 });
 function StsMenu() {
-  const classes = useStyles();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
+  const displayMenu = useSelector((state) => state.app.displayMenu);
+  const classes = useStyles({ displayMenu });
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+  const isMobile = useMemo(() => {
+    return ['xs'].includes(screenWidth);
+  }, [screenWidth]);
   const [activeMenu, setActiveMenu] = useState('sts');
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -25,7 +33,10 @@ function StsMenu() {
     if (featureInfo?.length) {
       setIsCollapsed(false);
     }
-  }, [featureInfo]);
+    if (featureInfo?.length && isMobile) {
+      dispatch(setDisplayMenu(false));
+    }
+  }, [featureInfo, isMobile, dispatch]);
 
   const onClick = useCallback(
     (key) => {
@@ -36,6 +47,7 @@ function StsMenu() {
           });
           setActiveMenu(key);
           setIsCollapsed(false);
+          dispatch(setFeatureInfo([]));
           return;
         }
         setIsCollapsed(!isCollapsed);
@@ -47,17 +59,19 @@ function StsMenu() {
           });
           setActiveMenu(key);
           setIsCollapsed(false);
+          dispatch(setFeatureInfo([]));
           return;
         }
         setIsCollapsed(!isCollapsed);
       }
     },
-    [activeMenu, isCollapsed],
+    [activeMenu, isCollapsed, dispatch],
   );
 
   return (
     <div className={classes.container}>
       <StsIframeMenu
+        displayMenu={displayMenu}
         active={activeMenu === 'sts'}
         activeMenu={activeMenu}
         collapsed={
@@ -67,6 +81,7 @@ function StsMenu() {
         title={t('Validity of Swiss Travel Pass')}
       />
       <StsIframeMenu
+        displayMenu={displayMenu}
         active={activeMenu === 'dv'}
         activeMenu={activeMenu}
         collapsed={activeMenu !== 'dv' || (activeMenu === 'dv' && isCollapsed)}

@@ -8,6 +8,10 @@
   }
 }
 
+.wkp-menu-toggler {
+  padding: 8px;
+}
+
 .wkp-fit-extent {
   svg {
     width: 30px;
@@ -19,6 +23,7 @@
   }
 }
 
+.wkp-menu-toggler,
 .wkp-geolocation,
 .wkp-fit-extent {
   margin: 20px 0;

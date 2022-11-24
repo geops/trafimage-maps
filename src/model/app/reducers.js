@@ -45,6 +45,7 @@ import {
   SET_API_KEY_NAME,
   SET_REALTIME_URL,
   SET_REALTIME_KEY,
+  SET_DISPLAY_MENU,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -98,6 +99,7 @@ const getInitialState = () => ({
   embeddded: false,
   consentGiven: false,
   disableCookies: false,
+  displayMenu: true,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -302,6 +304,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         staticFilesUrl: action.data,
+      };
+    case SET_DISPLAY_MENU:
+      return {
+        ...state,
+        displayMenu: action.data,
       };
     default:
       return {

@@ -65,6 +65,7 @@ function StsValidityLayerSwitcher() {
           const isActive = switchValue === layer.key;
           return (
             <FormControlLabel
+              key={layer.key}
               label={isActive ? <b>{t(layer.name)}</b> : t(layer.name)}
               checked={isActive}
               control={

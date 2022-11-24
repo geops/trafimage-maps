@@ -89,11 +89,6 @@ class Map extends PureComponent {
     dispatchHtmlEvent(new CustomEvent('load'));
   }
 
-  componentDidUpdate() {
-    const { featureInfo } = this.props;
-    console.log(featureInfo);
-  }
-
   componentWillUnmount() {
     unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
   }

@@ -11,8 +11,6 @@ class HighlightRoutesLayer extends MapboxStyleLayer {
         const any = ['any'];
         names.forEach((name) => {
           any.push(['in', name, ['get', property]]);
-          // any.push(['in', name, ['get', 'route_names_premium']]);
-          // any.push(['in', name, ['get', 'route_names_gttos']]);
         });
         lineWidthProp = ['case', any, lineWidth, 0];
       }
