@@ -3,11 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
 import SBBSwitch from '../../components/SBBSwitch/SBBSwitch';
-import stsLayers, {
-  highlights,
-  gttos,
-  premium,
-} from '../../config/ch.sbb.sts.iframe';
+import stsLayers, { highlights, gttos, premium } from '../../config/ch.sbb.sts';
 import { setFeatureInfo } from '../../model/app/actions';
 
 function StsValidityLayerSwitcher() {

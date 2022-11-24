@@ -8,11 +8,9 @@
   }
 }
 
-.wkp-display-menu-toggler {
-  padding: 8px;
-}
-
 .wkp-fit-extent {
+  margin: 20px 0;
+
   svg {
     width: 30px;
     height: 30px;
@@ -23,10 +21,14 @@
   }
 }
 
+.wkp-display-menu-toggler {
+  padding: 8px;
+  margin: 10px 0;
+}
+
 .wkp-display-menu-toggler,
 .wkp-geolocation,
 .wkp-fit-extent {
-  margin: 20px 0;
   background: white;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.9);
   border-radius: 50%;

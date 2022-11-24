@@ -6,7 +6,7 @@ import {
   direktverbindungenDay,
   direktverbindungenNight,
   highlights,
-} from '../config/ch.sbb.sts.iframe';
+} from '../config/ch.sbb.sts';
 import { getId } from './removeDuplicateFeatures';
 
 /**

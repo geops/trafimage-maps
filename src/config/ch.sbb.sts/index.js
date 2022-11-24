@@ -19,7 +19,7 @@ const FILTER_HIGHLIGHT_VALUE = 'sts_highlight';
 const FILTER_OTHERS_VALUE = 'sts_others';
 const FILTER_LINE_VALUE = 'sts.line'; // style using nova daten
 
-const DATA_LAYER_KEY = 'ch.sbb.sts.iframe.data';
+const DATA_LAYER_KEY = 'ch.sbb.sts.data';
 const HIGHLIGHTS_LAYER_KEY = 'ch.sbb.sts.validity.highlights';
 const ROUTES_HIGHLIGHT_LAYER_KEY = 'ch.sbb.sts.validity.routes_highlight';
 const OTHER_LAYER_KEY = 'ch.sbb.sts.validity.other';

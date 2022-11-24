@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core';
-import StsIframeMenu from './StsIframeMenu';
-import stsLayers from '../../config/ch.sbb.sts.iframe';
+import StsMenu from './StsMenu';
+import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => {
     },
   };
 });
-function StsMenu() {
+function StsTopicMenu() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
@@ -70,7 +70,7 @@ function StsMenu() {
 
   return (
     <div className={classes.container}>
-      <StsIframeMenu
+      <StsMenu
         displayMenu={displayMenu}
         active={activeMenu === 'sts'}
         activeMenu={activeMenu}
@@ -80,7 +80,7 @@ function StsMenu() {
         onClick={() => onClick('sts')}
         title={t('Validity of Swiss Travel Pass')}
       />
-      <StsIframeMenu
+      <StsMenu
         displayMenu={displayMenu}
         active={activeMenu === 'dv'}
         activeMenu={activeMenu}
@@ -92,6 +92,6 @@ function StsMenu() {
   );
 }
 
-StsMenu.propTypes = {};
+StsTopicMenu.propTypes = {};
 
-export default StsMenu;
+export default StsTopicMenu;

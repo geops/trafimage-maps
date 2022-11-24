@@ -1,13 +1,12 @@
 /* eslint-disable no-param-reassign */
 import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
 import SBBSwitch from '../../components/SBBSwitch/SBBSwitch';
 import {
   direktverbindungenDay,
   direktverbindungenNight,
-} from '../../config/ch.sbb.sts.iframe';
+} from '../../config/ch.sbb.sts';
 import { setFeatureInfo } from '../../model/app/actions';
 
 const getVisibleLayers = () => {
@@ -18,7 +17,6 @@ const getVisibleLayers = () => {
 };
 
 function StsDirektverbindungenLayerSwitcher() {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const [visibleLayers, setVisibleLayers] = useState(getVisibleLayers());
@@ -39,13 +37,7 @@ function StsDirektverbindungenLayerSwitcher() {
     <>
       <FormGroup>
         <FormControlLabel
-          label={
-            dvDayVisible ? (
-              <b>{t(direktverbindungenDay.name)}</b>
-            ) : (
-              t(direktverbindungenDay.name)
-            )
-          }
+          label={dvDayVisible ? <b>Day trains</b> : 'Day trains'}
           checked={dvDayVisible}
           control={
             <SBBSwitch
@@ -56,13 +48,7 @@ function StsDirektverbindungenLayerSwitcher() {
           }
         />
         <FormControlLabel
-          label={
-            dvNightVisible ? (
-              <b>{t(direktverbindungenNight.name)}</b>
-            ) : (
-              t(direktverbindungenNight.name)
-            )
-          }
+          label={dvNightVisible ? <b>Night trains</b> : 'Night trains'}
           checked={dvNightVisible}
           control={
             <SBBSwitch

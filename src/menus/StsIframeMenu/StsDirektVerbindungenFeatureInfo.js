@@ -78,13 +78,7 @@ function StsDirektVerbindungenFeatureInfo() {
   }
   return (
     <>
-      <br />
-      {!isMobile && (
-        <>
-          <Divider />
-          <br />
-        </>
-      )}
+      {!isMobile && <Divider />}
       {dvFeatures?.length ? (
         <>
           <br />

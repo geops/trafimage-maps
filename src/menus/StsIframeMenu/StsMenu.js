@@ -1,7 +1,6 @@
 import React, { useRef, useMemo } from 'react';
 import { PropTypes } from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { makeStyles, IconButton } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
 import MenuItem from '../../components/Menu/MenuItem';
@@ -40,7 +39,7 @@ const useStyles = makeStyles(() => {
       top: 50,
     },
     menuContent: {
-      padding: 15,
+      padding: '0 15px 0',
     },
     fullHeight: {
       '& .wkp-collapsible-vertical': {
@@ -73,7 +72,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function StsIframeMenu({
+function StsMenu({
   collapsed,
   onClick,
   activeMenu,
@@ -81,7 +80,6 @@ function StsIframeMenu({
   title,
   displayMenu,
 }) {
-  const { t } = useTranslation();
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
@@ -143,12 +141,12 @@ function StsIframeMenu({
               <div className={classes.mobileHandle}>
                 <IconButton
                   className={`wkp-close-bt ${classes.closeBtn}`}
-                  title={t('Popup schliessen')}
+                  title="Close"
                   onClick={() => {
                     dispatch(setFeatureInfo());
                   }}
                 >
-                  <MdClose focusable={false} alt={t('Popup schliessen')} />
+                  <MdClose focusable={false} alt="Close" />
                 </IconButton>
               </div>
             </div>
@@ -160,7 +158,7 @@ function StsIframeMenu({
   );
 }
 
-StsIframeMenu.propTypes = {
+StsMenu.propTypes = {
   collapsed: PropTypes.bool,
   active: PropTypes.bool,
   activeMenu: PropTypes.string,
@@ -169,7 +167,7 @@ StsIframeMenu.propTypes = {
   displayMenu: PropTypes.bool,
 };
 
-StsIframeMenu.defaultProps = {
+StsMenu.defaultProps = {
   collapsed: false,
   onClick: () => {},
   active: false,
@@ -177,4 +175,4 @@ StsIframeMenu.defaultProps = {
   displayMenu: true,
 };
 
-export default React.memo(StsIframeMenu);
+export default React.memo(StsMenu);

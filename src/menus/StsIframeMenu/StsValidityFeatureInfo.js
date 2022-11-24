@@ -10,7 +10,7 @@ import {
   otherRoutes,
   highlightRoutes,
   highlights,
-} from '../../config/ch.sbb.sts.iframe';
+} from '../../config/ch.sbb.sts';
 import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
 import { DETAILS_BASE_URL } from '../../utils/constants';
 import { getId } from '../../utils/removeDuplicateFeatures';
@@ -143,13 +143,7 @@ function StsValidityFeatureInfo() {
 
   return (
     <>
-      <br />
-      {!isMobile && (
-        <>
-          <Divider />
-          <br />
-        </>
-      )}
+      {!isMobile && <Divider />}
       {gbFeatureInfo?.features?.length ? (
         <GeltungsbereichePopup
           feature={gbFeatureInfo.features.filter((feat) => feat.get('mot'))}
