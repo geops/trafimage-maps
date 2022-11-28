@@ -172,6 +172,11 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   getFeatureInfoAtCoordinate(coordinate) {
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
       const featureInfo = { ...data };
+      // console.log(
+      //   featureInfo.features.filter(
+      //     (feat) => !(feat.get('source') === 'verbund'),
+      //   ),
+      // );
       const municipalityFeature = featureInfo.features.find(
         (feat) => feat.get('source') === 'verbund',
       );

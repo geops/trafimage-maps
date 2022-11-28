@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Link from '../../components/Link';
 import TarifverbundkarteLayer from '../../layers/TarifverbundkarteLayer';
+import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 const useStyles = makeStyles(() => ({
   zoneNumber: {
@@ -25,7 +26,13 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const properties = feature.getProperties();
-  const { zPass, zones } = properties;
+  const { zPass, zones, partners } = properties;
+
+  const verbunde = useMemo(() => {
+    return partners
+      .split(',')
+      .map((p) => capitalizeFirstLetter(p.toLowerCase()));
+  }, [partners]);
 
   useEffect(() => {
     layer.set('clicked', false);
@@ -48,27 +55,45 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
 
   return (
     <div className="wkp-tarifverbundkarte-popup">
-      {zones?.map((tarifZone, idx, array) => {
-        return (
-          <div key={tarifZone.id}>
-            <div>
-              {tarifZone.tarifverbund_urls ? (
-                <Link href={tarifZone.tarifverbund_urls}>
-                  {tarifZone.verbund}
-                </Link>
-              ) : (
-                <span>{tarifZone.verbund}</span>
-              )}
-            </div>
-            <div className={classes.zoneNumber}>
-              {`${t('Zone')} ${tarifZone.zone}`}
-            </div>
-            {(idx !== array.length - 1 || zPass) && (
-              <hr className={classes.divider} />
-            )}
-          </div>
-        );
-      })}
+      {verbunde ? (
+        <>
+          <Typography variant="h4">
+            <b>{t(`Tarifverbunde in ${feature.get('name')}`)}</b>
+          </Typography>
+          {verbunde.map((v) => (
+            <Typography key={v}>{v}</Typography>
+          ))}
+          <br />
+        </>
+      ) : null}
+      {zones ? (
+        <>
+          <Typography variant="h4">
+            <b>{t('Ausgewählte Zonen')}</b>
+          </Typography>
+          {zones.map((tarifZone, idx, array) => {
+            return (
+              <div key={tarifZone.id}>
+                <div>
+                  {tarifZone.tarifverbund_urls ? (
+                    <Link href={tarifZone.tarifverbund_urls}>
+                      {tarifZone.verbund}
+                    </Link>
+                  ) : (
+                    <span>{tarifZone.verbund}</span>
+                  )}
+                </div>
+                <div className={classes.zoneNumber}>
+                  {`${t('Zone')} ${tarifZone.zone}`}
+                </div>
+                {(idx !== array.length - 1 || zPass) && (
+                  <hr className={classes.divider} />
+                )}
+              </div>
+            );
+          })}
+        </>
+      ) : null}
       {zPass?.tarifverbund_urls && (
         <div key="z-pass">
           <Link href={zPass.tarifverbund_urls}>{zPass.partners}</Link>
