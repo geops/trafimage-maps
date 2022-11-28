@@ -19,11 +19,6 @@ const useStyles = makeStyles(() => {
         borderBottom: 'none !important',
       },
     },
-    fit: {
-      '& .wkp-collapsible-vertical': {
-        height: 'fit-content !important',
-      },
-    },
     titleWrapper: {
       display: 'flex',
       alignItems: 'center',
@@ -104,7 +99,7 @@ function StsDirektVerbindungenFeatureInfo() {
               <MenuItem
                 key={id}
                 onCollapseToggle={(open) => setInfoKey(open ? null : id)}
-                className={`wkp-gb-topic-menu ${classes.root} ${classes.fit}`}
+                className={`wkp-gb-topic-menu ${classes.root}`}
                 collapsed={!active}
                 open={active}
                 title={

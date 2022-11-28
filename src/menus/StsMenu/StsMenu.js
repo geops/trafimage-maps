@@ -175,8 +175,8 @@ function StsTopicMenu() {
   }, [activeMenu, dispatch]);
 
   useEffect(() => {
-    if (featureInfo?.length && isMobile) {
-      dispatch(setDisplayMenu(false));
+    if (featureInfo?.length) {
+      dispatch(setDisplayMenu(!isMobile));
     }
   }, [featureInfo, isMobile, dispatch]);
 
