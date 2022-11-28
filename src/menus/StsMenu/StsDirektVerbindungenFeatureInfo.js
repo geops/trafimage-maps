@@ -35,6 +35,16 @@ const useStyles = makeStyles(() => {
     featureInfos: {
       maxHeight: 'calc(90vh - 31px)',
       overflow: 'auto',
+      scrollbarWidth: 'thin',
+      '&::-webkit-scrollbar': {
+        width: 6,
+      },
+      '&::-webkit-scrollbar-track': {
+        background: 'rgba(0, 0, 0, 0.1)',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        background: 'rgba(0, 0, 0, 0.4)',
+      },
     },
     featureInfoItem: {
       padding: 15,
