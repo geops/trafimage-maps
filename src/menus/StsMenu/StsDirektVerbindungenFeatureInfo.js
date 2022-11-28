@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => {
     },
     featureInfos: {
       border: '1px solid #666',
-      maxHeight: 'calc(85vh - 100px)',
+      maxHeight: 'calc(90vh - 90px)',
       overflow: 'auto',
     },
     featureInfoItem: {
@@ -78,51 +78,53 @@ function StsDirektVerbindungenFeatureInfo() {
   }
   return (
     <>
-      {!isMobile && <Divider />}
-      {dvFeatures?.length ? (
+      {!isMobile && (
         <>
+          <Divider />
           <br />
-          <div className={classes.featureInfos}>
-            {dvFeatures.map((feat) => {
-              const id = getId(feat);
-              const title = feat.get('name');
-              const layer = feat.get('layer');
-              const isNightTrain = feat.get('nachtverbindung');
-              const active = infoKey === id;
-              return (
-                <MenuItem
-                  key={id}
-                  onCollapseToggle={(open) => setInfoKey(open ? null : id)}
-                  className={`wkp-gb-topic-menu ${classes.root} ${classes.fit}`}
-                  collapsed={!active}
-                  open={active}
-                  title={
-                    <div className={classes.titleWrapper}>
-                      <img
-                        src={
-                          isNightTrain
-                            ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
-                            : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
-                        }
-                        alt="icon"
-                        className={classes.titleIcon}
-                      />
-                      {active ? <b>{title}</b> : title}
-                    </div>
-                  }
-                  menuHeight="unset"
-                >
-                  <div className={classes.featureInfoItem}>
-                    <DirektverbindungPopup
-                      feature={active ? feat : null}
-                      layer={layer}
-                    />
-                  </div>
-                </MenuItem>
-              );
-            })}
-          </div>
         </>
+      )}
+      {dvFeatures?.length ? (
+        <div className={classes.featureInfos}>
+          {dvFeatures.map((feat) => {
+            const id = getId(feat);
+            const title = feat.get('name');
+            const layer = feat.get('layer');
+            const isNightTrain = feat.get('nachtverbindung');
+            const active = infoKey === id;
+            return (
+              <MenuItem
+                key={id}
+                onCollapseToggle={(open) => setInfoKey(open ? null : id)}
+                className={`wkp-gb-topic-menu ${classes.root} ${classes.fit}`}
+                collapsed={!active}
+                open={active}
+                title={
+                  <div className={classes.titleWrapper}>
+                    <img
+                      src={
+                        isNightTrain
+                          ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
+                          : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
+                      }
+                      alt="icon"
+                      className={classes.titleIcon}
+                    />
+                    {active ? <b>{title}</b> : title}
+                  </div>
+                }
+                menuHeight="unset"
+              >
+                <div className={classes.featureInfoItem}>
+                  <DirektverbindungPopup
+                    feature={active ? feat : null}
+                    layer={layer}
+                  />
+                </div>
+              </MenuItem>
+            );
+          })}
+        </div>
       ) : null}
     </>
   );

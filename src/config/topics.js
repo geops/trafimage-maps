@@ -30,7 +30,7 @@ import stsIframeLayers from './ch.sbb.sts';
 import defaultSearches, { handicapStopFinder } from './searches';
 import { GeltungsbereicheMenuFilter } from '../filters';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
-import StsIframeMenu from '../menus/StsIframeMenu';
+import StsMenu from '../menus/StsMenu';
 
 // For backward compatibility
 export {
@@ -319,11 +319,11 @@ export const stsIframe = {
     menu: false,
     menuToggler: true,
   },
-  maxZoom: 13.5,
+  maxZoom: 14,
   layers: stsIframeLayers,
   only: true,
   hideInLayerTree: true,
-  menu: <StsIframeMenu />,
+  menu: <StsMenu />,
   enableFeatureClick: true,
 };
 

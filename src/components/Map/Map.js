@@ -22,7 +22,6 @@ import NoMouseWheelWarning from '../NoMouseWheelWarning';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
-  maxZoom: PropTypes.number,
 
   // mapStateToProps
   featureInfo: PropTypes.arrayOf(PropTypes.shape()),
@@ -36,6 +35,9 @@ const propTypes = {
   resolution: PropTypes.number,
   zoom: PropTypes.number,
   showPopups: PropTypes.bool,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
@@ -57,6 +59,7 @@ const defaultProps = {
   resolution: undefined,
   zoom: 9,
   maxZoom: 20,
+  minZoom: 2,
   dispatchHtmlEvent: () => {},
   showPopups: true,
 };
@@ -322,6 +325,7 @@ class Map extends PureComponent {
       center,
       zoom,
       maxZoom,
+      minZoom,
       layers,
       map,
       resolution,
@@ -343,6 +347,7 @@ class Map extends PureComponent {
           onMapMoved={(evt) => this.onMapMoved(evt)}
           viewOptions={{
             maxZoom,
+            minZoom,
             extent: maxExtent,
           }}
           tabIndex={0}
@@ -368,6 +373,8 @@ const mapStateToProps = (state) => ({
   resolution: state.map.resolution,
   zoom: state.map.zoom,
   maxExtent: state.map.maxExtent,
+  maxZoom: state.map.maxZoom,
+  minZoom: state.map.minZoom,
   showPopups: state.app.showPopups,
   activeTopic: state.app.activeTopic,
 });

@@ -7,7 +7,7 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import { Layer } from 'mobility-toolbox-js/ol';
 import LayerService from '../../utils/LayerService';
-import { setLayers } from '../../model/map/actions';
+import { setLayers, setMaxZoom, setMinZoom } from '../../model/map/actions';
 import {
   setActiveTopic,
   setTopics,
@@ -52,6 +52,8 @@ const propTypes = {
   // dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
+  dispatchSetMaxZoom: PropTypes.func.isRequired,
+  dispatchSetMinZoom: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -174,9 +176,10 @@ class TopicLoader extends PureComponent {
       activeTopic,
       dispatchSetFeatureInfo,
       dispatchSetSearchService,
+      dispatchSetMaxZoom,
+      dispatchSetMinZoom,
     } = this.props;
 
-    // console.log('updateServices', !apiKey || !searchUrl);
     // wait until all web components attributes are properly set
     if (!apiKey || !searchUrl) {
       return;
@@ -216,6 +219,9 @@ class TopicLoader extends PureComponent {
       dispatchSetFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
+
+    dispatchSetMaxZoom(activeTopic.maxZoom);
+    dispatchSetMinZoom(activeTopic.minZoom);
   }
 
   updateLayers() {
@@ -396,6 +402,8 @@ const mapDispatchToProps = {
   dispatchSetTopics: setTopics,
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchService: setSearchService,
+  dispatchSetMaxZoom: setMaxZoom,
+  dispatchSetMinZoom: setMinZoom,
 };
 
 TopicLoader.propTypes = propTypes;

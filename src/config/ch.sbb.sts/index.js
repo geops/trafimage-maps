@@ -112,7 +112,8 @@ const hiddenRoutes = new MapboxStyleLayer({
   name: 'Hidden routes',
   mapboxLayer: stsDataLayer,
   visible: false,
-  styleLayersFilter: ({ metadata }) =>
+  styleLayersFilter: ({ metadata, id }) =>
+    /^gb_Fanas_Bus/.test(id) ||
     !!(
       metadata &&
       metadata['geltungsbereiche.filter'] &&
@@ -136,11 +137,14 @@ export const otherRoutes = new MapboxStyleLayer({
           metadata['geltungsbereiche.filter'].includes(FILTER_LINE_VALUE)))
     );
   },
-  styleLayersFilter: ({ metadata }) =>
-    metadata &&
-    (metadata[FILTER_KEY] === FILTER_OTHERS_VALUE ||
-      (metadata['geltungsbereiche.filter'] &&
-        metadata['geltungsbereiche.filter'].includes(FILTER_LINE_VALUE))),
+  styleLayersFilter: ({ metadata }) => {
+    return (
+      metadata &&
+      (metadata[FILTER_KEY] === FILTER_OTHERS_VALUE ||
+        (metadata['geltungsbereiche.filter'] &&
+          metadata['geltungsbereiche.filter'].includes(FILTER_LINE_VALUE)))
+    );
+  },
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,

@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Point from 'ol/geom/Point';
-import { makeStyles, Divider } from '@material-ui/core';
-import MenuItem from '../../components/Menu/MenuItem';
+import { makeStyles, Divider, Typography } from '@material-ui/core';
 import Link from '../../components/Link';
 import usePrevious from '../../utils/usePrevious';
 import GeltungsbereichePopup from '../../popups/GeltungsbereicheGaPopup/GeltungsbereicheGaPopup';
@@ -18,31 +17,15 @@ import { setCenter } from '../../model/map/actions';
 
 const useStyles = makeStyles(() => {
   return {
-    root: {
-      '&.wkp-menu-item': {
-        marginTop: '0 !important',
-        border: '1px solid #666 !important',
-        '&:not(:last-child)': {
-          borderBottom: '1px solid #666 !important',
-          borderBottomWidth: '1px !important',
-        },
-        '& .wkp-menu-item-header.open': {
-          borderBottom: 'none !important',
-        },
-      },
-    },
-    fit: {
-      '& .wkp-collapsible-vertical': {
-        height: 'fit-content !important',
-      },
-    },
     featureInfos: {
-      border: '1px solid #666',
+      border: '2px solid rgba(0, 0, 0, 0.3)',
+      maxHeight: 'calc(90vh - 90px)',
     },
     featureInfoItem: {
       padding: 15,
     },
     imageLine: {
+      margin: '5px 0',
       '& img': {
         width: '100%',
       },
@@ -77,12 +60,13 @@ function StsValidityFeatureInfo() {
     () => featureInfo.find((info) => info.layer.key === otherRoutes.key),
     [featureInfo],
   );
-  const mainFeatures = useMemo(() => {
-    return mainFeatureInfos?.length
+  const mainFeature = useMemo(() => {
+    const features = mainFeatureInfos?.length
       ? parseFeaturesInfos(mainFeatureInfos, tours)
       : [];
+    return features[0];
   }, [mainFeatureInfos, tours]);
-  const prevMainFeatures = usePrevious(mainFeatures);
+  const prevMainFeature = usePrevious(mainFeature);
 
   const select = useCallback(
     (feature) => {
@@ -110,14 +94,6 @@ function StsValidityFeatureInfo() {
     [previousSelectedFeature, dispatch],
   );
 
-  const onCollapseToggle = useCallback(
-    (open, feat) => {
-      setSelectedFeature(open ? null : feat);
-      select(open ? null : feat);
-    },
-    [select],
-  );
-
   useEffect(() => {
     fetch('../data/tours.json')
       .then((response) => response.json())
@@ -127,26 +103,31 @@ function StsValidityFeatureInfo() {
   }, []);
 
   useEffect(() => {
-    if (!mainFeatures?.length) {
+    if (!mainFeature) {
       select();
     }
-    if (mainFeatures !== prevMainFeatures) {
+    if (mainFeature !== prevMainFeature) {
       setSelectedFeature();
     }
-    if (mainFeatures?.length && selectedFeature === undefined) {
-      setSelectedFeature(mainFeatures[0]);
-      select(mainFeatures[0]);
+    if (mainFeature && selectedFeature === undefined) {
+      setSelectedFeature(mainFeature);
+      select(mainFeature);
     }
-  }, [mainFeatures, prevMainFeatures, selectedFeature, select]);
+  }, [mainFeature, prevMainFeature, selectedFeature, select]);
 
-  if (!gbFeatureInfo?.features?.length && !mainFeatures.length) {
+  if (!gbFeatureInfo?.features?.length && !mainFeature) {
     select();
     return null;
   }
 
   return (
     <>
-      {!isMobile && <Divider />}
+      {!isMobile && (
+        <>
+          <Divider />
+          <br />
+        </>
+      )}
       {gbFeatureInfo?.features?.length ? (
         <GeltungsbereichePopup
           feature={gbFeatureInfo.features.filter((feat) => feat.get('mot'))}
@@ -154,51 +135,49 @@ function StsValidityFeatureInfo() {
           renderValidityFooter={false}
         />
       ) : null}
-      {mainFeatures?.length ? (
-        <>
-          <br />
-          <div className={classes.featureInfos}>
-            {mainFeatures.map((feat) => {
-              const id = getId(feat) || feat.get('title');
-              const title =
-                feat.get('route_names_premium') ||
-                feat.get('route_names_gttos') ||
-                feat.get('title');
-              const images = feat.get('images') && feat.get('images').length;
-              const description = feat.get('lead_text');
-              const link = id && DETAILS_BASE_URL + id;
-              const active = !!selectedFeature && getId(selectedFeature) === id;
-              return (
-                <MenuItem
-                  key={id}
-                  onCollapseToggle={(open) => onCollapseToggle(open, feat)}
-                  className={`wkp-gb-topic-menu ${classes.root} ${classes.fit}`}
-                  collapsed={!active}
-                  title={active ? <b>{title}</b> : title}
-                  open={active}
-                  menuHeight="unset"
-                >
+      {mainFeature
+        ? (() => {
+            const id = getId(mainFeature) || mainFeature.get('title');
+            const title =
+              mainFeature.get('route_names_premium') ||
+              mainFeature.get('route_names_gttos') ||
+              mainFeature.get('title');
+            const images =
+              mainFeature.get('images') && mainFeature.get('images').length;
+            const description = mainFeature.get('lead_text');
+            const link = id && DETAILS_BASE_URL + id;
+            return (
+              <>
+                <br />
+                <div className={classes.featureInfos}>
                   <div className={classes.featureInfoItem}>
+                    <Typography paragraph variant="h4">
+                      {title}
+                    </Typography>
                     {images ? (
                       <div className={classes.imageLine}>
                         <a
-                          href={`${feat.get('highlight_url') || link}`}
+                          href={`${mainFeature.get('highlight_url') || link}`}
                           rel="noopener noreferrer"
                           target="_blank"
                         >
-                          <img src={feat.get('images')[0].url} alt={title} />
+                          <img
+                            src={mainFeature.get('images')[0].url}
+                            alt={title}
+                          />
                         </a>
                       </div>
                     ) : null}
-                    {description && <p>{description}</p>}
+                    {description && (
+                      <Typography paragraph>{description}</Typography>
+                    )}
                     {link && <Link href={link}>Details</Link>}
                   </div>
-                </MenuItem>
-              );
-            })}
-          </div>
-        </>
-      ) : null}
+                </div>
+              </>
+            );
+          })()
+        : null}
     </>
   );
 }
