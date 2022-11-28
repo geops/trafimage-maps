@@ -89,7 +89,10 @@ const useStyles = makeStyles(() => {
     },
     featureInfo: {
       overflow: 'hidden',
-      height: 'calc(96vh - 110px)',
+      height: (props) =>
+        props.activeMenu === 'sts'
+          ? 'calc(93vh - 110px)'
+          : 'calc(96vh - 110px)',
     },
     mobileHandleWrapper: {
       position: 'absolute',
@@ -134,6 +137,7 @@ function StsTopicMenu() {
     isCollapsed,
     featureSelected: featureInfo?.length,
     isMobile,
+    activeMenu,
   });
   const ref = useRef();
   const [node, setNode] = useState();
