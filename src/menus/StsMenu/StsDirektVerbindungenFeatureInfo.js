@@ -12,11 +12,8 @@ const useStyles = makeStyles(() => {
     root: {
       '&.wkp-menu-item': {
         marginTop: '0 !important',
-        border: '1px solid #666 !important',
-        '&:not(:last-child)': {
-          borderBottom: '1px solid #666 !important',
-          borderBottomWidth: '1px !important',
-        },
+        border: 'none !important',
+        borderBottom: '1px solid rgba(0, 0, 0, 0.1) !important',
       },
       '& .wkp-menu-item-header.open': {
         borderBottom: 'none !important',
@@ -32,9 +29,11 @@ const useStyles = makeStyles(() => {
       alignItems: 'center',
       gap: 10,
     },
+    title: {
+      maxWidth: 280,
+    },
     featureInfos: {
-      border: '1px solid #666',
-      maxHeight: 'calc(90vh - 90px)',
+      maxHeight: 'calc(90vh - 31px)',
       overflow: 'auto',
     },
     featureInfoItem: {
@@ -81,7 +80,6 @@ function StsDirektVerbindungenFeatureInfo() {
       {!isMobile && (
         <>
           <Divider />
-          <br />
         </>
       )}
       {dvFeatures?.length ? (
@@ -110,7 +108,9 @@ function StsDirektVerbindungenFeatureInfo() {
                       alt="icon"
                       className={classes.titleIcon}
                     />
-                    {active ? <b>{title}</b> : title}
+                    <span className={classes.title}>
+                      {active ? <b>{title}</b> : title}
+                    </span>
                   </div>
                 }
                 menuHeight="unset"

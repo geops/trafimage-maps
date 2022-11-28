@@ -29,7 +29,7 @@ const boxShadow = '7px 7px 10px -6px rgb(0 0 0 / 40%)';
 const useStyles = makeStyles(() => {
   return {
     root: {
-      boxShadow: 'border-box',
+      boxSizing: 'border-box',
       marginTop: '0 !important',
       // Hide the MenuItem css, display only the select box.
       border: 'none !important',
@@ -83,15 +83,13 @@ const useStyles = makeStyles(() => {
           ? 'calc(100vh - 75px)'
           : 'unset',
     },
-    menuContentDesktop: {
-      padding: '0 15px 0',
-      zIndex: 10,
-    },
+
     menuContentMobile: {
-      padding: '40px 15px 15px',
+      padding: '30px 0 0',
     },
     featureInfo: {
       overflow: 'hidden',
+      height: 'calc(96vh - 110px)',
     },
     mobileHandleWrapper: {
       position: 'absolute',
@@ -112,10 +110,10 @@ const useStyles = makeStyles(() => {
     },
     closeBtn: {
       padding: 8,
-      marginRight: 10,
+      marginRight: 5,
     },
     layerSwitcher: {
-      padding: '10px 0',
+      padding: 10,
     },
   };
 });
@@ -292,7 +290,7 @@ function StsTopicMenu() {
         </Overlay>
       ) : null}
       {isCollapsed && displayMenu && (
-        <div className={`${classes.menuContent} ${classes.menuContentDesktop}`}>
+        <div className={classes.menuContent}>
           <div className={classes.layerSwitcher}>{layerSwitcher}</div>
           {!isMobile && featureInfo?.length ? (
             <div className={classes.featureInfo}>{featureInfos}</div>

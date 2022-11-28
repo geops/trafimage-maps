@@ -30,6 +30,9 @@ const useStyles = makeStyles(() => {
         width: '100%',
       },
     },
+    container: {
+      padding: 10,
+    },
   };
 });
 
@@ -121,7 +124,7 @@ function StsValidityFeatureInfo() {
   }
 
   return (
-    <>
+    <div className={classes.container}>
       {!isMobile && (
         <>
           <Divider />
@@ -178,7 +181,7 @@ function StsValidityFeatureInfo() {
             );
           })()
         : null}
-    </>
+    </div>
   );
 }
 
