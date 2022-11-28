@@ -59,6 +59,7 @@ export const highlights = new MTVectorLayer({
         ? [
             new Style({
               image: new Icon({
+                scale: 1.2,
                 src: poiImageHL,
                 anchor: [0.5, 41],
                 anchorYUnits: 'pixels',
