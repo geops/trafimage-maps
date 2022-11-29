@@ -28,11 +28,23 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
   const properties = feature.getProperties();
   const { zPass, zones, partners } = properties;
 
+  const styleLayers = useMemo(
+    () => layer?.mapboxLayer?.mbMap?.getStyle()?.layers || [],
+    [layer?.mapboxLayer?.mbMap],
+  );
+
   const verbunde = useMemo(() => {
-    return partners
-      .split(',')
-      .map((p) => capitalizeFirstLetter(p.toLowerCase()));
-  }, [partners]);
+    return partners.split(',').map((p) => {
+      const lowerCaseName = p.toLowerCase();
+      const color = styleLayers.find((l) => {
+        return l.id.split('verbund_')[1]?.toLowerCase() === lowerCaseName;
+      })?.paint?.['fill-color'];
+      return {
+        name: capitalizeFirstLetter(lowerCaseName),
+        color,
+      };
+    });
+  }, [partners, styleLayers]);
 
   useEffect(() => {
     layer.set('clicked', false);
@@ -61,7 +73,7 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
             <b>{t(`Tarifverbunde in ${feature.get('name')}`)}</b>
           </Typography>
           {verbunde.map((v) => (
-            <Typography key={v}>{v}</Typography>
+            <Typography key={v.name}>{v.name}</Typography>
           ))}
           <br />
         </>
