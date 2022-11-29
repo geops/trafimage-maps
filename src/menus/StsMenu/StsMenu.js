@@ -15,15 +15,16 @@ import {
 } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
 import Overlay from '../../components/Overlay/Overlay';
-import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
-import stsLayers from '../../config/ch.sbb.sts';
-import { setMaxExtent, setMinZoom } from '../../model/map/actions';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
 import StsDirektVerbindungenFeatureInfo from './StsDirektVerbindungenFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import MenuItem from '../../components/Menu/MenuItem';
 import Select from '../../components/Select';
+import stsLayers from '../../config/ch.sbb.sts';
+import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
+import { setMaxExtent, setMinZoom } from '../../model/map/actions';
+import { SWISS_EXTENT } from '../../utils/constants';
 
 const boxShadow = '7px 7px 10px -6px rgb(0 0 0 / 40%)';
 const useStyles = makeStyles(() => {
@@ -78,7 +79,7 @@ const useStyles = makeStyles(() => {
     },
     menuContent: {
       backgroundColor: 'white',
-      minHeight: (props) =>
+      height: (props) =>
         props.isCollapsed && props.featureSelected && !props.isMobile
           ? 'calc(100vh - 75px)'
           : 'unset',
@@ -90,9 +91,7 @@ const useStyles = makeStyles(() => {
     featureInfo: {
       overflow: 'hidden',
       height: (props) =>
-        props.activeMenu === 'sts'
-          ? 'calc(93vh - 110px)'
-          : 'calc(96vh - 110px)',
+        props.activeMenu === 'dv' ? 'calc(100% - 88px)' : 'calc(100% - 122px)',
     },
     mobileHandleWrapper: {
       position: 'absolute',
@@ -145,28 +144,26 @@ function StsTopicMenu() {
   const layerSwitcher = useMemo(
     () =>
       activeMenu === 'sts' ? (
-        <StsValidityLayerSwitcher />
+        <StsValidityLayerSwitcher menuOpen={!isCollapsed} />
       ) : (
         <StsDirektverbindungenLayerSwitcher />
       ),
-    [activeMenu],
+    [activeMenu, isCollapsed],
   );
 
   const featureInfos = useMemo(
     () =>
       activeMenu === 'sts' ? (
-        <StsValidityFeatureInfo />
+        <StsValidityFeatureInfo menuOpen={!isCollapsed} />
       ) : (
         <StsDirektVerbindungenFeatureInfo />
       ),
-    [activeMenu],
+    [activeMenu, isCollapsed],
   );
 
   useEffect(() => {
     if (activeMenu === 'sts') {
-      dispatch(
-        setMaxExtent([311863.0754, 5439870.429, 1451692.0412, 6392581.5495]), // larger swiss extent
-      );
+      dispatch(setMaxExtent(SWISS_EXTENT));
       dispatch(setMinZoom(8));
     } else {
       dispatch(setMinZoom(undefined));

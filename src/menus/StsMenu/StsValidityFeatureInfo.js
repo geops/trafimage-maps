@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 import Point from 'ol/geom/Point';
 import { makeStyles, Divider, Typography } from '@material-ui/core';
 import Link from '../../components/Link';
@@ -13,16 +14,18 @@ import {
 import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
 import { DETAILS_BASE_URL } from '../../utils/constants';
 import { getId } from '../../utils/removeDuplicateFeatures';
-import { setCenter } from '../../model/map/actions';
+import panCenterFeature from '../../utils/panCenterFeature';
 
 const useStyles = makeStyles(() => {
   return {
-    featureInfos: {
-      border: '2px solid rgba(0, 0, 0, 0.3)',
-      maxHeight: 'calc(90vh - 90px)',
-    },
     featureInfoItem: {
-      padding: 15,
+      padding: '0 5px 10px',
+    },
+    mainInfo: {
+      padding: '0 10px',
+    },
+    gbLegend: {
+      padding: 10,
     },
     imageLine: {
       margin: '5px 0',
@@ -31,7 +34,8 @@ const useStyles = makeStyles(() => {
       },
     },
     container: {
-      padding: 10,
+      height: 'calc(100% - 17px)',
+      overflow: 'auto',
     },
   };
 });
@@ -42,11 +46,11 @@ const clearHighlightsSelection = () =>
     .getFeatures()
     .forEach((feat) => feat.set('selected', false));
 
-function StsValidityFeatureInfo() {
-  const dispatch = useDispatch();
+function StsValidityFeatureInfo({ menuOpen }) {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const map = useSelector((state) => state.app.map);
   const [tours, setTours] = useState([]);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
@@ -83,7 +87,16 @@ function StsValidityFeatureInfo() {
       }
       if (feature.getGeometry() instanceof Point) {
         feature.set('selected', true);
-        dispatch(setCenter(feature.getGeometry().getCoordinates()));
+        panCenterFeature(
+          map,
+          [featureInfo.layer],
+          feature.getGeometry().getCoordinates(),
+          !menuOpen, // default menuOpen to false
+          isMobile,
+          true, // useOverlay
+          0, // ignore right overlay for desktop
+          410, // new overlayHeightMobile
+        );
         highlightRoutes.highlightRoutes([]);
       } else {
         clearHighlightsSelection();
@@ -94,7 +107,7 @@ function StsValidityFeatureInfo() {
       }
       setSelectedFeature(feature);
     },
-    [previousSelectedFeature, dispatch],
+    [previousSelectedFeature, featureInfo, map, menuOpen, isMobile],
   );
 
   useEffect(() => {
@@ -124,35 +137,41 @@ function StsValidityFeatureInfo() {
   }
 
   return (
-    <div className={classes.container}>
+    <>
       {!isMobile && (
         <>
           <Divider />
-          <br />
         </>
       )}
-      {gbFeatureInfo?.features?.length ? (
-        <GeltungsbereichePopup
-          feature={gbFeatureInfo.features.filter((feat) => feat.get('mot'))}
-          layer={[gbFeatureInfo.layer]}
-          renderValidityFooter={false}
-        />
-      ) : null}
-      {mainFeature
-        ? (() => {
-            const id = getId(mainFeature) || mainFeature.get('title');
-            const title =
-              mainFeature.get('route_names_premium') ||
-              mainFeature.get('route_names_gttos') ||
-              mainFeature.get('title');
-            const images =
-              mainFeature.get('images') && mainFeature.get('images').length;
-            const description = mainFeature.get('lead_text');
-            const link = id && DETAILS_BASE_URL + id;
-            return (
-              <>
-                <br />
-                <div className={classes.featureInfos}>
+      <div className={classes.container}>
+        {gbFeatureInfo?.features?.length ? (
+          <>
+            <div className={classes.gbLegend}>
+              <GeltungsbereichePopup
+                feature={gbFeatureInfo.features.filter((feat) =>
+                  feat.get('mot'),
+                )}
+                layer={[gbFeatureInfo.layer]}
+                renderValidityFooter={false}
+              />
+            </div>
+          </>
+        ) : null}
+        {gbFeatureInfo?.features?.length && mainFeature ? <Divider /> : null}
+        {mainFeature
+          ? (() => {
+              const id = getId(mainFeature) || mainFeature.get('title');
+              const title =
+                mainFeature.get('route_names_premium') ||
+                mainFeature.get('route_names_gttos') ||
+                mainFeature.get('title');
+              const images =
+                mainFeature.get('images') && mainFeature.get('images').length;
+              const description = mainFeature.get('lead_text');
+              const link = id && DETAILS_BASE_URL + id;
+              return (
+                <div className={classes.mainInfo}>
+                  <br />
                   <div className={classes.featureInfoItem}>
                     <Typography paragraph variant="h4">
                       {title}
@@ -177,14 +196,15 @@ function StsValidityFeatureInfo() {
                     {link && <Link href={link}>Details</Link>}
                   </div>
                 </div>
-              </>
-            );
-          })()
-        : null}
-    </div>
+              );
+            })()
+          : null}
+      </div>
+    </>
   );
 }
 
-StsValidityFeatureInfo.propTypes = {};
+StsValidityFeatureInfo.propTypes = { menuOpen: PropTypes.bool };
+StsValidityFeatureInfo.defaultProps = { menuOpen: true };
 
 export default StsValidityFeatureInfo;

@@ -325,6 +325,9 @@ export const stsIframe = {
   hideInLayerTree: true,
   menu: <StsMenu />,
   enableFeatureClick: true,
+  center: [915788.3813658276, 5909670.533831286],
+  zoom: 8,
+  constrainOnlyCenter: true,
 };
 
 export const geltungsbereiche = {

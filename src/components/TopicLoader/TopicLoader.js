@@ -242,15 +242,6 @@ class TopicLoader extends PureComponent {
       realtimeUrl,
     } = this.props;
 
-    // console.log(
-    //   'ici',
-    //   !apiKey ||
-    //     !apiKeyName ||
-    //     !appBaseUrl ||
-    //     !activeTopic ||
-    //     !vectorTilesUrl ||
-    //     !vectorTilesKey,
-    // );
     // wait until all web components attributes are properly set
     if (
       !apiKey ||

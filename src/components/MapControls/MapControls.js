@@ -15,7 +15,7 @@ import { ReactComponent as ZoomIn } from '../../img/plus.svg';
 import Geolocate from '../../img/Geolocate';
 import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
 import geolocateMarker from '../../img/geolocate_marker.svg';
-import { swissExtent } from '../../utils/constants';
+import { SWISS_EXTENT } from '../../utils/constants';
 import './MapControls.scss';
 
 const propTypes = {
@@ -195,7 +195,7 @@ const MapControls = ({ menuToggler, geolocation, zoomSlider, fitExtent }) => {
         <FitExtent
           map={map}
           title={t('Ganze Schweiz')}
-          extent={swissExtent}
+          extent={SWISS_EXTENT}
           className="wkp-fit-extent"
         >
           <SwissBounds focusable={false} />

@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => {
       maxWidth: 280,
     },
     featureInfos: {
-      maxHeight: 'calc(90vh - 31px)',
+      maxHeight: '100%',
       overflow: 'auto',
       scrollbarWidth: 'thin',
       '&::-webkit-scrollbar': {

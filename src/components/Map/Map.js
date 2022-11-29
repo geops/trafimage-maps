@@ -332,6 +332,7 @@ class Map extends PureComponent {
       maxExtent,
       extent,
       t,
+      activeTopic,
     } = this.props;
 
     return (
@@ -349,6 +350,7 @@ class Map extends PureComponent {
             maxZoom,
             minZoom,
             extent: maxExtent,
+            constrainOnlyCenter: activeTopic.constrainOnlyCenter,
           }}
           tabIndex={0}
         />

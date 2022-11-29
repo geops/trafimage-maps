@@ -35,6 +35,7 @@ const stsDataLayer = new TrafimageMapboxLayer({
   preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2_ch.sbb.geltungsbereiche_ga',
+  hitTolerance: 15,
   properties: {
     isQueryable: false,
     isBaseLayer: true,
@@ -47,7 +48,6 @@ export const highlights = new MTVectorLayer({
   key: HIGHLIGHTS_LAYER_KEY,
   visible: true,
   olLayer: new VectorLayer({
-    minZoom: 8.5,
     source: new VectorSource({
       format: new GeoJSON(),
     }),
@@ -59,7 +59,6 @@ export const highlights = new MTVectorLayer({
         ? [
             new Style({
               image: new Icon({
-                scale: 1.2,
                 src: poiImageHL,
                 anchor: [0.5, 41],
                 anchorYUnits: 'pixels',

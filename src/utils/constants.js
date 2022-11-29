@@ -32,4 +32,4 @@ export const energieleitungenColorMapping = {
   ausserhalb: 'black',
 };
 
-export const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];
