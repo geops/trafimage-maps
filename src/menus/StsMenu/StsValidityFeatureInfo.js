@@ -46,12 +46,22 @@ const clearHighlightsSelection = () =>
     .getFeatures()
     .forEach((feat) => feat.set('selected', false));
 
+const useFetchTours = (select) => {
+  const [tours, setTours] = useState(null);
+  useEffect(() => {
+    fetch('../data/tours.json')
+      .then((response) => response.json())
+      .then((data) => setTours(data));
+    return () => select();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return [tours];
+};
 function StsValidityFeatureInfo({ menuOpen }) {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const map = useSelector((state) => state.app.map);
-  const [tours, setTours] = useState([]);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
@@ -67,13 +77,6 @@ function StsValidityFeatureInfo({ menuOpen }) {
     () => featureInfo.find((info) => info.layer.key === otherRoutes.key),
     [featureInfo],
   );
-  const mainFeature = useMemo(() => {
-    const features = mainFeatureInfos?.length
-      ? parseFeaturesInfos(mainFeatureInfos, tours)
-      : [];
-    return features[0];
-  }, [mainFeatureInfos, tours]);
-  const prevMainFeature = usePrevious(mainFeature);
 
   const select = useCallback(
     (feature) => {
@@ -110,13 +113,15 @@ function StsValidityFeatureInfo({ menuOpen }) {
     [previousSelectedFeature, featureInfo, map, menuOpen, isMobile],
   );
 
-  useEffect(() => {
-    fetch('../data/tours.json')
-      .then((response) => response.json())
-      .then((data) => setTours(data));
-    return () => select();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const [tours] = useFetchTours(select);
+
+  const mainFeature = useMemo(() => {
+    const features = mainFeatureInfos?.length
+      ? parseFeaturesInfos(mainFeatureInfos, tours)
+      : [];
+    return features[0];
+  }, [mainFeatureInfos, tours]);
+  const prevMainFeature = usePrevious(mainFeature);
 
   useEffect(() => {
     if (!mainFeature) {

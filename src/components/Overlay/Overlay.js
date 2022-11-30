@@ -187,6 +187,7 @@ const Overlay = ({
         {isMobile && (
           <Resizable
             enable={{ top: isMobile }}
+            maxHeight="100vh"
             defaultSize={defaultSize}
             handleComponent={{
               top: <div className={classes.resizeHandler}>&mdash;</div>,

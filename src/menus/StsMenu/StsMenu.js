@@ -1,78 +1,58 @@
 /* eslint-disable no-param-reassign */
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
   makeStyles,
+  withStyles,
   IconButton,
   MenuItem as MuiMenuItem,
+  Menu,
+  Button,
 } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Overlay from '../../components/Overlay/Overlay';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
 import StsDirektVerbindungenFeatureInfo from './StsDirektVerbindungenFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
-import MenuItem from '../../components/Menu/MenuItem';
-import Select from '../../components/Select';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
 import { setMaxExtent, setMinZoom } from '../../model/map/actions';
 import { SWISS_EXTENT } from '../../utils/constants';
 
-const boxShadow = '7px 7px 10px -6px rgb(0 0 0 / 40%)';
+const boxShadow =
+  '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
+
+const StyledMenu = withStyles(() => ({
+  paper: {
+    boxShadow,
+    border: '1px solid rgba(0, 0, 0, 0.1)',
+  },
+  list: {
+    minWidth: 230,
+  },
+}))(Menu);
+
+const StyledMenuItem = withStyles({
+  root: {
+    color: '#000000',
+  },
+})(MuiMenuItem);
+
 const useStyles = makeStyles(() => {
   return {
-    root: {
-      boxSizing: 'border-box',
-      marginTop: '0 !important',
-      // Hide the MenuItem css, display only the select box.
-      border: 'none !important',
-      borderBottom: (props) =>
-        props.isCollapsed
-          ? '1px solid rgba(0, 0, 0, 0.1) !important'
-          : undefined,
-      '& .MuiPaper-root[style]': {
-        // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
-        // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
-        overflow: 'auto',
-        left: '10px !important',
-        boxShadow,
+    dropdownToggler: {
+      backgroundColor: 'white',
+      padding: '6px 10px',
+      '&:hover': {
+        backgroundColor: 'white',
       },
-
-      // Allow multiline display
-      '& .MuiSelect-selectMenu, & .MuiMenuItem-root ': {
-        textOverflow: 'unset',
-        whiteSpace: 'unset',
-      },
-
-      // Display proper padding and border inside the list
-      '& li:first-child': {
-        paddingTop: '6px',
-      },
-      '& li': {
-        paddingTop: '14px',
-        paddingBottom: '14px',
-        borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-      },
-      '& li:last-child': {
-        borderBottom: 'none',
-        paddingBottom: '6px',
-      },
-      '& .MuiOutlinedInput-notchedOutline': {
-        border: 'none',
-      },
-    },
-    currentValue: {
-      display: 'flex',
     },
     container: {
+      backgroundColor: 'white',
       boxSizing: 'border-box',
       border: (props) => (props.displayMenu ? '2px solid #666' : 'none'),
       boxShadow,
@@ -80,11 +60,10 @@ const useStyles = makeStyles(() => {
     menuContent: {
       backgroundColor: 'white',
       height: (props) =>
-        props.isCollapsed && props.featureSelected && !props.isMobile
-          ? 'calc(100vh - 75px)'
+        props.featureSelected && !props.isMobile
+          ? 'calc(100vh - 80px)'
           : 'unset',
     },
-
     menuContentMobile: {
       padding: '30px 0 0',
     },
@@ -130,35 +109,33 @@ function StsTopicMenu() {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const [activeMenu, setActiveMenu] = useState('sts');
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [anchorEl, setAnchorEl] = useState();
   const classes = useStyles({
     displayMenu,
-    isCollapsed,
+    isOpen: !!anchorEl,
     featureSelected: featureInfo?.length,
     isMobile,
     activeMenu,
   });
-  const ref = useRef();
-  const [node, setNode] = useState();
 
   const layerSwitcher = useMemo(
     () =>
       activeMenu === 'sts' ? (
-        <StsValidityLayerSwitcher menuOpen={!isCollapsed} />
+        <StsValidityLayerSwitcher menuOpen={!featureInfo} />
       ) : (
         <StsDirektverbindungenLayerSwitcher />
       ),
-    [activeMenu, isCollapsed],
+    [activeMenu, featureInfo],
   );
 
   const featureInfos = useMemo(
     () =>
       activeMenu === 'sts' ? (
-        <StsValidityFeatureInfo menuOpen={!isCollapsed} />
+        <StsValidityFeatureInfo menuOpen={!featureInfo} />
       ) : (
         <StsDirektVerbindungenFeatureInfo />
       ),
-    [activeMenu, isCollapsed],
+    [activeMenu, featureInfo],
   );
 
   useEffect(() => {
@@ -178,88 +155,69 @@ function StsTopicMenu() {
   }, [featureInfo, isMobile, dispatch]);
 
   const onChange = useCallback(
-    (evt) => {
-      const { value } = evt.target;
-      if (value === 'sts') {
+    (key) => {
+      if (key === 'sts') {
         stsLayers.forEach((layer) => {
           layer.visible = /(ch.sbb.sts.validity|\.data)/.test(layer.key);
         });
-        setActiveMenu(value);
+        setActiveMenu(key);
         dispatch(setFeatureInfo([]));
       }
-      if (value === 'dv') {
+      if (key === 'dv') {
         stsLayers.forEach((layer) => {
           layer.visible = /(direktverbindungen|\.data)/.test(layer.key);
         });
-        setActiveMenu(value);
+        setActiveMenu(key);
         dispatch(setFeatureInfo([]));
       }
+      setAnchorEl(null);
     },
     [dispatch],
   );
 
   return (
     <div className={classes.container}>
-      {displayMenu && (
-        <MenuItem
-          open
-          className={`wkp-gb-topic-menu ${classes.root}`}
-          collapsed={false}
-          ref={ref}
-        >
-          {activeMenu && (
-            <Select
-              fullWidth
-              data-cy="sts-select"
-              value={activeMenu}
-              renderValue={() => (
-                <span
-                  className={`wkp-gb-menu-current-value ${classes.currentValue}`}
-                >
-                  <b style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
-                    {activeMenu === 'sts'
-                      ? t('Validity of Swiss Travel Pass')
-                      : t('Direct trains to Switzerland')}
-                  </b>
-                </span>
-              )}
-              onChange={onChange}
-              MenuProps={{
-                disablePortal: true,
-                TransitionProps: {
-                  onEnter: (el) => {
-                    // Show all the text of the current value
-                    node.style.display = 'inline-block';
-
-                    /**
-                     * Apply css of the current element
-                     * @ignore
-                     */
-                    const menuEl = el;
-                    const parentStyle = window.getComputedStyle(
-                      ref.current.parentElement,
-                    );
-                    menuEl.style.maxWidth = parentStyle.maxWidth;
-                    menuEl.style.width = parentStyle.width;
-                    menuEl.style.right = parentStyle.right;
-                    setIsCollapsed(false);
-                  },
-                  onExit: () => {
-                    // Apply text overflow
-                    node.style.display = '-webkit-box';
-                    setIsCollapsed(true);
-                  },
-                },
-              }}
+      {displayMenu && activeMenu && (
+        <>
+          <Button
+            color="secondary"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={(evt) => setAnchorEl(evt.currentTarget)}
+            endIcon={anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+            className={classes.dropdownToggler}
+          >
+            <b>
+              {activeMenu === 'sts'
+                ? t('Validity of Swiss Travel Pass')
+                : t('Direct trains to Switzerland')}
+            </b>
+          </Button>
+          <StyledMenu
+            keepMounted
+            open={!!anchorEl}
+            data-cy="sts-select"
+            anchorEl={anchorEl}
+            onClose={() => setAnchorEl(null)}
+            transitionDuration="auto"
+            MenuListProps={{
+              autoFocusItem: false,
+            }}
+          >
+            <StyledMenuItem
+              disabled={activeMenu === 'sts'}
+              onClick={() => onChange('sts')}
             >
-              <MuiMenuItem value={activeMenu === 'sts' ? 'dv' : 'sts'}>
-                {activeMenu === 'sts'
-                  ? t('Direct trains to Switzerland')
-                  : t('Validity of Swiss Travel Pass')}
-              </MuiMenuItem>
-            </Select>
-          )}
-        </MenuItem>
+              {t('Validity of Swiss Travel Pass')}
+            </StyledMenuItem>
+            <StyledMenuItem
+              disabled={activeMenu === 'dv'}
+              onClick={() => onChange('dv')}
+            >
+              {t('Direct trains to Switzerland')}
+            </StyledMenuItem>
+          </StyledMenu>
+        </>
       )}
       {isMobile && featureInfo?.length ? (
         <Overlay
@@ -290,7 +248,7 @@ function StsTopicMenu() {
           </div>
         </Overlay>
       ) : null}
-      {isCollapsed && displayMenu && (
+      {displayMenu && (
         <div className={classes.menuContent}>
           <div className={classes.layerSwitcher}>{layerSwitcher}</div>
           {!isMobile && featureInfo?.length ? (
