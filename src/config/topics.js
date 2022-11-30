@@ -302,8 +302,8 @@ export const geltungsbereicheIframe = {
   menu: <GeltungsbereicheTopicMenu />,
 };
 
-export const stsIframe = {
-  ...geltungsbereicheMvp,
+export const sts = {
+  name: 'ch.sbb.sts',
   key: 'ch.sbb.sts',
   elements: {
     ...defaultElements,
@@ -319,7 +319,6 @@ export const stsIframe = {
     menu: false,
     menuToggler: true,
   },
-  maxZoom: 14,
   layers: stsIframeLayers,
   only: true,
   hideInLayerTree: true,
@@ -360,7 +359,7 @@ const topics = {
     geltungsbereicheMvp,
     geltungsbereicheIframe,
     geltungsbereiche,
-    stsIframe,
+    sts,
     energiePublic,
     sandbox,
   ],

@@ -46,13 +46,12 @@ const clearHighlightsSelection = () =>
     .getFeatures()
     .forEach((feat) => feat.set('selected', false));
 
-const useFetchTours = (select) => {
+const useFetchTours = () => {
   const [tours, setTours] = useState(null);
   useEffect(() => {
     fetch('../data/tours.json')
       .then((response) => response.json())
       .then((data) => setTours(data));
-    return () => select();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return [tours];
@@ -113,14 +112,16 @@ function StsValidityFeatureInfo({ menuOpen }) {
     [previousSelectedFeature, featureInfo, map, menuOpen, isMobile],
   );
 
-  const [tours] = useFetchTours(select);
+  const [tours] = useFetchTours();
 
   const mainFeature = useMemo(() => {
-    const features = mainFeatureInfos?.length
-      ? parseFeaturesInfos(mainFeatureInfos, tours)
-      : [];
+    const features =
+      mainFeatureInfos?.length && tours?.length
+        ? parseFeaturesInfos(mainFeatureInfos, tours)
+        : [];
     return features[0];
   }, [mainFeatureInfos, tours]);
+
   const prevMainFeature = usePrevious(mainFeature);
 
   useEffect(() => {

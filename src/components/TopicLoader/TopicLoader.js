@@ -219,7 +219,6 @@ class TopicLoader extends PureComponent {
       dispatchSetFeatureInfo,
     });
     dispatchSetSearchService(newSearchService);
-
     dispatchSetMaxZoom(activeTopic.maxZoom);
     dispatchSetMinZoom(activeTopic.minZoom);
   }

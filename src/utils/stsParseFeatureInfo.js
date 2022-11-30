@@ -100,6 +100,7 @@ export const parseFeaturesInfos = (infos, tours = []) => {
         if (toursByRoute[routeName]) {
           featuresForPopup = featuresForPopup.concat(clone);
         } else {
+          // eslint-disable-next-line no-console
           console.warn(
             `Layer ${layerName}: There is no info for the tour '${routeName}' `,
             clone.getProperties(),
