@@ -204,7 +204,7 @@ export const direktverbindungenNight = new DirektverbindungenLayer({
   name: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
   key: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: true,
+  visible: false,
   properties: {
     routeType: 'night',
     isQueryable: true,
@@ -217,7 +217,7 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
   name: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
   key: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
   mapboxLayer: stsDataLayer,
-  visible: true,
+  visible: false,
   properties: {
     routeType: 'day',
     isQueryable: true,
