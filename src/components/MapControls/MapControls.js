@@ -1,21 +1,24 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { IconButton } from '@material-ui/core';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
 import { ZoomSlider } from 'ol/control';
 import { unByKey } from 'ol/Observable';
 import { Style, Icon } from 'ol/style';
-import MenuToggleButton from '../MenuToggleButton/MenuToggleButton';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
+import { ReactComponent as MenuOpenImg } from '../../img/sbb/040_hamburgermenu_102_36.svg';
+import { ReactComponent as MenuClosedImg } from '../../img/sbb/040_schliessen_104_36.svg';
 import Geolocate from '../../img/Geolocate';
 import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
 import geolocateMarker from '../../img/geolocate_marker.svg';
 import { SWISS_EXTENT } from '../../utils/constants';
+import { setDisplayMenu } from '../../model/app/actions';
 import './MapControls.scss';
 
 const propTypes = {
@@ -38,7 +41,9 @@ const degreesToRadians = (degrees) => {
 
 const MapControls = ({ menuToggler, geolocation, zoomSlider, fitExtent }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
+  const displayMenu = useSelector((state) => state.app.displayMenu);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const [geolocating, setGeolocating] = useState(false);
   const featureRef = useRef(geolocationFeature);
@@ -165,7 +170,15 @@ const MapControls = ({ menuToggler, geolocation, zoomSlider, fitExtent }) => {
 
   return (
     <div className="wkp-map-controls">
-      {menuToggler && <MenuToggleButton />}
+      {menuToggler && (
+        <IconButton
+          className="wkp-display-menu-toggler"
+          onClick={() => dispatch(setDisplayMenu(!displayMenu))}
+          size="medium"
+        >
+          {displayMenu ? <MenuClosedImg /> : <MenuOpenImg />}
+        </IconButton>
+      )}
       <Zoom
         map={map}
         zoomInChildren={<ZoomIn />}
