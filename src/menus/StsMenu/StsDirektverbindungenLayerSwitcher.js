@@ -34,32 +34,30 @@ function StsDirektverbindungenLayerSwitcher() {
   );
 
   return (
-    <>
-      <FormGroup>
-        <FormControlLabel
-          label={dvDayVisible ? <b>Day trains</b> : 'Day trains'}
-          checked={dvDayVisible}
-          control={
-            <SBBSwitch
-              key={direktverbindungenDay.key}
-              value={direktverbindungenDay.key}
-              onChange={(evt) => onSwitchClick(evt, direktverbindungenDay)}
-            />
-          }
-        />
-        <FormControlLabel
-          label={dvNightVisible ? <b>Night trains</b> : 'Night trains'}
-          checked={dvNightVisible}
-          control={
-            <SBBSwitch
-              key={direktverbindungenNight.key}
-              value={direktverbindungenNight.key}
-              onChange={(evt) => onSwitchClick(evt, direktverbindungenNight)}
-            />
-          }
-        />
-      </FormGroup>
-    </>
+    <FormGroup data-testid="sts-validity-layerswitcher">
+      <FormControlLabel
+        label={dvDayVisible ? <b>Day trains</b> : 'Day trains'}
+        checked={dvDayVisible}
+        control={
+          <SBBSwitch
+            key={direktverbindungenDay.key}
+            value={direktverbindungenDay.key}
+            onChange={(evt) => onSwitchClick(evt, direktverbindungenDay)}
+          />
+        }
+      />
+      <FormControlLabel
+        label={dvNightVisible ? <b>Night trains</b> : 'Night trains'}
+        checked={dvNightVisible}
+        control={
+          <SBBSwitch
+            key={direktverbindungenNight.key}
+            value={direktverbindungenNight.key}
+            onChange={(evt) => onSwitchClick(evt, direktverbindungenNight)}
+          />
+        }
+      />
+    </FormGroup>
   );
 }
 

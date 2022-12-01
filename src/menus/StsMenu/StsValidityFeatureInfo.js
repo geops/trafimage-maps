@@ -177,7 +177,10 @@ function StsValidityFeatureInfo({ menuOpen }) {
               const description = mainFeature.get('lead_text');
               const link = id && DETAILS_BASE_URL + id;
               return (
-                <div className={classes.mainInfo}>
+                <div
+                  className={classes.mainInfo}
+                  data-testid="sts-validity-feature-info"
+                >
                   <br />
                   <div className={classes.featureInfoItem}>
                     <Typography paragraph variant="h4">

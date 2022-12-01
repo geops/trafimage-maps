@@ -26,7 +26,7 @@ import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
-import stsIframeLayers from './ch.sbb.sts';
+import stsLayers from './ch.sbb.sts';
 import defaultSearches, { handicapStopFinder } from './searches';
 import { GeltungsbereicheMenuFilter } from '../filters';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
@@ -319,7 +319,7 @@ export const sts = {
     menu: false,
     menuToggler: true,
   },
-  layers: stsIframeLayers,
+  layers: stsLayers,
   only: true,
   hideInLayerTree: true,
   menu: <StsMenu />,

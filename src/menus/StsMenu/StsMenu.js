@@ -33,12 +33,14 @@ const StyledMenu = withStyles(() => ({
   },
   list: {
     minWidth: 230,
+    padding: '5px 0',
   },
 }))(Menu);
 
 const StyledMenuItem = withStyles({
   root: {
     color: '#000000',
+    padding: 15,
   },
 })(MuiMenuItem);
 
@@ -121,11 +123,11 @@ function StsTopicMenu() {
   const layerSwitcher = useMemo(
     () =>
       activeMenu === 'sts' ? (
-        <StsValidityLayerSwitcher menuOpen={!featureInfo} />
+        <StsValidityLayerSwitcher />
       ) : (
         <StsDirektverbindungenLayerSwitcher />
       ),
-    [activeMenu, featureInfo],
+    [activeMenu],
   );
 
   const featureInfos = useMemo(
@@ -186,6 +188,7 @@ function StsTopicMenu() {
             onClick={(evt) => setAnchorEl(evt.currentTarget)}
             endIcon={anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             className={classes.dropdownToggler}
+            data-testid="sts-menu-opener"
           >
             <b>
               {activeMenu === 'sts'
@@ -203,16 +206,19 @@ function StsTopicMenu() {
             MenuListProps={{
               autoFocusItem: false,
             }}
+            data-testid="sts-menu-popover"
           >
             <StyledMenuItem
               disabled={activeMenu === 'sts'}
               onClick={() => onChange('sts')}
+              data-testid="sts-menu-sts"
             >
               {t('Validity of Swiss Travel Pass')}
             </StyledMenuItem>
             <StyledMenuItem
               disabled={activeMenu === 'dv'}
               onClick={() => onChange('dv')}
+              data-testid="sts-menu-dv"
             >
               {t('Direct trains to Switzerland')}
             </StyledMenuItem>

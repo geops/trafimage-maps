@@ -55,44 +55,42 @@ function StsValidityLayerSwitcher() {
   );
 
   return (
-    <>
-      <FormGroup>
-        {switchLayers.map((layer) => {
-          const isActive = switchValue === layer.key;
-          return (
-            <FormControlLabel
-              key={layer.key}
-              label={isActive ? <b>{t(layer.name)}</b> : t(layer.name)}
-              checked={isActive}
-              control={
-                <SBBSwitch
-                  key={layer.key}
-                  value={layer.key}
-                  onChange={(evt) => onSwitchClick(evt, layer.key)}
-                />
-              }
-            />
-          );
-        })}
-        <FormControlLabel
-          label={
-            highlightsVisible ? (
-              <b>{t(highlightsLayer.name)}</b>
-            ) : (
-              t(highlightsLayer.name)
-            )
-          }
-          checked={highlightsVisible}
-          control={
-            <SBBSwitch
-              key={highlightsLayer.key}
-              value={highlightsLayer.key}
-              onChange={(evt) => onHighlightChange(evt, highlightsLayer.key)}
-            />
-          }
-        />
-      </FormGroup>
-    </>
+    <FormGroup data-testid="sts-validity-layerswitcher">
+      {switchLayers.map((layer) => {
+        const isActive = switchValue === layer.key;
+        return (
+          <FormControlLabel
+            key={layer.key}
+            label={isActive ? <b>{t(layer.name)}</b> : t(layer.name)}
+            checked={isActive}
+            control={
+              <SBBSwitch
+                key={layer.key}
+                value={layer.key}
+                onChange={(evt) => onSwitchClick(evt, layer.key)}
+              />
+            }
+          />
+        );
+      })}
+      <FormControlLabel
+        label={
+          highlightsVisible ? (
+            <b>{t(highlightsLayer.name)}</b>
+          ) : (
+            t(highlightsLayer.name)
+          )
+        }
+        checked={highlightsVisible}
+        control={
+          <SBBSwitch
+            key={highlightsLayer.key}
+            value={highlightsLayer.key}
+            onChange={(evt) => onHighlightChange(evt, highlightsLayer.key)}
+          />
+        }
+      />
+    </FormGroup>
   );
 }
 
