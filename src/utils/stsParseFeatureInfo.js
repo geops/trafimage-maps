@@ -1,5 +1,5 @@
-import trim from 'trim';
 import Feature from 'ol/Feature';
+import trim from 'trim';
 import {
   gttos,
   premium,
