@@ -30,6 +30,7 @@ const StyledMenu = withStyles(() => ({
   paper: {
     boxShadow,
     border: '1px solid rgba(0, 0, 0, 0.1)',
+    borderRadius: 0,
   },
   list: {
     minWidth: 230,
