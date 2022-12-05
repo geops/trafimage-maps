@@ -279,8 +279,8 @@ class TopicLoader extends PureComponent {
     }
 
     const visibleLayersMinZoom = visibleLayers.reduce(
-      (maxZooms, layer) =>
-        layer.get('minZoom') ? [...maxZooms, layer.get('minZoom')] : maxZooms,
+      (minZooms, layer) =>
+        layer.get('minZoom') ? [...minZooms, layer.get('minZoom')] : minZooms,
       [],
     );
 

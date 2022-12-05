@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { IconButton } from '@material-ui/core';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
@@ -171,13 +170,13 @@ const MapControls = ({ menuToggler, geolocation, zoomSlider, fitExtent }) => {
   return (
     <div className="wkp-map-controls">
       {menuToggler && (
-        <IconButton
+        <button
+          type="button"
           className="wkp-display-menu-toggler"
           onClick={() => dispatch(setDisplayMenu(!displayMenu))}
-          size="medium"
         >
           {displayMenu ? <MenuClosedImg /> : <MenuOpenImg />}
-        </IconButton>
+        </button>
       )}
       <Zoom
         map={map}

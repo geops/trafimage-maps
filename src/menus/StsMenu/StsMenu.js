@@ -111,6 +111,19 @@ const useStyles = makeStyles(() => {
     },
   };
 });
+
+const updateLayers = (key = 'sts') => {
+  if (key === 'sts') {
+    stsLayers.forEach((layer) => {
+      layer.visible = /(ch.sbb.sts.validity|\.data)/.test(layer.key);
+    });
+  }
+  if (key === 'dv') {
+    stsLayers.forEach((layer) => {
+      layer.visible = /(direktverbindungen|\.data)/.test(layer.key);
+    });
+  }
+};
 function StsTopicMenu() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -159,20 +172,9 @@ function StsTopicMenu() {
 
   const onChange = useCallback(
     (key) => {
-      if (key === 'sts') {
-        stsLayers.forEach((layer) => {
-          layer.visible = /(ch.sbb.sts.validity|\.data)/.test(layer.key);
-        });
-        setActiveMenu(key);
-        dispatch(setFeatureInfo([]));
-      }
-      if (key === 'dv') {
-        stsLayers.forEach((layer) => {
-          layer.visible = /(direktverbindungen|\.data)/.test(layer.key);
-        });
-        setActiveMenu(key);
-        dispatch(setFeatureInfo([]));
-      }
+      updateLayers(key);
+      setActiveMenu(key);
+      dispatch(setFeatureInfo([]));
       setAnchorEl(null);
     },
     [dispatch],

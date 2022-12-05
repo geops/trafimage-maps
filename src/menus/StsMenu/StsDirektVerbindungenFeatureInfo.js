@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useState, useRef } from 'react';
+import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -77,8 +77,6 @@ function StsDirektVerbindungenFeatureInfo() {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
 
-  const containerRef = useRef();
-
   const [infoKey, setInfoKey] = useState(undefined);
 
   const dvFeatures = useMemo(() => {
@@ -103,12 +101,7 @@ function StsDirektVerbindungenFeatureInfo() {
     <>
       {!isMobile && <Divider />}
       {dvFeatures?.length ? (
-        <div
-          className={classes.featureInfos}
-          ref={containerRef}
-          id="test"
-          style={{ overflowY: 'scroll' }}
-        >
+        <div className={classes.featureInfos}>
           {dvFeatures.length > 1 ? (
             dvFeatures.map((feat) => {
               const id = getId(feat);
