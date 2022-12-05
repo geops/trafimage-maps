@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { Fragment, useEffect, useMemo, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -18,6 +18,9 @@ const useStyles = makeStyles(() => {
       '& .wkp-menu-item-header.open': {
         borderBottom: 'none !important',
       },
+      '& .wkp-menu-item-header-toggler': {
+        marginRight: 5,
+      },
     },
     titleWrapper: {
       display: 'flex',
@@ -30,16 +33,6 @@ const useStyles = makeStyles(() => {
     featureInfos: {
       maxHeight: '100%',
       overflow: 'auto',
-      scrollbarWidth: 'thin',
-      '&::-webkit-scrollbar': {
-        width: 6,
-      },
-      '&::-webkit-scrollbar-track': {
-        background: 'rgba(0, 0, 0, 0.1)',
-      },
-      '&::-webkit-scrollbar-thumb': {
-        background: 'rgba(0, 0, 0, 0.4)',
-      },
     },
     featureInfoItem: {
       padding: 15,
@@ -84,6 +77,8 @@ function StsDirektVerbindungenFeatureInfo() {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
 
+  const containerRef = useRef();
+
   const [infoKey, setInfoKey] = useState(undefined);
 
   const dvFeatures = useMemo(() => {
@@ -106,13 +101,14 @@ function StsDirektVerbindungenFeatureInfo() {
   }
   return (
     <>
-      {!isMobile && (
-        <>
-          <Divider />
-        </>
-      )}
+      {!isMobile && <Divider />}
       {dvFeatures?.length ? (
-        <div className={classes.featureInfos}>
+        <div
+          className={classes.featureInfos}
+          ref={containerRef}
+          id="test"
+          style={{ overflowY: 'scroll' }}
+        >
           {dvFeatures.length > 1 ? (
             dvFeatures.map((feat) => {
               const id = getId(feat);
@@ -123,6 +119,7 @@ function StsDirektVerbindungenFeatureInfo() {
               return (
                 <Fragment key={id}>
                   <MenuItem
+                    dataId={id}
                     onCollapseToggle={(open) => setInfoKey(open ? null : id)}
                     className={`wkp-gb-topic-menu ${classes.root}`}
                     collapsed={!active}

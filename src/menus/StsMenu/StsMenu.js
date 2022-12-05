@@ -20,8 +20,6 @@ import StsDirektVerbindungenFeatureInfo from './StsDirektVerbindungenFeatureInfo
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
-import { setMaxExtent, setMinZoom } from '../../model/map/actions';
-import { SWISS_EXTENT } from '../../utils/constants';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -73,7 +71,19 @@ const useStyles = makeStyles(() => {
     featureInfo: {
       overflow: 'hidden',
       height: (props) =>
-        props.activeMenu === 'dv' ? 'calc(100% - 88px)' : 'calc(100% - 122px)',
+        props.activeMenu === 'dv' ? 'calc(100% - 98px)' : 'calc(100% - 105px)',
+      '& > div': {
+        scrollbarWidth: 'thin',
+        '&::-webkit-scrollbar': {
+          width: 6,
+        },
+        '&::-webkit-scrollbar-track': {
+          background: 'rgba(0, 0, 0, 0.1)',
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'rgba(0, 0, 0, 0.4)',
+        },
+      },
     },
     mobileHandleWrapper: {
       position: 'absolute',
@@ -97,7 +107,7 @@ const useStyles = makeStyles(() => {
       marginRight: 5,
     },
     layerSwitcher: {
-      padding: 10,
+      padding: '15px 10px',
     },
   };
 });
@@ -140,16 +150,6 @@ function StsTopicMenu() {
       ),
     [activeMenu, featureInfo],
   );
-
-  useEffect(() => {
-    if (activeMenu === 'sts') {
-      dispatch(setMaxExtent(SWISS_EXTENT));
-      dispatch(setMinZoom(8));
-    } else {
-      dispatch(setMinZoom(undefined));
-      dispatch(setMaxExtent(null));
-    }
-  }, [activeMenu, dispatch]);
 
   useEffect(() => {
     if (featureInfo?.length) {

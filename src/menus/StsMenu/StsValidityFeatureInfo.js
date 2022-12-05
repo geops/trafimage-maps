@@ -12,8 +12,6 @@ import {
   highlights,
 } from '../../config/ch.sbb.sts';
 import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
-import { DETAILS_BASE_URL } from '../../utils/constants';
-import { getId } from '../../utils/removeDuplicateFeatures';
 import panCenterFeature from '../../utils/panCenterFeature';
 
 const useStyles = makeStyles(() => {
@@ -145,11 +143,7 @@ function StsValidityFeatureInfo({ menuOpen }) {
 
   return (
     <>
-      {!isMobile && (
-        <>
-          <Divider />
-        </>
-      )}
+      {!isMobile && <Divider />}
       <div className={classes.container}>
         {gbFeatureInfo?.features?.length ? (
           <>
@@ -167,7 +161,6 @@ function StsValidityFeatureInfo({ menuOpen }) {
         {gbFeatureInfo?.features?.length && mainFeature ? <Divider /> : null}
         {mainFeature
           ? (() => {
-              const id = getId(mainFeature) || mainFeature.get('title');
               const title =
                 mainFeature.get('route_names_premium') ||
                 mainFeature.get('route_names_gttos') ||
@@ -175,7 +168,7 @@ function StsValidityFeatureInfo({ menuOpen }) {
               const images =
                 mainFeature.get('images') && mainFeature.get('images').length;
               const description = mainFeature.get('lead_text');
-              const link = id && DETAILS_BASE_URL + id;
+              const highlightUrl = mainFeature.get('highlight_url');
               return (
                 <div
                   className={classes.mainInfo}
@@ -189,7 +182,7 @@ function StsValidityFeatureInfo({ menuOpen }) {
                     {images ? (
                       <div className={classes.imageLine}>
                         <a
-                          href={`${mainFeature.get('highlight_url') || link}`}
+                          href={highlightUrl}
                           rel="noopener noreferrer"
                           target="_blank"
                         >
@@ -203,7 +196,7 @@ function StsValidityFeatureInfo({ menuOpen }) {
                     {description && (
                       <Typography paragraph>{description}</Typography>
                     )}
-                    {link && <Link href={link}>Details</Link>}
+                    {highlightUrl && <Link href={highlightUrl}>Details</Link>}
                   </div>
                 </div>
               );

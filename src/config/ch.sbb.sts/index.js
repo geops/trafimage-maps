@@ -7,7 +7,7 @@ import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
+import { DIREKTVERBINDUNGEN_KEY, SWISS_EXTENT } from '../../utils/constants';
 import poiImage from './img/poi.png';
 import poiImageHL from './img/poi_hl.png';
 
@@ -79,6 +79,8 @@ export const highlights = new MTVectorLayer({
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
+    maxExtent: SWISS_EXTENT,
+    minZoom: 8,
   },
 });
 
@@ -104,6 +106,8 @@ export const highlightRoutes = new HighlightRoutesLayer({
   properties: {
     isQueryable: false,
     disableSetFeatureInfoOnHover: true,
+    maxExtent: SWISS_EXTENT,
+    minZoom: 8,
   },
 });
 
@@ -121,6 +125,7 @@ const hiddenRoutes = new MapboxStyleLayer({
     ),
   properties: {
     isQueryable: true,
+    minZoom: 8,
   },
 });
 
@@ -161,6 +166,8 @@ export const otherRoutes = new MapboxStyleLayer({
       }
       return 'Freie Fahrt';
     },
+    maxExtent: SWISS_EXTENT,
+    minZoom: 8,
     products: [
       'ch.sbb.geltungsbereiche.products.sts',
       'ch.sbb.geltungsbereiche.products.sts-half',
@@ -181,6 +188,8 @@ export const gttos = new MapboxStyleLayer({
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
+    maxExtent: SWISS_EXTENT,
+    minZoom: 8,
   },
 });
 
@@ -197,6 +206,8 @@ export const premium = new MapboxStyleLayer({
   properties: {
     disableSetFeatureInfoOnHover: true,
     isQueryable: true,
+    maxExtent: SWISS_EXTENT,
+    minZoom: 8,
   },
 });
 
