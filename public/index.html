@@ -125,7 +125,10 @@
             return response.json();
           })
           .then(function (data) {
-            changeAttr('apiKey', data.key);
+            changeAttr(
+              'apiKey',
+              '5cc87b12d7c5370001c1d655352830d2fef24680ae3a1cda54418cb8',
+            );
             var topicFromUrl = url.pathname.split('/').pop();
             if (topicFromUrl) {
               changeAttr('activeTopicKey', topicFromUrl);
@@ -136,7 +139,6 @@
           .catch(function () {
             console.error('Request to get the apiKey failed');
           });
-        
 
         url.searchParams?.forEach((value, key) => {
           if (/(Url|Key)/.test(key)) {
