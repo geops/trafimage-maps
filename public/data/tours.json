@@ -1,5 +1,46 @@
 [
   {
+    "title": "GoldenPass Express",
+    "lead_text": "The GoldenPass Express redefines the travel experience between Interlaken and Montreux.",
+    "description": "The journey on the GoldenPass Express is like a foray through Switzerland. The trip starts in picturesque Interlaken and continues via Gstaad, Château-d’OEx and Montboven to Montreux, the journey’s final stop.\n\nThe new Prestige Class is the centrepiece of the new train. The exclusive travel class offers discerning travellers everything they expect from an unforgettable train journey: plenty of privacy, maximum comfort in a small compartment, and an exceptional culinary offering.\n\nDue to limited seating capacity, reservations for Prestige Class are mandatory - and strongly recommended for 1st and 2nd class travel.",
+    "area_of_validity": "Unlimited travel with Swiss Travel Pass (Flex).",
+    "images": [
+      {
+        "id": "5xmIm7gY7CUkp9sePsXAVy",
+        "title": "GoldenPass Express in Rougemont",
+        "description": "",
+        "url": "//images.ctfassets.net/247zai9dqz4o/5xmIm7gY7CUkp9sePsXAVy/9075ba1630fc607dfb4c78351d598fa8/GoldenPass-Express-Rougemont-94016.jpg",
+        "height": 800,
+        "width": 1200
+      },
+      {
+        "id": "3i5CYPRK2oBkb2egLCQW2F",
+        "title": "GoldenPass Express Panoramic Windows",
+        "description": "",
+        "url": "//images.ctfassets.net/247zai9dqz4o/3i5CYPRK2oBkb2egLCQW2F/03bf422233c88e113e615dafaac5d56b/GoldenPass-Express-Windows-94041.jpg",
+        "height": 800,
+        "width": 1200
+      },
+      {
+        "id": "5Yd83H49ba9aUU9gR6mkyI",
+        "title": "GoldenPass Express Culinary Delights",
+        "description": "",
+        "url": "//images.ctfassets.net/247zai9dqz4o/5Yd83H49ba9aUU9gR6mkyI/9dcd9cacd3b7f88276df2c45087c6020/GoldenPass-Express-Catering-94058.jpg",
+        "height": 800,
+        "width": 1200
+      },
+      {
+        "id": "3HqmZOgzzreRAlVkFIJVbx",
+        "title": "GoldenPass Express Technology",
+        "description": "",
+        "url": "//images.ctfassets.net/247zai9dqz4o/3HqmZOgzzreRAlVkFIJVbx/42db4e8d3cc528898cdff13f608cd55d/GoldenPass-Express-Seating-94029.jpg",
+        "height": 800,
+        "width": 1200
+      }
+    ],
+    "highlight_url": "https://www.gpx.swiss/en/"
+  },
+  {
     "title": "Luzern–Interlaken Express",
     "lead_text": "This train line connects Lucerne and Interlaken, two of Switzerland’s most popular tourist destinations.",
     "description": "The Luzern-Interlaken Express turns the journey from one city to the other into a great experience. During a train ride of roughly two hours, passengers marvel at five crystal clear mountain lakes that gather the waters from various rivers and waterfalls. At the lake shore, steep rock faces of surrounding mountains rise up protectively and provide unique photo motifs.\n\nShortly before starting its steep, winding ascent to Brünig Pass, the train changes to cogwheel drive train technology in order to conquer the gradient. With good reason, the Luzern-Interlaken Express is part of the scenic GoldenPass Line leading to Interlaken and on to Montreux.",
