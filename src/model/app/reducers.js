@@ -45,6 +45,7 @@ import {
   SET_REALTIME_URL,
   SET_REALTIME_KEY,
   SET_DISPLAY_MENU,
+  SET_STOPS_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -307,6 +308,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         displayMenu: action.data,
+      };
+    case SET_STOPS_URL:
+      return {
+        ...state,
+        stopsUrl: action.data,
       };
     default:
       return {
