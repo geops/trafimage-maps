@@ -38,6 +38,7 @@ import {
   setLoginUrl,
   setRealtimeKey,
   setRealtimeUrl,
+  setStopsUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -172,6 +173,12 @@ const propTypes = {
   searchUrl: PropTypes.string,
 
   /**
+   * URL endpoint for Stops api.
+   * @private
+   */
+  stopsUrl: PropTypes.string,
+
+  /**
    * Api key for Realtime api.
    * @private
    */
@@ -268,6 +275,7 @@ const defaultProps = {
   matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
   searchUrl: process?.env?.REACT_APP_SEARCH_URL,
+  stopsUrl: process?.env?.REACT_APP_STOPS_URL,
   realtimeKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
 };
@@ -391,6 +399,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       embedded,
       searchUrl,
+      stopsUrl,
       appBaseUrl,
       staticFilesUrl,
       activeTopicKey,
@@ -438,6 +447,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (searchUrl) {
       this.store.dispatch(setSearchUrl(searchUrl));
+    }
+
+    if (stopsUrl) {
+      this.store.dispatch(setStopsUrl(stopsUrl));
     }
 
     if (maxExtent) {
@@ -537,6 +550,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKeyName,
       embedded,
       searchUrl,
+      stopsUrl,
       appBaseUrl,
       staticFilesUrl,
       activeTopicKey,
@@ -574,6 +588,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (searchUrl !== prevProps.searchUrl) {
       this.store.dispatch(setSearchUrl(searchUrl));
+    }
+
+    if (stopsUrl !== prevProps.stopsUrl) {
+      this.store.dispatch(setStopsUrl(stopsUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {
