@@ -324,7 +324,7 @@ export const sts = {
   hideInLayerTree: true,
   menu: <StsMenu />,
   enableFeatureClick: true,
-  disablePermalinkLayers: true,
+  disablePermalinkLayers: false,
   center: [915788.3813658276, 5909670.533831286],
   zoom: 8,
   constrainOnlyCenter: true,

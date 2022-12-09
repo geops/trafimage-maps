@@ -105,7 +105,11 @@
     <script type="text/javascript">
       window.changeAttr = function (attr, val) {
         if (attr === 'activeTopicKey') {
-          window.history.pushState({}, '', '/' + val);
+          window.history.pushState(
+            {},
+            '',
+            '/' + val + window.location.search + window.location.hash,
+          );
         }
         // If attribute value is the same the update is not triggered,
         // so we set it to null first before setting it to the new value.
@@ -126,7 +130,8 @@
           })
           .then(function (data) {
             changeAttr('apiKey', data.key);
-            var topicFromUrl = url.pathname.split('/').pop();
+            var topicFromUrl = url.pathname.split('/');
+            topicFromUrl = topicFromUrl[topicFromUrl.length - 1];
             if (topicFromUrl) {
               changeAttr('activeTopicKey', topicFromUrl);
             } else {
@@ -145,7 +150,6 @@
 
         var embedded = url.searchParams.get('embedded');
         if (embedded) {
-          console.log(embedded);
           changeAttr('embedded', embedded);
         }
 
@@ -173,6 +177,42 @@
         var domainConsent = url.searchParams.get('domainConsent');
         if (domainConsent) {
           changeAttr('domainConsent', domainConsent);
+        }
+
+        var disabled = url.searchParams.get('disabled');
+        if (disabled) {
+          changeAttr(
+            'elements',
+            disabled
+              .split('.')
+              .map((d) => d + '=false')
+              .join(','),
+          );
+        }
+
+        // baselayers
+        var layersVisibility = '';
+        var baselayers = url.searchParams.get('baselayers');
+        if (baselayers) {
+          // only the first is relevant
+          layersVisibility = `${baselayers.split(',')[0]}=true`;
+        }
+
+        // layers
+        var layers = url.searchParams.get('layers');
+        if (layers) {
+          if (layersVisibility) {
+            layersVisibility += ',';
+          }
+          layersVisibility += layers
+            .split(',')
+            .map((d) => `${d}=true`)
+            .join(',');
+        }
+
+        // baselayers & layers
+        if (layersVisibility) {
+          changeAttr('layersVisibility', layersVisibility);
         }
 
         var map = document.getElementById('map');

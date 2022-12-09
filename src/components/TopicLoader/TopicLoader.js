@@ -41,7 +41,6 @@ const propTypes = {
   // mapStateToProps
   activeTopic: PropTypes.shape(),
   language: PropTypes.string.isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
   permissionInfos: PropTypes.shape({
     user: PropTypes.string,
     permissions: PropTypes.array,
@@ -51,6 +50,7 @@ const propTypes = {
   searchUrl: PropTypes.string,
   realtimeKey: PropTypes.string,
   realtimeUrl: PropTypes.string,
+  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
 
   // mapDispatchToProps
   // dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -79,6 +79,7 @@ const defaultProps = {
   appBaseUrl: null,
   realtimeKey: null,
   realtimeUrl: null,
+  layers: [],
 };
 
 class TopicLoader extends PureComponent {
@@ -148,8 +149,6 @@ class TopicLoader extends PureComponent {
   loadTopics() {
     const { topics, appBaseUrl, permissionInfos, activeTopic } = this.props;
 
-    // console.log('loadTopics', !topics?.length, !activeTopic);
-
     // wait until all web components attributes are properly set
     if (!topics?.length || !activeTopic) {
       return;
@@ -188,7 +187,6 @@ class TopicLoader extends PureComponent {
       apiKey,
       searchUrl,
       appBaseUrl,
-      layerService,
       activeTopic,
       dispatchSetFeatureInfo,
       dispatchSetSearchService,
@@ -220,7 +218,7 @@ class TopicLoader extends PureComponent {
       });
     }
 
-    this.updateLayers();
+    const layers = this.updateLayers();
 
     const newSearchService = new SearchService();
     newSearchService.setSearches(activeTopic.searches || {});
@@ -229,12 +227,12 @@ class TopicLoader extends PureComponent {
     newSearchService.setSearchesProps({
       t,
       activeTopic,
-      layerService,
+      layerService: new LayerService(layers),
       dispatchSetFeatureInfo,
     });
 
-    this.onChangeVisibleKeys?.forEach((key) => unByKey(key));
-    this.onChangeVisibleKeys = layerService
+    unByKey(this.onChangeVisibleKeys);
+    this.onChangeVisibleKeys = new LayerService(layers)
       .getLayersAsFlatArray()
       .map((layer) => layer.on('change:visible', this.updateMapLimits));
     this.updateMapLimits();
@@ -296,7 +294,6 @@ class TopicLoader extends PureComponent {
       apiKey,
       apiKeyName,
       language,
-      layerService,
       dispatchSetLayers,
       cartaroUrl,
       appBaseUrl,
@@ -307,6 +304,7 @@ class TopicLoader extends PureComponent {
       activeTopic,
       realtimeKey,
       realtimeUrl,
+      layers,
     } = this.props;
 
     // wait until all web components attributes are properly set
@@ -318,18 +316,19 @@ class TopicLoader extends PureComponent {
       !vectorTilesUrl ||
       !vectorTilesKey
     ) {
-      return;
+      return [];
     }
 
     const topicLayers = activeTopic.layers;
-    const [currentBaseLayer] = layerService
-      .getLayersAsFlatArray()
-      .filter((l) => l.get('isBaseLayer') && l.visible);
+    const layerAsFlatArray = new LayerService(layers).getLayersAsFlatArray();
+    const [currentBaseLayer] = layerAsFlatArray.filter(
+      (l) => l.get('isBaseLayer') && l.visible,
+    );
 
     // In case you set the topics after the default topics are loaded, you'll loose
     // the layers visibility set initially by the permalink parameters.
     // We try to apply the current layers visibility to the new topics.
-    layerService.getLayersAsFlatArray().forEach((layer) => {
+    layerAsFlatArray.forEach((layer) => {
       topicLayers.forEach((topicLayer) => {
         if (layer.key === topicLayer.key) {
           // topicLayer.setVisible(layer.visible);
@@ -358,22 +357,17 @@ class TopicLoader extends PureComponent {
     }
 
     // Layers to display
-    const layers = [...topicLayers];
+    const newLayers = [...topicLayers];
 
     // Draw layer is only useful with the permalink draw.id parameter.
     // So if there is no permalink no need to add this layer.
     // This fix a bug in CASA where ol_uid of the drawLayer is the same as another
     // layer creating a js error when the web component is unmounted.
     if (activeTopic?.elements?.permalink) {
-      layers.push(drawLayer);
+      newLayers.push(drawLayer);
     }
 
-    // TODO: It seems there is a mix of using layerService and layers.
-    // Dispatching dispatchSetLayers(topicLayers) should updtae the layerService
-    // then update the flatLayers.
-    layerService.setLayers(layers);
-
-    const flatLayers = layerService.getLayersAsFlatArray();
+    const flatLayers = new LayerService(newLayers).getLayersAsFlatArray();
     for (let i = 0; i < flatLayers.length; i += 1) {
       // TODO: seems unused so should we remove it?
       if (flatLayers[i].setGeoServerUrl) {
@@ -422,7 +416,9 @@ class TopicLoader extends PureComponent {
       }
     }
 
-    dispatchSetLayers(layers);
+    dispatchSetLayers(newLayers);
+
+    return newLayers;
   }
 
   render() {
@@ -435,8 +431,8 @@ const mapStateToProps = (state) => ({
   activeTopic: state.app.activeTopic,
   topics: state.app.topics,
   language: state.app.language,
-  layerService: state.app.layerService,
   drawLayer: state.map.drawLayer,
+  layers: state.map.layers,
   permissionInfos: state.app.permissionInfos,
   cartaroUrl: state.app.cartaroUrl,
   searchUrl: state.app.searchUrl,

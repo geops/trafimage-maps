@@ -134,14 +134,6 @@ export const otherRoutes = new MapboxStyleLayer({
   key: OTHER_LAYER_KEY,
   mapboxLayer: stsDataLayer,
   visible: true,
-  queryRenderedLayersFilter: ({ metadata }) => {
-    return (
-      metadata &&
-      (metadata[FILTER_KEY] === FILTER_OTHERS_VALUE ||
-        (metadata['geltungsbereiche.filter'] &&
-          metadata['geltungsbereiche.filter'].includes(FILTER_LINE_VALUE)))
-    );
-  },
   styleLayersFilter: ({ metadata }) => {
     return (
       metadata &&
@@ -180,8 +172,6 @@ export const gttos = new MapboxStyleLayer({
   key: GTTOS_LAYER_KEY,
   mapboxLayer: stsDataLayer,
   visible: true,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata[FILTER_KEY] === FILTER_GTTOS_VALUE,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_GTTOS_VALUE,
   group: 'ch.sbb.sts.validity.group',
@@ -199,8 +189,6 @@ export const premium = new MapboxStyleLayer({
   mapboxLayer: stsDataLayer,
   visible: false,
   group: 'ch.sbb.sts.validity.group',
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata[FILTER_KEY] === FILTER_PREMIUM_VALUE,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_PREMIUM_VALUE,
   properties: {

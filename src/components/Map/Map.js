@@ -30,7 +30,6 @@ const propTypes = {
   maxExtent: PropTypes.arrayOf(PropTypes.number),
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
   map: PropTypes.instanceOf(OLMap).isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
   activeTopic: PropTypes.shape().isRequired,
   resolution: PropTypes.number,
   zoom: PropTypes.number,
@@ -133,13 +132,8 @@ class Map extends PureComponent {
 
   onPointerMove(evt) {
     const { map, coordinate } = evt;
-    const {
-      layerService,
-      featureInfo,
-      dispatchSetFeatureInfo,
-      showPopups,
-      activeTopic,
-    } = this.props;
+    const { featureInfo, dispatchSetFeatureInfo, showPopups, activeTopic } =
+      this.props;
 
     if (document.activeElement !== map.getTargetElement()) {
       map.getTargetElement().focus();
@@ -156,7 +150,7 @@ class Map extends PureComponent {
     }
 
     const layers = this.getQueryableLayers('pointermove');
-    layerService
+    new LayerService(layers)
       .getFeatureInfoAtCoordinate(coordinate, layers)
       .then((newInfos) => {
         // If the featureInfos contains one from a priority layer.
@@ -229,7 +223,6 @@ class Map extends PureComponent {
   onSingleClick(evt) {
     const { coordinate } = evt;
     const {
-      layerService,
       dispatchSetFeatureInfo,
       dispatchSetSearchOpen,
       dispatchHtmlEvent,
@@ -247,7 +240,7 @@ class Map extends PureComponent {
     }
 
     const layers = this.getQueryableLayers('singleclick');
-    layerService
+    new LayerService(layers)
       .getFeatureInfoAtCoordinate(coordinate, layers)
       .then((featureInfos) => {
         // If the featureInfos contains one from a priority layer.
@@ -307,9 +300,9 @@ class Map extends PureComponent {
   }
 
   getQueryableLayers(featureInfoEventType) {
-    const { layerService } = this.props;
+    const { layers } = this.props;
 
-    return layerService.getLayersAsFlatArray().filter((layer) => {
+    return new LayerService(layers).getLayersAsFlatArray().filter((layer) => {
       return (
         layer.visible &&
         layer.get('isQueryable') &&
@@ -368,7 +361,6 @@ Map.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => ({
   featureInfo: state.app.featureInfo,
-  layerService: state.app.layerService,
   layers: state.map.layers,
   center: state.map.center,
   extent: state.map.extent,
