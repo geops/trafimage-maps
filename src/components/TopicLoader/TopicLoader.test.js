@@ -6,12 +6,10 @@ import { render } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Layer';
 import { Map, View } from 'ol';
-import LayerService from '../../utils/LayerService';
 import TopicLoader from '.';
 
 describe('TopicLoader', () => {
   const mockStore = configureStore([thunk]);
-  let layerService;
   let initialStore = {};
   let store;
   let map;
@@ -19,15 +17,14 @@ describe('TopicLoader', () => {
 
   beforeEach(() => {
     map = new Map({ view: new View({}) });
-    layerService = new LayerService([]);
     initialStore = {
       map: {
         drawLayer,
+        layers: [],
       },
       app: {
         map,
         language: 'de',
-        layerService,
         apiKey: 'apikey',
         apiKeyName: 'apiKeyName',
         appBaseUrl: 'https://appBaseUrl.ch',
@@ -63,11 +60,7 @@ describe('TopicLoader', () => {
       .getActions()
       .filter((act) => act.type === 'SET_LAYERS');
     expect(action.length).toBe(1);
-    expect(action[0].data).toEqual(layerService.getLayers());
-    expect(layerService.getLayersAsFlatArray()).toEqual([
-      ...topicDflt.layers,
-      drawLayer,
-    ]);
+    expect(action[0].data).toEqual([...topicDflt.layers, drawLayer]);
   });
 
   test("doesn't add draw layer when activeTopic.elements.permalink=false.", () => {

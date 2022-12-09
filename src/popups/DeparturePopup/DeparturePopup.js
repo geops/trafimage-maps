@@ -4,7 +4,7 @@ import Feature from 'ol/Feature';
 import { useSelector, useDispatch } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import { setFeatureInfo } from '../../model/app/actions';
-
+import LayerService from '../../utils/LayerService';
 import DeparturePopupContent from './DeparturePopupContent';
 
 const propTypes = {
@@ -18,7 +18,7 @@ let returnToNetzkarte = false;
 
 const DeparturePopup = ({ feature, coordinate }) => {
   const dispatch = useDispatch();
-  const layerService = useSelector((state) => state.app.layerService);
+  const layers = useSelector((state) => state.map.layers);
   const platform = feature.get('platform');
   const uic = parseFloat(feature.get('sbb_id'));
 
@@ -28,7 +28,9 @@ const DeparturePopup = ({ feature, coordinate }) => {
         {
           features: [feature],
           coordinate,
-          layer: layerService.getLayer('ch.sbb.netzkarte.stationen'),
+          layer: new LayerService(layers).getLayer(
+            'ch.sbb.netzkarte.stationen',
+          ),
         },
       ]),
     );

@@ -343,7 +343,7 @@ class TrafimageMaps extends React.PureComponent {
               // Matomo set SameSite=LAX by default if nothing is provided.
               setCookieSameSite: 'LAX',
             };
-      // console.log(window.OneTrust.GetDomainData());
+
       this.matomo = createInstance({
         urlBase: matomoUrl,
         siteId: matomoSiteId,

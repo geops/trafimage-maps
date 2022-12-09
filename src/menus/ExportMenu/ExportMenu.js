@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import canvasSize from 'canvas-size';
 import { cancelable } from 'cancelable-promise';
 import { useTranslation } from 'react-i18next';
@@ -115,7 +109,6 @@ const ExportMenu = () => {
     getHighestPossibleRes(maxCanvasSize, map),
   );
   const { t } = useTranslation();
-  const ref = useRef();
 
   useEffect(() => {
     const maxCanvasPromise =
@@ -151,84 +144,80 @@ const ExportMenu = () => {
   }, [exportSelection]);
 
   return (
-    <div ref={ref} id="wkp-export-menu">
-      <MenuItem
-        open
-        title={t('Grossformatiges PDF exportieren')}
-        icon={<FaDownload focusable={false} />}
-        collapsed={collapsed}
-        onCollapseToggle={(c) => setCollapsed(c)}
-        fixedHeight={200}
-      >
-        <div className={classes.menuContent}>
-          <div className={classes.selectWrapper}>
-            <FormControl className={classes.formControl}>
-              <InputLabel
-                className={classes.label}
-                id="pdf-format-select-label"
-              >
-                {t('Format')}
-              </InputLabel>
-              <Select
-                labelId="pdf-format-select-label"
-                id="pdf-format-select-label"
-                className={classes.input}
-                value={getValue()}
-                onChange={(evt) =>
-                  setExportSelection({
-                    format: evt.target.value.format,
-                    resolution: evt.target.value.resolution,
-                  })
-                }
-              >
-                {options.map((opt) => {
-                  return (
-                    <MuiMenuItem
-                      key={`${opt.format}-${opt.resolution}`}
-                      value={opt}
-                      disabled={validateOption(
-                        `${opt.format}`,
-                        opt.resolution,
-                        maxCanvasSize,
-                        map,
-                      )}
-                    >
-                      {opt.label}
-                    </MuiMenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
-            <ExportButton
-              exportFormat={exportSelection.format}
-              exportScale={exportSelection.resolution}
-              exportSize={sizesByFormat[exportSelection.format]}
+    <MenuItem
+      open
+      className="wkp-export-menu"
+      title={t('Grossformatiges PDF exportieren')}
+      icon={<FaDownload focusable={false} />}
+      collapsed={collapsed}
+      onCollapseToggle={(c) => setCollapsed(c)}
+      fixedHeight={200}
+    >
+      <div className={classes.menuContent}>
+        <div className={classes.selectWrapper}>
+          <FormControl className={classes.formControl}>
+            <InputLabel className={classes.label} id="pdf-format-select-label">
+              {t('Format')}
+            </InputLabel>
+            <Select
+              labelId="pdf-format-select-label"
+              id="pdf-format-select-label"
+              className={classes.input}
+              value={getValue()}
+              onChange={(evt) =>
+                setExportSelection({
+                  format: evt.target.value.format,
+                  resolution: evt.target.value.resolution,
+                })
+              }
             >
-              {t('PDF exportieren')}
-            </ExportButton>
-          </div>
-          <div className={classes.infoWrapper}>
-            <FaInfoCircle
-              focusable={false}
-              fontSize="small"
-              className={classes.infoIcon}
-            />
-            <div>
-              <Typography variant="subtitle1">
-                {t(
-                  'Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.',
-                )}
-              </Typography>
-              <Typography variant="subtitle1">
-                {t(
-                  'Tipp: Verwenden Sie den Firefox-Browser für den Export hochauflösender Karten.',
-                )}
-              </Typography>
-            </div>
+              {options.map((opt) => {
+                return (
+                  <MuiMenuItem
+                    key={`${opt.format}-${opt.resolution}`}
+                    value={opt}
+                    disabled={validateOption(
+                      `${opt.format}`,
+                      opt.resolution,
+                      maxCanvasSize,
+                      map,
+                    )}
+                  >
+                    {opt.label}
+                  </MuiMenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <ExportButton
+            exportFormat={exportSelection.format}
+            exportScale={exportSelection.resolution}
+            exportSize={sizesByFormat[exportSelection.format]}
+          >
+            {t('PDF exportieren')}
+          </ExportButton>
+        </div>
+        <div className={classes.infoWrapper}>
+          <FaInfoCircle
+            focusable={false}
+            fontSize="small"
+            className={classes.infoIcon}
+          />
+          <div>
+            <Typography variant="subtitle1">
+              {t(
+                'Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.',
+              )}
+            </Typography>
+            <Typography variant="subtitle1">
+              {t(
+                'Tipp: Verwenden Sie den Firefox-Browser für den Export hochauflösender Karten.',
+              )}
+            </Typography>
           </div>
         </div>
-      </MenuItem>
-    </div>
+      </div>
+    </MenuItem>
   );
 };
 

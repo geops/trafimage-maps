@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
 import LayerTree from 'react-spatial/components/LayerTree';
 import { withStyles, MenuItem } from '@material-ui/core';
+import { Layer } from 'mobility-toolbox-js/ol';
 import LayerService from '../../utils/LayerService';
 import Collapsible from '../Collapsible';
 import filters from '../../filters';
@@ -32,7 +33,7 @@ const propTypes = {
   // mapStateToProps
   menuOpen: PropTypes.bool.isRequired,
   activeTopic: PropTypes.shape().isRequired,
-  layerService: PropTypes.instanceOf(LayerService).isRequired,
+  layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
 
   // mapDispatchToProps
   dispatchSetActiveTopic: PropTypes.func.isRequired,
@@ -85,22 +86,17 @@ class TopicMenu extends PureComponent {
   }
 
   render() {
-    const { t, layerService, topic, activeTopic, menuOpen, classes } =
-      this.props;
+    const { t, layers, topic, activeTopic, menuOpen, classes } = this.props;
     const { isCollapsed, currentBaseLayerKey } = this.state;
     let layerTree = null;
     const TopicMenuBottom = topic.topicMenuBottom;
 
-    if (
-      activeTopic.key === topic.key &&
-      layerService &&
-      layerService.getLayers()
-    ) {
+    if (activeTopic.key === topic.key && layers) {
       layerTree = (
         <div className="wkp-layer-tree">
           <LayerTree
             isItemHidden={(l) => l.get('isBaseLayer') || l.get('hideInLegend')}
-            layers={layerService.getLayers()}
+            layers={layers}
             t={t}
             titles={{
               layerShow: t('Layer anzeigen'),
@@ -144,7 +140,7 @@ class TopicMenu extends PureComponent {
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
       return !l.get('hideInLegend');
     });
-    const baseLayers = layerService.getBaseLayers();
+    const baseLayers = new LayerService(layers).getBaseLayers();
     const currentBaseLayer = baseLayers.find((l) => l.visible);
 
     return (
@@ -244,7 +240,7 @@ const mapStateToProps = (state) => ({
   menuOpen: state.app.menuOpen,
   map: state.app.map,
   activeTopic: state.app.activeTopic,
-  layerService: state.app.layerService,
+  layers: state.map.layers,
 });
 
 const mapDispatchToProps = {
