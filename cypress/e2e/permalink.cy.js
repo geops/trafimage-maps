@@ -1,7 +1,7 @@
 describe('permalink', () => {
   describe('"disabled" parameter', () => {
     describe('using default topic', () => {
-      it("should display some elements when it's not set", () => {
+      it.only("should display some elements when it's not set", () => {
         cy.visit('/');
         cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
@@ -56,7 +56,7 @@ describe('permalink', () => {
         cy.url().should(
           'match',
           new RegExp(
-            'baselayers=ch.sbb.netzkarte,ch.sbb.netzkarte.dark,ch.sbb.netzkarte.luftbild.group,ch.sbb.netzkarte.landeskarte,ch.sbb.netzkarte.landeskarte.grau&lang=de&layers=&x=810000&y=5900000&z=8',
+            'baselayers=ch.sbb.netzkarte,ch.sbb.netzkarte.dark,ch.sbb.netzkarte.luftbild.group,ch.sbb.netzkarte.landeskarte,ch.sbb.netzkarte.landeskarte.grau&lang=de&x=810000&y=5900000&z=8',
           ),
         );
       });
