@@ -44,6 +44,7 @@ import {
   SET_API_KEY_NAME,
   SET_REALTIME_URL,
   SET_REALTIME_KEY,
+  SET_STOPS_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -300,6 +301,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         staticFilesUrl: action.data,
+      };
+    case SET_STOPS_URL:
+      return {
+        ...state,
+        stopsUrl: action.data,
       };
     default:
       return {
