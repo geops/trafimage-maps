@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import {
@@ -131,6 +131,7 @@ function StsTopicMenu() {
   const displayMenu = useSelector((state) => state.app.displayMenu);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const activeTopic = useSelector((state) => state.app.activeTopic);
+  const layers = useSelector((state) => state.map.layers);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
@@ -143,6 +144,16 @@ function StsTopicMenu() {
     isMobile,
     activeMenu,
   });
+
+  useEffect(() => {
+    // Active the correct menu on load of the topic.
+    const isDirektVerbindungLayersVisible = layers?.find((layer) => {
+      return /direktverbindungen/.test(layer.key) && layer.visible;
+    });
+    if (isDirektVerbindungLayersVisible) {
+      setActiveMenu('dv');
+    }
+  }, [layers]);
 
   const layerSwitcher = useMemo(
     () =>
@@ -170,15 +181,12 @@ function StsTopicMenu() {
     }
   }, [featureInfo, isMobile, dispatch]);
 
-  const onChange = useCallback(
-    (key) => {
-      updateLayers(key);
-      setActiveMenu(key);
-      dispatch(setFeatureInfo([]));
-      setAnchorEl(null);
-    },
-    [dispatch],
-  );
+  const onChange = (key) => {
+    updateLayers(key);
+    setActiveMenu(key);
+    dispatch(setFeatureInfo([]));
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.container}>

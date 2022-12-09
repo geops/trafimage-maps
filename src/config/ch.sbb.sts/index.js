@@ -99,8 +99,6 @@ export const highlightRoutes = new HighlightRoutesLayer({
   key: ROUTES_HIGHLIGHT_LAYER_KEY,
   mapboxLayer: stsDataLayer,
   visible: true,
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata[FILTER_KEY] === FILTER_HIGHLIGHT_VALUE,
   styleLayersFilter: ({ metadata }) =>
     metadata && metadata[FILTER_KEY] === FILTER_HIGHLIGHT_VALUE,
   properties: {

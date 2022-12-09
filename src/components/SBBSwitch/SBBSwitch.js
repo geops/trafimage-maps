@@ -4,7 +4,7 @@ import { withStyles, Switch } from '@material-ui/core';
 const StyledSwitch = withStyles((theme) => ({
   root: {
     width: 38,
-    height: 26,
+    height: '100%',
     padding: 0,
     margin: '4px 10px 4px 0',
     overflow: 'visible',
