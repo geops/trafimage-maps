@@ -4,6 +4,7 @@ describe('permalink', () => {
       it("should display some elements when it's not set", () => {
         cy.visit('/');
         cy.get('.tm-trafimage-maps').should('exist');
+        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
 
         // header + telephoneinfos
         cy.get('.wkp-header').should('exist');
@@ -116,6 +117,7 @@ describe('permalink', () => {
 
       it('should hide draw menu', () => {
         cy.visit('/?disabled=drawMenu');
+        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-menu-header').click();
         cy.get('.wkp-draw-menu').should('not.exist');
