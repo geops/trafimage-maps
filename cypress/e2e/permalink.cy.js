@@ -90,7 +90,7 @@ describe('permalink', () => {
         cy.get('.wkp-map-controls').should('not.exist');
       });
 
-      it('should fit extent button', () => {
+      it('should hide fit extent button', () => {
         cy.visit('/?disabled=fitExtent');
         cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-map-controls').should('exist');
