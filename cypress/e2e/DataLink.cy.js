@@ -1,8 +1,8 @@
 describe('A link to data', () => {
   const openDataText = 'Diesen Datensatz beziehen (Open Data)';
   beforeEach(() => {
+    cy.consent();
     cy.visit('');
-    cy.get('#onetrust-accept-btn-handler', { timeout: 100000 }).click();
     cy.get('.wkp-menu-header').click();
   });
 
