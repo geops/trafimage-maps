@@ -58,7 +58,9 @@ const bufferMessagee = {
 */
 
 describe('ch.sbb.netzkarte', () => {
-  beforeEach(() => {});
+  beforeEach(() => {
+    cy.consent();
+  });
 
   describe('punctuality layers', () => {
     let bufferMessage;
@@ -331,7 +333,6 @@ describe('ch.sbb.netzkarte', () => {
           });
         },
       });
-      cy.get('#onetrust-accept-btn-handler', { timeout: 100000 }).click();
       cy.get('.wkp-menu-header').click();
       cy.get(
         ':nth-child(6) > .rs-layer-tree-item > .rs-layer-tree-input > span',

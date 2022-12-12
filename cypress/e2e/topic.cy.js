@@ -2,8 +2,8 @@ describe('topic', () => {
   /*
   describe('ch.sbb.geltungsbereiche-iframe', () => {
     beforeEach(() => {
+      cy.consent();
       cy.visit('/ch.sbb.geltungsbereiche-iframe');
-      cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
     });
 
     it('should show/hide some elements', () => {
