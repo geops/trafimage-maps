@@ -164,6 +164,7 @@ describe('permalink', () => {
 
       it('should hide export menu', () => {
         cy.visit('/ch.sbb.tarifverbundkarte.public?disabled=exportMenu');
+        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-menu-header').click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-export-menu').should('not.exist');
