@@ -3,7 +3,6 @@ describe('permalink', () => {
     describe('using default topic', () => {
       it("should display some elements when it's not set", () => {
         cy.visit('/');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
 
         // header + telephoneinfos
@@ -68,7 +67,6 @@ describe('permalink', () => {
 
       it('should hide header', () => {
         cy.visit('/?disabled=header');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-header').should('not.exist');
         cy.get('.wkp-tel-infos').should('not.exist');
@@ -76,56 +74,48 @@ describe('permalink', () => {
 
       it('should hide topics menu', () => {
         cy.visit('/?disabled=menu');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-topics-menu').should('not.exist');
       });
 
       it('should hide base layer switcher', () => {
         cy.visit('/?disabled=baseLayerSwitcher');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.rs-base-layer-switcher').should('not.exist');
       });
 
       it('should hide maps controls', () => {
         cy.visit('/?disabled=mapControls');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-map-controls').should('not.exist');
       });
 
       it('should fit extent button', () => {
         cy.visit('/?disabled=fitExtent');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-map-controls').should('exist');
         cy.get('.wkp-fit-extent').should('not.exist');
       });
 
       it('should hide geolocation button', () => {
         cy.visit('/?disabled=geolocationButton');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-map-controls').should('exist');
         cy.get('.wkp-geolocation').should('not.exist');
       });
 
       it('should hide zoom slider', () => {
         cy.visit('/?disabled=zoomSlider');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-map-controls').should('exist');
         cy.get('.rs-zoomslider-wrapper').should('not.exist');
       });
 
       it('should hide footer', () => {
         cy.visit('/?disabled=footer');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-footer').should('not.exist');
       });
 
       it('should hide draw menu', () => {
         cy.visit('/?disabled=drawMenu');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-menu-header').click();
         cy.get('.wkp-draw-menu').should('not.exist');
@@ -133,7 +123,6 @@ describe('permalink', () => {
 
       it('should hide share menu', () => {
         cy.visit('/?disabled=shareMenu');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-menu-header').click();
         cy.get('.wkp-share-menu').should('not.exist');
@@ -141,7 +130,6 @@ describe('permalink', () => {
 
       it('should hide export menu', () => {
         cy.visit('/ch.sbb.tarifverbundkarte.public?disabled=exportMenu');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-menu-header').click();
         cy.get('.wkp-export-menu').should('not.exist');
@@ -149,14 +137,12 @@ describe('permalink', () => {
 
       it('should deactivate permalink parameter', () => {
         cy.visit('/?disabled=permalink');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.url().should('match', /\?disabled=permalink/);
       });
 
       it('should hide manage a list of value, for example header and footer', () => {
         cy.visit('/?disabled=header,footer');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-header').should('not.exist');
         cy.get('.wkp-tel-infos').should('not.exist');
@@ -167,7 +153,6 @@ describe('permalink', () => {
     describe('using tarifverbundkarte topic', () => {
       it("should display some elements when it's not set", () => {
         cy.visit('/ch.sbb.tarifverbundkarte.public');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-menu-header').click();
         cy.get('.tm-trafimage-maps').should('exist');
         // See tarifverbundkarte topic for this test
@@ -177,7 +162,6 @@ describe('permalink', () => {
 
       it('should hide export menu', () => {
         cy.visit('/ch.sbb.tarifverbundkarte.public?disabled=exportMenu');
-        cy.get('#onetrust-accept-btn-handler', { timeout: 20000 }).click();
         cy.get('.wkp-menu-header').click();
         cy.get('.tm-trafimage-maps').should('exist');
         cy.get('.wkp-export-menu').should('not.exist');

@@ -5,7 +5,7 @@ describe('Handicap Topic', () => {
     cy.visit('');
     cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
     cy.get('.wkp-menu-header ').click();
-    cy.server();
+    cy.intercept();
     cy.wait(1000);
   });
 
