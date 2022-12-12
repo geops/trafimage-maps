@@ -2,8 +2,8 @@
 
 describe('Search', () => {
   beforeEach(() => {
+    cy.consent();
     cy.visit('');
-    cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
   });
   it(`should display plural texts`, () => {
     // Input is not visible

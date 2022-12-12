@@ -88,8 +88,6 @@ const setViewPort = (viewport) => {
   } else {
     cy.viewport(viewport.preset, viewport.orientation);
   }
-  // Click the consent button
-  cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
 };
 
 const getViewPortName = (viewport) => {
@@ -101,6 +99,7 @@ const getViewPortName = (viewport) => {
 
 describe('Header components', () => {
   beforeEach(() => {
+    cy.consent();
     cy.visit('');
   });
 

@@ -2,8 +2,8 @@ import lang from '../../src/lang/de.json';
 
 describe('Handicap Topic', () => {
   beforeEach(() => {
+    cy.consent();
     cy.visit('');
-    cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
     cy.get('.wkp-menu-header ').click();
   });
 
