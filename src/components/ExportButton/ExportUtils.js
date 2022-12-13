@@ -7,6 +7,7 @@ import VectorSource from 'ol/source/Vector';
 import { LineString } from 'ol/geom';
 import { getCenter } from 'ol/extent';
 import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
+import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -133,35 +134,33 @@ export const clean = (mapToExport) => {
   mapToExport.setTarget(null);
 };
 
-export const generateExtraData = (layerService, exportNorthArrow) => {
+export const generateExtraData = (layers, exportNorthArrow) => {
   const extraData = {};
 
-  if (layerService) {
-    extraData.copyright = {
-      text: () => {
-        const layers = layerService.getLayersAsFlatArray();
-        const copyrights = layers
-          .filter((layer) => layer.visible && layer.copyrights)
-          .map((layer) => {
-            // Parse the copyright html drawn from the layer
-            const parsed = new DOMParser().parseFromString(
-              layer.copyrights,
-              'text/html',
-            );
-            const copyrightArray = [];
-            const coll = parsed.getElementsByTagName('a');
+  extraData.copyright = {
+    text: () => {
+      const copyrights = getLayersAsFlatArray(layers)
+        .filter((layer) => layer.visible && layer.copyrights)
+        .map((layer) => {
+          // Parse the copyright html drawn from the layer
+          const parsed = new DOMParser().parseFromString(
+            layer.copyrights,
+            'text/html',
+          );
+          const copyrightArray = [];
+          const coll = parsed.getElementsByTagName('a');
 
-            for (let i = 0; i < coll.length; i += 1) {
-              const copyright = coll[i];
-              copyrightArray.push(copyright.text);
-            }
-            return copyrightArray;
-          });
-        const unique = Array.from(new Set(copyrights));
-        return unique.join(' | ');
-      },
-    };
-  }
+          for (let i = 0; i < coll.length; i += 1) {
+            const copyright = coll[i];
+            copyrightArray.push(copyright.text);
+          }
+          return copyrightArray;
+        })
+        .flat();
+      const unique = Array.from(new Set(copyrights));
+      return unique.join(' | ');
+    },
+  };
 
   if (exportNorthArrow) {
     extraData.northArrow = {

@@ -9,6 +9,12 @@ export const LS_MATOMO_USER_SESSION_TIMER = 'matomo_user_session_timer';
 export const LS_MATOMO_TOPIC_VISITED = 'matomo_topic_visited';
 export const MATOMO_TOPIC_CHANGE_ACTION = 'load';
 export const MATOMO_TOPIC_CHANGE_TIMER = 30 * 60 * 1000;
+export const TRACK_NEW_DRAW_ACTION = 'clickNewDraw';
+export const TRACK_SHARE_PERMALINK_ACTION = 'clickSharePermalink';
+export const TRACK_SHARE_MAIL_ACTION = 'clickShareMail';
+export const TRACK_SHARE_DL_ACTION = 'clickShareDownload';
+export const TRACK_SHARE_FB_ACTION = 'clickShareFacebook';
+export const TRACK_SHARE_TW_ACTION = 'clickShareTwitter';
 
 // Direktverbindungen
 export const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';

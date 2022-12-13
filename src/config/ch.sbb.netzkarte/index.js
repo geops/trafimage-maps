@@ -189,7 +189,6 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     tenant: 'sbb',
-    minZoomNonTrain: 14,
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
     group: 'ch.sbb.punctuality',
     properties: {
@@ -203,7 +202,6 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     tenant: 'sbb',
-    minZoomNonTrain: 14,
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
     group: 'ch.sbb.punctuality',
     properties: {
@@ -217,7 +215,6 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     tenant: 'sbb',
-    minZoomNonTrain: 14,
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,

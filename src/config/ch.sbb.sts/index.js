@@ -84,7 +84,7 @@ export const highlights = new MTVectorLayer({
   },
 });
 
-fetch('data/pois.geojson')
+fetch('https://maps.trafimage/sts-static/pois.geojson')
   .then((response) => response.json())
   .then((data) => {
     const features = new GeoJSON().readFeatures(data, {

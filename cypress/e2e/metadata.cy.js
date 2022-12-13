@@ -5,8 +5,8 @@
 
 describe('metadata', () => {
   // beforeEach(() => {
+  //   cy.consent();
   //   cy.visit('');
-  //   cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
   // });
   // describe('of MapboxStyleLayer in ch.sbb.netzkarte', (done) => {
   //   it(`refers to at least one mapbox layer`, () => {

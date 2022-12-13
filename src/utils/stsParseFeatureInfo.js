@@ -1,5 +1,4 @@
 import Feature from 'ol/Feature';
-import trim from 'trim';
 import {
   gttos,
   premium,
@@ -89,7 +88,7 @@ export const parseFeaturesInfos = (infos, tours = []) => {
         );
       } else {
         toursByRoute[routeName] = tours.find(
-          (tour) => tour.title === trim(routeName),
+          (tour) => tour.title === routeName.trim(),
         );
         const clone = feature.clone();
         clone.setProperties({

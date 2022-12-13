@@ -29,8 +29,12 @@ class StopFinder extends Search {
         signal,
       },
     )
-      .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features)
+      .then((response) => {
+        return response.json();
+      })
+      .then((featureCollection) => {
+        return featureCollection?.features || [];
+      })
       .catch(() => {
         return [];
       });
