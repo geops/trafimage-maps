@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.18.0](https://github.com/geops/trafimage-maps/compare/v1.18.0-beta.13...v1.18.0) (2022-12-13)
+
+
+### Bug Fixes
+
+* query bus only after zoom 15 ([ff50e5c](https://github.com/geops/trafimage-maps/commit/ff50e5c2176c81be94f22485ac605069cf36eaf1))
+
 ### [1.17.3](https://github.com/geops/trafimage-maps/compare/v1.17.2...v1.17.3) (2022-11-14)
 
 
