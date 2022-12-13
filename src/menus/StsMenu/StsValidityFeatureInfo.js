@@ -47,7 +47,7 @@ const clearHighlightsSelection = () =>
 const useFetchTours = (select) => {
   const [tours, setTours] = useState(null);
   useEffect(() => {
-    fetch('https://maps.trafimage/sts-static/tours.geojson')
+    fetch('https://maps.trafimage.ch/sts-static/tours.json')
       .then((response) => response.json())
       .then((data) => setTours(data));
     return () => select();

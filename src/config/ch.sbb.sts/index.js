@@ -52,9 +52,9 @@ export const highlights = new MTVectorLayer({
       format: new GeoJSON(),
     }),
     style: (feature) => {
-      if (!feature.get('highlight_url')) {
-        return null;
-      }
+      // if (!feature.get('highlight_url')) {
+      //   return null;
+      // }
       return feature.get('selected')
         ? [
             new Style({
@@ -84,7 +84,7 @@ export const highlights = new MTVectorLayer({
   },
 });
 
-fetch('https://maps.trafimage/sts-static/pois.geojson')
+fetch('https://maps.trafimage.ch/sts-static/pois.geojson')
   .then((response) => response.json())
   .then((data) => {
     const features = new GeoJSON().readFeatures(data, {
