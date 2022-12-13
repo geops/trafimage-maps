@@ -1,61 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { WebSocket, Server } from 'mock-socket';
-import { compileString } from 'sass';
-
-/*
-const bufferMessagee = {
-  source: 'buffer',
-  timestamp: 1668783727177,
-  client_reference: '',
-  content: [
-    {
-      source: 'trajectory',
-      timestamp: 1668783726870,
-      client_reference: '',
-      content: {
-        type: 'Feature',
-        geometry: {
-          type: 'LineString',
-          coordinates: [
-            [957757, 6006871],
-            [957343, 6006954],
-          ],
-        },
-        properties: {
-          bounds: [957343, 6006871, 957757, 6006954],
-          gen_level: null,
-          gen_range: [-32767, 32767],
-          tenant: 'sbb',
-          type: 'bus',
-          time_intervals: [
-            [1668783720000, 0, 0],
-            [1668783720000, 0, 0],
-            [1668783780000, 1, 0],
-            [1668783780000, 1, 0],
-          ],
-          train_id: 'sbb_139634620718104',
-          event_timestamp: 1668781771456,
-          line: {
-            id: 12396459,
-            name: '752',
-            color: null,
-            text_color: null,
-            stroke: null,
-          },
-          timestamp: 1668783726867,
-          state: 'DRIVING',
-          time_since_update: null,
-          has_realtime: false,
-          has_realtime_journey: true,
-          operator_provides_realtime_journey: 'maybe',
-          has_journey: true,
-          route_identifier: '016274.000773.001:752',
-          delay: 0,
-        },
-      },
-    },
-  ],
-};
-*/
 
 describe('ch.sbb.netzkarte', () => {
   beforeEach(() => {
@@ -67,11 +11,32 @@ describe('ch.sbb.netzkarte', () => {
     let fullTrajectoryMessage;
     let stopSequenceMessage;
     let now;
+    let mockServer;
     const coord = [810000, 5900000];
+    const coord2 = [811000, 5901000];
     const trainId = 'foo';
+
+    const visitWithMsg = (url, message) => {
+      cy.visit(url, {
+        onBeforeLoad: (win) => {
+          // Stub out JS WebSocket
+          cy.stub(win, 'WebSocket', (wsUrl) => {
+            return new WebSocket(wsUrl);
+          });
+        },
+      });
+      cy.get('.wkp-menu-header').click();
+      cy.get(
+        ':nth-child(6) > .rs-layer-tree-item > .rs-layer-tree-input > span',
+      ).click();
+      cy.wait(3000).then(() => {
+        mockServer.emit('message', JSON.stringify(message));
+      });
+    };
 
     beforeEach(() => {
       // Create mock server
+      mockServer = new Server('wss://tralis-tracker-api.geops.io/ws');
       now = Date.now();
       bufferMessage = {
         source: 'buffer',
@@ -322,24 +287,12 @@ describe('ch.sbb.netzkarte', () => {
       };
     });
 
-    it('should display the full trajectory on click', () => {
-      const mockServer = new Server('wss://tralis-tracker-api.geops.io/ws');
+    afterEach(() => {
+      mockServer.stop();
+    });
 
-      cy.visit('/ch.sbb.netzkarte', {
-        onBeforeLoad: (win) => {
-          // Stub out JS WebSocket
-          cy.stub(win, 'WebSocket', (url) => {
-            return new WebSocket(url);
-          });
-        },
-      });
-      cy.get('.wkp-menu-header').click();
-      cy.get(
-        ':nth-child(6) > .rs-layer-tree-item > .rs-layer-tree-input > span',
-      ).click();
-      cy.wait(3000).then(() => {
-        mockServer.emit('message', JSON.stringify(bufferMessage));
-      });
+    it('should display the full trajectory on click', () => {
+      visitWithMsg('/ch.sbb.netzkarte', bufferMessage);
 
       // Click on the vehicle
       cy.get('.rs-map').click('center');
@@ -368,22 +321,6 @@ describe('ch.sbb.netzkarte', () => {
         });
       });
 
-      // Test if the canvas has the line and thje selcetd vehicle.
-      // cy.readFile('./main/cypress/downloads/mapset.png', 'base64').then(() => {
-      //   cy.task('comparePng', {
-      //     download: './main/cypress/downloads/mapset.png',
-      //     fixture: './cypress/fixtures/export_red_polygon.png',
-      //   }).then((result) => {
-      //     cy.task(
-      //       'log',
-      //       `mismatch (<0.5 to pass test): ${result.rawMisMatchPercentage}`,
-      //     ).then(() => {
-      //       // Mismatch tolerance of < 0.5 to avoid detecting micro differences in pixels
-      //       expect(result.rawMisMatchPercentage < 0.5).to.equal(true);
-      //     });
-      //   });
-      // });
-
       // Display Tracker menu with stop sequences.
       cy.wait(2000).then(() => {
         mockServer.emit('message', JSON.stringify(stopSequenceMessage));
@@ -404,6 +341,147 @@ describe('ch.sbb.netzkarte', () => {
       });
       cy.contains(`a[href="${operatorUrl}"]`, operator);
       cy.contains(`a[href="${publisherUrl}"]`, publisher);
+    });
+
+    describe('receiving a bus and a train', () => {
+      // One train and one bus
+      const buffer = {
+        source: 'buffer',
+        timestamp: now,
+        client_reference: '',
+        content: [
+          {
+            source: 'trajectory',
+            timestamp: 1668783726870,
+            client_reference: '',
+            content: {
+              type: 'Feature',
+              geometry: {
+                type: 'LineString',
+                coordinates: [coord2, coord2],
+              },
+              properties: {
+                bounds: [0, 0, 30000000, 30000000],
+                gen_level: null,
+                gen_range: [-32767, 32767],
+                tenant: 'sbb',
+                type: 'rail',
+                time_intervals: [
+                  [now - 1000000, 0, 0],
+                  [now - 1000000, 0, 0],
+                  [now + 1000000, 1, 0],
+                  [now + 1000000, 1, 0],
+                ],
+                train_id: `${trainId}rail`,
+                event_timestamp: now,
+                line: {
+                  id: 12396459,
+                  name: '752',
+                  color: null,
+                  text_color: null,
+                  stroke: null,
+                },
+                timestamp: now,
+                state: 'DRIVING',
+                time_since_update: null,
+                has_realtime: false,
+                has_realtime_journey: true,
+                operator_provides_realtime_journey: 'maybe',
+                has_journey: true,
+                route_identifier: '016274.000773.001:752',
+                delay: 0,
+              },
+            },
+          },
+          {
+            source: 'trajectory',
+            timestamp: 1668783726870,
+            client_reference: '',
+            content: {
+              type: 'Feature',
+              geometry: {
+                type: 'LineString',
+                coordinates: [coord, coord],
+              },
+              properties: {
+                bounds: [0, 0, 30000000, 30000000],
+                gen_level: null,
+                gen_range: [-32767, 32767],
+                tenant: 'sbb',
+                type: 'bus',
+                time_intervals: [
+                  [now - 1000000, 0, 0],
+                  [now - 1000000, 0, 0],
+                  [now + 1000000, 1, 0],
+                  [now + 1000000, 1, 0],
+                ],
+                train_id: trainId,
+                event_timestamp: now,
+                line: {
+                  id: 12396459,
+                  name: '752',
+                  color: null,
+                  text_color: null,
+                  stroke: null,
+                },
+                timestamp: now,
+                state: 'DRIVING',
+                time_since_update: null,
+                has_realtime: false,
+                has_realtime_journey: true,
+                operator_provides_realtime_journey: 'maybe',
+                has_journey: true,
+                route_identifier: '016274.000773.001:752',
+                delay: 0,
+              },
+            },
+          },
+        ],
+      };
+
+      it('should not display bus at zoom 13', () => {
+        visitWithMsg('/ch.sbb.netzkarte?z=13', buffer);
+        cy.get('canvas').then((elts) => {
+          const vehicleCanvas = elts[2];
+
+          cy.fixture('noBusAtZoom13.png').then((fixture) => {
+            cy.task('comparePng', {
+              current: vehicleCanvas.toDataURL('image/png'),
+              fixture: `data:image/png;base64,${fixture}`,
+            }).then((result) => {
+              cy.task(
+                'log',
+                `mismatch (<0.5 to pass test): ${result.rawMisMatchPercentage}`,
+              ).then(() => {
+                // Mismatch tolerance of < 0.5 to avoid detecting micro differences in pixels
+                expect(result.rawMisMatchPercentage < 0.5).to.equal(true);
+              });
+            });
+          });
+        });
+      });
+
+      it('should display bus at zoom 14', () => {
+        visitWithMsg('/ch.sbb.netzkarte?z=14', buffer);
+        cy.get('canvas').then((elts) => {
+          const vehicleCanvas = elts[2];
+
+          cy.fixture('busAtZoom14.png').then((fixture) => {
+            cy.task('comparePng', {
+              current: vehicleCanvas.toDataURL('image/png'),
+              fixture: `data:image/png;base64,${fixture}`,
+            }).then((result) => {
+              cy.task(
+                'log',
+                `mismatch (<0.5 to pass test): ${result.rawMisMatchPercentage}`,
+              ).then(() => {
+                // Mismatch tolerance of < 0.5 to avoid detecting micro differences in pixels
+                expect(result.rawMisMatchPercentage < 0.5).to.equal(true);
+              });
+            });
+          });
+        });
+      });
     });
   });
 });
