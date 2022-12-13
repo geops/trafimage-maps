@@ -189,6 +189,9 @@ const theme = createTheme({
         '&$selected svg': {
           color: colors.red,
         },
+        '&.Mui-disabled': {
+          color: '#888',
+        },
       },
     },
     MuiInputBase: {

@@ -366,6 +366,7 @@ class TrafimageMaps extends React.PureComponent {
       //   in the case it uses http in an iframe, Matomo cookies will use SameSite=LAX and will not add cookie to the page from
       //   a 3rd party website, so no need of a consent.
       if (
+        // fake.consent is set in Head component.
         domainConsentId &&
         !disableCookies &&
         isDomainAllowed &&

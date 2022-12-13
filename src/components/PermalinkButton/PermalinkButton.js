@@ -11,6 +11,12 @@ const useStyles = makeStyles(() => ({
     maxWidth: 300,
     paddingRight: 42,
   },
+  button: {
+    padding: '0 15px',
+    color: 'initial',
+    fontSize: 17.63,
+    marginTop: 1,
+  },
 }));
 
 function PermalinkButton({ buttonProps, children, popoverProps }) {
@@ -20,9 +26,15 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
   const ref = useRef();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleClick = useCallback((event) => {
-    setAnchorEl(event.currentTarget);
-  }, []);
+  const handleClick = useCallback(
+    (event) => {
+      setAnchorEl(event.currentTarget);
+      if (buttonProps?.onClick) {
+        buttonProps.onClick();
+      }
+    },
+    [buttonProps],
+  );
 
   const handleClose = useCallback(() => {
     setAnchorEl(null);
@@ -43,17 +55,13 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
         value=""
         component="div"
         selected={!!anchorEl}
+        className={classes.button}
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...buttonProps}
+        onClick={handleClick}
+        title={t('Permalink generieren')}
       >
-        <IconButton
-          title={t('Permalink generieren')}
-          onClick={handleClick}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          {...buttonProps}
-        >
-          <FaLink focusable={false} />
-        </IconButton>
+        <FaLink focusable={false} />
       </ToggleButton>
       {!!anchorEl && (
         <Popover
