@@ -241,7 +241,9 @@ export const buslines = new MapboxStyleLayer({
     !!metadata && metadata['trafimage.filter'] === 'bus',
   visible: false,
   properties: {
-    isQueryable: true,
+    isQueryable: (map) => {
+      return map.getView().getZoom() >= 15;
+    },
     hasInfos: true,
     layerInfoComponent: 'BuslinesLayerInfo',
     popupComponent: 'BusLinePopup',
