@@ -9,6 +9,7 @@ describe('Share', () => {
   let store;
   beforeEach(() => {
     store = global.mockStore({
+      map: {},
       app: {
         map: new Map({ view: new View({}) }),
         activeTopic: {

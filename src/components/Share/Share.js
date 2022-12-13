@@ -15,6 +15,7 @@ import {
   TRACK_SHARE_PERMALINK_ACTION,
   TRACK_SHARE_TW_ACTION,
 } from '../../utils/constants';
+import { generateExtraData } from '../ExportButton/ExportUtils';
 
 const socialShareConfig = [
   {
@@ -88,6 +89,7 @@ ShareLink.propTypes = {
 
 const Share = () => {
   const map = useSelector((state) => state.app.map);
+  const layers = useSelector((state) => state.map.layers);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const { t } = useTranslation();
   const { trackEvent } = useMatomo();
@@ -108,6 +110,7 @@ const Share = () => {
       <CanvasSaveButton
         map={map}
         title={t('Karte als Bild speichern')}
+        extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
           trackEvent({
             category: activeTopic?.key,
