@@ -1,15 +1,9 @@
-import GeoJSON from 'ol/format/GeoJSON';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { Style, Icon } from 'ol/style';
-import { VectorLayer as MTVectorLayer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import { DIREKTVERBINDUNGEN_KEY, SWISS_EXTENT } from '../../utils/constants';
-import poiImage from './img/poi.png';
-import poiImageHL from './img/poi_hl.png';
+import StsPoisLayer from '../../layers/StsPoisLayer';
 
 // const { POIS_URL } = process.env;
 const FILTER_KEY = 'sts.filter';
@@ -43,39 +37,10 @@ const stsDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const highlights = new MTVectorLayer({
+export const highlights = new StsPoisLayer({
   name: 'Highlights',
   key: HIGHLIGHTS_LAYER_KEY,
   visible: true,
-  olLayer: new VectorLayer({
-    source: new VectorSource({
-      format: new GeoJSON(),
-    }),
-    style: (feature) => {
-      // if (!feature.get('highlight_url')) {
-      //   return null;
-      // }
-      return feature.get('selected')
-        ? [
-            new Style({
-              image: new Icon({
-                src: poiImageHL,
-                anchor: [0.5, 41],
-                anchorYUnits: 'pixels',
-              }),
-            }),
-          ]
-        : [
-            new Style({
-              image: new Icon({
-                src: poiImage,
-                anchor: [0.5, 41],
-                anchorYUnits: 'pixels',
-              }),
-            }),
-          ];
-    },
-  }),
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,
@@ -83,16 +48,6 @@ export const highlights = new MTVectorLayer({
     minZoom: 8,
   },
 });
-
-fetch('https://maps.trafimage.ch/sts-static/pois.geojson')
-  .then((response) => response.json())
-  .then((data) => {
-    const features = new GeoJSON().readFeatures(data, {
-      dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857',
-    });
-    highlights.olLayer.getSource().addFeatures(features);
-  });
 
 export const highlightRoutes = new HighlightRoutesLayer({
   name: 'Highlight routes',
