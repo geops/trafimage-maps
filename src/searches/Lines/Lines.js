@@ -111,7 +111,7 @@ class Lines extends Search {
     })
       .then((data) => data.json())
       .then((featureCollection) => {
-        return featureCollection.features;
+        return featureCollection?.features || [];
       })
       .catch(() => {
         return [];
