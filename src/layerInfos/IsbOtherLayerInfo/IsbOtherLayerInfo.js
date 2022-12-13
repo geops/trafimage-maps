@@ -40,7 +40,7 @@ const translations = {
   },
 };
 
-const IsbOtherLayerInfo = ({ properties: layer }) => {
+function IsbOtherLayerInfo({ properties: layer }) {
   const { i18n } = useTranslation();
   const { title, description, dataInfo1, dataInfo2 } =
     translations[i18n.language];
@@ -92,7 +92,7 @@ const IsbOtherLayerInfo = ({ properties: layer }) => {
       </p>
     </div>
   );
-};
+}
 
 IsbOtherLayerInfo.propTypes = propTypes;
 

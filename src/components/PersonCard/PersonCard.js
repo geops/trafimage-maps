@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-const PersonCard = ({
+function PersonCard({
   title,
   name,
   email,
@@ -39,7 +39,7 @@ const PersonCard = ({
   division,
   otherDetails,
   className,
-}) => {
+}) {
   const classes = useStyles();
   return (
     <div
@@ -87,7 +87,7 @@ const PersonCard = ({
       ))}
     </div>
   );
-};
+}
 
 PersonCard.propTypes = {
   name: PropTypes.string.isRequired,

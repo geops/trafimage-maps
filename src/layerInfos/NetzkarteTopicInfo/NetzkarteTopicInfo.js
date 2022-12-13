@@ -8,7 +8,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const NetzkarteTopicInfo = ({ t }) => {
+function NetzkarteTopicInfo({ t }) {
   return (
     <div>
       <p>{`${t('ch.sbb.netzkarte-desc')} ${t(
@@ -24,7 +24,7 @@ const NetzkarteTopicInfo = ({ t }) => {
       </p>
     </div>
   );
-};
+}
 
 NetzkarteTopicInfo.propTypes = propTypes;
 NetzkarteTopicInfo.defaultProps = defaultProps;

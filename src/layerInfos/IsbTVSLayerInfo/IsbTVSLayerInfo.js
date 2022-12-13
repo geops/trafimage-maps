@@ -41,7 +41,7 @@ const translations = {
   },
 };
 
-const IsbTVSLayerInfo = ({ properties: layer }) => {
+function IsbTVSLayerInfo({ properties: layer }) {
   const { i18n } = useTranslation();
   const { title, description, dataInfo1, dataInfo2 } =
     translations[i18n.language];
@@ -96,7 +96,7 @@ const IsbTVSLayerInfo = ({ properties: layer }) => {
       </p>
     </div>
   );
-};
+}
 
 IsbTVSLayerInfo.propTypes = propTypes;
 

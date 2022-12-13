@@ -54,7 +54,7 @@ const comps = {
   ),
 };
 
-const HandicapTopicInfo = () => {
+function HandicapTopicInfo() {
   const { i18n } = useTranslation();
   return (
     <div>
@@ -65,6 +65,6 @@ const HandicapTopicInfo = () => {
       </p>
     </div>
   );
-};
+}
 
 export default React.memo(HandicapTopicInfo);

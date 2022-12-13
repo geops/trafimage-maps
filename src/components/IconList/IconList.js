@@ -5,8 +5,6 @@ import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
 import Button from '../Button';
 import List from '../List';
 
-import './IconList.scss';
-
 const propTypes = {
   disabled: PropTypes.bool,
   options: PropTypes.array.isRequired,

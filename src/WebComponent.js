@@ -223,7 +223,7 @@ const defaultProps = {
 // layers to be able to set it back if the layersVisibility parameter change.
 const initialLayersVisibility = {};
 
-const WebComponent = (props) => {
+function WebComponent(props) {
   const {
     width,
     height,
@@ -367,7 +367,7 @@ const WebComponent = (props) => {
       </div>
     </Styled>
   );
-};
+}
 
 WebComponent.propTypes = propTypes;
 WebComponent.defaultProps = defaultProps;

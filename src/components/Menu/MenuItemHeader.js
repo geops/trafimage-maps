@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import Button from '../Button';
-import './MenuItemHeader.scss';
 
 const propTypes = {
   className: PropTypes.string,
@@ -18,19 +17,21 @@ const defaultProps = {
   icon: null,
 };
 
-const MenuItemHeader = ({ className, title, icon, isOpen, onToggle }) => (
-  <Button
-    className={`${className}${isOpen ? ' open' : ''}`}
-    ariaExpanded={isOpen}
-    onClick={() => onToggle()}
-  >
-    {icon && <div className="wkp-menu-item-header-icon">{icon}</div>}
-    <div className="wkp-menu-item-header-title">{title}</div>
-    <div className="wkp-menu-item-header-toggler">
-      {isOpen ? <FaAngleUp /> : <FaAngleDown />}
-    </div>
-  </Button>
-);
+function MenuItemHeader({ className, title, icon, isOpen, onToggle }) {
+  return (
+    <Button
+      className={`${className}${isOpen ? ' open' : ''}`}
+      ariaExpanded={isOpen}
+      onClick={() => onToggle()}
+    >
+      {icon && <div className="wkp-menu-item-header-icon">{icon}</div>}
+      <div className="wkp-menu-item-header-title">{title}</div>
+      <div className="wkp-menu-item-header-toggler">
+        {isOpen ? <FaAngleUp /> : <FaAngleDown />}
+      </div>
+    </Button>
+  );
+}
 
 MenuItemHeader.propTypes = propTypes;
 MenuItemHeader.defaultProps = defaultProps;

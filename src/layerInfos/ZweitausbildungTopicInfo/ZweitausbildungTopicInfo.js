@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ZweitausbildungTopicInfo = () => {
+function ZweitausbildungTopicInfo() {
   const { t } = useTranslation();
   return (
     <div>
@@ -18,6 +18,6 @@ const ZweitausbildungTopicInfo = () => {
       </p>
     </div>
   );
-};
+}
 
 export default ZweitausbildungTopicInfo;

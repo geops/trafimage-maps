@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
-import { getLayersAsFlatArray } from 'mobility-toolbox-js/common';
+import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
 import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';

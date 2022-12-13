@@ -21,7 +21,7 @@ const defaultProps = {
  * Generic menu use to display feature info.
  * See TrackerMenu for an example of use.
  */
-const FeatureMenu = ({ property, menuItemProps }) => {
+function FeatureMenu({ property, menuItemProps }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const menuOpen = useSelector((state) => state.app.menuOpen);
@@ -84,7 +84,7 @@ const FeatureMenu = ({ property, menuItemProps }) => {
       <FeatureInformation featureInfo={filtered} />
     </MenuItem>
   );
-};
+}
 
 FeatureMenu.propTypes = propTypes;
 FeatureMenu.defaultProps = defaultProps;

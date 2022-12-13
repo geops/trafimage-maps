@@ -7,7 +7,7 @@ const propTypes = {
   t: PropTypes.func.isRequired,
 };
 
-const NetzentwicklungTopicInfo = ({ t }) => {
+function NetzentwicklungTopicInfo({ t }) {
   return (
     <div>
       <p>{t('ch.sbb.netzentwicklung-desc')}</p>
@@ -15,7 +15,7 @@ const NetzentwicklungTopicInfo = ({ t }) => {
       <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
     </div>
   );
-};
+}
 
 NetzentwicklungTopicInfo.propTypes = propTypes;
 export default compose(withTranslation())(NetzentwicklungTopicInfo);

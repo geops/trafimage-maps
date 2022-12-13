@@ -21,7 +21,7 @@ const propTypes = {
   layer: PropTypes.instanceOf(TarifverbundkarteLayer).isRequired,
 };
 
-const TarifverbundkartePopup = ({ feature, layer }) => {
+function TarifverbundkartePopup({ feature, layer }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const properties = feature.getProperties();
@@ -76,7 +76,7 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
       )}
     </div>
   );
-};
+}
 
 TarifverbundkartePopup.propTypes = propTypes;
 

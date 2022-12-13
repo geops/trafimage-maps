@@ -5,8 +5,6 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import ZweitausbildungRoutesHighlightLayer from '../../layers/ZweitausbildungRoutesHighlightLayer';
 
-import './ZweitausbildungRoutesPopup.scss';
-
 const propTypes = {
   layer: PropTypes.instanceOf(ZweitausbildungRoutesHighlightLayer).isRequired,
   feature: PropTypes.instanceOf(Feature).isRequired,

@@ -32,10 +32,10 @@
   @each $family in $paths {
     @font-face {
       font-family: #{$family};
-      src: url('#{$family}.eot');
+      src: url("#{$family}.eot");
       src:
-        url('#{$family}.woff2') format('woff2'),
-        url('#{$family}.woff') format('woff');
+        url("#{$family}.woff2") format("woff2"),
+        url("#{$family}.woff") format("woff");
       font-weight: normal;
       font-style: normal;
     }

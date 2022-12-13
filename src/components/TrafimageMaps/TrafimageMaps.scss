@@ -1,7 +1,7 @@
-@import '../../globals.scss';
+@import "../../globals";
 
 .tm-trafimage-maps {
-  font-family: 'SBBWeb-Roman', Arial, sans-serif;
+  font-family: SBBWeb-Roman, Arial, sans-serif;
   font-size: 14px;
   margin: 0;
   height: 100%;
@@ -29,7 +29,7 @@
   * we force the <b> tag to use the good font.
   */
   b {
-    font-family: 'SBBWeb-Bold', Arial, sans-serif;
+    font-family: SBBWeb-Bold, Arial, sans-serif;
   }
 
   .wkp-selected {
@@ -54,10 +54,8 @@
     position: relative;
 
     *:focus {
-      outline-width: 3px;
-      outline-style: solid;
       outline-offset: 1px;
-      outline-color: #3f83d1;
+      outline: #3f83d1 solid 3px;
     }
 
     &.tm-no-focus *:focus {
@@ -85,11 +83,11 @@
     user-select: none;
 
     .rs-opener {
-      box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 7px rgb(0 0 0 / 40%);
       transition: box-shadow 0.5s ease, 700ms opacity, 1000ms z-index;
 
       &:hover {
-        box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+        box-shadow: 0 0 12px rgb(0 0 0 / 90%);
       }
     }
 
@@ -128,11 +126,11 @@
 
       .rs-base-layer-switcher-close-btn,
       .rs-base-layer-switcher-btn-wrapper {
-        box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 7px rgb(0 0 0 / 40%);
         transition: box-shadow 0.5s ease, 700ms opacity, 1000ms z-index;
 
         &:hover {
-          box-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
+          box-shadow: 0 0 12px rgb(0 0 0 / 90%);
         }
       }
 
@@ -170,12 +168,12 @@
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 7.5%);
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   }
 
   button,
-  div[role='button'] {
+  div[role="button"] {
     cursor: pointer;
   }
 

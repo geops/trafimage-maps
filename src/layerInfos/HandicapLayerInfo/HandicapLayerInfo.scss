@@ -7,11 +7,10 @@
     flex-shrink: 0;
     height: 18px;
     border-radius: 50%;
-    background-color: rgb(246, 136, 38);
-    border: 5px solid rgba(246, 136, 38, 0.4);
+    background-color: rgb(246 136 38);
+    border: 5px solid rgb(246 136 38 / 40%);
     margin: 2px 10px 5px 0;
-    -webkit-background-clip: padding-box; /* for Safari */
-    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+    background-clip: padding-box; /* for Safari, IE9+, Firefox 4+, Opera, Chrome */
   }
 
   img {

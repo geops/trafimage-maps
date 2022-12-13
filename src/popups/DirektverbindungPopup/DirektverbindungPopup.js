@@ -84,7 +84,7 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const DVPopupTitle = ({ feature }) => {
+function DVPopupTitle({ feature }) {
   const classes = useStyles();
   return (
     <div className={classes.titleWrapper}>
@@ -100,9 +100,9 @@ const DVPopupTitle = ({ feature }) => {
       {feature.get('name')}
     </div>
   );
-};
+}
 
-const DirektverbindungPopup = ({ feature, layer }) => {
+function DirektverbindungPopup({ feature, layer }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
 
@@ -180,7 +180,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
       </div>
     </div>
   );
-};
+}
 
 DirektverbindungPopup.renderTitle = (feat) => <DVPopupTitle feature={feat} />;
 

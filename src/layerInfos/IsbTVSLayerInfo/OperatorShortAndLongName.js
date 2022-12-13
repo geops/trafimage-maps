@@ -23,7 +23,7 @@ const propTypes = {
   longName: PropTypes.string.isRequired,
 };
 
-const OperatorShortAndLongName = ({ shortName, longName }) => {
+function OperatorShortAndLongName({ shortName, longName }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -32,7 +32,7 @@ const OperatorShortAndLongName = ({ shortName, longName }) => {
       <span> {t(longName)}</span>
     </div>
   );
-};
+}
 
 OperatorShortAndLongName.propTypes = propTypes;
 

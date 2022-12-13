@@ -14,7 +14,7 @@ const KEYCODE_ENTER = 13;
  * single (radioGroup) TrackerLayers are supported.
  * @private
  */
-const MapAccessibility = ({ layers, map }) => {
+function MapAccessibility({ layers, map }) {
   useEffect(() => {
     const mapTarget = map.getTarget();
     let tabFeature;
@@ -73,7 +73,7 @@ const MapAccessibility = ({ layers, map }) => {
   });
 
   return null;
-};
+}
 
 MapAccessibility.propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,

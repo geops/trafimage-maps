@@ -29,7 +29,7 @@ const propTypes = {
   properties: PropTypes.object.isRequired,
 };
 
-const NetzentwicklungLayerInfo = ({ t, properties }) => {
+function NetzentwicklungLayerInfo({ t, properties }) {
   const netzentwicklungRoleType = properties.get('netzentwicklungRoleType');
   const [regions, setRegions] = useState();
   const classes = useStyles();
@@ -56,7 +56,7 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
         ))}
     </div>
   );
-};
+}
 
 NetzentwicklungLayerInfo.propTypes = propTypes;
 export default NetzentwicklungLayerInfo;

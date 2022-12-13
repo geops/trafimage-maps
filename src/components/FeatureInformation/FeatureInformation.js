@@ -15,8 +15,6 @@ import { setFeatureInfo } from '../../model/app/actions';
 import popups from '../../popups';
 import highlightPointStyle from '../../utils/highlightPointStyle';
 
-import './FeatureInformation.scss';
-
 const getPopupComponent = ({ popupComponent, layer }) => {
   const comp = popupComponent || layer.get('popupComponent');
   return typeof comp === 'string' ? popups[comp] : comp;
@@ -27,7 +25,7 @@ const highlightLayer = new VectorLayer({
 });
 highlightLayer.setStyle(highlightPointStyle);
 
-const FeatureInformation = ({ featureInfo }) => {
+function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
@@ -324,7 +322,7 @@ const FeatureInformation = ({ featureInfo }) => {
       </React.Suspense>
     </div>
   );
-};
+}
 
 FeatureInformation.propTypes = {
   featureInfo: PropTypes.array.isRequired,

@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => {
  *  This component fits the official design of SBB,
  *  see https://angular.app.sbb.ch/angular/components/select/examples
  */
-const Select = (props) => {
+function Select(props) {
   const { MenuProps } = props;
   const classes = useStyles();
   const isAnchorTop = MenuProps?.anchorOrigin?.vertical === 'top';
@@ -78,7 +78,7 @@ const Select = (props) => {
       }}
     />
   );
-};
+}
 
 Select.propTypes = {
   MenuProps: propTypes.shape({

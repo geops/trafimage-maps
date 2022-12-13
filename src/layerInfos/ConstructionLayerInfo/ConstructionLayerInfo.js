@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 
-import './ConstructionLayerInfo.scss';
-
 const propTypes = {
   t: PropTypes.func.isRequired,
   properties: PropTypes.object.isRequired,
@@ -12,7 +10,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const ConstructionLayerInfo = ({ t, properties, staticFilesUrl }) => {
+function ConstructionLayerInfo({ t, properties, staticFilesUrl }) {
   const config = properties.get('construction');
   const filename = `${config.art}_${config.ort}`.replace(
     /[^A-Z,^0-9,-_]/gi,
@@ -29,7 +27,7 @@ const ConstructionLayerInfo = ({ t, properties, staticFilesUrl }) => {
       {t(`${properties.key}-desc`)}
     </div>
   );
-};
+}
 
 ConstructionLayerInfo.propTypes = propTypes;
 ConstructionLayerInfo.defaultProps = defaultProps;

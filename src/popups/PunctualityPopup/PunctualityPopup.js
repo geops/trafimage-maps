@@ -5,7 +5,7 @@ import Feature from 'ol/Feature';
 import RouteSchedule from 'react-spatial/components/RouteSchedule';
 import TralisLayer from '../../layers/TralisLayer';
 
-const PunctualityPopup = ({ feature, layer }) => {
+function PunctualityPopup({ feature, layer }) {
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
   const [lineInfos, setLineInfos] = useState(null);
@@ -63,7 +63,7 @@ const PunctualityPopup = ({ feature, layer }) => {
       }}
     />
   );
-};
+}
 
 PunctualityPopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

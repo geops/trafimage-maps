@@ -10,7 +10,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const TarifverbundkarteTopicInfo = ({ language, t, staticFilesUrl }) => {
+function TarifverbundkarteTopicInfo({ language, t, staticFilesUrl }) {
   const img = (
     <img
       src={`${staticFilesUrl}/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png`}
@@ -77,7 +77,7 @@ const TarifverbundkarteTopicInfo = ({ language, t, staticFilesUrl }) => {
   };
 
   return comps[language];
-};
+}
 
 TarifverbundkarteTopicInfo.propTypes = propTypes;
 TarifverbundkarteTopicInfo.defaultProps = defaultProps;

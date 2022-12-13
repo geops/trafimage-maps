@@ -24,7 +24,7 @@ const propTypes = {
   properties: PropTypes.instanceOf(Layer).isRequired,
 };
 
-const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
+function DirektVerbindungenLayerInfo({ properties: layer }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const legend = layer.children.reverse().map((child) => (
@@ -130,7 +130,7 @@ const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
       )}
     </>
   );
-};
+}
 
 DirektVerbindungenLayerInfo.propTypes = propTypes;
 

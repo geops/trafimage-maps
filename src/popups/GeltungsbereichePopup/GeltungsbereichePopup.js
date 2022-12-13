@@ -24,7 +24,7 @@ const defaultProps = {};
 
 let geltungsbereicheGlobal;
 
-const GeltungsbereichePopup = ({ feature, layer }) => {
+function GeltungsbereichePopup({ feature, layer }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const geltungsbereiche = JSON.parse(feature.get('geltungsbereiche'));
@@ -82,7 +82,7 @@ const GeltungsbereichePopup = ({ feature, layer }) => {
         t('Keine Geltungsbereiche gefunden')}
     </div>
   );
-};
+}
 
 GeltungsbereichePopup.propTypes = propTypes;
 GeltungsbereichePopup.defaultProps = defaultProps;

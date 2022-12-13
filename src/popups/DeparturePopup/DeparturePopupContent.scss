@@ -1,4 +1,4 @@
-@import '../../globals.scss';
+@import "../../globals";
 
 .tm-departure-popup-body {
   .tm-departure-input {
@@ -100,11 +100,7 @@
 }
 
 .tm-load-spinner {
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  -webkit-animation: spin 2s infinite linear;
-  -moz-animation: spin 2s infinite linear;
-  -o-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
   font-size: 20px;
   color: $brand-primary;

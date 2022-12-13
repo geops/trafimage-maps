@@ -5,8 +5,6 @@ import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import ZweitausbildungPoisLayer from '../../layers/ZweitausbildungPoisLayer';
 
-import './ZweitausbildungPoisPopup.scss';
-
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
   layer: PropTypes.oneOfType([

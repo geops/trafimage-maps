@@ -50,7 +50,7 @@ const comps = {
   ),
 };
 
-const DirektVerbindungenTagLayerInfo = ({ t, language, properties }) => {
+function DirektVerbindungenTagLayerInfo({ t, language, properties }) {
   const classes = useStyles();
   return (
     <div>
@@ -64,7 +64,7 @@ const DirektVerbindungenTagLayerInfo = ({ t, language, properties }) => {
       </div>
     </div>
   );
-};
+}
 
 DirektVerbindungenTagLayerInfo.propTypes = propTypes;
 

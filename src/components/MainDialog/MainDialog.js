@@ -11,7 +11,7 @@ import DrawRemoveDialog, {
 import Dialog from '../Dialog';
 import LegalLines from '../LegalLines';
 
-const MainDialog = () => {
+function MainDialog() {
   const { t } = useTranslation();
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
@@ -52,6 +52,6 @@ const MainDialog = () => {
   }
 
   return null;
-};
+}
 
 export default MainDialog;

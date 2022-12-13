@@ -8,9 +8,8 @@ import { Link } from '@material-ui/core';
 import ProjectionSelect from '../ProjectionSelect';
 import coordinateHelper from '../../utils/coordinateHelper';
 import { setDialogVisible } from '../../model/app/actions';
-import './Footer.scss';
 
-const Footer = () => {
+function Footer() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
@@ -105,6 +104,6 @@ const Footer = () => {
       </div>
     </div>
   );
-};
+}
 
 export default React.memo(Footer);

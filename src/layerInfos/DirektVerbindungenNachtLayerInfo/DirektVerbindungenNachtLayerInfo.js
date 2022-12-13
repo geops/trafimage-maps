@@ -50,7 +50,7 @@ const comps = {
   ),
 };
 
-const DirektVerbindungenNachtLayerInfo = ({ t, language, properties }) => {
+function DirektVerbindungenNachtLayerInfo({ t, language, properties }) {
   const classes = useStyles();
   return (
     <div>
@@ -64,7 +64,7 @@ const DirektVerbindungenNachtLayerInfo = ({ t, language, properties }) => {
       </div>
     </div>
   );
-};
+}
 
 DirektVerbindungenNachtLayerInfo.propTypes = propTypes;
 

@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withTranslation } from 'react-i18next';
 import Autocomplete from '../../components/Autocomplete';
-
 import { ReactComponent as SearchIcon } from '../../img/search.svg';
-
-import './DestinationInput.scss';
 
 const propTypes = {
   destination: PropTypes.string,

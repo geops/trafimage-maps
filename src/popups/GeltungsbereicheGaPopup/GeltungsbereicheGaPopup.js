@@ -55,7 +55,7 @@ const translations = {
   },
 };
 
-const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
+function GeltungsbereichePopup({ feature: features, layer: layers }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
@@ -170,7 +170,7 @@ const GeltungsbereichePopup = ({ feature: features, layer: layers }) => {
       ) : null}
     </div>
   );
-};
+}
 
 GeltungsbereichePopup.propTypes = propTypes;
 

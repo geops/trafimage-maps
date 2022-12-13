@@ -27,7 +27,7 @@ const propTypes = {
   ).isRequired,
 };
 
-const ProjectionSelect = ({ projections }) => {
+function ProjectionSelect({ projections }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -79,7 +79,7 @@ const ProjectionSelect = ({ projections }) => {
       })}
     </Select>
   );
-};
+}
 
 ProjectionSelect.propTypes = propTypes;
 

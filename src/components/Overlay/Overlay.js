@@ -81,7 +81,7 @@ const propTypes = {
   elements: PropTypes.shape().isRequired,
 };
 
-const Overlay = ({ elements }) => {
+function Overlay({ elements }) {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
 
@@ -168,7 +168,7 @@ const Overlay = ({ elements }) => {
       </Drawer>
     </div>
   );
-};
+}
 
 Overlay.propTypes = propTypes;
 export default Overlay;

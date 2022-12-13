@@ -22,7 +22,7 @@ describe('PermalinkInput', () => {
     beforeEach(() => {
       getShortenedUrl = jest.fn((val) => {
         return new Promise((resolve) => {
-          return resolve(val);
+          resolve(val);
         });
       });
     });

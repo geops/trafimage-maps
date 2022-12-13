@@ -26,10 +26,10 @@ const desc = (lng, date) => {
     and/or enhance comfort.`;
 };
 
-const ConstructionFertigstellungLayerInfo = ({ language, properties }) => {
+function ConstructionFertigstellungLayerInfo({ language, properties }) {
   const key = properties.get('date');
   return desc(language, key);
-};
+}
 
 ConstructionFertigstellungLayerInfo.propTypes = propTypes;
 

@@ -14,7 +14,6 @@ import { ReactComponent as ZoomIn } from '../../img/plus.svg';
 import Geolocate from '../../img/Geolocate';
 import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
 import geolocateMarker from '../../img/geolocate_marker.svg';
-import './MapControls.scss';
 
 const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
 
@@ -34,7 +33,7 @@ const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
 };
 
-const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
+function MapControls({ geolocation, zoomSlider, fitExtent }) {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
@@ -200,7 +199,7 @@ const MapControls = ({ geolocation, zoomSlider, fitExtent }) => {
       )}
     </div>
   );
-};
+}
 
 MapControls.propTypes = propTypes;
 MapControls.defaultProps = defaultProps;

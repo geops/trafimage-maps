@@ -5,13 +5,9 @@ import { compose } from 'redux';
 import { MdLoop } from 'react-icons/md';
 import { withTranslation } from 'react-i18next';
 import qs from 'query-string';
-
 import DestinationInput from './DestinationInput';
-
 import { ReactComponent as SBBClock } from '../../img/clock_10_large.svg';
 import { setDeparturesFilter } from '../../model/app/actions';
-
-import './DeparturePopupContent.scss';
 
 const DESTINATION_FILTER = 'destination';
 

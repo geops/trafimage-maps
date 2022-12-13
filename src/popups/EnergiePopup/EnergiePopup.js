@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
+export function EnergiePopupSubtitle({ kategorie, unterkategorie, label }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return kategorie ? (
@@ -88,7 +88,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
       )}
     </div>
   ) : null;
-};
+}
 
 EnergiePopupSubtitle.propTypes = {
   kategorie: PropTypes.string,
@@ -102,7 +102,7 @@ EnergiePopupSubtitle.defaultProps = {
   label: undefined,
 };
 
-const EnergiePopup = ({ feature }) => {
+function EnergiePopup({ feature }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -232,7 +232,7 @@ const EnergiePopup = ({ feature }) => {
       )}
     </div>
   );
-};
+}
 
 EnergiePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

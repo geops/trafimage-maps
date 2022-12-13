@@ -32,7 +32,7 @@ const infos = {
   },
 };
 
-const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
+function GeltungsbereicheLayerInfo({ properties: layer }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const cardsScope = layer.get('cardsScope') || 'ga';
@@ -132,28 +132,25 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
               </tr>
             </tbody>
           </table>
-          <>
-            <Typography paragraph>
-              {products.map((p, idx, arr) => (
-                <b
-                  key={p}
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{
-                    __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
-                  }}
-                />
-              ))}
-              {productsRemark ? (
-                <b>
-                  ,{' '}
-                  <span className={classes.lowerCase}>{t(productsRemark)}</span>
-                </b>
-              ) : (
-                ''
-              )}
-              : {t(reduced)}
-            </Typography>
-          </>
+          <Typography paragraph>
+            {products.map((p, idx, arr) => (
+              <b
+                key={p}
+                // eslint-disable-next-line react/no-danger
+                dangerouslySetInnerHTML={{
+                  __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
+                }}
+              />
+            ))}
+            {productsRemark ? (
+              <b>
+                , <span className={classes.lowerCase}>{t(productsRemark)}</span>
+              </b>
+            ) : (
+              ''
+            )}
+            : {t(reduced)}
+          </Typography>
           <br />
           <br />
         </>
@@ -184,7 +181,7 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
       <br />
     </div>
   );
-};
+}
 
 GeltungsbereicheLayerInfo.propTypes = {
   properties: PropTypes.instanceOf(Layer).isRequired,

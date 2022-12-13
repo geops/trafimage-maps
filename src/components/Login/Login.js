@@ -4,9 +4,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as SBBUser } from '../../img/sbb/user_92_large.svg';
 
-import './Login.scss';
-
-const Login = ({ loginUrl }) => {
+function Login({ loginUrl }) {
   const { t } = useTranslation();
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);
@@ -39,7 +37,7 @@ const Login = ({ loginUrl }) => {
       <span className="wkp-login-text">{login}</span>
     </div>
   );
-};
+}
 
 Login.propTypes = {
   loginUrl: PropTypes.string,

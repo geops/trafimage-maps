@@ -83,7 +83,7 @@ const comps = {
   ),
 };
 
-const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
+function PassagierFrequenzenLayerInfo({ properties: layer }) {
   const { i18n } = useTranslation();
   return (
     <div>
@@ -94,7 +94,7 @@ const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
       </p>
     </div>
   );
-};
+}
 
 PassagierFrequenzenLayerInfo.propTypes = {
   properties: PropTypes.instanceOf(Layer),

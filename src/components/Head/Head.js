@@ -29,22 +29,21 @@ function Head({ topics, displayConsent, domainConsentId }) {
   }
 
   return (
-    <>
-      <Helmet>
-        <script
-          type="text/javascript"
-          src={`https://cdn.cookielaw.org/consent/${domainConsentId}/OtAutoBlock.js`}
-        />
-        <script
-          data-cy="consent-script"
-          src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
-          type="text/javascript"
-          charset="UTF-8"
-          data-domain-script={domainConsentId}
-          data-language={`${language}-ch`}
-        />
-      </Helmet>
-    </>
+    <Helmet>
+      <script
+        type="text/javascript"
+        src={`https://cdn.cookielaw.org/consent/${domainConsentId}/OtAutoBlock.js`}
+      />
+      <script
+        data-cy="consent-script"
+        src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"
+        type="text/javascript"
+        // eslint-disable-next-line
+        charset="UTF-8"
+        data-domain-script={domainConsentId}
+        data-language={`${language}-ch`}
+      />
+    </Helmet>
   );
 }
 

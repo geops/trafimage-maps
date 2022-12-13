@@ -5,12 +5,12 @@
 }
 
 /* Hide WebComponent header section in main page */
-[data-testid='WebComponent-container'] header {
+[data-testid="WebComponent-container"] header {
   display: none;
 }
 
 /* Hide WebComponent section in left menu */
-a[href='/#/Web%20component?id=section-trafimage-maps'] + ul {
+a[href="/#/Web%20component?id=section-trafimage-maps"] + ul {
   display: none;
 }
 
@@ -57,7 +57,7 @@ iframe {
 
 iframe,
 .tm-trafimage-maps {
-  border: 1px solid rgb(232, 232, 232);
+  border: 1px solid rgb(232 232 232);
   border-radius: 3px;
 }
 

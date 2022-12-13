@@ -16,7 +16,7 @@ const defaultProps = {};
 
 let returnToNetzkarte = false;
 
-const DeparturePopup = ({ feature, coordinate }) => {
+function DeparturePopup({ feature, coordinate }) {
   const dispatch = useDispatch();
   const layers = useSelector((state) => state.map.layers);
   const platform = feature.get('platform');
@@ -48,7 +48,7 @@ const DeparturePopup = ({ feature, coordinate }) => {
   }, []);
 
   return <DeparturePopupContent uic={uic} platform={platform} showTitle />;
-};
+}
 
 DeparturePopup.propTypes = propTypes;
 DeparturePopup.defaultProps = defaultProps;

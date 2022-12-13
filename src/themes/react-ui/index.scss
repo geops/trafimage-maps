@@ -1,11 +1,11 @@
 /**
 * This file load the default theme, for all the components.
 */
-@import './variables.scss';
-@import './mixins.scss';
-@import './components.scss';
+@import url("./variables");
+@import url("./mixins");
+@import url("./components");
 
-[role='button']:not([disable]),
+[role="button"]:not([disable]),
 button:not([disable]),
 a:not([disable]) {
   cursor: pointer;

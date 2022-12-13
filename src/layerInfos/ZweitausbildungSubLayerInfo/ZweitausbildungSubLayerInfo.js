@@ -24,7 +24,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ZweitausbildungSubLayerInfo = ({ properties, staticFilesUrl }) => {
+function ZweitausbildungSubLayerInfo({ properties, staticFilesUrl }) {
   const { t } = useTranslation();
   const { infos } = properties.get('zweitausbildung');
   const { title, legend } = infos;
@@ -47,7 +47,7 @@ const ZweitausbildungSubLayerInfo = ({ properties, staticFilesUrl }) => {
       </div>
     </div>
   );
-};
+}
 
 ZweitausbildungSubLayerInfo.propTypes = propTypes;
 

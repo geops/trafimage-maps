@@ -8,7 +8,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const InterventionTopicInfo = ({ t }) => {
+function InterventionTopicInfo({ t }) {
   return (
     <div>
       <p>{t('ch.sbb.intervention-desc')}</p>
@@ -20,7 +20,7 @@ const InterventionTopicInfo = ({ t }) => {
       </p>
     </div>
   );
-};
+}
 
 InterventionTopicInfo.propTypes = propTypes;
 InterventionTopicInfo.defaultProps = defaultProps;

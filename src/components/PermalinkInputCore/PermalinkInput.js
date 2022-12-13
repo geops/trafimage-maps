@@ -55,7 +55,7 @@ const defaultProps = {
   button: <MdContentCopy focusable={false} />,
   getShortenedUrl: (val) => {
     return new Promise((resolve) => {
-      return resolve(val);
+      resolve(val);
     });
   },
 };

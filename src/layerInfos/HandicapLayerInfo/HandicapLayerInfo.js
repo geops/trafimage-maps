@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 
-import './HandicapLayerInfo.scss';
-
 const propTypes = {
   t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
@@ -72,7 +70,7 @@ const descriptions = {
   },
 };
 
-const HandicapLayerInfo = ({ t, properties, language, staticFilesUrl }) => {
+function HandicapLayerInfo({ t, properties, language, staticFilesUrl }) {
   const handicapType = properties.get('handicapType');
 
   const name = t(names[handicapType]);
@@ -102,7 +100,7 @@ const HandicapLayerInfo = ({ t, properties, language, staticFilesUrl }) => {
       </div>
     </div>
   );
-};
+}
 
 HandicapLayerInfo.propTypes = propTypes;
 HandicapLayerInfo.defaultProps = defaultProps;

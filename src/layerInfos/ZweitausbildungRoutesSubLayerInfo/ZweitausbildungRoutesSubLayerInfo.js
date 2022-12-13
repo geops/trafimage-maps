@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ZweitausbildungRoutesSubLayerInfo = ({ properties, staticFilesUrl }) => {
+function ZweitausbildungRoutesSubLayerInfo({ properties, staticFilesUrl }) {
   const { t } = useTranslation();
   const { infos } = properties.get('zweitausbildung');
   const { title, desc, legend } = infos;
@@ -35,7 +35,7 @@ const ZweitausbildungRoutesSubLayerInfo = ({ properties, staticFilesUrl }) => {
       </div>
     </div>
   );
-};
+}
 
 ZweitausbildungRoutesSubLayerInfo.propTypes = propTypes;
 

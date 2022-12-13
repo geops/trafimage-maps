@@ -48,7 +48,7 @@ const renderConf = (conf, t, lang, appBaseUrl) => (
   </div>
 );
 
-const Share = () => {
+function Share() {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);
   const map = useSelector((state) => state.app.map);
@@ -67,6 +67,6 @@ const Share = () => {
       {renderConf(config[2], t, language, appBaseUrl)}
     </div>
   );
-};
+}
 
 export default React.memo(Share);

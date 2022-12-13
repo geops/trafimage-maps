@@ -25,13 +25,15 @@ module.exports = function override(config, env) {
 const overrideModule = (module) => {
   // We override css and scss rules to generate a string css instead of an object.
   // See the first <style> tag in the web-component.
-  const ruleIndex = 1;
+  const ruleIndex = 0;
   const cssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.css'.match(rule.test),
   );
+
   const scssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.scss'.match(rule.test),
   );
+
   if (cssRuleIndex !== -1) {
     module.rules[ruleIndex].oneOf[cssRuleIndex].use[0] = {
       loader: 'to-string-loader',
@@ -84,15 +86,9 @@ const overrideOptimization = (optimization, env) => {
   };
 };
 
-const overridePlugins = (plugins, env) => {
-  plugins[0].options.inject = 'head';
-
-  /* plugins.push(
-    new EventHooksPlugin({
-      done: new PromiseTask(() => copyBundleScript(env)),
-    }),
-  ); */
-
+const overridePlugins = (plugins) => {
+  // HtmlWebpackPlugin
+  plugins[0].userOptions.inject = 'head';
   return plugins;
 };
 

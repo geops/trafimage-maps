@@ -176,16 +176,14 @@ function ExportButton({
           setLoading(false);
         }}
       >
-        <>
-          {isLoading ? (
-            <span className={classes.loading}>
-              <Loader />
-              {t('Export läuft...')}
-            </span>
-          ) : (
-            children
-          )}
-        </>
+        {isLoading ? (
+          <span className={classes.loading}>
+            <Loader />
+            {t('Export läuft...')}
+          </span>
+        ) : (
+          children
+        )}
       </CanvasSaveButton>
     </div>
   );

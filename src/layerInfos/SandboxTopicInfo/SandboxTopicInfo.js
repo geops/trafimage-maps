@@ -35,7 +35,7 @@ const propTypes = {
   language: PropTypes.string.isRequired,
 };
 
-const SandboxTopicInfo = ({ language }) => {
+function SandboxTopicInfo({ language }) {
   return (
     <div>
       <p>{translations[language]['ch.sbb.netzkarte.sandbox-desc']}</p>
@@ -52,7 +52,7 @@ const SandboxTopicInfo = ({ language }) => {
       </p>
     </div>
   );
-};
+}
 
 SandboxTopicInfo.propTypes = propTypes;
 

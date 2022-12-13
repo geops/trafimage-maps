@@ -8,8 +8,6 @@ import { IconButton, Typography } from '@material-ui/core';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import SearchToggle from './SearchToggle';
 
-import './Search.scss';
-
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');

@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-export const BeleuchtungLegendeRow = ({ lightClass }) => {
+export function BeleuchtungLegendeRow({ lightClass }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
@@ -47,7 +47,7 @@ export const BeleuchtungLegendeRow = ({ lightClass }) => {
       </div>
     </div>
   );
-};
+}
 
 BeleuchtungLegendeRow.propTypes = {
   lightClass: PropTypes.string.isRequired,

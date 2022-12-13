@@ -57,7 +57,7 @@ const isGbFilter = (filter) => {
   );
 };
 
-const GeltungsbereicheMenuFilter = ({ topic }) => {
+function GeltungsbereicheMenuFilter({ topic }) {
   const { t } = useTranslation();
   const apiKey = useSelector((state) => state.app.apiKey);
   const [filterValue, setFilterValue] = useState(nullOption);
@@ -68,7 +68,7 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
   });
 
   useEffect(() => {
-    const { mbMap } = layers[0]?.mapboxLayer;
+    const { mbMap } = layers[0]?.mapboxLayer || {};
     if (mbMap) {
       // Update current filter value in dropdown on mount by getting the current gb filter from the stylelayer
       const updateFilter = (mbStyle) => {
@@ -198,7 +198,7 @@ const GeltungsbereicheMenuFilter = ({ topic }) => {
       </FormControl>
     </div>
   );
-};
+}
 
 const propTypes = {
   topic: PropTypes.shape().isRequired,

@@ -1,4 +1,4 @@
-@import '~ol/ol.css';
+@import url("~ol/ol.css");
 
 .ol-scale-line {
   background: none;
@@ -23,18 +23,18 @@ $bf-outline: 2px solid black !important;
   @font-face {
     font-family: #{$fontFamily};
     src:
-      url('#{$path}.woff') format('woff'),
-      url('#{$path}.woff2') format('woff2');
+      url("#{$path}.woff") format("woff"),
+      url("#{$path}.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
   }
 }
 
 @include loadFont(
-  'SBBWeb-Roman',
-  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman'
+  "SBBWeb-Roman",
+  "https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Roman"
 );
 @include loadFont(
-  'SBBWeb-Bold',
-  'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
+  "SBBWeb-Bold",
+  "https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold"
 );

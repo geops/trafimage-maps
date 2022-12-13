@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LanguageSelect = () => {
+function LanguageSelect() {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -106,6 +106,6 @@ const LanguageSelect = () => {
       </Select>
     </div>
   );
-};
+}
 
 export default React.memo(LanguageSelect);

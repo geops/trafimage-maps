@@ -9,7 +9,7 @@ import Button from '../Button';
 import { ReactComponent as MenuOpenImg } from '../../img/sbb/040_hamburgermenu_102_36.svg';
 import { ReactComponent as MenuClosedImg } from '../../img/sbb/040_schliessen_104_36.svg';
 
-const TopicsMenuHeader = ({ isOpen, onToggle }) => {
+function TopicsMenuHeader({ isOpen, onToggle }) {
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
   const [forceRender, setForceRender] = useState(1);
@@ -74,7 +74,7 @@ const TopicsMenuHeader = ({ isOpen, onToggle }) => {
       </div>
     </Button>
   );
-};
+}
 
 TopicsMenuHeader.propTypes = {
   onToggle: PropTypes.func,

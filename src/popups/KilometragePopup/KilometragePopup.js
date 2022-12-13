@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const KilometragePopup = ({ feature, t }) => {
+function KilometragePopup({ feature, t }) {
   const classes = useStyles();
   const { line_number: lineNumber, kilometration } = feature.getProperties();
   return (
@@ -27,7 +27,7 @@ const KilometragePopup = ({ feature, t }) => {
       <div>{`${t('Kilometer')}: ${Number(kilometration).toFixed(2)}`}</div>
     </div>
   );
-};
+}
 
 KilometragePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

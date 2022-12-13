@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 
-import './MapsGeoAdminLayerInfo.scss';
-
 const propTypes = {
   language: PropTypes.string.isRequired,
   properties: PropTypes.object.isRequired,
@@ -62,7 +60,7 @@ const footer = {
   ),
 };
 
-const MapsGeoAdminLayerInfo = ({ language, t, properties }) => {
+function MapsGeoAdminLayerInfo({ language, t, properties }) {
   const [legendHtml, setLegendHtml] = useState(null);
 
   useEffect(() => {
@@ -107,7 +105,7 @@ const MapsGeoAdminLayerInfo = ({ language, t, properties }) => {
       </div>
     </div>
   );
-};
+}
 
 MapsGeoAdminLayerInfo.propTypes = propTypes;
 
