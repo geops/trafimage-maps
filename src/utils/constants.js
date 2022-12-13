@@ -16,6 +16,9 @@ export const TRACK_SHARE_DL_ACTION = 'clickShareDownload';
 export const TRACK_SHARE_FB_ACTION = 'clickShareFacebook';
 export const TRACK_SHARE_TW_ACTION = 'clickShareTwitter';
 
+// Direktverbindungen
+export const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
+
 export const energieleitungenColorMapping = {
   los1: '#12919a',
   los2: '#da1720',
@@ -30,3 +33,5 @@ export const energieleitungenColorMapping = {
   los11: '#a3005b',
   ausserhalb: 'black',
 };
+
+export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];

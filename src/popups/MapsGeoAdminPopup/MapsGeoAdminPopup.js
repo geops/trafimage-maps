@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useTranslation } from 'react-i18next';
+import { getId } from '../../utils/removeDuplicateFeatures';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -10,7 +11,7 @@ const propTypes = {
 
 function MapsGeoAdminPopup({ feature }) {
   const [popupHtml, setPopupHtml] = useState(null);
-  const featureId = feature.getId();
+  const featureId = getId(feature);
   const layer = feature.get('layer');
   const { i18n } = useTranslation();
 

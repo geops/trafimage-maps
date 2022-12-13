@@ -22,7 +22,6 @@ import NoMouseWheelWarning from '../NoMouseWheelWarning';
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
-  maxZoom: PropTypes.number,
 
   // mapStateToProps
   featureInfo: PropTypes.arrayOf(PropTypes.shape()),
@@ -35,6 +34,9 @@ const propTypes = {
   resolution: PropTypes.number,
   zoom: PropTypes.number,
   showPopups: PropTypes.bool,
+  maxZoom: PropTypes.number,
+  minZoom: PropTypes.number,
+
   // mapDispatchToProps
   dispatchSetCenter: PropTypes.func.isRequired,
   dispatchSetResolution: PropTypes.func.isRequired,
@@ -56,6 +58,7 @@ const defaultProps = {
   resolution: undefined,
   zoom: 9,
   maxZoom: 20,
+  minZoom: 2,
   dispatchHtmlEvent: () => {},
   showPopups: true,
 };
@@ -139,7 +142,7 @@ class Map extends PureComponent {
     if (
       touchOnly(evt) ||
       !showPopups ||
-      !activeTopic?.elements?.popup ||
+      (!activeTopic?.elements?.popup && !activeTopic.enableFeatureClick) ||
       map.getView().getInteracting() ||
       map.getView().getAnimating()
     ) {
@@ -177,15 +180,22 @@ class Map extends PureComponent {
 
         map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
 
-        const isClickInfoOpen =
+        const shouldNotSetInfoOnHover =
           featureInfo.length &&
-          featureInfo.every(
-            ({ layer }) =>
-              layer.get('popupComponent') && !layer.get('showPopupOnHover'),
+          featureInfo.every(({ layer }) =>
+            layer.get('disableSetFeatureInfoOnHover'),
           );
 
+        const clickInfoOpen =
+          featureInfo.length &&
+          featureInfo.every(({ layer }) => {
+            return (
+              layer.get('popupComponent') && !layer.get('showPopupOnHover')
+            );
+          });
+
         // don't continue if there's a popup that was opened by click
-        if (!isClickInfoOpen) {
+        if (!clickInfoOpen && !shouldNotSetInfoOnHover) {
           infos = infos
             .filter(
               ({ layer }) =>
@@ -222,7 +232,10 @@ class Map extends PureComponent {
     } = this.props;
 
     // If there is no popup to display just ignore the click event.
-    if (!showPopups || !activeTopic?.elements?.popup) {
+    if (
+      !showPopups ||
+      (!activeTopic?.elements?.popup && !activeTopic.enableFeatureClick)
+    ) {
       return;
     }
 
@@ -241,7 +254,8 @@ class Map extends PureComponent {
         // Display only info of layers with a popup defined.
         let infos = featureInfos.reverse().filter(({ layer }) => {
           const allow =
-            layer.get('popupComponent') && !layer.get('showPopupOnHover');
+            (layer.get('popupComponent') && !layer.get('showPopupOnHover')) ||
+            activeTopic.enableFeatureClick;
           if (hasPriorityLayer) {
             // Clear the highlight style when there is priority layers
             if (layer.highlight && !layer.get('priorityFeatureInfo')) {
@@ -304,12 +318,14 @@ class Map extends PureComponent {
       center,
       zoom,
       maxZoom,
+      minZoom,
       layers,
       map,
       resolution,
       maxExtent,
       extent,
       t,
+      activeTopic,
     } = this.props;
 
     return (
@@ -325,7 +341,9 @@ class Map extends PureComponent {
           onMapMoved={(evt) => this.onMapMoved(evt)}
           viewOptions={{
             maxZoom,
+            minZoom,
             extent: maxExtent,
+            constrainOnlyCenter: activeTopic.constrainOnlyCenter,
           }}
           tabIndex={0}
         />
@@ -349,6 +367,8 @@ const mapStateToProps = (state) => ({
   resolution: state.map.resolution,
   zoom: state.map.zoom,
   maxExtent: state.map.maxExtent,
+  maxZoom: state.map.maxZoom,
+  minZoom: state.map.minZoom,
   showPopups: state.app.showPopups,
   activeTopic: state.app.activeTopic,
 });

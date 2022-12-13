@@ -6,8 +6,14 @@ import i18next from 'i18next';
 import { withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import { Layer } from 'mobility-toolbox-js/ol';
+import { unByKey } from 'ol/Observable';
 import LayerService from '../../utils/LayerService';
-import { setLayers } from '../../model/map/actions';
+import {
+  setLayers,
+  setMaxZoom,
+  setMinZoom,
+  setMaxExtent,
+} from '../../model/map/actions';
 import {
   setActiveTopic,
   setTopics,
@@ -52,6 +58,9 @@ const propTypes = {
   // dispatchSetTopics: PropTypes.func.isRequired,
   dispatchSetFeatureInfo: PropTypes.func.isRequired,
   dispatchSetSearchService: PropTypes.func.isRequired,
+  dispatchSetMaxZoom: PropTypes.func.isRequired,
+  dispatchSetMinZoom: PropTypes.func.isRequired,
+  dispatchSetMaxExtent: PropTypes.func.isRequired,
 
   t: PropTypes.func.isRequired,
 };
@@ -74,6 +83,11 @@ const defaultProps = {
 };
 
 class TopicLoader extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.updateMapLimits = this.updateMapLimits.bind(this);
+  }
+
   componentDidMount() {
     this.loadTopics();
   }
@@ -126,6 +140,10 @@ class TopicLoader extends PureComponent {
     ) {
       this.updateLayers(activeTopic.layers);
     }
+  }
+
+  componentWillUnmount() {
+    this.onChangeVisibleKeys.forEach((key) => unByKey(key));
   }
 
   loadTopics() {
@@ -212,7 +230,63 @@ class TopicLoader extends PureComponent {
       layerService: new LayerService(layers),
       dispatchSetFeatureInfo,
     });
+
+    unByKey(this.onChangeVisibleKeys);
+    this.onChangeVisibleKeys = new LayerService(layers)
+      .getLayersAsFlatArray()
+      .map((layer) => layer.on('change:visible', this.updateMapLimits));
+    this.updateMapLimits();
     dispatchSetSearchService(newSearchService);
+  }
+
+  updateMapLimits() {
+    const {
+      activeTopic,
+      dispatchSetMaxZoom,
+      dispatchSetMinZoom,
+      dispatchSetMaxExtent,
+    } = this.props;
+
+    const visibleLayers = activeTopic?.layers.filter((l) => l.visible) || [];
+
+    // Set maxExtent (CAUTION: will break if there are multiple visible layers with different maxExtents)
+    const visibleLayersMaxExtent = visibleLayers
+      .find((layer) => layer.get('maxExtent'))
+      ?.get('maxExtent');
+
+    if (visibleLayersMaxExtent) {
+      dispatchSetMaxExtent(visibleLayersMaxExtent);
+    } else {
+      dispatchSetMaxExtent();
+    }
+
+    /* 
+      We set minZoom and maxZoom: 
+      - We get min/max values for each visible layer and then select the min for maxZoom and max for minZoom
+    */
+    const visibleLayersMaxZoom = visibleLayers.reduce(
+      (maxZooms, layer) =>
+        layer.get('maxZoom') ? [...maxZooms, layer.get('maxZoom')] : maxZooms,
+      [],
+    );
+
+    if (visibleLayersMaxZoom.length) {
+      dispatchSetMaxZoom(Math.min(...visibleLayersMaxZoom));
+    } else {
+      dispatchSetMaxZoom(activeTopic.maxZoom);
+    }
+
+    const visibleLayersMinZoom = visibleLayers.reduce(
+      (minZooms, layer) =>
+        layer.get('minZoom') ? [...minZooms, layer.get('minZoom')] : minZooms,
+      [],
+    );
+
+    if (visibleLayersMinZoom.length) {
+      dispatchSetMinZoom(Math.max(...visibleLayersMinZoom));
+    } else {
+      dispatchSetMinZoom(activeTopic.minZoom);
+    }
   }
 
   updateLayers() {
@@ -382,6 +456,9 @@ const mapDispatchToProps = {
   dispatchSetTopics: setTopics,
   dispatchSetFeatureInfo: setFeatureInfo,
   dispatchSetSearchService: setSearchService,
+  dispatchSetMaxZoom: setMaxZoom,
+  dispatchSetMinZoom: setMinZoom,
+  dispatchSetMaxExtent: setMaxExtent,
 };
 
 TopicLoader.propTypes = propTypes;

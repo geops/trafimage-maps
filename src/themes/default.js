@@ -117,6 +117,12 @@ const theme = createTheme({
     },
   },
   overrides: {
+    MuiFormControlLabel: {
+      root: {
+        marginLeft: 0,
+        marginRight: 0,
+      },
+    },
     // from sbb design, see 'select' angular components
     MuiSelect: {
       select: {
