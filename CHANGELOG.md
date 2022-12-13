@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.1](https://github.com/geops/trafimage-maps/compare/v1.18.0...v1.18.1) (2022-12-13)
+
+
+### Bug Fixes
+
+* load sts pois in a custom layer ([6f0982b](https://github.com/geops/trafimage-maps/commit/6f0982b0ba1bb25b7df5755cfa377bfd59c5a9cf))
+
 ## [1.18.0](https://github.com/geops/trafimage-maps/compare/v1.17.3...v1.18.0) (2022-12-13)
 
 ### Features
