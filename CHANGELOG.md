@@ -2,11 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.18.0](https://github.com/geops/trafimage-maps/compare/v1.18.0-beta.13...v1.18.0) (2022-12-13)
+## [1.18.0](https://github.com/geops/trafimage-maps/compare/v1.17.3...v1.18.0) (2022-12-13)
 
+### Features
+
+* add iframe documentation  ([aa48453](https://github.com/geops/trafimage-maps/commit/aa484530cf32e2539d9614d867ad42aba034f898))
+* add geltungsbereiche topics but hide them ([#993](https://github.com/geops/trafimage-maps/issues/993)) ([7c69575](https://github.com/geops/trafimage-maps/commit/7c69575e5cdc3607a0942df65216640ce9fd6bcf))
+* add sts topic ([#1043](https://github.com/geops/trafimage-maps/issues/1043)) ([d4cbb9d](https://github.com/geops/trafimage-maps/commit/d4cbb9d7b935558f43865284a0905999d9ce2a39))
 
 ### Bug Fixes
 
+* add copyright in exported canvas ([89e374e](https://github.com/geops/trafimage-maps/commit/89e374e40c301ea764b80be8a52cf7ee6da74245))
 * query bus only after zoom 15 ([ff50e5c](https://github.com/geops/trafimage-maps/commit/ff50e5c2176c81be94f22485ac605069cf36eaf1))
 
 ### [1.17.3](https://github.com/geops/trafimage-maps/compare/v1.17.2...v1.17.3) (2022-11-14)
