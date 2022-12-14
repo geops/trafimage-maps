@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.2](https://github.com/geops/trafimage-maps/compare/v1.18.1...v1.18.2) (2022-12-14)
+
+
+### Bug Fixes
+
+* click on search clear button remove the feature info from the overlay ([2bf36a1](https://github.com/geops/trafimage-maps/commit/2bf36a1fcdf6e3f9d9e553928fe35f89979250cd))
+
 ### [1.18.1](https://github.com/geops/trafimage-maps/compare/v1.18.0...v1.18.1) (2022-12-13)
 
 
