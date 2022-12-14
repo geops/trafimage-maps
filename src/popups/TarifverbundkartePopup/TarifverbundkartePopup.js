@@ -68,7 +68,7 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
           {verbunde.map((v) => {
             console.log(v);
             return (
-              <div className={classes.partnerLink}>
+              <div className={classes.partnerLink} key={v.code}>
                 <div
                   className={classes.partnerColor}
                   style={{
@@ -92,9 +92,9 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
               <div key={tarifZone.id}>
                 <div>
                   {tarifZone.tarifverbund_urls ? (
-                    <Link href={tarifZone.tarifverbund_urls}>
+                    <Typography href={tarifZone.tarifverbund_urls}>
                       {tarifZone.verbund}
-                    </Link>
+                    </Typography>
                   ) : (
                     <span>{tarifZone.verbund}</span>
                   )}
