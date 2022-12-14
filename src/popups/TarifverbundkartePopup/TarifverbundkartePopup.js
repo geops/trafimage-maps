@@ -5,7 +5,7 @@ import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Link from '../../components/Link';
 import TarifverbundkarteLayer from '../../layers/TarifverbundkarteLayer';
-import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
+// import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
 const useStyles = makeStyles(() => ({
   zoneNumber: {
@@ -14,6 +14,16 @@ const useStyles = makeStyles(() => ({
   },
   divider: {
     border: '1px solid #f5f5f5',
+  },
+  partnerLink: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 8,
+    margin: '5px 0',
+  },
+  partnerColor: {
+    width: 10,
+    height: 10,
   },
 }));
 
@@ -26,25 +36,8 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const properties = feature.getProperties();
-  const { zPass, zones, partners } = properties;
-
-  const styleLayers = useMemo(
-    () => layer?.mapboxLayer?.mbMap?.getStyle()?.layers || [],
-    [layer?.mapboxLayer?.mbMap],
-  );
-
-  const verbunde = useMemo(() => {
-    return partners.split(',').map((p) => {
-      const lowerCaseName = p.toLowerCase();
-      const color = styleLayers.find((l) => {
-        return l.id.split('verbund_')[1]?.toLowerCase() === lowerCaseName;
-      })?.paint?.['fill-color'];
-      return {
-        name: capitalizeFirstLetter(lowerCaseName),
-        color,
-      };
-    });
-  }, [partners, styleLayers]);
+  const { zPass, zones, partners_json: partners } = properties;
+  const verbunde = useMemo(() => JSON.parse(partners), [partners]);
 
   useEffect(() => {
     layer.set('clicked', false);
@@ -67,14 +60,25 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
 
   return (
     <div className="wkp-tarifverbundkarte-popup">
-      {verbunde ? (
+      {verbunde?.length ? (
         <>
           <Typography variant="h4">
             <b>{t(`Tarifverbunde in ${feature.get('name')}`)}</b>
           </Typography>
-          {verbunde.map((v) => (
-            <Typography key={v.name}>{v.name}</Typography>
-          ))}
+          {verbunde.map((v) => {
+            console.log(v);
+            return (
+              <div className={classes.partnerLink}>
+                <div
+                  className={classes.partnerColor}
+                  style={{
+                    backgroundColor: v.colour ? `#${v.colour}` : 'black',
+                  }}
+                />
+                <Link href={v.url}>{v.name}</Link>
+              </div>
+            );
+          })}
           <br />
         </>
       ) : null}
