@@ -40,7 +40,7 @@ const stsDataLayer = new TrafimageMapboxLayer({
 export const highlights = new StsPoisLayer({
   name: 'Highlights',
   key: HIGHLIGHTS_LAYER_KEY,
-  visible: true,
+  visible: false,
   properties: {
     isQueryable: true,
     disableSetFeatureInfoOnHover: true,

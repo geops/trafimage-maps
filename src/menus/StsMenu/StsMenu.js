@@ -115,7 +115,9 @@ const useStyles = makeStyles(() => {
 const updateLayers = (key = 'sts') => {
   if (key === 'sts') {
     stsLayers.forEach((layer) => {
-      layer.visible = /(ch.sbb.sts.validity|\.data)/.test(layer.key);
+      layer.visible = /(ch\.sbb\.sts\.validity(?!\.highlights$)|\.data$)/.test(
+        layer.key,
+      );
     });
   }
   if (key === 'dv') {
@@ -146,7 +148,7 @@ function StsTopicMenu() {
   });
 
   useEffect(() => {
-    // Active the correct menu on load of the topic.
+    // Activate the correct menu on load of the topic.
     const isDirektVerbindungLayersVisible = layers?.find((layer) => {
       return /direktverbindungen/.test(layer.key) && layer.visible;
     });

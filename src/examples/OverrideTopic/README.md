@@ -9,12 +9,12 @@ import { netzkarte } from 'trafimage-maps/es/config/topics';
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
-const topic=  {
+const topic = {
   ...netzkarte,
   elements: {
     ...netzkarte.elements,
     popup: false,
-  }
+  },
 };
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
 
   useEffect(() => {
     const map = ref.current;
-    map.topics =  [topic];
+    map.topics = [topic];
 
     return () => {
       map.topics = null;
@@ -34,7 +34,7 @@ const App = () => {
       <trafimage-maps ref={ref} zoom="7" apiKey={apiKey} />
     </div>
   );
-}
+};
 
-<App />
+<App />;
 ```
