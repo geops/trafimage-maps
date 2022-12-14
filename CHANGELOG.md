@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.5](https://github.com/geops/trafimage-maps/compare/v1.18.4...v1.18.5) (2022-12-14)
+
+
+### Bug Fixes
+
+* **sts:** disable sts POI highlight visibility by default ([79ed6bf](https://github.com/geops/trafimage-maps/commit/79ed6bf97938485d1487c7466970da3d5be476c7))
+
 ### [1.18.4](https://github.com/geops/trafimage-maps/compare/v1.18.3...v1.18.4) (2022-12-14)
 
 ### Bug Fixes
