@@ -6,7 +6,7 @@ import InfosButton from '../InfosButton';
 
 function DrawLayerMenu() {
   const { t } = useTranslation();
-  const layerService = useSelector((state) => state.app.layerService);
+  const layers = useSelector((state) => state.map.layers);
   const drawLayer = useSelector((state) => state.map.drawLayer);
   const drawIds = useSelector((state) => state.app.drawIds);
 
@@ -34,7 +34,7 @@ function DrawLayerMenu() {
               {layer.get('hasInfos') && <InfosButton selectedInfo={layer} />}
             </>
           )}
-          layers={layerService.getLayers()}
+          layers={layers}
           titles={titles}
           t={t}
         />

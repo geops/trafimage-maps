@@ -30,6 +30,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         );
       },
     });
+    this.useDvPoints = options.properties.useDvPoints !== false;
   }
 
   onLoad() {
@@ -83,27 +84,29 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       return;
     }
     super.select(features);
-    mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
-    if (mbMap) {
-      if (this.selectedFeatures.length) {
-        this.selectedFeatures.forEach((feature) => {
-          mbMap.setFilter(VIAPOINTSLAYER_ID, [
-            '==',
-            ['get', 'direktverbindung_id'],
-            feature.get('id'),
-          ]);
-        });
-        mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
-        mbMap.setPaintProperty(
-          VIAPOINTSLAYER_ID,
-          'circle-stroke-color',
-          this.get('routeType') === 'night'
-            ? 'rgba(5, 21, 156, 1)'
-            : 'rgba(9, 194, 242, 1)',
-        );
-      } else {
-        mbMap.setFilter(VIAPOINTSLAYER_ID, null);
-        mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'none');
+    if (this.useDvPoints) {
+      mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
+      if (mbMap) {
+        if (this.selectedFeatures.length) {
+          this.selectedFeatures.forEach((feature) => {
+            mbMap.setFilter(VIAPOINTSLAYER_ID, [
+              '==',
+              ['get', 'direktverbindung_id'],
+              feature.get('id'),
+            ]);
+          });
+          mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
+          mbMap.setPaintProperty(
+            VIAPOINTSLAYER_ID,
+            'circle-stroke-color',
+            this.get('routeType') === 'night'
+              ? 'rgba(5, 21, 156, 1)'
+              : 'rgba(9, 194, 242, 1)',
+          );
+        } else {
+          mbMap.setFilter(VIAPOINTSLAYER_ID, null);
+          mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'none');
+        }
       }
     }
   }

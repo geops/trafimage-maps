@@ -4,6 +4,8 @@ import highlightPointStyle from '../utils/highlightPointStyle';
 
 const searchUrl =
   process?.env?.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
+const stopsUrl =
+  process?.env?.REACT_APP_STOPS_URL || 'https://api.geops.io/stops/v1/';
 
 class Search {
   constructor() {
@@ -22,7 +24,7 @@ class Search {
     ];
 
     this.searchUrl = searchUrl;
-    this.stopsUrl = 'https://api.geops.io/stops/v1/';
+    this.stopsUrl = stopsUrl;
   }
 
   setSearchUrl(url) {
@@ -65,6 +67,16 @@ class Search {
 
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
   select(item) {
+    // Can be overwritten by sub-classes.
+  }
+
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  clearSelect(item) {
+    // Can be overwritten by sub-classes.
+  }
+
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  clearPopup(item) {
     // Can be overwritten by sub-classes.
   }
 }

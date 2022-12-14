@@ -4,6 +4,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import Feature from 'ol/Feature';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import NetzkartePopup from '../NetzkartePopup';
+import { getId } from '../../utils/removeDuplicateFeatures';
 
 const propTypes = {
   feature: PropTypes.oneOfType([
@@ -41,7 +42,7 @@ function StationPopup({ feature, layer, coordinate }) {
         const displayNetzkartePopup =
           layers[idx].name === 'ch.sbb.netzkarte.stationen' ||
           layers[idx].name === 'ch.sbb.netzkarte.platforms';
-        const key = layers[idx].name + feat.getId();
+        const key = layers[idx].name + getId(feat);
         if (displayNetzkartePopup) {
           return (
             <NetzkartePopup

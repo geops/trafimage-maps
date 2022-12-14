@@ -28,7 +28,9 @@ class HandicapStopFinder extends Search {
       },
     )
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features)
+      .then((featureCollection) => {
+        return featureCollection?.features || [];
+      })
       .catch(() => {
         return [];
       });
