@@ -1,4 +1,4 @@
-name: Cypress
+name: Cypress Edge
 
 on: [push]
 
@@ -20,5 +20,4 @@ jobs:
       - run: yarn cypress info
       - run: node --version
       - run: node -p 'os.cpus()'
-      - run: yarn cy:test:chrome
       - run: yarn cy:test:edge

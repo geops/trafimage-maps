@@ -291,7 +291,7 @@ describe('ch.sbb.netzkarte', () => {
       mockServer.stop();
     });
 
-    it('should display the full trajectory on click', () => {
+    it.only('should display the full trajectory on click', () => {
       visitWithMsg('/ch.sbb.netzkarte', bufferMessage);
 
       // Click on the vehicle
