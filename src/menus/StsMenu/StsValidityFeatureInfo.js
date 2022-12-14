@@ -124,20 +124,20 @@ function StsValidityFeatureInfo({ menuOpen }) {
       : features;
   }, [mainFeatureInfos, tours]);
 
-  const prevMainFeature = usePrevious(mainFeatures);
+  const prevMainFeatures = usePrevious(mainFeatures);
 
   useEffect(() => {
     if (!mainFeatures?.length) {
       select();
     }
-    if (mainFeatures !== prevMainFeature) {
+    if (mainFeatures !== prevMainFeatures) {
       setSelectedFeature();
     }
     if (mainFeatures && selectedFeature === undefined) {
       setSelectedFeature(mainFeatures[0]);
       select(mainFeatures[0]);
     }
-  }, [mainFeatures, prevMainFeature, selectedFeature, select]);
+  }, [mainFeatures, prevMainFeatures, selectedFeature, select]);
 
   if (!gbFeatureInfo?.features?.length && !mainFeatures?.length) {
     select();
