@@ -24,6 +24,7 @@ const typoBody = {
 };
 
 const theme = createTheme({
+  colors,
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {
