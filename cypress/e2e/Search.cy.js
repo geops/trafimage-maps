@@ -2,8 +2,8 @@
 
 describe('Search', () => {
   beforeEach(() => {
+    cy.consent();
     cy.visit('');
-    cy.get('#onetrust-accept-btn-handler', { timeout: 10000 }).click();
   });
   it(`should display plural texts`, () => {
     // Input is not visible
@@ -44,5 +44,43 @@ describe('Search', () => {
     // Popup is opened.
     cy.wait(10000);
     cy.get('.wkp-feature-information').should('be.visible');
+  });
+
+  it('should not crash when search services returns a json error', () => {
+    cy.viewport(1440, 900);
+    cy.intercept(
+      {
+        method: 'GET',
+        pathname: /(stops|search|api3-geo-admin\/SearchServer)/,
+      },
+      {
+        statusCode: 500,
+        body: { detail: 'foo error' },
+      },
+    );
+    cy.get('.wkp-search-input input').focus().type('Ber');
+
+    cy.wait(10000);
+
+    cy.get('.wkp-search-input input').should('be.visible');
+  });
+
+  it('should not crash when search services returns a non json error', () => {
+    cy.viewport(1440, 900);
+    cy.intercept(
+      {
+        method: 'GET',
+        pathname: /(stops|search|api3-geo-admin\/SearchServer)/,
+      },
+      {
+        statusCode: 500,
+        body: 'Error 500',
+      },
+    );
+    cy.get('.wkp-search-input input').focus().type('Ber');
+
+    cy.wait(10000);
+
+    cy.get('.wkp-search-input input').should('be.visible');
   });
 });

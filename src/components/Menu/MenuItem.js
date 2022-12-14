@@ -5,15 +5,15 @@ import Collapsible from '../Collapsible';
 import withResizing from '../withResizing';
 
 const propTypes = {
-  menuHeight: PropTypes.number,
-  fixedHeight: PropTypes.number,
+  menuHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  fixedHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   bodyElementRef: PropTypes.shape({
     current: PropTypes.instanceOf(Collapsible),
   }),
   children: PropTypes.node,
   className: PropTypes.string,
   icon: PropTypes.node,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   open: PropTypes.bool.isRequired,
   collapsed: PropTypes.bool.isRequired,
   onCollapseToggle: PropTypes.func,

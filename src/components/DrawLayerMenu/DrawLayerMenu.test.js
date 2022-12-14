@@ -6,7 +6,6 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Layer';
-import LayerService from '../../utils/LayerService';
 import DrawLayerMenu from './DrawLayerMenu';
 
 describe('DrawLayerMenu', () => {
@@ -18,12 +17,12 @@ describe('DrawLayerMenu', () => {
 
   describe('should match snapshot.', () => {
     test('should return null', () => {
-      const layerService = new LayerService([]);
       store = mockStore({
         map: {
+          layers: [],
           drawLayer,
         },
-        app: { layerService },
+        app: {},
       });
       const component = renderer.create(
         <Provider store={store}>
@@ -35,14 +34,13 @@ describe('DrawLayerMenu', () => {
     });
 
     test('using the layerService property', () => {
-      const layerService = new LayerService([]);
       store = mockStore({
         map: {
           drawLayer,
+          layers: [],
         },
         app: {
           drawIds: { admin_id: 'foo' },
-          layerService,
         },
       });
       const component = renderer.create(
@@ -56,17 +54,17 @@ describe('DrawLayerMenu', () => {
   });
 
   test('display only draw layer', () => {
-    const layerService = new LayerService([
+    const layers = [
       new Layer({ olLayer: new OLLayer({}) }),
       store.getState().map.drawLayer,
-    ]);
+    ];
     store = mockStore({
       map: {
         drawLayer,
+        layers,
       },
       app: {
         drawIds: { admin_id: 'foo' },
-        layerService,
       },
     });
     const wrapper = mount(
@@ -74,7 +72,7 @@ describe('DrawLayerMenu', () => {
         <DrawLayerMenu />
       </Provider>,
     );
-    expect(layerService.layers.length).toBe(2);
+    expect(layers.length).toBe(2);
     expect(wrapper.find('.rs-layer-tree-item').length).toBe(1);
   });
 });

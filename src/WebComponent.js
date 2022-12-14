@@ -127,6 +127,16 @@ const propTypes = {
   realtimeUrl: PropTypes.string,
 
   /**
+   * URL of the search API server. Default is 'https://maps.trafimage.ch'.
+   */
+  searchUrl: PropTypes.string,
+
+  /**
+   * URL of the stops API server. Default is 'https://api.geops.io/stops/v1/'.
+   */
+  stopsUrl: PropTypes.string,
+
+  /**
    * URL of the static files. Default is 'https://maps2.trafimage.ch'.
    */
   staticFilesUrl: PropTypes.string,
@@ -201,6 +211,7 @@ const attributes = {
   matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
   searchUrl: process?.env?.REACT_APP_SEARCH_URL,
+  stops: process?.env?.REACT_APP_STOPS_URL,
 };
 
 const defaultProps = {

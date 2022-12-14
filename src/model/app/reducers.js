@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { defaults as defaultInteractions } from 'ol/interaction';
 import OLMap from 'ol/Map';
 import DragPan from 'ol/interaction/DragPan';
-import LayerService from '../../utils/LayerService';
 import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
 import DblPointerClickZoomOut from '../../ol/interaction/DblPointerClickZoomOut';
 import {
@@ -45,6 +44,8 @@ import {
   SET_API_KEY_NAME,
   SET_REALTIME_URL,
   SET_REALTIME_KEY,
+  SET_DISPLAY_MENU,
+  SET_STOPS_URL,
 } from './actions';
 
 import SearchService from '../../components/Search/SearchService';
@@ -86,7 +87,6 @@ const getInitialState = () => ({
     controls: [],
     interactions: dftlInteractions,
   }),
-  layerService: new LayerService([]),
   searchService: new SearchService(),
   screenWidth: null,
   drawIds: null,
@@ -98,6 +98,7 @@ const getInitialState = () => ({
   embeddded: false,
   consentGiven: false,
   disableCookies: false,
+  displayMenu: true,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -302,6 +303,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         staticFilesUrl: action.data,
+      };
+    case SET_DISPLAY_MENU:
+      return {
+        ...state,
+        displayMenu: action.data,
+      };
+    case SET_STOPS_URL:
+      return {
+        ...state,
+        stopsUrl: action.data,
       };
     default:
       return {

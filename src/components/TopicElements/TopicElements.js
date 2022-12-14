@@ -41,6 +41,7 @@ const defaultElements = {
   exportMenu: false,
   search: false,
   overlay: false,
+  menuToggler: false,
 };
 
 const propTypes = {
@@ -177,6 +178,7 @@ function TopicElements({ history }) {
         {elements.popup && <Popup />}
         {elements.mapControls && (
           <MapControls
+            menuToggler={elements.menuToggler}
             geolocation={elements.geolocationButton}
             fitExtent={elements.fitExtent}
             zoomSlider={elements.zoomSlider}

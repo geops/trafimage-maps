@@ -18,3 +18,17 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// The name of the cookie holding whether the user has accepted
+// the cookie policy
+const COOKIE_NAME = 'OptanonAlertBoxClosed';
+// The value meaning that user has accepted the cookie policy
+const COOKIE_VALUE = '2019-12-12T06:46:23.046Z';
+
+// Prevent the consent banner to be displayed.
+Cypress.Commands.add('consent', () => {
+  Cypress.on('window:before:load', (window) => {
+    // eslint-disable-next-line no-param-reassign
+    window.document.cookie = `${COOKIE_NAME}=${COOKIE_VALUE}`;
+  });
+});
