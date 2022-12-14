@@ -134,11 +134,12 @@ class SearchService {
       this.selectLayer.getSource().addFeature(feature);
     }
 
+    this.popupItem = item;
     this.map.getView().fit(this.selectLayer.getSource().getExtent(), {
       padding: [50, 50, 50, 50],
       maxZoom: 15.6,
       callback: () => {
-        this.searches[item.section].openPopup(item);
+        this.searches[item.section].openPopup(this.popupItem);
       },
     });
   }
@@ -160,6 +161,16 @@ class SearchService {
 
   value(item) {
     return this.searches[item.section].value(item);
+  }
+
+  clearPopup() {
+    if (this.popupItem) {
+      const featureInfos = this.searches[this.popupItem.section].clearPopup();
+      this.searches[this.popupItem.section].featureInfos = null;
+      this.popupItem = null;
+      return featureInfos;
+    }
+    return null;
   }
 }
 

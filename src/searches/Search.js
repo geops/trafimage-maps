@@ -69,6 +69,16 @@ class Search {
   select(item) {
     // Can be overwritten by sub-classes.
   }
+
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  clearSelect(item) {
+    // Can be overwritten by sub-classes.
+  }
+
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  clearPopup(item) {
+    // Can be overwritten by sub-classes.
+  }
 }
 
 export default Search;

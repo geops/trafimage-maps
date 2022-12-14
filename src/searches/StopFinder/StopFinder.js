@@ -85,13 +85,13 @@ class StopFinder extends Search {
   }
 
   openPopup(item) {
-    this.popupItem = item;
     const { layerService } = this.props;
     const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
 
     if (!layer) {
       return;
     }
+    this.popupItem = item;
 
     // We try to display the overlay only when the stations layer is ready and has all the stations loaded.
     if (layer.ready) {
@@ -102,6 +102,9 @@ class StopFinder extends Search {
   }
 
   onIdle() {
+    if (!this.popupItem) {
+      return;
+    }
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.netzkarte.data');
     const styleLayers = mbMap?.getStyle()?.layers;
@@ -132,10 +135,16 @@ class StopFinder extends Search {
       )
       .filter((i) => i);
     Promise.all(infos).then((featureInfos) => {
-      dispatchSetFeatureInfo(
-        featureInfos.filter(({ features }) => features.length),
+      this.featureInfos = featureInfos.filter(
+        ({ features }) => features.length,
       );
+      dispatchSetFeatureInfo(this.featureInfos);
     });
+  }
+
+  clearPopup() {
+    this.popupItem = null;
+    return this.featureInfos;
   }
 }
 
