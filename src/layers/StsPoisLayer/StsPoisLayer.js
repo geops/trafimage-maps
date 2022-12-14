@@ -9,6 +9,7 @@ import poiImageHL from './img/poi_hl.png';
 class StsPoisLayer extends MTVectorLayer {
   constructor(options) {
     const olLayer = new VectorLayer({
+      visible: options?.visible,
       source: new VectorSource({
         url: 'https://maps.trafimage.ch/sts-static/pois.geojson',
         format: new GeoJSON({
