@@ -48,6 +48,7 @@ function StsDirektverbindungenLayerSwitcher() {
       {direktVbLayers.map((layer) => {
         return (
           <FormControlLabel
+            key={layer.key}
             label={layer.visible ? <b>{t(layer.name)}</b> : t(layer.name)}
             checked={layer.visible}
             control={

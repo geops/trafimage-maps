@@ -113,30 +113,33 @@ function StsValidityFeatureInfo({ menuOpen }) {
 
   const [tours] = useFetchTours(select);
 
-  const mainFeature = useMemo(() => {
+  const mainFeatures = useMemo(() => {
     const features =
       mainFeatureInfos?.length && tours?.length
         ? parseFeaturesInfos(mainFeatureInfos, tours)
         : [];
-    return features[0];
+    // When a POI highlight is selected we only display the first one, with lines we display all
+    return features[0]?.getGeometry() instanceof Point
+      ? [features[0]]
+      : features;
   }, [mainFeatureInfos, tours]);
 
-  const prevMainFeature = usePrevious(mainFeature);
+  const prevMainFeatures = usePrevious(mainFeatures);
 
   useEffect(() => {
-    if (!mainFeature) {
+    if (!mainFeatures?.length) {
       select();
     }
-    if (mainFeature !== prevMainFeature) {
+    if (mainFeatures !== prevMainFeatures) {
       setSelectedFeature();
     }
-    if (mainFeature && selectedFeature === undefined) {
-      setSelectedFeature(mainFeature);
-      select(mainFeature);
+    if (mainFeatures && selectedFeature === undefined) {
+      setSelectedFeature(mainFeatures[0]);
+      select(mainFeatures[0]);
     }
-  }, [mainFeature, prevMainFeature, selectedFeature, select]);
+  }, [mainFeatures, prevMainFeatures, selectedFeature, select]);
 
-  if (!gbFeatureInfo?.features?.length && !mainFeature) {
+  if (!gbFeatureInfo?.features?.length && !mainFeatures?.length) {
     select();
     return null;
   }
@@ -158,49 +161,52 @@ function StsValidityFeatureInfo({ menuOpen }) {
             </div>
           </>
         ) : null}
-        {gbFeatureInfo?.features?.length && mainFeature ? <Divider /> : null}
-        {mainFeature
-          ? (() => {
+        {gbFeatureInfo?.features?.length && mainFeatures.length ? (
+          <Divider />
+        ) : null}
+        {mainFeatures?.length
+          ? mainFeatures.map((feat, idx, array) => {
               const title =
-                mainFeature.get('route_names_premium') ||
-                mainFeature.get('route_names_gttos') ||
-                mainFeature.get('title');
-              const images =
-                mainFeature.get('images') && mainFeature.get('images').length;
-              const description = mainFeature.get('lead_text');
-              const highlightUrl = mainFeature.get('highlight_url');
+                feat.get('title') ||
+                feat.get('route_names_premium') ||
+                feat.get('route_names_gttos');
+              const images = feat.get('images') && feat.get('images').length;
+              const description = feat.get('lead_text');
+              const highlightUrl = feat.get('highlight_url');
               return (
-                <div
-                  className={classes.mainInfo}
-                  data-testid="sts-validity-feature-info"
-                >
-                  <br />
-                  <div className={classes.featureInfoItem}>
-                    <Typography paragraph variant="h4">
-                      {title}
-                    </Typography>
-                    {images ? (
-                      <div className={classes.imageLine}>
-                        <a
-                          href={highlightUrl}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          <img
-                            src={mainFeature.get('images')[0].url}
-                            alt={title}
-                          />
-                        </a>
-                      </div>
-                    ) : null}
-                    {description && (
-                      <Typography paragraph>{description}</Typography>
-                    )}
-                    {highlightUrl && <Link href={highlightUrl}>Details</Link>}
+                <React.Fragment key={title}>
+                  <div
+                    className={classes.mainInfo}
+                    data-testid="sts-validity-feature-info"
+                  >
+                    <br />
+                    <div className={classes.featureInfoItem}>
+                      <Typography paragraph variant="h4">
+                        {title}
+                      </Typography>
+                      {images ? (
+                        <div className={classes.imageLine}>
+                          <a
+                            href={highlightUrl}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            <img src={feat.get('images')[0].url} alt={title} />
+                          </a>
+                        </div>
+                      ) : null}
+                      {description && (
+                        <Typography paragraph>{description}</Typography>
+                      )}
+                      {highlightUrl && <Link href={highlightUrl}>Details</Link>}
+                    </div>
                   </div>
-                </div>
+                  {array.length > 1 && idx !== array.length - 1 ? (
+                    <Divider />
+                  ) : null}
+                </React.Fragment>
               );
-            })()
+            })
           : null}
       </div>
     </>
