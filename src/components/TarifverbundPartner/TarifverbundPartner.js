@@ -9,11 +9,6 @@ const useStyles = makeStyles((theme) => {
       alignItems: 'center',
       gap: 8,
       margin: '8px 0',
-      overflowX: 'hidden',
-    },
-    label: {
-      overflowX: 'hidden',
-      textOverflow: 'ellipsis',
     },
     partnerColor: {
       flexShrink: 0,
@@ -36,7 +31,7 @@ function TarifverbundPartner({ color, label, iconSize, style }) {
           }
         }
       />
-      <span className={classes.label}>{label}</span>
+      {label}
     </div>
   );
 }
