@@ -42,13 +42,14 @@ function TarifverbundPartner({ color, label, iconSize, style }) {
 }
 
 TarifverbundPartner.propTypes = {
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   style: PropTypes.shape(),
   iconSize: PropTypes.number,
 };
 
 TarifverbundPartner.defaultProps = {
+  color: null,
   style: null,
   iconSize: 15,
 };

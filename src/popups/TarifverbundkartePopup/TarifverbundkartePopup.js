@@ -85,22 +85,12 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
           </Typography>
           {zones.map((tarifZone) => {
             return (
-              <React.Fragment key={tarifZone.id}>
-                <div className={classes.zone}>
-                  <div>
-                    {tarifZone.tarifverbund_urls ? (
-                      <Typography href={tarifZone.tarifverbund_urls}>
-                        {tarifZone.verbund}
-                      </Typography>
-                    ) : (
-                      <span>{tarifZone.verbund}</span>
-                    )}
-                  </div>
-                  <div className={classes.zoneNumber}>
-                    {`${t('Zone')} ${tarifZone.zone}`}
-                  </div>
+              <div className={classes.zone} key={tarifZone.id}>
+                <Typography>{tarifZone.verbund}</Typography>
+                <div className={classes.zoneNumber}>
+                  {`${t('Zone')} ${tarifZone.zone}`}
                 </div>
-              </React.Fragment>
+              </div>
             );
           })}
         </>
