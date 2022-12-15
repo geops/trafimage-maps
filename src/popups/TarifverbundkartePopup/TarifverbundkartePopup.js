@@ -72,7 +72,7 @@ const TarifverbundkartePopup = ({ feature, layer }) => {
                 background:
                   'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
               }}
-              label="Z-Pass"
+              label={<Link href={zPass?.tarifverbund_urls}>Z-Pass</Link>}
             />
           )}
           <br />
