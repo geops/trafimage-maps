@@ -20,7 +20,11 @@ const useFetchVerbunde = (vectorTilesUrl) => {
   useEffect(() => {
     fetch(`${vectorTilesUrl}/styles/ch.sbb.tarifverbund/style.json`)
       .then((response) => response.json())
-      .then((data) => setVerbunde(data.metadata.partners))
+      .then((data) =>
+        setVerbunde(
+          data.metadata.partners.sort((a, b) => a.name.localeCompare(b.name)),
+        ),
+      )
       // eslint-disable-next-line no-console
       .catch((err) => console.error(err));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,6 +47,7 @@ function TarifVerbundLegend() {
         <div className={classes.legend}>
           {verbunde.map((v) => (
             <TarifverbundPartner
+              key={v.name}
               color={`#${v.verbund_colour_hex}`}
               label={v.name}
             />
