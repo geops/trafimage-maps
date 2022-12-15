@@ -12,14 +12,6 @@ const propTypes = {
 const defaultProps = {};
 
 const TarifverbundkarteTopicInfo = ({ language }) => {
-  // const img = (
-  //   <img
-  //     src={`${staticFilesUrl}/img/topics/tarifverbundkarte/tarifverbundkarte_legend.png`}
-  //     draggable="false"
-  //     alt={t('Kein Bildtext')}
-  //   />
-  // );
-
   const comps = {
     de: (
       <div>
