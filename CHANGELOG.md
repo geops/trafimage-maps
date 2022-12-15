@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.6](https://github.com/geops/trafimage-maps/compare/v1.18.3...v1.18.6) (2022-12-15)
+
+
+### Bug Fixes
+
+* click on search clear button remove the feature info from the overlay in handicap topic ([ea6c558](https://github.com/geops/trafimage-maps/commit/ea6c558ca4360cd9c26d21b2a1184991598b5931))
+* **sts:** disable sts POI highlight visibility by default ([#1052](https://github.com/geops/trafimage-maps/issues/1052)) ([38a3ea6](https://github.com/geops/trafimage-maps/commit/38a3ea6e596f2b11d7cc3fc03a9143815fd7409e))
+
 ### [1.18.5](https://github.com/geops/trafimage-maps/compare/v1.18.4...v1.18.5) (2022-12-14)
 
 ### Bug Fixes
