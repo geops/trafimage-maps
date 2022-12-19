@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.7](https://github.com/geops/trafimage-maps/compare/v1.18.6...v1.18.7) (2022-12-19)
+
+
+### Bug Fixes
+
+* **Tarifverbundkarte:** improved popup and compile legend using style metadata ([#1053](https://github.com/geops/trafimage-maps/issues/1053)) ([02aa187](https://github.com/geops/trafimage-maps/commit/02aa18731931a080c4f186d014828985ae3d28f1))
+
 ### [1.18.6](https://github.com/geops/trafimage-maps/compare/v1.18.3...v1.18.6) (2022-12-15)
 
 
