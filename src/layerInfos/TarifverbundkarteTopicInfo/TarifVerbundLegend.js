@@ -1,8 +1,10 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 import TarifverbundPartner from '../../components/TarifverbundPartner';
+import useFetch from '../../utils/useFetch';
 
 const useStyles = makeStyles(() => {
   return {
@@ -15,52 +17,46 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const useFetchVerbunde = (vectorTilesUrl) => {
-  const [verbunde, setVerbunde] = useState([]);
-  useEffect(() => {
-    fetch(`${vectorTilesUrl}/styles/ch.sbb.tarifverbund/style.json`)
-      .then((response) => response.json())
-      .then((data) =>
-        setVerbunde(
-          data.metadata.partners.sort((a, b) => a.name.localeCompare(b.name)),
-        ),
-      )
-      // eslint-disable-next-line no-console
-      .catch((err) => console.error(err));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return [verbunde];
-};
-
 function TarifVerbundLegend() {
+  const { t } = useTranslation();
   const vectorTilesUrl = useSelector((state) => state.app.vectorTilesUrl);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const classes = useStyles({ isMobile });
+  const { data: style, loading } = useFetch(
+    `${vectorTilesUrl}/styles/ch.sbb.tarifverbund/style.json`,
+  );
+  const verbunde = useMemo(() => {
+    return style?.metadata?.partners?.sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
+  }, [style]);
 
-  const [verbunde] = useFetchVerbunde(vectorTilesUrl);
   return (
     <div>
-      {verbunde.length ? (
-        <div className={classes.legend}>
-          {verbunde.map((v) => (
+      <div className={classes.legend}>
+        {loading ? `${t('Wird geladen')}...` : null}
+        {!loading && (verbunde || []).length ? (
+          <>
+            {verbunde.map((v) => (
+              <TarifverbundPartner
+                key={v.name}
+                color={`#${v.verbund_colour_hex}`}
+                label={v.name}
+              />
+            ))}
             <TarifverbundPartner
-              key={v.name}
-              color={`#${v.verbund_colour_hex}`}
-              label={v.name}
+              style={{
+                background:
+                  'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
+              }}
+              label="Z-Pass"
             />
-          ))}
-          <TarifverbundPartner
-            style={{
-              background:
-                'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
-            }}
-            label="Z-Pass"
-          />
-        </div>
-      ) : null}
+          </>
+        ) : null}
+      </div>
     </div>
   );
 }
