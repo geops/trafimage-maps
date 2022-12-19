@@ -35,28 +35,26 @@ function TarifVerbundLegend() {
   }, [style]);
 
   return (
-    <div>
-      <div className={classes.legend}>
-        {loading ? `${t('Wird geladen')}...` : null}
-        {!loading && (verbunde || []).length ? (
-          <>
-            {verbunde.map((v) => (
-              <TarifverbundPartner
-                key={v.name}
-                color={`#${v.verbund_colour_hex}`}
-                label={v.name}
-              />
-            ))}
+    <div className={classes.legend} data-testid="tarifverbund-legend-container">
+      {loading ? `${t('Wird geladen')}...` : null}
+      {!loading && (verbunde || []).length ? (
+        <>
+          {verbunde.map((v) => (
             <TarifverbundPartner
-              style={{
-                background:
-                  'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
-              }}
-              label="Z-Pass"
+              key={v.name}
+              color={v.verbund_colour_hex ? `#${v.verbund_colour_hex}` : null}
+              label={v.name}
             />
-          </>
-        ) : null}
-      </div>
+          ))}
+          <TarifverbundPartner
+            style={{
+              background:
+                'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
+            }}
+            label="Z-Pass"
+          />
+        </>
+      ) : null}
     </div>
   );
 }

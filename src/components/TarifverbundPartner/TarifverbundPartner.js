@@ -22,7 +22,10 @@ const useStyles = makeStyles((theme) => {
 function TarifverbundPartner({ color, label, iconSize, style }) {
   const classes = useStyles({ iconSize });
   return (
-    <div className={classes.partner}>
+    <div
+      className={classes.partner}
+      data-testid={`tarifverbund-partner-${label}`}
+    >
       <div
         className={classes.partnerColor}
         style={
@@ -30,6 +33,7 @@ function TarifverbundPartner({ color, label, iconSize, style }) {
             backgroundColor: color || 'black',
           }
         }
+        data-testid={`tarifverbund-partner-${label}-color`}
       />
       {label}
     </div>
