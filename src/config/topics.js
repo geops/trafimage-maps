@@ -178,10 +178,10 @@ export const tarifverbundkarte = {
   maxZoom: 12,
   exportConfig: {
     publisher: 'tobias.hauser@sbb.ch',
-    publishedAt: '12/2021',
-    dateDe: '12.12.2021',
-    dateFr: '12.12.2021',
-    year: '2021',
+    publishedAt: '12/2022',
+    dateDe: '12.12.2022',
+    dateFr: '12.12.2022',
+    year: '2022',
     overlayImageUrl: tarifverbundkarteLegend,
   },
   elements: {

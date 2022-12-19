@@ -189,8 +189,12 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
 
       // If zones present and the municipality has a 'partners' attribute we store the zone in the municipality feature
       const zoneFeatures = featureInfo.features.filter(
-        (feat) => feat.get('zone') && feat.get('verbund'),
+        (feat) =>
+          feat.get('zone') &&
+          feat.get('verbund') &&
+          !/^Z-Pass/.test(feat.get('verbund')),
       );
+
       if (zoneFeatures[0] && municipalityFeature.get('partners')) {
         const zones = zoneFeatures.map((zone) => zone.getProperties());
         const cleanedZones = [

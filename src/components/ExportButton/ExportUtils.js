@@ -56,7 +56,8 @@ const buildOlMapHd = (map, elt, center, scale = 1, resolution) => {
   });
 
   const addLayer = (layer) => {
-    if (!layer.getVisible()) {
+    // Filter out invisible and vector layers
+    if (!layer.getVisible() || layer?.getSource() instanceof VectorSource) {
       return;
     }
     // ol.layer.Group
