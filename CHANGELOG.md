@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.8](https://github.com/geops/trafimage-maps/compare/v1.18.7...v1.18.8) (2022-12-20)
+
+
+### Bug Fixes
+
+* updated data source dates in DV and Eisenbahninfrastruktur TopicInfos ([#1054](https://github.com/geops/trafimage-maps/issues/1054)) ([22ac30b](https://github.com/geops/trafimage-maps/commit/22ac30bd13d6590293b25c9b4d80a7ef3e9d9799))
+
 ### [1.18.7](https://github.com/geops/trafimage-maps/compare/v1.18.6...v1.18.7) (2022-12-19)
 
 
