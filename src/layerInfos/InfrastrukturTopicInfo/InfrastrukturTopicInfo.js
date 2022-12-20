@@ -11,8 +11,7 @@ const comps = {
         Eisenbahnunternehmen unterschieden werden. Das Kartenmaterial dient in
         erster Linie bei SBB-internen Kartenthemen als Hintergrundkarte.
       </p>
-      <p>Datenstand: 2020</p>
-      <p>Stand Kartengrundlage: 2020</p>
+      <p>Die Daten und die Kartengrundlage werden jährlich aktualisiert.</p>
       <p>
         Verantwortlich: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
@@ -30,8 +29,9 @@ const comps = {
         premier lieu pour servir de référence dans le cadre des thèmes internes
         aux CFF en matière de cartographie.
       </p>
-      <p>État des données: 2020</p>
-      <p>État de la base de données de la carte: 2020</p>
+      <p>
+        Les données et la base cartographique sont mises à jour chaque année.
+      </p>
       <p>
         Responsable: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
@@ -47,8 +47,7 @@ const comps = {
         railway companies. The map is primarily used as a background map for SBB
         internal map topics.
       </p>
-      <p>Data status: 2020</p>
-      <p>Base map status 2020</p>
+      <p>The data and the map base are updated annually.</p>
       <p>
         Contact person: Trafimage System Manager Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
@@ -65,8 +64,7 @@ const comps = {
         ferroviarie. Il materiale cartografico serve principalmente da supporto
         per le cartine tematiche interne alle FFS.
       </p>
-      <p>Aggiornamento dei dati: 2020</p>
-      <p>Versione della base cartografica: 2020</p>
+      <p>I dati e la base cartografica vengono aggiornati annualmente.</p>
       <p>
         Responsabile: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.

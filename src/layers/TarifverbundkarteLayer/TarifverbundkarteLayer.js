@@ -195,7 +195,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
           !/^Z-Pass/.test(feat.get('verbund')),
       );
 
-      if (zoneFeatures[0] && municipalityFeature.get('partners')) {
+      if (zoneFeatures[0] && !!municipalityFeature.get('partners').trim()) {
         const zones = zoneFeatures.map((zone) => zone.getProperties());
         const cleanedZones = [
           ...new Map(zones.map((zone) => [zone.verbund, zone])).values(), // Remove duplicates
