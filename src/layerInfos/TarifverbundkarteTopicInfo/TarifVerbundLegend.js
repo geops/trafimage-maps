@@ -21,12 +21,13 @@ function TarifVerbundLegend() {
   const { t } = useTranslation();
   const vectorTilesUrl = useSelector((state) => state.app.vectorTilesUrl);
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const apiKey = useSelector((state) => state.app.apiKey);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const classes = useStyles({ isMobile });
   const { data: style, loading } = useFetch(
-    `${vectorTilesUrl}/styles/ch.sbb.tarifverbund/style.json`,
+    `${vectorTilesUrl}/styles/ch.sbb.tarifverbund/style.json?key=${apiKey}`,
   );
   const verbunde = useMemo(() => {
     return style?.metadata?.partners?.sort((a, b) =>
