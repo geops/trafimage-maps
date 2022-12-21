@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.9](https://github.com/geops/trafimage-maps/compare/v1.18.8...v1.18.9) (2022-12-21)
+
+
+### Bug Fixes
+
+* **Tarifverbundkarte:** add key to style fetch for Tarifverbundkarte legend ([#1055](https://github.com/geops/trafimage-maps/issues/1055)) ([fc27c8d](https://github.com/geops/trafimage-maps/commit/fc27c8dccd226b50df4c459b01ebe12201dfbbff))
+
 ### [1.18.8](https://github.com/geops/trafimage-maps/compare/v1.18.7...v1.18.8) (2022-12-20)
 
 
