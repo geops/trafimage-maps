@@ -23,7 +23,6 @@ import MapsGeoAdminPopup from './MapsGeoAdminPopup';
 import EnergiePopup from './EnergiePopup/EnergiePopup';
 import IsbPopup from './IsbPopup';
 import GeltungsbereicheGaPopup from './GeltungsbereicheGaPopup';
-import GeltungsbereichePopup from './GeltungsbereichePopup';
 import PunctualityPopup from './PunctualityPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
@@ -50,7 +49,6 @@ export { default as MapsGeoAdminPopup } from './MapsGeoAdminPopup';
 export { default as EnergiePopup } from './EnergiePopup';
 export { default as IsbPopup } from './IsbPopup';
 export { default as GeltungsbereicheGaPopup } from './GeltungsbereicheGaPopup';
-export { default as GeltungsbereichePopup } from './GeltungsbereichePopup';
 export { default as PunctualityPopup } from './PunctualityPopup';
 
 export default {
@@ -78,7 +76,6 @@ export default {
   MapsGeoAdminPopup,
   EnergiePopup,
   IsbPopup,
-  GeltungsbereichePopup,
   GeltungsbereicheGaPopup,
   PunctualityPopup,
 };
