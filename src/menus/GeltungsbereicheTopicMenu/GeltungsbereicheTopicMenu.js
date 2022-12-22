@@ -77,7 +77,7 @@ function GeltungsbereicheTopicMenu() {
   const ref = useRef();
   const [node, setNode] = useState();
   const { t } = useTranslation();
-  const tmMapsEl = document.getElementsByTagName('trafimage-maps')[0];
+  const tmMapsEl = document.getElementsByClassName('tm-trafimage-maps')[0];
   const classes = useStyles({
     isEmbedded: window.innerWidth !== tmMapsEl?.offsetWidth,
   });
