@@ -43,7 +43,6 @@ const App = () => {
   const [url, setUrl] = useState(baseUrl + topic + `?embedded=${embedded}`);
 
   const code = useMemo(() => {
-    console.log(url);
     return getCodeFromUrl(url);
   }, [url]);
 
