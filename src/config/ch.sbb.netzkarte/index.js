@@ -10,6 +10,7 @@ import StationsLayer from '../../layers/StationsLayer';
 import PlatformsLayer from '../../layers/PlatformsLayer';
 import TralisLayer from '../../layers/TralisLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
+import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
@@ -188,7 +189,6 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     tenant: 'sbb',
-    minZoomNonTrain: 14,
     regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
     group: 'ch.sbb.punctuality',
     properties: {
@@ -202,7 +202,6 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     tenant: 'sbb',
-    minZoomNonTrain: 14,
     regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
     group: 'ch.sbb.punctuality',
     properties: {
@@ -216,7 +215,6 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-all',
     visible: false,
     tenant: 'sbb',
-    minZoomNonTrain: 14,
     group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
@@ -243,7 +241,9 @@ export const buslines = new MapboxStyleLayer({
     !!metadata && metadata['trafimage.filter'] === 'bus',
   visible: false,
   properties: {
-    isQueryable: true,
+    isQueryable: (map) => {
+      return map.getView().getZoom() >= 15;
+    },
     hasInfos: true,
     layerInfoComponent: 'BuslinesLayerInfo',
     popupComponent: 'BusLinePopup',
@@ -262,8 +262,6 @@ export const gemeindegrenzen = new MapboxStyleLayer({
     description: 'ch.sbb.ch_gemeinden-desc',
   },
 });
-
-const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
 
 export const direktverbindungenDay = new DirektverbindungenLayer({
   name: `${DIREKTVERBINDUNGEN_KEY}.day`,

@@ -103,6 +103,7 @@ module.exports = {
       content: 'src/examples/iframe/README.md',
       external: true,
       sectionDepth: 2,
+      exampleMode: 'hide',
       sections: [
         {
           name: 'Geltungsbereiche',
@@ -110,14 +111,6 @@ module.exports = {
           exampleMode: 'expand',
         },
       ],
-    },
-    {
-      name: 'Iframe',
-      content: 'src/examples/iframe/README.md',
-      external: true,
-      sectionDepth: 2,
-      sections: [],
-      exampleMode: 'hide',
     },
   ],
   styles: {

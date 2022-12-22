@@ -38,6 +38,7 @@ import {
   setLoginUrl,
   setRealtimeKey,
   setRealtimeUrl,
+  setStopsUrl,
 } from '../../model/app/actions';
 import theme from '../../themes/default';
 
@@ -172,6 +173,12 @@ const propTypes = {
   searchUrl: PropTypes.string,
 
   /**
+   * URL endpoint for Stops api.
+   * @private
+   */
+  stopsUrl: PropTypes.string,
+
+  /**
    * Api key for Realtime api.
    * @private
    */
@@ -268,6 +275,7 @@ const defaultProps = {
   matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
   matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
   searchUrl: process?.env?.REACT_APP_SEARCH_URL,
+  stopsUrl: process?.env?.REACT_APP_STOPS_URL,
   realtimeKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
 };
@@ -335,7 +343,7 @@ class TrafimageMaps extends React.PureComponent {
               // Matomo set SameSite=LAX by default if nothing is provided.
               setCookieSameSite: 'LAX',
             };
-      // console.log(window.OneTrust.GetDomainData());
+
       this.matomo = createInstance({
         urlBase: matomoUrl,
         siteId: matomoSiteId,
@@ -358,6 +366,7 @@ class TrafimageMaps extends React.PureComponent {
       //   in the case it uses http in an iframe, Matomo cookies will use SameSite=LAX and will not add cookie to the page from
       //   a 3rd party website, so no need of a consent.
       if (
+        // fake.consent is set in Head component.
         domainConsentId &&
         !disableCookies &&
         isDomainAllowed &&
@@ -391,6 +400,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKey,
       embedded,
       searchUrl,
+      stopsUrl,
       appBaseUrl,
       staticFilesUrl,
       activeTopicKey,
@@ -403,6 +413,9 @@ class TrafimageMaps extends React.PureComponent {
       realtimeUrl,
     } = this.props;
     const { requireConsent } = this.state;
+    const activeTopic = (topics || []).find(
+      (topic) => topic.key === activeTopicKey,
+    );
 
     if (appBaseUrl) {
       this.store.dispatch(setAppBaseUrl(appBaseUrl));
@@ -410,14 +423,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (staticFilesUrl) {
       this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
-    }
-
-    if (zoom) {
-      this.store.dispatch(setZoom(zoom));
-    }
-
-    if (center) {
-      this.store.dispatch(setCenter(center));
     }
 
     if (cartaroUrl) {
@@ -438,6 +443,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (searchUrl) {
       this.store.dispatch(setSearchUrl(searchUrl));
+    }
+
+    if (stopsUrl) {
+      this.store.dispatch(setStopsUrl(stopsUrl));
     }
 
     if (maxExtent) {
@@ -485,6 +494,14 @@ class TrafimageMaps extends React.PureComponent {
     }
     if (apiKeyName) {
       this.store.dispatch(setApiKeyName(apiKeyName));
+    }
+
+    if (zoom) {
+      this.store.dispatch(setZoom(zoom || activeTopic?.zoom));
+    }
+
+    if (center) {
+      this.store.dispatch(setCenter(center || activeTopic?.center));
     }
 
     if (embedded) {
@@ -537,6 +554,7 @@ class TrafimageMaps extends React.PureComponent {
       apiKeyName,
       embedded,
       searchUrl,
+      stopsUrl,
       appBaseUrl,
       staticFilesUrl,
       activeTopicKey,
@@ -548,13 +566,9 @@ class TrafimageMaps extends React.PureComponent {
       realtimeUrl,
     } = this.props;
 
-    if (zoom !== prevProps.zoom) {
-      this.store.dispatch(setZoom(zoom));
-    }
-
-    if (center !== prevProps.center) {
-      this.store.dispatch(setCenter(center));
-    }
+    const activeTopic = (topics || []).find(
+      (topic) => topic.key === activeTopicKey,
+    );
 
     if (cartaroUrl !== prevProps.cartaroUrl) {
       this.store.dispatch(setCartaroUrl(cartaroUrl));
@@ -574,6 +588,10 @@ class TrafimageMaps extends React.PureComponent {
 
     if (searchUrl !== prevProps.searchUrl) {
       this.store.dispatch(setSearchUrl(searchUrl));
+    }
+
+    if (stopsUrl !== prevProps.stopsUrl) {
+      this.store.dispatch(setStopsUrl(stopsUrl));
     }
 
     if (maxExtent !== prevProps.maxExtent) {
@@ -640,11 +658,15 @@ class TrafimageMaps extends React.PureComponent {
       activeTopicKey !== prevProps.activeTopicKey ||
       topics !== prevProps.topics
     ) {
-      this.store.dispatch(
-        setActiveTopic(
-          (topics || []).find((topic) => topic.key === activeTopicKey),
-        ),
-      );
+      this.store.dispatch(setActiveTopic(activeTopic));
+    }
+
+    if (zoom !== prevProps.zoom || zoom !== activeTopic?.zoom) {
+      this.store.dispatch(setZoom(zoom || activeTopic?.zoom));
+    }
+
+    if (center !== prevProps.center) {
+      this.store.dispatch(setCenter(center || activeTopic?.center));
     }
   }
 

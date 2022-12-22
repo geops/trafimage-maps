@@ -28,7 +28,9 @@ class HandicapStopFinder extends Search {
       },
     )
       .then((data) => data.json())
-      .then((featureCollection) => featureCollection.features)
+      .then((featureCollection) => {
+        return featureCollection?.features || [];
+      })
       .catch(() => {
         return [];
       });
@@ -48,13 +50,13 @@ class HandicapStopFinder extends Search {
   }
 
   openPopup(item) {
-    this.popupItem = item;
     const { layerService } = this.props;
     const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
 
     if (!layer) {
       return;
     }
+    this.popupItem = item;
 
     // We try to display the overlay only when the stations layer is ready and has all the stations loaded.
     if (layer.ready) {
@@ -65,6 +67,9 @@ class HandicapStopFinder extends Search {
   }
 
   onIdle() {
+    if (!this.popupItem) {
+      return;
+    }
     const { layerService, dispatchSetFeatureInfo } = this.props;
     const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
 
@@ -102,9 +107,14 @@ class HandicapStopFinder extends Search {
       .filter((i) => i);
 
     Promise.all(infos).then((featInfos) => {
-      const featureInfos = featInfos.filter(({ features }) => features.length);
-      dispatchSetFeatureInfo(featureInfos);
+      this.featureInfos = featInfos.filter(({ features }) => features.length);
+      dispatchSetFeatureInfo(this.featureInfos);
     });
+  }
+
+  clearPopup() {
+    this.popupItem = null;
+    return this.featureInfos;
   }
 }
 

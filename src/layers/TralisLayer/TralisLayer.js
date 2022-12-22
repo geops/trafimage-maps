@@ -41,6 +41,21 @@ class TralisLayer extends RealtimeLayer {
       style: realtimeDelayStyle,
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,
+      getMotsByZoom: (zoom) => {
+        return zoom < 14
+          ? ['rail']
+          : [
+              'tram',
+              'subway',
+              'rail',
+              'bus',
+              'ferry',
+              'cablecar',
+              'gondola',
+              'funicular',
+              'coach',
+            ];
+      },
       ...options,
       properties: {
         isQueryable: true,

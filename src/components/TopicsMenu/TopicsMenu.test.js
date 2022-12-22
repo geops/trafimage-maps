@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { Provider } from 'react-redux';
 import { Map } from 'ol';
-import LayerService from '../../utils/LayerService';
 import TopicsMenu from './TopicsMenu';
 
 const layer1 = new Layer({
@@ -39,7 +38,6 @@ describe('TopicsMenu', () => {
       },
       app: {
         menuOpen: true,
-        layerService: new LayerService([layer1, layer2]),
         topics: [topic1, topic2],
         activeTopic: topic2,
         map: new Map(),

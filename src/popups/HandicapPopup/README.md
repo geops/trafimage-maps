@@ -35,5 +35,5 @@ const apiKey = window.apiKey;
       },
     ]}
   />
-</div>
+</div>;
 ```

@@ -10,7 +10,6 @@ import VectorSource from 'ol/source/Vector';
 import { Map, View } from 'ol';
 import OLLayer from 'ol/layer/Layer';
 import fetchMock from 'fetch-mock';
-import LayerService from '../../utils/LayerService';
 import Permalink from './Permalink';
 
 describe('Permalink', () => {
@@ -29,6 +28,14 @@ describe('Permalink', () => {
     store = mockStore({
       map: {
         drawLayer,
+        layers: [
+          new Layer({
+            name: 'testLayer',
+            olLayer: new VectorLayer({
+              source: new VectorSource(),
+            }),
+          }),
+        ],
       },
       app: {
         drawUrl: 'http://drawfoo.ch/',
@@ -38,14 +45,6 @@ describe('Permalink', () => {
           name: 'topic name',
           projection: 'EPSG:3857',
         },
-        layerService: new LayerService([
-          new Layer({
-            name: 'testLayer',
-            olLayer: new VectorLayer({
-              source: new VectorSource(),
-            }),
-          }),
-        ]),
         map: new Map({ view: new View({}) }),
       },
     });

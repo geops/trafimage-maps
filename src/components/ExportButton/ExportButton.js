@@ -9,6 +9,7 @@ import Canvg from 'canvg';
 import { ReactComponent as Loader } from './loader.svg';
 
 import { getMapHd, clean, generateExtraData } from './ExportUtils';
+import LayerService from '../../utils/LayerService';
 
 const useStyles = makeStyles(() => ({
   buttonWrapper: {
@@ -46,7 +47,7 @@ function ExportButton({
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
-  const layerService = useSelector((state) => state.app.layerService);
+  const layers = useSelector((state) => state.map.layers);
   const { t } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
@@ -59,14 +60,14 @@ function ExportButton({
           pointerEvents: isLoading ? 'none' : 'auto',
           opacity: isLoading ? 0.3 : 1,
         }}
-        extraData={generateExtraData(layerService)}
+        extraData={generateExtraData(layers)}
         autoDownload={false}
         format="image/jpeg"
         onSaveStart={() => {
           setLoading(true);
           return getMapHd(
             map,
-            layerService,
+            new LayerService(layers),
             exportScale,
             exportCoordinates,
             exportSize,
@@ -75,7 +76,7 @@ function ExportButton({
           );
         }}
         onSaveEnd={async (mapToExport, canvas) => {
-          clean(mapToExport, map, layerService);
+          clean(mapToExport, map, new LayerService(layers));
 
           // add the image to a newly created PDF
           const doc = new JsPDF({

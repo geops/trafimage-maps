@@ -34,7 +34,7 @@ const defaultPermalinkParams = [
     description: () => {
       return (
         <span>
-          Base layer to display, values available are depending of the topic
+          Base layer to display, values available are depending on the topic
           selected.
         </span>
       );
@@ -49,7 +49,7 @@ const defaultPermalinkParams = [
     description: () => {
       return (
         <span>
-          Layers to display, values available are depending of the topic
+          Layers to display, values available are depending on the topic
           selected.
         </span>
       );
@@ -94,7 +94,7 @@ const defaultPermalinkParams = [
           <li>search</li>
           <li>trackerMenu</li>
           <br />
-          <div>Functionnalities to deactivate:</div>
+          <div>Functionalities to deactivate:</div>
           <br />
           <li>permalink - deactivates auto update of the window url</li>
         </span>

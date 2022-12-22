@@ -8,10 +8,15 @@ import React from 'react';
 const App = () => {
   return (
     <div className="container">
-      <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" elements="permalink=false"/>
+      <trafimage-maps
+        zoom="7"
+        apiKey={apiKey}
+        embedded="true"
+        elements="permalink=false"
+      />
     </div>
   );
-}
+};
 
-<App />
+<App />;
 ```

@@ -36,7 +36,7 @@ const BetriebsRegionenLayerInfo = () => {
       <span>{t('ch.sbb.betriebsregionen-desc')}</span>
       <div className="wkp-betriebsregionen">
         {regions.map((region) => (
-          <div className="wkp-betriebsregion">
+          <div className="wkp-betriebsregion" key={region.title}>
             <img src={region.img} height={25} width={25} alt={region.title} />
             {t(region.title)}
           </div>
