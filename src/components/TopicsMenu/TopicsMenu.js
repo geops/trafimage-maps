@@ -61,7 +61,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
     return activeTopic?.only
       ? [activeTopic]
       : topics.filter(
-          (t) => !t.only || (t.key !== activeTopic?.key && !t.hideInLayerTree),
+          (t) => t.key === activeTopic?.key || (!t.hideInLayerTree && !t.only),
         );
   }, [activeTopic, topics]);
 
