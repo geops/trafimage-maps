@@ -27,10 +27,8 @@ const useStyles = makeStyles(() => {
       boxShadow,
       '& .MuiPaper-root[style]': {
         boxShadow,
-        // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
         // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
         overflow: 'auto',
-        left: '10px !important',
       },
 
       // Allow multiline display
@@ -52,6 +50,10 @@ const useStyles = makeStyles(() => {
         borderBottom: 'none',
         paddingBottom: '6px',
       },
+    },
+    responsiveLeft: {
+      // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
+      left: '10px !important',
     },
     currentValue: {
       display: 'flex',
@@ -77,6 +79,8 @@ function GeltungsbereicheTopicMenu() {
   const ref = useRef();
   const [node, setNode] = useState();
   const { t } = useTranslation();
+  const tmMapsEl = document.getElementsByClassName('tm-trafimage-maps')[0];
+  const isEmbedded = tmMapsEl && window.innerWidth !== tmMapsEl?.offsetWidth;
   const classes = useStyles();
 
   useEffect(() => {
@@ -151,6 +155,10 @@ function GeltungsbereicheTopicMenu() {
           )}
           onChange={onChange}
           MenuProps={{
+            PopoverClasses: {
+              // When embedded as web component (not iFrame) left: 10px will move the menu outside trafimage, so we omit it
+              paper: !isEmbedded ? classes.responsiveLeft : undefined,
+            },
             disablePortal: true,
             TransitionProps: {
               onEnter: (el) => {
@@ -165,6 +173,7 @@ function GeltungsbereicheTopicMenu() {
                 const parentStyle = window.getComputedStyle(
                   ref.current.parentElement,
                 );
+
                 menuEl.style.maxWidth = parentStyle.maxWidth;
                 menuEl.style.right = parentStyle.right;
               },
