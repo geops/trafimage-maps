@@ -34,8 +34,7 @@ const useStyles = makeStyles(() => {
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-// const baseUrl = 'https://maps.trafimage.ch';
-const baseUrl = 'https://localhost:3000';
+const baseUrl = 'https://maps.trafimage.ch';
 const topic = '/ch.sbb.geltungsbereiche-iframe';
 
 const App = () => {
