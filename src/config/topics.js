@@ -23,12 +23,10 @@ import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
 import isbLayers from './ch.sbb.isb';
 import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 import zweitausbildungLayers from './ch.sbb.zweitausbildung';
-import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import stsLayers from './ch.sbb.sts';
 import defaultSearches, { handicapStopFinder } from './searches';
-import { GeltungsbereicheMenuFilter } from '../filters';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
 
@@ -277,6 +275,7 @@ export const geltungsbereicheMvp = {
   maxZoom: 14,
   layers: geltungsbereicheMvpLayers,
   projection: 'EPSG:3857',
+  hideInLayerTree: true,
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
   searches: defaultSearches,
 };
@@ -330,21 +329,6 @@ export const sts = {
   constrainOnlyCenter: true,
 };
 
-export const geltungsbereiche = {
-  name: 'ch.sbb.geltungsbereiche-beta',
-  key: 'ch.sbb.geltungsbereiche-beta',
-  elements: {
-    ...defaultElements,
-    popup: true,
-    shareMenu: true,
-  },
-  layers: geltungsbereicheLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'GeltungsbereicheTopicInfo',
-  topicMenuBottom: ({ topic }) => <GeltungsbereicheMenuFilter topic={topic} />,
-  searches: defaultSearches,
-};
-
 const topics = {
   wkp: [
     netzkarte,
@@ -357,9 +341,8 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
-    // geltungsbereicheMvp,
-    // geltungsbereicheIframe,
-    // geltungsbereiche,
+    geltungsbereicheMvp,
+    geltungsbereicheIframe,
     sts,
     energiePublic,
     sandbox,
