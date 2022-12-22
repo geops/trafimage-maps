@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => {
         // We hardcode left because the menu is too close from the window's border, mui calculate a bad left value.
         // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
         overflow: 'auto',
-        left: '10px !important',
+        left: (props) => (!props.isEmbedded ? '10px !important' : undefined),
       },
 
       // Allow multiline display
@@ -77,7 +77,10 @@ function GeltungsbereicheTopicMenu() {
   const ref = useRef();
   const [node, setNode] = useState();
   const { t } = useTranslation();
-  const classes = useStyles();
+  const tmMapsEl = document.getElementsByTagName('trafimage-maps')[0];
+  const classes = useStyles({
+    isEmbedded: window.innerWidth !== tmMapsEl?.offsetWidth,
+  });
 
   useEffect(() => {
     dispatch(setDialogPosition({ x: 390, y: 17 }));
@@ -165,6 +168,7 @@ function GeltungsbereicheTopicMenu() {
                 const parentStyle = window.getComputedStyle(
                   ref.current.parentElement,
                 );
+
                 menuEl.style.maxWidth = parentStyle.maxWidth;
                 menuEl.style.right = parentStyle.right;
               },
