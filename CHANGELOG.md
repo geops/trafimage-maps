@@ -2,42 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.18.10](https://github.com/geops/trafimage-maps/compare/v1.18.9...v1.18.10) (2022-12-22)
-
-
-### Bug Fixes
-
-* **Geltungsbereiche:** activate Geltungsbereiche topics (hidden) ([#1056](https://github.com/geops/trafimage-maps/issues/1056)) ([41bf0be](https://github.com/geops/trafimage-maps/commit/41bf0be934330dd590fa9606156e6f337ae91c01))
-* **Geltungsbereiche:** added Geltungsbereiche examples with documentation ([#1041](https://github.com/geops/trafimage-maps/issues/1041)) ([6bda271](https://github.com/geops/trafimage-maps/commit/6bda27173ddb126c779d3fabc2aac6462c55e4e2))
-
 ### [1.18.9](https://github.com/geops/trafimage-maps/compare/v1.18.8...v1.18.9) (2022-12-21)
 
-
 ### Bug Fixes
 
-* **Tarifverbundkarte:** add key to style fetch for Tarifverbundkarte legend ([#1055](https://github.com/geops/trafimage-maps/issues/1055)) ([fc27c8d](https://github.com/geops/trafimage-maps/commit/fc27c8dccd226b50df4c459b01ebe12201dfbbff))
+- **Tarifverbundkarte:** add key to style fetch for Tarifverbundkarte legend ([#1055](https://github.com/geops/trafimage-maps/issues/1055)) ([fc27c8d](https://github.com/geops/trafimage-maps/commit/fc27c8dccd226b50df4c459b01ebe12201dfbbff))
 
 ### [1.18.8](https://github.com/geops/trafimage-maps/compare/v1.18.7...v1.18.8) (2022-12-20)
 
-
 ### Bug Fixes
 
-* updated data source dates in DV and Eisenbahninfrastruktur TopicInfos ([#1054](https://github.com/geops/trafimage-maps/issues/1054)) ([22ac30b](https://github.com/geops/trafimage-maps/commit/22ac30bd13d6590293b25c9b4d80a7ef3e9d9799))
+- updated data source dates in DV and Eisenbahninfrastruktur TopicInfos ([#1054](https://github.com/geops/trafimage-maps/issues/1054)) ([22ac30b](https://github.com/geops/trafimage-maps/commit/22ac30bd13d6590293b25c9b4d80a7ef3e9d9799))
 
 ### [1.18.7](https://github.com/geops/trafimage-maps/compare/v1.18.6...v1.18.7) (2022-12-19)
 
-
 ### Bug Fixes
 
-* **Tarifverbundkarte:** improved popup and compile legend using style metadata ([#1053](https://github.com/geops/trafimage-maps/issues/1053)) ([02aa187](https://github.com/geops/trafimage-maps/commit/02aa18731931a080c4f186d014828985ae3d28f1))
+- **Tarifverbundkarte:** improved popup and compile legend using style metadata ([#1053](https://github.com/geops/trafimage-maps/issues/1053)) ([02aa187](https://github.com/geops/trafimage-maps/commit/02aa18731931a080c4f186d014828985ae3d28f1))
 
 ### [1.18.6](https://github.com/geops/trafimage-maps/compare/v1.18.3...v1.18.6) (2022-12-15)
 
-
 ### Bug Fixes
 
-* click on search clear button remove the feature info from the overlay in handicap topic ([ea6c558](https://github.com/geops/trafimage-maps/commit/ea6c558ca4360cd9c26d21b2a1184991598b5931))
-* **sts:** disable sts POI highlight visibility by default ([#1052](https://github.com/geops/trafimage-maps/issues/1052)) ([38a3ea6](https://github.com/geops/trafimage-maps/commit/38a3ea6e596f2b11d7cc3fc03a9143815fd7409e))
+- click on search clear button remove the feature info from the overlay in handicap topic ([ea6c558](https://github.com/geops/trafimage-maps/commit/ea6c558ca4360cd9c26d21b2a1184991598b5931))
+- **sts:** disable sts POI highlight visibility by default ([#1052](https://github.com/geops/trafimage-maps/issues/1052)) ([38a3ea6](https://github.com/geops/trafimage-maps/commit/38a3ea6e596f2b11d7cc3fc03a9143815fd7409e))
 
 ### [1.18.5](https://github.com/geops/trafimage-maps/compare/v1.18.4...v1.18.5) (2022-12-14)
 
