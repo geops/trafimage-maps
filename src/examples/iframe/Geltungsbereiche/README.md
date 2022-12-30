@@ -9,6 +9,7 @@ import {
   Checkbox,
   makeStyles,
 } from '@material-ui/core';
+import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import getCodeFromUrl from '../getCodeFromUrl';
 
 const useStyles = makeStyles(() => {
@@ -95,12 +96,25 @@ const App = () => {
           const newUrlObj = new URL(evt.target.value);
           const { searchParams } = newUrlObj;
           setEmbedded(searchParams.get('embedded') === 'true');
-          setUrl(evt.target.value);
+          setUrl(newUrlObj);
         }}
       />
       <div className="container">
         <iframe src={url} />
       </div>
+      <br />
+      <br />
+      <Editor
+        code={code}
+        onChange={(code) => {
+          const embedded = code.includes('embedded=true');
+          const newUrlObj = new URL(url);
+          const { searchParams } = newUrlObj;
+          setEmbedded(embedded);
+          searchParams.set('embedded', embedded);
+          setUrl(newUrlObj);
+        }}
+      />
     </>
   );
 };
