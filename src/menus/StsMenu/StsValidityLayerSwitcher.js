@@ -52,13 +52,14 @@ function StsValidityLayerSwitcher() {
         layer.visible = false;
         return;
       }
-      const otherGroupLayer = layers.find(
-        (lyr) => !!lyr.get('group') && lyr.key !== layer.key,
+      const otherGroupLayer = stsLayers.find(
+        (lyr) =>
+          lyr.get('group') === gttos.get('group') && lyr.key !== layer.key,
       );
       otherGroupLayer.visible = false;
       layer.visible = true;
     },
-    [dispatch, layers],
+    [dispatch, stsLayers],
   );
 
   return (
