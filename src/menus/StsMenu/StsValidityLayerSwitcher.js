@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+/* eslint-disable no-param-reassign */
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
@@ -40,6 +41,26 @@ function StsValidityLayerSwitcher() {
     );
   }, [layers]);
 
+  const onChange = useCallback(
+    (layer) => {
+      dispatch(setFeatureInfo([]));
+      if (layer.key === highlights.key) {
+        layer.visible = !layer.visible;
+        return;
+      }
+      if (layer.visible) {
+        layer.visible = false;
+        return;
+      }
+      const otherGroupLayer = layers.find(
+        (lyr) => !!lyr.get('group') && lyr.key !== layer.key,
+      );
+      otherGroupLayer.visible = false;
+      layer.visible = true;
+    },
+    [dispatch, layers],
+  );
+
   return (
     <FormGroup data-testid="sts-validity-layerswitcher">
       {stsLayers.map((layer) => {
@@ -52,11 +73,7 @@ function StsValidityLayerSwitcher() {
               <SBBSwitch
                 key={layer.key}
                 value={layer.key}
-                onChange={() => {
-                  // eslint-disable-next-line no-param-reassign
-                  layer.visible = !layer.visible;
-                  dispatch(setFeatureInfo([]));
-                }}
+                onChange={() => onChange(layer)}
               />
             }
           />
