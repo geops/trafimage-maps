@@ -43,6 +43,11 @@ const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
       <p style={{ marginBottom: 0 }}>
         <DataLink layer={layer} />
       </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+        </DataLink>
+      </p>
     </>
   );
   return (

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import DataLink from '../../components/DataLink';
 
@@ -75,7 +76,7 @@ const comps = {
   ),
 };
 
-const ConstructionTopicInfo = () => {
+const ConstructionTopicInfo = ({ t }) => {
   const { i18n } = useTranslation();
   return (
     <div>
@@ -84,8 +85,20 @@ const ConstructionTopicInfo = () => {
       <p>
         <DataLink href="https://data.sbb.ch/explore/dataset/construction-projects/information/" />
       </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+        </DataLink>
+      </p>
     </div>
   );
+};
+
+ConstructionTopicInfo.propTypes = {
+  t: PropTypes.func,
+};
+ConstructionTopicInfo.defaultProps = {
+  t: () => {},
 };
 
 export default React.memo(ConstructionTopicInfo);

@@ -83,7 +83,7 @@ const comps = {
   ),
 };
 
-const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
+const PassagierFrequenzenLayerInfo = ({ properties: layer, t }) => {
   const { i18n } = useTranslation();
   return (
     <div>
@@ -92,15 +92,22 @@ const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
       <p>
         <DataLink layer={layer} />
       </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+        </DataLink>
+      </p>
     </div>
   );
 };
 
 PassagierFrequenzenLayerInfo.propTypes = {
+  t: PropTypes.func,
   properties: PropTypes.instanceOf(Layer),
 };
 PassagierFrequenzenLayerInfo.defaultProps = {
   properties: { get: () => {} },
+  t: () => {},
 };
 
 export default React.memo(PassagierFrequenzenLayerInfo);

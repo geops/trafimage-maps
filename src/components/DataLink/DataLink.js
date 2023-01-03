@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import Link from '../Link';
 
-function DataLink({ layer, href }) {
+function DataLink({ children, layer, href }) {
   const { t } = useTranslation();
 
   if (!layer && !href) {
@@ -20,9 +20,10 @@ function DataLink({ layer, href }) {
   return (
     dataLink && (
       <Link href={dataLink}>
-        {`${t('Diesen Datensatz einbinden')} (${
-          t(dataLinkPortalName) || dataLinkPortalName || 'Open Data'
-        })`}
+        {children ||
+          `${t('Diesen Datensatz einbinden')} (${
+            t(dataLinkPortalName) || dataLinkPortalName || 'Open Data'
+          })`}
       </Link>
     )
   );
@@ -33,11 +34,13 @@ DataLink.propTypes = {
     get: PropTypes.func,
   }),
   href: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 DataLink.defaultProps = {
   layer: null,
   href: null,
+  children: null,
 };
 
 export default DataLink;

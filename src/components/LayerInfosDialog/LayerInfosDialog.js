@@ -32,6 +32,7 @@ function LayerInfosDialog(props) {
   let component = null;
   let description = null;
   let dataLink = null;
+  let dataService = null;
 
   // test if get function exist instead of `instanceof` since the layer may be created
   // outside this bundle.
@@ -39,6 +40,7 @@ function LayerInfosDialog(props) {
     component = selectedForInfos.get('layerInfoComponent');
     description = selectedForInfos.get('description');
     dataLink = selectedForInfos.get('dataLink');
+    dataService = selectedForInfos.get('dataService');
   } else {
     component = selectedForInfos.layerInfoComponent;
     description = selectedForInfos.description;
@@ -75,6 +77,13 @@ function LayerInfosDialog(props) {
               <DataLink layer={selectedForInfos} />
             </p>
           </>
+        )}
+        {dataService && (
+          <p>
+            <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+              {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+            </DataLink>
+          </p>
         )}
       </div>
     );
