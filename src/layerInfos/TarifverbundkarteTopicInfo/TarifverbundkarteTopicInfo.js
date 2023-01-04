@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
+
 import TarifVerbundLegend from './TarifVerbundLegend';
 import DataLink from '../../components/DataLink';
 
@@ -71,6 +72,7 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
   return (
     <div>
       {comps[language]}
+      <hr />
       <p>
         <DataLink
           fullWidth={false}

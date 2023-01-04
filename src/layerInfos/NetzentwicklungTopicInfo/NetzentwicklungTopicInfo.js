@@ -12,8 +12,11 @@ const NetzentwicklungTopicInfo = ({ t }) => {
   return (
     <div>
       <p>{t('ch.sbb.netzentwicklung-desc')}</p>
-      {t('Verantwortlich')}: I-NAT-NET-UM, Christof Mahnig,{' '}
-      <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
+      <p>
+        {t('Verantwortlich')}: I-NAT-NET-UM, Christof Mahnig,{' '}
+        <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
+      </p>
+      <hr />
       <p>
         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
           {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
