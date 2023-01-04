@@ -72,7 +72,10 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
     <div>
       {comps[language]}
       <p>
-        <DataLink href="https://data.sbb.ch/explore/dataset/tarifverbundkarte/information/" />
+        <DataLink
+          fullWidth={false}
+          href="https://data.sbb.ch/explore/dataset/tarifverbundkarte/information/"
+        />
       </p>
     </div>
   );

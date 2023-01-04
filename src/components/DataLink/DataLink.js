@@ -1,10 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Link from '../Link';
 
-function DataLink({ children, layer, href }) {
+const useStyles = makeStyles(() => {
+  return {
+    fullWidth: {
+      justifyContent: 'space-between',
+    },
+  };
+});
+
+function DataLink({ children, layer, href, fullWidth }) {
   const { t } = useTranslation();
+  const classes = useStyles();
 
   if (!layer && !href) {
     return null;
@@ -19,7 +29,7 @@ function DataLink({ children, layer, href }) {
 
   return (
     dataLink && (
-      <Link href={dataLink}>
+      <Link href={dataLink} className={fullWidth ? classes.fullWidth : ''}>
         {children ||
           `${t('Diesen Datensatz einbinden')} (${
             t(dataLinkPortalName) || dataLinkPortalName || 'Open Data'
@@ -35,11 +45,13 @@ DataLink.propTypes = {
   }),
   href: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  fullWidth: PropTypes.bool,
 };
 
 DataLink.defaultProps = {
   layer: null,
   href: null,
+  fullWidth: true,
   children: null,
 };
 

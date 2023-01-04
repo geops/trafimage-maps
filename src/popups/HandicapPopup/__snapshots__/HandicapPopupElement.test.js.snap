@@ -53,7 +53,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
               
       </span>
       <a
-        className="wkp-link"
+        className="wkp-link "
         href="http://www.test.ch"
         rel="noopener noreferrer"
         target="_blank"
@@ -87,7 +87,7 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
               
       </span>
       <a
-        className="wkp-link"
+        className="wkp-link "
         href="http://www.geops.ch"
         rel="noopener noreferrer"
         target="_blank"

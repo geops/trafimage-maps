@@ -7,12 +7,20 @@ import './Link.scss';
 const propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
-const Link = ({ href, children }) => (
-  <a className="wkp-link" href={href} rel="noopener noreferrer" target="_blank">
+const Link = ({ href, children, className }) => (
+  <a
+    className={`wkp-link ${className}`}
+    href={href}
+    rel="noopener noreferrer"
+    target="_blank"
+  >
     <span>{children}</span>
     <LinkIcon />
   </a>
