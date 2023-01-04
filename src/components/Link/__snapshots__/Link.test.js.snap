@@ -2,7 +2,7 @@
 
 exports[`Link should match snapshot. 1`] = `
 <a
-  className="wkp-link"
+  className="wkp-link "
   href="https://geops.de/"
   rel="noopener noreferrer"
   target="_blank"

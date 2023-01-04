@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
+
 import TarifVerbundLegend from './TarifVerbundLegend';
+import DataLink from '../../components/DataLink';
 
 const propTypes = {
-  t: PropTypes.func.isRequired,
   language: PropTypes.string.isRequired,
-  staticFilesUrl: PropTypes.string.isRequired,
 };
 
 const defaultProps = {};
@@ -14,7 +14,7 @@ const defaultProps = {};
 const TarifverbundkarteTopicInfo = ({ language }) => {
   const comps = {
     de: (
-      <div>
+      <>
         <p>
           Die Verbund-Landschaft der Schweiz. Finden Sie das für Sie passende
           Pendler- und Freizeitabo im Tarifverbund Ihrer Region.
@@ -24,10 +24,10 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
           Verantwortlich: SBB Personenverkehr – Marketing – Konzeption
           Regional/International
         </p>
-      </div>
+      </>
     ),
     fr: (
-      <div>
+      <>
         <p>
           Les communautés tarifaires en Suisse: trouvez l’abonnement pendulaire
           et/ou loisirs qui vous convient dans la communauté tarifaire de votre
@@ -38,10 +38,10 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
           Responsable: CFF Voyageurs – Marketing – Conception
           régional/international
         </p>
-      </div>
+      </>
     ),
     en: (
-      <div>
+      <>
         <p>
           Switzerland’s network landscape. Find the right travelcard for you for
           commuting or leisure from your region’s fare network.
@@ -51,10 +51,10 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
           Responsible: SBB Passenger Traffic – Marketing – Conception
           regional/international
         </p>
-      </div>
+      </>
     ),
     it: (
-      <div>
+      <>
         <p>
           La cartina delle comunità tariffarie svizzere. Cercate l’abbonamento
           per pendolari o per il tempo libero più adatto a voi nella comunità
@@ -65,11 +65,22 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
           Responsabile: FFS Viaggiatori – Marketing – Concezione
           regionale/internazionale
         </p>
-      </div>
+      </>
     ),
   };
 
-  return comps[language];
+  return (
+    <div>
+      {comps[language]}
+      <hr />
+      <p>
+        <DataLink
+          fullWidth={false}
+          href="https://data.sbb.ch/explore/dataset/tarifverbundkarte/information/"
+        />
+      </p>
+    </div>
+  );
 };
 
 TarifverbundkarteTopicInfo.propTypes = propTypes;

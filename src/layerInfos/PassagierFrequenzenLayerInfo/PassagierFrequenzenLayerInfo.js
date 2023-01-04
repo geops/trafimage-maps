@@ -84,13 +84,18 @@ const comps = {
 };
 
 const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   return (
     <div>
       {comps[i18n.language]}
       <hr />
       <p>
         <DataLink layer={layer} />
+      </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+        </DataLink>
       </p>
     </div>
   );

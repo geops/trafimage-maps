@@ -115,9 +115,10 @@ const useStyles = makeStyles(() => {
 const updateLayers = (key = 'sts') => {
   if (key === 'sts') {
     stsLayers.forEach((layer) => {
-      layer.visible = /(ch\.sbb\.sts\.validity(?!\.highlights$)|\.data$)/.test(
-        layer.key,
-      );
+      layer.visible =
+        /(ch\.sbb\.sts\.validity(?!\.(highlights|premium)$)|\.data$)/.test(
+          layer.key,
+        );
     });
   }
   if (key === 'dv') {

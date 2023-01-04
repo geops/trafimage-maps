@@ -138,6 +138,7 @@ export const bahnhofplaene = new Layer({
     description: 'ch.sbb.bahnhofplaene-desc',
     dataLink:
       'https://data.sbb.ch/explore/dataset/haltestelle-karte-trafimage/information/',
+    dataService: true,
   },
 });
 bahnhofplaene.children = [
