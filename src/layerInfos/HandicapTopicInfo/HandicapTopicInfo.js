@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import DataLink from '../../components/DataLink';
 
@@ -55,8 +54,8 @@ const comps = {
   ),
 };
 
-const HandicapTopicInfo = ({ t }) => {
-  const { i18n } = useTranslation();
+const HandicapTopicInfo = () => {
+  const { i18n, t } = useTranslation();
   return (
     <div>
       {comps[i18n.language]}
@@ -71,13 +70,6 @@ const HandicapTopicInfo = ({ t }) => {
       </p>
     </div>
   );
-};
-
-HandicapTopicInfo.propTypes = {
-  t: PropTypes.func,
-};
-HandicapTopicInfo.defaultProps = {
-  t: () => {},
 };
 
 export default React.memo(HandicapTopicInfo);
