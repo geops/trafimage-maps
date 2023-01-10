@@ -37,6 +37,7 @@ const propTypes = {
   // mapStateToProps
   activeTopic: PropTypes.shape({
     key: PropTypes.string,
+    disablePermalinkLayers: PropTypes.bool,
   }).isRequired,
   language: PropTypes.string.isRequired,
   map: PropTypes.instanceOf(OLMap).isRequired,
@@ -375,7 +376,7 @@ class Permalink extends PureComponent {
   }
 
   render() {
-    const { history, layers, map } = this.props;
+    const { history, layers, map, activeTopic } = this.props;
 
     return (
       <RSPermalink
@@ -383,7 +384,7 @@ class Permalink extends PureComponent {
           ...this.state,
         }}
         map={map}
-        layers={layers}
+        layers={!activeTopic.disablePermalinkLayers ? layers : undefined}
         history={history}
         isBaseLayer={(l) => l.get('isBaseLayer')}
         isLayerHidden={(l) =>

@@ -23,11 +23,12 @@ class Locations extends Search {
       },
     )
       .then((data) => data.json())
-      .then((response) =>
-        response.results.map((item) => ({
-          ...item,
-          label: item.attrs.label.replace(/<[^>]*>?/gm, ''),
-        })),
+      .then(
+        (response) =>
+          response?.results?.map((item) => ({
+            ...item,
+            label: item.attrs.label.replace(/<[^>]*>?/gm, ''),
+          })) || [],
       )
       .catch(() => {
         return [];

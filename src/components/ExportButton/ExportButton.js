@@ -60,7 +60,7 @@ function ExportButton({
           pointerEvents: isLoading ? 'none' : 'auto',
           opacity: isLoading ? 0.3 : 1,
         }}
-        extraData={generateExtraData(new LayerService(layers))}
+        extraData={generateExtraData(layers)}
         autoDownload={false}
         format="image/jpeg"
         onSaveStart={() => {

@@ -366,6 +366,7 @@ class TrafimageMaps extends React.PureComponent {
       //   in the case it uses http in an iframe, Matomo cookies will use SameSite=LAX and will not add cookie to the page from
       //   a 3rd party website, so no need of a consent.
       if (
+        // fake.consent is set in Head component.
         domainConsentId &&
         !disableCookies &&
         isDomainAllowed &&
@@ -412,6 +413,9 @@ class TrafimageMaps extends React.PureComponent {
       realtimeUrl,
     } = this.props;
     const { requireConsent } = this.state;
+    const activeTopic = (topics || []).find(
+      (topic) => topic.key === activeTopicKey,
+    );
 
     if (appBaseUrl) {
       this.store.dispatch(setAppBaseUrl(appBaseUrl));
@@ -419,14 +423,6 @@ class TrafimageMaps extends React.PureComponent {
 
     if (staticFilesUrl) {
       this.store.dispatch(setStaticFilesUrl(staticFilesUrl));
-    }
-
-    if (zoom) {
-      this.store.dispatch(setZoom(zoom));
-    }
-
-    if (center) {
-      this.store.dispatch(setCenter(center));
     }
 
     if (cartaroUrl) {
@@ -500,6 +496,14 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKeyName(apiKeyName));
     }
 
+    if (zoom) {
+      this.store.dispatch(setZoom(zoom || activeTopic?.zoom));
+    }
+
+    if (center) {
+      this.store.dispatch(setCenter(center || activeTopic?.center));
+    }
+
     if (embedded) {
       this.store.dispatch(setEmbedded(embedded));
     }
@@ -562,13 +566,9 @@ class TrafimageMaps extends React.PureComponent {
       realtimeUrl,
     } = this.props;
 
-    if (zoom !== prevProps.zoom) {
-      this.store.dispatch(setZoom(zoom));
-    }
-
-    if (center !== prevProps.center) {
-      this.store.dispatch(setCenter(center));
-    }
+    const activeTopic = (topics || []).find(
+      (topic) => topic.key === activeTopicKey,
+    );
 
     if (cartaroUrl !== prevProps.cartaroUrl) {
       this.store.dispatch(setCartaroUrl(cartaroUrl));
@@ -658,11 +658,15 @@ class TrafimageMaps extends React.PureComponent {
       activeTopicKey !== prevProps.activeTopicKey ||
       topics !== prevProps.topics
     ) {
-      this.store.dispatch(
-        setActiveTopic(
-          (topics || []).find((topic) => topic.key === activeTopicKey),
-        ),
-      );
+      this.store.dispatch(setActiveTopic(activeTopic));
+    }
+
+    if (zoom !== prevProps.zoom || zoom !== activeTopic?.zoom) {
+      this.store.dispatch(setZoom(zoom || activeTopic?.zoom));
+    }
+
+    if (center !== prevProps.center) {
+      this.store.dispatch(setCenter(center || activeTopic?.center));
     }
   }
 

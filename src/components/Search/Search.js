@@ -12,6 +12,7 @@ function Search() {
   const [suggestions, setSuggestions] = useState([]);
   const [value, setValue] = useState('');
   const map = useSelector((state) => state.app.map);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
   const searchService = useSelector((state) => state.app.searchService);
   const searchContainerRef = useRef();
   const { t } = useTranslation();
@@ -132,6 +133,22 @@ function Search() {
                       setValue('');
                       searchService.clearHighlight();
                       searchService.clearSelect();
+                      const searchFeatureInfos = searchService.clearPopup();
+
+                      // We remove the stations feature infos from the current list of feature infos.
+                      if (featureInfo?.length && searchFeatureInfos?.length) {
+                        (searchFeatureInfos || []).forEach(
+                          (searchFeatureInfo) => {
+                            const index = featureInfo?.findIndex((info) => {
+                              return info === searchFeatureInfo;
+                            });
+                            if (index > -1) {
+                              featureInfo.splice(index, 1);
+                            }
+                          },
+                        );
+                        dispatch(setFeatureInfo([...featureInfo]));
+                      }
                     }}
                   >
                     <FaTimes focusable={false} />

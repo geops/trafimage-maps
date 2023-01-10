@@ -43,6 +43,11 @@ function DirektVerbindungenLayerInfo({ properties: layer }) {
       <p style={{ marginBottom: 0 }}>
         <DataLink layer={layer} />
       </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+        </DataLink>
+      </p>
     </>
   );
   return (
@@ -58,7 +63,7 @@ function DirektVerbindungenLayerInfo({ properties: layer }) {
           </p>
           <div>{legend}</div>
           <p>
-            Datenstand 12. Dezember 2021.
+            Datenstand 11. Dezember 2022.
             <br />
             Die Karte wird jährlich zum Fahrplanwechsel aktualisiert.
             <br />
@@ -78,7 +83,7 @@ function DirektVerbindungenLayerInfo({ properties: layer }) {
           </p>
           <div>{legend}</div>
           <p>
-            Mise à jour des données le 12 décembre 2021.
+            Mise à jour des données le 11 décembre 2022.
             <br />
             La carte est actualisée chaque année lors du changement
             d&apos;horaire.
@@ -98,7 +103,7 @@ function DirektVerbindungenLayerInfo({ properties: layer }) {
           </p>
           <div>{legend}</div>
           <p>
-            Data updated on 12 December 2021.
+            Data updated on 11 December 2022.
             <br />
             The map is updated annually at the time of the timetable change.
             <br />
@@ -118,7 +123,7 @@ function DirektVerbindungenLayerInfo({ properties: layer }) {
           </p>
           <div>{legend}</div>
           <p>
-            Stato dei dati 12 dicembre 2021.
+            Stato dei dati 11 dicembre 2022.
             <br />
             La mappa viene aggiornata ogni anno al momento del cambio
             d&apos;orario.

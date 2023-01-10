@@ -18,6 +18,7 @@ const LS_SIZE_KEY = 'tm.max.canvas.size';
 const useStyles = makeStyles((theme) => ({
   menuContent: {
     padding: 16,
+    overflow: 'hidden',
   },
   selectWrapper: {
     display: 'flex',

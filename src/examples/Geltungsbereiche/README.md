@@ -1,4 +1,3 @@
-
 This example shows how to show the Geltungsbereiche topic optimized for small screen.
 
 ```jsx
@@ -10,11 +9,11 @@ const apiKey = window.apiKey;
 
 <trafimage-maps
   apiKey={apiKey}
-  activeTopicKey='ch.sbb.geltungsbereiche-iframe'
+  activeTopicKey="ch.sbb.geltungsbereiche-iframe"
   height="500px"
   zoom="7"
   language="en"
   elements="permalink=false"
   embedded="true"
-/>
+/>;
 ```

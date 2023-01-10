@@ -91,11 +91,11 @@ module.exports = {
           content: 'src/examples/Schulzug/README.md',
           exampleMode: 'expand',
         },
-        // {
-        //   name: 'Geltungsbereiche',
-        //   content: 'src/examples/Geltungsbereiche/README.md',
-        //   exampleMode: 'expand',
-        // },
+        {
+          name: 'Geltungsbereiche',
+          content: 'src/examples/Geltungsbereiche/README.md',
+          exampleMode: 'expand',
+        },
       ],
     },
     {
@@ -105,11 +105,11 @@ module.exports = {
       sectionDepth: 2,
       exampleMode: 'hide',
       sections: [
-        // {
-        //   name: 'Geltungsbereiche',
-        //   content: 'src/examples/iframe/Geltungsbereiche/README.md',
-        //   exampleMode: 'expand',
-        // },
+        {
+          name: 'Geltungsbereiche',
+          content: 'src/examples/iframe/Geltungsbereiche/README.md',
+          exampleMode: 'expand',
+        },
       ],
     },
   ],

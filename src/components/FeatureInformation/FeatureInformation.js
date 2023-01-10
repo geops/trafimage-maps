@@ -14,6 +14,7 @@ import { Link, IconButton } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
 import popups from '../../popups';
 import highlightPointStyle from '../../utils/highlightPointStyle';
+import panCenterFeature from '../../utils/panCenterFeature';
 
 const getPopupComponent = ({ popupComponent, layer }) => {
   const comp = popupComponent || layer.get('popupComponent');
@@ -182,44 +183,7 @@ function FeatureInformation({ featureInfo }) {
     if (!coordinateClicked) {
       return;
     }
-    const overlayWidthDesktop = 400;
-    const overlayHeightMobile = 250;
-    const menuWidthDesktop = 381;
-    const redCircleWidth = 25;
-    const [width, height] = map.getSize();
-    const [pixelX, pixelY] = map.getPixelFromCoordinate(coordinateClicked);
-    const isUsingOverlay = !!layers.find((l) => l.get('useOverlay'));
-    const isHiddenByOverlayOnDesktop =
-      isUsingOverlay && pixelX >= width - overlayWidthDesktop - redCircleWidth;
-    const isHiddenByOverlayOnMobile =
-      isUsingOverlay && pixelY >= height - overlayHeightMobile - redCircleWidth;
-    const isHiddenByMenuOnDesktop =
-      menuOpen && pixelX <= menuWidthDesktop + redCircleWidth;
-
-    let padding = null;
-
-    if (isMobile && isHiddenByOverlayOnMobile) {
-      padding = [0, 0, overlayHeightMobile, 0];
-    } else if (
-      !isMobile &&
-      (isHiddenByOverlayOnDesktop || isHiddenByMenuOnDesktop)
-    ) {
-      padding = [
-        0,
-        isUsingOverlay ? overlayWidthDesktop : 0,
-        0,
-        menuOpen ? menuWidthDesktop : 0,
-      ];
-    }
-
-    if (padding) {
-      map.getView().cancelAnimations();
-      map.getView().fit([...coordinateClicked, ...coordinateClicked], {
-        padding,
-        maxZoom: map.getView().getZoom(), // only pan
-        duration: 500,
-      });
-    }
+    panCenterFeature(map, layers, coordinateClicked, menuOpen, isMobile);
   }, [map, isMobile, featureIndex, infoIndexed, menuOpen]);
 
   // The current feature(s) to display.

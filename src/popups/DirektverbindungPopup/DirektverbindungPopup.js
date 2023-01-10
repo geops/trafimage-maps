@@ -81,7 +81,11 @@ const useStyles = makeStyles({
 });
 
 const propTypes = {
-  feature: PropTypes.instanceOf(Feature).isRequired,
+  feature: PropTypes.instanceOf(Feature),
+};
+
+const defaultProps = {
+  feature: null,
 };
 
 function DVPopupTitle({ feature }) {
@@ -106,6 +110,23 @@ function DirektverbindungPopup({ feature, layer }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
 
+  useEffect(() => {
+    if (layer.visible) {
+      if (feature) {
+        layer.select([feature]);
+      } else {
+        layer.select();
+      }
+      return;
+    }
+    // eslint-disable-next-line consistent-return
+    return () => layer.select();
+  }, [layer, feature]);
+
+  if (!feature) {
+    return null;
+  }
+
   const {
     start_station_name: start,
     end_station_name: end,
@@ -115,16 +136,9 @@ function DirektverbindungPopup({ feature, layer }) {
     [`url_${i18n.language}`]: link,
   } = feature.getProperties();
 
-  const switchVias = JSON.parse(vias).filter(
+  const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
     (via) => via.via_type === 'switch' || via.via_type === 'visible',
   );
-
-  useEffect(() => {
-    if (layer.visible) {
-      layer.select([feature]);
-    }
-    return () => layer.select();
-  }, [layer, feature]);
 
   return (
     <div className={classes.container}>
@@ -183,6 +197,7 @@ function DirektverbindungPopup({ feature, layer }) {
 }
 
 DirektverbindungPopup.renderTitle = (feat) => <DVPopupTitle feature={feat} />;
+DirektverbindungPopup.defaultProps = defaultProps;
 
 DirektverbindungPopup.propTypes = propTypes;
 export default DirektverbindungPopup;

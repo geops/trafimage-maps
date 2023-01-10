@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { unByKey } from 'ol/Observable';
-import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
+import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
 import TopicMenu from '../TopicMenu';
 import TopicsMenuHeader from '../TopicsMenuHeader';
 import Collapsible from '../Collapsible';
@@ -61,7 +61,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
     return activeTopic?.only
       ? [activeTopic]
       : topics.filter(
-          (t) => !t.only || (t.key !== activeTopic?.key && !t.hideInLayerTree),
+          (t) => t.key === activeTopic?.key || (!t.hideInLayerTree && !t.only),
         );
   }, [activeTopic, topics]);
 

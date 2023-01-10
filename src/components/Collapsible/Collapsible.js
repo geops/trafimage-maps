@@ -6,8 +6,8 @@ const propTypes = {
   className: PropTypes.string,
   transitionDuration: PropTypes.number,
   isCollapsed: PropTypes.bool.isRequired,
-  maxHeight: PropTypes.number,
-  maxWidth: PropTypes.number,
+  maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   type: PropTypes.oneOf(['vertical', 'horizontal']),
   hideScrollbar: PropTypes.bool,
 };

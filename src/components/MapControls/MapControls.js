@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Zoom from 'react-spatial/components/Zoom';
 import Geolocation from 'react-spatial/components/Geolocation';
 import FitExtent from 'react-spatial/components/FitExtent';
@@ -11,31 +11,38 @@ import { Style, Icon } from 'ol/style';
 import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
 import { ReactComponent as ZoomOut } from '../../img/minus.svg';
 import { ReactComponent as ZoomIn } from '../../img/plus.svg';
+import { ReactComponent as MenuOpenImg } from '../../img/sbb/040_hamburgermenu_102_36.svg';
+import { ReactComponent as MenuClosedImg } from '../../img/sbb/040_schliessen_104_36.svg';
 import Geolocate from '../../img/Geolocate';
 import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
 import geolocateMarker from '../../img/geolocate_marker.svg';
-
-const swissExtent = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+import { SWISS_EXTENT } from '../../utils/constants';
+import { setDisplayMenu } from '../../model/app/actions';
+import './MapControls.scss';
 
 const propTypes = {
   geolocation: PropTypes.bool,
   zoomSlider: PropTypes.bool,
   fitExtent: PropTypes.bool,
+  menuToggler: PropTypes.bool,
 };
 
 const defaultProps = {
   geolocation: true,
   zoomSlider: true,
   fitExtent: true,
+  menuToggler: false,
 };
 
 const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
 };
 
-function MapControls({ geolocation, zoomSlider, fitExtent }) {
+function MapControls({ menuToggler, geolocation, zoomSlider, fitExtent }) {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
+  const displayMenu = useSelector((state) => state.app.displayMenu);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const [geolocating, setGeolocating] = useState(false);
   const featureRef = useRef(geolocationFeature);
@@ -162,6 +169,15 @@ function MapControls({ geolocation, zoomSlider, fitExtent }) {
 
   return (
     <div className="wkp-map-controls">
+      {menuToggler && (
+        <button
+          type="button"
+          className="wkp-display-menu-toggler"
+          onClick={() => dispatch(setDisplayMenu(!displayMenu))}
+        >
+          {displayMenu ? <MenuClosedImg /> : <MenuOpenImg />}
+        </button>
+      )}
       <Zoom
         map={map}
         zoomInChildren={<ZoomIn />}
@@ -191,7 +207,7 @@ function MapControls({ geolocation, zoomSlider, fitExtent }) {
         <FitExtent
           map={map}
           title={t('Ganze Schweiz')}
-          extent={swissExtent}
+          extent={SWISS_EXTENT}
           className="wkp-fit-extent"
         >
           <SwissBounds focusable={false} />

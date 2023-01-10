@@ -189,12 +189,11 @@ export const legends = [
 
 // eslint-disable-next-line react/prop-types
 function GeltungsbereicheLegend({ mot, valid, background }) {
-  // const mapboxFeature = feature.get('mapboxFeature');
   const legend = legends
     .find(({ mots }) => {
       return mots.includes(mot);
     })
-    .validity.find(({ value }) => {
+    ?.validity.find(({ value }) => {
       if (Array.isArray(value) && !Array.isArray(valid)) {
         return value.includes(valid);
       }

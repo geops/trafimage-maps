@@ -5,14 +5,17 @@ import { ReactComponent as LinkIcon } from './Link.svg';
 const propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
-const defaultProps = {};
+const defaultProps = {
+  className: '',
+};
 
-function Link({ href, children }) {
+function Link({ href, children, className }) {
   return (
     <a
-      className="wkp-link"
+      className={`wkp-link ${className}`}
       href={href}
       rel="noopener noreferrer"
       target="_blank"

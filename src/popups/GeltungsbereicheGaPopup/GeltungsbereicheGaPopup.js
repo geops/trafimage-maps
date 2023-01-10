@@ -17,6 +17,7 @@ import GeltungsbereicheLegend, { legends } from './GeltungsbereicheLegend';
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
   layer: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,
+  renderValidityFooter: PropTypes.bool,
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -55,7 +56,11 @@ const translations = {
   },
 };
 
-function GeltungsbereichePopup({ feature: features, layer: layers }) {
+function GeltungsbereichePopup({
+  feature: features,
+  layer: layers,
+  renderValidityFooter,
+}) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
@@ -144,35 +149,43 @@ function GeltungsbereichePopup({ feature: features, layer: layers }) {
         <GeltungsbereicheLegend background />
         <Typography variant="subtitle1">{t('Keine Ermässigung')}</Typography>
       </div>
-      <br />
-      <Typography variant="h4">
-        {translations[i18n.language]['Information gilt für diese Produkte']}:
-      </Typography>
-      <List dense>
-        {products.map((product) => {
-          return (
-            <ListItem className={classes.listItem} key={product}>
-              <ListItemIcon className={classes.listItemIcon}>
-                <AiTwotoneCopyrightCircle size={7} />
-              </ListItemIcon>
-              <ListItemText primaryTypographyProps={{ variant: 'body1' }}>
-                {
-                  // eslint-disable-next-line react/no-danger
-                  <span dangerouslySetInnerHTML={{ __html: t(product) }} />
-                }
-              </ListItemText>
-            </ListItem>
-          );
-        })}
-      </List>
-      {productsRemark ? (
-        <Typography variant="body1">{t(productsRemark)}</Typography>
-      ) : null}
+      {renderValidityFooter && (
+        <>
+          <br />
+          <Typography variant="h4">
+            {translations[i18n.language]['Information gilt für diese Produkte']}
+            :
+          </Typography>
+          <List dense>
+            {products.map((product) => {
+              return (
+                <ListItem className={classes.listItem} key={product}>
+                  <ListItemIcon className={classes.listItemIcon}>
+                    <AiTwotoneCopyrightCircle size={7} />
+                  </ListItemIcon>
+                  <ListItemText primaryTypographyProps={{ variant: 'body1' }}>
+                    {
+                      // eslint-disable-next-line react/no-danger
+                      <span dangerouslySetInnerHTML={{ __html: t(product) }} />
+                    }
+                  </ListItemText>
+                </ListItem>
+              );
+            })}
+          </List>
+          {productsRemark ? (
+            <Typography variant="body1">{t(productsRemark)}</Typography>
+          ) : null}
+        </>
+      )}
     </div>
   );
 }
 
 GeltungsbereichePopup.propTypes = propTypes;
+GeltungsbereichePopup.defaultProps = {
+  renderValidityFooter: true,
+};
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
   return t('ch.sbb.geltungsbereiche');

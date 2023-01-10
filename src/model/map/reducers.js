@@ -5,6 +5,8 @@ import {
   SET_RESOLUTION,
   SET_ZOOM,
   SET_MAX_EXTENT,
+  SET_MAX_ZOOM,
+  SET_MIN_ZOOM,
 } from './actions';
 
 const initialState = {
@@ -58,11 +60,22 @@ export default function app(state = initialState, action) {
       if (!action.data) {
         return {
           ...state,
+          maxExtent: undefined,
         };
       }
       return {
         ...state,
         maxExtent: action.data,
+      };
+    case SET_MAX_ZOOM:
+      return {
+        ...state,
+        maxZoom: action.data,
+      };
+    case SET_MIN_ZOOM:
+      return {
+        ...state,
+        minZoom: action.data,
       };
     default:
       return {

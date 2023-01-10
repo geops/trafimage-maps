@@ -23,12 +23,12 @@ import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
 import isbLayers from './ch.sbb.isb';
 import sandboxLayers from './ch.sbb.netzkarte.sandbox';
 import zweitausbildungLayers from './ch.sbb.zweitausbildung';
-import geltungsbereicheLayers from './ch.sbb.geltungsbereiche';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
+import stsLayers from './ch.sbb.sts';
 import defaultSearches, { handicapStopFinder } from './searches';
-import { GeltungsbereicheMenuFilter } from '../filters';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
+import StsMenu from '../menus/StsMenu';
 
 // For backward compatibility
 export {
@@ -176,10 +176,10 @@ export const tarifverbundkarte = {
   maxZoom: 12,
   exportConfig: {
     publisher: 'tobias.hauser@sbb.ch',
-    publishedAt: '12/2021',
-    dateDe: '12.12.2021',
-    dateFr: '12.12.2021',
-    year: '2021',
+    publishedAt: '12/2022',
+    dateDe: '12.12.2022',
+    dateFr: '12.12.2022',
+    year: '2022',
     overlayImageUrl: tarifverbundkarteLegend,
   },
   elements: {
@@ -275,6 +275,7 @@ export const geltungsbereicheMvp = {
   maxZoom: 14,
   layers: geltungsbereicheMvpLayers,
   projection: 'EPSG:3857',
+  hideInLayerTree: true,
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
   searches: defaultSearches,
 };
@@ -300,19 +301,32 @@ export const geltungsbereicheIframe = {
   menu: <GeltungsbereicheTopicMenu />,
 };
 
-export const geltungsbereiche = {
-  name: 'ch.sbb.geltungsbereiche-beta',
-  key: 'ch.sbb.geltungsbereiche-beta',
+export const sts = {
+  name: 'ch.sbb.sts',
+  key: 'ch.sbb.sts',
   elements: {
     ...defaultElements,
-    popup: true,
-    shareMenu: true,
+    overlay: false,
+    popup: false,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+    menuToggler: true,
   },
-  layers: geltungsbereicheLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'GeltungsbereicheTopicInfo',
-  topicMenuBottom: ({ topic }) => <GeltungsbereicheMenuFilter topic={topic} />,
-  searches: defaultSearches,
+  layers: stsLayers,
+  only: true,
+  hideInLayerTree: true,
+  menu: <StsMenu />,
+  enableFeatureClick: true,
+  disablePermalinkLayers: false,
+  center: [915788.3813658276, 5909670.533831286],
+  zoom: 8,
+  constrainOnlyCenter: true,
 };
 
 const topics = {
@@ -327,9 +341,9 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
-    // geltungsbereicheMvp,
-    // geltungsbereicheIframe,
-    // geltungsbereiche,
+    geltungsbereicheMvp,
+    geltungsbereicheIframe,
+    sts,
     energiePublic,
     sandbox,
   ],

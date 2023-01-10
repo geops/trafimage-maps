@@ -26,7 +26,7 @@ const App = () => {
   useEffect(() => {
     const map = ref.current;
     map.topics = [
-      { 
+      {
         name: 'Punctuality topic',
         key: 'punctuality',
         layers: [
@@ -46,7 +46,7 @@ const App = () => {
             // tripNumber: '5712,6553',
             // publishedLineName: 'RE,IC5,S3,17',
             // regexPublishedLineName: '^S[0-5]$'
-          })
+          }),
         ],
         elements: {
           footer: true,
@@ -56,7 +56,7 @@ const App = () => {
           popup: true,
           permalink: false,
           search: false,
-          trackerMenu: true
+          trackerMenu: true,
         },
       },
     ];
