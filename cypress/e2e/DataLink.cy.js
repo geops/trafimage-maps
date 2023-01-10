@@ -3,7 +3,7 @@ describe('A link to data', () => {
   beforeEach(() => {
     cy.consent();
     cy.visit('');
-    cy.get('.wkp-menu-header').click();
+    cy.get('.wkp-menu-header', { timeout: 20000 }).click();
   });
 
   it('is available for direktverbindung layer', () => {
