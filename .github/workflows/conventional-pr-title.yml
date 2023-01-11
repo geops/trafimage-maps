@@ -16,3 +16,5 @@ jobs:
           success-state: Title follows the specification.
           failure-state: Title does not follow the specification.
           context-name: conventional-pr-title
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
