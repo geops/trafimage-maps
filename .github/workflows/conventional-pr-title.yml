@@ -8,7 +8,7 @@ on:
       - synchronize
 
 permissions:
-  actions: read
+  actions: write
   checks: read
   contents: read
   deployments: read
@@ -17,8 +17,8 @@ permissions:
   discussions: read
   packages: read
   pages: read
-  pull-requests: read
-  repository-projects: read
+  pull-requests: write
+  repository-projects: write
   security-events: read
   statuses: write
 
