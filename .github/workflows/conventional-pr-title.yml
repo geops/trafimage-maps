@@ -9,17 +9,17 @@ on:
 
 permissions:
   actions: write
-  checks: read
-  contents: read
-  deployments: read
-  id-token: read
-  issues: read
-  discussions: read
-  packages: read
-  pages: read
+  checks: write
+  contents: write
+  deployments: write
+  id-token: write
+  issues: write
+  discussions: write
+  packages: write
+  pages: write
   pull-requests: write
   repository-projects: write
-  security-events: read
+  security-events: write
   statuses: write
 
 jobs:
