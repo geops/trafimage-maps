@@ -20,7 +20,7 @@ permissions:
   pull-requests: read
   repository-projects: read
   security-events: read
-  statuses: write
+  statuses: read
 
 jobs:
   lint:
