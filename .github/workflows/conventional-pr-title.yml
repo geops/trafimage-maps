@@ -7,6 +7,8 @@ on:
       - edited
       - synchronize
 
+permissions: write-all
+
 jobs:
   lint:
     runs-on: ubuntu-latest
