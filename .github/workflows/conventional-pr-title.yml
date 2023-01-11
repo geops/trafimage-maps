@@ -17,9 +17,9 @@ permissions:
   discussions: read
   packages: read
   pages: read
-  pull-requests: write
-  repository-projects: write
-  security-events: write
+  pull-requests: read
+  repository-projects: read
+  security-events: read
   statuses: write
 
 jobs:
