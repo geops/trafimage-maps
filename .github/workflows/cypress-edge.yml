@@ -4,7 +4,10 @@ on: [push]
 
 jobs:
   run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
+    container:
+      # See images at https://github.com/cypress-io/cypress-docker-images/tree/master/browsers
+      image: cypress/browsers:node16.18.0-chrome107-ff106-edge
     steps:
       - name: Checkout
         uses: actions/checkout@v3
