@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.12](https://github.com/geops/trafimage-maps/compare/v1.18.11...v1.18.12) (2023-01-13)
+
+
+### Bug Fixes
+
+* **Geltungsbereiche:** don't hide Geltungsbereiche in LayerTree ([#1061](https://github.com/geops/trafimage-maps/issues/1061)) ([6ed6751](https://github.com/geops/trafimage-maps/commit/6ed6751fa40061788f3b50d3545ec998c2bf6bdf))
+
 ### [1.18.11](https://github.com/geops/trafimage-maps/compare/v1.18.10...v1.18.11) (2023-01-04)
 
 
