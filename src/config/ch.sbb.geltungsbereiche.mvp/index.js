@@ -133,7 +133,7 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
 export default [
   geltungsbereicheDataLayer,
   geltungsbereicheSTS,
-  geltungsbereicheHta,
   geltungsbereicheTk,
+  geltungsbereicheHta,
   geltungsbereicheGA,
 ];

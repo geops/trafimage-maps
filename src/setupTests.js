@@ -8,8 +8,8 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
-
 import mediaQuery from 'css-mediaquery';
+import i18n from './i18n';
 
 configure({ adapter: new Adapter() });
 
@@ -28,6 +28,12 @@ proj4.defs(
 );
 
 register(proj4);
+
+// We don't want to test translations so we reinitialize the 'de' bundle with some contents for unit tests.
+i18n.removeResourceBundle('de', 'translation');
+i18n.addResourceBundle('de', 'translation', {});
+
+global.i18n = i18n;
 
 global.URL.createObjectURL = jest.fn(() => 'fooblob');
 
