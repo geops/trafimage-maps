@@ -21,7 +21,7 @@ const topic = 'ch.sbb.geltungsbereiche-iframe';
 
 
 const App = () => {
-  const [url, setUrl] = useState(baseUrl + '/' + topic);
+  const [url, setUrl] = useState(baseUrl + '/' + topic + '?embedded=true');
 
   const code = useMemo(() => {
     return getCodeFromUrl(url);
