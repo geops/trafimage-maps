@@ -15,23 +15,32 @@ describe('GeltungsbereicheTopicMenu', () => {
     visible: true,
     properties: { isBaseLayer: true },
   });
-  const layer1 = new Layer({ name: 'foo', visible: false });
-  const layer2 = new Layer({ name: 'bar', visible: true });
+  const layer1 = new Layer({
+    name: 'foo',
+    visible: false,
+  });
+  const layer2 = new Layer({
+    name: 'bar',
+    visible: true,
+  });
 
   test('should display the menu and select the good value', () => {
+    global.i18n.addResourceBundle('de', 'translation', {
+      foo: 'foo <b>bold</b>',
+      bar: 'bar <b>boldbar</b>',
+    });
     store = mockStore({
       map: { layers: [baseLayer, layer1, layer2] },
       app: { map: new OLMap({}), menuOpen: false },
     });
-
     const { container } = render(
       <Provider store={store}>
         <GeltungsbereicheTopicMenu />
       </Provider>,
     );
-
     expect(container.querySelectorAll('.wkp-menu-item').length).toBe(1);
     expect(container.querySelectorAll('.wkp-gb-topic-menu').length).toBe(1);
+    expect(screen.getByText('boldbar').nodeName).toBe('B');
     expect(screen.getByText('bar')).toBeInTheDocument();
   });
 });

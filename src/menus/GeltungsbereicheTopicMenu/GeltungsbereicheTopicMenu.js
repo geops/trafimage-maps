@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import { makeStyles, MenuItem as MuiMenuItem } from '@material-ui/core';
 import { unByKey } from 'ol/Observable';
 import MenuItem from '../../components/Menu/MenuItem';
@@ -78,7 +78,6 @@ function GeltungsbereicheTopicMenu() {
   const drawLayer = useSelector((state) => state.map.drawLayer);
   const ref = useRef();
   const [node, setNode] = useState();
-  const { t } = useTranslation();
   const tmMapsEl = document.getElementsByClassName('tm-trafimage-maps')[0];
   const isEmbedded = tmMapsEl && window.innerWidth !== tmMapsEl?.offsetWidth;
   const classes = useStyles();
@@ -148,7 +147,7 @@ function GeltungsbereicheTopicMenu() {
               className={`wkp-gb-menu-current-value ${classes.currentValue}`}
             >
               <span style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
-                {t(value)}
+                <Trans i18nKey={value} />
               </span>
               <span style={{ width: 20 }} />
             </span>
@@ -191,7 +190,9 @@ function GeltungsbereicheTopicMenu() {
 
             return (
               <MuiMenuItem key={layer.key} value={layer.name}>
-                {t(layer.name)}
+                <span>
+                  <Trans i18nKey={layer.name} />
+                </span>
               </MuiMenuItem>
             );
           })}
