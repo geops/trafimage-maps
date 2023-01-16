@@ -158,7 +158,7 @@ export const defaultPermalinkParams = [
     name: 'embedded',
     type: 'boolean',
     comp: 'checkbox',
-    defaultValue: false,
+    defaultValue: true,
     description: () => {
       return (
         <span>
