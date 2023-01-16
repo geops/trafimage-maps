@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.13](https://github.com/geops/trafimage-maps/compare/v1.18.12...v1.18.13) (2023-01-16)
+
+
+### Bug Fixes
+
+* manage bold text in layer name and in geleutngsbereiche menu ([#1060](https://github.com/geops/trafimage-maps/issues/1060)) ([ccb0619](https://github.com/geops/trafimage-maps/commit/ccb0619344062492c7442620e57d24f4a8511f5e))
+
 ### [1.18.12](https://github.com/geops/trafimage-maps/compare/v1.18.11...v1.18.12) (2023-01-13)
 
 
