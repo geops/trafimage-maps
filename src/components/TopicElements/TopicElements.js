@@ -106,8 +106,16 @@ function TopicElements({ history }) {
     );
   }, [activeTopic]);
 
+  const topicClassName = useMemo(() => {
+    let classNamee = '';
+    if (activeTopic?.key) {
+      classNamee = activeTopic.key.toLowerCase().replaceAll('.', '-');
+    }
+    return classNamee;
+  }, [activeTopic]);
+
   const className = useMemo(() => {
-    const classNames = ['tm-trafimage-maps'];
+    const classNames = ['tm-trafimage-maps', topicClassName];
 
     if (elements.header) {
       classNames.push('header');
@@ -122,7 +130,7 @@ function TopicElements({ history }) {
     }
 
     return classNames.join(' ');
-  }, [elements]);
+  }, [topicClassName, elements]);
 
   const barrierFreeClassName = useMemo(() => {
     const classNames = ['tm-barrier-free'];

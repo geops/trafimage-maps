@@ -48,7 +48,6 @@ i18n
       },
       react: {
         useSuspense: false,
-        wait: false,
         transKeepBasicHtmlNodesFor: [
           'br',
           'strong',
@@ -58,6 +57,7 @@ i18n
           'img',
           'p',
           'a',
+          'b',
         ],
       },
     },

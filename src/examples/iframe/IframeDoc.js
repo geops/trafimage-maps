@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
 import topics, { getTopicConfig } from '../../config/topics';
 
-const defaultPermalinkParams = [
+export const defaultPermalinkParams = [
   {
     name: 'topic',
     type: 'string',
@@ -223,7 +223,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function IframeDoc({ value, onChange }) {
+function IframeDoc({ value, onChange, filter }) {
   const classes = useStyles();
   const [permalinkParams, setPermalinkParams] = useState(
     defaultPermalinkParams,
@@ -276,141 +276,143 @@ function IframeDoc({ value, onChange }) {
         </tr>
       </thead>
       <tbody>
-        {permalinkParams.map(
-          ({
-            name,
-            type,
-            defaultValue,
-            values,
-            description,
-            comp,
-            props,
-            pathname,
-          }) => {
-            let currentValue = pathname
-              ? url.pathname.split('/')[1] || ''
-              : searchParams.get(name);
+        {permalinkParams
+          .filter(filter)
+          .map(
+            ({
+              name,
+              type,
+              defaultValue,
+              values,
+              description,
+              comp,
+              props,
+              pathname,
+            }) => {
+              let currentValue = pathname
+                ? url.pathname.split('/')[1] || ''
+                : searchParams.get(name);
 
-            const isSelectMultiple = comp === 'select' && /Array/i.test(type);
+              const isSelectMultiple = comp === 'select' && /Array/i.test(type);
 
-            if (pathname) {
-              currentValue = url.pathname.split('/')[1] || '';
-            } else if (comp === 'checkbox') {
-              currentValue = currentValue === 'true' || currentValue === true;
-            } else if (comp === 'select') {
-              currentValue = searchParams.get(name);
+              if (pathname) {
+                currentValue = url.pathname.split('/')[1] || '';
+              } else if (comp === 'checkbox') {
+                currentValue = currentValue === 'true' || currentValue === true;
+              } else if (comp === 'select') {
+                currentValue = searchParams.get(name);
 
-              if (isSelectMultiple) {
-                currentValue = searchParams.get(name)?.split(',');
+                if (isSelectMultiple) {
+                  currentValue = searchParams.get(name)?.split(',');
+                }
+                if (!currentValue && isSelectMultiple) {
+                  currentValue = [];
+                }
+                if (!currentValue) {
+                  currentValue = '';
+                }
+              } else if (comp === 'input') {
+                if (!currentValue) {
+                  currentValue = '';
+                }
               }
-              if (!currentValue && isSelectMultiple) {
-                currentValue = [];
-              }
-              if (!currentValue) {
-                currentValue = '';
-              }
-            } else if (comp === 'input') {
-              if (!currentValue) {
-                currentValue = '';
-              }
-            }
 
-            return (
-              <tr key={name}>
-                <td className={classes.colName}>
-                  <span className="flex">{name}</span>
-                </td>
-                {/* <td className={classes.colType}>{type}</td> */}
-                <td className={classes.colDefault}>
-                  <span className="flex">{defaultValue || ''}</span>
-                </td>
-                <td className={classes.colDescription}>
-                  <span className="flex">{description()}</span>
-                </td>
-                <td className={classes.colSelected}>
-                  {comp === 'select' && (
-                    <FormControl>
-                      <InputLabel id="demo-mutiple-name-label">
-                        {name}
-                      </InputLabel>
-                      <Select
-                        labelId="demo-mutiple-name-label"
-                        multiple={/Array/i.test(type)}
-                        value={currentValue}
-                        onChange={(evt) => {
-                          if (pathname) {
-                            url.pathname = `/${evt.target.value}`;
-                          } else {
-                            const newValue = isSelectMultiple
-                              ? evt.target.value.join(',')
-                              : evt.target.value;
-                            if (newValue) {
-                              searchParams.set(name, newValue);
+              return (
+                <tr key={name}>
+                  <td className={classes.colName}>
+                    <span className="flex">{name}</span>
+                  </td>
+                  {/* <td className={classes.colType}>{type}</td> */}
+                  <td className={classes.colDefault}>
+                    <span className="flex">{defaultValue || ''}</span>
+                  </td>
+                  <td className={classes.colDescription}>
+                    <span className="flex">{description()}</span>
+                  </td>
+                  <td className={classes.colSelected}>
+                    {comp === 'select' && (
+                      <FormControl>
+                        <InputLabel id="demo-mutiple-name-label">
+                          {name}
+                        </InputLabel>
+                        <Select
+                          labelId="demo-mutiple-name-label"
+                          multiple={/Array/i.test(type)}
+                          value={currentValue}
+                          onChange={(evt) => {
+                            if (pathname) {
+                              url.pathname = `/${evt.target.value}`;
                             } else {
-                              searchParams.delete(name);
-                            }
-                          }
-                          onChange(url.toString());
-                        }}
-                        MenuProps={{
-                          disablePortal: true,
-                        }}
-                      >
-                        {values.map((val) => (
-                          <MenuItem key={val} value={val}>
-                            {val}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                  {comp === 'input' && (
-                    <TextField
-                      label={name}
-                      type={type}
-                      value={currentValue}
-                      onChange={(evt) => {
-                        if (evt.target.value) {
-                          searchParams.set(name, evt.target.value);
-                        } else {
-                          searchParams.delete(name);
-                        }
-
-                        onChange(url.toString());
-                      }}
-                      // eslint-disable-next-line react/jsx-props-no-spreading
-                      {...(props || {})}
-                    />
-                  )}
-                  {comp === 'checkbox' && (
-                    <FormControl>
-                      <FormControlLabel
-                        style={{ marginTop: 16 }}
-                        control={
-                          <Checkbox
-                            checked={currentValue}
-                            onChange={(evt) => {
-                              if (evt.target.checked) {
-                                searchParams.set(name, evt.target.checked);
+                              const newValue = isSelectMultiple
+                                ? evt.target.value.join(',')
+                                : evt.target.value;
+                              if (newValue) {
+                                searchParams.set(name, newValue);
                               } else {
                                 searchParams.delete(name);
                               }
-
-                              onChange(url.toString());
-                            }}
-                            // eslint-disable-next-line react/jsx-props-no-spreading
-                            {...(props || {})}
-                          />
-                        }
+                            }
+                            onChange(url.toString());
+                          }}
+                          MenuProps={{
+                            disablePortal: true,
+                          }}
+                        >
+                          {values.map((val) => (
+                            <MenuItem key={val} value={val}>
+                              {val}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    )}
+                    {comp === 'input' && (
+                      <TextField
                         label={name}
+                        type={type}
+                        value={currentValue}
+                        onChange={(evt) => {
+                          if (evt.target.value) {
+                            searchParams.set(name, evt.target.value);
+                          } else {
+                            searchParams.delete(name);
+                          }
+
+                          onChange(url.toString());
+                        }}
+                        // eslint-disable-next-line react/jsx-props-no-spreading
+                        {...(props || {})}
                       />
-                    </FormControl>
-                  )}
-                </td>
-              </tr>
-            );
-          },
-        )}
+                    )}
+                    {comp === 'checkbox' && (
+                      <FormControl>
+                        <FormControlLabel
+                          style={{ marginTop: 16 }}
+                          control={
+                            <Checkbox
+                              checked={currentValue}
+                              onChange={(evt) => {
+                                if (evt.target.checked) {
+                                  searchParams.set(name, evt.target.checked);
+                                } else {
+                                  searchParams.delete(name);
+                                }
+
+                                onChange(url.toString());
+                              }}
+                              // eslint-disable-next-line react/jsx-props-no-spreading
+                              {...(props || {})}
+                            />
+                          }
+                          label={name}
+                        />
+                      </FormControl>
+                    )}
+                  </td>
+                </tr>
+              );
+            },
+          )}
       </tbody>
     </table>
   );
@@ -419,6 +421,11 @@ function IframeDoc({ value, onChange }) {
 IframeDoc.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
+  filter: PropTypes.func,
+};
+
+IframeDoc.defaultProps = {
+  filter: () => true,
 };
 
 export default IframeDoc;

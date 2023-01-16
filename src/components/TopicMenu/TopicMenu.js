@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { withTranslation } from 'react-i18next';
+import { Trans, withTranslation } from 'react-i18next';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { FaLock } from 'react-icons/fa';
@@ -103,6 +103,9 @@ class TopicMenu extends PureComponent {
               layerHide: t('Layer verbergen'),
               subLayerShow: t('Layer anzeigen'),
               subLayerHide: t('Layer verbergen'),
+            }}
+            renderLabel={(layer) => {
+              return <Trans i18nKey={layer.name} />;
             }}
             renderItemContent={(layer, layerTreeComp) => (
               <>

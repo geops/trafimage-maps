@@ -11,6 +11,7 @@ describe('TopicsMenuHeader', () => {
   let topic1;
   let topic2;
   let store;
+  let state;
 
   beforeEach(() => {
     layer1 = new Layer({
@@ -40,7 +41,7 @@ describe('TopicsMenuHeader', () => {
       key: 'topic2',
       layers: [layer1, layer2],
     };
-    store = global.mockStore({
+    state = {
       map: {
         layers: topic2.layers,
       },
@@ -50,7 +51,8 @@ describe('TopicsMenuHeader', () => {
         activeTopic: topic2,
         map: new Map(),
       },
-    });
+    };
+    store = global.mockStore(state);
   });
 
   it('renders the active topic name and active layers', () => {
@@ -105,5 +107,20 @@ describe('TopicsMenuHeader', () => {
     expect(
       container.querySelector('.wkp-menu-layers.hidden'),
     ).toBeInTheDocument();
+  });
+
+  it("doesn't render html tags from layer name", () => {
+    layer2.visible = false;
+    const layerWithHtmlTags = new Layer({
+      name: 'layer2<b>withHtmlTags</b>',
+    });
+    state.map.layers = [layer2, layerWithHtmlTags];
+    store = global.mockStore(state);
+    render(
+      <Provider store={store}>
+        <TopicsMenuHeader />
+      </Provider>,
+    );
+    expect(screen.getByText('layer2withHtmlTags')).toBeInTheDocument();
   });
 });

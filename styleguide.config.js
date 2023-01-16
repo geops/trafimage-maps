@@ -108,7 +108,7 @@ module.exports = {
         {
           name: 'Geltungsbereiche',
           content: 'src/examples/iframe/Geltungsbereiche/README.md',
-          exampleMode: 'expand',
+          exampleMode: 'hide',
         },
       ],
     },
