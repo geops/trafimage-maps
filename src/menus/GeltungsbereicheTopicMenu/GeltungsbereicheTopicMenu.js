@@ -25,16 +25,24 @@ const useStyles = makeStyles(() => {
       // Hide the MenuItem css, display only the select box.
       border: 'none !important',
       boxShadow,
+      '& .MuiInputBase-root': {
+        minHeight: 50,
+      },
       '& .MuiPaper-root[style]': {
         boxShadow,
         // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
         overflow: 'auto',
+      },
+      '& .MuiSelect-selectMenu': {
+        paddingRight: 62,
       },
 
       // Allow multiline display
       '& .MuiSelect-selectMenu, & .MuiMenuItem-root ': {
         textOverflow: 'unset',
         whiteSpace: 'unset',
+        fontSize: '15px', // css that fits https://www.sbb.ch/de/abos-billette/abonnemente/ga/ga-geltungsbereich.html
+        lineHeight: 1.5,
       },
 
       // Display proper padding and border inside the list
@@ -68,6 +76,7 @@ const useStyles = makeStyles(() => {
       top: 0,
       height: 18,
       paddingTop: 5, // needed because the MenuItem has an 5px margin top
+      // marginLeft: 10,
     },
   };
 });
@@ -84,7 +93,7 @@ function GeltungsbereicheTopicMenu() {
   const [value, setValue] = useState();
 
   useEffect(() => {
-    dispatch(setDialogPosition({ x: 390, y: 17 }));
+    dispatch(setDialogPosition({ x: 425, y: 17 }));
   }, [dispatch]);
 
   const nonBaseLayers = useMemo(() => {
@@ -146,7 +155,6 @@ function GeltungsbereicheTopicMenu() {
               <span style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
                 <Trans i18nKey={value} />
               </span>
-              <span style={{ width: 20 }} />
             </span>
           )}
           onChange={onChange}
