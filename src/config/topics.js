@@ -331,6 +331,7 @@ export const sts = {
 const topics = {
   wkp: [
     netzkarte,
+    geltungsbereicheMvp,
     zweitausbildung,
     bauprojekte,
     handicap,
@@ -340,7 +341,6 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
-    geltungsbereicheMvp,
     geltungsbereicheIframe,
     sts,
     energiePublic,
