@@ -81,6 +81,7 @@ function GeltungsbereicheTopicMenu() {
   const tmMapsEl = document.getElementsByClassName('tm-trafimage-maps')[0];
   const isEmbedded = tmMapsEl && window.innerWidth !== tmMapsEl?.offsetWidth;
   const classes = useStyles();
+  const [value, setValue] = useState();
 
   useEffect(() => {
     dispatch(setDialogPosition({ x: 390, y: 17 }));
@@ -94,13 +95,9 @@ function GeltungsbereicheTopicMenu() {
     );
   }, [drawLayer, layers]);
 
-  const [value, setValue] = useState(
-    (nonBaseLayers?.find((layer) => layer.visible) || {}).name,
-  );
-
   useEffect(() => {
     const val = (nonBaseLayers?.find((layer) => layer.visible) || {}).name;
-    if (!value && val) {
+    if (val && val !== value) {
       setValue(val);
     }
 
@@ -198,10 +195,12 @@ function GeltungsbereicheTopicMenu() {
           })}
         </Select>
       )}
-      <InfosButton
-        className={`wkp-info-bt ${classes.infoButton}`}
-        selectedInfo={layers.find((l) => l.name === value)}
-      />
+      {value && (
+        <InfosButton
+          className={`wkp-info-bt ${classes.infoButton}`}
+          selectedInfo={layers.find((l) => l.name === value)}
+        />
+      )}
     </MenuItem>
   );
 }
