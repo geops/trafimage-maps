@@ -1,5 +1,5 @@
 // This test use chromeWebSecurity=false, it doesn't work on firefox.
-describe('A link to data', ({ browser: '!firefox' }) => {
+describe('A link to data', { browser: '!firefox' }, () => {
   const openDataText = 'Diesen Datensatz beziehen (Open Data)';
   beforeEach(() => {
     cy.consent();
