@@ -4,9 +4,8 @@ The vehicles displayed can be filtered using layer's properties, see 'view code'
 
 The vehicles displayed can also be filtered using url parameters:
 
-- operator : The operator of the train (ex: [operator=vbz](/?operator=vbz#/Examples/Punctuality%20Map))
 - publishedlinename : a comma separated list of line's name (ex: [publishedlinename=RE,IC5,S3,17](/?publishedlinename=RE,IC5,S3,17#/Examples/Punctuality%20Map))
-- tripnumber : a comma separated list of trip's number (ex: [tripnumber=5712,6553](/?tripnumber=5712,6553#/Examples/Punctuality%20Map))
+- tripnumber : a comma separated list of trip's number (ex: [tripnumber=007383.003849.001:3](/?tripnumber=007383.003849.001:3#/Examples/Punctuality%20Map))
 
 Important to know, filters using layer's properties have precedence over url parameters.
 
@@ -42,8 +41,7 @@ const App = () => {
               console.log(features);
             },
             // You can filter the trains displayed using the following properties:
-            // operator: 'vbz',
-            // tripNumber: '5712,6553',
+            // tripNumber: '007383.003849.001:3',
             // publishedLineName: 'RE,IC5,S3,17',
             // regexPublishedLineName: '^S[0-5]$'
           }),

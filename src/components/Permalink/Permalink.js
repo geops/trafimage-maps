@@ -200,7 +200,6 @@ class Permalink extends PureComponent {
 
     const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
     const routeFilterKey = getUrlParamKey(parameters, /tripnumber/i);
-    const operatorFilterKey = getUrlParamKey(parameters, /operator/i);
     const departuresFilterKey = getUrlParamKey(parameters, /departures/i);
     const platformFilterKey = getUrlParamKey(parameters, /platform/i);
 
@@ -208,8 +207,6 @@ class Permalink extends PureComponent {
       lineFilterKey && getUrlParamVal(parameters[lineFilterKey]);
     const routeFilter =
       routeFilterKey && getUrlParamVal(parameters[routeFilterKey]);
-    const operatorFilter =
-      operatorFilterKey && getUrlParamVal(parameters[operatorFilterKey]);
     this.loadDepartureOnce = true;
     this.departures =
       departuresFilterKey && getUrlParamVal(parameters[departuresFilterKey]);
@@ -222,7 +219,6 @@ class Permalink extends PureComponent {
       lang: lang || language, // take from permalink, else from redux.
       [lineFilterKey]: lineFilter,
       [routeFilterKey]: routeFilter,
-      [operatorFilterKey]: operatorFilter,
       [departuresFilterKey]: this.departures,
       [platformFilterKey]: this.platform,
       [DRAW_OLD_PARAM]: undefined,
