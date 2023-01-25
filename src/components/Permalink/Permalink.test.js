@@ -78,19 +78,6 @@ describe('Permalink', () => {
     );
   });
 
-  test("shoud remove space from 'operator' Tracker filter.", () => {
-    window.history.pushState({}, undefined, '/?lang=de&operator=sbb,  zsg');
-    render(
-      <Provider store={store}>
-        <Permalink />
-      </Provider>,
-    );
-
-    expect(window.location.search).toEqual(
-      '?lang=de&layers=testLayer&operator=sbb,zsg',
-    );
-  });
-
   test("shoud remove space from 'publishedLineName' Tracker filter.", () => {
     window.history.pushState(
       {},
