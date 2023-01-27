@@ -41,13 +41,13 @@ module.exports = {
           name: 'trafimage-maps',
           content: 'src/examples/README.md',
           components: 'src/WebComponent.js',
-          exampleMode: 'expand',
+          exampleMode: 'hide',
         },
       ],
     },
     {
-      name: 'Examples',
-      href: '/#/Examples/Custom%20Topic',
+      name: 'React examples',
+      href: '/#/React examples/Custom%20Topic',
       external: true,
       sectionDepth: 2,
       sections: [
