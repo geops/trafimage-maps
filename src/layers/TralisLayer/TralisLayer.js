@@ -1,3 +1,4 @@
+import { getTypeIndex } from 'mobility-toolbox-js/common/utils/realtimeConfig';
 import {
   RealtimeLayer,
   fullTrajectoryDelayStyle,
@@ -5,6 +6,51 @@ import {
   realtimeDelayStyle,
   sortByDelay,
 } from 'mobility-toolbox-js/ol';
+
+/**
+ * Trajserv value: 'Tram',  'Subway / Metro / S-Bahn',  'Train', 'Bus', 'Ferry', 'Cable Car', 'Gondola', 'Funicular', 'Long distance bus', 'Rail',
+ * New endpoint use Rail instead of Train.
+ * New tracker values:  null, "tram", "subway", "rail", "bus", "ferry", "cablecar", "gondola", "funicular", "coach".
+ *
+ * @ignore
+ */
+export const types = [
+  /^Tram/i,
+  /^Subway( \/ Metro \/ S-Bahn)?/i,
+  /^Train/i,
+  /^Bus/i,
+  /^Ferry/i,
+  /^Cable ?Car/i,
+  /^Gondola/i,
+  /^Funicular/i,
+  /^(Long distance bus|coach)/i,
+  /^Rail/i, // New endpoint use Rail instead of Train.
+];
+
+const radiusMapping = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7],
+  [2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 7, 15, 15, 15, 15, 15, 15],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7],
+  [0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+  [0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+  [0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+  [0, 0, 0, 0, 0, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7],
+  [2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 7, 15, 15, 15, 15, 15, 15],
+];
+
+/**
+ * @ignore
+ */
+const getRadius = (type, zoom) => {
+  try {
+    const typeIdx = getTypeIndex(type || 0);
+    return radiusMapping[typeIdx][zoom];
+  } catch (e) {
+    return 1;
+  }
+};
 
 class TralisLayer extends RealtimeLayer {
   constructor(options) {
@@ -36,6 +82,9 @@ class TralisLayer extends RealtimeLayer {
       url: 'wss://tralis-tracker-api.geops.io/ws',
       tenant: 'sbb',
       style: realtimeDelayStyle,
+      styleOptions: {
+        getRadius,
+      },
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,
       getMotsByZoom: (zoom) => {
