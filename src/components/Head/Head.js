@@ -31,6 +31,13 @@ function Head({ topics, displayConsent, domainConsentId }) {
     window.localStorage.setItem('wkp.fake.consent', true);
   }
 
+  // [TRAFDOKU-96] On jsdoc.maps.trafimage.ch when switching between examples the script
+  // OtAutoBlock is executed eachtime and try to redefined some object poroperties
+  // (on iframe, script, embed and img), and trigger a js error.
+  if (document.querySelector("script[src*='cdn.cookielaw.org']")) {
+    return null;
+  }
+
   return (
     <>
       <Helmet>
