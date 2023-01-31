@@ -4,8 +4,8 @@ The vehicles displayed can be filtered using layer's properties, see 'view code'
 
 The vehicles displayed can also be filtered using url parameters:
 
-- publishedlinename : a comma separated list of line's name (ex: [publishedlinename=RE,IC5,S3,17](/?publishedlinename=RE,IC5,S3,17#/Examples/Punctuality%20Map))
-- tripnumber : a comma separated list of trip's number (ex: [tripnumber=007383.003849.001:3](/?tripnumber=007383.003849.001:3#/Examples/Punctuality%20Map))
+- publishedlinename : a comma separated list of line's name (ex: [publishedlinename=RE,IC5,S3,17](/?publishedlinename=RE,IC5,S3,17#/React%20examples/Punctuality%20Map))
+- tripnumber : a comma separated list of trip's number (ex: [tripnumber=007383.003849.001:3](/?tripnumber=007383.003849.001:3#/React%20examples/Punctuality%20Map))
 
 Important to know, filters using layer's properties have precedence over url parameters.
 
