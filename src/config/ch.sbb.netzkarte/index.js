@@ -187,11 +187,79 @@ export const punctuality = new Layer({
 punctuality.children = [
   new TralisLayer({
     isUpdateBboxOnMoveEnd: true,
+    name: 'ch.sbb.puenktlichkeit-gondola',
+    visible: false,
+    tenant: 'sbb',
+    filter: ({ properties }) => properties?.type === 'gondola',
+    properties: {
+      isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
+    },
+  }),
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
+    name: 'ch.sbb.puenktlichkeit-funicular',
+    visible: false,
+    tenant: 'sbb',
+    filter: ({ properties }) =>
+      properties?.type && /^(funicular|cablecar)$/.test(properties.type),
+    properties: {
+      isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
+    },
+  }),
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
+    name: 'ch.sbb.puenktlichkeit-ferry',
+    visible: false,
+    tenant: 'sbb',
+    filter: ({ properties }) => properties?.type === 'ferry',
+    properties: {
+      isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
+    },
+  }),
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
+    name: 'ch.sbb.puenktlichkeit-bus',
+    visible: false,
+    tenant: 'sbb',
+    filter: ({ properties }) => properties?.type === 'bus',
+    properties: {
+      isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
+    },
+  }),
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
+    name: 'ch.sbb.puenktlichkeit-tram',
+    visible: false,
+    tenant: 'sbb',
+    filter: ({ properties }) => properties?.type === 'tram',
+    properties: {
+      isQueryable: true,
+      popupComponent: 'PunctualityPopup',
+      useTrackerMenu: true,
+    },
+  }),
+  new TralisLayer({
+    isUpdateBboxOnMoveEnd: true,
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     tenant: 'sbb',
-    regexPublishedLineName: '^(S|R$|RE|PE|D|IRE|RB|TER)',
-    group: 'ch.sbb.punctuality',
+    filter: ({ properties }) => {
+      const { type, line } = properties;
+      return (
+        type &&
+        line?.name &&
+        type === 'rail' &&
+        /^(S|R$|RE|PE|D|IRE|RB|TER)/.test(line.name)
+      );
+    },
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
@@ -203,20 +271,15 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     tenant: 'sbb',
-    regexPublishedLineName: '(IR|IC|EC|RJX|TGV)',
-    group: 'ch.sbb.punctuality',
-    properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+    filter: ({ properties }) => {
+      const { type, line } = properties;
+      return (
+        type &&
+        line?.name &&
+        type === 'rail' &&
+        /(IR|IC|EC|RJX|TGV)/.test(line.name)
+      );
     },
-  }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
-    name: 'ch.sbb.puenktlichkeit-all',
-    visible: false,
-    tenant: 'sbb',
-    group: 'ch.sbb.punctuality',
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
