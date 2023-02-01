@@ -239,7 +239,8 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-tram',
     visible: false,
     tenant: 'sbb',
-    filter: ({ properties }) => properties?.type === 'tram',
+    filter: ({ properties }) =>
+      properties?.type && /^(tram|subway)$/.test(properties.type),
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
