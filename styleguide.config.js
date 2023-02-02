@@ -46,8 +46,8 @@ module.exports = {
       ],
     },
     {
-      name: 'React examples',
-      href: '/#/React examples/Custom%20Topic',
+      name: 'Examples',
+      href: '/#/Examples/Custom%20Topic',
       external: true,
       sectionDepth: 2,
       sections: [
