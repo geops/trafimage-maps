@@ -13,21 +13,21 @@ const defaultAttributes = [
       return <span>Topic to display</span>;
     },
   },
-  {
-    name: 'layersVisibility',
-    type: 'array<string>',
-    comp: 'select',
-    defaultValue: '',
-    values: [],
-    description: () => {
-      return (
-        <span>
-          Layers to display, values available are depending on the topic
-          selected.
-        </span>
-      );
-    },
-  },
+  // {
+  //   name: 'layersVisibility',
+  //   type: 'array<string>',
+  //   comp: 'select',
+  //   defaultValue: '',
+  //   values: [],
+  //   description: () => {
+  //     return (
+  //       <span>
+  //         Layers to display, values available are depending on the topic
+  //         selected.
+  //       </span>
+  //     );
+  //   },
+  // },
   {
     name: 'elements',
     type: 'array<string>',
@@ -43,7 +43,7 @@ const defaultAttributes = [
       'mapControls',
       'menu',
       'overlay',
-      'permalink',
+      'permalink(disabled)',
       'shareMenu',
       'search',
       'trackerMenu',
@@ -69,7 +69,10 @@ const defaultAttributes = [
           <br />
           <div>Functionalities to deactivate:</div>
           <br />
-          <li>permalink - deactivates auto update of the window url</li>
+          <li>
+            permalink - deactivates auto update of the window url (permalink
+            disabled in this example)
+          </li>
         </span>
       );
     },

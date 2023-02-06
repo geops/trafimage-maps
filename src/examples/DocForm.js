@@ -64,58 +64,50 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function DocForm({ value, onChange, filter, isIframe, paramProps }) {
+function DocForm({ value, onChange, filter, isIframe, propConfig }) {
   const classes = useStyles();
-  const [permalinkParams, setPermalinkParams] = useState(paramProps);
+  const [permalinkParams, setPermalinkParams] = useState(propConfig);
   const url = useMemo(() => {
     return new URL(value);
   }, [value]);
   const { searchParams } = url;
 
   useEffect(() => {
-    const topicKey = url.pathname?.split('/')[1] || paramProps[0].defaultValue;
+    const topicKey = url.pathname?.split('/')[1] || propConfig[0].defaultValue;
 
     if (topicKey) {
       const topic = getTopicConfig('wkp').find((t) => t.key === topicKey);
+
+      const layers = getLayersAsFlatArray(topic.layers || [])
+        .filter(
+          (l) =>
+            !l.get('isBaseLayer') &&
+            !l.children?.length &&
+            !l.children?.some((c) => c.visible) &&
+            !l.get('hideInLegend'),
+        )
+        .map((l) => l.key)
+        .reverse();
 
       if (isIframe) {
         // Apply base layers available
         const baseLayers = getLayersAsFlatArray(topic.layers || [])
           .filter((l) => l.get('isBaseLayer'))
           .map((l) => l.key);
-        paramProps.find((p) => p.name === 'baselayers').values =
+        propConfig.find((p) => p.name === 'baselayers').values =
           baseLayers.length > 1 ? baseLayers : [];
         // Apply layers available
-        const layers = getLayersAsFlatArray(topic.layers || [])
-          .filter(
-            (l) =>
-              !l.get('isBaseLayer') &&
-              !l.children?.length &&
-              !l.children?.some((c) => c.visible) &&
-              !l.get('hideInLegend'),
-          )
-          .map((l) => l.key)
-          .reverse();
-        paramProps.find((p) => p.name === 'layers').values =
+        propConfig.find((p) => p.name === 'layers').values =
           layers.length > 1 ? layers : [];
       } else {
-        // Apply layers available
-        const layers = getLayersAsFlatArray(topic.layers || [])
-          .filter(
-            (l) =>
-              !l.children?.length &&
-              !l.children?.some((c) => c.visible) &&
-              !l.get('hideInLegend'),
-          )
-          .map((l) => l.key)
-          .reverse();
-        paramProps.find((p) => p.name === 'layersVisibility').values =
-          layers.length > 1 ? layers : [];
+        // Apply layers available (TODO: update visible layers dynamically in styleguide, currently crashes the app)
+        // propConfig.find((p) => p.name === 'layersVisibility').values =
+        // layers.length > 1 ? layers : [];
       }
 
-      setPermalinkParams([...paramProps]);
+      setPermalinkParams([...propConfig]);
     }
-  }, [url, isIframe, paramProps]);
+  }, [url, isIframe, propConfig]);
 
   return (
     <table className={classes.table}>
@@ -212,8 +204,12 @@ function DocForm({ value, onChange, filter, isIframe, paramProps }) {
                           }}
                         >
                           {values.map((val) => (
-                            <MenuItem key={val} value={val}>
-                              {val}
+                            <MenuItem
+                              key={val}
+                              value={val}
+                              disabled={/\(disabled\)$/.test(val)}
+                            >
+                              {val.replace(/\(disabled\)$/, '')}
                             </MenuItem>
                           ))}
                         </Select>
@@ -276,7 +272,7 @@ DocForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   filter: PropTypes.func,
   isIframe: PropTypes.bool,
-  paramProps: PropTypes.arrayOf(
+  propConfig: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
       type: PropTypes.string,
@@ -294,7 +290,7 @@ DocForm.propTypes = {
         PropTypes.array,
         PropTypes.object,
       ]),
-      description: PropTypes.bool,
+      description: PropTypes.func,
     }),
   ).isRequired,
 };

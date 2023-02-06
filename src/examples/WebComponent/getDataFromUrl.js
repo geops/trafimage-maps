@@ -17,9 +17,10 @@ const getDataFromUrl = (urlString, htmlCode = true) => {
   }
 
   // layers
-  let layersVisibility = searchParams.get('layersVisibility');
-  if (layersVisibility) {
-    layersVisibility += layersVisibility
+  let layersVisibility = '';
+  const layers = searchParams.get('layersVisibility');
+  if (layers) {
+    layersVisibility += layers
       .split(',')
       .map((d) => `${d}=true`)
       .join(',');
@@ -30,12 +31,15 @@ const getDataFromUrl = (urlString, htmlCode = true) => {
   // disabled
   const elements = searchParams.get('elements');
   if (elements) {
-    const elementsString = elements
+    const elementsString = `${elements
       .split(',')
       .map((e) => `${e}=false`)
-      .join(',');
+      .join(',')},permalink=false`;
     code.push(`\n\telements="${elementsString}"`);
     attributes.elements = elementsString;
+  } else {
+    code.push(`\n\telements="permalink=false"`);
+    attributes.elements = 'permalink=false';
   }
 
   // language
@@ -49,7 +53,7 @@ const getDataFromUrl = (urlString, htmlCode = true) => {
   const center = searchParams.get('center');
   const validateCoords = (val) =>
     val &&
-    /^\[(?:[1-9]\d*|0)(?:\.\d+)?,(?:[1-9]\d*|0)(?:\.\d+)?\]$/.test(
+    /^\[(-)?(?:[1-9]\d*|0)(?:\.\d+)?,(-)?(?:[1-9]\d*|0)(?:\.\d+)?\]$/.test(
       val.toString().replace(/ /g, ''),
     );
   if (validateCoords(center)) {

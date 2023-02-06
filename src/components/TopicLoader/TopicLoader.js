@@ -273,7 +273,7 @@ class TopicLoader extends PureComponent {
     if (visibleLayersMaxZoom.length) {
       dispatchSetMaxZoom(Math.min(...visibleLayersMaxZoom));
     } else {
-      dispatchSetMaxZoom(activeTopic.maxZoom);
+      dispatchSetMaxZoom(activeTopic?.maxZoom);
     }
 
     const visibleLayersMinZoom = visibleLayers.reduce(
@@ -285,7 +285,7 @@ class TopicLoader extends PureComponent {
     if (visibleLayersMinZoom.length) {
       dispatchSetMinZoom(Math.max(...visibleLayersMinZoom));
     } else {
-      dispatchSetMinZoom(activeTopic.minZoom);
+      dispatchSetMinZoom(activeTopic?.minZoom);
     }
   }
 

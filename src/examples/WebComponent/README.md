@@ -23,6 +23,16 @@ const App = () => {
     return getDataFromUrl(url, false);
   }, [url]);
 
+  console.log(props);
+
+  const webComponent = useMemo(() => {
+    return (
+      <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
+    );
+  }, [props]);
+
+  console.dir(webComponent);
+
   return (
     <div className="container">
       <DocForm
@@ -30,20 +40,16 @@ const App = () => {
         onChange={(newUrl) => {
           setUrl(newUrl);
         }}
-        paramProps={webComponentAttributes}
+        propConfig={webComponentAttributes}
       />
-      <trafimage-maps
-        zoom="7"
-        apiKey={apiKey}
-        embedded="true"
-        elements="permalink=false"
-        {...props}
-      />
+      {webComponent}
       <br />
       <Editor
         code={code}
         onChange={(code) => null} //setCode(code)}
       />
+      <br />
+      <br />
     </div>
   );
 };

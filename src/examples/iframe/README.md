@@ -15,6 +15,7 @@ import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import DocForm from '../DocForm';
 import getCodeFromUrl from './getCodeFromUrl';
+import getHtmlPageCode from '../getHtmlPageCode';
 import iframeSearchParams from './iframeSearchParams';
 
 // The `apiKey` used here is for demonstration purposes only.
@@ -27,7 +28,7 @@ const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic);
 
   const code = useMemo(() => {
-    return getCodeFromUrl(url);
+    return getHtmlPageCode(`<iframe src="${url}" />`);
   }, [url]);
 
   return (
@@ -38,7 +39,7 @@ const App = () => {
           setUrl(newUrl);
         }}
         isIframe
-        paramProps={iframeSearchParams}
+        propConfig={iframeSearchParams}
       />
       <TextField
         label="Iframe URL"

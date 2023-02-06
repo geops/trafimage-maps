@@ -25,7 +25,7 @@ const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic + '?embedded=true');
 
   const code = useMemo(() => {
-    return getCodeFromUrl(url);
+    return getHtmlPageCode(`<iframe src="${url}" />`);
   }, [url]);
 
   return (
@@ -36,7 +36,7 @@ const App = () => {
           setUrl(newUrl);
         }}
         isIframe
-        paramProps={iframeSearchParams}
+        propConfig={iframeSearchParams}
         filter={(config) => ['layers', 'embedded'].includes(config.name)}
       />
       <TextField
@@ -58,7 +58,7 @@ const App = () => {
         <Heading level={2}>Web component code: </Heading>
         <br />
         <Editor
-          code={getHtmlPageCode(code)}
+          code={code}
           onChange={(code) => null} //setCode(code)}
         />
       </div>

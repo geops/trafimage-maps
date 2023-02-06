@@ -236,6 +236,7 @@ const WebComponent = (props) => {
     vectorTilesKey,
     enableTracking,
     elements,
+    language,
     layersVisibility,
     embedded,
     domainConsent,
@@ -363,6 +364,8 @@ const WebComponent = (props) => {
           disableCookies={disableCookies === 'true'}
           domainConsent={domainConsent}
           domainConsentId={domainConsentId}
+          language={language}
+          elements={elements}
         />
       </div>
     </Styled>

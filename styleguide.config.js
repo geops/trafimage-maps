@@ -37,6 +37,23 @@ module.exports = {
     {
       name: 'Web component',
       content: 'src/examples/WebComponent/README.md',
+      external: true,
+      sectionDepth: 2,
+      exampleMode: 'hide',
+    },
+    {
+      name: 'Iframe',
+      content: 'src/examples/iframe/README.md',
+      external: true,
+      sectionDepth: 2,
+      exampleMode: 'hide',
+      sections: [
+        {
+          name: 'Geltungsbereiche',
+          content: 'src/examples/iframe/Geltungsbereiche/README.md',
+          exampleMode: 'hide',
+        },
+      ],
     },
     {
       name: 'Examples',
@@ -88,20 +105,6 @@ module.exports = {
           name: 'Geltungsbereiche',
           content: 'src/examples/Geltungsbereiche/README.md',
           exampleMode: 'expand',
-        },
-      ],
-    },
-    {
-      name: 'Iframe',
-      content: 'src/examples/iframe/README.md',
-      external: true,
-      sectionDepth: 2,
-      exampleMode: 'hide',
-      sections: [
-        {
-          name: 'Geltungsbereiche',
-          content: 'src/examples/iframe/Geltungsbereiche/README.md',
-          exampleMode: 'hide',
         },
       ],
     },
