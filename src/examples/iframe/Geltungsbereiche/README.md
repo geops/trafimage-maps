@@ -9,17 +9,17 @@ import {
   InputLabel,
   MenuItem,
 } from '@material-ui/core';
-import IframeDoc from '../IframeDoc';
-import getCodeFromUrl from '../getCodeFromUrl';
-import getHtmlPageCode from '../../getHtmlPageCode';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
+import DocForm from '../../DocForm';
+import getCodeFromUrl from '../getCodeFromUrl';
+import getHtmlPageCode from '../../getHtmlPageCode';
+import iframeSearchParams from '../iframeSearchParams';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 const baseUrl = 'https://maps.trafimage.ch';
 const topic = 'ch.sbb.geltungsbereiche-iframe';
-
 
 const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic + '?embedded=true');
@@ -30,14 +30,14 @@ const App = () => {
 
   return (
     <>
-      <IframeDoc
+      <DocForm
         value={url}
         onChange={(newUrl) => {
           setUrl(newUrl);
         }}
-
-        // Filter the parameter to display
-        filter={(config) => ['layers','embedded'].includes(config.name)}
+        isIframe
+        paramProps={iframeSearchParams}
+        filter={(config) => ['layers', 'embedded'].includes(config.name)}
       />
       <TextField
         label="Iframe URL"

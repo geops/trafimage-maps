@@ -11,10 +11,11 @@ import {
   InputLabel,
   MenuItem,
 } from '@material-ui/core';
-import IframeDoc from './IframeDoc';
-import getCodeFromUrl from './getCodeFromUrl';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
+import DocForm from '../DocForm';
+import getCodeFromUrl from './getCodeFromUrl';
+import iframeSearchParams from './iframeSearchParams';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
@@ -31,11 +32,13 @@ const App = () => {
 
   return (
     <>
-      <IframeDoc
+      <DocForm
         value={url}
         onChange={(newUrl) => {
           setUrl(newUrl);
         }}
+        isIframe
+        paramProps={iframeSearchParams}
       />
       <TextField
         label="Iframe URL"

@@ -36,14 +36,7 @@ module.exports = {
   sections: [
     {
       name: 'Web component',
-      sections: [
-        {
-          name: 'trafimage-maps',
-          content: 'src/examples/README.md',
-          components: 'src/WebComponent.js',
-          exampleMode: 'hide',
-        },
-      ],
+      content: 'src/examples/WebComponent/README.md',
     },
     {
       name: 'Examples',

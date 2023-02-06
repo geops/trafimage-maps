@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useMemo, useState, useEffect } from 'react';
 import {
   TextField,
@@ -11,167 +12,7 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
-import topics, { getTopicConfig } from '../../config/topics';
-
-export const defaultPermalinkParams = [
-  {
-    name: 'topic',
-    type: 'string',
-    comp: 'select',
-    pathname: true,
-    defaultValue: 'ch.sbb.netzkarte',
-    values: topics.wkp.map((t) => t.key),
-    description: () => {
-      return <span>Topic to display</span>;
-    },
-  },
-  {
-    name: 'baselayers',
-    type: 'string',
-    comp: 'select',
-    defaultValue: '',
-    values: [],
-    description: () => {
-      return (
-        <span>
-          Base layer to display, values available are depending on the topic
-          selected.
-        </span>
-      );
-    },
-  },
-  {
-    name: 'layers',
-    type: 'array<string>',
-    comp: 'select',
-    defaultValue: '',
-    values: [],
-    description: () => {
-      return (
-        <span>
-          Layers to display, values available are depending on the topic
-          selected.
-        </span>
-      );
-    },
-  },
-  {
-    name: 'disabled',
-    type: 'array<string>',
-    defaultValue: '',
-    comp: 'select',
-    values: [
-      'baseLayerSwitcher',
-      'drawMenu',
-      'exportMenu',
-      'footer',
-      'geolocationButton',
-      'header',
-      'mapControls',
-      'menu',
-      'overlay',
-      'permalink',
-      'shareMenu',
-      'search',
-      'trackerMenu',
-    ],
-    description: () => {
-      return (
-        <span>
-          <div>UI elements to hide:</div>
-          <br />
-          <li>baseLayerSwitcher</li>
-          <li>drawMenu</li>
-          <li>exportMenu</li>
-          <li>footer</li>
-          <li>geolocationButtonn</li>
-          <li>header</li>
-          <li>mapControls</li>
-          <li>menu</li>
-          <li>overlay </li>
-          <li>permalink</li>
-          <li>shareMenu</li>
-          <li>search</li>
-          <li>trackerMenu</li>
-          <br />
-          <div>Functionalities to deactivate:</div>
-          <br />
-          <li>permalink - deactivates auto update of the window url</li>
-        </span>
-      );
-    },
-  },
-  {
-    name: 'lang',
-    type: 'string',
-    comp: 'select',
-    defaultValue: 'de',
-    values: ['de', 'fr', 'it', 'en'],
-    description: () => {
-      return <span>Language of the application.</span>;
-    },
-    props: { type: 'text' },
-  },
-  {
-    name: 'x',
-    type: 'number',
-    comp: 'input',
-    defaultValue: 925472,
-    description: () => {
-      return (
-        // eslint-disable-next-line react/no-unescaped-entities
-        <span>x coordinate of the map's center in Mercator projection.</span>
-      );
-    },
-    props: { type: 'number' },
-  },
-  {
-    name: 'y',
-    type: 'number',
-    comp: 'input',
-    defaultValue: 5920000,
-    description: () => {
-      return (
-        // eslint-disable-next-line react/no-unescaped-entities
-        <span>y coordinate of the map's center in Mercator projection.</span>
-      );
-    },
-    props: { type: 'number' },
-  },
-  {
-    name: 'z',
-    type: 'number',
-    comp: 'input',
-    defaultValue: 9,
-    description: () => {
-      return <span>Zoom level.</span>;
-    },
-    props: {
-      type: 'number',
-      inputProps: {
-        min: 0,
-        max: 20,
-      },
-    },
-  },
-  {
-    name: 'embedded',
-    type: 'boolean',
-    comp: 'checkbox',
-    defaultValue: false,
-    description: () => {
-      return (
-        <span>
-          If true, it improves mouse/touch interactions to avoid conflict with
-          parent page.
-        </span>
-      );
-    },
-    props: {
-      type: 'checkbox',
-    },
-  },
-];
+import { getTopicConfig } from '../config/topics';
 
 const useStyles = makeStyles(() => {
   return {
@@ -223,46 +64,58 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function IframeDoc({ value, onChange, filter }) {
+function DocForm({ value, onChange, filter, isIframe, paramProps }) {
   const classes = useStyles();
-  const [permalinkParams, setPermalinkParams] = useState(
-    defaultPermalinkParams,
-  );
+  const [permalinkParams, setPermalinkParams] = useState(paramProps);
   const url = useMemo(() => {
     return new URL(value);
   }, [value]);
   const { searchParams } = url;
 
   useEffect(() => {
-    const topicKey =
-      url.pathname?.split('/')[1] || defaultPermalinkParams[0].defaultValue;
+    const topicKey = url.pathname?.split('/')[1] || paramProps[0].defaultValue;
 
     if (topicKey) {
       const topic = getTopicConfig('wkp').find((t) => t.key === topicKey);
 
-      // Apply base layers available
-      const baseLayers = getLayersAsFlatArray(topic.layers || [])
-        .filter((l) => l.get('isBaseLayer'))
-        .map((l) => l.key);
-      defaultPermalinkParams.find((p) => p.name === 'baselayers').values =
-        baseLayers.length > 1 ? baseLayers : [];
+      if (isIframe) {
+        // Apply base layers available
+        const baseLayers = getLayersAsFlatArray(topic.layers || [])
+          .filter((l) => l.get('isBaseLayer'))
+          .map((l) => l.key);
+        paramProps.find((p) => p.name === 'baselayers').values =
+          baseLayers.length > 1 ? baseLayers : [];
+        // Apply layers available
+        const layers = getLayersAsFlatArray(topic.layers || [])
+          .filter(
+            (l) =>
+              !l.get('isBaseLayer') &&
+              !l.children?.length &&
+              !l.children?.some((c) => c.visible) &&
+              !l.get('hideInLegend'),
+          )
+          .map((l) => l.key)
+          .reverse();
+        paramProps.find((p) => p.name === 'layers').values =
+          layers.length > 1 ? layers : [];
+      } else {
+        // Apply layers available
+        const layers = getLayersAsFlatArray(topic.layers || [])
+          .filter(
+            (l) =>
+              !l.children?.length &&
+              !l.children?.some((c) => c.visible) &&
+              !l.get('hideInLegend'),
+          )
+          .map((l) => l.key)
+          .reverse();
+        paramProps.find((p) => p.name === 'layersVisibility').values =
+          layers.length > 1 ? layers : [];
+      }
 
-      // Apply layers available
-      const layers = getLayersAsFlatArray(topic.layers || [])
-        .filter(
-          (l) =>
-            !l.get('isBaseLayer') &&
-            !l.children?.length &&
-            !l.children?.some((c) => c.visible) &&
-            !l.get('hideInLegend'),
-        )
-        .map((l) => l.key)
-        .reverse();
-      defaultPermalinkParams.find((p) => p.name === 'layers').values =
-        layers.length > 1 ? layers : [];
-      setPermalinkParams([...defaultPermalinkParams]);
+      setPermalinkParams([...paramProps]);
     }
-  }, [url]);
+  }, [url, isIframe, paramProps]);
 
   return (
     <table className={classes.table}>
@@ -418,14 +271,37 @@ function IframeDoc({ value, onChange, filter }) {
   );
 }
 
-IframeDoc.propTypes = {
+DocForm.propTypes = {
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   filter: PropTypes.func,
+  isIframe: PropTypes.bool,
+  paramProps: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      type: PropTypes.string,
+      comp: PropTypes.string,
+      pathname: PropTypes.bool,
+      defaultValue: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool,
+      ]),
+      values: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.bool,
+        PropTypes.array,
+        PropTypes.object,
+      ]),
+      description: PropTypes.bool,
+    }),
+  ).isRequired,
 };
 
-IframeDoc.defaultProps = {
+DocForm.defaultProps = {
   filter: () => true,
+  isIframe: false,
 };
 
-export default IframeDoc;
+export default DocForm;
