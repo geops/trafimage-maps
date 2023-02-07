@@ -41,7 +41,7 @@ module.exports = {
           name: 'trafimage-maps',
           content: 'src/examples/README.md',
           components: 'src/WebComponent.js',
-          exampleMode: 'expand',
+          exampleMode: 'hide',
         },
       ],
     },

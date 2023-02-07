@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core';
 import IframeDoc from '../IframeDoc';
 import getCodeFromUrl from '../getCodeFromUrl';
+import getHtmlPageCode from '../../getHtmlPageCode';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 // The `apiKey` used here is for demonstration purposes only.
@@ -57,7 +58,7 @@ const App = () => {
         <Heading level={2}>Web component code: </Heading>
         <br />
         <Editor
-          code={code}
+          code={getHtmlPageCode(code)}
           onChange={(code) => null} //setCode(code)}
         />
       </div>
