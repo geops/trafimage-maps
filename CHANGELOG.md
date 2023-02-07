@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.14](https://github.com/geops/trafimage-maps/compare/v1.18.13...v1.18.14) (2023-02-07)
+
+
+### Bug Fixes
+
+* add consent script only when they are not already loaded ([65e2d1b](https://github.com/geops/trafimage-maps/commit/65e2d1b4b5bb9b470581fdc32effb034ff149207))
+* **Geltungbereiche:** add translation for subway ([#1065](https://github.com/geops/trafimage-maps/issues/1065)) ([2b36b9d](https://github.com/geops/trafimage-maps/commit/2b36b9dec9046844885476e51f0d1cf24e813180))
+
 ### [1.18.13](https://github.com/geops/trafimage-maps/compare/v1.18.12...v1.18.13) (2023-01-16)
 
 
