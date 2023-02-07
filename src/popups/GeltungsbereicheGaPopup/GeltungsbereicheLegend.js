@@ -12,7 +12,7 @@ const colorGray = 'rgba(180,180,180, 1)';
 // Be aware that order is important here!
 export const legends = [
   {
-    mots: ['rail', 'tram'],
+    mots: ['rail', 'tram', 'subway'],
     validity: [
       {
         value: 100,
