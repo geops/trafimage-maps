@@ -88,7 +88,7 @@ class TralisLayer extends RealtimeLayer {
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,
       generalizationLevelByZoom: [
-        5, 5, 5, 5, 5, 5, 5, 5, 10, 30, 30, 100, 100, 100, 150,
+        5, 5, 5, 5, 5, 5, 5, 5, 10, 30, 30, 100, 100, 150,
       ],
       getMotsByZoom: (zoom) => {
         if (zoom < 8) {
