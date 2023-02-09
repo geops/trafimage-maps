@@ -101,8 +101,8 @@ function DocForm({ value, onChange, filter, isIframe, propConfig }) {
           layers.length > 1 ? layers : [];
       } else {
         // Apply layers available (TODO: update visible layers dynamically in styleguide, currently crashes the app)
-        // propConfig.find((p) => p.name === 'layersVisibility').values =
-        // layers.length > 1 ? layers : [];
+        propConfig.find((p) => p.name === 'layersVisibility').values =
+          layers.length > 1 ? layers : [];
       }
 
       setPermalinkParams([...propConfig]);

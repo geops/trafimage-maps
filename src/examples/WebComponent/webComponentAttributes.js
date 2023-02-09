@@ -13,21 +13,21 @@ const defaultAttributes = [
       return <span>Topic to display</span>;
     },
   },
-  // {
-  //   name: 'layersVisibility',
-  //   type: 'array<string>',
-  //   comp: 'select',
-  //   defaultValue: '',
-  //   values: [],
-  //   description: () => {
-  //     return (
-  //       <span>
-  //         Layers to display, values available are depending on the topic
-  //         selected.
-  //       </span>
-  //     );
-  //   },
-  // },
+  {
+    name: 'layersVisibility',
+    type: 'array<string>',
+    comp: 'select',
+    defaultValue: '',
+    values: [],
+    description: () => {
+      return (
+        <span>
+          Layers to display, values available are depending on the topic
+          selected.
+        </span>
+      );
+    },
+  },
   {
     name: 'elements',
     type: 'array<string>',

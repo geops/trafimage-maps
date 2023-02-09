@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import { Layer } from 'mobility-toolbox-js/ol';
@@ -301,6 +301,15 @@ const WebComponent = (props) => {
         // eslint-disable-next-line no-param-reassign
         topic.elements = { ...topic.elements, ...obj };
       }
+    });
+    return [...tps];
+  }, [topics, appName, elements]);
+
+  // Update layers visiblity using web component attribute
+  // It's important to do this outside the previous useMemo so a webComponent render is not triggered
+  useEffect(() => {
+    // TODO improve the code, particularly the transformation string to object.
+    appTopics.forEach((topic) => {
       // Override layers visiblity.
       if (layersVisibility && topic.layers.length) {
         const obj = {};
@@ -336,8 +345,7 @@ const WebComponent = (props) => {
         });
       }
     });
-    return [...tps];
-  }, [topics, appName, elements, layersVisibility]);
+  }, [appTopics, layersVisibility]);
 
   if (!appTopics) {
     return null;
