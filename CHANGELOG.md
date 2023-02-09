@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.15](https://github.com/geops/trafimage-maps/compare/v1.18.14...v1.18.15) (2023-02-09)
+
+
+### Bug Fixes
+
+* **Geltungsbereiche:** prevent subway features from duplicating rail in GB legend ([5c3bb0e](https://github.com/geops/trafimage-maps/commit/5c3bb0ecf0abe92429b866cd28a878a7e11e6150))
+
 ### [1.18.14](https://github.com/geops/trafimage-maps/compare/v1.18.13...v1.18.14) (2023-02-07)
 
 
