@@ -7,23 +7,22 @@ This section shows you how to configure your own map for integrating it in your 
 import 'trafimage-maps';
 import React, { useState, useMemo } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import getHtmlPageCode from '../getHtmlPageCode';
+import getHtmlPageCode from './getHtmlPageCode';
 import DocForm from '../DocForm';
-import getDataFromUrl from './getDataFromUrl';
+import getWcCodeFromUrl from './getWcCodeFromUrl';
+import getWcAttributesFromUrl from './getWcAttributesFromUrl'
 import webComponentAttributes from './webComponentAttributes';
 
 const App = () => {
   const [url, setUrl] = useState('https://maps.trafimage.ch');
 
   const code = useMemo(() => {
-    return getDataFromUrl(url);
+    return getHtmlPageCode(getWcCodeFromUrl(url));
   }, [url]);
 
   const props = useMemo(() => {
-    return getDataFromUrl(url, false);
+    return getWcAttributesFromUrl(url, false);
   }, [url]);
-
-  console.log(props);
 
   const webComponent = useMemo(() => {
     return (
@@ -31,10 +30,8 @@ const App = () => {
     );
   }, [props]);
 
-  console.dir(webComponent);
-
   return (
-    <div className="container">
+    <>
       <DocForm
         value={url}
         onChange={(newUrl) => {
@@ -42,15 +39,15 @@ const App = () => {
         }}
         propConfig={webComponentAttributes}
       />
-      {webComponent}
+      <div className="container">
+        {webComponent}
+      </div>
       <br />
       <Editor
         code={code}
         onChange={(code) => null} //setCode(code)}
       />
-      <br />
-      <br />
-    </div>
+    </>
   );
 };
 

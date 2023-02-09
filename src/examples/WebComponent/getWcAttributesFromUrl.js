@@ -1,18 +1,14 @@
-const getDataFromUrl = (urlString, htmlCode = true) => {
+const getWcAttributesFromUrl = (urlString) => {
   if (!urlString) {
     return null;
   }
   const url = new URL(urlString);
   const { pathname, searchParams } = url;
-  const code = [];
-  code.push('<trafimage-maps ');
-  code.push(`\n\tapiKey="${window.apiKey}"`);
   const attributes = {};
 
   // activeTopicKey
   const activeTopicKey = (pathname && pathname.split('/')[1]) || null;
   if (activeTopicKey) {
-    code.push(`\n\tactiveTopicKey="${activeTopicKey}"`);
     attributes.activeTopicKey = activeTopicKey;
   }
 
@@ -24,7 +20,6 @@ const getDataFromUrl = (urlString, htmlCode = true) => {
       .split(',')
       .map((d) => `${d}=true`)
       .join(',');
-    code.push(`\n\tlayersVisibility="${layersVisibility}"`);
     attributes.layersVisibility = layersVisibility;
   }
 
@@ -35,17 +30,14 @@ const getDataFromUrl = (urlString, htmlCode = true) => {
       .split(',')
       .map((e) => `${e}=false`)
       .join(',')},permalink=false`;
-    code.push(`\n\telements="${elementsString}"`);
     attributes.elements = elementsString;
   } else {
-    code.push(`\n\telements="permalink=false"`);
     attributes.elements = 'permalink=false';
   }
 
   // language
   const language = searchParams.get('language');
   if (language) {
-    code.push(`\n\tlanguage="${language}"`);
     attributes.language = language;
   }
 
@@ -57,26 +49,21 @@ const getDataFromUrl = (urlString, htmlCode = true) => {
       val.toString().replace(/ /g, ''),
     );
   if (validateCoords(center)) {
-    code.push(`\n\tcenter="${center}"`);
     attributes.center = center;
   }
 
   // zoom
   const zoom = searchParams.get('zoom');
   if (zoom) {
-    code.push(`\n\tzoom="${zoom}"`);
     attributes.zoom = zoom;
   }
 
   // embedded
   const embedded = searchParams.get('embedded');
   if (embedded === 'true') {
-    code.push(`\n\tembedded="${embedded}"`);
     attributes.embedded = embedded;
   }
-
-  code.push('/>');
-  return htmlCode ? code.join('') : attributes;
+  return attributes;
 };
 
-export default getDataFromUrl;
+export default getWcAttributesFromUrl;

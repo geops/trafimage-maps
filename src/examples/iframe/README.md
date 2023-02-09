@@ -14,8 +14,8 @@ import {
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import DocForm from '../DocForm';
-import getCodeFromUrl from './getCodeFromUrl';
-import getHtmlPageCode from '../getHtmlPageCode';
+import getIframeCodeFromUrl from './getIframeCodeFromUrl';
+import getHtmlPageCode from './getHtmlPageCode';
 import iframeSearchParams from './iframeSearchParams';
 
 // The `apiKey` used here is for demonstration purposes only.
@@ -28,7 +28,7 @@ const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic);
 
   const code = useMemo(() => {
-    return getHtmlPageCode(`<iframe src="${url}" />`);
+    return getHtmlPageCode(getIframeCodeFromUrl(url));
   }, [url]);
 
   return (
@@ -41,7 +41,7 @@ const App = () => {
         isIframe
         propConfig={iframeSearchParams}
       />
-      <TextField
+      {/* <TextField
         label="Iframe URL"
         variant="outlined"
         value={url}
@@ -50,20 +50,15 @@ const App = () => {
         onChange={(evt) => {
           setUrl(evt.target.value);
         }}
-      />
+      /> */}
       <div className="container">
         <iframe src={url} />
       </div>
       <br />
-      <br />
-      <div>
-        <Heading level={2}>Web component code: </Heading>
-        <br />
-        <Editor
-          code={code}
-          onChange={(code) => null} //setCode(code)}
-        />
-      </div>
+      <Editor
+        code={code}
+        onChange={(code) => null} //setCode(code)}
+      />
     </>
   );
 };
