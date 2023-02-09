@@ -190,7 +190,7 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-gondola',
     visible: false,
     tenant: 'sbb',
-    filter: ({ properties }) => properties?.type === 'gondola',
+    getMotsByZoom: (zoom) => (zoom < 12 ? [] : ['gondola']),
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
@@ -202,8 +202,8 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-funicular',
     visible: false,
     tenant: 'sbb',
-    filter: ({ properties }) =>
-      properties?.type && /^(funicular|cablecar)$/.test(properties.type),
+    getMotsByZoom: (zoom) => (zoom < 12 ? [] : ['funicular', 'cablecar']),
+
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
@@ -215,7 +215,7 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-ferry',
     visible: false,
     tenant: 'sbb',
-    filter: ({ properties }) => properties?.type === 'ferry',
+    getMotsByZoom: (zoom) => (zoom < 8 ? [] : ['ferry']),
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
@@ -227,7 +227,7 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-bus',
     visible: false,
     tenant: 'sbb',
-    filter: ({ properties }) => properties?.type === 'bus',
+    getMotsByZoom: (zoom) => (zoom < 11 ? [] : ['bus']),
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
@@ -239,8 +239,7 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-tram',
     visible: false,
     tenant: 'sbb',
-    filter: ({ properties }) =>
-      properties?.type && /^(tram|subway)$/.test(properties.type),
+    getMotsByZoom: (zoom) => (zoom < 11 ? [] : ['tram', 'subway']),
     properties: {
       isQueryable: true,
       popupComponent: 'PunctualityPopup',
@@ -252,6 +251,7 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
     tenant: 'sbb',
+    getMotsByZoom: (zoom) => (zoom < 4 ? [] : ['rail']),
     filter: ({ properties }) => {
       const { type, line } = properties;
       return (
@@ -272,6 +272,7 @@ punctuality.children = [
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
     tenant: 'sbb',
+    getMotsByZoom: (zoom) => (zoom < 4 ? [] : ['rail']),
     filter: ({ properties }) => {
       const { type, line } = properties;
       return (
