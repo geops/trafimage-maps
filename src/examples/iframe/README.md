@@ -41,16 +41,6 @@ const App = () => {
         isIframe
         propConfig={iframeSearchParams}
       />
-      {/* <TextField
-        label="Iframe URL"
-        variant="outlined"
-        value={url}
-        margin="normal"
-        fullWidth
-        onChange={(evt) => {
-          setUrl(evt.target.value);
-        }}
-      /> */}
       <div className="container">
         <iframe src={url} />
       </div>
