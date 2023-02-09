@@ -3,7 +3,7 @@ Simple and flexible configuration of a trafimage maps application. You can use p
 Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://company.sbb.ch/en/sbb-as-business-partner/services/trafimage-maps-and-station-plans.html)).
 This section shows you how to configure your own map for integrating it in your existing web page.
 
-Furthermore, this [CodeSandBox example](https://codesandbox.io/s/angular-trafimage-maps-t432zr?file=/src/app/app.component.html) demonstrates the usage of trafimage-maps web component in an Angular app.
+Furthermore, this [CodeSandBox example](https://codesandbox.io/s/angular-trafimage-maps-m5s51x?file=/src/app/app.component.html) demonstrates the usage of trafimage-maps web component in an Angular app.
 
 ```jsx
 import 'trafimage-maps';
