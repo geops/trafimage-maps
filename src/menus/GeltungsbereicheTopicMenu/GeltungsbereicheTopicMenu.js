@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import { Trans } from 'react-i18next';
 import { makeStyles, MenuItem as MuiMenuItem } from '@material-ui/core';
 import { unByKey } from 'ol/Observable';
 import MenuItem from '../../components/Menu/MenuItem';
@@ -25,16 +25,24 @@ const useStyles = makeStyles(() => {
       // Hide the MenuItem css, display only the select box.
       border: 'none !important',
       boxShadow,
+      '& .MuiInputBase-root': {
+        minHeight: 50,
+      },
       '& .MuiPaper-root[style]': {
         boxShadow,
         // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
         overflow: 'auto',
+      },
+      '& .MuiSelect-selectMenu': {
+        paddingRight: 62,
       },
 
       // Allow multiline display
       '& .MuiSelect-selectMenu, & .MuiMenuItem-root ': {
         textOverflow: 'unset',
         whiteSpace: 'unset',
+        fontSize: '15px', // css that fits https://www.sbb.ch/de/abos-billette/abonnemente/ga/ga-geltungsbereich.html
+        lineHeight: 1.5,
       },
 
       // Display proper padding and border inside the list
@@ -68,6 +76,7 @@ const useStyles = makeStyles(() => {
       top: 0,
       height: 18,
       paddingTop: 5, // needed because the MenuItem has an 5px margin top
+      // marginLeft: 10,
     },
   };
 });
@@ -78,13 +87,13 @@ function GeltungsbereicheTopicMenu() {
   const drawLayer = useSelector((state) => state.map.drawLayer);
   const ref = useRef();
   const [node, setNode] = useState();
-  const { t } = useTranslation();
   const tmMapsEl = document.getElementsByClassName('tm-trafimage-maps')[0];
   const isEmbedded = tmMapsEl && window.innerWidth !== tmMapsEl?.offsetWidth;
   const classes = useStyles();
+  const [value, setValue] = useState();
 
   useEffect(() => {
-    dispatch(setDialogPosition({ x: 390, y: 17 }));
+    dispatch(setDialogPosition({ x: 425, y: 17 }));
   }, [dispatch]);
 
   const nonBaseLayers = useMemo(() => {
@@ -95,13 +104,9 @@ function GeltungsbereicheTopicMenu() {
     );
   }, [drawLayer, layers]);
 
-  const [value, setValue] = useState(
-    (nonBaseLayers?.find((layer) => layer.visible) || {}).name,
-  );
-
   useEffect(() => {
     const val = (nonBaseLayers?.find((layer) => layer.visible) || {}).name;
-    if (!value && val) {
+    if (val && val !== value) {
       setValue(val);
     }
 
@@ -148,9 +153,8 @@ function GeltungsbereicheTopicMenu() {
               className={`wkp-gb-menu-current-value ${classes.currentValue}`}
             >
               <span style={{ flex: 2 }} ref={(textNode) => setNode(textNode)}>
-                {t(value)}
+                <Trans i18nKey={value} />
               </span>
-              <span style={{ width: 20 }} />
             </span>
           )}
           onChange={onChange}
@@ -191,16 +195,20 @@ function GeltungsbereicheTopicMenu() {
 
             return (
               <MuiMenuItem key={layer.key} value={layer.name}>
-                {t(layer.name)}
+                <span>
+                  <Trans i18nKey={layer.name} />
+                </span>
               </MuiMenuItem>
             );
           })}
         </Select>
       )}
-      <InfosButton
-        className={`wkp-info-bt ${classes.infoButton}`}
-        selectedInfo={layers.find((l) => l.name === value)}
-      />
+      {value && (
+        <InfosButton
+          className={`wkp-info-bt ${classes.infoButton}`}
+          selectedInfo={layers.find((l) => l.name === value)}
+        />
+      )}
     </MenuItem>
   );
 }

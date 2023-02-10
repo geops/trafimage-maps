@@ -93,7 +93,7 @@ function GeltungsbereichePopup({
 
   features.forEach((feat) => {
     let mot = feat.get('mot');
-    if (mot === 'tram') {
+    if (/^(tram|subway)$/.test(mot)) {
       mot = 'rail';
     }
     if (mot === 'funicular') {

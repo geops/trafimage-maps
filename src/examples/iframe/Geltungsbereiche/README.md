@@ -1,90 +1,44 @@
 The Geltungsbereiche topic provides a topic specific for iframe use.
 
 ```jsx
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   TextField,
   FormControl,
-  FormControlLabel,
-  Checkbox,
-  makeStyles,
+  Select,
+  InputLabel,
+  MenuItem,
 } from '@material-ui/core';
+import IframeDoc from '../IframeDoc';
 import getCodeFromUrl from '../getCodeFromUrl';
-
-const useStyles = makeStyles(() => {
-  return {
-    params: {
-      display: 'grid',
-      gridTemplateColumns: '15% 15% 50% 20%',
-      rowGap: 20,
-      fontFamily: 'Consolas,"Liberation Mono",Menlo,monospace !important',
-      fontSize: '13px',
-      color: 'rgb(51, 51, 51)',
-      '& strong': {
-        color: 'black',
-        textAlign: 'left',
-      },
-    },
-    parameter: {
-      color: '#690',
-    },
-  };
-});
-
+import getHtmlPageCode from '../../getHtmlPageCode';
+import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
+import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 const baseUrl = 'https://maps.trafimage.ch';
-const topic = '/ch.sbb.geltungsbereiche-iframe';
+const topic = 'ch.sbb.geltungsbereiche-iframe';
+
 
 const App = () => {
-  const classes = useStyles();
-  const [embedded, setEmbedded] = useState(true);
-  const [url, setUrl] = useState(baseUrl + topic + `?embedded=${embedded}`);
+  const [url, setUrl] = useState(baseUrl + '/' + topic + '?embedded=true');
 
   const code = useMemo(() => {
     return getCodeFromUrl(url);
   }, [url]);
 
-  const urlObject = useMemo(() => {
-    return new URL(url);
-  }, [url]);
-
   return (
     <>
-      <div className={classes.params}>
-        <strong>Name</strong>
-        <strong>Default</strong>
-        <strong>Description</strong>
-        <strong>Selected</strong>
-        <span className={classes.parameter}>embedded</span>
-        <span>false</span>
-        <span>
-          If true, it improves mouse/touch interactions to avoid conflict with
-          parent page.
-        </span>
-        <FormControl>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={embedded}
-                onChange={(evt) => {
-                  setEmbedded(!embedded);
-                  const { searchParams } = urlObject;
-                  if (!embedded) {
-                    searchParams.set('embedded', true);
-                  } else {
-                    searchParams.delete('embedded');
-                  }
+      <IframeDoc
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
 
-                  setUrl(urlObject.toString());
-                }}
-              />
-            }
-            label="embedded"
-          />
-        </FormControl>
-      </div>
+        // Filter the parameter to display
+        filter={(config) => ['layers','embedded'].includes(config.name)}
+      />
       <TextField
         label="Iframe URL"
         variant="outlined"
@@ -92,14 +46,21 @@ const App = () => {
         margin="normal"
         fullWidth
         onChange={(evt) => {
-          const newUrlObj = new URL(evt.target.value);
-          const { searchParams } = newUrlObj;
-          setEmbedded(searchParams.get('embedded') === 'true');
           setUrl(evt.target.value);
         }}
       />
       <div className="container">
         <iframe src={url} />
+      </div>
+      <br />
+      <br />
+      <div>
+        <Heading level={2}>Web component code: </Heading>
+        <br />
+        <Editor
+          code={getHtmlPageCode(code)}
+          onChange={(code) => null} //setCode(code)}
+        />
       </div>
     </>
   );

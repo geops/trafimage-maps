@@ -62,7 +62,9 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
         </div>
         <div class="makeStyles-dialogBody-7 ">
           <div>
-            description&lt;br/&gt;break
+            description
+            <br>
+            break
           </div>
         </div>
       </div>

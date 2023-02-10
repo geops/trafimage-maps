@@ -275,7 +275,6 @@ export const geltungsbereicheMvp = {
   maxZoom: 14,
   layers: geltungsbereicheMvpLayers,
   projection: 'EPSG:3857',
-  hideInLayerTree: true,
   layerInfoComponent: 'GeltungsbereicheTopicInfo',
   searches: defaultSearches,
 };
@@ -332,6 +331,7 @@ export const sts = {
 const topics = {
   wkp: [
     netzkarte,
+    geltungsbereicheMvp,
     zweitausbildung,
     bauprojekte,
     handicap,
@@ -341,7 +341,6 @@ const topics = {
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
-    geltungsbereicheMvp,
     geltungsbereicheIframe,
     sts,
     energiePublic,

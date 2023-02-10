@@ -3,16 +3,13 @@ import lang from '../../src/lang/de.json';
 describe('Handicap Topic', () => {
   beforeEach(() => {
     cy.consent();
-    cy.visit('');
+    cy.visit('/ch.sbb.handicap');
     cy.get('.wkp-menu-header ').click();
   });
 
   it('should open a popup on station search.', () => {
     cy.viewport(1440, 900);
     cy.get('.wkp-feature-information').should('not.exist');
-
-    cy.get('.wkp-topic-menu-item').eq(3).click();
-    cy.wait(1000);
 
     // In handicap topic
     cy.get('.wkp-menu-header .wkp-menu-title', { timeout: 10000 }).contains(

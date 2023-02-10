@@ -59,4 +59,29 @@ describe('TopicMenu', () => {
     expect(screen.getByText('layer2')).toBeInTheDocument();
     expect(screen.getByText('topicName')).toBeInTheDocument();
   });
+
+  it("renders html <b> tag form tanslated layer's name", () => {
+    global.i18n.addResourceBundle('de', 'translation', {
+      layerWithHtmlTagsInName: 'translation <b>withhtmltags</b>',
+    });
+    const topic = { name: 'topicName', key: 'topic' };
+    const layerWithHtmlTags = new Layer({
+      name: 'layerWithHtmlTagsInName',
+    });
+    const store = global.mockStore({
+      map: {
+        layers: [layerWithHtmlTags],
+      },
+      app: {
+        menuOpen: true,
+        activeTopic: topic,
+      },
+    });
+    render(
+      <Provider store={store}>
+        <TopicMenu topic={topic} />
+      </Provider>,
+    );
+    expect(screen.getByText('withhtmltags').nodeName).toBe('B');
+  });
 });

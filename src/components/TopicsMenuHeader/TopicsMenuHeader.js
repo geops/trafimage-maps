@@ -69,7 +69,12 @@ function TopicsMenuHeader({ isOpen, onToggle }) {
           )}
         </div>
         <div className={`wkp-menu-layers ${layerNames.length ? '' : 'hidden'}`}>
-          {layerNames.map((layerName) => t(layerName)).join(', ')}
+          {
+            layerNames
+              .map((layerName) => t(layerName))
+              .join(', ')
+              .replace(/<\/?[^>]+(>|$)/g, '') // clean html tags
+          }
         </div>
       </div>
     </Button>

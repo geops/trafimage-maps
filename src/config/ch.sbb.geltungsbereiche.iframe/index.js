@@ -7,7 +7,7 @@ import {
 
 export default [
   geltungsbereicheDataLayer,
-  geltungsbereicheHta,
   geltungsbereicheTk,
+  geltungsbereicheHta,
   geltungsbereicheGA,
 ];

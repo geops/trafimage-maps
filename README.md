@@ -41,15 +41,29 @@ yarn start
 
 ## Publish as NPM package
 
+Make sure you're on the good branch.
+
+Usually, public version are only published from master, beta version can be published from every branches.
+
+Using the following commands, the release version number is automatically updated depending on commit messages (tanks conventionnal commit!)
+
+- Always test the changelog content before publishing:
+
+```bash
+yarn publish:public:dryrun
+```
+
 - Publish a public version:
 
 ```bash
+yarn login # only if it's not already done.
 yarn publish:public
 ```
 
 - Publish a beta version:
 
 ```bash
+yarn login # only if it's not already done.
 yarn publish:beta
 ```
 

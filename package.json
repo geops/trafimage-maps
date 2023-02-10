@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.18.11",
+  "version": "1.18.15",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -57,7 +57,7 @@
   "peerDependencies": {
     "react": "16.14.0",
     "react-dom": "16.14.0",
-    "react-error-overlay": "6.0.9"
+    "react-error-overlay": "6.0.11"
   },
   "devDependencies": {
     "@babel/cli": "7.19.3",

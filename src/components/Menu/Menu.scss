@@ -10,3 +10,8 @@
 .map-controls .wkp-menu-wrapper {
   right: 75px; /* map-controls + margin*2 */
 }
+
+// Specific zu geltungsbereiche iframe topic
+.tm-trafimage-maps.ch-sbb-geltungsbereiche-iframe .wkp-menu-wrapper {
+  max-width: 406px;
+}
