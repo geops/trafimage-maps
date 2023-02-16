@@ -15,6 +15,8 @@ import getWcCodeFromUrl from './getWcCodeFromUrl';
 import getWcAttributesFromUrl from './getWcAttributesFromUrl';
 import webComponentAttributes from './webComponentAttributes';
 
+const apiKey = window.apiKey;
+
 const App = () => {
   const [url, setUrl] = useState('https://maps.trafimage.ch');
 

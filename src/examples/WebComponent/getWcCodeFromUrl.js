@@ -11,7 +11,11 @@ const getWcCodeFromUrl = (urlString) => {
     layersVisibility,
   } = getWcAttributesFromUrl(urlString);
 
-  const code = ['<trafimage-maps', `\n\tapiKey="${window.apiKey}"`];
+  const code = [
+    '<!--Please contact sbb_map@geops.ch for your own API key-->',
+    '\n      <trafimage-maps',
+    `\n\tapiKey="${window.apiKey}"`,
+  ];
 
   if (activeTopicKey) {
     code.push(`\n\tactiveTopicKey="${activeTopicKey}"`);
