@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.18.16](https://github.com/geops/trafimage-maps/compare/v1.18.15...v1.18.16) (2023-02-16)
+
 ### [1.18.15](https://github.com/geops/trafimage-maps/compare/v1.18.14...v1.18.15) (2023-02-09)
 
 
