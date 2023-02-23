@@ -38,7 +38,6 @@ module.exports = {
       content: 'src/examples/WebComponent/README.md',
       sectionDepth: 2,
       exampleMode: 'hide',
-      external: true,
     },
     {
       name: 'Examples',
@@ -127,6 +126,23 @@ module.exports = {
       ],
     },
   ],
+  theme: {
+    color: {
+      links: '#6987a1',
+      linkHover: '#76B833',
+    },
+    fontSize: {
+      base: 16,
+      text: 17,
+      small: 14,
+      h1: 48,
+      h2: 36,
+      h3: 24,
+      h4: 18,
+      h5: 16,
+      h6: 16,
+    },
+  },
   styles: {
     StyleGuide: {
       '@global body': {

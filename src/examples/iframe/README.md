@@ -4,13 +4,7 @@ If you wish you can use the official website inside an iframe, you have access t
 
 ```jsx
 import React, { useMemo, useState, useEffect } from 'react';
-import {
-  TextField,
-  FormControl,
-  Select,
-  InputLabel,
-  MenuItem,
-} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import DocForm from '../DocForm';
@@ -26,6 +20,7 @@ const topic = '';
 
 const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic);
+  const [propsOpen, togglePropsOpen] = useState(false);
 
   const code = useMemo(() => {
     return getHtmlPageCode(getIframeCodeFromUrl(url));
@@ -33,14 +28,21 @@ const App = () => {
 
   return (
     <>
-      <DocForm
-        value={url}
-        onChange={(newUrl) => {
-          setUrl(newUrl);
-        }}
-        isIframe
-        propConfig={iframeSearchParams}
-      />
+      <Button onClick={() => togglePropsOpen(!propsOpen)}>
+        PROPS & METHODS
+      </Button>
+      <br />
+      <br />
+      {propsOpen ? (
+        <DocForm
+          value={url}
+          onChange={(newUrl) => {
+            setUrl(newUrl);
+          }}
+          isIframe
+          propConfig={iframeSearchParams}
+        />
+      ) : null}
       <div className="container">
         <iframe src={url} />
       </div>

@@ -1,11 +1,18 @@
-The trafimage-maps web component showcases a whole range of maps containing a variety of different topics related to public transport ([more information](https://company.sbb.ch/en/sbb-as-business-partner/services/trafimage-maps-and-station-plans.html)).
+[Trafimage maps](https://company.sbb.ch/en/sbb-as-business-partner/services/trafimage-maps-and-station-plans.html) focus on public transport in Switzerland and Europe. The maps combine high graphcial quality with a consistent network data model, that allows to depict many thematic aspects upon them.
 
-trafimage-maps can be configured for different use cases. You can use prepared map topics or integrate any [layers](https://jsdoc.maps.trafimage.ch/docjs.html). This section shows you how to configure your own map for integrating it in your existing web page.
+trafimage-maps stands for a web component, that encapsulates all UI elements of the [Trafimage web mapping portal](https://maps.trafimage.ch/). It allows to use readily prepared map topics as well as single map layers [link to jsdocs.html] in order to create own topics. The main adavantage of a web component is its modularity and reusability. The _trafimage-maps_ web component can be used across different web projects with either Vanilla JavaScript, various JavaScript frameworks or wrapped within an iFrame.
+
+The main mapping libraries in trafimage-maps are [OpenLayers](https://openlayers.org/) and [MapLibre GL JS](https://maplibre.org/projects/maplibre-gl-js/). Furthermore, some topics and components also use [mobility-toolbox-js](https://mobility-toolbox-js.geops.io/) and [react-spatial](https://react-spatial.geops.io).
+
+The whole code of trafimage-maps is open-source and can be found on [GitHub](https://github.com/geops/trafimage-maps).
+
+This section shows you how to configure your own basic map for integrating it in your existing web page. Under [Examples](/#/Examples/Vanilla%20JS/Construction) you can find samples as well as code generators for different environments.
 
 ```jsx
 import 'trafimage-maps';
 import React, { useState, useMemo } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
+import { Button } from '@material-ui/core';
 import getHtmlPageCode from './getHtmlPageCode';
 import DocForm from '../DocForm';
 import getWcCodeFromUrl from './getWcCodeFromUrl';
@@ -16,6 +23,7 @@ const apiKey = window.apiKey;
 
 const App = () => {
   const [url, setUrl] = useState('https://maps.trafimage.ch');
+  const [propsOpen, togglePropsOpen] = useState(false);
 
   const code = useMemo(() => {
     return getHtmlPageCode(getWcCodeFromUrl(url));
@@ -25,22 +33,25 @@ const App = () => {
     return getWcAttributesFromUrl(url, false);
   }, [url]);
 
-  const webComponent = useMemo(() => {
-    return (
-      <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
-    );
-  }, [props]);
-
   return (
     <>
-      <DocForm
-        value={url}
-        onChange={(newUrl) => {
-          setUrl(newUrl);
-        }}
-        propConfig={webComponentAttributes}
-      />
-      <div className="container">{webComponent}</div>
+      <Button onClick={() => togglePropsOpen(!propsOpen)}>
+        PROPS & METHODS
+      </Button>
+      <br />
+      <br />
+      {propsOpen ? (
+        <DocForm
+          value={url}
+          onChange={(newUrl) => {
+            setUrl(newUrl);
+          }}
+          propConfig={webComponentAttributes}
+        />
+      ) : null}
+      <div className="container">
+        <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
+      </div>
       <br />
       <Editor
         code={code}
