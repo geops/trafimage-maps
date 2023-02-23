@@ -36,6 +36,7 @@ const App = () => {
           setUrl(newUrl);
         }}
         isIframe
+        propToggler={false}
         propConfig={iframeSearchParams}
         filter={(config) => ['layers', 'embedded'].includes(config.name)}
       />

@@ -12,7 +12,6 @@ This section shows you how to configure your own basic map for integrating it in
 import 'trafimage-maps';
 import React, { useState, useMemo } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import { Button } from '@material-ui/core';
 import getHtmlPageCode from './getHtmlPageCode';
 import DocForm from '../DocForm';
 import getWcCodeFromUrl from './getWcCodeFromUrl';
@@ -23,32 +22,22 @@ const apiKey = window.apiKey;
 
 const App = () => {
   const [url, setUrl] = useState('https://maps.trafimage.ch');
-  const [propsOpen, togglePropsOpen] = useState(false);
-
   const code = useMemo(() => {
     return getHtmlPageCode(getWcCodeFromUrl(url));
   }, [url]);
-
   const props = useMemo(() => {
     return getWcAttributesFromUrl(url, false);
   }, [url]);
 
   return (
     <>
-      <Button onClick={() => togglePropsOpen(!propsOpen)}>
-        PROPS & METHODS
-      </Button>
-      <br />
-      <br />
-      {propsOpen ? (
-        <DocForm
-          value={url}
-          onChange={(newUrl) => {
-            setUrl(newUrl);
-          }}
-          propConfig={webComponentAttributes}
-        />
-      ) : null}
+      <DocForm
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
+        propConfig={webComponentAttributes}
+      />
       <div className="container">
         <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
       </div>

@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useMemo, useState, useEffect } from 'react';
 import {
+  Button,
   TextField,
   FormControl,
   Select,
@@ -16,6 +17,21 @@ import { getTopicConfig } from '../config/topics';
 
 const useStyles = makeStyles(() => {
   return {
+    formWrapper: {
+      margin: '20px 0',
+    },
+    propToggler: {
+      borderRadius: 0,
+      marginBottom: 10,
+      padding: 2,
+      color: (props) => (props.propsOpen ? '#76B833' : 'rgb(118, 118, 118)'),
+      borderBottom: (props) => (props.propsOpen ? '2px solid #76B833' : 'none'),
+      transition: 'color 100ms ease-in-out',
+      '&:hover': {
+        color: '#76B833',
+        backgroundColor: 'transparent',
+      },
+    },
     table: {
       margin: '25px 0',
 
@@ -64,9 +80,17 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function DocForm({ value, onChange, filter, isIframe, propConfig }) {
-  const classes = useStyles();
+function DocForm({
+  value,
+  onChange,
+  filter,
+  isIframe,
+  propToggler,
+  propConfig,
+}) {
   const [permalinkParams, setPermalinkParams] = useState(propConfig);
+  const [propsOpen, togglePropsOpen] = useState(!propToggler);
+  const classes = useStyles({ propsOpen });
   const url = useMemo(() => {
     return new URL(value);
   }, [value]);
@@ -110,160 +134,178 @@ function DocForm({ value, onChange, filter, isIframe, propConfig }) {
   }, [url, isIframe, propConfig]);
 
   return (
-    <table className={classes.table}>
-      <thead>
-        <tr>
-          <th className={classes.colName}>Name</th>
-          {/* <th className={classes.colType}>Type</th> */}
-          <th className={classes.colDefault}>Default</th>
-          <th className={classes.colDescription}>Description</th>
-          <th className={classes.colSelected}>Selected</th>
-        </tr>
-      </thead>
-      <tbody>
-        {permalinkParams
-          .filter(filter)
-          .map(
-            ({
-              name,
-              type,
-              defaultValue,
-              values,
-              description,
-              comp,
-              props,
-              pathname,
-            }) => {
-              let currentValue = pathname
-                ? url.pathname.split('/')[1] || ''
-                : searchParams.get(name);
+    <div className={classes.formWrapper}>
+      {propToggler ? (
+        <Button
+          disableRipple
+          onClick={() => togglePropsOpen(!propsOpen)}
+          className={classes.propToggler}
+        >
+          PROPS & METHODS
+        </Button>
+      ) : null}
+      {propsOpen ? (
+        <table className={classes.table}>
+          <thead>
+            <tr>
+              <th className={classes.colName}>Name</th>
+              {/* <th className={classes.colType}>Type</th> */}
+              <th className={classes.colDefault}>Default</th>
+              <th className={classes.colDescription}>Description</th>
+              <th className={classes.colSelected}>Selected</th>
+            </tr>
+          </thead>
+          <tbody>
+            {permalinkParams
+              .filter(filter)
+              .map(
+                ({
+                  name,
+                  type,
+                  defaultValue,
+                  values,
+                  description,
+                  comp,
+                  props,
+                  pathname,
+                }) => {
+                  let currentValue = pathname
+                    ? url.pathname.split('/')[1] || ''
+                    : searchParams.get(name);
 
-              const isSelectMultiple = comp === 'select' && /Array/i.test(type);
+                  const isSelectMultiple =
+                    comp === 'select' && /Array/i.test(type);
 
-              if (pathname) {
-                currentValue = url.pathname.split('/')[1] || '';
-              } else if (comp === 'checkbox') {
-                currentValue = currentValue === 'true' || currentValue === true;
-              } else if (comp === 'select') {
-                currentValue = searchParams.get(name);
+                  if (pathname) {
+                    currentValue = url.pathname.split('/')[1] || '';
+                  } else if (comp === 'checkbox') {
+                    currentValue =
+                      currentValue === 'true' || currentValue === true;
+                  } else if (comp === 'select') {
+                    currentValue = searchParams.get(name);
 
-                if (isSelectMultiple) {
-                  currentValue = searchParams.get(name)?.split(',');
-                }
-                if (!currentValue && isSelectMultiple) {
-                  currentValue = [];
-                }
-                if (!currentValue) {
-                  currentValue = '';
-                }
-              } else if (comp === 'input') {
-                if (!currentValue) {
-                  currentValue = '';
-                }
-              }
+                    if (isSelectMultiple) {
+                      currentValue = searchParams.get(name)?.split(',');
+                    }
+                    if (!currentValue && isSelectMultiple) {
+                      currentValue = [];
+                    }
+                    if (!currentValue) {
+                      currentValue = '';
+                    }
+                  } else if (comp === 'input') {
+                    if (!currentValue) {
+                      currentValue = '';
+                    }
+                  }
 
-              return (
-                <tr key={name}>
-                  <td className={classes.colName}>
-                    <span className="flex">{name}</span>
-                  </td>
-                  {/* <td className={classes.colType}>{type}</td> */}
-                  <td className={classes.colDefault}>
-                    <span className="flex">{defaultValue || ''}</span>
-                  </td>
-                  <td className={classes.colDescription}>
-                    <span className="flex">{description()}</span>
-                  </td>
-                  <td className={classes.colSelected}>
-                    {comp === 'select' && (
-                      <FormControl>
-                        <InputLabel id="demo-mutiple-name-label">
-                          {name}
-                        </InputLabel>
-                        <Select
-                          labelId="demo-mutiple-name-label"
-                          multiple={/Array/i.test(type)}
-                          value={currentValue}
-                          onChange={(evt) => {
-                            if (pathname) {
-                              url.pathname = `/${evt.target.value}`;
-                            } else {
-                              const newValue = isSelectMultiple
-                                ? evt.target.value.join(',')
-                                : evt.target.value;
-                              if (newValue) {
-                                searchParams.set(name, newValue);
+                  return (
+                    <tr key={name}>
+                      <td className={classes.colName}>
+                        <span className="flex">{name}</span>
+                      </td>
+                      {/* <td className={classes.colType}>{type}</td> */}
+                      <td className={classes.colDefault}>
+                        <span className="flex">{defaultValue || ''}</span>
+                      </td>
+                      <td className={classes.colDescription}>
+                        <span className="flex">{description()}</span>
+                      </td>
+                      <td className={classes.colSelected}>
+                        {comp === 'select' && (
+                          <FormControl>
+                            <InputLabel id="demo-mutiple-name-label">
+                              {name}
+                            </InputLabel>
+                            <Select
+                              labelId="demo-mutiple-name-label"
+                              multiple={/Array/i.test(type)}
+                              value={currentValue}
+                              onChange={(evt) => {
+                                if (pathname) {
+                                  url.pathname = `/${evt.target.value}`;
+                                } else {
+                                  const newValue = isSelectMultiple
+                                    ? evt.target.value.join(',')
+                                    : evt.target.value;
+                                  if (newValue) {
+                                    searchParams.set(name, newValue);
+                                  } else {
+                                    searchParams.delete(name);
+                                  }
+                                }
+                                onChange(url.toString());
+                              }}
+                              MenuProps={{
+                                disablePortal: true,
+                              }}
+                            >
+                              {values.map((val) => (
+                                <MenuItem
+                                  key={val}
+                                  value={val}
+                                  disabled={/\(disabled\)$/.test(val)}
+                                >
+                                  {val.replace(/\(disabled\)$/, '')}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </FormControl>
+                        )}
+                        {comp === 'input' && (
+                          <TextField
+                            label={name}
+                            type={type}
+                            value={currentValue}
+                            onChange={(evt) => {
+                              if (evt.target.value) {
+                                searchParams.set(name, evt.target.value);
                               } else {
                                 searchParams.delete(name);
                               }
-                            }
-                            onChange(url.toString());
-                          }}
-                          MenuProps={{
-                            disablePortal: true,
-                          }}
-                        >
-                          {values.map((val) => (
-                            <MenuItem
-                              key={val}
-                              value={val}
-                              disabled={/\(disabled\)$/.test(val)}
-                            >
-                              {val.replace(/\(disabled\)$/, '')}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      </FormControl>
-                    )}
-                    {comp === 'input' && (
-                      <TextField
-                        label={name}
-                        type={type}
-                        value={currentValue}
-                        onChange={(evt) => {
-                          if (evt.target.value) {
-                            searchParams.set(name, evt.target.value);
-                          } else {
-                            searchParams.delete(name);
-                          }
 
-                          onChange(url.toString());
-                        }}
-                        // eslint-disable-next-line react/jsx-props-no-spreading
-                        {...(props || {})}
-                      />
-                    )}
-                    {comp === 'checkbox' && (
-                      <FormControl>
-                        <FormControlLabel
-                          style={{ marginTop: 16 }}
-                          control={
-                            <Checkbox
-                              checked={currentValue}
-                              onChange={(evt) => {
-                                if (evt.target.checked) {
-                                  searchParams.set(name, evt.target.checked);
-                                } else {
-                                  searchParams.delete(name);
-                                }
+                              onChange(url.toString());
+                            }}
+                            // eslint-disable-next-line react/jsx-props-no-spreading
+                            {...(props || {})}
+                          />
+                        )}
+                        {comp === 'checkbox' && (
+                          <FormControl>
+                            <FormControlLabel
+                              style={{ marginTop: 16 }}
+                              control={
+                                <Checkbox
+                                  checked={currentValue}
+                                  onChange={(evt) => {
+                                    if (evt.target.checked) {
+                                      searchParams.set(
+                                        name,
+                                        evt.target.checked,
+                                      );
+                                    } else {
+                                      searchParams.delete(name);
+                                    }
 
-                                onChange(url.toString());
-                              }}
-                              // eslint-disable-next-line react/jsx-props-no-spreading
-                              {...(props || {})}
+                                    onChange(url.toString());
+                                  }}
+                                  // eslint-disable-next-line react/jsx-props-no-spreading
+                                  {...(props || {})}
+                                />
+                              }
+                              label={name}
                             />
-                          }
-                          label={name}
-                        />
-                      </FormControl>
-                    )}
-                  </td>
-                </tr>
-              );
-            },
-          )}
-      </tbody>
-    </table>
+                          </FormControl>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                },
+              )}
+          </tbody>
+        </table>
+      ) : null}
+    </div>
   );
 }
 
@@ -272,6 +314,7 @@ DocForm.propTypes = {
   onChange: PropTypes.func.isRequired,
   filter: PropTypes.func,
   isIframe: PropTypes.bool,
+  propToggler: PropTypes.bool,
   propConfig: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
@@ -296,6 +339,7 @@ DocForm.propTypes = {
 };
 
 DocForm.defaultProps = {
+  propToggler: true,
   filter: () => true,
   isIframe: false,
 };

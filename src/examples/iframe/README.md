@@ -3,8 +3,7 @@ The web component is used as basis for the application [maps.trafimage.ch](https
 If you wish you can use the official website inside an iframe, you have access to the same functionnalities.
 
 ```jsx
-import React, { useMemo, useState, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import React, { useMemo, useState } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import DocForm from '../DocForm';
@@ -20,29 +19,20 @@ const topic = '';
 
 const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic);
-  const [propsOpen, togglePropsOpen] = useState(false);
-
   const code = useMemo(() => {
     return getHtmlPageCode(getIframeCodeFromUrl(url));
   }, [url]);
 
   return (
     <>
-      <Button onClick={() => togglePropsOpen(!propsOpen)}>
-        PROPS & METHODS
-      </Button>
-      <br />
-      <br />
-      {propsOpen ? (
-        <DocForm
-          value={url}
-          onChange={(newUrl) => {
-            setUrl(newUrl);
-          }}
-          isIframe
-          propConfig={iframeSearchParams}
-        />
-      ) : null}
+      <DocForm
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
+        isIframe
+        propConfig={iframeSearchParams}
+      />
       <div className="container">
         <iframe src={url} />
       </div>
