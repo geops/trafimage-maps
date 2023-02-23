@@ -3,7 +3,7 @@ Simple and flexible configuration of a trafimage maps application. You can use p
 Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://company.sbb.ch/en/sbb-as-business-partner/services/trafimage-maps-and-station-plans.html)).
 This section shows you how to configure your own map for integrating it in your existing web page.
 
-```
+```jsx
 import 'trafimage-maps';
 import React, { useState, useMemo } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
