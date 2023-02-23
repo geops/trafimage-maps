@@ -1,7 +1,6 @@
-Simple and flexible configuration of a trafimage maps application. You can use prepared map topics or integrate any [layers](https://jsdoc.maps.trafimage.ch/docjs.html).
+The trafimage-maps web component showcases a whole range of maps containing a variety of different topics related to public transport ([more information](https://company.sbb.ch/en/sbb-as-business-partner/services/trafimage-maps-and-station-plans.html)).
 
-Trafimage maps are used to illustrate a whole range of topics relating to public transport ([more information](https://company.sbb.ch/en/sbb-as-business-partner/services/trafimage-maps-and-station-plans.html)).
-This section shows you how to configure your own map for integrating it in your existing web page.
+trafimage-maps can be configured for different use cases. You can use prepared map topics or integrate any [layers](https://jsdoc.maps.trafimage.ch/docjs.html). This section shows you how to configure your own map for integrating it in your existing web page.
 
 ```jsx
 import 'trafimage-maps';
