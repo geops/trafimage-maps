@@ -1,6 +1,4 @@
-The web component is used as basis for the application [maps.trafimage.ch](https://map.trafimage.ch).
-
-If you wish you can use the official website inside an iframe, you have access to the same functionnalities.
+The trafimage-maps web component can be embedded as an iframe on any website. Web component properties can be set via the iframe source url.
 
 ```jsx
 import React, { useMemo, useState } from 'react';
