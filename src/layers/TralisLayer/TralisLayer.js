@@ -1,3 +1,4 @@
+import { getTypeIndex } from 'mobility-toolbox-js/common/utils/realtimeConfig';
 import {
   RealtimeLayer,
   fullTrajectoryDelayStyle,
@@ -5,6 +6,51 @@ import {
   realtimeDelayStyle,
   sortByDelay,
 } from 'mobility-toolbox-js/ol';
+
+/**
+ * Trajserv value: 'Tram',  'Subway / Metro / S-Bahn',  'Train', 'Bus', 'Ferry', 'Cable Car', 'Gondola', 'Funicular', 'Long distance bus', 'Rail',
+ * New endpoint use Rail instead of Train.
+ * New tracker values:  null, "tram", "subway", "rail", "bus", "ferry", "cablecar", "gondola", "funicular", "coach".
+ *
+ * @ignore
+ */
+export const types = [
+  /^Tram/i,
+  /^Subway( \/ Metro \/ S-Bahn)?/i,
+  /^Train/i,
+  /^Bus/i,
+  /^Ferry/i,
+  /^Cable ?Car/i,
+  /^Gondola/i,
+  /^Funicular/i,
+  /^(Long distance bus|coach)/i,
+  /^Rail/i, // New endpoint use Rail instead of Train.
+];
+
+const radiusMapping = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 7, 7, 15], // tram
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 7, 7, 15], // subway
+  [2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 7, 15, 15, 15, 15, 15, 15], // rail
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 7, 7, 15], // bus
+  [0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7, 15, 15, 15], // ferry
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 7, 7, 7], // funicular
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 7, 7, 7], // gondola
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 7, 7, 7], // funicular
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 7, 7, 7, 15], // coach
+  [2, 2, 2, 2, 2, 2, 2, 2, 7, 7, 7, 15, 15, 15, 15, 15, 15], // rail
+];
+
+/**
+ * @ignore
+ */
+const getRadius = (type, zoom) => {
+  try {
+    const typeIdx = getTypeIndex(type || 0);
+    return radiusMapping[typeIdx][zoom];
+  } catch (e) {
+    return 1;
+  }
+};
 
 class TralisLayer extends RealtimeLayer {
   constructor(options) {
@@ -36,22 +82,38 @@ class TralisLayer extends RealtimeLayer {
       url: 'wss://tralis-tracker-api.geops.io/ws',
       tenant: 'sbb',
       style: realtimeDelayStyle,
+      styleOptions: {
+        getRadius,
+      },
       sort: sortByDelay,
       fullTrajectoryStyle: fullTrajectoryDelayStyle,
+      generalizationLevelByZoom: [
+        5, 5, 5, 5, 5, 5, 5, 5, 10, 30, 30, 100, 100, 150,
+      ],
       getMotsByZoom: (zoom) => {
-        return zoom < 14
-          ? ['rail']
-          : [
-              'tram',
-              'subway',
-              'rail',
-              'bus',
-              'ferry',
-              'cablecar',
-              'gondola',
-              'funicular',
-              'coach',
-            ];
+        if (zoom < 8) {
+          return ['rail'];
+        }
+
+        if (zoom < 11) {
+          return ['rail', 'ferry'];
+        }
+
+        if (zoom < 12) {
+          return ['rail', 'ferry', 'tram', 'subway', 'rail', 'bus'];
+        }
+
+        return [
+          'rail',
+          'tram',
+          'subway',
+          'bus',
+          'ferry',
+          'cablecar',
+          'gondola',
+          'funicular',
+          'coach',
+        ];
       },
       ...options,
       properties: {
