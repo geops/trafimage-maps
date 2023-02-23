@@ -1,4 +1,4 @@
-This example shows how to show the Geltungsbereiche topic optimized for small screen.
+This example shows how to show the _Geltungsbereiche_ topic optimized for small screen.
 
 ```jsx
 import 'trafimage-maps';

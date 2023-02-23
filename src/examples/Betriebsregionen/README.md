@@ -1,4 +1,4 @@
-Example for the appName 'betriebsregionen'.
+Example for the _Betriebsregionen_ topic.
 
 ```js
 import 'trafimage-maps';
