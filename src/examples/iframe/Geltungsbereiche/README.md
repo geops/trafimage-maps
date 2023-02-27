@@ -1,4 +1,4 @@
-The Geltungsbereiche topic provides a topic specifically for iframe use.
+The _Geltungsbereiche_ topic provides a topic specifically for iframe use.
 
 ```jsx
 import React, { useMemo, useState, useEffect } from 'react';

@@ -1,4 +1,4 @@
-The trafimage-maps web component can be embedded as an iframe on any website. Web component properties can be set via the iframe source url.
+The _trafimage-maps_ web component can be embedded as an iframe on any website. Web component properties can be set via the iframe source url.
 
 ```jsx
 import React, { useMemo, useState } from 'react';

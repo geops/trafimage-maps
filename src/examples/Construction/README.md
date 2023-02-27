@@ -1,4 +1,4 @@
-Example how to load trafimage-maps with a specific topic without using React.
+Example how to load _trafimage-maps_ with a specific topic without using React.
 
 ```js
 import 'trafimage-maps';
