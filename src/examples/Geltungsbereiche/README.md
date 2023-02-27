@@ -1,19 +1,34 @@
-This example shows how to show the _Geltungsbereiche_ topic optimized for small screen.
+This example shows how to show the _Area of validity_ topic optimized for small screen.
 
-```jsx
+```js
 import 'trafimage-maps';
+import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
+import getHtmlPageCode from '../getHtmlPageCode';
 
-// The `apiKey` used here is for demonstration purposes only.
-// Please get your own api key at https://developer.geops.io/.
-const apiKey = window.apiKey;
-
-<trafimage-maps
-  apiKey={apiKey}
-  activeTopicKey="ch.sbb.geltungsbereiche-iframe"
-  height="500px"
-  zoom="7"
-  language="en"
-  elements="permalink=false"
-  embedded="true"
-/>;
+const App = () => {
+  return (
+    <>
+      <div className="container">
+        <trafimage-maps
+          apiKey={apiKey}
+          activeTopicKey="ch.sbb.geltungsbereiche-iframe"
+          height="500px"
+          zoom="7"
+          language="en"
+          elements="permalink=false"
+          embedded="true"
+        />
+        ;
+      </div>
+      <br />
+      <Editor
+        code={getHtmlPageCode(
+          `<!--Please contact sbb_map@geops.ch for your own API key-->\n      <trafimage-maps\n\tactiveTopicKey="ch.sbb.geltungsbereiche-iframe"\n\tapiKey="${window.apiKey}"\n\tzoom="7"\n\theight="500px"\n\telements="permalink=false"\n\tembedded="true"\n\tlanguage="en"\n      />`,
+        )}
+        onChange={(code) => null} //setCode(code)}
+      />
+    </>
+  );
+};
+<App />;
 ```

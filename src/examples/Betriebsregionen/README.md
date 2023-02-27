@@ -1,11 +1,29 @@
-Example for the _Betriebsregionen_ topic.
+Example for the _Operating regions_ topic.
 
 ```js
 import 'trafimage-maps';
+import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
+import getHtmlPageCode from '../getHtmlPageCode';
 
-// The `apiKey` used here is for demonstration purposes only.
-// Please get your own api key at https://developer.geops.io/.
-const apiKey = window.apiKey;
-
-<trafimage-maps appName="betriebsregionen" apiKey={apiKey} height="500px" />;
+const App = () => {
+  return (
+    <>
+      <div className="container">
+        <trafimage-maps
+          appName="betriebsregionen"
+          apiKey={apiKey}
+          height="500px"
+        />
+      </div>
+      <br />
+      <Editor
+        code={getHtmlPageCode(
+          `<!--Please contact sbb_map@geops.ch for your own API key-->\n      <trafimage-maps\n\tappName="betriebsregionen"\n\tapiKey="${window.apiKey}"\n\theight="500px"\n      />`,
+        )}
+        onChange={(code) => null} //setCode(code)}
+      />
+    </>
+  );
+};
+<App />;
 ```

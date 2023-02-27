@@ -339,7 +339,7 @@ DocForm.propTypes = {
 };
 
 DocForm.defaultProps = {
-  propToggler: true,
+  propToggler: false,
   filter: () => true,
   isIframe: false,
 };

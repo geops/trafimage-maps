@@ -23,14 +23,6 @@ const App = () => {
 
   return (
     <>
-      <DocForm
-        value={url}
-        onChange={(newUrl) => {
-          setUrl(newUrl);
-        }}
-        isIframe
-        propConfig={iframeSearchParams}
-      />
       <div className="container">
         <iframe src={url} />
       </div>
@@ -38,6 +30,15 @@ const App = () => {
       <Editor
         code={code}
         onChange={(code) => null} //setCode(code)}
+      />
+      <br />
+      <DocForm
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
+        isIframe
+        propConfig={iframeSearchParams}
       />
     </>
   );

@@ -41,32 +41,37 @@ module.exports = {
     },
     {
       name: 'Examples',
-      href: '#/Examples/Vanilla%20JS/Construction',
+      href: '#/Examples/HTML%20%26%20Vanilla%20JS/Construction',
       sectionDepth: 2,
       sections: [
         {
-          name: 'Vanilla JS',
-          href: '#/Examples/Vanilla%20JS/Construction',
+          name: 'HTML & Vanilla JS',
+          href: '#/Examples/HTML%20%26%20Vanilla%20JS/Construction',
           sections: [
             {
               name: 'Construction',
               content: 'src/examples/Construction/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
               name: 'Direct connections by night',
               content: 'src/examples/DirektVerbindung/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
-              name: 'Infrastruktur Betriebsregionen',
+              name: 'Operating regions',
               content: 'src/examples/Betriebsregionen/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
-              name: 'Geltungsbereiche',
+              name: 'Area of validity',
               content: 'src/examples/Geltungsbereiche/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'External component update',
+              content: 'src/examples/ExternalUpdate/README.md',
+              exampleMode: 'hide',
             },
           ],
         },
@@ -117,7 +122,7 @@ module.exports = {
               exampleMode: 'hide',
             },
             {
-              name: 'Geltungsbereiche',
+              name: 'Area of validity',
               content: 'src/examples/iframe/Geltungsbereiche/README.md',
               exampleMode: 'hide',
             },

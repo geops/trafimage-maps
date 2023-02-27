@@ -30,16 +30,6 @@ const App = () => {
 
   return (
     <>
-      <DocForm
-        value={url}
-        onChange={(newUrl) => {
-          setUrl(newUrl);
-        }}
-        isIframe
-        propToggler={false}
-        propConfig={iframeSearchParams}
-        filter={(config) => ['layers', 'embedded'].includes(config.name)}
-      />
       <div className="container">
         <iframe src={url} />
       </div>
@@ -47,6 +37,16 @@ const App = () => {
       <Editor
         code={code}
         onChange={(code) => null} //setCode(code)}
+      />
+      <br />
+      <DocForm
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
+        isIframe
+        propConfig={iframeSearchParams}
+        filter={(config) => ['layers', 'embedded'].includes(config.name)}
       />
     </>
   );

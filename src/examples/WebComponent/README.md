@@ -6,13 +6,13 @@ The main mapping libraries in _trafimage-maps_ are [OpenLayers](https://openlaye
 
 The whole code of _trafimage-maps_ is open source and can be found on [GitHub](https://github.com/geops/trafimage-maps).
 
-This section shows you how to configure your own basic map for integrating it in your existing web page. Under [Examples](/#/Examples/Vanilla%20JS/Construction) you can find samples as well as code generators for different environments.
+This section shows you how to configure your own basic map for integrating it in your existing web page. Under [Examples](/#/Examples/HTML%20%26%20Vanilla%20JS/Construction) you can find samples as well as code generators for different environments.
 
 ```jsx
 import 'trafimage-maps';
 import React, { useState, useMemo } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import getHtmlPageCode from './getHtmlPageCode';
+import getHtmlPageCode from '../getHtmlPageCode';
 import DocForm from '../DocForm';
 import getWcCodeFromUrl from './getWcCodeFromUrl';
 import getWcAttributesFromUrl from './getWcAttributesFromUrl';
@@ -31,13 +31,6 @@ const App = () => {
 
   return (
     <>
-      <DocForm
-        value={url}
-        onChange={(newUrl) => {
-          setUrl(newUrl);
-        }}
-        propConfig={webComponentAttributes}
-      />
       <div className="container">
         <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
       </div>
@@ -45,6 +38,14 @@ const App = () => {
       <Editor
         code={code}
         onChange={(code) => null} //setCode(code)}
+      />
+      <br />
+      <DocForm
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
+        propConfig={webComponentAttributes}
       />
     </>
   );
