@@ -82,39 +82,37 @@ module.exports = {
             {
               name: 'Custom Topic',
               content: 'src/examples/CustomTopic/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
               name: 'Override Topic',
               content: 'src/examples/OverrideTopic/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
               name: 'Punctuality Map',
               content: 'src/examples/Punctuality/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
               name: 'Casa Map',
               content: 'src/examples/Casa/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
             {
               name: 'Schulzug',
               content: 'src/examples/Schulzug/README.md',
-              exampleMode: 'expand',
+              exampleMode: 'hide',
             },
           ],
         },
         {
           name: 'Angular',
           content: 'src/examples/Angular/README.md',
-          exampleMode: 'expand',
         },
         {
           name: 'Iframe',
           href: '#/Examples/Iframe/Basic',
-          exampleMode: 'expand',
           sections: [
             {
               name: 'Basic',

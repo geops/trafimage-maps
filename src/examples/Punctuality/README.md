@@ -11,16 +11,18 @@ Important to know, filters using layer's properties have precedence over url par
 
 ```jsx
 import 'trafimage-maps';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import TralisLayer from 'trafimage-maps/es/layers/TralisLayer';
 import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
+import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
+import getCodeWithParsedApiKey from '../getCodeWithParsedApiKey.js';
+import EditorCode from './ExampleCode.txt';
 
-// The `apiKey` used here is for demonstration purposes only.
-// Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 
 const App = () => {
   const ref = useRef();
+  const [code, setCode] = useState();
 
   useEffect(() => {
     const map = ref.current;
@@ -59,20 +61,34 @@ const App = () => {
       },
     ];
 
+    // We fetch the example code from local text file and insert the current public API key
+    const getCode = async () => {
+      const jsCode = await getCodeWithParsedApiKey(
+        `./${EditorCode}`,
+        window.apiKey,
+      );
+      setCode(jsCode);
+    };
+    getCode();
+
     return () => {
       map.topics = null;
     };
   }, []);
 
   return (
-    <div className="container">
-      <trafimage-maps
-        ref={ref}
-        zoom="14"
-        center="[950690,6004000]"
-        apiKey={apiKey}
-      />
-    </div>
+    <>
+      <div className="container">
+        <trafimage-maps
+          ref={ref}
+          zoom="14"
+          center="[950690,6004000]"
+          apiKey={apiKey}
+        />
+      </div>
+      <br />
+      {code && <Editor code={code} onChange={(code) => null} />}
+    </>
   );
 };
 

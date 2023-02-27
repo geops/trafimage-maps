@@ -19,7 +19,7 @@ const App = () => {
           height="500px"
           zoom="6"
           language="en"
-          elements="menu=false,header=false,permalink=false,search=false"
+          elements="permalink=false,search=false"
           layersVisibility="ch.sbb.direktverbindungen.night=true"
         />
       </div>

@@ -1,0 +1,47 @@
+mport 'trafimage-maps';
+import React, { useRef, useEffect } from 'react';
+import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
+
+const topic = {
+  name: 'Default',
+  key: 'default',
+  elements: {
+    menu: false,
+    header: true,
+    footer: true,
+    permalink: false,
+  },
+  layers: [
+    new TrafimageMapboxLayer({
+      name: 'Netzkarte',
+      visible: true,
+      style: 'base_bright_v2',
+    }),
+  ],
+};
+
+const App = () => {
+  const ref = useRef();
+
+  useEffect(() => {
+    const map = ref.current;
+    map.topics = [topic];
+
+    return () => {
+      map.topics = null;
+    };
+  }, []);
+
+  return (
+    <div className="container">
+      <!--Please contact sbb_map@geops.ch for your own API key-->
+      <trafimage-maps
+        ref={ref}
+        zoom="7"
+        apiKey=<apiKey> 
+      />
+    </div>
+  );
+};
+
+<App />;

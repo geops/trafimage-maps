@@ -1,18 +1,12 @@
-This example shows how to create a simple map with vector data.
-
-```jsx
 import 'trafimage-maps';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
 import { VectorLayer } from 'mobility-toolbox-js/ol';
 import OLVectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
 import { Icon, Style } from 'ol/style';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import marker from './marker.png';
-import getCodeWithParsedApiKey from '../getCodeWithParsedApiKey.js';
-import EditorCode from './ExampleCode.txt';
 
 const featureCollection = {
   type: 'FeatureCollection',
@@ -81,25 +75,12 @@ const topic = {
   ],
 };
 
-const apiKey = window.apiKey;
-
 const App = () => {
   const ref = useRef();
-  const [code, setCode] = useState();
 
   useEffect(() => {
     const map = ref.current;
     map.topics = [topic];
-
-    // We fetch the example code from local text file and insert the current public API key
-    const getCode = async () => {
-      const jsCode = await getCodeWithParsedApiKey(
-        `./${EditorCode}`,
-        window.apiKey,
-      );
-      setCode(jsCode);
-    };
-    getCode();
 
     return () => {
       map.topics = null;
@@ -107,15 +88,15 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      <div className="container">
-        <trafimage-maps ref={ref} zoom="7" apiKey={apiKey} />
-      </div>
-      <br />
-      {code && <Editor code={code} onChange={(code) => null} />}
-    </>
+    <div className="container">
+      <!--Please contact sbb_map@geops.ch for your own API key-->
+      <trafimage-maps
+        ref={ref}
+        zoom="7"
+        apiKey=<apiKey>
+      />
+    </div>
   );
 };
 
 <App />;
-```
