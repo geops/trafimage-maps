@@ -1,19 +1,12 @@
-The Casa module is a sub module of _trafimage-maps_ which is integrated in the SBB selling application. It is used for visualizing the planned [route](/docjs.html#routelayer) with different means of transportation and allows the selection of relevant [fare network](/docjs.html#zonelayer).
-
-```jsx
 import 'trafimage-maps';
-import React, { useEffect, useRef, useState } from 'react';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
+import React, { useEffect, useRef } from 'react';
 import RouteLayer from 'trafimage-maps/es/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/es/layers/ZoneLayer';
 import { casa } from 'trafimage-maps/es/config/topics';
 import 'trafimage-maps/es/examples/Casa/casa.css';
-import getCodeWithApiKey from '../getCodeWithApiKey.js';
-import EditorCode from './ExampleCode.txt';
 
-// The `apiKey` used here is for demonstration purposes only.
-// Please get your own api key at https://developer.geops.io/.
-const apiKey = window.apiKey;
+// Please contact sbb_map@geops.ch for your own API key.
+const apiKey = <apiKey>;
 const apiKeyName = 'key';
 
 // Intialization of zone layer.
@@ -187,7 +180,6 @@ routeLayer.onClick((features) => {
 
 const App = () => {
   const ref = useRef();
-  const [code, setCode] = useState();
 
   useEffect(() => {
     const map = ref.current;
@@ -204,13 +196,6 @@ const App = () => {
       },
     ];
 
-    // We fetch the example code from local text file and insert the current public API key
-    const getCode = async () => {
-      const jsCode = await getCodeWithApiKey(`./${EditorCode}`, window.apiKey);
-      setCode(jsCode);
-    };
-    getCode();
-
     return () => {
       map.topics = null;
     };
@@ -218,20 +203,15 @@ const App = () => {
 
   /* To use casa style sheet, add the casa class in the parent class */
   return (
-    <>
-      <div className="container casa">
-        <trafimage-maps
-          ref={ref}
-          appName="casa"
-          apiKey={apiKey}
-          apiKeyName={apiKeyName}
-        />
-      </div>
-      <br />
-      {code && <Editor code={code} onChange={(code) => null} />}
-    </>
+    <div className="container casa">
+      <trafimage-maps
+        ref={ref}
+        appName="casa"
+        apiKey={apiKey}
+        apiKeyName={apiKeyName}
+      />
+    </div>
   );
 };
 
 <App />;
-```

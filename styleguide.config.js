@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const path = require('path');
-const webpack = require('webpack');
 const { version } = require('./package.json');
 
 module.exports = {
@@ -35,84 +34,118 @@ module.exports = {
   pagePerSection: true,
   sections: [
     {
-      name: 'Web component',
-      sections: [
-        {
-          name: 'trafimage-maps',
-          content: 'src/examples/README.md',
-          components: 'src/WebComponent.js',
-          exampleMode: 'hide',
-        },
-      ],
+      name: 'trafimage-maps',
+      content: 'src/examples/WebComponent/README.md',
+      sectionDepth: 2,
+      exampleMode: 'hide',
     },
     {
       name: 'Examples',
-      href: '/#/Examples/Custom%20Topic',
-      external: true,
+      href: '#/Examples/HTML%20%26%20Vanilla%20JS/Construction',
       sectionDepth: 2,
       sections: [
         {
-          name: 'Custom Topic',
-          content: 'src/examples/CustomTopic/README.md',
-          exampleMode: 'expand',
+          name: 'HTML & Vanilla JS',
+          href: '#/Examples/HTML%20%26%20Vanilla%20JS/Construction',
+          sections: [
+            {
+              name: 'Construction',
+              content: 'src/examples/Construction/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Direct Connections',
+              content: 'src/examples/DirektVerbindung/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Operating Regions',
+              content: 'src/examples/Betriebsregionen/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Area of Validity',
+              content: 'src/examples/Geltungsbereiche/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'External Component Update',
+              content: 'src/examples/ExternalUpdate/README.md',
+              exampleMode: 'hide',
+            },
+          ],
         },
         {
-          name: 'Override Topic',
-          content: 'src/examples/OverrideTopic/README.md',
-          exampleMode: 'expand',
+          name: 'React',
+          href: '#/Examples/React/Custom%20Topic',
+          sections: [
+            {
+              name: 'Custom Topic',
+              content: 'src/examples/CustomTopic/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Override Topic',
+              content: 'src/examples/OverrideTopic/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Punctuality Map',
+              content: 'src/examples/Punctuality/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Casa Map',
+              content: 'src/examples/Casa/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Schulzug',
+              content: 'src/examples/Schulzug/README.md',
+              exampleMode: 'hide',
+            },
+          ],
         },
         {
-          name: 'Punctuality Map',
-          content: 'src/examples/Punctuality/README.md',
-          exampleMode: 'expand',
+          name: 'Angular',
+          content: 'src/examples/Angular/README.md',
         },
         {
-          name: 'Casa Map',
-          content: 'src/examples/Casa/README.md',
-          exampleMode: 'expand',
-        },
-        {
-          name: 'Construction',
-          content: 'src/examples/Construction/README.md',
-          exampleMode: 'expand',
-        },
-        {
-          name: 'Direct connections by night',
-          content: 'src/examples/DirektVerbindung/README.md',
-          exampleMode: 'expand',
-        },
-        {
-          name: 'Infrastruktur Betriebsregionen',
-          content: 'src/examples/Betriebsregionen/README.md',
-          exampleMode: 'expand',
-        },
-        {
-          name: 'Schulzug',
-          content: 'src/examples/Schulzug/README.md',
-          exampleMode: 'expand',
-        },
-        {
-          name: 'Geltungsbereiche',
-          content: 'src/examples/Geltungsbereiche/README.md',
-          exampleMode: 'expand',
-        },
-      ],
-    },
-    {
-      name: 'Iframe',
-      content: 'src/examples/iframe/README.md',
-      external: true,
-      sectionDepth: 2,
-      exampleMode: 'hide',
-      sections: [
-        {
-          name: 'Geltungsbereiche',
-          content: 'src/examples/iframe/Geltungsbereiche/README.md',
-          exampleMode: 'hide',
+          name: 'Iframe',
+          href: '#/Examples/Iframe/Basic',
+          sections: [
+            {
+              name: 'Basic',
+              content: 'src/examples/iframe/README.md',
+              exampleMode: 'hide',
+            },
+            {
+              name: 'Area of Validity',
+              content: 'src/examples/iframe/Geltungsbereiche/README.md',
+              exampleMode: 'hide',
+            },
+          ],
         },
       ],
     },
   ],
+  theme: {
+    color: {
+      links: '#6987a1',
+      linkHover: '#76B833',
+    },
+    fontSize: {
+      base: 16,
+      text: 17,
+      small: 14,
+      h1: 48,
+      h2: 36,
+      h3: 24,
+      h4: 18,
+      h5: 16,
+      h6: 16,
+    },
+  },
   styles: {
     StyleGuide: {
       '@global body': {

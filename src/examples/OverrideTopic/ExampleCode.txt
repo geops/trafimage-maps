@@ -1,0 +1,37 @@
+import 'trafimage-maps';
+import React, { useRef, useEffect } from 'react';
+import { netzkarte } from 'trafimage-maps/es/config/topics';
+
+const topic = {
+  ...netzkarte,
+  elements: {
+    ...netzkarte.elements,
+    popup: false,
+  },
+};
+
+const App = () => {
+  const ref = useRef();
+
+  useEffect(() => {
+    const map = ref.current;
+    map.topics = [topic];
+
+    return () => {
+      map.topics = null;
+    };
+  }, []);
+
+  return (
+    <div className="container">
+      <!--Please contact sbb_map@geops.ch for your own API key-->
+      <trafimage-maps
+        ref={ref}
+        zoom="7"
+        apiKey=<apiKey>
+      />
+    </div>
+  );
+};
+
+<App />;
