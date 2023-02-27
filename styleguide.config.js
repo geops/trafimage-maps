@@ -54,22 +54,22 @@ module.exports = {
               exampleMode: 'hide',
             },
             {
-              name: 'Direct connections by night',
+              name: 'Direct Connections',
               content: 'src/examples/DirektVerbindung/README.md',
               exampleMode: 'hide',
             },
             {
-              name: 'Operating regions',
+              name: 'Operating Regions',
               content: 'src/examples/Betriebsregionen/README.md',
               exampleMode: 'hide',
             },
             {
-              name: 'Area of validity',
+              name: 'Area of Validity',
               content: 'src/examples/Geltungsbereiche/README.md',
               exampleMode: 'hide',
             },
             {
-              name: 'External component update',
+              name: 'External Component Update',
               content: 'src/examples/ExternalUpdate/README.md',
               exampleMode: 'hide',
             },
@@ -122,7 +122,7 @@ module.exports = {
               exampleMode: 'hide',
             },
             {
-              name: 'Area of validity',
+              name: 'Area of Validity',
               content: 'src/examples/iframe/Geltungsbereiche/README.md',
               exampleMode: 'hide',
             },
