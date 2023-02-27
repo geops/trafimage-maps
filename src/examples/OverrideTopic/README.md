@@ -5,7 +5,7 @@ import 'trafimage-maps';
 import React, { useRef, useEffect, useState } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import { netzkarte } from 'trafimage-maps/es/config/topics';
-import getCodeWithParsedApiKey from '../getCodeWithParsedApiKey.js';
+import getCodeWithApiKey from '../getCodeWithApiKey.js';
 import EditorCode from './ExampleCode.txt';
 
 const apiKey = window.apiKey;
@@ -27,10 +27,7 @@ const App = () => {
 
     // We fetch the example code from local text file and insert the current public API key
     const getCode = async () => {
-      const jsCode = await getCodeWithParsedApiKey(
-        `./${EditorCode}`,
-        window.apiKey,
-      );
+      const jsCode = await getCodeWithApiKey(`./${EditorCode}`, window.apiKey);
       setCode(jsCode);
     };
     getCode();

@@ -1,4 +1,4 @@
-mport 'trafimage-maps';
+import 'trafimage-maps';
 import React, { useRef, useEffect } from 'react';
 import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
 

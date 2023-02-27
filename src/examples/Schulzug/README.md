@@ -11,7 +11,7 @@ import GeoJSON from 'ol/format/GeoJSON';
 import { Icon, Style } from 'ol/style';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import marker from './marker.png';
-import getCodeWithParsedApiKey from '../getCodeWithParsedApiKey.js';
+import getCodeWithApiKey from '../getCodeWithApiKey.js';
 import EditorCode from './ExampleCode.txt';
 
 const featureCollection = {
@@ -93,10 +93,7 @@ const App = () => {
 
     // We fetch the example code from local text file and insert the current public API key
     const getCode = async () => {
-      const jsCode = await getCodeWithParsedApiKey(
-        `./${EditorCode}`,
-        window.apiKey,
-      );
+      const jsCode = await getCodeWithApiKey(`./${EditorCode}`, window.apiKey);
       setCode(jsCode);
     };
     getCode();

@@ -8,7 +8,7 @@ import RouteLayer from 'trafimage-maps/es/layers/RouteLayer';
 import ZoneLayer from 'trafimage-maps/es/layers/ZoneLayer';
 import { casa } from 'trafimage-maps/es/config/topics';
 import 'trafimage-maps/es/examples/Casa/casa.css';
-import getCodeWithParsedApiKey from '../getCodeWithParsedApiKey.js';
+import getCodeWithApiKey from '../getCodeWithApiKey.js';
 import EditorCode from './ExampleCode.txt';
 
 // The `apiKey` used here is for demonstration purposes only.
@@ -206,10 +206,7 @@ const App = () => {
 
     // We fetch the example code from local text file and insert the current public API key
     const getCode = async () => {
-      const jsCode = await getCodeWithParsedApiKey(
-        `./${EditorCode}`,
-        window.apiKey,
-      );
+      const jsCode = await getCodeWithApiKey(`./${EditorCode}`, window.apiKey);
       setCode(jsCode);
     };
     getCode();
