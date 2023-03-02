@@ -23,12 +23,13 @@ const propTypes = {
 const useStyles = makeStyles((theme) => ({
   legendItem: {
     display: 'flex',
-    alignItems: 'start',
+    alignItems: 'center',
     gap: 15,
     padding: '10px 0',
   },
   listItem: {
     padding: '0 10px 0',
+    alignItems: 'start',
     maxWidth: 280,
   },
   listItemIcon: {
