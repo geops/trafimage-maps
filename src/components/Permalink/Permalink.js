@@ -116,7 +116,7 @@ class Permalink extends PureComponent {
     const drawId = parameters[DRAW_PARAM] || parameters[DRAW_OLD_PARAM];
 
     if (drawId) {
-      fetch(`${drawUrl}${drawId}`)
+      fetch(`${drawUrl}${drawId}/?format=kml`)
         .then((response) =>
           response
             .clone()
@@ -124,19 +124,14 @@ class Permalink extends PureComponent {
             .catch(() => response.text()),
         )
         .then((data) => {
-          if (data && data.admin_id && data.file_id) {
-            dispatchSetDrawIds(data);
-            return fetch(`${drawUrl}${data.file_id}`);
-          }
-
           dispatchSetDrawIds({ file_id: drawId });
           return { text: () => data };
         })
         .then((response) => response.text())
         .then((data) => {
-          if (data && data.error) {
+          if (data === 'detail') {
             // eslint-disable-next-line no-console
-            console.warn(`The KML ${drawId} can't be loaded:`, data.error);
+            console.warn(`The KML ${drawId} can't be loaded:`, data);
             return;
           }
           // TO REMOVE. This will be fixed during migration of kmls

@@ -128,38 +128,11 @@ describe('Permalink', () => {
   });
 
   describe('shoud load kml if draw.id exists', () => {
-    test('if it is a admin_id.', async () => {
-      window.history.pushState({}, undefined, '/?lang=de&draw.id=foo');
-      expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
-      const drawIds = {
-        admin_id: 'qux',
-        file_id: 'quu',
-      };
-      await act(async () => {
-        fetchMock.once('http://drawfoo.ch/foo', drawIds);
-        fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
-        render(
-          <Provider store={store}>
-            <Permalink />
-          </Provider>,
-        );
-      });
-      expect(window.location.search).toEqual(
-        '?draw.id=foo&lang=de&layers=testLayer',
-      );
-      expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
-      expect(store.getActions().pop()).toEqual({
-        data: drawIds,
-        type: 'SET_DRAW_IDS',
-      });
-      fetchMock.restore();
-    });
-
     test('if it is a file_id.', async () => {
       window.history.pushState({}, undefined, '/?lang=de&draw.id=quu');
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
       await act(async () => {
-        fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
+        fetchMock.once('http://drawfoo.ch/quu/?format=kml', global.sampleKml);
         render(
           <Provider store={store}>
             <Permalink />
@@ -184,7 +157,7 @@ describe('Permalink', () => {
     window.history.pushState({}, undefined, '/?lang=de&wkp.draw=quu');
     expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(0);
     await act(async () => {
-      fetchMock.once('http://drawfoo.ch/quu', global.sampleKml);
+      fetchMock.once('http://drawfoo.ch/quu/?format=kml', global.sampleKml);
       render(
         <Provider store={store}>
           <Permalink />
