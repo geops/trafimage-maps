@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.1](https://github.com/geops/trafimage-maps/compare/v1.19.0...v1.19.1) (2023-03-02)
+
+
+### Bug Fixes
+
+* **draw tool:** update mapset backend url ([#1069](https://github.com/geops/trafimage-maps/issues/1069)) ([8dffe85](https://github.com/geops/trafimage-maps/commit/8dffe853dae6fc1bf1204b083e511b72f8dc9ba8))
+
 ## [1.19.0](https://github.com/geops/trafimage-maps/compare/v1.18.16...v1.19.0) (2023-02-20)
 
 
