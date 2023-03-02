@@ -309,7 +309,7 @@ const WebComponent = (props) => {
   // It's important to do this outside the previous useMemo so a webComponent render is not triggered
   useEffect(() => {
     // TODO improve the code, particularly the transformation string to object.
-    appTopics.forEach((topic) => {
+    appTopics?.forEach((topic) => {
       // Override layers visiblity.
       if (layersVisibility && topic.layers.length) {
         const obj = {};
