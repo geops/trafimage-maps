@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.3](https://github.com/geops/trafimage-maps/compare/v1.19.2...v1.19.3) (2023-03-07)
+
+
+### Bug Fixes
+
+* **ISB:** add open data link in topic info ([#1070](https://github.com/geops/trafimage-maps/issues/1070)) ([ace822e](https://github.com/geops/trafimage-maps/commit/ace822ed60f079fe270b638efa2d4afda96b29cf))
+* **Regionenkarte Public:** prevent permalink parameters from using private roles in popup ([#1071](https://github.com/geops/trafimage-maps/issues/1071)) ([6daaf9e](https://github.com/geops/trafimage-maps/commit/6daaf9ec0df47ae5649ebecfa9377b06a9104cdb))
+
 ### [1.19.2](https://github.com/geops/trafimage-maps/compare/v1.19.2-beta.0...v1.19.2) (2023-03-02)
 
 ### [1.19.1](https://github.com/geops/trafimage-maps/compare/v1.19.0...v1.19.1) (2023-03-02)
