@@ -24,7 +24,7 @@ function Person({ isIntern, person }) {
       name={name}
       division={division}
       phone={formatPhone(phone)}
-      email={isIntern && email}
+      email={isIntern ? email : undefined}
       className={classes.personCard}
     />
   ) : (

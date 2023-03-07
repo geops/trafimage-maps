@@ -42,7 +42,9 @@ function Av({ layer, feature, onChangeRole }) {
   const parsed = qs.parseUrl(window.location.href);
   const permalinkParam = parsed.query[PERMALINK_PARAM];
   const [role, setRole] = useState(
-    (roles.includes(permalinkParam) && permalinkParam) || roles[0],
+    isIntern
+      ? (roles.includes(permalinkParam) && permalinkParam) || roles[0]
+      : 'av_bnb',
   );
   const [person, setPerson] = useState();
   const [lineData, setLineData] = useState();
