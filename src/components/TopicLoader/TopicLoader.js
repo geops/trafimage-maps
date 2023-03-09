@@ -95,7 +95,6 @@ class TopicLoader extends PureComponent {
   componentDidUpdate(prevProps) {
     const {
       activeTopic,
-      language,
       topics,
       permissionInfos,
       apiKey,
@@ -130,7 +129,6 @@ class TopicLoader extends PureComponent {
     } else if (
       activeTopic &&
       (apiKey !== prevProps.apiKey ||
-        language !== prevProps.language ||
         apiKeyName !== prevProps.apiKeyName ||
         appBaseUrl !== prevProps.appBaseUrl ||
         cartaroUrl !== prevProps.cartaroUrl ||

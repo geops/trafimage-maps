@@ -18,6 +18,12 @@ const useStyles = makeStyles((theme) => ({
       paddingBottom: theme.spacing(2),
     },
   },
+  menuItem: {
+    width: (props) => props.selectWidth - 4,
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    display: 'block',
+  },
 }));
 
 const roles = [
@@ -35,7 +41,6 @@ const PERMALINK_PARAM = 'anlagegattung';
 
 function Av({ layer, feature, onChangeRole }) {
   const { t } = useTranslation();
-  const classes = useStyles();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const accessType = layer.get('accessType') || 'public';
   const isIntern = accessType === 'intern';
@@ -48,6 +53,8 @@ function Av({ layer, feature, onChangeRole }) {
   );
   const [person, setPerson] = useState();
   const [lineData, setLineData] = useState();
+  const [selectWidth, setSelectWidth] = useState();
+  const classes = useStyles({ selectWidth });
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -99,19 +106,30 @@ function Av({ layer, feature, onChangeRole }) {
   return (
     <>
       <Line feature={feature} />
-      <div className={classes.description}>
+      <div
+        className={classes.description}
+        ref={(el) => setSelectWidth(el?.clientWidth)}
+      >
         <div>
           {isIntern && (
             <Select
               value={role}
               onChange={(evt) => setRole(evt.target.value)}
               fullWidth
+              MenuProps={{ marginThreshold: 0 }}
+              data-cy="av-role-select"
             >
               {[...roles]
                 .sort((a, b) => (t(a) < t(b) ? -1 : 1))
                 .map((value) => {
                   return (
-                    <MenuItem key={value} value={value}>
+                    <MenuItem
+                      key={value}
+                      value={value}
+                      className={classes.menuItem}
+                      title={t(value)}
+                      data-cy={`av-role-option-${value}`}
+                    >
                       {t(value)}
                     </MenuItem>
                   );
