@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.4](https://github.com/geops/trafimage-maps/compare/v1.19.3...v1.19.4) (2023-03-09)
+
+### Bug Fixes
+
+- **Anlagenverantwortliche:** remove map update on language switch (fixes the AV popup dropdown) ([#1072](https://github.com/geops/trafimage-maps/issues/1072)) ([ed27116](https://github.com/geops/trafimage-maps/commit/ed2711646ea6a602766b4e6ade8143a44a3a2b69))
+
 ### [1.19.3](https://github.com/geops/trafimage-maps/compare/v1.19.2...v1.19.3) (2023-03-07)
 
 ### Bug Fixes
