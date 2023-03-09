@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   menuItem: {
-    width: (props) => props.fullWidth - 4,
+    width: (props) => props.selectWidth - 4,
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
     display: 'block',
@@ -53,8 +53,8 @@ function Av({ layer, feature, onChangeRole }) {
   );
   const [person, setPerson] = useState();
   const [lineData, setLineData] = useState();
-  const [fullWidth, setFullWidth] = useState();
-  const classes = useStyles({ fullWidth });
+  const [selectWidth, setSelectWidth] = useState();
+  const classes = useStyles({ selectWidth });
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -108,7 +108,7 @@ function Av({ layer, feature, onChangeRole }) {
       <Line feature={feature} />
       <div
         className={classes.description}
-        ref={(el) => setFullWidth(el?.clientWidth)}
+        ref={(el) => setSelectWidth(el?.clientWidth)}
       >
         <div>
           {isIntern && (
