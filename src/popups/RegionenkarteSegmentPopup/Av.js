@@ -111,7 +111,7 @@ function Av({ layer, feature, onChangeRole }) {
         ref={(el) => setFullWidth(el?.clientWidth)}
       >
         <div>
-          {!isIntern && (
+          {isIntern && (
             <Select
               value={role}
               onChange={(evt) => setRole(evt.target.value)}
