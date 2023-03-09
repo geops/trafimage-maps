@@ -111,12 +111,13 @@ function Av({ layer, feature, onChangeRole }) {
         ref={(el) => setFullWidth(el?.clientWidth)}
       >
         <div>
-          {isIntern && (
+          {!isIntern && (
             <Select
               value={role}
               onChange={(evt) => setRole(evt.target.value)}
               fullWidth
               MenuProps={{ marginThreshold: 0 }}
+              data-cy="av-role-select"
             >
               {[...roles]
                 .sort((a, b) => (t(a) < t(b) ? -1 : 1))
@@ -127,6 +128,7 @@ function Av({ layer, feature, onChangeRole }) {
                       value={value}
                       className={classes.menuItem}
                       title={t(value)}
+                      data-cy={`av-role-option-${value}`}
                     >
                       {t(value)}
                     </MenuItem>
