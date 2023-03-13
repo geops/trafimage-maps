@@ -174,121 +174,218 @@ bahnhofplaene.children = [
   }),
 ];
 
-export const punctuality = new Layer({
+export const punctuality = new TralisLayer({
   name: 'ch.sbb.puenktlichkeit',
   visible: false,
   properties: {
     hasAccessibility: true,
     hasInfos: true,
     layerInfoComponent: 'PunctualityLayerInfo',
+    isQueryable: true,
+    popupComponent: 'PunctualityPopup',
+    useTrackerMenu: true,
   },
 });
 
 punctuality.children = [
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-gondola',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 12 ? [] : ['gondola']),
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      mots: ['gondola'],
     },
   }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-funicular',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 12 ? [] : ['funicular', 'cablecar']),
-
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      mots: ['funicular', 'cablecar'],
     },
   }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-ferry',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 8 ? [] : ['ferry']),
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      mots: ['ferry'],
     },
   }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-bus',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 11 ? [] : ['bus']),
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      mots: ['bus'],
     },
   }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-tram',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 11 ? [] : ['tram', 'subway']),
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      mots: ['tram', 'subway'],
     },
   }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-nv',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 4 ? [] : ['rail']),
-    filter: ({ properties }) => {
-      const { type, line } = properties;
-      return (
-        type &&
-        line?.name &&
-        type === 'rail' &&
-        /^(S|R$|RE|PE|D|IRE|RB|TER)/.test(line.name)
-      );
-    },
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      filter: ({ properties }) => {
+        const { type, line } = properties;
+        return type === 'rail' && /^(S|R$|RE|PE|D|IRE|RB|TER)/.test(line?.name);
+      },
     },
   }),
-  new TralisLayer({
-    isUpdateBboxOnMoveEnd: true,
+  new Layer({
     name: 'ch.sbb.puenktlichkeit-fv',
     visible: false,
-    tenant: 'sbb',
-    getMotsByZoom: (zoom) => (zoom < 4 ? [] : ['rail']),
-    filter: ({ properties }) => {
-      const { type, line } = properties;
-      return (
-        type &&
-        line?.name &&
-        type === 'rail' &&
-        /(IR|IC|EC|RJX|TGV)/.test(line.name)
-      );
-    },
     properties: {
-      isQueryable: true,
-      popupComponent: 'PunctualityPopup',
-      useTrackerMenu: true,
+      filter: ({ properties }) => {
+        const { type, line } = properties;
+        return type === 'rail' && /(IR|IC|EC|RJX|TGV)/.test(line?.name);
+      },
     },
   }),
 ];
+
+punctuality.children.forEach((layer) => {
+  layer.on('change:visible', () => {
+    let mots = [];
+    let filters = [];
+    punctuality.children.forEach((child) => {
+      if (child.visible) {
+        if (child.get('mots')) {
+          mots = mots.concat(child.get('mots'));
+        }
+        if (child.get('filter')) {
+          filters.push(child.get('filter'));
+        }
+      }
+    });
+    filters = [
+      (trajectory) => {
+        return mots.includes(trajectory.properties.type);
+      },
+      ...filters,
+    ];
+    punctuality.filter = (trajectory) => {
+      return filters.find((filterFunc) => filterFunc(trajectory));
+    };
+  });
+});
+
+// export const punctuality = new Layer({
+//   name: 'ch.sbb.puenktlichkeit',
+//   visible: false,
+//   properties: {
+//     hasAccessibility: true,
+//     hasInfos: true,
+//     layerInfoComponent: 'PunctualityLayerInfo',
+//   },
+// });
+
+// punctuality.children = [
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-gondola',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 12 ? [] : ['gondola']),
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-funicular',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 12 ? [] : ['funicular', 'cablecar']),
+
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-ferry',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 8 ? [] : ['ferry']),
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-bus',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 11 ? [] : ['bus']),
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-tram',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 11 ? [] : ['tram', 'subway']),
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-nv',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 4 ? [] : ['rail']),
+//     filter: ({ properties }) => {
+//       const { type, line } = properties;
+//       return (
+//         type &&
+//         line?.name &&
+//         type === 'rail' &&
+//         /^(S|R$|RE|PE|D|IRE|RB|TER)/.test(line.name)
+//       );
+//     },
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+//   new TralisLayer({
+//     isUpdateBboxOnMoveEnd: true,
+//     name: 'ch.sbb.puenktlichkeit-fv',
+//     visible: false,
+//     tenant: 'sbb',
+//     getMotsByZoom: (zoom) => (zoom < 4 ? [] : ['rail']),
+//     filter: ({ properties }) => {
+//       const { type, line } = properties;
+//       return (
+//         type &&
+//         line?.name &&
+//         type === 'rail' &&
+//         /(IR|IC|EC|RJX|TGV)/.test(line.name)
+//       );
+//     },
+//     properties: {
+//       isQueryable: true,
+//       popupComponent: 'PunctualityPopup',
+//       useTrackerMenu: true,
+//     },
+//   }),
+// ];
 
 export const stationsLayer = new StationsLayer({
   name: 'ch.sbb.netzkarte.stationen',

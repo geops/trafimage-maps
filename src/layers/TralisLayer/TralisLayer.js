@@ -79,7 +79,6 @@ class TralisLayer extends RealtimeLayer {
     super({
       isUpdateBboxOnMoveEnd: true,
       minZoomNonTrain: 14,
-      url: 'wss://tralis-tracker-api.geops.io/ws',
       tenant: 'sbb',
       style: realtimeDelayStyle,
       styleOptions: {

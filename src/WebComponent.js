@@ -242,6 +242,7 @@ const WebComponent = (props) => {
     domainConsent,
     domainConsentId,
     disableCookies,
+    realtimeKey,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -250,11 +251,6 @@ const WebComponent = (props) => {
     }
     return JSON.parse(center);
   }, [center]);
-
-  const vectorTileApiKey = useMemo(
-    () => vectorTilesKey || apiKey,
-    [apiKey, vectorTilesKey],
-  );
 
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
@@ -362,7 +358,8 @@ const WebComponent = (props) => {
       >
         <TrafimageMaps
           {...props}
-          vectorTilesKey={vectorTileApiKey}
+          vectorTilesKey={vectorTilesKey || apiKey}
+          realtimeKey={realtimeKey || apiKey}
           topics={appTopics}
           zoom={floatZoom}
           maxExtent={extentArray}
