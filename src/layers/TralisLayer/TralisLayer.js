@@ -122,6 +122,10 @@ class TralisLayer extends RealtimeLayer {
         ...(options.properties || {}),
       },
     });
+
+    if (options.filter) {
+      this.permalinkFilter = options.filter;
+    }
   }
 
   getFeatureInfoAtCoordinate(...props) {
