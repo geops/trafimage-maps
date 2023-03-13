@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
-const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const regionColors = {
   Ost: '#2F9F48',
   Süd: '#DC320A',
@@ -31,14 +31,15 @@ const propTypes = {
 
 function NetzentwicklungLayerInfo({ t, properties }) {
   const netzentwicklungRoleType = properties.get('netzentwicklungRoleType');
+  const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const [regions, setRegions] = useState();
   const classes = useStyles();
 
   useEffect(() => {
-    fetch(`${cartaroURL}netzentwicklung/region/items/`)
+    fetch(`${cartaroUrl}netzentwicklung/region/items/`)
       .then((res) => res.json())
       .then((res) => setRegions(res));
-  }, []);
+  }, [cartaroUrl]);
 
   return (
     <div>

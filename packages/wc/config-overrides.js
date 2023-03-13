@@ -25,7 +25,8 @@ module.exports = function override(config, env) {
 const overrideModule = (module) => {
   // We override css and scss rules to generate a string css instead of an object.
   // See the first <style> tag in the web-component.
-  const ruleIndex = 0;
+  const ruleIndex = module.rules.length - 1;
+
   const cssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.css'.match(rule.test),
   );
