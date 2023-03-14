@@ -35,6 +35,7 @@ const roles = [
   'av_bzu',
   'av_wasser',
   'av_abwasser',
+  'av_bahntechnik',
 ];
 
 const PERMALINK_PARAM = 'anlagegattung';
