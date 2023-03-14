@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.19.5](https://github.com/geops/trafimage-maps/compare/v1.19.4...v1.19.5) (2023-03-14)
+
+### Bug Fixes
+
+- **Anlagenverantwortliche:** add bahntechnik role to AV options ([#1074](https://github.com/geops/trafimage-maps/issues/1074)) ([6a5fdd4](https://github.com/geops/trafimage-maps/commit/6a5fdd40f364d8317808a62857dad68e862de020))
+
 ### [1.19.4](https://github.com/geops/trafimage-maps/compare/v1.19.3...v1.19.4) (2023-03-09)
 
 ### Bug Fixes
