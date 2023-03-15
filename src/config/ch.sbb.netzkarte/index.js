@@ -268,6 +268,7 @@ if (!punctuality.permalinkFilter) {
       punctuality.filter = (trajectory) => {
         return filters.find((filterFunc) => filterFunc(trajectory));
       };
+      punctuality.renderTrajectories();
     });
   });
 }
