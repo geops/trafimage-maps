@@ -18,7 +18,7 @@ export const TRACK_SHARE_TW_ACTION = 'clickShareTwitter';
 
 // Direktverbindungen
 export const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
-export const IPV_KEY = 'ch.sbb.direktverbindungen';
+export const IPV_KEY = 'ch.sbb.ipv';
 
 export const energieleitungenColorMapping = {
   los1: '#12919a',

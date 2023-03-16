@@ -26,6 +26,7 @@ import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import stsLayers from './ch.sbb.sts';
+import ipvLayers from './ch.sbb.ipv';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
@@ -337,9 +338,9 @@ export const ipv = {
     popup: true,
     shareMenu: true,
   },
-  layers: netzkarteLayers,
+  layers: ipvLayers,
   projection: 'EPSG:3857',
-  layerInfoComponent: 'NetzkarteTopicInfo',
+  layerInfoComponent: 'IpvTopicInfo',
   searches: defaultSearches,
 };
 

@@ -1,5 +1,5 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+// import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import { IPV_KEY } from '../../utils/constants';
@@ -17,19 +17,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const gemeindegrenzen = new MapboxStyleLayer({
-  name: 'ch.sbb.ch_gemeinden',
-  mapboxLayer: dataLayer,
-  visible: false,
-  styleLayersFilter: ({ metadata }) =>
-    metadata && metadata['trafimage.filter'] === 'municipality_borders',
-  properties: {
-    hasInfos: true,
-    description: 'ch.sbb.ch_gemeinden-desc',
-  },
-});
-
-export const direktverbindungenDay = new DirektverbindungenLayer({
+export const ipvDay = new DirektverbindungenLayer({
   name: `${IPV_KEY}.day`,
   mapboxLayer: dataLayer,
   visible: false,
@@ -44,7 +32,7 @@ export const direktverbindungenDay = new DirektverbindungenLayer({
   },
 });
 
-export const direktverbindungenNight = new DirektverbindungenLayer({
+export const ipvNight = new DirektverbindungenLayer({
   name: `${IPV_KEY}.night`,
   mapboxLayer: dataLayer,
   visible: false,
@@ -59,16 +47,17 @@ export const direktverbindungenNight = new DirektverbindungenLayer({
   },
 });
 
-export const direktverbindungenLayer = new Layer({
+export const ipvLayer = new Layer({
   name: IPV_KEY,
-  children: [direktverbindungenDay, direktverbindungenNight],
+  children: [ipvDay, ipvNight],
   isQueryable: false,
-  visible: false,
+  visible: true,
   properties: {
     hasInfos: true,
     layerInfoComponent: 'DirektVerbindungenLayerInfo',
     dataLink:
       'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
+    hideInLegend: true,
   },
 });
-export default [gemeindegrenzen, direktverbindungenLayer];
+export default [dataLayer, ipvLayer];

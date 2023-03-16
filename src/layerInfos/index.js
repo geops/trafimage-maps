@@ -31,6 +31,7 @@ import EnergieLayerInfo from './EnergieLayerInfo';
 import EnergieTopicInfo from './EnergieTopicInfo';
 import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
+import IpvTopicInfo from './IpvTopicInfo';
 import IsbTVSLayerInfo from './IsbTVSLayerInfo';
 import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 import GeltungsbereicheTopicInfo from './GeltungsbereicheTopicInfo';
@@ -67,6 +68,7 @@ export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindunge
 export { default as EnergieTopicInfo } from './EnergieTopicInfo';
 export { default as EnergiePublicTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
+export { default as IpvTopicInfo } from './IpvTopicInfo';
 export { default as IsbTopicInfo } from './IsbTopicInfo';
 export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
 export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
@@ -106,6 +108,7 @@ export default {
   EnergieTopicInfo,
   EnergiePublicTopicInfo,
   SandboxTopicInfo,
+  IpvTopicInfo,
   IsbTopicInfo,
   IsbTVSLayerInfo,
   IsbOtherLayerInfo,
