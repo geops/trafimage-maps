@@ -29,6 +29,7 @@ import stsLayers from './ch.sbb.sts';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
+import { IPV_KEY } from '../utils/constants';
 
 // For backward compatibility
 export {
@@ -328,9 +329,24 @@ export const sts = {
   constrainOnlyCenter: true,
 };
 
+export const ipv = {
+  name: `${IPV_KEY}.topic`,
+  key: `${IPV_KEY}`,
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+  },
+  layers: netzkarteLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'NetzkarteTopicInfo',
+  searches: defaultSearches,
+};
+
 const topics = {
   wkp: [
     netzkarte,
+    ipv,
     geltungsbereicheMvp,
     zweitausbildung,
     bauprojekte,
