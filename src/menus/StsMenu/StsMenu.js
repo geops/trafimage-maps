@@ -9,6 +9,7 @@ import {
   MenuItem as MuiMenuItem,
   Menu,
   Button,
+  Divider,
 } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
@@ -16,7 +17,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Overlay from '../../components/Overlay/Overlay';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
-import StsDirektVerbindungenFeatureInfo from './StsDirektVerbindungenFeatureInfo';
+import IpvFeatureInfo from '../../components/IpvFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
@@ -173,7 +174,7 @@ function StsTopicMenu() {
       activeMenu === 'sts' ? (
         <StsValidityFeatureInfo menuOpen={!featureInfo} />
       ) : (
-        <StsDirektVerbindungenFeatureInfo />
+        <IpvFeatureInfo />
       ),
     [activeMenu, featureInfo],
   );
@@ -272,7 +273,10 @@ function StsTopicMenu() {
         <div className={classes.menuContent}>
           <div className={classes.layerSwitcher}>{layerSwitcher}</div>
           {!isMobile && featureInfo?.length ? (
-            <div className={classes.featureInfo}>{featureInfos}</div>
+            <div className={classes.featureInfo}>
+              <Divider />
+              {featureInfos}
+            </div>
           ) : null}
         </div>
       )}

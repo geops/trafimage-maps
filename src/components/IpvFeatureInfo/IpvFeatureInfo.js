@@ -2,11 +2,11 @@ import React, { Fragment, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
-import MenuItem from '../../components/Menu/MenuItem';
+import MenuItem from '../Menu/MenuItem';
 import usePrevious from '../../utils/usePrevious';
 import DirektverbindungPopup from '../../popups/DirektverbindungPopup';
-import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
 import removeDuplicates, { getId } from '../../utils/removeDuplicateFeatures';
+import parseIpvFeatures from '../../utils/ipvParseFeatures';
 
 const useStyles = makeStyles(() => {
   return {
@@ -20,6 +20,23 @@ const useStyles = makeStyles(() => {
       },
       '& .wkp-menu-item-header-toggler': {
         marginRight: 5,
+      },
+    },
+    teaser: {
+      maxHeight: 400,
+      position: 'relative',
+      overflow: 'hidden',
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        zIndex: 10,
+        bottom: 0,
+        left: 0,
+        pointerEvents: 'none',
+        backgroundImage:
+          'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)',
+        width: '100%',
+        height: '10em',
       },
     },
     titleWrapper: {
@@ -69,28 +86,26 @@ DvTitle.propTypes = {
   active: PropTypes.bool.isRequired,
 };
 
-function StsDirektVerbindungenFeatureInfo() {
-  const classes = useStyles();
+function IpvFeatureInfo() {
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
-
-  const [infoKey, setInfoKey] = useState(undefined);
+  const [infoKey, setInfoKey] = useState();
+  const [teaser, setTeaser] = useState(true);
+  const classes = useStyles({ teaser });
 
   const dvFeatures = useMemo(() => {
-    return removeDuplicates(parseFeaturesInfos(featureInfo));
+    const features = featureInfo.reduce((feats, info) => {
+      info.features.forEach((feat) => feat.set('layer', info.layer));
+      return [...feats, ...info.features];
+    }, []);
+    return removeDuplicates(parseIpvFeatures(features));
   }, [featureInfo]);
 
   const previousDvFeatures = usePrevious(dvFeatures);
 
   useEffect(() => {
     if (dvFeatures !== previousDvFeatures) {
-      setInfoKey();
-    }
-    if (dvFeatures?.length && dvFeatures.length < 5 && infoKey === undefined) {
       setInfoKey(getId(dvFeatures[0]));
+      setTeaser(true);
     }
   }, [dvFeatures, previousDvFeatures, infoKey]);
 
@@ -99,7 +114,6 @@ function StsDirektVerbindungenFeatureInfo() {
   }
   return (
     <>
-      {!isMobile && <Divider />}
       {dvFeatures?.length ? (
         <div className={classes.featureInfos}>
           {dvFeatures.length > 1 ? (
@@ -113,8 +127,15 @@ function StsDirektVerbindungenFeatureInfo() {
                 <Fragment key={id}>
                   <MenuItem
                     dataId={id}
-                    onCollapseToggle={(open) => setInfoKey(open ? null : id)}
-                    className={`wkp-gb-topic-menu ${classes.root}`}
+                    onCollapseToggle={(open) => {
+                      if (!(active && teaser)) {
+                        setInfoKey(open ? null : id);
+                      }
+                      setTeaser(false);
+                    }}
+                    className={`wkp-gb-topic-menu ${classes.root}${
+                      active && teaser ? ` ${classes.teaser}` : ''
+                    }`}
                     collapsed={!active}
                     open={active}
                     title={
@@ -133,7 +154,7 @@ function StsDirektVerbindungenFeatureInfo() {
                       />
                     </div>
                   </MenuItem>
-                  {dvFeatures?.length > 1 ? <Divider /> : null}
+                  <Divider />
                 </Fragment>
               );
             })
@@ -160,6 +181,4 @@ function StsDirektVerbindungenFeatureInfo() {
   );
 }
 
-StsDirektVerbindungenFeatureInfo.propTypes = {};
-
-export default StsDirektVerbindungenFeatureInfo;
+export default IpvFeatureInfo;

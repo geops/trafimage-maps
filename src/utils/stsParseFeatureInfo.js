@@ -7,6 +7,7 @@ import {
   highlights,
 } from '../config/ch.sbb.sts';
 import { getId } from './removeDuplicateFeatures';
+import parseIpvFeatures from './ipvParseFeatures';
 
 /**
  * Rearrange the features for the popup
@@ -39,24 +40,10 @@ export const parseFeaturesInfos = (infos, tours = []) => {
     infoFeatures[direktverbindungenDay.name] ||
     infoFeatures[direktverbindungenNight.name]
   ) {
-    [
+    parseIpvFeatures([
       ...(infoFeatures[direktverbindungenDay.name] || []),
       ...(infoFeatures[direktverbindungenNight.name] || []),
-    ].forEach((feature) => {
-      const {
-        start_station_name: start,
-        end_station_name: end,
-        vias,
-      } = feature.getProperties();
-
-      const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
-        (via) => via.via_type === 'switch' || via.via_type === 'visible',
-      );
-      feature.set('vias', [
-        { station_name: start },
-        ...switchVias,
-        { station_name: end },
-      ]);
+    ]).forEach((feature) => {
       featuresForPopup.push(feature);
     });
   }

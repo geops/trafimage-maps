@@ -146,7 +146,6 @@ function StsValidityFeatureInfo({ menuOpen }) {
 
   return (
     <>
-      {!isMobile && <Divider />}
       <div className={classes.container}>
         {gbFeatureInfo?.features?.length ? (
           <>

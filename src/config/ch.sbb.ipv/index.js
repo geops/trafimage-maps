@@ -1,5 +1,3 @@
-import { Layer } from 'mobility-toolbox-js/ol';
-// import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import { IPV_KEY } from '../../utils/constants';
@@ -20,13 +18,13 @@ export const dataLayer = new TrafimageMapboxLayer({
 export const ipvDay = new DirektverbindungenLayer({
   name: `${IPV_KEY}.day`,
   mapboxLayer: dataLayer,
-  visible: false,
+  visible: true,
   properties: {
     isQueryable: true,
     routeType: 'day',
     hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
-    popupComponent: 'DirektverbindungPopup',
+    layerInfoComponent: 'IpvTagLayerInfo',
+    popupComponent: 'IpvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
@@ -35,29 +33,16 @@ export const ipvDay = new DirektverbindungenLayer({
 export const ipvNight = new DirektverbindungenLayer({
   name: `${IPV_KEY}.night`,
   mapboxLayer: dataLayer,
-  visible: false,
+  visible: true,
   properties: {
     isQueryable: true,
     routeType: 'night',
     hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
-    popupComponent: 'DirektverbindungPopup',
+    layerInfoComponent: 'IpvNachtLayerInfo',
+    popupComponent: 'IpvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
 
-export const ipvLayer = new Layer({
-  name: IPV_KEY,
-  children: [ipvDay, ipvNight],
-  isQueryable: false,
-  visible: true,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenLayerInfo',
-    dataLink:
-      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
-    hideInLegend: true,
-  },
-});
-export default [dataLayer, ipvLayer];
+export default [dataLayer, ipvDay, ipvNight];
