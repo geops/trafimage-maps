@@ -1,4 +1,10 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -38,6 +44,18 @@ const useStyles = makeStyles(() => {
         width: '100%',
         height: '10em',
       },
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        zIndex: 0,
+        transform: 'translateY(-300px)',
+        left: 0,
+        pointerEvents: 'none',
+        backgroundImage:
+          'radial-gradient(circle, rgba(210,210,210, 1), rgba(210,210,210,0) 85%)',
+        width: '100%',
+        height: '30em',
+      },
     },
     titleWrapper: {
       display: 'flex',
@@ -46,6 +64,7 @@ const useStyles = makeStyles(() => {
     },
     title: {
       maxWidth: 280,
+      zIndex: 10,
     },
     featureInfos: {
       maxHeight: '100%',
@@ -90,7 +109,11 @@ function IpvFeatureInfo() {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const [infoKey, setInfoKey] = useState();
   const [teaser, setTeaser] = useState(true);
+  const [expandedHeight, setExpandedHeight] = useState();
   const classes = useStyles({ teaser });
+  const teaserOnClick = useCallback(() => {
+    return teaser ? setTeaser(false) : undefined;
+  }, [teaser]);
 
   const dvFeatures = useMemo(() => {
     const features = featureInfo.reduce((feats, info) => {
@@ -112,8 +135,10 @@ function IpvFeatureInfo() {
   if (!dvFeatures?.length) {
     return null;
   }
+
   return (
     <>
+      {!teaser ? <Divider /> : null}
       {dvFeatures?.length ? (
         <div className={classes.featureInfos}>
           {dvFeatures.length > 1 ? (
@@ -124,7 +149,14 @@ function IpvFeatureInfo() {
               const isNightTrain = feat.get('nachtverbindung');
               const active = infoKey === id;
               return (
-                <Fragment key={id}>
+                <div
+                  key={id}
+                  role="menuitem"
+                  tabIndex={teaser ? '-1' : null}
+                  onClick={teaserOnClick}
+                  onKeyDown={teaserOnClick}
+                  style={{ cursor: teaser ? 'pointer' : 'auto' }}
+                >
                   <MenuItem
                     dataId={id}
                     onCollapseToggle={(open) => {
@@ -145,9 +177,16 @@ function IpvFeatureInfo() {
                         isNightTrain={isNightTrain}
                       />
                     }
-                    menuHeight="unset"
+                    menuHeight={expandedHeight}
                   >
-                    <div className={classes.featureInfoItem}>
+                    <div
+                      className={classes.featureInfoItem}
+                      ref={
+                        active
+                          ? (el) => setExpandedHeight(el?.clientHeight)
+                          : null
+                      }
+                    >
                       <DirektverbindungPopup
                         feature={active ? feat : null}
                         layer={layer}
@@ -155,7 +194,7 @@ function IpvFeatureInfo() {
                     </div>
                   </MenuItem>
                   <Divider />
-                </Fragment>
+                </div>
               );
             })
           ) : (

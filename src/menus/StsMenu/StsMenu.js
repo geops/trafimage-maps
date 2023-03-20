@@ -5,20 +5,17 @@ import { useTranslation } from 'react-i18next';
 import {
   makeStyles,
   withStyles,
-  IconButton,
   MenuItem as MuiMenuItem,
   Menu,
   Button,
-  Divider,
 } from '@material-ui/core';
-import { MdClose } from 'react-icons/md';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Overlay from '../../components/Overlay/Overlay';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
 import IpvFeatureInfo from '../../components/IpvFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
+import IframeMenu from '../IframeMenu';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
 
@@ -53,60 +50,6 @@ const useStyles = makeStyles(() => {
         backgroundColor: 'white',
       },
     },
-    container: {
-      backgroundColor: 'white',
-      boxSizing: 'border-box',
-      border: (props) => (props.displayMenu ? '2px solid #666' : 'none'),
-      boxShadow,
-    },
-    menuContent: {
-      backgroundColor: 'white',
-      height: (props) =>
-        props.featureSelected && !props.isMobile
-          ? 'calc(100vh - 80px)'
-          : 'unset',
-    },
-    menuContentMobile: {
-      padding: '30px 0 0',
-    },
-    featureInfo: {
-      overflow: 'hidden',
-      height: (props) =>
-        props.activeMenu === 'dv' ? 'calc(100% - 98px)' : 'calc(100% - 105px)',
-      '& > div': {
-        scrollbarWidth: 'thin',
-        '&::-webkit-scrollbar': {
-          width: 6,
-        },
-        '&::-webkit-scrollbar-track': {
-          background: 'rgba(0, 0, 0, 0.1)',
-        },
-        '&::-webkit-scrollbar-thumb': {
-          background: 'rgba(0, 0, 0, 0.4)',
-        },
-      },
-    },
-    mobileHandleWrapper: {
-      position: 'absolute',
-      width: '100%',
-      height: 30,
-      top: 0,
-      right: 0,
-      zIndex: 1000,
-    },
-    mobileHandle: {
-      position: 'fixed',
-      backgroundColor: '#f5f5f5',
-      width: 'inherit',
-      height: 'inherit',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
-    },
-    closeBtn: {
-      padding: 8,
-      marginRight: 5,
-    },
     layerSwitcher: {
       padding: '15px 10px',
     },
@@ -131,23 +74,15 @@ const updateLayers = (key = 'sts') => {
 function StsTopicMenu() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const displayMenu = useSelector((state) => state.app.displayMenu);
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const activeTopic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const [activeMenu, setActiveMenu] = useState('sts');
   const [anchorEl, setAnchorEl] = useState();
-  const classes = useStyles({
-    displayMenu,
-    isOpen: !!anchorEl,
-    featureSelected: featureInfo?.length,
-    isMobile,
-    activeMenu,
-  });
 
   useEffect(() => {
     // Activate the correct menu on load of the topic.
@@ -193,94 +128,58 @@ function StsTopicMenu() {
   };
 
   return (
-    <div className={classes.container}>
-      {displayMenu && activeMenu && (
-        <>
-          <Button
-            color="secondary"
-            aria-controls="simple-menu"
-            aria-haspopup="true"
-            onClick={(evt) => setAnchorEl(evt.currentTarget)}
-            endIcon={anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-            className={classes.dropdownToggler}
-            data-testid="sts-menu-opener"
-          >
-            <b>
-              {activeMenu === 'sts'
-                ? t('Validity of Swiss Travel Pass')
-                : t('Direct trains to Switzerland')}
-            </b>
-          </Button>
-          <StyledMenu
-            keepMounted
-            open={!!anchorEl}
-            data-cy="sts-select"
-            anchorEl={anchorEl}
-            onClose={() => setAnchorEl(null)}
-            transitionDuration="auto"
-            MenuListProps={{
-              autoFocusItem: false,
-            }}
-            data-testid="sts-menu-popover"
-          >
-            <StyledMenuItem
-              disabled={activeMenu === 'sts'}
-              onClick={() => onChange('sts')}
-              data-testid="sts-menu-sts"
+    <IframeMenu
+      header={
+        activeMenu && (
+          <>
+            <Button
+              color="secondary"
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={(evt) => setAnchorEl(evt.currentTarget)}
+              endIcon={anchorEl ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              className={classes.dropdownToggler}
+              data-testid="sts-menu-opener"
             >
-              {t('Validity of Swiss Travel Pass')}
-            </StyledMenuItem>
-            <StyledMenuItem
-              disabled={activeMenu === 'dv'}
-              onClick={() => onChange('dv')}
-              data-testid="sts-menu-dv"
+              <b>
+                {activeMenu === 'sts'
+                  ? t('Validity of Swiss Travel Pass')
+                  : t('Direct trains to Switzerland')}
+              </b>
+            </Button>
+            <StyledMenu
+              keepMounted
+              open={!!anchorEl}
+              data-cy="sts-select"
+              anchorEl={anchorEl}
+              onClose={() => setAnchorEl(null)}
+              transitionDuration="auto"
+              MenuListProps={{
+                autoFocusItem: false,
+              }}
+              data-testid="sts-menu-popover"
             >
-              {t('Direct trains to Switzerland')}
-            </StyledMenuItem>
-          </StyledMenu>
-        </>
-      )}
-      {isMobile && featureInfo?.length ? (
-        <Overlay
-          elements={activeTopic.elements}
-          disablePortal={false}
-          transitionDuration={0}
-          defaultSize={{ height: 400 }}
-        >
-          {isMobile && (
-            <div className={classes.mobileHandleWrapper}>
-              <div className={classes.mobileHandle}>
-                <IconButton
-                  className={`wkp-close-bt ${classes.closeBtn}`}
-                  title="Close"
-                  onClick={() => {
-                    dispatch(setFeatureInfo());
-                  }}
-                >
-                  <MdClose focusable={false} alt="Close" />
-                </IconButton>
-              </div>
-            </div>
-          )}
-          <div
-            className={`${classes.menuContent} ${classes.menuContentMobile}`}
-          >
-            {featureInfos}
-          </div>
-        </Overlay>
-      ) : null}
-      {displayMenu && (
-        <div className={classes.menuContent}>
-          <div className={classes.layerSwitcher}>{layerSwitcher}</div>
-          {!isMobile && featureInfo?.length ? (
-            <div className={classes.featureInfo}>
-              <Divider />
-              {featureInfos}
-            </div>
-          ) : null}
-        </div>
-      )}
-    </div>
+              <StyledMenuItem
+                disabled={activeMenu === 'sts'}
+                onClick={() => onChange('sts')}
+                data-testid="sts-menu-sts"
+              >
+                {t('Validity of Swiss Travel Pass')}
+              </StyledMenuItem>
+              <StyledMenuItem
+                disabled={activeMenu === 'dv'}
+                onClick={() => onChange('dv')}
+                data-testid="sts-menu-dv"
+              >
+                {t('Direct trains to Switzerland')}
+              </StyledMenuItem>
+            </StyledMenu>
+            <div className={classes.layerSwitcher}>{layerSwitcher}</div>
+          </>
+        )
+      }
+      body={featureInfos}
+    />
   );
 }
 

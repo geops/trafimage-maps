@@ -31,6 +31,7 @@ import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
 import { IPV_KEY } from '../utils/constants';
+import IpvMenu from '../menus/IpvMenu/IpvMenu';
 
 // For backward compatibility
 export {
@@ -344,10 +345,33 @@ export const ipv = {
   searches: defaultSearches,
 };
 
+export const ipvIframe = {
+  name: `${IPV_KEY}-iframe.topic`,
+  key: `${IPV_KEY}-iframe`,
+  elements: {
+    ...defaultElements,
+    overlay: false,
+    popup: false,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+    menuToggler: true,
+  },
+  layers: ipvLayers,
+  enableFeatureClick: true,
+  only: true,
+  hideInLayerTree: true,
+  menu: <IpvMenu />,
+};
+
 const topics = {
   wkp: [
     netzkarte,
-    ipv,
     geltungsbereicheMvp,
     zweitausbildung,
     bauprojekte,
@@ -355,6 +379,8 @@ const topics = {
     tarifverbundkarte,
     infrastruktur,
     isb,
+    ipv,
+    ipvIframe,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,
