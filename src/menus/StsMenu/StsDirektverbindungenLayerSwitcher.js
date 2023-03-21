@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
-import SBBSwitch from '../../components/SBBSwitch/SBBSwitch';
+import SBBSwitch from '../../components/SBBSwitch';
 import {
   direktverbindungenDay,
   direktverbindungenNight,

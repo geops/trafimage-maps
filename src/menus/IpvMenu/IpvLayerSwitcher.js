@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
-import SBBSwitch from '../../components/SBBSwitch/SBBSwitch';
+import SBBSwitch from '../../components/SBBSwitch';
 import { ipvDay, ipvNight } from '../../config/ch.sbb.ipv';
 // import { setFeatureInfo } from '../../model/app/actions';
 
@@ -15,6 +15,9 @@ const useStyles = makeStyles(() => {
     },
     switchWrapper: {
       padding: '0 10px',
+      '& .MuiSwitch-switchBase': {
+        top: 4,
+      },
     },
   };
 });

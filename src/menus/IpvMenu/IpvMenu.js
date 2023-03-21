@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Divider } from '@material-ui/core';
 import IpvFeatureInfo from '../../components/IpvFeatureInfo';
 import IpvLayerSwitcher from './IpvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
@@ -26,6 +27,7 @@ function IpvMenu() {
       body={
         <>
           {isMobile ? <IpvLayerSwitcher /> : null}
+          <Divider />
           <IpvFeatureInfo />
         </>
       }

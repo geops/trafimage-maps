@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
 import { unByKey } from 'ol/Observable';
-import SBBSwitch from '../../components/SBBSwitch/SBBSwitch';
+import SBBSwitch from '../../components/SBBSwitch';
 import { highlights, gttos, premium } from '../../config/ch.sbb.sts';
 import { setFeatureInfo } from '../../model/app/actions';
 

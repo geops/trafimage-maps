@@ -44,18 +44,18 @@ const useStyles = makeStyles(() => {
         width: '100%',
         height: '10em',
       },
-      '&::before': {
-        content: '""',
-        position: 'absolute',
-        zIndex: 0,
-        transform: 'translateY(-300px)',
-        left: 0,
-        pointerEvents: 'none',
-        backgroundImage:
-          'radial-gradient(circle, rgba(210,210,210, 1), rgba(210,210,210,0) 85%)',
-        width: '100%',
-        height: '30em',
-      },
+      // '&::before': {
+      //   content: '""',
+      //   position: 'absolute',
+      //   zIndex: 0,
+      //   transform: 'translateY(-300px)',
+      //   left: 0,
+      //   pointerEvents: 'none',
+      //   backgroundImage:
+      //     'radial-gradient(circle, rgba(210,210,210, 1), rgba(210,210,210,0) 85%)',
+      //   width: '100%',
+      //   height: '30em',
+      // },
     },
     titleWrapper: {
       display: 'flex',
@@ -138,7 +138,6 @@ function IpvFeatureInfo() {
 
   return (
     <>
-      {!teaser ? <Divider /> : null}
       {dvFeatures?.length ? (
         <div className={classes.featureInfos}>
           {dvFeatures.length > 1 ? (
