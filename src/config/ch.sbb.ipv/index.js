@@ -90,6 +90,9 @@ export const ipvNight = new DirektverbindungenLayer({
   },
 });
 
+ipvDay.set('nightLayer', ipvNight);
+ipvNight.set('dayLayer', ipvDay);
+
 export default [
   dataLayer,
   ipvBaseDay,
