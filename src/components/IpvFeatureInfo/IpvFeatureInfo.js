@@ -120,6 +120,7 @@ function IpvFeatureInfo() {
       info.features.forEach((feat) => feat.set('layer', info.layer));
       return [...feats, ...info.features];
     }, []);
+    features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
     return removeDuplicates(parseIpvFeatures(features));
   }, [featureInfo]);
 
@@ -136,6 +137,17 @@ function IpvFeatureInfo() {
     return null;
   }
 
+  // if (ipvLayers[0].mapboxLayer?.mbMap) {
+  //   console.log(
+  //     ipvLayers[0].mapboxLayer?.mbMap.queryRenderedFeatures(undefined, {
+  //       layers: ['dv_lines_day', 'dv_lines_night'], // replace this with the name of the layer
+  //     }),
+  //   );
+  //   console.log(ipvLayers[0].mapboxLayer?.mbMap.style);
+  // } else {
+  //   console.log('doublewank');
+  // }
+
   return (
     <>
       {dvFeatures?.length ? (
@@ -145,7 +157,7 @@ function IpvFeatureInfo() {
               const id = getId(feat);
               const title = feat.get('name');
               const layer = feat.get('layer');
-              const isNightTrain = feat.get('nachtverbindung');
+              const isNightTrain = feat.get('line') === 'night';
               const active = infoKey === id;
               return (
                 <div
@@ -202,7 +214,7 @@ function IpvFeatureInfo() {
                 <DvTitle
                   title={dvFeatures[0].get('name')}
                   active
-                  isNightTrain={dvFeatures[0].get('nachtverbindung')}
+                  isNightTrain={dvFeatures[0].get('line') === 'night'}
                 />
               </div>
               <div className={classes.featureInfoItem}>

@@ -5,21 +5,38 @@ import { useTranslation } from 'react-i18next';
 import { FormGroup, FormControlLabel } from '@material-ui/core';
 import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';
-import { highlights, gttos, premium } from '../../config/ch.sbb.sts';
+// import { highlights, gttos, premium } from '../../config/ch.sbb.sts';
+import { STS_KEY } from '../../utils/constants';
 import { setFeatureInfo } from '../../model/app/actions';
 
+const stsStyleLayerRegex = new RegExp(
+  `^${STS_KEY}.validity.(highlights|premium|gttos)$`,
+);
+const stsHightlightLayerRegex = new RegExp(`^${STS_KEY}.validity.highlights$`);
 function StsValidityLayerSwitcher() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [revision, forceRender] = useState();
   const layers = useSelector((state) => state.map.layers);
+  const stsLayers = useMemo(() => {
+    return layers?.filter((layer) => stsStyleLayerRegex.test(layer.key));
+  }, [layers]);
+  const [layersVisible, setLayersVisible] = useState(
+    stsLayers.filter((l) => l.visible).map((l) => l.key),
+  );
 
   // Force render when visibility changes
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', () => {
-          forceRender(revision + 1);
+        return layer?.on('change:visible', (evt) => {
+          forceRender((value) => value + 1);
+          const { target: targetLayer } = evt;
+          if (stsStyleLayerRegex.test(targetLayer.key)) {
+            setLayersVisible(
+              stsLayers.filter((l) => l.visible).map((l) => l.key),
+            );
+          }
         });
       }) || [];
 
@@ -31,20 +48,12 @@ function StsValidityLayerSwitcher() {
     return () => {
       unByKey(olKeys);
     };
-  }, [layers, revision]);
-
-  const stsLayers = useMemo(() => {
-    return layers?.filter(
-      (layer) =>
-        layer.get('group') === (gttos.get('group') || premium.get('group')) ||
-        layer.key === highlights.key,
-    );
-  }, [layers]);
+  }, [layers, revision, stsLayers]);
 
   const onChange = useCallback(
     (layer) => {
       dispatch(setFeatureInfo([]));
-      if (layer.key === highlights.key) {
+      if (stsHightlightLayerRegex.test(layer.key)) {
         layer.visible = !layer.visible;
         return;
       }
@@ -53,8 +62,7 @@ function StsValidityLayerSwitcher() {
         return;
       }
       const otherGroupLayer = stsLayers.find(
-        (lyr) =>
-          lyr.get('group') === gttos.get('group') && lyr.key !== layer.key,
+        (lyr) => lyr.get('group') && lyr.key !== layer.key,
       );
       otherGroupLayer.visible = false;
       layer.visible = true;
@@ -69,7 +77,7 @@ function StsValidityLayerSwitcher() {
           <FormControlLabel
             key={layer.key}
             label={layer.visible ? <b>{t(layer.name)}</b> : t(layer.name)}
-            checked={layer.visible}
+            checked={layersVisible.includes(layer.key)}
             control={
               <SBBSwitch
                 key={layer.key}

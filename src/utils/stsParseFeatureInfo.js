@@ -2,8 +2,8 @@ import Feature from 'ol/Feature';
 import {
   gttos,
   premium,
-  direktverbindungenDay,
-  direktverbindungenNight,
+  ipvDay,
+  ipvNight,
   highlights,
 } from '../config/ch.sbb.sts';
 import { getId } from './removeDuplicateFeatures';
@@ -36,13 +36,10 @@ export const parseFeaturesInfos = (infos, tours = []) => {
   }
 
   // Then we put all direktverbindung features
-  if (
-    infoFeatures[direktverbindungenDay.name] ||
-    infoFeatures[direktverbindungenNight.name]
-  ) {
+  if (infoFeatures[ipvDay.name] || infoFeatures[ipvNight.name]) {
     parseIpvFeatures([
-      ...(infoFeatures[direktverbindungenDay.name] || []),
-      ...(infoFeatures[direktverbindungenNight.name] || []),
+      ...(infoFeatures[ipvDay.name] || []),
+      ...(infoFeatures[ipvNight.name] || []),
     ]).forEach((feature) => {
       featuresForPopup.push(feature);
     });

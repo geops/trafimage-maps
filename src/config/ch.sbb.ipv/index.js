@@ -1,7 +1,8 @@
+import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import { IPV_KEY } from '../../utils/constants';
+import { IPV_KEY, IPV_TOPIC_KEY } from '../../utils/constants';
 import netzkarteNightImg from '../../img/netzkarte_night.png';
 import netzkarte from '../../img/netzkarte.png';
 import luftbild from '../../img/luftbild.png';
@@ -60,38 +61,53 @@ export const ipvBaseAerial = new MapboxStyleLayer({
   style: 'aerial_sbb_direktverbindungen_preview',
 });
 
-export const ipvDay = new DirektverbindungenLayer({
+export const ipvDay = new Layer({
   name: `${IPV_KEY}.day`,
+  key: `${IPV_KEY}.day`,
   mapboxLayer: dataLayer,
   visible: true,
   properties: {
-    isQueryable: true,
     routeType: 'day',
     hasInfos: true,
     layerInfoComponent: 'IpvTagLayerInfo',
-    popupComponent: 'IpvPopup',
-    useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
 
-export const ipvNight = new DirektverbindungenLayer({
+export const ipvNight = new Layer({
   name: `${IPV_KEY}.night`,
+  key: `${IPV_KEY}.night`,
   mapboxLayer: dataLayer,
   visible: true,
   properties: {
-    isQueryable: true,
     routeType: 'night',
     hasInfos: true,
     layerInfoComponent: 'IpvNachtLayerInfo',
-    popupComponent: 'IpvPopup',
-    useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
 
-ipvDay.set('nightLayer', ipvNight);
-ipvNight.set('dayLayer', ipvDay);
+export const ipvMainLayer = new DirektverbindungenLayer({
+  visible: true,
+  name: IPV_TOPIC_KEY,
+  key: IPV_TOPIC_KEY,
+  mapboxLayer: dataLayer,
+  properties: {
+    isQueryable: true,
+    hideInLegend: true,
+    dayLayer: ipvDay,
+    nightLayer: ipvNight,
+    popupComponent: 'IpvPopup',
+    useOverlay: true,
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
+    dataLink:
+      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
+  },
+});
+
+[ipvNight, ipvDay].forEach((layer) =>
+  layer.on('change:visible', (evt) => {
+    ipvMainLayer.onChangeVisible(evt.target);
+  }),
+);
 
 export default [
   dataLayer,
@@ -100,4 +116,5 @@ export default [
   ipvBaseAerial,
   ipvDay,
   ipvNight,
+  ipvMainLayer,
 ];

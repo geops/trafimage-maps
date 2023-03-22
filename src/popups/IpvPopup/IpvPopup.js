@@ -99,7 +99,7 @@ const IpvPopup = () => {
 IpvPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(IpvPopup);
-memoized.renderTitle = () => 'IPV Popup';
+memoized.renderTitle = (feat, layer, t) => t(layer.key);
 memoized.hidePagination = defaultProps;
 
 export default memoized;

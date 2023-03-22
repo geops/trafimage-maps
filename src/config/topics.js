@@ -30,7 +30,7 @@ import ipvLayers from './ch.sbb.ipv';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
-import { IPV_KEY } from '../utils/constants';
+import { IPV_TOPIC_KEY } from '../utils/constants';
 import IpvMenu from '../menus/IpvMenu/IpvMenu';
 
 // For backward compatibility
@@ -332,8 +332,8 @@ export const sts = {
 };
 
 export const ipv = {
-  name: `${IPV_KEY}.topic`,
-  key: `${IPV_KEY}`,
+  name: `${IPV_TOPIC_KEY}.topic`,
+  key: `${IPV_TOPIC_KEY}`,
   elements: {
     ...defaultElements,
     popup: true,
@@ -346,8 +346,8 @@ export const ipv = {
 };
 
 export const ipvIframe = {
-  name: `${IPV_KEY}-iframe.topic`,
-  key: `${IPV_KEY}-iframe`,
+  name: `${IPV_TOPIC_KEY}-iframe.topic`,
+  key: `${IPV_TOPIC_KEY}-iframe`,
   elements: {
     ...defaultElements,
     overlay: false,
@@ -360,7 +360,7 @@ export const ipvIframe = {
     search: false,
     footer: false,
     menu: false,
-    menuToggler: true,
+    baseLayerSwitcher: false,
   },
   layers: ipvLayers,
   enableFeatureClick: true,

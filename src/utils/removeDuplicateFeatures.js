@@ -1,4 +1,4 @@
-export const getId = (feat) => feat.getId() || feat.get('id');
+export const getId = (feat) => feat?.getId() || feat?.get('id');
 
 export const removeDuplicateFeatures = (featureArray = []) => {
   return featureArray.reduce((final, feat) => {

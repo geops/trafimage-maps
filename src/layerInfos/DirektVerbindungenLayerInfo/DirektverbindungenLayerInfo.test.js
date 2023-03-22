@@ -1,12 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { direktverbindungenLayer } from '../../config/ch.sbb.netzkarte';
+import { ipvMainLayer } from '../../config/ch.sbb.ipv';
 import DirektVerbindungenLayerInfo from '.';
 
 describe('direktverbindungenLayer', () => {
   test('should display link to data', () => {
     const { container } = render(
-      <DirektVerbindungenLayerInfo properties={direktverbindungenLayer} />,
+      <DirektVerbindungenLayerInfo properties={ipvMainLayer} />,
     );
     const link = container.querySelector('a.wkp-link');
     expect(link.href).toBe(

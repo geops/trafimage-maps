@@ -12,7 +12,8 @@ import {
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
-import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
+import IpvLayerSwitcher from '../IpvMenu/IpvLayerSwitcher';
+// import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
 import IpvFeatureInfo from '../../components/IpvFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import IframeMenu from '../IframeMenu';
@@ -57,7 +58,9 @@ const useStyles = makeStyles(() => {
 });
 
 const updateLayers = (key = 'sts') => {
+  const baseLayer = stsLayers.find((layer) => layer.get('isBaseLayer'));
   if (key === 'sts') {
+    baseLayer.setStyle('base_bright_v2_ch.sbb.geltungsbereiche_ga');
     stsLayers.forEach((layer) => {
       layer.visible =
         /(ch\.sbb\.sts\.validity(?!\.(highlights|premium)$)|\.data$)/.test(
@@ -66,8 +69,11 @@ const updateLayers = (key = 'sts') => {
     });
   }
   if (key === 'dv') {
+    baseLayer.setStyle('base_bright_v2_direktverbindungen');
     stsLayers.forEach((layer) => {
-      layer.visible = /(direktverbindungen|\.data)/.test(layer.key);
+      layer.visible = /(ch\.sbb\.(ipv|direktverbindungen)|\.data)/.test(
+        layer.key,
+      );
     });
   }
 };
@@ -99,9 +105,9 @@ function StsTopicMenu() {
       activeMenu === 'sts' ? (
         <StsValidityLayerSwitcher />
       ) : (
-        <StsDirektverbindungenLayerSwitcher />
+        <IpvLayerSwitcher onToggle={() => dispatch(setFeatureInfo([]))} />
       ),
-    [activeMenu],
+    [activeMenu, dispatch],
   );
 
   const featureInfos = useMemo(
@@ -120,8 +126,11 @@ function StsTopicMenu() {
     }
   }, [featureInfo, isMobile, dispatch]);
 
+  useEffect(() => {
+    updateLayers(activeMenu);
+  }, [activeMenu]);
+
   const onChange = (key) => {
-    updateLayers(key);
     setActiveMenu(key);
     dispatch(setFeatureInfo([]));
     setAnchorEl(null);

@@ -1,43 +1,60 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useState, useMemo } from 'react';
+import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';
-import { ipvDay, ipvNight } from '../../config/ch.sbb.ipv';
-// import { setFeatureInfo } from '../../model/app/actions';
+import { IPV_KEY } from '../../utils/constants';
+
+const ipvDayNightRegex = new RegExp(`^${IPV_KEY}.(day|night)$`);
 
 const useStyles = makeStyles(() => {
   return {
-    layerSwitcher: {
-      padding: '15px 10px',
-    },
     switchWrapper: {
-      padding: '0 10px',
+      '& .MuiFormControlLabel-root': {
+        minWidth: 140,
+      },
       '& .MuiSwitch-switchBase': {
-        top: 4,
+        top: (props) => (props.isMobile && props.row ? 4 : 0),
       },
     },
   };
 });
 
-function IpvLayerSwitcher() {
-  // const dispatch = useDispatch();
+function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
   const { t } = useTranslation();
-  const classes = useStyles();
   const [revision, forceRender] = useState();
   const layers = useSelector((state) => state.map.layers);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
+  const classes = useStyles({ isMobile, row });
+  const direktVbLayers = useMemo(
+    () =>
+      layers.filter((layer) => {
+        return ipvDayNightRegex.test(layer.key);
+      }),
+    [layers],
+  );
+  const [layersVisible, setLayersVisible] = useState(
+    direktVbLayers.filter((l) => l.visible).map((l) => l.key),
+  );
+
   // Force render when visibility changes
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', () => {
+        return layer?.on('change:visible', (evt) => {
           forceRender(revision + 1);
+          const { target: targetLayer } = evt;
+          if (ipvDayNightRegex.test(targetLayer.key)) {
+            setLayersVisible(
+              direktVbLayers.filter((l) => l.visible).map((l) => l.key),
+            );
+          }
         });
       }) || [];
 
@@ -49,50 +66,45 @@ function IpvLayerSwitcher() {
     return () => {
       unByKey(olKeys);
     };
-  }, [layers, revision]);
-
-  const ipvLayers = layers.filter((layer) => {
-    return layer.key === ipvDay.key || layer.key === ipvNight.key;
-  });
-
-  // if (ipvLayers[0].mapboxLayer?.mbMap) {
-  //   console.log(
-  //     ipvLayers[0].mapboxLayer?.mbMap.queryRenderedFeatures(undefined, {
-  //       layers: ['dv_lines_day', 'dv_lines_night'], // replace this with the name of the layer
-  //     }),
-  //   );
-  //   console.log(ipvLayers[0].mapboxLayer?.mbMap.style);
-  // } else {
-  //   console.log('doublewank');
-  // }
+  }, [layers, direktVbLayers, revision]);
 
   return (
-    <div className={classes.layerSwitcher}>
-      <FormGroup data-testid="ipv-layerswitcher" row={isMobile}>
-        {ipvLayers.map((layer) => {
-          return (
-            <FormControlLabel
-              key={layer.key}
-              label={layer.visible ? <b>{t(layer.name)}</b> : t(layer.name)}
-              checked={layer.visible}
-              className={classes.switchWrapper}
-              control={
-                <SBBSwitch
-                  key={layer.key}
-                  value={layer.key}
-                  onChange={() => {
-                    layer.visible = !layer.visible;
-                  }}
-                />
-              }
-            />
-          );
-        })}
-      </FormGroup>
-    </div>
+    <FormGroup
+      data-testid="ipv-layerswitcher"
+      row={row}
+      className={classes.switchWrapper}
+    >
+      {direktVbLayers.map((layer) => {
+        return (
+          <FormControlLabel
+            key={layer.key}
+            label={layer.visible ? <b>{t(layer.name)}</b> : t(layer.name)}
+            checked={layersVisible.includes(layer.key)}
+            control={
+              <SBBSwitch
+                key={layer.key}
+                value={layer.key}
+                onChange={() => {
+                  layer.visible = !layer.visible;
+                  onToggle(layer);
+                }}
+              />
+            }
+          />
+        );
+      })}
+    </FormGroup>
   );
 }
 
-IpvLayerSwitcher.propTypes = {};
+StsDirektverbindungenLayerSwitcher.propTypes = {
+  onToggle: PropTypes.func,
+  row: PropTypes.bool,
+};
 
-export default IpvLayerSwitcher;
+StsDirektverbindungenLayerSwitcher.defaultProps = {
+  onToggle: () => {},
+  row: false,
+};
+
+export default StsDirektverbindungenLayerSwitcher;

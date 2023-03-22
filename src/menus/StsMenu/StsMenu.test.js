@@ -13,6 +13,8 @@ describe('GeltungsbereicheTopicMenu', () => {
   let store;
 
   beforeEach(() => {
+    stsLayers.find((layer) => layer.get('isBaseLayer')).url =
+      'https://foo-maps.io';
     store = mockStore({
       map: { layers: stsLayers },
       app: {

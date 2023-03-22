@@ -1,8 +1,9 @@
+import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import { DIREKTVERBINDUNGEN_KEY, SWISS_EXTENT } from '../../utils/constants';
+import { IPV_KEY, SWISS_EXTENT } from '../../utils/constants';
 import StsPoisLayer from '../../layers/StsPoisLayer';
 
 // const { POIS_URL } = process.env;
@@ -13,18 +14,16 @@ const FILTER_HIGHLIGHT_VALUE = 'sts_highlight';
 const FILTER_OTHERS_VALUE = 'sts_others';
 const FILTER_LINE_VALUE = 'sts.line'; // style using nova daten
 
-const DATA_LAYER_KEY = 'ch.sbb.sts.data';
+const STS_DATA_LAYER_KEY = 'ch.sbb.sts.data';
 const HIGHLIGHTS_LAYER_KEY = 'ch.sbb.sts.validity.highlights';
 const ROUTES_HIGHLIGHT_LAYER_KEY = 'ch.sbb.sts.validity.routes_highlight';
 const OTHER_LAYER_KEY = 'ch.sbb.sts.validity.other';
 const GTTOS_LAYER_KEY = 'ch.sbb.sts.validity.gttos';
 const PREMIUM_LAYER_KEY = 'ch.sbb.sts.validity.premium';
-const DIREKTVERBINDUNGEN_DAY_LAYER_KEY = `${DIREKTVERBINDUNGEN_KEY}.day`;
-const DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY = `${DIREKTVERBINDUNGEN_KEY}.night`;
 
 const stsDataLayer = new TrafimageMapboxLayer({
-  name: DATA_LAYER_KEY,
-  key: DATA_LAYER_KEY,
+  name: STS_DATA_LAYER_KEY,
+  key: STS_DATA_LAYER_KEY,
   visible: true,
   preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
@@ -152,31 +151,51 @@ export const premium = new MapboxStyleLayer({
   },
 });
 
-export const direktverbindungenNight = new DirektverbindungenLayer({
-  name: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
-  key: DIREKTVERBINDUNGEN_NIGHT_LAYER_KEY,
-  mapboxLayer: stsDataLayer,
-  visible: false,
-  properties: {
-    routeType: 'night',
-    isQueryable: true,
-    disableSetFeatureInfoOnHover: true,
-    useDvPoints: false,
-  },
-});
-
-export const direktverbindungenDay = new DirektverbindungenLayer({
-  name: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
-  key: DIREKTVERBINDUNGEN_DAY_LAYER_KEY,
+export const ipvDay = new Layer({
+  name: `${IPV_KEY}.day`,
+  key: `${IPV_KEY}.day`,
   mapboxLayer: stsDataLayer,
   visible: false,
   properties: {
     routeType: 'day',
-    isQueryable: true,
-    disableSetFeatureInfoOnHover: true,
-    useDvPoints: false,
+    hasInfos: true,
+    layerInfoComponent: 'IpvTagLayerInfo',
   },
 });
+
+export const ipvNight = new Layer({
+  name: `${IPV_KEY}.night`,
+  key: `${IPV_KEY}.night`,
+  mapboxLayer: stsDataLayer,
+  visible: false,
+  properties: {
+    routeType: 'night',
+    hasInfos: true,
+    layerInfoComponent: 'IpvNachtLayerInfo',
+  },
+});
+
+export const ipvMainLayer = new DirektverbindungenLayer({
+  visible: false,
+  name: `${IPV_KEY}.main`,
+  key: `${IPV_KEY}.main`,
+  mapboxLayer: stsDataLayer,
+  properties: {
+    isQueryable: true,
+    hideInLegend: true,
+    dayLayer: ipvDay,
+    nightLayer: ipvNight,
+    popupComponent: 'IpvPopup',
+    useOverlay: true,
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
+  },
+});
+
+[ipvNight, ipvDay].forEach((layer) =>
+  layer.on('change:visible', (evt) => {
+    ipvMainLayer.onChangeVisible(evt.target);
+  }),
+);
 
 export default [
   stsDataLayer,
@@ -186,6 +205,7 @@ export default [
   premium,
   gttos,
   highlights,
-  direktverbindungenDay,
-  direktverbindungenNight,
+  ipvMainLayer,
+  ipvDay,
+  ipvNight,
 ];

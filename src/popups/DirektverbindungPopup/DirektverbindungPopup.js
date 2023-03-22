@@ -131,9 +131,10 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     start_station_name: start,
     end_station_name: end,
     vias,
-    nachtverbindung: night,
+    line,
     [`description_${i18n.language}`]: description,
     [`url_${i18n.language}`]: link,
+    color,
   } = feature.getProperties();
 
   const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
@@ -143,7 +144,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>
-        <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
+        <i>{line === 'night' ? t('Nachtverbindung') : t('Tagverbindung')}</i>
         {description && <p>{description}</p>}
         {link && (
           <p>
@@ -175,11 +176,11 @@ const DirektverbindungPopup = ({ feature, layer }) => {
                 <div className={classes.routeIcon}>
                   <div
                     className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
-                    style={{ backgroundColor: layer.get('color') }}
+                    style={{ backgroundColor: color }}
                   />
                   <div
                     className={classes.routeCircleMiddle}
-                    style={{ borderColor: layer.get('color') }}
+                    style={{ borderColor: color }}
                   />
                 </div>
                 <div>
