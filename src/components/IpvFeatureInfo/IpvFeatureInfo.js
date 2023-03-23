@@ -137,17 +137,6 @@ function IpvFeatureInfo() {
     return null;
   }
 
-  // if (ipvLayers[0].mapboxLayer?.mbMap) {
-  //   console.log(
-  //     ipvLayers[0].mapboxLayer?.mbMap.queryRenderedFeatures(undefined, {
-  //       layers: ['dv_lines_day', 'dv_lines_night'], // replace this with the name of the layer
-  //     }),
-  //   );
-  //   console.log(ipvLayers[0].mapboxLayer?.mbMap.style);
-  // } else {
-  //   console.log('doublewank');
-  // }
-
   return (
     <>
       {dvFeatures?.length ? (

@@ -6,6 +6,7 @@ import IpvFeatureInfo from '../../components/IpvFeatureInfo';
 import IpvLayerSwitcher from './IpvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
+import { IPV_TOPIC_KEY } from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -19,14 +20,17 @@ function IpvMenu() {
   const dispatch = useDispatch();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const featureInfo = useSelector((state) => state.app.featureInfo);
+  const layers = useSelector((state) => state.map.layers);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const classes = useStyles({ isMobile });
+
   const urlSearch = useMemo(
     () => new URLSearchParams(window.location.search),
     [],
   );
+
   const switcher = useMemo(
     () => (
       <div className={classes.wrapper}>
@@ -35,6 +39,7 @@ function IpvMenu() {
     ),
     [classes.wrapper, isMobile],
   );
+
   const hideMenu = useMemo(() => {
     return urlSearch.get('ipvmenu') === 'false' && !featureInfo?.length;
   }, [featureInfo?.length, urlSearch]);
@@ -42,6 +47,10 @@ function IpvMenu() {
   const showSwitcher = useMemo(() => {
     return urlSearch.get('ipvmenu') !== 'false';
   }, [urlSearch]);
+
+  const ipvMainLayer = layers.find((l) => l.key === IPV_TOPIC_KEY);
+
+  console.log(ipvMainLayer.allFeatures);
 
   useEffect(() => {
     dispatch(setDisplayMenu(!isMobile));

@@ -1,7 +1,46 @@
+import { GeoJSON } from 'ol/format';
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
 
 const IPV_REGEX = /^ipv_(day|night|all)$/;
+
+const setFakeFeatProps = (feat) => {
+  feat.setProperties({
+    ...feat.getProperties(),
+    name: 'Old road to The Shire',
+    start_station_name: 'Minas Tirith, Gondor',
+    end_station_name: 'Bagend, The Shire',
+    vias: [
+      {
+        via_type: 'start',
+        station_name: 'Minas Tirith, Gondor',
+        didok: '8501120',
+        coordinates: [737947, 5863556],
+      },
+      ...Array.from(Array(Math.floor(Math.random() * 15))).map((f, idx) => ({
+        via_type: 'visible',
+        station_name: `Isengard, Rohan (${idx})`,
+        didok: '8501125',
+        coordinates: [737947, 5863556],
+      })),
+      {
+        via_type: 'end',
+        station_name: 'Bagend, The Shire',
+        didok: '8768634',
+        coordinates: [264219, 6248583],
+      },
+    ],
+    description_de: 'This is the path the four hobbits took at the end of LOTR',
+    description_en: 'This is the path the four hobbits took at the end of LOTR',
+    description_it: 'This is the path the four hobbits took at the end of LOTR',
+    description_fr: 'This is the path the four hobbits took at the end of LOTR',
+    url_de: 'https://example.com/',
+    url_en: 'https://example.com/',
+    url_it: 'https://example.com/',
+    url_fr: 'https://example.com/',
+  });
+  return feat;
+};
 /**
  * Layer for visualizing station levels.
  *
@@ -30,6 +69,24 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
+    const { mbMap } = this.mapboxLayer;
+    if (mbMap) {
+      const allIpvFeaturesGeoJSON = mbMap.querySourceFeatures(
+        'ch.sbb.direktverbindungen',
+      );
+
+      const olFeatures = new GeoJSON().readFeatures({
+        type: 'FeatureCollection',
+        crs: {
+          type: 'name',
+          properties: {
+            name: 'EPSG:3857',
+          },
+        },
+        features: allIpvFeaturesGeoJSON,
+      });
+      this.allLines = olFeatures.map(setFakeFeatProps);
+    }
   }
 
   getCurrentFilter() {
