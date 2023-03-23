@@ -58,9 +58,7 @@ const useStyles = makeStyles(() => {
 });
 
 const updateLayers = (key = 'sts') => {
-  const baseLayer = stsLayers.find((layer) => layer.get('isBaseLayer'));
   if (key === 'sts') {
-    baseLayer.setStyle('base_bright_v2_ch.sbb.geltungsbereiche_ga');
     stsLayers.forEach((layer) => {
       layer.visible =
         /(ch\.sbb\.sts\.validity(?!\.(highlights|premium)$)|\.data$)/.test(
@@ -69,7 +67,6 @@ const updateLayers = (key = 'sts') => {
     });
   }
   if (key === 'dv') {
-    baseLayer.setStyle('base_bright_v2_direktverbindungen');
     stsLayers.forEach((layer) => {
       layer.visible = /(ch\.sbb\.(ipv|direktverbindungen)|\.data)/.test(
         layer.key,
@@ -89,6 +86,13 @@ function StsTopicMenu() {
   }, [screenWidth]);
   const [activeMenu, setActiveMenu] = useState('sts');
   const [anchorEl, setAnchorEl] = useState();
+  const baseLayer = useMemo(() => {
+    const bl = stsLayers.find((layer) => layer.get('isBaseLayer'));
+    // Since we update the style dynamically on menu switch
+    // we update the layers once the style has loaded
+    bl.onStyleLoaded = () => updateLayers(activeMenu);
+    return bl;
+  }, [activeMenu]);
 
   useEffect(() => {
     // Activate the correct menu on load of the topic.
@@ -127,8 +131,12 @@ function StsTopicMenu() {
   }, [featureInfo, isMobile, dispatch]);
 
   useEffect(() => {
-    updateLayers(activeMenu);
-  }, [activeMenu]);
+    baseLayer.setStyle(
+      activeMenu === 'dv'
+        ? 'base_bright_v2_direktverbindungen'
+        : 'base_bright_v2_ch.sbb.geltungsbereiche_ga',
+    );
+  }, [activeMenu, baseLayer]);
 
   const onChange = (key) => {
     setActiveMenu(key);

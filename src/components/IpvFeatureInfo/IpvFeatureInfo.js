@@ -171,9 +171,7 @@ function IpvFeatureInfo() {
                   <MenuItem
                     dataId={id}
                     onCollapseToggle={(open) => {
-                      if (!(active && teaser)) {
-                        setInfoKey(open ? null : id);
-                      }
+                      setInfoKey(open ? null : id);
                       setTeaser(false);
                     }}
                     className={`wkp-gb-topic-menu ${classes.root}${

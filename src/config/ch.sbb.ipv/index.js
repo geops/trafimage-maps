@@ -114,7 +114,7 @@ export default [
   ipvBaseDay,
   ipvBaseNight,
   ipvBaseAerial,
-  ipvDay,
   ipvNight,
+  ipvDay,
   ipvMainLayer,
 ];

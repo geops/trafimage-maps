@@ -18,10 +18,15 @@ const useStyles = makeStyles(() => {
 function IpvMenu() {
   const dispatch = useDispatch();
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const classes = useStyles({ isMobile });
+  const urlSearch = useMemo(
+    () => new URLSearchParams(window.location.search),
+    [],
+  );
   const switcher = useMemo(
     () => (
       <div className={classes.wrapper}>
@@ -30,6 +35,13 @@ function IpvMenu() {
     ),
     [classes.wrapper, isMobile],
   );
+  const hideMenu = useMemo(() => {
+    return urlSearch.get('ipvmenu') === 'false' && !featureInfo?.length;
+  }, [featureInfo?.length, urlSearch]);
+
+  const showSwitcher = useMemo(() => {
+    return urlSearch.get('ipvmenu') !== 'false';
+  }, [urlSearch]);
 
   useEffect(() => {
     dispatch(setDisplayMenu(!isMobile));
@@ -37,11 +49,12 @@ function IpvMenu() {
 
   return (
     <IframeMenu
-      header={isMobile ? null : switcher}
+      hide={hideMenu}
+      header={showSwitcher ? switcher : null}
       body={
         <>
-          {isMobile ? switcher : null}
-          <Divider />
+          {showSwitcher && isMobile ? switcher : null}
+          {showSwitcher ? <Divider /> : null}
           <IpvFeatureInfo />
         </>
       }

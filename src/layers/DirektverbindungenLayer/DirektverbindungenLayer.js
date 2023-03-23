@@ -1,6 +1,7 @@
 import MapboxStyleLayer from '../MapboxStyleLayer';
+import getTrafimageFilter from '../../utils/getTrafimageFilter';
 
-// const VIAPOINTSLAYER_ID = 'dv_points';
+const IPV_REGEX = /^ipv_(day|night|all)$/;
 /**
  * Layer for visualizing station levels.
  *
@@ -9,37 +10,26 @@ import MapboxStyleLayer from '../MapboxStyleLayer';
  * @inheritdoc
  * @private
  */
+
 class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
       ...options,
       queryRenderedLayersFilter: (layer) => {
-        const { metadata } = layer;
-        const currentFilter = this.getCurrentFilter();
-        const regex = new RegExp(`^(${currentFilter})$`, 'i');
         return (
-          metadata &&
-          regex.test(metadata['trafimage.filter']) &&
+          IPV_REGEX.test(getTrafimageFilter(layer)) &&
           layer['source-layer'] === 'ch.sbb.direktverbindungen_edges'
         );
       },
-      styleLayersFilter: ({ metadata }) => {
-        const currentFilter = this.getCurrentFilter();
-        const regex = new RegExp(`^(${currentFilter})$`, 'i');
-        return metadata && regex.test(metadata['trafimage.filter']);
+      styleLayersFilter: (layer) => {
+        return IPV_REGEX.test(getTrafimageFilter(layer));
       },
     });
-    this.useDvPoints = options?.properties?.useDvPoints !== false;
   }
 
   onLoad() {
-    // const { mbMap } = this.mapboxLayer;
-    // const nightLayer = this.get('nightLayer');
-    // const dayLayer = this.get('dayLayer');
-
-    // const styleLayersDay = this.getIpvLayers('^ipv_day$');
-    // console.log(styleLayersDay);
     super.onLoad();
+    this.onChangeVisible();
   }
 
   getCurrentFilter() {
@@ -58,35 +48,21 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     return null;
   }
 
-  getIpvLayers(filterRegex = '^ipv_(day|night|all)$') {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
-      return [];
-    }
-    const style = mbMap.getStyle();
-    const regex = new RegExp(filterRegex);
-    const ipvLayers = style.layers.filter((stylelayer) =>
-      regex.test(
-        stylelayer.metadata && stylelayer.metadata['trafimage.filter'],
-      ),
-    );
-    return ipvLayers;
-  }
-
   onChangeVisible() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
     }
+    const style = mbMap.getStyle();
     const currentFilter = this.getCurrentFilter();
-    const ipvLayers = this.getIpvLayers();
+    const ipvLayers = style?.layers.filter((stylelayer) => {
+      return IPV_REGEX.test(getTrafimageFilter(stylelayer));
+    });
     ipvLayers.forEach((stylelayer) => {
-      const filter =
-        stylelayer.metadata && stylelayer.metadata['trafimage.filter'];
       mbMap.setLayoutProperty(
         stylelayer.id,
         'visibility',
-        filter === currentFilter ? 'visible' : 'none',
+        getTrafimageFilter(stylelayer) === currentFilter ? 'visible' : 'none',
       );
     });
   }

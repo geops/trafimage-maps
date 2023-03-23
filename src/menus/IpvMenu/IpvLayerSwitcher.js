@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
@@ -32,16 +32,18 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const classes = useStyles({ isMobile, row });
-  const direktVbLayers = useMemo(
+  const ipvLayers = useMemo(
     () =>
       layers.filter((layer) => {
         return ipvDayNightRegex.test(layer.key);
       }),
     [layers],
   );
-  const [layersVisible, setLayersVisible] = useState(
-    direktVbLayers.filter((l) => l.visible).map((l) => l.key),
+  const getVisibleLayerKeys = useCallback(
+    () => ipvLayers.filter((l) => l.visible).map((l) => l.key),
+    [ipvLayers],
   );
+  const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
 
   // Force render when visibility changes
   useEffect(() => {
@@ -51,9 +53,7 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
           forceRender(revision + 1);
           const { target: targetLayer } = evt;
           if (ipvDayNightRegex.test(targetLayer.key)) {
-            setLayersVisible(
-              direktVbLayers.filter((l) => l.visible).map((l) => l.key),
-            );
+            setLayersVisible(getVisibleLayerKeys());
           }
         });
       }) || [];
@@ -61,12 +61,13 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
     // Force render after first render because visibility of layers is  not yet applied.
     if (revision === undefined) {
       forceRender(0);
+      setLayersVisible(getVisibleLayerKeys());
     }
 
     return () => {
       unByKey(olKeys);
     };
-  }, [layers, direktVbLayers, revision]);
+  }, [layers, revision, getVisibleLayerKeys]);
 
   return (
     <FormGroup
@@ -74,7 +75,7 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
       row={row}
       className={classes.switchWrapper}
     >
-      {direktVbLayers.map((layer) => {
+      {ipvLayers.map((layer) => {
         return (
           <FormControlLabel
             key={layer.key}

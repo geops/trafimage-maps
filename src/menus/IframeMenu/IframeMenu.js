@@ -75,10 +75,13 @@ const useStyles = makeStyles(() => {
     layerSwitcher: {
       padding: '15px 10px',
     },
+    hide: {
+      display: 'none',
+    },
   };
 });
 
-function IframeMenu({ header, body }) {
+function IframeMenu({ header, body, hide }) {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const displayMenu = useSelector((state) => state.app.displayMenu);
@@ -102,7 +105,7 @@ function IframeMenu({ header, body }) {
   }, [featureInfo, isMobile, dispatch]);
 
   return (
-    <div className={classes.container}>
+    <div className={`${classes.container}${hide ? ` ${classes.hide}` : ''}`}>
       {displayMenu && (
         <div className={classes.menuContent}>
           <div
@@ -152,11 +155,13 @@ function IframeMenu({ header, body }) {
 IframeMenu.propTypes = {
   header: PropTypes.node,
   body: PropTypes.node,
+  hide: PropTypes.bool,
 };
 
 IframeMenu.defaultProps = {
   header: null,
   body: null,
+  hide: false,
 };
 
 export default IframeMenu;
