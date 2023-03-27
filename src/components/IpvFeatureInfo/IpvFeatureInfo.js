@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { unByKey } from 'ol/Observable';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -14,11 +8,7 @@ import usePrevious from '../../utils/usePrevious';
 import DirektverbindungPopup from '../../popups/DirektverbindungPopup';
 import removeDuplicates, { getId } from '../../utils/removeDuplicateFeatures';
 import parseIpvFeatures from '../../utils/ipvParseFeatures';
-import {
-  // IPV_TOPIC_KEY,
-  IPV_DAY_AND_NIGHT_REGEX,
-  IPV_KEY,
-} from '../../utils/constants';
+import { IPV_DAY_NIGHT_REGEX, IPV_KEY } from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -27,8 +17,11 @@ const useStyles = makeStyles(() => {
         marginTop: '0 !important',
         border: 'none !important',
       },
-      '& .wkp-menu-item-header.open': {
-        borderBottom: 'none !important',
+      '& .wkp-menu-item-header': {
+        height: '40px !important',
+        '&.open': {
+          borderBottom: 'none !important',
+        },
       },
       '& .wkp-menu-item-header-toggler': {
         marginRight: 5,
@@ -70,8 +63,7 @@ const useStyles = makeStyles(() => {
       overflow: 'auto',
     },
     featureInfoItem: {
-      padding: 15,
-      marginLeft: 24,
+      marginLeft: 38,
     },
     imageLine: {
       '& img': {
@@ -117,31 +109,60 @@ function IpvFeatureInfo() {
   }, [teaser]);
   const [revision, forceRender] = useState();
 
+  const getVisibleLayerKeys = useCallback(
+    () =>
+      layers
+        .filter((l) => IPV_DAY_NIGHT_REGEX.test(l.key) && l.visible)
+        .map((l) => l.key),
+    [layers],
+  );
+  const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
+
   const dvFeatures = useMemo(() => {
     const features = featureInfo.reduce((feats, info) => {
       info.features.forEach((feat) => feat.set('layer', info.layer));
       return [...feats, ...info.features];
     }, []);
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
-    return removeDuplicates(parseIpvFeatures(features));
-  }, [featureInfo]);
-  const getVisibleLayerKeys = useCallback(
-    () =>
-      layers
-        .filter((l) => IPV_DAY_AND_NIGHT_REGEX.test(l.key) && l.visible)
-        .map((l) => l.key),
-    [layers],
-  );
-  const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
-
+    return removeDuplicates(parseIpvFeatures(features)).filter(
+      (feat) =>
+        !!layersVisible.find((layerKey) => {
+          return `${IPV_KEY}.${feat.get('line')}` === layerKey;
+        }),
+    );
+  }, [featureInfo, layersVisible]);
+  const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
+  const previousInfoKey = usePrevious(infoKey);
 
   useEffect(() => {
-    if (dvFeatures !== previousDvFeatures) {
-      setInfoKey(getId(dvFeatures[0]));
+    if (featureInfo !== previousFeatureInfo) {
       setTeaser(true);
+      setInfoKey(getId(dvFeatures[0]));
+      return;
     }
-  }, [dvFeatures, previousDvFeatures, infoKey]);
+    if (dvFeatures !== previousDvFeatures) {
+      const previousSelectedFeature = dvFeatures.find(
+        (feat) => getId(feat) === previousInfoKey,
+      );
+      if (previousInfoKey) {
+        setInfoKey(
+          previousSelectedFeature
+            ? getId(previousSelectedFeature)
+            : getId(dvFeatures[0]),
+        );
+      } else {
+        setInfoKey(getId(dvFeatures[0]));
+      }
+    }
+  }, [
+    dvFeatures,
+    previousDvFeatures,
+    previousInfoKey,
+    layersVisible,
+    featureInfo,
+    previousFeatureInfo,
+  ]);
 
   useEffect(() => {
     const olKeys =
@@ -149,8 +170,9 @@ function IpvFeatureInfo() {
         return layer?.on('change:visible', (evt) => {
           forceRender(revision + 1);
           const { target: targetLayer } = evt;
-          if (IPV_DAY_AND_NIGHT_REGEX.test(targetLayer.key)) {
+          if (IPV_DAY_NIGHT_REGEX.test(targetLayer.key)) {
             setLayersVisible(getVisibleLayerKeys());
+            setInfoKey(null);
           }
         });
       }) || [];
@@ -168,79 +190,68 @@ function IpvFeatureInfo() {
     return null;
   }
 
-  // const ipvMainLayer = layers.find((l) => l.key === IPV_TOPIC_KEY);
-  console.log(layersVisible);
-
   return (
     <>
       {dvFeatures?.length ? (
         <div className={classes.featureInfos}>
           {dvFeatures.length > 1 ? (
-            dvFeatures
-              .filter(
-                (feat) =>
-                  !!layersVisible.find((layerKey) => {
-                    console.log(`${IPV_KEY}.${feat.get('line')}`);
-                    return `${IPV_KEY}.${feat.get('line')}` === layerKey;
-                  }),
-              )
-              .map((feat) => {
-                const id = getId(feat);
-                const title = feat.get('name');
-                const layer = feat.get('layer');
-                const isNightTrain = feat.get('line') === 'night';
-                const active = infoKey === id;
-                return (
-                  <div
-                    key={id}
-                    role="menuitem"
-                    tabIndex={teaser ? '-1' : null}
-                    onClick={teaserOnClick}
-                    onKeyDown={teaserOnClick}
-                    style={{ cursor: teaser ? 'pointer' : 'auto' }}
-                  >
-                    <MenuItem
-                      dataId={id}
-                      onCollapseToggle={(open) => {
-                        if (active && teaser) {
-                          setTeaser(false);
-                          return;
-                        }
-                        setInfoKey(open ? null : id);
+            dvFeatures.map((feat) => {
+              const id = getId(feat);
+              const title = feat.get('name');
+              const layer = feat.get('layer');
+              const isNightTrain = feat.get('line') === 'night';
+              const active = infoKey === id;
+              return (
+                <div
+                  key={id}
+                  role="menuitem"
+                  tabIndex={teaser ? '-1' : null}
+                  onClick={teaserOnClick}
+                  onKeyDown={teaserOnClick}
+                  style={{ cursor: teaser ? 'pointer' : 'auto' }}
+                >
+                  <MenuItem
+                    dataId={id}
+                    onCollapseToggle={(open) => {
+                      if (active && teaser) {
                         setTeaser(false);
-                      }}
-                      className={`wkp-ipv-feature-info ${classes.root}${
-                        active && teaser ? ` ${classes.teaser}` : ''
-                      }`}
-                      collapsed={!active}
-                      open={active}
-                      title={
-                        <IpvTitle
-                          title={title}
-                          active={active}
-                          isNightTrain={isNightTrain}
-                        />
+                        return;
                       }
-                      menuHeight={expandedHeight}
+                      setInfoKey(open ? null : id);
+                      setTeaser(false);
+                    }}
+                    className={`wkp-ipv-feature-info ${classes.root}${
+                      active && teaser ? ` ${classes.teaser}` : ''
+                    }`}
+                    collapsed={!active}
+                    open={active}
+                    title={
+                      <IpvTitle
+                        title={title}
+                        active={active}
+                        isNightTrain={isNightTrain}
+                      />
+                    }
+                    menuHeight={expandedHeight}
+                  >
+                    <div
+                      className={classes.featureInfoItem}
+                      ref={
+                        active
+                          ? (el) => setExpandedHeight(el?.clientHeight)
+                          : null
+                      }
                     >
-                      <div
-                        className={classes.featureInfoItem}
-                        ref={
-                          active
-                            ? (el) => setExpandedHeight(el?.clientHeight)
-                            : null
-                        }
-                      >
-                        <DirektverbindungPopup
-                          feature={active ? feat : null}
-                          layer={layer}
-                        />
-                      </div>
-                    </MenuItem>
-                    <Divider />
-                  </div>
-                );
-              })
+                      <DirektverbindungPopup
+                        feature={active ? feat : null}
+                        layer={layer}
+                      />
+                    </div>
+                  </MenuItem>
+                  <Divider />
+                </div>
+              );
+            })
           ) : (
             <>
               <div style={{ padding: 10 }}>

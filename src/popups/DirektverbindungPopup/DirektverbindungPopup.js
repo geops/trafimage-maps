@@ -8,7 +8,7 @@ import Link from '../../components/Link';
 
 const useStyles = makeStyles({
   container: {
-    padding: 8,
+    padding: '0 8px 8px',
   },
   header: {
     marginTop: 5,

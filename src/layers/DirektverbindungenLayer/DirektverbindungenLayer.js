@@ -2,6 +2,7 @@ import { GeoJSON } from 'ol/format';
 import { LineString } from 'ol/geom';
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
+import { getId } from '../../utils/removeDuplicateFeatures';
 
 const IPV_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const IPV_TRIP_REGEX = /^ipv_trip_(day|night|all)$/;
@@ -65,7 +66,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       const allIpvFeaturesGeoJSON = mbMap.querySourceFeatures(
         'ch.sbb.direktverbindungen',
         {
-          sourceLayer: 'ch.sbb.direktverbindungen_edges',
+          sourceLayer: 'ch.sbb.direktverbindungen_trips',
           filter: ['==', '$type', 'LineString'],
         },
       );
@@ -80,7 +81,14 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         },
         features: allIpvFeaturesGeoJSON,
       });
-      return olFeatures.map(setFakeFeatProps);
+      olFeatures.forEach((feat) => {
+        setFakeFeatProps(feat);
+        feat.set(
+          'mapboxFeature',
+          allIpvFeaturesGeoJSON.find((mbFeat) => mbFeat.id === getId(feat)),
+        );
+      });
+      return olFeatures;
     }
     // eslint-disable-next-line no-console
     console.error(`Mapbox map not loaded`);
@@ -113,6 +121,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       return visibleLayer.get('routeType');
     }
     return null;
+  }
+
+  select(features) {
+    super.select(features);
   }
 
   onChangeVisible() {

@@ -32,6 +32,7 @@ import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
 import { IPV_TOPIC_KEY } from '../utils/constants';
 import IpvMenu from '../menus/IpvMenu/IpvMenu';
+import IpvListButton from './ch.sbb.ipv/IpvListButton';
 
 // For backward compatibility
 export {
@@ -361,6 +362,7 @@ export const ipvIframe = {
     footer: false,
     menu: false,
     baseLayerSwitcher: false,
+    customButton: <IpvListButton />,
   },
   layers: ipvLayers,
   enableFeatureClick: true,

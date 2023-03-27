@@ -1,12 +1,13 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';
-import { IPV_DAY_AND_NIGHT_REGEX } from '../../utils/constants';
+import { IPV_DAY_NIGHT_REGEX } from '../../utils/constants';
+import { setFeatureInfo } from '../../model/app/actions';
 
 const useStyles = makeStyles(() => {
   return {
@@ -24,11 +25,13 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
+function IpvLayerSwitcher({ onToggle, row }) {
   const { t } = useTranslation();
   const [revision, forceRender] = useState();
+  const dispatch = useDispatch();
   const layers = useSelector((state) => state.map.layers);
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
@@ -36,7 +39,7 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
   const ipvLayers = useMemo(
     () =>
       layers.filter((layer) => {
-        return IPV_DAY_AND_NIGHT_REGEX.test(layer.key);
+        return IPV_DAY_NIGHT_REGEX.test(layer.key);
       }),
     [layers],
   );
@@ -53,7 +56,7 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
         return layer?.on('change:visible', (evt) => {
           forceRender(revision + 1);
           const { target: targetLayer } = evt;
-          if (IPV_DAY_AND_NIGHT_REGEX.test(targetLayer.key)) {
+          if (IPV_DAY_NIGHT_REGEX.test(targetLayer.key)) {
             setLayersVisible(getVisibleLayerKeys());
           }
         });
@@ -69,6 +72,13 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
       unByKey(olKeys);
     };
   }, [layers, revision, getVisibleLayerKeys]);
+
+  useEffect(() => {
+    // If featureInfos but both layers are deactivated we remove the featureInfos from store
+    if (featureInfo.length && !layersVisible?.length) {
+      dispatch(setFeatureInfo([]));
+    }
+  }, [dispatch, featureInfo, layersVisible]);
 
   return (
     <FormGroup
@@ -99,14 +109,14 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
   );
 }
 
-StsDirektverbindungenLayerSwitcher.propTypes = {
+IpvLayerSwitcher.propTypes = {
   onToggle: PropTypes.func,
   row: PropTypes.bool,
 };
 
-StsDirektverbindungenLayerSwitcher.defaultProps = {
+IpvLayerSwitcher.defaultProps = {
   onToggle: () => {},
   row: false,
 };
 
-export default StsDirektverbindungenLayerSwitcher;
+export default IpvLayerSwitcher;

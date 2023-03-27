@@ -110,9 +110,9 @@ function StsTopicMenu() {
       activeMenu === 'sts' ? (
         <StsValidityLayerSwitcher />
       ) : (
-        <IpvLayerSwitcher onToggle={() => dispatch(setFeatureInfo([]))} />
+        <IpvLayerSwitcher />
       ),
-    [activeMenu, dispatch],
+    [activeMenu],
   );
 
   const featureInfos = useMemo(
