@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { unByKey } from 'ol/Observable';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -13,6 +14,11 @@ import usePrevious from '../../utils/usePrevious';
 import DirektverbindungPopup from '../../popups/DirektverbindungPopup';
 import removeDuplicates, { getId } from '../../utils/removeDuplicateFeatures';
 import parseIpvFeatures from '../../utils/ipvParseFeatures';
+import {
+  // IPV_TOPIC_KEY,
+  IPV_DAY_AND_NIGHT_REGEX,
+  IPV_KEY,
+} from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -44,18 +50,11 @@ const useStyles = makeStyles(() => {
         width: '100%',
         height: '10em',
       },
-      // '&::before': {
-      //   content: '""',
-      //   position: 'absolute',
-      //   zIndex: 0,
-      //   transform: 'translateY(-300px)',
-      //   left: 0,
-      //   pointerEvents: 'none',
-      //   backgroundImage:
-      //     'radial-gradient(circle, rgba(210,210,210, 1), rgba(210,210,210,0) 85%)',
-      //   width: '100%',
-      //   height: '30em',
-      // },
+      '& .open': {
+        '& .wkp-menu-item-header-toggler': {
+          transform: 'rotate(180deg)',
+        },
+      },
     },
     titleWrapper: {
       display: 'flex',
@@ -72,6 +71,7 @@ const useStyles = makeStyles(() => {
     },
     featureInfoItem: {
       padding: 15,
+      marginLeft: 24,
     },
     imageLine: {
       '& img': {
@@ -81,7 +81,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function DvTitle({ isNightTrain, title, active }) {
+function IpvTitle({ isNightTrain, title, active }) {
   const classes = useStyles();
   return (
     <div className={classes.titleWrapper}>
@@ -99,7 +99,7 @@ function DvTitle({ isNightTrain, title, active }) {
   );
 }
 
-DvTitle.propTypes = {
+IpvTitle.propTypes = {
   isNightTrain: PropTypes.bool.isRequired,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
   active: PropTypes.bool.isRequired,
@@ -107,6 +107,7 @@ DvTitle.propTypes = {
 
 function IpvFeatureInfo() {
   const featureInfo = useSelector((state) => state.app.featureInfo);
+  const layers = useSelector((state) => state.map.layers);
   const [infoKey, setInfoKey] = useState();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
@@ -114,6 +115,7 @@ function IpvFeatureInfo() {
   const teaserOnClick = useCallback(() => {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);
+  const [revision, forceRender] = useState();
 
   const dvFeatures = useMemo(() => {
     const features = featureInfo.reduce((feats, info) => {
@@ -123,6 +125,14 @@ function IpvFeatureInfo() {
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
     return removeDuplicates(parseIpvFeatures(features));
   }, [featureInfo]);
+  const getVisibleLayerKeys = useCallback(
+    () =>
+      layers
+        .filter((l) => IPV_DAY_AND_NIGHT_REGEX.test(l.key) && l.visible)
+        .map((l) => l.key),
+    [layers],
+  );
+  const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
 
   const previousDvFeatures = usePrevious(dvFeatures);
 
@@ -133,72 +143,108 @@ function IpvFeatureInfo() {
     }
   }, [dvFeatures, previousDvFeatures, infoKey]);
 
+  useEffect(() => {
+    const olKeys =
+      layers?.map((layer) => {
+        return layer?.on('change:visible', (evt) => {
+          forceRender(revision + 1);
+          const { target: targetLayer } = evt;
+          if (IPV_DAY_AND_NIGHT_REGEX.test(targetLayer.key)) {
+            setLayersVisible(getVisibleLayerKeys());
+          }
+        });
+      }) || [];
+    // Force render after first render because visibility of layers is  not yet applied.
+    if (revision === undefined) {
+      forceRender(0);
+      setLayersVisible(getVisibleLayerKeys());
+    }
+    return () => {
+      unByKey(olKeys);
+    };
+  }, [getVisibleLayerKeys, layers, layersVisible, revision]);
+
   if (!dvFeatures?.length) {
     return null;
   }
+
+  // const ipvMainLayer = layers.find((l) => l.key === IPV_TOPIC_KEY);
+  console.log(layersVisible);
 
   return (
     <>
       {dvFeatures?.length ? (
         <div className={classes.featureInfos}>
           {dvFeatures.length > 1 ? (
-            dvFeatures.map((feat) => {
-              const id = getId(feat);
-              const title = feat.get('name');
-              const layer = feat.get('layer');
-              const isNightTrain = feat.get('line') === 'night';
-              const active = infoKey === id;
-              return (
-                <div
-                  key={id}
-                  role="menuitem"
-                  tabIndex={teaser ? '-1' : null}
-                  onClick={teaserOnClick}
-                  onKeyDown={teaserOnClick}
-                  style={{ cursor: teaser ? 'pointer' : 'auto' }}
-                >
-                  <MenuItem
-                    dataId={id}
-                    onCollapseToggle={(open) => {
-                      setInfoKey(open ? null : id);
-                      setTeaser(false);
-                    }}
-                    className={`wkp-gb-topic-menu ${classes.root}${
-                      active && teaser ? ` ${classes.teaser}` : ''
-                    }`}
-                    collapsed={!active}
-                    open={active}
-                    title={
-                      <DvTitle
-                        title={title}
-                        active={active}
-                        isNightTrain={isNightTrain}
-                      />
-                    }
-                    menuHeight={expandedHeight}
+            dvFeatures
+              .filter(
+                (feat) =>
+                  !!layersVisible.find((layerKey) => {
+                    console.log(`${IPV_KEY}.${feat.get('line')}`);
+                    return `${IPV_KEY}.${feat.get('line')}` === layerKey;
+                  }),
+              )
+              .map((feat) => {
+                const id = getId(feat);
+                const title = feat.get('name');
+                const layer = feat.get('layer');
+                const isNightTrain = feat.get('line') === 'night';
+                const active = infoKey === id;
+                return (
+                  <div
+                    key={id}
+                    role="menuitem"
+                    tabIndex={teaser ? '-1' : null}
+                    onClick={teaserOnClick}
+                    onKeyDown={teaserOnClick}
+                    style={{ cursor: teaser ? 'pointer' : 'auto' }}
                   >
-                    <div
-                      className={classes.featureInfoItem}
-                      ref={
-                        active
-                          ? (el) => setExpandedHeight(el?.clientHeight)
-                          : null
+                    <MenuItem
+                      dataId={id}
+                      onCollapseToggle={(open) => {
+                        if (active && teaser) {
+                          setTeaser(false);
+                          return;
+                        }
+                        setInfoKey(open ? null : id);
+                        setTeaser(false);
+                      }}
+                      className={`wkp-ipv-feature-info ${classes.root}${
+                        active && teaser ? ` ${classes.teaser}` : ''
+                      }`}
+                      collapsed={!active}
+                      open={active}
+                      title={
+                        <IpvTitle
+                          title={title}
+                          active={active}
+                          isNightTrain={isNightTrain}
+                        />
                       }
+                      menuHeight={expandedHeight}
                     >
-                      <DirektverbindungPopup
-                        feature={active ? feat : null}
-                        layer={layer}
-                      />
-                    </div>
-                  </MenuItem>
-                  <Divider />
-                </div>
-              );
-            })
+                      <div
+                        className={classes.featureInfoItem}
+                        ref={
+                          active
+                            ? (el) => setExpandedHeight(el?.clientHeight)
+                            : null
+                        }
+                      >
+                        <DirektverbindungPopup
+                          feature={active ? feat : null}
+                          layer={layer}
+                        />
+                      </div>
+                    </MenuItem>
+                    <Divider />
+                  </div>
+                );
+              })
           ) : (
             <>
               <div style={{ padding: 10 }}>
-                <DvTitle
+                <IpvTitle
                   title={dvFeatures[0].get('name')}
                   active
                   isNightTrain={dvFeatures[0].get('line') === 'night'}

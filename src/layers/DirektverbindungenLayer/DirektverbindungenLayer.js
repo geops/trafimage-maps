@@ -1,43 +1,34 @@
 import { GeoJSON } from 'ol/format';
+import { LineString } from 'ol/geom';
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
 
-const IPV_REGEX = /^ipv_(day|night|all)$/;
+const IPV_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
+const IPV_TRIP_REGEX = /^ipv_trip_(day|night|all)$/;
 
 const setFakeFeatProps = (feat) => {
   feat.setProperties({
     ...feat.getProperties(),
-    name: 'Old road to The Shire',
-    start_station_name: 'Minas Tirith, Gondor',
-    end_station_name: 'Bagend, The Shire',
     vias: [
       {
         via_type: 'start',
-        station_name: 'Minas Tirith, Gondor',
+        station_name: feat.getProperties().start_station_name,
         didok: '8501120',
         coordinates: [737947, 5863556],
       },
       ...Array.from(Array(Math.floor(Math.random() * 15))).map((f, idx) => ({
         via_type: 'visible',
-        station_name: `Isengard, Rohan (${idx})`,
+        station_name: `Zwischenhalt ${idx + 1}`,
         didok: '8501125',
         coordinates: [737947, 5863556],
       })),
       {
         via_type: 'end',
-        station_name: 'Bagend, The Shire',
+        station_name: feat.getProperties().end_station_name,
         didok: '8768634',
         coordinates: [264219, 6248583],
       },
     ],
-    description_de: 'This is the path the four hobbits took at the end of LOTR',
-    description_en: 'This is the path the four hobbits took at the end of LOTR',
-    description_it: 'This is the path the four hobbits took at the end of LOTR',
-    description_fr: 'This is the path the four hobbits took at the end of LOTR',
-    url_de: 'https://example.com/',
-    url_en: 'https://example.com/',
-    url_it: 'https://example.com/',
-    url_fr: 'https://example.com/',
   });
   return feat;
 };
@@ -54,25 +45,29 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
       ...options,
-      queryRenderedLayersFilter: (layer) => {
-        return (
-          IPV_REGEX.test(getTrafimageFilter(layer)) &&
-          layer['source-layer'] === 'ch.sbb.direktverbindungen_edges'
-        );
-      },
+      queryRenderedLayersFilter: (layer) =>
+        IPV_TRIP_REGEX.test(getTrafimageFilter(layer)),
       styleLayersFilter: (layer) => {
-        return IPV_REGEX.test(getTrafimageFilter(layer));
+        return IPV_TRIP_REGEX.test(getTrafimageFilter(layer));
       },
+      featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
   }
 
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
+  }
+
+  getIpvFeatures() {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
       const allIpvFeaturesGeoJSON = mbMap.querySourceFeatures(
         'ch.sbb.direktverbindungen',
+        {
+          sourceLayer: 'ch.sbb.direktverbindungen_edges',
+          filter: ['==', '$type', 'LineString'],
+        },
       );
 
       const olFeatures = new GeoJSON().readFeatures({
@@ -85,22 +80,37 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         },
         features: allIpvFeaturesGeoJSON,
       });
-      this.allLines = olFeatures.map(setFakeFeatProps);
+      return olFeatures.map(setFakeFeatProps);
     }
+    // eslint-disable-next-line no-console
+    console.error(`Mapbox map not loaded`);
+    return [];
   }
 
-  getCurrentFilter() {
+  getIpvLayers() {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return null;
+    }
+    const style = mbMap.getStyle();
+    return style?.layers.filter((stylelayer) => {
+      return IPV_REGEX.test(getTrafimageFilter(stylelayer));
+    });
+  }
+
+  /** Returns a string: 'day', 'night' or 'all' */
+  getCurrentLayer() {
     const nightLayer = this.get('nightLayer');
     const dayLayer = this.get('dayLayer');
 
     if (dayLayer?.get('visible') && nightLayer?.get('visible')) {
-      return 'ipv_all';
+      return 'all';
     }
     if (dayLayer?.get('visible') || nightLayer?.get('visible')) {
       const visibleLayer = [dayLayer, nightLayer].find((layer) =>
         layer.get('visible'),
       );
-      return `ipv_${visibleLayer.get('routeType')}`;
+      return visibleLayer.get('routeType');
     }
     return null;
   }
@@ -110,16 +120,14 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return;
     }
-    const style = mbMap.getStyle();
-    const currentFilter = this.getCurrentFilter();
-    const ipvLayers = style?.layers.filter((stylelayer) => {
-      return IPV_REGEX.test(getTrafimageFilter(stylelayer));
-    });
-    ipvLayers.forEach((stylelayer) => {
+    const ipvLayers = this.getIpvLayers();
+    const currentLayer = this.getCurrentLayer();
+    const filterRegex = new RegExp(`^ipv_(trip_)?(${currentLayer})$`);
+    ipvLayers?.forEach((stylelayer) => {
       mbMap.setLayoutProperty(
         stylelayer.id,
         'visibility',
-        getTrafimageFilter(stylelayer) === currentFilter ? 'visible' : 'none',
+        filterRegex.test(getTrafimageFilter(stylelayer)) ? 'visible' : 'none',
       );
     });
   }
@@ -131,83 +139,11 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         // TODO: Hardcoded test data, remove when data is updated
         // eslint-disable-next-line no-param-reassign
         featureInfo.features = featureInfo.features.map((feat) => {
-          feat.setProperties({
-            ...feat.getProperties(),
-            name: 'Old road to The Shire',
-            start_station_name: 'Minas Tirith, Gondor',
-            end_station_name: 'Bagend, The Shire',
-            vias: [
-              {
-                via_type: 'start',
-                station_name: 'Minas Tirith, Gondor',
-                didok: '8501120',
-                coordinates: [737947, 5863556],
-              },
-              ...Array.from(Array(Math.floor(Math.random() * 15))).map(
-                (f, idx) => ({
-                  via_type: 'visible',
-                  station_name: `Isengard, Rohan (${idx})`,
-                  didok: '8501125',
-                  coordinates: [737947, 5863556],
-                }),
-              ),
-              {
-                via_type: 'end',
-                station_name: 'Bagend, The Shire',
-                didok: '8768634',
-                coordinates: [264219, 6248583],
-              },
-            ],
-            description_de:
-              'This is the path the four hobbits took at the end of LOTR',
-            description_en:
-              'This is the path the four hobbits took at the end of LOTR',
-            description_it:
-              'This is the path the four hobbits took at the end of LOTR',
-            description_fr:
-              'This is the path the four hobbits took at the end of LOTR',
-            url_de: 'https://example.com/',
-            url_en: 'https://example.com/',
-            url_it: 'https://example.com/',
-            url_fr: 'https://example.com/',
-          });
+          setFakeFeatProps(feat);
           return feat;
         });
         return featureInfo;
       });
-  }
-
-  select(features = []) {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
-      return;
-    }
-    super.select(features);
-    // if (this.useDvPoints) {
-    //   mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
-    //   if (mbMap) {
-    //     if (this.selectedFeatures.length) {
-    //       this.selectedFeatures.forEach((feature) => {
-    //         mbMap.setFilter(VIAPOINTSLAYER_ID, [
-    //           '==',
-    //           ['get', 'direktverbindung_id'],
-    //           feature.get('id'),
-    //         ]);
-    //       });
-    //       mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
-    //       mbMap.setPaintProperty(
-    //         VIAPOINTSLAYER_ID,
-    //         'circle-stroke-color',
-    //         this.get('routeType') === 'night'
-    //           ? 'rgba(5, 21, 156, 1)'
-    //           : 'rgba(9, 194, 242, 1)',
-    //       );
-    //     } else {
-    //       mbMap.setFilter(VIAPOINTSLAYER_ID, null);
-    //       mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'none');
-    //     }
-    //   }
-    // }
   }
 }
 

@@ -19,6 +19,7 @@ export const TRACK_SHARE_TW_ACTION = 'clickShareTwitter';
 // Direktverbindungen
 export const IPV_KEY = 'ch.sbb.direktverbindungen';
 export const IPV_TOPIC_KEY = 'ch.sbb.ipv';
+export const IPV_DAY_AND_NIGHT_REGEX = new RegExp(`^${IPV_KEY}.(day|night)$`);
 
 // STS
 export const STS_KEY = 'ch.sbb.sts';

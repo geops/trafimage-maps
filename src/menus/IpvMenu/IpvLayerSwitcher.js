@@ -6,13 +6,14 @@ import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';
-import { IPV_KEY } from '../../utils/constants';
-
-const ipvDayNightRegex = new RegExp(`^${IPV_KEY}.(day|night)$`);
+import { IPV_DAY_AND_NIGHT_REGEX } from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
     switchWrapper: {
+      '& .MuiFormControlLabel-label': {
+        fontSize: 16,
+      },
       '& .MuiFormControlLabel-root': {
         minWidth: 140,
       },
@@ -35,7 +36,7 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
   const ipvLayers = useMemo(
     () =>
       layers.filter((layer) => {
-        return ipvDayNightRegex.test(layer.key);
+        return IPV_DAY_AND_NIGHT_REGEX.test(layer.key);
       }),
     [layers],
   );
@@ -52,7 +53,7 @@ function StsDirektverbindungenLayerSwitcher({ onToggle, row }) {
         return layer?.on('change:visible', (evt) => {
           forceRender(revision + 1);
           const { target: targetLayer } = evt;
-          if (ipvDayNightRegex.test(targetLayer.key)) {
+          if (IPV_DAY_AND_NIGHT_REGEX.test(targetLayer.key)) {
             setLayersVisible(getVisibleLayerKeys());
           }
         });

@@ -22,8 +22,10 @@ const useStyles = makeStyles(() => {
     container: {
       backgroundColor: 'white',
       boxSizing: 'border-box',
-      border: (props) => (props.displayMenu ? '2px solid #666' : 'none'),
+      overflow: 'hidden',
+      // border: (props) => (props.displayMenu ? '2px solid #666' : 'none'),
       boxShadow,
+      borderRadius: 8,
     },
     menuContent: {
       backgroundColor: 'white',
