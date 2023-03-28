@@ -1,9 +1,14 @@
+/* eslint-disable no-param-reassign */
 import { GeoJSON } from 'ol/format';
 import { LineString } from 'ol/geom';
+import { unByKey } from 'ol/Observable';
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
-import { getId } from '../../utils/removeDuplicateFeatures';
+import { IPV_KEY } from '../../utils/constants';
 
+const IPV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
+
+const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const IPV_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const IPV_TRIP_REGEX = /^ipv_trip_(day|night|all)$/;
 
@@ -34,7 +39,7 @@ const setFakeFeatProps = (feat) => {
   return feat;
 };
 /**
- * Layer for visualizing station levels.
+ * Layer for visualizing international train connections.
  *
  * @class
  * @param {Object} [options] Layer options.
@@ -53,46 +58,95 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       },
       featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
+    this.allFeatures = [];
   }
 
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
+    this.fetchIpvFeatures();
+    this.viewChangeListener = this.map
+      .getView()
+      .on('change', () => this.syncFeatures());
   }
 
-  getIpvFeatures() {
+  getMapboxFeatures() {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
-      const allIpvFeaturesGeoJSON = mbMap.querySourceFeatures(
-        'ch.sbb.direktverbindungen',
-        {
-          sourceLayer: 'ch.sbb.direktverbindungen_trips',
-          filter: ['==', '$type', 'LineString'],
-        },
-      );
-
-      const olFeatures = new GeoJSON().readFeatures({
-        type: 'FeatureCollection',
-        crs: {
-          type: 'name',
-          properties: {
-            name: 'EPSG:3857',
-          },
-        },
-        features: allIpvFeaturesGeoJSON,
+      const renderedMbFeatures = mbMap.querySourceFeatures(IPV_KEY, {
+        sourceLayer: IPV_TRIPS_SOURCELAYER_ID,
+        filter: ['==', '$type', 'LineString'],
       });
-      olFeatures.forEach((feat) => {
-        setFakeFeatProps(feat);
-        feat.set(
-          'mapboxFeature',
-          allIpvFeaturesGeoJSON.find((mbFeat) => mbFeat.id === getId(feat)),
-        );
+      renderedMbFeatures.forEach((feat) => {
+        feat.source = IPV_KEY;
+        feat.sourceLayer = IPV_TRIPS_SOURCELAYER_ID;
       });
-      return olFeatures;
+      return renderedMbFeatures;
     }
-    // eslint-disable-next-line no-console
-    console.error(`Mapbox map not loaded`);
     return [];
+  }
+
+  syncFeatures() {
+    const mbFeatures = this.getMapboxFeatures();
+    const cartaroFeatIsMissingMbFeat =
+      this.allFeatures?.length &&
+      !!this.allFeatures.find((feat) => feat.get('mapboxFeature'));
+    if (cartaroFeatIsMissingMbFeat && mbFeatures?.length) {
+      this.allFeatures.forEach((feat) => {
+        feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
+        const mbFeature = mbFeatures.find((mbFeat) => {
+          return mbFeat?.properties?.name === feat?.get('name');
+        });
+        if (!feat.get('mapboxFeature')) {
+          feat.set('mapboxFeature', mbFeature);
+        }
+        feat.setId(mbFeature?.properties?.id);
+        feat.setProperties({
+          ...feat.getProperties(),
+          ...mbFeature?.properties,
+        });
+      });
+    }
+    this.dispatchEvent({
+      type: 'load:features',
+      features: this.allFeatures,
+      target: this,
+    });
+  }
+
+  async fetchIpvFeatures() {
+    await fetch(`${cartaroURL}/direktverbindungen/items/`)
+      .then((res) => res.json())
+      .then((data) => {
+        const features = new GeoJSON().readFeatures(data);
+        const { mbMap } = this.mapboxLayer;
+        if (mbMap) {
+          const ipvRenderedMbFeatures = mbMap.querySourceFeatures(IPV_KEY, {
+            sourceLayer: IPV_TRIPS_SOURCELAYER_ID,
+            filter: ['==', '$type', 'LineString'],
+          });
+          ipvRenderedMbFeatures.forEach((feat) => {
+            feat.source = IPV_KEY;
+            feat.sourceLayer = IPV_TRIPS_SOURCELAYER_ID;
+          });
+          features.forEach((feat) => {
+            const mbFeature = ipvRenderedMbFeatures.find(
+              (mbFeat) => mbFeat?.properties?.name === feat?.get('name'),
+            );
+            feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
+            feat.set('mapboxFeature', mbFeature);
+            feat.setId(mbFeature?.properties?.id);
+            feat.setProperties({
+              ...feat.getProperties(),
+              ...mbFeature?.properties,
+            });
+          });
+          this.allFeatures = features;
+          this.syncFeatures();
+        }
+      })
+      // eslint-disable-next-line no-console
+      .catch((err) => console.error(err));
   }
 
   getIpvLayers() {
@@ -123,8 +177,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     return null;
   }
 
-  select(features) {
-    super.select(features);
+  detachFromMap() {
+    super.detachFromMap();
+    unByKey(this.viewChangeListener);
   }
 
   onChangeVisible() {

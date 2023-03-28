@@ -3,12 +3,14 @@ import { unByKey } from 'ol/Observable';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
-import MenuItem from '../Menu/MenuItem';
-import usePrevious from '../../utils/usePrevious';
-import DirektverbindungPopup from '../../popups/DirektverbindungPopup';
-import removeDuplicates, { getId } from '../../utils/removeDuplicateFeatures';
-import parseIpvFeatures from '../../utils/ipvParseFeatures';
-import { IPV_DAY_NIGHT_REGEX, IPV_KEY } from '../../utils/constants';
+import MenuItem from '../../../components/Menu/MenuItem';
+import usePrevious from '../../../utils/usePrevious';
+import DirektverbindungPopup from '../../../popups/DirektverbindungPopup';
+import removeDuplicates, {
+  getId,
+} from '../../../utils/removeDuplicateFeatures';
+import parseIpvFeatures from '../../../utils/ipvParseFeatures';
+import { IPV_DAY_NIGHT_REGEX, IPV_KEY } from '../../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -238,7 +240,12 @@ function IpvFeatureInfo() {
                       className={classes.featureInfoItem}
                       ref={
                         active
-                          ? (el) => setExpandedHeight(el?.clientHeight)
+                          ? (el) =>
+                              setExpandedHeight(
+                                el?.clientHeight
+                                  ? el?.clientHeight + 10
+                                  : undefined,
+                              )
                           : null
                       }
                     >

@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core';
-import IpvFeatureInfo from '../../components/IpvFeatureInfo';
+import IpvFeatureInfo from '../../config/ch.sbb.ipv/IpvFeatureInfo';
 import IpvLayerSwitcher from './IpvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';

@@ -1,31 +1,55 @@
-import React from 'react';
-import ListIcon from '@material-ui/icons/List';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { unByKey } from 'ol/Observable';
 import MapButton from '../../../components/MapButton';
 import { setFeatureInfo } from '../../../model/app/actions';
 import { IPV_TOPIC_KEY } from '../../../utils/constants';
+import { ReactComponent as List } from '../../../img/list-icon-sbb.svg';
 
 const IpvListButton = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const layers = useSelector((state) => state.map.layers);
-  const ipvMainLayer = layers.find((l) => l.key === IPV_TOPIC_KEY);
+  const map = useSelector((state) => state.app.map);
+  const featureInfo = useSelector((state) => state.app.featureInfo);
+  const ipvMainLayer = useMemo(
+    () => layers.find((l) => l.key === IPV_TOPIC_KEY),
+    [layers],
+  );
+  const [features, setFeatures] = useState([]);
+
+  useEffect(() => {
+    const loadFeatsListener = ipvMainLayer.on('load:features', (evt) => {
+      setFeatures(evt.features);
+    });
+    return () => {
+      unByKey(loadFeatsListener);
+    };
+  }, [ipvMainLayer, map]);
+
   return (
     <MapButton
       title={t('Alle Direktverbindungen anzeigen')}
-      onClick={() =>
+      disabled={!features?.length}
+      style={{ padding: 8 }}
+      onClick={() => {
+        if (!features?.length) return;
         dispatch(
-          setFeatureInfo([
-            {
-              features: ipvMainLayer.getIpvFeatures(),
-              layer: ipvMainLayer,
-            },
-          ]),
-        )
-      }
+          setFeatureInfo(
+            !featureInfo?.length || featureInfo[0]?.features !== features
+              ? [
+                  {
+                    features,
+                    layer: ipvMainLayer,
+                  },
+                ]
+              : [],
+          ),
+        );
+      }}
     >
-      <ListIcon />
+      <List />
     </MapButton>
   );
 };

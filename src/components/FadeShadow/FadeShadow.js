@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => {
         transform: 'translateY(-330px)',
         left: 0,
         backgroundImage:
-          'radial-gradient(circle, rgba(220,220,220, 1), rgba(220,220,220,0) 85%)',
+          'radial-gradient(circle, rgba(220,220,220, 1), rgba(220,220,220,0) 75%)',
         width: '100%',
         height: '30em',
       },

@@ -14,6 +14,13 @@ const StyledIconButton = withStyles(() => ({
       boxShadow: '0 0 12px 2px rgba(0, 0, 0, 0.9)',
       backgroundColor: 'white',
     },
+    '&:disabled': {
+      boxShadow: '0 0 7px 2px rgba(0, 0, 0, 0.4)',
+      backgroundColor: 'white',
+      '& svg': {
+        opacity: 0.4,
+      },
+    },
   },
 }))(IconButton);
 

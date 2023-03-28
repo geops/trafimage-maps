@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { containsExtent } from 'ol/extent';
 import Feature from 'ol/Feature';
 import Link from '../../components/Link';
 
@@ -108,12 +110,56 @@ const DVPopupTitle = ({ feature }) => {
 
 const DirektverbindungPopup = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
+  const map = useSelector((state) => state.app.map);
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+  const topic = useSelector((state) => state.app.activeTopic);
+  const isMobile = useMemo(() => {
+    return ['xs'].includes(screenWidth);
+  }, [screenWidth]);
+  const isEmbeddedTopic = useMemo(() => {
+    return /-iframe$/.test(topic.key);
+  }, [topic]);
   const classes = useStyles();
 
   useEffect(() => {
     if (layer.visible) {
       if (feature) {
         layer.select([feature]);
+        const cartaroFeature = layer.allFeatures.find(
+          (feat) => feat.get('name') === feature.get('name'),
+        );
+        if (cartaroFeature) {
+          /** Zoom on feature
+           * We get the full geometry from the cartaro feature,
+           * since the feature from the map clips the feature at the viewport edges
+           */
+          const geom = cartaroFeature.getGeometry();
+          const view = map.getView();
+          const extent = view.calculateExtent();
+          let padding = [100, 100, 400, 100];
+          if (!isMobile) {
+            if (isEmbeddedTopic) {
+              extent[0] += (extent[0] + extent[2]) / 4;
+              padding = [100, 100, 100, 500];
+            } else {
+              extent[2] += (extent[0] + extent[2]) / 4;
+              padding = [100, 500, 100, 100];
+            }
+          }
+          if (isMobile) {
+            // Bottom padding when overlay slides in from bottom
+            padding = [100, 100, 400, 100];
+          }
+          if (!containsExtent(extent, geom.getExtent())) {
+            view.fit(geom.getExtent(), {
+              size: map.getSize(),
+              duration: 1000,
+              padding,
+              minResolution: view.getResolutionForZoom(6),
+              callback: () => layer.select([feature]),
+            });
+          }
+        }
       } else {
         layer.select();
       }
@@ -121,7 +167,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     }
     // eslint-disable-next-line consistent-return
     return () => layer.select();
-  }, [layer, feature]);
+  }, [layer, feature, map, isMobile, isEmbeddedTopic]);
 
   if (!feature) {
     return null;

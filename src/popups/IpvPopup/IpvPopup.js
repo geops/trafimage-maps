@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
-import IpvFeatureInfo from '../../components/IpvFeatureInfo';
+import IpvFeatureInfo from '../../config/ch.sbb.ipv/IpvFeatureInfo';
 
 const useStyles = makeStyles({
   container: {
