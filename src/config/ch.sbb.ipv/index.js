@@ -68,8 +68,11 @@ export const ipvDay = new Layer({
   visible: true,
   properties: {
     routeType: 'day',
+    color: 'rgb(247, 181, 0)',
     hasInfos: true,
     layerInfoComponent: 'IpvTagLayerInfo',
+    dataLink:
+      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
   },
 });
 
@@ -80,8 +83,11 @@ export const ipvNight = new Layer({
   visible: true,
   properties: {
     routeType: 'night',
+    color: 'rgb(0, 110, 179)',
     hasInfos: true,
     layerInfoComponent: 'IpvNachtLayerInfo',
+    dataLink:
+      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
   },
 });
 
@@ -98,8 +104,6 @@ export const ipvMainLayer = new DirektverbindungenLayer({
     popupComponent: 'IpvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
-    dataLink:
-      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
   },
 });
 

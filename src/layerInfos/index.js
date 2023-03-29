@@ -24,9 +24,6 @@ import NetzentwicklungLayerInfo from './NetzentwicklungLayerInfo';
 import BeleuchtungTopicInfo from './BeleuchtungTopicInfo';
 import BeleuchtungLayerInfo from './BeleuchtungLayerInfo';
 import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
-import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
-import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
-import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
 import EnergieLayerInfo from './EnergieLayerInfo';
 import EnergieTopicInfo from './EnergieTopicInfo';
 import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
@@ -64,9 +61,6 @@ export { default as NetzentwicklungLayerInfo } from './NetzentwicklungLayerInfo'
 export { default as BeleuchtungTopicInfo } from './BeleuchtungTopicInfo';
 export { default as BeleuchtungLayerInfo } from './BeleuchtungLayerInfo';
 export { default as MapsGeoAdminLayerInfo } from './MapsGeoAdminLayerInfo';
-export { default as DirektVerbindungenLayerInfo } from './DirektVerbindungenLayerInfo';
-export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenTagLayerInfo';
-export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
 export { default as EnergieTopicInfo } from './EnergieTopicInfo';
 export { default as EnergiePublicTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
@@ -85,9 +79,6 @@ export default {
   ConstructionLayerInfo,
   ConstructionTopicInfo,
   ConstructionFertigstellungLayerInfo,
-  DirektVerbindungenLayerInfo,
-  DirektVerbindungenNachtLayerInfo,
-  DirektVerbindungenTagLayerInfo,
   DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,

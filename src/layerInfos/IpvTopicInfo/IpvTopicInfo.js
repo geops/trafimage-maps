@@ -1,59 +1,51 @@
 import React from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-// import PropTypes from 'prop-types';
-// import { Layer } from 'mobility-toolbox-js/ol';
-// import DataLink from '../../components/DataLink';
+import { ipvDay, ipvNight } from '../../config/ch.sbb.ipv';
+import DataLink from '../../components/DataLink';
 
-// const useStyles = makeStyles({
-//   legendItem: {
-//     margin: '10px 0',
-//     display: 'flex',
-//     alignItems: 'center',
-//   },
-//   itemColor: {
-//     width: 30,
-//     height: 20,
-//     margin: 5,
-//     marginLeft: 0,
-//     border: '1px solid #767676',
-//   },
-// });
-
-// const propTypes = {
-//   properties: PropTypes.instanceOf(Layer).isRequired,
-// };
-
-// const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
-//   const { t, i18n } = useTranslation();
-//   const classes = useStyles();
-//   const legend = layer.children.reverse().map((child) => (
-//     <div className={classes.legendItem} key={child.key}>
-//       <div
-//         className={classes.itemColor}
-//         style={{ backgroundColor: child.get('color') }}
-//       />
-//       <div>{t(child.name)}</div>
-//     </div>
-//   ));
-
-//   const dataLink = layer.get('dataLink') && (
-//     <>
-//       <hr />
-//       <p style={{ marginBottom: 0 }}>
-//         <DataLink layer={layer} />
-//       </p>
-//       <p>
-//         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
-//           {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
-//         </DataLink>
-//       </p>
-//     </>
-//   );
+const useStyles = makeStyles({
+  legendItem: {
+    margin: '10px 0',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  itemColor: {
+    width: 30,
+    height: 20,
+    margin: 5,
+    marginLeft: 0,
+    border: '1px solid #767676',
+  },
+});
 
 const IpvTopicInfo = () => {
-  const { i18n } = useTranslation();
-  const legend = <div>IPV legend</div>;
+  const { t, i18n } = useTranslation();
+  const classes = useStyles();
+  const legend = [ipvDay, ipvNight].map((layer) => (
+    <div className={classes.legendItem} key={layer.key}>
+      <div
+        className={classes.itemColor}
+        style={{
+          backgroundColor: layer.get('color'),
+        }}
+      />
+      <div>{t(layer.name)}</div>
+    </div>
+  ));
+  const dataLink = ipvDay.get('dataLink') && (
+    <>
+      <hr />
+      <p style={{ marginBottom: 0 }}>
+        <DataLink layer={ipvDay} />
+      </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+        </DataLink>
+      </p>
+    </>
+  );
   return (
     <>
       {i18n.language === 'de' && (
@@ -73,7 +65,7 @@ const IpvTopicInfo = () => {
             <br />
             Internationaler Personenverkehr, SBB AG
           </p>
-          {/* {dataLink} */}
+          {dataLink}
         </div>
       )}
       {i18n.language === 'fr' && (
@@ -94,7 +86,7 @@ const IpvTopicInfo = () => {
             <br />
             Trafic voyageurs international, CFF SA
           </p>
-          {/* {dataLink} */}
+          {dataLink}
         </div>
       )}
       {i18n.language === 'en' && (
@@ -113,7 +105,7 @@ const IpvTopicInfo = () => {
             <br />
             International Passenger Traffic, SBB
           </p>
-          {/* {dataLink} */}
+          {dataLink}
         </div>
       )}
       {i18n.language === 'it' && (
@@ -134,13 +126,11 @@ const IpvTopicInfo = () => {
             <br />
             Traffico passeggeri internazionale, FFS
           </p>
-          {/* {dataLink} */}
+          {dataLink}
         </div>
       )}
     </>
   );
 };
-
-// DirektVerbindungenLayerInfo.propTypes = propTypes;
 
 export default React.memo(IpvTopicInfo);
