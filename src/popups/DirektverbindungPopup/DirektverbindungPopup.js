@@ -128,7 +128,6 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     let featureChangeListener;
     if (layer.visible) {
       if (feature) {
-        const view = map.getView();
         layer.select([feature]);
         const cartaroFeature = layer.allFeatures.find(
           (feat) => feat.get('name') === feature.get('name'),
@@ -138,6 +137,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
            * We get the full geometry from the cartaro feature,
            * since the feature from the map clips the feature at the viewport edges
            */
+          const view = map.getView();
           const geom = cartaroFeature.getGeometry();
           const extent = view.calculateExtent();
           let padding = [100, 100, 400, 100]; // Bottom padding for feature centering on mobile
@@ -170,7 +170,10 @@ const DirektverbindungPopup = ({ feature, layer }) => {
                 duration: 500,
                 padding,
                 callback: () => layer.select([feature]),
-                minResolution: isMobile && view.getResolutionForZoom(6),
+                minResolution: isMobile
+                  ? view.getResolutionForZoom(6)
+                  : undefined,
+                maxZoom: view.getZoom(), // Prevent zooming in
               },
             );
           }
