@@ -5,7 +5,9 @@ import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { containsExtent } from 'ol/extent';
+import { Point } from 'ol/geom';
 import Feature from 'ol/Feature';
+import { unByKey } from 'ol/Observable';
 import Link from '../../components/Link';
 
 const useStyles = makeStyles({
@@ -113,17 +115,20 @@ const DirektverbindungPopup = ({ feature, layer }) => {
   const map = useSelector((state) => state.app.map);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const topic = useSelector((state) => state.app.activeTopic);
+  const layers = useSelector((state) => state.map.layers);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const isEmbeddedTopic = useMemo(() => {
-    return /-iframe$/.test(topic.key);
+    return /(-iframe|\.sts)$/.test(topic.key);
   }, [topic]);
   const classes = useStyles();
 
   useEffect(() => {
+    let featureChangeListener;
     if (layer.visible) {
       if (feature) {
+        const view = map.getView();
         layer.select([feature]);
         const cartaroFeature = layer.allFeatures.find(
           (feat) => feat.get('name') === feature.get('name'),
@@ -134,30 +139,40 @@ const DirektverbindungPopup = ({ feature, layer }) => {
            * since the feature from the map clips the feature at the viewport edges
            */
           const geom = cartaroFeature.getGeometry();
-          const view = map.getView();
           const extent = view.calculateExtent();
-          let padding = [100, 100, 400, 100];
+          let padding = [100, 100, 400, 100]; // Bottom padding for feature centering on mobile
           if (!isMobile) {
             if (isEmbeddedTopic) {
+              // Left padding for feature centering on desktop embedded (left menu)
               extent[0] += (extent[0] + extent[2]) / 4;
               padding = [100, 100, 100, 500];
             } else {
-              extent[2] += (extent[0] + extent[2]) / 4;
+              // Right padding for feature centering on desktop (right overlay)
+              extent[2] -= (extent[0] + extent[2]) / 4;
               padding = [100, 500, 100, 100];
             }
-          }
-          if (isMobile) {
+          } else {
             // Bottom padding when overlay slides in from bottom
-            padding = [100, 100, 400, 100];
+            extent[1] += (extent[3] - extent[1]) / 3;
+            padding = [100, 100, 200, 100];
           }
-          if (!containsExtent(extent, geom.getExtent())) {
-            view.fit(geom.getExtent(), {
-              size: map.getSize(),
-              duration: 1000,
-              padding,
-              minResolution: view.getResolutionForZoom(6),
-              callback: () => layer.select([feature]),
-            });
+
+          if (
+            !view.getAnimating() &&
+            !containsExtent(extent, geom.getExtent())
+          ) {
+            view.cancelAnimations();
+            // We fit the feature to the view, on mobile we fit the cenroid and set a min resolution
+            // to prevent smaller zoom levels from hiding the IPV features (only visible at zoom > 6)
+            view.fit(
+              isMobile ? new Point(geom.getFlatMidpoints()) : geom.getExtent(),
+              {
+                duration: 500,
+                padding,
+                callback: () => layer.select([feature]),
+                minResolution: isMobile && view.getResolutionForZoom(6),
+              },
+            );
           }
         }
       } else {
@@ -166,8 +181,11 @@ const DirektverbindungPopup = ({ feature, layer }) => {
       return;
     }
     // eslint-disable-next-line consistent-return
-    return () => layer.select();
-  }, [layer, feature, map, isMobile, isEmbeddedTopic]);
+    return () => {
+      layer.select();
+      unByKey(featureChangeListener);
+    };
+  }, [layer, feature, map, isMobile, isEmbeddedTopic, layers]);
 
   if (!feature) {
     return null;

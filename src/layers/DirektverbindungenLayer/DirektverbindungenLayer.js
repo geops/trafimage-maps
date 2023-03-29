@@ -90,7 +90,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     const mbFeatures = this.getMapboxFeatures();
     const cartaroFeatIsMissingMbFeat =
       this.allFeatures?.length &&
-      !!this.allFeatures.find((feat) => feat.get('mapboxFeature'));
+      !this.allFeatures.every((feat) => feat.get('mapboxFeature'));
     if (cartaroFeatIsMissingMbFeat && mbFeatures?.length) {
       this.allFeatures.forEach((feat) => {
         feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
@@ -112,6 +112,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       features: this.allFeatures,
       target: this,
     });
+    return this.allFeatures;
   }
 
   async fetchIpvFeatures() {

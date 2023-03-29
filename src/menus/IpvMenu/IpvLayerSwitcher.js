@@ -74,9 +74,18 @@ function IpvLayerSwitcher({ onToggle, row }) {
   }, [layers, revision, getVisibleLayerKeys]);
 
   useEffect(() => {
-    // If featureInfos but both layers are deactivated we remove the featureInfos from store
-    if (featureInfo.length && !layersVisible?.length) {
-      dispatch(setFeatureInfo([]));
+    // If the switcher configuration filters out all features from list
+    // (e.g. when both layers are deactivated) we remove the featureInfo
+    if (featureInfo.length) {
+      if (
+        !layersVisible?.length ||
+        (layersVisible.length === 1 &&
+          !featureInfo[0].features.some(
+            (feat) => feat.get('line') === layersVisible[0].split('.').pop(),
+          ))
+      ) {
+        dispatch(setFeatureInfo([]));
+      }
     }
   }, [dispatch, featureInfo, layersVisible]);
 

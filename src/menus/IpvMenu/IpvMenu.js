@@ -59,7 +59,7 @@ function IpvMenu() {
         <>
           {showSwitcher && isMobile ? switcher : null}
           {showSwitcher ? <FadeShadow /> : null}
-          <IpvFeatureInfo hasTopShadow={showSwitcher} />
+          <IpvFeatureInfo hasTopShadow={showSwitcher} filterByType />
         </>
       }
     />

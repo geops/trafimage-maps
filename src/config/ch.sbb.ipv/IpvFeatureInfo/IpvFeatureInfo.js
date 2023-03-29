@@ -99,7 +99,7 @@ IpvTitle.propTypes = {
   active: PropTypes.bool.isRequired,
 };
 
-function IpvFeatureInfo() {
+function IpvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const [infoKey, setInfoKey] = useState();
@@ -126,13 +126,17 @@ function IpvFeatureInfo() {
       return [...feats, ...info.features];
     }, []);
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
-    return removeDuplicates(parseIpvFeatures(features)).filter(
-      (feat) =>
-        !!layersVisible.find((layerKey) => {
-          return `${IPV_KEY}.${feat.get('line')}` === layerKey;
-        }),
-    );
-  }, [featureInfo, layersVisible]);
+    const cleaned = removeDuplicates(parseIpvFeatures(features));
+    return filterByType
+      ? cleaned.filter(
+          (feat) =>
+            !!layersVisible.find((layerKey) => {
+              return `${IPV_KEY}.${feat.get('line')}` === layerKey;
+            }),
+        )
+      : cleaned;
+  }, [featureInfo, layersVisible, filterByType]);
+
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
   const previousInfoKey = usePrevious(infoKey);
@@ -281,5 +285,13 @@ function IpvFeatureInfo() {
     </>
   );
 }
+
+IpvFeatureInfo.propTypes = {
+  filterByType: PropTypes.bool,
+};
+
+IpvFeatureInfo.defaultProps = {
+  filterByType: false,
+};
 
 export default IpvFeatureInfo;

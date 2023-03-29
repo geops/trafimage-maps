@@ -120,7 +120,7 @@ function StsTopicMenu() {
       activeMenu === 'sts' ? (
         <StsValidityFeatureInfo menuOpen={!featureInfo} />
       ) : (
-        <IpvFeatureInfo />
+        <IpvFeatureInfo filterByType />
       ),
     [activeMenu, featureInfo],
   );
