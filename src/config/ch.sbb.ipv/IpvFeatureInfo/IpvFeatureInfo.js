@@ -132,7 +132,7 @@ function IpvFeatureInfo({ filterByType }) {
           (feat) =>
             !!layersVisible.find((layerKey) => {
               return `${IPV_KEY}.${feat.get('line')}` === layerKey;
-            }),
+            }) && !!feat.get('mapboxFeature'),
         )
       : cleaned;
   }, [featureInfo, layersVisible, filterByType]);
