@@ -21,7 +21,11 @@ All notable changes to this project will be documented in this file. See [standa
 - **ISB:** add open data link in topic info ([#1070](https://github.com/geops/trafimage-maps/issues/1070)) ([ace822e](https://github.com/geops/trafimage-maps/commit/ace822ed60f079fe270b638efa2d4afda96b29cf))
 - **Regionenkarte Public:** prevent permalink parameters from using private roles in popup ([#1071](https://github.com/geops/trafimage-maps/issues/1071)) ([6daaf9e](https://github.com/geops/trafimage-maps/commit/6daaf9ec0df47ae5649ebecfa9377b06a9104cdb))
 
-### [1.19.2](https://github.com/geops/trafimage-maps/compare/v1.19.2-beta.0...v1.19.2) (2023-03-02)
+### [1.19.2](https://github.com/geops/trafimage-maps/compare/v1.19.1...v1.19.2) (2023-03-02)
+
+### Bug Fixes
+
+- prevent js error when no topics are defined
 
 ### [1.19.1](https://github.com/geops/trafimage-maps/compare/v1.19.0...v1.19.1) (2023-03-02)
 
@@ -54,7 +58,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- manage bold text in layer name and in geleutngsbereiche menu ([#1060](https://github.com/geops/trafimage-maps/issues/1060)) ([ccb0619](https://github.com/geops/trafimage-maps/commit/ccb0619344062492c7442620e57d24f4a8511f5e))
+- manage bold text in layer name and in geltungsbereiche menu ([#1060](https://github.com/geops/trafimage-maps/issues/1060)) ([ccb0619](https://github.com/geops/trafimage-maps/commit/ccb0619344062492c7442620e57d24f4a8511f5e))
 
 ### [1.18.12](https://github.com/geops/trafimage-maps/compare/v1.18.11...v1.18.12) (2023-01-13)
 

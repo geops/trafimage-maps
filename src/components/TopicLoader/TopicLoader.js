@@ -405,11 +405,12 @@ class TopicLoader extends PureComponent {
 
       // Realtime layers
       if (flatLayers[i].api?.wsApi) {
-        if (realtimeKey) {
-          flatLayers[i].api.apiKey = realtimeKey;
-        }
         if (realtimeUrl) {
-          flatLayers[i].api.url = realtimeUrl;
+          let newUrl = realtimeUrl;
+          if (realtimeKey) {
+            newUrl = `${newUrl}?key=${realtimeKey}`;
+          }
+          flatLayers[i].api.url = newUrl;
         }
       }
     }
