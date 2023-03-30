@@ -53,12 +53,6 @@ function IpvLayerSwitcher({ onToggle, row }) {
     [ipvLayers],
   );
   const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
-  // const onSwitchChange = useCallback((layer) => {
-  //   layer.visible = !layer.visible;
-  //   if (layersVisible?.length === 1 && !getVisibleLayerKeys().length) {
-  //     const otherLayer
-  //   }
-  // }, [layersVisible]);
 
   // Force render when visibility changes
   useEffect(() => {
@@ -117,9 +111,9 @@ function IpvLayerSwitcher({ onToggle, row }) {
                 key={layer.key}
                 value={layer.key}
                 disabled={layer.visible && layersVisible?.length === 1}
+                data-testid={`ipv-layerswitcher-${layer.key}`}
                 onChange={() => {
                   layer.visible = !layer.visible;
-                  // onSwitchChange(layer);
                   onToggle(layer);
                 }}
               />

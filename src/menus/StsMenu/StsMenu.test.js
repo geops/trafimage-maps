@@ -8,7 +8,7 @@ import StsMenu from './StsMenu';
 import { sts } from '../../config/topics';
 import stsLayers from '../../config/ch.sbb.sts';
 
-describe('GeltungsbereicheTopicMenu', () => {
+describe('StsMenu', () => {
   const mockStore = configureStore([thunk]);
   let store;
 

@@ -19,12 +19,12 @@ const useStyles = makeStyles(() => {
 
 function IpvMenu() {
   const dispatch = useDispatch();
+  const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
-  const classes = useStyles({ isMobile });
 
   const urlSearch = useMemo(
     () => new URLSearchParams(window.location.search),
@@ -51,9 +51,10 @@ function IpvMenu() {
   useEffect(() => {
     // Hide menu and zoom buttons on mobile
     dispatch(setDisplayMenu(!isMobile));
-    document.getElementById(WKP_ZOOM_ELEMENT_ID).style.display = isMobile
-      ? 'none'
-      : 'block';
+    const zoomControls = document.getElementById(WKP_ZOOM_ELEMENT_ID);
+    if (zoomControls) {
+      zoomControls.style.display = isMobile ? 'none' : 'block';
+    }
   }, [isMobile, dispatch]);
 
   return (

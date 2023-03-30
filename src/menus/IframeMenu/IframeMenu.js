@@ -23,7 +23,6 @@ const useStyles = makeStyles(() => {
       backgroundColor: 'white',
       boxSizing: 'border-box',
       overflow: 'hidden',
-      // border: (props) => (props.displayMenu ? '2px solid #666' : 'none'),,
       boxShadow: (props) => (props.displayMenu ? boxShadow : null),
       borderRadius: 8,
     },
