@@ -9,8 +9,10 @@ import { IPV_KEY } from '../../utils/constants';
 const IPV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
 
 const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
-const IPV_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
-const IPV_TRIP_REGEX = /^ipv_trip_(day|night|all)$/;
+const IPV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
+const IPV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
+const IPV_STATION_CALL_LAYERID_REGEX =
+  /^dv(d|n)?_call(_(border|bg|border|displace|label))?/;
 
 const setFakeFeatProps = (feat) => {
   feat.setProperties({
@@ -52,9 +54,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super({
       ...options,
       queryRenderedLayersFilter: (layer) =>
-        IPV_TRIP_REGEX.test(getTrafimageFilter(layer)),
+        IPV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)),
       styleLayersFilter: (layer) => {
-        return IPV_TRIP_REGEX.test(getTrafimageFilter(layer));
+        return IPV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer));
       },
       featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
@@ -157,7 +159,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     }
     const style = mbMap.getStyle();
     return style?.layers.filter((stylelayer) => {
-      return IPV_REGEX.test(getTrafimageFilter(stylelayer));
+      return IPV_FILTER_REGEX.test(getTrafimageFilter(stylelayer));
     });
   }
 
@@ -215,6 +217,54 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         });
         return featureInfo;
       });
+  }
+
+  select(features = []) {
+    super.select(features);
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
+    }
+
+    // Highlight stations and station labels on select
+    this.getIpvLayers().forEach((layer) => {
+      if (!IPV_STATION_CALL_LAYERID_REGEX.test(layer.id)) {
+        return;
+      }
+
+      const idFilterExpression = ['get', 'direktverbindung_id'];
+      if (this.selectedFeatures.length) {
+        const regex = new RegExp(
+          `${IPV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
+        );
+        mbMap.setLayoutProperty(
+          layer.id,
+          'visibility',
+          regex.test(layer.id) ? 'visible' : 'none',
+        );
+        this.selectedFeatures.forEach((feature) => {
+          // Add feature id filter
+          const featureIdFilter = [
+            ...mbMap.getFilter(layer.id),
+            ['==', idFilterExpression, feature.get('id')],
+          ];
+          mbMap.setFilter(layer.id, featureIdFilter);
+        });
+      } else {
+        // Reset filter to original state
+        const originalFilter = mbMap
+          .getFilter(layer.id)
+          ?.filter(
+            (item) =>
+              !(
+                Array.isArray(item) &&
+                item[1].toString() === idFilterExpression.toString()
+              ),
+          );
+        mbMap.setFilter(layer.id, originalFilter);
+        mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
+      }
+    });
   }
 }
 

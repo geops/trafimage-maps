@@ -16,10 +16,15 @@ const useStyles = makeStyles(() => {
         fontSize: 16,
       },
       '& .MuiFormControlLabel-root': {
-        minWidth: 140,
+        minWidth: 155,
       },
       '& .MuiSwitch-switchBase': {
         top: (props) => (props.isMobile && props.row ? 4 : 0),
+      },
+      '& .Mui-disabled': {
+        '& .MuiSwitch-root': {
+          opacity: 0.6,
+        },
       },
     },
   };
@@ -48,6 +53,12 @@ function IpvLayerSwitcher({ onToggle, row }) {
     [ipvLayers],
   );
   const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
+  // const onSwitchChange = useCallback((layer) => {
+  //   layer.visible = !layer.visible;
+  //   if (layersVisible?.length === 1 && !getVisibleLayerKeys().length) {
+  //     const otherLayer
+  //   }
+  // }, [layersVisible]);
 
   // Force render when visibility changes
   useEffect(() => {
@@ -99,14 +110,16 @@ function IpvLayerSwitcher({ onToggle, row }) {
         return (
           <FormControlLabel
             key={layer.key}
-            label={layer.visible ? <b>{t(layer.name)}</b> : t(layer.name)}
+            label={t(layer.name)}
             checked={layersVisible.includes(layer.key)}
             control={
               <SBBSwitch
                 key={layer.key}
                 value={layer.key}
+                disabled={layer.visible && layersVisible?.length === 1}
                 onChange={() => {
                   layer.visible = !layer.visible;
+                  // onSwitchChange(layer);
                   onToggle(layer);
                 }}
               />

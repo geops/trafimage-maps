@@ -9,16 +9,19 @@ const useStyles = makeStyles(() => {
       width: '100%',
       height: 80,
       pointerEvents: 'none',
-      '&::before': {
+      '&::after': {
         content: '""',
         position: 'absolute',
-        zIndex: 1,
-        transform: 'translateY(-330px)',
         left: 0,
-        backgroundImage:
-          'radial-gradient(circle, rgba(220,220,220, 1), rgba(220,220,220,0) 75%)',
-        width: '100%',
-        height: '30em',
+        right: 0,
+        top: -20,
+        bottom: 0,
+        zIndex: 1,
+        height: 20,
+        background: '#18191B',
+        opacity: 0.2,
+        borderRadius: '600px / 50px',
+        filter: 'blur(15px)',
       },
     },
   };
