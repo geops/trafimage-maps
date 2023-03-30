@@ -235,6 +235,7 @@
   "ch.sbb.infrastruktur.uebrigebahnen.group-desc": "This layer group comprises the operating points and routes of infrastructure operated by other railway companies.",
   "ch.sbb.ipv": "Direct trains to Europe",
   "ch.sbb.ipv.day": "Day train",
+  "ch.sbb.ipv.main": "Direct trains to Europe",
   "ch.sbb.ipv.night": "Night train",
   "ch.sbb.ipv.topic": "Direct trains to Europe",
   "ch.sbb.isb": "Infrastructure operators",

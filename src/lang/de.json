@@ -229,6 +229,7 @@
   "ch.sbb.intervention-desc": "Auf der Informationskarte der Intervention werden die Haupt- und Aussenstandorte sowie die Zugehörigkeit der Betriebspunkte je Standort abgebildet. An den Haupt- und Nebenstandorten werden zusätzlich die wichtigsten Eckdaten zur Erreichbarkeit, Personal und Material abgebildet.",
   "ch.sbb.ipv": "Direktverbindungen nach Europa",
   "ch.sbb.ipv.day": "Tagverbindung",
+  "ch.sbb.ipv.main": "Direktverbindungen nach Europa",
   "ch.sbb.ipv.night": "Nachtverbindung",
   "ch.sbb.ipv.topic": "Direktverbindungen nach Europa",
   "ch.sbb.isb": "Infrastrukturbetreiberinnen",

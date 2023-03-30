@@ -24,7 +24,7 @@ const IpvListButton = () => {
   const map = useSelector((state) => state.app.map);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const ipvMainLayer = useMemo(
-    () => layers.find((l) => l.key === `${IPV_TOPIC_KEY}.mainlayer`),
+    () => layers.find((l) => l.key === `${IPV_TOPIC_KEY}.main`),
     [layers],
   );
   const [features, setFeatures] = useState([]);
