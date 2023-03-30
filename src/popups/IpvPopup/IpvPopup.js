@@ -13,7 +13,6 @@ const defaultProps = {
 };
 
 const IpvPopup = () => {
-  // const { t, i18n } = useTranslation();
   const classes = useStyles();
 
   return (
