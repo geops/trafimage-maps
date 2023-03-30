@@ -66,6 +66,7 @@ const useStyles = makeStyles(() => {
     },
     featureInfoItem: {
       marginLeft: 38,
+      marginRight: 16,
     },
     imageLine: {
       '& img': {

@@ -16,7 +16,7 @@ import { ReactComponent as MenuClosedImg } from '../../img/sbb/040_schliessen_10
 import Geolocate from '../../img/Geolocate';
 import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
 import geolocateMarker from '../../img/geolocate_marker.svg';
-import { SWISS_EXTENT } from '../../utils/constants';
+import { SWISS_EXTENT, WKP_ZOOM_ELEMENT_ID } from '../../utils/constants';
 import { setDisplayMenu } from '../../model/app/actions';
 import './MapControls.scss';
 
@@ -191,10 +191,11 @@ const MapControls = ({
         zoomInChildren={<ZoomIn />}
         zoomOutChildren={<ZoomOut />}
         zoomSlider={zoomSlider}
-        title={{
+        titles={{
           zoomIn: t('Zoom'),
           zoomOut: t('Zoom'),
         }}
+        id={WKP_ZOOM_ELEMENT_ID}
       />
       {geolocation && (
         <Geolocation

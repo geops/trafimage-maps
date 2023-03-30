@@ -7,6 +7,7 @@ import IpvLayerSwitcher from './IpvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
 import FadeShadow from '../../components/FadeShadow';
+import { WKP_ZOOM_ELEMENT_ID } from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -48,7 +49,11 @@ function IpvMenu() {
   }, [urlSearch]);
 
   useEffect(() => {
+    // Hide menu and zoom buttons on mobile
     dispatch(setDisplayMenu(!isMobile));
+    document.getElementById(WKP_ZOOM_ELEMENT_ID).style.display = isMobile
+      ? 'none'
+      : 'block';
   }, [isMobile, dispatch]);
 
   return (
