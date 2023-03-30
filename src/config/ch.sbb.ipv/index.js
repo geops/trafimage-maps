@@ -30,8 +30,6 @@ export const ipvBaseDay = new MapboxStyleLayer({
   },
   visible: true,
   mapboxLayer: dataLayer,
-  styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'perimeter_mask',
   style: 'base_bright_v2_direktverbindungen',
 });
 
@@ -45,7 +43,7 @@ export const ipvBaseNight = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'base_dark_v2_direktverbindungen',
+  style: 'base_dark_v2_direktverbindungen_dark',
 });
 
 export const ipvBaseAerial = new MapboxStyleLayer({
@@ -58,7 +56,7 @@ export const ipvBaseAerial = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'aerial_sbb_direktverbindungen_preview',
+  style: 'aerial_sbb_direktverbindungen_dark',
 });
 
 export const ipvDay = new Layer({
