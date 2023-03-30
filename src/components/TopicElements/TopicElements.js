@@ -187,7 +187,7 @@ function TopicElements({ history }) {
         {elements.mapControls && (
           <MapControls
             menuToggler={elements.menuToggler}
-            customButton={elements.customButton}
+            customMapButton={elements.customMapButton}
             geolocation={elements.geolocationButton}
             fitExtent={elements.fitExtent}
             zoomSlider={elements.zoomSlider}

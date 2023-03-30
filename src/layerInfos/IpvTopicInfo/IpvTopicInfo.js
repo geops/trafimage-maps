@@ -63,7 +63,7 @@ const IpvTopicInfo = () => {
             <br />
             Die Karte wird jährlich zum Fahrplanwechsel aktualisiert.
             <br />
-            Internationaler Personenverkehr, SBB AG
+            Direktverbindungen nach Europa, SBB AG
           </p>
           {dataLink}
         </div>

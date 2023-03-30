@@ -126,13 +126,15 @@ function IpvFeatureInfo({ filterByType }) {
       return [...feats, ...info.features];
     }, []);
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
-    const cleaned = removeDuplicates(parseIpvFeatures(features));
+    const cleaned = removeDuplicates(parseIpvFeatures(features)).filter(
+      (feat) => !!feat.get('mapboxFeature'),
+    );
     return filterByType
       ? cleaned.filter(
           (feat) =>
             !!layersVisible.find((layerKey) => {
               return `${IPV_KEY}.${feat.get('line')}` === layerKey;
-            }) && !!feat.get('mapboxFeature'),
+            }),
         )
       : cleaned;
   }, [featureInfo, layersVisible, filterByType]);
@@ -152,13 +154,7 @@ function IpvFeatureInfo({ filterByType }) {
         (feat) => getId(feat) === previousInfoKey,
       );
       if (previousInfoKey) {
-        setInfoKey(
-          previousSelectedFeature
-            ? getId(previousSelectedFeature)
-            : getId(dvFeatures[0]),
-        );
-      } else {
-        setInfoKey(getId(dvFeatures[0]));
+        setInfoKey(previousSelectedFeature && getId(previousSelectedFeature));
       }
     }
   }, [

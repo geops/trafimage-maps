@@ -14,7 +14,6 @@ import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import IpvLayerSwitcher from '../IpvMenu/IpvLayerSwitcher';
-// import StsDirektverbindungenLayerSwitcher from './StsDirektverbindungenLayerSwitcher';
 import IpvFeatureInfo from '../../config/ch.sbb.ipv/IpvFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import IframeMenu from '../IframeMenu';

@@ -93,8 +93,7 @@ export const ipvNight = new Layer({
 
 export const ipvMainLayer = new DirektverbindungenLayer({
   visible: true,
-  name: IPV_TOPIC_KEY,
-  key: IPV_TOPIC_KEY,
+  key: `${IPV_TOPIC_KEY}.mainlayer`,
   mapboxLayer: dataLayer,
   properties: {
     isQueryable: true,

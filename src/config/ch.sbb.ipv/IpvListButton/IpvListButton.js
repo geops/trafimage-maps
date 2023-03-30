@@ -24,13 +24,13 @@ const IpvListButton = () => {
   const map = useSelector((state) => state.app.map);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const ipvMainLayer = useMemo(
-    () => layers.find((l) => l.key === IPV_TOPIC_KEY),
+    () => layers.find((l) => l.key === `${IPV_TOPIC_KEY}.mainlayer`),
     [layers],
   );
   const [features, setFeatures] = useState([]);
 
   useEffect(() => {
-    const loadFeatsListener = ipvMainLayer.on('load:features', (evt) => {
+    const loadFeatsListener = ipvMainLayer?.on('load:features', (evt) => {
       setFeatures(evt.features);
     });
     return () => unByKey(loadFeatsListener);

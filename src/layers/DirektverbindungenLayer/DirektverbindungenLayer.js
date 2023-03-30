@@ -167,14 +167,17 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     const dayLayer = this.get('dayLayer');
 
     if (dayLayer?.get('visible') && nightLayer?.get('visible')) {
+      this.visible = true;
       return 'all';
     }
     if (dayLayer?.get('visible') || nightLayer?.get('visible')) {
       const visibleLayer = [dayLayer, nightLayer].find((layer) =>
         layer.get('visible'),
       );
+      this.visible = true;
       return visibleLayer.get('routeType');
     }
+    this.visible = false;
     return null;
   }
 
