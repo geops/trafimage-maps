@@ -69,7 +69,7 @@ describe('ch.sbb.netzkarte', () => {
                 event_timestamp: now,
                 line: {
                   id: 12396459,
-                  name: '752',
+                  name: 'TER',
                   color: null,
                   text_color: null,
                   stroke: null,
@@ -291,7 +291,7 @@ describe('ch.sbb.netzkarte', () => {
       mockServer.stop();
     });
 
-    it.only('should display the full trajectory on click', () => {
+    it('should display the full trajectory on click', () => {
       visitWithMsg('/ch.sbb.netzkarte', bufferMessage);
 
       // Click on the vehicle
