@@ -2,8 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
-import { extend, createEmpty, getCenter } from 'ol/extent';
-import { Point } from 'ol/geom';
+import { extend, createEmpty } from 'ol/extent';
 import MapButton from '../../../components/MapButton';
 import { setFeatureInfo } from '../../../model/app/actions';
 import { IPV_TOPIC_KEY } from '../../../utils/constants';
@@ -40,13 +39,13 @@ const IpvListButton = ({ ...props }) => {
     <MapButton
       title={t('Alle Direktverbindungen anzeigen')}
       disabled={!features?.length}
-      style={{ padding: 8, marginTop: 10 }}
+      data-testid="ipv-list-button"
       onClick={() => {
         if (!features?.length) return;
         const view = map.getView();
         const extent = getExtentFromFeatures(features);
         view.cancelAnimations();
-        view.fit(new Point(getCenter(extent)), {
+        view.fit(extent, {
           duration: 500,
           padding: [100, 100, 100, 100],
           maxZoom: 6,
