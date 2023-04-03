@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.20.0](https://github.com/geops/trafimage-maps/compare/v1.19.5...v1.20.0) (2023-04-03)
+
+### Features
+
+- add rokas poi background layer in sandbox topic ([#1076](https://github.com/geops/trafimage-maps/issues/1076)) ([9f51845](https://github.com/geops/trafimage-maps/commit/9f51845d62c3b2818f0a34438384a799bf430a5c))
+
+### Bug Fixes
+
+- use one websocket for all punctuality layers and use the proper … ([#1073](https://github.com/geops/trafimage-maps/issues/1073)) ([c2d6895](https://github.com/geops/trafimage-maps/commit/c2d6895b42de30f629c8918f731fe69cc3db0c15))
+
 ### [1.19.5](https://github.com/geops/trafimage-maps/compare/v1.19.4...v1.19.5) (2023-03-14)
 
 ### Bug Fixes

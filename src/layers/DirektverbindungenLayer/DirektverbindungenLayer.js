@@ -219,52 +219,51 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       });
   }
 
-  select(features = []) {
-    super.select(features);
+  highlightLabels() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
     }
-
+    const regex = new RegExp(
+      `${IPV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
+    );
     // Highlight stations and station labels on select
-    this.getIpvLayers().forEach((layer) => {
-      if (!IPV_STATION_CALL_LAYERID_REGEX.test(layer.id)) {
-        return;
-      }
+    this.getIpvLayers()
+      .filter((layer) => regex.test(layer.id))
+      .forEach((layer) => {
+        const idFilterExpression = ['get', 'direktverbindung_id'];
+        // Reset filter to original state
+        const originalFilter = mbMap
+          .getFilter(layer.id)
+          ?.filter(
+            (item) =>
+              !(
+                Array.isArray(item) &&
+                item[1].toString() === idFilterExpression.toString()
+              ),
+          );
+        mbMap.setFilter(layer.id, originalFilter);
+        if (this.selectedFeatures.length) {
+          mbMap.setLayoutProperty(layer.id, 'visibility', 'visible', {
+            validate: false,
+          });
+          this.selectedFeatures.forEach((feature) => {
+            // Add feature id filter
+            const featureIdFilter = [
+              ...mbMap.getFilter(layer.id),
+              ['==', idFilterExpression, feature.get('id')],
+            ];
+            mbMap.setFilter(layer.id, featureIdFilter);
+          });
+        } else {
+          mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
+        }
+      });
+  }
 
-      const idFilterExpression = ['get', 'direktverbindung_id'];
-      // Reset filter to original state
-      const originalFilter = mbMap
-        .getFilter(layer.id)
-        ?.filter(
-          (item) =>
-            !(
-              Array.isArray(item) &&
-              item[1].toString() === idFilterExpression.toString()
-            ),
-        );
-      mbMap.setFilter(layer.id, originalFilter);
-      if (this.selectedFeatures.length) {
-        const regex = new RegExp(
-          `${IPV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
-        );
-        mbMap.setLayoutProperty(
-          layer.id,
-          'visibility',
-          regex.test(layer.id) ? 'visible' : 'none',
-        );
-        this.selectedFeatures.forEach((feature) => {
-          // Add feature id filter
-          const featureIdFilter = [
-            ...mbMap.getFilter(layer.id),
-            ['==', idFilterExpression, feature.get('id')],
-          ];
-          mbMap.setFilter(layer.id, featureIdFilter);
-        });
-      } else {
-        mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
-      }
-    });
+  select(features = []) {
+    super.select(features);
+    this.highlightLabels();
   }
 }
 

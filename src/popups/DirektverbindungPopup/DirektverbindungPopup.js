@@ -5,7 +5,6 @@ import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { containsExtent } from 'ol/extent';
-import { Point } from 'ol/geom';
 import Feature from 'ol/Feature';
 import { unByKey } from 'ol/Observable';
 import Link from '../../components/Link';
@@ -128,7 +127,6 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     let featureChangeListener;
     if (layer.visible) {
       if (feature) {
-        layer.select([feature]);
         const cartaroFeature = layer.allFeatures.find(
           (feat) => feat.get('name') === feature.get('name'),
         );
@@ -162,24 +160,14 @@ const DirektverbindungPopup = ({ feature, layer }) => {
             !containsExtent(extent, geom.getExtent())
           ) {
             view.cancelAnimations();
-            // We fit the feature to the view, on mobile we fit the cenroid and set a min resolution
-            // to prevent smaller zoom levels from hiding the IPV features (only visible at zoom > 6)
-            view.fit(
-              isMobile ? new Point(geom.getFlatMidpoints()) : geom.getExtent(),
-              {
-                duration: 500,
-                padding,
-                callback: () => layer.select([feature]),
-                minResolution: isMobile
-                  ? view.getResolutionForZoom(6)
-                  : undefined,
-                maxZoom: view.getZoom(), // Prevent zooming in
-              },
-            );
+            view.fit(geom.getExtent(), {
+              duration: 500,
+              padding,
+              callback: () => layer.select([feature]),
+              maxZoom: view.getZoom(), // Prevent zooming in
+            });
           }
         }
-      } else {
-        layer.select();
       }
       return;
     }

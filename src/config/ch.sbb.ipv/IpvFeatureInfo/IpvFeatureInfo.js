@@ -10,7 +10,11 @@ import removeDuplicates, {
   getId,
 } from '../../../utils/removeDuplicateFeatures';
 import parseIpvFeatures from '../../../utils/ipvParseFeatures';
-import { IPV_DAY_NIGHT_REGEX, IPV_KEY } from '../../../utils/constants';
+import {
+  IPV_DAY_NIGHT_REGEX,
+  IPV_KEY,
+  IPV_TOPIC_KEY,
+} from '../../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -119,6 +123,10 @@ function IpvFeatureInfo({ filterByType }) {
         .map((l) => l.key),
     [layers],
   );
+  const ipvMainLayer = useMemo(
+    () => layers.find((l) => l.key === `${IPV_TOPIC_KEY}.main`),
+    [layers],
+  );
   const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
 
   const dvFeatures = useMemo(() => {
@@ -204,6 +212,9 @@ function IpvFeatureInfo({ filterByType }) {
               const layer = feat.get('layer');
               const isNightTrain = feat.get('line') === 'night';
               const active = infoKey === id;
+              if (active) {
+                ipvMainLayer.select([feat]);
+              }
               return (
                 <div
                   key={id}
@@ -222,6 +233,9 @@ function IpvFeatureInfo({ filterByType }) {
                       }
                       setInfoKey(open ? null : id);
                       setTeaser(false);
+                      // We select the feature here instead of DirektverbindungPopup
+                      // to prevent excessive map layer rerenders.
+                      ipvMainLayer.select(open ? [] : [feat]);
                     }}
                     className={`wkp-ipv-feature-info ${classes.root}${
                       active && teaser ? ` ${classes.teaser}` : ''
