@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.1](https://github.com/geops/trafimage-maps/compare/v1.20.0...v1.20.1) (2023-04-03)
+
+### Bug Fixes
+
+- open a new websocket only when the url change ([c42e052](https://github.com/geops/trafimage-maps/commit/c42e0521b8434c909b3fadf85be91cac688a4039))
+
 ## [1.20.0](https://github.com/geops/trafimage-maps/compare/v1.19.5...v1.20.0) (2023-04-03)
 
 ### Features
