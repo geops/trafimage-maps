@@ -17,7 +17,7 @@ const getExtentFromFeatures = (features) => {
   return extent;
 };
 
-const IpvListButton = () => {
+const IpvListButton = ({ ...props }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const layers = useSelector((state) => state.map.layers);
@@ -40,7 +40,7 @@ const IpvListButton = () => {
     <MapButton
       title={t('Alle Direktverbindungen anzeigen')}
       disabled={!features?.length}
-      style={{ padding: 8 }}
+      style={{ padding: 8, marginTop: 10 }}
       onClick={() => {
         if (!features?.length) return;
         const view = map.getView();
@@ -67,6 +67,8 @@ const IpvListButton = () => {
           },
         });
       }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       <List />
     </MapButton>

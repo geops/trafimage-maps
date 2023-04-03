@@ -233,6 +233,17 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       }
 
       const idFilterExpression = ['get', 'direktverbindung_id'];
+      // Reset filter to original state
+      const originalFilter = mbMap
+        .getFilter(layer.id)
+        ?.filter(
+          (item) =>
+            !(
+              Array.isArray(item) &&
+              item[1].toString() === idFilterExpression.toString()
+            ),
+        );
+      mbMap.setFilter(layer.id, originalFilter);
       if (this.selectedFeatures.length) {
         const regex = new RegExp(
           `${IPV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
@@ -251,17 +262,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           mbMap.setFilter(layer.id, featureIdFilter);
         });
       } else {
-        // Reset filter to original state
-        const originalFilter = mbMap
-          .getFilter(layer.id)
-          ?.filter(
-            (item) =>
-              !(
-                Array.isArray(item) &&
-                item[1].toString() === idFilterExpression.toString()
-              ),
-          );
-        mbMap.setFilter(layer.id, originalFilter);
         mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
       }
     });
