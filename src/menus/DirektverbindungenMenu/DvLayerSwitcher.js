@@ -21,10 +21,15 @@ const useStyles = makeStyles(() => {
       '& .MuiSwitch-switchBase': {
         top: (props) => (props.isMobile && props.row ? 4 : 0),
       },
-      '& .Mui-disabled': {
-        '& .MuiSwitch-root': {
-          opacity: 0.6,
-        },
+    },
+    disabled: {
+      color: 'blue',
+      cursor: 'not-allowed',
+      '& .MuiButtonBase-root': {
+        cursor: 'not-allowed',
+      },
+      '& .MuiSwitch-root': {
+        opacity: 0.6,
       },
     },
   };
@@ -101,8 +106,10 @@ function DvLayerSwitcher({ onToggle, row }) {
       className={classes.switchWrapper}
     >
       {dvLayers.map((layer) => {
+        const disabled = layer.visible && layersVisible?.length === 1;
         return (
           <FormControlLabel
+            className={disabled ? classes.disabled : undefined}
             key={layer.key}
             label={t(layer.name)}
             checked={layersVisible.includes(layer.key)}
@@ -110,9 +117,9 @@ function DvLayerSwitcher({ onToggle, row }) {
               <SBBSwitch
                 key={layer.key}
                 value={layer.key}
-                disabled={layer.visible && layersVisible?.length === 1}
                 data-testid={`dv-layerswitcher-${layer.key}`}
                 onChange={() => {
+                  if (disabled) return;
                   layer.visible = !layer.visible;
                   onToggle(layer);
                 }}
