@@ -41,6 +41,11 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super.onLoad();
     this.onChangeVisible();
     this.fetchIpvFeatures();
+    // We can only get the mapbox features from the view on load.
+    // In order to assign the Cartaro features their corresponding
+    // mapbox features for the full list view, we sync the features when
+    // the view changes and add the mapbox feature to any ol feature
+    // that still hasn't got one.
     this.viewChangeListener = this.map
       .getView()
       .on('change', () => this.syncFeatures());
@@ -53,15 +58,15 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         sourceLayer: IPV_TRIPS_SOURCELAYER_ID,
         filter: ['==', '$type', 'LineString'],
       });
-      renderedMbFeatures.forEach((feat) => {
-        feat.source = IPV_KEY;
-        feat.sourceLayer = IPV_TRIPS_SOURCELAYER_ID;
-      });
       return renderedMbFeatures;
     }
     return [];
   }
 
+  /**
+   * Assigns mapbox features to Cartaro ol features using their ID
+   * @returns {array<ol.Feature>} Array of ol features
+   */
   syncFeatures() {
     const mbFeatures = this.getMapboxFeatures();
     const cartaroFeatIsMissingMbFeat =
@@ -69,18 +74,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       !this.allFeatures.every((feat) => feat.get('mapboxFeature'));
     if (cartaroFeatIsMissingMbFeat && mbFeatures?.length) {
       this.allFeatures.forEach((feat) => {
-        feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
         const mbFeature = mbFeatures.find((mbFeat) => {
           return mbFeat?.properties?.name === feat?.get('name');
         });
         if (!feat.get('mapboxFeature')) {
           feat.set('mapboxFeature', mbFeature);
         }
-        feat.setId(mbFeature?.properties?.id);
-        feat.setProperties({
-          ...feat.getProperties(),
-          ...mbFeature?.properties,
-        });
       });
     }
     this.dispatchEvent({
@@ -91,6 +90,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     return this.allFeatures;
   }
 
+  /**
+   * Fetch features from Cartaro for the list view
+   */
   async fetchIpvFeatures() {
     await fetch(`${cartaroURL}/direktverbindungen/items/`)
       .then((res) => res.json())
@@ -126,6 +128,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       .catch((err) => console.error(err));
   }
 
+  /**
+   * @returns {array<mapbox.stylelayer>} Array of mapbox style layers
+   */
   getIpvLayers() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
@@ -137,7 +142,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     });
   }
 
-  /** Returns a string: 'day', 'night' or 'all' */
+  /**
+   * Gets the current visible IPV layer
+   * @returns {string} 'day', 'night' or 'all'
+   */
   getCurrentLayer() {
     const nightLayer = this.get('nightLayer');
     const dayLayer = this.get('dayLayer');
@@ -162,6 +170,8 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     unByKey(this.viewChangeListener);
   }
 
+  // Updates the IPV mapbox stylelayer visibility according
+  // to the current visible WKP layer
   onChangeVisible() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
@@ -179,7 +189,11 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     });
   }
 
-  highlightLabels() {
+  /**
+   * Updates visibility for stations, labels and select highlight mb layers
+   * and applys the mb filter for the currently selected feature
+   */
+  highlightFeatures() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
@@ -226,7 +240,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
 
   select(features = []) {
     super.select(features);
-    this.highlightLabels();
+    this.highlightFeatures();
   }
 }
 

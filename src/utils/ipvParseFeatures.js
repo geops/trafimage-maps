@@ -9,9 +9,11 @@ const parseIpvFeatures = (featuresArray) => {
       vias,
     } = feature.getProperties();
 
-    const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
-      (via) => via.via_type === 'switch' || via.via_type === 'visible',
-    );
+    const switchVias = vias
+      ? (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
+          (via) => via.via_type === 'switch' || via.via_type === 'visible',
+        )
+      : [];
     feature.set('vias', [
       { station_name: start },
       ...switchVias,
