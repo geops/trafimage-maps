@@ -1,12 +1,11 @@
-import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import { IPV_KEY, SWISS_EXTENT } from '../../utils/constants';
+import { DV_KEY, SWISS_EXTENT } from '../../utils/constants';
 import StsPoisLayer from '../../layers/StsPoisLayer';
+import { dvDay, dvNight } from '../ch.sbb.direktverbindungen';
 
-// const { POIS_URL } = process.env;
 const FILTER_KEY = 'sts.filter';
 const FILTER_GTTOS_VALUE = 'sts_gttos';
 const FILTER_PREMIUM_VALUE = 'sts_premium';
@@ -151,49 +150,35 @@ export const premium = new MapboxStyleLayer({
   },
 });
 
-export const ipvDay = new Layer({
-  name: `${IPV_KEY}.day`,
-  key: `${IPV_KEY}.day`,
+const stsDvDay = dvDay.clone({
   mapboxLayer: stsDataLayer,
   visible: false,
-  properties: {
-    routeType: 'day',
-    hasInfos: true,
-    layerInfoComponent: 'IpvTagLayerInfo',
-  },
 });
 
-export const ipvNight = new Layer({
-  name: `${IPV_KEY}.night`,
-  key: `${IPV_KEY}.night`,
+const stsDvNight = dvNight.clone({
   mapboxLayer: stsDataLayer,
   visible: false,
-  properties: {
-    routeType: 'night',
-    hasInfos: true,
-    layerInfoComponent: 'IpvNachtLayerInfo',
-  },
 });
 
-export const ipvMainLayer = new DirektverbindungenLayer({
+export const stsDvMain = new DirektverbindungenLayer({
   visible: false,
-  name: `${IPV_KEY}.main`,
-  key: `${IPV_KEY}.main`,
+  name: `${DV_KEY}.main`,
+  key: `${DV_KEY}.main`,
   mapboxLayer: stsDataLayer,
   properties: {
     isQueryable: true,
     hideInLegend: true,
-    dayLayer: ipvDay,
-    nightLayer: ipvNight,
-    popupComponent: 'IpvPopup',
+    dayLayer: stsDvDay,
+    nightLayer: stsDvNight,
+    popupComponent: 'DvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
   },
 });
 
-[ipvNight, ipvDay].forEach((layer) =>
+[stsDvNight, stsDvDay].forEach((layer) =>
   layer.on('change:visible', (evt) => {
-    ipvMainLayer.onChangeVisible(evt.target);
+    stsDvMain.onChangeVisible(evt.target);
   }),
 );
 
@@ -205,7 +190,7 @@ export default [
   premium,
   gttos,
   highlights,
-  ipvMainLayer,
-  ipvDay,
-  ipvNight,
+  stsDvMain,
+  stsDvDay,
+  stsDvNight,
 ];

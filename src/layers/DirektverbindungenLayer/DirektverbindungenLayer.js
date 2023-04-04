@@ -4,14 +4,14 @@ import { LineString } from 'ol/geom';
 import { unByKey } from 'ol/Observable';
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
-import { IPV_KEY } from '../../utils/constants';
+import { DV_KEY } from '../../utils/constants';
 
-const IPV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
+const DV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
 
 const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
-const IPV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
-const IPV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
-const IPV_STATION_CALL_LAYERID_REGEX =
+const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
+const DV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
+const DV_STATION_CALL_LAYERID_REGEX =
   /^dv(d|n)?_call(_(border|bg|border|displace|label))?(_highlight)?/;
 
 /**
@@ -28,9 +28,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super({
       ...options,
       queryRenderedLayersFilter: (layer) =>
-        IPV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)),
+        DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)),
       styleLayersFilter: (layer) => {
-        return IPV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer));
+        return DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer));
       },
       featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
@@ -40,7 +40,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
-    this.fetchIpvFeatures();
+    this.fetchDvFeatures();
     // We can only get the mapbox features from the view on load.
     // In order to assign the Cartaro features their corresponding
     // mapbox features for the full list view, we sync the features when
@@ -54,8 +54,8 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   getMapboxFeatures() {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
-      const renderedMbFeatures = mbMap.querySourceFeatures(IPV_KEY, {
-        sourceLayer: IPV_TRIPS_SOURCELAYER_ID,
+      const renderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
+        sourceLayer: DV_TRIPS_SOURCELAYER_ID,
         filter: ['==', '$type', 'LineString'],
       });
       return renderedMbFeatures;
@@ -93,23 +93,23 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   /**
    * Fetch features from Cartaro for the list view
    */
-  async fetchIpvFeatures() {
+  async fetchDvFeatures() {
     await fetch(`${cartaroURL}/direktverbindungen/items/`)
       .then((res) => res.json())
       .then((data) => {
         const features = new GeoJSON().readFeatures(data);
         const { mbMap } = this.mapboxLayer;
         if (mbMap) {
-          const ipvRenderedMbFeatures = mbMap.querySourceFeatures(IPV_KEY, {
-            sourceLayer: IPV_TRIPS_SOURCELAYER_ID,
+          const dvRenderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
+            sourceLayer: DV_TRIPS_SOURCELAYER_ID,
             filter: ['==', '$type', 'LineString'],
           });
-          ipvRenderedMbFeatures.forEach((feat) => {
-            feat.source = IPV_KEY;
-            feat.sourceLayer = IPV_TRIPS_SOURCELAYER_ID;
+          dvRenderedMbFeatures.forEach((feat) => {
+            feat.source = DV_KEY;
+            feat.sourceLayer = DV_TRIPS_SOURCELAYER_ID;
           });
           features.forEach((feat) => {
-            const mbFeature = ipvRenderedMbFeatures.find(
+            const mbFeature = dvRenderedMbFeatures.find(
               (mbFeat) => mbFeat?.properties?.name === feat?.get('name'),
             );
             feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
@@ -131,14 +131,14 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   /**
    * @returns {array<mapbox.stylelayer>} Array of mapbox style layers
    */
-  getIpvLayers() {
+  getDvLayers() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return null;
     }
     const style = mbMap.getStyle();
     return style?.layers.filter((stylelayer) => {
-      return IPV_FILTER_REGEX.test(getTrafimageFilter(stylelayer));
+      return DV_FILTER_REGEX.test(getTrafimageFilter(stylelayer));
     });
   }
 
@@ -177,10 +177,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return;
     }
-    const ipvLayers = this.getIpvLayers();
     const currentLayer = this.getCurrentLayer();
     const filterRegex = new RegExp(`^ipv_(trip_)?(${currentLayer})$`);
-    ipvLayers?.forEach((stylelayer) => {
+    this.getDvLayers()?.forEach((stylelayer) => {
       mbMap.setLayoutProperty(
         stylelayer.id,
         'visibility',
@@ -191,7 +190,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
 
   /**
    * Updates visibility for stations, labels and select highlight mb layers
-   * and applys the mb filter for the currently selected feature
+   * and applies the mb filter for the currently selected feature
    */
   highlightFeatures() {
     const { mbMap } = this.mapboxLayer;
@@ -199,10 +198,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       return;
     }
     const regex = new RegExp(
-      `${IPV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
+      `${DV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
     );
     // Highlight stations and station labels on select
-    this.getIpvLayers()
+    this.getDvLayers()
       .filter((layer) => regex.test(layer.id))
       .forEach((layer) => {
         const idFilterExpression = [

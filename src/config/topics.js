@@ -26,13 +26,13 @@ import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import stsLayers from './ch.sbb.sts';
-import ipvLayers from './ch.sbb.ipv';
+import dvLayers from './ch.sbb.direktverbindungen';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
-import { IPV_TOPIC_KEY } from '../utils/constants';
-import IpvMenu from '../menus/IpvMenu/IpvMenu';
-import IpvListButton from './ch.sbb.ipv/IpvListButton';
+import { DV_KEY } from '../utils/constants';
+import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
+import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 
 // For backward compatibility
 export {
@@ -320,7 +320,6 @@ export const sts = {
     footer: false,
     menu: false,
     menuToggler: true,
-    // customMapButton: <IpvListButton />,
   },
   layers: stsLayers,
   only: true,
@@ -333,27 +332,27 @@ export const sts = {
   constrainOnlyCenter: true,
 };
 
-export const ipv = {
-  name: `${IPV_TOPIC_KEY}.topic`,
-  key: `${IPV_TOPIC_KEY}`,
+export const direktverbindungen = {
+  name: `${DV_KEY}.topic`,
+  key: `${DV_KEY}`,
   elements: {
     ...defaultElements,
     popup: true,
     shareMenu: true,
     fitExtent: false,
-    customMapButton: <IpvListButton style={{ padding: 8, marginTop: 10 }} />,
+    customMapButton: <DvListButton style={{ padding: 8, marginTop: 10 }} />,
   },
-  maxZoom: 10,
+  maxZoom: 13,
   minZoom: 6,
-  layers: ipvLayers,
+  layers: dvLayers,
   projection: 'EPSG:3857',
-  layerInfoComponent: 'IpvTopicInfo',
+  layerInfoComponent: 'DvTopicInfo',
   searches: defaultSearches,
 };
 
-export const ipvIframe = {
-  name: `${IPV_TOPIC_KEY}-iframe.topic`,
-  key: `${IPV_TOPIC_KEY}-iframe`,
+export const direktverbindungenIframe = {
+  name: `${DV_KEY}-iframe.topic`,
+  key: `${DV_KEY}-iframe`,
   elements: {
     ...defaultElements,
     overlay: false,
@@ -368,15 +367,15 @@ export const ipvIframe = {
     menu: false,
     baseLayerSwitcher: false,
     fitExtent: false,
-    customMapButton: <IpvListButton style={{ padding: 8 }} />,
+    customMapButton: <DvListButton style={{ padding: 8 }} />,
   },
-  maxZoom: 10,
+  maxZoom: 13,
   minZoom: 6,
-  layers: ipvLayers,
+  layers: dvLayers,
   enableFeatureClick: true,
   only: true,
   hideInLayerTree: true,
-  menu: <IpvMenu />,
+  menu: <DvMenu />,
 };
 
 const topics = {
@@ -389,8 +388,8 @@ const topics = {
     tarifverbundkarte,
     infrastruktur,
     isb,
-    ipv,
-    ipvIframe,
+    direktverbindungen,
+    direktverbindungenIframe,
     regionenkartePublic,
     netzentwicklung,
     beleuchtungsstaerken,

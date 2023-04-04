@@ -13,8 +13,8 @@ import {
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
-import IpvLayerSwitcher from '../IpvMenu/IpvLayerSwitcher';
-import IpvFeatureInfo from '../../config/ch.sbb.ipv/IpvFeatureInfo';
+import DvLayerSwitcher from '../DirektverbindungenMenu/DvLayerSwitcher';
+import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import IframeMenu from '../IframeMenu';
 import stsLayers from '../../config/ch.sbb.sts';
@@ -106,11 +106,7 @@ function StsTopicMenu() {
 
   const layerSwitcher = useMemo(
     () =>
-      activeMenu === 'sts' ? (
-        <StsValidityLayerSwitcher />
-      ) : (
-        <IpvLayerSwitcher />
-      ),
+      activeMenu === 'sts' ? <StsValidityLayerSwitcher /> : <DvLayerSwitcher />,
     [activeMenu],
   );
 
@@ -119,7 +115,7 @@ function StsTopicMenu() {
       activeMenu === 'sts' ? (
         <StsValidityFeatureInfo menuOpen={!featureInfo} />
       ) : (
-        <IpvFeatureInfo filterByType />
+        <DvFeatureInfo filterByType />
       ),
     [activeMenu, featureInfo],
   );

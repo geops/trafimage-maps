@@ -14,7 +14,7 @@ const App = () => {
     <>
       <div className="container">
         <trafimage-maps
-          activeTopicKey="ch.sbb.ipv"
+          activeTopicKey="ch.sbb.direktverbindungen"
           apiKey={apiKey}
           height="500px"
           zoom="6"
