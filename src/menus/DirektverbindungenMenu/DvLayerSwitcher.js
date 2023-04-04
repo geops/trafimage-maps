@@ -23,7 +23,6 @@ const useStyles = makeStyles(() => {
       },
     },
     disabled: {
-      color: 'blue',
       cursor: 'not-allowed',
       '& .MuiButtonBase-root': {
         cursor: 'not-allowed',
