@@ -2,7 +2,7 @@ import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import HighlightRoutesLayer from '../../layers/StsHighlightRoutesLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import { DV_KEY, SWISS_EXTENT } from '../../utils/constants';
+import { DV_KEY, STS_HIT_TOLERANCE, SWISS_EXTENT } from '../../utils/constants';
 import StsPoisLayer from '../../layers/StsPoisLayer';
 import { dvDay, dvNight } from '../ch.sbb.direktverbindungen';
 
@@ -27,7 +27,7 @@ const stsDataLayer = new TrafimageMapboxLayer({
   preserveDrawingBuffer: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2_ch.sbb.geltungsbereiche_ga',
-  hitTolerance: 15,
+  hitTolerance: STS_HIT_TOLERANCE,
   properties: {
     isQueryable: false,
     isBaseLayer: true,

@@ -2,7 +2,7 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import { DV_KEY } from '../../utils/constants';
+import { DV_HIT_TOLERANCE, DV_KEY } from '../../utils/constants';
 import netzkarteNightImg from '../../img/netzkarte_night.png';
 import netzkarte from '../../img/netzkarte.png';
 import luftbild from '../../img/luftbild.png';
@@ -12,6 +12,7 @@ export const dataLayer = new TrafimageMapboxLayer({
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: 'base_bright_v2_direktverbindungen',
+  hitTolerance: DV_HIT_TOLERANCE,
   properties: {
     hideInLegend: true,
   },

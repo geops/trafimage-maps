@@ -19,6 +19,7 @@ import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import IframeMenu from '../IframeMenu';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
+import { DV_HIT_TOLERANCE, STS_HIT_TOLERANCE } from '../../utils/constants';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -127,11 +128,14 @@ function StsTopicMenu() {
   }, [featureInfo, isMobile, dispatch]);
 
   useEffect(() => {
-    baseLayer.setStyle(
-      activeMenu === 'dv'
-        ? 'base_bright_v2_direktverbindungen'
-        : 'base_bright_v2_ch.sbb.geltungsbereiche_ga',
-    );
+    if (activeMenu === 'dv') {
+      baseLayer.setStyle('base_bright_v2_direktverbindungen');
+      baseLayer.hitTolerance = DV_HIT_TOLERANCE;
+    }
+    if (activeMenu === 'sts') {
+      baseLayer.setStyle('base_bright_v2_ch.sbb.geltungsbereiche_ga');
+      baseLayer.hitTolerance = STS_HIT_TOLERANCE;
+    }
   }, [activeMenu, baseLayer]);
 
   const onChange = (key) => {
