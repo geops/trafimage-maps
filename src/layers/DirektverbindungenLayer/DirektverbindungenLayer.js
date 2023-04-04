@@ -12,7 +12,7 @@ const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const IPV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const IPV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
 const IPV_STATION_CALL_LAYERID_REGEX =
-  /^dv(d|n)?_call(_(border|bg|border|displace|label))?/;
+  /^dv(d|n)?_call(_(border|bg|border|displace|label))?(_highlight)?/;
 
 /**
  * Layer for visualizing international train connections.
@@ -191,7 +191,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     this.getIpvLayers()
       .filter((layer) => regex.test(layer.id))
       .forEach((layer) => {
-        const idFilterExpression = ['get', 'direktverbindung_id'];
+        const idFilterExpression = [
+          'get',
+          /_highlight_/.test(layer.id) ? 'id' : 'direktverbindung_id',
+        ];
         // Reset filter to original state
         const originalFilter = mbMap
           .getFilter(layer.id)
