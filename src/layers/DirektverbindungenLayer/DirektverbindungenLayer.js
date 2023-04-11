@@ -225,9 +225,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           );
         mbMap.setFilter(layer.id, originalFilter);
         if (this.selectedFeatures.length) {
-          mbMap.setLayoutProperty(layer.id, 'visibility', 'visible', {
-            validate: false,
-          });
+          mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
+          // mbMap.setPaintProperty(
+          //   layer.id,
+          //   layer.type === 'symbol' ? 'text-opacity' : `${layer.type}-opacity`,
+          //   0.5,
+          // );
           this.selectedFeatures.forEach((feature) => {
             // Add feature id filter
             const featureIdFilter = [
