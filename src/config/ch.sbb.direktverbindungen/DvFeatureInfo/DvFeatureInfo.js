@@ -6,6 +6,7 @@ import { makeStyles, Divider } from '@material-ui/core';
 import MenuItem from '../../../components/Menu/MenuItem';
 import usePrevious from '../../../utils/usePrevious';
 import DvLineInfo from '../DvLineInfo';
+import DvLineTitle from '../DvLineTitle';
 import removeDuplicates, {
   getId,
 } from '../../../utils/removeDuplicateFeatures';
@@ -51,15 +52,6 @@ const useStyles = makeStyles(() => {
         },
       },
     },
-    titleWrapper: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 10,
-    },
-    title: {
-      maxWidth: 280,
-      zIndex: 10,
-    },
     featureInfos: {
       maxHeight: '100%',
       overflow: 'auto',
@@ -75,30 +67,6 @@ const useStyles = makeStyles(() => {
     },
   };
 });
-
-function DvTitle({ isNightTrain, title, active }) {
-  const classes = useStyles();
-  return (
-    <div className={classes.titleWrapper}>
-      <img
-        src={
-          isNightTrain
-            ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
-            : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
-        }
-        alt="icon"
-        className={classes.titleIcon}
-      />
-      <span className={classes.title}>{active ? <b>{title}</b> : title}</span>
-    </div>
-  );
-}
-
-DvTitle.propTypes = {
-  isNightTrain: PropTypes.bool.isRequired,
-  title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
-  active: PropTypes.bool.isRequired,
-};
 
 function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
@@ -240,10 +208,13 @@ function DvFeatureInfo({ filterByType }) {
                     collapsed={!active}
                     open={active}
                     title={
-                      <DvTitle
+                      <DvLineTitle
+                        layer={dvMainLayer}
+                        feature={feat}
                         title={title}
                         active={active}
                         isNightTrain={isNightTrain}
+                        teaser={active && teaser}
                       />
                     }
                     menuHeight={expandedHeight}
@@ -274,10 +245,12 @@ function DvFeatureInfo({ filterByType }) {
           ) : (
             <>
               <div style={{ padding: 10 }}>
-                <DvTitle
+                <DvLineTitle
                   title={dvFeatures[0].get('name')}
                   active
                   isNightTrain={dvFeatures[0].get('line') === 'night'}
+                  layer={dvMainLayer}
+                  feature={dvFeatures[0]}
                 />
               </div>
               <div className={classes.featureInfoItem}>

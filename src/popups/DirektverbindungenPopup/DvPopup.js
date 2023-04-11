@@ -26,6 +26,6 @@ DvPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(DvPopup);
 memoized.renderTitle = (feat, layer, t) => t(layer.key);
-memoized.hidePagination = defaultProps;
+memoized.hidePagination = true;
 
 export default memoized;

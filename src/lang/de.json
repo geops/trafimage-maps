@@ -20,6 +20,7 @@
   "arrival_url": "http://fahrplan.sbb.ch/bin/stboard.exe/dn?boardType=arr&editStation=yes&input={stationname}&start=yes",
   "Auf Facebook teilen": "Auf Facebook teilen.",
   "Auf Google Plus teilen": "Auf Google Plus teilen.",
+  "Auf Linie zentrieren": "Auf Linie zentrieren",
   "Auf Twitter teilen": "Auf Twitter teilen.",
   "Ausfall": "Ausfall",
   "Autotrafo": "Autotrafo",

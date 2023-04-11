@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { containsExtent } from 'ol/extent';
 import Feature from 'ol/Feature';
 import { unByKey } from 'ol/Observable';
 import Link from '../../../components/Link';
@@ -20,14 +19,6 @@ const useStyles = makeStyles({
     margin: 0,
     display: 'flex',
     alignItems: 'center',
-  },
-  titleWrapper: {
-    padding: 0,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  titleIcon: {
-    marginRight: 10,
   },
   routeStops: {
     fontWeight: 'bold',
@@ -91,24 +82,6 @@ const defaultProps = {
   feature: null,
 };
 
-const DVPopupTitle = ({ feature }) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.titleWrapper}>
-      <img
-        src={
-          feature.get('nachtverbindung')
-            ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
-            : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
-        }
-        alt="icon"
-        className={classes.titleIcon}
-      />
-      {feature.get('name')}
-    </div>
-  );
-};
-
 const DvLineInfo = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
   const map = useSelector((state) => state.app.map);
@@ -127,47 +100,7 @@ const DvLineInfo = ({ feature, layer }) => {
     let featureChangeListener;
     if (layer.visible) {
       if (feature) {
-        const cartaroFeature = layer.allFeatures.find(
-          (feat) => feat.get('name') === feature.get('name'),
-        );
-        if (cartaroFeature) {
-          /** Zoom on feature
-           * We get the full geometry from the cartaro feature,
-           * since the feature from the map clips the feature at the viewport edges
-           */
-          const view = map.getView();
-          const geom = cartaroFeature.getGeometry();
-          const extent = view.calculateExtent();
-          let padding = [100, 100, 400, 100]; // Bottom padding for feature centering on mobile
-          if (!isMobile) {
-            if (isEmbeddedTopic) {
-              // Left padding for feature centering on desktop embedded (left menu)
-              extent[0] += (extent[0] + extent[2]) / 4;
-              padding = [100, 100, 100, 500];
-            } else {
-              // Right padding for feature centering on desktop (right overlay)
-              extent[2] -= (extent[0] + extent[2]) / 4;
-              padding = [100, 500, 100, 100];
-            }
-          } else {
-            // Bottom padding when overlay slides in from bottom
-            extent[1] += (extent[3] - extent[1]) / 3;
-            padding = [100, 100, 200, 100];
-          }
-
-          if (
-            !view.getAnimating() &&
-            !containsExtent(extent, geom.getExtent())
-          ) {
-            view.cancelAnimations();
-            view.fit(geom.getExtent(), {
-              duration: 500,
-              padding,
-              callback: () => layer.select([feature]),
-              maxZoom: view.getZoom(), // Prevent zooming in
-            });
-          }
-        }
+        layer.select([feature]);
       }
       return;
     }
@@ -252,8 +185,7 @@ const DvLineInfo = ({ feature, layer }) => {
   );
 };
 
-DvLineInfo.renderTitle = (feat) => <DVPopupTitle feature={feat} />;
 DvLineInfo.defaultProps = defaultProps;
-
 DvLineInfo.propTypes = propTypes;
+
 export default DvLineInfo;

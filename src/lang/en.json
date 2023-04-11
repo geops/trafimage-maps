@@ -28,6 +28,7 @@
   "arrival_url": "http://fahrplan.sbb.ch/bin/stboard.exe/en?boardType=arr&editStation=yes&input={stationname}&start=yes",
   "Auf Facebook teilen": "Share on Facebook.",
   "Auf Google Plus teilen": "Share on Google Plus.",
+  "Auf Linie zentrieren": "Centre on line",
   "Auf Twitter teilen": "Share on Twitter.",
   "Ausbau": "Upgrades",
   "Ausfall": "Cancelled",
