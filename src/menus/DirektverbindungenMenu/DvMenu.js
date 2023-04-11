@@ -7,7 +7,6 @@ import DvLayerSwitcher from './DvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
 import FadeShadow from '../../components/FadeShadow';
-import { WKP_ZOOM_ELEMENT_ID } from '../../utils/constants';
 
 const useStyles = makeStyles(() => {
   return {
@@ -22,6 +21,7 @@ function DvMenu() {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const featureInfo = useSelector((state) => state.app.featureInfo);
+  const topic = useSelector((state) => state.app.activeTopic);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
@@ -54,11 +54,13 @@ function DvMenu() {
   useEffect(() => {
     // Hide menu and zoom buttons on mobile
     dispatch(setDisplayMenu(!isMobile));
-    const zoomControls = document.getElementById(WKP_ZOOM_ELEMENT_ID);
+    const zoomControls = document
+      .querySelectorAll(`.${topic.key.replaceAll('.', '-')}.map-controls`)[0]
+      ?.querySelectorAll('.rs-zooms-bar')[0];
     if (zoomControls) {
       zoomControls.style.display = isMobile ? 'none' : 'block';
     }
-  }, [isMobile, dispatch]);
+  }, [isMobile, topic, dispatch]);
 
   return (
     <IframeMenu

@@ -127,21 +127,19 @@ function IframeMenu({ header, body, hide }) {
           transitionDuration={0}
           defaultSize={{ height: 400 }}
         >
-          {isMobile && (
-            <div className={classes.mobileHandleWrapper}>
-              <div className={classes.mobileHandle}>
-                <IconButton
-                  className={`wkp-close-bt ${classes.closeBtn}`}
-                  title="Close"
-                  onClick={() => {
-                    dispatch(setFeatureInfo());
-                  }}
-                >
-                  <MdClose focusable={false} alt="Close" />
-                </IconButton>
-              </div>
+          <div className={classes.mobileHandleWrapper}>
+            <div className={classes.mobileHandle}>
+              <IconButton
+                className={`wkp-close-bt ${classes.closeBtn}`}
+                title="Close"
+                onClick={() => {
+                  dispatch(setFeatureInfo());
+                }}
+              >
+                <MdClose focusable={false} alt="Close" />
+              </IconButton>
             </div>
-          )}
+          </div>
           <div
             className={`${classes.menuContent} ${classes.menuContentMobile}`}
           >
