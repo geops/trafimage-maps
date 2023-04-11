@@ -187,11 +187,12 @@ function TopicElements({ history }) {
         {elements.mapControls && (
           <MapControls
             menuToggler={elements.menuToggler}
-            customMapButton={elements.customMapButton}
             geolocation={elements.geolocationButton}
             fitExtent={elements.fitExtent}
             zoomSlider={elements.zoomSlider}
-          />
+          >
+            {activeTopic.customMapControls}
+          </MapControls>
         )}
         {elements.baseLayerSwitcher && (
           <BaseLayerSwitcher

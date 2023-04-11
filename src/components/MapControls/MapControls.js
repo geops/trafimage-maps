@@ -25,7 +25,7 @@ const propTypes = {
   zoomSlider: PropTypes.bool,
   fitExtent: PropTypes.bool,
   menuToggler: PropTypes.bool,
-  customMapButton: PropTypes.node,
+  children: PropTypes.node,
 };
 
 const defaultProps = {
@@ -33,7 +33,7 @@ const defaultProps = {
   zoomSlider: true,
   fitExtent: true,
   menuToggler: false,
-  customMapButton: false,
+  children: undefined,
 };
 
 const degreesToRadians = (degrees) => {
@@ -45,7 +45,7 @@ const MapControls = ({
   geolocation,
   zoomSlider,
   fitExtent,
-  customMapButton,
+  children,
 }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -221,7 +221,7 @@ const MapControls = ({
           <SwissBounds focusable={false} />
         </FitExtent>
       )}
-      {customMapButton}
+      {children}
     </div>
   );
 };
