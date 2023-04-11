@@ -21,22 +21,14 @@ function StsValidityLayerSwitcher() {
   const stsLayers = useMemo(() => {
     return layers?.filter((layer) => stsStyleLayerRegex.test(layer.key));
   }, [layers]);
-  const [layersVisible, setLayersVisible] = useState(
-    stsLayers.filter((l) => l.visible).map((l) => l.key),
-  );
+  const layersVisible = stsLayers.filter((l) => l.visible).map((l) => l.key);
 
   // Force render when visibility changes
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', (evt) => {
+        return layer?.on('change:visible', () => {
           forceRender((value) => value + 1);
-          const { target: targetLayer } = evt;
-          if (stsStyleLayerRegex.test(targetLayer.key)) {
-            setLayersVisible(
-              stsLayers.filter((l) => l.visible).map((l) => l.key),
-            );
-          }
         });
       }) || [];
 

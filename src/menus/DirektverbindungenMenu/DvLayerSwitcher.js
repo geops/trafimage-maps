@@ -56,25 +56,20 @@ function DvLayerSwitcher({ onToggle, row }) {
     () => dvLayers.filter((l) => l.visible).map((l) => l.key),
     [dvLayers],
   );
-  const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
+  const layersVisible = getVisibleLayerKeys();
 
   // Force render when visibility changes
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', (evt) => {
+        return layer?.on('change:visible', () => {
           forceRender(revision + 1);
-          const { target: targetLayer } = evt;
-          if (DV_DAY_NIGHT_REGEX.test(targetLayer.key)) {
-            setLayersVisible(getVisibleLayerKeys());
-          }
         });
       }) || [];
 
     // Force render after first render because visibility of layers is  not yet applied.
     if (revision === undefined) {
       forceRender(0);
-      setLayersVisible(getVisibleLayerKeys());
     }
 
     return () => {
