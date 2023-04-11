@@ -68,7 +68,7 @@ function DvMenu() {
         <>
           {showSwitcher && isMobile ? switcher : null}
           {showSwitcher ? <FadeShadow /> : null}
-          <DvFeatureInfo hasTopShadow={showSwitcher} filterByType />
+          <DvFeatureInfo filterByType />
         </>
       }
     />

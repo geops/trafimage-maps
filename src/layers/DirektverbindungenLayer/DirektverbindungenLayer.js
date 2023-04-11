@@ -2,6 +2,7 @@
 import { GeoJSON } from 'ol/format';
 import { LineString } from 'ol/geom';
 import { unByKey } from 'ol/Observable';
+
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
 import { DV_KEY } from '../../utils/constants';
@@ -35,6 +36,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
     this.allFeatures = [];
+    this.syncTimeout = null;
   }
 
   onLoad() {
@@ -46,9 +48,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     // mapbox features for the full list view, we sync the features when
     // the view changes and add the mapbox feature to any ol feature
     // that still hasn't got one.
-    this.viewChangeListener = this.map
-      .getView()
-      .on('change', () => this.syncFeatures());
+    this.viewChangeListener = this.map.on('moveend', () => {
+      clearTimeout(this.syncTimeout);
+      this.syncTimeout = setTimeout(() => {
+        this.syncFeatures();
+      }, 400);
+    });
   }
 
   getMapboxFeatures() {

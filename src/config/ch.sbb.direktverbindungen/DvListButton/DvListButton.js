@@ -56,7 +56,7 @@ const DvListButton = ({ ...props }) => {
                 dispatch(
                   setFeatureInfo([
                     {
-                      features: dvMainLayer.syncFeatures(),
+                      features: dvMainLayer.allFeatures,
                       layer: dvMainLayer,
                     },
                   ]),
