@@ -40,16 +40,15 @@ function DvMenu() {
     [classes.wrapper, isMobile],
   );
 
-  const hideMenu = useMemo(() => {
-    return (
-      urlSearch.get('direktverbindungen.menu') === 'false' &&
-      !featureInfo?.length
-    );
-  }, [featureInfo?.length, urlSearch]);
-
   const showSwitcher = useMemo(() => {
+    // Completely hide the switcher via the permalink
     return urlSearch.get('direktverbindungen.menu') !== 'false';
   }, [urlSearch]);
+
+  const hideMenu = useMemo(() => {
+    // Hide the menu if the switcher is hidden and no features are selected
+    return !showSwitcher && !featureInfo?.length;
+  }, [featureInfo?.length, showSwitcher]);
 
   useEffect(() => {
     // Hide menu and zoom buttons on mobile
