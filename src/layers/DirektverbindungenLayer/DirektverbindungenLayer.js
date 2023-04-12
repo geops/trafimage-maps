@@ -202,47 +202,43 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return;
     }
-    const regex = new RegExp(
+    const highlightRegex = new RegExp(
       `${DV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
     );
+    const dvHighlightLayers = this.getDvLayers().filter((layer) =>
+      highlightRegex.test(layer.id),
+    );
     // Highlight stations and station labels on select
-    this.getDvLayers()
-      .filter((layer) => regex.test(layer.id))
-      .forEach((layer) => {
-        const idFilterExpression = [
-          'get',
-          /_highlight_/.test(layer.id) ? 'id' : 'direktverbindung_id',
-        ];
-        // Reset filter to original state
-        const originalFilter = mbMap
-          .getFilter(layer.id)
-          ?.filter(
-            (item) =>
-              !(
-                Array.isArray(item) &&
-                item[1].toString() === idFilterExpression.toString()
-              ),
-          );
-        mbMap.setFilter(layer.id, originalFilter);
-        if (this.selectedFeatures.length) {
-          mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
-          // mbMap.setPaintProperty(
-          //   layer.id,
-          //   layer.type === 'symbol' ? 'text-opacity' : `${layer.type}-opacity`,
-          //   0.5,
-          // );
-          this.selectedFeatures.forEach((feature) => {
-            // Add feature id filter
-            const featureIdFilter = [
-              ...mbMap.getFilter(layer.id),
-              ['==', idFilterExpression, feature.get('id')],
-            ];
-            mbMap.setFilter(layer.id, featureIdFilter);
-          });
-        } else {
-          mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
-        }
-      });
+    dvHighlightLayers.forEach((layer) => {
+      const idFilterExpression = [
+        'get',
+        /_highlight_/.test(layer.id) ? 'id' : 'direktverbindung_id',
+      ];
+      // Reset filter to original state
+      const originalFilter = mbMap
+        .getFilter(layer.id)
+        ?.filter(
+          (item) =>
+            !(
+              Array.isArray(item) &&
+              item[1].toString() === idFilterExpression.toString()
+            ),
+        );
+      mbMap.setFilter(layer.id, originalFilter);
+      if (this.selectedFeatures.length) {
+        mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
+        this.selectedFeatures.forEach((feature) => {
+          // Add feature id filter
+          const featureIdFilter = [
+            ...mbMap.getFilter(layer.id),
+            ['==', idFilterExpression, feature.get('id')],
+          ];
+          mbMap.setFilter(layer.id, featureIdFilter);
+        });
+      } else {
+        mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
+      }
+    });
   }
 
   select(features = []) {
