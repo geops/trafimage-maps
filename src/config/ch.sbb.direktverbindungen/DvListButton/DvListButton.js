@@ -21,7 +21,6 @@ const DvListButton = ({ ...props }) => {
   const { t } = useTranslation();
   const layers = useSelector((state) => state.map.layers);
   const map = useSelector((state) => state.app.map);
-  const featureInfo = useSelector((state) => state.app.featureInfo);
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
     [layers],
@@ -33,7 +32,7 @@ const DvListButton = ({ ...props }) => {
       setFeatures(evt.features);
     });
     return () => unByKey(loadFeatsListener);
-  }, [dvMainLayer, map, featureInfo, dispatch, features]);
+  }, [dvMainLayer]);
 
   return (
     <MapButton
@@ -73,7 +72,5 @@ const DvListButton = ({ ...props }) => {
     </MapButton>
   );
 };
-
-DvListButton.propTypes = {};
 
 export default DvListButton;
