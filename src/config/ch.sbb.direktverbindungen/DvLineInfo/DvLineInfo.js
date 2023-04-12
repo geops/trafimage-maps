@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
-import { unByKey } from 'ol/Observable';
 import Link from '../../../components/Link';
 
 const useStyles = makeStyles({
@@ -86,7 +85,6 @@ const DvLineInfo = ({ feature, layer }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    let featureChangeListener;
     if (layer.visible) {
       if (feature) {
         layer.select([feature]);
@@ -96,7 +94,6 @@ const DvLineInfo = ({ feature, layer }) => {
     // eslint-disable-next-line consistent-return
     return () => {
       layer.select();
-      unByKey(featureChangeListener);
     };
   }, [layer, feature]);
 
