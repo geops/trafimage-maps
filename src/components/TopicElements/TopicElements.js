@@ -191,7 +191,7 @@ function TopicElements({ history }) {
             fitExtent={elements.fitExtent}
             zoomSlider={elements.zoomSlider}
           >
-            {activeTopic.customMapControls}
+            {activeTopic.mapControls}
           </MapControls>
         )}
         {elements.baseLayerSwitcher && (
