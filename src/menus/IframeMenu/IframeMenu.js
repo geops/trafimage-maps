@@ -34,7 +34,7 @@ const useStyles = makeStyles(() => {
           : 'unset',
     },
     menuContentMobile: {
-      padding: '30px 0 0',
+      padding: '50px 0 0',
     },
     featureInfo: {
       overflow: 'hidden',
@@ -55,7 +55,7 @@ const useStyles = makeStyles(() => {
     mobileHandleWrapper: {
       position: 'absolute',
       width: '100%',
-      height: 30,
+      height: 50,
       top: 0,
       right: 0,
       zIndex: 1000,
@@ -70,8 +70,11 @@ const useStyles = makeStyles(() => {
       justifyContent: 'flex-end',
     },
     closeBtn: {
-      padding: 8,
-      marginRight: 5,
+      position: 'fixed',
+      right: 0,
+      padding: 14,
+      marginRight: 4,
+      zIndex: 1002,
     },
     layerSwitcher: {
       padding: '15px 10px',
@@ -125,21 +128,21 @@ function IframeMenu({ header, body, hide }) {
           elements={activeTopic.elements}
           disablePortal={false}
           transitionDuration={0}
-          defaultSize={{ height: 400 }}
+          defaultSize={{ height: 300 }}
         >
           <div className={classes.mobileHandleWrapper}>
-            <div className={classes.mobileHandle}>
-              <IconButton
-                className={`wkp-close-bt ${classes.closeBtn}`}
-                title="Close"
-                onClick={() => {
-                  dispatch(setFeatureInfo());
-                }}
-              >
-                <MdClose focusable={false} alt="Close" />
-              </IconButton>
-            </div>
+            <div className={classes.mobileHandle} />
           </div>
+          <IconButton
+            size="medium"
+            className={`wkp-close-bt ${classes.closeBtn}`}
+            title="Close"
+            onClick={() => {
+              dispatch(setFeatureInfo());
+            }}
+          >
+            <MdClose focusable={false} alt="Close" />
+          </IconButton>
           <div
             className={`${classes.menuContent} ${classes.menuContentMobile}`}
           >

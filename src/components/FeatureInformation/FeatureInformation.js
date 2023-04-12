@@ -233,6 +233,7 @@ const FeatureInformation = ({ featureInfo }) => {
                 : layer && layer.name && t(layer.name)}
             </span>
             <IconButton
+              size="medium"
               className="wkp-close-bt"
               title={t('Popup schliessen')}
               onClick={() => {

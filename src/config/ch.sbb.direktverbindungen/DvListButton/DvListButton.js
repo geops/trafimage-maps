@@ -36,6 +36,7 @@ const DvListButton = ({ ...props }) => {
 
   return (
     <MapButton
+      style={{ padding: 8 }}
       title={t('Alle Direktverbindungen anzeigen')}
       disabled={!features?.length}
       data-testid="dv-list-button"

@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => {
       },
     },
     teaser: {
-      maxHeight: 400,
+      maxHeight: (props) => (props.isMobile ? 200 : 400),
       position: 'relative',
       overflow: 'hidden',
       '&::after': {
@@ -72,9 +72,13 @@ function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const [infoKey, setInfoKey] = useState();
+  const screenWidth = useSelector((state) => state.app.screenWidth);
+  const isMobile = useMemo(() => {
+    return ['xs'].includes(screenWidth);
+  }, [screenWidth]);
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
-  const classes = useStyles({ teaser });
+  const classes = useStyles({ isMobile });
   const teaserOnClick = useCallback(() => {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);

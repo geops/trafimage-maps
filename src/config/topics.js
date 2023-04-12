@@ -347,7 +347,7 @@ export const direktverbindungen = {
   projection: 'EPSG:3857',
   layerInfoComponent: 'DvTopicInfo',
   searches: defaultSearches,
-  mapControls: <DvListButton style={{ padding: 8, marginTop: 10 }} />,
+  mapControls: <DvListButton />,
 };
 
 export const direktverbindungenIframe = {
@@ -360,7 +360,7 @@ export const direktverbindungenIframe = {
     shareMenu: false,
     drawMenu: false,
     permalink: true,
-    geolocationButton: false,
+    geolocationButton: true,
     header: false,
     search: false,
     footer: false,
@@ -375,7 +375,7 @@ export const direktverbindungenIframe = {
   only: true,
   hideInLayerTree: true,
   menu: <DvMenu />,
-  mapControls: <DvListButton style={{ padding: 8 }} />,
+  mapControls: <DvListButton />,
 };
 
 const topics = {

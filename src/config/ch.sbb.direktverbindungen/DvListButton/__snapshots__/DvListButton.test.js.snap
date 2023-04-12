@@ -5,6 +5,7 @@ exports[`DvListButton should match snapshot and be disabled on load. 1`] = `
         tabindex="-1"
         type="button"
         disabled
+        style="padding: 8px;"
         title="Alle Direktverbindungen anzeigen"
         data-testid="dv-list-button"
 >
