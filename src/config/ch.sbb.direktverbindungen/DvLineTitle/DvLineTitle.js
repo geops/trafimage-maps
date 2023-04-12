@@ -114,7 +114,7 @@ const DvLineTitle = ({
                 });
               }}
             >
-              <ZoomOutMapIcon focusable={false} />
+              <ZoomOutMapIcon fontSize="small" focusable={false} />
             </IconButton>
           </>
         ) : (
