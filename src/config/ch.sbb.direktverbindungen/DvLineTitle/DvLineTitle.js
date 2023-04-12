@@ -6,6 +6,8 @@ import { makeStyles, IconButton } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import DirektverbindungenLayer from '../../../layers/DirektverbindungenLayer';
+import { ReactComponent as TrainIconDay } from '../../../img/train-day.svg';
+import { ReactComponent as TrainIconNight } from '../../../img/train-night.svg';
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
@@ -63,15 +65,11 @@ const DvLineTitle = ({
   }, [screenWidth]);
   return (
     <div className={classes.titleWrapper}>
-      <img
-        src={
-          isNightTrain
-            ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
-            : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
-        }
-        alt="icon"
-        className={classes.titleIcon}
-      />
+      {isNightTrain ? (
+        <TrainIconNight className={classes.titleIcon} />
+      ) : (
+        <TrainIconDay className={classes.titleIcon} />
+      )}
       <span className={classes.title}>
         {active ? (
           <>

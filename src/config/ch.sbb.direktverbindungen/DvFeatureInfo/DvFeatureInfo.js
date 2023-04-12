@@ -167,103 +167,96 @@ function DvFeatureInfo({ filterByType }) {
   }
 
   return (
-    <>
-      {dvFeatures?.length ? (
-        <div className={classes.featureInfos}>
-          {dvFeatures.length > 1 ? (
-            dvFeatures.map((feat) => {
-              const id = getId(feat);
-              const title = feat.get('name');
-              const layer = feat.get('layer');
-              const isNightTrain = feat.get('line') === 'night';
-              const active = infoKey === id;
-              if (active && dvMainLayer) {
-                dvMainLayer.select([feat]);
-              }
-              return (
+    <div className={classes.featureInfos}>
+      {dvFeatures.length > 1 ? (
+        dvFeatures.map((feat) => {
+          const id = getId(feat);
+          const title = feat.get('name');
+          const layer = feat.get('layer');
+          const isNightTrain = feat.get('line') === 'night';
+          const active = infoKey === id;
+          if (active && dvMainLayer) {
+            dvMainLayer.select([feat]);
+          }
+          return (
+            <div
+              key={id}
+              role="menuitem"
+              tabIndex={teaser ? '-1' : null}
+              onClick={teaserOnClick}
+              onKeyDown={teaserOnClick}
+              style={{ cursor: teaser ? 'pointer' : 'auto' }}
+            >
+              <MenuItem
+                dataId={id}
+                onCollapseToggle={(open) => {
+                  if (active && teaser) {
+                    setTeaser(false);
+                    return;
+                  }
+                  setInfoKey(open ? null : id);
+                  setTeaser(false);
+                  // We select the feature here instead of DvLineInfo
+                  // to prevent excessive map layer rerenders.
+                  dvMainLayer.select(open ? [] : [feat]);
+                }}
+                className={`wkp-dv-feature-info ${classes.root}${
+                  active && teaser ? ` ${classes.teaser}` : ''
+                }`}
+                collapsed={!active}
+                open={active}
+                title={
+                  <DvLineTitle
+                    layer={dvMainLayer}
+                    feature={feat}
+                    title={title}
+                    active={active}
+                    isNightTrain={isNightTrain}
+                    teaser={active && teaser}
+                  />
+                }
+                menuHeight={expandedHeight}
+              >
                 <div
-                  key={id}
-                  role="menuitem"
-                  tabIndex={teaser ? '-1' : null}
-                  onClick={teaserOnClick}
-                  onKeyDown={teaserOnClick}
-                  style={{ cursor: teaser ? 'pointer' : 'auto' }}
+                  className={classes.featureInfoItem}
+                  ref={
+                    active
+                      ? (el) =>
+                          setExpandedHeight(
+                            el?.clientHeight
+                              ? el?.clientHeight + 10
+                              : undefined,
+                          )
+                      : null
+                  }
                 >
-                  <MenuItem
-                    dataId={id}
-                    onCollapseToggle={(open) => {
-                      if (active && teaser) {
-                        setTeaser(false);
-                        return;
-                      }
-                      setInfoKey(open ? null : id);
-                      setTeaser(false);
-                      // We select the feature here instead of DvLineInfo
-                      // to prevent excessive map layer rerenders.
-                      dvMainLayer.select(open ? [] : [feat]);
-                    }}
-                    className={`wkp-dv-feature-info ${classes.root}${
-                      active && teaser ? ` ${classes.teaser}` : ''
-                    }`}
-                    collapsed={!active}
-                    open={active}
-                    title={
-                      <DvLineTitle
-                        layer={dvMainLayer}
-                        feature={feat}
-                        title={title}
-                        active={active}
-                        isNightTrain={isNightTrain}
-                        teaser={active && teaser}
-                      />
-                    }
-                    menuHeight={expandedHeight}
-                  >
-                    <div
-                      className={classes.featureInfoItem}
-                      ref={
-                        active
-                          ? (el) =>
-                              setExpandedHeight(
-                                el?.clientHeight
-                                  ? el?.clientHeight + 10
-                                  : undefined,
-                              )
-                          : null
-                      }
-                    >
-                      <DvLineInfo
-                        feature={active ? feat : null}
-                        layer={layer}
-                      />
-                    </div>
-                  </MenuItem>
-                  <Divider />
+                  <DvLineInfo feature={active ? feat : null} layer={layer} />
                 </div>
-              );
-            })
-          ) : (
-            <>
-              <div style={{ padding: 10 }}>
-                <DvLineTitle
-                  title={dvFeatures[0].get('name')}
-                  active
-                  isNightTrain={dvFeatures[0].get('line') === 'night'}
-                  layer={dvMainLayer}
-                  feature={dvFeatures[0]}
-                />
-              </div>
-              <div className={classes.featureInfoItem}>
-                <DvLineInfo
-                  feature={dvFeatures[0]}
-                  layer={dvFeatures[0].get('layer')}
-                />
-              </div>
-            </>
-          )}
-        </div>
-      ) : null}
-    </>
+              </MenuItem>
+              <Divider />
+            </div>
+          );
+        })
+      ) : (
+        <>
+          <div style={{ padding: 10 }}>
+            <DvLineTitle
+              title={dvFeatures[0].get('name')}
+              active
+              isNightTrain={dvFeatures[0].get('line') === 'night'}
+              layer={dvMainLayer}
+              feature={dvFeatures[0]}
+            />
+          </div>
+          <div className={classes.featureInfoItem}>
+            <DvLineInfo
+              feature={dvFeatures[0]}
+              layer={dvFeatures[0].get('layer')}
+            />
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 

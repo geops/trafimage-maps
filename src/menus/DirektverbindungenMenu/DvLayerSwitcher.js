@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
@@ -52,11 +52,7 @@ function DvLayerSwitcher({ onToggle, row }) {
       }),
     [layers],
   );
-  const getVisibleLayerKeys = useCallback(
-    () => dvLayers.filter((l) => l.visible).map((l) => l.key),
-    [dvLayers],
-  );
-  const layersVisible = getVisibleLayerKeys();
+  const layersVisible = dvLayers.filter((l) => l.visible).map((l) => l.key);
 
   // Force render when visibility changes
   useEffect(() => {
@@ -75,7 +71,7 @@ function DvLayerSwitcher({ onToggle, row }) {
     return () => {
       unByKey(olKeys);
     };
-  }, [layers, revision, getVisibleLayerKeys]);
+  }, [layers, revision]);
 
   useEffect(() => {
     // If the switcher configuration filters out all features from list
