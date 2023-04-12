@@ -80,19 +80,19 @@ function DvFeatureInfo({ filterByType }) {
   }, [teaser]);
   const [revision, forceRender] = useState();
 
-  const getVisibleLayerKeys = useCallback(
-    () =>
-      layers
-        .filter((l) => DV_DAY_NIGHT_REGEX.test(l.key) && l.visible)
-        .map((l) => l.key),
-    [layers],
-  );
-
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
     [layers],
   );
-  const [layersVisible, setLayersVisible] = useState(getVisibleLayerKeys());
+
+  const layersVisible = useMemo(
+    () =>
+      layers
+        .filter((l) => DV_DAY_NIGHT_REGEX.test(l.key) && l.visible)
+        .map((l) => l.key),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [layers, revision],
+  );
 
   const dvFeatures = useMemo(() => {
     const features = featureInfo.reduce((feats, info) => {
@@ -111,7 +111,7 @@ function DvFeatureInfo({ filterByType }) {
             }),
         )
       : cleaned;
-  }, [featureInfo, layersVisible, filterByType]);
+  }, [featureInfo, filterByType, layersVisible]);
 
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
@@ -135,7 +135,6 @@ function DvFeatureInfo({ filterByType }) {
     dvFeatures,
     previousDvFeatures,
     previousInfoKey,
-    layersVisible,
     featureInfo,
     previousFeatureInfo,
   ]);
@@ -147,7 +146,6 @@ function DvFeatureInfo({ filterByType }) {
           forceRender(revision + 1);
           const { target: targetLayer } = evt;
           if (DV_DAY_NIGHT_REGEX.test(targetLayer.key)) {
-            setLayersVisible(getVisibleLayerKeys());
             setInfoKey(null);
           }
         });
@@ -155,12 +153,11 @@ function DvFeatureInfo({ filterByType }) {
     // Force render after first render because visibility of layers is  not yet applied.
     if (revision === undefined) {
       forceRender(0);
-      setLayersVisible(getVisibleLayerKeys());
     }
     return () => {
       unByKey(olKeys);
     };
-  }, [getVisibleLayerKeys, layers, layersVisible, revision]);
+  }, [layers, revision]);
 
   if (!dvFeatures?.length) {
     return null;
@@ -190,12 +187,11 @@ function DvFeatureInfo({ filterByType }) {
               <MenuItem
                 dataId={id}
                 onCollapseToggle={(open) => {
+                  setTeaser(false);
                   if (active && teaser) {
-                    setTeaser(false);
                     return;
                   }
                   setInfoKey(open ? null : id);
-                  setTeaser(false);
                   // We select the feature here instead of DvLineInfo
                   // to prevent excessive map layer rerenders.
                   dvMainLayer.select(open ? [] : [feat]);
