@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import Feature from 'ol/Feature';
 import { unByKey } from 'ol/Observable';
 import Link from '../../../components/Link';
@@ -84,16 +83,6 @@ const defaultProps = {
 
 const DvLineInfo = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
-  const map = useSelector((state) => state.app.map);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
-  const topic = useSelector((state) => state.app.activeTopic);
-  const layers = useSelector((state) => state.map.layers);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
-  const isEmbeddedTopic = useMemo(() => {
-    return /(-iframe|\.sts)$/.test(topic.key);
-  }, [topic]);
   const classes = useStyles();
 
   useEffect(() => {
@@ -109,7 +98,7 @@ const DvLineInfo = ({ feature, layer }) => {
       layer.select();
       unByKey(featureChangeListener);
     };
-  }, [layer, feature, map, isMobile, isEmbeddedTopic, layers]);
+  }, [layer, feature]);
 
   if (!feature) {
     return null;
