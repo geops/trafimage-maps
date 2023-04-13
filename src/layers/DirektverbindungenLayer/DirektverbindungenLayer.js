@@ -13,7 +13,7 @@ const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const DV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
-  /^dv(d|n)?_call(_(border|bg|border|displace|label))?(_highlight)?/;
+  /^dv(d|n)?_call(_(border|bg|border(2)?|displace|label))?(_highlight)?/;
 
 /**
  * Layer for visualizing international train connections.
