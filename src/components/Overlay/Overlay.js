@@ -1,10 +1,17 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, {
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Drawer } from '@material-ui/core';
 import { Resizable } from 're-resizable';
 import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
+import usePrevious from '../../utils/usePrevious';
 
 const OVERLAY_MIN_HEIGHT = 50;
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
       overflow: 'hidden',
     },
     '& .wkp-feature-information-body': {
-      height: 'calc(100% - 38px)',
+      height: 'calc(100% - 50px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -90,7 +97,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   resizeResetButton: {
-    position: 'absolute',
     width: 'calc(100% - 50px)',
     height: 55,
     zIndex: 10000,
@@ -147,9 +153,23 @@ const Overlay = ({
     return ['xs', 's', 'm'].includes(screenWidth);
   }, [screenWidth]);
 
+  const resetOverlayHeight = useCallback(() => {
+    if (resizeRef?.current && contentHeight <= 50) {
+      resizeRef.current.resizable.style.height = `${defaultSize.height}px`;
+    }
+  }, [contentHeight, defaultSize.height]);
+
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
+  const previousFeatureInfo = usePrevious(featureInfo);
+
+  useEffect(() => {
+    // Reset the overlay height if another feature is selected on the map
+    if (featureInfo?.length && featureInfo !== previousFeatureInfo) {
+      resetOverlayHeight();
+    }
+  }, [featureInfo, previousFeatureInfo, resetOverlayHeight]);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
@@ -235,15 +255,10 @@ const Overlay = ({
                   <button
                     className={`${classes.resizeResetButton} ${classes.resizeHandle}`}
                     type="button"
-                    onClick={() => {
-                      if (resizeRef?.current && contentHeight <= 50) {
-                        resizeRef.current.resizable.style.height = `${defaultSize.height}px`;
-                      }
-                    }}
+                    onClick={resetOverlayHeight}
                   >
                     {' '}
                   </button>
-                  {/* <div className={classes.resizeHandle} /> */}
                 </>
               ),
             }}
