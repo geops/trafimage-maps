@@ -27,6 +27,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
+// Unused component for now (does not work on iOS), but we keep it for now in case it becomes iOS compatible
 const FadeShadow = () => {
   const classes = useStyles();
   return <div className={classes.topShadow} />;

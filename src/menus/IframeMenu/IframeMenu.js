@@ -6,6 +6,9 @@ import { makeStyles, IconButton } from '@material-ui/core';
 import { MdClose } from 'react-icons/md';
 import Overlay from '../../components/Overlay/Overlay';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
+import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
+
+const IFRAME_OVERLAY_DEFAULT_HEIGHT = 300;
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -128,7 +131,16 @@ function IframeMenu({ header, body, hide }) {
           elements={activeTopic.elements}
           disablePortal={false}
           transitionDuration={0}
-          defaultSize={{ height: 300 }}
+          ResizableProps={{
+            defaultSize: { height: IFRAME_OVERLAY_DEFAULT_HEIGHT },
+            snap: {
+              y: [
+                OVERLAY_MIN_HEIGHT,
+                IFRAME_OVERLAY_DEFAULT_HEIGHT,
+                document.documentElement.clientHeight,
+              ],
+            },
+          }}
         >
           <div className={classes.mobileHandleWrapper}>
             <div className={classes.mobileHandle} />

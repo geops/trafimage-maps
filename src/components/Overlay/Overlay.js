@@ -1,10 +1,4 @@
-import React, {
-  useMemo,
-  useRef,
-  useState,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, { useMemo, useRef, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Drawer } from '@material-ui/core';
@@ -12,8 +6,8 @@ import { Resizable } from 're-resizable';
 import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
 import usePrevious from '../../utils/usePrevious';
+import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
 
-const OVERLAY_MIN_HEIGHT = 50;
 const useStyles = makeStyles((theme) => ({
   drawerRoot: {
     position: 'absolute !important',
@@ -109,11 +103,6 @@ const propTypes = {
   elements: PropTypes.shape().isRequired,
   children: PropTypes.node,
   disablePortal: PropTypes.bool,
-  onResize: PropTypes.func,
-  defaultSize: PropTypes.shape({
-    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  }),
   transitionDuration: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.shape({
@@ -122,28 +111,41 @@ const propTypes = {
       exit: PropTypes.number,
     }),
   ]),
+  ResizableProps: PropTypes.shape({
+    defaultSize: PropTypes.shape({
+      height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    }),
+    snap: PropTypes.shape({
+      x: PropTypes.arrayOf(PropTypes.number),
+      y: PropTypes.arrayOf(PropTypes.number),
+    }),
+    onResize: PropTypes.func,
+  }),
 };
 
 const defaultProps = {
   children: null,
   disablePortal: true,
-  defaultSize: { height: 300 },
   transitionDuration: undefined,
-  onResize: () => {},
+  ResizableProps: {
+    defaultSize: { height: 300 },
+    onResize: () => {},
+    snap: null,
+  },
 };
 
 const Overlay = ({
   elements,
   children,
   disablePortal,
-  defaultSize,
   transitionDuration,
-  onResize,
+  ResizableProps,
 }) => {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
-  const [contentHeight, setContentHeight] = useState(0);
   const resizeRef = useRef(null);
+  const { defaultSize } = ResizableProps;
 
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
@@ -154,10 +156,10 @@ const Overlay = ({
   }, [screenWidth]);
 
   const resetOverlayHeight = useCallback(() => {
-    if (resizeRef?.current && contentHeight <= 50) {
+    if (resizeRef?.current) {
       resizeRef.current.resizable.style.height = `${defaultSize.height}px`;
     }
-  }, [contentHeight, defaultSize.height]);
+  }, [defaultSize.height]);
 
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -234,19 +236,7 @@ const Overlay = ({
             ref={resizeRef}
             enable={{ top: isMobile }}
             maxHeight="100vh"
-            defaultSize={defaultSize}
             minHeight={OVERLAY_MIN_HEIGHT}
-            onResize={(evt, side, el) => {
-              setContentHeight(el.clientHeight);
-              onResize(evt, side, el);
-            }}
-            snap={{
-              y: [
-                OVERLAY_MIN_HEIGHT,
-                defaultSize.height,
-                document.documentElement.clientHeight,
-              ],
-            }}
             handleComponent={{
               top: (
                 <>
@@ -262,6 +252,8 @@ const Overlay = ({
                 </>
               ),
             }}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...ResizableProps}
           >
             {children || <FeatureInformation featureInfo={filtered} />}
           </Resizable>

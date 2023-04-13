@@ -1,12 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
+import { Divider, makeStyles } from '@material-ui/core';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
 import DvLayerSwitcher from './DvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
-import FadeShadow from '../../components/FadeShadow';
 
 const useStyles = makeStyles(() => {
   return {
@@ -68,7 +67,7 @@ function DvMenu() {
       body={
         <>
           {showSwitcher && isMobile ? switcher : null}
-          {showSwitcher ? <FadeShadow /> : null}
+          {showSwitcher ? <Divider /> : null}
           <DvFeatureInfo filterByType />
         </>
       }
