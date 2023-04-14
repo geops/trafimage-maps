@@ -6,8 +6,6 @@
  */
 import Interaction from 'ol/interaction/Interaction';
 import MapBrowserEventType from 'ol/MapBrowserEventType';
-import { getValues } from 'ol/obj';
-
 /**
  * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent Event.
  * @return {boolean} Whether the event is a pointerdown, pointerdrag
@@ -209,7 +207,7 @@ class DblClickDragZoom extends Interaction {
         // update only when there was a pointerdown event for this pointer
         this.trackedPointers_[id] = event;
       }
-      this.targetPointers = getValues(this.trackedPointers_);
+      this.targetPointers = Object.values(this.trackedPointers_);
     }
   }
 

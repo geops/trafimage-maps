@@ -1,5 +1,4 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import GeometryType from 'ol/geom/GeometryType';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import { kilometrageLayer } from '../ch.sbb.infrastruktur';
@@ -35,8 +34,8 @@ export const regionenkartePublicSegment = new Layer({
       featureInfoFilter: (feature) => {
         // There is some points in this data source and we don't want them.
         return (
-          feature.getGeometry().getType() === GeometryType.LINE_STRING ||
-          feature.getGeometry().getType() === GeometryType.MULTI_LINE_STRING
+          feature.getGeometry().getType() === 'LineString' ||
+          feature.getGeometry().getType() === 'MultiLineString'
         );
       },
       properties: {

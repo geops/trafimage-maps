@@ -6,7 +6,6 @@
  */
 import Interaction, { zoomByDelta } from 'ol/interaction/Interaction';
 import MapBrowserEventType from 'ol/MapBrowserEventType';
-import { getValues } from 'ol/obj';
 
 /**
  * @typedef {Object} Options
@@ -153,7 +152,7 @@ class DblPointerClickZoomOut extends Interaction {
         // update only when there was a pointerdown event for this pointer
         this.trackedPointers_[id] = event;
       }
-      this.targetPointers = getValues(this.trackedPointers_);
+      this.targetPointers = Object.values(this.trackedPointers_);
     }
   }
 }

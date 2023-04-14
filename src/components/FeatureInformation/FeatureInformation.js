@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
-import GeometryType from 'ol/geom/GeometryType';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import Feature from 'ol/Feature';
@@ -158,7 +157,7 @@ const FeatureInformation = ({ featureInfo }) => {
 
     features.forEach((feat, idx) => {
       if (feat && feat.getGeometry()) {
-        if (feat.getGeometry().getType() === GeometryType.POINT) {
+        if (feat.getGeometry().getType() === 'Point') {
           highlightLayer
             .getSource()
             .addFeature(new Feature(feat.getGeometry()));

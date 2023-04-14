@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
-import GeometryType from 'ol/geom/GeometryType';
 import { Divider, Typography } from '@material-ui/core';
 import { energieleitungenColorMapping } from '../../utils/constants';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
@@ -109,7 +108,7 @@ const EnergiePopup = ({ feature }) => {
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
   const description = useMemo(
     () =>
-      feature.getGeometry().getType() === GeometryType.POINT
+      feature.getGeometry().getType() === 'Point'
         ? `${feature.get('bezeichnung')} (${feature.get('anlage_id')})`
         : feature.get('bezeichnung'),
     [feature],
