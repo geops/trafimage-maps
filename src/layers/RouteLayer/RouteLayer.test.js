@@ -257,7 +257,6 @@ describe('RouteLayer', () => {
     layer.attachToMap(map);
     const features = await layer.loadRoutes(routes);
     jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([features[0]]);
-    jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);
 
     expect(onClick).toHaveBeenCalledTimes(0);
     const evt = { type: 'singleclick', map, coordinate };

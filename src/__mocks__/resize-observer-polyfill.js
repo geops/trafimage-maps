@@ -1,5 +1,5 @@
 /* eslint-disable */
-export default class ResizeObserver {
+class ResizeObserver {
   constructor(onResize) {
     ResizeObserver.onResize = onResize;
   }
@@ -7,3 +7,6 @@ export default class ResizeObserver {
   unobserve() {}
   disconnect() {}
 }
+
+window.ResizeObserver = ResizeObserver;
+export default ResizeObserver;

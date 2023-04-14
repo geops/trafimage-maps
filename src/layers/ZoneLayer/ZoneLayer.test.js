@@ -16,12 +16,12 @@ const feature = new Feature({
 const olLayer = new LayerGroup({
   layers: [
     new OLVectorLayer({
-      className: 'Verbundzonen', // needed for forEachLayerAtPixel
+      className: 'Verbundzonen',
       source: new VectorSource(),
       style: (f, r) => this.zoneStyle(f, r)[0],
     }),
     new OLVectorLayer({
-      className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
+      className: 'Verbundzonen - Labels',
       source: new VectorSource(),
       style: (f, r) => this.zoneStyle(f, r)[1],
       zIndex: 100,

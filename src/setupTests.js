@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import 'resize-observer-polyfill';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-import 'resize-observer-polyfill';
 import '@testing-library/jest-dom';
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

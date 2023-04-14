@@ -14,7 +14,6 @@ import {
 } from 'ol/style';
 import { Point } from 'ol/geom';
 import CasaLayer from '../CasaLayer';
-// use flag png to ensure IE detects it in olMap.forEachLayerAtPixel.
 import finishFlag from '../../img/finish_flag.png';
 
 /**
@@ -49,7 +48,7 @@ class RouteLayer extends CasaLayer {
     super({
       name: 'RouteLayer',
       olLayer: new OLVectorLayer({
-        className: 'RouteLayer', // needed for forEachLayerAtPixel
+        className: 'RouteLayer',
         style: (f) => this.routeStyle(f),
         source: new VectorSource(),
       }),
@@ -251,7 +250,7 @@ class RouteLayer extends CasaLayer {
               anchorYUnits: 'pixels',
               anchorOrigin: 'bottom-left',
               imgSize: [24, 24],
-              crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
+              crossOrigin: 'anonymous',
             }),
             zIndex: 1,
           }),
