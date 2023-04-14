@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.18.15",
+  "version": "1.20.1",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -27,7 +27,7 @@
     "jspdf": "2.4.0",
     "mapbox-gl": "1.13.1",
     "maplibre-gl": "2.4.0",
-    "mobility-toolbox-js": "2.0.0-beta.69",
+    "mobility-toolbox-js": "2.0.0-beta.77",
     "ol": "6.6.1",
     "proj4": "2.7.5",
     "prop-types": "15.7.2",
@@ -72,7 +72,7 @@
     "babel-plugin-named-asset-import": "0.3.7",
     "canvas": "2.8.0",
     "css-mediaquery": "0.1.2",
-    "cypress": "12",
+    "cypress": "12.9.0",
     "cypress-enter-plugin": "1.0.1",
     "cypress-plugin-tab": "1.0.5",
     "documentation": "14.0.0",
@@ -210,6 +210,9 @@
     ]
   },
   "lint-staged": {
+    "*.md": [
+      "prettier --write"
+    ],
     "src/lang/*.json": [
       "yarn sort",
       "git add"

@@ -7,7 +7,7 @@ class Municipalities extends Search {
   constructor() {
     super();
     this.showInPlaceholder = false;
-    this.dataProjection = 'EPSG:21781';
+    this.dataProjection = 'EPSG:2056';
   }
 
   // eslint-disable-next-line class-methods-use-this

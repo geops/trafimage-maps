@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import { Layer } from 'mobility-toolbox-js/ol';
@@ -236,11 +236,13 @@ function WebComponent(props) {
     vectorTilesKey,
     enableTracking,
     elements,
+    language,
     layersVisibility,
     embedded,
     domainConsent,
     domainConsentId,
     disableCookies,
+    realtimeKey,
   } = props;
 
   const arrayCenter = useMemo(() => {
@@ -249,11 +251,6 @@ function WebComponent(props) {
     }
     return JSON.parse(center);
   }, [center]);
-
-  const vectorTileApiKey = useMemo(
-    () => vectorTilesKey || apiKey,
-    [apiKey, vectorTilesKey],
-  );
 
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
@@ -300,6 +297,15 @@ function WebComponent(props) {
         // eslint-disable-next-line no-param-reassign
         topic.elements = { ...topic.elements, ...obj };
       }
+    });
+    return [...tps];
+  }, [topics, appName, elements]);
+
+  // Update layers visiblity using web component attribute
+  // It's important to do this outside the previous useMemo so a webComponent render is not triggered
+  useEffect(() => {
+    // TODO improve the code, particularly the transformation string to object.
+    appTopics?.forEach((topic) => {
       // Override layers visiblity.
       if (layersVisibility && topic.layers.length) {
         const obj = {};
@@ -335,8 +341,7 @@ function WebComponent(props) {
         });
       }
     });
-    return [...tps];
-  }, [topics, appName, elements, layersVisibility]);
+  }, [appTopics, layersVisibility]);
 
   if (!appTopics) {
     return null;
@@ -353,7 +358,8 @@ function WebComponent(props) {
       >
         <TrafimageMaps
           {...props}
-          vectorTilesKey={vectorTileApiKey}
+          vectorTilesKey={vectorTilesKey || apiKey}
+          realtimeKey={realtimeKey || apiKey}
           topics={appTopics}
           zoom={floatZoom}
           maxExtent={extentArray}
@@ -363,6 +369,8 @@ function WebComponent(props) {
           disableCookies={disableCookies === 'true'}
           domainConsent={domainConsent}
           domainConsentId={domainConsentId}
+          language={language}
+          elements={elements}
         />
       </div>
     </Styled>

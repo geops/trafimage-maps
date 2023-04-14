@@ -2,49 +2,98 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.18.15](https://github.com/geops/trafimage-maps/compare/v1.18.14...v1.18.15) (2023-02-09)
-
+### [1.20.1](https://github.com/geops/trafimage-maps/compare/v1.20.0...v1.20.1) (2023-04-03)
 
 ### Bug Fixes
 
-* **Geltungsbereiche:** prevent subway features from duplicating rail in GB legend ([5c3bb0e](https://github.com/geops/trafimage-maps/commit/5c3bb0ecf0abe92429b866cd28a878a7e11e6150))
+- open a new websocket only when the url change ([c42e052](https://github.com/geops/trafimage-maps/commit/c42e0521b8434c909b3fadf85be91cac688a4039))
+
+## [1.20.0](https://github.com/geops/trafimage-maps/compare/v1.19.5...v1.20.0) (2023-04-03)
+
+### Features
+
+- add rokas poi background layer in sandbox topic ([#1076](https://github.com/geops/trafimage-maps/issues/1076)) ([9f51845](https://github.com/geops/trafimage-maps/commit/9f51845d62c3b2818f0a34438384a799bf430a5c))
+
+### Bug Fixes
+
+- use one websocket for all punctuality layers and use the proper … ([#1073](https://github.com/geops/trafimage-maps/issues/1073)) ([c2d6895](https://github.com/geops/trafimage-maps/commit/c2d6895b42de30f629c8918f731fe69cc3db0c15))
+
+### [1.19.5](https://github.com/geops/trafimage-maps/compare/v1.19.4...v1.19.5) (2023-03-14)
+
+### Bug Fixes
+
+- **Anlagenverantwortliche:** add bahntechnik role to AV options ([#1074](https://github.com/geops/trafimage-maps/issues/1074)) ([6a5fdd4](https://github.com/geops/trafimage-maps/commit/6a5fdd40f364d8317808a62857dad68e862de020))
+
+### [1.19.4](https://github.com/geops/trafimage-maps/compare/v1.19.3...v1.19.4) (2023-03-09)
+
+### Bug Fixes
+
+- **Anlagenverantwortliche:** remove map update on language switch (fixes the AV popup dropdown) ([#1072](https://github.com/geops/trafimage-maps/issues/1072)) ([ed27116](https://github.com/geops/trafimage-maps/commit/ed2711646ea6a602766b4e6ade8143a44a3a2b69))
+
+### [1.19.3](https://github.com/geops/trafimage-maps/compare/v1.19.2...v1.19.3) (2023-03-07)
+
+### Bug Fixes
+
+- **ISB:** add open data link in topic info ([#1070](https://github.com/geops/trafimage-maps/issues/1070)) ([ace822e](https://github.com/geops/trafimage-maps/commit/ace822ed60f079fe270b638efa2d4afda96b29cf))
+- **Regionenkarte Public:** prevent permalink parameters from using private roles in popup ([#1071](https://github.com/geops/trafimage-maps/issues/1071)) ([6daaf9e](https://github.com/geops/trafimage-maps/commit/6daaf9ec0df47ae5649ebecfa9377b06a9104cdb))
+
+### [1.19.2](https://github.com/geops/trafimage-maps/compare/v1.19.1...v1.19.2) (2023-03-02)
+
+### Bug Fixes
+
+- prevent js error when no topics are defined
+
+### [1.19.1](https://github.com/geops/trafimage-maps/compare/v1.19.0...v1.19.1) (2023-03-02)
+
+### Bug Fixes
+
+- **draw tool:** update mapset backend url ([#1069](https://github.com/geops/trafimage-maps/issues/1069)) ([8dffe85](https://github.com/geops/trafimage-maps/commit/8dffe853dae6fc1bf1204b083e511b72f8dc9ba8))
+
+## [1.19.0](https://github.com/geops/trafimage-maps/compare/v1.18.16...v1.19.0) (2023-02-20)
+
+### Features
+
+- **punctuality:** separate MOTs as togglable child layers in punctuality layer ([#1063](https://github.com/geops/trafimage-maps/issues/1063)) ([1867a70](https://github.com/geops/trafimage-maps/commit/1867a7021ce57638ae0dbbaaff63656e74fc31aa))
+
+### [1.18.16](https://github.com/geops/trafimage-maps/compare/v1.18.15...v1.18.16) (2023-02-16)
+
+### [1.18.15](https://github.com/geops/trafimage-maps/compare/v1.18.14...v1.18.15) (2023-02-09)
+
+### Bug Fixes
+
+- **Geltungsbereiche:** prevent subway features from duplicating rail in GB legend ([5c3bb0e](https://github.com/geops/trafimage-maps/commit/5c3bb0ecf0abe92429b866cd28a878a7e11e6150))
 
 ### [1.18.14](https://github.com/geops/trafimage-maps/compare/v1.18.13...v1.18.14) (2023-02-07)
 
-
 ### Bug Fixes
 
-* add consent script only when they are not already loaded ([65e2d1b](https://github.com/geops/trafimage-maps/commit/65e2d1b4b5bb9b470581fdc32effb034ff149207))
-* **Geltungbereiche:** add translation for subway ([#1065](https://github.com/geops/trafimage-maps/issues/1065)) ([2b36b9d](https://github.com/geops/trafimage-maps/commit/2b36b9dec9046844885476e51f0d1cf24e813180))
+- add consent script only when they are not already loaded ([65e2d1b](https://github.com/geops/trafimage-maps/commit/65e2d1b4b5bb9b470581fdc32effb034ff149207))
+- **Geltungbereiche:** add translation for subway ([#1065](https://github.com/geops/trafimage-maps/issues/1065)) ([2b36b9d](https://github.com/geops/trafimage-maps/commit/2b36b9dec9046844885476e51f0d1cf24e813180))
 
 ### [1.18.13](https://github.com/geops/trafimage-maps/compare/v1.18.12...v1.18.13) (2023-01-16)
 
-
 ### Bug Fixes
 
-* manage bold text in layer name and in geleutngsbereiche menu ([#1060](https://github.com/geops/trafimage-maps/issues/1060)) ([ccb0619](https://github.com/geops/trafimage-maps/commit/ccb0619344062492c7442620e57d24f4a8511f5e))
+- manage bold text in layer name and in geltungsbereiche menu ([#1060](https://github.com/geops/trafimage-maps/issues/1060)) ([ccb0619](https://github.com/geops/trafimage-maps/commit/ccb0619344062492c7442620e57d24f4a8511f5e))
 
 ### [1.18.12](https://github.com/geops/trafimage-maps/compare/v1.18.11...v1.18.12) (2023-01-13)
 
-
 ### Bug Fixes
 
-* **Geltungsbereiche:** don't hide Geltungsbereiche in LayerTree ([#1061](https://github.com/geops/trafimage-maps/issues/1061)) ([6ed6751](https://github.com/geops/trafimage-maps/commit/6ed6751fa40061788f3b50d3545ec998c2bf6bdf))
+- **Geltungsbereiche:** don't hide Geltungsbereiche in LayerTree ([#1061](https://github.com/geops/trafimage-maps/issues/1061)) ([6ed6751](https://github.com/geops/trafimage-maps/commit/6ed6751fa40061788f3b50d3545ec998c2bf6bdf))
 
 ### [1.18.11](https://github.com/geops/trafimage-maps/compare/v1.18.10...v1.18.11) (2023-01-04)
 
-
 ### Bug Fixes
 
-* add data links for various topics and layers in Info components  ([#1058](https://github.com/geops/trafimage-maps/issues/1058)) ([f26fe8c](https://github.com/geops/trafimage-maps/commit/f26fe8c81ae9bcdf54ba68787376e769801cce53))
+- add data links for various topics and layers in Info components ([#1058](https://github.com/geops/trafimage-maps/issues/1058)) ([f26fe8c](https://github.com/geops/trafimage-maps/commit/f26fe8c81ae9bcdf54ba68787376e769801cce53))
 
 ### [1.18.10](https://github.com/geops/trafimage-maps/compare/v1.18.9...v1.18.10) (2022-12-22)
 
-
 ### Bug Fixes
 
-* **Geltungsbereiche:** activate Geltungsbereiche topics (hidden) ([#1056](https://github.com/geops/trafimage-maps/issues/1056)) ([41bf0be](https://github.com/geops/trafimage-maps/commit/41bf0be934330dd590fa9606156e6f337ae91c01))
-* **Geltungsbereiche:** added Geltungsbereiche examples with documentation ([#1041](https://github.com/geops/trafimage-maps/issues/1041)) ([6bda271](https://github.com/geops/trafimage-maps/commit/6bda27173ddb126c779d3fabc2aac6462c55e4e2))
+- **Geltungsbereiche:** activate Geltungsbereiche topics (hidden) ([#1056](https://github.com/geops/trafimage-maps/issues/1056)) ([41bf0be](https://github.com/geops/trafimage-maps/commit/41bf0be934330dd590fa9606156e6f337ae91c01))
+- **Geltungsbereiche:** added Geltungsbereiche examples with documentation ([#1041](https://github.com/geops/trafimage-maps/issues/1041)) ([6bda271](https://github.com/geops/trafimage-maps/commit/6bda27173ddb126c779d3fabc2aac6462c55e4e2))
 
 ### [1.18.9](https://github.com/geops/trafimage-maps/compare/v1.18.8...v1.18.9) (2022-12-21)
 

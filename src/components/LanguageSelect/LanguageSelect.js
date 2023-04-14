@@ -72,7 +72,11 @@ function LanguageSelect() {
   const langOptions = useMemo(() => {
     return options.map((opt) => {
       return (
-        <MenuItem key={opt.value} value={opt.value}>
+        <MenuItem
+          key={opt.value}
+          value={opt.value}
+          data-cy={`lang-select-option-${opt.value}`}
+        >
           {opt.label}
         </MenuItem>
       );

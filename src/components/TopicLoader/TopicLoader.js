@@ -95,7 +95,6 @@ class TopicLoader extends PureComponent {
   componentDidUpdate(prevProps) {
     const {
       activeTopic,
-      language,
       topics,
       permissionInfos,
       apiKey,
@@ -130,7 +129,6 @@ class TopicLoader extends PureComponent {
     } else if (
       activeTopic &&
       (apiKey !== prevProps.apiKey ||
-        language !== prevProps.language ||
         apiKeyName !== prevProps.apiKeyName ||
         appBaseUrl !== prevProps.appBaseUrl ||
         cartaroUrl !== prevProps.cartaroUrl ||
@@ -273,7 +271,7 @@ class TopicLoader extends PureComponent {
     if (visibleLayersMaxZoom.length) {
       dispatchSetMaxZoom(Math.min(...visibleLayersMaxZoom));
     } else {
-      dispatchSetMaxZoom(activeTopic.maxZoom);
+      dispatchSetMaxZoom(activeTopic?.maxZoom);
     }
 
     const visibleLayersMinZoom = visibleLayers.reduce(
@@ -285,7 +283,7 @@ class TopicLoader extends PureComponent {
     if (visibleLayersMinZoom.length) {
       dispatchSetMinZoom(Math.max(...visibleLayersMinZoom));
     } else {
-      dispatchSetMinZoom(activeTopic.minZoom);
+      dispatchSetMinZoom(activeTopic?.minZoom);
     }
   }
 
@@ -407,11 +405,12 @@ class TopicLoader extends PureComponent {
 
       // Realtime layers
       if (flatLayers[i].api?.wsApi) {
-        if (realtimeKey) {
-          flatLayers[i].api.apiKey = realtimeKey;
-        }
         if (realtimeUrl) {
-          flatLayers[i].api.url = realtimeUrl;
+          let newUrl = realtimeUrl;
+          if (realtimeKey) {
+            newUrl = `${newUrl}?key=${realtimeKey}`;
+          }
+          flatLayers[i].api.url = newUrl;
         }
       }
     }

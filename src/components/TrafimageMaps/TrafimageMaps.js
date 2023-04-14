@@ -14,6 +14,7 @@ import Head from '../Head';
 import TopicLoader from '../TopicLoader';
 import getStore from '../../model/store';
 import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
+import { defaultElements } from '../../config/topics';
 import {
   setLanguage,
   setCartaroUrl,
@@ -243,6 +244,11 @@ const propTypes = {
    * Key of the current active topic
    */
   activeTopicKey: PropTypes.string,
+
+  /**
+   * Key of the current active topic
+   */
+  elements: PropTypes.string,
 };
 
 const defaultProps = {
@@ -259,6 +265,7 @@ const defaultProps = {
   activeTopicKey: null,
   permissionInfos: null,
   embedded: false,
+  elements: undefined,
   apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
@@ -564,6 +571,8 @@ class TrafimageMaps extends React.PureComponent {
       loginUrl,
       realtimeKey,
       realtimeUrl,
+      language,
+      elements,
     } = this.props;
 
     const activeTopic = (topics || []).find(
@@ -667,6 +676,29 @@ class TrafimageMaps extends React.PureComponent {
 
     if (center !== prevProps.center) {
       this.store.dispatch(setCenter(center || activeTopic?.center));
+    }
+
+    if (language !== prevProps.language) {
+      this.store.dispatch(setLanguage(language));
+    }
+
+    if (elements !== prevProps.elements) {
+      const newElements = (elements?.split(',') || []).reduce(
+        (final, currentEl) => {
+          const [prop, value] = currentEl.split('=');
+          const newProps = { ...final };
+          newProps[prop] = value === 'true';
+          return newProps;
+        },
+        {},
+      );
+      const topic = activeTopic || topics[0];
+      this.store.dispatch(
+        setActiveTopic({
+          ...topic,
+          elements: { ...defaultElements, ...newElements },
+        }),
+      );
     }
   }
 

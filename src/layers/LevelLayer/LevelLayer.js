@@ -2,7 +2,7 @@
 import MapboxStyleLayer from '../MapboxStyleLayer';
 
 // Caching filters to reset to the original when toggle off the layer.
-const filterCache = {};
+const filterCacheByMbStyle = {};
 
 /**
  * Layer for visualizing station levels.
@@ -29,6 +29,14 @@ class LevelLayer extends MapboxStyleLayer {
     if (!mbMap || !style) {
       return;
     }
+
+    // Since style layer can have the same id between styles,
+    // we store the filters depending on the style.
+    if (!filterCacheByMbStyle[style.name]) {
+      filterCacheByMbStyle[style.name] = {};
+    }
+
+    const filterCache = filterCacheByMbStyle[style.name];
 
     const isInit = !evt;
 

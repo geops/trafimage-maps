@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DataLink from '../../components/DataLink';
 
 const translations = {
   de: {
@@ -49,6 +50,13 @@ function IsbTopicInfo({ language }) {
         {responsibleContent},
         <br />
         <a href="mailto:netzzugang@sbb.ch">netzzugang@sbb.ch</a>.
+      </p>
+      <hr />
+      <p>
+        <DataLink
+          fullWidth={false}
+          href="https://data.sbb.ch/explore/dataset/infrastrukturbetreiberinnen/information/"
+        />
       </p>
     </div>
   );

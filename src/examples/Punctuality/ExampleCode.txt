@@ -1,0 +1,66 @@
+import 'trafimage-maps';
+import React, { useRef, useEffect } from 'react';
+import TralisLayer from 'trafimage-maps/es/layers/TralisLayer';
+import TrafimageMapboxLayer from 'trafimage-maps/es/layers/TrafimageMapboxLayer';
+
+// Please contact sbb_map@geops.ch for your own API key
+const apiKey = <apiKey>;
+
+const App = () => {
+  const ref = useRef();
+
+  useEffect(() => {
+    const map = ref.current;
+    map.topics = [
+      {
+        name: 'Punctuality topic',
+        key: 'punctuality',
+        layers: [
+          new TrafimageMapboxLayer({
+            name: 'Background layer',
+            style: 'base_bright_v2',
+          }),
+          new TralisLayer({
+            name: 'Punctuality Layer',
+            apiKey: apiKey,
+            onClick: (features) => {
+              // Show the raw features clicked in the browser console (press F12).
+              console.log(features);
+            },
+            // You can filter the trains displayed using the following properties:
+            // tripNumber: '007383.003849.001:3',
+            // publishedLineName: 'RE,IC5,S3,17',
+            // regexPublishedLineName: '^S[0-5]$'
+          }),
+        ],
+        elements: {
+          footer: true,
+          header: true,
+          mapControls: true,
+          menu: true,
+          popup: true,
+          permalink: false,
+          search: false,
+          trackerMenu: true,
+        },
+      },
+    ];
+
+    return () => {
+      map.topics = null;
+    };
+  }, []);
+
+  return (
+    <div className="container">
+      <trafimage-maps
+        ref={ref}
+        zoom="14"
+        center="[950690,6004000]"
+        apiKey={apiKey}
+      />
+    </div>
+  );
+};
+
+<App />;

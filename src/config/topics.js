@@ -37,7 +37,7 @@ export {
   casaNetzkarteLayerWithoutLabels,
 } from './ch.sbb.casa';
 
-const defaultElements = {
+export const defaultElements = {
   header: true,
   footer: true,
   menu: true,

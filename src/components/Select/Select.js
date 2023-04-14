@@ -61,6 +61,7 @@ function Select(props) {
     <MuiSelect
       variant="outlined"
       IconComponent={ExpandMoreIcon}
+      data-testid="trafimage-maps-select"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       // The following props need to be set after {...newProps}, since they overwrite some of them

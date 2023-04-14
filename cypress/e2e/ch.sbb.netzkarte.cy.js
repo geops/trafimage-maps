@@ -69,7 +69,7 @@ describe('ch.sbb.netzkarte', () => {
                 event_timestamp: now,
                 line: {
                   id: 12396459,
-                  name: '752',
+                  name: 'TER',
                   color: null,
                   text_color: null,
                   stroke: null,
@@ -291,7 +291,7 @@ describe('ch.sbb.netzkarte', () => {
       mockServer.stop();
     });
 
-    it.only('should display the full trajectory on click', () => {
+    it('should display the full trajectory on click', () => {
       visitWithMsg('/ch.sbb.netzkarte', bufferMessage);
 
       // Click on the vehicle
@@ -376,7 +376,7 @@ describe('ch.sbb.netzkarte', () => {
                 event_timestamp: now,
                 line: {
                   id: 12396459,
-                  name: '752',
+                  name: 'TER',
                   color: null,
                   text_color: null,
                   stroke: null,
@@ -439,22 +439,22 @@ describe('ch.sbb.netzkarte', () => {
         ],
       };
 
-      it('should not display bus at zoom 13', () => {
-        visitWithMsg('/ch.sbb.netzkarte?z=13', buffer);
+      it('should not display bus at zoom 9', () => {
+        visitWithMsg('/ch.sbb.netzkarte?z=9', buffer);
         cy.get('canvas').then((elts) => {
           const vehicleCanvas = elts[2];
 
-          cy.fixture('noBusAtZoom13.png').then((fixture) => {
+          cy.fixture('noBusAtZoom9.png').then((fixture) => {
             cy.task('comparePng', {
               current: vehicleCanvas.toDataURL('image/png'),
               fixture: `data:image/png;base64,${fixture}`,
             }).then((result) => {
               cy.task(
                 'log',
-                `mismatch (<0.5 to pass test): ${result.rawMisMatchPercentage}`,
+                `mismatch (<0.1 to pass test): ${result.rawMisMatchPercentage}`,
               ).then(() => {
-                // Mismatch tolerance of < 0.5 to avoid detecting micro differences in pixels
-                expect(result.rawMisMatchPercentage < 0.5).to.equal(true);
+                // Canvas to compare are pretty empty so we use a lower mismatch.
+                expect(result.rawMisMatchPercentage < 0.1).to.equal(true);
               });
             });
           });
@@ -473,10 +473,10 @@ describe('ch.sbb.netzkarte', () => {
             }).then((result) => {
               cy.task(
                 'log',
-                `mismatch (<0.5 to pass test): ${result.rawMisMatchPercentage}`,
+                `mismatch (<0.1 to pass test): ${result.rawMisMatchPercentage}`,
               ).then(() => {
-                // Mismatch tolerance of < 0.5 to avoid detecting micro differences in pixels
-                expect(result.rawMisMatchPercentage < 0.5).to.equal(true);
+                // Canvas to compare are pretty empty so we use a lower mismatch.
+                expect(result.rawMisMatchPercentage < 0.2).to.equal(true);
               });
             });
           });

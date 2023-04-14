@@ -29,9 +29,11 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     padding: '0 10px 0',
+    alignItems: 'start',
     maxWidth: 280,
   },
   listItemIcon: {
+    marginTop: 8,
     minWidth: 20,
     color: theme.palette.text.primary,
   },
