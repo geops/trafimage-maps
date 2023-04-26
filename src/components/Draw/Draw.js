@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FaTrash, FaInfoCircle } from 'react-icons/fa';
 import { Grid, Typography, IconButton, makeStyles } from '@material-ui/core';
-import { useMatomo } from '@datapunt/matomo-tracker-react';
+import { useMatomo } from '@jonkoops/matomo-tracker-react';
 import { setDialogVisible } from '../../model/app/actions';
 import DrawButton from '../DrawButton';
 import { NAME } from '../DrawRemoveDialog';

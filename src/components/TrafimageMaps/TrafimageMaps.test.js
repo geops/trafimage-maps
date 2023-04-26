@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { createInstance } from '@datapunt/matomo-tracker-react';
+import { createInstance } from '@jonkoops/matomo-tracker-react';
 import TrafimageMaps from '.';
 
 describe('TrafimageMaps', () => {

@@ -2,11 +2,6 @@ import OLGeoJSON from 'ol/format/GeoJSON';
 import { Style, Fill, Stroke } from 'ol/style';
 import highlightPointStyle from '../utils/highlightPointStyle';
 
-const searchUrl =
-  process?.env?.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-const stopsUrl =
-  process?.env?.REACT_APP_STOPS_URL || 'https://api.geops.io/stops/v1/';
-
 class Search {
   constructor() {
     this.geoJSON = new OLGeoJSON();
@@ -22,9 +17,6 @@ class Search {
       // For points
       highlightPointStyle,
     ];
-
-    this.searchUrl = searchUrl;
-    this.stopsUrl = stopsUrl;
   }
 
   setSearchUrl(url) {

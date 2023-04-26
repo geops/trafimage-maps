@@ -1,5 +1,5 @@
-import { getTypeIndex } from 'mobility-toolbox-js/common/utils/realtimeConfig';
 import {
+  realtimeConfig,
   RealtimeLayer,
   fullTrajectoryDelayStyle,
   createRealtimeFilters,
@@ -45,7 +45,7 @@ const radiusMapping = [
  */
 const getRadius = (type, zoom) => {
   try {
-    const typeIdx = getTypeIndex(type || 0);
+    const typeIdx = realtimeConfig.getTypeIndex(type || 0);
     return radiusMapping[typeIdx][zoom];
   } catch (e) {
     return 1;

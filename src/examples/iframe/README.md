@@ -4,10 +4,10 @@ The _trafimage-maps_ web component can be embedded as an iframe on any website. 
 import React, { useMemo, useState } from 'react';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
-import DocForm from '../DocForm';
-import getIframeCodeFromUrl from './getIframeCodeFromUrl';
-import getHtmlPageCode from './getHtmlPageCode';
-import iframeSearchParams from './iframeSearchParams';
+import DocForm from 'trafimage-maps/es/examples/DocForm';
+import getIframeCodeFromUrl from 'trafimage-maps/es/examples/iframe/getIframeCodeFromUrl';
+import getHtmlPageCode from 'trafimage-maps/es/examples/iframe/getHtmlPageCode';
+import iframeSearchParams from 'trafimage-maps/es/examples/iframe/iframeSearchParams';
 
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.

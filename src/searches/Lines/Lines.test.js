@@ -1,6 +1,7 @@
 import Lines from './Lines';
 
 const linesSearch = new Lines();
+linesSearch.searchUrl = 'trafimage.ch';
 let fetchMock;
 describe('Lines', () => {
   beforeEach(() => {

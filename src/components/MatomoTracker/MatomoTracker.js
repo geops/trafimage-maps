@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useMatomo } from '@datapunt/matomo-tracker-react';
+import { useMatomo } from '@jonkoops/matomo-tracker-react';
 import {
   LS_MATOMO_USER_SESSION_TIMER,
   LS_MATOMO_TOPIC_VISITED,

@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { ThemeProvider } from '@material-ui/core';
 import { render, fireEvent } from '@testing-library/react';
-import { MatomoProvider } from '@datapunt/matomo-tracker-react';
+import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
 import theme from '../../themes/default';
 
 import Draw from '.';

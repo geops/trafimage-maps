@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { Map, View } from 'ol';
-import { MatomoProvider } from '@datapunt/matomo-tracker-react';
+import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
 import Share from '.';
 
 describe('Share', () => {

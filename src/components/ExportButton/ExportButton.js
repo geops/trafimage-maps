@@ -5,7 +5,7 @@ import { jsPDF as JsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
-import Canvg from 'canvg';
+import { Canvg } from 'canvg';
 import { ReactComponent as Loader } from './loader.svg';
 
 import { getMapHd, clean, generateExtraData } from './ExportUtils';
