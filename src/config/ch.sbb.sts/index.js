@@ -5,7 +5,6 @@ import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import { DIREKTVERBINDUNGEN_KEY, SWISS_EXTENT } from '../../utils/constants';
 import StsPoisLayer from '../../layers/StsPoisLayer';
 
-// const { POIS_URL } = process.env;
 const FILTER_KEY = 'sts.filter';
 const FILTER_GTTOS_VALUE = 'sts_gttos';
 const FILTER_PREMIUM_VALUE = 'sts_premium';

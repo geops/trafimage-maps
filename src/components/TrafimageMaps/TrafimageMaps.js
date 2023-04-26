@@ -663,9 +663,11 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setTopics(topics));
     }
 
+    // If we load a new set f topics, activeTopic will be null and will be set in the setTopics action.
     if (
-      activeTopicKey !== prevProps.activeTopicKey ||
-      topics !== prevProps.topics
+      activeTopic &&
+      (activeTopicKey !== prevProps.activeTopicKey ||
+        topics !== prevProps.topics)
     ) {
       this.store.dispatch(setActiveTopic(activeTopic));
     }
