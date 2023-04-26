@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.20.2](https://github.com/geops/trafimage-maps/compare/v1.20.2-beta.6...v1.20.2) (2023-04-26)
+
+### Bug Fixes
+
+- fix process is undefined error when used in typescript project ([#1080](https://github.com/geops/trafimage-maps/issues/1080)) ([70d827c](https://github.com/geops/trafimage-maps/commit/70d827c72595066b0c2a4e0ac9e29c837e11551a))
+
 ### [1.20.1](https://github.com/geops/trafimage-maps/compare/v1.20.0...v1.20.1) (2023-04-03)
 
 ### Bug Fixes
