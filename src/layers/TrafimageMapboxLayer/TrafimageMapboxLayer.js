@@ -31,8 +31,6 @@ const applyFilters = (mbStyle, filters) => {
   return newStyle;
 };
 
-const stylePrefix = process.env.REACT_APP_STYLE_REVIEW_PREFIX || '';
-
 class TrafimageMapboxLayer extends MaplibreLayer {
   constructor(options) {
     super({
@@ -42,7 +40,11 @@ class TrafimageMapboxLayer extends MaplibreLayer {
       isClickActive: false,
     });
     this.filters = options.filters;
-    this.style = stylePrefix + options.style;
+
+    // TODO don't use process.env here it fails in Schulzug
+    // const stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
+    this.stylePrefix = '';
+    this.style = this.stylePrefix + options.style;
   }
 
   attachToMap(map) {
@@ -82,7 +84,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     if (this.style === newStyle || !newStyle) {
       return;
     }
-    this.style = stylePrefix + newStyle;
+    this.style = this.stylePrefix + newStyle;
     this.setStyleConfig();
   }
 
@@ -116,9 +118,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
       this.apiKeyName = apiKeyName;
     }
     if ((!url && !key && !apiKeyName) || !this.styleUrl) {
-      this.styleUrl = `${this.url}/styles/${
-        process?.env?.REACT_APP_REVIEW_PREFIX || ''
-      }${this.style}/style.json?`;
+      this.styleUrl = `${this.url}/styles/${this.stylePrefix}${this.style}/style.json?`;
     }
 
     const newStyleUrl = this.createStyleUrl();
