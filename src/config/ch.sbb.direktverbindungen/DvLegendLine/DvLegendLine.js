@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const DvLegendLine = ({ color, width }) => {
-  return <div style={{ backgroundColor: color, height: 5, width }} />;
+  return <div style={{ backgroundColor: color, height: 4, width }} />;
 };
 
 DvLegendLine.propTypes = {
