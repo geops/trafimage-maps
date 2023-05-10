@@ -44,9 +44,9 @@ const comps = {
         <br />
         geOps AG
         <br />
-        Eggstrasse 42
+        Solothurnerstrasse 235
         <br />
-        CH-4402 Frenkendorf
+        CH-4600 Olten
         <br />
         <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
@@ -161,9 +161,9 @@ const comps = {
         <br />
         geOps AG
         <br />
-        Eggstrasse 42
+        Solothurnerstrasse 235
         <br />
-        CH-4402 Frenkendorf
+        CH-4600 Olten
         <br />
         <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
@@ -282,9 +282,9 @@ const comps = {
         <br />
         geOps AG
         <br />
-        Eggstrasse 42
+        Solothurnerstrasse 235
         <br />
-        CH-4402 Frenkendorf
+        CH-4600 Olten
         <br />
         <a href="http://www.geops.ch">www.geops.ch</a>
         <br />
@@ -403,9 +403,9 @@ const comps = {
         <br />
         geOps AG
         <br />
-        Eggstrasse 42
+        Solothurnerstrasse 235
         <br />
-        CH-4402 Frenkendorf
+        CH-4600 Olten
         <br />
         <a href="http://www.geops.ch">www.geops.ch</a>
         <br />

@@ -59,9 +59,9 @@ exports[`LegalLines should match snapshot with doc=impressum and language=de 1`]
     <br />
     geOps AG
     <br />
-    Eggstrasse 42
+    Solothurnerstrasse 235
     <br />
-    CH-4402 Frenkendorf
+    CH-4600 Olten
     <br />
     <a
       href="http://www.geops.ch"
@@ -244,9 +244,9 @@ exports[`LegalLines should match snapshot with doc=impressum and language=en 1`]
     <br />
     geOps AG
     <br />
-    Eggstrasse 42
+    Solothurnerstrasse 235
     <br />
-    CH-4402 Frenkendorf
+    CH-4600 Olten
     <br />
     <a
       href="http://www.geops.ch"
@@ -429,9 +429,9 @@ exports[`LegalLines should match snapshot with doc=impressum and language=fr 1`]
     <br />
     geOps AG
     <br />
-    Eggstrasse 42
+    Solothurnerstrasse 235
     <br />
-    CH-4402 Frenkendorf
+    CH-4600 Olten
     <br />
     <a
       href="http://www.geops.ch"
@@ -614,9 +614,9 @@ exports[`LegalLines should match snapshot with doc=impressum and language=it 1`]
     <br />
     geOps AG
     <br />
-    Eggstrasse 42
+    Solothurnerstrasse 235
     <br />
-    CH-4402 Frenkendorf
+    CH-4600 Olten
     <br />
     <a
       href="http://www.geops.ch"
