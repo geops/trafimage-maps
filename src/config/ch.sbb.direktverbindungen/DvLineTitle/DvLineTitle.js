@@ -63,6 +63,9 @@ const DvLineTitle = ({
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
+  const cartaroFeature = layer.allFeatures.find(
+    (feat) => feat.get('name') === feature.get('name'),
+  );
   return (
     <div className={classes.titleWrapper}>
       {isNightTrain ? (
@@ -77,14 +80,12 @@ const DvLineTitle = ({
             <IconButton
               className={classes.zoomOnLineBtn}
               title={t('Auf Linie zentrieren')}
+              disabled={!cartaroFeature}
               onClick={(evt) => {
                 if (!teaser) {
                   evt.stopPropagation();
                   evt.preventDefault();
                 }
-                const cartaroFeature = layer.allFeatures.find(
-                  (feat) => feat.get('name') === feature.get('name'),
-                );
                 const view = map.getView();
                 const geom = cartaroFeature.getGeometry();
                 const extent = view.calculateExtent();

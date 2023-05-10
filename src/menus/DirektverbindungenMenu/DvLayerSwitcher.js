@@ -8,6 +8,7 @@ import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';
 import { DV_DAY_NIGHT_REGEX } from '../../utils/constants';
 import { setFeatureInfo } from '../../model/app/actions';
+import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';
 
 const useStyles = makeStyles(() => {
   return {
@@ -31,8 +32,31 @@ const useStyles = makeStyles(() => {
         opacity: 0.6,
       },
     },
+    label: {
+      display: 'flex',
+      alignItems: 'center',
+      gap: 10,
+      '& span': {
+        minWidth: 80,
+      },
+    },
   };
 });
+
+function DvSwitcherLabel({ title, color }) {
+  const classes = useStyles({ color });
+  return (
+    <span className={classes.label}>
+      <span>{title}</span>
+      <DvLegendLine color={color} />
+    </span>
+  );
+}
+
+DvSwitcherLabel.propTypes = {
+  title: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
 function DvLayerSwitcher({ onToggle, row }) {
   const { t } = useTranslation();
@@ -101,7 +125,12 @@ function DvLayerSwitcher({ onToggle, row }) {
           <FormControlLabel
             className={disabled ? classes.disabled : undefined}
             key={layer.key}
-            label={t(layer.name)}
+            label={
+              <DvSwitcherLabel
+                title={t(layer.name)}
+                color={layer.get('color')}
+              />
+            }
             checked={layersVisible.includes(layer.key)}
             control={
               <SBBSwitch

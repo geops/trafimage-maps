@@ -99,7 +99,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
    * Fetch features from Cartaro for the list view
    */
   async fetchDvFeatures() {
-    await fetch(`${cartaroURL}/direktverbindungen/items/`)
+    await fetch(`${cartaroURL}direktverbindungen/items/`)
       .then((res) => res.json())
       .then((data) => {
         const features = new GeoJSON().readFeatures(data);

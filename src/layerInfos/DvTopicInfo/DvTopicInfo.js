@@ -3,19 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { dvDay, dvNight } from '../../config/ch.sbb.direktverbindungen';
 import DataLink from '../../components/DataLink';
+import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';
 
 const useStyles = makeStyles({
   legendItem: {
     margin: '10px 0',
     display: 'flex',
     alignItems: 'center',
-  },
-  itemColor: {
-    width: 30,
-    height: 20,
-    margin: 5,
-    marginLeft: 0,
-    border: '1px solid #767676',
+    gap: 10,
   },
 });
 
@@ -24,12 +19,7 @@ const DvTopicInfo = () => {
   const classes = useStyles();
   const legend = [dvDay, dvNight].map((layer) => (
     <div className={classes.legendItem} key={layer.key}>
-      <div
-        className={classes.itemColor}
-        style={{
-          backgroundColor: layer.get('color'),
-        }}
-      />
+      <DvLegendLine color={layer.get('color')} />
       <div>{t(layer.name)}</div>
     </div>
   ));

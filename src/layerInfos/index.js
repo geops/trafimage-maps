@@ -29,8 +29,7 @@ import EnergieTopicInfo from './EnergieTopicInfo';
 import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
 import DvTopicInfo from './DvTopicInfo';
-import DvTagLayerInfo from './DvTagLayerInfo';
-import DvNachtLayerInfo from './DvNachtLayerInfo';
+import DvLayerInfo from './DvLayerInfo';
 import IsbTVSLayerInfo from './IsbTVSLayerInfo';
 import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 import GeltungsbereicheTopicInfo from './GeltungsbereicheTopicInfo';
@@ -65,8 +64,7 @@ export { default as EnergieTopicInfo } from './EnergieTopicInfo';
 export { default as EnergiePublicTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
 export { default as DvTopicInfo } from './DvTopicInfo';
-export { default as DvTagLayerInfo } from './DvTagLayerInfo';
-export { default as DvNachtLayerInfo } from './DvNachtLayerInfo';
+export { default as DvLayerInfo } from './DvLayerInfo';
 export { default as IsbTopicInfo } from './IsbTopicInfo';
 export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
 export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
@@ -104,8 +102,7 @@ export default {
   EnergiePublicTopicInfo,
   SandboxTopicInfo,
   DvTopicInfo,
-  DvTagLayerInfo,
-  DvNachtLayerInfo,
+  DvLayerInfo,
   IsbTopicInfo,
   IsbTVSLayerInfo,
   IsbOtherLayerInfo,

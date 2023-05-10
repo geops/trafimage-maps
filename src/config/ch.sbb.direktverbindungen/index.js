@@ -69,7 +69,7 @@ export const dvDay = new Layer({
     routeType: 'day',
     color: 'rgb(247, 181, 0)',
     hasInfos: true,
-    layerInfoComponent: 'DvTagLayerInfo',
+    layerInfoComponent: 'DvLayerInfo',
     dataLink:
       'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
   },
@@ -84,7 +84,7 @@ export const dvNight = new Layer({
     routeType: 'night',
     color: 'rgb(0, 110, 179)',
     hasInfos: true,
-    layerInfoComponent: 'DvNachtLayerInfo',
+    layerInfoComponent: 'DvLayerInfo',
     dataLink:
       'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
   },
