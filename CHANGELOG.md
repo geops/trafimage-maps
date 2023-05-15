@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.21.0](https://github.com/geops/trafimage-maps/compare/v1.20.3...v1.21.0) (2023-05-15)
+
+### Features
+
+- **Direktverbindungen:** add two new topics for direct connection maps ([#1075](https://github.com/geops/trafimage-maps/issues/1075)) ([42acc2a](https://github.com/geops/trafimage-maps/commit/42acc2a284d5154a84bcb053bee747a65bc6be79))
+
 ### [1.20.3](https://github.com/geops/trafimage-maps/compare/v1.20.2...v1.20.3) (2023-05-11)
 
 ### Bug Fixes
