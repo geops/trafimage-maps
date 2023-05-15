@@ -1,12 +1,14 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Drawer } from '@material-ui/core';
 import { Resizable } from 're-resizable';
 import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
+import usePrevious from '../../utils/usePrevious';
+import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   drawerRoot: {
     position: 'absolute !important',
   },
@@ -16,7 +18,7 @@ const useStyles = makeStyles({
       overflow: 'hidden',
     },
     '& .wkp-feature-information-body': {
-      height: 'calc(100% - 38px)',
+      height: 'calc(100% - 50px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -68,25 +70,39 @@ const useStyles = makeStyles({
     position: 'absolute',
     pointerEvents: 'all',
   },
-  resizeHandler: {
+  resizeHandle: {
     position: 'fixed',
     display: 'flex',
     width: '100%',
-    height: 20,
+    height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1001,
+    '&::before': {
+      content: '""',
+      height: 4,
+      width: 50,
+      top: 12,
+      left: '50%',
+      transform: 'translate(calc(-50% + 30px), -50%)',
+      position: 'absolute',
+      borderRadius: 5,
+      backgroundColor: theme.colors.lightgray,
+    },
   },
-});
+  resizeResetButton: {
+    width: 'calc(100% - 50px)',
+    height: 55,
+    zIndex: 10000,
+    border: 'none',
+    background: 'transparent',
+  },
+}));
 
 const propTypes = {
   elements: PropTypes.shape().isRequired,
   children: PropTypes.node,
   disablePortal: PropTypes.bool,
-  defaultSize: PropTypes.shape({
-    height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  }),
   transitionDuration: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.shape({
@@ -95,24 +111,41 @@ const propTypes = {
       exit: PropTypes.number,
     }),
   ]),
+  ResizableProps: PropTypes.shape({
+    defaultSize: PropTypes.shape({
+      height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    }),
+    snap: PropTypes.shape({
+      x: PropTypes.arrayOf(PropTypes.number),
+      y: PropTypes.arrayOf(PropTypes.number),
+    }),
+    onResize: PropTypes.func,
+  }),
 };
 
 const defaultProps = {
   children: null,
   disablePortal: true,
-  defaultSize: { height: 250 },
   transitionDuration: undefined,
+  ResizableProps: {
+    defaultSize: { height: 300 },
+    onResize: () => {},
+    snap: null,
+  },
 };
 
 const Overlay = ({
   elements,
   children,
   disablePortal,
-  defaultSize,
   transitionDuration,
+  ResizableProps,
 }) => {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const resizeRef = useRef(null);
+  const { defaultSize } = ResizableProps;
 
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
@@ -122,9 +155,23 @@ const Overlay = ({
     return ['xs', 's', 'm'].includes(screenWidth);
   }, [screenWidth]);
 
+  const resetOverlayHeight = useCallback(() => {
+    if (resizeRef?.current) {
+      resizeRef.current.resizable.style.height = `${defaultSize.height}px`;
+    }
+  }, [defaultSize.height]);
+
   const dispatch = useDispatch();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   let featureInfo = useSelector((state) => state.app.featureInfo);
+  const previousFeatureInfo = usePrevious(featureInfo);
+
+  useEffect(() => {
+    // Reset the overlay height if another feature is selected on the map
+    if (featureInfo?.length && featureInfo !== previousFeatureInfo) {
+      resetOverlayHeight();
+    }
+  }, [featureInfo, previousFeatureInfo, resetOverlayHeight]);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
@@ -186,12 +233,27 @@ const Overlay = ({
       >
         {isMobile && (
           <Resizable
+            ref={resizeRef}
             enable={{ top: isMobile }}
             maxHeight="100vh"
-            defaultSize={defaultSize}
+            minHeight={OVERLAY_MIN_HEIGHT}
             handleComponent={{
-              top: <div className={classes.resizeHandler}>&mdash;</div>,
+              top: (
+                <>
+                  {/* When then Overlay is swiped completely to the bottom,
+                  clicking the header will reset it to default height */}
+                  <button
+                    className={`${classes.resizeResetButton} ${classes.resizeHandle}`}
+                    type="button"
+                    onClick={resetOverlayHeight}
+                  >
+                    {' '}
+                  </button>
+                </>
+              ),
             }}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            {...ResizableProps}
           >
             {children || <FeatureInformation featureInfo={filtered} />}
           </Resizable>

@@ -24,13 +24,12 @@ import NetzentwicklungLayerInfo from './NetzentwicklungLayerInfo';
 import BeleuchtungTopicInfo from './BeleuchtungTopicInfo';
 import BeleuchtungLayerInfo from './BeleuchtungLayerInfo';
 import MapsGeoAdminLayerInfo from './MapsGeoAdminLayerInfo';
-import DirektVerbindungenLayerInfo from './DirektVerbindungenLayerInfo';
-import DirektVerbindungenTagLayerInfo from './DirektVerbindungenTagLayerInfo';
-import DirektVerbindungenNachtLayerInfo from './DirektVerbindungenNachtLayerInfo';
 import EnergieLayerInfo from './EnergieLayerInfo';
 import EnergieTopicInfo from './EnergieTopicInfo';
 import EnergiePublicTopicInfo from './EnergiePublicTopicInfo';
 import SandboxTopicInfo from './SandboxTopicInfo';
+import DvTopicInfo from './DvTopicInfo';
+import DvLayerInfo from './DvLayerInfo';
 import IsbTVSLayerInfo from './IsbTVSLayerInfo';
 import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 import GeltungsbereicheTopicInfo from './GeltungsbereicheTopicInfo';
@@ -61,12 +60,11 @@ export { default as NetzentwicklungLayerInfo } from './NetzentwicklungLayerInfo'
 export { default as BeleuchtungTopicInfo } from './BeleuchtungTopicInfo';
 export { default as BeleuchtungLayerInfo } from './BeleuchtungLayerInfo';
 export { default as MapsGeoAdminLayerInfo } from './MapsGeoAdminLayerInfo';
-export { default as DirektVerbindungenLayerInfo } from './DirektVerbindungenLayerInfo';
-export { default as DirektVerbindungenTagLayerInfo } from './DirektVerbindungenTagLayerInfo';
-export { default as DirektVerbindungenNachtLayerInfo } from './DirektVerbindungenNachtLayerInfo';
 export { default as EnergieTopicInfo } from './EnergieTopicInfo';
 export { default as EnergiePublicTopicInfo } from './EnergieTopicInfo';
 export { default as SandboxTopicInfo } from './SandboxTopicInfo';
+export { default as DvTopicInfo } from './DvTopicInfo';
+export { default as DvLayerInfo } from './DvLayerInfo';
 export { default as IsbTopicInfo } from './IsbTopicInfo';
 export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
 export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
@@ -79,9 +77,6 @@ export default {
   ConstructionLayerInfo,
   ConstructionTopicInfo,
   ConstructionFertigstellungLayerInfo,
-  DirektVerbindungenLayerInfo,
-  DirektVerbindungenNachtLayerInfo,
-  DirektVerbindungenTagLayerInfo,
   DrawLayerInfo,
   HandicapTopicInfo,
   HandicapLayerInfo,
@@ -106,6 +101,8 @@ export default {
   EnergieTopicInfo,
   EnergiePublicTopicInfo,
   SandboxTopicInfo,
+  DvTopicInfo,
+  DvLayerInfo,
   IsbTopicInfo,
   IsbTVSLayerInfo,
   IsbOtherLayerInfo,

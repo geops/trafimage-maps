@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
-import Link from '../../components/Link';
+import Link from '../../../components/Link';
 
 const useStyles = makeStyles({
   container: {
-    padding: 8,
+    padding: '0 8px 8px',
   },
   header: {
     marginTop: 5,
@@ -17,14 +17,6 @@ const useStyles = makeStyles({
     margin: 0,
     display: 'flex',
     alignItems: 'center',
-  },
-  titleWrapper: {
-    padding: 0,
-    display: 'flex',
-    alignItems: 'center',
-  },
-  titleIcon: {
-    marginRight: 10,
   },
   routeStops: {
     fontWeight: 'bold',
@@ -88,25 +80,7 @@ const defaultProps = {
   feature: null,
 };
 
-const DVPopupTitle = ({ feature }) => {
-  const classes = useStyles();
-  return (
-    <div className={classes.titleWrapper}>
-      <img
-        src={
-          feature.get('nachtverbindung')
-            ? 'https://icons.app.sbb.ch/kom/locomotive-profile-moon-small.svg'
-            : 'https://icons.app.sbb.ch/kom/train-profile-small.svg'
-        }
-        alt="icon"
-        className={classes.titleIcon}
-      />
-      {feature.get('name')}
-    </div>
-  );
-};
-
-const DirektverbindungPopup = ({ feature, layer }) => {
+const DvLineInfo = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
 
@@ -114,13 +88,13 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     if (layer.visible) {
       if (feature) {
         layer.select([feature]);
-      } else {
-        layer.select();
       }
       return;
     }
     // eslint-disable-next-line consistent-return
-    return () => layer.select();
+    return () => {
+      layer.select();
+    };
   }, [layer, feature]);
 
   if (!feature) {
@@ -131,9 +105,10 @@ const DirektverbindungPopup = ({ feature, layer }) => {
     start_station_name: start,
     end_station_name: end,
     vias,
-    nachtverbindung: night,
+    line,
     [`description_${i18n.language}`]: description,
     [`url_${i18n.language}`]: link,
+    color,
   } = feature.getProperties();
 
   const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
@@ -143,7 +118,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
   return (
     <div className={classes.container}>
       <div className={classes.header}>
-        <i>{night ? t('Nachtverbindung') : t('Tagverbindung')}</i>
+        <i>{line === 'night' ? t('Nachtverbindung') : t('Tagverbindung')}</i>
         {description && <p>{description}</p>}
         {link && (
           <p>
@@ -175,11 +150,11 @@ const DirektverbindungPopup = ({ feature, layer }) => {
                 <div className={classes.routeIcon}>
                   <div
                     className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
-                    style={{ backgroundColor: layer.get('color') }}
+                    style={{ backgroundColor: color }}
                   />
                   <div
                     className={classes.routeCircleMiddle}
-                    style={{ borderColor: layer.get('color') }}
+                    style={{ borderColor: color }}
                   />
                 </div>
                 <div>
@@ -196,8 +171,7 @@ const DirektverbindungPopup = ({ feature, layer }) => {
   );
 };
 
-DirektverbindungPopup.renderTitle = (feat) => <DVPopupTitle feature={feat} />;
-DirektverbindungPopup.defaultProps = defaultProps;
+DvLineInfo.defaultProps = defaultProps;
+DvLineInfo.propTypes = propTypes;
 
-DirektverbindungPopup.propTypes = propTypes;
-export default DirektverbindungPopup;
+export default DvLineInfo;

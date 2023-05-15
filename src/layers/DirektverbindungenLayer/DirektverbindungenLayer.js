@@ -1,114 +1,249 @@
-import MapboxStyleLayer from '../MapboxStyleLayer';
+/* eslint-disable no-param-reassign */
+import { GeoJSON } from 'ol/format';
+import { LineString } from 'ol/geom';
+import { unByKey } from 'ol/Observable';
 
-const VIAPOINTSLAYER_ID = 'dv_points';
+import MapboxStyleLayer from '../MapboxStyleLayer';
+import getTrafimageFilter from '../../utils/getTrafimageFilter';
+import { DV_KEY } from '../../utils/constants';
+
+const DV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
+
+const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
+const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
+const DV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
+const DV_STATION_CALL_LAYERID_REGEX =
+  /^dv(d|n)?_call(_(border|bg|border(2)?|displace|label))?(_highlight)?/;
+
 /**
- * Layer for visualizing station levels.
+ * Layer for visualizing international train connections.
  *
  * @class
  * @param {Object} [options] Layer options.
  * @inheritdoc
  * @private
  */
+
 class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
       ...options,
-      featureInfoFilter: (feature) => {
-        const mapboxFeature = feature.get('mapboxFeature');
-        return (
-          mapboxFeature &&
-          !/outline/.test(mapboxFeature.layer.id) &&
-          !/highlight/.test(mapboxFeature.layer.id)
-        );
-      },
+      queryRenderedLayersFilter: (layer) =>
+        DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)),
       styleLayersFilter: (layer) => {
-        return (
-          // !/outline/.test(layer.id) &&
-          layer.metadata &&
-          layer.metadata['trafimage.filter'] ===
-            `lines_${this.get('routeType')}`
-        );
+        return DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer));
       },
+      featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
-    this.useDvPoints = options.properties.useDvPoints !== false;
+    this.allFeatures = [];
+    this.syncTimeout = null;
   }
 
   onLoad() {
-    if (!this.originalColor) {
-      this.originalColor = {};
-    }
-
-    if (!this.originalLineWidth) {
-      this.originalLineWidth = {};
-    }
-
-    const { mbMap } = this.mapboxLayer;
-    this.osmPointsLayers = mbMap
-      .getStyle()
-      .layers.filter((layer) => {
-        return this.styleLayersFilter(layer); // && /outline/.test(layer.id);
-      })
-      .forEach((layer) => {
-        const layerId = layer.id;
-        if (!this.originalColor[layerId]) {
-          this.originalColor[layerId] = layer.paint['line-color'];
-          this.originalLineWidth[layerId] = layer.paint['line-width'];
-
-          // We retrieve the color and save it to use it in the popup.
-          this.set('color', this.originalColor[layerId]);
-        }
-      });
     super.onLoad();
+    this.onChangeVisible();
+    this.fetchDvFeatures();
+    // We can only get the mapbox features from the view on load.
+    // In order to assign the Cartaro features their corresponding
+    // mapbox features for the full list view, we sync the features when
+    // the view changes and add the mapbox feature to any ol feature
+    // that still hasn't got one.
+    this.viewChangeListener = this.map.on('moveend', () => {
+      clearTimeout(this.syncTimeout);
+      this.syncTimeout = setTimeout(() => {
+        this.syncFeatures();
+      }, 400);
+    });
   }
 
-  // setVisible(
-  //   visible,
-  //   stopPropagationDown,
-  //   stopPropagationUp,
-  //   stopPropagationSiblings,
-  // ) {
-  //   if (!visible) {
-  //     this.select();
-  //   }
-  //   super.setVisible(
-  //     visible,
-  //     stopPropagationDown,
-  //     stopPropagationUp,
-  //     stopPropagationSiblings,
-  //   );
-  // }
+  getMapboxFeatures() {
+    const { mbMap } = this.mapboxLayer;
+    if (mbMap) {
+      const renderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
+        sourceLayer: DV_TRIPS_SOURCELAYER_ID,
+        filter: ['==', '$type', 'LineString'],
+      });
+      return renderedMbFeatures;
+    }
+    return [];
+  }
 
-  select(features = []) {
+  /**
+   * Assigns mapbox features to Cartaro ol features using their ID
+   * @returns {array<ol.Feature>} Array of ol features
+   */
+  syncFeatures() {
+    const mbFeatures = this.getMapboxFeatures();
+    const cartaroFeatIsMissingMbFeat =
+      this.allFeatures?.length &&
+      !this.allFeatures.every((feat) => feat.get('mapboxFeature'));
+    if (cartaroFeatIsMissingMbFeat && mbFeatures?.length) {
+      this.allFeatures.forEach((feat) => {
+        const mbFeature = mbFeatures.find((mbFeat) => {
+          return mbFeat?.properties?.name === feat?.get('name');
+        });
+        if (!feat.get('mapboxFeature')) {
+          feat.set('mapboxFeature', mbFeature);
+        }
+      });
+    }
+    this.dispatchEvent({
+      type: 'load:features',
+      features: this.allFeatures,
+      target: this,
+    });
+    return this.allFeatures;
+  }
+
+  /**
+   * Fetch features from Cartaro for the list view
+   */
+  async fetchDvFeatures() {
+    await fetch(`${cartaroURL}direktverbindungen/items/`)
+      .then((res) => res.json())
+      .then((data) => {
+        const features = new GeoJSON().readFeatures(data);
+        const { mbMap } = this.mapboxLayer;
+        if (mbMap) {
+          const dvRenderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
+            sourceLayer: DV_TRIPS_SOURCELAYER_ID,
+            filter: ['==', '$type', 'LineString'],
+          });
+          dvRenderedMbFeatures.forEach((feat) => {
+            feat.source = DV_KEY;
+            feat.sourceLayer = DV_TRIPS_SOURCELAYER_ID;
+          });
+          features.forEach((feat) => {
+            const mbFeature = dvRenderedMbFeatures.find(
+              (mbFeat) => mbFeat?.properties?.name === feat?.get('name'),
+            );
+            feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
+            feat.set('mapboxFeature', mbFeature);
+            feat.setId(mbFeature?.properties?.id);
+            feat.setProperties({
+              ...feat.getProperties(),
+              ...mbFeature?.properties,
+            });
+          });
+          this.allFeatures = features;
+          this.syncFeatures();
+        }
+      })
+      // eslint-disable-next-line no-console
+      .catch((err) => console.error(err));
+  }
+
+  /**
+   * @returns {array<mapbox.stylelayer>} Array of mapbox style layers
+   */
+  getDvLayers() {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return null;
+    }
+    const style = mbMap.getStyle();
+    return style?.layers.filter((stylelayer) => {
+      return DV_FILTER_REGEX.test(getTrafimageFilter(stylelayer));
+    });
+  }
+
+  /**
+   * Gets the current visible IPV layer
+   * @returns {string} 'day', 'night' or 'all'
+   */
+  getCurrentLayer() {
+    const nightLayer = this.get('nightLayer');
+    const dayLayer = this.get('dayLayer');
+
+    if (dayLayer?.get('visible') && nightLayer?.get('visible')) {
+      this.visible = true;
+      return 'all';
+    }
+    if (dayLayer?.get('visible') || nightLayer?.get('visible')) {
+      const visibleLayer = [dayLayer, nightLayer].find((layer) =>
+        layer.get('visible'),
+      );
+      this.visible = true;
+      return visibleLayer.get('routeType');
+    }
+    this.visible = false;
+    return null;
+  }
+
+  detachFromMap() {
+    super.detachFromMap();
+    unByKey(this.viewChangeListener);
+  }
+
+  // Updates the IPV mapbox stylelayer visibility according
+  // to the current visible WKP layer
+  onChangeVisible() {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
     }
-    super.select(features);
-    if (this.useDvPoints) {
-      mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
-      if (mbMap) {
-        if (this.selectedFeatures.length) {
-          this.selectedFeatures.forEach((feature) => {
-            mbMap.setFilter(VIAPOINTSLAYER_ID, [
-              '==',
-              ['get', 'direktverbindung_id'],
-              feature.get('id'),
-            ]);
-          });
-          mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'visible');
-          mbMap.setPaintProperty(
-            VIAPOINTSLAYER_ID,
-            'circle-stroke-color',
-            this.get('routeType') === 'night'
-              ? 'rgba(5, 21, 156, 1)'
-              : 'rgba(9, 194, 242, 1)',
-          );
-        } else {
-          mbMap.setFilter(VIAPOINTSLAYER_ID, null);
-          mbMap.setLayoutProperty(VIAPOINTSLAYER_ID, 'visibility', 'none');
-        }
-      }
+    const currentLayer = this.getCurrentLayer();
+    const filterRegex = new RegExp(`^ipv_(trip_)?(${currentLayer})$`);
+    this.getDvLayers()?.forEach((stylelayer) => {
+      mbMap.setLayoutProperty(
+        stylelayer.id,
+        'visibility',
+        filterRegex.test(getTrafimageFilter(stylelayer)) ? 'visible' : 'none',
+      );
+    });
+  }
+
+  /**
+   * Updates visibility for stations, labels and select highlight mb layers
+   * and applies the mb filter for the currently selected feature
+   */
+  highlightFeatures() {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
     }
+    const highlightRegex = new RegExp(
+      `${DV_STATION_CALL_LAYERID_REGEX.source}_${this.getCurrentLayer()}$`,
+    );
+    const dvHighlightLayers = this.getDvLayers().filter((layer) =>
+      highlightRegex.test(layer.id),
+    );
+    // Highlight stations and station labels on select
+    dvHighlightLayers.forEach((layer) => {
+      const idFilterExpression = [
+        'get',
+        /_highlight_/.test(layer.id) ? 'id' : 'direktverbindung_id',
+      ];
+      // Reset filter to original state
+      const originalFilter = mbMap
+        .getFilter(layer.id)
+        ?.filter(
+          (item) =>
+            !(
+              Array.isArray(item) &&
+              item[1].toString() === idFilterExpression.toString()
+            ),
+        );
+      mbMap.setFilter(layer.id, originalFilter);
+      if (this.selectedFeatures.length) {
+        mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
+        this.selectedFeatures.forEach((feature) => {
+          // Add feature id filter
+          const featureIdFilter = [
+            ...mbMap.getFilter(layer.id),
+            ['==', idFilterExpression, feature.get('id')],
+          ];
+          mbMap.setFilter(layer.id, featureIdFilter);
+        });
+      } else {
+        mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
+      }
+    });
+  }
+
+  select(features = []) {
+    super.select(features);
+    this.highlightFeatures();
   }
 }
 

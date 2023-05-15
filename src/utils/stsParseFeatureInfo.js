@@ -1,12 +1,8 @@
 import Feature from 'ol/Feature';
-import {
-  gttos,
-  premium,
-  direktverbindungenDay,
-  direktverbindungenNight,
-  highlights,
-} from '../config/ch.sbb.sts';
+import { gttos, premium, highlights } from '../config/ch.sbb.sts';
+import { dvDay, dvNight } from '../config/ch.sbb.direktverbindungen';
 import { getId } from './removeDuplicateFeatures';
+import parseDvFeatures from './dvParseFeatures';
 
 /**
  * Rearrange the features for the popup
@@ -35,28 +31,11 @@ export const parseFeaturesInfos = (infos, tours = []) => {
   }
 
   // Then we put all direktverbindung features
-  if (
-    infoFeatures[direktverbindungenDay.name] ||
-    infoFeatures[direktverbindungenNight.name]
-  ) {
-    [
-      ...(infoFeatures[direktverbindungenDay.name] || []),
-      ...(infoFeatures[direktverbindungenNight.name] || []),
-    ].forEach((feature) => {
-      const {
-        start_station_name: start,
-        end_station_name: end,
-        vias,
-      } = feature.getProperties();
-
-      const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
-        (via) => via.via_type === 'switch' || via.via_type === 'visible',
-      );
-      feature.set('vias', [
-        { station_name: start },
-        ...switchVias,
-        { station_name: end },
-      ]);
+  if (infoFeatures[dvDay.name] || infoFeatures[dvNight.name]) {
+    parseDvFeatures([
+      ...(infoFeatures[dvDay.name] || []),
+      ...(infoFeatures[dvNight.name] || []),
+    ]).forEach((feature) => {
       featuresForPopup.push(feature);
     });
   }
@@ -116,11 +95,6 @@ export const parseFeaturesInfos = (infos, tours = []) => {
         }),
       );
     }
-
-    // // eslint-disable-next-line no-restricted-globals
-    // if (!isNaN(feature.get('valid_sts'))) {
-    //   areaOfValidity = `${feature.get('valid_sts')}`;
-    // }
   }
 
   // Remove duplicate routes (at intersections)
@@ -133,21 +107,6 @@ export const parseFeaturesInfos = (infos, tours = []) => {
     }
     return false;
   });
-
-  // At the end we add the STS validity text
-  // if a poi highlight (icon) is clicked, value comes from area_of_validity property of the poi
-  // eslint-disable-next-line max-len
-  // else if a gttos or premium tours (colored lines) is clicked, value comes from valid_sts property of the mapbox feature
-  // eslint-disable-next-line max-len
-  // else if a other route (sts.line) (red line) is clicked, value comes from valid_sts property of the mapbox feature (nova daten)
-  // eslint-disable-next-line max-len
-  // else if a other route (sts_others) (all grey lines) is clicked, value comes from valid_sts property of the mapbox feature
-  //   if (areaOfValidity !== undefined) {
-  //     const feat = new Feature({
-  //       validity: validText[areaOfValidity] || areaOfValidity,
-  //     });
-  //     featuresForPopup.push(feat);
-  //   }
 
   return featuresForPopup;
 };

@@ -8,11 +8,13 @@ import StsMenu from './StsMenu';
 import { sts } from '../../config/topics';
 import stsLayers from '../../config/ch.sbb.sts';
 
-describe('GeltungsbereicheTopicMenu', () => {
+describe('StsMenu', () => {
   const mockStore = configureStore([thunk]);
   let store;
 
   beforeEach(() => {
+    stsLayers.find((layer) => layer.get('isBaseLayer')).url =
+      'https://foo-maps.io';
     store = mockStore({
       map: { layers: stsLayers },
       app: {

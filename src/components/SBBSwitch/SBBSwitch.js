@@ -3,17 +3,18 @@ import { withStyles, Switch } from '@material-ui/core';
 
 const StyledSwitch = withStyles((theme) => ({
   root: {
-    width: 38,
+    width: 40,
     height: '100%',
     padding: 0,
     margin: '4px 10px 4px 0',
     overflow: 'visible',
+    alignItems: 'center',
   },
   switchBase: {
-    padding: 2,
-    color: theme.palette.grey[500],
+    padding: 3,
+    color: 'white',
     '&$checked': {
-      transform: 'translateX(16px)',
+      transform: 'translateX(14px)',
       color: 'white',
       '& + $track': {
         opacity: 1,
@@ -22,17 +23,17 @@ const StyledSwitch = withStyles((theme) => ({
     },
   },
   thumb: {
-    width: 18,
-    height: 18,
+    width: 20,
+    height: 20,
     boxShadow:
       '0 1px 1px 0 rgb(0 0 0 / 7%), 0 0 1px 1px rgb(0 0 0 / 11%), 0 4px 2px 0 rgb(0 0 0 / 10%), 0 4px 9px 2px rgb(0 0 0 / 8%)',
   },
   track: {
-    height: 20,
-    borderRadius: 25,
+    height: 24,
+    borderRadius: 24,
     border: `1px solid #e5e5e5`,
     opacity: 1,
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.grey[500],
   },
   checked: {},
 }))(Switch);

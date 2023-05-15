@@ -18,9 +18,9 @@ import TarifverbundkartePopup from './TarifverbundkartePopup';
 import DrawPopup from './DrawPopup';
 import NetzentwicklungPopup from './NetzentwicklungPopup';
 import BeleuchtungsPopup from './BeleuchtungsPopup';
-import DirektverbindungPopup from './DirektverbindungPopup';
 import MapsGeoAdminPopup from './MapsGeoAdminPopup';
 import EnergiePopup from './EnergiePopup/EnergiePopup';
+import DvPopup from './DirektverbindungenPopup';
 import IsbPopup from './IsbPopup';
 import GeltungsbereicheGaPopup from './GeltungsbereicheGaPopup';
 import PunctualityPopup from './PunctualityPopup';
@@ -47,6 +47,7 @@ export { default as NetzentwicklungPopup } from './NetzentwicklungPopup';
 export { default as BeleuchtungsPopup } from './BeleuchtungsPopup';
 export { default as MapsGeoAdminPopup } from './MapsGeoAdminPopup';
 export { default as EnergiePopup } from './EnergiePopup';
+export { default as DvPopup } from './DirektverbindungenPopup';
 export { default as IsbPopup } from './IsbPopup';
 export { default as GeltungsbereicheGaPopup } from './GeltungsbereicheGaPopup';
 export { default as PunctualityPopup } from './PunctualityPopup';
@@ -72,9 +73,9 @@ export default {
   DrawPopup,
   NetzentwicklungPopup,
   BeleuchtungsPopup,
-  DirektverbindungPopup,
   MapsGeoAdminPopup,
   EnergiePopup,
+  DvPopup,
   IsbPopup,
   GeltungsbereicheGaPopup,
   PunctualityPopup,

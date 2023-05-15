@@ -26,9 +26,13 @@ import zweitausbildungLayers from './ch.sbb.zweitausbildung';
 import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
 import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
 import stsLayers from './ch.sbb.sts';
+import dvLayers from './ch.sbb.direktverbindungen';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
+import { DV_KEY } from '../utils/constants';
+import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
+import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 
 // For backward compatibility
 export {
@@ -328,10 +332,58 @@ export const sts = {
   constrainOnlyCenter: true,
 };
 
+export const direktverbindungen = {
+  name: `${DV_KEY}.topic`,
+  key: `${DV_KEY}`,
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: true,
+    fitExtent: false,
+  },
+  maxZoom: 13,
+  minZoom: 6,
+  layers: dvLayers,
+  projection: 'EPSG:3857',
+  layerInfoComponent: 'DvTopicInfo',
+  searches: defaultSearches,
+  mapControls: <DvListButton />,
+};
+
+export const direktverbindungenIframe = {
+  name: `${DV_KEY}-iframe.topic`,
+  key: `${DV_KEY}-iframe`,
+  elements: {
+    ...defaultElements,
+    overlay: false,
+    popup: false,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: true,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+    baseLayerSwitcher: false,
+    fitExtent: false,
+  },
+  maxZoom: 13,
+  minZoom: 6,
+  layers: dvLayers,
+  enableFeatureClick: true,
+  only: true,
+  hideInLayerTree: true,
+  menu: <DvMenu />,
+  mapControls: <DvListButton />,
+};
+
 const topics = {
   wkp: [
     netzkarte,
     geltungsbereicheMvp,
+    direktverbindungen,
+    direktverbindungenIframe,
     zweitausbildung,
     bauprojekte,
     handicap,

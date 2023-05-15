@@ -37,7 +37,9 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
   useEffect(() => {
     fetch(`${cartaroURL}netzentwicklung/region/items/`)
       .then((res) => res.json())
-      .then((res) => setRegions(res));
+      .then((res) => setRegions(res))
+      // eslint-disable-next-line no-console
+      .catch((err) => console.error('Failed to fetch!', err));
   }, []);
 
   return (

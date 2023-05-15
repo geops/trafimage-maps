@@ -9,8 +9,6 @@ import luftbild from '../../img/luftbild.png';
 import StationsLayer from '../../layers/StationsLayer';
 import PlatformsLayer from '../../layers/PlatformsLayer';
 import TralisLayer from '../../layers/TralisLayer';
-import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import { DIREKTVERBINDUNGEN_KEY } from '../../utils/constants';
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.netzkarte.data',
@@ -312,48 +310,6 @@ export const gemeindegrenzen = new MapboxStyleLayer({
   },
 });
 
-export const direktverbindungenDay = new DirektverbindungenLayer({
-  name: `${DIREKTVERBINDUNGEN_KEY}.day`,
-  mapboxLayer: dataLayer,
-  visible: false,
-  properties: {
-    isQueryable: true,
-    routeType: 'day',
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenTagLayerInfo',
-    popupComponent: 'DirektverbindungPopup',
-    useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
-  },
-});
-
-export const direktverbindungenNight = new DirektverbindungenLayer({
-  name: `${DIREKTVERBINDUNGEN_KEY}.night`,
-  mapboxLayer: dataLayer,
-  visible: false,
-  properties: {
-    isQueryable: true,
-    routeType: 'night',
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenNachtLayerInfo',
-    popupComponent: 'DirektverbindungPopup',
-    useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
-  },
-});
-
-export const direktverbindungenLayer = new Layer({
-  name: DIREKTVERBINDUNGEN_KEY,
-  children: [direktverbindungenDay, direktverbindungenNight],
-  isQueryable: false,
-  visible: false,
-  properties: {
-    hasInfos: true,
-    layerInfoComponent: 'DirektVerbindungenLayerInfo',
-    dataLink:
-      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
-  },
-});
 export const defaultBaseLayers = [
   dataLayer,
   netzkarteLayer,
@@ -372,5 +328,4 @@ export default [
   gemeindegrenzen,
   buslines,
   bahnhofplaene,
-  direktverbindungenLayer,
 ];

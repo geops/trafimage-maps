@@ -190,7 +190,9 @@ function TopicElements({ history }) {
             geolocation={elements.geolocationButton}
             fitExtent={elements.fitExtent}
             zoomSlider={elements.zoomSlider}
-          />
+          >
+            {activeTopic.mapControls}
+          </MapControls>
         )}
         {elements.baseLayerSwitcher && (
           <BaseLayerSwitcher

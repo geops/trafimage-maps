@@ -1,4 +1,7 @@
 /* eslint-disable import/prefer-default-export */
+
+import getIsMobileDevice from './getIsMobileDevice';
+
 export const DRAW_PARAM = 'draw.id';
 export const DRAW_REDIRECT_PARAM = 'draw.redirect';
 export const MAPSET_PARENT_PARAM = 'parent';
@@ -17,7 +20,13 @@ export const TRACK_SHARE_FB_ACTION = 'clickShareFacebook';
 export const TRACK_SHARE_TW_ACTION = 'clickShareTwitter';
 
 // Direktverbindungen
-export const DIREKTVERBINDUNGEN_KEY = 'ch.sbb.direktverbindungen';
+export const DV_KEY = 'ch.sbb.direktverbindungen';
+export const DV_DAY_NIGHT_REGEX = new RegExp(`^${DV_KEY}.(day|night)$`);
+export const DV_HIT_TOLERANCE = getIsMobileDevice() ? 8 : 2;
+
+// STS
+export const STS_KEY = 'ch.sbb.sts';
+export const STS_HIT_TOLERANCE = 15;
 
 export const energieleitungenColorMapping = {
   los1: '#12919a',
@@ -35,3 +44,6 @@ export const energieleitungenColorMapping = {
 };
 
 export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+
+// UI
+export const OVERLAY_MIN_HEIGHT = 50;

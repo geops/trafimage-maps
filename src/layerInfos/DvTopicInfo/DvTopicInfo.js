@@ -1,47 +1,33 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import { Layer } from 'mobility-toolbox-js/ol';
+import { dvDay, dvNight } from '../../config/ch.sbb.direktverbindungen';
 import DataLink from '../../components/DataLink';
+import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';
 
 const useStyles = makeStyles({
   legendItem: {
     margin: '10px 0',
     display: 'flex',
     alignItems: 'center',
-  },
-  itemColor: {
-    width: 30,
-    height: 20,
-    margin: 5,
-    marginLeft: 0,
-    border: '1px solid #767676',
+    gap: 10,
   },
 });
 
-const propTypes = {
-  properties: PropTypes.instanceOf(Layer).isRequired,
-};
-
-const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
+const DvTopicInfo = () => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
-  const legend = layer.children.reverse().map((child) => (
-    <div className={classes.legendItem} key={child.key}>
-      <div
-        className={classes.itemColor}
-        style={{ backgroundColor: child.get('color') }}
-      />
-      <div>{t(child.name)}</div>
+  const legend = [dvDay, dvNight].map((layer) => (
+    <div className={classes.legendItem} key={layer.key}>
+      <DvLegendLine color={layer.get('color')} />
+      <div>{t(layer.name)}</div>
     </div>
   ));
-
-  const dataLink = layer.get('dataLink') && (
+  const dataLink = dvDay.get('dataLink') && (
     <>
       <hr />
       <p style={{ marginBottom: 0 }}>
-        <DataLink layer={layer} />
+        <DataLink layer={dvDay} />
       </p>
       <p>
         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
@@ -67,7 +53,7 @@ const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
             <br />
             Die Karte wird jährlich zum Fahrplanwechsel aktualisiert.
             <br />
-            Internationaler Personenverkehr, SBB AG
+            Direktverbindungen nach Europa, SBB AG
           </p>
           {dataLink}
         </div>
@@ -137,6 +123,4 @@ const DirektVerbindungenLayerInfo = ({ properties: layer }) => {
   );
 };
 
-DirektVerbindungenLayerInfo.propTypes = propTypes;
-
-export default React.memo(DirektVerbindungenLayerInfo);
+export default React.memo(DvTopicInfo);

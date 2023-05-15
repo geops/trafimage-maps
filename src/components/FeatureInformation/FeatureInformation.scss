@@ -5,8 +5,8 @@
     justify-content: space-between;
     background-color: #f5f5f5;
     font-family: 'SBBWeb-Bold', Arial, sans-serif;
-    min-height: 36px;
-    max-height: 38px;
+    min-height: 40px;
+    max-height: 60px;
 
     > span {
       display: flex;
@@ -21,8 +21,10 @@
       align-items: center;
       justify-content: center;
       padding: 10px 13px;
-      height: 100%;
-      width: 40px;
+      margin-right: 5px;
+      height: 50px;
+      width: 50px;
+      z-index: 1002;
     }
   }
 
