@@ -7,6 +7,7 @@ export const energieDataLayer = new TrafimageMapboxLayer({
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie.public',
   properties: {
     hideInLegend: true,
+    isBaseLayer: true,
   },
   mapOptions: {
     preserveDrawingBuffer: true,
