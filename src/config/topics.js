@@ -241,6 +241,22 @@ export const energiePublic = {
     overlay: true,
     exportMenu: true,
   },
+  exportConfig: {
+    mbStyleFunction: (mbStyle, topicStyleLayers) => {
+      const newMbStyle = { ...mbStyle };
+      topicStyleLayers.forEach((styleLayer) => {
+        if (styleLayer.styleLayersFilter) {
+          newMbStyle.layers.forEach((mbLayer) => {
+            if (styleLayer.styleLayersFilter(mbLayer)) {
+              // eslint-disable-next-line no-param-reassign
+              mbLayer.layout.visibility = 'visible';
+            }
+          });
+        }
+      });
+      return newMbStyle;
+    },
+  },
   layers: energieLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergiePublicTopicInfo',

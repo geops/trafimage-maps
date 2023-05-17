@@ -73,9 +73,14 @@ function ExportButton({
             exportSize,
             exportZoom,
             exportExtent,
+            topic.exportConfig,
           );
         }}
         onSaveEnd={async (mapToExport, canvas) => {
+          if (!mapToExport) {
+            setLoading(false);
+            return;
+          }
           clean(mapToExport, map, new LayerService(layers));
 
           // add the image to a newly created PDF
