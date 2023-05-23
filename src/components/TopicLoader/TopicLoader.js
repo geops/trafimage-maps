@@ -29,17 +29,10 @@ const propTypes = {
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
-  apiKey: PropTypes.string,
-  apiKeyName: PropTypes.string,
-  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-
-  appBaseUrl: PropTypes.string,
-  vectorTilesKey: PropTypes.string,
-  vectorTilesUrl: PropTypes.string,
-  staticFilesUrl: PropTypes.string,
 
   // mapStateToProps
   activeTopic: PropTypes.shape(),
+  topics: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   language: PropTypes.string.isRequired,
   permissionInfos: PropTypes.shape({
     user: PropTypes.string,
@@ -51,6 +44,12 @@ const propTypes = {
   realtimeKey: PropTypes.string,
   realtimeUrl: PropTypes.string,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
+  appBaseUrl: PropTypes.string,
+  vectorTilesKey: PropTypes.string,
+  vectorTilesUrl: PropTypes.string,
+  staticFilesUrl: PropTypes.string,
+  apiKey: PropTypes.string,
+  apiKeyName: PropTypes.string,
 
   // mapDispatchToProps
   // dispatchSetActiveTopic: PropTypes.func.isRequired,
