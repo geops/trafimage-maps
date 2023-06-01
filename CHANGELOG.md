@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.1](https://github.com/geops/trafimage-maps/compare/v1.21.1-beta.0...v1.21.1) (2023-06-01)
+
+### Bug Fixes
+
+- update translations for GA Night ([9ff9155](https://github.com/geops/trafimage-maps/commit/9ff9155f13526a05c372feee29adecf323d35378))
+
 ## [1.21.0](https://github.com/geops/trafimage-maps/compare/v1.20.3...v1.21.0) (2023-05-15)
 
 ### Features
