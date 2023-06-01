@@ -15,7 +15,7 @@ export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
 });
 
 export const geltungsbereicheGA = new GeltungsbereicheLayer({
-  name: 'ch.sbb.geltungsbereiche.mvp-ga',
+  name: 'ch.sbb.geltungsbereiche.mvp-ga_s25',
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata['geltungsbereiche.filter']?.includes('ga.line'),
