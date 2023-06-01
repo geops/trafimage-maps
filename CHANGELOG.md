@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.2](https://github.com/geops/trafimage-maps/compare/v1.21.1...v1.21.2) (2023-06-01)
+
+### Bug Fixes
+
+- switch back to original layer name for permalink support ([290bad3](https://github.com/geops/trafimage-maps/commit/290bad31a419bb9722396cb69716a35f8d9fdafe))
+
 ### [1.21.1](https://github.com/geops/trafimage-maps/compare/v1.21.1-beta.0...v1.21.1) (2023-06-01)
 
 ### Bug Fixes
