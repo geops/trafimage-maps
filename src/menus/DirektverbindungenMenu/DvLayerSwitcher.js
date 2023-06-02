@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => {
   return {
     switchWrapper: {
       '& label:first-child': {
-        marginRight: 30,
+        marginRight: 20,
       },
       '& .MuiFormControlLabel-label': {
         fontSize: 16,
