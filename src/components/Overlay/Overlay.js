@@ -65,6 +65,8 @@ const useStyles = makeStyles((theme) => ({
     '& .wkp-feature-information': {
       width: '100%',
     },
+  },
+  drawerMobileSmooth: {
     '& > .MuiPaper-root > div:first-child': {
       transition: 'height .3s ease',
     },
@@ -199,6 +201,7 @@ const Overlay = ({
   if (!children && !filtered.length) {
     return null;
   }
+  console.log(ResizableProps.snap);
 
   return (
     <div>
@@ -206,7 +209,7 @@ const Overlay = ({
         transitionDuration={transitionDuration}
         className={`${classes.drawer} ${
           isMobile ? classes.drawerMobile : classes.drawerDesktop
-        }`}
+        } ${ResizableProps.snap ? classes.drawerMobileSmooth : ''}`}
         classes={{
           root: classes.drawerRoot,
           paper: isMobile
@@ -240,6 +243,43 @@ const Overlay = ({
             enable={{ top: isMobile }}
             maxHeight="100vh"
             minHeight={OVERLAY_MIN_HEIGHT}
+            onResizeStart={() => {
+              console.log('resiestart');
+            }}
+            onResizeStop={(evt, direction, ref, delta) => {
+              // We do the sanp manually to have a better effect
+              const snaps = ResizableProps?.snap?.y;
+              console.log('resiestop', delta, ref, snaps);
+              if (ResizableProps?.snap?.y) {
+                let closerSnapDistance = Infinity;
+                let closerSnap = snaps[0];
+                snaps.forEach((snap) => {
+                  console.log(
+                    'resiestop',
+                    resizeRef.current.state.height - snap,
+                  );
+                  if (
+                    Math.abs(resizeRef.current.state.height - snap) <
+                    closerSnapDistance
+                  ) {
+                    closerSnapDistance = resizeRef.current.state.height - snap;
+                    closerSnap = snap;
+                  }
+                });
+                console.log('closerSnap', closerSnap);
+                resizeRef.current.updateSize({ height: closerSnap });
+              }
+            }}
+            onResize={(evt) => {
+              if (evt.touches[0]) {
+                resizeRef.current.updateSize({
+                  height:
+                    document.documentElement.clientHeight -
+                    evt.touches[0].clientY,
+                });
+                console.log('resies', resizeRef.current);
+              }
+            }}
             handleComponent={{
               top: (
                 <>
