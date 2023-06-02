@@ -13,6 +13,9 @@ import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/Dv
 const useStyles = makeStyles(() => {
   return {
     switchWrapper: {
+      '& label:first-child': {
+        marginRight: 30,
+      },
       '& .MuiFormControlLabel-label': {
         fontSize: 16,
       },
