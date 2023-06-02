@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
     '& .wkp-feature-information': {
       width: '100%',
     },
+    '& > .MuiPaper-root > div:first-child': {
+      transition: 'height .3s ease',
+    },
   },
   drawerMobilePaper: {
     position: 'absolute',
