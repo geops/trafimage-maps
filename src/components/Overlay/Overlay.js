@@ -1,4 +1,10 @@
-import React, { useMemo, useRef, useCallback, useEffect } from 'react';
+import React, {
+  useMemo,
+  useRef,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Drawer } from '@material-ui/core';
@@ -150,6 +156,7 @@ const Overlay = ({
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const resizeRef = useRef(null);
+  const [isSnapSmooth, setSnapSmooth] = useState(false);
   const { defaultSize } = ResizableProps;
 
   const isMobile = useMemo(() => {
@@ -201,15 +208,13 @@ const Overlay = ({
   if (!children && !filtered.length) {
     return null;
   }
-  console.log(ResizableProps.snap);
-
   return (
     <div>
       <Drawer
         transitionDuration={transitionDuration}
         className={`${classes.drawer} ${
           isMobile ? classes.drawerMobile : classes.drawerDesktop
-        } ${ResizableProps.snap ? classes.drawerMobileSmooth : ''}`}
+        } ${isSnapSmooth ? classes.drawerMobileSmooth : ''}`}
         classes={{
           root: classes.drawerRoot,
           paper: isMobile
@@ -244,20 +249,17 @@ const Overlay = ({
             maxHeight="100vh"
             minHeight={OVERLAY_MIN_HEIGHT}
             onResizeStart={() => {
-              console.log('resiestart');
-            }}
-            onResizeStop={(evt, direction, ref, delta) => {
-              // We do the sanp manually to have a better effect
-              const snaps = ResizableProps?.snap?.y;
-              console.log('resiestop', delta, ref, snaps);
               if (ResizableProps?.snap?.y) {
+                setSnapSmooth(false);
+              }
+            }}
+            onResizeStop={() => {
+              // We do the snap manually to have a befalsetance = Infinity;
+              const snaps = ResizableProps?.snap?.y;
+              if (snaps) {
                 let closerSnapDistance = Infinity;
                 let closerSnap = snaps[0];
                 snaps.forEach((snap) => {
-                  console.log(
-                    'resiestop',
-                    resizeRef.current.state.height - snap,
-                  );
                   if (
                     Math.abs(resizeRef.current.state.height - snap) <
                     closerSnapDistance
@@ -266,18 +268,8 @@ const Overlay = ({
                     closerSnap = snap;
                   }
                 });
-                console.log('closerSnap', closerSnap);
+                setSnapSmooth(true);
                 resizeRef.current.updateSize({ height: closerSnap });
-              }
-            }}
-            onResize={(evt) => {
-              if (evt.touches[0]) {
-                resizeRef.current.updateSize({
-                  height:
-                    document.documentElement.clientHeight -
-                    evt.touches[0].clientY,
-                });
-                console.log('resies', resizeRef.current);
               }
             }}
             handleComponent={{
@@ -297,6 +289,7 @@ const Overlay = ({
             }}
             // eslint-disable-next-line react/jsx-props-no-spreading
             {...ResizableProps}
+            snap={null} // We do the snap manually
           >
             {children || <FeatureInformation featureInfo={filtered} />}
           </Resizable>
