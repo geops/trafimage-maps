@@ -76,8 +76,8 @@ const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
   const statisticsLink = useMemo(() => {
     const { language: lang } = i18n;
     return `https://reporting.sbb.ch${lang === 'de' ? '' : `/${lang}`}/${t(
-      'bahnhoefe',
-    )}`;
+      'verkehr',
+    )}?highlighted=row-243`;
   }, [i18n, t]);
   return (
     <div>
