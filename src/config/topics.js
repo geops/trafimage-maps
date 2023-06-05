@@ -2,6 +2,7 @@ import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
+import energieLegendPub from '../img/energie_legend_pub.svg';
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
@@ -256,6 +257,12 @@ export const energiePublic = {
       });
       return newMbStyle;
     },
+    publisher: 'tobias.hauser@sbb.ch',
+    publishedAt: '12/2022',
+    dateDe: '12.12.2022',
+    dateFr: '12.12.2022',
+    year: '2022',
+    overlayImageUrl: energieLegendPub,
   },
   layers: energieLayers,
   projection: 'EPSG:3857',

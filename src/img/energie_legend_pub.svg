@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_2" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" width="2380.3999" height="1683.11096" viewBox="0 0 2380.3999 1683.11096">
+  <g id="energie">
+    <rect id="Rechteck_52" data-name="Rechteck 52" x="2377.04348" y="1679.89" width="3.35642" height="3.22096" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+    <rect id="Rechteck_52-2" data-name="Rechteck 52" x="2064.78261" width="314.78244" height="94.58565" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+    <rect id="Rechteck_34" data-name="Rechteck 34" width="336.78261" height="435.28377" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+    <g id="title">
+      <text id="text2308" transform="translate(54.0293 75.03648)" style="font-family: Arial-BoldMT, Arial; font-size: 24.65136px; font-weight: 700; isolation: isolate;"><tspan x="0" y="0">Netzkarte Energie</tspan></text>
+      <text id="text2317" transform="translate(54.0293 108.11363)" style="font-family: Arial-BoldMT, Arial; font-size: 24.65136px; font-weight: 700; isolation: isolate; letter-spacing: -.01em;"><tspan x="0" y="0">Réseau énergétique</tspan></text>
+      <text id="text2320" transform="translate(212.19116 151.60484)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">Name/Nom</tspan></text>
+      <text id="text2323" transform="translate(212.19116 171.77965)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">***publisher***</tspan></text>
+      <text id="text2347" transform="translate(53.98242 151.60484)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">Stand/Etat</tspan></text>
+      <text id="text2350" transform="translate(53.98242 171.78014)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">***published_at***</tspan></text>
+    </g>
+    <g id="sbb">
+      <path id="path2879" d="m2070.96665,78.9046h80.9362v-26.97887h-80.9362v26.97887Z" style="fill: #e42328;"/>
+      <path id="path2881" d="m2118.60855,63.35038h8.75088v-6.92805h4.12235v6.92805h8.75075l-7.0405-6.92805h5.22448l8.9929,8.99283-8.9929,8.99284h-5.2282l7.04063-6.92806h-8.7473v6.92806h-4.12235v-6.92769h-8.75088l7.03986,6.92805h-5.2209l-8.99277-8.99283,8.99277-8.99284h5.22192" style="fill: #fff;"/>
+      <path id="path2883" d="m2160.25511,69.03631c-.0525,4.65571,3.86125,6.71869,8.03879,6.71869,5.13152,0,7.85593-2.59093,7.85593-6.05694,0-4.28217-4.23081-5.15545-5.60736-5.49645-4.73405-1.21826-5.63143-1.40376-5.63143-2.85671,0-1.58674,1.532-2.14109,2.85656-2.14109,1.98402,0,3.59747.58038,3.72808,2.85671h4.0208c0-4.36316-3.62333-6.0808-7.56295-6.0808-3.41179,0-7.06099,1.85108-7.06099,5.71341,0,3.54376,2.8289,4.62858,5.63399,5.36735,2.7764.73985,5.60479,1.08482,5.60479,3.11887,0,1.93172-2.2222,2.35515-3.67583,2.35515-2.2222,0-4.17779-.98032-4.17779-3.49241" style="fill: #221e20;"/>
+      <path id="path2885" d="m2182.86252,59.65077h3.88737c1.4795,0,2.85656.36884,2.85656,2.16748,0,1.58674-1.08485,2.24812-2.53848,2.24812h-4.20545v-4.4156Zm-4.15116,15.65439h9.14874c3.41179,0,6.66634-1.63917,6.66634-5.47438,0-2.35299-1.16578-4.12523-3.46634-4.78661,1.59142-.65296,2.61352-2.22192,2.56742-3.94153,0-3.51628-2.43374-4.67956-6.03095-4.67956h-8.88495l-.00026,18.88208Zm4.15116-8.40992h4.5202c1.77171,0,2.98794.76842,2.98794,2.69796,0,1.95558-1.42726,2.48606-3.06631,2.48606h-4.44158" style="fill: #221e20; fill-rule: evenodd;"/>
+      <path id="path2887" d="m2201.4458,59.65077h3.88737c1.4795,0,2.85656.36884,2.85656,2.16748,0,1.58674-1.08485,2.24812-2.53848,2.24812h-4.20545v-4.4156Zm-4.15142,15.65439h9.14874c3.41179,0,6.66378-1.63917,6.66378-5.47438,0-2.35299-1.16322-4.12523-3.46378-4.78661,1.59014-.65417,2.6107-2.22276,2.56435-3.94153,0-3.51628-2.43143-4.67956-6.02839-4.67956h-8.88469v18.88208Zm4.15372-8.40992h4.5202c1.77197,0,2.98846.76842,2.98846,2.69796,0,1.95558-1.42726,2.48606-3.06631,2.48606h-4.44158" style="fill: #221e20; fill-rule: evenodd;"/>
+      <path id="path2889" d="m2239.47978,62.76963c-.50196-4.36316-3.99212-6.79462-8.14379-6.79462-5.84553,0-9.28114,4.36316-9.28114,9.96845,0,5.44799,3.43535,9.81116,9.28114,9.81116,4.62853,0,7.87949-3.01437,8.30283-7.72251h-4.02106c-.31654,2.48606-1.74406,4.23082-4.28203,4.23082-3.72833,0-5.13152-3.17383-5.13152-6.32128,0-3.30438,1.4037-6.47821,5.13152-6.47821,2.06111,0,3.86125,1.42763,4.12529,3.30438" style="fill: #221e20;"/>
+      <path id="path2891" d="m2242.19523,75.30514h4.15116v-7.80133h7.90818v-3.22591h-7.90818v-4.36316h9.12338v-3.48988h-13.27531" style="fill: #221e20;"/>
+      <path id="path2893" d="m2257.99392,75.30514h4.13989v-7.80133h7.89844v-3.22591h-7.90126v-4.36316h9.11263v-3.48988h-13.2497" style="fill: #221e20;"/>
+      <path id="path2895" d="m2280.23664,75.30514h4.16192v-7.80133h7.89844v-3.22591h-7.89844v-4.36316h9.11263v-3.48988h-13.27454" style="fill: #221e20;"/>
+      <path id="path2897" d="m2296.53421,75.30514h4.13963v-7.80133h7.89819v-3.22591h-7.89844v-4.36316h9.13567v-3.48988h-13.27531" style="fill: #221e20;"/>
+      <path id="path2899" d="m2311.33128,69.03631c-.04712,4.65571,3.85408,6.71869,8.04135,6.71869,5.13869,0,7.85081-2.59093,7.85081-6.05694,0-4.28217-4.2349-5.15545-5.59071-5.49645-4.73405-1.21826-5.63834-1.40376-5.63834-2.85671,0-1.58674,1.52227-2.14109,2.85656-2.14109,1.97429,0,3.5926.58038,3.73499,2.85671h3.99699c0-4.36316-3.61616-6.0808-7.54169-6.0808-3.42588,0-7.06586,1.85108-7.06586,5.71341,0,3.54376,2.83095,4.62858,5.6386,5.36735,2.75976.73985,5.59071,1.08482,5.59071,3.11887,0,1.93172-2.21272,2.35515-3.6638,2.35515-2.23654,0-4.18701-.98032-4.18701-3.49241" style="fill: #221e20;"/>
+    </g>
+    <g id="ref-pub">
+      <rect id="rect2966" x="2312.34941" y="937.32478" width="21.91146" height="588.72733" style="fill: #fffffd;"/>
+      <text id="text1948" transform="translate(2327.0918 1640.14195) rotate(-90)" style="font-family: Arial-BoldMT, Arial; font-size: 14.00816px; font-weight: 700; isolation: isolate;"><tspan x="0" y="0">SBB-Netzkarte-Energie-pub-***</tspan><tspan x="204.70508" y="0" style="letter-spacing: -.05521em;">Y</tspan><tspan x="213.27539" y="0">ear***</tspan></text>
+      <text id="text1951" transform="translate(2327.0918 1411.19545) rotate(-90)" style="font-family: ArialMT, Arial; font-size: 12.00699px; isolation: isolate;"><tspan x="0" y="0" xml:space="preserve">Quelle: OpenStreetMap contributors  © SBB/CFF/FFS ww</tspan><tspan x="308.45801" y="0" style="letter-spacing: -.05514em;">w</tspan><tspan x="316.4668" y="0">.traﬁmage.ch ww</tspan><tspan x="406.54883" y="0" style="letter-spacing: -.05522em;">w</tspan><tspan x="414.55664" y="0">.geops.ch</tspan></text>
+    </g>
+    <g id="legende-pub">
+      <rect id="Rechteck_34-2" data-name="Rechteck 34" y="342.68165" width="187.05701" height="342.76245" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+      <rect id="rect2197" y="671.23783" width="340.82609" height="99.78261" style="fill: #fffffd;"/>
+      <rect id="rect2197-2" data-name="rect2197" y="771.02043" width="314.21739" height="65.47826" style="fill: #fffffd;"/>
+      <g id="Gruppe_15" data-name="Gruppe 15" style="opacity: .99;">
+        <line id="Linie_1" data-name="Linie 1" x1="59.41352" y1="790.7431" x2="123.05233" y2="790.7431" style="fill: none; stroke: #000; stroke-miterlimit: 5.24497; stroke-width: .9906px;"/>
+        <line id="Linie_2" data-name="Linie 2" x1="127.40408" y1="790.7431" x2="190.34374" y2="790.7431" style="fill: none; stroke: #000; stroke-miterlimit: 5.24497; stroke-width: .9906px;"/>
+        <line id="Linie_3" data-name="Linie 3" x1="195.23886" y1="790.7431" x2="258.2981" y2="790.7431" style="fill: none; stroke: #000; stroke-miterlimit: 5.24497; stroke-width: .9906px;"/>
+        <g id="_0" data-name=" 0">
+          <text id="text2332" transform="translate(55.18848 810.13727)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">0</tspan></text>
+        </g>
+        <g id="_10" data-name=" 10">
+          <text id="text2335" transform="translate(117.54004 810.13629)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate; letter-spacing: -.04999em;"><tspan x="0" y="0">10</tspan></text>
+        </g>
+        <g id="_20" data-name=" 20">
+          <text id="text2340" transform="translate(183.02637 810.13629)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">20</tspan></text>
+        </g>
+        <g id="_30_km" data-name=" 30 km">
+          <text id="text2343" transform="translate(248.21387 810.13629)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">30 km</tspan></text>
+        </g>
+      </g>
+      <g>
+        <text id="text2489" transform="translate(55.18835 293.38747)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">Übertragungsleitungen /</tspan><tspan x="0" y="19.84229">Lignes de transmission</tspan><tspan x="0" y="54.7085" xml:space="preserve" style="letter-spacing: .92217em;">		</tspan><tspan x="47.76367" y="54.7085" xml:space="preserve">   Los 1</tspan><tspan x="0" y="89.57471" xml:space="preserve">    </tspan><tspan x="17.48633" y="89.57471" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="89.57471" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="89.57471" xml:space="preserve">   Los 2</tspan><tspan x="0" y="124.44092" xml:space="preserve">    </tspan><tspan x="17.48633" y="124.44092" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="124.44092" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="124.44092" xml:space="preserve">   Los 3</tspan><tspan x="0" y="159.30713" xml:space="preserve">    </tspan><tspan x="17.48633" y="159.30713" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="159.30713" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="159.30713" xml:space="preserve">   Los 4</tspan><tspan x="0" y="194.17285" xml:space="preserve">    </tspan><tspan x="17.48633" y="194.17285" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="194.17285" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="194.17285" xml:space="preserve">   Los 5</tspan><tspan x="0" y="229.03906" xml:space="preserve">    </tspan><tspan x="17.48633" y="229.03906" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="229.03906" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="229.03906" xml:space="preserve">   Los 6</tspan><tspan x="0" y="263.90527" xml:space="preserve">    </tspan><tspan x="17.48633" y="263.90527" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="263.90527" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="263.90527" xml:space="preserve">   Los 7</tspan><tspan x="0" y="298.77148" xml:space="preserve">    </tspan><tspan x="17.48633" y="298.77148" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="298.77148" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="298.77148" xml:space="preserve">   Los 8</tspan><tspan x="0" y="333.6377" xml:space="preserve">    </tspan><tspan x="17.48633" y="333.6377" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="333.6377" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="333.6377" xml:space="preserve">   Los 9</tspan><tspan x="0" y="368.50391" xml:space="preserve">    </tspan><tspan x="17.48633" y="368.50391" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="368.50391" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="368.50391" xml:space="preserve">   Los 10</tspan><tspan x="0" y="403.37012" xml:space="preserve">    </tspan><tspan x="17.48633" y="403.37012" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="403.37012" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="403.37012" xml:space="preserve">   Los </tspan><tspan x="80.61963" y="403.37012" style="letter-spacing: -.07423em;">1</tspan><tspan x="88.20264" y="403.37012">1</tspan><tspan x="0" y="438.23633" xml:space="preserve">    </tspan><tspan x="17.48633" y="438.23633" style="letter-spacing: -.18914em;">	</tspan><tspan x="18.88184" y="438.23633" style="letter-spacing: .92217em;">	</tspan><tspan x="47.76367" y="438.23633" xml:space="preserve">   ausserhalb der Loseinteilung /</tspan><tspan x="0" y="458.0791" xml:space="preserve" style="letter-spacing: .92217em;">		</tspan><tspan x="47.76367" y="458.0791" xml:space="preserve">   exclus de la division des lots</tspan></text>
+        <line x1="54.72871" y1="377.76203" x2="92.28218" y2="377.76203" style="fill: none; stroke: #da1720; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="412.84241" x2="92.28218" y2="412.84241" style="fill: none; stroke: #71c520; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="342.68165" x2="92.28218" y2="342.68165" style="fill: none; stroke: #12919a; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="447.92279" x2="92.28218" y2="447.92279" style="fill: none; stroke: #f057b3; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="483.00317" x2="92.28218" y2="483.00317" style="fill: none; stroke: #f27211; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="518.08356" x2="92.28218" y2="518.08356" style="fill: none; stroke: #1486da; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="553.16394" x2="92.28218" y2="553.16394" style="fill: none; stroke: #7346bc; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="588.24432" x2="92.28218" y2="588.24432" style="fill: none; stroke: #1abebc; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="623.3247" x2="92.28218" y2="623.3247" style="fill: none; stroke: #f9b914; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="658.40508" x2="92.28218" y2="658.40508" style="fill: none; stroke: #128939; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="693.48547" x2="92.28218" y2="693.48547" style="fill: none; stroke: #a3005b; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+        <line x1="54.72871" y1="728.56585" x2="92.28218" y2="728.56585" style="fill: none; stroke: #000; stroke-miterlimit: 10; stroke-width: 7.08661px;"/>
+      </g>
+      <g>
+        <g id="los">
+          <text id="text2489-2" data-name="text2489" transform="translate(55.18835 231.27568)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0" xml:space="preserve" style="letter-spacing: .92217em;">		</tspan><tspan x="47.76367" y="0" xml:space="preserve">   Unterwerke /</tspan><tspan x="0" y="19.84229" xml:space="preserve" style="letter-spacing: .92217em;">		</tspan><tspan x="47.76367" y="19.84229" xml:space="preserve">   Sous-stations</tspan></text>
+        </g>
+        <g>
+          <rect x="60.31982" y="218.03502" width="22.94336" height="22.94336"/>
+          <path d="m81.47734,219.82056v19.37207h-19.37195v-19.37207h19.37195m3.57166-3.57166h-26.51527v26.51538h26.51527v-26.51538h0Z" style="fill: #fff;"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
