@@ -262,7 +262,7 @@ export const energiePublic = {
       const date = new Date();
       return `${date.getMonth() + 1}/${date.getFullYear()}`;
     },
-    year: '2022',
+    year: () => new Date().getFullYear(),
     overlayImageUrl: energieLegendPub,
   },
   layers: energieLayers,
