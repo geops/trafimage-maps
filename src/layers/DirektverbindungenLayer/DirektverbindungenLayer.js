@@ -9,7 +9,6 @@ import { DV_KEY } from '../../utils/constants';
 
 const DV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
 
-// const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const DV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
