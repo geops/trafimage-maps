@@ -257,7 +257,7 @@ export const energiePublic = {
       });
       return newMbStyle;
     },
-    publisher: 'tobias.hauser@sbb.ch',
+    publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
     publishedAt: '12/2022',
     dateDe: '12.12.2022',
     dateFr: '12.12.2022',

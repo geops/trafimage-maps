@@ -3,11 +3,13 @@
   <g id="energie">
     <rect id="Rechteck_52" data-name="Rechteck 52" x="2377.04348" y="1679.89" width="3.35642" height="3.22096" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
     <rect id="Rechteck_52-2" data-name="Rechteck 52" x="2064.78261" width="314.78244" height="94.58565" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
-    <rect id="Rechteck_34" data-name="Rechteck 34" width="336.78261" height="435.28377" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+    <rect id="Rechteck_titel" data-name="Rechteck Titel" width="300.78261" height="145.28377" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+    <rect id="Rechteck_34" data-name="Rechteck 34" width="236.78261" height="345.28377" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+    <rect id="Rechteck_verantwortlich" data-name="Rechteck Verantwortlich" y="134.78261" width="636.78261" height="50.28377" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
     <g id="title">
       <text id="text2308" transform="translate(54.0293 75.03648)" style="font-family: Arial-BoldMT, Arial; font-size: 24.65136px; font-weight: 700; isolation: isolate;"><tspan x="0" y="0">Netzkarte Energie</tspan></text>
       <text id="text2317" transform="translate(54.0293 108.11363)" style="font-family: Arial-BoldMT, Arial; font-size: 24.65136px; font-weight: 700; isolation: isolate; letter-spacing: -.01em;"><tspan x="0" y="0">Réseau énergétique</tspan></text>
-      <text id="text2320" transform="translate(212.19116 151.60484)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">Name/Nom</tspan></text>
+      <text id="text2320" transform="translate(212.19116 151.60484)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">Verantwortlich/Responsable</tspan></text>
       <text id="text2323" transform="translate(212.19116 171.77965)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">***publisher***</tspan></text>
       <text id="text2347" transform="translate(53.98242 151.60484)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">Stand/Etat</tspan></text>
       <text id="text2350" transform="translate(53.98242 171.78014)" style="font-family: ArialMT, Arial; font-size: 15.73491px; isolation: isolate;"><tspan x="0" y="0">***published_at***</tspan></text>
@@ -31,9 +33,9 @@
       <text id="text1951" transform="translate(2327.0918 1411.19545) rotate(-90)" style="font-family: ArialMT, Arial; font-size: 12.00699px; isolation: isolate;"><tspan x="0" y="0" xml:space="preserve">Quelle: OpenStreetMap contributors  © SBB/CFF/FFS www.traﬁmage.ch www.geops.ch</tspan></text>
     </g>
     <g id="legende-pub">
-      <rect id="Rechteck_34-2" data-name="Rechteck 34" y="342.68165" width="187.05701" height="342.76245" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
-      <rect id="rect2197" y="671.23783" width="340.82609" height="99.78261" style="fill: #fffffd;"/>
-      <rect id="rect2197-2" data-name="rect2197" y="771.02043" width="314.21739" height="65.47826" style="fill: #fffffd;"/>
+      <rect id="Rechteck_34-2" data-name="Rechteck 34" y="342.68165" width="187.05701" height="370.76245" style="fill: #fffffd; isolation: isolate; opacity: .99;"/>
+      <rect id="rect2197" y="710.23783" width="340.82609" height="50.78261" style="fill: #fffffd;"/>
+      <rect id="rect2197-2" data-name="rect2197" y="760.02043" width="314.21739" height="65.47826" style="fill: #fffffd;"/>
       <g id="Gruppe_15" data-name="Gruppe 15" style="opacity: .99;">
         <line id="Linie_1" data-name="Linie 1" x1="59.41352" y1="790.7431" x2="123.05233" y2="790.7431" style="fill: none; stroke: #000; stroke-miterlimit: 5.24497; stroke-width: .9906px;"/>
         <line id="Linie_2" data-name="Linie 2" x1="127.40408" y1="790.7431" x2="190.34374" y2="790.7431" style="fill: none; stroke: #000; stroke-miterlimit: 5.24497; stroke-width: .9906px;"/>
