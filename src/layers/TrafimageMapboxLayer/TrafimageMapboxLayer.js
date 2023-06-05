@@ -1,8 +1,4 @@
-import {
-  MaplibreLayer,
-  getUrlWithParams,
-  getMapboxMapCopyrights,
-} from 'mobility-toolbox-js/ol';
+import { MaplibreLayer, getMapboxMapCopyrights } from 'mobility-toolbox-js/ol';
 import { toLonLat } from 'ol/proj';
 
 const applyFilters = (mbStyle, filters) => {
@@ -42,9 +38,9 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     this.filters = options.filters;
 
     // TODO don't use process.env here it fails in Schulzug
-    // const stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
+    // this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
     this.stylePrefix = '';
-    this.style = this.stylePrefix + options.style;
+    this.style = options.style;
   }
 
   attachToMap(map) {
@@ -97,16 +93,6 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     });
   }
 
-  /**
-   * Returns a style URL with apiKey & apiKeyName infos.
-   * @private
-   */
-  createStyleUrl() {
-    return getUrlWithParams(this.styleUrl, {
-      [this.apiKeyName]: this.apiKey,
-    }).toString();
-  }
-
   setStyleConfig(url, key, apiKeyName) {
     if (url && url !== this.url) {
       this.url = url;
@@ -117,11 +103,14 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     if (apiKeyName && apiKeyName !== this.apiKeyName) {
       this.apiKeyName = apiKeyName;
     }
-    if ((!url && !key && !apiKeyName) || !this.styleUrl) {
-      this.styleUrl = `${this.url}/styles/${this.stylePrefix}${this.style}/style.json?`;
-    }
 
-    const newStyleUrl = this.createStyleUrl();
+    const searchParams = new URLSearchParams({
+      [this.apiKeyName]: this.apiKey,
+    });
+
+    const newStyleUrl = `${this.url}/styles/${this.stylePrefix}${
+      this.style
+    }/style.json?${searchParams.toString()}`;
 
     // Don't apply style if not necessary otherwise
     // it will remove styles applied by MapboxStyleLayer layers.
@@ -129,10 +118,9 @@ class TrafimageMapboxLayer extends MaplibreLayer {
       return;
     }
 
+    this.styleUrl = newStyleUrl;
+
     if (!this.mbMap) {
-      // The mapbox map does not exist so we only set the good styleUrl.
-      // The style will be loaded in loadMbMap function.
-      this.styleUrl = newStyleUrl;
       if (this.filters) {
         this.on('load', () => {
           this.applyStyle(this.mbMap.getStyle());
@@ -249,7 +237,6 @@ class TrafimageMapboxLayer extends MaplibreLayer {
         if (!this.mbMap) {
           return;
         }
-        this.styleUrl = newStyleUrl;
         this.applyStyle(data);
       })
       .catch((err) => {

@@ -32,7 +32,7 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
     cardsScope: 'ga',
     products: [
       'ch.sbb.geltungsbereiche.products.ga',
-      'ch.sbb.geltungsbereiche.products.s25',
+      'ch.sbb.geltungsbereiche.products.ga-night',
       'ch.sbb.geltungsbereiche.products.ga-month',
       'ch.sbb.geltungsbereiche.products.excursion',
       'ch.sbb.geltungsbereiche.products.hta-day',

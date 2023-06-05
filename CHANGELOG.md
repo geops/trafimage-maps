@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.3](https://github.com/geops/trafimage-maps/compare/v1.21.2...v1.21.3) (2023-06-02)
+
+### Bug Fixes
+
+- add more space when sbb switch are on the same row ([#1085](https://github.com/geops/trafimage-maps/issues/1085)) ([2a1be35](https://github.com/geops/trafimage-maps/commit/2a1be35e74daf56390317081f7c8758075d403b1))
+- add transition when the overlay snap ([#1087](https://github.com/geops/trafimage-maps/issues/1087)) ([9d2bb4d](https://github.com/geops/trafimage-maps/commit/9d2bb4d5d576f50498eb2ca71eced709e3a99e4d))
+
+### [1.21.2](https://github.com/geops/trafimage-maps/compare/v1.21.1...v1.21.2) (2023-06-01)
+
+### Bug Fixes
+
+- switch back to original layer name for permalink support ([290bad3](https://github.com/geops/trafimage-maps/commit/290bad31a419bb9722396cb69716a35f8d9fdafe))
+
+### [1.21.1](https://github.com/geops/trafimage-maps/compare/v1.21.1-beta.0...v1.21.1) (2023-06-01)
+
+### Bug Fixes
+
+- update translations for GA Night ([9ff9155](https://github.com/geops/trafimage-maps/commit/9ff9155f13526a05c372feee29adecf323d35378))
+
 ## [1.21.0](https://github.com/geops/trafimage-maps/compare/v1.20.3...v1.21.0) (2023-05-15)
 
 ### Features

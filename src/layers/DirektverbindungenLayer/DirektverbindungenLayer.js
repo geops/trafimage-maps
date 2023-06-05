@@ -129,6 +129,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           this.syncFeatures();
         }
       })
+
       // eslint-disable-next-line no-console
       .catch((err) => console.error(err));
   }

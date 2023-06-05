@@ -82,6 +82,15 @@
         color: #444;
         width: 0;
         height: 0;
+        overflow-y: auto;
+      }
+
+      fieldset {
+        border: 1px solid lightgray;
+      }
+
+      legend {
+        font-weight: bold;
       }
 
       #development-wrapper button {
@@ -215,6 +224,13 @@
           changeAttr('layersVisibility', layersVisibility);
         }
 
+        // All parameters using xxxUrl or xxxKey will replace the attributes of the same name
+        url.searchParams.entries(([key,value])=>{
+          if ([/(key|url)/i.test(key)]){
+            changeAttr(key, value);
+          }
+        })
+
         var map = document.getElementById('map');
         var log = document.getElementById('log');
         map.addEventListener('moveend', function (evt) {
@@ -242,7 +258,7 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
-    <div style="width: 100%; height: 100%">
+    <div style="width: 100%; height: 100%;">
       <trafimage-maps
         id="map"
         zoom="8"
@@ -282,82 +298,142 @@
         <span>X</span>
       </button>
       <div id="buttons">
-        <div class="buttons-row">
+        <fieldset>
+          <legend>activeTopicKey:</legend>
           <label>
-            <input id="topic" type="text" />
-            <button
-              type="button"
-              onclick="changeAttr('activeTopicKey', document.getElementById('topic').value)"
-            >
-              change topic
-            </button>
+            <input type="text" id="activeTopicKey" value="ch.sbb.handicap"></input>
+            <button onclick="changeAttr('activeTopicKey', document.getElementById('activeTopicKey').value)">apply</button>
           </label>
-        </div>
-        <div class="buttons-row">
-          <button
-            type="button"
-            onclick="changeAttr('activeTopicKey','ch.sbb.handicap')"
-          >
-            change to handicap
-          </button>
-          <button
-            type="button"
-            onclick="changeAttr('activeTopicKey','ch.sbb.netzkarte')"
-          >
-            change to netzkarte
-          </button>
-        </div>
-        <div class="buttons-row">
-          <button
-            type="button"
-            onclick="changeAttr('vectorTilesUrl', 'http://foo.ch')"
-          >
-            change vectorTilesUrl to http://foo.ch
-          </button>
-          <button type="button" onclick="changeAttr('apiKey', 'abcdefgh')">
-            change apiKey to 'abcdefgh'
-          </button>
-        </div>
-        <div class="buttons-row">
-          <button
-            type="button"
-            onclick="changeAttr('vectorTilesKey', 'abcdefgh')"
-          >
-            change vectorTilesKey to 'abcdefgh'
-          </button>
-          <button
-            type="button"
-            onclick="changeAttr('geoserverUrl', 'http://foo.ch')"
-          >
-            change geoserverUrl to http://foo.ch
-          </button>
-        </div>
-        <div class="buttons-row">
-          <button
-            type="button"
-            onclick="changeAttr('cartaroUrl', 'http://foo.ch')"
-          >
-            change cartaroUrl to http://foo.ch
-          </button>
-          <button
-            type="button"
-            onclick="changeAttr('center', '[950000, 6000000]')"
-          >
-            change center to '[950000, 5900000]'
-          </button>
-        </div>
-        <div class="buttons-row">
-          <button type="button" onclick="changeAttr('zoom', 16)">
-            change zoom to 16
-          </button>
-          <button
-            type="button"
-            onclick="changeAttr('maxExtent', '502649.8980,5655117.1007,1352629.6525,6141868.0968')"
-          >
-            change max extent to
-            "502649.8980,5655117.1007,1352629.6525,6141868.0968"
-          </button>
-        </div>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>vectorTilesUrl:</legend>
+          <label>
+            <input type="text" id="vectorTilesUrl"></input>
+            <button onclick="changeAttr('vectorTilesUrl', document.getElementById('vectorTilesUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>realtimeUrl:</legend>
+          <label>
+            <input type="text" id="realtimeUrl"></input>
+            <button onclick="changeAttr('realtimeUrl', document.getElementById('realtimeUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>stopsUrl:</legend>
+          <label>
+            <input type="text" id="stopsUrl"></input>
+            <button onclick="changeAttr('stopsUrl', document.getElementById('stopsUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>searchUrl:</legend>
+          <label>
+            <input type="text" id="searchUrl"></input>
+            <button onclick="changeAttr('searchUrl', document.getElementById('searchUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>cartaroUrl:</legend>
+          <label>
+            <input type="text" id="cartaroUrl"></input>
+            <button onclick="changeAttr('cartaroUrl', document.getElementById('cartaroUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>mapsetUrl:</legend>
+          <label>
+            <input type="text" id="mapsetUrl"></input>
+            <button onclick="changeAttr('mapsetUrl', document.getElementById('mapsetUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>drawUrl:</legend>
+          <label>
+            <input type="text" id="drawUrl"></input>
+            <button onclick="changeAttr('drawUrl', document.getElementById('drawUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>shortenerUrl:</legend>
+          <label>
+            <input type="text" id="shortenerUrl"></input>
+            <button onclick="changeAttr('shortenerUrl', document.getElementById('shortenerUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>destinationUrl:</legend>
+          <label>
+            <input type="text" id="destinationUrl"></input>
+            <button onclick="changeAttr('destinationUrl', document.getElementById('destinationUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>departuresUrl:</legend>
+          <label>
+            <input type="text" id="departuresUrl"></input>
+            <button onclick="changeAttr('departuresUrl', document.getElementById('departuresUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>appBaseUrl:</legend>
+          <label>
+            <input type="text" id="appBaseUrl"></input>
+            <button onclick="changeAttr('appBaseUrl', document.getElementById('appBaseUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>staticFilesUrl:</legend>
+          <label>
+            <input type="text" id="staticFilesUrl"></input>
+            <button onclick="changeAttr('staticFilesUrl', document.getElementById('staticFilesUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>loginUrl:</legend>
+          <label>
+            <input type="text" id="loginUrl"></input>
+            <button onclick="changeAttr('loginUrl', document.getElementById('loginUrl').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>center:</legend>
+          <label>
+            <input type="text" id="center" value='950000,6000000'></input>
+            <button onclick="changeAttr('center', '[' + document.getElementById('center').value + ']')">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>zoom:</legend>
+          <label>
+            <input type="text" id="zoom" value="16"></input>
+            <button onclick="changeAttr('zoom', parseFloat(document.getElementById('zoom').value))">apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>maxExtent:</legend>
+          <label>
+            <input type="text" id="maxExtent" value='502649.8980,5655117.1007,1352629.6525,6141868.0968'></input>
+            <button onclick="changeAttr('maxExtent', document.getElementById('maxExtent').value)">apply</button>
+          </label>
+        </fieldset>
+        <br>
       </div>
       <div id="log"></div>
     </div>
