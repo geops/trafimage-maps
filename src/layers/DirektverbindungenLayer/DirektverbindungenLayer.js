@@ -42,7 +42,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
-    this.fetchDvFeatures();
+    // this.fetchDvFeatures();
     // We can only get the mapbox features from the view on load.
     // In order to assign the Cartaro features their corresponding
     // mapbox features for the full list view, we sync the features when
