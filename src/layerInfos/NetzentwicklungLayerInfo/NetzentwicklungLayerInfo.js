@@ -36,7 +36,7 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
 
   useEffect(() => {
     fetch(
-      `https://api.geops.io/cartaro/netzentwicklung/region/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf`,
+      `https://api.geops.io/cartaro/v1/netzentwicklung/region/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf`,
     )
       .then((res) => res.json())
       .then((res) => setRegions(res))
