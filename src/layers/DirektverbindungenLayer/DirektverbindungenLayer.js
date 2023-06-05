@@ -9,7 +9,7 @@ import { DV_KEY } from '../../utils/constants';
 
 const DV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
 
-const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
+// const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const DV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
@@ -42,7 +42,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
-    // this.fetchDvFeatures();
+    this.fetchDvFeatures();
     // We can only get the mapbox features from the view on load.
     // In order to assign the Cartaro features their corresponding
     // mapbox features for the full list view, we sync the features when
@@ -99,7 +99,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
    * Fetch features from Cartaro for the list view
    */
   async fetchDvFeatures() {
-    await fetch(`${cartaroURL}direktverbindungen/items/`)
+    await fetch(
+      'https://api.geops.io/cartaro/v1/direktverbindungen/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf',
+    )
       .then((res) => res.json())
       .then((data) => {
         const features = new GeoJSON().readFeatures(data);

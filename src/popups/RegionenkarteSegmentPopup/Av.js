@@ -65,7 +65,7 @@ function Av({ layer, feature, onChangeRole }) {
 
     if (newPerson && newPerson.email) {
       fetch(
-        `${cartaroUrl}anlagenverantwortliche/items/other_lines/?role=${
+        `https://api.geops.io/cartaro/anlagenverantwortliche/items/other_lines/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf&role=${
           role.split('_')[1]
         }&email=${newPerson.email}&format=json`,
         {
