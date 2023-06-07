@@ -114,7 +114,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   visible: false,
   mapboxLayer: dataLayer,
   styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'passagierfrequenzen',
+    !!metadata && metadata['trafimage.filter'] === 'passagier_freq',
   properties: {
     isQueryable: true,
     hasInfos: true,

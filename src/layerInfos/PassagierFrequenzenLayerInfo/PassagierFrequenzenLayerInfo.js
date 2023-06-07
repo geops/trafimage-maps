@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PropTypes } from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
@@ -8,17 +8,13 @@ const comps = {
   de: (
     <>
       <p>
-        Angezeigt wird die Anzahl Ein- und Aussteigende an den Bahnhöfen und
-        Haltestellen der MGB, RhB, SBB, SOB, Thurbo und Zentralbahn. Die Zahlen
-        beziehen sich auf den durchschnittlichen werktäglichen Verkehr (Mo-Fr)
-        und enthalten die Ein- resp. Aussteigenden folgender
-        Transportunternehmen: BLS, MGB, MOB, Oensingen-Balsthal-Bahn,
-        RegionAlps, RhB, SBB, SBB GmbH, SOB, SZU, Thurbo, TILO, TRAVYS und
-        Zentralbahn. Ein- und Aussteigende anderer Transportunternehmen und
-        anderer öffentlicher Verkehrsmittel sowie Passanten werden nicht
-        berücksichtigt.
-        <br />
-        Die Angaben beziehen sich auf das Fahrplanjahr 2018.
+        Die Karte stellt die Anzahl der Ein- und Aussteigenden an den Bahnhöfen
+        und Haltestellen der Eisenbahn dar. Die Zahlen beziehen sich auf den
+        durchschnittlichen werktäglichen Verkehr (Montag bis Freitag) und die
+        für den jeweiligen Bahnhof angegebenen Eisenbahnverkehrs­unternehmen.
+        Ein- und Aussteigende anderer öffentlicher Verkehrsmittel sowie
+        Passanten werden nicht berücksichtigt. Umsteigende zählen sowohl als
+        Aus- wie als Einsteigende, also zweifach.
       </p>
       <p>
         Daten: <a href="mailto:stat@sbb.ch">stat@sbb.ch</a>.
@@ -28,16 +24,14 @@ const comps = {
   fr: (
     <>
       <p>
-        L’affluence des voyageurs dans les gares et les arrêts CFF, MGB, RhB,
-        SOB, Thurbo et Zentralbahn est affiché. Les chiffres se rapportent au
-        trafic moyen pendant les jours ouvrés (lu-ve) et recensent les montées
-        et descentes de personnes pour les entreprises de transport suivantes:
-        BLS, CFF, MGB, MOB, Oensingen-Balsthal-Bahn, RegionAlps, RhB, SBB GmbH,
-        SOB, SZU, Thurbo, TILO, TRAVYS et Zentralbahn. Les passagers d’autres
-        entreprises de transport/d’autres moyens de transport publics et les
-        passants ne sont pas pris en compte.
-        <br />
-        Les données se réfèrent à l’année d’horaire 2018.
+        La carte représente le nombre de personnes montant et descendant des
+        trains dans les gares et aux arrêts. Les chiffres se réfèrent au trafic
+        journalier moyen des jours ouvrés (lundi à vendredi) et aux entreprises
+        de transport ferroviaire indiquées pour chaque gare. Ni les personnes
+        montant et descendant d’autres modes de transports publics, ni les
+        passant·e·s ne sont pris en compte. Les voyageuses et voyageurs qui
+        changent de train sont comptés deux fois, à savoir comme personnes
+        descendant du train et comme personnes montant à bord.
       </p>
       <p>
         Données: <a href="mailto:stat@sbb.ch">stat@sbb.ch</a>.
@@ -47,16 +41,12 @@ const comps = {
   en: (
     <>
       <p>
-        This layer depicts the number of passengers boarding and alighting at
-        stations and stops of MGB, RhB, SBB, SOB, Thurbo and Zentralbahn. The
-        figures refer to normal service on working days (Mon–Fri) and include
-        passengers who get on and off trains operated by the following transport
-        companies: BLS, MGB, MOB, Oensingen-Balsthal-Bahn, RegionAlps, RhB, SBB,
-        SBB GmbH, SOB, SZU, Thurbo, TILO, TRAVYS and Zentralbahn. Users of other
-        transport companies and other means of public transport and passers-by
-        are not taken into account.
-        <br />
-        The information refers to the timetable year 2018.
+        The map depicts the number of passengers boarding and alighting at
+        railway stations and stops. The figures refer to average weekday traffic
+        (Monday to Friday) and the railway undertakings indicated for the
+        respective station. Passengers boarding and alighting other public
+        transport as well as passers-by are not taken into account. Passengers
+        changing trains are counted twice, as both alighting and boarding.
       </p>
       <p>
         Data: <a href="mailto:stat@sbb.ch">stat@sbb.ch</a>.
@@ -66,15 +56,13 @@ const comps = {
   it: (
     <>
       <p>
-        Vengono visualizzate le affluenze dei passeggeri delle stazioni e
-        fermate delle FFS, MGB, RhB, SOB, Thurbo e Zentralbahn. I dati si
-        riferiscono al traffico feriale medio (lun.-ven.) e contengono
-        informazioni sui viaggiatori saliti e scesi delle seguenti imprese di
-        trasporto: BLS, FFS, MGB, MOB, Oensingen-Balsthal-Bahn, RegionAlps, RhB,
-        SBB GmbH, SOB, SZU, Thurbo, TILO, TRAVYS e Zentralbahn. Gli utenti di
-        altre imprese di trasporto e di altri trasporti pubblici, nonché i
-        passanti, non vengono presi in considerazione.
-        <br />I dati si riferiscono all’anno d’orario 2018.
+        La mappa rappresenta il numero di persone che salgono e scendono dal
+        treno nelle stazioni e alle fermate ferroviarie. I dati si riferiscono
+        al traffico feriale medio (dal lunedì al venerdì) e alle imprese di
+        trasporto ferroviario indicate per la rispettiva stazione. Le persone
+        che salgono e scendono da altri mezzi pubblici e i passanti non vengono
+        presi in considerazione. I viaggiatori in coincidenza sono conteggiati
+        due volte, sia quando salgono, sia quando scendono.
       </p>
       <p>
         Dati: <a href="mailto:stat@sbb.ch">stat@sbb.ch</a>.
@@ -85,12 +73,18 @@ const comps = {
 
 const PassagierFrequenzenLayerInfo = ({ properties: layer }) => {
   const { i18n, t } = useTranslation();
+  const statisticsLink = useMemo(() => {
+    const { language: lang } = i18n;
+    return `https://reporting.sbb.ch${lang === 'de' ? '' : `/${lang}`}/${t(
+      'verkehr',
+    )}?highlighted=row-243`;
+  }, [i18n, t]);
   return (
     <div>
       {comps[i18n.language]}
       <hr />
       <p>
-        <DataLink layer={layer} />
+        <DataLink href={statisticsLink} layer={layer} />
       </p>
       <p>
         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
