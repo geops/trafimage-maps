@@ -6,7 +6,8 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
-import { Divider, Tab, Tabs, Typography } from '@material-ui/core';
+import { Divider, MenuItem, Tab, Tabs, Typography } from '@material-ui/core';
+import Select from '../../components/Select/Select';
 import { energieleitungenColorMapping } from '../../utils/constants';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => {
       marginTop: -1,
     },
     tabs: {
+      minHeight: 65,
       '& .MuiTabs-indicator': {
         backgroundColor: 'transparent',
       },
@@ -79,12 +81,41 @@ const useStyles = makeStyles((theme) => {
       },
       '&.Mui-selected': {
         borderBottomColor: 'white',
+        backgroundColor: 'white',
       },
+    },
+    segmentIcon: {
+      '&::before': {
+        position: 'absolute',
+        content: '"•"',
+        top: 3,
+        left: -2,
+      },
+      '&::after': {
+        position: 'absolute',
+        content: '"•"',
+        top: 3,
+        right: -2,
+      },
+      fontSize: 18,
+      position: 'relative',
+      borderBottom: '1px solid black',
+      width: '60%',
+      height: '52%',
+      transform: 'rotate(-45deg)',
+      marginLeft: 6,
+      marginTop: -2,
+      transformOrigin: 'bottom',
     },
   };
 });
 
 const TABS = ['asset_management', 'intervention', 'sicherheitsrelevant'];
+const SICHERHEITSRELEVANT_CATEGORIES = [
+  'schalt_erd_berechtigt',
+  'sachverstaendig',
+  'instruiert',
+];
 
 export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
   const classes = useStyles();
@@ -139,11 +170,68 @@ EnergiePopupSubtitle.defaultProps = {
   label: undefined,
 };
 
+const InterventionPersonCard = ({ person, segments }) => {
+  const { t } = useTranslation();
+  const classes = useStyles();
+  return (
+    <PersonCard
+      name={person.name}
+      email={person.email}
+      phone={person.phone}
+      division={person.division}
+      otherDetails={
+        segments &&
+        segments.length && [
+          {
+            id: 'segments',
+            label: segments.join(', '),
+            icon: (
+              <div
+                title={t('Liniensegmente')}
+                className={classes.segmentIcon}
+              />
+            ),
+          },
+        ]
+      }
+    />
+  );
+};
+
+InterventionPersonCard.propTypes = {
+  person: PropTypes.shape(PersonCard.propTypes).isRequired,
+  segments: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  ).isRequired,
+};
+
+const validatedParseProperty = (feature, property) => {
+  return feature.get(property) && JSON.parse(feature.get(property));
+};
+
+const renderSicherheitsrelevantPersons = (sbbPersons, externalPersons) => {
+  return [...(sbbPersons || []), ...(externalPersons || [])].map((person) => (
+    <PersonCard
+      key={person.name}
+      name={person.name}
+      email={person.email}
+      phone={person.phone}
+      division={person.division}
+    />
+  ));
+};
+
 const EnergiePopup = ({ feature }) => {
   const { t } = useTranslation();
   const classes = useStyles();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
+
+  // General Info
+  const kategorie = feature.get('kategorie');
+  const unterkategorie = feature.get('unterkategorie');
+  const trassennummer = feature.get('trassennummer');
+  const losNr = feature.get('los_nr');
   const description = useMemo(
     () =>
       feature.getGeometry().getType() === GeometryType.POINT
@@ -151,6 +239,8 @@ const EnergiePopup = ({ feature }) => {
         : feature.get('bezeichnung'),
     [feature],
   );
+
+  // Asset management
   const anlageBetreuer = useMemo(
     () =>
       feature.get('anlagebetreuer') &&
@@ -169,35 +259,56 @@ const EnergiePopup = ({ feature }) => {
       JSON.parse(feature.get('life_cycle_manager')),
     [feature],
   );
-  // const schaltErdBerechtigung = useMemo(
-  //   () =>
-  //     feature.get('schalt_erd_berechtigung') &&
-  //     JSON.parse(feature.get('schalt_erd_berechtigung')),
-  //   [feature],
-  // );
-  const kategorie = feature.get('kategorie');
-  const unterkategorie = feature.get('unterkategorie');
-  const trassennummer = feature.get('trassennummer');
-  const losNr = feature.get('los_nr');
+
+  // Intervention
   const interventionPikettNummer = feature.get('intervention_pikettnummer');
   const interventionPikettNummerDetail = feature.get(
     'intervention_pikettnummer_detail',
   );
   const interventionMail = feature.get('intervention_mail');
-  // const interventionMailDetail = feature.get('intervention_mail_detail');
-  // const interventionBemerkungen = feature.get('intervention_bemerkungen');
-  const interventionExternePersonen = JSON.parse(
-    feature.get('intervention_energie_persons'),
+  const interventionMailDetail = feature.get('intervention_mail_detail');
+  const interventionBemerkungen = feature.get('intervention_bemerkungen');
+  const interventionExternePersonen = validatedParseProperty(
+    feature,
+    'intervention_energie_persons',
   );
-  const interventionSbbPersonen = JSON.parse(
-    feature.get('intervention_persons'),
+  const interventionSbbPersonen = validatedParseProperty(
+    feature,
+    'intervention_persons',
   );
-  console.log(interventionExternePersonen, interventionSbbPersonen);
-  // const losNr = feature.get('los_nr');
+
+  // Sicherheitsrelevant
+  const sicherheitsrelevantInstruiertExternalPersons = validatedParseProperty(
+    feature,
+    'sicherheitsrelevant_instruiert_energie_persons',
+  );
+  const sicherheitsrelevantInstruiertSbbPersons = validatedParseProperty(
+    feature,
+    'sicherheitsrelevant_instruiert_persons',
+  );
+  const sicherheitsrelevantSachverstaendigExternalPersons =
+    validatedParseProperty(
+      feature,
+      'sicherheitsrelevant_sachverstaendige_energie_persons',
+    );
+  const sicherheitsrelevantSachverstaendigSbbPersons = validatedParseProperty(
+    feature,
+    'sicherheitsrelevant_sachverstaendige_persons',
+  );
+  const sicherheitsrelevantSchaltErdExternalPersons = validatedParseProperty(
+    feature,
+    'sicherheitsrelevant_schalt_erd_berechtigt_energie_persons',
+  );
+  const sicherheitsrelevantSchaltErdSbbPersons = validatedParseProperty(
+    feature,
+    'sicherheitsrelevant_schalt_erd_berechtigt_persons',
+  );
+
   const [tab, setTab] = useState(TABS[0]);
-  const handleChange = (event, newTab) => {
-    setTab(TABS[newTab]);
-  };
+  const [sicherheitActiveCat, setSicherheitActiveCat] = useState(
+    SICHERHEITSRELEVANT_CATEGORIES[0],
+  );
+  const handleChange = (event, newTab) => setTab(TABS[newTab]);
 
   const mainInfo = useMemo(() => {
     return (
@@ -238,26 +349,6 @@ const EnergiePopup = ({ feature }) => {
   return (
     <div>
       {!(permissionInfos?.user && activeTopic.permission === 'sbb') ? (
-        // <div>
-        //   {intervention && (
-        //     <PersonCard
-        //       title={t('Intervention')}
-        //       name={intervention.name}
-        //       email={intervention.email}
-        //       phone={intervention.phone}
-        //       division={intervention.division}
-        //     />
-        //   )}
-        //   {schaltErdBerechtigung && (
-        //     <PersonCard
-        //       title={t('Schalt- und Erdberechtigung')}
-        //       name={schaltErdBerechtigung.name}
-        //       email={schaltErdBerechtigung.email}
-        //       phone={schaltErdBerechtigung.phone}
-        //       division={schaltErdBerechtigung.division}
-        //     />
-        //   )}
-        // </div>
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -265,9 +356,9 @@ const EnergiePopup = ({ feature }) => {
             variant="fullWidth"
             className={classes.tabs}
           >
-            <Tab className={classes.tab} label={t('Asset Management')} />
-            <Tab className={classes.tab} label={t('Intervention')} />
-            <Tab className={classes.tab} label={t('Sicherheits- relevant')} />
+            <Tab className={classes.tab} label={t('asset_management')} />
+            <Tab className={classes.tab} label={t('intervention')} />
+            <Tab className={classes.tab} label={t('sicherheitsrelevant')} />
           </Tabs>
           <div className={classes.tabPanel}>
             {mainInfo}
@@ -306,22 +397,102 @@ const EnergiePopup = ({ feature }) => {
             {tab === TABS[1] && (
               <>
                 {interventionPikettNummer && (
-                  <p>
-                    {`${t('Pikettnummer')}: ${interventionPikettNummer}`}
+                  <Typography paragraph>
+                    <span>
+                      <b>{t('Pikettnummer')}: </b>
+                      {interventionPikettNummer}
+                    </span>
                     {interventionPikettNummerDetail && (
                       <>
                         <br />
                         {interventionPikettNummerDetail}
                       </>
                     )}
-                  </p>
+                  </Typography>
                 )}
                 {interventionMail && (
-                  <p>{`${t('Pikettnummer')}: ${interventionPikettNummer}`}</p>
+                  <Typography paragraph>
+                    <b>{t('E-Mail')}: </b>
+                    <a href={`mailto:${interventionMail}`}>
+                      {interventionMail}
+                    </a>
+                    {interventionMailDetail && (
+                      <>
+                        <br />
+                        {interventionMailDetail}
+                      </>
+                    )}
+                  </Typography>
                 )}
+                {interventionBemerkungen && (
+                  <Typography paragraph>{interventionBemerkungen}</Typography>
+                )}
+                {interventionSbbPersonen?.map((sbbPerson) => {
+                  const { person, linienabschnitte } = sbbPerson;
+                  return (
+                    <InterventionPersonCard
+                      key={person.name}
+                      person={person}
+                      segments={linienabschnitte}
+                    />
+                  );
+                })}
+                {interventionExternePersonen?.map((externalPerson) => {
+                  const { energie_person: person, linienabschnitte } =
+                    externalPerson;
+                  return (
+                    <InterventionPersonCard
+                      key={person.name}
+                      person={person}
+                      segments={linienabschnitte}
+                    />
+                  );
+                })}
               </>
             )}
-            {tab === TABS[2] && <span>Sicherheitsrelevant</span>}
+            {tab === TABS[2] && (
+              <>
+                <Select
+                  value={sicherheitActiveCat}
+                  onChange={(evt) => setSicherheitActiveCat(evt.target.value)}
+                  fullWidth
+                  MenuProps={{ marginThreshold: 0 }}
+                  data-cy="sicherheitsrelevant-category-select"
+                >
+                  {[...SICHERHEITSRELEVANT_CATEGORIES].map((value) => {
+                    return (
+                      <MenuItem
+                        key={value}
+                        value={value}
+                        className={classes.menuItem}
+                        title={t(value)}
+                        data-cy={`av-role-option-${value}`}
+                      >
+                        {t(value)}
+                      </MenuItem>
+                    );
+                  })}
+                </Select>
+                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[0]
+                  ? renderSicherheitsrelevantPersons(
+                      sicherheitsrelevantSachverstaendigSbbPersons,
+                      sicherheitsrelevantSachverstaendigExternalPersons,
+                    )
+                  : null}
+                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[1]
+                  ? renderSicherheitsrelevantPersons(
+                      sicherheitsrelevantSchaltErdSbbPersons,
+                      sicherheitsrelevantSchaltErdExternalPersons,
+                    )
+                  : null}
+                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[2]
+                  ? renderSicherheitsrelevantPersons(
+                      sicherheitsrelevantInstruiertSbbPersons,
+                      sicherheitsrelevantInstruiertExternalPersons,
+                    )
+                  : null}
+              </>
+            )}
           </div>
         </>
       ) : (
