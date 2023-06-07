@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.5](https://github.com/geops/trafimage-maps/compare/v1.21.4...v1.21.5) (2023-06-07)
+
+### Bug Fixes
+
+- **Passagierfrequenzen:** update Passagierfrequenzen layer name, layer info content and popup content ([#1088](https://github.com/geops/trafimage-maps/issues/1088)) ([487836d](https://github.com/geops/trafimage-maps/commit/487836d8ec54ec9f1be2103ea94579bcc8f62ded))
+
 ### [1.21.4](https://github.com/geops/trafimage-maps/compare/v1.21.3...v1.21.4) (2023-06-06)
 
 ### Bug Fixes
