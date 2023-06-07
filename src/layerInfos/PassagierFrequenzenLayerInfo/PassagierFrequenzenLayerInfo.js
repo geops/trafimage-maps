@@ -46,7 +46,7 @@ const comps = {
         (Monday to Friday) and the railway undertakings indicated for the
         respective station. Passengers boarding and alighting other public
         transport as well as passers-by are not taken into account. Passengers
-        changing trains are counted twice—i.e., as both alighting and boarding.
+        changing trains are counted twice, as both alighting and boarding.
       </p>
       <p>
         Data: <a href="mailto:stat@sbb.ch">stat@sbb.ch</a>.
