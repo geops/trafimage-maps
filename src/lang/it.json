@@ -371,6 +371,7 @@
   "departure_url": "http://fahrplan.sbb.ch/bin/stboard.exe/in?boardType=dep&editStation=yes&input={stationname}&start=yes",
   "Der barrierefreie Umbau der Gleise 1 & 2 dauert bis 2025": "La trasformazione delle tracce 1 e 2 dura fino al 2025",
   "Detailinformationen": "Informazioni dettagliate",
+  "Detaillierter Datensatz auf": "Dataset dettagliato su",
   "DfA Linien Nr.": "N. linee DfA",
   "Dialog schließen": "chiudi la finestra di dialogo",
   "didok": "DIDOK",

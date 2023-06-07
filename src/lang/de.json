@@ -344,6 +344,7 @@
   "Datenstand": "Datenstand",
   "departure_url": "http://fahrplan.sbb.ch/bin/stboard.exe/dn?boardType=dep&editStation=yes&input={stationname}&start=yes",
   "Der barrierefreie Umbau der Gleise 1 & 2 dauert bis 2025": "Der Umbau der Gleise 1 & 2 dauert bis 2025",
+  "Detaillierter Datensatz auf": "Detaillierter Datensatz auf",
   "didok": "DIDOK",
   "Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.": "Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.",
   "Diesen Datensatz als Service einbinden (SBB-intern)": "Diesen Datensatz als Service einbinden (SBB-intern)",

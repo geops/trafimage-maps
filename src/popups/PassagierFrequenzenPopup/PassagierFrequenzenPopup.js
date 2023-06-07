@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Link, Typography } from '@material-ui/core';
+import { Typography, Link } from '@material-ui/core';
+import { ReactComponent as LinkIcon } from '../../components/Link/Link.svg';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -36,17 +37,21 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
         </Typography>
         {evu ? <Typography paragraph>{evu}</Typography> : null}
         {remark ? (
-          <Typography paragraph className="wkp-passagier-freq-remark">
-            {remark}
+          <Typography paragraph>
+            <i>{remark}</i>
           </Typography>
         ) : null}
         {url ? (
           <Typography>
             {t('Detaillierter Datensatz auf')}{' '}
-            <Link href={url} rel="noopener noreferrer" target="_blank">
-              data.sbb.ch
+            <Link
+              href={url}
+              rel="noopener noreferrer"
+              target="_blank"
+              style={{ textDecoration: 'none' }}
+            >
+              data.sbb.ch <LinkIcon />
             </Link>
-            .
           </Typography>
         ) : null}
       </div>
