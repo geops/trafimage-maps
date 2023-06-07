@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.4](https://github.com/geops/trafimage-maps/compare/v1.21.3...v1.21.4) (2023-06-06)
+
+### Bug Fixes
+
+- **cartaro requests:** use tyke cache url instead of cartaro items endpoint ([#1089](https://github.com/geops/trafimage-maps/issues/1089)) ([875ed27](https://github.com/geops/trafimage-maps/commit/875ed27743d7e7619ce5c8628591a0222122e6e0))
+
 ### [1.21.3](https://github.com/geops/trafimage-maps/compare/v1.21.2...v1.21.3) (2023-06-02)
 
 ### Bug Fixes

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 
-const cartaroURL = process?.env?.REACT_APP_CARTARO_URL;
 const regionColors = {
   Ost: '#2F9F48',
   Süd: '#DC320A',
@@ -35,7 +34,9 @@ const NetzentwicklungLayerInfo = ({ t, properties }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    fetch(`${cartaroURL}netzentwicklung/region/items/`)
+    fetch(
+      `https://api.geops.io/cartaro/v1/netzentwicklung/region/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf`,
+    )
       .then((res) => res.json())
       .then((res) => setRegions(res))
       // eslint-disable-next-line no-console
