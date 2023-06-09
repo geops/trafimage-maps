@@ -2,6 +2,7 @@ import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
+import energieLegendPub from '../img/energie_legend_pub.svg';
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
@@ -234,7 +235,36 @@ export const energiePublic = {
   name: 'ch.sbb.energie',
   key: 'ch.sbb.energie',
   maxZoom: 14,
-  elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
+  elements: {
+    ...defaultElements,
+    shareMenu: true,
+    popup: true,
+    overlay: true,
+    exportMenu: true,
+  },
+  exportConfig: {
+    mbStyleFunction: (mbStyle, topicStyleLayers) => {
+      const newMbStyle = { ...mbStyle };
+      topicStyleLayers.forEach((styleLayer) => {
+        if (styleLayer.styleLayersFilter) {
+          newMbStyle.layers.forEach((mbLayer) => {
+            if (styleLayer.styleLayersFilter(mbLayer)) {
+              // eslint-disable-next-line no-param-reassign
+              mbLayer.layout.visibility = 'visible';
+            }
+          });
+        }
+      });
+      return newMbStyle;
+    },
+    publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
+    publishedAt: () => {
+      const date = new Date();
+      return `${date.getMonth() + 1}/${date.getFullYear()}`;
+    },
+    year: () => new Date().getFullYear(),
+    overlayImageUrl: energieLegendPub,
+  },
   layers: energieLayers,
   projection: 'EPSG:3857',
   layerInfoComponent: 'EnergiePublicTopicInfo',

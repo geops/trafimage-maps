@@ -1,5 +1,6 @@
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
 
 export const energieDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.energie.public.data',
@@ -7,6 +8,7 @@ export const energieDataLayer = new TrafimageMapboxLayer({
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.energie.public',
   properties: {
     hideInLegend: true,
+    isBaseLayer: true,
   },
   mapOptions: {
     preserveDrawingBuffer: true,
@@ -29,6 +31,7 @@ export const energieLeitungenLayer = new MapboxStyleLayer({
     layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
+    [FORCE_EXPORT_PROPERTY]: true,
   },
 });
 
@@ -45,6 +48,7 @@ export const energieUnterwerkeLayer = new MapboxStyleLayer({
     layerInfoComponent: 'EnergieLayerInfo',
     popupComponent: 'EnergiePopup',
     useOverlay: true,
+    [FORCE_EXPORT_PROPERTY]: true,
   },
 });
 

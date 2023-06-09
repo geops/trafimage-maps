@@ -73,9 +73,14 @@ function ExportButton({
             exportSize,
             exportZoom,
             exportExtent,
+            topic.exportConfig,
           );
         }}
         onSaveEnd={async (mapToExport, canvas) => {
+          if (!mapToExport) {
+            setLoading(false);
+            return;
+          }
           clean(mapToExport, map, new LayerService(layers));
 
           // add the image to a newly created PDF
@@ -114,14 +119,23 @@ function ExportButton({
 
             // Replace dates and publisher data
             if (year) {
-              updatedSvg = updatedSvg.replace('***Year***', year);
+              updatedSvg = updatedSvg.replace(
+                '***Year***',
+                typeof year === 'function' ? year() : year,
+              );
             }
             if (dateDe) {
-              updatedSvg = updatedSvg.replace('***date_DE***', dateDe);
+              updatedSvg = updatedSvg.replace(
+                '***date_DE***',
+                typeof dateDe === 'function' ? dateDe() : dateDe,
+              );
             }
 
             if (dateFr) {
-              updatedSvg = updatedSvg.replace('***date_FR***', dateFr);
+              updatedSvg = updatedSvg.replace(
+                '***date_FR***',
+                typeof dateFr === 'function' ? dateFr() : dateFr,
+              );
             }
 
             if (publisher) {
@@ -131,7 +145,7 @@ function ExportButton({
             if (publishedAt) {
               updatedSvg = updatedSvg.replace(
                 '***published_at***',
-                publishedAt,
+                typeof publishedAt === 'function' ? publishedAt() : publishedAt,
               );
             }
 
