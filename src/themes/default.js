@@ -324,6 +324,11 @@ const theme = createTheme({
         position: 'relative',
       },
     },
+    MuiTab: {
+      root: {
+        lineHeight: 'unset',
+      },
+    },
   },
 });
 

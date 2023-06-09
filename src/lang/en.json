@@ -479,6 +479,7 @@
   "login_url": "http://www.sbb.ch/en/meta/login.html",
   "Lokalisieren": "Localize",
   "Löschen": "Delete",
+  "Mehr Information": "More information",
   "Menü": "Menu",
   "Menü wird geladen...": "Loading menu...",
   "Metainformationen": "Information about accessible services: This application shows the Swiss public transport network on a map. Different topics (e.g. construction projects) can be selected and levels (e.g. passenger footfall, bus lines and fare networks) can be displayed or hidden. The information is placed on the basic map. Unfortunately, the map application is not yet fully accessible for users with disabilities. Timetable and price information is fully accessible at sbb.ch/en/timetable and on SBB Mobile. You can obtain all other information relating to your mobility by calling the SBB Call Center Handicap on 0800 007 102 free of charge.",

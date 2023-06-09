@@ -8,6 +8,7 @@ import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
 import { Divider, MenuItem, Tab, Tabs, Typography } from '@material-ui/core';
 import Select from '../../components/Select/Select';
+import Link from '../../components/Link';
 import { energieleitungenColorMapping } from '../../utils/constants';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
 
@@ -56,7 +57,7 @@ const useStyles = makeStyles((theme) => {
       marginTop: -1,
     },
     tabs: {
-      minHeight: 65,
+      minHeight: 62,
       '& .MuiTabs-indicator': {
         backgroundColor: 'transparent',
       },
@@ -202,7 +203,11 @@ InterventionPersonCard.propTypes = {
   person: PropTypes.shape(PersonCard.propTypes).isRequired,
   segments: PropTypes.arrayOf(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  ).isRequired,
+  ),
+};
+
+InterventionPersonCard.defaultProps = {
+  segments: [],
 };
 
 const validatedParseProperty = (feature, property) => {
@@ -226,6 +231,11 @@ const EnergiePopup = ({ feature }) => {
   const classes = useStyles();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
+  const [tab, setTab] = useState(TABS[0]);
+  const [sicherheitActiveCat, setSicherheitActiveCat] = useState(
+    SICHERHEITSRELEVANT_CATEGORIES[0],
+  );
+  const handleChange = (event, newTab) => setTab(TABS[newTab]);
 
   // General Info
   const kategorie = feature.get('kategorie');
@@ -239,6 +249,8 @@ const EnergiePopup = ({ feature }) => {
         : feature.get('bezeichnung'),
     [feature],
   );
+
+  console.log(feature.getProperties());
 
   // Asset management
   const anlageBetreuer = useMemo(
@@ -278,6 +290,10 @@ const EnergiePopup = ({ feature }) => {
   );
 
   // Sicherheitsrelevant
+  const sicherheitsrelevantLink = feature.get('sicherheitsrelevant_link');
+  const sicherheitsrelevantBemerkungen = feature.get(
+    'sicherheitsrelevant_bemerkungen',
+  );
   const sicherheitsrelevantInstruiertExternalPersons = validatedParseProperty(
     feature,
     'sicherheitsrelevant_instruiert_energie_persons',
@@ -303,12 +319,6 @@ const EnergiePopup = ({ feature }) => {
     feature,
     'sicherheitsrelevant_schalt_erd_berechtigt_persons',
   );
-
-  const [tab, setTab] = useState(TABS[0]);
-  const [sicherheitActiveCat, setSicherheitActiveCat] = useState(
-    SICHERHEITSRELEVANT_CATEGORIES[0],
-  );
-  const handleChange = (event, newTab) => setTab(TABS[newTab]);
 
   const mainInfo = useMemo(() => {
     return (
@@ -425,7 +435,9 @@ const EnergiePopup = ({ feature }) => {
                   </Typography>
                 )}
                 {interventionBemerkungen && (
-                  <Typography paragraph>{interventionBemerkungen}</Typography>
+                  <Typography paragraph>
+                    <i>{interventionBemerkungen}</i>
+                  </Typography>
                 )}
                 {interventionSbbPersonen?.map((sbbPerson) => {
                   const { person, linienabschnitte } = sbbPerson;
@@ -452,6 +464,18 @@ const EnergiePopup = ({ feature }) => {
             )}
             {tab === TABS[2] && (
               <>
+                {sicherheitsrelevantLink && (
+                  <Typography paragraph>
+                    <Link href={sicherheitsrelevantLink}>
+                      {t('Mehr Information')}
+                    </Link>
+                  </Typography>
+                )}
+                {sicherheitsrelevantBemerkungen && (
+                  <Typography paragraph>
+                    <i>{sicherheitsrelevantBemerkungen}</i>
+                  </Typography>
+                )}
                 <Select
                   value={sicherheitActiveCat}
                   onChange={(evt) => setSicherheitActiveCat(evt.target.value)}
