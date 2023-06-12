@@ -64,7 +64,7 @@ const DvLineTitle = ({
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
   const cartaroFeature = layer.allFeatures.find(
-    (feat) => feat.get('name') === feature.get('name'),
+    (feat) => feat.get('id') === feature.get('id'),
   );
   return (
     <div className={classes.titleWrapper}>

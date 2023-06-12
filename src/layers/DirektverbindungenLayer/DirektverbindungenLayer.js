@@ -79,7 +79,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (cartaroFeatIsMissingMbFeat && mbFeatures?.length) {
       this.allFeatures.forEach((feat) => {
         const mbFeature = mbFeatures.find((mbFeat) => {
-          return mbFeat?.properties?.name === feat?.get('name');
+          return mbFeat?.properties?.cartaro_id === feat?.get('id');
         });
         if (!feat.get('mapboxFeature')) {
           feat.set('mapboxFeature', mbFeature);
@@ -116,10 +116,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
           });
           features.forEach((feat) => {
             const mbFeature = dvRenderedMbFeatures.find(
-              (mbFeat) => mbFeat?.properties?.name === feat?.get('name'),
+              (mbFeat) => mbFeat?.properties?.cartaro_id === feat?.get('id'),
             );
-            feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
             feat.set('mapboxFeature', mbFeature);
+            feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
             feat.setId(mbFeature?.properties?.id);
             feat.setProperties({
               ...feat.getProperties(),

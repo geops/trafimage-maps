@@ -235,13 +235,13 @@ const FeatureInformation = ({ featureInfo }) => {
             <IconButton
               size="medium"
               className="wkp-close-bt"
-              title={t('Popup schliessen')}
+              title={t('Schliessen')}
               onClick={() => {
                 dispatch(setFeatureInfo());
                 onCloseBtClick();
               }}
             >
-              <MdClose focusable={false} alt={t('Popup schliessen')} />
+              <MdClose focusable={false} alt={t('Schliessen')} />
             </IconButton>
           </div>
         ) : null}
