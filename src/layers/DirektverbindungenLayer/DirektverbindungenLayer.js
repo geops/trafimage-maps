@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { GeoJSON } from 'ol/format';
-import { LineString } from 'ol/geom';
 import { unByKey } from 'ol/Observable';
 
 import MapboxStyleLayer from '../MapboxStyleLayer';
@@ -10,7 +9,8 @@ import { DV_KEY } from '../../utils/constants';
 const DV_TRIPS_SOURCELAYER_ID = 'ch.sbb.direktverbindungen_trips';
 
 const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
-const DV_TRIP_FILTER_REGEX = /^ipv_trip_(day|night|all)$/;
+const DV_TRIP_FILTER_REGEX = /^ipv_(call|trip)_(day|night|all)$/;
+const DV_STATION_HOVER_FILTER_REGEX = /^ipv_(station|label)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
   /^dv(d|n)?_call(_(border|bg|border(2)?|displace|label))?(_highlight)?/;
 
@@ -28,11 +28,18 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super({
       ...options,
       queryRenderedLayersFilter: (layer) =>
-        DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)),
+        DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)) ||
+        DV_STATION_HOVER_FILTER_REGEX.test(
+          getTrafimageFilter(layer, 'trafimage.hover'),
+        ),
       styleLayersFilter: (layer) => {
-        return DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer));
+        return (
+          DV_TRIP_FILTER_REGEX.test(getTrafimageFilter(layer)) ||
+          DV_STATION_HOVER_FILTER_REGEX.test(
+            getTrafimageFilter(layer, 'trafimage.hover'),
+          )
+        );
       },
-      featureInfoFilter: (feat) => feat.getGeometry() instanceof LineString,
     });
     this.allFeatures = [];
     this.syncTimeout = null;
@@ -210,6 +217,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     const dvHighlightLayers = this.getDvLayers().filter((layer) =>
       highlightRegex.test(layer.id),
     );
+
     // Highlight stations and station labels on select
     dvHighlightLayers.forEach((layer) => {
       const idFilterExpression = [

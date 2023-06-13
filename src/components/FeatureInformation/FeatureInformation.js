@@ -17,6 +17,7 @@ import highlightPointStyle from '../../utils/highlightPointStyle';
 import panCenterFeature from '../../utils/panCenterFeature';
 
 import './FeatureInformation.scss';
+import useIsMobile from '../../utils/useIsMobile';
 
 const getPopupComponent = ({ popupComponent, layer }) => {
   const comp = popupComponent || layer.get('popupComponent');
@@ -34,15 +35,11 @@ const FeatureInformation = ({ featureInfo }) => {
   const map = useSelector((state) => state.app.map);
   const language = useSelector((state) => state.app.language);
   const searchService = useSelector((state) => state.app.searchService);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const [featureIndex, setFeatureIndex] = useState(0);
-
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // The featureInformation component can be display twice at the same time (in the popup and in the overlay).
@@ -149,8 +146,9 @@ const FeatureInformation = ({ featureInfo }) => {
       return;
     }
     const features = Array.isArray(feature) ? feature : [feature];
-    const layerr = infoIndexed.layers[featureIndex];
-    const layers = Array.isArray(layerr) ? layerr : [layerr];
+    const layerr = Array.isArray(infoIndexed.layers[featureIndex])
+      ? infoIndexed.layers[featureIndex][0]
+      : infoIndexed.layers[featureIndex];
     const coordinate = infoIndexed.coordinates[featureIndex];
     const coordinates = Array.isArray((coordinate || [])[0])
       ? coordinate
@@ -158,19 +156,30 @@ const FeatureInformation = ({ featureInfo }) => {
 
     features.forEach((feat, idx) => {
       if (feat && feat.getGeometry()) {
+        const layerHighlightGeom =
+          layerr.get('getHighlightGeometry') &&
+          layerr.get('getHighlightGeometry')(feat, layerr, coordinates[idx]);
         if (feat.getGeometry().getType() === GeometryType.POINT) {
           highlightLayer
             .getSource()
-            .addFeature(new Feature(feat.getGeometry()));
+            .addFeature(new Feature(layerHighlightGeom || feat.getGeometry()));
         } else {
           // In case mapbox render an icon for a polygon or a line we display
           // the highlight style on the coordinate clicked.
           // Needed for platforms layer.
-          const { layer } = feat.get('mapboxFeature') || {};
-          if (layer && layer.layout && layer.layout['icon-image']) {
+          const { layer: mbLayer } = feat.get('mapboxFeature') || {};
+          const defaultHighlightGeom =
+            mbLayer &&
+            mbLayer.layout &&
+            mbLayer.layout['icon-image'] &&
+            new Point(coordinates[idx]);
+
+          if (layerHighlightGeom || defaultHighlightGeom) {
             highlightLayer
               .getSource()
-              .addFeature(new Feature(new Point(coordinates[idx])));
+              .addFeature(
+                new Feature(layerHighlightGeom || defaultHighlightGeom),
+              );
           }
         }
       }
@@ -185,7 +194,7 @@ const FeatureInformation = ({ featureInfo }) => {
     if (!coordinateClicked) {
       return;
     }
-    panCenterFeature(map, layers, coordinateClicked, menuOpen, isMobile);
+    panCenterFeature(map, [layerr], coordinateClicked, menuOpen, isMobile);
   }, [map, isMobile, featureIndex, infoIndexed, menuOpen]);
 
   // The current feature(s) to display.

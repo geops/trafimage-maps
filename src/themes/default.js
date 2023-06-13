@@ -5,7 +5,8 @@ const colors = {
   redDark: '#c60018',
   black: '#000',
   gray: '#767676',
-  lightgray: '#b7b7b7',
+  lighterGray: '#b7b7b7',
+  lightGray: '#f5f5f5',
 };
 
 const breakpointValues = {
@@ -211,11 +212,11 @@ const theme = createTheme({
       notchedOutline: {
         borderRadius: 2,
         borderWidth: 2,
-        borderColor: colors.lightgray,
+        borderColor: colors.lighterGray,
       },
       root: {
         '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: colors.lightgray,
+          borderColor: colors.lighterGray,
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
           borderColor: '#666',

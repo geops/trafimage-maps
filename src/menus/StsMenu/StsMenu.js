@@ -20,6 +20,7 @@ import IframeMenu from '../IframeMenu';
 import stsLayers from '../../config/ch.sbb.sts';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
 import { DV_HIT_TOLERANCE, STS_HIT_TOLERANCE } from '../../utils/constants';
+import useIsMobile from '../../utils/useIsMobile';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -80,11 +81,8 @@ function StsTopicMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const layers = useSelector((state) => state.map.layers);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile;
   const [activeMenu, setActiveMenu] = useState('sts');
   const [anchorEl, setAnchorEl] = useState();
   const baseLayer = useMemo(() => {

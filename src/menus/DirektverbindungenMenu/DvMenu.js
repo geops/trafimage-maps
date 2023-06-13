@@ -6,6 +6,7 @@ import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo'
 import DvLayerSwitcher from './DvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
+import useIsMobile from '../../utils/useIsMobile';
 
 const useStyles = makeStyles(() => {
   return {
@@ -18,12 +19,9 @@ const useStyles = makeStyles(() => {
 function DvMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const topic = useSelector((state) => state.app.activeTopic);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
 
   const urlSearch = useMemo(
     () => new URLSearchParams(window.location.search),

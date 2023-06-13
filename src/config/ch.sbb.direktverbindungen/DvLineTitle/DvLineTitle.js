@@ -8,6 +8,7 @@ import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import DirektverbindungenLayer from '../../../layers/DirektverbindungenLayer';
 import { ReactComponent as TrainIconDay } from '../../../img/train-day.svg';
 import { ReactComponent as TrainIconNight } from '../../../img/train-night.svg';
+import useIsMobile from '../../../utils/useIsMobile';
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
@@ -56,13 +57,10 @@ const DvLineTitle = ({
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const isEmbeddedTopic = useMemo(() => {
     return /(-iframe|\.sts)$/.test(topic.key);
   }, [topic]);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
   const cartaroFeature = layer.allFeatures.find(
     (feat) => feat.get('id') === feature.get('id'),
   );

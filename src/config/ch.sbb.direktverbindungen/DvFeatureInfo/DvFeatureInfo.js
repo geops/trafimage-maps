@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { unByKey } from 'ol/Observable';
+import { Polygon, LineString } from 'ol/geom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -12,6 +13,7 @@ import removeDuplicates, {
 } from '../../../utils/removeDuplicateFeatures';
 import parseDvFeatures from '../../../utils/dvParseFeatures';
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from '../../../utils/constants';
+import useIsMobile from '../../../utils/useIsMobile';
 
 const useStyles = makeStyles(() => {
   return {
@@ -72,10 +74,7 @@ function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const [infoKey, setInfoKey] = useState();
-  const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
   const classes = useStyles({ isMobile });
@@ -99,9 +98,25 @@ function DvFeatureInfo({ filterByType }) {
   );
 
   const dvFeatures = useMemo(() => {
-    const features = featureInfo.reduce((feats, info) => {
-      info.features.forEach((feat) => feat.set('layer', info.layer));
-      return [...feats, ...info.features];
+    const features = featureInfo.reduce((finalFeats, info) => {
+      const newFeatures = info.features.reduce((feats, feat) => {
+        // When we click a station or a station label we check the dv ids and select those instead of the station feature
+        if (feat.getGeometry() instanceof Polygon) {
+          const dvIds = JSON.parse(feat.get('direktverbindung_ids') || '[]');
+          const stationLineFeatures = dvIds.map((id) =>
+            info.layer.allFeatures.find(
+              (f) => (f.get('id') || f.getId()) === id,
+            ),
+          );
+          return [...feats, ...stationLineFeatures.filter((f) => !!f)];
+        }
+        if (feat.getGeometry() instanceof LineString) {
+          return feat ? [...feats, feat] : feats;
+        }
+        return feats;
+      }, []);
+      newFeatures.forEach((feat) => feat.set('layer', info.layer));
+      return [...finalFeats, ...newFeatures];
     }, []);
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
     const cleaned = removeDuplicates(parseDvFeatures(features)).filter(

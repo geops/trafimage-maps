@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles, Typography, Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
+import { useSelector } from 'react-redux';
 import Link from '../../../components/Link';
+import panCenterFeature from '../../../utils/panCenterFeature';
+import useIsMobile from '../../../utils/useIsMobile';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   container: {
     padding: '0 8px 8px',
   },
@@ -17,6 +20,10 @@ const useStyles = makeStyles({
     margin: 0,
     display: 'flex',
     alignItems: 'center',
+    borderRadius: 4,
+    '&:hover': {
+      backgroundColor: theme.colors.lightGray,
+    },
   },
   routeStops: {
     fontWeight: 'bold',
@@ -70,7 +77,7 @@ const useStyles = makeStyles({
   },
   rowFirst: { fontSize: '1.1em' },
   rowLast: { fontSize: '1.1em' },
-});
+}));
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature),
@@ -83,6 +90,9 @@ const defaultProps = {
 const DvLineInfo = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
+  const map = useSelector((state) => state.app.map);
+  const menuOpen = useSelector((state) => state.app.menuOpen);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (layer.visible) {
@@ -102,18 +112,12 @@ const DvLineInfo = ({ feature, layer }) => {
   }
 
   const {
-    start_station_name: start,
-    end_station_name: end,
     vias,
     line,
     [`description_${i18n.language}`]: description,
     [`url_${i18n.language}`]: link,
     color,
   } = feature.getProperties();
-
-  const switchVias = (Array.isArray(vias) ? vias : JSON.parse(vias)).filter(
-    (via) => via.via_type === 'switch' || via.via_type === 'visible',
-  );
 
   return (
     <div className={classes.container}>
@@ -127,45 +131,62 @@ const DvLineInfo = ({ feature, layer }) => {
         )}
       </div>
       <div className={classes.route}>
-        {[{ station_name: start }, ...switchVias, { station_name: end }].map(
-          (via, index, arr) => {
-            let extraRowClass = '';
-            let extraVerticalClass = '';
-            const isFirst = index === 0;
-            const isLast = index === arr.length - 1;
+        {vias.map((via, index, arr) => {
+          let extraRowClass = '';
+          let extraVerticalClass = '';
+          const isFirst = index === 0;
+          const isLast = index === arr.length - 1;
+          const { coordinates } = via;
 
-            if (isFirst) {
-              extraRowClass = ` ${classes.rowFirst}`;
-              extraVerticalClass = ` ${classes.routeVerticalFirst}`;
-            } else if (isLast) {
-              extraRowClass = ` ${classes.rowLast}`;
-              extraVerticalClass = ` ${classes.routeVerticalLast}`;
-            }
+          if (isFirst) {
+            extraRowClass = ` ${classes.rowFirst}`;
+            extraVerticalClass = ` ${classes.routeVerticalFirst}`;
+          } else if (isLast) {
+            extraRowClass = ` ${classes.rowLast}`;
+            extraVerticalClass = ` ${classes.routeVerticalLast}`;
+          }
 
-            return (
-              <div
-                key={via.station_name}
-                className={classes.row + extraRowClass}
-              >
-                <div className={classes.routeIcon}>
-                  <div
-                    className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
-                    style={{ backgroundColor: color }}
-                  />
-                  <div
-                    className={classes.routeCircleMiddle}
-                    style={{ borderColor: color }}
-                  />
-                </div>
-                <div>
-                  <Typography variant={isFirst || isLast ? 'h4' : 'body1'}>
-                    {via.station_name}
-                  </Typography>
-                </div>
+          return (
+            <Box
+              key={via.station_name}
+              className={classes.row + extraRowClass}
+              style={{ cursor: coordinates ? 'pointer' : 'auto' }}
+              onClick={() => {
+                if (coordinates) {
+                  panCenterFeature(
+                    map,
+                    [layer],
+                    coordinates,
+                    !menuOpen, // default menuOpen to false
+                    isMobile,
+                    true, // useOverlay
+                    null,
+                    null,
+                    null,
+                    null,
+                    true,
+                  );
+                }
+              }}
+            >
+              <div className={classes.routeIcon}>
+                <div
+                  className={`${classes.routeAbsolute} ${classes.routeVertical}${extraVerticalClass}`}
+                  style={{ backgroundColor: color }}
+                />
+                <div
+                  className={classes.routeCircleMiddle}
+                  style={{ borderColor: color }}
+                />
               </div>
-            );
-          },
-        )}
+              <div>
+                <Typography variant={isFirst || isLast ? 'h4' : 'body1'}>
+                  {via.station_name}
+                </Typography>
+              </div>
+            </Box>
+          );
+        })}
       </div>
     </div>
   );

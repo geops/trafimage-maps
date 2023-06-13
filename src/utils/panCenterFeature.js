@@ -9,6 +9,7 @@ const panCenterFeature = (
   overlayHeightMobile = 250,
   menuWidthDesktop = 381,
   redCircleWidth = 25,
+  forcePan,
 ) => {
   const [width, height] = map.getSize();
   const [pixelX, pixelY] = map.getPixelFromCoordinate(coordinate);
@@ -23,11 +24,11 @@ const panCenterFeature = (
 
   let padding = null;
 
-  if (isMobile && isHiddenByOverlayOnMobile) {
+  if (isMobile && (isHiddenByOverlayOnMobile || forcePan)) {
     padding = [0, 0, overlayHeightMobile, 0];
   } else if (
     !isMobile &&
-    (isHiddenByOverlayOnDesktop || isHiddenByMenuOnDesktop)
+    (isHiddenByOverlayOnDesktop || isHiddenByMenuOnDesktop || forcePan)
   ) {
     padding = [
       0,

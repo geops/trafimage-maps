@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles, IconButton } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { MdClose } from 'react-icons/md';
 import Overlay from '../../components/Overlay/Overlay';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
 import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
+import useIsMobile from '../../utils/useIsMobile';
 
 const IFRAME_OVERLAY_DEFAULT_HEIGHT = 300;
 
@@ -92,11 +93,8 @@ function IframeMenu({ header, body, hide }) {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const displayMenu = useSelector((state) => state.app.displayMenu);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
   const [headerHeight, setHeaderHeight] = useState(0);
   const classes = useStyles({
     displayMenu,
