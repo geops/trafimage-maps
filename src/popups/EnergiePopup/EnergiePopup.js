@@ -6,7 +6,15 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
-import { Divider, MenuItem, Tab, Tabs, Typography } from '@material-ui/core';
+import {
+  Divider,
+  List,
+  ListItem,
+  MenuItem,
+  Tab,
+  Tabs,
+  Typography,
+} from '@material-ui/core';
 import Select from '../../components/Select/Select';
 import Link from '../../components/Link';
 import { energieleitungenColorMapping } from '../../utils/constants';
@@ -54,37 +62,9 @@ const useStyles = makeStyles((theme) => {
       paddingRight: theme.spacing(1),
       paddingLeft: theme.spacing(1),
       borderTop: '1px solid #dddddd',
-      marginTop: -1,
+      marginTop: -4,
     },
-    tabs: {
-      minHeight: 62,
-      '& .MuiTabs-indicator': {
-        backgroundColor: 'transparent',
-      },
-    },
-    tab: {
-      minWidth: 0,
-      marginLeft: 2,
-      marginRight: 2,
-      marginBottom: -1,
-      border: '1px solid #dddddd',
-      borderTopLeftRadius: 2,
-      borderTopRightRadius: 2,
-      textTransform: 'none',
-      '&:first-child': {
-        marginLeft: theme.spacing(2),
-      },
-      '&:last-child': {
-        marginRight: theme.spacing(2),
-      },
-      '&:hover': {
-        color: theme.palette.secondary.dark,
-      },
-      '&.Mui-selected': {
-        borderBottomColor: 'white',
-        backgroundColor: 'white',
-      },
-    },
+    tab: { minWidth: 0 },
     segmentIcon: {
       '&::before': {
         position: 'absolute',
@@ -250,8 +230,6 @@ const EnergiePopup = ({ feature }) => {
     [feature],
   );
 
-  console.log(feature.getProperties());
-
   // Asset management
   const anlageBetreuer = useMemo(
     () =>
@@ -273,7 +251,12 @@ const EnergiePopup = ({ feature }) => {
   );
 
   // Intervention
-  const interventionPikettNummer = feature.get('intervention_pikettnummer');
+  const interventionPikettNummerTag = feature.get(
+    'intervention_pikettnummer_tag',
+  );
+  const interventionPikettNummerNacht = feature.get(
+    'intervention_pikettnummer_nacht',
+  );
   const interventionPikettNummerDetail = feature.get(
     'intervention_pikettnummer_detail',
   );
@@ -358,7 +341,7 @@ const EnergiePopup = ({ feature }) => {
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === 'sbb' ? (
+      {!(permissionInfos?.user && activeTopic.permission === 'sbb') ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -406,11 +389,23 @@ const EnergiePopup = ({ feature }) => {
             )}
             {tab === TABS[1] && (
               <>
-                {interventionPikettNummer && (
+                {(interventionPikettNummerTag ||
+                  interventionPikettNummerNacht) && (
                   <Typography paragraph>
                     <span>
-                      <b>{t('Pikettnummer')}: </b>
-                      {interventionPikettNummer}
+                      <b>{t('Pikettnummern')}: </b>
+                      <List>
+                        {interventionPikettNummerTag && (
+                          <ListItem>
+                            {`${interventionPikettNummerTag} (${t('Tag')})`}
+                          </ListItem>
+                        )}
+                        {interventionPikettNummerNacht && (
+                          <ListItem>
+                            {`${interventionPikettNummerNacht} (${t('Nacht')})`}
+                          </ListItem>
+                        )}
+                      </List>
                     </span>
                     {interventionPikettNummerDetail && (
                       <>

@@ -19,35 +19,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
     borderTop: '1px solid #dddddd',
-    marginTop: -1,
+    marginTop: -4,
   },
-  tabs: {
-    '& .MuiTabs-indicator': {
-      backgroundColor: 'transparent',
-    },
-  },
-  tab: {
-    minWidth: 0,
-    marginLeft: 2,
-    marginRight: 2,
-    marginBottom: -1,
-    border: '1px solid #dddddd',
-    borderTopLeftRadius: 2,
-    borderTopRightRadius: 2,
-    textTransform: 'none',
-    '&:first-child': {
-      marginLeft: theme.spacing(2),
-    },
-    '&:last-child': {
-      marginRight: theme.spacing(2),
-    },
-    '&:hover': {
-      color: theme.palette.secondary.dark,
-    },
-    '&.Mui-selected': {
-      borderBottomColor: 'white',
-    },
-  },
+  tab: { minWidth: 0 },
 }));
 
 function RegionenkarteSegmentPopup({ layer, feature }) {
