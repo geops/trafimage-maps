@@ -40,5 +40,6 @@ $bf-outline: 2px solid black !important;
 );
 
 * {
-  -webkit-overflow-scrolling: auto !important;
+  -webkit-overflow-scrolling: unset !important;
+  overscroll-behavior: auto !important;
 }
