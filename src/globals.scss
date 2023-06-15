@@ -38,3 +38,7 @@ $bf-outline: 2px solid black !important;
   'SBBWeb-Bold',
   'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
 );
+
+* {
+  -webkit-overflow-scrolling: unset !important;
+}
