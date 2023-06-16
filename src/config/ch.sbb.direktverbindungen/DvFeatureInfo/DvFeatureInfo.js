@@ -146,7 +146,7 @@ function DvFeatureInfo({ filterByType }) {
         element.scrollTop = 0;
         ignoreScroll = true;
         element.style.overflow = 'hidden';
-      } else if (!goesUp && currentScroll === totalScroll) {
+      } else if (!goesUp && currentScroll >= totalScroll) {
         element.scrollTop = element.scrollHeight;
         ignoreScroll = true;
         element.style.overflow = 'hidden';
