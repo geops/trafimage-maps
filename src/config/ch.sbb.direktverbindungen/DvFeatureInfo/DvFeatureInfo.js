@@ -12,6 +12,7 @@ import removeDuplicates, {
 } from '../../../utils/removeDuplicateFeatures';
 import parseDvFeatures from '../../../utils/dvParseFeatures';
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from '../../../utils/constants';
+import useDisableIosElasticScrollEffect from '../../../utils/useDisableIosElasticScrollEffect';
 
 const useStyles = makeStyles(() => {
   return {
@@ -73,6 +74,7 @@ function DvFeatureInfo({ filterByType }) {
   const layers = useSelector((state) => state.map.layers);
   const [infoKey, setInfoKey] = useState();
   const screenWidth = useSelector((state) => state.app.screenWidth);
+  const embedded = useSelector((state) => state.app.embedded);
   const isMobile = useMemo(() => {
     return ['xs'].includes(screenWidth);
   }, [screenWidth]);
@@ -84,6 +86,8 @@ function DvFeatureInfo({ filterByType }) {
   }, [teaser]);
   const [revision, forceRender] = useState();
   const [overflowNode, setOverflowNode] = useState();
+
+  useDisableIosElasticScrollEffect(embedded && overflowNode);
 
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
@@ -121,72 +125,6 @@ function DvFeatureInfo({ filterByType }) {
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
   const previousInfoKey = usePrevious(infoKey);
-
-  useEffect(() => {
-    if (!overflowNode) {
-      return () => {};
-    }
-    let startY;
-    const element = overflowNode;
-    let ignoreScroll = false;
-    const onTouchStart = (evt) => {
-      startY = evt.touches[0].clientY;
-    };
-    const onTouchEnd = () => {
-      // element.style.overflow = 'auto';
-      // eslint-disable-next-line no-alert
-      // alert(
-      //   `${element.style.overflow} ${ignoreScroll} ${element.scrollTop} ${element.offsetHeight} ${element.scrollHeight}`,
-      // );
-    };
-
-    const onTouchMove = (evt) => {
-      ignoreScroll = false;
-      const goesUp = evt.touches[0].clientY - startY > 0;
-      const goesDown = evt.touches[0].clientY - startY < 0;
-      const top = element.scrollTop;
-      const totalScroll = element.scrollHeight;
-      const currentScroll = top + element.offsetHeight;
-      if (element.scrollTop <= 0 && goesUp) {
-        element.scrollTop = 0;
-        ignoreScroll = true;
-        element.style.overflow = 'hidden';
-      } else if (goesDown && currentScroll >= totalScroll) {
-        element.scrollTop = element.scrollHeight;
-        ignoreScroll = true;
-        element.style.overflow = 'hidden';
-      }
-      if (ignoreScroll) {
-        element.style.overflow = 'hidden';
-      } else {
-        element.style.overflow = 'auto';
-      }
-    };
-    // const onScroll = (evt) => {
-    //   const top = element.scrollTop;
-    //   const totalScroll = element.scrollHeight;
-    //   const currentScroll = top + element.offsetHeight;
-    //   if (ignoreScroll) {
-    //     evt.preventDefault();
-    //     if (element.scrollTop <= 0) {
-    //       element.scrollTop = 0;
-    //     } else if (currentScroll === totalScroll) {
-    //       element.scrollTop = element.scrollHeight;
-    //     }
-    //   }
-    // };
-
-    element.addEventListener('touchstart', onTouchStart);
-    element.addEventListener('touchend', onTouchEnd);
-    element.addEventListener('touchmove', onTouchMove);
-    // element.addEventListener('scroll', onScroll);
-
-    return () => {
-      element.removeEventListener('touchstart', onTouchStart);
-      element.removeEventListener('touchmove', onTouchMove);
-      element.removeEventListener('touchend', onTouchEnd);
-    };
-  }, [overflowNode]);
 
   useEffect(() => {
     if (featureInfo !== previousFeatureInfo) {
