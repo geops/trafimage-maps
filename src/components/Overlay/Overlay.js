@@ -157,6 +157,7 @@ const Overlay = ({
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const resizeRef = useRef(null);
   const [isSnapSmooth, setSnapSmooth] = useState(false);
+  const [paperNode, setPaperNode] = useState();
   const { defaultSize } = ResizableProps;
 
   const isMobile = useMemo(() => {
@@ -184,6 +185,38 @@ const Overlay = ({
       resetOverlayHeight();
     }
   }, [featureInfo, previousFeatureInfo, resetOverlayHeight]);
+
+  useEffect(() => {
+    if (!paperNode) {
+      return () => {};
+    }
+    let startY;
+    const element = paperNode;
+    const onTouchStart = (evt) => {
+      startY = evt.touches[0].clientY;
+    };
+
+    const onTouchMove = (evt) => {
+      const goesUp = evt.touches[0].clientY - startY > 0;
+      const top = element.scrollTop;
+      const totalScroll = element.scrollHeight;
+      const currentScroll = top + element.offsetHeight;
+      if (element.scrollTop <= 0 && goesUp) {
+        // evt.preventDefault();
+        element.scrollTop = 0;
+      } else if (!goesUp && currentScroll === totalScroll) {
+        element.scrollTop = element.scrollHeight;
+      }
+    };
+
+    element.addEventListener('touchstart', onTouchStart);
+    element.addEventListener('touchmove', onTouchMove);
+
+    return () => {
+      element.removeEventListener('touchstart', onTouchStart);
+      element.removeEventListener('touchmove', onTouchMove);
+    };
+  }, [paperNode]);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
@@ -230,6 +263,11 @@ const Overlay = ({
         open
         onClose={() => {
           dispatch(setFeatureInfo());
+        }}
+        PaperProps={{
+          ref: (node) => {
+            setPaperNode(node);
+          },
         }}
         ModalProps={{
           disableEnforceFocus: true,
