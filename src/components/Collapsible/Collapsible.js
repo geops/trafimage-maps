@@ -31,6 +31,9 @@ class Collapsible extends PureComponent {
     this.state = {
       isHidden: false,
     };
+
+    this.onTouchStart = this.onTouchStart.bind(this);
+    this.onTouchMove = this.onTouchMove.bind(this);
   }
 
   componentDidUpdate() {
@@ -44,10 +47,40 @@ class Collapsible extends PureComponent {
         duration,
       );
     }
+
+    if (this.ref.current) {
+      if (this.ref.current) {
+        this.ref.current.removeEventListener('touchstart', this.onTouchStart);
+        this.ref.current.removeEventListener('touchmove', this.onTouchMove);
+      }
+      if (this.ref.current) {
+        this.ref.current.addEventListener('touchstart', this.onTouchStart);
+        this.ref.current.addEventListener('touchmove', this.onTouchMove);
+      }
+    }
   }
 
   componentWillUnmount() {
     window.clearTimeout(this.timeout);
+  }
+
+  onTouchStart(evt) {
+    this.startY = evt.touches[0].clientY;
+  }
+
+  onTouchMove(evt) {
+    // const { node } = this.state;
+    const element = this.ref.current;
+    this.startY = evt.touches[0].clientY;
+    const goesUp = evt.touches[0].clientY - this.startY > 0;
+    const top = element.scrollTop;
+    const totalScroll = element.scrollHeight;
+    const currentScroll = top + element.offsetHeight;
+    if (element.scrollTop <= 0 && goesUp) {
+      element.scrollTop = 0;
+    } else if (!goesUp && currentScroll === totalScroll) {
+      element.scrollTop = element.scrollHeight;
+    }
   }
 
   render() {
@@ -82,7 +115,7 @@ class Collapsible extends PureComponent {
 
     return (
       <div
-        ref={this.ref}
+        ref={this.ref} // (node) => this.setState({ node })}
         style={style}
         className={`${className} wkp-collapsible-${type}${
           hideScrollbar ? ' wkp-collapsible-hide-scrollbar' : ''
