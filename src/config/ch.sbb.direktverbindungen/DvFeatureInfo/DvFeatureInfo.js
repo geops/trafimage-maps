@@ -128,24 +128,41 @@ function DvFeatureInfo({ filterByType }) {
     }
     let startY;
     const element = overflowNode;
+    let ignoreScroll = false;
     const onTouchStart = (evt) => {
       startY = evt.touches[0].clientY;
     };
 
     const onTouchMove = (evt) => {
+      ignoreScroll = false;
       const goesUp = evt.touches[0].clientY - startY > 0;
       const top = element.scrollTop;
       const totalScroll = element.scrollHeight;
       const currentScroll = top + element.offsetHeight;
       if (element.scrollTop <= 0 && goesUp) {
         element.scrollTop = 0;
+        ignoreScroll = true;
       } else if (!goesUp && currentScroll === totalScroll) {
         element.scrollTop = element.scrollHeight;
+        ignoreScroll = true;
+      }
+    };
+    const onScroll = () => {
+      const top = element.scrollTop;
+      const totalScroll = element.scrollHeight;
+      const currentScroll = top + element.offsetHeight;
+      if (ignoreScroll) {
+        if (element.scrollTop <= 0) {
+          element.scrollTop = 0;
+        } else if (currentScroll === totalScroll) {
+          element.scrollTop = element.scrollHeight;
+        }
       }
     };
 
     element.addEventListener('touchstart', onTouchStart);
     element.addEventListener('touchmove', onTouchMove);
+    element.addEventListener('scroll', onScroll);
 
     return () => {
       element.removeEventListener('touchstart', onTouchStart);
