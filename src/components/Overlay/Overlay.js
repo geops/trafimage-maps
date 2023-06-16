@@ -202,7 +202,6 @@ const Overlay = ({
       const totalScroll = element.scrollHeight;
       const currentScroll = top + element.offsetHeight;
       if (element.scrollTop <= 0 && goesUp) {
-        // evt.preventDefault();
         element.scrollTop = 0;
       } else if (!goesUp && currentScroll === totalScroll) {
         element.scrollTop = element.scrollHeight;

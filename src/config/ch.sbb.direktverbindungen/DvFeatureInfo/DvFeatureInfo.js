@@ -83,6 +83,7 @@ function DvFeatureInfo({ filterByType }) {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);
   const [revision, forceRender] = useState();
+  const [overflowNode, setOverflowNode] = useState();
 
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
@@ -120,6 +121,37 @@ function DvFeatureInfo({ filterByType }) {
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
   const previousInfoKey = usePrevious(infoKey);
+
+  useEffect(() => {
+    if (!overflowNode) {
+      return () => {};
+    }
+    let startY;
+    const element = overflowNode;
+    const onTouchStart = (evt) => {
+      startY = evt.touches[0].clientY;
+    };
+
+    const onTouchMove = (evt) => {
+      const goesUp = evt.touches[0].clientY - startY > 0;
+      const top = element.scrollTop;
+      const totalScroll = element.scrollHeight;
+      const currentScroll = top + element.offsetHeight;
+      if (element.scrollTop <= 0 && goesUp) {
+        element.scrollTop = 0;
+      } else if (!goesUp && currentScroll === totalScroll) {
+        element.scrollTop = element.scrollHeight;
+      }
+    };
+
+    element.addEventListener('touchstart', onTouchStart);
+    element.addEventListener('touchmove', onTouchMove);
+
+    return () => {
+      element.removeEventListener('touchstart', onTouchStart);
+      element.removeEventListener('touchmove', onTouchMove);
+    };
+  }, [overflowNode]);
 
   useEffect(() => {
     if (featureInfo !== previousFeatureInfo) {
@@ -168,7 +200,12 @@ function DvFeatureInfo({ filterByType }) {
   }
 
   return (
-    <div className={classes.featureInfos}>
+    <div
+      className={classes.featureInfos}
+      ref={(node) => {
+        setOverflowNode(node);
+      }}
+    >
       {dvFeatures.length > 1 ? (
         dvFeatures.map((feat) => {
           const id = getId(feat);
