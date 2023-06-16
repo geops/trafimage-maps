@@ -340,7 +340,7 @@ const EnergiePopup = ({ feature }) => {
 
   return (
     <div>
-      {!(permissionInfos?.user && activeTopic.permission === 'sbb') ? (
+      {permissionInfos?.user && activeTopic.permission === 'sbb' ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
