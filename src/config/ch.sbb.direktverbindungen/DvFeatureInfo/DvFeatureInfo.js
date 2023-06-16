@@ -127,10 +127,15 @@ function DvFeatureInfo({ filterByType }) {
       return () => {};
     }
     let startY;
+    let initialOverflow = 'auto';
     const element = overflowNode;
     let ignoreScroll = false;
     const onTouchStart = (evt) => {
       startY = evt.touches[0].clientY;
+      initialOverflow = element.style.overflow;
+    };
+    const onTouchEnd = () => {
+      element.style.overflow = initialOverflow;
     };
 
     const onTouchMove = (evt) => {
@@ -142,32 +147,39 @@ function DvFeatureInfo({ filterByType }) {
       if (element.scrollTop <= 0 && goesUp) {
         element.scrollTop = 0;
         ignoreScroll = true;
+        element.style.overflow = 'hidden';
       } else if (!goesUp && currentScroll === totalScroll) {
         element.scrollTop = element.scrollHeight;
         ignoreScroll = true;
+        element.style.overflow = 'hidden';
       }
-    };
-    const onScroll = (evt) => {
-      const top = element.scrollTop;
-      const totalScroll = element.scrollHeight;
-      const currentScroll = top + element.offsetHeight;
       if (ignoreScroll) {
-        evt.preventDefault();
-        if (element.scrollTop <= 0) {
-          element.scrollTop = 0;
-        } else if (currentScroll === totalScroll) {
-          element.scrollTop = element.scrollHeight;
-        }
+        element.style.overflow = 'hidden';
       }
     };
+    // const onScroll = (evt) => {
+    //   const top = element.scrollTop;
+    //   const totalScroll = element.scrollHeight;
+    //   const currentScroll = top + element.offsetHeight;
+    //   if (ignoreScroll) {
+    //     evt.preventDefault();
+    //     if (element.scrollTop <= 0) {
+    //       element.scrollTop = 0;
+    //     } else if (currentScroll === totalScroll) {
+    //       element.scrollTop = element.scrollHeight;
+    //     }
+    //   }
+    // };
 
     element.addEventListener('touchstart', onTouchStart);
+    element.addEventListener('touchend', onTouchEnd);
     element.addEventListener('touchmove', onTouchMove);
-    element.addEventListener('scroll', onScroll);
+    // element.addEventListener('scroll', onScroll);
 
     return () => {
       element.removeEventListener('touchstart', onTouchStart);
       element.removeEventListener('touchmove', onTouchMove);
+      element.removeEventListener('touchend', onTouchEnd);
     };
   }, [overflowNode]);
 
