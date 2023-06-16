@@ -127,15 +127,13 @@ function DvFeatureInfo({ filterByType }) {
       return () => {};
     }
     let startY;
-    let initialOverflow = 'auto';
     const element = overflowNode;
     let ignoreScroll = false;
     const onTouchStart = (evt) => {
       startY = evt.touches[0].clientY;
-      initialOverflow = element.style.overflow;
     };
     const onTouchEnd = () => {
-      element.style.overflow = initialOverflow;
+      element.style.overflow = 'auto';
     };
 
     const onTouchMove = (evt) => {
@@ -155,6 +153,8 @@ function DvFeatureInfo({ filterByType }) {
       }
       if (ignoreScroll) {
         element.style.overflow = 'hidden';
+      } else {
+        element.style.overflow = 'auto';
       }
     };
     // const onScroll = (evt) => {
