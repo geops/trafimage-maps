@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography } from '@material-ui/core';
 import { ReactComponent as PhoneIcon } from '../../img/phone.svg';
 import { ReactComponent as MailIcon } from '../../img/mail.svg';
 import { ReactComponent as PersonIcon } from '../../img/person.svg';
+import formatPhone from '../../utils/formatPhone';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
+const validatePhone = (string) =>
+  /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(string);
+
 const PersonCard = ({
   title,
   name,
@@ -41,6 +45,7 @@ const PersonCard = ({
   className,
 }) => {
   const classes = useStyles();
+  const formattedPhone = useMemo(() => formatPhone(phone), [phone]);
   return (
     <div
       key={`${title}-${name}`}
@@ -63,7 +68,11 @@ const PersonCard = ({
             <PhoneIcon />
           </div>
           <Typography>
-            <a href={`tel:${phone}`}>{phone || '-'}</a>
+            {validatePhone(formattedPhone.replace(/\s/g, '')) ? (
+              <a href={`tel:${formattedPhone}`}>{formattedPhone}</a>
+            ) : (
+              <span>{formattedPhone}</span>
+            )}
           </Typography>
         </div>
       )}

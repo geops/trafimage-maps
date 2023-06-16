@@ -6,19 +6,12 @@ import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import { Feature } from 'ol';
 import GeometryType from 'ol/geom/GeometryType';
-import {
-  Divider,
-  List,
-  ListItem,
-  MenuItem,
-  Tab,
-  Tabs,
-  Typography,
-} from '@material-ui/core';
+import { Divider, MenuItem, Tab, Tabs, Typography } from '@material-ui/core';
 import Select from '../../components/Select/Select';
 import Link from '../../components/Link';
 import { energieleitungenColorMapping } from '../../utils/constants';
 import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
+import formatPhone from '../../utils/formatPhone';
 
 import PersonCard from '../../components/PersonCard';
 
@@ -163,7 +156,6 @@ const InterventionPersonCard = ({ person, segments }) => {
   return (
     <PersonCard
       name={person.name}
-      email={person.email}
       phone={person.phone}
       division={person.division}
       otherDetails={
@@ -258,11 +250,11 @@ const EnergiePopup = ({ feature }) => {
   );
 
   // Intervention
-  const interventionPikettNummerTag = feature.get(
-    'intervention_pikettnummer_tag',
+  const interventionPikettNummerTag = formatPhone(
+    feature.get('intervention_pikettnummer_tag'),
   );
-  const interventionPikettNummerNacht = feature.get(
-    'intervention_pikettnummer_nacht',
+  const interventionPikettNummerNacht = formatPhone(
+    feature.get('intervention_pikettnummer_nacht'),
   );
   const interventionPikettNummerDetail = feature.get(
     'intervention_pikettnummer_detail',
@@ -402,23 +394,22 @@ const EnergiePopup = ({ feature }) => {
                 {(interventionPikettNummerTag ||
                   interventionPikettNummerNacht) && (
                   <Typography paragraph>
-                    <span>
-                      <b>{t('Pikettnummern')}: </b>
-                      <List>
-                        {interventionPikettNummerTag && (
-                          <ListItem>
-                            {`${interventionPikettNummerTag} (${t('Tag')})`}
-                          </ListItem>
-                        )}
-                        {interventionPikettNummerNacht && (
-                          <ListItem>
-                            {`${interventionPikettNummerNacht} (${t('Nacht')})`}
-                          </ListItem>
-                        )}
-                      </List>
-                    </span>
+                    <b>{t('Pikettnummern')}: </b>
+                    {interventionPikettNummerTag && (
+                      <>
+                        <br />
+                        {`${interventionPikettNummerTag} (${t('Tag')})`}
+                      </>
+                    )}
+                    {interventionPikettNummerNacht && (
+                      <>
+                        <br />
+                        {`${interventionPikettNummerNacht} (${t('Nacht')})`}
+                      </>
+                    )}
                     {interventionPikettNummerDetail && (
                       <>
+                        <br />
                         <br />
                         {interventionPikettNummerDetail}
                       </>
@@ -427,12 +418,15 @@ const EnergiePopup = ({ feature }) => {
                 )}
                 {interventionMail && (
                   <Typography paragraph>
-                    <b>{t('E-Mail')}: </b>
-                    <a href={`mailto:${interventionMail}`}>
-                      {interventionMail}
-                    </a>
+                    <span>
+                      <b>{t('E-Mail')}: </b>
+                      <a href={`mailto:${interventionMail}`}>
+                        {interventionMail}
+                      </a>
+                    </span>
                     {interventionMailDetail && (
                       <>
+                        <br />
                         <br />
                         {interventionMailDetail}
                       </>
