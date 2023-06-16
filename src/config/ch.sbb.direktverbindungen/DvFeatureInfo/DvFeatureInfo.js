@@ -147,11 +147,12 @@ function DvFeatureInfo({ filterByType }) {
         ignoreScroll = true;
       }
     };
-    const onScroll = () => {
+    const onScroll = (evt) => {
       const top = element.scrollTop;
       const totalScroll = element.scrollHeight;
       const currentScroll = top + element.offsetHeight;
       if (ignoreScroll) {
+        evt.preventDefault();
         if (element.scrollTop <= 0) {
           element.scrollTop = 0;
         } else if (currentScroll === totalScroll) {
