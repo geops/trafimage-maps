@@ -88,6 +88,12 @@ const useStyles = makeStyles((theme) => {
       marginTop: -2,
       transformOrigin: 'bottom',
     },
+    menuItem: {
+      width: (props) => props.selectWidth - 40,
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      display: 'block',
+    },
   };
 });
 
@@ -208,14 +214,15 @@ const renderSicherheitsrelevantPersons = (sbbPersons, externalPersons) => {
 
 const EnergiePopup = ({ feature }) => {
   const { t } = useTranslation();
-  const classes = useStyles();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
   const [tab, setTab] = useState(TABS[0]);
+  const [selectWidth, setSelectWidth] = useState(0);
   const [sicherheitActiveCat, setSicherheitActiveCat] = useState(
     SICHERHEITSRELEVANT_CATEGORIES[0],
   );
   const handleChange = (event, newTab) => setTab(TABS[newTab]);
+  const classes = useStyles({ selectWidth });
 
   // General Info
   const kategorie = feature.get('kategorie');
@@ -341,7 +348,7 @@ const EnergiePopup = ({ feature }) => {
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === 'sbb' ? (
+      {!(permissionInfos?.user && activeTopic.permission === 'sbb') ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -353,7 +360,10 @@ const EnergiePopup = ({ feature }) => {
             <Tab className={classes.tab} label={t('intervention')} />
             <Tab className={classes.tab} label={t('sicherheitsrelevant')} />
           </Tabs>
-          <div className={classes.tabPanel}>
+          <div
+            className={classes.tabPanel}
+            ref={(el) => setSelectWidth(el?.clientWidth)}
+          >
             {mainInfo}
             <br />
             {tab === TABS[0] && (
