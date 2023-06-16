@@ -136,10 +136,7 @@ function DvFeatureInfo({ filterByType }) {
       element.style.overflow = 'auto';
       // eslint-disable-next-line no-alert
       alert(
-        element.style.overflow,
-        ignoreScroll,
-        element.scrollTop,
-        element.offsetHeight,
+        `${element.style.overflow} ${ignoreScroll} ${element.scrollTop} ${element.offsetHeight} `,
       );
     };
 
