@@ -136,13 +136,14 @@ function DvFeatureInfo({ filterByType }) {
       element.style.overflow = 'auto';
       // eslint-disable-next-line no-alert
       alert(
-        `${element.style.overflow} ${ignoreScroll} ${element.scrollTop} ${element.offsetHeight} `,
+        `${element.style.overflow} ${ignoreScroll} ${element.scrollTop} ${element.offsetHeight} ${element.scrollHeight}`,
       );
     };
 
     const onTouchMove = (evt) => {
       ignoreScroll = false;
       const goesUp = evt.touches[0].clientY - startY > 0;
+      const goesDown = evt.touches[0].clientY - startY < 0;
       const top = element.scrollTop;
       const totalScroll = element.scrollHeight;
       const currentScroll = top + element.offsetHeight;
@@ -150,7 +151,7 @@ function DvFeatureInfo({ filterByType }) {
         element.scrollTop = 0;
         ignoreScroll = true;
         element.style.overflow = 'hidden';
-      } else if (!goesUp && currentScroll >= totalScroll) {
+      } else if (goesDown && currentScroll >= totalScroll) {
         element.scrollTop = element.scrollHeight;
         ignoreScroll = true;
         element.style.overflow = 'hidden';
