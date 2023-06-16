@@ -134,6 +134,13 @@ function DvFeatureInfo({ filterByType }) {
     };
     const onTouchEnd = () => {
       element.style.overflow = 'auto';
+      // eslint-disable-next-line no-alert
+      alert(
+        element.style.overflow,
+        ignoreScroll,
+        element.scrollTop,
+        element.offsetHeight,
+      );
     };
 
     const onTouchMove = (evt) => {
