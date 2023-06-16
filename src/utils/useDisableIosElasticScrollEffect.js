@@ -8,7 +8,7 @@ import { useEffect } from 'react';
  */
 const useDisableIosElasticScrollEffect = (element) => {
   useEffect(() => {
-    if (!element || /(iPhone|iPad|Mac OS)/.test(navigator.userAgent)) {
+    if (!element || !/(iPhone|iPad|Mac OS)/.test(navigator.userAgent)) {
       return () => {};
     }
     let startY;
