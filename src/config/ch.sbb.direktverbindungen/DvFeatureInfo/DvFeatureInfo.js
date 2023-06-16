@@ -55,6 +55,7 @@ const useStyles = makeStyles(() => {
     featureInfos: {
       maxHeight: '100%',
       overflow: 'auto',
+      overscrollBehavior: 'auto',
     },
     featureInfoItem: {
       marginLeft: 38,
