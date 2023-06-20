@@ -4,6 +4,8 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
 import { Feature } from 'ol';
 import { Point, Polygon } from 'ol/geom';
 import { Layer } from 'mobility-toolbox-js/ol';
@@ -17,13 +19,17 @@ describe('FeatureInformation', () => {
   let layers = [];
   let fit;
   let cancelAnimations;
+  const highlightLayer = new VectorLayer({
+    source: new VectorSource({ features: [] }),
+  });
+  highlightLayer.setStyle(highlightPointStyle);
 
   beforeEach(() => {
     layers = [];
     fit = jest.fn();
     cancelAnimations = jest.fn();
     storeUnMocked = {
-      map: {},
+      map: { highlightLayer },
       app: {
         projection: { value: 'EPSG:3857' },
         map: {

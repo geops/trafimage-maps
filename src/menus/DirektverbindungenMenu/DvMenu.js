@@ -2,14 +2,11 @@
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Divider, makeStyles } from '@material-ui/core';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
 import DvLayerSwitcher from './DvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
 import useIsMobile from '../../utils/useIsMobile';
-import highlightPointStyle from '../../utils/highlightPointStyle';
 import useHighlightLayer from '../../utils/useHighlightLayer';
 
 const useStyles = makeStyles(() => {
@@ -20,16 +17,12 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const highlightLayer = new VectorLayer({
-  source: new VectorSource({ features: [] }),
-});
-highlightLayer.setStyle(highlightPointStyle);
-
 function DvMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const topic = useSelector((state) => state.app.activeTopic);
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const isMobile = useIsMobile();
 
   const urlSearch = useMemo(

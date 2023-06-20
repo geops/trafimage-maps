@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import GeometryType from 'ol/geom/GeometryType';
-import { Feature } from 'ol';
-import { Point } from 'ol/geom';
 import useIndexedFeatureInfo from './useIndexedFeatureInfo';
 import useIsMobile from './useIsMobile';
 import panCenterFeature from './panCenterFeature';
+import highlightPointFeatures from './highlightPointFeatures';
 
 const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
   const map = useSelector((state) => state.app.map);
@@ -65,36 +63,8 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
     const coordinates = Array.isArray((coordinate || [])[0])
       ? coordinate
       : [coordinate];
-    features.forEach((feat, idx) => {
-      if (feat && feat.getGeometry()) {
-        const layerHighlightGeom =
-          layerr.get('getHighlightGeometry') &&
-          layerr.get('getHighlightGeometry')(feat, layerr, coordinates[idx]);
-        if (feat.getGeometry().getType() === GeometryType.POINT) {
-          highlightLayer
-            .getSource()
-            .addFeature(new Feature(layerHighlightGeom || feat.getGeometry()));
-        } else {
-          // In case mapbox render an icon for a polygon or a line we display
-          // the highlight style on the coordinate clicked.
-          // Needed for platforms layer.
-          const { layer: mbLayer } = feat.get('mapboxFeature') || {};
-          const defaultHighlightGeom =
-            mbLayer &&
-            mbLayer.layout &&
-            mbLayer.layout['icon-image'] &&
-            new Point(coordinates[idx]);
 
-          if (layerHighlightGeom || defaultHighlightGeom) {
-            highlightLayer
-              .getSource()
-              .addFeature(
-                new Feature(layerHighlightGeom || defaultHighlightGeom),
-              );
-          }
-        }
-      }
-    });
+    highlightPointFeatures(features, layerr, highlightLayer, coordinates);
 
     // We have to render the map otherwise the last selected features are displayed during animation.
     map.renderSync();

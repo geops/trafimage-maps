@@ -36,6 +36,7 @@ const useStyles = makeStyles(() => {
       maxHeight: (props) => (props.isMobile ? 200 : 400),
       position: 'relative',
       overflow: 'hidden',
+      pointerEvents: 'none',
       '&::after': {
         content: '""',
         position: 'absolute',

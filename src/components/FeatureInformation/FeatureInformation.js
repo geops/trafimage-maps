@@ -4,21 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
 import { Link, IconButton } from '@material-ui/core';
 import { setFeatureInfo } from '../../model/app/actions';
-import highlightPointStyle from '../../utils/highlightPointStyle';
 import useIndexedFeatureInfo from '../../utils/useIndexedFeatureInfo';
 import useHighlightLayer from '../../utils/useHighlightLayer';
 import getPopupComponent from '../../utils/getPopupComponent';
 import './FeatureInformation.scss';
-
-const highlightLayer = new VectorLayer({
-  source: new VectorSource({ features: [] }),
-});
-highlightLayer.setStyle(highlightPointStyle);
 
 const FeatureInformation = ({ featureInfo }) => {
   const { t } = useTranslation();
@@ -26,6 +18,7 @@ const FeatureInformation = ({ featureInfo }) => {
   const language = useSelector((state) => state.app.language);
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const [featureIndex, setFeatureIndex] = useState(0);
 
   // List of features and layers available for pagination.

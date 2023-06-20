@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Typography, Box } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
+import { Point } from 'ol/geom';
 import { useSelector } from 'react-redux';
 import Link from '../../../components/Link';
 import panCenterFeature from '../../../utils/panCenterFeature';
 import useIsMobile from '../../../utils/useIsMobile';
+import highlightPointFeatures from '../../../utils/highlightPointFeatures';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -24,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.colors.lightGray,
     },
+  },
+  rowSelected: {
+    backgroundColor: theme.colors.lightGray,
   },
   routeStops: {
     fontWeight: 'bold',
@@ -91,12 +96,15 @@ const DvLineInfo = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const isMobile = useIsMobile();
+  const [viaUid, setViaUid] = useState(null);
 
   useEffect(() => {
     if (layer.visible) {
       if (feature) {
+        highlightLayer.getSource().clear();
         layer.select([feature]);
       }
       return;
@@ -105,7 +113,7 @@ const DvLineInfo = ({ feature, layer }) => {
     return () => {
       layer.select();
     };
-  }, [layer, feature]);
+  }, [layer, feature, highlightLayer]);
 
   if (!feature) {
     return null;
@@ -134,8 +142,10 @@ const DvLineInfo = ({ feature, layer }) => {
         {vias.map((via, index, arr) => {
           let extraRowClass = '';
           let extraVerticalClass = '';
+          let selectedClass = '';
           const isFirst = index === 0;
           const isLast = index === arr.length - 1;
+          const isSelected = via.uid === viaUid;
           const { coordinates } = via;
 
           if (isFirst) {
@@ -146,13 +156,23 @@ const DvLineInfo = ({ feature, layer }) => {
             extraVerticalClass = ` ${classes.routeVerticalLast}`;
           }
 
+          if (isSelected) {
+            selectedClass = ` ${classes.rowSelected}`;
+          }
+
           return (
             <Box
-              key={via.station_name}
-              className={classes.row + extraRowClass}
+              key={via.uid}
+              className={classes.row + extraRowClass + selectedClass}
               style={{ cursor: coordinates ? 'pointer' : 'auto' }}
               onClick={() => {
+                if (isSelected) {
+                  highlightLayer.getSource().clear();
+                  setViaUid();
+                  return;
+                }
                 if (coordinates) {
+                  setViaUid(via.uid);
                   panCenterFeature(
                     map,
                     [layer],
@@ -165,6 +185,17 @@ const DvLineInfo = ({ feature, layer }) => {
                     null,
                     null,
                     true,
+                  );
+                  highlightPointFeatures(
+                    [
+                      new Feature({
+                        geometry: new Point(coordinates),
+                        ...via,
+                      }),
+                    ],
+                    layer,
+                    highlightLayer,
+                    [coordinates],
                   );
                 }
               }}
