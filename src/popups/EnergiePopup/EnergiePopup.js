@@ -496,19 +496,19 @@ const EnergiePopup = ({ feature }) => {
                     );
                   })}
                 </Select>
-                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[0]
-                  ? renderSicherheitsrelevantPersons(
-                      sicherheitsrelevantSachverstaendigSbbPersons,
-                      sicherheitsrelevantSachverstaendigExternalPersons,
-                    )
-                  : null}
-                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[1]
+                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[0] // Schalt- erdberechtigt
                   ? renderSicherheitsrelevantPersons(
                       sicherheitsrelevantSchaltErdSbbPersons,
                       sicherheitsrelevantSchaltErdExternalPersons,
                     )
                   : null}
-                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[2]
+                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[1] // Sachverständig
+                  ? renderSicherheitsrelevantPersons(
+                      sicherheitsrelevantSachverstaendigSbbPersons,
+                      sicherheitsrelevantSachverstaendigExternalPersons,
+                    )
+                  : null}
+                {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[2] // Instruiert
                   ? renderSicherheitsrelevantPersons(
                       sicherheitsrelevantInstruiertSbbPersons,
                       sicherheitsrelevantInstruiertExternalPersons,
