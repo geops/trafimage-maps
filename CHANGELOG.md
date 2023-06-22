@@ -2,12 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-### [1.21.6](https://github.com/geops/trafimage-maps/compare/v1.21.5...v1.21.6) (2023-06-22)
-
-### Bug Fixes
-
-- fetch netzentwicklung and dv metadata from mapbox metadata ([#1093](https://github.com/geops/trafimage-maps/issues/1093)) ([878591b](https://github.com/geops/trafimage-maps/commit/878591b28ae72a7c61fe1dcc6d785605e9967690))
-
 ### [1.21.5](https://github.com/geops/trafimage-maps/compare/v1.21.4...v1.21.5) (2023-06-07)
 
 ### Bug Fixes
