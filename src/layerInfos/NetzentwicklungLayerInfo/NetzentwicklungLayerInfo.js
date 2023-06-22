@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
+import { useSelector } from 'react-redux';
 
 const regionColors = {
   Ost: '#2F9F48',
@@ -29,19 +30,21 @@ const propTypes = {
 };
 
 const NetzentwicklungLayerInfo = ({ t, properties }) => {
+  const vectorTilesUrl = useSelector((state) => state.app.vectorTilesUrl);
+  const vectorTilesKey = useSelector((state) => state.app.vectorTilesKey);
   const netzentwicklungRoleType = properties.get('netzentwicklungRoleType');
   const [regions, setRegions] = useState();
   const classes = useStyles();
 
   useEffect(() => {
     fetch(
-      `https://api.geops.io/cartaro/v1/netzentwicklung/region/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf`,
+      `${vectorTilesUrl}/data/ch.sbb.netzentwicklung.json?key=${vectorTilesKey}`,
     )
       .then((res) => res.json())
-      .then((res) => setRegions(res))
+      .then((res) => setRegions(res['geops.netzentwicklung.region']))
       // eslint-disable-next-line no-console
       .catch((err) => console.error('Failed to fetch!', err));
-  }, []);
+  }, [vectorTilesKey, vectorTilesUrl]);
 
   return (
     <div>

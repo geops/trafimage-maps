@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
-import { GeoJSON } from 'ol/format';
 import { LineString } from 'ol/geom';
 import { unByKey } from 'ol/Observable';
 
+import { Feature } from 'ol';
 import MapboxStyleLayer from '../MapboxStyleLayer';
 import getTrafimageFilter from '../../utils/getTrafimageFilter';
 import { DV_KEY } from '../../utils/constants';
@@ -99,11 +99,19 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
    */
   async fetchDvFeatures() {
     await fetch(
-      'https://api.geops.io/cartaro/v1/direktverbindungen/?key=5cc87b12d7c5370001c1d655c9f9fcc168914865819eae10cbc671cf',
+      `${this.mapboxLayer.url}/data/ch.sbb.direktverbindungen.public.json?key=${this.mapboxLayer.apiKey}`,
     )
       .then((res) => res.json())
       .then((data) => {
-        const features = new GeoJSON().readFeatures(data);
+        const features = data['geops.direktverbindungen'].map((line) => {
+          return new Feature({
+            ...line,
+            geometry: new LineString([
+              [line.bbox[0], line.bbox[1]],
+              [line.bbox[2], line.bbox[3]],
+            ]),
+          });
+        });
         const { mbMap } = this.mapboxLayer;
         if (mbMap) {
           const dvRenderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
