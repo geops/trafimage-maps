@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.8](https://github.com/geops/trafimage-maps/compare/v1.21.7...v1.21.8) (2023-06-26)
+
+### Bug Fixes
+
+- **Direktverbindungen:** remove line attribute set on feaures fetch ([a16b1b7](https://github.com/geops/trafimage-maps/commit/a16b1b791433e93ac94714e1fe70e175b3556809))
+
 ### [1.21.7](https://github.com/geops/trafimage-maps/compare/v1.21.5...v1.21.7) (2023-06-22)
 
 ### Bug Fixes
