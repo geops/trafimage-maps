@@ -126,7 +126,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
             const mbFeature = dvRenderedMbFeatures.find(
               (mbFeat) => mbFeat?.properties?.name === feat?.get('name'),
             );
-            feat.set('line', feat.get('tagverbindung') ? 'day' : 'night');
             feat.set('mapboxFeature', mbFeature);
             feat.setId(mbFeature?.properties?.id);
             feat.setProperties({
