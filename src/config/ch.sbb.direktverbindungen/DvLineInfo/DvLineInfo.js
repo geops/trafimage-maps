@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Point } from 'ol/geom';
 import { useSelector } from 'react-redux';
+import { unByKey } from 'ol/Observable';
 import Link from '../../../components/Link';
 import panCenterFeature from '../../../utils/panCenterFeature';
 import useIsMobile from '../../../utils/useIsMobile';
@@ -99,12 +100,13 @@ const DvLineInfo = ({ feature, layer }) => {
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const isMobile = useIsMobile();
-  const [viaUid, setViaUid] = useState(null);
+  const [viaUid, setViaUid] = useState(
+    highlightLayer.getSource().getFeatures()?.[0]?.get('uid'),
+  );
 
   useEffect(() => {
     if (layer.visible) {
       if (feature) {
-        highlightLayer.getSource().clear();
         layer.select([feature]);
       }
       return;
@@ -113,7 +115,14 @@ const DvLineInfo = ({ feature, layer }) => {
     return () => {
       layer.select();
     };
-  }, [layer, feature, highlightLayer]);
+  }, [layer, feature]);
+
+  useEffect(() => {
+    const onHighlightFeatureChange = highlightLayer
+      .getSource()
+      .on('addfeature', (evt) => setViaUid(evt.feature.get('uid')));
+    return () => unByKey(onHighlightFeatureChange);
+  }, [highlightLayer]);
 
   if (!feature) {
     return null;
@@ -125,7 +134,12 @@ const DvLineInfo = ({ feature, layer }) => {
     [`description_${i18n.language}`]: description,
     [`url_${i18n.language}`]: link,
     color,
-  } = feature.getProperties();
+  } = feature?.getProperties();
+
+  if (viaUid && !vias.some((via) => via.uid === viaUid)) {
+    setViaUid();
+    highlightLayer.getSource().clear();
+  }
 
   return (
     <div className={classes.container}>

@@ -13,7 +13,7 @@ const DV_FILTER_REGEX = /^ipv_((trip|call)_)?(day|night|all)$/;
 const DV_TRIP_FILTER_REGEX = /^ipv_(call|trip)_(day|night|all)$/;
 const DV_STATION_HOVER_FILTER_REGEX = /^ipv_(station|label)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
-  /^dv(d|n)?_call(_(border|bg|border(2)?|displace|label))?(_highlight)?/;
+  /^dv(d|n)?_call(_(bg|displace|label))?(_highlight)?/;
 
 /**
  * Layer for visualizing international train connections.
@@ -23,7 +23,6 @@ const DV_STATION_CALL_LAYERID_REGEX =
  * @inheritdoc
  * @private
  */
-
 class DirektverbindungenLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
@@ -86,11 +85,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       !this.allFeatures.every((feat) => feat.get('mapboxFeature'));
     if (cartaroFeatIsMissingMbFeat && mbFeatures?.length) {
       this.allFeatures.forEach((feat) => {
-        const mbFeature = mbFeatures.find((mbFeat) => {
-          return mbFeat?.properties?.cartaro_id === feat?.get('id');
-        });
+        const mbFeature = mbFeatures.find(
+          (mbFeat) =>
+            mbFeat?.properties?.cartaro_id === feat?.get('cartaro_id'),
+        );
         if (!feat.get('mapboxFeature')) {
-          feat.set('mapboxFeature', mbFeature);
+          feat.set('mapboxFeature', mbFeature?.properties?.id);
         }
       });
     }
@@ -130,22 +130,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
             feat.source = DV_KEY;
             feat.sourceLayer = DV_TRIPS_SOURCELAYER_ID;
           });
-          features.forEach((feat) => {
-            const mbFeature = dvRenderedMbFeatures.find(
-              (mbFeat) => mbFeat?.properties?.cartaro_id === feat?.get('id'),
-            );
-            feat.set('mapboxFeature', mbFeature);
-            feat.setId(mbFeature?.properties?.id);
-            feat.setProperties({
-              ...feat.getProperties(),
-              ...mbFeature?.properties,
-            });
-          });
           this.allFeatures = features;
           this.syncFeatures();
         }
       })
-
       // eslint-disable-next-line no-console
       .catch((err) => console.error(err));
   }
@@ -244,12 +232,17 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         );
       mbMap.setFilter(layer.id, originalFilter);
       if (this.selectedFeatures.length) {
+        // console.log(this.selectedFeatures);
         mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
+        // console.log(this.selectedFeatures);
         this.selectedFeatures.forEach((feature) => {
+          const dvIds = feature.get('direktverbindung_ids')
+            ? JSON.parse(feature.get('direktverbindung_ids'))
+            : [feature.get('id')];
           // Add feature id filter
           const featureIdFilter = [
             ...mbMap.getFilter(layer.id),
-            ['==', idFilterExpression, feature.get('id')],
+            ['==', idFilterExpression, dvIds[0]],
           ];
           mbMap.setFilter(layer.id, featureIdFilter);
         });

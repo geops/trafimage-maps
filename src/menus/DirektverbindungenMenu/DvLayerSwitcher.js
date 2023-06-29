@@ -102,13 +102,14 @@ function DvLayerSwitcher({ onToggle, row }) {
     // If the switcher configuration filters out all features from list
     // (e.g. when both layers are deactivated) we remove the featureInfo
     if (featureInfo.length) {
-      if (
+      const regex = new RegExp(`${layersVisible[0].split('.').pop()}`);
+      const featureIncludesDvLine =
         !layersVisible?.length ||
         (layersVisible.length === 1 &&
-          !featureInfo[0].features.some(
-            (feat) => feat.get('line') === layersVisible[0].split('.').pop(),
-          ))
-      ) {
+          !featureInfo[0].features.some((feat) =>
+            regex.test(feat.get('data_variant')),
+          ));
+      if (featureIncludesDvLine) {
         dispatch(setFeatureInfo([]));
       }
     }

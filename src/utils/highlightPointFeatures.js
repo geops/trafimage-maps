@@ -8,13 +8,13 @@ const highlightPointFeatures = (
   highlightLayer,
   coordinatesArray,
 ) => {
-  highlightLayer.getSource().clear();
   features.forEach((feat, idx) => {
     if (feat && feat.getGeometry()) {
       const layerHighlightGeom =
         layer.get('getHighlightGeometry') &&
         layer.get('getHighlightGeometry')(feat, layer, coordinatesArray[idx]);
       if (feat.getGeometry().getType() === GeometryType.POINT) {
+        highlightLayer.getSource().clear();
         highlightLayer.getSource().addFeature(
           new Feature({
             ...feat.getProperties(),
@@ -33,6 +33,7 @@ const highlightPointFeatures = (
           new Point(coordinatesArray[idx]);
 
         if (layerHighlightGeom || defaultHighlightGeom) {
+          highlightLayer.getSource().clear();
           highlightLayer.getSource().addFeature(
             new Feature({
               ...feat.getProperties(),

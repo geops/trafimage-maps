@@ -1,5 +1,4 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import GeometryType from 'ol/geom/GeometryType';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
@@ -103,11 +102,6 @@ export const dvMain = new DirektverbindungenLayer({
     popupComponent: 'DvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
-    getHighlightGeometry: (feat) => {
-      return feat.getGeometry().getType() === GeometryType.POLYGON
-        ? feat.getGeometry().getInteriorPoint()
-        : null;
-    },
   },
 });
 

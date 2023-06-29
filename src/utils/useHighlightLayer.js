@@ -42,11 +42,9 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
         map.removeLayer(highlightLayer);
       }
     };
-  }, [map, searchService, highlightLayer]);
+  }, [map, searchService, highlightLayer, infoIndexed]);
   // When the featureIndex change we add the red circle then we pan on it.
   useEffect(() => {
-    highlightLayer.getSource().clear();
-
     // 'feature' can be a feature or an array
     const feature = infoIndexed.features[featureIndex];
     if (!feature) {

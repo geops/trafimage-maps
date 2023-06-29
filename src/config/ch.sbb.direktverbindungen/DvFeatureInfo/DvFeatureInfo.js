@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { unByKey } from 'ol/Observable';
-import { Polygon, LineString } from 'ol/geom';
+import { Point, LineString } from 'ol/geom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -102,13 +102,11 @@ function DvFeatureInfo({ filterByType }) {
     const features = featureInfo.reduce((finalFeats, info) => {
       const newFeatures = info.features.reduce((feats, feat) => {
         // When we click a station or a station label we check the dv ids and select those instead of the station feature
-        if (feat.getGeometry() instanceof Polygon) {
+        if (feat.getGeometry() instanceof Point) {
           const dvIds = JSON.parse(feat.get('direktverbindung_ids') || '[]');
-          const stationLineFeatures = dvIds.map((id) =>
-            info.layer.allFeatures.find(
-              (f) => (f.get('id') || f.getId()) === id,
-            ),
-          );
+          const stationLineFeatures = dvIds.map((id) => {
+            return info.layer.allFeatures.find((f) => getId(f) === id);
+          });
           return [...feats, ...stationLineFeatures.filter((f) => !!f)];
         }
         if (feat.getGeometry() instanceof LineString) {
