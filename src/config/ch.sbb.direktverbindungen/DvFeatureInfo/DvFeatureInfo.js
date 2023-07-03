@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { unByKey } from 'ol/Observable';
 import { Point, LineString, MultiLineString } from 'ol/geom';
 import { useSelector } from 'react-redux';
@@ -85,8 +79,8 @@ function DvFeatureInfo({ filterByType }) {
   const isMobile = useIsMobile();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
+  const [highlightUid, setHighlightUid] = useState();
   const classes = useStyles({ isMobile });
-  const hightlightUidRef = useRef();
   const teaserOnClick = useCallback(() => {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);
@@ -131,10 +125,8 @@ function DvFeatureInfo({ filterByType }) {
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
     const cleaned = removeDuplicates(parseDvFeatures(features)).filter(
       (feat) => {
-        const hasHighlightedStation = hightlightUidRef.current
-          ? feat
-              .get('vias')
-              ?.some((via) => via.uid === hightlightUidRef.current)
+        const hasHighlightedStation = highlightUid
+          ? feat.get('vias')?.some((via) => via.uid === highlightUid)
           : true;
         return !!feat.get('mapboxFeature') && hasHighlightedStation;
       },
@@ -147,15 +139,18 @@ function DvFeatureInfo({ filterByType }) {
             }),
         )
       : cleaned;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [featureInfo, filterByType, layersVisible, hightlightUidRef.current]);
+  }, [featureInfo, filterByType, layersVisible, highlightUid]);
 
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
   const previousInfoKey = usePrevious(infoKey);
+  const previousHighlightUid = usePrevious(highlightUid);
 
   useEffect(() => {
-    if (featureInfo !== previousFeatureInfo) {
+    if (
+      featureInfo !== previousFeatureInfo ||
+      highlightUid !== previousHighlightUid
+    ) {
       setTeaser(true);
       setInfoKey(getId(dvFeatures[0]));
       return;
@@ -174,6 +169,8 @@ function DvFeatureInfo({ filterByType }) {
     previousInfoKey,
     featureInfo,
     previousFeatureInfo,
+    highlightUid,
+    previousHighlightUid,
   ]);
 
   useEffect(() => {
@@ -197,11 +194,9 @@ function DvFeatureInfo({ filterByType }) {
   }, [layers, revision]);
 
   useEffect(() => {
-    // eslint-disable-next-line array-callback-return
-    const olListeners = ['addfeature', 'clear'].map(() => {
-      highlightLayer.getSource().on((evt) => {
-        hightlightUidRef.current =
-          evt.type === 'clear' ? null : evt.feature.get('uid');
+    const olListeners = ['addfeature', 'clear'].map((evt) => {
+      return highlightLayer.getSource().on(evt, (e) => {
+        setHighlightUid(e.type === 'clear' ? null : e.feature.get('uid'));
       });
     });
     return () => unByKey(olListeners);
