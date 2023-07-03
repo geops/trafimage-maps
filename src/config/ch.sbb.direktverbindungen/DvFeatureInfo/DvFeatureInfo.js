@@ -147,7 +147,8 @@ function DvFeatureInfo({ filterByType }) {
             }),
         )
       : cleaned;
-  }, [featureInfo, filterByType, layersVisible]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [featureInfo, filterByType, layersVisible, hightlightUidRef.current]);
 
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
