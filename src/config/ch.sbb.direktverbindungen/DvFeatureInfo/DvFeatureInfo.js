@@ -1,6 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { unByKey } from 'ol/Observable';
-import { Point, LineString } from 'ol/geom';
+import { Point, LineString, MultiLineString } from 'ol/geom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -73,12 +79,14 @@ const useStyles = makeStyles(() => {
 
 function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const layers = useSelector((state) => state.map.layers);
   const [infoKey, setInfoKey] = useState();
   const isMobile = useIsMobile();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
   const classes = useStyles({ isMobile });
+  const hightlightUidRef = useRef();
   const teaserOnClick = useCallback(() => {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);
@@ -109,7 +117,10 @@ function DvFeatureInfo({ filterByType }) {
           });
           return [...feats, ...stationLineFeatures.filter((f) => !!f)];
         }
-        if (feat.getGeometry() instanceof LineString) {
+        if (
+          feat.getGeometry() instanceof LineString ||
+          feat.getGeometry() instanceof MultiLineString
+        ) {
           return feat ? [...feats, feat] : feats;
         }
         return feats;
@@ -119,7 +130,14 @@ function DvFeatureInfo({ filterByType }) {
     }, []);
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
     const cleaned = removeDuplicates(parseDvFeatures(features)).filter(
-      (feat) => !!feat.get('mapboxFeature'),
+      (feat) => {
+        const hasHighlightedStation = hightlightUidRef.current
+          ? feat
+              .get('vias')
+              ?.some((via) => via.uid === hightlightUidRef.current)
+          : true;
+        return !!feat.get('mapboxFeature') && hasHighlightedStation;
+      },
     );
     return filterByType
       ? cleaned.filter(
@@ -176,6 +194,17 @@ function DvFeatureInfo({ filterByType }) {
       unByKey(olKeys);
     };
   }, [layers, revision]);
+
+  useEffect(() => {
+    // eslint-disable-next-line array-callback-return
+    const olListeners = ['addfeature', 'clear'].map(() => {
+      highlightLayer.getSource().on((evt) => {
+        hightlightUidRef.current =
+          evt.type === 'clear' ? null : evt.feature.get('uid');
+      });
+    });
+    return () => unByKey(olListeners);
+  }, [highlightLayer]);
 
   if (!dvFeatures?.length) {
     return null;
