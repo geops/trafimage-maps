@@ -136,11 +136,6 @@ const DvLineInfo = ({ feature, layer }) => {
     color,
   } = feature?.getProperties();
 
-  if (viaUid && !vias.some((via) => via.uid === viaUid)) {
-    setViaUid();
-    highlightLayer.getSource().clear();
-  }
-
   return (
     <div className={classes.container}>
       <div className={classes.header}>

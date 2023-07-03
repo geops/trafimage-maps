@@ -6,7 +6,7 @@ const colors = {
   black: '#000',
   gray: '#767676',
   lighterGray: '#b7b7b7',
-  lightGray: '#f5f5f5',
+  lightGray: '#e5e5e5',
 };
 
 const breakpointValues = {
