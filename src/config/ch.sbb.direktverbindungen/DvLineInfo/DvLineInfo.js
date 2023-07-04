@@ -205,6 +205,7 @@ const DvLineInfo = ({ feature, layer }) => {
                     layer,
                     highlightLayer,
                     [coordinates],
+                    true, // silent
                   );
                 }
               }}

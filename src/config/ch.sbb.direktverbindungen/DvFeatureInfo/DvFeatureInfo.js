@@ -151,7 +151,7 @@ function DvFeatureInfo({ filterByType }) {
       featureInfo !== previousFeatureInfo ||
       highlightUid !== previousHighlightUid
     ) {
-      setTeaser(true);
+      setTeaser(!!highlightUid);
       setInfoKey(getId(dvFeatures[0]));
       return;
     }
@@ -196,6 +196,8 @@ function DvFeatureInfo({ filterByType }) {
   useEffect(() => {
     const olListeners = ['addfeature', 'clear'].map((evt) => {
       return highlightLayer.getSource().on(evt, (e) => {
+        const { feature } = e;
+        if (feature?.get('silent')) return;
         setHighlightUid(e.type === 'clear' ? null : e.feature.get('uid'));
       });
     });

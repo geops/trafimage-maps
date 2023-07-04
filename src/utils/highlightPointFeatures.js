@@ -7,6 +7,7 @@ const highlightPointFeatures = (
   layer,
   highlightLayer,
   coordinatesArray,
+  silent, // Used to prevent state updates in popup components (e.g. DvLineInfo, DvFeatureInfo)
 ) => {
   features.forEach((feat, idx) => {
     if (feat && feat.getGeometry()) {
@@ -19,6 +20,7 @@ const highlightPointFeatures = (
           new Feature({
             ...feat.getProperties(),
             geometry: layerHighlightGeom || feat.getGeometry(),
+            silent,
           }),
         );
       } else {
@@ -38,6 +40,7 @@ const highlightPointFeatures = (
             new Feature({
               ...feat.getProperties(),
               geometry: layerHighlightGeom || defaultHighlightGeom,
+              silent,
             }),
           );
         }
