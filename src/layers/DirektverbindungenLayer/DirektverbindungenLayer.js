@@ -49,6 +49,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super.onLoad();
     this.onChangeVisible();
     this.fetchDvFeatures();
+    const { mbMap } = this.mapboxLayer;
+    if (mbMap) {
+      mbMap.once('idle', () => {
+        this.syncFeatures();
+      });
+    }
     // We can only get the mapbox features from the view on load.
     // In order to assign the Cartaro features their corresponding
     // mapbox features for the full list view, we sync the features when
@@ -95,7 +101,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       });
     }
     this.dispatchEvent({
-      type: 'load:features',
+      type: 'sync:features',
       features: this.allFeatures,
       target: this,
     });

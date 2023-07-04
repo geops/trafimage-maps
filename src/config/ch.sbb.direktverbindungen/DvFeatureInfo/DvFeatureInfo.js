@@ -151,7 +151,7 @@ function DvFeatureInfo({ filterByType }) {
       featureInfo !== previousFeatureInfo ||
       (highlightUid && highlightUid !== previousHighlightUid)
     ) {
-      setTeaser(!!highlightUid);
+      setTeaser(true);
       setInfoKey(getId(dvFeatures[0]));
       return;
     }
@@ -159,8 +159,8 @@ function DvFeatureInfo({ filterByType }) {
       const previousSelectedFeature = dvFeatures.find(
         (feat) => getId(feat) === previousInfoKey,
       );
-      if (previousInfoKey) {
-        setInfoKey(previousSelectedFeature && getId(previousSelectedFeature));
+      if (previousInfoKey && previousSelectedFeature) {
+        setInfoKey(getId(previousSelectedFeature));
       }
     }
   }, [

@@ -28,7 +28,7 @@ const DvListButton = ({ ...props }) => {
   const [features, setFeatures] = useState([]);
 
   useEffect(() => {
-    const loadFeatsListener = dvMainLayer?.on('load:features', (evt) => {
+    const loadFeatsListener = dvMainLayer?.on('sync:features', (evt) => {
       setFeatures(evt.features);
     });
     return () => unByKey(loadFeatsListener);
