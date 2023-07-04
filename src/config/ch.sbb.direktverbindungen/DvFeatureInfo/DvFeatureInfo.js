@@ -149,7 +149,7 @@ function DvFeatureInfo({ filterByType }) {
   useEffect(() => {
     if (
       featureInfo !== previousFeatureInfo ||
-      highlightUid !== previousHighlightUid
+      (highlightUid && highlightUid !== previousHighlightUid)
     ) {
       setTeaser(!!highlightUid);
       setInfoKey(getId(dvFeatures[0]));
