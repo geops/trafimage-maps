@@ -232,9 +232,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         );
       mbMap.setFilter(layer.id, originalFilter);
       if (this.selectedFeatures.length) {
-        // console.log(this.selectedFeatures);
         mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
-        // console.log(this.selectedFeatures);
         this.selectedFeatures.forEach((feature) => {
           const dvIds = feature.get('direktverbindung_ids')
             ? JSON.parse(feature.get('direktverbindung_ids'))
