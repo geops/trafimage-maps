@@ -159,8 +159,8 @@ function DvFeatureInfo({ filterByType }) {
       const previousSelectedFeature = dvFeatures.find(
         (feat) => getId(feat) === previousInfoKey,
       );
-      if (previousInfoKey && previousSelectedFeature) {
-        setInfoKey(getId(previousSelectedFeature));
+      if (previousInfoKey) {
+        setInfoKey(getId(previousSelectedFeature) || getId(dvFeatures[0]));
       }
     }
   }, [
@@ -196,13 +196,15 @@ function DvFeatureInfo({ filterByType }) {
   useEffect(() => {
     const olListeners = ['addfeature', 'clear'].map((evt) => {
       return highlightLayer.getSource().on(evt, (e) => {
-        const { feature } = e;
+        const { feature, type } = e;
+        const isClear = type === 'clear';
+        dvMainLayer.priorityHighlightStation(!isClear && feature.get('uid'));
         if (feature?.get('silent')) return;
-        setHighlightUid(e.type === 'clear' ? null : e.feature.get('uid'));
+        setHighlightUid(!isClear && feature.get('uid'));
       });
     });
     return () => unByKey(olListeners);
-  }, [highlightLayer]);
+  }, [highlightLayer, dvMainLayer]);
 
   if (!dvFeatures?.length) {
     return null;

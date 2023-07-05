@@ -14,6 +14,7 @@ const DV_TRIP_FILTER_REGEX = /^ipv_(call|trip)_(day|night|all)$/;
 const DV_STATION_HOVER_FILTER_REGEX = /^ipv_(station|label)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
   /^dv(d|n)?_call(_(bg|displace|label))?(_highlight)?/;
+const DV_PRIO_STATION_HIGHLIGHT_REGEX = /ipv_selected_station_all/;
 
 /**
  * Layer for visualizing international train connections.
@@ -49,12 +50,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super.onLoad();
     this.onChangeVisible();
     this.fetchDvFeatures();
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.once('idle', () => {
-        this.syncFeatures();
-      });
-    }
     // We can only get the mapbox features from the view on load.
     // In order to assign the Cartaro features their corresponding
     // mapbox features for the full list view, we sync the features when
@@ -66,18 +61,25 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         this.syncFeatures();
       }, 400);
     });
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
+    }
+    mbMap.once('idle', () => {
+      this.syncFeatures();
+    });
   }
 
   getMapboxFeatures() {
     const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      const renderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
-        sourceLayer: DV_TRIPS_SOURCELAYER_ID,
-        filter: ['==', '$type', 'LineString'],
-      });
-      return renderedMbFeatures;
+    if (!mbMap) {
+      return null;
     }
-    return [];
+    const renderedMbFeatures = mbMap.querySourceFeatures(DV_KEY, {
+      sourceLayer: DV_TRIPS_SOURCELAYER_ID,
+      filter: ['==', '$type', 'LineString'],
+    });
+    return renderedMbFeatures || [];
   }
 
   /**
@@ -204,6 +206,22 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     });
   }
 
+  getLayerOriginalFilter(layerId, filterExpression) {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return null;
+    }
+    return mbMap
+      ?.getFilter(layerId)
+      ?.filter(
+        (item) =>
+          !(
+            Array.isArray(item) &&
+            item[1].toString() === filterExpression.toString()
+          ),
+      );
+  }
+
   /**
    * Updates visibility for stations, labels and select highlight mb layers
    * and applies the mb filter for the currently selected feature
@@ -227,15 +245,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         /_highlight_/.test(layer.id) ? 'id' : 'direktverbindung_id',
       ];
       // Reset filter to original state
-      const originalFilter = mbMap
-        .getFilter(layer.id)
-        ?.filter(
-          (item) =>
-            !(
-              Array.isArray(item) &&
-              item[1].toString() === idFilterExpression.toString()
-            ),
-        );
+      const originalFilter = this.getLayerOriginalFilter(
+        layer.id,
+        idFilterExpression,
+      );
       mbMap.setFilter(layer.id, originalFilter);
       if (this.selectedFeatures.length) {
         mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
@@ -254,6 +267,32 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         mbMap.setLayoutProperty(layer.id, 'visibility', 'none');
       }
     });
+  }
+
+  priorityHighlightStation(uid) {
+    const { mbMap } = this.mapboxLayer;
+    if (!mbMap) {
+      return;
+    }
+    const style = mbMap.getStyle();
+    const prioHighlightLayer = style?.layers.find((stylelayer) => {
+      return DV_PRIO_STATION_HIGHLIGHT_REGEX.test(
+        getTrafimageFilter(stylelayer),
+      );
+    });
+    if (prioHighlightLayer) {
+      const idFilterExpression = uid && ['==', ['get', 'uid'], uid];
+      const originalFilter = this.getLayerOriginalFilter(
+        prioHighlightLayer.id,
+        idFilterExpression,
+      );
+      const featureIdFilter = [
+        idFilterExpression
+          ? [...originalFilter, idFilterExpression]
+          : originalFilter,
+      ];
+      mbMap.setFilter(prioHighlightLayer.id, featureIdFilter);
+    }
   }
 
   select(features = []) {
