@@ -14,7 +14,7 @@ const DV_TRIP_FILTER_REGEX = /^ipv_(call|trip)_(day|night|all)$/;
 const DV_STATION_HOVER_FILTER_REGEX = /^ipv_(station|label)$/;
 const DV_STATION_CALL_LAYERID_REGEX =
   /^dv(d|n)?_call(_(bg|displace|label))?(_highlight)?/;
-const DV_PRIO_STATION_HIGHLIGHT_REGEX = /ipv_selected_station_all/;
+const DV_PRIO_STATION_HIGHLIGHT_REGEX = /ipv_selected_station_(day|night|all)/;
 
 /**
  * Layer for visualizing international train connections.
@@ -211,15 +211,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     if (!mbMap) {
       return null;
     }
-    return mbMap
-      ?.getFilter(layerId)
-      ?.filter(
-        (item) =>
-          !(
-            Array.isArray(item) &&
-            item[1].toString() === filterExpression.toString()
-          ),
+    return mbMap?.getFilter(layerId)?.filter((item) => {
+      return !(
+        Array.isArray(item) &&
+        item[1].toString() === filterExpression.toString()
       );
+    });
   }
 
   /**
@@ -281,17 +278,21 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       );
     });
     if (prioHighlightLayer) {
-      const idFilterExpression = uid && ['==', ['get', 'uid'], uid];
+      const getUidExpression = ['get', 'uid'];
+      const idFilterExpression = uid && ['==', getUidExpression, uid];
       const originalFilter = this.getLayerOriginalFilter(
         prioHighlightLayer.id,
-        idFilterExpression,
+        getUidExpression,
       );
-      const featureIdFilter = [
-        idFilterExpression
-          ? [...originalFilter, idFilterExpression]
-          : originalFilter,
-      ];
+      const featureIdFilter = idFilterExpression
+        ? [...originalFilter, idFilterExpression]
+        : originalFilter;
       mbMap.setFilter(prioHighlightLayer.id, featureIdFilter);
+      mbMap.setLayoutProperty(
+        prioHighlightLayer.id,
+        'visibility',
+        uid ? 'visible' : 'none',
+      );
     }
   }
 
