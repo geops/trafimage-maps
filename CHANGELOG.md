@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.9](https://github.com/geops/trafimage-maps/compare/v1.21.8...v1.21.9) (2023-07-06)
+
+### Bug Fixes
+
+- add missing translations ([5303131](https://github.com/geops/trafimage-maps/commit/5303131e746c219a8ad9a33791c8fadf3c758f7d))
+- deactivate elastic scroll effect on ios to allow propagation of scroll to the parent, only in embedded mode ([#1092](https://github.com/geops/trafimage-maps/issues/1092)) ([bb852db](https://github.com/geops/trafimage-maps/commit/bb852dbd23a212c7e3ce73669ac6006c584853c5))
+
 ### [1.21.8](https://github.com/geops/trafimage-maps/compare/v1.21.7...v1.21.8) (2023-06-26)
 
 ### Bug Fixes
