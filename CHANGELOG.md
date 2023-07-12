@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.10](https://github.com/geops/trafimage-maps/compare/v1.21.9...v1.21.10) (2023-07-12)
+
+### Bug Fixes
+
+- **Geltungsbereiche-STS:** remove Swiss Half Fare Card from Layer, LayerInfo and Overlay ([#1096](https://github.com/geops/trafimage-maps/issues/1096)) ([a3fabc5](https://github.com/geops/trafimage-maps/commit/a3fabc5677353fccab6ac8a71454c7a9774f8c96))
+
 ### [1.21.9](https://github.com/geops/trafimage-maps/compare/v1.21.8...v1.21.9) (2023-07-06)
 
 ### Bug Fixes
