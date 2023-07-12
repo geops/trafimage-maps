@@ -123,10 +123,7 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
       }
       return 'Freie Fahrt';
     },
-    products: [
-      'ch.sbb.geltungsbereiche.products.sts',
-      'ch.sbb.geltungsbereiche.products.sts-half',
-    ],
+    products: ['ch.sbb.geltungsbereiche.products.sts'],
   },
 });
 
