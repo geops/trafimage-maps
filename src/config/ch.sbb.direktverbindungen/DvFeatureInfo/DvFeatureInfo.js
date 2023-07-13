@@ -14,6 +14,7 @@ import removeDuplicates, {
 import parseDvFeatures from '../../../utils/dvParseFeatures';
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from '../../../utils/constants';
 import useIsMobile from '../../../utils/useIsMobile';
+import useDisableIosElasticScrollEffect from '../../../utils/useDisableIosElasticScrollEffect';
 
 const useStyles = makeStyles(() => {
   return {
@@ -75,6 +76,7 @@ function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const layers = useSelector((state) => state.map.layers);
+  const embedded = useSelector((state) => state.app.embedded);
   const [infoKey, setInfoKey] = useState();
   const isMobile = useIsMobile();
   const [teaser, setTeaser] = useState(true);
@@ -85,6 +87,9 @@ function DvFeatureInfo({ filterByType }) {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);
   const [revision, forceRender] = useState();
+  const [overflowNode, setOverflowNode] = useState();
+
+  useDisableIosElasticScrollEffect(embedded && overflowNode);
 
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
@@ -211,7 +216,12 @@ function DvFeatureInfo({ filterByType }) {
   }
 
   return (
-    <div className={classes.featureInfos}>
+    <div
+      className={classes.featureInfos}
+      ref={(node) => {
+        setOverflowNode(node);
+      }}
+    >
       {dvFeatures.length > 1 ? (
         dvFeatures.map((feat) => {
           const id = getId(feat);
