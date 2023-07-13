@@ -211,6 +211,11 @@ function DvFeatureInfo({ filterByType }) {
     return () => unByKey(olListeners);
   }, [highlightLayer, dvMainLayer]);
 
+  useEffect(() => {
+    // Force unhighlight prio highlight station
+    return () => dvMainLayer.priorityHighlightStation(null);
+  }, [dvMainLayer]);
+
   if (!dvFeatures?.length) {
     return null;
   }
