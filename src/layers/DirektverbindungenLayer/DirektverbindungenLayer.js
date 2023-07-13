@@ -220,6 +220,29 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   }
 
   /**
+   * Highlight a list of features.
+   * @param {Array<ol/Feature~Feature>} [features=[]] Features to highlight.
+   * @private
+   */
+  highlight(features = []) {
+    // Filter out selected features
+    const filtered =
+      this.highlightedFeatures?.filter(
+        (feature) =>
+          !(this.selectedFeatures || [])
+            .map((feat) => feat.getId())
+            .includes(feature.getId()),
+      ) || [];
+
+    // Remove previous highlight
+    this.setHoverState(filtered, false);
+    this.highlightedFeatures = features.length ? [features[0]] : [];
+
+    // Add highlight
+    this.setHoverState(this.highlightedFeatures, true);
+  }
+
+  /**
    * Updates visibility for stations, labels and select highlight mb layers
    * and applies the mb filter for the currently selected feature
    */
