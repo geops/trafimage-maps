@@ -108,14 +108,8 @@ function DvFeatureInfo({ filterByType }) {
   const dvFeatures = useMemo(() => {
     const features = featureInfo.reduce((finalFeats, info) => {
       const newFeatures = info.features.reduce((feats, feat) => {
-        const hoveredStationUid =
-          info.layer.highlightedFeatures?.[0]?.get('uid');
         // When we click a station or a station label we check the dv ids and select those instead of the station feature
-        // We only consider the station that is hovered when clicking
-        if (
-          feat.getGeometry() instanceof Point &&
-          hoveredStationUid === feat.get('uid')
-        ) {
+        if (feat.getGeometry() instanceof Point) {
           const dvIds = JSON.parse(feat.get('direktverbindung_ids') || '[]');
           const stationLineFeatures = dvIds.map((id) => {
             return info.layer.allFeatures.find((f) => getId(f) === id);
