@@ -24,6 +24,25 @@ const typoBody = {
   color: '#000000',
 };
 
+const themeSpacing = (value) => {
+  let space = 0;
+  switch (value) {
+    case 'thin':
+      space = 8; // From SSB design
+      break;
+    case 'small':
+      space = 24; // From SSB design
+      break;
+    case 'medium':
+      space = 48; // From SSB design
+      break;
+    default:
+      space = value * 8;
+      break;
+  }
+  return space;
+};
+
 const theme = createTheme({
   colors,
   breakpoints: { values: breakpointValues },
@@ -66,24 +85,7 @@ const theme = createTheme({
       lineHeight: '26px',
     },
   },
-  spacing: (value) => {
-    let space = 0;
-    switch (value) {
-      case 'thin':
-        space = 8; // From SSB design
-        break;
-      case 'small':
-        space = 24; // From SSB design
-        break;
-      case 'medium':
-        space = 48; // From SSB design
-        break;
-      default:
-        space = value * 8;
-        break;
-    }
-    return space;
-  },
+  spacing: themeSpacing,
   props: {
     MuiPopover: {
       elevation: 0,
@@ -323,6 +325,42 @@ const theme = createTheme({
         alignItems: 'center',
         justifyContent: 'space-between',
         position: 'relative',
+      },
+    },
+    MuiTabs: {
+      root: {
+        display: 'unset',
+        overflow: 'unset',
+        minHeight: 'unset',
+        '& .MuiTabs-indicator': {
+          backgroundColor: 'transparent',
+        },
+      },
+    },
+    MuiTab: {
+      root: {
+        lineHeight: 'unset',
+        minWidth: 0,
+        marginLeft: 2,
+        marginRight: 2,
+        marginBottom: -1,
+        border: '1px solid #dddddd',
+        borderTopLeftRadius: 2,
+        borderTopRightRadius: 2,
+        textTransform: 'none',
+        '&:first-child': {
+          marginLeft: themeSpacing(2),
+        },
+        '&:last-child': {
+          marginRight: themeSpacing(2),
+        },
+        '&:hover': {
+          color: colors.redDark,
+        },
+        '&.Mui-selected': {
+          borderBottomColor: 'white',
+          backgroundColor: 'white',
+        },
       },
     },
   },

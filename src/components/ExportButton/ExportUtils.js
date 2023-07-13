@@ -8,6 +8,7 @@ import { LineString } from 'ol/geom';
 import { getCenter } from 'ol/extent';
 import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
 import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
+import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -88,12 +89,12 @@ export const getMapHd = (
   size,
   zoom,
   extent,
+  exportConfig,
 ) => {
   const targetSize = size || map.getSize();
 
   // We create a temporary map.
   const div = document.createElement('div');
-  //   div.style.visibility = 'hidden';
   div.style.width = `${targetSize[0]}px`;
   div.style.height = `${targetSize[1]}px`;
   document.body.append(div);
@@ -117,16 +118,25 @@ export const getMapHd = (
   const mbMap =
     layerService.getBaseLayers()[0]?.mbMap ||
     layerService.getBaseLayers()[0]?.mapboxLayer.mbMap;
-  return buildMapboxMapHd(
-    map,
-    div,
-    center,
-    mbMap.getStyle(),
-    scale,
-    targetZoom,
-  ).then(() => {
-    return buildOlMapHd(map, div, center, scale, targetResolution);
-  });
+
+  if (!mbMap) {
+    // eslint-disable-next-line no-console
+    console.error('Mapbox map not found!');
+    return Promise.resolve();
+  }
+
+  const styleLayers = layerService.layers.filter((l) =>
+    l.get(FORCE_EXPORT_PROPERTY),
+  );
+  const mbStyle =
+    exportConfig?.mbStyleFunction && styleLayers.length
+      ? exportConfig?.mbStyleFunction(mbMap.getStyle(), styleLayers)
+      : mbMap.getStyle();
+  return buildMapboxMapHd(map, div, center, mbStyle, scale, targetZoom).then(
+    () => {
+      return buildOlMapHd(map, div, center, scale, targetResolution);
+    },
+  );
 };
 
 export const clean = (mapToExport) => {
@@ -150,7 +160,6 @@ export const generateExtraData = (layers, exportNorthArrow) => {
           );
           const copyrightArray = [];
           const coll = parsed.getElementsByTagName('a');
-
           for (let i = 0; i < coll.length; i += 1) {
             const copyright = coll[i];
             copyrightArray.push(copyright.text);
