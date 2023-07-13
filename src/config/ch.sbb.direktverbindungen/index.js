@@ -102,6 +102,11 @@ export const dvMain = new DirektverbindungenLayer({
     popupComponent: 'DvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
+    highlightPointFeatureFilter: (feature, layer) => {
+      // We only hoghlight the station that is currently hovered by the user
+      const hoverFeatureUid = layer.highlightedFeatures?.[0]?.get('uid');
+      return hoverFeatureUid === feature.get('uid');
+    },
   },
 });
 
