@@ -9,11 +9,12 @@ const highlightPointFeatures = (
   coordinatesArray,
   silent, // Used to prevent state updates in popup components (e.g. DvLineInfo, DvFeatureInfo)
 ) => {
-  const filtered = layer.get('highlightPointFeatureFilter')
-    ? features.filter((feat) =>
-        layer.get('highlightPointFeatureFilter')(feat, layer),
-      )
-    : features;
+  const filtered =
+    !silent && layer.get('highlightPointFeatureFilter')
+      ? features.filter((feat) =>
+          layer.get('highlightPointFeatureFilter')(feat, layer),
+        )
+      : features;
   filtered.forEach((feat, idx) => {
     if (feat && feat.getGeometry()) {
       const layerHighlightGeom =
