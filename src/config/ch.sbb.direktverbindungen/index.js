@@ -28,6 +28,7 @@ export const dvBaseLight = new MapboxStyleLayer({
   properties: {
     previewImage: netzkarte,
     isBaseLayer: true,
+    deselectOnChangeVisible: true,
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -41,6 +42,7 @@ export const dvBaseDark = new MapboxStyleLayer({
   properties: {
     previewImage: netzkarteNightImg,
     isBaseLayer: true,
+    deselectOnChangeVisible: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -54,6 +56,7 @@ export const dvBaseAerial = new MapboxStyleLayer({
   properties: {
     previewImage: luftbild,
     isBaseLayer: true,
+    deselectOnChangeVisible: true,
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -72,6 +75,7 @@ export const dvDay = new Layer({
     layerInfoComponent: 'DvLayerInfo',
     dataLink:
       'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
+    deselectOnChangeVisible: true,
   },
 });
 
@@ -87,6 +91,7 @@ export const dvNight = new Layer({
     layerInfoComponent: 'DvLayerInfo',
     dataLink:
       'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
+    deselectOnChangeVisible: true,
   },
 });
 
@@ -102,17 +107,14 @@ export const dvMain = new DirektverbindungenLayer({
     popupComponent: 'DvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
-    highlightPointFeatureFilter: (feature, layer) => {
-      // We only hoghlight the station that is currently hovered by the user
-      const hoverFeatureUid = layer.highlightedFeatures?.[0]?.get('uid');
-      return hoverFeatureUid === feature.get('uid');
-    },
+    highlightPointFeatureFilter: () => false,
   },
 });
 
 [dvNight, dvDay].forEach((layer) =>
   layer.on('change:visible', (evt) => {
     dvMain.onChangeVisible(evt.target);
+    dvMain.select([]);
   }),
 );
 

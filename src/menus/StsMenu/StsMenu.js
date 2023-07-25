@@ -25,7 +25,6 @@ import {
   STS_HIT_TOLERANCE,
 } from '../../utils/constants';
 import useIsMobile from '../../utils/useIsMobile';
-import useHighlightLayer from '../../utils/useHighlightLayer';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -91,7 +90,6 @@ function StsTopicMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const layers = useSelector((state) => state.map.layers);
   const isMobile = useIsMobile;
   const [activeMenu, setActiveMenu] = useState('sts');
@@ -140,9 +138,6 @@ function StsTopicMenu() {
       baseLayer.hitTolerance = STS_HIT_TOLERANCE;
     }
   }, [activeMenu, baseLayer]);
-
-  // Hook to highlight map features
-  useHighlightLayer(featureInfo, highlightLayer);
 
   const onChange = (key) => {
     setActiveMenu(key);

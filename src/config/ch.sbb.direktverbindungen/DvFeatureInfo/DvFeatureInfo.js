@@ -74,14 +74,12 @@ const useStyles = makeStyles(() => {
 
 function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const layers = useSelector((state) => state.map.layers);
   const embedded = useSelector((state) => state.app.embedded);
   const [infoKey, setInfoKey] = useState();
   const isMobile = useIsMobile();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
-  const [highlightUid, setHighlightUid] = useState();
   const classes = useStyles({ isMobile });
   const teaserOnClick = useCallback(() => {
     return teaser ? setTeaser(false) : undefined;
@@ -112,7 +110,9 @@ function DvFeatureInfo({ filterByType }) {
         if (feat.getGeometry() instanceof Point) {
           const dvIds = JSON.parse(feat.get('direktverbindung_ids') || '[]');
           const stationLineFeatures = dvIds.map((id) => {
-            return info.layer.allFeatures.find((f) => getId(f) === id);
+            return info.layer.allFeatures.find(
+              (f) => !!f.get('mapboxFeature') && getId(f) === id,
+            );
           });
           return [...feats, ...stationLineFeatures.filter((f) => !!f)];
         }
@@ -120,7 +120,10 @@ function DvFeatureInfo({ filterByType }) {
           feat.getGeometry() instanceof LineString ||
           feat.getGeometry() instanceof MultiLineString
         ) {
-          return feat ? [...feats, feat] : feats;
+          const hasValidMapboxFeature =
+            feat?.get('mapboxFeature')?.sourceLayer ===
+            'ch.sbb.direktverbindungen_trips';
+          return hasValidMapboxFeature ? [...feats, feat] : feats;
         }
         return feats;
       }, []);
@@ -128,14 +131,7 @@ function DvFeatureInfo({ filterByType }) {
       return [...finalFeats, ...newFeatures];
     }, []);
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
-    const cleaned = removeDuplicates(parseDvFeatures(features)).filter(
-      (feat) => {
-        const hasHighlightedStation = highlightUid
-          ? feat.get('vias')?.some((via) => via.uid === highlightUid)
-          : true;
-        return !!feat.get('mapboxFeature') && hasHighlightedStation;
-      },
-    );
+    const cleaned = removeDuplicates(parseDvFeatures(features));
     return filterByType
       ? cleaned.filter(
           (feat) =>
@@ -144,18 +140,14 @@ function DvFeatureInfo({ filterByType }) {
             }),
         )
       : cleaned;
-  }, [featureInfo, filterByType, layersVisible, highlightUid]);
+  }, [featureInfo, filterByType, layersVisible]);
 
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
   const previousInfoKey = usePrevious(infoKey);
-  const previousHighlightUid = usePrevious(highlightUid);
 
   useEffect(() => {
-    if (
-      featureInfo !== previousFeatureInfo ||
-      (highlightUid && highlightUid !== previousHighlightUid)
-    ) {
+    if (featureInfo !== previousFeatureInfo) {
       setTeaser(true);
       setInfoKey(getId(dvFeatures[0]));
       return;
@@ -174,8 +166,6 @@ function DvFeatureInfo({ filterByType }) {
     previousInfoKey,
     featureInfo,
     previousFeatureInfo,
-    highlightUid,
-    previousHighlightUid,
   ]);
 
   useEffect(() => {
@@ -198,27 +188,7 @@ function DvFeatureInfo({ filterByType }) {
     };
   }, [layers, revision]);
 
-  useEffect(() => {
-    const olListeners = ['addfeature', 'clear'].map((evt) => {
-      return highlightLayer.getSource().on(evt, (e) => {
-        const { feature, type } = e;
-        const isClear = type === 'clear';
-        dvMainLayer.priorityHighlightStation(!isClear && feature.get('uid'));
-        if (feature?.get('silent')) return;
-        setHighlightUid(!isClear && feature.get('uid'));
-      });
-    });
-    return () => unByKey(olListeners);
-  }, [highlightLayer, dvMainLayer]);
-
-  useEffect(() => {
-    // Force unhighlight prio highlight station
-    return () => dvMainLayer.priorityHighlightStation(null);
-  }, [dvMainLayer]);
-
-  if (!dvFeatures?.length) {
-    return null;
-  }
+  if (!dvFeatures?.length) return null;
 
   return (
     <div
@@ -257,6 +227,15 @@ function DvFeatureInfo({ filterByType }) {
                   // We select the feature here instead of DvLineInfo
                   // to prevent excessive map layer rerenders.
                   dvMainLayer.select(open ? [] : [feat]);
+                  const vias = feat.get('vias');
+                  if (
+                    !vias.find(
+                      (via) =>
+                        via.uid === dvMainLayer.highlightedStation?.get('uid'),
+                    )
+                  ) {
+                    dvMainLayer.highlightStation();
+                  }
                 }}
                 className={`wkp-dv-feature-info ${classes.root}${
                   active && teaser ? ` ${classes.teaser}` : ''

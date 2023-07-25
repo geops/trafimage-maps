@@ -10,7 +10,6 @@ import { unByKey } from 'ol/Observable';
 import Link from '../../../components/Link';
 import panCenterFeature from '../../../utils/panCenterFeature';
 import useIsMobile from '../../../utils/useIsMobile';
-import highlightPointFeatures from '../../../utils/highlightPointFeatures';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -97,32 +96,16 @@ const DvLineInfo = ({ feature, layer }) => {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const isMobile = useIsMobile();
-  const [viaUid, setViaUid] = useState(
-    highlightLayer.getSource().getFeatures()?.[0]?.get('uid'),
-  );
+  const [viaUid, setViaUid] = useState(layer.highlightedStation?.get('uid'));
 
   useEffect(() => {
-    if (layer.visible) {
-      if (feature) {
-        layer.select([feature]);
-      }
-      return;
-    }
-    // eslint-disable-next-line consistent-return
-    return () => {
-      layer.select();
-    };
-  }, [layer, feature]);
-
-  useEffect(() => {
-    const onHighlightFeatureChange = highlightLayer
-      .getSource()
-      .on('addfeature', (evt) => setViaUid(evt.feature.get('uid')));
-    return () => unByKey(onHighlightFeatureChange);
-  }, [highlightLayer]);
+    const highlightStationListener = layer.on('select:station', (e) =>
+      setViaUid(e.feature?.get('uid')),
+    );
+    return () => unByKey(highlightStationListener);
+  }, [layer]);
 
   if (!feature) {
     return null;
@@ -176,11 +159,13 @@ const DvLineInfo = ({ feature, layer }) => {
               style={{ cursor: coordinates ? 'pointer' : 'auto' }}
               onClick={() => {
                 if (isSelected) {
-                  highlightLayer.getSource().clear();
                   setViaUid();
                   return;
                 }
                 if (coordinates) {
+                  layer.highlightStation(
+                    new Feature({ ...via, geometry: new Point(coordinates) }),
+                  );
                   setViaUid(via.uid);
                   panCenterFeature(
                     map,
@@ -194,18 +179,6 @@ const DvLineInfo = ({ feature, layer }) => {
                     null,
                     null,
                     true,
-                  );
-                  highlightPointFeatures(
-                    [
-                      new Feature({
-                        geometry: new Point(coordinates),
-                        ...via,
-                      }),
-                    ],
-                    layer,
-                    highlightLayer,
-                    [coordinates],
-                    true, // silent
                   );
                 }
               }}
