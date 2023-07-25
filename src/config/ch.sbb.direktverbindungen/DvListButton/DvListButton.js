@@ -54,6 +54,7 @@ const DvListButton = ({ ...props }) => {
             if (mbMap) {
               mbMap.once('idle', () => {
                 dvMainLayer.syncFeatures();
+                dvMainLayer.highlightStation();
                 dispatch(
                   setFeatureInfo([
                     {
