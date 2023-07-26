@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.colors.lightGray,
     },
   },
-  rowSelected: {
-    backgroundColor: theme.colors.lightGray,
-  },
   routeStops: {
     fontWeight: 'bold',
     marginBottom: 10,
@@ -134,7 +131,6 @@ const DvLineInfo = ({ feature, layer }) => {
         {vias.map((via, index, arr) => {
           let extraRowClass = '';
           let extraVerticalClass = '';
-          let selectedClass = '';
           const isFirst = index === 0;
           const isLast = index === arr.length - 1;
           const isSelected = via.uid === viaUid;
@@ -148,20 +144,12 @@ const DvLineInfo = ({ feature, layer }) => {
             extraVerticalClass = ` ${classes.routeVerticalLast}`;
           }
 
-          if (isSelected) {
-            selectedClass = ` ${classes.rowSelected}`;
-          }
-
           return (
             <Box
               key={via.uid}
-              className={classes.row + extraRowClass + selectedClass}
+              className={classes.row + extraRowClass}
               style={{ cursor: coordinates ? 'pointer' : 'auto' }}
               onClick={() => {
-                if (isSelected) {
-                  setViaUid();
-                  return;
-                }
                 if (coordinates) {
                   layer.highlightStation(
                     new Feature({ ...via, geometry: new Point(coordinates) }),
@@ -190,12 +178,12 @@ const DvLineInfo = ({ feature, layer }) => {
                 />
                 <div
                   className={classes.routeCircleMiddle}
-                  style={{ borderColor: color }}
+                  style={{ borderColor: isSelected ? 'black' : color }}
                 />
               </div>
               <div>
                 <Typography variant={isFirst || isLast ? 'h4' : 'body1'}>
-                  {via.station_name}
+                  {isSelected ? <b>{via.station_name}</b> : via.station_name}
                 </Typography>
               </div>
             </Box>

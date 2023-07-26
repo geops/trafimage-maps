@@ -9,6 +9,7 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
   const map = useSelector((state) => state.app.map);
   const searchService = useSelector((state) => state.app.searchService);
   const menuOpen = useSelector((state) => state.app.menuOpen);
+  const activeTopic = useSelector((state) => state.app.activeTopic);
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
   const isMobile = useIsMobile();
 
@@ -73,8 +74,29 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
     if (!coordinateClicked) {
       return;
     }
-    panCenterFeature(map, [layerr], coordinateClicked, menuOpen, isMobile);
-  }, [map, isMobile, featureIndex, infoIndexed, menuOpen, highlightLayer]);
+    panCenterFeature(
+      map,
+      [layerr],
+      coordinateClicked,
+      menuOpen,
+      isMobile,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      activeTopic?.overlaySide,
+    );
+  }, [
+    map,
+    isMobile,
+    featureIndex,
+    infoIndexed,
+    menuOpen,
+    highlightLayer,
+    activeTopic,
+  ]);
 };
 
 export default useHighlightLayer;

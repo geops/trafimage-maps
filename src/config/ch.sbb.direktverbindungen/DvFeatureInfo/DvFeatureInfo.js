@@ -1,9 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { unByKey } from 'ol/Observable';
 import { Point, LineString, MultiLineString } from 'ol/geom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { makeStyles, Divider } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+import { makeStyles, Divider, Box, IconButton } from '@material-ui/core';
+import { MdClose } from 'react-icons/md';
 import MenuItem from '../../../components/Menu/MenuItem';
 import usePrevious from '../../../utils/usePrevious';
 import DvLineInfo from '../DvLineInfo';
@@ -15,6 +17,7 @@ import parseDvFeatures from '../../../utils/dvParseFeatures';
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from '../../../utils/constants';
 import useIsMobile from '../../../utils/useIsMobile';
 import useDisableIosElasticScrollEffect from '../../../utils/useDisableIosElasticScrollEffect';
+import { setFeatureInfo } from '../../../model/app/actions';
 
 const useStyles = makeStyles(() => {
   return {
@@ -32,6 +35,14 @@ const useStyles = makeStyles(() => {
       '& .wkp-menu-item-header-toggler': {
         marginRight: 5,
       },
+    },
+    listHeader: {
+      padding: '10px 12px 10px 15px',
+      fontSize: 16,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginTop: 10,
     },
     teaser: {
       maxHeight: (props) => (props.isMobile ? 200 : 400),
@@ -72,7 +83,9 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function DvFeatureInfo({ filterByType }) {
+function DvFeatureInfo({ filterByType, showListHeader }) {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const embedded = useSelector((state) => state.app.embedded);
@@ -197,6 +210,29 @@ function DvFeatureInfo({ filterByType }) {
         setOverflowNode(node);
       }}
     >
+      {showListHeader && (
+        <Box className={classes.listHeader}>
+          <b>
+            {t('Direktverbindungen')}
+            {dvMainLayer.highlightedStation
+              ? ` ${t('über')} ${dvMainLayer.highlightedStation.get('name')}`
+              : null}
+          </b>
+          {!isMobile ? (
+            <IconButton
+              size="medium"
+              className="wkp-close-bt"
+              title={t('Schliessen')}
+              onClick={() => {
+                dvMainLayer.highlightStation();
+                dispatch(setFeatureInfo());
+              }}
+            >
+              <MdClose focusable={false} alt={t('Schliessen')} />
+            </IconButton>
+          ) : null}
+        </Box>
+      )}
       {dvFeatures.length > 1 ? (
         dvFeatures.map((feat) => {
           const id = getId(feat);
@@ -299,10 +335,12 @@ function DvFeatureInfo({ filterByType }) {
 
 DvFeatureInfo.propTypes = {
   filterByType: PropTypes.bool,
+  showListHeader: PropTypes.bool,
 };
 
 DvFeatureInfo.defaultProps = {
   filterByType: false,
+  showListHeader: true,
 };
 
 export default DvFeatureInfo;

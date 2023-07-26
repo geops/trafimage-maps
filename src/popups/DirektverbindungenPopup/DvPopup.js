@@ -17,7 +17,7 @@ const DvPopup = () => {
 
   return (
     <div className={classes.container}>
-      <DvFeatureInfo />
+      <DvFeatureInfo showListHeader={false} />
     </div>
   );
 };

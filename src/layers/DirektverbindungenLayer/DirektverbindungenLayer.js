@@ -226,7 +226,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     callLayers.forEach((layer) => {
       if (this.selectedFeatures.length) {
         mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
-        if (highlightLayersRegex.test(getTrafimageFilter(layer))) {
+        if (
+          highlightLayersRegex.test(getTrafimageFilter(layer)) ||
+          /displace/.test(layer.id)
+        ) {
           const idFilterExpression = [
             'get',
             /^symbol$/.test(layer.type) ? 'direktverbindung_id' : 'id',

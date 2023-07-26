@@ -25,6 +25,7 @@ import {
   STS_HIT_TOLERANCE,
 } from '../../utils/constants';
 import useIsMobile from '../../utils/useIsMobile';
+import useHighlightLayer from '../../utils/useHighlightLayer';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -94,6 +95,7 @@ function StsTopicMenu() {
   const isMobile = useIsMobile;
   const [activeMenu, setActiveMenu] = useState('sts');
   const [anchorEl, setAnchorEl] = useState();
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const baseLayer = useMemo(() => {
     const bl = stsLayers.find((layer) => layer.get('isBaseLayer'));
     // Since we update the style dynamically on menu switch
@@ -144,6 +146,9 @@ function StsTopicMenu() {
     dispatch(setFeatureInfo([]));
     setAnchorEl(null);
   };
+
+  // Hook to highlight map features
+  useHighlightLayer(featureInfo, highlightLayer);
 
   return (
     <IframeMenu
