@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
+import { DvFeatureInfoTitleString } from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
 
 const useStyles = makeStyles({
   container: {
@@ -17,7 +18,7 @@ const DvPopup = () => {
 
   return (
     <div className={classes.container}>
-      <DvFeatureInfo showListHeader={false} />
+      <DvFeatureInfo />
     </div>
   );
 };
@@ -25,7 +26,7 @@ const DvPopup = () => {
 DvPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(DvPopup);
-memoized.renderTitle = (feat, layer, t) => t(layer.key);
+memoized.renderTitle = () => <DvFeatureInfoTitleString />;
 memoized.hidePagination = true;
 
 export default memoized;

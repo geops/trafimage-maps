@@ -26,6 +26,7 @@ import {
 } from '../../utils/constants';
 import useIsMobile from '../../utils/useIsMobile';
 import useHighlightLayer from '../../utils/useHighlightLayer';
+import DvFeatureInfoTitle from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -201,6 +202,7 @@ function StsTopicMenu() {
           </>
         )
       }
+      title={activeMenu === 'dv' ? <DvFeatureInfoTitle /> : null}
       body={
         <>
           {isMobile ? null : <Divider />}
