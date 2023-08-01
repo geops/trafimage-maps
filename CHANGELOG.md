@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.11](https://github.com/geops/trafimage-maps/compare/v1.21.10...v1.21.11) (2023-08-01)
+
+### Bug Fixes
+
+- initialize properly the background visibility ([#1098](https://github.com/geops/trafimage-maps/issues/1098)) ([bca6c93](https://github.com/geops/trafimage-maps/commit/bca6c935b286d3ae0d206d6cb211a12ddf40ed38))
+
 ### [1.21.10](https://github.com/geops/trafimage-maps/compare/v1.21.9...v1.21.10) (2023-07-12)
 
 ### Bug Fixes
