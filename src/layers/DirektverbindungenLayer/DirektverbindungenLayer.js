@@ -291,6 +291,10 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         ['==', idFilterExpression, this.highlightedStation.get('uid')],
       ];
       mbMap.setFilter(selectedStationLayer.id, featureIdFilter);
+      const fullLayer = this.getDvLayers(
+        new RegExp(`^ipv_call_full_${this.getCurrentLayer()}$`),
+      )?.[0];
+      mbMap.setLayoutProperty(fullLayer.id, 'visibility', 'none');
     } else {
       mbMap.setLayoutProperty(selectedStationLayer.id, 'visibility', 'none');
     }
