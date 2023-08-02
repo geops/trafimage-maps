@@ -95,6 +95,7 @@
     "geops-docjs-template": "1.0.7",
     "husky": "8.0.2",
     "is-ci": "3.0.1",
+    "jest-canvas-mock": "^2.5.2",
     "jest-serializer-html": "7.1.0",
     "lint-staged": "11.2.0",
     "mock-socket": "9.1.5",
