@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { LineString } from 'ol/geom';
+import { LineString, MultiLineString } from 'ol/geom';
 import { unByKey } from 'ol/Observable';
 import { Feature } from 'ol';
 
@@ -28,7 +28,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         );
         return (
           clickRegex.test(getTrafimageFilter(layer)) &&
-          !/displace/.test(layer.id) // Avoid detecting displace layer
+          !/(displace|edge_bg)/.test(layer.id) // Avoid detecting displace layer
         );
       },
       styleLayersFilter: (layer) =>
@@ -222,9 +222,14 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     const highlightLayersRegex = new RegExp(
       `^ipv_call_${highlightLayerString}${this.getCurrentLayer()}$`,
     );
-    // Highlight stations and station labels on select
+    // Highlight lines only
+    const selectedLines = this.selectedFeatures.filter(
+      (feat) =>
+        feat.getGeometry() instanceof MultiLineString ||
+        feat.getGeometry() instanceof LineString,
+    );
     callLayers.forEach((layer) => {
-      if (this.selectedFeatures.length) {
+      if (selectedLines.length > 0) {
         mbMap.setLayoutProperty(layer.id, 'visibility', 'visible');
         if (
           highlightLayersRegex.test(getTrafimageFilter(layer)) ||
@@ -240,17 +245,13 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
             idFilterExpression,
           );
           mbMap.setFilter(layer.id, originalFilter);
-          this.selectedFeatures
+          selectedLines
             .filter((feat) => !!feat.get('name'))
             .forEach((feature) => {
-              const dvIds = feature.get('direktverbindung_ids')
-                ? JSON.parse(feature.get('direktverbindung_ids'))
-                : [feature.get('id')];
-
               // Add feature id filter
               const featureIdFilter = [
                 ...mbMap.getFilter(layer.id),
-                ['==', idFilterExpression, dvIds[0]],
+                ['==', idFilterExpression, feature.get('id')],
               ];
               mbMap.setFilter(layer.id, featureIdFilter);
             });
@@ -290,10 +291,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
         ['==', idFilterExpression, this.highlightedStation.get('uid')],
       ];
       mbMap.setFilter(selectedStationLayer.id, featureIdFilter);
-      const fullLayer = this.getDvLayers(
-        new RegExp(`^ipv_call_full_${this.getCurrentLayer()}$`),
-      )?.[0];
-      mbMap.setLayoutProperty(fullLayer.id, 'visibility', 'none');
     } else {
       mbMap.setLayoutProperty(selectedStationLayer.id, 'visibility', 'none');
     }

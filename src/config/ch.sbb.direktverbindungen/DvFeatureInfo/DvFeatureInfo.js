@@ -180,6 +180,15 @@ function DvFeatureInfo({ filterByType }) {
     };
   }, [layers, revision]);
 
+  useEffect(() => {
+    if (dvFeatures.length > 0 && infoKey) {
+      const selectedFeature = dvFeatures.find(
+        (feat) => getId(feat) === infoKey,
+      );
+      dvMainLayer.select(selectedFeature ? [selectedFeature] : []);
+    }
+  }, [dvFeatures, dvMainLayer, infoKey]);
+
   if (!dvFeatures?.length) return null;
 
   return (
@@ -193,9 +202,6 @@ function DvFeatureInfo({ filterByType }) {
           const title = feat.get('name');
           const isNightTrain = feat.get('line') === 'night';
           const active = infoKey === id;
-          if (active && dvMainLayer) {
-            dvMainLayer.select([feat]);
-          }
           return (
             <div
               key={id}
