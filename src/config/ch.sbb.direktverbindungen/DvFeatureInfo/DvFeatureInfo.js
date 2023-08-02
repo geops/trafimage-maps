@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { unByKey } from 'ol/Observable';
-import { Point, LineString, MultiLineString } from 'ol/geom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { makeStyles, Divider } from '@material-ui/core';
@@ -101,32 +100,28 @@ function DvFeatureInfo({ filterByType }) {
   );
 
   const dvFeatures = useMemo(() => {
-    const features = featureInfo.reduce((finalFeats, info) => {
-      const newFeatures = info.features.reduce((feats, feat) => {
-        // When we click a station or a station label we check the dv ids and select those instead of the station feature
-        if (feat.getGeometry() instanceof Point) {
-          const dvIds = JSON.parse(feat.get('direktverbindung_ids') || '[]');
-          const stationLineFeatures = dvIds.map((id) => {
-            return info.layer.allFeatures.find(
-              (f) => !!f.get('mapboxFeature') && getId(f) === id,
-            );
-          });
-          return [...feats, ...stationLineFeatures.filter((f) => !!f)];
-        }
-        if (
-          feat.getGeometry() instanceof LineString ||
-          feat.getGeometry() instanceof MultiLineString
-        ) {
+    let features = [];
+    const dvInfo = featureInfo.find((i) => i.layer === dvMainLayer);
+    if (dvInfo && dvInfo.features.length !== 0) {
+      // When we click on a station/label we select the lines using the direktverbundung_ids
+      if (dvMainLayer.highlightedStation) {
+        const dvIds = JSON.parse(
+          dvMainLayer.highlightedStation.get('direktverbindung_ids') || '[]',
+        );
+        features = dvIds.map((id) => {
+          return dvMainLayer.allFeatures.find(
+            (f) => !!f.get('mapboxFeature') && getId(f) === id,
+          );
+        });
+      } else {
+        features = dvInfo.features.reduce((feats, feat) => {
           const hasValidMapboxFeature =
             feat?.get('mapboxFeature')?.sourceLayer ===
             'ch.sbb.direktverbindungen_trips';
           return hasValidMapboxFeature ? [...feats, feat] : feats;
-        }
-        return feats;
-      }, []);
-      newFeatures.forEach((feat) => feat.set('layer', info.layer));
-      return [...finalFeats, ...newFeatures];
-    }, []);
+        }, []);
+      }
+    }
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
     const cleaned = removeDuplicates(parseDvFeatures(features));
     return filterByType
@@ -137,7 +132,7 @@ function DvFeatureInfo({ filterByType }) {
             }),
         )
       : cleaned;
-  }, [featureInfo, filterByType, layersVisible]);
+  }, [featureInfo, filterByType, layersVisible, dvMainLayer]);
 
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
@@ -190,15 +185,12 @@ function DvFeatureInfo({ filterByType }) {
   return (
     <div
       className={`${classes.featureInfos}`}
-      ref={(node) => {
-        setOverflowNode(node);
-      }}
+      ref={(node) => setOverflowNode(node)}
     >
       {dvFeatures.length > 1 ? (
         dvFeatures.map((feat) => {
           const id = getId(feat);
           const title = feat.get('name');
-          const layer = feat.get('layer');
           const isNightTrain = feat.get('line') === 'night';
           const active = infoKey === id;
           if (active && dvMainLayer) {
@@ -264,7 +256,10 @@ function DvFeatureInfo({ filterByType }) {
                       : null
                   }
                 >
-                  <DvLineInfo feature={active ? feat : null} layer={layer} />
+                  <DvLineInfo
+                    feature={active ? feat : null}
+                    layer={dvMainLayer}
+                  />
                 </div>
               </MenuItem>
               <Divider />
@@ -283,10 +278,7 @@ function DvFeatureInfo({ filterByType }) {
             />
           </div>
           <div className={classes.featureInfoItem}>
-            <DvLineInfo
-              feature={dvFeatures[0]}
-              layer={dvFeatures[0].get('layer')}
-            />
+            <DvLineInfo feature={dvFeatures[0]} layer={dvMainLayer} />
           </div>
         </>
       )}
