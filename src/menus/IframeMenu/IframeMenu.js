@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => {
     },
     mobileTitle: {
       padding: '0 15px',
-      maxWidth: 'calc(100vw - 55px)',
+      maxWidth: 'calc(100vw - 65px)',
     },
     closeBtn: {
       position: 'fixed',
@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme) => {
       padding: '13px 10px',
       marginRight: 2,
       zIndex: 1002,
+      height: OVERLAY_MIN_HEIGHT,
     },
     hide: { display: 'none' },
     bottomFade: {

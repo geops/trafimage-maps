@@ -26,7 +26,11 @@ const DvPopup = () => {
 DvPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(DvPopup);
-memoized.renderTitle = () => <DvFeatureInfoTitleString />;
+memoized.renderTitle = () => (
+  <span style={{ padding: '2px 0' }}>
+    <DvFeatureInfoTitleString />
+  </span>
+);
 memoized.hidePagination = true;
 
 export default memoized;
