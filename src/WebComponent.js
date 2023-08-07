@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import { Layer } from 'mobility-toolbox-js/ol';
@@ -243,7 +243,13 @@ const WebComponent = (props) => {
     domainConsentId,
     disableCookies,
     realtimeKey,
+    activeTopicKey,
   } = props;
+
+  // We have to wait the applyinace of the layersVisibility attribute to avoid having blinking bg layer on load
+  const [layersVisibilityApplied, setLayersVisibilityApplied] = useState(
+    !layersVisibility,
+  );
 
   const arrayCenter = useMemo(() => {
     if (!center || Array.isArray(center)) {
@@ -258,6 +264,7 @@ const WebComponent = (props) => {
     () => maxExtent && maxExtent.split(',').map((float) => parseFloat(float)),
     [maxExtent],
   );
+
   const appTopics = useMemo(() => {
     const tps = topics || getTopicConfig(appName);
 
@@ -306,6 +313,11 @@ const WebComponent = (props) => {
   useEffect(() => {
     // TODO improve the code, particularly the transformation string to object.
     appTopics?.forEach((topic) => {
+      // We use the active topic key because it's to force the layersVisiibility
+      // attribute to be reapply on change of a topic
+      if (activeTopicKey && topic.key !== activeTopicKey) {
+        return;
+      }
       // Override layers visiblity.
       if (layersVisibility && topic.layers.length) {
         const obj = {};
@@ -336,14 +348,40 @@ const WebComponent = (props) => {
               }
               // eslint-disable-next-line no-param-reassign
               layer.visible = value;
+
+              // Hide other base layers
+              if (layer.get('isBaseLayer') && value) {
+                rootLayer.children
+                  .filter((l) => l.get('isBaseLayer'))
+                  .forEach((l) => {
+                    if (l.key !== key) {
+                      // eslint-disable-next-line no-param-reassign
+                      l.visible = false;
+                    }
+                  });
+              }
             }
           });
         });
+
+        rootLayer.children
+          .filter((layer) => layer.get('isBaseLayer'))
+          .forEach((layer) => {
+            // When the base layer refers to a MapboxLayer we have to update the style of the
+            // mapbox layer too, too avoid seeing the previous background first.
+            //  same as in applPermalinkVisiblity funtion.
+            if (layer.visible && layer.style && layer.mapboxLayer) {
+              // eslint-disable-next-line no-param-reassign
+              layer.mapboxLayer.style = layer.style;
+            }
+          });
+
+        setLayersVisibilityApplied(true);
       }
     });
-  }, [appTopics, layersVisibility]);
+  }, [appTopics, layersVisibility, activeTopicKey]);
 
-  if (!appTopics) {
+  if (!appTopics || !layersVisibilityApplied) {
     return null;
   }
 

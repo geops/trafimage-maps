@@ -198,8 +198,8 @@ class TopicMenu extends PureComponent {
                   fullWidth
                   value={
                     currentBaseLayerKey ||
-                    currentBaseLayer.name ||
-                    currentBaseLayer.key
+                    currentBaseLayer?.name ||
+                    currentBaseLayer?.key
                   }
                   onChange={(evt) => {
                     const { value } = evt.target;

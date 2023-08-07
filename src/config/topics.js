@@ -34,6 +34,7 @@ import StsMenu from '../menus/StsMenu';
 import { DV_KEY } from '../utils/constants';
 import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
 import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
+import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
 
 // For backward compatibility
 export {
@@ -433,6 +434,13 @@ const topics = {
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],
 };
+
+topics.wkp.forEach((topic) => {
+  applPermalinkVisiblity(
+    topic.layers,
+    (pathname) => pathname?.indexOf(`/${topic.key}`) !== -1,
+  );
+});
 
 export const getTopicConfig = (name) => {
   return topics[name];
