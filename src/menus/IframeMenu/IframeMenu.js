@@ -14,24 +14,17 @@ const IFRAME_OVERLAY_DEFAULT_HEIGHT = 300;
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
 
-const useStyles = makeStyles(() => {
+const stylesContainer = {
+  boxSizing: 'border-box',
+  backgroundColor: 'white',
+  boxShadow: (props) => (props.displayMenu ? boxShadow : null),
+  borderRadius: 8,
+  overflow: 'hidden',
+};
+const useStyles = makeStyles((theme) => {
   return {
-    dropdownToggler: {
-      backgroundColor: 'white',
-      padding: '6px 10px',
-      '&:hover': {
-        backgroundColor: 'white',
-      },
-    },
-    container: {
-      backgroundColor: 'white',
-      boxSizing: 'border-box',
-      overflow: 'hidden',
-      boxShadow: (props) => (props.displayMenu ? boxShadow : null),
-      borderRadius: 8,
-    },
+    menuHeader: stylesContainer,
     menuContent: {
-      backgroundColor: 'white',
       height: (props) =>
         props.featureSelected && !props.isMobile
           ? 'calc(100vh - 30px)'
@@ -41,8 +34,10 @@ const useStyles = makeStyles(() => {
       padding: '50px 0 0',
     },
     featureInfo: {
-      overflow: 'hidden',
-      height: (props) => `calc(100vh - ${props.headerHeight + 30}px)`,
+      ...stylesContainer,
+      marginTop: (props) => (props.header ? 15 : 0),
+      height: (props) =>
+        `calc(100vh - ${props.header ? props.headerHeight + 40 : 25}px)`,
       '& > div': {
         scrollbarWidth: 'thin',
         '&::-webkit-scrollbar': {
@@ -59,7 +54,7 @@ const useStyles = makeStyles(() => {
     mobileHandleWrapper: {
       position: 'absolute',
       width: '100%',
-      height: 50,
+      height: OVERLAY_MIN_HEIGHT,
       top: 0,
       right: 0,
       zIndex: 1000,
@@ -67,29 +62,35 @@ const useStyles = makeStyles(() => {
     mobileHandle: {
       position: 'fixed',
       backgroundColor: '#f5f5f5',
+      borderBottom: `1px solid #F0F0F0`,
       width: 'inherit',
       height: 'inherit',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'flex-end',
+    },
+    mobileTitle: {
+      padding: '0 15px',
+      maxWidth: 'calc(100vw - 65px)',
     },
     closeBtn: {
       position: 'fixed',
       right: 0,
-      padding: 14,
-      marginRight: 4,
+      padding: '13px 10px',
+      marginRight: 2,
       zIndex: 1002,
+      height: OVERLAY_MIN_HEIGHT,
     },
-    layerSwitcher: {
-      padding: '15px 10px',
-    },
-    hide: {
-      display: 'none',
+    hide: { display: 'none' },
+    bottomFade: {
+      '&::after': {
+        ...theme.styles.bottomFade['&::after'],
+        borderRadius: 8,
+      },
     },
   };
 });
 
-function IframeMenu({ header, body, hide }) {
+function IframeMenu({ header, body, hide, title }) {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const displayMenu = useSelector((state) => state.app.displayMenu);
@@ -101,6 +102,8 @@ function IframeMenu({ header, body, hide }) {
     featureSelected: featureInfo?.length,
     isMobile,
     headerHeight,
+    header,
+    title,
   });
 
   useEffect(() => {
@@ -110,7 +113,7 @@ function IframeMenu({ header, body, hide }) {
   }, [featureInfo, isMobile, dispatch]);
 
   return (
-    <div className={`${classes.container}${hide ? ` ${classes.hide}` : ''}`}>
+    <div className={hide ? classes.hide : ''}>
       {displayMenu && (
         <div className={classes.menuContent}>
           <div
@@ -120,7 +123,10 @@ function IframeMenu({ header, body, hide }) {
             {header}
           </div>
           {!isMobile && featureInfo?.length ? (
-            <div className={classes.featureInfo}>{body}</div>
+            <div className={`${classes.featureInfo} ${classes.bottomFade}`}>
+              {title}
+              {body}
+            </div>
           ) : null}
         </div>
       )}
@@ -141,7 +147,9 @@ function IframeMenu({ header, body, hide }) {
           }}
         >
           <div className={classes.mobileHandleWrapper}>
-            <div className={classes.mobileHandle} />
+            <div className={classes.mobileHandle}>
+              {title ? <b className={classes.mobileTitle}>{title}</b> : null}
+            </div>
           </div>
           <IconButton
             size="medium"
@@ -168,12 +176,14 @@ IframeMenu.propTypes = {
   header: PropTypes.node,
   body: PropTypes.node,
   hide: PropTypes.bool,
+  title: PropTypes.node,
 };
 
 IframeMenu.defaultProps = {
   header: null,
   body: null,
   hide: false,
+  title: null,
 };
 
 export default IframeMenu;

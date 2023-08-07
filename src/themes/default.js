@@ -9,6 +9,23 @@ const colors = {
   lightGray: '#e5e5e5',
 };
 
+const styles = {
+  bottomFade: {
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      zIndex: 10,
+      bottom: -5,
+      left: 0,
+      pointerEvents: 'none',
+      backgroundImage:
+        'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)',
+      width: 'calc(100% - 6px)',
+      height: '5em',
+    },
+  },
+};
+
 const breakpointValues = {
   xs: 0,
   sm: 576,
@@ -45,6 +62,7 @@ const themeSpacing = (value) => {
 
 const theme = createTheme({
   colors,
+  styles,
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {

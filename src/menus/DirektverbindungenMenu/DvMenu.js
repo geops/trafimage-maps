@@ -1,18 +1,27 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Divider, makeStyles } from '@material-ui/core';
+import { makeStyles, Divider } from '@material-ui/core';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
 import DvLayerSwitcher from './DvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';
 import IframeMenu from '../IframeMenu';
 import useIsMobile from '../../utils/useIsMobile';
 import useHighlightLayer from '../../utils/useHighlightLayer';
+import DvFeatureInfoTitle from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
 
 const useStyles = makeStyles(() => {
   return {
     wrapper: {
-      padding: '15px 10px',
+      padding: 15,
+    },
+    listHeader: {
+      padding: '5px 12px',
+      fontSize: 16,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: '#f5f5f5',
     },
   };
 });
@@ -67,10 +76,11 @@ function DvMenu() {
     <IframeMenu
       hide={hideMenu}
       header={showSwitcher ? switcher : null}
+      title={<DvFeatureInfoTitle />}
       body={
         <>
           {showSwitcher && isMobile ? switcher : null}
-          {showSwitcher ? <Divider /> : null}
+          {showSwitcher && isMobile ? <Divider /> : null}
           <DvFeatureInfo filterByType />
         </>
       }
