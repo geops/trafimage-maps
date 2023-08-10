@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.12](https://github.com/geops/trafimage-maps/compare/v1.21.11...v1.21.12) (2023-08-10)
+
+### Bug Fixes
+
+- **Direktverbindungen:** enable click on labels and overlay vias, use new IPV style ([#1091](https://github.com/geops/trafimage-maps/issues/1091)) ([51d5de5](https://github.com/geops/trafimage-maps/commit/51d5de58cce92215f97f078c13df39ec8f14f2f5))
+- ignore negative delays in punctuality layer ([#1099](https://github.com/geops/trafimage-maps/issues/1099)) ([456a9aa](https://github.com/geops/trafimage-maps/commit/456a9aa3f0f30bd2a4a42a63ca56abb469c83052))
+
 ### [1.21.11](https://github.com/geops/trafimage-maps/compare/v1.21.10...v1.21.11) (2023-08-01)
 
 ### Bug Fixes
