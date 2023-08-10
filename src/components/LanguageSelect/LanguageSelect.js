@@ -4,6 +4,7 @@ import { makeStyles, MenuItem } from '@material-ui/core';
 import Select from '../Select';
 import { setLanguage } from '../../model/app/actions';
 import { ReactComponent as SBBGlobe } from '../../img/sbb/globe_210_large.svg';
+import useIsMobile from '../../utils/useIsMobile';
 
 const optionsDesktop = [
   { label: 'Deutsch', value: 'de' },
@@ -50,11 +51,7 @@ const useStyles = makeStyles((theme) => ({
 const LanguageSelect = () => {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobileWidth = useMemo(
-    () => ['xs', 's'].includes(screenWidth),
-    [screenWidth],
-  );
+  const isMobileWidth = useIsMobile();
   const classes = useStyles({ isMobileWidth });
   const options = isMobileWidth ? optionsMobile : optionsDesktop;
   const inputValue = useMemo(

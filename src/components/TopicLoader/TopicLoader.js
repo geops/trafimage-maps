@@ -231,7 +231,14 @@ class TopicLoader extends PureComponent {
     unByKey(this.onChangeVisibleKeys);
     this.onChangeVisibleKeys = new LayerService(layers)
       .getLayersAsFlatArray()
-      .map((layer) => layer.on('change:visible', this.updateMapLimits));
+      .map((layer) =>
+        layer.on('change:visible', () => {
+          this.updateMapLimits();
+          if (layer.get('deselectOnChangeVisible')) {
+            dispatchSetFeatureInfo([]);
+          }
+        }),
+      );
     this.updateMapLimits();
     dispatchSetSearchService(newSearchService);
   }

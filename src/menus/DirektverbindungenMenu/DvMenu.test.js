@@ -3,21 +3,30 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { render, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/core';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
 import OLMap from 'ol/Map';
 import DvMenu from './DvMenu';
 import { direktverbindungenIframe } from '../../config/topics';
 import dvLayers from '../../config/ch.sbb.direktverbindungen';
 import { DV_KEY } from '../../utils/constants';
+import highlightPointStyle from '../../utils/highlightPointStyle';
+import theme from '../../themes/default';
 
 describe('DvMenu', () => {
   const mockStore = configureStore([thunk]);
   let store;
+  const highlightLayer = new VectorLayer({
+    source: new VectorSource({ features: [] }),
+  });
+  highlightLayer.setStyle(highlightPointStyle);
 
   beforeEach(() => {
     dvLayers.find((layer) => layer.get('isBaseLayer')).url =
       'https://foo-maps.io';
     store = mockStore({
-      map: { layers: dvLayers },
+      map: { layers: dvLayers, highlightLayer },
       app: {
         map: new OLMap({}),
         activeTopic: direktverbindungenIframe,
@@ -29,9 +38,11 @@ describe('DvMenu', () => {
 
   test('should render two checked switches for two visible layers and deactivate on click', () => {
     const { getByTestId } = render(
-      <Provider store={store}>
-        <DvMenu />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DvMenu />
+        </Provider>
+      </ThemeProvider>,
     );
 
     expect(getByTestId('dv-layerswitcher')).toBeTruthy();
@@ -54,7 +65,7 @@ describe('DvMenu', () => {
 
   test('should not hide menu on mobile', () => {
     store = mockStore({
-      map: { layers: dvLayers },
+      map: { layers: dvLayers, highlightLayer },
       app: {
         map: new OLMap({}),
         activeTopic: direktverbindungenIframe,
@@ -64,9 +75,11 @@ describe('DvMenu', () => {
       },
     });
     render(
-      <Provider store={store}>
-        <DvMenu />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DvMenu />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(store.getActions()[0]).toEqual({
       type: 'SET_DISPLAY_MENU',

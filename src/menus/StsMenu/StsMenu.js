@@ -18,8 +18,15 @@ import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo'
 import StsValidityFeatureInfo from './StsValidityFeatureInfo';
 import IframeMenu from '../IframeMenu';
 import stsLayers from '../../config/ch.sbb.sts';
-import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
-import { DV_HIT_TOLERANCE, STS_HIT_TOLERANCE } from '../../utils/constants';
+import { setFeatureInfo } from '../../model/app/actions';
+import {
+  DV_HIT_TOLERANCE,
+  DV_KEY,
+  STS_HIT_TOLERANCE,
+} from '../../utils/constants';
+import useIsMobile from '../../utils/useIsMobile';
+import useHighlightLayer from '../../utils/useHighlightLayer';
+import DvFeatureInfoTitle from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
 
 const boxShadow =
   '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
@@ -58,7 +65,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const updateLayers = (key = 'sts') => {
+const updateLayers = (key = 'sts', baseLayer) => {
   if (key === 'sts') {
     stsLayers.forEach((layer) => {
       layer.visible =
@@ -72,6 +79,11 @@ const updateLayers = (key = 'sts') => {
       layer.visible = /(ch\.sbb\.(ipv|direktverbindungen)|\.data)/.test(
         layer.key,
       );
+      if (layer.key === `${DV_KEY}.main` && baseLayer?.mbMap) {
+        baseLayer.mbMap.once('idle', () => {
+          layer.syncFeatures();
+        });
+      }
     });
   }
 };
@@ -80,18 +92,16 @@ function StsTopicMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const layers = useSelector((state) => state.map.layers);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile;
   const [activeMenu, setActiveMenu] = useState('sts');
   const [anchorEl, setAnchorEl] = useState();
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const baseLayer = useMemo(() => {
     const bl = stsLayers.find((layer) => layer.get('isBaseLayer'));
     // Since we update the style dynamically on menu switch
     // we update the layers once the style has loaded
-    bl.onStyleLoaded = () => updateLayers(activeMenu);
+    bl.onStyleLoaded = () => updateLayers(activeMenu, bl);
     return bl;
   }, [activeMenu]);
 
@@ -122,12 +132,6 @@ function StsTopicMenu() {
   );
 
   useEffect(() => {
-    if (featureInfo?.length) {
-      dispatch(setDisplayMenu(!isMobile));
-    }
-  }, [featureInfo, isMobile, dispatch]);
-
-  useEffect(() => {
     if (activeMenu === 'dv') {
       baseLayer.setStyle('base_bright_v2_direktverbindungen');
       baseLayer.hitTolerance = DV_HIT_TOLERANCE;
@@ -143,6 +147,9 @@ function StsTopicMenu() {
     dispatch(setFeatureInfo([]));
     setAnchorEl(null);
   };
+
+  // Hook to highlight map features
+  useHighlightLayer(featureInfo, highlightLayer);
 
   return (
     <IframeMenu
@@ -195,6 +202,7 @@ function StsTopicMenu() {
           </>
         )
       }
+      title={activeMenu === 'dv' ? <DvFeatureInfoTitle /> : null}
       body={
         <>
           {isMobile ? null : <Divider />}

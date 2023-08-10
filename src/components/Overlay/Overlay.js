@@ -13,6 +13,7 @@ import FeatureInformation from '../FeatureInformation';
 import { setFeatureInfo } from '../../model/app/actions';
 import usePrevious from '../../utils/usePrevious';
 import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
+import useIsMobile from '../../utils/useIsMobile';
 
 const useStyles = makeStyles((theme) => ({
   drawerRoot: {
@@ -98,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
       transform: 'translate(calc(-50% + 30px), -50%)',
       position: 'absolute',
       borderRadius: 5,
-      backgroundColor: theme.colors.lightgray,
+      backgroundColor: theme.colors.lighterGray,
     },
   },
   resizeResetButton: {
@@ -158,10 +159,7 @@ const Overlay = ({
   const resizeRef = useRef(null);
   const [isSnapSmooth, setSnapSmooth] = useState(false);
   const { defaultSize } = ResizableProps;
-
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
 
   const isSmallerThanMd = useMemo(() => {
     return ['xs', 's', 'm'].includes(screenWidth);

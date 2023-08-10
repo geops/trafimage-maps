@@ -331,6 +331,7 @@ export const sts = {
   center: [915788.3813658276, 5909670.533831286],
   zoom: 8,
   constrainOnlyCenter: true,
+  overlaySide: 'left',
 };
 
 export const direktverbindungen = {
@@ -377,6 +378,7 @@ export const direktverbindungenIframe = {
   hideInLayerTree: true,
   menu: <DvMenu />,
   mapControls: <DvListButton />,
+  overlaySide: 'left',
 };
 
 const topics = {
