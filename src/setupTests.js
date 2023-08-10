@@ -1,4 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
+import 'jest-canvas-mock';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '@testing-library/jest-dom';
