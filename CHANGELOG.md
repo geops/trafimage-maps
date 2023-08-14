@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.13](https://github.com/geops/trafimage-maps/compare/v1.21.12...v1.21.13) (2023-08-14)
+
+### Bug Fixes
+
+- **Netzkarte Sandbox:** clone Netzkarte layers in sandbox topic to prevent residuals on topic switch ([#1100](https://github.com/geops/trafimage-maps/issues/1100)) ([a8017df](https://github.com/geops/trafimage-maps/commit/a8017df68d45c710ddbeecbff4e534b7a1ac227f))
+
 ### [1.21.12](https://github.com/geops/trafimage-maps/compare/v1.21.11...v1.21.12) (2023-08-10)
 
 ### Bug Fixes
