@@ -226,9 +226,7 @@ if (!punctuality.permalinkFilter) {
       properties: {
         filter: ({ properties }) => {
           const { type, line } = properties;
-          return (
-            type === 'rail' && /^(S|R$|RE|PE|D|IRE|RB|TER)/.test(line?.name)
-          );
+          return type === 'rail' && !/(IR|IC|EC|RJX|TGV)/.test(line?.name);
         },
       },
     }),
