@@ -6,9 +6,12 @@ import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { IconButton, Typography } from '@material-ui/core';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
+import useIsMobile from '../../utils/useIsMobile';
 import SearchToggle from './SearchToggle';
 
 import './Search.scss';
+
+const mobileMapPadding = [50, 50, 50, 50];
 
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
@@ -16,6 +19,7 @@ function Search() {
   const map = useSelector((state) => state.app.map);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const searchService = useSelector((state) => state.app.searchService);
+  const isMobile = useIsMobile();
   const searchContainerRef = useRef();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -63,7 +67,10 @@ function Search() {
           }
           onSuggestionSelected={(e, { suggestion }) => {
             dispatch(setFeatureInfo());
-            searchService.select(suggestion);
+            searchService.select(
+              suggestion,
+              isMobile ? mobileMapPadding : undefined,
+            );
             dispatch(setSearchOpen(false));
           }}
           getSuggestionValue={(suggestion) => searchService.value(suggestion)}
@@ -113,7 +120,10 @@ function Search() {
                 if (filtered.length > 0) {
                   const { items, section } = filtered[0];
                   dispatch(setSearchOpen(false));
-                  searchService.select({ ...items[0], section });
+                  searchService.select(
+                    { ...items[0], section },
+                    isMobile ? mobileMapPadding : undefined,
+                  );
                 }
               } else if (key === 'ArrowDown' || key === 'ArrowUp') {
                 searchService.highlightSection(); // for improved accessibility
@@ -168,7 +178,10 @@ function Search() {
 
                     if (searchService.selectItem) {
                       // Will zoom on the current selected feature
-                      searchService.select(searchService.selectItem);
+                      searchService.select(
+                        searchService.selectItem,
+                        isMobile ? mobileMapPadding : undefined,
+                      );
                     }
 
                     // Launch a search
@@ -180,7 +193,10 @@ function Search() {
                         if (result) {
                           const { items, section } = result;
                           dispatch(setSearchOpen(false));
-                          searchService.select({ ...items[0], section });
+                          searchService.select(
+                            { ...items[0], section },
+                            isMobile ? mobileMapPadding : undefined,
+                          );
                         }
                       });
                     }

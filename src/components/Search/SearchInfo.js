@@ -115,7 +115,11 @@ function SearchInfo({ anchorEl }) {
   return (
     <div className={classes.searchInfoOuterWrapper}>
       <div className={classes.searchInfoInnerWrapper}>
-        <IconButton className={classes.searchInfoBtn} onClick={togglePopup}>
+        <IconButton
+          className={classes.searchInfoBtn}
+          onClick={togglePopup}
+          title={t('Suche-Info')}
+        >
           <QuestionIcon />
         </IconButton>
         {anchorEl && (
