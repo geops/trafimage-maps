@@ -217,7 +217,7 @@
   "ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen": "Grüne Grenzlinie",
   "ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen": "Graue Grenzlinie",
   "ch.sbb.infrastruktur.kantonsgrenzen.group": "Kantonsgrenzen",
-  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Kantonsgrenzen</p><p>Daten:<br/>OpenStreetMap (01.01.2018)</p>",
+  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Kantonsgrenzen</p><p>Daten:<br/>OpenStreetMap (wöchentliche Aktualisierung)</p>",
   "ch.sbb.infrastruktur.line_point": "Strecken",
   "ch.sbb.infrastruktur.line_point-desc": "Eine Strecke verbindet zwei benachbarte Betriebspunkte. Auf eine Strecke können mehrere Gleise referenzieren.",
   "ch.sbb.infrastruktur.overlay.group": "Strecken und Betriebspunkte",

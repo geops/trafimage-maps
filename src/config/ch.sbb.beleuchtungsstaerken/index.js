@@ -106,7 +106,6 @@ const mapsGeoAdminSchutzgebieteLayerKeys = [
   'ch.bafu.schutzgebiete-smaragd',
   'ch.bafu.schutzgebiete-paerke_nationaler_bedeutung_perimeter',
   'ch.bafu.schutzgebiete-ramsar',
-  'ch.pronatura.waldreservate',
   'ch.pronatura.naturschutzgebiete',
   'ch.bafu.schutzgebiete-biosphaerenreservate',
 ];

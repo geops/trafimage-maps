@@ -238,7 +238,7 @@
   "ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen": "Linea di confine in verde",
   "ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen": "Linea di confine in grigio",
   "ch.sbb.infrastruktur.kantonsgrenzen.group": "Confini cantonali",
-  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Confini cantonali</p><p>Dati:<br/>OpenStreetMap (01.01.2018)</p>",
+  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Confini cantonali</p><p>Dati:<br/>OpenStreetMap (aggiornamento settimanale)</p>",
   "ch.sbb.infrastruktur.line_point": "Tratte",
   "ch.sbb.infrastruktur.line_point-desc": "Una tratta collega due punti d’esercizio vicini; a una tratta possono essere associati vari binari.",
   "ch.sbb.infrastruktur.overlay.group-desc": "Questo gruppo di layer comprende i punti d’esercizio, le tratte e le numeri di linea dell’infrastruttura operati dalle FFS, dalle sue società affiliate e da altre ferrovie.",

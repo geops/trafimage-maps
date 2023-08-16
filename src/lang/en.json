@@ -227,7 +227,7 @@
   "ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen": "Green border line",
   "ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen": "Grey border line",
   "ch.sbb.infrastruktur.kantonsgrenzen.group": "Cantonal borders",
-  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Cantonal borders</p><p>Data:<br/>OpenStreetMap (01.01.2018)</p>",
+  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Cantonal borders</p><p>Data:<br/>OpenStreetMap (weekly update)</p>",
   "ch.sbb.infrastruktur.line_point": "Routes",
   "ch.sbb.infrastruktur.line_point-desc": "A route connects two neighbouring operating points. Several tracks may reference one route.",
   "ch.sbb.infrastruktur.overlay.group-desc": "This layer group comprises the operating points, routes, and line numbers of the infrastructure operated by SBB, its subsidiaries and other railway companies.",

@@ -238,7 +238,7 @@
   "ch.sbb.infrastruktur.kantonsgrenzen.greengrenzen": "Ligne de démarcation verte",
   "ch.sbb.infrastruktur.kantonsgrenzen.greygrenzen": "Ligne de démarcation grise",
   "ch.sbb.infrastruktur.kantonsgrenzen.group": "Limites cantonales",
-  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Limites cantonales</p><p>Données:<br/>OpenStreetMap (01.01.2018)</p>",
+  "ch.sbb.infrastruktur.kantonsgrenzen.group-desc": "<p>Limites cantonales</p><p>Données:<br/>OpenStreetMap (mise à jour hebdomadaire)</p>",
   "ch.sbb.infrastruktur.line_point": "Lignes",
   "ch.sbb.infrastruktur.line_point-desc": "Un tronçon relie deux points d’exploitation voisins. Plusieurs voies peuvent être référencées sur un même tronçon.",
   "ch.sbb.infrastruktur.overlay.group-desc": "Ce groupe de layers comprend les points d’exploitation, les tronçons et les numéros des lignes des infrastructures exploitées par les CFF, leurs filiales et les autres entreprises de chemin de fer.",

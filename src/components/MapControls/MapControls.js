@@ -193,7 +193,7 @@ const MapControls = ({
         zoomSlider={zoomSlider}
         titles={{
           zoomIn: t('Hineinzoomen'),
-          zoomOut: t('Hinauszoomen'),
+          zoomOut: t('Rauszoomen'),
         }}
       />
       {geolocation && (
