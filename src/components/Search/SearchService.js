@@ -115,7 +115,7 @@ class SearchService {
     return this.searches[item.section].render(item);
   }
 
-  select(item) {
+  select(item, padding = [120, 50, 50, 50]) {
     // If item is not defined, we zoom on the current highlighted feature.
     this.searches[item.section].select(item);
     this.selectItem = item;
@@ -136,7 +136,7 @@ class SearchService {
 
     this.popupItem = item;
     this.map.getView().fit(this.selectLayer.getSource().getExtent(), {
-      padding: [50, 50, 50, 50],
+      padding,
       maxZoom: 15.6,
       callback: () => {
         this.searches[item.section].openPopup(this.popupItem);

@@ -99,7 +99,8 @@ const MapsGeoAdminLayerInfo = ({ language, t, properties }) => {
             className="wkp-maps-geo-admin-layer-info-img"
             dangerouslySetInnerHTML={{
               __html:
-                legendHtml.getElementsByClassName('img-container')[0].innerHTML,
+                legendHtml.getElementsByClassName('img-container')[0]
+                  ?.innerHTML,
             }}
           />
         )}
