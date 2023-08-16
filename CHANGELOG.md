@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.14](https://github.com/geops/trafimage-maps/compare/v1.21.13...v1.21.14) (2023-08-16)
+
+### Bug Fixes
+
+- add aria-labels to buttons, fix Login and LanguageSwitcher tab sequence, update text content ([#1102](https://github.com/geops/trafimage-maps/issues/1102)) ([3a55a11](https://github.com/geops/trafimage-maps/commit/3a55a11e8e5da9fd86cd84091e791a6472fcf5f6))
+- **punctuality:** redefine stylelayersFilter for regional trains in tracker ([#1101](https://github.com/geops/trafimage-maps/issues/1101)) ([df1186c](https://github.com/geops/trafimage-maps/commit/df1186c36631763ca1e149503666c0f34eb08605))
+
 ### [1.21.13](https://github.com/geops/trafimage-maps/compare/v1.21.12...v1.21.13) (2023-08-14)
 
 ### Bug Fixes
