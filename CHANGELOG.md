@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.15](https://github.com/geops/trafimage-maps/compare/v1.21.14...v1.21.15) (2023-08-17)
+
+### Bug Fixes
+
+- **STS:** ensure hidden layers visibility is applied after switch from STS DV to STS validity ([#1103](https://github.com/geops/trafimage-maps/issues/1103)) ([3c5552c](https://github.com/geops/trafimage-maps/commit/3c5552c2d91f0c127c8b41413c4456ffad44fd3b))
+
 ### [1.21.14](https://github.com/geops/trafimage-maps/compare/v1.21.13...v1.21.14) (2023-08-16)
 
 ### Bug Fixes
