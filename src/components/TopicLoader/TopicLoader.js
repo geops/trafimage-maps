@@ -231,7 +231,14 @@ class TopicLoader extends PureComponent {
     unByKey(this.onChangeVisibleKeys);
     this.onChangeVisibleKeys = new LayerService(layers)
       .getLayersAsFlatArray()
-      .map((layer) => layer.on('change:visible', this.updateMapLimits));
+      .map((layer) =>
+        layer.on('change:visible', () => {
+          this.updateMapLimits();
+          if (layer.get('deselectOnChangeVisible')) {
+            dispatchSetFeatureInfo([]);
+          }
+        }),
+      );
     this.updateMapLimits();
     dispatchSetSearchService(newSearchService);
   }
@@ -318,9 +325,6 @@ class TopicLoader extends PureComponent {
 
     const topicLayers = activeTopic.layers;
     const layerAsFlatArray = new LayerService(layers).getLayersAsFlatArray();
-    const [currentBaseLayer] = layerAsFlatArray.filter(
-      (l) => l.get('isBaseLayer') && l.visible,
-    );
 
     // In case you set the topics after the default topics are loaded, you'll loose
     // the layers visibility set initially by the permalink parameters.
@@ -335,22 +339,15 @@ class TopicLoader extends PureComponent {
       });
     });
 
-    const visibleBaseLayers = topicLayers.filter(
-      (l) => l.get('isBaseLayer') && l.visible,
-    );
+    const topicBaseLayers = topicLayers.filter((l) => l.get('isBaseLayer'));
+    const visibleBaseLayers = topicLayers.filter((l) => l.visible);
 
     // Make sure a base layer is a visible on topic change
-    if (
-      !visibleBaseLayers.length ||
-      (currentBaseLayer && visibleBaseLayers.indexOf(currentBaseLayer) === -1)
-    ) {
-      topicLayers
-        .filter((l) => l.get('isBaseLayer'))
-        .forEach((lay, idx) => {
-          // lay.setVisible(idx === 0);
-          // eslint-disable-next-line no-param-reassign
-          lay.visible = idx === 0;
-        });
+    if (!visibleBaseLayers.length) {
+      if (topicBaseLayers.length) {
+        // set the first base layer visible
+        topicBaseLayers[0].visible = true;
+      }
     }
 
     // Layers to display

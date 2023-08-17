@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => {
       flexShrink: 0,
       width: (props) => props.iconSize || 15,
       height: (props) => props.iconSize || 15,
-      border: `1px solid ${theme.colors.lightgray}`,
+      border: `1px solid ${theme.colors.lighterGray}`,
     },
   };
 });

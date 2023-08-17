@@ -16,6 +16,7 @@ const FILTER_LINE_VALUE = 'sts.line'; // style using nova daten
 const STS_DATA_LAYER_KEY = 'ch.sbb.sts.data';
 const HIGHLIGHTS_LAYER_KEY = 'ch.sbb.sts.validity.highlights';
 const ROUTES_HIGHLIGHT_LAYER_KEY = 'ch.sbb.sts.validity.routes_highlight';
+const STS_HIDDEN_ROUTES_LAYER_KEY = 'ch.sbb.sts.validity.hidden';
 const OTHER_LAYER_KEY = 'ch.sbb.sts.validity.other';
 const GTTOS_LAYER_KEY = 'ch.sbb.sts.validity.gttos';
 const PREMIUM_LAYER_KEY = 'ch.sbb.sts.validity.premium';
@@ -65,6 +66,7 @@ export const highlightRoutes = new HighlightRoutesLayer({
 // Hide the routes displayed by default like gqa ones
 const hiddenRoutes = new MapboxStyleLayer({
   name: 'Hidden routes',
+  key: STS_HIDDEN_ROUTES_LAYER_KEY,
   mapboxLayer: stsDataLayer,
   visible: false,
   styleLayersFilter: ({ metadata, id }) =>
@@ -173,6 +175,7 @@ export const stsDvMain = new DirektverbindungenLayer({
     popupComponent: 'DvPopup',
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
+    highlightPointFeatureFilter: () => false,
   },
 });
 

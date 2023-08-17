@@ -1,3 +1,6 @@
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import highlightPointStyle from '../../utils/highlightPointStyle';
 import DrawLayer from '../../layers/DrawLayer';
 import {
   SET_LAYERS,
@@ -9,9 +12,15 @@ import {
   SET_MIN_ZOOM,
 } from './actions';
 
+const highlightLayer = new VectorLayer({
+  source: new VectorSource({ features: [] }),
+});
+highlightLayer.setStyle(highlightPointStyle);
+
 const initialState = {
   layers: [],
   drawLayer: new DrawLayer(),
+  highlightLayer,
 };
 
 export default function app(state = initialState, action) {

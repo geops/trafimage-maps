@@ -13,6 +13,7 @@ import {
 } from '../../config/ch.sbb.sts';
 import { parseFeaturesInfos } from '../../utils/stsParseFeatureInfo';
 import panCenterFeature from '../../utils/panCenterFeature';
+import useIsMobile from '../../utils/useIsMobile';
 
 const useStyles = makeStyles(() => {
   return {
@@ -58,11 +59,8 @@ const useFetchTours = (select) => {
 function StsValidityFeatureInfo({ menuOpen }) {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const map = useSelector((state) => state.app.map);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
 
   const [selectedFeature, setSelectedFeature] = useState();
   const previousSelectedFeature = usePrevious(selectedFeature);

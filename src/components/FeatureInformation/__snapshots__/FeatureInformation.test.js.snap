@@ -29,14 +29,14 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       tabIndex={0}
-      title="Popup schliessen"
+      title="Schliessen"
       type="button"
     >
       <span
         className="MuiIconButton-label"
       >
         <svg
-          alt="Popup schliessen"
+          alt="Schliessen"
           fill="currentColor"
           focusable={false}
           height="1em"
@@ -192,14 +192,14 @@ exports[`FeatureInformation should match snapshot. using the info's popupCompone
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       tabIndex={0}
-      title="Popup schliessen"
+      title="Schliessen"
       type="button"
     >
       <span
         className="MuiIconButton-label"
       >
         <svg
-          alt="Popup schliessen"
+          alt="Schliessen"
           fill="currentColor"
           focusable={false}
           height="1em"
@@ -291,14 +291,14 @@ exports[`FeatureInformation should match snapshot. using the layers's popupCompo
       onTouchMove={[Function]}
       onTouchStart={[Function]}
       tabIndex={0}
-      title="Popup schliessen"
+      title="Schliessen"
       type="button"
     >
       <span
         className="MuiIconButton-label"
       >
         <svg
-          alt="Popup schliessen"
+          alt="Schliessen"
           fill="currentColor"
           focusable={false}
           height="1em"

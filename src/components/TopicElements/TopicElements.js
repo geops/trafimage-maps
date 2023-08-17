@@ -180,8 +180,8 @@ function TopicElements({ history }) {
           )}
         </EventConsumer>
         {elements.permalink && <Permalink history={history} />}
-        {elements.header && <Header loginUrl={loginUrl} />}
         {elements.search && <Search />}
+        {elements.header && <Header loginUrl={loginUrl} />}
         {elements.header && <TopicTelephoneInfos />}
         {elements.popup && <Popup />}
         {elements.mapControls && (

@@ -2,6 +2,51 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.15](https://github.com/geops/trafimage-maps/compare/v1.21.14...v1.21.15) (2023-08-17)
+
+### Bug Fixes
+
+- **STS:** ensure hidden layers visibility is applied after switch from STS DV to STS validity ([#1103](https://github.com/geops/trafimage-maps/issues/1103)) ([3c5552c](https://github.com/geops/trafimage-maps/commit/3c5552c2d91f0c127c8b41413c4456ffad44fd3b))
+
+### [1.21.14](https://github.com/geops/trafimage-maps/compare/v1.21.13...v1.21.14) (2023-08-16)
+
+### Bug Fixes
+
+- add aria-labels to buttons, fix Login and LanguageSwitcher tab sequence, update text content ([#1102](https://github.com/geops/trafimage-maps/issues/1102)) ([3a55a11](https://github.com/geops/trafimage-maps/commit/3a55a11e8e5da9fd86cd84091e791a6472fcf5f6))
+- **punctuality:** redefine stylelayersFilter for regional trains in tracker ([#1101](https://github.com/geops/trafimage-maps/issues/1101)) ([df1186c](https://github.com/geops/trafimage-maps/commit/df1186c36631763ca1e149503666c0f34eb08605))
+
+### [1.21.13](https://github.com/geops/trafimage-maps/compare/v1.21.12...v1.21.13) (2023-08-14)
+
+### Bug Fixes
+
+- **Netzkarte Sandbox:** clone Netzkarte layers in sandbox topic to prevent residuals on topic switch ([#1100](https://github.com/geops/trafimage-maps/issues/1100)) ([a8017df](https://github.com/geops/trafimage-maps/commit/a8017df68d45c710ddbeecbff4e534b7a1ac227f))
+
+### [1.21.12](https://github.com/geops/trafimage-maps/compare/v1.21.11...v1.21.12) (2023-08-10)
+
+### Bug Fixes
+
+- **Direktverbindungen:** enable click on labels and overlay vias, use new IPV style ([#1091](https://github.com/geops/trafimage-maps/issues/1091)) ([51d5de5](https://github.com/geops/trafimage-maps/commit/51d5de58cce92215f97f078c13df39ec8f14f2f5))
+- ignore negative delays in punctuality layer ([#1099](https://github.com/geops/trafimage-maps/issues/1099)) ([456a9aa](https://github.com/geops/trafimage-maps/commit/456a9aa3f0f30bd2a4a42a63ca56abb469c83052))
+
+### [1.21.11](https://github.com/geops/trafimage-maps/compare/v1.21.10...v1.21.11) (2023-08-01)
+
+### Bug Fixes
+
+- initialize properly the background visibility ([#1098](https://github.com/geops/trafimage-maps/issues/1098)) ([bca6c93](https://github.com/geops/trafimage-maps/commit/bca6c935b286d3ae0d206d6cb211a12ddf40ed38))
+
+### [1.21.10](https://github.com/geops/trafimage-maps/compare/v1.21.9...v1.21.10) (2023-07-12)
+
+### Bug Fixes
+
+- **Geltungsbereiche-STS:** remove Swiss Half Fare Card from Layer, LayerInfo and Overlay ([#1096](https://github.com/geops/trafimage-maps/issues/1096)) ([a3fabc5](https://github.com/geops/trafimage-maps/commit/a3fabc5677353fccab6ac8a71454c7a9774f8c96))
+
+### [1.21.9](https://github.com/geops/trafimage-maps/compare/v1.21.8...v1.21.9) (2023-07-06)
+
+### Bug Fixes
+
+- add missing translations ([5303131](https://github.com/geops/trafimage-maps/commit/5303131e746c219a8ad9a33791c8fadf3c758f7d))
+- deactivate elastic scroll effect on ios to allow propagation of scroll to the parent, only in embedded mode ([#1092](https://github.com/geops/trafimage-maps/issues/1092)) ([bb852db](https://github.com/geops/trafimage-maps/commit/bb852dbd23a212c7e3ce73669ac6006c584853c5))
+
 ### [1.21.8](https://github.com/geops/trafimage-maps/compare/v1.21.7...v1.21.8) (2023-06-26)
 
 ### Bug Fixes

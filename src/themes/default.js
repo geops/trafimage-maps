@@ -5,7 +5,25 @@ const colors = {
   redDark: '#c60018',
   black: '#000',
   gray: '#767676',
-  lightgray: '#b7b7b7',
+  lighterGray: '#b7b7b7',
+  lightGray: '#e5e5e5',
+};
+
+const styles = {
+  bottomFade: {
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      zIndex: 10,
+      bottom: -5,
+      left: 0,
+      pointerEvents: 'none',
+      backgroundImage:
+        'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)',
+      width: 'calc(100% - 6px)',
+      height: '5em',
+    },
+  },
 };
 
 const breakpointValues = {
@@ -44,6 +62,7 @@ const themeSpacing = (value) => {
 
 const theme = createTheme({
   colors,
+  styles,
   breakpoints: { values: breakpointValues },
   palette: {
     primary: {
@@ -213,11 +232,11 @@ const theme = createTheme({
       notchedOutline: {
         borderRadius: 2,
         borderWidth: 2,
-        borderColor: colors.lightgray,
+        borderColor: colors.lighterGray,
       },
       root: {
         '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: colors.lightgray,
+          borderColor: colors.lighterGray,
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
           borderColor: '#666',

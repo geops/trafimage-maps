@@ -2,12 +2,13 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Feature } from 'ol';
-import { makeStyles, IconButton } from '@material-ui/core';
+import { makeStyles, IconButton, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import ZoomOutMapIcon from '@material-ui/icons/ZoomOutMap';
 import DirektverbindungenLayer from '../../../layers/DirektverbindungenLayer';
 import { ReactComponent as TrainIconDay } from '../../../img/train-day.svg';
 import { ReactComponent as TrainIconNight } from '../../../img/train-night.svg';
+import useIsMobile from '../../../utils/useIsMobile';
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
@@ -56,15 +57,12 @@ const DvLineTitle = ({
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const isEmbeddedTopic = useMemo(() => {
     return /(-iframe|\.sts)$/.test(topic.key);
   }, [topic]);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
   const cartaroFeature = layer.allFeatures.find(
-    (feat) => feat.get('name') === feature.get('name'),
+    (feat) => feat.get('id') === feature.get('id'),
   );
   return (
     <div className={classes.titleWrapper}>
@@ -73,7 +71,7 @@ const DvLineTitle = ({
       ) : (
         <TrainIconDay className={classes.titleIcon} />
       )}
-      <span className={classes.title}>
+      <Typography className={classes.title}>
         {active ? (
           <>
             <b>{title}</b>
@@ -119,7 +117,7 @@ const DvLineTitle = ({
         ) : (
           title
         )}
-      </span>
+      </Typography>
     </div>
   );
 };

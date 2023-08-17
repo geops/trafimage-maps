@@ -12,8 +12,10 @@ import removeDuplicates, {
 } from '../../../utils/removeDuplicateFeatures';
 import parseDvFeatures from '../../../utils/dvParseFeatures';
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from '../../../utils/constants';
+import useIsMobile from '../../../utils/useIsMobile';
+import useDisableIosElasticScrollEffect from '../../../utils/useDisableIosElasticScrollEffect';
 
-const useStyles = makeStyles(() => {
+const useStyles = makeStyles((theme) => {
   return {
     root: {
       '&.wkp-menu-item': {
@@ -34,15 +36,12 @@ const useStyles = makeStyles(() => {
       maxHeight: (props) => (props.isMobile ? 200 : 400),
       position: 'relative',
       overflow: 'hidden',
+      pointerEvents: 'none',
       '&::after': {
-        content: '""',
-        position: 'absolute',
-        zIndex: 10,
+        ...theme.styles.bottomFade['&::after'],
         bottom: 0,
         left: 0,
         pointerEvents: 'none',
-        backgroundImage:
-          'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)',
         width: '100%',
         height: '10em',
       },
@@ -65,17 +64,16 @@ const useStyles = makeStyles(() => {
         width: '100%',
       },
     },
+    spacer: { height: 100 },
   };
 });
 
 function DvFeatureInfo({ filterByType }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
+  const embedded = useSelector((state) => state.app.embedded);
   const [infoKey, setInfoKey] = useState();
-  const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobile = useMemo(() => {
-    return ['xs'].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobile = useIsMobile();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
   const classes = useStyles({ isMobile });
@@ -83,6 +81,9 @@ function DvFeatureInfo({ filterByType }) {
     return teaser ? setTeaser(false) : undefined;
   }, [teaser]);
   const [revision, forceRender] = useState();
+  const [overflowNode, setOverflowNode] = useState();
+
+  useDisableIosElasticScrollEffect(embedded && overflowNode);
 
   const dvMainLayer = useMemo(
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
@@ -99,14 +100,30 @@ function DvFeatureInfo({ filterByType }) {
   );
 
   const dvFeatures = useMemo(() => {
-    const features = featureInfo.reduce((feats, info) => {
-      info.features.forEach((feat) => feat.set('layer', info.layer));
-      return [...feats, ...info.features];
-    }, []);
+    let features = [];
+    const dvInfo = featureInfo.find((i) => i.layer === dvMainLayer);
+    if (dvInfo && dvInfo.features.length !== 0) {
+      // When we click on a station/label we select the lines using the direktverbundung_ids
+      if (dvMainLayer.highlightedStation) {
+        const dvIds = JSON.parse(
+          dvMainLayer.highlightedStation.get('direktverbindung_ids') || '[]',
+        );
+        features = dvIds.map((id) => {
+          return dvMainLayer.allFeatures.find(
+            (f) => !!f.get('mapboxFeature') && getId(f) === id,
+          );
+        });
+      } else {
+        features = dvInfo.features.reduce((feats, feat) => {
+          const hasValidMapboxFeature =
+            feat?.get('mapboxFeature')?.sourceLayer ===
+            'ch.sbb.direktverbindungen_trips';
+          return hasValidMapboxFeature ? [...feats, feat] : feats;
+        }, []);
+      }
+    }
     features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
-    const cleaned = removeDuplicates(parseDvFeatures(features)).filter(
-      (feat) => !!feat.get('mapboxFeature'),
-    );
+    const cleaned = removeDuplicates(parseDvFeatures(features));
     return filterByType
       ? cleaned.filter(
           (feat) =>
@@ -115,7 +132,7 @@ function DvFeatureInfo({ filterByType }) {
             }),
         )
       : cleaned;
-  }, [featureInfo, filterByType, layersVisible]);
+  }, [featureInfo, filterByType, layersVisible, dvMainLayer]);
 
   const previousFeatureInfo = usePrevious(featureInfo);
   const previousDvFeatures = usePrevious(dvFeatures);
@@ -132,7 +149,7 @@ function DvFeatureInfo({ filterByType }) {
         (feat) => getId(feat) === previousInfoKey,
       );
       if (previousInfoKey) {
-        setInfoKey(previousSelectedFeature && getId(previousSelectedFeature));
+        setInfoKey(getId(previousSelectedFeature) || getId(dvFeatures[0]));
       }
     }
   }, [
@@ -163,22 +180,28 @@ function DvFeatureInfo({ filterByType }) {
     };
   }, [layers, revision]);
 
-  if (!dvFeatures?.length) {
-    return null;
-  }
+  useEffect(() => {
+    if (dvFeatures.length > 0 && infoKey) {
+      const selectedFeature = dvFeatures.find(
+        (feat) => getId(feat) === infoKey,
+      );
+      dvMainLayer.select(selectedFeature ? [selectedFeature] : []);
+    }
+  }, [dvFeatures, dvMainLayer, infoKey]);
+
+  if (!dvFeatures?.length) return null;
 
   return (
-    <div className={classes.featureInfos}>
+    <div
+      className={`${classes.featureInfos}`}
+      ref={(node) => setOverflowNode(node)}
+    >
       {dvFeatures.length > 1 ? (
         dvFeatures.map((feat) => {
           const id = getId(feat);
           const title = feat.get('name');
-          const layer = feat.get('layer');
           const isNightTrain = feat.get('line') === 'night';
           const active = infoKey === id;
-          if (active && dvMainLayer) {
-            dvMainLayer.select([feat]);
-          }
           return (
             <div
               key={id}
@@ -199,6 +222,15 @@ function DvFeatureInfo({ filterByType }) {
                   // We select the feature here instead of DvLineInfo
                   // to prevent excessive map layer rerenders.
                   dvMainLayer.select(open ? [] : [feat]);
+                  const vias = feat.get('vias');
+                  if (
+                    !vias.find(
+                      (via) =>
+                        via.uid === dvMainLayer.highlightedStation?.get('uid'),
+                    )
+                  ) {
+                    dvMainLayer.highlightStation();
+                  }
                 }}
                 className={`wkp-dv-feature-info ${classes.root}${
                   active && teaser ? ` ${classes.teaser}` : ''
@@ -230,7 +262,10 @@ function DvFeatureInfo({ filterByType }) {
                       : null
                   }
                 >
-                  <DvLineInfo feature={active ? feat : null} layer={layer} />
+                  <DvLineInfo
+                    feature={active ? feat : null}
+                    layer={dvMainLayer}
+                  />
                 </div>
               </MenuItem>
               <Divider />
@@ -249,13 +284,13 @@ function DvFeatureInfo({ filterByType }) {
             />
           </div>
           <div className={classes.featureInfoItem}>
-            <DvLineInfo
-              feature={dvFeatures[0]}
-              layer={dvFeatures[0].get('layer')}
-            />
+            <DvLineInfo feature={dvFeatures[0]} layer={dvMainLayer} />
           </div>
         </>
       )}
+      {!isMobile && dvFeatures.length ? (
+        <div className={classes.spacer} />
+      ) : null}
     </div>
   );
 }

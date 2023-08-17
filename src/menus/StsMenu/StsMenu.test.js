@@ -3,10 +3,15 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { render, within, fireEvent } from '@testing-library/react';
+import { ThemeProvider } from '@material-ui/core';
 import OLMap from 'ol/Map';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
 import StsMenu from './StsMenu';
 import { sts } from '../../config/topics';
 import stsLayers from '../../config/ch.sbb.sts';
+import highlightPointStyle from '../../utils/highlightPointStyle';
+import theme from '../../themes/default';
 
 describe('StsMenu', () => {
   const mockStore = configureStore([thunk]);
@@ -15,8 +20,12 @@ describe('StsMenu', () => {
   beforeEach(() => {
     stsLayers.find((layer) => layer.get('isBaseLayer')).url =
       'https://foo-maps.io';
+    const highlightLayer = new VectorLayer({
+      source: new VectorSource({ features: [] }),
+    });
+    highlightLayer.setStyle(highlightPointStyle);
     store = mockStore({
-      map: { layers: stsLayers },
+      map: { layers: stsLayers, highlightLayer },
       app: {
         map: new OLMap({}),
         activeTopic: sts,
@@ -28,9 +37,11 @@ describe('StsMenu', () => {
 
   test('should render the menu opener and sts validity layerswitcher on load', () => {
     const { getByTestId } = render(
-      <Provider store={store}>
-        <StsMenu />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <StsMenu />
+        </Provider>
+      </ThemeProvider>,
     );
 
     const opener = getByTestId('sts-menu-opener');
@@ -42,9 +53,11 @@ describe('StsMenu', () => {
 
   test('should switch to Direktverbindungen when switching in the menu', () => {
     const { getByTestId } = render(
-      <Provider store={store}>
-        <StsMenu />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <StsMenu />
+        </Provider>
+      </ThemeProvider>,
     );
 
     const opener = getByTestId('sts-menu-opener');
