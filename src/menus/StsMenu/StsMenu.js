@@ -69,9 +69,13 @@ const updateLayers = (key = 'sts', baseLayer) => {
   if (key === 'sts') {
     stsLayers.forEach((layer) => {
       layer.visible =
-        /(ch\.sbb\.sts\.validity(?!\.(highlights|premium)$)|\.data$)/.test(
+        /(ch\.sbb\.sts\.validity(?!\.(highlights|premium|hidden)$)|\.data$)/.test(
           layer.key,
         );
+      // Ensure layout visibility is applied after style url change (otherwise hidden layers will be displayed)
+      if (layer.applyLayoutVisibility) {
+        layer.applyLayoutVisibility();
+      }
     });
   }
   if (key === 'dv') {
