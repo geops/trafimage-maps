@@ -18,7 +18,7 @@ import iframeSearchParams from '../iframeSearchParams';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const baseUrl = 'https://maps.trafimage.ch';
+const baseUrl = 'https://trafimage-maps.sbb.ch';
 const topic = 'ch.sbb.geltungsbereiche-iframe';
 
 const App = () => {
