@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.16](https://github.com/geops/trafimage-maps/compare/v1.21.15...v1.21.16) (2023-08-31)
+
+### Bug Fixes
+
+- **energie:** add PDF export for Energie topics, update internal Energie overlay ([#1090](https://github.com/geops/trafimage-maps/issues/1090)) ([0d0a8e0](https://github.com/geops/trafimage-maps/commit/0d0a8e014ccbe475ab67c6405489a2e4e152ddf6))
+
 ### [1.21.15](https://github.com/geops/trafimage-maps/compare/v1.21.14...v1.21.15) (2023-08-17)
 
 ### Bug Fixes
