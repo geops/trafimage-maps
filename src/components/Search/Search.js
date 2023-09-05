@@ -111,7 +111,7 @@ function Search() {
           inputProps={{
             autoFocus: true,
             tabIndex: 0,
-            'aria-label': 'Suche',
+            'aria-label': t('Suchmaske'),
             onChange: (e, { newValue }) => setValue(newValue),
             onKeyUp: (e) => {
               const { key } = e;
@@ -168,7 +168,7 @@ function Search() {
                 )}
                 <IconButton
                   tabIndex={0}
-                  aria-label="Suche"
+                  aria-label={t('Suche starten')}
                   className="wkp-search-button wkp-search-button-submit"
                   onClick={() => {
                     if (!value) {
