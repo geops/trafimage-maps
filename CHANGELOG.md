@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.17](https://github.com/geops/trafimage-maps/compare/v1.21.16...v1.21.17) (2023-09-05)
+
+### Bug Fixes
+
+- **Search:** add aria-label translations for search input and button ([638579a](https://github.com/geops/trafimage-maps/commit/638579a0cea8f30ae6385ffd1cdd1641322ec595))
+
 ### [1.21.16](https://github.com/geops/trafimage-maps/compare/v1.21.15...v1.21.16) (2023-08-31)
 
 ### Bug Fixes
