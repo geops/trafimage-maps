@@ -52,6 +52,9 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
         olLayer: new OLVectorLayer({
           source: new VectorSource(),
         }),
+        properties: {
+          hideInLegend: true,
+        },
       }),
     ];
     super({ ...options, styleLayers, children });
