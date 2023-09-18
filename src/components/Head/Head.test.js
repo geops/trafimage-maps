@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import getStore from '../../model/store';
 import Head from '.';
 
-describe.only('Head', () => {
+describe('Head', () => {
   let store;
 
   beforeEach(() => {
