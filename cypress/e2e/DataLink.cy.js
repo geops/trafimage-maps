@@ -17,10 +17,12 @@ describe('A link to data', { browser: '!firefox' }, () => {
     cy.get('.wkp-menu-header', { timeout: 20000 }).click();
   });
 
-  it('is available for direktverbindung layer', () => {
+  it('is available for direktverbindung topic', () => {
     ignoreDataLinkError('https://data.sbb.ch');
     // Click info button
-    cy.get(':nth-child(1) > .rs-layer-tree-item > button').click();
+    cy.get(
+      ':nth-child(3) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
+    ).click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/direktverbindungen/information/"]',
     )
@@ -40,7 +42,7 @@ describe('A link to data', { browser: '!firefox' }, () => {
   it('is available for bahnhofplaene layer', () => {
     ignoreDataLinkError('https://data.sbb.ch');
     // Click info button
-    cy.get(':nth-child(2) > .rs-layer-tree-item > button').click();
+    cy.get(':nth-child(1) > .rs-layer-tree-item > button').click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/haltestelle-karte-trafimage/information/"]',
     )
@@ -61,8 +63,8 @@ describe('A link to data', { browser: '!firefox' }, () => {
     ignoreDataLinkError('https://reporting.sbb.ch');
 
     // Click info button
-    cy.get(':nth-child(5) > .rs-layer-tree-item > button').click();
-    cy.get('a[href="https://reporting.sbb.ch/bahnhoefe"]')
+    cy.get(':nth-child(4) > .rs-layer-tree-item > button').click();
+    cy.get('a[href="https://reporting.sbb.ch/verkehr?highlighted=row-243"]')
       .should(([a]) => {
         expect(a.textContent).to.equal(
           'Diesen Datensatz beziehen (SBB Statistikportal)',
@@ -72,14 +74,19 @@ describe('A link to data', { browser: '!firefox' }, () => {
         a.target = '_self';
       })
       .click();
-    cy.url().should('equal', 'https://reporting.sbb.ch/bahnhoefe');
+    cy.url().should(
+      'match',
+      new RegExp(
+        /https:\/\/reporting\.sbb\.ch\/verkehr\?highlighted=row-243.*/,
+      ),
+    );
   });
 
   it('is available for construction topic', () => {
     ignoreDataLinkError('https://data.sbb.ch');
     // Click info button
     cy.get(
-      ':nth-child(4) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
+      ':nth-child(5) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
     ).click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/construction-projects/information/"]',
@@ -101,7 +108,7 @@ describe('A link to data', { browser: '!firefox' }, () => {
     ignoreDataLinkError('https://data.sbb.ch');
     // Click info button
     cy.get(
-      ':nth-child(8) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
+      ':nth-child(9) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
     ).click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/infrastrukturbetreiberinnen/information/"]',
@@ -130,7 +137,7 @@ describe('A link to data', { browser: '!firefox' }, () => {
     });
     // Click info button
     cy.get(
-      ':nth-child(5) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
+      ':nth-child(6) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button',
     ).click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/"]',
