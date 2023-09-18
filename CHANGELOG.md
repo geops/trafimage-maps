@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.18](https://github.com/geops/trafimage-maps/compare/v1.21.17...v1.21.18) (2023-09-18)
+
+### Bug Fixes
+
+- apply correctly the permalink layer parameter in trafiverbundkarte and infrastruktur topics ([#1104](https://github.com/geops/trafimage-maps/issues/1104)) ([9ccb8a3](https://github.com/geops/trafimage-maps/commit/9ccb8a3b9ac430470449a93294a25bd150895a76))
+
 ### [1.21.17](https://github.com/geops/trafimage-maps/compare/v1.21.16...v1.21.17) (2023-09-05)
 
 ### Bug Fixes
