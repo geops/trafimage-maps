@@ -47,13 +47,13 @@ const applPermalinkVisiblity = (layers, filterTopic) => {
 
       // We use the layer service only to update properly the inital visibility to parent layer.
       getLayersAsFlatArray(layers)
-        .filter((layer) => !layer.get('isBaseLayer'))
+        // Permalink layers param only use layer in legend and non baselayer
+        .filter(
+          (layer) => !layer.get('isBaseLayer') && !layer.get('hideInLegend'),
+        )
         .forEach((layer) => {
-          // Permalink only use layer in legend
-          if (!layer.get('hideInLegend')) {
-            // eslint-disable-next-line no-param-reassign
-            layer.visible = layerKeys.includes(layer.key);
-          }
+          // eslint-disable-next-line no-param-reassign
+          layer.visible = layerKeys.includes(layer.key);
         });
     }
   }
