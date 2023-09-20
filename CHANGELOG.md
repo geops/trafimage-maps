@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.19](https://github.com/geops/trafimage-maps/compare/v1.21.18...v1.21.19) (2023-09-20)
+
+### Bug Fixes
+
+- fix time_based vehcile in punctuality layer ([0932c1d](https://github.com/geops/trafimage-maps/commit/0932c1def9081c22a4a354b6c10debc805209280))
+
 ### [1.21.18](https://github.com/geops/trafimage-maps/compare/v1.21.17...v1.21.18) (2023-09-18)
 
 ### Bug Fixes
