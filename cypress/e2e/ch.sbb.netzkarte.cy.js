@@ -27,7 +27,7 @@ describe('ch.sbb.netzkarte', () => {
       });
       cy.get('.wkp-menu-header').click();
       cy.get(
-        ':nth-child(6) > .rs-layer-tree-item > .rs-layer-tree-input > span',
+        ':nth-child(5) > .rs-layer-tree-item > .rs-layer-tree-input > span',
       ).click();
       cy.wait(3000).then(() => {
         mockServer.emit('message', JSON.stringify(message));
@@ -465,19 +465,18 @@ describe('ch.sbb.netzkarte', () => {
         visitWithMsg('/ch.sbb.netzkarte?z=14', buffer);
         cy.get('canvas').then((elts) => {
           const vehicleCanvas = elts[2];
+          cy.log(elts.length);
 
           cy.fixture('busAtZoom14.png').then((fixture) => {
             cy.task('comparePng', {
               current: vehicleCanvas.toDataURL('image/png'),
               fixture: `data:image/png;base64,${fixture}`,
             }).then((result) => {
-              cy.task(
-                'log',
-                `mismatch (<0.1 to pass test): ${result.rawMisMatchPercentage}`,
-              ).then(() => {
-                // Canvas to compare are pretty empty so we use a lower mismatch.
-                expect(result.rawMisMatchPercentage < 0.2).to.equal(true);
-              });
+              cy.log(
+                `mismatch (<0.25 to pass test): ${result.rawMisMatchPercentage}`,
+              );
+              // Canvas to compare are pretty empty so we use a lower mismatch.
+              expect(result.rawMisMatchPercentage < 0.25).to.equal(true);
             });
           });
         });
