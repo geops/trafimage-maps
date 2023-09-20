@@ -29,8 +29,7 @@ describe('Search', () => {
     cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
 
     // Popup is opened.
-    cy.wait(20000);
-    cy.get('.wkp-feature-information').should('be.visible');
+    cy.get('.wkp-feature-information', { timeout: 20000 }).should('be.visible');
   });
 
   it('should not open a popup on station search because we click on the clear button', () => {
@@ -49,8 +48,7 @@ describe('Search', () => {
     cy.get('.wkp-search-button-clear').click();
 
     // Popup is opened.
-    cy.wait(10000);
-    cy.get('.wkp-feature-information').should('not.exist');
+    cy.get('.wkp-feature-information', { timeout: 20000 }).should('not.exist');
   });
 
   it('should open a popup on station search using a station that appears after zoom 15.5', () => {
@@ -62,8 +60,7 @@ describe('Search', () => {
     cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
 
     // Popup is opened.
-    cy.wait(20000);
-    cy.get('.wkp-feature-information').should('be.visible');
+    cy.get('.wkp-feature-information', { timeout: 20000 }).should('be.visible');
   });
 
   it('should not open a popup on station search using a station that appears after zoom 15.5 because we click on the clear button', () => {
@@ -76,9 +73,8 @@ describe('Search', () => {
 
     cy.get('.wkp-search-button-clear').click();
 
-    // Popup is opened.
-    cy.wait(10000);
-    cy.get('.wkp-feature-information').should('not.exist');
+    // Popup is opened
+    cy.get('.wkp-feature-information', { timeout: 20000 }).should('not.exist');
   });
 
   it('should close the popup after a station search then we click on the clear button', () => {
@@ -95,8 +91,7 @@ describe('Search', () => {
     cy.get('#react-autowhatever-1-section-0-item-0').click({ force: true });
 
     // Popup is opened.
-    cy.wait(10000);
-    cy.get('.wkp-feature-information').should('be.visible');
+    cy.get('.wkp-feature-information', { timeout: 20000 }).should('be.visible');
     cy.get('.wkp-search-button-clear').click();
     // Popup is closed.
     cy.get('.wkp-feature-information').should('not.exist');
@@ -115,10 +110,7 @@ describe('Search', () => {
       },
     );
     cy.get('.wkp-search-input input').focus().type('Ber');
-
-    cy.wait(10000);
-
-    cy.get('.wkp-search-input input').should('be.visible');
+    cy.get('.wkp-search-input input', { timeout: 20000 }).should('be.visible');
   });
 
   it('should not crash when search services returns a non json error', () => {
@@ -135,8 +127,6 @@ describe('Search', () => {
     );
     cy.get('.wkp-search-input input').focus().type('Ber');
 
-    cy.wait(10000);
-
-    cy.get('.wkp-search-input input').should('be.visible');
+    cy.get('.wkp-search-input input', { timeout: 20000 }).should('be.visible');
   });
 });
