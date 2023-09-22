@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.20](https://github.com/geops/trafimage-maps/compare/v1.21.19...v1.21.20) (2023-09-22)
+
+### Bug Fixes
+
+- update react-spatial to fix route schedule updates ([ec5eb4a](https://github.com/geops/trafimage-maps/commit/ec5eb4a3e8e4f49431d45e991aeb605aa303df72))
+
 ### [1.21.19](https://github.com/geops/trafimage-maps/compare/v1.21.18...v1.21.19) (2023-09-20)
 
 ### Bug Fixes
