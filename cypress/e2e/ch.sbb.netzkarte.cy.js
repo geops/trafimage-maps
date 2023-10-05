@@ -36,7 +36,7 @@ describe('ch.sbb.netzkarte', () => {
 
     beforeEach(() => {
       // Create mock server
-      mockServer = new Server('wss://tralis-tracker-api.geops.io/ws');
+      mockServer = new Server('wss://api.geops.io/tracker-ws/v1/ws');
       now = Date.now();
       bufferMessage = {
         source: 'buffer',

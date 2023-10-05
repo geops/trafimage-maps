@@ -122,7 +122,7 @@ const propTypes = {
   realtimeKey: PropTypes.string,
 
   /**
-   * URL of the websocket realtime server. Default is 'wss://tralis-tracker-api.geops.io/ws'.
+   * URL of the websocket realtime server. Default is 'wss://api.geops.io/tracker-ws/v1/ws'.
    */
   realtimeUrl: PropTypes.string,
 
