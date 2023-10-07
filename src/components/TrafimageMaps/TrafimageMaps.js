@@ -270,7 +270,7 @@ const defaultProps = {
   cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
   vectorTilesKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process?.env?.REACT_APP_VECTOR_TILES_URL,
+  vectorTilesUrl: 'https://maps.test.geops.io',
   staticFilesUrl: process?.env?.REACT_APP_STATIC_FILES_URL,
   mapsetUrl: process?.env?.REACT_APP_MAPSET_URL,
   shortenerUrl: process?.env?.REACT_APP_SHORTENER_URL,
