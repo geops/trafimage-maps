@@ -8,6 +8,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 - **Geltungsbereiche:** update layer info translations ([#1105](https://github.com/geops/trafimage-maps/issues/1105)) ([256ec76](https://github.com/geops/trafimage-maps/commit/256ec7669c26ca69dadfc16565cd01c55e8b9b97))
 
+### [1.21.21](https://github.com/geops/trafimage-maps/compare/v1.21.20...v1.21.21) (2023-10-10)
+
+### Bug Fixes
+
+- **Geltungsbereiche:** update layer info translations ([#1105](https://github.com/geops/trafimage-maps/issues/1105)) ([256ec76](https://github.com/geops/trafimage-maps/commit/256ec7669c26ca69dadfc16565cd01c55e8b9b97))
+
 ### [1.21.20](https://github.com/geops/trafimage-maps/compare/v1.21.19...v1.21.20) (2023-09-22)
 
 ### Bug Fixes
