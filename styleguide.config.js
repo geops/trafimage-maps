@@ -124,6 +124,11 @@ module.exports = {
               content: 'src/examples/iframe/Geltungsbereiche/README.md',
               exampleMode: 'hide',
             },
+            {
+              name: 'Railplus',
+              content: 'src/examples/iframe/Railplus/README.md',
+              exampleMode: 'hide',
+            },
           ],
         },
       ],

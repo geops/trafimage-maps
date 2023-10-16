@@ -104,6 +104,8 @@ class TopicLoader extends PureComponent {
       vectorTilesUrl,
       staticFilesUrl,
       searchUrl,
+      layers,
+      language,
     } = this.props;
 
     // Sometimes the array object is different but the content is the same as before.
@@ -136,6 +138,13 @@ class TopicLoader extends PureComponent {
         staticFilesUrl !== prevProps.staticFilesUrl)
     ) {
       this.updateLayers(activeTopic.layers);
+    }
+
+    if (language !== prevProps.language) {
+      const layerAsFlatArray = new LayerService(layers).getLayersAsFlatArray();
+      layerAsFlatArray.forEach(
+        (layer) => layer.setLanguage && layer.setLanguage(language),
+      );
     }
   }
 

@@ -3,6 +3,7 @@ import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
+import railPlusLayers from './ch.railplus.meterspurbahnen';
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
@@ -411,6 +412,25 @@ export const direktverbindungenIframe = {
   overlaySide: 'left',
 };
 
+export const railPlus = {
+  elements: {
+    ...defaultElements,
+    popup: true,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+  },
+  key: 'ch.railplus.meterspurbahnen',
+  layers: railPlusLayers,
+  only: true,
+  hideInLayerTree: true,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -430,6 +450,7 @@ const topics = {
     sts,
     energiePublic,
     sandbox,
+    railPlus,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],

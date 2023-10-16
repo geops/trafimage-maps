@@ -24,6 +24,7 @@ import DvPopup from './DirektverbindungenPopup';
 import IsbPopup from './IsbPopup';
 import GeltungsbereicheGaPopup from './GeltungsbereicheGaPopup';
 import PunctualityPopup from './PunctualityPopup';
+import RailplusMeterspurPopup from './RailplusMeterspurPopup';
 
 export { default as RegionenkarteSegmentPopup } from './RegionenkarteSegmentPopup';
 export { default as RegionenkarteIntersectionPopup } from './RegionenkarteIntersectionPopup';
@@ -51,6 +52,7 @@ export { default as DvPopup } from './DirektverbindungenPopup';
 export { default as IsbPopup } from './IsbPopup';
 export { default as GeltungsbereicheGaPopup } from './GeltungsbereicheGaPopup';
 export { default as PunctualityPopup } from './PunctualityPopup';
+export { default as RailplusMeterspurPopup } from './RailplusMeterspurPopup';
 
 export default {
   BahnhofplanPopup,
@@ -79,4 +81,5 @@ export default {
   IsbPopup,
   GeltungsbereicheGaPopup,
   PunctualityPopup,
+  RailplusMeterspurPopup,
 };
