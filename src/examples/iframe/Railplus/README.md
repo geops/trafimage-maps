@@ -1,4 +1,4 @@
-The _Railplus - Meterspurbahnen_ topic provides a topic specifically for iframe use.
+The _Railplus_ topic provides a topic specifically for iframe use.
 
 ```jsx
 import React, { useMemo, useState, useEffect } from 'react';
@@ -19,7 +19,7 @@ import iframeSearchParams from '../iframeSearchParams';
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
 const baseUrl = 'https://wkp.stag.trafimage.geops.ch';
-const topic = 'ch.railplus.meterspurbahnen';
+const topic = 'ch.railplus.mitglieder';
 
 const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic + '?embedded=true');

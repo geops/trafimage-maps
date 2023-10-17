@@ -2,7 +2,7 @@ import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 
 export const netzkarteRailplus = new TrafimageMapboxLayer({
-  name: 'ch.railplus.meterspurbahnen.data',
+  name: 'ch.railplus.mitglieder.data',
   visible: true,
   zIndex: -1,
   style: 'netzkarte_eisenbahninfrastruktur_v3_ch.railplus',
@@ -14,8 +14,8 @@ export const netzkarteRailplus = new TrafimageMapboxLayer({
   },
 });
 
-export const railplusTVS = new MapboxStyleLayer({
-  name: 'ch.railplus.meterspurbahnen',
+export const railplusMeterspurbahnen = new MapboxStyleLayer({
+  name: 'ch.railplus.mitglieder.meterspur',
   visible: true,
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) =>
@@ -26,8 +26,8 @@ export const railplusTVS = new MapboxStyleLayer({
     metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
   properties: {
     isQueryable: true,
-    popupComponent: 'RailplusMeterspurPopup',
+    popupComponent: 'RailplusPopup',
   },
 });
 
-export default [netzkarteRailplus, railplusTVS];
+export default [netzkarteRailplus, railplusMeterspurbahnen];

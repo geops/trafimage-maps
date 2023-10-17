@@ -512,7 +512,7 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (embedded) {
-      this.store.dispatch(setEmbedded(embedded));
+      this.store.dispatch(setEmbedded(embedded || activeTopic?.embedded));
     }
 
     if (requireConsent) {
@@ -537,11 +537,11 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (activeTopicKey && topics) {
-      this.store.dispatch(
-        setActiveTopic(
-          (topics || []).find((topic) => topic.key === activeTopicKey),
-        ),
+      const newTopic = (topics || []).find(
+        (topic) => topic.key === activeTopicKey,
       );
+      this.store.dispatch(setActiveTopic(newTopic));
+      this.store.dispatch(setEmbedded(embedded || newTopic?.embedded));
     }
   }
 
@@ -628,7 +628,7 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (embedded !== prevProps.embedded) {
-      this.store.dispatch(setEmbedded(embedded));
+      this.store.dispatch(setEmbedded(embedded || activeTopic?.embedded));
     }
 
     if (appBaseUrl !== prevProps.appBaseUrl) {
@@ -670,6 +670,7 @@ class TrafimageMaps extends React.PureComponent {
         topics !== prevProps.topics)
     ) {
       this.store.dispatch(setActiveTopic(activeTopic));
+      this.store.dispatch(setEmbedded(embedded || activeTopic?.embedded));
     }
 
     if (zoom !== prevProps.zoom || zoom !== activeTopic?.zoom) {

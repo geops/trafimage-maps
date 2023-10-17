@@ -3,7 +3,7 @@ import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
-import railPlusLayers from './ch.railplus.meterspurbahnen';
+import railPlusLayers from './ch.railplus.mitglieder';
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
@@ -425,10 +425,11 @@ export const railPlus = {
     footer: false,
     menu: false,
   },
-  key: 'ch.railplus.meterspurbahnen',
+  key: 'ch.railplus.mitglieder',
   layers: railPlusLayers,
   only: true,
   hideInLayerTree: true,
+  embedded: true,
 };
 
 const topics = {

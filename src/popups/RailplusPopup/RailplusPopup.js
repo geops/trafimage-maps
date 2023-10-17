@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divider, Typography, makeStyles } from '@material-ui/core';
-import providers from '../../config/ch.railplus.meterspurbahnen/providersMapping';
+import providers from '../../config/ch.railplus.mitglieder/providersMapping';
 
 const useStyles = makeStyles((theme) => ({
   dividerRoot: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RailplusMeterspurPopup() {
+function RailplusPopup() {
   const classes = useStyles();
   const provider = providers[Math.floor(Math.random() * 5)]; // TODO: get info from tiles once style is ready
   return (
@@ -40,6 +40,6 @@ function RailplusMeterspurPopup() {
   );
 }
 
-RailplusMeterspurPopup.hideHeader = () => true;
+RailplusPopup.hideHeader = () => true;
 
-export default RailplusMeterspurPopup;
+export default RailplusPopup;
