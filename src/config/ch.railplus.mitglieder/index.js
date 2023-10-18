@@ -20,10 +20,12 @@ export const railplusMeterspurbahnen = new RailplusLayer({
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) =>
     metadata &&
-    metadata['isb.filter'] &&
-    /^(tvs|tvs_flag)$/.test(metadata['isb.filter']),
+    metadata['railplus.filter'] &&
+    /^line$/.test(metadata['railplus.filter']),
   queryRenderedLayersFilter: ({ metadata }) =>
-    metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
+    metadata &&
+    metadata['railplus.filter'] &&
+    /^line$/.test(metadata['railplus.filter']),
   properties: {
     isQueryable: true,
     popupComponent: 'RailplusPopup',
