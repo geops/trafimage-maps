@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
   providerName: {
     fontSize: 16,
-    color: theme.colors.gray,
+    // color: theme.colors.gray,
   },
   link: {
     '&:link': {
@@ -49,7 +49,6 @@ function RailplusPopup({ feature, layer }) {
   );
 }
 
-RailplusPopup.hideHeader = () => true;
 RailplusPopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
   layer: PropTypes.instanceOf(RailplusLayer).isRequired,
