@@ -1,6 +1,7 @@
 import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
+import { FaDownload } from 'react-icons/fa';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
 import railPlusLayers from './ch.railplus.mitglieder';
@@ -36,6 +37,8 @@ import { DV_KEY } from '../utils/constants';
 import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
 import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
+import MapButton from '../components/MapButton';
+import RailplusMenu from '../menus/RailplusMenu';
 
 // For backward compatibility
 export {
@@ -415,8 +418,8 @@ export const direktverbindungenIframe = {
 export const railPlus = {
   elements: {
     ...defaultElements,
-    overlay: true,
-    popup: true,
+    overlay: false,
+    popup: false,
     shareMenu: false,
     drawMenu: false,
     permalink: true,
@@ -430,6 +433,13 @@ export const railPlus = {
   layers: railPlusLayers,
   only: true,
   hideInLayerTree: true,
+  enableFeatureClick: true,
+  mapControls: (
+    <MapButton style={{ padding: 8, color: '#444' }} onClick={() => null}>
+      <FaDownload />
+    </MapButton>
+  ),
+  menu: <RailplusMenu />,
   embedded: true,
 };
 

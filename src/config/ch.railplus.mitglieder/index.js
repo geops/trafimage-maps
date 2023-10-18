@@ -29,7 +29,6 @@ export const railplusMeterspurbahnen = new RailplusLayer({
   properties: {
     isQueryable: true,
     popupComponent: 'RailplusPopup',
-    useOverlay: true,
   },
 });
 

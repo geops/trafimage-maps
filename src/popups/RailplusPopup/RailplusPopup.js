@@ -5,6 +5,9 @@ import { Typography, makeStyles } from '@material-ui/core';
 import RailplusLayer from '../../layers/RailplusLayer';
 
 const useStyles = makeStyles((theme) => ({
+  railplusPopup: {
+    maxWidth: 200,
+  },
   dividerRoot: {
     height: 2,
     margin: '10px 0',
