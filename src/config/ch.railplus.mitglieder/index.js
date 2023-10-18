@@ -1,11 +1,11 @@
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
+import RailplusLayer from '../../layers/RailplusLayer';
 
 export const netzkarteRailplus = new TrafimageMapboxLayer({
   name: 'ch.railplus.mitglieder.data',
   visible: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.railplus',
+  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.railplus.meterspurbahnen',
   properties: {
     isBaseLayer: true,
   },
@@ -14,7 +14,7 @@ export const netzkarteRailplus = new TrafimageMapboxLayer({
   },
 });
 
-export const railplusMeterspurbahnen = new MapboxStyleLayer({
+export const railplusMeterspurbahnen = new RailplusLayer({
   name: 'ch.railplus.mitglieder.meterspur',
   visible: true,
   mapboxLayer: netzkarteRailplus,

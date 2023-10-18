@@ -1,6 +1,8 @@
 import React from 'react';
-import { Divider, Typography, makeStyles } from '@material-ui/core';
-import providers from '../../config/ch.railplus.mitglieder/providersMapping';
+import PropTypes from 'prop-types';
+import { Feature } from 'ol';
+import { Typography, makeStyles } from '@material-ui/core';
+import RailplusLayer from '../../layers/RailplusLayer';
 
 const useStyles = makeStyles((theme) => ({
   dividerRoot: {
@@ -19,12 +21,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function RailplusPopup() {
+function RailplusPopup({ feature, layer }) {
   const classes = useStyles();
-  const provider = providers[Math.floor(Math.random() * 5)]; // TODO: get info from tiles once style is ready
+  const isbNummer = feature.get('isb_tu_nummer');
+  const tuDetails = layer.railplusProviders.find((tu) => !!tu[isbNummer])[
+    isbNummer
+  ];
+
   return (
     <div className={classes.railplusPopup}>
-      <a
+      {/* <a
         href={provider.url}
         target="_blank"
         rel="noopener noreferrer"
@@ -35,11 +41,18 @@ function RailplusPopup() {
         <Typography className={classes.providerName}>
           {provider.name}
         </Typography>
-      </a>
+      </a> */}
+      <Typography className={classes.providerName}>
+        {tuDetails.long_name}
+      </Typography>
     </div>
   );
 }
 
 RailplusPopup.hideHeader = () => true;
+RailplusPopup.propTypes = {
+  feature: PropTypes.instanceOf(Feature).isRequired,
+  layer: PropTypes.instanceOf(RailplusLayer).isRequired,
+};
 
 export default RailplusPopup;
