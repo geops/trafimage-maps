@@ -415,6 +415,7 @@ export const direktverbindungenIframe = {
 export const railPlus = {
   elements: {
     ...defaultElements,
+    overlay: true,
     popup: true,
     shareMenu: false,
     drawMenu: false,
