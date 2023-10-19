@@ -1,8 +1,8 @@
 import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
-import { FaDownload } from 'react-icons/fa';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
+import railplusLegend from '../img/railplus_legend.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
 import railPlusLayers from './ch.railplus.mitglieder';
 import netzkarteLayers, {
@@ -37,8 +37,8 @@ import { DV_KEY } from '../utils/constants';
 import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
 import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
-import MapButton from '../components/MapButton';
 import RailplusMenu from '../menus/RailplusMenu';
+import RailplusExportButton from './ch.railplus.mitglieder/RailplusExportButton';
 
 // For backward compatibility
 export {
@@ -434,14 +434,17 @@ export const railPlus = {
   only: true,
   hideInLayerTree: true,
   enableFeatureClick: true,
-  mapControls: (
-    <MapButton style={{ padding: 8, color: '#444' }} onClick={() => null}>
-      <FaDownload />
-    </MapButton>
-  ),
+  mapControls: <RailplusExportButton />,
   menu: <RailplusMenu />,
   embedded: true,
   overlaySide: 'left',
+  exportConfig: {
+    publishedAt: '12/2022',
+    dateDe: '12.12.2022',
+    dateFr: '12.12.2022',
+    year: '2022',
+    overlayImageUrl: railplusLegend,
+  },
 };
 
 const topics = {

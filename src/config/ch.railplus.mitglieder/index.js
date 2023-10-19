@@ -5,7 +5,7 @@ export const netzkarteRailplus = new TrafimageMapboxLayer({
   name: 'ch.railplus.mitglieder.data',
   visible: true,
   zIndex: -1,
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.railplus.meterspurbahnen',
+  style: 'base_bright_v2_ch.railplus.meterspurbahnen',
   properties: {
     isBaseLayer: true,
   },

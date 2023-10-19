@@ -15,7 +15,7 @@ import {
   TRACK_SHARE_PERMALINK_ACTION,
   TRACK_SHARE_TW_ACTION,
 } from '../../utils/constants';
-import { generateExtraData } from '../ExportButton/ExportUtils';
+import { generateExtraData } from '../ExportButton/exportUtils';
 
 const socialShareConfig = [
   {

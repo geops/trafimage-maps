@@ -1,5 +1,5 @@
 import { Layer } from 'mobility-toolbox-js/ol';
-import { generateExtraData } from './ExportUtils';
+import { generateExtraData } from './exportUtils';
 
 describe('ExportUtils ', () => {
   describe('generateExtraData', () => {

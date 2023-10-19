@@ -35,7 +35,11 @@ const MapButton = ({ children, onClick, ...props }) => {
 
 MapButton.propTypes = {
   children: PropTypes.node.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+};
+
+MapButton.defaultProps = {
+  onClick: () => null,
 };
 
 export default MapButton;

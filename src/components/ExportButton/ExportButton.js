@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { jsPDF as JsPDF } from 'jspdf';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
-import Canvg from 'canvg';
 import { ReactComponent as Loader } from './loader.svg';
 
-import { getMapHd, clean, generateExtraData } from './ExportUtils';
+import { getMapHd, generateExtraData, exportPdf } from './exportUtils';
 import LayerService from '../../utils/LayerService';
+
+const flexCenter = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
 const useStyles = makeStyles(() => ({
   buttonWrapper: {
     margin: '10px 20px',
     minWidth: 100,
   },
-  button: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  buttonContent: {
+    ...flexCenter,
     padding: '5px 10px',
     height: 35,
     width: 110,
@@ -28,10 +30,8 @@ const useStyles = makeStyles(() => ({
       backgroundColor: '#cdcdcd',
     },
   },
-  loading: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  canvasButton: {
+    ...flexCenter,
   },
 }));
 
@@ -43,6 +43,7 @@ function ExportButton({
   exportZoom,
   exportExtent,
   children,
+  loadingComponent,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -54,8 +55,8 @@ function ExportButton({
   return (
     <div className={classes.buttonWrapper}>
       <CanvasSaveButton
-        className={classes.button}
         title={t('Karte als PDF exportieren')}
+        className={classes.canvasButton}
         style={{
           pointerEvents: isLoading ? 'none' : 'auto',
           opacity: isLoading ? 0.3 : 1,
@@ -81,129 +82,41 @@ function ExportButton({
             setLoading(false);
             return;
           }
-          clean(mapToExport, map, new LayerService(layers));
-
-          // add the image to a newly created PDF
-          const doc = new JsPDF({
-            orientation: 'landscape',
-            unit: 'pt',
-            format: exportFormat,
-          });
-
-          // Add map image
-          const ctx = canvas.getContext('2d');
-
-          // Apply SVG overlay if provided
-          if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
-            const {
-              overlayImageUrl,
-              dateDe,
-              dateFr,
-              publisher,
-              publishedAt,
-              year,
-            } = topic.exportConfig;
-            /**
-             * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
-             * If changes in the legend SVG are necessary, make sure the values to insert are maintained
-             * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
-             * without major alterations)
-             * @ignore
-             */
-            // Fetch local svg
-            const svgString = await fetch(overlayImageUrl).then((response) =>
-              response.text(),
-            );
-
-            let updatedSvg = svgString.slice(); // Clone the string
-
-            // Replace dates and publisher data
-            if (year) {
-              updatedSvg = updatedSvg.replace(
-                '***Year***',
-                typeof year === 'function' ? year() : year,
-              );
-            }
-            if (dateDe) {
-              updatedSvg = updatedSvg.replace(
-                '***date_DE***',
-                typeof dateDe === 'function' ? dateDe() : dateDe,
-              );
-            }
-
-            if (dateFr) {
-              updatedSvg = updatedSvg.replace(
-                '***date_FR***',
-                typeof dateFr === 'function' ? dateFr() : dateFr,
-              );
-            }
-
-            if (publisher) {
-              updatedSvg = updatedSvg.replace('***publisher***', publisher);
-            }
-
-            if (publishedAt) {
-              updatedSvg = updatedSvg.replace(
-                '***published_at***',
-                typeof publishedAt === 'function' ? publishedAt() : publishedAt,
-              );
-            }
-
-            // The legend SVG MUST NOT contains width and height attributes (only a viewBox)
-            // because it breaks canvg rendering: a bad canvas size is set.
-            // so we remove it before the conversion to canvas.
-            const svgDoc = new DOMParser().parseFromString(
-              updatedSvg,
-              'application/xml',
-            );
-            svgDoc.documentElement.removeAttribute('width');
-            svgDoc.documentElement.removeAttribute('height');
-            updatedSvg = new XMLSerializer().serializeToString(svgDoc);
-
-            // Add legend SVG
-            const canvass = document.createElement('canvas');
-            canvass.width = canvas.width;
-            canvass.height = canvas.height;
-
-            const instance = await Canvg.fromString(
-              canvass.getContext('2d'),
-              updatedSvg,
-            );
-            await instance.render();
-
-            // Add SVG to map canvas
-            ctx.drawImage(canvass, 0, 0);
-          }
-
-          // Scale to fit the export size
-          ctx.scale(1 / exportScale, 1 / exportScale);
-
-          // Add canvas to PDF
-          doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
-
-          // download the result
-          const filename = `trafimage-${new Date()
-            .toISOString()
-            .substr(0, 10)}.pdf`;
-          doc.save(filename);
-
+          exportPdf(
+            mapToExport,
+            map,
+            layers,
+            exportFormat,
+            canvas,
+            topic,
+            exportScale,
+            exportSize,
+          );
           setLoading(false);
         }}
       >
-        <>
-          {isLoading ? (
-            <span className={classes.loading}>
-              <Loader />
-              {t('Export läuft...')}
-            </span>
-          ) : (
-            children
-          )}
-        </>
+        {isLoading ? loadingComponent : children}
       </CanvasSaveButton>
     </div>
   );
 }
+
+const DefaultLoadingComponent = () => {
+  const classes = useStyles();
+  const { t } = useTranslation();
+  return (
+    <span className={classes.buttonContent}>
+      <Loader />
+      {t('Export läuft...')}
+    </span>
+  );
+};
+
+const DefaultChildren = () => {
+  const classes = useStyles();
+  const { t } = useTranslation();
+  return <span className={classes.buttonContent}>{t('PDF exportieren')}</span>;
+};
 
 ExportButton.propTypes = {
   exportFormat: PropTypes.string,
@@ -213,6 +126,7 @@ ExportButton.propTypes = {
   exportCoordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   children: PropTypes.node,
   exportSize: PropTypes.arrayOf(PropTypes.number),
+  loadingComponent: PropTypes.node,
 };
 
 ExportButton.defaultProps = {
@@ -221,8 +135,9 @@ ExportButton.defaultProps = {
   exportCoordinates: null,
   exportZoom: null, // 10,
   exportExtent: [620000, 5741000, 1200000, 6058000],
-  children: [],
+  children: <DefaultChildren />,
   exportSize: [3370, 2384], // a0
+  loadingComponent: <DefaultLoadingComponent />,
 };
 
 export default React.memo(ExportButton);
