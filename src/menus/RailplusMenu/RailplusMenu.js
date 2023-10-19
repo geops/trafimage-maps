@@ -8,6 +8,7 @@ import IframeMenu from '../IframeMenu';
 import { RailplusPopup } from '../../popups';
 import { setFeatureInfo } from '../../model/app/actions';
 import useIsMobile from '../../utils/useIsMobile';
+import usePanCenterFeature from '../../utils/usePanCenterFeature';
 
 const useStyles = makeStyles(() => {
   return {
@@ -36,6 +37,7 @@ function RailplusMenu() {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const feature = featureInfo[0]?.features[0];
   const layer = featureInfo[0]?.layer;
+  usePanCenterFeature();
 
   if (!feature || !layer) {
     return null;

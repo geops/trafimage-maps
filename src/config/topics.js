@@ -441,6 +441,7 @@ export const railPlus = {
   ),
   menu: <RailplusMenu />,
   embedded: true,
+  overlaySide: 'left',
 };
 
 const topics = {

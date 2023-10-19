@@ -42,9 +42,7 @@ function RailplusPopup({ feature, layer }) {
           {provider.name}
         </Typography>
       </a> */}
-      <Typography className={classes.providerName}>
-        {tuDetails.long_name}
-      </Typography>
+      <Typography variant="body2">{tuDetails.long_name}</Typography>
     </div>
   );
 }
