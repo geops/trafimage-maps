@@ -16,10 +16,6 @@ const flexCenter = {
 };
 
 const useStyles = makeStyles(() => ({
-  buttonWrapper: {
-    margin: '10px 20px',
-    minWidth: 100,
-  },
   buttonContent: {
     ...flexCenter,
     padding: '5px 10px',
@@ -44,6 +40,7 @@ function ExportButton({
   exportExtent,
   children,
   loadingComponent,
+  style,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -53,51 +50,50 @@ function ExportButton({
   const [isLoading, setLoading] = useState(false);
 
   return (
-    <div className={classes.buttonWrapper}>
-      <CanvasSaveButton
-        title={t('Karte als PDF exportieren')}
-        className={classes.canvasButton}
-        style={{
-          pointerEvents: isLoading ? 'none' : 'auto',
-          opacity: isLoading ? 0.3 : 1,
-        }}
-        extraData={generateExtraData(layers)}
-        autoDownload={false}
-        format="image/jpeg"
-        onSaveStart={() => {
-          setLoading(true);
-          return getMapHd(
-            map,
-            new LayerService(layers),
-            exportScale,
-            exportCoordinates,
-            exportSize,
-            exportZoom,
-            exportExtent,
-            topic.exportConfig,
-          );
-        }}
-        onSaveEnd={async (mapToExport, canvas) => {
-          if (!mapToExport) {
-            setLoading(false);
-            return;
-          }
-          exportPdf(
-            mapToExport,
-            map,
-            layers,
-            exportFormat,
-            canvas,
-            topic,
-            exportScale,
-            exportSize,
-          );
+    <CanvasSaveButton
+      title={t('Karte als PDF exportieren')}
+      className={classes.canvasButton}
+      style={{
+        pointerEvents: isLoading ? 'none' : 'auto',
+        opacity: isLoading ? 0.3 : 1,
+        ...style,
+      }}
+      extraData={generateExtraData(layers)}
+      autoDownload={false}
+      format="image/jpeg"
+      onSaveStart={() => {
+        setLoading(true);
+        return getMapHd(
+          map,
+          new LayerService(layers),
+          exportScale,
+          exportCoordinates,
+          exportSize,
+          exportZoom,
+          exportExtent,
+          topic.exportConfig,
+        );
+      }}
+      onSaveEnd={async (mapToExport, canvas) => {
+        if (!mapToExport) {
           setLoading(false);
-        }}
-      >
-        {isLoading ? loadingComponent : children}
-      </CanvasSaveButton>
-    </div>
+          return;
+        }
+        exportPdf(
+          mapToExport,
+          map,
+          layers,
+          exportFormat,
+          canvas,
+          topic,
+          exportScale,
+          exportSize,
+        );
+        setLoading(false);
+      }}
+    >
+      {isLoading ? loadingComponent : children}
+    </CanvasSaveButton>
   );
 }
 
@@ -127,6 +123,7 @@ ExportButton.propTypes = {
   children: PropTypes.node,
   exportSize: PropTypes.arrayOf(PropTypes.number),
   loadingComponent: PropTypes.node,
+  style: PropTypes.object,
 };
 
 ExportButton.defaultProps = {
@@ -138,6 +135,7 @@ ExportButton.defaultProps = {
   children: <DefaultChildren />,
   exportSize: [3370, 2384], // a0
   loadingComponent: <DefaultLoadingComponent />,
+  style: {},
 };
 
 export default React.memo(ExportButton);

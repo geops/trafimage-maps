@@ -5,17 +5,22 @@ import MapButton from '../../components/MapButton';
 import ExportButton from '../../components/ExportButton/ExportButton';
 import { ReactComponent as Loader } from '../../img/loader.svg';
 
+const styles = { padding: 8, color: '#444' };
+
 function RailplusExportButton() {
   const { t } = useTranslation();
   return (
-    <MapButton
-      style={{ padding: 8, color: '#444' }}
-      title={t('Grossformatiges PDF exportieren')}
+    <ExportButton
+      loadingComponent={
+        <MapButton style={styles}>
+          <Loader />
+        </MapButton>
+      }
     >
-      <ExportButton loadingComponent={<Loader />}>
+      <MapButton style={styles} title={t('Grossformatiges PDF exportieren')}>
         <FaDownload />
-      </ExportButton>
-    </MapButton>
+      </MapButton>
+    </ExportButton>
   );
 }
 
