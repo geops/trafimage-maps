@@ -50,3 +50,4 @@ export const OVERLAY_MIN_HEIGHT = 55;
 
 // PDF export
 export const FORCE_EXPORT_PROPERTY = 'forceVisibilityOnPdf';
+export const RAILPLUS_EXPORTBTN_ID = 'railplus-export-button';

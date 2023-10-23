@@ -95,11 +95,12 @@ export const getMapHd = (
   exportConfig,
 ) => {
   const targetSize = size || map.getSize();
-
   // We create a temporary map.
   const div = document.createElement('div');
   div.style.width = `${targetSize[0]}px`;
   div.style.height = `${targetSize[1]}px`;
+  div.style.margin = `0 0 0 -50000px`; // we move the map to the left to be ensure it is hidden during export
+  document.body.style.overflow = 'hidden';
   document.body.append(div);
 
   let center = map.getView().getCenter();
@@ -145,6 +146,7 @@ export const getMapHd = (
 export const clean = (mapToExport) => {
   mapToExport.getLayers().clear();
   document.body.removeChild(mapToExport.getTarget());
+  document.body.style.overflow = '';
   mapToExport.setTarget(null);
 };
 

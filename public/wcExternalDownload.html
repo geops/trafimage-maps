@@ -24,9 +24,19 @@
   <body>
     <div style="width: 800px; height: 500px">
       <!-- you must specify an api key to make it work -->
-      <trafimage-maps id="map"></trafimage-maps>
+      <trafimage-maps
+        id="map"
+        activeTopicKey="ch.railplus.mitglieder"
+      ></trafimage-maps>
+      <button onclick="downloadPdf()">Download PDF</button>
     </div>
     <!-- <script src="./build/bundle.js"></script> -->
-    <script src="https://unpkg.com/trafimage-maps@1.21.21/bundle.js"></script>
+    <script src="https://unpkg.com/trafimage-maps@1.21.22-beta.5/bundle.js"></script>
+    <script>
+      function downloadPdf() {
+        const tm = document.getElementsByTagName('trafimage-maps')?.[0];
+        tm?.dispatchEvent(new Event('pdf-download'));
+      }
+    </script>
   </body>
 </html>

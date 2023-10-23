@@ -41,6 +41,7 @@ function ExportButton({
   children,
   loadingComponent,
   style,
+  id,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -51,6 +52,7 @@ function ExportButton({
 
   return (
     <CanvasSaveButton
+      id={id}
       title={t('Karte als PDF exportieren')}
       className={classes.canvasButton}
       style={{
@@ -124,6 +126,7 @@ ExportButton.propTypes = {
   exportSize: PropTypes.arrayOf(PropTypes.number),
   loadingComponent: PropTypes.node,
   style: PropTypes.object,
+  id: PropTypes.string,
 };
 
 ExportButton.defaultProps = {
@@ -136,6 +139,7 @@ ExportButton.defaultProps = {
   exportSize: [3370, 2384], // a0
   loadingComponent: <DefaultLoadingComponent />,
   style: {},
+  id: 'download',
 };
 
 export default React.memo(ExportButton);
