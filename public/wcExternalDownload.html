@@ -28,10 +28,15 @@
         id="map"
         activeTopicKey="ch.railplus.mitglieder"
       ></trafimage-maps>
-      <button onclick="downloadPdf()" style="margin: 10px 5px; padding: 10px 5px">Download PDF</button>
+      <button
+        onclick="downloadPdf()"
+        style="margin: 10px 5px; padding: 10px 5px"
+      >
+        Download PDF
+      </button>
     </div>
     <!-- <script src="./build/bundle.js"></script> -->
-    <script src="https://unpkg.com/trafimage-maps@1.21.22-beta.5/bundle.js"></script>
+    <script src="https://unpkg.com/trafimage-maps@1.21.22-beta.6/bundle.js"></script>
     <script>
       function downloadPdf() {
         const tm = document.getElementsByTagName('trafimage-maps')?.[0];
