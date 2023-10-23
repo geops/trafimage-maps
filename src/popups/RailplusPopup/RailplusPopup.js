@@ -24,9 +24,7 @@ const useStyles = makeStyles((theme) => ({
 function RailplusPopup({ feature, layer }) {
   const classes = useStyles();
   const isbNummer = feature.get('isb_tu_nummer');
-  const tuDetails = layer.railplusProviders.find((tu) => !!tu[isbNummer])[
-    isbNummer
-  ];
+  const tuDetails = layer.railplusProviders[isbNummer];
 
   return (
     <div className={classes.railplusPopup}>
