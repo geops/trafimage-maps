@@ -437,7 +437,7 @@ export const railPlus = {
     },
   },
   exportConfig: {
-    publishedAt: '12/2023',
+    publishedAt: '11/2023',
     dateDe: '12.12.2023',
     dateFr: '12.12.2023',
     year: '2023',
