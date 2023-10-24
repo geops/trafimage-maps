@@ -73,7 +73,6 @@ function ExportButton({
           exportSize,
           exportZoom,
           exportExtent,
-          topic.exportConfig,
         );
       }}
       onSaveEnd={async (mapToExport, canvas) => {

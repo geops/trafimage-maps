@@ -15,6 +15,21 @@ import LayerService from '../../utils/LayerService';
 
 const actualPixelRatio = window.devicePixelRatio;
 
+const getStyleWithForceVisibility = (mbStyle, topicStyleLayers) => {
+  const newMbStyle = { ...mbStyle };
+  topicStyleLayers.forEach((styleLayer) => {
+    if (styleLayer.styleLayersFilter) {
+      newMbStyle.layers.forEach((mbLayer) => {
+        if (styleLayer.styleLayersFilter(mbLayer)) {
+          // eslint-disable-next-line no-param-reassign
+          mbLayer.layout.visibility = 'visible';
+        }
+      });
+    }
+  });
+  return newMbStyle;
+};
+
 export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
   Object.defineProperty(window, 'devicePixelRatio', {
     get() {
@@ -92,7 +107,6 @@ export const getMapHd = (
   size,
   zoom,
   extent,
-  exportConfig,
 ) => {
   const targetSize = size || map.getSize();
   // We create a temporary map.
@@ -129,13 +143,13 @@ export const getMapHd = (
     return Promise.resolve();
   }
 
-  const styleLayers = layerService.layers.filter((l) =>
+  const styleLayersToForceShow = layerService.layers.filter((l) =>
     l.get(FORCE_EXPORT_PROPERTY),
   );
-  const mbStyle =
-    exportConfig?.mbStyleFunction && styleLayers.length
-      ? exportConfig?.mbStyleFunction(mbMap.getStyle(), styleLayers)
-      : mbMap.getStyle();
+
+  const mbStyle = styleLayersToForceShow.length
+    ? getStyleWithForceVisibility(mbMap.getStyle(), styleLayersToForceShow)
+    : mbMap.getStyle();
   return buildMapboxMapHd(map, div, center, mbStyle, scale, targetZoom).then(
     () => {
       return buildOlMapHd(map, div, center, scale, targetResolution);

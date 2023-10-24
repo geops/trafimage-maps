@@ -1,5 +1,6 @@
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import RailplusLayer from '../../layers/RailplusLayer';
+import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
 
 export const netzkarteRailplus = new TrafimageMapboxLayer({
   name: 'ch.railplus.mitglieder.data',
@@ -33,4 +34,21 @@ export const railplusMeterspurbahnen = new RailplusLayer({
   },
 });
 
-export default [netzkarteRailplus, railplusMeterspurbahnen];
+export const railplusMeterspurbahnenPrint = new RailplusLayer({
+  name: 'ch.railplus.mitglieder.meterspur.print',
+  visible: false,
+  mapboxLayer: netzkarteRailplus,
+  styleLayersFilter: ({ metadata }) =>
+    metadata &&
+    metadata['railplus.filter'] &&
+    /^(print|logos)$/.test(metadata['railplus.filter']),
+  properties: {
+    [FORCE_EXPORT_PROPERTY]: true,
+  },
+});
+
+export default [
+  netzkarteRailplus,
+  railplusMeterspurbahnen,
+  railplusMeterspurbahnenPrint,
+];

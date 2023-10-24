@@ -248,20 +248,6 @@ export const energiePublic = {
     exportMenu: true,
   },
   exportConfig: {
-    mbStyleFunction: (mbStyle, topicStyleLayers) => {
-      const newMbStyle = { ...mbStyle };
-      topicStyleLayers.forEach((styleLayer) => {
-        if (styleLayer.styleLayersFilter) {
-          newMbStyle.layers.forEach((mbLayer) => {
-            if (styleLayer.styleLayersFilter(mbLayer)) {
-              // eslint-disable-next-line no-param-reassign
-              mbLayer.layout.visibility = 'visible';
-            }
-          });
-        }
-      });
-      return newMbStyle;
-    },
     publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
     publishedAt: () => {
       const date = new Date();
@@ -451,10 +437,10 @@ export const railPlus = {
     },
   },
   exportConfig: {
-    publishedAt: '12/2022',
-    dateDe: '12.12.2022',
-    dateFr: '12.12.2022',
-    year: '2022',
+    publishedAt: '12/2023',
+    dateDe: '12.12.2023',
+    dateFr: '12.12.2023',
+    year: '2023',
     overlayImageUrl: railplusLegend,
   },
 };

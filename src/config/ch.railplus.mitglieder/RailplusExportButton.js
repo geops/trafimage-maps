@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { FaDownload } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import MapButton from '../../components/MapButton';
@@ -6,23 +7,41 @@ import ExportButton from '../../components/ExportButton/ExportButton';
 import { ReactComponent as Loader } from '../../img/loader.svg';
 import { RAILPLUS_EXPORTBTN_ID } from '../../utils/constants';
 
-const styles = { padding: 8, color: '#444' };
-
-function RailplusExportButton() {
+const BtnCmpt = ({ children = <FaDownload />, title }) => {
   const { t } = useTranslation();
   return (
+    <MapButton style={{ padding: 8, color: '#444' }} title={t(title)}>
+      {children}
+    </MapButton>
+  );
+};
+
+BtnCmpt.propTypes = {
+  children: PropTypes.node,
+  title: PropTypes.string,
+};
+
+BtnCmpt.defaultProps = {
+  children: <FaDownload />,
+  title: 'Grossformatiges PDF exportieren',
+};
+
+const hidden = { visibility: 'hidden', position: 'absolute', top: -50 };
+const params = new URLSearchParams(window.location.search);
+
+function RailplusExportButton() {
+  const styles = params.get('exportbtn') === 'true' ? undefined : hidden;
+  return (
     <ExportButton
-      style={{ visibility: 'hidden', position: 'absolute', top: -50 }}
+      style={styles}
       id={RAILPLUS_EXPORTBTN_ID}
       loadingComponent={
-        <MapButton style={styles}>
+        <BtnCmpt>
           <Loader />
-        </MapButton>
+        </BtnCmpt>
       }
     >
-      <MapButton style={styles} title={t('Grossformatiges PDF exportieren')}>
-        <FaDownload />
-      </MapButton>
+      <BtnCmpt />
     </ExportButton>
   );
 }
