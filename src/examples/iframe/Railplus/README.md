@@ -18,7 +18,7 @@ import iframeSearcgetHtmlPageCodehParams from '../iframeSearchParams';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const baseUrl = 'https://wkp.stag.trafimage.geops.ch';
+const baseUrl = 'https://wkp.stag.trafimage.geops.ch'; // TODO: change before merge
 const topic = 'ch.railplus.mitglieder';
 
 const extraCode = `
@@ -34,10 +34,10 @@ const extraCode = `
 
 const App = () => {
   const [url, setUrl] = useState(baseUrl + '/' + topic);
-
-  const code = useMemo(() => {
-    return getHtmlPageCode(getIframeCodeFromUrl(url), extraCode);
-  }, [url]);
+  const code = getHtmlPageCode(
+    getIframeCodeFromUrl(`https://trafimage-maps.sbb.ch/${topic}`),
+    extraCode,
+  );
 
   return (
     <>
