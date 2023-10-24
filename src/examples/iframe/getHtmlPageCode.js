@@ -1,4 +1,4 @@
-const getHtmlPageCode = (iframeCode) => {
+const getHtmlPageCode = (iframeCode, extraCode = '') => {
   if (!iframeCode) {
     return null;
   }
@@ -8,7 +8,7 @@ const getHtmlPageCode = (iframeCode) => {
   <body>
     <div style="width:800px;height:600px;">
       ${iframeCode}
-    </div>
+    </div>${extraCode}
   </body>
 </html>
   `;
