@@ -47,7 +47,6 @@ const App = () => {
       <button
         style={{ margin: '10px 5px', padding: '10px 5px' }}
         onClick={() => {
-          console.dir(document);
           const iframe = document.getElementById('railplus-iframe');
           if (iframe) {
             iframe.contentWindow.postMessage('pdf-download', '*');
