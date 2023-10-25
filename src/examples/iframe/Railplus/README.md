@@ -49,7 +49,7 @@ const App = () => {
         onClick={() => {
           const iframe = document.getElementById('railplus-iframe');
           if (iframe) {
-            iframe.contentWindow.postMessage('pdf-download', '*');
+            iframe.contentWindow.postMessage('pdf-download-event', '*');
           }
         }}
       >

@@ -138,7 +138,7 @@ ExportButton.defaultProps = {
   exportSize: [3370, 2384], // a0
   loadingComponent: <DefaultLoadingComponent />,
   style: {},
-  id: 'download',
+  id: null,
 };
 
 export default React.memo(ExportButton);

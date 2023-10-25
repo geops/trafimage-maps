@@ -24,7 +24,6 @@ import TopicTelephoneInfos from '../TopicTelephoneInfos';
 import TopicsMenu from '../TopicsMenu';
 import Overlay from '../Overlay';
 import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
-import MessageListener from '../MessageListener';
 
 const defaultElements = {
   header: false,
@@ -222,10 +221,6 @@ function TopicElements({ history }) {
         {elements.footer && <Footer />}
         {elements.overlay && <Overlay elements={elements} />}
         <MainDialog />
-        <MessageListener
-          message={activeTopic?.messageConfig?.message}
-          callback={activeTopic?.messageConfig?.callback}
-        />
       </div>
     </div>
   );

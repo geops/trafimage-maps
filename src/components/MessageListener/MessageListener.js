@@ -1,28 +1,51 @@
+import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-const useListenMessage = (callback, eventType = 'trafimage-event') => {
-  const tm = document.getElementsByTagName('trafimage-maps')[0];
+const useListenMessage = (messageEvents, element) => {
   useEffect(() => {
-    if (callback) {
-      tm?.addEventListener(eventType, callback);
-      window.addEventListener('message', callback);
+    let eventCache = [];
+    if (messageEvents?.length) {
+      messageEvents.forEach((messageEvent) => {
+        const callback = (evt) => {
+          if (
+            evt.type === messageEvent.eventType ||
+            evt.data === messageEvent.eventType
+          ) {
+            messageEvent.callback(evt);
+          }
+        };
+        window.addEventListener('message', callback);
+        element?.addEventListener(messageEvent.eventType, callback);
+        eventCache = ['message', messageEvent.eventType].map((eventType) => ({
+          eventType,
+          callback,
+        }));
+      });
     }
+
     return () => {
-      tm?.removeEventListener(eventType, callback);
-      window.removeEventListener('message', callback);
+      eventCache.forEach((event) => {
+        window.removeEventListener(event.eventType, event.callback);
+        element?.removeEventListener(event.eventType, event.callback);
+      });
     };
-  }, [callback, eventType, tm]);
+  }, [messageEvents, element]);
 };
 
-function MessageListener() {
+function MessageListener({ element }) {
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  useListenMessage(
-    activeTopic?.messageConfig?.callback,
-    activeTopic?.messageConfig?.eventType,
-  );
+  useListenMessage(activeTopic?.messageEvents, element);
 
   return null;
 }
+
+MessageListener.propTypes = {
+  element: PropTypes.object,
+};
+
+MessageListener.defaultProps = {
+  element: null,
+};
 
 export default MessageListener;

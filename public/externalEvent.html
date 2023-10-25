@@ -35,12 +35,12 @@
         Download PDF
       </button>
     </div>
-    <!-- <script src="./build/bundle.js"></script> -->
-    <script src="https://unpkg.com/trafimage-maps@1.21.22-beta.7/bundle.js"></script>
+    <!-- <script src="./bundle.js"></script> -->
+    <script src="https://unpkg.com/trafimage-maps@1.21.22-beta.9/bundle.js"></script>
     <script>
       function downloadPdf() {
         const tm = document.getElementsByTagName('trafimage-maps')?.[0];
-        tm?.dispatchEvent(new Event('pdf-download'));
+        tm?.dispatchEvent(new Event('pdf-download-event'));
       }
     </script>
   </body>

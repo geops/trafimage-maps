@@ -8,9 +8,9 @@
     />
     <title>Trafimage Webkarten</title>
   </head>
-  <body style="height: 3000px; width: 100%; box-sizing: border-box; margin: 0">
+  <body style="width: 100%; box-sizing: border-box; margin: 0">
     <div>
-      <h1>Test iframe</h1>
+      <h1>Iframe scroll & external PDF download</h1>
     </div>
     <div
       id="root"
@@ -22,9 +22,18 @@
       "
     >
       <iframe
-        src="/ch.sbb.direktverbindungen?embedded=true"
+        id="iframe"
+        src="/ch.railplus.mitglieder"
         style="width: 100%; height: 100%; border: none"
       ></iframe>
+    </div>
+    <div>
+      <button
+        style="margin: 10px 5px; padding: 10px 5px"
+        onclick="downloadPdf()"
+      >
+        Download Pdf
+      </button>
     </div>
     <div>
       <p>More content</p>
@@ -52,4 +61,12 @@
       <p>More content</p>
     </div>
   </body>
+  <script>
+    function downloadPdf() {
+      const iframe = document.getElementById('iframe');
+      if (iframe) {
+        iframe.contentWindow.postMessage('pdf-download-event', '*');
+      }
+    }
+  </script>
 </html>

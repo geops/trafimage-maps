@@ -33,7 +33,11 @@ import dvLayers from './ch.sbb.direktverbindungen';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
-import { DV_KEY, RAILPLUS_EXPORTBTN_ID } from '../utils/constants';
+import {
+  DV_KEY,
+  PDF_DOWNLOAD_EVENT_TYPE,
+  RAILPLUS_EXPORTBTN_ID,
+} from '../utils/constants';
 import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
 import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
@@ -401,7 +405,6 @@ export const direktverbindungenIframe = {
   overlaySide: 'left',
 };
 
-const railplusPdfDownloadType = 'pdf-download';
 export const railPlus = {
   elements: {
     ...defaultElements,
@@ -425,17 +428,12 @@ export const railPlus = {
   menu: <RailplusMenu />,
   embedded: true,
   overlaySide: 'left',
-  messageConfig: {
-    eventType: railplusPdfDownloadType,
-    callback: (evt) => {
-      if (
-        evt.type === railplusPdfDownloadType ||
-        evt.data === railplusPdfDownloadType
-      ) {
-        document.getElementById(RAILPLUS_EXPORTBTN_ID).click();
-      }
+  messageEvents: [
+    {
+      eventType: PDF_DOWNLOAD_EVENT_TYPE,
+      callback: () => document.getElementById(RAILPLUS_EXPORTBTN_ID).click(),
     },
-  },
+  ],
   exportConfig: {
     publishedAt: '11/2023',
     year: '2023',
