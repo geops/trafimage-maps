@@ -112,6 +112,10 @@
       }
     </style>
     <script type="text/javascript">
+      window.sendMessage = function (eventType) {
+        var trafimageMaps = document.getElementsByTagName('trafimage-maps')[0];
+        trafimageMaps.dispatchEvent(new CustomEvent(eventType));
+      };
       window.changeAttr = function (attr, val) {
         if (attr === 'activeTopicKey') {
           window.history.pushState(
@@ -302,7 +306,7 @@
           <legend>activeTopicKey:</legend>
           <label>
             <input type="text" id="activeTopicKey" value="ch.sbb.handicap"></input>
-            <button onclick="changeAttr('activeTopicKey', document.getElementById('activeTopicKey').value)">apply</button>
+            <button onclick="changeAttr('activeTopicKey', document.getElementById('activeTopicKey').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -310,7 +314,7 @@
           <legend>vectorTilesUrl:</legend>
           <label>
             <input type="text" id="vectorTilesUrl"></input>
-            <button onclick="changeAttr('vectorTilesUrl', document.getElementById('vectorTilesUrl').value)">apply</button>
+            <button onclick="changeAttr('vectorTilesUrl', document.getElementById('vectorTilesUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -318,7 +322,7 @@
           <legend>realtimeUrl:</legend>
           <label>
             <input type="text" id="realtimeUrl"></input>
-            <button onclick="changeAttr('realtimeUrl', document.getElementById('realtimeUrl').value)">apply</button>
+            <button onclick="changeAttr('realtimeUrl', document.getElementById('realtimeUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -326,7 +330,7 @@
           <legend>stopsUrl:</legend>
           <label>
             <input type="text" id="stopsUrl"></input>
-            <button onclick="changeAttr('stopsUrl', document.getElementById('stopsUrl').value)">apply</button>
+            <button onclick="changeAttr('stopsUrl', document.getElementById('stopsUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -334,7 +338,7 @@
           <legend>searchUrl:</legend>
           <label>
             <input type="text" id="searchUrl"></input>
-            <button onclick="changeAttr('searchUrl', document.getElementById('searchUrl').value)">apply</button>
+            <button onclick="changeAttr('searchUrl', document.getElementById('searchUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -342,7 +346,7 @@
           <legend>cartaroUrl:</legend>
           <label>
             <input type="text" id="cartaroUrl"></input>
-            <button onclick="changeAttr('cartaroUrl', document.getElementById('cartaroUrl').value)">apply</button>
+            <button onclick="changeAttr('cartaroUrl', document.getElementById('cartaroUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -350,7 +354,7 @@
           <legend>mapsetUrl:</legend>
           <label>
             <input type="text" id="mapsetUrl"></input>
-            <button onclick="changeAttr('mapsetUrl', document.getElementById('mapsetUrl').value)">apply</button>
+            <button onclick="changeAttr('mapsetUrl', document.getElementById('mapsetUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -358,7 +362,7 @@
           <legend>drawUrl:</legend>
           <label>
             <input type="text" id="drawUrl"></input>
-            <button onclick="changeAttr('drawUrl', document.getElementById('drawUrl').value)">apply</button>
+            <button onclick="changeAttr('drawUrl', document.getElementById('drawUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -366,7 +370,7 @@
           <legend>shortenerUrl:</legend>
           <label>
             <input type="text" id="shortenerUrl"></input>
-            <button onclick="changeAttr('shortenerUrl', document.getElementById('shortenerUrl').value)">apply</button>
+            <button onclick="changeAttr('shortenerUrl', document.getElementById('shortenerUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -374,7 +378,7 @@
           <legend>destinationUrl:</legend>
           <label>
             <input type="text" id="destinationUrl"></input>
-            <button onclick="changeAttr('destinationUrl', document.getElementById('destinationUrl').value)">apply</button>
+            <button onclick="changeAttr('destinationUrl', document.getElementById('destinationUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -382,7 +386,7 @@
           <legend>departuresUrl:</legend>
           <label>
             <input type="text" id="departuresUrl"></input>
-            <button onclick="changeAttr('departuresUrl', document.getElementById('departuresUrl').value)">apply</button>
+            <button onclick="changeAttr('departuresUrl', document.getElementById('departuresUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -390,7 +394,7 @@
           <legend>appBaseUrl:</legend>
           <label>
             <input type="text" id="appBaseUrl"></input>
-            <button onclick="changeAttr('appBaseUrl', document.getElementById('appBaseUrl').value)">apply</button>
+            <button onclick="changeAttr('appBaseUrl', document.getElementById('appBaseUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -398,7 +402,7 @@
           <legend>staticFilesUrl:</legend>
           <label>
             <input type="text" id="staticFilesUrl"></input>
-            <button onclick="changeAttr('staticFilesUrl', document.getElementById('staticFilesUrl').value)">apply</button>
+            <button onclick="changeAttr('staticFilesUrl', document.getElementById('staticFilesUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -406,7 +410,7 @@
           <legend>loginUrl:</legend>
           <label>
             <input type="text" id="loginUrl"></input>
-            <button onclick="changeAttr('loginUrl', document.getElementById('loginUrl').value)">apply</button>
+            <button onclick="changeAttr('loginUrl', document.getElementById('loginUrl').value)">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -414,7 +418,7 @@
           <legend>center:</legend>
           <label>
             <input type="text" id="center" value='950000,6000000'></input>
-            <button onclick="changeAttr('center', '[' + document.getElementById('center').value + ']')">apply</button>
+            <button onclick="changeAttr('center', '[' + document.getElementById('center').value + ']')">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -422,7 +426,7 @@
           <legend>zoom:</legend>
           <label>
             <input type="text" id="zoom" value="16"></input>
-            <button onclick="changeAttr('zoom', parseFloat(document.getElementById('zoom').value))">apply</button>
+            <button onclick="changeAttr('zoom', parseFloat(document.getElementById('zoom').value))">Apply</button>
           </label>
         </fieldset>
         <br>
@@ -430,7 +434,15 @@
           <legend>maxExtent:</legend>
           <label>
             <input type="text" id="maxExtent" value='502649.8980,5655117.1007,1352629.6525,6141868.0968'></input>
-            <button onclick="changeAttr('maxExtent', document.getElementById('maxExtent').value)">apply</button>
+            <button onclick="changeAttr('maxExtent', document.getElementById('maxExtent').value)">Apply</button>
+          </label>
+        </fieldset>
+        <br>
+        <fieldset>
+          <legend>messageEvent:</legend>
+          <label>
+            <input type="text" id="messageEvent" value='pdf-download-event'></input>
+            <button onclick="sendMessage(document.getElementById('messageEvent').value)">Send message</button>
           </label>
         </fieldset>
         <br>
