@@ -15,6 +15,7 @@ import DocForm from '../../DocForm';
 import getIframeCodeFromUrl from '../getIframeCodeFromUrl';
 import getHtmlPageCode from '../getHtmlPageCode';
 import iframeSearcgetHtmlPageCodehParams from '../iframeSearchParams';
+import { PDF_DOWNLOAD_EVENT_TYPE } from '../../../utils/constants';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
@@ -27,7 +28,7 @@ const extraCode = `
       function downloadPdf() {
         const iframe = document.getElementsByTagName('iframe');
         if (iframe) {
-          iframe.contentWindow.postMessage('pdf-download', '*');
+          iframe.contentWindow.postMessage('${PDF_DOWNLOAD_EVENT_TYPE}', '*');
         }
       }
     </script>`;
@@ -49,7 +50,7 @@ const App = () => {
         onClick={() => {
           const iframe = document.getElementById('railplus-iframe');
           if (iframe) {
-            iframe.contentWindow.postMessage('pdf-download-event', '*');
+            iframe.contentWindow.postMessage(PDF_DOWNLOAD_EVENT_TYPE, '*');
           }
         }}
       >
