@@ -4,7 +4,8 @@
       "react-app",
       {
         "absoluteRuntime": false,
-        "typescript": false
+        "typescript": false,
+        "modules": "auto"
       }
     ]
   ],
