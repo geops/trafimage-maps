@@ -1,7 +1,7 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.21.22",
+  "version": "1.21.23-beta.4",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
@@ -110,6 +110,7 @@
     "resemblejs": "4.1.0",
     "sass": "1.69.4",
     "sort-json": "2.0.1",
+    "source-map-explorer": "^2.5.3",
     "standard-version": "9.5.0",
     "start-server-and-test": "1.14.0",
     "stream-array": "1.1.2",
@@ -125,6 +126,7 @@
     "react-error-overlay": "6.0.9"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js",
     "build": "GENERATE_SOURCEMAP=false  react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
     "coverage": "yarn test  --watchAll=false  --coverage --coverageDirectory=coverage",
     "cp": "generact --root src",
