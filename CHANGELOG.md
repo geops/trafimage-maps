@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.21.22](https://github.com/geops/trafimage-maps/compare/v1.21.21...v1.21.22) (2023-10-27)
+
+### Bug Fixes
+
+- remove delays when the vehicle does not support realtime ([#1107](https://github.com/geops/trafimage-maps/issues/1107)) ([4ad92a0](https://github.com/geops/trafimage-maps/commit/4ad92a0cb00a320a4ac0e0547a9412d5c4b2b931))
+
 ### [1.21.21](https://github.com/geops/trafimage-maps/compare/v1.21.20...v1.21.21) (2023-10-10)
 
 ### Bug Fixes

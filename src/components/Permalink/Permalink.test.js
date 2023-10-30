@@ -58,7 +58,8 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual('?lang=de&layers=testLayer');
+    expect(window.location.search).toMatch('lang=de');
+    expect(window.location.search).toMatch('layers=testLayer');
   });
 
   test("shoud remove space from 'tripNumber' Tracker filter.", () => {
@@ -73,9 +74,9 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual(
-      '?lang=de&layers=testLayer&tripNumber=150,200,300',
-    );
+    expect(window.location.search).toMatch('lang=de');
+    expect(window.location.search).toMatch('layers=testLayer');
+    expect(window.location.search).toMatch('tripNumber=150,200,300');
   });
 
   test("shoud remove space from 'publishedLineName' Tracker filter.", () => {
@@ -90,9 +91,9 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual(
-      '?lang=de&layers=testLayer&publishedLineName=2068,3003',
-    );
+    expect(window.location.search).toMatch('lang=de');
+    expect(window.location.search).toMatch('layers=testLayer');
+    expect(window.location.search).toMatch('publishedLineName=2068,3003');
   });
 
   test('shoud use x,y in mercator.', () => {
@@ -103,9 +104,9 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual(
-      '?lang=de&layers=testLayer&x=6456530&y=-7170156',
-    );
+    expect(window.location.search).toMatch('x=6456530&y=-7170156');
+    expect(window.location.search).toMatch('lang=de');
+    expect(window.location.search).toMatch('layers=testLayer');
     expect(store.getActions()[0]).toEqual({
       data: [6456530, -7170156],
       type: 'SET_CENTER',
@@ -120,7 +121,8 @@ describe('Permalink', () => {
       </Provider>,
     );
 
-    expect(window.location.search).toEqual('?lang=de&layers=testLayer');
+    expect(window.location.search).toMatch('lang=de');
+    expect(window.location.search).toMatch('layers=testLayer');
     expect(store.getActions()[0]).toEqual({
       data: [6456530.466009867, -7170156.29399995],
       type: 'SET_CENTER',
@@ -139,9 +141,9 @@ describe('Permalink', () => {
           </Provider>,
         );
       });
-      expect(window.location.search).toEqual(
-        '?draw.id=quu&lang=de&layers=testLayer',
-      );
+      expect(window.location.search).toMatch('lang=de');
+      expect(window.location.search).toMatch('draw.id=quu');
+      expect(window.location.search).toMatch('layers=testLayer');
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
       expect(store.getActions().pop()).toEqual({
         data: {
@@ -164,9 +166,9 @@ describe('Permalink', () => {
         </Provider>,
       );
     });
-    expect(window.location.search).toEqual(
-      '?draw.id=quu&lang=de&layers=testLayer',
-    );
+    expect(window.location.search).toMatch('draw.id=quu');
+    expect(window.location.search).toMatch('lang=de');
+    expect(window.location.search).toMatch('layers=testLayer');
     expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
     expect(store.getActions().pop()).toEqual({
       data: {

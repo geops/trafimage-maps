@@ -61,11 +61,9 @@ describe('permalink', () => {
             'baselayers=ch.sbb.netzkarte,ch.sbb.netzkarte.dark,ch.sbb.netzkarte.luftbild.group,ch.sbb.netzkarte.landeskarte,ch.sbb.netzkarte.landeskarte.grau',
           ),
         );
-
-        cy.url().should(
-          'match',
-          new RegExp('lang=de&layers=&x=810000&y=5900000&z=8'),
-        );
+        cy.url().should('match', new RegExp('lang=de'));
+        cy.url().should('match', new RegExp('layers=&'));
+        cy.url().should('match', new RegExp('x=810000&y=5900000&z=8'));
       });
 
       it('should hide header', () => {

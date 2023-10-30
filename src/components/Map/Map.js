@@ -90,6 +90,13 @@ class Map extends PureComponent {
     this.onPointerMoveRef = map.on('pointermove', (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on('singleclick', (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent('load'));
+    map?.updateSize();
+  }
+
+  componentDidUpdate() {
+    const { map } = this.props;
+    // VIP: Without the map stays white.
+    map?.updateSize();
   }
 
   componentWillUnmount() {
