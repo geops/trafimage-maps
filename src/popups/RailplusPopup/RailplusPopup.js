@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Feature } from 'ol';
 import { Typography, makeStyles } from '@material-ui/core';
+import { useSelector } from 'react-redux';
 import RailplusLayer from '../../layers/RailplusLayer';
 
 const useStyles = makeStyles(() => ({
@@ -12,6 +13,7 @@ const useStyles = makeStyles(() => ({
 
 function RailplusPopup({ feature, layer }) {
   const classes = useStyles();
+  const apiKey = useSelector((state) => state.app.apiKey);
   const tuDetails = layer.railplusProviders[feature.get('isb_tu_nummer')];
   const [spriteStyle, setSpriteStyle] = useState();
 
@@ -21,7 +23,9 @@ function RailplusPopup({ feature, layer }) {
     const abortController = new AbortController();
 
     const fetchSpriteData = () => {
-      fetch(`${style.sprite}.json`, { signal: abortController.signal })
+      fetch(`${style.sprite}.json?key=${apiKey}`, {
+        signal: abortController.signal,
+      })
         .then((res) => res.json())
         .then((data) => {
           const detail = data[tuDetails.name];
@@ -32,7 +36,7 @@ function RailplusPopup({ feature, layer }) {
           } else {
             const { width, height, x, y } = detail;
             setSpriteStyle({
-              background: `url('${style.sprite}.png') -${x}px -${y}px`,
+              background: `url('${style.sprite}.png?key=${apiKey}') -${x}px -${y}px`,
               width,
               height,
             });
@@ -45,7 +49,7 @@ function RailplusPopup({ feature, layer }) {
     return () => {
       abortController?.abort();
     };
-  }, [layer, tuDetails]);
+  }, [apiKey, layer, tuDetails]);
 
   return (
     <div className={classes.railplusPopup}>
