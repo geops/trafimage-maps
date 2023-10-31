@@ -1,45 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Feature } from 'ol';
 import { Typography, makeStyles } from '@material-ui/core';
 import RailplusLayer from '../../layers/RailplusLayer';
 
-const useStyles = makeStyles((theme) => ({
-  dividerRoot: {
-    height: 2,
-    margin: '10px 0',
-    backgroundColor: theme.colors.gray,
-  },
-  providerName: {
-    fontSize: 16,
-    // color: theme.colors.gray,
-  },
-  link: {
-    '&:link': {
-      textDecoration: 'none !important',
-    },
+const useStyles = makeStyles(() => ({
+  logo: {
+    marginBottom: 10,
   },
 }));
 
 function RailplusPopup({ feature, layer }) {
   const classes = useStyles();
-  const isbNummer = feature.get('isb_tu_nummer');
-  const tuDetails = layer.railplusProviders[isbNummer];
+  const tuDetails = layer.railplusProviders[feature.get('isb_tu_nummer')];
+  const [spriteStyle, setSpriteStyle] = useState();
+
+  useEffect(() => {
+    const style = layer.mapboxLayer.mbMap.getStyle();
+
+    const abortController = new AbortController();
+
+    const fetchSpriteData = () => {
+      fetch(`${style.sprite}.json`, { signal: abortController.signal })
+        .then((res) => res.json())
+        .then((data) => {
+          const detail = data[tuDetails.name];
+          if (!detail) {
+            // eslint-disable-next-line no-console
+            console.log('No image for', tuDetails.name, data);
+            setSpriteStyle();
+          } else {
+            const { width, height, x, y } = detail;
+            setSpriteStyle({
+              background: `url('${style.sprite}.png') -${x}px -${y}px`,
+              width,
+              height,
+            });
+          }
+        });
+    };
+
+    fetchSpriteData();
+
+    return () => {
+      abortController?.abort();
+    };
+  }, [layer, tuDetails]);
 
   return (
     <div className={classes.railplusPopup}>
-      {/* <a
-        href={provider.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={classes.link}
-      >
-        <img src={provider.logo} style={{ width: '100%' }} alt="logo" />
-        <Divider classes={{ root: classes.dividerRoot }} />
-        <Typography className={classes.providerName}>
-          {provider.name}
-        </Typography>
-      </a> */}
+      {spriteStyle && <div className={classes.logo} style={spriteStyle} />}
       <Typography variant="body2">{tuDetails.long_name}</Typography>
     </div>
   );
@@ -50,4 +60,4 @@ RailplusPopup.propTypes = {
   layer: PropTypes.instanceOf(RailplusLayer).isRequired,
 };
 
-export default RailplusPopup;
+export default React.memo(RailplusPopup);
