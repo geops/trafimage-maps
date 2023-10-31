@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.22.0](https://github.com/geops/trafimage-maps/compare/v1.21.22...v1.22.0) (2023-10-31)
+
+### Features
+
+- **railplus:** add RailPlus topic ([#1106](https://github.com/geops/trafimage-maps/issues/1106)) ([5992fae](https://github.com/geops/trafimage-maps/commit/5992fae966daa51a29df2a6048eda7a008dcebc5))
+
+### Bug Fixes
+
+- allow proper tree shaking for app using the es folder ([#1108](https://github.com/geops/trafimage-maps/issues/1108)) ([03c6259](https://github.com/geops/trafimage-maps/commit/03c625913b804252e32ad1b371ca07ca2ee1ce56))
+
 ### [1.21.22](https://github.com/geops/trafimage-maps/compare/v1.21.21...v1.21.22) (2023-10-27)
 
 ### Bug Fixes
