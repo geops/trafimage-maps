@@ -6,8 +6,15 @@ import { useSelector } from 'react-redux';
 import RailplusLayer from '../../layers/RailplusLayer';
 
 const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 30,
+  },
   logo: {
-    marginBottom: 10,
+    marginTop: 20,
+    display: 'flex',
+    // justifyContent: 'center',
   },
 }));
 
@@ -57,8 +64,12 @@ function RailplusPopup({ feature, layer }) {
   }, [apiKey, layer, tuDetails]);
 
   return (
-    <div className={classes.railplusPopup}>
-      {spriteStyle && <div className={classes.logo} style={spriteStyle} />}
+    <div className={classes.root}>
+      {spriteStyle && (
+        <div className={classes.logo}>
+          <div style={spriteStyle} />
+        </div>
+      )}
       <Typography variant="body2">{tuDetails.long_name}</Typography>
     </div>
   );
