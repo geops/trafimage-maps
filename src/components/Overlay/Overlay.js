@@ -141,7 +141,7 @@ const defaultProps = {
   disablePortal: true,
   transitionDuration: undefined,
   ResizableProps: {
-    defaultSize: { height: 300 },
+    defaultSize: { height: 200 },
     onResize: () => {},
     snap: null,
   },

@@ -45,6 +45,9 @@ function RailplusMenu() {
 
   return (
     <IframeMenu
+      ResizableProps={{
+        defaultSize: { height: 'auto' },
+      }}
       title={
         <Box className={classes.listHeader}>
           <b>{t(layer.key)}</b>

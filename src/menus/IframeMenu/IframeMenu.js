@@ -90,7 +90,7 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function IframeMenu({ header, body, hide, title }) {
+function IframeMenu({ header, body, hide, title, ResizableProps }) {
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const displayMenu = useSelector((state) => state.app.displayMenu);
@@ -136,13 +136,18 @@ function IframeMenu({ header, body, hide, title }) {
           disablePortal={false}
           transitionDuration={0}
           ResizableProps={{
-            defaultSize: { height: IFRAME_OVERLAY_DEFAULT_HEIGHT },
+            ...(ResizableProps || {}),
+            defaultSize: {
+              height: IFRAME_OVERLAY_DEFAULT_HEIGHT,
+              ...(ResizableProps?.defaultSize || {}),
+            },
             snap: {
               y: [
                 OVERLAY_MIN_HEIGHT,
                 IFRAME_OVERLAY_DEFAULT_HEIGHT,
                 document.documentElement.clientHeight,
               ],
+              ...(ResizableProps?.snap || {}),
             },
           }}
         >
@@ -177,6 +182,17 @@ IframeMenu.propTypes = {
   body: PropTypes.node,
   hide: PropTypes.bool,
   title: PropTypes.node,
+  ResizableProps: PropTypes.shape({
+    defaultSize: PropTypes.shape({
+      height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+      width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    }),
+    snap: PropTypes.shape({
+      x: PropTypes.arrayOf(PropTypes.number),
+      y: PropTypes.arrayOf(PropTypes.number),
+    }),
+    onResize: PropTypes.func,
+  }),
 };
 
 IframeMenu.defaultProps = {
@@ -184,6 +200,7 @@ IframeMenu.defaultProps = {
   body: null,
   hide: false,
   title: null,
+  ResizableProps: {},
 };
 
 export default IframeMenu;
