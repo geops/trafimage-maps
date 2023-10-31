@@ -9,10 +9,10 @@ const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 30,
+    gap: 20,
   },
   logo: {
-    marginTop: 20,
+    marginTop: 15,
     display: 'flex',
     // justifyContent: 'center',
   },
