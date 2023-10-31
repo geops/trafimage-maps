@@ -26,24 +26,17 @@ BtnCmpt.defaultProps = {
   title: 'Grossformatiges PDF exportieren',
 };
 
-const hidden = { visibility: 'hidden', position: 'absolute', top: -50 };
 const params = new URLSearchParams(window.location.search);
 
 function RailplusExportButton() {
-  const styles = params.get('exportbtn') === 'true' ? undefined : hidden;
+  if (params.get('exportbtn') !== 'true') {
+    return null;
+  }
   return (
-    <ExportButton
-      style={styles}
-      id={RAILPLUS_EXPORTBTN_ID}
-      loadingComponent={
-        <BtnCmpt>
-          <Loader />
-        </BtnCmpt>
-      }
-    >
+    <ExportButton id={RAILPLUS_EXPORTBTN_ID} loadingComponent={<Loader />}>
       <BtnCmpt />
     </ExportButton>
   );
 }
 
-export default RailplusExportButton;
+export default React.memo(RailplusExportButton);
