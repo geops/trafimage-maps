@@ -48,6 +48,9 @@ export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];
 // UI
 export const OVERLAY_MIN_HEIGHT = 55;
 
+// Style metadata filter
+export const MD_RAILPLUS_FILTER = 'railplus.filter';
+
 // PDF export
 export const FORCE_EXPORT_PROPERTY = 'forceVisibilityOnPdf';
 export const RAILPLUS_EXPORTBTN_ID = 'railplus-export-button';

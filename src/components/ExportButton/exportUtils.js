@@ -15,14 +15,29 @@ import LayerService from '../../utils/LayerService';
 
 const actualPixelRatio = window.devicePixelRatio;
 
-const getStyleWithForceVisibility = (mbStyle, topicStyleLayers) => {
+const getStyleWithForceVisibility = (
+  mbStyle,
+  topicStyleLayersToShow = [],
+  topicStyleLayersToHide = [],
+) => {
   const newMbStyle = { ...mbStyle };
-  topicStyleLayers.forEach((styleLayer) => {
+  topicStyleLayersToShow.forEach((styleLayer) => {
     if (styleLayer.styleLayersFilter) {
       newMbStyle.layers.forEach((mbLayer) => {
         if (styleLayer.styleLayersFilter(mbLayer)) {
           // eslint-disable-next-line no-param-reassign
           mbLayer.layout.visibility = 'visible';
+        }
+      });
+    }
+  });
+  topicStyleLayersToHide.forEach((styleLayer) => {
+    if (styleLayer.styleLayersFilter) {
+      newMbStyle.layers.forEach((mbLayer) => {
+        if (styleLayer.styleLayersFilter(mbLayer)) {
+          console.log('ici');
+          // eslint-disable-next-line no-param-reassign
+          mbLayer.layout.visibility = 'none';
         }
       });
     }
@@ -143,13 +158,22 @@ export const getMapHd = (
     return Promise.resolve();
   }
 
-  const styleLayersToForceShow = layerService.layers.filter((l) =>
-    l.get(FORCE_EXPORT_PROPERTY),
+  // We hide/show some layers when export.
+  const styleLayersToForceShow = layerService.layers.filter(
+    (l) => l.get(FORCE_EXPORT_PROPERTY) === true,
+  );
+  const styleLayersToForceHide = layerService.layers.filter(
+    (l) => l.get(FORCE_EXPORT_PROPERTY) === false,
   );
 
-  const mbStyle = styleLayersToForceShow.length
-    ? getStyleWithForceVisibility(mbMap.getStyle(), styleLayersToForceShow)
-    : mbMap.getStyle();
+  console.log(styleLayersToForceHide);
+
+  const mbStyle = getStyleWithForceVisibility(
+    mbMap.getStyle(),
+    styleLayersToForceShow,
+    styleLayersToForceHide,
+  );
+
   return buildMapboxMapHd(map, div, center, mbStyle, scale, targetZoom).then(
     () => {
       return buildOlMapHd(map, div, center, scale, targetResolution);

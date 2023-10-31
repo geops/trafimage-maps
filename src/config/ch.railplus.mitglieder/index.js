@@ -1,6 +1,9 @@
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import RailplusLayer from '../../layers/RailplusLayer';
-import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
+import {
+  FORCE_EXPORT_PROPERTY,
+  MD_RAILPLUS_FILTER,
+} from '../../utils/constants';
 
 export const netzkarteRailplus = new TrafimageMapboxLayer({
   name: 'ch.railplus.mitglieder.data',
@@ -8,6 +11,7 @@ export const netzkarteRailplus = new TrafimageMapboxLayer({
   zIndex: -1,
   style: 'base_bright_v2_ch.railplus.meterspurbahnen',
   properties: {
+    hideInLegend: true,
     isBaseLayer: true,
   },
   mapOptions: {
@@ -20,16 +24,11 @@ export const railplusMeterspurbahnen = new RailplusLayer({
   visible: true,
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['railplus.filter'] &&
-    /^line$/.test(metadata['railplus.filter']),
-  queryRenderedLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['railplus.filter'] &&
-    /^line$/.test(metadata['railplus.filter']),
+    /^line$/.test(metadata?.[MD_RAILPLUS_FILTER]),
   properties: {
     isQueryable: true,
     popupComponent: 'RailplusPopup',
+    hideInLegend: true,
     useOverlay: true,
   },
 });
@@ -39,11 +38,23 @@ export const railplusMeterspurbahnenPrint = new RailplusLayer({
   visible: false,
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) =>
-    metadata &&
-    metadata['railplus.filter'] &&
-    /^(print|logos)$/.test(metadata['railplus.filter']),
+    /^(print|logos)$/.test(metadata?.[MD_RAILPLUS_FILTER]),
   properties: {
+    hideInLegend: true,
     [FORCE_EXPORT_PROPERTY]: true,
+  },
+});
+
+export const railplusMeterspurbahnenFlags = new RailplusLayer({
+  name: 'ch.railplus.mitglieder.meterspur.flags',
+  visible: true,
+  mapboxLayer: netzkarteRailplus,
+  styleLayersFilter: ({ metadata }) => {
+    return /^flag$/.test(metadata?.[MD_RAILPLUS_FILTER]);
+  },
+  properties: {
+    hideInLegend: true,
+    [FORCE_EXPORT_PROPERTY]: false,
   },
 });
 
@@ -51,4 +62,5 @@ export default [
   netzkarteRailplus,
   railplusMeterspurbahnen,
   railplusMeterspurbahnenPrint,
+  railplusMeterspurbahnenFlags,
 ];
