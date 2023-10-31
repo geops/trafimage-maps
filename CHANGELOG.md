@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.2](https://github.com/geops/trafimage-maps/compare/v1.22.1...v1.22.2) (2023-10-31)
+
+### Bug Fixes
+
+- update translations ([64ad2b4](https://github.com/geops/trafimage-maps/commit/64ad2b41d27612f8d72784d06cae95cce5274f05))
+- use auto height for railplus menu on mobile ([ea068d5](https://github.com/geops/trafimage-maps/commit/ea068d503a659b0c2f15c39712e462898b2fbef9))
+
 ### [1.22.1](https://github.com/geops/trafimage-maps/compare/v1.22.0...v1.22.1) (2023-10-31)
 
 ### Bug Fixes
