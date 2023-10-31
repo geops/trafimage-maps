@@ -19,7 +19,7 @@ import { PDF_DOWNLOAD_EVENT_TYPE } from '../../../utils/constants';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const baseUrl = 'https://wkp.stag.trafimage.geops.ch'; // TODO: change before merge
+const baseUrl = 'https://maps.trafimage.ch'; // TODO: change before merge
 const topic = 'ch.railplus.mitglieder';
 
 const extraCode = `
