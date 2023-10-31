@@ -439,6 +439,7 @@ export const railPlus = {
     year: '2023',
     overlayImageUrl: railplusLegend,
   },
+  minZoom: 7,
 };
 
 const topics = {

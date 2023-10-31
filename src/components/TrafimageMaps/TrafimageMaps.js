@@ -250,11 +250,6 @@ const propTypes = {
    * Key of the current active topic
    */
   elements: PropTypes.string,
-
-  /**
-   * ref of the trafimage-maps element
-   */
-  trafimageRef: PropTypes.object,
 };
 
 const defaultProps = {
@@ -272,7 +267,6 @@ const defaultProps = {
   permissionInfos: null,
   embedded: false,
   elements: undefined,
-  trafimageRef: undefined,
   apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
   appBaseUrl: process?.env?.REACT_APP_BASE_URL,
@@ -721,8 +715,7 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   render() {
-    const { history, topics, enableTracking, domainConsentId, trafimageRef } =
-      this.props;
+    const { history, topics, enableTracking, domainConsentId } = this.props;
     const { requireConsent } = this.state;
 
     return (
@@ -737,7 +730,7 @@ class TrafimageMaps extends React.PureComponent {
             {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
             {this.matomo && <MatomoTracker />}
             <TopicLoader history={history} />
-            {trafimageRef && <MessageListener element={trafimageRef} />}
+            <MessageListener />
           </Provider>
         </ThemeProvider>
       </MatomoProvider>

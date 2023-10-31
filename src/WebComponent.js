@@ -411,7 +411,6 @@ const WebComponent = (props) => {
           domainConsentId={domainConsentId}
           language={language}
           elements={elements}
-          trafimageRef={ref?.current?.parentElement}
         />
       </div>
     </Styled>
