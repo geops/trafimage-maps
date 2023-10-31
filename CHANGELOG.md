@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.3](https://github.com/geops/trafimage-maps/compare/v1.22.2...v1.22.3) (2023-10-31)
+
+### Bug Fixes
+
+- hide flags when export as pdf ([02c711c](https://github.com/geops/trafimage-maps/commit/02c711c1aa3e7cd834ab3d12d565bd796eb6d359))
+
 ### [1.22.2](https://github.com/geops/trafimage-maps/compare/v1.22.1...v1.22.2) (2023-10-31)
 
 ### Bug Fixes
