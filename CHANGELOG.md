@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.1](https://github.com/geops/trafimage-maps/compare/v1.22.0...v1.22.1) (2023-10-31)
+
+### Bug Fixes
+
+- use tu_nummer when available for logos ([db788b7](https://github.com/geops/trafimage-maps/commit/db788b73dd58f2b84f84938321754945cf6a43a3))
+
 ## [1.22.0](https://github.com/geops/trafimage-maps/compare/v1.21.22...v1.22.0) (2023-10-31)
 
 ### Features
