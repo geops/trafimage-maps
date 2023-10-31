@@ -35,7 +35,6 @@ const getStyleWithForceVisibility = (
     if (styleLayer.styleLayersFilter) {
       newMbStyle.layers.forEach((mbLayer) => {
         if (styleLayer.styleLayersFilter(mbLayer)) {
-          console.log('ici');
           // eslint-disable-next-line no-param-reassign
           mbLayer.layout.visibility = 'none';
         }
@@ -165,8 +164,6 @@ export const getMapHd = (
   const styleLayersToForceHide = layerService.layers.filter(
     (l) => l.get(FORCE_EXPORT_PROPERTY) === false,
   );
-
-  console.log(styleLayersToForceHide);
 
   const mbStyle = getStyleWithForceVisibility(
     mbMap.getStyle(),

@@ -1,9 +1,8 @@
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import RailplusLayer from '../../layers/RailplusLayer';
-import {
-  FORCE_EXPORT_PROPERTY,
-  MD_RAILPLUS_FILTER,
-} from '../../utils/constants';
+import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
+
+export const MD_RAILPLUS_FILTER = 'railplus.filter';
 
 export const netzkarteRailplus = new TrafimageMapboxLayer({
   name: 'ch.railplus.mitglieder.data',
