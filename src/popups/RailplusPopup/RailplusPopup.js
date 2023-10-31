@@ -28,10 +28,15 @@ function RailplusPopup({ feature, layer }) {
       })
         .then((res) => res.json())
         .then((data) => {
-          const detail = data[tuDetails.name];
+          const detail = data[tuDetails.tu_nummer] || data[tuDetails.name];
           if (!detail) {
             // eslint-disable-next-line no-console
-            console.log('No image for', tuDetails.name, data);
+            console.log(
+              'No image for',
+              tuDetails.name,
+              tuDetails.tu_nummer,
+              data,
+            );
             setSpriteStyle();
           } else {
             const { width, height, x, y } = detail;

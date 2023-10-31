@@ -136,6 +136,7 @@
       };
 
       window.onload = function () {
+        var map = document.getElementById('map');
         var url = new URL(window.location.href);
         fetch('https://backend.developer.geops.io/publickey')
           .then(function (response) {
@@ -147,7 +148,7 @@
             topicFromUrl = topicFromUrl[topicFromUrl.length - 1];
             if (topicFromUrl) {
               changeAttr('activeTopicKey', topicFromUrl);
-            } else {
+            } else if(!map.getAttribute('activeTopicKey')) {
               changeAttr('activeTopicKey', 'ch.sbb.netzkarte');
             }
           })
@@ -235,7 +236,6 @@
           }
         })
 
-        var map = document.getElementById('map');
         var log = document.getElementById('log');
         map.addEventListener('moveend', function (evt) {
           console.log(evt);
