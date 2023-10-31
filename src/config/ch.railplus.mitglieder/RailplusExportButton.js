@@ -29,11 +29,9 @@ BtnCmpt.defaultProps = {
 const params = new URLSearchParams(window.location.search);
 
 function RailplusExportButton() {
-  if (params.get('exportbtn') !== 'true') {
-    return null;
-  }
   return (
     <ExportButton
+      style={params.get('exportbtn') !== 'true' ? { display: 'none' } : {}}
       id={RAILPLUS_EXPORTBTN_ID}
       loadingComponent={
         <BtnCmpt>
