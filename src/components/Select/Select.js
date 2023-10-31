@@ -66,7 +66,7 @@ const Select = (props) => {
       {...props}
       // The following props need to be set after {...newProps}, since they overwrite some of them
       MenuProps={{
-        getContentAnchorEl: () => null,
+        getContentAnchorEl: null,
         anchorOrigin: {
           vertical: 'bottom',
           horizontal: 'left',

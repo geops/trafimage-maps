@@ -91,6 +91,7 @@ const theme = createTheme({
     body2: {
       ...typoBody,
       fontSize: 16,
+      lineHeight: '1.7333333rem',
     },
     subtitle1: {
       fontSize: 13,

@@ -6,11 +6,29 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { LineString } from 'ol/geom';
 import { getCenter } from 'ol/extent';
+import { jsPDF as JsPDF } from 'jspdf';
+import Canvg from 'canvg';
 import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
 import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
 import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
+import LayerService from '../../utils/LayerService';
 
 const actualPixelRatio = window.devicePixelRatio;
+
+const getStyleWithForceVisibility = (mbStyle, topicStyleLayers) => {
+  const newMbStyle = { ...mbStyle };
+  topicStyleLayers.forEach((styleLayer) => {
+    if (styleLayer.styleLayersFilter) {
+      newMbStyle.layers.forEach((mbLayer) => {
+        if (styleLayer.styleLayersFilter(mbLayer)) {
+          // eslint-disable-next-line no-param-reassign
+          mbLayer.layout.visibility = 'visible';
+        }
+      });
+    }
+  });
+  return newMbStyle;
+};
 
 export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
   Object.defineProperty(window, 'devicePixelRatio', {
@@ -89,14 +107,14 @@ export const getMapHd = (
   size,
   zoom,
   extent,
-  exportConfig,
 ) => {
   const targetSize = size || map.getSize();
-
   // We create a temporary map.
   const div = document.createElement('div');
   div.style.width = `${targetSize[0]}px`;
   div.style.height = `${targetSize[1]}px`;
+  div.style.margin = `0 0 0 -50000px`; // we move the map to the left to be ensure it is hidden during export
+  document.body.style.overflow = 'hidden';
   document.body.append(div);
 
   let center = map.getView().getCenter();
@@ -125,13 +143,13 @@ export const getMapHd = (
     return Promise.resolve();
   }
 
-  const styleLayers = layerService.layers.filter((l) =>
+  const styleLayersToForceShow = layerService.layers.filter((l) =>
     l.get(FORCE_EXPORT_PROPERTY),
   );
-  const mbStyle =
-    exportConfig?.mbStyleFunction && styleLayers.length
-      ? exportConfig?.mbStyleFunction(mbMap.getStyle(), styleLayers)
-      : mbMap.getStyle();
+
+  const mbStyle = styleLayersToForceShow.length
+    ? getStyleWithForceVisibility(mbMap.getStyle(), styleLayersToForceShow)
+    : mbMap.getStyle();
   return buildMapboxMapHd(map, div, center, mbStyle, scale, targetZoom).then(
     () => {
       return buildOlMapHd(map, div, center, scale, targetResolution);
@@ -142,6 +160,7 @@ export const getMapHd = (
 export const clean = (mapToExport) => {
   mapToExport.getLayers().clear();
   document.body.removeChild(mapToExport.getTarget());
+  document.body.style.overflow = '';
   mapToExport.setTarget(null);
 };
 
@@ -178,4 +197,113 @@ export const generateExtraData = (layers, exportNorthArrow) => {
     };
   }
   return extraData;
+};
+
+export const exportPdf = async (
+  mapToExport,
+  map,
+  layers,
+  exportFormat,
+  canvas,
+  topic,
+  exportScale,
+  exportSize,
+) => {
+  clean(mapToExport, map, new LayerService(layers));
+
+  // add the image to a newly created PDF
+  const doc = new JsPDF({
+    orientation: 'landscape',
+    unit: 'pt',
+    format: exportFormat,
+  });
+
+  // Add map image
+  const ctx = canvas.getContext('2d');
+
+  // Apply SVG overlay if provided
+  if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
+    const { overlayImageUrl, dateDe, dateFr, publisher, publishedAt, year } =
+      topic.exportConfig;
+    /**
+     * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
+     * If changes in the legend SVG are necessary, make sure the values to insert are maintained
+     * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
+     * without major alterations)
+     * @ignore
+     */
+    // Fetch local svg
+    const svgString = await fetch(overlayImageUrl).then((response) =>
+      response.text(),
+    );
+
+    let updatedSvg = svgString.slice(); // Clone the string
+
+    // Replace dates and publisher data
+    if (year) {
+      updatedSvg = updatedSvg.replace(
+        '***Year***',
+        typeof year === 'function' ? year() : year,
+      );
+    }
+    if (dateDe) {
+      updatedSvg = updatedSvg.replace(
+        '***date_DE***',
+        typeof dateDe === 'function' ? dateDe() : dateDe,
+      );
+    }
+
+    if (dateFr) {
+      updatedSvg = updatedSvg.replace(
+        '***date_FR***',
+        typeof dateFr === 'function' ? dateFr() : dateFr,
+      );
+    }
+
+    if (publisher) {
+      updatedSvg = updatedSvg.replace('***publisher***', publisher);
+    }
+
+    if (publishedAt) {
+      updatedSvg = updatedSvg.replace(
+        '***published_at***',
+        typeof publishedAt === 'function' ? publishedAt() : publishedAt,
+      );
+    }
+
+    // The legend SVG MUST NOT contains width and height attributes (only a viewBox)
+    // because it breaks canvg rendering: a bad canvas size is set.
+    // so we remove it before the conversion to canvas.
+    const svgDoc = new DOMParser().parseFromString(
+      updatedSvg,
+      'application/xml',
+    );
+    svgDoc.documentElement.removeAttribute('width');
+    svgDoc.documentElement.removeAttribute('height');
+    updatedSvg = new XMLSerializer().serializeToString(svgDoc);
+
+    // Add legend SVG
+    const canvass = document.createElement('canvas');
+    canvass.width = canvas.width;
+    canvass.height = canvas.height;
+
+    const instance = await Canvg.fromString(
+      canvass.getContext('2d'),
+      updatedSvg,
+    );
+    await instance.render();
+
+    // Add SVG to map canvas
+    ctx.drawImage(canvass, 0, 0);
+  }
+
+  // Scale to fit the export size
+  ctx.scale(1 / exportScale, 1 / exportScale);
+
+  // Add canvas to PDF
+  doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
+
+  // download the result
+  const filename = `trafimage-${new Date().toISOString().substr(0, 10)}.pdf`;
+  doc.save(filename);
 };

@@ -37,8 +37,6 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
     });
 
     this.styleCache = {};
-
-    // this.setVisible(this.visible);
   }
 
   setLanguage(language) {

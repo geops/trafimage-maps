@@ -191,12 +191,14 @@ const ExportMenu = () => {
             </Select>
           </FormControl>
           <ExportButton
+            style={{
+              margin: '10px 20px',
+              minWidth: 100,
+            }}
             exportFormat={exportSelection.format}
             exportScale={exportSelection.resolution}
             exportSize={sizesByFormat[exportSelection.format]}
-          >
-            {t('PDF exportieren')}
-          </ExportButton>
+          />
         </div>
         <div className={classes.infoWrapper}>
           <FaInfoCircle

@@ -141,9 +141,9 @@ describe('Permalink', () => {
           </Provider>,
         );
       });
-      expect(window.location.search).toEqual(
-        '?lang=de&draw.id=quu&layers=testLayer',
-      );
+      expect(window.location.search).toMatch('lang=de');
+      expect(window.location.search).toMatch('draw.id=quu');
+      expect(window.location.search).toMatch('layers=testLayer');
       expect(drawLayer.olLayer.getSource().getFeatures().length).toEqual(1);
       expect(store.getActions().pop()).toEqual({
         data: {

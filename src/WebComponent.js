@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Styled } from '@geops/create-react-web-component';
 import { Layer } from 'mobility-toolbox-js/ol';
@@ -245,6 +245,7 @@ const WebComponent = (props) => {
     realtimeKey,
     activeTopicKey,
   } = props;
+  const ref = useRef();
 
   // We have to wait the applyinace of the layersVisibility attribute to avoid having blinking bg layer on load
   const [layersVisibilityApplied, setLayersVisibilityApplied] = useState(
@@ -393,6 +394,7 @@ const WebComponent = (props) => {
           width,
           height,
         }}
+        ref={ref}
       >
         <TrafimageMaps
           {...props}

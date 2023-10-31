@@ -2,7 +2,7 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
 
 /**
  * Layer for displaying blue circle on platforms on hover.
- * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
+ * Extends {@link https://mobility-toolbox-js.geops.io/doc/class/build/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
  * @private
  * @class
  * @param {Object} [options] Layer options.

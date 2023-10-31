@@ -2,7 +2,9 @@ import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
+import railplusLegend from '../img/railplus_legend.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
+import railPlusLayers from './ch.railplus.mitglieder';
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
@@ -31,10 +33,16 @@ import dvLayers from './ch.sbb.direktverbindungen';
 import defaultSearches, { handicapStopFinder } from './searches';
 import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
 import StsMenu from '../menus/StsMenu';
-import { DV_KEY } from '../utils/constants';
+import {
+  DV_KEY,
+  PDF_DOWNLOAD_EVENT_TYPE,
+  RAILPLUS_EXPORTBTN_ID,
+} from '../utils/constants';
 import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
 import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
+import RailplusMenu from '../menus/RailplusMenu';
+import RailplusExportButton from './ch.railplus.mitglieder/RailplusExportButton';
 
 // For backward compatibility
 export {
@@ -244,20 +252,6 @@ export const energiePublic = {
     exportMenu: true,
   },
   exportConfig: {
-    mbStyleFunction: (mbStyle, topicStyleLayers) => {
-      const newMbStyle = { ...mbStyle };
-      topicStyleLayers.forEach((styleLayer) => {
-        if (styleLayer.styleLayersFilter) {
-          newMbStyle.layers.forEach((mbLayer) => {
-            if (styleLayer.styleLayersFilter(mbLayer)) {
-              // eslint-disable-next-line no-param-reassign
-              mbLayer.layout.visibility = 'visible';
-            }
-          });
-        }
-      });
-      return newMbStyle;
-    },
     publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
     publishedAt: () => {
       const date = new Date();
@@ -411,6 +405,43 @@ export const direktverbindungenIframe = {
   overlaySide: 'left',
 };
 
+export const railPlus = {
+  elements: {
+    ...defaultElements,
+    overlay: false,
+    popup: false,
+    shareMenu: false,
+    drawMenu: false,
+    permalink: true,
+    geolocationButton: false,
+    header: false,
+    search: false,
+    footer: false,
+    menu: false,
+  },
+  key: 'ch.railplus.mitglieder',
+  layers: railPlusLayers,
+  only: true,
+  hideInLayerTree: true,
+  enableFeatureClick: true,
+  mapControls: <RailplusExportButton />,
+  menu: <RailplusMenu />,
+  embedded: true,
+  overlaySide: 'left',
+  messageEvents: [
+    {
+      eventType: PDF_DOWNLOAD_EVENT_TYPE,
+      callback: () => document.getElementById(RAILPLUS_EXPORTBTN_ID).click(),
+    },
+  ],
+  exportConfig: {
+    publishedAt: '11/2023',
+    year: '2023',
+    overlayImageUrl: railplusLegend,
+  },
+  minZoom: 7,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -430,6 +461,7 @@ const topics = {
     sts,
     energiePublic,
     sandbox,
+    railPlus,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],

@@ -4,7 +4,7 @@ import getStyleLayers from './getStyleLayers';
 
 /**
  * Layer for zweitausbildung routes
- * Extends {@link https://mobility-toolbox-js.netlify.app/api/class/src/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
+ * Extends {@link https://mobility-toolbox-js.geops.io/doc/class/build/ol/layers/MapboxStyleLayer%20js~MapboxStyleLayer%20html-offset-anchor}
  * @private
  * @class
  * @param {Object} [options] Layer options.

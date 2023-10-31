@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="630.4129mm"
+   height="446.28522mm"
+   viewBox="0 0 630.4129 446.28522"
+   version="1.1"
+   id="svg2977"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs61" />
+  <g
+     id="layer1"
+     transform="translate(612.6203,232.40297)">
+    <g
+       id="railplus"
+       transform="matrix(0.26458333,0,0,0.26458333,-613.07052,-232.43975)">
+      <g
+         id="title"
+         transform="translate(-0.96090077,13.979754)">
+        <rect
+           id="Rechteck_titel"
+           data-name="Rechteck Titel"
+           width="468.34579"
+           height="39.345833"
+           style="opacity:1;isolation:isolate;fill:#dddde1;fill-opacity:1;stroke-width:0.64938"
+           x="52.430714"
+           y="76.805206" />
+        <text
+           id="text2308"
+           style="font-weight:700;font-size:24.6514px;font-family:Arial-BoldMT, Arial;isolation:isolate"
+           x="52.74139"
+           y="110.54694"><tspan
+             x="52.74139"
+             y="110.54694"
+             id="tspan4250"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:42.6667px;font-family:Arial-BoldMT, Arial;-inkscape-font-specification:'Arial-BoldMT, Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">RAILplus Streckennetz</tspan></text>
+      </g>
+      <g
+         id="publish-date"
+         transform="translate(5.1859513,2.840295)">
+        <rect
+           id="Rechteck_verantwortlich"
+           data-name="Rechteck Verantwortlich"
+           y="134.78261"
+           width="165.63031"
+           height="25.602493"
+           style="opacity:1;isolation:isolate;fill:#dddde1;fill-opacity:1;stroke-width:0.363916"
+           x="46.116348" />
+        <text
+           id="text2350"
+           style="font-size:15.7349px;font-family:ArialMT, Arial;isolation:isolate"
+           x="100.64825"
+           y="151.2403"><tspan
+             x="100.64825"
+             y="151.2403"
+             id="tspan4265">***published_at***</tspan></text>
+        <text
+           id="text2347"
+           transform="translate(53.98242,151.60484)"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.7349px;font-family:ArialMT, Arial;-inkscape-font-specification:'ArialMT, Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;isolation:isolate"><tspan
+             id="tspan2540"
+             x="0"
+             y="0">Stand:</tspan></text>
+      </g>
+      <g
+         id="ref-pub"
+         transform="translate(32,-14)">
+        <rect
+           id="rect2966"
+           x="2312.3494"
+           y="979.15741"
+           width="21.911461"
+           height="665.09076"
+           style="opacity:0.5;fill:#fffffd;stroke-width:1.06205;stroke-miterlimit:4;stroke-dasharray:none" />
+        <text
+           id="text1948"
+           transform="rotate(-90,1983.6169,-343.47493)"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.0082px;font-family:Arial-BoldMT, Arial;-inkscape-font-specification:'Arial-BoldMT, Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;isolation:isolate"><tspan
+             id="tspan30914"
+             x="0"
+             y="0">RAILplus-NETZ-***Year***</tspan></text>
+        <text
+           id="text1951"
+           transform="rotate(-90)"
+           style="font-size:12.007px;font-family:ArialMT, Arial;isolation:isolate"
+           x="-1457.1954"
+           y="2327.0918"><tspan
+             x="-1457.1954"
+             y="2327.0918"
+             xml:space="preserve"
+             id="tspan4285">Quelle: OpenStreetMap contributors  © SBB/CFF/FFS www.traﬁmage.ch www.geops.ch</tspan></text>
+      </g>
+      <g
+         id="legende-pub"
+         transform="translate(4.4445038,-70.382024)">
+        <rect
+           id="Rechteck_34-2"
+           data-name="Rechteck 34"
+           y="328.56744"
+           width="232.84644"
+           height="95.675385"
+           style="opacity:1;isolation:isolate;fill:#dddde1;fill-opacity:1;stroke-width:0.566762"
+           x="46.857796" />
+        <text
+           id="text2347-8"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.6667px;font-family:ArialMT, Arial;-inkscape-font-specification:'ArialMT, Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;isolation:isolate"
+           x="53.309391"
+           y="347.22925"><tspan
+             id="tspan30797"
+             x="53.309391"
+             y="347.22925">RAILplus AG</tspan><tspan
+             id="tspan30799"
+             x="53.309391"
+             y="370.56262">Hintere Bahnhofstraße 85</tspan><tspan
+             id="tspan30801"
+             x="53.309391"
+             y="393.896">5001 Aarau</tspan><tspan
+             id="tspan30803"
+             x="53.309391"
+             y="417.22937">www.railplus.ch</tspan></text>
+      </g>
+      <g
+         id="scaleline"
+         data-name="scaleline"
+         style="opacity:0.99"
+         transform="translate(-2.9582252,-577.38758)">
+        <g
+           id="g35328">
+          <rect
+             id="rect2197-2"
+             data-name="rect2197"
+             y="772.61298"
+             width="247.18777"
+             height="48.960037"
+             style="opacity:1;fill:#dddde1;fill-opacity:1;stroke-width:0.93011"
+             x="54.260525"
+             ry="0.68009585" />
+          <line
+             id="Linie_1"
+             data-name="Linie 1"
+             x1="63.405365"
+             y1="790.7431"
+             x2="127.04417"
+             y2="790.7431"
+             style="fill:none;stroke:#000000;stroke-width:0.9906px;stroke-miterlimit:5.24497" />
+          <line
+             id="Linie_2"
+             data-name="Linie 2"
+             x1="131.39594"
+             y1="790.7431"
+             x2="194.33559"
+             y2="790.7431"
+             style="fill:none;stroke:#000000;stroke-width:0.9906px;stroke-miterlimit:5.24497" />
+          <line
+             id="Linie_3"
+             data-name="Linie 3"
+             x1="199.23071"
+             y1="790.7431"
+             x2="262.28995"
+             y2="790.7431"
+             style="fill:none;stroke:#000000;stroke-width:0.9906px;stroke-miterlimit:5.24497" />
+          <g
+             id="_0"
+             data-name=" 0"
+             transform="translate(3.9918442)">
+            <text
+               id="text2332"
+               transform="translate(55.18848,810.13727)"
+               style="font-size:15.7349px;font-family:ArialMT, Arial;isolation:isolate"><tspan
+                 x="0"
+                 y="0"
+                 id="tspan4295">0</tspan></text>
+          </g>
+          <g
+             id="_10"
+             data-name=" 10"
+             transform="translate(3.9918442)">
+            <text
+               id="text2335"
+               transform="translate(117.54004,810.13629)"
+               style="font-size:15.7349px;font-family:ArialMT, Arial;letter-spacing:-0.04999em;isolation:isolate"><tspan
+                 x="0"
+                 y="0"
+                 id="tspan4299">10</tspan></text>
+          </g>
+          <g
+             id="_20"
+             data-name=" 20"
+             transform="translate(3.9918442)">
+            <text
+               id="text2340"
+               transform="translate(183.02637,810.13629)"
+               style="font-size:15.7349px;font-family:ArialMT, Arial;isolation:isolate"><tspan
+                 x="0"
+                 y="0"
+                 id="tspan4303">20</tspan></text>
+          </g>
+          <g
+             id="_30_km"
+             data-name=" 30 km"
+             transform="translate(3.9918442)">
+            <text
+               id="text2343"
+               transform="translate(248.21387,810.13629)"
+               style="font-size:15.7349px;font-family:ArialMT, Arial;isolation:isolate"><tspan
+                 x="0"
+                 y="0"
+                 id="tspan4307">30 km</tspan></text>
+          </g>
+        </g>
+      </g>
+      <g
+         id="railplus-logo"
+         transform="matrix(0.91496919,0,0,0.91496919,138.77545,46.074689)">
+        <rect
+           id="Rechteck_52-2-8-2"
+           data-name="Rechteck 52"
+           x="2086.4529"
+           width="293.11227"
+           height="48.970383"
+           style="opacity:1;isolation:isolate;fill:#dddde1;fill-opacity:1;stroke-width:0.694329"
+           y="48.86533" />
+        <path
+           id="Rechteck_52-2-3-7"
+           style="opacity:0.99;isolation:isolate;fill:#ffffff;stroke-width:0.139673"
+           d="m 2187.2891,48.820312 v 32.552735 h 14.7441 v 1.318359 h 5.3984 v 0.263672 h 4.5977 V 70.962891 h 1.207 v 0.263671 h 3.0977 v -8.515624 h -1.4024 v -1.388672 h -2.9023 v -6.669922 h -4.5762 v -4.119141 h -2.3203 v -1.712891 z"
+           transform="matrix(1.092933,0,0,1.092933,-149.81251,-50.204617)" />
+        <g
+           id="layer1-5"
+           transform="matrix(0.74204628,0,0,0.74204628,2239.6643,-5.6247279)">
+          <path
+             d="M 8.3624313,8.4306991 C -12.310348,12.981533 -15.802848,43.355701 2.3299309,60.747647 8.1507646,66.321536 14.394932,69.567092 21.803265,70.87237 c 5.362223,0.917222 9.948334,0.458611 13.899446,-1.481667 4.162778,-2.010834 7.9375,-7.126112 9.525,-12.87639 C 47.344378,48.823757 46.603545,37.711256 43.463822,29.879589 39.159933,19.155144 30.234655,11.041255 20.074654,8.607088 16.687987,7.7956991 11.572709,7.7251435 8.3624313,8.4306991 Z m 16.0513897,4.8683339 4.409723,1.481666 1.023055,2.116667 c 0.564445,1.164167 1.481667,4.092223 2.046112,6.52639 0.599722,2.434166 1.164166,4.621389 1.305277,4.868333 0.105834,0.246945 1.622778,1.023056 3.35139,1.658056 1.728611,0.635 3.81,1.622778 4.586111,2.187222 1.27,0.881945 1.516944,1.305278 2.010833,3.280834 0.3175,1.27 0.705556,3.774722 0.846667,5.538611 l 0.246945,3.280834 -1.516945,-0.564445 c -1.411111,-0.493889 -6.879167,-1.905 -7.408334,-1.905 -0.141111,0 -0.141111,2.822223 -0.03528,6.244167 0.176389,6.173612 -0.3175,12.24139 -0.987777,12.946946 -0.176389,0.176388 -2.751667,0.388055 -5.715001,0.493888 l -5.3975,0.176389 V 51.187368 c 0,-5.715 -0.141111,-10.548056 -0.282222,-10.689167 -0.141109,-0.176389 -2.928054,-0.423333 -6.17361,-0.564444 C 13.477709,39.757368 8.7857647,39.510423 6.2457645,39.369312 L 1.6596531,39.122368 1.5538198,31.749312 1.4832642,24.376256 5.4343756,24.6232 c 4.5508336,0.282222 13.8288894,1.199445 15.0283344,1.446389 0.670278,0.176389 0.776111,0.03528 0.776111,-0.846667 0,-2.469444 -1.164167,-8.89 -2.328333,-12.841112 -0.282223,-0.881944 0.493888,-0.776111 5.503333,0.917223 z"
+             id="path1500"
+             style="fill:#e3000b;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m -206.30286,106.64404 v 32.84361 h 8.11389 8.11389 l 0.0706,-12.62944 0.10584,-12.59417 h 3.88055 3.84528 l 8.50195,12.59417 8.46666,12.62944 h 9.63084 c 5.25639,0 9.59555,-0.0705 9.59555,-0.14111 0,-0.10583 -4.19805,-5.92667 -9.34861,-12.94694 l -9.34861,-12.77056 2.43417,-0.635 c 8.53722,-2.15195 13.19389,-8.07861 13.97,-17.780002 0.77611,-9.419167 -4.97417,-17.462501 -14.11111,-19.755557 -4.55084,-1.128889 -7.47889,-1.305278 -25.47056,-1.481667 l -18.45028,-0.211666 z m 35.34834,-18.238614 c 2.04611,1.234723 3.10444,3.210278 3.10444,5.961945 0,2.398889 -1.12889,4.7625 -2.75167,5.856109 -1.55222,1.02306 -3.59833,1.23472 -11.71222,1.09361 l -6.87917,-0.10583 -0.10583,-6.985 -0.0706,-6.985 8.36084,0.105833 8.39611,0.105833 z"
+             id="path1502"
+             style="fill:#19368a;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m -131.09063,106.39709 c -7.40834,17.92112 -13.47611,32.66723 -13.47611,32.80834 0,0.17639 3.70416,0.28222 8.21972,0.28222 h 8.18444 l 2.82223,-6.70278 2.82222,-6.70277 12.84111,0.10583 12.841111,0.0706 2.822223,6.59695 2.786944,6.63222 h 7.902223 c 4.339167,0 7.902223,-0.10583 7.902223,-0.28222 0,-0.14111 -5.856112,-14.85195 -12.982223,-32.7025 l -12.982221,-32.45556 -8.11389,-0.105833 -8.14917,-0.07056 z m 24.97667,-1.83444 c 1.79916,4.37444 3.31611,8.14917 3.42194,8.36083 0.14111,0.35278 -1.44639,0.45861 -7.23195,0.45861 h -7.44361 l 3.35139,-8.21972 c 1.86972,-4.48028 3.52778,-8.572499 3.73945,-9.066388 0.35277,-0.846666 0.35277,-0.846666 0.635,-0.176389 0.14111,0.388056 1.72861,4.268607 3.52778,8.643057 z"
+             id="path1504"
+             style="fill:#19368a;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m -69.530907,74.117925 c -0.141111,0.105834 -0.246944,14.887224 -0.246944,32.808335 v 32.56139 h 8.113889 8.113889 V 106.67932 73.870981 h -7.866945 c -4.339166,0 -8.008056,0.105833 -8.113889,0.246944 z"
+             id="path1506"
+             style="fill:#19368a;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m -45.436183,106.67932 v 32.80833 h 24.518057 24.518057 v -6.70278 -6.70277 H -12.980626 -29.561182 V 99.976538 73.870981 h -7.937501 -7.9375 z"
+             id="path1508"
+             style="fill:#19368a;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m 68.863824,106.85571 v 32.63194 h 6.879167 6.879167 V 106.85571 74.223759 h -6.879167 -6.879167 z"
+             id="path1510"
+             style="fill:#0f6fb7;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m 11.71382,126.57598 v 36.90056 h 6.52639 6.526389 v -11.95917 -11.95916 l 8.219723,-0.17639 c 9.242778,-0.17639 10.830278,-0.45861 15.769167,-2.78695 5.750279,-2.75166 10.089445,-8.43139 11.500557,-15.09889 0.846666,-3.84527 0.776111,-10.68916 -0.141111,-14.14639 -2.398889,-9.031107 -8.290279,-14.604997 -17.709446,-16.721664 -2.151945,-0.493888 -5.185834,-0.635 -16.651112,-0.776111 L 11.71382,89.675426 Z m 29.703891,-21.73111 c 4.021667,1.97556 5.679723,4.83306 5.715001,9.98361 0.03528,2.68111 -0.07056,3.24556 -1.023056,5.08 -1.234722,2.43417 -3.069167,3.98639 -6.067778,5.15056 -1.763889,0.67028 -2.892778,0.81139 -8.290279,0.9525 l -6.279444,0.14111 v -11.35944 -11.35945 l 6.808611,0.14111 6.773334,0.10584 z"
+             id="path1512"
+             style="fill:#0f6fb7;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m 90.38327,107.10265 c 0,13.93472 0.105833,17.78 0.529167,19.29695 1.763889,6.63222 7.055555,11.7475 13.229163,12.73527 1.27,0.17639 8.71362,0.35278 16.86278,0.35278 h 14.53445 V 114.61682 89.745982 h -6.87917 -6.87917 v 18.203338 18.20333 l -6.94972,-0.14111 c -6.6675,-0.10583 -7.05555,-0.14111 -8.14917,-0.91722 -2.39888,-1.72861 -2.36361,-1.30528 -2.46944,-19.22639 L 104.10633,89.745982 H 97.262437 90.38327 Z"
+             id="path1514"
+             style="fill:#0f6fb7;fill-opacity:1;stroke-width:0.0352778" />
+          <path
+             d="m 153.88327,90.663204 c -8.67833,2.328334 -12.87639,8.325556 -11.67694,16.615836 0.88194,5.99722 4.7625,10.19528 11.32417,12.27667 1.55222,0.49389 3.73944,0.635 11.07722,0.77611 l 9.17222,0.17639 0.98778,0.98777 c 1.05833,1.05834 1.30528,2.64584 0.59972,3.95112 -0.84666,1.5875 -1.86972,1.69333 -16.89805,1.69333 h -14.11112 v 6.17361 6.17361 h 15.09889 c 16.12195,0 18.87362,-0.21166 21.55473,-1.5875 4.69194,-2.36361 7.65527,-9.31333 6.80861,-16.05139 -0.67028,-5.53861 -2.50472,-8.78417 -5.96195,-10.65389 -3.31611,-1.83444 -5.15055,-2.08139 -15.62805,-2.29305 l -9.66611,-0.21167 -0.98778,-0.98778 c -1.83445,-1.79916 -1.09361,-4.55083 1.41111,-5.25639 0.77611,-0.21166 6.70278,-0.35278 15.16944,-0.35278 h 13.82889 V 96.095982 90.09876 l -15.06361,0.03528 c -12.10028,0 -15.48694,0.105833 -17.03917,0.529166 z"
+             id="path1516"
+             style="fill:#0f6fb7;fill-opacity:1;stroke-width:0.0352778" />
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
