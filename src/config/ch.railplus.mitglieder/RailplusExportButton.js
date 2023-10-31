@@ -33,7 +33,14 @@ function RailplusExportButton() {
     return null;
   }
   return (
-    <ExportButton id={RAILPLUS_EXPORTBTN_ID} loadingComponent={<Loader />}>
+    <ExportButton
+      id={RAILPLUS_EXPORTBTN_ID}
+      loadingComponent={
+        <BtnCmpt>
+          <Loader />
+        </BtnCmpt>
+      }
+    >
       <BtnCmpt />
     </ExportButton>
   );
