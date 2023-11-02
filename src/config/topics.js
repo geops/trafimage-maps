@@ -438,6 +438,9 @@ export const railPlus = {
     publishedAt: '11/2023',
     year: '2023',
     overlayImageUrl: railplusLegend,
+    exportFileName: `RAILplus Streckennetz ${new Date()
+      .toISOString()
+      .slice(0, 10)}`,
   },
   minZoom: 7,
 };
