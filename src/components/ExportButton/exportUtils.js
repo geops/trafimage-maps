@@ -325,6 +325,9 @@ export const exportPdf = async (
   doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
   // download the result
-  const filename = `trafimage-${new Date().toISOString().substr(0, 10)}.pdf`;
+  const filename = `${
+    topic?.exportConfig?.exportFileName ||
+    `trafimage-${new Date().toISOString().slice(0, 10)}`
+  }.pdf`;
   doc.save(filename);
 };
