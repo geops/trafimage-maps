@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.6](https://github.com/geops/trafimage-maps/compare/v1.22.5...v1.22.6) (2023-11-02)
+
+### Bug Fixes
+
+- **export:** make export file name configurable in the topic config ([#1110](https://github.com/geops/trafimage-maps/issues/1110)) ([4b867f4](https://github.com/geops/trafimage-maps/commit/4b867f48148c8b0f171b2f00f7b7904098acb702))
+
 ### [1.22.5](https://github.com/geops/trafimage-maps/compare/v1.22.4...v1.22.5) (2023-11-02)
 
 ### Bug Fixes
