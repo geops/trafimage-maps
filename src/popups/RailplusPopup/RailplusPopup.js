@@ -14,7 +14,6 @@ const useStyles = makeStyles(() => ({
   logo: {
     marginTop: 15,
     display: 'flex',
-    // justifyContent: 'center',
   },
 }));
 
