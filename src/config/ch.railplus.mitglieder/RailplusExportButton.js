@@ -33,6 +33,9 @@ function RailplusExportButton() {
     <ExportButton
       style={params.get('exportbtn') !== 'true' ? { display: 'none' } : {}}
       id={RAILPLUS_EXPORTBTN_ID}
+      exportFormat="a0"
+      exportScale={2}
+      exportSize={[3370, 2384]}
       loadingComponent={
         <BtnCmpt>
           <Loader />

@@ -229,6 +229,7 @@ export const exportPdf = async (
   topic,
   exportScale,
   exportSize,
+  lang,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
 
@@ -253,10 +254,14 @@ export const exportPdf = async (
      * without major alterations)
      * @ignore
      */
+
+    const imageUrl =
+      typeof overlayImageUrl === 'function'
+        ? overlayImageUrl(lang)
+        : overlayImageUrl;
+
     // Fetch local svg
-    const svgString = await fetch(overlayImageUrl).then((response) =>
-      response.text(),
-    );
+    const svgString = await fetch(imageUrl).then((response) => response.text());
 
     let updatedSvg = svgString.slice(); // Clone the string
 

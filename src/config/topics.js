@@ -2,7 +2,9 @@ import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
-import railplusLegend from '../img/railplus_legend.svg';
+import railplusLegendDe from '../img/railplus_legend_de.svg';
+import railplusLegendFr from '../img/railplus_legend_fr.svg';
+import railplusLegendIt from '../img/railplus_legend_it.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
 import railPlusLayers from './ch.railplus.mitglieder';
 import netzkarteLayers, {
@@ -437,7 +439,16 @@ export const railPlus = {
   exportConfig: {
     publishedAt: '11/2023',
     year: '2023',
-    overlayImageUrl: railplusLegend,
+    overlayImageUrl: (lang) => {
+      switch (lang) {
+        case 'fr':
+          return railplusLegendFr;
+        case 'it':
+          return railplusLegendIt;
+        default:
+          return railplusLegendDe;
+      }
+    },
     exportFileName: `RAILplus Streckennetz ${new Date()
       .toISOString()
       .slice(0, 10)}`,

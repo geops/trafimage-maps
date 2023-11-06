@@ -47,7 +47,7 @@ function ExportButton({
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
   return (
@@ -89,6 +89,7 @@ function ExportButton({
           topic,
           exportScale,
           exportSize,
+          i18n.language,
         );
         setLoading(false);
       }}
