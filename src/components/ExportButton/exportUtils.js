@@ -229,7 +229,7 @@ export const exportPdf = async (
   topic,
   exportScale,
   exportSize,
-  lang,
+  i18n,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
 
@@ -257,7 +257,7 @@ export const exportPdf = async (
 
     const imageUrl =
       typeof overlayImageUrl === 'function'
-        ? overlayImageUrl(lang)
+        ? overlayImageUrl(i18n)
         : overlayImageUrl;
 
     // Fetch local svg
@@ -329,9 +329,14 @@ export const exportPdf = async (
   // Add canvas to PDF
   doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
+  const topicFileName = topic?.exportConfig?.exportFileName;
+
   // download the result
   const filename = `${
-    topic?.exportConfig?.exportFileName ||
+    (topicFileName &&
+      (typeof topicFileName === 'function'
+        ? topicFileName(i18n)
+        : topicFileName)) ||
     `trafimage-${new Date().toISOString().slice(0, 10)}`
   }.pdf`;
   doc.save(filename);

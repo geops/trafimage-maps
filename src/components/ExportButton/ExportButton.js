@@ -89,7 +89,7 @@ function ExportButton({
           topic,
           exportScale,
           exportSize,
-          i18n.language,
+          i18n,
         );
         setLoading(false);
       }}

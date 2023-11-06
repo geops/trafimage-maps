@@ -439,8 +439,8 @@ export const railPlus = {
   exportConfig: {
     publishedAt: '11/2023',
     year: '2023',
-    overlayImageUrl: (lang) => {
-      switch (lang) {
+    overlayImageUrl: (i18n) => {
+      switch (i18n.language) {
         case 'fr':
           return railplusLegendFr;
         case 'it':
@@ -449,9 +449,10 @@ export const railPlus = {
           return railplusLegendDe;
       }
     },
-    exportFileName: `RAILplus Streckennetz ${new Date()
-      .toISOString()
-      .slice(0, 10)}`,
+    exportFileName: (i18n) =>
+      `RAILplus ${i18n.t('Streckennetz')} ${new Date()
+        .toISOString()
+        .slice(0, 10)}`,
   },
   minZoom: 7,
 };
