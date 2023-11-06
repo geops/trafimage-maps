@@ -13,13 +13,13 @@ function NoMouseWheelWarning() {
   const embedded = useSelector((state) => state.app.embedded);
 
   useEffect(() => {
-    if (embedded && map) {
-      // Dactivate mouse wheel zoom
+    if (map) {
+      // Deactivate mouse wheel zoom if embedded
       const mouseWheelZoom = map
         .getInteractions()
         .getArray()
         .find((interaction) => interaction instanceof MouseWheelZoom);
-      mouseWheelZoom.setActive(false);
+      mouseWheelZoom.setActive(!embedded);
     }
 
     return () => {};
