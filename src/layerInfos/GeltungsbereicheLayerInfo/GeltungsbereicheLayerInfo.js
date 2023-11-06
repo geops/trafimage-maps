@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Divider, Typography, makeStyles } from '@material-ui/core';
 import { Layer } from 'mobility-toolbox-js/ol';
 import GeltungsbereicheLegend, {
   legends,
@@ -181,6 +181,12 @@ const GeltungsbereicheLayerInfo = ({ properties: layer }) => {
       </table>
       <Typography paragraph>{t('Gültigkeit vor Ort erfragen')}</Typography>
       <br />
+      <Divider />
+      <br />
+      <br />
+      <Typography paragraph>
+        <i>{t('ch.sbb.geltungsbereiche.layerinfo-footer')}</i>
+      </Typography>
       <br />
     </div>
   );
