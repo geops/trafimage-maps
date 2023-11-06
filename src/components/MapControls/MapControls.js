@@ -47,17 +47,23 @@ const MapControls = ({
   fitExtent,
   children,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
   const displayMenu = useSelector((state) => state.app.displayMenu);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
   const [geolocating, setGeolocating] = useState(false);
   const featureRef = useRef(geolocationFeature);
+  const [, setForceRender] = useState(0);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
     setGeolocationFeature(feature);
   };
+
+  useEffect(() => {
+    // Ensure the translations are always applied
+    setForceRender((prevcount) => prevcount + 1);
+  }, [i18n.language]);
 
   const deviceOrientationListener = useCallback(
     (evt) => {
