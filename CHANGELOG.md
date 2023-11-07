@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.7](https://github.com/geops/trafimage-maps/compare/v1.22.6...v1.22.7) (2023-11-06)
+
+### Bug Fixes
+
+- **Geltungsbereiche:** add detail in LayerInfo footer ([#1112](https://github.com/geops/trafimage-maps/issues/1112)) ([682ec06](https://github.com/geops/trafimage-maps/commit/682ec066ac49f6660f89108420c2af94a2801f62))
+
+### [1.22.6](https://github.com/geops/trafimage-maps/compare/v1.22.5...v1.22.6) (2023-11-02)
+
+### Bug Fixes
+
+- **export:** make export file name configurable in the topic config ([#1110](https://github.com/geops/trafimage-maps/issues/1110)) ([4b867f4](https://github.com/geops/trafimage-maps/commit/4b867f48148c8b0f171b2f00f7b7904098acb702))
+
+### [1.22.5](https://github.com/geops/trafimage-maps/compare/v1.22.4...v1.22.5) (2023-11-02)
+
+### Bug Fixes
+
+- **railplus:** update railplus PDF legend (logo, text background), remove logos from repo ([#1109](https://github.com/geops/trafimage-maps/issues/1109)) ([1f332f4](https://github.com/geops/trafimage-maps/commit/1f332f488c02a74ba063db7e2d1363babb258bf2))
+
 ### [1.22.4](https://github.com/geops/trafimage-maps/compare/v1.22.3...v1.22.4) (2023-10-31)
 
 ### Bug Fixes
