@@ -80,16 +80,39 @@ function ExportButton({
           setLoading(false);
           return;
         }
-        exportPdf(
+
+        const { exportConfig } = topic;
+        let imageUrl;
+        let fileName = `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`;
+
+        if (exportConfig) {
+          const { overlayImageUrl, exportFileName } = exportConfig;
+          imageUrl =
+            overlayImageUrl &&
+            (typeof overlayImageUrl === 'function'
+              ? overlayImageUrl(i18n.language)
+              : overlayImageUrl);
+
+          fileName = exportFileName
+            ? `${
+                typeof exportFileName === 'function'
+                  ? exportFileName(t)
+                  : exportFileName
+              }.pdf`
+            : fileName;
+        }
+
+        await exportPdf(
           mapToExport,
           map,
           layers,
           exportFormat,
           canvas,
-          topic,
           exportScale,
           exportSize,
-          i18n,
+          exportConfig,
+          imageUrl,
+          fileName,
         );
         setLoading(false);
       }}

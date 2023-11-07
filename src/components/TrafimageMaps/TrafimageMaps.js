@@ -254,7 +254,7 @@ const propTypes = {
 
 const defaultProps = {
   history: null,
-  center: [925472, 5920000],
+  center: undefined,
   zoom: undefined,
   maxExtent: undefined,
   apiKeyName: 'key',
@@ -504,11 +504,11 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setApiKeyName(apiKeyName));
     }
 
-    if (zoom) {
+    if (zoom || activeTopic?.zoom) {
       this.store.dispatch(setZoom(zoom || activeTopic?.zoom));
     }
 
-    if (center) {
+    if (center || activeTopic?.center) {
       this.store.dispatch(setCenter(center || activeTopic?.center));
     }
 
@@ -674,12 +674,12 @@ class TrafimageMaps extends React.PureComponent {
       this.store.dispatch(setEmbedded(embedded || activeTopic?.embedded));
     }
 
-    if (zoom !== prevProps.zoom || zoom !== activeTopic?.zoom) {
-      this.store.dispatch(setZoom(zoom || activeTopic?.zoom));
+    if (zoom !== prevProps.zoom) {
+      this.store.dispatch(setZoom(zoom));
     }
 
     if (center !== prevProps.center) {
-      this.store.dispatch(setCenter(center || activeTopic?.center));
+      this.store.dispatch(setCenter(center));
     }
 
     if (language !== prevProps.language) {

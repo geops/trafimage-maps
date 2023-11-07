@@ -226,14 +226,15 @@ export const exportPdf = async (
   layers,
   exportFormat,
   canvas,
-  topic,
   exportScale,
   exportSize,
-  i18n,
+  exportConfig,
+  overlayImageUrl,
+  exportFileName,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
 
-  // add the image to a newly created PDF
+  // Add the image to a newly created PDF
   const doc = new JsPDF({
     orientation: 'landscape',
     unit: 'pt',
@@ -244,9 +245,8 @@ export const exportPdf = async (
   const ctx = canvas.getContext('2d');
 
   // Apply SVG overlay if provided
-  if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
-    const { overlayImageUrl, dateDe, dateFr, publisher, publishedAt, year } =
-      topic.exportConfig;
+  if (exportConfig && overlayImageUrl) {
+    const { dateDe, dateFr, publisher, publishedAt, year } = exportConfig;
     /**
      * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
      * If changes in the legend SVG are necessary, make sure the values to insert are maintained
@@ -255,13 +255,10 @@ export const exportPdf = async (
      * @ignore
      */
 
-    const imageUrl =
-      typeof overlayImageUrl === 'function'
-        ? overlayImageUrl(i18n)
-        : overlayImageUrl;
-
     // Fetch local svg
-    const svgString = await fetch(imageUrl).then((response) => response.text());
+    const svgString = await fetch(overlayImageUrl).then((response) =>
+      response.text(),
+    );
 
     let updatedSvg = svgString.slice(); // Clone the string
 
@@ -329,15 +326,6 @@ export const exportPdf = async (
   // Add canvas to PDF
   doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
-  const topicFileName = topic?.exportConfig?.exportFileName;
-
   // download the result
-  const filename = `${
-    (topicFileName &&
-      (typeof topicFileName === 'function'
-        ? topicFileName(i18n)
-        : topicFileName)) ||
-    `trafimage-${new Date().toISOString().slice(0, 10)}`
-  }.pdf`;
-  doc.save(filename);
+  doc.save(exportFileName);
 };
