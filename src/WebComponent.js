@@ -186,7 +186,7 @@ const attributes = {
   zoom: undefined,
   maxExtent: undefined,
   appName: 'wkp',
-  language: 'de',
+  language: undefined,
   activeTopicKey: undefined,
   apiKey: undefined,
   apiKeyName: 'key',

@@ -260,7 +260,7 @@ const defaultProps = {
   apiKeyName: 'key',
   loginUrl: undefined,
   topics: null,
-  language: 'de',
+  language: undefined,
   enableTracking: true,
   disableCookies: false,
   activeTopicKey: null,
