@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
@@ -21,13 +21,6 @@ const FeatureInformation = ({ featureInfo }) => {
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const [featureIndex, setFeatureIndex] = useState(0);
 
-  // Re initialize the feature index when feature info change and there is no feature at this index.
-  useEffect(() => {
-    if (!featureInfo?.[featureIndex]) {
-      setFeatureIndex(0);
-    }
-  }, [featureInfo, featureIndex]);
-
   // List of features and layers available for pagination.
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
 
@@ -37,6 +30,7 @@ const FeatureInformation = ({ featureInfo }) => {
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
   if (!feature) {
+    setFeatureIndex(0);
     return null;
   }
 
