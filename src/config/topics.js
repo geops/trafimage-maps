@@ -2,7 +2,9 @@ import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
 import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
-import railplusLegend from '../img/railplus_legend.svg';
+import railplusLegendDe from '../img/railplus_legend_de.svg';
+import railplusLegendFr from '../img/railplus_legend_fr.svg';
+import railplusLegendIt from '../img/railplus_legend_it.svg';
 import energieLegendPub from '../img/energie_legend_pub.svg';
 import railPlusLayers from './ch.railplus.mitglieder';
 import netzkarteLayers, {
@@ -189,12 +191,14 @@ export const tarifverbundkarte = {
   layers: tarifverbundkarteLayers,
   maxZoom: 12,
   exportConfig: {
-    publisher: 'tobias.hauser@sbb.ch',
-    publishedAt: '12/2022',
-    dateDe: '12.12.2022',
-    dateFr: '12.12.2022',
-    year: '2022',
-    overlayImageUrl: tarifverbundkarteLegend,
+    getTemplateValues: () => ({
+      publisher: 'tobias.hauser@sbb.ch',
+      publishedAt: '12/2022',
+      dateDe: '12.12.2022',
+      dateFr: '12.12.2022',
+      year: '2022',
+    }),
+    getOverlayImageUrl: () => tarifverbundkarteLegend,
   },
   elements: {
     ...defaultElements,
@@ -252,13 +256,15 @@ export const energiePublic = {
     exportMenu: true,
   },
   exportConfig: {
-    publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
-    publishedAt: () => {
-      const date = new Date();
-      return `${date.getMonth() + 1}/${date.getFullYear()}`;
-    },
-    year: () => new Date().getFullYear(),
-    overlayImageUrl: energieLegendPub,
+    getTemplateValues: () => ({
+      publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
+      publishedAt: () => {
+        const date = new Date();
+        return `${date.getMonth() + 1}/${date.getFullYear()}`;
+      },
+      year: () => new Date().getFullYear(),
+    }),
+    getOverlayImageUrl: () => energieLegendPub,
   },
   layers: energieLayers,
   projection: 'EPSG:3857',
@@ -435,12 +441,22 @@ export const railPlus = {
     },
   ],
   exportConfig: {
-    publishedAt: '11/2023',
-    year: '2023',
-    overlayImageUrl: railplusLegend,
-    exportFileName: `RAILplus Streckennetz ${new Date()
-      .toISOString()
-      .slice(0, 10)}`,
+    getTemplateValues: () => ({
+      publishedAt: '11/2023',
+      year: '2023',
+    }),
+    getOverlayImageUrl: (lang) => {
+      switch (lang) {
+        case 'fr':
+          return railplusLegendFr;
+        case 'it':
+          return railplusLegendIt;
+        default:
+          return railplusLegendDe;
+      }
+    },
+    getExportFileName: (lang, t) =>
+      `RAILplus ${t('Streckennetz')} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,
 };

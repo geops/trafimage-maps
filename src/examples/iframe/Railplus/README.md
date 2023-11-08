@@ -14,12 +14,12 @@ import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import DocForm from '../../DocForm';
 import getIframeCodeFromUrl from '../getIframeCodeFromUrl';
 import getHtmlPageCode from '../getHtmlPageCode';
-import iframeSearcgetHtmlPageCodehParams from '../iframeSearchParams';
+import iframeSearchParams from '../iframeSearchParams';
 import { PDF_DOWNLOAD_EVENT_TYPE } from '../../../utils/constants';
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const baseUrl = 'https://maps.trafimage.ch'; // TODO: change before merge
+const baseUrl = 'https://maps.trafimage.ch';
 const topic = 'ch.railplus.mitglieder';
 
 const extraCode = `
@@ -34,11 +34,8 @@ const extraCode = `
     </script>`;
 
 const App = () => {
-  const [url, setUrl] = useState(baseUrl + '/' + topic);
-  const code = getHtmlPageCode(
-    getIframeCodeFromUrl(`https://trafimage-maps.sbb.ch/${topic}`),
-    extraCode,
-  );
+  const [url, setUrl] = useState(baseUrl + '/' + topic + '?lang=de');
+  const code = getHtmlPageCode(getIframeCodeFromUrl(`${url}`), extraCode);
 
   return (
     <>
@@ -60,6 +57,16 @@ const App = () => {
       <Editor
         code={code}
         onChange={(code) => null} //setCode(code)}
+      />
+      <br />
+      <DocForm
+        value={url}
+        onChange={(newUrl) => {
+          setUrl(newUrl);
+        }}
+        isIframe
+        propConfig={iframeSearchParams}
+        filter={(config) => ['lang'].includes(config.name)}
       />
     </>
   );

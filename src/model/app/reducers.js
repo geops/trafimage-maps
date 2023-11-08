@@ -287,7 +287,7 @@ export default function app(state = getInitialState(), action) {
     case SET_EMBEDDED:
       return {
         ...state,
-        embedded: action.data,
+        embedded: action.data === true,
       };
     case SET_SEARCH_INFO_OPEN:
       return {
