@@ -226,13 +226,15 @@ export const exportPdf = async (
   layers,
   exportFormat,
   canvas,
-  topic,
   exportScale,
   exportSize,
+  templateValues,
+  overlayImageUrl,
+  exportFileName,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
 
-  // add the image to a newly created PDF
+  // Add the image to a newly created PDF
   const doc = new JsPDF({
     orientation: 'landscape',
     unit: 'pt',
@@ -243,56 +245,30 @@ export const exportPdf = async (
   const ctx = canvas.getContext('2d');
 
   // Apply SVG overlay if provided
-  if (topic.exportConfig && topic.exportConfig.overlayImageUrl) {
-    const { overlayImageUrl, dateDe, dateFr, publisher, publishedAt, year } =
-      topic.exportConfig;
+  if (overlayImageUrl) {
+    // Fetch local svg
+    const svgString = await fetch(overlayImageUrl).then((response) =>
+      response.text(),
+    );
+
     /**
+     * Replace dates and publisher data in the legend SVG
      * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
      * If changes in the legend SVG are necessary, make sure the values to insert are maintained
      * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
      * without major alterations)
      * @ignore
      */
-    // Fetch local svg
-    const svgString = await fetch(overlayImageUrl).then((response) =>
-      response.text(),
-    );
-
     let updatedSvg = svgString.slice(); // Clone the string
+    Object.keys(templateValues).forEach((key) => {
+      const value =
+        typeof templateValues[key] === 'function'
+          ? templateValues[key]()
+          : templateValues[key];
+      updatedSvg = updatedSvg.replace(`***${key}***`, value);
+    });
 
-    // Replace dates and publisher data
-    if (year) {
-      updatedSvg = updatedSvg.replace(
-        '***Year***',
-        typeof year === 'function' ? year() : year,
-      );
-    }
-    if (dateDe) {
-      updatedSvg = updatedSvg.replace(
-        '***date_DE***',
-        typeof dateDe === 'function' ? dateDe() : dateDe,
-      );
-    }
-
-    if (dateFr) {
-      updatedSvg = updatedSvg.replace(
-        '***date_FR***',
-        typeof dateFr === 'function' ? dateFr() : dateFr,
-      );
-    }
-
-    if (publisher) {
-      updatedSvg = updatedSvg.replace('***publisher***', publisher);
-    }
-
-    if (publishedAt) {
-      updatedSvg = updatedSvg.replace(
-        '***published_at***',
-        typeof publishedAt === 'function' ? publishedAt() : publishedAt,
-      );
-    }
-
-    // The legend SVG MUST NOT contains width and height attributes (only a viewBox)
+    // The legend SVG MUST NOT contain width and height attributes (only a viewBox)
     // because it breaks canvg rendering: a bad canvas size is set.
     // so we remove it before the conversion to canvas.
     const svgDoc = new DOMParser().parseFromString(
@@ -325,9 +301,5 @@ export const exportPdf = async (
   doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
 
   // download the result
-  const filename = `${
-    topic?.exportConfig?.exportFileName ||
-    `trafimage-${new Date().toISOString().slice(0, 10)}`
-  }.pdf`;
-  doc.save(filename);
+  doc.save(exportFileName);
 };

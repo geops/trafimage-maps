@@ -63,7 +63,7 @@ describe('permalink', () => {
         );
         cy.url().should('match', new RegExp('lang=de'));
         cy.url().should('match', new RegExp('layers=&'));
-        cy.url().should('match', new RegExp('x=810000&y=5900000&z=8'));
+        cy.url().should('match', new RegExp('x=928460&y=5908948&z=8.5'));
       });
 
       it('should hide header', () => {

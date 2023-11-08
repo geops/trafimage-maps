@@ -24,9 +24,9 @@
         <rect
            id="Rechteck_titel"
            data-name="Rechteck Titel"
-           width="468.34579"
+           width="515.6109"
            height="39.345833"
-           style="opacity:1;isolation:isolate;fill:#dddde1;fill-opacity:1;stroke-width:0.64938"
+           style="opacity:1;isolation:isolate;fill:#dddde1;fill-opacity:1;stroke-width:0.68136"
            x="52.430714"
            y="76.805206" />
         <text
@@ -37,7 +37,7 @@
              x="52.74139"
              y="110.54694"
              id="tspan4250"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:42.6667px;font-family:Arial-BoldMT, Arial;-inkscape-font-specification:'Arial-BoldMT, Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">RAILplus Streckennetz</tspan></text>
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:42.6667px;font-family:Arial-BoldMT, Arial;-inkscape-font-specification:'Arial-BoldMT, Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal">RAILplus Carta della rete</tspan></text>
       </g>
       <g
          id="publish-date"
@@ -53,18 +53,18 @@
         <text
            id="text2350"
            style="font-size:15.7349px;font-family:ArialMT, Arial;isolation:isolate"
-           x="100.64825"
-           y="151.2403"><tspan
-             x="100.64825"
-             y="151.2403"
-             id="tspan4265">***published_at***</tspan></text>
+           x="98.019997"
+           y="151.54973"><tspan
+             x="98.019997"
+             y="151.54973"
+             id="tspan4265">***publishedAt***</tspan></text>
         <text
            id="text2347"
            transform="translate(53.98242,151.60484)"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:15.7349px;font-family:ArialMT, Arial;-inkscape-font-specification:'ArialMT, Arial, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;isolation:isolate"><tspan
              id="tspan2540"
              x="0"
-             y="0">Stand:</tspan></text>
+             y="0">Stato:</tspan></text>
       </g>
       <g
          id="ref-pub"
@@ -82,7 +82,7 @@
            style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:14.0082px;font-family:Arial-BoldMT, Arial;-inkscape-font-specification:'Arial-BoldMT, Arial, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;isolation:isolate"><tspan
              id="tspan30914"
              x="0"
-             y="0">RAILplus-NETZ-***Year***</tspan></text>
+             y="0">RAILplus-NETZ-***year***</tspan></text>
         <text
            id="text1951"
            transform="rotate(-90)"

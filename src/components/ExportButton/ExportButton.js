@@ -47,7 +47,7 @@ function ExportButton({
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
   return (
@@ -80,15 +80,35 @@ function ExportButton({
           setLoading(false);
           return;
         }
-        exportPdf(
+
+        let templateValues = {};
+        let imageUrl;
+        let fileName = `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`;
+
+        const { exportConfig } = topic;
+        if (exportConfig) {
+          const { getTemplateValues, getOverlayImageUrl, getExportFileName } =
+            exportConfig;
+          templateValues = getTemplateValues
+            ? getTemplateValues(i18n.language, t)
+            : {};
+          imageUrl = getOverlayImageUrl && getOverlayImageUrl(i18n.language, t);
+          fileName = getExportFileName
+            ? getExportFileName(i18n.language, t)
+            : fileName;
+        }
+
+        await exportPdf(
           mapToExport,
           map,
           layers,
           exportFormat,
           canvas,
-          topic,
           exportScale,
           exportSize,
+          templateValues,
+          imageUrl,
+          fileName,
         );
         setLoading(false);
       }}

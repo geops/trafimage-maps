@@ -51,7 +51,7 @@ const propTypes = {
 
 const defaultProps = {
   // mapStateToProps
-  center: [0, 0],
+  center: [925472, 5920000],
   featureInfo: [],
   layers: [],
   extent: undefined,
