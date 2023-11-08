@@ -37,7 +37,7 @@ function StationPopup({ feature, layer, coordinate }) {
   });
 
   return (
-    <div className="wkp-station-popup">
+    <div>
       {features.map((feat, idx) => {
         const displayNetzkartePopup =
           layers[idx].name === 'ch.sbb.netzkarte.stationen' ||

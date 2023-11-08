@@ -2,16 +2,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
-import { Layer } from 'mobility-toolbox-js/ol';
 import { Link as MuiLink } from '@material-ui/core';
 import GeometryType from 'ol/geom/GeometryType';
 import Link from '../../components/Link';
-import { setFeatureInfo } from '../../model/app/actions';
 import BahnhofplanPopup from '../BahnhofplanPopup';
 import coordinateHelper from '../../utils/coordinateHelper';
+import DeparturePopup from '../DeparturePopup';
+import CloseButton from '../../components/CloseButton';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -21,7 +21,9 @@ const propTypes = {
 function NetzkartePopup({ feature, coordinate }) {
   const [showPlanLinks, setShowPlanLinks] = useState(true);
   const [showCoordinates, setShowCoordinates] = useState(false);
-  const dispatch = useDispatch();
+  const [showDepartures, setShowDepartures] = useState(
+    feature?.get('showDepartures'),
+  );
   const projection = useSelector((state) => state.app.projection);
   const { t } = useTranslation();
 
@@ -76,32 +78,13 @@ function NetzkartePopup({ feature, coordinate }) {
   }
 
   if (Number.isFinite(didok)) {
-    const openDeparturePopup = () => {
-      dispatch(
-        setFeatureInfo([
-          {
-            features: [feature],
-            coordinate,
-            // Fake layer binded to popup, to open it.
-            layer: new Layer({
-              key: 'ch.sbb.departure.popup',
-              properties: {
-                isQueryable: true,
-                popupComponent: 'DeparturePopup',
-                useOverlay: true,
-              },
-            }),
-          },
-        ]),
-      );
-    };
     transportLink = (
       <div>
         <div
           tabIndex={0}
           role="button"
-          onClick={() => openDeparturePopup()}
-          onKeyPress={() => openDeparturePopup()}
+          onClick={() => setShowDepartures(true)}
+          onKeyPress={() => setShowDepartures(true)}
           className="wkp-departure-btn"
         >
           {t('Abfahrtszeiten')}
@@ -194,7 +177,17 @@ function NetzkartePopup({ feature, coordinate }) {
     </>
   );
 
-  return (
+  return showDepartures ? (
+    <DeparturePopup feature={feature} coordinate={coordinate}>
+      <CloseButton
+        size="small"
+        style={{ position: 'absolute', top: 0, right: 0, padding: '5px 0px' }}
+        onClick={() => {
+          setShowDepartures(false);
+        }}
+      />
+    </DeparturePopup>
+  ) : (
     <div className="wkp-netzkarte-popup">
       {airportLabel}
       {hasPlanLinks ? (
