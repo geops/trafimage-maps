@@ -1,6 +1,8 @@
 @import '../../globals.scss';
 
 .tm-departure-popup-body {
+  position: relative;
+
   .tm-departure-input {
     margin: 5px 0;
     height: 25px;

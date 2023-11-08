@@ -312,19 +312,14 @@ class Permalink extends PureComponent {
       coordinate = geometry.getInteriorPoint().getCoordinates();
     }
 
+    // Tells the NetzkartePopup to display the DeparturesPopup
+    stationFeature.set('showDepartures', true);
+
     dispatchSetFeatureInfo([
       {
         coordinate,
         features: [stationFeature],
-        // Fake layer binded to popup, to open it.
-        layer: new Layer({
-          key: 'ch.sbb.departure.popup',
-          properties: {
-            isQueryable: true,
-            popupComponent: 'DeparturePopup',
-            useOverlay: true,
-          },
-        }),
+        layer: stationsLayer,
       },
     ]);
   }

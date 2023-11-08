@@ -24,6 +24,8 @@ const propTypes = {
 
   showTitle: PropTypes.bool,
 
+  children: PropTypes.node,
+
   // react-i18next
   t: PropTypes.func.isRequired,
 
@@ -41,6 +43,7 @@ const defaultProps = {
   showTitle: false,
   apiKey: null,
   platform: undefined, // important to avoid the platform param to be add in the url.
+  children: undefined,
 };
 
 class DeparturePopupContent extends Component {
@@ -254,7 +257,7 @@ class DeparturePopupContent extends Component {
   }
 
   render() {
-    const { uic, icon, showTitle, t } = this.props;
+    const { uic, icon, showTitle, t, children } = this.props;
     let { departures } = this.state;
     departures = departures.sort(
       (a, b) =>
@@ -293,16 +296,13 @@ class DeparturePopupContent extends Component {
             {`${t(`Abfahrtszeiten aller ${platformName}`)}`}
           </div>
         )}
-
         <DestinationInput
           destination={destinationFilter}
           onSelect={(d) => this.onDestinationSelect(d)}
           uic={uic}
         />
-
         {loading}
         {info}
-
         <div
           className={`tm-table-wrapper${departuresLoading ? ' loading' : ''}`}
         >
@@ -374,6 +374,7 @@ class DeparturePopupContent extends Component {
             </tbody>
           </table>
         </div>
+        {children}
       </div>
     );
   }
