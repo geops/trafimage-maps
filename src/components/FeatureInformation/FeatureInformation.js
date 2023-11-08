@@ -30,7 +30,9 @@ const FeatureInformation = ({ featureInfo }) => {
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
   if (!feature) {
-    setFeatureIndex(0);
+    if (featureIndex !== 0) {
+      setFeatureIndex(0);
+    }
     return null;
   }
 
