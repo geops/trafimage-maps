@@ -191,12 +191,14 @@ export const tarifverbundkarte = {
   layers: tarifverbundkarteLayers,
   maxZoom: 12,
   exportConfig: {
-    publisher: 'tobias.hauser@sbb.ch',
-    publishedAt: '12/2022',
-    dateDe: '12.12.2022',
-    dateFr: '12.12.2022',
-    year: '2022',
-    overlayImageUrl: tarifverbundkarteLegend,
+    getTemplateValues: () => ({
+      publisher: 'tobias.hauser@sbb.ch',
+      publishedAt: '12/2022',
+      dateDe: '12.12.2022',
+      dateFr: '12.12.2022',
+      year: '2022',
+    }),
+    getOverlayImageUrl: () => tarifverbundkarteLegend,
   },
   elements: {
     ...defaultElements,
@@ -254,13 +256,15 @@ export const energiePublic = {
     exportMenu: true,
   },
   exportConfig: {
-    publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
-    publishedAt: () => {
-      const date = new Date();
-      return `${date.getMonth() + 1}/${date.getFullYear()}`;
-    },
-    year: () => new Date().getFullYear(),
-    overlayImageUrl: energieLegendPub,
+    getTemplateValues: () => ({
+      publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
+      publishedAt: () => {
+        const date = new Date();
+        return `${date.getMonth() + 1}/${date.getFullYear()}`;
+      },
+      year: () => new Date().getFullYear(),
+    }),
+    getOverlayImageUrl: () => energieLegendPub,
   },
   layers: energieLayers,
   projection: 'EPSG:3857',
@@ -437,10 +441,12 @@ export const railPlus = {
     },
   ],
   exportConfig: {
-    publishedAt: '11/2023',
-    year: '2023',
-    overlayImageUrl: (language) => {
-      switch (language) {
+    getTemplateValues: () => ({
+      publishedAt: '11/2023',
+      year: '2023',
+    }),
+    getOverlayImageUrl: (lang) => {
+      switch (lang) {
         case 'fr':
           return railplusLegendFr;
         case 'it':
@@ -449,7 +455,7 @@ export const railPlus = {
           return railplusLegendDe;
       }
     },
-    exportFileName: (t) =>
+    getExportFileName: (lang, t) =>
       `RAILplus ${t('Streckennetz')} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,

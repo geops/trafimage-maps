@@ -228,7 +228,7 @@ export const exportPdf = async (
   canvas,
   exportScale,
   exportSize,
-  exportConfig,
+  templateValues,
   overlayImageUrl,
   exportFileName,
 ) => {
@@ -245,8 +245,8 @@ export const exportPdf = async (
   const ctx = canvas.getContext('2d');
 
   // Apply SVG overlay if provided
-  if (exportConfig && overlayImageUrl) {
-    const { dateDe, dateFr, publisher, publishedAt, year } = exportConfig;
+  if (templateValues && overlayImageUrl) {
+    const { dateDe, dateFr, publisher, publishedAt, year } = templateValues;
     /**
      * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
      * If changes in the legend SVG are necessary, make sure the values to insert are maintained

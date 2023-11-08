@@ -81,24 +81,20 @@ function ExportButton({
           return;
         }
 
-        const { exportConfig } = topic;
+        let templateValues = {};
         let imageUrl;
         let fileName = `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`;
 
+        const { exportConfig } = topic;
         if (exportConfig) {
-          const { overlayImageUrl, exportFileName } = exportConfig;
-          imageUrl =
-            overlayImageUrl &&
-            (typeof overlayImageUrl === 'function'
-              ? overlayImageUrl(i18n.language)
-              : overlayImageUrl);
-
-          fileName = exportFileName
-            ? `${
-                typeof exportFileName === 'function'
-                  ? exportFileName(t)
-                  : exportFileName
-              }.pdf`
+          const { getTemplateValues, getOverlayImageUrl, getExportFileName } =
+            exportConfig;
+          templateValues = getTemplateValues
+            ? getTemplateValues(i18n.language, t)
+            : {};
+          imageUrl = getOverlayImageUrl && getOverlayImageUrl(i18n.language, t);
+          fileName = getExportFileName
+            ? getExportFileName(i18n.language, t)
             : fileName;
         }
 
@@ -110,7 +106,7 @@ function ExportButton({
           canvas,
           exportScale,
           exportSize,
-          exportConfig,
+          templateValues,
           imageUrl,
           fileName,
         );
