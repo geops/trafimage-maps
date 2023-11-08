@@ -19,10 +19,13 @@ describe('ch.sbb.netzkarte', () => {
     const visitWithMsg = (url, message) => {
       cy.visit(url, {
         onBeforeLoad: (win) => {
+          // Create mock server
+          mockServer = new Server('wss://api.geops.io/tracker-ws/v1/ws');
           // Stub out JS WebSocket
           cy.stub(win, 'WebSocket', (wsUrl) => {
             return new WebSocket(wsUrl);
           });
+          mockServer.emit('message', JSON.stringify(message));
         },
       });
       cy.get('.wkp-menu-header').click();
@@ -35,8 +38,6 @@ describe('ch.sbb.netzkarte', () => {
     };
 
     beforeEach(() => {
-      // Create mock server
-      mockServer = new Server('wss://api.geops.io/tracker-ws/v1/ws');
       now = Date.now();
       bufferMessage = {
         source: 'buffer',
@@ -292,7 +293,10 @@ describe('ch.sbb.netzkarte', () => {
     });
 
     it('should display the full trajectory on click', () => {
-      visitWithMsg('/ch.sbb.netzkarte', bufferMessage);
+      visitWithMsg(
+        `/ch.sbb.netzkarte?x=${coord[0]}&y=${coord[1]}`,
+        bufferMessage,
+      );
 
       // Click on the vehicle
       cy.get('.rs-map').click('center');
