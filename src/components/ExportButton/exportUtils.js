@@ -246,49 +246,27 @@ export const exportPdf = async (
 
   // Apply SVG overlay if provided
   if (overlayImageUrl) {
-    const { dateDe, dateFr, publisher, publishedAt, year } = templateValues;
+    // Fetch local svg
+    const svgString = await fetch(overlayImageUrl).then((response) =>
+      response.text(),
+    );
+
     /**
+     * Replace dates and publisher data in the legend SVG
      * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
      * If changes in the legend SVG are necessary, make sure the values to insert are maintained
      * It is also recommended to use inkscape (Adobe illustrator SVG won't work out-of-the-box
      * without major alterations)
      * @ignore
      */
-
-    // Fetch local svg
-    const svgString = await fetch(overlayImageUrl).then((response) =>
-      response.text(),
-    );
-
-    // Replace dates and publisher data
     let updatedSvg = svgString.slice(); // Clone the string
-    if (year) {
-      updatedSvg = updatedSvg.replace(
-        '***Year***',
-        typeof year === 'function' ? year() : year,
-      );
-    }
-    if (dateDe) {
-      updatedSvg = updatedSvg.replace(
-        '***date_DE***',
-        typeof dateDe === 'function' ? dateDe() : dateDe,
-      );
-    }
-    if (dateFr) {
-      updatedSvg = updatedSvg.replace(
-        '***date_FR***',
-        typeof dateFr === 'function' ? dateFr() : dateFr,
-      );
-    }
-    if (publisher) {
-      updatedSvg = updatedSvg.replace('***publisher***', publisher);
-    }
-    if (publishedAt) {
-      updatedSvg = updatedSvg.replace(
-        '***published_at***',
-        typeof publishedAt === 'function' ? publishedAt() : publishedAt,
-      );
-    }
+    Object.keys(templateValues).forEach((key) => {
+      const value =
+        typeof templateValues[key] === 'function'
+          ? templateValues[key]()
+          : templateValues[key];
+      updatedSvg = updatedSvg.replace(`***${key}***`, value);
+    });
 
     // The legend SVG MUST NOT contain width and height attributes (only a viewBox)
     // because it breaks canvg rendering: a bad canvas size is set.
