@@ -245,7 +245,7 @@ export const exportPdf = async (
   const ctx = canvas.getContext('2d');
 
   // Apply SVG overlay if provided
-  if (templateValues && overlayImageUrl) {
+  if (overlayImageUrl) {
     const { dateDe, dateFr, publisher, publishedAt, year } = templateValues;
     /**
      * CAUTION: The values dynamically replaced in the SVG are unique strings using ***[value]***
@@ -260,9 +260,8 @@ export const exportPdf = async (
       response.text(),
     );
 
-    let updatedSvg = svgString.slice(); // Clone the string
-
     // Replace dates and publisher data
+    let updatedSvg = svgString.slice(); // Clone the string
     if (year) {
       updatedSvg = updatedSvg.replace(
         '***Year***',
@@ -275,18 +274,15 @@ export const exportPdf = async (
         typeof dateDe === 'function' ? dateDe() : dateDe,
       );
     }
-
     if (dateFr) {
       updatedSvg = updatedSvg.replace(
         '***date_FR***',
         typeof dateFr === 'function' ? dateFr() : dateFr,
       );
     }
-
     if (publisher) {
       updatedSvg = updatedSvg.replace('***publisher***', publisher);
     }
-
     if (publishedAt) {
       updatedSvg = updatedSvg.replace(
         '***published_at***',
@@ -294,7 +290,7 @@ export const exportPdf = async (
       );
     }
 
-    // The legend SVG MUST NOT contains width and height attributes (only a viewBox)
+    // The legend SVG MUST NOT contain width and height attributes (only a viewBox)
     // because it breaks canvg rendering: a bad canvas size is set.
     // so we remove it before the conversion to canvas.
     const svgDoc = new DOMParser().parseFromString(
