@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.8](https://github.com/geops/trafimage-maps/compare/v1.22.7...v1.22.8) (2023-11-08)
+
+### Bug Fixes
+
+- fix display of departures when multiple features are selected ([fe245c9](https://github.com/geops/trafimage-maps/commit/fe245c9e2034407f18c3c906c0d084b0bf6097a5))
+- load properly the language on load when the lang url parameter is set ([248c79a](https://github.com/geops/trafimage-maps/commit/248c79af75c6b48969d75fb7137f24d06a11f702))
+- **railplus:** add PDF overlays for it and fr, update default export size and format for railplus ([#1113](https://github.com/geops/trafimage-maps/issues/1113)) ([c738803](https://github.com/geops/trafimage-maps/commit/c73880397b6703de2fa38e07a8ca22f0420b7d8c))
+
 ### [1.22.7](https://github.com/geops/trafimage-maps/compare/v1.22.6...v1.22.7) (2023-11-06)
 
 ### Bug Fixes
