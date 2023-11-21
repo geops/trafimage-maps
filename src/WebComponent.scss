@@ -44,6 +44,7 @@
 @import './components/TopicTelephoneInfos/TopicTelephoneInfos.scss';
 @import './components/TrafimageMaps/TrafimageMaps.scss';
 @import './components/DrawLayerMenu/DrawLayerMenu.scss';
+@import './components/EstaClient/EstaClient.scss';
 
 // Menus
 @import './menus/ShareMenu/ShareMenu.scss';
@@ -67,5 +68,3 @@
 @import './layerInfos/ConstructionLayerInfo/ConstructionLayerInfo.scss';
 @import './layerInfos/HandicapLayerInfo/HandicapLayerInfo.scss';
 @import './layerInfos/MapsGeoAdminLayerInfo/MapsGeoAdminLayerInfo.scss';
-
-.map-widgets { top: 110px; }

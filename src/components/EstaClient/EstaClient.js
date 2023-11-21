@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 function EstaClient() {
   useEffect(() => {
     const client = document.createElement('sbb-journey-maps-wc');
-
     client.language = 'en';
     client.apiKey = '4a6dca7396895a262d76584d7b203f8e';
 
@@ -29,7 +28,7 @@ function EstaClient() {
     };
 
     client.markerOptions = {
-      popup: true,
+      popup: false,
       markers: [
         {
           id: 'velo',
@@ -47,6 +46,8 @@ function EstaClient() {
         },
       ],
     };
+
+    client.markerDetailsTemplate = 'myTemplate';
 
     client.listenerOptions = {
       ZONE: {
@@ -71,6 +72,8 @@ function EstaClient() {
 
     client.addEventListener('featuresClick', (event) => {
       const feature = event.detail?.features?.[0];
+      // eslint-disable-next-line no-console
+      console.log('feature clicked: ', feature);
       switch (feature?.featureDataType) {
         case 'POI':
           document.getElementById('myTemplate').innerHTML = `
@@ -106,28 +109,24 @@ function EstaClient() {
       }
     });
 
+    // eslint-disable-next-line no-unused-vars
     client.addEventListener('mapCenterChange', (event) => {
-      console.log('mapCenterChange: ', event.detail);
+      // console.log('mapCenterChange: ', event.detail);
       // mapCenterChangeSubject.next(event.detail);
     });
 
-    client.addEventListener('selectedLevelChange', (event) =>
-      console.log('selectedLevelChange: ', event.detail),
-    );
+    // eslint-disable-next-line no-unused-vars
+    client.addEventListener('selectedLevelChange', (event) => {
+      // console.log('selectedLevelChange: ', event.detail),
+    });
 
     document.getElementById('my-map-container').appendChild(client);
   }, []);
 
   return (
     <>
-      <div
-        id="my-map-container"
-        style={{
-          position: 'fixed',
-          inset: 0,
-          backgroundColor: 'yellow',
-        }}
-      />
+      <div id="my-map-container" />
+      <template id="myTemplate" />
       {/* <sbb-journey-maps-wc
         ref={(node) => setClient(node)}
         // api-key="4782e0cdef173b15bdaf3ce4fc07ce4f"
