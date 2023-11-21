@@ -2263,6 +2263,11 @@
     estree-walker "^1.0.1"
     picomatch "^2.2.2"
 
+"@sbb-esta/journey-maps@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/@sbb-esta/journey-maps/-/journey-maps-17.0.0.tgz#2012bd0a69fba4b7a87293fbd7652bc6c88d0f52"
+  integrity sha512-0FcX4QcLOR83i4iqS8slHkhWdYKK1tdlDgmNq0ZfqKSPEBM6zrre3CPOxj3wNrcUZfuV3P6dx8TvTGhtvI+U4A==
+
 "@sideway/address@^4.1.3":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"

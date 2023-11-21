@@ -1,6 +1,8 @@
 @import 'globals.scss';
+@import '../node_modules/@sbb-esta/journey-maps/web-component/styles.css';
+@import '../node_modules/maplibre-gl/dist/maplibre-gl.css';
 
-// @geops/react-ui
+// react-ui
 @import './themes/react-ui/variables.scss';
 @import './themes/react-ui/mixins.scss';
 @import './components/List/List.scss';
@@ -65,3 +67,5 @@
 @import './layerInfos/ConstructionLayerInfo/ConstructionLayerInfo.scss';
 @import './layerInfos/HandicapLayerInfo/HandicapLayerInfo.scss';
 @import './layerInfos/MapsGeoAdminLayerInfo/MapsGeoAdminLayerInfo.scss';
+
+.map-widgets { top: 110px; }

@@ -149,7 +149,7 @@ class TopicLoader extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.onChangeVisibleKeys.forEach((key) => unByKey(key));
+    this.onChangeVisibleKeys?.forEach((key) => unByKey(key));
   }
 
   loadTopics() {
@@ -332,7 +332,7 @@ class TopicLoader extends PureComponent {
       return [];
     }
 
-    const topicLayers = activeTopic.layers;
+    const topicLayers = activeTopic.layers || [];
     const layerAsFlatArray = new LayerService(layers).getLayersAsFlatArray();
 
     // In case you set the topics after the default topics are loaded, you'll loose

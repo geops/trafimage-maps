@@ -45,6 +45,7 @@ import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
 import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
 import RailplusMenu from '../menus/RailplusMenu';
 import RailplusExportButton from './ch.railplus.mitglieder/RailplusExportButton';
+import EstaClient from '../components/EstaClient';
 
 // For backward compatibility
 export {
@@ -461,6 +462,15 @@ export const railPlus = {
   minZoom: 7,
 };
 
+const estaClient = {
+  key: 'ch.sbb.esta-client',
+  layers: [],
+  elements: {
+    ...defaultElements,
+  },
+  mapControls: <EstaClient />,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -481,6 +491,7 @@ const topics = {
     energiePublic,
     sandbox,
     railPlus,
+    estaClient,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],
