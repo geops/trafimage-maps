@@ -24,10 +24,10 @@ const defaultProps = {
   language: 'de',
 };
 
-const LegalLines = ({ language, doc }) => {
+function LegalLines({ language, doc }) {
   const Comp = docs[doc];
   return <Comp language={language} />;
-};
+}
 
 LegalLines.propTypes = propTypes;
 LegalLines.defaultProps = defaultProps;

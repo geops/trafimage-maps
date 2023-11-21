@@ -46,7 +46,7 @@ const regions = {
   },
 };
 
-const BetriebsRegionenPopup = ({ language, feature }) => {
+function BetriebsRegionenPopup({ language, feature }) {
   const regionName = feature.get('region');
   if (!regions[regionName]) {
     return null;
@@ -56,7 +56,7 @@ const BetriebsRegionenPopup = ({ language, feature }) => {
       <span>{regions[regionName][language]}</span>
     </div>
   );
-};
+}
 
 BetriebsRegionenPopup.propTypes = propTypes;
 export default memo(BetriebsRegionenPopup);

@@ -6,11 +6,11 @@ import ExportButton from '../../components/ExportButton/ExportButton';
 import { ReactComponent as Loader } from '../../img/loader.svg';
 import { RAILPLUS_EXPORTBTN_ID } from '../../utils/constants';
 
-const BtnCmpt = ({ children }) => {
+function BtnCmpt({ children }) {
   return (
     <MapButton style={{ padding: 8, color: '#444' }}>{children}</MapButton>
   );
-};
+}
 
 BtnCmpt.propTypes = { children: PropTypes.node };
 BtnCmpt.defaultProps = { children: <BsDownload /> };

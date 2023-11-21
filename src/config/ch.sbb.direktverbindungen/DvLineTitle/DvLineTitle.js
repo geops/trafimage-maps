@@ -45,14 +45,7 @@ const defaultProps = {
   teaser: false,
 };
 
-const DvLineTitle = ({
-  feature,
-  layer,
-  isNightTrain,
-  title,
-  active,
-  teaser,
-}) => {
+function DvLineTitle({ feature, layer, isNightTrain, title, active, teaser }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
@@ -120,7 +113,7 @@ const DvLineTitle = ({
       </Typography>
     </div>
   );
-};
+}
 
 DvLineTitle.propTypes = propTypes;
 DvLineTitle.defaultProps = defaultProps;

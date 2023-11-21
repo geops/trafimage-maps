@@ -5,7 +5,7 @@ import { FaShareAlt } from 'react-icons/fa';
 import Share from '../../components/Share';
 import MenuItem from '../../components/Menu/MenuItem';
 
-const ShareMenu = () => {
+function ShareMenu() {
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const collapsedOnLoad = useMemo(() => {
@@ -37,6 +37,6 @@ const ShareMenu = () => {
       </MenuItem>
     </div>
   );
-};
+}
 
 export default React.memo(ShareMenu);

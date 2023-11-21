@@ -223,7 +223,7 @@ const defaultProps = {
 // layers to be able to set it back if the layersVisibility parameter change.
 const initialLayersVisibility = {};
 
-const WebComponent = (props) => {
+function WebComponent(props) {
   const {
     width,
     height,
@@ -248,9 +248,8 @@ const WebComponent = (props) => {
   const ref = useRef();
 
   // We have to wait the applyinace of the layersVisibility attribute to avoid having blinking bg layer on load
-  const [layersVisibilityApplied, setLayersVisibilityApplied] = useState(
-    !layersVisibility,
-  );
+  const [layersVisibilityApplied, setLayersVisibilityApplied] =
+    useState(!layersVisibility);
 
   const arrayCenter = useMemo(() => {
     if (!center || Array.isArray(center)) {
@@ -415,7 +414,7 @@ const WebComponent = (props) => {
       </div>
     </Styled>
   );
-};
+}
 
 WebComponent.propTypes = propTypes;
 WebComponent.defaultProps = defaultProps;

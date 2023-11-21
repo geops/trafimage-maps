@@ -66,7 +66,7 @@ const renderRoleCard = (rolle, classes, t) => {
   );
 };
 
-const NetzentwicklungPopup = ({ feature, layer, t }) => {
+function NetzentwicklungPopup({ feature, layer, t }) {
   const classes = useStyles();
   const rollen = JSON.parse(feature.get('rollen') || '[]').filter((r) =>
     ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
@@ -106,7 +106,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
       </div>
     </div>
   );
-};
+}
 
 NetzentwicklungPopup.renderTitle = (feat, layer, t) =>
   renderTitle(feat, t, false);

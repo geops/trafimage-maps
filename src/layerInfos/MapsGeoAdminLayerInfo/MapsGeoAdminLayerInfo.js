@@ -62,7 +62,7 @@ const footer = {
   ),
 };
 
-const MapsGeoAdminLayerInfo = ({ language, t, properties }) => {
+function MapsGeoAdminLayerInfo({ language, t, properties }) {
   const [legendHtml, setLegendHtml] = useState(null);
 
   useEffect(() => {
@@ -108,7 +108,7 @@ const MapsGeoAdminLayerInfo = ({ language, t, properties }) => {
       </div>
     </div>
   );
-};
+}
 
 MapsGeoAdminLayerInfo.propTypes = propTypes;
 

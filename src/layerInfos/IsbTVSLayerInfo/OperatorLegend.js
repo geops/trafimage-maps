@@ -44,7 +44,7 @@ const propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-const OperatorLegend = ({ shortName, longName, color }) => {
+function OperatorLegend({ shortName, longName, color }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -61,7 +61,7 @@ const OperatorLegend = ({ shortName, longName, color }) => {
       <div>{t(longName)}</div>
     </div>
   );
-};
+}
 
 OperatorLegend.propTypes = propTypes;
 

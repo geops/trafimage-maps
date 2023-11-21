@@ -46,7 +46,7 @@ const useStyles = makeStyles({
   },
 });
 
-const InfoBody = ({ name, t }) => {
+function InfoBody({ name, t }) {
   const classes = useStyles();
   if (name.match(/ch.sbb.energie(.public)?.unterwerke/)) {
     return (
@@ -86,14 +86,14 @@ const InfoBody = ({ name, t }) => {
       ))}
     </ul>
   );
-};
+}
 
 InfoBody.propTypes = {
   name: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
 };
 
-const EnergieLayerInfo = ({ properties, t }) => {
+function EnergieLayerInfo({ properties, t }) {
   return (
     <div>
       <InfoBody name={properties.name} t={t} />
@@ -106,7 +106,7 @@ const EnergieLayerInfo = ({ properties, t }) => {
       </p>
     </div>
   );
-};
+}
 
 EnergieLayerInfo.propTypes = {
   properties: PropTypes.object.isRequired,

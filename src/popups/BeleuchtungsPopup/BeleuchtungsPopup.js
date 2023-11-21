@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const BeleuchtungsPopup = ({ feature }) => {
+function BeleuchtungsPopup({ feature }) {
   const { t } = useTranslation();
   const classes = useStyles();
   const stationClass = feature.get('rte_klasse');
@@ -41,7 +41,7 @@ const BeleuchtungsPopup = ({ feature }) => {
       </p>
     </div>
   );
-};
+}
 
 BeleuchtungsPopup.propTypes = propTypes;
 const memoized = memo(BeleuchtungsPopup);

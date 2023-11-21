@@ -188,7 +188,7 @@ export const legends = [
 ];
 
 // eslint-disable-next-line react/prop-types
-const GeltungsbereicheLegend = ({ mot, valid, background }) => {
+function GeltungsbereicheLegend({ mot, valid, background }) {
   const legend = legends
     .find(({ mots }) => {
       return mots.includes(mot);
@@ -235,7 +235,7 @@ const GeltungsbereicheLegend = ({ mot, valid, background }) => {
       })}
     </svg>
   );
-};
+}
 
 GeltungsbereicheLegend.propTypes = {
   mot: PropTypes.string,

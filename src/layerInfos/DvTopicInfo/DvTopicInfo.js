@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DvTopicInfo = () => {
+function DvTopicInfo() {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const legend = [dvDay, dvNight].map((layer) => (
@@ -121,6 +121,6 @@ const DvTopicInfo = () => {
       )}
     </>
   );
-};
+}
 
 export default React.memo(DvTopicInfo);

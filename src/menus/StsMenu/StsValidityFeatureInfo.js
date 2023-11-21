@@ -143,70 +143,64 @@ function StsValidityFeatureInfo({ menuOpen }) {
   }
 
   return (
-    <>
-      <div className={classes.container}>
-        {gbFeatureInfo?.features?.length ? (
-          <>
-            <div className={classes.gbLegend}>
-              <GeltungsbereichePopup
-                feature={gbFeatureInfo.features.filter((feat) =>
-                  feat.get('mot'),
-                )}
-                layer={[gbFeatureInfo.layer]}
-                renderValidityFooter={false}
-              />
-            </div>
-          </>
-        ) : null}
-        {gbFeatureInfo?.features?.length && mainFeatures.length ? (
-          <Divider />
-        ) : null}
-        {mainFeatures?.length
-          ? mainFeatures.map((feat, idx, array) => {
-              const title =
-                feat.get('title') ||
-                feat.get('route_names_premium') ||
-                feat.get('route_names_gttos');
-              const images = feat.get('images') && feat.get('images').length;
-              const description = feat.get('lead_text');
-              const highlightUrl = feat.get('highlight_url');
-              return (
-                <React.Fragment key={title}>
-                  <div
-                    className={classes.mainInfo}
-                    data-testid="sts-validity-feature-info"
-                  >
-                    <br />
-                    <div className={classes.featureInfoItem}>
-                      <Typography paragraph variant="h4">
-                        {title}
-                      </Typography>
-                      {images ? (
-                        <div className={classes.imageLine}>
-                          <a
-                            href={highlightUrl}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            <img src={feat.get('images')[0].url} alt={title} />
-                          </a>
-                        </div>
-                      ) : null}
-                      {description && (
-                        <Typography paragraph>{description}</Typography>
-                      )}
-                      {highlightUrl && <Link href={highlightUrl}>Details</Link>}
-                    </div>
+    <div className={classes.container}>
+      {gbFeatureInfo?.features?.length ? (
+        <div className={classes.gbLegend}>
+          <GeltungsbereichePopup
+            feature={gbFeatureInfo.features.filter((feat) => feat.get('mot'))}
+            layer={[gbFeatureInfo.layer]}
+            renderValidityFooter={false}
+          />
+        </div>
+      ) : null}
+      {gbFeatureInfo?.features?.length && mainFeatures.length ? (
+        <Divider />
+      ) : null}
+      {mainFeatures?.length
+        ? mainFeatures.map((feat, idx, array) => {
+            const title =
+              feat.get('title') ||
+              feat.get('route_names_premium') ||
+              feat.get('route_names_gttos');
+            const images = feat.get('images') && feat.get('images').length;
+            const description = feat.get('lead_text');
+            const highlightUrl = feat.get('highlight_url');
+            return (
+              <React.Fragment key={title}>
+                <div
+                  className={classes.mainInfo}
+                  data-testid="sts-validity-feature-info"
+                >
+                  <br />
+                  <div className={classes.featureInfoItem}>
+                    <Typography paragraph variant="h4">
+                      {title}
+                    </Typography>
+                    {images ? (
+                      <div className={classes.imageLine}>
+                        <a
+                          href={highlightUrl}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          <img src={feat.get('images')[0].url} alt={title} />
+                        </a>
+                      </div>
+                    ) : null}
+                    {description && (
+                      <Typography paragraph>{description}</Typography>
+                    )}
+                    {highlightUrl && <Link href={highlightUrl}>Details</Link>}
                   </div>
-                  {array.length > 1 && idx !== array.length - 1 ? (
-                    <Divider />
-                  ) : null}
-                </React.Fragment>
-              );
-            })
-          : null}
-      </div>
-    </>
+                </div>
+                {array.length > 1 && idx !== array.length - 1 ? (
+                  <Divider />
+                ) : null}
+              </React.Fragment>
+            );
+          })
+        : null}
+    </div>
   );
 }
 

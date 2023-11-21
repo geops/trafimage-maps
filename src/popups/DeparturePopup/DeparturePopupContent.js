@@ -311,6 +311,7 @@ class DeparturePopupContent extends Component {
               <tr>
                 <th className="tm-departure-line-cell">{t('Linie')}</th>
                 <th>{t('Ziel')}</th>
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <th colSpan="2">
                   <SBBClock focusable={false} height="23px" width="23px" />
                 </th>

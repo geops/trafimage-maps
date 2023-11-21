@@ -37,7 +37,7 @@ const propTypes = {
   language: PropTypes.string.isRequired,
 };
 
-const IsbTopicInfo = ({ language }) => {
+function IsbTopicInfo({ language }) {
   const { title, description, responsible, responsibleContent } =
     translations[language];
   return (
@@ -60,7 +60,7 @@ const IsbTopicInfo = ({ language }) => {
       </p>
     </div>
   );
-};
+}
 
 IsbTopicInfo.propTypes = propTypes;
 

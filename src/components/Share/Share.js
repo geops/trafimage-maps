@@ -48,7 +48,7 @@ const replaceParams = (url, language, appBaseUrl) => {
     .replace('{appBaseUrl}', appBaseUrl);
 };
 
-const ShareLink = ({ config }) => {
+function ShareLink({ config }) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
@@ -75,7 +75,7 @@ const ShareLink = ({ config }) => {
       </Link>
     </div>
   );
-};
+}
 
 ShareLink.propTypes = {
   config: PropTypes.shape({
@@ -87,7 +87,7 @@ ShareLink.propTypes = {
   }).isRequired,
 };
 
-const Share = () => {
+function Share() {
   const map = useSelector((state) => state.app.map);
   const layers = useSelector((state) => state.map.layers);
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -125,6 +125,6 @@ const Share = () => {
       <ShareLink config={socialShareConfig[2]} />
     </div>
   );
-};
+}
 
 export default React.memo(Share);

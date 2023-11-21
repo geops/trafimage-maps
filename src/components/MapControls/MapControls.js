@@ -40,13 +40,13 @@ const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
 };
 
-const MapControls = ({
+function MapControls({
   menuToggler,
   geolocation,
   zoomSlider,
   fitExtent,
   children,
-}) => {
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
@@ -224,7 +224,7 @@ const MapControls = ({
       {children}
     </div>
   );
-};
+}
 
 MapControls.propTypes = propTypes;
 MapControls.defaultProps = defaultProps;

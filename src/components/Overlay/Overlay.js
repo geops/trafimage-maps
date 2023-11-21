@@ -147,13 +147,13 @@ const defaultProps = {
   },
 };
 
-const Overlay = ({
+function Overlay({
   elements,
   children,
   disablePortal,
   transitionDuration,
   ResizableProps,
-}) => {
+}) {
   const classes = useStyles();
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const resizeRef = useRef(null);
@@ -297,7 +297,7 @@ const Overlay = ({
       </Drawer>
     </div>
   );
-};
+}
 
 Overlay.propTypes = propTypes;
 Overlay.defaultProps = defaultProps;

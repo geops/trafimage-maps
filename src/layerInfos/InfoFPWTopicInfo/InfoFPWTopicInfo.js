@@ -9,7 +9,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const InfoFPWTopicInfo = ({ language, t }) => {
+function InfoFPWTopicInfo({ language, t }) {
   const desc = {
     de: (
       <p>
@@ -42,7 +42,7 @@ const InfoFPWTopicInfo = ({ language, t }) => {
       </p>
     </div>
   );
-};
+}
 
 InfoFPWTopicInfo.propTypes = propTypes;
 InfoFPWTopicInfo.defaultProps = defaultProps;

@@ -12,7 +12,7 @@ import useHighlightLayer from '../../utils/useHighlightLayer';
 import getPopupComponent from '../../utils/getPopupComponent';
 import './FeatureInformation.scss';
 
-const FeatureInformation = ({ featureInfo }) => {
+function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
@@ -131,7 +131,7 @@ const FeatureInformation = ({ featureInfo }) => {
       </React.Suspense>
     </div>
   );
-};
+}
 
 FeatureInformation.propTypes = {
   featureInfo: PropTypes.array.isRequired,

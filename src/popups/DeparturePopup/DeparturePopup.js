@@ -4,7 +4,7 @@ import Feature from 'ol/Feature';
 import { withTranslation } from 'react-i18next';
 import DeparturePopupContent from './DeparturePopupContent';
 
-const DeparturePopup = ({ feature, children }) => {
+function DeparturePopup({ feature, children }) {
   const platform = feature.get('platform');
   const uic = parseFloat(feature.get('sbb_id'));
 
@@ -13,7 +13,7 @@ const DeparturePopup = ({ feature, children }) => {
       {children}
     </DeparturePopupContent>
   );
-};
+}
 
 DeparturePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

@@ -1,5 +1,5 @@
-import { getTypeIndex } from 'mobility-toolbox-js/common/utils/realtimeConfig';
 import {
+  getTypeIndex,
   RealtimeLayer,
   fullTrajectoryDelayStyle,
   createRealtimeFilters,

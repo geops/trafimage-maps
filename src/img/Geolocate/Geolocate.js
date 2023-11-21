@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const Geolocate = ({ onClick, color }) => {
+function Geolocate({ onClick, color }) {
   const classes = useStyles({ color });
   return (
     <svg
@@ -34,7 +34,7 @@ const Geolocate = ({ onClick, color }) => {
       <circle cx="20" cy="20" r="3" className={classes.geolocIconPoint} />
     </svg>
   );
-};
+}
 
 Geolocate.propTypes = {
   onClick: PropTypes.func,

@@ -6,7 +6,7 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const CasaRoutePopup = ({ feature }) => {
+function CasaRoutePopup({ feature }) {
   const route = feature.get('route');
 
   return (
@@ -18,7 +18,7 @@ const CasaRoutePopup = ({ feature }) => {
       ))}
     </div>
   );
-};
+}
 
 CasaRoutePopup.propTypes = propTypes;
 

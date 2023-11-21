@@ -68,7 +68,7 @@ const translations = {
   },
 };
 
-const IsbPopup = ({ feature, layer }) => {
+function IsbPopup({ feature, layer }) {
   const classes = useStyles();
   const { i18n, t } = useTranslation();
   const shortToLongName = layer.get('shortToLongName') || {};
@@ -137,7 +137,7 @@ const IsbPopup = ({ feature, layer }) => {
       )}
     </div>
   );
-};
+}
 
 IsbPopup.propTypes = propTypes;
 IsbPopup.renderTitle = (feat, layer, t) => {

@@ -12,13 +12,9 @@ import GeoJSON from 'ol/format/GeoJSON';
 import Search from '../Search';
 import getGreaterNumber from '../../utils/getGreaterNumber';
 
-const lineMeasuresRegExp = new RegExp(
-  '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
-);
+const lineMeasuresRegExp = /([0-9]*)\s*([0-9]+\.?[0-9]*)-([0-9]*\.?[0-9]*)/;
 
-const lineKilometerRegExp = new RegExp(
-  '^([0-9]+)(\\s)(\\+)?(\\s+)?([0-9]+(\\.[0-9]+)?)$',
-);
+const lineKilometerRegExp = /^([0-9]+)(\s)(\+)?(\s+)?([0-9]+(\.[0-9]+)?)$/;
 
 const color = 'rgba(0,61,155,0.5)';
 

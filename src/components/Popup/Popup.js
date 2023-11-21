@@ -22,7 +22,7 @@ const getPopupCoordinates = (
   return coordinate;
 };
 
-const Popup = () => {
+function Popup() {
   const map = useSelector((state) => state.app.map);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const showPopups = useSelector((state) => state.app.showPopups);
@@ -103,6 +103,6 @@ const Popup = () => {
       <FeatureInformation featureInfo={filtered} />
     </RSPopup>
   );
-};
+}
 
 export default React.memo(Popup);

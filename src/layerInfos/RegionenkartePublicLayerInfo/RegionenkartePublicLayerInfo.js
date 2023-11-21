@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegionenkartePublicLayerInfo = ({ language }) => {
+function RegionenkartePublicLayerInfo({ language }) {
   const classes = useStyles();
   return (
     <div>
@@ -81,7 +81,7 @@ const RegionenkartePublicLayerInfo = ({ language }) => {
       {description[language]}
     </div>
   );
-};
+}
 
 RegionenkartePublicLayerInfo.propTypes = {
   language: PropTypes.string.isRequired,

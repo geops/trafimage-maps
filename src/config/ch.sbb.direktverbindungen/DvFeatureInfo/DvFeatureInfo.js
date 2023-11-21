@@ -203,6 +203,7 @@ function DvFeatureInfo({ filterByType }) {
           const isNightTrain = feat.get('line') === 'night';
           const active = infoKey === id;
           return (
+            // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <div
               key={id}
               role="menuitem"
@@ -255,9 +256,7 @@ function DvFeatureInfo({ filterByType }) {
                     active
                       ? (el) =>
                           setExpandedHeight(
-                            el?.clientHeight
-                              ? el?.clientHeight + 10
-                              : undefined,
+                            el?.clientHeight ? el.clientHeight + 10 : undefined,
                           )
                       : null
                   }

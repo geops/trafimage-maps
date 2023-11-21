@@ -75,7 +75,7 @@ const comps = {
   ),
 };
 
-const ConstructionTopicInfo = () => {
+function ConstructionTopicInfo() {
   const { i18n, t } = useTranslation();
   return (
     <div>
@@ -91,6 +91,6 @@ const ConstructionTopicInfo = () => {
       </p>
     </div>
   );
-};
+}
 
 export default React.memo(ConstructionTopicInfo);

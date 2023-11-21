@@ -6,7 +6,7 @@ const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const BusLinePopup = ({ feature }) => {
+function BusLinePopup({ feature }) {
   const props = feature.getProperties();
   return (
     <div className="wkp-bus-line-popup">
@@ -23,7 +23,7 @@ const BusLinePopup = ({ feature }) => {
       })}
     </div>
   );
-};
+}
 
 BusLinePopup.propTypes = propTypes;
 

@@ -97,7 +97,7 @@ const SICHERHEITSRELEVANT_CATEGORIES = [
   'instruiert',
 ];
 
-export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
+export function EnergiePopupSubtitle({ kategorie, unterkategorie, label }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return kategorie ? (
@@ -136,7 +136,7 @@ export const EnergiePopupSubtitle = ({ kategorie, unterkategorie, label }) => {
       )}
     </div>
   ) : null;
-};
+}
 
 EnergiePopupSubtitle.propTypes = {
   kategorie: PropTypes.string,
@@ -150,7 +150,7 @@ EnergiePopupSubtitle.defaultProps = {
   label: undefined,
 };
 
-const InterventionPersonCard = ({ person, segments }) => {
+function InterventionPersonCard({ person, segments }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -175,7 +175,7 @@ const InterventionPersonCard = ({ person, segments }) => {
       }
     />
   );
-};
+}
 
 InterventionPersonCard.propTypes = {
   person: PropTypes.shape(PersonCard.propTypes).isRequired,
@@ -204,7 +204,7 @@ const renderSicherheitsrelevantPersons = (sbbPersons, externalPersons) => {
   ));
 };
 
-const EnergiePopup = ({ feature }) => {
+function EnergiePopup({ feature }) {
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const permissionInfos = useSelector((state) => state.app.permissionInfos);
@@ -534,7 +534,7 @@ const EnergiePopup = ({ feature }) => {
       )}
     </div>
   );
-};
+}
 
 EnergiePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,

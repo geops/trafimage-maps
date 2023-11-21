@@ -170,15 +170,15 @@ const comps = {
         Il est permis de télécharger, d’enregistrer, d‘imprimer, ou de
         reproduire sous toute autre forme, certaines cartes et plans et/ou des
         extraits ainsi que des informations, à condition de ne supprimer ni des
-        mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors, ©
-        swisstopo (5704003351)» ni d’autres désignations légalement protégées.
-        Les CFF conservent tous les droits de propriété ou bien d’utilisation
-        (carte-image), de même que swisstopo (bases des cartes). Cette
-        autorisation peut être révoquée à tout moment. Toute autre utilisation
-        (en totalité ou en partie), transmission (par voie électronique ou avec
-        d’autres moyens), modification, mise en lien ou utilisation des
-        géodonnées de base nécessite l’autorisation préalable expresse des CFF
-        et de swisstopo.
+        mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors,
+        © swisstopo (5704003351)» ni d’autres désignations légalement
+        protégées. Les CFF conservent tous les droits de propriété ou bien
+        d’utilisation (carte-image), de même que swisstopo (bases des cartes).
+        Cette autorisation peut être révoquée à tout moment. Toute autre
+        utilisation (en totalité ou en partie), transmission (par voie
+        électronique ou avec d’autres moyens), modification, mise en lien ou
+        utilisation des géodonnées de base nécessite l’autorisation préalable
+        expresse des CFF et de swisstopo.
       </p>
       <p>
         <b>Copyright swisstopo.</b>

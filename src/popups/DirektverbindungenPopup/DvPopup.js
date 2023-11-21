@@ -13,7 +13,7 @@ const defaultProps = {
   feature: null,
 };
 
-const DvPopup = () => {
+function DvPopup() {
   const classes = useStyles();
 
   return (
@@ -21,7 +21,7 @@ const DvPopup = () => {
       <DvFeatureInfo />
     </div>
   );
-};
+}
 
 DvPopup.defaultProps = defaultProps;
 

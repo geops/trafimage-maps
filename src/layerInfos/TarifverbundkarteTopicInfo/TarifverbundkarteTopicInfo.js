@@ -11,7 +11,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const TarifverbundkarteTopicInfo = ({ language }) => {
+function TarifverbundkarteTopicInfo({ language }) {
   const comps = {
     de: (
       <>
@@ -81,7 +81,7 @@ const TarifverbundkarteTopicInfo = ({ language }) => {
       </p>
     </div>
   );
-};
+}
 
 TarifverbundkarteTopicInfo.propTypes = propTypes;
 TarifverbundkarteTopicInfo.defaultProps = defaultProps;

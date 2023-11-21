@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => {
 const validatePhone = (string) =>
   /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(string);
 
-const PersonCard = ({
+function PersonCard({
   title,
   name,
   email,
@@ -43,7 +43,7 @@ const PersonCard = ({
   division,
   otherDetails,
   className,
-}) => {
+}) {
   const classes = useStyles();
   const formattedPhone = useMemo(() => formatPhone(phone), [phone]);
   return (
@@ -96,7 +96,7 @@ const PersonCard = ({
       ))}
     </div>
   );
-};
+}
 
 PersonCard.propTypes = {
   name: PropTypes.string.isRequired,

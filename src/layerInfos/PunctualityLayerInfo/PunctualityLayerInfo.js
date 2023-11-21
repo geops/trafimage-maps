@@ -38,7 +38,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const PunctualityLayerInfo = ({ language, t }) => {
+function PunctualityLayerInfo({ language, t }) {
   const classes = useStyles();
   const delays = [
     {
@@ -180,7 +180,7 @@ const PunctualityLayerInfo = ({ language, t }) => {
   };
 
   return comps[language];
-};
+}
 
 PunctualityLayerInfo.propTypes = propTypes;
 PunctualityLayerInfo.defaultProps = defaultProps;

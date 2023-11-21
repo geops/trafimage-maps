@@ -29,7 +29,7 @@ const regions = [
   },
 ];
 
-const BetriebsRegionenLayerInfo = () => {
+function BetriebsRegionenLayerInfo() {
   const { t } = useTranslation();
   return (
     <div>
@@ -44,6 +44,6 @@ const BetriebsRegionenLayerInfo = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BetriebsRegionenLayerInfo;

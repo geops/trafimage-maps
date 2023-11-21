@@ -14,7 +14,7 @@ const defaultProps = {
   loginUrl: undefined,
 };
 
-const Header = ({ loginUrl }) => {
+function Header({ loginUrl }) {
   return (
     <div className="wkp-header">
       <div className="wkp-header-right">
@@ -26,7 +26,7 @@ const Header = ({ loginUrl }) => {
       </div>
     </div>
   );
-};
+}
 
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;

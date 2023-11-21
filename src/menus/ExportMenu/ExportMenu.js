@@ -94,7 +94,7 @@ const getHighestPossibleRes = (maxCanvasSize, map) => {
   return { format: highestRes.format, resolution: highestRes.resolution };
 };
 
-const ExportMenu = () => {
+function ExportMenu() {
   const classes = useStyles();
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const menuOpen = useSelector((state) => state.app.menuOpen);
@@ -222,6 +222,6 @@ const ExportMenu = () => {
       </div>
     </MenuItem>
   );
-};
+}
 
 export default React.memo(ExportMenu);

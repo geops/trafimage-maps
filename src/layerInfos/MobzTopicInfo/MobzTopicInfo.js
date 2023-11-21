@@ -10,7 +10,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const MobzTopicInfo = ({ language, t, properties }) => {
+function MobzTopicInfo({ language, t, properties }) {
   const { infos } = properties;
   const desc = {
     de: (
@@ -58,7 +58,7 @@ const MobzTopicInfo = ({ language, t, properties }) => {
       </p>
     </div>
   );
-};
+}
 
 MobzTopicInfo.propTypes = propTypes;
 MobzTopicInfo.defaultProps = defaultProps;

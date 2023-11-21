@@ -13,7 +13,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const PassagierFrequenzenPopup = ({ feature, t }) => {
+function PassagierFrequenzenPopup({ feature, t }) {
   const language = useSelector((state) => state.app.language);
 
   const statisticDate = feature.get('passagier_freq_jahr');
@@ -57,7 +57,7 @@ const PassagierFrequenzenPopup = ({ feature, t }) => {
       </div>
     </div>
   );
-};
+}
 
 PassagierFrequenzenPopup.propTypes = propTypes;
 PassagierFrequenzenPopup.defaultProps = defaultProps;

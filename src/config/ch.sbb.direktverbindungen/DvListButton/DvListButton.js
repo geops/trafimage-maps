@@ -16,7 +16,7 @@ const getExtentFromFeatures = (features) => {
   return extent;
 };
 
-const DvListButton = ({ ...props }) => {
+function DvListButton({ ...props }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const layers = useSelector((state) => state.map.layers);
@@ -74,6 +74,6 @@ const DvListButton = ({ ...props }) => {
       <List />
     </MapButton>
   );
-};
+}
 
 export default DvListButton;

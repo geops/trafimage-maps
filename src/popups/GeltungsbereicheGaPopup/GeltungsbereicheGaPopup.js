@@ -58,11 +58,11 @@ const translations = {
   },
 };
 
-const GeltungsbereichePopup = ({
+function GeltungsbereichePopup({
   feature: features,
   layer: layers,
   renderValidityFooter,
-}) => {
+}) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
@@ -182,7 +182,7 @@ const GeltungsbereichePopup = ({
       )}
     </div>
   );
-};
+}
 
 GeltungsbereichePopup.propTypes = propTypes;
 GeltungsbereichePopup.defaultProps = {

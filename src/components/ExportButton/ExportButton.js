@@ -118,7 +118,7 @@ function ExportButton({
   );
 }
 
-const DefaultLoadingComponent = () => {
+function DefaultLoadingComponent() {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
@@ -127,13 +127,13 @@ const DefaultLoadingComponent = () => {
       {t('Export läuft...')}
     </span>
   );
-};
+}
 
-const DefaultChildren = () => {
+function DefaultChildren() {
   const classes = useStyles();
   const { t } = useTranslation();
   return <span className={classes.buttonContent}>{t('PDF exportieren')}</span>;
-};
+}
 
 ExportButton.propTypes = {
   exportFormat: PropTypes.string,

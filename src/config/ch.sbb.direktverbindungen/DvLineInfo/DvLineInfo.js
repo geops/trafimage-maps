@@ -89,7 +89,7 @@ const defaultProps = {
   feature: null,
 };
 
-const DvLineInfo = ({ feature, layer }) => {
+function DvLineInfo({ feature, layer }) {
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -114,7 +114,7 @@ const DvLineInfo = ({ feature, layer }) => {
     [`description_${i18n.language}`]: description,
     [`url_${i18n.language}`]: link,
     color,
-  } = feature?.getProperties();
+  } = feature?.getProperties() || {};
 
   return (
     <div className={classes.container}>
@@ -192,7 +192,7 @@ const DvLineInfo = ({ feature, layer }) => {
       </div>
     </div>
   );
-};
+}
 
 DvLineInfo.defaultProps = defaultProps;
 DvLineInfo.propTypes = propTypes;

@@ -24,14 +24,14 @@ const StyledIconButton = withStyles(() => ({
   },
 }))(IconButton);
 
-const MapButton = ({ children, onClick, ...props }) => {
+function MapButton({ children, onClick, ...props }) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <StyledIconButton onClick={onClick} {...props}>
       {children}
     </StyledIconButton>
   );
-};
+}
 
 MapButton.propTypes = {
   children: PropTypes.node.isRequired,

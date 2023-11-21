@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
-const TopicTelephoneInfos = () => {
+function TopicTelephoneInfos() {
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
 
@@ -15,6 +15,6 @@ const TopicTelephoneInfos = () => {
       })}
     </div>
   );
-};
+}
 
 export default TopicTelephoneInfos;

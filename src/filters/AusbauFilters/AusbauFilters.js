@@ -28,7 +28,7 @@ const defaultProps = {
   layer: null,
 };
 
-const AusbauFilters = ({ layer }) => {
+function AusbauFilters({ layer }) {
   const classes = useStyles();
   const { t } = useTranslation();
   const [value, setValue] = useState((layer && layer.filter.value) || '');
@@ -48,28 +48,26 @@ const AusbauFilters = ({ layer }) => {
   }
 
   return (
-    <>
-      <FormControl fullWidth className={classes.formControl}>
-        <InputLabel shrink>{t('angebotsschritt')}</InputLabel>
-        <Select
-          autoWidth
-          displayEmpty
-          value={value}
-          onChange={onChange}
-          classes={{ icon: classes.selectIcon }}
-        >
-          {layer.filters.map((filter) => {
-            return (
-              <MenuItem value={filter.value} key={filter.key}>
-                {t(filter.key)}
-              </MenuItem>
-            );
-          })}
-        </Select>
-      </FormControl>
-    </>
+    <FormControl fullWidth className={classes.formControl}>
+      <InputLabel shrink>{t('angebotsschritt')}</InputLabel>
+      <Select
+        autoWidth
+        displayEmpty
+        value={value}
+        onChange={onChange}
+        classes={{ icon: classes.selectIcon }}
+      >
+        {layer.filters.map((filter) => {
+          return (
+            <MenuItem value={filter.value} key={filter.key}>
+              {t(filter.key)}
+            </MenuItem>
+          );
+        })}
+      </Select>
+    </FormControl>
   );
-};
+}
 
 AusbauFilters.propTypes = propTypes;
 AusbauFilters.defaultProps = defaultProps;

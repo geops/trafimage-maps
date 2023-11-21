@@ -7,7 +7,7 @@ const propTypes = {
   properties: PropTypes.object.isRequired,
 };
 
-const ZweitausbildungLayerInfo = ({ properties: layer }) => {
+function ZweitausbildungLayerInfo({ properties: layer }) {
   const { t } = useTranslation();
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
   const {
@@ -53,7 +53,7 @@ const ZweitausbildungLayerInfo = ({ properties: layer }) => {
       </p>
     </div>
   );
-};
+}
 
 ZweitausbildungLayerInfo.propTypes = propTypes;
 

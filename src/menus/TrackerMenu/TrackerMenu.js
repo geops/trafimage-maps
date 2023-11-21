@@ -6,7 +6,7 @@ import FeatureMenu from '../../components/FeatureMenu';
 /**
  * Menu use to display feature info from punctuality layers.
  */
-const TrackerMenu = (props) => {
+function TrackerMenu(props) {
   const { t } = useTranslation();
 
   return (
@@ -21,6 +21,6 @@ const TrackerMenu = (props) => {
       }}
     />
   );
-};
+}
 
 export default React.memo(TrackerMenu);

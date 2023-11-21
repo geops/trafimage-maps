@@ -74,7 +74,7 @@ const comps = {
   },
 };
 
-const DvLayerInfo = ({ t, language, properties }) => {
+function DvLayerInfo({ t, language, properties }) {
   const classes = useStyles();
   return (
     <div>
@@ -85,7 +85,7 @@ const DvLayerInfo = ({ t, language, properties }) => {
       </div>
     </div>
   );
-};
+}
 
 DvLayerInfo.propTypes = propTypes;
 

@@ -15,7 +15,7 @@ const defaultProps = {};
 
 const capitalize = (stg) => `${stg.charAt(0).toUpperCase()}${stg.slice(1)}`;
 
-const ConstructionPopup = ({ feature, t }) => {
+function ConstructionPopup({ feature, t }) {
   let projektort;
   let ort;
   let artAndOrt;
@@ -82,7 +82,7 @@ const ConstructionPopup = ({ feature, t }) => {
       {link3}
     </div>
   );
-};
+}
 
 ConstructionPopup.propTypes = propTypes;
 ConstructionPopup.defaultProps = defaultProps;

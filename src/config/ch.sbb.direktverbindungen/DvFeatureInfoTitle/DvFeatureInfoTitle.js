@@ -36,7 +36,7 @@ export const DvFeatureInfoTitleString = () => {
   }`;
 };
 
-const DvFeatureInfoTitle = () => {
+function DvFeatureInfoTitle() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -67,6 +67,6 @@ const DvFeatureInfoTitle = () => {
       </IconButton>
     </Box>
   );
-};
+}
 
 export default DvFeatureInfoTitle;
