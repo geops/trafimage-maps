@@ -17,6 +17,7 @@ fi
 # Transform .scss import to .css import.
 # Creates also js sourcemaps.
 if NODE_ENV=production ./node_modules/.bin/babel src --config-file './packages/es/.babelrc' --out-dir build/es --source-maps --copy-files; then
+# if NODE_ENV=production yarn esbuild; then
   echo "Transformation suceeds."
 else
   echo "Compile the 'src' directory failed."

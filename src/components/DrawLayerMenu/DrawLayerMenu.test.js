@@ -2,9 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
 import { Layer } from 'mobility-toolbox-js/ol';
+import { render } from '@testing-library/react';
 import OLLayer from 'ol/layer/Layer';
 import DrawLayerMenu from './DrawLayerMenu';
 
@@ -24,13 +23,12 @@ describe('DrawLayerMenu', () => {
         },
         app: {},
       });
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <DrawLayerMenu />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
 
     test('using the layerService property', () => {
@@ -43,13 +41,12 @@ describe('DrawLayerMenu', () => {
           drawIds: { admin_id: 'foo' },
         },
       });
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <DrawLayerMenu />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
   });
 
@@ -67,12 +64,12 @@ describe('DrawLayerMenu', () => {
         drawIds: { admin_id: 'foo' },
       },
     });
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <DrawLayerMenu />
       </Provider>,
     );
     expect(layers.length).toBe(2);
-    expect(wrapper.find('.rs-layer-tree-item').length).toBe(1);
+    expect(container.querySelectorAll('.rs-layer-tree-item').length).toBe(1);
   });
 });

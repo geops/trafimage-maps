@@ -1,9 +1,13 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import userEvent from '@testing-library/user-event';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import InfosButton from '.';
+import getStore from '../../model/store';
+import { setSelectedForInfos } from '../../model/app/actions';
 
 describe('InfosButton', () => {
   const mockStore = configureStore([thunk]);
@@ -11,16 +15,13 @@ describe('InfosButton', () => {
 
   test('renders not selected info button  ', () => {
     const info = { key: 'foo' };
-    store = mockStore({
-      map: {},
-      app: { selectedForInfos: {} },
-    });
-    const wrapper = mount(
+    store = getStore();
+    const { container } = render(
       <Provider store={store}>
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(wrapper.find('button').prop('className')).toBe(
+    expect(container.querySelector('button').className).toBe(
       'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
     );
   });
@@ -31,56 +32,57 @@ describe('InfosButton', () => {
       map: {},
       app: { selectedForInfos: info },
     });
-    const wrapper = mount(
+    const { container } = render(
       <Provider store={store}>
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    wrapper.update();
-    expect(wrapper.find('button').prop('className')).toBe(
+    expect(container.querySelector('button').className).toBe(
       'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
     );
   });
 
-  test('select on click ', () => {
+  test('select on click ', async () => {
+    const user = userEvent.setup();
     const info = { key: 'foo' };
-    store = mockStore({
-      map: {},
-      app: { selectedForInfos: {} },
-    });
-    const wrapper = mount(
+    store = getStore();
+    const { container } = render(
       <Provider store={store}>
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(wrapper.find('button').prop('className')).toBe(
+    expect(container.querySelector('button').className).toBe(
       'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
     );
-    wrapper.find('button').simulate('click');
-    expect(store.getActions()[0]).toEqual({
-      data: { key: 'foo' },
-      type: 'SET_SELECTED_FOR_INFOS',
-    });
+
+    // You can also call this method directly on userEvent,
+    // but using the methods from `.setup()` is recommended.
+    await user.click(container.querySelector('button'));
+    await waitFor(() =>
+      expect(container.querySelector('button').className).toBe(
+        'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
+      ),
+    );
   });
 
-  test('deselect on click', () => {
+  test('deselect on click', async () => {
+    const user = userEvent.setup();
     const info = { key: 'foo' };
-    store = mockStore({
-      map: {},
-      app: { selectedForInfos: info },
-    });
-    const wrapper = mount(
+    store = getStore();
+    store.dispatch(setSelectedForInfos(info));
+    const { container } = render(
       <Provider store={store}>
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(wrapper.find('button').prop('className')).toBe(
+    expect(container.querySelector('button').className).toBe(
       'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
     );
-    wrapper.find('button').simulate('click');
-    expect(store.getActions()[0]).toEqual({
-      data: null,
-      type: 'SET_SELECTED_FOR_INFOS',
-    });
+    await user.click(container.querySelector('button'));
+    await waitFor(() =>
+      expect(container.querySelector('button').className).toBe(
+        'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
+      ),
+    );
   });
 });

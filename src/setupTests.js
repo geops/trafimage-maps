@@ -50,6 +50,12 @@ global.createMatchMedia = (width) => {
     removeListener: () => {},
   });
 };
+
+global.navigator.geolocation = {
+  getCurrentPosition: jest.fn(),
+  clearWatch: jest.fn(),
+};
+
 global.matchMedia = global.createMatchMedia(window.innerWidth);
 
 global.sampleKml = `

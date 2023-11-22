@@ -3,7 +3,7 @@ import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '../../i18n';
 
-import { MatomoProvider, createInstance } from '@datapunt/matomo-tracker-react';
+import { MatomoProvider, createInstance } from '@jonkoops/matomo-tracker-react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
@@ -267,25 +267,25 @@ const defaultProps = {
   permissionInfos: null,
   embedded: false,
   elements: undefined,
-  apiKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
-  cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
-  appBaseUrl: process?.env?.REACT_APP_BASE_URL,
-  vectorTilesKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process?.env?.REACT_APP_VECTOR_TILES_URL,
-  staticFilesUrl: process?.env?.REACT_APP_STATIC_FILES_URL,
-  mapsetUrl: process?.env?.REACT_APP_MAPSET_URL,
-  shortenerUrl: process?.env?.REACT_APP_SHORTENER_URL,
-  drawUrl: process?.env?.REACT_APP_DRAW_URL,
-  destinationUrl: process?.env?.REACT_APP_DESTINATION_URL,
-  departuresUrl: process?.env?.REACT_APP_DEPARTURES_URL,
-  domainConsent: process?.env?.REACT_APP_DOMAIN_CONSENT,
-  domainConsentId: process?.env?.REACT_APP_DOMAIN_CONSENT_ID,
-  matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
-  matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
-  searchUrl: process?.env?.REACT_APP_SEARCH_URL,
-  stopsUrl: process?.env?.REACT_APP_STOPS_URL,
-  realtimeKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
-  realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
+  apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  cartaroUrl: process.env.REACT_APP_CARTARO_URL,
+  appBaseUrl: process.env.REACT_APP_BASE_URL,
+  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
+  staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
+  mapsetUrl: process.env.REACT_APP_MAPSET_URL,
+  shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
+  drawUrl: process.env.REACT_APP_DRAW_URL,
+  destinationUrl: process.env.REACT_APP_DESTINATION_URL,
+  departuresUrl: process.env.REACT_APP_DEPARTURES_URL,
+  domainConsent: process.env.REACT_APP_DOMAIN_CONSENT,
+  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
+  matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
+  matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
+  searchUrl: process.env.REACT_APP_SEARCH_URL,
+  stopsUrl: process.env.REACT_APP_STOPS_URL,
+  realtimeKey: process.env.REACT_APP_VECTOR_TILES_KEY,
+  realtimeUrl: process.env.REACT_APP_REALTIME_URL,
 };
 
 class TrafimageMaps extends React.PureComponent {

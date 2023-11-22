@@ -1,4 +1,4 @@
-import { MatomoContext } from '@datapunt/matomo-tracker-react';
+import { MatomoContext } from '@jonkoops/matomo-tracker-react';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -41,6 +41,7 @@ const propTypes = {
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   cartaroUrl: PropTypes.string,
   searchUrl: PropTypes.string,
+  stopsUrl: PropTypes.string,
   realtimeKey: PropTypes.string,
   realtimeUrl: PropTypes.string,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
@@ -75,6 +76,7 @@ const defaultProps = {
   permissionInfos: null,
   staticFilesUrl: null,
   searchUrl: null,
+  stopsUrl: null,
   appBaseUrl: null,
   realtimeKey: null,
   realtimeUrl: null,
@@ -149,7 +151,7 @@ class TopicLoader extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.onChangeVisibleKeys.forEach((key) => unByKey(key));
+    this.onChangeVisibleKeys?.forEach((key) => unByKey(key));
   }
 
   loadTopics() {
@@ -192,6 +194,7 @@ class TopicLoader extends PureComponent {
       t,
       apiKey,
       searchUrl,
+      stopsUrl,
       appBaseUrl,
       activeTopic,
       dispatchSetFeatureInfo,
@@ -230,6 +233,7 @@ class TopicLoader extends PureComponent {
     newSearchService.setSearches(activeTopic.searches || {});
     newSearchService.setApiKey(apiKey);
     newSearchService.setSearchUrl(searchUrl);
+    newSearchService.setSearchUrl(stopsUrl);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
@@ -440,6 +444,7 @@ const mapStateToProps = (state) => ({
   permissionInfos: state.app.permissionInfos,
   cartaroUrl: state.app.cartaroUrl,
   searchUrl: state.app.searchUrl,
+  stopsUrl: state.app.stopsUrl,
   appBaseUrl: state.app.appBaseUrl,
   staticFilesUrl: state.app.staticFilesUrl,
   apiKey: state.app.apiKey,

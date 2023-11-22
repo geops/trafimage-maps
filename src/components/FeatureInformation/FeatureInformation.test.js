@@ -2,8 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import renderer from 'react-test-renderer';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
 import { Feature } from 'ol';
@@ -74,14 +73,15 @@ describe('FeatureInformation', () => {
         coordinate: [2, 2],
       },
     ];
-    const wraper = mount(
+
+    const { unmount } = render(
       <Provider store={store}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
     );
     expect(store.getState().app.map.addLayer).toHaveBeenCalledTimes(1);
     const highlighLayer = store.getState().app.map.addLayer.mock.calls[0][0];
-    wraper.unmount();
+    unmount();
     expect(store.getState().app.map.removeLayer).toHaveBeenCalledWith(
       highlighLayer,
     );
@@ -102,7 +102,8 @@ describe('FeatureInformation', () => {
         coordinate: [2, 2],
       },
     ];
-    const wraper = mount(
+
+    const { unmount } = render(
       <Provider store={store}>
         <FeatureInformation featureInfo={fi} />
         <FeatureInformation featureInfo={fi} />
@@ -110,7 +111,7 @@ describe('FeatureInformation', () => {
     );
     expect(store.getState().app.map.addLayer).toHaveBeenCalledTimes(1);
     const highlighLayer = store.getState().app.map.addLayer.mock.calls[0][0];
-    wraper.unmount();
+    unmount();
     expect(store.getState().app.map.removeLayer).toHaveBeenCalledWith(
       highlighLayer,
     );
@@ -144,7 +145,7 @@ describe('FeatureInformation', () => {
     fi[0].features[0].set('mapboxFeature', {
       layer: { layout: { 'icon-image': 'foo' } },
     });
-    const wrapper = mount(
+    const { unmount } = render(
       <Provider store={store}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
@@ -155,7 +156,7 @@ describe('FeatureInformation', () => {
     expect(
       highlighLayer.getSource().getFeatures()[0].getGeometry().getCoordinates(),
     ).toEqual([2.5, 2.5]);
-    wrapper.unmount();
+    unmount();
   });
 
   test("doesn't add an hihglight feature if the feature is not a point and not a mapbox feature", () => {
@@ -182,7 +183,7 @@ describe('FeatureInformation', () => {
         coordinate: [2.5, 2.5],
       },
     ];
-    const wrapper = mount(
+    const { unmount } = render(
       <Provider store={store}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
@@ -190,7 +191,7 @@ describe('FeatureInformation', () => {
     expect(store.getState().app.map.addLayer).toHaveBeenCalledTimes(1);
     const highlighLayer = store.getState().app.map.addLayer.mock.calls[0][0];
     expect(highlighLayer.getSource().getFeatures().length).toBe(0);
-    wrapper.unmount();
+    unmount();
   });
 
   test('center the map on selected features if one of them is using an Overlay', () => {
@@ -240,7 +241,7 @@ describe('FeatureInformation', () => {
       },
     ];
     storeUnMocked.app.screenWidth = 's';
-    const wrapper = mount(
+    const { unmount } = render(
       <Provider store={mockStore(storeUnMocked)}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
@@ -252,7 +253,7 @@ describe('FeatureInformation', () => {
       maxZoom: 10,
       padding: [0, 400, 0, 0],
     });
-    wrapper.unmount();
+    unmount();
   });
 
   test("center the map on selected feature if it's using an Overlay (mobile)", () => {
@@ -281,7 +282,7 @@ describe('FeatureInformation', () => {
       },
     ];
     storeUnMocked.app.screenWidth = 'xs';
-    const wrapper = mount(
+    const { unmount } = render(
       <Provider store={mockStore(storeUnMocked)}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
@@ -293,7 +294,7 @@ describe('FeatureInformation', () => {
       maxZoom: 10,
       padding: [0, 0, 250, 0],
     });
-    wrapper.unmount();
+    unmount();
   });
 
   test("doesn't center the map on selected feature if it's not using an Overlay'", () => {
@@ -342,14 +343,14 @@ describe('FeatureInformation', () => {
         coordinate: [2.5, 2.5],
       },
     ];
-    const wrapper = mount(
+    const { unmount } = render(
       <Provider store={store}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
     );
     expect(cancelAnimations).toHaveBeenCalledTimes(0);
     expect(fit).toHaveBeenCalledTimes(0);
-    wrapper.unmount();
+    unmount();
   });
 
   describe('should match snapshot.', () => {
@@ -368,13 +369,12 @@ describe('FeatureInformation', () => {
         },
       ];
 
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
 
     test("using the info's popupComponent", () => {
@@ -390,13 +390,12 @@ describe('FeatureInformation', () => {
         },
       ];
 
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
 
     test('should display multiple features with pagination', () => {
@@ -424,13 +423,12 @@ describe('FeatureInformation', () => {
         },
       ];
 
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
 
     test('should not display header', () => {
@@ -446,13 +444,12 @@ describe('FeatureInformation', () => {
         },
       ];
 
-      const component = renderer.create(
+      const { container } = render(
         <Provider store={store}>
           <FeatureInformation featureInfo={fi} />
         </Provider>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
   });
 });

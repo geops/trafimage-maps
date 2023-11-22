@@ -1,5 +1,5 @@
 import XMLSerializer from 'xmlserializer';
-import tarifverbundkarteLegend from '../../img/tarifverbund_legend.svg';
+import tarifverbundkarteLegend from '../../img/tarifverbund_legend.url.svg';
 
 describe('ExportButton', () => {
   test('legend svg must be parseable/serializable by native DOMParser and XML Serializer', (done) => {

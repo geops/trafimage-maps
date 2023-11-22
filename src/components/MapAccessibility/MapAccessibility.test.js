@@ -1,8 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 import { Layer, RealtimeLayer as TrackerLayer } from 'mobility-toolbox-js/ol';
 import { Map, View } from 'ol';
-import renderer from 'react-test-renderer';
 import MapAccessibility from './MapAccessibility';
 
 let map;
@@ -68,11 +67,10 @@ describe('MapAccessibility', () => {
   });
 
   test('should return null', () => {
-    const component = renderer.create(
+    const { container } = render(
       <MapAccessibility map={map} layers={[layer]} />,
     );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
   });
 
   test('should go through vehicles on TAB event', () => {
@@ -83,7 +81,7 @@ describe('MapAccessibility', () => {
     });
     const spy = jest.spyOn(event, 'preventDefault');
     const spy2 = jest.spyOn(eventShift, 'preventDefault');
-    mount(<MapAccessibility map={map} layers={[layer]} />);
+    render(<MapAccessibility map={map} layers={[layer]} />);
     mapElement.focus();
     // Go to vehicle with smaller x coordinate
     document.dispatchEvent(event);
@@ -124,7 +122,7 @@ describe('MapAccessibility', () => {
     const eventEnter = new KeyboardEvent('keydown', { which: 13 });
     const spy = jest.spyOn(eventEnter, 'preventDefault');
     const spy2 = jest.spyOn(map, 'dispatchEvent');
-    mount(<MapAccessibility map={map} layers={[layer]} />);
+    render(<MapAccessibility map={map} layers={[layer]} />);
     mapElement.focus();
     // Go to vehicle with smaller x coordinate
     document.dispatchEvent(event);
@@ -139,10 +137,10 @@ describe('MapAccessibility', () => {
   test('remove listener on unmount', () => {
     const event = new KeyboardEvent('keydown', { which: 9 });
     const spy = jest.spyOn(event, 'preventDefault');
-    const wrapper = mount(<MapAccessibility map={map} layers={[layer]} />);
-    wrapper.unmount();
+    const { unmount } = render(<MapAccessibility map={map} layers={[layer]} />);
+    unmount();
     mapElement.focus();
-    // Go to vehicle with smaller x coordinate
+    // Go to vehicle with smaller x coordinateu
     document.dispatchEvent(event);
     expect(spy).toHaveBeenCalledTimes(0);
   });

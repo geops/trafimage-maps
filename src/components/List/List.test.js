@@ -1,10 +1,6 @@
 import React from 'react';
-import { configure, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import List from './List';
-
-configure({ adapter: new Adapter() });
 
 describe('List', () => {
   describe('when no properties are set', () => {
@@ -21,14 +17,13 @@ describe('List', () => {
     });
 
     test('displays 1 error for required property ', () => {
-      shallow(<List />);
+      render(<List />);
       expect(spy).toHaveBeenCalledTimes(1);
     });
 
     test('matches snapshot', () => {
-      const component = renderer.create(<List />);
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      const component = render(<List />);
+      expect(component.container.innerHTML).toMatchSnapshot();
     });
   });
 
@@ -58,7 +53,7 @@ describe('List', () => {
     ];
 
     test('matches snapshot with defaultItems', () => {
-      const component = renderer.create(
+      const component = render(
         <List
           className="tm-foo"
           defaultItems={defaultItems}
@@ -68,12 +63,11 @@ describe('List', () => {
           onSelect={() => {}}
         />,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(component.container.innerHTML).toMatchSnapshot();
     });
 
     test('matches snapshot with items', () => {
-      const component = renderer.create(
+      const component = render(
         <List
           className="tm-foo"
           defaultItems={defaultItems}
@@ -84,8 +78,7 @@ describe('List', () => {
           onSelect={() => {}}
         />,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(component.container.innerHTML).toMatchSnapshot();
     });
   });
 });

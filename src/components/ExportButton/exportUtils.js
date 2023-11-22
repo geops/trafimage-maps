@@ -7,7 +7,7 @@ import VectorSource from 'ol/source/Vector';
 import { LineString } from 'ol/geom';
 import { getCenter } from 'ol/extent';
 import { jsPDF as JsPDF } from 'jspdf';
-import Canvg from 'canvg';
+import { Canvg } from 'canvg';
 import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
 import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
 import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';

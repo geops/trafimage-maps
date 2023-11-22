@@ -1,62 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`] = `
-<div
-  className="wkp-handicap-popup-element"
->
-  <p
-    className="wkp-handicap-popup-field-title"
-  >
+<div class="wkp-handicap-popup-element">
+  <p class="wkp-handicap-popup-field-title">
     Zusätzliche Informationen
   </p>
-  <div
-    className="wkp-handicap-popup-field-body"
-  >
+  <div class="wkp-handicap-popup-field-body">
     <p>
       Test line here
     </p>
     <p>
       <span>
-              
       </span>
-      <a
-        href="tel:+33 666 66 66"
-      >
+      <a href="tel:+33 666 66 66">
         +33 666 66 66
       </a>
     </p>
     <p>
       <span>
         <span>
-                
         </span>
       </span>
       <span>
-        <a
-          href="mailto:admin@email.it"
-        >
+        <a href="mailto:admin@email.it">
           admin@email.it
         </a>
       </span>
     </p>
     <p>
-            (text)
+      (text)
     </p>
     <p>
-            LU-Tixi
+      LU-Tixi
     </p>
     <p>
-            foo bar baz
+      foo bar baz
     </p>
     <p>
       <span>
-              
       </span>
-      <a
-        className="wkp-link "
-        href="http://www.test.ch"
-        rel="noopener noreferrer"
-        target="_blank"
+      <a class="wkp-link "
+         href="http://www.test.ch"
+         rel="noopener noreferrer"
+         target="_blank"
       >
         <span>
           www.test.ch
@@ -67,30 +53,25 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
       </a>
     </p>
     <p>
-            Dritte Dienstleistung
+      Dritte Dienstleistung
     </p>
     <p>
-            Freiburg
+      Freiburg
     </p>
     <p>
       <span>
-              
       </span>
-      <a
-        href="tel:+41 (0) 41 210 00 60"
-      >
+      <a href="tel:+41 (0) 41 210 00 60">
         +41 (0) 41 210 00 60
       </a>
     </p>
     <p>
       <span>
-              
       </span>
-      <a
-        className="wkp-link "
-        href="http://www.geops.ch"
-        rel="noopener noreferrer"
-        target="_blank"
+      <a class="wkp-link "
+         href="http://www.geops.ch"
+         rel="noopener noreferrer"
+         target="_blank"
       >
         <span>
           www.geops.ch
@@ -104,4 +85,4 @@ exports[`HandicapPopupElement matches 'Zusätzliche Informationen' snapshot. 1`]
 </div>
 `;
 
-exports[`HandicapPopupElement matches empty snapshot. 1`] = `null`;
+exports[`HandicapPopupElement matches empty snapshot. 1`] = `""`;

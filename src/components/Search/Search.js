@@ -28,7 +28,7 @@ function Search() {
     if (!searchService) {
       return;
     }
-    searchService.setUpsert((section, items, position) =>
+    searchService.setUpsert((section, items, position) => {
       setSuggestions((oldSuggestions) => {
         const index = oldSuggestions.findIndex((s) => s.section === section);
         const start = index === -1 ? position : index;
@@ -36,8 +36,8 @@ function Search() {
         const newSuggestions = [...oldSuggestions];
         newSuggestions.splice(start, deleteCount, { section, items });
         return newSuggestions;
-      }),
-    );
+      });
+    });
   }, [searchService, setSuggestions]);
 
   useEffect(

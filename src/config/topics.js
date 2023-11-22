@@ -1,11 +1,11 @@
 import React from 'react';
 import { getCenter } from 'ol/extent';
 import './proj4';
-import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
-import railplusLegendDe from '../img/railplus_legend_de.svg';
-import railplusLegendFr from '../img/railplus_legend_fr.svg';
-import railplusLegendIt from '../img/railplus_legend_it.svg';
-import energieLegendPub from '../img/energie_legend_pub.svg';
+import tarifverbundkarteLegend from '../img/tarifverbund_legend.url.svg';
+import railplusLegendDe from '../img/railplus_legend_de.url.svg';
+import railplusLegendFr from '../img/railplus_legend_fr.url.svg';
+import railplusLegendIt from '../img/railplus_legend_it.url.svg';
+import energieLegendPub from '../img/energie_legend_pub.url.svg';
 import railPlusLayers from './ch.railplus.mitglieder';
 import netzkarteLayers, {
   dataLayer,

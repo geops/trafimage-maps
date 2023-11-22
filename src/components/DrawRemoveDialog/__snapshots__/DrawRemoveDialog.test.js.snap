@@ -32,7 +32,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
               Zeichnung löschen
             </span>
           </h4>
-          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-13"
+          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-13 Mui-focusVisible"
                   tabindex="0"
                   type="button"
                   title="Dialog schließen"
@@ -55,6 +55,12 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
               </svg>
             </span>
             <span class="MuiTouchRipple-root">
+              <span class="MuiTouchRipple-ripple MuiTouchRipple-rippleVisible MuiTouchRipple-ripplePulsate"
+                    style="width: 1px; height: 1px; top: -0.5px; left: -0.5px;"
+              >
+                <span class="MuiTouchRipple-child MuiTouchRipple-childPulsate">
+                </span>
+              </span>
             </span>
           </button>
         </div>

@@ -9,7 +9,7 @@ const xsmall = '@media (max-width: 600px)';
 
 const styles = ({ font, mq }) => ({
   root: {
-    backgroundColor: 'white',
+    backgroundColor: 'red',
   },
   header: {
     height: 60,

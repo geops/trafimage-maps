@@ -33,6 +33,14 @@ class SearchService {
     });
   }
 
+  setStopsUrl(url) {
+    Object.values(this.searches).forEach((search) => {
+      if (typeof search.setStopsUrl === 'function') {
+        search.setStopsUrl(url);
+      }
+    });
+  }
+
   setMap(map) {
     this.map = map;
     this.highlightLayer.setMap(map);

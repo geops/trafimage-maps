@@ -1,10 +1,6 @@
 import React from 'react';
-import { configure, shallow, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
+import { render, fireEvent } from '@testing-library/react';
 import ListItem from './ListItem';
-
-configure({ adapter: new Adapter() });
 
 describe('ListItem', () => {
   const item = {
@@ -26,85 +22,91 @@ describe('ListItem', () => {
     });
 
     test('displays 1 error for required property ', () => {
-      shallow(<ListItem />);
+      render(<ListItem />);
       expect(spy).toHaveBeenCalledTimes(2);
     });
 
     test('matches snapshot', () => {
-      const component = renderer.create(<ListItem />);
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      const { container } = render(<ListItem />);
+      expect(container.innerHTML).toMatchSnapshot();
     });
 
     test('calls default onSelect and onKeyDown without errors.', () => {
-      const wrapper = mount(<ListItem item={item}>{children}</ListItem>);
-      wrapper.find('p').first().simulate('click', {}).simulate('keydown', {});
+      const { container } = render(<ListItem item={item}>{children}</ListItem>);
+      fireEvent.click(container.querySelector('p'));
+      fireEvent.keyDown(container.querySelector('p'));
+      expect(spy).toHaveBeenCalledTimes(0);
     });
   });
 
   describe('when properties are set', () => {
     test('matches snapshot', () => {
-      const component = renderer.create(
+      const { container } = render(
         <ListItem item={item} onSelect={() => {}}>
           {children}
         </ListItem>,
       );
-      const tree = component.toJSON();
-      expect(tree).toMatchSnapshot();
+      expect(container.innerHTML).toMatchSnapshot();
     });
 
     test('calls onSelect property on click.', () => {
       const fn = jest.fn();
-      const wrapper = mount(
+      const { container } = render(
         <ListItem item={item} onSelect={fn}>
           {children}
         </ListItem>,
       );
-      wrapper.find('p').first().simulate('click', {});
+      fireEvent.click(container.querySelector('p'));
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
     test('calls onSelect property on click.', () => {
       const fn = jest.fn();
-      const wrapper = mount(
+      const { container } = render(
         <ListItem item={item} onSelect={fn}>
           {children}
         </ListItem>,
       );
-      wrapper.find('p').first().simulate('click', {});
+      fireEvent.click(container.querySelector('p'));
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
     test('calls onSelect property on enter key press.', () => {
       const fn = jest.fn();
-      const wrapper = mount(
+      const { container } = render(
         <ListItem item={item} onSelect={fn}>
           {children}
         </ListItem>,
       );
-      wrapper.find('p').first().simulate('keypress', { which: 13 });
+      fireEvent.keyPress(container.querySelector('p'), {
+        which: 13,
+        keyCode: 13,
+      });
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
     test("shouldn't calls onSelect property on key press other than enter", () => {
       const fn = jest.fn();
-      const wrapper = mount(
+      const { container } = render(
         <ListItem item={item} onSelect={fn}>
           {children}
         </ListItem>,
       );
-      wrapper.find('p').first().simulate('keypress', { which: 14 });
+      fireEvent.keyPress(container.querySelector('p'), {
+        which: 14,
+        keyCode: 14,
+      });
       expect(fn).toHaveBeenCalledTimes(0);
     });
 
     test('calls onKeyDown property on key down', () => {
       const fn = jest.fn();
-      const wrapper = mount(
+      const { container } = render(
         <ListItem item={item} onKeyDown={fn}>
           {children}
         </ListItem>,
       );
-      wrapper.find('p').first().simulate('keydown', {});
+      fireEvent.keyDown(container.querySelector('p'));
       expect(fn).toHaveBeenCalledTimes(1);
     });
   });

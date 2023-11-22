@@ -26,12 +26,20 @@ const overrideModule = (module) => {
   // We override css and scss rules to generate a string css instead of an object.
   // See the first <style> tag in the web-component.
   const ruleIndex = module.rules.length - 1;
+
+  // We remove the auto svg loader to react component
+  const svgRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
+    '.svg'.match(rule.test),
+  );
+  module.rules[ruleIndex].oneOf[svgRuleIndex].test = /^((?!url).)*\.svg$/;
+
   const cssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.css'.match(rule.test),
   );
   const scssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     '.scss'.match(rule.test),
   );
+
   if (cssRuleIndex !== -1) {
     module.rules[ruleIndex].oneOf[cssRuleIndex].use[0] = {
       loader: 'to-string-loader',
@@ -59,6 +67,11 @@ const overrideModule = (module) => {
     };
   }
 
+  module.rules[ruleIndex].oneOf.push({
+    test: /\.url\.svg$/,
+    loader: 'url-loader',
+  });
+
   return module;
 };
 
@@ -85,8 +98,7 @@ const overrideOptimization = (optimization, env) => {
 };
 
 const overridePlugins = (plugins, env) => {
-  console.log(plugins);
-  // plugins[0].options.inject = 'head';
+  plugins[0].userOptions.inject = 'head';
 
   /* plugins.push(
     new EventHooksPlugin({

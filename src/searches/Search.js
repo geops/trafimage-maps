@@ -2,13 +2,11 @@ import OLGeoJSON from 'ol/format/GeoJSON';
 import { Style, Fill, Stroke } from 'ol/style';
 import highlightPointStyle from '../utils/highlightPointStyle';
 
-const searchUrl =
-  process?.env?.REACT_APP_SEARCH_URL || 'https://maps.trafimage.ch';
-const stopsUrl =
-  process?.env?.REACT_APP_STOPS_URL || 'https://api.geops.io/stops/v1/';
-
 class Search {
-  constructor() {
+  constructor(
+    searchUrl = 'https://maps.trafimage.ch',
+    stopsUrl = 'https://api.geops.io/stops/v1/',
+  ) {
     this.geoJSON = new OLGeoJSON();
     this.collapsed = true;
     this.showInPlaceholder = true;

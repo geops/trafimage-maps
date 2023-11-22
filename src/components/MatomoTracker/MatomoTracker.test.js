@@ -1,5 +1,5 @@
 import React from 'react';
-import { MatomoProvider } from '@datapunt/matomo-tracker-react';
+import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';

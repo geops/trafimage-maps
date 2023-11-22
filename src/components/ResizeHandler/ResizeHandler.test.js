@@ -1,14 +1,11 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable  react/no-multi-comp,react/prefer-stateless-function,react/prop-types */
 import React from 'react';
-import { configure, mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { render } from '@testing-library/react';
 import ResizeObserver from 'resize-observer-polyfill';
 import ResizeHandler from './ResizeHandler';
 
 jest.mock('resize-observer-polyfill');
-
-configure({ adapter: new Adapter() });
 
 class Div extends React.Component {
   render() {
@@ -171,15 +168,15 @@ describe('ResizeHandler', () => {
   describe('when observe property is not set', () => {
     test("doesn't observe", () => {
       const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
-      shallow(<ResizeHandler />);
+      render(<ResizeHandler />);
       expect(spy).not.toHaveBeenCalled();
       spy.mockRestore();
     });
 
     test('disconnect on unmount', () => {
-      const wrapper = shallow(<ResizeHandler />);
-      const spy = jest.spyOn(wrapper.instance().observer, 'disconnect');
-      wrapper.unmount();
+      const { unmount } = render(<ResizeHandler />);
+      const spy = jest.spyOn(ResizeObserver.prototype, 'disconnect');
+      unmount();
       expect(spy).toHaveBeenCalledTimes(1);
     });
   });
@@ -190,7 +187,7 @@ describe('ResizeHandler', () => {
       document.querySelectorAll = jest.fn().mockImplementation(() => [div]);
       const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
       const spy2 = jest.spyOn(ResizeObserver.prototype, 'disconnect');
-      mount(<StrComponent />);
+      render(<StrComponent />);
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy.mock.calls[0][0]).toBe(div);
       expect(spy2.mock.calls.length >= 1).toBe(true);
@@ -203,20 +200,20 @@ describe('ResizeHandler', () => {
       test(`(un)observes an html node from ${Comp.name} on (un)mount`, () => {
         const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
         const spy2 = jest.spyOn(ResizeObserver.prototype, 'disconnect');
-        const wrapper = mount(<Comp />);
+        const { unmount } = render(<Comp />);
         expect(spy).toHaveBeenCalledTimes(1);
         expect(spy.mock.calls[0][0]).toBeInstanceOf(Element);
         expect(spy2.mock.calls.length >= 1).toBe(true);
         ResizeObserver.prototype.observe.mockRestore();
         spy.mockRestore();
         spy2.mockRestore();
-        wrapper.unmount();
+        unmount();
       });
     });
 
     test('set the default css class on resize ', () => {
-      const wrapper = mount(<BasicComponent />);
-      const basic = wrapper.getDOMNode();
+      const wrapper = render(<BasicComponent />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -274,8 +271,8 @@ describe('ResizeHandler', () => {
     });
 
     test('uses user defined breakpoints', () => {
-      const wrapper = mount(<BasicComponent3 />);
-      const basic = wrapper.getDOMNode();
+      const wrapper = render(<BasicComponent3 />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -304,8 +301,8 @@ describe('ResizeHandler', () => {
 
     test('calls onResize property', () => {
       const fn = jest.fn();
-      const wrapper = mount(<BasicComponent onResize={fn} />);
-      const basic = wrapper.getDOMNode();
+      const wrapper = render(<BasicComponent onResize={fn} />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -323,8 +320,8 @@ describe('ResizeHandler', () => {
 
     test('set a style property on resize', () => {
       const spy = jest.spyOn(document.documentElement.style, 'setProperty');
-      const wrapper = mount(<BasicComponent stylePropHeight="foo" />);
-      const basic = wrapper.getDOMNode();
+      const wrapper = render(<BasicComponent stylePropHeight="foo" />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -342,12 +339,10 @@ describe('ResizeHandler', () => {
 
     test('re-applies the breakpoints if the forceUpdate property changes', () => {
       const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
-      const wrapper = mount(<BasicComponent forceUpdate="foo" />);
+      const { rerender } = render(<BasicComponent forceUpdate="foo" />);
       expect(spy).toHaveBeenCalledTimes(1);
       spy.mockReset();
-      wrapper.setProps({
-        forceUpdate: 'bar',
-      });
+      rerender(<BasicComponent forceUpdate="bar" />);
       expect(spy).toHaveBeenCalledTimes(2);
     });
   });

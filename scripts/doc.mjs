@@ -9,7 +9,7 @@ const json = JSON.parse(
 );
 
 // Use geOps default template (https://github.com/geops/geops-docjs-template)
-build(['src/layers/*'], { shallow: false })
+build(['src/layers/*.js'], { shallow: false })
   .then((out) =>
     formats.html(out, {
       name: json.appName,
