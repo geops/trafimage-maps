@@ -1,0 +1,13 @@
+@import '../../globals.scss';
+
+#my-map-container {
+  position: fixed;
+  inset: 0;
+  top: 100px;
+  bottom: 40px;
+
+  // .teaser-container {
+  //   right: 0;
+  //   left: unset;
+  // }
+}
