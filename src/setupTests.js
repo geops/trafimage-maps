@@ -3,16 +3,12 @@ import 'jest-canvas-mock';
 import 'react-app-polyfill/stable';
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 import '@testing-library/jest-dom';
-import { configure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import proj4 from 'proj4';
 import { register } from 'ol/proj/proj4';
 import mediaQuery from 'css-mediaquery';
 import i18n from './i18n';
-
-configure({ adapter: new Adapter() });
 
 proj4.defs(
   'EPSG:21781',

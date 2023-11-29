@@ -106,7 +106,6 @@ export function StyleGuideRenderer({
   toc,
   hasSidebar,
 }) {
-  console.log('ici');
   const [apiKey, setApiKey] = useState();
   useEffect(() => {
     fetch('https://backend.developer.geops.io/publickey')
@@ -134,7 +133,7 @@ export function StyleGuideRenderer({
         <header className={classes.header}>
           <div className={classes.bar}>
             <Logo>
-              <a className={classes.title} href="/">
+              <a className={classes.title} href="index.html">
                 {docConfig.appName}
               </a>
             </Logo>
@@ -142,7 +141,7 @@ export function StyleGuideRenderer({
               <a className={`${classes.headerLink} link-active`} href="/">
                 Components
               </a>
-              <a className={classes.headerLink} href="/docjs.html">
+              <a className={classes.headerLink} href="docjs.html">
                 Layers
               </a>
             </nav>
