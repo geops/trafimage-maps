@@ -114,6 +114,7 @@ export const isbNormalspurbahnen = new Layer({
 
 export const isbSchmalspurbahnen = new RailplusLayer({
   name: 'ch.sbb.isb.schmalspurbahnen',
+  visible: false,
   mapboxLayer: netzkarteIsb,
   group: 'ch.sbb.isb',
   styleLayersFilter: ({ metadata }) => {
