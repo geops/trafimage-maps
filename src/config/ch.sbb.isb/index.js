@@ -2,6 +2,10 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import { kilometrageLayer } from '../ch.sbb.infrastruktur';
+import {
+  railplusMeterspurbahnen,
+  MD_RAILPLUS_FILTER,
+} from '../ch.railplus.mitglieder';
 
 export const netzkarteIsb = new TrafimageMapboxLayer({
   name: 'ch.sbb.isb',
@@ -103,32 +107,24 @@ export const isbTVS = new MapboxStyleLayer({
 export const isbNormalspurbahnen = new Layer({
   name: 'ch.sbb.isb.normalspurbahnen',
   visible: true,
-  isQueryable: false,
   group: 'ch.sbb.isb',
   children: [isbOther, isbTVS],
   properties: {
-    isQueryable: true,
     hasInfos: true,
   },
 });
 
-export const isbSchmalspurbahnen = new MapboxStyleLayer({
+export const isbSchmalspurbahnen = railplusMeterspurbahnen.clone({
   name: 'ch.sbb.isb.schmalspurbahnen',
   mapboxLayer: netzkarteIsb,
-  visible: false,
-  // styleLayersFilter: ({ metadata }) =>
-  //   metadata &&
-  //   metadata['isb.filter'] &&
-  //   /^(tvs|tvs_flag)$/.test(metadata['isb.filter']),
-  // queryRenderedLayersFilter: ({ metadata }) =>
-  //   metadata && metadata['isb.filter'] && /^tvs$/.test(metadata['isb.filter']),
   group: 'ch.sbb.isb',
+  styleLayersFilter: ({ metadata }) => {
+    return /^(line|flag)$/.test(metadata?.[MD_RAILPLUS_FILTER]);
+  },
   properties: {
     isQueryable: true,
-    // hasInfos: true,
-    // useOverlay: true,
-    // popupComponent: 'IsbPopup',
-    // layerInfoComponent: 'IsbTVSLayerInfo',
+    popupComponent: 'IsbPopup',
+    useOverlay: true,
   },
 });
 
