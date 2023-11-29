@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
+import { makeStyles } from '@mui/styles';
 import {
-  makeStyles,
   IconButton,
   Popper,
   Paper,
@@ -15,7 +15,7 @@ import {
   ListItemText,
   ClickAwayListener,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { ReactComponent as QuestionIcon } from '../../img/circleQuestionMark.svg';
 import { setSearchInfoOpen } from '../../model/app/actions';
 

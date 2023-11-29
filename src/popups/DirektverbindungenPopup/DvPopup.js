@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
 import { DvFeatureInfoTitleString } from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
 

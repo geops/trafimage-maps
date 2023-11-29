@@ -1,6 +1,7 @@
 import React from 'react';
+import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
-import { IconButton, withStyles } from '@material-ui/core';
+import { IconButton } from '@mui/material';
 
 const StyledIconButton = withStyles(() => ({
   root: {

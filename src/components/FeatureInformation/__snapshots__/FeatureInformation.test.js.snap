@@ -9,31 +9,29 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
   <div class="wkp-feature-information-header">
     <span id="wkp-popup-label">
     </span>
-    <button class="MuiButtonBase-root MuiIconButton-root wkp-close-bt"
+    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-close-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
             title="Schliessen"
     >
-      <span class="MuiIconButton-label">
-        <svg stroke="currentColor"
-             fill="currentColor"
-             stroke-width="0"
-             viewbox="0 0 24 24"
-             focusable="false"
-             alt="Schliessen"
-             height="1em"
-             width="1em"
-             xmlns="http://www.w3.org/2000/svg"
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           alt="Schliessen"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="none"
+              d="M0 0h24v24H0z"
         >
-          <path fill="none"
-                d="M0 0h24v24H0z"
-          >
-          </path>
-          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-          </path>
-        </svg>
-      </span>
-      <span class="MuiTouchRipple-root">
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
+      </svg>
+      <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root">
       </span>
     </button>
   </div>
@@ -62,7 +60,7 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
       </span>
       1 von 4
       <span class="wkp-pagination-button-wrapper">
-        <a class="MuiTypography-root MuiLink-root MuiLink-underlineHover wkp-pagination-button MuiTypography-colorPrimary"
+        <a class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineAlways wkp-pagination-button css-1xylxj1-MuiTypography-root-MuiLink-root"
            title="weiter"
            tabindex="0"
         >
@@ -112,31 +110,29 @@ exports[`FeatureInformation should match snapshot. using the info's popupCompone
   <div class="wkp-feature-information-header">
     <span id="wkp-popup-label">
     </span>
-    <button class="MuiButtonBase-root MuiIconButton-root wkp-close-bt"
+    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-close-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
             title="Schliessen"
     >
-      <span class="MuiIconButton-label">
-        <svg stroke="currentColor"
-             fill="currentColor"
-             stroke-width="0"
-             viewbox="0 0 24 24"
-             focusable="false"
-             alt="Schliessen"
-             height="1em"
-             width="1em"
-             xmlns="http://www.w3.org/2000/svg"
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           alt="Schliessen"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="none"
+              d="M0 0h24v24H0z"
         >
-          <path fill="none"
-                d="M0 0h24v24H0z"
-          >
-          </path>
-          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-          </path>
-        </svg>
-      </span>
-      <span class="MuiTouchRipple-root">
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
+      </svg>
+      <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root">
       </span>
     </button>
   </div>
@@ -173,31 +169,29 @@ exports[`FeatureInformation should match snapshot. using the layers's popupCompo
   <div class="wkp-feature-information-header">
     <span id="wkp-popup-label">
     </span>
-    <button class="MuiButtonBase-root MuiIconButton-root wkp-close-bt"
+    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-close-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
             title="Schliessen"
     >
-      <span class="MuiIconButton-label">
-        <svg stroke="currentColor"
-             fill="currentColor"
-             stroke-width="0"
-             viewbox="0 0 24 24"
-             focusable="false"
-             alt="Schliessen"
-             height="1em"
-             width="1em"
-             xmlns="http://www.w3.org/2000/svg"
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           alt="Schliessen"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="none"
+              d="M0 0h24v24H0z"
         >
-          <path fill="none"
-                d="M0 0h24v24H0z"
-          >
-          </path>
-          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-          </path>
-        </svg>
-      </span>
-      <span class="MuiTouchRipple-root">
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
+      </svg>
+      <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root">
       </span>
     </button>
   </div>

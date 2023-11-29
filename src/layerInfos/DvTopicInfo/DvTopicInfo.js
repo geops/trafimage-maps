@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import { dvDay, dvNight } from '../../config/ch.sbb.direktverbindungen';
 import DataLink from '../../components/DataLink';

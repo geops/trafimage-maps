@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Feature } from 'ol';
 import { Layer } from 'mobility-toolbox-js/ol';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import Link from '../../components/Link';
 import phoneIcon from '../../img/popups/NetzentwicklungPopup/phone.svg';
 import mailIcon from '../../img/popups/NetzentwicklungPopup/mail.svg';

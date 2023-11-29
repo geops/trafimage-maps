@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { FaLink } from 'react-icons/fa';
 import { MdClose } from 'react-icons/md';
 import PropTypes from 'prop-types';
-import { Popover, IconButton, makeStyles } from '@material-ui/core';
-import { ToggleButton } from '@material-ui/lab';
+import { makeStyles } from '@mui/styles';
+import { Popover, IconButton, ToggleButton } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
   content: {

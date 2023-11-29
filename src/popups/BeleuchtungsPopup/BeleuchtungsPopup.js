@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import LightIcon from '../../img/LightIcon';

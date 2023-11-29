@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, Box, IconButton } from '@material-ui/core';
+import { Box, IconButton } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { MdClose } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import IframeMenu from '../IframeMenu';

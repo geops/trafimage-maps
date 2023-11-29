@@ -3,66 +3,56 @@
 exports[`Dialog should match snapshot. 1`] = `
 <div>
   <div role="presentation"
-       class="MuiDialog-root makeStyles-rootDesktop-1"
        name="foo"
-       style="position: fixed; z-index: 1300; right: 0px; bottom: 0px; top: 0px; left: 0px;"
+       class="MuiDialog-root makeStyles-rootDesktop-1 MuiModal-root css-4uaxrt-MuiModal-root-MuiDialog-root"
   >
     <div tabindex="0"
-         data-test="sentinelStart"
+         data-testid="sentinelStart"
     >
     </div>
-    <div class="MuiDialog-container MuiDialog-scrollPaper makeStyles-scrollPaper-5"
+    <div class="MuiDialog-container MuiDialog-scrollPaper makeStyles-scrollPaper-5 css-1sep8xo-MuiDialog-container"
          style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
-         role="none presentation"
+         role="presentation"
          tabindex="-1"
     >
-      <div class="MuiPaper-root MuiDialog-paper makeStyles-paper-2   MuiDialog-paperScrollPaper MuiDialog-paperWidthFalse react-draggable MuiPaper-elevation4"
+      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiDialog-paper makeStyles-paper-2   MuiDialog-paperScrollPaper MuiDialog-paperWidthFalse react-draggable css-1e9859v-MuiPaper-root-MuiDialog-paper"
            role="dialog"
+           aria-labelledby="mui-1"
            style="transform: translate(0px,0px);"
       >
-        <div class="MuiDialogTitle-root makeStyles-title-11 makeStyles-title-14"
-             id="draggable-dialog-title"
+        <span class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root makeStyles-title-11 makeStyles-title-14 css-1236ds1-MuiTypography-root-MuiDialogTitle-root"
+              id="draggable-dialog-title"
         >
-          <h4 class="MuiTypography-root makeStyles-title-11 makeStyles-title-14 MuiTypography-h4">
+          <h4 class="MuiTypography-root MuiTypography-h4 makeStyles-title-11 makeStyles-title-14 css-17wodpb-MuiTypography-root">
           </h4>
-          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-10 Mui-focusVisible"
+          <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-1se5fg2-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                   title="Dialog schließen"
           >
-            <span class="MuiIconButton-label">
-              <svg stroke="currentColor"
-                   fill="currentColor"
-                   stroke-width="0"
-                   viewbox="0 0 24 24"
-                   height="1em"
-                   width="1em"
-                   xmlns="http://www.w3.org/2000/svg"
+            <svg stroke="currentColor"
+                 fill="currentColor"
+                 stroke-width="0"
+                 viewbox="0 0 24 24"
+                 height="1em"
+                 width="1em"
+                 xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none"
+                    d="M0 0h24v24H0z"
               >
-                <path fill="none"
-                      d="M0 0h24v24H0z"
-                >
-                </path>
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-                </path>
-              </svg>
-            </span>
-            <span class="MuiTouchRipple-root">
-              <span class="MuiTouchRipple-ripple MuiTouchRipple-rippleVisible MuiTouchRipple-ripplePulsate"
-                    style="width: 1px; height: 1px; top: -0.5px; left: -0.5px;"
-              >
-                <span class="MuiTouchRipple-child MuiTouchRipple-childPulsate">
-                </span>
-              </span>
-            </span>
+              </path>
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+              </path>
+            </svg>
           </button>
-        </div>
+        </span>
         <div class="makeStyles-dialogBody-7 ">
         </div>
       </div>
     </div>
     <div tabindex="0"
-         data-test="sentinelEnd"
+         data-testid="sentinelEnd"
     >
     </div>
   </div>

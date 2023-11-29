@@ -5,7 +5,7 @@ import Feature from 'ol/Feature';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { transform as transformCoords } from 'ol/proj';
-import { Link as MuiLink } from '@material-ui/core';
+import { Link as MuiLink } from '@mui/material';
 import GeometryType from 'ol/geom/GeometryType';
 import Link from '../../components/Link';
 import BahnhofplanPopup from '../BahnhofplanPopup';

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
 import { FaEnvelope } from 'react-icons/fa';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
-import { Link } from '@material-ui/core';
+import { Link } from '@mui/material';
 import SharePermalinkButton from '../SharePermalinkButton';
 import {
   TRACK_SHARE_DL_ACTION,

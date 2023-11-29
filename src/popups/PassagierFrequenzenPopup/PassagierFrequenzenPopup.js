@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { Typography, Link } from '@material-ui/core';
+import { Typography, Link } from '@mui/material';
 import { ReactComponent as LinkIcon } from '../../components/Link/Link.svg';
 
 const propTypes = {

@@ -3,67 +3,57 @@
 exports[`DrawRemoveDialog should match snapshot 1`] = `
 <div>
   <div role="presentation"
-       class="MuiDialog-root"
        name="drawRemoveDialog"
-       style="position: fixed; z-index: 1300; right: 0px; bottom: 0px; top: 0px; left: 0px;"
+       class="MuiDialog-root MuiModal-root css-4uaxrt-MuiModal-root-MuiDialog-root"
   >
-    <div class="MuiBackdrop-root"
-         aria-hidden="true"
+    <div aria-hidden="true"
+         class="MuiBackdrop-root MuiModal-backdrop css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop"
          style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
     >
     </div>
     <div tabindex="0"
-         data-test="sentinelStart"
+         data-testid="sentinelStart"
     >
     </div>
-    <div class="MuiDialog-container MuiDialog-scrollPaper makeStyles-scrollPaperModal-9"
+    <div class="MuiDialog-container MuiDialog-scrollPaper makeStyles-scrollPaperModal-9 css-1sep8xo-MuiDialog-container"
          style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
-         role="none presentation"
+         role="presentation"
          tabindex="-1"
     >
-      <div class="MuiPaper-root MuiDialog-paper makeStyles-paperModal-6 tm-dialog-container makeStyles-dialogContainer-1 MuiDialog-paperScrollPaper MuiDialog-paperWidthMd MuiPaper-elevation4"
+      <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiDialog-paper makeStyles-paperModal-6 tm-dialog-container makeStyles-dialogContainer-1 MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-1hvry59-MuiPaper-root-MuiDialog-paper"
            role="dialog"
+           aria-labelledby="mui-1"
       >
-        <div class="MuiDialogTitle-root makeStyles-title-14 makeStyles-title-17"
-             id="draggable-dialog-title"
+        <span class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root makeStyles-title-14 makeStyles-title-17 css-1236ds1-MuiTypography-root-MuiDialogTitle-root"
+              id="draggable-dialog-title"
         >
-          <h4 class="MuiTypography-root makeStyles-title-14 makeStyles-title-17 MuiTypography-h4">
+          <h4 class="MuiTypography-root MuiTypography-h4 makeStyles-title-14 makeStyles-title-17 css-17wodpb-MuiTypography-root">
             <span>
               Zeichnung löschen
             </span>
           </h4>
-          <button class="MuiButtonBase-root MuiIconButton-root makeStyles-closeBtn-13 Mui-focusVisible"
+          <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-13 css-1se5fg2-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                   title="Dialog schließen"
           >
-            <span class="MuiIconButton-label">
-              <svg stroke="currentColor"
-                   fill="currentColor"
-                   stroke-width="0"
-                   viewbox="0 0 24 24"
-                   height="1em"
-                   width="1em"
-                   xmlns="http://www.w3.org/2000/svg"
+            <svg stroke="currentColor"
+                 fill="currentColor"
+                 stroke-width="0"
+                 viewbox="0 0 24 24"
+                 height="1em"
+                 width="1em"
+                 xmlns="http://www.w3.org/2000/svg"
+            >
+              <path fill="none"
+                    d="M0 0h24v24H0z"
               >
-                <path fill="none"
-                      d="M0 0h24v24H0z"
-                >
-                </path>
-                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-                </path>
-              </svg>
-            </span>
-            <span class="MuiTouchRipple-root">
-              <span class="MuiTouchRipple-ripple MuiTouchRipple-rippleVisible MuiTouchRipple-ripplePulsate"
-                    style="width: 1px; height: 1px; top: -0.5px; left: -0.5px;"
-              >
-                <span class="MuiTouchRipple-child MuiTouchRipple-childPulsate">
-                </span>
-              </span>
-            </span>
+              </path>
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+              </path>
+            </svg>
           </button>
-        </div>
+        </span>
         <div class="makeStyles-dialogBody-10 ">
           <div>
             <div>
@@ -105,25 +95,17 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
               </div>
             </div>
             <div class="makeStyles-footer-3">
-              <button class="MuiButtonBase-root MuiButton-root MuiButton-text"
+              <button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation css-1wggy8g-MuiButtonBase-root-MuiButton-root"
                       tabindex="0"
                       type="button"
               >
-                <span class="MuiButton-label">
-                  Löschen
-                </span>
-                <span class="MuiTouchRipple-root">
-                </span>
+                Löschen
               </button>
-              <button class="MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-textSecondary"
+              <button class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation MuiButton-root MuiButton-contained MuiButton-containedSecondary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-disableElevation css-3vpgl4-MuiButtonBase-root-MuiButton-root"
                       tabindex="0"
                       type="button"
               >
-                <span class="MuiButton-label">
-                  Abbrechen
-                </span>
-                <span class="MuiTouchRipple-root">
-                </span>
+                Abbrechen
               </button>
             </div>
           </div>
@@ -131,7 +113,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
       </div>
     </div>
     <div tabindex="0"
-         data-test="sentinelEnd"
+         data-testid="sentinelEnd"
     >
     </div>
   </div>

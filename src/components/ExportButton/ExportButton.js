@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
 import { ReactComponent as Loader } from './loader.svg';
 

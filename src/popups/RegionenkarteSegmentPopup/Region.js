@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles, MenuItem } from '@material-ui/core';
+import { MenuItem } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
 import Select from '../../components/Select';

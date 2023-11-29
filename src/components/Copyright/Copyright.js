@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import RsCopyright from 'react-spatial/components/Copyright';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
   wrapper: {

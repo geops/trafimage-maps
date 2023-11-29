@@ -3,7 +3,9 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
+import { ThemeProvider } from '@mui/material';
 import SharePermalinkButton from '.';
+import theme from '../../themes/default';
 
 describe('SharePermalinkButton', () => {
   const mockStore = configureStore([thunk]);
@@ -15,9 +17,11 @@ describe('SharePermalinkButton', () => {
     });
 
     const component = render(
-      <Provider store={store}>
-        <SharePermalinkButton />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <SharePermalinkButton />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(component.container.innerHTML).toMatchSnapshot();
   });

@@ -4,8 +4,10 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Map, View } from 'ol';
+import { ThemeProvider } from '@mui/material';
 import Search from '.';
 import SearchService from './SearchService';
+import theme from '../../themes/default';
 import { Search as SearchDflt } from '../../searches';
 
 const dfltApp = {
@@ -57,9 +59,11 @@ describe('Search', () => {
     const store = mockStore(dfltStore);
 
     const { container } = render(
-      <Provider store={store}>
-        <Search />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Search />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelectorAll('input').length).toBe(1);
     expect(container.querySelectorAll('.wkp-search-button').length).toBe(1);
@@ -69,9 +73,11 @@ describe('Search', () => {
   test.skip('launch search and render multiple collapsed sections.', async () => {
     const store = mockStore(dfltStore);
     const { container } = render(
-      <Provider store={store}>
-        <Search />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <Search />
+        </Provider>
+      </ThemeProvider>,
     );
     await act(async () => {
       container.querySelectorAll('input')[0].focus();

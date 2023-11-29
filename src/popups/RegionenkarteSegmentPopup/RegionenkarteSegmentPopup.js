@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles, Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import qs from 'query-string';
 import { Layer } from 'mobility-toolbox-js/ol';

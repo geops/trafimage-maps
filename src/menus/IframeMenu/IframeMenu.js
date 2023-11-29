@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, IconButton } from '@material-ui/core';
+import { IconButton } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { MdClose } from 'react-icons/md';
 import Overlay from '../../components/Overlay/Overlay';
 import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';

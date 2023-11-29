@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { fromLonLat } from 'ol/proj';
 import Search from '../Search';
 import isoToIntlVehicleCode from '../../utils/isoToIntlVehicleCode';

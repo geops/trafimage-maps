@@ -7,7 +7,7 @@ import { MatomoProvider, createInstance } from '@jonkoops/matomo-tracker-react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material';
 import { Layer } from 'mobility-toolbox-js/ol';
 import MatomoTracker from '../MatomoTracker';
 import Head from '../Head';
@@ -729,7 +729,10 @@ class TrafimageMaps extends React.PureComponent {
             />
             {/* The tracking could not be instanced properly if this.matomo is not set, see constructor comment */}
             {this.matomo && <MatomoTracker />}
-            <TopicLoader history={history} />
+            {/* For JSS styles be loaded after emotioin style, see "migrating to v5" page of mui doc */}
+            <StyledEngineProvider injectFirst>
+              <TopicLoader history={history} />
+            </StyledEngineProvider>
             <MessageListener />
           </Provider>
         </ThemeProvider>

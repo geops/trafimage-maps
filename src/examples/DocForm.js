@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React, { useMemo, useState, useEffect } from 'react';
+import { makeStyles } from '@mui/styles';
 import {
   Button,
   TextField,
@@ -7,10 +8,9 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  makeStyles,
   Checkbox,
   FormControlLabel,
-} from '@material-ui/core';
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
 import { getTopicConfig } from '../config/topics';

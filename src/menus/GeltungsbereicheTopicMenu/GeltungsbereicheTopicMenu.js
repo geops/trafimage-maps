@@ -7,7 +7,8 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Trans } from 'react-i18next';
-import { makeStyles, MenuItem as MuiMenuItem } from '@material-ui/core';
+import { MenuItem as MuiMenuItem } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { unByKey } from 'ol/Observable';
 import MenuItem from '../../components/Menu/MenuItem';
 import Select from '../../components/Select';

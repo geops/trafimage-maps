@@ -2,7 +2,9 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { Map, View } from 'ol';
+import { ThemeProvider } from '@mui/material';
 import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
+import theme from '../../themes/default';
 import Share from '.';
 
 describe('Share', () => {
@@ -24,9 +26,11 @@ describe('Share', () => {
   test('should match snapshot.', () => {
     const { container } = render(
       <MatomoProvider value={{}}>
-        <Provider store={store}>
-          <Share />
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <Share />
+          </Provider>
+        </ThemeProvider>
       </MatomoProvider>,
     );
     expect(container.innerHTML).toMatchSnapshot();
@@ -44,9 +48,11 @@ describe('Share', () => {
       };
       const wrapper = render(
         <MatomoProvider value={matomo}>
-          <Provider store={store}>
-            <Share />
-          </Provider>
+          <ThemeProvider theme={theme}>
+            <Provider store={store}>
+              <Share />
+            </Provider>
+          </ThemeProvider>
         </MatomoProvider>,
       );
       container = wrapper.container;

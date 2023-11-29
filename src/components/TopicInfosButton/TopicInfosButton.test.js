@@ -20,8 +20,8 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toBe(
-      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-active',
+    expect(container.querySelector('button').className).toMatch(
+      'wkp-info-bt wkp-active',
     );
   });
 
@@ -36,8 +36,8 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toBe(
-      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-active wkp-selected',
+    expect(container.querySelector('button').className).toMatch(
+      'wkp-info-bt wkp-active wkp-selected',
     );
   });
 });

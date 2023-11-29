@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { FormGroup, FormControlLabel } from '@material-ui/core';
+import { FormGroup, FormControlLabel } from '@mui/material';
 import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';
 // import { highlights, gttos, premium } from '../../config/ch.sbb.sts';

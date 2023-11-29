@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles } from '@mui/styles';
 import {
-  makeStyles,
   Dialog as MuiDialog,
   DialogTitle,
   Paper,
   Typography,
   IconButton,
-} from '@material-ui/core';
+} from '@mui/material';
 import { MdClose } from 'react-icons/md';
 import Draggable from 'react-draggable';
 import { setDialogVisible, setDialogPosition } from '../../model/app/actions';
@@ -84,15 +84,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function PaperComponent(props) {
-  return <Paper square {...props} elevation={4} />;
-}
+const PaperComponent = forwardRef((props, ref) => {
+  return <Paper square ref={ref} {...props} elevation={4} />;
+});
 
 function DraggablePaperComponent(props) {
   const dispatch = useDispatch();
   const dialogPosition = useSelector((state) => state.app.dialogPosition);
+  const nodeRef = useRef(null);
   return (
     <Draggable
+      nodeRef={nodeRef}
       handle="#draggable-dialog-title"
       cancel={'[class*="MuiDialogContent-root"]'}
       defaultPosition={dialogPosition}
@@ -106,7 +108,7 @@ function DraggablePaperComponent(props) {
         );
       }}
     >
-      <PaperComponent {...props} />
+      <PaperComponent {...props} ref={nodeRef} />
     </Draggable>
   );
 }
@@ -173,7 +175,9 @@ function Dialog(props) {
     disableEnforceFocus: true,
     hideBackdrop: true,
     maxWidth: false,
-    PaperComponent: isSmallScreen ? PaperComponent : DraggablePaperComponent,
+    PaperComponent: isSmallScreen
+      ? PaperComponent
+      : React.memo(DraggablePaperComponent),
     classes: {
       root: !isSmallScreen ? classes.rootDesktop : '',
       scrollPaper: classes.scrollPaper,
@@ -208,8 +212,8 @@ function Dialog(props) {
       >
         <DialogTitle
           id="draggable-dialog-title"
-          disableTypography
           className={classes.title}
+          component="span"
         >
           <Typography variant="h4" className={classes.title}>
             {title}

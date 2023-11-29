@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import LightIcon from '../../img/LightIcon';
 import { lightingMapping } from '../BeleuchtungLayerInfo/lightingMapping';

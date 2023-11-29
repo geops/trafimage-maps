@@ -21,8 +21,9 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toBe(
-      'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
+    expect(container.querySelector('button').className).toMatch('wkp-info-bt');
+    expect(container.querySelector('button').className).not.toMatch(
+      'wkp-selected',
     );
   });
 
@@ -37,8 +38,8 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toBe(
-      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
+    expect(container.querySelector('button').className).toMatch(
+      'wkp-info-bt wkp-selected',
     );
   });
 
@@ -51,16 +52,17 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toBe(
-      'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
+    expect(container.querySelector('button').className).toMatch('wkp-info-bt');
+    expect(container.querySelector('button').className).not.toMatch(
+      'wkp-selected',
     );
 
     // You can also call this method directly on userEvent,
     // but using the methods from `.setup()` is recommended.
     await user.click(container.querySelector('button'));
     await waitFor(() =>
-      expect(container.querySelector('button').className).toBe(
-        'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
+      expect(container.querySelector('button').className).toMatch(
+        'wkp-info-bt wkp-selected',
       ),
     );
   });
@@ -75,14 +77,14 @@ describe('InfosButton', () => {
         <InfosButton selectedInfo={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toBe(
-      'MuiButtonBase-root MuiIconButton-root wkp-info-bt wkp-selected',
+    expect(container.querySelector('button').className).toMatch(
+      'wkp-info-bt wkp-selected',
     );
     await user.click(container.querySelector('button'));
-    await waitFor(() =>
-      expect(container.querySelector('button').className).toBe(
-        'MuiButtonBase-root MuiIconButton-root wkp-info-bt',
-      ),
+    expect(container.querySelector('button').className).toMatch('wkp-info-bt');
+
+    expect(container.querySelector('button').className).not.toMatch(
+      'wkp-selected',
     );
   });
 });

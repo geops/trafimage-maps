@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import ScaleLine from 'react-spatial/components/ScaleLine';
 import MousePosition from 'react-spatial/components/MousePosition';
-import { Link } from '@material-ui/core';
+import { Link } from '@mui/material';
 import ProjectionSelect from '../ProjectionSelect';
 import coordinateHelper from '../../utils/coordinateHelper';
 import { setDialogVisible } from '../../model/app/actions';

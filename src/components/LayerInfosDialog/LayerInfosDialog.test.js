@@ -5,6 +5,8 @@ import configureStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Vector';
+import { ThemeProvider } from '@mui/material';
+import theme from '../../themes/default';
 import { bahnhofplaene } from '../../config/ch.sbb.netzkarte';
 import LayerInfosDialog from '.';
 
@@ -31,18 +33,22 @@ describe('LayerInfosDialog', () => {
 
   test('should match snapshot when Layer is null', () => {
     const { container } = render(
-      <Provider store={store}>
-        <LayerInfosDialog />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <LayerInfosDialog />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.innerHTML).toMatchSnapshot();
   });
 
   test('should match snapshot when Layer is defined', () => {
     const { container } = render(
-      <Provider store={store}>
-        <LayerInfosDialog selectedForInfos={layer} />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <LayerInfosDialog selectedForInfos={layer} />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.innerHTML).toMatchSnapshot();
   });
@@ -50,9 +56,11 @@ describe('LayerInfosDialog', () => {
   describe('should display data link ', () => {
     test('for layer bahnhofplaene', () => {
       const { container } = render(
-        <Provider store={store}>
-          <LayerInfosDialog selectedForInfos={bahnhofplaene} />
-        </Provider>,
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <LayerInfosDialog selectedForInfos={bahnhofplaene} />
+          </Provider>
+        </ThemeProvider>,
       );
 
       const link = container.querySelector('a.wkp-link');

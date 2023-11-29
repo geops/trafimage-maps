@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@mui/styles';
 import Feature from 'ol/Feature';
 import { Layer } from 'mobility-toolbox-js/ol';
 import {
-  makeStyles,
   Typography,
   List,
   ListItem,
   ListItemText,
   ListItemIcon,
-} from '@material-ui/core';
+} from '@mui/material';
 import { AiTwotoneCopyrightCircle } from 'react-icons/ai';
 import GeltungsbereicheLegend, { legends } from './GeltungsbereicheLegend';
 

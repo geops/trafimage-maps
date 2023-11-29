@@ -1,7 +1,8 @@
 import React from 'react';
-import { Select as MuiSelect, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Select as MuiSelect } from '@mui/material';
 import propTypes from 'prop-types';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const useStyles = makeStyles((theme) => {
   const list = {
@@ -64,12 +65,12 @@ function Select(props) {
       data-testid="trafimage-maps-select"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
-      // The following props need to be set after {...newProps}, since they overwrite some of them
+      // // The following props need to be set after {...newProps}, since they overwrite some of them
       MenuProps={{
         getContentAnchorEl: null,
         anchorOrigin: {
           vertical: 'bottom',
-          horizontal: 'left',
+          horizontal: 'center',
         },
         ...MenuProps,
         classes: {

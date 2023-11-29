@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Style, Circle, Fill, Stroke as OLStroke } from 'ol/style';
 import {
   MultiLineString,

@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Typography, Box } from '@material-ui/core';
+import { Typography, Box } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import Feature from 'ol/Feature';
 import { Point } from 'ol/geom';

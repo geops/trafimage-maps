@@ -4,7 +4,7 @@ This example shows how to control the map zoom level from a button outside the w
 ```js
 import 'trafimage-maps';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import getHtmlPageCode from '../getHtmlPageCode';
 
 const changeAttr = async function (attr, val) {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, Typography } from '@mui/material';
 import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
 import useIsMobile from '../../utils/useIsMobile';
 import SearchToggle from './SearchToggle';

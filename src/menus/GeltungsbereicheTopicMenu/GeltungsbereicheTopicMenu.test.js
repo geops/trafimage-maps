@@ -4,7 +4,9 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { render, screen } from '@testing-library/react';
 import OLMap from 'ol/Map';
+import { ThemeProvider } from '@mui/material';
 import { Layer } from 'mobility-toolbox-js/ol';
+import theme from '../../themes/default';
 import GeltungsbereicheTopicMenu from './GeltungsbereicheTopicMenu';
 
 describe('GeltungsbereicheTopicMenu', () => {
@@ -34,9 +36,11 @@ describe('GeltungsbereicheTopicMenu', () => {
       app: { map: new OLMap({}), menuOpen: false },
     });
     const { container } = render(
-      <Provider store={store}>
-        <GeltungsbereicheTopicMenu />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <GeltungsbereicheTopicMenu />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelectorAll('.wkp-menu-item').length).toBe(1);
     expect(container.querySelectorAll('.wkp-gb-topic-menu').length).toBe(1);

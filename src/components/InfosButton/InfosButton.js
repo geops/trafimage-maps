@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FaInfoCircle } from 'react-icons/fa';
-import { IconButton } from '@material-ui/core';
+import { IconButton } from '@mui/material';
 import { setSelectedForInfos } from '../../model/app/actions';
 
 function InfosButton({ selectedInfo, className }) {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { MdClose } from 'react-icons/md';
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
-import { Link, IconButton } from '@material-ui/core';
+import { Link, IconButton } from '@mui/material';
 import { setFeatureInfo } from '../../model/app/actions';
 import useIndexedFeatureInfo from '../../utils/useIndexedFeatureInfo';
 import useHighlightLayer from '../../utils/useHighlightLayer';

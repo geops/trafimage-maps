@@ -1,17 +1,11 @@
 /* eslint-disable no-param-reassign */
 import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { makeStyles, withStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
-import {
-  makeStyles,
-  withStyles,
-  MenuItem as MuiMenuItem,
-  Menu,
-  Button,
-  Divider,
-} from '@material-ui/core';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { MenuItem as MuiMenuItem, Menu, Button, Divider } from '@mui/material';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
 import DvLayerSwitcher from '../DirektverbindungenMenu/DvLayerSwitcher';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';

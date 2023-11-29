@@ -1,5 +1,6 @@
 import React from 'react';
-import { withStyles, Switch } from '@material-ui/core';
+import { withStyles } from '@mui/styles';
+import { Switch } from '@mui/material';
 
 const StyledSwitch = withStyles((theme) => ({
   root: {

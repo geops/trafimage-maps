@@ -4,7 +4,7 @@ import { Map, View } from 'ol';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Provider } from 'react-redux';
 import { Layer } from 'mobility-toolbox-js/ol';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@mui/material';
 import theme from '../../themes/default';
 import TopicElements from '.';
 

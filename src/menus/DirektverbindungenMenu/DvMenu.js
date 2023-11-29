@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, Divider } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Divider } from '@mui/material';
 import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
 import DvLayerSwitcher from './DvLayerSwitcher';
 import { setDisplayMenu } from '../../model/app/actions';

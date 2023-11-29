@@ -8,7 +8,7 @@ import {
   Select,
   InputLabel,
   MenuItem,
-} from '@material-ui/core';
+} from '@mui/material';
 import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
 import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
 import DocForm from '../../DocForm';

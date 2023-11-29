@@ -2,7 +2,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
-import { Divider, Typography, makeStyles } from '@material-ui/core';
+import { Divider, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Layer } from 'mobility-toolbox-js/ol';
 import GeltungsbereicheLegend, {
   legends,

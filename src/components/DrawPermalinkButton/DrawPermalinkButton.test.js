@@ -2,7 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
+import { ThemeProvider } from '@mui/material';
 import { render } from '@testing-library/react';
+import theme from '../../themes/default';
 import DrawPermalinkButton from '.';
 
 describe('DrawPermalinkButton', () => {
@@ -15,11 +17,13 @@ describe('DrawPermalinkButton', () => {
     });
 
     const component = render(
-      <Provider store={store}>
-        <DrawPermalinkButton>
-          <div />
-        </DrawPermalinkButton>
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DrawPermalinkButton>
+            <div />
+          </DrawPermalinkButton>
+        </Provider>
+      </ThemeProvider>,
     );
     expect(component.container.innerHTML).toMatchSnapshot();
   });

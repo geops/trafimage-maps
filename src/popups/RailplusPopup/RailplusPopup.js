@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Feature } from 'ol';
-import { Typography, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Typography } from '@mui/material';
 import { useSelector } from 'react-redux';
 import RailplusLayer from '../../layers/RailplusLayer';
 

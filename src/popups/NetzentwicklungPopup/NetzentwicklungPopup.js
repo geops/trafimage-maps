@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import Feature from 'ol/Feature';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import PersonCard from '../../components/PersonCard';

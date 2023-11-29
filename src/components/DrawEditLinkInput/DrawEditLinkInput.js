@@ -1,5 +1,6 @@
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { ReactComponent as Loader } from '../../img/loader.svg';

@@ -2,7 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
-import { ThemeProvider } from '@material-ui/core';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material';
 import { render, fireEvent } from '@testing-library/react';
 import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
 import theme from '../../themes/default';
@@ -21,7 +21,10 @@ describe('Draw', () => {
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Draw />
+          {/* For JSS styles be loaded after emotioin style, see "migrating to v5" page of mui doc */}
+          <StyledEngineProvider injectFirst>
+            <Draw />
+          </StyledEngineProvider>
         </Provider>
       </ThemeProvider>,
     );
@@ -40,7 +43,10 @@ describe('Draw', () => {
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <Draw />
+          {/* For JSS styles be loaded after emotioin style, see "migrating to v5" page of mui doc */}
+          <StyledEngineProvider injectFirst>
+            <Draw />
+          </StyledEngineProvider>
         </Provider>
       </ThemeProvider>,
     );
@@ -66,7 +72,10 @@ describe('Draw', () => {
       <MatomoProvider value={matomo}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <Draw />
+            {/* For JSS styles be loaded after emotioin style, see "migrating to v5" page of mui doc */}
+            <StyledEngineProvider injectFirst>
+              <Draw />
+            </StyledEngineProvider>
           </Provider>
         </ThemeProvider>
       </MatomoProvider>,

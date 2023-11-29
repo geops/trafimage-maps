@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import { Layer } from 'mobility-toolbox-js/ol';
 import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';

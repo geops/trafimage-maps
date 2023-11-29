@@ -1,7 +1,8 @@
 import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { makeStyles, MenuItem } from '@material-ui/core';
+import { MenuItem } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import Select from '../Select';
 import { setProjection } from '../../model/app/actions';

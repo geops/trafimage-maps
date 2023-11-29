@@ -4,7 +4,9 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { Layer } from 'mobility-toolbox-js/ol';
 import OLLayer from 'ol/layer/Vector';
+import { ThemeProvider } from '@mui/material';
 import { render } from '@testing-library/react';
+import theme from '../../themes/default';
 import DrawRemoveDialog from '.';
 
 describe('DrawRemoveDialog', () => {
@@ -33,18 +35,22 @@ describe('DrawRemoveDialog', () => {
 
   test('should match snapshot', () => {
     const { container } = render(
-      <Provider store={store}>
-        <DrawRemoveDialog />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DrawRemoveDialog />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.innerHTML).toMatchSnapshot();
   });
 
   test('remove permalink on click on remove button', () => {
     const { container } = render(
-      <Provider store={store}>
-        <DrawRemoveDialog />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DrawRemoveDialog />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelector('input').value).toBe('');
   });

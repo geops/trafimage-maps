@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { ReactComponent as PhoneIcon } from '../../img/phone.svg';
 import { ReactComponent as MailIcon } from '../../img/mail.svg';
 import { ReactComponent as PersonIcon } from '../../img/person.svg';
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => {
       flex: 1,
       border: '1px solid #ddd',
       padding: theme.spacing(1),
-      margin: `${theme.spacing(1)}px 0`,
+      margin: `${theme.spacing(1)} 0`,
       borderRadius: 2,
     },
   };

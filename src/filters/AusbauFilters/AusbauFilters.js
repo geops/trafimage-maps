@@ -1,13 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import {
-  Select,
-  MenuItem,
-  FormControl,
-  InputLabel,
-  makeStyles,
-} from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import AusbauLayer from '../../layers/AusbauLayer';
 import { updateConstructions } from '../../config/ch.sbb.construction';
 

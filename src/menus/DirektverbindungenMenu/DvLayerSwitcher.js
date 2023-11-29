@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
+import { FormGroup, FormControlLabel } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { unByKey } from 'ol/Observable';
 import SBBSwitch from '../../components/SBBSwitch';

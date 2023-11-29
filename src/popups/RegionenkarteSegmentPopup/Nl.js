@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
 import Line from './Line';
 import Person from './Person';

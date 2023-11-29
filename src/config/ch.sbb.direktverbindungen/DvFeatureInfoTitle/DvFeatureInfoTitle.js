@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, Box, IconButton } from '@material-ui/core';
+import { Box, IconButton } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { MdClose } from 'react-icons/md';
 import { DV_KEY } from '../../../utils/constants';
 import useIsMobile from '../../../utils/useIsMobile';
