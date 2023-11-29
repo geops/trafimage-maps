@@ -17,7 +17,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
     >
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiDialog-paper makeStyles-paper-2   MuiDialog-paperScrollPaper MuiDialog-paperWidthFalse react-draggable css-1e9859v-MuiPaper-root-MuiDialog-paper"
            role="dialog"
-           aria-labelledby="mui-1"
+           aria-labelledby=":r0:"
            style="transform: translate(0px,0px);"
       >
         <span class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root makeStyles-title-11 makeStyles-title-14 css-1236ds1-MuiTypography-root-MuiDialogTitle-root"

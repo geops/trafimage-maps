@@ -12,7 +12,7 @@ import { getTopicConfig } from './config/topics';
 const propTypes = {
   /**
    * Configuration of the topics to load. See examples to learn how topics
-   * can be configured or use the 'appName' attribute to load a predefined
+   * can be configured or use the 'appname' attribute to load a predefined
    * topic configuration (ask us for help).
    */
   topics: PropTypes.array,
@@ -24,9 +24,9 @@ const propTypes = {
 
   /**
    * Set the default visiblity of the layers in the topic. It will override all the topics configuration.
-   * Warning: Used with caution if you also use Permalink functionnality.
+   * Warning: used with caution if you also use Permalink functionnality.
    */
-  layersVisibility: PropTypes.string,
+  layersvisibility: PropTypes.string,
 
   /**
    * @ignore
@@ -61,195 +61,276 @@ const propTypes = {
   zoom: PropTypes.string,
 
   /**
-   * Limit the map extent (e.g. maxExtent="502649.8980,5655117.1007,1352629.6525,6141868.0968"). Default extent has no limit.
+   * Limit the map extent (e.g. maxextent="502649.8980,5655117.1007,1352629.6525,6141868.0968"). Default extent has no limit.
    */
-  maxExtent: PropTypes.string,
+  maxextent: PropTypes.string,
 
   /**
    * Application name. By specifying the app name, you can load a predefined
    * topics configuration. Default is 'wkp' loading the trafimage maps portal.
    */
-  appName: PropTypes.string,
+  appname: PropTypes.string,
 
   /**
-   * Key of the topic that should be opened on startup.
+   * key of the topic that should be opened on startup.
    */
-  activeTopicKey: PropTypes.string,
+  activetopickey: PropTypes.string,
 
   /**
    * API key of using the application. Details at 'https://developer.geops.io'.
    */
-  apiKey: PropTypes.string,
+  apikey: PropTypes.string,
 
   /**
    * API key name of using the application.
    */
-  apiKeyName: PropTypes.string,
+  apikeyname: PropTypes.string,
 
   /**
    * URL of the cartaro instance to use.
    * @ignore
    */
-  cartaroUrl: PropTypes.string,
+  cartarourl: PropTypes.string,
 
   /**
    * URL of the previous cartaro instance to use.
    * @ignore
    */
-  loginUrl: PropTypes.string,
+  loginurl: PropTypes.string,
 
   /**
    * Base URL to use.
    * @ignore
    */
-  appBaseUrl: PropTypes.string,
+  appbaseurl: PropTypes.string,
+
+  /**
+   * URL of the kML service. Default is 'https://editor.mapset.ch/api/v1/meta/kml/'.
+   */
+  drawurl: PropTypes.string,
+
+  /**
+   * URL of the mapset editor. Default is 'https://editor.mapset.ch'.
+   */
+  mapseturl: PropTypes.string,
+
+  /**
+   * URL of the shortener service. Default is 'https://geops.sh/api/v1/weburls'.
+   */
+  shortenerurl: PropTypes.string,
 
   /**
    * API key for accessing vector tiles.
    * Details at 'https://developer.geops.io'.
    */
-  vectorTilesKey: PropTypes.string,
+  vectortileskey: PropTypes.string,
 
   /**
    * URL of the vector tile server. Default is 'https://maps.geops.io'.
    */
-  vectorTilesUrl: PropTypes.string,
+  vectortilesurl: PropTypes.string,
 
   /**
    * API key for accessing Realtime api.
    * Details at 'https://developer.geops.io'.
    */
-  realtimeKey: PropTypes.string,
+  realtimekey: PropTypes.string,
 
   /**
    * URL of the websocket realtime server. Default is 'wss://api.geops.io/tracker-ws/v1/ws'.
    */
-  realtimeUrl: PropTypes.string,
+  realtimeurl: PropTypes.string,
 
   /**
    * URL of the search API server. Default is 'https://maps.trafimage.ch'.
    */
-  searchUrl: PropTypes.string,
+  searchurl: PropTypes.string,
 
   /**
    * URL of the stops API server. Default is 'https://api.geops.io/stops/v1/'.
    */
-  stopsUrl: PropTypes.string,
+  stopsurl: PropTypes.string,
 
   /**
    * URL of the static files. Default is 'https://maps2.trafimage.ch'.
    */
-  staticFilesUrl: PropTypes.string,
+  staticfilesurl: PropTypes.string,
 
   /**
    * Enable analytics tracking.
    */
-  enableTracking: PropTypes.string,
+  enabletracking: PropTypes.string,
 
   /**
-   * Disable use of cookies when tracking is enabled and no domainConsentId is provided.
+   * Disable use of cookies when tracking is enabled and no domainconsentid is provided.
    */
-  disableCookies: PropTypes.string,
+  disablecookies: PropTypes.string,
 
   /**
    * URL endpoint for matomo.
    */
-  matomoUrl: PropTypes.string,
+  matomourl: PropTypes.string,
 
   /**
    * Site id used by matomo
    */
-  matomoSiteId: PropTypes.string,
+  matomositeid: PropTypes.string,
 
   /**
-   * Domain for which the domainConsentId is configured for.
+   * Domain for which the domainconsentid is configured for.
    */
-  domainConsent: PropTypes.string,
+  domainconsent: PropTypes.string,
 
   /**
    * OneTrust id used for consent Management.
    * WARNING: OneTrust id can be domain dependent and with SameSite=LAX configured,
    * so make sure OneTrust is properly configured for your domain.
    */
-  domainConsentId: PropTypes.string,
+  domainconsentid: PropTypes.string,
 
   /**
    * Improve mouse/touch interactions to avoid conflict with parent page.
    */
   embedded: PropTypes.string,
+
+  /**
+   * URL of departures service .Default is '//maps.trafimage.ch/search/v2/destinations'.
+   */
+  departuresurl: PropTypes.string,
+
+  /**
+   * URL of destination service. Default is '//api.geops.io/sbb-departures/v1'.
+   */
+  destinationurl: PropTypes.string,
 };
 
+/** These are the web component attributes */
 const attributes = {
-  width: '100%',
-  height: '100%',
-  center: undefined,
-  zoom: undefined,
-  maxExtent: undefined,
-  appName: 'wkp',
-  language: undefined,
-  activeTopicKey: undefined,
-  apiKey: undefined,
-  apiKeyName: 'key',
-  cartaroUrl: process.env?.REACT_APP_CARTARO_URL,
-  loginUrl: undefined,
-  appBaseUrl: process.env.REACT_APP_BASE_URL,
-  vectorTilesKey: process.env.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process.env.REACT_APP_VECTOR_TILES_URL,
-  realtimeKey: process.env.REACT_APP_REALTIME_KEY,
-  realtimeUrl: process.env.REACT_APP_REALTIME_URL,
-  staticFilesUrl: process.env.REACT_APP_STATIC_FILES_URL,
-  mapsetUrl: process.env.REACT_APP_MAPSET_URL,
-  shortenerUrl: process.env.REACT_APP_SHORTENER_URL,
-  drawUrl: process.env.REACT_APP_DRAW_URL,
-  enableTracking: 'true',
-  disableCookies: null,
-  elements: undefined,
-  layersVisibility: undefined,
-  embedded: undefined,
-  domainConsent: process.env.REACT_APP_DOMAIN_CONSENT,
-  domainConsentId: process.env.REACT_APP_DOMAIN_CONSENT_ID,
-  matomoUrl: process.env.REACT_APP_MATOMO_URL_BASE,
-  matomoSiteId: process.env.REACT_APP_MATOMO_SITE_ID,
-  searchUrl: process.env.REACT_APP_SEARCH_URL,
-  stops: process.env.REACT_APP_STOPS_URL,
+  activetopickey: 'string',
+  appbaseurl: 'string',
+  apikey: 'string',
+  apikeyname: 'string',
+  appname: 'string',
+  cartarourl: 'string',
+  center: 'string',
+  departuresurl: 'string',
+  destinationurl: 'string',
+  disablecookies: 'string',
+  domainconsent: 'string',
+  domainconsentid: 'string',
+  drawurl: 'string',
+  elements: 'string',
+  embedded: 'string',
+  enabletracking: 'string',
+  height: 'string',
+  history: 'string',
+  language: 'string',
+  layersvisibility: 'string',
+  loginurl: 'string',
+  mapseturl: 'string',
+  matomositeid: 'string',
+  matomourl: 'string',
+  maxextent: 'string',
+  realtimekey: 'string',
+  realtimeurl: 'string',
+  searchurl: 'string',
+  shortenerurl: 'string',
+  staticfilesurl: 'string',
+  stopsurl: 'string',
+  topics: 'string',
+  vectortileskey: 'string',
+  vectortilesurl: 'string',
+  width: 'string',
+  zoom: 'string',
 };
 
 const defaultProps = {
-  topics: undefined,
+  activetopickey: undefined,
+  appbaseurl: undefined,
+  apikey: undefined,
+  apikeyname: 'key',
+  appname: 'wkp',
+  cartarourl: undefined,
+  center: undefined,
+  departuresurl: undefined,
+  destinationurl: undefined,
+  disablecookies: undefined,
+  domainconsent: undefined,
+  domainconsentid: undefined,
+  drawurl: undefined,
+  elements: undefined,
+  embedded: undefined,
+  enabletracking: 'true',
+  height: '100%',
   history: undefined,
+  language: undefined,
+  layersvisibility: undefined,
+  loginurl: undefined,
+  mapseturl: undefined,
+  matomositeid: undefined,
+  matomourl: undefined,
+  maxextent: undefined,
+  realtimekey: undefined,
+  realtimeurl: undefined,
+  searchurl: undefined,
+  shortenerurl: undefined,
+  staticfilesurl: undefined,
+  stopsurl: undefined,
+  topics: undefined,
+  vectortileskey: undefined,
+  vectortilesurl: undefined,
+  width: '100%',
+  zoom: undefined,
 };
 
 // Since we won't clone all layers, we store here the initial visibility of
-// layers to be able to set it back if the layersVisibility parameter change.
+// layers to be able to set it back if the layersvisibility parameter change.
 const initialLayersVisibility = {};
 
 function WebComponent(props) {
   const {
-    width,
-    height,
-    zoom,
-    maxExtent,
-    topics,
-    appName,
+    activetopickey,
+    appbaseurl,
+    apikey,
+    apikeyname,
+    appname,
+    cartarourl,
     center,
-    apiKey,
-    vectorTilesKey,
-    enableTracking,
+    departuresurl,
+    destinationurl,
+    disablecookies,
+    domainconsent,
+    domainconsentid,
+    drawurl,
     elements,
-    language,
-    layersVisibility,
     embedded,
-    domainConsent,
-    domainConsentId,
-    disableCookies,
-    realtimeKey,
-    activeTopicKey,
+    enabletracking,
+    height,
+    history,
+    language,
+    layersvisibility,
+    loginurl,
+    mapseturl,
+    matomositeid,
+    matomourl,
+    maxextent,
+    realtimekey,
+    realtimeurl,
+    searchurl,
+    shortenerurl,
+    staticfilesurl,
+    stopsurl,
+    topics,
+    vectortileskey,
+    vectortilesurl,
+    width,
+    zoom,
   } = props;
   const ref = useRef();
 
-  // We have to wait the applyinace of the layersVisibility attribute to avoid having blinking bg layer on load
-  const [layersVisibilityApplied, setLayersVisibilityApplied] =
-    useState(!layersVisibility);
+  // We have to wait the applyinace of the layersvisibility attribute to avoid having blinking bg layer on load
+  const [layersvisibilityApplied, setLayersVisibilityApplied] =
+    useState(!layersvisibility);
 
   const arrayCenter = useMemo(() => {
     if (!center || Array.isArray(center)) {
@@ -261,16 +342,16 @@ function WebComponent(props) {
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(
-    () => maxExtent && maxExtent.split(',').map((float) => parseFloat(float)),
-    [maxExtent],
+    () => maxextent && maxextent.split(',').map((float) => parseFloat(float)),
+    [maxextent],
   );
 
   const appTopics = useMemo(() => {
-    const tps = topics || getTopicConfig(appName);
+    const tps = topics || getTopicConfig(appname);
 
     if (!tps) {
       // eslint-disable-next-line no-console
-      console.warn(`There is no public topics for app name: ${appName}.`);
+      console.warn(`There is no public topics for app name: ${appname}.`);
       // It's important to return null so the permalink doesn't try to update parameters.
       // If we return [], it will try to update paramaters and we will loose the inital
       // parameters when the topics will be loaded.
@@ -281,12 +362,12 @@ function WebComponent(props) {
     // could load nothing. Example with a pathname like this /build.d/index.html
     // We expect a topic is composed at least like this xxxx.xxxx.xxxx.
     // const urlTopic = window.location.pathname.split('/').pop();
-    // const isTopicInUrl = urlTopic.split('.').length > 1;
+    // const isTopicInurl = urlTopic.split('.').length > 1;
     // if (
-    //   isTopicInUrl &&
+    //   isTopicInurl &&
     //   urlTopic &&
-    //   activeTopicKey &&
-    //   urlTopic !== activeTopicKey
+    //   activetopickey &&
+    //   urlTopic !== activetopickey
     // ) {
     //   return [];
     // }
@@ -306,22 +387,22 @@ function WebComponent(props) {
       }
     });
     return [...tps];
-  }, [topics, appName, elements]);
+  }, [topics, appname, elements]);
 
-  // Update layers visiblity using web component attribute
+  // update layers visiblity using web component attribute
   // It's important to do this outside the previous useMemo so a webComponent render is not triggered
   useEffect(() => {
     // TODO improve the code, particularly the transformation string to object.
     appTopics?.forEach((topic) => {
       // We use the active topic key because it's to force the layersVisiibility
       // attribute to be reapply on change of a topic
-      if (activeTopicKey && topic.key !== activeTopicKey) {
+      if (activetopickey && topic.key !== activetopickey) {
         return;
       }
       // Override layers visiblity.
-      if (layersVisibility && topic.layers.length) {
+      if (layersvisibility && topic.layers.length) {
         const obj = {};
-        layersVisibility.split(',').forEach((elt) => {
+        layersvisibility.split(',').forEach((elt) => {
           const [key, value] = elt.split('=');
           obj[key] = value === 'true';
         });
@@ -379,9 +460,9 @@ function WebComponent(props) {
         setLayersVisibilityApplied(true);
       }
     });
-  }, [appTopics, layersVisibility, activeTopicKey]);
+  }, [appTopics, layersvisibility, activetopickey]);
 
-  if (!appTopics || !layersVisibilityApplied) {
+  if (!appTopics || !layersvisibilityApplied) {
     return null;
   }
 
@@ -395,21 +476,41 @@ function WebComponent(props) {
         }}
         ref={ref}
       >
+        {/* We translate attributes which are lower case to trafimagemaps attributes which are camelCase */}
         <TrafimageMaps
-          {...props}
-          vectorTilesKey={vectorTilesKey || apiKey}
-          realtimeKey={realtimeKey || apiKey}
-          topics={appTopics}
-          zoom={floatZoom}
-          maxExtent={extentArray}
+          activeTopicKey={activetopickey}
+          appBaseUrl={appbaseurl}
+          apiKey={apikey}
+          apiKeyName={apikeyname}
+          cartaroUrl={cartarourl}
           center={arrayCenter}
-          embedded={embedded === 'true'}
-          enableTracking={enableTracking === 'true'}
-          disableCookies={disableCookies === 'true'}
-          domainConsent={domainConsent}
-          domainConsentId={domainConsentId}
-          language={language}
+          departuresUrl={departuresurl}
+          destinationUrl={destinationurl}
+          disableCookies={disablecookies === 'true'}
+          domainConsent={domainconsent}
+          domainConsentId={domainconsentid}
+          drawUrl={drawurl}
           elements={elements}
+          embedded={embedded === 'true'}
+          enableTracking={enabletracking === 'true'}
+          history={history}
+          language={language}
+          loginUrl={loginurl}
+          mapsetUrl={mapseturl}
+          matomoSiteId={matomositeid}
+          matomoUrl={matomourl}
+          maxExtent={extentArray}
+          // permissionInfos={permission}
+          realtimeKey={realtimekey || apikey}
+          realtimeUrl={realtimeurl}
+          searchUrl={searchurl}
+          shortenerUrl={shortenerurl}
+          staticFilesUrl={staticfilesurl}
+          stopsUrl={stopsurl}
+          topics={appTopics}
+          vectorTilesKey={vectortileskey || apikey}
+          vectorTilesUrl={vectortilesurl}
+          zoom={floatZoom}
         />
       </div>
     </Styled>

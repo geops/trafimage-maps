@@ -4,8 +4,8 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { render } from '@testing-library/react';
 import { ThemeProvider } from '@mui/material';
-import SharePermalinkButton from '.';
 import theme from '../../themes/default';
+import SharePermalinkButton from '.';
 
 describe('SharePermalinkButton', () => {
   const mockStore = configureStore([thunk]);
