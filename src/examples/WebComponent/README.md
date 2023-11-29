@@ -32,7 +32,14 @@ const App = () => {
   return (
     <>
       <div className="container">
-        <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
+        <trafimage-maps
+          zoom="7"
+          apiKey={apiKey}
+          embedded="true"
+          {...props}
+          width="100%"
+          height="500px"
+        />
       </div>
       <br />
       <Editor

@@ -4,6 +4,7 @@ import Logo from 'react-styleguidist/lib/client/rsg-components/Logo';
 import Version from 'react-styleguidist/lib/client/rsg-components/Version';
 import Styled from 'react-styleguidist/lib/client/rsg-components/Styled';
 import docConfig from '../config/doc-config.json';
+import style from './styleguidist.css';
 
 const xsmall = '@media (max-width: 600px)';
 
@@ -105,6 +106,7 @@ export function StyleGuideRenderer({
   toc,
   hasSidebar,
 }) {
+  console.log('ici');
   const [apiKey, setApiKey] = useState();
   useEffect(() => {
     fetch('https://backend.developer.geops.io/publickey')
@@ -127,6 +129,7 @@ export function StyleGuideRenderer({
   window.apiKey = apiKey;
   return (
     <div className={classes.root}>
+      <style>{style}</style>
       <div>
         <header className={classes.header}>
           <div className={classes.bar}>

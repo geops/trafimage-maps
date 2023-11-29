@@ -8,7 +8,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@geops/create-react-web-component": "2.0.19",
+    "@geops/create-react-web-component": "3.0.2",
     "@jonkoops/matomo-tracker-react": "^0.7.0",
     "@mui/icons-material": "^5.14.18",
     "@mui/lab": "^5.0.0-alpha.153",
@@ -55,7 +55,7 @@
     "redux-debounced": "0.5.0",
     "redux-thunk": "2.4.2",
     "resize-observer-polyfill": "1.5.1",
-    "style-it": "2.1.4",
+    "style-it": "^2.1.4",
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
@@ -93,6 +93,7 @@
     "eslint-plugin-prettier": "5.0.1",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "event-hooks-webpack-plugin": "^2.3.0",
     "fetch-mock": "9.11.0",
     "file-loader": "^6.2.0",
     "fixpack": "4.0.0",
@@ -108,7 +109,7 @@
     "postcss-normalize": "^10.0.1",
     "prettier": "3.1.0",
     "react-app-rewired": "2.2.1",
-    "react-error-overlay": "6.0.11",
+    "react-error-overlay": "6.0.9",
     "react-scripts": "5.0.1",
     "react-svg-loader": "^3.0.3",
     "react-test-renderer": "18.2.0",
@@ -134,7 +135,7 @@
     "xmlserializer": "^0.6.1"
   },
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "GENERATE_SOURCEMAP=false  react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
     "coverage": "yarn test  --watchAll=false  --coverage --coverageDirectory=coverage",
     "cp": "generact --root src",

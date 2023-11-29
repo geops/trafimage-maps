@@ -2,38 +2,18 @@
 require('dotenv').config();
 // eslint-disable-next-line no-unused-vars
 const path = require('path');
-const Dotenv = require('dotenv-webpack');
 const { version } = require('./package.json');
 const webpackConfigFunc = require('./node_modules/react-scripts/config/webpack.config.js');
 const override = require('./packages/wc/config-overrides');
 
 const webpackConfig = override(webpackConfigFunc('production'), 'production');
-const cssRule = webpackConfig.module.rules[
-  webpackConfig.module.rules.length - 1
-].oneOf.find((rule) => '.css'.match(rule.test));
-const sassRule = webpackConfig.module.rules[
-  webpackConfig.module.rules.length - 1
-].oneOf.find((rule) => '.sass'.match(rule.test));
-console.log(webpackConfig.plugins);
+
 module.exports = {
   version,
   template: {
     favicon: 'img/favicon.png',
   },
   components: [],
-  require: [
-    path.join(__dirname, 'src/styleguidist/styleguidist.css'),
-    // I have no idea why I need to re-add these file, they are already in src/index.js
-    // When you use the "components" property (ex: components: ['src/components/Autocomplete/Autocomplete.js']),
-    // the web-component works as expected.
-    // but if you use the "sections" property, the web-component doesn't work.
-    'react-app-polyfill/stable',
-    'abortcontroller-polyfill/dist/abortcontroller-polyfill-only',
-    '@webcomponents/webcomponents-platform',
-    '@webcomponents/custom-elements',
-    '@webcomponents/webcomponentsjs/custom-elements-es5-adapter',
-    'proxy-polyfill',
-  ],
   ribbon: {
     url: 'https://github.com/geops/trafimage-maps',
     text: 'Fork me on GitHub',
@@ -42,6 +22,7 @@ module.exports = {
     'trafimage-maps/es': path.join(__dirname, 'src'),
     'trafimage-maps': path.join(__dirname, 'src'),
   },
+  showSidebar: true,
   pagePerSection: true,
   sections: [
     {
@@ -170,114 +151,13 @@ module.exports = {
       },
     },
   },
-  showSidebar: true,
   styleguideComponents: {
     ComponentsList: path.join(__dirname, 'src/styleguidist/ComponentsList'),
     StyleGuideRenderer: path.join(__dirname, 'src/styleguidist/StyleGuide'),
   },
-  // dangerouslyUpdateWebpackConfig(webpackConfig, env) {
-  //   // WARNING: inspect Styleguidist Webpack config before modifying it, otherwise you may break Styleguidist
-  //   const c = override(webpackConfig, env);
-  //   // const pl = c.plugins.splice(4, 1); //
-  //   console.log(c.plugins);
-  //   // console.log(pl);
-  //   return c;
-  // },
   webpackConfig: {
     optimization: webpackConfig.optimization,
-    // {
-    //   minimize: false, // Terser minification is broken since webpack 5
-    //   minimizer: [
-    //     // new TerserPlugin({
-    //     //   test: /build\//,
-    //     //   include: /\/build/,
-    //     // }),
-    //     // new TerserPlugin<SwcOptions>({
-    //     //   minify: TerserPlugin.swcMinify,
-    //     //   terserOptions: {
-    //     //     // `swc` options
-    //     //   },
-    //     // }),
-    //     // new TerserPlugin<UglifyJSOptions>({
-    //     //   minify: TerserPlugin.uglifyJsMinify,
-    //     //   terserOptions: {
-    //     //     // `uglif-js` options
-    //     //   },
-    //     // }),
-    //     // new TerserPlugin({
-    //     //   minify: TerserPlugin.esbuildMinify,
-    //     //   // test: /Line\.js$/,
-    //     //   terserOptions: {
-    //     //     // `esbuild` options
-    //     //     // loader: '.js=jsx',
-    //     //     loader: 'jsx',
-    //     //   },
-    //     // }),
-    //   ],
-    // },
-    plugins: webpackConfig.plugins, // [new Dotenv()],
+    plugins: webpackConfig.plugins,
     module: webpackConfig.module,
-    //  {
-    //   rules: webpackConfig.module.rules,
-    //   // [
-    //   //   // Babel loader, will use your project’s .babelrc
-
-    //   //   {
-    //   //     // Match js, jsx, ts & tsx files
-    //   //     test: /\.[jt]sx?$/,
-    //   //     loader: 'babel-loader',
-    //   //   },
-    //   //   // Transpile js
-    //   //   // {
-    //   //   //   // Match js, jsx, ts & tsx files
-    //   //   //   test: /\.[jt]sx?$/,
-    //   //   //   loader: 'esbuild-loader',
-    //   //   //   options: {
-    //   //   //     // JavaScript version to compile to
-    //   //   //     target: 'es2015',
-    //   //   //     loader: 'jsx',
-    //   //   //     minify: true,
-    //   //   //     sourcemap: true,
-    //   //   //   },
-    //   //   // },
-    //   //   // Load css and scss files.
-    //   //   cssRule,
-    //   //   sassRule,
-    //   //   {
-    //   //     test: /^((?!url).)*\.svg$/,
-    //   //     use: [
-    //   //       {
-    //   //         loader: require.resolve('@svgr/webpack'),
-    //   //       },
-    //   //       {
-    //   //         loader: 'file-loader',
-    //   //         options: {
-    //   //           jsx: true,
-    //   //         },
-    //   //       },
-    //   //     ],
-    //   //   },
-    //   //   {
-    //   //     test: /\.url\.svg$/,
-    //   //     loader: 'url-loader',
-    //   //   },
-    //   //   {
-    //   //     test: /\.png$|.ico$/,
-    //   //     use: [
-    //   //       {
-    //   //         loader: 'url-loader',
-    //   //       },
-    //   //     ],
-    //   //   },
-    //   //   {
-    //   //     test: /\.txt$/,
-    //   //     use: [
-    //   //       {
-    //   //         loader: 'file-loader',
-    //   //       },
-    //   //     ],
-    //   //   },
-    //   // ],
-    // },
   },
 };
