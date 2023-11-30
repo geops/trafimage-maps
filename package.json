@@ -170,8 +170,14 @@
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
   "jest": {
+    "#": "jest config is there, because adding a config file does not work to override CRA jest config",
     "resetMocks": false,
-    "coverageReporters": ["text", "html"],
-    "snapshotSerializers": ["jest-serializer-html"]
-  }  
+    "coverageReporters": [
+      "text",
+      "html"
+    ],
+    "snapshotSerializers": [
+      "jest-serializer-html"
+    ]
+  }
 }
