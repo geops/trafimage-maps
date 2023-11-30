@@ -1,68 +1,68 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { unByKey } from 'ol/Observable';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
-import { Divider } from '@mui/material';
-import MenuItem from '../../../components/Menu/MenuItem';
-import usePrevious from '../../../utils/usePrevious';
-import DvLineInfo from '../DvLineInfo';
-import DvLineTitle from '../DvLineTitle';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { unByKey } from "ol/Observable";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { Divider } from "@mui/material";
+import MenuItem from "../../../components/Menu/MenuItem";
+import usePrevious from "../../../utils/usePrevious";
+import DvLineInfo from "../DvLineInfo";
+import DvLineTitle from "../DvLineTitle";
 import removeDuplicates, {
   getId,
-} from '../../../utils/removeDuplicateFeatures';
-import parseDvFeatures from '../../../utils/dvParseFeatures';
-import { DV_DAY_NIGHT_REGEX, DV_KEY } from '../../../utils/constants';
-import useIsMobile from '../../../utils/useIsMobile';
-import useDisableIosElasticScrollEffect from '../../../utils/useDisableIosElasticScrollEffect';
+} from "../../../utils/removeDuplicateFeatures";
+import parseDvFeatures from "../../../utils/dvParseFeatures";
+import { DV_DAY_NIGHT_REGEX, DV_KEY } from "../../../utils/constants";
+import useIsMobile from "../../../utils/useIsMobile";
+import useDisableIosElasticScrollEffect from "../../../utils/useDisableIosElasticScrollEffect";
 
 const useStyles = makeStyles((theme) => {
   return {
     root: {
-      '&.wkp-menu-item': {
-        marginTop: '0 !important',
-        border: 'none !important',
+      "&.wkp-menu-item": {
+        marginTop: "0 !important",
+        border: "none !important",
       },
-      '& .wkp-menu-item-header': {
-        height: '40px !important',
-        '&.open': {
-          borderBottom: 'none !important',
+      "& .wkp-menu-item-header": {
+        height: "40px !important",
+        "&.open": {
+          borderBottom: "none !important",
         },
       },
-      '& .wkp-menu-item-header-toggler': {
+      "& .wkp-menu-item-header-toggler": {
         marginRight: 5,
       },
     },
     teaser: {
       maxHeight: (props) => (props.isMobile ? 200 : 400),
-      position: 'relative',
-      overflow: 'hidden',
-      pointerEvents: 'none',
-      '&::after': {
-        ...theme.styles.bottomFade['&::after'],
+      position: "relative",
+      overflow: "hidden",
+      pointerEvents: "none",
+      "&::after": {
+        ...theme.styles.bottomFade["&::after"],
         bottom: 0,
         left: 0,
-        pointerEvents: 'none',
-        width: '100%',
-        height: '10em',
+        pointerEvents: "none",
+        width: "100%",
+        height: "10em",
       },
-      '& .open': {
-        '& .wkp-menu-item-header-toggler': {
-          transform: 'rotate(180deg)',
+      "& .open": {
+        "& .wkp-menu-item-header-toggler": {
+          transform: "rotate(180deg)",
         },
       },
     },
     featureInfos: {
-      maxHeight: '100%',
-      overflow: 'auto',
+      maxHeight: "100%",
+      overflow: "auto",
     },
     featureInfoItem: {
       marginLeft: 38,
       marginRight: 16,
     },
     imageLine: {
-      '& img': {
-        width: '100%',
+      "& img": {
+        width: "100%",
       },
     },
     spacer: { height: 100 },
@@ -107,29 +107,29 @@ function DvFeatureInfo({ filterByType }) {
       // When we click on a station/label we select the lines using the direktverbundung_ids
       if (dvMainLayer.highlightedStation) {
         const dvIds = JSON.parse(
-          dvMainLayer.highlightedStation.get('direktverbindung_ids') || '[]',
+          dvMainLayer.highlightedStation.get("direktverbindung_ids") || "[]",
         );
         features = dvIds.map((id) => {
           return dvMainLayer.allFeatures.find(
-            (f) => !!f.get('mapboxFeature') && getId(f) === id,
+            (f) => !!f.get("mapboxFeature") && getId(f) === id,
           );
         });
       } else {
         features = dvInfo.features.reduce((feats, feat) => {
           const hasValidMapboxFeature =
-            feat?.get('mapboxFeature')?.sourceLayer ===
-            'ch.sbb.direktverbindungen_trips';
+            feat?.get("mapboxFeature")?.sourceLayer ===
+            "ch.sbb.direktverbindungen_trips";
           return hasValidMapboxFeature ? [...feats, feat] : feats;
         }, []);
       }
     }
-    features.sort((feat) => (feat.get('line') === 'night' ? -1 : 1));
+    features.sort((feat) => (feat.get("line") === "night" ? -1 : 1));
     const cleaned = removeDuplicates(parseDvFeatures(features));
     return filterByType
       ? cleaned.filter(
           (feat) =>
             !!layersVisible.find((layerKey) => {
-              return `${DV_KEY}.${feat.get('line')}` === layerKey;
+              return `${DV_KEY}.${feat.get("line")}` === layerKey;
             }),
         )
       : cleaned;
@@ -164,7 +164,7 @@ function DvFeatureInfo({ filterByType }) {
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', (evt) => {
+        return layer?.on("change:visible", (evt) => {
           forceRender(revision + 1);
           const { target: targetLayer } = evt;
           if (DV_DAY_NIGHT_REGEX.test(targetLayer.key)) {
@@ -200,18 +200,18 @@ function DvFeatureInfo({ filterByType }) {
       {dvFeatures.length > 1 ? (
         dvFeatures.map((feat) => {
           const id = getId(feat);
-          const title = feat.get('name');
-          const isNightTrain = feat.get('line') === 'night';
+          const title = feat.get("name");
+          const isNightTrain = feat.get("line") === "night";
           const active = infoKey === id;
           return (
             // eslint-disable-next-line jsx-a11y/control-has-associated-label
             <div
               key={id}
               role="menuitem"
-              tabIndex={teaser ? '-1' : null}
+              tabIndex={teaser ? "-1" : null}
               onClick={teaserOnClick}
               onKeyDown={teaserOnClick}
-              style={{ cursor: teaser ? 'pointer' : 'auto' }}
+              style={{ cursor: teaser ? "pointer" : "auto" }}
             >
               <MenuItem
                 dataId={id}
@@ -224,18 +224,18 @@ function DvFeatureInfo({ filterByType }) {
                   // We select the feature here instead of DvLineInfo
                   // to prevent excessive map layer rerenders.
                   dvMainLayer.select(open ? [] : [feat]);
-                  const vias = feat.get('vias');
+                  const vias = feat.get("vias");
                   if (
                     !vias.find(
                       (via) =>
-                        via.uid === dvMainLayer.highlightedStation?.get('uid'),
+                        via.uid === dvMainLayer.highlightedStation?.get("uid"),
                     )
                   ) {
                     dvMainLayer.highlightStation();
                   }
                 }}
                 className={`wkp-dv-feature-info ${classes.root}${
-                  active && teaser ? ` ${classes.teaser}` : ''
+                  active && teaser ? ` ${classes.teaser}` : ""
                 }`}
                 collapsed={!active}
                 open={active}
@@ -276,9 +276,9 @@ function DvFeatureInfo({ filterByType }) {
         <>
           <div style={{ padding: 10 }}>
             <DvLineTitle
-              title={dvFeatures[0].get('name')}
+              title={dvFeatures[0].get("name")}
               active
-              isNightTrain={dvFeatures[0].get('line') === 'night'}
+              isNightTrain={dvFeatures[0].get("line") === "night"}
               layer={dvMainLayer}
               feature={dvFeatures[0]}
             />

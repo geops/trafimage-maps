@@ -1,1 +1,1 @@
-export { default } from './SBBSwitch';
+export { default } from "./SBBSwitch";

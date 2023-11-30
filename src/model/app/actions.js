@@ -1,47 +1,47 @@
-import qs from 'query-string';
-import { DRAW_PARAM, DRAW_REDIRECT_PARAM } from '../../utils/constants';
+import qs from "query-string";
+import { DRAW_PARAM, DRAW_REDIRECT_PARAM } from "../../utils/constants";
 
-export const SET_TOPICS = 'SET_TOPICS';
-export const SET_ACTIVE_TOPIC = 'SET_ACTIVE_TOPIC';
-export const SET_FEATURE_INFO = 'SET_FEATURE_INFO';
-export const SET_LANGUAGE = 'SET_LANGUAGE';
-export const SET_PROJECTION = 'SET_PROJECTION';
-export const SET_MENU_OPEN = 'SET_MENU_OPEN';
-export const SET_SEARCH_OPEN = 'SET_SEARCH_OPEN';
-export const SET_SELECTED_FOR_INFOS = 'SET_SELECTED_FOR_INFOS';
-export const SET_DIALOG_VISIBLE = 'SET_DIALOG_VISIBLE';
-export const SET_DIALOG_POSITION = 'SET_DIALOG_POSITION';
-export const SET_DEPARTURES_FILTER = 'SET_DEPARTURES_FILTER';
-export const SET_SEARCH_SERVICE = 'SET_SEARCH_SERVICE';
-export const SET_PERMISSION_INFOS = 'SET_PERMISSION_INFOS';
-export const SET_SCREEN_WIDTH = 'SET_SCREEN_WIDTH';
-export const SET_CARTARO_URL = 'SET_CARTARO_URL';
-export const SET_MAPSET_URL = 'SET_MAPSET_URL';
-export const SET_SHORTENER_URL = 'SET_SHORTENER_URL';
-export const SET_DRAW_URL = 'SET_DRAW_URL';
-export const SET_DRAW_IDS = 'SET_DRAW_IDS';
-export const SET_DRAW_EDIT_LINK_LOADING = 'SET_DRAW_EDIT_LINK_LOADING';
-export const SET_DRAW_EDIT_LINK = 'SET_DRAW_EDIT_LINK';
-export const SET_DESTINATION_URL = 'SET_DESTINATION_URL';
-export const SET_DEPARTURES_URL = 'SET_DEPARTURES_URL';
-export const SET_API_KEY = 'SET_API_KEY';
-export const SET_SHOW_POPUPS = 'SET_SHOW_POPUPS';
-export const SET_ENABLE_TRACKING = 'SET_ENABLE_TRACKING';
-export const SET_CONSENT_GIVEN = 'SET_CONSENT_GIVEN';
-export const SET_EMBEDDED = 'SET_EMBEDDED';
-export const SET_DISABLE_COOKIES = 'SET_DISABLE_COOKIES';
-export const SET_SEARCH_URL = 'SET_SEARCH_URL';
-export const SET_SEARCH_INFO_OPEN = 'SET_SEARCH_INFO_OPEN';
-export const SET_APP_BASE_URL = 'SET_APP_BASE_URL';
-export const SET_STATIC_FILES_URL = 'SET_STATIC_FILES_URL';
-export const SET_API_KEY_NAME = 'SET_API_KEY_NAME';
-export const SET_VECTOR_TILES_URL = 'SET_VECTOR_TILES_URL';
-export const SET_VECTOR_TILES_KEY = 'SET_VECTOR_TILES_KEY';
-export const SET_LOGIN_URL = 'SET_LOGIN_URL';
-export const SET_REALTIME_KEY = 'SET_REALTIME_KEY';
-export const SET_REALTIME_URL = 'SET_REALTIME_URL';
-export const SET_DISPLAY_MENU = 'SET_DISPLAY_MENU';
-export const SET_STOPS_URL = 'SET_STOPS_URL';
+export const SET_TOPICS = "SET_TOPICS";
+export const SET_ACTIVE_TOPIC = "SET_ACTIVE_TOPIC";
+export const SET_FEATURE_INFO = "SET_FEATURE_INFO";
+export const SET_LANGUAGE = "SET_LANGUAGE";
+export const SET_PROJECTION = "SET_PROJECTION";
+export const SET_MENU_OPEN = "SET_MENU_OPEN";
+export const SET_SEARCH_OPEN = "SET_SEARCH_OPEN";
+export const SET_SELECTED_FOR_INFOS = "SET_SELECTED_FOR_INFOS";
+export const SET_DIALOG_VISIBLE = "SET_DIALOG_VISIBLE";
+export const SET_DIALOG_POSITION = "SET_DIALOG_POSITION";
+export const SET_DEPARTURES_FILTER = "SET_DEPARTURES_FILTER";
+export const SET_SEARCH_SERVICE = "SET_SEARCH_SERVICE";
+export const SET_PERMISSION_INFOS = "SET_PERMISSION_INFOS";
+export const SET_SCREEN_WIDTH = "SET_SCREEN_WIDTH";
+export const SET_CARTARO_URL = "SET_CARTARO_URL";
+export const SET_MAPSET_URL = "SET_MAPSET_URL";
+export const SET_SHORTENER_URL = "SET_SHORTENER_URL";
+export const SET_DRAW_URL = "SET_DRAW_URL";
+export const SET_DRAW_IDS = "SET_DRAW_IDS";
+export const SET_DRAW_EDIT_LINK_LOADING = "SET_DRAW_EDIT_LINK_LOADING";
+export const SET_DRAW_EDIT_LINK = "SET_DRAW_EDIT_LINK";
+export const SET_DESTINATION_URL = "SET_DESTINATION_URL";
+export const SET_DEPARTURES_URL = "SET_DEPARTURES_URL";
+export const SET_API_KEY = "SET_API_KEY";
+export const SET_SHOW_POPUPS = "SET_SHOW_POPUPS";
+export const SET_ENABLE_TRACKING = "SET_ENABLE_TRACKING";
+export const SET_CONSENT_GIVEN = "SET_CONSENT_GIVEN";
+export const SET_EMBEDDED = "SET_EMBEDDED";
+export const SET_DISABLE_COOKIES = "SET_DISABLE_COOKIES";
+export const SET_SEARCH_URL = "SET_SEARCH_URL";
+export const SET_SEARCH_INFO_OPEN = "SET_SEARCH_INFO_OPEN";
+export const SET_APP_BASE_URL = "SET_APP_BASE_URL";
+export const SET_STATIC_FILES_URL = "SET_STATIC_FILES_URL";
+export const SET_API_KEY_NAME = "SET_API_KEY_NAME";
+export const SET_VECTOR_TILES_URL = "SET_VECTOR_TILES_URL";
+export const SET_VECTOR_TILES_KEY = "SET_VECTOR_TILES_KEY";
+export const SET_LOGIN_URL = "SET_LOGIN_URL";
+export const SET_REALTIME_KEY = "SET_REALTIME_KEY";
+export const SET_REALTIME_URL = "SET_REALTIME_URL";
+export const SET_DISPLAY_MENU = "SET_DISPLAY_MENU";
+export const SET_STOPS_URL = "SET_STOPS_URL";
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
 
@@ -272,7 +272,7 @@ export const updateDrawEditLink = () => (dispatch, getState) => {
       dispatch(setDrawEditLink(data.url));
     })
     .catch((err) => {
-      if (err && err.name === 'AbortError') {
+      if (err && err.name === "AbortError") {
         // ignore user abort request
         return;
       }
@@ -307,7 +307,7 @@ export const updateDrawEditLink = () => (dispatch, getState) => {
           dispatch(setDrawEditLink(data.url));
         })
         .catch((errr) => {
-          if (errr && errr.name === 'AbortError') {
+          if (errr && errr.name === "AbortError") {
             // ignore user abort request
             return;
           }

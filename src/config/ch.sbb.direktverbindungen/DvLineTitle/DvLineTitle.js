@@ -1,33 +1,33 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { Feature } from 'ol';
-import { IconButton, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
-import DirektverbindungenLayer from '../../../layers/DirektverbindungenLayer';
-import { ReactComponent as TrainIconDay } from '../../../img/train-day.svg';
-import { ReactComponent as TrainIconNight } from '../../../img/train-night.svg';
-import useIsMobile from '../../../utils/useIsMobile';
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { Feature } from "ol";
+import { IconButton, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
+import DirektverbindungenLayer from "../../../layers/DirektverbindungenLayer";
+import { ReactComponent as TrainIconDay } from "../../../img/train-day.svg";
+import { ReactComponent as TrainIconNight } from "../../../img/train-night.svg";
+import useIsMobile from "../../../utils/useIsMobile";
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
     padding: 0,
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
   },
   titleIcon: {
     marginRight: 10,
   },
   title: {
-    width: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   zoomOnLineBtn: {
-    '&:hover': {
+    "&:hover": {
       color: theme.palette.secondary.main,
     },
   },
@@ -56,7 +56,7 @@ function DvLineTitle({ feature, layer, isNightTrain, title, active, teaser }) {
   }, [topic]);
   const isMobile = useIsMobile();
   const cartaroFeature = layer.allFeatures.find(
-    (feat) => feat.get('id') === feature.get('id'),
+    (feat) => feat.get("id") === feature.get("id"),
   );
   return (
     <div className={classes.titleWrapper}>
@@ -71,7 +71,7 @@ function DvLineTitle({ feature, layer, isNightTrain, title, active, teaser }) {
             <b>{title}</b>
             <IconButton
               className={classes.zoomOnLineBtn}
-              title={t('Auf Linie zentrieren')}
+              title={t("Auf Linie zentrieren")}
               disabled={!cartaroFeature}
               onClick={(evt) => {
                 if (!teaser) {

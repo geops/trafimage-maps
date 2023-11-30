@@ -1,1 +1,1 @@
-export { default } from './GeltungsbereicheGaPopup';
+export { default } from "./GeltungsbereicheGaPopup";

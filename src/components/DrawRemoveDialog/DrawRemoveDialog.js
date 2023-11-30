@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@mui/styles';
-import { Button } from '@mui/material';
-import PermalinkInput from '../PermalinkInput';
-import Dialog from '../Dialog';
-import { setDialogVisible, setDrawIds } from '../../model/app/actions';
+import React, { useCallback } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import { Button } from "@mui/material";
+import PermalinkInput from "../PermalinkInput";
+import Dialog from "../Dialog";
+import { setDialogVisible, setDrawIds } from "../../model/app/actions";
 
-export const NAME = 'drawRemoveDialog';
+export const NAME = "drawRemoveDialog";
 
 const useStyles = makeStyles((theme) => ({
   dialogContainer: {
-    minWidth: '400px !important',
+    minWidth: "400px !important",
   },
   link: {
     marginTop: theme.spacing(2),
@@ -19,11 +19,11 @@ const useStyles = makeStyles((theme) => ({
   footer: {
     marginTop: theme.spacing(2),
     paddingTop: theme.spacing(2),
-    display: 'flex',
-    justifyContent: 'flex-end',
-    width: '100%',
+    display: "flex",
+    justifyContent: "flex-end",
+    width: "100%",
 
-    '& > button': {
+    "& > button": {
       marginLeft: theme.spacing(2),
     },
   },
@@ -49,15 +49,15 @@ function DrawRemoveDialog() {
     <Dialog
       isModal
       name={NAME}
-      title={<span>{t('Zeichnung löschen')}</span>}
+      title={<span>{t("Zeichnung löschen")}</span>}
       className={`tm-dialog-container ${classes.dialogContainer}`}
       body={
         <div>
           <div>
-            {t('Wollen Sie den Plan wirklich aus der Karte löschen?')}
+            {t("Wollen Sie den Plan wirklich aus der Karte löschen?")}
             <br />
             {t(
-              'Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link',
+              "Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link",
             )}
             :
           </div>
@@ -65,9 +65,9 @@ function DrawRemoveDialog() {
             <PermalinkInput value={window.location.href} />
           </div>
           <div className={classes.footer}>
-            <Button onClick={clear}>{t('Löschen')}</Button>
+            <Button onClick={clear}>{t("Löschen")}</Button>
             <Button onClick={closeDialog} color="secondary">
-              {t('Abbrechen')}
+              {t("Abbrechen")}
             </Button>
           </div>
         </div>

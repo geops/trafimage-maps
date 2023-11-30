@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 function DvLegendLine({ color, width }) {
   return <div style={{ backgroundColor: color, height: 4, width }} />;

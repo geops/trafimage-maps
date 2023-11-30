@@ -1,10 +1,10 @@
-import React, { useRef, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { FaLink } from 'react-icons/fa';
-import { MdClose } from 'react-icons/md';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
-import { Popover, IconButton, ToggleButton } from '@mui/material';
+import React, { useRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { FaLink } from "react-icons/fa";
+import { MdClose } from "react-icons/md";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { Popover, IconButton, ToggleButton } from "@mui/material";
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -12,10 +12,11 @@ const useStyles = makeStyles(() => ({
     paddingRight: 42,
   },
   button: {
-    padding: '0 15px',
-    color: 'initial',
-    fontSize: 17.63,
-    marginTop: 1,
+    padding: "0 15px !important",
+    color: "initial",
+    fontSize: "17.63px !important",
+    marginTop: "1px !important",
+    border: "0 !important",
   },
 }));
 
@@ -41,8 +42,8 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
   }, []);
 
   const transformOrigin = {
-    vertical: 'center',
-    horizontal: 'left',
+    vertical: "center",
+    horizontal: "left",
     ...(popoverProps.transformOrigin || {}),
   };
 
@@ -59,7 +60,7 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
         // eslint-disable-next-line react/jsx-props-no-spreading
         {...buttonProps}
         onClick={handleClick}
-        title={t('Permalink generieren')}
+        title={t("Permalink generieren")}
       >
         <FaLink focusable={false} />
       </ToggleButton>
@@ -71,8 +72,8 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
           onClose={handleClose}
           elevation={0}
           anchorOrigin={{
-            vertical: 'center',
-            horizontal: 'right',
+            vertical: "center",
+            horizontal: "right",
           }}
           transformOrigin={transformOrigin}
         >

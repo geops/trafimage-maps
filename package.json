@@ -8,12 +8,11 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@geops/create-react-web-component": "3.0.2",
+    "@geops/create-react-web-component": "3.0.3",
     "@jonkoops/matomo-tracker-react": "^0.7.0",
-    "@mui/icons-material": "^5.14.18",
-    "@mui/lab": "^5.0.0-alpha.153",
-    "@mui/material": "^5.14.18",
-    "@mui/styles": "^5.14.18",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.19",
+    "@mui/styles": "^5.14.19",
     "@turf/intersect": "6.5.0",
     "@webcomponents/custom-elements": "1.6.0",
     "@webcomponents/webcomponents-platform": "1.0.1",
@@ -79,7 +78,6 @@
     "documentation": "14.0.2",
     "dotenv-webpack": "^8.0.1",
     "esbuild": "^0.19.8",
-    "esbuild-loader": "^4.0.2",
     "esdoc-standard-plugin": "1.0.0",
     "eslint": "8.54.0",
     "eslint-config-airbnb": "19.0.4",
@@ -160,7 +158,7 @@
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
     "start:doc": "ESLINT_NO_DEV_ERRORS=true  styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(filter-obj|split-on-first|node-fetch|query-string|decode-uri-component|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\"",
+    "test": "react-app-rewired test  --transformIgnorePatterns \"/node_modules/(?!(@geops/create-react-web-component|filter-obj|split-on-first|node-fetch|query-string|decode-uri-component|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\"",
     "up": "yarn upgrade-interactive --latest"
   },
   "browserslist": [
@@ -171,88 +169,6 @@
     "not android < 5"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "browser": true,
-      "es6": true,
-      "jest": true,
-      "cypress/globals": true
-    },
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "jsx": true,
-      "impliedStrict": true
-    },
-    "extends": [
-      "airbnb",
-      "airbnb/hooks",
-      "prettier"
-    ],
-    "plugins": [
-      "cypress",
-      "prettier"
-    ],
-    "rules": {
-      "linebreak-style": 0,
-      "arrow-body-style": 0,
-      "default-param-last": 0,
-      "no-restricted-exports": 0,
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ],
-      "react/forbid-prop-types": "Off",
-      "prettier/prettier": "error"
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    }
-  },
-  "jest": {
-    "resetMocks": false,
-    "coverageReporters": [
-      "text",
-      "html"
-    ],
-    "snapshotSerializers": [
-      "jest-serializer-html"
-    ]
-  },
-  "lint-staged": {
-    "*.md": [
-      "prettier --write"
-    ],
-    "src/lang/*.json": [
-      "yarn sort",
-      "git add"
-    ],
-    "(src|__mocks__)/**/*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add",
-      "yarn test --bail --findRelatedTests"
-    ],
-    "src/**/*.scss": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "package.json": [
-      "yarn fixpack",
-      "git add"
-    ]
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "singleQuote": true
-  },
   "stylelint": {
     "plugins": [
       "stylelint-scss"

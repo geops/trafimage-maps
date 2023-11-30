@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@mui/styles';
-import Feature from 'ol/Feature';
-import { Layer } from 'mobility-toolbox-js/ol';
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import Feature from "ol/Feature";
+import { Layer } from "mobility-toolbox-js/ol";
 import {
   Typography,
   List,
   ListItem,
   ListItemText,
   ListItemIcon,
-} from '@mui/material';
-import { AiTwotoneCopyrightCircle } from 'react-icons/ai';
-import GeltungsbereicheLegend, { legends } from './GeltungsbereicheLegend';
+} from "@mui/material";
+import { AiTwotoneCopyrightCircle } from "react-icons/ai";
+import GeltungsbereicheLegend, { legends } from "./GeltungsbereicheLegend";
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
@@ -22,14 +22,14 @@ const propTypes = {
 
 const useStyles = makeStyles((theme) => ({
   legendItem: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     gap: 15,
-    padding: '10px 0',
+    padding: "10px 0",
   },
   listItem: {
-    padding: '0 10px 0',
-    alignItems: 'start',
+    padding: "0 10px 0",
+    alignItems: "start",
     maxWidth: 280,
   },
   listItemIcon: {
@@ -41,20 +41,20 @@ const useStyles = makeStyles((theme) => ({
 
 const translations = {
   de: {
-    'Information gilt für diese Produkte':
-      'Information gilt für diese Produkte',
+    "Information gilt für diese Produkte":
+      "Information gilt für diese Produkte",
   },
   en: {
-    'Information gilt für diese Produkte':
-      'Information applies to these products',
+    "Information gilt für diese Produkte":
+      "Information applies to these products",
   },
   fr: {
-    'Information gilt für diese Produkte':
+    "Information gilt für diese Produkte":
       "L'information s'applique à ces produits",
   },
   it: {
-    'Information gilt für diese Produkte':
-      'Informazioni applicabili a questi prodotti',
+    "Information gilt für diese Produkte":
+      "Informazioni applicabili a questi prodotti",
   },
 };
 
@@ -66,21 +66,21 @@ function GeltungsbereichePopup({
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
-  const products = layer.get('products');
-  const productsRemark = layer.get('productsRemark');
-  const validPropertyName = layer.get('validPropertyName');
+  const products = layer.get("products");
+  const productsRemark = layer.get("productsRemark");
+  const validPropertyName = layer.get("validPropertyName");
   const getTextFromValid =
-    layer.get('getTextFromValid') ||
+    layer.get("getTextFromValid") ||
     ((valid) => {
-      let text = 'Keine Ermässigung';
+      let text = "Keine Ermässigung";
       if (valid === 50 || valid === 25) {
-        text = 'Fahrt zum ermässigten Preis';
+        text = "Fahrt zum ermässigten Preis";
       }
       if (valid === 100) {
-        text = 'Freie Fahrt';
+        text = "Freie Fahrt";
       }
       if (valid === -1) {
-        text = 'Gültigkeit vor Ort erfragen';
+        text = "Gültigkeit vor Ort erfragen";
       }
       return text;
     });
@@ -94,12 +94,12 @@ function GeltungsbereichePopup({
   });
 
   features.forEach((feat) => {
-    let mot = feat.get('mot');
+    let mot = feat.get("mot");
     if (/^(tram|subway)$/.test(mot)) {
-      mot = 'rail';
+      mot = "rail";
     }
-    if (mot === 'funicular') {
-      mot = 'gondola';
+    if (mot === "funicular") {
+      mot = "gondola";
     }
     if (!featuresByMot[mot]) {
       featuresByMot[mot] = {};
@@ -135,7 +135,7 @@ function GeltungsbereichePopup({
             return (
               <div key={mot + valid} className={classes.legendItem}>
                 <GeltungsbereicheLegend
-                  mot={feature.get('mot')}
+                  mot={feature.get("mot")}
                   valid={valid}
                   background
                 />
@@ -149,13 +149,13 @@ function GeltungsbereichePopup({
       })}
       <div className={classes.legendItem}>
         <GeltungsbereicheLegend background />
-        <Typography variant="subtitle1">{t('Keine Ermässigung')}</Typography>
+        <Typography variant="subtitle1">{t("Keine Ermässigung")}</Typography>
       </div>
       {renderValidityFooter && (
         <>
           <br />
           <Typography variant="h4">
-            {translations[i18n.language]['Information gilt für diese Produkte']}
+            {translations[i18n.language]["Information gilt für diese Produkte"]}
             :
           </Typography>
           <List dense>
@@ -165,7 +165,7 @@ function GeltungsbereichePopup({
                   <ListItemIcon className={classes.listItemIcon}>
                     <AiTwotoneCopyrightCircle size={7} />
                   </ListItemIcon>
-                  <ListItemText primaryTypographyProps={{ variant: 'body1' }}>
+                  <ListItemText primaryTypographyProps={{ variant: "body1" }}>
                     {
                       // eslint-disable-next-line react/no-danger
                       <span dangerouslySetInnerHTML={{ __html: t(product) }} />
@@ -190,7 +190,7 @@ GeltungsbereichePopup.defaultProps = {
 };
 
 GeltungsbereichePopup.renderTitle = (feat, layer, t) => {
-  return t('ch.sbb.geltungsbereiche');
+  return t("ch.sbb.geltungsbereiche");
 };
 
 GeltungsbereichePopup.hidePagination = true;

@@ -1,9 +1,9 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-import './MapsGeoAdminLayerInfo.scss';
+import "./MapsGeoAdminLayerInfo.scss";
 
 const propTypes = {
   language: PropTypes.string.isRequired,
@@ -14,7 +14,7 @@ const propTypes = {
 const footer = {
   de: (
     <span>
-      Mehr Informationen unter{' '}
+      Mehr Informationen unter{" "}
       <a
         href="https://map.geo.admin.ch/?topic=bafu&lang=de"
         target="_blank"
@@ -26,7 +26,7 @@ const footer = {
   ),
   fr: (
     <span>
-      Plus informations sur{' '}
+      Plus informations sur{" "}
       <a
         href="https://map.geo.admin.ch/?topic=bafu&lang=fr"
         target="_blank"
@@ -38,7 +38,7 @@ const footer = {
   ),
   it: (
     <span>
-      Piú informazioni su{' '}
+      Piú informazioni su{" "}
       <a
         href="https://map.geo.admin.ch/?topic=bafu&lang=it"
         target="_blank"
@@ -50,7 +50,7 @@ const footer = {
   ),
   en: (
     <span>
-      More information at{' '}
+      More information at{" "}
       <a
         href="https://map.geo.admin.ch/?topic=bafu&lang=en"
         target="_blank"
@@ -67,13 +67,13 @@ function MapsGeoAdminLayerInfo({ language, t, properties }) {
 
   useEffect(() => {
     const fetchLegend = () => {
-      const legendKey = properties.get('legendKey');
+      const legendKey = properties.get("legendKey");
       fetch(
         `https://api3.geo.admin.ch/rest/services/all/MapServer/${legendKey}/legend?lang=${language}`,
       )
         .then((res) => res.text())
         .then((text) => {
-          const node = document.createElement('div');
+          const node = document.createElement("div");
           node.innerHTML = text;
           setLegendHtml(node);
         });
@@ -92,14 +92,14 @@ function MapsGeoAdminLayerInfo({ language, t, properties }) {
       )}
       <div className="wkp-maps-geo-admin-layer-info-footer">
         <p className="bod-title">
-          <span>{t('Legende')}</span>
+          <span>{t("Legende")}</span>
         </p>
         {legendHtml && (
           <div
             className="wkp-maps-geo-admin-layer-info-img"
             dangerouslySetInnerHTML={{
               __html:
-                legendHtml.getElementsByClassName('img-container')[0]
+                legendHtml.getElementsByClassName("img-container")[0]
                   ?.innerHTML,
             }}
           />

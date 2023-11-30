@@ -1,5 +1,5 @@
-import { Layer } from 'mobility-toolbox-js/ol';
-import { Feature } from 'ol';
+import { Layer } from "mobility-toolbox-js/ol";
+import { Feature } from "ol";
 
 /**
  * Layer for kilometrage popup
@@ -34,7 +34,7 @@ class KilometrageLayer extends Layer {
       })
       .catch(() => {
         // eslint-disable-next-line no-console
-        console.error('Kilometrage request needs CORS to work properly');
+        console.error("Kilometrage request needs CORS to work properly");
         return { features: [], layer, coordinate };
       });
   }

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { render } from '@testing-library/react';
-import PermalinkButton from '.';
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { render } from "@testing-library/react";
+import PermalinkButton from ".";
 
-describe('PermalinkButton', () => {
+describe("PermalinkButton", () => {
   const mockStore = configureStore([thunk]);
   let store;
-  test('should match snapshot.', () => {
+  test("should match snapshot.", () => {
     store = mockStore({
       map: {},
       app: { drawIds: {} },

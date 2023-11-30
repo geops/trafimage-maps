@@ -1,13 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import PropTypes from 'prop-types';
-import { Layer } from 'mobility-toolbox-js/ol';
-import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';
+import React from "react";
+import { makeStyles } from "@mui/styles";
+import PropTypes from "prop-types";
+import { Layer } from "mobility-toolbox-js/ol";
+import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
 
 const useStyles = makeStyles({
   legendItem: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     gap: 10,
   },
 });
@@ -78,9 +78,9 @@ function DvLayerInfo({ t, language, properties }) {
   const classes = useStyles();
   return (
     <div>
-      {comps[properties.get('routeType')][language]}
+      {comps[properties.get("routeType")][language]}
       <div className={classes.legendItem}>
-        <DvLegendLine color={properties.get('color')} />
+        <DvLegendLine color={properties.get("color")} />
         <div>{t(properties.key)}</div>
       </div>
     </div>

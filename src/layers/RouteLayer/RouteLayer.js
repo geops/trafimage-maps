@@ -1,21 +1,21 @@
-import 'react-app-polyfill/stable';
-import qs from 'query-string';
-import OLVectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import MultiLineString from 'ol/geom/MultiLineString';
-import Feature from 'ol/Feature';
+import "react-app-polyfill/stable";
+import qs from "query-string";
+import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import GeoJSON from "ol/format/GeoJSON";
+import MultiLineString from "ol/geom/MultiLineString";
+import Feature from "ol/Feature";
 import {
   Style,
   Fill as FillStyle,
   Icon as IconStyle,
   Stroke as StrokeStyle,
   Circle as CircleStyle,
-} from 'ol/style';
-import { Point } from 'ol/geom';
-import CasaLayer from '../CasaLayer';
+} from "ol/style";
+import { Point } from "ol/geom";
+import CasaLayer from "../CasaLayer";
 // use flag png to ensure IE detects it in olMap.forEachLayerAtPixel.
-import finishFlag from '../../img/finish_flag.png';
+import finishFlag from "../../img/finish_flag.png";
 
 /**
  * Layer for visualizing routes.
@@ -47,22 +47,22 @@ class RouteLayer extends CasaLayer {
   constructor(options = {}) {
     const properties = { isQueryable: true, ...(options.properties || {}) };
     super({
-      name: 'RouteLayer',
+      name: "RouteLayer",
       olLayer: new OLVectorLayer({
-        className: 'RouteLayer', // needed for forEachLayerAtPixel
+        className: "RouteLayer", // needed for forEachLayerAtPixel
         style: (f) => this.routeStyle(f),
         source: new VectorSource(),
       }),
       ...options,
       properties,
     });
-    this.set('showPopupOnHover', (features = []) => {
+    this.set("showPopupOnHover", (features = []) => {
       return features.filter((f) => {
-        const { popupContent } = f.get('route');
+        const { popupContent } = f.get("route");
         if (
           popupContent &&
           (!Array.isArray(popupContent) ||
-            !popupContent.every((item) => typeof item === 'string'))
+            !popupContent.every((item) => typeof item === "string"))
         ) {
           throw new Error(
             `Popup content was provided with type ${typeof popupContent}. Please use an array of strings instead (e.g. ['some content', 'more content']).`,
@@ -71,18 +71,18 @@ class RouteLayer extends CasaLayer {
         return popupContent;
       });
     });
-    this.set('popupComponent', 'CasaRoutePopup');
+    this.set("popupComponent", "CasaRoutePopup");
 
     this.featuresLayer = this.olLayer;
 
-    this.url = options.url || 'https://api.geops.io/routing/v1';
+    this.url = options.url || "https://api.geops.io/routing/v1";
 
     this.selectedRouteIds = [];
 
     this.onClick((features) => {
       if (features.length) {
         const [feature] = features;
-        const { isClickable, routeId } = feature.get('route');
+        const { isClickable, routeId } = feature.get("route");
 
         if (isClickable) {
           const idx = this.selectedRouteIds.indexOf(routeId);
@@ -100,7 +100,7 @@ class RouteLayer extends CasaLayer {
 
   // eslint-disable-next-line class-methods-use-this
   hidePopup(feature) {
-    return !feature.get('route').popupContent;
+    return !feature.get("route").popupContent;
   }
 
   /**
@@ -117,7 +117,7 @@ class RouteLayer extends CasaLayer {
       foot: { color: [69, 118, 162], lineDash: [1, 10] },
     };
 
-    const lineStyle = motLineStyles[feature.get('mot')];
+    const lineStyle = motLineStyles[feature.get("mot")];
     const opacity = isSelected || isHovered ? 1 : 0.3;
     const rgb = (lineStyle && lineStyle.color) || [68, 68, 68];
     const lineDash = (lineStyle && lineStyle.lineDash) || null;
@@ -133,7 +133,7 @@ class RouteLayer extends CasaLayer {
     if (isHovered) {
       style.hoverStyles = {
         outline: {
-          color: 'black',
+          color: "black",
           width: 8,
         },
       };
@@ -141,7 +141,7 @@ class RouteLayer extends CasaLayer {
       if (lineDash) {
         // Add white background if there is a line dash
         style.hoverStyles.background = {
-          color: 'white',
+          color: "white",
           width: 6,
         };
       }
@@ -171,15 +171,15 @@ class RouteLayer extends CasaLayer {
     });
 
     const urlParams = {
-      profile: 'sbb',
-      [this.apiKeyName || 'key']: this.apiKey || '',
-      via: via.join('|'),
+      profile: "sbb",
+      [this.apiKeyName || "key"]: this.apiKey || "",
+      via: via.join("|"),
       mot,
     };
 
     const url = `${this.url}/?${qs.stringify(urlParams)}`;
     const format = new GeoJSON({
-      dataProjection: 'EPSG:4326',
+      dataProjection: "EPSG:4326",
       featureProjection: this.projection,
     });
 
@@ -211,12 +211,12 @@ class RouteLayer extends CasaLayer {
    * @returns {ol.style} get the feature's style function.
    */
   routeStyle(feature) {
-    const { routeId } = feature.get('route');
+    const { routeId } = feature.get("route");
     const isSelected = this.selectedRouteIds.includes(routeId);
     const isHovered =
       this.hoverFeature &&
-      (this.hoverFeature.get('route') || {}).isClickable &&
-      (this.hoverFeature.get('route') || {}).routeId === routeId;
+      (this.hoverFeature.get("route") || {}).isClickable &&
+      (this.hoverFeature.get("route") || {}).routeId === routeId;
 
     const routeStyle = this.styleFunction(
       feature.getProperties(),
@@ -234,12 +234,12 @@ class RouteLayer extends CasaLayer {
       const lineEnd = feature.getGeometry().getLastCoordinate();
 
       /* Set circle icon if it is the first sequence of a route */
-      if (feature.get('isStart')) {
+      if (feature.get("isStart")) {
         styleArray.push(RouteLayer.getCircleStyle(lineStart));
       }
 
       /* Set flag and circle icons if it is the final sequence of a route */
-      if (feature.get('isEnd')) {
+      if (feature.get("isEnd")) {
         styleArray.push(RouteLayer.getCircleStyle(lineEnd));
         styleArray.push(
           new Style({
@@ -247,11 +247,11 @@ class RouteLayer extends CasaLayer {
             image: new IconStyle({
               src: finishFlag,
               anchor: [4.5, 3.5],
-              anchorXUnits: 'pixels',
-              anchorYUnits: 'pixels',
-              anchorOrigin: 'bottom-left',
+              anchorXUnits: "pixels",
+              anchorYUnits: "pixels",
+              anchorOrigin: "bottom-left",
               imgSize: [24, 24],
-              crossOrigin: 'anonymous', // To ensure IE detects it in olMap.forEachLayerAtPixel.
+              crossOrigin: "anonymous", // To ensure IE detects it in olMap.forEachLayerAtPixel.
             }),
             zIndex: 1,
           }),
@@ -295,7 +295,7 @@ class RouteLayer extends CasaLayer {
       let via = [];
 
       if (!routes[i].sequences) {
-        throw new Error('Missing route sequences.');
+        throw new Error("Missing route sequences.");
       }
 
       for (let j = 0; j < routes[i].sequences.length; j += 1) {
@@ -328,7 +328,7 @@ class RouteLayer extends CasaLayer {
       const sequenceFeatures = data.flat().filter((f) => f);
       this.olLayer.getSource().addFeatures(sequenceFeatures);
       sequenceFeatures.forEach((f) => {
-        const { routeId, isSelected } = f.get('route');
+        const { routeId, isSelected } = f.get("route");
         if (isSelected && this.selectedRouteIds.indexOf(routeId) === -1) {
           this.selectedRouteIds.push(routeId);
         }

@@ -1,19 +1,19 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import RsCopyright from 'react-spatial/components/Copyright';
-import { makeStyles } from '@mui/styles';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import RsCopyright from "react-spatial/components/Copyright";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   wrapper: {
-    position: 'absolute',
+    position: "absolute",
     right: 5,
     paddingLeft: 5,
     fontSize: 12,
     bottom: ({ footer }) => (footer ? 42 : 2),
-    '& a:not(.MuiIconButton-root)': {
-      whiteSpace: 'nowrap',
-      textDecoration: 'none !important',
+    "& a:not(.MuiIconButton-root)": {
+      whiteSpace: "nowrap",
+      textDecoration: "none !important",
     },
   },
 }));
@@ -28,7 +28,7 @@ function Copyright() {
     <div className={`wkp-copyright ${classes.wrapper}`}>
       <RsCopyright
         map={map}
-        format={(f) => `${t('Geodaten')} ${f.join(', ')}`}
+        format={(f) => `${t("Geodaten")} ${f.join(", ")}`}
       />
     </div>
   );

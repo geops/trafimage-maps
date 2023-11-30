@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Login from '../Login';
-import { ReactComponent as SBBLogo } from '../../img/sbb-logo.svg';
-import LanguageSelect from '../LanguageSelect';
+import React from "react";
+import PropTypes from "prop-types";
+import Login from "../Login";
+import { ReactComponent as SBBLogo } from "../../img/sbb-logo.svg";
+import LanguageSelect from "../LanguageSelect";
 
-import './Header.scss';
+import "./Header.scss";
 
 const propTypes = {
   loginUrl: PropTypes.string,

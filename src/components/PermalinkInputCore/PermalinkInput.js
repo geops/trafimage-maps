@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { MdContentCopy } from 'react-icons/md';
-import Button from '../Button';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { MdContentCopy } from "react-icons/md";
+import Button from "../Button";
 
 const propTypes = {
   /**
@@ -46,12 +46,12 @@ const propTypes = {
 };
 
 const defaultProps = {
-  value: '',
-  className: 'tm-permalink-field',
-  classNameInputField: 'tm-permalink-input',
-  classNameCopyBt: 'tm-permalink-bt',
-  titleCopyBt: '',
-  titleInputField: '',
+  value: "",
+  className: "tm-permalink-field",
+  classNameInputField: "tm-permalink-input",
+  classNameCopyBt: "tm-permalink-bt",
+  titleCopyBt: "",
+  titleInputField: "",
   button: <MdContentCopy focusable={false} />,
   getShortenedUrl: (val) => {
     return Promise.resolve(val);
@@ -64,7 +64,7 @@ const defaultProps = {
  */
 class PermalinkInput extends PureComponent {
   static selectInput() {
-    document.execCommand('selectall');
+    document.execCommand("selectall");
   }
 
   constructor(props) {
@@ -93,7 +93,7 @@ class PermalinkInput extends PureComponent {
     if (this.inputRef) {
       this.inputRef.select();
     }
-    document.execCommand('copy');
+    document.execCommand("copy");
   }
 
   updatePermalinkValue() {
@@ -118,7 +118,7 @@ class PermalinkInput extends PureComponent {
     return (
       <div className={className}>
         <input
-          value={permalinkValue || ''}
+          value={permalinkValue || ""}
           type="text"
           tabIndex="0"
           title={titleInputField}

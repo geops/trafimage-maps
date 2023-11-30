@@ -1,21 +1,21 @@
 // import polyfills if application is not loaded via index.js
-import 'react-app-polyfill/stable';
-import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
-import '../../i18n';
+import "react-app-polyfill/stable";
+import "abortcontroller-polyfill/dist/abortcontroller-polyfill-only";
+import "../../i18n";
 
-import { MatomoProvider, createInstance } from '@jonkoops/matomo-tracker-react';
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { StyledEngineProvider, ThemeProvider } from '@mui/material';
-import { Layer } from 'mobility-toolbox-js/ol';
-import MatomoTracker from '../MatomoTracker';
-import Head from '../Head';
-import TopicLoader from '../TopicLoader';
-import MessageListener from '../MessageListener';
-import getStore from '../../model/store';
-import { setZoom, setCenter, setMaxExtent } from '../../model/map/actions';
-import { defaultElements } from '../../config/topics';
+import { MatomoProvider, createInstance } from "@jonkoops/matomo-tracker-react";
+import React from "react";
+import PropTypes from "prop-types";
+import { Provider } from "react-redux";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material";
+import { Layer } from "mobility-toolbox-js/ol";
+import MatomoTracker from "../MatomoTracker";
+import Head from "../Head";
+import TopicLoader from "../TopicLoader";
+import MessageListener from "../MessageListener";
+import getStore from "../../model/store";
+import { setZoom, setCenter, setMaxExtent } from "../../model/map/actions";
+import { defaultElements } from "../../config/topics";
 import {
   setLanguage,
   setCartaroUrl,
@@ -41,8 +41,8 @@ import {
   setRealtimeKey,
   setRealtimeUrl,
   setStopsUrl,
-} from '../../model/app/actions';
-import theme from '../../themes/default';
+} from "../../model/app/actions";
+import theme from "../../themes/default";
 
 const propTypes = {
   /**
@@ -257,7 +257,7 @@ const defaultProps = {
   center: undefined,
   zoom: undefined,
   maxExtent: undefined,
-  apiKeyName: 'key',
+  apiKeyName: "key",
   loginUrl: undefined,
   topics: null,
   language: undefined,
@@ -336,7 +336,7 @@ class TrafimageMaps extends React.PureComponent {
         // So we are sure that the parent is not allowed.
         isParentDomainAllowed = false;
       }
-      const isHttps = window.location.protocol === 'https:';
+      const isHttps = window.location.protocol === "https:";
 
       // Separate the logic avoid a warning if Secure=true and the site is http.
       const configurations =
@@ -345,11 +345,11 @@ class TrafimageMaps extends React.PureComponent {
               // It's important that the OneTrust cookies also ahve the same properties,
               // otherwise results of consent will never be saved
               setSecureCookie: true,
-              setCookieSameSite: 'None',
+              setCookieSameSite: "None",
             }
           : {
               // Matomo set SameSite=LAX by default if nothing is provided.
-              setCookieSameSite: 'LAX',
+              setCookieSameSite: "LAX",
             };
 
       this.matomo = createInstance({
@@ -363,7 +363,7 @@ class TrafimageMaps extends React.PureComponent {
       // will not work because SameSite=LAX so we have better time to disableCookies
       // to avoid errors message.
       if (disableCookies || (isIframe && !isParentDomainAllowed && !isHttps)) {
-        this.matomo.pushInstruction('disableCookies');
+        this.matomo.pushInstruction("disableCookies");
       }
 
       // Need of the consent  if:
@@ -382,7 +382,7 @@ class TrafimageMaps extends React.PureComponent {
           (isIframe && isParentDomainAllowed) ||
           (isIframe && !isParentDomainAllowed && isHttps))
       ) {
-        this.matomo.pushInstruction('requireConsent');
+        this.matomo.pushInstruction("requireConsent");
         this.state = {
           requireConsent: true,
         };
@@ -687,11 +687,11 @@ class TrafimageMaps extends React.PureComponent {
     }
 
     if (elements !== prevProps.elements) {
-      const newElements = (elements?.split(',') || []).reduce(
+      const newElements = (elements?.split(",") || []).reduce(
         (final, currentEl) => {
-          const [prop, value] = currentEl.split('=');
+          const [prop, value] = currentEl.split("=");
           const newProps = { ...final };
-          newProps[prop] = value === 'true';
+          newProps[prop] = value === "true";
           return newProps;
         },
         {},

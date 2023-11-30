@@ -1,1 +1,1 @@
-export { default } from './HandicapStopFinder';
+export { default } from "./HandicapStopFinder";

@@ -1,48 +1,48 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import { Divider, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { Layer } from 'mobility-toolbox-js/ol';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import { Divider, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { Layer } from "mobility-toolbox-js/ol";
 import GeltungsbereicheLegend, {
   legends,
-} from '../../popups/GeltungsbereicheGaPopup/GeltungsbereicheLegend';
+} from "../../popups/GeltungsbereicheGaPopup/GeltungsbereicheLegend";
 
 const useStyles = makeStyles(() => ({
   lowerCase: {
-    '&::first-letter': {
-      textTransform: 'lowercase',
+    "&::first-letter": {
+      textTransform: "lowercase",
     },
   },
 }));
 
 const infos = {
   ga: {
-    100: 'Freie Fahrt',
-    50: 'Fahrt zum ermässigten Preis',
+    100: "Freie Fahrt",
+    50: "Fahrt zum ermässigten Preis",
   },
   tk: {
-    100: 'Freie Fahrt',
+    100: "Freie Fahrt",
   },
   hta: {
-    100: 'Fahrt zum ermässigten Preis',
+    100: "Fahrt zum ermässigten Preis",
   },
   sts: {
-    100: 'Freie Fahrt',
-    50: '50% oder 25% Ermässigung',
+    100: "Freie Fahrt",
+    50: "50% oder 25% Ermässigung",
   },
 };
 
 function GeltungsbereicheLayerInfo({ properties: layer }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const cardsScope = layer.get('cardsScope') || 'ga';
+  const cardsScope = layer.get("cardsScope") || "ga";
   const cardsInfos = infos[cardsScope];
-  const full = infos[cardsScope]['100'];
-  const reduced = infos[cardsScope]['50'];
-  const products = layer.get('products');
-  const productsRemark = layer.get('productsRemark');
+  const full = infos[cardsScope]["100"];
+  const reduced = infos[cardsScope]["50"];
+  const products = layer.get("products");
+  const productsRemark = layer.get("productsRemark");
   return (
     <div style={{ maxHeight: 450 }}>
       {legends.map(({ mots: [mot], validity }) => {
@@ -98,7 +98,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
               key={p}
               // eslint-disable-next-line react/no-danger
               dangerouslySetInnerHTML={{
-                __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
+                __html: `${t(p)}${idx !== arr.length - 1 ? ", " : ""}`, // We don't use .join() because of html parsing for line breaks
               }}
             />
           ))}
@@ -107,7 +107,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
               , <span className={classes.lowerCase}>{t(productsRemark)}</span>
             </b>
           ) : (
-            ''
+            ""
           )}
           : {t(full)}
         </Typography>
@@ -140,7 +140,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
                 key={p}
                 // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
-                  __html: `${t(p)}${idx !== arr.length - 1 ? ', ' : ''}`, // We don't use .join() because of html parsing for line breaks
+                  __html: `${t(p)}${idx !== arr.length - 1 ? ", " : ""}`, // We don't use .join() because of html parsing for line breaks
                 }}
               />
             ))}
@@ -149,7 +149,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
                 , <span className={classes.lowerCase}>{t(productsRemark)}</span>
               </b>
             ) : (
-              ''
+              ""
             )}
             : {t(reduced)}
           </Typography>
@@ -167,7 +167,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
           </tr>
         </tbody>
       </table>
-      <Typography paragraph>{t('Keine Ermässigung')}</Typography>
+      <Typography paragraph>{t("Keine Ermässigung")}</Typography>
       <table style={{ marginBottom: 10 }}>
         <thead />
         <tbody>
@@ -178,13 +178,13 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
           </tr>
         </tbody>
       </table>
-      <Typography paragraph>{t('Gültigkeit vor Ort erfragen')}</Typography>
+      <Typography paragraph>{t("Gültigkeit vor Ort erfragen")}</Typography>
       <br />
       <Divider />
       <br />
       <br />
       <Typography paragraph>
-        <i>{t('ch.sbb.geltungsbereiche.layerinfo-footer')}</i>
+        <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
       </Typography>
       <br />
     </div>
@@ -196,7 +196,7 @@ GeltungsbereicheLayerInfo.propTypes = {
 };
 
 GeltungsbereicheLayerInfo.renderTitle = (layer, t) => {
-  return t('ch.sbb.geltungsbereiche'); // - ${t(`${layer.name || layer.key}`)}`;
+  return t("ch.sbb.geltungsbereiche"); // - ${t(`${layer.name || layer.key}`)}`;
 };
 
 export default GeltungsbereicheLayerInfo;

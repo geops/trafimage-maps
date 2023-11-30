@@ -1,29 +1,29 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { fireEvent, render } from '@testing-library/react';
-import { ReactComponent as PencilAdd } from '../../img/pencil_add.svg';
-import DrawButton from '.';
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { fireEvent, render } from "@testing-library/react";
+import { ReactComponent as PencilAdd } from "../../img/pencil_add.svg";
+import DrawButton from ".";
 
-describe('DrawButton', () => {
+describe("DrawButton", () => {
   const mockStore = configureStore([thunk]);
 
   const store = mockStore({
     map: {},
-    app: { mapsetUrl: 'foo.mapset.ch' },
+    app: { mapsetUrl: "foo.mapset.ch" },
   });
 
-  test('display basic default icon.', () => {
+  test("display basic default icon.", () => {
     const { container } = render(
       <Provider store={store}>
         <DrawButton />
       </Provider>,
     );
-    expect(container.querySelectorAll('svg').length).toBe(1);
+    expect(container.querySelectorAll("svg").length).toBe(1);
   });
 
-  test('display children instead of default icon.', () => {
+  test("display children instead of default icon.", () => {
     const { container } = render(
       <Provider store={store}>
         <DrawButton>
@@ -31,22 +31,22 @@ describe('DrawButton', () => {
         </DrawButton>
       </Provider>,
     );
-    expect(container.querySelectorAll('svg').length).toBe(1);
+    expect(container.querySelectorAll("svg").length).toBe(1);
   });
 
-  test('open new window to mapset with an encoded string representing the current url.', () => {
+  test("open new window to mapset with an encoded string representing the current url.", () => {
     const { container } = render(
       <Provider store={store}>
         <DrawButton />
       </Provider>,
     );
     global.window.open = jest.fn();
-    fireEvent.click(container.querySelector('button'), {
-      target: { name: 'width', value: 50 },
+    fireEvent.click(container.querySelector("button"), {
+      target: { name: "width", value: 50 },
     });
     expect(global.window.open).toBeCalledWith(
-      'foo.mapset.ch?parent=http%3A%2F%2Flocalhost%2F',
-      '_self',
+      "foo.mapset.ch?parent=http%3A%2F%2Flocalhost%2F",
+      "_self",
     );
   });
 });

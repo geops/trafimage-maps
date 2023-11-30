@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { FormGroup, FormControlLabel } from '@mui/material';
-import { unByKey } from 'ol/Observable';
-import SBBSwitch from '../../components/SBBSwitch';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { FormGroup, FormControlLabel } from "@mui/material";
+import { unByKey } from "ol/Observable";
+import SBBSwitch from "../../components/SBBSwitch";
 // import { highlights, gttos, premium } from '../../config/ch.sbb.sts';
-import { STS_KEY } from '../../utils/constants';
-import { setFeatureInfo } from '../../model/app/actions';
+import { STS_KEY } from "../../utils/constants";
+import { setFeatureInfo } from "../../model/app/actions";
 
 const stsStyleLayerRegex = new RegExp(
   `^${STS_KEY}.validity.(highlights|premium|gttos)$`,
@@ -27,7 +27,7 @@ function StsValidityLayerSwitcher() {
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', () => {
+        return layer?.on("change:visible", () => {
           forceRender((value) => value + 1);
         });
       }) || [];
@@ -54,7 +54,7 @@ function StsValidityLayerSwitcher() {
         return;
       }
       const otherGroupLayer = stsLayers.find(
-        (lyr) => lyr.get('group') && lyr.key !== layer.key,
+        (lyr) => lyr.get("group") && lyr.key !== layer.key,
       );
       otherGroupLayer.visible = false;
       layer.visible = true;

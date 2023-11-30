@@ -4,58 +4,58 @@ import React, {
   useCallback,
   useEffect,
   useState,
-} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Drawer } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { Resizable } from 're-resizable';
-import FeatureInformation from '../FeatureInformation';
-import { setFeatureInfo } from '../../model/app/actions';
-import usePrevious from '../../utils/usePrevious';
-import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
-import useIsMobile from '../../utils/useIsMobile';
+} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { Drawer } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { Resizable } from "re-resizable";
+import FeatureInformation from "../FeatureInformation";
+import { setFeatureInfo } from "../../model/app/actions";
+import usePrevious from "../../utils/usePrevious";
+import { OVERLAY_MIN_HEIGHT } from "../../utils/constants";
+import useIsMobile from "../../utils/useIsMobile";
 
 const useStyles = makeStyles((theme) => ({
   drawerRoot: {
-    position: 'absolute !important',
+    position: "absolute !important",
   },
   drawer: {
-    '& .wkp-feature-information': {
-      height: '100%',
-      overflow: 'hidden',
+    "& .wkp-feature-information": {
+      height: "100%",
+      overflow: "hidden",
     },
-    '& .wkp-feature-information-body': {
-      height: 'calc(100% - 50px)',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      '& > div:first-child': {
+    "& .wkp-feature-information-body": {
+      height: "calc(100% - 50px)",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      "& > div:first-child": {
         // Normally this div is the root element of a popup component
         flex: 1,
-        overflow: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
+        overflow: "auto",
+        display: "flex",
+        flexDirection: "column",
       },
     },
   },
   drawerDesktop: {
-    pointerEvents: 'none',
-    '& .wkp-feature-information': {
-      pointerEvents: 'all',
+    pointerEvents: "none",
+    "& .wkp-feature-information": {
+      pointerEvents: "all",
       maxWidth: 400,
       minWidth: 250,
     },
   },
   drawerDesktopPaper: {
-    boxShadow: '-5px 0px 10px -6px rgb(0 0 0 / 40%)',
-    height: 'initial',
-    borderColor: '#cdcdcd',
-    borderStyle: 'solid',
-    borderWidth: '1px 0 1px 0',
-    overflow: 'hidden',
-    position: 'absolute',
-    pointerEvents: 'all',
+    boxShadow: "-5px 0px 10px -6px rgb(0 0 0 / 40%)",
+    height: "initial",
+    borderColor: "#cdcdcd",
+    borderStyle: "solid",
+    borderWidth: "1px 0 1px 0",
+    overflow: "hidden",
+    position: "absolute",
+    pointerEvents: "all",
     top: 0,
     bottom: 0,
   },
@@ -69,46 +69,46 @@ const useStyles = makeStyles((theme) => ({
     bottom: 40,
   },
   drawerMobile: {
-    pointerEvents: 'none',
-    '& .wkp-feature-information': {
-      width: '100%',
+    pointerEvents: "none",
+    "& .wkp-feature-information": {
+      width: "100%",
     },
   },
   drawerMobileSmooth: {
-    '& > .MuiPaper-root > div:first-child': {
-      transition: 'height .3s ease',
+    "& > .MuiPaper-root > div:first-child": {
+      transition: "height .3s ease",
     },
   },
   drawerMobilePaper: {
-    position: 'absolute',
-    pointerEvents: 'all',
+    position: "absolute",
+    pointerEvents: "all",
   },
   resizeHandle: {
-    position: 'fixed',
-    display: 'flex',
-    width: '100%',
+    position: "fixed",
+    display: "flex",
+    width: "100%",
     height: 60,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     zIndex: 1001,
-    '&::before': {
+    "&::before": {
       content: '""',
       height: 4,
       width: 50,
       top: 12,
-      left: '50%',
-      transform: 'translate(calc(-50% + 30px), -50%)',
-      position: 'absolute',
+      left: "50%",
+      transform: "translate(calc(-50% + 30px), -50%)",
+      position: "absolute",
       borderRadius: 5,
       backgroundColor: theme.colors.lighterGray,
     },
   },
   resizeResetButton: {
-    width: 'calc(100% - 50px)',
+    width: "calc(100% - 50px)",
     height: 55,
     zIndex: 10000,
-    border: 'none',
-    background: 'transparent',
+    border: "none",
+    background: "transparent",
   },
 }));
 
@@ -163,7 +163,7 @@ function Overlay({
   const isMobile = useIsMobile();
 
   const isSmallerThanMd = useMemo(() => {
-    return ['xs', 's', 'm'].includes(screenWidth);
+    return ["xs", "s", "m"].includes(screenWidth);
   }, [screenWidth]);
 
   const resetOverlayHeight = useCallback(() => {
@@ -195,8 +195,8 @@ function Overlay({
   const filtered = featureInfo.filter((info) => {
     const { layer, features } = info;
 
-    if (layer.get('popupComponent') && layer.get('useOverlay')) {
-      if (typeof layer.hidePopup === 'function') {
+    if (layer.get("popupComponent") && layer.get("useOverlay")) {
+      if (typeof layer.hidePopup === "function") {
         return features.find((f) => !layer.hidePopup(f, layer, featureInfo));
       }
       return true;
@@ -213,19 +213,19 @@ function Overlay({
         transitionDuration={transitionDuration}
         className={`${classes.drawer} ${
           isMobile ? classes.drawerMobile : classes.drawerDesktop
-        } ${isSnapSmooth ? classes.drawerMobileSmooth : ''}`}
+        } ${isSnapSmooth ? classes.drawerMobileSmooth : ""}`}
         classes={{
           root: classes.drawerRoot,
           paper: isMobile
             ? `${classes.drawerMobilePaper}`
             : `${[
                 classes.drawerDesktopPaper,
-                elements.header && !isSmallerThanMd ? classes.headerActive : '',
-                elements.header && isSmallerThanMd ? classes.mobileHeader : '',
-                elements.footer ? classes.footerActive : '',
-              ].join(' ')}`,
+                elements.header && !isSmallerThanMd ? classes.headerActive : "",
+                elements.header && isSmallerThanMd ? classes.mobileHeader : "",
+                elements.footer ? classes.footerActive : "",
+              ].join(" ")}`,
         }}
-        anchor={isMobile ? 'bottom' : 'right'}
+        anchor={isMobile ? "bottom" : "right"}
         open
         onClose={() => {
           dispatch(setFeatureInfo());
@@ -234,7 +234,7 @@ function Overlay({
           disableEnforceFocus: true,
           disablePortal,
           container: !disablePortal
-            ? document.getElementsByClassName('tm-barrier-free')[0]
+            ? document.getElementsByClassName("tm-barrier-free")[0]
             : null,
           BackdropComponent: () => {
             return null;
@@ -281,7 +281,7 @@ function Overlay({
                     type="button"
                     onClick={resetOverlayHeight}
                   >
-                    {' '}
+                    {" "}
                   </button>
                 </>
               ),

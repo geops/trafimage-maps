@@ -1,30 +1,30 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Trans, withTranslation } from 'react-i18next';
-import { compose } from 'redux';
-import PropTypes from 'prop-types';
-import { FaLock } from 'react-icons/fa';
-import LayerTree from 'react-spatial/components/LayerTree';
-import { withStyles } from '@mui/styles';
-import { MenuItem } from '@mui/material';
-import { Layer } from 'mobility-toolbox-js/ol';
-import LayerService from '../../utils/LayerService';
-import Collapsible from '../Collapsible';
-import filters from '../../filters';
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { Trans, withTranslation } from "react-i18next";
+import { compose } from "redux";
+import PropTypes from "prop-types";
+import { FaLock } from "react-icons/fa";
+import LayerTree from "react-spatial/components/LayerTree";
+import { withStyles } from "@mui/styles";
+import { MenuItem } from "@mui/material";
+import { Layer } from "mobility-toolbox-js/ol";
+import LayerService from "../../utils/LayerService";
+import Collapsible from "../Collapsible";
+import filters from "../../filters";
 import {
   setActiveTopic,
   setFeatureInfo,
   updateDrawEditLink,
-} from '../../model/app/actions';
-import Select from '../Select/Select';
-import InfosButton from '../InfosButton';
-import TopicInfosButton from '../TopicInfosButton';
+} from "../../model/app/actions";
+import Select from "../Select/Select";
+import InfosButton from "../InfosButton";
+import TopicInfosButton from "../TopicInfosButton";
 
 const styles = () => ({
   wrapperBaseLayerSelect: {
-    margin: '4px 20px 5px 23px',
-    width: 'calc(100% - 42px)',
-    display: 'none',
+    margin: "4px 20px 5px 23px",
+    width: "calc(100% - 42px)",
+    display: "none",
   },
 });
 
@@ -72,15 +72,15 @@ class TopicMenu extends PureComponent {
   renderLockIcon(topic, isInfo) {
     const { activeTopic, t } = this.props;
 
-    const className = `wkp-lock-icon${isInfo ? ' wkp-lock-left' : ''}${
-      activeTopic.key === topic.key ? ' wkp-active' : ''
+    const className = `wkp-lock-icon${isInfo ? " wkp-lock-left" : ""}${
+      activeTopic.key === topic.key ? " wkp-active" : ""
     }`;
 
     return (
       <div className={className}>
         <FaLock
           focusable={false}
-          title={t('Vertraulich/ Nur SBB-intern verfügbar')}
+          title={t("Vertraulich/ Nur SBB-intern verfügbar")}
         />
       </div>
     );
@@ -96,14 +96,14 @@ class TopicMenu extends PureComponent {
       layerTree = (
         <div className="wkp-layer-tree">
           <LayerTree
-            isItemHidden={(l) => l.get('isBaseLayer') || l.get('hideInLegend')}
+            isItemHidden={(l) => l.get("isBaseLayer") || l.get("hideInLegend")}
             layers={layers}
             t={t}
             titles={{
-              layerShow: t('Layer anzeigen'),
-              layerHide: t('Layer verbergen'),
-              subLayerShow: t('Layer anzeigen'),
-              subLayerHide: t('Layer verbergen'),
+              layerShow: t("Layer anzeigen"),
+              layerHide: t("Layer verbergen"),
+              subLayerShow: t("Layer anzeigen"),
+              subLayerHide: t("Layer verbergen"),
             }}
             renderLabel={(layer) => {
               return <Trans i18nKey={layer.name} />;
@@ -113,18 +113,18 @@ class TopicMenu extends PureComponent {
                 {layer.renderItemContent
                   ? layer.renderItemContent(layerTreeComp)
                   : layerTreeComp.renderItemContent(layer)}
-                {layer.get('hasInfos') && <InfosButton selectedInfo={layer} />}
+                {layer.get("hasInfos") && <InfosButton selectedInfo={layer} />}
               </>
             )}
             renderAfterItem={(layer, level) => {
-              const component = layer.get('filtersComponent');
+              const component = layer.get("filtersComponent");
 
               if (component) {
                 const FiltersComponent = filters[component];
                 return (
                   <div
                     style={{
-                      display: 'flex',
+                      display: "flex",
                       paddingLeft: `${30 * (level + 1)}px`,
                     }}
                   >
@@ -142,7 +142,7 @@ class TopicMenu extends PureComponent {
     const collapsed = isCollapsed || activeTopic.key !== topic.key;
     const isActiveTopic = topic.key === activeTopic.key;
     const isMenuVisibleLayers = (topic.layers || []).find((l) => {
-      return !l.get('hideInLegend');
+      return !l.get("hideInLegend");
     });
     const baseLayers = new LayerService(layers).getBaseLayers();
     const currentBaseLayer = baseLayers.find((l) => l.visible);
@@ -159,7 +159,7 @@ class TopicMenu extends PureComponent {
             onKeyPress={(e) => e.which === 13 && this.onTopicClick(topic)}
           >
             <div
-              className={`wkp-topic-title${isActiveTopic ? ' wkp-active' : ''}`}
+              className={`wkp-topic-title${isActiveTopic ? " wkp-active" : ""}`}
             >
               <div className="wkp-topic-radio">
                 {isActiveTopic && <div className="wkp-topic-radio-dot" />}
@@ -168,9 +168,9 @@ class TopicMenu extends PureComponent {
             </div>
             {isMenuVisibleLayers && (
               <div
-                className={`wkp-layer-toggler ${collapsed ? 'collapsed' : ''}`}
+                className={`wkp-layer-toggler ${collapsed ? "collapsed" : ""}`}
                 style={{
-                  display: isActiveTopic ? 'block' : 'none',
+                  display: isActiveTopic ? "block" : "none",
                 }}
               />
             )}

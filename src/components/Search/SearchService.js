@@ -1,5 +1,5 @@
-import OLVectorLayer from 'ol/layer/Vector';
-import OLVectorSource from 'ol/source/Vector';
+import OLVectorLayer from "ol/layer/Vector";
+import OLVectorSource from "ol/source/Vector";
 
 class SearchService {
   constructor(highlightStyle) {
@@ -19,7 +19,7 @@ class SearchService {
 
   setApiKey(apiKey) {
     Object.entries(this.searches).forEach(([, search]) => {
-      if (typeof search.setApiKey === 'function') {
+      if (typeof search.setApiKey === "function") {
         search.setApiKey(apiKey);
       }
     });
@@ -27,7 +27,7 @@ class SearchService {
 
   setSearchUrl(url) {
     Object.values(this.searches).forEach((search) => {
-      if (typeof search.setSearchUrl === 'function') {
+      if (typeof search.setSearchUrl === "function") {
         search.setSearchUrl(url);
       }
     });
@@ -35,7 +35,7 @@ class SearchService {
 
   setStopsUrl(url) {
     Object.values(this.searches).forEach((search) => {
-      if (typeof search.setStopsUrl === 'function') {
+      if (typeof search.setStopsUrl === "function") {
         search.setStopsUrl(url);
       }
     });
@@ -63,7 +63,7 @@ class SearchService {
     const sections = Object.entries(this.searches)
       .filter(([, search]) => search.showInPlaceholder)
       .map(([section, search]) => t(search.placeholder || section));
-    return `${sections.join(', ')} …`;
+    return `${sections.join(", ")} …`;
   }
 
   clearHighlight() {

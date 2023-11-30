@@ -1,21 +1,21 @@
-import OLGeoJSON from 'ol/format/GeoJSON';
-import { Style, Fill, Stroke } from 'ol/style';
-import highlightPointStyle from '../utils/highlightPointStyle';
+import OLGeoJSON from "ol/format/GeoJSON";
+import { Style, Fill, Stroke } from "ol/style";
+import highlightPointStyle from "../utils/highlightPointStyle";
 
 class Search {
   constructor(
-    searchUrl = 'https://maps.trafimage.ch',
-    stopsUrl = 'https://api.geops.io/stops/v1/',
+    searchUrl = "https://maps.trafimage.ch",
+    stopsUrl = "https://api.geops.io/stops/v1/",
   ) {
     this.geoJSON = new OLGeoJSON();
     this.collapsed = true;
     this.showInPlaceholder = true;
-    this.dataProjection = 'EPSG:4326';
+    this.dataProjection = "EPSG:4326";
     this.highlightStyle = [
       // For lines and polygon
       new Style({
-        fill: new Fill({ color: 'rgba(0,61,155,0.2)' }),
-        stroke: new Stroke({ color: 'rgba(0,61,155,0.5)', width: 10 }),
+        fill: new Fill({ color: "rgba(0,61,155,0.2)" }),
+        stroke: new Stroke({ color: "rgba(0,61,155,0.5)", width: 10 }),
       }),
       // For points
       highlightPointStyle,

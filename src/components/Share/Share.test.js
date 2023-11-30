@@ -1,13 +1,13 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Map, View } from 'ol';
-import { ThemeProvider } from '@mui/material';
-import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
-import theme from '../../themes/default';
-import Share from '.';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { Map, View } from "ol";
+import { ThemeProvider } from "@mui/material";
+import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
+import theme from "../../themes/default";
+import Share from ".";
 
-describe('Share', () => {
+describe("Share", () => {
   let store;
   beforeEach(() => {
     store = global.mockStore({
@@ -15,15 +15,15 @@ describe('Share', () => {
       app: {
         map: new Map({ view: new View({}) }),
         activeTopic: {
-          key: 'test',
+          key: "test",
         },
-        language: 'de',
-        appBaseUrl: 'https://maps.trafimage.ch',
+        language: "de",
+        appBaseUrl: "https://maps.trafimage.ch",
       },
     });
   });
 
-  test('should match snapshot.', () => {
+  test("should match snapshot.", () => {
     const { container } = render(
       <MatomoProvider value={{}}>
         <ThemeProvider theme={theme}>
@@ -36,7 +36,7 @@ describe('Share', () => {
     expect(container.innerHTML).toMatchSnapshot();
   });
 
-  describe('should send track event on click', () => {
+  describe("should send track event on click", () => {
     let matomo;
     let container;
 
@@ -58,45 +58,45 @@ describe('Share', () => {
       container = wrapper.container;
     });
 
-    test('on permalink button', () => {
+    test("on permalink button", () => {
       fireEvent.click(
-        container.querySelector('.wkp-permalink-bt div[role=button]'),
+        container.querySelector(".wkp-permalink-bt div[role=button]"),
       );
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickSharePermalink',
-        category: 'test',
+        action: "clickSharePermalink",
+        category: "test",
       });
     });
 
-    test('on mail button', () => {
-      fireEvent.click(container.querySelector('.ta-mail-icon a'));
+    test("on mail button", () => {
+      fireEvent.click(container.querySelector(".ta-mail-icon a"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareMail',
-        category: 'test',
+        action: "clickShareMail",
+        category: "test",
       });
     });
 
-    test('on download button', () => {
-      fireEvent.click(container.querySelector('.rs-canvas-save-button'));
+    test("on download button", () => {
+      fireEvent.click(container.querySelector(".rs-canvas-save-button"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareDownload',
-        category: 'test',
+        action: "clickShareDownload",
+        category: "test",
       });
     });
 
-    test('on facebook button', () => {
-      fireEvent.click(container.querySelector('.ta-facebook-icon a'));
+    test("on facebook button", () => {
+      fireEvent.click(container.querySelector(".ta-facebook-icon a"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareFacebook',
-        category: 'test',
+        action: "clickShareFacebook",
+        category: "test",
       });
     });
 
-    test('on twitter button', () => {
-      fireEvent.click(container.querySelector('.ta-twitter-icon a'));
+    test("on twitter button", () => {
+      fireEvent.click(container.querySelector(".ta-twitter-icon a"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareTwitter',
-        category: 'test',
+        action: "clickShareTwitter",
+        category: "test",
       });
     });
   });

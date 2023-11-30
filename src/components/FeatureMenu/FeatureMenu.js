@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { FaInfo } from 'react-icons/fa';
-import FeatureInformation from '../FeatureInformation';
-import MenuItem from '../Menu/MenuItem';
-import { setFeatureInfo, setMenuOpen } from '../../model/app/actions';
+import React, { useState, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { FaInfo } from "react-icons/fa";
+import FeatureInformation from "../FeatureInformation";
+import MenuItem from "../Menu/MenuItem";
+import { setFeatureInfo, setMenuOpen } from "../../model/app/actions";
 
 const propTypes = {
   menuItemProps: PropTypes.shape({}),
@@ -14,7 +14,7 @@ const propTypes = {
 
 const defaultProps = {
   menuItemProps: {},
-  property: 'useMenu',
+  property: "useMenu",
 };
 
 /**
@@ -32,8 +32,8 @@ function FeatureMenu({ property, menuItemProps }) {
     return featureInfo?.filter((info) => {
       const { layer, features } = info;
 
-      if (layer.get('popupComponent') && layer.get(property)) {
-        if (typeof layer.hidePopup === 'function') {
+      if (layer.get("popupComponent") && layer.get(property)) {
+        if (typeof layer.hidePopup === "function") {
           return features.find((f) => !layer.hidePopup(f, layer, featureInfo));
         }
         return true;
@@ -67,7 +67,7 @@ function FeatureMenu({ property, menuItemProps }) {
   return (
     <MenuItem
       className="wkp-feature-menu"
-      title={t('Detailinformationen')}
+      title={t("Detailinformationen")}
       icon={<FaInfo />}
       open
       collapsed={collapsed}

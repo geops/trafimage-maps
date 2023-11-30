@@ -1,14 +1,14 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { render } from '@testing-library/react';
-import { Layer } from 'mobility-toolbox-js/ol';
-import OLLayer from 'ol/layer/Layer';
-import { Map, View } from 'ol';
-import TopicLoader from '.';
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { render } from "@testing-library/react";
+import { Layer } from "mobility-toolbox-js/ol";
+import OLLayer from "ol/layer/Layer";
+import { Map, View } from "ol";
+import TopicLoader from ".";
 
-describe('TopicLoader', () => {
+describe("TopicLoader", () => {
   const mockStore = configureStore([thunk]);
   let initialStore = {};
   let store;
@@ -24,21 +24,21 @@ describe('TopicLoader', () => {
       },
       app: {
         map,
-        language: 'de',
-        apiKey: 'apikey',
-        apiKeyName: 'apiKeyName',
-        appBaseUrl: 'https://appBaseUrl.ch',
-        staticFilesUrl: 'https://foostatic.ch',
-        vectorTilesUrl: 'https://vectorTilesUrl.ch',
-        vectorTilesKey: 'apikey',
-        searchUrl: 'https://searchUrl.ch',
+        language: "de",
+        apiKey: "apikey",
+        apiKeyName: "apiKeyName",
+        appBaseUrl: "https://appBaseUrl.ch",
+        staticFilesUrl: "https://foostatic.ch",
+        vectorTilesUrl: "https://vectorTilesUrl.ch",
+        vectorTilesKey: "apikey",
+        searchUrl: "https://searchUrl.ch",
       },
     };
   });
 
-  test('add draw layer if activeTopic.elements.permalink=true', () => {
+  test("add draw layer if activeTopic.elements.permalink=true", () => {
     const topicDflt = {
-      key: 'topicPermalinkTrue',
+      key: "topicPermalinkTrue",
       layers: [new Layer({ olLayer: new OLLayer({}) })],
       elements: { permalink: true },
     };
@@ -58,14 +58,14 @@ describe('TopicLoader', () => {
     );
     const action = store
       .getActions()
-      .filter((act) => act.type === 'SET_LAYERS');
+      .filter((act) => act.type === "SET_LAYERS");
     expect(action.length).toBe(1);
     expect(action[0].data).toEqual([...topicDflt.layers, drawLayer]);
   });
 
   test("doesn't add draw layer when activeTopic.elements.permalink=false.", () => {
     const topicPermalinkFalse = {
-      key: 'topicPermalinkFalse',
+      key: "topicPermalinkFalse",
       layers: [new Layer({ olLayer: new OLLayer({}) })],
       elements: {
         permalink: false,
@@ -87,7 +87,7 @@ describe('TopicLoader', () => {
     );
     const action = store
       .getActions()
-      .filter((act) => act.type === 'SET_LAYERS');
+      .filter((act) => act.type === "SET_LAYERS");
     expect(action.length).toBe(1);
     expect(action[0].data).toEqual(topicPermalinkFalse.layers);
   });

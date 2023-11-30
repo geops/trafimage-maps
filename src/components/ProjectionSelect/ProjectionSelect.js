@@ -1,18 +1,18 @@
-import React, { useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { MenuItem } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import Select from '../Select';
-import { setProjection } from '../../model/app/actions';
+import React, { useMemo, useCallback } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { MenuItem } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import Select from "../Select";
+import { setProjection } from "../../model/app/actions";
 
 const useStyles = makeStyles(() => ({
   input: {
     width: 138,
     minWidth: 138,
 
-    '& svg:not(.MuiSelect-iconOpen) + .MuiOutlinedInput-notchedOutline': {
+    "& svg:not(.MuiSelect-iconOpen) + .MuiOutlinedInput-notchedOutline": {
       border: 0,
     },
   },
@@ -35,7 +35,7 @@ function ProjectionSelect({ projections }) {
   const projection = useSelector((state) => state.app.projection);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobileWidth = useMemo(() => {
-    return ['xs', 's'].includes(screenWidth);
+    return ["xs", "s"].includes(screenWidth);
   }, [screenWidth]);
 
   const onSelectChange = useCallback(
@@ -61,8 +61,8 @@ function ProjectionSelect({ projections }) {
       className={classes.input}
       MenuProps={{
         anchorOrigin: {
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         },
         PaperProps: {
           style: {

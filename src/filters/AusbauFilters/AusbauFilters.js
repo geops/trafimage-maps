@@ -1,17 +1,17 @@
-import React, { useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@mui/styles';
-import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import AusbauLayer from '../../layers/AusbauLayer';
-import { updateConstructions } from '../../config/ch.sbb.construction';
+import React, { useCallback, useState } from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import AusbauLayer from "../../layers/AusbauLayer";
+import { updateConstructions } from "../../config/ch.sbb.construction";
 
 const useStyles = makeStyles(() => ({
   formControl: {
     marginTop: 10,
     marginBottom: 20,
-    flex: 'auto',
-    marginRight: '22px',
+    flex: "auto",
+    marginRight: "22px",
   },
 }));
 
@@ -26,7 +26,7 @@ const defaultProps = {
 function AusbauFilters({ layer }) {
   const classes = useStyles();
   const { t } = useTranslation();
-  const [value, setValue] = useState((layer && layer.filter.value) || '');
+  const [value, setValue] = useState((layer && layer.filter.value) || "");
 
   const onChange = useCallback(
     (evt) => {
@@ -38,13 +38,13 @@ function AusbauFilters({ layer }) {
     [layer, setValue],
   );
 
-  if (!layer || typeof layer.showFilterParam !== 'string') {
+  if (!layer || typeof layer.showFilterParam !== "string") {
     return null;
   }
 
   return (
     <FormControl fullWidth className={classes.formControl}>
-      <InputLabel shrink>{t('angebotsschritt')}</InputLabel>
+      <InputLabel shrink>{t("angebotsschritt")}</InputLabel>
       <Select
         autoWidth
         displayEmpty

@@ -1,12 +1,12 @@
-import { Layer } from 'mobility-toolbox-js/ol';
-import GeometryType from 'ol/geom/GeometryType';
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import { kilometrageLayer } from '../ch.sbb.infrastruktur';
+import { Layer } from "mobility-toolbox-js/ol";
+import GeometryType from "ol/geom/GeometryType";
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
+import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
+import { kilometrageLayer } from "../ch.sbb.infrastruktur";
 
 export const anlagenverantwortliche = new TrafimageMapboxLayer({
-  name: 'ch.sbb.anlagenverantwortliche',
-  style: 'netzkarte_eisenbahninfrastruktur_v3_ch.sbb.anlagenverantwortliche',
+  name: "ch.sbb.anlagenverantwortliche",
+  style: "netzkarte_eisenbahninfrastruktur_v3_ch.sbb.anlagenverantwortliche",
   visible: true,
   zIndex: -1,
   properties: {
@@ -19,15 +19,15 @@ export const anlagenverantwortliche = new TrafimageMapboxLayer({
 });
 
 export const regionenkartePublicSegment = new Layer({
-  name: 'ch.sbb.regionenkarte.intern.av_segmente.public',
+  name: "ch.sbb.regionenkarte.intern.av_segmente.public",
   visible: true,
   properties: {
     hasInfos: true,
-    layerInfoComponent: 'RegionenkartePublicLayerInfo',
+    layerInfoComponent: "RegionenkartePublicLayerInfo",
   },
   children: [
     new MapboxStyleLayer({
-      name: 'ch.sbb.regionenkarte.lines',
+      name: "ch.sbb.regionenkarte.lines",
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.lines$/.test(id);
@@ -43,11 +43,11 @@ export const regionenkartePublicSegment = new Layer({
         isQueryable: true,
         hideInLegend: true,
         useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-        popupComponent: 'RegionenkarteSegmentPopup',
+        popupComponent: "RegionenkarteSegmentPopup",
       },
     }),
     new MapboxStyleLayer({
-      name: 'ch.sbb.regionenkarte.stations',
+      name: "ch.sbb.regionenkarte.stations",
       isQueryable: false,
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
@@ -58,7 +58,7 @@ export const regionenkartePublicSegment = new Layer({
       },
     }),
     new MapboxStyleLayer({
-      name: 'ch.sbb.regionenkarte.regionintersection',
+      name: "ch.sbb.regionenkarte.regionintersection",
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.regionintersection/.test(id);
@@ -66,7 +66,7 @@ export const regionenkartePublicSegment = new Layer({
       properties: {
         hideInLegend: true,
         showPopupOnHover: true,
-        popupComponent: 'RegionenkarteIntersectionPopup',
+        popupComponent: "RegionenkarteIntersectionPopup",
         isQueryable: true,
       },
     }),
@@ -74,16 +74,16 @@ export const regionenkartePublicSegment = new Layer({
 });
 
 export const regionenkarteOverlayGroup = new Layer({
-  name: 'ch.sbb.infrastruktur.overlay.group',
+  name: "ch.sbb.infrastruktur.overlay.group",
   visible: true,
   isQueryable: false,
   properties: {
     hasInfos: true,
-    description: 'ch.sbb.infrastruktur.overlay.group-desc',
+    description: "ch.sbb.infrastruktur.overlay.group-desc",
   },
   children: [
     new MapboxStyleLayer({
-      name: 'ch.sbb.infrastruktur.betriebspunkte',
+      name: "ch.sbb.infrastruktur.betriebspunkte",
       visible: true,
       isQueryable: false,
       mapboxLayer: anlagenverantwortliche,
@@ -93,11 +93,11 @@ export const regionenkarteOverlayGroup = new Layer({
       },
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.infrastruktur.betriebspunkte-desc',
+        description: "ch.sbb.infrastruktur.betriebspunkte-desc",
       },
     }),
     new MapboxStyleLayer({
-      name: 'ch.sbb.infrastruktur.line_point',
+      name: "ch.sbb.infrastruktur.line_point",
       visible: true,
       isQueryable: false,
       mapboxLayer: anlagenverantwortliche,
@@ -106,7 +106,7 @@ export const regionenkarteOverlayGroup = new Layer({
       },
       properties: {
         hasInfos: true,
-        description: 'ch.sbb.infrastruktur.line_point-desc',
+        description: "ch.sbb.infrastruktur.line_point-desc",
       },
     }),
   ],

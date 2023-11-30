@@ -4,9 +4,9 @@
 /**
  * @module ol/interaction/DblPointerDblClickZoomOut
  */
-import Interaction, { zoomByDelta } from 'ol/interaction/Interaction';
-import MapBrowserEventType from 'ol/MapBrowserEventType';
-import { getValues } from 'ol/obj';
+import Interaction, { zoomByDelta } from "ol/interaction/Interaction";
+import MapBrowserEventType from "ol/MapBrowserEventType";
+import { getValues } from "ol/obj";
 
 /**
  * @typedef {Object} Options

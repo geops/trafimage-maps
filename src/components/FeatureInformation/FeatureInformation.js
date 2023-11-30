@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { MdClose } from 'react-icons/md';
-import { IoIosArrowRoundBack, IoIosArrowRoundForward } from 'react-icons/io';
-import { Link, IconButton } from '@mui/material';
-import { setFeatureInfo } from '../../model/app/actions';
-import useIndexedFeatureInfo from '../../utils/useIndexedFeatureInfo';
-import useHighlightLayer from '../../utils/useHighlightLayer';
-import getPopupComponent from '../../utils/getPopupComponent';
-import './FeatureInformation.scss';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { MdClose } from "react-icons/md";
+import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
+import { Link, IconButton } from "@mui/material";
+import { setFeatureInfo } from "../../model/app/actions";
+import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
+import useHighlightLayer from "../../utils/useHighlightLayer";
+import getPopupComponent from "../../utils/getPopupComponent";
+import "./FeatureInformation.scss";
 
 function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
@@ -77,13 +77,13 @@ function FeatureInformation({ featureInfo }) {
             <IconButton
               size="medium"
               className="wkp-close-bt"
-              title={t('Schliessen')}
+              title={t("Schliessen")}
               onClick={() => {
                 dispatch(setFeatureInfo());
                 onCloseBtClick();
               }}
             >
-              <MdClose focusable={false} alt={t('Schliessen')} />
+              <MdClose focusable={false} alt={t("Schliessen")} />
             </IconButton>
           </div>
         ) : null}
@@ -104,7 +104,7 @@ function FeatureInformation({ featureInfo }) {
                 {featureIndex > 0 && (
                   <Link
                     className="wkp-pagination-button"
-                    title={t('zurück')}
+                    title={t("zurück")}
                     onClick={() => setFeatureIndex(featureIndex - 1)}
                     tabIndex="0"
                   >
@@ -112,12 +112,12 @@ function FeatureInformation({ featureInfo }) {
                   </Link>
                 )}
               </span>
-              {featureIndex + 1} {t('von')} {features.length}
+              {featureIndex + 1} {t("von")} {features.length}
               <span className="wkp-pagination-button-wrapper">
                 {featureIndex < features.length - 1 && (
                   <Link
                     className="wkp-pagination-button"
-                    title={t('weiter')}
+                    title={t("weiter")}
                     onClick={() => setFeatureIndex(featureIndex + 1)}
                     tabIndex="0"
                   >

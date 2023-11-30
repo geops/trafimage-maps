@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { makeStyles } from '@mui/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
-    minWidth: '155px !important',
+    minWidth: "155px !important",
 
-    '& > div': {
-      padding: '3px 0',
+    "& > div": {
+      padding: "3px 0",
 
-      '&:first-child': {
-        border: '0 solid  #eee',
+      "&:first-child": {
+        border: "0 solid  #eee",
         borderBottomWidth: 1,
       },
     },
@@ -23,8 +23,8 @@ function KilometragePopup({ feature, t }) {
   const { line_number: lineNumber, kilometration } = feature.getProperties();
   return (
     <div className={classes.root}>
-      <div>{`${t('DfA Linien Nr.')}: ${lineNumber}`}</div>
-      <div>{`${t('Kilometer')}: ${Number(kilometration).toFixed(2)}`}</div>
+      <div>{`${t("DfA Linien Nr.")}: ${lineNumber}`}</div>
+      <div>{`${t("Kilometer")}: ${Number(kilometration).toFixed(2)}`}</div>
     </div>
   );
 }

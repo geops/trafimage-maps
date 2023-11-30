@@ -1,1 +1,1 @@
-export { default } from './MatomoTracker';
+export { default } from "./MatomoTracker";

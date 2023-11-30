@@ -1,1 +1,1 @@
-export { default } from './HandicapPopup';
+export { default } from "./HandicapPopup";

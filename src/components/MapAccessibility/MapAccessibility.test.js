@@ -1,14 +1,14 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Layer, RealtimeLayer as TrackerLayer } from 'mobility-toolbox-js/ol';
-import { Map, View } from 'ol';
-import MapAccessibility from './MapAccessibility';
+import React from "react";
+import { render } from "@testing-library/react";
+import { Layer, RealtimeLayer as TrackerLayer } from "mobility-toolbox-js/ol";
+import { Map, View } from "ol";
+import MapAccessibility from "./MapAccessibility";
 
 let map;
 let mapElement;
 const trackerLayer = new TrackerLayer({
   visible: true,
-  url: 'ws://foo.ch/style',
+  url: "ws://foo.ch/style",
 });
 const layer = new Layer({
   visible: true,
@@ -16,14 +16,14 @@ const layer = new Layer({
   children: [trackerLayer],
 });
 
-describe('MapAccessibility', () => {
+describe("MapAccessibility", () => {
   beforeEach(() => {
     TrackerLayer.prototype.purgeTrajectory = () => {
       return false;
     };
     TrackerLayer.prototype.renderTrajectoriesInternal = () => {};
     TrackerLayer.prototype.hasFeatureInfoAtCoordinate = jest.fn(() => true);
-    mapElement = document.createElement('div');
+    mapElement = document.createElement("div");
     mapElement.tabIndex = 1;
     mapElement.tabindex = 1;
     document.body.appendChild(mapElement);
@@ -37,8 +37,8 @@ describe('MapAccessibility', () => {
     trackerLayer.attachToMap(map);
     trackerLayer.trajectories = {
       1: {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [1, 0] },
+        type: "Feature",
+        geometry: { type: "Point", coordinates: [1, 0] },
         properties: {
           id: 1,
           train_id: 1,
@@ -47,8 +47,8 @@ describe('MapAccessibility', () => {
         },
       },
       2: {
-        type: 'Feature',
-        geometry: { type: 'Point', coordinates: [1, 0] },
+        type: "Feature",
+        geometry: { type: "Point", coordinates: [1, 0] },
         properties: {
           id: 2,
           train_id: 2,
@@ -66,21 +66,21 @@ describe('MapAccessibility', () => {
     document.body.removeChild(mapElement);
   });
 
-  test('should return null', () => {
+  test("should return null", () => {
     const { container } = render(
       <MapAccessibility map={map} layers={[layer]} />,
     );
     expect(container.innerHTML).toMatchSnapshot();
   });
 
-  test('should go through vehicles on TAB event', () => {
-    const event = new KeyboardEvent('keydown', { which: 9 });
-    const eventShift = new KeyboardEvent('keydown', {
+  test("should go through vehicles on TAB event", () => {
+    const event = new KeyboardEvent("keydown", { which: 9 });
+    const eventShift = new KeyboardEvent("keydown", {
       which: 9,
       shiftKey: true,
     });
-    const spy = jest.spyOn(event, 'preventDefault');
-    const spy2 = jest.spyOn(eventShift, 'preventDefault');
+    const spy = jest.spyOn(event, "preventDefault");
+    const spy2 = jest.spyOn(eventShift, "preventDefault");
     render(<MapAccessibility map={map} layers={[layer]} />);
     mapElement.focus();
     // Go to vehicle with smaller x coordinate
@@ -117,11 +117,11 @@ describe('MapAccessibility', () => {
     spy2.mockRestore();
   });
 
-  test('should trigger maps singleclick event if a vehicle is selected', () => {
-    const event = new KeyboardEvent('keydown', { which: 9 });
-    const eventEnter = new KeyboardEvent('keydown', { which: 13 });
-    const spy = jest.spyOn(eventEnter, 'preventDefault');
-    const spy2 = jest.spyOn(map, 'dispatchEvent');
+  test("should trigger maps singleclick event if a vehicle is selected", () => {
+    const event = new KeyboardEvent("keydown", { which: 9 });
+    const eventEnter = new KeyboardEvent("keydown", { which: 13 });
+    const spy = jest.spyOn(eventEnter, "preventDefault");
+    const spy2 = jest.spyOn(map, "dispatchEvent");
     render(<MapAccessibility map={map} layers={[layer]} />);
     mapElement.focus();
     // Go to vehicle with smaller x coordinate
@@ -129,14 +129,14 @@ describe('MapAccessibility', () => {
     document.dispatchEvent(eventEnter);
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy2).toHaveBeenCalledTimes(1);
-    expect(spy2.mock.calls[0][0].type).toBe('singleclick');
+    expect(spy2.mock.calls[0][0].type).toBe("singleclick");
     expect(spy2.mock.calls[0][0].map).toBe(map);
     expect(spy2.mock.calls[0][0].coordinate).toEqual([0, 1]);
   });
 
-  test('remove listener on unmount', () => {
-    const event = new KeyboardEvent('keydown', { which: 9 });
-    const spy = jest.spyOn(event, 'preventDefault');
+  test("remove listener on unmount", () => {
+    const event = new KeyboardEvent("keydown", { which: 9 });
+    const spy = jest.spyOn(event, "preventDefault");
     const { unmount } = render(<MapAccessibility map={map} layers={[layer]} />);
     unmount();
     mapElement.focus();

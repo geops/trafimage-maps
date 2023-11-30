@@ -1,15 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import { dvDay, dvNight } from '../../config/ch.sbb.direktverbindungen';
-import DataLink from '../../components/DataLink';
-import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';
+import React from "react";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
+import DataLink from "../../components/DataLink";
+import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
 
 const useStyles = makeStyles({
   legendItem: {
-    margin: '10px 0',
-    display: 'flex',
-    alignItems: 'center',
+    margin: "10px 0",
+    display: "flex",
+    alignItems: "center",
     gap: 10,
   },
 });
@@ -19,11 +19,11 @@ function DvTopicInfo() {
   const classes = useStyles();
   const legend = [dvDay, dvNight].map((layer) => (
     <div className={classes.legendItem} key={layer.key}>
-      <DvLegendLine color={layer.get('color')} />
+      <DvLegendLine color={layer.get("color")} />
       <div>{t(layer.name)}</div>
     </div>
   ));
-  const dataLink = dvDay.get('dataLink') && (
+  const dataLink = dvDay.get("dataLink") && (
     <>
       <hr />
       <p style={{ marginBottom: 0 }}>
@@ -31,14 +31,14 @@ function DvTopicInfo() {
       </p>
       <p>
         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
-          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+          {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
         </DataLink>
       </p>
     </>
   );
   return (
     <>
-      {i18n.language === 'de' && (
+      {i18n.language === "de" && (
         <div>
           <p>
             Die Karte bildet alle Fernverkehrsverbindungen ab, welche direkt ab
@@ -58,7 +58,7 @@ function DvTopicInfo() {
           {dataLink}
         </div>
       )}
-      {i18n.language === 'fr' && (
+      {i18n.language === "fr" && (
         <div>
           <p>
             La carte représente toutes les liaisons longue distance qui
@@ -79,7 +79,7 @@ function DvTopicInfo() {
           {dataLink}
         </div>
       )}
-      {i18n.language === 'en' && (
+      {i18n.language === "en" && (
         <div>
           <p>
             The map shows all long-distance services that run directly from
@@ -98,7 +98,7 @@ function DvTopicInfo() {
           {dataLink}
         </div>
       )}
-      {i18n.language === 'it' && (
+      {i18n.language === "it" && (
         <div>
           <p>
             La mappa mostra tutti i collegamenti a lunga percorrenza che

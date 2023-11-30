@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import Feature from 'ol/Feature';
-import RouteSchedule from 'react-spatial/components/RouteSchedule';
-import TralisLayer from '../../layers/TralisLayer';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import Feature from "ol/Feature";
+import RouteSchedule from "react-spatial/components/RouteSchedule";
+import TralisLayer from "../../layers/TralisLayer";
 
 function PunctualityPopup({ feature, layer }) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function PunctualityPopup({ feature, layer }) {
     };
 
     if (layer && feature) {
-      trainId = feature.get('train_id');
+      trainId = feature.get("train_id");
 
       if (trainId && layer instanceof TralisLayer) {
         // eslint-disable-next-line no-param-reassign

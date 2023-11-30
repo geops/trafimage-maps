@@ -1,13 +1,13 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useMemo, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { Styled } from '@geops/create-react-web-component';
-import { Layer } from 'mobility-toolbox-js/ol';
-import LayerService from './utils/LayerService';
-import TrafimageMaps from './components/TrafimageMaps';
-import styles from './WebComponent.scss';
-import { getTopicConfig } from './config/topics';
+import React, { useEffect, useMemo, useState, useRef } from "react";
+import PropTypes from "prop-types";
+import { Styled } from "@geops/create-react-web-component";
+import { Layer } from "mobility-toolbox-js/ol";
+import LayerService from "./utils/LayerService";
+import TrafimageMaps from "./components/TrafimageMaps";
+import styles from "./WebComponent.scss";
+import { getTopicConfig } from "./config/topics";
 
 const propTypes = {
   /**
@@ -180,16 +180,16 @@ const propTypes = {
 };
 
 const attributes = {
-  width: '100%',
-  height: '100%',
+  width: "100%",
+  height: "100%",
   center: undefined,
   zoom: undefined,
   maxExtent: undefined,
-  appName: 'wkp',
+  appName: "wkp",
   language: undefined,
   activeTopicKey: undefined,
   apiKey: undefined,
-  apiKeyName: 'key',
+  apiKeyName: "key",
   cartaroUrl: undefined,
   loginUrl: undefined,
   appBaseUrl: undefined,
@@ -201,7 +201,7 @@ const attributes = {
   mapsetUrl: undefined,
   shortenerUrl: undefined,
   drawUrl: undefined,
-  enableTracking: 'true',
+  enableTracking: "true",
   disableCookies: null,
   elements: undefined,
   layersVisibility: undefined,
@@ -261,7 +261,7 @@ function WebComponent(props) {
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(
-    () => maxExtent && maxExtent.split(',').map((float) => parseFloat(float)),
+    () => maxExtent && maxExtent.split(",").map((float) => parseFloat(float)),
     [maxExtent],
   );
 
@@ -297,9 +297,9 @@ function WebComponent(props) {
       // Override elements.
       if (elements) {
         const obj = {};
-        elements.split(',').forEach((elt) => {
-          const [key, value] = elt.split('=');
-          obj[key] = value === 'true';
+        elements.split(",").forEach((elt) => {
+          const [key, value] = elt.split("=");
+          obj[key] = value === "true";
         });
         // eslint-disable-next-line no-param-reassign
         topic.elements = { ...topic.elements, ...obj };
@@ -321,9 +321,9 @@ function WebComponent(props) {
       // Override layers visiblity.
       if (layersVisibility && topic.layers.length) {
         const obj = {};
-        layersVisibility.split(',').forEach((elt) => {
-          const [key, value] = elt.split('=');
-          obj[key] = value === 'true';
+        layersVisibility.split(",").forEach((elt) => {
+          const [key, value] = elt.split("=");
+          obj[key] = value === "true";
         });
         const layerService = new LayerService(topic.layers);
         const layers = layerService.getLayersAsFlatArray();
@@ -350,9 +350,9 @@ function WebComponent(props) {
               layer.visible = value;
 
               // Hide other base layers
-              if (layer.get('isBaseLayer') && value) {
+              if (layer.get("isBaseLayer") && value) {
                 rootLayer.children
-                  .filter((l) => l.get('isBaseLayer'))
+                  .filter((l) => l.get("isBaseLayer"))
                   .forEach((l) => {
                     if (l.key !== key) {
                       // eslint-disable-next-line no-param-reassign
@@ -365,7 +365,7 @@ function WebComponent(props) {
         });
 
         rootLayer.children
-          .filter((layer) => layer.get('isBaseLayer'))
+          .filter((layer) => layer.get("isBaseLayer"))
           .forEach((layer) => {
             // When the base layer refers to a MapboxLayer we have to update the style of the
             // mapbox layer too, too avoid seeing the previous background first.
@@ -389,7 +389,7 @@ function WebComponent(props) {
     <Styled styles={styles}>
       <div
         style={{
-          position: 'relative',
+          position: "relative",
           width,
           height,
         }}
@@ -403,9 +403,9 @@ function WebComponent(props) {
           zoom={floatZoom}
           maxExtent={extentArray}
           center={arrayCenter}
-          embedded={embedded === 'true'}
-          enableTracking={enableTracking === 'true'}
-          disableCookies={disableCookies === 'true'}
+          embedded={embedded === "true"}
+          enableTracking={enableTracking === "true"}
+          disableCookies={disableCookies === "true"}
           domainConsent={domainConsent}
           domainConsentId={domainConsentId}
           language={language}

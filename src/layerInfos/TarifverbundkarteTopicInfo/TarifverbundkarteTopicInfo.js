@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-import TarifVerbundLegend from './TarifVerbundLegend';
-import DataLink from '../../components/DataLink';
+import TarifVerbundLegend from "./TarifVerbundLegend";
+import DataLink from "../../components/DataLink";
 
 const propTypes = {
   language: PropTypes.string.isRequired,

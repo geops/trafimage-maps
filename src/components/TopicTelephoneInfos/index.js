@@ -1,1 +1,1 @@
-export { default } from './TopicTelephoneInfos';
+export { default } from "./TopicTelephoneInfos";

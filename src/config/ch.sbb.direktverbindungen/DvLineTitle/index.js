@@ -1,1 +1,1 @@
-export { default } from './DvLineTitle';
+export { default } from "./DvLineTitle";

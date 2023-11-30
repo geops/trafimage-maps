@@ -1,21 +1,21 @@
-import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import { Box, IconButton } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { MdClose } from 'react-icons/md';
-import { DV_KEY } from '../../../utils/constants';
-import useIsMobile from '../../../utils/useIsMobile';
-import { setFeatureInfo } from '../../../model/app/actions';
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import { Box, IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { MdClose } from "react-icons/md";
+import { DV_KEY } from "../../../utils/constants";
+import useIsMobile from "../../../utils/useIsMobile";
+import { setFeatureInfo } from "../../../model/app/actions";
 
 const useStyles = makeStyles(() => {
   return {
     listHeader: {
       paddingLeft: 15,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      backgroundColor: '#f5f5f5',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: "#f5f5f5",
       borderBottom: `1px solid #F0F0F0`,
     },
     closeButton: {
@@ -31,9 +31,9 @@ export const DvFeatureInfoTitleString = () => {
     () => layers.find((l) => l.key === `${DV_KEY}.main`),
     [layers],
   );
-  const stationName = dvMainLayer?.highlightedStation?.get('name');
-  return `${t('Direktverbindungen')} ${
-    stationName ? ` ${t('über')} ${stationName}` : ''
+  const stationName = dvMainLayer?.highlightedStation?.get("name");
+  return `${t("Direktverbindungen")} ${
+    stationName ? ` ${t("über")} ${stationName}` : ""
   }`;
 };
 
@@ -58,13 +58,13 @@ function DvFeatureInfoTitle() {
       <IconButton
         size="medium"
         className={`${classes.closeButton} wkp-close-bt`}
-        title={t('Schliessen')}
+        title={t("Schliessen")}
         onClick={() => {
           dvMainLayer.highlightStation();
           dispatch(setFeatureInfo());
         }}
       >
-        <MdClose focusable={false} alt={t('Schliessen')} />
+        <MdClose focusable={false} alt={t("Schliessen")} />
       </IconButton>
     </Box>
   );

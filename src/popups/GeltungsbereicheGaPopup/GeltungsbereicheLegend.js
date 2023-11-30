@@ -1,25 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-const dashArray = '1 7';
+const dashArray = "1 7";
 const lineWidth = 3.5;
-const colorYellow = 'rgba(255, 242, 0, 1)';
-const colorRed = 'rgba(235, 0, 0, 1)';
-const colorBlue = 'rgba(42, 102, 152, 1)';
-const colorBlack = 'rgba(0, 0, 0, 1)';
-const colorGray = 'rgba(180,180,180, 1)';
+const colorYellow = "rgba(255, 242, 0, 1)";
+const colorRed = "rgba(235, 0, 0, 1)";
+const colorBlue = "rgba(42, 102, 152, 1)";
+const colorBlack = "rgba(0, 0, 0, 1)";
+const colorGray = "rgba(180,180,180, 1)";
 
 // Be aware that order is important here!
 export const legends = [
   {
-    mots: ['rail', 'tram', 'subway'],
+    mots: ["rail", "tram", "subway"],
     validity: [
       {
         value: 100,
         paint: [
           {
-            'line-color': colorRed,
-            'line-width': lineWidth,
+            "line-color": colorRed,
+            "line-width": lineWidth,
           },
         ],
       },
@@ -27,9 +27,9 @@ export const legends = [
         value: 50,
         paint: [
           {
-            'line-color': colorRed,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorRed,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
@@ -37,27 +37,27 @@ export const legends = [
         value: 25,
         paint: [
           {
-            'line-color': colorRed,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorRed,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
     ],
   },
   {
-    mots: ['bus'],
+    mots: ["bus"],
     validity: [
       {
         value: 100,
         paint: [
           {
-            'line-color': 'rgba(74, 74, 74, 1)',
-            'line-width': lineWidth + 0.5,
+            "line-color": "rgba(74, 74, 74, 1)",
+            "line-width": lineWidth + 0.5,
           },
           {
-            'line-color': colorYellow,
-            'line-width': lineWidth,
+            "line-color": colorYellow,
+            "line-width": lineWidth,
           },
         ],
       },
@@ -65,14 +65,14 @@ export const legends = [
         value: 50,
         paint: [
           {
-            'line-color': 'rgba(74, 74, 74, 1)',
-            'line-width': lineWidth + 0.5,
-            'line-dasharray': dashArray,
+            "line-color": "rgba(74, 74, 74, 1)",
+            "line-width": lineWidth + 0.5,
+            "line-dasharray": dashArray,
           },
           {
-            'line-color': colorYellow,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorYellow,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
@@ -80,28 +80,28 @@ export const legends = [
         value: 25,
         paint: [
           {
-            'line-color': 'rgba(74, 74, 74, 1)',
-            'line-width': lineWidth + 0.5,
-            'line-dasharray': dashArray,
+            "line-color": "rgba(74, 74, 74, 1)",
+            "line-width": lineWidth + 0.5,
+            "line-dasharray": dashArray,
           },
           {
-            'line-color': colorYellow,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorYellow,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
     ],
   },
   {
-    mots: ['gondola', 'funicular'],
+    mots: ["gondola", "funicular"],
     validity: [
       {
         value: 100,
         paint: [
           {
-            'line-color': colorBlack,
-            'line-width': lineWidth,
+            "line-color": colorBlack,
+            "line-width": lineWidth,
           },
         ],
       },
@@ -109,9 +109,9 @@ export const legends = [
         value: 50,
         paint: [
           {
-            'line-color': colorBlack,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorBlack,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
@@ -119,23 +119,23 @@ export const legends = [
         value: 25,
         paint: [
           {
-            'line-color': colorBlack,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorBlack,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
     ],
   },
   {
-    mots: ['ferry'],
+    mots: ["ferry"],
     validity: [
       {
         value: 100,
         paint: [
           {
-            'line-color': colorBlue,
-            'line-width': lineWidth,
+            "line-color": colorBlue,
+            "line-width": lineWidth,
           },
         ],
       },
@@ -143,9 +143,9 @@ export const legends = [
         value: 50,
         paint: [
           {
-            'line-color': colorBlue,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorBlue,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
@@ -153,9 +153,9 @@ export const legends = [
         value: 25,
         paint: [
           {
-            'line-color': colorBlue,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorBlue,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
@@ -163,9 +163,9 @@ export const legends = [
         value: -1,
         paint: [
           {
-            'line-color': colorGray,
-            'line-width': lineWidth,
-            'line-dasharray': dashArray,
+            "line-color": colorGray,
+            "line-width": lineWidth,
+            "line-dasharray": dashArray,
           },
         ],
       },
@@ -178,8 +178,8 @@ export const legends = [
         value: null,
         paint: [
           {
-            'line-color': colorGray,
-            'line-width': lineWidth,
+            "line-color": colorGray,
+            "line-width": lineWidth,
           },
         ],
       },
@@ -206,30 +206,30 @@ function GeltungsbereicheLegend({ mot, valid, background }) {
   if (!legend) {
     // eslint-disable-next-line no-console
     console.warn(
-      'No legend found! Check feature data and extend legend options if necessary',
+      "No legend found! Check feature data and extend legend options if necessary",
     );
   }
 
   return (
     <svg
-      viewBox={`0 0 50 ${background ? '50' : '10'}`}
+      viewBox={`0 0 50 ${background ? "50" : "10"}`}
       width="50"
-      height={background ? '50' : '10'}
+      height={background ? "50" : "10"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {background ? <circle cx="25" cy="25" r="25" fill="#f5f5f5" /> : null}
       {legend?.paint.map((paint) => {
         return (
           <line
-            key={paint['line-dasharray'] + paint['line-color']}
+            key={paint["line-dasharray"] + paint["line-color"]}
             x1="0"
-            y1={background ? '25' : '5'}
+            y1={background ? "25" : "5"}
             x2="50"
-            y2={background ? '25' : '5'}
-            stroke={paint['line-color']}
-            strokeWidth={paint['line-width']}
-            strokeDasharray={paint['line-dasharray']}
-            strokeLinecap={paint['line-dasharray'] && 'round'}
+            y2={background ? "25" : "5"}
+            stroke={paint["line-color"]}
+            strokeWidth={paint["line-width"]}
+            strokeDasharray={paint["line-dasharray"]}
+            strokeLinecap={paint["line-dasharray"] && "round"}
           />
         );
       })}

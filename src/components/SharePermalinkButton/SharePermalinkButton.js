@@ -1,10 +1,10 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
-import { Typography } from '@mui/material';
-import PermalinkInput from '../PermalinkInput';
-import PermalinkButton from '../PermalinkButton';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { Typography } from "@mui/material";
+import PermalinkInput from "../PermalinkInput";
+import PermalinkButton from "../PermalinkButton";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -25,7 +25,7 @@ function SharePermalinkButton({ buttonProps }) {
             <PermalinkInput value={locationHref} />
             <Typography className={classes.margin}>
               {t(
-                'Sie können auch den Link aus der Adresszeile des Browsers kopieren.',
+                "Sie können auch den Link aus der Adresszeile des Browsers kopieren.",
               )}
             </Typography>
           </>

@@ -1,24 +1,24 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import Zoom from 'react-spatial/components/Zoom';
-import Geolocation from 'react-spatial/components/Geolocation';
-import FitExtent from 'react-spatial/components/FitExtent';
-import { ZoomSlider } from 'ol/control';
-import { unByKey } from 'ol/Observable';
-import { Style, Icon } from 'ol/style';
-import { ReactComponent as SwissBounds } from '../../img/swissbounds.svg';
-import { ReactComponent as ZoomOut } from '../../img/minus.svg';
-import { ReactComponent as ZoomIn } from '../../img/plus.svg';
-import { ReactComponent as MenuOpenImg } from '../../img/sbb/040_hamburgermenu_102_36.svg';
-import { ReactComponent as MenuClosedImg } from '../../img/sbb/040_schliessen_104_36.svg';
-import Geolocate from '../../img/Geolocate';
-import geolocateMarkerWithDirection from '../../img/geolocate_marker_direction.svg';
-import geolocateMarker from '../../img/geolocate_marker.svg';
-import { SWISS_EXTENT } from '../../utils/constants';
-import { setDisplayMenu } from '../../model/app/actions';
-import './MapControls.scss';
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import Zoom from "react-spatial/components/Zoom";
+import Geolocation from "react-spatial/components/Geolocation";
+import FitExtent from "react-spatial/components/FitExtent";
+import { ZoomSlider } from "ol/control";
+import { unByKey } from "ol/Observable";
+import { Style, Icon } from "ol/style";
+import { ReactComponent as SwissBounds } from "../../img/swissbounds.svg";
+import { ReactComponent as ZoomOut } from "../../img/minus.svg";
+import { ReactComponent as ZoomIn } from "../../img/plus.svg";
+import { ReactComponent as MenuOpenImg } from "../../img/sbb/040_hamburgermenu_102_36.svg";
+import { ReactComponent as MenuClosedImg } from "../../img/sbb/040_schliessen_104_36.svg";
+import Geolocate from "../../img/Geolocate";
+import geolocateMarkerWithDirection from "../../img/geolocate_marker_direction.svg";
+import geolocateMarker from "../../img/geolocate_marker.svg";
+import { SWISS_EXTENT } from "../../utils/constants";
+import { setDisplayMenu } from "../../model/app/actions";
+import "./MapControls.scss";
 
 const propTypes = {
   geolocation: PropTypes.bool,
@@ -65,17 +65,17 @@ function MapControls({
       if (feature) {
         if (evt.webkitCompassHeading) {
           // For iOS
-          feature.set('rotation', degreesToRadians(evt.webkitCompassHeading));
+          feature.set("rotation", degreesToRadians(evt.webkitCompassHeading));
         } else if (evt.alpha || evt.alpha === 0) {
           if (evt.absolute) {
-            feature.set('rotation', degreesToRadians(360 - evt.alpha));
+            feature.set("rotation", degreesToRadians(360 - evt.alpha));
           } else {
             // not absolute event; e.g. firefox, lets disable everything again
             window.removeEventListener(
-              'deviceorientation',
+              "deviceorientation",
               deviceOrientationListener,
             );
-            feature.set('rotation', false);
+            feature.set("rotation", false);
           }
         }
       }
@@ -89,22 +89,22 @@ function MapControls({
       setGeolocating(false);
       setGeolocFeatureWithRef();
       window.removeEventListener(
-        'deviceorientation',
+        "deviceorientation",
         deviceOrientationListener,
       );
       return;
     }
-    if ('ondeviceorientationabsolute' in window) {
+    if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(
-        'deviceorientationabsolute',
+        "deviceorientationabsolute",
         deviceOrientationListener,
       );
-    } else if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    } else if (typeof DeviceOrientationEvent.requestPermission === "function") {
       DeviceOrientationEvent.requestPermission()
         .then((permissionState) => {
-          if (permissionState === 'granted') {
+          if (permissionState === "granted") {
             window.addEventListener(
-              'deviceorientation',
+              "deviceorientation",
               deviceOrientationListener,
               true,
             );
@@ -112,7 +112,7 @@ function MapControls({
         })
         .catch(alert);
     } else {
-      window.addEventListener('deviceorientation', deviceOrientationListener);
+      window.addEventListener("deviceorientation", deviceOrientationListener);
     }
   }, [deviceOrientationListener, geolocating]);
 
@@ -125,7 +125,7 @@ function MapControls({
         setGeolocFeatureWithRef(feature);
       }
       const style = new Style();
-      const rotation = feature.get('rotation');
+      const rotation = feature.get("rotation");
       style.setImage(
         new Icon({
           src:
@@ -134,8 +134,8 @@ function MapControls({
               : geolocateMarker,
           rotation: rotation || 0,
           anchor: [21, 46],
-          anchorXUnits: 'pixels',
-          anchorYUnits: 'pixels',
+          anchorXUnits: "pixels",
+          anchorYUnits: "pixels",
         }),
       );
       return style;
@@ -147,7 +147,7 @@ function MapControls({
     // Remove geolocate listener on component unmount
     return () =>
       window.removeEventListener(
-        'deviceorientation',
+        "deviceorientation",
         deviceOrientationListener,
       );
   }, [deviceOrientationListener]);
@@ -156,7 +156,7 @@ function MapControls({
     let key = null;
     // on resize reload the zoomSlider control
     if (zoomSlider) {
-      key = map.on('change:size', () => {
+      key = map.on("change:size", () => {
         const control = map
           .getControls()
           .getArray()
@@ -192,15 +192,15 @@ function MapControls({
         zoomOutChildren={<ZoomOut />}
         zoomSlider={zoomSlider}
         titles={{
-          zoomIn: t('Hineinzoomen'),
-          zoomOut: t('Rauszoomen'),
+          zoomIn: t("Hineinzoomen"),
+          zoomOut: t("Rauszoomen"),
         }}
       />
       {geolocation && (
         <Geolocation
-          title={t('Lokalisieren')}
+          title={t("Lokalisieren")}
           className={`wkp-geolocation${
-            geolocating ? ' wkp-geolocation-active' : ''
+            geolocating ? " wkp-geolocation-active" : ""
           }`}
           map={map}
           noCenterAfterDrag
@@ -214,7 +214,7 @@ function MapControls({
       {fitExtent && (
         <FitExtent
           map={map}
-          title={t('Ganze Schweiz')}
+          title={t("Ganze Schweiz")}
           extent={SWISS_EXTENT}
           className="wkp-fit-extent"
         >

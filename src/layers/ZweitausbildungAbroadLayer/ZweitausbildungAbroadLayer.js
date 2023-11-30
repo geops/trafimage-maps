@@ -1,12 +1,12 @@
-import { VectorLayer } from 'mobility-toolbox-js/ol';
-import Fill from 'ol/style/Fill';
-import GeoJSON from 'ol/format/GeoJSON';
-import Icon from 'ol/style/Icon';
-import OLVectorLayer from 'ol/layer/Vector';
-import OLVectorSource from 'ol/source/Vector';
-import Style from 'ol/style/Style';
-import Text from 'ol/style/Text';
-import featureCollection from './FeatureCollection.json';
+import { VectorLayer } from "mobility-toolbox-js/ol";
+import Fill from "ol/style/Fill";
+import GeoJSON from "ol/format/GeoJSON";
+import Icon from "ol/style/Icon";
+import OLVectorLayer from "ol/layer/Vector";
+import OLVectorSource from "ol/source/Vector";
+import Style from "ol/style/Style";
+import Text from "ol/style/Text";
+import featureCollection from "./FeatureCollection.json";
 
 /**
  * Layer for Zweitausbildung Abroad
@@ -51,7 +51,7 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
 
   style(feature, resolution) {
     const text = feature.get(`title_${this.language}`);
-    const hover = feature.get('hoverStyle');
+    const hover = feature.get("hoverStyle");
 
     const fontSize = hover ? 20 : 16;
 
@@ -61,11 +61,11 @@ class ZweitausbildungAbroadLayer extends VectorLayer {
       this.styleCache[cacheKey] = [
         new Style({
           text: new Text({
-            textBaseline: 'middle',
-            textAlign: 'center',
+            textBaseline: "middle",
+            textAlign: "center",
             text,
             fill: new Fill({
-              color: 'white',
+              color: "white",
             }),
             font: `${fontSize}px Arial, Verdana, Helvetica, sans-serif`,
           }),

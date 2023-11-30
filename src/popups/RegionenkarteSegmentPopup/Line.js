@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   title: {
     paddingBottom: theme.spacing(2),
-    flex: '0 0',
+    flex: "0 0",
   },
   km: {
     paddingLeft: theme.spacing(1),
@@ -28,10 +28,10 @@ function Line({ feature }) {
   return (
     <div className={classes.title}>
       <div>
-        {!!lineNumber && `${t('Linie')} ${lineNumber}, `}
-        {bpStart && bpEnd && `${t('BPs')} ${bpStart} - ${bpEnd}`}
+        {!!lineNumber && `${t("Linie")} ${lineNumber}, `}
+        {bpStart && bpEnd && `${t("BPs")} ${bpStart} - ${bpEnd}`}
         {((bpStart && !bpEnd) || (!bpStart && bpEnd)) &&
-          `${t('BP')} ${bpStart || bpEnd}`}
+          `${t("BP")} ${bpStart || bpEnd}`}
       </div>
       <div className={classes.km}>{`km ${kmStart} - ${kmEnd}`}</div>
     </div>

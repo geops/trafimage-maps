@@ -1,19 +1,19 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { ThemeProvider, StyledEngineProvider } from '@mui/material';
-import { render, fireEvent } from '@testing-library/react';
-import { MatomoProvider } from '@jonkoops/matomo-tracker-react';
-import theme from '../../themes/default';
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { ThemeProvider, StyledEngineProvider } from "@mui/material";
+import { render, fireEvent } from "@testing-library/react";
+import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
+import theme from "../../themes/default";
 
-import Draw from '.';
+import Draw from ".";
 
-describe('Draw', () => {
+describe("Draw", () => {
   const mockStore = configureStore([thunk]);
   let store;
 
-  test('should render only one disabled button', () => {
+  test("should render only one disabled button", () => {
     store = mockStore({
       map: {},
       app: { drawIds: {} },
@@ -28,14 +28,14 @@ describe('Draw', () => {
         </Provider>
       </ThemeProvider>,
     );
-    expect(container.querySelectorAll('button[disabled]').length).toBe(1);
-    expect(container.querySelectorAll('button:not([disabled])').length).toBe(2);
+    expect(container.querySelectorAll("button[disabled]").length).toBe(1);
+    expect(container.querySelectorAll("button:not([disabled])").length).toBe(2);
     expect(
-      container.querySelectorAll('div[role=button]:not(.Mui-disabled)').length,
+      container.querySelectorAll("div[role=button]:not(.Mui-disabled)").length,
     ).toBe(1);
   });
 
-  test('should render three disabled buttons', () => {
+  test("should render three disabled buttons", () => {
     store = mockStore({
       map: {},
       app: {},
@@ -50,18 +50,18 @@ describe('Draw', () => {
         </Provider>
       </ThemeProvider>,
     );
-    expect(container.querySelectorAll('button:not([disabled])').length).toBe(1);
-    expect(container.querySelectorAll('button[disabled]').length).toBe(2);
+    expect(container.querySelectorAll("button:not([disabled])").length).toBe(1);
+    expect(container.querySelectorAll("button[disabled]").length).toBe(2);
     expect(
-      container.querySelectorAll('div.Mui-disabled[role=button]').length,
+      container.querySelectorAll("div.Mui-disabled[role=button]").length,
     ).toBe(1);
   });
 
-  test('should send track event on draw add button', () => {
+  test("should send track event on draw add button", () => {
     window.open = jest.fn();
     store = mockStore({
       map: {},
-      app: { activeTopic: { key: 'foo' } },
+      app: { activeTopic: { key: "foo" } },
     });
     const matomo = {
       pushInstruction: jest.fn(),
@@ -80,14 +80,14 @@ describe('Draw', () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    fireEvent.click(container.querySelector('button:not([disabled])'));
+    fireEvent.click(container.querySelector("button:not([disabled])"));
     expect(matomo.trackEvent).toBeCalledWith({
-      action: 'clickNewDraw',
-      category: 'foo',
+      action: "clickNewDraw",
+      category: "foo",
     });
     expect(window.open).toBeCalledWith(
-      'undefined?parent=http%3A%2F%2Flocalhost%2F',
-      '_self',
+      "undefined?parent=http%3A%2F%2Flocalhost%2F",
+      "_self",
     );
     window.open.mockRestore();
   });

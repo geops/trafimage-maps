@@ -1,21 +1,21 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { Layer } from 'mobility-toolbox-js/ol';
-import { render } from '@testing-library/react';
-import OLLayer from 'ol/layer/Layer';
-import DrawLayerMenu from './DrawLayerMenu';
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { Layer } from "mobility-toolbox-js/ol";
+import { render } from "@testing-library/react";
+import OLLayer from "ol/layer/Layer";
+import DrawLayerMenu from "./DrawLayerMenu";
 
-describe('DrawLayerMenu', () => {
+describe("DrawLayerMenu", () => {
   const mockStore = configureStore([thunk]);
   let store;
   const drawLayer = new Layer({
     olLayer: new OLLayer({}),
   });
 
-  describe('should match snapshot.', () => {
-    test('should return null', () => {
+  describe("should match snapshot.", () => {
+    test("should return null", () => {
       store = mockStore({
         map: {
           layers: [],
@@ -31,14 +31,14 @@ describe('DrawLayerMenu', () => {
       expect(container.innerHTML).toMatchSnapshot();
     });
 
-    test('using the layerService property', () => {
+    test("using the layerService property", () => {
       store = mockStore({
         map: {
           drawLayer,
           layers: [],
         },
         app: {
-          drawIds: { admin_id: 'foo' },
+          drawIds: { admin_id: "foo" },
         },
       });
       const { container } = render(
@@ -50,7 +50,7 @@ describe('DrawLayerMenu', () => {
     });
   });
 
-  test('display only draw layer', () => {
+  test("display only draw layer", () => {
     const layers = [
       new Layer({ olLayer: new OLLayer({}) }),
       store.getState().map.drawLayer,
@@ -61,7 +61,7 @@ describe('DrawLayerMenu', () => {
         layers,
       },
       app: {
-        drawIds: { admin_id: 'foo' },
+        drawIds: { admin_id: "foo" },
       },
     });
     const { container } = render(
@@ -70,6 +70,6 @@ describe('DrawLayerMenu', () => {
       </Provider>,
     );
     expect(layers.length).toBe(2);
-    expect(container.querySelectorAll('.rs-layer-tree-item').length).toBe(1);
+    expect(container.querySelectorAll(".rs-layer-tree-item").length).toBe(1);
   });
 });

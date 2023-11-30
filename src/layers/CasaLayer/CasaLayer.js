@@ -1,14 +1,14 @@
-import deepmerge from 'deepmerge';
+import deepmerge from "deepmerge";
 import {
   Style,
   Fill as FillStyle,
   Icon as IconStyle,
   Stroke as StrokeStyle,
   Text as TextStyle,
-} from 'ol/style';
-import { MultiLineString, LineString, Point } from 'ol/geom';
-import { VectorLayer } from 'mobility-toolbox-js/ol';
-import ArrowImg from '../../img/arrow.png';
+} from "ol/style";
+import { MultiLineString, LineString, Point } from "ol/geom";
+import { VectorLayer } from "mobility-toolbox-js/ol";
+import ArrowImg from "../../img/arrow.png";
 
 /**
  * @typedef {Object} styleObject
@@ -65,7 +65,7 @@ class CasaLayer extends VectorLayer {
 
     this.apiKeyName = options.apiKeyName;
 
-    this.projection = options.projection || 'EPSG:3857';
+    this.projection = options.projection || "EPSG:3857";
 
     this.styleFunction = options.styleFunction || (() => ({}));
 
@@ -90,8 +90,8 @@ class CasaLayer extends VectorLayer {
         })
         .filter(
           (feature) =>
-            feature.get('isClickable') ||
-            (feature.get('route') && feature.get('route').isClickable),
+            feature.get("isClickable") ||
+            (feature.get("route") && feature.get("route").isClickable),
         );
     }
 
@@ -120,7 +120,7 @@ class CasaLayer extends VectorLayer {
    * and the coordinate.
    */
   onMouseOver(callback) {
-    if (callback && typeof callback === 'function') {
+    if (callback && typeof callback === "function") {
       this.mouseOverCallbacks.push(callback);
     }
   }
@@ -237,7 +237,7 @@ class CasaLayer extends VectorLayer {
     if (style.text) {
       olStyles.text = new Style({
         text: new TextStyle({
-          font: style.text.font || 'bold 13px Arial',
+          font: style.text.font || "bold 13px Arial",
           fill: new FillStyle({
             color: style.text.color,
           }),
@@ -293,7 +293,7 @@ class CasaLayer extends VectorLayer {
    */
   attachToMap(map) {
     super.attachToMap(map);
-    this.map.on('pointermove', (e) => {
+    this.map.on("pointermove", (e) => {
       const feature = this.map.forEachFeatureAtPixel(e.pixel, (f) => f);
       if (feature !== this.hoverFeature) {
         this.hoverFeature = feature;

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 function TopicTelephoneInfos() {
   const { t } = useTranslation();
@@ -10,7 +10,7 @@ function TopicTelephoneInfos() {
 
   return (
     <div className="wkp-tel-infos" tabIndex={0} role="button">
-      {t('telephone_information', {
+      {t("telephone_information", {
         name: t(name),
       })}
     </div>

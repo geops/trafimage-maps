@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@mui/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
@@ -10,15 +10,15 @@ const propTypes = {
 
 const useStyles = makeStyles(() => ({
   legend: {
-    overflowY: 'auto',
+    overflowY: "auto",
     height: 120,
-    boxShadow: '-1px 1px 2px rgba(0, 0, 0, 0.4)',
+    boxShadow: "-1px 1px 2px rgba(0, 0, 0, 0.4)",
   },
 }));
 
 function ZweitausbildungRoutesSubLayerInfo({ properties, staticFilesUrl }) {
   const { t } = useTranslation();
-  const { infos } = properties.get('zweitausbildung');
+  const { infos } = properties.get("zweitausbildung");
   const { title, desc, legend } = infos;
   const classes = useStyles();
 
@@ -30,7 +30,7 @@ function ZweitausbildungRoutesSubLayerInfo({ properties, staticFilesUrl }) {
         <img
           src={`${staticFilesUrl}/img/layers/zweitausbildung/${legend.image}`}
           draggable="false"
-          alt={t('Kein Bildtext')}
+          alt={t("Kein Bildtext")}
         />
       </div>
     </div>

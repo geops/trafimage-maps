@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -16,7 +16,7 @@ function BusLinePopup({ feature }) {
         }
         return (
           <div key={key}>
-            <div>{key.replace('lines ', '')}</div>
+            <div>{key.replace("lines ", "")}</div>
             <div>{value}</div>
           </div>
         );

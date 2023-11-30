@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useMatomo } from '@jonkoops/matomo-tracker-react';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useMatomo } from "@jonkoops/matomo-tracker-react";
 import {
   LS_MATOMO_USER_SESSION_TIMER,
   LS_MATOMO_TOPIC_VISITED,
   MATOMO_TOPIC_CHANGE_ACTION,
   MATOMO_TOPIC_CHANGE_TIMER,
-} from '../../utils/constants';
+} from "../../utils/constants";
 
 function MatomoTracker() {
   const { trackPageView, trackEvent, pushInstruction } = useMatomo();
@@ -20,18 +20,18 @@ function MatomoTracker() {
       return;
     }
 
-    pushInstruction('setConsentGiven');
+    pushInstruction("setConsentGiven");
 
     if (disableCookies) {
       // it's important that this instruction happens after the setConsentGiven instruction.
-      pushInstruction('disableCookies');
+      pushInstruction("disableCookies");
     }
 
     trackPageView();
 
     // Start the clock to avoid duplicate 'User topic change' event tracking.
     localStorage?.setItem(LS_MATOMO_USER_SESSION_TIMER, Date.now());
-    localStorage?.setItem(LS_MATOMO_TOPIC_VISITED, '');
+    localStorage?.setItem(LS_MATOMO_TOPIC_VISITED, "");
   }, [disableCookies, consentGiven, trackPageView, pushInstruction]);
 
   // Track topic change event within 30 min.
@@ -40,7 +40,7 @@ function MatomoTracker() {
       return;
     }
     const startDate = localStorage?.getItem(LS_MATOMO_USER_SESSION_TIMER) || 0;
-    const topicVisited = localStorage?.getItem(LS_MATOMO_TOPIC_VISITED) || '';
+    const topicVisited = localStorage?.getItem(LS_MATOMO_TOPIC_VISITED) || "";
 
     // A matomo user session is 30 min by default.
     if (

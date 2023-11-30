@@ -1,1 +1,1 @@
-export { default } from './BeleuchtungTopicInfo';
+export { default } from "./BeleuchtungTopicInfo";

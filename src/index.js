@@ -9,9 +9,9 @@
 // import '@webcomponents/custom-elements';
 // import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter';
 // import 'proxy-polyfill';
-import { ReactWebComponent } from '@geops/create-react-web-component';
+import { ReactWebComponent } from "@geops/create-react-web-component";
 // import r2wc from '@r2wc/react-to-web-component';
-import WebComponent from './WebComponent';
+import WebComponent from "./WebComponent";
 
 // const WebComp = r2wc(WebComponent, { props: WebComponent.attributes });
 
@@ -19,4 +19,4 @@ import WebComponent from './WebComponent';
 
 ReactWebComponent.setAttributes(WebComponent.attributes);
 ReactWebComponent.setProperties(WebComponent.defaultProps);
-ReactWebComponent.render(WebComponent, 'trafimage-maps', { shadow: false });
+ReactWebComponent.render(WebComponent, "trafimage-maps", { shadow: false });

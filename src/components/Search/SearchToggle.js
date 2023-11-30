@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import { setSearchOpen } from '../../model/app/actions';
-import { ReactComponent as SearchIcon } from './Search.svg';
-import SearchInfo from './SearchInfo';
+import PropTypes from "prop-types";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import { setSearchOpen } from "../../model/app/actions";
+import { ReactComponent as SearchIcon } from "./Search.svg";
+import SearchInfo from "./SearchInfo";
 
 const propTypes = {
   children: PropTypes.node,
@@ -23,7 +23,7 @@ function SearchToggle({ popupAnchor, children }) {
   return (
     <div>
       <div
-        className={`wkp-search-toggle-container${searchOpen ? '--open' : ''}`}
+        className={`wkp-search-toggle-container${searchOpen ? "--open" : ""}`}
       >
         {children}
         <SearchInfo anchorEl={popupAnchor} />
@@ -35,7 +35,7 @@ function SearchToggle({ popupAnchor, children }) {
           onClick={() => dispatch(setSearchOpen(true))}
         >
           <SearchIcon />
-          <span>{t('Suchen')}</span>
+          <span>{t("Suchen")}</span>
         </button>
       )}
     </div>

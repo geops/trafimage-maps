@@ -1,21 +1,21 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { ReactComponent as Loader } from '../../img/loader.svg';
-import PermalinkInput from '../PermalinkInput';
+import React from "react";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { ReactComponent as Loader } from "../../img/loader.svg";
+import PermalinkInput from "../PermalinkInput";
 
 const useStyles = makeStyles(() => ({
   root: {
-    position: 'relative',
+    position: "relative",
   },
   loader: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
   },
 }));
 
@@ -35,7 +35,7 @@ function DrawEditLinkInput() {
       {isLoading && (
         <Typography variant="subtitle1">
           <span className={classes.loader}>
-            <Loader /> <span>{t('Laden...')}</span>
+            <Loader /> <span>{t("Laden...")}</span>
           </span>
         </Typography>
       )}

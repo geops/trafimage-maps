@@ -1,24 +1,24 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { Layer } from 'mobility-toolbox-js/ol';
-import { Provider } from 'react-redux';
-import TopicMenu from './TopicMenu';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { Layer } from "mobility-toolbox-js/ol";
+import { Provider } from "react-redux";
+import TopicMenu from "./TopicMenu";
 
 const layer1 = new Layer({
-  name: 'parent1',
+  name: "parent1",
   children: [
     new Layer({
-      name: 'child',
+      name: "child",
     }),
   ],
 });
 
 const layer2 = new Layer({
-  name: 'layer2',
+  name: "layer2",
 });
 
-describe('TopicMenu', () => {
-  it('renders the topic name and not layers when topic is not active', () => {
+describe("TopicMenu", () => {
+  it("renders the topic name and not layers when topic is not active", () => {
     const store = global.mockStore({
       map: { layers: [layer1, layer2] },
       app: {
@@ -28,17 +28,17 @@ describe('TopicMenu', () => {
     });
     render(
       <Provider store={store}>
-        <TopicMenu topic={{ name: 'topicName', key: 'topic' }} />
+        <TopicMenu topic={{ name: "topicName", key: "topic" }} />
       </Provider>,
     );
-    expect(screen.getByText('topicName')).toBeInTheDocument();
-    expect(screen.queryByText('parent1')).toBe(null);
-    expect(screen.queryByText('child')).toBe(null);
-    expect(screen.queryByText('layer2')).toBe(null);
+    expect(screen.getByText("topicName")).toBeInTheDocument();
+    expect(screen.queryByText("parent1")).toBe(null);
+    expect(screen.queryByText("child")).toBe(null);
+    expect(screen.queryByText("layer2")).toBe(null);
   });
 
   it("renders the topic's layers name when topic is active", () => {
-    const topic = { name: 'topicName', key: 'topic' };
+    const topic = { name: "topicName", key: "topic" };
     const store = global.mockStore({
       map: {
         layers: [layer1, layer2],
@@ -54,19 +54,19 @@ describe('TopicMenu', () => {
       </Provider>,
     );
     // Test important operator
-    expect(screen.getByText('parent1')).toBeInTheDocument();
-    expect(screen.getByText('child')).toBeInTheDocument();
-    expect(screen.getByText('layer2')).toBeInTheDocument();
-    expect(screen.getByText('topicName')).toBeInTheDocument();
+    expect(screen.getByText("parent1")).toBeInTheDocument();
+    expect(screen.getByText("child")).toBeInTheDocument();
+    expect(screen.getByText("layer2")).toBeInTheDocument();
+    expect(screen.getByText("topicName")).toBeInTheDocument();
   });
 
   it("renders html <b> tag form tanslated layer's name", () => {
-    global.i18n.addResourceBundle('de', 'translation', {
-      layerWithHtmlTagsInName: 'translation <b>withhtmltags</b>',
+    global.i18n.addResourceBundle("de", "translation", {
+      layerWithHtmlTagsInName: "translation <b>withhtmltags</b>",
     });
-    const topic = { name: 'topicName', key: 'topic' };
+    const topic = { name: "topicName", key: "topic" };
     const layerWithHtmlTags = new Layer({
-      name: 'layerWithHtmlTagsInName',
+      name: "layerWithHtmlTagsInName",
     });
     const store = global.mockStore({
       map: {
@@ -82,6 +82,6 @@ describe('TopicMenu', () => {
         <TopicMenu topic={topic} />
       </Provider>,
     );
-    expect(screen.getByText('withhtmltags').nodeName).toBe('B');
+    expect(screen.getByText("withhtmltags").nodeName).toBe("B");
   });
 });

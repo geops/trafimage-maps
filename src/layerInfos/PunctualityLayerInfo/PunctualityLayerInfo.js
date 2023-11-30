@@ -1,32 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
-import { withTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { withTranslation } from "react-i18next";
 
 const useStyles = makeStyles(() => ({
   legendWrapper: {
-    margin: '10px 0',
+    margin: "10px 0",
   },
   legendLine: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     paddingBottom: 5,
-    '& svg': {
+    "& svg": {
       paddingRight: 10,
     },
-    '& span': {
-      maxWidth: '85%',
+    "& span": {
+      maxWidth: "85%",
     },
   },
   punctualityCharacter: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     paddingRight: 10,
-    color: 'red',
+    color: "red",
     fontSize: 30,
-    fontWeight: 'bold',
-    '-webkit-text-stroke': '1px black',
+    fontWeight: "bold",
+    "-webkit-text-stroke": "1px black",
     height: 23,
     width: 23,
   },
@@ -42,29 +42,29 @@ function PunctualityLayerInfo({ language, t }) {
   const classes = useStyles();
   const delays = [
     {
-      color: '#00a00c', // green
-      legend: 'ch.sbb.puenktlichkeit-ontime',
+      color: "#00a00c", // green
+      legend: "ch.sbb.puenktlichkeit-ontime",
     },
     {
-      color: '#f7bf00', // yellow
-      legend: 'ch.sbb.puenktlichkeit-medium-delay',
+      color: "#f7bf00", // yellow
+      legend: "ch.sbb.puenktlichkeit-medium-delay",
     },
     {
-      color: '#e13f20', // red
-      legend: 'ch.sbb.puenktlichkeit-high-delay',
+      color: "#e13f20", // red
+      legend: "ch.sbb.puenktlichkeit-high-delay",
     },
     {
       dashed: true,
-      color: '#a0a0a0', // grey
-      legend: 'ch.sbb.puenktlichkeit-journey-no-realtime',
+      color: "#a0a0a0", // grey
+      legend: "ch.sbb.puenktlichkeit-journey-no-realtime",
     },
     {
-      color: '#a0a0a0', // grey
-      legend: 'ch.sbb.puenktlichkeit-company-no-realtime',
+      color: "#a0a0a0", // grey
+      legend: "ch.sbb.puenktlichkeit-company-no-realtime",
     },
     {
       character: String.fromCodePoint(0x00d7),
-      legend: 'Ausfall',
+      legend: "Ausfall",
     },
   ];
 
@@ -86,7 +86,7 @@ function PunctualityLayerInfo({ language, t }) {
                 fill={d.color}
                 strokeWidth="1.5"
                 stroke="#404040"
-                strokeDasharray={d.dashed ? '5 3' : null}
+                strokeDasharray={d.dashed ? "5 3" : null}
               />
             </svg>
           )}

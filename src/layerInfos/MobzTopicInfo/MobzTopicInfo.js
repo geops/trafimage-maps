@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
 const propTypes = {
   language: PropTypes.string.isRequired,
@@ -45,12 +45,12 @@ function MobzTopicInfo({ language, t, properties }) {
     <div>
       {desc[language] ? desc[language] : desc.de}
       <p>
-        {t('Aktualisierungs-Zyklus')}:
+        {t("Aktualisierungs-Zyklus")}:
         <br />
-        {t('bei Bedarf')}
+        {t("bei Bedarf")}
       </p>
       <p>
-        {t('Verantwortlich')}:
+        {t("Verantwortlich")}:
         <br />
         {infos.owner},
         <br />

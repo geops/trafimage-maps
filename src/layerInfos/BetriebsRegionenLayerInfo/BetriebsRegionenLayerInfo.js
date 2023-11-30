@@ -1,30 +1,30 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import ostImg from '../../img/layers/Betriebsregionen/ost.png';
-import sudImg from '../../img/layers/Betriebsregionen/sud.png';
-import westImg from '../../img/layers/Betriebsregionen/west.png';
-import mitteImg from '../../img/layers/Betriebsregionen/mitte.png';
-import otherImg from '../../img/layers/Betriebsregionen/other.png';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import ostImg from "../../img/layers/Betriebsregionen/ost.png";
+import sudImg from "../../img/layers/Betriebsregionen/sud.png";
+import westImg from "../../img/layers/Betriebsregionen/west.png";
+import mitteImg from "../../img/layers/Betriebsregionen/mitte.png";
+import otherImg from "../../img/layers/Betriebsregionen/other.png";
 
 const regions = [
   {
-    title: 'West',
+    title: "West",
     img: westImg,
   },
   {
-    title: 'Mitte',
+    title: "Mitte",
     img: mitteImg,
   },
   {
-    title: 'Süd',
+    title: "Süd",
     img: sudImg,
   },
   {
-    title: 'Ost',
+    title: "Ost",
     img: ostImg,
   },
   {
-    title: 'Andere Infrastrukturbetreiberinnen',
+    title: "Andere Infrastrukturbetreiberinnen",
     img: otherImg,
   },
 ];
@@ -33,7 +33,7 @@ function BetriebsRegionenLayerInfo() {
   const { t } = useTranslation();
   return (
     <div>
-      <span>{t('ch.sbb.betriebsregionen-desc')}</span>
+      <span>{t("ch.sbb.betriebsregionen-desc")}</span>
       <div className="wkp-betriebsregionen">
         {regions.map((region) => (
           <div className="wkp-betriebsregion" key={region.title}>

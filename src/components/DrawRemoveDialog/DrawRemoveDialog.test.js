@@ -1,15 +1,15 @@
-import React from 'react';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { Layer } from 'mobility-toolbox-js/ol';
-import OLLayer from 'ol/layer/Vector';
-import { ThemeProvider } from '@mui/material';
-import { render } from '@testing-library/react';
-import theme from '../../themes/default';
-import DrawRemoveDialog from '.';
+import React from "react";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
+import { Layer } from "mobility-toolbox-js/ol";
+import OLLayer from "ol/layer/Vector";
+import { ThemeProvider } from "@mui/material";
+import { render } from "@testing-library/react";
+import theme from "../../themes/default";
+import DrawRemoveDialog from ".";
 
-describe('DrawRemoveDialog', () => {
+describe("DrawRemoveDialog", () => {
   const mockStore = configureStore([thunk]);
   let store;
 
@@ -23,17 +23,17 @@ describe('DrawRemoveDialog', () => {
       },
       map: {
         drawlayer: new Layer({
-          name: 'test',
+          name: "test",
           olLayer: new OLLayer(),
           properties: {
-            description: 'description<br/>break',
+            description: "description<br/>break",
           },
         }),
       },
     });
   });
 
-  test('should match snapshot', () => {
+  test("should match snapshot", () => {
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -44,7 +44,7 @@ describe('DrawRemoveDialog', () => {
     expect(container.innerHTML).toMatchSnapshot();
   });
 
-  test('remove permalink on click on remove button', () => {
+  test("remove permalink on click on remove button", () => {
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -52,6 +52,6 @@ describe('DrawRemoveDialog', () => {
         </Provider>
       </ThemeProvider>,
     );
-    expect(container.querySelector('input').value).toBe('');
+    expect(container.querySelector("input").value).toBe("");
   });
 });

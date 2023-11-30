@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { FaShareAlt } from 'react-icons/fa';
-import Share from '../../components/Share';
-import MenuItem from '../../components/Menu/MenuItem';
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { FaShareAlt } from "react-icons/fa";
+import Share from "../../components/Share";
+import MenuItem from "../../components/Menu/MenuItem";
 
 function ShareMenu() {
   const activeTopic = useSelector((state) => state.app.activeTopic);
@@ -28,7 +28,7 @@ function ShareMenu() {
         open
         fixedHeight={375}
         className="wkp-share-menu"
-        title={t('Teilen')}
+        title={t("Teilen")}
         icon={<FaShareAlt focusable={false} />}
         collapsed={collapsed}
         onCollapseToggle={(c) => setCollapsed(c)}

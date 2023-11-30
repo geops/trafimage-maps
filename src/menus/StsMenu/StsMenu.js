@@ -1,45 +1,45 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, withStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import { MenuItem as MuiMenuItem, Menu, Button, Divider } from '@mui/material';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import StsValidityLayerSwitcher from './StsValidityLayerSwitcher';
-import DvLayerSwitcher from '../DirektverbindungenMenu/DvLayerSwitcher';
-import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
-import StsValidityFeatureInfo from './StsValidityFeatureInfo';
-import IframeMenu from '../IframeMenu';
-import stsLayers from '../../config/ch.sbb.sts';
-import { setFeatureInfo } from '../../model/app/actions';
+import React, { useState, useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { makeStyles, withStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import { MenuItem as MuiMenuItem, Menu, Button, Divider } from "@mui/material";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import StsValidityLayerSwitcher from "./StsValidityLayerSwitcher";
+import DvLayerSwitcher from "../DirektverbindungenMenu/DvLayerSwitcher";
+import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo";
+import StsValidityFeatureInfo from "./StsValidityFeatureInfo";
+import IframeMenu from "../IframeMenu";
+import stsLayers from "../../config/ch.sbb.sts";
+import { setFeatureInfo } from "../../model/app/actions";
 import {
   DV_HIT_TOLERANCE,
   DV_KEY,
   STS_HIT_TOLERANCE,
-} from '../../utils/constants';
-import useIsMobile from '../../utils/useIsMobile';
-import useHighlightLayer from '../../utils/useHighlightLayer';
-import DvFeatureInfoTitle from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
+} from "../../utils/constants";
+import useIsMobile from "../../utils/useIsMobile";
+import useHighlightLayer from "../../utils/useHighlightLayer";
+import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 
 const boxShadow =
-  '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
+  "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)";
 
 const StyledMenu = withStyles(() => ({
   paper: {
     boxShadow,
-    border: '1px solid rgba(0, 0, 0, 0.1)',
+    border: "1px solid rgba(0, 0, 0, 0.1)",
     borderRadius: 0,
   },
   list: {
     minWidth: 230,
-    padding: '5px 0',
+    padding: "5px 0",
   },
 }))(Menu);
 
 const StyledMenuItem = withStyles({
   root: {
-    color: '#000000',
+    color: "#000000",
     padding: 15,
   },
 })(MuiMenuItem);
@@ -47,20 +47,20 @@ const StyledMenuItem = withStyles({
 const useStyles = makeStyles(() => {
   return {
     dropdownToggler: {
-      backgroundColor: 'white',
-      padding: '6px 10px',
-      '&:hover': {
-        backgroundColor: 'white',
+      backgroundColor: "white",
+      padding: "6px 10px",
+      "&:hover": {
+        backgroundColor: "white",
       },
     },
     layerSwitcher: {
-      padding: '15px 10px',
+      padding: "15px 10px",
     },
   };
 });
 
-const updateLayers = (key = 'sts', baseLayer) => {
-  if (key === 'sts') {
+const updateLayers = (key = "sts", baseLayer) => {
+  if (key === "sts") {
     stsLayers.forEach((layer) => {
       layer.visible =
         /(ch\.sbb\.sts\.validity(?!\.(highlights|premium|hidden)$)|\.data$)/.test(
@@ -72,13 +72,13 @@ const updateLayers = (key = 'sts', baseLayer) => {
       }
     });
   }
-  if (key === 'dv') {
+  if (key === "dv") {
     stsLayers.forEach((layer) => {
       layer.visible = /(ch\.sbb\.(ipv|direktverbindungen)|\.data)/.test(
         layer.key,
       );
       if (layer.key === `${DV_KEY}.main` && baseLayer?.mbMap) {
-        baseLayer.mbMap.once('idle', () => {
+        baseLayer.mbMap.once("idle", () => {
           layer.syncFeatures();
         });
       }
@@ -92,11 +92,11 @@ function StsTopicMenu() {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
   const isMobile = useIsMobile;
-  const [activeMenu, setActiveMenu] = useState('sts');
+  const [activeMenu, setActiveMenu] = useState("sts");
   const [anchorEl, setAnchorEl] = useState();
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const baseLayer = useMemo(() => {
-    const bl = stsLayers.find((layer) => layer.get('isBaseLayer'));
+    const bl = stsLayers.find((layer) => layer.get("isBaseLayer"));
     // Since we update the style dynamically on menu switch
     // we update the layers once the style has loaded
     bl.onStyleLoaded = () => updateLayers(activeMenu, bl);
@@ -109,19 +109,19 @@ function StsTopicMenu() {
       return /direktverbindungen/.test(layer.key) && layer.visible;
     });
     if (isDirektVerbindungLayersVisible) {
-      setActiveMenu('dv');
+      setActiveMenu("dv");
     }
   }, [layers]);
 
   const layerSwitcher = useMemo(
     () =>
-      activeMenu === 'sts' ? <StsValidityLayerSwitcher /> : <DvLayerSwitcher />,
+      activeMenu === "sts" ? <StsValidityLayerSwitcher /> : <DvLayerSwitcher />,
     [activeMenu],
   );
 
   const featureInfos = useMemo(
     () =>
-      activeMenu === 'sts' ? (
+      activeMenu === "sts" ? (
         <StsValidityFeatureInfo menuOpen={!featureInfo} />
       ) : (
         <DvFeatureInfo filterByType />
@@ -130,12 +130,12 @@ function StsTopicMenu() {
   );
 
   useEffect(() => {
-    if (activeMenu === 'dv') {
-      baseLayer.setStyle('base_bright_v2_direktverbindungen');
+    if (activeMenu === "dv") {
+      baseLayer.setStyle("base_bright_v2_direktverbindungen");
       baseLayer.hitTolerance = DV_HIT_TOLERANCE;
     }
-    if (activeMenu === 'sts') {
-      baseLayer.setStyle('base_bright_v2_ch.sbb.geltungsbereiche_ga');
+    if (activeMenu === "sts") {
+      baseLayer.setStyle("base_bright_v2_ch.sbb.geltungsbereiche_ga");
       baseLayer.hitTolerance = STS_HIT_TOLERANCE;
     }
   }, [activeMenu, baseLayer]);
@@ -164,9 +164,9 @@ function StsTopicMenu() {
               data-testid="sts-menu-opener"
             >
               <b>
-                {activeMenu === 'sts'
-                  ? t('Validity of Swiss Travel Pass')
-                  : t('Direct trains to Switzerland')}
+                {activeMenu === "sts"
+                  ? t("Validity of Swiss Travel Pass")
+                  : t("Direct trains to Switzerland")}
               </b>
             </Button>
             <StyledMenu
@@ -182,25 +182,25 @@ function StsTopicMenu() {
               data-testid="sts-menu-popover"
             >
               <StyledMenuItem
-                disabled={activeMenu === 'sts'}
-                onClick={() => onChange('sts')}
+                disabled={activeMenu === "sts"}
+                onClick={() => onChange("sts")}
                 data-testid="sts-menu-sts"
               >
-                {t('Validity of Swiss Travel Pass')}
+                {t("Validity of Swiss Travel Pass")}
               </StyledMenuItem>
               <StyledMenuItem
-                disabled={activeMenu === 'dv'}
-                onClick={() => onChange('dv')}
+                disabled={activeMenu === "dv"}
+                onClick={() => onChange("dv")}
                 data-testid="sts-menu-dv"
               >
-                {t('Direct trains to Switzerland')}
+                {t("Direct trains to Switzerland")}
               </StyledMenuItem>
             </StyledMenu>
             <div className={classes.layerSwitcher}>{layerSwitcher}</div>
           </>
         )
       }
-      title={activeMenu === 'dv' ? <DvFeatureInfoTitle /> : null}
+      title={activeMenu === "dv" ? <DvFeatureInfoTitle /> : null}
       body={
         <>
           {isMobile ? null : <Divider />}

@@ -1,10 +1,10 @@
-import React, { memo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@mui/styles';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import LightIcon from '../../img/LightIcon';
-import { lightingMapping } from '../../layerInfos/BeleuchtungLayerInfo/lightingMapping';
+import React, { memo } from "react";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import LightIcon from "../../img/LightIcon";
+import { lightingMapping } from "../../layerInfos/BeleuchtungLayerInfo/lightingMapping";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -13,9 +13,9 @@ const propTypes = {
 const useStyles = makeStyles(() => {
   return {
     line: {
-      display: 'flex',
-      alignItems: 'center',
-      '& svg': {
+      display: "flex",
+      alignItems: "center",
+      "& svg": {
         marginLeft: 10,
       },
     },
@@ -25,17 +25,17 @@ const useStyles = makeStyles(() => {
 function BeleuchtungsPopup({ feature }) {
   const { t } = useTranslation();
   const classes = useStyles();
-  const stationClass = feature.get('rte_klasse');
+  const stationClass = feature.get("rte_klasse");
   const { color } = lightingMapping[stationClass];
 
   return (
     <div>
       <p className={classes.line}>
-        {t('Bahnhofklasse')}
+        {t("Bahnhofklasse")}
         <LightIcon
           color={color}
           label={stationClass}
-          fontColor={stationClass.match(/(3|4|2b)/) && 'white'}
+          fontColor={stationClass.match(/(3|4|2b)/) && "white"}
           size={25}
         />
       </p>
@@ -45,5 +45,5 @@ function BeleuchtungsPopup({ feature }) {
 
 BeleuchtungsPopup.propTypes = propTypes;
 const memoized = memo(BeleuchtungsPopup);
-memoized.renderTitle = (feat) => feat.get('name');
+memoized.renderTitle = (feat) => feat.get("name");
 export default memoized;

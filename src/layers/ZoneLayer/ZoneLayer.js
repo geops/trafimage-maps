@@ -1,15 +1,15 @@
-import 'react-app-polyfill/stable';
-import qs from 'query-string';
-import OLVectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { Group as LayerGroup } from 'ol/layer';
-import GeoJSON from 'ol/format/GeoJSON';
-import { containsExtent } from 'ol/extent';
-import MultiPolygon from 'ol/geom/MultiPolygon';
-import { fromExtent } from 'ol/geom/Polygon';
-import Feature from 'ol/Feature';
-import intersect from '@turf/intersect';
-import CasaLayer from '../CasaLayer';
+import "react-app-polyfill/stable";
+import qs from "query-string";
+import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { Group as LayerGroup } from "ol/layer";
+import GeoJSON from "ol/format/GeoJSON";
+import { containsExtent } from "ol/extent";
+import MultiPolygon from "ol/geom/MultiPolygon";
+import { fromExtent } from "ol/geom/Polygon";
+import Feature from "ol/Feature";
+import intersect from "@turf/intersect";
+import CasaLayer from "../CasaLayer";
 
 /**
  * Layer for visualizing fare networks.
@@ -51,7 +51,7 @@ class ZoneLayer extends CasaLayer {
   constructor(options = {}) {
     const properties = { isQueryable: true, ...(options.properties || {}) };
     super({
-      name: 'Verbundzonen',
+      name: "Verbundzonen",
       olLayer: new LayerGroup({
         layers: [
           new OLVectorLayer({
@@ -78,9 +78,9 @@ class ZoneLayer extends CasaLayer {
     this.validTo = options.validTo;
 
     this.simplify =
-      typeof options.simplify === 'undefined' ? 100 : options.simplify;
+      typeof options.simplify === "undefined" ? 100 : options.simplify;
 
-    this.url = options.url || 'https://api.geops.io/casa-fare-network/v1';
+    this.url = options.url || "https://api.geops.io/casa-fare-network/v1";
 
     this.labelOptimizeMinRes = options.labelOptimizationMinResolution || 100;
 
@@ -90,7 +90,7 @@ class ZoneLayer extends CasaLayer {
       if (features.length) {
         const [feature] = features;
 
-        if (feature.get('isClickable')) {
+        if (feature.get("isClickable")) {
           const idx = this.selectedZones.indexOf(feature);
           if (idx > -1) {
             this.selectedZones.splice(idx, 1);
@@ -116,10 +116,10 @@ class ZoneLayer extends CasaLayer {
           color: [104, 104, 104, 0.7],
         },
         stroke: {
-          color: '#fff',
+          color: "#fff",
         },
         text: {
-          color: '#fff',
+          color: "#fff",
         },
       };
     }
@@ -131,10 +131,10 @@ class ZoneLayer extends CasaLayer {
         },
         stroke: {
           width: 2,
-          color: '#4576a2',
+          color: "#4576a2",
         },
         text: {
-          color: '#4576a2',
+          color: "#4576a2",
         },
       };
     }
@@ -148,7 +148,7 @@ class ZoneLayer extends CasaLayer {
         width: 1,
       },
       text: {
-        color: '#4576A2',
+        color: "#4576A2",
       },
     };
   }
@@ -185,7 +185,7 @@ class ZoneLayer extends CasaLayer {
       feature,
     );
     if (olStyles.text) {
-      olStyles.text.getText().setText(feature.get('zone'));
+      olStyles.text.getText().setText(feature.get("zone"));
 
       // change text geometry
       if (res <= this.labelOptimizeMinRes) {
@@ -212,7 +212,7 @@ class ZoneLayer extends CasaLayer {
   zoneStyle(feature, resolution) {
     const isSelected = this.selectedZones.includes(feature);
     const isHovered =
-      feature.get('isClickable') && this.hoverFeature === feature;
+      feature.get("isClickable") && this.hoverFeature === feature;
     const styleObject = this.styleFunction(
       feature.getProperties(),
       isSelected,
@@ -254,7 +254,7 @@ class ZoneLayer extends CasaLayer {
     const format = new GeoJSON();
     const urlParams = {
       ...params,
-      [this.apiKeyName || 'key']: this.apiKey,
+      [this.apiKeyName || "key"]: this.apiKey,
       simplify: this.simplify,
       srs: 3857,
       from: this.validFrom,
@@ -275,7 +275,7 @@ class ZoneLayer extends CasaLayer {
       })
       .catch(() => {
         // eslint-disable-next-line no-console
-        console.info('Request cancelled');
+        console.info("Request cancelled");
       });
   }
 
@@ -313,19 +313,19 @@ class ZoneLayer extends CasaLayer {
       for (let j = 0; j < config[i].zones.length; j += 1) {
         qryParams.push(
           [
-            config[i].partnerCode || '',
-            config[i].zones[j].zoneCode || '',
-            config[i].zones[j].zoneName || '',
-          ].join(':'),
+            config[i].partnerCode || "",
+            config[i].zones[j].zoneCode || "",
+            config[i].zones[j].zoneName || "",
+          ].join(":"),
         );
       }
     }
 
-    return this.fetchZones({ filter: qryParams.join(',') }).then((features) => {
+    return this.fetchZones({ filter: qryParams.join(",") }).then((features) => {
       // Preselect features
       for (let i = 0; i < features.length; i += 1) {
-        const zoneCode = features[i].get('zone');
-        const partnerCode = features[i].get('partner_code');
+        const zoneCode = features[i].get("zone");
+        const partnerCode = features[i].get("partner_code");
         // partner code can be string or int. ensure both are string.
         const partner = config.find(
           (c) => `${c.partnerCode}` === `${partnerCode}`,
@@ -337,7 +337,7 @@ class ZoneLayer extends CasaLayer {
           );
 
           if (zone) {
-            features[i].set('isClickable', zone.isClickable);
+            features[i].set("isClickable", zone.isClickable);
 
             if (zone.isSelected) {
               this.selectedZones.push(features[i]);

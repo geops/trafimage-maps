@@ -6,7 +6,7 @@ const getHtmlPageCode = (wcCode, scriptCode) => {
 <html>
   <head>
    <script src="https://unpkg.com/trafimage-maps@latest/bundle.js"></script>${
-     scriptCode ? `\n   ${scriptCode}` : ''
+     scriptCode ? `\n   ${scriptCode}` : ""
    }
   </head>
   <body>

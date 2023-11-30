@@ -1,1 +1,1 @@
-export { default } from './StsPoisLayer';
+export { default } from "./StsPoisLayer";

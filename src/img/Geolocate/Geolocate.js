@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => {
   return {
     geolocIconWrapper: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
     geolocIconCircle: {
       stroke: (props) => props.color,
-      fill: 'transparent',
+      fill: "transparent",
       strokeWidth: 1,
     },
     geolocIconPoint: {
@@ -43,7 +43,7 @@ Geolocate.propTypes = {
 
 Geolocate.defaultProps = {
   onClick: () => {},
-  color: 'currentColor',
+  color: "currentColor",
 };
 
 export default Geolocate;

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { ReactComponent as LinkIcon } from './Link.svg';
+import React from "react";
+import PropTypes from "prop-types";
+import { ReactComponent as LinkIcon } from "./Link.svg";
 
-import './Link.scss';
+import "./Link.scss";
 
 const propTypes = {
   href: PropTypes.string.isRequired,
@@ -11,7 +11,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  className: '',
+  className: "",
 };
 
 function Link({ href, children, className }) {

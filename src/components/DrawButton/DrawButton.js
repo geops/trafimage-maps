@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import IconButton from '@mui/material/IconButton';
-import { ReactComponent as Pencil } from '../../img/pencil.svg';
+import React from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import IconButton from "@mui/material/IconButton";
+import { ReactComponent as Pencil } from "../../img/pencil.svg";
 
 function DrawButton({ children, onClick, ...buttonProps }) {
   const mapsetUrl = useSelector((state) => state.app.mapsetUrl);
@@ -11,7 +11,7 @@ function DrawButton({ children, onClick, ...buttonProps }) {
 
   return (
     <IconButton
-      title={t('Neue Zeichnung')}
+      title={t("Neue Zeichnung")}
       size="medium"
       /* We use a function instead of href to be able to get the proper window.location value. */
       onClick={() => {
@@ -19,7 +19,7 @@ function DrawButton({ children, onClick, ...buttonProps }) {
         // window.open is esaier to test.
         window.open(
           `${mapsetUrl}?parent=${encodeURIComponent(window.location)}`,
-          '_self',
+          "_self",
         );
       }}
       // eslint-disable-next-line react/jsx-props-no-spreading

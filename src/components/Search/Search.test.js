@@ -1,21 +1,21 @@
-import React from 'react';
-import { render, act, waitFor } from '@testing-library/react';
-import configureStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { Map, View } from 'ol';
-import { ThemeProvider } from '@mui/material';
-import Search from '.';
-import SearchService from './SearchService';
-import theme from '../../themes/default';
-import { Search as SearchDflt } from '../../searches';
+import React from "react";
+import { render, act, waitFor } from "@testing-library/react";
+import configureStore from "redux-mock-store";
+import thunk from "redux-thunk";
+import { Provider } from "react-redux";
+import { Map, View } from "ol";
+import { ThemeProvider } from "@mui/material";
+import Search from ".";
+import SearchService from "./SearchService";
+import theme from "../../themes/default";
+import { Search as SearchDflt } from "../../searches";
 
 const dfltApp = {
   map: new Map({ view: new View({}) }),
   activeTopic: {
-    key: 'test',
+    key: "test",
   },
-  language: 'de',
+  language: "de",
   searchInfoOpen: false,
 };
 const mockStore = configureStore([thunk]);
@@ -24,11 +24,11 @@ class MockSearch extends SearchDflt {
   // eslint-disable-next-line class-methods-use-this
   search() {
     return Promise.resolve([
-      { id: 'test', title: 'Test' },
-      { id: 'test2', title: 'Test2' },
-      { id: 'test3', title: 'Test3' },
-      { id: 'test4', title: 'Test4' },
-      { id: 'test5', title: 'Test5' },
+      { id: "test", title: "Test" },
+      { id: "test2", title: "Test2" },
+      { id: "test3", title: "Test3" },
+      { id: "test4", title: "Test4" },
+      { id: "test5", title: "Test5" },
     ]);
   }
 
@@ -42,7 +42,7 @@ class MockSearch extends SearchDflt {
   }
 }
 
-describe('Search', () => {
+describe("Search", () => {
   const dfltSearch = new MockSearch();
 
   const searchService = new SearchService();
@@ -55,7 +55,7 @@ describe('Search', () => {
     },
   };
 
-  test('render inputs.', () => {
+  test("render inputs.", () => {
     const store = mockStore(dfltStore);
 
     const { container } = render(
@@ -65,12 +65,12 @@ describe('Search', () => {
         </Provider>
       </ThemeProvider>,
     );
-    expect(container.querySelectorAll('input').length).toBe(1);
-    expect(container.querySelectorAll('.wkp-search-button').length).toBe(1);
+    expect(container.querySelectorAll("input").length).toBe(1);
+    expect(container.querySelectorAll(".wkp-search-button").length).toBe(1);
   });
 
   // TODO fix this test
-  test.skip('launch search and render multiple collapsed sections.', async () => {
+  test.skip("launch search and render multiple collapsed sections.", async () => {
     const store = mockStore(dfltStore);
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -80,22 +80,22 @@ describe('Search', () => {
       </ThemeProvider>,
     );
     await act(async () => {
-      container.querySelectorAll('input')[0].focus();
-      container.querySelectorAll('input')[0].value = 'test';
-      await searchService.search('test');
+      container.querySelectorAll("input")[0].focus();
+      container.querySelectorAll("input")[0].value = "test";
+      await searchService.search("test");
     });
 
     await waitFor(() =>
       expect(
-        container.querySelectorAll('.wkp-search-section-header').length,
+        container.querySelectorAll(".wkp-search-section-header").length,
       ).toBe(2),
     );
 
     expect(
-      container.querySelectorAll('.wkp-search-section-header span')[1]
+      container.querySelectorAll(".wkp-search-section-header span")[1]
         .textContent,
-    ).toBe('overallResult');
-    expect(container.querySelectorAll('li').length).toBe(4);
+    ).toBe("overallResult");
+    expect(container.querySelectorAll("li").length).toBe(4);
 
     // test.skip('launch search and render multiple collapsed sections.', async () => {
     //   let wrapper = null;

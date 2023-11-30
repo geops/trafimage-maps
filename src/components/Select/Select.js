@@ -1,18 +1,18 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
-import { Select as MuiSelect } from '@mui/material';
-import propTypes from 'prop-types';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import React from "react";
+import { makeStyles } from "@mui/styles";
+import { Select as MuiSelect } from "@mui/material";
+import propTypes from "prop-types";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const useStyles = makeStyles((theme) => {
   const list = {
     // Should be apply by theme but it's not
-    '& .Mui-selected': {
+    "& .Mui-selected": {
       color: theme.palette.secondary.main,
     },
   };
   const paper = {
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     borderRadius: 0,
     marginTop: -2,
   };
@@ -27,11 +27,11 @@ const useStyles = makeStyles((theme) => {
       ...paper,
     },
     listAnchorBottom: {
-      borderTop: '1px solid rgba(0, 0, 0, 0.1)',
+      borderTop: "1px solid rgba(0, 0, 0, 0.1)",
       ...list,
     },
     listAnchorTop: {
-      borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+      borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
       ...list,
     },
   };
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => {
 function Select(props) {
   const { MenuProps } = props;
   const classes = useStyles();
-  const isAnchorTop = MenuProps?.anchorOrigin?.vertical === 'top';
+  const isAnchorTop = MenuProps?.anchorOrigin?.vertical === "top";
 
   let classesMenu = {
     paper: classes.paperAnchorBottom,
@@ -68,8 +68,8 @@ function Select(props) {
       // // The following props need to be set after {...newProps}, since they overwrite some of them
       MenuProps={{
         anchorOrigin: {
-          vertical: 'bottom',
-          horizontal: 'center',
+          vertical: "bottom",
+          horizontal: "center",
         },
         ...MenuProps,
         classes: {
@@ -85,8 +85,8 @@ Select.propTypes = {
   MenuProps: propTypes.shape({
     classes: propTypes.object,
     anchorOrigin: propTypes.shape({
-      vertical: propTypes.oneOf(['top', 'bottom']),
-      horizontal: propTypes.oneOf(['left', 'right']),
+      vertical: propTypes.oneOf(["top", "bottom"]),
+      horizontal: propTypes.oneOf(["left", "right"]),
     }),
   }),
 };

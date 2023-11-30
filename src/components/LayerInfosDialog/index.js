@@ -1,1 +1,1 @@
-export { default, NAME } from './LayerInfosDialog';
+export { default, NAME } from "./LayerInfosDialog";

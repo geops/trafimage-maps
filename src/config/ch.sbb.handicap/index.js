@@ -1,5 +1,5 @@
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
+import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 
 import {
   netzkarteLayer,
@@ -9,13 +9,13 @@ import {
   bahnhofplaene,
   swisstopoLandeskarte,
   swisstopoLandeskarteGrau,
-} from '../ch.sbb.netzkarte';
+} from "../ch.sbb.netzkarte";
 
 export const handicapDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.handicap.data',
+  name: "ch.sbb.handicap.data",
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_ch.sbb.handicap',
+  style: "base_bright_v2_ch.sbb.handicap",
   properties: {
     hideInLegend: true,
   },
@@ -25,18 +25,18 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
 });
 
 export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
-  name: 'ch.sbb.stuetzpunktbahnhoefe',
-  key: 'ch.sbb.stuetzpunktbahnhoefe',
+  name: "ch.sbb.stuetzpunktbahnhoefe",
+  key: "ch.sbb.stuetzpunktbahnhoefe",
   visible: true,
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
+    !!metadata && metadata["trafimage.filter"] === "stuetzpunkt",
   properties: {
     isQueryable: true,
-    handicapType: 'stuetzpunkt',
+    handicapType: "stuetzpunkt",
     hasInfos: true,
-    layerInfoComponent: 'HandicapLayerInfo',
-    popupComponent: 'HandicapPopup',
+    layerInfoComponent: "HandicapLayerInfo",
+    popupComponent: "HandicapPopup",
     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
   hidePopup: (feat, layer, featureInfo) => {
@@ -44,42 +44,42 @@ export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
       .filter((info) => info.layer !== layer)
       .map((info) => info.features)
       .flat()
-      .map((f) => f.get('stationsbezeichnung'));
+      .map((f) => f.get("stationsbezeichnung"));
 
-    return otherFeatsClicked.includes(feat.get('stationsbezeichnung'));
+    return otherFeatsClicked.includes(feat.get("stationsbezeichnung"));
   },
 });
 
 export const barrierfreierBahnhoefe = new MapboxStyleLayer({
-  name: 'ch.sbb.barrierfreierbahnhoefe',
-  key: 'ch.sbb.barrierfreierbahnhoefe',
+  name: "ch.sbb.barrierfreierbahnhoefe",
+  key: "ch.sbb.barrierfreierbahnhoefe",
   visible: true,
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'barrierefrei',
+    !!metadata && metadata["trafimage.filter"] === "barrierefrei",
   properties: {
     isQueryable: true,
-    handicapType: 'barrierfree',
+    handicapType: "barrierfree",
     hasInfos: true,
-    layerInfoComponent: 'HandicapLayerInfo',
-    popupComponent: 'HandicapPopup',
+    layerInfoComponent: "HandicapLayerInfo",
+    popupComponent: "HandicapPopup",
     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
 export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
-  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-  key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  name: "ch.sbb.nichtbarrierfreierbahnhoefe",
+  key: "ch.sbb.nichtbarrierfreierbahnhoefe",
   visible: true,
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata['trafimage.filter'] === 'nicht_barrierefrei',
+    !!metadata && metadata["trafimage.filter"] === "nicht_barrierefrei",
   properties: {
     isQueryable: true,
-    handicapType: 'notBarrierfree',
+    handicapType: "notBarrierfree",
     hasInfos: true,
-    layerInfoComponent: 'HandicapLayerInfo',
-    popupComponent: 'HandicapPopup',
+    layerInfoComponent: "HandicapLayerInfo",
+    popupComponent: "HandicapPopup",
     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
@@ -88,23 +88,23 @@ export default [
   handicapDataLayer,
   netzkarteLayer.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'base_bright_v2_ch.sbb.handicap',
+    style: "base_bright_v2_ch.sbb.handicap",
   }),
   netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'base_dark_v2_ch.sbb.handicap',
+    style: "base_dark_v2_ch.sbb.handicap",
   }),
   netzkarteAerial.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'aerial_sbb_sbbkey_ch.sbb.handicap',
+    style: "aerial_sbb_sbbkey_ch.sbb.handicap",
   }),
   swisstopoLandeskarte.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: "ch.swisstopo.backgrounds_ch.sbb.handicap",
   }),
   swisstopoLandeskarteGrau.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: "ch.swisstopo.backgrounds_ch.sbb.handicap",
   }),
   stationsLayer.clone({
     mapboxLayer: handicapDataLayer,

@@ -1,27 +1,27 @@
-import React from 'react';
-import { makeStyles } from '@mui/styles';
+import React from "react";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => {
   return {
     topShadow: {
-      position: 'absolute',
-      overflow: 'hidden',
-      width: '100%',
+      position: "absolute",
+      overflow: "hidden",
+      width: "100%",
       height: 80,
-      pointerEvents: 'none',
-      '&::after': {
+      pointerEvents: "none",
+      "&::after": {
         content: '""',
-        position: 'absolute',
+        position: "absolute",
         left: 0,
         right: 0,
         top: -20,
         bottom: 0,
         zIndex: 1,
         height: 20,
-        background: '#18191B',
+        background: "#18191B",
         opacity: 0.2,
-        borderRadius: '600px / 50px',
-        filter: 'blur(15px)',
+        borderRadius: "600px / 50px",
+        filter: "blur(15px)",
       },
     },
   };

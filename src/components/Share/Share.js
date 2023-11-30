@@ -1,51 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useMatomo } from '@jonkoops/matomo-tracker-react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { TiImage, TiSocialFacebook, TiSocialTwitter } from 'react-icons/ti';
-import { FaEnvelope } from 'react-icons/fa';
-import CanvasSaveButton from 'react-spatial/components/CanvasSaveButton';
-import { Link } from '@mui/material';
-import SharePermalinkButton from '../SharePermalinkButton';
+import React from "react";
+import PropTypes from "prop-types";
+import { useMatomo } from "@jonkoops/matomo-tracker-react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { TiImage, TiSocialFacebook, TiSocialTwitter } from "react-icons/ti";
+import { FaEnvelope } from "react-icons/fa";
+import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
+import { Link } from "@mui/material";
+import SharePermalinkButton from "../SharePermalinkButton";
 import {
   TRACK_SHARE_DL_ACTION,
   TRACK_SHARE_FB_ACTION,
   TRACK_SHARE_MAIL_ACTION,
   TRACK_SHARE_PERMALINK_ACTION,
   TRACK_SHARE_TW_ACTION,
-} from '../../utils/constants';
-import { generateExtraData } from '../ExportButton/exportUtils';
+} from "../../utils/constants";
+import { generateExtraData } from "../ExportButton/exportUtils";
 
 const socialShareConfig = [
   {
-    url: 'mailto:?body={url}',
-    title: 'Per Email versenden',
+    url: "mailto:?body={url}",
+    title: "Per Email versenden",
     icon: <FaEnvelope focusable={false} />,
-    className: 'ta-mail-icon',
+    className: "ta-mail-icon",
     trackEventAction: TRACK_SHARE_MAIL_ACTION,
   },
   {
-    url: '//www.facebook.com/sharer.php?u={url}',
-    title: 'Auf Facebook teilen',
+    url: "//www.facebook.com/sharer.php?u={url}",
+    title: "Auf Facebook teilen",
     icon: <TiSocialFacebook focusable={false} />,
-    className: 'ta-facebook-icon',
+    className: "ta-facebook-icon",
     trackEventAction: TRACK_SHARE_FB_ACTION,
   },
   {
-    url: '//twitter.com/intent/tweet?url={url}',
-    title: 'Auf Twitter teilen',
+    url: "//twitter.com/intent/tweet?url={url}",
+    title: "Auf Twitter teilen",
     icon: <TiSocialTwitter focusable={false} />,
-    className: 'ta-twitter-icon',
+    className: "ta-twitter-icon",
     trackEventAction: TRACK_SHARE_TW_ACTION,
   },
 ];
 
 const replaceParams = (url, language, appBaseUrl) => {
   return url
-    .replace('{url}', encodeURIComponent(window.location.href))
-    .replace('{language}', language)
-    .replace('{appBaseUrl}', appBaseUrl);
+    .replace("{url}", encodeURIComponent(window.location.href))
+    .replace("{language}", language)
+    .replace("{appBaseUrl}", appBaseUrl);
 };
 
 function ShareLink({ config }) {
@@ -109,7 +109,7 @@ function Share() {
       <ShareLink config={socialShareConfig[0]} />
       <CanvasSaveButton
         map={map}
-        title={t('Karte als Bild speichern')}
+        title={t("Karte als Bild speichern")}
         extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
           trackEvent({

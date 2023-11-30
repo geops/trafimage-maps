@@ -4,9 +4,9 @@
 /**
  * @module ol/interaction/DblPointerDblClick
  */
-import Interaction from 'ol/interaction/Interaction';
-import MapBrowserEventType from 'ol/MapBrowserEventType';
-import { getValues } from 'ol/obj';
+import Interaction from "ol/interaction/Interaction";
+import MapBrowserEventType from "ol/MapBrowserEventType";
+import { getValues } from "ol/obj";
 
 /**
  * @param {import("../MapBrowserEvent.js").default} mapBrowserEvent Event.

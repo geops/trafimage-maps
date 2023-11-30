@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
-import React, { useMemo, useState, useEffect } from 'react';
-import { makeStyles } from '@mui/styles';
+import React, { useMemo, useState, useEffect } from "react";
+import { makeStyles } from "@mui/styles";
 import {
   Button,
   TextField,
@@ -10,72 +10,72 @@ import {
   MenuItem,
   Checkbox,
   FormControlLabel,
-} from '@mui/material';
-import PropTypes from 'prop-types';
-import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
-import { getTopicConfig } from '../config/topics';
+} from "@mui/material";
+import PropTypes from "prop-types";
+import { getLayersAsFlatArray } from "mobility-toolbox-js/ol";
+import { getTopicConfig } from "../config/topics";
 
 const useStyles = makeStyles(() => {
   return {
     formWrapper: {
-      margin: '20px 0',
+      margin: "20px 0",
     },
     propToggler: {
       borderRadius: 0,
       marginBottom: 10,
       padding: 2,
-      color: (props) => (props.propsOpen ? '#76B833' : 'rgb(118, 118, 118)'),
-      borderBottom: (props) => (props.propsOpen ? '2px solid #76B833' : 'none'),
-      transition: 'color 100ms ease-in-out',
-      '&:hover': {
-        color: '#76B833',
-        backgroundColor: 'transparent',
+      color: (props) => (props.propsOpen ? "#76B833" : "rgb(118, 118, 118)"),
+      borderBottom: (props) => (props.propsOpen ? "2px solid #76B833" : "none"),
+      transition: "color 100ms ease-in-out",
+      "&:hover": {
+        color: "#76B833",
+        backgroundColor: "transparent",
       },
     },
     table: {
-      margin: '25px 0',
+      margin: "25px 0",
 
-      '& , *': {
+      "& , *": {
         fontFamily: 'Consolas,"Liberation Mono",Menlo,monospace !important',
-        fontSize: '13px !important',
+        fontSize: "13px !important",
       },
-      '& .MuiFormControl-root': {
+      "& .MuiFormControl-root": {
         width: 150,
       },
 
-      '& thead th': {
+      "& thead th": {
         fontFamily:
           '"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif',
-        color: 'black !important',
-        textAlign: 'left',
+        color: "black !important",
+        textAlign: "left",
       },
 
-      '& th, & td': {
+      "& th, & td": {
         paddingRight: 16,
         paddingBottom: 8,
-        verticalAlign: 'top',
+        verticalAlign: "top",
       },
-      '& td > span.flex': {
-        display: 'flex',
+      "& td > span.flex": {
+        display: "flex",
         marginTop: 25,
       },
     },
     colName: {
-      width: '10%',
-      color: '#690',
+      width: "10%",
+      color: "#690",
     },
     colType: {
-      width: '10%',
-      color: '#905',
+      width: "10%",
+      color: "#905",
     },
     colDefault: {
-      width: '10%',
+      width: "10%",
     },
     colDescription: {
-      width: '45%',
+      width: "45%",
     },
     colSelected: {
-      width: '25%',
+      width: "25%",
     },
   };
 });
@@ -97,18 +97,18 @@ function DocForm({
   const { searchParams } = url;
 
   useEffect(() => {
-    const topicKey = url.pathname?.split('/')[1] || propConfig[0].defaultValue;
+    const topicKey = url.pathname?.split("/")[1] || propConfig[0].defaultValue;
 
     if (topicKey) {
-      const topic = getTopicConfig('wkp').find((t) => t.key === topicKey);
+      const topic = getTopicConfig("wkp").find((t) => t.key === topicKey);
 
       const layers = getLayersAsFlatArray(topic.layers || [])
         .filter(
           (l) =>
-            !l.get('isBaseLayer') &&
+            !l.get("isBaseLayer") &&
             !l.children?.length &&
             !l.children?.some((c) => c.visible) &&
-            !l.get('hideInLegend'),
+            !l.get("hideInLegend"),
         )
         .map((l) => l.key)
         .reverse();
@@ -116,16 +116,16 @@ function DocForm({
       if (isIframe) {
         // Apply base layers available
         const baseLayers = getLayersAsFlatArray(topic.layers || [])
-          .filter((l) => l.get('isBaseLayer'))
+          .filter((l) => l.get("isBaseLayer"))
           .map((l) => l.key);
-        propConfig.find((p) => p.name === 'baselayers').values =
+        propConfig.find((p) => p.name === "baselayers").values =
           baseLayers.length > 1 ? baseLayers : [];
         // Apply layers available
-        propConfig.find((p) => p.name === 'layers').values =
+        propConfig.find((p) => p.name === "layers").values =
           layers.length > 1 ? layers : [];
       } else {
         // Apply layers available (TODO: update visible layers dynamically in styleguide, currently crashes the app)
-        propConfig.find((p) => p.name === 'layersVisibility').values =
+        propConfig.find((p) => p.name === "layersVisibility").values =
           layers.length > 1 ? layers : [];
       }
 
@@ -170,32 +170,32 @@ function DocForm({
                   pathname,
                 }) => {
                   let currentValue = pathname
-                    ? url.pathname.split('/')[1] || ''
+                    ? url.pathname.split("/")[1] || ""
                     : searchParams.get(name);
 
                   const isSelectMultiple =
-                    comp === 'select' && /Array/i.test(type);
+                    comp === "select" && /Array/i.test(type);
 
                   if (pathname) {
-                    currentValue = url.pathname.split('/')[1] || '';
-                  } else if (comp === 'checkbox') {
+                    currentValue = url.pathname.split("/")[1] || "";
+                  } else if (comp === "checkbox") {
                     currentValue =
-                      currentValue === 'true' || currentValue === true;
-                  } else if (comp === 'select') {
+                      currentValue === "true" || currentValue === true;
+                  } else if (comp === "select") {
                     currentValue = searchParams.get(name);
 
                     if (isSelectMultiple) {
-                      currentValue = searchParams.get(name)?.split(',');
+                      currentValue = searchParams.get(name)?.split(",");
                     }
                     if (!currentValue && isSelectMultiple) {
                       currentValue = [];
                     }
                     if (!currentValue) {
-                      currentValue = '';
+                      currentValue = "";
                     }
-                  } else if (comp === 'input') {
+                  } else if (comp === "input") {
                     if (!currentValue) {
-                      currentValue = '';
+                      currentValue = "";
                     }
                   }
 
@@ -206,13 +206,13 @@ function DocForm({
                       </td>
                       {/* <td className={classes.colType}>{type}</td> */}
                       <td className={classes.colDefault}>
-                        <span className="flex">{defaultValue || ''}</span>
+                        <span className="flex">{defaultValue || ""}</span>
                       </td>
                       <td className={classes.colDescription}>
                         <span className="flex">{description()}</span>
                       </td>
                       <td className={classes.colSelected}>
-                        {comp === 'select' && (
+                        {comp === "select" && (
                           <FormControl>
                             <InputLabel id="demo-mutiple-name-label">
                               {name}
@@ -226,7 +226,7 @@ function DocForm({
                                   url.pathname = `/${evt.target.value}`;
                                 } else {
                                   const newValue = isSelectMultiple
-                                    ? evt.target.value.join(',')
+                                    ? evt.target.value.join(",")
                                     : evt.target.value;
                                   if (newValue) {
                                     searchParams.set(name, newValue);
@@ -246,13 +246,13 @@ function DocForm({
                                   value={val}
                                   disabled={/\(disabled\)$/.test(val)}
                                 >
-                                  {val.replace(/\(disabled\)$/, '')}
+                                  {val.replace(/\(disabled\)$/, "")}
                                 </MenuItem>
                               ))}
                             </Select>
                           </FormControl>
                         )}
-                        {comp === 'input' && (
+                        {comp === "input" && (
                           <TextField
                             label={name}
                             type={type}
@@ -270,7 +270,7 @@ function DocForm({
                             {...(props || {})}
                           />
                         )}
-                        {comp === 'checkbox' && (
+                        {comp === "checkbox" && (
                           <FormControl>
                             <FormControlLabel
                               style={{ marginTop: 16 }}

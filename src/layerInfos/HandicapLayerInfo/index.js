@@ -1,1 +1,1 @@
-export { default } from './HandicapLayerInfo';
+export { default } from "./HandicapLayerInfo";

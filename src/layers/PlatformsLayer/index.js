@@ -1,1 +1,1 @@
-export { default } from './PlatformsLayer';
+export { default } from "./PlatformsLayer";

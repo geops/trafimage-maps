@@ -3,7 +3,7 @@ const {
   MatomoContext: MC,
   useMatomo: uM,
   createInstance: cI,
-} = require('@jonkoops/matomo-tracker-react');
+} = require("@jonkoops/matomo-tracker-react");
 
 const createInstanceTmp = jest.fn((params) => {
   const inst = cI(params);

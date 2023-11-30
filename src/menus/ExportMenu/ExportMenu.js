@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import canvasSize from 'canvas-size';
-import { cancelable } from 'cancelable-promise';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { FaDownload, FaInfoCircle } from 'react-icons/fa';
-import { makeStyles } from '@mui/styles';
-import MuiMenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '../../components/Select';
-import MenuItem from '../../components/Menu/MenuItem';
-import ExportButton from '../../components/ExportButton';
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import canvasSize from "canvas-size";
+import { cancelable } from "cancelable-promise";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { FaDownload, FaInfoCircle } from "react-icons/fa";
+import { makeStyles } from "@mui/styles";
+import MuiMenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Select from "../../components/Select";
+import MenuItem from "../../components/Menu/MenuItem";
+import ExportButton from "../../components/ExportButton";
 
-const LS_SIZE_KEY = 'tm.max.canvas.size';
+const LS_SIZE_KEY = "tm.max.canvas.size";
 
 const useStyles = makeStyles((theme) => ({
   menuContent: {
     padding: 16,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   selectWrapper: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
     marginLeft: 20,
   },
   label: {
@@ -34,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
     height: 44,
   },
   infoWrapper: {
-    display: 'flex',
-    alignItems: 'start',
-    margin: '10px 0',
+    display: "flex",
+    alignItems: "start",
+    margin: "10px 0",
   },
   infoIcon: {
     marginRight: theme.spacing(1),
@@ -53,12 +53,12 @@ const sizesByFormat = {
 };
 
 const options = [
-  { label: 'A0 (72 dpi)', resolution: 1, format: 'a0', weight: 2 },
-  { label: 'A0 (150 dpi)', resolution: 2, format: 'a0', weight: 4 },
-  { label: 'A0 (300 dpi)', resolution: 3, format: 'a0', weight: 6 },
-  { label: 'A1 (72 dpi)', resolution: 1, format: 'a1', weight: 1 },
-  { label: 'A1 (150 dpi)', resolution: 2, format: 'a1', weight: 3 },
-  { label: 'A1 (300 dpi)', resolution: 3, format: 'a1', weight: 5 },
+  { label: "A0 (72 dpi)", resolution: 1, format: "a0", weight: 2 },
+  { label: "A0 (150 dpi)", resolution: 2, format: "a0", weight: 4 },
+  { label: "A0 (300 dpi)", resolution: 3, format: "a0", weight: 6 },
+  { label: "A1 (72 dpi)", resolution: 1, format: "a1", weight: 1 },
+  { label: "A1 (150 dpi)", resolution: 2, format: "a1", weight: 3 },
+  { label: "A1 (300 dpi)", resolution: 3, format: "a1", weight: 5 },
 ];
 
 const validateOption = (format, exportScale, maxCanvasSize, map) => {
@@ -123,7 +123,7 @@ function ExportMenu() {
             localStorage.setItem(LS_SIZE_KEY, size);
           })
           // eslint-disable-next-line no-console
-          .catch((result) => console.log('Error', result)),
+          .catch((result) => console.log("Error", result)),
       );
     return () => maxCanvasPromise && maxCanvasPromise.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -148,7 +148,7 @@ function ExportMenu() {
     <MenuItem
       open
       className="wkp-export-menu"
-      title={t('Grossformatiges PDF exportieren')}
+      title={t("Grossformatiges PDF exportieren")}
       icon={<FaDownload focusable={false} />}
       collapsed={collapsed}
       onCollapseToggle={(c) => setCollapsed(c)}
@@ -158,7 +158,7 @@ function ExportMenu() {
         <div className={classes.selectWrapper}>
           <FormControl className={classes.formControl}>
             <InputLabel className={classes.label} id="pdf-format-select-label">
-              {t('Format')}
+              {t("Format")}
             </InputLabel>
             <Select
               labelId="pdf-format-select-label"
@@ -192,7 +192,7 @@ function ExportMenu() {
           </FormControl>
           <ExportButton
             style={{
-              margin: '10px 20px',
+              margin: "10px 20px",
               minWidth: 100,
             }}
             exportFormat={exportSelection.format}
@@ -209,12 +209,12 @@ function ExportMenu() {
           <div>
             <Typography variant="subtitle1">
               {t(
-                'Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.',
+                "Die maximal auswählbare dpi hängt von der Browser-Einstellung ab.",
               )}
             </Typography>
             <Typography variant="subtitle1">
               {t(
-                'Tipp: Verwenden Sie den Firefox-Browser für den Export hochauflösender Karten.',
+                "Tipp: Verwenden Sie den Firefox-Browser für den Export hochauflösender Karten.",
               )}
             </Typography>
           </div>

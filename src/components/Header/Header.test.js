@@ -1,9 +1,9 @@
-import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
-import Header from './Header';
+import React from "react";
+import ShallowRenderer from "react-test-renderer/shallow";
+import Header from "./Header";
 
-describe('Header', () => {
-  test('match snapshots', () => {
+describe("Header", () => {
+  test("match snapshots", () => {
     const renderer = new ShallowRenderer();
     renderer.render(<Header />);
     const tree = renderer.getRenderOutput();

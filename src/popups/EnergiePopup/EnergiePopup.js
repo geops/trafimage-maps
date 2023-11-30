@@ -1,100 +1,100 @@
 /* eslint-disable no-param-reassign */
-import React, { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@mui/styles';
-import { Feature } from 'ol';
-import GeometryType from 'ol/geom/GeometryType';
-import { Divider, MenuItem, Tab, Tabs, Typography } from '@mui/material';
-import Select from '../../components/Select/Select';
-import Link from '../../components/Link';
-import { energieleitungenColorMapping } from '../../utils/constants';
-import capitalizeFirstLetter from '../../utils/capitalizeFirstLetter';
-import formatPhone from '../../utils/formatPhone';
+import React, { useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@mui/styles";
+import { Feature } from "ol";
+import GeometryType from "ol/geom/GeometryType";
+import { Divider, MenuItem, Tab, Tabs, Typography } from "@mui/material";
+import Select from "../../components/Select/Select";
+import Link from "../../components/Link";
+import { energieleitungenColorMapping } from "../../utils/constants";
+import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
+import formatPhone from "../../utils/formatPhone";
 
-import PersonCard from '../../components/PersonCard';
+import PersonCard from "../../components/PersonCard";
 
 const useStyles = makeStyles((theme) => {
   return {
     title: {
-      padding: '8px 0',
-      fontFamily: ['SBBWeb-Bold', 'Arial', 'sans-serif'],
-      display: 'flex',
-      alignItems: 'baseline',
+      padding: "8px 0",
+      fontFamily: ["SBBWeb-Bold", "Arial", "sans-serif"],
+      display: "flex",
+      alignItems: "baseline",
       gap: 10,
     },
     subtitle: {
       color: theme.palette.text.secondary,
     },
     icon: {
-      backgroundColor: 'black',
-      display: 'inline-block',
+      backgroundColor: "black",
+      display: "inline-block",
     },
     unterwerk: {
-      backgroundColor: 'black',
-      width: '10px',
-      height: '10px',
-      display: 'inline-block',
-      flex: '0 0 10px',
+      backgroundColor: "black",
+      width: "10px",
+      height: "10px",
+      display: "inline-block",
+      flex: "0 0 10px",
     },
     produktionsanlage: {
-      width: '7px',
-      height: '7px',
-      borderRadius: '8px',
-      border: '2px solid white',
-      outline: '1.5px solid black',
-      flex: '0 0 7px',
+      width: "7px",
+      height: "7px",
+      borderRadius: "8px",
+      border: "2px solid white",
+      outline: "1.5px solid black",
+      flex: "0 0 7px",
     },
     divider: {
-      margin: '10px 0',
+      margin: "10px 0",
     },
     tabPanel: {
       paddingTop: theme.spacing(2),
       paddingBottom: theme.spacing(2),
       paddingRight: theme.spacing(1),
       paddingLeft: theme.spacing(1),
-      borderTop: '1px solid #dddddd',
+      borderTop: "1px solid #dddddd",
       marginTop: -4,
     },
     tab: { minWidth: 0 },
     segmentIcon: {
-      '&::before': {
-        position: 'absolute',
+      "&::before": {
+        position: "absolute",
         content: '"•"',
         top: 3,
         left: -2,
       },
-      '&::after': {
-        position: 'absolute',
+      "&::after": {
+        position: "absolute",
         content: '"•"',
         top: 3,
         right: -2,
       },
       fontSize: 18,
-      position: 'relative',
-      borderBottom: '1px solid black',
-      width: '60%',
-      height: '52%',
-      transform: 'rotate(-45deg)',
+      position: "relative",
+      borderBottom: "1px solid black",
+      width: "60%",
+      height: "52%",
+      transform: "rotate(-45deg)",
       marginLeft: 6,
       marginTop: -2,
-      transformOrigin: 'bottom',
+      transformOrigin: "bottom",
     },
     menuItem: {
       width: (props) => props.selectWidth - 40,
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-      display: 'block',
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+      display: "block",
     },
   };
 });
 
-const TABS = ['asset_management', 'intervention', 'sicherheitsrelevant'];
+const TABS = ["asset_management", "intervention", "sicherheitsrelevant"];
 const SICHERHEITSRELEVANT_CATEGORIES = [
-  'schalt_erd_berechtigt',
-  'sachverstaendig',
-  'instruiert',
+  "schalt_erd_berechtigt",
+  "sachverstaendig",
+  "instruiert",
 ];
 
 export function EnergiePopupSubtitle({ kategorie, unterkategorie, label }) {
@@ -102,34 +102,34 @@ export function EnergiePopupSubtitle({ kategorie, unterkategorie, label }) {
   const { t } = useTranslation();
   return kategorie ? (
     <div className={classes.title}>
-      {kategorie === 'UW' && (
+      {kategorie === "UW" && (
         <>
           <div className={`${classes.unterwerk} ${classes.icon}`} />
           <div className={classes.label}>
-            {capitalizeFirstLetter(label || t('Unterwerk'))}
+            {capitalizeFirstLetter(label || t("Unterwerk"))}
             {unterkategorie ? (
               <span className={classes.subtitle}>
-                {' - '}
+                {" - "}
                 {t(`${unterkategorie.trim()}`)}
               </span>
             ) : (
-              ''
+              ""
             )}
           </div>
         </>
       )}
-      {kategorie === 'KW' && (
+      {kategorie === "KW" && (
         <>
           <div className={`${classes.produktionsanlage} ${classes.icon}`} />
           <div className={classes.label}>
-            {capitalizeFirstLetter(label || t('Produktionsanlage'))}
+            {capitalizeFirstLetter(label || t("Produktionsanlage"))}
             {unterkategorie ? (
               <span className={classes.subtitle}>
-                {' - '}
+                {" - "}
                 {t(`${unterkategorie.trim()}`)}
               </span>
             ) : (
-              ''
+              ""
             )}
           </div>
         </>
@@ -162,11 +162,11 @@ function InterventionPersonCard({ person, segments }) {
         segments &&
         segments.length && [
           {
-            id: 'segments',
-            label: segments.join(', '),
+            id: "segments",
+            label: segments.join(", "),
             icon: (
               <div
-                title={t('Liniensegmente')}
+                title={t("Liniensegmente")}
                 className={classes.segmentIcon}
               />
             ),
@@ -217,89 +217,89 @@ function EnergiePopup({ feature }) {
   const classes = useStyles({ selectWidth });
 
   // General Info
-  const kategorie = feature.get('kategorie');
-  const unterkategorie = feature.get('unterkategorie');
-  const trassennummer = feature.get('trassennummer');
-  const losNr = feature.get('los_nr');
+  const kategorie = feature.get("kategorie");
+  const unterkategorie = feature.get("unterkategorie");
+  const trassennummer = feature.get("trassennummer");
+  const losNr = feature.get("los_nr");
   const description = useMemo(
     () =>
       feature.getGeometry().getType() === GeometryType.POINT
-        ? `${feature.get('bezeichnung')} (${feature.get('anlage_id')})`
-        : feature.get('bezeichnung'),
+        ? `${feature.get("bezeichnung")} (${feature.get("anlage_id")})`
+        : feature.get("bezeichnung"),
     [feature],
   );
 
   // Asset management
   const anlageBetreuer = useMemo(
     () =>
-      feature.get('anlagebetreuer') &&
-      JSON.parse(feature.get('anlagebetreuer')),
+      feature.get("anlagebetreuer") &&
+      JSON.parse(feature.get("anlagebetreuer")),
     [feature],
   );
   const betriebInstandhaltung = useMemo(
     () =>
-      feature.get('betrieb_instandhaltung') &&
-      JSON.parse(feature.get('betrieb_instandhaltung')),
+      feature.get("betrieb_instandhaltung") &&
+      JSON.parse(feature.get("betrieb_instandhaltung")),
     [feature],
   );
   const lifeCycleManager = useMemo(
     () =>
-      feature.get('life_cycle_manager') &&
-      JSON.parse(feature.get('life_cycle_manager')),
+      feature.get("life_cycle_manager") &&
+      JSON.parse(feature.get("life_cycle_manager")),
     [feature],
   );
 
   // Intervention
   const interventionPikettNummerTag = formatPhone(
-    feature.get('intervention_pikettnummer_tag'),
+    feature.get("intervention_pikettnummer_tag"),
   );
   const interventionPikettNummerNacht = formatPhone(
-    feature.get('intervention_pikettnummer_nacht'),
+    feature.get("intervention_pikettnummer_nacht"),
   );
   const interventionPikettNummerDetail = feature.get(
-    'intervention_pikettnummer_detail',
+    "intervention_pikettnummer_detail",
   );
-  const interventionMail = feature.get('intervention_mail');
-  const interventionMailDetail = feature.get('intervention_mail_detail');
-  const interventionBemerkungen = feature.get('intervention_bemerkungen');
+  const interventionMail = feature.get("intervention_mail");
+  const interventionMailDetail = feature.get("intervention_mail_detail");
+  const interventionBemerkungen = feature.get("intervention_bemerkungen");
   const interventionExternePersonen = validatedParseProperty(
     feature,
-    'intervention_energie_persons',
+    "intervention_energie_persons",
   );
   const interventionSbbPersonen = validatedParseProperty(
     feature,
-    'intervention_persons',
+    "intervention_persons",
   );
 
   // Sicherheitsrelevant
-  const sicherheitsrelevantLink = feature.get('sicherheitsrelevant_link');
+  const sicherheitsrelevantLink = feature.get("sicherheitsrelevant_link");
   const sicherheitsrelevantBemerkungen = feature.get(
-    'sicherheitsrelevant_bemerkungen',
+    "sicherheitsrelevant_bemerkungen",
   );
   const sicherheitsrelevantInstruiertExternalPersons = validatedParseProperty(
     feature,
-    'sicherheitsrelevant_instruiert_energie_persons',
+    "sicherheitsrelevant_instruiert_energie_persons",
   );
   const sicherheitsrelevantInstruiertSbbPersons = validatedParseProperty(
     feature,
-    'sicherheitsrelevant_instruiert_persons',
+    "sicherheitsrelevant_instruiert_persons",
   );
   const sicherheitsrelevantSachverstaendigExternalPersons =
     validatedParseProperty(
       feature,
-      'sicherheitsrelevant_sachverstaendige_energie_persons',
+      "sicherheitsrelevant_sachverstaendige_energie_persons",
     );
   const sicherheitsrelevantSachverstaendigSbbPersons = validatedParseProperty(
     feature,
-    'sicherheitsrelevant_sachverstaendige_persons',
+    "sicherheitsrelevant_sachverstaendige_persons",
   );
   const sicherheitsrelevantSchaltErdExternalPersons = validatedParseProperty(
     feature,
-    'sicherheitsrelevant_schalt_erd_berechtigt_energie_persons',
+    "sicherheitsrelevant_schalt_erd_berechtigt_energie_persons",
   );
   const sicherheitsrelevantSchaltErdSbbPersons = validatedParseProperty(
     feature,
-    'sicherheitsrelevant_schalt_erd_berechtigt_persons',
+    "sicherheitsrelevant_schalt_erd_berechtigt_persons",
   );
 
   const mainInfo = useMemo(() => {
@@ -312,17 +312,17 @@ function EnergiePopup({ feature }) {
           />
         ) : (
           <Typography className={classes.title}>
-            <b>{t('Übertragungsleitung')}</b>
+            <b>{t("Übertragungsleitung")}</b>
           </Typography>
         )}
         <Divider className={classes.divider} />
         <Typography>
           {trassennummer ? (
             <b style={{ color: energieleitungenColorMapping[`los${losNr}`] }}>
-              {trassennummer}{' '}
+              {trassennummer}{" "}
             </b>
           ) : (
-            ''
+            ""
           )}
           {description}
         </Typography>
@@ -340,7 +340,7 @@ function EnergiePopup({ feature }) {
 
   return (
     <div>
-      {permissionInfos?.user && activeTopic.permission === 'sbb' ? (
+      {permissionInfos?.user && activeTopic.permission === "sbb" ? (
         <>
           <Tabs
             value={TABS.indexOf(tab)}
@@ -348,9 +348,9 @@ function EnergiePopup({ feature }) {
             variant="fullWidth"
             className={classes.tabs}
           >
-            <Tab className={classes.tab} label={t('asset_management')} />
-            <Tab className={classes.tab} label={t('intervention')} />
-            <Tab className={classes.tab} label={t('sicherheitsrelevant')} />
+            <Tab className={classes.tab} label={t("asset_management")} />
+            <Tab className={classes.tab} label={t("intervention")} />
+            <Tab className={classes.tab} label={t("sicherheitsrelevant")} />
           </Tabs>
           <div
             className={classes.tabPanel}
@@ -362,7 +362,7 @@ function EnergiePopup({ feature }) {
               <>
                 {anlageBetreuer && (
                   <PersonCard
-                    title={`AVANT/${t('Anlagebetreuer')}`}
+                    title={`AVANT/${t("Anlagebetreuer")}`}
                     name={anlageBetreuer.name}
                     email={anlageBetreuer.email}
                     phone={anlageBetreuer.phone}
@@ -371,7 +371,7 @@ function EnergiePopup({ feature }) {
                 )}
                 {betriebInstandhaltung && (
                   <PersonCard
-                    title={t('Verantwortlich Betrieb und Instandhaltung')}
+                    title={t("Verantwortlich Betrieb und Instandhaltung")}
                     name={betriebInstandhaltung.name}
                     email={betriebInstandhaltung.email}
                     phone={betriebInstandhaltung.phone}
@@ -380,7 +380,7 @@ function EnergiePopup({ feature }) {
                 )}
                 {lifeCycleManager && (
                   <PersonCard
-                    title={t('Life-Cycle Manager')}
+                    title={t("Life-Cycle Manager")}
                     name={lifeCycleManager.name}
                     email={lifeCycleManager.email}
                     phone={lifeCycleManager.phone}
@@ -394,17 +394,17 @@ function EnergiePopup({ feature }) {
                 {(interventionPikettNummerTag ||
                   interventionPikettNummerNacht) && (
                   <Typography paragraph>
-                    <b>{t('Pikettnummern')}: </b>
+                    <b>{t("Pikettnummern")}: </b>
                     {interventionPikettNummerTag && (
                       <>
                         <br />
-                        {`${interventionPikettNummerTag} (${t('Tag')})`}
+                        {`${interventionPikettNummerTag} (${t("Tag")})`}
                       </>
                     )}
                     {interventionPikettNummerNacht && (
                       <>
                         <br />
-                        {`${interventionPikettNummerNacht} (${t('Nacht')})`}
+                        {`${interventionPikettNummerNacht} (${t("Nacht")})`}
                       </>
                     )}
                     {interventionPikettNummerDetail && (
@@ -419,7 +419,7 @@ function EnergiePopup({ feature }) {
                 {interventionMail && (
                   <Typography paragraph>
                     <span>
-                      <b>{t('E-Mail')}: </b>
+                      <b>{t("E-Mail")}: </b>
                       <a href={`mailto:${interventionMail}`}>
                         {interventionMail}
                       </a>
@@ -466,7 +466,7 @@ function EnergiePopup({ feature }) {
                 {sicherheitsrelevantLink && (
                   <Typography paragraph>
                     <Link href={sicherheitsrelevantLink}>
-                      {t('Mehr Information')}
+                      {t("Mehr Information")}
                     </Link>
                   </Typography>
                 )}
@@ -540,5 +540,5 @@ EnergiePopup.propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-EnergiePopup.renderTitle = (feat, layer, t) => t('Detailinformationen');
+EnergiePopup.renderTitle = (feat, layer, t) => t("Detailinformationen");
 export default EnergiePopup;

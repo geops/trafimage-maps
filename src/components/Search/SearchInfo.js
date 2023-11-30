@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { MdClose } from 'react-icons/md';
-import { makeStyles } from '@mui/styles';
+import React, { useEffect, useCallback } from "react";
+import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { MdClose } from "react-icons/md";
+import { makeStyles } from "@mui/styles";
 import {
   IconButton,
   Popper,
@@ -15,68 +15,68 @@ import {
   ListItemText,
   ClickAwayListener,
   Typography,
-} from '@mui/material';
-import { ReactComponent as QuestionIcon } from '../../img/circleQuestionMark.svg';
-import { setSearchInfoOpen } from '../../model/app/actions';
+} from "@mui/material";
+import { ReactComponent as QuestionIcon } from "../../img/circleQuestionMark.svg";
+import { setSearchInfoOpen } from "../../model/app/actions";
 
 const useStyles = makeStyles((theme) => {
   return {
     searchInfoOuterWrapper: {
-      position: 'absolute',
+      position: "absolute",
       right: 2,
       top: 0,
       height: 48,
       width: 48,
-      display: 'flex',
-      alignItems: 'center',
-      backgroundColor: 'white',
+      display: "flex",
+      alignItems: "center",
+      backgroundColor: "white",
     },
     searchInfoInnerWrapper: {
-      position: 'relative',
+      position: "relative",
     },
     searchInfoBtn: {
       padding: 10,
       color: theme.palette.text.secondary,
-      '&:hover': {
+      "&:hover": {
         color: theme.palette.secondary.main,
       },
     },
     popupHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
       paddingLeft: 10,
     },
     closeBtn: {
       zIndex: 1500,
-      padding: '4px 8px',
+      padding: "4px 8px",
     },
     searchInfoBox: {
       zIndex: 1500,
-      left: '10px !important',
-      width: '32vw',
-      maxWidth: (props) => (props.screenWidth !== 'xl' ? 258 : 420),
+      left: "10px !important",
+      width: "32vw",
+      maxWidth: (props) => (props.screenWidth !== "xl" ? 258 : 420),
     },
     searchInfoContent: {
-      padding: '5px 0',
-      position: 'relative',
-      maxHeight: '90vh',
-      '&::before': {
+      padding: "5px 0",
+      position: "relative",
+      maxHeight: "90vh",
+      "&::before": {
         content: '""',
         height: 0,
         width: 0,
         top: 13,
         left: -18,
-        position: 'absolute',
-        border: '10px solid transparent',
-        borderRight: '8px solid white',
-        filter: 'drop-shadow(-8px 2px 5px rgba(130,130,130,1))',
+        position: "absolute",
+        border: "10px solid transparent",
+        borderRight: "8px solid white",
+        filter: "drop-shadow(-8px 2px 5px rgba(130,130,130,1))",
       },
     },
     searchInfoList: {
-      maxHeight: '50vh',
-      padding: '0 10px',
-      overflow: 'auto',
+      maxHeight: "50vh",
+      padding: "0 10px",
+      overflow: "auto",
     },
   };
 });
@@ -103,12 +103,12 @@ function SearchInfo({ anchorEl }) {
 
   useEffect(() => {
     // Ensure the popup is always closed on mount
-    if (screenWidth !== 'xl' && !searchOpen) {
+    if (screenWidth !== "xl" && !searchOpen) {
       dispatch(setSearchInfoOpen(false));
     }
   }, [searchOpen, screenWidth, dispatch]);
 
-  if (['s', 'xs'].includes(screenWidth)) {
+  if (["s", "xs"].includes(screenWidth)) {
     return null;
   }
 
@@ -118,7 +118,7 @@ function SearchInfo({ anchorEl }) {
         <IconButton
           className={classes.searchInfoBtn}
           onClick={togglePopup}
-          title={t('Suche-Info')}
+          title={t("Suche-Info")}
         >
           <QuestionIcon />
         </IconButton>
@@ -138,7 +138,7 @@ function SearchInfo({ anchorEl }) {
               >
                 <Fade
                   {...TransitionProps}
-                  timeout={searchOpen || screenWidth === 'xl' ? 350 : 0}
+                  timeout={searchOpen || screenWidth === "xl" ? 350 : 0}
                 >
                   <Paper
                     square
@@ -146,9 +146,9 @@ function SearchInfo({ anchorEl }) {
                     className={classes.searchInfoContent}
                   >
                     <div className={classes.popupHeader}>
-                      <Typography variant="h4">{t('Suche')}</Typography>
+                      <Typography variant="h4">{t("Suche")}</Typography>
                       <IconButton
-                        title={t('Schliessen')}
+                        title={t("Schliessen")}
                         onClick={togglePopup}
                         className={classes.closeBtn}
                       >
@@ -165,16 +165,16 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Stationen')}
+                                {t("Stationen")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.stations.desc')}
+                                {t("search.info.stations.desc")}
                               </Typography>
                             </span>
                           }
-                          secondary={`${t('z.B.')} ${t(
-                            'search.info.stations.example',
+                          secondary={`${t("z.B.")} ${t(
+                            "search.info.stations.example",
                           )}`}
                         />
                       </ListItem>
@@ -183,15 +183,15 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Gemeinden')}
+                                {t("Gemeinden")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.municipalities.desc')}
+                                {t("search.info.municipalities.desc")}
                               </Typography>
                             </span>
                           }
-                          secondary={`${t('z.B.')} "Eriz", "Mesocco"`}
+                          secondary={`${t("z.B.")} "Eriz", "Mesocco"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -199,16 +199,16 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Orte')}
+                                {t("Orte")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.places.desc')}
+                                {t("search.info.places.desc")}
                               </Typography>
                             </span>
                           }
                           secondary={`${t(
-                            'z.B.',
+                            "z.B.",
                           )} "Le Chasseron", "Passo del San Bernardino", "Louwibach"`}
                         />
                       </ListItem>
@@ -217,16 +217,16 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Adressen')}
+                                {t("Adressen")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.addresses.desc')}
+                                {t("search.info.addresses.desc")}
                               </Typography>
                             </span>
                           }
                           secondary={`${t(
-                            'z.B.',
+                            "z.B.",
                           )} "Trüsselstrasse 2 3014 Bern"`}
                         />
                       </ListItem>
@@ -235,16 +235,16 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Betriebspunkte')}
+                                {t("Betriebspunkte")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.operatingpoints.desc')}
+                                {t("search.info.operatingpoints.desc")}
                               </Typography>
                             </span>
                           }
-                          secondary={`${t('z.B.')} "Aespli" ${t(
-                            'oder',
+                          secondary={`${t("z.B.")} "Aespli" ${t(
+                            "oder",
                           )} "AESP"`}
                         />
                       </ListItem>
@@ -253,15 +253,15 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Linien')}
+                                {t("Linien")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.lines.desc')}
+                                {t("search.info.lines.desc")}
                               </Typography>
                             </span>
                           }
-                          secondary={`${t('z.B.')} "210"`}
+                          secondary={`${t("z.B.")} "210"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -269,15 +269,15 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Kilometerpunkt auf Linie')}
+                                {t("Kilometerpunkt auf Linie")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.lineskilometer.desc')}
+                                {t("search.info.lineskilometer.desc")}
                               </Typography>
                             </span>
                           }
-                          secondary={`${t('z.B.')} "210 +35.74"`}
+                          secondary={`${t("z.B.")} "210 +35.74"`}
                         />
                       </ListItem>
                       <ListItem disableGutters>
@@ -285,15 +285,15 @@ function SearchInfo({ anchorEl }) {
                           primary={
                             <span>
                               <Typography component="span" variant="h4">
-                                {t('Liniensegment')}
+                                {t("Liniensegment")}
                               </Typography>
-                              :{' '}
+                              :{" "}
                               <Typography component="span">
-                                {t('search.info.linessegment.desc')}
+                                {t("search.info.linessegment.desc")}
                               </Typography>
                             </span>
                           }
-                          secondary={`${t('z.B.')} "210 29.5-35.7"`}
+                          secondary={`${t("z.B.")} "210 29.5-35.7"`}
                         />
                       </ListItem>
                     </List>

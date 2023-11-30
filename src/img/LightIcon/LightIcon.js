@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 function LightIcon({ color, label, fontColor, size }) {
   return (
@@ -39,9 +39,9 @@ LightIcon.propTypes = {
 };
 
 LightIcon.defaultProps = {
-  color: 'none',
+  color: "none",
   label: undefined,
-  fontColor: 'black',
+  fontColor: "black",
   size: 30,
 };
 

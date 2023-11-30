@@ -1,1 +1,1 @@
-export { default } from './NetzkartePopup';
+export { default } from "./NetzkartePopup";

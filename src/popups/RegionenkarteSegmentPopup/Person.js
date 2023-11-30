@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import PersonCard from '../../components/PersonCard';
-import formatPhone from '../../utils/formatPhone';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import PersonCard from "../../components/PersonCard";
+import formatPhone from "../../utils/formatPhone";
 
 const useStyles = makeStyles({
   personCard: {
-    '& a': {
-      textDecoration: 'none !important',
+    "& a": {
+      textDecoration: "none !important",
     },
   },
 });
@@ -20,7 +20,7 @@ function Person({ isIntern, person }) {
 
   return name ? (
     <PersonCard
-      title={unterrolle && `${unterrolle}${kommentar ? ` ${kommentar}` : ''}`}
+      title={unterrolle && `${unterrolle}${kommentar ? ` ${kommentar}` : ""}`}
       name={name}
       division={division}
       phone={formatPhone(phone)}
@@ -28,7 +28,7 @@ function Person({ isIntern, person }) {
       className={classes.personCard}
     />
   ) : (
-    <i>{t('Information nicht verfügbar')}</i>
+    <i>{t("Information nicht verfügbar")}</i>
   );
 }
 

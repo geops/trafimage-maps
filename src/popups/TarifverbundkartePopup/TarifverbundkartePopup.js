@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import Link from '../../components/Link';
-import TarifverbundkarteLayer from '../../layers/TarifverbundkarteLayer';
-import TarifverbundPartner from '../../components/TarifverbundPartner';
+import React, { useEffect, useMemo } from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import Link from "../../components/Link";
+import TarifverbundkarteLayer from "../../layers/TarifverbundkarteLayer";
+import TarifverbundPartner from "../../components/TarifverbundPartner";
 
 const useStyles = makeStyles(() => ({
   zone: {
-    margin: '8px 0',
+    margin: "8px 0",
   },
   zoneNumber: {
-    color: '#888',
+    color: "#888",
     fontSize: 12,
   },
 }));
@@ -31,7 +31,7 @@ function TarifverbundkartePopup({ feature, layer }) {
   const verbunde = useMemo(() => JSON.parse(partners), [partners]);
 
   useEffect(() => {
-    layer.set('clicked', false);
+    layer.set("clicked", false);
     return () => {
       /**
        * When the unmount happens due to a click on the map (with the clicked property === true),
@@ -39,7 +39,7 @@ function TarifverbundkartePopup({ feature, layer }) {
        * it is handled here.
        * @ignore
        */
-      if (!layer.get('clicked')) {
+      if (!layer.get("clicked")) {
         layer.removeSelection();
       }
     };
@@ -54,7 +54,7 @@ function TarifverbundkartePopup({ feature, layer }) {
       {verbunde?.length ? (
         <>
           <Typography variant="h4">
-            <b>{t(`Tarifverbunde in ${feature.get('name')}`)}</b>
+            <b>{t(`Tarifverbunde in ${feature.get("name")}`)}</b>
           </Typography>
           {verbunde.map((v) => {
             return (
@@ -71,7 +71,7 @@ function TarifverbundkartePopup({ feature, layer }) {
               iconSize={12}
               style={{
                 background:
-                  'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
+                  "repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)",
               }}
               label={<Link href={zPass?.tarifverbund_urls}>Z-Pass</Link>}
             />
@@ -82,14 +82,14 @@ function TarifverbundkartePopup({ feature, layer }) {
       {zones ? (
         <>
           <Typography variant="h4">
-            <b>{t('Ausgewählte Zonen')}</b>
+            <b>{t("Ausgewählte Zonen")}</b>
           </Typography>
           {zones.map((tarifZone) => {
             return (
               <div className={classes.zone} key={tarifZone.id}>
                 <Typography>{tarifZone.verbund}</Typography>
                 <div className={classes.zoneNumber}>
-                  {`${t('Zone')} ${tarifZone.zone}`}
+                  {`${t("Zone")} ${tarifZone.zone}`}
                 </div>
               </div>
             );
@@ -103,6 +103,6 @@ function TarifverbundkartePopup({ feature, layer }) {
 TarifverbundkartePopup.propTypes = propTypes;
 
 const memoized = React.memo(TarifverbundkartePopup);
-memoized.renderTitle = (feat) => feat.get('name');
+memoized.renderTitle = (feat) => feat.get("name");
 
 export default memoized;

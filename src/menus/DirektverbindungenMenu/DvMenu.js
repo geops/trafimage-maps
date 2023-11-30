@@ -1,15 +1,15 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles } from '@mui/styles';
-import { Divider } from '@mui/material';
-import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
-import DvLayerSwitcher from './DvLayerSwitcher';
-import { setDisplayMenu } from '../../model/app/actions';
-import IframeMenu from '../IframeMenu';
-import useIsMobile from '../../utils/useIsMobile';
-import useHighlightLayer from '../../utils/useHighlightLayer';
-import DvFeatureInfoTitle from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
+import React, { useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { makeStyles } from "@mui/styles";
+import { Divider } from "@mui/material";
+import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo";
+import DvLayerSwitcher from "./DvLayerSwitcher";
+import { setDisplayMenu } from "../../model/app/actions";
+import IframeMenu from "../IframeMenu";
+import useIsMobile from "../../utils/useIsMobile";
+import useHighlightLayer from "../../utils/useHighlightLayer";
+import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 
 const useStyles = makeStyles(() => {
   return {
@@ -17,12 +17,12 @@ const useStyles = makeStyles(() => {
       padding: 15,
     },
     listHeader: {
-      padding: '5px 12px',
+      padding: "5px 12px",
       fontSize: 16,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      backgroundColor: '#f5f5f5',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: "#f5f5f5",
     },
   };
 });
@@ -51,7 +51,7 @@ function DvMenu() {
 
   const showSwitcher = useMemo(() => {
     // Completely hide the switcher via the permalink
-    return urlSearch.get('direktverbindungen.menu') !== 'false';
+    return urlSearch.get("direktverbindungen.menu") !== "false";
   }, [urlSearch]);
 
   const hideMenu = useMemo(() => {
@@ -63,10 +63,10 @@ function DvMenu() {
     // Hide menu and zoom buttons on mobile
     dispatch(setDisplayMenu(!isMobile));
     const zoomControls = document
-      .querySelectorAll(`.${topic.key.replaceAll('.', '-')}.map-controls`)[0]
-      ?.querySelectorAll('.rs-zooms-bar')[0];
+      .querySelectorAll(`.${topic.key.replaceAll(".", "-")}.map-controls`)[0]
+      ?.querySelectorAll(".rs-zooms-bar")[0];
     if (zoomControls) {
-      zoomControls.style.display = isMobile ? 'none' : 'block';
+      zoomControls.style.display = isMobile ? "none" : "block";
     }
   }, [isMobile, topic, dispatch]);
 

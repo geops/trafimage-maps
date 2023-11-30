@@ -1,8 +1,8 @@
-import React from 'react';
-import { Typography } from '@mui/material';
-import { fromLonLat } from 'ol/proj';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import Search from '../Search';
+import React from "react";
+import { Typography } from "@mui/material";
+import { fromLonLat } from "ol/proj";
+import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
+import Search from "../Search";
 
 class HandicapStopFinder extends Search {
   constructor() {
@@ -51,7 +51,7 @@ class HandicapStopFinder extends Search {
 
   openPopup(item) {
     const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+    const layer = layerService.getLayer("ch.sbb.netzkarte.stationen");
 
     if (!layer) {
       return;
@@ -62,7 +62,7 @@ class HandicapStopFinder extends Search {
     if (layer.ready) {
       this.onIdle();
     } else {
-      layer.once('datarendered', this.onIdle);
+      layer.once("datarendered", this.onIdle);
     }
   }
 
@@ -71,13 +71,13 @@ class HandicapStopFinder extends Search {
       return;
     }
     const { layerService, dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = layerService.getLayer('ch.sbb.handicap.data');
+    const { mbMap } = layerService.getLayer("ch.sbb.handicap.data");
 
     if (
-      mbMap.getSource('ch.sbb.handicap') &&
-      mbMap.isSourceLoaded('ch.sbb.handicap')
+      mbMap.getSource("ch.sbb.handicap") &&
+      mbMap.isSourceLoaded("ch.sbb.handicap")
     ) {
-      mbMap.off('idle', this.onIdle);
+      mbMap.off("idle", this.onIdle);
     } else {
       return;
     }
@@ -95,7 +95,7 @@ class HandicapStopFinder extends Search {
         .map(({ source }) => source);
       return (
         layer instanceof MapboxStyleLayer &&
-        sourceIds.includes('ch.sbb.handicap')
+        sourceIds.includes("ch.sbb.handicap")
       );
     });
 

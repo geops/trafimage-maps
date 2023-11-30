@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { withTranslation } from 'react-i18next';
-import Autocomplete from '../../components/Autocomplete';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { withTranslation } from "react-i18next";
+import Autocomplete from "../../components/Autocomplete";
 
-import { ReactComponent as SearchIcon } from '../../img/search.svg';
+import { ReactComponent as SearchIcon } from "../../img/search.svg";
 
-import './DestinationInput.scss';
+import "./DestinationInput.scss";
 
 const propTypes = {
   destination: PropTypes.string,
@@ -22,7 +22,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  destination: '',
+  destination: "",
 };
 
 class DestinationInput extends Component {
@@ -114,7 +114,7 @@ class DestinationInput extends Component {
         this.setState({ destinations });
       })
       .catch((err) => {
-        if (err.name === 'AbortError') {
+        if (err.name === "AbortError") {
           // eslint-disable-next-line no-console
           // console.warn(`Abort ${url}`);
           return;
@@ -133,9 +133,9 @@ class DestinationInput extends Component {
       <div className="tm-departure-input">
         <Autocomplete
           button={<SearchIcon />}
-          value={destinationInputValue || ''}
+          value={destinationInputValue || ""}
           items={destinations}
-          placeholder={t('Direkt erreichbares Ziel auswählen')}
+          placeholder={t("Direkt erreichbares Ziel auswählen")}
           renderItem={(item) => item.label}
           getItemKey={(item) => item.id}
           onChange={(value) => {

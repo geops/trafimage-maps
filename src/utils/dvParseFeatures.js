@@ -8,10 +8,10 @@ const parseDvFeatures = (featuresArray) => {
 
     const switchVias = vias
       ? parsedVias.filter(
-          (via) => via.via_type === 'switch' || via.via_type === 'visible',
+          (via) => via.via_type === "switch" || via.via_type === "visible",
         )
       : [];
-    feature.set('vias', [
+    feature.set("vias", [
       parsedVias[0],
       ...switchVias,
       parsedVias[parsedVias.length - 1],

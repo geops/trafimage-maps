@@ -1,12 +1,12 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Map } from 'ol';
-import { MouseWheelZoom } from 'ol/interaction';
-import NoMouseWheelWarning from './NoMouseWheelWarning';
+import React from "react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { Map } from "ol";
+import { MouseWheelZoom } from "ol/interaction";
+import NoMouseWheelWarning from "./NoMouseWheelWarning";
 
-describe('NoMouseWheelWarning', () => {
-  test('deactivate mouse wheel interaction in embedded mode', () => {
+describe("NoMouseWheelWarning", () => {
+  test("deactivate mouse wheel interaction in embedded mode", () => {
     const map = new Map({});
     const mouseWheelZoom = map
       .getInteractions()

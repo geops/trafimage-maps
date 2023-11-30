@@ -1,17 +1,17 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import { render } from '@testing-library/react';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { Feature } from 'ol';
-import { Point, Polygon } from 'ol/geom';
-import { Layer } from 'mobility-toolbox-js/ol';
-import highlightPointStyle from '../../utils/highlightPointStyle';
-import FeatureInformation from '.';
+import React from "react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import { render } from "@testing-library/react";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { Feature } from "ol";
+import { Point, Polygon } from "ol/geom";
+import { Layer } from "mobility-toolbox-js/ol";
+import highlightPointStyle from "../../utils/highlightPointStyle";
+import FeatureInformation from ".";
 
-describe('FeatureInformation', () => {
+describe("FeatureInformation", () => {
   const mockStore = configureStore([thunk]);
   let storeUnMocked;
   let store;
@@ -30,7 +30,7 @@ describe('FeatureInformation', () => {
     storeUnMocked = {
       map: { highlightLayer },
       app: {
-        projection: { value: 'EPSG:3857' },
+        projection: { value: "EPSG:3857" },
         map: {
           renderSync: () => {},
           getPixelFromCoordinate: jest.fn(() => [50, 50]),
@@ -59,11 +59,11 @@ describe('FeatureInformation', () => {
     cancelAnimations.mockRestore();
   });
 
-  test('adds/removes an highlightLayer on mount/unmount', () => {
+  test("adds/removes an highlightLayer on mount/unmount", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -88,11 +88,11 @@ describe('FeatureInformation', () => {
     expect(highlighLayer.getStyle()).toBe(highlightPointStyle);
   });
 
-  test('does not add twice the same layer', () => {
+  test("does not add twice the same layer", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -118,11 +118,11 @@ describe('FeatureInformation', () => {
     expect(highlighLayer.getStyle()).toBe(highlightPointStyle);
   });
 
-  test('adds an hihglight feature if the feature is not a point but mapbox displays an icon', () => {
+  test("adds an hihglight feature if the feature is not a point but mapbox displays an icon", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -142,8 +142,8 @@ describe('FeatureInformation', () => {
         coordinate: [2.5, 2.5],
       },
     ];
-    fi[0].features[0].set('mapboxFeature', {
-      layer: { layout: { 'icon-image': 'foo' } },
+    fi[0].features[0].set("mapboxFeature", {
+      layer: { layout: { "icon-image": "foo" } },
     });
     const { unmount } = render(
       <Provider store={store}>
@@ -161,9 +161,9 @@ describe('FeatureInformation', () => {
 
   test("doesn't add an hihglight feature if the feature is not a point and not a mapbox feature", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -194,18 +194,18 @@ describe('FeatureInformation', () => {
     unmount();
   });
 
-  test('center the map on selected features if one of them is using an Overlay', () => {
+  test("center the map on selected features if one of them is using an Overlay", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
         useOverlay: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const l2 = new Layer({
-      key: 'bar',
+      key: "bar",
       properties: {
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -240,7 +240,7 @@ describe('FeatureInformation', () => {
         coordinate: [2.5, 2.5],
       },
     ];
-    storeUnMocked.app.screenWidth = 's';
+    storeUnMocked.app.screenWidth = "s";
     const { unmount } = render(
       <Provider store={mockStore(storeUnMocked)}>
         <FeatureInformation featureInfo={fi} />
@@ -258,10 +258,10 @@ describe('FeatureInformation', () => {
 
   test("center the map on selected feature if it's using an Overlay (mobile)", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
         useOverlay: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -281,7 +281,7 @@ describe('FeatureInformation', () => {
         coordinate: [2.5, 2.5],
       },
     ];
-    storeUnMocked.app.screenWidth = 'xs';
+    storeUnMocked.app.screenWidth = "xs";
     const { unmount } = render(
       <Provider store={mockStore(storeUnMocked)}>
         <FeatureInformation featureInfo={fi} />
@@ -299,16 +299,16 @@ describe('FeatureInformation', () => {
 
   test("doesn't center the map on selected feature if it's not using an Overlay'", () => {
     const l = new Layer({
-      key: 'foo',
+      key: "foo",
       properties: {
         useOverlay: true,
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const l2 = new Layer({
-      key: 'bar',
+      key: "bar",
       properties: {
-        popupComponent: 'NetzkartePopup',
+        popupComponent: "NetzkartePopup",
       },
     });
     const fi = [
@@ -353,12 +353,12 @@ describe('FeatureInformation', () => {
     unmount();
   });
 
-  describe('should match snapshot.', () => {
+  describe("should match snapshot.", () => {
     test("using the layers's popupComponent", () => {
       const l = new Layer({
-        key: 'foo',
+        key: "foo",
         properties: {
-          popupComponent: 'NetzkartePopup',
+          popupComponent: "NetzkartePopup",
         },
       });
       const fi = [
@@ -379,14 +379,14 @@ describe('FeatureInformation', () => {
 
     test("using the info's popupComponent", () => {
       const l = new Layer({
-        key: 'foo',
+        key: "foo",
       });
       const fi = [
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
           coordinate: [2, 2],
-          popupComponent: 'NetzkartePopup',
+          popupComponent: "NetzkartePopup",
         },
       ];
 
@@ -398,9 +398,9 @@ describe('FeatureInformation', () => {
       expect(container.innerHTML).toMatchSnapshot();
     });
 
-    test('should display multiple features with pagination', () => {
+    test("should display multiple features with pagination", () => {
       const l = new Layer({
-        key: 'foo',
+        key: "foo",
       });
       const fi = [
         {
@@ -410,7 +410,7 @@ describe('FeatureInformation', () => {
           ],
           layer: l,
           coordinate: [2, 2],
-          popupComponent: 'NetzkartePopup',
+          popupComponent: "NetzkartePopup",
         },
         {
           features: [
@@ -419,7 +419,7 @@ describe('FeatureInformation', () => {
           ],
           layer: l,
           coordinate: [2, 2],
-          popupComponent: 'NetzkartePopup',
+          popupComponent: "NetzkartePopup",
         },
       ];
 
@@ -431,16 +431,16 @@ describe('FeatureInformation', () => {
       expect(container.innerHTML).toMatchSnapshot();
     });
 
-    test('should not display header', () => {
+    test("should not display header", () => {
       const l = new Layer({
-        key: 'foo',
+        key: "foo",
       });
       const fi = [
         {
           features: [new Feature(new Point([2, 2]))],
           layer: l,
           coordinate: [2, 2],
-          popupComponent: 'KilometragePopup',
+          popupComponent: "KilometragePopup",
         },
       ];
 

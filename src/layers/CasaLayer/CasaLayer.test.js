@@ -1,11 +1,11 @@
-import OLVectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import { Style, Stroke, Text, Fill } from 'ol/style';
-import CasaLayer from './CasaLayer';
+import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import Map from "ol/Map";
+import View from "ol/View";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+import { Style, Stroke, Text, Fill } from "ol/style";
+import CasaLayer from "./CasaLayer";
 
 const feature = new Feature({
   geometry: new Point([50, 50]),
@@ -23,12 +23,12 @@ let map;
 let onClick;
 let onMouseOver;
 
-describe('CasaLayer', () => {
+describe("CasaLayer", () => {
   beforeEach(() => {
     onClick = jest.fn();
     onMouseOver = jest.fn();
     layer = new CasaLayer({
-      name: 'Layer',
+      name: "Layer",
       olLayer,
       onClick,
       onMouseOver,
@@ -37,33 +37,33 @@ describe('CasaLayer', () => {
     layer.attachToMap(map);
   });
 
-  test('should convert a style to an object.', () => {
+  test("should convert a style to an object.", () => {
     const style = {
       stroke: {
-        color: 'rgb(255, 200, 25)',
+        color: "rgb(255, 200, 25)",
         width: 2,
       },
       hoverStyles: {
         outline: {
-          color: 'white',
+          color: "white",
           width: 8,
         },
         background: {
-          color: 'black',
+          color: "black",
           width: 4,
         },
       },
       fill: {
-        color: 'rgb(255, 200, 25)',
+        color: "rgb(255, 200, 25)",
       },
       text: {
-        font: '12px Arial',
-        color: 'black',
-        label: 'zone',
+        font: "12px Arial",
+        color: "black",
+        label: "zone",
       },
       textOutline: {
         width: 2,
-        color: 'white',
+        color: "white",
       },
     };
 
@@ -72,11 +72,11 @@ describe('CasaLayer', () => {
     expect(olStyles.base).toEqual(
       new Style({
         stroke: new Stroke({
-          color: 'rgb(255, 200, 25)',
+          color: "rgb(255, 200, 25)",
           width: 2,
         }),
         fill: new Fill({
-          color: 'rgb(255, 200, 25)',
+          color: "rgb(255, 200, 25)",
         }),
       }),
     );
@@ -86,7 +86,7 @@ describe('CasaLayer', () => {
       new Style({
         stroke: new Stroke({
           width: 8,
-          color: 'white',
+          color: "white",
         }),
       }),
     );
@@ -96,7 +96,7 @@ describe('CasaLayer', () => {
       new Style({
         stroke: new Stroke({
           width: 4,
-          color: 'black',
+          color: "black",
         }),
       }),
     );
@@ -105,13 +105,13 @@ describe('CasaLayer', () => {
     expect(olStyles.text).toEqual(
       new Style({
         text: new Text({
-          font: '12px Arial',
-          text: 'zone',
+          font: "12px Arial",
+          text: "zone",
           fill: new Fill({
-            color: 'black',
+            color: "black",
           }),
           stroke: new Stroke({
-            color: 'white',
+            color: "white",
             width: 2,
           }),
         }),
@@ -119,12 +119,12 @@ describe('CasaLayer', () => {
     );
   });
 
-  test('should call onMouseOver callback.', async () => {
+  test("should call onMouseOver callback.", async () => {
     const coordinate = [50, 50];
-    jest.spyOn(map, 'forEachFeatureAtPixel').mockReturnValue(feature);
+    jest.spyOn(map, "forEachFeatureAtPixel").mockReturnValue(feature);
     const spy = jest.fn();
     layer.onMouseOver(spy);
-    await map.dispatchEvent({ type: 'pointermove', map, coordinate });
+    await map.dispatchEvent({ type: "pointermove", map, coordinate });
 
     expect(onMouseOver).toHaveBeenCalledWith(feature, coordinate);
     expect(spy).toHaveBeenCalledWith(feature, coordinate);

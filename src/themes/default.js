@@ -1,27 +1,27 @@
-import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
 const colors = {
-  red: '#eb0000',
-  redDark: '#c60018',
-  black: '#000',
-  gray: '#767676',
-  lighterGray: '#b7b7b7',
-  lightGray: '#e5e5e5',
+  red: "#eb0000",
+  redDark: "#c60018",
+  black: "#000",
+  gray: "#767676",
+  lighterGray: "#b7b7b7",
+  lightGray: "#e5e5e5",
 };
 
 const styles = {
   bottomFade: {
-    '&::after': {
+    "&::after": {
       content: '""',
-      position: 'absolute',
+      position: "absolute",
       zIndex: 10,
       bottom: -5,
       left: 0,
-      pointerEvents: 'none',
+      pointerEvents: "none",
       backgroundImage:
-        'linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)',
-      width: 'calc(100% - 6px)',
-      height: '5em',
+        "linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255, 1) 90%)",
+      width: "calc(100% - 6px)",
+      height: "5em",
     },
   },
 };
@@ -36,21 +36,21 @@ const breakpointValues = {
 
 const typoBody = {
   fontSize: 14,
-  fontWeight: 'normal',
-  lineHeight: '16.8px',
-  color: '#000000',
+  fontWeight: "normal",
+  lineHeight: "16.8px",
+  color: "#000000",
 };
 
 const themeSpacing = (value) => {
   let space = 0;
   switch (value) {
-    case 'thin':
+    case "thin":
       space = 8; // From SSB design
       break;
-    case 'small':
+    case "small":
       space = 24; // From SSB design
       break;
-    case 'medium':
+    case "medium":
       space = 48; // From SSB design
       break;
     default:
@@ -84,25 +84,25 @@ const theme = createTheme(
       htmlFontSize: 14, // SBB design says 15
       h4: {
         fontFamily: "'SBBWeb-Bold', 'Arial', 'sans-serif'",
-        fontWeight: 'bold',
-        fontSize: '1em',
-        lineHeight: '22.5px',
+        fontWeight: "bold",
+        fontSize: "1em",
+        lineHeight: "22.5px",
       },
       body1: typoBody,
       body2: {
         ...typoBody,
         fontSize: 16,
-        lineHeight: '1.7333333rem',
+        lineHeight: "1.7333333rem",
       },
       subtitle1: {
         fontSize: 13,
-        lineHeight: '19.5px',
+        lineHeight: "19.5px",
         color: colors.gray,
       },
       button: {
-        fontSize: '1em',
+        fontSize: "1em",
         letterSpacing: 0,
-        lineHeight: '26px',
+        lineHeight: "26px",
       },
     },
     spacing: themeSpacing,
@@ -111,13 +111,13 @@ const theme = createTheme(
         elevation: 0,
       },
       MuiIconButton: {
-        size: 'small',
+        size: "small",
         disableRipple: true,
         disableFocusRipple: true,
       },
       MuiButton: {
-        variant: 'contained',
-        color: 'primary',
+        variant: "contained",
+        color: "primary",
         disableRipple: true,
         disableFocusRipple: true,
         disableElevation: true,
@@ -137,7 +137,7 @@ const theme = createTheme(
         transitionDuration: 0,
       },
       MuiListItemText: {
-        primaryTypographyProps: { variant: 'body1' },
+        primaryTypographyProps: { variant: "body1" },
       },
     },
     overrides: {
@@ -150,34 +150,34 @@ const theme = createTheme(
       // from sbb design, see 'select' angular components
       MuiSelect: {
         select: {
-          '&:focus': {
-            backgroundColor: 'white',
+          "&:focus": {
+            backgroundColor: "white",
           },
         },
         icon: {
-          transition: 'transform 400ms',
+          transition: "transform 400ms",
           width: 18,
-          color: 'inherit', // on SBB design it will be more colors.gray, but it's nicer like this.
+          color: "inherit", // on SBB design it will be more colors.gray, but it's nicer like this.
         },
         outlined: {
-          padding: '10px 44px 11px 14px',
+          padding: "10px 44px 11px 14px",
         },
       },
       MuiPopover: {
         paper: {
-          border: '2px solid #666',
-          padding: '30px 20px',
-          overflowX: 'visible',
-          overflowY: 'visible',
+          border: "2px solid #666",
+          padding: "30px 20px",
+          overflowX: "visible",
+          overflowY: "visible",
           maxWidth: 400,
-          '& .MuiIconButton-root.wkp-close': {
-            position: 'absolute',
-            border: 'none',
+          "& .MuiIconButton-root.wkp-close": {
+            position: "absolute",
+            border: "none",
             right: 0,
             top: 0,
-            color: 'black',
-            height: '50px',
-            width: '50px',
+            color: "black",
+            height: "50px",
+            width: "50px",
             // SBB design
             // float: 'right',
             // width: 25,
@@ -189,20 +189,20 @@ const theme = createTheme(
             //   height: '100%',
             // },
           },
-          '& .wkp-arrow-center-left': {
-            position: 'absolute',
-            top: 'calc(50% - 11px)',
+          "& .wkp-arrow-center-left": {
+            position: "absolute",
+            top: "calc(50% - 11px)",
             left: -12,
             width: 20,
             height: 20,
-            border: '2px solid #666',
-            borderWidth: '0 2px 2px 0',
-            display: 'inline-block',
-            transform: 'rotate(135deg)',
-            background: 'white',
+            border: "2px solid #666",
+            borderWidth: "0 2px 2px 0",
+            display: "inline-block",
+            transform: "rotate(135deg)",
+            background: "white",
           },
           // Remove the padding for menu or select
-          '&.MuiMenu-paper': {
+          "&.MuiMenu-paper": {
             padding: 0,
           },
         },
@@ -211,23 +211,23 @@ const theme = createTheme(
       // maybe there will be more use case to manage in the future.
       MuiToggleButton: {
         root: {
-          border: 'none',
+          border: "none",
           padding: 0,
-          '&:hover, &$selected': {
-            backgroundColor: 'transparent',
+          "&:hover, &$selected": {
+            backgroundColor: "transparent",
           },
-          '&$selected svg': {
+          "&$selected svg": {
             color: colors.red,
           },
-          '&.Mui-disabled': {
-            color: '#888',
+          "&.Mui-disabled": {
+            color: "#888",
           },
         },
       },
       MuiInputBase: {
         root: {
           borderRadius: 2,
-          fontSize: '1em',
+          fontSize: "1em",
         },
       },
       MuiOutlinedInput: {
@@ -237,11 +237,11 @@ const theme = createTheme(
           borderColor: colors.lighterGray,
         },
         root: {
-          '&:hover .MuiOutlinedInput-notchedOutline': {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
             borderColor: colors.lighterGray,
           },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#666',
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#666",
           },
         },
       },
@@ -249,7 +249,7 @@ const theme = createTheme(
       MuiMenuItem: {
         root: {
           color: colors.gray,
-          '&:hover,&:focus': {
+          "&:hover,&:focus": {
             color: colors.redDark,
           },
           paddingLeft: 14,
@@ -257,47 +257,47 @@ const theme = createTheme(
       },
       MuiListItem: {
         root: {
-          backgroundColor: 'white !important',
-          '&:hover': {
-            backgroundColor: 'white !important',
+          backgroundColor: "white !important",
+          "&:hover": {
+            backgroundColor: "white !important",
           },
         },
       },
       MuiButton: {
         root: {
-          borderRadius: '2px',
+          borderRadius: "2px",
           minWidth: 60,
           maxWidth: 400,
           height: 48,
-          textTransform: 'none',
-          transition: 'none',
-          borderWidth: '1px',
+          textTransform: "none",
+          transition: "none",
+          borderWidth: "1px",
           paddingLeft: 40,
           paddingRight: 40,
 
-          '&$disabled': {
-            color: '#666',
-            borderColor: '#979797',
-            textDecoration: 'line-through',
-            backgroundColor: 'white',
+          "&$disabled": {
+            color: "#666",
+            borderColor: "#979797",
+            textDecoration: "line-through",
+            backgroundColor: "white",
           },
         },
         containedPrimary: {
-          color: '#fff',
+          color: "#fff",
           backgroundColor: colors.red,
           borderColor: colors.red,
-          '&:hover': {
+          "&:hover": {
             borderColor: colors.redDark,
             backgroundColor: colors.redDark,
           },
         },
         containedSecondary: {
           color: colors.black,
-          backgroundColor: '#dcdcdc',
-          borderColor: '#dcdcdc',
-          '&:hover': {
-            borderColor: '#cdcdcd',
-            backgroundColor: '#cdcdcd',
+          backgroundColor: "#dcdcdc",
+          borderColor: "#dcdcdc",
+          "&:hover": {
+            borderColor: "#cdcdcd",
+            backgroundColor: "#cdcdcd",
           },
         },
       },
@@ -305,11 +305,11 @@ const theme = createTheme(
         root: {
           borderRadius: 0,
           color: colors.black,
-          '&:hover': {
-            backgroundColor: 'transparent',
+          "&:hover": {
+            backgroundColor: "transparent",
           },
-          '&$disabled': {
-            color: '#888',
+          "&$disabled": {
+            color: "#888",
           },
         },
         sizeSmall: {
@@ -318,68 +318,68 @@ const theme = createTheme(
       },
       MuiDialog: {
         root: {
-          position: 'absolute !important',
+          position: "absolute !important",
         },
         paper: {
-          pointerEvents: 'auto',
-          textAlign: 'left',
+          pointerEvents: "auto",
+          textAlign: "left",
           minHeight: 65,
-          backgroundColor: '#fff',
-          overflowY: 'hidden',
+          backgroundColor: "#fff",
+          overflowY: "hidden",
           borderRadius: 0,
           margin: 0,
-          width: 'min-content',
+          width: "min-content",
         },
         paperWidthFalse: {
-          maxWidth: 'none',
+          maxWidth: "none",
         },
       },
       MuiDialogTitle: {
         root: {
           fontSize: 14,
-          borderBottom: '1px solid #eee',
+          borderBottom: "1px solid #eee",
           minHeight: 50,
-          height: 'auto',
-          padding: '0 40px 0 20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          position: 'relative',
+          height: "auto",
+          padding: "0 40px 0 20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative",
         },
       },
       MuiTabs: {
         root: {
-          display: 'unset',
-          overflow: 'unset',
-          minHeight: 'unset',
-          '& .MuiTabs-indicator': {
-            backgroundColor: 'transparent',
+          display: "unset",
+          overflow: "unset",
+          minHeight: "unset",
+          "& .MuiTabs-indicator": {
+            backgroundColor: "transparent",
           },
         },
       },
       MuiTab: {
         root: {
-          lineHeight: 'unset',
+          lineHeight: "unset",
           minWidth: 0,
           marginLeft: 2,
           marginRight: 2,
           marginBottom: -1,
-          border: '1px solid #dddddd',
+          border: "1px solid #dddddd",
           borderTopLeftRadius: 2,
           borderTopRightRadius: 2,
-          textTransform: 'none',
-          '&:first-child': {
+          textTransform: "none",
+          "&:first-child": {
             marginLeft: themeSpacing(2),
           },
-          '&:last-child': {
+          "&:last-child": {
             marginRight: themeSpacing(2),
           },
-          '&:hover': {
+          "&:hover": {
             color: colors.redDark,
           },
-          '&.Mui-selected': {
-            borderBottomColor: 'white',
-            backgroundColor: 'white',
+          "&.Mui-selected": {
+            borderBottomColor: "white",
+            backgroundColor: "white",
           },
         },
       },

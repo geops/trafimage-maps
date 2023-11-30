@@ -1,29 +1,29 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import { EventConsumer } from '@geops/create-react-web-component';
-import BaseLayerSwitcher from 'react-spatial/components/BaseLayerSwitcher';
-import ResizeHandler from '../ResizeHandler';
-import { setScreenWidth } from '../../model/app/actions';
-import MainDialog from '../MainDialog';
-import Map from '../Map';
-import Menu from '../Menu';
-import FeatureMenu from '../FeatureMenu';
-import TrackerMenu from '../../menus/TrackerMenu';
-import ShareMenu from '../../menus/ShareMenu';
-import DrawMenu from '../../menus/DrawMenu';
-import ExportMenu from '../../menus/ExportMenu';
-import Permalink from '../Permalink';
-import Header from '../Header';
-import Footer from '../Footer';
-import MapControls from '../MapControls';
-import Popup from '../Popup';
-import Search from '../Search';
-import TopicTelephoneInfos from '../TopicTelephoneInfos';
-import TopicsMenu from '../TopicsMenu';
-import Overlay from '../Overlay';
-import { ReactComponent as ChevronLeft } from '../../img/chevronLeft.svg';
+import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { EventConsumer } from "@geops/create-react-web-component";
+import BaseLayerSwitcher from "react-spatial/components/BaseLayerSwitcher";
+import ResizeHandler from "../ResizeHandler";
+import { setScreenWidth } from "../../model/app/actions";
+import MainDialog from "../MainDialog";
+import Map from "../Map";
+import Menu from "../Menu";
+import FeatureMenu from "../FeatureMenu";
+import TrackerMenu from "../../menus/TrackerMenu";
+import ShareMenu from "../../menus/ShareMenu";
+import DrawMenu from "../../menus/DrawMenu";
+import ExportMenu from "../../menus/ExportMenu";
+import Permalink from "../Permalink";
+import Header from "../Header";
+import Footer from "../Footer";
+import MapControls from "../MapControls";
+import Popup from "../Popup";
+import Search from "../Search";
+import TopicTelephoneInfos from "../TopicTelephoneInfos";
+import TopicsMenu from "../TopicsMenu";
+import Overlay from "../Overlay";
+import { ReactComponent as ChevronLeft } from "../../img/chevronLeft.svg";
 
 const defaultElements = {
   header: false,
@@ -71,25 +71,25 @@ function TopicElements({ history }) {
   useEffect(() => {
     const unfocusTab = () => setTabFocus(false);
     const focusTab = (e) => e.which === 9 && setTabFocus(true);
-    document.addEventListener('mousedown', unfocusTab);
-    document.addEventListener('keydown', focusTab);
+    document.addEventListener("mousedown", unfocusTab);
+    document.addEventListener("keydown", focusTab);
     return function cleanup() {
-      document.removeEventListener('mousedown', unfocusTab);
-      document.removeEventListener('keydown', focusTab);
+      document.removeEventListener("mousedown", unfocusTab);
+      document.removeEventListener("keydown", focusTab);
     };
   });
 
   const elements = useMemo(() => {
-    const disabled = new URL(window.location.href).searchParams.get('disabled');
+    const disabled = new URL(window.location.href).searchParams.get("disabled");
     const elts = activeTopic?.elements || defaultElements;
     if (disabled) {
-      disabled.split(',').forEach((element) => {
+      disabled.split(",").forEach((element) => {
         // Backward compatibility
-        if (element === 'spyLayer') {
+        if (element === "spyLayer") {
           elts.baseLayerSwitcher = false;
         }
         // Backward compatibility
-        if (element === 'header') {
+        if (element === "header") {
           elts.search = false;
           elts.telephoneInfos = false;
         }
@@ -102,43 +102,43 @@ function TopicElements({ history }) {
 
   const baseLayers = useMemo(() => {
     return (activeTopic?.layers || []).filter((layer) =>
-      layer.get('isBaseLayer'),
+      layer.get("isBaseLayer"),
     );
   }, [activeTopic]);
 
   const topicClassName = useMemo(() => {
-    let classNamee = '';
+    let classNamee = "";
     if (activeTopic?.key) {
-      classNamee = activeTopic.key.toLowerCase().replaceAll('.', '-');
+      classNamee = activeTopic.key.toLowerCase().replaceAll(".", "-");
     }
     return classNamee;
   }, [activeTopic]);
 
   const className = useMemo(() => {
-    const classNames = ['tm-trafimage-maps', topicClassName];
+    const classNames = ["tm-trafimage-maps", topicClassName];
 
     if (elements.header) {
-      classNames.push('header');
+      classNames.push("header");
     }
 
     if (elements.menu) {
-      classNames.push('menu');
+      classNames.push("menu");
     }
 
     if (elements.mapControls) {
-      classNames.push('map-controls');
+      classNames.push("map-controls");
     }
 
-    return classNames.join(' ');
+    return classNames.join(" ");
   }, [topicClassName, elements]);
 
   const barrierFreeClassName = useMemo(() => {
-    const classNames = ['tm-barrier-free'];
+    const classNames = ["tm-barrier-free"];
 
     if (!tabFocus) {
-      classNames.push('tm-no-focus');
+      classNames.push("tm-no-focus");
     }
-    return classNames.join(' ');
+    return classNames.join(" ");
   }, [tabFocus]);
 
   const onResize = useCallback(
@@ -198,9 +198,9 @@ function TopicElements({ history }) {
           <BaseLayerSwitcher
             layers={baseLayers}
             titles={{
-              button: t('Baselayerwechsel'),
-              openSwitcher: t('Baselayer-Menu öffnen'),
-              closeSwitcher: t('Baselayer-Menu schliessen'),
+              button: t("Baselayerwechsel"),
+              openSwitcher: t("Baselayer-Menu öffnen"),
+              closeSwitcher: t("Baselayer-Menu schliessen"),
             }}
             closeButtonImage={<ChevronLeft />}
             t={t}

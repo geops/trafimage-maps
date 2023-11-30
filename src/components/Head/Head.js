@@ -1,8 +1,8 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import { setConsentGiven } from '../../model/app/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import { setConsentGiven } from "../../model/app/actions";
 
 /**
  * This component adds a script tag in the HTML head for SBB consent management.
@@ -24,11 +24,11 @@ function Head({ topics, displayConsent, domainConsentId }) {
     /localhost:3000/.test(window.location.href)
   ) {
     // Simulate that the consent has already been given.
-    if (window.localStorage.getItem('wkp.fake.consent') === 'true') {
+    if (window.localStorage.getItem("wkp.fake.consent") === "true") {
       dispatch(setConsentGiven(true));
       return null;
     }
-    window.localStorage.setItem('wkp.fake.consent', true);
+    window.localStorage.setItem("wkp.fake.consent", true);
   }
 
   // [TRAFDOKU-96] On jsdoc.maps.trafimage.ch when switching between examples the script

@@ -1,101 +1,101 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import Logo from 'react-styleguidist/lib/client/rsg-components/Logo';
-import Version from 'react-styleguidist/lib/client/rsg-components/Version';
-import Styled from 'react-styleguidist/lib/client/rsg-components/Styled';
-import docConfig from '../config/doc-config.json';
-import style from './styleguidist.css';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import Logo from "react-styleguidist/lib/client/rsg-components/Logo";
+import Version from "react-styleguidist/lib/client/rsg-components/Version";
+import Styled from "react-styleguidist/lib/client/rsg-components/Styled";
+import docConfig from "../config/doc-config.json";
+import style from "./styleguidist.css";
 
-const xsmall = '@media (max-width: 600px)';
+const xsmall = "@media (max-width: 600px)";
 
 const styles = ({ font, mq }) => ({
   root: {
-    backgroundColor: 'red',
+    backgroundColor: "red",
   },
   header: {
     height: 60,
-    position: 'absolute',
+    position: "absolute",
     top: 0,
-    width: '100%',
-    color: '#61849c',
-    borderBottom: '2px solid #61849c',
-    backgroundColor: 'white',
+    width: "100%",
+    color: "#61849c",
+    borderBottom: "2px solid #61849c",
+    backgroundColor: "white",
   },
   bar: {
-    display: 'flex',
-    alignItems: 'center',
-    height: '100%',
+    display: "flex",
+    alignItems: "center",
+    height: "100%",
     [xsmall]: {
-      flexDirection: 'column',
-      alignItems: 'center',
+      flexDirection: "column",
+      alignItems: "center",
     },
   },
   title: {
-    fontFamily: 'Avenir, Helvetica, Arial, sans-serif',
+    fontFamily: "Avenir, Helvetica, Arial, sans-serif",
     fontSize: 20,
-    marginLeft: '1.5em',
-    color: '#61849c',
-    fontWeight: 'bold',
+    marginLeft: "1.5em",
+    color: "#61849c",
+    fontWeight: "bold",
   },
   version: {
-    padding: '10px 0 0 10px',
+    padding: "10px 0 0 10px",
   },
   nav: {
-    fontFamily: 'Avenir, Helvetica, Arial, sans-serif',
-    marginLeft: 'auto',
-    marginRight: '1.5em',
+    fontFamily: "Avenir, Helvetica, Arial, sans-serif",
+    marginLeft: "auto",
+    marginRight: "1.5em",
     fontSize: 16,
     [xsmall]: {
       margin: [[10, 0, 0]],
     },
   },
   headerLink: {
-    '&, &:link, &:visited': {
-      marginLeft: '0.5em',
-      marginRight: '0.5em',
+    "&, &:link, &:visited": {
+      marginLeft: "0.5em",
+      marginRight: "0.5em",
       fontFamily: font,
     },
-    '&:hover, &:active': {
-      textDecoration: 'underline',
-      cursor: 'pointer',
+    "&:hover, &:active": {
+      textDecoration: "underline",
+      cursor: "pointer",
     },
   },
   content: {
     marginTop: 60,
-    height: 'calc(100% - 60px)',
-    position: 'fixed',
-    width: '100%',
+    height: "calc(100% - 60px)",
+    position: "fixed",
+    width: "100%",
   },
   scrollable: {
-    overflowY: 'scroll',
-    height: 'calc(100vh - 60px)',
+    overflowY: "scroll",
+    height: "calc(100vh - 60px)",
   },
   main: {
     maxWidth: 1000,
     padding: [[15, 30]],
-    paddingLeft: '230px',
-    margin: [[0, 'auto']],
+    paddingLeft: "230px",
+    margin: [[0, "auto"]],
     [mq.small]: {
       padding: 15,
     },
-    display: 'block',
+    display: "block",
   },
   components: {
-    overflow: 'auto', // To prevent the pane from growing out of the screen
+    overflow: "auto", // To prevent the pane from growing out of the screen
   },
   sidebar: {
-    backgroundColor: '#f5f5f5',
-    border: '#e8e8e8 solid',
-    borderWidth: '0 1px 0 0',
-    position: 'fixed',
+    backgroundColor: "#f5f5f5",
+    border: "#e8e8e8 solid",
+    borderWidth: "0 1px 0 0",
+    position: "fixed",
     top: 60,
     left: 0,
     bottom: 0,
-    width: '220px',
-    overflow: 'auto',
+    width: "220px",
+    overflow: "auto",
   },
   preview: {
-    padding: '0!important',
+    padding: "0!important",
   },
 });
 
@@ -108,15 +108,15 @@ export function StyleGuideRenderer({
 }) {
   const [apiKey, setApiKey] = useState();
   useEffect(() => {
-    fetch('https://backend.developer.geops.io/publickey')
+    fetch("https://backend.developer.geops.io/publickey")
       .then((response) => response.json())
       .then((data) => {
         setApiKey(data.key);
       })
       .catch(() => {
-        setApiKey('error');
+        setApiKey("error");
         // eslint-disable-next-line no-console
-        console.error('Request to get the apiKey failed');
+        console.error("Request to get the apiKey failed");
       });
   }, []);
 

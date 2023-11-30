@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import MapboxStyleLayer from '../MapboxStyleLayer';
+import MapboxStyleLayer from "../MapboxStyleLayer";
 
 // Caching filters to reset to the original when toggle off the layer.
 const filterCacheByMbStyle = {};
@@ -58,39 +58,39 @@ class LevelLayer extends MapboxStyleLayer {
       }
 
       // level 2D
-      if (metadata === '2D' && this.level === '2D') {
-        if (visible && styleLayer.layout.visibility === 'none') {
-          mbMap.setLayoutProperty(styleLayer.id, 'visibility', 'visible');
-        } else if (!visible && styleLayer.layout.visibility === 'visible') {
-          mbMap.setLayoutProperty(styleLayer.id, 'visibility', 'none');
+      if (metadata === "2D" && this.level === "2D") {
+        if (visible && styleLayer.layout.visibility === "none") {
+          mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
+        } else if (!visible && styleLayer.layout.visibility === "visible") {
+          mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
         }
 
         // others levels
-      } else if (metadata === 'level' && this.level !== '2D') {
+      } else if (metadata === "level" && this.level !== "2D") {
         // If visible apply the new level filter.
         if (visible) {
           const currentFilter = [...filterCache[styleLayer.id]];
           currentFilter[1] = [
-            '==',
-            ['case', ['has', 'level'], ['get', 'level'], 0],
+            "==",
+            ["case", ["has", "level"], ["get", "level"], 0],
             this.level,
           ];
 
           mbMap.setFilter(styleLayer.id, currentFilter);
 
-          if (styleLayer.layout.visibility === 'none') {
-            mbMap.setLayoutProperty(styleLayer.id, 'visibility', 'visible');
+          if (styleLayer.layout.visibility === "none") {
+            mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
           }
-        } else if (!isInit && styleLayer.layout.visibility === 'visible') {
+        } else if (!isInit && styleLayer.layout.visibility === "visible") {
           // We set the visibility to none only if others siblings level layer are also hidden.
           // it can happens when we load the topic via urls aand then we switch topic.
           // In that case change:visible events are not registered in the same order.
           if (
-            !this.get('parent').children.find(
-              (child) => child.level !== '2D' && child.visible,
+            !this.get("parent").children.find(
+              (child) => child.level !== "2D" && child.visible,
             )
           ) {
-            mbMap.setLayoutProperty(styleLayer.id, 'visibility', 'none');
+            mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
           }
         }
       }

@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import createDebounce from 'redux-debounced';
-import map from './map/reducers';
-import app from './app/reducers';
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import createDebounce from "redux-debounced";
+import map from "./map/reducers";
+import app from "./app/reducers";
 
 /* eslint-disable */
 const getStore = () => {

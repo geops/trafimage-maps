@@ -1,27 +1,27 @@
-import OLVectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import Feature from 'ol/Feature';
-import Point from 'ol/geom/Point';
-import { Group as LayerGroup } from 'ol/layer';
-import { Style, Stroke, Text, Fill } from 'ol/style';
-import ZoneLayer from './ZoneLayer';
+import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import Map from "ol/Map";
+import View from "ol/View";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
+import { Group as LayerGroup } from "ol/layer";
+import { Style, Stroke, Text, Fill } from "ol/style";
+import ZoneLayer from "./ZoneLayer";
 
 const feature = new Feature({
   geometry: new Point([50, 50]),
-  zone: '42',
+  zone: "42",
 });
 
 const olLayer = new LayerGroup({
   layers: [
     new OLVectorLayer({
-      className: 'Verbundzonen', // needed for forEachLayerAtPixel
+      className: "Verbundzonen", // needed for forEachLayerAtPixel
       source: new VectorSource(),
       style: (f, r) => this.zoneStyle(f, r)[0],
     }),
     new OLVectorLayer({
-      className: 'Verbundzonen - Labels', // needed for forEachLayerAtPixel
+      className: "Verbundzonen - Labels", // needed for forEachLayerAtPixel
       source: new VectorSource(),
       style: (f, r) => this.zoneStyle(f, r)[1],
       zIndex: 100,
@@ -34,12 +34,12 @@ let map;
 let onClick;
 let onMouseOver;
 
-describe('ZoneLayer', () => {
+describe("ZoneLayer", () => {
   beforeEach(() => {
     onClick = jest.fn();
     onMouseOver = jest.fn();
     layer = new ZoneLayer({
-      name: 'Layer',
+      name: "Layer",
       olLayer,
       onClick,
       onMouseOver,
@@ -48,7 +48,7 @@ describe('ZoneLayer', () => {
     layer.attachToMap(map);
   });
 
-  test('should return the correct default style.', () => {
+  test("should return the correct default style.", () => {
     const style = layer.defaultStyleFunction(feature, false, false);
     const olStyles = layer.getOlStylesFromObject(style, false, false, feature);
 
@@ -67,17 +67,17 @@ describe('ZoneLayer', () => {
     expect(olStyles.text).toEqual(
       new Style({
         text: new Text({
-          text: '42',
-          font: 'bold 13px Arial',
+          text: "42",
+          font: "bold 13px Arial",
           fill: new Fill({
-            color: '#4576A2',
+            color: "#4576A2",
           }),
         }),
       }),
     );
   });
 
-  test('should return the correct select style', () => {
+  test("should return the correct select style", () => {
     const style = layer.defaultStyleFunction(feature, true, false);
     const olStyles = layer.getOlStylesFromObject(style, true, false, feature);
 
@@ -88,7 +88,7 @@ describe('ZoneLayer', () => {
           color: [104, 104, 104, 0.7],
         }),
         stroke: new Stroke({
-          color: '#fff',
+          color: "#fff",
         }),
       }),
     );
@@ -97,10 +97,10 @@ describe('ZoneLayer', () => {
       new Style({
         zIndex: 0.5,
         text: new Text({
-          text: '42',
-          font: 'bold 13px Arial',
+          text: "42",
+          font: "bold 13px Arial",
           fill: new Fill({
-            color: '#fff',
+            color: "#fff",
           }),
         }),
       }),

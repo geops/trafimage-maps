@@ -1,1 +1,1 @@
-export { default } from './InterventionTopicInfo';
+export { default } from "./InterventionTopicInfo";

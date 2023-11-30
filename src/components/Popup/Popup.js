@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Point, LineString } from 'ol/geom';
-import RSPopup from 'react-spatial/components/Popup';
-import FeatureInformation from '../FeatureInformation';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Point, LineString } from "ol/geom";
+import RSPopup from "react-spatial/components/Popup";
+import FeatureInformation from "../FeatureInformation";
 
 const getPopupCoordinates = (
   map,
@@ -40,12 +40,12 @@ function Popup() {
     const { layer, features } = info;
 
     if (
-      layer.get('popupComponent') &&
-      !layer.get('useOverlay') &&
-      !layer.get('useMenu') &&
-      !layer.get('useTrackerMenu')
+      layer.get("popupComponent") &&
+      !layer.get("useOverlay") &&
+      !layer.get("useMenu") &&
+      !layer.get("useTrackerMenu")
     ) {
-      if (typeof layer.hidePopup === 'function') {
+      if (typeof layer.hidePopup === "function") {
         return features.find((f) => !layer.hidePopup(f, layer, featureInfo));
       }
       return true;

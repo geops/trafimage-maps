@@ -1,16 +1,16 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import TopicInfosButton from '.';
+import React from "react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import configureStore from "redux-mock-store";
+import TopicInfosButton from ".";
 
-describe('TopicInfosButton', () => {
+describe("TopicInfosButton", () => {
   const mockStore = configureStore([thunk]);
   let store;
 
-  test('renders active state', () => {
-    const info = { key: 'foo' };
+  test("renders active state", () => {
+    const info = { key: "foo" };
     store = mockStore({
       map: {},
       app: { activeTopic: info, selectedForInfos: {} },
@@ -20,13 +20,13 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toMatch(
-      'wkp-info-bt wkp-active',
+    expect(container.querySelector("button").className).toMatch(
+      "wkp-info-bt wkp-active",
     );
   });
 
-  test('renders selected and active state', () => {
-    const info = { key: 'foo' };
+  test("renders selected and active state", () => {
+    const info = { key: "foo" };
     store = mockStore({
       map: {},
       app: { activeTopic: info, selectedForInfos: info },
@@ -36,8 +36,8 @@ describe('TopicInfosButton', () => {
         <TopicInfosButton topic={info} />
       </Provider>,
     );
-    expect(container.querySelector('button').className).toMatch(
-      'wkp-info-bt wkp-active wkp-selected',
+    expect(container.querySelector("button").className).toMatch(
+      "wkp-info-bt wkp-active wkp-selected",
     );
   });
 });

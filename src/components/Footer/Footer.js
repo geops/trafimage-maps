@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import ScaleLine from 'react-spatial/components/ScaleLine';
-import MousePosition from 'react-spatial/components/MousePosition';
-import { Link } from '@mui/material';
-import ProjectionSelect from '../ProjectionSelect';
-import coordinateHelper from '../../utils/coordinateHelper';
-import { setDialogVisible } from '../../model/app/actions';
-import './Footer.scss';
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import ScaleLine from "react-spatial/components/ScaleLine";
+import MousePosition from "react-spatial/components/MousePosition";
+import { Link } from "@mui/material";
+import ProjectionSelect from "../ProjectionSelect";
+import coordinateHelper from "../../utils/coordinateHelper";
+import { setDialogVisible } from "../../model/app/actions";
+import "./Footer.scss";
 
 function Footer() {
   const dispatch = useDispatch();
@@ -20,28 +20,28 @@ function Footer() {
   const projections = useMemo(() => {
     return [
       {
-        label: 'CH1903 / LV03',
-        value: 'EPSG:21781',
+        label: "CH1903 / LV03",
+        value: "EPSG:21781",
         format: (c) =>
-          `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+          `${t("Koordinaten")}: ${coordinateHelper.meterFormat(c)}`,
       },
       {
-        label: 'CH1903+ / LV95',
-        value: 'EPSG:2056',
+        label: "CH1903+ / LV95",
+        value: "EPSG:2056",
         format: (c) =>
-          `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+          `${t("Koordinaten")}: ${coordinateHelper.meterFormat(c)}`,
       },
       {
-        label: 'Web Mercator',
-        value: 'EPSG:3857',
+        label: "Web Mercator",
+        value: "EPSG:3857",
         format: (c) =>
-          `${t('Koordinaten')}: ${coordinateHelper.meterFormat(c)}`,
+          `${t("Koordinaten")}: ${coordinateHelper.meterFormat(c)}`,
       },
       {
-        label: 'WGS 84',
-        value: 'EPSG:4326',
+        label: "WGS 84",
+        value: "EPSG:4326",
         format: (c) =>
-          `${t('Koordinaten')}: ${coordinateHelper.wgs84Format(c)}`,
+          `${t("Koordinaten")}: ${coordinateHelper.wgs84Format(c)}`,
       },
     ];
   }, [t]);
@@ -69,29 +69,29 @@ function Footer() {
             }}
             tabIndex="0"
           >
-            {t('Cookie-Einstellungen')}
+            {t("Cookie-Einstellungen")}
           </Link>
         )}
         <Link
           component="button"
-          onClick={() => dispatch(setDialogVisible('Kontakt'))}
+          onClick={() => dispatch(setDialogVisible("Kontakt"))}
           tabIndex="0"
         >
-          {t('Kontakt')}
+          {t("Kontakt")}
         </Link>
         <Link
           component="button"
-          onClick={() => dispatch(setDialogVisible('Impressum'))}
+          onClick={() => dispatch(setDialogVisible("Impressum"))}
           tabIndex="0"
         >
-          {t('Impressum')}
+          {t("Impressum")}
         </Link>
         <Link
           component="button"
-          onClick={() => dispatch(setDialogVisible('Rechtliches'))}
+          onClick={() => dispatch(setDialogVisible("Rechtliches"))}
           tabIndex="0"
         >
-          {t('Rechtliches')}
+          {t("Rechtliches")}
         </Link>
         <Link
           className="wkp-dev-portal-link"

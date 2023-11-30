@@ -1,1 +1,1 @@
-export { default } from './TopicLoader';
+export { default } from "./TopicLoader";

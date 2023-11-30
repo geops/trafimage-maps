@@ -1,7 +1,7 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-import Link from '../../components/Link';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
+import Link from "../../components/Link";
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
@@ -25,7 +25,7 @@ const urlTester =
   /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)/gm;
 
 const escapeRegExp = (string) => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 };
 
 const searchMatches = (intialText, testers) => {
@@ -82,9 +82,9 @@ const replaceLinks = (intialTextArray, matched, renderCallback) => {
   // Split array items and flatten it.
   const flatSplitArray = intialTextArray
     .map((item) => {
-      if (typeof item === 'string') {
+      if (typeof item === "string") {
         // Split string with RegExp and remove all empty strings or undefined.
-        return item.split(new RegExp(regularExp, 'g')).filter((v) => !!v);
+        return item.split(new RegExp(regularExp, "g")).filter((v) => !!v);
       }
       return [item];
     })
@@ -132,7 +132,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
   }
 
   const propLabel = label || propertyName;
-  const values = properties[propertyName].split('\n');
+  const values = properties[propertyName].split("\n");
   let content = null;
 
   if (values.length > 1) {
@@ -143,7 +143,7 @@ function HandicapPopupElement({ properties, propertyName, label }) {
         ) : null}
         <div className="wkp-handicap-popup-field-body">
           {values.map((v, idx) => {
-            if (v === '') {
+            if (v === "") {
               return <br />;
             }
             return (

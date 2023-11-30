@@ -1,7 +1,7 @@
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import highlightPointStyle from '../../utils/highlightPointStyle';
-import DrawLayer from '../../layers/DrawLayer';
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import highlightPointStyle from "../../utils/highlightPointStyle";
+import DrawLayer from "../../layers/DrawLayer";
 import {
   SET_LAYERS,
   SET_CENTER,
@@ -10,7 +10,7 @@ import {
   SET_MAX_EXTENT,
   SET_MAX_ZOOM,
   SET_MIN_ZOOM,
-} from './actions';
+} from "./actions";
 
 const highlightLayer = new VectorLayer({
   source: new VectorSource({ features: [] }),

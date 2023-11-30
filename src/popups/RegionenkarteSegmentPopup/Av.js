@@ -1,57 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import Feature from 'ol/Feature';
-import { Layer } from 'mobility-toolbox-js/ol';
-import { MenuItem } from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { useTranslation } from 'react-i18next';
-import qs from 'query-string';
-import Select from '../../components/Select';
-import Person from './Person';
-import Line from './Line';
-import LineData from './LineData';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import Feature from "ol/Feature";
+import { Layer } from "mobility-toolbox-js/ol";
+import { MenuItem } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import qs from "query-string";
+import Select from "../../components/Select";
+import Person from "./Person";
+import Line from "./Line";
+import LineData from "./LineData";
 
 const useStyles = makeStyles((theme) => ({
   description: {
-    flex: '0 0',
-    '& > div:first-child': {
+    flex: "0 0",
+    "& > div:first-child": {
       paddingBottom: theme.spacing(2),
     },
   },
   menuItem: {
     width: (props) => props.selectWidth - 4,
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-    display: 'block',
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    display: "block",
   },
 }));
 
 const roles = [
-  'av_bnb',
-  'av_fahrbahn',
-  'av_fahrstrom',
-  'av_ingenieurbau',
-  'av_natur',
-  'av_bzu',
-  'av_wasser',
-  'av_abwasser',
-  'av_bahntechnik',
+  "av_bnb",
+  "av_fahrbahn",
+  "av_fahrstrom",
+  "av_ingenieurbau",
+  "av_natur",
+  "av_bzu",
+  "av_wasser",
+  "av_abwasser",
+  "av_bahntechnik",
 ];
 
-const PERMALINK_PARAM = 'anlagegattung';
+const PERMALINK_PARAM = "anlagegattung";
 
 function Av({ layer, feature, onChangeRole }) {
   const { t } = useTranslation();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
-  const accessType = layer.get('accessType') || 'public';
-  const isIntern = accessType === 'intern';
+  const accessType = layer.get("accessType") || "public";
+  const isIntern = accessType === "intern";
   const parsed = qs.parseUrl(window.location.href);
   const permalinkParam = parsed.query[PERMALINK_PARAM];
   const [role, setRole] = useState(
     isIntern
       ? (roles.includes(permalinkParam) && permalinkParam) || roles[0]
-      : 'av_bnb',
+      : "av_bnb",
   );
   const [person, setPerson] = useState();
   const [lineData, setLineData] = useState();
@@ -67,7 +67,7 @@ function Av({ layer, feature, onChangeRole }) {
     if (newPerson && newPerson.email) {
       fetch(
         `${cartaroUrl}anlagenverantwortliche/items/other_lines/?role=${
-          role.split('_')[1]
+          role.split("_")[1]
         }&email=${newPerson.email}&format=json`,
         {
           signal: abortController.signal,
@@ -78,7 +78,7 @@ function Av({ layer, feature, onChangeRole }) {
           setLineData(newLineData);
         })
         .catch((err) => {
-          if (err && err.name === 'AbortError') {
+          if (err && err.name === "AbortError") {
             // ignore user abort request
             return;
           }
@@ -139,7 +139,7 @@ function Av({ layer, feature, onChangeRole }) {
             </Select>
           )}
           {!isIntern && (
-            <b>{t(role === 'av_bnb' ? 'Koordinator Bahnnahes Bauen' : 'Av')}</b>
+            <b>{t(role === "av_bnb" ? "Koordinator Bahnnahes Bauen" : "Av")}</b>
           )}
         </div>
       </div>

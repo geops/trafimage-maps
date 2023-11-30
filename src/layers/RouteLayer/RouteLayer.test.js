@@ -1,39 +1,39 @@
-import fetchMock from 'fetch-mock';
-import OLVectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import Map from 'ol/Map';
-import View from 'ol/View';
-import Feature from 'ol/Feature';
-import LineString from 'ol/geom/LineString';
-import { Style, Stroke, Circle, Fill, Icon } from 'ol/style';
-import RouteLayer from './RouteLayer';
-import finishFlag from '../../img/finish_flag.png';
+import fetchMock from "fetch-mock";
+import OLVectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import Map from "ol/Map";
+import View from "ol/View";
+import Feature from "ol/Feature";
+import LineString from "ol/geom/LineString";
+import { Style, Stroke, Circle, Fill, Icon } from "ol/style";
+import RouteLayer from "./RouteLayer";
+import finishFlag from "../../img/finish_flag.png";
 
 const routes = [
   {
     isClickable: true,
     isSelected: true,
-    popupTitle: 'Route St. Gallen >> Zürich',
-    popupContent: ['Von: St. Gallen', 'Nach: Zürich HB'],
+    popupTitle: "Route St. Gallen >> Zürich",
+    popupContent: ["Von: St. Gallen", "Nach: Zürich HB"],
     sequences: [
       {
         uicFrom: 8503000,
         uicTo: 8507000,
-        mot: 'rail',
+        mot: "rail",
       },
       {
         uicFrom: 8507000,
         uicTo: 8576579,
-        mot: 'bus',
+        mot: "bus",
       },
     ],
   },
 ];
 
 const routeDataRail = {
-  type: 'Feature',
+  type: "Feature",
   geometry: {
-    type: 'LineString',
+    type: "LineString",
     coordinates: [
       [-1, 1],
       [10, -10],
@@ -42,28 +42,28 @@ const routeDataRail = {
   properties: {
     lines: [],
     station_from: {
-      id: '8503000',
-      ident_source: 'sbb',
+      id: "8503000",
+      ident_source: "sbb",
       latitude: 8.5373327691,
       longitude: 47.3785545925,
-      name: 'Zürich HB',
-      platform: '34',
+      name: "Zürich HB",
+      platform: "34",
     },
     station_to: {
-      id: '8507000',
-      ident_source: 'sbb',
+      id: "8507000",
+      ident_source: "sbb",
       latitude: 7.4384644,
       longitude: 46.9493093,
-      name: 'Bern',
-      platform: '8',
+      name: "Bern",
+      platform: "8",
     },
   },
 };
 
 const routeDataBus = {
-  type: 'Feature',
+  type: "Feature",
   geometry: {
-    type: 'LineString',
+    type: "LineString",
     coordinates: [
       [-1, -1],
       [10, 10],
@@ -76,16 +76,16 @@ const routeDataBus = {
       ident_source: null,
       latitude: 7.438445,
       longitude: 46.9489792,
-      name: 'bern hauptbahnhof',
-      platform: '',
+      name: "bern hauptbahnhof",
+      platform: "",
     },
     station_to: {
-      id: '8576579',
-      ident_source: 'sbb',
+      id: "8576579",
+      ident_source: "sbb",
       latitude: 7.6338961748,
       longitude: 46.7801596652,
-      name: 'Steffisburg, Dorf',
-      platform: '',
+      name: "Steffisburg, Dorf",
+      platform: "",
     },
   },
 };
@@ -95,10 +95,10 @@ const feature = new Feature({
     [10, 10],
     [1, 1],
   ]),
-  mot: 'rail',
+  mot: "rail",
   route: {
     isClickable: true,
-    popupContent: ['Von: St. Gallen', 'Nach: Zürich HB'],
+    popupContent: ["Von: St. Gallen", "Nach: Zürich HB"],
   },
 });
 
@@ -126,16 +126,16 @@ const fetchRoutesError = () => {
   fetchMock.once(/8576579/g, 500);
 };
 
-describe('RouteLayer', () => {
+describe("RouteLayer", () => {
   beforeEach(() => {
-    mapElement = document.createElement('div');
-    mapElement.style.width = '100px';
-    mapElement.style.height = '100px';
+    mapElement = document.createElement("div");
+    mapElement.style.width = "100px";
+    mapElement.style.height = "100px";
     document.body.appendChild(mapElement);
     onClick = jest.fn();
     onMouseOver = jest.fn();
     layer = new RouteLayer({
-      name: 'Layer',
+      name: "Layer",
       olLayer,
       onClick,
       onMouseOver,
@@ -151,7 +151,7 @@ describe('RouteLayer', () => {
     document.body.removeChild(mapElement);
   });
 
-  test('should return the correct default style.', () => {
+  test("should return the correct default style.", () => {
     const style = layer.defaultStyleFunction(feature);
     const olStyles = layer.getOlStylesFromObject(style, false, false, feature);
 
@@ -166,7 +166,7 @@ describe('RouteLayer', () => {
   });
 
   // This test failed because of the canvas mock but we don't know why.
-  test('should return the correct styles when selected.', async () => {
+  test("should return the correct styles when selected.", async () => {
     layer.attachToMap(map);
     fetchRoutes();
 
@@ -201,16 +201,16 @@ describe('RouteLayer', () => {
       new Icon({
         src: finishFlag,
         anchor: [4.5, 3.5],
-        anchorXUnits: 'pixels',
-        anchorYUnits: 'pixels',
-        anchorOrigin: 'bottom-left',
+        anchorXUnits: "pixels",
+        anchorYUnits: "pixels",
+        anchorOrigin: "bottom-left",
         imgSize: [24, 24],
-        crossOrigin: 'anonymous',
+        crossOrigin: "anonymous",
       }),
     );
   });
 
-  test('should return the correct hover style', () => {
+  test("should return the correct hover style", () => {
     const style = layer.defaultStyleFunction(feature, false, true);
     const olStyles = layer.getOlStylesFromObject(style, false, true, feature);
 
@@ -228,14 +228,14 @@ describe('RouteLayer', () => {
       new Style({
         zIndex: 1,
         stroke: new Stroke({
-          color: 'black',
+          color: "black",
           width: 8,
         }),
       }),
     );
   });
 
-  test('should return a feature on loadRoute.', async () => {
+  test("should return a feature on loadRoute.", async () => {
     layer.attachToMap(map);
     fetchRoutes();
     const route = await layer.loadRoutes(routes);
@@ -243,7 +243,7 @@ describe('RouteLayer', () => {
     expect(route[0]).toBeInstanceOf(Feature);
   });
 
-  test('should skip failed API requests on loadRoute.', async () => {
+  test("should skip failed API requests on loadRoute.", async () => {
     layer.attachToMap(map);
     fetchRoutesError();
     const route = await layer.loadRoutes(routes);
@@ -251,16 +251,16 @@ describe('RouteLayer', () => {
     expect(route).toEqual([]);
   });
 
-  test('shoud call onClick callbacks and deselect on click.', async () => {
+  test("shoud call onClick callbacks and deselect on click.", async () => {
     const coordinate = [10, 10];
     fetchRoutes();
     layer.attachToMap(map);
     const features = await layer.loadRoutes(routes);
-    jest.spyOn(map, 'getFeaturesAtPixel').mockReturnValue([features[0]]);
-    jest.spyOn(map, 'forEachLayerAtPixel').mockReturnValue(layer.olLayer);
+    jest.spyOn(map, "getFeaturesAtPixel").mockReturnValue([features[0]]);
+    jest.spyOn(map, "forEachLayerAtPixel").mockReturnValue(layer.olLayer);
 
     expect(onClick).toHaveBeenCalledTimes(0);
-    const evt = { type: 'singleclick', map, coordinate };
+    const evt = { type: "singleclick", map, coordinate };
     await map.dispatchEvent(evt);
     expect(onClick.mock.calls[0][0]).toEqual([features[0]]);
     expect(onClick.mock.calls[0][1]).toBe(layer);

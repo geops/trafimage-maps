@@ -1,4 +1,4 @@
-const getHtmlPageCode = (iframeCode, extraCode = '') => {
+const getHtmlPageCode = (iframeCode, extraCode = "") => {
   if (!iframeCode) {
     return null;
   }

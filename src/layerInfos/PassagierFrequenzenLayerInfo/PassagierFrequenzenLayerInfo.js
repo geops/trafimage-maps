@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { PropTypes } from 'prop-types';
-import { Layer } from 'mobility-toolbox-js/ol';
-import DataLink from '../../components/DataLink';
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { PropTypes } from "prop-types";
+import { Layer } from "mobility-toolbox-js/ol";
+import DataLink from "../../components/DataLink";
 
 const comps = {
   de: (
@@ -75,8 +75,8 @@ function PassagierFrequenzenLayerInfo({ properties: layer }) {
   const { i18n, t } = useTranslation();
   const statisticsLink = useMemo(() => {
     const { language: lang } = i18n;
-    return `https://reporting.sbb.ch${lang === 'de' ? '' : `/${lang}`}/${t(
-      'verkehr',
+    return `https://reporting.sbb.ch${lang === "de" ? "" : `/${lang}`}/${t(
+      "verkehr",
     )}?highlighted=row-243`;
   }, [i18n, t]);
   return (
@@ -88,7 +88,7 @@ function PassagierFrequenzenLayerInfo({ properties: layer }) {
       </p>
       <p>
         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
-          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+          {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
         </DataLink>
       </p>
     </div>

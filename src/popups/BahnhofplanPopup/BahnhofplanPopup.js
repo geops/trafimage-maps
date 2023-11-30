@@ -1,11 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { FaRegFilePdf } from 'react-icons/fa';
-import Link from '../../components/Link';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { FaRegFilePdf } from "react-icons/fa";
+import Link from "../../components/Link";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -16,10 +16,10 @@ const propTypes = {
 const defaultProps = {};
 
 function BahnhofplanPopup({ feature, language, t }) {
-  const iabpUrl = feature.get('url_interactive_plan');
-  const a4Url = feature.get('url_a4');
-  const posterUrl = feature.get('url_poster');
-  const shoppingUrl = feature.get('url_shopping');
+  const iabpUrl = feature.get("url_interactive_plan");
+  const a4Url = feature.get("url_a4");
+  const posterUrl = feature.get("url_poster");
+  const shoppingUrl = feature.get("url_shopping");
 
   let iabpLink;
   let a4Link;
@@ -30,7 +30,7 @@ function BahnhofplanPopup({ feature, language, t }) {
     iabpLink = (
       <div>
         <Link href={`${iabpUrl}#?lang=${language}`}>
-          {t('Interaktiver Bahnhofplan')}
+          {t("Interaktiver Bahnhofplan")}
         </Link>
       </div>
     );
@@ -40,7 +40,7 @@ function BahnhofplanPopup({ feature, language, t }) {
     a4Link = (
       <div>
         <a href={a4Url} rel="noopener noreferrer" target="_blank">
-          {t('Format A4')}
+          {t("Format A4")}
           <FaRegFilePdf />
         </a>
       </div>
@@ -51,7 +51,7 @@ function BahnhofplanPopup({ feature, language, t }) {
     posterLink = (
       <div>
         <a href={posterUrl} rel="noopener noreferrer" target="_blank">
-          {t('Plakat')}
+          {t("Plakat")}
           <FaRegFilePdf />
         </a>
       </div>
@@ -62,7 +62,7 @@ function BahnhofplanPopup({ feature, language, t }) {
     shoppingLink = (
       <div>
         <a href={shoppingUrl} rel="noopener noreferrer" target="_blank">
-          {t('Shopping im Bahnhof')}
+          {t("Shopping im Bahnhof")}
           <FaRegFilePdf />
         </a>
       </div>
@@ -91,5 +91,5 @@ const composed = compose(
   connect(mapStateToProps),
 )(BahnhofplanPopup);
 
-composed.renderTitle = (feat) => feat.get('name');
+composed.renderTitle = (feat) => feat.get("name");
 export default composed;
