@@ -158,7 +158,7 @@
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
     "start:doc": "ESLINT_NO_DEV_ERRORS=true  styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
-    "test": "react-app-rewired test  --transformIgnorePatterns \"/node_modules/(?!(@geops/create-react-web-component|filter-obj|split-on-first|node-fetch|query-string|decode-uri-component|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\"",
+    "test": "react-app-rewired test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(@geops/create-react-web-component|filter-obj|split-on-first|node-fetch|query-string|decode-uri-component|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\"",
     "up": "yarn upgrade-interactive --latest"
   },
   "browserslist": [
@@ -169,33 +169,9 @@
     "not android < 5"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
-  "stylelint": {
-    "plugins": [
-      "stylelint-scss"
-    ],
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-recommended-scss"
-    ],
-    "rules": {
-      "import-notation": "string",
-      "scss/at-import-partial-extension": "always",
-      "selector-pseudo-class-no-unknown": [
-        true,
-        {
-          "ignorePseudoClasses": [
-            "export"
-          ]
-        }
-      ],
-      "property-no-unknown": [
-        true,
-        {
-          "ignoreProperties": [
-            "/transitiondelay/"
-          ]
-        }
-      ]
-    }
-  }
+  "jest": {
+    "resetMocks": false,
+    "coverageReporters": ["text", "html"],
+    "snapshotSerializers": ["jest-serializer-html"]
+  }  
 }

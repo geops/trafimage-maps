@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, act } from "@testing-library/react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import userEvent from "@testing-library/user-event";
 import Autocomplete from "./Autocomplete";
@@ -71,7 +71,9 @@ describe("Autocomplete", () => {
   describe("when properties are set", () => {
     test("should match snapshot without items and defaultItems using defaultProps", () => {
       const { container } = render(<Autocomplete value="fooval" />);
-      container.querySelector("input").focus();
+      act(() => {
+        container.querySelector("input").focus();
+      });
       expect(container.innerHTML).toMatchSnapshot();
     });
 
@@ -84,7 +86,9 @@ describe("Autocomplete", () => {
           getItemKey={() => Math.random()}
         />,
       );
-      container.querySelector("input").focus();
+      act(() => {
+        container.querySelector("input").focus();
+      });
       expect(container.innerHTML).toMatchSnapshot();
     });
 
@@ -98,7 +102,9 @@ describe("Autocomplete", () => {
           getItemKey={() => Math.random()}
         />,
       );
-      container.querySelector("input").focus();
+      act(() => {
+        container.querySelector("input").focus();
+      });
       expect(container.innerHTML).toMatchSnapshot();
     });
 
@@ -113,7 +119,9 @@ describe("Autocomplete", () => {
           onSelect={() => {}}
         />,
       );
-      container.querySelector("input").focus();
+      act(() => {
+        container.querySelector("input").focus();
+      });
       expect(container.innerHTML).toMatchSnapshot();
     });
 
@@ -144,21 +152,27 @@ describe("Autocomplete", () => {
           onSelect={() => {}}
         />,
       );
-      container.querySelector("input").focus();
+      act(() => {
+        container.querySelector("input").focus();
+      });
       expect(container.innerHTML).toMatchSnapshot();
     });
 
     describe("#onDocClick()", () => {
       test("hide the list and removes the focus.", () => {
         const container = mountDflt();
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
         fireEvent.click(document);
         expect(container.innerHTML).toMatchSnapshot();
       });
 
       test("does nothing when click comes from ana element of Autocomplete.", () => {
         const container = mountDflt();
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
         fireEvent.click(container.querySelector("div"));
         expect(container.innerHTML).toMatchSnapshot();
       });
@@ -167,7 +181,9 @@ describe("Autocomplete", () => {
     describe("#onFocus()", () => {
       test("updates set showList state property to true", () => {
         const container = mountDflt();
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
         expect(container.querySelectorAll(".tm-focus").length).toBe(1);
       });
     });
@@ -175,14 +191,22 @@ describe("Autocomplete", () => {
     describe("#onBlurInput()", () => {
       test("does nothing if no lastKeyPress parameter", () => {
         const container = mountDflt();
-        container.querySelector("input").focus();
-        container.querySelector("input").blur();
+        act(() => {
+          container.querySelector("input").focus();
+        });
+        act(() => {
+          container.querySelector("input").blur();
+        });
         expect(container.querySelectorAll(".tm-focus").length).toBe(0);
       });
 
-      test("hide list and renove focus if lastKeyPress is not an arrow down.", () => {
+      test("hide list and renove focus if lastKeyPress is not an arrow down.", async () => {
         const container = mountDflt();
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
+        const user = userEvent.setup();
+        await user.keyboard("foo");
         fireEvent.keyPress(container.querySelector("input"), { which: 41 });
         expect(container.querySelectorAll(".tm-focus").length).toBe(1);
       });
@@ -191,7 +215,9 @@ describe("Autocomplete", () => {
     describe("#onKeyPress()", () => {
       test("gives focus to the first element of the list", () => {
         const container = mountDflt();
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
         fireEvent.keyUp(container.querySelector("input"), {
           keyCode: 40,
         });
@@ -289,7 +315,9 @@ describe("Autocomplete", () => {
             onSelect={fn}
           />,
         );
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
         fireEvent.click(container.querySelector("li"));
         expect(
           container.querySelector(".tm-autocomplete-results").style.display,
@@ -309,7 +337,9 @@ describe("Autocomplete", () => {
             onSelect={fn}
           />,
         );
-        container.querySelector("input").focus();
+        act(() => {
+          container.querySelector("input").focus();
+        });
         fireEvent.click(container.querySelectorAll("li")[4]);
         expect(
           container.querySelector(".tm-autocomplete-results").style.display,
@@ -338,9 +368,11 @@ describe("Autocomplete", () => {
       });
     });
 
-    test("hides the list on click on search button if the list is open.", () => {
+    test("hides the list on click on search button if the list is open.", async () => {
       const container = mountDflt();
-      container.querySelector("input").focus();
+      act(() => {
+        container.querySelector("input").focus();
+      });
       expect(
         container.querySelector(".tm-autocomplete-results").style.display,
       ).toBe("");

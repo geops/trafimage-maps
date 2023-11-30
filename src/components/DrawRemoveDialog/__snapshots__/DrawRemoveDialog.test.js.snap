@@ -22,7 +22,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
     >
       <div class="MuiPaper-root MuiPaper-elevation MuiPaper-elevation4 MuiDialog-paper makeStyles-paperModal-6 tm-dialog-container makeStyles-dialogContainer-1 MuiDialog-paperScrollPaper MuiDialog-paperWidthMd css-1hvry59-MuiPaper-root-MuiDialog-paper"
            role="dialog"
-           aria-labelledby="mui-1"
+           aria-labelledby=":r0:"
       >
         <span class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root makeStyles-title-14 makeStyles-title-17 css-1236ds1-MuiTypography-root-MuiDialogTitle-root"
               id="draggable-dialog-title"

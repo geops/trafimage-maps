@@ -12,14 +12,15 @@ exports[`AusbauFilters should match snapshot if showFilterParam is an empty stri
   <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-16ml97r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
     <div tabindex="0"
          role="combobox"
+         aria-controls=":r2:"
          aria-expanded="false"
          aria-haspopup="listbox"
          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-         aria-controls="mui-2"
     >
       Projekte im Bau
     </div>
     <input aria-invalid="false"
+           name=":r3:"
            aria-hidden="true"
            tabindex="-1"
            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
@@ -57,14 +58,15 @@ exports[`AusbauFilters should match snapshot if showFilterParam is true, should 
   <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-16ml97r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
     <div tabindex="0"
          role="combobox"
+         aria-controls=":r0:"
          aria-expanded="false"
          aria-haspopup="listbox"
          class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
-         aria-controls="mui-1"
     >
       Projekte im Bau
     </div>
     <input aria-invalid="false"
+           name=":r1:"
            aria-hidden="true"
            tabindex="-1"
            class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"

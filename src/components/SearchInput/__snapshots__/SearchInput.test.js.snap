@@ -86,7 +86,7 @@ exports[`SearchInput when properties are set matches snapshot  1`] = `
 `;
 
 exports[`SearchInput when properties are set matches snapshot  2`] = `
-<div class="tm-foo tm-focus">
+<div class="tm-foo">
   <input type="text"
          tabindex="0"
          placeholder="gux"
