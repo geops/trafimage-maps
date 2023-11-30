@@ -107,7 +107,6 @@
     "react-error-overlay": "6.0.11",
     "react-scripts": "5.0.1",
     "react-svg-loader": "^3.0.3",
-    "react-test-renderer": "18.2.0",
     "react-web-component-style-loader": "0.1.4-alpha",
     "redux-mock-store": "1.5.4",
     "resemblejs": "5.0.0",
