@@ -266,6 +266,8 @@
   "ch.sbb.netzentwicklung-desc": "Visione delle responsabilità dello sviluppo della rete di I-NAT-NET per i ruoli di Pianificatore tratte&nodi, Sviluppatore rete strategico, Manager di programma. Le mappe contengono ulteriori informazioni sui compiti regionali (dirigente sviluppo della rete regione).",
   "ch.sbb.netzentwicklung.programm_manager": "Manager di programma",
   "ch.sbb.netzentwicklung.sk_planer": "Pianificatore tratte & nodi",
+  "ch.sbb.netzentwicklung.sk_planer.by_person": "Per persona",
+  "ch.sbb.netzentwicklung.sk_planer.by_region": "Per regione",
   "ch.sbb.netzentwicklung.strategisch": "Sviluppatore rete strategico",
   "ch.sbb.netzkarte-desc": "La carta di rete è destinata agli utenti dei trasporti pubblici. Si tratta di una cartina di base che fa riferimento ai dati dell’orario. È sufficiente fare clic sulla stazione desiderata direttamente sulla cartina per consultare le informazioni corrispondenti.",
   "ch.sbb.netzkarte-desc-topic-info": "Alla voce «Layer» sono disponibili ulteriori contenuti che possono essere visualizzati sulla carta.",

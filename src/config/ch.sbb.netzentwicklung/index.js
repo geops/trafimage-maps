@@ -1,3 +1,4 @@
+import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import { kilometrageLayer } from '../ch.sbb.infrastruktur';
@@ -30,22 +31,6 @@ export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   },
 });
 
-export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
-  name: 'ch.sbb.netzentwicklung.sk_planer',
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
-  group: 'netzentwicklung',
-  properties: {
-    isQueryable: true,
-    popupComponent: 'NetzentwicklungPopup',
-    netzentwicklungRoleType: 'S&K Planer', // display only roles of this type
-    hasInfos: true,
-    useOverlay: true,
-    layerInfoComponent: 'NetzentwicklungLayerInfo',
-  },
-});
-
 export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   name: 'ch.sbb.netzentwicklung.strategisch',
   mapboxLayer: netzentwicklungDataLayer,
@@ -58,6 +43,52 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
     netzentwicklungRoleType: 'Netzentwickler Strategisch', // display only roles of this type
     hasInfos: true,
     useOverlay: true,
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
+});
+
+export const netzentwicklungSkPlanerByRegionLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.sk_planer.by_region',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
+  group: 'netzentwicklung.sk_planer',
+  properties: {
+    isQueryable: true,
+    popupComponent: 'NetzentwicklungPopup',
+    netzentwicklungRoleType: 'S&K Planer', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    layerInfoComponent: 'NetzentwicklungLayerInfo',
+  },
+});
+
+export const netzentwicklungSkPlanerBySkplanerLayer = new MapboxStyleLayer({
+  name: 'ch.sbb.netzentwicklung.sk_planer.by_person',
+  mapboxLayer: netzentwicklungDataLayer,
+  styleLayersFilter: ({ id }) => /sk_planer.by_person/.test(id),
+  group: 'netzentwicklung.sk_planer',
+  properties: {
+    isQueryable: true,
+    popupComponent: 'NetzentwicklungPopup',
+    netzentwicklungRoleType: 'S&K Planer', // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+  },
+});
+
+export const netzentwicklungSkPlanerLayer = new Layer({
+  name: 'ch.sbb.netzentwicklung.sk_planer',
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
+  group: 'netzentwicklung',
+  children: [
+    netzentwicklungSkPlanerBySkplanerLayer,
+    netzentwicklungSkPlanerByRegionLayer,
+  ],
+  properties: {
+    hasInfos: true,
     layerInfoComponent: 'NetzentwicklungLayerInfo',
   },
 });

@@ -246,6 +246,8 @@
   "ch.sbb.netzentwicklung-desc": "Übersicht der Zuständigkeiten der Netzentwicklung von I-NAT-NET für die Rollen Strecken + Knoten Planer, Netzentwickler Strategisch, Programm Manager. Die Karten enthalten zusätzlich Informationen über regionale Aufgaben (Leiter Netzentwicklung Region).",
   "ch.sbb.netzentwicklung.programm_manager": "Programm Manager",
   "ch.sbb.netzentwicklung.sk_planer": "S&K Planer",
+  "ch.sbb.netzentwicklung.sk_planer.by_person": "Nach Person",
+  "ch.sbb.netzentwicklung.sk_planer.by_region": "Nach Region",
   "ch.sbb.netzentwicklung.strategisch": "Netzentwickler Strategisch",
   "ch.sbb.netzkarte-desc": "Die Netzkarte richtet sich an die Nutzerinnen und Nutzer des öffentlichen Verkehrs. Es handelt sich um eine Basiskarte auf der Grundlage von  Fahrplandaten. Direkt auf der Karte können mit einem Klick auf die  gewünschte Station die entsprechenden Informationen abgefragt werden.",
   "ch.sbb.netzkarte-desc-topic-info": "Unter Layer gibt es weitere Inhalte, die auf der Karte abgebildet werden  können.",

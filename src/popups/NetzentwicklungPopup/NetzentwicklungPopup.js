@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Feature from 'ol/Feature';
@@ -68,6 +68,7 @@ const renderRoleCard = (rolle, classes, t) => {
 
 const NetzentwicklungPopup = ({ feature, layer, t }) => {
   const classes = useStyles();
+  const isSkPlanerByName = /sk_planer.by_person/.test(layer.key);
   const rollen = JSON.parse(feature.get('rollen') || '[]').filter((r) =>
     ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
@@ -85,6 +86,13 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
     };
     regionColor = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
   }
+
+  useEffect(() => {
+    if (layer) {
+      layer.select([feature]);
+    }
+  }, [layer, feature]);
+
   return (
     <div>
       <div className={classes.title}>
@@ -97,12 +105,17 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
             marginRight: 9,
           }}
         />
-        {`${t('Region')} ${t(feature.get('region'))}`}
+        {isSkPlanerByName
+          ? `${t('ch.sbb.netzentwicklung.sk_planer')}: ${
+              rollen.find((r) => r.typ === 'S&K Planer')?.person?.name
+            }`
+          : `${t('Region')} ${t(feature.get('region'))}`}
       </div>
       <div className={classes.title}>{renderTitle(feature, t, true)}</div>
       <div>
         {rollen.map((rolle) => renderRoleCard(rolle, classes, t))}
-        {regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
+        {!isSkPlanerByName &&
+          regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
       </div>
     </div>
   );

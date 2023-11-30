@@ -253,6 +253,8 @@
   "ch.sbb.netzentwicklung-desc": "Overview of the responsibilities of the network development of I-NAT-NET for the roles of Route + Node Planner, Network Developer Strategic, Programme Manager. The maps also contain information on regional tasks (Head of Network Development Region).",
   "ch.sbb.netzentwicklung.programm_manager": "Program manager",
   "ch.sbb.netzentwicklung.sk_planer": "Lines & nodes Planner",
+  "ch.sbb.netzentwicklung.sk_planer.by_person": "By person",
+  "ch.sbb.netzentwicklung.sk_planer.by_region": "By region",
   "ch.sbb.netzentwicklung.strategisch": "Network developer Strategic",
   "ch.sbb.netzkarte-desc": "The network map is aimed at public transport users. It is a basic map derived from timetable data. Relevant information can be accessed directly from the map by clicking on the required station.",
   "ch.sbb.netzkarte-desc-topic-info": "Under Layer, there is further content which can be displayed on the map.",
