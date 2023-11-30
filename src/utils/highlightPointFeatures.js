@@ -1,4 +1,3 @@
-import GeometryType from "ol/geom/GeometryType";
 import { Feature } from "ol";
 import { Point } from "ol/geom";
 
@@ -20,7 +19,7 @@ const highlightPointFeatures = (
       const layerHighlightGeom =
         layer.get("getHighlightGeometry") &&
         layer.get("getHighlightGeometry")(feat, layer, coordinatesArray[idx]);
-      if (feat.getGeometry().getType() === GeometryType.POINT) {
+      if (feat.getGeometry().getType() === "Point") {
         highlightLayer.getSource().clear();
         highlightLayer.getSource().addFeature(
           new Feature({

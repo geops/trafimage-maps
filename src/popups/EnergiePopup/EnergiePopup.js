@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { Feature } from "ol";
-import GeometryType from "ol/geom/GeometryType";
 import { Divider, MenuItem, Tab, Tabs, Typography } from "@mui/material";
 import Select from "../../components/Select/Select";
 import Link from "../../components/Link";
@@ -223,7 +222,7 @@ function EnergiePopup({ feature }) {
   const losNr = feature.get("los_nr");
   const description = useMemo(
     () =>
-      feature.getGeometry().getType() === GeometryType.POINT
+      feature.getGeometry().getType() === "Point"
         ? `${feature.get("bezeichnung")} (${feature.get("anlage_id")})`
         : feature.get("bezeichnung"),
     [feature],

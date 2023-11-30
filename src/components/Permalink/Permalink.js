@@ -146,6 +146,7 @@ class Permalink extends PureComponent {
             newKmlString,
             map.getView().getProjection(),
             map.getView().getResolution(),
+            true,
           );
 
           // eslint-disable-next-line no-console

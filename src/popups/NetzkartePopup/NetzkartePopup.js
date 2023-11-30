@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { transform as transformCoords } from "ol/proj";
 import { Link as MuiLink } from "@mui/material";
-import GeometryType from "ol/geom/GeometryType";
 import Link from "../../components/Link";
 import BahnhofplanPopup from "../BahnhofplanPopup";
 import coordinateHelper from "../../utils/coordinateHelper";
@@ -132,7 +131,7 @@ function NetzkartePopup({ feature, coordinate }) {
       "EPSG:4326",
       projection.value,
     );
-  } else if (feature.getGeometry().getType() === GeometryType.POINT) {
+  } else if (feature.getGeometry().getType() === "Point") {
     pointCoordinate = transformCoords(
       feature.getGeometry().getCoordinates(),
       "EPSG:3857",
