@@ -132,7 +132,7 @@
     "cy:test:chrome": "yarn build && start-server-and-test start:http http://localhost:3000 'cypress run --browser chrome'",
     "cy:test:edge": "yarn build && start-server-and-test start:http http://localhost:3000 'cypress run --browser edge'",
     "cy:test:firefox": "yarn build && start-server-and-test start:http http://localhost:3000 'cypress run --browser firefox'",
-    "doc": "styleguidist build",
+    "doc": "styleguidist build && cp -rf src/img/ doc/build",
     "eject": "react-scripts eject",
     "esbuild": "esbuild src/*.js src/**/*.js src/**/**/*.js --target=chrome100 --outdir=build/es --loader:.js=jsx --sourcemap=external",
     "fixpack": "fixpack",
