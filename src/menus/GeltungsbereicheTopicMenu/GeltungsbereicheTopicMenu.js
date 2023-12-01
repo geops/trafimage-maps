@@ -34,12 +34,12 @@ const useStyles = makeStyles(() => {
         // The trafimage menu item is automatically resized so we need this to be able to scroll on small height screen
         overflow: "auto",
       },
-      "& .MuiSelect-selectMenu": {
+      "& .MuiSelect-select": {
         paddingRight: 62,
       },
 
       // Allow multiline display
-      "& .MuiSelect-selectMenu, & .MuiMenuItem-root ": {
+      "& .MuiSelect-select, & .MuiMenuItem-root ": {
         textOverflow: "unset",
         whiteSpace: "unset",
         fontSize: "15px", // css that fits https://www.sbb.ch/de/abos-billette/abonnemente/ga/ga-geltungsbereich.html

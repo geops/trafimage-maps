@@ -213,7 +213,7 @@ function DocForm({
                       </td>
                       <td className={classes.colSelected}>
                         {comp === "select" && (
-                          <FormControl>
+                          <FormControl variant="standard">
                             <InputLabel id="demo-mutiple-name-label">
                               {name}
                             </InputLabel>
@@ -254,6 +254,7 @@ function DocForm({
                         )}
                         {comp === "input" && (
                           <TextField
+                            variant="standard"
                             label={name}
                             type={type}
                             value={currentValue}
