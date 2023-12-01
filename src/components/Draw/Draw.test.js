@@ -29,10 +29,7 @@ describe("Draw", () => {
       </ThemeProvider>,
     );
     expect(container.querySelectorAll("button[disabled]").length).toBe(1);
-    expect(container.querySelectorAll("button:not([disabled])").length).toBe(2);
-    expect(
-      container.querySelectorAll("div[role=button]:not(.Mui-disabled)").length,
-    ).toBe(1);
+    expect(container.querySelectorAll("button:not([disabled])").length).toBe(3);
   });
 
   test("should render three disabled buttons", () => {
@@ -51,10 +48,7 @@ describe("Draw", () => {
       </ThemeProvider>,
     );
     expect(container.querySelectorAll("button:not([disabled])").length).toBe(1);
-    expect(container.querySelectorAll("button[disabled]").length).toBe(2);
-    expect(
-      container.querySelectorAll("div.Mui-disabled[role=button]").length,
-    ).toBe(1);
+    expect(container.querySelectorAll("button[disabled]").length).toBe(3);
   });
 
   test("should send track event on draw add button", () => {

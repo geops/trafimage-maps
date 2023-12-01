@@ -59,9 +59,7 @@ describe("Share", () => {
     });
 
     test("on permalink button", () => {
-      fireEvent.click(
-        container.querySelector(".wkp-permalink-bt div[role=button]"),
-      );
+      fireEvent.click(container.querySelector(".wkp-permalink-bt button"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickSharePermalink",
         category: "test",

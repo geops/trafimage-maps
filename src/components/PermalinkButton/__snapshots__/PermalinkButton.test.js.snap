@@ -2,12 +2,12 @@
 
 exports[`PermalinkButton should match snapshot. 1`] = `
 <div class="wkp-permalink-bt">
-  <div class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-standard makeStyles-button-2 css-ueukts-MuiButtonBase-root-MuiToggleButton-root"
-       tabindex="0"
-       role="button"
-       value
-       aria-pressed="false"
-       title="Permalink generieren"
+  <button class="MuiButtonBase-root MuiToggleButton-root MuiToggleButton-sizeMedium MuiToggleButton-standard makeStyles-button-2 css-ueukts-MuiButtonBase-root-MuiToggleButton-root"
+          tabindex="0"
+          type="button"
+          value
+          aria-pressed="false"
+          title="Permalink generieren"
   >
     <svg stroke="currentColor"
          fill="currentColor"
@@ -23,6 +23,6 @@ exports[`PermalinkButton should match snapshot. 1`] = `
     </svg>
     <span class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root">
     </span>
-  </div>
+  </button>
 </div>
 `;

@@ -28,7 +28,7 @@ exports[`LayerInfosDialog should match snapshot when Layer is defined 1`] = `
               test
             </span>
           </h4>
-          <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-1se5fg2-MuiButtonBase-root-MuiIconButton-root"
+          <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-bp3e88-MuiButtonBase-root-MuiIconButton-root"
                   tabindex="0"
                   type="button"
                   title="Dialog schließen"

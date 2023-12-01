@@ -34,6 +34,6 @@ describe("DrawMenu", () => {
     expect(
       container.querySelectorAll(".wkp-menu-item-header-title")[0].textContent,
     ).toBe("Zeichnen auf der Karte");
-    expect(container.querySelectorAll("button").length).toBe(3);
+    expect(container.querySelectorAll("button").length).toBe(4);
   });
 });

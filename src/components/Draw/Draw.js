@@ -18,23 +18,20 @@ const useStyles = makeStyles((theme) => ({
   },
   buttons: {
     display: "flex",
-    marginBottom: theme.spacing(2),
+    gap: 24,
 
-    "& > a:first-child": {
-      paddingLeft: 0,
-    },
-    "& .MuiIconButton-root ": {
+    "& .MuiButtonBase-root": {
       height: 20,
-      paddingTop: 0,
-      paddingBottom: 0,
+      padding: 0,
     },
   },
   caption: {
     display: "flex",
     alignItems: "start",
+    gap: theme.spacing(1),
+    marginTop: theme.spacing(2),
   },
   infoIcon: {
-    marginRight: theme.spacing(1),
     flexShrink: 0,
     paddingTop: 3,
   },

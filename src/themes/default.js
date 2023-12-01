@@ -211,13 +211,16 @@ const theme = createTheme(
       // maybe there will be more use case to manage in the future.
       MuiToggleButton: {
         root: {
-          border: "none",
+          border: "0",
           padding: 0,
-          "&:hover, &$selected": {
+          color: colors.black,
+          "&:hover, &.Mui-selected:hover": {
             backgroundColor: "transparent",
+            color: colors.redDark,
           },
-          "&$selected svg": {
-            color: colors.red,
+          "&.Mui-selected": {
+            backgroundColor: "transparent",
+            color: colors.redDark,
           },
           "&.Mui-disabled": {
             color: "#888",
@@ -307,6 +310,7 @@ const theme = createTheme(
           color: colors.black,
           "&:hover": {
             backgroundColor: "transparent",
+            color: colors.redDark,
           },
           "&$disabled": {
             color: "#888",

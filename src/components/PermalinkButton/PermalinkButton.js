@@ -12,11 +12,9 @@ const useStyles = makeStyles(() => ({
     paddingRight: 42,
   },
   button: {
-    padding: "0 15px !important",
-    color: "initial",
-    fontSize: "17.63px !important",
-    marginTop: "1px !important",
-    border: "0 !important",
+    "& svg": {
+      fontSize: "17.63px !important",
+    },
   },
 }));
 
@@ -54,7 +52,6 @@ function PermalinkButton({ buttonProps, children, popoverProps }) {
       {/* ToggleButton is used to set a color when the svg is selected */}
       <ToggleButton
         value=""
-        component="div"
         selected={!!anchorEl}
         className={classes.button}
         // eslint-disable-next-line react/jsx-props-no-spreading
