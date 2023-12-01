@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import "jest-canvas-mock";
 import "react-app-polyfill/stable";
+import ResizeObserver from "resize-observer-polyfill";
 import "abortcontroller-polyfill/dist/abortcontroller-polyfill-only";
 import "@testing-library/jest-dom";
 import configureStore from "redux-mock-store";
@@ -33,6 +34,8 @@ i18n.addResourceBundle("de", "translation", {});
 global.i18n = i18n;
 
 global.URL.createObjectURL = jest.fn(() => "fooblob");
+
+global.ResizeObserver = ResizeObserver;
 
 global.mockStore = configureStore([thunk]);
 

@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useMemo, useState, useRef } from "react";
 import PropTypes from "prop-types";
-import { Styled } from "@geops/create-react-web-component";
+import Style from "style-it";
 import { Layer } from "mobility-toolbox-js/ol";
 import LayerService from "./utils/LayerService";
 import TrafimageMaps from "./components/TrafimageMaps";
@@ -386,7 +386,8 @@ function WebComponent(props) {
   }
 
   return (
-    <Styled styles={styles}>
+    <>
+      <style type="text/css">{Style.it(styles)}</style>
       <div
         style={{
           position: "relative",
@@ -412,7 +413,7 @@ function WebComponent(props) {
           elements={elements}
         />
       </div>
-    </Styled>
+    </>
   );
 }
 

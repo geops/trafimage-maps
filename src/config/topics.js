@@ -1,5 +1,4 @@
 import React from "react";
-import { getCenter } from "ol/extent";
 import "./proj4";
 import tarifverbundkarteLegend from "../img/tarifverbund_legend.url.svg";
 import railplusLegendDe from "../img/railplus_legend_de.url.svg";
@@ -15,7 +14,6 @@ import netzkarteLayers, {
 } from "./ch.sbb.netzkarte";
 import constructionLayers from "./ch.sbb.construction";
 import handicapLayers from "./ch.sbb.handicap";
-import casaLayers from "./ch.sbb.casa";
 import infrastrukturLayers, {
   netzkarteEisenbahninfrastruktur,
   betriebsRegionenVisible,
@@ -104,25 +102,6 @@ export const netzkarteStelen = {
   layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
   elements: {},
   projection: "EPSG:3857",
-};
-
-export const casa = {
-  name: "CASA",
-  key: "ch.sbb.casa",
-  layers: casaLayers,
-  projection: "EPSG:3857",
-  popupConfig: {
-    getPopupCoordinates: (feature, map) => {
-      const mapCenter = getCenter(map.getView().calculateExtent());
-      return feature.getGeometry().getClosestPoint(mapCenter);
-    },
-  },
-  elements: {
-    menu: true,
-    popup: true,
-    permalink: false,
-    baseLayerSwitcher: true,
-  },
 };
 
 export const bauprojekte = {

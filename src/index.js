@@ -1,4 +1,4 @@
-// import 'react-app-polyfill/stable';
+import "react-app-polyfill/stable";
 // import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only';
 
 // Import web-components polyfills for ie 11, see https://github.com/webcomponents/polyfills.
@@ -9,13 +9,8 @@
 // import '@webcomponents/custom-elements';
 // import '@webcomponents/webcomponentsjs/custom-elements-es5-adapter';
 // import 'proxy-polyfill';
-import { ReactWebComponent } from "@geops/create-react-web-component";
-// import r2wc from '@r2wc/react-to-web-component';
+import ReactWebComponent from "@geops/create-react-web-component";
 import WebComponent from "./WebComponent";
-
-// const WebComp = r2wc(WebComponent, { props: WebComponent.attributes });
-
-// customElements.define('trafimage-maps', WebComp);
 
 ReactWebComponent.setAttributes(WebComponent.attributes);
 ReactWebComponent.setProperties(WebComponent.defaultProps);
