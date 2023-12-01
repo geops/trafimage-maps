@@ -4,7 +4,7 @@
 /node_modules
 
 # others
-/doc/build
+/doc
 /docjs
 
 # testing
