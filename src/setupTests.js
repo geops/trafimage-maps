@@ -5,7 +5,7 @@ import ResizeObserver from "resize-observer-polyfill";
 import "abortcontroller-polyfill/dist/abortcontroller-polyfill-only";
 import "@testing-library/jest-dom";
 import configureStore from "redux-mock-store";
-import { thunk } from "redux-thunk";
+import thunk from "redux-thunk";
 import proj4 from "proj4";
 import { register } from "ol/proj/proj4";
 import mediaQuery from "css-mediaquery";
