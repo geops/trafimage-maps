@@ -76,9 +76,7 @@ describe("A link to data", { browser: "!firefox" }, () => {
       .click();
     cy.url().should(
       "match",
-      new RegExp(
-        /https:\/\/reporting\.sbb\.ch\/verkehr\?highlighted=row-243.*/,
-      ),
+      /https:\/\/reporting\.sbb\.ch\/verkehr\?highlighted=row-243.*/,
     );
   });
 

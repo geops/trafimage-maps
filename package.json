@@ -135,7 +135,7 @@
     "fixpack": "fixpack",
     "format": "prettier --write 'cypress/**/*.js' '*.js' '*.json' 'src/**/*.js' '*.md' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
     "link2": "cmdToAdd=$(node ./scripts/read-pkg-json.js add) && $cmdToAdd && yarn build && cmdToRemove=$(node ./scripts/read-pkg-json.js remove) && $cmdToRemove && cd build && yarn link",
-    "lint": "eslint 'cypress/**/*.js' '*.js' '*.json' src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
+    "lint": "eslint 'cypress/**/*.js' '*.js' 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
     "prebuild": "rm -rf build/",
     "prepare": "is-ci || husky install",
     "publish:alpha": "yarn release -- --prerelease alpha --skip.changelog && yarn run build && HUSKY=0 yarn publish build/ --access public --tag beta && git push origin HEAD && git push --tags",

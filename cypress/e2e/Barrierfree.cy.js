@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import "cypress-plugin-tab";
 import "cypress-enter-plugin";
 import lang from "../../src/lang/de.json";

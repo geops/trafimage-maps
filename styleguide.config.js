@@ -3,6 +3,7 @@ require("dotenv").config();
 // eslint-disable-next-line no-unused-vars
 const path = require("path");
 const { version } = require("./package.json");
+// eslint-disable-next-line import/extensions
 const webpackConfigFunc = require("./node_modules/react-scripts/config/webpack.config.js");
 const override = require("./packages/wc/config-overrides");
 

@@ -57,12 +57,14 @@ describe("permalink", () => {
         // permalink
         cy.url().should(
           "match",
+          // eslint-disable-next-line prefer-regex-literals
           new RegExp(
             "baselayers=ch.sbb.netzkarte,ch.sbb.netzkarte.dark,ch.sbb.netzkarte.luftbild.group,ch.sbb.netzkarte.landeskarte,ch.sbb.netzkarte.landeskarte.grau",
           ),
         );
-        cy.url().should("match", new RegExp("lang=de"));
-        cy.url().should("match", new RegExp("layers=&"));
+        cy.url().should("match", /lang=de/);
+        cy.url().should("match", /layers=&/);
+        // eslint-disable-next-line prefer-regex-literals
         cy.url().should("match", new RegExp("x=928460&y=5908948&z=8.5"));
       });
 
