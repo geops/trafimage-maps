@@ -107,9 +107,6 @@ export const isbNormalspurbahnen = new Layer({
   visible: true,
   group: 'ch.sbb.isb',
   children: [isbOther, isbTVS],
-  properties: {
-    hasInfos: true,
-  },
 });
 
 export const isbSchmalspurbahnen = new RailplusLayer({
