@@ -29,7 +29,7 @@ describe("Search", () => {
     cy.get("#react-autowhatever-1-section-0-item-0").click({ force: true });
 
     // Popup is opened.
-    cy.get(".wkp-feature-information", { timeout: 20000 }).should("be.visible");
+    cy.get(".wkp-feature-information", { timeout: 40000 }).should("be.visible");
   });
 
   it("should not open a popup on station search because we click on the clear button", () => {

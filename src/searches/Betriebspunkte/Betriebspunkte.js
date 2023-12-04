@@ -17,7 +17,6 @@ class Betriebspunkte extends Search {
     }
     this.abortController = new AbortController();
     const { signal } = this.abortController;
-
     return fetch(
       `${this.searchUrl}/search/bps?name=${encodeURIComponent(value)}`,
       {

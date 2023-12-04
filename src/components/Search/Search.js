@@ -103,11 +103,12 @@ function Search() {
               )
             );
           }}
-          getSectionSuggestions={(result) =>
-            result.items
-              ? result.items.map((i) => ({ ...i, section: result.section }))
-              : []
-          }
+          getSectionSuggestions={(result) => {
+            return (
+              result?.items?.map((i) => ({ ...i, section: result.section })) ||
+              []
+            );
+          }}
           inputProps={{
             autoFocus: true,
             tabIndex: 0,

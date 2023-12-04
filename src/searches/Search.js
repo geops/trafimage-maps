@@ -5,7 +5,7 @@ import highlightPointStyle from "../utils/highlightPointStyle";
 class Search {
   constructor(
     searchUrl = "https://maps.trafimage.ch",
-    stopsUrl = "https://api.geops.io/stops/v1/",
+    stopsUrl = "https://api.geops.io/stops/v1",
   ) {
     this.geoJSON = new OLGeoJSON();
     this.collapsed = true;

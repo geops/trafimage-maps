@@ -233,7 +233,7 @@ class TopicLoader extends PureComponent {
     newSearchService.setSearches(activeTopic.searches || {});
     newSearchService.setApiKey(apiKey);
     newSearchService.setSearchUrl(searchUrl);
-    newSearchService.setSearchUrl(stopsUrl);
+    newSearchService.setStopsUrl(stopsUrl);
     newSearchService.setSearchesProps({
       t,
       activeTopic,

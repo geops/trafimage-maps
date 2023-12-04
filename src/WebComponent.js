@@ -132,7 +132,7 @@ const propTypes = {
   searchUrl: PropTypes.string,
 
   /**
-   * URL of the stops API server. Default is 'https://api.geops.io/stops/v1/'.
+   * URL of the stops API server. Default is 'https://api.geops.io/stops/v1'.
    */
   stopsUrl: PropTypes.string,
 
