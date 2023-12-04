@@ -68,7 +68,7 @@ const renderRoleCard = (rolle, classes, t) => {
 
 const NetzentwicklungPopup = ({ feature, layer, t }) => {
   const classes = useStyles();
-  const isSkPlanerByName = /sk_planer.by_person/.test(layer.key);
+  const isSkPlanerByName = /sk_planer/.test(layer.key);
   const rollen = JSON.parse(feature.get('rollen') || '[]').filter((r) =>
     ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
@@ -76,7 +76,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
     (r) => ['Alle', layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
   const mbFeature = feature.get('mapboxFeature');
-  let regionColor = 'transparent';
+  let color = 'transparent';
   if (mbFeature) {
     const { r, g, b, a } = mbFeature.layer.paint['line-color'] || {
       r: 1,
@@ -84,7 +84,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
       b: 1,
       a: 1,
     };
-    regionColor = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
+    color = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
   }
 
   useEffect(() => {
@@ -98,7 +98,7 @@ const NetzentwicklungPopup = ({ feature, layer, t }) => {
       <div className={classes.title}>
         <div
           style={{
-            backgroundColor: regionColor,
+            backgroundColor: color,
             width: 19,
             height: 19,
             borderRadius: '50%',
