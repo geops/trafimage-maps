@@ -5,15 +5,6 @@ describe("Search", () => {
     cy.consent();
     cy.visit("");
   });
-  it(`should display plural texts`, () => {
-    // Input is not visible
-    cy.get(".wkp-search-toggle-button").click();
-    cy.get(".wkp-search-input input").focus().type("Bern");
-    cy.get(".wkp-search-section-header").should(
-      "contain",
-      "Ergebnisse", // plural
-    );
-  });
 
   it("should open a popup on station search.", () => {
     cy.viewport(1440, 900);
@@ -128,5 +119,15 @@ describe("Search", () => {
     cy.get(".wkp-search-input input").focus().type("Ber");
 
     cy.get(".wkp-search-input input", { timeout: 20000 }).should("be.visible");
+  });
+
+  it(`should display plural texts`, () => {
+    // Input is not visible
+    cy.get(".wkp-search-toggle-button").click();
+    cy.get(".wkp-search-input input").focus().type("Bern");
+    cy.get(".wkp-search-section-header").should(
+      "contain",
+      "Ergebnisse", // plural
+    );
   });
 });
