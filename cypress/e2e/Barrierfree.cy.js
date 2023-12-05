@@ -26,6 +26,11 @@ describe("Barrierfree E2E", () => {
 
     // Press enter and focus dialog closer.
     cy.focused().type("{enter}");
+    cy.focused({ timeout: 5000 }).should(
+      "have.attr",
+      "title",
+      "Dialog schließen",
+    );
     cy.focused().then(($el) => {
       expect($el[0].title).to.equal("Dialog schließen");
     });
