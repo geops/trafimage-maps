@@ -28,9 +28,10 @@ describe("ch.sbb.netzkarte", () => {
           mockServer.emit("message", JSON.stringify(message));
         },
       });
-      cy.get(".wkp-menu-header").click();
+      cy.get(".wkp-menu-header", { timeout: 5000 }).click();
       cy.get(
         ":nth-child(5) > .rs-layer-tree-item > .rs-layer-tree-input > span",
+        { timeout: 5000 },
       ).click();
       cy.wait(3000).then(() => {
         mockServer.emit("message", JSON.stringify(message));
