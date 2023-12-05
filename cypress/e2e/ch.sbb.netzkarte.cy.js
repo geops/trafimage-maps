@@ -469,9 +469,12 @@ describe("ch.sbb.netzkarte", () => {
       });
 
       it("should display bus at zoom 14", () => {
-        visitWithMsg("/ch.sbb.netzkarte?z=14", buffer);
+        visitWithMsg(
+          `/ch.sbb.netzkarte?z=14&x=${coord[0]}&y=${coord[1]}`,
+          buffer,
+        );
         cy.get("canvas").then((elts) => {
-          const vehicleCanvas = elts[2];
+          const vehicleCanvas = elts[1];
           cy.log(elts.length);
 
           cy.fixture("busAtZoom14.png").then((fixture) => {
