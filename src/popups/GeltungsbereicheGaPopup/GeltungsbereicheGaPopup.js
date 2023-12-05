@@ -11,7 +11,7 @@ import {
   ListItemText,
   ListItemIcon,
 } from "@mui/material";
-import { AiTwotoneCopyrightCircle } from "react-icons/ai";
+import { FaCircle } from "react-icons/fa";
 import GeltungsbereicheLegend, { legends } from "./GeltungsbereicheLegend";
 
 const propTypes = {
@@ -163,7 +163,7 @@ function GeltungsbereichePopup({
               return (
                 <ListItem className={classes.listItem} key={product}>
                   <ListItemIcon className={classes.listItemIcon}>
-                    <AiTwotoneCopyrightCircle size={7} />
+                    <FaCircle size={7} />
                   </ListItemIcon>
                   <ListItemText primaryTypographyProps={{ variant: "body1" }}>
                     {
