@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       # See images at https://github.com/cypress-io/cypress-docker-images/tree/master/browsers
-      image: latest
+      image: cypress/browsers:latest
       options: --user 1001
     steps:
       - name: Checkout
