@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import OLMap from "ol/Map";
 import { render } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material";
@@ -9,7 +8,6 @@ import DrawMenu from "./DrawMenu";
 import theme from "../../themes/default";
 
 describe("DrawMenu", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   test.only("should use MenuItem and display Draw", () => {
     const info = {
@@ -18,7 +16,7 @@ describe("DrawMenu", () => {
         drawMenu: true,
       },
     };
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: { activeTopic: info, map: new OLMap(), menuOpen: true },
     });

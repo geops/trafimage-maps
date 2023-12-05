@@ -10,7 +10,7 @@ import Share from ".";
 describe("Share", () => {
   let store;
   beforeEach(() => {
-    store = global.mockStore({
+    store = global.global.mockStore({
       map: {},
       app: {
         map: new Map({ view: new View({}) }),

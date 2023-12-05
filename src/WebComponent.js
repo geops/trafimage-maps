@@ -177,6 +177,8 @@ const propTypes = {
    * Improve mouse/touch interactions to avoid conflict with parent page.
    */
   embedded: PropTypes.string,
+
+  children: PropTypes.node,
 };
 
 const attributes = {
@@ -217,6 +219,7 @@ const attributes = {
 const defaultProps = {
   topics: undefined,
   history: undefined,
+  children: undefined,
 };
 
 // Since we won't clone all layers, we store here the initial visibility of
@@ -244,6 +247,7 @@ function WebComponent(props) {
     disableCookies,
     realtimeKey,
     activeTopicKey,
+    children,
   } = props;
   const ref = useRef();
 
@@ -411,7 +415,9 @@ function WebComponent(props) {
           domainConsentId={domainConsentId}
           language={language}
           elements={elements}
-        />
+        >
+          {children}
+        </TrafimageMaps>
       </div>
     </>
   );

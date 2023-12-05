@@ -250,6 +250,8 @@ const propTypes = {
    * Key of the current active topic
    */
   elements: PropTypes.string,
+
+  children: PropTypes.node,
 };
 
 const defaultProps = {
@@ -267,6 +269,7 @@ const defaultProps = {
   permissionInfos: null,
   embedded: false,
   elements: undefined,
+  children: undefined,
   apiKey: process.env.REACT_APP_VECTOR_TILES_KEY,
   cartaroUrl: process.env.REACT_APP_CARTARO_URL,
   appBaseUrl: process.env.REACT_APP_BASE_URL,
@@ -715,7 +718,8 @@ class TrafimageMaps extends React.PureComponent {
   }
 
   render() {
-    const { history, topics, enableTracking, domainConsentId } = this.props;
+    const { history, topics, enableTracking, domainConsentId, children } =
+      this.props;
     const { requireConsent } = this.state;
 
     return (
@@ -732,6 +736,7 @@ class TrafimageMaps extends React.PureComponent {
             {/* For JSS styles be loaded after emotioin style, see "migrating to v5" page of mui doc */}
             <StyledEngineProvider injectFirst>
               <TopicLoader history={history} />
+              {children}
             </StyledEngineProvider>
             <MessageListener />
           </Provider>

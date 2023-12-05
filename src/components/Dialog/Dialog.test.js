@@ -1,7 +1,7 @@
 import React from "react";
-import thunk from "redux-thunk";
+
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+
 import { Map, View } from "ol";
 import { render } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material";
@@ -9,12 +9,11 @@ import theme from "../../themes/default";
 import Dialog from "./Dialog";
 
 describe("Dialog", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   let map;
 
   beforeEach(() => {
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: {},
     });

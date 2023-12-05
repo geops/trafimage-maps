@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { render, within, fireEvent } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material";
 import OLMap from "ol/Map";
@@ -14,7 +13,6 @@ import highlightPointStyle from "../../utils/highlightPointStyle";
 import theme from "../../themes/default";
 
 describe("StsMenu", () => {
-  const mockStore = configureStore([thunk]);
   let store;
 
   beforeEach(() => {
@@ -24,7 +22,7 @@ describe("StsMenu", () => {
       source: new VectorSource({ features: [] }),
     });
     highlightLayer.setStyle(highlightPointStyle);
-    store = mockStore({
+    store = global.mockStore({
       map: { layers: stsLayers, highlightLayer },
       app: {
         map: new OLMap({}),

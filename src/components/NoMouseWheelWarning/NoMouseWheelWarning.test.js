@@ -14,7 +14,9 @@ describe("NoMouseWheelWarning", () => {
       .find((int) => int instanceof MouseWheelZoom);
     expect(mouseWheelZoom.getActive()).toBe(true);
     render(
-      <Provider store={global.mockStore({ app: { map, embedded: true } })}>
+      <Provider
+        store={global.global.mockStore({ app: { map, embedded: true } })}
+      >
         <NoMouseWheelWarning />
       </Provider>,
     );
@@ -29,7 +31,9 @@ describe("NoMouseWheelWarning", () => {
       .find((int) => int instanceof MouseWheelZoom);
     expect(mouseWheelZoom.getActive()).toBe(true);
     render(
-      <Provider store={global.mockStore({ app: { map, embedded: false } })}>
+      <Provider
+        store={global.global.mockStore({ app: { map, embedded: false } })}
+      >
         <NoMouseWheelWarning />
       </Provider>,
     );

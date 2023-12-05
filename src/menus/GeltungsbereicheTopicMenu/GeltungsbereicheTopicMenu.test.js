@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { render, screen } from "@testing-library/react";
 import OLMap from "ol/Map";
 import { ThemeProvider } from "@mui/material";
@@ -10,7 +9,6 @@ import theme from "../../themes/default";
 import GeltungsbereicheTopicMenu from "./GeltungsbereicheTopicMenu";
 
 describe("GeltungsbereicheTopicMenu", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   const baseLayer = new Layer({
     name: "base",
@@ -31,7 +29,7 @@ describe("GeltungsbereicheTopicMenu", () => {
       foo: "foo <b>bold</b>",
       bar: "bar <b>boldbar</b>",
     });
-    store = mockStore({
+    store = global.mockStore({
       map: { layers: [baseLayer, layer1, layer2] },
       app: { map: new OLMap({}), menuOpen: false },
     });

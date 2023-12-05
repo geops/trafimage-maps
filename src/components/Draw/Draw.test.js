@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { ThemeProvider, StyledEngineProvider } from "@mui/material";
 import { render, fireEvent } from "@testing-library/react";
 import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
@@ -10,11 +9,10 @@ import theme from "../../themes/default";
 import Draw from ".";
 
 describe("Draw", () => {
-  const mockStore = configureStore([thunk]);
   let store;
 
   test("should render only one disabled button", () => {
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: { drawIds: {} },
     });
@@ -33,7 +31,7 @@ describe("Draw", () => {
   });
 
   test("should render three disabled buttons", () => {
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: {},
     });
@@ -53,7 +51,7 @@ describe("Draw", () => {
 
   test("should send track event on draw add button", () => {
     window.open = jest.fn();
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: { activeTopic: { key: "foo" } },
     });

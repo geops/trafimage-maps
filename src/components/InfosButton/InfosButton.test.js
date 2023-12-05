@@ -3,14 +3,12 @@ import React from "react";
 import { render, waitFor } from "@testing-library/react";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import InfosButton from ".";
 import getStore from "../../model/store";
 import { setSelectedForInfos } from "../../model/app/actions";
 
 describe("InfosButton", () => {
-  const mockStore = configureStore([thunk]);
   let store;
 
   test("renders not selected info button  ", () => {
@@ -29,7 +27,7 @@ describe("InfosButton", () => {
 
   test("renders selected info button ", () => {
     const info = { key: "foo" };
-    store = mockStore({
+    store = global.global.mockStore({
       map: {},
       app: { selectedForInfos: info },
     });

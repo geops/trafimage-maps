@@ -1,14 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { Layer } from "mobility-toolbox-js/ol";
 import { render } from "@testing-library/react";
 import OLLayer from "ol/layer/Layer";
 import DrawLayerMenu from "./DrawLayerMenu";
 
 describe("DrawLayerMenu", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   const drawLayer = new Layer({
     olLayer: new OLLayer({}),
@@ -16,7 +14,7 @@ describe("DrawLayerMenu", () => {
 
   describe("should match snapshot.", () => {
     test("should return null", () => {
-      store = mockStore({
+      store = global.mockStore({
         map: {
           layers: [],
           drawLayer,
@@ -32,7 +30,7 @@ describe("DrawLayerMenu", () => {
     });
 
     test("using the layerService property", () => {
-      store = mockStore({
+      store = global.mockStore({
         map: {
           drawLayer,
           layers: [],
@@ -55,7 +53,7 @@ describe("DrawLayerMenu", () => {
       new Layer({ olLayer: new OLLayer({}) }),
       store.getState().map.drawLayer,
     ];
-    store = mockStore({
+    store = global.mockStore({
       map: {
         drawLayer,
         layers,

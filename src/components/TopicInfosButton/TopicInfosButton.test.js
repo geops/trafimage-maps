@@ -1,17 +1,15 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import TopicInfosButton from ".";
 
 describe("TopicInfosButton", () => {
-  const mockStore = configureStore([thunk]);
   let store;
 
   test("renders active state", () => {
     const info = { key: "foo" };
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: { activeTopic: info, selectedForInfos: {} },
     });
@@ -27,7 +25,7 @@ describe("TopicInfosButton", () => {
 
   test("renders selected and active state", () => {
     const info = { key: "foo" };
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: { activeTopic: info, selectedForInfos: info },
     });

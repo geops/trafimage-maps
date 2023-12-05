@@ -19,7 +19,7 @@ const dfltStore = {
 };
 describe("Footer", () => {
   test("renders default elements", () => {
-    const store = global.mockStore({ ...dfltStore });
+    const store = global.global.mockStore({ ...dfltStore });
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -41,7 +41,7 @@ describe("Footer", () => {
   });
 
   test("renders cookies settings link if consentGiven is true", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       ...dfltStore,
       app: {
         ...dfltStore.app,

@@ -1,19 +1,17 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import OLMap from "ol/Map";
 import dvLayers from "../index";
 import { direktverbindungenIframe } from "../../topics";
 import DvListButton from "./DvListButton";
 
 describe("DvListButton", () => {
-  const mockStore = configureStore([thunk]);
   let store;
 
   beforeEach(() => {
-    store = mockStore({
+    store = global.mockStore({
       map: { layers: dvLayers },
       app: {
         map: new OLMap({}),

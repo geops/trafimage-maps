@@ -1,9 +1,9 @@
 import React from "react";
 import { act } from "react-dom/test-utils";
-import thunk from "redux-thunk";
+
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+
 import { Layer } from "mobility-toolbox-js/ol";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
@@ -13,7 +13,6 @@ import fetchMock from "fetch-mock";
 import Permalink from "./Permalink";
 
 describe("Permalink", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   let drawLayer;
 
@@ -25,7 +24,7 @@ describe("Permalink", () => {
         description: "description<br/>break",
       },
     });
-    store = mockStore({
+    store = global.mockStore({
       map: {
         drawLayer,
         layers: [

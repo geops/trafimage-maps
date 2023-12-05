@@ -1,18 +1,16 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { Feature } from "ol";
 import { Polygon } from "ol/geom";
 import NetzkartePopup from ".";
 
 describe("NetzkartePopup", () => {
-  const mockStore = configureStore([thunk]);
   let store;
 
   beforeEach(() => {
-    store = mockStore({
+    store = global.mockStore({
       map: {},
       app: {
         projection: { value: "EPSG:3857" },

@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { render } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
 import OLLayer from "ol/layer/Layer";
@@ -9,7 +8,6 @@ import { Map, View } from "ol";
 import TopicLoader from ".";
 
 describe("TopicLoader", () => {
-  const mockStore = configureStore([thunk]);
   let initialStore = {};
   let store;
   let map;
@@ -42,7 +40,7 @@ describe("TopicLoader", () => {
       layers: [new Layer({ olLayer: new OLLayer({}) })],
       elements: { permalink: true },
     };
-    store = mockStore({
+    store = global.mockStore({
       ...initialStore,
       app: {
         ...initialStore.app,
@@ -71,7 +69,7 @@ describe("TopicLoader", () => {
         permalink: false,
       },
     };
-    store = mockStore({
+    store = global.mockStore({
       ...initialStore,
       app: {
         ...initialStore.app,

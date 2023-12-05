@@ -32,7 +32,7 @@ const topic2 = {
 
 describe("TopicsMenu", () => {
   it("renders the active topic name and active layers", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       map: {
         layers: [layer1, layer2],
       },

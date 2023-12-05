@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { render } from "@testing-library/react";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
@@ -12,7 +11,6 @@ import highlightPointStyle from "../../utils/highlightPointStyle";
 import FeatureInformation from ".";
 
 describe("FeatureInformation", () => {
-  const mockStore = configureStore([thunk]);
   let storeUnMocked;
   let store;
   let layers = [];
@@ -52,7 +50,7 @@ describe("FeatureInformation", () => {
         },
       },
     };
-    store = mockStore(storeUnMocked);
+    store = global.mockStore(storeUnMocked);
   });
   afterEach(() => {
     fit.mockRestore();
@@ -242,7 +240,7 @@ describe("FeatureInformation", () => {
     ];
     storeUnMocked.app.screenWidth = "s";
     const { unmount } = render(
-      <Provider store={mockStore(storeUnMocked)}>
+      <Provider store={global.mockStore(storeUnMocked)}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
     );
@@ -283,7 +281,7 @@ describe("FeatureInformation", () => {
     ];
     storeUnMocked.app.screenWidth = "xs";
     const { unmount } = render(
-      <Provider store={mockStore(storeUnMocked)}>
+      <Provider store={global.mockStore(storeUnMocked)}>
         <FeatureInformation featureInfo={fi} />
       </Provider>,
     );

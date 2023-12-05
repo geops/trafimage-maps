@@ -6,7 +6,7 @@ import Login from ".";
 describe("Login", () => {
   describe("matches snapshot", () => {
     test("displaying default text", () => {
-      const store = global.mockStore({
+      const store = global.global.mockStore({
         app: { appBaseUrl: "http://foo.de" },
       });
       const component = render(
@@ -18,7 +18,7 @@ describe("Login", () => {
     });
 
     test("displaying user name", () => {
-      const store = global.mockStore({
+      const store = global.global.mockStore({
         app: { permissionInfos: { user: "bar" }, appBaseUrl: "http://foo.de" },
       });
       const component = render(

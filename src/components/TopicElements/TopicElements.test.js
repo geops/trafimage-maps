@@ -58,7 +58,7 @@ describe("TopicElements", () => {
       key: "lala",
       elements: {},
     };
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       ...dfltStore,
       app: {
         ...dfltStore.app,
@@ -129,7 +129,7 @@ describe("TopicElements", () => {
         fitExtent: false,
       },
     };
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       ...dfltStore,
       app: { ...dfltStore.app, activeTopic: tpc },
     });
@@ -198,7 +198,7 @@ describe("TopicElements", () => {
         fitExtent: true,
       },
     };
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       ...dfltStore,
       app: { ...dfltStore.app, activeTopic: tpc },
     });

@@ -26,7 +26,7 @@ describe("MapControls", () => {
   });
 
   test("should display all buttons by default", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       app: { map },
     });
     const { container } = render(
@@ -42,7 +42,7 @@ describe("MapControls", () => {
   });
 
   test("should not display geolocation", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       app: { map },
     });
     const { container } = render(
@@ -58,7 +58,7 @@ describe("MapControls", () => {
   });
 
   test("should not display fitExtent", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       app: { map },
     });
     const { container } = render(
@@ -74,7 +74,7 @@ describe("MapControls", () => {
   });
 
   test("should not display zoomSlider", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       app: { map },
     });
     const { container } = render(

@@ -1,8 +1,8 @@
 import React from "react";
-import thunk from "redux-thunk";
+
 import { render, act, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+
 import { ThemeProvider } from "@mui/material";
 import TarifVerbundLegend from "./TarifVerbundLegend";
 import theme from "../../themes/default";
@@ -23,10 +23,9 @@ global.fetch = jest.fn(() =>
 );
 
 describe("TarifverbundLegend", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   beforeEach(() => {
-    store = mockStore({
+    store = global.mockStore({
       app: {
         vectorTilesUrl: "http://tilefoo.ch",
         screenWidth: "lg",

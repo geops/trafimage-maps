@@ -1,7 +1,6 @@
 import React from "react";
 import { render, act, waitFor } from "@testing-library/react";
-import configureStore from "redux-mock-store";
-import thunk from "redux-thunk";
+
 import { Provider } from "react-redux";
 import { Map, View } from "ol";
 import { ThemeProvider } from "@mui/material";
@@ -18,7 +17,6 @@ const dfltApp = {
   language: "de",
   searchInfoOpen: false,
 };
-const mockStore = configureStore([thunk]);
 
 class MockSearch extends SearchDflt {
   // eslint-disable-next-line class-methods-use-this
@@ -56,7 +54,7 @@ describe("Search", () => {
   };
 
   test("render inputs.", () => {
-    const store = mockStore(dfltStore);
+    const store = global.mockStore(dfltStore);
 
     const { container } = render(
       <ThemeProvider theme={theme}>
@@ -71,7 +69,7 @@ describe("Search", () => {
 
   // TODO fix this test
   test.skip("launch search and render multiple collapsed sections.", async () => {
-    const store = mockStore(dfltStore);
+    const store = global.mockStore(dfltStore);
     const { container } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
@@ -100,7 +98,7 @@ describe("Search", () => {
     // test.skip('launch search and render multiple collapsed sections.', async () => {
     //   let wrapper = null;
     //   await act(async () => {
-    //     const store = mockStore(dfltStore);
+    //     const store = global.mockStore(dfltStore);
     //     wrapper = mount(
     //       <Provider store={store}>
     //         <Search />

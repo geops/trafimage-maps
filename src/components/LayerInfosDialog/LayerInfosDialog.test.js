@@ -1,7 +1,7 @@
 import React from "react";
-import thunk from "redux-thunk";
+
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+
 import { render } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
 import OLLayer from "ol/layer/Vector";
@@ -11,7 +11,6 @@ import { bahnhofplaene } from "../../config/ch.sbb.netzkarte";
 import LayerInfosDialog from ".";
 
 describe("LayerInfosDialog", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   let layer;
 
@@ -23,7 +22,7 @@ describe("LayerInfosDialog", () => {
         description: "description<br/>break",
       },
     });
-    store = mockStore({
+    store = global.mockStore({
       app: {
         language: "de",
         t: (t) => t,

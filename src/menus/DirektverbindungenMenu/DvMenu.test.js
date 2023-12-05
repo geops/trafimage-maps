@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { render, fireEvent } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material";
 import VectorLayer from "ol/layer/Vector";
@@ -15,7 +14,6 @@ import highlightPointStyle from "../../utils/highlightPointStyle";
 import theme from "../../themes/default";
 
 describe("DvMenu", () => {
-  const mockStore = configureStore([thunk]);
   let store;
   const highlightLayer = new VectorLayer({
     source: new VectorSource({ features: [] }),
@@ -25,7 +23,7 @@ describe("DvMenu", () => {
   beforeEach(() => {
     dvLayers.find((layer) => layer.get("isBaseLayer")).url =
       "https://foo-maps.io";
-    store = mockStore({
+    store = global.mockStore({
       map: { layers: dvLayers, highlightLayer },
       app: {
         map: new OLMap({}),
@@ -64,7 +62,7 @@ describe("DvMenu", () => {
   });
 
   test("should not hide menu on mobile", () => {
-    store = mockStore({
+    store = global.mockStore({
       map: { layers: dvLayers, highlightLayer },
       app: {
         map: new OLMap({}),

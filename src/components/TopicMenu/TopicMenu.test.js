@@ -19,7 +19,7 @@ const layer2 = new Layer({
 
 describe("TopicMenu", () => {
   it("renders the topic name and not layers when topic is not active", () => {
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       map: { layers: [layer1, layer2] },
       app: {
         menuOpen: true,
@@ -39,7 +39,7 @@ describe("TopicMenu", () => {
 
   it("renders the topic's layers name when topic is active", () => {
     const topic = { name: "topicName", key: "topic" };
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       map: {
         layers: [layer1, layer2],
       },
@@ -68,7 +68,7 @@ describe("TopicMenu", () => {
     const layerWithHtmlTags = new Layer({
       name: "layerWithHtmlTagsInName",
     });
-    const store = global.mockStore({
+    const store = global.global.mockStore({
       map: {
         layers: [layerWithHtmlTags],
       },

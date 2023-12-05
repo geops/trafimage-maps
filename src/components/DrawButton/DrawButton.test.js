@@ -1,15 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import configureStore from "redux-mock-store";
+
 import { fireEvent, render } from "@testing-library/react";
 import { ReactComponent as PencilAdd } from "../../img/pencil_add.svg";
 import DrawButton from ".";
 
 describe("DrawButton", () => {
-  const mockStore = configureStore([thunk]);
-
-  const store = mockStore({
+  const store = global.mockStore({
     map: {},
     app: { mapsetUrl: "foo.mapset.ch" },
   });
