@@ -7,7 +7,7 @@ import { MatomoProvider, createInstance } from "@jonkoops/matomo-tracker-react";
 import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import { StyledEngineProvider, ThemeProvider } from "@mui/material";
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles";
 import { Layer } from "mobility-toolbox-js/ol";
 import MatomoTracker from "../MatomoTracker";
 import Head from "../Head";

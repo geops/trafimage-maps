@@ -387,8 +387,9 @@ function WebComponent(props) {
 
   return (
     <>
-      <style type="text/css">{Style.it(styles)}</style>
+      {Style.it(styles)}
       <div
+        className="tm-trafimage-maps-container"
         style={{
           position: "relative",
           width,
