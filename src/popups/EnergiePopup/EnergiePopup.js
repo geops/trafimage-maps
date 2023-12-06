@@ -361,7 +361,7 @@ function EnergiePopup({ feature }) {
               <>
                 {anlageBetreuer && (
                   <PersonCard
-                    title={`AVANT/${t("Anlagebetreuer")}`}
+                    title={`${t("Anlagebetreuer")}`}
                     name={anlageBetreuer.name}
                     email={anlageBetreuer.email}
                     phone={anlageBetreuer.phone}
