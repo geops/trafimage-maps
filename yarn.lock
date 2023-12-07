@@ -14765,10 +14765,10 @@ react-simple-code-editor@^0.13.1:
   resolved "https://registry.yarnpkg.com/react-simple-code-editor/-/react-simple-code-editor-0.13.1.tgz#4514553fa132dcaffec33a6612c58f1613c52416"
   integrity sha512-XYeVwRZwgyKtjNIYcAEgg2FaQcCZwhbarnkJIV20U2wkCU9q/CPFBo8nRXrK4GXUz3AvbqZFsZRrpUTkqqEYyQ==
 
-react-spatial@v1.7.2-beta.0:
-  version "1.7.2-beta.0"
-  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.7.2-beta.0.tgz#cf551cfce70df5b28cc56fda5b04b3beb248febc"
-  integrity sha512-kBtnbx7MNCPZBEflbFyEPWCVO0j954uabIX+dZafXylYhccn0B3TW85zhvRjDh7u3qaVejyfJAIdrLU+07F7Gg==
+react-spatial@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-spatial/-/react-spatial-1.8.0.tgz#f30fd0aefe00e6a72e5edfd2f34fecaf2a81649f"
+  integrity sha512-qJduqOJCbz+s/fObBqzsF/pUaDMOLxUBO/0faogKZvb4Yk1pSBiv7D430hbMBa+0k8ajP9vgSZdvfaqj6FLmAw==
   dependencies:
     "@geops/geops-ui" "0.1.18"
     "@material-ui/core" "4.12.4"

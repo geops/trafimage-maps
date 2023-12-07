@@ -145,8 +145,6 @@ class Permalink extends PureComponent {
           const features = KML.readFeatures(
             newKmlString,
             map.getView().getProjection(),
-            map.getView().getResolution(),
-            true,
           );
 
           // eslint-disable-next-line no-console

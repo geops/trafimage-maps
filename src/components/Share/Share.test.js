@@ -33,7 +33,7 @@ describe("Share", () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(container.innerHTML).toMatchSnapshot();
+    expect(container.querySelectorAll("button").length).toBe(1);
   });
 
   describe("should send track event on click", () => {

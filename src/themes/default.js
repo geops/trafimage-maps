@@ -224,6 +224,7 @@ const theme = createTheme(
           },
           "&.Mui-disabled": {
             color: "#888",
+            border: "0",
           },
         },
       },

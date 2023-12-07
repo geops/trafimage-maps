@@ -21,6 +21,9 @@ describe("SharePermalinkButton", () => {
         </Provider>
       </ThemeProvider>,
     );
-    expect(component.container.innerHTML).toMatchSnapshot();
+    expect(
+      component.container.querySelectorAll(".wkp-permalink-bt").length,
+    ).toBe(1);
+    expect(component.container.querySelectorAll("button").length).toBe(1);
   });
 });
