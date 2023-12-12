@@ -1,3 +1,4 @@
+import { unByKey } from 'ol/Observable';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 
@@ -15,12 +16,84 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   name: 'ch.sbb.handicap.data',
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_ch.sbb.handicap',
+  style: 'base_bright_v2_ch.sbb.handicap_v2',
   properties: {
     hideInLegend: true,
   },
   mapOptions: {
     preserveDrawingBuffer: true,
+  },
+});
+
+let layersToQuery = [];
+
+export const updateStations = (mbMap) => {
+  // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
+  mbMap.once('idle', () => {
+    const features = mbMap
+      .querySourceFeatures('stop_places', {
+        sourceLayer: 'stop_place',
+      })
+      .map((feat) => {
+        const good = {
+          id: feat.id * 1000,
+          type: feat.type,
+          properties: feat.properties,
+          geometry: feat.geometry,
+        };
+        return good;
+      });
+    const source = mbMap.getSource('clusters');
+    console.log(source, features);
+
+    if (source) {
+      source.setData({
+        type: 'FeatureCollection',
+        features,
+      });
+    }
+  });
+};
+const olKeys = [];
+handicapDataLayer.on('load', () => {
+  const { map, mbMap } = handicapDataLayer;
+  layersToQuery = mbMap
+    .getStyle()
+    .layers.filter(({ source }) => {
+      return source === 'stop_places';
+    })
+    .map((layer) => layer.id);
+
+  updateStations(mbMap);
+
+  // Update clusters source on moveeend.
+  unByKey(olKeys);
+
+  olKeys.push(
+    map.on('moveend', () => {
+      // [constrAusbau, constrUnterhalt].forEach((layer) => {
+      //   // eslint-disable-next-line no-param-reassign
+      //   layer.isQueryable = map.getView().getZoom() > 10;
+      // });
+      updateStations(mbMap);
+    }),
+  );
+});
+
+export const cluster = new MapboxStyleLayer({
+  name: 'ch.sbb.handicap-cluster',
+  key: 'ch.sbb.handicap-cluster',
+  visible: true,
+  mapboxLayer: handicapDataLayer,
+  properties: {
+    isQueryable: true,
+    useOverlay: true,
+    popupComponent: 'HandicapPopup',
+    hideInLegend: true,
+    cluster: true,
+  },
+  styleLayersFilter: ({ source }) => {
+    return source === 'cluster';
   },
 });
 
@@ -84,39 +157,56 @@ export const nichtBarrierfreierBahnhoefe = new MapboxStyleLayer({
   },
 });
 
+// Re-render cluster when change construction layers visiblity.
+// [
+//   stuetzpunktBahnhoefe,
+//   barrierfreierBahnhoefe,
+//   nichtBarrierfreierBahnhoefe,
+// ].forEach((parentLayer) => {
+//   parentLayer.children.forEach((l) => {
+//     l.on('change:visible', ({ target: layer }) => {
+//       // Re-render only for children that contribute to the cluster
+//       if (layer.mapboxLayer && handicapDataLayer && handicapDataLayer.mbMap) {
+//         updateStations(layer.mapboxLayer.mbMap);
+//       }
+//     });
+//   });
+// });
+
 export default [
   handicapDataLayer,
   netzkarteLayer.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'base_bright_v2_ch.sbb.handicap',
+    style: 'base_bright_v2_ch.sbb.handicap_v2',
   }),
   netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'base_dark_v2_ch.sbb.handicap',
+    style: 'base_dark_v2_ch.sbb.handicap_v2',
   }),
   netzkarteAerial.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'aerial_sbb_sbbkey_ch.sbb.handicap',
+    style: 'aerial_sbb_sbbkey_ch.sbb.handicap_v2',
   }),
   swisstopoLandeskarte.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap_v2',
   }),
   swisstopoLandeskarteGrau.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap',
+    style: 'ch.swisstopo.backgrounds_ch.sbb.handicap_v2',
   }),
-  stationsLayer.clone({
-    mapboxLayer: handicapDataLayer,
-  }),
-  bahnhofplaene.clone({
-    children: bahnhofplaene.children.map((layer) =>
-      layer.clone({
-        mapboxLayer: handicapDataLayer,
-      }),
-    ),
-  }),
-  nichtBarrierfreierBahnhoefe,
-  barrierfreierBahnhoefe,
-  stuetzpunktBahnhoefe,
+  cluster,
+  // stationsLayer.clone({
+  //   mapboxLayer: handicapDataLayer,
+  // }),
+  // bahnhofplaene.clone({
+  //   children: bahnhofplaene.children.map((layer) =>
+  //     layer.clone({
+  //       mapboxLayer: handicapDataLayer,
+  //     }),
+  //   ),
+  // }),
+  // nichtBarrierfreierBahnhoefe,
+  // barrierfreierBahnhoefe,
+  // stuetzpunktBahnhoefe,
 ];
