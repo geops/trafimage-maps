@@ -114,7 +114,7 @@ export const isbSchmalspurbahnen = new RailplusLayer({
   mapboxLayer: netzkarteIsb,
   group: 'ch.sbb.isb',
   styleLayersFilter: ({ metadata }) =>
-    /^schmalspur_(line|flag)$/.test(metadata?.['isb.filter']),
+    /^schmalspur_/.test(metadata?.['isb.filter']),
   queryRenderedLayersFilter: ({ metadata }) =>
     /^schmalspur_line$/.test(metadata?.['isb.filter']),
   properties: {
