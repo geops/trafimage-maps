@@ -215,9 +215,9 @@ const EnergiePopup = ({ feature }) => {
   );
   const handleChange = (event, newTab) => setTab(TABS[newTab]);
   const classes = useStyles({ selectWidth });
-
   // General Info
   const kategorie = feature.get('kategorie');
+
   const unterkategorie = feature.get('unterkategorie');
   const trassennummer = feature.get('trassennummer');
   const losNr = feature.get('los_nr');
@@ -362,7 +362,9 @@ const EnergiePopup = ({ feature }) => {
               <>
                 {anlageBetreuer && (
                   <PersonCard
-                    title={`AVANT/${t('Anlagebetreuer')}`}
+                    title={`${t(
+                      kategorie ? 'Anlagebetreuer' : 'LeitungAnlagebetreuer',
+                    )}`}
                     name={anlageBetreuer.name}
                     email={anlageBetreuer.email}
                     phone={anlageBetreuer.phone}
