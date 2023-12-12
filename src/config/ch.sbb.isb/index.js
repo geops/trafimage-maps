@@ -1,6 +1,8 @@
+import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import { kilometrageLayer } from '../ch.sbb.infrastruktur';
+import RailplusLayer from '../../layers/RailplusLayer';
 
 export const netzkarteIsb = new TrafimageMapboxLayer({
   name: 'ch.sbb.isb',
@@ -99,4 +101,32 @@ export const isbTVS = new MapboxStyleLayer({
   },
 });
 
-export default [kilometrageLayer, netzkarteIsb, isbOther, isbTVS];
+export const isbNormalspurbahnen = new Layer({
+  name: 'ch.sbb.isb.normalspurbahnen',
+  visible: true,
+  group: 'ch.sbb.isb',
+  children: [isbOther, isbTVS],
+});
+
+export const isbSchmalspurbahnen = new RailplusLayer({
+  name: 'ch.sbb.isb.schmalspurbahnen',
+  visible: false,
+  mapboxLayer: netzkarteIsb,
+  group: 'ch.sbb.isb',
+  styleLayersFilter: ({ metadata }) =>
+    /^schmalspur_(line|flag)$/.test(metadata?.['isb.filter']),
+  queryRenderedLayersFilter: ({ metadata }) =>
+    /^schmalspur_line$/.test(metadata?.['isb.filter']),
+  properties: {
+    isQueryable: true,
+    popupComponent: 'SchmalspurPopup',
+    useOverlay: true,
+  },
+});
+
+export default [
+  kilometrageLayer,
+  netzkarteIsb,
+  isbSchmalspurbahnen,
+  isbNormalspurbahnen,
+];
