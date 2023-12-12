@@ -2,7 +2,6 @@ import { Layer } from 'mobility-toolbox-js/ol';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import { kilometrageLayer } from '../ch.sbb.infrastruktur';
-import { MD_RAILPLUS_FILTER } from '../ch.railplus.mitglieder';
 import RailplusLayer from '../../layers/RailplusLayer';
 
 export const netzkarteIsb = new TrafimageMapboxLayer({
@@ -115,9 +114,9 @@ export const isbSchmalspurbahnen = new RailplusLayer({
   mapboxLayer: netzkarteIsb,
   group: 'ch.sbb.isb',
   styleLayersFilter: ({ metadata }) =>
-    /^(line|flag)$/.test(metadata?.[MD_RAILPLUS_FILTER]),
+    /^schmalspur_(line|flag)$/.test(metadata?.['isb.filter']),
   queryRenderedLayersFilter: ({ metadata }) =>
-    /^line$/.test(metadata?.[MD_RAILPLUS_FILTER]),
+    /^schmalspur_line$/.test(metadata?.['isb.filter']),
   properties: {
     isQueryable: true,
     popupComponent: 'RailplusPopup',
