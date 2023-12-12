@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.12](https://github.com/geops/trafimage-maps/compare/v1.22.11...v1.22.12) (2023-12-11)
+
+### Bug Fixes
+
+- change geltungsbereiche translations ([#1120](https://github.com/geops/trafimage-maps/issues/1120)) ([c847b6b](https://github.com/geops/trafimage-maps/commit/c847b6b9a621c24f474a8a665c2bc90fea79731a))
+
+### [1.22.11](https://github.com/geops/trafimage-maps/compare/v1.22.10...v1.22.11) (2023-12-07)
+
+### Bug Fixes
+
+- use different translation when there is no energy category ([0208d22](https://github.com/geops/trafimage-maps/commit/0208d22802c18df5e07d2a7e0548d23af15619b0))
+
+### [1.22.10](https://github.com/geops/trafimage-maps/compare/v1.22.9...v1.22.10) (2023-12-06)
+
+### [1.22.9](https://github.com/geops/trafimage-maps/compare/v1.22.7...v1.22.9) (2023-12-06)
+
+### Bug Fixes
+
+- fix display of departures when multiple features are selected ([#1115](https://github.com/geops/trafimage-maps/issues/1115)) ([a18865f](https://github.com/geops/trafimage-maps/commit/a18865f6b6c5105ffb0d50b04ce1a7a20fc50a48))
+- load properly the language on load when the lang url parameter is set ([248c79a](https://github.com/geops/trafimage-maps/commit/248c79af75c6b48969d75fb7137f24d06a11f702))
+- **railplus:** add PDF overlays for it and fr, update default export size and format for railplus ([#1113](https://github.com/geops/trafimage-maps/issues/1113)) ([c738803](https://github.com/geops/trafimage-maps/commit/c73880397b6703de2fa38e07a8ca22f0420b7d8c))
+- remove ANVANT text ([fe781cf](https://github.com/geops/trafimage-maps/commit/fe781cffa7836a48c1cca5a9afef773afc25f892))
+
 ### [1.22.8](https://github.com/geops/trafimage-maps/compare/v1.22.7...v1.22.8) (2023-11-08)
 
 ### Bug Fixes
