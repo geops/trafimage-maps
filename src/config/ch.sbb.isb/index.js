@@ -119,7 +119,7 @@ export const isbSchmalspurbahnen = new RailplusLayer({
     /^schmalspur_line$/.test(metadata?.['isb.filter']),
   properties: {
     isQueryable: true,
-    popupComponent: 'RailplusPopup',
+    popupComponent: 'SchmalspurPopup',
     useOverlay: true,
   },
 });
