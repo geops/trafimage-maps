@@ -89,7 +89,7 @@ function StopPlacePopup({ feature }) {
   }
   return (
     <div>
-      {data
+      {data?.prmInformation
         ? Object.entries(data?.prmInformation || {}).map(divv)
         : `No data for this station`}
     </div>
