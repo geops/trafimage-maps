@@ -40,7 +40,6 @@ exports[`Header match snapshots 1`] = `
           </span>
         </div>
         <input aria-invalid="false"
-               name=":r1:"
                aria-hidden="true"
                tabindex="-1"
                class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"

@@ -1,4 +1,4 @@
-import { createTheme, adaptV4Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
 const colors = {
   red: "#eb0000",
@@ -26,12 +26,14 @@ const styles = {
   },
 };
 
-const breakpointValues = {
-  xs: 0,
-  sm: 576,
-  md: 768,
-  lg: 992,
-  xl: 1200,
+const breakpoints = {
+  values: {
+    xs: 0,
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200,
+  },
 };
 
 const typoBody = {
@@ -60,110 +62,60 @@ const themeSpacing = (value) => {
   return space;
 };
 
-const theme = createTheme(
-  adaptV4Theme({
-    colors,
-    styles,
-    breakpoints: { values: breakpointValues },
-    palette: {
-      primary: {
-        main: colors.black,
-      },
-      secondary: {
-        main: colors.red,
-        dark: colors.redDark,
-      },
-      text: {
-        primary: colors.black,
-        secondary: colors.gray,
-      },
+const v5 = {
+  colors,
+  styles,
+  breakpoints,
+  mixins: {},
+  spacing: themeSpacing,
+  palette: {
+    mode: "light",
+    type: "light",
+    primary: {
+      main: colors.black,
     },
-    typography: {
-      fontFamily: "'SBBWeb-Roman', 'Arial', 'sans-serif'",
-      fontSize: 12,
-      htmlFontSize: 14, // SBB design says 15
-      h4: {
-        fontFamily: "'SBBWeb-Bold', 'Arial', 'sans-serif'",
-        fontWeight: "bold",
-        fontSize: "1em",
-        lineHeight: "22.5px",
-      },
-      body1: typoBody,
-      body2: {
-        ...typoBody,
-        fontSize: 16,
-        lineHeight: "1.7333333rem",
-      },
-      subtitle1: {
-        fontSize: 13,
-        lineHeight: "19.5px",
-        color: colors.gray,
-      },
-      button: {
-        fontSize: "1em",
-        letterSpacing: 0,
-        lineHeight: "26px",
-      },
+    secondary: {
+      main: colors.red,
+      dark: colors.redDark,
     },
-    spacing: themeSpacing,
-    props: {
-      MuiPopover: {
+    text: {
+      primary: colors.black,
+      secondary: colors.gray,
+    },
+  },
+  typography: {
+    fontFamily: "'SBBWeb-Roman', 'Arial', 'sans-serif'",
+    fontSize: 12,
+    htmlFontSize: 14,
+    h4: {
+      fontFamily: "'SBBWeb-Bold', 'Arial', 'sans-serif'",
+      fontWeight: "bold",
+      fontSize: "1em",
+      lineHeight: "22.5px",
+    },
+    body1: typoBody,
+    body2: {
+      ...typoBody,
+      fontSize: 16,
+      lineHeight: "1.7333333rem",
+    },
+    subtitle1: {
+      fontSize: 13,
+      lineHeight: "19.5px",
+      color: colors.gray,
+    },
+    button: {
+      fontSize: "1em",
+      letterSpacing: 0,
+      lineHeight: "26px",
+    },
+  },
+  components: {
+    MuiPopover: {
+      defaultProps: {
         elevation: 0,
       },
-      MuiIconButton: {
-        size: "small",
-        disableRipple: true,
-        disableFocusRipple: true,
-      },
-      MuiButton: {
-        variant: "contained",
-        color: "primary",
-        disableRipple: true,
-        disableFocusRipple: true,
-        disableElevation: true,
-      },
-      MuiToggleButton: {
-        disableRipple: true,
-        disableFocusRipple: true,
-      },
-      MuiMenuItem: {
-        disableRipple: true,
-      },
-      MuiTab: {
-        disableRipple: true,
-        disableFocusRipple: true,
-      },
-      MuiMenu: {
-        transitionDuration: 0,
-      },
-      MuiListItemText: {
-        primaryTypographyProps: { variant: "body1" },
-      },
-    },
-    overrides: {
-      MuiFormControlLabel: {
-        root: {
-          marginLeft: 0,
-          marginRight: 0,
-        },
-      },
-      // from sbb design, see 'select' angular components
-      MuiSelect: {
-        select: {
-          "&:focus": {
-            backgroundColor: "white",
-          },
-        },
-        icon: {
-          transition: "transform 400ms",
-          width: 18,
-          color: "inherit", // on SBB design it will be more colors.gray, but it's nicer like this.
-        },
-        outlined: {
-          padding: "10px 44px 11px 14px",
-        },
-      },
-      MuiPopover: {
+      styleOverrides: {
         paper: {
           border: "2px solid #666",
           padding: "30px 20px",
@@ -207,67 +159,39 @@ const theme = createTheme(
           },
         },
       },
-      // This css was done for IconButton as child of the ToggleButton.
-      // maybe there will be more use case to manage in the future.
-      MuiToggleButton: {
+    },
+    MuiIconButton: {
+      defaultProps: {
+        size: "small",
+        disableRipple: true,
+        disableFocusRipple: true,
+      },
+      styleOverrides: {
         root: {
-          border: "0",
-          padding: 0,
+          borderRadius: 0,
           color: colors.black,
-          "&:hover, &.Mui-selected:hover": {
-            backgroundColor: "transparent",
-            color: colors.redDark,
-          },
-          "&.Mui-selected": {
-            backgroundColor: "transparent",
-            color: colors.redDark,
-          },
-          "&.Mui-disabled": {
-            color: "#888",
-            border: "0",
-          },
-        },
-      },
-      MuiInputBase: {
-        root: {
-          borderRadius: 2,
-          fontSize: "1em",
-        },
-      },
-      MuiOutlinedInput: {
-        notchedOutline: {
-          borderRadius: 2,
-          borderWidth: 2,
-          borderColor: colors.lighterGray,
-        },
-        root: {
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderColor: colors.lighterGray,
-          },
-          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#666",
-          },
-        },
-      },
-      // MenuItem are only used for Select component.
-      MuiMenuItem: {
-        root: {
-          color: colors.gray,
-          "&:hover,&:focus": {
-            color: colors.redDark,
-          },
-          paddingLeft: 14,
-        },
-      },
-      MuiListItem: {
-        root: {
-          backgroundColor: "white !important",
           "&:hover": {
-            backgroundColor: "white !important",
+            backgroundColor: "transparent",
+            color: colors.redDark,
+          },
+          "&$disabled": {
+            color: "#888",
           },
         },
+        sizeSmall: {
+          padding: 15,
+        },
       },
-      MuiButton: {
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: "contained",
+        color: "primary",
+        disableRipple: true,
+        disableFocusRipple: true,
+        disableElevation: true,
+      },
+      styleOverrides: {
         root: {
           borderRadius: "2px",
           minWidth: 60,
@@ -278,7 +202,6 @@ const theme = createTheme(
           borderWidth: "1px",
           paddingLeft: 40,
           paddingRight: 40,
-
           "&$disabled": {
             color: "#666",
             borderColor: "#979797",
@@ -305,64 +228,52 @@ const theme = createTheme(
           },
         },
       },
-      MuiIconButton: {
+    },
+    MuiToggleButton: {
+      defaultProps: {
+        disableRipple: true,
+        disableFocusRipple: true,
+      },
+      styleOverrides: {
         root: {
-          borderRadius: 0,
+          border: "0",
+          padding: 0,
           color: colors.black,
-          "&:hover": {
+          "&:hover, &.Mui-selected:hover": {
             backgroundColor: "transparent",
             color: colors.redDark,
           },
-          "&$disabled": {
-            color: "#888",
-          },
-        },
-        sizeSmall: {
-          padding: 15,
-        },
-      },
-      MuiDialog: {
-        root: {
-          position: "absolute !important",
-        },
-        paper: {
-          pointerEvents: "auto",
-          textAlign: "left",
-          minHeight: 65,
-          backgroundColor: "#fff",
-          overflowY: "hidden",
-          borderRadius: 0,
-          margin: 0,
-          width: "min-content",
-        },
-        paperWidthFalse: {
-          maxWidth: "none",
-        },
-      },
-      MuiDialogTitle: {
-        root: {
-          fontSize: 14,
-          borderBottom: "1px solid #eee",
-          minHeight: 50,
-          height: "auto",
-          padding: "0 40px 0 20px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          position: "relative",
-        },
-      },
-      MuiTabs: {
-        root: {
-          display: "unset",
-          overflow: "unset",
-          minHeight: "unset",
-          "& .MuiTabs-indicator": {
+          "&.Mui-selected": {
             backgroundColor: "transparent",
+            color: colors.redDark,
+          },
+          "&.Mui-disabled": {
+            color: "#888",
+            border: "0",
           },
         },
       },
-      MuiTab: {
+    },
+    MuiMenuItem: {
+      defaultProps: {
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          color: colors.gray,
+          "&:hover,&:focus": {
+            color: colors.redDark,
+          },
+          paddingLeft: 14,
+        },
+      },
+    },
+    MuiTab: {
+      defaultProps: {
+        disableRipple: true,
+        disableFocusRipple: true,
+      },
+      styleOverrides: {
         root: {
           lineHeight: "unset",
           minWidth: 0,
@@ -389,7 +300,127 @@ const theme = createTheme(
         },
       },
     },
-  }),
-);
+    MuiMenu: {
+      defaultProps: {
+        transitionDuration: 0,
+      },
+    },
+    MuiListItemText: {
+      defaultProps: {
+        primaryTypographyProps: {
+          variant: "body1",
+        },
+      },
+    },
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          marginLeft: 0,
+          marginRight: 0,
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          "&:focus": {
+            backgroundColor: "white",
+          },
+        },
+        icon: {
+          transition: "transform 400ms",
+          width: 18,
+          color: "inherit",
+        },
+        outlined: {
+          padding: "10px 44px 11px 14px",
+        },
+      },
+    },
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          borderRadius: 2,
+          fontSize: "1em",
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        notchedOutline: {
+          borderRadius: 2,
+          borderWidth: 2,
+          borderColor: colors.lighterGray,
+        },
+        root: {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: colors.lighterGray,
+          },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#666",
+          },
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white !important",
+          "&:hover": {
+            backgroundColor: "white !important",
+          },
+        },
+      },
+    },
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          position: "absolute !important",
+        },
+        paper: {
+          pointerEvents: "auto",
+          textAlign: "left",
+          minHeight: 65,
+          backgroundColor: "#fff",
+          overflowY: "hidden",
+          borderRadius: 0,
+          margin: 0,
+          width: "min-content",
+        },
+        paperWidthFalse: {
+          maxWidth: "none",
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          fontSize: 14,
+          borderBottom: "1px solid #eee",
+          minHeight: 50,
+          height: "auto",
+          padding: "0 40px 0 20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative",
+        },
+      },
+    },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          display: "unset",
+          overflow: "unset",
+          minHeight: "unset",
+          "& .MuiTabs-indicator": {
+            backgroundColor: "transparent",
+          },
+        },
+      },
+    },
+  },
+};
+const theme = createTheme(v5);
 
 export default theme;
