@@ -4,6 +4,10 @@
   gap: 20px;
   padding: 16px;
 
+  > *:first-child {
+    padding-left:12px
+  }
+
   .wkp-permalink-bt {
     width: 20px;
   }

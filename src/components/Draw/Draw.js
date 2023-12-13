@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
   buttons: {
     display: "flex",
+    paddingLeft: 12,
     gap: 24,
 
     "& .MuiButtonBase-root": {
