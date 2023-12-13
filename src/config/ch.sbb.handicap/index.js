@@ -6,8 +6,8 @@ import {
   netzkarteLayer,
   netzkarteNight,
   // netzkarteAerial,
-  stationsLayer,
-  bahnhofplaene,
+  // stationsLayer,
+  // bahnhofplaene,
   // swisstopoLandeskarte,
   // swisstopoLandeskarteGrau,
 } from '../ch.sbb.netzkarte';
@@ -29,7 +29,6 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
 let layersToQuery = [];
 
 export const updateStations = (mbMap) => {
-  console.log(layersToQuery);
   // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
   mbMap.once('idle', () => {
     const features = mbMap
@@ -255,16 +254,16 @@ export default [
   // }),
   cluster,
   withoutCluster,
-  stationsLayer.clone({
-    mapboxLayer: handicapDataLayer,
-  }),
-  bahnhofplaene.clone({
-    children: bahnhofplaene.children.map((layer) =>
-      layer.clone({
-        mapboxLayer: handicapDataLayer,
-      }),
-    ),
-  }),
+  // stationsLayer.clone({
+  //   mapboxLayer: handicapDataLayer,
+  // }),
+  // bahnhofplaene.clone({
+  //   children: bahnhofplaene.children.map((layer) =>
+  //     layer.clone({
+  //       mapboxLayer: handicapDataLayer,
+  //     }),
+  //   ),
+  // }),
   // nichtBarrierfreierBahnhoefe,
   // barrierfreierBahnhoefe,
   // stuetzpunktBahnhoefe,
