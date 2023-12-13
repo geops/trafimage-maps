@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector } from 'react-redux';
@@ -51,8 +51,11 @@ function StopPlacePopup({ feature }) {
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const [loading, setLoading] = useState();
   const [data, setData] = useState();
+  const uic = useMemo(() => {
+    return feature?.get('uic');
+  }, [feature]);
+
   useEffect(() => {
-    const uic = feature.get('uic');
     const abortController = new AbortController();
     setData();
 
@@ -67,6 +70,10 @@ function StopPlacePopup({ feature }) {
             cache[uic] = newData;
             setData(newData);
           })
+          .catch(() => {
+            // eslint-disable-next-line no-console
+            console.warn(`StopPlacePopup. No data for stations: ${uic}`);
+          })
           .finally(() => {
             setLoading(false);
           });
@@ -76,15 +83,21 @@ function StopPlacePopup({ feature }) {
     return () => {
       abortController.abort();
     };
-  }, [cartaroUrl, feature]);
+  }, [cartaroUrl, uic]);
+
+  if (loading) {
+    return <div>Loading ...</div>;
+  }
   return (
-    <div>{loading ? 'Loading ...' : Object.entries(data || {}).map(divv)}</div>
+    <div>
+      {data ? Object.entries(data || {}).map(divv) : `No data for this station`}
+    </div>
   );
 }
 
 StopPlacePopup.propTypes = propTypes;
 
 const memoized = React.memo(StopPlacePopup);
-memoized.renderTitle = (feat) => feat.get('stationsbezeichnung');
+memoized.renderTitle = (feat) => feat.get('name');
 
 export default memoized;
