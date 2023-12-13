@@ -1,4 +1,5 @@
 import { unByKey } from 'ol/Observable';
+import { Layer } from 'mobility-toolbox-js/ol';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 
@@ -28,7 +29,37 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
 
 let layersToQuery = [];
 
+const clusterBarrierfrei = new MapboxStyleLayer({
+  name: 'ch.sbb.barrierfreierbahnhoefe',
+  key: 'ch.sbb.barrierfreierbahnhoefe-cluster',
+  mapboxLayer: handicapDataLayer,
+  properties: {
+    filter: ['==', ['get', 'prmAutonomyState'], 'YES'],
+  },
+});
+
+const clusterNichtBarrierfrei = new MapboxStyleLayer({
+  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  key: 'ch.sbb.nichtbarrierfreierbahnhoefe-cluster',
+  mapboxLayer: handicapDataLayer,
+  properties: {
+    filter: ['!=', ['get', 'prmAutonomyState'], 'YES'],
+  },
+});
+
+const clusterLayerFilter = [clusterNichtBarrierfrei, clusterBarrierfrei];
+
 export const updateStations = (mbMap) => {
+  const filter = ['any'];
+  clusterLayerFilter.forEach((l) => {
+    if (l.visible) {
+      filter.push(l.get('filter'));
+    }
+  });
+  layersToQuery.forEach((layerId) => {
+    mbMap.setFilter(layerId, filter);
+  });
+
   // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
   mbMap.once('idle', () => {
     const features = mbMap
@@ -80,8 +111,7 @@ handicapDataLayer.on('load', () => {
 });
 
 export const cluster = new MapboxStyleLayer({
-  name: 'ch.sbb.handicap-cluster',
-  key: 'ch.sbb.handicap-cluster',
+  name: 'With cluster',
   visible: true,
   mapboxLayer: handicapDataLayer,
   group: 'test',
@@ -94,29 +124,6 @@ export const cluster = new MapboxStyleLayer({
     cluster: true,
   },
   children: [
-    // style used to build to fill the cluster feature collection
-    // new MapboxStyleLayer({
-    //   mapboxLayer: handicapDataLayer,
-    //   styleLayers: [
-    //     {
-    //       id: 'unclustered-point',
-    //       type: 'circle',
-    //       source: 'stop_places',
-    //       'source-layer': 'stop_place',
-    //       filter: ['!', ['has', 'point_count']],
-    //       paint: {
-    //         'circle-color': '#11b4da',
-    //         'circle-radius': 1,
-    //         'circle-opacity': 0,
-    //       },
-    //     },
-    //   ],
-    //   properties: {
-    //     isQueryable: false,
-    //     hideInLegend: true,
-    //   },
-    // }),
-    // Layer use to query cluster only when a symbol is displayed
     new MapboxStyleLayer({
       mapboxLayer: handicapDataLayer,
       styleLayersFilter: ({ metadata }) => {
@@ -129,19 +136,40 @@ export const cluster = new MapboxStyleLayer({
         popupComponent: 'StopPlacePopup',
       },
     }),
+    ...clusterLayerFilter,
   ],
 });
 
-export const withoutCluster = new MapboxStyleLayer({
-  name: 'ch.sbb.handicap-nocluster',
-  key: 'ch.sbb.handicap-nocluster',
-  visible: false,
+clusterLayerFilter.forEach((layer) => {
+  layer.on('change:visible', ({ target }) => {
+    // Re-render only for children that contribute to the cluster
+    if (target.mapboxLayer && handicapDataLayer && handicapDataLayer.mbMap) {
+      updateStations(target.mapboxLayer.mbMap);
+    }
+  });
+});
+
+const barrierfrei = new MapboxStyleLayer({
+  name: 'ch.sbb.barrierfreierbahnhoefe',
   mapboxLayer: handicapDataLayer,
+  visible: false,
   styleLayersFilter: ({ metadata }) => {
-    return /^symbol/.test(metadata?.['handicap.filter']);
+    return /^symbol.barrierfrei/.test(metadata?.['handicap.filter']);
   },
-  group: 'test',
-  // !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
+  properties: {
+    isQueryable: true,
+    popupComponent: 'StopPlacePopup',
+    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
+  },
+});
+
+const nichtBarrierfrei = new MapboxStyleLayer({
+  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  mapboxLayer: handicapDataLayer,
+  visible: false,
+  styleLayersFilter: ({ metadata }) => {
+    return /^symbol.nichtbarrierfrei/.test(metadata?.['handicap.filter']);
+  },
   properties: {
     isQueryable: true,
     // hasInfos: true,
@@ -149,6 +177,14 @@ export const withoutCluster = new MapboxStyleLayer({
     popupComponent: 'StopPlacePopup',
     useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
+});
+
+export const withoutCluster = new Layer({
+  name: 'Without cluster',
+  visible: false,
+  group: 'test',
+  // !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
+  children: [nichtBarrierfrei, barrierfrei],
 });
 
 // TODO: keep this layer until we are sure we will not use it.
@@ -214,22 +250,6 @@ export const withoutCluster = new MapboxStyleLayer({
 //   },
 // });
 
-// Re-render cluster when change construction layers visiblity.
-[
-  cluster,
-  // barrierfreierBahnhoefe,
-  // nichtBarrierfreierBahnhoefe,
-].forEach((parentLayer) => {
-  parentLayer.children.forEach((l) => {
-    l.on('change:visible', ({ target: layer }) => {
-      // Re-render only for children that contribute to the cluster
-      if (layer.mapboxLayer && handicapDataLayer && handicapDataLayer.mbMap) {
-        updateStations(layer.mapboxLayer.mbMap);
-      }
-    });
-  });
-});
-
 export default [
   handicapDataLayer,
   netzkarteLayer.clone({
@@ -252,8 +272,6 @@ export default [
   //   mapboxLayer: handicapDataLayer,
   //   style: 'ch.swisstopo.backgrounds_ch.sbb.handicap_v2',
   // }),
-  cluster,
-  withoutCluster,
   stationsLayer.clone({
     mapboxLayer: handicapDataLayer,
   }),
@@ -264,6 +282,8 @@ export default [
       }),
     ),
   }),
+  cluster,
+  withoutCluster,
   // nichtBarrierfreierBahnhoefe,
   // barrierfreierBahnhoefe,
   // stuetzpunktBahnhoefe,
