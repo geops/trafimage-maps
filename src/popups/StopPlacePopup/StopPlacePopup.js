@@ -9,13 +9,13 @@ const propTypes = {
 const divv = ([key, value]) => {
   if (value?.de) {
     return (
-      <>
-        <div key={key}>
+      <div key={key}>
+        <div>
           {key}: {value?.de}
           <br />
         </div>{' '}
         <br />
-      </>
+      </div>
     );
   }
 
@@ -23,9 +23,8 @@ const divv = ([key, value]) => {
     const entries = Object.entries(value);
     if (entries.length) {
       return (
-        <div>
-          <br />
-          <fieldset key={key}>
+        <div key={key}>
+          <fieldset>
             <legend>{key}</legend>
             <br />
             <div>{entries.map(divv)}</div>
@@ -37,12 +36,12 @@ const divv = ([key, value]) => {
   }
 
   return (
-    <>
-      <div key={key}>
+    <div key={key}>
+      <div>
         {key}: {value}
       </div>{' '}
       <br />
-    </>
+    </div>
   );
 };
 const cache = {};
@@ -90,7 +89,9 @@ function StopPlacePopup({ feature }) {
   }
   return (
     <div>
-      {data ? Object.entries(data || {}).map(divv) : `No data for this station`}
+      {data
+        ? Object.entries(data?.prmInformation || {}).map(divv)
+        : `No data for this station`}
     </div>
   );
 }
