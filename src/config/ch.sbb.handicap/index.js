@@ -118,26 +118,15 @@ export const cluster = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) => {
     return /^cluster/.test(metadata?.['handicap.filter']);
   },
-  properties: {
-    isQueryable: false,
-    hideInLegend: false,
-    cluster: true,
+  queryRenderedLayersFilter: ({ metadata }) => {
+    return /^cluster.symbol/.test(metadata?.['handicap.filter']);
   },
-  children: [
-    new MapboxStyleLayer({
-      mapboxLayer: handicapDataLayer,
-      styleLayersFilter: ({ metadata }) => {
-        return /^cluster.symbol/.test(metadata?.['handicap.filter']);
-      },
-      properties: {
-        hideInLegend: true,
-        isQueryable: true,
-        useOverlay: true,
-        popupComponent: 'StopPlacePopup',
-      },
-    }),
-    ...clusterLayerFilter,
-  ],
+  properties: {
+    isQueryable: true,
+    useOverlay: true,
+    popupComponent: 'StopPlacePopup',
+  },
+  children: [...clusterLayerFilter],
 });
 
 clusterLayerFilter.forEach((layer) => {
