@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 import { Feature } from 'ol';
 import { MapboxLayer } from 'mobility-toolbox-js/ol';
 import SchmalspurPopup from '.';
-import RailplusLayer from '../../layers/RailplusLayer';
+import SchmalspurLayer from '../../layers/SchmalspurLayer';
 
 describe('SchmalspurPopup', () => {
   let store;
@@ -16,19 +16,36 @@ describe('SchmalspurPopup', () => {
     });
   });
 
-  test('displays isb_tu_nummer', () => {
-    const layer = new RailplusLayer({
+  test('displays info', () => {
+    global.i18n.addResourceBundle('de', 'translation', {
+      'zur Webseite von': 'zur Webseite von {{operator}}',
+    });
+    const layer = new SchmalspurLayer({
       mapboxLayer: new MapboxLayer({ url: 'https://foo' }),
     });
-    layer.railplusProviders = { foo: { long_name: 'long_name' } };
+    layer.tuInfos = {
+      50: {
+        long_name: 'long_name',
+        name: 'foo',
+        url_de: 'https://foo.de',
+      },
+    };
     const { container } = render(
       <Provider store={store}>
         <SchmalspurPopup
-          feature={new Feature({ isb_tu_nummer: 'foo' })}
+          feature={
+            new Feature({
+              isb_tu_nummer: '50',
+              mail: 'mail',
+              phone: 'phone',
+            })
+          }
           layer={layer}
         />
       </Provider>,
     );
-    expect(container.textContent).toBe('long_name');
+    expect(container.textContent).toBe(
+      'long_namezur Webseite von fooLink.svgphonemail',
+    );
   });
 });
