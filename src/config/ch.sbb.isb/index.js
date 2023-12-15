@@ -119,7 +119,6 @@ export const isbSchmalspurbahnen = new SchmalspurLayer({
     /^schmalspur_line$/.test(metadata?.['isb.filter']),
   properties: {
     isQueryable: true,
-    shortToLongName: shortToLongNameTVS,
     popupComponent: 'SchmalspurPopup',
     useOverlay: true,
   },
