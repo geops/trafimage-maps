@@ -16,7 +16,7 @@ describe('SchmalspurPopup', () => {
     });
   });
 
-  test('displays isb_tu_nummer', () => {
+  test('displays info', () => {
     global.i18n.addResourceBundle('de', 'translation', {
       'zur Webseite von': 'zur Webseite von {{operator}}',
     });
@@ -24,18 +24,28 @@ describe('SchmalspurPopup', () => {
       mapboxLayer: new MapboxLayer({ url: 'https://foo' }),
     });
     layer.tuInfos = {
-      50: { long_name: 'long_name', name: 'foo', url_de: 'https://foo.de' },
+      50: {
+        long_name: 'long_name',
+        name: 'foo',
+        url_de: 'https://foo.de',
+      },
     };
     const { container } = render(
       <Provider store={store}>
         <SchmalspurPopup
-          feature={new Feature({ isb_tu_nummer: '50' })}
+          feature={
+            new Feature({
+              isb_tu_nummer: '50',
+              mail: 'mail',
+              phone: 'phone',
+            })
+          }
           layer={layer}
         />
       </Provider>,
     );
     expect(container.textContent).toBe(
-      'bei long_name.zur Webseite von fooLink.svg',
+      'long_namezur Webseite von fooLink.svgphonemail',
     );
   });
 });
