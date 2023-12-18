@@ -240,7 +240,7 @@
   "ch.sbb.infrastruktur.uebrigebahnen.group": "Other railway company infrastructure",
   "ch.sbb.infrastruktur.uebrigebahnen.group-desc": "This layer group comprises the operating points and routes of infrastructure operated by other railway companies.",
   "ch.sbb.isb": "Infrastructure operators",
-  "ch.sbb.isb.normalspurbahnen": "Narrow-gauge lines",
+  "ch.sbb.isb.normalspurbahnen": "Normal-gauge lines",
   "ch.sbb.isb.other": "Other",
   "ch.sbb.isb.schmalspurbahnen": "Narrow-gauge lines",
   "ch.sbb.isb.tvs": "TVS",
