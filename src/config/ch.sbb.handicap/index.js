@@ -1,16 +1,11 @@
-import { unByKey } from 'ol/Observable';
-import { Layer } from 'mobility-toolbox-js/ol';
 import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
 import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
 
 import {
   netzkarteLayer,
   netzkarteNight,
-  // netzkarteAerial,
   stationsLayer,
   bahnhofplaene,
-  // swisstopoLandeskarte,
-  // swisstopoLandeskarteGrau,
 } from '../ch.sbb.netzkarte';
 
 export const handicapDataLayer = new TrafimageMapboxLayer({
@@ -27,153 +22,69 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   group: 'data',
 });
 
-let layersToQuery = [];
-
-const clusterBarrierfrei = new MapboxStyleLayer({
+const barrierefrei = new MapboxStyleLayer({
   name: 'ch.sbb.barrierfreierbahnhoefe',
-  key: 'ch.sbb.barrierfreierbahnhoefe-cluster',
   mapboxLayer: handicapDataLayer,
-  properties: {
-    filter: ['==', ['get', 'prmAutonomyState'], 'YES'],
-  },
-});
-
-const clusterNichtBarrierfrei = new MapboxStyleLayer({
-  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
-  key: 'ch.sbb.nichtbarrierfreierbahnhoefe-cluster',
-  mapboxLayer: handicapDataLayer,
-  properties: {
-    filter: ['!=', ['get', 'prmAutonomyState'], 'YES'],
-  },
-});
-
-const clusterLayerFilter = [clusterNichtBarrierfrei, clusterBarrierfrei];
-
-export const updateStations = (mbMap) => {
-  const filter = ['any'];
-  clusterLayerFilter.forEach((l) => {
-    if (l.visible) {
-      filter.push(l.get('filter'));
-    }
-  });
-  layersToQuery.forEach((layerId) => {
-    mbMap.setFilter(layerId, filter);
-  });
-
-  // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
-  mbMap.once('idle', () => {
-    const features = mbMap
-      .queryRenderedFeatures({
-        layers: layersToQuery,
-      })
-      .map((feat) => {
-        const good = {
-          id: feat.id * 1000,
-          type: feat.type,
-          properties: feat.properties,
-          geometry: feat.geometry,
-        };
-        return good;
-      });
-    const source = mbMap.getSource('clusters');
-    if (source) {
-      source.setData({
-        type: 'FeatureCollection',
-        features,
-      });
-    }
-  });
-};
-const olKeys = [];
-handicapDataLayer.on('load', () => {
-  const { map, mbMap } = handicapDataLayer;
-  layersToQuery = mbMap
-    .getStyle()
-    .layers.filter(({ metadata }) => {
-      return /^cluster.data/.test(metadata?.['handicap.filter']);
-    })
-    .map((layer) => layer.id);
-
-  updateStations(mbMap);
-
-  // Update clusters source on moveeend.
-  unByKey(olKeys);
-
-  olKeys.push(
-    map.on('moveend', () => {
-      // [constrAusbau, constrUnterhalt].forEach((layer) => {
-      //   // eslint-disable-next-line no-param-reassign
-      //   layer.isQueryable = map.getView().getZoom() > 10;
-      // });
-      updateStations(mbMap);
-    }),
-  );
-});
-
-export const cluster = new MapboxStyleLayer({
-  name: 'With cluster',
-  visible: true,
-  mapboxLayer: handicapDataLayer,
-  group: 'test',
   styleLayersFilter: ({ metadata }) => {
-    return /^cluster/.test(metadata?.['handicap.filter']);
-  },
-  queryRenderedLayersFilter: ({ metadata }) => {
-    return /^cluster.symbol/.test(metadata?.['handicap.filter']);
+    return /^symbol.barrierfrei/.test(metadata?.['handicap.filter']);
   },
   properties: {
     isQueryable: true,
     useOverlay: true,
     popupComponent: 'StopPlacePopup',
   },
-  children: [...clusterLayerFilter],
 });
 
-clusterLayerFilter.forEach((layer) => {
-  layer.on('change:visible', ({ target }) => {
-    // Re-render only for children that contribute to the cluster
-    if (target.mapboxLayer && handicapDataLayer && handicapDataLayer.mbMap) {
-      updateStations(target.mapboxLayer.mbMap);
-    }
-  });
-});
-
-const barrierfrei = new MapboxStyleLayer({
-  name: 'ch.sbb.barrierfreierbahnhoefe',
-  mapboxLayer: handicapDataLayer,
-  visible: false,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.barrierfrei/.test(metadata?.['handicap.filter']);
-  },
-  properties: {
-    isQueryable: true,
-    popupComponent: 'StopPlacePopup',
-    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  },
-});
-
-const nichtBarrierfrei = new MapboxStyleLayer({
+const nichtBarrierefrei = new MapboxStyleLayer({
   name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
   mapboxLayer: handicapDataLayer,
-  visible: false,
   styleLayersFilter: ({ metadata }) => {
     return /^symbol.nichtbarrierfrei/.test(metadata?.['handicap.filter']);
   },
   properties: {
     isQueryable: true,
-    // hasInfos: true,
-    // layerInfoComponent: 'HandicapLayerInfo',
+    useOverlay: true,
     popupComponent: 'StopPlacePopup',
-    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
   },
 });
 
-export const withoutCluster = new Layer({
-  name: 'Without cluster',
-  visible: false,
-  group: 'test',
-  // !!metadata && metadata['trafimage.filter'] === 'stuetzpunkt',
-  children: [nichtBarrierfrei, barrierfrei],
+const teilBarrierefrei = new MapboxStyleLayer({
+  name: 'ch.sbb.teilbarrierfreierbahnhoefe',
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ metadata }) => {
+    return /^symbol.teilbarrierfrei/.test(metadata?.['handicap.filter']);
+  },
+  properties: {
+    isQueryable: true,
+    useOverlay: true,
+    popupComponent: 'StopPlacePopup',
+  },
+});
+
+const shuttle = new MapboxStyleLayer({
+  name: 'ch.sbb.shuttle',
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ metadata }) => {
+    return /^symbol.shuttle/.test(metadata?.['handicap.filter']);
+  },
+  properties: {
+    isQueryable: true,
+    useOverlay: true,
+    popupComponent: 'StopPlacePopup',
+  },
+});
+
+const statusUnbekannt = new MapboxStyleLayer({
+  name: 'ch.sbb.status_unbekannt',
+  mapboxLayer: handicapDataLayer,
+  styleLayersFilter: ({ metadata }) => {
+    return /^symbol.statusunbekannt/.test(metadata?.['handicap.filter']);
+  },
+  properties: {
+    isQueryable: true,
+    useOverlay: true,
+    popupComponent: 'StopPlacePopup',
+  },
 });
 
 // TODO: keep this layer until we are sure we will not use it.
@@ -271,8 +182,11 @@ export default [
       }),
     ),
   }),
-  cluster,
-  withoutCluster,
+  statusUnbekannt,
+  shuttle,
+  nichtBarrierefrei,
+  teilBarrierefrei,
+  barrierefrei,
   // nichtBarrierfreierBahnhoefe,
   // barrierfreierBahnhoefe,
   // stuetzpunktBahnhoefe,
