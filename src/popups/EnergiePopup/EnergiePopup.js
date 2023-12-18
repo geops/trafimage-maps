@@ -179,7 +179,7 @@ function InterventionPersonCard({ person, segments }) {
 InterventionPersonCard.propTypes = {
   person: PropTypes.shape(PersonCard.propTypes).isRequired,
   segments: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ),
 };
 
@@ -210,7 +210,7 @@ function EnergiePopup({ feature }) {
   const [tab, setTab] = useState(TABS[0]);
   const [selectWidth, setSelectWidth] = useState(0);
   const [sicherheitActiveCat, setSicherheitActiveCat] = useState(
-    SICHERHEITSRELEVANT_CATEGORIES[0]
+    SICHERHEITSRELEVANT_CATEGORIES[0],
   );
   const handleChange = (event, newTab) => setTab(TABS[newTab]);
   const classes = useStyles({ selectWidth });
@@ -224,7 +224,7 @@ function EnergiePopup({ feature }) {
       feature.getGeometry().getType() === "Point"
         ? `${feature.get("bezeichnung")} (${feature.get("anlage_id")})`
         : feature.get("bezeichnung"),
-    [feature]
+    [feature],
   );
 
   // Asset management
@@ -232,72 +232,72 @@ function EnergiePopup({ feature }) {
     () =>
       feature.get("anlagebetreuer") &&
       JSON.parse(feature.get("anlagebetreuer")),
-    [feature]
+    [feature],
   );
   const betriebInstandhaltung = useMemo(
     () =>
       feature.get("betrieb_instandhaltung") &&
       JSON.parse(feature.get("betrieb_instandhaltung")),
-    [feature]
+    [feature],
   );
   const lifeCycleManager = useMemo(
     () =>
       feature.get("life_cycle_manager") &&
       JSON.parse(feature.get("life_cycle_manager")),
-    [feature]
+    [feature],
   );
 
   // Intervention
   const interventionPikettNummerTag = formatPhone(
-    feature.get("intervention_pikettnummer_tag")
+    feature.get("intervention_pikettnummer_tag"),
   );
   const interventionPikettNummerNacht = formatPhone(
-    feature.get("intervention_pikettnummer_nacht")
+    feature.get("intervention_pikettnummer_nacht"),
   );
   const interventionPikettNummerDetail = feature.get(
-    "intervention_pikettnummer_detail"
+    "intervention_pikettnummer_detail",
   );
   const interventionMail = feature.get("intervention_mail");
   const interventionMailDetail = feature.get("intervention_mail_detail");
   const interventionBemerkungen = feature.get("intervention_bemerkungen");
   const interventionExternePersonen = validatedParseProperty(
     feature,
-    "intervention_energie_persons"
+    "intervention_energie_persons",
   );
   const interventionSbbPersonen = validatedParseProperty(
     feature,
-    "intervention_persons"
+    "intervention_persons",
   );
 
   // Sicherheitsrelevant
   const sicherheitsrelevantLink = feature.get("sicherheitsrelevant_link");
   const sicherheitsrelevantBemerkungen = feature.get(
-    "sicherheitsrelevant_bemerkungen"
+    "sicherheitsrelevant_bemerkungen",
   );
   const sicherheitsrelevantInstruiertExternalPersons = validatedParseProperty(
     feature,
-    "sicherheitsrelevant_instruiert_energie_persons"
+    "sicherheitsrelevant_instruiert_energie_persons",
   );
   const sicherheitsrelevantInstruiertSbbPersons = validatedParseProperty(
     feature,
-    "sicherheitsrelevant_instruiert_persons"
+    "sicherheitsrelevant_instruiert_persons",
   );
   const sicherheitsrelevantSachverstaendigExternalPersons =
     validatedParseProperty(
       feature,
-      "sicherheitsrelevant_sachverstaendige_energie_persons"
+      "sicherheitsrelevant_sachverstaendige_energie_persons",
     );
   const sicherheitsrelevantSachverstaendigSbbPersons = validatedParseProperty(
     feature,
-    "sicherheitsrelevant_sachverstaendige_persons"
+    "sicherheitsrelevant_sachverstaendige_persons",
   );
   const sicherheitsrelevantSchaltErdExternalPersons = validatedParseProperty(
     feature,
-    "sicherheitsrelevant_schalt_erd_berechtigt_energie_persons"
+    "sicherheitsrelevant_schalt_erd_berechtigt_energie_persons",
   );
   const sicherheitsrelevantSchaltErdSbbPersons = validatedParseProperty(
     feature,
-    "sicherheitsrelevant_schalt_erd_berechtigt_persons"
+    "sicherheitsrelevant_schalt_erd_berechtigt_persons",
   );
 
   const mainInfo = useMemo(() => {
@@ -361,7 +361,7 @@ function EnergiePopup({ feature }) {
                 {anlageBetreuer && (
                   <PersonCard
                     title={`${t(
-                      kategorie ? "Anlagebetreuer" : "LeitungAnlagebetreuer"
+                      kategorie ? "Anlagebetreuer" : "LeitungAnlagebetreuer",
                     )}`}
                     name={anlageBetreuer.name}
                     email={anlageBetreuer.email}
@@ -499,19 +499,19 @@ function EnergiePopup({ feature }) {
                 {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[0] // Schalt- erdberechtigt
                   ? renderSicherheitsrelevantPersons(
                       sicherheitsrelevantSchaltErdSbbPersons,
-                      sicherheitsrelevantSchaltErdExternalPersons
+                      sicherheitsrelevantSchaltErdExternalPersons,
                     )
                   : null}
                 {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[1] // Sachverständig
                   ? renderSicherheitsrelevantPersons(
                       sicherheitsrelevantSachverstaendigSbbPersons,
-                      sicherheitsrelevantSachverstaendigExternalPersons
+                      sicherheitsrelevantSachverstaendigExternalPersons,
                     )
                   : null}
                 {sicherheitActiveCat === SICHERHEITSRELEVANT_CATEGORIES[2] // Instruiert
                   ? renderSicherheitsrelevantPersons(
                       sicherheitsrelevantInstruiertSbbPersons,
-                      sicherheitsrelevantInstruiertExternalPersons
+                      sicherheitsrelevantInstruiertExternalPersons,
                     )
                   : null}
               </>
