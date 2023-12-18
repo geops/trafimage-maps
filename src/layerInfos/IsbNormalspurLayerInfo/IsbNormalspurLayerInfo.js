@@ -10,28 +10,24 @@ const propTypes = {
 
 const translations = {
   de: {
-    title: 'Normalspurstrecken',
     description:
       'Infrastrukturbetreiberinnen, die Normalspurstrecken betreiben. ',
     dataInfo1: 'Datengrundlage: SBB',
     dataInfo2: 'Datenstand: 12.2023',
   },
   fr: {
-    title: 'Voies étroites',
     description:
       "Les gestionnaires d'infrastructure qui exploitent des lignes à voie normale.",
     dataInfo1: 'Base de données: CFF',
     dataInfo2: 'État des données: 12.2023',
   },
   it: {
-    title: 'Tratte a scartamento ridotto',
     description:
       'Gestori di infrastrutture che operano su linee a scartamento normale.',
     dataInfo1: 'Base dati: FFS',
     dataInfo2: 'Aggiornamento dei dati: 12.2023',
   },
   en: {
-    title: 'Narrow gauge',
     description: 'Infrastructure managers who operate standard gauge lines.',
     dataInfo1: 'Data basis: SBB',
     dataInfo2: 'Data status: 12.2023',
@@ -40,8 +36,7 @@ const translations = {
 
 const IsbNormalspurLayerInfo = ({ properties: layer }) => {
   const { i18n } = useTranslation();
-  const { title, description, dataInfo1, dataInfo2 } =
-    translations[i18n.language];
+  const { description, dataInfo1, dataInfo2 } = translations[i18n.language];
   const shortToLongName = Object.entries(
     layer.get('shortToLongName') || {},
   ).sort(([key1], [key2]) =>
@@ -50,7 +45,6 @@ const IsbNormalspurLayerInfo = ({ properties: layer }) => {
 
   return (
     <div>
-      <p>{title}</p>
       <p>{description}</p>
       {shortToLongName.map(([shortName, longName]) => {
         return (
