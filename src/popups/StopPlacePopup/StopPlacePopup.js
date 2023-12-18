@@ -89,7 +89,7 @@ function StopPlacePopup({ feature }) {
             <fieldset>
               <legend>{t(key)}</legend>
               <br />
-              <div>{formatYesNoData(value?.state)}</div>
+              <div>{t(formatYesNoData(value?.state))}</div>
               {value.note?.[i18n.language] && (
                 <>
                   <br />
