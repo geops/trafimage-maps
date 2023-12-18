@@ -34,6 +34,8 @@ import IsbTVSLayerInfo from './IsbTVSLayerInfo';
 import IsbOtherLayerInfo from './IsbOtherLayerInfo';
 import GeltungsbereicheTopicInfo from './GeltungsbereicheTopicInfo';
 import GeltungsbereicheLayerInfo from './GeltungsbereicheLayerInfo';
+import IsbSchmalspurLayerInfo from './IsbSchmalspurLayerInfo';
+import IsbNormalspurLayerInfo from './IsbNormalspurLayerInfo';
 
 export { default as BetriebsRegionenLayerInfo } from './BetriebsRegionenLayerInfo';
 export { default as BuslinesLayerInfo } from './BuslinesLayerInfo';
@@ -70,6 +72,8 @@ export { default as IsbTVSLayerInfo } from './IsbTVSLayerInfo';
 export { default as IsbOtherLayerInfo } from './IsbOtherLayerInfo';
 export { default as GeltungsbereicheTopicInfo } from './GeltungsbereicheTopicInfo';
 export { default as GeltungsbereicheLayerInfo } from './GeltungsbereicheLayerInfo';
+export { default as IsbSchmalspurLayerInfo } from './IsbSchmalspurLayerInfo';
+export { default as IsbNormalspurLayerInfo } from './IsbNormalspurLayerInfo';
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -108,4 +112,6 @@ export default {
   IsbOtherLayerInfo,
   GeltungsbereicheTopicInfo,
   GeltungsbereicheLayerInfo,
+  IsbSchmalspurLayerInfo,
+  IsbNormalspurLayerInfo,
 };
