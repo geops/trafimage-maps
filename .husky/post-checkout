@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-nvm use && yarn install --frozen-lockfile
+yarn install --frozen-lockfile
