@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.22.12](https://github.com/geops/trafimage-maps/compare/v1.22.11...v1.22.12) (2023-12-11)
+
+### Bug Fixes
+
+- change geltungsbereiche translations ([#1120](https://github.com/geops/trafimage-maps/issues/1120)) ([c847b6b](https://github.com/geops/trafimage-maps/commit/c847b6b9a621c24f474a8a665c2bc90fea79731a))
+
+### [1.22.11](https://github.com/geops/trafimage-maps/compare/v1.22.10...v1.22.11) (2023-12-07)
+
+### Bug Fixes
+
+- use different translation when there is no energy category ([0208d22](https://github.com/geops/trafimage-maps/commit/0208d22802c18df5e07d2a7e0548d23af15619b0))
+
 ### [1.22.10](https://github.com/geops/trafimage-maps/compare/v1.22.9...v1.22.10) (2023-12-06)
 
 ### [1.22.9](https://github.com/geops/trafimage-maps/compare/v1.22.7...v1.22.9) (2023-12-06)
