@@ -28,7 +28,7 @@ const translations = {
     dataInfo2: 'Aggiornamento dei dati: 12.2023',
   },
   en: {
-    description: 'Infrastructure managers who operate narrow-gauge lines.',
+    description: 'Infrastructure managers who operate narrow gauge lines.',
     dataInfo1: 'Data basis: SBB',
     dataInfo2: 'Data status: 12.2023',
   },
