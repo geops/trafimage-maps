@@ -66,7 +66,7 @@ export const netzentwicklungGueterverkehrLayer = new MapboxStyleLayer({
   name: "ch.sbb.netzentwicklung.gueterverkehr",
   mapboxLayer: netzentwicklungDataLayer,
   visible: false,
-  styleLayersFilter: ({ id }) => /gueterverkehr$/.test(id),
+  styleLayersFilter: ({ id }) => /gueterverkehr/.test(id),
   group: "netzentwicklung",
   properties: {
     isQueryable: true,
