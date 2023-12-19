@@ -2,6 +2,8 @@
 
 import getIsMobileDevice from "./getIsMobileDevice";
 
+export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+
 export const DRAW_PARAM = "draw.id";
 export const DRAW_REDIRECT_PARAM = "draw.redirect";
 export const MAPSET_PARENT_PARAM = "parent";
@@ -28,6 +30,7 @@ export const DV_HIT_TOLERANCE = getIsMobileDevice() ? 8 : 2;
 export const STS_KEY = "ch.sbb.sts";
 export const STS_HIT_TOLERANCE = 15;
 
+// Energieleitungen
 export const energieleitungenColorMapping = {
   los1: "#12919a",
   los2: "#da1720",
@@ -43,7 +46,8 @@ export const energieleitungenColorMapping = {
   ausserhalb: "black",
 };
 
-export const SWISS_EXTENT = [656409.5, 5740863.4, 1200512.3, 6077033.16];
+// Handicap
+export const HANDICAP_SOURCE = "stop_places";
 
 // UI
 export const OVERLAY_MIN_HEIGHT = 55;
