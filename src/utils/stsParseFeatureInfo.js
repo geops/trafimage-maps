@@ -1,8 +1,8 @@
-import Feature from 'ol/Feature';
-import { gttos, premium, highlights } from '../config/ch.sbb.sts';
-import { dvDay, dvNight } from '../config/ch.sbb.direktverbindungen';
-import { getId } from './removeDuplicateFeatures';
-import parseDvFeatures from './dvParseFeatures';
+import Feature from "ol/Feature";
+import { gttos, premium, highlights } from "../config/ch.sbb.sts";
+import { dvDay, dvNight } from "../config/ch.sbb.direktverbindungen";
+import { getId } from "./removeDuplicateFeatures";
+import parseDvFeatures from "./dvParseFeatures";
 
 /**
  * Rearrange the features for the popup
@@ -16,7 +16,7 @@ export const parseFeaturesInfos = (infos, tours = []) => {
     const { layer, features } = info;
 
     features.forEach((feature) => {
-      feature.set('layer', layer);
+      feature.set("layer", layer);
       infoFeatures[layer.key] = infoFeatures[layer.key] || [];
       infoFeatures[layer.key].push(feature);
     });
@@ -26,7 +26,7 @@ export const parseFeaturesInfos = (infos, tours = []) => {
   // We display only one highlight.
   if (infoFeatures[highlights.key]) {
     const [firstFeature] = infoFeatures[highlights.key].reverse();
-    firstFeature.set('layer', highlights.key);
+    firstFeature.set("layer", highlights.key);
     featuresForPopup.push(firstFeature);
   }
 
@@ -47,12 +47,12 @@ export const parseFeaturesInfos = (infos, tours = []) => {
       ...(infoFeatures[gttos.key] || []),
       ...(infoFeatures[premium.key] || []),
     ];
-    const layerName = feature.get('layer').key;
+    const layerName = feature.get("layer").key;
     // Read routes for gttos or panorama layers
     const propertyName =
-      layerName === gttos.key ? 'route_names_gttos' : 'route_names_premium';
-    feature.set('routeProperty', propertyName);
-    const routeNames = (feature.get(propertyName) || '').split(',');
+      layerName === gttos.key ? "route_names_gttos" : "route_names_premium";
+    feature.set("routeProperty", propertyName);
+    const routeNames = (feature.get(propertyName) || "").split(",");
     const toursByRoute = {};
 
     // For each route name we create a new feature.
@@ -61,7 +61,7 @@ export const parseFeaturesInfos = (infos, tours = []) => {
       if (/Optional Shortcut/.test(routeName)) {
         featuresForPopup.push(
           new Feature({
-            title: 'Optional Shortcut',
+            title: "Optional Shortcut",
             routeProperty: propertyName,
           }),
         );
@@ -88,10 +88,10 @@ export const parseFeaturesInfos = (infos, tours = []) => {
     });
 
     // Add a feature for Optional Shortcut which have not pois
-    if (/Optional Shortcut/.test(feature.get('title'))) {
+    if (/Optional Shortcut/.test(feature.get("title"))) {
       featuresForPopup.push(
         new Feature({
-          title: 'Optional Shortcut',
+          title: "Optional Shortcut",
         }),
       );
     }
@@ -100,7 +100,7 @@ export const parseFeaturesInfos = (infos, tours = []) => {
   // Remove duplicate routes (at intersections)
   const routeNames = [];
   featuresForPopup = featuresForPopup.filter((f) => {
-    const title = f.get('title');
+    const title = f.get("title");
     if (!title || routeNames.indexOf(title) === -1) {
       routeNames.push(title);
       return true;

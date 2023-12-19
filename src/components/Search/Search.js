@@ -1,21 +1,21 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Autosuggest from 'react-autosuggest';
-import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { useTranslation } from 'react-i18next';
-import { IconButton, Typography } from '@material-ui/core';
-import { setFeatureInfo, setSearchOpen } from '../../model/app/actions';
-import useIsMobile from '../../utils/useIsMobile';
-import SearchToggle from './SearchToggle';
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Autosuggest from "react-autosuggest";
+import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { IconButton, Typography } from "@mui/material";
+import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
+import useIsMobile from "../../utils/useIsMobile";
+import SearchToggle from "./SearchToggle";
 
-import './Search.scss';
+import "./Search.scss";
 
 const mobileMapPadding = [50, 50, 50, 50];
 
 function Search() {
   const [suggestions, setSuggestions] = useState([]);
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const map = useSelector((state) => state.app.map);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const searchService = useSelector((state) => state.app.searchService);
@@ -28,7 +28,7 @@ function Search() {
     if (!searchService) {
       return;
     }
-    searchService.setUpsert((section, items, position) =>
+    searchService.setUpsert((section, items, position) => {
       setSuggestions((oldSuggestions) => {
         const index = oldSuggestions.findIndex((s) => s.section === section);
         const start = index === -1 ? position : index;
@@ -36,8 +36,8 @@ function Search() {
         const newSuggestions = [...oldSuggestions];
         newSuggestions.splice(start, deleteCount, { section, items });
         return newSuggestions;
-      }),
-    );
+      });
+    });
   }, [searchService, setSuggestions]);
 
   useEffect(
@@ -88,10 +88,10 @@ function Search() {
                 >
                   <div className="wkp-search-section-header">
                     <Typography variant="h4" component="span">
-                      {t(section)}:{' '}
+                      {t(section)}:{" "}
                     </Typography>
                     <Typography variant="subtitle1" component="span">
-                      {t('overallResult', { count })}
+                      {t("overallResult", { count })}
                     </Typography>
                   </div>
                   {searchService.sectionCollapsed(section) ? (
@@ -103,19 +103,20 @@ function Search() {
               )
             );
           }}
-          getSectionSuggestions={(result) =>
-            result.items
-              ? result.items.map((i) => ({ ...i, section: result.section }))
-              : []
-          }
+          getSectionSuggestions={(result) => {
+            return (
+              result?.items?.map((i) => ({ ...i, section: result.section })) ||
+              []
+            );
+          }}
           inputProps={{
             autoFocus: true,
             tabIndex: 0,
-            'aria-label': t('Suchmaske'),
+            "aria-label": t("Suchmaske"),
             onChange: (e, { newValue }) => setValue(newValue),
             onKeyUp: (e) => {
               const { key } = e;
-              if (key === 'Enter') {
+              if (key === "Enter") {
                 const filtered = suggestions.filter((s) => s.items.length > 0);
                 if (filtered.length > 0) {
                   const { items, section } = filtered[0];
@@ -125,7 +126,7 @@ function Search() {
                     isMobile ? mobileMapPadding : undefined,
                   );
                 }
-              } else if (key === 'ArrowDown' || key === 'ArrowUp') {
+              } else if (key === "ArrowDown" || key === "ArrowUp") {
                 searchService.highlightSection(); // for improved accessibility
               }
             },
@@ -139,10 +140,10 @@ function Search() {
                 {value && (
                   <IconButton
                     tabIndex={0}
-                    aria-label={t('Suchtext löschen')}
+                    aria-label={t("Suchtext löschen")}
                     className="wkp-search-button wkp-search-button-clear"
                     onClick={() => {
-                      setValue('');
+                      setValue("");
                       searchService.clearHighlight();
                       searchService.clearSelect();
                       const searchFeatureInfos = searchService.clearPopup();
@@ -168,7 +169,7 @@ function Search() {
                 )}
                 <IconButton
                   tabIndex={0}
-                  aria-label={t('Suche starten')}
+                  aria-label={t("Suche starten")}
                   className="wkp-search-button wkp-search-button-submit"
                   onClick={() => {
                     if (!value) {

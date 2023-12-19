@@ -1,1 +1,1 @@
-export { default } from './InfrastrukturTopicInfo';
+export { default } from "./InfrastrukturTopicInfo";

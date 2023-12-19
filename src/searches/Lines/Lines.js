@@ -1,26 +1,22 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
-import { Style, Circle, Fill, Stroke as OLStroke } from 'ol/style';
+import React from "react";
+import { Typography } from "@mui/material";
+import { Style, Circle, Fill, Stroke as OLStroke } from "ol/style";
 import {
   MultiLineString,
   GeometryCollection,
   MultiPoint,
   Point,
-} from 'ol/geom';
-import GeoJSON from 'ol/format/GeoJSON';
+} from "ol/geom";
+import GeoJSON from "ol/format/GeoJSON";
 
-import Search from '../Search';
-import getGreaterNumber from '../../utils/getGreaterNumber';
+import Search from "../Search";
+import getGreaterNumber from "../../utils/getGreaterNumber";
 
-const lineMeasuresRegExp = new RegExp(
-  '([0-9]*)\\s*([0-9]+\\.?[0-9]*)\\-([0-9]*\\.?[0-9]*)',
-);
+const lineMeasuresRegExp = /([0-9]*)\s*([0-9]+\.?[0-9]*)-([0-9]*\.?[0-9]*)/;
 
-const lineKilometerRegExp = new RegExp(
-  '^([0-9]+)(\\s)(\\+)?(\\s+)?([0-9]+(\\.[0-9]+)?)$',
-);
+const lineKilometerRegExp = /^([0-9]+)(\s)(\+)?(\s+)?([0-9]+(\.[0-9]+)?)$/;
 
-const color = 'rgba(0,61,155,0.5)';
+const color = "rgba(0,61,155,0.5)";
 
 const genLevelByMapRes = {
   21685.61508959875: 5, // zoom 0
@@ -35,7 +31,7 @@ const format = new GeoJSON();
 class Lines extends Search {
   constructor() {
     super();
-    this.dataProjection = 'EPSG:21781';
+    this.dataProjection = "EPSG:21781";
 
     this.highlightStyle = (feature, resolution) => {
       const dataRes = getGreaterNumber(
@@ -44,12 +40,12 @@ class Lines extends Search {
       );
       const generalizationLevel = genLevelByMapRes[dataRes];
       const generalizedGeometry =
-        feature.get('geoms') && feature.get('geoms')[generalizationLevel];
+        feature.get("geoms") && feature.get("geoms")[generalizationLevel];
 
       const geometry = generalizedGeometry
         ? format.readGeometry(generalizedGeometry, {
             dataProjection: this.dataProjection,
-            featureProjection: 'EPSG:3857',
+            featureProjection: "EPSG:3857",
           })
         : feature.getGeometry();
 
@@ -122,14 +118,14 @@ class Lines extends Search {
     const { t } = this.props;
     return (
       <div className="wkp-search-suggestion-subtitled">
-        <Typography>{`${t('Linie')} ${properties.linie}`}</Typography>
+        <Typography>{`${t("Linie")} ${properties.linie}`}</Typography>
         {properties.name ? (
           <Typography variant="subtitle1">
             {properties.name}
             {properties.start !== properties.end && (
-              <div style={{ color: '#999' }}>
-                {t('Kilometer')} {properties.start}
-                {properties.end ? `-${properties.end}` : ''}
+              <div style={{ color: "#999" }}>
+                {t("Kilometer")} {properties.start}
+                {properties.end ? `-${properties.end}` : ""}
               </div>
             )}
           </Typography>
@@ -141,8 +137,8 @@ class Lines extends Search {
   // eslint-disable-next-line class-methods-use-this
   value({ properties }) {
     return properties.start !== properties.end
-      ? `${properties.linie} ${!properties.end ? '+' : ''}${properties.start}${
-          properties.end ? `-${properties.end}` : ''
+      ? `${properties.linie} ${!properties.end ? "+" : ""}${properties.start}${
+          properties.end ? `-${properties.end}` : ""
         }`
       : `${properties.linie}`;
   }

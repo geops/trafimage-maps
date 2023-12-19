@@ -1,1 +1,1 @@
-export { default } from './NoDragPanWarning';
+export { default } from "./NoDragPanWarning";

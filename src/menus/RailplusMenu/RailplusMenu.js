@@ -1,14 +1,15 @@
 /* eslint-disable no-param-reassign */
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, Box, IconButton } from '@material-ui/core';
-import { MdClose } from 'react-icons/md';
-import { useTranslation } from 'react-i18next';
-import IframeMenu from '../IframeMenu';
-import { RailplusPopup } from '../../popups';
-import { setFeatureInfo } from '../../model/app/actions';
-import useIsMobile from '../../utils/useIsMobile';
-import usePanCenterFeature from '../../utils/usePanCenterFeature';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Box, IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { MdClose } from "react-icons/md";
+import { useTranslation } from "react-i18next";
+import IframeMenu from "../IframeMenu";
+import { RailplusPopup } from "../../popups";
+import { setFeatureInfo } from "../../model/app/actions";
+import useIsMobile from "../../utils/useIsMobile";
+import usePanCenterFeature from "../../utils/usePanCenterFeature";
 
 const useStyles = makeStyles(() => {
   return {
@@ -17,10 +18,10 @@ const useStyles = makeStyles(() => {
     },
     listHeader: {
       paddingLeft: (props) => (props.isMobile ? 0 : 15),
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      backgroundColor: '#f5f5f5',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      backgroundColor: "#f5f5f5",
       borderBottom: `1px solid #F0F0F0`,
     },
     closeButton: {
@@ -46,7 +47,7 @@ function RailplusMenu() {
   return (
     <IframeMenu
       ResizableProps={{
-        defaultSize: { height: 'auto' },
+        defaultSize: { height: "auto" },
       }}
       title={
         <Box className={classes.listHeader}>
@@ -55,12 +56,12 @@ function RailplusMenu() {
             <IconButton
               size="medium"
               className={`${classes.closeButton} wkp-close-bt`}
-              title={t('Schliessen')}
+              title={t("Schliessen")}
               onClick={() => {
                 dispatch(setFeatureInfo());
               }}
             >
-              <MdClose focusable={false} alt={t('Schliessen')} />
+              <MdClose focusable={false} alt={t("Schliessen")} />
             </IconButton>
           )}
         </Box>

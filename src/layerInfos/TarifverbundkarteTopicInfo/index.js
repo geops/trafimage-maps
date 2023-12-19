@@ -1,1 +1,1 @@
-export { default } from './TarifverbundkarteTopicInfo';
+export { default } from "./TarifverbundkarteTopicInfo";

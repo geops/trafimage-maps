@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for displaying blue stations circle on hover.
@@ -11,17 +11,17 @@ class StationsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     super({
       styleLayersFilter: ({ metadata }) =>
-        !!metadata && metadata['trafimage.filter'] === 'stations',
+        !!metadata && metadata["trafimage.filter"] === "stations",
       properties: {
         hideInLegend: true,
-        popupComponent: 'StationPopup',
+        popupComponent: "StationPopup",
         useOverlay: true,
         isQueryable: true,
       },
       ...options,
     });
 
-    this.sourceId = 'stations';
+    this.sourceId = "stations";
 
     this.onIdle = this.onIdle.bind(this);
     this.ready = false;
@@ -34,13 +34,13 @@ class StationsLayer extends MapboxStyleLayer {
     super.attachToMap(map);
 
     this.olListenersKeys.push(
-      this.on('change:visible', () => {
+      this.on("change:visible", () => {
         this.ready = false;
         this.updateSource();
       }),
-      this.map.on('moveend', () => {
+      this.map.on("moveend", () => {
         this.ready = false;
-        this.mapboxLayer.mbMap?.once('idle', this.onIdle);
+        this.mapboxLayer.mbMap?.once("idle", this.onIdle);
       }),
     );
   }
@@ -52,7 +52,7 @@ class StationsLayer extends MapboxStyleLayer {
     super.detachFromMap(map);
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
-      mbMap.off('idle', this.onIdle);
+      mbMap.off("idle", this.onIdle);
       this.removeSource();
     }
   }
@@ -67,9 +67,9 @@ class StationsLayer extends MapboxStyleLayer {
       .getStyle()
       .layers.filter((layer) => {
         return (
-          (layer['source-layer'] === 'osm_points' &&
-            layer.id !== 'osm_points') ||
-          (layer['source-layer'] === 'poi' && /^station_ship/.test(layer.id))
+          (layer["source-layer"] === "osm_points" &&
+            layer.id !== "osm_points") ||
+          (layer["source-layer"] === "poi" && /^station_ship/.test(layer.id))
         );
       })
       .map((layer) => layer.id);
@@ -77,7 +77,7 @@ class StationsLayer extends MapboxStyleLayer {
     this.addSource();
     super.onLoad();
     this.updateSource();
-    mbMap.once('idle', this.onIdle);
+    mbMap.once("idle", this.onIdle);
   }
 
   /**
@@ -87,12 +87,12 @@ class StationsLayer extends MapboxStyleLayer {
     this.updateSource();
 
     // We warn the permalink that new data have been rendered.
-    this.mapboxLayer.mbMap?.once('idle', () => {
+    this.mapboxLayer.mbMap?.once("idle", () => {
       this.ready = true;
 
       // New data are rendered
       this.dispatchEvent({
-        type: 'datarendered',
+        type: "datarendered",
         target: this,
       });
     });
@@ -122,7 +122,7 @@ class StationsLayer extends MapboxStyleLayer {
       });
 
     source.setData({
-      type: 'FeatureCollection',
+      type: "FeatureCollection",
       features: osmPointsRendered,
     });
   }
@@ -135,9 +135,9 @@ class StationsLayer extends MapboxStyleLayer {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap.getSource(this.sourceId)) {
       mbMap.addSource(this.sourceId, {
-        type: 'geojson',
+        type: "geojson",
         data: {
-          type: 'FeatureCollection',
+          type: "FeatureCollection",
           features: [],
         },
       });
@@ -155,7 +155,7 @@ class StationsLayer extends MapboxStyleLayer {
       // Don't remove source just make it empty.
       // Because others layers during unmount still could rely on it.
       source.setData({
-        type: 'FeatureCollection',
+        type: "FeatureCollection",
         features: [],
       });
     }

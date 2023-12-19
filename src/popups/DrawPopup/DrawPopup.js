@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
 
 function DrawPopup({ feature }) {
-  const descr = feature.get('description');
+  const descr = feature.get("description");
   if (!descr) {
     return null;
   }
@@ -22,5 +22,5 @@ DrawPopup.propTypes = {
 
 const composed = React.memo(DrawPopup);
 
-composed.renderTitle = (feature) => feature.get('name');
+composed.renderTitle = (feature) => feature.get("name");
 export default composed;

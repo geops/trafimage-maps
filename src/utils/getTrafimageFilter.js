@@ -1,6 +1,6 @@
 const getTrafimageFilter = (
   stylelayer,
-  filterAttribute = 'trafimage.filter',
+  filterAttribute = "trafimage.filter",
 ) => {
   return stylelayer?.metadata && stylelayer.metadata[filterAttribute];
 };

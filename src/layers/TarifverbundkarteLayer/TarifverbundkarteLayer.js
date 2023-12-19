@@ -1,10 +1,10 @@
-import { MapboxStyleLayer, VectorLayer } from 'mobility-toolbox-js/ol';
-import { Vector as OLVectorLayer } from 'ol/layer';
-import VectorSource from 'ol/source/Vector';
-import GeoJSON from 'ol/format/GeoJSON';
-import Feature from 'ol/Feature';
-import intersect from '@turf/intersect';
-import { Style, Fill, Stroke } from 'ol/style';
+import { MapboxStyleLayer, VectorLayer } from "mobility-toolbox-js/ol";
+import { Vector as OLVectorLayer } from "ol/layer";
+import VectorSource from "ol/source/Vector";
+import GeoJSON from "ol/format/GeoJSON";
+import Feature from "ol/Feature";
+import intersect from "@turf/intersect";
+import { Style, Fill, Stroke } from "ol/style";
 
 const format = new GeoJSON();
 
@@ -19,30 +19,30 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     const styleLayers = [
       {
-        id: 'verbundskarte',
-        source: 'tarifverbundkarte',
-        'source-layer': 'ch.sbb.tarifverbundkarte',
-        type: 'fill',
+        id: "verbundskarte",
+        source: "tarifverbundkarte",
+        "source-layer": "ch.sbb.tarifverbundkarte",
+        type: "fill",
         paint: {
-          'fill-opacity': 0,
+          "fill-opacity": 0,
         },
       },
       {
-        id: 'verbundskarte.zpass',
-        source: 'tarifverbundkarte',
-        'source-layer': 'ch.sbb.tarifverbundkarte.zpass',
-        type: 'fill',
+        id: "verbundskarte.zpass",
+        source: "tarifverbundkarte",
+        "source-layer": "ch.sbb.tarifverbundkarte.zpass",
+        type: "fill",
         paint: {
-          'fill-opacity': 0,
+          "fill-opacity": 0,
         },
       },
       {
-        id: 'verbundskarte.zonen',
-        source: 'tarifverbundkarte',
-        'source-layer': 'ch.sbb.tarifverbundkarte.zonen',
-        type: 'fill',
+        id: "verbundskarte.zonen",
+        source: "tarifverbundkarte",
+        "source-layer": "ch.sbb.tarifverbundkarte.zonen",
+        type: "fill",
         paint: {
-          'fill-opacity': 0,
+          "fill-opacity": 0,
         },
       },
     ];
@@ -68,7 +68,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
   attachToMap(map) {
     super.attachToMap(map);
     this.olListenersKeys.push(
-      this.map.on('singleclick', (e) => this.selectZone(e)), // Add click listener
+      this.map.on("singleclick", (e) => this.selectZone(e)), // Add click listener
     );
   }
 
@@ -88,7 +88,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
     // Select new zone
     this.getFeatureInfoAtCoordinate(e.coordinate).then((data) => {
       const [feature] = data.features; // Municipality feature containing the zone objects in the properties
-      const zones = feature?.get('zones');
+      const zones = feature?.get("zones");
 
       if (!feature || !zones || !zones[0]) {
         // Abort if no zone or feature present
@@ -155,7 +155,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
        * Used for popup close handling
        * @ignore
        */
-      this.set('clicked', true);
+      this.set("clicked", true);
 
       return null;
     });
@@ -176,7 +176,7 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
       const featureInfo = { ...data };
       const municipalityFeature = featureInfo.features.find(
-        (feat) => feat.get('source') === 'verbund',
+        (feat) => feat.get("source") === "verbund",
       );
 
       /**
@@ -193,26 +193,26 @@ class TarifverbundkarteLayer extends MapboxStyleLayer {
       // If zones present and the municipality has a 'partners' attribute we store the zone in the municipality feature
       const zoneFeatures = featureInfo.features.filter(
         (feat) =>
-          feat.get('zone') &&
-          feat.get('verbund') &&
-          !/^Z-Pass/.test(feat.get('verbund')),
+          feat.get("zone") &&
+          feat.get("verbund") &&
+          !/^Z-Pass/.test(feat.get("verbund")),
       );
 
-      if (zoneFeatures[0] && !!municipalityFeature.get('partners').trim()) {
+      if (zoneFeatures[0] && !!municipalityFeature.get("partners").trim()) {
         const zones = zoneFeatures.map((zone) => zone.getProperties());
         const cleanedZones = [
           ...new Map(zones.map((zone) => [zone.verbund, zone])).values(), // Remove duplicates
         ];
-        municipalityFeature.set('zones', cleanedZones);
+        municipalityFeature.set("zones", cleanedZones);
       }
 
       // Extract z-Pass and store in the municipality feature
       const zPassFeature = featureInfo.features.find(
-        (feat) => feat.get('source') === 'z-pass',
+        (feat) => feat.get("source") === "z-pass",
       );
 
       if (zPassFeature) {
-        municipalityFeature.set('zPass', zPassFeature.getProperties());
+        municipalityFeature.set("zPass", zPassFeature.getProperties());
       }
 
       // Return only municipality feature to prevent multiple feature info and popup pagination

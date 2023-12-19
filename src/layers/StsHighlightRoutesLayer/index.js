@@ -1,1 +1,1 @@
-export { default } from './StsHighlightRoutesLayer';
+export { default } from "./StsHighlightRoutesLayer";

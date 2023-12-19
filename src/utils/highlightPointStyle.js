@@ -1,4 +1,4 @@
-import { Style } from 'ol/style';
+import { Style } from "ol/style";
 
 const style = new Style({
   renderer(coordinates, state) {
@@ -19,18 +19,18 @@ const style = new Style({
       y,
       outerRadius,
     );
-    gradient.addColorStop(0, 'rgba(235,0,0,0)');
-    gradient.addColorStop(0.2, 'rgba(235,0,0,0)');
-    gradient.addColorStop(0.6, 'rgba(235,0,0,0.4)');
-    gradient.addColorStop(0.8, 'rgba(235,0,0,0.8)');
-    gradient.addColorStop(1, 'rgba(235,0,0,1)');
+    gradient.addColorStop(0, "rgba(235,0,0,0)");
+    gradient.addColorStop(0.2, "rgba(235,0,0,0)");
+    gradient.addColorStop(0.6, "rgba(235,0,0,0.4)");
+    gradient.addColorStop(0.8, "rgba(235,0,0,0.8)");
+    gradient.addColorStop(1, "rgba(235,0,0,1)");
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI, true);
     ctx.fillStyle = gradient;
     ctx.fill();
 
     ctx.arc(x, y, radius, 0, 2 * Math.PI, true);
-    ctx.strokeStyle = 'rgba(235,0,0,1)';
+    ctx.strokeStyle = "rgba(235,0,0,1)";
     ctx.lineWidth = 4 * pixelRatio;
     ctx.stroke();
   },

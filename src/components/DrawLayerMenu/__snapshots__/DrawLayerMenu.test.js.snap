@@ -1,17 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DrawLayerMenu should match snapshot. should return null 1`] = `null`;
+exports[`DrawLayerMenu should match snapshot. should return null 1`] = `""`;
 
 exports[`DrawLayerMenu should match snapshot. using the layerService property 1`] = `
-<div
-  className="wkp-draw-layer-menu"
->
-  <div
-    className="wkp-layer-tree"
-  >
-    <div
-      className="rs-layer-tree"
-    />
+<div class="wkp-draw-layer-menu">
+  <div class="wkp-layer-tree">
+    <div class="rs-layer-tree">
+    </div>
   </div>
 </div>
 `;

@@ -1,5 +1,5 @@
-import { useMemo } from 'react';
-import getPopupComponent from './getPopupComponent';
+import { useMemo } from "react";
+import getPopupComponent from "./getPopupComponent";
 
 const useIndexedFeatureInfo = (featureInfo) => {
   const infoIndexed = useMemo(() => {

@@ -1,1 +1,1 @@
-export { default } from './Imprint';
+export { default } from "./Imprint";

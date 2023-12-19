@@ -1,13 +1,13 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
+import React from "react";
+import { Typography } from "@mui/material";
 
-import Search from '../Search';
+import Search from "../Search";
 
 class Betriebspunkte extends Search {
   constructor() {
     super();
     this.showInPlaceholder = false;
-    this.dataProjection = 'EPSG:21781';
+    this.dataProjection = "EPSG:21781";
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -17,7 +17,6 @@ class Betriebspunkte extends Search {
     }
     this.abortController = new AbortController();
     const { signal } = this.abortController;
-
     return fetch(
       `${this.searchUrl}/search/bps?name=${encodeURIComponent(value)}`,
       {
@@ -39,7 +38,7 @@ class Betriebspunkte extends Search {
       <div className="wkp-search-suggestion">
         <Typography>
           {name}
-          {abbreviated ? ` (${abbreviated})` : ''}
+          {abbreviated ? ` (${abbreviated})` : ""}
         </Typography>
       </div>
     );

@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import Link from '../Link';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import Link from "../Link";
 
 const useStyles = makeStyles(() => {
   return {
     fullWidth: {
-      justifyContent: 'space-between',
+      justifyContent: "space-between",
     },
   };
 });
@@ -20,8 +20,8 @@ function DataLink({ children, layer, href, fullWidth }) {
     return null;
   }
 
-  const dataLink = href || layer.get('dataLink');
-  const dataLinkPortalName = layer?.get('dataLinkPortalName');
+  const dataLink = href || layer.get("dataLink");
+  const dataLinkPortalName = layer?.get("dataLinkPortalName");
 
   if (!dataLink) {
     return null;
@@ -29,10 +29,10 @@ function DataLink({ children, layer, href, fullWidth }) {
 
   return (
     dataLink && (
-      <Link href={dataLink} className={fullWidth ? classes.fullWidth : ''}>
+      <Link href={dataLink} className={fullWidth ? classes.fullWidth : ""}>
         {children ||
-          `${t('Diesen Datensatz einbinden')} (${
-            t(dataLinkPortalName) || dataLinkPortalName || 'Open Data'
+          `${t("Diesen Datensatz einbinden")} (${
+            t(dataLinkPortalName) || dataLinkPortalName || "Open Data"
           })`}
       </Link>
     )

@@ -1,42 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { makeStyles, MenuItem } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import qs from 'query-string';
-import Select from '../../components/Select';
-import Person from './Person';
-import Line from './Line';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { MenuItem } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import qs from "query-string";
+import Select from "../../components/Select";
+import Person from "./Person";
+import Line from "./Line";
 
 const useStyles = makeStyles((theme) => ({
   description: {
-    flex: '0 0',
-    '& > div:first-child': {
+    flex: "0 0",
+    "& > div:first-child": {
       paddingBottom: theme.spacing(2),
     },
   },
 }));
 
 const roles = [
-  'leiter_region',
-  'leiter_kbn',
-  'leiter_natur',
-  'leiter_fahrweg',
-  'mitarbeitende_kbn',
-  'mitarbeitende_fahrweg',
+  "leiter_region",
+  "leiter_kbn",
+  "leiter_natur",
+  "leiter_fahrweg",
+  "mitarbeitende_kbn",
+  "mitarbeitende_fahrweg",
 ];
 
 // The old WKP had different roles. These roles are used for translations.
 const oldRoles = [
-  'Leiter Region',
-  'Leiter KBN',
-  'Leiter Natur',
-  'Leiter FW TEC',
-  'Mitarbeitende KBN',
-  'Mitarbeitende FW TEC',
+  "Leiter Region",
+  "Leiter KBN",
+  "Leiter Natur",
+  "Leiter FW TEC",
+  "Mitarbeitende KBN",
+  "Mitarbeitende FW TEC",
 ];
 
-const PERMALINK_PARAM = 'regionRole';
+const PERMALINK_PARAM = "regionRole";
 
 const getRoleFromPermalinkParam = (param) => {
   const idx = oldRoles.indexOf(param);

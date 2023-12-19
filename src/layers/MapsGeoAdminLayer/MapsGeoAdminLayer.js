@@ -1,5 +1,5 @@
-import { Layer } from 'mobility-toolbox-js/ol';
-import GeoJSON from 'ol/format/GeoJSON';
+import { Layer } from "mobility-toolbox-js/ol";
+import GeoJSON from "ol/format/GeoJSON";
 
 const format = new GeoJSON();
 
@@ -30,7 +30,7 @@ class MapsGeoAdminLayer extends Layer {
             }
             return data.results.map((feature) => {
               const feat = format.readFeature(feature);
-              feat.set('layer', layer);
+              feat.set("layer", layer);
               return feat;
             });
           })

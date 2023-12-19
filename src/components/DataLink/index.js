@@ -1,1 +1,1 @@
-export { default } from './DataLink';
+export { default } from "./DataLink";

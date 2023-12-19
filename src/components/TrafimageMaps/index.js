@@ -1,1 +1,1 @@
-export { default } from './TrafimageMaps';
+export { default } from "./TrafimageMaps";

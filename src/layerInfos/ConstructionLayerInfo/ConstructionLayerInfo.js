@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
-import './ConstructionLayerInfo.scss';
+import "./ConstructionLayerInfo.scss";
 
 const propTypes = {
   t: PropTypes.func.isRequired,
@@ -12,11 +12,11 @@ const propTypes = {
 
 const defaultProps = {};
 
-const ConstructionLayerInfo = ({ t, properties, staticFilesUrl }) => {
-  const config = properties.get('construction');
+function ConstructionLayerInfo({ t, properties, staticFilesUrl }) {
+  const config = properties.get("construction");
   const filename = `${config.art}_${config.ort}`.replace(
     /[^A-Z,^0-9,-_]/gi,
-    '',
+    "",
   );
 
   return (
@@ -24,12 +24,12 @@ const ConstructionLayerInfo = ({ t, properties, staticFilesUrl }) => {
       <img
         src={`${staticFilesUrl}/img/layers/construction/${filename}.png`}
         draggable="false"
-        alt={t('Kein Bildtext')}
+        alt={t("Kein Bildtext")}
       />
       {t(`${properties.key}-desc`)}
     </div>
   );
-};
+}
 
 ConstructionLayerInfo.propTypes = propTypes;
 ConstructionLayerInfo.defaultProps = defaultProps;

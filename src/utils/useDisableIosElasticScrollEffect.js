@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * This hook disable the elastic ios effect when the scroll reach the beging or the end of a scrollable element.
@@ -34,18 +34,18 @@ const useDisableIosElasticScrollEffect = (element) => {
       }
       if (ignoreScroll) {
         // This line will force the scroll of the parent on next user scroll
-        element.style.overflow = 'hidden';
+        element.style.overflow = "hidden";
       } else {
         element.style.overflow = initialOverflow;
       }
     };
 
-    element.addEventListener('touchstart', onTouchStart);
-    element.addEventListener('touchmove', onTouchMove);
+    element.addEventListener("touchstart", onTouchStart);
+    element.addEventListener("touchmove", onTouchMove);
 
     return () => {
-      element.removeEventListener('touchstart', onTouchStart);
-      element.removeEventListener('touchmove', onTouchMove);
+      element.removeEventListener("touchstart", onTouchStart);
+      element.removeEventListener("touchmove", onTouchMove);
       element.style.overflow = initialOverflow;
     };
   }, [element]);

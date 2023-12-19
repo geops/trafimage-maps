@@ -54,13 +54,13 @@ export default class LayerService {
 
   getBaseLayers() {
     return this.getLayersAsFlatArray().filter((l) => {
-      return l.get('isBaseLayer');
+      return l.get("isBaseLayer");
     });
   }
 
   getQueryableLayers() {
     return this.getLayersAsFlatArray().filter((layer) => {
-      return layer.visible && layer.get('isQueryable');
+      return layer.visible && layer.get("isQueryable");
     });
   }
 

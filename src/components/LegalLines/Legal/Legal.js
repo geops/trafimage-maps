@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const comps = {
   de: (
@@ -8,14 +8,14 @@ const comps = {
       </p>
       <p />
       <p>
-        Es gelten die{' '}
+        Es gelten die{" "}
         <a href="http://www.sbb.ch/meta/rechtlicher-hinweis.html">
           rechtlichen Hinweise
-        </a>{' '}
-        und{' '}
+        </a>{" "}
+        und{" "}
         <a href="http://www.sbb.ch/meta/datenschutz.html">
           Datenschutzbestimmungen
-        </a>{' '}
+        </a>{" "}
         der SBB.
       </p>
       <p>
@@ -29,7 +29,7 @@ const comps = {
       Bei Kartenthemen und –Layer in der internen Sicht handelt es sich um
       Informationen für den internen Gebrauch gemäss &quot;R K 400.16
       Informationsklassifizierung.&quot; und &quot;R K 040.1 Konzernweisung
-      Datenschutz. &quot; (siehe{' '}
+      Datenschutz. &quot; (siehe{" "}
       <a href="http://intranet.sbb.ch/de/Themen/Sicherheit/Alle/IT-Security/Seiten/Klassifikation.aspx">
         SBB-Intranet
       </a>
@@ -127,14 +127,14 @@ const comps = {
         <b>Mention juridique et protection des données.</b>
       </p>
       <p>
-        La{' '}
+        La{" "}
         <a href="http://www.cff.ch/meta/mention-juridique.html">
           Mention juridique
-        </a>{' '}
-        et les{' '}
+        </a>{" "}
+        et les{" "}
         <a href="http://www.cff.ch/meta/protection-des-donnees.html">
           dispositions sur la protection des données
-        </a>{' '}
+        </a>{" "}
         des CFF s’appliquent.
       </p>
       <p>
@@ -170,15 +170,15 @@ const comps = {
         Il est permis de télécharger, d’enregistrer, d‘imprimer, ou de
         reproduire sous toute autre forme, certaines cartes et plans et/ou des
         extraits ainsi que des informations, à condition de ne supprimer ni des
-        mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors, ©
-        swisstopo (5704003351)» ni d’autres désignations légalement protégées.
-        Les CFF conservent tous les droits de propriété ou bien d’utilisation
-        (carte-image), de même que swisstopo (bases des cartes). Cette
-        autorisation peut être révoquée à tout moment. Toute autre utilisation
-        (en totalité ou en partie), transmission (par voie électronique ou avec
-        d’autres moyens), modification, mise en lien ou utilisation des
-        géodonnées de base nécessite l’autorisation préalable expresse des CFF
-        et de swisstopo.
+        mentions de copyright «© CFF/géodonnées: © OpenStreetMap contributors,
+        © swisstopo (5704003351)» ni d’autres désignations légalement
+        protégées. Les CFF conservent tous les droits de propriété ou bien
+        d’utilisation (carte-image), de même que swisstopo (bases des cartes).
+        Cette autorisation peut être révoquée à tout moment. Toute autre
+        utilisation (en totalité ou en partie), transmission (par voie
+        électronique ou avec d’autres moyens), modification, mise en lien ou
+        utilisation des géodonnées de base nécessite l’autorisation préalable
+        expresse des CFF et de swisstopo.
       </p>
       <p>
         <b>Copyright swisstopo.</b>
@@ -239,14 +239,14 @@ const comps = {
       </p>
       <p />
       <p>
-        SBB&apos;s{' '}
+        SBB&apos;s{" "}
         <a href="http://www.sbb.ch/en/meta/legal-information.html">
           legal information
-        </a>{' '}
-        and{' '}
+        </a>{" "}
+        and{" "}
         <a href="http://www.sbb.ch/en/meta/data-protection.html">
           Privacy Policy
-        </a>{' '}
+        </a>{" "}
         apply.
       </p>
       <p>
@@ -346,8 +346,8 @@ const comps = {
         <b>Avvertenza legale e protezione dei dati.</b>
       </p>
       <p>
-        Valgono le{' '}
-        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e{' '}
+        Valgono le{" "}
+        <a href="http://www.ffs.ch/meta/note-legali.html">note legali</a> e{" "}
         <a href="http://www.ffs.ch/meta/tutela-dei-dati.html">
           la dichiarazione sulla protezione dei dati
         </a>

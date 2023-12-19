@@ -1,15 +1,15 @@
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import StationsLayer from '../../layers/StationsLayer';
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
+import StationsLayer from "../../layers/StationsLayer";
 import {
   dataLayer,
   netzkarteLayer,
   netzkarteAerial,
-} from '../ch.sbb.netzkarte';
+} from "../ch.sbb.netzkarte";
 
 export const casaDataLayerWithoutLabels = dataLayer.clone({
   filters: [
     {
-      field: 'type',
+      field: "type",
       value: /symbol|circle/,
       include: false,
     },
@@ -25,12 +25,12 @@ const casaNetzkarteAerial = netzkarteAerial.clone({
 });
 
 export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
-  name: 'ch.sbb.netzkarte.labels',
+  name: "ch.sbb.netzkarte.labels",
   visible: true,
-  style: 'base_bright_v2',
+  style: "base_bright_v2",
   filters: [
     {
-      field: 'type',
+      field: "type",
       value: /symbol|circle/i,
       include: true,
     },
@@ -44,7 +44,7 @@ export const casaNetzkarteLayerWithLabels = new TrafimageMapboxLayer({
 
 // Add stations (blue style on hover) to labelsDataLayer.
 const casaNetzkarteStationsLayer = new StationsLayer({
-  name: 'ch.sbb.netzkarte.stationen.casa',
+  name: "ch.sbb.netzkarte.stationen.casa",
   mapboxLayer: casaNetzkarteLayerWithLabels,
 });
 

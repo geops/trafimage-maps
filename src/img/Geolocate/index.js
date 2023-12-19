@@ -1,1 +1,1 @@
-export { default } from './Geolocate';
+export { default } from "./Geolocate";

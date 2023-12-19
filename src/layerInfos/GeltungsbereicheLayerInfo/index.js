@@ -1,1 +1,1 @@
-export { default } from './GeltungsbereicheLayerInfo';
+export { default } from "./GeltungsbereicheLayerInfo";

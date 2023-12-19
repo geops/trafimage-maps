@@ -1,12 +1,12 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import Backend from 'i18next-xhr-backend';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
+import Backend from "i18next-xhr-backend";
 
-import translationDE from './lang/de.json';
-import translationEN from './lang/en.json';
-import translationFR from './lang/fr.json';
-import translationIT from './lang/it.json';
+import translationDE from "./lang/de.json";
+import translationEN from "./lang/en.json";
+import translationFR from "./lang/fr.json";
+import translationIT from "./lang/it.json";
 
 const resources = {
   de: {
@@ -30,15 +30,15 @@ i18n
   .init(
     {
       detection: {
-        order: ['querystring'],
-        lookupQuerystring: 'lang',
+        order: ["querystring"],
+        lookupQuerystring: "lang",
       },
       resources,
-      fallbackLng: 'de',
+      fallbackLng: "de",
       interpolation: {
         escapeValue: false,
       },
-      keySeparator: ' µ', // Deactivate the keySeparator option
+      keySeparator: " µ", // Deactivate the keySeparator option
       nsSeparator: false, // Deactivate the nsSeparator option
       saveMissing: false,
       missingKeyHandler(lng, ns, key, fallbackValue) {
@@ -49,22 +49,22 @@ i18n
       react: {
         useSuspense: false,
         transKeepBasicHtmlNodesFor: [
-          'br',
-          'strong',
-          'i',
-          'div',
-          'span',
-          'img',
-          'p',
-          'a',
-          'b',
+          "br",
+          "strong",
+          "i",
+          "div",
+          "span",
+          "img",
+          "p",
+          "a",
+          "b",
         ],
       },
     },
     (err) => {
       if (err) {
         // eslint-disable-next-line no-console
-        console.error('i18n initialisation failed:', err);
+        console.error("i18n initialisation failed:", err);
       }
     },
   );

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-access-key */
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 const propTypes = {
   /**
@@ -59,7 +59,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  className: 'tm-button',
+  className: "tm-button",
   children: undefined,
   title: undefined,
   tabIndex: 0,

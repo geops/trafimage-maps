@@ -1,11 +1,11 @@
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import TarifverbundkarteLayer from '../../layers/TarifverbundkarteLayer';
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
+import TarifverbundkarteLayer from "../../layers/TarifverbundkarteLayer";
 
 export const tarifverbundkarteDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.tarifverbundkarte.data',
+  name: "ch.sbb.tarifverbundkarte.data",
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'ch.sbb.tarifverbund',
+  style: "ch.sbb.tarifverbund",
   properties: {
     hideInLegend: true,
     isBaseLayer: true,
@@ -22,7 +22,7 @@ export const tarifverbundkarteLayer = new TarifverbundkarteLayer({
     isQueryable: true,
     hideInLegend: true,
     useOverlay: true,
-    popupComponent: 'TarifverbundkartePopup',
+    popupComponent: "TarifverbundkartePopup",
   },
 });
 export default [tarifverbundkarteDataLayer, tarifverbundkarteLayer];

@@ -1,10 +1,10 @@
-import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { FaInfoCircle } from 'react-icons/fa';
-import { IconButton } from '@material-ui/core';
-import { setSelectedForInfos } from '../../model/app/actions';
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { FaInfoCircle } from "react-icons/fa";
+import { IconButton } from "@mui/material";
+import { setSelectedForInfos } from "../../model/app/actions";
 
 function InfosButton({ selectedInfo, className }) {
   const { t } = useTranslation();
@@ -19,15 +19,15 @@ function InfosButton({ selectedInfo, className }) {
     const classes = [className];
 
     if (isSelected) {
-      classes.push('wkp-selected');
+      classes.push("wkp-selected");
     }
-    return classes.join(' ');
+    return classes.join(" ");
   }, [className, isSelected]);
 
   return (
     <IconButton
       className={classNam}
-      title={t('Layerinformationen anzeigen', { layer: t(selectedInfo.key) })}
+      title={t("Layerinformationen anzeigen", { layer: t(selectedInfo.key) })}
       onClick={(evt) => {
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
         evt.stopPropagation();
@@ -45,7 +45,7 @@ InfosButton.propTypes = {
 };
 
 InfosButton.defaultProps = {
-  className: 'wkp-info-bt',
+  className: "wkp-info-bt",
 };
 
 export default React.memo(InfosButton);

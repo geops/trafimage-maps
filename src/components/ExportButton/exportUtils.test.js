@@ -1,9 +1,9 @@
-import { Layer } from 'mobility-toolbox-js/ol';
-import { generateExtraData } from './exportUtils';
+import { Layer } from "mobility-toolbox-js/ol";
+import { generateExtraData } from "./exportUtils";
 
-describe('ExportUtils ', () => {
-  describe('generateExtraData', () => {
-    test('renders only copyrights from visible layer', () => {
+describe("ExportUtils ", () => {
+  describe("generateExtraData", () => {
+    test("renders only copyrights from visible layer", () => {
       const layerWithCopyrights = new Layer({
         copyrights: [
           '<a href="https://www.sbb.ch/" target="_blank">© SBB/CFF/FFS</a>',
@@ -20,11 +20,11 @@ describe('ExportUtils ', () => {
       const layers = [layerWithCopyrights, layerWithCopyrightsNotVisible];
 
       expect(generateExtraData(layers, false).copyright.text()).toBe(
-        '© SBB/CFF/FFS | © geOps Tiles',
+        "© SBB/CFF/FFS | © geOps Tiles",
       );
     });
 
-    test('renders only unique copyrights', () => {
+    test("renders only unique copyrights", () => {
       const layerWithCopyrights = new Layer({
         copyrights: [
           '<a href="https://www.sbb.ch/" target="_blank">© SBB/CFF/FFS</a>',
@@ -40,11 +40,11 @@ describe('ExportUtils ', () => {
       const layers = [layerWithCopyrights, layerWithOthersCopyrights];
 
       expect(generateExtraData(layers, false).copyright.text()).toBe(
-        '© SBB/CFF/FFS | © geOps Tiles | © DBAHN',
+        "© SBB/CFF/FFS | © geOps Tiles | © DBAHN",
       );
     });
 
-    test('renders also copyrights from children', () => {
+    test("renders also copyrights from children", () => {
       const child = new Layer({
         copyrights: [
           '<a href="https://www.dbahnn.de/" target="_blank">© DBAHNN</a>',
@@ -61,13 +61,13 @@ describe('ExportUtils ', () => {
       const layers = [layerWithCopyrights];
 
       expect(generateExtraData(layers, false).copyright.text()).toBe(
-        '© SBB/CFF/FFS | © geOps Tiles | © DBAHNN',
+        "© SBB/CFF/FFS | © geOps Tiles | © DBAHNN",
       );
     });
 
-    test('renders north arrow', () => {
+    test("renders north arrow", () => {
       expect(generateExtraData([], true).northArrow).toEqual({
-        src: 'northArrowCircle.png',
+        src: "northArrowCircle.png",
       });
     });
   });

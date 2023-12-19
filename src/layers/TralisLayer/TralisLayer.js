@@ -1,11 +1,11 @@
-import { getTypeIndex } from 'mobility-toolbox-js/common/utils/realtimeConfig';
 import {
+  realtimeConfig,
   RealtimeLayer,
   fullTrajectoryDelayStyle,
   createRealtimeFilters,
   realtimeDelayStyle,
   sortByDelay,
-} from 'mobility-toolbox-js/ol';
+} from "mobility-toolbox-js/ol";
 
 /**
  * Trajserv value: 'Tram',  'Subway / Metro / S-Bahn',  'Train', 'Bus', 'Ferry', 'Cable Car', 'Gondola', 'Funicular', 'Long distance bus', 'Rail',
@@ -45,7 +45,7 @@ const radiusMapping = [
  */
 const getRadius = (type, zoom) => {
   try {
-    const typeIdx = getTypeIndex(type || 0);
+    const typeIdx = realtimeConfig.getTypeIndex(type || 0);
     return radiusMapping[typeIdx][zoom];
   } catch (e) {
     return 1;
@@ -59,9 +59,9 @@ class TralisLayer extends RealtimeLayer {
     // publishedLineName: 'RE,IC5,S3,17',
     // regexPublishedLineName: '^S[0-5]$'
     const urlParams = new URLSearchParams(window.location.search);
-    const tripNumber = options.tripNumber || urlParams.get('tripnumber');
+    const tripNumber = options.tripNumber || urlParams.get("tripnumber");
     const publishedLineName =
-      options.operator || urlParams.get('publishedlinename');
+      options.operator || urlParams.get("publishedlinename");
     const { regexPublishedLineName } = options;
 
     if (
@@ -79,7 +79,7 @@ class TralisLayer extends RealtimeLayer {
     super({
       isUpdateBboxOnMoveEnd: true,
       minZoomNonTrain: 14,
-      tenant: 'sbb',
+      tenant: "sbb",
       style: realtimeDelayStyle,
       styleOptions: {
         getRadius,
@@ -91,33 +91,33 @@ class TralisLayer extends RealtimeLayer {
       ],
       getMotsByZoom: (zoom) => {
         if (zoom < 8) {
-          return ['rail'];
+          return ["rail"];
         }
 
         if (zoom < 11) {
-          return ['rail', 'ferry'];
+          return ["rail", "ferry"];
         }
 
         if (zoom < 12) {
-          return ['rail', 'ferry', 'tram', 'subway', 'rail', 'bus'];
+          return ["rail", "ferry", "tram", "subway", "rail", "bus"];
         }
 
         return [
-          'rail',
-          'tram',
-          'subway',
-          'bus',
-          'ferry',
-          'cablecar',
-          'gondola',
-          'funicular',
-          'coach',
+          "rail",
+          "tram",
+          "subway",
+          "bus",
+          "ferry",
+          "cablecar",
+          "gondola",
+          "funicular",
+          "coach",
         ];
       },
       ...options,
       properties: {
         isQueryable: true,
-        popupComponent: 'PunctualityPopup',
+        popupComponent: "PunctualityPopup",
         useTrackerMenu: true,
         ...(options.properties || {}),
       },

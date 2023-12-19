@@ -1,1 +1,1 @@
-export { default } from './MapAccessibility';
+export { default } from "./MapAccessibility";

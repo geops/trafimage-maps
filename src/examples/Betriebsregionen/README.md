@@ -12,6 +12,7 @@ const App = () => {
         <trafimage-maps
           appName="betriebsregionen"
           apiKey={apiKey}
+          width="100%"
           height="500px"
         />
       </div>

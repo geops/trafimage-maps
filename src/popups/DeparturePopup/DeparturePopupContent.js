@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { MdLoop } from 'react-icons/md';
-import { withTranslation } from 'react-i18next';
-import qs from 'query-string';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { MdLoop } from "react-icons/md";
+import { withTranslation } from "react-i18next";
+import qs from "query-string";
 
-import DestinationInput from './DestinationInput';
+import DestinationInput from "./DestinationInput";
 
-import { ReactComponent as SBBClock } from '../../img/clock_10_large.svg';
-import { setDeparturesFilter } from '../../model/app/actions';
+import { ReactComponent as SBBClock } from "../../img/clock_10_large.svg";
+import { setDeparturesFilter } from "../../model/app/actions";
 
-import './DeparturePopupContent.scss';
+import "./DeparturePopupContent.scss";
 
-const DESTINATION_FILTER = 'destination';
+const DESTINATION_FILTER = "destination";
 
 const propTypes = {
   uic: PropTypes.number.isRequired,
@@ -56,7 +56,7 @@ class DeparturePopupContent extends Component {
       },
     };
     const qStr = qs.stringify(parameters);
-    const search = qStr ? `?${qStr}` : '';
+    const search = qStr ? `?${qStr}` : "";
     if (
       (!qStr && window.location.search) ||
       (qStr && search !== window.location.search)
@@ -65,7 +65,7 @@ class DeparturePopupContent extends Component {
       window.history.replaceState(
         undefined,
         undefined,
-        `${search}${hash || ''}`,
+        `${search}${hash || ""}`,
       );
     }
   }
@@ -74,7 +74,7 @@ class DeparturePopupContent extends Component {
     const d = new Date(time);
 
     return [`0${d.getHours()}`.slice(-2), `0${d.getMinutes()}`.slice(-2)].join(
-      ':',
+      ":",
     );
   }
 
@@ -83,12 +83,12 @@ class DeparturePopupContent extends Component {
     if (min < 0) {
       return null;
     }
-    return min > 0 && min < 60 ? [min, "'"].join('') : null;
+    return min > 0 && min < 60 ? [min, "'"].join("") : null;
   }
 
   static getDelayColor(estimatedTimeLocal, timetabledTimeLocal) {
     if (!estimatedTimeLocal || !timetabledTimeLocal) {
-      return 'green';
+      return "green";
     }
 
     const min = Math.floor(
@@ -97,12 +97,12 @@ class DeparturePopupContent extends Component {
         60,
     );
     if (min >= 3 && min < 5) {
-      return 'orange';
+      return "orange";
     }
     if (min >= 5) {
-      return 'red';
+      return "red";
     }
-    return 'green';
+    return "green";
   }
 
   constructor(props) {
@@ -112,7 +112,7 @@ class DeparturePopupContent extends Component {
       departures: [],
       departuresLoading: true,
       destinationFilter: null,
-      platformName: 'abfahrtszeiten_kante',
+      platformName: "abfahrtszeiten_kante",
       isOffline: false,
     };
     this.loadInterval = null;
@@ -188,7 +188,7 @@ class DeparturePopupContent extends Component {
 
     const urlParams = {
       key: apiKey,
-      limit: '30',
+      limit: "30",
     };
     if (uic) {
       urlParams.uic = uic;
@@ -219,14 +219,14 @@ class DeparturePopupContent extends Component {
         let platformName = null;
 
         switch (platformType) {
-          case 'rail':
-            platformName = 'abfahrtszeiten_gleis';
+          case "rail":
+            platformName = "abfahrtszeiten_gleis";
             break;
-          case 'water':
-            platformName = 'abfahrtszeiten_steg';
+          case "water":
+            platformName = "abfahrtszeiten_steg";
             break;
           default:
-            platformName = 'abfahrtszeiten_kante';
+            platformName = "abfahrtszeiten_kante";
             break;
         }
         this.setState({
@@ -237,7 +237,7 @@ class DeparturePopupContent extends Component {
         });
       })
       .catch((err) => {
-        if (err && err.name === 'AbortError') {
+        if (err && err.name === "AbortError") {
           // ignore user abort request
           return;
         }
@@ -280,8 +280,8 @@ class DeparturePopupContent extends Component {
         <p>
           <i>
             {`${t(
-              'Für den aktuellen Zeitraum konnten keine ' +
-                'Verbindungen gefunden werden',
+              "Für den aktuellen Zeitraum konnten keine " +
+                "Verbindungen gefunden werden",
             )}.`}
           </i>
         </p>
@@ -304,13 +304,14 @@ class DeparturePopupContent extends Component {
         {loading}
         {info}
         <div
-          className={`tm-table-wrapper${departuresLoading ? ' loading' : ''}`}
+          className={`tm-table-wrapper${departuresLoading ? " loading" : ""}`}
         >
           <table className="tm-departures">
             <tbody>
               <tr>
-                <th className="tm-departure-line-cell">{t('Linie')}</th>
-                <th>{t('Ziel')}</th>
+                <th className="tm-departure-line-cell">{t("Linie")}</th>
+                <th>{t("Ziel")}</th>
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                 <th colSpan="2">
                   <SBBClock focusable={false} height="23px" width="23px" />
                 </th>
@@ -342,7 +343,7 @@ class DeparturePopupContent extends Component {
                       className="tm-departure-min"
                       style={{
                         color: isOffline
-                          ? '#333'
+                          ? "#333"
                           : DeparturePopupContent.getDelayColor(
                               departure.estimatedTimeLocal,
                               departure.timetabledTimeLocal,
@@ -360,8 +361,8 @@ class DeparturePopupContent extends Component {
                   <td>
                     <div
                       className={
-                        'tm-departure-platform ' +
-                        `${departure.modeOfTransport === 'rail' ? 'train' : ''}`
+                        "tm-departure-platform " +
+                        `${departure.modeOfTransport === "rail" ? "train" : ""}`
                       }
                     >
                       <div className="tm-platform-inner">

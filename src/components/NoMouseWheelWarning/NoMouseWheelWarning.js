@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import MouseWheelZoom from 'ol/interaction/MouseWheelZoom';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+import MouseWheelZoom from "ol/interaction/MouseWheelZoom";
 
 /**
  * This component only deactivate the mouse wheel zoom interaction in embedded mode.

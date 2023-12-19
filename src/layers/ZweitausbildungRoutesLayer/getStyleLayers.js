@@ -1,15 +1,15 @@
-import lines from './lines';
+import lines from "./lines";
 
 // Get mapbox line-color expression.
 const getLineColorExpr = (lineProperty) => {
-  const expr = ['case'];
+  const expr = ["case"];
   Object.entries(lines).forEach(([key, { property, color }]) => {
     if (property === lineProperty) {
-      expr.push(['==', ['get', property], key]);
+      expr.push(["==", ["get", property], key]);
       expr.push(color);
     }
   });
-  expr.push('rgba(0, 0, 0, 0)');
+  expr.push("rgba(0, 0, 0, 0)");
   return expr;
 };
 
@@ -17,7 +17,7 @@ const getLineColorExpr = (lineProperty) => {
 const generateDashedStyleLayers = (line, layer) => {
   const { property, sourceId, sourceLayer } = layer;
   const styleLayers = [];
-  const linesLabels = line.split(',');
+  const linesLabels = line.split(",");
   linesLabels.forEach((label, index) => {
     const color = lines[label]?.color;
     if (!color) {
@@ -31,13 +31,13 @@ const generateDashedStyleLayers = (line, layer) => {
     styleLayers.push({
       id: `${line}${index}`,
       source: sourceId,
-      'source-layer': sourceLayer,
-      type: 'line',
-      filter: ['==', line, ['get', property]],
+      "source-layer": sourceLayer,
+      type: "line",
+      filter: ["==", line, ["get", property]],
       paint: {
-        'line-color': color,
-        'line-width': 4,
-        'line-dasharray': [(linesLabels.length - index) * 2, index * 2],
+        "line-color": color,
+        "line-width": 4,
+        "line-dasharray": [(linesLabels.length - index) * 2, index * 2],
       },
     });
   });
@@ -50,7 +50,7 @@ const getDashedStyleLayers = (layer, zweitTilestats = {}) => {
   const styleLayers = [];
   (zweitTilestats[`geops.zweitausbildung.${property}`] || []).forEach(
     (value) => {
-      const split = value.split(',');
+      const split = value.split(",");
       if (split.length > 1) {
         styleLayers.push(...generateDashedStyleLayers(value, layer));
       }
@@ -62,14 +62,14 @@ const getDashedStyleLayers = (layer, zweitTilestats = {}) => {
 const getStyleLayers = (layer, zweitTilestats = {}) => {
   const { property, sourceId, sourceLayer, name, key } = layer;
   const defautStyle = {
-    type: 'line',
-    filter: ['has', property],
+    type: "line",
+    filter: ["has", property],
     paint: {
-      'line-color': getLineColorExpr(property),
-      'line-width': 4,
+      "line-color": getLineColorExpr(property),
+      "line-width": 4,
     },
     layout: {
-      'line-cap': 'round',
+      "line-cap": "round",
     },
   };
   const styleLayers = [
@@ -78,7 +78,7 @@ const getStyleLayers = (layer, zweitTilestats = {}) => {
       ...defautStyle,
       id: name || key,
       source: sourceId,
-      'source-layer': sourceLayer,
+      "source-layer": sourceLayer,
     },
     // Lines with a dashed style.
     ...getDashedStyleLayers(layer, zweitTilestats),

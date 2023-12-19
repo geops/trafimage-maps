@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
-import ZweitausbildungRoutesHighlightLayer from '../../layers/ZweitausbildungRoutesHighlightLayer';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { withTranslation } from "react-i18next";
+import { compose } from "redux";
+import ZweitausbildungRoutesHighlightLayer from "../../layers/ZweitausbildungRoutesHighlightLayer";
 
-import './ZweitausbildungRoutesPopup.scss';
+import "./ZweitausbildungRoutesPopup.scss";
 
 const propTypes = {
   layer: PropTypes.instanceOf(ZweitausbildungRoutesHighlightLayer).isRequired,
@@ -43,7 +43,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
 
   highlightFirstLine() {
     const { layer, feature } = this.props;
-    const labels = feature.get(layer.property).split(',');
+    const labels = feature.get(layer.property).split(",");
     layer.onSelect(labels[0], true);
     layer.forceRenderList();
     this.setState({ labelSelected: labels[0] });
@@ -52,7 +52,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
   render() {
     const { labelSelected } = this.state;
     const { t, staticFilesUrl, layer, feature } = this.props;
-    const labels = feature.get(layer.property).split(',');
+    const labels = feature.get(layer.property).split(",");
 
     return (
       <div className="wkp-zweitausbildung-routes-popup">
@@ -60,7 +60,7 @@ class ZweitausbildungRoutesPopup extends PureComponent {
           return (
             <div
               className={`wkp-zweitausbildung-routes-popup-row${
-                labelSelected === label ? ' highlight' : ''
+                labelSelected === label ? " highlight" : ""
               }`}
               key={label}
               onMouseEnter={() => {
@@ -76,13 +76,13 @@ class ZweitausbildungRoutesPopup extends PureComponent {
                     height="16"
                     width="42"
                     draggable="false"
-                    alt={t('Kein Bildtext')}
+                    alt={t("Kein Bildtext")}
                   />
                 </span>
               ) : null}
-              <b>{label.split(':')[0]}</b>
+              <b>{label.split(":")[0]}</b>
               <div className="wkp-zweitausbildung-routes-popup-desc">
-                {label.split(':')[1]}
+                {label.split(":")[1]}
               </div>
             </div>
           );
@@ -96,5 +96,5 @@ ZweitausbildungRoutesPopup.propTypes = propTypes;
 
 const composed = compose(withTranslation())(ZweitausbildungRoutesPopup);
 
-composed.renderTitle = (feat, layer, t) => t('Detailinformationen');
+composed.renderTitle = (feat, layer, t) => t("Detailinformationen");
 export default composed;
