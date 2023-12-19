@@ -1,25 +1,26 @@
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { makeStyles, IconButton } from '@material-ui/core';
-import { MdClose } from 'react-icons/md';
-import Overlay from '../../components/Overlay/Overlay';
-import { setDisplayMenu, setFeatureInfo } from '../../model/app/actions';
-import { OVERLAY_MIN_HEIGHT } from '../../utils/constants';
-import useIsMobile from '../../utils/useIsMobile';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { MdClose } from "react-icons/md";
+import Overlay from "../../components/Overlay/Overlay";
+import { setDisplayMenu, setFeatureInfo } from "../../model/app/actions";
+import { OVERLAY_MIN_HEIGHT } from "../../utils/constants";
+import useIsMobile from "../../utils/useIsMobile";
 
 const IFRAME_OVERLAY_DEFAULT_HEIGHT = 300;
 
 const boxShadow =
-  '0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)';
+  "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)";
 
 const stylesContainer = {
-  boxSizing: 'border-box',
-  backgroundColor: 'white',
+  boxSizing: "border-box",
+  backgroundColor: "white",
   boxShadow: (props) => (props.displayMenu ? boxShadow : null),
   borderRadius: 8,
-  overflow: 'hidden',
+  overflow: "hidden",
 };
 const useStyles = makeStyles((theme) => {
   return {
@@ -27,63 +28,63 @@ const useStyles = makeStyles((theme) => {
     menuContent: {
       height: (props) =>
         props.featureSelected && !props.isMobile
-          ? 'calc(100vh - 30px)'
-          : 'unset',
+          ? "calc(100vh - 30px)"
+          : "unset",
     },
     menuContentMobile: {
-      padding: '50px 0 0',
+      padding: "50px 0 0",
     },
     featureInfo: {
       ...stylesContainer,
       marginTop: (props) => (props.header ? 15 : 0),
       height: (props) =>
         `calc(100vh - ${props.header ? props.headerHeight + 40 : 25}px)`,
-      '& > div': {
-        scrollbarWidth: 'thin',
-        '&::-webkit-scrollbar': {
+      "& > div": {
+        scrollbarWidth: "thin",
+        "&::-webkit-scrollbar": {
           width: 6,
         },
-        '&::-webkit-scrollbar-track': {
-          background: 'rgba(0, 0, 0, 0.1)',
+        "&::-webkit-scrollbar-track": {
+          background: "rgba(0, 0, 0, 0.1)",
         },
-        '&::-webkit-scrollbar-thumb': {
-          background: 'rgba(0, 0, 0, 0.4)',
+        "&::-webkit-scrollbar-thumb": {
+          background: "rgba(0, 0, 0, 0.4)",
         },
       },
     },
     mobileHandleWrapper: {
-      position: 'absolute',
-      width: '100%',
+      position: "absolute",
+      width: "100%",
       height: OVERLAY_MIN_HEIGHT,
       top: 0,
       right: 0,
       zIndex: 1000,
     },
     mobileHandle: {
-      position: 'fixed',
-      backgroundColor: '#f5f5f5',
+      position: "fixed",
+      backgroundColor: "#f5f5f5",
       borderBottom: `1px solid #F0F0F0`,
-      width: 'inherit',
-      height: 'inherit',
-      display: 'flex',
-      alignItems: 'center',
+      width: "inherit",
+      height: "inherit",
+      display: "flex",
+      alignItems: "center",
     },
     mobileTitle: {
-      padding: '0 15px',
-      maxWidth: 'calc(100vw - 65px)',
+      padding: "0 15px",
+      maxWidth: "calc(100vw - 65px)",
     },
     closeBtn: {
-      position: 'fixed',
+      position: "fixed",
       right: 0,
-      padding: '13px 10px',
+      padding: "13px 10px",
       marginRight: 2,
       zIndex: 1002,
       height: OVERLAY_MIN_HEIGHT,
     },
-    hide: { display: 'none' },
+    hide: { display: "none" },
     bottomFade: {
-      '&::after': {
-        ...theme.styles.bottomFade['&::after'],
+      "&::after": {
+        ...theme.styles.bottomFade["&::after"],
         borderRadius: 8,
       },
     },
@@ -113,7 +114,7 @@ function IframeMenu({ header, body, hide, title, ResizableProps }) {
   }, [featureInfo, isMobile, dispatch]);
 
   return (
-    <div className={hide ? classes.hide : ''}>
+    <div className={hide ? classes.hide : ""}>
       {displayMenu && (
         <div className={classes.menuContent}>
           <div

@@ -1,5 +1,5 @@
-import { MaplibreLayer, getMapboxMapCopyrights } from 'mobility-toolbox-js/ol';
-import { toLonLat } from 'ol/proj';
+import { MaplibreLayer, getMapboxMapCopyrights } from "mobility-toolbox-js/ol";
+import { toLonLat } from "ol/proj";
 
 const applyFilters = (mbStyle, filters) => {
   const newStyle = { ...mbStyle };
@@ -38,8 +38,8 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     this.filters = options.filters;
 
     // TODO don't use process.env here it fails in Schulzug
-    this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
-    // this.stylePrefix = '';
+    // this.stylePrefix = process?.env?.REACT_APP_STYLE_REVIEW_PREFIX || '';
+    this.stylePrefix = "";
     this.style = options.style;
   }
 
@@ -48,7 +48,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
 
     if (this.map) {
       this.dispatchEvent({
-        type: 'init',
+        type: "init",
         target: this,
       });
     }
@@ -70,7 +70,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     super.detachFromMap(map);
 
     this.dispatchEvent({
-      type: 'terminate',
+      type: "terminate",
       target: this,
     });
   }
@@ -88,7 +88,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     const styleFiltered = applyFilters(data, this.filters);
 
     this.mbMap.setStyle(styleFiltered);
-    this.mbMap.once('styledata', () => {
+    this.mbMap.once("styledata", () => {
       this.onStyleLoaded();
     });
   }
@@ -122,7 +122,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
 
     if (!this.mbMap) {
       if (this.filters) {
-        this.on('load', () => {
+        this.on("load", () => {
           this.applyStyle(this.mbMap.getStyle());
         });
       }
@@ -195,7 +195,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
               cfs?.forEach((cf) => {
                 const olFeature = this.format.readFeature(cf);
                 if (olFeature) {
-                  olFeature.set('mapboxFeature', cf);
+                  olFeature.set("mapboxFeature", cf);
                 }
                 features.push(olFeature);
               });
@@ -206,7 +206,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
       } else {
         const olFeature = this.format.readFeature(feature);
         if (olFeature) {
-          olFeature.set('mapboxFeature', feature);
+          olFeature.set("mapboxFeature", feature);
         }
         features.push(olFeature);
       }
@@ -240,12 +240,12 @@ class TrafimageMapboxLayer extends MaplibreLayer {
         this.applyStyle(data);
       })
       .catch((err) => {
-        if (err && err.name === 'AbortError') {
+        if (err && err.name === "AbortError") {
           // ignore user abort request
           return;
         }
         // eslint-disable-next-line no-console
-        console.log('Loading of mapbox style failed: ', newStyleUrl, err);
+        console.log("Loading of mapbox style failed: ", newStyleUrl, err);
       });
   }
 
@@ -257,7 +257,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
       .setAttributions(this.copyrights || getMapboxMapCopyrights(this.mbMap));
 
     this.dispatchEvent({
-      type: 'load',
+      type: "load",
       target: this,
     });
   }

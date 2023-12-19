@@ -1,4 +1,4 @@
-import { MapboxStyleLayer as MTMapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer as MTMapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for visualizing information about stations (default) or airports.

@@ -1,11 +1,12 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
-import { Typography, makeStyles } from '@material-ui/core';
-import PermalinkInput from '../PermalinkInput';
-import DrawEditLinkInput from '../DrawEditLinkInput';
-import PermalinkButton from '../PermalinkButton';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import PermalinkInput from "../PermalinkInput";
+import DrawEditLinkInput from "../DrawEditLinkInput";
+import PermalinkButton from "../PermalinkButton";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -27,7 +28,7 @@ function DrawPermalinkButton({ buttonProps }) {
             {drawIds && drawIds.file_id && (
               <>
                 <Typography variant="h4" gutterBottom>{`${t(
-                  'Link zum Teilen',
+                  "Link zum Teilen",
                 )}: `}</Typography>
                 <PermalinkInput
                   value={
@@ -41,11 +42,11 @@ function DrawPermalinkButton({ buttonProps }) {
             {drawIds && drawIds.admin_id && (
               <div className={classes.margin}>
                 <Typography variant="h4" gutterBottom>{`${t(
-                  'Link zum Editieren',
+                  "Link zum Editieren",
                 )}: `}</Typography>
                 <Typography gutterBottom>
                   {t(
-                    'Damit sie ihre Zeichnung erneut bearbeiten können, müssen sie diesen Link speichern.',
+                    "Damit sie ihre Zeichnung erneut bearbeiten können, müssen sie diesen Link speichern.",
                   )}
                 </Typography>
                 <DrawEditLinkInput />

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import MenuItemHeader from './MenuItemHeader';
-import Collapsible from '../Collapsible';
-import withResizing from '../withResizing';
+import React from "react";
+import PropTypes from "prop-types";
+import MenuItemHeader from "./MenuItemHeader";
+import Collapsible from "../Collapsible";
+import withResizing from "../withResizing";
 
 const propTypes = {
   menuHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -24,9 +24,9 @@ const defaultProps = {
   fixedHeight: null,
   bodyElementRef: null,
   children: null,
-  className: '',
+  className: "",
   icon: null,
-  title: '',
+  title: "",
   onCollapseToggle: () => {},
 };
 
@@ -47,7 +47,7 @@ const ForwardedRefComp = React.forwardRef((props, ref) => {
   return (
     <div
       ref={ref}
-      className={`wkp-menu-item ${className} ${open ? '' : 'closed'}`}
+      className={`wkp-menu-item ${className} ${open ? "" : "closed"}`}
     >
       {(title || icon) && (
         <MenuItemHeader

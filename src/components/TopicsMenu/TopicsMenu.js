@@ -1,18 +1,18 @@
-import React, { useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import { unByKey } from 'ol/Observable';
-import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
-import TopicMenu from '../TopicMenu';
-import TopicsMenuHeader from '../TopicsMenuHeader';
-import Collapsible from '../Collapsible';
-import withResizing from '../withResizing';
+import React, { useEffect, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
+import { unByKey } from "ol/Observable";
+import getLayersAsFlatArray from "../../utils/getLayersAsFlatArray";
+import TopicMenu from "../TopicMenu";
+import TopicsMenuHeader from "../TopicsMenuHeader";
+import Collapsible from "../Collapsible";
+import withResizing from "../withResizing";
 import {
   setMenuOpen,
   setSearchOpen,
   updateDrawEditLink,
-} from '../../model/app/actions';
-import DrawLayerMenu from '../DrawLayerMenu';
+} from "../../model/app/actions";
+import DrawLayerMenu from "../DrawLayerMenu";
 
 const propTypes = {
   menuHeight: PropTypes.number,
@@ -48,7 +48,7 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
     };
 
     const keys = getLayersAsFlatArray(layers).map((layer) =>
-      layer.on('change:visible', cb),
+      layer.on("change:visible", cb),
     );
 
     return () => {

@@ -1,11 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core';
-import DvFeatureInfo from '../../config/ch.sbb.direktverbindungen/DvFeatureInfo';
-import { DvFeatureInfoTitleString } from '../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle';
+import React from "react";
+import { makeStyles } from "@mui/styles";
+import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo";
+import { DvFeatureInfoTitleString } from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 
 const useStyles = makeStyles({
   container: {
-    padding: '0 !important',
+    padding: "0 !important",
   },
 });
 
@@ -13,7 +13,7 @@ const defaultProps = {
   feature: null,
 };
 
-const DvPopup = () => {
+function DvPopup() {
   const classes = useStyles();
 
   return (
@@ -21,13 +21,13 @@ const DvPopup = () => {
       <DvFeatureInfo />
     </div>
   );
-};
+}
 
 DvPopup.defaultProps = defaultProps;
 
 const memoized = React.memo(DvPopup);
 memoized.renderTitle = () => (
-  <span style={{ padding: '2px 0' }}>
+  <span style={{ padding: "2px 0" }}>
     <DvFeatureInfoTitleString />
   </span>
 );

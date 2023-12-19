@@ -1,1 +1,1 @@
-export { default } from './RegionenkartePublicLayerInfo';
+export { default } from "./RegionenkartePublicLayerInfo";

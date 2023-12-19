@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
 };
 
-const BusLinePopup = ({ feature }) => {
+function BusLinePopup({ feature }) {
   const props = feature.getProperties();
   return (
     <div className="wkp-bus-line-popup">
@@ -16,14 +16,14 @@ const BusLinePopup = ({ feature }) => {
         }
         return (
           <div key={key}>
-            <div>{key.replace('lines ', '')}</div>
+            <div>{key.replace("lines ", "")}</div>
             <div>{value}</div>
           </div>
         );
       })}
     </div>
   );
-};
+}
 
 BusLinePopup.propTypes = propTypes;
 

@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
 const propTypes = {
   /**
@@ -34,7 +34,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  className: 'tm-list-item',
+  className: "tm-list-item",
   onSelect: () => {},
   onKeyDown: () => {},
 };

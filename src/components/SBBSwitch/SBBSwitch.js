@@ -1,24 +1,25 @@
-import React from 'react';
-import { withStyles, Switch } from '@material-ui/core';
+import React from "react";
+import { withStyles } from "@mui/styles";
+import { Switch } from "@mui/material";
 
 const StyledSwitch = withStyles((theme) => ({
   root: {
     width: 40,
-    height: '100%',
+    height: "100%",
     padding: 0,
-    margin: '4px 10px 4px 0',
-    overflow: 'visible',
-    alignItems: 'center',
+    margin: "4px 10px 4px 0",
+    overflow: "visible",
+    alignItems: "center",
   },
   switchBase: {
     padding: 3,
-    color: 'white',
-    '&$checked': {
-      transform: 'translateX(14px)',
-      color: 'white',
-      '& + $track': {
+    color: "white",
+    "&$checked": {
+      transform: "translateX(14px)",
+      color: "white",
+      "& + $track": {
         opacity: 1,
-        backgroundColor: '#eb0000',
+        backgroundColor: "#eb0000",
       },
     },
   },
@@ -26,7 +27,7 @@ const StyledSwitch = withStyles((theme) => ({
     width: 20,
     height: 20,
     boxShadow:
-      '0 1px 1px 0 rgb(0 0 0 / 7%), 0 0 1px 1px rgb(0 0 0 / 11%), 0 4px 2px 0 rgb(0 0 0 / 10%), 0 4px 9px 2px rgb(0 0 0 / 8%)',
+      "0 1px 1px 0 rgb(0 0 0 / 7%), 0 0 1px 1px rgb(0 0 0 / 11%), 0 4px 2px 0 rgb(0 0 0 / 10%), 0 4px 9px 2px rgb(0 0 0 / 8%)",
   },
   track: {
     height: 24,

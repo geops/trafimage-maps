@@ -1,45 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Login matches snapshot displaying default text 1`] = `
-<div
-  className="wkp-login"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex={0}
+<div class="wkp-login"
+     role="button"
+     tabindex="0"
 >
-  <svg
-    className="wkp-login-icon"
-    focusable={false}
+  <svg focusable="false"
+       class="wkp-login-icon"
   >
     user_92_large.svg
   </svg>
-  <span
-    className="wkp-login-text"
-  >
+  <span class="wkp-login-text">
     Anmelden
   </span>
 </div>
 `;
 
 exports[`Login matches snapshot displaying user name 1`] = `
-<div
-  className="wkp-login"
-  onClick={[Function]}
-  onKeyPress={[Function]}
-  role="button"
-  tabIndex={0}
-  title="bar"
+<div class="wkp-login"
+     role="button"
+     tabindex="0"
+     title="bar"
 >
-  <svg
-    className="wkp-login-icon"
-    focusable={false}
+  <svg focusable="false"
+       class="wkp-login-icon"
   >
     user_92_large.svg
   </svg>
-  <span
-    className="wkp-login-text"
-  >
+  <span class="wkp-login-text">
     bar
   </span>
 </div>

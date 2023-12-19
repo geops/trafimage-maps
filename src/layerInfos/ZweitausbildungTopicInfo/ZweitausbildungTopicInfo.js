@@ -1,16 +1,16 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-const ZweitausbildungTopicInfo = () => {
+function ZweitausbildungTopicInfo() {
   const { t } = useTranslation();
   return (
     <div>
-      <p>{t('ch.sbb.zweitausbildung-desc')}</p>
+      <p>{t("ch.sbb.zweitausbildung-desc")}</p>
       <p>
-        {t('Datenstand')}: {t('ch.sbb.zweitausbildung-datastatus')}
+        {t("Datenstand")}: {t("ch.sbb.zweitausbildung-datastatus")}
       </p>
       <p>
-        {t('Verantwortlich')}:
+        {t("Verantwortlich")}:
         <br />
         HR-POK-SKK-PM
         <br />
@@ -18,6 +18,6 @@ const ZweitausbildungTopicInfo = () => {
       </p>
     </div>
   );
-};
+}
 
 export default ZweitausbildungTopicInfo;

@@ -1,10 +1,10 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import PlatformsLayer from './PlatformsLayer';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import PlatformsLayer from "./PlatformsLayer";
 
-describe('PlatformsLayer', () => {
-  test('return only one featureInfo to avoid duplicate data in der Popup [TRAFDATA-334]', (done) => {
-    const feat1 = { id: 'feat1' };
-    const feat2 = { id: 'feat2' };
+describe("PlatformsLayer", () => {
+  test("return only one featureInfo to avoid duplicate data in der Popup [TRAFDATA-334]", (done) => {
+    const feat1 = { id: "feat1" };
+    const feat2 = { id: "feat2" };
     MapboxStyleLayer.prototype.getFeatureInfoAtCoordinate = jest.fn(() =>
       Promise.resolve({
         features: [feat1, feat2],

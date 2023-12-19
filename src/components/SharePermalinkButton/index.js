@@ -1,1 +1,1 @@
-export { default } from './SharePermalinkButton';
+export { default } from "./SharePermalinkButton";

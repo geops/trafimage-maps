@@ -1,1 +1,1 @@
-export { default } from './EnergiePublicTopicInfo';
+export { default } from "./EnergiePublicTopicInfo";

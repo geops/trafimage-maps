@@ -1,13 +1,13 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import HandicapTopicInfo from '.';
+import React from "react";
+import { render } from "@testing-library/react";
+import HandicapTopicInfo from ".";
 
-describe('HandicapTopicInfo', () => {
-  test('should display link to data', () => {
+describe("HandicapTopicInfo", () => {
+  test("should display link to data", () => {
     const { container } = render(<HandicapTopicInfo />);
-    const link = container.querySelector('a.wkp-link');
+    const link = container.querySelector("a.wkp-link");
     expect(link.href).toBe(
-      'https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/',
+      "https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/",
     );
   });
 });

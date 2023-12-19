@@ -1,19 +1,17 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import configureStore from 'redux-mock-store';
-import OLMap from 'ol/Map';
-import dvLayers from '../index';
-import { direktverbindungenIframe } from '../../topics';
-import DvListButton from './DvListButton';
+import React from "react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
 
-describe('DvListButton', () => {
-  const mockStore = configureStore([thunk]);
+import OLMap from "ol/Map";
+import dvLayers from "../index";
+import { direktverbindungenIframe } from "../../topics";
+import DvListButton from "./DvListButton";
+
+describe("DvListButton", () => {
   let store;
 
   beforeEach(() => {
-    store = mockStore({
+    store = global.mockStore({
       map: { layers: dvLayers },
       app: {
         map: new OLMap({}),
@@ -24,13 +22,13 @@ describe('DvListButton', () => {
     });
   });
 
-  test('should match snapshot and be disabled on load.', () => {
+  test("should match snapshot and be disabled on load.", () => {
     const { container, getByTestId } = render(
       <Provider store={store}>
         <DvListButton />
       </Provider>,
     );
     expect(container.innerHTML).toMatchSnapshot();
-    expect(getByTestId('dv-list-button')).toBeDisabled();
+    expect(getByTestId("dv-list-button")).toBeDisabled();
   });
 });

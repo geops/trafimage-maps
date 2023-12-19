@@ -1,12 +1,12 @@
-import { getLayersAsFlatArray } from 'mobility-toolbox-js/ol';
-import qs from 'query-string';
+import { getLayersAsFlatArray } from "mobility-toolbox-js/ol";
+import qs from "query-string";
 
 /**
  * This function apply permalink 'layers' to a list of layers.
  * Useful on load of a topic to avoid loading unecessary data or styles.
  */
 const applPermalinkVisiblity = (layers, filterTopic) => {
-  const isSSR = typeof window === 'undefined';
+  const isSSR = typeof window === "undefined";
   // We apply the visibility depending on the layers parameter only if it's the good topic.
   const { pathname } = !isSSR ? window.location : {};
   if (!isSSR && filterTopic(pathname)) {
@@ -20,11 +20,11 @@ const applPermalinkVisiblity = (layers, filterTopic) => {
 
     if (hasBaseLayersParam) {
       const [baseLayerVisible] =
-        (baseLayersParam && baseLayersParam.split(',')) || [];
+        (baseLayersParam && baseLayersParam.split(",")) || [];
 
       // We use the layer service only to update properly the inital visibility to parent layer.
       getLayersAsFlatArray(layers)
-        .filter((layer) => layer.get('isBaseLayer'))
+        .filter((layer) => layer.get("isBaseLayer"))
         .forEach((layer) => {
           // eslint-disable-next-line no-param-reassign
           layer.visible = baseLayerVisible === layer.key;
@@ -43,13 +43,13 @@ const applPermalinkVisiblity = (layers, filterTopic) => {
     );
 
     if (hasLayersParam) {
-      const layerKeys = (layersParam && layersParam.split(',')) || [];
+      const layerKeys = (layersParam && layersParam.split(",")) || [];
 
       // We use the layer service only to update properly the inital visibility to parent layer.
       getLayersAsFlatArray(layers)
         // Permalink layers param only use layer in legend and non baselayer
         .filter(
-          (layer) => !layer.get('isBaseLayer') && !layer.get('hideInLegend'),
+          (layer) => !layer.get("isBaseLayer") && !layer.get("hideInLegend"),
         )
         .forEach((layer) => {
           // eslint-disable-next-line no-param-reassign

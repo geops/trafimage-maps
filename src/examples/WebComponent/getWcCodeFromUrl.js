@@ -1,4 +1,4 @@
-import getWcAttributesFromUrl from './getWcAttributesFromUrl';
+import getWcAttributesFromUrl from "./getWcAttributesFromUrl";
 
 const getWcCodeFromUrl = (urlString) => {
   const {
@@ -12,8 +12,8 @@ const getWcCodeFromUrl = (urlString) => {
   } = getWcAttributesFromUrl(urlString);
 
   const code = [
-    '<!--Please contact sbb_map@geops.ch for your own API key-->',
-    '\n      <trafimage-maps',
+    "<!--Please contact sbb_map@geops.ch for your own API key-->",
+    "\n      <trafimage-maps",
     `\n\tapiKey="${window.apiKey}"`,
   ];
 
@@ -47,8 +47,8 @@ const getWcCodeFromUrl = (urlString) => {
     code.push(`\n\tembedded="${embedded}"`);
   }
 
-  code.push('/>');
-  return code.join('');
+  code.push("/>");
+  return code.join("");
 };
 
 export default getWcCodeFromUrl;

@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Layer } from 'mobility-toolbox-js/ol';
-import Feature from 'ol/Feature';
-import BahnhofplanPopup from '../BahnhofplanPopup';
-import NetzkartePopup from '../NetzkartePopup';
-import { getId } from '../../utils/removeDuplicateFeatures';
+import React from "react";
+import PropTypes from "prop-types";
+import { Layer } from "mobility-toolbox-js/ol";
+import Feature from "ol/Feature";
+import BahnhofplanPopup from "../BahnhofplanPopup";
+import NetzkartePopup from "../NetzkartePopup";
+import { getId } from "../../utils/removeDuplicateFeatures";
 
 const propTypes = {
   feature: PropTypes.oneOfType([
@@ -31,8 +31,8 @@ function StationPopup({ feature, layer, coordinate }) {
   // if a a station has been clicked, don't show the bahnhohfplans features.
   const isStationClicked = features.find((feat, idx) => {
     return (
-      layers[idx].name === 'ch.sbb.netzkarte.stationen' ||
-      layers[idx].name === 'ch.sbb.netzkarte.platforms'
+      layers[idx].name === "ch.sbb.netzkarte.stationen" ||
+      layers[idx].name === "ch.sbb.netzkarte.platforms"
     );
   });
 
@@ -40,8 +40,8 @@ function StationPopup({ feature, layer, coordinate }) {
     <div>
       {features.map((feat, idx) => {
         const displayNetzkartePopup =
-          layers[idx].name === 'ch.sbb.netzkarte.stationen' ||
-          layers[idx].name === 'ch.sbb.netzkarte.platforms';
+          layers[idx].name === "ch.sbb.netzkarte.stationen" ||
+          layers[idx].name === "ch.sbb.netzkarte.platforms";
         const key = layers[idx].name + getId(feat);
         if (displayNetzkartePopup) {
           return (
@@ -76,11 +76,11 @@ const memoized = React.memo(StationPopup);
 
 memoized.renderTitle = (feat, layer, t) => {
   const feature = feat.length ? feat[0] : feat;
-  const platform = feature.get('platform');
+  const platform = feature.get("platform");
   if (platform) {
-    return `${feature.get('name')} (${t('abfahrtszeiten_kante')} ${platform})`;
+    return `${feature.get("name")} (${t("abfahrtszeiten_kante")} ${platform})`;
   }
-  return feature.get('name');
+  return feature.get("name");
 };
 memoized.hidePagination = true;
 

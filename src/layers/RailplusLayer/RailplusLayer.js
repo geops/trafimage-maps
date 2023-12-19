@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for RailplusLayer
@@ -19,7 +19,7 @@ class RailplusLayer extends MapboxStyleLayer {
     )
       .then((res) => res.json())
       .then((data) => {
-        this.railplusProviders = data['geops.railplus.tu_info'];
+        this.railplusProviders = data["geops.railplus.tu_info"];
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.error(err));

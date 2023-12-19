@@ -1,14 +1,11 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable  react/no-multi-comp,react/prefer-stateless-function,react/prop-types */
-import React from 'react';
-import { configure, mount, shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import ResizeObserver from 'resize-observer-polyfill';
-import ResizeHandler from './ResizeHandler';
+import React from "react";
+import { render } from "@testing-library/react";
+import ResizeObserver from "resize-observer-polyfill";
+import ResizeHandler from "./ResizeHandler";
 
-jest.mock('resize-observer-polyfill');
-
-configure({ adapter: new Adapter() });
+jest.mock("resize-observer-polyfill");
 
 class Div extends React.Component {
   render() {
@@ -167,30 +164,30 @@ const comps = [
   CallbackNodeComponent,
 ];
 
-describe('ResizeHandler', () => {
-  describe('when observe property is not set', () => {
+describe("ResizeHandler", () => {
+  describe("when observe property is not set", () => {
     test("doesn't observe", () => {
-      const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
-      shallow(<ResizeHandler />);
+      const spy = jest.spyOn(ResizeObserver.prototype, "observe");
+      render(<ResizeHandler />);
       expect(spy).not.toHaveBeenCalled();
       spy.mockRestore();
     });
 
-    test('disconnect on unmount', () => {
-      const wrapper = shallow(<ResizeHandler />);
-      const spy = jest.spyOn(wrapper.instance().observer, 'disconnect');
-      wrapper.unmount();
+    test("disconnect on unmount", () => {
+      const { unmount } = render(<ResizeHandler />);
+      const spy = jest.spyOn(ResizeObserver.prototype, "disconnect");
+      unmount();
       expect(spy).toHaveBeenCalledTimes(1);
     });
   });
 
-  describe('when observe property is set', () => {
-    test('try to get an html node from a string on (un)mount', () => {
-      const div = document.createElement('div');
+  describe("when observe property is set", () => {
+    test("try to get an html node from a string on (un)mount", () => {
+      const div = document.createElement("div");
       document.querySelectorAll = jest.fn().mockImplementation(() => [div]);
-      const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
-      const spy2 = jest.spyOn(ResizeObserver.prototype, 'disconnect');
-      mount(<StrComponent />);
+      const spy = jest.spyOn(ResizeObserver.prototype, "observe");
+      const spy2 = jest.spyOn(ResizeObserver.prototype, "disconnect");
+      render(<StrComponent />);
       expect(spy).toHaveBeenCalledTimes(1);
       expect(spy.mock.calls[0][0]).toBe(div);
       expect(spy2.mock.calls.length >= 1).toBe(true);
@@ -201,22 +198,22 @@ describe('ResizeHandler', () => {
 
     comps.forEach((Comp) => {
       test(`(un)observes an html node from ${Comp.name} on (un)mount`, () => {
-        const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
-        const spy2 = jest.spyOn(ResizeObserver.prototype, 'disconnect');
-        const wrapper = mount(<Comp />);
+        const spy = jest.spyOn(ResizeObserver.prototype, "observe");
+        const spy2 = jest.spyOn(ResizeObserver.prototype, "disconnect");
+        const { unmount } = render(<Comp />);
         expect(spy).toHaveBeenCalledTimes(1);
         expect(spy.mock.calls[0][0]).toBeInstanceOf(Element);
         expect(spy2.mock.calls.length >= 1).toBe(true);
         ResizeObserver.prototype.observe.mockRestore();
         spy.mockRestore();
         spy2.mockRestore();
-        wrapper.unmount();
+        unmount();
       });
     });
 
-    test('set the default css class on resize ', () => {
-      const wrapper = mount(<BasicComponent />);
-      const basic = wrapper.getDOMNode();
+    test("set the default css class on resize ", () => {
+      const wrapper = render(<BasicComponent />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -229,7 +226,7 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-xs tm-h-xs');
+      expect(basic.className).toBe("tm-w-xs tm-h-xs");
 
       ResizeObserver.onResize([
         {
@@ -240,7 +237,7 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-s tm-h-s');
+      expect(basic.className).toBe("tm-w-s tm-h-s");
       ResizeObserver.onResize([
         {
           target: basic,
@@ -250,7 +247,7 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-m tm-h-m');
+      expect(basic.className).toBe("tm-w-m tm-h-m");
       ResizeObserver.onResize([
         {
           target: basic,
@@ -260,7 +257,7 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-l tm-h-l');
+      expect(basic.className).toBe("tm-w-l tm-h-l");
       ResizeObserver.onResize([
         {
           target: basic,
@@ -270,12 +267,12 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-xl tm-h-xl');
+      expect(basic.className).toBe("tm-w-xl tm-h-xl");
     });
 
-    test('uses user defined breakpoints', () => {
-      const wrapper = mount(<BasicComponent3 />);
-      const basic = wrapper.getDOMNode();
+    test("uses user defined breakpoints", () => {
+      const wrapper = render(<BasicComponent3 />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -288,7 +285,7 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-schmal tm-h-niedrig');
+      expect(basic.className).toBe("tm-w-schmal tm-h-niedrig");
 
       ResizeObserver.onResize([
         {
@@ -299,13 +296,13 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(basic.className).toBe('tm-w-breit tm-h-hoch');
+      expect(basic.className).toBe("tm-w-breit tm-h-hoch");
     });
 
-    test('calls onResize property', () => {
+    test("calls onResize property", () => {
       const fn = jest.fn();
-      const wrapper = mount(<BasicComponent onResize={fn} />);
-      const basic = wrapper.getDOMNode();
+      const wrapper = render(<BasicComponent onResize={fn} />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -321,10 +318,10 @@ describe('ResizeHandler', () => {
       expect(fn).toHaveBeenCalledTimes(1);
     });
 
-    test('set a style property on resize', () => {
-      const spy = jest.spyOn(document.documentElement.style, 'setProperty');
-      const wrapper = mount(<BasicComponent stylePropHeight="foo" />);
-      const basic = wrapper.getDOMNode();
+    test("set a style property on resize", () => {
+      const spy = jest.spyOn(document.documentElement.style, "setProperty");
+      const wrapper = render(<BasicComponent stylePropHeight="foo" />);
+      const basic = wrapper.container;
 
       // The mock class set the onResize property, we just have to run it to
       // simulate a resize
@@ -337,17 +334,15 @@ describe('ResizeHandler', () => {
           },
         },
       ]);
-      expect(spy).toHaveBeenCalledWith('foo', '7.68px');
+      expect(spy).toHaveBeenCalledWith("foo", "7.68px");
     });
 
-    test('re-applies the breakpoints if the forceUpdate property changes', () => {
-      const spy = jest.spyOn(ResizeObserver.prototype, 'observe');
-      const wrapper = mount(<BasicComponent forceUpdate="foo" />);
+    test("re-applies the breakpoints if the forceUpdate property changes", () => {
+      const spy = jest.spyOn(ResizeObserver.prototype, "observe");
+      const { rerender } = render(<BasicComponent forceUpdate="foo" />);
       expect(spy).toHaveBeenCalledTimes(1);
       spy.mockReset();
-      wrapper.setProps({
-        forceUpdate: 'bar',
-      });
+      rerender(<BasicComponent forceUpdate="bar" />);
       expect(spy).toHaveBeenCalledTimes(2);
     });
   });

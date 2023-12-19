@@ -1,1 +1,1 @@
-export { default } from './TarifverbundPartner';
+export { default } from "./TarifverbundPartner";

@@ -1,16 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
-import grun from './grun.png';
-import gelb from './gelb.png';
-import lila from './lila.png';
-import rot from './rot.png';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import grun from "./grun.png";
+import gelb from "./gelb.png";
+import lila from "./lila.png";
+import rot from "./rot.png";
 
 const title = {
-  de: 'Regionenkarte I-VU-UEW',
-  fr: 'Cartes régionales I-VU-UEW',
-  en: 'Regional map I-VU-UEW',
-  it: 'Cartina della regione I-VU-UEW',
+  de: "Regionenkarte I-VU-UEW",
+  fr: "Cartes régionales I-VU-UEW",
+  en: "Regional map I-VU-UEW",
+  it: "Cartina della regione I-VU-UEW",
 };
 
 const description = {
@@ -43,19 +43,19 @@ const description = {
 
 const useStyles = makeStyles((theme) => ({
   legend: {
-    '& > div': {
-      display: 'flex',
-      alignItems: 'center',
+    "& > div": {
+      display: "flex",
+      alignItems: "center",
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
     },
-    '& img': {
+    "& img": {
       marginRight: theme.spacing(1),
     },
   },
 }));
 
-const RegionenkartePublicLayerInfo = ({ language }) => {
+function RegionenkartePublicLayerInfo({ language }) {
   const classes = useStyles();
   return (
     <div>
@@ -81,7 +81,7 @@ const RegionenkartePublicLayerInfo = ({ language }) => {
       {description[language]}
     </div>
   );
-};
+}
 
 RegionenkartePublicLayerInfo.propTypes = {
   language: PropTypes.string.isRequired,

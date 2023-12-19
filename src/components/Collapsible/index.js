@@ -1,1 +1,1 @@
-export { default } from './Collapsible';
+export { default } from "./Collapsible";

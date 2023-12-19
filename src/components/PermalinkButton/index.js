@@ -1,1 +1,1 @@
-export { default } from './PermalinkButton';
+export { default } from "./PermalinkButton";

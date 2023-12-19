@@ -1,7 +1,7 @@
-import OLMap from 'ol/Map';
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { Layer } from 'mobility-toolbox-js/ol';
+import OLMap from "ol/Map";
+import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { Layer } from "mobility-toolbox-js/ol";
 
 const KEYCODE_TAB = 9;
 const KEYCODE_ENTER = 13;
@@ -14,7 +14,7 @@ const KEYCODE_ENTER = 13;
  * single (radioGroup) TrackerLayers are supported.
  * @private
  */
-const MapAccessibility = ({ layers, map }) => {
+function MapAccessibility({ layers, map }) {
   useEffect(() => {
     const mapTarget = map.getTarget();
     let tabFeature;
@@ -60,20 +60,20 @@ const MapAccessibility = ({ layers, map }) => {
         tabLayer.trajectories
       ) {
         const { coordinate } = tabFeature.properties;
-        map.dispatchEvent({ type: 'singleclick', map, coordinate });
+        map.dispatchEvent({ type: "singleclick", map, coordinate });
         evt.preventDefault();
       }
     };
 
-    document.addEventListener('keydown', mapAccessibility);
+    document.addEventListener("keydown", mapAccessibility);
 
     return function cleanup() {
-      document.removeEventListener('keydown', mapAccessibility);
+      document.removeEventListener("keydown", mapAccessibility);
     };
   });
 
   return null;
-};
+}
 
 MapAccessibility.propTypes = {
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)).isRequired,

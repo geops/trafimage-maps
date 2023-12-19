@@ -1,32 +1,33 @@
-import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles, Typography } from '@material-ui/core';
-import { ReactComponent as PhoneIcon } from '../../img/phone.svg';
-import { ReactComponent as MailIcon } from '../../img/mail.svg';
-import { ReactComponent as PersonIcon } from '../../img/person.svg';
-import formatPhone from '../../utils/formatPhone';
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { ReactComponent as PhoneIcon } from "../../img/phone.svg";
+import { ReactComponent as MailIcon } from "../../img/mail.svg";
+import { ReactComponent as PersonIcon } from "../../img/person.svg";
+import formatPhone from "../../utils/formatPhone";
 
 const useStyles = makeStyles((theme) => {
   return {
     row: {
       minWidth: 250,
-      alignItems: 'center',
-      display: 'flex',
+      alignItems: "center",
+      display: "flex",
     },
     icon: {
       height: 24,
       width: 24,
       marginRight: 5,
-      '& svg': {
-        height: '100%',
-        width: '100%',
+      "& svg": {
+        height: "100%",
+        width: "100%",
       },
     },
     card: {
       flex: 1,
-      border: '1px solid #ddd',
+      border: "1px solid #ddd",
       padding: theme.spacing(1),
-      margin: `${theme.spacing(1)}px 0`,
+      margin: `${theme.spacing(1)} 0`,
       borderRadius: 2,
     },
   };
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => {
 const validatePhone = (string) =>
   /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(string);
 
-const PersonCard = ({
+function PersonCard({
   title,
   name,
   email,
@@ -43,13 +44,13 @@ const PersonCard = ({
   division,
   otherDetails,
   className,
-}) => {
+}) {
   const classes = useStyles();
   const formattedPhone = useMemo(() => formatPhone(phone), [phone]);
   return (
     <div
       key={`${title}-${name}`}
-      className={`wkp-person-card ${classes.card}${` ${className}` || ''}`}
+      className={`wkp-person-card ${classes.card}${` ${className}` || ""}`}
     >
       {title && <Typography paragraph>{title}</Typography>}
       {name && (
@@ -58,7 +59,7 @@ const PersonCard = ({
             <PersonIcon />
           </div>
           <Typography>{`${name} ${
-            division ? ` (${division})` : ''
+            division ? ` (${division})` : ""
           }`}</Typography>
         </div>
       )}
@@ -68,7 +69,7 @@ const PersonCard = ({
             <PhoneIcon />
           </div>
           <Typography>
-            {validatePhone(formattedPhone.replace(/\s/g, '')) ? (
+            {validatePhone(formattedPhone.replace(/\s/g, "")) ? (
               <a href={`tel:${formattedPhone}`}>{formattedPhone}</a>
             ) : (
               <span>{formattedPhone}</span>
@@ -82,7 +83,7 @@ const PersonCard = ({
             <MailIcon />
           </div>
           <Typography>
-            <a href={`mailto:${email}`}>{(email || '-').toLowerCase()}</a>
+            <a href={`mailto:${email}`}>{(email || "-").toLowerCase()}</a>
           </Typography>
         </div>
       )}
@@ -96,7 +97,7 @@ const PersonCard = ({
       ))}
     </div>
   );
-};
+}
 
 PersonCard.propTypes = {
   name: PropTypes.string.isRequired,

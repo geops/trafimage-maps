@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for GeltungsbereicheLayer
@@ -11,7 +11,7 @@ class GeltungsbereicheLayer extends MapboxStyleLayer {
   getFeatureInfoAtCoordinate(coordinate) {
     const zoom = this.map?.getView().getZoom();
     this.mapboxLayer.hitTolerance = zoom < 15 ? 15 : 5;
-    const validPropertyName = this.get('validPropertyName');
+    const validPropertyName = this.get("validPropertyName");
 
     return super.getFeatureInfoAtCoordinate(coordinate).then((data) => {
       const featureInfo = {
@@ -37,10 +37,10 @@ class GeltungsbereicheLayer extends MapboxStyleLayer {
          */
         const feats = featureInfo.features.reduce((uniques, feature) => {
           // Geltungsbereiche topic BETA
-          if (feature.get('geltungsbereiche')) {
+          if (feature.get("geltungsbereiche")) {
             const isUnique = !uniques.find(
               (f) =>
-                f.get('geltungsbereiche') === feature.get('geltungsbereiche'),
+                f.get("geltungsbereiche") === feature.get("geltungsbereiche"),
             );
             return isUnique ? [...uniques, feature] : uniques;
           }

@@ -1,1 +1,1 @@
-export { default } from './GeltungsbereicheTopicInfo';
+export { default } from "./GeltungsbereicheTopicInfo";

@@ -1,9 +1,9 @@
-import i18n from 'i18next';
-import { defaults as defaultInteractions } from 'ol/interaction';
-import OLMap from 'ol/Map';
-import DragPan from 'ol/interaction/DragPan';
-import DblClickDragZoom from '../../ol/interaction/DblClickDragZoom';
-import DblPointerClickZoomOut from '../../ol/interaction/DblPointerClickZoomOut';
+import i18n from "i18next";
+import { defaults as defaultInteractions } from "ol/interaction";
+import OLMap from "ol/Map";
+import DragPan from "ol/interaction/DragPan";
+import DblClickDragZoom from "../../ol/interaction/DblClickDragZoom";
+import DblPointerClickZoomOut from "../../ol/interaction/DblPointerClickZoomOut";
 import {
   SET_TOPICS,
   SET_ACTIVE_TOPIC,
@@ -46,10 +46,10 @@ import {
   SET_REALTIME_KEY,
   SET_DISPLAY_MENU,
   SET_STOPS_URL,
-} from './actions';
+} from "./actions";
 
-import SearchService from '../../components/Search/SearchService';
-import { isOpenedByMapset } from '../../utils/redirectHelper';
+import SearchService from "../../components/Search/SearchService";
+import { isOpenedByMapset } from "../../utils/redirectHelper";
 
 const dftlInteractions = defaultInteractions({
   altShiftDragRotate: false,
@@ -71,10 +71,10 @@ const getInitialState = () => ({
   permissionInfos: null,
   topics: [],
   featureInfo: [],
-  language: 'de',
+  language: "de",
   projection: {
-    label: 'WGS 84',
-    value: 'EPSG:4326',
+    label: "WGS 84",
+    value: "EPSG:4326",
     format: (c) => c,
   },
   dialogPosition: { x: 390, y: 110 },
@@ -93,7 +93,7 @@ const getInitialState = () => ({
   destinationUrl: null,
   departuresUrl: null,
   apiKey: null,
-  apiKeyName: 'key',
+  apiKeyName: "key",
   showPopups: true,
   embeddded: false,
   consentGiven: false,
@@ -147,7 +147,7 @@ export default function app(state = getInitialState(), action) {
     case SET_SELECTED_FOR_INFOS:
       return {
         ...state,
-        dialogVisible: action.data ? 'infoDialog' : false,
+        dialogVisible: action.data ? "infoDialog" : false,
         selectedForInfos: action.data,
       };
     case SET_DIALOG_VISIBLE:

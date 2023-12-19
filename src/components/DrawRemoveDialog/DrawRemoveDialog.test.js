@@ -1,18 +1,19 @@
-import React from 'react';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { Layer } from 'mobility-toolbox-js/ol';
-import OLLayer from 'ol/layer/Vector';
-import { mount } from 'enzyme';
-import DrawRemoveDialog from '.';
+import React from "react";
 
-describe('DrawRemoveDialog', () => {
-  const mockStore = configureStore([thunk]);
+import { Provider } from "react-redux";
+
+import { Layer } from "mobility-toolbox-js/ol";
+import OLLayer from "ol/layer/Vector";
+import { ThemeProvider } from "@mui/material";
+import { render } from "@testing-library/react";
+import theme from "../../themes/default";
+import DrawRemoveDialog from ".";
+
+describe("DrawRemoveDialog", () => {
   let store;
 
   beforeEach(() => {
-    store = mockStore({
+    store = global.mockStore({
       app: {
         dialogPosition: {
           top: 0,
@@ -21,31 +22,35 @@ describe('DrawRemoveDialog', () => {
       },
       map: {
         drawlayer: new Layer({
-          name: 'test',
+          name: "test",
           olLayer: new OLLayer(),
           properties: {
-            description: 'description<br/>break',
+            description: "description<br/>break",
           },
         }),
       },
     });
   });
 
-  test('should match snapshot', () => {
-    const component = mount(
-      <Provider store={store}>
-        <DrawRemoveDialog />
-      </Provider>,
+  test("should match snapshot", () => {
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DrawRemoveDialog />
+        </Provider>
+      </ThemeProvider>,
     );
-    expect(component.html()).toMatchSnapshot();
+    expect(container.innerHTML).toMatchSnapshot();
   });
 
-  test('remove permalink on click on remove button', () => {
-    const wrapper = mount(
-      <Provider store={store}>
-        <DrawRemoveDialog />
-      </Provider>,
+  test("remove permalink on click on remove button", () => {
+    const { container } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <DrawRemoveDialog />
+        </Provider>
+      </ThemeProvider>,
     );
-    expect(wrapper.find('input').at(0).value).toBe();
+    expect(container.querySelector("input").value).toBe("");
   });
 });

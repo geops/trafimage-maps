@@ -1,11 +1,11 @@
-import React, { PureComponent, createRef } from 'react';
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import { FaCaretUp, FaCaretDown } from 'react-icons/fa';
-import Button from '../Button';
-import List from '../List';
+import React, { PureComponent, createRef } from "react";
+import ReactDOM from "react-dom";
+import PropTypes from "prop-types";
+import { FaCaretUp, FaCaretDown } from "react-icons/fa";
+import Button from "../Button";
+import List from "../List";
 
-import './IconList.scss';
+import "./IconList.scss";
 
 const propTypes = {
   disabled: PropTypes.bool,
@@ -49,7 +49,7 @@ class IconList extends PureComponent {
     };
 
     this.hideList = this.hideList.bind(this);
-    this.evtTypes = ['wheel', 'click', 'touchstart'];
+    this.evtTypes = ["wheel", "click", "touchstart"];
     this.mounted = false;
   }
 
@@ -119,7 +119,7 @@ class IconList extends PureComponent {
             height={iconSize.height}
             width={iconSize.width}
             draggable="false"
-            alt={t('Kein Bildtext')}
+            alt={t("Kein Bildtext")}
           />
         </div>
         {label}
@@ -155,7 +155,7 @@ class IconList extends PureComponent {
 
     if (displayOnTop) {
       const targetElements =
-        document.getElementsByClassName('tm-trafimage-maps');
+        document.getElementsByClassName("tm-trafimage-maps");
 
       if (!targetElements || !targetElements.length) {
         return null;

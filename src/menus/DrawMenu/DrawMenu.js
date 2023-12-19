@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { FaPencilAlt } from 'react-icons/fa';
-import MenuItem from '../../components/Menu/MenuItem';
-import Draw from '../../components/Draw';
-import { isOpenedByMapset } from '../../utils/redirectHelper';
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { FaPencilAlt } from "react-icons/fa";
+import MenuItem from "../../components/Menu/MenuItem";
+import Draw from "../../components/Draw";
+import { isOpenedByMapset } from "../../utils/redirectHelper";
 
 let shouldScroll = isOpenedByMapset();
 
@@ -45,7 +45,7 @@ function DrawMenu() {
       <MenuItem
         open
         className="wkp-draw-menu"
-        title={t('Zeichnen auf der Karte')}
+        title={t("Zeichnen auf der Karte")}
         icon={<FaPencilAlt focusable={false} />}
         collapsed={collapsed}
         onCollapseToggle={(c) => setCollapsed(c)}

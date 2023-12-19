@@ -1,1 +1,1 @@
-export { default } from './RegionenkarteIntersectionPopup';
+export { default } from "./RegionenkarteIntersectionPopup";

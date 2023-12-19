@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import Link from '../../components/Link';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import Link from "../../components/Link";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -47,8 +47,8 @@ const useStopPlaceData = (uic, cartaroUrl) => {
 };
 
 const formatYesNoData = (data) => {
-  if (data === 'YES') return 'Ja';
-  if (data === 'NO') return 'Nein';
+  if (data === "YES") return "Ja";
+  if (data === "NO") return "Nein";
   return data;
 };
 
@@ -56,20 +56,20 @@ function StopPlacePopup({ feature }) {
   const { t, i18n } = useTranslation();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const uic = useMemo(() => {
-    return feature?.get('uic');
+    return feature?.get("uic");
   }, [feature]);
   const { data, loading } = useStopPlaceData(uic, cartaroUrl);
   const renderContent = useCallback(
     ([key, value]) => {
-      if (key === 'ticketMachine') return null;
-      if (key === 'alternativeTransport') {
+      if (key === "ticketMachine") return null;
+      if (key === "alternativeTransport") {
         return (
           !/^NO|UNKNOWN$/.test(value?.state) && (
             <div key={key}>
               <fieldset>
                 <legend>{t(key)}</legend>
                 <br />
-                <div>{t('Shuttle-Fahrdienst')}</div>
+                <div>{t("Shuttle-Fahrdienst")}</div>
                 {value.note?.[i18n.language] && (
                   <>
                     <br />
@@ -84,7 +84,7 @@ function StopPlacePopup({ feature }) {
         );
       }
 
-      if (key === 'accessibility') {
+      if (key === "accessibility") {
         return (
           <div key={key}>
             <fieldset>
@@ -104,18 +104,18 @@ function StopPlacePopup({ feature }) {
         );
       }
 
-      if (key === 'note') {
+      if (key === "note") {
         return (
           value && (
             <div key={key}>
-              {typeof value === 'object' ? value?.[i18n.language] : value}
+              {typeof value === "object" ? value?.[i18n.language] : value}
               <br />
             </div>
           )
         );
       }
 
-      if (key === 'url') {
+      if (key === "url") {
         return (
           value && (
             <div key={key}>
@@ -126,7 +126,7 @@ function StopPlacePopup({ feature }) {
         );
       }
 
-      if (value && typeof value === 'object') {
+      if (value && typeof value === "object") {
         const entries = Object.entries(value);
         if (entries.length) {
           return (
@@ -147,7 +147,7 @@ function StopPlacePopup({ feature }) {
           <div key={key}>
             <div>
               {t(key)}: {t(formatYesNoData(value))}
-            </div>{' '}
+            </div>{" "}
             <br />
           </div>
         )
@@ -172,6 +172,6 @@ function StopPlacePopup({ feature }) {
 StopPlacePopup.propTypes = propTypes;
 
 const memoized = React.memo(StopPlacePopup);
-memoized.renderTitle = (feat) => feat.get('name');
+memoized.renderTitle = (feat) => feat.get("name");
 
 export default memoized;

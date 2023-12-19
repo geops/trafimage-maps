@@ -1,17 +1,17 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import GeoJSON from 'ol/format/GeoJSON';
-import qs from 'query-string';
-import OLMap from 'ol/Map';
-import { fromLonLat } from 'ol/proj';
-import RSPermalink from 'react-spatial/components/Permalink';
-import KML from 'react-spatial/utils/KML';
-import { Layer } from 'mobility-toolbox-js/ol';
-import LayerService from '../../utils/LayerService';
-import { setCenter, setZoom } from '../../model/map/actions';
-import { stationsLayer, platformsLayer } from '../../config/ch.sbb.netzkarte';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import GeoJSON from "ol/format/GeoJSON";
+import qs from "query-string";
+import OLMap from "ol/Map";
+import { fromLonLat } from "ol/proj";
+import RSPermalink from "react-spatial/components/Permalink";
+import KML from "react-spatial/utils/KML";
+import { Layer } from "mobility-toolbox-js/ol";
+import LayerService from "../../utils/LayerService";
+import { setCenter, setZoom } from "../../model/map/actions";
+import { stationsLayer, platformsLayer } from "../../config/ch.sbb.netzkarte";
 import {
   setDeparturesFilter,
   setFeatureInfo,
@@ -19,13 +19,13 @@ import {
   setDrawIds,
   setShowPopups,
   updateDrawEditLink,
-} from '../../model/app/actions';
+} from "../../model/app/actions";
 import {
   DRAW_PARAM,
   DRAW_OLD_PARAM,
   DRAW_REDIRECT_PARAM,
   MAPSET_PARENT_PARAM,
-} from '../../utils/constants';
+} from "../../utils/constants";
 
 const propTypes = {
   history: PropTypes.shape({
@@ -82,13 +82,13 @@ class Permalink extends PureComponent {
     const drawId = parameters[DRAW_PARAM] || wkpDraw;
 
     // if the draw.redirect parameter is true, that means we must redirect the page to mapset.
-    const mustRedirectToMapset = parameters[DRAW_REDIRECT_PARAM] === 'true';
+    const mustRedirectToMapset = parameters[DRAW_REDIRECT_PARAM] === "true";
     if (drawId && mustRedirectToMapset && mapsetUrl) {
       const params = qs.parse(window.location.search);
       params[DRAW_PARAM] = drawId;
       delete params[DRAW_REDIRECT_PARAM];
       window.location.href = `${mapsetUrl}?${MAPSET_PARENT_PARAM}=${encodeURIComponent(
-        `${window.location.href.split('?')[0]}?${qs.stringify(params)}`,
+        `${window.location.href.split("?")[0]}?${qs.stringify(params)}`,
       )}`;
     }
   }
@@ -129,7 +129,7 @@ class Permalink extends PureComponent {
         })
         .then((response) => response.text())
         .then((data) => {
-          if (data === 'detail') {
+          if (data === "detail") {
             // eslint-disable-next-line no-console
             console.warn(`The KML ${drawId} can't be loaded:`, data);
             return;
@@ -145,7 +145,6 @@ class Permalink extends PureComponent {
           const features = KML.readFeatures(
             newKmlString,
             map.getView().getProjection(),
-            map.getView().getResolution(),
           );
 
           // eslint-disable-next-line no-console
@@ -162,7 +161,7 @@ class Permalink extends PureComponent {
 
     const getUrlParamVal = (param) => {
       // Remove spaces from value.
-      return param ? param.replace(/\s+/g, '') : undefined;
+      return param ? param.replace(/\s+/g, "") : undefined;
     };
 
     const z = parseFloat(parameters.z);
@@ -190,7 +189,7 @@ class Permalink extends PureComponent {
     }
 
     if (parameters.showpopups) {
-      dispatchSetShowPopups(parameters.showpopups !== 'false');
+      dispatchSetShowPopups(parameters.showpopups !== "false");
     }
 
     const lineFilterKey = getUrlParamKey(parameters, /publishedlinename/i);
@@ -254,7 +253,7 @@ class Permalink extends PureComponent {
       this.loadDepartureOnce = false;
 
       // We need to wait until stations layer has been updated and rendered.
-      stationsLayer.once('datarendered', () => {
+      stationsLayer.once("datarendered", () => {
         this.openDepartureOnLoad();
       });
     }
@@ -270,10 +269,10 @@ class Permalink extends PureComponent {
     const { dispatchSetFeatureInfo } = this.props;
     const { mbMap } = stationsLayer.mapboxLayer;
 
-    const filter = ['all', ['==', ['get', 'sbb_id'], this.departures]];
+    const filter = ["all", ["==", ["get", "sbb_id"], this.departures]];
 
     if (this.platform) {
-      filter.push(['==', ['get', 'platform'], this.platform]);
+      filter.push(["==", ["get", "platform"], this.platform]);
     }
 
     const styleLayers = mbMap?.getStyle()?.layers || [];
@@ -298,9 +297,9 @@ class Permalink extends PureComponent {
     }
 
     const stationFeature = format.readFeature(departure, {
-      featureProjection: 'EPSG:3857',
+      featureProjection: "EPSG:3857",
     });
-    stationFeature.set('mapboxFeature', departure);
+    stationFeature.set("mapboxFeature", departure);
     const geometry = stationFeature.getGeometry();
 
     // Feature can be a Point, LineString or a Polygon.
@@ -313,7 +312,7 @@ class Permalink extends PureComponent {
     }
 
     // Tells the NetzkartePopup to display the DeparturesPopup
-    stationFeature.set('showDepartures', true);
+    stationFeature.set("showDepartures", true);
 
     dispatchSetFeatureInfo([
       {
@@ -372,12 +371,12 @@ class Permalink extends PureComponent {
         map={map}
         layers={!activeTopic.disablePermalinkLayers ? layers : undefined}
         history={history}
-        isBaseLayer={(l) => l.get('isBaseLayer')}
+        isBaseLayer={(l) => l.get("isBaseLayer")}
         isLayerHidden={(l) =>
-          l.get('hideInLegend') ||
+          l.get("hideInLegend") ||
           new LayerService(layers)
             .getParents(l)
-            .some((pl) => pl.get('hideInLegend'))
+            .some((pl) => pl.get("hideInLegend"))
         }
       />
     );

@@ -1,89 +1,89 @@
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
+import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 
 import {
   netzkarteLayer,
   netzkarteNight,
   stationsLayer,
   bahnhofplaene,
-} from '../ch.sbb.netzkarte';
+} from "../ch.sbb.netzkarte";
 
 export const handicapDataLayer = new TrafimageMapboxLayer({
-  name: 'ch.sbb.handicap.data',
+  name: "ch.sbb.handicap.data",
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_ch.sbb.handicap_v2',
+  style: "base_bright_v2_ch.sbb.handicap_v2",
   properties: {
     hideInLegend: true,
   },
   mapOptions: {
     preserveDrawingBuffer: true,
   },
-  group: 'data',
+  group: "data",
 });
 
 const barrierefrei = new MapboxStyleLayer({
-  name: 'ch.sbb.barrierfreierbahnhoefe',
+  name: "ch.sbb.barrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
-    return /^symbol.barrierfrei/.test(metadata?.['handicap.filter']);
+    return /^symbol.barrierfrei/.test(metadata?.["handicap.filter"]);
   },
   properties: {
     isQueryable: true,
     useOverlay: true,
-    popupComponent: 'StopPlacePopup',
+    popupComponent: "StopPlacePopup",
   },
 });
 
 const nichtBarrierefrei = new MapboxStyleLayer({
-  name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+  name: "ch.sbb.nichtbarrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
-    return /^symbol.nichtbarrierfrei/.test(metadata?.['handicap.filter']);
+    return /^symbol.nichtbarrierfrei/.test(metadata?.["handicap.filter"]);
   },
   properties: {
     isQueryable: true,
     useOverlay: true,
-    popupComponent: 'StopPlacePopup',
+    popupComponent: "StopPlacePopup",
   },
 });
 
 const teilBarrierefrei = new MapboxStyleLayer({
-  name: 'ch.sbb.teilbarrierfreierbahnhoefe',
+  name: "ch.sbb.teilbarrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
-    return /^symbol.teilbarrierfrei/.test(metadata?.['handicap.filter']);
+    return /^symbol.teilbarrierfrei/.test(metadata?.["handicap.filter"]);
   },
   properties: {
     isQueryable: true,
     useOverlay: true,
-    popupComponent: 'StopPlacePopup',
+    popupComponent: "StopPlacePopup",
   },
 });
 
 const shuttle = new MapboxStyleLayer({
-  name: 'ch.sbb.shuttle',
+  name: "ch.sbb.shuttle",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
-    return /^symbol.shuttle/.test(metadata?.['handicap.filter']);
+    return /^symbol.shuttle/.test(metadata?.["handicap.filter"]);
   },
   properties: {
     isQueryable: true,
     useOverlay: true,
-    popupComponent: 'StopPlacePopup',
+    popupComponent: "StopPlacePopup",
   },
 });
 
 const statusUnbekannt = new MapboxStyleLayer({
-  name: 'ch.sbb.status_unbekannt',
+  name: "ch.sbb.status_unbekannt",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
-    return /^symbol.statusunbekannt/.test(metadata?.['handicap.filter']);
+    return /^symbol.statusunbekannt/.test(metadata?.["handicap.filter"]);
   },
   properties: {
     isQueryable: true,
     useOverlay: true,
-    popupComponent: 'StopPlacePopup',
+    popupComponent: "StopPlacePopup",
   },
 });
 
@@ -154,11 +154,11 @@ export default [
   handicapDataLayer,
   netzkarteLayer.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'base_bright_v2_ch.sbb.handicap_v2',
+    style: "base_bright_v2_ch.sbb.handicap_v2",
   }),
   netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: 'base_dark_v2_ch.sbb.handicap_v2',
+    style: "base_dark_v2_ch.sbb.handicap_v2",
   }),
   // netzkarteAerial.clone({
   //   mapboxLayer: handicapDataLayer,

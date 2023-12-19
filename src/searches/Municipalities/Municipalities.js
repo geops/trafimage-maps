@@ -1,13 +1,13 @@
-import { Typography } from '@material-ui/core';
-import React from 'react';
+import { Typography } from "@mui/material";
+import React from "react";
 
-import Search from '../Search';
+import Search from "../Search";
 
 class Municipalities extends Search {
   constructor() {
     super();
     this.showInPlaceholder = false;
-    this.dataProjection = 'EPSG:2056';
+    this.dataProjection = "EPSG:2056";
   }
 
   // eslint-disable-next-line class-methods-use-this

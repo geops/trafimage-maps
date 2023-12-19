@@ -1,1 +1,1 @@
-export { default } from './ZweitausbildungAbroadPopup';
+export { default } from "./ZweitausbildungAbroadPopup";

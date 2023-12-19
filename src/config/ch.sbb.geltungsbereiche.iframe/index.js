@@ -3,7 +3,7 @@ import {
   geltungsbereicheHta,
   geltungsbereicheTk,
   geltungsbereicheGA,
-} from '../ch.sbb.geltungsbereiche.mvp';
+} from "../ch.sbb.geltungsbereiche.mvp";
 
 export default [
   geltungsbereicheDataLayer,

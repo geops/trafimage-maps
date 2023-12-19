@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { defineConfig } = require('cypress');
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
   requestTimeout: 20000,
@@ -13,7 +13,7 @@ module.exports = defineConfig({
     openMode: 0,
   },
   e2e: {
-    baseUrl: 'http://localhost:3000',
+    baseUrl: "http://localhost:3000",
     numTestsKeptInMemory: 0,
     chromeWebSecurity: false,
     video: false,
@@ -22,7 +22,7 @@ module.exports = defineConfig({
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
       // eslint-disable-next-line global-require, import/extensions
-      return require('./cypress/plugins/index.js')(on, config);
+      return require("./cypress/plugins/index.js")(on, config);
     },
   },
 });

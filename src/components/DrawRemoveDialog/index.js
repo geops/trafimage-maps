@@ -1,1 +1,1 @@
-export { default, NAME } from './DrawRemoveDialog';
+export { default, NAME } from "./DrawRemoveDialog";

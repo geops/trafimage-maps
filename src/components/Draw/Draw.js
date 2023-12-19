@@ -1,39 +1,38 @@
-import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { FaTrash, FaInfoCircle } from 'react-icons/fa';
-import { Grid, Typography, IconButton, makeStyles } from '@material-ui/core';
-import { useMatomo } from '@datapunt/matomo-tracker-react';
-import { setDialogVisible } from '../../model/app/actions';
-import DrawButton from '../DrawButton';
-import { NAME } from '../DrawRemoveDialog';
-import DrawPermalinkButton from '../DrawPermalinkButton';
-import { ReactComponent as PencilAdd } from '../../img/pencil_add.svg';
-import { TRACK_NEW_DRAW_ACTION } from '../../utils/constants';
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { FaTrash, FaInfoCircle } from "react-icons/fa";
+import { Grid, Typography, IconButton } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useMatomo } from "@jonkoops/matomo-tracker-react";
+import { setDialogVisible } from "../../model/app/actions";
+import DrawButton from "../DrawButton";
+import { NAME } from "../DrawRemoveDialog";
+import DrawPermalinkButton from "../DrawPermalinkButton";
+import { ReactComponent as PencilAdd } from "../../img/pencil_add.svg";
+import { TRACK_NEW_DRAW_ACTION } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(2),
   },
   buttons: {
-    display: 'flex',
-    marginBottom: theme.spacing(2),
+    display: "flex",
+    paddingLeft: 12,
+    gap: 24,
 
-    '& > a:first-child': {
-      paddingLeft: 0,
-    },
-    '& .MuiIconButton-root ': {
+    "& .MuiButtonBase-root": {
       height: 20,
-      paddingTop: 0,
-      paddingBottom: 0,
+      padding: 0,
     },
   },
   caption: {
-    display: 'flex',
-    alignItems: 'start',
+    display: "flex",
+    alignItems: "start",
+    gap: theme.spacing(1),
+    marginTop: theme.spacing(2),
   },
   infoIcon: {
-    marginRight: theme.spacing(1),
     flexShrink: 0,
     paddingTop: 3,
   },
@@ -65,9 +64,9 @@ function Draw() {
           >
             <PencilAdd focusable={false} />
           </DrawButton>
-          <DrawButton disabled={!drawIds} title={t('Zeichnung bearbeiten')} />
+          <DrawButton disabled={!drawIds} title={t("Zeichnung bearbeiten")} />
           <IconButton
-            title={t('Zeichnung löschen')}
+            title={t("Zeichnung löschen")}
             onClick={onRemoveClick}
             disabled={!drawIds}
           >
@@ -75,7 +74,7 @@ function Draw() {
           </IconButton>
           <DrawPermalinkButton
             buttonProps={{
-              title: t('Zeichnung teilen'),
+              title: t("Zeichnung teilen"),
               disabled: !drawIds,
             }}
           />
@@ -89,7 +88,7 @@ function Draw() {
             />
             <span>
               {t(
-                'Ihre Zeichnung wird ein Jahr lang gespeichert. Bitte speichernSie vor dem verlassen der Seite den Link zum Bearbeiten der Zeichnung.',
+                "Ihre Zeichnung wird ein Jahr lang gespeichert. Bitte speichernSie vor dem verlassen der Seite den Link zum Bearbeiten der Zeichnung.",
               )}
             </span>
           </Typography>

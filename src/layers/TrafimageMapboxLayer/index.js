@@ -1,1 +1,1 @@
-export { default } from './TrafimageMapboxLayer';
+export { default } from "./TrafimageMapboxLayer";

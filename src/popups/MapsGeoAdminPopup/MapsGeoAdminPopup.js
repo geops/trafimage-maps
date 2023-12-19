@@ -1,9 +1,9 @@
 /* eslint-disable react/no-danger */
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { useTranslation } from 'react-i18next';
-import { getId } from '../../utils/removeDuplicateFeatures';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { useTranslation } from "react-i18next";
+import { getId } from "../../utils/removeDuplicateFeatures";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -12,7 +12,7 @@ const propTypes = {
 function MapsGeoAdminPopup({ feature }) {
   const [popupHtml, setPopupHtml] = useState(null);
   const featureId = getId(feature);
-  const layer = feature.get('layer');
+  const layer = feature.get("layer");
   const { i18n } = useTranslation();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function MapsGeoAdminPopup({ feature }) {
       )
         .then((res) => res.text())
         .then((text) => {
-          const node = document.createElement('div');
+          const node = document.createElement("div");
           node.innerHTML = text;
           setPopupHtml(node);
         });
@@ -47,6 +47,6 @@ MapsGeoAdminPopup.propTypes = propTypes;
 
 const memoized = React.memo(MapsGeoAdminPopup);
 memoized.renderTitle = (feat, layer, t) =>
-  feat.get('name') || t('Informationen');
+  feat.get("name") || t("Informationen");
 
 export default memoized;

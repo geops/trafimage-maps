@@ -1,5 +1,5 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import { GeoJSON } from 'ol/format';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import { GeoJSON } from "ol/format";
 
 /**
  * Layer for zweitausbildung pois
@@ -15,17 +15,17 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     super({
       ...options,
       queryRenderedLayersFilter: ({ metadata }) => {
-        const mdValue = !!metadata && metadata['trafimage.filter'];
+        const mdValue = !!metadata && metadata["trafimage.filter"];
         return mdValue === sourceId && !/number/.test(mdValue);
       },
     });
     this.filter = filter;
     this.sourceId = sourceId;
-    this.highlightSourceId = 'highlight';
+    this.highlightSourceId = "highlight";
     this.updateTimeout = null;
     this.format = new GeoJSON({
-      dataProjection: 'EPSG:4326',
-      featureProjection: 'EPSG:3857',
+      dataProjection: "EPSG:4326",
+      featureProjection: "EPSG:3857",
     });
     this.onIdle = this.onIdle.bind(this);
   }
@@ -37,14 +37,14 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     super.attachToMap(map);
 
     this.olListenersKeys.push(
-      this.on('change:visible', () => {
+      this.on("change:visible", () => {
         this.updateClusterSource();
       }),
-      this.map.on('movestart', () => {
+      this.map.on("movestart", () => {
         window.clearTimeout(this.updateTimeout);
       }),
-      this.map.on('moveend', () => {
-        this.mapboxLayer.mbMap?.once('idle', this.onIdle);
+      this.map.on("moveend", () => {
+        this.mapboxLayer.mbMap?.once("idle", this.onIdle);
       }),
     );
   }
@@ -56,7 +56,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     window.clearTimeout(this.updateTimeout);
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
-      mbMap.off('idle', this.onIdle);
+      mbMap.off("idle", this.onIdle);
 
       [this.sourceId, this.highlightSourceId].forEach((id) => {
         const source = mbMap.getSource(id);
@@ -64,7 +64,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
           // Don't remove source just make it empty.
           // Because others layers during unmount still could rely on it.
           source.setData({
-            type: 'FeatureCollection',
+            type: "FeatureCollection",
             features: [],
           });
         }
@@ -105,8 +105,8 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
 
     let features;
     try {
-      features = mbMap.querySourceFeatures('ch.sbb.zweitausbildung_pois', {
-        sourceLayer: 'ch.sbb.zweitausbildung_pois',
+      features = mbMap.querySourceFeatures("ch.sbb.zweitausbildung_pois", {
+        sourceLayer: "ch.sbb.zweitausbildung_pois",
         filter: this.filter,
       });
     } catch (e) {
@@ -130,7 +130,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     });
 
     source.setData({
-      type: 'FeatureCollection',
+      type: "FeatureCollection",
       features: uniqueFeatures,
     });
   }
@@ -150,7 +150,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
     // Launch animation
     mbMap.setPaintProperty(
       this.highlightSourceId,
-      'circle-radius',
+      "circle-radius",
       toggle ? 14 : 0,
     );
   }

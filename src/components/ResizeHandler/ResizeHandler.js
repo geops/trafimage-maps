@@ -1,7 +1,7 @@
-import ReactDOM from 'react-dom';
-import { PureComponent, Component } from 'react';
-import PropTypes from 'prop-types';
-import ResizeObserver from 'resize-observer-polyfill';
+import ReactDOM from "react-dom";
+import { PureComponent, Component } from "react";
+import PropTypes from "prop-types";
+import ResizeObserver from "resize-observer-polyfill";
 
 const propTypes = {
   observe: PropTypes.oneOfType([
@@ -115,7 +115,7 @@ class ResizeHandler extends PureComponent {
           entry,
           maxWidthBrkpts,
           width,
-          'w',
+          "w",
         );
       }
       if (maxHeightBrkpts) {
@@ -123,7 +123,7 @@ class ResizeHandler extends PureComponent {
           entry,
           maxHeightBrkpts,
           height,
-          'h',
+          "h",
         );
       }
     }
@@ -141,7 +141,7 @@ class ResizeHandler extends PureComponent {
       return;
     }
 
-    if (typeof observe === 'string' || observe instanceof String) {
+    if (typeof observe === "string" || observe instanceof String) {
       this.nodes = document.querySelectorAll(observe);
     } else if (observe instanceof Component) {
       // eslint-disable-next-line react/no-find-dom-node

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const comps = {
   de: (
@@ -87,13 +87,13 @@ const comps = {
       <p>
         <b className="ng-binding">öV-Netzkarte Schweiz.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
         <b className="ng-binding">Bauprojekte Bahninfrastruktur.</b>
         <br />
-        Kommunikation SBB Infrastruktur,{' '}
+        Kommunikation SBB Infrastruktur,{" "}
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -101,13 +101,13 @@ const comps = {
       <p>
         <b className="ng-binding">Eisenbahninfrastruktur Schweiz.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
         <b className="ng-binding">Koordinatoren Bahnnahes Bauen.</b>
         <br />
-        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,{' '}
+        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,{" "}
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>
@@ -204,7 +204,7 @@ const comps = {
       <p>
         <b className="ng-binding">Carte du réseau des TP suisses.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@cff.ch">trafimage@cff.ch</a>
       </p>
       <p>
@@ -212,7 +212,7 @@ const comps = {
           Projet de construction de l&apos;infrastructure ferroviaire.
         </b>
         <br />
-        Communication CFF Infrastructure,{' '}
+        Communication CFF Infrastructure,{" "}
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -220,7 +220,7 @@ const comps = {
       <p>
         <b className="ng-binding">Infrastructure ferroviaire suisse.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -228,7 +228,7 @@ const comps = {
           Coordinateurs travaux à proximité des voies.
         </b>
         <br />
-        CFF Infrastructure, Installations &amp; Technologie, Surveillance,{' '}
+        CFF Infrastructure, Installations &amp; Technologie, Surveillance,{" "}
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>
@@ -325,7 +325,7 @@ const comps = {
       <p>
         <b className="ng-binding">Swiss public transport network map.</b>
         <br />
-        Trafimage System Manager Daniel Hofstetter,{' '}
+        Trafimage System Manager Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -333,7 +333,7 @@ const comps = {
           Railway infrastructure construction projects.
         </b>
         <br />
-        Communications at SBB Infrastructure,{' '}
+        Communications at SBB Infrastructure,{" "}
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -341,7 +341,7 @@ const comps = {
       <p>
         <b className="ng-binding">Railway infrastructure in Switzerland.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -349,7 +349,7 @@ const comps = {
           Coordinators for construction work near railways.
         </b>
         <br />
-        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,{' '}
+        SBB Infrastruktur, Anlagen&amp;Technologie, Überwachung,{" "}
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>
@@ -448,7 +448,7 @@ const comps = {
           Carta di rete dei trasporti pubblici svizzeri.
         </b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@ffs.ch">trafimage@ffs.ch</a>
       </p>
       <p>
@@ -456,7 +456,7 @@ const comps = {
           Progetti di costruzione dell&apos;infrastruttura ferroviaria.
         </b>
         <br />
-        Comunicazione FFS Infrastruttura,{' '}
+        Comunicazione FFS Infrastruttura,{" "}
         <a href="mailto:Kommunikation-Infrastruktur@sbb.ch">
           Kommunikation-Infrastruktur@sbb.ch
         </a>
@@ -464,7 +464,7 @@ const comps = {
       <p>
         <b className="ng-binding">Infrastruttura ferroviaria Svizzera.</b>
         <br />
-        Fachbus Trafimage, Daniel Hofstetter,{' '}
+        Fachbus Trafimage, Daniel Hofstetter,{" "}
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>
       </p>
       <p>
@@ -472,7 +472,7 @@ const comps = {
           Coordinatori Costruzioni in prossimità della ferrovia.
         </b>
         <br />
-        FFS Infrastruttura, Impianti&amp;Tecnologia, Sorveglianza,{' '}
+        FFS Infrastruttura, Impianti&amp;Tecnologia, Sorveglianza,{" "}
         <a href="mailto:ueberwachung@sbb.ch">ueberwachung@sbb.ch</a>
       </p>
       <p>

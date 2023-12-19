@@ -1,1 +1,1 @@
-export { default } from './BeleuchtungLayerInfo';
+export { default } from "./BeleuchtungLayerInfo";

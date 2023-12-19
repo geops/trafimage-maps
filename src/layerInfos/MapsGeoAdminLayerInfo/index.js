@@ -1,1 +1,1 @@
-export { default } from './MapsGeoAdminLayerInfo';
+export { default } from "./MapsGeoAdminLayerInfo";

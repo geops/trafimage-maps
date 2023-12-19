@@ -1,1 +1,1 @@
-export { default } from './DvTopicInfo';
+export { default } from "./DvTopicInfo";
