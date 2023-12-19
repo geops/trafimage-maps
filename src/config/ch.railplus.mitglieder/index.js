@@ -1,14 +1,14 @@
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import RailplusLayer from '../../layers/RailplusLayer';
-import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
+import RailplusLayer from "../../layers/RailplusLayer";
+import { FORCE_EXPORT_PROPERTY } from "../../utils/constants";
 
-export const MD_RAILPLUS_FILTER = 'railplus.filter';
+export const MD_RAILPLUS_FILTER = "railplus.filter";
 
 export const netzkarteRailplus = new TrafimageMapboxLayer({
-  name: 'ch.railplus.mitglieder.data',
+  name: "ch.railplus.mitglieder.data",
   visible: true,
   zIndex: -1,
-  style: 'base_bright_v2_ch.railplus.meterspurbahnen',
+  style: "base_bright_v2_ch.railplus.meterspurbahnen",
   properties: {
     hideInLegend: true,
     isBaseLayer: true,
@@ -19,21 +19,21 @@ export const netzkarteRailplus = new TrafimageMapboxLayer({
 });
 
 export const railplusMeterspurbahnen = new RailplusLayer({
-  name: 'ch.railplus.mitglieder.meterspur',
+  name: "ch.railplus.mitglieder.meterspur",
   visible: true,
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) =>
     /^line$/.test(metadata?.[MD_RAILPLUS_FILTER]),
   properties: {
     isQueryable: true,
-    popupComponent: 'RailplusPopup',
+    popupComponent: "RailplusPopup",
     hideInLegend: true,
     useOverlay: true,
   },
 });
 
 export const railplusMeterspurbahnenPrint = new RailplusLayer({
-  name: 'ch.railplus.mitglieder.meterspur.print',
+  name: "ch.railplus.mitglieder.meterspur.print",
   visible: false,
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) =>
@@ -45,7 +45,7 @@ export const railplusMeterspurbahnenPrint = new RailplusLayer({
 });
 
 export const railplusMeterspurbahnenFlags = new RailplusLayer({
-  name: 'ch.railplus.mitglieder.meterspur.flags',
+  name: "ch.railplus.mitglieder.meterspur.flags",
   visible: true,
   mapboxLayer: netzkarteRailplus,
   styleLayersFilter: ({ metadata }) => {

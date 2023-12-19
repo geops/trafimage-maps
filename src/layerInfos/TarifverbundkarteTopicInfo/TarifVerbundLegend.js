@@ -1,18 +1,18 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
 
-import TarifverbundPartner from '../../components/TarifverbundPartner';
-import useFetch from '../../utils/useFetch';
-import useIsMobile from '../../utils/useIsMobile';
+import TarifverbundPartner from "../../components/TarifverbundPartner";
+import useFetch from "../../utils/useFetch";
+import useIsMobile from "../../utils/useIsMobile";
 
 const useStyles = makeStyles(() => {
   return {
     legend: {
-      display: 'grid',
+      display: "grid",
       gridTemplateColumns: (props) =>
-        props.isMobile ? '1fr 1fr' : '200px 200px',
+        props.isMobile ? "1fr 1fr" : "200px 200px",
       gap: 5,
     },
   };
@@ -35,7 +35,7 @@ function TarifVerbundLegend() {
 
   return (
     <div className={classes.legend} data-testid="tarifverbund-legend-container">
-      {loading ? `${t('Wird geladen')}...` : null}
+      {loading ? `${t("Wird geladen")}...` : null}
       {!loading && (verbunde || []).length ? (
         <>
           {verbunde.map((v) => (
@@ -48,7 +48,7 @@ function TarifVerbundLegend() {
           <TarifverbundPartner
             style={{
               background:
-                'repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)',
+                "repeating-linear-gradient(45deg, transparent, transparent 2px, #bd9189 2px, #bd9189 4px)",
             }}
             label="Z-Pass"
           />

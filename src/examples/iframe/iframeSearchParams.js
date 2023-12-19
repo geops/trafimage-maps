@@ -1,23 +1,23 @@
-import React from 'react';
-import topics from '../../config/topics';
+import React from "react";
+import topics from "../../config/topics";
 
 const defaultPermalinkParams = [
   {
-    name: 'topic',
-    type: 'string',
-    comp: 'select',
+    name: "topic",
+    type: "string",
+    comp: "select",
     pathname: true,
-    defaultValue: 'ch.sbb.netzkarte',
+    defaultValue: "ch.sbb.netzkarte",
     values: topics.wkp.map((t) => t.key),
     description: () => {
       return <span>Topic to display</span>;
     },
   },
   {
-    name: 'baselayers',
-    type: 'string',
-    comp: 'select',
-    defaultValue: '',
+    name: "baselayers",
+    type: "string",
+    comp: "select",
+    defaultValue: "",
     values: [],
     description: () => {
       return (
@@ -29,10 +29,10 @@ const defaultPermalinkParams = [
     },
   },
   {
-    name: 'layers',
-    type: 'array<string>',
-    comp: 'select',
-    defaultValue: '',
+    name: "layers",
+    type: "array<string>",
+    comp: "select",
+    defaultValue: "",
     values: [],
     description: () => {
       return (
@@ -44,24 +44,24 @@ const defaultPermalinkParams = [
     },
   },
   {
-    name: 'disabled',
-    type: 'array<string>',
-    defaultValue: '',
-    comp: 'select',
+    name: "disabled",
+    type: "array<string>",
+    defaultValue: "",
+    comp: "select",
     values: [
-      'baseLayerSwitcher',
-      'drawMenu',
-      'exportMenu',
-      'footer',
-      'geolocationButton',
-      'header',
-      'mapControls',
-      'menu',
-      'overlay',
-      'permalink',
-      'shareMenu',
-      'search',
-      'trackerMenu',
+      "baseLayerSwitcher",
+      "drawMenu",
+      "exportMenu",
+      "footer",
+      "geolocationButton",
+      "header",
+      "mapControls",
+      "menu",
+      "overlay",
+      "permalink",
+      "shareMenu",
+      "search",
+      "trackerMenu",
     ],
     description: () => {
       return (
@@ -90,20 +90,20 @@ const defaultPermalinkParams = [
     },
   },
   {
-    name: 'lang',
-    type: 'string',
-    comp: 'select',
-    defaultValue: 'de',
-    values: ['de', 'fr', 'it', 'en'],
+    name: "lang",
+    type: "string",
+    comp: "select",
+    defaultValue: "de",
+    values: ["de", "fr", "it", "en"],
     description: () => {
       return <span>Language of the application.</span>;
     },
-    props: { type: 'text' },
+    props: { type: "text" },
   },
   {
-    name: 'x',
-    type: 'number',
-    comp: 'input',
+    name: "x",
+    type: "number",
+    comp: "input",
     defaultValue: 925472,
     description: () => {
       return (
@@ -111,12 +111,12 @@ const defaultPermalinkParams = [
         <span>x coordinate of the map's center in Mercator projection.</span>
       );
     },
-    props: { type: 'number' },
+    props: { type: "number" },
   },
   {
-    name: 'y',
-    type: 'number',
-    comp: 'input',
+    name: "y",
+    type: "number",
+    comp: "input",
     defaultValue: 5920000,
     description: () => {
       return (
@@ -124,18 +124,18 @@ const defaultPermalinkParams = [
         <span>y coordinate of the map's center in Mercator projection.</span>
       );
     },
-    props: { type: 'number' },
+    props: { type: "number" },
   },
   {
-    name: 'z',
-    type: 'number',
-    comp: 'input',
+    name: "z",
+    type: "number",
+    comp: "input",
     defaultValue: 9,
     description: () => {
       return <span>Zoom level.</span>;
     },
     props: {
-      type: 'number',
+      type: "number",
       inputProps: {
         min: 0,
         max: 20,
@@ -143,9 +143,9 @@ const defaultPermalinkParams = [
     },
   },
   {
-    name: 'embedded',
-    type: 'boolean',
-    comp: 'checkbox',
+    name: "embedded",
+    type: "boolean",
+    comp: "checkbox",
     defaultValue: false,
     description: () => {
       return (
@@ -156,7 +156,7 @@ const defaultPermalinkParams = [
       );
     },
     props: {
-      type: 'checkbox',
+      type: "checkbox",
     },
   },
 ];

@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Contact from './Contact';
-import Legal from './Legal';
-import Imprint from './Imprint';
+import React from "react";
+import PropTypes from "prop-types";
+import Contact from "./Contact";
+import Legal from "./Legal";
+import Imprint from "./Imprint";
 
 const kontakt = Contact;
 const rechtliches = Legal;
@@ -21,13 +21,13 @@ const propTypes = {
 
 const defaultProps = {
   doc: Object.keys(docs)[0],
-  language: 'de',
+  language: "de",
 };
 
-const LegalLines = ({ language, doc }) => {
+function LegalLines({ language, doc }) {
   const Comp = docs[doc];
   return <Comp language={language} />;
-};
+}
 
 LegalLines.propTypes = propTypes;
 LegalLines.defaultProps = defaultProps;

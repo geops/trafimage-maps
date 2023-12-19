@@ -1,57 +1,55 @@
-import React from 'react';
-import { getCenter } from 'ol/extent';
-import './proj4';
-import tarifverbundkarteLegend from '../img/tarifverbund_legend.svg';
-import railplusLegendDe from '../img/railplus_legend_de.svg';
-import railplusLegendFr from '../img/railplus_legend_fr.svg';
-import railplusLegendIt from '../img/railplus_legend_it.svg';
-import energieLegendPub from '../img/energie_legend_pub.svg';
-import railPlusLayers from './ch.railplus.mitglieder';
+import React from "react";
+import "./proj4";
+import tarifverbundkarteLegend from "../img/tarifverbund_legend.url.svg";
+import railplusLegendDe from "../img/railplus_legend_de.url.svg";
+import railplusLegendFr from "../img/railplus_legend_fr.url.svg";
+import railplusLegendIt from "../img/railplus_legend_it.url.svg";
+import energieLegendPub from "../img/energie_legend_pub.url.svg";
+import railPlusLayers from "./ch.railplus.mitglieder";
 import netzkarteLayers, {
   dataLayer,
   netzkarteLayer,
   stationsLayer,
   bahnhofplaene,
-} from './ch.sbb.netzkarte';
-import constructionLayers from './ch.sbb.construction';
-import handicapLayers from './ch.sbb.handicap';
-import casaLayers from './ch.sbb.casa';
+} from "./ch.sbb.netzkarte";
+import constructionLayers from "./ch.sbb.construction";
+import handicapLayers from "./ch.sbb.handicap";
 import infrastrukturLayers, {
   netzkarteEisenbahninfrastruktur,
   betriebsRegionenVisible,
-} from './ch.sbb.infrastruktur';
-import energieLayers from './ch.sbb.energie';
-import tarifverbundkarteLayers from './ch.sbb.tarifverbundkarte.public';
-import regionenkarteLayers from './ch.sbb.regionenkarte.public';
-import netzentwicklungLayers from './ch.sbb.netzentwicklung';
-import beleuchtungLayers from './ch.sbb.beleuchtungsstaerken';
-import isbLayers from './ch.sbb.isb';
-import sandboxLayers from './ch.sbb.netzkarte.sandbox';
-import zweitausbildungLayers from './ch.sbb.zweitausbildung';
-import geltungsbereicheMvpLayers from './ch.sbb.geltungsbereiche.mvp';
-import geltungsbereicheIframeLayers from './ch.sbb.geltungsbereiche.iframe';
-import stsLayers from './ch.sbb.sts';
-import dvLayers from './ch.sbb.direktverbindungen';
-import defaultSearches, { handicapStopFinder } from './searches';
-import GeltungsbereicheTopicMenu from '../menus/GeltungsbereicheTopicMenu';
-import StsMenu from '../menus/StsMenu';
+} from "./ch.sbb.infrastruktur";
+import energieLayers from "./ch.sbb.energie";
+import tarifverbundkarteLayers from "./ch.sbb.tarifverbundkarte.public";
+import regionenkarteLayers from "./ch.sbb.regionenkarte.public";
+import netzentwicklungLayers from "./ch.sbb.netzentwicklung";
+import beleuchtungLayers from "./ch.sbb.beleuchtungsstaerken";
+import isbLayers from "./ch.sbb.isb";
+import sandboxLayers from "./ch.sbb.netzkarte.sandbox";
+import zweitausbildungLayers from "./ch.sbb.zweitausbildung";
+import geltungsbereicheMvpLayers from "./ch.sbb.geltungsbereiche.mvp";
+import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
+import stsLayers from "./ch.sbb.sts";
+import dvLayers from "./ch.sbb.direktverbindungen";
+import defaultSearches, { handicapStopFinder } from "./searches";
+import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
+import StsMenu from "../menus/StsMenu";
 import {
   DV_KEY,
   PDF_DOWNLOAD_EVENT_TYPE,
   RAILPLUS_EXPORTBTN_ID,
-} from '../utils/constants';
-import DvMenu from '../menus/DirektverbindungenMenu/DvMenu';
-import DvListButton from './ch.sbb.direktverbindungen/DvListButton';
-import applPermalinkVisiblity from '../utils/applyPermalinkVisibility';
-import RailplusMenu from '../menus/RailplusMenu';
-import RailplusExportButton from './ch.railplus.mitglieder/RailplusExportButton';
+} from "../utils/constants";
+import DvMenu from "../menus/DirektverbindungenMenu/DvMenu";
+import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
+import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
+import RailplusMenu from "../menus/RailplusMenu";
+import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
 
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
   casaNetzkarteLayerWithLabels,
   casaNetzkarteLayerWithoutLabels,
-} from './ch.sbb.casa';
+} from "./ch.sbb.casa";
 
 export const defaultElements = {
   header: true,
@@ -68,8 +66,8 @@ export const defaultElements = {
 };
 
 export const netzkarte = {
-  name: 'ch.sbb.netzkarte.topic',
-  key: 'ch.sbb.netzkarte',
+  name: "ch.sbb.netzkarte.topic",
+  key: "ch.sbb.netzkarte",
   elements: {
     ...defaultElements,
     popup: true,
@@ -77,57 +75,38 @@ export const netzkarte = {
     trackerMenu: true,
   },
   layers: netzkarteLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'NetzkarteTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "NetzkarteTopicInfo",
   searches: defaultSearches,
 };
 
 export const handicap = {
-  name: 'ch.sbb.handicap',
-  key: 'ch.sbb.handicap',
+  name: "ch.sbb.handicap",
+  key: "ch.sbb.handicap",
   elements: {
     ...defaultElements,
     shareMenu: true,
     popup: true,
   },
   layers: handicapLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'HandicapTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "HandicapTopicInfo",
   searches: {
     Stationen: handicapStopFinder,
   },
 };
 
 export const netzkarteStelen = {
-  name: 'ch.sbb.netzkarte.topic',
-  key: 'ch.sbb.netzkarte',
+  name: "ch.sbb.netzkarte.topic",
+  key: "ch.sbb.netzkarte",
   layers: [dataLayer, netzkarteLayer, stationsLayer, bahnhofplaene],
   elements: {},
-  projection: 'EPSG:3857',
-};
-
-export const casa = {
-  name: 'CASA',
-  key: 'ch.sbb.casa',
-  layers: casaLayers,
-  projection: 'EPSG:3857',
-  popupConfig: {
-    getPopupCoordinates: (feature, map) => {
-      const mapCenter = getCenter(map.getView().calculateExtent());
-      return feature.getGeometry().getClosestPoint(mapCenter);
-    },
-  },
-  elements: {
-    menu: true,
-    popup: true,
-    permalink: false,
-    baseLayerSwitcher: true,
-  },
+  projection: "EPSG:3857",
 };
 
 export const bauprojekte = {
-  name: 'ch.sbb.construction',
-  key: 'ch.sbb.construction',
+  name: "ch.sbb.construction",
+  key: "ch.sbb.construction",
   elements: {
     ...defaultElements,
     shareMenu: true,
@@ -136,14 +115,14 @@ export const bauprojekte = {
     filters: true,
   },
   layers: constructionLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'ConstructionTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "ConstructionTopicInfo",
   searches: defaultSearches,
 };
 
 export const infrastruktur = {
-  name: 'ch.sbb.infrastruktur',
-  key: 'ch.sbb.infrastruktur',
+  name: "ch.sbb.infrastruktur",
+  key: "ch.sbb.infrastruktur",
   maxZoom: 14,
   elements: {
     ...defaultElements,
@@ -151,14 +130,14 @@ export const infrastruktur = {
     popup: true,
   },
   layers: infrastrukturLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'InfrastrukturTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "InfrastrukturTopicInfo",
   searches: defaultSearches,
 };
 
 export const betriebsregionen = {
-  name: 'ch.sbb.infrastruktur',
-  key: 'ch.sbb.infrastruktur',
+  name: "ch.sbb.infrastruktur",
+  key: "ch.sbb.infrastruktur",
   elements: {
     ...defaultElements,
     header: false,
@@ -167,12 +146,12 @@ export const betriebsregionen = {
     popup: true,
   },
   layers: [netzkarteEisenbahninfrastruktur, betriebsRegionenVisible],
-  projection: 'EPSG:3857',
+  projection: "EPSG:3857",
 };
 
 export const regionenkartePublic = {
-  name: 'ch.sbb.regionenkarte.public',
-  key: 'ch.sbb.regionenkarte.public',
+  name: "ch.sbb.regionenkarte.public",
+  key: "ch.sbb.regionenkarte.public",
   maxZoom: 13,
   elements: {
     ...defaultElements,
@@ -180,23 +159,23 @@ export const regionenkartePublic = {
     overlay: true,
   },
   layers: regionenkarteLayers,
-  layerInfoComponent: 'RegionenkartePublicTopicInfo',
+  layerInfoComponent: "RegionenkartePublicTopicInfo",
   searches: defaultSearches,
 };
 
 export const tarifverbundkarte = {
-  name: 'ch.sbb.tarifverbundkarte.public',
-  key: 'ch.sbb.tarifverbundkarte.public',
-  layerInfoComponent: 'TarifverbundkarteTopicInfo',
+  name: "ch.sbb.tarifverbundkarte.public",
+  key: "ch.sbb.tarifverbundkarte.public",
+  layerInfoComponent: "TarifverbundkarteTopicInfo",
   layers: tarifverbundkarteLayers,
   maxZoom: 12,
   exportConfig: {
     getTemplateValues: () => ({
-      publisher: 'tobias.hauser@sbb.ch',
-      publishedAt: '12/2022',
-      dateDe: '12.12.2022',
-      dateFr: '12.12.2022',
-      year: '2022',
+      publisher: "tobias.hauser@sbb.ch",
+      publishedAt: "12/2022",
+      dateDe: "12.12.2022",
+      dateFr: "12.12.2022",
+      year: "2022",
     }),
     getOverlayImageUrl: () => tarifverbundkarteLegend,
   },
@@ -212,41 +191,41 @@ export const tarifverbundkarte = {
 };
 
 export const zweitausbildung = {
-  name: 'ch.sbb.zweitausbildung',
-  key: 'ch.sbb.zweitausbildung',
+  name: "ch.sbb.zweitausbildung",
+  key: "ch.sbb.zweitausbildung",
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: zweitausbildungLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'ZweitausbildungTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "ZweitausbildungTopicInfo",
   searches: defaultSearches,
 };
 
 export const netzentwicklung = {
-  name: 'ch.sbb.netzentwicklung',
-  key: 'ch.sbb.netzentwicklung',
+  name: "ch.sbb.netzentwicklung",
+  key: "ch.sbb.netzentwicklung",
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true, overlay: true },
   layers: netzentwicklungLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'NetzentwicklungTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "NetzentwicklungTopicInfo",
   searches: defaultSearches,
 };
 
 export const beleuchtungsstaerken = {
-  name: 'ch.sbb.beleuchtungsstaerken',
-  key: 'ch.sbb.beleuchtungsstaerken',
+  name: "ch.sbb.beleuchtungsstaerken",
+  key: "ch.sbb.beleuchtungsstaerken",
   maxZoom: 13,
   elements: { ...defaultElements, shareMenu: true, popup: true },
   layers: beleuchtungLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'BeleuchtungTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "BeleuchtungTopicInfo",
   searches: defaultSearches,
 };
 
 export const energiePublic = {
-  name: 'ch.sbb.energie',
-  key: 'ch.sbb.energie',
+  name: "ch.sbb.energie",
+  key: "ch.sbb.energie",
   maxZoom: 14,
   elements: {
     ...defaultElements,
@@ -257,7 +236,7 @@ export const energiePublic = {
   },
   exportConfig: {
     getTemplateValues: () => ({
-      publisher: 'I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch',
+      publisher: "I-EN-DAE-OAN-BUI, trassensicherung-energie@sbb.ch",
       publishedAt: () => {
         const date = new Date();
         return `${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -267,14 +246,14 @@ export const energiePublic = {
     getOverlayImageUrl: () => energieLegendPub,
   },
   layers: energieLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'EnergiePublicTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "EnergiePublicTopicInfo",
   searches: defaultSearches,
 };
 
 export const isb = {
-  name: 'ch.sbb.isb',
-  key: 'ch.sbb.isb',
+  name: "ch.sbb.isb",
+  key: "ch.sbb.isb",
   maxZoom: 14,
   elements: {
     ...defaultElements,
@@ -282,26 +261,26 @@ export const isb = {
     popup: true,
   },
   layers: isbLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'IsbTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "IsbTopicInfo",
   searches: defaultSearches,
 };
 
 const sandbox = {
-  name: 'ch.sbb.netzkarte.sandbox',
-  key: 'ch.sbb.netzkarte.sandbox',
+  name: "ch.sbb.netzkarte.sandbox",
+  key: "ch.sbb.netzkarte.sandbox",
   layers: sandboxLayers,
-  projection: 'EPSG:3857',
+  projection: "EPSG:3857",
   elements: {
     ...defaultElements,
   },
-  layerInfoComponent: 'SandboxTopicInfo',
+  layerInfoComponent: "SandboxTopicInfo",
   searches: defaultSearches,
 };
 
 export const geltungsbereicheMvp = {
-  name: 'ch.sbb.geltungsbereiche',
-  key: 'ch.sbb.geltungsbereiche',
+  name: "ch.sbb.geltungsbereiche",
+  key: "ch.sbb.geltungsbereiche",
   elements: {
     ...defaultElements,
     popup: true,
@@ -309,8 +288,8 @@ export const geltungsbereicheMvp = {
   },
   maxZoom: 14,
   layers: geltungsbereicheMvpLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'GeltungsbereicheTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "GeltungsbereicheTopicInfo",
   searches: defaultSearches,
 };
 
@@ -328,7 +307,7 @@ export const geltungsbereicheIframe = {
     footer: false,
     menu: false,
   },
-  key: 'ch.sbb.geltungsbereiche-iframe',
+  key: "ch.sbb.geltungsbereiche-iframe",
   layers: geltungsbereicheIframeLayers,
   only: true,
   hideInLayerTree: true,
@@ -336,8 +315,8 @@ export const geltungsbereicheIframe = {
 };
 
 export const sts = {
-  name: 'ch.sbb.sts',
-  key: 'ch.sbb.sts',
+  name: "ch.sbb.sts",
+  key: "ch.sbb.sts",
   elements: {
     ...defaultElements,
     overlay: false,
@@ -361,7 +340,7 @@ export const sts = {
   center: [915788.3813658276, 5909670.533831286],
   zoom: 8,
   constrainOnlyCenter: true,
-  overlaySide: 'left',
+  overlaySide: "left",
 };
 
 export const direktverbindungen = {
@@ -376,8 +355,8 @@ export const direktverbindungen = {
   maxZoom: 13,
   minZoom: 6,
   layers: dvLayers,
-  projection: 'EPSG:3857',
-  layerInfoComponent: 'DvTopicInfo',
+  projection: "EPSG:3857",
+  layerInfoComponent: "DvTopicInfo",
   searches: defaultSearches,
   mapControls: <DvListButton />,
 };
@@ -408,7 +387,7 @@ export const direktverbindungenIframe = {
   hideInLayerTree: true,
   menu: <DvMenu />,
   mapControls: <DvListButton />,
-  overlaySide: 'left',
+  overlaySide: "left",
 };
 
 export const railPlus = {
@@ -425,7 +404,7 @@ export const railPlus = {
     footer: false,
     menu: false,
   },
-  key: 'ch.railplus.mitglieder',
+  key: "ch.railplus.mitglieder",
   layers: railPlusLayers,
   only: true,
   hideInLayerTree: true,
@@ -433,7 +412,7 @@ export const railPlus = {
   mapControls: <RailplusExportButton />,
   menu: <RailplusMenu />,
   embedded: true,
-  overlaySide: 'left',
+  overlaySide: "left",
   messageEvents: [
     {
       eventType: PDF_DOWNLOAD_EVENT_TYPE,
@@ -442,21 +421,21 @@ export const railPlus = {
   ],
   exportConfig: {
     getTemplateValues: () => ({
-      publishedAt: '11/2023',
-      year: '2023',
+      publishedAt: "11/2023",
+      year: "2023",
     }),
     getOverlayImageUrl: (lang) => {
       switch (lang) {
-        case 'fr':
+        case "fr":
           return railplusLegendFr;
-        case 'it':
+        case "it":
           return railplusLegendIt;
         default:
           return railplusLegendDe;
       }
     },
     getExportFileName: (lang, t) =>
-      `RAILplus ${t('Streckennetz')} ${new Date().toISOString().slice(0, 10)}`,
+      `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,
 };

@@ -1,1 +1,1 @@
-export { default } from './NetzkarteTopicInfo';
+export { default } from "./NetzkarteTopicInfo";

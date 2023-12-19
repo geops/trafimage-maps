@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import useIndexedFeatureInfo from './useIndexedFeatureInfo';
-import useIsMobile from './useIsMobile';
-import panCenterFeature from './panCenterFeature';
-import highlightPointFeatures from './highlightPointFeatures';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import useIndexedFeatureInfo from "./useIndexedFeatureInfo";
+import useIsMobile from "./useIsMobile";
+import panCenterFeature from "./panCenterFeature";
+import highlightPointFeatures from "./highlightPointFeatures";
 
 const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
   const map = useSelector((state) => state.app.map);

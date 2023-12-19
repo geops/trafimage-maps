@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
 
 const propTypes = {
   language: PropTypes.string.isRequired,
@@ -9,7 +9,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-const InfoFPWTopicInfo = ({ language, t }) => {
+function InfoFPWTopicInfo({ language, t }) {
   const desc = {
     de: (
       <p>
@@ -35,14 +35,14 @@ const InfoFPWTopicInfo = ({ language, t }) => {
     <div>
       {desc[language] ? desc[language] : desc.de}
       <p>
-        {t('Verantwortlich')}:
+        {t("Verantwortlich")}:
         <br />
         P-O-BP-STN-KLI-AFK,&nbsp;
         <a href="mailto:xzafk@sbb.ch">xzafk@sbb.ch</a>.
       </p>
     </div>
   );
-};
+}
 
 InfoFPWTopicInfo.propTypes = propTypes;
 InfoFPWTopicInfo.defaultProps = defaultProps;

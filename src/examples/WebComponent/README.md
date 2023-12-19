@@ -9,19 +9,19 @@ The whole code of _trafimage-maps_ is open source and can be found on [GitHub](h
 This section shows you how to configure your own basic map for integrating it in your existing web page. Under [Examples](/#/Examples/HTML%20%26%20Vanilla%20JS/Construction) you can find samples as well as code generators for different environments.
 
 ```jsx
-import 'trafimage-maps';
-import React, { useState, useMemo } from 'react';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import getHtmlPageCode from '../getHtmlPageCode';
-import DocForm from '../DocForm';
-import getWcCodeFromUrl from './getWcCodeFromUrl';
-import getWcAttributesFromUrl from './getWcAttributesFromUrl';
-import webComponentAttributes from './webComponentAttributes';
+import "trafimage-maps";
+import React, { useState, useMemo } from "react";
+import Editor from "react-styleguidist/lib/client/rsg-components/Editor";
+import getHtmlPageCode from "../getHtmlPageCode";
+import DocForm from "../DocForm";
+import getWcCodeFromUrl from "./getWcCodeFromUrl";
+import getWcAttributesFromUrl from "./getWcAttributesFromUrl";
+import webComponentAttributes from "./webComponentAttributes";
 
 const apiKey = window.apiKey;
 
 const App = () => {
-  const [url, setUrl] = useState('https://maps.trafimage.ch');
+  const [url, setUrl] = useState("https://maps.trafimage.ch");
   const code = useMemo(() => {
     return getHtmlPageCode(getWcCodeFromUrl(url));
   }, [url]);
@@ -32,7 +32,14 @@ const App = () => {
   return (
     <>
       <div className="container">
-        <trafimage-maps zoom="7" apiKey={apiKey} embedded="true" {...props} />
+        <trafimage-maps
+          zoom="7"
+          apiKey={apiKey}
+          embedded="true"
+          {...props}
+          width="100%"
+          height="500px"
+        />
       </div>
       <br />
       <Editor

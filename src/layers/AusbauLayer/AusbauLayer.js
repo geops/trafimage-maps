@@ -1,5 +1,5 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import qs from 'query-string';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import qs from "query-string";
 
 /**
  * Layer for ausbau
@@ -20,7 +20,7 @@ class AusbauLayer extends MapboxStyleLayer {
         `${window.location.pathname}?${qs.stringify(params)}`,
       );
     } else {
-      params.showFilter = 'true';
+      params.showFilter = "true";
     }
   }
 
@@ -33,9 +33,9 @@ class AusbauLayer extends MapboxStyleLayer {
 
     // List of filters availables
     this.filters = [
-      { value: '', key: 'Projekte im Bau' },
-      { value: '2030', key: 'Fertigstellung bis 2030' },
-      { value: '2035', key: 'Fertigstellung bis 2035' },
+      { value: "", key: "Projekte im Bau" },
+      { value: "2030", key: "Fertigstellung bis 2030" },
+      { value: "2035", key: "Fertigstellung bis 2035" },
     ];
     this.filter =
       this.filters.find((filter) => filter.value === this.showFilterParam) ||
@@ -54,9 +54,9 @@ class AusbauLayer extends MapboxStyleLayer {
     }
     this.filter = this.filters.find((filter) => filter.value === filterValue);
     const filterToApply = filterValue !== undefined && [
-      '==',
+      "==",
       filterValue,
-      ['get', 'angebotsschritt'],
+      ["get", "angebotsschritt"],
     ];
 
     style.layers.forEach(({ id }) => {
@@ -75,8 +75,8 @@ class AusbauLayer extends MapboxStyleLayer {
         : null;
 
       if (!newFilter && filterToApply) {
-        newFilter = ['all', filterToApply];
-      } else if (filterToApply && newFilter[0] === 'all') {
+        newFilter = ["all", filterToApply];
+      } else if (filterToApply && newFilter[0] === "all") {
         // we assume the filter is defined with 'all' keyword
         // ['all', filter1, filter2]
         newFilter.push(filterToApply);

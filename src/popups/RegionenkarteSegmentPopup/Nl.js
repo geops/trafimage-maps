@@ -1,15 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Feature from 'ol/Feature';
-import { makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import Line from './Line';
-import Person from './Person';
+import React from "react";
+import PropTypes from "prop-types";
+import Feature from "ol/Feature";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import Line from "./Line";
+import Person from "./Person";
 
 const useStyles = makeStyles((theme) => ({
   description: {
-    flex: '0 0',
-    '& > div:first-child': {
+    flex: "0 0",
+    "& > div:first-child": {
       paddingBottom: theme.spacing(2),
     },
   },
@@ -25,7 +25,7 @@ function Nl({ feature }) {
     <>
       <Line feature={feature} />
       <div className={classes.description}>
-        <div>{`${t('Leiter NL')} ${name}`}</div>
+        <div>{`${t("Leiter NL")} ${name}`}</div>
         {person && (
           <div>
             <Person person={person} isIntern />

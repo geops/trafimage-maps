@@ -1,1 +1,1 @@
-export { default } from './TralisLayer';
+export { default } from "./TralisLayer";

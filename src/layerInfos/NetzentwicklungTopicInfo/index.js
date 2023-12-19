@@ -1,1 +1,1 @@
-export { default } from './NetzentwicklungTopicInfo';
+export { default } from "./NetzentwicklungTopicInfo";

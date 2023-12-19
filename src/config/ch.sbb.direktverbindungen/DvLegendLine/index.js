@@ -1,1 +1,1 @@
-export { default } from './DvLegendLine';
+export { default } from "./DvLegendLine";

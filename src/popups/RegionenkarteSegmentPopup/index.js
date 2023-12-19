@@ -1,1 +1,1 @@
-export { default } from './RegionenkarteSegmentPopup';
+export { default } from "./RegionenkarteSegmentPopup";

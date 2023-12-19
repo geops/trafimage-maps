@@ -1,1 +1,1 @@
-export { default } from './IsbTopicInfo';
+export { default } from "./IsbTopicInfo";

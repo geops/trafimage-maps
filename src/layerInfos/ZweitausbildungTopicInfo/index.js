@@ -1,1 +1,1 @@
-export { default } from './ZweitausbildungTopicInfo';
+export { default } from "./ZweitausbildungTopicInfo";

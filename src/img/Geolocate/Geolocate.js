@@ -1,17 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => {
   return {
     geolocIconWrapper: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     },
     geolocIconCircle: {
       stroke: (props) => props.color,
-      fill: 'transparent',
+      fill: "transparent",
       strokeWidth: 1,
     },
     geolocIconPoint: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-const Geolocate = ({ onClick, color }) => {
+function Geolocate({ onClick, color }) {
   const classes = useStyles({ color });
   return (
     <svg
@@ -34,7 +34,7 @@ const Geolocate = ({ onClick, color }) => {
       <circle cx="20" cy="20" r="3" className={classes.geolocIconPoint} />
     </svg>
   );
-};
+}
 
 Geolocate.propTypes = {
   onClick: PropTypes.func,
@@ -43,7 +43,7 @@ Geolocate.propTypes = {
 
 Geolocate.defaultProps = {
   onClick: () => {},
-  color: 'currentColor',
+  color: "currentColor",
 };
 
 export default Geolocate;

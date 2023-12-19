@@ -1,1 +1,1 @@
-export { default } from './IsbPopup';
+export { default } from "./IsbPopup";

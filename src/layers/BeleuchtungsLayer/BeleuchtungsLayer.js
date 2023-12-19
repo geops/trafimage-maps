@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for BeleuchtungsLayer
@@ -23,7 +23,7 @@ class BeleuchtungsLayer extends MapboxStyleLayer {
          */
         const feats = featureInfo.features.reduce((uniques, feature) => {
           const isUnique = !uniques.find(
-            (f) => f.get('name') === feature.get('name'),
+            (f) => f.get("name") === feature.get("name"),
           );
           return isUnique ? [...uniques, feature] : uniques;
         }, []);

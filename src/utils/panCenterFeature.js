@@ -10,15 +10,15 @@ const panCenterFeature = (
   menuWidthDesktop = 381,
   redCircleWidth = 25,
   forcePan,
-  overlaySide = 'right',
+  overlaySide = "right",
 ) => {
   const [width, height] = map.getSize();
   const [pixelX, pixelY] = map.getPixelFromCoordinate(coordinate);
   const isUsingOverlay =
-    useOverlay || !!layers.find((l) => l.get('useOverlay'));
+    useOverlay || !!layers.find((l) => l.get("useOverlay"));
   const isHiddenByOverlayOnDesktop =
     isUsingOverlay &&
-    (overlaySide === 'right'
+    (overlaySide === "right"
       ? pixelX >= width - overlayWidthDesktop - redCircleWidth
       : pixelX <= overlayWidthDesktop + redCircleWidth);
   const isHiddenByOverlayOnMobile =
@@ -35,12 +35,12 @@ const panCenterFeature = (
   ) {
     let paddingLeft = menuOpen ? menuWidthDesktop : 0;
     // In some iframe topics we render the overlay on the left
-    if (isUsingOverlay && overlaySide === 'left') {
+    if (isUsingOverlay && overlaySide === "left") {
       paddingLeft = overlayWidthDesktop;
     }
     padding = [
       0,
-      isUsingOverlay && overlaySide === 'right' ? overlayWidthDesktop : 0,
+      isUsingOverlay && overlaySide === "right" ? overlayWidthDesktop : 0,
       0,
       paddingLeft,
     ];

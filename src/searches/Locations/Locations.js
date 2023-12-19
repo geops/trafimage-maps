@@ -1,7 +1,7 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
+import React from "react";
+import { Typography } from "@mui/material";
 
-import Search from '../Search';
+import Search from "../Search";
 
 class Locations extends Search {
   // eslint-disable-next-line class-methods-use-this
@@ -27,7 +27,7 @@ class Locations extends Search {
         (response) =>
           response?.results?.map((item) => ({
             ...item,
-            label: item.attrs.label.replace(/<[^>]*>?/gm, ''),
+            label: item.attrs.label.replace(/<[^>]*>?/gm, ""),
           })) || [],
       )
       .catch(() => {
@@ -46,9 +46,9 @@ class Locations extends Search {
   getFeature(item, options) {
     const feature = super.getFeature(
       {
-        type: 'Feature',
+        type: "Feature",
         geometry: {
-          type: 'Point',
+          type: "Point",
           coordinates: [item.attrs.lon, item.attrs.lat],
         },
         properties: {

@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for displaying blue circle on platforms on hover.
@@ -9,7 +9,7 @@ import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
  */
 class PlatformsLayer extends MapboxStyleLayer {
   constructor(options = {}) {
-    const id = 'platforms';
+    const id = "platforms";
     // const paint = {
     //   'icon-opacity': [
     //     'case',
@@ -25,7 +25,7 @@ class PlatformsLayer extends MapboxStyleLayer {
     // };
     super({
       styleLayersFilter: ({ metadata }) =>
-        !!metadata && metadata['trafimage.filter'] === 'platforms',
+        !!metadata && metadata["trafimage.filter"] === "platforms",
       // styleLayers: [
       //   // Icons are not well placed on platform polygons because we don't
       //   // have the exact same polygon as mapbox. So we can't use the new
@@ -63,7 +63,7 @@ class PlatformsLayer extends MapboxStyleLayer {
       // ],
       properties: {
         hideInLegend: true,
-        popupComponent: 'StationPopup',
+        popupComponent: "StationPopup",
         useOverlay: true,
         isQueryable: true,
       },
@@ -72,9 +72,9 @@ class PlatformsLayer extends MapboxStyleLayer {
 
     this.source = {
       id,
-      type: 'geojson',
+      type: "geojson",
       data: {
-        type: 'FeatureCollection',
+        type: "FeatureCollection",
         features: [],
       },
     };
@@ -89,11 +89,11 @@ class PlatformsLayer extends MapboxStyleLayer {
     super.attachToMap(map);
 
     this.olListenersKeys.push(
-      this.on('change:visible', () => {
+      this.on("change:visible", () => {
         this.updateSource();
       }),
-      this.map.on('moveend', () => {
-        this.mapboxLayer.mbMap?.once('idle', this.onIdle);
+      this.map.on("moveend", () => {
+        this.mapboxLayer.mbMap?.once("idle", this.onIdle);
       }),
     );
   }
@@ -104,7 +104,7 @@ class PlatformsLayer extends MapboxStyleLayer {
   detachFromMap(map) {
     const { mbMap } = this.mapboxLayer;
     if (mbMap) {
-      mbMap.off('idle', this.onIdle);
+      mbMap.off("idle", this.onIdle);
       this.removeSource();
     }
     super.detachFromMap(map);
@@ -117,7 +117,7 @@ class PlatformsLayer extends MapboxStyleLayer {
   onLoad() {
     const { mbMap } = this.mapboxLayer;
     this.platformLayers = mbMap.getStyle().layers.filter((layer) => {
-      return layer.type === 'symbol' && layer['source-layer'] === 'platform';
+      return layer.type === "symbol" && layer["source-layer"] === "platform";
     });
 
     this.platformLayers = this.platformLayers.map((layer) => layer.id);
@@ -125,7 +125,7 @@ class PlatformsLayer extends MapboxStyleLayer {
     this.addSource();
     super.onLoad();
     this.updateSource();
-    mbMap.once('idle', this.onIdle);
+    mbMap.once("idle", this.onIdle);
   }
 
   /**
@@ -151,7 +151,7 @@ class PlatformsLayer extends MapboxStyleLayer {
       .map((feat) => {
         const { geometry } = feat;
 
-        if (geometry.type === 'Polygon') {
+        if (geometry.type === "Polygon") {
           // if it's a polygon we store the uid for the filter.
           uids.push(feat.properties.uid);
         }
@@ -166,13 +166,13 @@ class PlatformsLayer extends MapboxStyleLayer {
       });
 
     // we display only visible platorm polygons
-    mbMap.setFilter('platforms_polygon_highlight', [
-      'all',
-      ['==', ['geometry-type'], 'Polygon'],
-      ['in', ['get', 'uid'], ['literal', uids]],
+    mbMap.setFilter("platforms_polygon_highlight", [
+      "all",
+      ["==", ["geometry-type"], "Polygon"],
+      ["in", ["get", "uid"], ["literal", uids]],
     ]);
     source.setData({
-      type: 'FeatureCollection',
+      type: "FeatureCollection",
       features: pointsRendered,
     });
   }
@@ -203,7 +203,7 @@ class PlatformsLayer extends MapboxStyleLayer {
       // Don't remove source just make it empty.
       // Because others layers during unmount still could rely on it.
       source.setData({
-        type: 'FeatureCollection',
+        type: "FeatureCollection",
         features: [],
       });
     }

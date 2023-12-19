@@ -1,1 +1,1 @@
-export { default } from './Betriebspunkte';
+export { default } from "./Betriebspunkte";

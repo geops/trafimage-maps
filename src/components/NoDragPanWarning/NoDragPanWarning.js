@@ -1,52 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { makeStyles, Typography } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { unByKey } from 'ol/Observable';
-import DragPan from 'ol/interaction/DragPan';
-import { ReactComponent as NoDragPanWarningIcon } from '../../img/sbb/two-finger-tap-large.svg';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
+import { unByKey } from "ol/Observable";
+import DragPan from "ol/interaction/DragPan";
+import { ReactComponent as NoDragPanWarningIcon } from "../../img/sbb/two-finger-tap-large.svg";
 
 const useStyles = makeStyles(() => ({
-  '@keyframes show': {
+  "@keyframes show": {
     from: { opacity: 0 },
     to: { opcaity: 1 },
   },
   wrapper: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
-    width: 'calc(100% - 100px)',
-    height: 'calc(100% - 100px)',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white !important',
-    flexDirection: 'column',
+    width: "calc(100% - 100px)",
+    height: "calc(100% - 100px)",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white !important",
+    flexDirection: "column",
     padding: 50,
     zIndex: 9999,
-    animation: '$show .5s',
+    animation: "$show .5s",
   },
   icon: {
-    background: 'white',
-    borderRadius: '50%',
-    width: '52px',
-    height: '52px',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: '10px',
+    background: "white",
+    borderRadius: "50%",
+    width: "52px",
+    height: "52px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: "10px",
 
-    '& svg': {
-      width: '70%',
+    "& svg": {
+      width: "70%",
 
-      '& path': {
-        stroke: '#767676',
+      "& path": {
+        stroke: "#767676",
       },
     },
   },
   text: {
-    fontSize: '1.3em',
+    fontSize: "1.3em",
   },
 }));
 
@@ -59,7 +60,7 @@ function NoDragPanWarning() {
   const [target, setTarget] = useState(null);
 
   useEffect(() => {
-    const onChangeTargetRef = map.on('change:target', () => {
+    const onChangeTargetRef = map.on("change:target", () => {
       setTarget(map.getViewport());
     });
     return () => {
@@ -77,20 +78,20 @@ function NoDragPanWarning() {
 
     if (embedded && map && target) {
       // We allow default scroll behavior for touch events.
-      map.getViewport().style.touchAction = 'pan-x pan-y';
+      map.getViewport().style.touchAction = "pan-x pan-y";
 
       // Dactivate drag pan only on touch events.
       const dragPan = map
         .getInteractions()
         .getArray()
         .find((interaction) => interaction instanceof DragPan);
-      onPointerDownRef = map.on('pointerdown', (evt) => {
+      onPointerDownRef = map.on("pointerdown", (evt) => {
         let isCancelled = false;
-        target.removeEventListener('touchend', onTouchEnd);
-        target.removeEventListener('pointercancel', onPointerCancel);
+        target.removeEventListener("touchend", onTouchEnd);
+        target.removeEventListener("pointercancel", onPointerCancel);
 
         if (
-          evt.originalEvent.pointerType !== 'touch' ||
+          evt.originalEvent.pointerType !== "touch" ||
           // eslint-disable-next-line no-underscore-dangle
           !dragPan.condition_(evt)
         ) {
@@ -98,7 +99,7 @@ function NoDragPanWarning() {
         }
 
         // Show the warning on next pointerdrag events.
-        onPointerDragRef = map.on('pointerdrag', () => {
+        onPointerDragRef = map.on("pointerdrag", () => {
           if (dragPan.targetPointers.length !== 1) {
             return true;
           }
@@ -114,14 +115,14 @@ function NoDragPanWarning() {
           onTouchEnd = () => {
             unByKey(onPointerDragRef);
             setShow(false);
-            target.removeEventListener('touchend', onTouchEnd);
+            target.removeEventListener("touchend", onTouchEnd);
           };
-          target.addEventListener('touchend', onTouchEnd);
+          target.addEventListener("touchend", onTouchEnd);
         };
-        target.addEventListener('pointercancel', onPointerCancel);
+        target.addEventListener("pointercancel", onPointerCancel);
 
         // Use pointerup to hide the warning if the pointer event is not cancelled before.
-        oncePointerUpRef = map.once('pointerup', () => {
+        oncePointerUpRef = map.once("pointerup", () => {
           if (isCancelled) {
             // let touchend event handle the warning
             return;
@@ -143,8 +144,8 @@ function NoDragPanWarning() {
       ]);
 
       if (target) {
-        target.removeEventListener('pointercancel', onPointerCancel);
-        target.removeEventListener('touchend', onTouchEnd);
+        target.removeEventListener("pointercancel", onPointerCancel);
+        target.removeEventListener("touchend", onTouchEnd);
       }
     };
   }, [embedded, map, target]);
@@ -171,7 +172,7 @@ function NoDragPanWarning() {
         <NoDragPanWarningIcon />
       </div>
       <Typography variant="h4" align="center" className={classes.text}>
-        {t('Benutzen Sie 2 Finger um die Karte zu bedienen.')}
+        {t("Benutzen Sie 2 Finger um die Karte zu bedienen.")}
       </Typography>
     </div>
   );

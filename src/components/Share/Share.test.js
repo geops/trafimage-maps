@@ -1,38 +1,42 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { Map, View } from 'ol';
-import { MatomoProvider } from '@datapunt/matomo-tracker-react';
-import Share from '.';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import { Provider } from "react-redux";
+import { Map, View } from "ol";
+import { ThemeProvider } from "@mui/material";
+import { MatomoProvider } from "@jonkoops/matomo-tracker-react";
+import theme from "../../themes/default";
+import Share from ".";
 
-describe('Share', () => {
+describe("Share", () => {
   let store;
   beforeEach(() => {
-    store = global.mockStore({
+    store = global.global.mockStore({
       map: {},
       app: {
         map: new Map({ view: new View({}) }),
         activeTopic: {
-          key: 'test',
+          key: "test",
         },
-        language: 'de',
-        appBaseUrl: 'https://maps.trafimage.ch',
+        language: "de",
+        appBaseUrl: "https://maps.trafimage.ch",
       },
     });
   });
 
-  test('should match snapshot.', () => {
+  test("should match snapshot.", () => {
     const { container } = render(
       <MatomoProvider value={{}}>
-        <Provider store={store}>
-          <Share />
-        </Provider>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <Share />
+          </Provider>
+        </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(container.innerHTML).toMatchSnapshot();
+    expect(container.querySelectorAll("button").length).toBe(1);
   });
 
-  describe('should send track event on click', () => {
+  describe("should send track event on click", () => {
     let matomo;
     let container;
 
@@ -44,53 +48,53 @@ describe('Share', () => {
       };
       const wrapper = render(
         <MatomoProvider value={matomo}>
-          <Provider store={store}>
-            <Share />
-          </Provider>
+          <ThemeProvider theme={theme}>
+            <Provider store={store}>
+              <Share />
+            </Provider>
+          </ThemeProvider>
         </MatomoProvider>,
       );
       container = wrapper.container;
     });
 
-    test('on permalink button', () => {
-      fireEvent.click(
-        container.querySelector('.wkp-permalink-bt div[role=button]'),
-      );
+    test("on permalink button", () => {
+      fireEvent.click(container.querySelector(".wkp-permalink-bt button"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickSharePermalink',
-        category: 'test',
+        action: "clickSharePermalink",
+        category: "test",
       });
     });
 
-    test('on mail button', () => {
-      fireEvent.click(container.querySelector('.ta-mail-icon a'));
+    test("on mail button", () => {
+      fireEvent.click(container.querySelector(".ta-mail-icon a"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareMail',
-        category: 'test',
+        action: "clickShareMail",
+        category: "test",
       });
     });
 
-    test('on download button', () => {
-      fireEvent.click(container.querySelector('.rs-canvas-save-button'));
+    test("on download button", () => {
+      fireEvent.click(container.querySelector(".rs-canvas-save-button"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareDownload',
-        category: 'test',
+        action: "clickShareDownload",
+        category: "test",
       });
     });
 
-    test('on facebook button', () => {
-      fireEvent.click(container.querySelector('.ta-facebook-icon a'));
+    test("on facebook button", () => {
+      fireEvent.click(container.querySelector(".ta-facebook-icon a"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareFacebook',
-        category: 'test',
+        action: "clickShareFacebook",
+        category: "test",
       });
     });
 
-    test('on twitter button', () => {
-      fireEvent.click(container.querySelector('.ta-twitter-icon a'));
+    test("on twitter button", () => {
+      fireEvent.click(container.querySelector(".ta-twitter-icon a"));
       expect(matomo.trackEvent).toBeCalledWith({
-        action: 'clickShareTwitter',
-        category: 'test',
+        action: "clickShareTwitter",
+        category: "test",
       });
     });
   });

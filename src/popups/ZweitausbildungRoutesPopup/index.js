@@ -1,1 +1,1 @@
-export { default } from './ZweitausbildungRoutesPopup';
+export { default } from "./ZweitausbildungRoutesPopup";

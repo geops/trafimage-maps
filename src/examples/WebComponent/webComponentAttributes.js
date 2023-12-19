@@ -1,23 +1,23 @@
-import React from 'react';
-import topics from '../../config/topics';
+import React from "react";
+import topics from "../../config/topics";
 
 const defaultAttributes = [
   {
-    name: 'topic',
-    type: 'string',
-    comp: 'select',
+    name: "topic",
+    type: "string",
+    comp: "select",
     pathname: true,
-    defaultValue: 'ch.sbb.netzkarte',
+    defaultValue: "ch.sbb.netzkarte",
     values: topics.wkp.map((t) => t.key),
     description: () => {
       return <span>Topic to display</span>;
     },
   },
   {
-    name: 'layersVisibility',
-    type: 'array<string>',
-    comp: 'select',
-    defaultValue: '',
+    name: "layersVisibility",
+    type: "array<string>",
+    comp: "select",
+    defaultValue: "",
     values: [],
     description: () => {
       return (
@@ -29,24 +29,24 @@ const defaultAttributes = [
     },
   },
   {
-    name: 'elements',
-    type: 'array<string>',
-    defaultValue: '',
-    comp: 'select',
+    name: "elements",
+    type: "array<string>",
+    defaultValue: "",
+    comp: "select",
     values: [
-      'baseLayerSwitcher',
-      'drawMenu',
-      'exportMenu',
-      'footer',
-      'geolocationButton',
-      'header',
-      'mapControls',
-      'menu',
-      'overlay',
-      'permalink(disabled)',
-      'shareMenu',
-      'search',
-      'trackerMenu',
+      "baseLayerSwitcher",
+      "drawMenu",
+      "exportMenu",
+      "footer",
+      "geolocationButton",
+      "header",
+      "mapControls",
+      "menu",
+      "overlay",
+      "permalink(disabled)",
+      "shareMenu",
+      "search",
+      "trackerMenu",
     ],
     description: () => {
       return (
@@ -78,21 +78,21 @@ const defaultAttributes = [
     },
   },
   {
-    name: 'language',
-    type: 'string',
-    comp: 'select',
-    defaultValue: 'de',
-    values: ['de', 'fr', 'it', 'en'],
+    name: "language",
+    type: "string",
+    comp: "select",
+    defaultValue: "de",
+    values: ["de", "fr", "it", "en"],
     description: () => {
       return <span>Language of the application.</span>;
     },
-    props: { type: 'text' },
+    props: { type: "text" },
   },
   {
-    name: 'center',
-    type: 'string',
-    comp: 'input',
-    defaultValue: '[925472,5920000]',
+    name: "center",
+    type: "string",
+    comp: "input",
+    defaultValue: "[925472,5920000]",
     description: () => {
       return (
         <span>
@@ -101,18 +101,18 @@ const defaultAttributes = [
         </span>
       );
     },
-    props: { type: 'text' },
+    props: { type: "text" },
   },
   {
-    name: 'zoom',
-    type: 'number',
-    comp: 'input',
+    name: "zoom",
+    type: "number",
+    comp: "input",
     defaultValue: 9,
     description: () => {
       return <span>Zoom level.</span>;
     },
     props: {
-      type: 'number',
+      type: "number",
       inputProps: {
         min: 0,
         max: 20,
@@ -120,9 +120,9 @@ const defaultAttributes = [
     },
   },
   {
-    name: 'embedded',
-    type: 'boolean',
-    comp: 'checkbox',
+    name: "embedded",
+    type: "boolean",
+    comp: "checkbox",
     defaultValue: false,
     description: () => {
       return (
@@ -133,7 +133,7 @@ const defaultAttributes = [
       );
     },
     props: {
-      type: 'checkbox',
+      type: "checkbox",
     },
   },
 ];

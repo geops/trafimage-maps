@@ -1,12 +1,12 @@
-import React, { useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { ReactComponent as SBBUser } from '../../img/sbb/user_92_large.svg';
+import React, { useMemo, useCallback } from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { ReactComponent as SBBUser } from "../../img/sbb/user_92_large.svg";
 
-import './Login.scss';
+import "./Login.scss";
 
-const Login = ({ loginUrl }) => {
+function Login({ loginUrl }) {
   const { t } = useTranslation();
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const language = useSelector((state) => state.app.language);
@@ -16,7 +16,7 @@ const Login = ({ loginUrl }) => {
     if (permissionInfos && permissionInfos.user) {
       return permissionInfos.user;
     }
-    return t('Anmelden');
+    return t("Anmelden");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [permissionInfos, language]);
 
@@ -39,7 +39,7 @@ const Login = ({ loginUrl }) => {
       <span className="wkp-login-text">{login}</span>
     </div>
   );
-};
+}
 
 Login.propTypes = {
   loginUrl: PropTypes.string,

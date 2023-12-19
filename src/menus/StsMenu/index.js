@@ -1,1 +1,1 @@
-export { default } from './StsMenu';
+export { default } from "./StsMenu";

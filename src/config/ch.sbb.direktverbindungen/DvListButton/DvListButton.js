@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { unByKey } from 'ol/Observable';
-import { extend, createEmpty } from 'ol/extent';
-import MapButton from '../../../components/MapButton';
-import { setFeatureInfo } from '../../../model/app/actions';
-import { DV_KEY } from '../../../utils/constants';
-import { ReactComponent as List } from '../../../img/list-icon-sbb.svg';
+import React, { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { unByKey } from "ol/Observable";
+import { extend, createEmpty } from "ol/extent";
+import MapButton from "../../../components/MapButton";
+import { setFeatureInfo } from "../../../model/app/actions";
+import { DV_KEY } from "../../../utils/constants";
+import { ReactComponent as List } from "../../../img/list-icon-sbb.svg";
 
 const getExtentFromFeatures = (features) => {
   let extent = createEmpty();
@@ -16,7 +16,7 @@ const getExtentFromFeatures = (features) => {
   return extent;
 };
 
-const DvListButton = ({ ...props }) => {
+function DvListButton({ ...props }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const layers = useSelector((state) => state.map.layers);
@@ -28,7 +28,7 @@ const DvListButton = ({ ...props }) => {
   const [features, setFeatures] = useState([]);
 
   useEffect(() => {
-    const loadFeatsListener = dvMainLayer?.on('sync:features', (evt) => {
+    const loadFeatsListener = dvMainLayer?.on("sync:features", (evt) => {
       setFeatures(evt.features);
     });
     return () => unByKey(loadFeatsListener);
@@ -37,7 +37,7 @@ const DvListButton = ({ ...props }) => {
   return (
     <MapButton
       style={{ padding: 8, marginTop: 10 }}
-      title={t('Alle Direktverbindungen anzeigen')}
+      title={t("Alle Direktverbindungen anzeigen")}
       disabled={!features?.length}
       data-testid="dv-list-button"
       onClick={() => {
@@ -52,7 +52,7 @@ const DvListButton = ({ ...props }) => {
           callback: () => {
             const { mbMap } = dvMainLayer.mapboxLayer;
             if (mbMap) {
-              mbMap.once('idle', () => {
+              mbMap.once("idle", () => {
                 dvMainLayer.syncFeatures();
                 dvMainLayer.highlightStation();
                 dispatch(
@@ -74,6 +74,6 @@ const DvListButton = ({ ...props }) => {
       <List />
     </MapButton>
   );
-};
+}
 
 export default DvListButton;

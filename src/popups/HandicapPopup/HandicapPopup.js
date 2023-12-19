@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import Feature from 'ol/Feature';
-import { useTranslation } from 'react-i18next';
-import PopupElement from './HandicapPopupElement';
-import Link from '../../components/Link';
+import React, { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import Feature from "ol/Feature";
+import { useTranslation } from "react-i18next";
+import PopupElement from "./HandicapPopupElement";
+import Link from "../../components/Link";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -18,7 +18,7 @@ function HandicapPopup({ feature }) {
 
   const parsedTouristOffers =
     properties.barrierefreie_touristische_angebote &&
-    (typeof properties.barrierefreie_touristische_angebote === 'string' ||
+    (typeof properties.barrierefreie_touristische_angebote === "string" ||
       properties.barrierefreie_touristische_angebote instanceof String) // Ensure property value is defined and of type string
       ? JSON.parse(properties.barrierefreie_touristische_angebote)
       : [];
@@ -49,14 +49,14 @@ function HandicapPopup({ feature }) {
   // build string for equipment
   const equipment = [];
 
-  const treppenfreiString = `${t('treppenfrei')}${
+  const treppenfreiString = `${t("treppenfrei")}${
     properties[bfEquipmentExceptions.rampe] && !properties.rampe
       ? ` (${properties[bfEquipmentExceptions.rampe]})`
-      : ''
+      : ""
   }`;
 
   equipment.unshift(
-    properties.treppenfrei ? treppenfreiString : t('nicht treppenfrei'),
+    properties.treppenfrei ? treppenfreiString : t("nicht treppenfrei"),
   );
 
   Object.keys(bfEquipmentExceptions).forEach((key) => {
@@ -66,7 +66,7 @@ function HandicapPopup({ feature }) {
       if (bfEquipmentExceptions[key]) {
         // handle exception texts
         const exception = properties[bfEquipmentExceptions[key]];
-        str += exception ? ` (${exception})` : '';
+        str += exception ? ` (${exception})` : "";
       }
 
       equipment.push(str);
@@ -75,67 +75,67 @@ function HandicapPopup({ feature }) {
 
   const behigInfo = () => {
     const status = properties.status_bahnhof;
-    if (status === 'OK') {
-      return t('Dieser Bahnhof ist barrierefrei.');
+    if (status === "OK") {
+      return t("Dieser Bahnhof ist barrierefrei.");
     }
-    if (status === 'NOCH NICHT OK') {
+    if (status === "NOCH NICHT OK") {
       const prognose =
-        properties.prognose === 'nach 2026'
-          ? `${t('behig_nach')} 2026`
+        properties.prognose === "nach 2026"
+          ? `${t("behig_nach")} 2026`
           : properties.prognose;
       return `${t(
         `Dieser Bahnhof wird vollständig angepasst`,
-      )}: ${prognose} (${t('Prognose')}).`;
+      )}: ${prognose} (${t("Prognose")}).`;
     }
-    if (status === 'BLEIBEN NICHT OK') {
-      return t('Dieser Bahnhof wird nicht baulich angepasst.');
+    if (status === "BLEIBEN NICHT OK") {
+      return t("Dieser Bahnhof wird nicht baulich angepasst.");
     }
-    return t('Keine Information vorhanden.');
+    return t("Keine Information vorhanden.");
   };
 
   const equipmentStr = equipment.length ? (
     <div className="wkp-handicap-popup-element" key="Ausstattung">
-      <div className="wkp-handicap-popup-field-title">{t('Ausstattung')}</div>
+      <div className="wkp-handicap-popup-field-title">{t("Ausstattung")}</div>
       <div className="wkp-handicap-popup-field-body">
-        {equipment.join(', ')}
+        {equipment.join(", ")}
       </div>
     </div>
   ) : null;
 
   const elementsList = [
     {
-      label: 'Treffpunkt',
+      label: "Treffpunkt",
       propertyName: `treffpunkt_${language}`,
     },
     {
-      label: 'Voranmeldefrist',
+      label: "Voranmeldefrist",
       propertyName: `voranmeldefrist_${language}`,
     },
     {
-      label: 'Bedienungszeiten',
+      label: "Bedienungszeiten",
       propertyName: `bedienungszeiten_${language}`,
     },
     {
-      label: 'Ausstattung',
+      label: "Ausstattung",
       element: equipmentStr,
     },
     {
-      key: 'behigInfo',
+      key: "behigInfo",
       element: (
         <div className="wkp-handicap-popup-element" key="BehigInfo">
           <div className="wkp-handicap-popup-field-title">
-            {t('ch.sbb.behig')}
+            {t("ch.sbb.behig")}
           </div>
           <span>{behigInfo()}</span>
         </div>
       ),
     },
     {
-      label: 'Aktuell',
+      label: "Aktuell",
       propertyName: `aktuell_${language}`,
     },
     {
-      key: 'touristOffers',
+      key: "touristOffers",
       element: parsedTouristOffers?.length &&
         parsedTouristOffers.find((p) => p[`label_${language}`]) && (
           <div
@@ -143,7 +143,7 @@ function HandicapPopup({ feature }) {
             key="TouristischeAngebote"
           >
             <div className="wkp-handicap-popup-field-title">
-              {t('Barrierefreie touristische Angebote')}
+              {t("Barrierefreie touristische Angebote")}
             </div>
             {parsedTouristOffers
               .filter((offer) => offer[`label_${language}`])
@@ -169,19 +169,19 @@ function HandicapPopup({ feature }) {
       [
         `zusaetzliche_informationen_${language}`,
         `beschreibung_zur_dritte_dienstleistung_${language}`,
-      ].every((val) => Object.keys(props).includes(val) && props[val] !== '')
+      ].every((val) => Object.keys(props).includes(val) && props[val] !== "")
     ) {
       return (
         <div className="wkp-handicap-popup-bottom">
           <PopupElement
             key={`beschreibung_zur_dritte_dienstleistung_${language}`}
-            label={t('Dritte Dienstleistung')}
+            label={t("Dritte Dienstleistung")}
             properties={props}
             propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
           />
           <PopupElement
             key="Zusätzliche Informationen"
-            label={t('Zusätzliche Informationen')}
+            label={t("Zusätzliche Informationen")}
             properties={props}
             propertyName={`zusaetzliche_informationen_${language}`}
           />
@@ -191,12 +191,12 @@ function HandicapPopup({ feature }) {
     if (
       Object.keys(props).includes(`zusaetzliche_informationen_${language}`) &&
       // eslint-disable-next-line react/destructuring-assignment
-      props[`zusaetzliche_informationen_${language}`] !== ''
+      props[`zusaetzliche_informationen_${language}`] !== ""
     ) {
       return (
         <PopupElement
           key="Zusätzliche Informationen"
-          label={t('Zusätzliche Informationen')}
+          label={t("Zusätzliche Informationen")}
           properties={props}
           propertyName={`zusaetzliche_informationen_${language}`}
         />
@@ -205,7 +205,7 @@ function HandicapPopup({ feature }) {
     return (
       <PopupElement
         key="beschreibung_zur_dritte_dienstleistung"
-        label={t('Dritte Dienstleistung')}
+        label={t("Dritte Dienstleistung")}
         properties={props}
         propertyName={`beschreibung_zur_dritte_dienstleistung_${language}`}
       />
@@ -213,14 +213,14 @@ function HandicapPopup({ feature }) {
   };
 
   const titles = properties.stuetzpunktbahnhof
-    ? [`${t('Stützpunktbahnhof')}`]
+    ? [`${t("Stützpunktbahnhof")}`]
     : [];
 
   if (properties.barrierefreier_bahnhof !== null) {
     titles.push(
       properties.barrierefreier_bahnhof
-        ? t('Barrierefreier Bahnhof')
-        : t('Nicht barrierefreier Bahnhof'),
+        ? t("Barrierefreier Bahnhof")
+        : t("Nicht barrierefreier Bahnhof"),
     );
   }
 
@@ -228,14 +228,14 @@ function HandicapPopup({ feature }) {
     if (properties.noInfo) {
       return (
         <span tabIndex={-1} ref={refBody}>
-          {t('Keine Information vorhanden.')}
+          {t("Keine Information vorhanden.")}
         </span>
       );
     }
     return (
       <>
         <p className="wkp-handicap-popup-title" ref={refBody} tabIndex={-1}>
-          {titles.join(' / ')}
+          {titles.join(" / ")}
         </p>
         {elementsList.map((field) => {
           if (!properties[field.propertyName] && !field.element) {
@@ -264,7 +264,7 @@ function HandicapPopup({ feature }) {
     <div
       className="wkp-handicap-popup"
       style={{
-        minWidth: properties.noInfo ? '250px' : '350px',
+        minWidth: properties.noInfo ? "250px" : "350px",
       }}
     >
       <div className="wkp-handicap-popup-body" id="wkp-popup-desc">
@@ -277,6 +277,6 @@ function HandicapPopup({ feature }) {
 HandicapPopup.propTypes = propTypes;
 
 const memoized = React.memo(HandicapPopup);
-memoized.renderTitle = (feat) => feat.get('stationsbezeichnung');
+memoized.renderTitle = (feat) => feat.get("stationsbezeichnung");
 
 export default memoized;

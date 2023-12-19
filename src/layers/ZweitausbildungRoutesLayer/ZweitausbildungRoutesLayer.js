@@ -1,6 +1,6 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import lines from './lines';
-import getStyleLayers from './getStyleLayers';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import lines from "./lines";
+import getStyleLayers from "./getStyleLayers";
 
 /**
  * Layer for zweitausbildung routes
@@ -15,11 +15,11 @@ class ZweitausbildungRoutesLayer extends MapboxStyleLayer {
     super({
       ...options,
       styleLayers: [],
-      beforeId: 'ch.sbb.zweitausbildung_stations.aufbau.not.border',
+      beforeId: "ch.sbb.zweitausbildung_stations.aufbau.not.border",
     });
     this.property = property;
-    this.sourceId = 'ch.sbb.zweitausbildung';
-    this.sourceLayer = 'ch.sbb.zweitausbildung';
+    this.sourceId = "ch.sbb.zweitausbildung";
+    this.sourceLayer = "ch.sbb.zweitausbildung";
   }
 
   /**

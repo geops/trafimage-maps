@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
+import React from "react";
+import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
 
 const propTypes = {
   properties: PropTypes.object.isRequired,
@@ -10,23 +10,23 @@ const propTypes = {
 
 const useStyles = makeStyles(() => ({
   legend: {
-    '& > div': {
+    "& > div": {
       height: 31,
       margin: 0,
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
     },
 
-    '& img': {
-      float: 'left',
+    "& img": {
+      float: "left",
       paddingRight: 10,
     },
   },
 }));
 
-const ZweitausbildungSubLayerInfo = ({ properties, staticFilesUrl }) => {
+function ZweitausbildungSubLayerInfo({ properties, staticFilesUrl }) {
   const { t } = useTranslation();
-  const { infos } = properties.get('zweitausbildung');
+  const { infos } = properties.get("zweitausbildung");
   const { title, legend } = infos;
   const classes = useStyles();
 
@@ -39,7 +39,7 @@ const ZweitausbildungSubLayerInfo = ({ properties, staticFilesUrl }) => {
             <img
               src={`${staticFilesUrl}/img/layers/zweitausbildung/${item.image}`}
               draggable="false"
-              alt={t('Kein Bildtext')}
+              alt={t("Kein Bildtext")}
             />
             {t(item.name)}
           </div>
@@ -47,7 +47,7 @@ const ZweitausbildungSubLayerInfo = ({ properties, staticFilesUrl }) => {
       </div>
     </div>
   );
-};
+}
 
 ZweitausbildungSubLayerInfo.propTypes = propTypes;
 

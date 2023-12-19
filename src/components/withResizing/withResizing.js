@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import Map from 'ol/Map';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { unByKey } from 'ol/Observable';
+import React, { Component } from "react";
+import Map from "ol/Map";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { unByKey } from "ol/Observable";
 
 const transitiondelay = 300;
 
@@ -26,7 +26,7 @@ function withResizing(MenuToBeResized) {
 
     componentDidMount() {
       const { map } = this.props;
-      this.olEventKey = map.on('change:size', () => this.updateMenuHeight());
+      this.olEventKey = map.on("change:size", () => this.updateMenuHeight());
       window.clearTimeout(this.heightTimeout);
       this.heightTimeout = window.setTimeout(() => {
         this.updateMenuHeight();

@@ -1,1 +1,1 @@
-export { default } from './FeatureInformation';
+export { default } from "./FeatureInformation";

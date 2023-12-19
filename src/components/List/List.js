@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
 
-import ListItem from '../ListItem';
+import ListItem from "../ListItem";
 
 const propTypes = {
   className: PropTypes.string,
@@ -13,7 +13,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  className: 'tm-list',
+  className: "tm-list",
   items: [],
   renderItem: () => {},
   onSelect: () => {},

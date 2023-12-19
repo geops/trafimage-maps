@@ -1,1 +1,1 @@
-export { default } from './GeltungsbereicheTopicMenu';
+export { default } from "./GeltungsbereicheTopicMenu";

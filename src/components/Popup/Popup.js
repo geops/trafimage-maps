@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Point, LineString } from 'ol/geom';
-import RSPopup from 'react-spatial/components/Popup';
-import FeatureInformation from '../FeatureInformation';
+import React from "react";
+import { useSelector } from "react-redux";
+import { Point, LineString } from "ol/geom";
+import RSPopup from "react-spatial/components/Popup";
+import FeatureInformation from "../FeatureInformation";
 
 const getPopupCoordinates = (
   map,
@@ -22,7 +22,7 @@ const getPopupCoordinates = (
   return coordinate;
 };
 
-const Popup = () => {
+function Popup() {
   const map = useSelector((state) => state.app.map);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const showPopups = useSelector((state) => state.app.showPopups);
@@ -40,12 +40,12 @@ const Popup = () => {
     const { layer, features } = info;
 
     if (
-      layer.get('popupComponent') &&
-      !layer.get('useOverlay') &&
-      !layer.get('useMenu') &&
-      !layer.get('useTrackerMenu')
+      layer.get("popupComponent") &&
+      !layer.get("useOverlay") &&
+      !layer.get("useMenu") &&
+      !layer.get("useTrackerMenu")
     ) {
-      if (typeof layer.hidePopup === 'function') {
+      if (typeof layer.hidePopup === "function") {
         return features.find((f) => !layer.hidePopup(f, layer, featureInfo));
       }
       return true;
@@ -103,6 +103,6 @@ const Popup = () => {
       <FeatureInformation featureInfo={filtered} />
     </RSPopup>
   );
-};
+}
 
 export default React.memo(Popup);

@@ -1,1 +1,1 @@
-export { default } from './RailplusMenu';
+export { default } from "./RailplusMenu";

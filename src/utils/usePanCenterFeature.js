@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import useIsMobile from './useIsMobile';
-import panCenterFeature from './panCenterFeature';
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import useIsMobile from "./useIsMobile";
+import panCenterFeature from "./panCenterFeature";
 
 const usePanDisplayFeature = () => {
   const featureInfo = useSelector((state) => state.app.featureInfo);

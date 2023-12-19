@@ -1,44 +1,44 @@
-import { act } from 'react-dom/test-utils';
-import fetchMock from 'fetch-mock';
-import { setSearchService, updateDrawEditLink } from './actions';
+import { act } from "react-dom/test-utils";
+import fetchMock from "fetch-mock";
+import { setSearchService, updateDrawEditLink } from "./actions";
 
-describe('actions', () => {
-  describe('updateDrawEditLink', () => {
-    test('creates a new shorten url using the draw admin id then displays result in an input', async () => {
+describe("actions", () => {
+  describe("updateDrawEditLink", () => {
+    test("creates a new shorten url using the draw admin id then displays result in an input", async () => {
       const spy = jest.fn();
       await act(async () => {
         // Updating an existing shoreten url fails
         fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue',
-          { error: 'Not found' },
+          "http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue",
+          { error: "Not found" },
         );
         // Creating an existing shorten url succeeds
         fetchMock.once(
-          'http://shortenfoo.ch/?url=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue&word=foo',
-          { url: 'http://shortqux.ch/qur' },
+          "http://shortenfoo.ch/?url=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue&word=foo",
+          { url: "http://shortqux.ch/qur" },
         );
 
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
-            mapsetUrl: 'http://mapsetbar.ch',
-            shortenerUrl: 'http://shortenfoo.ch',
-            drawIds: { admin_id: 'foo' },
+            mapsetUrl: "http://mapsetbar.ch",
+            shortenerUrl: "http://shortenfoo.ch",
+            drawIds: { admin_id: "foo" },
           },
         }));
       });
       expect(spy.mock.calls.length).toBe(3);
       expect(spy.mock.calls[0][0]).toEqual({
         data: true,
-        type: 'SET_DRAW_EDIT_LINK_LOADING',
+        type: "SET_DRAW_EDIT_LINK_LOADING",
       });
       expect(spy.mock.calls[1][0]).toEqual({
         data: false,
-        type: 'SET_DRAW_EDIT_LINK_LOADING',
+        type: "SET_DRAW_EDIT_LINK_LOADING",
       });
       expect(spy.mock.calls[2][0]).toEqual({
-        data: 'http://shortqux.ch/qur',
-        type: 'SET_DRAW_EDIT_LINK',
+        data: "http://shortqux.ch/qur",
+        type: "SET_DRAW_EDIT_LINK",
       });
       fetchMock.restore();
 
@@ -47,9 +47,9 @@ describe('actions', () => {
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
-            mapsetUrl: 'http://mapsetbar.ch',
-            shortenerUrl: 'http://shortenfoo.ch',
-            drawIds: { admin_id: 'foo' },
+            mapsetUrl: "http://mapsetbar.ch",
+            shortenerUrl: "http://shortenfoo.ch",
+            drawIds: { admin_id: "foo" },
           },
         }));
       });
@@ -57,80 +57,80 @@ describe('actions', () => {
       fetchMock.restore();
     });
 
-    test('updates an existing shorten url using the draw admin id and displays result in an input', async () => {
+    test("updates an existing shorten url using the draw admin id and displays result in an input", async () => {
       const spy = jest.fn();
       await act(async () => {
         // Updating an existing shoreten url succeeds
         fetchMock.once(
-          'http://shortenfoo.ch/edit/fooch/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfooch%26draw.redirect%3Dtrue',
-          { url: 'http://shortqux.ch/qur' },
+          "http://shortenfoo.ch/edit/fooch/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfooch%26draw.redirect%3Dtrue",
+          { url: "http://shortqux.ch/qur" },
         );
 
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
-            mapsetUrl: 'http://mapsetbar.ch',
-            shortenerUrl: 'http://shortenfoo.ch',
-            drawIds: { admin_id: 'fooch' },
+            mapsetUrl: "http://mapsetbar.ch",
+            shortenerUrl: "http://shortenfoo.ch",
+            drawIds: { admin_id: "fooch" },
           },
         }));
       });
       expect(spy.mock.calls.length).toBe(3);
       expect(spy.mock.calls[0][0]).toEqual({
         data: true,
-        type: 'SET_DRAW_EDIT_LINK_LOADING',
+        type: "SET_DRAW_EDIT_LINK_LOADING",
       });
       expect(spy.mock.calls[1][0]).toEqual({
         data: false,
-        type: 'SET_DRAW_EDIT_LINK_LOADING',
+        type: "SET_DRAW_EDIT_LINK_LOADING",
       });
       expect(spy.mock.calls[2][0]).toEqual({
-        data: 'http://shortqux.ch/qur',
-        type: 'SET_DRAW_EDIT_LINK',
+        data: "http://shortqux.ch/qur",
+        type: "SET_DRAW_EDIT_LINK",
       });
       fetchMock.restore();
     });
 
-    test('fails to fetch the shorten url and displays the url unshortened in an input', async () => {
+    test("fails to fetch the shorten url and displays the url unshortened in an input", async () => {
       const spy = jest.fn();
       await act(async () => {
         // Updating an existing shoreten url fails
         fetchMock.once(
-          'http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue',
-          { error: 'Not found' },
+          "http://shortenfoo.ch/edit/foo/?target=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue",
+          { error: "Not found" },
         );
         // Creating an existing shorten url fails too
         fetchMock.once(
-          'http://shortenfoo.ch/?url=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue&word=foo',
-          { error: 'Bad parameter' },
+          "http://shortenfoo.ch/?url=http%3A%2F%2Flocalhost%2F%3Fdraw.id%3Dfoo%26draw.redirect%3Dtrue&word=foo",
+          { error: "Bad parameter" },
         );
 
         updateDrawEditLink()(spy, () => ({
           map: {},
           app: {
-            mapsetUrl: 'http://mapsetbar.ch',
-            shortenerUrl: 'http://shortenfoo.ch',
-            drawIds: { admin_id: 'foo' },
+            mapsetUrl: "http://mapsetbar.ch",
+            shortenerUrl: "http://shortenfoo.ch",
+            drawIds: { admin_id: "foo" },
           },
         }));
       });
       expect(spy.mock.calls.length).toBe(3);
       expect(spy.mock.calls[0][0]).toEqual({
         data: true,
-        type: 'SET_DRAW_EDIT_LINK_LOADING',
+        type: "SET_DRAW_EDIT_LINK_LOADING",
       });
       expect(spy.mock.calls[1][0]).toEqual({
         data: false,
-        type: 'SET_DRAW_EDIT_LINK_LOADING',
+        type: "SET_DRAW_EDIT_LINK_LOADING",
       });
       expect(spy.mock.calls[2][0]).toEqual({
-        data: 'http://localhost/?draw.id=foo&draw.redirect=true',
-        type: 'SET_DRAW_EDIT_LINK',
+        data: "http://localhost/?draw.id=foo&draw.redirect=true",
+        type: "SET_DRAW_EDIT_LINK",
       });
       fetchMock.restore();
     });
 
-    test('clears highlight of previous search service', () => {
+    test("clears highlight of previous search service", () => {
       const dispatch = jest.fn();
       const searchService = {
         clearHighlight: jest.fn(),
@@ -146,7 +146,7 @@ describe('actions', () => {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         data: searchService,
-        type: 'SET_SEARCH_SERVICE',
+        type: "SET_SEARCH_SERVICE",
       });
       dispatch.mockReset();
       setSearchService(searchService)(dispatch, getState);
@@ -154,7 +154,7 @@ describe('actions', () => {
       expect(searchService.clearSelect).toHaveBeenCalledTimes(0);
       expect(dispatch).toHaveBeenCalledWith({
         data: searchService,
-        type: 'SET_SEARCH_SERVICE',
+        type: "SET_SEARCH_SERVICE",
       });
       dispatch.mockReset();
       setSearchService(searchService1)(dispatch, getState);
@@ -163,7 +163,7 @@ describe('actions', () => {
       expect(dispatch).toHaveBeenCalledTimes(1);
       expect(dispatch).toHaveBeenCalledWith({
         data: searchService1,
-        type: 'SET_SEARCH_SERVICE',
+        type: "SET_SEARCH_SERVICE",
       });
     });
   });

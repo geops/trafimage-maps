@@ -1,221 +1,326 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Autocomplete when no properties are set matches snapshot 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value=""
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      style={
-        Object {
-          "display": "none",
-        }
-      }
-      tabIndex={0}
-      title=""
+<div class="tm-autocomplete">
+  <div class="tm-search-input">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         style="display: none;"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-  />
+  <div style="display: none;"
+       class="tm-autocomplete-results"
+  >
+  </div>
 </div>
 `;
 
-exports[`Autocomplete when properties are set should match snapshot 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value="fooval"
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+exports[`Autocomplete when properties are set #onDocClick() does nothing when click comes from ana element of Autocomplete. 1`] = `
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={null}
+  <div style
+       class="tm-autocomplete-results"
   >
-    <ul
-      className="tm-list"
-      role="menu"
+    <ul role="menu"
+        class="tm-list"
     >
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         qux
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         quux
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         corge
       </li>
     </ul>
-    <hr />
-    my_foo_title
-    <ul
-      className="tm-list"
-      role="menu"
+    <hr>
+    <ul role="menu"
+        class="tm-list"
     >
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         foo
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         bar
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        foo2
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete when properties are set #onDocClick() hide the list and removes the focus. 1`] = `
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
+    >
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
+      </svg>
+    </div>
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
+    >
+      submit
+    </div>
+  </div>
+  <div style="display: none;"
+       class="tm-autocomplete-results"
+  >
+    <ul role="menu"
+        class="tm-list"
+    >
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        qux
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        quux
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        corge
+      </li>
+    </ul>
+    <hr>
+    <ul role="menu"
+        class="tm-list"
+    >
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        foo
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        bar
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        foo2
+      </li>
+    </ul>
+  </div>
+</div>
+`;
+
+exports[`Autocomplete when properties are set should match snapshot 1`] = `
+<div class="tm-autocomplete">
+  <div class="tm-search-input">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
+    >
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
+      >
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
+      </svg>
+    </div>
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
+    >
+      submit
+    </div>
+  </div>
+  <div style="display: none;"
+       class="tm-autocomplete-results"
+  >
+    <ul role="menu"
+        class="tm-list"
+    >
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        qux
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        quux
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        corge
+      </li>
+    </ul>
+    <hr>
+    my_foo_title
+    <ul role="menu"
+        class="tm-list"
+    >
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        foo
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
+      >
+        bar
+      </li>
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         foo2
       </li>
@@ -225,141 +330,91 @@ exports[`Autocomplete when properties are set should match snapshot 1`] = `
 `;
 
 exports[`Autocomplete when properties are set should match snapshot showing list 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value="fooval"
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={null}
+  <div style
+       class="tm-autocomplete-results"
   >
-    <ul
-      className="tm-list"
-      role="menu"
+    <ul role="menu"
+        class="tm-list"
     >
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         qux
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         quux
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         corge
       </li>
     </ul>
-    <hr />
+    <hr>
     my_foo_title
-    <ul
-      className="tm-list"
-      role="menu"
+    <ul role="menu"
+        class="tm-list"
     >
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         foo
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         bar
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         foo2
       </li>
@@ -369,104 +424,67 @@ exports[`Autocomplete when properties are set should match snapshot showing list
 `;
 
 exports[`Autocomplete when properties are set should match snapshot without defaultItems 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value="fooval"
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={null}
+  <div style
+       class="tm-autocomplete-results"
   >
-    <ul
-      className="tm-list"
-      role="menu"
+    <ul role="menu"
+        class="tm-list"
     >
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         qux
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         quux
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         corge
       </li>
@@ -477,105 +495,68 @@ exports[`Autocomplete when properties are set should match snapshot without defa
 `;
 
 exports[`Autocomplete when properties are set should match snapshot without items 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value="fooval"
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={null}
+  <div style
+       class="tm-autocomplete-results"
   >
     my_foo_title
-    <ul
-      className="tm-list"
-      role="menu"
+    <ul role="menu"
+        class="tm-list"
     >
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         foo
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         bar
       </li>
-      <li
-        className="tm-list-item"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        onKeyPress={[Function]}
-        role="menuitem"
-        tabIndex="0"
+      <li class="tm-list-item"
+          role="menuitem"
+          tabindex="0"
       >
         foo2
       </li>
@@ -585,76 +566,48 @@ exports[`Autocomplete when properties are set should match snapshot without item
 `;
 
 exports[`Autocomplete when properties are set should match snapshot without items and defaultItems 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value="fooval"
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
+  <div style="display: none;"
+       class="tm-autocomplete-results"
   >
     my_foo_title
   </div>
@@ -662,76 +615,49 @@ exports[`Autocomplete when properties are set should match snapshot without item
 `;
 
 exports[`Autocomplete when properties are set should match snapshot without items and defaultItems using defaultProps 1`] = `
-<div
-  className="tm-autocomplete"
->
-  <div
-    className="tm-search-input"
-  >
-    <input
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onKeyUp={[Function]}
-      placeholder=""
-      tabIndex="0"
-      title=""
-      type="text"
-      value="fooval"
-    />
-    <div
-      aria-label=""
-      className="tm-button tm-bt-clear"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+<div class="tm-autocomplete">
+  <div class="tm-search-input tm-focus">
+    <input type="text"
+           tabindex="0"
+           placeholder
+           title
+           value="fooval"
     >
-      <svg
-        fill="currentColor"
-        focusable={false}
-        height="1em"
-        stroke="currentColor"
-        strokeWidth="0"
-        style={
-          Object {
-            "color": undefined,
-          }
-        }
-        viewBox="0 0 24 24"
-        width="1em"
-        xmlns="http://www.w3.org/2000/svg"
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-clear"
+         title
+         aria-label
+    >
+      <svg stroke="currentColor"
+           fill="currentColor"
+           stroke-width="0"
+           viewbox="0 0 24 24"
+           focusable="false"
+           height="1em"
+           width="1em"
+           xmlns="http://www.w3.org/2000/svg"
       >
-        <path
-          d="M0 0h24v24H0z"
-          fill="none"
-        />
-        <path
-          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-        />
+        <path fill="none"
+              d="M0 0h24v24H0z"
+        >
+        </path>
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+        </path>
       </svg>
     </div>
-    <div
-      aria-label=""
-      className="tm-button tm-bt-search"
-      onClick={[Function]}
-      onKeyPress={[Function]}
-      role="button"
-      tabIndex={0}
-      title=""
+    <div role="button"
+         tabindex="0"
+         class="tm-button tm-bt-search"
+         title
+         aria-label
     >
       submit
     </div>
   </div>
-  <div
-    className="tm-autocomplete-results"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-  />
+  <div style="display: none;"
+       class="tm-autocomplete-results"
+  >
+  </div>
 </div>
 `;

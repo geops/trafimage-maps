@@ -1,1 +1,1 @@
-export { default } from './BeleuchtungsPopup';
+export { default } from "./BeleuchtungsPopup";

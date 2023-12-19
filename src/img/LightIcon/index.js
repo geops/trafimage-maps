@@ -1,1 +1,1 @@
-export { default } from './LightIcon';
+export { default } from "./LightIcon";

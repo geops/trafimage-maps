@@ -1,5 +1,5 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 const comps = {
   de: (
@@ -48,13 +48,13 @@ const comps = {
   ),
 };
 
-const GeltungsbereicheTopicInfo = () => {
+function GeltungsbereicheTopicInfo() {
   const { i18n } = useTranslation();
   return (
     <div>
       <div>{comps[i18n.language]}</div>
     </div>
   );
-};
+}
 
 export default GeltungsbereicheTopicInfo;

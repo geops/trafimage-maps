@@ -1,4 +1,4 @@
-import getGreaterNumber from './getGreaterNumber';
+import getGreaterNumber from "./getGreaterNumber";
 
 test(`#getGreaterNumber()`, () => {
   let gen = getGreaterNumber(20.01, [200, 50, 100, 20, 10, 5]);

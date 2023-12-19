@@ -1,17 +1,17 @@
-import maplibregl from 'maplibre-gl';
-import OLMap from 'ol/Map';
-import View from 'ol/View';
-import { toLonLat } from 'ol/proj';
-import VectorLayer from 'ol/layer/Vector';
-import VectorSource from 'ol/source/Vector';
-import { LineString } from 'ol/geom';
-import { getCenter } from 'ol/extent';
-import { jsPDF as JsPDF } from 'jspdf';
-import Canvg from 'canvg';
-import NorthArrowCircle from './northArrowCircle.png'; // svg export doesn't work for ie11
-import getLayersAsFlatArray from '../../utils/getLayersAsFlatArray';
-import { FORCE_EXPORT_PROPERTY } from '../../utils/constants';
-import LayerService from '../../utils/LayerService';
+import maplibregl from "maplibre-gl";
+import OLMap from "ol/Map";
+import View from "ol/View";
+import { toLonLat } from "ol/proj";
+import VectorLayer from "ol/layer/Vector";
+import VectorSource from "ol/source/Vector";
+import { LineString } from "ol/geom";
+import { getCenter } from "ol/extent";
+import { jsPDF as JsPDF } from "jspdf";
+import { Canvg } from "canvg";
+import NorthArrowCircle from "./northArrowCircle.png"; // svg export doesn't work for ie11
+import getLayersAsFlatArray from "../../utils/getLayersAsFlatArray";
+import { FORCE_EXPORT_PROPERTY } from "../../utils/constants";
+import LayerService from "../../utils/LayerService";
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -26,7 +26,7 @@ const getStyleWithForceVisibility = (
       newMbStyle.layers.forEach((mbLayer) => {
         if (styleLayer.styleLayersFilter(mbLayer)) {
           // eslint-disable-next-line no-param-reassign
-          mbLayer.layout.visibility = 'visible';
+          mbLayer.layout.visibility = "visible";
         }
       });
     }
@@ -36,7 +36,7 @@ const getStyleWithForceVisibility = (
       newMbStyle.layers.forEach((mbLayer) => {
         if (styleLayer.styleLayersFilter(mbLayer)) {
           // eslint-disable-next-line no-param-reassign
-          mbLayer.layout.visibility = 'none';
+          mbLayer.layout.visibility = "none";
         }
       });
     }
@@ -45,7 +45,7 @@ const getStyleWithForceVisibility = (
 };
 
 export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
-  Object.defineProperty(window, 'devicePixelRatio', {
+  Object.defineProperty(window, "devicePixelRatio", {
     get() {
       return scale;
     },
@@ -65,8 +65,8 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
     animate: false,
   });
   const p = new Promise((resolve) => {
-    mbMap.on('idle', () => {
-      Object.defineProperty(window, 'devicePixelRatio', {
+    mbMap.on("idle", () => {
+      Object.defineProperty(window, "devicePixelRatio", {
         get() {
           return actualPixelRatio;
         },
@@ -124,11 +124,11 @@ export const getMapHd = (
 ) => {
   const targetSize = size || map.getSize();
   // We create a temporary map.
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.style.width = `${targetSize[0]}px`;
   div.style.height = `${targetSize[1]}px`;
   div.style.margin = `0 0 0 -50000px`; // we move the map to the left to be ensure it is hidden during export
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
   document.body.append(div);
 
   let center = map.getView().getCenter();
@@ -153,7 +153,7 @@ export const getMapHd = (
 
   if (!mbMap) {
     // eslint-disable-next-line no-console
-    console.error('Mapbox map not found!');
+    console.error("Mapbox map not found!");
     return Promise.resolve();
   }
 
@@ -181,7 +181,7 @@ export const getMapHd = (
 export const clean = (mapToExport) => {
   mapToExport.getLayers().clear();
   document.body.removeChild(mapToExport.getTarget());
-  document.body.style.overflow = '';
+  document.body.style.overflow = "";
   mapToExport.setTarget(null);
 };
 
@@ -196,10 +196,10 @@ export const generateExtraData = (layers, exportNorthArrow) => {
           // Parse the copyright html drawn from the layer
           const parsed = new DOMParser().parseFromString(
             layer.copyrights,
-            'text/html',
+            "text/html",
           );
           const copyrightArray = [];
-          const coll = parsed.getElementsByTagName('a');
+          const coll = parsed.getElementsByTagName("a");
           for (let i = 0; i < coll.length; i += 1) {
             const copyright = coll[i];
             copyrightArray.push(copyright.text);
@@ -208,7 +208,7 @@ export const generateExtraData = (layers, exportNorthArrow) => {
         })
         .flat();
       const unique = Array.from(new Set(copyrights));
-      return unique.join(' | ');
+      return unique.join(" | ");
     },
   };
 
@@ -236,13 +236,13 @@ export const exportPdf = async (
 
   // Add the image to a newly created PDF
   const doc = new JsPDF({
-    orientation: 'landscape',
-    unit: 'pt',
+    orientation: "landscape",
+    unit: "pt",
     format: exportFormat,
   });
 
   // Add map image
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext("2d");
 
   // Apply SVG overlay if provided
   if (overlayImageUrl) {
@@ -262,7 +262,7 @@ export const exportPdf = async (
     let updatedSvg = svgString.slice(); // Clone the string
     Object.keys(templateValues).forEach((key) => {
       const value =
-        typeof templateValues[key] === 'function'
+        typeof templateValues[key] === "function"
           ? templateValues[key]()
           : templateValues[key];
       updatedSvg = updatedSvg.replace(`***${key}***`, value);
@@ -273,19 +273,19 @@ export const exportPdf = async (
     // so we remove it before the conversion to canvas.
     const svgDoc = new DOMParser().parseFromString(
       updatedSvg,
-      'application/xml',
+      "application/xml",
     );
-    svgDoc.documentElement.removeAttribute('width');
-    svgDoc.documentElement.removeAttribute('height');
+    svgDoc.documentElement.removeAttribute("width");
+    svgDoc.documentElement.removeAttribute("height");
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
 
     // Add legend SVG
-    const canvass = document.createElement('canvas');
+    const canvass = document.createElement("canvas");
     canvass.width = canvas.width;
     canvass.height = canvas.height;
 
     const instance = await Canvg.fromString(
-      canvass.getContext('2d'),
+      canvass.getContext("2d"),
       updatedSvg,
     );
     await instance.render();
@@ -298,7 +298,7 @@ export const exportPdf = async (
   ctx.scale(1 / exportScale, 1 / exportScale);
 
   // Add canvas to PDF
-  doc.addImage(canvas, 'JPEG', 0, 0, exportSize[0], exportSize[1]);
+  doc.addImage(canvas, "JPEG", 0, 0, exportSize[0], exportSize[1]);
 
   // download the result
   doc.save(exportFileName);

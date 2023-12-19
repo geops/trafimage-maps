@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function MessageListener() {
   const messageEvents = useSelector(
@@ -17,9 +17,9 @@ function MessageListener() {
           messageEvent.callback(evt);
         }
       };
-      window.addEventListener('message', callback);
+      window.addEventListener("message", callback);
       unlistens.push(() => {
-        window.removeEventListener('message', callback);
+        window.removeEventListener("message", callback);
       });
     });
 

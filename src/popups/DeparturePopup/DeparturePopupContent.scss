@@ -1,3 +1,5 @@
+/* stylelint-disable import-notation */
+/* stylelint-disable scss/at-import-partial-extension */
 @import '../../globals.scss';
 
 .tm-departure-popup-body {
@@ -62,8 +64,7 @@
 
   .tm-table-wrapper {
     flex: 1;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
     min-height: 100px;
   }
 
@@ -102,11 +103,7 @@
 }
 
 .tm-load-spinner {
-  -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  -webkit-animation: spin 2s infinite linear;
-  -moz-animation: spin 2s infinite linear;
-  -o-animation: spin 2s infinite linear;
   animation: spin 2s infinite linear;
   font-size: 20px;
   color: $brand-primary;
