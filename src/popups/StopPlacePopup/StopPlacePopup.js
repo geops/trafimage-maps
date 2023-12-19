@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Feature from 'ol/Feature';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import Link from '../../components/Link';
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -108,6 +109,17 @@ function StopPlacePopup({ feature }) {
           value && (
             <div key={key}>
               {typeof value === 'object' ? value?.[i18n.language] : value}
+              <br />
+            </div>
+          )
+        );
+      }
+
+      if (key === 'url') {
+        return (
+          value && (
+            <div key={key}>
+              <Link href={value}>{value}</Link>
               <br />
             </div>
           )
