@@ -44,22 +44,34 @@ function NetzentwicklungLayerInfo({ t, properties }) {
       .then((res) => setRegions(res["geops.netzentwicklung.region"]))
       // eslint-disable-next-line no-console
       .catch((err) => console.error("Failed to fetch!", err));
-  }, [vectorTilesKey, vectorTilesUrl]);
+  }, [vectorTilesKey, vectorTilesUrl, netzentwicklungRoleType]);
 
   return (
     <div>
-      <p>{t(`${netzentwicklungRoleType}-layer-info`)}</p>
-      {regions &&
-        Array.isArray(regions) &&
-        regions.map((region) => (
-          <div className={classes.regionLegendItem} key={region.id}>
-            <div
-              className={classes.regionColor}
-              style={{ backgroundColor: regionColors[region.name] }}
-            />
-            <div>{t(region.name)}</div>
-          </div>
-        ))}
+      {netzentwicklungRoleType === "Netzentwickler Güterverkehr" ? (
+        <div className={classes.regionLegendItem}>
+          <div
+            className={classes.regionColor}
+            style={{ backgroundColor: "#6495ED" }}
+          />
+          <div>{t(`${netzentwicklungRoleType}-layer-info`)}</div>
+        </div>
+      ) : (
+        <>
+          <p>{t(`${netzentwicklungRoleType}-layer-info`)}</p>
+          {regions &&
+            Array.isArray(regions) &&
+            regions.map((region) => (
+              <div className={classes.regionLegendItem} key={region.id}>
+                <div
+                  className={classes.regionColor}
+                  style={{ backgroundColor: regionColors[region.name] }}
+                />
+                <div>{t(region.name)}</div>
+              </div>
+            ))}
+        </>
+      )}
     </div>
   );
 }
