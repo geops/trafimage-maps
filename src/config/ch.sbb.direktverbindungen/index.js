@@ -1,17 +1,17 @@
-import { Layer } from 'mobility-toolbox-js/ol';
-import TrafimageMapboxLayer from '../../layers/TrafimageMapboxLayer';
-import DirektverbindungenLayer from '../../layers/DirektverbindungenLayer';
-import MapboxStyleLayer from '../../layers/MapboxStyleLayer';
-import { DV_HIT_TOLERANCE, DV_KEY } from '../../utils/constants';
-import netzkarteNightImg from '../../img/netzkarte_night.png';
-import netzkarte from '../../img/netzkarte.png';
-import luftbild from '../../img/luftbild.png';
+import { Layer } from "mobility-toolbox-js/ol";
+import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
+import DirektverbindungenLayer from "../../layers/DirektverbindungenLayer";
+import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
+import { DV_HIT_TOLERANCE, DV_KEY } from "../../utils/constants";
+import netzkarteNightImg from "../../img/netzkarte_night.png";
+import netzkarte from "../../img/netzkarte.png";
+import luftbild from "../../img/luftbild.png";
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: `${DV_KEY}.data`,
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: 'base_bright_v2_direktverbindungen',
+  style: "base_bright_v2_direktverbindungen",
   hitTolerance: DV_HIT_TOLERANCE,
   properties: {
     hideInLegend: true,
@@ -24,7 +24,7 @@ export const dataLayer = new TrafimageMapboxLayer({
 export const dvBaseLight = new MapboxStyleLayer({
   name: `${DV_KEY}.base-light`,
   key: `${DV_KEY}.base-light`,
-  group: 'baseLayer',
+  group: "baseLayer",
   properties: {
     previewImage: netzkarte,
     isBaseLayer: true,
@@ -32,13 +32,13 @@ export const dvBaseLight = new MapboxStyleLayer({
   },
   visible: true,
   mapboxLayer: dataLayer,
-  style: 'base_bright_v2_direktverbindungen',
+  style: "base_bright_v2_direktverbindungen",
 });
 
 export const dvBaseDark = new MapboxStyleLayer({
   name: `${DV_KEY}.base-dark`,
   key: `${DV_KEY}.base-dark`,
-  group: 'baseLayer',
+  group: "baseLayer",
   properties: {
     previewImage: netzkarteNightImg,
     isBaseLayer: true,
@@ -46,13 +46,13 @@ export const dvBaseDark = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'base_dark_v2_direktverbindungen_dark',
+  style: "base_dark_v2_direktverbindungen_dark",
 });
 
 export const dvBaseAerial = new MapboxStyleLayer({
   name: `${DV_KEY}.base-aerial`,
   key: `${DV_KEY}.base-aerial`,
-  group: 'baseLayer',
+  group: "baseLayer",
   properties: {
     previewImage: luftbild,
     isBaseLayer: true,
@@ -60,7 +60,7 @@ export const dvBaseAerial = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: dataLayer,
-  style: 'aerial_sbb_direktverbindungen_dark',
+  style: "aerial_sbb_direktverbindungen_dark",
 });
 
 export const dvDay = new Layer({
@@ -69,12 +69,12 @@ export const dvDay = new Layer({
   mapboxLayer: dataLayer,
   visible: true,
   properties: {
-    routeType: 'day',
-    color: 'rgb(247, 181, 0)',
+    routeType: "day",
+    color: "rgb(247, 181, 0)",
     hasInfos: true,
-    layerInfoComponent: 'DvLayerInfo',
+    layerInfoComponent: "DvLayerInfo",
     dataLink:
-      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
+      "https://data.sbb.ch/explore/dataset/direktverbindungen/information/",
     deselectOnChangeVisible: true,
   },
 });
@@ -85,12 +85,12 @@ export const dvNight = new Layer({
   mapboxLayer: dataLayer,
   visible: true,
   properties: {
-    routeType: 'night',
-    color: 'rgb(0, 110, 179)',
+    routeType: "night",
+    color: "rgb(0, 110, 179)",
     hasInfos: true,
-    layerInfoComponent: 'DvLayerInfo',
+    layerInfoComponent: "DvLayerInfo",
     dataLink:
-      'https://data.sbb.ch/explore/dataset/direktverbindungen/information/',
+      "https://data.sbb.ch/explore/dataset/direktverbindungen/information/",
     deselectOnChangeVisible: true,
   },
 });
@@ -104,7 +104,7 @@ export const dvMain = new DirektverbindungenLayer({
     hideInLegend: true,
     dayLayer: dvDay,
     nightLayer: dvNight,
-    popupComponent: 'DvPopup',
+    popupComponent: "DvPopup",
     useOverlay: true,
     priorityFeatureInfo: true, // This property will block display of others featureInfos
     highlightPointFeatureFilter: () => false,
@@ -112,7 +112,7 @@ export const dvMain = new DirektverbindungenLayer({
 });
 
 [dvNight, dvDay].forEach((layer) =>
-  layer.on('change:visible', (evt) => {
+  layer.on("change:visible", (evt) => {
     dvMain.onChangeVisible(evt.target);
     dvMain.select([]);
   }),

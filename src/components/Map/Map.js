@@ -1,25 +1,25 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
-import { touchOnly } from 'ol/events/condition';
-import { Layer } from 'mobility-toolbox-js/ol';
-import { unByKey } from 'ol/Observable';
-import OLMap from 'ol/Map';
-import BasicMap from 'react-spatial/components/BasicMap';
-import MapAccessibility from '../MapAccessibility';
-import { setResolution, setCenter, setZoom } from '../../model/map/actions';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { touchOnly } from "ol/events/condition";
+import { Layer } from "mobility-toolbox-js/ol";
+import { unByKey } from "ol/Observable";
+import OLMap from "ol/Map";
+import BasicMap from "react-spatial/components/BasicMap";
+import MapAccessibility from "../MapAccessibility";
+import { setResolution, setCenter, setZoom } from "../../model/map/actions";
 import {
   setFeatureInfo,
   setSearchOpen,
   updateDrawEditLink,
-} from '../../model/app/actions';
-import Copyright from '../Copyright/Copyright';
-import NoDragPanWarning from '../NoDragPanWarning';
-import NoMouseWheelWarning from '../NoMouseWheelWarning';
-import getFeatureInfoAtCoordinate from '../../utils/getFeatureInfoAtCoordinate';
-import getQueryableLayers from '../../utils/getQueryableLayers';
+} from "../../model/app/actions";
+import Copyright from "../Copyright/Copyright";
+import NoDragPanWarning from "../NoDragPanWarning";
+import NoMouseWheelWarning from "../NoMouseWheelWarning";
+import getFeatureInfoAtCoordinate from "../../utils/getFeatureInfoAtCoordinate";
+import getQueryableLayers from "../../utils/getQueryableLayers";
 
 const propTypes = {
   dispatchHtmlEvent: PropTypes.func,
@@ -87,9 +87,9 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
-    this.onPointerMoveRef = map.on('pointermove', (e) => this.onPointerMove(e));
-    this.onSingleClickRef = map.on('singleclick', (e) => this.onSingleClick(e));
-    dispatchHtmlEvent(new CustomEvent('load'));
+    this.onPointerMoveRef = map.on("pointermove", (e) => this.onPointerMove(e));
+    this.onSingleClickRef = map.on("singleclick", (e) => this.onSingleClick(e));
+    dispatchHtmlEvent(new CustomEvent("load"));
     map?.updateSize();
   }
 
@@ -162,20 +162,20 @@ class Map extends PureComponent {
       return;
     }
 
-    const queryableLayers = getQueryableLayers('pointermove', layers, map);
+    const queryableLayers = getQueryableLayers("pointermove", layers, map);
     getFeatureInfoAtCoordinate(coordinate, queryableLayers).then((newInfos) => {
       // If the featureInfos contains one from a priority layer.
       // We display only these featureInfos.
       // See DirektVerbindungen layers for an example.
       const hasPriorityLayer = newInfos.find(
         ({ features, layer }) =>
-          features.length && layer.get('priorityFeatureInfo'),
+          features.length && layer.get("priorityFeatureInfo"),
       );
 
       let infos = newInfos.filter(({ features, layer }) => {
         const allow = features.length;
         if (hasPriorityLayer) {
-          return allow && layer.get('priorityFeatureInfo');
+          return allow && layer.get("priorityFeatureInfo");
         }
         return allow;
       });
@@ -183,24 +183,24 @@ class Map extends PureComponent {
       // Clear the highlight style when there is priority layers
       if (hasPriorityLayer) {
         newInfos.forEach(({ layer }) => {
-          if (layer.highlight && !layer.get('priorityFeatureInfo')) {
+          if (layer.highlight && !layer.get("priorityFeatureInfo")) {
             layer.highlight([]);
           }
         });
       }
 
-      map.getTarget().style.cursor = infos.length ? 'pointer' : 'auto';
+      map.getTarget().style.cursor = infos.length ? "pointer" : "auto";
 
       const shouldNotSetInfoOnHover =
         featureInfo.length &&
         featureInfo.every(({ layer }) =>
-          layer.get('disableSetFeatureInfoOnHover'),
+          layer.get("disableSetFeatureInfoOnHover"),
         );
 
       const clickInfoOpen =
         featureInfo.length &&
         featureInfo.every(({ layer }) => {
-          return layer.get('popupComponent') && !layer.get('showPopupOnHover');
+          return layer.get("popupComponent") && !layer.get("showPopupOnHover");
         });
 
       // don't continue if there's a popup that was opened by click
@@ -208,15 +208,15 @@ class Map extends PureComponent {
         infos = infos
           .filter(
             ({ layer }) =>
-              layer.get('showPopupOnHover') && layer.get('popupComponent'),
+              layer.get("showPopupOnHover") && layer.get("popupComponent"),
           )
           .map((info) => {
             /* Apply showPopupOnHover function if defined to further filter features */
-            const showPopupOnHover = info.layer.get('showPopupOnHover');
-            if (typeof showPopupOnHover === 'function') {
+            const showPopupOnHover = info.layer.get("showPopupOnHover");
+            if (typeof showPopupOnHover === "function") {
               return {
                 ...info,
-                features: info.layer.get('showPopupOnHover')(info.features),
+                features: info.layer.get("showPopupOnHover")(info.features),
               };
             }
             return info;
@@ -249,7 +249,7 @@ class Map extends PureComponent {
       return;
     }
 
-    const queryableLayers = getQueryableLayers('singleclick', layers, map);
+    const queryableLayers = getQueryableLayers("singleclick", layers, map);
     getFeatureInfoAtCoordinate(coordinate, queryableLayers).then(
       (featureInfos) => {
         // If the featureInfos contains one from a priority layer.
@@ -257,20 +257,20 @@ class Map extends PureComponent {
         // See DirektVerbindungen layers for an example.
         const hasPriorityLayer = featureInfos.find(
           ({ features, layer }) =>
-            features.length && layer.get('priorityFeatureInfo'),
+            features.length && layer.get("priorityFeatureInfo"),
         );
 
         // Display only info of layers with a popup defined.
         let infos = featureInfos.reverse().filter(({ layer }) => {
           const allow =
-            (layer.get('popupComponent') && !layer.get('showPopupOnHover')) ||
+            (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
             activeTopic.enableFeatureClick;
           if (hasPriorityLayer) {
             // Clear the highlight style when there is priority layers
-            if (layer.highlight && !layer.get('priorityFeatureInfo')) {
+            if (layer.highlight && !layer.get("priorityFeatureInfo")) {
               layer.highlight([]);
             }
-            return allow && layer.get('priorityFeatureInfo');
+            return allow && layer.get("priorityFeatureInfo");
           }
           return allow;
         });
@@ -294,7 +294,7 @@ class Map extends PureComponent {
 
         // Propagate the infos clicked to the WebComponent
         dispatchHtmlEvent(
-          new CustomEvent('getfeatureinfo', {
+          new CustomEvent("getfeatureinfo", {
             detail: infos,
           }),
         );
@@ -333,7 +333,7 @@ class Map extends PureComponent {
           layers={layers}
           zoom={zoom}
           map={map}
-          ariaLabel={t('Karte')}
+          ariaLabel={t("Karte")}
           onMapMoved={(evt) => this.onMapMoved(evt)}
           viewOptions={{
             maxZoom,

@@ -1,1 +1,1 @@
-export { default } from './LegalLines';
+export { default } from "./LegalLines";

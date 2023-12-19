@@ -1,13 +1,13 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect, useMemo, useState, useRef } from 'react';
-import PropTypes from 'prop-types';
-import { Styled } from '@geops/create-react-web-component';
-import { Layer } from 'mobility-toolbox-js/ol';
-import LayerService from './utils/LayerService';
-import TrafimageMaps from './components/TrafimageMaps';
-import styles from './WebComponent.scss';
-import { getTopicConfig } from './config/topics';
+import React, { useEffect, useMemo, useState, useRef } from "react";
+import PropTypes from "prop-types";
+import Style from "style-it";
+import { Layer } from "mobility-toolbox-js/ol";
+import LayerService from "./utils/LayerService";
+import TrafimageMaps from "./components/TrafimageMaps";
+import styles from "./WebComponent.scss";
+import { getTopicConfig } from "./config/topics";
 
 const propTypes = {
   /**
@@ -132,7 +132,7 @@ const propTypes = {
   searchUrl: PropTypes.string,
 
   /**
-   * URL of the stops API server. Default is 'https://api.geops.io/stops/v1/'.
+   * URL of the stops API server. Default is 'https://api.geops.io/stops/v1'.
    */
   stopsUrl: PropTypes.string,
 
@@ -177,53 +177,56 @@ const propTypes = {
    * Improve mouse/touch interactions to avoid conflict with parent page.
    */
   embedded: PropTypes.string,
+
+  children: PropTypes.node,
 };
 
 const attributes = {
-  width: '100%',
-  height: '100%',
+  width: "100%",
+  height: "100%",
   center: undefined,
   zoom: undefined,
   maxExtent: undefined,
-  appName: 'wkp',
+  appName: "wkp",
   language: undefined,
   activeTopicKey: undefined,
   apiKey: undefined,
-  apiKeyName: 'key',
-  cartaroUrl: process?.env?.REACT_APP_CARTARO_URL,
+  apiKeyName: "key",
+  cartaroUrl: undefined,
   loginUrl: undefined,
-  appBaseUrl: process?.env?.REACT_APP_BASE_URL,
-  vectorTilesKey: process?.env?.REACT_APP_VECTOR_TILES_KEY,
-  vectorTilesUrl: process?.env?.REACT_APP_VECTOR_TILES_URL,
-  realtimeKey: process?.env?.REACT_APP_REALTIME_KEY,
-  realtimeUrl: process?.env?.REACT_APP_REALTIME_URL,
-  staticFilesUrl: process?.env?.REACT_APP_STATIC_FILES_URL,
-  mapsetUrl: process?.env?.REACT_APP_MAPSET_URL,
-  shortenerUrl: process?.env?.REACT_APP_SHORTENER_URL,
-  drawUrl: process?.env?.REACT_APP_DRAW_URL,
-  enableTracking: 'true',
+  appBaseUrl: undefined,
+  vectorTilesKey: undefined,
+  vectorTilesUrl: undefined,
+  realtimeKey: undefined,
+  realtimeUrl: undefined,
+  staticFilesUrl: undefined,
+  mapsetUrl: undefined,
+  shortenerUrl: undefined,
+  drawUrl: undefined,
+  enableTracking: "true",
   disableCookies: null,
   elements: undefined,
   layersVisibility: undefined,
   embedded: undefined,
-  domainConsent: process?.env?.REACT_APP_DOMAIN_CONSENT,
-  domainConsentId: process?.env?.REACT_APP_DOMAIN_CONSENT_ID,
-  matomoUrl: process?.env?.REACT_APP_MATOMO_URL_BASE,
-  matomoSiteId: process?.env?.REACT_APP_MATOMO_SITE_ID,
-  searchUrl: process?.env?.REACT_APP_SEARCH_URL,
-  stops: process?.env?.REACT_APP_STOPS_URL,
+  domainConsent: undefined,
+  domainConsentId: undefined,
+  matomoUrl: undefined,
+  matomoSiteId: undefined,
+  searchUrl: undefined,
+  stops: undefined,
 };
 
 const defaultProps = {
   topics: undefined,
   history: undefined,
+  children: undefined,
 };
 
 // Since we won't clone all layers, we store here the initial visibility of
 // layers to be able to set it back if the layersVisibility parameter change.
 const initialLayersVisibility = {};
 
-const WebComponent = (props) => {
+function WebComponent(props) {
   const {
     width,
     height,
@@ -244,13 +247,13 @@ const WebComponent = (props) => {
     disableCookies,
     realtimeKey,
     activeTopicKey,
+    children,
   } = props;
   const ref = useRef();
 
   // We have to wait the applyinace of the layersVisibility attribute to avoid having blinking bg layer on load
-  const [layersVisibilityApplied, setLayersVisibilityApplied] = useState(
-    !layersVisibility,
-  );
+  const [layersVisibilityApplied, setLayersVisibilityApplied] =
+    useState(!layersVisibility);
 
   const arrayCenter = useMemo(() => {
     if (!center || Array.isArray(center)) {
@@ -262,7 +265,7 @@ const WebComponent = (props) => {
   const floatZoom = useMemo(() => zoom && parseFloat(zoom), [zoom]);
 
   const extentArray = useMemo(
-    () => maxExtent && maxExtent.split(',').map((float) => parseFloat(float)),
+    () => maxExtent && maxExtent.split(",").map((float) => parseFloat(float)),
     [maxExtent],
   );
 
@@ -298,9 +301,9 @@ const WebComponent = (props) => {
       // Override elements.
       if (elements) {
         const obj = {};
-        elements.split(',').forEach((elt) => {
-          const [key, value] = elt.split('=');
-          obj[key] = value === 'true';
+        elements.split(",").forEach((elt) => {
+          const [key, value] = elt.split("=");
+          obj[key] = value === "true";
         });
         // eslint-disable-next-line no-param-reassign
         topic.elements = { ...topic.elements, ...obj };
@@ -322,9 +325,9 @@ const WebComponent = (props) => {
       // Override layers visiblity.
       if (layersVisibility && topic.layers.length) {
         const obj = {};
-        layersVisibility.split(',').forEach((elt) => {
-          const [key, value] = elt.split('=');
-          obj[key] = value === 'true';
+        layersVisibility.split(",").forEach((elt) => {
+          const [key, value] = elt.split("=");
+          obj[key] = value === "true";
         });
         const layerService = new LayerService(topic.layers);
         const layers = layerService.getLayersAsFlatArray();
@@ -351,9 +354,9 @@ const WebComponent = (props) => {
               layer.visible = value;
 
               // Hide other base layers
-              if (layer.get('isBaseLayer') && value) {
+              if (layer.get("isBaseLayer") && value) {
                 rootLayer.children
-                  .filter((l) => l.get('isBaseLayer'))
+                  .filter((l) => l.get("isBaseLayer"))
                   .forEach((l) => {
                     if (l.key !== key) {
                       // eslint-disable-next-line no-param-reassign
@@ -366,7 +369,7 @@ const WebComponent = (props) => {
         });
 
         rootLayer.children
-          .filter((layer) => layer.get('isBaseLayer'))
+          .filter((layer) => layer.get("isBaseLayer"))
           .forEach((layer) => {
             // When the base layer refers to a MapboxLayer we have to update the style of the
             // mapbox layer too, too avoid seeing the previous background first.
@@ -387,10 +390,11 @@ const WebComponent = (props) => {
   }
 
   return (
-    <Styled styles={styles}>
+    <>
+      {Style.it(styles)}
       <div
         style={{
-          position: 'relative',
+          position: "relative",
           width,
           height,
         }}
@@ -404,18 +408,20 @@ const WebComponent = (props) => {
           zoom={floatZoom}
           maxExtent={extentArray}
           center={arrayCenter}
-          embedded={embedded === 'true'}
-          enableTracking={enableTracking === 'true'}
-          disableCookies={disableCookies === 'true'}
+          embedded={embedded === "true"}
+          enableTracking={enableTracking === "true"}
+          disableCookies={disableCookies === "true"}
           domainConsent={domainConsent}
           domainConsentId={domainConsentId}
           language={language}
           elements={elements}
-        />
+        >
+          {children}
+        </TrafimageMaps>
       </div>
-    </Styled>
+    </>
   );
-};
+}
 
 WebComponent.propTypes = propTypes;
 WebComponent.defaultProps = defaultProps;

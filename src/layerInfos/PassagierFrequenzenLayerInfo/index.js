@@ -1,1 +1,1 @@
-export { default } from './PassagierFrequenzenLayerInfo';
+export { default } from "./PassagierFrequenzenLayerInfo";

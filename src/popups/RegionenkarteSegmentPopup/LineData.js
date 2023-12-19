@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
+import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles((theme) => ({
   otherLines: {
-    flex: '1 1',
-    overflow: 'auto',
-    border: '1px solid #dddddd',
+    flex: "1 1",
+    overflow: "auto",
+    border: "1px solid #dddddd",
     borderRadius: 2,
     margin: 0,
     marginTop: theme.spacing(2),
@@ -21,7 +21,7 @@ function LineData({ lineData }) {
   const classes = useStyles();
   return (
     <fieldset className={classes.otherLines}>
-      <legend>{t('Linien')}</legend>
+      <legend>{t("Linien")}</legend>
       {lineData && lineData.length ? (
         <div>
           {lineData
@@ -49,13 +49,13 @@ function LineData({ lineData }) {
                   key={`${lineNumber}-${kmStart}
                 }-${kmEnd}`}
                 >{`${
-                  lineNumber ? `${lineNumber}, ` : ''
+                  lineNumber ? `${lineNumber}, ` : ""
                 }km ${kmStart} - ${kmEnd}`}</div>
               );
             })}
         </div>
       ) : (
-        <div>{t('Information nicht verfügbar')}</div>
+        <div>{t("Information nicht verfügbar")}</div>
       )}
     </fieldset>
   );

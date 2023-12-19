@@ -1,46 +1,47 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect, useState, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { FormGroup, FormControlLabel, makeStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { unByKey } from 'ol/Observable';
-import SBBSwitch from '../../components/SBBSwitch';
-import { DV_DAY_NIGHT_REGEX } from '../../utils/constants';
-import { setFeatureInfo } from '../../model/app/actions';
-import DvLegendLine from '../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine';
-import useIsMobile from '../../utils/useIsMobile';
+import React, { useEffect, useState, useMemo } from "react";
+import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { makeStyles } from "@mui/styles";
+import { FormGroup, FormControlLabel } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { unByKey } from "ol/Observable";
+import SBBSwitch from "../../components/SBBSwitch";
+import { DV_DAY_NIGHT_REGEX } from "../../utils/constants";
+import { setFeatureInfo } from "../../model/app/actions";
+import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
+import useIsMobile from "../../utils/useIsMobile";
 
 const useStyles = makeStyles(() => {
   return {
     switchWrapper: {
-      '& label:first-child': {
+      "& label:first-child": {
         marginRight: 20,
       },
-      '& .MuiFormControlLabel-label': {
+      "& .MuiFormControlLabel-label": {
         fontSize: 16,
       },
-      '& .MuiFormControlLabel-root': {
+      "& .MuiFormControlLabel-root": {
         minWidth: 155,
       },
-      '& .MuiSwitch-switchBase': {
+      "& .MuiSwitch-switchBase": {
         top: (props) => (props.isMobile && props.row ? 4 : 0),
       },
     },
     disabled: {
-      cursor: 'not-allowed',
-      '& .MuiButtonBase-root': {
-        cursor: 'not-allowed',
+      cursor: "not-allowed",
+      "& .MuiButtonBase-root": {
+        cursor: "not-allowed",
       },
-      '& .MuiSwitch-root': {
+      "& .MuiSwitch-root": {
         opacity: 0.6,
       },
     },
     label: {
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       gap: 10,
-      '& span': {
+      "& span": {
         minWidth: 80,
       },
     },
@@ -83,7 +84,7 @@ function DvLayerSwitcher({ onToggle, row }) {
   useEffect(() => {
     const olKeys =
       layers?.map((layer) => {
-        return layer?.on('change:visible', () => {
+        return layer?.on("change:visible", () => {
           forceRender(revision + 1);
         });
       }) || [];
@@ -102,12 +103,12 @@ function DvLayerSwitcher({ onToggle, row }) {
     // If the switcher configuration filters out all features from list
     // (e.g. when both layers are deactivated) we remove the featureInfo
     if (featureInfo.length) {
-      const regex = new RegExp(`${layersVisible[0].split('.').pop()}`);
+      const regex = new RegExp(`${layersVisible[0].split(".").pop()}`);
       const featureIncludesDvLine =
         !layersVisible?.length ||
         (layersVisible.length === 1 &&
           !featureInfo[0].features.some((feat) =>
-            regex.test(feat.get('data_variant')),
+            regex.test(feat.get("data_variant")),
           ));
       if (featureIncludesDvLine) {
         dispatch(setFeatureInfo([]));
@@ -130,7 +131,7 @@ function DvLayerSwitcher({ onToggle, row }) {
             label={
               <DvSwitcherLabel
                 title={t(layer.name)}
-                color={layer.get('color')}
+                color={layer.get("color")}
               />
             }
             checked={layersVisible.includes(layer.key)}

@@ -1,21 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Feature } from 'ol';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core';
-import Link from '../../components/Link';
-import phoneIcon from '../../img/popups/NetzentwicklungPopup/phone.svg';
-import mailIcon from '../../img/popups/NetzentwicklungPopup/mail.svg';
-import SchmalspurLayer from '../../layers/SchmalspurLayer';
+import React from "react";
+import PropTypes from "prop-types";
+import { Feature } from "ol";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import Link from "../../components/Link";
+import phoneIcon from "../../img/popups/NetzentwicklungPopup/phone.svg";
+import mailIcon from "../../img/popups/NetzentwicklungPopup/mail.svg";
+import SchmalspurLayer from "../../layers/SchmalspurLayer";
 
 const useStyles = makeStyles(() => {
   return {
     row: {
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       minHeight: 15,
-      padding: '5px 0',
-      '& img': {
+      padding: "5px 0",
+      "& img": {
         paddingRight: 5,
       },
     },
@@ -46,7 +46,7 @@ function SchmalspurPopup({ feature, layer }) {
       {href && (
         <div className={classes.row}>
           <Link href={href}>
-            {t('zur Webseite von', { operator: t(name) })}
+            {t("zur Webseite von", { operator: t(name) })}
           </Link>
         </div>
       )}

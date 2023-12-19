@@ -1,5 +1,5 @@
-import { transform } from 'ol/proj';
-import qs from 'query-string';
+import { transform } from "ol/proj";
+import qs from "query-string";
 
 export const zoomEquivalent = {
   7: 1,
@@ -34,8 +34,8 @@ export function convertUrlParams(urlParams) {
     // Reproject the coordinates to the old wkp projection: EPSG:21781.
     const [newX, newY] = transform(
       [parseInt(params.x, 10), parseInt(params.y, 10)],
-      'EPSG:3857',
-      'EPSG:21781',
+      "EPSG:3857",
+      "EPSG:21781",
     );
     params.x = newX;
     params.y = newY;

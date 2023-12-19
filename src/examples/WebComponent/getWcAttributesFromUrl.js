@@ -7,60 +7,60 @@ const getWcAttributesFromUrl = (urlString) => {
   const attributes = {};
 
   // activeTopicKey
-  const activeTopicKey = (pathname && pathname.split('/')[1]) || null;
+  const activeTopicKey = (pathname && pathname.split("/")[1]) || null;
   if (activeTopicKey) {
     attributes.activeTopicKey = activeTopicKey;
   }
 
   // layers
-  let layersVisibility = '';
-  const layers = searchParams.get('layersVisibility');
+  let layersVisibility = "";
+  const layers = searchParams.get("layersVisibility");
   if (layers) {
     layersVisibility += layers
-      .split(',')
+      .split(",")
       .map((d) => `${d}=true`)
-      .join(',');
+      .join(",");
     attributes.layersVisibility = layersVisibility;
   }
 
   // disabled
-  const elements = searchParams.get('elements');
+  const elements = searchParams.get("elements");
   if (elements) {
     const elementsString = `${elements
-      .split(',')
+      .split(",")
       .map((e) => `${e}=false`)
-      .join(',')},permalink=false`;
+      .join(",")},permalink=false`;
     attributes.elements = elementsString;
   } else {
-    attributes.elements = 'permalink=false';
+    attributes.elements = "permalink=false";
   }
 
   // language
-  const language = searchParams.get('language');
+  const language = searchParams.get("language");
   if (language) {
     attributes.language = language;
   }
 
   // center
-  const center = searchParams.get('center');
+  const center = searchParams.get("center");
   const validateCoords = (val) =>
     val &&
     /^\[(-)?(?:[1-9]\d*|0)(?:\.\d+)?,(-)?(?:[1-9]\d*|0)(?:\.\d+)?\]$/.test(
-      val.toString().replace(/ /g, ''),
+      val.toString().replace(/ /g, ""),
     );
   if (validateCoords(center)) {
     attributes.center = center;
   }
 
   // zoom
-  const zoom = searchParams.get('zoom');
+  const zoom = searchParams.get("zoom");
   if (zoom) {
     attributes.zoom = zoom;
   }
 
   // embedded
-  const embedded = searchParams.get('embedded');
-  if (embedded === 'true') {
+  const embedded = searchParams.get("embedded");
+  if (embedded === "true") {
     attributes.embedded = embedded;
   }
   return attributes;

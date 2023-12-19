@@ -1,23 +1,23 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { FaInfo } from 'react-icons/fa';
-import { useTranslation } from 'react-i18next';
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { FaInfo } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import LayerInfosDialog, {
   NAME as LayerInfosDialogName,
-} from '../LayerInfosDialog';
+} from "../LayerInfosDialog";
 import DrawRemoveDialog, {
   NAME as DrawRemoveDialogName,
-} from '../DrawRemoveDialog';
-import Dialog from '../Dialog';
-import LegalLines from '../LegalLines';
+} from "../DrawRemoveDialog";
+import Dialog from "../Dialog";
+import LegalLines from "../LegalLines";
 
-const MainDialog = () => {
+function MainDialog() {
   const { t } = useTranslation();
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobileWidth = useMemo(() => {
-    return ['xs', 's'].includes(screenWidth);
+    return ["xs", "s"].includes(screenWidth);
   }, [screenWidth]);
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
@@ -52,6 +52,6 @@ const MainDialog = () => {
   }
 
   return null;
-};
+}
 
 export default MainDialog;

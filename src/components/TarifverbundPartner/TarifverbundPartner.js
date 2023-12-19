@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core';
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => {
   return {
     partner: {
-      display: 'flex',
-      alignItems: 'center',
+      display: "flex",
+      alignItems: "center",
       gap: 8,
-      margin: '8px 0',
+      margin: "8px 0",
     },
     partnerColor: {
       flexShrink: 0,
@@ -30,7 +30,7 @@ function TarifverbundPartner({ color, label, iconSize, style }) {
         className={classes.partnerColor}
         style={
           style || {
-            backgroundColor: color || 'black',
+            backgroundColor: color || "black",
           }
         }
         data-testid={`tarifverbund-partner-${label}-color`}

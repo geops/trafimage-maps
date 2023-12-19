@@ -1,1 +1,1 @@
-export { default } from './IsbSchmalspurLayerInfo';
+export { default } from "./IsbSchmalspurLayerInfo";

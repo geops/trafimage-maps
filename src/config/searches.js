@@ -1,9 +1,9 @@
-import Betriebspunkte from '../searches/Betriebspunkte';
-import Lines from '../searches/Lines';
-import Locations from '../searches/Locations';
-import Municipalities from '../searches/Municipalities';
-import StopFinder from '../searches/StopFinder';
-import HandicapStopFinder from '../searches/HandicapStopFinder';
+import Betriebspunkte from "../searches/Betriebspunkte";
+import Lines from "../searches/Lines";
+import Locations from "../searches/Locations";
+import Municipalities from "../searches/Municipalities";
+import StopFinder from "../searches/StopFinder";
+import HandicapStopFinder from "../searches/HandicapStopFinder";
 
 export const betriebspunkte = new Betriebspunkte();
 

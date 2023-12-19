@@ -1,19 +1,19 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    fontSize: '0.8em',
-    margin: '3px 0',
+    display: "flex",
+    alignItems: "center",
+    fontSize: "0.8em",
+    margin: "3px 0",
   },
   shortName: {
-    display: 'inline-block',
-    flex: '0 0 40px',
-    minWidth: '40px',
+    display: "inline-block",
+    flex: "0 0 40px",
+    minWidth: "40px",
     marginRight: 5,
   },
 });
@@ -23,7 +23,7 @@ const propTypes = {
   longName: PropTypes.string.isRequired,
 };
 
-const OperatorShortAndLongName = ({ shortName, longName }) => {
+function OperatorShortAndLongName({ shortName, longName }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -32,7 +32,7 @@ const OperatorShortAndLongName = ({ shortName, longName }) => {
       <span> {t(longName)}</span>
     </div>
   );
-};
+}
 
 OperatorShortAndLongName.propTypes = propTypes;
 

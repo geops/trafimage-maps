@@ -1,1 +1,1 @@
-export { default } from './TopicMenu';
+export { default } from "./TopicMenu";

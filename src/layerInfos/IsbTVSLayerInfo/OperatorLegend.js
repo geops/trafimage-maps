@@ -1,14 +1,14 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { makeStyles } from "@mui/styles";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   legendItem: {
-    margin: '0 0 5 0',
-    display: 'flex',
-    alignItems: 'center',
-    position: 'relative',
+    margin: "0 0 5 0",
+    display: "flex",
+    alignItems: "center",
+    position: "relative",
   },
   legendSymbol: {
     width: 45,
@@ -16,25 +16,25 @@ const useStyles = makeStyles({
     height: 18,
     margin: 5,
     marginLeft: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: '0 0 35px',
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flex: "0 0 35px",
   },
   legendText: {
-    position: 'absolute',
-    color: 'white',
-    fontWeight: 'bold',
-    padding: '0 3px',
+    position: "absolute",
+    color: "white",
+    fontWeight: "bold",
+    padding: "0 3px",
     fontSize: 13,
     width: 26,
     height: 15,
   },
   legendLine: {
-    position: 'absolute',
+    position: "absolute",
     width: 4,
     height: 44, // not 45, otherwise it looks blurry
-    transform: 'rotate(90deg)',
+    transform: "rotate(90deg)",
   },
 });
 
@@ -44,7 +44,7 @@ const propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-const OperatorLegend = ({ shortName, longName, color }) => {
+function OperatorLegend({ shortName, longName, color }) {
   const { t } = useTranslation();
   const classes = useStyles();
   return (
@@ -61,7 +61,7 @@ const OperatorLegend = ({ shortName, longName, color }) => {
       <div>{t(longName)}</div>
     </div>
   );
-};
+}
 
 OperatorLegend.propTypes = propTypes;
 

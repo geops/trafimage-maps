@@ -1,133 +1,129 @@
 {
   "name": "trafimage-maps",
   "description": "trafimage-maps web component",
-  "version": "1.22.13-beta.5",
+  "version": "1.23.0",
   "private": true,
   "main": "build/bundle.js",
   "proxy": "http://127.0.0.1:8000",
   "dependencies": {
-    "@datapunt/matomo-tracker-react": "0.5.1",
-    "@geops/create-react-web-component": "2.0.19",
-    "@material-ui/core": "4.12.4",
-    "@material-ui/icons": "4.11.3",
-    "@material-ui/lab": "4.0.0-alpha.60",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@geops/create-react-web-component": "3.0.5",
+    "@jonkoops/matomo-tracker-react": "^0.7.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "@mui/styles": "^5.15.0",
+    "@reduxjs/toolkit": "^2.0.1",
     "@turf/intersect": "6.5.0",
-    "@webcomponents/custom-elements": "1.5.0",
-    "@webcomponents/webcomponents-platform": "1.0.1",
-    "@webcomponents/webcomponentsjs": "2.6.0",
     "abortcontroller-polyfill": "1.7.5",
     "cancelable-promise": "4.3.1",
     "canvas-size": "1.2.6",
-    "canvg": "3.0.9",
+    "canvg": "4.0.1",
     "color": "4.2.3",
     "deepmerge": "4.3.1",
-    "i18next": "21.2.4",
-    "i18next-browser-languagedetector": "6.1.2",
+    "i18next": "23.7.11",
+    "i18next-browser-languagedetector": "7.2.0",
     "i18next-xhr-backend": "3.2.2",
     "jspdf": "2.5.1",
-    "mapbox-gl": "npm:empty-npm-package@1.0.0",
-    "maplibre-gl": "3.0.0",
-    "mobility-toolbox-js": "2.2.1",
-    "ol": "6.6.1",
+    "mapbox-gl": "1.13.3",
+    "maplibre-gl": "3.6.2",
+    "mobility-toolbox-js": "2.3.7",
+    "ol": "8.2.0",
     "proj4": "2.9.2",
     "prop-types": "15.8.1",
     "proxy-polyfill": "0.3.2",
-    "query-string": "7.0.1",
+    "query-string": "8.1.0",
     "re-resizable": "6.9.11",
-    "react": "16.14.0",
-    "react-app-polyfill": "2.0.0",
+    "react": "18.2.0",
+    "react-app-polyfill": "3.0.0",
     "react-autosuggest": "10.1.0",
-    "react-dom": "16.14.0",
+    "react-dom": "18.2.0",
     "react-draggable": "4.4.6",
     "react-helmet": "^6.1.0",
-    "react-i18next": "11.12.0",
-    "react-icons": "^4.11.0",
-    "react-redux": "7.2.5",
-    "react-select": "5.7.7",
-    "react-spatial": "1.7.1",
-    "react-styleguidist": "11.2.0",
+    "react-i18next": "13.5.0",
+    "react-icons": "^4.12.0",
+    "react-redux": "^9.0.4",
+    "react-select": "5.8.0",
+    "react-spatial": "1.8.0",
+    "react-styleguidist": "13.1.1",
     "react-web-component": "2.0.2",
-    "redux": "4.2.1",
+    "redux": "^5.0.0",
     "redux-debounced": "0.5.0",
-    "redux-thunk": "2.4.2",
+    "redux-thunk": "^3.1.0",
     "resize-observer-polyfill": "1.5.1",
-    "style-it": "2.1.4",
-    "styled-components": "5.3.6"
-  },
-  "peerDependencies": {
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "react-error-overlay": "6.0.11"
+    "style-it": "^2.1.4",
+    "styled-components": "^6.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.23.0",
-    "@babel/eslint-parser": "7.22.15",
-    "@commitlint/cli": "17.3.0",
-    "@commitlint/config-conventional": "17.3.0",
-    "@svgr/webpack": "5.5.0",
-    "@testing-library/jest-dom": "5.16.5",
-    "@testing-library/react": "12.1.2",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
-    "babel-jest": "26.6.3",
+    "@babel/cli": "^7.23.4",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@commitlint/cli": "18.4.3",
+    "@commitlint/config-conventional": "18.4.3",
+    "@svgr/webpack": "8.1.0",
+    "@testing-library/jest-dom": "6.1.5",
+    "@testing-library/react": "14.1.2",
+    "@testing-library/user-event": "^14.5.1",
+    "babel-jest": "29.7.0",
+    "babel-loader": "^9.1.3",
     "babel-plugin-named-asset-import": "0.3.8",
     "canvas": "2.11.2",
+    "css-loader": "^6.8.1",
     "css-mediaquery": "0.1.2",
-    "cypress": "12.9.0",
+    "cypress": "13.6.1",
     "cypress-enter-plugin": "1.0.1",
     "cypress-plugin-tab": "1.0.5",
-    "documentation": "14.0.2",
-    "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.7",
+    "dotenv-webpack": "^8.0.1",
+    "esbuild": "^0.19.10",
     "esdoc-standard-plugin": "1.0.0",
-    "eslint": "7.32.0",
-    "eslint-config-airbnb": "18.2.1",
-    "eslint-config-prettier": "8.3.0",
-    "eslint-plugin-cypress": "2.12.1",
-    "eslint-plugin-import": "2.24.2",
-    "eslint-plugin-jsx-a11y": "6.4.1",
-    "eslint-plugin-prettier": "4.0.0",
-    "eslint-plugin-react": "7.26.1",
-    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint": "8.56.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-cypress": "2.15.1",
+    "eslint-plugin-import": "2.29.1",
+    "eslint-plugin-jsx-a11y": "6.8.0",
+    "eslint-plugin-prettier": "5.0.1",
+    "eslint-plugin-react": "7.33.2",
+    "eslint-plugin-react-hooks": "4.6.0",
     "fetch-mock": "9.11.0",
-    "fixpack": "3.0.6",
+    "file-loader": "^6.2.0",
+    "fixpack": "4.0.0",
     "generact": "0.4.0",
     "gensync": "1.0.0-beta.2",
-    "geops-docjs-template": "1.0.7",
     "husky": "8.0.3",
     "is-ci": "3.0.1",
     "jest-canvas-mock": "^2.5.2",
     "jest-serializer-html": "7.1.0",
-    "lint-staged": "11.2.0",
+    "lint-staged": "15.2.0",
     "mock-socket": "9.3.1",
-    "prettier": "2.4.1",
+    "postcss-normalize": "^10.0.1",
+    "prettier": "3.1.1",
     "react-app-rewired": "2.2.1",
     "react-error-overlay": "6.0.11",
-    "react-scripts": "4.0.3",
-    "react-svg-loader": "3.0.3",
-    "react-test-renderer": "17.0.2",
-    "react-web-component-style-loader": "0.1.4-alpha",
+    "react-scripts": "5.0.1",
     "redux-mock-store": "1.5.4",
-    "resemblejs": "4.1.0",
-    "sass": "1.69.4",
+    "resemblejs": "5.0.0",
+    "sass": "1.69.5",
+    "sass-loader": "^13.3.2",
     "sort-json": "2.0.1",
     "source-map-explorer": "^2.5.3",
     "standard-version": "9.5.0",
-    "start-server-and-test": "1.14.0",
+    "start-server-and-test": "2.0.3",
     "stream-array": "1.1.2",
-    "stylelint": "13.13.1",
-    "stylelint-config-recommended-scss": "4.3.0",
-    "stylelint-config-standard": "22.0.0",
-    "stylelint-scss": "3.21.0",
+    "style-loader": "^3.3.3",
+    "stylelint": "16.0.2",
+    "stylelint-config-recommended-scss": "14.0.0",
+    "stylelint-config-standard": "35.0.0",
+    "stylelint-scss": "6.0.0",
+    "terser-webpack-plugin": "^5.3.9",
     "to-string-loader": "1.2.0",
-    "vinyl-fs": "3.0.3",
+    "url-loader": "^4.1.1",
+    "vinyl-fs": "4.0.0",
     "xmlserializer": "^0.6.1"
   },
-  "resolutions": {
-    "react-error-overlay": "6.0.9"
-  },
   "scripts": {
-    "analyze": "source-map-explorer 'build/static/js/*.js",
+    "analyze": "GENERATE_SOURCEMAP=true  react-app-rewired build && source-map-explorer 'build/bundle.js'",
     "build": "GENERATE_SOURCEMAP=false  react-app-rewired build &&  bash ./scripts/build-es.sh && node scripts/prepare-package.js",
+    "clean": "rm -rf node_modules/ && yarn install",
     "coverage": "yarn test  --watchAll=false  --coverage --coverageDirectory=coverage",
     "cp": "generact --root src",
     "cy:open": "cypress open",
@@ -135,12 +131,13 @@
     "cy:test:chrome": "yarn build && start-server-and-test start:http http://localhost:3000 'cypress run --browser chrome'",
     "cy:test:edge": "yarn build && start-server-and-test start:http http://localhost:3000 'cypress run --browser edge'",
     "cy:test:firefox": "yarn build && start-server-and-test start:http http://localhost:3000 'cypress run --browser firefox'",
-    "doc": "bash ./scripts/prepare-doc.sh",
+    "doc": "styleguidist build && cp -rf src/img/ doc/build",
     "eject": "react-scripts eject",
-    "fixpack": "fixpack --sortToTop name --sortToTop description --sortToTop version --sortToTop author --sortToTop private --sortToTop main --sortToTop proxy --sortToTop dependencies --sortToTop peerDependencies --sortToTop devDependencies --sortToTop resolutions --sortToTop scripts",
-    "format": "prettier --write 'src/**/*.js' '*.md' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
+    "esbuild": "esbuild src/*.js src/**/*.js src/**/**/*.js --target=chrome100 --outdir=build/es --loader:.js=jsx --sourcemap=external",
+    "fixpack": "fixpack",
+    "format": "prettier --write 'cypress/**/*.js' '*.js' '*.json' 'src/**/*.js' '*.md' && eslint 'src/**/*.js' --fix && stylelint 'src/**/*.css' 'src/**/*.scss' --fix",
     "link2": "cmdToAdd=$(node ./scripts/read-pkg-json.js add) && $cmdToAdd && yarn build && cmdToRemove=$(node ./scripts/read-pkg-json.js remove) && $cmdToRemove && cd build && yarn link",
-    "lint": "eslint 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
+    "lint": "eslint 'cypress/**/*.js' '*.js' 'src/**/*.js' && stylelint 'src/**/*.css' 'src/**/*.scss'",
     "prebuild": "rm -rf build/",
     "prepare": "is-ci || husky install",
     "publish:alpha": "yarn release -- --prerelease alpha --skip.changelog && yarn run build && HUSKY=0 yarn publish build/ --access public --tag beta && git push origin HEAD && git push --tags",
@@ -153,7 +150,7 @@
     "start": "ESLINT_NO_DEV_ERRORS=true HTTPS=true react-app-rewired start",
     "start:doc": "ESLINT_NO_DEV_ERRORS=true  styleguidist server",
     "start:http": "ESLINT_NO_DEV_ERRORS=true react-app-rewired start",
-    "test": "react-app-rewired test  --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(node-fetch|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\"",
+    "test": "react-app-rewired test --env=jsdom --transformIgnorePatterns \"/node_modules/(?!(color-.*|@geops/create-react-web-component|filter-obj|split-on-first|node-fetch|query-string|decode-uri-component|fetch-blob|@geops/react-ui|jsts|ol|react-spatial|mobility-toolbox-js|ol-mapbox-style|geotiff|quick-lru)/).*/\"",
     "up": "yarn upgrade-interactive --latest"
   },
   "browserslist": [
@@ -164,45 +161,6 @@
     "not android < 5"
   ],
   "config-overrides-path": "packages/wc/config-overrides.js",
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "browser": true,
-      "es6": true,
-      "jest": true,
-      "cypress/globals": true
-    },
-    "parser": "@babel/eslint-parser",
-    "extends": [
-      "airbnb",
-      "airbnb/hooks",
-      "prettier"
-    ],
-    "plugins": [
-      "cypress",
-      "prettier"
-    ],
-    "rules": {
-      "linebreak-style": 0,
-      "arrow-body-style": 0,
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ],
-      "react/forbid-prop-types": "Off",
-      "prettier/prettier": "error"
-    },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    }
-  },
   "jest": {
     "resetMocks": false,
     "coverageReporters": [
@@ -212,59 +170,5 @@
     "snapshotSerializers": [
       "jest-serializer-html"
     ]
-  },
-  "lint-staged": {
-    "*.md": [
-      "prettier --write"
-    ],
-    "src/lang/*.json": [
-      "yarn sort",
-      "git add"
-    ],
-    "(src|__mocks__)/**/*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add",
-      "yarn test --bail --findRelatedTests"
-    ],
-    "src/**/*.scss": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "package.json": [
-      "yarn fixpack",
-      "git add"
-    ]
-  },
-  "prettier": {
-    "trailingComma": "all",
-    "singleQuote": true
-  },
-  "stylelint": {
-    "plugins": [
-      "stylelint-scss"
-    ],
-    "extends": [
-      "stylelint-config-standard",
-      "stylelint-config-recommended-scss"
-    ],
-    "rules": {
-      "selector-pseudo-class-no-unknown": [
-        true,
-        {
-          "ignorePseudoClasses": [
-            "export"
-          ]
-        }
-      ],
-      "property-no-unknown": [
-        true,
-        {
-          "ignoreProperties": [
-            "/transitiondelay/"
-          ]
-        }
-      ]
-    }
   }
 }

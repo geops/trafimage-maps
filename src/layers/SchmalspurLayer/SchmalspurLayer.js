@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for SchmalspurLayer
@@ -15,11 +15,11 @@ class SchmalspurLayer extends MapboxStyleLayer {
 
   fetchSource() {
     const { url } =
-      this.mapboxLayer?.mbMap?.getSource('ch.sbb.isb.schmalspur') || {};
+      this.mapboxLayer?.mbMap?.getSource("ch.sbb.isb.schmalspur") || {};
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        this.tuInfos = data['geops.isb.schmalspur.tu_info'];
+        this.tuInfos = data["geops.isb.schmalspur.tu_info"];
       })
       // eslint-disable-next-line no-console
       .catch((err) => console.error(err));

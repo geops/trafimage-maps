@@ -1,10 +1,10 @@
-import React from 'react';
-import { MapboxStyleLayer } from 'mobility-toolbox-js/ol';
-import IconList from '../../components/IconList';
-import lines from '../ZweitausbildungRoutesLayer/lines';
+import React from "react";
+import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import IconList from "../../components/IconList";
+import lines from "../ZweitausbildungRoutesLayer/lines";
 
-const sourceId = 'ch.sbb.zweitausbildung';
-const sourceLayer = 'ch.sbb.zweitausbildung';
+const sourceId = "ch.sbb.zweitausbildung";
+const sourceLayer = "ch.sbb.zweitausbildung";
 
 /**
  * Layer for zweitausbildung highlight routes.
@@ -16,13 +16,13 @@ const sourceLayer = 'ch.sbb.zweitausbildung';
 class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
   constructor(options = {}) {
     const defautStyle = {
-      type: 'line',
+      type: "line",
       paint: {
-        'line-color': 'rgba(0,0,0,0)',
-        'line-width': 10,
+        "line-color": "rgba(0,0,0,0)",
+        "line-width": 10,
       },
       layout: {
-        'line-cap': 'round',
+        "line-cap": "round",
       },
     };
     const { property } = options.properties.zweitausbildung;
@@ -31,7 +31,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
         ...defautStyle,
         id: options.key || options.name,
         source: sourceId,
-        'source-layer': sourceLayer,
+        "source-layer": sourceLayer,
       },
     ];
 
@@ -58,7 +58,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       queryRenderedLayersFilter: (layer) => {
         return (
           layer.filter &&
-          layer.filter[0] === 'has' &&
+          layer.filter[0] === "has" &&
           layer.filter[1] === property
         );
       },
@@ -83,7 +83,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
        * @ignore
        */
       this.olListenersKeys.push(
-        this.map.on('singleclick', () => {
+        this.map.on("singleclick", () => {
           this.onSelect();
           this.forceRenderList();
         }),
@@ -108,7 +108,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       }
     });
     this.selectOptions = this.selectOptions.sort((a, b) => a.localeCompare(b));
-    this.selectOptions.unshift('Alle');
+    this.selectOptions.unshift("Alle");
   }
 
   /**
@@ -154,7 +154,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
       return;
     }
     this.styleLayers.forEach(({ id }) => {
-      mbMap.setPaintProperty(id, 'line-color', 'rgba(0,0,0,0)');
+      mbMap.setPaintProperty(id, "line-color", "rgba(0,0,0,0)");
     });
 
     if (this.selected) {
@@ -173,7 +173,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
 
     const { color } = lines[this.selected] || {};
     if (!color) {
-      if (this.selected !== 'Alle') {
+      if (this.selected !== "Alle") {
         // eslint-disable-next-line no-console
         console.log(
           `There is no color defined for ${this.selected}, available labels are `,
@@ -184,11 +184,11 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     }
 
     this.styleLayers.forEach(({ id }) => {
-      mbMap.setPaintProperty(id, 'line-color', [
-        'case',
-        ['in', this.selected, ['get', this.property]],
+      mbMap.setPaintProperty(id, "line-color", [
+        "case",
+        ["in", this.selected, ["get", this.property]],
         color,
-        'rgba(0,0,0,0)',
+        "rgba(0,0,0,0)",
       ]);
     });
   }

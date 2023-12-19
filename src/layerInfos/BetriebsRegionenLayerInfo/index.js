@@ -1,1 +1,1 @@
-export { default } from './BetriebsRegionenLayerInfo';
+export { default } from "./BetriebsRegionenLayerInfo";

@@ -1,1 +1,1 @@
-export { default } from './IsbOtherLayerInfo';
+export { default } from "./IsbOtherLayerInfo";

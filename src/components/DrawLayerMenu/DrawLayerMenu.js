@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import LayerTree from 'react-spatial/components/LayerTree';
-import InfosButton from '../InfosButton';
+import React, { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import LayerTree from "react-spatial/components/LayerTree";
+import InfosButton from "../InfosButton";
 
 function DrawLayerMenu() {
   const { t } = useTranslation();
@@ -12,8 +12,8 @@ function DrawLayerMenu() {
 
   const titles = useMemo(() => {
     return {
-      layerShow: t('Layer anzeigen'),
-      layerHide: t('Layer verbergen'),
+      layerShow: t("Layer anzeigen"),
+      layerHide: t("Layer verbergen"),
     };
   }, [t]);
 
@@ -31,7 +31,7 @@ function DrawLayerMenu() {
               {layer.renderItemContent
                 ? layer.renderItemContent(layerTreeComp)
                 : layerTreeComp.renderItemContent(layer)}
-              {layer.get('hasInfos') && <InfosButton selectedInfo={layer} />}
+              {layer.get("hasInfos") && <InfosButton selectedInfo={layer} />}
             </>
           )}
           layers={layers}

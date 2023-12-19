@@ -6,8 +6,8 @@ function meterFormat(coords) {
   );
 }
 
-function wgs84Format(coords, decimalSep = '.') {
-  return coords.map((num) => num.toFixed(5).replace('.', decimalSep));
+function wgs84Format(coords, decimalSep = ".") {
+  return coords.map((num) => num.toFixed(5).replace(".", decimalSep));
 }
 
 export default { meterFormat, wgs84Format };

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import DataLink from '../../components/DataLink';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import DataLink from "../../components/DataLink";
 
 const comps = {
   de: (
@@ -54,7 +54,7 @@ const comps = {
   ),
 };
 
-const HandicapTopicInfo = () => {
+function HandicapTopicInfo() {
   const { i18n, t } = useTranslation();
   return (
     <div>
@@ -65,11 +65,11 @@ const HandicapTopicInfo = () => {
       </p>
       <p>
         <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
-          {t('Diesen Datensatz als Service einbinden (SBB-intern)')}
+          {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
         </DataLink>
       </p>
     </div>
   );
-};
+}
 
 export default React.memo(HandicapTopicInfo);

@@ -1,42 +1,24 @@
 .wkp-share {
-  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  gap: 24px;
+  padding: 10px 16px;
 
-  .ta-draw-icon {
-    svg {
-      font-size: 21px;
-    }
+  > *:first-child {
+    padding-left:12px
   }
 
-  > div {
-    width: 30px;
-    height: 30px;
-    margin: 10px 0 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-    svg:hover {
-      color: $brand-primary-hover;
-    }
+  .wkp-permalink-bt {
+    width: 20px;
   }
 
   .ta-mail-icon {
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-
-      & svg {
-        font-size: 23px;
-        margin-bottom: 2px;
-      }
-    }
+    width:24px;
+    font-size: 23px;
   }
 
   .ta-facebook-icon {
-    margin: 10px 0 10px 15px;
+    width: 11px;
     font-size: 30px;
   }
 
@@ -47,5 +29,20 @@
 
   .rs-canvas-save-button {
     font-size: 28px;
+  }
+
+  svg:hover {
+    color: $brand-primary-hover;
+  }
+
+
+
+  > div, a {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
   }
 }

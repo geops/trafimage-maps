@@ -1,8 +1,8 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
-import { fromLonLat } from 'ol/proj';
-import Search from '../Search';
-import isoToIntlVehicleCode from '../../utils/isoToIntlVehicleCode';
+import React from "react";
+import { Typography } from "@mui/material";
+import { fromLonLat } from "ol/proj";
+import Search from "../Search";
+import isoToIntlVehicleCode from "../../utils/isoToIntlVehicleCode";
 
 class StopFinder extends Search {
   constructor() {
@@ -22,7 +22,7 @@ class StopFinder extends Search {
     const { signal } = this.abortController;
 
     return fetch(
-      `${this.stopsUrl}?&q=${encodeURIComponent(value)}&key=${
+      `${this.stopsUrl}/?&q=${encodeURIComponent(value)}&key=${
         this.apiKey
       }&limit=50`,
       {
@@ -45,7 +45,7 @@ class StopFinder extends Search {
       // When collapsed we move first Swiss result to second position
       const sorted = [...this.items];
       const firstSwissStationIdx = sorted.findIndex(
-        (feat) => feat.properties.country_code === 'CH',
+        (feat) => feat.properties.country_code === "CH",
       );
       if (firstSwissStationIdx > 0) {
         sorted.splice(1, 0, sorted.splice(firstSwissStationIdx, 1)[0]);
@@ -86,7 +86,7 @@ class StopFinder extends Search {
 
   openPopup(item) {
     const { layerService } = this.props;
-    const layer = layerService.getLayer('ch.sbb.netzkarte.stationen');
+    const layer = layerService.getLayer("ch.sbb.netzkarte.stationen");
 
     if (!layer) {
       return;
@@ -97,7 +97,7 @@ class StopFinder extends Search {
     if (layer.ready) {
       this.onIdle();
     } else {
-      layer.once('datarendered', this.onIdle);
+      layer.once("datarendered", this.onIdle);
     }
   }
 
@@ -106,7 +106,7 @@ class StopFinder extends Search {
       return;
     }
     const { layerService, dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = layerService.getLayer('ch.sbb.netzkarte.data');
+    const { mbMap } = layerService.getLayer("ch.sbb.netzkarte.data");
     const styleLayers = mbMap?.getStyle()?.layers;
 
     // We get feature infos only for layer that use the source 'stations'.
@@ -120,8 +120,8 @@ class StopFinder extends Search {
         .map(({ source }) => source);
       return (
         layer.visible &&
-        layer.get('isQueryable') &&
-        sourceIds.includes('stations')
+        layer.get("isQueryable") &&
+        sourceIds.includes("stations")
       );
     });
 

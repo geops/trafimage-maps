@@ -1,24 +1,24 @@
-import AusbauLayer from '.';
+import AusbauLayer from ".";
 
-describe('AusbauFilters', () => {
+describe("AusbauFilters", () => {
   let layer;
   let spy;
-  const dfltFilter = ['==', '', ['get', 'angebotsschritt']];
+  const dfltFilter = ["==", "", ["get", "angebotsschritt"]];
   let style;
 
   beforeEach(() => {
     style = {
-      id: 'ch.sbb.bauprojekte',
+      id: "ch.sbb.bauprojekte",
       layers: [
         {
-          id: 'style_ausbau_without_filter',
+          id: "style_ausbau_without_filter",
         },
         {
-          id: 'style_ausbau_with_filter',
-          filter: ['all', ['==', 'type', 'ausbau']],
+          id: "style_ausbau_with_filter",
+          filter: ["all", ["==", "type", "ausbau"]],
         },
         {
-          id: 'fooaotherbar',
+          id: "fooaotherbar",
         },
       ],
     };
@@ -41,71 +41,71 @@ describe('AusbauFilters', () => {
     };
   });
 
-  test('has good default properties.', () => {
+  test("has good default properties.", () => {
     expect(layer.initialFiltersById).toEqual({});
     expect(layer.showFilterParam).toBe();
     expect(layer.filter).toEqual(layer.filters[0]);
     expect(layer.filters.length).toEqual(3);
   });
 
-  describe('#addDynamicFilters()', () => {
-    test('uses the default filter if showFilterParam == false', () => {
+  describe("#addDynamicFilters()", () => {
+    test("uses the default filter if showFilterParam == false", () => {
       expect(style.layers[0].filter).toBe();
       layer.addDynamicFilters();
-      expect(style.layers[0].filter).toEqual(['all', dfltFilter]);
+      expect(style.layers[0].filter).toEqual(["all", dfltFilter]);
     });
 
-    test('apply default filter if showFilterParam == true', () => {
-      layer.showFilterParam = 'true';
+    test("apply default filter if showFilterParam == true", () => {
+      layer.showFilterParam = "true";
       expect(style.layers[0].filter).toBe();
 
       layer.addDynamicFilters();
-      expect(style.layers[0].filter).toEqual(['all', dfltFilter]);
+      expect(style.layers[0].filter).toEqual(["all", dfltFilter]);
       expect(style.layers[1].filter).toEqual([
-        'all',
-        ['==', 'type', 'ausbau'],
+        "all",
+        ["==", "type", "ausbau"],
         dfltFilter,
       ]);
       expect(style.layers[2].filter).toBe();
     });
   });
 
-  describe('#applyNewFilter()', () => {
-    test('apply new filter', () => {
-      layer.applyNewFilter('bar');
+  describe("#applyNewFilter()", () => {
+    test("apply new filter", () => {
+      layer.applyNewFilter("bar");
       expect(style.layers[0].filter).toEqual([
-        'all',
-        ['==', 'bar', ['get', 'angebotsschritt']],
+        "all",
+        ["==", "bar", ["get", "angebotsschritt"]],
       ]);
       expect(style.layers[1].filter).toEqual([
-        'all',
-        ['==', 'type', 'ausbau'],
-        ['==', 'bar', ['get', 'angebotsschritt']],
+        "all",
+        ["==", "type", "ausbau"],
+        ["==", "bar", ["get", "angebotsschritt"]],
       ]);
       expect(style.layers[2].filter).toBe();
 
       // foo must replace bar.
-      layer.applyNewFilter('foo');
+      layer.applyNewFilter("foo");
       expect(style.layers[0].filter).toEqual([
-        'all',
-        ['==', 'foo', ['get', 'angebotsschritt']],
+        "all",
+        ["==", "foo", ["get", "angebotsschritt"]],
       ]);
       expect(style.layers[1].filter).toEqual([
-        'all',
-        ['==', 'type', 'ausbau'],
-        ['==', 'foo', ['get', 'angebotsschritt']],
+        "all",
+        ["==", "type", "ausbau"],
+        ["==", "foo", ["get", "angebotsschritt"]],
       ]);
       expect(style.layers[2].filter).toBe();
 
       // apply inital filters.
-      layer.applyNewFilter('');
+      layer.applyNewFilter("");
       expect(style.layers[0].filter).toEqual([
-        'all',
-        ['==', '', ['get', 'angebotsschritt']],
+        "all",
+        ["==", "", ["get", "angebotsschritt"]],
       ]);
       expect(style.layers[1].filter).toEqual([
-        'all',
-        ['==', 'type', 'ausbau'],
+        "all",
+        ["==", "type", "ausbau"],
         dfltFilter,
       ]);
       expect(style.layers[2].filter).toBe();

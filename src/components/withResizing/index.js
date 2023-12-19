@@ -1,1 +1,1 @@
-export { default } from './withResizing';
+export { default } from "./withResizing";

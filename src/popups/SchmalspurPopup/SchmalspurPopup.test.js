@@ -1,12 +1,12 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { render } from '@testing-library/react';
-import { Feature } from 'ol';
-import { MapboxLayer } from 'mobility-toolbox-js/ol';
-import SchmalspurPopup from '.';
-import SchmalspurLayer from '../../layers/SchmalspurLayer';
+import React from "react";
+import { Provider } from "react-redux";
+import { render } from "@testing-library/react";
+import { Feature } from "ol";
+import { MapboxLayer } from "mobility-toolbox-js/ol";
+import SchmalspurPopup from ".";
+import SchmalspurLayer from "../../layers/SchmalspurLayer";
 
-describe('SchmalspurPopup', () => {
+describe("SchmalspurPopup", () => {
   let store;
 
   beforeEach(() => {
@@ -16,18 +16,18 @@ describe('SchmalspurPopup', () => {
     });
   });
 
-  test('displays info', () => {
-    global.i18n.addResourceBundle('de', 'translation', {
-      'zur Webseite von': 'zur Webseite von {{operator}}',
+  test("displays info", () => {
+    global.i18n.addResourceBundle("de", "translation", {
+      "zur Webseite von": "zur Webseite von {{operator}}",
     });
     const layer = new SchmalspurLayer({
-      mapboxLayer: new MapboxLayer({ url: 'https://foo' }),
+      mapboxLayer: new MapboxLayer({ url: "https://foo" }),
     });
     layer.tuInfos = {
       50: {
-        long_name: 'long_name',
-        name: 'foo',
-        url_de: 'https://foo.de',
+        long_name: "long_name",
+        name: "foo",
+        url_de: "https://foo.de",
       },
     };
     const { container } = render(
@@ -35,9 +35,9 @@ describe('SchmalspurPopup', () => {
         <SchmalspurPopup
           feature={
             new Feature({
-              isb_tu_nummer: '50',
-              mail: 'mail',
-              phone: 'phone',
+              isb_tu_nummer: "50",
+              mail: "mail",
+              phone: "phone",
             })
           }
           layer={layer}
@@ -45,7 +45,7 @@ describe('SchmalspurPopup', () => {
       </Provider>,
     );
     expect(container.textContent).toBe(
-      'long_namezur Webseite von fooLink.svgphonemail',
+      "long_namezur Webseite von fooLink.svgphonemail",
     );
   });
 });

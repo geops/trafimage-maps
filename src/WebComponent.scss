@@ -1,3 +1,5 @@
+/* stylelint-disable import-notation */
+/* stylelint-disable scss/at-import-partial-extension */
 @import 'globals.scss';
 
 // @geops/react-ui
@@ -44,7 +46,6 @@
 @import './components/DrawLayerMenu/DrawLayerMenu.scss';
 
 // Menus
-@import './menus/ShareMenu/ShareMenu.scss';
 @import './menus/TrackerMenu/TrackerMenu.scss';
 
 // Popups

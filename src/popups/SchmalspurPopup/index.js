@@ -1,1 +1,1 @@
-export { default } from './SchmalspurPopup';
+export { default } from "./SchmalspurPopup";

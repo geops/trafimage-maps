@@ -1,1 +1,1 @@
-export { default } from './MapboxStyleLayer';
+export { default } from "./MapboxStyleLayer";

@@ -1,21 +1,76 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header match snapshots 1`] = `
-<div
-  className="wkp-header"
->
-  <div
-    className="wkp-header-right"
-  >
-    <Memo(Login) />
-    <Memo(LanguageSelect) />
-    <div
-      className="wkp-header-sbb-logo-wrapper"
+<div class="wkp-header">
+  <div class="wkp-header-right">
+    <div class="wkp-login"
+         role="button"
+         tabindex="0"
     >
-      <ForwardRef(SvgSbbLogo)
-        className="wkp-header-sbb-logo"
-        focusable={false}
-      />
+      <svg focusable="false"
+           class="wkp-login-icon"
+      >
+        user_92_large.svg
+      </svg>
+      <span class="wkp-login-text">
+        Anmelden
+      </span>
+    </div>
+    <div class="makeStyles-wrapper-1 makeStyles-wrapper-5">
+      <div data-testid="trafimage-maps-select"
+           data-cy="lang-select"
+           class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth makeStyles-select-4 css-iie7mv-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
+      >
+        <div tabindex="0"
+             role="combobox"
+             aria-controls=":r0:"
+             aria-expanded="false"
+             aria-haspopup="listbox"
+             class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+        >
+          <span class="makeStyles-currentValue-3">
+            <svg focusable="false"
+                 class="makeStyles-icon-2 makeStyles-icon-6 wkp-single-value-globe"
+            >
+              globe_210_large.svg
+            </svg>
+            <span style="padding-top: 1px;">
+              Français
+            </span>
+          </span>
+        </div>
+        <input aria-invalid="false"
+               aria-hidden="true"
+               tabindex="-1"
+               class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+               value="fr"
+        >
+        <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1dl46ju-MuiSvgIcon-root-MuiSelect-icon"
+             focusable="false"
+             aria-hidden="true"
+             viewbox="0 0 24 24"
+             data-testid="ExpandMoreIcon"
+        >
+          <path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z">
+          </path>
+        </svg>
+        <fieldset aria-hidden="true"
+                  class="MuiOutlinedInput-notchedOutline css-1lps3wb-MuiOutlinedInput-notchedOutline"
+        >
+          <legend class="css-ihdtdm">
+            <span class="notranslate">
+              ​
+            </span>
+          </legend>
+        </fieldset>
+      </div>
+    </div>
+    <div class="wkp-header-sbb-logo-wrapper">
+      <svg focusable="false"
+           class="wkp-header-sbb-logo"
+      >
+        sbb-logo.svg
+      </svg>
     </div>
   </div>
 </div>

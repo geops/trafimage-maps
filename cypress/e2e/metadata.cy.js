@@ -3,7 +3,7 @@
 // import MapboxStyleLayer from '../../src/layers/MapboxStyleLayer';
 // import TrafimageMapboxLayer from '../../src/layers/TrafimageMapboxLayer';
 
-describe('metadata', () => {
+describe("metadata", () => {
   // beforeEach(() => {
   //   cy.consent();
   //   cy.visit('');

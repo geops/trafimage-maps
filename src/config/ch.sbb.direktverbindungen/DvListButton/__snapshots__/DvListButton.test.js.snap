@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DvListButton should match snapshot and be disabled on load. 1`] = `
-<button class="MuiButtonBase-root MuiIconButton-root WithStyles(ForwardRef(IconButton))-root-1 Mui-disabled Mui-disabled"
+<button class="MuiButtonBase-root Mui-disabled MuiIconButton-root ForwardRef(IconButton)-root-1 Mui-disabled MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         tabindex="-1"
         type="button"
         disabled
@@ -9,10 +9,8 @@ exports[`DvListButton should match snapshot and be disabled on load. 1`] = `
         title="Alle Direktverbindungen anzeigen"
         data-testid="dv-list-button"
 >
-  <span class="MuiIconButton-label">
-    <svg>
-      list-icon-sbb.svg
-    </svg>
-  </span>
+  <svg>
+    list-icon-sbb.svg
+  </svg>
 </button>
 `;

@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { MdClose } from 'react-icons/md';
-import Button from '../Button';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { MdClose } from "react-icons/md";
+import Button from "../Button";
 
 const propTypes = {
   /**
@@ -82,15 +82,15 @@ const propTypes = {
 };
 
 const defaultProps = {
-  button: 'search',
-  value: '',
-  className: 'tm-search-input',
-  classNameClearBt: 'tm-button tm-bt-clear',
-  classNameSearchBt: 'tm-button tm-bt-search',
-  placeholder: '',
-  titleClearBt: '',
-  titleSearchBt: '',
-  titleSearchInput: '',
+  button: "search",
+  value: "",
+  className: "tm-search-input",
+  classNameClearBt: "tm-button tm-bt-clear",
+  classNameSearchBt: "tm-button tm-bt-search",
+  placeholder: "",
+  titleClearBt: "",
+  titleSearchBt: "",
+  titleSearchInput: "",
   onFocus: () => {},
   onBlurInput: () => {},
   onClickSearchButton: () => {},
@@ -173,9 +173,9 @@ class SearchInput extends PureComponent {
     const { focus } = this.state;
 
     // Hide clear button
-    const display = !value ? 'none' : undefined;
+    const display = !value ? "none" : undefined;
 
-    let newClassName = className || '';
+    let newClassName = className || "";
     if (focus) {
       newClassName = `${newClassName} tm-focus`;
     }
@@ -206,7 +206,7 @@ class SearchInput extends PureComponent {
             }
           }
           onClick={(e) => {
-            this.search(e, '');
+            this.search(e, "");
             this.setState({ focus: true });
             onClearClick();
           }}

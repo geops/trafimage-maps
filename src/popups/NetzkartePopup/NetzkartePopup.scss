@@ -1,3 +1,5 @@
+/* stylelint-disable scss/at-import-partial-extension */
+/* stylelint-disable import-notation */
 @import '../../globals.scss';
 
 .tm-trafimage-maps {
@@ -8,7 +10,7 @@
 
     > div {
       padding: 4px 0;
-      border-width: 0 0 1px 0;
+      border-width: 0 0 1px;
       border-style: solid;
       border-color: #eee;
     }

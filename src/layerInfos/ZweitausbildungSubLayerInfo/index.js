@@ -1,1 +1,1 @@
-export { default } from './ZweitausbildungSubLayerInfo';
+export { default } from "./ZweitausbildungSubLayerInfo";

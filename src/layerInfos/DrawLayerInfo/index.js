@@ -1,1 +1,1 @@
-export { default } from './DrawLayerInfo';
+export { default } from "./DrawLayerInfo";

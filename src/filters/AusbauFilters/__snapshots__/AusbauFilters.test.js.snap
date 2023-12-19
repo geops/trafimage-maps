@@ -1,103 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AusbauFilters should match snapshot if no layer defined, should display null. 1`] = `null`;
+exports[`AusbauFilters should match snapshot if no layer defined, should display null. 1`] = `""`;
 
 exports[`AusbauFilters should match snapshot if showFilterParam is an empty string, should display a select box. 1`] = `
-<div
-  className="MuiFormControl-root makeStyles-formControl-1 MuiFormControl-fullWidth"
->
-  <label
-    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-    data-shrink={true}
+<div class="MuiFormControl-root MuiFormControl-fullWidth makeStyles-formControl-4 css-q8hpuo-MuiFormControl-root">
+  <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-10ne5he-MuiFormLabel-root-MuiInputLabel-root"
+         data-shrink="true"
   >
     angebotsschritt
   </label>
-  <div
-    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-    onClick={[Function]}
-  >
-    <div
-      aria-haspopup="listbox"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onMouseDown={[Function]}
-      role="button"
-      tabIndex={0}
+  <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-16ml97r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
+    <div tabindex="0"
+         role="combobox"
+         aria-controls=":r1:"
+         aria-expanded="false"
+         aria-haspopup="listbox"
+         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
     >
       Projekte im Bau
     </div>
-    <input
-      aria-hidden={true}
-      className="MuiSelect-nativeInput"
-      onAnimationStart={[Function]}
-      onChange={[Function]}
-      required={false}
-      tabIndex={-1}
-      value=""
-    />
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
-      focusable="false"
-      viewBox="0 0 24 24"
+    <input aria-invalid="false"
+           aria-hidden="true"
+           tabindex="-1"
+           class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+           value
     >
-      <path
-        d="M7 10l5 5 5-5z"
-      />
+    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1dl46ju-MuiSvgIcon-root-MuiSelect-icon"
+         focusable="false"
+         aria-hidden="true"
+         viewbox="0 0 24 24"
+         data-testid="ArrowDropDownIcon"
+    >
+      <path d="M7 10l5 5 5-5z">
+      </path>
     </svg>
+    <fieldset aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-1lps3wb-MuiOutlinedInput-notchedOutline"
+    >
+      <legend class="css-ihdtdm">
+        <span class="notranslate">
+          ​
+        </span>
+      </legend>
+    </fieldset>
   </div>
 </div>
 `;
 
 exports[`AusbauFilters should match snapshot if showFilterParam is true, should display a select box. 1`] = `
-<div
-  className="MuiFormControl-root makeStyles-formControl-1 MuiFormControl-fullWidth"
->
-  <label
-    className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink"
-    data-shrink={true}
+<div class="MuiFormControl-root MuiFormControl-fullWidth makeStyles-formControl-3 css-q8hpuo-MuiFormControl-root">
+  <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-10ne5he-MuiFormLabel-root-MuiInputLabel-root"
+         data-shrink="true"
   >
     angebotsschritt
   </label>
-  <div
-    className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
-    onClick={[Function]}
-  >
-    <div
-      aria-haspopup="listbox"
-      className="MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input"
-      onBlur={[Function]}
-      onFocus={[Function]}
-      onKeyDown={[Function]}
-      onMouseDown={[Function]}
-      role="button"
-      tabIndex={0}
+  <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-16ml97r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
+    <div tabindex="0"
+         role="combobox"
+         aria-controls=":r0:"
+         aria-expanded="false"
+         aria-haspopup="listbox"
+         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
     >
       Projekte im Bau
     </div>
-    <input
-      aria-hidden={true}
-      className="MuiSelect-nativeInput"
-      onAnimationStart={[Function]}
-      onChange={[Function]}
-      required={false}
-      tabIndex={-1}
-      value=""
-    />
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root MuiSelect-icon"
-      focusable="false"
-      viewBox="0 0 24 24"
+    <input aria-invalid="false"
+           aria-hidden="true"
+           tabindex="-1"
+           class="MuiSelect-nativeInput css-yf8vq0-MuiSelect-nativeInput"
+           value
     >
-      <path
-        d="M7 10l5 5 5-5z"
-      />
+    <svg class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium MuiSelect-icon MuiSelect-iconOutlined css-1dl46ju-MuiSvgIcon-root-MuiSelect-icon"
+         focusable="false"
+         aria-hidden="true"
+         viewbox="0 0 24 24"
+         data-testid="ArrowDropDownIcon"
+    >
+      <path d="M7 10l5 5 5-5z">
+      </path>
     </svg>
+    <fieldset aria-hidden="true"
+              class="MuiOutlinedInput-notchedOutline css-1lps3wb-MuiOutlinedInput-notchedOutline"
+    >
+      <legend class="css-ihdtdm">
+        <span class="notranslate">
+          ​
+        </span>
+      </legend>
+    </fieldset>
   </div>
 </div>
 `;
 
-exports[`AusbauFilters should match snapshot if showFilterParam is undefined or null, should display null. 1`] = `null`;
+exports[`AusbauFilters should match snapshot if showFilterParam is undefined or null, should display null. 1`] = `""`;

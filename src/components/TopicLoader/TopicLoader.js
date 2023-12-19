@@ -1,28 +1,28 @@
-import { MatomoContext } from '@datapunt/matomo-tracker-react';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import i18next from 'i18next';
-import { withTranslation } from 'react-i18next';
-import { compose } from 'redux';
-import { Layer } from 'mobility-toolbox-js/ol';
-import { unByKey } from 'ol/Observable';
-import LayerService from '../../utils/LayerService';
+import { MatomoContext } from "@jonkoops/matomo-tracker-react";
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import i18next from "i18next";
+import { withTranslation } from "react-i18next";
+import { compose } from "redux";
+import { Layer } from "mobility-toolbox-js/ol";
+import { unByKey } from "ol/Observable";
+import LayerService from "../../utils/LayerService";
 import {
   setLayers,
   setMaxZoom,
   setMinZoom,
   setMaxExtent,
-} from '../../model/map/actions';
+} from "../../model/map/actions";
 import {
   setActiveTopic,
   setTopics,
   setFeatureInfo,
   setSearchService,
-} from '../../model/app/actions';
-import SearchService from '../Search/SearchService';
-import TopicElements from '../TopicElements';
-import { redirect, redirectToLogin } from '../../utils/redirectHelper';
+} from "../../model/app/actions";
+import SearchService from "../Search/SearchService";
+import TopicElements from "../TopicElements";
+import { redirect, redirectToLogin } from "../../utils/redirectHelper";
 
 const propTypes = {
   history: PropTypes.shape({
@@ -41,6 +41,7 @@ const propTypes = {
   drawLayer: PropTypes.instanceOf(Layer).isRequired,
   cartaroUrl: PropTypes.string,
   searchUrl: PropTypes.string,
+  stopsUrl: PropTypes.string,
   realtimeKey: PropTypes.string,
   realtimeUrl: PropTypes.string,
   layers: PropTypes.arrayOf(PropTypes.instanceOf(Layer)),
@@ -66,7 +67,7 @@ const propTypes = {
 
 const defaultProps = {
   apiKey: null,
-  apiKeyName: 'key',
+  apiKeyName: "key",
   history: null,
   activeTopic: null,
   cartaroUrl: null,
@@ -75,6 +76,7 @@ const defaultProps = {
   permissionInfos: null,
   staticFilesUrl: null,
   searchUrl: null,
+  stopsUrl: null,
   appBaseUrl: null,
   realtimeKey: null,
   realtimeUrl: null,
@@ -149,7 +151,7 @@ class TopicLoader extends PureComponent {
   }
 
   componentWillUnmount() {
-    this.onChangeVisibleKeys.forEach((key) => unByKey(key));
+    this.onChangeVisibleKeys?.forEach((key) => unByKey(key));
   }
 
   loadTopics() {
@@ -192,6 +194,7 @@ class TopicLoader extends PureComponent {
       t,
       apiKey,
       searchUrl,
+      stopsUrl,
       appBaseUrl,
       activeTopic,
       dispatchSetFeatureInfo,
@@ -212,15 +215,15 @@ class TopicLoader extends PureComponent {
     if (activeTopic.redirect) {
       // Redirection to the old wkp
       redirect(appBaseUrl, activeTopic.key, {
-        baselayers: '',
-        layers: '',
+        baselayers: "",
+        layers: "",
       });
       return;
     }
 
     if (activeTopic.translations) {
       Object.entries(activeTopic.translations).forEach(([lang, trans]) => {
-        i18next.addResourceBundle(lang, 'translation', trans);
+        i18next.addResourceBundle(lang, "translation", trans);
       });
     }
 
@@ -230,6 +233,7 @@ class TopicLoader extends PureComponent {
     newSearchService.setSearches(activeTopic.searches || {});
     newSearchService.setApiKey(apiKey);
     newSearchService.setSearchUrl(searchUrl);
+    newSearchService.setStopsUrl(stopsUrl);
     newSearchService.setSearchesProps({
       t,
       activeTopic,
@@ -241,9 +245,9 @@ class TopicLoader extends PureComponent {
     this.onChangeVisibleKeys = new LayerService(layers)
       .getLayersAsFlatArray()
       .map((layer) =>
-        layer.on('change:visible', () => {
+        layer.on("change:visible", () => {
           this.updateMapLimits();
-          if (layer.get('deselectOnChangeVisible')) {
+          if (layer.get("deselectOnChangeVisible")) {
             dispatchSetFeatureInfo([]);
           }
         }),
@@ -264,8 +268,8 @@ class TopicLoader extends PureComponent {
 
     // Set maxExtent (CAUTION: will break if there are multiple visible layers with different maxExtents)
     const visibleLayersMaxExtent = visibleLayers
-      .find((layer) => layer.get('maxExtent'))
-      ?.get('maxExtent');
+      .find((layer) => layer.get("maxExtent"))
+      ?.get("maxExtent");
 
     if (visibleLayersMaxExtent) {
       dispatchSetMaxExtent(visibleLayersMaxExtent);
@@ -279,7 +283,7 @@ class TopicLoader extends PureComponent {
     */
     const visibleLayersMaxZoom = visibleLayers.reduce(
       (maxZooms, layer) =>
-        layer.get('maxZoom') ? [...maxZooms, layer.get('maxZoom')] : maxZooms,
+        layer.get("maxZoom") ? [...maxZooms, layer.get("maxZoom")] : maxZooms,
       [],
     );
 
@@ -291,7 +295,7 @@ class TopicLoader extends PureComponent {
 
     const visibleLayersMinZoom = visibleLayers.reduce(
       (minZooms, layer) =>
-        layer.get('minZoom') ? [...minZooms, layer.get('minZoom')] : minZooms,
+        layer.get("minZoom") ? [...minZooms, layer.get("minZoom")] : minZooms,
       [],
     );
 
@@ -348,7 +352,7 @@ class TopicLoader extends PureComponent {
       });
     });
 
-    const topicBaseLayers = topicLayers.filter((l) => l.get('isBaseLayer'));
+    const topicBaseLayers = topicLayers.filter((l) => l.get("isBaseLayer"));
     const visibleBaseLayers = topicLayers.filter((l) => l.visible);
 
     // Make sure a base layer is a visible on topic change
@@ -440,6 +444,7 @@ const mapStateToProps = (state) => ({
   permissionInfos: state.app.permissionInfos,
   cartaroUrl: state.app.cartaroUrl,
   searchUrl: state.app.searchUrl,
+  stopsUrl: state.app.stopsUrl,
   appBaseUrl: state.app.appBaseUrl,
   staticFilesUrl: state.app.staticFilesUrl,
   apiKey: state.app.apiKey,

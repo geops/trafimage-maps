@@ -1,1 +1,1 @@
-export { default } from './HandicapTopicInfo';
+export { default } from "./HandicapTopicInfo";
