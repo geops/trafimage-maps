@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [1.23.0](https://github.com/geops/trafimage-maps/compare/v1.22.12...v1.23.0) (2023-12-19)
 
+### Features
+
+- update all dependencies
+
 ### Bug Fixes
 
 - display Transreno instead of TransReno ([25280db](https://github.com/geops/trafimage-maps/commit/25280db8d0c77ecddbfc9a1c3226db91bcb156a8))
