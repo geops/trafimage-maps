@@ -44,7 +44,7 @@ function NetzentwicklungLayerInfo({ t, properties }) {
       .then((res) => setRegions(res["geops.netzentwicklung.region"]))
       // eslint-disable-next-line no-console
       .catch((err) => console.error("Failed to fetch!", err));
-  }, [vectorTilesKey, vectorTilesUrl, netzentwicklungRoleType]);
+  }, [vectorTilesKey, vectorTilesUrl]);
 
   return (
     <div>
