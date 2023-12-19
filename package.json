@@ -8,7 +8,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@geops/create-react-web-component": "3.0.4",
+    "@geops/create-react-web-component": "3.0.5",
     "@jonkoops/matomo-tracker-react": "^0.7.0",
     "@mui/icons-material": "^5.15.0",
     "@mui/material": "^5.15.0",
@@ -73,7 +73,7 @@
     "cypress-enter-plugin": "1.0.1",
     "cypress-plugin-tab": "1.0.5",
     "dotenv-webpack": "^8.0.1",
-    "esbuild": "^0.19.9",
+    "esbuild": "^0.19.10",
     "esdoc-standard-plugin": "1.0.0",
     "eslint": "8.56.0",
     "eslint-config-airbnb": "19.0.4",
