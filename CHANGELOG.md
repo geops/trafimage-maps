@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.24.0](https://github.com/geops/trafimage-maps/compare/v1.23.0...v1.24.0) (2023-12-20)
+
+### Features
+
+- **ISB Schmalspurbahnen:** add Schmalspurbahnen Layer in ISB topic ([#1118](https://github.com/geops/trafimage-maps/issues/1118)) ([efd2c95](https://github.com/geops/trafimage-maps/commit/efd2c95e441b384d3887601bde71f0c76263f19e))
+
 ## [1.23.0](https://github.com/geops/trafimage-maps/compare/v1.22.12...v1.23.0) (2023-12-19)
 
 ### Features

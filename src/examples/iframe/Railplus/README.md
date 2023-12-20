@@ -1,26 +1,26 @@
 The _Railplus_ topic provides a topic specifically for iframe use.
 
 ```jsx
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from "react";
 import {
   TextField,
   FormControl,
   Select,
   InputLabel,
   MenuItem,
-} from '@mui/material';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import Heading from 'react-styleguidist/lib/client/rsg-components/Heading';
-import DocForm from '../../DocForm';
-import getIframeCodeFromUrl from '../getIframeCodeFromUrl';
-import getHtmlPageCode from '../getHtmlPageCode';
-import iframeSearchParams from '../iframeSearchParams';
-import { PDF_DOWNLOAD_EVENT_TYPE } from '../../../utils/constants';
+} from "@mui/material";
+import Editor from "react-styleguidist/lib/client/rsg-components/Editor";
+import Heading from "react-styleguidist/lib/client/rsg-components/Heading";
+import DocForm from "../../DocForm";
+import getIframeCodeFromUrl from "../getIframeCodeFromUrl";
+import getHtmlPageCode from "../getHtmlPageCode";
+import iframeSearchParams from "../iframeSearchParams";
+import { PDF_DOWNLOAD_EVENT_TYPE } from "../../../utils/constants";
 // The `apiKey` used here is for demonstration purposes only.
 // Please get your own api key at https://developer.geops.io/.
 const apiKey = window.apiKey;
-const baseUrl = 'https://maps.trafimage.ch';
-const topic = 'ch.railplus.mitglieder';
+const baseUrl = "https://maps.trafimage.ch";
+const topic = "ch.railplus.mitglieder";
 
 const extraCode = `
     <button onclick="downloadPdf()" style="margin: 10px 5px; padding: 10px 5px">Export PDF</button>
@@ -34,7 +34,7 @@ const extraCode = `
     </script>`;
 
 const App = () => {
-  const [url, setUrl] = useState(baseUrl + '/' + topic + '?lang=de');
+  const [url, setUrl] = useState(baseUrl + "/" + topic + "?lang=de");
   const code = getHtmlPageCode(getIframeCodeFromUrl(`${url}`), extraCode);
 
   return (
@@ -43,11 +43,11 @@ const App = () => {
         <iframe src={url} id="railplus-iframe" />
       </div>
       <button
-        style={{ margin: '10px 5px', padding: '10px 5px' }}
+        style={{ margin: "10px 5px", padding: "10px 5px" }}
         onClick={() => {
-          const iframe = document.getElementById('railplus-iframe');
+          const iframe = document.getElementById("railplus-iframe");
           if (iframe) {
-            iframe.contentWindow.postMessage(PDF_DOWNLOAD_EVENT_TYPE, '*');
+            iframe.contentWindow.postMessage(PDF_DOWNLOAD_EVENT_TYPE, "*");
           }
         }}
       >
@@ -66,7 +66,7 @@ const App = () => {
         }}
         isIframe
         propConfig={iframeSearchParams}
-        filter={(config) => ['lang'].includes(config.name)}
+        filter={(config) => ["lang"].includes(config.name)}
       />
     </>
   );
