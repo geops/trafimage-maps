@@ -4,12 +4,13 @@ const comps = {
   de: (
     <div>
       <p>
-        Die Infrastrukturkarte zeigt die komplette Schweizer
-        Eisenbahninfrastruktur inkl. den streckenbezogenen Betriebspunkten. In
-        der Karte kann zwischen der Infrastruktur der SBB inkl.
-        Tochtergesellschaften und der Infrasturktur der übrigen
-        Eisenbahnunternehmen unterschieden werden. Das Kartenmaterial dient in
-        erster Linie bei SBB-internen Kartenthemen als Hintergrundkarte.
+        Die Karte der Normalspur- und Schmalspur-Infrastrukturbetreiberinnen
+        zeigt die komplette Schweizer Eisenbahninfrastruktur inkl. den
+        streckenbezogenen Betriebspunkten. In der Karte kann zwischen der
+        Infrastruktur der SBB inkl. Tochtergesellschaften und der Infrasturktur
+        der übrigen Eisenbahnunternehmen unterschieden werden. Das
+        Kartenmaterial dient in erster Linie bei SBB-internen Kartenthemen als
+        Hintergrundkarte.
       </p>
       <p>Die Daten und die Kartengrundlage werden jährlich aktualisiert.</p>
       <p>
@@ -21,11 +22,12 @@ const comps = {
   fr: (
     <div>
       <p>
-        La carte des infrastructures indique l’emplacement de toutes les
-        infrastructures ferroviaires de Suisse, points d’exploitation propres
-        aux tronçons compris. Cette carte réalise une distinction entre les
-        infrastructures des CFF et de leurs filiales, d’une part, et celles des
-        autres entreprises de chemin de fer, d’autre part. Elle est conçue en
+        La carte des gestionnaires d&apos;infrastructure à voie normale et à
+        voie étroite montre l&apos;emplacement de toutes les infrastructures
+        ferroviaires de Suisse, points d&apos;exploitation propres aux tronçons
+        compris. Cette carte réalise une distinction entre les infrastructures
+        des CFF et de leurs filiales, d&apos;une part, et celles des autres
+        entreprises de chemin de fer, d&apos;autre part. Elle est conçue en
         premier lieu pour servir de référence dans le cadre des thèmes internes
         aux CFF en matière de cartographie.
       </p>
@@ -41,11 +43,11 @@ const comps = {
   en: (
     <div>
       <p>
-        The infrastructure map shows all Swiss railway infrastructure including
-        route operating points. The map differentiates between SBB
-        infrastructure, including subsidiaries, and the infrastructure of other
-        railway companies. The map is primarily used as a background map for SBB
-        internal map topics.
+        The map of the standard gauge and narrow gauge infrastructure managers
+        shows all Swiss railway infrastructure including route operating points.
+        The map differentiates between SBB infrastructure, including
+        subsidiaries, and the infrastructure of other railway companies. The map
+        is primarily used as a background map for SBB internal map topics.
       </p>
       <p>The data and the map base are updated annually.</p>
       <p>
@@ -57,10 +59,8 @@ const comps = {
   it: (
     <div>
       <p>
-        La cartina infrastruttura mostra l’intera infrastruttura ferroviaria
-        della Svizzera, comprensiva dei punti di esercizio per una determinata
-        tratta. La cartina distingue tra l’infrastruttura delle FFS (con
-        relative società affiliate) e l’infrastruttura delle altre imprese
+        La cartina distingue tra l&apos;infrastruttura delle FFS (con relative
+        società affiliate) e l&apos;infrastruttura delle altre imprese
         ferroviarie. Il materiale cartografico serve principalmente da supporto
         per le cartine tematiche interne alle FFS.
       </p>
