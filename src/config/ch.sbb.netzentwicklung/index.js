@@ -65,7 +65,8 @@ export const netzentwicklungSkPlanerByRegionLayer = new MapboxStyleLayer({
 export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
   name: "ch.sbb.netzentwicklung.sk_planer",
   mapboxLayer: netzentwicklungDataLayer,
-  styleLayersFilter: ({ id }) => /sk_planer.by_person/.test(id),
+  styleLayersFilter: ({ id }) => /sk_planer\.by_person/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /sk_planer\.by_person$/.test(id),
   group: "netzentwicklung",
   properties: {
     isQueryable: true,
