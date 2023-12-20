@@ -104,25 +104,49 @@ function StopPlacePopup({ feature }) {
         );
       }
 
-      if (key === "note") {
+      if (value && key === "passengerInformation") {
+        const entries = Object.entries(value);
         return (
-          value && (
-            <div key={key}>
-              {typeof value === "object" ? value?.[i18n.language] : value}
+          <div key={key}>
+            <fieldset>
+              <legend>{t(key)}</legend>
               <br />
-            </div>
-          )
+              {entries.map(([k, val]) => {
+                return (
+                  val !== "NO" &&
+                  k !== "note" && (
+                    <>
+                      <div>
+                        {t(k)}
+                        {val === "UNKNOWN" && `: ${val}`}
+                      </div>
+                      <br />
+                    </>
+                  )
+                );
+              })}
+            </fieldset>
+            <br />
+          </div>
         );
       }
 
-      if (key === "url") {
+      if (value && key === "note") {
         return (
-          value && (
-            <div key={key}>
-              <Link href={value}>{value}</Link>
-              <br />
-            </div>
-          )
+          <div key={key}>
+            {typeof value === "object" ? value[i18n.language] : value}
+            <br />
+          </div>
+        );
+      }
+
+      if (value && key === "url") {
+        const url = /^http(s)?:\/\//.test(value) ? value : `https://${value}`;
+        return (
+          <div key={key}>
+            <Link href={url}>{value}</Link>
+            <br />
+          </div>
         );
       }
 
