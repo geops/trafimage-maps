@@ -1,6 +1,8 @@
+import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { kilometrageLayer } from "../ch.sbb.infrastruktur";
+import SchmalspurLayer from "../../layers/SchmalspurLayer";
 
 export const netzkarteIsb = new TrafimageMapboxLayer({
   name: "ch.sbb.isb",
@@ -39,7 +41,7 @@ export const isbOther = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata["isb.filter"] &&
-    /^(other|other_flag)$/.test(metadata["isb.filter"]),
+    /^(other(\.highlight)?|other_flag)$/.test(metadata["isb.filter"]),
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata &&
     metadata["isb.filter"] &&
@@ -80,7 +82,7 @@ export const isbTVS = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata["isb.filter"] &&
-    /^(tvs|tvs_flag)$/.test(metadata["isb.filter"]),
+    /^(tvs(\.highlight)?|tvs_flag)$/.test(metadata["isb.filter"]),
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata["isb.filter"] && /^tvs$/.test(metadata["isb.filter"]),
   properties: {
@@ -99,4 +101,70 @@ export const isbTVS = new MapboxStyleLayer({
   },
 });
 
-export default [kilometrageLayer, netzkarteIsb, isbOther, isbTVS];
+export const isbNormalspurbahnen = new Layer({
+  name: "ch.sbb.isb.normalspurbahnen",
+  visible: true,
+  group: "ch.sbb.isb",
+  children: [isbOther, isbTVS],
+  properties: {
+    hasInfos: true,
+    layerInfoComponent: "IsbNormalspurLayerInfo",
+    shortToLongName: { ...shortToLongNameTVS, ...shortToLongNameOther },
+  },
+});
+
+const shortToLongNameSchmalspur = {
+  AB: "Appenzeller Bahnen",
+  asm: "Aare Seeland mobil AG",
+  AVA: "Aargau Verkehr AG",
+  BLM: "Bergbahn Lauterbrunnen-Mürren AG",
+  BLT: "Baselland Transport AG",
+  BOB: "Berner Oberland-Bahnen AG",
+  CJ: "Compagnie des chemins de fer du Jura SA",
+  DFB: "Dampfbahn Furka-Bergstrecke",
+  FART: "Società per le Ferrovie Autolinee Regionali Ticinesi SA",
+  FB: "Forchbahn AG",
+  FLP: "Ferrovie Luganesi SA",
+  LEB: "Compagnie du Chemin de fer Lausanne – Echallens – Bercher SA",
+  MBC: "Transports de la région Morges – Bière – Cossonay SA",
+  MGB: "Matterhorn Gotthard Verkehrs AG",
+  MOB: "Compagnie du Chemin de fer Montreux Oberland bernois SA",
+  MVR: "Transports Montreux-Vevey-Riviera",
+  NStCM: "Compagnie du chemin de fer Nyon-St-Cergue-Morez SA",
+  PAC: "Parc d'Attractions du Châtelard VS SA",
+  RBS: "Regionalverkehr Bern-Solothurn AG",
+  RhB: "Rhätische Bahn AG",
+  TMR: "Transports de Martigny et Régions SA",
+  TPC: "Transports publics du Chablais SA",
+  TPF: "Transports publics fribourgeois SA",
+  TPG: "Transports publics genevois SA",
+  TRAVYS: "Travys",
+  TRN: "Transports Publics Neuchâtelois",
+  zb: "Zentralbahn AG",
+};
+
+export const isbSchmalspurbahnen = new SchmalspurLayer({
+  name: "ch.sbb.isb.schmalspurbahnen",
+  visible: false,
+  mapboxLayer: netzkarteIsb,
+  group: "ch.sbb.isb",
+  styleLayersFilter: ({ metadata }) =>
+    /^schmalspur_(flag|line|stationen|stations)/.test(metadata?.["isb.filter"]),
+  queryRenderedLayersFilter: ({ metadata }) =>
+    /^schmalspur_line$/.test(metadata?.["isb.filter"]),
+  properties: {
+    useOverlay: true,
+    isQueryable: true,
+    popupComponent: "SchmalspurPopup",
+    hasInfos: true,
+    shortToLongName: shortToLongNameSchmalspur,
+    layerInfoComponent: "IsbSchmalspurLayerInfo",
+  },
+});
+
+export default [
+  kilometrageLayer,
+  netzkarteIsb,
+  isbSchmalspurbahnen,
+  isbNormalspurbahnen,
+];

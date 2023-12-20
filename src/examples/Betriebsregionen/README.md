@@ -1,9 +1,9 @@
 Example for the _Operating regions_ topic.
 
 ```js
-import 'trafimage-maps';
-import Editor from 'react-styleguidist/lib/client/rsg-components/Editor';
-import getHtmlPageCode from '../getHtmlPageCode';
+import "trafimage-maps";
+import Editor from "react-styleguidist/lib/client/rsg-components/Editor";
+import getHtmlPageCode from "../getHtmlPageCode";
 
 const App = () => {
   return (
