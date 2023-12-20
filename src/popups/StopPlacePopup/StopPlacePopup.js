@@ -91,7 +91,7 @@ function StopPlacePopup({ feature }) {
               <legend>{t(key)}</legend>
               <br />
               <div>{t(formatYesNoData(value?.state))}</div>
-              {value.note?.[i18n.language] && (
+              {value?.state === "NO" && value.note?.[i18n.language] && (
                 <>
                   <br />
                   <div>{value.note[i18n.language]}</div>
