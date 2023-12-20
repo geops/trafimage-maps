@@ -41,7 +41,7 @@ export const isbOther = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata["isb.filter"] &&
-    /^(other|other_flag)$/.test(metadata["isb.filter"]),
+    /^(other(\.highlight)?|other_flag)$/.test(metadata["isb.filter"]),
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata &&
     metadata["isb.filter"] &&
@@ -82,7 +82,7 @@ export const isbTVS = new MapboxStyleLayer({
   styleLayersFilter: ({ metadata }) =>
     metadata &&
     metadata["isb.filter"] &&
-    /^(tvs|tvs_flag)$/.test(metadata["isb.filter"]),
+    /^(tvs(\.highlight)?|tvs_flag)$/.test(metadata["isb.filter"]),
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata["isb.filter"] && /^tvs$/.test(metadata["isb.filter"]),
   properties: {
