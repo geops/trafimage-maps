@@ -24,32 +24,6 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   },
 });
 
-export const stuetzpunktBahnhoefe = new MapboxStyleLayer({
-  name: "ch.sbb.stuetzpunktbahnhoefe",
-  key: "ch.sbb.stuetzpunktbahnhoefe",
-  visible: true,
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) =>
-    !!metadata && metadata["trafimage.filter"] === "stuetzpunkt",
-  properties: {
-    isQueryable: true,
-    handicapType: "stuetzpunkt",
-    hasInfos: true,
-    layerInfoComponent: "HandicapLayerInfo",
-    popupComponent: "HandicapPopup",
-    useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
-  },
-  hidePopup: (feat, layer, featureInfo) => {
-    const otherFeatsClicked = featureInfo
-      .filter((info) => info.layer !== layer)
-      .map((info) => info.features)
-      .flat()
-      .map((f) => f.get("stationsbezeichnung"));
-
-    return otherFeatsClicked.includes(feat.get("stationsbezeichnung"));
-  },
-});
-
 export const barrierfreierBahnhoefe = new MapboxStyleLayer({
   name: "ch.sbb.barrierfreierbahnhoefe",
   key: "ch.sbb.barrierfreierbahnhoefe",
@@ -118,5 +92,4 @@ export default [
   }),
   nichtBarrierfreierBahnhoefe,
   barrierfreierBahnhoefe,
-  stuetzpunktBahnhoefe,
 ];

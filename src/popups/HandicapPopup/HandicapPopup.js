@@ -212,9 +212,7 @@ function HandicapPopup({ feature }) {
     );
   };
 
-  const titles = properties.stuetzpunktbahnhof
-    ? [`${t("Stützpunktbahnhof")}`]
-    : [];
+  const titles = [];
 
   if (properties.barrierefreier_bahnhof !== null) {
     titles.push(
