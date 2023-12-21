@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.24.2](https://github.com/geops/trafimage-maps/compare/v1.24.1...v1.24.2) (2023-12-21)
+
+### Bug Fixes
+
+- update date on trafiverbunkarte export ([9f20506](https://github.com/geops/trafimage-maps/commit/9f2050676a020e1226815b6e3365486d0dde62e3))
+
 ### [1.24.1](https://github.com/geops/trafimage-maps/compare/v1.24.0...v1.24.1) (2023-12-21)
 
 ### Bug Fixes
