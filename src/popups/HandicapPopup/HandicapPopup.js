@@ -112,10 +112,6 @@ function HandicapPopup({ feature }) {
       propertyName: `voranmeldefrist_${language}`,
     },
     {
-      label: "Bedienungszeiten",
-      propertyName: `bedienungszeiten_${language}`,
-    },
-    {
       label: "Ausstattung",
       element: equipmentStr,
     },
