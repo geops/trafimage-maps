@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.24.1](https://github.com/geops/trafimage-maps/compare/v1.24.0...v1.24.1) (2023-12-21)
+
+### Bug Fixes
+
+- remove stuetzpunkt layer ([11288e0](https://github.com/geops/trafimage-maps/commit/11288e0434dff061213ef2433921afafcec9f36b))
+
 ## [1.24.0](https://github.com/geops/trafimage-maps/compare/v1.23.0...v1.24.0) (2023-12-20)
 
 ### Features
