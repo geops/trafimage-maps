@@ -59,6 +59,7 @@ function StopPlacePopup({ feature }) {
     return feature?.get("uic");
   }, [feature]);
   const { data, loading } = useStopPlaceData(uic, cartaroUrl);
+
   const renderContent = useCallback(
     ([key, value]) => {
       if (key === "ticketMachine") return null;
@@ -114,6 +115,7 @@ function StopPlacePopup({ feature }) {
               {entries.map(([k, val]) => {
                 return (
                   val !== "NO" &&
+                  val !== "UNKNOWN" &&
                   k !== "note" && (
                     <>
                       <div>
@@ -142,9 +144,17 @@ function StopPlacePopup({ feature }) {
 
       if (value && key === "url") {
         const url = /^http(s)?:\/\//.test(value) ? value : `https://${value}`;
+        let niceVal = value;
+        try {
+          niceVal = /^http(s)?:\/\//.test(url) ? new URL(url).hostname : value;
+        } catch (e) {
+          // eslint-disable-next-line no-console
+          console.log("StopPlacePopup. Not a parseable url: ", value);
+          niceVal = value;
+        }
         return (
           <div key={key}>
-            <Link href={url}>{value}</Link>
+            <Link href={url}>{niceVal}</Link>
             <br />
           </div>
         );
