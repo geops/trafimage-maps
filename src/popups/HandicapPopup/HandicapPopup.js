@@ -112,10 +112,6 @@ function HandicapPopup({ feature }) {
       propertyName: `voranmeldefrist_${language}`,
     },
     {
-      label: "Bedienungszeiten",
-      propertyName: `bedienungszeiten_${language}`,
-    },
-    {
       label: "Ausstattung",
       element: equipmentStr,
     },
@@ -212,9 +208,7 @@ function HandicapPopup({ feature }) {
     );
   };
 
-  const titles = properties.stuetzpunktbahnhof
-    ? [`${t("Stützpunktbahnhof")}`]
-    : [];
+  const titles = [];
 
   if (properties.barrierefreier_bahnhof !== null) {
     titles.push(

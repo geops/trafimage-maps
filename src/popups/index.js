@@ -25,8 +25,8 @@ import IsbPopup from "./IsbPopup";
 import GeltungsbereicheGaPopup from "./GeltungsbereicheGaPopup";
 import PunctualityPopup from "./PunctualityPopup";
 import RailplusPopup from "./RailplusPopup";
-import SchmalspurPopup from "./SchmalspurPopup";
 import StopPlacePopup from "./StopPlacePopup";
+import SchmalspurPopup from "./SchmalspurPopup";
 
 export { default as RegionenkarteSegmentPopup } from "./RegionenkarteSegmentPopup";
 export { default as RegionenkarteIntersectionPopup } from "./RegionenkarteIntersectionPopup";
@@ -55,8 +55,8 @@ export { default as IsbPopup } from "./IsbPopup";
 export { default as GeltungsbereicheGaPopup } from "./GeltungsbereicheGaPopup";
 export { default as PunctualityPopup } from "./PunctualityPopup";
 export { default as RailplusPopup } from "./RailplusPopup";
-export { default as SchmalspurPopup } from "./SchmalspurPopup";
 export { default as StopPlacePopup } from "./StopPlacePopup";
+export { default as SchmalspurPopup } from "./SchmalspurPopup";
 
 export default {
   BahnhofplanPopup,
@@ -86,6 +86,6 @@ export default {
   GeltungsbereicheGaPopup,
   PunctualityPopup,
   RailplusPopup,
-  SchmalspurPopup,
   StopPlacePopup,
+  SchmalspurPopup,
 };
