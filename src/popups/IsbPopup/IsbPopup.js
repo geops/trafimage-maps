@@ -81,7 +81,6 @@ function IsbPopup({ feature, layer }) {
   const urls = getUrls(properties, i18n.language) || [];
   const mainUrl = urls[0];
   const secondaryUrl = urls[1];
-
   // Character case of operator could change in the future, so we prevent futur errors using a regex.
   const operatorLongName =
     (Object.entries(shortToLongName).find(([key]) => {
