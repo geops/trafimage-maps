@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { useSelector } from "react-redux";
@@ -139,10 +145,10 @@ function StopPlacePopup({ feature }) {
               <br />
               {entries.map(([k]) => {
                 return (
-                  <>
+                  <Fragment key={k}>
                     <div>{t(k)}</div>
                     <br />
-                  </>
+                  </Fragment>
                 );
               })}
             </fieldset>
