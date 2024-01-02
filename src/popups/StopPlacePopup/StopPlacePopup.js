@@ -62,31 +62,54 @@ function StopPlacePopup({ feature }) {
 
   const renderContent = useCallback(
     ([key, value]) => {
-      if (key === "ticketMachine") return null;
-      if (key === "alternativeTransport") {
-        return (
-          !/^NO|UNKNOWN$/.test(value?.state) && (
+      let content = value && (
+        <div key={key}>
+          <div>
+            {t(key)}: {t(formatYesNoData(value))}
+          </div>{" "}
+          <br />
+        </div>
+      );
+
+      if (value && typeof value === "object") {
+        const entries = Object.entries(value);
+        if (entries.length) {
+          content = (
             <div key={key}>
               <fieldset>
                 <legend>{t(key)}</legend>
                 <br />
-                <div>{t("Shuttle-Fahrdienst")}</div>
-                {value.note?.[i18n.language] && (
-                  <>
-                    <br />
-                    <div>{value.note[i18n.language]}</div>
-                  </>
-                )}
-                <br />
+                <div>{entries.map(renderContent)}</div>
               </fieldset>
               <br />
             </div>
-          )
+          );
+        }
+      }
+
+      if (key === "ticketMachine") content = null;
+      if (key === "alternativeTransport") {
+        content = !/^NO|UNKNOWN$/.test(value?.state) && (
+          <div key={key}>
+            <fieldset>
+              <legend>{t(key)}</legend>
+              <br />
+              <div>{t("Shuttle-Fahrdienst")}</div>
+              {value.note?.[i18n.language] && (
+                <>
+                  <br />
+                  <div>{value.note[i18n.language]}</div>
+                </>
+              )}
+              <br />
+            </fieldset>
+            <br />
+          </div>
         );
       }
 
       if (key === "accessibility") {
-        return (
+        content = (
           <div key={key}>
             <fieldset>
               <legend>{t(key)}</legend>
@@ -106,25 +129,20 @@ function StopPlacePopup({ feature }) {
       }
 
       if (value && key === "passengerInformation") {
-        const entries = Object.entries(value);
-        return (
+        const entries = Object.entries(value).filter(([k, val]) => {
+          return val !== "NO" && val !== "UNKNOWN" && k !== "note";
+        });
+        content = !!entries.length && (
           <div key={key}>
             <fieldset>
               <legend>{t(key)}</legend>
               <br />
-              {entries.map(([k, val]) => {
+              {entries.map(([k]) => {
                 return (
-                  val !== "NO" &&
-                  val !== "UNKNOWN" &&
-                  k !== "note" && (
-                    <>
-                      <div>
-                        {t(k)}
-                        {val === "UNKNOWN" && `: ${val}`}
-                      </div>
-                      <br />
-                    </>
-                  )
+                  <>
+                    <div>{t(k)}</div>
+                    <br />
+                  </>
                 );
               })}
             </fieldset>
@@ -134,7 +152,7 @@ function StopPlacePopup({ feature }) {
       }
 
       if (value && key === "note") {
-        return (
+        content = (
           <div key={key}>
             {typeof value === "object" ? value[i18n.language] : value}
             <br />
@@ -152,7 +170,7 @@ function StopPlacePopup({ feature }) {
           console.log("StopPlacePopup. Not a parseable url: ", value);
           niceVal = value;
         }
-        return (
+        content = (
           <div key={key}>
             <Link href={url}>{niceVal}</Link>
             <br />
@@ -160,47 +178,23 @@ function StopPlacePopup({ feature }) {
         );
       }
 
-      if (value && typeof value === "object") {
-        const entries = Object.entries(value);
-        if (entries.length) {
-          return (
-            <div key={key}>
-              <fieldset>
-                <legend>{t(key)}</legend>
-                <br />
-                <div>{entries.map(renderContent)}</div>
-              </fieldset>
-              <br />
-            </div>
-          );
-        }
-      }
-
-      return (
-        value && (
-          <div key={key}>
-            <div>
-              {t(key)}: {t(formatYesNoData(value))}
-            </div>{" "}
-            <br />
-          </div>
-        )
-      );
+      return content || null;
     },
     [i18n.language, t],
   );
+
+  const popupContent = useMemo(() => {
+    const content = Object.entries(data?.prmInformation || {})
+      .map(renderContent)
+      .filter(Boolean);
+    return content?.length ? content : t(`Keine Daten für diese Station`);
+  }, [data?.prmInformation, renderContent, t]);
 
   if (loading) {
     return <div>Loading ...</div>;
   }
 
-  return (
-    <div>
-      {data?.prmInformation
-        ? Object.entries(data?.prmInformation || {}).map(renderContent)
-        : `No data for this station`}
-    </div>
-  );
+  return <div>{popupContent}</div>;
 }
 
 StopPlacePopup.propTypes = propTypes;
