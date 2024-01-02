@@ -192,7 +192,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
         promises.push(
           new Promise((resolve) => {
             source.getClusterLeaves(id, count, 0, (_, cfs) => {
-              cfs.forEach((cf) => {
+              cfs?.forEach((cf) => {
                 const olFeature = this.format.readFeature(cf);
                 if (olFeature) {
                   olFeature.set("mapboxFeature", cf);

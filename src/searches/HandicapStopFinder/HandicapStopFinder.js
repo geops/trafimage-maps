@@ -3,6 +3,7 @@ import { Typography } from "@mui/material";
 import { fromLonLat } from "ol/proj";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import Search from "../Search";
+import { HANDICAP_SOURCE } from "../../utils/constants";
 
 class HandicapStopFinder extends Search {
   constructor() {
@@ -74,8 +75,8 @@ class HandicapStopFinder extends Search {
     const { mbMap } = layerService.getLayer("ch.sbb.handicap.data");
 
     if (
-      mbMap.getSource("ch.sbb.handicap") &&
-      mbMap.isSourceLoaded("ch.sbb.handicap")
+      mbMap.getSource(HANDICAP_SOURCE) &&
+      mbMap.isSourceLoaded(HANDICAP_SOURCE)
     ) {
       mbMap.off("idle", this.onIdle);
     } else {
@@ -94,8 +95,7 @@ class HandicapStopFinder extends Search {
         .filter(styleLayersFilter)
         .map(({ source }) => source);
       return (
-        layer instanceof MapboxStyleLayer &&
-        sourceIds.includes("ch.sbb.handicap")
+        layer instanceof MapboxStyleLayer && sourceIds.includes(HANDICAP_SOURCE)
       );
     });
 
