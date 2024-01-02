@@ -52,7 +52,7 @@ function NetzentwicklungLayerInfo({ t, properties }) {
         <div className={classes.regionLegendItem}>
           <div
             className={classes.regionColor}
-            style={{ backgroundColor: "#6495ED" }}
+            style={{ backgroundColor: "rgb(0, 110, 179)" }}
           />
           <div>{t(`${netzentwicklungRoleType}-layer-info`)}</div>
         </div>
