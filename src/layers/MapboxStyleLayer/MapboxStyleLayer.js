@@ -45,6 +45,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
     }
 
     if (this.style && visible) {
+      this.mapboxLayer.forceUrl = this.forceUrl;
       this.mapboxLayer.setStyle(this.style);
     }
 

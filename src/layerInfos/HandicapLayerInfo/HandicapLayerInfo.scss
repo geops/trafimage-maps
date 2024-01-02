@@ -1,18 +1,6 @@
 .handicap-layer-info {
   display: flex;
 
-  .stuetzpunkt-layer-icon {
-    width: 18px;
-    flex-grow: 0;
-    flex-shrink: 0;
-    height: 18px;
-    border-radius: 50%;
-    background-color: rgb(246 136 38);
-    border: 5px solid rgb(246 136 38 / 40%);
-    margin: 2px 10px 5px 0; /* for Safari */
-    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
-  }
-
   img {
     height: 20px;
     width: 20px;
