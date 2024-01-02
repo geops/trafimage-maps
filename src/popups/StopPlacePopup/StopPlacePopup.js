@@ -154,7 +154,9 @@ function StopPlacePopup({ feature }) {
       if (value && key === "note") {
         content = (
           <div key={key}>
-            {typeof value === "object" ? value[i18n.language] : value}
+            {typeof value === "object"
+              ? value[i18n.language] || value.de
+              : value}
             <br />
           </div>
         );
