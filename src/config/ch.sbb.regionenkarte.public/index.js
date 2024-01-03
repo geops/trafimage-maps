@@ -2,6 +2,7 @@ import { Layer } from "mobility-toolbox-js/ol";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { kilometrageLayer } from "../ch.sbb.infrastruktur";
+import RegionenkarteLayer from "../../layers/RegionenkarteLayer";
 
 export const anlagenverantwortliche = new TrafimageMapboxLayer({
   name: "ch.sbb.anlagenverantwortliche",
@@ -25,7 +26,7 @@ export const regionenkartePublicSegment = new Layer({
     layerInfoComponent: "RegionenkartePublicLayerInfo",
   },
   children: [
-    new MapboxStyleLayer({
+    new RegionenkarteLayer({
       name: "ch.sbb.regionenkarte.lines",
       mapboxLayer: anlagenverantwortliche,
       styleLayersFilter: ({ id }) => {
