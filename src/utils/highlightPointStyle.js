@@ -23,14 +23,6 @@ export const createPointStyleRenderer =
       x = currentStyleState ? x + currentStyleState.offsetX : x;
       y = currentStyleState ? y + currentStyleState.offsetY : y;
       radius = currentStyleState ? currentStyleState.radius : radius;
-      // console.log(resolution, currentStyleState);
-      // console.log(
-      //   resolution,
-      //   dynamicStyleMapping.filter(
-      //     (styleState) => styleState.resolution > resolution,
-      //   ),
-      //   currentStyleState,
-      // );
     }
     const radiusWithPixelRatio = radius * pixelRatio;
     const ctx = state.context;
