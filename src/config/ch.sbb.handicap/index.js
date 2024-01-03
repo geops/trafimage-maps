@@ -72,33 +72,35 @@ const nichtBarrierefrei = new MapboxStyleLayer({
   },
 });
 
-const teilBarrierefrei = new MapboxStyleLayer({
-  name: "ch.sbb.teilbarrierfreierbahnhoefe",
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.teilbarrierfrei/.test(metadata?.["handicap.filter"]);
-  },
-  properties: {
-    isQueryable: true,
-    useOverlay: true,
-    popupComponent: "StopPlacePopup",
-    highlightPointStyle: handicapHighlightStyleSecondary,
-  },
-});
+// TODO: We need to wait for ROKAS to add data for this layer.
+// const teilBarrierefrei = new MapboxStyleLayer({
+//   name: "ch.sbb.teilbarrierfreierbahnhoefe",
+//   mapboxLayer: handicapDataLayer,
+//   styleLayersFilter: ({ metadata }) => {
+//     return /^symbol.teilbarrierfrei/.test(metadata?.["handicap.filter"]);
+//   },
+//   properties: {
+//     isQueryable: true,
+//     useOverlay: true,
+//     popupComponent: "StopPlacePopup",
+//     highlightPointStyle: handicapHighlightStyleSecondary,
+//   },
+// });
 
-const shuttle = new MapboxStyleLayer({
-  name: "ch.sbb.shuttle",
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.shuttle/.test(metadata?.["handicap.filter"]);
-  },
-  properties: {
-    isQueryable: true,
-    useOverlay: true,
-    popupComponent: "StopPlacePopup",
-    highlightPointStyle: handicapHighlightStyleSecondary,
-  },
-});
+// TODO: We need to wait for ROKAS to add data for this layer.
+// const shuttle = new MapboxStyleLayer({
+//   name: "ch.sbb.shuttle",
+//   mapboxLayer: handicapDataLayer,
+//   styleLayersFilter: ({ metadata }) => {
+//     return /^symbol.shuttle/.test(metadata?.["handicap.filter"]);
+//   },
+//   properties: {
+//     isQueryable: true,
+//     useOverlay: true,
+//     popupComponent: "StopPlacePopup",
+//     highlightPointStyle: handicapHighlightStyleSecondary,
+//   },
+// });
 
 const statusUnbekannt = new MapboxStyleLayer({
   name: "ch.sbb.status_unbekannt",
@@ -215,9 +217,9 @@ export default [
     },
   }),
   statusUnbekannt,
-  shuttle,
+  // shuttle,
   nichtBarrierefrei,
-  teilBarrierefrei,
+  // teilBarrierefrei,
   barrierefrei,
   // nichtBarrierfreierBahnhoefe,
   // barrierfreierBahnhoefe,
