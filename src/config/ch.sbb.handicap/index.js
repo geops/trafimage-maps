@@ -55,7 +55,6 @@ const barrierefrei = new MapboxStyleLayer({
     useOverlay: true,
     popupComponent: "StopPlacePopup",
     highlightPointStyle: handicapHighlightStyleMain,
-    getHighlightGeometry: (feat) => feat.getGeometry().getCoordinates(),
   },
 });
 
