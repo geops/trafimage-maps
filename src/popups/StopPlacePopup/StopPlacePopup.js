@@ -121,7 +121,7 @@ function StopPlacePopup({ feature }) {
               <legend>{t(key)}</legend>
               <br />
               <div>{t(formatYesNoData(value?.state))}</div>
-              {value.note && (
+              {value?.note && (
                 <>
                   <br />
                   {typeof value.note === "object"
