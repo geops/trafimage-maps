@@ -30,10 +30,14 @@ class RegionenkarteLayer extends MapboxStyleLayer {
     }
   }
 
-  // Deactivate select style, since we don't want to highlight the selected feature
+  // Deactivate select style, since we don't use the selectedFeatures for highlighting
   select() {
     this.selectedFeatures = [];
     this.highlightedFeatures = [];
+  }
+
+  clone(newOptions) {
+    return new RegionenkarteLayer({ ...this.options, ...newOptions });
   }
 }
 
