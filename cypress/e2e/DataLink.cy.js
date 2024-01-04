@@ -123,33 +123,4 @@ describe("A link to data", { browser: "!firefox" }, () => {
       "https://data.sbb.ch/explore/dataset/infrastrukturbetreiberinnen/information/",
     );
   });
-
-  it("is available for handicap topic", () => {
-    cy.origin("https://data.sbb.ch", () => {
-      cy.on("uncaught:exception", () => {
-        // Exception triggered by bad code on js when loading the targeted page
-        // It will break the test by defualt if we don't return false.
-        // So let the test continue.
-        return false;
-      });
-    });
-    // Click info button
-    cy.get(
-      ":nth-child(6) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button",
-    ).click();
-    cy.get(
-      'a[href="https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/"]',
-    )
-      .should(([a]) => {
-        expect(a.textContent).to.equal(openDataText);
-        expect(a.target).to.equal("_blank");
-        // eslint-disable-next-line no-param-reassign
-        a.target = "_self";
-      })
-      .click();
-    cy.url().should(
-      "equal",
-      "https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/",
-    );
-  });
 });

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.1](https://github.com/geops/trafimage-maps/compare/v1.25.0...v1.25.1) (2024-01-04)
+
+### Bug Fixes
+
+- **handicap:** improve AMO highlighting, remove datalinks and dataservice from topic info ([#1125](https://github.com/geops/trafimage-maps/issues/1125)) ([0e766c5](https://github.com/geops/trafimage-maps/commit/0e766c535d24a0363528ac63d80c7c5d200a8aa4))
+
 ## [1.25.0](https://github.com/geops/trafimage-maps/compare/v1.24.2...v1.25.0) (2024-01-02)
 
 ### Features

@@ -4,6 +4,7 @@ import useIndexedFeatureInfo from "./useIndexedFeatureInfo";
 import useIsMobile from "./useIsMobile";
 import panCenterFeature from "./panCenterFeature";
 import highlightPointFeatures from "./highlightPointFeatures";
+import defaultHighlightPointStyle from "./highlightPointStyle";
 
 const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
   const map = useSelector((state) => state.app.map);
@@ -32,6 +33,7 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
 
     return () => {
       highlightLayer.getSource().clear();
+      highlightLayer.setStyle(defaultHighlightPointStyle);
 
       if (
         map &&
@@ -62,7 +64,10 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
     const coordinates = Array.isArray((coordinate || [])[0])
       ? coordinate
       : [coordinate];
-
+    const layerHighlightPointStyle = layerr.get("highlightPointStyle");
+    highlightLayer.setStyle(
+      layerHighlightPointStyle || defaultHighlightPointStyle,
+    );
     highlightPointFeatures(features, layerr, highlightLayer, coordinates);
 
     // We have to render the map otherwise the last selected features are displayed during animation.
