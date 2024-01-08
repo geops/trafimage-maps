@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.2](https://github.com/geops/trafimage-maps/compare/v1.25.1...v1.25.2) (2024-01-08)
+
+### Bug Fixes
+
+- **Regionenkarte:** move highlight logic from popup to RegionenkarteLayer, improve Select UI ([#1126](https://github.com/geops/trafimage-maps/issues/1126)) ([74ee65c](https://github.com/geops/trafimage-maps/commit/74ee65c2b99edbd752c553552f10bb77e31f5e46))
+
 ### [1.25.1](https://github.com/geops/trafimage-maps/compare/v1.25.0...v1.25.1) (2024-01-04)
 
 ### Bug Fixes
