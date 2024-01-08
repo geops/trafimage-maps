@@ -129,9 +129,7 @@ export const passagierfrequenzen = new MapboxStyleLayer({
 export const bahnhofplaene = new Layer({
   name: "ch.sbb.bahnhofplaene",
   visible: false,
-  isQueryable: false,
   properties: {
-    isQueryable: true,
     hasInfos: true,
     description: "ch.sbb.bahnhofplaene-desc",
     dataLink:

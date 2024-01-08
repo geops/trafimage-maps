@@ -1,5 +1,7 @@
+import { Style } from "ol/style";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
+import { createPointStyleRenderer } from "../../utils/highlightPointStyle";
 
 import {
   netzkarteLayer,
@@ -22,6 +24,26 @@ export const handicapDataLayer = new TrafimageMapboxLayer({
   group: "data",
 });
 
+const handicapHighlightStyleMain = new Style({
+  renderer: createPointStyleRenderer([
+    { offsetX: 0, offsetY: -25, radius: 25, resolution: 19.5 },
+    { offsetX: 0, offsetY: -28, radius: 25, resolution: 9 },
+    { offsetX: 0, offsetY: -32, radius: 25, resolution: 4.8 },
+    { offsetX: 0, offsetY: -35, radius: 25, resolution: 2.5 },
+    { offsetX: -1, offsetY: -32, radius: 25, resolution: 0.8 },
+  ]),
+});
+const handicapHighlightStyleSecondary = new Style({
+  renderer: createPointStyleRenderer([
+    { offsetX: 0, offsetY: -15, radius: 15, resolution: 5 },
+    { offsetX: 0, offsetY: -18, radius: 18, resolution: 2.4 },
+    { offsetX: 0, offsetY: -20, radius: 20, resolution: 2 },
+    { offsetX: 0, offsetY: -22, radius: 20, resolution: 1.7 },
+    { offsetX: 0, offsetY: -25, radius: 22, resolution: 1.5 },
+    { offsetX: -1, offsetY: -25, radius: 22, resolution: 0.4 },
+  ]),
+});
+
 const barrierefrei = new MapboxStyleLayer({
   name: "ch.sbb.barrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
@@ -32,6 +54,7 @@ const barrierefrei = new MapboxStyleLayer({
     isQueryable: true,
     useOverlay: true,
     popupComponent: "StopPlacePopup",
+    highlightPointStyle: handicapHighlightStyleMain,
   },
 });
 
@@ -45,34 +68,39 @@ const nichtBarrierefrei = new MapboxStyleLayer({
     isQueryable: true,
     useOverlay: true,
     popupComponent: "StopPlacePopup",
+    highlightPointStyle: handicapHighlightStyleMain,
   },
 });
 
-const teilBarrierefrei = new MapboxStyleLayer({
-  name: "ch.sbb.teilbarrierfreierbahnhoefe",
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.teilbarrierfrei/.test(metadata?.["handicap.filter"]);
-  },
-  properties: {
-    isQueryable: true,
-    useOverlay: true,
-    popupComponent: "StopPlacePopup",
-  },
-});
+// TODO: We need to wait for ROKAS to add data for this layer.
+// const teilBarrierefrei = new MapboxStyleLayer({
+//   name: "ch.sbb.teilbarrierfreierbahnhoefe",
+//   mapboxLayer: handicapDataLayer,
+//   styleLayersFilter: ({ metadata }) => {
+//     return /^symbol.teilbarrierfrei/.test(metadata?.["handicap.filter"]);
+//   },
+//   properties: {
+//     isQueryable: true,
+//     useOverlay: true,
+//     popupComponent: "StopPlacePopup",
+//     highlightPointStyle: handicapHighlightStyleSecondary,
+//   },
+// });
 
-const shuttle = new MapboxStyleLayer({
-  name: "ch.sbb.shuttle",
-  mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.shuttle/.test(metadata?.["handicap.filter"]);
-  },
-  properties: {
-    isQueryable: true,
-    useOverlay: true,
-    popupComponent: "StopPlacePopup",
-  },
-});
+// TODO: We need to wait for ROKAS to add data for this layer.
+// const shuttle = new MapboxStyleLayer({
+//   name: "ch.sbb.shuttle",
+//   mapboxLayer: handicapDataLayer,
+//   styleLayersFilter: ({ metadata }) => {
+//     return /^symbol.shuttle/.test(metadata?.["handicap.filter"]);
+//   },
+//   properties: {
+//     isQueryable: true,
+//     useOverlay: true,
+//     popupComponent: "StopPlacePopup",
+//     highlightPointStyle: handicapHighlightStyleSecondary,
+//   },
+// });
 
 const statusUnbekannt = new MapboxStyleLayer({
   name: "ch.sbb.status_unbekannt",
@@ -84,6 +112,7 @@ const statusUnbekannt = new MapboxStyleLayer({
     isQueryable: true,
     useOverlay: true,
     popupComponent: "StopPlacePopup",
+    highlightPointStyle: handicapHighlightStyleSecondary,
   },
 });
 
@@ -181,11 +210,16 @@ export default [
         mapboxLayer: handicapDataLayer,
       }),
     ),
+    properties: {
+      ...bahnhofplaene.getProperties(),
+      dataLink: null,
+      dataService: false,
+    },
   }),
   statusUnbekannt,
-  shuttle,
+  // shuttle,
   nichtBarrierefrei,
-  teilBarrierefrei,
+  // teilBarrierefrei,
   barrierefrei,
   // nichtBarrierfreierBahnhoefe,
   // barrierfreierBahnhoefe,

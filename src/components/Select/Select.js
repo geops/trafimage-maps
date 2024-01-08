@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => {
   const list = {
     // Should be apply by theme but it's not
     "& .Mui-selected": {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
   };
   const paper = {

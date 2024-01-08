@@ -49,20 +49,6 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
   }, [isIntern, parsed, tab]);
 
   useEffect(() => {
-    // highlight style on mouse over and the style when selected use 2 different styles.
-    const layerId = "anlagenverantwortliche.lines.select";
-    const mbMap = layer?.mapboxLayer?.mbMap;
-
-    if (!mbMap || !mbMap.getLayer(layerId)) {
-      return () => {};
-    }
-
-    // We don't want to highlight the features selected on click.
-    // We want only to highlight the lines of the coordinator of the current feature selected in the overlay.
-    // So here we clean all the style
-    layer.select([]);
-    layer.highlight([]);
-
     let property;
     let value;
 
@@ -78,15 +64,10 @@ function RegionenkarteSegmentPopup({ layer, feature }) {
     }
 
     if (property && value) {
-      mbMap.setFilter(layerId, ["==", property, value]);
-      mbMap.setLayoutProperty(layerId, "visibility", "visible");
+      layer.setHighlightFilter(["==", ["get", property], value]);
     }
 
-    return () => {
-      if (mbMap.getLayer(layerId)) {
-        mbMap.setLayoutProperty(layerId, "visibility", "none");
-      }
-    };
+    return () => layer.setHighlightFilter(null);
   }, [feature, isIntern, layer, layer.mapboxLayer, tab, avRole]);
 
   return (
