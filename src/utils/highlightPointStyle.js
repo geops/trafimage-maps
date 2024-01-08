@@ -9,7 +9,7 @@ export const createPointStyleRenderer =
     let [x, y] = coordinates;
     const pixelRatio = state.pixelRatio || 1;
     const { resolution } = state;
-    let radius = 20 * pixelRatio;
+    let radius = 20;
     if (dynamicStyleMapping?.length) {
       /** The dynamic style mapping updates the radius and
        * offsets of the highlight depending on the resolution

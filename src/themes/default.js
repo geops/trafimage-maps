@@ -320,6 +320,11 @@ const v5 = {
         },
       },
     },
+    MuiList: {
+      defaultProps: {
+        disablePadding: true,
+      },
+    },
     MuiSelect: {
       styleOverrides: {
         select: {
