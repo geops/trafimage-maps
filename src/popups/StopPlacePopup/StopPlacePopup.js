@@ -23,6 +23,9 @@ const useStyles = makeStyles(() => ({
     "& legend": {
       fontWeight: "bold", // Ensure the title is bold in gitlab
     },
+    "& fieldset": {
+      borderWidth: 1, // Ensure border is 1px in gitlab
+    },
   },
 }));
 
