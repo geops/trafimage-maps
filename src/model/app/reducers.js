@@ -46,10 +46,13 @@ import {
   SET_REALTIME_KEY,
   SET_DISPLAY_MENU,
   SET_STOPS_URL,
+  SET_MAX_CANVAS_SIZE,
+  SET_EXPORT_SELECTION,
 } from "./actions";
 
 import SearchService from "../../components/Search/SearchService";
 import { isOpenedByMapset } from "../../utils/redirectHelper";
+import { LS_SIZE_KEY } from "../../utils/constants";
 
 const dftlInteractions = defaultInteractions({
   altShiftDragRotate: false,
@@ -99,6 +102,10 @@ const getInitialState = () => ({
   consentGiven: false,
   disableCookies: false,
   displayMenu: true,
+  maxCanvasSize:
+    localStorage.getItem(LS_SIZE_KEY) &&
+    parseFloat(localStorage.getItem(LS_SIZE_KEY)),
+  exportSelection: null,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -313,6 +320,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         stopsUrl: action.data,
+      };
+    case SET_MAX_CANVAS_SIZE:
+      return {
+        ...state,
+        maxCanvasSize: action.data,
+      };
+    case SET_EXPORT_SELECTION:
+      return {
+        ...state,
+        exportSelection: action.data,
       };
     default:
       return {

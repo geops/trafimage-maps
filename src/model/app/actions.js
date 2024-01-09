@@ -42,6 +42,8 @@ export const SET_REALTIME_KEY = "SET_REALTIME_KEY";
 export const SET_REALTIME_URL = "SET_REALTIME_URL";
 export const SET_DISPLAY_MENU = "SET_DISPLAY_MENU";
 export const SET_STOPS_URL = "SET_STOPS_URL";
+export const SET_MAX_CANVAS_SIZE = "SET_MAX_CANVAS_SIZE";
+export const SET_EXPORT_SELECTION = "SET_EXPORT_SELECTION";
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
 
@@ -349,5 +351,15 @@ export const setSearchInfoOpen = (data) => ({
 
 export const setDisplayMenu = (data) => ({
   type: SET_DISPLAY_MENU,
+  data,
+});
+
+export const setMaxCanvasSize = (data) => ({
+  type: SET_MAX_CANVAS_SIZE,
+  data,
+});
+
+export const setExportSelection = (data) => ({
+  type: SET_EXPORT_SELECTION,
   data,
 });

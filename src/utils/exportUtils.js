@@ -8,10 +8,10 @@ import { LineString } from "ol/geom";
 import { getCenter } from "ol/extent";
 import { jsPDF as JsPDF } from "jspdf";
 import { Canvg } from "canvg";
-import NorthArrowCircle from "./northArrowCircle.png"; // svg export doesn't work for ie11
-import getLayersAsFlatArray from "../../utils/getLayersAsFlatArray";
-import { FORCE_EXPORT_PROPERTY } from "../../utils/constants";
-import LayerService from "../../utils/LayerService";
+import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn't work for ie11
+import getLayersAsFlatArray from "./getLayersAsFlatArray";
+import { FORCE_EXPORT_PROPERTY } from "./constants";
+import LayerService from "./LayerService";
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -303,3 +303,59 @@ export const exportPdf = async (
   // download the result
   doc.save(exportFileName);
 };
+
+export const sizesByFormat = {
+  // https://www.din-formate.de/reihe-a-din-groessen-mm-pixel-dpi.html
+  a0: [3370, 2384],
+  a1: [2384, 1684],
+  a3: [1191, 842],
+  a4: [842, 595],
+};
+
+export const validateOption = (format, exportScale, maxCanvasSize, map) => {
+  if (!map || !maxCanvasSize) {
+    return true;
+  }
+  const exportSize = sizesByFormat[format];
+  const mapSize = map.getSize();
+  return (
+    (maxCanvasSize &&
+      ((exportSize &&
+        (maxCanvasSize < exportSize[0] * exportScale ||
+          maxCanvasSize < exportSize[1] * exportScale)) ||
+        (!exportSize &&
+          mapSize &&
+          (maxCanvasSize < mapSize[0] * exportScale ||
+            maxCanvasSize < mapSize[1] * exportScale)))) ||
+    false
+  );
+};
+
+export const getHighestPossibleRes = (maxCanvasSize, map, options) => {
+  const highestRes = options.reduce((final, option) => {
+    let newFinal = { ...final };
+    if (
+      !validateOption(option.format, option.resolution, maxCanvasSize, map) &&
+      option.weight > (final.weight || 0)
+    ) {
+      newFinal = option;
+    }
+    return newFinal;
+  });
+  return { format: highestRes.format, resolution: highestRes.resolution };
+};
+
+export const defaultExportOptions = [
+  { label: "A0 (72 dpi)", resolution: 1, format: "a0", weight: 8 },
+  { label: "A0 (150 dpi)", resolution: 2, format: "a0", weight: 10 },
+  { label: "A0 (300 dpi)", resolution: 3, format: "a0", weight: 12 },
+  { label: "A1 (72 dpi)", resolution: 1, format: "a1", weight: 7 },
+  { label: "A1 (150 dpi)", resolution: 2, format: "a1", weight: 9 },
+  { label: "A1 (300 dpi)", resolution: 3, format: "a1", weight: 11 },
+  { label: "A3 (72 dpi)", resolution: 1, format: "a3", weight: 2 },
+  { label: "A3 (150 dpi)", resolution: 2, format: "a3", weight: 4 },
+  { label: "A3 (300 dpi)", resolution: 3, format: "a3", weight: 6 },
+  { label: "A4 (72 dpi)", resolution: 1, format: "a4", weight: 1 },
+  { label: "A4 (150 dpi)", resolution: 2, format: "a4", weight: 3 },
+  { label: "A4 (300 dpi)", resolution: 3, format: "a4", weight: 5 },
+];

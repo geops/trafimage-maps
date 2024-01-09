@@ -43,6 +43,7 @@ import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
 import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
+import GaExportMapButton from "../menus/GaExportMenu/GaExportMapButton";
 
 // For backward compatibility
 export {
@@ -291,6 +292,7 @@ export const geltungsbereicheMvp = {
   projection: "EPSG:3857",
   layerInfoComponent: "GeltungsbereicheTopicInfo",
   searches: defaultSearches,
+  mapControls: <GaExportMapButton />,
 };
 
 export const geltungsbereicheIframe = {

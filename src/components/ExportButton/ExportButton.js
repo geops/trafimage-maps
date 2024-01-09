@@ -5,8 +5,11 @@ import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { ReactComponent as Loader } from "./loader.svg";
-
-import { getMapHd, generateExtraData, exportPdf } from "./exportUtils";
+import {
+  getMapHd,
+  generateExtraData,
+  exportPdf,
+} from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
 
 const flexCenter = {

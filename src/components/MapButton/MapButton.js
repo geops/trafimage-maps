@@ -11,6 +11,7 @@ const StyledIconButton = withStyles(() => ({
     height: 40,
     boxShadow: "0 0 7px rgba(0, 0, 0, 0.9)",
     transition: "box-shadow 0.5s ease",
+    padding: 10,
     "&:hover": {
       boxShadow: "0 0 12px 2px rgba(0, 0, 0, 0.9)",
       backgroundColor: "white",
