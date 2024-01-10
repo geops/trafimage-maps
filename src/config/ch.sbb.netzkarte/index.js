@@ -324,6 +324,6 @@ export default [
   gemeindegrenzen,
   buslines,
   bahnhofplaene.clone({
-    children: [printPlans.clone(), interactivePlans.clone()], // There is a bug in MTJS that breaks the radio buttons, so we need to clone the layers.
+    children: [interactivePlans.clone(), printPlans.clone()], // There is a bug in MTJS that breaks the radio buttons, so we need to clone the layers.
   }),
 ];
