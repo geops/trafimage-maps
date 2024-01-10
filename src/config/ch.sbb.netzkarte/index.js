@@ -126,9 +126,41 @@ export const passagierfrequenzen = new MapboxStyleLayer({
   },
 });
 
+const interactivePlans = new MapboxStyleLayer({
+  name: "ch.sbb.bahnhofplaene.interaktiv",
+  visible: false,
+  mapboxLayer: dataLayer,
+  styleLayersFilter: ({ metadata }) =>
+    !!metadata && metadata["trafimage.filter"] === "interaktiv",
+  group: "bahnhofplaene",
+  properties: {
+    isQueryable: true,
+    hasInfos: true,
+    description: "ch.sbb.bahnhofplaene.interaktiv-desc",
+    popupComponent: "StationPopup",
+    useOverlay: true,
+  },
+});
+const printPlans = new MapboxStyleLayer({
+  name: "ch.sbb.bahnhofplaene.printprodukte",
+  visible: false,
+  mapboxLayer: dataLayer,
+  styleLayersFilter: ({ metadata }) =>
+    !!metadata && metadata["trafimage.filter"] === "printprodukte",
+  group: "bahnhofplaene",
+  properties: {
+    isQueryable: true,
+    hasInfos: true,
+    description: "ch.sbb.bahnhofplaene.printprodukte-desc",
+    popupComponent: "StationPopup",
+    useOverlay: true,
+  },
+});
+
 export const bahnhofplaene = new Layer({
   name: "ch.sbb.bahnhofplaene",
   visible: false,
+  children: [interactivePlans.clone(), printPlans.clone()],
   properties: {
     hasInfos: true,
     description: "ch.sbb.bahnhofplaene-desc",
@@ -137,38 +169,6 @@ export const bahnhofplaene = new Layer({
     dataService: true,
   },
 });
-bahnhofplaene.children = [
-  new MapboxStyleLayer({
-    name: "ch.sbb.bahnhofplaene.interaktiv",
-    visible: false,
-    mapboxLayer: dataLayer,
-    styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "interaktiv",
-    group: "bahnhofplaene",
-    properties: {
-      isQueryable: true,
-      hasInfos: true,
-      description: "ch.sbb.bahnhofplaene.interaktiv-desc",
-      popupComponent: "StationPopup",
-      useOverlay: true,
-    },
-  }),
-  new MapboxStyleLayer({
-    name: "ch.sbb.bahnhofplaene.printprodukte",
-    visible: false,
-    mapboxLayer: dataLayer,
-    styleLayersFilter: ({ metadata }) =>
-      !!metadata && metadata["trafimage.filter"] === "printprodukte",
-    group: "bahnhofplaene",
-    properties: {
-      isQueryable: true,
-      hasInfos: true,
-      description: "ch.sbb.bahnhofplaene.printprodukte-desc",
-      popupComponent: "StationPopup",
-      useOverlay: true,
-    },
-  }),
-];
 
 export const punctuality = new TralisLayer({
   name: "ch.sbb.puenktlichkeit",
@@ -323,5 +323,7 @@ export default [
   passagierfrequenzen,
   gemeindegrenzen,
   buslines,
-  bahnhofplaene,
+  bahnhofplaene.clone({
+    children: [interactivePlans.clone(), printPlans.clone()], // There is a bug in MTJS that breaks the radio buttons, so we need to clone the layers.
+  }),
 ];
