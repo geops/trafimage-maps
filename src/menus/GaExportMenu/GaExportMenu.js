@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 
@@ -12,6 +12,7 @@ import Point from "ol/geom/Point";
 import { Stroke, RegularShape, Fill, Style } from "ol/style";
 // #############Test################
 import { getCenter } from "ol/extent";
+import { Checkbox, FormControlLabel } from "@mui/material";
 import Dialog from "../../components/Dialog";
 import ExportResolutionSelect from "../ExportMenu/ExportResolutionSelect";
 import { defaultExportOptions, sizesByFormat } from "../../utils/exportUtils";
@@ -27,13 +28,22 @@ const useStyles = makeStyles(() => ({
   resSelect: {
     marginTop: 20,
     width: 190,
+    marginLeft: 12,
+  },
+  mainBody: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 15,
   },
   footer: {
-    padding: 20,
+    padding: "10px 0",
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
   },
+  // checkbox: {
+  //   paddingLeft: 0,
+  // },
 }));
 
 const options = defaultExportOptions.filter((opt) =>
@@ -61,6 +71,7 @@ function GaExportMenu() {
   const classes = useStyles();
   const exportSelection = useExportSelection(options);
   const map = useSelector((state) => state.app.map);
+  const [exportFullMap, setExportFullMap] = useState(false);
   const pdfSizePxls = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
@@ -88,6 +99,9 @@ function GaExportMenu() {
         newMaxY = center[1] + newHeight / 2;
       }
       const newExtent = [ext[0], newMinY, ext[2], newMaxY];
+      const newExtentHeight = newExtent && newExtent[3] - newExtent[1];
+      const newExtentWidth = newExtent && newExtent[2] - newExtent[0];
+      // console.log("height: ", newExtentHeight, "width: ", newExtentWidth);
       // const newExtent = ext;
       const newRatio =
         (newExtent[2] - newExtent[0]) / (newExtent[3] - newExtent[1]);
@@ -127,6 +141,16 @@ function GaExportMenu() {
       body={
         <div>
           <div className={classes.mainBody}>
+            <FormControlLabel
+              onChange={(evt) => setExportFullMap(evt.target.checked)}
+              control={
+                <Checkbox
+                  checked={exportFullMap}
+                  classes={{ root: classes.checkbox }}
+                />
+              }
+              label="Ganze Schweiz exportieren"
+            />
             <ExportResolutionSelect
               options={options}
               className={classes.resSelect}
@@ -137,8 +161,7 @@ function GaExportMenu() {
               exportFormat={exportSelection?.format}
               exportScale={exportSelection?.resolution}
               exportSize={sizesByFormat[exportSelection?.format]}
-              exportExtent={extent}
-              // forceCurrentZoom
+              exportExtent={exportFullMap ? undefined : extent}
             />
           </div>
         </div>
