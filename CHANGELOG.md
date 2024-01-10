@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.3](https://github.com/geops/trafimage-maps/compare/v1.25.2...v1.25.3) (2024-01-10)
+
+### Bug Fixes
+
+- **handicap:** translate accessibility note string ([#1127](https://github.com/geops/trafimage-maps/issues/1127)) ([ed20b9d](https://github.com/geops/trafimage-maps/commit/ed20b9de2b74ebd31606aae3c5b375379303f15a))
+- **railplus:** update PDF publish date to 12/2023 ([fbf76a6](https://github.com/geops/trafimage-maps/commit/fbf76a696b7815c27b721bc4bfee5f356e10876f))
+
 ### [1.25.2](https://github.com/geops/trafimage-maps/compare/v1.25.1...v1.25.2) (2024-01-08)
 
 ### Bug Fixes
