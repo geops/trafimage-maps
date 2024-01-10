@@ -121,6 +121,7 @@ export const getMapHd = (
   size,
   zoom,
   extent,
+  forceCurrentZoom,
 ) => {
   const targetSize = size || map.getSize();
   // We create a temporary map.
@@ -144,7 +145,9 @@ export const getMapHd = (
   if (extent) {
     center = getCenter(extent);
     targetResolution = map.getView().getResolutionForExtent(extent, targetSize);
-    targetZoom = map.getView().getZoomForResolution(targetResolution);
+    targetZoom = forceCurrentZoom
+      ? targetZoom
+      : map.getView().getZoomForResolution(targetResolution);
   }
 
   const mbMap =
