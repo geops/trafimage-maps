@@ -6,6 +6,7 @@ import { createPointStyleRenderer } from "../../utils/highlightPointStyle";
 import {
   netzkarteLayer,
   netzkarteNight,
+  stationsLayer,
   bahnhofplaene,
 } from "../ch.sbb.netzkarte";
 
@@ -200,6 +201,9 @@ export default [
   //   mapboxLayer: handicapDataLayer,
   //   style: 'ch.swisstopo.backgrounds_ch.sbb.handicap_v2',
   // }),
+  stationsLayer.clone({
+    mapboxLayer: handicapDataLayer,
+  }),
   bahnhofplaene.clone({
     children: bahnhofplaene.children.map((layer) =>
       layer.clone({
