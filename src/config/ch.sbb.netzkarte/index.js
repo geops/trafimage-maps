@@ -1,5 +1,5 @@
-import { Layer, MapboxStyleLayer } from "mobility-toolbox-js/ol";
-// import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
+import { Layer } from "mobility-toolbox-js/ol";
+import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import netzkarte from "../../img/netzkarte.png";
 import netzkarteNightImg from "../../img/netzkarte_night.png";
