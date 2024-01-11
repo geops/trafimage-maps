@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.5](https://github.com/geops/trafimage-maps/compare/v1.25.4...v1.25.5) (2024-01-11)
+
+### Bug Fixes
+
+- **handicap:** adjust handicap.filter for AMO layers ([a42e29b](https://github.com/geops/trafimage-maps/commit/a42e29bb6d56ac1673e987eadc0a08c1bcab719b))
+
 ### [1.25.4](https://github.com/geops/trafimage-maps/compare/v1.25.3...v1.25.4) (2024-01-11)
 
 ### Bug Fixes
