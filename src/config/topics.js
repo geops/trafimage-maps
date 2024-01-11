@@ -5,6 +5,7 @@ import railplusLegendDe from "../img/railplus_legend_de.url.svg";
 import railplusLegendFr from "../img/railplus_legend_fr.url.svg";
 import railplusLegendIt from "../img/railplus_legend_it.url.svg";
 import energieLegendPub from "../img/energie_legend_pub.url.svg";
+import gaLegendA3De from "../img/gaLegends/ga_legend_a3_de.svg";
 import railPlusLayers from "./ch.railplus.mitglieder";
 import netzkarteLayers, {
   dataLayer,
@@ -293,6 +294,13 @@ export const geltungsbereicheMvp = {
   layerInfoComponent: "GeltungsbereicheTopicInfo",
   searches: defaultSearches,
   mapControls: <GaExportMapButton />,
+  exportConfig: {
+    getTemplateValues: () => ({
+      publishedAt: "01/2024",
+      year: "2024",
+    }),
+    getOverlayImageUrl: () => gaLegendA3De,
+  },
 };
 
 export const geltungsbereicheIframe = {

@@ -13,6 +13,7 @@ import { Stroke, RegularShape, Fill, Style } from "ol/style";
 // #############Test################
 import { getCenter } from "ol/extent";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import { Polygon } from "ol/geom";
 import Dialog from "../../components/Dialog";
 import ExportResolutionSelect from "../ExportMenu/ExportResolutionSelect";
 import { defaultExportOptions, sizesByFormat } from "../../utils/exportUtils";
@@ -41,9 +42,6 @@ const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "flex-end",
   },
-  // checkbox: {
-  //   paddingLeft: 0,
-  // },
 }));
 
 const options = defaultExportOptions.filter((opt) =>
@@ -54,15 +52,27 @@ const options = defaultExportOptions.filter((opt) =>
 const markers = new VectorLayer({
   id: "test-markers",
   source: new VectorSource(),
-  style: new Style({
-    image: new RegularShape({
-      fill: new Fill({ color: "red" }),
-      stroke: new Stroke({ color: "black", width: 2 }),
-      points: 4,
-      radius: 10,
-      angle: Math.PI / 4,
-    }),
-  }),
+  style: (feature) => {
+    return feature.getGeometry() instanceof Point
+      ? new Style({
+          image: new RegularShape({
+            fill: new Fill({ color: "red" }),
+            stroke: new Stroke({ color: "black", width: 2 }),
+            points: 4,
+            radius: 5,
+            angle: Math.PI / 4,
+          }),
+        })
+      : new Style({
+          stroke: new Stroke({
+            color: "red",
+            width: 3,
+          }),
+          fill: new Fill({
+            color: "rgba(0, 0, 255, 0.1)",
+          }),
+        });
+  },
 });
 // #############Test################
 
@@ -71,40 +81,38 @@ function GaExportMenu() {
   const classes = useStyles();
   const exportSelection = useExportSelection(options);
   const map = useSelector((state) => state.app.map);
+  const zoom = useSelector((state) => state.map.zoom);
   const [exportFullMap, setExportFullMap] = useState(false);
-  const pdfSizePxls = useMemo(() => {
+  const exportSize = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
 
   const extent = useMemo(() => {
-    const ext = map?.getView().calculateExtent(map.getSize());
-    if (pdfSizePxls) {
+    const ext = map?.getView().calculateExtent(exportSize);
+    if (exportSize) {
       const center = getCenter(ext);
       const extentHeight = ext && ext[3] - ext[1];
       const extentWidth = ext && ext[2] - ext[0];
-      const pdfWidthRatio = pdfSizePxls[0] / pdfSizePxls[1];
+      const pdfWidthRatio = exportSize[0] / exportSize[1];
       const extentWidthRatio = extentWidth / extentHeight;
       const viewportNotWideEnough = extentWidthRatio < pdfWidthRatio;
       const viewportTooWide = extentWidthRatio > pdfWidthRatio;
-      let newMinY = ext[1];
-      let newMaxY = ext[3];
+      const newMinY = ext[1];
+      const newMaxY = ext[3];
       // if (viewportNotWideEnough) {
       //   newMinX = center[0] - (extentWidth * pdfWidthRatio) / 2;
       //   newMaxX = center[0] + (extentWidth * pdfWidthRatio) / 2;
       // }
-      if (viewportTooWide) {
-        const newHeight = extentWidth / pdfWidthRatio;
-        // console.log("heightRatio", newHeight);
-        newMinY = center[1] - newHeight / 2;
-        newMaxY = center[1] + newHeight / 2;
-      }
+      // if (viewportTooWide) {
+      //   const newHeight = extentWidth / pdfWidthRatio;
+      //   // console.log("heightRatio", newHeight);
+      //   newMinY = center[1] - newHeight / 2;
+      //   newMaxY = center[1] + newHeight / 2;
+      // }
       const newExtent = [ext[0], newMinY, ext[2], newMaxY];
       const newExtentHeight = newExtent && newExtent[3] - newExtent[1];
       const newExtentWidth = newExtent && newExtent[2] - newExtent[0];
-      // console.log("height: ", newExtentHeight, "width: ", newExtentWidth);
-      // const newExtent = ext;
-      const newRatio =
-        (newExtent[2] - newExtent[0]) / (newExtent[3] - newExtent[1]);
+      const newRatio = newExtentWidth / newExtentHeight;
       map.removeLayer(markers);
       markers.getSource().clear();
       map.addLayer(markers);
@@ -124,13 +132,24 @@ function GaExportMenu() {
         new Feature({
           geometry: new Point([newExtent[2], newExtent[1]]),
         }),
+        new Feature({
+          geometry: new Polygon([
+            [
+              [newExtent[0], newExtent[1]],
+              [newExtent[2], newExtent[1]],
+              [newExtent[2], newExtent[3]],
+              [newExtent[0], newExtent[3]],
+              [newExtent[0], newExtent[1]],
+            ],
+          ]),
+        }),
       ];
       markers.getSource().addFeatures(features);
 
       return newExtent;
     }
     return ext;
-  }, [map, pdfSizePxls]);
+  }, [map, exportSize]);
 
   return (
     <Dialog
