@@ -30,22 +30,6 @@ export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   },
 });
 
-export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
-  name: "ch.sbb.netzentwicklung.sk_planer",
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
-  group: "netzentwicklung",
-  properties: {
-    isQueryable: true,
-    popupComponent: "NetzentwicklungPopup",
-    netzentwicklungRoleType: "S&K Planer", // display only roles of this type
-    hasInfos: true,
-    useOverlay: true,
-    layerInfoComponent: "NetzentwicklungLayerInfo",
-  },
-});
-
 export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   name: "ch.sbb.netzentwicklung.strategisch",
   mapboxLayer: netzentwicklungDataLayer,
@@ -59,6 +43,37 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: "NetzentwicklungLayerInfo",
+  },
+});
+
+// Not used for now but may be reinserted
+export const netzentwicklungSkPlanerByRegionLayer = new MapboxStyleLayer({
+  name: "ch.sbb.netzentwicklung.sk_planer.by_region",
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: true,
+  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
+  properties: {
+    isQueryable: true,
+    popupComponent: "NetzentwicklungPopup",
+    netzentwicklungRoleType: "S&K Planer", // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    layerInfoComponent: "NetzentwicklungLayerInfo",
+  },
+});
+
+export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
+  name: "ch.sbb.netzentwicklung.sk_planer",
+  mapboxLayer: netzentwicklungDataLayer,
+  styleLayersFilter: ({ id }) => /sk_planer\.by_person/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /sk_planer\.by_person$/.test(id),
+  group: "netzentwicklung",
+  properties: {
+    isQueryable: true,
+    popupComponent: "NetzentwicklungPopup",
+    netzentwicklungRoleType: "S&K Planer", // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
   },
 });
 

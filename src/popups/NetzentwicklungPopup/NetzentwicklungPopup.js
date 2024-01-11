@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import Feature from "ol/Feature";
@@ -68,6 +68,7 @@ const renderRoleCard = (rolle, classes, t) => {
 
 function NetzentwicklungPopup({ feature, layer, t }) {
   const classes = useStyles();
+  const isSkPlanerByName = /sk_planer/.test(layer.key);
   const rollen = JSON.parse(feature.get("rollen") || "[]").filter((r) =>
     ["Alle", layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
@@ -75,7 +76,7 @@ function NetzentwicklungPopup({ feature, layer, t }) {
     (r) => ["Alle", layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
   const mbFeature = feature.get("mapboxFeature");
-  let regionColor = "transparent";
+  let color = "transparent";
   if (mbFeature) {
     const { r, g, b, a } = mbFeature.layer.paint["line-color"] || {
       r: 1,
@@ -83,26 +84,38 @@ function NetzentwicklungPopup({ feature, layer, t }) {
       b: 1,
       a: 1,
     };
-    regionColor = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
+    color = `rgba(${r * 255},${g * 255},${b * 255},${a})`;
   }
+
+  useEffect(() => {
+    if (layer) {
+      layer.select([feature]);
+    }
+  }, [layer, feature]);
+
   return (
     <div>
       <div className={classes.title}>
         <div
           style={{
-            backgroundColor: regionColor,
+            backgroundColor: color,
             width: 19,
             height: 19,
             borderRadius: "50%",
             marginRight: 9,
           }}
         />
-        {`${t("Region")} ${t(feature.get("region"))}`}
+        {isSkPlanerByName
+          ? `${t("ch.sbb.netzentwicklung.sk_planer")}: ${
+              rollen.find((r) => r.typ === "S&K Planer")?.person?.name
+            }`
+          : `${t("Region")} ${t(feature.get("region"))}`}
       </div>
       <div className={classes.title}>{renderTitle(feature, t, true)}</div>
       <div>
         {rollen.map((rolle) => renderRoleCard(rolle, classes, t))}
-        {regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
+        {!isSkPlanerByName &&
+          regionRollen.map((rolle) => renderRoleCard(rolle, classes, t))}
       </div>
     </div>
   );
