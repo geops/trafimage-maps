@@ -77,7 +77,7 @@ const nichtBarrierefrei = new MapboxStyleLayer({
 //   name: "ch.sbb.teilbarrierfreierbahnhoefe",
 //   mapboxLayer: handicapDataLayer,
 //   styleLayersFilter: ({ metadata }) => {
-//     return /^symbol.teilbarrierfrei/.test(metadata?.["handicap.filter"]);
+//     return /^symbol.teilbarrierefrei/.test(metadata?.["handicap.filter"]);
 //   },
 //   properties: {
 //     isQueryable: true,
@@ -187,7 +187,7 @@ export default [
   }),
   netzkarteNight.clone({
     mapboxLayer: handicapDataLayer,
-    style: "base_dark_v2_ch.sbb.handicap_v2",
+    style: "base_dark_v2_ch.sbb.handicap_v2_dark",
   }),
   // netzkarteAerial.clone({
   //   mapboxLayer: handicapDataLayer,
