@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.6](https://github.com/geops/trafimage-maps/compare/v1.25.5...v1.25.6) (2024-01-11)
+
+### Bug Fixes
+
+- **netzentwicklung:** remove S&K Planer layer from Netzentwicklung ([#1129](https://github.com/geops/trafimage-maps/issues/1129)) ([b60a520](https://github.com/geops/trafimage-maps/commit/b60a520850841964a918826646d895c3c92e5f30))
+
 ### [1.25.5](https://github.com/geops/trafimage-maps/compare/v1.25.4...v1.25.5) (2024-01-11)
 
 ### Bug Fixes
