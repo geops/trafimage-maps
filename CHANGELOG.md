@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.4](https://github.com/geops/trafimage-maps/compare/v1.25.3...v1.25.4) (2024-01-11)
+
+### Bug Fixes
+
+- **handicap:** use new amo darkmode style to fix labels ([e8ea172](https://github.com/geops/trafimage-maps/commit/e8ea1729c80cd7757fef4f8cf79a644953daf894))
+
 ### [1.25.3](https://github.com/geops/trafimage-maps/compare/v1.25.2...v1.25.3) (2024-01-10)
 
 ### Bug Fixes
