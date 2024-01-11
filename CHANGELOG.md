@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.6](https://github.com/geops/trafimage-maps/compare/v1.25.5...v1.25.6) (2024-01-11)
+
+### Bug Fixes
+
+- **netzentwicklung:** remove S&K Planer layer from Netzentwicklung ([#1129](https://github.com/geops/trafimage-maps/issues/1129)) ([b60a520](https://github.com/geops/trafimage-maps/commit/b60a520850841964a918826646d895c3c92e5f30))
+
+### [1.25.5](https://github.com/geops/trafimage-maps/compare/v1.25.4...v1.25.5) (2024-01-11)
+
+### Bug Fixes
+
+- **handicap:** adjust handicap.filter for AMO layers ([a42e29b](https://github.com/geops/trafimage-maps/commit/a42e29bb6d56ac1673e987eadc0a08c1bcab719b))
+
+### [1.25.4](https://github.com/geops/trafimage-maps/compare/v1.25.3...v1.25.4) (2024-01-11)
+
+### Bug Fixes
+
+- **handicap:** use new amo darkmode style to fix labels ([e8ea172](https://github.com/geops/trafimage-maps/commit/e8ea1729c80cd7757fef4f8cf79a644953daf894))
+
+### [1.25.3](https://github.com/geops/trafimage-maps/compare/v1.25.2...v1.25.3) (2024-01-10)
+
+### Bug Fixes
+
+- **handicap:** translate accessibility note string ([#1127](https://github.com/geops/trafimage-maps/issues/1127)) ([ed20b9d](https://github.com/geops/trafimage-maps/commit/ed20b9de2b74ebd31606aae3c5b375379303f15a))
+- **railplus:** update PDF publish date to 12/2023 ([fbf76a6](https://github.com/geops/trafimage-maps/commit/fbf76a696b7815c27b721bc4bfee5f356e10876f))
+
 ### [1.25.2](https://github.com/geops/trafimage-maps/compare/v1.25.1...v1.25.2) (2024-01-08)
 
 ### Bug Fixes

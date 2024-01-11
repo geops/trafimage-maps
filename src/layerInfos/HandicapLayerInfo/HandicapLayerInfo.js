@@ -15,7 +15,7 @@ const defaultProps = {};
 
 const names = {
   barrierfree: "",
-  notBarrierfree: "ch.sbb.nichtbarrierfreierbahnhoefe",
+  notBarrierfree: "ch.sbb.nichtbarrierefreiebahnhoefe",
 };
 
 const descriptions = {

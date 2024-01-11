@@ -8,7 +8,8 @@ import React, {
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
+import { makeStyles } from "@mui/styles";
 import Link from "../../components/Link";
 
 const propTypes = {
@@ -16,6 +17,21 @@ const propTypes = {
 };
 
 const cache = {};
+
+const useStyles = makeStyles(() => ({
+  popup: {
+    "& legend": {
+      fontWeight: "bold", // Ensure the title is bold in gitlab
+    },
+    "& fieldset": {
+      borderWidth: 1, // Ensure border is 1px in gitlab
+    },
+  },
+}));
+
+// TODO: The NOVA data is still quite incomplete. For now check the API accessibility note for this hardcoded string. This needs to be improved when the data is updated
+const hardcodedStringForNote =
+  "Bei dieser Verbindung benötigen Sie Ein- und Ausstiegshilfen. Bitte melden Sie sich bis spätestens 1 Stunde vor Abfahrt unter swisspass.ch/handicap oder beim Contact Center Handicap.Contact Center Handicaptäglich 5.00–24.00 Uhr, Telefon 0800 007 102 (kostenlos in der Schweiz), aus dem Ausland +41 800 007 102.";
 
 const useStopPlaceData = (uic, cartaroUrl) => {
   const [loading, setLoading] = useState();
@@ -59,6 +75,7 @@ const formatYesNoData = (data) => {
 };
 
 function StopPlacePopup({ feature }) {
+  const classes = useStyles();
   const { t, i18n } = useTranslation();
   const cartaroUrl = useSelector((state) => state.app.cartaroUrl);
   const uic = useMemo(() => {
@@ -115,6 +132,13 @@ function StopPlacePopup({ feature }) {
       }
 
       if (key === "accessibility") {
+        const note =
+          typeof value.note === "object"
+            ? value?.note?.[i18n.language] || value?.note?.de
+            : value.note;
+        const hasTranslatedString = note?.includes(hardcodedStringForNote);
+        const hasAdditionalInfo =
+          hasTranslatedString && note?.split(hardcodedStringForNote)[1];
         content = (
           <div key={key}>
             <fieldset>
@@ -124,9 +148,30 @@ function StopPlacePopup({ feature }) {
               {value?.note && (
                 <>
                   <br />
-                  {typeof value.note === "object"
-                    ? value.note[i18n.language] || value.note.de
-                    : value.note}
+                  {hasTranslatedString ? (
+                    <Trans
+                      i18nKey={hardcodedStringForNote}
+                      components={{
+                        1: <br />,
+                        2: (
+                          <a
+                            href="https://www.swisspass.ch/handicap"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            swisspass.ch/handicap
+                          </a>
+                        ),
+                      }}
+                    />
+                  ) : null}
+                  {hasAdditionalInfo && (
+                    <>
+                      <br />
+                      <br />
+                      {hasAdditionalInfo}
+                    </>
+                  )}
                 </>
               )}
               <br />
@@ -204,7 +249,7 @@ function StopPlacePopup({ feature }) {
     return <div>Loading ...</div>;
   }
 
-  return <div>{popupContent}</div>;
+  return <div className={classes.popup}>{popupContent}</div>;
 }
 
 StopPlacePopup.propTypes = propTypes;
