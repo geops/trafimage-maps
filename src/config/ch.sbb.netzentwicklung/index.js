@@ -17,29 +17,13 @@ export const netzentwicklungDataLayer = new TrafimageMapboxLayer({
 export const netzentwicklungProgrammManagerLayer = new MapboxStyleLayer({
   name: "ch.sbb.netzentwicklung.programm_manager",
   mapboxLayer: netzentwicklungDataLayer,
-  visible: false,
+  visible: true,
   styleLayersFilter: ({ id }) => /programm_manager$/.test(id),
   group: "netzentwicklung",
   properties: {
     isQueryable: true,
     popupComponent: "NetzentwicklungPopup",
     netzentwicklungRoleType: "Programm Manager", // display only roles of this type
-    hasInfos: true,
-    useOverlay: true,
-    layerInfoComponent: "NetzentwicklungLayerInfo",
-  },
-});
-
-export const netzentwicklungSkPlanerLayer = new MapboxStyleLayer({
-  name: "ch.sbb.netzentwicklung.sk_planer",
-  mapboxLayer: netzentwicklungDataLayer,
-  visible: true,
-  styleLayersFilter: ({ id }) => /sk_planer$/.test(id),
-  group: "netzentwicklung",
-  properties: {
-    isQueryable: true,
-    popupComponent: "NetzentwicklungPopup",
-    netzentwicklungRoleType: "S&K Planer", // display only roles of this type
     hasInfos: true,
     useOverlay: true,
     layerInfoComponent: "NetzentwicklungLayerInfo",
@@ -67,5 +51,4 @@ export default [
   netzentwicklungDataLayer,
   netzentwicklungStrategischLayer,
   netzentwicklungProgrammManagerLayer,
-  netzentwicklungSkPlanerLayer,
 ];
