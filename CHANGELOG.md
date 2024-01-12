@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.25.7](https://github.com/geops/trafimage-maps/compare/v1.25.6...v1.25.7) (2024-01-12)
+
+### Bug Fixes
+
+- put back original names of layers ([ca60b94](https://github.com/geops/trafimage-maps/commit/ca60b947a8d8fa2d653d3a17aa49b351c0b0aa33))
+
 ### [1.25.6](https://github.com/geops/trafimage-maps/compare/v1.25.5...v1.25.6) (2024-01-11)
 
 ### Bug Fixes
