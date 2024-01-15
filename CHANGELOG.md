@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- **hndicap:** always display accessibility note, even without translated string ([f4d40ab](https://github.com/geops/trafimage-maps/commit/f4d40abdd078b3df137f52d8dbf1bd0e095d4a02))
+- **handicap:** always display accessibility note, even without translated string ([f4d40ab](https://github.com/geops/trafimage-maps/commit/f4d40abdd078b3df137f52d8dbf1bd0e095d4a02))
 - **translation:** correct italian translation for closing dialog ([309aaa1](https://github.com/geops/trafimage-maps/commit/309aaa1366bc14c059fcf98d6b35da2d6e902a43))
 
 ### [1.25.7](https://github.com/geops/trafimage-maps/compare/v1.25.6...v1.25.7) (2024-01-12)
