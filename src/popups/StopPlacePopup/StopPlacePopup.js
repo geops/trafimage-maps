@@ -10,6 +10,7 @@ import Feature from "ol/Feature";
 import { useSelector } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 import { makeStyles } from "@mui/styles";
+import { Typography } from "@mui/material";
 import Link from "../../components/Link";
 
 const propTypes = {
@@ -137,17 +138,19 @@ function StopPlacePopup({ feature }) {
             ? value?.note?.[i18n.language] || value?.note?.de
             : value.note;
         const hasTranslatedString = note?.includes(hardcodedStringForNote);
-        const hasAdditionalInfo =
-          hasTranslatedString && note?.split(hardcodedStringForNote)[1];
+        const notTranslatedInfo = hasTranslatedString
+          ? note?.split(hardcodedStringForNote)[1]
+          : note;
         content = (
           <div key={key}>
             <fieldset>
               <legend>{t(key)}</legend>
               <br />
-              <div>{t(formatYesNoData(value?.state))}</div>
-              {value?.note && (
-                <>
-                  <br />
+              <Typography paragraph>
+                {t(formatYesNoData(value?.state))}
+              </Typography>
+              {hasTranslatedString && (
+                <Typography paragraph>
                   {hasTranslatedString ? (
                     <Trans
                       i18nKey={hardcodedStringForNote}
@@ -165,16 +168,11 @@ function StopPlacePopup({ feature }) {
                       }}
                     />
                   ) : null}
-                  {hasAdditionalInfo && (
-                    <>
-                      <br />
-                      <br />
-                      {hasAdditionalInfo}
-                    </>
-                  )}
-                </>
+                </Typography>
               )}
-              <br />
+              {notTranslatedInfo && (
+                <Typography paragraph>{notTranslatedInfo}</Typography>
+              )}
             </fieldset>
             <br />
           </div>
