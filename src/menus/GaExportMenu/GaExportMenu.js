@@ -44,8 +44,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const options = defaultExportOptions.filter((opt) =>
-  /^(a3|a4)$/.test(opt.format),
+const options = defaultExportOptions.filter(
+  (opt) => /^(a3|a4)$/.test(opt.format) && /^(2|3)$/.test(opt.resolution),
 );
 
 // #############Test################
@@ -82,74 +82,75 @@ function GaExportMenu() {
   const exportSelection = useExportSelection(options);
   const map = useSelector((state) => state.app.map);
   const zoom = useSelector((state) => state.map.zoom);
+  const center = useSelector((state) => state.map.center);
   const [exportFullMap, setExportFullMap] = useState(false);
   const exportSize = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
 
-  const extent = useMemo(() => {
-    const ext = map?.getView().calculateExtent(exportSize);
-    if (exportSize) {
-      const center = getCenter(ext);
-      const extentHeight = ext && ext[3] - ext[1];
-      const extentWidth = ext && ext[2] - ext[0];
-      const pdfWidthRatio = exportSize[0] / exportSize[1];
-      const extentWidthRatio = extentWidth / extentHeight;
-      const viewportNotWideEnough = extentWidthRatio < pdfWidthRatio;
-      const viewportTooWide = extentWidthRatio > pdfWidthRatio;
-      const newMinY = ext[1];
-      const newMaxY = ext[3];
-      // if (viewportNotWideEnough) {
-      //   newMinX = center[0] - (extentWidth * pdfWidthRatio) / 2;
-      //   newMaxX = center[0] + (extentWidth * pdfWidthRatio) / 2;
-      // }
-      // if (viewportTooWide) {
-      //   const newHeight = extentWidth / pdfWidthRatio;
-      //   // console.log("heightRatio", newHeight);
-      //   newMinY = center[1] - newHeight / 2;
-      //   newMaxY = center[1] + newHeight / 2;
-      // }
-      const newExtent = [ext[0], newMinY, ext[2], newMaxY];
-      const newExtentHeight = newExtent && newExtent[3] - newExtent[1];
-      const newExtentWidth = newExtent && newExtent[2] - newExtent[0];
-      const newRatio = newExtentWidth / newExtentHeight;
-      map.removeLayer(markers);
-      markers.getSource().clear();
-      map.addLayer(markers);
-      const features = [
-        new Feature({
-          geometry: new Point(center),
-        }),
-        new Feature({
-          geometry: new Point([newExtent[0], newExtent[1]]),
-        }),
-        new Feature({
-          geometry: new Point([newExtent[2], newExtent[3]]),
-        }),
-        new Feature({
-          geometry: new Point([newExtent[0], newExtent[3]]),
-        }),
-        new Feature({
-          geometry: new Point([newExtent[2], newExtent[1]]),
-        }),
-        new Feature({
-          geometry: new Polygon([
-            [
-              [newExtent[0], newExtent[1]],
-              [newExtent[2], newExtent[1]],
-              [newExtent[2], newExtent[3]],
-              [newExtent[0], newExtent[3]],
-              [newExtent[0], newExtent[1]],
-            ],
-          ]),
-        }),
-      ];
-      markers.getSource().addFeatures(features);
+  // const extent = useMemo(() => {
+  //   const ext = map?.getView().calculateExtent(exportSize);
+  //   if (exportSize) {
+  //     const center = getCenter(ext);
+  //     const extentHeight = ext && ext[3] - ext[1];
+  //     const extentWidth = ext && ext[2] - ext[0];
+  //     const pdfWidthRatio = exportSize[0] / exportSize[1];
+  //     const extentWidthRatio = extentWidth / extentHeight;
+  //     const viewportNotWideEnough = extentWidthRatio < pdfWidthRatio;
+  //     const viewportTooWide = extentWidthRatio > pdfWidthRatio;
+  //     const newMinY = ext[1];
+  //     const newMaxY = ext[3];
+  //     // if (viewportNotWideEnough) {
+  //     //   newMinX = center[0] - (extentWidth * pdfWidthRatio) / 2;
+  //     //   newMaxX = center[0] + (extentWidth * pdfWidthRatio) / 2;
+  //     // }
+  //     // if (viewportTooWide) {
+  //     //   const newHeight = extentWidth / pdfWidthRatio;
+  //     //   // console.log("heightRatio", newHeight);
+  //     //   newMinY = center[1] - newHeight / 2;
+  //     //   newMaxY = center[1] + newHeight / 2;
+  //     // }
+  //     const newExtent = [ext[0], newMinY, ext[2], newMaxY];
+  //     const newExtentHeight = newExtent && newExtent[3] - newExtent[1];
+  //     const newExtentWidth = newExtent && newExtent[2] - newExtent[0];
+  //     const newRatio = newExtentWidth / newExtentHeight;
+  //     map.removeLayer(markers);
+  //     markers.getSource().clear();
+  //     map.addLayer(markers);
+  //     const features = [
+  //       new Feature({
+  //         geometry: new Point(center),
+  //       }),
+  //       new Feature({
+  //         geometry: new Point([newExtent[0], newExtent[1]]),
+  //       }),
+  //       new Feature({
+  //         geometry: new Point([newExtent[2], newExtent[3]]),
+  //       }),
+  //       new Feature({
+  //         geometry: new Point([newExtent[0], newExtent[3]]),
+  //       }),
+  //       new Feature({
+  //         geometry: new Point([newExtent[2], newExtent[1]]),
+  //       }),
+  //       new Feature({
+  //         geometry: new Polygon([
+  //           [
+  //             [newExtent[0], newExtent[1]],
+  //             [newExtent[2], newExtent[1]],
+  //             [newExtent[2], newExtent[3]],
+  //             [newExtent[0], newExtent[3]],
+  //             [newExtent[0], newExtent[1]],
+  //           ],
+  //         ]),
+  //       }),
+  //     ];
+  //     // markers.getSource().addFeatures(features);
 
-      return newExtent;
-    }
-    return ext;
-  }, [map, exportSize]);
+  //     return newExtent;
+  //   }
+  //   return ext;
+  // }, [map, exportSize]);
 
   return (
     <Dialog
@@ -179,8 +180,10 @@ function GaExportMenu() {
             <ExportButton
               exportFormat={exportSelection?.format}
               exportScale={exportSelection?.resolution}
-              exportSize={sizesByFormat[exportSelection?.format]}
-              exportExtent={exportFullMap ? undefined : extent}
+              exportSize={exportSize}
+              exportExtent={exportFullMap ? undefined : null} // use default extent when exporting full map
+              exportZoom={zoom}
+              exportCoordinates={[center, center]}
             />
           </div>
         </div>
