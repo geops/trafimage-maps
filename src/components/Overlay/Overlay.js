@@ -185,10 +185,8 @@ function Overlay({
   }, [featureInfo, previousFeatureInfo, resetOverlayHeight]);
 
   useEffect(() => {
-    if (["xs", "s"].includes(screenWidth)) {
-      dispatch(setOverlayElement(null));
-    }
-  }, [dispatch, screenWidth]);
+    return () => dispatch(setOverlayElement(null));
+  }, [dispatch]);
 
   if (!featureInfo || !featureInfo.length) {
     return null;

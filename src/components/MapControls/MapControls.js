@@ -21,6 +21,7 @@ import { ReactComponent as MenuClosed } from "../../img/sbb/040_schliessen_104_3
 import Geolocate from "../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../img/geolocate_marker_direction.svg";
 import geolocateMarker from "../../img/geolocate_marker.svg";
+import useIsMobile from "../../utils/useIsMobile";
 
 const propTypes = {
   geolocation: PropTypes.bool,
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       flexDirection: "column",
       gap: 8,
-      right: (props) => props.overlayWidth + 15,
+      right: (props) => (props.isMobile ? 15 : props.overlayWidth + 15),
       "& .rs-zooms-bar": {
         "& .ol-zoomslider": {
           border: "1px solid #5a5a5a !important",
@@ -136,7 +137,8 @@ function MapControls({
   children,
 }) {
   const overlayWidth = useOverlayWidth();
-  const classes = useStyles({ overlayWidth });
+  const isMobile = useIsMobile();
+  const classes = useStyles({ overlayWidth, isMobile });
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
