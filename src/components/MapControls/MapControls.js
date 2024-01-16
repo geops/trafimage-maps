@@ -263,7 +263,10 @@ function MapControls({
   }, [map, zoomSlider]);
 
   return (
-    <div className={`wkp-map-controls ${classes.mapControls}`}>
+    <div
+      className={`wkp-map-controls ${classes.mapControls}`}
+      data-testid="map-controls-wrapper"
+    >
       {menuToggler && (
         <MapButton
           className={`wkp-display-menu-toggler ${classes.displayMenuToggler}`}

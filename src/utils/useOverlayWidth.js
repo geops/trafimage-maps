@@ -9,9 +9,9 @@ const useOverlayWidth = () => {
       setWidth(0);
       return;
     }
-    new ResizeObserver((entries) =>
-      setWidth(entries[0].contentRect.width),
-    ).observe(overlayElement);
+    new ResizeObserver((entries) => {
+      setWidth(entries[0].contentRect.width);
+    }).observe(overlayElement);
   }, [overlayElement]);
   return width;
 };

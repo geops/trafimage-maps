@@ -31,13 +31,14 @@ describe("MapControls", () => {
     const store = global.global.mockStore({
       app: { map },
     });
-    const { container, getByTestId } = render(
+    const { container, getByTestId, queryByTestId } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <MapControls />
         </Provider>
       </ThemeProvider>,
     );
+    expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
@@ -56,6 +57,7 @@ describe("MapControls", () => {
         </Provider>
       </ThemeProvider>,
     );
+    expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
@@ -74,6 +76,7 @@ describe("MapControls", () => {
         </Provider>
       </ThemeProvider>,
     );
+    expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
@@ -85,16 +88,36 @@ describe("MapControls", () => {
     const store = global.global.mockStore({
       app: { map },
     });
-    const { container, getByTestId } = render(
+    const { container, getByTestId, queryByTestId } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <MapControls map={map} zoomSlider={false} />,
         </Provider>
       </ThemeProvider>,
     );
+    expect(queryByTestId("map-controls-menu-toggler")).toBeNull();
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(0);
+    expect(getByTestId("map-controls-geolocation")).toBeTruthy();
+    expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
+  });
+
+  test("should display menuToggler", () => {
+    const store = global.global.mockStore({
+      app: { map },
+    });
+    const { container, getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <MapControls map={map} menuToggler />,
+        </Provider>
+      </ThemeProvider>,
+    );
+    expect(getByTestId("map-controls-menu-toggler")).toBeTruthy();
+    expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
+    expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
+    expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
     expect(getByTestId("map-controls-geolocation")).toBeTruthy();
     expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });
