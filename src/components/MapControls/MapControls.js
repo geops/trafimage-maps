@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => {
   return {
     mapControls: {
       position: "absolute",
+      display: "flex",
+      flexDirection: "column",
+      gap: 8,
       right: (props) => props.overlayWidth + 15,
       "& .rs-zooms-bar": {
         "& .ol-zoomslider": {
@@ -111,7 +114,7 @@ const useStyles = makeStyles((theme) => {
       alignItems: "center",
       justifyContent: "center",
       padding: 5,
-      margin: "20px 0",
+      margin: "10px 0",
       color: theme.colors.darkGray,
       "&:hover": {
         color: theme.colors.darkGray,

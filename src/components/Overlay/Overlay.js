@@ -184,6 +184,12 @@ function Overlay({
     }
   }, [featureInfo, previousFeatureInfo, resetOverlayHeight]);
 
+  useEffect(() => {
+    if (["xs", "s"].includes(screenWidth)) {
+      dispatch(setOverlayElement(null));
+    }
+  }, [dispatch, screenWidth]);
+
   if (!featureInfo || !featureInfo.length) {
     return null;
   }
@@ -241,7 +247,7 @@ function Overlay({
           },
         }}
         PaperProps={{
-          ref: (node) => dispatch(setOverlayElement(node)),
+          ref: (node) => dispatch(setOverlayElement(isMobile ? null : node)),
         }}
       >
         {isMobile && (
