@@ -43,7 +43,9 @@ import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
 import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
-
+import messwagenLayers from "./ch.sbb.messwagen";
+import MesswagenFollowButton from "./ch.sbb.messwagen/MesswagenFollowButton";
+import { MesswagenPopup } from "../popups";
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -58,7 +60,7 @@ export const defaultElements = {
   permalink: true,
   mapControls: true,
   baseLayerSwitcher: true,
-  popup: false,
+  popup: true,
   search: true,
   drawMenu: true,
   overlay: true,
@@ -440,6 +442,19 @@ export const railPlus = {
   minZoom: 7,
 };
 
+export const messwagen = {
+  name: "ch.sbb.messwagen",
+  key: "ch.sbb.messwagen",
+  layers: messwagenLayers,
+  elements: {
+    ...defaultElements,
+    overlay: false,
+  },
+  hideInLayerTree: "onlyWhenLoggedIn",
+  mapControls: <MesswagenFollowButton />,
+  customElements: <MesswagenPopup />,
+};
+
 const topics = {
   wkp: [
     netzkarte,
@@ -460,6 +475,7 @@ const topics = {
     energiePublic,
     sandbox,
     railPlus,
+    messwagen,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],

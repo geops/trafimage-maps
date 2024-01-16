@@ -5,7 +5,7 @@
   position: initial;
 }
 
-// Colors
+/* Colors */
 $brand-primary: #eb0000;
 $brand-primary-hover: #c60018;
 $brand-grey: #767676;
@@ -15,7 +15,7 @@ $footer-height: 40px;
 $footer-font-size: 12px;
 $menu-item-height: 30px;
 
-// BarrierFree
+/* BarrierFree */
 $bf-large-outline: 4px solid black !important;
 $bf-outline: 2px solid black !important;
 
@@ -38,3 +38,22 @@ $bf-outline: 2px solid black !important;
   'SBBWeb-Bold',
   'https://cdn.app.sbb.ch/fonts/v1_6_subset/SBBWeb-Bold'
 );
+
+@keyframes pulse {
+  0% {
+      opacity: 1;
+  }
+
+  50% {
+      opacity: 0.3;
+  
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+.pulse {
+  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

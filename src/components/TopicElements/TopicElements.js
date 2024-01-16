@@ -220,6 +220,7 @@ function TopicElements({ history }) {
         </Menu>
         {elements.footer && <Footer />}
         {elements.overlay && <Overlay elements={elements} />}
+        {activeTopic?.customElements}
         <MainDialog />
       </div>
     </div>
