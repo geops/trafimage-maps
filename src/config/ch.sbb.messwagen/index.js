@@ -15,10 +15,9 @@ const messwagenAerial = netzkarteAerial.clone({
 const mewa12 = new MesswagenLayer({
   name: "ch.sbb.messwagen.mewa12",
   group: "ch.sbb.messwagen",
-  visible: false,
+  visible: true,
   properties: {
     fileName: "mewa12",
-    isQueryable: true,
   },
 });
 
