@@ -13,6 +13,7 @@ import {
   updateDrawEditLink,
 } from "../../model/app/actions";
 import DrawLayerMenu from "../DrawLayerMenu";
+import { ONLY_WHEN_NOT_LOGGED_IN } from "../../utils/constants";
 
 const propTypes = {
   menuHeight: PropTypes.number,
@@ -32,6 +33,7 @@ const defaultProps = {
 };
 
 function TopicsMenu({ children, menuHeight, bodyElementRef }) {
+  const permissionInfos = useSelector((state) => state.app.permissionInfos);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const layers = useSelector((state) => state.map.layers || []);
   const topics = useSelector((state) => state.app.topics);
@@ -58,12 +60,19 @@ function TopicsMenu({ children, menuHeight, bodyElementRef }) {
   }, [layers, dispatch]);
 
   const topicsToDisplay = useMemo(() => {
-    return activeTopic?.only
-      ? [activeTopic]
-      : topics.filter(
-          (t) => t.key === activeTopic?.key || (!t.hideInLayerTree && !t.only),
-        );
-  }, [activeTopic, topics]);
+    if (activeTopic?.only) {
+      return [activeTopic];
+    }
+    return topics.filter((t) => {
+      return (
+        t.key === activeTopic?.key ||
+        ((!t.hideInLayerTree ||
+          (t.hideInLayerTree === ONLY_WHEN_NOT_LOGGED_IN &&
+            permissionInfos?.user)) &&
+          !t.only)
+      );
+    });
+  }, [activeTopic, topics, permissionInfos]);
 
   if (!topics || !topics.length) {
     return null;

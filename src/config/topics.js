@@ -35,6 +35,7 @@ import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
 import {
   DV_KEY,
+  ONLY_WHEN_NOT_LOGGED_IN,
   PDF_DOWNLOAD_EVENT_TYPE,
   RAILPLUS_EXPORTBTN_ID,
 } from "../utils/constants";
@@ -450,7 +451,7 @@ export const messwagen = {
     ...defaultElements,
     overlay: false,
   },
-  hideInLayerTree: "onlyWhenLoggedIn",
+  hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
   mapControls: <MesswagenFollowButton />,
   customElements: <MesswagenPopup />,
 };

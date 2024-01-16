@@ -28,7 +28,6 @@ function MesswagenPopup() {
         position: "absolute",
         left: 5,
         bottom: 45,
-        marginLeft: "calc(50% - 100px)",
         width: 190,
         backgroundColor: "rgba(255,255,255,0.6)",
         padding: 5,
