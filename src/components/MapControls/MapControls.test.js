@@ -2,6 +2,8 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { Map, View } from "ol";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@mui/material";
+import theme from "../../themes/default";
 import MapControls from ".";
 
 let map;
@@ -29,63 +31,71 @@ describe("MapControls", () => {
     const store = global.global.mockStore({
       app: { map },
     });
-    const { container } = render(
-      <Provider store={store}>
-        <MapControls />,
-      </Provider>,
+    const { container, getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <MapControls />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
-    expect(container.querySelectorAll(".wkp-geolocation svg").length).toBe(1);
-    expect(container.querySelectorAll(".wkp-fit-extent svg").length).toBe(1);
+    expect(getByTestId("map-controls-geolocation")).toBeTruthy();
+    expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });
 
   test("should not display geolocation", () => {
     const store = global.global.mockStore({
       app: { map },
     });
-    const { container } = render(
-      <Provider store={store}>
-        <MapControls map={map} geolocation={false} />,
-      </Provider>,
+    const { container, queryByTestId, getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <MapControls map={map} geolocation={false} />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
-    expect(container.querySelectorAll(".wkp-geolocation svg").length).toBe(0);
-    expect(container.querySelectorAll(".wkp-fit-extent svg").length).toBe(1);
+    expect(queryByTestId("map-controls-geolocation")).toBeNull();
+    expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });
 
   test("should not display fitExtent", () => {
     const store = global.global.mockStore({
       app: { map },
     });
-    const { container } = render(
-      <Provider store={store}>
-        <MapControls map={map} fitExtent={false} />,
-      </Provider>,
+    const { container, getByTestId, queryByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <MapControls map={map} fitExtent={false} />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(1);
-    expect(container.querySelectorAll(".wkp-geolocation svg").length).toBe(1);
-    expect(container.querySelectorAll(".wkp-fit-extent svg").length).toBe(0);
+    expect(getByTestId("map-controls-geolocation")).toBeTruthy();
+    expect(queryByTestId("map-controls-fit-extent")).toBeNull();
   });
 
   test("should not display zoomSlider", () => {
     const store = global.global.mockStore({
       app: { map },
     });
-    const { container } = render(
-      <Provider store={store}>
-        <MapControls map={map} zoomSlider={false} />,
-      </Provider>,
+    const { container, getByTestId } = render(
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <MapControls map={map} zoomSlider={false} />,
+        </Provider>
+      </ThemeProvider>,
     );
     expect(container.querySelectorAll(".rs-zoom-in svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoom-out svg").length).toBe(1);
     expect(container.querySelectorAll(".rs-zoomslider-wrapper").length).toBe(0);
-    expect(container.querySelectorAll(".wkp-geolocation svg").length).toBe(1);
-    expect(container.querySelectorAll(".wkp-fit-extent svg").length).toBe(1);
+    expect(getByTestId("map-controls-geolocation")).toBeTruthy();
+    expect(getByTestId("map-controls-fit-extent")).toBeTruthy();
   });
 });

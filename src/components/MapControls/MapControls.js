@@ -8,17 +8,19 @@ import FitExtent from "react-spatial/components/FitExtent";
 import { ZoomSlider } from "ol/control";
 import { unByKey } from "ol/Observable";
 import { Style, Icon } from "ol/style";
+import { makeStyles } from "@mui/styles";
+import MapButton from "../MapButton/MapButton";
+import { SWISS_EXTENT } from "../../utils/constants";
+import useOverlayWidth from "../../utils/useOverlayWidth";
+import { setDisplayMenu } from "../../model/app/actions";
 import { ReactComponent as SwissBounds } from "../../img/swissbounds.svg";
 import { ReactComponent as ZoomOut } from "../../img/minus.svg";
 import { ReactComponent as ZoomIn } from "../../img/plus.svg";
-import { ReactComponent as MenuOpenImg } from "../../img/sbb/040_hamburgermenu_102_36.svg";
-import { ReactComponent as MenuClosedImg } from "../../img/sbb/040_schliessen_104_36.svg";
+import { ReactComponent as MenuOpen } from "../../img/sbb/040_hamburgermenu_102_36.svg";
+import { ReactComponent as MenuClosed } from "../../img/sbb/040_schliessen_104_36.svg";
 import Geolocate from "../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../img/geolocate_marker_direction.svg";
 import geolocateMarker from "../../img/geolocate_marker.svg";
-import { SWISS_EXTENT } from "../../utils/constants";
-import { setDisplayMenu } from "../../model/app/actions";
-import "./MapControls.scss";
 
 const propTypes = {
   geolocation: PropTypes.bool,
@@ -40,6 +42,89 @@ const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
 };
 
+const useStyles = makeStyles((theme) => {
+  return {
+    mapControls: {
+      position: "absolute",
+      right: (props) => props.overlayWidth + 15,
+      "& .rs-zooms-bar": {
+        "& .ol-zoomslider": {
+          border: "1px solid #5a5a5a !important",
+          paddingBottom: "3px !important",
+        },
+        "& .ol-zoomslider-thumb": {
+          background: `${theme.colors.darkGray} !important`,
+        },
+        "& .rs-zoom-in, .rs-zoom-out": {
+          margin: "10px 0",
+          background: "white",
+          boxShadow: "0 0 7px rgb(0 0 0 / 90%)",
+          borderRadius: "50%",
+          height: "40px",
+          width: "40px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          transition: "box-shadow 0.5s ease",
+          border: "none",
+          "& svg": {
+            "& path": {
+              transition: "stroke 0.5s ease",
+              fill: theme.colors.darkGray,
+            },
+          },
+          "&:hover": { boxShadow: "0 0 12px 2px rgb(0 0 0 / 90%)" },
+          "&:disabled": {
+            boxShadow: "0 0 7px 2px rgb(0 0 0 / 40%)",
+            cursor: "default",
+          },
+        },
+      },
+    },
+    "@keyframes fadeInOut": {
+      "0%": { opacity: 0 },
+      "50%": { opacity: 1 },
+      "100%": { opacity: 0 },
+    },
+    geolocation: {
+      padding: 0,
+      color: theme.colors.darkGray,
+      "&:hover": {
+        color: theme.colors.darkGray,
+      },
+    },
+    geolocationActive: {
+      color: "#006aff",
+      "&:hover": {
+        color: "#006aff",
+      },
+      "& svg": {
+        animation: "$fadeInOut 1.5s infinite",
+      },
+    },
+    rsGeolocation: {
+      display: "flex",
+      alignItems: "center",
+    },
+    fitExtent: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 5,
+      margin: "20px 0",
+      color: theme.colors.darkGray,
+      "&:hover": {
+        color: theme.colors.darkGray,
+      },
+    },
+    rsFitExtent: {
+      height: "100%",
+      width: "100%",
+    },
+    displayMenuToggler: { padding: "8px", margin: "10px 0" },
+  };
+});
+
 function MapControls({
   menuToggler,
   geolocation,
@@ -47,6 +132,8 @@ function MapControls({
   fitExtent,
   children,
 }) {
+  const overlayWidth = useOverlayWidth();
+  const classes = useStyles({ overlayWidth });
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
@@ -176,15 +263,16 @@ function MapControls({
   }, [map, zoomSlider]);
 
   return (
-    <div className="wkp-map-controls">
+    <div className={`wkp-map-controls ${classes.mapControls}`}>
       {menuToggler && (
-        <button
-          type="button"
-          className="wkp-display-menu-toggler"
+        <MapButton
+          className={`wkp-display-menu-toggler ${classes.displayMenuToggler}`}
           onClick={() => dispatch(setDisplayMenu(!displayMenu))}
+          title={t("Menü")}
+          data-testid="map-controls-menu-toggler"
         >
-          {displayMenu ? <MenuClosedImg /> : <MenuOpenImg />}
-        </button>
+          {displayMenu ? <MenuClosed /> : <MenuOpen />}
+        </MapButton>
       )}
       <Zoom
         map={map}
@@ -197,29 +285,38 @@ function MapControls({
         }}
       />
       {geolocation && (
-        <Geolocation
-          title={t("Lokalisieren")}
-          className={`wkp-geolocation${
-            geolocating ? " wkp-geolocation-active" : ""
-          }`}
-          map={map}
-          noCenterAfterDrag
-          onSuccess={() => setGeolocating(true)}
-          onError={() => setGeolocating(false)}
-          colorOrStyleFunc={styleFunction}
+        <MapButton
+          onClick={onGeolocateToggle}
+          className={`wkp-geolocation ${classes.geolocation} ${geolocating ? classes.geolocationActive : ""}`}
+          data-testid="map-controls-geolocation"
         >
-          <Geolocate focusable={false} onClick={onGeolocateToggle} />
-        </Geolocation>
+          <Geolocation
+            title={t("Lokalisieren")}
+            className={classes.rsGeolocation}
+            map={map}
+            noCenterAfterDrag
+            onSuccess={() => setGeolocating(true)}
+            onError={() => setGeolocating(false)}
+            colorOrStyleFunc={styleFunction}
+          >
+            <Geolocate focusable={false} />
+          </Geolocation>
+        </MapButton>
       )}
       {fitExtent && (
-        <FitExtent
-          map={map}
-          title={t("Ganze Schweiz")}
-          extent={SWISS_EXTENT}
-          className="wkp-fit-extent"
+        <MapButton
+          className={`wkp-fit-extent ${classes.fitExtent}`}
+          data-testid="map-controls-fit-extent"
         >
-          <SwissBounds focusable={false} />
-        </FitExtent>
+          <FitExtent
+            map={map}
+            title={t("Ganze Schweiz")}
+            extent={SWISS_EXTENT}
+            className={classes.rsFitExtent}
+          >
+            <SwissBounds focusable={false} />
+          </FitExtent>
+        </MapButton>
       )}
       {children}
     </div>

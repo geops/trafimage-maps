@@ -11,7 +11,7 @@ import { Drawer } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Resizable } from "re-resizable";
 import FeatureInformation from "../FeatureInformation";
-import { setFeatureInfo } from "../../model/app/actions";
+import { setFeatureInfo, setOverlayElement } from "../../model/app/actions";
 import usePrevious from "../../utils/usePrevious";
 import { OVERLAY_MIN_HEIGHT } from "../../utils/constants";
 import useIsMobile from "../../utils/useIsMobile";
@@ -239,6 +239,9 @@ function Overlay({
           BackdropComponent: () => {
             return null;
           },
+        }}
+        PaperProps={{
+          ref: (node) => dispatch(setOverlayElement(node)),
         }}
       >
         {isMobile && (
