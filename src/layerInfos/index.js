@@ -36,6 +36,7 @@ import GeltungsbereicheTopicInfo from "./GeltungsbereicheTopicInfo";
 import GeltungsbereicheLayerInfo from "./GeltungsbereicheLayerInfo";
 import IsbSchmalspurLayerInfo from "./IsbSchmalspurLayerInfo";
 import IsbNormalspurLayerInfo from "./IsbNormalspurLayerInfo";
+import MesswagenTopicInfo from "./MesswagenTopicInfo";
 
 export { default as BetriebsRegionenLayerInfo } from "./BetriebsRegionenLayerInfo";
 export { default as BuslinesLayerInfo } from "./BuslinesLayerInfo";
@@ -74,6 +75,7 @@ export { default as GeltungsbereicheTopicInfo } from "./GeltungsbereicheTopicInf
 export { default as GeltungsbereicheLayerInfo } from "./GeltungsbereicheLayerInfo";
 export { default as IsbSchmalspurLayerInfo } from "./IsbSchmalspurLayerInfo";
 export { default as IsbNormalspurLayerInfo } from "./IsbNormalspurLayerInfo";
+export { default as MesswagenTopicInfo } from "./MesswagenTopicInfo";
 
 export default {
   BetriebsRegionenLayerInfo,
@@ -114,4 +116,5 @@ export default {
   GeltungsbereicheLayerInfo,
   IsbSchmalspurLayerInfo,
   IsbNormalspurLayerInfo,
+  MesswagenTopicInfo,
 };

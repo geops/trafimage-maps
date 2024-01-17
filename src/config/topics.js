@@ -454,6 +454,7 @@ export const messwagen = {
   hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
   mapControls: <MesswagenFollowButton />,
   searches: defaultSearches,
+  layerInfoComponent: "MesswagenTopicInfo",
   customElements: <MesswagenPopup />,
 };
 
