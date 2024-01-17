@@ -2,10 +2,10 @@ import { MesswagenLayer } from "../../layers";
 import {
   dataLayer,
   netzkarteLayer,
-  // netzkarteNight,
+  netzkarteNight,
   netzkarteAerial,
-  // swisstopoLandeskarte,
-  // swisstopoLandeskarteGrau,
+  swisstopoLandeskarte,
+  swisstopoLandeskarteGrau,
 } from "../ch.sbb.netzkarte";
 
 const messwagenDataLayer = dataLayer.clone({
@@ -19,11 +19,11 @@ const messwagenNetzkarte = netzkarteLayer.clone({
   visible: false,
 });
 
-// const messwagenNetzkarteNight = netzkarteNight.clone({
-//   mapboxLayer: messwagenDataLayer,
-//   key: `ch.sbb.messwagen.netzkarte.night`,
-//   visible: true,
-// });
+const messwagenNetzkarteNight = netzkarteNight.clone({
+  mapboxLayer: messwagenDataLayer,
+  key: `ch.sbb.messwagen.netzkarte.night`,
+  visible: true,
+});
 
 const messwagenNetzkarteAerial = netzkarteAerial.clone({
   mapboxLayer: messwagenDataLayer,
@@ -31,17 +31,17 @@ const messwagenNetzkarteAerial = netzkarteAerial.clone({
   visible: true,
 });
 
-// const messwagenLandeskarte = swisstopoLandeskarte.clone({
-//   mapboxLayer: messwagenDataLayer,
-//   key: `ch.sbb.messwagen.landeskartegrau`,
-//   visible: false,
-// });
+const messwagenLandeskarte = swisstopoLandeskarte.clone({
+  mapboxLayer: messwagenDataLayer,
+  key: `ch.sbb.messwagen.landeskartegrau`,
+  visible: false,
+});
 
-// const messwagenLandeskarteGrau = swisstopoLandeskarteGrau.clone({
-//   mapboxLayer: messwagenDataLayer,
-//   key: `ch.sbb.messwagen.landeskartegrau`,
-//   visible: false,
-// });
+const messwagenLandeskarteGrau = swisstopoLandeskarteGrau.clone({
+  mapboxLayer: messwagenDataLayer,
+  key: `ch.sbb.messwagen.landeskartegrau`,
+  visible: false,
+});
 
 const mewa12 = new MesswagenLayer({
   name: "ch.sbb.messwagen.mewa12",
@@ -73,10 +73,10 @@ const mobile = new MesswagenLayer({
 export default [
   messwagenDataLayer,
   messwagenNetzkarte,
-  // messwagenNetzkarteNight,
+  messwagenNetzkarteNight,
   messwagenNetzkarteAerial,
-  // messwagenLandeskarte,
-  // messwagenLandeskarteGrau,
+  messwagenLandeskarte,
+  messwagenLandeskarteGrau,
   mobile,
   mb,
   mewa12,

@@ -28,8 +28,8 @@ function MesswagenPopup() {
     <div
       style={{
         position: "absolute",
-        left: "calc(50% - 95px)",
-        bottom: 45,
+        right: 60,
+        bottom: 60,
         width: 190,
         backgroundColor: "rgba(255,255,255,0.6)",
         padding: 5,
