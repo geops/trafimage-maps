@@ -34,8 +34,71 @@ const infos = {
   },
 };
 
+const warranty = {
+  de: (
+    <div>
+      Alle Angaben ohne Gewähr. Änderungen vorbehalten.
+      <br />
+      Es gilt der Anwendungsbereich (
+      <a
+        href="https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Übersicht der Tarife und Vorschriften - Alliance SwissPass
+      </a>
+      ).
+    </div>
+  ),
+  fr: (
+    <div>
+      Toutes les indications sont sans garantie. Sous réserve de modifications.
+      <br />
+      Le champ d&apos;application fait foi (
+      <a
+        href="https://www.allianceswisspass.ch/fr/tarifs/TarifsPrescriptions"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Tarifs et prescriptions Vue d&apos;ensemble - Alliance SwissPass
+      </a>
+      ).
+    </div>
+  ),
+  en: (
+    <div>
+      All information without guarantee. Subject to change.
+      <br />
+      The scope of application applies (
+      <a
+        href="https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Übersicht der Tarife und Vorschriften - Alliance SwissPass german only
+      </a>
+      ).
+    </div>
+  ),
+  it: (
+    <div>
+      Tutte le informazioni non sono garantite. Salvo modifiche.
+      <br />
+      Si applica il campi d&apos;applicazione (
+      <a
+        href="https://www.allianceswisspass.ch/it/Tariffeprescrizioni/Panoramica"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Tariffe e prescrizioni Panoramica - Alliance SwissPass
+      </a>
+      ).
+    </div>
+  ),
+};
+
 function GeltungsbereicheLayerInfo({ properties: layer }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const cardsScope = layer.get("cardsScope") || "ga";
   const cardsInfos = infos[cardsScope];
@@ -186,6 +249,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
       <Typography paragraph>
         <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
       </Typography>
+      <Typography paragraph>{warranty[i18n.language]}</Typography>
       <br />
     </div>
   );
