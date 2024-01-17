@@ -76,7 +76,7 @@
     bottom: 50px;
     left: 10px;
     width: 120px;
-    z-index: 0; // under menu
+    z-index: 0; /* under menu */
     padding: 12px;
     user-select: none;
 
@@ -100,7 +100,7 @@
 
       .rs-base-layer-switcher-title {
         font-size: 12px;
-        max-height: inherit; //IE
+        max-height: inherit; /* IE */
       }
 
       &.rs-opener {
@@ -175,16 +175,24 @@
     cursor: pointer;
   }
 
-  &.tm-h-m,
-  &.tm-h-s,
-  &.tm-h-xs {
-    .wkp-geolocation,
-    .wkp-fit-extent,
-    .rs-zoom-in,
-    .rs-zoom-out {
-      margin: 10px 0;
+  .wkp-map-controls {
+    top: 15px;
+    right: 15px;
+  }
+
+  .wkp-map-controls,
+  .rs-zooms-bar {
+    & > button, & > div[role="button"] {
+      margin-bottom: 15px;
     }
   }
+
+  &.header {
+    .wkp-map-controls {
+      top: 115px;
+    }
+  }
+
 
   &.tm-h-s,
   &.tm-h-xs {
@@ -249,15 +257,6 @@
     }
   }
 
-  .wkp-map-controls {
-    top: 10px;
-  }
-
-  &.header {
-    .wkp-map-controls {
-      top: 110px;
-    }
-  }
 
   &.tm-w-m,
   &.tm-w-s,
@@ -288,7 +287,7 @@
       top: 65px;
     }
 
-    // topics menu component is enabled
+    /* topics menu component is enabled */
     &.menu .wkp-menu-wrapper {
       top: 55px;
       left: 0;
@@ -302,10 +301,22 @@
       }
     }
 
-    // header component is enabled
+    .wkp-map-controls {
+      top: 10px;
+      right: 10px;
+    }
+
+    .wkp-map-controls,
+    .rs-zooms-bar {
+      & > button, & > div[role="button"] {
+            margin-bottom: 10px;
+      }
+    }
+
+    /* header component is enabled */
     &.header {
       .wkp-map-controls {
-        top: 60px;
+        top: 66px; // 56px + 10px
       }
 
       .wkp-topics-menu {
@@ -396,7 +407,8 @@
 
     .wkp-gb-menu-current-value > span:first-child {
       overflow: hidden;
-      // Multiline overflow ellipsis
+
+      /* Multiline overflow ellipsis */
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;

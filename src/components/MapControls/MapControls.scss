@@ -9,8 +9,6 @@
 }
 
 .wkp-fit-extent {
-  margin: 20px 0;
-
   svg {
     width: 30px;
     height: 30px;
@@ -56,6 +54,7 @@
 
 .wkp-map-controls {
   position: absolute;
+  top: 15px;
   right: 15px;
 
   .rs-zooms-bar {
@@ -70,7 +69,6 @@
 
     .rs-zoom-in,
     .rs-zoom-out {
-      margin: 10px 0;
       background: white;
       box-shadow: 0 0 7px rgb(0 0 0 / 90%);
       border-radius: 50%;
