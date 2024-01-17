@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { unByKey } from "ol/Observable";
 import { Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { MesswagenLayer } from "../../layers";
 
 function MesswagenPopup() {
+  const { t } = useTranslation();
   const topic = useSelector((state) => state.app.activeTopic);
   const [feature, setFeature] = useState(null);
 
@@ -26,7 +28,7 @@ function MesswagenPopup() {
     <div
       style={{
         position: "absolute",
-        left: 5,
+        left: "calc(50% - 95px)",
         bottom: 45,
         width: 190,
         backgroundColor: "rgba(255,255,255,0.6)",
@@ -41,6 +43,7 @@ function MesswagenPopup() {
       </Typography>
       {info?.map(({ label, value }) => (
         <div
+          key={label}
           style={{
             display: "flex",
             justifyContent: "center",
@@ -54,7 +57,7 @@ function MesswagenPopup() {
               textAlign: "right",
             }}
           >
-            {label}:
+            {t(label)}:
           </Typography>
           <Typography style={{ flex: 1, textAlign: "left" }}>
             {value}

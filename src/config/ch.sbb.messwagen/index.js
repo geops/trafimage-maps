@@ -1,16 +1,47 @@
 import { MesswagenLayer } from "../../layers";
-import { dataLayer, netzkarteAerial } from "../ch.sbb.netzkarte";
+import {
+  dataLayer,
+  netzkarteLayer,
+  // netzkarteNight,
+  netzkarteAerial,
+  // swisstopoLandeskarte,
+  // swisstopoLandeskarteGrau,
+} from "../ch.sbb.netzkarte";
 
 const messwagenDataLayer = dataLayer.clone({
   key: `ch.sbb.messwagen.data`,
   visible: true,
 });
 
-const messwagenAerial = netzkarteAerial.clone({
+const messwagenNetzkarte = netzkarteLayer.clone({
+  mapboxLayer: messwagenDataLayer,
+  key: `ch.sbb.messwagen.netzkarte`,
+  visible: false,
+});
+
+// const messwagenNetzkarteNight = netzkarteNight.clone({
+//   mapboxLayer: messwagenDataLayer,
+//   key: `ch.sbb.messwagen.netzkarte.night`,
+//   visible: true,
+// });
+
+const messwagenNetzkarteAerial = netzkarteAerial.clone({
   mapboxLayer: messwagenDataLayer,
   key: `ch.sbb.messwagen.aerial`,
   visible: true,
 });
+
+// const messwagenLandeskarte = swisstopoLandeskarte.clone({
+//   mapboxLayer: messwagenDataLayer,
+//   key: `ch.sbb.messwagen.landeskartegrau`,
+//   visible: false,
+// });
+
+// const messwagenLandeskarteGrau = swisstopoLandeskarteGrau.clone({
+//   mapboxLayer: messwagenDataLayer,
+//   key: `ch.sbb.messwagen.landeskartegrau`,
+//   visible: false,
+// });
 
 const mewa12 = new MesswagenLayer({
   name: "ch.sbb.messwagen.mewa12",
@@ -39,4 +70,14 @@ const mobile = new MesswagenLayer({
   },
 });
 
-export default [messwagenDataLayer, messwagenAerial, mobile, mb, mewa12];
+export default [
+  messwagenDataLayer,
+  messwagenNetzkarte,
+  // messwagenNetzkarteNight,
+  messwagenNetzkarteAerial,
+  // messwagenLandeskarte,
+  // messwagenLandeskarteGrau,
+  mobile,
+  mb,
+  mewa12,
+];

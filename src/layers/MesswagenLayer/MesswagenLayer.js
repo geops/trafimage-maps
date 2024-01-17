@@ -11,7 +11,8 @@ const style = new Style({
   image: new Icon({
     src: pin,
     scale: 1.5,
-    anchorOrigin: [0.5, 1],
+    anchor: [0.5, 30],
+    anchorYUnits: "pixels",
   }),
 });
 
@@ -52,7 +53,16 @@ class MesswagenLayer extends Layer {
       this.on("change:feature", (evt) => {
         const feature = this.get(evt.key);
         if (feature && this.get("follow")) {
-          this.centerOn(feature);
+          const size = map.getSize();
+          const extent = map
+            .getView()
+            .calculateExtent([size[0] - 200, size[1] - 400]);
+          if (!feature.getGeometry().intersectsExtent(extent)) {
+            this.centerOn(feature, undefined);
+          }
+          if (feature && !evt.oldValue) {
+            this.centerOn(feature, 17);
+          }
         }
       }),
     );
@@ -109,12 +119,13 @@ class MesswagenLayer extends Layer {
       .catch(() => {});
   }
 
-  centerOn(feature) {
+  centerOn(feature, zoom) {
     const center = feature?.getGeometry()?.getCoordinates();
     if (center) {
       this.map?.getView().cancelAnimations();
       this.map?.getView().animate({
         center,
+        zoom,
       });
     }
   }
