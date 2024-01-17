@@ -8,6 +8,7 @@ import { LineString } from "ol/geom";
 import { getCenter } from "ol/extent";
 import { jsPDF as JsPDF } from "jspdf";
 import { Canvg } from "canvg";
+import html2canvas from "html2canvas";
 import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn't work for ie11
 import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
@@ -121,7 +122,6 @@ export const getMapHd = (
   size,
   zoom,
   extent,
-  forceCurrentZoom,
 ) => {
   const targetSize = size || map.getSize();
   // We create a temporary map.
@@ -145,9 +145,7 @@ export const getMapHd = (
   if (extent) {
     center = getCenter(extent);
     targetResolution = map.getView().getResolutionForExtent(extent, targetSize);
-    targetZoom = forceCurrentZoom
-      ? targetZoom
-      : map.getView().getZoomForResolution(targetResolution);
+    targetZoom = map.getView().getZoomForResolution(targetResolution);
   }
 
   const mbMap =
@@ -236,7 +234,7 @@ export const exportPdf = async (
   exportFileName,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
-
+  let scaleBarCanvas;
   // Add the image to a newly created PDF
   const doc = new JsPDF({
     orientation: "landscape",
@@ -295,6 +293,18 @@ export const exportPdf = async (
 
     // Add SVG to map canvas
     ctx.drawImage(canvass, 0, 0);
+  }
+
+  const scalebar = document.getElementsByClassName("ol-scale-line")[0];
+  if (scalebar) {
+    scaleBarCanvas = await html2canvas(scalebar);
+    ctx.drawImage(
+      scaleBarCanvas,
+      exportSize[0] * exportScale * 0.009,
+      (exportSize[1] * exportScale) / 5.75,
+      (scaleBarCanvas.width / 2 - 3) * exportScale,
+      (scaleBarCanvas.height / 2 - 3) * exportScale,
+    );
   }
 
   // Scale to fit the export size

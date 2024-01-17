@@ -45,7 +45,6 @@ function ExportButton({
   loadingComponent,
   style,
   id,
-  // forceCurrentZoom
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -77,7 +76,6 @@ function ExportButton({
           exportSize,
           exportZoom,
           exportExtent,
-          // forceCurrentZoom
         );
       }}
       onSaveEnd={async (mapToExport, canvas) => {
