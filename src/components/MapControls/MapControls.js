@@ -208,7 +208,11 @@ function MapControls({
           onError={() => setGeolocating(false)}
           colorOrStyleFunc={styleFunction}
         >
-          <Geolocate focusable={false} onClick={onGeolocateToggle} />
+          <Geolocate
+            className={geolocating ? "pulse" : null}
+            focusable={false}
+            onClick={onGeolocateToggle}
+          />
         </Geolocation>
       )}
       {fitExtent && (
