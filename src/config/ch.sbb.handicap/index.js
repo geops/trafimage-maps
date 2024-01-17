@@ -45,7 +45,7 @@ const handicapHighlightStyleSecondary = new Style({
 });
 
 const barrierefrei = new MapboxStyleLayer({
-  name: "ch.sbb.barrierefreieebahnhoefe",
+  name: "ch.sbb.barrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
     return /^symbol.barrierefrei/.test(metadata?.["handicap.filter"]);
@@ -59,7 +59,7 @@ const barrierefrei = new MapboxStyleLayer({
 });
 
 const nichtBarrierefrei = new MapboxStyleLayer({
-  name: "ch.sbb.nichtbarrierefreiebahnhoefe",
+  name: "ch.sbb.nichtbarrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
     return /^symbol.nichtbarrierefrei/.test(metadata?.["handicap.filter"]);
@@ -145,8 +145,8 @@ const statusUnbekannt = new MapboxStyleLayer({
 
 // TODO: keep this layer until we are sure we will not use it.
 // export const barrierfreierBahnhoefe = new MapboxStyleLayer({
-//   name: 'ch.sbb.barrierefreieebahnhoefe',
-//   key: 'ch.sbb.barrierefreieebahnhoefe',
+//   name: 'ch.sbb.barrierfreierbahnhoefe',
+//   key: 'ch.sbb.barrierfreierbahnhoefe',
 //   visible: true,
 //   mapboxLayer: handicapDataLayer,
 //   styleLayersFilter: ({ metadata }) =>
@@ -163,8 +163,8 @@ const statusUnbekannt = new MapboxStyleLayer({
 
 // TODO: keep this layer until we are sure we will not use it.
 // export const nichtBarrierefreieBahnhoefe = new MapboxStyleLayer({
-//   name: 'ch.sbb.nichtbarrierefreiebahnhoefe',
-//   key: 'ch.sbb.nichtbarrierefreiebahnhoefe',
+//   name: 'ch.sbb.nichtbarrierfreierbahnhoefe',
+//   key: 'ch.sbb.nichtbarrierfreierbahnhoefe',
 //   visible: true,
 //   mapboxLayer: handicapDataLayer,
 //   styleLayersFilter: ({ metadata }) =>
