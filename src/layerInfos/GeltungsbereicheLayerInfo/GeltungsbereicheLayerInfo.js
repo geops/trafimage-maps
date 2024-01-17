@@ -249,7 +249,9 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
       <Typography paragraph>
         <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
       </Typography>
-      <Typography paragraph>{warranty[i18n.language]}</Typography>
+      <Typography paragraph>
+        <i>{warranty[i18n.language]}</i>
+      </Typography>
       <br />
     </div>
   );
