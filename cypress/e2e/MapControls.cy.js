@@ -1,7 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import "cypress-plugin-tab";
-import "cypress-enter-plugin";
-
 describe("MapControls", () => {
   beforeEach(() => {
     cy.consent();
