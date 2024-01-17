@@ -75,9 +75,9 @@ const warranty = {
         rel="noopener noreferrer"
         target="_blank"
       >
-        Übersicht der Tarife und Vorschriften - Alliance SwissPass german only
+        Übersicht der Tarife und Vorschriften - Alliance SwissPass
       </a>
-      ).
+      &nbsp;German only).
     </div>
   ),
   it: (
