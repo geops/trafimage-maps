@@ -20,6 +20,8 @@ class MesswagenLayer extends Layer {
     super({
       ...options,
       olLayer: new VectorLayer({
+        updateWhileAnimating: true,
+        updateWhileInteracting: true,
         source: new VectorSource({
           features: [],
         }),
