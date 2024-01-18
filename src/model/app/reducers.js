@@ -46,6 +46,7 @@ import {
   SET_REALTIME_KEY,
   SET_DISPLAY_MENU,
   SET_STOPS_URL,
+  SET_OVERLAY_ELEMENT,
 } from "./actions";
 
 import SearchService from "../../components/Search/SearchService";
@@ -313,6 +314,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         stopsUrl: action.data,
+      };
+    case SET_OVERLAY_ELEMENT:
+      return {
+        ...state,
+        overlayElement: action.data,
       };
     default:
       return {

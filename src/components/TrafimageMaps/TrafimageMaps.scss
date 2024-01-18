@@ -175,17 +175,6 @@
     cursor: pointer;
   }
 
-  &.tm-h-m,
-  &.tm-h-s,
-  &.tm-h-xs {
-    .wkp-geolocation,
-    .wkp-fit-extent,
-    .rs-zoom-in,
-    .rs-zoom-out {
-      margin: 10px 0;
-    }
-  }
-
   &.tm-h-s,
   &.tm-h-xs {
     .rs-zoomslider-wrapper {
