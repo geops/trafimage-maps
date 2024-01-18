@@ -232,9 +232,9 @@ export const exportPdf = async (
   templateValues,
   overlayImageUrl,
   exportFileName,
+  scalebarConfig = null,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
-  let scaleBarCanvas;
   // Add the image to a newly created PDF
   const doc = new JsPDF({
     orientation: "landscape",
@@ -293,18 +293,13 @@ export const exportPdf = async (
 
     // Add SVG to map canvas
     ctx.drawImage(canvass, 0, 0);
-  }
-
-  const scalebar = document.getElementsByClassName("ol-scale-line")[0];
-  if (scalebar) {
-    scaleBarCanvas = await html2canvas(scalebar);
-    ctx.drawImage(
-      scaleBarCanvas,
-      exportSize[0] * exportScale * 0.009,
-      (exportSize[1] * exportScale) / 5.75,
-      (scaleBarCanvas.width / 2 - 3) * exportScale,
-      (scaleBarCanvas.height / 2 - 3) * exportScale,
-    );
+    if (scalebarConfig) {
+      const { element, x, y, width, height } = scalebarConfig;
+      if (element && element.getBoundingClientRect().width) {
+        const scaleBarCanvas = await html2canvas(element);
+        ctx.drawImage(scaleBarCanvas, x, y, width, height);
+      }
+    }
   }
 
   // Scale to fit the export size

@@ -87,6 +87,7 @@ function GaExportMenu() {
   const exportSize = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
+  const scalebarElement = document.getElementsByClassName("ol-scale-line")[0];
 
   // const extent = useMemo(() => {
   //   const ext = map?.getView().calculateExtent(exportSize);
@@ -184,6 +185,21 @@ function GaExportMenu() {
               exportExtent={exportFullMap ? undefined : null} // use default extent when exporting full map
               exportZoom={zoom}
               exportCoordinates={[center, center]}
+              scalebarConfig={
+                scalebarElement &&
+                exportSelection &&
+                exportSize && {
+                  element: scalebarElement,
+                  x: exportSize[0] * exportSelection.resolution * 0.008,
+                  y: (exportSize[1] * exportSelection.resolution) / 5.75,
+                  width:
+                    (scalebarElement.getBoundingClientRect().width - 3) *
+                    exportSelection.resolution,
+                  height:
+                    (scalebarElement.getBoundingClientRect().height - 3) *
+                    exportSelection.resolution,
+                }
+              }
             />
           </div>
         </div>

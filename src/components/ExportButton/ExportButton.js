@@ -45,6 +45,7 @@ function ExportButton({
   loadingComponent,
   style,
   id,
+  scalebarConfig,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
@@ -112,6 +113,7 @@ function ExportButton({
           templateValues,
           imageUrl,
           fileName,
+          scalebarConfig,
         );
         setLoading(false);
       }}
@@ -149,6 +151,13 @@ ExportButton.propTypes = {
   loadingComponent: PropTypes.node,
   style: PropTypes.object,
   id: PropTypes.string,
+  scalebarConfig: PropTypes.shape({
+    element: PropTypes.instanceOf(Element),
+    x: PropTypes.number,
+    y: PropTypes.number,
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
 };
 
 ExportButton.defaultProps = {
@@ -162,6 +171,7 @@ ExportButton.defaultProps = {
   loadingComponent: <DefaultLoadingComponent />,
   style: {},
   id: null,
+  scalebarConfig: null,
 };
 
 export default React.memo(ExportButton);
