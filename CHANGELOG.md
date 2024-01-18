@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/geops/trafimage-maps/compare/v1.25.8...v1.26.0) (2024-01-18)
+
+### Features
+
+- add warrenty text to geltungsbereiche ([075a5e2](https://github.com/geops/trafimage-maps/commit/075a5e2b994ad3354c8847d8ffa9eb763b2c5d6b))
+- make text cursive ([c68311a](https://github.com/geops/trafimage-maps/commit/c68311a50a09f67231c6548d771af4da735fc4ce))
+- typo ([855af42](https://github.com/geops/trafimage-maps/commit/855af42e1ef6a9a112de68889822bf53fdc6036f))
+
 ### [1.25.8](https://github.com/geops/trafimage-maps/compare/v1.25.7...v1.25.8) (2024-01-15)
 
 ### Bug Fixes
