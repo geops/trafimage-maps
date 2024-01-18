@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { EventConsumer } from "@geops/create-react-web-component";
 import BaseLayerSwitcher from "react-spatial/components/BaseLayerSwitcher";
 import ResizeHandler from "../ResizeHandler";
-import { setScreenWidth } from "../../model/app/actions";
+import { setScreenDimensions } from "../../model/app/actions";
 import MainDialog from "../MainDialog";
 import Map from "../Map";
 import Menu from "../Menu";
@@ -142,8 +142,8 @@ function TopicElements({ history }) {
   }, [tabFocus]);
 
   const onResize = useCallback(
-    (entries, widthBreakpoint) => {
-      dispatch(setScreenWidth(widthBreakpoint));
+    (entries, width, height) => {
+      dispatch(setScreenDimensions({ width, height }));
     },
     [dispatch],
   );

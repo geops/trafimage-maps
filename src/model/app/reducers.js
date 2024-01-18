@@ -18,7 +18,7 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSION_INFOS,
-  SET_SCREEN_WIDTH,
+  SET_SCREEN_DIMENSIONS,
   SET_MAPSET_URL,
   SET_DRAW_URL,
   SET_DRAW_IDS,
@@ -225,10 +225,11 @@ export default function app(state = getInitialState(), action) {
         ...state,
         searchUrl: action.data,
       };
-    case SET_SCREEN_WIDTH:
+    case SET_SCREEN_DIMENSIONS:
       return {
         ...state,
-        screenWidth: action.data,
+        screenWidth: action.data.width,
+        screenHeight: action.data.height,
       };
     case SET_DRAW_IDS:
       return {

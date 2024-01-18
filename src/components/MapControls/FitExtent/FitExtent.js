@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     padding: 0,
-    margin: "10px 0",
     color: theme.colors.darkGray,
     "& svg": { scale: 0.8 },
     "&:hover": {
