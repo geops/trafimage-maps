@@ -48,6 +48,7 @@ import {
   SET_STOPS_URL,
   SET_MAX_CANVAS_SIZE,
   SET_EXPORT_SELECTION,
+  SET_OVERLAY_ELEMENT,
 } from "./actions";
 
 import SearchService from "../../components/Search/SearchService";
@@ -330,6 +331,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         exportSelection: action.data,
+      };
+    case SET_OVERLAY_ELEMENT:
+      return {
+        ...state,
+        overlayElement: action.data,
       };
     default:
       return {

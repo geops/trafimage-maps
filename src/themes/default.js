@@ -6,6 +6,7 @@ const colors = {
   red: "#eb0000",
   redDark: "#c60018",
   black: "#000",
+  darkGray: "#444",
   gray: "#767676",
   lighterGray: "#b7b7b7",
   lightGray: "#e5e5e5",
@@ -65,6 +66,13 @@ const themeSpacing = (value) => {
 };
 
 const v5 = {
+  animations: {
+    "@keyframes fadeInOut": {
+      "0%": { opacity: 0 },
+      "50%": { opacity: 1 },
+      "100%": { opacity: 0 },
+    },
+  },
   colors,
   styles,
   breakpoints,

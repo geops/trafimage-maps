@@ -44,6 +44,7 @@ export const SET_DISPLAY_MENU = "SET_DISPLAY_MENU";
 export const SET_STOPS_URL = "SET_STOPS_URL";
 export const SET_MAX_CANVAS_SIZE = "SET_MAX_CANVAS_SIZE";
 export const SET_EXPORT_SELECTION = "SET_EXPORT_SELECTION";
+export const SET_OVERLAY_ELEMENT = "SET_OVERLAY_ELEMENT";
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
 
@@ -361,5 +362,10 @@ export const setMaxCanvasSize = (data) => ({
 
 export const setExportSelection = (data) => ({
   type: SET_EXPORT_SELECTION,
+  data,
+});
+
+export const setOverlayElement = (data) => ({
+  type: SET_OVERLAY_ELEMENT,
   data,
 });
