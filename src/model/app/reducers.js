@@ -46,6 +46,8 @@ import {
   SET_REALTIME_KEY,
   SET_DISPLAY_MENU,
   SET_STOPS_URL,
+  SET_GEOLOCATING,
+  SET_FOLLOWING,
 } from "./actions";
 
 import SearchService from "../../components/Search/SearchService";
@@ -99,6 +101,8 @@ const getInitialState = () => ({
   consentGiven: false,
   disableCookies: false,
   displayMenu: true,
+  isGeolocating: false,
+  isFollowing: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -123,6 +127,16 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         projection: action.data,
+      };
+    case SET_GEOLOCATING:
+      return {
+        ...state,
+        isGeolocating: action.data,
+      };
+    case SET_FOLLOWING:
+      return {
+        ...state,
+        isFollowing: action.data,
       };
     case SET_FEATURE_INFO:
       return {

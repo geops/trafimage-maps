@@ -17,7 +17,7 @@ import Geolocate from "../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../img/geolocate_marker_direction.svg";
 import geolocateMarker from "../../img/geolocate_marker.svg";
 import { SWISS_EXTENT } from "../../utils/constants";
-import { setDisplayMenu } from "../../model/app/actions";
+import { setDisplayMenu, setGeolocating } from "../../model/app/actions";
 import "./MapControls.scss";
 
 const propTypes = {
@@ -50,9 +50,10 @@ function MapControls({
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const map = useSelector((state) => state.app.map);
+  const isGeolocating = useSelector((state) => state.app.isGeolocating);
+  const isFollowing = useSelector((state) => state.app.isFollowing);
   const displayMenu = useSelector((state) => state.app.displayMenu);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
-  const [geolocating, setGeolocating] = useState(false);
   const featureRef = useRef(geolocationFeature);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
@@ -84,9 +85,9 @@ function MapControls({
   );
 
   const onGeolocateToggle = useCallback(() => {
-    if (geolocating) {
+    if (isGeolocating) {
       // Deactivate geolocation
-      setGeolocating(false);
+      dispatch(setGeolocating(false));
       setGeolocFeatureWithRef();
       window.removeEventListener(
         "deviceorientation",
@@ -114,7 +115,7 @@ function MapControls({
     } else {
       window.addEventListener("deviceorientation", deviceOrientationListener);
     }
-  }, [deviceOrientationListener, geolocating]);
+  }, [deviceOrientationListener, isGeolocating, dispatch]);
 
   const styleFunction = useCallback(
     (feature) => {
@@ -200,16 +201,17 @@ function MapControls({
         <Geolocation
           title={t("Lokalisieren")}
           className={`wkp-geolocation${
-            geolocating ? " wkp-geolocation-active" : ""
+            isGeolocating ? " wkp-geolocation-active" : ""
           }`}
           map={map}
           noCenterAfterDrag
-          onSuccess={() => setGeolocating(true)}
-          onError={() => setGeolocating(false)}
+          neverCenterToPosition={isFollowing}
+          onSuccess={() => dispatch(setGeolocating(true))}
+          onError={() => dispatch(setGeolocating(false))}
           colorOrStyleFunc={styleFunction}
         >
           <Geolocate
-            className={geolocating ? "pulse" : null}
+            className={isGeolocating ? "pulse" : null}
             focusable={false}
             onClick={onGeolocateToggle}
           />
