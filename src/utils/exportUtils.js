@@ -8,7 +8,7 @@ import { LineString } from "ol/geom";
 import { getCenter } from "ol/extent";
 import { jsPDF as JsPDF } from "jspdf";
 import { Canvg } from "canvg";
-import html2canvas from "html2canvas";
+import { ScaleLine } from "ol/control";
 import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn't work for ie11
 import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
@@ -79,9 +79,10 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
 };
 
 const buildOlMapHd = (map, elt, center, scale = 1, resolution) => {
+  const olScaleline = new ScaleLine();
   const mapToExport = new OLMap({
     target: elt,
-    controls: [],
+    controls: [olScaleline],
     pixelRatio: scale,
     view: new View({
       center,
@@ -232,7 +233,7 @@ export const exportPdf = async (
   templateValues,
   overlayImageUrl,
   exportFileName,
-  scalebarConfig = null,
+  scaleLineConfig,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
   // Add the image to a newly created PDF
@@ -244,6 +245,11 @@ export const exportPdf = async (
 
   // Add map image
   const ctx = canvas.getContext("2d");
+
+  if (scaleLineConfig) {
+    const { canvas: scalelLineCanvas, x, y, width, height } = scaleLineConfig;
+    ctx.drawImage(scalelLineCanvas, x, y, width, height);
+  }
 
   // Apply SVG overlay if provided
   if (overlayImageUrl) {
@@ -293,13 +299,6 @@ export const exportPdf = async (
 
     // Add SVG to map canvas
     ctx.drawImage(canvass, 0, 0);
-    if (scalebarConfig) {
-      const { element, x, y, width, height } = scalebarConfig;
-      if (element && element.getBoundingClientRect().width) {
-        const scaleBarCanvas = await html2canvas(element);
-        ctx.drawImage(scaleBarCanvas, x, y, width, height);
-      }
-    }
   }
 
   // Scale to fit the export size

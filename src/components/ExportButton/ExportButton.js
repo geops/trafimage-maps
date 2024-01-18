@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
+import html2canvas from "html2canvas";
+import { ScaleLine } from "ol/control";
 import { ReactComponent as Loader } from "./loader.svg";
 import {
   getMapHd,
@@ -102,6 +104,23 @@ function ExportButton({
             : fileName;
         }
 
+        const scaleLine = mapToExport
+          .getControls()
+          .getArray()
+          .find((c) => c instanceof ScaleLine);
+
+        let scaleLineCanvas;
+        if (scalebarConfig) {
+          if (
+            scaleLine.element &&
+            scaleLine.element.getBoundingClientRect().width
+          ) {
+            scaleLineCanvas = await html2canvas(scaleLine.element);
+          }
+        }
+
+        // console.log(scaleLine.element.getBoundingClientRect());
+
         await exportPdf(
           mapToExport,
           map,
@@ -113,7 +132,11 @@ function ExportButton({
           templateValues,
           imageUrl,
           fileName,
-          scalebarConfig,
+          {
+            ...scalebarConfig,
+            canvas: scaleLineCanvas,
+          },
+          scaleLine.element,
         );
         setLoading(false);
       }}
