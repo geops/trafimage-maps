@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.26.0](https://github.com/geops/trafimage-maps/compare/v1.25.8...v1.26.0) (2024-01-18)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add warranty text to layer infos ([da74cb9](https://github.com/geops/trafimage-maps/commit/da74cb97c2c3d578ac76a5ae48ebab4a06f4e67c))
+
 ### [1.25.8](https://github.com/geops/trafimage-maps/compare/v1.25.7...v1.25.8) (2024-01-15)
 
 ### Bug Fixes
