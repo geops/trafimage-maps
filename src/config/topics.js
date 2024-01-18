@@ -450,6 +450,7 @@ export const messwagen = {
   elements: {
     ...defaultElements,
     overlay: false,
+    drawMenu: false,
   },
   hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
   mapControls: <MesswagenFollowButton />,
