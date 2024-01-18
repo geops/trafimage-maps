@@ -9,11 +9,11 @@ const useOverlayWidth = () => {
       setWidth(entries[0].contentRect.width);
     });
     if (!overlayElement) {
-      resizeObserver.disconnect();
       setWidth(0);
-      return;
+      return () => resizeObserver.disconnect();
     }
     resizeObserver.observe(overlayElement);
+    return () => resizeObserver.disconnect();
   }, [overlayElement]);
   return width;
 };

@@ -64,6 +64,13 @@ const themeSpacing = (value) => {
 };
 
 const v5 = {
+  animations: {
+    "@keyframes fadeInOut": {
+      "0%": { opacity: 0 },
+      "50%": { opacity: 1 },
+      "100%": { opacity: 0 },
+    },
+  },
   colors,
   styles,
   breakpoints,

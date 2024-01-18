@@ -159,6 +159,7 @@ function Overlay({
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const resizeRef = useRef(null);
   const [isSnapSmooth, setSnapSmooth] = useState(false);
+  const [node, setNode] = useState(null);
   const { defaultSize } = ResizableProps;
   const isMobile = useIsMobile();
 
@@ -185,8 +186,9 @@ function Overlay({
   }, [featureInfo, previousFeatureInfo, resetOverlayHeight]);
 
   useEffect(() => {
+    dispatch(setOverlayElement(isMobile ? null : node));
     return () => dispatch(setOverlayElement(null));
-  }, [dispatch]);
+  }, [isMobile, node, dispatch]);
 
   if (!featureInfo || !featureInfo.length) {
     return null;
@@ -245,7 +247,7 @@ function Overlay({
           },
         }}
         PaperProps={{
-          ref: (node) => dispatch(setOverlayElement(isMobile ? null : node)),
+          ref: (el) => setNode(el),
         }}
       >
         {isMobile && (
