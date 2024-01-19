@@ -31,7 +31,7 @@ function MesswagenPopup() {
         right: 60,
         bottom: 60,
         width: 190,
-        backgroundColor: "rgba(255,255,255,0.6)",
+        backgroundColor: "rgba(255,255,255,0.9)",
         padding: 5,
         borderRadius: 5,
       }}
