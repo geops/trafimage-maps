@@ -175,32 +175,6 @@
     cursor: pointer;
   }
 
-  .wkp-map-controls {
-    top: 15px;
-    right: 15px;
-  }
-
-  .wkp-map-controls,
-  .rs-zooms-bar {
-    & > button, & > div[role="button"] {
-      margin-bottom: 15px;
-    }
-  }
-
-  &.header {
-    .wkp-map-controls {
-      top: 115px;
-    }
-  }
-
-
-  &.tm-h-s,
-  &.tm-h-xs {
-    .rs-zoomslider-wrapper {
-      display: none;
-    }
-  }
-
   &.tm-h-xs {
     .wkp-search-toggle-container--open {
       width: 100%;
