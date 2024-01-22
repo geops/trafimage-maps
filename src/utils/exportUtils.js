@@ -246,8 +246,8 @@ export const exportPdf = async (
   const ctx = canvas.getContext("2d");
 
   if (scaleLineConfig) {
-    const { x, y, width, height, canvas: scaleLineCanvas } = scaleLineConfig;
-    ctx.drawImage(scaleLineCanvas, x, y, width, height);
+    const { x, y, canvas: scaleLineCanvas } = scaleLineConfig;
+    ctx.drawImage(scaleLineCanvas, x, y);
   }
 
   // Apply SVG overlay if provided

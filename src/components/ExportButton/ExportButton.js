@@ -36,6 +36,20 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+const getStylePdfScaleLine = (scaleLineControl, exportSelection) => {
+  const scaleLineElement = scaleLineControl?.element?.children[0];
+  const width = parseInt(scaleLineElement.style.width, 10);
+  scaleLineElement.style.width = `${width * exportSelection.resolution}px`;
+  scaleLineElement.style.height = `${10 * exportSelection.resolution}px`;
+  scaleLineElement.style["font-size"] = `${8 * exportSelection.resolution}px`;
+  scaleLineElement.style["border-width"] =
+    `${1.67 * exportSelection.resolution}px`;
+  scaleLineElement.style["border-color"] = "black";
+  scaleLineElement.style["font-color"] = "black";
+  scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
+  return scaleLineElement;
+};
+
 function ExportButton({
   exportFormat,
   exportScale,
@@ -106,13 +120,13 @@ function ExportButton({
             : fileName;
         }
 
-        const scaleLineContorl = mapToExport
+        const scaleLineControl = mapToExport
           .getControls()
           .getArray()
           .find((c) => c instanceof ScaleLine);
-        const scaleLineElement = scaleLineContorl?.element?.children[0];
-        scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
-
+        const scaleLineElement =
+          scaleLineControl &&
+          getStylePdfScaleLine(scaleLineControl, exportSelection);
         const scaleLineCanvas =
           scaleLineElement && (await html2canvas(scaleLineElement));
 
@@ -130,13 +144,6 @@ function ExportButton({
           scaleLineConfig &&
             scaleLineCanvas && {
               ...scaleLineConfig,
-              element: scaleLineElement,
-              width:
-                scaleLineElement.getBoundingClientRect().width *
-                exportSelection.resolution,
-              height:
-                scaleLineElement.getBoundingClientRect().height *
-                exportSelection.resolution,
               canvas: scaleLineCanvas,
             },
         );
