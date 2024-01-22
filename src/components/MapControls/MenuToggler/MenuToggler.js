@@ -8,7 +8,7 @@ import { ReactComponent as MenuClosed } from "../../../img/sbb/040_schliessen_10
 import { setDisplayMenu } from "../../../model/app/actions";
 
 const useStyles = makeStyles({
-  displayMenuToggler: { padding: "8px", margin: "10px 0" },
+  displayMenuToggler: { padding: "8px" },
 });
 
 function MenuToggler() {

@@ -36,10 +36,10 @@ const useStyles = makeStyles((theme) => {
       position: "absolute",
       display: "flex",
       flexDirection: "column",
-      top: (props) => props.margin,
-      right: (props) => {
-        return props.overlayWidth + props.margin;
-      },
+      top: 0,
+      right: 0,
+      marginTop: (props) => props.margin,
+      marginRight: (props) => props.margin,
       gap: (props) => props.margin,
       "& .rs-zooms-bar": {
         position: "relative",
@@ -83,7 +83,6 @@ const useStyles = makeStyles((theme) => {
         },
       },
     },
-    displayMenuToggler: { padding: "8px", margin: "10px 0" },
   };
 });
 
