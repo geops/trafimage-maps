@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
-import html2canvas from "html2canvas";
 import { ScaleLine } from "ol/control";
+import html2canvas from "html2canvas";
 import { ReactComponent as Loader } from "./loader.svg";
 import {
   getMapHd,
@@ -43,16 +43,18 @@ function ExportButton({
   exportCoordinates,
   exportZoom,
   exportExtent,
+  exportCopyright,
   children,
   loadingComponent,
   style,
   id,
-  scalebarConfig,
+  scaleLineConfig,
 }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
+  const exportSelection = useSelector((state) => state.app.exportSelection);
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
@@ -66,7 +68,7 @@ function ExportButton({
         opacity: isLoading ? 0.3 : 1,
         ...style,
       }}
-      extraData={generateExtraData(layers)}
+      extraData={exportCopyright ? generateExtraData(layers) : null}
       autoDownload={false}
       format="image/jpeg"
       onSaveStart={() => {
@@ -104,22 +106,15 @@ function ExportButton({
             : fileName;
         }
 
-        const scaleLine = mapToExport
+        const scaleLineContorl = mapToExport
           .getControls()
           .getArray()
           .find((c) => c instanceof ScaleLine);
+        const scaleLineElement = scaleLineContorl?.element?.children[0];
+        scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
 
-        let scaleLineCanvas;
-        if (scalebarConfig) {
-          if (
-            scaleLine.element &&
-            scaleLine.element.getBoundingClientRect().width
-          ) {
-            scaleLineCanvas = await html2canvas(scaleLine.element);
-          }
-        }
-
-        // console.log(scaleLine.element.getBoundingClientRect());
+        const scaleLineCanvas =
+          scaleLineElement && (await html2canvas(scaleLineElement));
 
         await exportPdf(
           mapToExport,
@@ -132,11 +127,18 @@ function ExportButton({
           templateValues,
           imageUrl,
           fileName,
-          {
-            ...scalebarConfig,
-            canvas: scaleLineCanvas,
-          },
-          scaleLine.element,
+          scaleLineConfig &&
+            scaleLineCanvas && {
+              ...scaleLineConfig,
+              element: scaleLineElement,
+              width:
+                scaleLineElement.getBoundingClientRect().width *
+                exportSelection.resolution,
+              height:
+                scaleLineElement.getBoundingClientRect().height *
+                exportSelection.resolution,
+              canvas: scaleLineCanvas,
+            },
         );
         setLoading(false);
       }}
@@ -169,17 +171,15 @@ ExportButton.propTypes = {
   exportScale: PropTypes.number,
   exportZoom: PropTypes.number,
   exportCoordinates: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
-  children: PropTypes.node,
   exportSize: PropTypes.arrayOf(PropTypes.number),
+  exportCopyright: PropTypes.bool,
+  children: PropTypes.node,
   loadingComponent: PropTypes.node,
   style: PropTypes.object,
   id: PropTypes.string,
-  scalebarConfig: PropTypes.shape({
-    element: PropTypes.instanceOf(Element),
+  scaleLineConfig: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
-    width: PropTypes.number,
-    height: PropTypes.number,
   }),
 };
 
@@ -189,12 +189,13 @@ ExportButton.defaultProps = {
   exportCoordinates: null,
   exportZoom: null, // 10,
   exportExtent: [620000, 5741000, 1200000, 6058000],
+  exportCopyright: true,
   children: <DefaultChildren />,
   exportSize: [3370, 2384], // a0
   loadingComponent: <DefaultLoadingComponent />,
   style: {},
   id: null,
-  scalebarConfig: null,
+  scaleLineConfig: null,
 };
 
 export default React.memo(ExportButton);

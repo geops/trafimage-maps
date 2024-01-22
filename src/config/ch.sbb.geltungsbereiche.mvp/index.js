@@ -38,6 +38,7 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
       "ch.sbb.geltungsbereiche.products.hta-day",
       "ch.sbb.geltungsbereiche.products.hta-combi",
     ],
+    isExportable: true,
   },
 });
 
@@ -64,6 +65,7 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
       "ch.sbb.geltungsbereiche.products.municipal-day",
     ],
     productsRemark: "ch.sbb.geltungsbereiche.products.tk-no-hta",
+    isExportable: true,
   },
 });
 
@@ -91,6 +93,7 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
       return "Fahrt zum ermässigten Preis";
     },
     products: ["ch.sbb.geltungsbereiche.products.hta"],
+    isExportable: true,
   },
 });
 

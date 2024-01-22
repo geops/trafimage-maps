@@ -8,9 +8,6 @@ import LayerInfosDialog, {
 import DrawRemoveDialog, {
   NAME as DRAW_REMOVE_DIALOG_NAME,
 } from "../DrawRemoveDialog";
-import GaExportMenu, {
-  NAME as GA_EXPORT_MENU_NAME,
-} from "../../menus/GaExportMenu/GaExportMenu";
 import Dialog from "../Dialog";
 import LegalLines from "../LegalLines";
 
@@ -52,10 +49,6 @@ function MainDialog() {
 
   if (dialogVisible === DRAW_REMOVE_DIALOG_NAME) {
     return <DrawRemoveDialog />;
-  }
-
-  if (dialogVisible === GA_EXPORT_MENU_NAME) {
-    return <GaExportMenu />;
   }
 
   return null;

@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { MdClose } from "react-icons/md";
 import Draggable from "react-draggable";
+import deepmerge from "deepmerge";
 import { setDialogVisible, setDialogPosition } from "../../model/app/actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -120,6 +121,8 @@ const propTypes = {
   // footer: PropTypes.element,
   isModal: PropTypes.bool,
   className: PropTypes.string,
+  onClose: PropTypes.func,
+  classes: PropTypes.object,
 };
 
 const defaultProps = {
@@ -128,16 +131,27 @@ const defaultProps = {
   // footer: null,
   isModal: false,
   className: null,
+  onClose: null,
+  classes: {},
 };
 
 function Dialog(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { body, title, name, isModal, className } = props;
+  const {
+    body,
+    title,
+    name,
+    isModal,
+    className,
+    onClose,
+    classes: classesProp,
+  } = props;
   const [dialogNode, setDialogNode] = useState(null);
   const classes = useStyles({ isModal });
-  const closeDialog = () => dispatch(setDialogVisible());
-  const escFunction = (e) => e.which === 27 && dispatch(setDialogVisible());
+  const closeDialog = onClose || (() => dispatch(setDialogVisible()));
+  const escFunction = (e) =>
+    e.which === 27 && (onClose || (() => dispatch(setDialogVisible())));
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isSmallScreen = useMemo(() => {
     return ["xs", "s"].includes(screenWidth);
@@ -178,13 +192,13 @@ function Dialog(props) {
     PaperComponent: isSmallScreen
       ? PaperComponent
       : React.memo(DraggablePaperComponent),
-    classes: {
+    classes: deepmerge(classesProp, {
       root: !isSmallScreen ? classes.rootDesktop : "",
       scrollPaper: classes.scrollPaper,
       paper: `${classes.paper} ${className || ""} ${
         isSmallScreen ? classes.paperMobile : ""
       }`,
-    },
+    }),
   };
 
   // Props for modal dialog
@@ -193,10 +207,10 @@ function Dialog(props) {
       hideBackdrop: false,
       maxWidth: "md",
       PaperComponent,
-      classes: {
+      classes: deepmerge(classesProp, {
         scrollPaper: classes.scrollPaperModal,
         paper: `${classes.paperModal} ${className || ""}`,
-      },
+      }),
     };
   }
 

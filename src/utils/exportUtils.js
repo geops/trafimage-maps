@@ -149,9 +149,8 @@ export const getMapHd = (
     targetZoom = map.getView().getZoomForResolution(targetResolution);
   }
 
-  const mbMap =
-    layerService.getBaseLayers()[0]?.mbMap ||
-    layerService.getBaseLayers()[0]?.mapboxLayer.mbMap;
+  const baseLayer = layerService.getBaseLayers()[0];
+  const mbMap = baseLayer?.mbMap || baseLayer?.mapboxLayer.mbMap;
 
   if (!mbMap) {
     // eslint-disable-next-line no-console
@@ -247,8 +246,8 @@ export const exportPdf = async (
   const ctx = canvas.getContext("2d");
 
   if (scaleLineConfig) {
-    const { canvas: scalelLineCanvas, x, y, width, height } = scaleLineConfig;
-    ctx.drawImage(scalelLineCanvas, x, y, width, height);
+    const { x, y, width, height, canvas: scaleLineCanvas } = scaleLineConfig;
+    ctx.drawImage(scaleLineCanvas, x, y, width, height);
   }
 
   // Apply SVG overlay if provided

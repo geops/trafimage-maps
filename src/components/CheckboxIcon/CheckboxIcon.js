@@ -9,7 +9,6 @@ const useStyles = makeStyles(() => {
       width: 16,
       height: 16,
       border: `1px solid lightgray`,
-      margin: 5,
       zIndex: 2,
       "&:hover": {
         backgroundColor: "rgba(0, 0, 0, 0.1)",

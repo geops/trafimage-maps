@@ -127,6 +127,9 @@ const v5 = {
         checkedIcon: <CheckboxIcon checked />,
         disableRipple: true,
       },
+      styleOverrides: {
+        root: { padding: 0, margin: 0 },
+      },
     },
     MuiPopover: {
       defaultProps: {
