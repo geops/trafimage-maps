@@ -296,7 +296,7 @@ export const geltungsbereicheMvp = {
   mapControls: <GaExportMapButton />,
   exportConfig: {
     getTemplateValues: () => ({
-      publishedAt: "01/2024",
+      publishedAt: "1/2024",
       year: "2024",
     }),
     getOverlayImageUrl: () => gaLegendA3De,

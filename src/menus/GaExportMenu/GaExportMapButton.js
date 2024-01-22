@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BsDownload } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
 import useIsMobile from "../../utils/useIsMobile";
@@ -22,6 +23,7 @@ const useGetVisible = (layers) => {
 
 function GaExportMapButton() {
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
   const layers = useSelector((state) => state.map.layers);
   const exportableGbLayers = layers.filter((layer) =>
@@ -35,6 +37,7 @@ function GaExportMapButton() {
         <MapButton
           onClick={() => setShowMenu(!showMenu)}
           style={{ padding: 8, color: "#444" }}
+          title={t("Karte als PDF exportieren")}
         >
           <BsDownload />
         </MapButton>
