@@ -10,7 +10,13 @@ const useGetVisible = (layers) => {
   const getVisible = useCallback(() => {
     setVisible(layers.some((l) => l.get("visible")));
   }, [layers]);
-  useEffect(() => getVisible(), [layers, getVisible]);
+  useEffect(() => {
+    getVisible();
+    layers.forEach((l) => l.on("change:visible", getVisible));
+    return () => {
+      layers.forEach((l) => l.un("change:visible", getVisible));
+    };
+  }, [layers, getVisible]);
   return visible;
 };
 
