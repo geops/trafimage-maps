@@ -36,12 +36,21 @@ const useStyles = makeStyles((theme) => {
       position: "absolute",
       display: "flex",
       flexDirection: "column",
-      gap: (props) => (props.isMobile ? 10 : 15),
-      right: (props) => (props.isMobile ? 10 : props.overlayWidth + 15),
+      top: (props) => props.margin,
+      right: (props) => {
+        return props.overlayWidth + props.margin;
+      },
+      gap: (props) => props.margin,
       "& .rs-zooms-bar": {
+        position: "relative",
         display: "flex",
         flexDirection: "column",
-        gap: (props) => (props.isSmallScreen ? 15 : 0),
+        gap: (props) => {
+          return props.margin;
+        },
+        "& .rs-zoomslider-wrapper": {
+          margin: 0,
+        },
         "& .ol-zoomslider": {
           border: "1px solid #5a5a5a !important",
           paddingBottom: "3px !important",
@@ -86,12 +95,19 @@ function MapControls({
   children,
 }) {
   const overlayWidth = useOverlayWidth();
+  const screenWidth = useSelector((state) => state.app.screenWidth);
   const screenHeight = useSelector((state) => state.app.screenHeight);
-  const isSmallScreen = useMemo(() => {
+  const isSmallHeight = useMemo(() => {
     return ["xs", "s"].includes(screenHeight);
   }, [screenHeight]);
+  const useSmallHeader = useMemo(() => {
+    return ["xs", "s", "m"].includes(screenWidth);
+  }, [screenWidth]);
   const isMobile = useIsMobile();
-  const classes = useStyles({ overlayWidth, isMobile, isSmallScreen });
+  const classes = useStyles({
+    overlayWidth: isMobile ? 0 : overlayWidth,
+    margin: useSmallHeader || isSmallHeight ? 10 : 15,
+  });
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
 
@@ -128,7 +144,7 @@ function MapControls({
         map={map}
         zoomInChildren={<ZoomIn />}
         zoomOutChildren={<ZoomOut />}
-        zoomSlider={!isSmallScreen && zoomSlider}
+        zoomSlider={!isSmallHeight && zoomSlider}
         titles={{
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),

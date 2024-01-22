@@ -67,10 +67,6 @@
     }
   }
 
-  .rs-zooms-bar {
-    position: relative;
-  }
-
   .rs-base-layer-switcher {
     position: absolute;
     bottom: 50px;
@@ -154,6 +150,12 @@
       &::before {
         margin-left: -9px;
       }
+    }
+  }
+
+  &.header {
+    .wkp-map-controls {
+      top: 115px; // 100px + 15px
     }
   }
 
@@ -275,22 +277,10 @@
       }
     }
 
-    .wkp-map-controls {
-      top: 10px;
-      right: 10px;
-    }
-
-    .wkp-map-controls,
-    .rs-zooms-bar {
-      & > button, & > div[role="button"] {
-            margin-bottom: 10px;
-      }
-    }
-
     /* header component is enabled */
     &.header {
       .wkp-map-controls {
-        top: 66px; // 56px + 10px
+        top: 66px; // 56px + 15px
       }
 
       .wkp-topics-menu {

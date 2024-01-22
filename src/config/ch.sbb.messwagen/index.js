@@ -33,7 +33,7 @@ const messwagenNetzkarteAerial = netzkarteAerial.clone({
 
 const messwagenLandeskarte = swisstopoLandeskarte.clone({
   mapboxLayer: messwagenDataLayer,
-  key: `ch.sbb.messwagen.landeskartegrau`,
+  key: `ch.sbb.messwagen.landeskarte`,
   visible: false,
 });
 
