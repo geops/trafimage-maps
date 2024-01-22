@@ -17,7 +17,7 @@ exports[`Header match snapshots 1`] = `
       </span>
     </div>
     <div class="makeStyles-wrapper-1 makeStyles-wrapper-5">
-      <div data-testid="trafimage-maps-select"
+      <div data-testid=" "
            data-cy="lang-select"
            class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-fullWidth makeStyles-select-4 css-iie7mv-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root"
       >
@@ -26,7 +26,7 @@ exports[`Header match snapshots 1`] = `
              aria-controls=":r0:"
              aria-expanded="false"
              aria-haspopup="listbox"
-             class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+             class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ybbvap-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
         >
           <span class="makeStyles-currentValue-3">
             <svg focusable="false"

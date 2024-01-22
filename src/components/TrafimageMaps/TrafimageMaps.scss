@@ -175,13 +175,6 @@
     cursor: pointer;
   }
 
-  &.tm-h-s,
-  &.tm-h-xs {
-    .rs-zoomslider-wrapper {
-      display: none;
-    }
-  }
-
   &.tm-h-xs {
     .wkp-search-toggle-container--open {
       width: 100%;

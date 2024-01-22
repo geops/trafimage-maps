@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -36,9 +36,12 @@ const useStyles = makeStyles((theme) => {
       position: "absolute",
       display: "flex",
       flexDirection: "column",
-      gap: (props) => (props.isMobile ? 5 : 8),
+      gap: (props) => (props.isMobile ? 10 : 15),
       right: (props) => (props.isMobile ? 10 : props.overlayWidth + 15),
       "& .rs-zooms-bar": {
+        display: "flex",
+        flexDirection: "column",
+        gap: (props) => (props.isSmallScreen ? 15 : 0),
         "& .ol-zoomslider": {
           border: "1px solid #5a5a5a !important",
           paddingBottom: "3px !important",
@@ -47,7 +50,6 @@ const useStyles = makeStyles((theme) => {
           background: `${theme.colors.darkGray} !important`,
         },
         "& .rs-zoom-in, .rs-zoom-out": {
-          margin: "10px 0",
           background: "white",
           boxShadow: "0 0 7px rgb(0 0 0 / 90%)",
           borderRadius: "50%",
@@ -84,8 +86,12 @@ function MapControls({
   children,
 }) {
   const overlayWidth = useOverlayWidth();
+  const screenHeight = useSelector((state) => state.app.screenHeight);
+  const isSmallScreen = useMemo(() => {
+    return ["xs", "s"].includes(screenHeight);
+  }, [screenHeight]);
   const isMobile = useIsMobile();
-  const classes = useStyles({ overlayWidth, isMobile });
+  const classes = useStyles({ overlayWidth, isMobile, isSmallScreen });
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
 
@@ -122,7 +128,7 @@ function MapControls({
         map={map}
         zoomInChildren={<ZoomIn />}
         zoomOutChildren={<ZoomOut />}
-        zoomSlider={zoomSlider}
+        zoomSlider={!isSmallScreen && zoomSlider}
         titles={{
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),

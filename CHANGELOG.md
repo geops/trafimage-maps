@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.1](https://github.com/geops/trafimage-maps/compare/v1.26.0...v1.26.1) (2024-01-18)
+
+### Bug Fixes
+
+- **map controls:** move map controls with overlay so they are always visible ([#1131](https://github.com/geops/trafimage-maps/issues/1131)) ([108c073](https://github.com/geops/trafimage-maps/commit/108c07371fb467a1acda8db394dacd3150c33dee))
+- **zweiausbildung:** update link Map D (Germany) ([1c549ea](https://github.com/geops/trafimage-maps/commit/1c549eac64539d62a056e4886113a35e125f57bd))
+
 ## [1.26.0](https://github.com/geops/trafimage-maps/compare/v1.25.8...v1.26.0) (2024-01-18)
 
 ### Bug Fixes

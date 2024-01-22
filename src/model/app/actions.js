@@ -14,7 +14,7 @@ export const SET_DIALOG_POSITION = "SET_DIALOG_POSITION";
 export const SET_DEPARTURES_FILTER = "SET_DEPARTURES_FILTER";
 export const SET_SEARCH_SERVICE = "SET_SEARCH_SERVICE";
 export const SET_PERMISSION_INFOS = "SET_PERMISSION_INFOS";
-export const SET_SCREEN_WIDTH = "SET_SCREEN_WIDTH";
+export const SET_SCREEN_DIMENSIONS = "SET_SCREEN_DIMENSIONS";
 export const SET_CARTARO_URL = "SET_CARTARO_URL";
 export const SET_MAPSET_URL = "SET_MAPSET_URL";
 export const SET_SHORTENER_URL = "SET_SHORTENER_URL";
@@ -120,8 +120,8 @@ export const setDeparturesFilter = (departuresFilter, platformFilter) => ({
   },
 });
 
-export const setScreenWidth = (data) => ({
-  type: SET_SCREEN_WIDTH,
+export const setScreenDimensions = (data) => ({
+  type: SET_SCREEN_DIMENSIONS,
   data,
 });
 

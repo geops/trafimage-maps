@@ -347,6 +347,7 @@ const v5 = {
         select: {
           "&:focus": {
             backgroundColor: "white",
+            borderRadius: "0 !important",
           },
         },
         icon: {
