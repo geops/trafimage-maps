@@ -269,6 +269,7 @@ export const exportPdf = async (
   doc.addFont("SBBWeb-Roman.ttf", "SBBWeb", "roman");
   doc.addFont("SBBWeb-Bold.ttf", "SBBWeb", "bold");
   doc.addFont("SBBWeb-Italic.ttf", "SBBWeb", "italic");
+  doc.setFont("SBBWeb");
 
   // Add map image
   const ctx = canvas.getContext("2d");
