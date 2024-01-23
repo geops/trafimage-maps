@@ -56,6 +56,10 @@ export const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";
   scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
+  scaleLineElement.style.display = "flex";
+  scaleLineElement.style["align-items"] = "center";
+  scaleLineElement.style["justify-content"] = "center";
+
   return scaleLineElement;
 };
 

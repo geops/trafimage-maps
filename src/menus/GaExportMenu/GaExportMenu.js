@@ -55,7 +55,7 @@ function GaExportMenu({ showModal, onClose }) {
   const scaleLineConfig = useMemo(() => {
     if (!exportSelection || !exportSize) return null;
     const x = exportSize[0] * exportSelection.resolution * 0.09;
-    let y = exportSize[1] * exportSelection.resolution * 0.915;
+    let y = exportSize[1] * exportSelection.resolution * 0.908;
     if (exportSelection.format === "a4") {
       // Since the aspect ratio of A4 is different, we need to adjust the y position
       y -= 8;
