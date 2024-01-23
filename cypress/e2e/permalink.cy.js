@@ -5,6 +5,7 @@ describe("permalink", () => {
   describe('"disabled" parameter', () => {
     describe("using default topic", () => {
       it("should display some elements when it's not set", () => {
+        cy.viewport(1440, 900);
         cy.visit("/");
         cy.get(".tm-trafimage-maps").should("exist");
 
