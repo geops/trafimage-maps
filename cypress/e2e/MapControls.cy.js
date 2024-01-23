@@ -36,4 +36,8 @@ describe("MapControls", () => {
         .should("equal", `${overlayWidth + 15}px`);
     });
   });
+
+  it("should remove zoomslider on landscape tablet heights.", () => {
+    cy.get(".rs-zoomslider-wrapper").should("not.exist");
+  });
 });
