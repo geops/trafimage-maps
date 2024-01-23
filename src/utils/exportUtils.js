@@ -263,9 +263,12 @@ export const exportPdf = async (
     format: exportFormat,
   });
 
-  doc.addFont(SBBRoman, "SBBWeb-Roman", "normal");
-  doc.addFont(SBBBold, "SBBWeb", "bold");
-  doc.addFont(SBBItalic, "SBBWeb", "italic");
+  doc.addFileToVFS("SBBWeb-Roman.ttf", SBBRoman);
+  doc.addFileToVFS("SBBWeb-Bold.ttf", SBBBold);
+  doc.addFileToVFS("SBBWeb-Italic.ttf", SBBItalic);
+  doc.addFont("SBBWeb-Roman.ttf", "SBBWeb", "roman");
+  doc.addFont("SBBWeb-Bold.ttf", "SBBWeb", "bold");
+  doc.addFont("SBBWeb-Italic.ttf", "SBBWeb", "italic");
 
   // Add map image
   const ctx = canvas.getContext("2d");
