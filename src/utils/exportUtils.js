@@ -14,8 +14,8 @@ import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
 import LayerService from "./LayerService";
 import SBBRoman from "./fonts/SBBWeb-Roman.ttf";
-import SBBBold from "./fonts/SBBWeb-Bold.ttf";
-import SBBItalic from "./fonts/SBBWeb-Italic.ttf";
+// import SBBBold from "./fonts/SBBWeb-Bold.ttf";
+// import SBBItalic from "./fonts/SBBWeb-Italic.ttf";
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -242,6 +242,14 @@ export const generateExtraData = (layers, exportNorthArrow) => {
   return extraData;
 };
 
+const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+
 export const exportPdf = async (
   mapToExport,
   map,
@@ -263,13 +271,19 @@ export const exportPdf = async (
     format: exportFormat,
   });
 
-  doc.addFileToVFS("SBBWeb-Roman.ttf", SBBRoman);
-  doc.addFileToVFS("SBBWeb-Bold.ttf", SBBBold);
-  doc.addFileToVFS("SBBWeb-Italic.ttf", SBBItalic);
+  const sbbBase64 = await fetch(SBBRoman)
+    .then((response) => response.blob())
+    .then((blob) => toBase64(blob))
+    .then((string) => string.split(",")[1]);
+
+  console.log(sbbBase64);
+  doc.addFileToVFS("SBBWeb-Roman.ttf", sbbBase64);
+  // doc.addFileToVFS("SBBWeb-Bold.ttf", SBBBold);
+  // doc.addFileToVFS("SBBWeb-Italic.ttf", SBBItalic);
   doc.addFont("SBBWeb-Roman.ttf", "SBBWeb", "normal");
-  doc.addFont("SBBWeb-Bold.ttf", "SBBWeb", "bold");
-  doc.addFont("SBBWeb-Italic.ttf", "SBBWeb", "italic");
-  doc.setFont("SBBWeb");
+  // doc.addFont("SBBWeb-Bold.ttf", "SBBWeb", "bold");
+  // doc.addFont("SBBWeb-Italic.ttf", "SBBWeb", "italic");
+  // doc.setFont("SBBWeb");
 
   // Add map image
   const ctx = canvas.getContext("2d");
