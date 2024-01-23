@@ -13,6 +13,9 @@ import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn'
 import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
 import LayerService from "./LayerService";
+import SBBRoman from "./fonts/SBBWeb-Roman.ttf";
+import SBBBold from "./fonts/SBBWeb-Bold.ttf";
+import SBBItalic from "./fonts/SBBWeb-Italic.ttf";
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -259,6 +262,10 @@ export const exportPdf = async (
     unit: "pt",
     format: exportFormat,
   });
+
+  doc.addFont(SBBRoman, "SBBWeb-Roman", "normal");
+  doc.addFont(SBBBold, "SBBWeb", "bold");
+  doc.addFont(SBBItalic, "SBBWeb", "italic");
 
   // Add map image
   const ctx = canvas.getContext("2d");
