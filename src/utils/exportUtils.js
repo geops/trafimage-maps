@@ -7,15 +7,12 @@ import VectorSource from "ol/source/Vector";
 import { LineString } from "ol/geom";
 import { getCenter } from "ol/extent";
 import { jsPDF as JsPDF } from "jspdf";
-import { Canvg } from "canvg";
 import { ScaleLine } from "ol/control";
 import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn't work for ie11
 import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
 import LayerService from "./LayerService";
-import SBBRoman from "./fonts/SBBWeb-Roman.ttf";
-// import SBBBold from "./fonts/SBBWeb-Bold.ttf";
-// import SBBItalic from "./fonts/SBBWeb-Italic.ttf";
+import SBBWebRoman from "./fonts/SBBWeb-Roman.woff";
 
 const actualPixelRatio = window.devicePixelRatio;
 
@@ -242,6 +239,14 @@ export const generateExtraData = (layers, exportNorthArrow) => {
   return extraData;
 };
 
+const loadImage = (src) =>
+  new Promise((resolve, reject) => {
+    const img = document.createElement("img");
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+
 const toBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -249,6 +254,21 @@ const toBase64 = (file) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
   });
+
+const getFontBase64Definition = (fontBase64String) => {
+  return `
+  <defs>
+    <style type="text/css">
+      @font-face {
+          font-family: 'SBBWeb-Roman';
+          src: url(${fontBase64String});
+          font-weight: normal;
+          font-style: normal italic;
+        }
+    </style>
+  </defs>
+  `;
+};
 
 export const exportPdf = async (
   mapToExport,
@@ -270,20 +290,6 @@ export const exportPdf = async (
     unit: "pt",
     format: exportFormat,
   });
-
-  const sbbBase64 = await fetch(SBBRoman)
-    .then((response) => response.blob())
-    .then((blob) => toBase64(blob))
-    .then((string) => string.split(",")[1]);
-
-  console.log(sbbBase64);
-  doc.addFileToVFS("SBBWeb-Roman.ttf", sbbBase64);
-  // doc.addFileToVFS("SBBWeb-Bold.ttf", SBBBold);
-  // doc.addFileToVFS("SBBWeb-Italic.ttf", SBBItalic);
-  doc.addFont("SBBWeb-Roman.ttf", "SBBWeb", "normal");
-  // doc.addFont("SBBWeb-Bold.ttf", "SBBWeb", "bold");
-  // doc.addFont("SBBWeb-Italic.ttf", "SBBWeb", "italic");
-  // doc.setFont("SBBWeb");
 
   // Add map image
   const ctx = canvas.getContext("2d");
@@ -309,6 +315,15 @@ export const exportPdf = async (
      * @ignore
      */
     let updatedSvg = svgString.slice(); // Clone the string
+
+    // Add SBB font definition to the SVG. Text elements in the SVG need to have "'SBBWeb-Roman','Arial','sans-serif'" as font-family
+    const sbbWebRomanBase64 = await fetch(SBBWebRoman)
+      .then((res) => res.blob())
+      .then((blob) => toBase64(blob));
+    const fontBase64DefinitionString =
+      getFontBase64Definition(sbbWebRomanBase64);
+    updatedSvg = updatedSvg.replace(">", `>${fontBase64DefinitionString}`);
+
     Object.keys(templateValues).forEach((key) => {
       const value =
         typeof templateValues[key] === "function"
@@ -327,20 +342,12 @@ export const exportPdf = async (
     svgDoc.documentElement.removeAttribute("width");
     svgDoc.documentElement.removeAttribute("height");
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
-
-    // Add legend SVG
-    const canvass = document.createElement("canvas");
-    canvass.width = canvas.width;
-    canvass.height = canvas.height;
-
-    const instance = await Canvg.fromString(
-      canvass.getContext("2d"),
-      updatedSvg,
-    );
-    await instance.render();
+    const blob = new Blob([updatedSvg], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const image = await loadImage(url);
 
     // Add SVG to map canvas
-    ctx.drawImage(canvass, 0, 0);
+    ctx.drawImage(image, 0, 0);
   }
 
   // Scale to fit the export size

@@ -58,7 +58,7 @@ function GaExportMenu({ showModal, onClose }) {
     let y = exportSize[1] * exportSelection.resolution * 0.908;
     if (exportSelection.format === "a4") {
       // Since the aspect ratio of A4 is different, we need to adjust the y position
-      y -= 8;
+      y -= 15;
     }
     return { x, y };
   }, [exportSelection, exportSize]);
