@@ -45,6 +45,20 @@ const getStyleWithForceVisibility = (
   return newMbStyle;
 };
 
+export const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
+  const scaleLineElement = scaleLineControl?.element?.children[0];
+  const width = parseInt(scaleLineElement.style.width, 10);
+  scaleLineElement.style.width = `${width * exportSelection.resolution}px`;
+  scaleLineElement.style.height = `${15 * exportSelection.resolution}px`;
+  scaleLineElement.style["font-size"] = `${8 * exportSelection.resolution}px`;
+  scaleLineElement.style["border-width"] =
+    `${1.67 * exportSelection.resolution}px`;
+  scaleLineElement.style["border-color"] = "black";
+  scaleLineElement.style["font-color"] = "black";
+  scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
+  return scaleLineElement;
+};
+
 export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
   Object.defineProperty(window, "devicePixelRatio", {
     get() {
