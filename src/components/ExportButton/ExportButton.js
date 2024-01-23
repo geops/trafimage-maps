@@ -36,7 +36,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const getStylePdfScaleLine = (scaleLineControl, exportSelection) => {
+const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
   const scaleLineElement = scaleLineControl?.element?.children[0];
   const width = parseInt(scaleLineElement.style.width, 10);
   scaleLineElement.style.width = `${width * exportSelection.resolution}px`;
@@ -126,7 +126,7 @@ function ExportButton({
           .find((c) => c instanceof ScaleLine);
         const scaleLineElement =
           scaleLineControl &&
-          getStylePdfScaleLine(scaleLineControl, exportSelection);
+          getStyledPdfScaleLine(scaleLineControl, exportSelection);
         const scaleLineCanvas =
           scaleLineElement && (await html2canvas(scaleLineElement));
 
