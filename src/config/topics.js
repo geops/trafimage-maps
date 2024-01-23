@@ -296,8 +296,10 @@ export const geltungsbereicheMvp = {
   mapControls: <GaExportMapButton />,
   exportConfig: {
     getTemplateValues: () => ({
-      publishedAt: "1/2024",
-      year: "2024",
+      publishedAt: new Date().toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+      }),
     }),
     getOverlayImageUrl: () => gaLegendA3De,
   },
