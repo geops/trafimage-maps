@@ -266,7 +266,7 @@ export const exportPdf = async (
   doc.addFileToVFS("SBBWeb-Roman.ttf", SBBRoman);
   doc.addFileToVFS("SBBWeb-Bold.ttf", SBBBold);
   doc.addFileToVFS("SBBWeb-Italic.ttf", SBBItalic);
-  doc.addFont("SBBWeb-Roman.ttf", "SBBWeb", "roman");
+  doc.addFont("SBBWeb-Roman.ttf", "SBBWeb", "normal");
   doc.addFont("SBBWeb-Bold.ttf", "SBBWeb", "bold");
   doc.addFont("SBBWeb-Italic.ttf", "SBBWeb", "italic");
   doc.setFont("SBBWeb");
