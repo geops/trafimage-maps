@@ -85,17 +85,16 @@ export const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
   const scaleLineElement = scaleLineControl?.element?.children[0];
   const width = parseInt(scaleLineElement.style.width, 10);
   scaleLineElement.style.width = `${width * exportSelection.resolution}px`;
-  scaleLineElement.style.height = `${15 * exportSelection.resolution}px`;
+  scaleLineElement.style.height = `${10 * exportSelection.resolution}px`;
   scaleLineElement.style["font-size"] = `${8 * exportSelection.resolution}px`;
   scaleLineElement.style["border-width"] =
-    `${1.67 * exportSelection.resolution}px`;
+    `${1 * exportSelection.resolution}px`;
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";
   scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
   scaleLineElement.style.display = "flex";
   scaleLineElement.style["align-items"] = "center";
   scaleLineElement.style["justify-content"] = "center";
-
   return scaleLineElement;
 };
 
@@ -299,11 +298,6 @@ export const exportPdf = async (
   // Add map image
   const ctx = canvas.getContext("2d");
 
-  if (scaleLineConfig) {
-    const { x, y, canvas: scaleLineCanvas } = scaleLineConfig;
-    ctx.drawImage(scaleLineCanvas, x, y);
-  }
-
   // Apply SVG overlay if provided
   if (overlayImageUrl) {
     // Fetch local svg
@@ -346,6 +340,11 @@ export const exportPdf = async (
     );
     svgDoc.documentElement.removeAttribute("width");
     svgDoc.documentElement.removeAttribute("height");
+    if (scaleLineConfig) {
+      svgDoc.documentElement.getElementById("scaleline")?.remove();
+      const { x, y, canvas: scaleLineCanvas } = scaleLineConfig;
+      ctx.drawImage(scaleLineCanvas, x, y);
+    }
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
     const blob = new Blob([updatedSvg], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
@@ -406,17 +405,33 @@ export const getHighestPossibleRes = (maxCanvasSize, map, options) => {
   return { format: highestRes.format, resolution: highestRes.resolution };
 };
 
-export const defaultExportOptions = [
+export const optionsA0 = [
   { label: "A0 (72 dpi)", resolution: 1, format: "a0", weight: 8 },
   { label: "A0 (150 dpi)", resolution: 2, format: "a0", weight: 10 },
   { label: "A0 (300 dpi)", resolution: 3, format: "a0", weight: 12 },
+];
+
+export const optionsA1 = [
   { label: "A1 (72 dpi)", resolution: 1, format: "a1", weight: 7 },
   { label: "A1 (150 dpi)", resolution: 2, format: "a1", weight: 9 },
   { label: "A1 (300 dpi)", resolution: 3, format: "a1", weight: 11 },
+];
+
+export const optionsA3 = [
   { label: "A3 (72 dpi)", resolution: 1, format: "a3", weight: 2 },
   { label: "A3 (150 dpi)", resolution: 2, format: "a3", weight: 4 },
   { label: "A3 (300 dpi)", resolution: 3, format: "a3", weight: 6 },
+];
+
+export const optionsA4 = [
   { label: "A4 (72 dpi)", resolution: 1, format: "a4", weight: 1 },
   { label: "A4 (150 dpi)", resolution: 2, format: "a4", weight: 3 },
   { label: "A4 (300 dpi)", resolution: 3, format: "a4", weight: 5 },
+];
+
+export const exportOptions = [
+  ...optionsA0,
+  ...optionsA1,
+  ...optionsA3,
+  ...optionsA4,
 ];

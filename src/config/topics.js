@@ -302,6 +302,8 @@ export const geltungsbereicheMvp = {
       }),
     }),
     getOverlayImageUrl: () => gaLegendA3De,
+    getExportFileName: (lang, t, format) =>
+      `${t("Geltungsbereiche")}_${format.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`,
   },
 };
 

@@ -6,11 +6,13 @@ import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import Dialog from "../../components/Dialog";
 import ExportResolutionSelect from "../ExportMenu/ExportResolutionSelect";
-import { defaultExportOptions, sizesByFormat } from "../../utils/exportUtils";
+import { optionsA3, optionsA4, sizesByFormat } from "../../utils/exportUtils";
 import ExportButton from "../../components/ExportButton/ExportButton";
 import useExportSelection from "../../utils/useExportSelection";
 
 export const NAME = "gaExportMenu";
+
+const SWISS_CENTER = [900000, 5899500];
 
 const useStyles = makeStyles(() => ({
   dialogContainer: {
@@ -38,8 +40,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const options = defaultExportOptions.filter(
-  (opt) => /^(a3|a4)$/.test(opt.format) && /^(2|3)$/.test(opt.resolution),
+const options = [...optionsA3, ...optionsA4].filter((opt) =>
+  /^(2|3)$/.test(opt.resolution),
 );
 
 function GaExportMenu({ showModal, onClose }) {
@@ -49,19 +51,28 @@ function GaExportMenu({ showModal, onClose }) {
   const zoom = useSelector((state) => state.map.zoom);
   const center = useSelector((state) => state.map.center);
   const [exportFullMap, setExportFullMap] = useState(false);
-  const exportSize = useMemo(() => {
+  const pdfSize = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
-  const scaleLineConfig = useMemo(() => {
-    if (!exportSelection || !exportSize) return null;
-    const x = exportSize[0] * exportSelection.resolution * 0.09;
-    let y = exportSize[1] * exportSelection.resolution * 0.908;
-    if (exportSelection.format === "a4") {
-      // Since the aspect ratio of A4 is different, we need to adjust the y position
-      y -= 15;
+  const mapSize = useMemo(() => {
+    if (!exportSelection || !pdfSize) return null;
+    let scale = 1;
+    if (exportFullMap) {
+      scale = exportSelection.format === "a3" ? 2.25 : 2.2;
     }
+    return [pdfSize[0] * scale, pdfSize[1] * scale];
+  }, [exportFullMap, exportSelection, pdfSize]);
+  const scaleLineConfig = useMemo(() => {
+    if (!exportSelection || !pdfSize) return null;
+    const x = pdfSize[0] * exportSelection.resolution * 0.027;
+    const y = pdfSize[1] * exportSelection.resolution * 0.46;
     return { x, y };
-  }, [exportSelection, exportSize]);
+  }, [exportSelection, pdfSize]);
+
+  const exportZoom = useMemo(() => {
+    if (!exportSelection || !exportFullMap) return zoom;
+    return exportSelection.format === "a3" ? 9.5 : 9;
+  }, [exportFullMap, exportSelection, zoom]);
 
   return (
     showModal && (
@@ -98,12 +109,16 @@ function GaExportMenu({ showModal, onClose }) {
               <ExportButton
                 exportFormat={exportSelection?.format}
                 exportScale={exportSelection?.resolution}
-                exportSize={exportSize}
-                exportExtent={exportFullMap ? undefined : null} // use default extent when exporting full map
-                exportZoom={zoom}
-                exportCoordinates={[center, center]}
+                exportSize={mapSize}
+                exportExtent={null} // set null to override default extent
+                exportZoom={exportZoom}
+                exportCoordinates={
+                  exportFullMap
+                    ? [SWISS_CENTER, SWISS_CENTER]
+                    : [center, center]
+                }
                 exportCopyright={false}
-                scaleLineConfig={scaleLineConfig}
+                scaleLineConfig={exportFullMap ? null : scaleLineConfig}
               />
             </div>
           </div>

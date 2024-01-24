@@ -8,7 +8,7 @@ import MenuItem from "../../components/Menu/MenuItem";
 import ExportButton from "../../components/ExportButton";
 import ExportResolutionSelect from "./ExportResolutionSelect";
 import useExportSelection from "../../utils/useExportSelection";
-import { sizesByFormat, defaultExportOptions } from "../../utils/exportUtils";
+import { sizesByFormat, optionsA0, optionsA1 } from "../../utils/exportUtils";
 
 const useStyles = makeStyles((theme) => ({
   menuContent: {
@@ -39,9 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const options = defaultExportOptions.filter((opt) =>
-  /^(a1|a0)$/.test(opt.format),
-);
+const options = [...optionsA0, ...optionsA1];
 
 function ExportMenu() {
   const classes = useStyles();

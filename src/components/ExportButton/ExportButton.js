@@ -12,6 +12,7 @@ import {
   generateExtraData,
   exportPdf,
   getStyledPdfScaleLine,
+  sizesByFormat,
 } from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
 
@@ -103,7 +104,7 @@ function ExportButton({
             : {};
           imageUrl = getOverlayImageUrl && getOverlayImageUrl(i18n.language, t);
           fileName = getExportFileName
-            ? getExportFileName(i18n.language, t)
+            ? getExportFileName(i18n.language, t, exportFormat)
             : fileName;
         }
 
@@ -124,7 +125,7 @@ function ExportButton({
           exportFormat,
           canvas,
           exportScale,
-          exportSize,
+          sizesByFormat[exportFormat],
           templateValues,
           imageUrl,
           fileName,
