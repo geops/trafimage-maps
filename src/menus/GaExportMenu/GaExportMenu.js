@@ -10,9 +10,7 @@ import { optionsA3, optionsA4, sizesByFormat } from "../../utils/exportUtils";
 import ExportButton from "../../components/ExportButton/ExportButton";
 import useExportSelection from "../../utils/useExportSelection";
 
-export const NAME = "gaExportMenu";
-
-const SWISS_CENTER = [900000, 5899500];
+const SWISS_CENTER = [903000, 5899500];
 
 const useStyles = makeStyles(() => ({
   dialogContainer: {
@@ -58,27 +56,22 @@ function GaExportMenu({ showModal, onClose }) {
     if (!exportSelection || !pdfSize) return null;
     let scale = 1;
     if (exportFullMap) {
-      scale = exportSelection.format === "a3" ? 2.25 : 2.2;
+      scale = exportSelection.format === "a3" ? 1.59 : 2.25;
     }
     return [pdfSize[0] * scale, pdfSize[1] * scale];
   }, [exportFullMap, exportSelection, pdfSize]);
   const scaleLineConfig = useMemo(() => {
     if (!exportSelection || !pdfSize) return null;
-    const x = pdfSize[0] * exportSelection.resolution * 0.027;
-    const y = pdfSize[1] * exportSelection.resolution * 0.46;
+    const x = pdfSize[0] * exportSelection.resolution * 0.026;
+    const y = pdfSize[1] * exportSelection.resolution * 0.28;
     return { x, y };
   }, [exportSelection, pdfSize]);
-
-  const exportZoom = useMemo(() => {
-    if (!exportSelection || !exportFullMap) return zoom;
-    return exportSelection.format === "a3" ? 9.5 : 9;
-  }, [exportFullMap, exportSelection, zoom]);
 
   return (
     showModal && (
       <Dialog
         isModal
-        name={NAME}
+        name="ga-export-menu"
         title={<span>{t("Karte als PDF exportieren")}</span>}
         className={`tm-dialog-container ${classes.dialogContainer}`}
         classes={{ root: classes.dialogRoot }}
@@ -111,7 +104,7 @@ function GaExportMenu({ showModal, onClose }) {
                 exportScale={exportSelection?.resolution}
                 exportSize={mapSize}
                 exportExtent={null} // set null to override default extent
-                exportZoom={exportZoom}
+                exportZoom={exportFullMap ? 9 : zoom}
                 exportCoordinates={
                   exportFullMap
                     ? [SWISS_CENTER, SWISS_CENTER]

@@ -102,7 +102,9 @@ function ExportButton({
           templateValues = getTemplateValues
             ? getTemplateValues(i18n.language, t)
             : {};
-          imageUrl = getOverlayImageUrl && getOverlayImageUrl(i18n.language, t);
+          imageUrl =
+            getOverlayImageUrl &&
+            getOverlayImageUrl(i18n.language, t, exportFormat);
           fileName = getExportFileName
             ? getExportFileName(i18n.language, t, exportFormat)
             : fileName;

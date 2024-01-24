@@ -340,10 +340,8 @@ export const exportPdf = async (
     );
     svgDoc.documentElement.removeAttribute("width");
     svgDoc.documentElement.removeAttribute("height");
-    if (scaleLineConfig) {
+    if (scaleLineConfig?.canvas) {
       svgDoc.documentElement.getElementById("scaleline")?.remove();
-      const { x, y, canvas: scaleLineCanvas } = scaleLineConfig;
-      ctx.drawImage(scaleLineCanvas, x, y);
     }
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
     const blob = new Blob([updatedSvg], { type: "image/svg+xml" });
@@ -352,6 +350,11 @@ export const exportPdf = async (
 
     // Add SVG to map canvas
     ctx.drawImage(image, 0, 0);
+  }
+
+  if (scaleLineConfig?.canvas) {
+    const { x, y, canvas: scaleLineCanvas } = scaleLineConfig;
+    ctx.drawImage(scaleLineCanvas, x, y);
   }
 
   // Scale to fit the export size
