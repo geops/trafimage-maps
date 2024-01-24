@@ -37,6 +37,8 @@ const infos = {
 const warranty = {
   de: (
     <div>
+      Aus Platzgründen sind, je nach Zoomstufe, nicht alle Linien angegeben.
+      <br />
       Alle Angaben ohne Gewähr. Änderungen vorbehalten.
       <br />
       Es gilt der Anwendungsbereich (
@@ -52,6 +54,9 @@ const warranty = {
   ),
   fr: (
     <div>
+      Faute de place, selon le niveau de zoom, toutes les lignes ne sont pas
+      mentionnées.
+      <br />
       Toutes les indications sont sans garantie. Sous réserve de modifications.
       <br />
       Le champ d&apos;application fait foi (
@@ -67,6 +72,8 @@ const warranty = {
   ),
   en: (
     <div>
+      Depending on the zoom level, not all lines shown due to lack of space.
+      <br />
       All information without guarantee. Subject to change.
       <br />
       The scope of application applies (
@@ -82,6 +89,9 @@ const warranty = {
   ),
   it: (
     <div>
+      Per mancanza di spazio, a seconda del livello di zoom, non vi figurano
+      tutte le linee.
+      <br />
       Tutte le informazioni non sono garantite. Salvo modifiche.
       <br />
       Si applica il campi d&apos;applicazione (

@@ -5,6 +5,7 @@ describe("Geltungsbereiche iframe topic", () => {
   });
 
   it("should show/hide some elements", () => {
+    cy.viewport(1440, 900);
     cy.get(".tm-trafimage-maps").should("exist");
 
     // header + telephoneinfos
