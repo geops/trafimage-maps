@@ -45,6 +45,42 @@ const getStyleWithForceVisibility = (
   return newMbStyle;
 };
 
+const loadImage = (src) =>
+  new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+
+const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+  });
+
+const getFontBase64Definition = (
+  fontFamily = "SBBWeb-Roman",
+  fontBase64String,
+  fontWeight = "normal",
+  fontStyle = "normal italic",
+) => {
+  return `
+  <defs>
+    <style type="text/css">
+      @font-face {
+        font-family: '${fontFamily}';
+          src: url(${fontBase64String});
+          font-weight: ${fontWeight};
+          font-style: ${fontStyle};
+        }
+    </style>
+  </defs>
+  `;
+};
+
 export const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
   const scaleLineElement = scaleLineControl?.element?.children[0];
   const width = parseInt(scaleLineElement.style.width, 10);
@@ -239,37 +275,6 @@ export const generateExtraData = (layers, exportNorthArrow) => {
   return extraData;
 };
 
-const loadImage = (src) =>
-  new Promise((resolve, reject) => {
-    const img = document.createElement("img");
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  });
-
-const toBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-  });
-
-const getFontBase64Definition = (fontBase64String) => {
-  return `
-  <defs>
-    <style type="text/css">
-      @font-face {
-          font-family: 'SBBWeb-Roman';
-          src: url(${fontBase64String});
-          font-weight: normal;
-          font-style: normal italic;
-        }
-    </style>
-  </defs>
-  `;
-};
-
 export const exportPdf = async (
   mapToExport,
   map,
@@ -333,8 +338,8 @@ export const exportPdf = async (
     });
 
     // The legend SVG MUST NOT contain width and height attributes (only a viewBox)
-    // because it breaks canvg rendering: a bad canvas size is set.
-    // so we remove it before the conversion to canvas.
+    // because it breaks the image rendering, a bad width and height is set
+    // so we remove it before the conversion
     const svgDoc = new DOMParser().parseFromString(
       updatedSvg,
       "application/xml",
