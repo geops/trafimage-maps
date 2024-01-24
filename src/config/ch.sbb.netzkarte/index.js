@@ -1,11 +1,6 @@
 import { Layer } from "mobility-toolbox-js/ol";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
-import netzkarte from "../../img/netzkarte.png";
-import netzkarteNightImg from "../../img/netzkarte_night.png";
-import landeskarte from "../../img/landeskarte.png";
-import landeskarteGrau from "../../img/landeskarte_grau.png";
-import luftbild from "../../img/luftbild.png";
 import StationsLayer from "../../layers/StationsLayer";
 import PlatformsLayer from "../../layers/PlatformsLayer";
 import TralisLayer from "../../layers/TralisLayer";
@@ -28,8 +23,8 @@ export const netzkarteLayer = new MapboxStyleLayer({
   key: "ch.sbb.netzkarte",
   group: "baseLayer",
   properties: {
-    previewImage: netzkarte,
     isBaseLayer: true,
+    previewImage: "ch.sbb.netzkarte",
   },
   visible: true,
   mapboxLayer: dataLayer,
@@ -43,8 +38,8 @@ export const netzkarteNight = new MapboxStyleLayer({
   key: "ch.sbb.netzkarte.dark",
   group: "baseLayer",
   properties: {
-    previewImage: netzkarteNightImg,
     isBaseLayer: true,
+    previewImage: "ch.sbb.netzkarte.dark",
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -56,8 +51,8 @@ export const netzkarteAerial = new MapboxStyleLayer({
   key: "ch.sbb.netzkarte.luftbild.group",
   group: "baseLayer",
   properties: {
-    previewImage: luftbild,
     isBaseLayer: true,
+    previewImage: "ch.sbb.netzkarte.luftbild.group",
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -69,8 +64,8 @@ export const swisstopoSwissImage = new MapboxStyleLayer({
   key: "ch.sbb.netzkarte.luftbild.group.old",
   group: "baseLayer",
   properties: {
-    previewImage: luftbild,
     isBaseLayer: true,
+    previewImage: "ch.sbb.netzkarte.luftbild.group",
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -84,8 +79,8 @@ export const swisstopoLandeskarte = new MapboxStyleLayer({
   key: "ch.sbb.netzkarte.landeskarte",
   group: "baseLayer",
   properties: {
-    previewImage: landeskarte,
     isBaseLayer: true,
+    previewImage: "ch.sbb.netzkarte.landeskarte",
   },
   visible: false,
   mapboxLayer: dataLayer,
@@ -99,8 +94,8 @@ export const swisstopoLandeskarteGrau = new MapboxStyleLayer({
   key: "ch.sbb.netzkarte.landeskarte.grau",
   group: "baseLayer",
   properties: {
-    previewImage: landeskarteGrau,
     isBaseLayer: true,
+    previewImage: "ch.sbb.netzkarte.landeskarte.grau",
   },
   visible: false,
   mapboxLayer: dataLayer,
