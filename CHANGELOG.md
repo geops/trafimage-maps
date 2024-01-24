@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.2](https://github.com/geops/trafimage-maps/compare/v1.26.1...v1.26.2) (2024-01-23)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add text ([#1134](https://github.com/geops/trafimage-maps/issues/1134)) ([90f94d2](https://github.com/geops/trafimage-maps/commit/90f94d2d2e6d37c98331c16a2909fb20b5094fa8))
+
+### [1.26.1](https://github.com/geops/trafimage-maps/compare/v1.26.0...v1.26.1) (2024-01-18)
+
+### Bug Fixes
+
+- **map controls:** move map controls with overlay so they are always visible ([#1131](https://github.com/geops/trafimage-maps/issues/1131)) ([108c073](https://github.com/geops/trafimage-maps/commit/108c07371fb467a1acda8db394dacd3150c33dee))
+- **zweiausbildung:** update link Map D (Germany) ([1c549ea](https://github.com/geops/trafimage-maps/commit/1c549eac64539d62a056e4886113a35e125f57bd))
+
+## [1.26.0](https://github.com/geops/trafimage-maps/compare/v1.25.8...v1.26.0) (2024-01-18)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add warranty text to layer infos ([da74cb9](https://github.com/geops/trafimage-maps/commit/da74cb97c2c3d578ac76a5ae48ebab4a06f4e67c))
+
 ### [1.25.8](https://github.com/geops/trafimage-maps/compare/v1.25.7...v1.25.8) (2024-01-15)
 
 ### Bug Fixes

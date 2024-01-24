@@ -15,7 +15,7 @@ exports[`AusbauFilters should match snapshot if showFilterParam is an empty stri
          aria-controls=":r1:"
          aria-expanded="false"
          aria-haspopup="listbox"
-         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ybbvap-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
     >
       Projekte im Bau
     </div>
@@ -60,7 +60,7 @@ exports[`AusbauFilters should match snapshot if showFilterParam is true, should 
          aria-controls=":r0:"
          aria-expanded="false"
          aria-haspopup="listbox"
-         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1qmt4kt-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
+         class="MuiSelect-select MuiSelect-outlined MuiInputBase-input MuiOutlinedInput-input css-1ybbvap-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input"
     >
       Projekte im Bau
     </div>

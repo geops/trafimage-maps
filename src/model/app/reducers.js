@@ -18,7 +18,7 @@ import {
   SET_DEPARTURES_FILTER,
   SET_SEARCH_SERVICE,
   SET_PERMISSION_INFOS,
-  SET_SCREEN_WIDTH,
+  SET_SCREEN_DIMENSIONS,
   SET_MAPSET_URL,
   SET_DRAW_URL,
   SET_DRAW_IDS,
@@ -46,6 +46,7 @@ import {
   SET_REALTIME_KEY,
   SET_DISPLAY_MENU,
   SET_STOPS_URL,
+  SET_OVERLAY_ELEMENT,
 } from "./actions";
 
 import SearchService from "../../components/Search/SearchService";
@@ -224,10 +225,11 @@ export default function app(state = getInitialState(), action) {
         ...state,
         searchUrl: action.data,
       };
-    case SET_SCREEN_WIDTH:
+    case SET_SCREEN_DIMENSIONS:
       return {
         ...state,
-        screenWidth: action.data,
+        screenWidth: action.data.width,
+        screenHeight: action.data.height,
       };
     case SET_DRAW_IDS:
       return {
@@ -313,6 +315,11 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         stopsUrl: action.data,
+      };
+    case SET_OVERLAY_ELEMENT:
+      return {
+        ...state,
+        overlayElement: action.data,
       };
     default:
       return {
