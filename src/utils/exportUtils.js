@@ -62,8 +62,8 @@ const toBase64 = (file) =>
   });
 
 const getFontBase64Definition = (
-  fontFamily = "SBBWeb-Roman",
   fontBase64String,
+  fontFamily = "SBBWeb-Roman",
   fontWeight = "normal",
   fontStyle = "normal italic",
 ) => {
@@ -71,11 +71,11 @@ const getFontBase64Definition = (
   <defs>
     <style type="text/css">
       @font-face {
+        src: url(${fontBase64String});
         font-family: '${fontFamily}';
-          src: url(${fontBase64String});
-          font-weight: ${fontWeight};
-          font-style: ${fontStyle};
-        }
+        font-weight: ${fontWeight};
+        font-style: ${fontStyle};
+      }
     </style>
   </defs>
   `;
