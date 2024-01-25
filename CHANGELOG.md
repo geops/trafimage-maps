@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.3](https://github.com/geops/trafimage-maps/compare/v1.26.2...v1.26.3) (2024-01-25)
+
+### Bug Fixes
+
+- **handicap:** add open data link to topic info, filter duplicates on feature click, update popup content ([#1139](https://github.com/geops/trafimage-maps/issues/1139)) ([8a2f8e7](https://github.com/geops/trafimage-maps/commit/8a2f8e739c9a8fdea64c1a1e251693d0f9a24f43))
+- **Zweitausbildung:** update Link on Map D ([4dc255d](https://github.com/geops/trafimage-maps/commit/4dc255d2f0f45f710b5696d1f53da177cb4aaa72))
+
 ### [1.26.2](https://github.com/geops/trafimage-maps/compare/v1.26.1...v1.26.2) (2024-01-23)
 
 ### Bug Fixes
