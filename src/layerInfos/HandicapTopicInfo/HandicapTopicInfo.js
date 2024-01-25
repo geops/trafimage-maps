@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import DataLink from "../../components/DataLink";
 
 const comps = {
   de: (
@@ -55,7 +56,15 @@ const comps = {
 
 function HandicapTopicInfo() {
   const { i18n } = useTranslation();
-  return <div>{comps[i18n.language]}</div>;
+  return (
+    <div>
+      {comps[i18n.language]}
+      <hr />
+      <p>
+        <DataLink href=" https://opentransportdata.swiss/de/dataset/prm_data" />
+      </p>
+    </div>
+  );
 }
 
 export default React.memo(HandicapTopicInfo);

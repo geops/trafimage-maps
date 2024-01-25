@@ -1,10 +1,4 @@
-import React, {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
 import { useSelector } from "react-redux";
@@ -19,13 +13,21 @@ const propTypes = {
 
 const cache = {};
 
+const flexStyle = {
+  display: "flex",
+  flexDirection: "column",
+  gap: 15,
+};
 const useStyles = makeStyles(() => ({
   popup: {
+    ...flexStyle,
     "& legend": {
       fontWeight: "bold", // Ensure the title is bold in gitlab
     },
     "& fieldset": {
+      ...flexStyle,
       borderWidth: 1, // Ensure border is 1px in gitlab
+      padding: "20px 10px",
     },
   },
 }));
@@ -75,6 +77,105 @@ const formatYesNoData = (data) => {
   return data;
 };
 
+const getAccessibility = (value, language, t) => {
+  if (!value) return null;
+  const note =
+    typeof value.note === "object"
+      ? value?.note?.[language] || value?.note?.de
+      : value.note;
+  const hasTranslatedString = note?.includes(hardcodedStringForNote);
+  const notTranslatedInfo = hasTranslatedString
+    ? note?.split(hardcodedStringForNote)[1]
+    : note;
+  return (
+    <fieldset key="accessibility">
+      <legend>{t("accessibility")}</legend>
+      <Typography>{t(formatYesNoData(value?.state))}</Typography>
+      {hasTranslatedString && (
+        <Typography>
+          {hasTranslatedString ? (
+            <Trans
+              i18nKey={hardcodedStringForNote}
+              components={{
+                1: <br />,
+                2: (
+                  <a
+                    href="https://www.swisspass.ch/handicap"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    swisspass.ch/handicap
+                  </a>
+                ),
+              }}
+            />
+          ) : null}
+        </Typography>
+      )}
+      {notTranslatedInfo && <Typography>{notTranslatedInfo}</Typography>}
+    </fieldset>
+  );
+};
+
+const getAlternativeTransport = (value, language, t) => {
+  if (!value) return null;
+  return (
+    !/^NO|UNKNOWN$/.test(value?.state) && (
+      <fieldset key="alternativeTransport">
+        <legend>{t("alternativeTransport")}</legend>
+        <div>{t("Shuttle-Fahrdienst")}</div>
+        {value.note?.[language] && <div>{value.note[language]}</div>}
+      </fieldset>
+    )
+  );
+};
+
+const getPassengetInformation = (value, t) => {
+  if (!value) return null;
+  const entries = Object.entries(value).filter(([k, val]) => {
+    return val !== "NO" && val !== "UNKNOWN" && k !== "note";
+  });
+  return (
+    !!entries.length && (
+      <fieldset key="passengerInformation">
+        <legend>{t("passengerInformation")}</legend>
+        {entries.map(([k]) => {
+          return <div key={k}>{t(k)}</div>;
+        })}
+      </fieldset>
+    )
+  );
+};
+
+const getNote = (value, language, t) => {
+  if (!value) return null;
+  return (
+    <fieldset key="note">
+      <legend>{t("Hinweise zur Haltestelle")}</legend>
+      {typeof value === "object" ? value[language] || value.de : value}
+    </fieldset>
+  );
+};
+
+const getUrl = (value, language, t) => {
+  if (!value) return null;
+  const url = /^http(s)?:\/\//.test(value) ? value : `https://${value}`;
+  let niceVal = value;
+  try {
+    niceVal = /^http(s)?:\/\//.test(url) ? new URL(url).hostname : value;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log("StopPlacePopup. Not a parseable url: ", value);
+    niceVal = value;
+  }
+  return (
+    <fieldset key="url">
+      <legend>{t("Weitere Informationen")}</legend>
+      <Link href={url}>{niceVal}</Link>
+    </fieldset>
+  );
+};
+
 function StopPlacePopup({ feature }) {
   const classes = useStyles();
   const { t, i18n } = useTranslation();
@@ -84,164 +185,33 @@ function StopPlacePopup({ feature }) {
   }, [feature]);
   const { data, loading } = useStopPlaceData(uic, cartaroUrl);
 
-  const renderContent = useCallback(
-    ([key, value]) => {
-      let content = value && (
-        <div key={key}>
-          <div>
-            {t(key)}: {t(formatYesNoData(value))}
-          </div>{" "}
-          <br />
-        </div>
-      );
-
-      if (value && typeof value === "object") {
-        const entries = Object.entries(value);
-        if (entries.length) {
-          content = (
-            <div key={key}>
-              <fieldset>
-                <legend>{t(key)}</legend>
-                <br />
-                <div>{entries.map(renderContent)}</div>
-              </fieldset>
-              <br />
-            </div>
-          );
-        }
-      }
-
-      if (key === "ticketMachine") content = null;
-      if (key === "alternativeTransport") {
-        content = !/^NO|UNKNOWN$/.test(value?.state) && (
-          <div key={key}>
-            <fieldset>
-              <legend>{t(key)}</legend>
-              <br />
-              <div>{t("Shuttle-Fahrdienst")}</div>
-              {value.note?.[i18n.language] && (
-                <>
-                  <br />
-                  <div>{value.note[i18n.language]}</div>
-                </>
-              )}
-              <br />
-            </fieldset>
-            <br />
-          </div>
-        );
-      }
-
-      if (key === "accessibility") {
-        const note =
-          typeof value.note === "object"
-            ? value?.note?.[i18n.language] || value?.note?.de
-            : value.note;
-        const hasTranslatedString = note?.includes(hardcodedStringForNote);
-        const notTranslatedInfo = hasTranslatedString
-          ? note?.split(hardcodedStringForNote)[1]
-          : note;
-        content = (
-          <div key={key}>
-            <fieldset>
-              <legend>{t(key)}</legend>
-              <br />
-              <Typography paragraph>
-                {t(formatYesNoData(value?.state))}
-              </Typography>
-              {hasTranslatedString && (
-                <Typography paragraph>
-                  {hasTranslatedString ? (
-                    <Trans
-                      i18nKey={hardcodedStringForNote}
-                      components={{
-                        1: <br />,
-                        2: (
-                          <a
-                            href="https://www.swisspass.ch/handicap"
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            swisspass.ch/handicap
-                          </a>
-                        ),
-                      }}
-                    />
-                  ) : null}
-                </Typography>
-              )}
-              {notTranslatedInfo && (
-                <Typography paragraph>{notTranslatedInfo}</Typography>
-              )}
-            </fieldset>
-            <br />
-          </div>
-        );
-      }
-
-      if (value && key === "passengerInformation") {
-        const entries = Object.entries(value).filter(([k, val]) => {
-          return val !== "NO" && val !== "UNKNOWN" && k !== "note";
-        });
-        content = !!entries.length && (
-          <div key={key}>
-            <fieldset>
-              <legend>{t(key)}</legend>
-              <br />
-              {entries.map(([k]) => {
-                return (
-                  <Fragment key={k}>
-                    <div>{t(k)}</div>
-                    <br />
-                  </Fragment>
-                );
-              })}
-            </fieldset>
-            <br />
-          </div>
-        );
-      }
-
-      if (value && key === "note") {
-        content = (
-          <div key={key}>
-            {typeof value === "object"
-              ? value[i18n.language] || value.de
-              : value}
-            <br />
-          </div>
-        );
-      }
-
-      if (value && key === "url") {
-        const url = /^http(s)?:\/\//.test(value) ? value : `https://${value}`;
-        let niceVal = value;
-        try {
-          niceVal = /^http(s)?:\/\//.test(url) ? new URL(url).hostname : value;
-        } catch (e) {
-          // eslint-disable-next-line no-console
-          console.log("StopPlacePopup. Not a parseable url: ", value);
-          niceVal = value;
-        }
-        content = (
-          <div key={key}>
-            <Link href={url}>{niceVal}</Link>
-            <br />
-          </div>
-        );
-      }
-
-      return content || null;
-    },
-    [i18n.language, t],
-  );
-
   const popupContent = useMemo(() => {
-    const content = Object.entries(data?.prmInformation || {})
-      .map(renderContent)
-      .filter(Boolean);
+    const infos = data?.prmInformation || {};
+    const accessibility = getAccessibility(
+      infos.accessibility,
+      i18n.language,
+      t,
+    );
+    const alternativeTransport = getAlternativeTransport(
+      infos.alternativeTransport,
+      i18n.language,
+      t,
+    );
+    const passengerInformation = getPassengetInformation(
+      infos.passengerInformation,
+      t,
+    );
+    const note = getNote(infos.note, i18n.language, t);
+    const url = getUrl(infos.url, i18n.language, t);
+    const content = [
+      accessibility,
+      alternativeTransport,
+      passengerInformation,
+      note,
+      url,
+    ].filter(Boolean);
     return content?.length ? content : t(`Keine Daten für diese Station`);
-  }, [data?.prmInformation, renderContent, t]);
+  }, [data?.prmInformation, i18n.language, t]);
 
   if (loading) {
     return <div>Loading ...</div>;
