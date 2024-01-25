@@ -124,7 +124,9 @@ const getAlternativeTransport = (value, language, t) => {
       <fieldset key="alternativeTransport">
         <legend>{t("alternativeTransport")}</legend>
         <div>{t("Shuttle-Fahrdienst")}</div>
-        {value.note?.[language] && <div>{value.note[language]}</div>}
+        {typeof value.note === "object"
+          ? value.note?.[language] || value.note?.de
+          : value}
       </fieldset>
     )
   );
