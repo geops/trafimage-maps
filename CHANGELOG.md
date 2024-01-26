@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.26.4](https://github.com/geops/trafimage-maps/compare/v1.26.3...v1.26.4) (2024-01-26)
+
+### Bug Fixes
+
+- change angular example ([#1136](https://github.com/geops/trafimage-maps/issues/1136)) ([27376e8](https://github.com/geops/trafimage-maps/commit/27376e88c49cf9374eec3831a04fced97d06f0fe))
+
 ### [1.26.3](https://github.com/geops/trafimage-maps/compare/v1.26.2...v1.26.3) (2024-01-25)
 
 ### Bug Fixes
