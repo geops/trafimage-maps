@@ -130,10 +130,15 @@ export default function app(state = getInitialState(), action) {
         projection: action.data,
       };
     case SET_GEOLOCATING:
-      return {
+      // eslint-disable-next-line no-case-declarations
+      const statee = {
         ...state,
         isGeolocating: action.data,
       };
+      if (action.data === true) {
+        statee.isFollowing = false;
+      }
+      return statee;
     case SET_FOLLOWING:
       return {
         ...state,
