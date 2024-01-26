@@ -44,8 +44,8 @@ import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
 import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
-import messwagenLayers from "./ch.sbb.messwagen";
-import MesswagenFollowButton from "./ch.sbb.messwagen/MesswagenFollowButton";
+import messwagenLayers from "./ch.sbb.funkmesswagen";
+import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
 // For backward compatibility
 export {
@@ -444,8 +444,8 @@ export const railPlus = {
 };
 
 export const messwagen = {
-  name: "ch.sbb.messwagen",
-  key: "ch.sbb.messwagen",
+  name: "ch.sbb.funkmesswagen",
+  key: "ch.sbb.funkmesswagen",
   layers: messwagenLayers,
   elements: {
     ...defaultElements,

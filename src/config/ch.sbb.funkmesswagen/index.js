@@ -9,43 +9,43 @@ import {
 } from "../ch.sbb.netzkarte";
 
 const messwagenDataLayer = dataLayer.clone({
-  key: `ch.sbb.messwagen.data`,
+  key: `ch.sbb.funkmesswagen.data`,
   visible: true,
 });
 
 const messwagenNetzkarte = netzkarteLayer.clone({
   mapboxLayer: messwagenDataLayer,
-  key: `ch.sbb.messwagen.netzkarte`,
+  key: `ch.sbb.funkmesswagen.netzkarte`,
   visible: false,
 });
 
 const messwagenNetzkarteNight = netzkarteNight.clone({
   mapboxLayer: messwagenDataLayer,
-  key: `ch.sbb.messwagen.netzkarte.night`,
+  key: `ch.sbb.funkmesswagen.netzkarte.night`,
   visible: true,
 });
 
 const messwagenNetzkarteAerial = netzkarteAerial.clone({
   mapboxLayer: messwagenDataLayer,
-  key: `ch.sbb.messwagen.aerial`,
+  key: `ch.sbb.funkmesswagen.aerial`,
   visible: true,
 });
 
 const messwagenLandeskarte = swisstopoLandeskarte.clone({
   mapboxLayer: messwagenDataLayer,
-  key: `ch.sbb.messwagen.landeskarte`,
+  key: `ch.sbb.funkmesswagen.landeskarte`,
   visible: false,
 });
 
 const messwagenLandeskarteGrau = swisstopoLandeskarteGrau.clone({
   mapboxLayer: messwagenDataLayer,
-  key: `ch.sbb.messwagen.landeskartegrau`,
+  key: `ch.sbb.funkmesswagen.landeskartegrau`,
   visible: false,
 });
 
 const mewa12 = new MesswagenLayer({
-  name: "ch.sbb.messwagen.mewa12",
-  group: "ch.sbb.messwagen",
+  name: "ch.sbb.funkmesswagen.mewa12",
+  group: "ch.sbb.funkmesswagen",
   visible: true,
   properties: {
     fileName: "mewa12",
@@ -53,8 +53,8 @@ const mewa12 = new MesswagenLayer({
 });
 
 const mb = new MesswagenLayer({
-  name: "ch.sbb.messwagen.mb",
-  group: "ch.sbb.messwagen",
+  name: "ch.sbb.funkmesswagen.mb",
+  group: "ch.sbb.funkmesswagen",
   visible: false,
   properties: {
     fileName: "mb",
@@ -62,8 +62,8 @@ const mb = new MesswagenLayer({
 });
 
 const mobile = new MesswagenLayer({
-  name: "ch.sbb.messwagen.mobile",
-  group: "ch.sbb.messwagen",
+  name: "ch.sbb.funkmesswagen.mobile",
+  group: "ch.sbb.funkmesswagen",
   visible: false,
   properties: {
     fileName: "mobile",

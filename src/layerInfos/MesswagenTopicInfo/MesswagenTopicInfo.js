@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 const desc = {
   de: (
     <p>
-      Anzeige der Position des Messwagens. Der Messwagen ist mit Messempfängern,
-      Testgeräten für Mobilfunk, Messantennen und Computern ausgestattet. Im
-      Wagen sind ausserdem Systeme zur Messung von Services (analoger Funk,
-      GSM-R, Polycom, GSM, UMTS und LTE) installiert.
+      Anzeige der Position des Messwagens. Der Funkmesswagen ist mit
+      Messempfängern, Testgeräten für Mobilfunk, Messantennen und Computern
+      ausgestattet. Im Wagen sind ausserdem Systeme zur Messung von Services
+      (analoger Funk, GSM-R, Polycom, GSM, UMTS und LTE) installiert.
     </p>
   ),
   en: (
