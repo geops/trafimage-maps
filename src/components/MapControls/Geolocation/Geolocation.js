@@ -84,6 +84,8 @@ function Geolocation() {
       );
       return;
     }
+    console.log("set true");
+    dispatch(setGeolocating(true));
     if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(
         "deviceorientationabsolute",
@@ -155,10 +157,6 @@ function Geolocation() {
         map={map}
         noCenterAfterDrag
         neverCenterToPosition={isFollowing}
-        onSuccess={() => {
-          console.log("success");
-          dispatch(setGeolocating(true));
-        }}
         onError={() => dispatch(setGeolocating(false))}
         colorOrStyleFunc={styleFunction}
       >
