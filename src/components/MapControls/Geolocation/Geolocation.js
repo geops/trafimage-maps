@@ -84,7 +84,6 @@ function Geolocation() {
       );
       return;
     }
-    console.log("set true");
     dispatch(setGeolocating(true));
     if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(
