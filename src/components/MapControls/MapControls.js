@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => {
       display: "flex",
       flexDirection: "column",
       top: 0,
-      right: 0,
+      right: (props) => props.overlayWidth,
       marginTop: (props) => props.margin,
       marginRight: (props) => props.margin,
       gap: (props) => props.margin,
