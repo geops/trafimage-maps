@@ -155,7 +155,10 @@ function Geolocation() {
         map={map}
         noCenterAfterDrag
         neverCenterToPosition={isFollowing}
-        onSuccess={() => dispatch(setGeolocating(true))}
+        onSuccess={() => {
+          console.log("success");
+          dispatch(setGeolocating(true));
+        }}
         onError={() => dispatch(setGeolocating(false))}
         colorOrStyleFunc={styleFunction}
       >
