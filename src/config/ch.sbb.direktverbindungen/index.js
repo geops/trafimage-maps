@@ -3,9 +3,6 @@ import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import DirektverbindungenLayer from "../../layers/DirektverbindungenLayer";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import { DV_HIT_TOLERANCE, DV_KEY } from "../../utils/constants";
-import netzkarteNightImg from "../../img/netzkarte_night.png";
-import netzkarte from "../../img/netzkarte.png";
-import luftbild from "../../img/luftbild.png";
 
 export const dataLayer = new TrafimageMapboxLayer({
   name: `${DV_KEY}.data`,
@@ -26,7 +23,7 @@ export const dvBaseLight = new MapboxStyleLayer({
   key: `${DV_KEY}.base-light`,
   group: "baseLayer",
   properties: {
-    previewImage: netzkarte,
+    previewImage: "ch.sbb.netzkarte",
     isBaseLayer: true,
     deselectOnChangeVisible: true,
   },
@@ -40,7 +37,7 @@ export const dvBaseDark = new MapboxStyleLayer({
   key: `${DV_KEY}.base-dark`,
   group: "baseLayer",
   properties: {
-    previewImage: netzkarteNightImg,
+    previewImage: "ch.sbb.netzkarte.dark",
     isBaseLayer: true,
     deselectOnChangeVisible: true,
   },
@@ -54,7 +51,7 @@ export const dvBaseAerial = new MapboxStyleLayer({
   key: `${DV_KEY}.base-aerial`,
   group: "baseLayer",
   properties: {
-    previewImage: luftbild,
+    previewImage: "ch.sbb.netzkarte.luftbild.group",
     isBaseLayer: true,
     deselectOnChangeVisible: true,
   },

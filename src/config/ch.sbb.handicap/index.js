@@ -1,5 +1,4 @@
 import { Style } from "ol/style";
-import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import { createPointStyleRenderer } from "../../utils/highlightPointStyle";
 
@@ -9,6 +8,7 @@ import {
   stationsLayer,
   bahnhofplaene,
 } from "../ch.sbb.netzkarte";
+import HandicapLayer from "../../layers/HandicapLayer";
 
 export const handicapDataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.handicap.data",
@@ -44,12 +44,11 @@ const handicapHighlightStyleSecondary = new Style({
   ]),
 });
 
-const barrierefrei = new MapboxStyleLayer({
+const barrierefrei = new HandicapLayer({
   name: "ch.sbb.barrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.barrierefrei/.test(metadata?.["handicap.filter"]);
-  },
+  styleLayersFilter: ({ metadata }) =>
+    /^symbol.barrierefrei/.test(metadata?.["handicap.filter"]),
   properties: {
     isQueryable: true,
     useOverlay: true,
@@ -58,12 +57,11 @@ const barrierefrei = new MapboxStyleLayer({
   },
 });
 
-const nichtBarrierefrei = new MapboxStyleLayer({
+const nichtBarrierefrei = new HandicapLayer({
   name: "ch.sbb.nichtbarrierfreierbahnhoefe",
   mapboxLayer: handicapDataLayer,
-  styleLayersFilter: ({ metadata }) => {
-    return /^symbol.nichtbarrierefrei/.test(metadata?.["handicap.filter"]);
-  },
+  styleLayersFilter: ({ metadata }) =>
+    /^symbol.nichtbarrierefrei/.test(metadata?.["handicap.filter"]),
   properties: {
     isQueryable: true,
     useOverlay: true,
@@ -102,11 +100,14 @@ const nichtBarrierefrei = new MapboxStyleLayer({
 //   },
 // });
 
-const statusUnbekannt = new MapboxStyleLayer({
+const statusUnbekannt = new HandicapLayer({
   name: "ch.sbb.status_unbekannt",
   mapboxLayer: handicapDataLayer,
   styleLayersFilter: ({ metadata }) => {
     return /^symbol.statusunbekannt/.test(metadata?.["handicap.filter"]);
+  },
+  queryRenderedLayers: ({ metadata }) => {
+    return /^symbol.statusunbekannt$/.test(metadata?.["handicap.filter"]);
   },
   properties: {
     isQueryable: true,

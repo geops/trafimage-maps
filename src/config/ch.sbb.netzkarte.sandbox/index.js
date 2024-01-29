@@ -2,7 +2,6 @@ import { Layer } from "mobility-toolbox-js/ol";
 import MapboxStyleLayer from "../../layers/MapboxStyleLayer";
 import LevelLayer from "../../layers/LevelLayer";
 import { dataLayer, netzkarteLayer } from "../ch.sbb.netzkarte";
-import netzkarte from "../../img/netzkarte.png";
 
 const sandboxDataLayer = dataLayer.clone({
   key: "ch.sbb.netzkarte.sandbox.data",
@@ -11,12 +10,13 @@ const sandboxNetzkarteLayer = netzkarteLayer.clone({
   key: "ch.sbb.netzkarte.sandbox",
   mapboxLayer: sandboxDataLayer,
 });
+
 export const poiLayer = new MapboxStyleLayer({
   name: "ROKAS-POIs",
   key: "ch.sbb.poi",
   group: "baseLayer",
   properties: {
-    previewImage: netzkarte,
+    previewImage: "ch.sbb.netzkarte",
     isBaseLayer: true,
   },
   visible: false,
