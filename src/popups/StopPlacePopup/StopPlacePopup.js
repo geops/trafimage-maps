@@ -88,7 +88,7 @@ const getAccessibility = (value, language, t) => {
     ? note?.split(hardcodedStringForNote)[1]
     : note;
   return (
-    <fieldset key="accessibility">
+    <fieldset key="accessibility" data-testid="stopplace-accessibility">
       <legend>{t("accessibility")}</legend>
       <Typography>{t(formatYesNoData(value?.state))}</Typography>
       {hasTranslatedString && (
@@ -121,12 +121,15 @@ const getAlternativeTransport = (value, language, t) => {
   if (!value) return null;
   return (
     !/^NO|UNKNOWN$/.test(value?.state) && (
-      <fieldset key="alternativeTransport">
+      <fieldset
+        key="alternativeTransport"
+        data-testid="stopplace-alternative-transport"
+      >
         <legend>{t("alternativeTransport")}</legend>
-        <div>{t("Shuttle-Fahrdienst")}</div>
+        <Typography>{t(formatYesNoData(value?.state))}</Typography>
         {typeof value.note === "object"
           ? value.note?.[language] || value.note?.de
-          : value}
+          : value.note}
       </fieldset>
     )
   );
@@ -139,10 +142,17 @@ const getPassengetInformation = (value, t) => {
   });
   return (
     !!entries.length && (
-      <fieldset key="passengerInformation">
+      <fieldset
+        key="passengerInformation"
+        data-testid="stopplace-passengerinfo"
+      >
         <legend>{t("passengerInformation")}</legend>
         {entries.map(([k]) => {
-          return <div key={k}>{t(k)}</div>;
+          return (
+            <div key={k} data-testid={`stopplace-passengerinfo-${k}`}>
+              {t(k)}
+            </div>
+          );
         })}
       </fieldset>
     )
@@ -152,7 +162,7 @@ const getPassengetInformation = (value, t) => {
 const getNote = (value, language, t) => {
   if (!value) return null;
   return (
-    <fieldset key="note">
+    <fieldset key="note" data-testid="stopplace-note">
       <legend>{t("Hinweise zur Haltestelle")}</legend>
       {typeof value === "object" ? value[language] || value.de : value}
     </fieldset>
@@ -171,7 +181,7 @@ const getUrl = (value, language, t) => {
     niceVal = value;
   }
   return (
-    <fieldset key="url">
+    <fieldset key="url" data-testid="stopplace-url">
       <legend>{t("Weitere Informationen")}</legend>
       <Link href={url}>{niceVal}</Link>
     </fieldset>
