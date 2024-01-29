@@ -74,6 +74,7 @@ const useStopPlaceData = (uic, cartaroUrl) => {
 const formatYesNoData = (data) => {
   if (data === "YES") return "Ja";
   if (data === "NO") return "Nein";
+  if (data === "PARTIALLY") return "Teilweise";
   return data;
 };
 
@@ -169,7 +170,7 @@ const getNote = (value, language, t) => {
   );
 };
 
-const getUrl = (value, language, t) => {
+const getUrl = (value, t) => {
   if (!value) return null;
   const url = /^http(s)?:\/\//.test(value) ? value : `https://${value}`;
   let niceVal = value;
@@ -214,7 +215,7 @@ function StopPlacePopup({ feature }) {
       t,
     );
     const note = getNote(infos.note, i18n.language, t);
-    const url = getUrl(infos.url, i18n.language, t);
+    const url = getUrl(infos.url, t);
     const content = [
       accessibility,
       alternativeTransport,
@@ -222,7 +223,7 @@ function StopPlacePopup({ feature }) {
       note,
       url,
     ].filter(Boolean);
-    return content?.length ? content : t(`Keine Daten für diese Station`);
+    return content?.length ? content : t("Keine Daten für diese Station");
   }, [data?.prmInformation, i18n.language, t]);
 
   if (loading) {
