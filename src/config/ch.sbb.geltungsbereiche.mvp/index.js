@@ -1,5 +1,7 @@
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import GeltungsbereicheLayer from "../../layers/GeltungsbereicheLayer";
+import { FORCE_EXPORT_PROPERTY } from "../../utils/constants";
+import LabelDisplaceLayer from "../../layers/LabelDisplaceLayer";
 
 export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.geltungsbereiche.mvp.data",
@@ -130,8 +132,23 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
   },
 });
 
+export const geltungsbereicheLabelsDisplace = new LabelDisplaceLayer({
+  name: "ch.sbb.geltungsbereiche.mvp-labels-displace",
+  visible: false,
+  mapboxLayer: geltungsbereicheDataLayer,
+  queryRenderedLayersFilter: ({ metadata }) =>
+    metadata && metadata["geltungsbereiche.filter"] === "printframe",
+  styleLayersFilter: ({ metadata }) =>
+    metadata && metadata["geltungsbereiche.filter"] === "printframe",
+  properties: {
+    hideInLegend: true,
+    [FORCE_EXPORT_PROPERTY]: true,
+  },
+});
+
 export default [
   geltungsbereicheDataLayer,
+  geltungsbereicheLabelsDisplace,
   geltungsbereicheSTS,
   geltungsbereicheTk,
   geltungsbereicheHta,

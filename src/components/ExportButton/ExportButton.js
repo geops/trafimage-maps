@@ -46,6 +46,7 @@ function ExportButton({
   exportZoom,
   exportExtent,
   exportCopyright,
+  onSaveStart,
   children,
   loadingComponent,
   style,
@@ -75,15 +76,25 @@ function ExportButton({
       format="image/jpeg"
       onSaveStart={() => {
         setLoading(true);
-        return getMapHd(
-          map,
-          new LayerService(layers),
-          exportScale,
-          exportCoordinates,
-          exportSize,
-          exportZoom,
-          exportExtent,
-        );
+        return onSaveStart
+          ? onSaveStart(
+              map,
+              new LayerService(layers),
+              exportScale,
+              exportCoordinates,
+              exportSize,
+              exportZoom,
+              exportExtent,
+            )
+          : getMapHd(
+              map,
+              new LayerService(layers),
+              exportScale,
+              exportCoordinates,
+              exportSize,
+              exportZoom,
+              exportExtent,
+            );
       }}
       onSaveEnd={async (mapToExport, canvas) => {
         if (!mapToExport) {
@@ -178,6 +189,7 @@ ExportButton.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
+  onSaveStart: PropTypes.func,
 };
 
 ExportButton.defaultProps = {
@@ -193,6 +205,7 @@ ExportButton.defaultProps = {
   style: {},
   id: null,
   scaleLineConfig: null,
+  onSaveStart: null,
 };
 
 export default React.memo(ExportButton);
