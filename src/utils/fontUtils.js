@@ -57,10 +57,6 @@ const sbbFontsBase64 = [
   sbbWebThin,
 ];
 
-/**
- *
- * @param {object} fonts object containing a family and a base64 attribute
- */
 export const getSBBFontsDefinition = async () => {
   const fontFacesPromises = sbbFontsBase64.map((font) =>
     getFontBase64FontFace(font.file, font.family),
