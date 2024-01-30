@@ -56,7 +56,7 @@ function GaExportMenu({ showModal, onClose }) {
     if (!exportSelection || !pdfSize) return null;
     let scale = 1;
     if (exportFullMap) {
-      scale = exportSelection.format === "a3" ? 1.59 : 2.25;
+      scale = exportSelection.format === "a3" ? 3.17 : 2.25;
     }
     return [pdfSize[0] * scale, pdfSize[1] * scale];
   }, [exportFullMap, exportSelection, pdfSize]);
@@ -66,6 +66,11 @@ function GaExportMenu({ showModal, onClose }) {
     const y = pdfSize[1] * exportSelection.resolution * 0.28;
     return { x, y };
   }, [exportSelection, pdfSize]);
+
+  const exportZoom = useMemo(() => {
+    if (!exportSelection || !exportFullMap) return zoom;
+    return exportSelection.format === "a3" ? 10 : 9;
+  }, [exportFullMap, exportSelection, zoom]);
 
   return (
     showModal && (
@@ -104,7 +109,7 @@ function GaExportMenu({ showModal, onClose }) {
                 exportScale={exportSelection?.resolution}
                 exportSize={mapSize}
                 exportExtent={null} // set null to override default extent
-                exportZoom={exportFullMap ? 9 : zoom}
+                exportZoom={exportZoom}
                 exportCoordinates={
                   exportFullMap
                     ? [SWISS_CENTER, SWISS_CENTER]

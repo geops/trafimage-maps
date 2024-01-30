@@ -14,7 +14,7 @@ import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn'
 import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
 import LayerService from "./LayerService";
-import SBBWebRoman from "./fonts/SBBWeb-Roman.woff";
+import { getSBBFontsDefinition } from "./fontUtils";
 
 const actualPixelRatio = window.devicePixelRatio;
 const geoJson = new GeoJSON();
@@ -55,34 +55,6 @@ const loadImage = (src) =>
     img.onerror = reject;
     img.src = src;
   });
-
-const toBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = reject;
-  });
-
-const getFontBase64Definition = (
-  fontBase64String,
-  fontFamily = "SBBWeb-Roman",
-  fontWeight = "normal",
-  fontStyle = "normal italic",
-) => {
-  return `
-  <defs>
-    <style type="text/css">
-      @font-face {
-        src: url(${fontBase64String});
-        font-family: '${fontFamily}';
-        font-weight: ${fontWeight};
-        font-style: ${fontStyle};
-      }
-    </style>
-  </defs>
-  `;
-};
 
 /**
  * Creates a styled scaleline element from the openlayers scaleline control
@@ -379,14 +351,6 @@ export const exportPdf = async (
      */
     let updatedSvg = svgString.slice(); // Clone the string
 
-    // Add SBB font definition to the SVG. Text elements in the SVG need to have "'SBBWeb-Roman','Arial','sans-serif'" as font-family
-    const sbbWebRomanBase64 = await fetch(SBBWebRoman)
-      .then((res) => res.blob())
-      .then((blob) => toBase64(blob));
-    const fontBase64DefinitionString =
-      getFontBase64Definition(sbbWebRomanBase64);
-    updatedSvg = updatedSvg.replace(">", `>${fontBase64DefinitionString}`);
-
     Object.keys(templateValues).forEach((key) => {
       const value =
         typeof templateValues[key] === "function"
@@ -404,9 +368,24 @@ export const exportPdf = async (
     );
     svgDoc.documentElement.removeAttribute("width");
     svgDoc.documentElement.removeAttribute("height");
+
+    // Remove SVG scaleline when using dynamic scaleline
     if (scaleLineConfig?.canvas) {
       svgDoc.documentElement.getElementById("scaleline")?.remove();
     }
+
+    // Insert SBB font definition as first child in the SVG
+    const fontDefsString = await getSBBFontsDefinition();
+    const fontDefsElement = new DOMParser().parseFromString(
+      fontDefsString,
+      "application/xml",
+    ).documentElement;
+    svgDoc.documentElement.insertBefore(
+      fontDefsElement,
+      svgDoc.documentElement.firstChild,
+    );
+
+    // Convert SVG to image
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
     const blob = new Blob([updatedSvg], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
@@ -416,6 +395,7 @@ export const exportPdf = async (
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
   }
 
+  // Add dynamic scaleline if defined
   if (scaleLineConfig?.canvas) {
     const { x, y, canvas: scaleLineCanvas } = scaleLineConfig;
     ctx.drawImage(scaleLineCanvas, x, y);
