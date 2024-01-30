@@ -33,9 +33,7 @@ const useStyles = makeStyles(() => ({
       backgroundColor: "#cdcdcd",
     },
   },
-  canvasButton: {
-    ...flexCenter,
-  },
+  canvasButton: { ...flexCenter },
 }));
 
 function ExportButton({
@@ -46,7 +44,6 @@ function ExportButton({
   exportZoom,
   exportExtent,
   exportCopyright,
-  onSaveStart,
   children,
   loadingComponent,
   style,
@@ -76,25 +73,15 @@ function ExportButton({
       format="image/jpeg"
       onSaveStart={() => {
         setLoading(true);
-        return onSaveStart
-          ? onSaveStart(
-              map,
-              new LayerService(layers),
-              exportScale,
-              exportCoordinates,
-              exportSize,
-              exportZoom,
-              exportExtent,
-            )
-          : getMapHd(
-              map,
-              new LayerService(layers),
-              exportScale,
-              exportCoordinates,
-              exportSize,
-              exportZoom,
-              exportExtent,
-            );
+        return getMapHd(
+          map,
+          new LayerService(layers),
+          exportScale,
+          exportCoordinates,
+          exportSize,
+          exportZoom,
+          exportExtent,
+        );
       }}
       onSaveEnd={async (mapToExport, canvas) => {
         if (!mapToExport) {
@@ -127,7 +114,7 @@ function ExportButton({
           .find((c) => c instanceof ScaleLine);
         const scaleLineElement =
           scaleLineControl &&
-          getStyledPdfScaleLine(scaleLineControl, exportSelection);
+          getStyledPdfScaleLine(scaleLineControl, exportSelection.resolution);
         const scaleLineCanvas =
           scaleLineElement && (await html2canvas(scaleLineElement));
 
@@ -189,7 +176,6 @@ ExportButton.propTypes = {
     x: PropTypes.number,
     y: PropTypes.number,
   }),
-  onSaveStart: PropTypes.func,
 };
 
 ExportButton.defaultProps = {
@@ -205,7 +191,6 @@ ExportButton.defaultProps = {
   style: {},
   id: null,
   scaleLineConfig: null,
-  onSaveStart: null,
 };
 
 export default React.memo(ExportButton);

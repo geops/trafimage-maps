@@ -8,6 +8,8 @@ import { LineString } from "ol/geom";
 import { getCenter } from "ol/extent";
 import { jsPDF as JsPDF } from "jspdf";
 import { ScaleLine } from "ol/control";
+import { GeoJSON } from "ol/format";
+import { Feature } from "ol";
 import NorthArrowCircle from "../img/northArrowCircle.png"; // svg export doesn't work for ie11
 import getLayersAsFlatArray from "./getLayersAsFlatArray";
 import { FORCE_EXPORT_PROPERTY } from "./constants";
@@ -15,6 +17,7 @@ import LayerService from "./LayerService";
 import SBBWebRoman from "./fonts/SBBWeb-Roman.woff";
 
 const actualPixelRatio = window.devicePixelRatio;
+const geoJson = new GeoJSON();
 
 const getStyleWithForceVisibility = (
   mbStyle,
@@ -81,14 +84,19 @@ const getFontBase64Definition = (
   `;
 };
 
-export const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
+/**
+ * Creates a styled scaleline element from the openlayers scaleline control
+ * @param {ol.controls.ScaleLineControl} scaleLineControl
+ * @param {number} resolution The resolution of the map
+ * @returns
+ */
+export const getStyledPdfScaleLine = (scaleLineControl, resolution = 1) => {
   const scaleLineElement = scaleLineControl?.element?.children[0];
   const width = parseInt(scaleLineElement.style.width, 10);
-  scaleLineElement.style.width = `${width * exportSelection.resolution}px`;
-  scaleLineElement.style.height = `${10 * exportSelection.resolution}px`;
-  scaleLineElement.style["font-size"] = `${8 * exportSelection.resolution}px`;
-  scaleLineElement.style["border-width"] =
-    `${1 * exportSelection.resolution}px`;
+  scaleLineElement.style.width = `${width * resolution}px`;
+  scaleLineElement.style.height = `${10 * resolution}px`;
+  scaleLineElement.style["font-size"] = `${8 * resolution}px`;
+  scaleLineElement.style["border-width"] = `${1 * resolution}px`;
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";
   scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
@@ -96,6 +104,61 @@ export const getStyledPdfScaleLine = (scaleLineControl, exportSelection) => {
   scaleLineElement.style["align-items"] = "center";
   scaleLineElement.style["justify-content"] = "center";
   return scaleLineElement;
+};
+
+/**
+ * Adds a layer with invisible labels to displace the labels at the edge of the exported map
+ * @param {maplibregl.Map} mbMap A maplibregl map
+ * @param {string} sourceId The id of the displace source
+ * @param {string} layerId The id of the displace layer
+ */
+const addLabelDisplaceLayer = (
+  mbMap,
+  sourceId = "printframe",
+  layerId = "print_frame_displacement",
+) => {
+  const extent = mbMap.getBounds().toArray();
+  const displaceSource = {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [
+        geoJson.writeFeatureObject(
+          new Feature(
+            new LineString([
+              extent[0],
+              [extent[0][0], extent[1][1]],
+              extent[1],
+              [extent[1][0], extent[0][1]],
+              extent[0],
+            ]),
+          ),
+        ),
+      ],
+    },
+  };
+  const displaceLayer = {
+    id: layerId,
+    type: "symbol",
+    source: "printframe",
+    metadata: { "geltungsbereiche.filter": "printframe" },
+    minzoom: 0,
+    maxzoom: 24,
+    layout: {
+      "symbol-placement": "line",
+      "symbol-spacing": 1,
+      "text-font": ["SBB Web Roman"],
+      "text-field": "x",
+      "text-size": 4,
+      "text-max-angle": 1000,
+      "text-pitch-alignment": "viewport",
+      "text-rotation-alignment": "viewport",
+      visibility: "visible",
+    },
+    paint: { "text-opacity": 0 },
+  };
+  mbMap.addSource(sourceId, displaceSource);
+  mbMap.addLayer(displaceLayer);
 };
 
 export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
@@ -119,6 +182,7 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
     animate: false,
   });
   const p = new Promise((resolve) => {
+    mbMap.on("load", () => addLabelDisplaceLayer(mbMap));
     mbMap.on("idle", () => {
       Object.defineProperty(window, "devicePixelRatio", {
         get() {
@@ -349,7 +413,7 @@ export const exportPdf = async (
     const image = await loadImage(url);
 
     // Add SVG to map canvas
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
   }
 
   if (scaleLineConfig?.canvas) {

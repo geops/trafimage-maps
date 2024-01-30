@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
@@ -6,12 +6,7 @@ import { useSelector } from "react-redux";
 import { Checkbox, FormControlLabel, Typography } from "@mui/material";
 import Dialog from "../../components/Dialog";
 import ExportResolutionSelect from "../ExportMenu/ExportResolutionSelect";
-import {
-  getMapHd,
-  optionsA3,
-  optionsA4,
-  sizesByFormat,
-} from "../../utils/exportUtils";
+import { optionsA3, optionsA4, sizesByFormat } from "../../utils/exportUtils";
 import ExportButton from "../../components/ExportButton/ExportButton";
 import useExportSelection from "../../utils/useExportSelection";
 
@@ -72,17 +67,6 @@ function GaExportMenu({ showModal, onClose }) {
     return { x, y };
   }, [exportSelection, pdfSize]);
 
-  const onSaveStart = useCallback(
-    (map, layerService, scale, coords, size, zoomm, extent) => {
-      const displaceLayer = layerService.getLayer(
-        "ch.sbb.geltungsbereiche.mvp-labels-displace",
-      );
-      displaceLayer.addDisplaceFeature();
-      return getMapHd(map, layerService, scale, coords, size, zoomm, extent);
-    },
-    [],
-  );
-
   return (
     showModal && (
       <Dialog
@@ -128,7 +112,6 @@ function GaExportMenu({ showModal, onClose }) {
                 }
                 exportCopyright={false}
                 scaleLineConfig={exportFullMap ? null : scaleLineConfig}
-                onSaveStart={onSaveStart}
               />
             </div>
           </div>
