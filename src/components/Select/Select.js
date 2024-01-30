@@ -4,13 +4,7 @@ import { Select as MuiSelect } from "@mui/material";
 import propTypes from "prop-types";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const useStyles = makeStyles((theme) => {
-  const list = {
-    // Should be apply by theme but it's not
-    "& .Mui-selected": {
-      color: theme.palette.primary.main,
-    },
-  };
+const useStyles = makeStyles(() => {
   const paper = {
     boxSizing: "border-box",
     borderRadius: 0,
@@ -28,11 +22,9 @@ const useStyles = makeStyles((theme) => {
     },
     listAnchorBottom: {
       borderTop: "1px solid rgba(0, 0, 0, 0.1)",
-      ...list,
     },
     listAnchorTop: {
       borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
-      ...list,
     },
   };
 });

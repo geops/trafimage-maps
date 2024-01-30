@@ -114,7 +114,7 @@ function ExportButton({
           .find((c) => c instanceof ScaleLine);
         const scaleLineElement =
           scaleLineControl &&
-          getStyledPdfScaleLine(scaleLineControl, exportSelection.resolution);
+          getStyledPdfScaleLine(scaleLineControl, exportSelection?.resolution);
         const scaleLineCanvas =
           scaleLineElement && (await html2canvas(scaleLineElement));
 
@@ -184,7 +184,7 @@ ExportButton.defaultProps = {
   exportCoordinates: null,
   exportZoom: null, // 10,
   exportExtent: [620000, 5741000, 1200000, 6058000],
-  exportCopyright: true,
+  exportCopyright: false,
   children: <DefaultChildren />,
   exportSize: [3370, 2384], // a0
   loadingComponent: <DefaultLoadingComponent />,

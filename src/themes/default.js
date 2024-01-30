@@ -281,10 +281,19 @@ const v5 = {
       styleOverrides: {
         root: {
           color: colors.gray,
+          padding: "10px 14px",
           "&:hover,&:focus": {
-            color: colors.redDark,
+            color: colors.red,
+            backgroundColor: "white",
           },
-          paddingLeft: 14,
+          "&.Mui-selected": {
+            color: colors.red,
+            backgroundColor: "white",
+            "&:hover,&:focus": {
+              color: colors.red,
+              backgroundColor: "white",
+            },
+          },
         },
       },
     },

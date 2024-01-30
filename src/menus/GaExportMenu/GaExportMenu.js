@@ -22,7 +22,7 @@ const useStyles = makeStyles(() => ({
   mainBody: {
     display: "flex",
     flexDirection: "column",
-    gap: 30,
+    gap: 25,
   },
   footer: {
     padding: "10px 0",
@@ -110,7 +110,6 @@ function GaExportMenu({ showModal, onClose }) {
                     ? [SWISS_CENTER, SWISS_CENTER]
                     : [center, center]
                 }
-                exportCopyright={false}
                 scaleLineConfig={exportFullMap ? null : scaleLineConfig}
               />
             </div>
