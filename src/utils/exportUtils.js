@@ -67,7 +67,7 @@ export const getStyledPdfScaleLine = (scaleLineControl, resolution = 1) => {
   const width = parseInt(scaleLineElement.style.width, 10);
   scaleLineElement.style.width = `${width * resolution}px`;
   scaleLineElement.style.height = `${10 * resolution}px`;
-  scaleLineElement.style["font-size"] = `${8 * resolution}px`;
+  scaleLineElement.style["font-size"] = `${7 * resolution}px`;
   scaleLineElement.style["border-width"] = `${1 * resolution}px`;
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";

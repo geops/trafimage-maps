@@ -9,6 +9,7 @@ import ExportResolutionSelect from "../ExportMenu/ExportResolutionSelect";
 import { optionsA3, optionsA4, sizesByFormat } from "../../utils/exportUtils";
 import ExportButton from "../../components/ExportButton/ExportButton";
 import useExportSelection from "../../utils/useExportSelection";
+import gbLegends from "../../img/geltungsbereicheLegends";
 
 const SWISS_CENTER = [903000, 5899500];
 
@@ -48,7 +49,11 @@ function GaExportMenu({ showModal, onClose }) {
   const exportSelection = useExportSelection(options);
   const zoom = useSelector((state) => state.map.zoom);
   const center = useSelector((state) => state.map.center);
+  const layers = useSelector((state) => state.app.activeTopic)?.layers;
   const [exportFullMap, setExportFullMap] = useState(false);
+  const visibleLayerName = useMemo(() => {
+    return layers.find((l) => !l.get("isBaseLayer") && l.visible)?.name;
+  }, [layers]);
   const pdfSize = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
@@ -56,20 +61,25 @@ function GaExportMenu({ showModal, onClose }) {
     if (!exportSelection || !pdfSize) return null;
     let scale = 1;
     if (exportFullMap) {
-      scale = exportSelection.format === "a3" ? 3.17 : 2.25;
+      scale = exportSelection.format === "a3" ? 1.95 : 2.25; // Magic scale factor to fit the map to pdf format
     }
     return [pdfSize[0] * scale, pdfSize[1] * scale];
   }, [exportFullMap, exportSelection, pdfSize]);
   const scaleLineConfig = useMemo(() => {
-    if (!exportSelection || !pdfSize) return null;
-    const x = pdfSize[0] * exportSelection.resolution * 0.026;
-    const y = pdfSize[1] * exportSelection.resolution * 0.28;
-    return { x, y };
-  }, [exportSelection, pdfSize]);
+    const getScaleLinePositionFunc = gbLegends.find(
+      (l) => l.name === visibleLayerName,
+    )?.getScaleLinePosition;
+    if (!exportSelection || !pdfSize || !getScaleLinePositionFunc) return null;
+    const scaleLinePosition = getScaleLinePositionFunc(
+      pdfSize[0],
+      exportSelection.resolution,
+    );
+    return scaleLinePosition;
+  }, [exportSelection, pdfSize, visibleLayerName]);
 
   const exportZoom = useMemo(() => {
     if (!exportSelection || !exportFullMap) return zoom;
-    return exportSelection.format === "a3" ? 10 : 9;
+    return exportSelection.format === "a3" ? 9.3 : 9;
   }, [exportFullMap, exportSelection, zoom]);
 
   return (

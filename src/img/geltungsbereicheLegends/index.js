@@ -36,48 +36,80 @@ const galegends = [
     language: "de",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3De,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "fr",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3Fr,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "it",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3It,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3En,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "de",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4De,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "fr",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4Fr,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "it",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4It,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4En,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
 ];
 
@@ -87,36 +119,60 @@ const sparAktionTagLegends = [
     language: "de",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3De,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "fr",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3Fr,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "it",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3It,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "en",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3En,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "de",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4De,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "fr",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4Fr,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
@@ -129,6 +185,10 @@ const sparAktionTagLegends = [
     language: "en",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4En,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
 ];
 
@@ -138,48 +198,80 @@ const halbtaxLegends = [
     language: "de",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3De,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "fr",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3Fr,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "it",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3It,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a3",
     language: "en",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3En,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "de",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4De,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "fr",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4Fr,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "it",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4It,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
   {
     format: "a4",
     language: "en",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4En,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.026,
+      y: pdfSize[1] * resolution * 0.28,
+    }),
   },
 ];
 
