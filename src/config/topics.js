@@ -1,4 +1,3 @@
-/* eslint-disable import/no-duplicates */
 import React from "react";
 import "./proj4";
 import tarifverbundkarteLegend from "../img/tarifverbund_legend.url.svg";
@@ -6,14 +5,6 @@ import railplusLegendDe from "../img/railplus_legend_de.url.svg";
 import railplusLegendFr from "../img/railplus_legend_fr.url.svg";
 import railplusLegendIt from "../img/railplus_legend_it.url.svg";
 import energieLegendPub from "../img/energie_legend_pub.url.svg";
-import gaLegendA3De from "../img/gaLegends/ga_legend_a3_de.svg";
-import gaLegendA3Fr from "../img/gaLegends/ga_legend_a3_de.svg";
-import gaLegendA3It from "../img/gaLegends/ga_legend_a3_de.svg";
-import gaLegendA3En from "../img/gaLegends/ga_legend_a3_de.svg";
-import gaLegendA4De from "../img/gaLegends/ga_legend_a4_de.svg";
-import gaLegendA4Fr from "../img/gaLegends/ga_legend_a4_de.svg";
-import gaLegendA4It from "../img/gaLegends/ga_legend_a4_de.svg";
-import gaLegendA4En from "../img/gaLegends/ga_legend_a4_de.svg";
 import railPlusLayers from "./ch.railplus.mitglieder";
 import netzkarteLayers, {
   dataLayer,
@@ -35,7 +26,11 @@ import beleuchtungLayers from "./ch.sbb.beleuchtungsstaerken";
 import isbLayers from "./ch.sbb.isb";
 import sandboxLayers from "./ch.sbb.netzkarte.sandbox";
 import zweitausbildungLayers from "./ch.sbb.zweitausbildung";
-import geltungsbereicheMvpLayers from "./ch.sbb.geltungsbereiche.mvp";
+import geltungsbereicheMvpLayers, {
+  geltungsbereicheTk,
+  geltungsbereicheHta,
+  geltungsbereicheGA,
+} from "./ch.sbb.geltungsbereiche.mvp";
 import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
 import stsLayers from "./ch.sbb.sts";
 import dvLayers from "./ch.sbb.direktverbindungen";
@@ -53,6 +48,7 @@ import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
 import GaExportMapButton from "../menus/GaExportMenu/GaExportMapButton";
+import geltungsbereicheLegends from "../img/geltungsbereicheLegends";
 
 // For backward compatibility
 export {
@@ -310,16 +306,19 @@ export const geltungsbereicheMvp = {
       }),
     }),
     getOverlayImageUrl: (lang, t, format) => {
-      switch (lang) {
-        case "fr":
-          return format === "a3" ? gaLegendA3Fr : gaLegendA4Fr;
-        case "it":
-          return format === "a3" ? gaLegendA3It : gaLegendA4It;
-        case "en":
-          return format === "a3" ? gaLegendA3En : gaLegendA4En;
-        default:
-          return format === "a3" ? gaLegendA3De : gaLegendA4De;
-      }
+      const visibleLayer = [
+        geltungsbereicheTk,
+        geltungsbereicheHta,
+        geltungsbereicheGA,
+      ].find((l) => l.visible);
+      return (
+        geltungsbereicheLegends.find(
+          (l) =>
+            l.format === format &&
+            l.language === lang &&
+            l.validity === visibleLayer.name,
+        )?.legend || geltungsbereicheLegends[0].legend
+      );
     },
     getExportFileName: (lang, t, format) =>
       `${t("Geltungsbereiche")}_${format.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`,

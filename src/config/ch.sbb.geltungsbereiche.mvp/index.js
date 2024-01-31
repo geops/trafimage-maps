@@ -1,6 +1,11 @@
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import GeltungsbereicheLayer from "../../layers/GeltungsbereicheLayer";
 
+export const GA_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-ga_s25";
+export const TK_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-tk";
+export const HALBTAX_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-hta";
+export const STS_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-sts";
+
 export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.geltungsbereiche.mvp.data",
   visible: true,
@@ -15,7 +20,7 @@ export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
 });
 
 export const geltungsbereicheGA = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-ga_s25",
+  name: GA_LAYER_KEY,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata["geltungsbereiche.filter"]?.includes("ga.line"),
@@ -43,7 +48,7 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
 });
 
 export const geltungsbereicheTk = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-tk",
+  name: TK_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -70,7 +75,7 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
 });
 
 export const geltungsbereicheHta = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-hta",
+  name: HALBTAX_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -98,7 +103,7 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
 });
 
 export const geltungsbereicheSTS = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-sts",
+  name: STS_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
