@@ -56,3 +56,6 @@ export const OVERLAY_MIN_HEIGHT = 55;
 export const FORCE_EXPORT_PROPERTY = "forceVisibilityOnPdf";
 export const RAILPLUS_EXPORTBTN_ID = "railplus-export-button";
 export const PDF_DOWNLOAD_EVENT_TYPE = "pdf-download-event";
+
+// hideInLayerTree values
+export const ONLY_WHEN_NOT_LOGGED_IN = "onlyWhenNotLoggedIn";

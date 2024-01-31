@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-function Geolocate({ onClick, color }) {
+function Geolocate({ onClick, color, className }) {
   const classes = useStyles({ color });
   return (
     <svg
@@ -28,6 +28,7 @@ function Geolocate({ onClick, color }) {
       width={40}
       height={40}
       onClick={() => onClick()}
+      className={className}
       color="currentColor"
     >
       <circle cx="20" cy="20" r="10" className={classes.geolocIconCircle} />
@@ -39,11 +40,13 @@ function Geolocate({ onClick, color }) {
 Geolocate.propTypes = {
   onClick: PropTypes.func,
   color: PropTypes.string,
+  className: PropTypes.string,
 };
 
 Geolocate.defaultProps = {
   onClick: () => {},
   color: "currentColor",
+  className: undefined,
 };
 
 export default Geolocate;

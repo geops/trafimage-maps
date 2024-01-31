@@ -9,11 +9,9 @@ describe("MapControls", () => {
   it("should move to the left corresponding to the overlay width.", () => {
     cy.viewport(1440, 900);
     cy.get('[data-testid="map-controls-wrapper"]')
-      .then(($el) => {
-        return window.getComputedStyle($el[0]);
-      })
+      .then(($mapControlsEl) => window.getComputedStyle($mapControlsEl[0]))
       .invoke("getPropertyValue", "right")
-      .should("equal", "15px");
+      .should("equal", "0px");
     cy.get(".wkp-search-input input")
       .focus()
       .type("B")
@@ -29,11 +27,9 @@ describe("MapControls", () => {
         10,
       );
       cy.get('[data-testid="map-controls-wrapper"]')
-        .then(($mapControlsEl) => {
-          return window.getComputedStyle($mapControlsEl[0]);
-        })
+        .then(($mapControlsEl) => window.getComputedStyle($mapControlsEl[0]))
         .invoke("getPropertyValue", "right")
-        .should("equal", `${overlayWidth + 15}px`);
+        .should("equal", `${overlayWidth}px`);
     });
   });
 

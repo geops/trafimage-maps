@@ -42,6 +42,8 @@ export const SET_REALTIME_KEY = "SET_REALTIME_KEY";
 export const SET_REALTIME_URL = "SET_REALTIME_URL";
 export const SET_DISPLAY_MENU = "SET_DISPLAY_MENU";
 export const SET_STOPS_URL = "SET_STOPS_URL";
+export const SET_GEOLOCATING = "SET_GEOLOCATING";
+export const SET_FOLLOWING = "SET_FOLLOWING";
 export const SET_OVERLAY_ELEMENT = "SET_OVERLAY_ELEMENT";
 
 export const setActiveTopic = (data) => ({ type: SET_ACTIVE_TOPIC, data });
@@ -64,6 +66,8 @@ export const setLanguage = (data) => {
   return { type: SET_LANGUAGE, data };
 };
 export const setProjection = (data) => ({ type: SET_PROJECTION, data });
+export const setGeolocating = (data) => ({ type: SET_GEOLOCATING, data });
+export const setFollowing = (data) => ({ type: SET_FOLLOWING, data });
 
 export const setFeatureInfo =
   (data = []) =>
