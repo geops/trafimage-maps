@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.27.0](https://github.com/geops/trafimage-maps/compare/v1.26.5...v1.27.0) (2024-01-31)
+
+### Features
+
+- add messwagen topic ([#1130](https://github.com/geops/trafimage-maps/issues/1130)) ([1dc52f0](https://github.com/geops/trafimage-maps/commit/1dc52f0923429d566794387171238c9e4106443b))
+
 ### [1.26.5](https://github.com/geops/trafimage-maps/compare/v1.26.4...v1.26.5) (2024-01-29)
 
 ### Bug Fixes
