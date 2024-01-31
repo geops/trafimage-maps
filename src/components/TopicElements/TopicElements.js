@@ -63,6 +63,8 @@ function TopicElements({ history }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
+  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
+
   const loginUrl = useSelector((state) => state.app.loginUrl);
   const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
@@ -105,6 +107,18 @@ function TopicElements({ history }) {
       layer.get("isBaseLayer"),
     );
   }, [activeTopic]);
+
+  // We define the images for the base layers using staticFilesUrl because they are too big to be encoded in base64.
+  // so when using in the web component (see angular example) the app is able to get them.
+  // Images are stored in the gitlab project.
+  const baseLayerImages = useMemo(() => {
+    const imgs = {};
+    baseLayers.forEach((layer) => {
+      imgs[layer.key] =
+        `${staticFilesUrl}/img/baselayer/${layer.get("previewImage")}.jpg`;
+    });
+    return imgs;
+  }, [baseLayers, staticFilesUrl]);
 
   const topicClassName = useMemo(() => {
     let classNamee = "";
@@ -202,6 +216,7 @@ function TopicElements({ history }) {
               openSwitcher: t("Baselayer-Menu öffnen"),
               closeSwitcher: t("Baselayer-Menu schliessen"),
             }}
+            layerImages={baseLayerImages}
             closeButtonImage={<ChevronLeft />}
             t={t}
           />
