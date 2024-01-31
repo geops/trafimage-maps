@@ -48,6 +48,8 @@ import {
   SET_STOPS_URL,
   SET_MAX_CANVAS_SIZE,
   SET_EXPORT_SELECTION,
+  SET_GEOLOCATING,
+  SET_FOLLOWING,
   SET_OVERLAY_ELEMENT,
 } from "./actions";
 
@@ -107,6 +109,8 @@ const getInitialState = () => ({
     localStorage.getItem(LS_SIZE_KEY) &&
     parseFloat(localStorage.getItem(LS_SIZE_KEY)),
   exportSelection: null,
+  isGeolocating: false,
+  isFollowing: false,
 });
 
 export default function app(state = getInitialState(), action) {
@@ -131,6 +135,21 @@ export default function app(state = getInitialState(), action) {
       return {
         ...state,
         projection: action.data,
+      };
+    case SET_GEOLOCATING:
+      // eslint-disable-next-line no-case-declarations
+      const statee = {
+        ...state,
+        isGeolocating: action.data,
+      };
+      if (action.data === true) {
+        statee.isFollowing = false;
+      }
+      return statee;
+    case SET_FOLLOWING:
+      return {
+        ...state,
+        isFollowing: action.data,
       };
     case SET_FEATURE_INFO:
       return {

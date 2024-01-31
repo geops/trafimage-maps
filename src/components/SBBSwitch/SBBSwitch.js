@@ -1,8 +1,8 @@
 import React from "react";
-import { withStyles } from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import { Switch } from "@mui/material";
 
-const StyledSwitch = withStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: 40,
     height: "100%",
@@ -37,11 +37,12 @@ const StyledSwitch = withStyles((theme) => ({
     backgroundColor: theme.palette.grey[500],
   },
   checked: {},
-}))(Switch);
+}));
 
 function SBBSwitch(props) {
+  const classes = useStyles();
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <StyledSwitch {...props} />;
+  return <Switch classes={classes} {...props} />;
 }
 
 export default SBBSwitch;

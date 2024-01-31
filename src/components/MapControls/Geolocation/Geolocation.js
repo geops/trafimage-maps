@@ -2,12 +2,13 @@ import React, { useRef, useCallback, useState, useEffect } from "react";
 import { Style, Icon } from "ol/style";
 import { makeStyles } from "@mui/styles";
 import RsGeolocation from "react-spatial/components/Geolocation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import MapButton from "../../MapButton";
 import Geolocate from "../../../img/Geolocate";
 import geolocateMarkerWithDirection from "../../../img/geolocate_marker_direction.svg";
 import geolocateMarker from "../../../img/geolocate_marker.svg";
+import { setGeolocating } from "../../../model/app/actions";
 
 const degreesToRadians = (degrees) => {
   return degrees * (Math.PI / 180);
@@ -19,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   geolocationActive: {
-    color: "#006aff",
+    color: "#c60018",
     "&:hover": {
-      color: "#006aff",
+      color: "#c60018",
     },
     "& svg": {
       animation: "$fadeInOut 1.5s infinite",
@@ -39,7 +40,9 @@ function Geolocation() {
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);
   const [geolocationFeature, setGeolocationFeature] = useState(null);
-  const [geolocating, setGeolocating] = useState(false);
+  const dispatch = useDispatch();
+  const isGeolocating = useSelector((state) => state.app.isGeolocating);
+  const isFollowing = useSelector((state) => state.app.isFollowing);
   const featureRef = useRef(geolocationFeature);
   const setGeolocFeatureWithRef = (feature) => {
     featureRef.current = feature;
@@ -71,9 +74,9 @@ function Geolocation() {
   );
 
   const onGeolocateToggle = useCallback(() => {
-    if (geolocating) {
+    if (isGeolocating) {
       // Deactivate geolocation
-      setGeolocating(false);
+      dispatch(setGeolocating(false));
       setGeolocFeatureWithRef();
       window.removeEventListener(
         "deviceorientation",
@@ -81,6 +84,7 @@ function Geolocation() {
       );
       return;
     }
+    dispatch(setGeolocating(true));
     if ("ondeviceorientationabsolute" in window) {
       window.addEventListener(
         "deviceorientationabsolute",
@@ -101,7 +105,7 @@ function Geolocation() {
     } else {
       window.addEventListener("deviceorientation", deviceOrientationListener);
     }
-  }, [deviceOrientationListener, geolocating]);
+  }, [deviceOrientationListener, dispatch, isGeolocating]);
 
   const styleFunction = useCallback(
     (feature) => {
@@ -142,7 +146,7 @@ function Geolocation() {
   return (
     <MapButton
       onClick={onGeolocateToggle}
-      className={`wkp-geolocation ${classes.geolocation} ${geolocating ? classes.geolocationActive : ""}`}
+      className={`wkp-geolocation ${classes.geolocation} ${isGeolocating ? classes.geolocationActive : ""}`}
       data-testid="map-controls-geolocation"
       tabIndex={-1}
     >
@@ -151,11 +155,14 @@ function Geolocation() {
         className={classes.rsGeolocation}
         map={map}
         noCenterAfterDrag
-        onSuccess={() => setGeolocating(true)}
-        onError={() => setGeolocating(false)}
+        neverCenterToPosition={isFollowing}
+        onError={() => dispatch(setGeolocating(false))}
         colorOrStyleFunc={styleFunction}
       >
-        <Geolocate focusable={false} />
+        <Geolocate
+          className={isGeolocating ? "pulse" : null}
+          focusable={false}
+        />
       </RsGeolocation>
     </MapButton>
   );
