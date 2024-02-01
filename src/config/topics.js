@@ -319,7 +319,7 @@ export const geltungsbereicheMvp = {
           (l) =>
             l.format === format &&
             l.language === lang &&
-            l.validity === visibleLayer.name,
+            l.validity === visibleLayer?.name,
         )?.legend || geltungsbereicheLegends[0].legend
       );
     },
