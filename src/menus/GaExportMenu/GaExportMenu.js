@@ -47,7 +47,7 @@ const options = [...optionsA3, ...optionsA4].filter((opt) =>
 );
 
 function GaExportMenu({ onClose }) {
-  const { t } = useTranslation();
+  const { i18n, t } = useTranslation();
   const classesBody = useStylesBody();
   const classesDialog = useStylesDialog();
   const exportPrintOptions = useExportPrintOptions(options);
@@ -73,17 +73,18 @@ function GaExportMenu({ onClose }) {
   }, [exportFullMap, exportPrintOptions, pdfSize]);
 
   const scaleLineConfig = useMemo(() => {
+    if (!exportPrintOptions || !pdfSize) return null;
     const getScaleLinePositionFunc = gbLegends.find(
-      (l) => l.validity === visibleLayerName,
+      (l) =>
+        l.validity === visibleLayerName &&
+        l.paperSize === exportPrintOptions.paperSize &&
+        l.language === i18n.language,
     )?.getScaleLinePosition;
-    if (!exportPrintOptions || !pdfSize || !getScaleLinePositionFunc)
-      return null;
-    const scaleLinePosition = getScaleLinePositionFunc(
-      pdfSize,
-      exportPrintOptions.quality,
-    );
+    const scaleLinePosition = getScaleLinePositionFunc
+      ? getScaleLinePositionFunc(pdfSize, exportPrintOptions.quality)
+      : null;
     return scaleLinePosition;
-  }, [exportPrintOptions, pdfSize, visibleLayerName]);
+  }, [exportPrintOptions, pdfSize, visibleLayerName, i18n.language]);
 
   const exportZoom = useMemo(() => {
     if (!exportPrintOptions || !exportFullMap) return zoom;

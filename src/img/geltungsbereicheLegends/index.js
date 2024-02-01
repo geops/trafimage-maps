@@ -32,7 +32,7 @@ import { TK_LAYER_KEY } from "../../config/ch.sbb.geltungsbereiche.mvp";
 
 const galegends = [
   {
-    format: "a3",
+    paperSize: "a3",
     language: "de",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3De,
@@ -42,7 +42,7 @@ const galegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "fr",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3Fr,
@@ -52,7 +52,7 @@ const galegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "it",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3It,
@@ -62,7 +62,7 @@ const galegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3En,
@@ -72,50 +72,50 @@ const galegends = [
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "de",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4De,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "fr",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4Fr,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "it",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4It,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4En,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
 ];
 
 const sparAktionTagLegends = [
   {
-    format: "a3",
+    paperSize: "a3",
     language: "de",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3De,
@@ -125,7 +125,7 @@ const sparAktionTagLegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "fr",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3Fr,
@@ -135,7 +135,7 @@ const sparAktionTagLegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "it",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3It,
@@ -145,7 +145,7 @@ const sparAktionTagLegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "en",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3En,
@@ -155,46 +155,50 @@ const sparAktionTagLegends = [
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "de",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4De,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "fr",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4Fr,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "it",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4It,
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
+    }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "en",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4En,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
 ];
 
 const halbtaxLegends = [
   {
-    format: "a3",
+    paperSize: "a3",
     language: "de",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3De,
@@ -204,7 +208,7 @@ const halbtaxLegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "fr",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3Fr,
@@ -214,7 +218,7 @@ const halbtaxLegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "it",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3It,
@@ -224,7 +228,7 @@ const halbtaxLegends = [
     }),
   },
   {
-    format: "a3",
+    paperSize: "a3",
     language: "en",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3En,
@@ -234,43 +238,43 @@ const halbtaxLegends = [
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "de",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4De,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "fr",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4Fr,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "it",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4It,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
   {
-    format: "a4",
+    paperSize: "a4",
     language: "en",
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA4En,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.29,
     }),
   },
 ];
