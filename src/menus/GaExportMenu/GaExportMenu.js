@@ -54,9 +54,11 @@ function GaExportMenu({ showModal, onClose }) {
   const visibleLayerName = useMemo(() => {
     return layers.find((l) => !l.get("isBaseLayer") && l.visible)?.name;
   }, [layers]);
+
   const pdfSize = useMemo(() => {
     return sizesByFormat[exportSelection?.format];
   }, [exportSelection]);
+
   const mapSize = useMemo(() => {
     if (!exportSelection || !pdfSize) return null;
     let scale = 1;
@@ -65,6 +67,7 @@ function GaExportMenu({ showModal, onClose }) {
     }
     return [pdfSize[0] * scale, pdfSize[1] * scale];
   }, [exportFullMap, exportSelection, pdfSize]);
+
   const scaleLineConfig = useMemo(() => {
     const getScaleLinePositionFunc = gbLegends.find(
       (l) => l.name === visibleLayerName,
