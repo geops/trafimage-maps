@@ -36,12 +36,10 @@ const galegends = [
     language: "de",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3De,
-    getScaleLinePosition: (pdfSize, resolution) => {
-      return {
-        x: pdfSize[0] * resolution * 0.021,
-        y: pdfSize[1] * resolution * 0.27,
-      };
-    },
+    getScaleLinePosition: (pdfSize, resolution) => ({
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
+    }),
   },
   {
     format: "a3",
@@ -122,8 +120,8 @@ const sparAktionTagLegends = [
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3De,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -132,8 +130,8 @@ const sparAktionTagLegends = [
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3Fr,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -142,8 +140,8 @@ const sparAktionTagLegends = [
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3It,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -152,8 +150,8 @@ const sparAktionTagLegends = [
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3En,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -201,8 +199,8 @@ const halbtaxLegends = [
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3De,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -211,8 +209,8 @@ const halbtaxLegends = [
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3Fr,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -221,8 +219,8 @@ const halbtaxLegends = [
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3It,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -231,8 +229,8 @@ const halbtaxLegends = [
     validity: HALBTAX_LAYER_KEY,
     legend: halbtaxLegendA3En,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
