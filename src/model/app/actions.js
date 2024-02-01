@@ -43,7 +43,7 @@ export const SET_REALTIME_URL = "SET_REALTIME_URL";
 export const SET_DISPLAY_MENU = "SET_DISPLAY_MENU";
 export const SET_STOPS_URL = "SET_STOPS_URL";
 export const SET_MAX_CANVAS_SIZE = "SET_MAX_CANVAS_SIZE";
-export const SET_EXPORT_SELECTION = "SET_EXPORT_SELECTION";
+export const SET_EXPORT_PRINT_OPTIONS = "SET_EXPORT_PRINT_OPTIONS";
 export const SET_GEOLOCATING = "SET_GEOLOCATING";
 export const SET_FOLLOWING = "SET_FOLLOWING";
 export const SET_OVERLAY_ELEMENT = "SET_OVERLAY_ELEMENT";
@@ -364,8 +364,8 @@ export const setMaxCanvasSize = (data) => ({
   data,
 });
 
-export const setExportSelection = (data) => ({
-  type: SET_EXPORT_SELECTION,
+export const setExportPrintOptions = (data) => ({
+  type: SET_EXPORT_PRINT_OPTIONS,
   data,
 });
 

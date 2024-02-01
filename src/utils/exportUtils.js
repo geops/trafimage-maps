@@ -275,34 +275,37 @@ export const clean = (mapToExport) => {
   mapToExport.setTarget(null);
 };
 
-export const generateExtraData = (layers, exportNorthArrow) => {
+export const generateExtraData = (layers, options = { copyright: true }) => {
+  const { copyright, northArrow } = options;
   const extraData = {};
 
-  extraData.copyright = {
-    text: () => {
-      const copyrights = getLayersAsFlatArray(layers)
-        .filter((layer) => layer.visible && layer.copyrights)
-        .map((layer) => {
-          // Parse the copyright html drawn from the layer
-          const parsed = new DOMParser().parseFromString(
-            layer.copyrights,
-            "text/html",
-          );
-          const copyrightArray = [];
-          const coll = parsed.getElementsByTagName("a");
-          for (let i = 0; i < coll.length; i += 1) {
-            const copyright = coll[i];
-            copyrightArray.push(copyright.text);
-          }
-          return copyrightArray;
-        })
-        .flat();
-      const unique = Array.from(new Set(copyrights));
-      return unique.join(" | ");
-    },
-  };
+  if (copyright) {
+    extraData.copyright = {
+      text: () => {
+        const copyrights = getLayersAsFlatArray(layers)
+          .filter((layer) => layer.visible && layer.copyrights)
+          .map((layer) => {
+            // Parse the copyright html drawn from the layer
+            const parsed = new DOMParser().parseFromString(
+              layer.copyrights,
+              "text/html",
+            );
+            const copyrightArray = [];
+            const coll = parsed.getElementsByTagName("a");
+            for (let i = 0; i < coll.length; i += 1) {
+              const cpyright = coll[i];
+              copyrightArray.push(cpyright.text);
+            }
+            return copyrightArray;
+          })
+          .flat();
+        const unique = Array.from(new Set(copyrights));
+        return unique.join(" | ");
+      },
+    };
+  }
 
-  if (exportNorthArrow) {
+  if (northArrow) {
     extraData.northArrow = {
       src: NorthArrowCircle,
     };
@@ -442,38 +445,38 @@ export const getHighestPossibleRes = (maxCanvasSize, map, options) => {
   const highestRes = options.reduce((final, option) => {
     let newFinal = { ...final };
     if (
-      !validateOption(option.format, option.resolution, maxCanvasSize, map) &&
+      !validateOption(option.paperSize, option.quality, maxCanvasSize, map) &&
       option.weight > (final.weight || 0)
     ) {
       newFinal = option;
     }
     return newFinal;
   });
-  return { format: highestRes.format, resolution: highestRes.resolution };
+  return { paperSize: highestRes.paperSize, quality: highestRes.quality };
 };
 
 export const optionsA0 = [
-  { label: "A0 (72 dpi)", resolution: 1, format: "a0", weight: 8 },
-  { label: "A0 (150 dpi)", resolution: 2, format: "a0", weight: 10 },
-  { label: "A0 (300 dpi)", resolution: 3, format: "a0", weight: 12 },
+  { label: "A0 (72 dpi)", quality: 1, paperSize: "a0", weight: 8 },
+  { label: "A0 (150 dpi)", quality: 2, paperSize: "a0", weight: 10 },
+  { label: "A0 (300 dpi)", quality: 3, paperSize: "a0", weight: 12 },
 ];
 
 export const optionsA1 = [
-  { label: "A1 (72 dpi)", resolution: 1, format: "a1", weight: 7 },
-  { label: "A1 (150 dpi)", resolution: 2, format: "a1", weight: 9 },
-  { label: "A1 (300 dpi)", resolution: 3, format: "a1", weight: 11 },
+  { label: "A1 (72 dpi)", quality: 1, paperSize: "a1", weight: 7 },
+  { label: "A1 (150 dpi)", quality: 2, paperSize: "a1", weight: 9 },
+  { label: "A1 (300 dpi)", quality: 3, paperSize: "a1", weight: 11 },
 ];
 
 export const optionsA3 = [
-  { label: "A3 (72 dpi)", resolution: 1, format: "a3", weight: 2 },
-  { label: "A3 (150 dpi)", resolution: 2, format: "a3", weight: 4 },
-  { label: "A3 (300 dpi)", resolution: 3, format: "a3", weight: 6 },
+  { label: "A3 (72 dpi)", quality: 1, paperSize: "a3", weight: 2 },
+  { label: "A3 (150 dpi)", quality: 2, paperSize: "a3", weight: 4 },
+  { label: "A3 (300 dpi)", quality: 3, paperSize: "a3", weight: 6 },
 ];
 
 export const optionsA4 = [
-  { label: "A4 (72 dpi)", resolution: 1, format: "a4", weight: 1 },
-  { label: "A4 (150 dpi)", resolution: 2, format: "a4", weight: 3 },
-  { label: "A4 (300 dpi)", resolution: 3, format: "a4", weight: 5 },
+  { label: "A4 (72 dpi)", quality: 1, paperSize: "a4", weight: 1 },
+  { label: "A4 (150 dpi)", quality: 2, paperSize: "a4", weight: 3 },
+  { label: "A4 (300 dpi)", quality: 3, paperSize: "a4", weight: 5 },
 ];
 
 export const exportOptions = [

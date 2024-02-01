@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { BsDownload } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
+import { unByKey } from "ol/Observable";
 import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
 import useIsMobile from "../../utils/useIsMobile";
@@ -13,10 +14,8 @@ const useVisibleLayer = (layers) => {
   }, [layers]);
   useEffect(() => {
     getVisible();
-    layers.forEach((l) => l.on("change:visible", getVisible));
-    return () => {
-      layers.forEach((l) => l.un("change:visible", getVisible));
-    };
+    const listeners = layers.map((l) => l.on("change:visible", getVisible));
+    return () => unByKey(listeners);
   }, [layers, getVisible]);
   return visible;
 };
@@ -41,7 +40,7 @@ function GaExportMapButton() {
         >
           <BsDownload />
         </MapButton>
-        <GaExportMenu showModal={showMenu} onClose={() => setShowMenu(false)} />
+        {showMenu && <GaExportMenu onClose={() => setShowMenu(false)} />}
       </>
     )
   );

@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import MenuItem from "../../components/Menu/MenuItem";
 import ExportButton from "../../components/ExportButton";
 import ExportResolutionSelect from "./ExportResolutionSelect";
-import useExportSelection from "../../utils/useExportSelection";
+import useExportPrintOptions from "../../utils/useExportPrintOptions";
 import { sizesByFormat, optionsA0, optionsA1 } from "../../utils/exportUtils";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ function ExportMenu() {
   }, [activeTopic]);
   const [collapsed, setCollapsed] = useState(collapsedOnLoad);
   const { t } = useTranslation();
-  const exportSelection = useExportSelection(options);
+  const exportPrintOptions = useExportPrintOptions(options);
 
   useEffect(() => {
     // Open menu item when loading/switching topic
@@ -59,7 +59,7 @@ function ExportMenu() {
     }
   }, [menuOpen, collapsedOnLoad]);
 
-  if (!exportSelection) return null;
+  if (!exportPrintOptions) return null;
 
   return (
     <MenuItem
@@ -75,9 +75,9 @@ function ExportMenu() {
         <div className={classes.selectWrapper}>
           <ExportResolutionSelect options={options} />
           <ExportButton
-            exportFormat={exportSelection.format}
-            exportScale={exportSelection.resolution}
-            exportSize={sizesByFormat[exportSelection.format]}
+            exportFormat={exportPrintOptions.paperSize}
+            exportScale={exportPrintOptions.quality}
+            exportSize={sizesByFormat[exportPrintOptions.paperSize]}
           />
         </div>
         <div className={classes.infoWrapper}>

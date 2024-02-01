@@ -9,13 +9,15 @@ export const STS_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-sts";
 export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.geltungsbereiche.mvp.data",
   visible: true,
-  preserveDrawingBuffer: true,
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: "base_bright_v2_ch.sbb.geltungsbereiche_ga",
   properties: {
     hideInLegend: true,
     isBaseLayer: true,
+  },
+  mapOptions: {
+    preserveDrawingBuffer: true,
   },
 });
 

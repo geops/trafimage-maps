@@ -19,7 +19,6 @@
     "cancelable-promise": "4.3.1",
     "canvas-size": "1.2.6",
     "color": "4.2.3",
-    "deepmerge": "4.3.1",
     "html2canvas": "^1.4.1",
     "i18next": "23.8.1",
     "i18next-browser-languagedetector": "7.2.0",

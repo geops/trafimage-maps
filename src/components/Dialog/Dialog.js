@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { MdClose } from "react-icons/md";
 import Draggable from "react-draggable";
-import deepmerge from "deepmerge";
 import { setDialogVisible, setDialogPosition } from "../../model/app/actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -192,13 +191,14 @@ function Dialog(props) {
     PaperComponent: isSmallScreen
       ? PaperComponent
       : React.memo(DraggablePaperComponent),
-    classes: deepmerge(classesProp, {
-      root: !isSmallScreen ? classes.rootDesktop : "",
-      scrollPaper: classes.scrollPaper,
+    classes: {
+      ...classesProp,
+      root: `${!isSmallScreen ? classes.rootDesktop : ""}${classesProp.root ? ` ${classesProp.root}` : ""}`,
+      scrollPaper: `${classes.scrollPaper}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
       paper: `${classes.paper} ${className || ""} ${
         isSmallScreen ? classes.paperMobile : ""
-      }`,
-    }),
+      }${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
+    },
   };
 
   // Props for modal dialog
@@ -207,10 +207,11 @@ function Dialog(props) {
       hideBackdrop: false,
       maxWidth: "md",
       PaperComponent,
-      classes: deepmerge(classesProp, {
-        scrollPaper: classes.scrollPaperModal,
-        paper: `${classes.paperModal} ${className || ""}`,
-      }),
+      classes: {
+        ...classesProp,
+        scrollPaper: `${classes.scrollPaperModal}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
+        paper: `${classes.paperModal} ${className || ""}${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
+      },
     };
   }
 

@@ -54,6 +54,13 @@ class TopicMenu extends PureComponent {
       isCollapsed: false,
       currentBaseLayerKey: null,
     };
+
+    this.titles = {
+      layerShow: props.t("Layer anzeigen"),
+      layerHide: props.t("Layer verbergen"),
+      subLayerShow: props.t("Layer anzeigen"),
+      subLayerHide: props.t("Layer verbergen"),
+    };
   }
 
   onTopicClick(topic) {
@@ -99,12 +106,7 @@ class TopicMenu extends PureComponent {
             isItemHidden={(l) => l.get("isBaseLayer") || l.get("hideInLegend")}
             layers={layers}
             t={t}
-            titles={{
-              layerShow: t("Layer anzeigen"),
-              layerHide: t("Layer verbergen"),
-              subLayerShow: t("Layer anzeigen"),
-              subLayerHide: t("Layer verbergen"),
-            }}
+            titles={this.titles}
             renderLabel={(layer) => {
               return <Trans i18nKey={layer.name} />;
             }}
@@ -208,7 +210,6 @@ class TopicMenu extends PureComponent {
                       const val = name || key;
                       return val === value || val === value;
                     });
-                    // baseLayer.setVisible(true);
                     baseLayer.visible = true;
                     this.setState({
                       currentBaseLayerKey: baseLayer.name || baseLayer.key,

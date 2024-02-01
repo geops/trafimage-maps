@@ -308,7 +308,7 @@ export const geltungsbereicheMvp = {
         month: "2-digit",
       }),
     }),
-    getOverlayImageUrl: (lang, t, format) => {
+    getOverlayImageUrl: (lang, paperSize) => {
       const visibleLayer = [
         geltungsbereicheTk,
         geltungsbereicheHta,
@@ -317,14 +317,14 @@ export const geltungsbereicheMvp = {
       return (
         geltungsbereicheLegends.find(
           (l) =>
-            l.format === format &&
+            l.paperSize === paperSize &&
             l.language === lang &&
             l.validity === visibleLayer?.name,
         )?.legend || geltungsbereicheLegends[0].legend
       );
     },
-    getExportFileName: (lang, t, format) =>
-      `${t("Geltungsbereiche")}_${format.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`,
+    getExportFileName: (t, paperSize) =>
+      `${t("Geltungsbereiche")}_${paperSize.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`,
   },
 };
 
@@ -469,7 +469,7 @@ export const railPlus = {
           return railplusLegendDe;
       }
     },
-    getExportFileName: (lang, t) =>
+    getExportFileName: (t) =>
       `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,

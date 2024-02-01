@@ -47,7 +47,7 @@ import {
   SET_DISPLAY_MENU,
   SET_STOPS_URL,
   SET_MAX_CANVAS_SIZE,
-  SET_EXPORT_SELECTION,
+  SET_EXPORT_PRINT_OPTIONS,
   SET_GEOLOCATING,
   SET_FOLLOWING,
   SET_OVERLAY_ELEMENT,
@@ -108,7 +108,7 @@ const getInitialState = () => ({
   maxCanvasSize:
     localStorage.getItem(LS_SIZE_KEY) &&
     parseFloat(localStorage.getItem(LS_SIZE_KEY)),
-  exportSelection: null,
+  exportPrintOptions: null,
   isGeolocating: false,
   isFollowing: false,
 });
@@ -347,10 +347,10 @@ export default function app(state = getInitialState(), action) {
         ...state,
         maxCanvasSize: action.data,
       };
-    case SET_EXPORT_SELECTION:
+    case SET_EXPORT_PRINT_OPTIONS:
       return {
         ...state,
-        exportSelection: action.data,
+        exportPrintOptions: action.data,
       };
     case SET_OVERLAY_ELEMENT:
       return {

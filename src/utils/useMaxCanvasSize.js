@@ -27,7 +27,7 @@ const useMaxCanvasSize = () => {
             .catch((result) => console.log("Error", result)),
         );
     }
-    return () => maxCanvasPromise && maxCanvasPromise.cancel();
+    return () => maxCanvasPromise?.cancel();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
   return mCanvasSize;

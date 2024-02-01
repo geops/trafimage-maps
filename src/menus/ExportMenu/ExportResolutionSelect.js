@@ -6,9 +6,9 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "../../components/Select";
 import { validateOption } from "../../utils/exportUtils";
-import { setExportSelection } from "../../model/app/actions";
+import { setExportPrintOptions } from "../../model/app/actions";
 import useMaxCanvasSize from "../../utils/useMaxCanvasSize";
-import useExportSelection from "../../utils/useExportSelection";
+import useExportPrintOptions from "../../utils/useExportPrintOptions";
 
 const useStyles = makeStyles(() => ({
   label: {
@@ -23,50 +23,40 @@ function ExportResolutionSelect({ options, className }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const maxCanvasSize = useMaxCanvasSize();
-  const exportSelection = useExportSelection(options);
-  const [value, setValue] = useState(exportSelection);
+  const exportPrintOptions = useExportPrintOptions(options);
+  const [value, setValue] = useState(exportPrintOptions);
 
   useEffect(() => {
-    if (exportSelection) {
+    if (exportPrintOptions) {
       setValue(
         options.find(
           (opt) =>
-            opt.resolution === exportSelection.resolution &&
-            opt.format === exportSelection.format,
+            opt.quality === exportPrintOptions.quality &&
+            opt.paperSize === exportPrintOptions.paperSize,
         ),
       );
     }
-  }, [exportSelection, options]);
+  }, [exportPrintOptions, options]);
 
-  if (!exportSelection || !value) return null;
+  if (!exportPrintOptions || !value) return null;
 
   return (
     <FormControl fullWidth className={className}>
-      <InputLabel className={classes.label} id="pdf-format-select-label">
-        {t("Format")}
-      </InputLabel>
+      <InputLabel className={classes.label}>{t("Format")}</InputLabel>
       <Select
-        labelId="pdf-format-select-label"
         id="pdf-format-select-label"
         className={classes.input}
         value={value}
-        onChange={(evt) =>
-          dispatch(
-            setExportSelection({
-              format: evt.target.value.format,
-              resolution: evt.target.value.resolution,
-            }),
-          )
-        }
+        onChange={(evt) => dispatch(setExportPrintOptions(evt.target.value))}
       >
         {options.map((opt) => {
           return (
             <MenuItem
-              key={`${opt.format}-${opt.resolution}`}
+              key={`${opt.paperSize}-${opt.quality}`}
               value={opt}
               disabled={validateOption(
-                `${opt.format}`,
-                opt.resolution,
+                `${opt.paperSize}`,
+                opt.quality,
                 maxCanvasSize,
                 map,
               )}
@@ -84,8 +74,8 @@ ExportResolutionSelect.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      format: PropTypes.string.isRequired,
-      resolution: PropTypes.number.isRequired,
+      paperSize: PropTypes.string.isRequired,
+      quality: PropTypes.number.isRequired,
     }),
   ).isRequired,
   className: PropTypes.string,

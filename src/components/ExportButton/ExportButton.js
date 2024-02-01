@@ -54,7 +54,9 @@ function ExportButton({
   const map = useSelector((state) => state.app.map);
   const topic = useSelector((state) => state.app.activeTopic);
   const layers = useSelector((state) => state.map.layers);
-  const exportSelection = useSelector((state) => state.app.exportSelection);
+  const exportPrintOptions = useSelector(
+    (state) => state.app.exportPrintOptions,
+  );
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
@@ -102,9 +104,9 @@ function ExportButton({
             : {};
           imageUrl =
             getOverlayImageUrl &&
-            getOverlayImageUrl(i18n.language, t, exportFormat);
+            getOverlayImageUrl(i18n.language, exportFormat);
           fileName = getExportFileName
-            ? getExportFileName(i18n.language, t, exportFormat)
+            ? getExportFileName(t, exportFormat)
             : fileName;
         }
 
@@ -114,7 +116,7 @@ function ExportButton({
           .find((c) => c instanceof ScaleLine);
         const scaleLineElement =
           scaleLineControl &&
-          getStyledPdfScaleLine(scaleLineControl, exportSelection?.resolution);
+          getStyledPdfScaleLine(scaleLineControl, exportPrintOptions?.quality);
         const scaleLineCanvas =
           scaleLineElement && (await html2canvas(scaleLineElement));
 
