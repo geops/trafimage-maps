@@ -25,10 +25,8 @@ function GaExportMapButton() {
   const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
   const layers = useSelector((state) => state.map.layers);
-  const exportableGbLayers = layers.filter((layer) =>
-    layer.get("isExportable"),
-  );
-  const showButton = useVisibleLayer(exportableGbLayers);
+  const exportableLayers = layers.filter((layer) => layer.get("isExportable"));
+  const showButton = useVisibleLayer(exportableLayers);
   return (
     !isMobile &&
     showButton && (
