@@ -6,7 +6,7 @@ import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
 import useIsMobile from "../../utils/useIsMobile";
 
-const useGetVisible = (layers) => {
+const useVisibleLayer = (layers) => {
   const [visible, setVisible] = useState(false);
   const getVisible = useCallback(() => {
     setVisible(layers.some((l) => l.get("visible")));
@@ -29,7 +29,7 @@ function GaExportMapButton() {
   const exportableGbLayers = layers.filter((layer) =>
     layer.get("isExportable"),
   );
-  const showButton = useGetVisible(exportableGbLayers);
+  const showButton = useVisibleLayer(exportableGbLayers);
   return (
     !isMobile &&
     showButton && (
