@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.1](https://github.com/geops/trafimage-maps/compare/v1.27.0...v1.27.1) (2024-02-01)
+
+### Bug Fixes
+
+- **geltungsbereiche:** change geltungsbereiche translations ([#1138](https://github.com/geops/trafimage-maps/issues/1138)) ([ec48723](https://github.com/geops/trafimage-maps/commit/ec4872374be60beb3a3d005125d85b6c99c18e7d))
+
 ## [1.27.0](https://github.com/geops/trafimage-maps/compare/v1.26.5...v1.27.0) (2024-01-31)
 
 ### Features
