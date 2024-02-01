@@ -74,12 +74,12 @@ function GaExportMenu({ onClose }) {
 
   const scaleLineConfig = useMemo(() => {
     const getScaleLinePositionFunc = gbLegends.find(
-      (l) => l.name === visibleLayerName,
+      (l) => l.validity === visibleLayerName,
     )?.getScaleLinePosition;
     if (!exportPrintOptions || !pdfSize || !getScaleLinePositionFunc)
       return null;
     const scaleLinePosition = getScaleLinePositionFunc(
-      pdfSize[0],
+      pdfSize,
       exportPrintOptions.quality,
     );
     return scaleLinePosition;

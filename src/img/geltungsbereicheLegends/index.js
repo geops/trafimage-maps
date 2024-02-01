@@ -36,10 +36,12 @@ const galegends = [
     language: "de",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3De,
-    getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
-    }),
+    getScaleLinePosition: (pdfSize, resolution) => {
+      return {
+        x: pdfSize[0] * resolution * 0.021,
+        y: pdfSize[1] * resolution * 0.27,
+      };
+    },
   },
   {
     format: "a3",
@@ -47,8 +49,8 @@ const galegends = [
     validity: GA_LAYER_KEY,
     legend: gaLegendA3Fr,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -57,8 +59,8 @@ const galegends = [
     validity: GA_LAYER_KEY,
     legend: gaLegendA3It,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
@@ -67,8 +69,8 @@ const galegends = [
     validity: GA_LAYER_KEY,
     legend: gaLegendA3En,
     getScaleLinePosition: (pdfSize, resolution) => ({
-      x: pdfSize[0] * resolution * 0.026,
-      y: pdfSize[1] * resolution * 0.28,
+      x: pdfSize[0] * resolution * 0.021,
+      y: pdfSize[1] * resolution * 0.27,
     }),
   },
   {
