@@ -71,9 +71,10 @@ const useStopPlaceData = (uic, cartaroUrl) => {
   return { data, loading };
 };
 
-const formatYesNoData = (data) => {
+const formatStateData = (data) => {
   if (data === "YES") return "Ja";
   if (data === "NO") return "Nein";
+  if (data === "UNKNOWN") return "Unbekannt";
   if (data === "PARTIALLY") return "Teilweise";
   return data;
 };
@@ -91,7 +92,7 @@ const getAccessibility = (value, language, t) => {
   return (
     <fieldset key="accessibility" data-testid="stopplace-accessibility">
       <legend>{t("accessibility")}</legend>
-      <Typography>{t(formatYesNoData(value?.state))}</Typography>
+      <Typography>{t(formatStateData(value?.state))}</Typography>
       {hasTranslatedString && (
         <Typography>
           {hasTranslatedString ? (
@@ -120,19 +121,31 @@ const getAccessibility = (value, language, t) => {
 
 const getAlternativeTransport = (value, language, t) => {
   if (!value) return null;
+  const note =
+    typeof value.note === "object"
+      ? value.note?.[language] || value.note?.de
+      : value.note;
   return (
-    !/^NO|UNKNOWN$/.test(value?.state) && (
-      <fieldset
-        key="alternativeTransport"
-        data-testid="stopplace-alternative-transport"
-      >
-        <legend>{t("alternativeTransport")}</legend>
-        <Typography>{t(formatYesNoData(value?.state))}</Typography>
-        {typeof value.note === "object"
-          ? value.note?.[language] || value.note?.de
-          : value.note}
-      </fieldset>
-    )
+    <fieldset
+      key="alternativeTransport"
+      data-testid="stopplace-alternative-transport"
+    >
+      <legend>{t("alternativeTransport")}</legend>
+      {(!note || (note && /NO|UNKNOWN/.test(value?.state))) && (
+        <Typography data-testid="stopplace-alternative-transport-state">
+          {/YES/.test(value?.state)
+            ? t("Shuttle-Fahrdienst")
+            : t(formatStateData(value?.state))}
+        </Typography>
+      )}
+      {note && (
+        <Typography data-testid="stopplace-alternative-transport-note">
+          {typeof value.note === "object"
+            ? value.note?.[language] || value.note?.de
+            : value.note}
+        </Typography>
+      )}
+    </fieldset>
   );
 };
 
