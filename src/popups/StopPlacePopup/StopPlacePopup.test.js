@@ -151,8 +151,8 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-url")).toBeFalsy();
   });
 
-  ["NO", "UNKNOWN"].forEach((state) => {
-    test(`displays alternative-transport box when value is ${state}`, async () => {
+  ["NO", "UNKNOWN", "NOT_APPLICABLE"].forEach((state) => {
+    test(`displays no alternative-transport box when value is ${state}`, async () => {
       const note = "Very important information for people with disabilities";
       const spy = fetchMock.once(new RegExp(cartaroUrl, "g"), {
         prmInformation: {
@@ -174,14 +174,12 @@ describe("StopPlacePopup", () => {
       });
 
       expect(queryByTestId("stopplace-accessibility")).toBeFalsy();
-      expect(queryByTestId("stopplace-alternative-transport")).toBeTruthy();
+      expect(queryByTestId("stopplace-alternative-transport")).toBeFalsy();
       expect(
         queryByTestId("stopplace-alternative-transport-state"),
-      ).toBeTruthy();
-      expect(
-        queryByTestId("stopplace-alternative-transport-note"),
-      ).toBeTruthy();
-      expect(queryByText(note)).toBeTruthy();
+      ).toBeFalsy();
+      expect(queryByTestId("stopplace-alternative-transport-note")).toBeFalsy();
+      expect(queryByText(note)).toBeFalsy();
       expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
       expect(queryByTestId("stopplace-note")).toBeFalsy();
       expect(queryByTestId("stopplace-url")).toBeFalsy();

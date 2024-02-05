@@ -124,24 +124,26 @@ const getAlternativeTransport = (value, language, t) => {
   if (!value) return null;
   const note = getNoteTranslation(value?.note, language);
   return (
-    <fieldset
-      key="alternativeTransport"
-      data-testid="stopplace-alternative-transport"
-    >
-      <legend>{t("alternativeTransport")}</legend>
-      {(!note || (note && /NO|UNKNOWN/.test(value?.state))) && (
-        <Typography data-testid="stopplace-alternative-transport-state">
-          {/YES/.test(value?.state)
-            ? t("Shuttle-Fahrdienst")
-            : t(formatStateData(value?.state))}
-        </Typography>
-      )}
-      {note && (
-        <Typography data-testid="stopplace-alternative-transport-note">
-          {note}
-        </Typography>
-      )}
-    </fieldset>
+    !/NO|UNKNOWN|NOT_APPLICABLE/.test(value.state) && (
+      <fieldset
+        key="alternativeTransport"
+        data-testid="stopplace-alternative-transport"
+      >
+        <legend>{t("alternativeTransport")}</legend>
+        {!note && (
+          <Typography data-testid="stopplace-alternative-transport-state">
+            {/YES/.test(value?.state)
+              ? t("Shuttle-Fahrdienst")
+              : t(formatStateData(value?.state))}
+          </Typography>
+        )}
+        {note && (
+          <Typography data-testid="stopplace-alternative-transport-note">
+            {note}
+          </Typography>
+        )}
+      </fieldset>
+    )
   );
 };
 
