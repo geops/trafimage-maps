@@ -67,16 +67,12 @@
     }
   }
 
-  .rs-zooms-bar {
-    position: relative;
-  }
-
   .rs-base-layer-switcher {
     position: absolute;
     bottom: 50px;
     left: 10px;
     width: 120px;
-    z-index: 0; // under menu
+    z-index: 0; /* under menu */
     padding: 12px;
     user-select: none;
 
@@ -100,7 +96,7 @@
 
       .rs-base-layer-switcher-title {
         font-size: 12px;
-        max-height: inherit; //IE
+        max-height: inherit; /* IE */
       }
 
       &.rs-opener {
@@ -157,6 +153,12 @@
     }
   }
 
+  &.header {
+    .wkp-map-controls {
+      top: 100px; // 100px + 15px
+    }
+  }
+
   select {
     margin: 0;
     padding: 1px 0 1px 12px;
@@ -173,24 +175,6 @@
   button,
   div[role='button'] {
     cursor: pointer;
-  }
-
-  &.tm-h-m,
-  &.tm-h-s,
-  &.tm-h-xs {
-    .wkp-geolocation,
-    .wkp-fit-extent,
-    .rs-zoom-in,
-    .rs-zoom-out {
-      margin: 10px 0;
-    }
-  }
-
-  &.tm-h-s,
-  &.tm-h-xs {
-    .rs-zoomslider-wrapper {
-      display: none;
-    }
   }
 
   &.tm-h-xs {
@@ -249,15 +233,6 @@
     }
   }
 
-  .wkp-map-controls {
-    top: 10px;
-  }
-
-  &.header {
-    .wkp-map-controls {
-      top: 110px;
-    }
-  }
 
   &.tm-w-m,
   &.tm-w-s,
@@ -288,7 +263,7 @@
       top: 65px;
     }
 
-    // topics menu component is enabled
+    /* topics menu component is enabled */
     &.menu .wkp-menu-wrapper {
       top: 55px;
       left: 0;
@@ -302,10 +277,10 @@
       }
     }
 
-    // header component is enabled
+    /* header component is enabled */
     &.header {
       .wkp-map-controls {
-        top: 60px;
+        top: 56px; // 56px + 15px
       }
 
       .wkp-topics-menu {
@@ -396,7 +371,8 @@
 
     .wkp-gb-menu-current-value > span:first-child {
       overflow: hidden;
-      // Multiline overflow ellipsis
+
+      /* Multiline overflow ellipsis */
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;

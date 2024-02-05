@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => {
   const list = {
     // Should be apply by theme but it's not
     "& .Mui-selected": {
-      color: theme.palette.secondary.main,
+      color: theme.palette.primary.main,
     },
   };
   const paper = {
@@ -62,7 +62,7 @@ function Select(props) {
     <MuiSelect
       variant="outlined"
       IconComponent={ExpandMoreIcon}
-      data-testid="trafimage-maps-select"
+      data-testid=" "
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
       // // The following props need to be set after {...newProps}, since they overwrite some of them

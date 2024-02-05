@@ -65,8 +65,9 @@ function ProjectionSelect({ projections }) {
           horizontal: "left",
         },
         PaperProps: {
-          style: {
-            marginTop: -19,
+          sx: {
+            marginTop: "-19px !important",
+            left: "175px !important",
           },
         },
       }}

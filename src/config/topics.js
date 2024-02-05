@@ -35,6 +35,7 @@ import GeltungsbereicheTopicMenu from "../menus/GeltungsbereicheTopicMenu";
 import StsMenu from "../menus/StsMenu";
 import {
   DV_KEY,
+  ONLY_WHEN_NOT_LOGGED_IN,
   PDF_DOWNLOAD_EVENT_TYPE,
   RAILPLUS_EXPORTBTN_ID,
 } from "../utils/constants";
@@ -43,7 +44,9 @@ import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
 import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
-
+import messwagenLayers from "./ch.sbb.funkmesswagen";
+import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
+import { MesswagenPopup } from "../popups";
 // For backward compatibility
 export {
   casaDataLayerWithoutLabels,
@@ -58,7 +61,7 @@ export const defaultElements = {
   permalink: true,
   mapControls: true,
   baseLayerSwitcher: true,
-  popup: false,
+  popup: true,
   search: true,
   drawMenu: true,
   overlay: true,
@@ -421,7 +424,7 @@ export const railPlus = {
   ],
   exportConfig: {
     getTemplateValues: () => ({
-      publishedAt: "11/2023",
+      publishedAt: "12/2023",
       year: "2023",
     }),
     getOverlayImageUrl: (lang) => {
@@ -438,6 +441,22 @@ export const railPlus = {
       `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,
+};
+
+export const messwagen = {
+  name: "ch.sbb.funkmesswagen",
+  key: "ch.sbb.funkmesswagen",
+  layers: messwagenLayers,
+  elements: {
+    ...defaultElements,
+    overlay: false,
+    drawMenu: false,
+  },
+  hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,
+  mapControls: <MesswagenFollowButton />,
+  searches: defaultSearches,
+  layerInfoComponent: "MesswagenTopicInfo",
+  customElements: <MesswagenPopup />,
 };
 
 const topics = {
@@ -460,6 +479,7 @@ const topics = {
     energiePublic,
     sandbox,
     railPlus,
+    messwagen,
   ],
   stelen: [netzkarteStelen],
   betriebsregionen: [betriebsregionen],

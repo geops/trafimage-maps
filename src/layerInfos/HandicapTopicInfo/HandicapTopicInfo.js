@@ -55,18 +55,13 @@ const comps = {
 };
 
 function HandicapTopicInfo() {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   return (
     <div>
       {comps[i18n.language]}
       <hr />
       <p>
-        <DataLink href="https://data.sbb.ch/explore/dataset/barrierefreies-reisen/information/" />
-      </p>
-      <p>
-        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
-          {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
-        </DataLink>
+        <DataLink href=" https://opentransportdata.swiss/de/dataset/prm_data" />
       </p>
     </div>
   );

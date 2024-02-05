@@ -34,8 +34,81 @@ const infos = {
   },
 };
 
+const warranty = {
+  de: (
+    <div>
+      Aus Platzgründen sind, je nach Zoomstufe, nicht alle Linien angegeben.
+      <br />
+      Alle Angaben ohne Gewähr. Änderungen vorbehalten.
+      <br />
+      Es gilt der Anwendungsbereich (
+      <a
+        href="https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Übersicht der Tarife und Vorschriften - Alliance SwissPass
+      </a>
+      ).
+    </div>
+  ),
+  fr: (
+    <div>
+      Faute de place, selon le niveau de zoom, toutes les lignes ne sont pas
+      mentionnées.
+      <br />
+      Toutes les indications sont sans garantie. Sous réserve de modifications.
+      <br />
+      Le champ d&apos;application fait foi (
+      <a
+        href="https://www.allianceswisspass.ch/fr/tarifs/TarifsPrescriptions"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Tarifs et prescriptions Vue d&apos;ensemble - Alliance SwissPass
+      </a>
+      ).
+    </div>
+  ),
+  en: (
+    <div>
+      Depending on the zoom level, not all lines shown due to lack of space.
+      <br />
+      All information without guarantee. Subject to change.
+      <br />
+      The scope of application applies (
+      <a
+        href="https://www.allianceswisspass.ch/de/tarife-vorschriften/uebersicht"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Übersicht der Tarife und Vorschriften - Alliance SwissPass
+      </a>
+      &nbsp;German only).
+    </div>
+  ),
+  it: (
+    <div>
+      Per mancanza di spazio, a seconda del livello di zoom, non vi figurano
+      tutte le linee.
+      <br />
+      Tutte le informazioni non sono garantite. Salvo modifiche.
+      <br />
+      Si applica il campi d&apos;applicazione (
+      <a
+        href="https://www.allianceswisspass.ch/it/Tariffeprescrizioni/Panoramica"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        Tariffe e prescrizioni Panoramica - Alliance SwissPass
+      </a>
+      ).
+    </div>
+  ),
+};
+
 function GeltungsbereicheLayerInfo({ properties: layer }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const classes = useStyles();
   const cardsScope = layer.get("cardsScope") || "ga";
   const cardsInfos = infos[cardsScope];
@@ -185,6 +258,9 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
       <br />
       <Typography paragraph>
         <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
+      </Typography>
+      <Typography paragraph>
+        <i>{warranty[i18n.language]}</i>
       </Typography>
       <br />
     </div>

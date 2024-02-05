@@ -2,6 +2,108 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.2](https://github.com/geops/trafimage-maps/compare/v1.27.1...v1.27.2) (2024-02-02)
+
+### [1.27.1](https://github.com/geops/trafimage-maps/compare/v1.27.0...v1.27.1) (2024-02-01)
+
+### Bug Fixes
+
+- **geltungsbereiche:** change geltungsbereiche translations ([#1138](https://github.com/geops/trafimage-maps/issues/1138)) ([ec48723](https://github.com/geops/trafimage-maps/commit/ec4872374be60beb3a3d005125d85b6c99c18e7d))
+
+## [1.27.0](https://github.com/geops/trafimage-maps/compare/v1.26.5...v1.27.0) (2024-01-31)
+
+### Features
+
+- add messwagen topic ([#1130](https://github.com/geops/trafimage-maps/issues/1130)) ([1dc52f0](https://github.com/geops/trafimage-maps/commit/1dc52f0923429d566794387171238c9e4106443b))
+
+### [1.26.5](https://github.com/geops/trafimage-maps/compare/v1.26.4...v1.26.5) (2024-01-29)
+
+### Bug Fixes
+
+- **handicap:** prevent popup crash ([#1140](https://github.com/geops/trafimage-maps/issues/1140)) ([8c775fa](https://github.com/geops/trafimage-maps/commit/8c775fa644f00ab540d0c2e5ec107760e44cf631))
+
+### [1.26.4](https://github.com/geops/trafimage-maps/compare/v1.26.3...v1.26.4) (2024-01-26)
+
+### Bug Fixes
+
+- change angular example ([#1136](https://github.com/geops/trafimage-maps/issues/1136)) ([27376e8](https://github.com/geops/trafimage-maps/commit/27376e88c49cf9374eec3831a04fced97d06f0fe))
+
+### [1.26.3](https://github.com/geops/trafimage-maps/compare/v1.26.2...v1.26.3) (2024-01-25)
+
+### Bug Fixes
+
+- **handicap:** add open data link to topic info, filter duplicates on feature click, update popup content ([#1139](https://github.com/geops/trafimage-maps/issues/1139)) ([8a2f8e7](https://github.com/geops/trafimage-maps/commit/8a2f8e739c9a8fdea64c1a1e251693d0f9a24f43))
+- **Zweitausbildung:** update Link on Map D ([4dc255d](https://github.com/geops/trafimage-maps/commit/4dc255d2f0f45f710b5696d1f53da177cb4aaa72))
+
+### [1.26.2](https://github.com/geops/trafimage-maps/compare/v1.26.1...v1.26.2) (2024-01-23)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add text ([#1134](https://github.com/geops/trafimage-maps/issues/1134)) ([90f94d2](https://github.com/geops/trafimage-maps/commit/90f94d2d2e6d37c98331c16a2909fb20b5094fa8))
+
+### [1.26.1](https://github.com/geops/trafimage-maps/compare/v1.26.0...v1.26.1) (2024-01-18)
+
+### Bug Fixes
+
+- **map controls:** move map controls with overlay so they are always visible ([#1131](https://github.com/geops/trafimage-maps/issues/1131)) ([108c073](https://github.com/geops/trafimage-maps/commit/108c07371fb467a1acda8db394dacd3150c33dee))
+- **zweiausbildung:** update link Map D (Germany) ([1c549ea](https://github.com/geops/trafimage-maps/commit/1c549eac64539d62a056e4886113a35e125f57bd))
+
+## [1.26.0](https://github.com/geops/trafimage-maps/compare/v1.25.8...v1.26.0) (2024-01-18)
+
+### Bug Fixes
+
+- **geltungsbereiche:** add warranty text to layer infos ([da74cb9](https://github.com/geops/trafimage-maps/commit/da74cb97c2c3d578ac76a5ae48ebab4a06f4e67c))
+
+### [1.25.8](https://github.com/geops/trafimage-maps/compare/v1.25.7...v1.25.8) (2024-01-15)
+
+### Bug Fixes
+
+- **handicap:** always display accessibility note, even without translated string ([f4d40ab](https://github.com/geops/trafimage-maps/commit/f4d40abdd078b3df137f52d8dbf1bd0e095d4a02))
+- **translation:** correct italian translation for closing dialog ([309aaa1](https://github.com/geops/trafimage-maps/commit/309aaa1366bc14c059fcf98d6b35da2d6e902a43))
+
+### [1.25.7](https://github.com/geops/trafimage-maps/compare/v1.25.6...v1.25.7) (2024-01-12)
+
+### Bug Fixes
+
+- put back original names of layers ([ca60b94](https://github.com/geops/trafimage-maps/commit/ca60b947a8d8fa2d653d3a17aa49b351c0b0aa33))
+
+### [1.25.6](https://github.com/geops/trafimage-maps/compare/v1.25.5...v1.25.6) (2024-01-11)
+
+### Bug Fixes
+
+- **netzentwicklung:** remove S&K Planer layer from Netzentwicklung ([#1129](https://github.com/geops/trafimage-maps/issues/1129)) ([b60a520](https://github.com/geops/trafimage-maps/commit/b60a520850841964a918826646d895c3c92e5f30))
+
+### [1.25.5](https://github.com/geops/trafimage-maps/compare/v1.25.4...v1.25.5) (2024-01-11)
+
+### Bug Fixes
+
+- **handicap:** adjust handicap.filter for AMO layers ([a42e29b](https://github.com/geops/trafimage-maps/commit/a42e29bb6d56ac1673e987eadc0a08c1bcab719b))
+
+### [1.25.4](https://github.com/geops/trafimage-maps/compare/v1.25.3...v1.25.4) (2024-01-11)
+
+### Bug Fixes
+
+- **handicap:** use new amo darkmode style to fix labels ([e8ea172](https://github.com/geops/trafimage-maps/commit/e8ea1729c80cd7757fef4f8cf79a644953daf894))
+
+### [1.25.3](https://github.com/geops/trafimage-maps/compare/v1.25.2...v1.25.3) (2024-01-10)
+
+### Bug Fixes
+
+- **handicap:** translate accessibility note string ([#1127](https://github.com/geops/trafimage-maps/issues/1127)) ([ed20b9d](https://github.com/geops/trafimage-maps/commit/ed20b9de2b74ebd31606aae3c5b375379303f15a))
+- **railplus:** update PDF publish date to 12/2023 ([fbf76a6](https://github.com/geops/trafimage-maps/commit/fbf76a696b7815c27b721bc4bfee5f356e10876f))
+
+### [1.25.2](https://github.com/geops/trafimage-maps/compare/v1.25.1...v1.25.2) (2024-01-08)
+
+### Bug Fixes
+
+- **Regionenkarte:** move highlight logic from popup to RegionenkarteLayer, improve Select UI ([#1126](https://github.com/geops/trafimage-maps/issues/1126)) ([74ee65c](https://github.com/geops/trafimage-maps/commit/74ee65c2b99edbd752c553552f10bb77e31f5e46))
+
+### [1.25.1](https://github.com/geops/trafimage-maps/compare/v1.25.0...v1.25.1) (2024-01-04)
+
+### Bug Fixes
+
+- **handicap:** improve AMO highlighting, remove datalinks and dataservice from topic info ([#1125](https://github.com/geops/trafimage-maps/issues/1125)) ([0e766c5](https://github.com/geops/trafimage-maps/commit/0e766c535d24a0363528ac63d80c7c5d200a8aa4))
+
 ## [1.25.0](https://github.com/geops/trafimage-maps/compare/v1.24.2...v1.25.0) (2024-01-02)
 
 ### Features

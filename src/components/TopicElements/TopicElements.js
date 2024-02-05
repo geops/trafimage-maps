@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { EventConsumer } from "@geops/create-react-web-component";
 import BaseLayerSwitcher from "react-spatial/components/BaseLayerSwitcher";
 import ResizeHandler from "../ResizeHandler";
-import { setScreenWidth } from "../../model/app/actions";
+import { setScreenDimensions } from "../../model/app/actions";
 import MainDialog from "../MainDialog";
 import Map from "../Map";
 import Menu from "../Menu";
@@ -63,6 +63,8 @@ function TopicElements({ history }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const activeTopic = useSelector((state) => state.app.activeTopic);
+  const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
+
   const loginUrl = useSelector((state) => state.app.loginUrl);
   const map = useSelector((state) => state.app.map);
   const [tabFocus, setTabFocus] = useState(false);
@@ -106,6 +108,19 @@ function TopicElements({ history }) {
     );
   }, [activeTopic]);
 
+  // We define the images for the base layers using staticFilesUrl because they are too big to be encoded in base64.
+  // so when using in the web component (see angular example) the app is able to get them.
+  // Images are stored in the gitlab project.
+  const baseLayerImages = useMemo(() => {
+    const imgs = {};
+    baseLayers.forEach((layer) => {
+      imgs[layer.key] = `${staticFilesUrl}/img/baselayer/${layer.get(
+        "previewImage",
+      )}.jpg`;
+    });
+    return imgs;
+  }, [baseLayers, staticFilesUrl]);
+
   const topicClassName = useMemo(() => {
     let classNamee = "";
     if (activeTopic?.key) {
@@ -142,8 +157,8 @@ function TopicElements({ history }) {
   }, [tabFocus]);
 
   const onResize = useCallback(
-    (entries, widthBreakpoint) => {
-      dispatch(setScreenWidth(widthBreakpoint));
+    (entries, width, height) => {
+      dispatch(setScreenDimensions({ width, height }));
     },
     [dispatch],
   );
@@ -202,6 +217,7 @@ function TopicElements({ history }) {
               openSwitcher: t("Baselayer-Menu öffnen"),
               closeSwitcher: t("Baselayer-Menu schliessen"),
             }}
+            layerImages={baseLayerImages}
             closeButtonImage={<ChevronLeft />}
             t={t}
           />
@@ -220,6 +236,7 @@ function TopicElements({ history }) {
         </Menu>
         {elements.footer && <Footer />}
         {elements.overlay && <Overlay elements={elements} />}
+        {activeTopic?.customElements}
         <MainDialog />
       </div>
     </div>
