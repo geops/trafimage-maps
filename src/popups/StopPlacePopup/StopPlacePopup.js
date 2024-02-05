@@ -83,7 +83,7 @@ const getAccessibility = (value, language, t) => {
   if (!value) return null;
   const note =
     typeof value.note === "object"
-      ? value?.note?.[language] || value?.note?.de
+      ? value.note?.[language] || value.note?.de
       : value.note;
   const hasTranslatedString = note?.includes(hardcodedStringForNote);
   const notTranslatedInfo = hasTranslatedString
@@ -140,9 +140,7 @@ const getAlternativeTransport = (value, language, t) => {
       )}
       {note && (
         <Typography data-testid="stopplace-alternative-transport-note">
-          {typeof value.note === "object"
-            ? value.note?.[language] || value.note?.de
-            : value.note}
+          {note}
         </Typography>
       )}
     </fieldset>
