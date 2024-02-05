@@ -79,12 +79,13 @@ const formatStateData = (data) => {
   return data;
 };
 
+const getNoteTranslation = (note, language) => {
+  return typeof note === "object" ? note?.[language] || note?.de : note;
+};
+
 const getAccessibility = (value, language, t) => {
   if (!value) return null;
-  const note =
-    typeof value.note === "object"
-      ? value.note?.[language] || value.note?.de
-      : value.note;
+  const note = getNoteTranslation(value?.note, language);
   const hasTranslatedString = note?.includes(hardcodedStringForNote);
   const notTranslatedInfo = hasTranslatedString
     ? note?.split(hardcodedStringForNote)[1]
@@ -121,10 +122,7 @@ const getAccessibility = (value, language, t) => {
 
 const getAlternativeTransport = (value, language, t) => {
   if (!value) return null;
-  const note =
-    typeof value.note === "object"
-      ? value.note?.[language] || value.note?.de
-      : value.note;
+  const note = getNoteTranslation(value?.note, language);
   return (
     <fieldset
       key="alternativeTransport"
@@ -176,7 +174,7 @@ const getNote = (value, language, t) => {
   return (
     <fieldset key="note" data-testid="stopplace-note">
       <legend>{t("Hinweise zur Haltestelle")}</legend>
-      {typeof value === "object" ? value[language] || value.de : value}
+      {getNoteTranslation(value, language)}
     </fieldset>
   );
 };
