@@ -66,6 +66,7 @@ const useStyles = makeStyles(() => {
     },
     currentValue: {
       display: "flex",
+      paddingRight: 24,
     },
     infoButton: {
       position: "absolute",
