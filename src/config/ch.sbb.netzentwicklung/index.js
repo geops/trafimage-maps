@@ -46,9 +46,27 @@ export const netzentwicklungStrategischLayer = new MapboxStyleLayer({
   },
 });
 
+export const netzentwicklungGueterverkehrLayer = new MapboxStyleLayer({
+  name: "ch.sbb.netzentwicklung.gueterverkehr",
+  mapboxLayer: netzentwicklungDataLayer,
+  visible: false,
+  styleLayersFilter: ({ id }) => /gueterverkehr/.test(id),
+  queryRenderedLayersFilter: ({ id }) => /gueterverkehr$/.test(id),
+  group: "netzentwicklung",
+  properties: {
+    isQueryable: true,
+    popupComponent: "NetzentwicklungPopup",
+    netzentwicklungRoleType: "Netzentwickler Güterverkehr", // display only roles of this type
+    hasInfos: true,
+    useOverlay: true,
+    layerInfoComponent: "NetzentwicklungLayerInfo",
+  },
+});
+
 export default [
   kilometrageLayer,
   netzentwicklungDataLayer,
+  netzentwicklungGueterverkehrLayer,
   netzentwicklungStrategischLayer,
   netzentwicklungProgrammManagerLayer,
 ];
