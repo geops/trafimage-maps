@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.4](https://github.com/geops/trafimage-maps/compare/v1.27.3...v1.27.4) (2024-02-06)
+
+### Bug Fixes
+
+- **netzentwicklung:** remove line highlight on layer switch ([#1143](https://github.com/geops/trafimage-maps/issues/1143)) ([5674e99](https://github.com/geops/trafimage-maps/commit/5674e99125c103a7ce5ad0cdc6883331c4459690))
+
 ### [1.27.3](https://github.com/geops/trafimage-maps/compare/v1.27.2...v1.27.3) (2024-02-05)
 
 ### Bug Fixes
