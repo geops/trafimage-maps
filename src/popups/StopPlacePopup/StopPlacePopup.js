@@ -121,29 +121,30 @@ const getAccessibility = (value, language, t) => {
 };
 
 const getAlternativeTransport = (value, language, t) => {
-  if (!value) return null;
   const note = getNoteTranslation(value?.note, language);
+  if (
+    !value ||
+    (/NO|UNKNOWN|NOT_APPLICABLE|PARTIALLY/.test(value?.state) && !note)
+  )
+    return null;
+
   return (
-    !/NO|UNKNOWN|NOT_APPLICABLE/.test(value.state) && (
-      <fieldset
-        key="alternativeTransport"
-        data-testid="stopplace-alternative-transport"
-      >
-        <legend>{t("alternativeTransport")}</legend>
-        {!note && (
-          <Typography data-testid="stopplace-alternative-transport-state">
-            {/YES/.test(value?.state)
-              ? t("Shuttle-Fahrdienst")
-              : t(formatStateData(value?.state))}
-          </Typography>
-        )}
-        {note && (
-          <Typography data-testid="stopplace-alternative-transport-note">
-            {note}
-          </Typography>
-        )}
-      </fieldset>
-    )
+    <fieldset
+      key="alternativeTransport"
+      data-testid="stopplace-alternative-transport"
+    >
+      <legend>{t("alternativeTransport")}</legend>
+      {!note && /YES/.test(value?.state) && (
+        <Typography data-testid="stopplace-alternative-transport-state">
+          {t("Shuttle-Fahrdienst")}
+        </Typography>
+      )}
+      {note && (
+        <Typography data-testid="stopplace-alternative-transport-note">
+          {note}
+        </Typography>
+      )}
+    </fieldset>
   );
 };
 
