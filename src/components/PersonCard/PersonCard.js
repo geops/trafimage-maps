@@ -12,12 +12,13 @@ const useStyles = makeStyles((theme) => {
     row: {
       minWidth: 250,
       alignItems: "center",
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: "1fr 11fr",
+      gap: 4,
     },
     icon: {
       height: 24,
       width: 24,
-      marginRight: 5,
       "& svg": {
         height: "100%",
         width: "100%",

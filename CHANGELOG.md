@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.3](https://github.com/geops/trafimage-maps/compare/v1.27.2...v1.27.3) (2024-02-05)
+
+### Bug Fixes
+
+- **handicap:** update display of alternative transport in handicap overlay ([#1142](https://github.com/geops/trafimage-maps/issues/1142)) ([540e8e6](https://github.com/geops/trafimage-maps/commit/540e8e66510031d02dd6d242a7c80fa8b581ed5a))
+- **netzentwicklung:** add Netzentwickler Güterverkehr layer ([#1123](https://github.com/geops/trafimage-maps/issues/1123)) ([93f6244](https://github.com/geops/trafimage-maps/commit/93f6244a1f9ca004022a962440877c7d8b35a1c4))
+
+### [1.27.2](https://github.com/geops/trafimage-maps/compare/v1.27.1...v1.27.2) (2024-02-02)
+
 ### [1.27.1](https://github.com/geops/trafimage-maps/compare/v1.27.0...v1.27.1) (2024-02-01)
 
 ### Bug Fixes

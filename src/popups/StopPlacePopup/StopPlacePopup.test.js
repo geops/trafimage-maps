@@ -92,7 +92,7 @@ describe("StopPlacePopup", () => {
     expect(queryByTestId("stopplace-url")).toBeFalsy();
   });
 
-  test("only displays alternative-transport box with PARTIALLY and with note", async () => {
+  test("only displays alternative-transport box with only note when state = PARTIALLY", async () => {
     const note =
       "Very important information for people with disabilities for alternative transport";
     const spy = fetchMock.once(new RegExp(cartaroUrl, "g"), {
@@ -116,14 +116,14 @@ describe("StopPlacePopup", () => {
 
     expect(queryByTestId("stopplace-accessibility")).toBeFalsy();
     expect(queryByTestId("stopplace-alternative-transport")).toBeTruthy();
-    expect(queryByText("Teilweise")).toBeTruthy();
+    expect(queryByText("Teilweise")).toBeFalsy();
     expect(queryByText(note)).toBeTruthy();
     expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
   });
 
-  test.only("only displays alternative-transport box with Ja", async () => {
+  test("only displays alternative-transport box with Shuttle-Fahrdienst when state = YES and no note is defined", async () => {
     const spy = fetchMock.once(new RegExp(cartaroUrl, "g"), {
       prmInformation: {
         alternativeTransport: {
@@ -144,23 +144,26 @@ describe("StopPlacePopup", () => {
 
     expect(queryByTestId("stopplace-accessibility")).toBeFalsy();
     expect(queryByTestId("stopplace-alternative-transport")).toBeTruthy();
-    expect(queryByText("Ja")).toBeTruthy();
+    expect(queryByTestId("stopplace-alternative-transport-state")).toBeTruthy();
+    expect(queryByText("Shuttle-Fahrdienst")).toBeTruthy();
     expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
     expect(queryByTestId("stopplace-note")).toBeFalsy();
     expect(queryByTestId("stopplace-url")).toBeFalsy();
   });
 
-  ["NO", "UNKNOWN"].forEach((state) => {
-    test(`does not display alternative-transport box when value is ${state}`, async () => {
+  ["NO", "UNKNOWN", "NOT_APPLICABLE"].forEach((state) => {
+    test(`displays no alternative-transport box when value is ${state}`, async () => {
+      const note = "Very important information for people with disabilities";
       const spy = fetchMock.once(new RegExp(cartaroUrl, "g"), {
         prmInformation: {
           alternativeTransport: {
             state,
+            note,
           },
         },
       });
 
-      const { queryByTestId } = render(
+      const { queryByTestId, queryByText } = render(
         <Provider store={store}>
           <StopPlacePopup feature={new Feature({ uic: state })} />
         </Provider>,
@@ -172,6 +175,11 @@ describe("StopPlacePopup", () => {
 
       expect(queryByTestId("stopplace-accessibility")).toBeFalsy();
       expect(queryByTestId("stopplace-alternative-transport")).toBeFalsy();
+      expect(
+        queryByTestId("stopplace-alternative-transport-state"),
+      ).toBeFalsy();
+      expect(queryByTestId("stopplace-alternative-transport-note")).toBeFalsy();
+      expect(queryByText(note)).toBeFalsy();
       expect(queryByTestId("stopplace-passengerinfo")).toBeFalsy();
       expect(queryByTestId("stopplace-note")).toBeFalsy();
       expect(queryByTestId("stopplace-url")).toBeFalsy();
