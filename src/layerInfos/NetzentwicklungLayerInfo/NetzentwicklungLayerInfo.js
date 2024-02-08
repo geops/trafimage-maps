@@ -48,18 +48,30 @@ function NetzentwicklungLayerInfo({ t, properties }) {
 
   return (
     <div>
-      <p>{t(`${netzentwicklungRoleType}-layer-info`)}</p>
-      {regions &&
-        Array.isArray(regions) &&
-        regions.map((region) => (
-          <div className={classes.regionLegendItem} key={region.id}>
-            <div
-              className={classes.regionColor}
-              style={{ backgroundColor: regionColors[region.name] }}
-            />
-            <div>{t(region.name)}</div>
-          </div>
-        ))}
+      {netzentwicklungRoleType === "Netzentwickler Güterverkehr" ? (
+        <div className={classes.regionLegendItem}>
+          <div
+            className={classes.regionColor}
+            style={{ backgroundColor: "rgb(0, 110, 179)" }}
+          />
+          <div>{t(`${netzentwicklungRoleType}-layer-info`)}</div>
+        </div>
+      ) : (
+        <>
+          <p>{t(`${netzentwicklungRoleType}-layer-info`)}</p>
+          {regions &&
+            Array.isArray(regions) &&
+            regions.map((region) => (
+              <div className={classes.regionLegendItem} key={region.id}>
+                <div
+                  className={classes.regionColor}
+                  style={{ backgroundColor: regionColors[region.name] }}
+                />
+                <div>{t(region.name)}</div>
+              </div>
+            ))}
+        </>
+      )}
     </div>
   );
 }

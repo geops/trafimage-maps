@@ -146,7 +146,9 @@ function Geolocation() {
   return (
     <MapButton
       onClick={onGeolocateToggle}
-      className={`wkp-geolocation ${classes.geolocation} ${isGeolocating ? classes.geolocationActive : ""}`}
+      className={`wkp-geolocation ${classes.geolocation} ${
+        isGeolocating ? classes.geolocationActive : ""
+      }`}
       data-testid="map-controls-geolocation"
       tabIndex={-1}
     >
