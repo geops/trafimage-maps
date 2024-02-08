@@ -127,8 +127,31 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
   },
 });
 
+export const geltungsbereicheAT = new GeltungsbereicheLayer({
+  name: "ch.sbb.geltungsbereiche.mvp-at",
+  visible: false,
+  mapboxLayer: geltungsbereicheDataLayer,
+  styleLayersFilter: ({ metadata }) =>
+    metadata?.["geltungsbereiche.filter"]?.includes("at.line"),
+  group: "ch.sbb.geltungsbereiche.group",
+  properties: {
+    isQueryable: true,
+    popupComponent: "GeltungsbereicheGaPopup",
+    useOverlay: true,
+    validPropertyName: "valid_at",
+    cardsScope: "at",
+    hasInfos: true,
+    layerInfoComponent: "GeltungsbereicheLayerInfo",
+    getTextFromValid: (valid) => {
+      return valid === 100 ? "Gültig" : "Ungültig";
+    },
+    products: ["ch.sbb.geltungsbereiche.products.at"],
+  },
+});
+
 export default [
   geltungsbereicheDataLayer,
+  geltungsbereicheAT,
   geltungsbereicheSTS,
   geltungsbereicheTk,
   geltungsbereicheHta,

@@ -17,7 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const infos = {
+export const infos = {
   ga: {
     100: "Freie Fahrt",
     50: "Fahrt zum ermässigten Preis",
@@ -31,6 +31,11 @@ const infos = {
   sts: {
     100: "Freie Fahrt",
     50: "50% oder 25% Ermässigung",
+  },
+
+  at: {
+    100: "Gültig",
+    0: "Ungültig",
   },
 };
 
@@ -114,6 +119,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
   const cardsInfos = infos[cardsScope];
   const full = infos[cardsScope]["100"];
   const reduced = infos[cardsScope]["50"];
+  const none = infos[cardsScope]["0"] || "Keine Ermässigung";
   const products = layer.get("products");
   const productsRemark = layer.get("productsRemark");
   return (
@@ -240,7 +246,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
           </tr>
         </tbody>
       </table>
-      <Typography paragraph>{t("Keine Ermässigung")}</Typography>
+      <Typography paragraph>{none}</Typography>
       <table style={{ marginBottom: 10 }}>
         <thead />
         <tbody>

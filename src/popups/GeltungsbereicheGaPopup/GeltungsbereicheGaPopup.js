@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { FaCircle } from "react-icons/fa";
 import GeltungsbereicheLegend, { legends } from "./GeltungsbereicheLegend";
+import { infos } from "../../layerInfos/GeltungsbereicheLayerInfo/GeltungsbereicheLayerInfo";
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
@@ -149,7 +150,9 @@ function GeltungsbereichePopup({
       })}
       <div className={classes.legendItem}>
         <GeltungsbereicheLegend background />
-        <Typography variant="subtitle1">{t("Keine Ermässigung")}</Typography>
+        <Typography variant="subtitle1">
+          {t(infos[layer.get("cardsScope")]?.["0"] || "Keine Ermässigung")}
+        </Typography>
       </div>
       {renderValidityFooter && (
         <>
