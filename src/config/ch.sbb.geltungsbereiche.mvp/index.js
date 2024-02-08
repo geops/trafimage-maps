@@ -146,6 +146,7 @@ export const geltungsbereicheAT = new GeltungsbereicheLayer({
       return valid === 100 ? "Gültig" : "Ungültig";
     },
     products: ["ch.sbb.geltungsbereiche.products.at"],
+    isExportable: false,
   },
 });
 
