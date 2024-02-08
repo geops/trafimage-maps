@@ -143,9 +143,10 @@ export const geltungsbereicheAT = new GeltungsbereicheLayer({
     hasInfos: true,
     layerInfoComponent: "GeltungsbereicheLayerInfo",
     getTextFromValid: (valid) => {
-      return valid === 100 ? "Gültig" : "Ungültig";
+      return valid === 100
+        ? "Automatisches Ticketing verfügbar"
+        : "Automatisches Ticketing nicht verfügbar";
     },
-    products: ["ch.sbb.geltungsbereiche.products.at"],
     isExportable: false,
   },
 });
