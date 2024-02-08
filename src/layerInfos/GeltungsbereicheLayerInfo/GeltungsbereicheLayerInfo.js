@@ -14,26 +14,31 @@ export const infos = {
     50: "Fahrt zum ermässigten Preis",
     0: "Keine Ermässigung",
     vorOrt: "Gültigkeit vor Ort erfragen",
+    footer: true,
   },
   tk: {
     100: "Freie Fahrt",
     0: "Keine Ermässigung",
     vorOrt: "Gültigkeit vor Ort erfragen",
+    footer: true,
   },
   hta: {
     100: "Fahrt zum ermässigten Preis",
     0: "Keine Ermässigung",
     vorOrt: "Gültigkeit vor Ort erfragen",
+    footer: true,
   },
   sts: {
     100: "Freie Fahrt",
     50: "50% oder 25% Ermässigung",
     0: "Keine Ermässigung",
     vorOrt: "Gültigkeit vor Ort erfragen",
+    footer: true,
   },
   at: {
     100: "Automatisches Ticketing verfügbar",
     0: "Automatisches Ticketing nicht verfügbar",
+    footer: false,
   },
 };
 
@@ -117,7 +122,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
   const full = infos[cardsScope]["100"];
   const reduced = infos[cardsScope]["50"];
   const none = infos[cardsScope]["0"] || "Keine Ermässigung";
-  const { vorOrt } = infos[cardsScope];
+  const { vorOrt, footer } = infos[cardsScope];
   const products = layer.get("products") || [];
   const productsRemark = layer.get("productsRemark");
   return (
@@ -229,17 +234,21 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
           <Typography paragraph>{t("Gültigkeit vor Ort erfragen")}</Typography>
         </>
       )}
-      <br />
-      <Divider />
-      <br />
-      <br />
-      <Typography paragraph>
-        <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
-      </Typography>
-      <Typography paragraph>
-        <i>{warranty[i18n.language]}</i>
-      </Typography>
-      <br />
+      {footer && (
+        <>
+          <br />
+          <Divider />
+          <br />
+          <br />
+          <Typography paragraph>
+            <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
+          </Typography>
+          <Typography paragraph>
+            <i>{warranty[i18n.language]}</i>
+          </Typography>
+          <br />
+        </>
+      )}
     </div>
   );
 }
