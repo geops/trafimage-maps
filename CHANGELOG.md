@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.5](https://github.com/geops/trafimage-maps/compare/v1.27.4...v1.27.5) (2024-02-08)
+
+### Bug Fixes
+
+- change order of handicap informations in popup ([cee19a0](https://github.com/geops/trafimage-maps/commit/cee19a0f3cc593f5285c29f67c1fbf87b2480c6c))
+
 ### [1.27.4](https://github.com/geops/trafimage-maps/compare/v1.27.3...v1.27.4) (2024-02-06)
 
 ### Bug Fixes
