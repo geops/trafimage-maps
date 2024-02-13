@@ -225,7 +225,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
       <GeltungsbereicheLegend />
       <br />
       <br />
-      <Typography paragraph>{none}</Typography>
+      <Typography paragraph>{t(none)}</Typography>
       {!!vorOrt && (
         <>
           <GeltungsbereicheLegend mot="ferry" valid={-1} />
