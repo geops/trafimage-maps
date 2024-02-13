@@ -114,8 +114,9 @@ function TopicElements({ history }) {
   const baseLayerImages = useMemo(() => {
     const imgs = {};
     baseLayers.forEach((layer) => {
-      imgs[layer.key] =
-        `${staticFilesUrl}/img/baselayer/${layer.get("previewImage")}.jpg`;
+      imgs[layer.key] = `${staticFilesUrl}/img/baselayer/${layer.get(
+        "previewImage",
+      )}.jpg`;
     });
     return imgs;
   }, [baseLayers, staticFilesUrl]);

@@ -99,7 +99,9 @@ class MesswagenLayer extends Layer {
 
     this.abortController = new AbortController();
     fetch(
-      `https://trafimage-services1.geops.de/messwagen/${this.get("fileName")}.json`,
+      `https://trafimage-services1.geops.de/messwagen/${this.get(
+        "fileName",
+      )}.json`,
       {
         signal: this.abortController.signal,
       },

@@ -2,6 +2,39 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.7](https://github.com/geops/trafimage-maps/compare/v1.27.6...v1.27.7) (2024-02-12)
+
+### Bug Fixes
+
+- **geltungsbereiche:** fix button and layer styling for iframes ([#1141](https://github.com/geops/trafimage-maps/issues/1141)) ([e330633](https://github.com/geops/trafimage-maps/commit/e3306338db80d7196d565f2cf531680fcb9e93e9))
+
+### [1.27.6](https://github.com/geops/trafimage-maps/compare/v1.27.5...v1.27.6) (2024-02-09)
+
+### Bug Fixes
+
+- **gemeindegrenzen:** change date in legend ([#1145](https://github.com/geops/trafimage-maps/issues/1145)) ([913f081](https://github.com/geops/trafimage-maps/commit/913f081fb0ced8bb78d0a58a59a53b404b11026e))
+
+### [1.27.5](https://github.com/geops/trafimage-maps/compare/v1.27.4...v1.27.5) (2024-02-08)
+
+### Bug Fixes
+
+- change order of handicap informations in popup ([cee19a0](https://github.com/geops/trafimage-maps/commit/cee19a0f3cc593f5285c29f67c1fbf87b2480c6c))
+
+### [1.27.4](https://github.com/geops/trafimage-maps/compare/v1.27.3...v1.27.4) (2024-02-06)
+
+### Bug Fixes
+
+- **netzentwicklung:** remove line highlight on layer switch ([#1143](https://github.com/geops/trafimage-maps/issues/1143)) ([5674e99](https://github.com/geops/trafimage-maps/commit/5674e99125c103a7ce5ad0cdc6883331c4459690))
+
+### [1.27.3](https://github.com/geops/trafimage-maps/compare/v1.27.2...v1.27.3) (2024-02-05)
+
+### Bug Fixes
+
+- **handicap:** update display of alternative transport in handicap overlay ([#1142](https://github.com/geops/trafimage-maps/issues/1142)) ([540e8e6](https://github.com/geops/trafimage-maps/commit/540e8e66510031d02dd6d242a7c80fa8b581ed5a))
+- **netzentwicklung:** add Netzentwickler Güterverkehr layer ([#1123](https://github.com/geops/trafimage-maps/issues/1123)) ([93f6244](https://github.com/geops/trafimage-maps/commit/93f6244a1f9ca004022a962440877c7d8b35a1c4))
+
+### [1.27.2](https://github.com/geops/trafimage-maps/compare/v1.27.1...v1.27.2) (2024-02-02)
+
 ### [1.27.1](https://github.com/geops/trafimage-maps/compare/v1.27.0...v1.27.1) (2024-02-01)
 
 ### Bug Fixes

@@ -74,6 +74,7 @@ function NetzentwicklungPopup({ feature, layer, t }) {
   const regionRollen = JSON.parse(feature.get("region_rollen") || "[]").filter(
     (r) => ["Alle", layer.properties.netzentwicklungRoleType].includes(r.typ),
   );
+  const netzentwicklungRoleType = layer.get("netzentwicklungRoleType");
   const mbFeature = feature.get("mapboxFeature");
   let regionColor = "transparent";
   if (mbFeature) {
@@ -87,18 +88,20 @@ function NetzentwicklungPopup({ feature, layer, t }) {
   }
   return (
     <div>
-      <div className={classes.title}>
-        <div
-          style={{
-            backgroundColor: regionColor,
-            width: 19,
-            height: 19,
-            borderRadius: "50%",
-            marginRight: 9,
-          }}
-        />
-        {`${t("Region")} ${t(feature.get("region"))}`}
-      </div>
+      {netzentwicklungRoleType !== "Netzentwickler Güterverkehr" && (
+        <div className={classes.title}>
+          <div
+            style={{
+              backgroundColor: regionColor,
+              width: 19,
+              height: 19,
+              borderRadius: "50%",
+              marginRight: 9,
+            }}
+          />
+          {`${t("Region")} ${t(feature.get("region"))}`}
+        </div>
+      )}
       <div className={classes.title}>{renderTitle(feature, t, true)}</div>
       <div>
         {rollen.map((rolle) => renderRoleCard(rolle, classes, t))}
