@@ -229,10 +229,10 @@ function StopPlacePopup({ feature }) {
     const note = getNote(infos.note, i18n.language, t);
     const url = getUrl(infos.url, t);
     const content = [
+      note,
       accessibility,
       alternativeTransport,
       passengerInformation,
-      note,
       url,
     ].filter(Boolean);
     return content?.length ? content : t("Keine Daten für diese Station");
