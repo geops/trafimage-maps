@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.7](https://github.com/geops/trafimage-maps/compare/v1.27.6...v1.27.7) (2024-02-12)
+
+### Bug Fixes
+
+- **geltungsbereiche:** fix button and layer styling for iframes ([#1141](https://github.com/geops/trafimage-maps/issues/1141)) ([e330633](https://github.com/geops/trafimage-maps/commit/e3306338db80d7196d565f2cf531680fcb9e93e9))
+
+### [1.27.6](https://github.com/geops/trafimage-maps/compare/v1.27.5...v1.27.6) (2024-02-09)
+
+### Bug Fixes
+
+- **gemeindegrenzen:** change date in legend ([#1145](https://github.com/geops/trafimage-maps/issues/1145)) ([913f081](https://github.com/geops/trafimage-maps/commit/913f081fb0ced8bb78d0a58a59a53b404b11026e))
+
 ### [1.27.5](https://github.com/geops/trafimage-maps/compare/v1.27.4...v1.27.5) (2024-02-08)
 
 ### Bug Fixes

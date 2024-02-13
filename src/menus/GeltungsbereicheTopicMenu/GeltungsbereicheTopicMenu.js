@@ -46,10 +46,6 @@ const useStyles = makeStyles(() => {
         lineHeight: 1.5,
       },
 
-      // Display proper padding and border inside the list
-      "& li:first-child": {
-        paddingTop: "6px",
-      },
       "& li": {
         paddingTop: "14px",
         paddingBottom: "14px",
@@ -57,7 +53,6 @@ const useStyles = makeStyles(() => {
       },
       "& li:last-child": {
         borderBottom: "none",
-        paddingBottom: "6px",
       },
     },
     responsiveLeft: {
@@ -66,7 +61,7 @@ const useStyles = makeStyles(() => {
     },
     currentValue: {
       display: "flex",
-      paddingLeft: "40px",
+      paddingRight: 24,
     },
     infoButton: {
       position: "absolute",
