@@ -66,7 +66,8 @@ function DvMenu() {
       .querySelectorAll(`.${topic.key.replaceAll(".", "-")}.map-controls`)[0]
       ?.querySelectorAll(".rs-zooms-bar")[0];
     if (zoomControls) {
-      zoomControls.style.display = isMobile ? "none" : "flex";
+      // We use empty string so the browser use the previous value defined in the css
+      zoomControls.style.display = isMobile ? "none" : "";
     }
   }, [isMobile, topic, dispatch]);
 
