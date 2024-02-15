@@ -66,7 +66,7 @@ function DvMenu() {
       .querySelectorAll(`.${topic.key.replaceAll(".", "-")}.map-controls`)[0]
       ?.querySelectorAll(".rs-zooms-bar")[0];
     if (zoomControls) {
-      zoomControls.style.display = isMobile ? "none" : "block";
+      zoomControls.style.display = isMobile ? "none" : "flex";
     }
   }, [isMobile, topic, dispatch]);
 
