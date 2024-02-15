@@ -31,7 +31,6 @@ function DvMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const topic = useSelector((state) => state.app.activeTopic);
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const isMobile = useIsMobile();
 
@@ -62,14 +61,7 @@ function DvMenu() {
   useEffect(() => {
     // Hide menu and zoom buttons on mobile
     dispatch(setDisplayMenu(!isMobile));
-    const zoomControls = document
-      .querySelectorAll(`.${topic.key.replaceAll(".", "-")}.map-controls`)[0]
-      ?.querySelectorAll(".rs-zooms-bar")[0];
-    if (zoomControls) {
-      // We use empty string so the browser use the previous value defined in the css
-      zoomControls.style.display = isMobile ? "none" : "";
-    }
-  }, [isMobile, topic, dispatch]);
+  }, [isMobile, dispatch]);
 
   // Hook to highlight map features
   useHighlightLayer(featureInfo, highlightLayer);

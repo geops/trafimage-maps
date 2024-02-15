@@ -435,4 +435,12 @@
       }
     }
   }
-}
+
+  /* Topic spezifische css */
+  &.ch-sbb-directverbindungen-iframe {
+  &.ch-sbb-geltungsbereiche-iframe {
+    &.tm-w-xs .wkp-map-controls {
+      display:none;
+    }
+  }
+}}
