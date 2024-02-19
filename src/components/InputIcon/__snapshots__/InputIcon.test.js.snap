@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputIcon should match snapshot when checked and checkbox 1`] = `
+<div class="makeStyles-box-7">
+  <svg width="13.707"
+       height="10.051"
+       viewbox="0 0 3.627 2.659"
+       data-testid="inputicon-tick"
+  >
+    <path fill="#eb0000"
+          fill-rule="evenodd"
+          d="m43.353 31.363-9 8.99-.353.354-.353-.354-4-4 .707-.707L34 39.293l8.647-8.637z"
+          clip-rule="evenodd"
+          transform="matrix(.26458 0 0 .26458 -7.844 -8.111)"
+    >
+    </path>
+  </svg>
+</div>
+`;
+
+exports[`InputIcon should match snapshot when checked and radio button 1`] = `
+<div class="makeStyles-box-10 makeStyles-radio-11">
+  <div class="makeStyles-innerCircle-12"
+       data-testid="inputicon-radio"
+  >
+  </div>
+</div>
+`;
+
+exports[`InputIcon should match snapshot when unchecked and checkbox 1`] = `
+<div class="makeStyles-box-1">
+</div>
+`;
+
+exports[`InputIcon should match snapshot when unchecked and radio button 1`] = `
+<div class="makeStyles-box-4 makeStyles-radio-5">
+</div>
+`;

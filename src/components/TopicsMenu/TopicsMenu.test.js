@@ -2,8 +2,10 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@mui/styles";
 import { Map } from "ol";
 import TopicsMenu from "./TopicsMenu";
+import theme from "../../themes/default";
 
 const layer1 = new Layer({
   name: "parent1",
@@ -44,9 +46,11 @@ describe("TopicsMenu", () => {
       },
     });
     render(
-      <Provider store={store}>
-        <TopicsMenu />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <TopicsMenu />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(screen.getAllByText(/topic2/).length).toBe(2);
     expect(screen.getByText("alle aktiviert")).toBeInTheDocument();
