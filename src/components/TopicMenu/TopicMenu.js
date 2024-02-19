@@ -160,6 +160,7 @@ class TopicMenu extends PureComponent {
                   <InputIcon
                     type={layer.get("group") && "radio"}
                     checked={layer.visible}
+                    data-cy={`input-icon-${layer.name}`}
                   />
                 </button>
               );

@@ -27,7 +27,7 @@ describe("InputIcon", () => {
         <InputIcon checked />
       </ThemeProvider>,
     );
-    expect(getByTestId("inputicon-tick")).toBeInTheDocument();
+    expect(getByTestId("input-icon-tick")).toBeInTheDocument();
     expect(container.innerHTML).toMatchSnapshot();
   });
   test("should match snapshot when checked and radio button", () => {
@@ -36,7 +36,7 @@ describe("InputIcon", () => {
         <InputIcon type="radio" checked />
       </ThemeProvider>,
     );
-    expect(getByTestId("inputicon-radio")).toBeInTheDocument();
+    expect(getByTestId("input-icon-radio")).toBeInTheDocument();
     expect(container.innerHTML).toMatchSnapshot();
   });
 });

@@ -20,9 +20,7 @@ describe("A link to data", { browser: "!firefox" }, () => {
   it("is available for direktverbindung topic", () => {
     ignoreDataLinkError("https://data.sbb.ch");
     // Click info button
-    cy.get(
-      ":nth-child(3) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button",
-    ).click();
+    cy.get('[data-cy="infos-button-ch.sbb.direktverbindungen"]').click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/direktverbindungen/information/"]',
     )
@@ -42,7 +40,7 @@ describe("A link to data", { browser: "!firefox" }, () => {
   it("is available for bahnhofplaene layer", () => {
     ignoreDataLinkError("https://data.sbb.ch");
     // Click info button
-    cy.get(":nth-child(1) > .rs-layer-tree-item > button").click();
+    cy.get('[data-cy="infos-button-ch.sbb.bahnhofplaene"]').click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/haltestelle-karte-trafimage/information/"]',
     )
@@ -63,7 +61,7 @@ describe("A link to data", { browser: "!firefox" }, () => {
     ignoreDataLinkError("https://reporting.sbb.ch");
 
     // Click info button
-    cy.get(":nth-child(4) > .rs-layer-tree-item > button").click();
+    cy.get('[data-cy="infos-button-ch.sbb.bahnhoffrequenzen"]').click();
     cy.get('a[href="https://reporting.sbb.ch/verkehr?highlighted=row-243"]')
       .should(([a]) => {
         expect(a.textContent).to.equal(
@@ -83,9 +81,7 @@ describe("A link to data", { browser: "!firefox" }, () => {
   it("is available for construction topic", () => {
     ignoreDataLinkError("https://data.sbb.ch");
     // Click info button
-    cy.get(
-      ":nth-child(5) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button",
-    ).click();
+    cy.get('[data-cy="infos-button-ch.sbb.construction"]').click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/construction-projects/information/"]',
     )
@@ -105,9 +101,7 @@ describe("A link to data", { browser: "!firefox" }, () => {
   it("is available for isb topic", () => {
     ignoreDataLinkError("https://data.sbb.ch");
     // Click info button
-    cy.get(
-      ":nth-child(9) > .wkp-topic-menu-item-wrapper > .wkp-topic-icons > button",
-    ).click();
+    cy.get('[data-cy="infos-button-ch.sbb.isb"]').click();
     cy.get(
       'a[href="https://data.sbb.ch/explore/dataset/infrastrukturbetreiberinnen/information/"]',
     )

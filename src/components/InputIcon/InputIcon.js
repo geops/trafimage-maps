@@ -33,19 +33,20 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
-function InputIcon({ checked, type }) {
+function InputIcon({ checked, type, "data-cy": dataCy }) {
   const classes = useStyles();
   const theme = useTheme();
   return (
     <div
       className={`${classes.box}${type === "radio" ? ` ${classes.radio}` : ""}`}
+      data-cy={dataCy}
     >
       {checked && type === "checkbox" && (
         <svg
           width="13.707"
           height="10.051"
           viewBox="0 0 3.627 2.659"
-          data-testid="inputicon-tick"
+          data-testid="input-icon-tick"
         >
           <path
             fill={theme.palette.secondary.main}
@@ -57,7 +58,7 @@ function InputIcon({ checked, type }) {
         </svg>
       )}
       {checked && type === "radio" && (
-        <div className={classes.innerCircle} data-testid="inputicon-radio" />
+        <div className={classes.innerCircle} data-testid="input-icon-radio" />
       )}
     </div>
   );
@@ -66,10 +67,12 @@ function InputIcon({ checked, type }) {
 InputIcon.propTypes = {
   checked: PropTypes.bool,
   type: PropTypes.oneOf(["checkbox", "radio"]),
+  "data-cy": PropTypes.string,
 };
 InputIcon.defaultProps = {
   checked: false,
   type: "checkbox",
+  "data-cy": undefined,
 };
 
 export default InputIcon;

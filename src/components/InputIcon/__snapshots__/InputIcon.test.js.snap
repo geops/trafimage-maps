@@ -5,7 +5,7 @@ exports[`InputIcon should match snapshot when checked and checkbox 1`] = `
   <svg width="13.707"
        height="10.051"
        viewbox="0 0 3.627 2.659"
-       data-testid="inputicon-tick"
+       data-testid="input-icon-tick"
   >
     <path fill="#eb0000"
           fill-rule="evenodd"
@@ -21,7 +21,7 @@ exports[`InputIcon should match snapshot when checked and checkbox 1`] = `
 exports[`InputIcon should match snapshot when checked and radio button 1`] = `
 <div class="makeStyles-box-10 makeStyles-radio-11">
   <div class="makeStyles-innerCircle-12"
-       data-testid="inputicon-radio"
+       data-testid="input-icon-radio"
   >
   </div>
 </div>
