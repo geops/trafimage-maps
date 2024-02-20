@@ -3,7 +3,7 @@ import GeltungsbereicheLayer from "../../layers/GeltungsbereicheLayer";
 
 export const GA_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-ga_s25";
 export const TK_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-tk";
-export const HALBTAX_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-hta";
+export const HTA_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-hta";
 export const STS_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-sts";
 
 export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
@@ -77,7 +77,7 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
 });
 
 export const geltungsbereicheHta = new GeltungsbereicheLayer({
-  name: HALBTAX_LAYER_KEY,
+  name: HTA_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>

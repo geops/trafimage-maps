@@ -287,6 +287,11 @@ const sandbox = {
   searches: defaultSearches,
 };
 
+const getVisibleGbExportLayer = () =>
+  [geltungsbereicheTk, geltungsbereicheHta, geltungsbereicheGA].find(
+    (l) => l.visible,
+  );
+
 export const geltungsbereicheMvp = {
   name: "ch.sbb.geltungsbereiche",
   key: "ch.sbb.geltungsbereiche",
@@ -309,11 +314,7 @@ export const geltungsbereicheMvp = {
       }),
     }),
     getOverlayImageUrl: (lang, paperSize) => {
-      const visibleLayer = [
-        geltungsbereicheTk,
-        geltungsbereicheHta,
-        geltungsbereicheGA,
-      ].find((l) => l.visible);
+      const visibleLayer = getVisibleGbExportLayer();
       return (
         geltungsbereicheLegends.find(
           (l) =>
@@ -323,8 +324,10 @@ export const geltungsbereicheMvp = {
         )?.legend || geltungsbereicheLegends[0].legend
       );
     },
-    getExportFileName: (t, paperSize) =>
-      `${t("Geltungsbereiche")}_${paperSize.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`,
+    getExportFileName: (t, paperSize) => {
+      const visibleLayer = getVisibleGbExportLayer();
+      return `${visibleLayer.name}_${paperSize.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`;
+    },
   },
 };
 
