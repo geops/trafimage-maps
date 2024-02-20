@@ -106,7 +106,7 @@ function ExportButton({
             getOverlayImageUrl &&
             getOverlayImageUrl(i18n.language, exportFormat);
           fileName = getExportFileName
-            ? getExportFileName(t, exportFormat)
+            ? getExportFileName(t, exportFormat, i18n.language)
             : fileName;
         }
 

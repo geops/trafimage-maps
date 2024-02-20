@@ -183,7 +183,7 @@ const sparAktionTagLegends = [
     language: "en",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA3En,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.235),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.23),
   },
   {
     paperSize: "a4",

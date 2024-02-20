@@ -324,9 +324,9 @@ export const geltungsbereicheMvp = {
         )?.legend || geltungsbereicheLegends[0].legend
       );
     },
-    getExportFileName: (t, paperSize) => {
+    getExportFileName: (t, paperSize, lang) => {
       const visibleLayer = getVisibleGbExportLayer();
-      return `${visibleLayer.name}_${paperSize.toUpperCase()}_${new Date().toISOString().slice(0, 10)}`;
+      return `${visibleLayer.name}_${paperSize.toUpperCase()}_${lang.toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`;
     },
   },
 };
