@@ -65,7 +65,7 @@ const galegends = [
     language: "en",
     validity: GA_LAYER_KEY,
     legend: gaLegendA3En,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.295),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.29),
   },
   {
     paperSize: "a4",
@@ -86,7 +86,7 @@ const galegends = [
     language: "it",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4It,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.305),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.315),
   },
   {
     paperSize: "a4",
@@ -103,7 +103,7 @@ const halbtaxLegends = [
     language: "de",
     validity: HTA_LAYER_KEY,
     legend: halbtaxLegendA3De,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.2),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.205),
   },
   {
     paperSize: "a3",
@@ -131,7 +131,7 @@ const halbtaxLegends = [
     language: "de",
     validity: HTA_LAYER_KEY,
     legend: halbtaxLegendA4De,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.22),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.225),
   },
   {
     paperSize: "a4",
@@ -152,7 +152,7 @@ const halbtaxLegends = [
     language: "en",
     validity: HTA_LAYER_KEY,
     legend: halbtaxLegendA4En,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.21),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.215),
   },
 ];
 
@@ -211,7 +211,7 @@ const sparAktionTagLegends = [
     language: "en",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4En,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.255),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.252),
   },
 ];
 
