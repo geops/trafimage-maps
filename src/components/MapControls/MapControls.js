@@ -143,7 +143,7 @@ function MapControls({
         map={map}
         zoomInChildren={<ZoomIn />}
         zoomOutChildren={<ZoomOut />}
-        zoomSlider={!isSmallHeight && zoomSlider}
+        zoomSlider={!isSmallHeight && !isMobile && zoomSlider}
         titles={{
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),
