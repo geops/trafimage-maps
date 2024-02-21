@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.9](https://github.com/geops/trafimage-maps/compare/v1.27.8...v1.27.9) (2024-02-21)
+
+### Bug Fixes
+
+- **railplus:** update address in railplus PDF legends ([#1147](https://github.com/geops/trafimage-maps/issues/1147)) ([57f9f9d](https://github.com/geops/trafimage-maps/commit/57f9f9d9db7ad6b40e94c5229172a8590cba5669))
+
 ### [1.27.8](https://github.com/geops/trafimage-maps/compare/v1.27.7...v1.27.8) (2024-02-15)
 
 ### Bug Fixes
