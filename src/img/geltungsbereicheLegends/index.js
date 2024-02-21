@@ -79,7 +79,7 @@ const galegends = [
     language: "fr",
     validity: GA_LAYER_KEY,
     legend: gaLegendA4Fr,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.305),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.315),
   },
   {
     paperSize: "a4",
@@ -138,7 +138,7 @@ const halbtaxLegends = [
     language: "fr",
     validity: HTA_LAYER_KEY,
     legend: halbtaxLegendA4Fr,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.22),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.225),
   },
   {
     paperSize: "a4",
@@ -197,7 +197,7 @@ const sparAktionTagLegends = [
     language: "fr",
     validity: TK_LAYER_KEY,
     legend: sparAktionTagLegendA4Fr,
-    getScaleLinePosition: createGetScalelinePosition(0.021, 0.255),
+    getScaleLinePosition: createGetScalelinePosition(0.021, 0.259),
   },
   {
     paperSize: "a4",
