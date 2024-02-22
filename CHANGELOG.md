@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.10](https://github.com/geops/trafimage-maps/compare/v1.27.9...v1.27.10) (2024-02-22)
+
+### Bug Fixes
+
+- **railplus:** use ss instead of ß in address in PDF ([a4572d6](https://github.com/geops/trafimage-maps/commit/a4572d67e4c8cd3b4420ed7ee7ddb150cde58fe2))
+
 ### [1.27.9](https://github.com/geops/trafimage-maps/compare/v1.27.8...v1.27.9) (2024-02-21)
 
 ### Bug Fixes
@@ -12,10 +18,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-- fix display of zoom bar and map buttons on iframe topics ([20961c0](https://github.com/geops/trafimage-maps/commit/20961c0269c536f8e28185c0f96905c642375f0e))
 - fix display of zoom bar and map buttons on iframe topics ([bc0d732](https://github.com/geops/trafimage-maps/commit/bc0d732d401de3a5e15263bb9fb279740a7568e5))
-- hide zoom buttons on mobile for iframe topics using css ([33032a9](https://github.com/geops/trafimage-maps/commit/33032a90f7c8914d9a282d047480631ce8e8b436))
-- hide zoom buttons on mobile for iframe topics using css ([c59d8f0](https://github.com/geops/trafimage-maps/commit/c59d8f08ac192d6575c8eab636f997b071e5a061))
 - hide zoom buttons on mobile for iframe topics using css ([be0e46c](https://github.com/geops/trafimage-maps/commit/be0e46c78409c5ac161cce031e918ebb8bcbaca5))
 
 ### [1.27.7](https://github.com/geops/trafimage-maps/compare/v1.27.6...v1.27.7) (2024-02-12)
