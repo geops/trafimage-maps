@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.27.10](https://github.com/geops/trafimage-maps/compare/v1.27.9...v1.27.10) (2024-02-22)
+
+### Bug Fixes
+
+- **railplus:** use ss instead of ß in address in PDF ([a4572d6](https://github.com/geops/trafimage-maps/commit/a4572d67e4c8cd3b4420ed7ee7ddb150cde58fe2))
+
 ### [1.27.9](https://github.com/geops/trafimage-maps/compare/v1.27.8...v1.27.9) (2024-02-21)
 
 ### Bug Fixes
