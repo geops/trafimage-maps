@@ -19,9 +19,9 @@ describe("ExportUtils ", () => {
       });
       const layers = [layerWithCopyrights, layerWithCopyrightsNotVisible];
 
-      expect(generateExtraData(layers, false).copyright.text()).toBe(
-        "© SBB/CFF/FFS | © geOps Tiles",
-      );
+      expect(
+        generateExtraData(layers, { copyright: true }).copyright.text(),
+      ).toBe("© SBB/CFF/FFS | © geOps Tiles");
     });
 
     test("renders only unique copyrights", () => {
@@ -39,9 +39,9 @@ describe("ExportUtils ", () => {
       });
       const layers = [layerWithCopyrights, layerWithOthersCopyrights];
 
-      expect(generateExtraData(layers, false).copyright.text()).toBe(
-        "© SBB/CFF/FFS | © geOps Tiles | © DBAHN",
-      );
+      expect(
+        generateExtraData(layers, { copyright: true }).copyright.text(),
+      ).toBe("© SBB/CFF/FFS | © geOps Tiles | © DBAHN");
     });
 
     test("renders also copyrights from children", () => {
@@ -60,13 +60,13 @@ describe("ExportUtils ", () => {
       });
       const layers = [layerWithCopyrights];
 
-      expect(generateExtraData(layers, false).copyright.text()).toBe(
-        "© SBB/CFF/FFS | © geOps Tiles | © DBAHNN",
-      );
+      expect(
+        generateExtraData(layers, { copyright: true }).copyright.text(),
+      ).toBe("© SBB/CFF/FFS | © geOps Tiles | © DBAHNN");
     });
 
     test("renders north arrow", () => {
-      expect(generateExtraData([], true).northArrow).toEqual({
+      expect(generateExtraData([], { northArrow: true }).northArrow).toEqual({
         src: "northArrowCircle.png",
       });
     });

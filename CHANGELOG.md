@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/geops/trafimage-maps/compare/v1.27.10...v1.28.0) (2024-02-26)
+
+### Features
+
+- **Geltungsbereiche:** add PDF export with export menu for GB topics ([#1128](https://github.com/geops/trafimage-maps/issues/1128)) ([7503b2e](https://github.com/geops/trafimage-maps/commit/7503b2eb28155ae4496c05dffea01e577e64f8a8))
+
+### [1.27.10](https://github.com/geops/trafimage-maps/compare/v1.27.9...v1.27.10) (2024-02-22)
+
+### Bug Fixes
+
+- **railplus:** use ss instead of ß in address in PDF ([a4572d6](https://github.com/geops/trafimage-maps/commit/a4572d67e4c8cd3b4420ed7ee7ddb150cde58fe2))
+
+### [1.27.9](https://github.com/geops/trafimage-maps/compare/v1.27.8...v1.27.9) (2024-02-21)
+
+### Bug Fixes
+
+- **railplus:** update address in railplus PDF legends ([#1147](https://github.com/geops/trafimage-maps/issues/1147)) ([57f9f9d](https://github.com/geops/trafimage-maps/commit/57f9f9d9db7ad6b40e94c5229172a8590cba5669))
+
+### [1.27.8](https://github.com/geops/trafimage-maps/compare/v1.27.7...v1.27.8) (2024-02-15)
+
+### Bug Fixes
+
+- fix display of zoom bar and map buttons on iframe topics ([bc0d732](https://github.com/geops/trafimage-maps/commit/bc0d732d401de3a5e15263bb9fb279740a7568e5))
+- hide zoom buttons on mobile for iframe topics using css ([be0e46c](https://github.com/geops/trafimage-maps/commit/be0e46c78409c5ac161cce031e918ebb8bcbaca5))
+
 ### [1.27.7](https://github.com/geops/trafimage-maps/compare/v1.27.6...v1.27.7) (2024-02-12)
 
 ### Bug Fixes

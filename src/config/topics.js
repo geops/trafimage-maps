@@ -26,7 +26,11 @@ import beleuchtungLayers from "./ch.sbb.beleuchtungsstaerken";
 import isbLayers from "./ch.sbb.isb";
 import sandboxLayers from "./ch.sbb.netzkarte.sandbox";
 import zweitausbildungLayers from "./ch.sbb.zweitausbildung";
-import geltungsbereicheMvpLayers from "./ch.sbb.geltungsbereiche.mvp";
+import geltungsbereicheMvpLayers, {
+  geltungsbereicheTk,
+  geltungsbereicheHta,
+  geltungsbereicheGA,
+} from "./ch.sbb.geltungsbereiche.mvp";
 import geltungsbereicheIframeLayers from "./ch.sbb.geltungsbereiche.iframe";
 import stsLayers from "./ch.sbb.sts";
 import dvLayers from "./ch.sbb.direktverbindungen";
@@ -44,6 +48,8 @@ import DvListButton from "./ch.sbb.direktverbindungen/DvListButton";
 import applPermalinkVisiblity from "../utils/applyPermalinkVisibility";
 import RailplusMenu from "../menus/RailplusMenu";
 import RailplusExportButton from "./ch.railplus.mitglieder/RailplusExportButton";
+import GaExportMapButton from "../menus/GaExportMenu/GaExportMapButton";
+import geltungsbereicheLegends from "../img/geltungsbereicheLegends";
 import messwagenLayers from "./ch.sbb.funkmesswagen";
 import MesswagenFollowButton from "./ch.sbb.funkmesswagen/MesswagenFollowButton";
 import { MesswagenPopup } from "../popups";
@@ -281,6 +287,11 @@ const sandbox = {
   searches: defaultSearches,
 };
 
+const getVisibleGbExportLayer = () =>
+  [geltungsbereicheTk, geltungsbereicheHta, geltungsbereicheGA].find(
+    (l) => l.visible,
+  );
+
 export const geltungsbereicheMvp = {
   name: "ch.sbb.geltungsbereiche",
   key: "ch.sbb.geltungsbereiche",
@@ -294,6 +305,31 @@ export const geltungsbereicheMvp = {
   projection: "EPSG:3857",
   layerInfoComponent: "GeltungsbereicheTopicInfo",
   searches: defaultSearches,
+  mapControls: <GaExportMapButton />,
+  exportConfig: {
+    getTemplateValues: () => ({
+      publishedAt: new Date().toLocaleDateString("en-GB", {
+        year: "numeric",
+        month: "2-digit",
+      }),
+    }),
+    getOverlayImageUrl: (lang, paperSize) => {
+      const visibleLayer = getVisibleGbExportLayer();
+      return (
+        geltungsbereicheLegends.find(
+          (l) =>
+            l.paperSize === paperSize &&
+            l.language === lang &&
+            l.validity === visibleLayer?.name,
+        )?.legend || geltungsbereicheLegends[0].legend
+      );
+    },
+    getExportFileName: (t, paperSize, lang) => {
+      const nameByLang = t("ch.sbb.geltungsbereiche").replaceAll(" ", "_");
+      const date = new Date().toISOString().slice(0, 10);
+      return `${nameByLang}_${paperSize.toUpperCase()}_${lang.toUpperCase()}_${date}.pdf`;
+    },
+  },
 };
 
 export const geltungsbereicheIframe = {
@@ -437,7 +473,7 @@ export const railPlus = {
           return railplusLegendDe;
       }
     },
-    getExportFileName: (lang, t) =>
+    getExportFileName: (t) =>
       `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,

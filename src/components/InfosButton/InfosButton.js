@@ -32,6 +32,7 @@ function InfosButton({ selectedInfo, className }) {
         dispatch(setSelectedForInfos(isSelected ? null : selectedInfo));
         evt.stopPropagation();
       }}
+      data-cy={`infos-button-${selectedInfo.key || selectedInfo.name}`}
     >
       <FaInfoCircle focusable={false} />
     </IconButton>
