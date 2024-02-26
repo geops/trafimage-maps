@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { FaInfo } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import LayerInfosDialog, {
-  NAME as LayerInfosDialogName,
+  NAME as LAYER_INFOS_DIALOG_NAME,
 } from "../LayerInfosDialog";
 import DrawRemoveDialog, {
-  NAME as DrawRemoveDialogName,
+  NAME as DRAW_REMOVE_DIALOG_NAME,
 } from "../DrawRemoveDialog";
 import Dialog from "../Dialog";
 import LegalLines from "../LegalLines";
@@ -21,7 +21,7 @@ function MainDialog() {
   }, [screenWidth]);
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
-  if (selectedForInfos && dialogVisible === LayerInfosDialogName) {
+  if (selectedForInfos && dialogVisible === LAYER_INFOS_DIALOG_NAME) {
     return (
       <LayerInfosDialog
         selectedForInfos={selectedForInfos}
@@ -47,7 +47,7 @@ function MainDialog() {
     );
   }
 
-  if (dialogVisible === DrawRemoveDialogName) {
+  if (dialogVisible === DRAW_REMOVE_DIALOG_NAME) {
     return <DrawRemoveDialog />;
   }
 

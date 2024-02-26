@@ -42,6 +42,8 @@ export const SET_REALTIME_KEY = "SET_REALTIME_KEY";
 export const SET_REALTIME_URL = "SET_REALTIME_URL";
 export const SET_DISPLAY_MENU = "SET_DISPLAY_MENU";
 export const SET_STOPS_URL = "SET_STOPS_URL";
+export const SET_MAX_CANVAS_SIZE = "SET_MAX_CANVAS_SIZE";
+export const SET_EXPORT_PRINT_OPTIONS = "SET_EXPORT_PRINT_OPTIONS";
 export const SET_GEOLOCATING = "SET_GEOLOCATING";
 export const SET_FOLLOWING = "SET_FOLLOWING";
 export const SET_OVERLAY_ELEMENT = "SET_OVERLAY_ELEMENT";
@@ -354,6 +356,16 @@ export const setSearchInfoOpen = (data) => ({
 
 export const setDisplayMenu = (data) => ({
   type: SET_DISPLAY_MENU,
+  data,
+});
+
+export const setMaxCanvasSize = (data) => ({
+  type: SET_MAX_CANVAS_SIZE,
+  data,
+});
+
+export const setExportPrintOptions = (data) => ({
+  type: SET_EXPORT_PRINT_OPTIONS,
   data,
 });
 
