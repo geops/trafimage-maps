@@ -13,24 +13,24 @@ const translations = {
     description:
       "Infrastrukturbetreiberinnen, die Schmalspurstrecken betreiben.",
     dataInfo1: "Datengrundlage: SBB",
-    dataInfo2: "Datenstand: 12.2023",
+    dataInfo2: "Datenstand: Dezember 2023",
   },
   fr: {
     description:
       "Les gestionnaires d'infrastructure qui exploitent des lignes à voie étroite.",
     dataInfo1: "Base de données: CFF",
-    dataInfo2: "État des données: 12.2023",
+    dataInfo2: "État des données: Décembre 2023",
   },
   it: {
     description:
       "Gestori di infrastrutture che operano su linee a scartamento ridotto.",
     dataInfo1: "Base dati: FFS",
-    dataInfo2: "Aggiornamento dei dati: 12.2023",
+    dataInfo2: "Aggiornamento dei dati: Dicembre 2023",
   },
   en: {
     description: "Infrastructure managers who operate narrow gauge lines.",
     dataInfo1: "Data basis: SBB",
-    dataInfo2: "Data status: 12.2023",
+    dataInfo2: "Data status: December 2023",
   },
 };
 
