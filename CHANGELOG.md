@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.28.0](https://github.com/geops/trafimage-maps/compare/v1.27.10...v1.28.0) (2024-02-26)
+
+### Features
+
+- **Geltungsbereiche:** add PDF export with export menu for GB topics ([#1128](https://github.com/geops/trafimage-maps/issues/1128)) ([7503b2e](https://github.com/geops/trafimage-maps/commit/7503b2eb28155ae4496c05dffea01e577e64f8a8))
+
 ### [1.27.10](https://github.com/geops/trafimage-maps/compare/v1.27.9...v1.27.10) (2024-02-22)
 
 ### Bug Fixes
