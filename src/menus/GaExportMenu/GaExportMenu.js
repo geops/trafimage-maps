@@ -52,12 +52,17 @@ function GaExportMenu({ onClose }) {
   const classesDialog = useStylesDialog();
   const exportPrintOptions = useExportPrintOptions(options);
   const zoom = useSelector((state) => state.map.zoom);
-  const center = useSelector((state) => state.map.center);
+  const map = useSelector((state) => state.app.map);
   const layers = useSelector((state) => state.app.activeTopic)?.layers;
   const [exportFullMap, setExportFullMap] = useState(false);
   const visibleLayerName = useMemo(() => {
     return layers.find((l) => !l.get("isBaseLayer") && l.visible)?.name;
   }, [layers]);
+
+  const exportCoordinates = useMemo(() => {
+    const viewCenter = map?.getView().getCenter();
+    return [viewCenter, viewCenter];
+  }, [map]);
 
   const pdfSize = useMemo(() => {
     return sizesByFormat[exportPrintOptions?.paperSize];
@@ -132,7 +137,7 @@ function GaExportMenu({ onClose }) {
               exportExtent={null} // set null to override default extent
               exportZoom={exportZoom}
               exportCoordinates={
-                exportFullMap ? [SWISS_CENTER, SWISS_CENTER] : [center, center]
+                exportFullMap ? [SWISS_CENTER, SWISS_CENTER] : exportCoordinates
               }
               scaleLineConfig={exportFullMap ? null : scaleLineConfig}
             />

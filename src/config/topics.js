@@ -325,8 +325,9 @@ export const geltungsbereicheMvp = {
       );
     },
     getExportFileName: (t, paperSize, lang) => {
-      const visibleLayer = getVisibleGbExportLayer();
-      return `${visibleLayer.name}_${paperSize.toUpperCase()}_${lang.toUpperCase()}_${new Date().toISOString().slice(0, 10)}.pdf`;
+      const nameByLang = t("ch.sbb.geltungsbereiche").replaceAll(" ", "_");
+      const date = new Date().toISOString().slice(0, 10);
+      return `${nameByLang}_${paperSize.toUpperCase()}_${lang.toUpperCase()}_${date}.pdf`;
     },
   },
 };
