@@ -7,7 +7,7 @@ function ZweitausbildungTopicInfo() {
     <div>
       <p>{t("ch.sbb.zweitausbildung-desc")}</p>
       <p>
-        {t("Datenstand")}: {t("ch.sbb.zweitausbildung-datastatus")}
+        {t("Datenstand")} {t("ch.sbb.zweitausbildung-datastatus")}
       </p>
       <p>
         {t("Verantwortlich")}:
