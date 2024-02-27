@@ -68,8 +68,7 @@ class StationsLayer extends MapboxStyleLayer {
       .layers.filter(
         ({ metadata }) =>
           metadata &&
-          (metadata["general.filter"] === "stations" ||
-            metadata["feature.filter"] === "stations"),
+          /^(stations|stop_position)/.test(metadata["general.filter"]),
       )
       .map((layer) => layer.id);
 
