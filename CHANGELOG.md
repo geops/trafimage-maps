@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.1](https://github.com/geops/trafimage-maps/compare/v1.28.0...v1.28.1) (2024-02-27)
+
+### Bug Fixes
+
+- **netzkarte:** use metadata tags for station layer source update instead of layer.id/layer.source-layer ([#1149](https://github.com/geops/trafimage-maps/issues/1149)) ([8895598](https://github.com/geops/trafimage-maps/commit/8895598352af918a253d126bf6e21e64ae5862f2))
+- **punctuality:** use correct generalization level on highlight trajectory ([#1150](https://github.com/geops/trafimage-maps/issues/1150)) ([685cb61](https://github.com/geops/trafimage-maps/commit/685cb61736699d6c46fe4aa3e36321683c10edb3))
+
 ## [1.28.0](https://github.com/geops/trafimage-maps/compare/v1.27.10...v1.28.0) (2024-02-26)
 
 ### Features
