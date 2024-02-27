@@ -12,7 +12,7 @@ import {
   highlightRoutes,
   highlights,
 } from "../../config/ch.sbb.sts";
-import { parseFeaturesInfos } from "../../utils/stsParseFeatureInfo";
+import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import panCenterFeature from "../../utils/panCenterFeature";
 import useIsMobile from "../../utils/useIsMobile";
 

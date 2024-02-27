@@ -11,7 +11,7 @@ import DvLineTitle from "../DvLineTitle";
 import removeDuplicates, {
   getId,
 } from "../../../utils/removeDuplicateFeatures";
-import parseDvFeatures from "../../../utils/dvParseFeatures";
+import parseDvFeatures from "../dvParseFeatures";
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from "../../../utils/constants";
 import useIsMobile from "../../../utils/useIsMobile";
 import useDisableIosElasticScrollEffect from "../../../utils/useDisableIosElasticScrollEffect";

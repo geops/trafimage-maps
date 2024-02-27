@@ -1,8 +1,8 @@
 import Feature from "ol/Feature";
-import { gttos, premium, highlights } from "../config/ch.sbb.sts";
-import { dvDay, dvNight } from "../config/ch.sbb.direktverbindungen";
-import { getId } from "./removeDuplicateFeatures";
-import parseDvFeatures from "./dvParseFeatures";
+import { gttos, premium, highlights } from "../../config/ch.sbb.sts";
+import { dvDay, dvNight } from "../../config/ch.sbb.direktverbindungen";
+import parseDvFeatures from "../../config/ch.sbb.direktverbindungen/dvParseFeatures";
+import { getId } from "../../utils/removeDuplicateFeatures";
 
 /**
  * Rearrange the features for the popup
