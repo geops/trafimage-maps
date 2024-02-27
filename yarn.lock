@@ -12640,10 +12640,10 @@ mkdirp@^1.0.3:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
-mobility-toolbox-js@2.3.9-beta.1:
-  version "2.3.9-beta.1"
-  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-2.3.9-beta.1.tgz#1fdab664c839a5d6fc951c1c03a42432eede4573"
-  integrity sha512-lkufPk7uqaUyOCi79JFdCFC58vsNTO4TegR7Ou9t7T5n3mFqgXlUg3dokgjLYgaVzmI5ETafuQjbAJ9Y/geafQ==
+mobility-toolbox-js@2.3.9:
+  version "2.3.9"
+  resolved "https://registry.yarnpkg.com/mobility-toolbox-js/-/mobility-toolbox-js-2.3.9.tgz#55f2260f50a42cf0427c66fd58ca55cb2e2385da"
+  integrity sha512-TfiThoNDHMilF5FzViT59e9JWH9YtSZKcZg+WkJJf4iEJ2vWYEMUgPvIVxRDr5JtIIfX16tElyBZ/r0UslGS1Q==
   dependencies:
     "@turf/helpers" "6.5.0"
     "@turf/transform-rotate" "6.5.0"
