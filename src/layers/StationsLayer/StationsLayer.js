@@ -66,7 +66,10 @@ class StationsLayer extends MapboxStyleLayer {
     this.osmPointsLayers = mbMap
       .getStyle()
       .layers.filter(
-        ({ metadata }) => metadata && metadata["feature.filter"] === "stations",
+        ({ metadata }) =>
+          metadata &&
+          (metadata["general.filter"] === "stations" ||
+            metadata["feature.filter"] === "stations"),
       )
       .map((layer) => layer.id);
 
