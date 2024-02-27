@@ -120,6 +120,8 @@ const propTypes = {
   // footer: PropTypes.element,
   isModal: PropTypes.bool,
   className: PropTypes.string,
+  onClose: PropTypes.func,
+  classes: PropTypes.object,
 };
 
 const defaultProps = {
@@ -128,16 +130,27 @@ const defaultProps = {
   // footer: null,
   isModal: false,
   className: null,
+  onClose: null,
+  classes: {},
 };
 
 function Dialog(props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { body, title, name, isModal, className } = props;
+  const {
+    body,
+    title,
+    name,
+    isModal,
+    className,
+    onClose,
+    classes: classesProp,
+  } = props;
   const [dialogNode, setDialogNode] = useState(null);
   const classes = useStyles({ isModal });
-  const closeDialog = () => dispatch(setDialogVisible());
-  const escFunction = (e) => e.which === 27 && dispatch(setDialogVisible());
+  const closeDialog = onClose || (() => dispatch(setDialogVisible()));
+  const escFunction = (e) =>
+    e.which === 27 && (onClose || (() => dispatch(setDialogVisible())));
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isSmallScreen = useMemo(() => {
     return ["xs", "s"].includes(screenWidth);
@@ -179,11 +192,12 @@ function Dialog(props) {
       ? PaperComponent
       : React.memo(DraggablePaperComponent),
     classes: {
-      root: !isSmallScreen ? classes.rootDesktop : "",
-      scrollPaper: classes.scrollPaper,
+      ...classesProp,
+      root: `${!isSmallScreen ? classes.rootDesktop : ""}${classesProp.root ? ` ${classesProp.root}` : ""}`,
+      scrollPaper: `${classes.scrollPaper}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
       paper: `${classes.paper} ${className || ""} ${
         isSmallScreen ? classes.paperMobile : ""
-      }`,
+      }${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
     },
   };
 
@@ -194,8 +208,9 @@ function Dialog(props) {
       maxWidth: "md",
       PaperComponent,
       classes: {
-        scrollPaper: classes.scrollPaperModal,
-        paper: `${classes.paperModal} ${className || ""}`,
+        ...classesProp,
+        scrollPaper: `${classes.scrollPaperModal}${classesProp.scrollPaper ? ` ${classesProp.scrollPaper}` : ""}`,
+        paper: `${classes.paperModal} ${className || ""}${classesProp.paper ? ` ${classesProp.paper}` : ""}`,
       },
     };
   }

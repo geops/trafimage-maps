@@ -1,10 +1,14 @@
 import TrafimageMapboxLayer from "../../layers/TrafimageMapboxLayer";
 import GeltungsbereicheLayer from "../../layers/GeltungsbereicheLayer";
 
+export const GA_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-ga_s25";
+export const TK_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-tk";
+export const HTA_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-hta";
+export const STS_LAYER_KEY = "ch.sbb.geltungsbereiche.mvp-sts";
+
 export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.geltungsbereiche.mvp.data",
   visible: true,
-  preserveDrawingBuffer: true,
   isQueryable: false,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
   style: "base_bright_v2_ch.sbb.geltungsbereiche_ga",
@@ -12,10 +16,13 @@ export const geltungsbereicheDataLayer = new TrafimageMapboxLayer({
     hideInLegend: true,
     isBaseLayer: true,
   },
+  mapOptions: {
+    preserveDrawingBuffer: true,
+  },
 });
 
 export const geltungsbereicheGA = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-ga_s25",
+  name: GA_LAYER_KEY,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
     metadata && metadata["geltungsbereiche.filter"]?.includes("ga.line"),
@@ -38,11 +45,12 @@ export const geltungsbereicheGA = new GeltungsbereicheLayer({
       "ch.sbb.geltungsbereiche.products.hta-day",
       "ch.sbb.geltungsbereiche.products.hta-combi",
     ],
+    isExportable: true,
   },
 });
 
 export const geltungsbereicheTk = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-tk",
+  name: TK_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -64,11 +72,12 @@ export const geltungsbereicheTk = new GeltungsbereicheLayer({
       "ch.sbb.geltungsbereiche.products.municipal-day",
     ],
     productsRemark: "ch.sbb.geltungsbereiche.products.tk-no-hta",
+    isExportable: true,
   },
 });
 
 export const geltungsbereicheHta = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-hta",
+  name: HTA_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>
@@ -91,11 +100,12 @@ export const geltungsbereicheHta = new GeltungsbereicheLayer({
       return "Fahrt zum ermässigten Preis";
     },
     products: ["ch.sbb.geltungsbereiche.products.hta"],
+    isExportable: true,
   },
 });
 
 export const geltungsbereicheSTS = new GeltungsbereicheLayer({
-  name: "ch.sbb.geltungsbereiche.mvp-sts",
+  name: STS_LAYER_KEY,
   visible: false,
   mapboxLayer: geltungsbereicheDataLayer,
   queryRenderedLayersFilter: ({ metadata }) =>

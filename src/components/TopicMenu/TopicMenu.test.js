@@ -2,7 +2,9 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { Layer } from "mobility-toolbox-js/ol";
 import { Provider } from "react-redux";
+import { ThemeProvider } from "@mui/styles";
 import TopicMenu from "./TopicMenu";
+import theme from "../../themes/default";
 
 const layer1 = new Layer({
   name: "parent1",
@@ -27,9 +29,11 @@ describe("TopicMenu", () => {
       },
     });
     render(
-      <Provider store={store}>
-        <TopicMenu topic={{ name: "topicName", key: "topic" }} />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <TopicMenu topic={{ name: "topicName", key: "topic" }} />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(screen.getByText("topicName")).toBeInTheDocument();
     expect(screen.queryByText("parent1")).toBe(null);
@@ -49,9 +53,11 @@ describe("TopicMenu", () => {
       },
     });
     render(
-      <Provider store={store}>
-        <TopicMenu topic={topic} />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <TopicMenu topic={topic} />
+        </Provider>
+      </ThemeProvider>,
     );
     // Test important operator
     expect(screen.getByText("parent1")).toBeInTheDocument();
@@ -78,9 +84,11 @@ describe("TopicMenu", () => {
       },
     });
     render(
-      <Provider store={store}>
-        <TopicMenu topic={topic} />
-      </Provider>,
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <TopicMenu topic={topic} />
+        </Provider>
+      </ThemeProvider>,
     );
     expect(screen.getByText("withhtmltags").nodeName).toBe("B");
   });
