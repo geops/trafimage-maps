@@ -20,7 +20,7 @@ function DvTopicInfo() {
   const legend = [dvDay, dvNight].map((layer) => (
     <div className={classes.legendItem} key={layer.key}>
       <DvLegendLine color={layer.get("color")} />
-      <div>{t(layer.name)}</div>
+      {t(layer.name)}
     </div>
   ));
   const dataLink = dvDay.get("dataLink") && (
@@ -47,9 +47,9 @@ function DvTopicInfo() {
             werden. Es besteht die Option nur Tages- oder nur Nachtzuglinien
             anzuzeigen.
           </p>
-          <div>{legend}</div>
+          {legend}
           <p>
-            Datenstand 11. Dezember 2022.
+            Datenstand Dezember 2023.
             <br />
             Die Karte wird jährlich zum Fahrplanwechsel aktualisiert.
             <br />
@@ -67,9 +67,9 @@ function DvTopicInfo() {
             lignes représentées en un seul clic. Il est possible d&apos;afficher
             uniquement les lignes de jour ou uniquement les lignes de nuit.
           </p>
-          <div>{legend}</div>
+          {legend}
           <p>
-            Mise à jour des données le 11 décembre 2022.
+            Mise à jour des données en décembre 2023.
             <br />
             La carte est actualisée chaque année lors du changement
             d&apos;horaire.
@@ -87,9 +87,9 @@ function DvTopicInfo() {
             can be called up with one click. There is the option to display only
             day or only night train lines.
           </p>
-          <div>{legend}</div>
+          {legend}
           <p>
-            Data updated on 11 December 2022.
+            Data updated in December 2023.
             <br />
             The map is updated annually at the time of the timetable change.
             <br />
@@ -107,9 +107,9 @@ function DvTopicInfo() {
             richiamate con un clic. C&apos;è l&apos;opzione di visualizzare solo
             le linee ferroviarie diurne o solo quelle notturne.
           </p>
-          <div>{legend}</div>
+          {legend}
           <p>
-            Stato dei dati 11 dicembre 2022.
+            Stato dei dati dicembre 2023.
             <br />
             La mappa viene aggiornata ogni anno al momento del cambio
             d&apos;orario.

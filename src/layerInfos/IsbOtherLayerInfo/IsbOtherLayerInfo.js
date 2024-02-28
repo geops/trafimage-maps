@@ -15,28 +15,28 @@ const translations = {
     description:
       "Übrige Normalspurstrecken, die sich nicht im Zuständigkeitsbereich der Schweizerischen Trassenvergabestelle TVS befinden.",
     dataInfo1: "Datengrundlage: BAV",
-    dataInfo2: "Datenstand: 02.2022",
+    dataInfo2: "Datenstand: Dezember 2023",
   },
   fr: {
     title: "Voies normales - autres",
     description:
       "Autres lignes à voie normale qui ne se trouvent pas dans le domaine de compétence du service suisse d'attribution des sillons SAS.",
     dataInfo1: "Base de données: OFT",
-    dataInfo2: "État des données: 02.2022",
+    dataInfo2: "État des données: Décembre 2023",
   },
   it: {
     title: "Tratte a scartamento normale - altre",
     description:
       "Altre linee a scartamento normale che non rientrano nell'area di responsabilità del Servizio svizzero di assegnazione delle tracce SAT.",
     dataInfo1: "Base dati: UFT",
-    dataInfo2: "Aggiornamento dei dati: 02.2022",
+    dataInfo2: "Aggiornamento dei dati: Dicembre 2023",
   },
   en: {
     title: "Standard gauge - other",
     description:
       "Other standard gauge lines which are not within the area of responsibility of the Swiss train path allocation body TVS.",
     dataInfo1: "Data basis: FOT",
-    dataInfo2: "Data status: 02.2022",
+    dataInfo2: "Data status: December 2023",
   },
 };
 
