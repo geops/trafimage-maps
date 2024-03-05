@@ -5,11 +5,10 @@ import { withTranslation } from "react-i18next";
 import DeparturePopupContent from "./DeparturePopupContent";
 
 function DeparturePopup({ feature, children }) {
-  const platform = feature.get("platform");
-  const uic = parseFloat(feature.get("sbb_id"));
+  const { platform, uic_ref: uicRef, sbb_id: sbbId } = feature.getProperties();
 
   return (
-    <DeparturePopupContent uic={uic} platform={platform} showTitle>
+    <DeparturePopupContent uic={sbbId || uicRef} platform={platform} showTitle>
       {children}
     </DeparturePopupContent>
   );

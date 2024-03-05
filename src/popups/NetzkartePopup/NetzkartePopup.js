@@ -32,6 +32,7 @@ function NetzkartePopup({ feature, coordinate }) {
     longitude,
     altitude,
     sbb_id: sbbId,
+    uic_ref: uicRef,
     layer,
     rail,
     ferry,
@@ -61,10 +62,11 @@ function NetzkartePopup({ feature, coordinate }) {
   // (it should be > -1).
   const isAirport = styleLayer && styleLayer.indexOf("flug") > 0;
 
-  const floatSbbId = parseFloat(sbbId);
+  const finalSbbId = sbbId || uicRef;
+  const floatSbbId = parseFloat(finalSbbId);
   const didok =
     (countryCode && countryCode === "CH") ||
-    (!countryCode && floatSbbId >= 8500000 && /^85/.test(sbbId))
+    (!countryCode && floatSbbId >= 8500000 && /^85/.test(finalSbbId))
       ? floatSbbId - 8500000
       : null;
 
