@@ -16,28 +16,28 @@ const translations = {
     description:
       "Infrastrukturbetreiberinnen, die sich im Zuständigkeitsbereich der Schweizerischen Trassenvergabestelle TVS befinden.",
     dataInfo1: "Datengrundlage: BAV und SBB",
-    dataInfo2: "Datenstand: 02.2022",
+    dataInfo2: "Datenstand: Dezember 2023",
   },
   fr: {
     title: "Voies normales - SAS",
     description:
       "Gestionnaires d'infrastructure qui se trouvent dans le domaine de compétence du service suisse d'attribution des sillons SAS.",
     dataInfo1: "Base de données: OFT et CFF",
-    dataInfo2: "État des données: 02.2022",
+    dataInfo2: "État des données: Décembre 2023",
   },
   it: {
     title: "Tratte a scartamento normale - SAT",
     description:
       "I gestori dell'infrastruttura che rientrano nell'area di responsabilità del Servizio svizzero di assegnazione delle tracce SAT.",
     dataInfo1: "Base dati: UFT e FFS",
-    dataInfo2: "Aggiornamento dei dati: 02.2022",
+    dataInfo2: "Aggiornamento dei dati: Dicembre 2023",
   },
   en: {
     title: "Standard gauge - TVS",
     description:
       "Infrastructure managers who are within the area of responsibility of the Swiss train path allocation body TVS.",
     dataInfo1: "Data basis: FOT and SBB",
-    dataInfo2: "Data status: 02.2022",
+    dataInfo2: "Data status: December 2023",
   },
 };
 

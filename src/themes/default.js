@@ -1,6 +1,6 @@
 import React from "react";
 import { createTheme } from "@mui/material/styles";
-import CheckboxIcon from "../components/CheckboxIcon";
+import InputIcon from "../components/InputIcon";
 
 const colors = {
   red: "#eb0000",
@@ -123,8 +123,8 @@ const v5 = {
   components: {
     MuiCheckbox: {
       defaultProps: {
-        icon: <CheckboxIcon />,
-        checkedIcon: <CheckboxIcon checked />,
+        icon: <InputIcon />,
+        checkedIcon: <InputIcon checked />,
         disableRipple: true,
       },
       styleOverrides: {

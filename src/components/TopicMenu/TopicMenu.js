@@ -10,6 +10,7 @@ import { MenuItem } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
 import LayerService from "../../utils/LayerService";
 import Collapsible from "../Collapsible";
+import InputIcon from "../InputIcon";
 import filters from "../../filters";
 import {
   setActiveTopic,
@@ -25,6 +26,15 @@ const styles = () => ({
     margin: "4px 20px 5px 23px",
     width: "calc(100% - 42px)",
     display: "none",
+  },
+  layerTreeInput: {
+    border: "none",
+    background: "none",
+    width: "min-content",
+  },
+  topicMenuWrapper: {
+    display: "flex",
+    gap: 8,
   },
 });
 
@@ -136,6 +146,25 @@ class TopicMenu extends PureComponent {
               }
               return null;
             }}
+            renderCheckbox={(layer) => {
+              return (
+                <button
+                  type="button"
+                  className={classes.layerTreeInput}
+                  onClick={() => {
+                    // eslint-disable-next-line no-param-reassign
+                    layer.visible = !layer.visible;
+                  }}
+                  aria-label={layer.get("name")}
+                >
+                  <InputIcon
+                    type={layer.get("group") && "radio"}
+                    checked={layer.visible}
+                    data-cy={`input-icon-${layer.name}`}
+                  />
+                </button>
+              );
+            }}
           />
         </div>
       );
@@ -161,11 +190,9 @@ class TopicMenu extends PureComponent {
             onKeyPress={(e) => e.which === 13 && this.onTopicClick(topic)}
           >
             <div
-              className={`wkp-topic-title${isActiveTopic ? " wkp-active" : ""}`}
+              className={`wkp-topic-title${isActiveTopic ? " wkp-active" : ""} ${classes.topicMenuWrapper}`}
             >
-              <div className="wkp-topic-radio">
-                {isActiveTopic && <div className="wkp-topic-radio-dot" />}
-              </div>
+              <InputIcon type="radio" checked={isActiveTopic} />
               {t(topic.name)}
             </div>
             {isMenuVisibleLayers && (
