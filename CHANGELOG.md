@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.3](https://github.com/geops/trafimage-maps/compare/v1.28.2...v1.28.3) (2024-03-06)
+
+### Bug Fixes
+
+- **Netzkarte:** remove stop_positions from StationsLayer, use metadata tag in PlatformsLayer ([#1153](https://github.com/geops/trafimage-maps/issues/1153)) ([b08fd70](https://github.com/geops/trafimage-maps/commit/b08fd70d12140edfd2e5caf4325d4e7034044c30))
+
 ### [1.28.2](https://github.com/geops/trafimage-maps/compare/v1.28.1...v1.28.2) (2024-02-28)
 
 ### Bug Fixes
