@@ -154,8 +154,8 @@ export const geltungsbereicheAT = new GeltungsbereicheLayer({
     layerInfoComponent: "GeltungsbereicheLayerInfo",
     getTextFromValid: (valid) => {
       return valid === 100
-        ? "Automatisches Ticketing verfügbar"
-        : "Automatisches Ticketing nicht verfügbar";
+        ? "Automatisches Ticketing gültig"
+        : "Automatisches Ticketing nicht gültg";
     },
     isExportable: false,
   },
