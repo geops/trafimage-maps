@@ -36,9 +36,9 @@ export const infos = {
     footer: true,
   },
   at: {
-    100: "Automatisches Ticketing verfügbar",
-    0: "Automatisches Ticketing nicht verfügbar",
-    footer: false,
+    100: "Automatisches Ticketing gültig",
+    0: "Automatisches Ticketing nicht gültg",
+    footer: true,
   },
 };
 
