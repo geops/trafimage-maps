@@ -116,9 +116,12 @@ class PlatformsLayer extends MapboxStyleLayer {
    */
   onLoad() {
     const { mbMap } = this.mapboxLayer;
-    this.platformLayers = mbMap.getStyle().layers.filter((layer) => {
-      return layer.type === "symbol" && layer["source-layer"] === "platform";
-    });
+    this.platformLayers = mbMap
+      .getStyle()
+      .layers.filter(
+        ({ metadata }) =>
+          metadata && /^stop_position/.test(metadata["general.filter"]),
+      );
 
     this.platformLayers = this.platformLayers.map((layer) => layer.id);
 

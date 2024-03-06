@@ -289,6 +289,10 @@ export const buslines = new MapboxStyleLayer({
   },
 });
 
+buslines.on("change:visible", () => {
+  dataLayer.mbMap?.once("idle", () => stationsLayer.updateSource());
+});
+
 export const gemeindegrenzen = new MapboxStyleLayer({
   name: "ch.sbb.ch_gemeinden",
   mapboxLayer: dataLayer,
