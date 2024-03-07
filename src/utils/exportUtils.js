@@ -63,18 +63,19 @@ const loadImage = (src) =>
  * @returns
  */
 export const getStyledPdfScaleLine = (scaleLineControl, resolution = 1) => {
+  const pixelRatio = window.devicePixelRatio || 1;
   const scaleLineElement = scaleLineControl?.element?.children[0];
   const width = parseInt(scaleLineElement.style.width, 10);
-  scaleLineElement.style.width = `${width * resolution}px`;
-  scaleLineElement.style.height = `${10 * resolution}px`;
-  scaleLineElement.style["font-size"] = `${6 * resolution}px`;
-  scaleLineElement.style["border-width"] = `${1 * resolution}px`;
+  scaleLineElement.style.width = `${(width * resolution) / pixelRatio}px`;
+  scaleLineElement.style.height = `${(10 * resolution) / pixelRatio}px`;
+  scaleLineElement.style["font-size"] = `${(6 * resolution) / pixelRatio}px`;
+  scaleLineElement.style["border-width"] = `${(1 * resolution) / pixelRatio}px`;
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";
   scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
-  scaleLineElement.style.display = "flex";
-  scaleLineElement.style["align-items"] = "center";
-  scaleLineElement.style["justify-content"] = "center";
+  // scaleLineElement.style.display = "flex";
+  // scaleLineElement.style["align-items"] = "center";
+  // scaleLineElement.style["justify-content"] = "center";
   return scaleLineElement;
 };
 
