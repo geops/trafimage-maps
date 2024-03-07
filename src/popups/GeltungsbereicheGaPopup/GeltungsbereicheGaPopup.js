@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { FaCircle } from "react-icons/fa";
 import GeltungsbereicheLegend, { legends } from "./GeltungsbereicheLegend";
+import { infos } from "../../layerInfos/GeltungsbereicheLayerInfo/GeltungsbereicheLayerInfo";
 
 const propTypes = {
   feature: PropTypes.arrayOf(PropTypes.instanceOf(Feature)).isRequired,
@@ -66,7 +67,7 @@ function GeltungsbereichePopup({
   const { t, i18n } = useTranslation();
   const classes = useStyles();
   const layer = layers[0];
-  const products = layer.get("products");
+  const products = layer.get("products") || [];
   const productsRemark = layer.get("productsRemark");
   const validPropertyName = layer.get("validPropertyName");
   const getTextFromValid =
@@ -149,9 +150,11 @@ function GeltungsbereichePopup({
       })}
       <div className={classes.legendItem}>
         <GeltungsbereicheLegend background />
-        <Typography variant="subtitle1">{t("Keine Ermässigung")}</Typography>
+        <Typography variant="subtitle1">
+          {t(infos[layer.get("cardsScope")]?.["0"] || "Keine Ermässigung")}
+        </Typography>
       </div>
-      {renderValidityFooter && (
+      {renderValidityFooter && !!products.length && (
         <>
           <br />
           <Typography variant="h4">
@@ -175,9 +178,9 @@ function GeltungsbereichePopup({
               );
             })}
           </List>
-          {productsRemark ? (
+          {!!productsRemark && (
             <Typography variant="body1">{t(productsRemark)}</Typography>
-          ) : null}
+          )}
         </>
       )}
     </div>
