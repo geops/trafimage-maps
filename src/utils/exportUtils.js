@@ -51,7 +51,13 @@ const getStyleWithForceVisibility = (
 const loadImage = (src) =>
   new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = () => resolve(img);
+    img.onload = () => {
+      window.setTimeout(() => {
+        // eslint-disable-next-line no-alert
+        alert("ici");
+        resolve(img);
+      }, 5000);
+    };
     img.onerror = reject;
     img.src = src;
   });
@@ -73,9 +79,9 @@ export const getStyledPdfScaleLine = (scaleLineControl, resolution = 1) => {
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";
   scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
-  // scaleLineElement.style.display = "flex";
-  // scaleLineElement.style["align-items"] = "center";
-  // scaleLineElement.style["justify-content"] = "center";
+  scaleLineElement.style.display = "flex";
+  scaleLineElement.style["align-items"] = "center";
+  scaleLineElement.style["justify-content"] = "center";
   return scaleLineElement;
 };
 
@@ -393,6 +399,7 @@ export const exportPdf = async (
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
     const blob = new Blob([updatedSvg], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
+    // window.open(url, "_blank");
     const image = await loadImage(url);
 
     // Add SVG to map canvas
