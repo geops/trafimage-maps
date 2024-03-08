@@ -101,8 +101,7 @@ function ExportButton({
             exportConfig;
           templateValues = getTemplateValues?.(i18n.language, t);
           imageUrl = getOverlayImageUrl?.(i18n.language, exportFormat);
-          fileName =
-            getExportFileName?.(t, exportFormat, i18n.language) || fileName;
+          fileName = getExportFileName?.(t, exportFormat, i18n.language);
         }
 
         const scaleLineControl = mapToExport
