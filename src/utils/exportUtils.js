@@ -52,11 +52,11 @@ const loadImage = (src) =>
   new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => {
+      // On safari and chrome iOS we have to wait the fonts are properly loaded
+      // it's ugly but seems to work.
       window.setTimeout(() => {
-        // eslint-disable-next-line no-alert
-        alert("ici");
         resolve(img);
-      }, 5000);
+      }, 2000);
     };
     img.onerror = reject;
     img.src = src;
