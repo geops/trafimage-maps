@@ -328,9 +328,9 @@ export const exportPdf = async (
   canvas,
   exportScale,
   exportSize,
-  templateValues,
+  templateValues = {},
   overlayImageUrl,
-  exportFileName,
+  exportFileName = `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
   scaleLineConfig,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
