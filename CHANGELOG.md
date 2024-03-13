@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.5](https://github.com/geops/trafimage-maps/compare/v1.28.4...v1.28.5) (2024-03-11)
+
+### Bug Fixes
+
+- **tarifverbundkarte:** add Tarifverbund Klosters to PDF legend ([#1154](https://github.com/geops/trafimage-maps/issues/1154)) ([89249d7](https://github.com/geops/trafimage-maps/commit/89249d7acf26be53871152c3ff30b18894b6b756))
+
+### [1.28.4](https://github.com/geops/trafimage-maps/compare/v1.28.3...v1.28.4) (2024-03-07)
+
+### Bug Fixes
+
+- add automatic ticketing layer in geltungsbereiche ([#1144](https://github.com/geops/trafimage-maps/issues/1144)) ([69357d4](https://github.com/geops/trafimage-maps/commit/69357d4c5a411d2d9bf81090a281e6d470fcf967))
+
 ### [1.28.3](https://github.com/geops/trafimage-maps/compare/v1.28.2...v1.28.3) (2024-03-06)
 
 ### Bug Fixes
