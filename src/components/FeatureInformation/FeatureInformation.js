@@ -7,6 +7,7 @@ import { MdClose } from "react-icons/md";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { Link, IconButton } from "@mui/material";
 import { setFeatureInfo } from "../../model/app/actions";
+import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import getPopupComponent from "../../utils/getPopupComponent";
@@ -26,6 +27,9 @@ function FeatureInformation({ featureInfo }) {
 
   // Hook to highlight map features
   useHighlightLayer(featureInfo, highlightLayer, featureIndex);
+
+  // Hook to filter out selected features for deactivated layers
+  useUpdateFeatureInfoOnLayerToggle(infoIndexed.layers.flat(), featureInfo);
 
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
