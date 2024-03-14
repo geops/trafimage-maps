@@ -1,40 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { MdClose } from "react-icons/md";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
 import { Link, IconButton } from "@mui/material";
-import { unByKey } from "ol/Observable";
 import { setFeatureInfo } from "../../model/app/actions";
+import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import getPopupComponent from "../../utils/getPopupComponent";
 import "./FeatureInformation.scss";
-
-const useUpdateFeatureInfoOnLayerDeactivate = (layers, featureInfo) => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const listeners = [];
-    layers.forEach((l) => {
-      const listener = l?.on("change:visible", (evt) => {
-        const layer = evt.target;
-        if (!layer.visible) {
-          layer.select();
-          layer.highlight();
-          dispatch(
-            setFeatureInfo(featureInfo.filter((info) => info.layer !== layer)),
-          );
-        }
-      });
-      listeners.push(listener);
-    });
-    return () => {
-      unByKey(listeners);
-    };
-  }, [layers, featureInfo, dispatch]);
-};
 
 function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
@@ -52,7 +29,7 @@ function FeatureInformation({ featureInfo }) {
   useHighlightLayer(featureInfo, highlightLayer, featureIndex);
 
   // Hook to filter out selected features for deactivated layers
-  useUpdateFeatureInfoOnLayerDeactivate(infoIndexed.layers.flat(), featureInfo);
+  useUpdateFeatureInfoOnLayerToggle(infoIndexed.layers.flat(), featureInfo);
 
   // The current feature(s) to display.
   const feature = infoIndexed.features[featureIndex];
