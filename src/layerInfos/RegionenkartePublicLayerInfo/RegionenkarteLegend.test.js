@@ -12,13 +12,13 @@ const mapping = {
 };
 
 describe("RegionenkarteLegend", () => {
-  test("should display correct partners", async () => {
+  test("should display all regions with correct colors", async () => {
     const { queryByTestId } = render(
       <ThemeProvider theme={theme}>
         <RegionenkarteLegend />
       </ThemeProvider>,
     );
-    ["ost", "west", "sud", "mitte"].forEach((region) => {
+    Object.keys(mapping).forEach((region) => {
       const imgElement = queryByTestId(`regionenkartelegend-${region}`);
       expect(imgElement).toBeInTheDocument();
       expect(imgElement).toHaveAttribute("src", `${mapping[region]}.png`);
