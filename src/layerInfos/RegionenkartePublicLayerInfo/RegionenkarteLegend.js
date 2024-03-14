@@ -26,19 +26,19 @@ function RegionenkarteLegend() {
   return (
     <div className={classes.legend}>
       <div>
-        <img src={grun} alt="grun" />
+        <img src={grun} alt="grun" data-testid="regionenkartelegend-ost" />
         {`${t("Region")} ${t("Ost")}`}
       </div>
       <div>
-        <img src={rot} alt="rot" />
+        <img src={rot} alt="rot" data-testid="regionenkartelegend-sud" />
         {`${t("Region")} ${t("Süd")}`}
       </div>
       <div>
-        <img src={lila} alt="lila" />
+        <img src={lila} alt="lila" data-testid="regionenkartelegend-mitte" />
         {`${t("Region")} ${t("Mitte")}`}
       </div>
       <div>
-        <img src={gelb} alt="gelb" />
+        <img src={gelb} alt="gelb" data-testid="regionenkartelegend-west" />
         {`${t("Region")} ${t("West")}`}
       </div>
     </div>
