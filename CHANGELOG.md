@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.6](https://github.com/geops/trafimage-maps/compare/v1.28.5...v1.28.6) (2024-03-14)
+
+### Bug Fixes
+
+- **overlay:** remove features from overlay when deactivating layers ([#1156](https://github.com/geops/trafimage-maps/issues/1156)) ([b26446e](https://github.com/geops/trafimage-maps/commit/b26446e729cbac9ce1eebbb60d6542c6041fdff6))
+- **regionenkarte:** make regionenkarte legend reusable as its own component ([#1157](https://github.com/geops/trafimage-maps/issues/1157)) ([9638f5e](https://github.com/geops/trafimage-maps/commit/9638f5eb1a6bfbe69d2000bc31d730635939bcab))
+
 ### [1.28.5](https://github.com/geops/trafimage-maps/compare/v1.28.4...v1.28.5) (2024-03-11)
 
 ### Bug Fixes
