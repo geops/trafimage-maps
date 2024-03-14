@@ -1,10 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { makeStyles } from "@mui/styles";
-import grun from "./grun.png";
-import gelb from "./gelb.png";
-import lila from "./lila.png";
-import rot from "./rot.png";
+import RegionenkarteLegend from "./RegionenkarteLegend";
 
 const title = {
   de: "Regionenkarte I-VU-UEW",
@@ -41,43 +37,11 @@ const description = {
   ),
 };
 
-const useStyles = makeStyles((theme) => ({
-  legend: {
-    "& > div": {
-      display: "flex",
-      alignItems: "center",
-      paddingTop: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-    },
-    "& img": {
-      marginRight: theme.spacing(1),
-    },
-  },
-}));
-
 function RegionenkartePublicLayerInfo({ language }) {
-  const classes = useStyles();
   return (
     <div>
       <p>{title[language]}</p>
-      <div className={classes.legend}>
-        <div>
-          <img src={grun} alt="grun" />
-          Region Ost
-        </div>
-        <div>
-          <img src={rot} alt="rot" />
-          Region Süd
-        </div>
-        <div>
-          <img src={lila} alt="lila" />
-          Region Mitte
-        </div>
-        <div>
-          <img src={gelb} alt="gelb" />
-          Region West
-        </div>
-      </div>
+      <RegionenkarteLegend />
       {description[language]}
     </div>
   );
