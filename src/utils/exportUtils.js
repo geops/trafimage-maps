@@ -51,7 +51,13 @@ const getStyleWithForceVisibility = (
 const loadImage = (src) =>
   new Promise((resolve, reject) => {
     const img = new Image();
-    img.onload = () => resolve(img);
+    img.onload = () => {
+      // On safari and chrome iOS we have to wait the fonts are properly loaded
+      // it's ugly but seems to work.
+      window.setTimeout(() => {
+        resolve(img);
+      }, 2000);
+    };
     img.onerror = reject;
     img.src = src;
   });
@@ -63,12 +69,13 @@ const loadImage = (src) =>
  * @returns
  */
 export const getStyledPdfScaleLine = (scaleLineControl, resolution = 1) => {
+  const pixelRatio = window.devicePixelRatio || 1;
   const scaleLineElement = scaleLineControl?.element?.children[0];
   const width = parseInt(scaleLineElement.style.width, 10);
-  scaleLineElement.style.width = `${width * resolution}px`;
-  scaleLineElement.style.height = `${10 * resolution}px`;
-  scaleLineElement.style["font-size"] = `${6 * resolution}px`;
-  scaleLineElement.style["border-width"] = `${1 * resolution}px`;
+  scaleLineElement.style.width = `${(width * resolution) / pixelRatio}px`;
+  scaleLineElement.style.height = `${(10 * resolution) / pixelRatio}px`;
+  scaleLineElement.style["font-size"] = `${(6 * resolution) / pixelRatio}px`;
+  scaleLineElement.style["border-width"] = `${(1 * resolution) / pixelRatio}px`;
   scaleLineElement.style["border-color"] = "black";
   scaleLineElement.style["font-color"] = "black";
   scaleLineElement.style["font-family"] = "SBBWeb-Roman,Arial,sans-serif";
@@ -321,9 +328,9 @@ export const exportPdf = async (
   canvas,
   exportScale,
   exportSize,
-  templateValues,
+  templateValues = {},
   overlayImageUrl,
-  exportFileName,
+  exportFileName = `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`,
   scaleLineConfig,
 ) => {
   clean(mapToExport, map, new LayerService(layers));
@@ -392,6 +399,7 @@ export const exportPdf = async (
     updatedSvg = new XMLSerializer().serializeToString(svgDoc);
     const blob = new Blob([updatedSvg], { type: "image/svg+xml" });
     const url = URL.createObjectURL(blob);
+    // window.open(url, "_blank");
     const image = await loadImage(url);
 
     // Add SVG to map canvas

@@ -91,23 +91,17 @@ function ExportButton({
           return;
         }
 
-        let templateValues = {};
+        let templateValues;
         let imageUrl;
-        let fileName = `trafimage-${new Date().toISOString().slice(0, 10)}.pdf`;
+        let fileName;
 
         const { exportConfig } = topic;
         if (exportConfig) {
           const { getTemplateValues, getOverlayImageUrl, getExportFileName } =
             exportConfig;
-          templateValues = getTemplateValues
-            ? getTemplateValues(i18n.language, t)
-            : {};
-          imageUrl =
-            getOverlayImageUrl &&
-            getOverlayImageUrl(i18n.language, exportFormat);
-          fileName = getExportFileName
-            ? getExportFileName(t, exportFormat, i18n.language)
-            : fileName;
+          templateValues = getTemplateValues?.(i18n.language, t);
+          imageUrl = getOverlayImageUrl?.(i18n.language, exportFormat);
+          fileName = getExportFileName?.(t, exportFormat, i18n.language);
         }
 
         const scaleLineControl = mapToExport

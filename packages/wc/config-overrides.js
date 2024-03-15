@@ -1,15 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-param-reassign */
 /*!
  * Caution! You should not edit this file.
  *
  * Running 'create-react-web-component --update' will replace this file.
  */
 
-// const EventHooksPlugin = require("event-hooks-webpack-plugin");
-// const { PromiseTask } = require("event-hooks-webpack-plugin/lib/tasks");
-// const rimraf = require("rimraf");
-const fs = require("fs");
+const { check } = require("prettier");
 
 const overrideModule = (module) => {
   // We override css and scss rules to generate a string css instead of an object.
@@ -20,6 +15,7 @@ const overrideModule = (module) => {
   const svgRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
     ".svg".match(rule.test),
   );
+  // eslint-disable-next-line no-param-reassign
   module.rules[ruleIndex].oneOf[svgRuleIndex].test = /^((?!url).)*\.svg$/;
 
   const cssRuleIndex = module.rules[ruleIndex].oneOf.findIndex((rule) =>
@@ -30,9 +26,11 @@ const overrideModule = (module) => {
   );
 
   if (cssRuleIndex !== -1) {
+    // eslint-disable-next-line no-param-reassign
     module.rules[ruleIndex].oneOf[cssRuleIndex].use[0] = {
       loader: "to-string-loader",
     };
+    // eslint-disable-next-line no-param-reassign
     module.rules[ruleIndex].oneOf[cssRuleIndex].use[1] = {
       loader: "css-loader",
       options: {
@@ -43,9 +41,11 @@ const overrideModule = (module) => {
     };
   }
   if (scssRuleIndex !== -1) {
+    // eslint-disable-next-line no-param-reassign
     module.rules[ruleIndex].oneOf[scssRuleIndex].use[0] = {
       loader: "to-string-loader",
     };
+    // eslint-disable-next-line no-param-reassign
     module.rules[ruleIndex].oneOf[scssRuleIndex].use[1] = {
       loader: "css-loader",
       options: {
@@ -65,53 +65,18 @@ const overrideModule = (module) => {
 };
 
 const overrideOutput = (output) => {
-  const { checkFilename, ...newOutput } = output;
-
   return {
-    ...newOutput,
+    ...output,
     filename: "bundle.js",
   };
 };
 
-const overrideOptimization = (optimization, env) => {
-  const newOptions = optimization.minimizer[0].options;
-
-  // newOptions.sourceMap = env === 'development';
-  // optimization.minimizer[0].options = newOptions;
-
-  return {
-    ...optimization,
-    splitChunks: false,
-    runtimeChunk: false,
-  };
+const overrideOptimization = (optimization) => {
+  return optimization;
 };
 
-const overridePlugins = (plugins, env) => {
-  plugins[0].userOptions.inject = "head";
-
-  /* plugins.push(
-    new EventHooksPlugin({
-      done: new PromiseTask(() => copyBundleScript(env)),
-    }),
-  ); */
-
+const overridePlugins = (plugins) => {
   return plugins;
-};
-
-const copyBundleScript = async (env) => {
-  if (env !== "production") {
-    return;
-  }
-
-  if (!fs.existsSync("build")) {
-    return;
-  }
-
-  fs.readdirSync("build").forEach((file) => {
-    if (file !== "bundle.js") {
-      // rimraf.sync(`build/${file}`);
-    }
-  });
 };
 
 module.exports = function override(config, env) {
