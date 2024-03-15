@@ -6,46 +6,34 @@ import SBBWebItalicPath from "./fonts/SBBWeb-Italic.woff";
 import SBBWebUltraLightPath from "./fonts/SBBWeb-UltraLight.woff";
 import SBBWebThinPath from "./fonts/SBBWeb-Thin.woff";
 
-export const sbbWebRoman = {
+const sbbWebRoman = {
   family: "SBBWeb-Roman",
   file: SBBWebRomanPath,
 };
 
-export const sbbWebLight = {
+const sbbWebLight = {
   family: "SBBWeb-Light",
   file: SBBWebLightPath,
 };
 
-export const sbbWebUltraLight = {
+const sbbWebUltraLight = {
   family: "SBBWeb-UltraLight",
   file: SBBWebUltraLightPath,
 };
 
-export const sbbWebBold = {
+const sbbWebBold = {
   family: "SBBWeb-Bold",
   file: SBBWebBoldPath,
 };
 
-export const sbbWebItalic = {
+const sbbWebItalic = {
   family: "SBBWeb-Italic",
   file: SBBWebItalicPath,
 };
 
-export const sbbWebThin = {
+const sbbWebThin = {
   family: "SBBWeb-Thin",
   file: SBBWebThinPath,
-};
-
-export const getFontBase64FontFace = async (file, fontFamily) => {
-  const fontBase64 = await fetch(file)
-    .then((res) => res.blob())
-    .then((blob) => toBase64(blob));
-  return `
-    @font-face {
-      src: url(${fontBase64});
-      font-family: '${fontFamily}';
-    }
-  `;
 };
 
 const sbbFontsBase64 = [
@@ -57,15 +45,42 @@ const sbbFontsBase64 = [
   sbbWebThin,
 ];
 
+/**
+ * Get the css font face string to load the font as base 64.
+ */
+const cache = {};
+const getFontFace = async (file, fontFamily) => {
+  if (!cache[fontFamily]) {
+    const response = await fetch(file);
+    const blob = await response.blob();
+    const fontBase64 = await toBase64(blob);
+    cache[fontFamily] = `
+      @font-face {
+        src: url(${fontBase64});
+        font-family: '${fontFamily}';
+      }
+    `;
+  }
+  return cache[fontFamily];
+};
+
+/**
+ * Get SVG <defs> tag with all the SBB fonts as base64.
+ * @returns
+ */
 export const getSBBFontsDefinition = async () => {
-  const fontFacesPromises = sbbFontsBase64.map((font) =>
-    getFontBase64FontFace(font.file, font.family),
+  const promises = sbbFontsBase64.map((font) =>
+    getFontFace(font.file, font.family),
   );
-  const fontFaces = await Promise.all(fontFacesPromises);
+  const fontFaces = await Promise.all(promises);
+  const string = fontFaces.reduce(
+    (accString, fontFace) => `${accString} ${fontFace}`,
+    "",
+  );
   return `
     <defs xmlns="http://www.w3.org/2000/svg">
       <style type="text/css">
-        ${fontFaces.reduce((accString, fontFace) => `${accString} ${fontFace}`, "")}
+        ${string}
       </style>
     </defs>
     `;
