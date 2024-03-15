@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.7](https://github.com/geops/trafimage-maps/compare/v1.28.6...v1.28.7) (2024-03-15)
+
+### Bug Fixes
+
+- add all geltungsbereiche laers in iframe topic ([ee7a9c3](https://github.com/geops/trafimage-maps/commit/ee7a9c39285797a4b75dd5701247b550c4a9085e))
+- use also the devicePixelRatio to size properly the scale bar in pdf ([#1155](https://github.com/geops/trafimage-maps/issues/1155)) ([c4d892d](https://github.com/geops/trafimage-maps/commit/c4d892d0e7ac255ef07644905198b42e97873415))
+
 ### [1.28.6](https://github.com/geops/trafimage-maps/compare/v1.28.5...v1.28.6) (2024-03-14)
 
 ### Bug Fixes
