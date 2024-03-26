@@ -1,6 +1,11 @@
 import { Feature } from "ol";
 import { Point } from "ol/geom";
 
+/**
+ * TODO highlightPointFeatureFilter and getHighlightGeometry seems never used anymore in the codebase.
+ * TODO silent parameter seems also never be used
+ * could we remove them?
+ */
 const highlightPointFeatures = (
   features,
   layer,
@@ -8,6 +13,7 @@ const highlightPointFeatures = (
   coordinatesArray,
   silent, // Used to prevent state updates in popup components (e.g. DvLineInfo, DvFeatureInfo)
 ) => {
+  highlightLayer.getSource().clear();
   const filtered =
     !silent && layer.get("highlightPointFeatureFilter")
       ? features.filter((feat) =>
@@ -19,8 +25,8 @@ const highlightPointFeatures = (
       const layerHighlightGeom =
         layer.get("getHighlightGeometry") &&
         layer.get("getHighlightGeometry")(feat, layer, coordinatesArray[idx]);
+
       if (feat.getGeometry().getType() === "Point") {
-        highlightLayer.getSource().clear();
         highlightLayer.getSource().addFeature(
           new Feature({
             ...feat.getProperties(),
