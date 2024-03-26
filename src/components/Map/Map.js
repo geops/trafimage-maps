@@ -87,6 +87,7 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
+    this.onPointerOutRef = map.on("pointerout", (e) => this.onPointerOut(e));
     this.onPointerMoveRef = map.on("pointermove", (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on("singleclick", (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent("load"));
@@ -100,7 +101,11 @@ class Map extends PureComponent {
   }
 
   componentWillUnmount() {
-    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
+    unByKey([
+      this.onPointerOutRef,
+      this.onPointerMoveRef,
+      this.onSingleClickRef,
+    ]);
   }
 
   onMapMoved(evt) {
@@ -167,24 +172,44 @@ class Map extends PureComponent {
       // If the featureInfos contains one from a priority layer.
       // We display only these featureInfos.
       // See DirektVerbindungen layers for an example.
-      const hasPriorityLayer = newInfos.find(
+      const priorityLayersInfos = newInfos.filter(
         ({ features, layer }) =>
           features.length && layer.get("priorityFeatureInfo"),
       );
+      const hasPriorityLayer = priorityLayersInfos.length;
 
-      let infos = newInfos.filter(({ features, layer }) => {
-        const allow = features.length;
-        if (hasPriorityLayer) {
-          return allow && layer.get("priorityFeatureInfo");
-        }
-        return allow;
-      });
+      const otherLayersInfos = newInfos.filter(
+        ({ features, layer }) =>
+          features.length && !layer.get("priorityFeatureInfo"),
+      );
 
-      // Clear the highlight style when there is priority layers
+      let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
+
+      // When there is priority layers, clear the highlight style of other layers.
       if (hasPriorityLayer) {
-        newInfos.forEach(({ layer }) => {
-          if (layer.highlight && !layer.get("priorityFeatureInfo")) {
-            layer.highlight([]);
+        otherLayersInfos.forEach(({ layer }) => {
+          layer?.highlight?.([]);
+        });
+
+        // When there is no priority layers we can highlight the features
+      } else {
+        // We don't want to use the automatic hihglighting of the mobility-toolbox layer
+        // and we want to be able to handle 2 feature-state 'hover' and 'selected'.
+        // So now the Map object highlight what is under the mouse AND also the
+        // features display in the featureInformation.
+        const layerAlreadyHighlighted = [];
+        featureInfo?.forEach(({ layer, features }) => {
+          const featuresToHighlight = [
+            ...features,
+            ...(infos.find((info) => info.layer === layer)?.features || []),
+          ];
+          layer?.highlight?.(featuresToHighlight);
+          layerAlreadyHighlighted.push(layer);
+        });
+
+        infos.forEach(({ layer, features }) => {
+          if (!layerAlreadyHighlighted.includes(layer)) {
+            layer?.highlight?.(features);
           }
         });
       }
@@ -237,7 +262,6 @@ class Map extends PureComponent {
       dispatchHtmlEvent,
       activeTopic,
       showPopups,
-      featureInfo,
       layers,
     } = this.props;
 
@@ -255,41 +279,37 @@ class Map extends PureComponent {
         // If the featureInfos contains one from a priority layer.
         // We display only these featureInfos.
         // See DirektVerbindungen layers for an example.
-        const hasPriorityLayer = featureInfos.find(
+        const priorityLayersInfos = featureInfos.filter(
           ({ features, layer }) =>
             features.length && layer.get("priorityFeatureInfo"),
         );
+        const hasPriorityLayer = priorityLayersInfos.length;
+
+        const otherLayersInfos = featureInfos.filter(
+          ({ features, layer }) =>
+            features.length && !layer.get("priorityFeatureInfo"),
+        );
+
+        // Clear the highlight style when there is priority layers
+        if (hasPriorityLayer) {
+          otherLayersInfos.forEach(({ layer }) => {
+            layer?.highlight?.([]);
+          });
+        }
 
         // Display only info of layers with a popup defined.
-        let infos = featureInfos.reverse().filter(({ layer }) => {
-          const allow =
-            (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
-            activeTopic.enableFeatureClick;
-          if (hasPriorityLayer) {
-            // Clear the highlight style when there is priority layers
-            if (layer.highlight && !layer.get("priorityFeatureInfo")) {
-              layer.highlight([]);
-            }
-            return allow && layer.get("priorityFeatureInfo");
-          }
-          return allow;
-        });
-
-        // Clear the previous select style.
-        (featureInfo || []).forEach(({ layer }) => {
-          if (layer.select) {
-            layer.select([]);
-          }
-        });
-
-        infos.forEach(({ layer, features }) => {
-          if (layer.select) {
-            layer.select(features);
-          }
-        });
+        const infos = (
+          hasPriorityLayer ? priorityLayersInfos : otherLayersInfos
+        )
+          .reverse()
+          .filter(({ layer }) => {
+            return (
+              (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
+              activeTopic.enableFeatureClick
+            );
+          });
 
         // Dispatch only infos with features found.
-        infos = infos.filter(({ features }) => features.length);
         dispatchSetFeatureInfo(infos);
 
         // Propagate the infos clicked to the WebComponent

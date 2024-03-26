@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import useIndexedFeatureInfo from "./useIndexedFeatureInfo";
 import useIsMobile from "./useIsMobile";
 import panCenterFeature from "./panCenterFeature";
 import highlightPointFeatures from "./highlightPointFeatures";
 import defaultHighlightPointStyle from "./highlightPointStyle";
 
-const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
+const useHighlightLayer = (infoIndexed, featureIndex = 0) => {
+  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const map = useSelector((state) => state.app.map);
   const searchService = useSelector((state) => state.app.searchService);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  const infoIndexed = useIndexedFeatureInfo(featureInfo);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -46,10 +45,11 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
       }
     };
   }, [map, searchService, highlightLayer, infoIndexed]);
+
   // When the featureIndex change we add the red circle then we pan on it.
   useEffect(() => {
     // 'feature' can be a feature or an array
-    const feature = infoIndexed.features[featureIndex];
+    const feature = infoIndexed?.features?.[featureIndex];
     if (!feature) {
       // When the user click on map to get new feature info, the infoIndexed is
       // changed before the featureIndex. So the featureIndex is not reinitialized yet.
@@ -57,18 +57,22 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
       return;
     }
     const features = Array.isArray(feature) ? feature : [feature];
-    const layerr = Array.isArray(infoIndexed.layers[featureIndex])
-      ? infoIndexed.layers[featureIndex][0]
-      : infoIndexed.layers[featureIndex];
+
+    // 'layer' can be a layer or an array
+    let layer = infoIndexed.layers[featureIndex];
+    layer = Array.isArray(layer) ? layer[0] : layer;
+
+    // 'coordinate' can be a coordinate (array of 2 integers) or an array of coordinate
     const coordinate = infoIndexed.coordinates[featureIndex];
-    const coordinates = Array.isArray((coordinate || [])[0])
+    const coordinates = Array.isArray(coordinate?.[0])
       ? coordinate
       : [coordinate];
-    const layerHighlightPointStyle = layerr.get("highlightPointStyle");
+
+    const layerHighlightPointStyle = layer.get("highlightPointStyle");
     highlightLayer.setStyle(
       layerHighlightPointStyle || defaultHighlightPointStyle,
     );
-    highlightPointFeatures(features, layerr, highlightLayer, coordinates);
+    highlightPointFeatures(features, layer, highlightLayer, coordinates);
 
     // We have to render the map otherwise the last selected features are displayed during animation.
     map.renderSync();
@@ -81,7 +85,7 @@ const useHighlightLayer = (featureInfo, highlightLayer, featureIndex = 0) => {
     }
     panCenterFeature(
       map,
-      [layerr],
+      [layer],
       coordinateClicked,
       menuOpen,
       isMobile,

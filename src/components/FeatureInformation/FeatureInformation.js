@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
@@ -19,20 +19,61 @@ function FeatureInformation({ featureInfo }) {
   const language = useSelector((state) => state.app.language);
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const [featureIndex, setFeatureIndex] = useState(0);
 
-  // List of features and layers available for pagination.
+  // List of features, layers and coordinates available for pagination.
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
 
   // Hook to highlight map features
-  useHighlightLayer(featureInfo, highlightLayer, featureIndex);
+  useHighlightLayer(infoIndexed, featureIndex);
 
   // Hook to filter out selected features for deactivated layers
-  useUpdateFeatureInfoOnLayerToggle(infoIndexed.layers.flat(), featureInfo);
+  useUpdateFeatureInfoOnLayerToggle(infoIndexed.layers.flat());
 
   // The current feature(s) to display.
-  const feature = infoIndexed.features[featureIndex];
+  const feature = useMemo(() => {
+    return infoIndexed?.features?.[featureIndex];
+  }, [featureIndex, infoIndexed?.features]);
+
+  // Get the feature info corresponding to the feature(s) selected.
+  const info = useMemo(() => {
+    if (!feature || !featureInfo) {
+      return null;
+    }
+    return featureInfo?.find((i) => {
+      if (Array.isArray(feature)) {
+        return i.features.includes(feature[0]);
+      }
+      return i.features.includes(feature);
+    });
+  }, [feature, featureInfo]);
+
+  // Apply highlight and select style, only MapboxStyleLayer
+  useEffect(() => {
+    featureInfo.forEach(({ layer, features }) => {
+      if (layer.highlight && !layer.get("priorityFeatureInfo")) {
+        layer.highlight(features);
+      }
+    });
+
+    if (!info?.layer?.select || info?.layer?.get("priorityFeatureInfo")) {
+      return () => {};
+    }
+    info.layer.select(Array.isArray(feature) ? feature : [feature]);
+
+    return () => {
+      // Remove the select sttyle
+      info.layer.select();
+
+      // Remove the highlight sttyle
+      (featureInfo || []).forEach(({ layer }) => {
+        if (layer.highlight) {
+          layer.highlight();
+        }
+      });
+    };
+  }, [feature, featureInfo, info]);
+
   if (!feature) {
     if (featureIndex !== 0) {
       setFeatureIndex(0);
@@ -40,15 +81,7 @@ function FeatureInformation({ featureInfo }) {
     return null;
   }
 
-  // Get the feature info corresponding to the feature(s) selected.
-  const info = featureInfo.find((i) => {
-    if (Array.isArray(feature)) {
-      return i.features.includes(feature[0]);
-    }
-    return i.features.includes(feature);
-  });
-
-  if (!info || !info.layer) {
+  if (!info?.layer) {
     return null;
   }
 
