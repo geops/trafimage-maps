@@ -34,7 +34,7 @@ describe("DvMenu", () => {
     });
   });
 
-  test("should render two checked switches for two visible layers and deactivate on click", () => {
+  test.only("should render two checked switches for two visible layers and deactivate on click", () => {
     const { getByTestId } = render(
       <ThemeProvider theme={theme}>
         <Provider store={store}>

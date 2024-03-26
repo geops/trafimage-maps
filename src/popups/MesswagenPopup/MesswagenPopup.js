@@ -4,6 +4,7 @@ import { unByKey } from "ol/Observable";
 import { Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { MesswagenLayer } from "../../layers";
+import Link from "../../components/Link";
 
 function MesswagenPopup() {
   const { t } = useTranslation();
@@ -26,6 +27,7 @@ function MesswagenPopup() {
   const { title, info } = feature?.getProperties() || {};
   return (
     <div
+      data-cy="messwagen-popup"
       style={{
         position: "absolute",
         right: 60,
@@ -64,6 +66,18 @@ function MesswagenPopup() {
           </Typography>
         </div>
       ))}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 10,
+          marginBottom: 5,
+        }}
+      >
+        <Link href="https://maps.trafimage.ch/funkmesswagen-einsatzplanung/infra-mewa-programm-aktuell.pdf">
+          {`${t("Einstazplanung")} ${new Date().getFullYear()}`}
+        </Link>
+      </div>
     </div>
   );
 }
