@@ -1,13 +1,3 @@
-import {
-  geltungsbereicheDataLayer,
-  geltungsbereicheHta,
-  geltungsbereicheTk,
-  geltungsbereicheGA,
-} from "../ch.sbb.geltungsbereiche.mvp";
+import layers from "../ch.sbb.geltungsbereiche.mvp";
 
-export default [
-  geltungsbereicheDataLayer,
-  geltungsbereicheTk,
-  geltungsbereicheHta,
-  geltungsbereicheGA,
-];
+export default layers;
