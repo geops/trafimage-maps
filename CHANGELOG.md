@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.8](https://github.com/geops/trafimage-maps/compare/v1.28.7...v1.28.8) (2024-03-28)
+
+### Bug Fixes
+
+- add links to funkmesswagen pdfs ([#1151](https://github.com/geops/trafimage-maps/issues/1151)) ([964b683](https://github.com/geops/trafimage-maps/commit/964b6832eeb48411336fced4c22c083171a8ab83))
+
 ### [1.28.7](https://github.com/geops/trafimage-maps/compare/v1.28.6...v1.28.7) (2024-03-15)
 
 ### Bug Fixes
