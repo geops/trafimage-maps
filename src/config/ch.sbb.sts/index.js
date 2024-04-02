@@ -174,7 +174,7 @@ export const stsDvMain = new DirektverbindungenLayer({
     nightLayer: stsDvNight,
     popupComponent: "DvPopup",
     useOverlay: true,
-    // priorityFeatureInfo: true, // This property will block display of others featureInfos
+    priorityFeatureInfo: true, // This property will block display of others featureInfos
     highlightPointFeatureFilter: () => false,
   },
 });
