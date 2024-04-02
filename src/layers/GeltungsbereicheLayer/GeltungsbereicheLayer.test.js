@@ -1,5 +1,5 @@
 import { Feature, Map, View } from "ol";
-import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import MapboxStyleLayer from "../MapboxStyleLayer";
 import GeltungsbereicheLayer from ".";
 
 describe("GeltungsbereicheLayer", () => {

@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import MapboxStyleLayer from "../MapboxStyleLayer";
 import PlatformsLayer from "./PlatformsLayer";
 
 describe("PlatformsLayer", () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import MapboxStyleLayer from "../MapboxStyleLayer";
 import IconList from "../../components/IconList";
 import lines from "../ZweitausbildungRoutesLayer/lines";
 
