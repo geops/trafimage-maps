@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import Link from "../../components/Link";
 
 const desc = {
   de: (
@@ -38,10 +39,24 @@ const desc = {
     </p>
   ),
 };
+const year = new Date().getFullYear();
 
 function MesswagenTopicInfo() {
-  const { i18n } = useTranslation();
-  return <div>{desc[i18n?.language] || desc.de}</div>;
+  const { t, i18n } = useTranslation();
+  return (
+    <div>
+      {desc[i18n?.language] || desc.de}
+      <Link href="https://maps.trafimage.ch/funkmesswagen-einsatzplanung/infra-mewa-programm-vorjahr.pdf">
+        {`${t("Einstazplanung")} ${year - 1}`}
+      </Link>
+      <Link href="https://maps.trafimage.ch/funkmesswagen-einsatzplanung/infra-mewa-programm-aktuell.pdf">
+        {`${t("Einstazplanung")} ${year}`}
+      </Link>
+      <Link href="https://maps.trafimage.ch/funkmesswagen-einsatzplanung/infra-mewa-programm-folgejahr.pdf">
+        {`${t("Einstazplanung")} ${year + 1}`}
+      </Link>
+    </div>
+  );
 }
 
 export default MesswagenTopicInfo;

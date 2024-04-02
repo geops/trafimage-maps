@@ -1,4 +1,4 @@
-import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
+import MapboxStyleLayer from "../MapboxStyleLayer";
 
 /**
  * Layer for displaying blue stations circle on hover.

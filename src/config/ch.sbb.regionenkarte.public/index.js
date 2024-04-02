@@ -32,18 +32,18 @@ export const regionenkartePublicSegment = new Layer({
       styleLayersFilter: ({ id }) => {
         return /anlagenverantwortliche\.lines$/.test(id);
       },
-      featureInfoFilter: (feature) => {
-        // There is some points in this data source and we don't want them.
-        return (
-          feature.getGeometry().getType() === "LineString" ||
-          feature.getGeometry().getType() === "MultiLineString"
-        );
-      },
       properties: {
         isQueryable: true,
         hideInLegend: true,
         useOverlay: true, // instead of a Popup , on click an Overlay will be displayed.
         popupComponent: "RegionenkarteSegmentPopup",
+        featureInfoFilter: (feature) => {
+          // There is some points in this data source and we don't want them.
+          return (
+            feature.getGeometry().getType() === "LineString" ||
+            feature.getGeometry().getType() === "MultiLineString"
+          );
+        },
       },
     }),
     new MapboxStyleLayer({

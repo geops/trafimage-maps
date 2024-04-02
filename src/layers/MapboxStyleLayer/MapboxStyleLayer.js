@@ -52,6 +52,18 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
     super.applyLayoutVisibility(evt);
   }
 
+  getFeatureInfoAtCoordinate(...args) {
+    return super.getFeatureInfoAtCoordinate(...args).then((featureInfo) => {
+      let { features } = featureInfo;
+      const filter = this.get("featureInfoFilter");
+      if (filter) {
+        features = featureInfo.features.filter(filter);
+      }
+      this.highlight(features);
+      return { ...featureInfo, features, layer: this };
+    });
+  }
+
   /**
    * Create exact copy of the MapboxLayer
    * @returns {MapboxLayer} MapboxLayer

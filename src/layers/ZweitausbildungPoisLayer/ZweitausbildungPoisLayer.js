@@ -1,5 +1,5 @@
-import { MapboxStyleLayer } from "mobility-toolbox-js/ol";
 import { GeoJSON } from "ol/format";
+import MapboxStyleLayer from "../MapboxStyleLayer";
 
 /**
  * Layer for zweitausbildung pois

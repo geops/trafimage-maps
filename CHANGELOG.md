@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.10](https://github.com/geops/trafimage-maps/compare/v1.28.9...v1.28.10) (2024-04-02)
+
+### Bug Fixes
+
+- don't wrap login text ([01b853c](https://github.com/geops/trafimage-maps/commit/01b853cce369dfbc3f0b1b6bf8260527fedb5e2f))
+- move featureInfoFilter and auto highlight functionnality to trafimage-maps ([cae470b](https://github.com/geops/trafimage-maps/commit/cae470b0b8d48f256db95a959a874eb9267be2ba))
+- move featureInfoFilter and auto highlight functionnality to trafimage-maps ([ce37cc6](https://github.com/geops/trafimage-maps/commit/ce37cc683493412e1533d24fa4ff06af359b6d0d))
+
+### [1.28.9](https://github.com/geops/trafimage-maps/compare/v1.28.8...v1.28.9) (2024-03-28)
+
+### Bug Fixes
+
+- add links to funkmesswagen pdfs ([#1151](https://github.com/geops/trafimage-maps/issues/1151)) ([964b683](https://github.com/geops/trafimage-maps/commit/964b6832eeb48411336fced4c22c083171a8ab83))
+
 ### [1.28.7](https://github.com/geops/trafimage-maps/compare/v1.28.6...v1.28.7) (2024-03-15)
 
 ### Bug Fixes
