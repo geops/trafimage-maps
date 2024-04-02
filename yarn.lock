@@ -1553,7 +1553,7 @@
   dependencies:
     "@emotion/memoize" "^0.8.1"
 
-"@emotion/is-prop-valid@^1.2.1":
+"@emotion/is-prop-valid@^1.2.1", "@emotion/is-prop-valid@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.2.2.tgz#d4175076679c6a26faa92b03bb786f9e52612337"
   integrity sha512-uNsoYd37AFmaCdXlg6EYD1KaPOaRWRByMCYzbKUX4+hhMfrxdVSelShywL4JVaAeM/eHUOSprYBQls+/neX3pw==
@@ -1590,6 +1590,17 @@
     "@emotion/utils" "^1.2.1"
     csstype "^3.0.2"
 
+"@emotion/serialize@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@emotion/serialize/-/serialize-1.1.4.tgz#fc8f6d80c492cfa08801d544a05331d1cc7cd451"
+  integrity sha512-RIN04MBT8g+FnDwgvIUi8czvr1LU1alUMI05LekWB5DGyTm8cCBMCRpq3GqaiyEDRptEXOyXnvZ58GZYu4kBxQ==
+  dependencies:
+    "@emotion/hash" "^0.9.1"
+    "@emotion/memoize" "^0.8.1"
+    "@emotion/unitless" "^0.8.1"
+    "@emotion/utils" "^1.2.1"
+    csstype "^3.0.2"
+
 "@emotion/sheet@^1.2.2":
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/@emotion/sheet/-/sheet-1.2.2.tgz#d58e788ee27267a14342303e1abb3d508b6d0fec"
@@ -1604,6 +1615,18 @@
     "@emotion/babel-plugin" "^11.11.0"
     "@emotion/is-prop-valid" "^1.2.1"
     "@emotion/serialize" "^1.1.2"
+    "@emotion/use-insertion-effect-with-fallbacks" "^1.0.1"
+    "@emotion/utils" "^1.2.1"
+
+"@emotion/styled@^11.11.5":
+  version "11.11.5"
+  resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-11.11.5.tgz#0c5c8febef9d86e8a926e663b2e5488705545dfb"
+  integrity sha512-/ZjjnaNKvuMPxcIiUkf/9SHoG4Q196DRl1w82hQ3WCsjo1IUR8uaGWrC6a87CrYAW0Kb/pK7hk8BnLgLRi9KoQ==
+  dependencies:
+    "@babel/runtime" "^7.18.3"
+    "@emotion/babel-plugin" "^11.11.0"
+    "@emotion/is-prop-valid" "^1.2.2"
+    "@emotion/serialize" "^1.1.4"
     "@emotion/use-insertion-effect-with-fallbacks" "^1.0.1"
     "@emotion/utils" "^1.2.1"
 
@@ -2467,10 +2490,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.8.tgz#6b79032e760a0899cd4204710beede972a3a185f"
   integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
 
-"@reduxjs/toolkit@^2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-2.2.2.tgz#952fc8f8315d7274e28f6e4608b7ec66fce7e94e"
-  integrity sha512-454GZrEx3G6QSYwIx9ROaso1HR6sTH8qyZBe3KEsdWVGU3ayV8jYCwdaEJV3vl9V6+pi3GRl+7Xl7AeDna6qwQ==
+"@reduxjs/toolkit@^2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-2.2.3.tgz#5ce71cbf162f98c5dafb49bd3f1e11c5486ab9c4"
+  integrity sha512-76dll9EnJXg4EVcI5YNxZA/9hSAmZsFqzMmNRHvIlzw2WS/twfcVX3ysYrWGJMClwEmChQFC4yRq74tn6fdzRA==
   dependencies:
     immer "^10.0.3"
     redux "^5.0.1"
@@ -8749,10 +8772,10 @@ hyphenate-style-name@^1.0.3:
   resolved "https://registry.yarnpkg.com/hyphenate-style-name/-/hyphenate-style-name-1.0.4.tgz#691879af8e220aea5750e8827db4ef62a54e361d"
   integrity sha512-ygGZLjmXfPHj+ZWh6LwbC37l43MhfztxetbFCoYTM2VjkIUpeHgSNn7QIyVFj7YQ1Wl9Cbw5sholVJPzWvC2MQ==
 
-i18next-browser-languagedetector@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-7.2.0.tgz#de0321cba6881be37d82e20e4d6f05aa75f6e37f"
-  integrity sha512-U00DbDtFIYD3wkWsr2aVGfXGAj2TgnELzOX9qv8bT0aJtvPV9CRO77h+vgmHFBMe7LAxdwvT/7VkCWGya6L3tA==
+i18next-browser-languagedetector@7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/i18next-browser-languagedetector/-/i18next-browser-languagedetector-7.2.1.tgz#1968196d437b4c8db847410c7c33554f6c448f6f"
+  integrity sha512-h/pM34bcH6tbz8WgGXcmWauNpQupCGr25XPp9cZwZInR9XHSjIFDYp1SIok7zSPsTOMxdvuLyu86V+g2Kycnfw==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
