@@ -59,7 +59,6 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
       if (filter) {
         features = featureInfo.features.filter(filter);
       }
-      this.highlight(features);
       return { ...featureInfo, features, layer: this };
     });
   }

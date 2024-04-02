@@ -180,34 +180,23 @@ class Map extends PureComponent {
 
       let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
 
-      // When there is priority layers, clear the highlight style of other layers.
-      if (hasPriorityLayer) {
-        otherLayersInfos.forEach(({ layer }) => {
-          layer?.highlight?.([]);
-        });
+      // We highlight the features already displayed in the feature information
+      const layerAlreadyHighlighted = [];
+      featureInfo?.forEach(({ layer, features }) => {
+        const featuresToHighlight = [
+          ...features,
+          ...(infos.find((info) => info.layer === layer)?.features || []),
+        ];
+        layer?.highlight?.(featuresToHighlight);
+        layerAlreadyHighlighted.push(layer);
+      });
 
-        // When there is no priority layers we can highlight the features
-      } else {
-        // We don't want to use the automatic hihglighting of the mobility-toolbox layer
-        // and we want to be able to handle 2 feature-state 'hover' and 'selected'.
-        // So now the Map object highlight what is under the mouse AND also the
-        // features display in the featureInformation.
-        const layerAlreadyHighlighted = [];
-        featureInfo?.forEach(({ layer, features }) => {
-          const featuresToHighlight = [
-            ...features,
-            ...(infos.find((info) => info.layer === layer)?.features || []),
-          ];
-          layer?.highlight?.(featuresToHighlight);
-          layerAlreadyHighlighted.push(layer);
-        });
-
-        infos.forEach(({ layer, features }) => {
-          if (!layerAlreadyHighlighted.includes(layer)) {
-            layer?.highlight?.(features);
-          }
-        });
-      }
+      // We highlight the features under the mouse
+      infos.forEach(({ layer, features }) => {
+        if (!layerAlreadyHighlighted.includes(layer)) {
+          layer?.highlight?.(features);
+        }
+      });
 
       map.getTarget().style.cursor = infos.length ? "pointer" : "auto";
 
