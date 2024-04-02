@@ -196,7 +196,11 @@ class Map extends PureComponent {
         }
       });
 
-      map.getTarget().style.cursor = infos.length ? "pointer" : "auto";
+      map.getTarget().style.cursor = infos.find(
+        ({ features }) => !!features.length,
+      )
+        ? "pointer"
+        : "auto";
 
       const shouldNotSetInfoOnHover =
         featureInfo.length &&

@@ -103,7 +103,7 @@ export const dvMain = new DirektverbindungenLayer({
     nightLayer: dvNight,
     popupComponent: "DvPopup",
     useOverlay: true,
-    priorityFeatureInfo: true, // This property will block display of others featureInfos
+    // priorityFeatureInfo: true, // This property will block display of others featureInfos
     highlightPointFeatureFilter: () => false,
   },
 });

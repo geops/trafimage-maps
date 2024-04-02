@@ -51,12 +51,18 @@ function FeatureInformation({ featureInfo }) {
   // Apply highlight and select style, only MapboxStyleLayer
   useEffect(() => {
     featureInfo.forEach(({ layer, features }) => {
-      if (layer.highlight && !layer.get("priorityFeatureInfo")) {
+      if (
+        layer.highlight
+        // && !layer.get("priorityFeatureInfo")
+      ) {
         layer.highlight(features);
       }
     });
 
-    if (!info?.layer?.select || info?.layer?.get("priorityFeatureInfo")) {
+    if (
+      !info?.layer?.select
+      // || info?.layer?.get("priorityFeatureInfo")
+    ) {
       return () => {};
     }
     info.layer.select(Array.isArray(feature) ? feature : [feature]);
