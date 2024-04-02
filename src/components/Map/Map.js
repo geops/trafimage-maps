@@ -167,15 +167,13 @@ class Map extends PureComponent {
       // If the featureInfos contains one from a priority layer.
       // We display only these featureInfos.
       // See DirektVerbindungen layers for an example.
-      const priorityLayersInfos = newInfos.filter(
-        ({ features, layer }) =>
-          features.length && layer.get("priorityFeatureInfo"),
+      const priorityLayersInfos = newInfos.filter(({ layer }) =>
+        layer.get("priorityFeatureInfo"),
       );
-      const hasPriorityLayer = priorityLayersInfos.length;
+      const hasPriorityLayer = !!priorityLayersInfos.length;
 
       const otherLayersInfos = newInfos.filter(
-        ({ features, layer }) =>
-          features.length && !layer.get("priorityFeatureInfo"),
+        ({ layer }) => !layer.get("priorityFeatureInfo"),
       );
 
       let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
@@ -191,7 +189,7 @@ class Map extends PureComponent {
         layerAlreadyHighlighted.push(layer);
       });
 
-      // We highlight the features under the mouse
+      // We highlight the features under the mouse or unhighlight the previously highlighted
       infos.forEach(({ layer, features }) => {
         if (!layerAlreadyHighlighted.includes(layer)) {
           layer?.highlight?.(features);
@@ -267,19 +265,12 @@ class Map extends PureComponent {
           ({ features, layer }) =>
             features.length && layer.get("priorityFeatureInfo"),
         );
-        const hasPriorityLayer = priorityLayersInfos.length;
+        const hasPriorityLayer = !!priorityLayersInfos.length;
 
         const otherLayersInfos = featureInfos.filter(
           ({ features, layer }) =>
             features.length && !layer.get("priorityFeatureInfo"),
         );
-
-        // Clear the highlight style when there is priority layers
-        if (hasPriorityLayer) {
-          otherLayersInfos.forEach(({ layer }) => {
-            layer?.highlight?.([]);
-          });
-        }
 
         // Display only info of layers with a popup defined.
         const infos = (

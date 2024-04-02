@@ -99,7 +99,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
           source,
           sourceLayer,
         },
-        state,
+        { hover: state },
       );
     });
   }
