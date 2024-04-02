@@ -87,7 +87,6 @@ class Map extends PureComponent {
 
   componentDidMount() {
     const { map, dispatchHtmlEvent } = this.props;
-    this.onPointerOutRef = map.on("pointerout", (e) => this.onPointerOut(e));
     this.onPointerMoveRef = map.on("pointermove", (e) => this.onPointerMove(e));
     this.onSingleClickRef = map.on("singleclick", (e) => this.onSingleClick(e));
     dispatchHtmlEvent(new CustomEvent("load"));
@@ -101,11 +100,7 @@ class Map extends PureComponent {
   }
 
   componentWillUnmount() {
-    unByKey([
-      this.onPointerOutRef,
-      this.onPointerMoveRef,
-      this.onSingleClickRef,
-    ]);
+    unByKey([this.onPointerMoveRef, this.onSingleClickRef]);
   }
 
   onMapMoved(evt) {
