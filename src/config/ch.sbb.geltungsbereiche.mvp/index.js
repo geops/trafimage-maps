@@ -134,6 +134,8 @@ export const geltungsbereicheSTS = new GeltungsbereicheLayer({
       return "Freie Fahrt";
     },
     products: ["ch.sbb.geltungsbereiche.products.sts"],
+    lineDashArray50: [6, 8],
+    lineDashArray25: [6, 8, 1, 8, 1, 8],
   },
 });
 

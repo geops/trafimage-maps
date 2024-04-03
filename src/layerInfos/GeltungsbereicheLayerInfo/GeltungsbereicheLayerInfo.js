@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 import { Divider, Typography } from "@mui/material";
 import { Layer } from "mobility-toolbox-js/ol";
 import GeltungsbereicheLegend, {
-  legends,
+  getLegends,
+  defaultDashArray,
 } from "../../popups/GeltungsbereicheGaPopup/GeltungsbereicheLegend";
 
 export const infos = {
@@ -30,7 +31,8 @@ export const infos = {
   },
   sts: {
     100: "Freie Fahrt",
-    50: "50% oder 25% Ermässigung",
+    50: "50% Ermässigung",
+    25: "25% Ermässigung",
     0: "Keine Ermässigung",
     vorOrt: "Gültigkeit vor Ort erfragen",
     footer: true,
@@ -44,7 +46,7 @@ export const infos = {
 
 const warranty = {
   de: (
-    <div>
+    <i>
       Aus Platzgründen sind, je nach Zoomstufe, nicht alle Linien angegeben.
       <br />
       Alle Angaben ohne Gewähr. Änderungen vorbehalten.
@@ -58,10 +60,10 @@ const warranty = {
         Übersicht der Tarife und Vorschriften - Alliance SwissPass
       </a>
       ).
-    </div>
+    </i>
   ),
   fr: (
-    <div>
+    <i>
       Faute de place, selon le niveau de zoom, toutes les lignes ne sont pas
       mentionnées.
       <br />
@@ -76,10 +78,10 @@ const warranty = {
         Tarifs et prescriptions Vue d&apos;ensemble - Alliance SwissPass
       </a>
       ).
-    </div>
+    </i>
   ),
   en: (
-    <div>
+    <i>
       Depending on the zoom level, not all lines shown due to lack of space.
       <br />
       All information without guarantee. Subject to change.
@@ -93,10 +95,10 @@ const warranty = {
         Übersicht der Tarife und Vorschriften - Alliance SwissPass
       </a>
       &nbsp;German only).
-    </div>
+    </i>
   ),
   it: (
-    <div>
+    <i>
       Per mancanza di spazio, a seconda del livello di zoom, non vi figurano
       tutte le linee.
       <br />
@@ -111,8 +113,73 @@ const warranty = {
         Tariffe e prescrizioni Panoramica - Alliance SwissPass
       </a>
       ).
-    </div>
+    </i>
   ),
+};
+
+function GbLegendValidity({
+  valid,
+  legends,
+  products,
+  productsRemark,
+  lineDashArray50,
+  lineDashArray25,
+  text,
+}) {
+  const { t } = useTranslation();
+  return (
+    <>
+      <div style={{ display: "flex", gap: 5 }}>
+        {legends
+          .filter(({ mots: [mot] }) => !!mot)
+          .map(({ mots: [mot] }) => {
+            return (
+              <GeltungsbereicheLegend
+                key={mot}
+                mot={mot}
+                valid={valid}
+                lineDashArray50={lineDashArray50}
+                lineDashArray25={lineDashArray25}
+              />
+            );
+          })}
+      </div>
+      <br />
+      <Typography paragraph>
+        {products.map((p, idx, arr) => (
+          <b
+            key={p}
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: `${t(p)}${idx !== arr.length - 1 ? ", " : ""}`, // We don't use .join() because of html parsing for line breaks
+            }}
+          />
+        ))}
+        {!!productsRemark && <b>, {t(productsRemark)}</b>}
+        {products.length || !!productsRemark ? ": " : ""}
+        {t(text)}
+      </Typography>
+      <br />
+      <br />
+    </>
+  );
+}
+
+GbLegendValidity.propTypes = {
+  valid: PropTypes.number,
+  legends: PropTypes.arrayOf(PropTypes.object).isRequired,
+  products: PropTypes.arrayOf(PropTypes.string).isRequired,
+  productsRemark: PropTypes.string,
+  lineDashArray50: PropTypes.arrayOf(PropTypes.number),
+  lineDashArray25: PropTypes.arrayOf(PropTypes.number),
+  text: PropTypes.string.isRequired,
+};
+
+GbLegendValidity.defaultProps = {
+  valid: 100,
+  productsRemark: null,
+  lineDashArray50: defaultDashArray,
+  lineDashArray25: defaultDashArray,
 };
 
 function GeltungsbereicheLayerInfo({ properties: layer }) {
@@ -120,19 +187,23 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
   const cardsScope = layer.get("cardsScope") || "ga";
   const cardsInfos = infos[cardsScope];
   const full = infos[cardsScope]["100"];
-  const reduced = infos[cardsScope]["50"];
+  const reduced50 = infos[cardsScope]["50"];
+  const reduced25 = infos[cardsScope]["25"];
   const none = infos[cardsScope]["0"] || "Keine Ermässigung";
   const { vorOrt, footer } = infos[cardsScope];
   const products = layer.get("products") || [];
   const productsRemark = layer.get("productsRemark");
+  const lineDashArray50 = layer.get("lineDashArray50");
+  const lineDashArray25 = layer.get("lineDashArray25");
+  const legends = getLegends(lineDashArray50, lineDashArray25);
   return (
     <div style={{ maxHeight: 450 }}>
       {legends
         .filter(({ mots: [mot] }) => !!mot)
         .map(({ mots: [mot], validity }) => {
           return (
-            <>
-              <table key={mot + validity} style={{ borderSpacing: 0 }}>
+            <React.Fragment key={mot + validity}>
+              <table style={{ borderSpacing: 0 }}>
                 <thead />
                 <tbody>
                   {validity
@@ -141,7 +212,12 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
                       return (
                         <tr key={mot + value}>
                           <td>
-                            <GeltungsbereicheLegend mot={mot} valid={value} />
+                            <GeltungsbereicheLegend
+                              mot={mot}
+                              valid={value}
+                              lineDashArray50={lineDashArray50}
+                              lineDashArray25={lineDashArray25}
+                            />
                           </td>
                           {index === 0 && (
                             <td
@@ -157,70 +233,46 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
                 </tbody>
               </table>
               <br />
-            </>
+            </React.Fragment>
           );
         })}
       <br />
       <br />
       {full && (
-        <>
-          <div style={{ display: "flex", gap: 5 }}>
-            {legends
-              .filter(({ mots: [mot] }) => !!mot)
-              .map(({ mots: [mot] }) => {
-                return (
-                  <GeltungsbereicheLegend key={mot} mot={mot} valid={100} />
-                );
-              })}
-          </div>
-          <br />
-          <Typography paragraph>
-            {products.map((p, idx, arr) => (
-              <b
-                key={p}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                  __html: `${t(p)}${idx !== arr.length - 1 ? ", " : ""}`, // We don't use .join() because of html parsing for line breaks
-                }}
-              />
-            ))}
-            {!!productsRemark && <b>, {t(productsRemark)}</b>}
-            {products.length || !!productsRemark ? ": " : ""}
-            {t(full)}
-          </Typography>
-          <br />
-          <br />
-        </>
+        <GbLegendValidity
+          {...{
+            legends,
+            products,
+            productsRemark,
+            text: full,
+          }}
+        />
       )}
-      {reduced && (
-        <>
-          <div style={{ display: "flex", gap: 5 }}>
-            {legends
-              .filter(({ mots: [mot] }) => !!mot)
-              .map(({ mots: [mot] }) => {
-                return (
-                  <GeltungsbereicheLegend key={mot} mot={mot} valid={50} />
-                );
-              })}
-          </div>
-          <br />
-          <Typography paragraph>
-            {products.map((p, idx, arr) => (
-              <b
-                key={p}
-                // eslint-disable-next-line react/no-danger
-                dangerouslySetInnerHTML={{
-                  __html: `${t(p)}${idx !== arr.length - 1 ? ", " : ""}`, // We don't use .join() because of html parsing for line breaks
-                }}
-              />
-            ))}
-            {!!productsRemark && <b>, {t(productsRemark)}</b>}
-            {products.length || !!productsRemark ? ": " : ""}
-            {t(reduced)}
-          </Typography>
-          <br />
-          <br />
-        </>
+      {reduced50 && (
+        <GbLegendValidity
+          {...{
+            valid: 50,
+            legends,
+            products,
+            productsRemark,
+            lineDashArray50,
+            lineDashArray25,
+            text: reduced50,
+          }}
+        />
+      )}
+      {reduced25 && (
+        <GbLegendValidity
+          {...{
+            valid: 25,
+            legends,
+            products,
+            productsRemark,
+            lineDashArray50,
+            lineDashArray25,
+            text: reduced25,
+          }}
+        />
       )}
       <GeltungsbereicheLegend />
       <br />
@@ -243,9 +295,7 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
           <Typography paragraph>
             <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
           </Typography>
-          <Typography paragraph>
-            <i>{warranty[i18n.language]}</i>
-          </Typography>
+          <Typography paragraph>{warranty[i18n.language]}</Typography>
           <br />
         </>
       )}
