@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.11](https://github.com/geops/trafimage-maps/compare/v1.28.10...v1.28.11) (2024-04-03)
+
+### Bug Fixes
+
+- **Geltungsbereiche:** adjusted line dash arrays for reduced fares in GB STS legend ([#1162](https://github.com/geops/trafimage-maps/issues/1162)) ([0cce969](https://github.com/geops/trafimage-maps/commit/0cce96915a64f8c76f466ff32fb782a15d28a22f))
+
 ### [1.28.10](https://github.com/geops/trafimage-maps/compare/v1.28.9...v1.28.10) (2024-04-02)
 
 ### Bug Fixes
