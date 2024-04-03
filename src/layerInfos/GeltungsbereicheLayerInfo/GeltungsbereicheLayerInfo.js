@@ -240,38 +240,32 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
       <br />
       {full && (
         <GbLegendValidity
-          {...{
-            legends,
-            products,
-            productsRemark,
-            text: full,
-          }}
+          legends={legends}
+          products={products}
+          productsRemark={productsRemark}
+          text={full}
         />
       )}
       {reduced50 && (
         <GbLegendValidity
-          {...{
-            valid: 50,
-            legends,
-            products,
-            productsRemark,
-            lineDashArray50,
-            lineDashArray25,
-            text: reduced50,
-          }}
+          valid={50}
+          legends={legends}
+          products={products}
+          productsRemark={productsRemark}
+          lineDashArray25={lineDashArray25}
+          lineDashArray50={lineDashArray50}
+          text={reduced50}
         />
       )}
       {reduced25 && (
         <GbLegendValidity
-          {...{
-            valid: 25,
-            legends,
-            products,
-            productsRemark,
-            lineDashArray50,
-            lineDashArray25,
-            text: reduced25,
-          }}
+          valid={25}
+          legends={legends}
+          products={products}
+          productsRemark={productsRemark}
+          lineDashArray25={lineDashArray25}
+          lineDashArray50={lineDashArray50}
+          text={reduced25}
         />
       )}
       <GeltungsbereicheLegend />
