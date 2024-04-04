@@ -48,7 +48,7 @@ function FeatureInformation({ featureInfo }) {
   }, [featureInfo, featuresAsArray]);
 
   // Hook to highlight/select map features
-  useHighlightLayer(featuresAsArray, info);
+  useHighlightLayer(info, featuresAsArray);
 
   if (!feature || !info?.layer) {
     if (featureIndex !== 0) {

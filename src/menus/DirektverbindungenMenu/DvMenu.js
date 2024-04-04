@@ -63,7 +63,7 @@ function DvMenu() {
   }, [isMobile, dispatch]);
 
   // Hook to highlight map features
-  useHighlightLayer(featureInfo.features, featureInfo);
+  useHighlightLayer(featureInfo);
 
   return (
     <IframeMenu

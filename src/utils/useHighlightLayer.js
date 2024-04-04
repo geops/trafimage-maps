@@ -5,13 +5,14 @@ import panCenterFeature from "./panCenterFeature";
 import highlightPointFeatures from "./highlightPointFeatures";
 import defaultHighlightPointStyle from "./highlightPointStyle";
 
-const useHighlightLayer = (features, featureInfo = {}) => {
+const useHighlightLayer = (featureInfo, featuresCandidate) => {
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const map = useSelector((state) => state.app.map);
   const searchService = useSelector((state) => state.app.searchService);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const isMobile = useIsMobile();
+  const features = featuresCandidate || featureInfo?.features;
 
   useEffect(() => {
     // The featureInformation component can be display twice at the same time (in the popup and in the overlay).

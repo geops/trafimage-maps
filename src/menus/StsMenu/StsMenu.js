@@ -146,7 +146,7 @@ function StsTopicMenu() {
   };
 
   // Hook to highlight map features
-  useHighlightLayer(featureInfo.feature, featureInfo);
+  useHighlightLayer(featureInfo);
 
   return (
     <IframeMenu
