@@ -41,6 +41,8 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
                fill="currentColor"
                stroke-width="0"
                viewbox="0 0 24 24"
+               focusable="false"
+               alt="Schliessen"
                height="1em"
                width="1em"
                xmlns="http://www.w3.org/2000/svg"
@@ -61,7 +63,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
               Um den Plan später zu bearbeiten, speichern Sie bitte folgenden Link:
             </div>
             <div class="makeStyles-link-2">
-              <div class="makeStyles-input-16">
+              <div class="makeStyles-input-17">
                 <input type="text"
                        tabindex="0"
                        title

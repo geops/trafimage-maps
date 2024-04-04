@@ -3,15 +3,15 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { MdClose } from "react-icons/md";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
-import { Link, IconButton } from "@mui/material";
+import { Link } from "@mui/material";
 import { setFeatureInfo } from "../../model/app/actions";
 import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import getPopupComponent from "../../utils/getPopupComponent";
 import "./FeatureInformation.scss";
+import CloseButton from "../CloseButton";
 
 function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
@@ -111,17 +111,12 @@ function FeatureInformation({ featureInfo }) {
                 ? renderTitle(feature, layer, t)
                 : layer && layer.name && t(layer.name)}
             </span>
-            <IconButton
-              size="medium"
-              className="wkp-close-bt"
-              title={t("Schliessen")}
+            <CloseButton
               onClick={() => {
                 dispatch(setFeatureInfo());
                 onCloseBtClick();
               }}
-            >
-              <MdClose focusable={false} alt={t("Schliessen")} />
-            </IconButton>
+            />
           </div>
         ) : null}
         <div className="wkp-feature-information-body">

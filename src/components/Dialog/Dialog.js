@@ -4,15 +4,10 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
-import {
-  Dialog as MuiDialog,
-  DialogTitle,
-  Paper,
-  IconButton,
-} from "@mui/material";
-import { MdClose } from "react-icons/md";
+import { Dialog as MuiDialog, DialogTitle, Paper } from "@mui/material";
 import Draggable from "react-draggable";
 import { setDialogVisible, setDialogPosition } from "../../model/app/actions";
+import CloseButton from "../CloseButton";
 
 const useStyles = makeStyles((theme) => ({
   rootDesktop: {
@@ -76,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     right: 0,
     top: 0,
-    width: 44,
+    width: 50,
     height: 50,
   },
 }));
@@ -233,13 +228,12 @@ function Dialog(props) {
         >
           {title}
         </DialogTitle>
-        <IconButton
+        <CloseButton
+          size="small"
           title={t("Dialog schließen")}
           onClick={closeDialog}
           className={classes.closeBtn}
-        >
-          <MdClose />
-        </IconButton>
+        />
         <div
           className={`${classes.dialogBody} ${
             isSmallScreen ? classes.dialogBodyMobile : ""
