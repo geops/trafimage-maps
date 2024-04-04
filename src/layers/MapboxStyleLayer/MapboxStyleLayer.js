@@ -16,13 +16,16 @@ import { MapboxStyleLayer as MTMapboxStyleLayer } from "mobility-toolbox-js/ol";
 class MapboxStyleLayer extends MTMapboxStyleLayer {
   constructor(options = {}) {
     super({ ...options, isHoverActive: false, isClickActive: false });
-    this.hover = this.hover.bind(this);
+
     this.style = options.style;
     this.filters = options.filters;
     this.hidePopupFunc = options.hidePopup;
     this.hoveredFeatures = []; // When the feature is under the mouse and selectable
     this.highlightedFeatures = []; // When the clicked is clicked abnd available in feature information.
     this.selectedFeatures = []; // When the feature properties is displayed in feature information.
+    this.onMouseLeave = () => {
+      this.hover();
+    };
   }
 
   attachToMap(map) {
@@ -34,11 +37,15 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
         }
       }),
     );
-    this.map?.getTargetElement()?.addEventListener("mouseleave", this.hover);
+    this.map
+      ?.getTargetElement()
+      ?.addEventListener("mouseleave", this.onMouseLeave);
   }
 
   detachFromMap(map) {
-    this.map?.getTargetElement()?.removeEventListener("mouseleave", this.hover);
+    this.map
+      ?.getTargetElement()
+      ?.removeEventListener("mouseleave", this.onMouseLeave);
     super.detachFromMap(map);
   }
 
@@ -139,7 +146,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    * @private
    */
   hover(features = []) {
-    // Filter out selected features
+    // Filter out highlighted and selected features
     const filtered =
       this.hoveredFeatures?.filter(
         (feature) =>
@@ -151,11 +158,8 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
             .includes(feature.getId()),
       ) || [];
 
-    // Remove previous highlight
     this.setHoverState(filtered, false);
     this.hoveredFeatures = features;
-
-    // Add highlight
     this.setHoverState(this.hoveredFeatures, true);
   }
 
@@ -174,11 +178,8 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
             .includes(feature.getId()),
       ) || [];
 
-    // Remove previous highlight
     this.setHoverState(filtered, false);
     this.highlightedFeatures = features;
-
-    // Add highlight
     this.setHoverState(this.highlightedFeatures, true);
   }
 
