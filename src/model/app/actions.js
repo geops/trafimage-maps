@@ -82,9 +82,7 @@ export const setFeatureInfo =
     featureInfo
       ?.filter((info) => !data?.find((d) => d.layer === info.layer))
       .forEach(({ layer }) => {
-        layer?.hover?.();
-        layer?.highlight?.();
-        layer?.select?.();
+        layer?.cleanFeatureState?.();
       });
 
     // Highlight the features selected
