@@ -105,7 +105,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    * @param {boolean} state Is the feature hovered
    * @private
    */
-  setHoverState(features, state) {
+  setFeatureState(features, state) {
     if (!this.mapboxLayer?.mbMap) {
       return;
     }
@@ -135,9 +135,19 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
           source,
           sourceLayer,
         },
-        { hover: state },
+        state,
       );
     });
+  }
+
+  /**
+   * Set the hover state to true/false to a list of features.
+   * @param {Array<ol/Feature~Feature>} features
+   * @param {boolean} state Is the feature hovered
+   * @private
+   */
+  setHoverState(features, hoverState) {
+    this.setFeatureState(features, { hover: hoverState });
   }
 
   /**
@@ -189,11 +199,17 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    * @private
    */
   // eslint-disable-next-line class-methods-use-this
-  select() {
+  select(features = []) {
     // By default no select state is applied
-    // this.setHoverState(this.selectedFeatures || [], false);
-    // this.selectedFeatures = features;
-    // this.setHoverState(this.selectedFeatures || [], true);
+    this.setFeatureState(this.selectedFeatures || [], {
+      hover: true,
+      selected: false,
+    });
+    this.selectedFeatures = features;
+    this.setFeatureState(this.selectedFeatures || [], {
+      hover: true,
+      selected: true,
+    });
   }
 
   /**

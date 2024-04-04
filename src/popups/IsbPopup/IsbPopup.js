@@ -88,9 +88,12 @@ function IsbPopup({ feature, layer }) {
     }) || [])[1] || operator;
 
   useEffect(() => {
-    if (layer) {
-      layer.select([feature]);
-    }
+    layer?.highlight();
+    layer?.select([feature]);
+    return () => {
+      layer?.select();
+      layer?.setFeatureState([feature], { hover: false });
+    };
   }, [layer, feature]);
 
   return (
