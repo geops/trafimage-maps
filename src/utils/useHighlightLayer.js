@@ -53,7 +53,7 @@ const useHighlightLayer = (featureInfo, featuresCandidate) => {
       // When the user click on map to get new feature info, the infoIndexed is
       // changed before the featureIndex. So the featureIndex is not reinitialized yet.
       // It will be on the next render. So we just ignore if there is no feature to display.
-      return;
+      return () => {};
     }
     const { layer, coordinate } = featureInfo;
     const layerHighlightPointStyle = layer.get("highlightPointStyle");
@@ -71,23 +71,25 @@ const useHighlightLayer = (featureInfo, featuresCandidate) => {
     // We want to recenter the map only if the coordinates clicked are under
     // the Overlay (mobile and desktop) or Menu element (only desktop).
     const coordinateClicked = coordinate;
-    if (!coordinateClicked) {
-      return;
+    if (coordinateClicked) {
+      panCenterFeature(
+        map,
+        [layer],
+        coordinateClicked,
+        menuOpen,
+        isMobile,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        activeTopic?.overlaySide,
+      );
     }
-    panCenterFeature(
-      map,
-      [layer],
-      coordinateClicked,
-      menuOpen,
-      isMobile,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      activeTopic?.overlaySide,
-    );
+    return () => {
+      layer?.select?.();
+    };
   }, [
     map,
     isMobile,
