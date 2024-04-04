@@ -178,21 +178,10 @@ class Map extends PureComponent {
 
       let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
 
-      // We highlight the features already displayed in the feature information
-      const layerAlreadyHighlighted = [];
-      featureInfo?.forEach(({ layer, features }) => {
-        const featuresToHighlight = [
-          ...features,
-          ...(infos.find((info) => info.layer === layer)?.features || []),
-        ];
-        layer?.highlight?.(featuresToHighlight);
-        layerAlreadyHighlighted.push(layer);
-      });
-
-      // We highlight the features under the mouse or unhighlight the previously highlighted
+      // Show the hover style if the layer has the method.
       infos.forEach(({ layer, features }) => {
-        if (!layerAlreadyHighlighted.includes(layer)) {
-          layer?.highlight?.(features);
+        if (!layer.get("priorityFeatureInfo")) {
+          layer?.hover?.(features);
         }
       });
 

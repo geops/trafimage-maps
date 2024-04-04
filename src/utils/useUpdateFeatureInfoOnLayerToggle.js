@@ -12,12 +12,6 @@ const useUpdateFeatureInfoOnLayerToggle = (layers) => {
       return l?.on("change:visible", (evt) => {
         const layer = evt.target;
         if (!layer.visible) {
-          if (layer?.select) {
-            layer.select();
-          }
-          if (layer?.highlight) {
-            layer.highlight();
-          }
           dispatch(
             setFeatureInfo(featureInfo.filter((info) => info.layer !== layer)),
           );

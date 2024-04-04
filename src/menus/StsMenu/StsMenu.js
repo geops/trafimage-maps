@@ -94,7 +94,6 @@ function StsTopicMenu() {
   const isMobile = useIsMobile;
   const [activeMenu, setActiveMenu] = useState("sts");
   const [anchorEl, setAnchorEl] = useState();
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const baseLayer = useMemo(() => {
     const bl = stsLayers.find((layer) => layer.get("isBaseLayer"));
     // Since we update the style dynamically on menu switch
@@ -147,7 +146,7 @@ function StsTopicMenu() {
   };
 
   // Hook to highlight map features
-  useHighlightLayer(featureInfo, highlightLayer);
+  useHighlightLayer(featureInfo.feature, featureInfo);
 
   return (
     <IframeMenu

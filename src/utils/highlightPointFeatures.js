@@ -10,7 +10,7 @@ const highlightPointFeatures = (
   features,
   layer,
   highlightLayer,
-  coordinatesArray,
+  coordinate,
   silent, // Used to prevent state updates in popup components (e.g. DvLineInfo, DvFeatureInfo)
 ) => {
   highlightLayer.getSource().clear();
@@ -20,11 +20,11 @@ const highlightPointFeatures = (
           layer.get("highlightPointFeatureFilter")(feat, layer),
         )
       : features;
-  filtered.forEach((feat, idx) => {
+  filtered.forEach((feat) => {
     if (feat && feat.getGeometry()) {
       const layerHighlightGeom =
         layer.get("getHighlightGeometry") &&
-        layer.get("getHighlightGeometry")(feat, layer, coordinatesArray[idx]);
+        layer.get("getHighlightGeometry")(feat, layer, coordinate);
 
       if (feat.getGeometry().getType() === "Point") {
         highlightLayer.getSource().addFeature(
@@ -43,7 +43,7 @@ const highlightPointFeatures = (
           mbLayer &&
           mbLayer.layout &&
           mbLayer.layout["icon-image"] &&
-          new Point(coordinatesArray[idx]);
+          new Point(coordinate);
 
         if (layerHighlightGeom || defaultHighlightGeom) {
           highlightLayer.getSource().clear();

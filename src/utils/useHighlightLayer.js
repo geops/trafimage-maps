@@ -5,7 +5,7 @@ import panCenterFeature from "./panCenterFeature";
 import highlightPointFeatures from "./highlightPointFeatures";
 import defaultHighlightPointStyle from "./highlightPointStyle";
 
-const useHighlightLayer = (infoIndexed, featureIndex = 0) => {
+const useHighlightLayer = (features, featureInfo = {}) => {
   const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const map = useSelector((state) => state.app.map);
   const searchService = useSelector((state) => state.app.searchService);
@@ -21,7 +21,7 @@ const useHighlightLayer = (infoIndexed, featureIndex = 0) => {
       !map
         .getLayers()
         .getArray()
-        .find((layer) => layer === highlightLayer)
+        .find((l) => l === highlightLayer)
     ) {
       map.addLayer(highlightLayer);
       // Clear the highlight for search
@@ -39,47 +39,37 @@ const useHighlightLayer = (infoIndexed, featureIndex = 0) => {
         map
           .getLayers()
           .getArray()
-          .find((layer) => layer === highlightLayer)
+          .find((l) => l === highlightLayer)
       ) {
         map.removeLayer(highlightLayer);
       }
     };
-  }, [map, searchService, highlightLayer, infoIndexed]);
+  }, [map, searchService, highlightLayer]);
 
   // When the featureIndex change we add the red circle then we pan on it.
   useEffect(() => {
-    // 'feature' can be a feature or an array
-    const feature = infoIndexed?.features?.[featureIndex];
-    if (!feature) {
+    if (!features || !featureInfo) {
       // When the user click on map to get new feature info, the infoIndexed is
       // changed before the featureIndex. So the featureIndex is not reinitialized yet.
       // It will be on the next render. So we just ignore if there is no feature to display.
       return;
     }
-    const features = Array.isArray(feature) ? feature : [feature];
-
-    // 'layer' can be a layer or an array
-    let layer = infoIndexed.layers[featureIndex];
-    layer = Array.isArray(layer) ? layer[0] : layer;
-
-    // 'coordinate' can be a coordinate (array of 2 integers) or an array of coordinate
-    const coordinate = infoIndexed.coordinates[featureIndex];
-    const coordinates = Array.isArray(coordinate?.[0])
-      ? coordinate
-      : [coordinate];
-
+    const { layer, coordinate } = featureInfo;
     const layerHighlightPointStyle = layer.get("highlightPointStyle");
     highlightLayer.setStyle(
       layerHighlightPointStyle || defaultHighlightPointStyle,
     );
-    highlightPointFeatures(features, layer, highlightLayer, coordinates);
+    highlightPointFeatures(features, layer, highlightLayer, coordinate);
+
+    // Apply select feature state to mapboxStyleLayer features
+    layer?.select?.(features);
 
     // We have to render the map otherwise the last selected features are displayed during animation.
     map.renderSync();
 
     // We want to recenter the map only if the coordinates clicked are under
     // the Overlay (mobile and desktop) or Menu element (only desktop).
-    const coordinateClicked = coordinates[0];
+    const coordinateClicked = coordinate;
     if (!coordinateClicked) {
       return;
     }
@@ -100,11 +90,11 @@ const useHighlightLayer = (infoIndexed, featureIndex = 0) => {
   }, [
     map,
     isMobile,
-    featureIndex,
-    infoIndexed,
     menuOpen,
     highlightLayer,
     activeTopic,
+    featureInfo,
+    features,
   ]);
 };
 

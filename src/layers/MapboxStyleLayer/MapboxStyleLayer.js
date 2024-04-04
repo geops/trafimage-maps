@@ -16,10 +16,39 @@ import { MapboxStyleLayer as MTMapboxStyleLayer } from "mobility-toolbox-js/ol";
 class MapboxStyleLayer extends MTMapboxStyleLayer {
   constructor(options = {}) {
     super({ ...options, isHoverActive: false, isClickActive: false });
-
+    this.hover = this.hover.bind(this);
     this.style = options.style;
     this.filters = options.filters;
     this.hidePopupFunc = options.hidePopup;
+    this.hoveredFeatures = []; // When the feature is under the mouse and selectable
+    this.highlightedFeatures = []; // When the clicked is clicked abnd available in feature information.
+    this.selectedFeatures = []; // When the feature properties is displayed in feature information.
+  }
+
+  attachToMap(map) {
+    super.attachToMap(map);
+    this.olListenersKeys.push(
+      this.on("change:visible", () => {
+        if (!this.visible) {
+          this.cleanFeatureState();
+        }
+      }),
+    );
+    this.map?.getTargetElement()?.addEventListener("mouseleave", this.hover);
+  }
+
+  detachFromMap(map) {
+    this.map?.getTargetElement()?.removeEventListener("mouseleave", this.hover);
+    super.detachFromMap(map);
+  }
+
+  cleanFeatureState() {
+    this.hover();
+    this.highlight();
+    this.select();
+    this.hoveredFeatures = [];
+    this.highlightedFeatures = [];
+    this.selectedFeatures = [];
   }
 
   hidePopup(feat, layer, featureInfo) {
@@ -105,14 +134,29 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
   }
 
   /**
-   * Select a list of features, setting the hover state to true to a list of features.
-   * @param {Array<ol/Feature~Feature>} [features=[]] Features to select.
+   * Highlight a list of features, setting the hover state to true to a list of features.
+   * @param {Array<ol/Feature~Feature>} [features=[]] Features to highlight.
    * @private
    */
-  select(features = []) {
-    this.setHoverState(this.selectedFeatures || [], false);
-    this.selectedFeatures = features;
-    this.setHoverState(this.selectedFeatures || [], true);
+  hover(features = []) {
+    // Filter out selected features
+    const filtered =
+      this.hoveredFeatures?.filter(
+        (feature) =>
+          ![
+            ...(this.selectedFeatures || []),
+            ...(this.highlightedFeatures || []),
+          ]
+            .map((feat) => feat.getId())
+            .includes(feature.getId()),
+      ) || [];
+
+    // Remove previous highlight
+    this.setHoverState(filtered, false);
+    this.hoveredFeatures = features;
+
+    // Add highlight
+    this.setHoverState(this.hoveredFeatures, true);
   }
 
   /**
@@ -136,6 +180,18 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
 
     // Add highlight
     this.setHoverState(this.highlightedFeatures, true);
+  }
+
+  /**
+   * Apply a select style to alist of features.
+   * @param {Array<ol/Feature~Feature>} [features=[]] Features to select.
+   * @private
+   */
+  // eslint-disable-next-line class-methods-use-this
+  select(features = []) {
+    this.setHoverState(this.selectedFeatures || [], false);
+    this.selectedFeatures = features;
+    this.setHoverState(this.selectedFeatures || [], true);
   }
 
   /**

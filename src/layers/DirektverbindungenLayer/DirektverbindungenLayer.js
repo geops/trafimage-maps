@@ -33,10 +33,6 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       },
       styleLayersFilter: (layer) =>
         DV_FILTER_UNSELECTED_REGEX.test(getTrafimageFilter(layer)),
-      onClick: (features, layer) =>
-        layer.highlightStation(
-          features.find((feat) => !!feat.get("direktverbindung_ids")),
-        ),
     });
     this.allFeatures = [];
     this.syncTimeout = null;
@@ -169,9 +165,20 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     return null;
   }
 
+  attachToMap(map) {
+    super.attachToMap(map);
+    this.singleClickKey = this.map?.on("singleclick", (evt) => {
+      this.getFeatureInfoAtCoordinate(evt.coordinate).then(({ features }) => {
+        this.highlightStation(
+          features.find((feat) => !!feat.get("direktverbindung_ids")),
+        );
+      });
+    });
+  }
+
   detachFromMap() {
     super.detachFromMap();
-    unByKey(this.viewChangeListener);
+    unByKey([this.viewChangeListener, this.singleClickKey]);
   }
 
   // Updates the IPV mapbox stylelayer visibility according
@@ -209,7 +216,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
    * Updates visibility for stations, labels and select highlight mb layers
    * and applies the mb filter for the currently selected feature
    */
-  highlightLine() {
+  highlightLine(features = []) {
     const { mbMap } = this.mapboxLayer;
     if (!mbMap) {
       return;
@@ -223,7 +230,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
       `^ipv_call_${highlightLayerString}${this.getCurrentLayer()}$`,
     );
     // Highlight lines only
-    const selectedLines = this.selectedFeatures.filter(
+    const selectedLines = features.filter(
       (feat) =>
         feat.getGeometry() instanceof MultiLineString ||
         feat.getGeometry() instanceof LineString,
@@ -305,8 +312,15 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   }
 
   select(features = []) {
-    super.select(features);
-    this.highlightLine();
+    if (!features?.length) {
+      // remove highlighted station when featureinformation is closed
+      this.highlightStation();
+      this.highlightLine();
+    }
+  }
+
+  selectLine(features) {
+    this.highlightLine(features);
   }
 }
 

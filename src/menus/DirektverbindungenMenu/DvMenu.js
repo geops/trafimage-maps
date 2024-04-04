@@ -31,7 +31,6 @@ function DvMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const isMobile = useIsMobile();
 
   const urlSearch = useMemo(
@@ -64,7 +63,7 @@ function DvMenu() {
   }, [isMobile, dispatch]);
 
   // Hook to highlight map features
-  useHighlightLayer(featureInfo, highlightLayer);
+  useHighlightLayer(featureInfo.features, featureInfo);
 
   return (
     <IframeMenu
