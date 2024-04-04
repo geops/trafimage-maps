@@ -8,7 +8,6 @@ import {
   Dialog as MuiDialog,
   DialogTitle,
   Paper,
-  Typography,
   IconButton,
 } from "@mui/material";
 import { MdClose } from "react-icons/md";
@@ -78,9 +77,7 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     top: 0,
     width: 44,
-  },
-  title: {
-    cursor: (props) => (props.isModal ? "auto" : "move"),
+    height: 50,
   },
 }));
 
@@ -148,7 +145,11 @@ function Dialog(props) {
   } = props;
   const [dialogNode, setDialogNode] = useState(null);
   const classes = useStyles({ isModal });
-  const closeDialog = onClose || (() => dispatch(setDialogVisible()));
+  const closeDialog =
+    onClose ||
+    (() => {
+      dispatch(setDialogVisible());
+    });
   const escFunction = (e) =>
     e.which === 27 && (onClose || (() => dispatch(setDialogVisible())));
   const screenWidth = useSelector((state) => state.app.screenWidth);
@@ -227,20 +228,18 @@ function Dialog(props) {
       >
         <DialogTitle
           id="draggable-dialog-title"
-          className={classes.title}
-          component="span"
+          variant="h4"
+          style={{ cursor: isModal ? "auto" : "move" }}
         >
-          <Typography variant="h4" className={classes.title}>
-            {title}
-          </Typography>
-          <IconButton
-            title={t("Dialog schließen")}
-            onClick={closeDialog}
-            className={classes.closeBtn}
-          >
-            <MdClose />
-          </IconButton>
+          {title}
         </DialogTitle>
+        <IconButton
+          title={t("Dialog schließen")}
+          onClick={closeDialog}
+          className={classes.closeBtn}
+        >
+          <MdClose />
+        </IconButton>
         <div
           className={`${classes.dialogBody} ${
             isSmallScreen ? classes.dialogBodyMobile : ""
