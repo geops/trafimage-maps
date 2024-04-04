@@ -311,12 +311,12 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     });
   }
 
-  select(features = []) {
+  highlight(features = []) {
     if (!features?.length) {
       // remove highlighted station when featureinformation is closed
       this.highlightStation();
-      this.highlightLine();
     }
+    super.highlight(features);
   }
 
   selectLine(features) {

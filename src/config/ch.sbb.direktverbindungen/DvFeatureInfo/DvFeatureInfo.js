@@ -188,6 +188,9 @@ function DvFeatureInfo({ filterByType }) {
       );
       dvMainLayer.selectLine(selectedFeature ? [selectedFeature] : []);
     }
+    return () => {
+      dvMainLayer.selectLine([]);
+    };
   }, [dvFeatures, dvMainLayer, infoKey]);
 
   if (!dvFeatures?.length) return null;
