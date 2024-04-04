@@ -87,6 +87,7 @@ export const setFeatureInfo =
 
     // Highlight the features selected
     data?.forEach(({ layer, features }) => {
+      layer?.select?.();
       layer?.highlight?.(features);
     });
 
