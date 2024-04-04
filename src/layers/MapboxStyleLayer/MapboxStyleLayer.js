@@ -50,9 +50,10 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
   }
 
   cleanFeatureState() {
-    this.hover();
-    this.highlight();
+    // Cleaning order is important to avoid having a feature with a bad hover state
     this.select();
+    this.highlight();
+    this.hover();
     this.hoveredFeatures = [];
     this.highlightedFeatures = [];
     this.selectedFeatures = [];
