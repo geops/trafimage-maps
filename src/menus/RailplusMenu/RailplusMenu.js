@@ -1,15 +1,15 @@
 /* eslint-disable no-param-reassign */
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { MdClose } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import IframeMenu from "../IframeMenu";
 import { RailplusPopup } from "../../popups";
 import { setFeatureInfo } from "../../model/app/actions";
 import useIsMobile from "../../utils/useIsMobile";
 import usePanCenterFeature from "../../utils/usePanCenterFeature";
+import CloseButton from "../../components/CloseButton";
 
 const useStyles = makeStyles(() => {
   return {
@@ -23,9 +23,6 @@ const useStyles = makeStyles(() => {
       justifyContent: "space-between",
       backgroundColor: "#f5f5f5",
       borderBottom: `1px solid #F0F0F0`,
-    },
-    closeButton: {
-      paddingRight: 15,
     },
   };
 });
@@ -53,16 +50,14 @@ function RailplusMenu() {
         <Box className={classes.listHeader}>
           <b>{t(layer.key)}</b>
           {!isMobile && (
-            <IconButton
+            <CloseButton
               size="medium"
-              className={`${classes.closeButton} wkp-close-bt`}
+              style={{ width: 40, height: 40 }}
               title={t("Schliessen")}
               onClick={() => {
                 dispatch(setFeatureInfo());
               }}
-            >
-              <MdClose focusable={false} alt={t("Schliessen")} />
-            </IconButton>
+            />
           )}
         </Box>
       }

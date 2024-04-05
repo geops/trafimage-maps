@@ -51,7 +51,7 @@ function PersonCard({
   return (
     <div
       key={`${title}-${name}`}
-      className={`wkp-person-card ${classes.card}${` ${className}` || ""}`}
+      className={`wkp-person-card ${classes.card}${` ${className}`}`}
     >
       {title && <Typography paragraph>{title}</Typography>}
       {name && (
@@ -122,7 +122,7 @@ PersonCard.defaultProps = {
   phone: undefined,
   division: undefined,
   otherDetails: [],
-  className: undefined,
+  className: "",
 };
 
 export default PersonCard;

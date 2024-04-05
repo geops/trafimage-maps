@@ -9,7 +9,7 @@ import theme from "../../themes/default";
 
 describe("DrawMenu", () => {
   let store;
-  test.only("should use MenuItem and display Draw", () => {
+  test("should use MenuItem and display Draw", () => {
     const info = {
       key: "foo",
       elements: {

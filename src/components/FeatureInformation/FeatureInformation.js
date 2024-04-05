@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
-import { MdClose } from "react-icons/md";
 import { IoIosArrowRoundBack, IoIosArrowRoundForward } from "react-icons/io";
-import { Link, IconButton } from "@mui/material";
+import { Link } from "@mui/material";
 import { setFeatureInfo } from "../../model/app/actions";
 import useUpdateFeatureInfoOnLayerToggle from "../../utils/useUpdateFeatureInfoOnLayerToggle";
 import useIndexedFeatureInfo from "../../utils/useIndexedFeatureInfo";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import getPopupComponent from "../../utils/getPopupComponent";
 import "./FeatureInformation.scss";
+import CloseButton from "../CloseButton";
 
 function FeatureInformation({ featureInfo }) {
   const { t } = useTranslation();
@@ -19,36 +19,41 @@ function FeatureInformation({ featureInfo }) {
   const language = useSelector((state) => state.app.language);
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const staticFilesUrl = useSelector((state) => state.app.staticFilesUrl);
-  const highlightLayer = useSelector((state) => state.map.highlightLayer);
   const [featureIndex, setFeatureIndex] = useState(0);
 
-  // List of features and layers available for pagination.
+  // List of features, layers and coordinates available for pagination.
   const infoIndexed = useIndexedFeatureInfo(featureInfo);
 
-  // Hook to highlight map features
-  useHighlightLayer(featureInfo, highlightLayer, featureIndex);
-
   // Hook to filter out selected features for deactivated layers
-  useUpdateFeatureInfoOnLayerToggle(infoIndexed.layers.flat(), featureInfo);
+  useUpdateFeatureInfoOnLayerToggle(infoIndexed.layers.flat());
 
-  // The current feature(s) to display.
-  const feature = infoIndexed.features[featureIndex];
-  if (!feature) {
+  // The current feature(s) to display. Can be an array of an array of features.
+  const feature = useMemo(() => {
+    return infoIndexed?.features?.[featureIndex];
+  }, [featureIndex, infoIndexed?.features]);
+
+  // The current feature(s) to display as an array of features.
+  const featuresAsArray = useMemo(() => {
+    return Array.isArray(feature) ? feature : [feature];
+  }, [feature]);
+
+  // The feature info corresponding to the feature(s) selected.
+  const info = useMemo(() => {
+    if (!featuresAsArray?.length || !featureInfo) {
+      return null;
+    }
+    return featureInfo?.find((i) => {
+      return i.features.includes(featuresAsArray[0]);
+    });
+  }, [featureInfo, featuresAsArray]);
+
+  // Hook to highlight/select map features
+  useHighlightLayer(info, featuresAsArray);
+
+  if (!feature || !info?.layer) {
     if (featureIndex !== 0) {
       setFeatureIndex(0);
     }
-    return null;
-  }
-
-  // Get the feature info corresponding to the feature(s) selected.
-  const info = featureInfo.find((i) => {
-    if (Array.isArray(feature)) {
-      return i.features.includes(feature[0]);
-    }
-    return i.features.includes(feature);
-  });
-
-  if (!info || !info.layer) {
     return null;
   }
 
@@ -57,7 +62,6 @@ function FeatureInformation({ featureInfo }) {
     return null;
   }
 
-  const { layer } = info;
   const { layers, features, coordinates } = infoIndexed;
   const { hideHeader, renderTitle, onCloseBtClick = () => {} } = PopupComponent;
 
@@ -75,29 +79,24 @@ function FeatureInformation({ featureInfo }) {
           <div className="wkp-feature-information-header">
             <span id="wkp-popup-label">
               {renderTitle
-                ? renderTitle(feature, layer, t)
-                : layer && layer.name && t(layer.name)}
+                ? renderTitle(feature, info.layer, t)
+                : info.layer.name && t(info.layer.name)}
             </span>
-            <IconButton
-              size="medium"
-              className="wkp-close-bt"
-              title={t("Schliessen")}
+            <CloseButton
               onClick={() => {
                 dispatch(setFeatureInfo());
                 onCloseBtClick();
               }}
-            >
-              <MdClose focusable={false} alt={t("Schliessen")} />
-            </IconButton>
+            />
           </div>
         ) : null}
         <div className="wkp-feature-information-body">
           <PopupComponent
             key={info.layer.key}
             t={t}
-            layer={layers[featureIndex]}
-            feature={features[featureIndex]}
-            coordinate={coordinates[featureIndex]}
+            layer={layers[featureIndex]} // always an array
+            feature={features[featureIndex]} //  can be an array of array of features
+            coordinate={coordinates[featureIndex]} // always an array
             language={language}
             appBaseUrl={appBaseUrl}
             staticFilesUrl={staticFilesUrl}

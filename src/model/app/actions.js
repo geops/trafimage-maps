@@ -78,17 +78,20 @@ export const setFeatureInfo =
       app: { searchService, featureInfo },
     } = getState();
 
-    if (!data.length) {
-      // Clean previous highlight and select styles.
-      featureInfo?.forEach(({ layer }) => {
-        if (layer.highlight) {
-          layer.highlight([]);
-        }
-        if (layer.select) {
-          layer.select([]);
-        }
+    // Clean previous styles of layers that are not in the new featureInfo
+    featureInfo
+      ?.filter((info) => !data?.find((d) => d.layer === info.layer))
+      .forEach(({ layer }) => {
+        layer?.cleanFeatureState?.();
       });
-    } else if (searchService) {
+
+    // Highlight the features selected
+    data?.forEach(({ layer, features }) => {
+      layer?.select?.();
+      layer?.highlight?.(features);
+    });
+
+    if (searchService) {
       // Never display 2 different highlights at the same time.
       searchService.clearHighlight();
       searchService.clearSelect();

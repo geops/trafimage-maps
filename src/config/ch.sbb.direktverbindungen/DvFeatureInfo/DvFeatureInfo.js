@@ -186,8 +186,11 @@ function DvFeatureInfo({ filterByType }) {
       const selectedFeature = dvFeatures.find(
         (feat) => getId(feat) === infoKey,
       );
-      dvMainLayer.select(selectedFeature ? [selectedFeature] : []);
+      dvMainLayer.selectLine(selectedFeature ? [selectedFeature] : []);
     }
+    return () => {
+      dvMainLayer.selectLine([]);
+    };
   }, [dvFeatures, dvMainLayer, infoKey]);
 
   if (!dvFeatures?.length) return null;

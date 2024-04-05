@@ -30,11 +30,12 @@ class RegionenkarteLayer extends MapboxStyleLayer {
     }
   }
 
-  // Deactivate select style, since we don't use the selectedFeatures for highlighting
-  select() {
-    this.selectedFeatures = [];
-    this.highlightedFeatures = [];
-  }
+  // Deactivate highlight and select style.
+  // eslint-disable-next-line class-methods-use-this
+  highlight() {}
+
+  // eslint-disable-next-line class-methods-use-this
+  select() {}
 
   clone(newOptions) {
     return new RegionenkarteLayer({ ...this.options, ...newOptions });

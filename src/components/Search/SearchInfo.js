@@ -3,7 +3,6 @@ import React, { useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { MdClose } from "react-icons/md";
 import { makeStyles } from "@mui/styles";
 import {
   IconButton,
@@ -16,8 +15,10 @@ import {
   ClickAwayListener,
   Typography,
 } from "@mui/material";
+import { FaTimes } from "react-icons/fa";
 import { ReactComponent as QuestionIcon } from "../../img/circleQuestionMark.svg";
 import { setSearchInfoOpen } from "../../model/app/actions";
+import CloseButton from "../CloseButton";
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -147,13 +148,12 @@ function SearchInfo({ anchorEl }) {
                   >
                     <div className={classes.popupHeader}>
                       <Typography variant="h4">{t("Suche")}</Typography>
-                      <IconButton
-                        title={t("Schliessen")}
+                      <CloseButton
                         onClick={togglePopup}
                         className={classes.closeBtn}
                       >
-                        <MdClose />
-                      </IconButton>
+                        <FaTimes />
+                      </CloseButton>
                     </div>
                     <List
                       dense

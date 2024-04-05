@@ -20,33 +20,34 @@ exports[`Dialog should match snapshot. 1`] = `
            aria-labelledby=":r0:"
            style="transform: translate(0px,0px);"
       >
-        <span class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root makeStyles-title-11 makeStyles-title-14 css-1236ds1-MuiTypography-root-MuiDialogTitle-root"
-              id="draggable-dialog-title"
+        <h2 class="MuiTypography-root MuiTypography-h4 MuiDialogTitle-root css-x5n03r-MuiTypography-root-MuiDialogTitle-root"
+            id="draggable-dialog-title"
+            style="cursor: move;"
         >
-          <h4 class="MuiTypography-root MuiTypography-h4 makeStyles-title-11 makeStyles-title-14 css-17wodpb-MuiTypography-root">
-          </h4>
-          <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-bp3e88-MuiButtonBase-root-MuiIconButton-root"
-                  tabindex="0"
-                  type="button"
-                  title="Dialog schließen"
+        </h2>
+        <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-10 css-1perq7w-MuiButtonBase-root-MuiIconButton-root"
+                tabindex="0"
+                type="button"
+                title="Dialog schließen"
+        >
+          <svg stroke="currentColor"
+               fill="currentColor"
+               stroke-width="0"
+               viewbox="0 0 24 24"
+               focusable="false"
+               alt="Schliessen"
+               height="1em"
+               width="1em"
+               xmlns="http://www.w3.org/2000/svg"
           >
-            <svg stroke="currentColor"
-                 fill="currentColor"
-                 stroke-width="0"
-                 viewbox="0 0 24 24"
-                 height="1em"
-                 width="1em"
-                 xmlns="http://www.w3.org/2000/svg"
+            <path fill="none"
+                  d="M0 0h24v24H0z"
             >
-              <path fill="none"
-                    d="M0 0h24v24H0z"
-              >
-              </path>
-              <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
-              </path>
-            </svg>
-          </button>
-        </span>
+            </path>
+            <path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z">
+            </path>
+          </svg>
+        </button>
         <div class="makeStyles-dialogBody-7 ">
         </div>
       </div>

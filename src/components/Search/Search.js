@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Autosuggest from "react-autosuggest";
-import { FaSearch, FaTimes, FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaSearch, FaAngleDown, FaAngleUp, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IconButton, Typography } from "@mui/material";
 import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
@@ -10,6 +10,7 @@ import useIsMobile from "../../utils/useIsMobile";
 import SearchToggle from "./SearchToggle";
 
 import "./Search.scss";
+import CloseButton from "../CloseButton";
 
 const mobileMapPadding = [50, 50, 50, 50];
 
@@ -138,9 +139,9 @@ function Search() {
               <div className="wkp-search-input" ref={searchContainerRef}>
                 <input {...inputProps} />
                 {value && (
-                  <IconButton
+                  <CloseButton
                     tabIndex={0}
-                    aria-label={t("Suchtext löschen")}
+                    title={t("Suchtext löschen")}
                     className="wkp-search-button wkp-search-button-clear"
                     onClick={() => {
                       setValue("");
@@ -165,7 +166,7 @@ function Search() {
                     }}
                   >
                     <FaTimes focusable={false} />
-                  </IconButton>
+                  </CloseButton>
                 )}
                 <IconButton
                   tabIndex={0}

@@ -167,29 +167,29 @@ class Map extends PureComponent {
       // If the featureInfos contains one from a priority layer.
       // We display only these featureInfos.
       // See DirektVerbindungen layers for an example.
-      const hasPriorityLayer = newInfos.find(
-        ({ features, layer }) =>
-          features.length && layer.get("priorityFeatureInfo"),
+      const priorityLayersInfos = newInfos.filter(({ layer }) =>
+        layer.get("priorityFeatureInfo"),
+      );
+      const hasPriorityLayer = !!priorityLayersInfos.length;
+
+      const otherLayersInfos = newInfos.filter(
+        ({ layer }) => !layer.get("priorityFeatureInfo"),
       );
 
-      let infos = newInfos.filter(({ features, layer }) => {
-        const allow = features.length;
-        if (hasPriorityLayer) {
-          return allow && layer.get("priorityFeatureInfo");
+      let infos = hasPriorityLayer ? priorityLayersInfos : otherLayersInfos;
+
+      // Show the hover style if the layer has the method.
+      infos.forEach(({ layer, features }) => {
+        if (!layer.get("priorityFeatureInfo")) {
+          layer?.hover?.(features);
         }
-        return allow;
       });
 
-      // Clear the highlight style when there is priority layers
-      if (hasPriorityLayer) {
-        newInfos.forEach(({ layer }) => {
-          if (layer.highlight && !layer.get("priorityFeatureInfo")) {
-            layer.highlight([]);
-          }
-        });
-      }
-
-      map.getTarget().style.cursor = infos.length ? "pointer" : "auto";
+      map.getTarget().style.cursor = infos.find(
+        ({ features }) => !!features.length,
+      )
+        ? "pointer"
+        : "auto";
 
       const shouldNotSetInfoOnHover =
         featureInfo.length &&
@@ -237,7 +237,6 @@ class Map extends PureComponent {
       dispatchHtmlEvent,
       activeTopic,
       showPopups,
-      featureInfo,
       layers,
     } = this.props;
 
@@ -255,41 +254,30 @@ class Map extends PureComponent {
         // If the featureInfos contains one from a priority layer.
         // We display only these featureInfos.
         // See DirektVerbindungen layers for an example.
-        const hasPriorityLayer = featureInfos.find(
+        const priorityLayersInfos = featureInfos.filter(
           ({ features, layer }) =>
             features.length && layer.get("priorityFeatureInfo"),
         );
+        const hasPriorityLayer = !!priorityLayersInfos.length;
+
+        const otherLayersInfos = featureInfos.filter(
+          ({ features, layer }) =>
+            features.length && !layer.get("priorityFeatureInfo"),
+        );
 
         // Display only info of layers with a popup defined.
-        let infos = featureInfos.reverse().filter(({ layer }) => {
-          const allow =
-            (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
-            activeTopic.enableFeatureClick;
-          if (hasPriorityLayer) {
-            // Clear the highlight style when there is priority layers
-            if (layer.highlight && !layer.get("priorityFeatureInfo")) {
-              layer.highlight([]);
-            }
-            return allow && layer.get("priorityFeatureInfo");
-          }
-          return allow;
-        });
-
-        // Clear the previous select style.
-        (featureInfo || []).forEach(({ layer }) => {
-          if (layer.select) {
-            layer.select([]);
-          }
-        });
-
-        infos.forEach(({ layer, features }) => {
-          if (layer.select) {
-            layer.select(features);
-          }
-        });
+        const infos = (
+          hasPriorityLayer ? priorityLayersInfos : otherLayersInfos
+        )
+          .reverse()
+          .filter(({ layer }) => {
+            return (
+              (layer.get("popupComponent") && !layer.get("showPopupOnHover")) ||
+              activeTopic.enableFeatureClick
+            );
+          });
 
         // Dispatch only infos with features found.
-        infos = infos.filter(({ features }) => features.length);
         dispatchSetFeatureInfo(infos);
 
         // Propagate the infos clicked to the WebComponent

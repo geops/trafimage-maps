@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import React from "react";
 import { IconButton } from "@mui/material";
+import React from "react";
 import { MdClose } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 
@@ -9,7 +9,11 @@ function CloseButton({ children, ...props }) {
   return (
     <IconButton
       size="medium"
-      className="wkp-close-bt"
+      sx={{
+        height: 50,
+        width: 50,
+        zIndex: 1002,
+      }}
       title={t("Schliessen")}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}

@@ -9,7 +9,7 @@ exports[`FeatureInformation should match snapshot. should display multiple featu
   <div class="wkp-feature-information-header">
     <span id="wkp-popup-label">
     </span>
-    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-close-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
             title="Schliessen"
@@ -110,7 +110,7 @@ exports[`FeatureInformation should match snapshot. using the info's popupCompone
   <div class="wkp-feature-information-header">
     <span id="wkp-popup-label">
     </span>
-    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-close-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
             title="Schliessen"
@@ -169,7 +169,7 @@ exports[`FeatureInformation should match snapshot. using the layers's popupCompo
   <div class="wkp-feature-information-header">
     <span id="wkp-popup-label">
     </span>
-    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium wkp-close-bt css-78trlr-MuiButtonBase-root-MuiIconButton-root"
+    <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1go4m0m-MuiButtonBase-root-MuiIconButton-root"
             tabindex="0"
             type="button"
             title="Schliessen"

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Feature } from "ol";
 import { Layer } from "mobility-toolbox-js/ol";
@@ -7,6 +7,7 @@ import { makeStyles } from "@mui/styles";
 import Link from "../../components/Link";
 import phoneIcon from "../../img/popups/NetzentwicklungPopup/phone.svg";
 import mailIcon from "../../img/popups/NetzentwicklungPopup/mail.svg";
+import useHighlightSomeFeatures from "../../utils/useHighlightSomeFeatures";
 
 const useStyles = makeStyles(() => {
   return {
@@ -87,11 +88,8 @@ function IsbPopup({ feature, layer }) {
       return new RegExp(`^${operator}$`, "i").test(key);
     }) || [])[1] || operator;
 
-  useEffect(() => {
-    if (layer) {
-      layer.select([feature]);
-    }
-  }, [layer, feature]);
+  // Highlight only the feature display in the feature information
+  useHighlightSomeFeatures([feature], layer);
 
   return (
     <div>
