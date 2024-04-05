@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.12](https://github.com/geops/trafimage-maps/compare/v1.28.11...v1.28.12) (2024-04-05)
+
+### Bug Fixes
+
+- refactor highlighting behavior to allow a select style ([#1161](https://github.com/geops/trafimage-maps/issues/1161)) ([6d647f3](https://github.com/geops/trafimage-maps/commit/6d647f3050fb49edfdb2294f281eb2e956522c9f))
+
 ### [1.28.11](https://github.com/geops/trafimage-maps/compare/v1.28.10...v1.28.11) (2024-04-03)
 
 ### Bug Fixes
