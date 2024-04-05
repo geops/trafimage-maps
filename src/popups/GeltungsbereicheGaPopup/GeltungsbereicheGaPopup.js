@@ -12,7 +12,7 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import { FaCircle } from "react-icons/fa";
-import GeltungsbereicheLegend, { legends } from "./GeltungsbereicheLegend";
+import GeltungsbereicheLegend, { getLegends } from "./GeltungsbereicheLegend";
 import { infos } from "../../layerInfos/GeltungsbereicheLayerInfo/GeltungsbereicheLayerInfo";
 
 const propTypes = {
@@ -85,6 +85,9 @@ function GeltungsbereichePopup({
       }
       return text;
     });
+  const lineDashArray50 = layer.get("lineDashArray50");
+  const lineDashArray25 = layer.get("lineDashArray25");
+  const legends = getLegends(lineDashArray50, lineDashArray25);
 
   // Keep same mot order as in the legends
   const featuresByMot = {};
@@ -139,6 +142,8 @@ function GeltungsbereichePopup({
                   mot={feature.get("mot")}
                   valid={valid}
                   background
+                  lineDashArray50={lineDashArray50}
+                  lineDashArray25={lineDashArray25}
                 />
                 <div>
                   <Typography variant="h4">{t(`gb.mot.${mot}`)}</Typography>
