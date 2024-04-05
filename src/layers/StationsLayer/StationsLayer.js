@@ -158,12 +158,12 @@ class StationsLayer extends MapboxStyleLayer {
     }
   }
 
+  // Deactivate highlight and select style.
   // eslint-disable-next-line class-methods-use-this
-  // Deactivate select style.
-  select() {
-    this.setHoverState(this.highlightedFeatures, false);
-    this.setHoverState(this.selectedFeatures, false);
-  }
+  highlight() {}
+
+  // eslint-disable-next-line class-methods-use-this
+  select() {}
 
   clone(newOptions) {
     return new StationsLayer({ ...this.options, ...newOptions });

@@ -200,17 +200,15 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    * @private
    */
   // eslint-disable-next-line class-methods-use-this
-  select(features = []) {
+  select() {
     // By default no select state is applied
-    this.setFeatureState(this.selectedFeatures || [], {
-      hover: true,
-      selected: false,
-    });
-    this.selectedFeatures = features;
-    this.setFeatureState(this.selectedFeatures || [], {
-      hover: true,
-      selected: true,
-    });
+    // this.setFeatureState(this.selectedFeatures || [], {
+    //   selected: false,
+    // });
+    // this.selectedFeatures = features;
+    // this.setFeatureState(this.selectedFeatures || [], {
+    //   selected: true,
+    // });
   }
 
   /**
