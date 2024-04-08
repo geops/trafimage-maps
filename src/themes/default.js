@@ -13,6 +13,11 @@ const colors = {
 };
 
 const styles = {
+  flexCenter: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   bottomFade: {
     "&::after": {
       content: '""',

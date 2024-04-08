@@ -106,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
   resizeResetButton: {
     width: "calc(100% - 50px)",
     height: 55,
-    zIndex: 10000,
+    zIndex: 1000,
     border: "none",
     background: "transparent",
   },

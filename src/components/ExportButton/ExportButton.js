@@ -16,15 +16,9 @@ import {
 } from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
 
-const flexCenter = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   buttonContent: {
-    ...flexCenter,
+    ...theme.styles.flexCenter,
     padding: "5px 10px",
     height: 35,
     width: 110,
@@ -33,7 +27,7 @@ const useStyles = makeStyles(() => ({
       backgroundColor: "#cdcdcd",
     },
   },
-  canvasButton: { ...flexCenter },
+  canvasButton: { ...theme.styles.flexCenter },
 }));
 
 function ExportButton({
