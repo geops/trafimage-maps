@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState, useEffect } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import makeStyles from "@mui/styles/makeStyles";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,7 @@ const useStylesDialog = makeStyles(() => ({
     position: "fixed !important",
   },
   dialogContainer: {
-    maxWidth: 1200,
+    maxWidth: "100%",
     maxHeight: "100%",
   },
   container: {
@@ -28,44 +28,28 @@ const useStylesDialog = makeStyles(() => ({
   },
 }));
 
-const usePhotos = (properties, feature) => {
+function MesswagenPhotosPopup({ feature }) {
+  const classesDialog = useStylesDialog();
+  const { t } = useTranslation();
+  const [fullSize, setFullSize] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
+  const properties = feature.getProperties();
   const photos = useMemo(
     () =>
       Array.from(Array(7).keys()).reduce((allPhotos, key) => {
-        const photo = properties[`foto_${key}`];
+        const featProps = feature.getProperties();
+        const photo = { ...featProps, ...fakePhotos }[`foto_${key}`];
         if (photo) {
           allPhotos.push(photo);
         }
         return allPhotos;
       }, []),
-    [properties],
+    [feature],
   );
-  useEffect(() => {
-    setCurrentPhotoIndex(0);
-  }, [feature]);
-  const incrementPhotoIndex = useCallback(() => {
-    setCurrentPhotoIndex((current) => current + 1);
-  }, []);
-  const decrementPhotoIndex = useCallback(() => {
-    setCurrentPhotoIndex((current) => current - 1);
-  }, []);
-  return [photos, currentPhotoIndex, incrementPhotoIndex, decrementPhotoIndex];
-};
-
-function MesswagenPhotosPopup({ feature }) {
-  const classesDialog = useStylesDialog();
-  const { t } = useTranslation();
-  const [fullSize, setFullSize] = useState(false);
-  const properties = feature.getProperties();
-  const [photos, currentPhotoIndex, incrementPhotoIndex, decrementPhotoIndex] =
-    usePhotos(
-      {
-        ...properties,
-        ...fakePhotos,
-      },
-      feature,
-    );
+  const getCurrentPhotoIndex = useCallback(
+    (index) => setCurrentPhotoIndex(index),
+    [],
+  );
 
   return (
     <>
@@ -76,18 +60,16 @@ function MesswagenPhotosPopup({ feature }) {
         {photos && (
           <PhotoCarusel
             photos={photos}
-            currentPhotoIndex={currentPhotoIndex}
-            onIncrement={incrementPhotoIndex}
-            onDecrement={decrementPhotoIndex}
-            altText={`${properties.bezeichnung}-foto-${currentPhotoIndex}`}
-            onImageClick={() => setFullSize(!fullSize)}
+            onIncrement={getCurrentPhotoIndex}
+            onDecrement={getCurrentPhotoIndex}
+            onImageClick={() => setFullSize(true)}
           />
         )}
       </div>
       {fullSize && (
         <Dialog
           isModal
-          name="ga-export-menu"
+          name="messwagen-photos-dialog"
           title={<span>{`${properties.bezeichnung} - ${t("Fotos")}`}</span>}
           className="tm-dialog-container"
           classes={{
@@ -99,10 +81,7 @@ function MesswagenPhotosPopup({ feature }) {
             <div className={classesDialog.container}>
               <PhotoCarusel
                 photos={photos}
-                currentPhotoIndex={currentPhotoIndex}
-                onIncrement={incrementPhotoIndex}
-                onDecrement={decrementPhotoIndex}
-                altText={`${properties.bezeichnung}-foto-${currentPhotoIndex}`}
+                initialPhotoIndex={currentPhotoIndex}
               />
             </div>
           }

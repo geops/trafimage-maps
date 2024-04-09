@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { unByKey } from "ol/Observable";
 import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 
 const useVisibleLayer = (layers) => {
   const [visible, setVisible] = useState(false);

@@ -14,7 +14,7 @@ import {
 } from "../../config/ch.sbb.sts";
 import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import panCenterFeature from "../../utils/panCenterFeature";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {

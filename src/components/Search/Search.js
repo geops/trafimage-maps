@@ -6,7 +6,7 @@ import { FaSearch, FaAngleDown, FaAngleUp, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IconButton, Typography } from "@mui/material";
 import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 import SearchToggle from "./SearchToggle";
 
 import "./Search.scss";

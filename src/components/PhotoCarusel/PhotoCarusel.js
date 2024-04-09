@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PropTypes from "prop-types";
 import { IconButton, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { ChevronLeft, ChevronRight, ZoomIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsSmallScreen from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles((theme) => ({
   imageButton: {
@@ -57,21 +57,20 @@ const useStylesPhoto = makeStyles((theme) => ({
   },
 }));
 
-function Photo({ src, alt, maxWidth }) {
+function Photo({ src, maxWidth }) {
   const { t } = useTranslation();
   const classes = useStylesPhoto();
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setLoading(true);
-  }, [src]);
+  useEffect(() => setLoading(true), [src]);
   return (
     <div className={classes.wrapper}>
       {loading && <div>{t("Wird geladen")}...</div>}
       <img
         src={src}
-        alt={alt}
+        alt={src}
         onLoad={() => setLoading(false)}
         style={{ maxWidth, display: loading ? "none" : "block" }}
+        data-testid="fmw-photo"
       />
     </div>
   );
@@ -79,28 +78,43 @@ function Photo({ src, alt, maxWidth }) {
 
 Photo.propTypes = {
   src: PropTypes.string,
-  alt: PropTypes.string,
   maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Photo.defaultProps = {
   src: "",
-  alt: "",
   maxWidth: "100%",
 };
 
 function PhotoCarusel({
   photos,
-  currentPhotoIndex,
+  initialPhotoIndex,
   onImageClick,
   onIncrement,
   onDecrement,
-  altText,
 }) {
   const { t } = useTranslation();
-  const isMobile = useIsMobile();
+  const isSmallScreen = useIsSmallScreen(["xs", "s"]);
   const [imageHover, setImageHover] = useState(false);
   const classes = useStyles({ imageHover });
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(
+    initialPhotoIndex || 0,
+  );
+  const incrementPhotoIndex = useCallback(() => {
+    setCurrentPhotoIndex(currentPhotoIndex + 1);
+    if (onIncrement) {
+      onIncrement(currentPhotoIndex + 1);
+    }
+  }, [currentPhotoIndex, onIncrement]);
+  const decrementPhotoIndex = useCallback(() => {
+    setCurrentPhotoIndex(currentPhotoIndex - 1);
+    if (onDecrement) {
+      onDecrement(currentPhotoIndex - 1);
+    }
+  }, [onDecrement, currentPhotoIndex]);
+  useEffect(() => {
+    setCurrentPhotoIndex(initialPhotoIndex || 0);
+  }, [photos, initialPhotoIndex]);
 
   if (!photos || photos.length === 0) {
     return null;
@@ -108,15 +122,17 @@ function PhotoCarusel({
 
   return (
     <>
-      {onImageClick && !isMobile ? (
+      {onImageClick && !isSmallScreen ? (
+        // eslint-disable-next-line jsx-a11y/control-has-associated-label
         <button
           className={classes.imageButton}
           onClick={onImageClick}
           type="button"
           onMouseEnter={() => setImageHover(true)}
           onMouseLeave={() => setImageHover(false)}
+          data-testid="fmw-photo-button"
         >
-          <Photo src={photos[currentPhotoIndex]} alt={altText} />
+          <Photo src={photos[currentPhotoIndex]} />
           <div className={classes.imageOverlay}>
             <div className={classes.zoomInIcon}>
               <ZoomIn />
@@ -126,8 +142,7 @@ function PhotoCarusel({
       ) : (
         <Photo
           src={photos[currentPhotoIndex]}
-          alt={altText}
-          maxWidth={isMobile ? "100%" : "80%"}
+          maxWidth={isSmallScreen ? "100%" : "80%"}
         />
       )}
       {photos.length > 1 && (
@@ -135,7 +150,8 @@ function PhotoCarusel({
           <IconButton
             title={t("zurück")}
             disabled={currentPhotoIndex === 0}
-            onClick={onDecrement}
+            onClick={decrementPhotoIndex}
+            data-testid="fmw-photo-decrement-button"
           >
             <ChevronLeft />
           </IconButton>
@@ -145,7 +161,8 @@ function PhotoCarusel({
           <IconButton
             title={t("weiter")}
             disabled={currentPhotoIndex === photos.length - 1}
-            onClick={onIncrement}
+            onClick={incrementPhotoIndex}
+            data-testid="fmw-photo-increment-button"
           >
             <ChevronRight />
           </IconButton>
@@ -157,20 +174,18 @@ function PhotoCarusel({
 
 PhotoCarusel.propTypes = {
   photos: PropTypes.arrayOf(PropTypes.string),
-  currentPhotoIndex: PropTypes.number,
+  initialPhotoIndex: PropTypes.number,
   onImageClick: PropTypes.func,
   onIncrement: PropTypes.func,
   onDecrement: PropTypes.func,
-  altText: PropTypes.string,
 };
 
 PhotoCarusel.defaultProps = {
   photos: [],
-  currentPhotoIndex: 0,
+  initialPhotoIndex: null,
   onImageClick: null,
   onIncrement: null,
   onDecrement: null,
-  altText: "",
 };
 
 export default PhotoCarusel;

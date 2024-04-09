@@ -10,7 +10,7 @@ import SBBSwitch from "../../components/SBBSwitch";
 import { DV_DAY_NIGHT_REGEX } from "../../utils/constants";
 import { setFeatureInfo } from "../../model/app/actions";
 import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {

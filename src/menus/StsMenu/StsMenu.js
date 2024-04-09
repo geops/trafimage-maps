@@ -18,7 +18,7 @@ import {
   DV_KEY,
   STS_HIT_TOLERANCE,
 } from "../../utils/constants";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 

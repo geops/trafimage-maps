@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import useIsMobile from "./useIsMobile";
+import useIsMobile from "./useHasScreenSize";
 import panCenterFeature from "./panCenterFeature";
 
 const usePanDisplayFeature = () => {

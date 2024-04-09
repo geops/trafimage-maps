@@ -13,7 +13,7 @@ import removeDuplicates, {
 } from "../../../utils/removeDuplicateFeatures";
 import parseDvFeatures from "../dvParseFeatures";
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from "../../../utils/constants";
-import useIsMobile from "../../../utils/useIsMobile";
+import useIsMobile from "../../../utils/useHasScreenSize";
 import useDisableIosElasticScrollEffect from "../../../utils/useDisableIosElasticScrollEffect";
 
 const useStyles = makeStyles((theme) => {

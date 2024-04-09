@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 
 const optionsDesktop = [
   { label: "Deutsch", value: "de" },

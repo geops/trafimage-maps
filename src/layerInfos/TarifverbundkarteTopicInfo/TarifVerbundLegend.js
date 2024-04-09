@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import TarifverbundPartner from "../../components/TarifverbundPartner";
 import useFetch from "../../utils/useFetch";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {

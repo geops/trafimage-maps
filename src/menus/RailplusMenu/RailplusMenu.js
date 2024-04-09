@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import IframeMenu from "../IframeMenu";
 import { RailplusPopup } from "../../popups";
 import { setFeatureInfo } from "../../model/app/actions";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 import usePanCenterFeature from "../../utils/usePanCenterFeature";
 import CloseButton from "../../components/CloseButton";
 

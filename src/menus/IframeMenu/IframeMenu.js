@@ -8,7 +8,7 @@ import { MdClose } from "react-icons/md";
 import Overlay from "../../components/Overlay/Overlay";
 import { setDisplayMenu, setFeatureInfo } from "../../model/app/actions";
 import { OVERLAY_MIN_HEIGHT } from "../../utils/constants";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 
 const IFRAME_OVERLAY_DEFAULT_HEIGHT = 300;
 

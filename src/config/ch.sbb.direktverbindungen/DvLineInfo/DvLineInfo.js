@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { unByKey } from "ol/Observable";
 import Link from "../../../components/Link";
 import panCenterFeature from "../../../utils/panCenterFeature";
-import useIsMobile from "../../../utils/useIsMobile";
+import useIsMobile from "../../../utils/useHasScreenSize";
 
 const useStyles = makeStyles((theme) => ({
   container: {

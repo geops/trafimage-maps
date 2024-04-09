@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { DV_KEY } from "../../../utils/constants";
-import useIsMobile from "../../../utils/useIsMobile";
+import useIsMobile from "../../../utils/useHasScreenSize";
 import { setFeatureInfo } from "../../../model/app/actions";
 import CloseButton from "../../../components/CloseButton";
 

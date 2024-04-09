@@ -7,7 +7,7 @@ import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo"
 import DvLayerSwitcher from "./DvLayerSwitcher";
 import { setDisplayMenu } from "../../model/app/actions";
 import IframeMenu from "../IframeMenu";
-import useIsMobile from "../../utils/useIsMobile";
+import useIsMobile from "../../utils/useHasScreenSize";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 

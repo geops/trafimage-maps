@@ -9,7 +9,7 @@ import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
 import DirektverbindungenLayer from "../../../layers/DirektverbindungenLayer";
 import { ReactComponent as TrainIconDay } from "../../../img/train-day.svg";
 import { ReactComponent as TrainIconNight } from "../../../img/train-night.svg";
-import useIsMobile from "../../../utils/useIsMobile";
+import useIsMobile from "../../../utils/useHasScreenSize";
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
