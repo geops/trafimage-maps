@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
 import Feature from "ol/Feature";
-import LightIcon from "../../img/LightIcon";
 import { lightingMapping } from "../../layerInfos/BeleuchtungLayerInfo/lightingMapping";
+import LegendCircle from "../../components/LegendCircle/LegendCircle";
 
 const propTypes = {
   feature: PropTypes.instanceOf(Feature).isRequired,
@@ -13,7 +13,9 @@ const propTypes = {
 const useStyles = makeStyles(() => {
   return {
     line: {
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: "auto 4fr",
+      gridGap: 10,
       alignItems: "center",
       "& svg": {
         marginLeft: 10,
@@ -32,12 +34,16 @@ function BeleuchtungsPopup({ feature }) {
     <div>
       <p className={classes.line}>
         {t("Bahnhofklasse")}
-        <LightIcon
-          color={color}
-          label={stationClass}
-          fontColor={stationClass.match(/(3|4|2b)/) && "white"}
-          size={25}
-        />
+        <LegendCircle fillColor={color} radius={10} borderWidth={2}>
+          <b
+            style={{
+              color: stationClass.match(/(3|4|2b)/) && "white",
+              fontSize: 12,
+            }}
+          >
+            {stationClass}
+          </b>
+        </LegendCircle>
       </p>
     </div>
   );

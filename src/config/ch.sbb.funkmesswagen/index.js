@@ -14,7 +14,7 @@ const messwagenDataLayer = new TrafimageMapboxLayer({
   name: "ch.sbb.funkmesswagen.data",
   visible: true,
   zIndex: -1, // Add zIndex as the MapboxLayer would block tiled layers (buslines)
-  style: "base_bright_v2_ch.sbb.netzkarte.funkmesswagen",
+  style: "base_bright_v2_ch.sbb.funkmesswagen",
   properties: {
     hideInLegend: true,
   },
@@ -27,7 +27,7 @@ const messwagenNetzkarte = netzkarteLayer.clone({
   mapboxLayer: messwagenDataLayer,
   key: `ch.sbb.funkmesswagen.netzkarte`,
   visible: false,
-  style: "base_bright_v2_ch.sbb.netzkarte.funkmesswagen",
+  style: "base_bright_v2_ch.sbb.funkmesswagen",
 });
 
 const messwagenNetzkarteNight = new MapboxStyleLayer({
@@ -40,7 +40,7 @@ const messwagenNetzkarteNight = new MapboxStyleLayer({
   },
   visible: false,
   mapboxLayer: messwagenDataLayer,
-  style: "base_dark_v2_ch.sbb.netzkarte.funkmesswagen",
+  style: "base_dark_v2_ch.sbb.funkmesswagen",
 });
 
 const messwagenNetzkarteAerial = netzkarteAerial.clone({
@@ -52,12 +52,14 @@ const messwagenLandeskarte = swisstopoLandeskarte.clone({
   mapboxLayer: messwagenDataLayer,
   key: `ch.sbb.funkmesswagen.landeskarte`,
   visible: false,
+  style: "ch.swisstopo.backgrounds_ch.sbb.funkmesswagen",
 });
 
 const messwagenLandeskarteGrau = swisstopoLandeskarteGrau.clone({
   mapboxLayer: messwagenDataLayer,
   key: `ch.sbb.funkmesswagen.landeskartegrau`,
   visible: false,
+  style: "ch.swisstopo.backgrounds_ch.sbb.funkmesswagen",
 });
 
 const mewa12 = new MesswagenLayer({
@@ -91,13 +93,15 @@ const messwagenPhotos = new MapboxStyleLayer({
   name: "ch.sbb.funkmesswagen.fotos",
   key: "ch.sbb.funkmesswagen.fotos",
   styleLayersFilter: ({ metadata }) =>
-    /^funkmesswagen$/.test(metadata?.["trafimage.filter"]),
+    /^funkmesswagen.photos$/.test(metadata?.["trafimage.filter"]),
   visible: true,
   properties: {
     isBaseLayer: false,
     isQueryable: true,
     useOverlay: true,
     popupComponent: "MesswagenPhotosPopup",
+    hasInfos: true,
+    layerInfoComponent: "MesswagenPhotosLayerInfo",
   },
   mapboxLayer: messwagenDataLayer,
 });
@@ -109,8 +113,8 @@ export default [
   messwagenNetzkarteAerial,
   messwagenLandeskarte,
   messwagenLandeskarteGrau,
+  messwagenPhotos,
   mobile,
   mb,
   mewa12,
-  messwagenPhotos,
 ];

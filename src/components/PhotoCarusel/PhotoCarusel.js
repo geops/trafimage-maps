@@ -131,6 +131,8 @@ function PhotoCarusel({
           onMouseEnter={() => setImageHover(true)}
           onMouseLeave={() => setImageHover(false)}
           data-testid="fmw-photo-button"
+          title={t("Foto vergrössern")}
+          tabIndex={0}
         >
           <Photo src={photos[currentPhotoIndex]} />
           <div className={classes.imageOverlay}>
