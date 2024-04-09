@@ -12,8 +12,8 @@ const sandboxNetzkarteLayer = netzkarteLayer.clone({
 });
 
 export const poiLayer = new MapboxStyleLayer({
-  name: "ROKAS-POIs",
-  key: "ch.sbb.poi",
+  name: "Teststyle",
+  key: "ch.sbb.temp_entwicklungsstyle",
   group: "baseLayer",
   properties: {
     previewImage: "ch.sbb.netzkarte",
@@ -23,7 +23,7 @@ export const poiLayer = new MapboxStyleLayer({
   mapboxLayer: sandboxDataLayer,
   styleLayersFilter: ({ metadata }) =>
     !!metadata && metadata["trafimage.filter"] === "perimeter_mask",
-  style: "base_bright_v2_poi",
+  style: "temp_entwicklungsstyle",
 });
 
 export const geschosseLayer = new Layer({
