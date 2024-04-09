@@ -54,6 +54,9 @@ const barrierefrei = new HandicapLayer({
     useOverlay: true,
     popupComponent: "StopPlacePopup",
     highlightPointStyle: handicapHighlightStyleMain,
+    hasInfos: true,
+    layerInfoComponent: "HandicapLayerInfo",
+    color: "#01973D",
   },
 });
 
@@ -67,6 +70,9 @@ const nichtBarrierefrei = new HandicapLayer({
     useOverlay: true,
     popupComponent: "StopPlacePopup",
     highlightPointStyle: handicapHighlightStyleMain,
+    hasInfos: true,
+    layerInfoComponent: "HandicapLayerInfo",
+    color: "#C60019",
   },
 });
 
@@ -114,6 +120,9 @@ const statusUnbekannt = new HandicapLayer({
     useOverlay: true,
     popupComponent: "StopPlacePopup",
     highlightPointStyle: handicapHighlightStyleSecondary,
+    hasInfos: true,
+    layerInfoComponent: "HandicapLayerInfo",
+    color: "#686868",
   },
 });
 
