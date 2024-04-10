@@ -21,6 +21,7 @@ import {
 import useIsMobile from "../../utils/useIsMobile";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
+import useFetch from "../../utils/useFetch";
 
 const boxShadow =
   "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)";
@@ -102,6 +103,10 @@ function StsTopicMenu() {
     return bl;
   }, [activeMenu]);
 
+  const { data: tours } = useFetch(
+    "https://maps.trafimage.ch/sts-static/tours.json",
+  );
+
   useEffect(() => {
     // Activate the correct menu on load of the topic.
     const isDirektVerbindungLayersVisible = layers?.find((layer) => {
@@ -121,11 +126,11 @@ function StsTopicMenu() {
   const featureInfos = useMemo(
     () =>
       activeMenu === "sts" ? (
-        <StsValidityFeatureInfo menuOpen={!featureInfo} />
+        <StsValidityFeatureInfo menuOpen={!featureInfo} tours={tours} />
       ) : (
         <DvFeatureInfo filterByType />
       ),
-    [activeMenu, featureInfo],
+    [activeMenu, featureInfo, tours],
   );
 
   useEffect(() => {

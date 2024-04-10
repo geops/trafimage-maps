@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Point from "ol/geom/Point";
 import { Divider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -15,6 +15,7 @@ import {
 import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import panCenterFeature from "../../utils/panCenterFeature";
 import useIsMobile from "../../utils/useIsMobile";
+import { setFeatureInfo } from "../../model/app/actions";
 
 const useStyles = makeStyles(() => {
   return {
@@ -46,19 +47,9 @@ const clearHighlightsSelection = () =>
     .getFeatures()
     .forEach((feat) => feat.set("selected", false));
 
-const useFetchTours = (select) => {
-  const [tours, setTours] = useState(null);
-  useEffect(() => {
-    fetch("https://maps.trafimage.ch/sts-static/tours.json")
-      .then((response) => response.json())
-      .then((data) => setTours(data));
-    return () => select();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return [tours];
-};
-function StsValidityFeatureInfo({ menuOpen }) {
+function StsValidityFeatureInfo({ menuOpen, tours }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const map = useSelector((state) => state.app.map);
   const isMobile = useIsMobile();
@@ -110,8 +101,6 @@ function StsValidityFeatureInfo({ menuOpen }) {
     [previousSelectedFeature, featureInfo, map, menuOpen, isMobile],
   );
 
-  const [tours] = useFetchTours(select);
-
   const mainFeatures = useMemo(() => {
     const features =
       mainFeatureInfos?.length && tours?.length
@@ -138,8 +127,13 @@ function StsValidityFeatureInfo({ menuOpen }) {
     }
   }, [mainFeatures, prevMainFeatures, selectedFeature, select]);
 
+  // Unhighlight on unmount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => select(), []);
+
+  // Unhighlight and clear the feature info if there is no feature to display
   if (!gbFeatureInfo?.features?.length && !mainFeatures?.length) {
-    select();
+    dispatch(setFeatureInfo([]));
     return null;
   }
 
@@ -205,7 +199,21 @@ function StsValidityFeatureInfo({ menuOpen }) {
   );
 }
 
-StsValidityFeatureInfo.propTypes = { menuOpen: PropTypes.bool };
-StsValidityFeatureInfo.defaultProps = { menuOpen: true };
+StsValidityFeatureInfo.propTypes = {
+  menuOpen: PropTypes.bool,
+  tours: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      highlight_url: PropTypes.string,
+      description: PropTypes.string,
+      images: PropTypes.arrayOf(
+        PropTypes.shape({
+          url: PropTypes.string,
+        }),
+      ),
+    }),
+  ),
+};
+StsValidityFeatureInfo.defaultProps = { menuOpen: true, tours: null };
 
 export default StsValidityFeatureInfo;
