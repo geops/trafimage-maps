@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.13](https://github.com/geops/trafimage-maps/compare/v1.28.12...v1.28.13) (2024-04-10)
+
+### Bug Fixes
+
+- **handicap:** add handicap layerInfos ([#1164](https://github.com/geops/trafimage-maps/issues/1164)) ([615dd9a](https://github.com/geops/trafimage-maps/commit/615dd9a2263f989a93db4406007d8130bee33d2a))
+- **sandbox:** use temp_entwicklungsstyle for sandbox topic, rename baselayer to Teststyle ([#1165](https://github.com/geops/trafimage-maps/issues/1165)) ([50335dd](https://github.com/geops/trafimage-maps/commit/50335dd60713de7a6951699c08bbf9e1145d6a0f))
+
 ### [1.28.12](https://github.com/geops/trafimage-maps/compare/v1.28.11...v1.28.12) (2024-04-05)
 
 ### Bug Fixes
