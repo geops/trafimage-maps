@@ -117,6 +117,8 @@ export const otherRoutes = new MapboxStyleLayer({
       "ch.sbb.geltungsbereiche.products.sts",
       "ch.sbb.geltungsbereiche.products.sts-half",
     ],
+    lineDashArray50: [6, 8],
+    lineDashArray25: [6, 8, 1, 8, 1, 8],
   },
 });
 

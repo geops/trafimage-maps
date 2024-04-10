@@ -169,9 +169,11 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
     super.attachToMap(map);
     this.singleClickKey = this.map?.on("singleclick", (evt) => {
       this.getFeatureInfoAtCoordinate(evt.coordinate).then(({ features }) => {
-        this.highlightStation(
-          features.find((feat) => !!feat.get("direktverbindung_ids")),
-        );
+        if (this.visible) {
+          this.highlightStation(
+            features.find((feat) => !!feat.get("direktverbindung_ids")),
+          );
+        }
       });
     });
   }
