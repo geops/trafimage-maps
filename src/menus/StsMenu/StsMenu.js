@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { MenuItem as MuiMenuItem, Menu, Button, Divider } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { unByKey } from "ol/Observable";
 import StsValidityLayerSwitcher from "./StsValidityLayerSwitcher";
 import DvLayerSwitcher from "../DirektverbindungenMenu/DvLayerSwitcher";
 import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo";
@@ -13,15 +14,10 @@ import StsValidityFeatureInfo from "./StsValidityFeatureInfo";
 import IframeMenu from "../IframeMenu";
 import stsLayers from "../../config/ch.sbb.sts";
 import { setFeatureInfo } from "../../model/app/actions";
-import {
-  DV_HIT_TOLERANCE,
-  DV_KEY,
-  STS_HIT_TOLERANCE,
-} from "../../utils/constants";
+import { DV_KEY } from "../../utils/constants";
 import useIsMobile from "../../utils/useIsMobile";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
-import useFetch from "../../utils/useFetch";
 
 const boxShadow =
   "0px 5px 5px -3px rgb(0 0 0 / 20%), 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%)";
@@ -64,7 +60,7 @@ const updateLayers = (key = "sts", baseLayer) => {
   if (key === "sts") {
     stsLayers.forEach((layer) => {
       layer.visible =
-        /(ch\.sbb\.sts\.validity(?!\.(highlights|premium|hidden)$)|\.data$)/.test(
+        /(ch\.sbb\.sts\.validity(?!\.(highlights|premium|hidden)$))/.test(
           layer.key,
         );
       // Ensure layout visibility is applied after style url change (otherwise hidden layers will be displayed)
@@ -75,9 +71,7 @@ const updateLayers = (key = "sts", baseLayer) => {
   }
   if (key === "dv") {
     stsLayers.forEach((layer) => {
-      layer.visible = /(ch\.sbb\.(ipv|direktverbindungen)|\.data)/.test(
-        layer.key,
-      );
+      layer.visible = /(ch\.sbb\.(ipv|direktverbindungen))/.test(layer.key);
       if (layer.key === `${DV_KEY}.main` && baseLayer?.mbMap) {
         baseLayer.mbMap.once("idle", () => {
           layer.syncFeatures();
@@ -86,6 +80,7 @@ const updateLayers = (key = "sts", baseLayer) => {
     });
   }
 };
+
 function StsTopicMenu() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -95,16 +90,16 @@ function StsTopicMenu() {
   const isMobile = useIsMobile;
   const [activeMenu, setActiveMenu] = useState("sts");
   const [anchorEl, setAnchorEl] = useState();
-  const baseLayer = useMemo(() => {
-    const bl = stsLayers.find((layer) => layer.get("isBaseLayer"));
-    // Since we update the style dynamically on menu switch
-    // we update the layers once the style has loaded
-    bl.onStyleLoaded = () => updateLayers(activeMenu, bl);
-    return bl;
-  }, [activeMenu]);
-
-  const { data: tours } = useFetch(
-    "https://maps.trafimage.ch/sts-static/tours.json",
+  const stsBaseLayer = useMemo(
+    () => stsLayers.find((layer) => /ch.sbb.sts.validity.data/.test(layer.key)),
+    [],
+  );
+  const dvBaseLayer = useMemo(
+    () =>
+      stsLayers.find((layer) =>
+        /ch.sbb.direktverbindungen.data/.test(layer.key),
+      ),
+    [],
   );
 
   useEffect(() => {
@@ -126,23 +121,37 @@ function StsTopicMenu() {
   const featureInfos = useMemo(
     () =>
       activeMenu === "sts" ? (
-        <StsValidityFeatureInfo menuOpen={!featureInfo} tours={tours} />
+        <StsValidityFeatureInfo menuOpen={!featureInfo} />
       ) : (
         <DvFeatureInfo filterByType />
       ),
-    [activeMenu, featureInfo, tours],
+    [activeMenu, featureInfo],
   );
 
   useEffect(() => {
-    if (activeMenu === "dv") {
-      baseLayer.setStyle("base_bright_v2_direktverbindungen");
-      baseLayer.hitTolerance = DV_HIT_TOLERANCE;
+    let updateLayersListeners = [];
+    if (dvBaseLayer && stsBaseLayer) {
+      updateLayersListeners = [dvBaseLayer, stsBaseLayer].map((layer) =>
+        layer?.on("change:visible", (evt) => {
+          if (evt.target.visible) {
+            evt.target.mbMap?.once("idle", () => {
+              updateLayers(activeMenu, dvBaseLayer);
+            });
+          }
+        }),
+      );
+
+      if (activeMenu === "dv") {
+        dvBaseLayer.visible = true;
+        stsBaseLayer.visible = false;
+      }
+      if (activeMenu === "sts") {
+        dvBaseLayer.visible = false;
+        stsBaseLayer.visible = true;
+      }
     }
-    if (activeMenu === "sts") {
-      baseLayer.setStyle("base_bright_v2_ch.sbb.geltungsbereiche_ga");
-      baseLayer.hitTolerance = STS_HIT_TOLERANCE;
-    }
-  }, [activeMenu, baseLayer]);
+    return () => unByKey(updateLayersListeners);
+  }, [activeMenu, layers, stsBaseLayer, dvBaseLayer]);
 
   const onChange = (key) => {
     setActiveMenu(key);

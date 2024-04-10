@@ -16,6 +16,7 @@ import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import panCenterFeature from "../../utils/panCenterFeature";
 import useIsMobile from "../../utils/useIsMobile";
 import { setFeatureInfo } from "../../model/app/actions";
+import useFetch from "../../utils/useFetch";
 
 const useStyles = makeStyles(() => {
   return {
@@ -47,7 +48,7 @@ const clearHighlightsSelection = () =>
     .getFeatures()
     .forEach((feat) => feat.set("selected", false));
 
-function StsValidityFeatureInfo({ menuOpen, tours }) {
+function StsValidityFeatureInfo({ menuOpen }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
@@ -64,6 +65,10 @@ function StsValidityFeatureInfo({ menuOpen, tours }) {
   const gbFeatureInfo = useMemo(
     () => featureInfo.find((info) => info.layer.key === otherRoutes.key),
     [featureInfo],
+  );
+
+  const { data: tours } = useFetch(
+    "https://maps.trafimage.ch/sts-static/tours.json",
   );
 
   const select = useCallback(
@@ -201,19 +206,7 @@ function StsValidityFeatureInfo({ menuOpen, tours }) {
 
 StsValidityFeatureInfo.propTypes = {
   menuOpen: PropTypes.bool,
-  tours: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-      highlight_url: PropTypes.string,
-      description: PropTypes.string,
-      images: PropTypes.arrayOf(
-        PropTypes.shape({
-          url: PropTypes.string,
-        }),
-      ),
-    }),
-  ),
 };
-StsValidityFeatureInfo.defaultProps = { menuOpen: true, tours: null };
+StsValidityFeatureInfo.defaultProps = { menuOpen: true };
 
 export default StsValidityFeatureInfo;

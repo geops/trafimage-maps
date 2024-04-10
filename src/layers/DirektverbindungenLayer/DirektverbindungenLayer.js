@@ -41,7 +41,9 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   onLoad() {
     super.onLoad();
     this.onChangeVisible();
-    this.fetchDvFeatures();
+    if (!this.allFeatures?.length) {
+      this.fetchDvFeatures();
+    }
     // We can only get the mapbox features from the view on load.
     // In order to assign the Cartaro features their corresponding
     // mapbox features for the full list view, we sync the features when
@@ -167,6 +169,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
 
   attachToMap(map) {
     super.attachToMap(map);
+    this.fetchDvFeatures();
     this.singleClickKey = this.map?.on("singleclick", (evt) => {
       this.getFeatureInfoAtCoordinate(evt.coordinate).then(({ features }) => {
         if (this.visible) {
@@ -187,7 +190,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   // to the current visible WKP layer
   onChangeVisible() {
     const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
+    if (!mbMap || !this.visible || !this.mapboxLayer.visible) {
       return;
     }
     const currentLayer = this.getCurrentLayer();
@@ -314,7 +317,7 @@ class DirektverbindungenLayer extends MapboxStyleLayer {
   }
 
   highlight(features = []) {
-    if (!features?.length) {
+    if (this.visible && !features?.length) {
       // remove highlighted station when featureinformation is closed
       this.highlightStation();
     }

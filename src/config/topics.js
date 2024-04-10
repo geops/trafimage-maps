@@ -369,6 +369,7 @@ export const sts = {
     footer: false,
     menu: false,
     menuToggler: true,
+    baseLayerSwitcher: false,
   },
   layers: stsLayers,
   only: true,
