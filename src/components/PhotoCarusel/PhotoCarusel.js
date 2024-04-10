@@ -6,7 +6,47 @@ import { ChevronLeft, ChevronRight, ZoomIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
 import useIsSmallScreen from "../../utils/useHasScreenSize";
 
+const useStylesPhoto = makeStyles((theme) => ({
+  wrapper: {
+    ...theme.styles.flexCenter,
+    maxWidth: "100%",
+  },
+}));
+
+function Photo({ src }) {
+  const { t } = useTranslation();
+  const classes = useStylesPhoto();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => setLoading(true), [src]);
+  return (
+    <div className={classes.wrapper}>
+      {loading && <div>{t("Wird geladen")}...</div>}
+      <img
+        src={src}
+        alt={src}
+        onLoad={() => setLoading(false)}
+        style={{ maxWidth: "100%", display: loading ? "none" : "block" }}
+        data-testid="fmw-photo"
+      />
+    </div>
+  );
+}
+
+Photo.propTypes = {
+  src: PropTypes.string,
+};
+
+Photo.defaultProps = {
+  src: "",
+};
+
 const useStyles = makeStyles((theme) => ({
+  wrapper: {
+    maxWidth: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
   imageButton: {
     backgroundColor: "transparent",
     border: "none",
@@ -51,41 +91,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const useStylesPhoto = makeStyles((theme) => ({
-  wrapper: {
-    ...theme.styles.flexCenter,
-  },
-}));
-
-function Photo({ src, maxWidth }) {
-  const { t } = useTranslation();
-  const classes = useStylesPhoto();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => setLoading(true), [src]);
-  return (
-    <div className={classes.wrapper}>
-      {loading && <div>{t("Wird geladen")}...</div>}
-      <img
-        src={src}
-        alt={src}
-        onLoad={() => setLoading(false)}
-        style={{ maxWidth, display: loading ? "none" : "block" }}
-        data-testid="fmw-photo"
-      />
-    </div>
-  );
-}
-
-Photo.propTypes = {
-  src: PropTypes.string,
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-};
-
-Photo.defaultProps = {
-  src: "",
-  maxWidth: "100%",
-};
-
 function PhotoCarusel({
   photos,
   initialPhotoIndex,
@@ -121,7 +126,7 @@ function PhotoCarusel({
   }
 
   return (
-    <>
+    <div className={classes.wrapper}>
       {onImageClick && !isSmallScreen ? (
         // eslint-disable-next-line jsx-a11y/control-has-associated-label
         <button
@@ -142,10 +147,7 @@ function PhotoCarusel({
           </div>
         </button>
       ) : (
-        <Photo
-          src={photos[currentPhotoIndex]}
-          maxWidth={isSmallScreen ? "100%" : "80%"}
-        />
+        <Photo src={photos[currentPhotoIndex]} />
       )}
       {photos.length > 1 && (
         <div className={classes.photoNavigation}>
@@ -170,7 +172,7 @@ function PhotoCarusel({
           </IconButton>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

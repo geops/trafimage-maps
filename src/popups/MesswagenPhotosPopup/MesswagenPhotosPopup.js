@@ -14,16 +14,14 @@ const useStylesDialog = makeStyles(() => ({
     position: "fixed !important",
   },
   dialogContainer: {
-    maxWidth: "100%",
+    maxWidth: "clamp(300px, 80vw, 1100px)",
     maxHeight: "100%",
   },
   container: {
     display: "flex",
-    flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
     gap: 25,
-  },
-  photo: {
     maxWidth: "100%",
   },
 }));
