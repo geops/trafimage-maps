@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import makeStyles from "@mui/styles/makeStyles";
 import { useTranslation } from "react-i18next";
@@ -6,8 +6,6 @@ import Typography from "@mui/material/Typography";
 import Feature from "ol/Feature";
 import Dialog from "../../components/Dialog";
 import PhotoCarusel from "../../components/PhotoCarusel";
-
-import fakePhotos from "./testFotos";
 
 const useStylesDialog = makeStyles(() => ({
   dialogRoot: {
@@ -36,7 +34,7 @@ function MesswagenPhotosPopup({ feature }) {
     () =>
       Array.from(Array(7).keys()).reduce((allPhotos, key) => {
         const featProps = feature.getProperties();
-        const photo = { ...featProps, ...fakePhotos }[`foto_${key}`];
+        const photo = featProps[`foto_${key + 1}`];
         if (photo) {
           allPhotos.push(photo);
         }
@@ -48,6 +46,10 @@ function MesswagenPhotosPopup({ feature }) {
     (index) => setCurrentPhotoIndex(index),
     [],
   );
+
+  useEffect(() => {
+    setCurrentPhotoIndex(0);
+  }, [feature]);
 
   return (
     <>
