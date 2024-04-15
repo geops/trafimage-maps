@@ -25,7 +25,11 @@ function Photo({ src }) {
         src={src}
         alt={src}
         onLoad={() => setLoading(false)}
-        style={{ maxWidth: "100%", display: loading ? "none" : "block" }}
+        style={{
+          maxWidth: "100%",
+          maxHeight: "80vh",
+          display: loading ? "none" : "block",
+        }}
         data-testid="fmw-photo"
       />
     </div>
@@ -80,9 +84,6 @@ const useStyles = makeStyles((theme) => ({
     ...theme.styles.flexCenter,
     opacity: (props) => (props.imageHover ? 1 : 0),
     transition: "opacity 0.3s",
-  },
-  photo: {
-    maxWidth: "100%",
   },
   photoNavigation: {
     margin: "0 auto",

@@ -12,7 +12,7 @@ const useStylesDialog = makeStyles(() => ({
     position: "fixed !important",
   },
   dialogContainer: {
-    maxWidth: "clamp(300px, 80vw, 1100px)",
+    maxWidth: "clamp(300px, 90vw, 2000px)",
     maxHeight: "100%",
   },
   container: {
