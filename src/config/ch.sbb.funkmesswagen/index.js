@@ -94,7 +94,7 @@ const messwagenPhotos = new MapboxStyleLayer({
   key: "ch.sbb.funkmesswagen.fotos",
   styleLayersFilter: ({ metadata }) =>
     /^funkmesswagen.photos$/.test(metadata?.["trafimage.filter"]),
-  visible: true,
+  visible: false,
   properties: {
     isBaseLayer: false,
     isQueryable: true,
