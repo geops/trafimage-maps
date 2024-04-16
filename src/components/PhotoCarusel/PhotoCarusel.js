@@ -4,7 +4,7 @@ import { IconButton, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import { ChevronLeft, ChevronRight, ZoomIn } from "@mui/icons-material";
 import { useTranslation } from "react-i18next";
-import useIsSmallScreen from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStylesPhoto = makeStyles((theme) => ({
   wrapper: {
@@ -100,7 +100,7 @@ function PhotoCarusel({
   onDecrement,
 }) {
   const { t } = useTranslation();
-  const isSmallScreen = useIsSmallScreen(["xs", "s"]);
+  const isSmallScreen = useHasScreenSize(["xs", "s"]);
   const [imageHover, setImageHover] = useState(false);
   const classes = useStyles({ imageHover });
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(

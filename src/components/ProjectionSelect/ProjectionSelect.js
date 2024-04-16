@@ -6,7 +6,7 @@ import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
 import Select from "../Select";
 import { setProjection } from "../../model/app/actions";
-import useIsMobileWidth from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -33,7 +33,7 @@ function ProjectionSelect({ projections }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const projection = useSelector((state) => state.app.projection);
-  const isMobileWidth = useIsMobileWidth(["xs", "s"]);
+  const isMobileWidth = useHasScreenSize(["xs", "s"]);
   const onSelectChange = useCallback(
     (evt) => {
       dispatch(

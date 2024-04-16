@@ -18,7 +18,7 @@ import {
   DV_KEY,
   STS_HIT_TOLERANCE,
 } from "../../utils/constants";
-import useIsMobile from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 
@@ -91,7 +91,7 @@ function StsTopicMenu() {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
-  const isMobile = useIsMobile;
+  const isMobile = useHasScreenSize();
   const [activeMenu, setActiveMenu] = useState("sts");
   const [anchorEl, setAnchorEl] = useState();
   const baseLayer = useMemo(() => {

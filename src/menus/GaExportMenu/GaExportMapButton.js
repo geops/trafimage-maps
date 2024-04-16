@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { unByKey } from "ol/Observable";
 import MapButton from "../../components/MapButton";
 import GaExportMenu from "./GaExportMenu";
-import useIsMobile from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useVisibleLayer = (layers) => {
   const [visible, setVisible] = useState(false);
@@ -21,7 +21,7 @@ const useVisibleLayer = (layers) => {
 };
 
 function GaExportMapButton() {
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const { t } = useTranslation();
   const [showMenu, setShowMenu] = useState(false);
   const layers = useSelector((state) => state.map.layers);

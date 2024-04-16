@@ -10,7 +10,7 @@ import SBBSwitch from "../../components/SBBSwitch";
 import { DV_DAY_NIGHT_REGEX } from "../../utils/constants";
 import { setFeatureInfo } from "../../model/app/actions";
 import DvLegendLine from "../../config/ch.sbb.direktverbindungen/DvLegendLine/DvLegendLine";
-import useIsMobile from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {
@@ -69,7 +69,7 @@ function DvLayerSwitcher({ onToggle, row }) {
   const dispatch = useDispatch();
   const layers = useSelector((state) => state.map.layers);
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const classes = useStyles({ isMobile, row });
   const dvLayers = useMemo(
     () =>

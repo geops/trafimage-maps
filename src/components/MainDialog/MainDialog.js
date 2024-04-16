@@ -10,13 +10,13 @@ import DrawRemoveDialog, {
 } from "../DrawRemoveDialog";
 import Dialog from "../Dialog";
 import LegalLines from "../LegalLines";
-import useIsMobileWidth from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 function MainDialog() {
   const { t } = useTranslation();
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
-  const isMobileWidth = useIsMobileWidth(["xs", "s"]);
+  const isMobileWidth = useHasScreenSize(["xs", "s"]);
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LAYER_INFOS_DIALOG_NAME) {

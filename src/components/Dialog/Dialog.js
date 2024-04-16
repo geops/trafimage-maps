@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import { Dialog as MuiDialog, DialogTitle, Paper } from "@mui/material";
 import Draggable from "react-draggable";
-import useIsSmallScreen from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 import { setDialogVisible, setDialogPosition } from "../../model/app/actions";
 import CloseButton from "../CloseButton";
 
@@ -148,7 +148,7 @@ function Dialog(props) {
     });
   const escFunction = (e) =>
     e.which === 27 && (onClose || (() => dispatch(setDialogVisible())));
-  const isSmallScreen = useIsSmallScreen(["xs", "s"]);
+  const isSmallScreen = useHasScreenSize(["xs", "s"]);
 
   useEffect(() => {
     // ComponentDidMount

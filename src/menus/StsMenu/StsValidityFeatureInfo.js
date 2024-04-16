@@ -14,7 +14,7 @@ import {
 } from "../../config/ch.sbb.sts";
 import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import panCenterFeature from "../../utils/panCenterFeature";
-import useIsMobile from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {
@@ -61,7 +61,7 @@ function StsValidityFeatureInfo({ menuOpen }) {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const map = useSelector((state) => state.app.map);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
 
   const [selectedFeature, setSelectedFeature] = useState();
   const previousSelectedFeature = usePrevious(selectedFeature);

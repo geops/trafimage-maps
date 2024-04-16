@@ -7,7 +7,7 @@ import DvFeatureInfo from "../../config/ch.sbb.direktverbindungen/DvFeatureInfo"
 import DvLayerSwitcher from "./DvLayerSwitcher";
 import { setDisplayMenu } from "../../model/app/actions";
 import IframeMenu from "../IframeMenu";
-import useIsMobile from "../../utils/useHasScreenSize";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 
@@ -31,7 +31,7 @@ function DvMenu() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
 
   const urlSearch = useMemo(
     () => new URLSearchParams(window.location.search),
