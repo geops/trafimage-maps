@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.14](https://github.com/geops/trafimage-maps/compare/v1.28.13...v1.28.14) (2024-04-18)
+
+### Bug Fixes
+
+- **railplus:** limit maxZoom to 13 in railplus topic ([#1167](https://github.com/geops/trafimage-maps/issues/1167)) ([f375608](https://github.com/geops/trafimage-maps/commit/f3756084ac95eb62643fc98106818fc2a133cd35))
+
 ### [1.28.13](https://github.com/geops/trafimage-maps/compare/v1.28.12...v1.28.13) (2024-04-10)
 
 ### Bug Fixes
