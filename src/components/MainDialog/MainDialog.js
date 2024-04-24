@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { FaInfo } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
@@ -10,15 +10,13 @@ import DrawRemoveDialog, {
 } from "../DrawRemoveDialog";
 import Dialog from "../Dialog";
 import LegalLines from "../LegalLines";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 function MainDialog() {
   const { t } = useTranslation();
   const dialogVisible = useSelector((state) => state.app.dialogVisible);
   const language = useSelector((state) => state.app.language);
-  const screenWidth = useSelector((state) => state.app.screenWidth);
-  const isMobileWidth = useMemo(() => {
-    return ["xs", "s"].includes(screenWidth);
-  }, [screenWidth]);
+  const isMobileWidth = useHasScreenSize(["xs", "s"]);
   const selectedForInfos = useSelector((state) => state.app.selectedForInfos);
 
   if (selectedForInfos && dialogVisible === LAYER_INFOS_DIALOG_NAME) {

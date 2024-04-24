@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
 
-const useIsMobile = () => {
+const useHasScreenSize = (screenSizes = ["xs"]) => {
   const screenWidth = useSelector((state) => state.app.screenWidth);
   const isMobile = useMemo(() => {
-    return ["xs"].includes(screenWidth);
-  }, [screenWidth]);
+    return screenSizes.includes(screenWidth);
+  }, [screenWidth, screenSizes]);
   return isMobile;
 };
 
-export default useIsMobile;
+export default useHasScreenSize;

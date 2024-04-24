@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { unByKey } from "ol/Observable";
 import Link from "../../../components/Link";
 import panCenterFeature from "../../../utils/panCenterFeature";
-import useIsMobile from "../../../utils/useIsMobile";
+import useHasScreenSize from "../../../utils/useHasScreenSize";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -95,7 +95,7 @@ function DvLineInfo({ feature, layer }) {
   const classes = useStyles();
   const map = useSelector((state) => state.app.map);
   const menuOpen = useSelector((state) => state.app.menuOpen);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const [viaUid, setViaUid] = useState(layer.highlightedStation?.get("uid"));
 
   useEffect(() => {
