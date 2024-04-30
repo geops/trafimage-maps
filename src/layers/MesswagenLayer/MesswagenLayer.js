@@ -91,6 +91,7 @@ class MesswagenLayer extends Layer {
 
   stop() {
     this.abortController?.abort();
+    clearTimeout(this.abortTimeout);
     clearInterval(this.interval);
   }
 
@@ -98,6 +99,8 @@ class MesswagenLayer extends Layer {
     this.abortController?.abort();
 
     this.abortController = new AbortController();
+    this.abortTimeout = setTimeout(() => this.abortController.abort(), 10000);
+
     fetch(
       `https://trafimage-services1.geops.de/messwagen/${this.get(
         "fileName",
@@ -108,6 +111,7 @@ class MesswagenLayer extends Layer {
     )
       .then((response) => response.json())
       .then((data) => {
+        clearTimeout(this.abortTimeout);
         this.olLayer.getSource().clear();
         if (data?.latitude && data?.longitude) {
           const feature = new Feature({
@@ -118,7 +122,9 @@ class MesswagenLayer extends Layer {
           this.set("feature", feature);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        clearTimeout(this.abortTimeout);
+      });
   }
 
   centerOn(feature, zoom) {
