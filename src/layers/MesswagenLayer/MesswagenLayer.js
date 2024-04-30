@@ -78,16 +78,16 @@ class MesswagenLayer extends Layer {
 
   start() {
     if (!this.get("fileName")) return;
-
     const feature = this.get("feature");
     if (feature) {
       this.centerOn(feature);
     }
-
+    this.stopped = false;
     this.updateData();
   }
 
   stop() {
+    this.stopped = true;
     this.abortController?.abort();
     clearTimeout(this.abortTimeout);
     clearTimeout(this.timeout);
@@ -130,8 +130,8 @@ class MesswagenLayer extends Layer {
         clearTimeout(this.timeout);
 
         // The finally occurs asynchronously when we call the abort in stop().
-        // So we have to recheck if the layer is still visible.
-        if (this.visible && this.map) {
+        // So we have to recheck if the layer is stopped or not.
+        if (!this.stopped) {
           // Update data in one second
           this.timeout = setTimeout(() => {
             this.updateData();
