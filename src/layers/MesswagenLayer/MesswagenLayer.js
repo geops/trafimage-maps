@@ -104,7 +104,8 @@ class MesswagenLayer extends Layer {
       this.abortController.abort();
     }, 10000);
 
-    fetch(
+    // We put it in a variable for easy testing.
+    this.fetch = fetch(
       `https://trafimage-services1.geops.de/messwagen/${this.get(
         "fileName",
       )}.json`,

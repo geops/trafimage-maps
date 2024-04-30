@@ -58,6 +58,40 @@ describe("MesswagenLayer", () => {
     expect(fetchMock.calls().length).toBe(0);
   });
 
+  it("does not send request if the layer is visible but stopped", async () => {
+    // First update data on start
+    fetchMock.once(
+      "https://trafimage-services1.geops.de/messwagen/foo.json",
+      mewa12Data,
+    );
+    // eslint-disable-next-line no-unused-vars
+    const layer = new MesswagenLayer({ properties: { fileName: "foo" } });
+    layer.start();
+    expect(fetchMock.calls().length).toBe(1);
+
+    // Wait the end of promise
+    await layer.fetch;
+
+    // No 2nd update data because stop() aborts the 2nd requests and does not trigger a timeout 1 sec after.
+    fetchMock.reset();
+    fetchMock.once(
+      "https://trafimage-services1.geops.de/messwagen/foo.json",
+      mewa12Data,
+      { timeout: 5000 },
+    );
+    jest.advanceTimersByTime(1000);
+    expect(fetchMock.calls().length).toBe(1);
+    layer.stop();
+    jest.advanceTimersByTime(1000);
+
+    // Wait the end of promise
+    await layer.fetch;
+
+    // Test if updateData is still called after 1000ms
+    jest.advanceTimersByTime(1000);
+    expect(fetchMock.calls().length).toBe(1);
+  });
+
   it("send a request on start then 1 second after a request ends, if fileName is set", async () => {
     fetchMock.once(
       "https://trafimage-services1.geops.de/messwagen/foo.json",
