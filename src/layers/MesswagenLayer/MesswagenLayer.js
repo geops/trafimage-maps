@@ -83,23 +83,24 @@ class MesswagenLayer extends Layer {
     }
 
     this.updateData();
-
-    this.interval = window.setInterval(() => {
-      this.updateData();
-    }, 1000);
   }
 
   stop() {
     this.abortController?.abort();
     clearTimeout(this.abortTimeout);
-    clearInterval(this.interval);
+    clearTimeout(this.timeout);
   }
 
   updateData() {
     this.abortController?.abort();
 
     this.abortController = new AbortController();
-    this.abortTimeout = setTimeout(() => this.abortController.abort(), 10000);
+
+    // Auto abort when request takes too long
+    clearTimeout(this.abortTimeout);
+    this.abortTimeout = setTimeout(() => {
+      this.abortController.abort();
+    }, 10000);
 
     fetch(
       `https://trafimage-services1.geops.de/messwagen/${this.get(
@@ -111,7 +112,6 @@ class MesswagenLayer extends Layer {
     )
       .then((response) => response.json())
       .then((data) => {
-        clearTimeout(this.abortTimeout);
         this.olLayer.getSource().clear();
         if (data?.latitude && data?.longitude) {
           const feature = new Feature({
@@ -122,8 +122,15 @@ class MesswagenLayer extends Layer {
           this.set("feature", feature);
         }
       })
-      .catch(() => {
+      .catch(() => {})
+      .finally(() => {
         clearTimeout(this.abortTimeout);
+        clearTimeout(this.timeout);
+
+        // Update data in one second
+        this.timeout = setTimeout(() => {
+          this.updateData();
+        }, 1000);
       });
   }
 
