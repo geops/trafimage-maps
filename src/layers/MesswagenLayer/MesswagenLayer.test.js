@@ -47,6 +47,7 @@ describe("MesswagenLayer", () => {
 
   it("does not send request if fileName is not set", () => {
     const layer = new MesswagenLayer();
+    layer.map = {};
     layer.start();
     expect(fetchMock.calls().length).toBe(0);
     layer.stop();
@@ -64,6 +65,7 @@ describe("MesswagenLayer", () => {
       mewa12Data,
     );
     const layer = new MesswagenLayer({ properties: { fileName: "foo" } });
+    layer.map = {};
     layer.start();
     expect(fetchMock.calls().length).toBe(1);
 
@@ -112,6 +114,8 @@ describe("MesswagenLayer", () => {
       { delay: 15000 },
     );
     const layer = new MesswagenLayer({ properties: { fileName: "foo" } });
+    layer.map = {};
+
     layer.start();
     expect(fetchMock.calls().length).toBe(1);
     jest.advanceTimersByTime(10000);

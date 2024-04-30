@@ -131,7 +131,7 @@ class MesswagenLayer extends Layer {
 
         // The finally occurs asynchronously when we call the abort in stop().
         // So we have to recheck if the layer is still visible.
-        if (this.visible) {
+        if (this.visible && this.map) {
           // Update data in one second
           this.timeout = setTimeout(() => {
             this.updateData();
