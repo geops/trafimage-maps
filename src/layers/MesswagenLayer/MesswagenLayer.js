@@ -52,6 +52,7 @@ class MesswagenLayer extends Layer {
       }),
       this.on("change:feature", (evt) => {
         const feature = this.get(evt.key);
+
         if (feature && this.get("follow")) {
           const size = map.getSize();
           const extent = map
@@ -60,6 +61,7 @@ class MesswagenLayer extends Layer {
           if (!feature.getGeometry().intersectsExtent(extent)) {
             this.centerOn(feature, undefined);
           }
+
           if (feature && !evt.oldValue) {
             this.centerOn(feature, 17);
           }
@@ -127,10 +129,14 @@ class MesswagenLayer extends Layer {
         clearTimeout(this.abortTimeout);
         clearTimeout(this.timeout);
 
-        // Update data in one second
-        this.timeout = setTimeout(() => {
-          this.updateData();
-        }, 1000);
+        // The finally occurs asynchronously when we call the abort in stop().
+        // So we have to recheck if the layer is still visible.
+        if (this.visible) {
+          // Update data in one second
+          this.timeout = setTimeout(() => {
+            this.updateData();
+          }, 1000);
+        }
       });
   }
 
