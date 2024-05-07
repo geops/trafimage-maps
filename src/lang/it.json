@@ -345,6 +345,7 @@
   "ch.sbb.status_unbekannt.layerinfo": "L'accessibilità della stazione è sconosciuta.",
   "ch.sbb.tarifverbundkarte.public": "Carta delle comunità tariffarie",
   "ch.sbb.teilbarrierefreiebahnhoefe": "Stazioni parzialmente accessibili",
+  "ch.sbb.teilbarrierefreiebahnhoefe.layerinfo": "Fermate che sono solo parzialmente accessibili e che soddisfano solo parzialmente i requisiti della LDis (stazioni in curva, stazioni con rampe troppo ripide o ascensori non conformi).",
   "ch.sbb.tracker": "Train tracker",
   "ch.sbb.tracker-desc": "<p>Il train tracker mostra i collegamenti aggiornati sulla base dell'orario teorico dei trasporti pubblici svizzeri.</p><p>Dati: <a href=\"http://fahrplanfelder.ch\" target=\"_blank\">fahrplanfelder.ch</a>.</p>",
   "ch.sbb.weinregionen": "Iniziativa Raiffeisen «Regioni vinicole svizzere»",

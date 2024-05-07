@@ -52,6 +52,7 @@ class MesswagenLayer extends Layer {
       }),
       this.on("change:feature", (evt) => {
         const feature = this.get(evt.key);
+
         if (feature && this.get("follow")) {
           const size = map.getSize();
           const extent = map
@@ -60,6 +61,7 @@ class MesswagenLayer extends Layer {
           if (!feature.getGeometry().intersectsExtent(extent)) {
             this.centerOn(feature, undefined);
           }
+
           if (feature && !evt.oldValue) {
             this.centerOn(feature, 17);
           }
@@ -76,29 +78,34 @@ class MesswagenLayer extends Layer {
 
   start() {
     if (!this.get("fileName")) return;
-
     const feature = this.get("feature");
     if (feature) {
       this.centerOn(feature);
     }
-
+    this.stopped = false;
     this.updateData();
-
-    this.interval = window.setInterval(() => {
-      this.updateData();
-    }, 1000);
   }
 
   stop() {
+    this.stopped = true;
     this.abortController?.abort();
-    clearInterval(this.interval);
+    clearTimeout(this.abortTimeout);
+    clearTimeout(this.timeout);
   }
 
   updateData() {
     this.abortController?.abort();
 
     this.abortController = new AbortController();
-    fetch(
+
+    // Auto abort when request takes too long
+    clearTimeout(this.abortTimeout);
+    this.abortTimeout = setTimeout(() => {
+      this.abortController.abort();
+    }, 10000);
+
+    // We put it in a variable for easy testing.
+    this.fetch = fetch(
       `https://trafimage-services1.geops.de/messwagen/${this.get(
         "fileName",
       )}.json`,
@@ -118,7 +125,20 @@ class MesswagenLayer extends Layer {
           this.set("feature", feature);
         }
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => {
+        clearTimeout(this.abortTimeout);
+        clearTimeout(this.timeout);
+
+        // The finally occurs asynchronously when we call the abort in stop().
+        // So we have to recheck if the layer is stopped or not.
+        if (!this.stopped) {
+          // Update data in one second
+          this.timeout = setTimeout(() => {
+            this.updateData();
+          }, 1000);
+        }
+      });
   }
 
   centerOn(feature, zoom) {

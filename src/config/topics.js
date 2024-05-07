@@ -477,6 +477,7 @@ export const railPlus = {
       `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,
+  maxZoom: 13,
 };
 
 export const messwagen = {

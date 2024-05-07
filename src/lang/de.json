@@ -325,6 +325,7 @@
   "ch.sbb.status_unbekannt.layerinfo": "Die Barrierefreiheit der Station ist unbekannt.",
   "ch.sbb.tarifverbundkarte.public": "Tarifverbundkarte",
   "ch.sbb.teilbarrierefreiebahnhoefe": "Teil-barrierefreie Stationen",
+  "ch.sbb.teilbarrierefreiebahnhoefe.layerinfo": "Haltestellen die nur teilweise zugänglich sind und die Anforderungen des BehiGs nur teilweise erfüllen (Kurvenbahnhöfe, Bahnhöfen die über eine zu steile Rampe oder einen nicht konformen Lift verfügen).",
   "ch.sbb.tracker": "Zugtracker",
   "ch.sbb.tracker-desc": "<p>Der Zugtracker zeigt die aktuellen Verbindungen basierend auf dem Soll-Fahrplan des Schweizer ÖV.</p><p>Daten: <a href=\"http://fahrplanfelder.ch\" target=\"_blank\">fahrplanfelder.ch</a>.</p>",
   "ch.sbb.weinregionen": "Raiffeisen Aktion \"Schweizer Weinregionen\"",

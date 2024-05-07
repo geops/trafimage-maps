@@ -3,6 +3,11 @@
 [![npm](https://img.shields.io/npm/v/trafimage-maps.svg)](https://www.npmjs.com/package/trafimage-maps)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 
+![unit tests](https://github.com/geops/trafimage-maps/actions/workflows/test.yml/badge.svg)
+![e2e chrome](https://github.com/geops/trafimage-maps/actions/workflows/cypress-chrome.yml/badge.svg)
+![e2e firefox](https://github.com/geops/trafimage-maps/actions/workflows/cypress-firefox.yml/badge.svg)
+![e2e edge](https://github.com/geops/trafimage-maps/actions/workflows/cypress-edge.yml/badge.svg)
+
 ## About
 
 This repo contains the web component used by the Trafimage Map Portal by Swiss Federal Railways SBB and other applications build on it.

@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.15](https://github.com/geops/trafimage-maps/compare/v1.28.14...v1.28.15) (2024-05-02)
+
+### Bug Fixes
+
+- **handicap:** add partially handicap conform layer, add translations and layer info ([f8dcdab](https://github.com/geops/trafimage-maps/commit/f8dcdabb1b0f32aca7dadad926f479b2480e36dd))
+- request new data only when previous request has ended and add a request timeout ([#1169](https://github.com/geops/trafimage-maps/issues/1169)) ([060e382](https://github.com/geops/trafimage-maps/commit/060e3824aa67ebcbc54ca51d58e83d1db01f22e0))
+
+### [1.28.14](https://github.com/geops/trafimage-maps/compare/v1.28.13...v1.28.14) (2024-04-18)
+
+### Bug Fixes
+
+- **railplus:** limit maxZoom to 13 in railplus topic ([#1167](https://github.com/geops/trafimage-maps/issues/1167)) ([f375608](https://github.com/geops/trafimage-maps/commit/f3756084ac95eb62643fc98106818fc2a133cd35))
+
 ### [1.28.13](https://github.com/geops/trafimage-maps/compare/v1.28.12...v1.28.13) (2024-04-10)
 
 ### Bug Fixes

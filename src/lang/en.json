@@ -332,6 +332,7 @@
   "ch.sbb.status_unbekannt.layerinfo": "The accessibility of the station is unknown.",
   "ch.sbb.tarifverbundkarte.public": "Fare networks map",
   "ch.sbb.teilbarrierefreiebahnhoefe": "Partly accessible stations",
+  "ch.sbb.teilbarrierefreiebahnhoefe.layerinfo": "Stops that are only partially accessible and only partially meet the requirements of the Disability Discrimination Act (railway stations on curves, stations with a ramp that is too steep or a non-compliant lift).",
   "ch.sbb.tracker": "Train tracker",
   "ch.sbb.tracker-desc": "<p>The train tracker shows current connections based on the planned timetable for Swiss public transport.</p><p>Data: <a href=\"http://fahrplanfelder.ch\" target=\"_blank\">fahrplanfelder.ch</a>.</p>",
   "ch.sbb.xmas-desc": "Christmas-Tracker",
