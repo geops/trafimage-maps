@@ -4,7 +4,7 @@ import DataLink from "../../components/DataLink";
 
 const comps = {
   de: (
-    <div>
+    <>
       Die Netzkarte Energie bildet das Netz der SBB Hochspannnungs
       Übertragungsleitungen (UL) ab. Die Karte richtet sich an die Bauherr:innen
       mit Bauvorhaben mit weniger als 51m Abstand zur Übertragungsleitung.
@@ -25,10 +25,10 @@ const comps = {
         </a>
         )
       </p>
-    </div>
+    </>
   ),
   fr: (
-    <div>
+    <>
       La carte du réseau énergétique représente le réseau des lignes de
       transport d&apos;électricité à haute tension (UL) des CFF. La carte
       s&apos;adresse aux maîtres d&apos;ouvrage dont les projets de construction
@@ -52,10 +52,10 @@ const comps = {
         </a>
         )
       </p>
-    </div>
+    </>
   ),
   en: (
-    <div>
+    <>
       The Energy Network Map displays the network of SBB high-voltage
       transmission lines (UL). The map is intended for developers with building
       projects less than 51m from the transmission line. Construction projects
@@ -76,10 +76,10 @@ const comps = {
         </a>
         )
       </p>
-    </div>
+    </>
   ),
   it: (
-    <div>
+    <>
       La carta della rete energetica visualizza la rete delle linee di
       trasmissione ad alta tensione delle FFS (UL). La mappa è destinata agli
       sviluppatori con progetti di costruzione a meno di 51 metri dalla linea di
@@ -103,14 +103,14 @@ const comps = {
         </a>
         )
       </p>
-    </div>
+    </>
   ),
 };
 
 function EnergieTopicInfo() {
   const { i18n, t } = useTranslation();
   return (
-    <>
+    <div>
       {comps[i18n.language]}
       <hr />
       <p>
@@ -118,7 +118,7 @@ function EnergieTopicInfo() {
           {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
         </DataLink>
       </p>
-    </>
+    </div>
   );
 }
 
