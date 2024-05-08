@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import DataLink from "../../components/DataLink";
 
 const translations = {
@@ -33,13 +33,10 @@ const translations = {
   },
 };
 
-const propTypes = {
-  language: PropTypes.string.isRequired,
-};
-
-function IsbTopicInfo({ language }) {
+function IsbTopicInfo() {
+  const { i18n, t } = useTranslation();
   const { title, description, responsible, responsibleContent } =
-    translations[language];
+    translations[i18n.language];
   return (
     <div>
       <p>{title}</p>
@@ -53,15 +50,15 @@ function IsbTopicInfo({ language }) {
       </p>
       <hr />
       <p>
-        <DataLink
-          fullWidth={false}
-          href="https://data.sbb.ch/explore/dataset/infrastrukturbetreiberinnen/information/"
-        />
+        <DataLink href="https://data.sbb.ch/explore/dataset/infrastrukturbetreiberinnen/information/" />
+      </p>
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
+        </DataLink>
       </p>
     </div>
   );
 }
-
-IsbTopicInfo.propTypes = propTypes;
 
 export default React.memo(IsbTopicInfo);

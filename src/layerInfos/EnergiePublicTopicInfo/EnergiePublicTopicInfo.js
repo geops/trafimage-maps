@@ -1,4 +1,6 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+import DataLink from "../../components/DataLink";
 
 const comps = {
   de: (
@@ -105,8 +107,19 @@ const comps = {
   ),
 };
 
-const EnergieTopicInfo = ({ language }) => {
-  return comps[language];
-};
+function EnergieTopicInfo() {
+  const { i18n, t } = useTranslation();
+  return (
+    <>
+      {comps[i18n.language]}
+      <hr />
+      <p>
+        <DataLink href="https://geo.sbb.ch/site/rest/services/Trafimage_PUBLIC/">
+          {t("Diesen Datensatz als Service einbinden (SBB-intern)")}
+        </DataLink>
+      </p>
+    </>
+  );
+}
 
 export default EnergieTopicInfo;

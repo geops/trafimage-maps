@@ -73,8 +73,8 @@ const comps = {
   ),
 };
 
-const InfrastrukturTopicInfo = ({ language }) => {
-  return comps[language];
-};
+function InfrastrukturTopicInfo() {
+  return <>{comps[i18n.language]}</>;
+}
 
 export default React.memo(InfrastrukturTopicInfo);
