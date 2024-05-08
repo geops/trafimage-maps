@@ -119,7 +119,7 @@ const shortToLongNameSchmalspur = {
   AVA: "Aargau Verkehr AG",
   BLM: "Bergbahn Lauterbrunnen-Mürren AG",
   BLT: "Baselland Transport AG",
-  BOB: "Berner Oberland-Bahnen AG",
+  BOB: "Berner Oberland-Bahnen",
   CJ: "Compagnie des chemins de fer du Jura SA",
   DFB: "Dampfbahn Furka-Bergstrecke",
   FART: "Società per le Ferrovie Autolinee Regionali Ticinesi SA",
