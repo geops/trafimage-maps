@@ -1,8 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const comps = {
   de: (
-    <div>
+    <>
       <p>
         Die Karte der Normalspur- und Schmalspur-Infrastrukturbetreiberinnen
         zeigt die komplette Schweizer Eisenbahninfrastruktur inkl. den
@@ -17,10 +18,10 @@ const comps = {
         Verantwortlich: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
-    </div>
+    </>
   ),
   fr: (
-    <div>
+    <>
       <p>
         La carte des gestionnaires d&apos;infrastructure à voie normale et à
         voie étroite montre l&apos;emplacement de toutes les infrastructures
@@ -38,10 +39,10 @@ const comps = {
         Responsable: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
-    </div>
+    </>
   ),
   en: (
-    <div>
+    <>
       <p>
         The map of the standard gauge and narrow gauge infrastructure managers
         shows all Swiss railway infrastructure including route operating points.
@@ -54,10 +55,10 @@ const comps = {
         Contact person: Trafimage System Manager Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
-    </div>
+    </>
   ),
   it: (
-    <div>
+    <>
       <p>
         La cartina distingue tra l&apos;infrastruttura delle FFS (con relative
         società affiliate) e l&apos;infrastruttura delle altre imprese
@@ -69,12 +70,13 @@ const comps = {
         Responsabile: Fachbus Trafimage, Daniel Hofstetter,&nbsp;
         <a href="mailto:trafimage@sbb.ch">trafimage@sbb.ch</a>.
       </p>
-    </div>
+    </>
   ),
 };
 
-const InfrastrukturTopicInfo = ({ language }) => {
-  return comps[language];
-};
+function InfrastrukturTopicInfo() {
+  const { i18n } = useTranslation();
+  return <div>{comps[i18n.language]}</div>;
+}
 
 export default React.memo(InfrastrukturTopicInfo);

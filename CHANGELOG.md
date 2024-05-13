@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.28.17](https://github.com/geops/trafimage-maps/compare/v1.28.17-beta.0...v1.28.17) (2024-05-08)
+
+### [1.28.16](https://github.com/geops/trafimage-maps/compare/v1.28.15...v1.28.16) (2024-05-08)
+
+### Bug Fixes
+
+- **isb:** rename Berner Oberland Bahnen AG to Berner Oberland Bahnen ([#1170](https://github.com/geops/trafimage-maps/issues/1170)) ([57e452f](https://github.com/geops/trafimage-maps/commit/57e452fa3c7e3051c1035a35333760b3356430e4))
+
 ### [1.28.15](https://github.com/geops/trafimage-maps/compare/v1.28.14...v1.28.15) (2024-05-02)
 
 ### Bug Fixes
