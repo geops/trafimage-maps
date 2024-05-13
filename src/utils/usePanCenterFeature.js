@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import useIsMobile from "./useIsMobile";
+import useHasScreenSize from "./useHasScreenSize";
 import panCenterFeature from "./panCenterFeature";
 
 const usePanDisplayFeature = () => {
@@ -11,7 +11,7 @@ const usePanDisplayFeature = () => {
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const feature = featureInfo[0]?.features[0];
   const layer = featureInfo[0]?.layer;
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
 
   useEffect(() => {
     if (feature && layer && coordinate) {

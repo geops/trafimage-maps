@@ -12,7 +12,7 @@ import MenuToggler from "./MenuToggler";
 import useOverlayWidth from "../../utils/useOverlayWidth";
 import { ReactComponent as ZoomOut } from "../../img/minus.svg";
 import { ReactComponent as ZoomIn } from "../../img/plus.svg";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const propTypes = {
   geolocation: PropTypes.bool,
@@ -94,18 +94,15 @@ function MapControls({
   children,
 }) {
   const overlayWidth = useOverlayWidth();
-  const screenWidth = useSelector((state) => state.app.screenWidth);
   const screenHeight = useSelector((state) => state.app.screenHeight);
   const isSmallHeight = useMemo(() => {
     return ["xs", "s"].includes(screenHeight);
   }, [screenHeight]);
-  const useSmallHeader = useMemo(() => {
-    return ["xs", "s", "m"].includes(screenWidth);
-  }, [screenWidth]);
-  const isMobile = useIsMobile();
+  const hasSmallHeader = useHasScreenSize(["xs", "s", "m"]);
+  const isMobile = useHasScreenSize();
   const classes = useStyles({
     overlayWidth: isMobile ? 0 : overlayWidth,
-    margin: useSmallHeader || isSmallHeight ? 10 : 15,
+    margin: hasSmallHeader || isSmallHeight ? 10 : 15,
   });
   const { t } = useTranslation();
   const map = useSelector((state) => state.app.map);

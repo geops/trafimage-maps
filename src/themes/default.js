@@ -13,6 +13,11 @@ const colors = {
 };
 
 const styles = {
+  flexCenter: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   bottomFade: {
     "&::after": {
       content: '""',
@@ -44,6 +49,7 @@ const typoBody = {
   fontWeight: "normal",
   lineHeight: "16.8px",
   color: "#000000",
+  whiteSpace: "pre-wrap",
 };
 
 const themeSpacing = (value) => {
@@ -121,6 +127,14 @@ const v5 = {
     },
   },
   components: {
+    // MuiTypography: {
+    //   defaultProps: {
+
+    //   },
+    //   styleOverrides: {
+    //     root: { padding: 0, margin: 0 },
+    //   },
+    // },
     MuiCheckbox: {
       defaultProps: {
         icon: <InputIcon />,

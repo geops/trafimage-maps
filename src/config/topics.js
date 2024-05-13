@@ -486,7 +486,6 @@ export const messwagen = {
   layers: messwagenLayers,
   elements: {
     ...defaultElements,
-    overlay: false,
     drawMenu: false,
   },
   hideInLayerTree: ONLY_WHEN_NOT_LOGGED_IN,

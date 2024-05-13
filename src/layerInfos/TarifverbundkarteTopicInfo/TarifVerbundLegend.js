@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 import TarifverbundPartner from "../../components/TarifverbundPartner";
 import useFetch from "../../utils/useFetch";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
   return {
@@ -22,7 +22,7 @@ function TarifVerbundLegend() {
   const { t } = useTranslation();
   const vectorTilesUrl = useSelector((state) => state.app.vectorTilesUrl);
   const apiKey = useSelector((state) => state.app.apiKey);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const classes = useStyles({ isMobile });
   const { data: style, loading } = useFetch(
     `${vectorTilesUrl}/styles/ch.sbb.tarifverbund/style.json?key=${apiKey}`,

@@ -9,7 +9,7 @@ import ZoomOutMapIcon from "@mui/icons-material/ZoomOutMap";
 import DirektverbindungenLayer from "../../../layers/DirektverbindungenLayer";
 import { ReactComponent as TrainIconDay } from "../../../img/train-day.svg";
 import { ReactComponent as TrainIconNight } from "../../../img/train-night.svg";
-import useIsMobile from "../../../utils/useIsMobile";
+import useHasScreenSize from "../../../utils/useHasScreenSize";
 
 const useStyles = makeStyles((theme) => ({
   titleWrapper: {
@@ -54,7 +54,7 @@ function DvLineTitle({ feature, layer, isNightTrain, title, active, teaser }) {
   const isEmbeddedTopic = useMemo(() => {
     return /(-iframe|\.sts)$/.test(topic.key);
   }, [topic]);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const cartaroFeature = layer.allFeatures.find(
     (feat) => feat.get("id") === feature.get("id"),
   );

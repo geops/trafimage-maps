@@ -8,7 +8,7 @@ import { MdClose } from "react-icons/md";
 import Overlay from "../../components/Overlay/Overlay";
 import { setDisplayMenu, setFeatureInfo } from "../../model/app/actions";
 import { OVERLAY_MIN_HEIGHT } from "../../utils/constants";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const IFRAME_OVERLAY_DEFAULT_HEIGHT = 300;
 
@@ -96,7 +96,7 @@ function IframeMenu({ header, body, hide, title, ResizableProps }) {
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const displayMenu = useSelector((state) => state.app.displayMenu);
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const [headerHeight, setHeaderHeight] = useState(0);
   const classes = useStyles({
     displayMenu,
