@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.29.0](https://github.com/geops/trafimage-maps/compare/v1.28.16...v1.29.0) (2024-05-13)
+
+### Features
+
+- **funkmesswagen:** add photo layer for Funkmesswagen topic ([#1163](https://github.com/geops/trafimage-maps/issues/1163)) ([8440193](https://github.com/geops/trafimage-maps/commit/844019374a8367a26b8b1b10894f544ed3040843))
+
+### Bug Fixes
+
+- **datalinks:** add datalink service for ISB, Tarifverbund, Geltungsbereiche, Energie ([#1171](https://github.com/geops/trafimage-maps/issues/1171)) ([788f881](https://github.com/geops/trafimage-maps/commit/788f881b5818b3ffe04fb0d1940b5555d1d95c72))
+
 ### [1.28.17](https://github.com/geops/trafimage-maps/compare/v1.28.17-beta.0...v1.28.17) (2024-05-08)
 
 ### [1.28.16](https://github.com/geops/trafimage-maps/compare/v1.28.15...v1.28.16) (2024-05-08)
