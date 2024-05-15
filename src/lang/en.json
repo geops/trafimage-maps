@@ -265,7 +265,7 @@
   "ch.sbb.mobz": "Mobilitätshubs",
   "ch.sbb.mobz_what_if": "What-if Mobilitätshubs",
   "ch.sbb.netzentwicklung": "Responsibilities for network development",
-  "ch.sbb.netzentwicklung-desc": "Overview of I-NAT-NET's network development responsibilities for the roles of route + node planner, strategic network developer, programme manager, specialist management of freight transport facilities. The maps also contain information on regional (Head of Network Development Region) and national tasks (Network Requirements Manager).",
+  "ch.sbb.netzentwicklung-desc": "Overview of I-NAT-NET's network development responsibilities for the roles of strategic network developer, programme manager, network developer freight traffic.",
   "ch.sbb.netzentwicklung.gueterverkehr": "Network developer Freight traffic",
   "ch.sbb.netzentwicklung.programm_manager": "Program manager",
   "ch.sbb.netzentwicklung.sk_planer": "Lines & nodes Planner",
