@@ -1,10 +1,10 @@
-import { VectorLayer } from "mobility-toolbox-js/ol";
 import { Vector as OLVectorLayer } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import GeoJSON from "ol/format/GeoJSON";
 import Feature from "ol/Feature";
 import intersect from "@turf/intersect";
 import { Style, Fill, Stroke } from "ol/style";
+import VectorLayer from "../VectorLayer";
 import MapboxStyleLayer from "../MapboxStyleLayer";
 
 const format = new GeoJSON();

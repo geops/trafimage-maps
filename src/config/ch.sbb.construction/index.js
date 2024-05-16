@@ -200,10 +200,10 @@ export const constrUnterhalt = new Layer({
 
 let constrLayers = [];
 
-export const updateConstructions = (mbMap) => {
+export const updateConstructions = (maplibreMap) => {
   // Modifying the source triggers an idle state so we use "once" to avoid an infinite loop.
-  mbMap.once("idle", () => {
-    const constrRendered = mbMap
+  maplibreMap.once("idle", () => {
+    const constrRendered = maplibreMap
       .queryRenderedFeatures({
         layers: constrLayers,
       })
@@ -216,7 +216,7 @@ export const updateConstructions = (mbMap) => {
         };
         return good;
       });
-    const source = mbMap.getSource("clusters");
+    const source = maplibreMap.getSource("clusters");
     if (source) {
       source.setData({
         type: "FeatureCollection",
@@ -228,8 +228,8 @@ export const updateConstructions = (mbMap) => {
 
 const constrOlListenersKeys = [];
 constructionDataLayer.on("load", () => {
-  const { map, mbMap } = constructionDataLayer;
-  constrLayers = mbMap
+  const { map, maplibreMap } = constructionDataLayer;
+  constrLayers = maplibreMap
     .getStyle()
     .layers.filter(({ metadata }) => {
       return (
@@ -238,7 +238,7 @@ constructionDataLayer.on("load", () => {
     })
     .map((layer) => layer.id);
 
-  updateConstructions(mbMap);
+  updateConstructions(maplibreMap);
 
   // Update clusters source on moveeend.
   unByKey(constrOlListenersKeys);
@@ -249,7 +249,7 @@ constructionDataLayer.on("load", () => {
       //   // eslint-disable-next-line no-param-reassign
       //   layer.isQueryable = map.getView().getZoom() > 10;
       // });
-      updateConstructions(mbMap);
+      updateConstructions(maplibreMap);
     }),
   );
 });
@@ -262,9 +262,9 @@ constructionDataLayer.on("load", () => {
       if (
         layer.mapboxLayer &&
         constructionDataLayer &&
-        constructionDataLayer.mbMap
+        constructionDataLayer.maplibreMap
       ) {
-        updateConstructions(layer.mapboxLayer.mbMap);
+        updateConstructions(layer.mapboxLayer.maplibreMap);
       }
     });
   });

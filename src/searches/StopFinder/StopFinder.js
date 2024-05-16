@@ -106,8 +106,8 @@ class StopFinder extends Search {
       return;
     }
     const { layerService, dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = layerService.getLayer("ch.sbb.netzkarte.data");
-    const styleLayers = mbMap?.getStyle()?.layers;
+    const { maplibreMap } = layerService.getLayer("ch.sbb.netzkarte.data");
+    const styleLayers = maplibreMap?.getStyle()?.layers;
 
     // We get feature infos only for layer that use the source 'stations'.
     const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {

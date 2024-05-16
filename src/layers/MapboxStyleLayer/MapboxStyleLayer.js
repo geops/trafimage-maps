@@ -1,4 +1,4 @@
-import { MapboxStyleLayer as MTMapboxStyleLayer } from "mobility-toolbox-js/ol";
+import { MaplibreStyleLayer as MTMapboxStyleLayer } from "mobility-toolbox-js/ol";
 
 /**
  * Layer for visualizing information about stations (default) or airports.
@@ -14,7 +14,18 @@ import { MapboxStyleLayer as MTMapboxStyleLayer } from "mobility-toolbox-js/ol";
  * @private
  */
 class MapboxStyleLayer extends MTMapboxStyleLayer {
+  get mapboxLayer() {
+    return this.get("maplibreLayer");
+  }
+
   constructor(options = {}) {
+    // For v3
+    if (options.mapboxLayer) {
+      // eslint-disable-next-line no-param-reassign
+      options.maplibreLayer = options.mapboxLayer;
+      // eslint-disable-next-line no-param-reassign
+      delete options.mapboxLayer;
+    }
     super({ ...options, isHoverActive: false, isClickActive: false });
 
     this.style = options.style;
@@ -69,13 +80,13 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    */
   applyLayoutVisibility(evt) {
     const { visible } = this;
-    const { mbMap } = this.mapboxLayer;
+    const { maplibreMap } = this.mapboxLayer;
 
-    if (!mbMap) {
+    if (!maplibreMap) {
       return;
     }
 
-    const style = mbMap.getStyle();
+    const style = maplibreMap.getStyle();
 
     if (!style) {
       return;
@@ -107,12 +118,12 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
    * @private
    */
   setFeatureState(features, state) {
-    if (!this.mapboxLayer?.mbMap) {
+    if (!this.mapboxLayer?.maplibreMap) {
       return;
     }
-    const { mbMap } = this.mapboxLayer;
+    const { maplibreMap } = this.mapboxLayer;
 
-    if (!features || !mbMap) {
+    if (!features || !maplibreMap) {
       return;
     }
 
@@ -130,7 +141,7 @@ class MapboxStyleLayer extends MTMapboxStyleLayer {
         return;
       }
 
-      mbMap.setFeatureState(
+      maplibreMap.setFeatureState(
         {
           id: feature.getId(),
           source,

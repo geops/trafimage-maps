@@ -25,7 +25,7 @@ function RailplusPopup({ feature, layer }) {
   const [spriteStyle, setSpriteStyle] = useState();
 
   useEffect(() => {
-    const style = layer.mapboxLayer.mbMap.getStyle();
+    const style = layer.mapboxLayer.maplibreMap.getStyle();
 
     const abortController = new AbortController();
 

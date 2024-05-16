@@ -77,8 +77,8 @@ const updateLayers = (key = "sts", baseLayer) => {
       layer.visible = /(ch\.sbb\.(ipv|direktverbindungen)|\.data)/.test(
         layer.key,
       );
-      if (layer.key === `${DV_KEY}.main` && baseLayer?.mbMap) {
-        baseLayer.mbMap.once("idle", () => {
+      if (layer.key === `${DV_KEY}.main` && baseLayer?.maplibreMap) {
+        baseLayer.maplibreMap.once("idle", () => {
           layer.syncFeatures();
         });
       }

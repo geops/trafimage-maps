@@ -290,7 +290,7 @@ export const buslines = new MapboxStyleLayer({
 });
 
 buslines.on("change:visible", () => {
-  dataLayer.mbMap?.once("idle", () => stationsLayer.updateSource());
+  dataLayer.maplibreMap?.once("idle", () => stationsLayer.updateSource());
 });
 
 export const gemeindegrenzen = new MapboxStyleLayer({

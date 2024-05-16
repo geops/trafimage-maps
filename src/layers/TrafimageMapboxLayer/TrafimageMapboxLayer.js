@@ -1,4 +1,4 @@
-import { MaplibreLayer, getMapboxMapCopyrights } from "mobility-toolbox-js/ol";
+import { MaplibreLayer, getMapGlCopyrights } from "mobility-toolbox-js/ol";
 import { toLonLat } from "ol/proj";
 
 const applyFilters = (mbStyle, filters) => {
@@ -87,8 +87,8 @@ class TrafimageMapboxLayer extends MaplibreLayer {
   applyStyle(data) {
     const styleFiltered = applyFilters(data, this.filters);
 
-    this.mbMap.setStyle(styleFiltered);
-    this.mbMap.once("styledata", () => {
+    this.maplibreMap.setStyle(styleFiltered);
+    this.maplibreMap.once("styledata", () => {
       this.onStyleLoaded();
     });
   }
@@ -120,10 +120,10 @@ class TrafimageMapboxLayer extends MaplibreLayer {
 
     this.styleUrl = newStyleUrl;
 
-    if (!this.mbMap) {
+    if (!this.maplibreMap) {
       if (this.filters) {
         this.on("load", () => {
-          this.applyStyle(this.mbMap.getStyle());
+          this.applyStyle(this.maplibreMap.getStyle());
         });
       }
       return;
@@ -134,12 +134,16 @@ class TrafimageMapboxLayer extends MaplibreLayer {
   }
 
   getFeatures({ source, sourceLayer, filter } = {}) {
-    const { mbMap } = this;
+    const { maplibreMap } = this;
     // Ignore the getFeatureInfo until the source is loaded
-    if (!mbMap || !mbMap.getSource(source) || !mbMap.isSourceLoaded(source)) {
+    if (
+      !maplibreMap ||
+      !maplibreMap.getSource(source) ||
+      !maplibreMap.isSourceLoaded(source)
+    ) {
       return [];
     }
-    return mbMap.querySourceFeatures(source, {
+    return maplibreMap.querySourceFeatures(source, {
       sourceLayer,
       filter,
     });
@@ -158,15 +162,15 @@ class TrafimageMapboxLayer extends MaplibreLayer {
     if (
       !options ||
       !this.format ||
-      !this.mbMap ||
-      !this.mbMap.isStyleLoaded() ||
+      !this.maplibreMap ||
+      !this.maplibreMap.isStyleLoaded() ||
       this.map?.getView().getAnimating() ||
       this.map?.getView().getInteracting()
     ) {
       return Promise.resolve({ coordinate, features: [], layer: this });
     }
 
-    let pixel = coordinate && this.mbMap.project(toLonLat(coordinate));
+    let pixel = coordinate && this.maplibreMap.project(toLonLat(coordinate));
 
     if (this.hitTolerance) {
       const { x, y } = pixel;
@@ -178,14 +182,17 @@ class TrafimageMapboxLayer extends MaplibreLayer {
 
     // At this point we get GeoJSON Mapbox feature, we transform it to an OpenLayers
     // feature to be consistent with other layers.
-    const renderedFeatures = this.mbMap.queryRenderedFeatures(pixel, options);
+    const renderedFeatures = this.maplibreMap.queryRenderedFeatures(
+      pixel,
+      options,
+    );
     const features = [];
     const promises = [];
 
     for (let i = 0; i < renderedFeatures.length; i += 1) {
       const feature = renderedFeatures[i];
       if (feature.properties.cluster) {
-        const source = this.mbMap.getSource(feature.layer.source);
+        const source = this.maplibreMap.getSource(feature.layer.source);
         const { cluster_id: id, point_count: count } = feature.properties;
         // because Mapbox GL JS should be fast ...
         // eslint-disable-next-line no-await-in-loop
@@ -234,7 +241,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
         return response.json();
       })
       .then((data) => {
-        if (!this.mbMap) {
+        if (!this.maplibreMap) {
           return;
         }
         this.applyStyle(data);
@@ -254,7 +261,7 @@ class TrafimageMapboxLayer extends MaplibreLayer {
 
     this.olLayer
       .getSource()
-      .setAttributions(this.copyrights || getMapboxMapCopyrights(this.mbMap));
+      .setAttributions(this.copyrights || getMapGlCopyrights(this.maplibreMap));
 
     this.dispatchEvent({
       type: "load",

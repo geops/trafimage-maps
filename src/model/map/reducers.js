@@ -79,12 +79,18 @@ export default function app(state = initialState, action) {
     case SET_MAX_ZOOM:
       return {
         ...state,
-        maxZoom: action.data,
+        maxZoom:
+          action.data === Infinity || action.data === -Infinity
+            ? undefined
+            : action.data,
       };
     case SET_MIN_ZOOM:
       return {
         ...state,
-        minZoom: action.data,
+        minZoom:
+          action.data === Infinity || action.data === -Infinity
+            ? undefined
+            : action.data,
       };
     default:
       return {

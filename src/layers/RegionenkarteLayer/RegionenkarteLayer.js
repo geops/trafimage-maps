@@ -14,19 +14,19 @@ class RegionenkarteLayer extends MapboxStyleLayer {
   }
 
   setHighlightFilter(filter) {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
+    const { maplibreMap } = this.mapboxLayer;
+    if (!maplibreMap) {
       return;
     }
     const layerId = "anlagenverantwortliche.lines.select";
-    const lyr = mbMap.getLayer(layerId);
+    const lyr = maplibreMap.getLayer(layerId);
     if (lyr) {
-      mbMap.setFilter(layerId, filter);
+      maplibreMap.setFilter(layerId, filter);
       if (filter) {
-        mbMap.setLayoutProperty(layerId, "visibility", "visible");
+        maplibreMap.setLayoutProperty(layerId, "visibility", "visible");
         return;
       }
-      mbMap.setLayoutProperty(layerId, "visibility", "none");
+      maplibreMap.setLayoutProperty(layerId, "visibility", "none");
     }
   }
 

@@ -149,12 +149,12 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
   onSelect(option) {
     this.selected = option;
 
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
+    const { maplibreMap } = this.mapboxLayer;
+    if (!maplibreMap) {
       return;
     }
     this.styleLayers.forEach(({ id }) => {
-      mbMap.setPaintProperty(id, "line-color", "rgba(0,0,0,0)");
+      maplibreMap.setPaintProperty(id, "line-color", "rgba(0,0,0,0)");
     });
 
     if (this.selected) {
@@ -166,8 +166,8 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
    * Highlight the line selected in the select box.
    */
   highlightLine() {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
+    const { maplibreMap } = this.mapboxLayer;
+    if (!maplibreMap) {
       return;
     }
 
@@ -184,7 +184,7 @@ class ZweitausbildungRoutesHighlightLayer extends MapboxStyleLayer {
     }
 
     this.styleLayers.forEach(({ id }) => {
-      mbMap.setPaintProperty(id, "line-color", [
+      maplibreMap.setPaintProperty(id, "line-color", [
         "case",
         ["in", this.selected, ["get", this.property]],
         color,

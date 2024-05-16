@@ -267,7 +267,7 @@ class Permalink extends PureComponent {
 
   async openDepartureOnLoad() {
     const { dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = stationsLayer.mapboxLayer;
+    const { maplibreMap } = stationsLayer.mapboxLayer;
 
     const filter = ["all", ["==", ["get", "sbb_id"], this.departures]];
 
@@ -275,7 +275,7 @@ class Permalink extends PureComponent {
       filter.push(["==", ["get", "platform"], this.platform]);
     }
 
-    const styleLayers = mbMap?.getStyle()?.layers || [];
+    const styleLayers = maplibreMap?.getStyle()?.layers || [];
     const layers = [
       ...styleLayers
         .filter(stationsLayer.styleLayersFilter)
@@ -286,7 +286,7 @@ class Permalink extends PureComponent {
     ];
 
     // We display the departures popup only on features of the station layer (not on platform).
-    const departures = mbMap.queryRenderedFeatures({
+    const departures = maplibreMap.queryRenderedFeatures({
       layers,
       filter,
     });

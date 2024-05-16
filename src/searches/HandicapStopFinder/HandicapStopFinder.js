@@ -72,18 +72,18 @@ class HandicapStopFinder extends Search {
       return;
     }
     const { layerService, dispatchSetFeatureInfo } = this.props;
-    const { mbMap } = layerService.getLayer("ch.sbb.handicap.data");
+    const { maplibreMap } = layerService.getLayer("ch.sbb.handicap.data");
 
     if (
-      mbMap.getSource(HANDICAP_SOURCE) &&
-      mbMap.isSourceLoaded(HANDICAP_SOURCE)
+      maplibreMap.getSource(HANDICAP_SOURCE) &&
+      maplibreMap.isSourceLoaded(HANDICAP_SOURCE)
     ) {
-      mbMap.off("idle", this.onIdle);
+      maplibreMap.off("idle", this.onIdle);
     } else {
       return;
     }
 
-    const styleLayers = mbMap?.getStyle()?.layers;
+    const styleLayers = maplibreMap?.getStyle()?.layers;
 
     // We get feature infos only for layer that use the source 'ch.sbb.handicap'.
     const infoLayers = layerService.getLayersAsFlatArray().filter((layer) => {

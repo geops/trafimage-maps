@@ -1,4 +1,3 @@
-import { VectorLayer } from "mobility-toolbox-js/ol";
 import Fill from "ol/style/Fill";
 import GeoJSON from "ol/format/GeoJSON";
 import Icon from "ol/style/Icon";
@@ -6,6 +5,7 @@ import OLVectorLayer from "ol/layer/Vector";
 import OLVectorSource from "ol/source/Vector";
 import Style from "ol/style/Style";
 import Text from "ol/style/Text";
+import VectorLayer from "../VectorLayer";
 import featureCollection from "./FeatureCollection.json";
 
 /**

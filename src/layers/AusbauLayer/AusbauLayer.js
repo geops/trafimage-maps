@@ -47,9 +47,9 @@ class AusbauLayer extends MapboxStyleLayer {
   }
 
   applyNewFilter(filterValue) {
-    const { mbMap } = this.mapboxLayer;
-    const style = mbMap.getStyle();
-    if (!mbMap || !style) {
+    const { maplibreMap } = this.mapboxLayer;
+    const style = maplibreMap.getStyle();
+    if (!maplibreMap || !style) {
       return;
     }
     this.filter = this.filters.find((filter) => filter.value === filterValue);
@@ -67,7 +67,7 @@ class AusbauLayer extends MapboxStyleLayer {
 
       // Store the initial filter values for each style layer.
       if (!this.initialFiltersById[id]) {
-        this.initialFiltersById[id] = mbMap.getFilter(id) || [];
+        this.initialFiltersById[id] = maplibreMap.getFilter(id) || [];
       }
 
       let newFilter = this.initialFiltersById[id].length
@@ -81,7 +81,7 @@ class AusbauLayer extends MapboxStyleLayer {
         // ['all', filter1, filter2]
         newFilter.push(filterToApply);
       }
-      mbMap.setFilter(id, newFilter);
+      maplibreMap.setFilter(id, newFilter);
     });
 
     // Update showFilter parameter

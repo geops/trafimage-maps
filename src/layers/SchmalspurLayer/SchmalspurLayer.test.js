@@ -30,7 +30,7 @@ describe("SchmalspurLayer", () => {
         mapboxLayer: new TrafimageMapboxLayer({}),
       });
       layer.mapboxLayer = {
-        mbMap: {
+        maplibreMap: {
           getStyle: () => {
             return { layers: [] };
           },

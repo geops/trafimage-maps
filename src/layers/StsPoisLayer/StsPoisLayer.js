@@ -2,7 +2,7 @@ import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 import { Style, Icon } from "ol/style";
-import { VectorLayer as MTVectorLayer } from "mobility-toolbox-js/ol";
+import MTVectorLayer from "../VectorLayer";
 import poiImage from "./img/poi.png";
 import poiImageHL from "./img/poi_hl.png";
 

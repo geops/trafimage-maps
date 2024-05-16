@@ -23,10 +23,10 @@ class LevelLayer extends MapboxStyleLayer {
    */
   applyLayoutVisibility(evt) {
     const { visible } = this;
-    const { mbMap } = this.mapboxLayer;
-    const style = mbMap.getStyle();
+    const { maplibreMap } = this.mapboxLayer;
+    const style = maplibreMap.getStyle();
 
-    if (!mbMap || !style) {
+    if (!maplibreMap || !style) {
       return;
     }
 
@@ -60,9 +60,9 @@ class LevelLayer extends MapboxStyleLayer {
       // level 2D
       if (metadata === "2D" && this.level === "2D") {
         if (visible && styleLayer.layout.visibility === "none") {
-          mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
+          maplibreMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
         } else if (!visible && styleLayer.layout.visibility === "visible") {
-          mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
+          maplibreMap.setLayoutProperty(styleLayer.id, "visibility", "none");
         }
 
         // others levels
@@ -76,10 +76,14 @@ class LevelLayer extends MapboxStyleLayer {
             this.level,
           ];
 
-          mbMap.setFilter(styleLayer.id, currentFilter);
+          maplibreMap.setFilter(styleLayer.id, currentFilter);
 
           if (styleLayer.layout.visibility === "none") {
-            mbMap.setLayoutProperty(styleLayer.id, "visibility", "visible");
+            maplibreMap.setLayoutProperty(
+              styleLayer.id,
+              "visibility",
+              "visible",
+            );
           }
         } else if (!isInit && styleLayer.layout.visibility === "visible") {
           // We set the visibility to none only if others siblings level layer are also hidden.
@@ -90,7 +94,7 @@ class LevelLayer extends MapboxStyleLayer {
               (child) => child.level !== "2D" && child.visible,
             )
           ) {
-            mbMap.setLayoutProperty(styleLayer.id, "visibility", "none");
+            maplibreMap.setLayoutProperty(styleLayer.id, "visibility", "none");
           }
         }
       }

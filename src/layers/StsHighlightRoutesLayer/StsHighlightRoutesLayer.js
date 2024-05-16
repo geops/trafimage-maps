@@ -4,8 +4,8 @@ const lineWidth = 15;
 
 class HighlightRoutesLayer extends MapboxStyleLayer {
   highlightRoutes(names = [], property = "route_names_premium") {
-    const { mbMap, loaded } = this.mapboxLayer || {};
-    if (loaded && mbMap && mbMap.getStyle()) {
+    const { maplibreMap, loaded } = this.mapboxLayer || {};
+    if (loaded && maplibreMap && maplibreMap.getStyle()) {
       let lineWidthProp = 0;
       if (names.length) {
         const any = ["any"];
@@ -14,12 +14,12 @@ class HighlightRoutesLayer extends MapboxStyleLayer {
         });
         lineWidthProp = ["case", any, lineWidth, 0];
       }
-      mbMap
+      maplibreMap
         .getStyle()
         .layers.filter(this.styleLayersFilter)
         .forEach((layer) => {
-          mbMap.setPaintProperty(layer.id, "line-opacity", 0.8);
-          mbMap.setPaintProperty(layer.id, "line-width", lineWidthProp);
+          maplibreMap.setPaintProperty(layer.id, "line-opacity", 0.8);
+          maplibreMap.setPaintProperty(layer.id, "line-width", lineWidthProp);
         });
     }
   }

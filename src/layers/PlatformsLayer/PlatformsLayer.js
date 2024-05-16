@@ -93,7 +93,7 @@ class PlatformsLayer extends MapboxStyleLayer {
         this.updateSource();
       }),
       this.map.on("moveend", () => {
-        this.mapboxLayer.mbMap?.once("idle", this.onIdle);
+        this.mapboxLayer.maplibreMap?.once("idle", this.onIdle);
       }),
     );
   }
@@ -102,9 +102,9 @@ class PlatformsLayer extends MapboxStyleLayer {
    * @override
    */
   detachFromMap(map) {
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.off("idle", this.onIdle);
+    const { maplibreMap } = this.mapboxLayer;
+    if (maplibreMap) {
+      maplibreMap.off("idle", this.onIdle);
       this.removeSource();
     }
     super.detachFromMap(map);
@@ -115,8 +115,8 @@ class PlatformsLayer extends MapboxStyleLayer {
    * @override
    */
   onLoad() {
-    const { mbMap } = this.mapboxLayer;
-    this.platformLayers = mbMap
+    const { maplibreMap } = this.mapboxLayer;
+    this.platformLayers = maplibreMap
       .getStyle()
       .layers.filter(
         ({ metadata }) =>
@@ -128,7 +128,7 @@ class PlatformsLayer extends MapboxStyleLayer {
     this.addSource();
     super.onLoad();
     this.updateSource();
-    mbMap.once("idle", this.onIdle);
+    maplibreMap.once("idle", this.onIdle);
   }
 
   /**
@@ -140,14 +140,14 @@ class PlatformsLayer extends MapboxStyleLayer {
 
   // Query the rendered stations then add them to the source.
   updateSource() {
-    const { mbMap } = this.mapboxLayer;
-    const source = mbMap.getSource(this.source.id);
+    const { maplibreMap } = this.mapboxLayer;
+    const source = maplibreMap.getSource(this.source.id);
 
     if (!this.platformLayers || !source) {
       return;
     }
     const uids = []; // ['==', 'uid', '496211a5d7ec6962'];
-    const pointsRendered = mbMap
+    const pointsRendered = maplibreMap
       .queryRenderedFeatures({
         layers: this.platformLayers,
       })
@@ -169,7 +169,7 @@ class PlatformsLayer extends MapboxStyleLayer {
       });
 
     // we display only visible platorm polygons
-    mbMap.setFilter("platforms_polygon_highlight", [
+    maplibreMap.setFilter("platforms_polygon_highlight", [
       "all",
       ["==", ["geometry-type"], "Polygon"],
       ["in", ["get", "uid"], ["literal", uids]],
@@ -182,26 +182,26 @@ class PlatformsLayer extends MapboxStyleLayer {
 
   // Add source for stations.
   addSource() {
-    if (!this.mapboxLayer.mbMap) {
+    if (!this.mapboxLayer.maplibreMap) {
       return;
     }
-    const { mbMap } = this.mapboxLayer;
+    const { maplibreMap } = this.mapboxLayer;
     const { id } = this.source;
-    if (!mbMap.getSource(id)) {
+    if (!maplibreMap.getSource(id)) {
       const withoutId = { ...this.source };
       delete withoutId.id;
-      mbMap.addSource(id, withoutId);
+      maplibreMap.addSource(id, withoutId);
     }
   }
 
   // Remove source added by addSources().
   removeSource() {
-    if (!this.mapboxLayer.mbMap) {
+    if (!this.mapboxLayer.maplibreMap) {
       return;
     }
-    const { mbMap } = this.mapboxLayer;
+    const { maplibreMap } = this.mapboxLayer;
     const { id } = this.source;
-    const source = mbMap.getSource(id);
+    const source = maplibreMap.getSource(id);
     if (source) {
       // Don't remove source just make it empty.
       // Because others layers during unmount still could rely on it.

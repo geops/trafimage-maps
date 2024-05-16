@@ -87,16 +87,16 @@ export const getStyledPdfScaleLine = (scaleLineControl, resolution = 1) => {
 
 /**
  * Adds a layer with invisible labels to displace the labels at the edge of the exported map
- * @param {maplibregl.Map} mbMap A maplibregl map
+ * @param {maplibregl.Map} maplibreMap A maplibregl map
  * @param {string} sourceId The id of the displace source
  * @param {string} layerId The id of the displace layer
  */
 const addLabelDisplaceLayer = (
-  mbMap,
+  maplibreMap,
   sourceId = "printframe",
   layerId = "print_frame_displacement",
 ) => {
-  const extent = mbMap.getBounds().toArray();
+  const extent = maplibreMap.getBounds().toArray();
   const displaceSource = {
     type: "geojson",
     data: {
@@ -136,8 +136,8 @@ const addLabelDisplaceLayer = (
     },
     paint: { "text-opacity": 0 },
   };
-  mbMap.addSource(sourceId, displaceSource);
-  mbMap.addLayer(displaceLayer);
+  maplibreMap.addSource(sourceId, displaceSource);
+  maplibreMap.addLayer(displaceLayer);
 };
 
 export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
@@ -146,7 +146,7 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
       return scale;
     },
   });
-  const mbMap = new maplibregl.Map({
+  const maplibreMap = new maplibregl.Map({
     style,
     attributionControl: false,
     boxZoom: false,
@@ -155,20 +155,20 @@ export const buildMapboxMapHd = (map, elt, center, style, scale, zoom) => {
     interactive: false,
     preserveDrawingBuffer: true, // very important otherwise you can't export the canvas to png
   });
-  mbMap.jumpTo({
+  maplibreMap.jumpTo({
     center: toLonLat(center),
     zoom: (zoom || map.getView().getZoom()) - 1,
     animate: false,
   });
   const p = new Promise((resolve) => {
-    mbMap.on("load", () => addLabelDisplaceLayer(mbMap));
-    mbMap.on("idle", () => {
+    maplibreMap.on("load", () => addLabelDisplaceLayer(maplibreMap));
+    maplibreMap.on("idle", () => {
       Object.defineProperty(window, "devicePixelRatio", {
         get() {
           return actualPixelRatio;
         },
       });
-      resolve(mbMap);
+      resolve(maplibreMap);
     });
   });
   return p;
@@ -246,9 +246,10 @@ export const getMapHd = (
   }
 
   const baseLayer = layerService.getBaseLayers()[0];
-  const mbMap = baseLayer?.mbMap || baseLayer?.mapboxLayer.mbMap;
+  const maplibreMap =
+    baseLayer?.maplibreMap || baseLayer?.mapboxLayer.maplibreMap;
 
-  if (!mbMap) {
+  if (!maplibreMap) {
     // eslint-disable-next-line no-console
     console.error("Mapbox map not found!");
     return Promise.resolve();
@@ -263,7 +264,7 @@ export const getMapHd = (
   );
 
   const mbStyle = getStyleWithForceVisibility(
-    mbMap.getStyle(),
+    maplibreMap.getStyle(),
     styleLayersToForceShow,
     styleLayersToForceHide,
   );

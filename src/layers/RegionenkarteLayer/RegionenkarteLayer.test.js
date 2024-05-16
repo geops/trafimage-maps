@@ -36,9 +36,9 @@ describe("RegionenkarteLayer", () => {
       mapboxLayer: new TrafimageMapboxLayer({}),
     });
     layer.mapboxLayer = {
-      mbMap: {
+      maplibreMap: {
         getLayer: (layerId) => {
-          return layer.mapboxLayer.mbMap
+          return layer.mapboxLayer.maplibreMap
             .getStyle()
             .layers.find((l) => l.id === layerId);
         },
@@ -46,10 +46,11 @@ describe("RegionenkarteLayer", () => {
           return { layers: [highlightLayer] };
         },
         setFilter: (layerId, filterr) => {
-          layer.mapboxLayer.mbMap.getLayer(layerId).filter = filterr;
+          layer.mapboxLayer.maplibreMap.getLayer(layerId).filter = filterr;
         },
         setLayoutProperty: (layerId, property, value) => {
-          layer.mapboxLayer.mbMap.getLayer(layerId).layout[property] = value;
+          layer.mapboxLayer.maplibreMap.getLayer(layerId).layout[property] =
+            value;
         },
       },
     };

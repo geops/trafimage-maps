@@ -15,7 +15,7 @@ class SchmalspurLayer extends MapboxStyleLayer {
 
   fetchSource() {
     const { url } =
-      this.mapboxLayer?.mbMap?.getSource("ch.sbb.isb.schmalspur") || {};
+      this.mapboxLayer?.maplibreMap?.getSource("ch.sbb.isb.schmalspur") || {};
     fetch(url)
       .then((res) => res.json())
       .then((data) => {

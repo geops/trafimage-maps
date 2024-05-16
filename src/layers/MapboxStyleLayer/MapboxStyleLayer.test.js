@@ -42,7 +42,7 @@ describe("MapboxStyleLayer", () => {
 
   test("should not initalized mapbox map.", () => {
     layer.attachToMap();
-    expect(layer.mbMap).toBe();
+    expect(layer.maplibreMap).toBe();
   });
 
   test("should initalized mapbox map.", async () => {
@@ -50,7 +50,7 @@ describe("MapboxStyleLayer", () => {
     source.attachToMap(map);
     await source.loadMbMap();
     layer.attachToMap(map);
-    expect(layer.mapboxLayer.mbMap).toBeInstanceOf(maplibregl.Map);
+    expect(layer.mapboxLayer.maplibreMap).toBeInstanceOf(maplibregl.Map);
   });
 
   test("should called detachFromMap on initalization.", () => {

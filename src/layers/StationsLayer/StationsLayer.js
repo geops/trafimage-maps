@@ -40,7 +40,7 @@ class StationsLayer extends MapboxStyleLayer {
       }),
       this.map.on("moveend", () => {
         this.ready = false;
-        this.mapboxLayer.mbMap?.once("idle", this.onIdle);
+        this.mapboxLayer.maplibreMap?.once("idle", this.onIdle);
       }),
     );
   }
@@ -50,9 +50,9 @@ class StationsLayer extends MapboxStyleLayer {
    */
   detachFromMap(map) {
     super.detachFromMap(map);
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.off("idle", this.onIdle);
+    const { maplibreMap } = this.mapboxLayer;
+    if (maplibreMap) {
+      maplibreMap.off("idle", this.onIdle);
       this.removeSource();
     }
   }
@@ -62,8 +62,8 @@ class StationsLayer extends MapboxStyleLayer {
    * @override
    */
   onLoad() {
-    const { mbMap } = this.mapboxLayer;
-    this.osmPointsLayers = mbMap
+    const { maplibreMap } = this.mapboxLayer;
+    this.osmPointsLayers = maplibreMap
       .getStyle()
       .layers.filter(
         ({ metadata }) =>
@@ -74,7 +74,7 @@ class StationsLayer extends MapboxStyleLayer {
     this.addSource();
     super.onLoad();
     this.updateSource();
-    mbMap.once("idle", this.onIdle);
+    maplibreMap.once("idle", this.onIdle);
   }
 
   /**
@@ -84,7 +84,7 @@ class StationsLayer extends MapboxStyleLayer {
     this.updateSource();
 
     // We warn the permalink that new data have been rendered.
-    this.mapboxLayer.mbMap?.once("idle", () => {
+    this.mapboxLayer.maplibreMap?.once("idle", () => {
       this.ready = true;
 
       // New data are rendered
@@ -97,14 +97,14 @@ class StationsLayer extends MapboxStyleLayer {
 
   // Query the rendered stations then add them to the source.
   updateSource() {
-    const { mbMap } = this.mapboxLayer;
-    const source = mbMap?.getSource(this.sourceId);
+    const { maplibreMap } = this.mapboxLayer;
+    const source = maplibreMap?.getSource(this.sourceId);
 
     if (!this.osmPointsLayers || !source) {
       return;
     }
 
-    const osmPointsRendered = mbMap
+    const osmPointsRendered = maplibreMap
       .queryRenderedFeatures({
         layers: this.osmPointsLayers,
       })
@@ -126,12 +126,12 @@ class StationsLayer extends MapboxStyleLayer {
 
   // Add source for stations.
   addSource() {
-    if (!this.mapboxLayer.mbMap) {
+    if (!this.mapboxLayer.maplibreMap) {
       return;
     }
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap.getSource(this.sourceId)) {
-      mbMap.addSource(this.sourceId, {
+    const { maplibreMap } = this.mapboxLayer;
+    if (!maplibreMap.getSource(this.sourceId)) {
+      maplibreMap.addSource(this.sourceId, {
         type: "geojson",
         data: {
           type: "FeatureCollection",
@@ -143,11 +143,11 @@ class StationsLayer extends MapboxStyleLayer {
 
   // Remove source added by addSources().
   removeSource() {
-    if (!this.mapboxLayer.mbMap) {
+    if (!this.mapboxLayer.maplibreMap) {
       return;
     }
-    const { mbMap } = this.mapboxLayer;
-    const source = mbMap.getSource(this.sourceId);
+    const { maplibreMap } = this.mapboxLayer;
+    const source = maplibreMap.getSource(this.sourceId);
     if (source) {
       // Don't remove source just make it empty.
       // Because others layers during unmount still could rely on it.

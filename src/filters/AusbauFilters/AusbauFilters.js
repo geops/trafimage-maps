@@ -33,7 +33,7 @@ function AusbauFilters({ layer }) {
       const newValue = evt.target.value;
       setValue(newValue);
       layer.applyNewFilter(newValue);
-      updateConstructions(layer.mapboxLayer.mbMap);
+      updateConstructions(layer.mapboxLayer.maplibreMap);
     },
     [layer, setValue],
   );

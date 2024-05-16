@@ -50,9 +50,9 @@ function DvListButton({ ...props }) {
           padding: [100, 100, 100, 100],
           maxZoom: 6,
           callback: () => {
-            const { mbMap } = dvMainLayer.mapboxLayer;
-            if (mbMap) {
-              mbMap.once("idle", () => {
+            const { maplibreMap } = dvMainLayer.mapboxLayer;
+            if (maplibreMap) {
+              maplibreMap.once("idle", () => {
                 dvMainLayer.syncFeatures();
                 dvMainLayer.highlightStation();
                 dispatch(

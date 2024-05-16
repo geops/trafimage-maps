@@ -1,6 +1,6 @@
 import OLVectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import { VectorLayer } from "mobility-toolbox-js/ol";
+import VectorLayer from "../VectorLayer";
 
 class DrawLayer extends VectorLayer {
   constructor(options = {}) {

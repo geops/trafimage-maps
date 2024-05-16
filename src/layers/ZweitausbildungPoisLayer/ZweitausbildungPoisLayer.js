@@ -44,7 +44,7 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
         window.clearTimeout(this.updateTimeout);
       }),
       this.map.on("moveend", () => {
-        this.mapboxLayer.mbMap?.once("idle", this.onIdle);
+        this.mapboxLayer.maplibreMap?.once("idle", this.onIdle);
       }),
     );
   }
@@ -54,12 +54,12 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
    */
   detachFromMap(map) {
     window.clearTimeout(this.updateTimeout);
-    const { mbMap } = this.mapboxLayer;
-    if (mbMap) {
-      mbMap.off("idle", this.onIdle);
+    const { maplibreMap } = this.mapboxLayer;
+    if (maplibreMap) {
+      maplibreMap.off("idle", this.onIdle);
 
       [this.sourceId, this.highlightSourceId].forEach((id) => {
-        const source = mbMap.getSource(id);
+        const source = maplibreMap.getSource(id);
         if (source) {
           // Don't remove source just make it empty.
           // Because others layers during unmount still could rely on it.
@@ -94,21 +94,24 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
 
   // Upodate sources for features with multiple lines.
   updateClusterSource() {
-    if (!this.visible || !this.map || !this.mapboxLayer.mbMap) {
+    if (!this.visible || !this.map || !this.mapboxLayer.maplibreMap) {
       return;
     }
-    const { mbMap } = this.mapboxLayer;
-    const source = mbMap.getSource(this.sourceId);
+    const { maplibreMap } = this.mapboxLayer;
+    const source = maplibreMap.getSource(this.sourceId);
     if (!source) {
       return;
     }
 
     let features;
     try {
-      features = mbMap.querySourceFeatures("ch.sbb.zweitausbildung_pois", {
-        sourceLayer: "ch.sbb.zweitausbildung_pois",
-        filter: this.filter,
-      });
+      features = maplibreMap.querySourceFeatures(
+        "ch.sbb.zweitausbildung_pois",
+        {
+          sourceLayer: "ch.sbb.zweitausbildung_pois",
+          filter: this.filter,
+        },
+      );
     } catch (e) {
       // eslint-disable-next-line no-console
       // console.error(e);
@@ -136,19 +139,19 @@ class ZweitausbildungPoisLayer extends MapboxStyleLayer {
   }
 
   highlightFromPopup(feature, toggle) {
-    const { mbMap } = this.mapboxLayer;
-    if (!mbMap) {
+    const { maplibreMap } = this.mapboxLayer;
+    if (!maplibreMap) {
       return;
     }
 
     const data = this.format.writeFeaturesObject(toggle ? [feature] : []);
-    const source = mbMap.getSource(this.highlightSourceId);
+    const source = maplibreMap.getSource(this.highlightSourceId);
     if (source) {
       source.setData(data);
     }
 
     // Launch animation
-    mbMap.setPaintProperty(
+    maplibreMap.setPaintProperty(
       this.highlightSourceId,
       "circle-radius",
       toggle ? 14 : 0,

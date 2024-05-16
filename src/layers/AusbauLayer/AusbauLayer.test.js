@@ -29,7 +29,7 @@ describe("AusbauFilters", () => {
     layer = new AusbauLayer();
 
     layer.mapboxLayer = {
-      mbMap: {
+      maplibreMap: {
         getStyle: () => {
           return style;
         },
