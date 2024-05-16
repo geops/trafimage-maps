@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.1](https://github.com/geops/trafimage-maps/compare/v1.29.0...v1.29.1) (2024-05-16)
+
+### Bug Fixes
+
+- **netzentwicklung:** change info text ([#1172](https://github.com/geops/trafimage-maps/issues/1172)) ([a6d2026](https://github.com/geops/trafimage-maps/commit/a6d20265dfa3a1ab8d8e4f6688aa767c91ad6b51))
+
 ## [1.29.0](https://github.com/geops/trafimage-maps/compare/v1.28.16...v1.29.0) (2024-05-13)
 
 ### Features
