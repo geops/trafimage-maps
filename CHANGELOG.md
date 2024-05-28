@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.2](https://github.com/geops/trafimage-maps/compare/v1.29.1...v1.29.2) (2024-05-28)
+
+### Bug Fixes
+
+- **passagierfrequenzen:** correct typo in italian layer name ([#1173](https://github.com/geops/trafimage-maps/issues/1173)) ([6f50629](https://github.com/geops/trafimage-maps/commit/6f50629dd7d29f496ddd82050406307e90fb4445))
+
 ### [1.29.1](https://github.com/geops/trafimage-maps/compare/v1.29.0...v1.29.1) (2024-05-16)
 
 ### Bug Fixes
