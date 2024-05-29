@@ -25,6 +25,12 @@ function RailplusExportButton() {
       exportFormat="a0"
       exportScale={2}
       exportSize={[3370, 2384]}
+      exportZoom={9.85}
+      exportExtent={null}
+      exportCoordinates={[
+        [909001.8239356248, 5920092.625643606],
+        [909001.8239356248, 5920092.625643606],
+      ]}
       loadingComponent={
         <BtnCmpt>
           <Loader />
