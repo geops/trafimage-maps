@@ -462,8 +462,8 @@ export const railPlus = {
       year: "2023",
     }),
     getOverlayImageUrl: () => railplusLegend,
-    getExportFileName: (t) =>
-      `RAILplus ${t("Streckennetz")} ${new Date().toISOString().slice(0, 10)}`,
+    getExportFileName: () =>
+      `RAILplus Streckennetz-Carte du réseau-Carta della rete  ${new Date().toISOString().slice(0, 10)}`,
   },
   minZoom: 7,
   maxZoom: 13,
