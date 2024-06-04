@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.3](https://github.com/geops/trafimage-maps/compare/v1.29.2...v1.29.3) (2024-06-04)
+
+### Bug Fixes
+
+- **geltungsbereiche:** update Automatisches Ticketing LayerInfo footer text ([#1175](https://github.com/geops/trafimage-maps/issues/1175)) ([28c46c9](https://github.com/geops/trafimage-maps/commit/28c46c9e62150938130e63003e5bddedeb4c50d4))
+- **railplus:** replace PDF legends with single multilanguage legend ([#1174](https://github.com/geops/trafimage-maps/issues/1174)) ([49ec737](https://github.com/geops/trafimage-maps/commit/49ec7378208801d1f88400d639cc8e7043437913))
+- **STS:** fix swtich between STS validity and STS direktverbindungen ([#1166](https://github.com/geops/trafimage-maps/issues/1166)) ([3268e45](https://github.com/geops/trafimage-maps/commit/3268e45a799d61eabcc8edd002ee89f76458c030))
+- use the genralization level provided by the config ([f9ce5ce](https://github.com/geops/trafimage-maps/commit/f9ce5ce4db0008422bf404b6795f487c1280ccb5))
+
 ### [1.29.2](https://github.com/geops/trafimage-maps/compare/v1.29.1...v1.29.2) (2024-05-28)
 
 ### Bug Fixes
