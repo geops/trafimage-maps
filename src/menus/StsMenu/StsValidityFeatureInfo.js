@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Point from "ol/geom/Point";
 import { Divider, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -14,6 +14,8 @@ import {
 } from "../../config/ch.sbb.sts";
 import { parseFeaturesInfos } from "./stsParseFeatureInfo";
 import panCenterFeature from "../../utils/panCenterFeature";
+import { setFeatureInfo } from "../../model/app/actions";
+import useFetch from "../../utils/useFetch";
 import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const useStyles = makeStyles(() => {
@@ -46,19 +48,9 @@ const clearHighlightsSelection = () =>
     .getFeatures()
     .forEach((feat) => feat.set("selected", false));
 
-const useFetchTours = (select) => {
-  const [tours, setTours] = useState(null);
-  useEffect(() => {
-    fetch("https://maps.trafimage.ch/sts-static/tours.json")
-      .then((response) => response.json())
-      .then((data) => setTours(data));
-    return () => select();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return [tours];
-};
 function StsValidityFeatureInfo({ menuOpen }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const map = useSelector((state) => state.app.map);
   const isMobile = useHasScreenSize();
@@ -73,6 +65,10 @@ function StsValidityFeatureInfo({ menuOpen }) {
   const gbFeatureInfo = useMemo(
     () => featureInfo.find((info) => info.layer.key === otherRoutes.key),
     [featureInfo],
+  );
+
+  const { data: tours } = useFetch(
+    "https://maps.trafimage.ch/sts-static/tours.json",
   );
 
   const select = useCallback(
@@ -110,8 +106,6 @@ function StsValidityFeatureInfo({ menuOpen }) {
     [previousSelectedFeature, featureInfo, map, menuOpen, isMobile],
   );
 
-  const [tours] = useFetchTours(select);
-
   const mainFeatures = useMemo(() => {
     const features =
       mainFeatureInfos?.length && tours?.length
@@ -138,8 +132,13 @@ function StsValidityFeatureInfo({ menuOpen }) {
     }
   }, [mainFeatures, prevMainFeatures, selectedFeature, select]);
 
+  // Unhighlight on unmount
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => () => select(), []);
+
+  // Unhighlight and clear the feature info if there is no feature to display
   if (!gbFeatureInfo?.features?.length && !mainFeatures?.length) {
-    select();
+    dispatch(setFeatureInfo([]));
     return null;
   }
 
@@ -205,7 +204,9 @@ function StsValidityFeatureInfo({ menuOpen }) {
   );
 }
 
-StsValidityFeatureInfo.propTypes = { menuOpen: PropTypes.bool };
+StsValidityFeatureInfo.propTypes = {
+  menuOpen: PropTypes.bool,
+};
 StsValidityFeatureInfo.defaultProps = { menuOpen: true };
 
 export default StsValidityFeatureInfo;
