@@ -10,8 +10,7 @@ import { optionsA3, optionsA4, sizesByFormat } from "../../utils/exportUtils";
 import ExportButton from "../../components/ExportButton/ExportButton";
 import useExportPrintOptions from "../../utils/useExportPrintOptions";
 import gbLegends from "../../img/geltungsbereicheLegends";
-
-const SWISS_CENTER = [903000, 5899500];
+import { SWISS_CENTER } from "../../utils/constants";
 
 const useStylesBody = makeStyles(() => ({
   resSelect: {

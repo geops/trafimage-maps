@@ -15,6 +15,8 @@ function BtnCmpt({ children }) {
 BtnCmpt.propTypes = { children: PropTypes.node };
 BtnCmpt.defaultProps = { children: <BsDownload /> };
 
+const center = [909001.8239356248, 5915092.625643606];
+
 const params = new URLSearchParams(window.location.search);
 
 function RailplusExportButton() {
@@ -25,6 +27,9 @@ function RailplusExportButton() {
       exportFormat="a0"
       exportScale={2}
       exportSize={[3370, 2384]}
+      exportZoom={9.85}
+      exportExtent={null}
+      exportCoordinates={[center, center]}
       loadingComponent={
         <BtnCmpt>
           <Loader />
