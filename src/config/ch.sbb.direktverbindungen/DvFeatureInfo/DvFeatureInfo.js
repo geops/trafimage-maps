@@ -13,7 +13,7 @@ import removeDuplicates, {
 } from "../../../utils/removeDuplicateFeatures";
 import parseDvFeatures from "../dvParseFeatures";
 import { DV_DAY_NIGHT_REGEX, DV_KEY } from "../../../utils/constants";
-import useIsMobile from "../../../utils/useIsMobile";
+import useHasScreenSize from "../../../utils/useHasScreenSize";
 import useDisableIosElasticScrollEffect from "../../../utils/useDisableIosElasticScrollEffect";
 
 const useStyles = makeStyles((theme) => {
@@ -74,7 +74,7 @@ function DvFeatureInfo({ filterByType }) {
   const layers = useSelector((state) => state.map.layers);
   const embedded = useSelector((state) => state.app.embedded);
   const [infoKey, setInfoKey] = useState();
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const [teaser, setTeaser] = useState(true);
   const [expandedHeight, setExpandedHeight] = useState();
   const classes = useStyles({ isMobile });

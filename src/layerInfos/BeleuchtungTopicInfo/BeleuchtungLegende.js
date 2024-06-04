@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useTranslation } from "react-i18next";
-import LightIcon from "../../img/LightIcon";
 import { lightingMapping } from "../BeleuchtungLayerInfo/lightingMapping";
+import LegendCircle from "../../components/LegendCircle/LegendCircle";
 
 const useStyles = makeStyles(() => {
   return {
@@ -12,7 +12,9 @@ const useStyles = makeStyles(() => {
       margin: "10px 0",
     },
     legendRow: {
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: "auto 1fr",
+      gridGap: 10,
       alignItems: "center",
       minHeight: 70,
       "& svg": {
@@ -31,12 +33,20 @@ export function BeleuchtungLegendeRow({ lightClass }) {
   const { t } = useTranslation();
   return (
     <div className={classes.legendRow} key={lightClass}>
-      <LightIcon
-        color={lightingMapping[lightClass].color}
-        label={lightClass}
-        fontColor={lightClass.match(/(3|4|2b)/) && "white"}
-        size={35}
-      />
+      <LegendCircle
+        fillColor={lightingMapping[lightClass].color}
+        radius={15}
+        borderWidth={3}
+      >
+        <b
+          style={{
+            color: lightClass.match(/(3|4|2b)/) && "white",
+            fontSize: 16,
+          }}
+        >
+          {lightClass}
+        </b>
+      </LegendCircle>
       <div>
         <Typography variant="h4">
           {`${t("Bahnhofklasse")} ${lightClass}`}

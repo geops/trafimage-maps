@@ -6,7 +6,7 @@ import { FaSearch, FaAngleDown, FaAngleUp, FaTimes } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IconButton, Typography } from "@mui/material";
 import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 import SearchToggle from "./SearchToggle";
 
 import "./Search.scss";
@@ -20,7 +20,7 @@ function Search() {
   const map = useSelector((state) => state.app.map);
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const searchService = useSelector((state) => state.app.searchService);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const searchContainerRef = useRef();
   const { t } = useTranslation();
   const dispatch = useDispatch();

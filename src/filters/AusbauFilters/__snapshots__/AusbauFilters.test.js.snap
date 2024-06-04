@@ -4,12 +4,12 @@ exports[`AusbauFilters should match snapshot if no layer defined, should display
 
 exports[`AusbauFilters should match snapshot if showFilterParam is an empty string, should display a select box. 1`] = `
 <div class="MuiFormControl-root MuiFormControl-fullWidth makeStyles-formControl-4 css-q8hpuo-MuiFormControl-root">
-  <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-10ne5he-MuiFormLabel-root-MuiInputLabel-root"
+  <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1gis3ws-MuiFormLabel-root-MuiInputLabel-root"
          data-shrink="true"
   >
     angebotsschritt
   </label>
-  <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-16ml97r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
+  <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1mycgdj-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
     <div tabindex="0"
          role="combobox"
          aria-controls=":r1:"
@@ -49,12 +49,12 @@ exports[`AusbauFilters should match snapshot if showFilterParam is an empty stri
 
 exports[`AusbauFilters should match snapshot if showFilterParam is true, should display a select box. 1`] = `
 <div class="MuiFormControl-root MuiFormControl-fullWidth makeStyles-formControl-3 css-q8hpuo-MuiFormControl-root">
-  <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-10ne5he-MuiFormLabel-root-MuiInputLabel-root"
+  <label class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined MuiFormLabel-colorPrimary MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiInputLabel-sizeMedium MuiInputLabel-outlined css-1gis3ws-MuiFormLabel-root-MuiInputLabel-root"
          data-shrink="true"
   >
     angebotsschritt
   </label>
-  <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-16ml97r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
+  <div class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl  css-1mycgdj-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root">
     <div tabindex="0"
          role="combobox"
          aria-controls=":r0:"

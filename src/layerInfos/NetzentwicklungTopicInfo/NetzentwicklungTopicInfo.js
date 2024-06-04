@@ -13,7 +13,7 @@ function NetzentwicklungTopicInfo({ t }) {
     <div>
       <p>{t("ch.sbb.netzentwicklung-desc")}</p>
       <p>
-        {t("Verantwortlich")}: I-NAT-NET-UM, Christof Mahnig,{" "}
+        {t("Verantwortlich")}: I-NAT-NET-NAP, Christof Mahnig,{" "}
         <a href="mailto:christof.mahnig@sbb.ch">christof.mahnig@sbb.ch</a>
       </p>
       <hr />

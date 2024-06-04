@@ -5,7 +5,7 @@ import { makeStyles } from "@mui/styles";
 import Select from "../Select";
 import { setLanguage } from "../../model/app/actions";
 import { ReactComponent as SBBGlobe } from "../../img/sbb/globe_210_large.svg";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 
 const optionsDesktop = [
   { label: "Deutsch", value: "de" },
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 function LanguageSelect() {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.app.language);
-  const isMobileWidth = useIsMobile();
+  const isMobileWidth = useHasScreenSize();
   const classes = useStyles({ isMobileWidth });
   const options = isMobileWidth ? optionsMobile : optionsDesktop;
   const inputValue = useMemo(

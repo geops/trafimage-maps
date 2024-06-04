@@ -15,7 +15,7 @@ import IframeMenu from "../IframeMenu";
 import stsLayers from "../../config/ch.sbb.sts";
 import { setFeatureInfo } from "../../model/app/actions";
 import { DV_KEY } from "../../utils/constants";
-import useIsMobile from "../../utils/useIsMobile";
+import useHasScreenSize from "../../utils/useHasScreenSize";
 import useHighlightLayer from "../../utils/useHighlightLayer";
 import DvFeatureInfoTitle from "../../config/ch.sbb.direktverbindungen/DvFeatureInfoTitle/DvFeatureInfoTitle";
 
@@ -87,7 +87,7 @@ function StsTopicMenu() {
   const classes = useStyles();
   const featureInfo = useSelector((state) => state.app.featureInfo);
   const layers = useSelector((state) => state.map.layers);
-  const isMobile = useIsMobile;
+  const isMobile = useHasScreenSize();
   const [activeMenu, setActiveMenu] = useState("sts");
   const [anchorEl, setAnchorEl] = useState();
   const stsBaseLayer = useMemo(
@@ -135,7 +135,7 @@ function StsTopicMenu() {
         layer?.on("change:visible", (evt) => {
           if (evt.target.visible) {
             evt.target.mbMap?.once("idle", () => {
-              updateLayers(activeMenu, dvBaseLayer);
+              updateLayers(activeMenu, layer);
             });
           }
         }),

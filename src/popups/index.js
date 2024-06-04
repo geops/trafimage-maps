@@ -28,6 +28,7 @@ import RailplusPopup from "./RailplusPopup";
 import StopPlacePopup from "./StopPlacePopup";
 import SchmalspurPopup from "./SchmalspurPopup";
 import MesswagenPopup from "./MesswagenPopup";
+import MesswagenPhotosPopup from "./MesswagenPhotosPopup";
 
 export { default as RegionenkarteSegmentPopup } from "./RegionenkarteSegmentPopup";
 export { default as RegionenkarteIntersectionPopup } from "./RegionenkarteIntersectionPopup";
@@ -59,6 +60,7 @@ export { default as RailplusPopup } from "./RailplusPopup";
 export { default as StopPlacePopup } from "./StopPlacePopup";
 export { default as SchmalspurPopup } from "./SchmalspurPopup";
 export { default as MesswagenPopup } from "./MesswagenPopup";
+export { default as MesswagenPhotosPopup } from "./MesswagenPhotosPopup";
 
 export default {
   BahnhofplanPopup,
@@ -91,4 +93,5 @@ export default {
   StopPlacePopup,
   SchmalspurPopup,
   MesswagenPopup,
+  MesswagenPhotosPopup,
 };

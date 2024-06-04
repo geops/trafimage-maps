@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import useIsMobile from "./useIsMobile";
+import useHasScreenSize from "./useHasScreenSize";
 import panCenterFeature from "./panCenterFeature";
 import highlightPointFeatures from "./highlightPointFeatures";
 import defaultHighlightPointStyle from "./highlightPointStyle";
@@ -11,7 +11,7 @@ const useHighlightLayer = (featureInfo, featuresCandidate) => {
   const searchService = useSelector((state) => state.app.searchService);
   const menuOpen = useSelector((state) => state.app.menuOpen);
   const activeTopic = useSelector((state) => state.app.activeTopic);
-  const isMobile = useIsMobile();
+  const isMobile = useHasScreenSize();
   const features = featuresCandidate || featureInfo?.features;
 
   useEffect(() => {

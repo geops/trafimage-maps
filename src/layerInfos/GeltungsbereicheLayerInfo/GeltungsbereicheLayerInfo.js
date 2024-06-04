@@ -287,7 +287,11 @@ function GeltungsbereicheLayerInfo({ properties: layer }) {
           <br />
           <br />
           <Typography paragraph>
-            <i>{t("ch.sbb.geltungsbereiche.layerinfo-footer")}</i>
+            <i>
+              {i18n.exists(`${layer.key}.layerinfo-footer`)
+                ? t(`${layer.key}.layerinfo-footer`)
+                : t("ch.sbb.geltungsbereiche.layerinfo-footer")}
+            </i>
           </Typography>
           <Typography paragraph>{warranty[i18n.language]}</Typography>
           <br />

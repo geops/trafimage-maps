@@ -2,6 +2,47 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.29.2](https://github.com/geops/trafimage-maps/compare/v1.29.1...v1.29.2) (2024-05-28)
+
+### Bug Fixes
+
+- **passagierfrequenzen:** correct typo in italian layer name ([#1173](https://github.com/geops/trafimage-maps/issues/1173)) ([6f50629](https://github.com/geops/trafimage-maps/commit/6f50629dd7d29f496ddd82050406307e90fb4445))
+
+### [1.29.1](https://github.com/geops/trafimage-maps/compare/v1.29.0...v1.29.1) (2024-05-16)
+
+### Bug Fixes
+
+- **netzentwicklung:** change info text ([#1172](https://github.com/geops/trafimage-maps/issues/1172)) ([a6d2026](https://github.com/geops/trafimage-maps/commit/a6d20265dfa3a1ab8d8e4f6688aa767c91ad6b51))
+
+## [1.29.0](https://github.com/geops/trafimage-maps/compare/v1.28.16...v1.29.0) (2024-05-13)
+
+### Features
+
+- **funkmesswagen:** add photo layer for Funkmesswagen topic ([#1163](https://github.com/geops/trafimage-maps/issues/1163)) ([8440193](https://github.com/geops/trafimage-maps/commit/844019374a8367a26b8b1b10894f544ed3040843))
+
+### Bug Fixes
+
+- **datalinks:** add datalink service for ISB, Tarifverbund, Geltungsbereiche, Energie ([#1171](https://github.com/geops/trafimage-maps/issues/1171)) ([788f881](https://github.com/geops/trafimage-maps/commit/788f881b5818b3ffe04fb0d1940b5555d1d95c72))
+
+### [1.28.16](https://github.com/geops/trafimage-maps/compare/v1.28.15...v1.28.16) (2024-05-08)
+
+### Bug Fixes
+
+- **isb:** rename Berner Oberland Bahnen AG to Berner Oberland Bahnen ([#1170](https://github.com/geops/trafimage-maps/issues/1170)) ([57e452f](https://github.com/geops/trafimage-maps/commit/57e452fa3c7e3051c1035a35333760b3356430e4))
+
+### [1.28.15](https://github.com/geops/trafimage-maps/compare/v1.28.14...v1.28.15) (2024-05-02)
+
+### Bug Fixes
+
+- **handicap:** add partially handicap conform layer, add translations and layer info ([f8dcdab](https://github.com/geops/trafimage-maps/commit/f8dcdabb1b0f32aca7dadad926f479b2480e36dd))
+- request new data only when previous request has ended and add a request timeout ([#1169](https://github.com/geops/trafimage-maps/issues/1169)) ([060e382](https://github.com/geops/trafimage-maps/commit/060e3824aa67ebcbc54ca51d58e83d1db01f22e0))
+
+### [1.28.14](https://github.com/geops/trafimage-maps/compare/v1.28.13...v1.28.14) (2024-04-18)
+
+### Bug Fixes
+
+- **railplus:** limit maxZoom to 13 in railplus topic ([#1167](https://github.com/geops/trafimage-maps/issues/1167)) ([f375608](https://github.com/geops/trafimage-maps/commit/f3756084ac95eb62643fc98106818fc2a133cd35))
+
 ### [1.28.13](https://github.com/geops/trafimage-maps/compare/v1.28.12...v1.28.13) (2024-04-10)
 
 ### Bug Fixes
