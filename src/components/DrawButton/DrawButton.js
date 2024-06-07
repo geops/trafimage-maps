@@ -22,7 +22,6 @@ function DrawButton({ children, onClick, ...buttonProps }) {
           "_self",
         );
       }}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...buttonProps}
     >
       {children || <Pencil focusable={false} />}

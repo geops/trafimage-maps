@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 import CanvasSaveButton from "react-spatial/components/CanvasSaveButton";
 import { ScaleLine } from "ol/control";
 import html2canvas from "html2canvas";
+import Button from "../Button";
 import { ReactComponent as Loader } from "./loader.svg";
 import {
   getMapHd,
@@ -22,9 +23,13 @@ const useStyles = makeStyles((theme) => ({
     padding: "5px 10px",
     height: 35,
     width: 110,
+    minWidth: 110,
     backgroundColor: "#dcdcdc",
     "&:hover": {
       backgroundColor: "#cdcdcd",
+    },
+    "&:disabled": {
+      opacity: 0.9,
     },
   },
   canvasButton: { ...theme.styles.flexCenter },
@@ -39,7 +44,6 @@ function ExportButton({
   exportExtent,
   exportCopyright,
   children,
-  loadingComponent,
   style,
   id,
   scaleLineConfig,
@@ -53,8 +57,6 @@ function ExportButton({
   );
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
-
-  const childr = isLoading ? loadingComponent : children;
 
   return (
     <CanvasSaveButton
@@ -122,7 +124,7 @@ function ExportButton({
         setLoading(false);
       }}
     >
-      {React.Children.map(childr, (child) => {
+      {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           id,
           title: t("Karte als PDF exportieren"),
@@ -132,28 +134,25 @@ function ExportButton({
             opacity: isLoading ? 0.3 : 1,
             ...style,
           },
+          isLoading,
         });
       })}
     </CanvasSaveButton>
   );
 }
 
-function DefaultLoadingComponent() {
+function DefaultChildren({ isLoading = false, ...props }) {
   const classes = useStyles();
   const { t } = useTranslation();
   return (
-    <span className={classes.buttonContent}>
-      <Loader />
-      {t("Export läuft...")}
-    </span>
+    <Button {...props} className={classes.buttonContent} disabled={isLoading}>
+      {isLoading && <Loader />}
+      {t(isLoading ? "Export läuft..." : "PDF exportieren")}
+    </Button>
   );
 }
 
-function DefaultChildren() {
-  const classes = useStyles();
-  const { t } = useTranslation();
-  return <span className={classes.buttonContent}>{t("PDF exportieren")}</span>;
-}
+DefaultChildren.propTypes = { isLoading: PropTypes.bool };
 
 ExportButton.propTypes = {
   exportFormat: PropTypes.string,
@@ -164,7 +163,6 @@ ExportButton.propTypes = {
   exportSize: PropTypes.arrayOf(PropTypes.number),
   exportCopyright: PropTypes.bool,
   children: PropTypes.node,
-  loadingComponent: PropTypes.node,
   style: PropTypes.object,
   id: PropTypes.string,
   scaleLineConfig: PropTypes.shape({
@@ -182,7 +180,6 @@ ExportButton.defaultProps = {
   exportCopyright: false,
   children: <DefaultChildren />,
   exportSize: [3370, 2384], // a0
-  loadingComponent: <DefaultLoadingComponent />,
   style: {},
   id: null,
   scaleLineConfig: null,

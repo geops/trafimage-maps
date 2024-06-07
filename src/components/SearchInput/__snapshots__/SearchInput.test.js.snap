@@ -9,11 +9,10 @@ exports[`SearchInput when no properties are set matches snapshot 1`] = `
          value
   >
   <div role="button"
-       style="display: none;"
        tabindex="0"
        class="tm-button tm-bt-clear"
        title
-       aria-label
+       style="display: none;"
   >
     <svg stroke="currentColor"
          fill="currentColor"
@@ -36,7 +35,6 @@ exports[`SearchInput when no properties are set matches snapshot 1`] = `
        tabindex="0"
        class="tm-button tm-bt-search"
        title
-       aria-label
   >
     search
   </div>
@@ -55,7 +53,6 @@ exports[`SearchInput when properties are set matches snapshot  1`] = `
        tabindex="0"
        class="tm-button tm-bt-clear"
        title
-       aria-label
   >
     <svg stroke="currentColor"
          fill="currentColor"
@@ -78,7 +75,6 @@ exports[`SearchInput when properties are set matches snapshot  1`] = `
        tabindex="0"
        class="tm-button tm-bt-search"
        title
-       aria-label
   >
     search
   </div>
@@ -97,7 +93,6 @@ exports[`SearchInput when properties are set matches snapshot  2`] = `
        tabindex="0"
        class="tm-button tm-bt-clear"
        title
-       aria-label
   >
     <svg stroke="currentColor"
          fill="currentColor"
@@ -120,7 +115,6 @@ exports[`SearchInput when properties are set matches snapshot  2`] = `
        tabindex="0"
        class="tm-button tm-bt-search"
        title
-       aria-label
   >
     search
   </div>
@@ -136,11 +130,10 @@ exports[`SearchInput when properties are set matches snapshot when className is 
          value
   >
   <div role="button"
-       style="display: none;"
        tabindex="0"
        class="tm-button tm-bt-clear"
        title
-       aria-label
+       style="display: none;"
   >
     <svg stroke="currentColor"
          fill="currentColor"
@@ -163,7 +156,6 @@ exports[`SearchInput when properties are set matches snapshot when className is 
        tabindex="0"
        class="tm-button tm-bt-search"
        title
-       aria-label
   >
     search
   </div>

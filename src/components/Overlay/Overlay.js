@@ -285,7 +285,6 @@ function Overlay({
                 </>
               ),
             }}
-            // eslint-disable-next-line react/jsx-props-no-spreading
             {...ResizableProps}
             snap={null} // We do the snap manually
           >

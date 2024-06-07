@@ -75,7 +75,6 @@ function withResizing(MenuToBeResized) {
         <MenuToBeResized
           bodyElementRef={this.bodyElementRef}
           menuHeight={menuHeight}
-          // eslint-disable-next-line react/jsx-props-no-spreading
           {...this.props}
           ref={forwardedRef}
         />
@@ -98,7 +97,6 @@ function withResizing(MenuToBeResized) {
   })(ResizedWrapper);
 
   return React.forwardRef((props, ref) => {
-    // eslint-disable-next-line react/jsx-props-no-spreading
     return <ConnectComp {...props} forwardedRef={ref} />;
   });
 }

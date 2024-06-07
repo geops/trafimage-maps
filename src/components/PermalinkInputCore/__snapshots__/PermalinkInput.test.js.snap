@@ -12,7 +12,6 @@ exports[`PermalinkInput matches snapshot 1`] = `
        tabindex="0"
        class="tm-permalink-bt"
        title
-       aria-label
   >
     <svg stroke="currentColor"
          fill="currentColor"

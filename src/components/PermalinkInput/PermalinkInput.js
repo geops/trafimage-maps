@@ -41,13 +41,7 @@ const useStyles = makeStyles(() => ({
 function PermalinkInput(props) {
   const classes = useStyles();
 
-  return (
-    <UIPermalinkInput
-      className={classes.input}
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      {...props}
-    />
-  );
+  return <UIPermalinkInput className={classes.input} {...props} />;
 }
 
 export default React.memo(PermalinkInput);

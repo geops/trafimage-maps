@@ -60,7 +60,7 @@ function ShareLink({ url, title, trackEventAction, children, ...props }) {
       href={replaceParams(url, language, appBaseUrl)}
       title={t(title)}
       target="_blank"
-      tabIndex="0"
+      tabIndex={0}
       onClick={() => {
         if (trackEventAction) {
           trackEvent({
