@@ -32,7 +32,7 @@ exports[`DrawRemoveDialog should match snapshot 1`] = `
             Zeichnung löschen
           </span>
         </h2>
-        <button class="MuiButtonBase-root Mui-focusVisible MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-13 css-1perq7w-MuiButtonBase-root-MuiIconButton-root"
+        <button class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeSmall makeStyles-closeBtn-13 css-1perq7w-MuiButtonBase-root-MuiIconButton-root"
                 tabindex="0"
                 type="button"
                 title="Dialog schließen"

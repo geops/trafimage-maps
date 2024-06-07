@@ -54,16 +54,10 @@ function ExportButton({
   const { t, i18n } = useTranslation();
   const [isLoading, setLoading] = useState(false);
 
+  const childr = isLoading ? loadingComponent : children;
+
   return (
     <CanvasSaveButton
-      id={id}
-      title={t("Karte als PDF exportieren")}
-      className={classes.canvasButton}
-      style={{
-        pointerEvents: isLoading ? "none" : "auto",
-        opacity: isLoading ? 0.3 : 1,
-        ...style,
-      }}
       extraData={exportCopyright ? generateExtraData(layers) : null}
       autoDownload={false}
       format="image/jpeg"
@@ -128,7 +122,18 @@ function ExportButton({
         setLoading(false);
       }}
     >
-      {isLoading ? loadingComponent : children}
+      {React.Children.map(childr, (child) => {
+        return React.cloneElement(child, {
+          id,
+          title: t("Karte als PDF exportieren"),
+          className: classes.canvasButton,
+          style: {
+            pointerEvents: isLoading ? "none" : "auto",
+            opacity: isLoading ? 0.3 : 1,
+            ...style,
+          },
+        });
+      })}
     </CanvasSaveButton>
   );
 }

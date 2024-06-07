@@ -33,7 +33,8 @@ describe("Share", () => {
         </ThemeProvider>
       </MatomoProvider>,
     );
-    expect(container.querySelectorAll("button").length).toBe(1);
+    expect(container.querySelectorAll("button").length).toBe(2);
+    expect(container.querySelectorAll("a").length).toBe(3);
   });
 
   describe("should send track event on click", () => {
@@ -67,7 +68,7 @@ describe("Share", () => {
     });
 
     test("on mail button", () => {
-      fireEvent.click(container.querySelector(".ta-mail-icon a"));
+      fireEvent.click(container.querySelector(".ta-mail-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareMail",
         category: "test",
@@ -83,7 +84,7 @@ describe("Share", () => {
     });
 
     test("on facebook button", () => {
-      fireEvent.click(container.querySelector(".ta-facebook-icon a"));
+      fireEvent.click(container.querySelector(".ta-facebook-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareFacebook",
         category: "test",
@@ -91,7 +92,7 @@ describe("Share", () => {
     });
 
     test("on twitter button", () => {
-      fireEvent.click(container.querySelector(".ta-twitter-icon a"));
+      fireEvent.click(container.querySelector(".ta-twitter-icon"));
       expect(matomo.trackEvent).toBeCalledWith({
         action: "clickShareTwitter",
         category: "test",
