@@ -24,6 +24,7 @@ import TopicTelephoneInfos from "../TopicTelephoneInfos";
 import TopicsMenu from "../TopicsMenu";
 import Overlay from "../Overlay";
 import { ReactComponent as ChevronLeft } from "../../img/chevronLeft.svg";
+import useTrackTopic from "../../utils/useTrackTopic";
 
 const defaultElements = {
   header: false,
@@ -162,6 +163,8 @@ function TopicElements({ history }) {
     },
     [dispatch],
   );
+
+  useTrackTopic(activeTopic?.key);
 
   if (!activeTopic) {
     return null;

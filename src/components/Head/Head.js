@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { setConsentGiven } from "../../model/app/actions";
+import { getTrackingLaunchScriptSrc } from "../../utils/trackingUtils";
 
 /**
  * This component adds a script tag in the HTML head for SBB consent management.
@@ -53,6 +55,7 @@ function Head({ topics, displayConsent, domainConsentId }) {
         data-domain-script={domainConsentId}
         data-language={`${language}-ch`}
       />
+      <script src={getTrackingLaunchScriptSrc()} />
     </Helmet>
   );
 }

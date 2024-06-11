@@ -11,6 +11,7 @@ import { NAME } from "../DrawRemoveDialog";
 import DrawPermalinkButton from "../DrawPermalinkButton";
 import { ReactComponent as PencilAdd } from "../../img/pencil_add.svg";
 import { TRACK_NEW_DRAW_ACTION } from "../../utils/constants";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +43,7 @@ function Draw() {
   const classes = useStyles();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { trackEvent } = useMatomo();
+  const { trackEvent: trackMatomoEvent } = useMatomo();
   const drawIds = useSelector((state) => state.app.drawIds);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const onRemoveClick = useCallback(() => {
@@ -56,9 +57,15 @@ function Draw() {
           <DrawButton
             disabled={!!drawIds}
             onClick={() => {
-              trackEvent({
+              trackMatomoEvent({
                 category: activeTopic?.key,
                 action: TRACK_NEW_DRAW_ACTION,
+              });
+              trackEvent({
+                eventType: "action",
+                componentName: "secondary button",
+                label: t("Neue Zeichnung"),
+                variant: "neue_zeichnung_erstellen",
               });
             }}
           >
