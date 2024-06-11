@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
       },
     },
 
-    "& div[role='button']": {
+    "& button": {
       width: 30,
       height: "100%",
       flexShrink: 0,
@@ -34,6 +34,7 @@ const useStyles = makeStyles(() => ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      padding: 7,
     },
   },
 }));
