@@ -13,6 +13,7 @@ import useOverlayWidth from "../../utils/useOverlayWidth";
 import { ReactComponent as ZoomOut } from "../../img/minus.svg";
 import { ReactComponent as ZoomIn } from "../../img/plus.svg";
 import useHasScreenSize from "../../utils/useHasScreenSize";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const propTypes = {
   geolocation: PropTypes.bool,
@@ -144,6 +145,14 @@ function MapControls({
         titles={{
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),
+        }}
+        onButtonClick={(evt, type) => {
+          trackEvent({
+            eventType: "action",
+            componentName: "zoom button",
+            label: type === "zoomIn" ? t("Hineinzoomen") : t("Rauszoomen"),
+            variant: type === "zoomIn" ? "ZoomIn" : "ZoomOut",
+          });
         }}
       />
       {geolocation && <Geolocation />}

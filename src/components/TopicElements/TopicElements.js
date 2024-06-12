@@ -25,6 +25,7 @@ import TopicsMenu from "../TopicsMenu";
 import Overlay from "../Overlay";
 import { ReactComponent as ChevronLeft } from "../../img/chevronLeft.svg";
 import useTrackTopic from "../../utils/useTrackTopic";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const defaultElements = {
   header: false,
@@ -223,6 +224,16 @@ function TopicElements({ history }) {
             layerImages={baseLayerImages}
             closeButtonImage={<ChevronLeft />}
             t={t}
+            onButtonClick={(e, type, layer) => {
+              if (layer) {
+                trackEvent({
+                  eventType: "action",
+                  componentName: "layer toggle button",
+                  label: t(layer.key),
+                  variant: "Layer Switch",
+                });
+              }
+            }}
           />
         )}
         <Menu>
