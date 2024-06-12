@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Autosuggest from "react-autosuggest";
-import { FaSearch, FaAngleDown, FaAngleUp, FaTimes } from "react-icons/fa";
+import { FaSearch, FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IconButton, Typography } from "@mui/material";
 import { setFeatureInfo, setSearchOpen } from "../../model/app/actions";
@@ -11,6 +11,7 @@ import SearchToggle from "./SearchToggle";
 
 import "./Search.scss";
 import CloseButton from "../CloseButton";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const mobileMapPadding = [50, 50, 50, 50];
 
@@ -66,7 +67,15 @@ function Search() {
           onSuggestionHighlighted={({ suggestion }) =>
             searchService.highlight(suggestion)
           }
-          onSuggestionSelected={(e, { suggestion }) => {
+          onSuggestionSelected={(e, thing) => {
+            const { suggestion } = thing;
+            trackEvent({
+              eventType: "action",
+              componentName: "search result",
+              label: searchService.value(suggestion),
+              variant: suggestion.section,
+              eventName: e.type,
+            });
             dispatch(setFeatureInfo());
             searchService.select(
               suggestion,
@@ -118,6 +127,13 @@ function Search() {
             onKeyUp: (e) => {
               const { key } = e;
               if (key === "Enter") {
+                trackEvent({
+                  eventType: "action",
+                  componentName: "search input",
+                  label: t("Suche starten"),
+                  variant: "Suche starten",
+                  eventName: e.type,
+                });
                 const filtered = suggestions.filter((s) => s.items.length > 0);
                 if (filtered.length > 0) {
                   const { items, section } = filtered[0];
@@ -164,15 +180,21 @@ function Search() {
                         dispatch(setFeatureInfo([...featureInfo]));
                       }
                     }}
-                  >
-                    <FaTimes focusable={false} />
-                  </CloseButton>
+                  />
                 )}
                 <IconButton
                   tabIndex={0}
                   aria-label={t("Suche starten")}
+                  title={t("Suche starten")}
                   className="wkp-search-button wkp-search-button-submit"
                   onClick={() => {
+                    trackEvent({
+                      eventType: "action",
+                      componentName: "search input",
+                      label: t("Suche starten"),
+                      variant: "Suche starten",
+                    });
+
                     if (!value) {
                       // Hide the search input on small screen
                       dispatch(setSearchOpen(false));
@@ -187,7 +209,7 @@ function Search() {
                     }
 
                     // Launch a search
-                    if (!suggestions.length && value) {
+                    if (value) {
                       searchService.search(value).then((searchResults) => {
                         const result = searchResults.find(
                           (results) => results.items.length > 0,

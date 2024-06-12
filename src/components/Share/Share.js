@@ -16,6 +16,7 @@ import {
   TRACK_SHARE_TW_ACTION,
 } from "../../utils/constants";
 import { generateExtraData } from "../../utils/exportUtils";
+import { trackEvent } from "../../utils/trackingUtils";
 
 const socialShareConfig = [
   {
@@ -23,21 +24,21 @@ const socialShareConfig = [
     title: "Per Email versenden",
     icon: <FaEnvelope focusable={false} />,
     className: "ta-mail-icon",
-    trackEventAction: TRACK_SHARE_MAIL_ACTION,
+    trackMatomoEventAction: TRACK_SHARE_MAIL_ACTION,
   },
   {
     url: "//www.facebook.com/sharer.php?u={url}",
     title: "Auf Facebook teilen",
     icon: <TiSocialFacebook focusable={false} />,
     className: "ta-facebook-icon",
-    trackEventAction: TRACK_SHARE_FB_ACTION,
+    trackMatomoEventAction: TRACK_SHARE_FB_ACTION,
   },
   {
     url: "//twitter.com/intent/tweet?url={url}",
     title: "Auf Twitter teilen",
     icon: <TiSocialTwitter focusable={false} />,
     className: "ta-twitter-icon",
-    trackEventAction: TRACK_SHARE_TW_ACTION,
+    trackMatomoEventAction: TRACK_SHARE_TW_ACTION,
   },
 ];
 
@@ -48,13 +49,34 @@ const replaceParams = (url, language, appBaseUrl) => {
     .replace("{appBaseUrl}", appBaseUrl);
 };
 
+function handleTracking(
+  matomoAction,
+  matomoCategory,
+  matomoTrackFunc,
+  title,
+  t,
+  action = "action",
+  variant,
+) {
+  matomoTrackFunc({
+    category: matomoAction,
+    action: matomoCategory,
+  });
+  trackEvent({
+    eventType: action,
+    componentName: "icon button",
+    label: t(title),
+    variant: variant || title,
+  });
+}
+
 function ShareLink({ config }) {
   const appBaseUrl = useSelector((state) => state.app.appBaseUrl);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const language = useSelector((state) => state.app.language);
   const { t } = useTranslation();
-  const { trackEvent } = useMatomo();
-  const { className, url, title, trackEventAction, icon } = config;
+  const { trackEvent: trackMatomoEvent } = useMatomo();
+  const { className, url, title, trackMatomoEventAction, icon } = config;
   return (
     <div className={className}>
       <Link
@@ -63,12 +85,13 @@ function ShareLink({ config }) {
         target="_blank"
         tabIndex="0"
         onClick={() => {
-          if (trackEventAction) {
-            trackEvent({
-              category: activeTopic?.key,
-              action: trackEventAction,
-            });
-          }
+          handleTracking(
+            activeTopic.key,
+            trackMatomoEventAction,
+            trackMatomoEvent,
+            title,
+            t,
+          );
         }}
       >
         {icon}
@@ -82,7 +105,7 @@ ShareLink.propTypes = {
     url: PropTypes.string,
     className: PropTypes.string,
     title: PropTypes.string,
-    trackEventAction: PropTypes.string,
+    trackMatomoEventAction: PropTypes.string,
     icon: PropTypes.node,
   }).isRequired,
 };
@@ -92,17 +115,20 @@ function Share() {
   const layers = useSelector((state) => state.map.layers);
   const activeTopic = useSelector((state) => state.app.activeTopic);
   const { t } = useTranslation();
-  const { trackEvent } = useMatomo();
+  const { trackEvent: trackMatomoEvent } = useMatomo();
 
   return (
     <div className="wkp-share">
       <SharePermalinkButton
         buttonProps={{
           onClick: () => {
-            trackEvent({
-              category: activeTopic?.key,
-              action: TRACK_SHARE_PERMALINK_ACTION,
-            });
+            handleTracking(
+              activeTopic?.key,
+              TRACK_SHARE_PERMALINK_ACTION,
+              trackMatomoEvent,
+              "Permalink erstellen",
+              t,
+            );
           },
         }}
       />
@@ -112,10 +138,15 @@ function Share() {
         title={t("Karte als Bild speichern")}
         extraData={generateExtraData(layers)}
         onSaveStart={(mapp) => {
-          trackEvent({
-            category: activeTopic?.key,
-            action: TRACK_SHARE_DL_ACTION,
-          });
+          handleTracking(
+            activeTopic?.key,
+            TRACK_SHARE_DL_ACTION,
+            trackMatomoEvent,
+            "Karte als Bild speichern",
+            t,
+            "download",
+            "PNG export",
+          );
           return Promise.resolve(mapp);
         }}
       >

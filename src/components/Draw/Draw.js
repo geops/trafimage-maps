@@ -71,7 +71,18 @@ function Draw() {
           >
             <PencilAdd focusable={false} />
           </DrawButton>
-          <DrawButton disabled={!drawIds} title={t("Zeichnung bearbeiten")} />
+          <DrawButton
+            disabled={!drawIds}
+            title={t("Zeichnung bearbeiten")}
+            onClick={() => {
+              trackEvent({
+                eventType: "action",
+                componentName: "secondary button",
+                label: t("Zeichnung bearbeiten"),
+                variant: "zeichnung_bearbeiten",
+              });
+            }}
+          />
           <IconButton
             title={t("Zeichnung löschen")}
             onClick={onRemoveClick}

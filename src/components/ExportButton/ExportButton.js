@@ -15,6 +15,8 @@ import {
   sizesByFormat,
 } from "../../utils/exportUtils";
 import LayerService from "../../utils/LayerService";
+import { trackEvent } from "../../utils/trackingUtils";
+import { SWISS_CENTER } from "../../utils/constants";
 
 const useStyles = makeStyles((theme) => ({
   buttonContent: {
@@ -68,6 +70,12 @@ function ExportButton({
       autoDownload={false}
       format="image/jpeg"
       onSaveStart={() => {
+        trackEvent({
+          eventType: "download",
+          componentName: "secondary button",
+          label: t("PDF exportieren"),
+          variant: `PDF export${exportCoordinates?.toString() === [SWISS_CENTER, SWISS_CENTER].toString() ? " - Ganze Schweiz" : ""}`,
+        });
         setLoading(true);
         return getMapHd(
           map,

@@ -6,6 +6,7 @@ import RsFitExtent from "react-spatial/components/FitExtent";
 import MapButton from "../../MapButton";
 import { SWISS_EXTENT } from "../../../utils/constants";
 import { ReactComponent as SwissBounds } from "../../../img/swissbounds.svg";
+import { trackEvent } from "../../../utils/trackingUtils";
 
 const useStyles = makeStyles((theme) => ({
   fitExtent: {
@@ -35,6 +36,14 @@ function FitExtent() {
       className={`wkp-fit-extent ${classes.fitExtent}`}
       data-testid="map-controls-fit-extent"
       tabIndex={-1}
+      onClick={() => {
+        trackEvent({
+          eventType: "action",
+          componentName: "icon button",
+          label: t("Ganze Schweiz"),
+          variant: "Ganze Schweiz",
+        });
+      }}
     >
       <RsFitExtent
         map={map}
