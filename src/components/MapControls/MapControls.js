@@ -87,6 +87,15 @@ const useStyles = makeStyles((theme) => {
   };
 });
 
+const handleTracking = (type, t) => {
+  trackEvent({
+    eventType: "action",
+    componentName: "zoom button",
+    label: type === "zoomIn" ? t("Hineinzoomen") : t("Rauszoomen"),
+    variant: type === "zoomIn" ? "ZoomIn" : "ZoomOut",
+  });
+};
+
 function MapControls({
   menuToggler,
   geolocation,
@@ -146,13 +155,11 @@ function MapControls({
           zoomIn: t("Hineinzoomen"),
           zoomOut: t("Rauszoomen"),
         }}
-        onButtonClick={(evt, type) => {
-          trackEvent({
-            eventType: "action",
-            componentName: "zoom button",
-            label: type === "zoomIn" ? t("Hineinzoomen") : t("Rauszoomen"),
-            variant: type === "zoomIn" ? "ZoomIn" : "ZoomOut",
-          });
+        onZoomInButtonClick={() => {
+          handleTracking("zoomIn", t);
+        }}
+        onZoomOutButtonClick={() => {
+          handleTracking("zoomOut", t);
         }}
       />
       {geolocation && <Geolocation />}

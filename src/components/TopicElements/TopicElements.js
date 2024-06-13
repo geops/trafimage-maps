@@ -224,7 +224,7 @@ function TopicElements({ history }) {
             layerImages={baseLayerImages}
             closeButtonImage={<ChevronLeft />}
             t={t}
-            onButtonClick={(e, type, layer) => {
+            onLayerButtonClick={(e, layer) => {
               if (layer) {
                 trackEvent({
                   eventType: "action",
